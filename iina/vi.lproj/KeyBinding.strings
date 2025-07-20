@@ -41,7 +41,7 @@
 "iina.toggle-music-mode" = "Chuyển đổi chế độ âm nhạc";
 "iina.open-file" = "Mở tệp";
 "iina.open-url" = "Mở liên kết URL";
-"iina.video-panel" = "Bảng điều khiển video";
+"iina.video-panel" = "Bảng điều khiển hình ảnh";
 "iina.audio-panel" = "Bảng điều khiển âm thanh";
 "iina.sub-panel" = "Bảng phụ đề";
 "iina.playlist-panel" = "Bảng danh sách phát";
@@ -69,8 +69,8 @@
 "backward" = "lùi lại";
 "seek-to" = "đến";
 
-"relative" = "g";
-"absolute" = "g";
+"relative" = "s";
+"absolute" = "s";
 "absolute-percent" = "%";
 "relative-percent" = "%";
 "relative+exact" = "s (chính xác)";
@@ -114,5 +114,5 @@
 "read.multiply" = "Nhân {{property}} với {{factor}}x";
 "read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
 "read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
-"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.seek" = "Tìm kiếm {{#fwd}}chuyển đến{{/fwd}}{{#bwd}}trở lại{{/bwd}}{{#abs}}đến{{/abs}} {{value}}{{#sec}} {{/sec}}{{#per}}%{{/per}} {{#exact}}(chính xác){{/exact}}{{#kf}}(khung hình){{/kf}}";
 "read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

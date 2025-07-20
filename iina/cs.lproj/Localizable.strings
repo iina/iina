@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se… %d%%";
 "main.opening_stream" = "Otevírám stream…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Přesnost";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekund";
@@ -256,14 +257,12 @@
 "alert.error_saving_file" = "Při ukládání %@ došlo k chybě: %@";
 "alert.error_deleting_file" = "Soubor nelze odstranit.";
 
-"alert.target_peak.bad_value" = "Hodnota \"%@\" je neplatná.\nUveďte hodnotu mezi 10 a 10000 nebo 0.";
+"alert.target_peak.bad_value" = "Hodnota „%@“ je neplatná.\nUveďte hodnotu mezi 10 a 10000 nebo 0.";
 
 "alert.config.new.title" = "Konfigurace nového vstupu";
 "alert.config.new.message" = "Zadejte název nové konfigurace.";
 "alert.config.duplicate.title" = "Duplicitní konfigurace";
 "alert.config.duplicate.message" = "Zadejte název pro duplicitní konfigurační soubor.";
-"alert.config.empty_name" = "Název nemůže být prázdný.";
-"alert.config.name_existing" = "Konfigurace se stejným názvem již existuje.";
 "alert.config.file_existing.title" = "Soubor již existuje.";
 "alert.config.file_existing.message" = "Konfigurační soubor se stejným názvem souboru již existuje. Vyberte OK pro zobrazení souboru v aplikaci Finder.";
 "alert.config.cannot_create" = "Konfigurační soubor nelze vytvořit!\n%@";
@@ -280,7 +279,7 @@
 "alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
 "alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
 "alert.extra_option.error" = "Při nastavování --%@=%@ se vyskytla chyba číslo %d. Zkontrolujte vaše nastavení dalších možností v Nastavení > Pokročilé.";
-"alert.extra_option.config_folder" = "Chyba při nastavování konfigurační složky „%@“.";
+"alert.extra_option.config_folder" = "Chyba při nastavování konfiguračního adresáře „%@“.";
 
 "alert.playlist.error_deleting" = "%@ nelze smazat";
 
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ celkem";
 "playlist.total_length_with_selected" = "Vybráno %@ z %@";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "Položek: %d";
 "pl_menu.play_next" = "Přehrát další";
 "pl_menu.play_in_new_window" = "Přehrát v novém okně";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Hlasitost";
 "mini_player.close" = "Zavřít hudební režim";
 "mini_player.back" = "Zpět do zobrazení videa";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

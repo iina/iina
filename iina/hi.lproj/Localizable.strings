@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "बफरिंग… %d%%";
 "main.opening_stream" = "खुलने की धारा…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precision";
 "osc.1s" = "1 second";
 "osc.100ms" = "100 milliseconds";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "कृपया नए कॉन्फ़िगरेशन के लिए एक नाम दर्ज करें।";
 "alert.config.duplicate.title" = "डुप्लिकेट कॉन्फ़िगरेशन";
 "alert.config.duplicate.message" = "कृपया डुप्लिकेट कॉन्फ़िगरेशन फ़ाइल के लिए नाम दर्ज करें।";
-"alert.config.empty_name" = "नाम खाली नहीं हो सकता।";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "फ़ाइल पहले से ही मौजूद है";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "कॉन्फ़िगरेशन फ़ाइल नहीं बना सकता है!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "कुल %@";
 "playlist.total_length_with_selected" = "%@ में से %@ का चयन किया गया ";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d आइटम";
 "pl_menu.play_next" = "आगे चलाएं";
 "pl_menu.play_in_new_window" = "नई विंडो में चलाएं";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "ध्वनि";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

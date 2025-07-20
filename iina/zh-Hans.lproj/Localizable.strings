@@ -14,7 +14,7 @@
 "general.ok" = "确定";
 "general.cancel" = "取消";
 "general.username" = "用户名";
-"general.password" = "口令";
+"general.password" = "密码";
 
 "input.value_is_empty" = "数值不能为空";
 "input.already_exists" = "值已经存在。";
@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "缓冲中… %d%%";
 "main.opening_stream" = "正在打开流媒体……";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "精确度";
 "osc.1s" = "1秒";
 "osc.100ms" = "100毫秒";
@@ -50,7 +51,7 @@
 "quicksetting.deinterlace" = "反交错";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隐藏";
-"quicksetting.reset_speed" = "";
+"quicksetting.reset_speed" = "原速";
 
 // EQ Presets
 "eq.preset.flat" = "平坦";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "请为此新配置输入名称。";
 "alert.config.duplicate.title" = "复制配置";
 "alert.config.duplicate.message" = "请为此复制配置文件输入名称。";
-"alert.config.empty_name" = "名称不能为空。";
-"alert.config.name_existing" = "具有相同名称的配置已存在。";
 "alert.config.file_existing.title" = "同名文件已存在";
 "alert.config.file_existing.message" = "一个具有相同文件名的配置文件已存在。选择“确定”在Finder中显示该文件。";
 "alert.config.cannot_create" = "无法创建配置文件！\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "总计 %@";
 "playlist.total_length_with_selected" = "选中 %@ / %@";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
 "pl_menu.play_in_new_window" = "在新窗口中播放";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "音量";
 "mini_player.close" = "关闭音乐模式";
 "mini_player.back" = "返回视频模式";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

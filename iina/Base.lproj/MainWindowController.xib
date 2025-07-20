@@ -416,7 +416,7 @@
                         <action selector="muteButtonAction:" target="-2" id="wUf-9f-uHT"/>
                     </connections>
                 </button>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider" customClass="VolumeSlider" customModule="IINA" customModuleProvider="target">
                     <rect key="frame" x="26" y="4" width="74" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="P2L-LI-jT7"/>

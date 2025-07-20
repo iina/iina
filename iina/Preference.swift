@@ -139,6 +139,8 @@ struct Preference {
     static let resizeWindowOption = Key("resizeWindowOption")
 
     static let oscPosition = Key("oscPosition")
+    static let disablePlaySliderScrolling = Key("disablePlaySliderScrolling")
+    static let disableVolumeSliderScrolling = Key("disableVolumeSliderScrolling")
 
     static let playlistWidth = Key("playlistWidth")
     static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")
@@ -802,6 +804,8 @@ struct Preference {
     .enableControlBarAutoHide: true,
     .controlBarToolbarButtons: [ToolBarButton.plugins.rawValue, ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
+    .disablePlaySliderScrolling: false,
+    .disableVolumeSliderScrolling: false,
     .playlistWidth: 270,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,

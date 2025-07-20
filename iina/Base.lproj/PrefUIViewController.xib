@@ -617,7 +617,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kw3-Lm-lBI" userLabel="Base remaining time on playback speed">
-                    <rect key="frame" x="140" y="56" width="262" height="16"/>)
+                    <rect key="frame" x="140" y="56" width="262" height="16"/>
                     <buttonCell key="cell" type="check" title="Base remaining time on playback speed" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="5Nk-Mu-V2I">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>

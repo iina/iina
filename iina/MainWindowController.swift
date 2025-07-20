@@ -425,6 +425,8 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  lazy var titlebarView: NSView? = { window?.contentView?.superview?.subviews.last }()
+
   /** Get the `NSTextField` of widow's title. */
   var titleTextField: NSTextField? {
     get {
@@ -1513,7 +1515,15 @@ class MainWindowController: PlayerWindowController {
     // stylemask
     window.styleMask.remove(.borderless)
     if #available(macOS 10.16, *) {
-      window.styleMask.insert(.titled)
+      // Workaround for issue #5600. Adding titled to the styleMask causes AppKit to draw a black
+      // window that disrupts the smooth transition from full screen mode. AppKit does not do this
+      // if instead we show and hide the title bar view.
+      if let titlebarView {
+        titlebarView.isHidden = false
+      } else {
+        log("Failed to find the tilebar view", level: .warning)
+        window.styleMask.insert(.titled)
+      }
       (window as! MainWindow).forceKeyAndMain = false
       window.level = .normal
     } else {
@@ -1558,7 +1568,15 @@ class MainWindowController: PlayerWindowController {
     // stylemask
     window.styleMask.insert(.borderless)
     if #available(macOS 10.16, *) {
-      window.styleMask.remove(.titled)
+      // Workaround for issue #5600. Removing titled from the styleMask causes AppKit to draw a
+      // black window that disrupts the smooth transition to full screen mode. AppKit does not do
+      // this if instead we show and hide the title bar view.
+      if let titlebarView {
+        titlebarView.isHidden = true
+      } else {
+        log("Failed to find the tilebar view", level: .warning)
+        window.styleMask.remove(.titled)
+      }
       (window as! MainWindow).forceKeyAndMain = true
       window.level = .floating
     } else {

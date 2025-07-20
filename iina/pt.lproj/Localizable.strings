@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "A carregar… %d%%";
 "main.opening_stream" = "A abrir stream…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precisão";
 "osc.1s" = "1 segundo";
 "osc.100ms" = "100 milissegundos";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Por favor digite um nome para a nova configuração.";
 "alert.config.duplicate.title" = "Duplicar Configuração";
 "alert.config.duplicate.message" = "Por favor digite o nome para o arquivo de configuração duplicado.";
-"alert.config.empty_name" = "Este nome não pode estar vazio.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Ficheiro já existe";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Não foi possível criar um ficheiro de configuração!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ no total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d itens";
 "pl_menu.play_next" = "Reproduzir Seguinte";
 "pl_menu.play_in_new_window" = "Reproduzir numa Nova Janela";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Fechar modo de música";
 "mini_player.back" = "Retornar ao modo vídeo";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregant… %d%%";
 "main.opening_stream" = "Obrint fluxe de dades…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precisió";
 "osc.1s" = "1 segon";
 "osc.100ms" = "100 milisegons";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Si us plau introdueix un nom per a la nova configuració.";
 "alert.config.duplicate.title" = "Duplica configuració";
 "alert.config.duplicate.message" = "Si us plau introdueix un nom per el fixer de configuració duplicat.";
-"alert.config.empty_name" = "El nom no pot estar buit.";
-"alert.config.name_existing" = "Ja existeix una configuració amb el mateix nom.";
 "alert.config.file_existing.title" = "El fitxer ja existeix";
 "alert.config.file_existing.message" = "Ja existeix un arxiu de configuració amb el mateix nom d'arxiu. Selecciona OK per veure l'arxiu a Finder.";
 "alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionats";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d elements";
 "pl_menu.play_next" = "Reprodueix el següent";
 "pl_menu.play_in_new_window" = "Reprodueix en una finestra nova";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Volum";
 "mini_player.close" = "Tanca el mode de música";
 "mini_player.back" = "Torna al mode de vídeo";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

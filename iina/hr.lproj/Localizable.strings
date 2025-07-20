@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Zaustavi";
 "osd.resume" = "Nastavi";
-"osd.volume" = "Glasnoća: %i";
+"osd.volume" = "Glasnoća: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Omjer: %@";
 "osd.crop" = "Obreži: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Ukloni preplitanje: %@";
 "osd.hwdec" = "Hardversko dekodiranje: %@";
 "osd.audio_delay.nodelay" = "Kašnjenje zvuka: bez kašnjenja";
-"osd.audio_delay.later" = "Kašnjenje zvuka: %.2fs kasnije";
-"osd.audio_delay.earlier" = "Kašnjenje zvuka: %.2fs ranije";
+"osd.audio_delay.later" = "Kašnjenje zvuka: %@s kasnije";
+"osd.audio_delay.earlier" = "Kašnjenje zvuka: %@s ranije";
 "osd.sub_delay.nodelay" = "Kašnjenje titla: bez kašnjenja";
-"osd.sub_delay.later" = "Kašnjenje titla: %.2fs kasnije";
-"osd.sub_delay.earlier" = "Kašnjenje titla: %.2fs ranije";
-"osd.subtitle_pos" = "Položaj titla: %.1f";
+"osd.sub_delay.later" = "Kašnjenje titla: %@s kasnije";
+"osd.sub_delay.earlier" = "Kašnjenje titla: %@s ranije";
+"osd.subtitle_pos" = "Položaj titla: %@";
 "osd.sub_hidden" = "Titlovi skriveni";
 "osd.sub_visible" = "Titlovi vidljivi";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Uključi zvuk";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "A-B petlja: izbrisana";
 "osd.stop" = "Prekini";
 "osd.chapter" = "Poglavlje: %@";
-"osd.subtitle_scale" = "Skaliranje titla: %.2fx";
+"osd.subtitle_scale" = "Skaliranje titla: %@x";
 "osd.add_to_playlist" = "Dodane datoteke u playlistu: %i";
 "osd.clear_playlist" = "Playlista je izbrisana";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Glasnoća: %d";
-"menu.volume_muted" = "Glasnoća: %d (Isključen zvuk)";
-"menu.audio_delay" = "Kašnjenje zvuka: %.2fs";
-"menu.sub_delay" = "Kašnjenje titlova: %.2fs";
+"menu.volume" = "Glasnoća: %@";
+"menu.volume_muted" = "Glasnoća: %@ (Isključen zvuk)";
+"menu.audio_delay" = "Kašnjenje zvuka: %@s";
+"menu.sub_delay" = "Kašnjenje titlova: %@s";
 "menu.sub_hide" = "Sakrij titlove";
 "menu.sub_show" = "Prikaži titlove";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Prikaži postavke titlova";
 "menu.hide_subtitles" = "Sakrij postavke titlova";
 
-"menu.seek_forward" = "Korak naprijed %.0fs";
-"menu.seek_backward" = "Korak natrag %.0fs";
+"menu.seek_forward" = "Korak naprijed %@s";
+"menu.seek_backward" = "Korak natrag %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Glasnoća + %.0f% %";
-"menu.volume_down" = "Glasnoća − %.0f% %";
-"menu.audio_delay_up" = "Kašnjenje zvuka + %.1fs";
-"menu.audio_delay_down" = "Kašnjenje zvuka − %.1fs";
-"menu.sub_delay_up" = "Kašnjenje titlova + %.1fs";
-"menu.sub_delay_down" = "Kašnjenje titlova − %.1fs";
+"menu.volume_up" = "Glasnoća + %@% %";
+"menu.volume_down" = "Glasnoća − %@% %";
+"menu.audio_delay_up" = "Kašnjenje zvuka + %@s";
+"menu.audio_delay_down" = "Kašnjenje zvuka − %@s";
+"menu.sub_delay_up" = "Kašnjenje titlova + %@s";
+"menu.sub_delay_down" = "Kašnjenje titlova − %@s";
 
 "menu.crop_custom" = "Prilagođeno …";
 "menu.find_online_sub" = "Pronađi titlove na internetu iz %@";
@@ -262,6 +262,8 @@
 "alert.config.new.message" = "Upiši naziv za novu konfiguraciju.";
 "alert.config.duplicate.title" = "Duplikat konfiguracije";
 "alert.config.duplicate.message" = "Upiši naziv za dupliciranu konfiguracijsku datoteku.";
+"alert.config.empty_name" = "Naziv ne smije biti prazan.";
+"alert.config.name_existing" = "Konfiguracija s istim nazivom već postoji.";
 "alert.config.file_existing.title" = "Datoteka već postoji";
 "alert.config.file_existing.message" = "Konfiguracija s istim nazivom datoteke već postoji. Odaberi „U redu” za prikaz datoteke u Finderu.";
 "alert.config.cannot_create" = "Nije moguće stvoriti konfiguracijsku datoteku!\n%@";
@@ -285,7 +287,7 @@
 "alert.screenshot.error_taking" = "Nije moguće snimiti snimku ekrana!";
 
 "alert.sub.no_selected" = "Najprije odaberi preuzeti titl.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Postavi željene jezike titlova u postavkama prije korištenja web stranice OpenSubtitles. Ovaj put će se koristiti engleski (eng).";
 "alert.sub.cannot_save_passwd" = "Neuspjelo spremanje tvoje lozinke u privjesak ključeva: %@";
 "alert.sub.cannot_login" = "Neuspjela prijava. Provjeri svoje korisničko ime, lozinku i stanje mreže.\n\n%@";
 "alert.sub.save_downloaded.title" = "Spremi preuzeti titl";
@@ -347,7 +349,7 @@
 "alert.plugin_uninstall.message" = "Dodatak će se izbrisati s tvog diska.";
 "alert.plugin_reinstall.title" = "Dodatak %@ već postoji";
 "alert.plugin_reinstall.message" = "Želiš li ponovo instalirati dodatak?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "Nema pronađenih ažuriranja.";
 "alert.plugin_update_found.title" = "Pronađena je nova verzija za %@";
 "alert.plugin_update_found.message" = "Najnovija verzija je %@. Ti imaš verziju %@. Želiš li preuzeti novu verziju?";

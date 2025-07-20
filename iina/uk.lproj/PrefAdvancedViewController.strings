@@ -11,7 +11,7 @@
 "HMa-Vz-EUk.title" = "Для набуття чинності наступні параметри потребують перезапуску IINA.";
 
 /* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Відкрити теку журналів";
+"JDA-g3-RNX.title" = "Open Log Directory";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Увімкнути журналювання";
@@ -26,7 +26,7 @@
 "SX9-fy-bss.headerCell.title" = "Значення";
 
 /* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
-"ehL-8Y-G8h.title" = "Задіяти теку конфігурації:";
+"ehL-8Y-G8h.title" = "Задіяти директорію конфігурації:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "Показувати інформацію на екрані від mpv";
@@ -35,7 +35,7 @@
 "nFf-vh-bNd.title" = "Рівень журналу:";
 
 /* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Відобразити журнал перегляду";
+"Owx-92-Ogg.title" = "Show Log Viewer";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Детальний";

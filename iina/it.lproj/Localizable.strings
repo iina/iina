@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Riprendi";
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Volume: %@";
 "osd.speed" = "Velocità: %@x";
 "osd.aspect" = "Proporzioni: %@";
 "osd.crop" = "Ritaglio: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Deinterlacciamento: %@";
 "osd.hwdec" = "Decodifica dell'Hardware: %@";
 "osd.audio_delay.nodelay" = "Differenza audio: 0.00s";
-"osd.audio_delay.later" = "Differenza audio: %.2fs dopo";
-"osd.audio_delay.earlier" = "Differenza audio: %.2fs prima";
+"osd.audio_delay.later" = "Differenza audio: %@s dopo";
+"osd.audio_delay.earlier" = "Differenza audio: %@s prima";
 "osd.sub_delay.nodelay" = "Differenza sottotitoli: 0.00s";
-"osd.sub_delay.later" = "Differenza sottotitoli: %.2fs dopo";
-"osd.sub_delay.earlier" = "Differenza sottotitoli: %.2fs prima";
-"osd.subtitle_pos" = "Posizione sottotitoli: %.1f";
+"osd.sub_delay.later" = "Differenza sottotitoli: %@s dopo";
+"osd.sub_delay.earlier" = "Differenza sottotitoli: %@s prima";
+"osd.subtitle_pos" = "Posizione sottotitoli: %@";
 "osd.sub_hidden" = "Nascondere Sottotitoli";
 "osd.sub_visible" = "Mostrare Sottotitoli";
 "osd.sub_second_delay.nodelay" = "Ritardo Sottotitoli Secondari: Nessun Ritardo";
-"osd.sub_second_delay.later" = "Ritardo Sottotitoli Secondari: %.2fs Dopo";
-"osd.sub_second_delay.earlier" = "Ritardo Sottotitoli Secondari: %.2fs Prima";
+"osd.sub_second_delay.later" = "Ritardo Sottotitoli Secondari: %@s Dopo";
+"osd.sub_second_delay.earlier" = "Ritardo Sottotitoli Secondari: %@s Prima";
 "osd.sub_second_hidden" = "Nascondere Sottotitoli Secondari";
-"osd.sub_second_pos" = "Posizione Sottotitoli Secondari: %.1f";
+"osd.sub_second_pos" = "Posizione Sottotitoli Secondari: %@";
 "osd.sub_second_visible" = "Mostrare Sottotitoli Secondari";
 "osd.mute" = "Muto";
 "osd.unmute" = "Attiva";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "Ripeti A-B: azzerato";
 "osd.stop" = "Ferma";
 "osd.chapter" = "Capitolo: %@";
-"osd.subtitle_scale" = "Scala sottotitoli: %.2fx";
+"osd.subtitle_scale" = "Scala sottotitoli: %@x";
 "osd.add_to_playlist" = "Aggiungi %i file alla playlist";
 "osd.clear_playlist" = "Playlist cancellata";
 "osd.video_eq.contrast" = "Contrasto: %i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "Ripeti la playlist";
 "osd.no_loop" = "Disabilita ripetizione";
 
-"preference.title" = "Impostazioni";
+"preference.title" = "Preferenze";
 "preference.general" = "Generali";
 "preference.ui" = "Interfaccia";
 "preference.video_audio" = "Video/Audio";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Installa il plug-in Media Online da 'Plug-in → Installa' da GitHub per godere di funzionalità avanzate come il download di video e aggiornamenti automatici di yt-dlp.";
 "preference.ytdl_plugin_installed" = "Il supporto youtube-dl integrato è disabilitato perché è installato il plug-in Media Online.";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Spento)";
-"menu.audio_delay" = "Differenza audio: %.2fs";
-"menu.sub_delay" = "Differenza sottotitoli: %.2fs";
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Spento)";
+"menu.audio_delay" = "Differenza audio: %@s";
+"menu.sub_delay" = "Differenza sottotitoli: %@s";
 "menu.sub_hide" = "Nascondere Sottotitoli";
 "menu.sub_show" = "Mostra sottotitoli";
 "menu.sub_second_hide" = "Nascondi Sottotitoli Secondari";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Mostra pannello sottotitoli";
 "menu.hide_subtitles" = "Nascondi pannello sottotitoli";
 
-"menu.seek_forward" = "Avanti %.0fs";
-"menu.seek_backward" = "Indietro %.0fs";
+"menu.seek_forward" = "Avanti %@s";
+"menu.seek_backward" = "Indietro %@s";
 "menu.speed_up" = "Aumenta la velocità di %@x";
 "menu.speed_down" = "Riduci la velocità di %@x";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Ritarda audio + %.1fs";
-"menu.audio_delay_down" = "Anticipa audio - %.1fs";
-"menu.sub_delay_up" = "Ritarda sottotitoli + %.1fs";
-"menu.sub_delay_down" = "Anticipa sottotitoli - %.1fs";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Ritarda audio + %@s";
+"menu.audio_delay_down" = "Anticipa audio - %@s";
+"menu.sub_delay_up" = "Ritarda sottotitoli + %@s";
+"menu.sub_delay_down" = "Anticipa sottotitoli - %@s";
 
 "menu.crop_custom" = "Altro…";
 "menu.find_online_sub" = "Trova sottotitoli online da %@";
@@ -262,6 +262,8 @@
 "alert.config.new.message" = "Inserisci un nome per la nuova configurazione.";
 "alert.config.duplicate.title" = "Configurazione del duplicato";
 "alert.config.duplicate.message" = "Inserisci il nome per il duplicato del file di configurazione.";
+"alert.config.empty_name" = "Il nome non può essere vuoto.";
+"alert.config.name_existing" = "Esiste già un profilo con lo stesso nome.";
 "alert.config.file_existing.title" = "Il file è già esistente";
 "alert.config.file_existing.message" = "Esiste già un file di configurazione con lo stesso nome di file. Scegliere OK per mostrare il file in Finder.";
 "alert.config.cannot_create" = "Impossibile creare il file di configurazione!\n%@";
@@ -285,7 +287,7 @@
 "alert.screenshot.error_taking" = "Impossibile fare uno screenshot!";
 
 "alert.sub.no_selected" = "Seleziona prima un sottotitolo scaricato.";
-"alert.sub_lang_not_set" = "Imposta la lingua per la ricerca di sottotitoli su OpenSubtitles. Per il momento sarà utilizzato l'inglese (eng).";
+"alert.sub_lang_not_set" = "Imposta la lingua preferita per i sottotitoli nelle preferenze prima di utilizzare OpenSubtitles. Questa volta verrà utilizzato l'Inglese (eng).";
 "alert.sub.cannot_save_passwd" = "Impossibile salvare la password nel portachiavi: %@";
 "alert.sub.cannot_login" = "Impossibile accedere. Controlla il tuo nome utente, la password e la connessione di rete.\n\n%@";
 "alert.sub.save_downloaded.title" = "Salva i sottotitoli scaricati";
@@ -347,7 +349,7 @@
 "alert.plugin_uninstall.message" = "Il plugin verrà eliminato dal disco.";
 "alert.plugin_reinstall.title" = "Il plugin %@ esiste già";
 "alert.plugin_reinstall.message" = "Vuoi reinstallare il plugin?";
-"alert.duplicated_plugin_id" = "Rilevati componenti aggiuntivi duplicati: due o più componenti hanno lo stesso nome \"%@\". Potrebbero verificarsi comportamenti anomali. Cercali in Impostazioni → Componenti aggiuntivi e invia una segnalazione agli autori. Se un componente aggiuntivo è installato localmente, è possibile modificare manualmente il suo nome aggiornando il file info.json corrispondente.";
+"alert.duplicated_plugin_id" = "Rilevati identificatori di plugin duplicati. Due o più plugin hanno lo stesso identificatore \"%@\". Questo può causare comportamenti anomali. Si prega di trovarli in Preferenze - Plugin e segnalarli ai loro autori. Se un plugin è installato localmente, è anche possibile modificare manualmente il suo identificatore tramite il file Info.json del plugin.";
 "alert.plugin_no_update" = "Nessun aggiornamento trovato.";
 "alert.plugin_update_found.title" = "Trovato aggiornamento per %@";
 "alert.plugin_update_found.message" = "L'ultima versione è %@. Hai %@. Vuoi aggiornare?";

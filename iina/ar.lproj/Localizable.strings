@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "التخزين… %d%%";
 "main.opening_stream" = "فتح البث…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "الدقة";
 "osc.1s" = "1 ثانية";
 "osc.100ms" = "100 مللي ثانية";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "الرجاء إدخال اسم للتكوين الجديد.";
 "alert.config.duplicate.title" = "تكرار الإعدادات";
 "alert.config.duplicate.message" = "الرجاء إدخال اسم لملف التكوين المكرر.";
-"alert.config.empty_name" = "الاسم لا يمكن أن يكون فارغاً.";
-"alert.config.name_existing" = "يوجد اعدادات بنفس الاسم مسبقاً.";
 "alert.config.file_existing.title" = "الملف موجود بالفعل";
 "alert.config.file_existing.message" = "يوجد بالفعل ملف تكوين بنفس اسم الملف. اختر موافق لإظهار الملف في Finder.";
 "alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ في المجموع";
 "playlist.total_length_with_selected" = "تم تحديد %@ من %@";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d عناصر";
 "pl_menu.play_next" = "تشغيل التالي";
 "pl_menu.play_in_new_window" = "تشغيل في نافذة جديدة";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "مستوى الصوت";
 "mini_player.close" = "إغلاق وضع الموسيقى";
 "mini_player.back" = "العودة إلى وضع الفيديو";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferwerking… %d%%";
 "main.opening_stream" = "Open tans stroom…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Presisie";
 "osc.1s" = "1 sekonde";
 "osc.100ms" = "100 millisekondes";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Voer ’n naam vir die nuwe konfigurasie in.";
 "alert.config.duplicate.title" = "Duplikaat konfigurasie";
 "alert.config.duplicate.message" = "Voer ’n naam vir die gedupliseerde konfigurasielêer in.";
-"alert.config.empty_name" = "Die naam mag nie leeg wees nie.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Lêer bestaan reeds";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Kan nie konfigurasielêer skep nie!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ in totaal";
 "playlist.total_length_with_selected" = "%@ van %@ geselekteer";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d items";
 "pl_menu.play_next" = "Speel volgende af";
 "pl_menu.play_in_new_window" = "Speel af in nuwe venster";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Sluit musiekmodus";
 "mini_player.back" = "Keer terug na videomodus";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

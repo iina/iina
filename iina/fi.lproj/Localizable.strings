@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Puskuroidaan… %d%%";
 "main.opening_stream" = "Avataan streamia…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Tarkkuus";
 "osc.1s" = "1 sekunti";
 "osc.100ms" = "100 millisekuntia";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Anna nimi uudelle konfiguraatiolle.";
 "alert.config.duplicate.title" = "Monista asetukset";
 "alert.config.duplicate.message" = "Anna nimi monistetulle asetustiedostolle.";
-"alert.config.empty_name" = "Nimi ei voi olla tyhjä.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Tiedosto on jo olemassa";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Asetustiedostoa ei voitu luoda!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ yhteensä";
 "playlist.total_length_with_selected" = "%@ / %@ valittu";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d kohdetta";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Toista uudessa ikkunassa";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Äänenvoimakkuus";
 "mini_player.close" = "Sulje musiikkitila";
 "mini_player.back" = "Palaa videotilaan";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Indlæser… %d%%";
 "main.opening_stream" = "Åbner stream…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Præcision";
 "osc.1s" = "1 sekund";
 "osc.100ms" = "100 millisekunder";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Indtast et navn til den nye konfiguration.";
 "alert.config.duplicate.title" = "Dupliker konfiguration";
 "alert.config.duplicate.message" = "Indtast et navn til den dublikerede konfiguration.";
-"alert.config.empty_name" = "Navnet kan ikke være tomt.";
-"alert.config.name_existing" = "En konfiguration med det samme navn findes allerede.";
 "alert.config.file_existing.title" = "Filen eksistere allerede";
 "alert.config.file_existing.message" = "En konfigurationsfil med det samme filnavn findes allerede. Vælg OK for at vise filen i Finder.";
 "alert.config.cannot_create" = "Kan ikke oprette konfigurationsfilen!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ i alt";
 "playlist.total_length_with_selected" = "%@ af %@ valgte";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d emner";
 "pl_menu.play_next" = "Afspil næste";
 "pl_menu.play_in_new_window" = "Afspil i nyt vindue";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Lydstyrke";
 "mini_player.close" = "Luk musik-tilstand";
 "mini_player.back" = "Vend tilbage til video-tilstand";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

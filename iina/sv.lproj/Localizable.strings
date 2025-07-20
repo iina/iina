@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precision";
 "osc.1s" = "1 sekund";
 "osc.100ms" = "100 millisekunder";
@@ -61,7 +62,7 @@
 "eq.preset.electronic" = "Elektronisk";
 "eq.preset.hip_hop" = "Hip-hop";
 "eq.preset.increase_bass" = "Öka bas";
-"eq.preset.increase_treble" = "Increase Treble";
+"eq.preset.increase_treble" = "Öka diskant";
 "eq.preset.increase_vocal" = "Increase Vocal";
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latinsk";
@@ -71,14 +72,14 @@
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "Minska bas";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_treble" = "Minska diskant";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
+"eq.preset.small_speaker" = "Liten högtalare";
 "eq.preset.spoken_word" = "Spoken Word";
 
 "alert.eq.new_profile.title" = "Ny EQ-profil";
 "alert.eq.new_profile.message" = "Ange ett profilnamn.";
-"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.title" = "Byt namn på aktuell profil";
 "alert.eq.rename.message" = "Ange ett nytt profilnamn.";
 
 // OSDMessage.swift
@@ -103,7 +104,7 @@
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
 "osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
 "osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_hidden" = "Sekundära undertexter dolda";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Tysta";
@@ -125,8 +126,8 @@
 "osd.find_online_sub" = "Hittar undertexter online…";
 "osd.find_online_sub.source" = "från";
 "osd.sub_not_found" = "Inga undertexter hittades";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d undertexter hittades.";
+"osd.sub_downloading" = "Laddar ner %d undertexter";
 "osd.sub_downloaded" = "Undertext nedladdad";
 "osd.sub_saved" = "Undertext sparad";
 "osd.network_error" = "Nätverksfel";
@@ -162,7 +163,7 @@
 
 "preference.enable_adv_settings" = "Aktivera avancerade inställningar";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "nej";
 "preference.sub_override_level.force" = "tvinga";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "avlägsna";
@@ -183,8 +184,8 @@
 "menu.sub_delay" = "Undertextsfördröjning: %@s";
 "menu.sub_hide" = "Dölj undertexter";
 "menu.sub_show" = "Visa undertexter";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_hide" = "Dölj sekundära undertexter";
+"menu.sub_second_show" = "Visa sekundära undertexter";
 "menu.fullscreen" = "Gå in i helskärmsläge";
 "menu.exit_fullscreen" = "Lämna helskärmsläge";
 "menu.pip" = "Använd bild-i-bild";
@@ -223,9 +224,9 @@
 "menu.developer_tool" = "Utvecklarverktyg";
 "menu.more_plugin" = "Mer…";
 "menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
+"menu.reload_plugins" = "Ladda om alla plugins";
 "menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.hide_plugins_panel" = "Dölj plugin-panel";
 
 "track.audio" = "Ljud";
 "track.none" = "<Inget>";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Vänligen ange ett namn för den nya konfigurationen.";
 "alert.config.duplicate.title" = "Duplicera konfigurationsfil";
 "alert.config.duplicate.message" = "Vänligen ange ett namn för den duplicerade konfigurationsfilen.";
-"alert.config.empty_name" = "Namnet får ej vara tomt.";
-"alert.config.name_existing" = "En konfiguration med samma namn finns redan.";
 "alert.config.file_existing.title" = "Filen finns redan";
 "alert.config.file_existing.message" = "En konfigurationsfil med samma filnamn finns redan. Välj OK för att visa filen i Finder.";
 "alert.config.cannot_create" = "Kan inte skapa konfigurationsfil!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "Totalt %@";
 "playlist.total_length_with_selected" = "%@ av %@ markerade";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d objekt";
 "pl_menu.play_next" = "Spela nästa";
 "pl_menu.play_in_new_window" = "Spela upp i nytt fönster";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Volym";
 "mini_player.close" = "Avsluta musikläge";
 "mini_player.back" = "Återgå till videoläge";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

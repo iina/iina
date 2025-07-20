@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Smeštanje u bafer… %d%%";
 "main.opening_stream" = "Otvaram strim…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Preciznost";
 "osc.1s" = "1. sekunda";
 "osc.100ms" = "100 milisekundi";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Unеsitе naziv za novu konfiguraciju.";
 "alert.config.duplicate.title" = "Duplirana konfiguracija";
 "alert.config.duplicate.message" = "Unеsitе naziv za dupliranu konfiguracionu datoteku.";
-"alert.config.empty_name" = "Naziv ne može biti prazan.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Datoteka već postoji";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Nije moguće kreirati konfiguracionu datoteku!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "Ukupno %@";
 "playlist.total_length_with_selected" = "%@ od %@ izabranih";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "Stavki %d";
 "pl_menu.play_next" = "Reprodukuj sledeće";
 "pl_menu.play_in_new_window" = "Reprodukuj u novom prozoru";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Jačina zvuka";
 "mini_player.close" = "Zatvori muzički režim";
 "mini_player.back" = "Vrati se u muzički režim";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

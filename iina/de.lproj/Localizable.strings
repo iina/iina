@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Du benutzt Version %@ von IINA";
 "initial.beta.desc" = "Wenn du eine Release Version benutzen willst, entferne den Haken bei „Betaupdates erhalten“ in Einstellungen -> Allgemein und installiere eine stabile Version von unserer <a href=\"https://iina.io\">offiziellen Webseite</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Nightly-Versionen sollten nicht für den täglichen Gebrauch eingesetzt werden. Aktuell unterstützen diese keine automatischen Updates. Bitte lade neuere Versionen von unserer <a href=\"https://nightly.iina.io\">Nightly-Website</a>.";
 "initial.debug.desc" = "Debug-Builds sind normalerweise nicht auf Leistung optimiert, daher wird es nicht empfohlen diese für den täglichen Gebrauch einzusetzen. Debug-Builds unterstützen keine automatischen Updates.";
 "initial.bug_report" = "Melde via <a href=\"https://github.com/iina/iina/issues\">GitHub Tickets</a>.";
 
@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
 "main.opening_stream" = "Stream öffnen …";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Genauigkeit";
 "osc.1s" = "1 Sekunde";
 "osc.100ms" = "100 Millisekunden";
@@ -53,7 +54,7 @@
 "quicksetting.reset_speed" = "Geschwindigkeit auf 1x zurücksetzen";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
+"eq.preset.flat" = "Flach";
 "eq.preset.acoustic" = "Akustisch";
 "eq.preset.classical" = "Klassik";
 "eq.preset.dance" = "Dance";
@@ -67,7 +68,7 @@
 "eq.preset.latin" = "Latin";
 "eq.preset.loundness" = "Lautheit";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
+"eq.preset.piano" = "Klavier";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "Bass reduzieren";
@@ -168,11 +169,11 @@
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "ja";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.no" = "Untertitel anzeigen, wie von den Untertitelskripten angegeben, ohne Überschreibungen.";
 "preference.sub_override_level.descriptive_text.force" = "Alle Untertitelstile anwenden.";
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.strip" = "Alle ASS-Tags und Stile aus dem Untertitel komplett entfernen.";
+"preference.sub_override_level.descriptive_text.yes" = "Alle Stil-Einstellungen in diesem Abschnitt anwenden.";
 
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
@@ -222,10 +223,10 @@
 "menu.manage_plugins" = "Plugins verwalten…";
 "menu.developer_tool" = "Entwicklerwerkzeug";
 "menu.more_plugin" = "Mehr…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.conflicting_shortcuts" = "Widersprüchliche Kurzbefehle…";
 "menu.reload_plugins" = "Alle Plugins neu laden";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.show_plugins_panel" = "Erweiterungen anzeigen";
+"menu.hide_plugins_panel" = "Erweiterungen verbergen";
 
 "track.audio" = "Audio";
 "track.none" = "Keine";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Bitte gib einen Namen für die neue Konfiguration ein.";
 "alert.config.duplicate.title" = "Konfiguration duplizieren";
 "alert.config.duplicate.message" = "Bitte gib einen Namen für die duplizierte Konfiguration ein.";
-"alert.config.empty_name" = "Der Name darf nicht leer sein.";
-"alert.config.name_existing" = "Es existiert bereits eine Konfiguration mit demselben Namen.";
 "alert.config.file_existing.title" = "Die Datei existiert bereits.";
 "alert.config.file_existing.message" = "Eine Konfigurationsdatei mit demselben Dateinamen existiert bereits. OK auswählen, um die Datei im Finder anzuzeigen.";
 "alert.config.cannot_create" = "Konfigurationsdatei konnte nicht erstellt werden.\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ insgesamt";
 "playlist.total_length_with_selected" = "%@ von %@ ausgewählt";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Dateien";
 "pl_menu.play_next" = "Als Nächstes wiedergeben";
 "pl_menu.play_in_new_window" = "In neuem Fenster wiedergeben";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Laufwerk";
 "mini_player.close" = "Musikmodus schließen";
 "mini_player.back" = "Zurück zum Video Modus";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

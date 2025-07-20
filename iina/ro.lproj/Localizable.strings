@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering...%d%%";
 "main.opening_stream" = "Se deschide streamul…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precizie";
 "osc.1s" = "O secundă";
 "osc.100ms" = "100 milisecunde";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Te rog introdu un nume pentru noua configurație.";
 "alert.config.duplicate.title" = "Duplică configurația";
 "alert.config.duplicate.message" = "Te rog introdu numele pentru fișierul de configurare duplicat.";
-"alert.config.empty_name" = "Numele nu poate fi gol.";
-"alert.config.name_existing" = "O configurare cu același nume există deja.";
 "alert.config.file_existing.title" = "Fișierul există deja";
 "alert.config.file_existing.message" = "O configurare cu un fișier identic denumit există deja. Alegeți OK pentru a arăta fișierul în Finder.";
 "alert.config.cannot_create" = "Nu se poate crea fișierul de configurare!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ în total";
 "playlist.total_length_with_selected" = "%@ din %@ selectat";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d elemente";
 "pl_menu.play_next" = "Redă în continuare";
 "pl_menu.play_in_new_window" = "Redă în Fereastră Nouă";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Volum";
 "mini_player.close" = "Închide modul muzică";
 "mini_player.back" = "Înapoi la modul video";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

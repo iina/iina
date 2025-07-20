@@ -43,7 +43,7 @@
 "hflip" = "水平镜像翻转";
 
 "lut3d" = "3D LUT调色档";
-"lut3d.file" = "文件";
+"lut3d.file" = "文件路径(你也可以拖拽文件到输入区域)";
 "lut3d.interp" = "插值模式";
 
 "custom_mpv" = "定制 (mpv)";

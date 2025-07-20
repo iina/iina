@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
 "main.opening_stream" = "Opening stream…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precision";
 "osc.1s" = "1 секунда";
 "osc.100ms" = "100 milliseconds";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Please enter a name for the new configuration.";
 "alert.config.duplicate.title" = "Duplicate Configuration";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "File Already Exists";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Прайграць у новым акне";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

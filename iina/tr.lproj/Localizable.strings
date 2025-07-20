@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Arabelleğe alınıyor... %%%d";
 "main.opening_stream" = "Akış açılıyor...";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Kesinlik";
 "osc.1s" = "1 saniye";
 "osc.100ms" = "100 milisaniye";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Lütfen yeni yapılandırma için bir ad girin.";
 "alert.config.duplicate.title" = "Yapılandırmayı Çoğalt";
 "alert.config.duplicate.message" = "Lütfen çoğaltılan yapılandırma dosyası için bir ad girin.";
-"alert.config.empty_name" = "Ad alanı boş olamaz.";
-"alert.config.name_existing" = "Aynı adlı bir yapılandırma halihazırda var.";
 "alert.config.file_existing.title" = "Dosya Halihazırda Var";
 "alert.config.file_existing.message" = "Aynı dosya adına sahip bir yapılandırma dosyası halihazırda var. Dosyayı Finder’da göstermek için Tamam düğmesine tıklayın.";
 "alert.config.cannot_create" = "Yapılandırma dosyası oluşturulamıyor!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "toplamda %@";
 "playlist.total_length_with_selected" = "%@/%@ seçili";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Öğe";
 "pl_menu.play_next" = "Sonrakini Oynat";
 "pl_menu.play_in_new_window" = "Yeni Pencerede Oynat";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Ses düzeyi";
 "mini_player.close" = "Müzik kipini kapat";
 "mini_player.back" = "Video kipine geri dön";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

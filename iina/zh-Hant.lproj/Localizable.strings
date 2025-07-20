@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
 "main.opening_stream" = "開啟串流中⋯⋯";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "精確度";
 "osc.1s" = "1秒";
 "osc.100ms" = "100毫秒";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "請輸入一個設定檔名稱";
 "alert.config.duplicate.title" = "複製設定檔";
 "alert.config.duplicate.message" = "請輸入複製的設定檔名稱";
-"alert.config.empty_name" = "名稱不能留空";
-"alert.config.name_existing" = "具有相同名稱的配置已存在。";
 "alert.config.file_existing.title" = "檔案已經存在";
 "alert.config.file_existing.message" = "一個具有相同文件名的配置文件已存在。選擇“確定”在Finder中顯示該文件。";
 "alert.config.cannot_create" = "無法建立設定檔\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d 個項目";
 "pl_menu.play_next" = "即將播放";
 "pl_menu.play_in_new_window" = "在新視窗裡播放";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "音量";
 "mini_player.close" = "結束音樂模式";
 "mini_player.back" = "返回影片模式";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

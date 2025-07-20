@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Menyangga… %d%%";
 "main.opening_stream" = "Membuka stream…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Ketepatan";
 "osc.1s" = "1 detik";
 "osc.100ms" = "100 milidetik";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Masukkan nama untuk konfigurasi yang baru.";
 "alert.config.duplicate.title" = "Duplikat Konfigurasi";
 "alert.config.duplicate.message" = "Masukkan nama untuk duplikasi konfigurasi.";
-"alert.config.empty_name" = "Nama tidak boleh kosong.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "File Sudah Ada";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Tidak dapat membuat file konfigurasi!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "Total %@";
 "playlist.total_length_with_selected" = "%@ dari %@ terpilih";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d item";
 "pl_menu.play_next" = "Putar Berikutnya";
 "pl_menu.play_in_new_window" = "Putar di Window Baru";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Tutup mode musik";
 "mini_player.back" = "Kembali ke mode video";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

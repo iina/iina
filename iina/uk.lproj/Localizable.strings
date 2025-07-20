@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Точність";
 "osc.1s" = "1 секунда";
 "osc.100ms" = "100 мілісекунд";
@@ -65,7 +66,7 @@
 "eq.preset.increase_vocal" = "Збільшити вокал";
 "eq.preset.jazz" = "Джаз";
 "eq.preset.latin" = "Латина";
-"eq.preset.loundness" = "Гучно";
+"eq.preset.loundness" = "Гучність";
 "eq.preset.lounge" = "Лаунж";
 "eq.preset.piano" = "Спокійно";
 "eq.preset.pop" = "Поп";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Будь ласка, введіть назву нових налаштувань.";
 "alert.config.duplicate.title" = "Дублювати налаштування";
 "alert.config.duplicate.message" = "Будь ласка, дайте назву дубльованому файлові налаштувань.";
-"alert.config.empty_name" = "Назва не може бути пустою.";
-"alert.config.name_existing" = "Конфігурація з такою ж назвою вже існує.";
 "alert.config.file_existing.title" = "Файл вже існує";
 "alert.config.file_existing.message" = "Файл конфігурації з такою самою назвою вже існує. Натисніть OK, щоб показати файл у Finder.";
 "alert.config.cannot_create" = "Не можу створити файл налаштувань!\n%@";
@@ -284,7 +283,7 @@
 
 "alert.playlist.error_deleting" = "Помилка при видаленні: %@";
 
-"alert.screenshot.error_taking" = "Не вдалося зробити скріншот!";
+"alert.screenshot.error_taking" = "Неможливо зробити зняток!";
 
 "alert.sub.no_selected" = "Будь ласка, спочатку виберіть завантажені субтитри.";
 "alert.sub_lang_not_set" = "Будь ласка, встановіть у параметрах основну мову субтитрів, перед тим як використовувати opensubtitles. Зараз буде використано англійську (eng).";
@@ -292,8 +291,8 @@
 "alert.sub.cannot_login" = "Не можу зайти. Будь ласка, перевірте ім'я, пароль та статус мережі.\n\n%@";
 "alert.sub.save_downloaded.title" = "Зберегти завантажені субтитри";
 
-"alert.set_default.title" = "Встановлюю IINA як стандартну програму";
-"alert.set_default.message" = "IINA буде встановлено як стандартну програму для всіх файлів, які він підтримує.";
+"alert.set_default.title" = "Встановлення IINA як застосунок за замовчуванням";
+"alert.set_default.message" = "IINA буде встановлено як застосунок за замовчуванням для всіх файлів, які він підтримує.";
 "alert.set_default.success" = "Закінчено: %d вдало та %d невдало.";
 
 "alert.add_watch.title" = "Додайте властивість перегляду";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ загалом";
 "playlist.total_length_with_selected" = "%@ з %@ вибрано";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "Елементів: %d";
 "pl_menu.play_next" = "Відтворити наступний";
 "pl_menu.play_in_new_window" = "Відтворити в новому вікні";
@@ -396,7 +400,7 @@
 "osc_toolbar.full_screen" = "Повноекранний режим";
 "osc_toolbar.music_mode" = "Перейти до музичного режиму";
 "osc_toolbar.sub_track" = "Наявні субтитри";
-"osc_toolbar.screenshot" = "Зробити скріншот";
+"osc_toolbar.screenshot" = "Зробити зняток";
 "osc_toolbar.plugins" = "Показати панель плагінів";
 
 "mini_player.album_art" = "Показати обкладинку альбому";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Гучність";
 "mini_player.close" = "Закрити музичний режим";
 "mini_player.back" = "Повернутись у режим відео";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

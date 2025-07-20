@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Προφόρτωση… %d%%";
 "main.opening_stream" = "Άνοιγμα Ροής…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Ακρίβεια";
 "osc.1s" = "1 δευτερόλεπτο";
 "osc.100ms" = "100 χιλιοστά του δευτερολέπτου";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Παρακαλώ εισάγετε ένα όνομα για τη νέα ρύθμιση.";
 "alert.config.duplicate.title" = "Αντιγραφή Ρυθμίσεων";
 "alert.config.duplicate.message" = "Παρακαλώ εισάγετε ένα όνομα για το αντιγραμμένο αρχείο ρυθμίσεων.";
-"alert.config.empty_name" = "Το όνομα δεν μπορεί να είναι κενό.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Ήδη Υπάρχον Αρχείο";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Αδυναμία δημιουργίας αρχείου ρυθμίσεων!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Αναπαραγωγή σε Νέο Παράθυρο";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Ένταση";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

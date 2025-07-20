@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Ön Az IINA %@ verzióját használja";
 "initial.beta.desc" = "Amennyiben végleges verzióra váltana, szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállítások > Általános almenüben, és telepítsen stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "A Nightly verzió nem ajánlott mindennapi használatra. Jelenleg a nightly verzió nem támogatja az automatikus frissítést.. Töltsd le a friss verziót a <a href=\"https://nightly.iina.io\">nightly oldalunkról</a>.";
 "initial.debug.desc" = "A hibakeresési verzió általában nincs teljesítményre optimalizálva, ezért nem ajánlott napi használatra. A hibakeresési verziók nem támogatják az automatikus frissítést.";
 "initial.bug_report" = "Jelentés a <a href=\"https://github.com/iina/iina/issues\">GitHub-bugok</a> felületen.";
 
@@ -35,8 +35,9 @@
 "inspector.error" = "Hiba";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Bufferelés…%d%%";
-"main.opening_stream" = "Stream megnyitása…";
+"main.buffering_indicator" = "Pufferelés…%d%%";
+"main.opening_stream" = "Adatfolyam megnyitása…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Pontosság";
 "osc.1s" = "1 másodperc";
 "osc.100ms" = "100 ezredmásodperc";
@@ -47,7 +48,7 @@
 "quicksetting.item_default" = "Alapértelmezett";
 "quicksetting.item_none" = "Egyik sem";
 "quicksetting.hwdec" = "Hardveres dekódolás";
-"quicksetting.deinterlace" = "Váltottsoros képszűrő";
+"quicksetting.deinterlace" = "Váltott soros képszűrő";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Elrejtés";
 "quicksetting.reset_speed" = "Sebesség alaphelyzetbe állítása";
@@ -78,7 +79,7 @@
 
 "alert.eq.new_profile.title" = "Új EQ profil";
 "alert.eq.new_profile.message" = "Kérjük, adjon meg egy profilnevet.";
-"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.title" = "Jelenlegi profil átnevezése";
 "alert.eq.rename.message" = "Kérjük, adjon meg egy új profilnevet.";
 
 // OSDMessage.swift
@@ -170,12 +171,12 @@
 
 "preference.sub_override_level.descriptive_text.no" = "A feliratokat a feliratozási szkriptek által megadott módon, felülírások nélkül adja vissza.";
 "preference.sub_override_level.descriptive_text.force" = "Minden feliratstílus alkalmazása.";
-"preference.sub_override_level.descriptive_text.scale" = "Az ebben a szakaszban található stílusbeállítások mellett alkalmazza a skála beállítását is.";
+"preference.sub_override_level.descriptive_text.scale" = "Az ebben a szakaszban található stílusbeállítások mellett alkalmazza a méretezés beállítását is.";
 "preference.sub_override_level.descriptive_text.strip" = "Alaposan távolítson el minden ASS taget és stílust a feliratból.";
 "preference.sub_override_level.descriptive_text.yes" = "Alkalmazza az összes stílusbeállítást ebben a szakaszban.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Telepítse az Online Media bővítményt a \"Bővítmények > Telepítés a GitHub-ról\" menüpont segítségével, hogy élvezhesse a fejlett képességeket, mint a videó letöltése és az automatikus yt-dlp frissítések.";
+"preference.ytdl_plugin_installed" = "A beépített youtube-dl támogatás nincs engedélyezve, mert az Online Media bővítmény telepítve van.";
 
 "menu.volume" = "Hangerő: %@";
 "menu.volume_muted" = "Hangerő: %@ (Némítva)";
@@ -219,13 +220,13 @@
 "menu.crop_custom" = "Egyéni…";
 "menu.find_online_sub" = "Online feliratok keresése innen: %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "Bővítmények kezelése…";
+"menu.developer_tool" = "Fejlesztőeszköz";
+"menu.more_plugin" = "Továbbiak…";
+"menu.conflicting_shortcuts" = "Billentyűparancs konfliktusok…";
+"menu.reload_plugins" = "Minden bővítmény újratöltése";
+"menu.show_plugins_panel" = "Bővítmény panel megjelenítése";
+"menu.hide_plugins_panel" = "Bővítmény panel elrejtése";
 
 "track.audio" = "Hang";
 "track.none" = "<None>";
@@ -256,14 +257,12 @@
 "alert.error_saving_file" = "Hiba történt mentéskor %@: %@";
 "alert.error_deleting_file" = "Nem sikerült törölni a fájlt.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "A \"%@\" érték érvénytelen.\nAdjon meg egy 10 és 10000 közötti értéket, vagy 0-át.";
 
 "alert.config.new.title" = "Új beviteli konfiguráció";
 "alert.config.new.message" = "Kérlek adj nevet az új konfigurációnak.";
 "alert.config.duplicate.title" = "Konfiguráció duplikálása";
 "alert.config.duplicate.message" = "Kérlek adj nevet az új duplikált konfigurációnak.";
-"alert.config.empty_name" = "A név mező nem lehet üres.";
-"alert.config.name_existing" = "Egy konfiguráció ezzel a névvel már létezik.";
 "alert.config.file_existing.title" = "A fájl már létezik";
 "alert.config.file_existing.message" = "Egy azonos fájlnevű konfigurációs fájl már létezik. Válassza az OK lehetőséget a fájl megjelenítéséhez a Finderben.";
 "alert.config.cannot_create" = "Konfigurációs fájl nem hozható létre!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ összesen";
 "playlist.total_length_with_selected" = "%@/%@ kiválasztva";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d elem";
 "pl_menu.play_next" = "Lejátszás következőként";
 "pl_menu.play_in_new_window" = "Lejátszás új ablakban";
@@ -397,7 +401,7 @@
 "osc_toolbar.music_mode" = "Belépés \"zene\" módba";
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
 "osc_toolbar.screenshot" = "Képernyőmentés készítése";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "Bővítmény panel megjelenítése";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Hangerő";
 "mini_player.close" = "Zene mód bezárása";
 "mini_player.back" = "Vissza videó módba";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

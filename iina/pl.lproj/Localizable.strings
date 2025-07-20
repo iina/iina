@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buforowanie… %d%%";
 "main.opening_stream" = "Otwieram strumień…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Dokładność";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekund";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Wprowadź nazwę nowej konfiguracji.";
 "alert.config.duplicate.title" = "Powiel konfigurację";
 "alert.config.duplicate.message" = "Proszę wprowadzić nazwę dla duplikatu pliku konfiguracyjnego.";
-"alert.config.empty_name" = "Nazwa nie może być pusta.";
-"alert.config.name_existing" = "Konfiguracja o tej samej nazwie już istnieje.";
 "alert.config.file_existing.title" = "Plik już istnieje";
 "alert.config.file_existing.message" = "Plik konfiguracyjny o tej samej nazwie już istnieje.";
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "Całkowity czas %@";
 "playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d plików";
 "pl_menu.play_next" = "Odtwórz następny";
 "pl_menu.play_in_new_window" = "Odtwórz w nowym oknie";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Głośność";
 "mini_player.close" = "Zamknij tryb muzyczny";
 "mini_player.back" = "Wróć do trybu wideo";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

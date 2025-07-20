@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "מוריד נתונים… %d%%";
 "main.opening_stream" = "פותח זרם…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "דיוק";
 "osc.1s" = "שניה";
 "osc.100ms" = "100 אלפיות שניה";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "נא להזין שם עבור התצורה החדשה.";
 "alert.config.duplicate.title" = "תצורה כפולה";
 "alert.config.duplicate.message" = "יש להזין שם עבור קובץ התצורה המשוכפל.";
-"alert.config.empty_name" = "השם לא יכול להיות ריק.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "הקובץ כבר קיים";
 "alert.config.file_existing.message" = "קובץ תצורה באותו שם קובץ כבר קיים. בחר אישור כדי להציג את הקובץ ב-Finder.";
 "alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ סך הכל";
 "playlist.total_length_with_selected" = "נבחרו %@ מתוך %@";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d פריטים";
 "pl_menu.play_next" = "הפעל את הבא";
 "pl_menu.play_in_new_window" = "הפעלה בחלון חדש";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "עוצמת קול";
 "mini_player.close" = "סגור מצב מוזיקה";
 "mini_player.back" = "חזור למצב וידאו";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

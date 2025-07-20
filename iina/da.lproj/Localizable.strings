@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Genoptag";
-"osd.volume" = "Lydstyrke: %i";
+"osd.volume" = "Lydstyrke: %@";
 "osd.speed" = "Hastighed: %@x";
 "osd.aspect" = "Billedformat: %@";
 "osd.crop" = "Beskær: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardwareafkodning: %@";
 "osd.audio_delay.nodelay" = "Lydforsinkelse: Ingen forsinkelse";
-"osd.audio_delay.later" = "Lydforsinkelse: %.2fs senere";
-"osd.audio_delay.earlier" = "Lydforsinkelse: %.2fs tidligere";
+"osd.audio_delay.later" = "Lydforsinkelse: %@s senere";
+"osd.audio_delay.earlier" = "Lydforsinkelse: %@s tidligere";
 "osd.sub_delay.nodelay" = "Undertekst forsinkelse: Ingen forsinkelse";
-"osd.sub_delay.later" = "Undertekst forsinkelse: %.2fs senere";
-"osd.sub_delay.earlier" = "Undertekst forsinkelse: %.2fs tidligere";
-"osd.subtitle_pos" = "Undertekst position: %.1f";
+"osd.sub_delay.later" = "Undertekst forsinkelse: %@s senere";
+"osd.sub_delay.earlier" = "Undertekst forsinkelse: %@s tidligere";
+"osd.subtitle_pos" = "Undertekst position: %@";
 "osd.sub_hidden" = "Undertekster er skjult";
 "osd.sub_visible" = "Undertekster er synlige";
 "osd.sub_second_delay.nodelay" = "Forsinkelse af sekundære undertekster: ingen forsinkelse";
-"osd.sub_second_delay.later" = "Forsinkelse af sekundære undertekster: %.2fs senere";
-"osd.sub_second_delay.earlier" = "Forsinkelse af sekundære undertekster: %.2fs tidligere";
+"osd.sub_second_delay.later" = "Forsinkelse af sekundære undertekster: %@s senere";
+"osd.sub_second_delay.earlier" = "Forsinkelse af sekundære undertekster: %@s tidligere";
 "osd.sub_second_hidden" = "Sekundære undertekster er skjulte";
-"osd.sub_second_pos" = "Sekundære underteksters position: %.1f";
+"osd.sub_second_pos" = "Sekundære underteksters position: %@";
 "osd.sub_second_visible" = "Sekundære undertekster er synlige";
 "osd.mute" = "Lydløs";
 "osd.unmute" = "Lydløs fra";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "AB-Løkke: Ryddet";
 "osd.stop" = "Stop";
 "osd.chapter" = "Kapitel: %@";
-"osd.subtitle_scale" = "Undertekst skala: %.2fx";
+"osd.subtitle_scale" = "Undertekst skala: %@x";
 "osd.add_to_playlist" = "Tilføj %i filer til spilleliste";
 "osd.clear_playlist" = "Spilleliste ryddet";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Installer Online Media-tilføjelsen fra \"Tilføjelser > Installer fra GitHub\" for at få fornøjelsen af nye avancerede funktioner såsom at hente videoer og automatiske youtube-dl-opdateringer.";
 "preference.ytdl_plugin_installed" = "Den indbyggede youtube-dl-understøttelse er slået fra, siden du har Online Media-tilføjelsen installeret.";
 
-"menu.volume" = "Lydstyrke: %d";
-"menu.volume_muted" = "Lydstyrke: %d (lydløs)";
-"menu.audio_delay" = "Lydforsinkelse: %.2fs";
-"menu.sub_delay" = "Undertekst forsinkelse: %.2fs";
+"menu.volume" = "Lydstyrke: %@";
+"menu.volume_muted" = "Lydstyrke: %@ (lydløs)";
+"menu.audio_delay" = "Lydforsinkelse: %@s";
+"menu.sub_delay" = "Undertekst forsinkelse: %@s";
 "menu.sub_hide" = "Skjul undertekster";
 "menu.sub_show" = "Vis undertekster";
 "menu.sub_second_hide" = "Skjul sekundære undertekster";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "Vis undertekst panel";
 "menu.hide_subtitles" = "Skjul undertekst panel";
 
-"menu.seek_forward" = "Spol frem %.0fs";
-"menu.seek_backward" = "Spol tilbage %.0fs";
+"menu.seek_forward" = "Spol frem %@s";
+"menu.seek_backward" = "Spol tilbage %@s";
 "menu.speed_up" = "Øg hastighed med %@x";
 "menu.speed_down" = "Sænk hastighed med %@x";
-"menu.volume_up" = "Lydstyrke + %.0f%%";
-"menu.volume_down" = "Lydstyrke - %.0f%%";
-"menu.audio_delay_up" = "Lydforsinkelse + %.1fs";
-"menu.audio_delay_down" = "Lydforsinkelse - %.1fs";
-"menu.sub_delay_up" = "Undertekst forsinkelse + %.1fs";
-"menu.sub_delay_down" = "Undertekst forsinkelse - %.1fs";
+"menu.volume_up" = "Lydstyrke + %@%%";
+"menu.volume_down" = "Lydstyrke - %@%%";
+"menu.audio_delay_up" = "Lydforsinkelse + %@s";
+"menu.audio_delay_down" = "Lydforsinkelse - %@s";
+"menu.sub_delay_up" = "Undertekst forsinkelse + %@s";
+"menu.sub_delay_down" = "Undertekst forsinkelse - %@s";
 
 "menu.crop_custom" = "Brugerdefineret...";
 "menu.find_online_sub" = "Find online undertekster fra %@";
@@ -262,6 +262,8 @@
 "alert.config.new.message" = "Indtast et navn til den nye konfiguration.";
 "alert.config.duplicate.title" = "Dupliker konfiguration";
 "alert.config.duplicate.message" = "Indtast et navn til den dublikerede konfiguration.";
+"alert.config.empty_name" = "Navnet kan ikke være tomt.";
+"alert.config.name_existing" = "En konfiguration med det samme navn findes allerede.";
 "alert.config.file_existing.title" = "Filen eksistere allerede";
 "alert.config.file_existing.message" = "En konfigurationsfil med det samme filnavn findes allerede. Vælg OK for at vise filen i Finder.";
 "alert.config.cannot_create" = "Kan ikke oprette konfigurationsfilen!\n%@";
@@ -285,7 +287,7 @@
 "alert.screenshot.error_taking" = "Kan ikke tage et skærmbillede!";
 
 "alert.sub.no_selected" = "Venligst vælg downloadet undertekst først.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Venligst vælgt det fortrukne undertekstsprog i Indstillinger før du bruger opensubtitles. Engelsk vil blive brugt denne gang.";
 "alert.sub.cannot_save_passwd" = "Kan ikke gemme dit kodeord til nøglering: %@";
 "alert.sub.cannot_login" = "Kan ikke logge ind. Venligst tjek dit brugernavn, kodeord og netværksstatus.\n\n%@";
 "alert.sub.save_downloaded.title" = "Gem hentede undertekster";
@@ -347,7 +349,7 @@
 "alert.plugin_uninstall.message" = "Denne udvidelse vil blive fjernet fra din harddisk.";
 "alert.plugin_reinstall.title" = "Pluginet %@ findes allerede";
 "alert.plugin_reinstall.message" = "Vil du installere tilføjelsen igen?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplikerede tilføjelsesidentifikationer fundet. To eller flere tilføjelser har den samme indetifikation \"%@\". Dette kan forårsage unormal adfærd. Find dem venligst i \"Præferencer - Tilføjelser\" og send rapporter til deres forfattere. Hvis en tilføjelse er installeret lokalt, så kan du også manuelt ændre dens identifikation i tilføjelsens \"Info.json\"-fil.";
 "alert.plugin_no_update" = "Ingen nye opdateringer fundet.";
 "alert.plugin_update_found.title" = "Ny opdatering fundet til %@";
 "alert.plugin_update_found.message" = "Den seneste version er %@. Du har %@. Vil du opdatere?";

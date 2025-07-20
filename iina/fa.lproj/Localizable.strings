@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "مکث";
 "osd.resume" = "ادامه";
-"osd.volume" = "بلندی صدا: %i";
+"osd.volume" = "بلندی صدا: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "نسبت تصویر: %@";
 "osd.crop" = "برش: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "تبدیل تصویر به غیر interlace: %@";
 "osd.hwdec" = "استفاده از تبدیل سخت‌افزاری: %@";
 "osd.audio_delay.nodelay" = "تاخیر صدا: بدون تاخیر";
-"osd.audio_delay.later" = "تاخیر صوت: %.2f ثانيه";
-"osd.audio_delay.earlier" = "تاخیر صوت: %.2f ثانيه زودتر";
+"osd.audio_delay.later" = "تاخیر صوت: %@ ثانيه";
+"osd.audio_delay.earlier" = "تاخیر صوت: %@ ثانيه زودتر";
 "osd.sub_delay.nodelay" = "تاخیر صدا: بدون تاخیر";
-"osd.sub_delay.later" = "تاخیر زیرنویس: %.2f ثانیه بعدتر";
-"osd.sub_delay.earlier" = "تاخیر زیرنویس: %.2f ثانیه زودتر";
-"osd.subtitle_pos" = "جایگذاری زیرنویس: %.1f";
+"osd.sub_delay.later" = "تاخیر زیرنویس: %@ ثانیه بعدتر";
+"osd.sub_delay.earlier" = "تاخیر زیرنویس: %@ ثانیه زودتر";
+"osd.subtitle_pos" = "جایگذاری زیرنویس: %@";
 "osd.sub_hidden" = "مخفی کردن زیرنویس";
 "osd.sub_visible" = "نمایش دادن زیرنویس";
 "osd.sub_second_delay.nodelay" = "تاخیر زیرنویس دوم: بدون تاخیر";
-"osd.sub_second_delay.later" = "تاخیر زیرنویس دوم: %.2f ثانیه دیرتر";
-"osd.sub_second_delay.earlier" = "تاخیر زیرنویس دوم: %.2f ثانیه زودتر";
+"osd.sub_second_delay.later" = "تاخیر زیرنویس دوم: %@ ثانیه دیرتر";
+"osd.sub_second_delay.earlier" = "تاخیر زیرنویس دوم: %@ ثانیه زودتر";
 "osd.sub_second_hidden" = "زیرنویس دوم مخفی";
-"osd.sub_second_pos" = "جایگاه زیرنویس دوم: %.1f";
+"osd.sub_second_pos" = "جایگاه زیرنویس دوم: %@";
 "osd.sub_second_visible" = "زیرنویس دوم مشخص";
 "osd.mute" = "بی صدا";
 "osd.unmute" = "با صدا";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "حلقه AB: پاک سازی شد";
 "osd.stop" = "توقف";
 "osd.chapter" = "قسمت: %@";
-"osd.subtitle_scale" = "بزرگنمایی زیرنویس: %.2f برابر";
+"osd.subtitle_scale" = "بزرگنمایی زیرنویس: %@ برابر";
 "osd.add_to_playlist" = "%i فایل به لیست پخش اضافه شد";
 "osd.clear_playlist" = "پاک کردن لیست پخش";
 "osd.video_eq.contrast" = "کنتراست: %i";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "بلندی صدا: %d";
-"menu.volume_muted" = "صدا: %d (بی صدا)";
-"menu.audio_delay" = "تاخیر صوت: %.2f ثانيه";
-"menu.sub_delay" = "تاخیر زیرنویس: %.2f ثانیه";
+"menu.volume" = "بلندی صدا: %@";
+"menu.volume_muted" = "صدا: %@ (بی صدا)";
+"menu.audio_delay" = "تاخیر صوت: %@ ثانيه";
+"menu.sub_delay" = "تاخیر زیرنویس: %@ ثانیه";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "پنل زیرنویس رو نشون بده";
 "menu.hide_subtitles" = "پنل زیرنویس رو پنهان کن";
 
-"menu.seek_forward" = "%.0f ثانیه به جلو";
-"menu.seek_backward" = "%.0f ثانیه به عقب";
+"menu.seek_forward" = "%@ ثانیه به جلو";
+"menu.seek_backward" = "%@ ثانیه به عقب";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "افزایش صدا + %.0f%%";
-"menu.volume_down" = "کاهش صدا - %.0f%%";
-"menu.audio_delay_up" = "تاخیر صدا + %.1f ثانيه";
-"menu.audio_delay_down" = "تاخیر صدا - %.1f ثانيه";
-"menu.sub_delay_up" = "تاخیر زیرنویس + %.1f ثانیه";
-"menu.sub_delay_down" = "تاخیر زیرنویس - %.1f ثانیه";
+"menu.volume_up" = "افزایش صدا + %@%%";
+"menu.volume_down" = "کاهش صدا - %@%%";
+"menu.audio_delay_up" = "تاخیر صدا + %@ ثانيه";
+"menu.audio_delay_down" = "تاخیر صدا - %@ ثانيه";
+"menu.sub_delay_up" = "تاخیر زیرنویس + %@ ثانیه";
+"menu.sub_delay_down" = "تاخیر زیرنویس - %@ ثانیه";
 
 "menu.crop_custom" = "سفارشی…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
@@ -262,6 +262,8 @@
 "alert.config.new.message" = "Please enter a name for the new configuration.";
 "alert.config.duplicate.title" = "Duplicate Configuration";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.empty_name" = "The name cannot be empty.";
+"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "فايل قبلا ساخته شده";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "فایل Config غیرقابل ساختن است\n%@";
@@ -285,7 +287,7 @@
 "alert.screenshot.error_taking" = "Cannot take a screenshot!";
 
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "ذخیره پسوورد در Keychain ناموفق بود: %@";
 "alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
 "alert.sub.save_downloaded.title" = "ذخیره زیرنویس دانلود شده";
@@ -347,7 +349,7 @@
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "آپدیتی پیدا نشد.";
 "alert.plugin_update_found.title" = "Update found for %@";
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";

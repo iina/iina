@@ -16,8 +16,8 @@
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[0]" = "Over";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[2]" = "Instellingen";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Preferences"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[2]" = "Voorkeuren";
 
 /* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
 "Ka5-V3-g5E.title" = "Help";
@@ -46,8 +46,8 @@
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
 "enP-C1-4vu.title" = "Installeren vanuit GitHub…";
 
-/* Class = "NSTabViewItem"; label = "Settings"; ObjectID = "eyS-eb-H4e"; */
-"eyS-eb-H4e.label" = "Instellingen";
+/* Class = "NSTabViewItem"; label = "Preferences"; ObjectID = "eyS-eb-H4e"; */
+"eyS-eb-H4e.label" = "Voorkeuren";
 
 /* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
 "fnl-uA-X7r.title" = "Je kunt een nieuwe plugin installeren vanaf GitHub of een lokaal .iinaplgz pakket. Plugins geïnstalleerd vanaf GitHub kunnen automatisch worden bijgewerkt.";

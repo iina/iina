@@ -16,8 +16,8 @@
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[0]" = "關於";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[2]" = "設定";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Preferences"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[2]" = "偏好設定";
 
 /* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
 "Ka5-V3-g5E.title" = "輔助說明";
@@ -47,8 +47,8 @@
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
 "enP-C1-4vu.title" = "從 GitHub 安裝...";
 
-/* Class = "NSTabViewItem"; label = "Settings"; ObjectID = "eyS-eb-H4e"; */
-"eyS-eb-H4e.label" = "設定";
+/* Class = "NSTabViewItem"; label = "Preferences"; ObjectID = "eyS-eb-H4e"; */
+"eyS-eb-H4e.label" = "偏好設定";
 
 /* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
 "fnl-uA-X7r.title" = "您可以從 GitHub 或利用 .iinaplgz 包安裝新外掛程式。從 GitHub 安裝的外掛程式支援自動更新。";
@@ -72,7 +72,7 @@
 "r3r-Qh-rC9.title" = "來源";
 
 /* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "安裝外掛…";
+"sdU-FG-dTO.title" = "Install Package…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "外掛程式";

@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "%@ 버전을 사용하고 있습니다.";
 "initial.beta.desc" = "정식 버전으로 롤백하려면, 환경 설정 > 일반 탭에서 \"베타 업데이트 받기\"를 해제하고, <a href=\"https://iina.io\"> 공식 웹사이트</a>에서 정식 버전을 설치하세요.";
-"initial.nightly.desc" = "나이틀리 빌드는 일반적으로 사용하지 않는 것을 추천합니다. 나이틀리 빌드는 자동 업데이트를 지원하지 않습니다. <a href=\"https://nightly.iina.io\">나이틀리 웹사이트</a>에서 최신 빌드를 수동으로 다운로드하세요.";
+"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "디버그 빌드는 성능에 최적화되어 있지 않으므로, 일반적으로 사용하지 않는 것이 좋습니다. 디버그 빌드는 자동 업데이트를 지원하지 않습니다.";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub 이슈</a>를 통해 오류를 보고해주십시오.";
 
@@ -84,7 +84,7 @@
 // OSDMessage.swift
 "osd.pause" = "일시 정지됨";
 "osd.resume" = "재생 복원됨";
-"osd.volume" = "음량: %i";
+"osd.volume" = "음량: %@";
 "osd.speed" = "속도: %@배속";
 "osd.aspect" = "화면비: %@";
 "osd.crop" = "화면 자르기: %@";
@@ -92,19 +92,19 @@
 "osd.deinterlace" = "디인터레이스: %@";
 "osd.hwdec" = "하드웨어 디코딩: %@";
 "osd.audio_delay.nodelay" = "오디오 지연: 없음";
-"osd.audio_delay.later" = "오디오 지연: %.2f초 느리게";
-"osd.audio_delay.earlier" = "오디오 지연: %.2f초 빠르게";
+"osd.audio_delay.later" = "오디오 지연: %@초 느리게";
+"osd.audio_delay.earlier" = "오디오 지연: %@초 빠르게";
 "osd.sub_delay.nodelay" = "자막 지연: 없음";
-"osd.sub_delay.later" = "자막 지연: %.2f초 느리게";
-"osd.sub_delay.earlier" = "자막 지연: %.2f초 빠르게";
-"osd.subtitle_pos" = "자막 위치: %.1f";
+"osd.sub_delay.later" = "자막 지연: %@초 느리게";
+"osd.sub_delay.earlier" = "자막 지연: %@초 빠르게";
+"osd.subtitle_pos" = "자막 위치: %@";
 "osd.sub_hidden" = "자막 숨김";
 "osd.sub_visible" = "자막 보임";
 "osd.sub_second_delay.nodelay" = "두번째 자막 지연: 없음";
-"osd.sub_second_delay.later" = "두번째 자막 지연: %.2f초 느리게";
-"osd.sub_second_delay.earlier" = "두번째 자막 지연: %.2f초 빠르게";
+"osd.sub_second_delay.later" = "두번째 자막 지연: %@초 느리게";
+"osd.sub_second_delay.earlier" = "두번째 자막 지연: %@초 빠르게";
 "osd.sub_second_hidden" = "두번째 자막 숨김";
-"osd.sub_second_pos" = "두번째 자막 위치: %.1f";
+"osd.sub_second_pos" = "두번째 자막 위치: %@";
 "osd.sub_second_visible" = "두번째 자막 보임";
 "osd.mute" = "소리 끔";
 "osd.unmute" = "음소거 해제";
@@ -114,7 +114,7 @@
 "osd.abloop.clear" = "구간 반복: 해제됨";
 "osd.stop" = "정지됨";
 "osd.chapter" = "챕터: %@";
-"osd.subtitle_scale" = "자막 크기: %.2f배";
+"osd.subtitle_scale" = "자막 크기: %@배";
 "osd.add_to_playlist" = "%i 파일이 재생목록에 추가되었습니다";
 "osd.clear_playlist" = "재생목록 비움";
 "osd.video_eq.contrast" = "대비: %i";
@@ -141,7 +141,7 @@
 "osd.playlist_loop" = "재생목록 반복 재생";
 "osd.no_loop" = "반복 재생하지 않음";
 
-"preference.title" = "설정";
+"preference.title" = "환경설정";
 "preference.general" = "일반";
 "preference.ui" = "화면";
 "preference.video_audio" = "비디오/오디오";
@@ -164,12 +164,12 @@
 
 "preference.sub_override_level.no" = "아니요";
 "preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "크기";
+"preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
 "preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "전체 자막 스타일 적용.";
+"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
@@ -177,10 +177,10 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "음량: %d";
-"menu.volume_muted" = "음량: %d (음소거 됨)";
-"menu.audio_delay" = "오디오 지연: %.2f초";
-"menu.sub_delay" = "자막 지연: %.2f초";
+"menu.volume" = "음량: %@";
+"menu.volume_muted" = "음량: %@ (음소거 됨)";
+"menu.audio_delay" = "오디오 지연: %@초";
+"menu.sub_delay" = "자막 지연: %@초";
 "menu.sub_hide" = "자막 숨기기";
 "menu.sub_show" = "자막 보이기";
 "menu.sub_second_hide" = "두번째 자막 숨기기";
@@ -205,16 +205,16 @@
 "menu.subtitles" = "자막 패널 보기";
 "menu.hide_subtitles" = "자막 패널 숨기기";
 
-"menu.seek_forward" = "앞으로 탐색 %.0f초";
-"menu.seek_backward" = "뒤로 탐색 %.0f초";
+"menu.seek_forward" = "앞으로 탐색 %@초";
+"menu.seek_backward" = "뒤로 탐색 %@초";
 "menu.speed_up" = "%@배 빠르게 재생";
 "menu.speed_down" = "%@배 느리게 재생";
-"menu.volume_up" = "음량 +%.0f%%";
-"menu.volume_down" = "음량 -%.0f%%";
-"menu.audio_delay_up" = "오디오 지연 +%.1f초";
-"menu.audio_delay_down" = "오디오 지연 -%.1f초";
-"menu.sub_delay_up" = "자막 지연 +%.1f초";
-"menu.sub_delay_down" = "자막 지연 -%.1f초";
+"menu.volume_up" = "음량 +%@%%";
+"menu.volume_down" = "음량 -%@%%";
+"menu.audio_delay_up" = "오디오 지연 +%@초";
+"menu.audio_delay_down" = "오디오 지연 -%@초";
+"menu.sub_delay_up" = "자막 지연 +%@초";
+"menu.sub_delay_down" = "자막 지연 -%@초";
 
 "menu.crop_custom" = "사용자 설정…";
 "menu.find_online_sub" = "%@에서 온라인 자막 찾기";
@@ -262,6 +262,8 @@
 "alert.config.new.message" = "새 설정 파일의 이름을 입력하십시오.";
 "alert.config.duplicate.title" = "설정 파일 복제";
 "alert.config.duplicate.message" = "새로 만들 설정 파일의 이름을 입력하십시오.";
+"alert.config.empty_name" = "파일 이름을 지정하십시오.";
+"alert.config.name_existing" = "같은 이름의 설정이 이미 존재합니다.";
 "alert.config.file_existing.title" = "같은 이름의 설정 파일이 이미 있습니다.";
 "alert.config.file_existing.message" = "같은 이름의 설정 파일이 이미 존재합니다. Finder에서 파일을 보려면 OK를 선택하세요.";
 "alert.config.cannot_create" = "설정 파일을 만들 수 없습니다!\n%@";
@@ -285,7 +287,7 @@
 "alert.screenshot.error_taking" = "스크린샷을 찍을 수 없습니다!";
 
 "alert.sub.no_selected" = "다운로드된 자막을 선택하십시오.";
-"alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub_lang_not_set" = "OpenSubtitles를 사용하기 전에 자막의 선호 언어를 설정하십시오. 지금은 영어(eng)를 사용합니다.";
 "alert.sub.cannot_save_passwd" = "키체인에 암호를 저장할 수 없습니다: %@";
 "alert.sub.cannot_login" = "로그인할 수 없습니다. 계정 이름과 암호, 네트워크 상태를 확인하십시오.\n\n%@";
 "alert.sub.save_downloaded.title" = "다운로드된 자막 저장";
@@ -347,7 +349,7 @@
 "alert.plugin_uninstall.message" = "이 플러그인이 디스크에서 삭제됩니다.";
 "alert.plugin_reinstall.title" = "%@ 플러그인이 이미 존재합니다.";
 "alert.plugin_reinstall.message" = "플러그인을 재설치하시겠습니까?";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Settings - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.duplicated_plugin_id" = "중복된 플러그인 식별자가 감지되었습니다. 두 개 이상의 플러그인 식별자 \"%@\"가 동일합니다. 이로 인해 비정상적인 동작이 발생할 수 있습니다. 환경설정 - 플러그인에서 해당 플러그인을 찾아 해당 플러그인 작성자에게 신고하세요. 플러그인이 로컬에 설치된 경우 플러그인의 Info.json 파일에서 식별자를 수동으로 변경할 수도 있습니다.";
 "alert.plugin_no_update" = "업데이트가 없습니다.";
 "alert.plugin_update_found.title" = "%@의 업데이트를 찾음";
 "alert.plugin_update_found.message" = "최신 버전은 %@입니다. %@에서 업데이트 하시겠습니까?";
@@ -395,7 +397,7 @@
 "osc_toolbar.music_mode" = "음악 모드 전환";
 "osc_toolbar.sub_track" = "자막 선택";
 "osc_toolbar.screenshot" = "스크린샷 찍기";
-"osc_toolbar.plugins" = "플러그인 패널 보기";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "앨범 아트 켜기/끄기";
 "mini_player.loop" = "반복";

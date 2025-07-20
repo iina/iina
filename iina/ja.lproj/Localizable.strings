@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
 "main.opening_stream" = "ストリームを展開中…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "精度";
 "osc.1s" = "1 秒";
 "osc.100ms" = "100 ミリ秒";
@@ -78,14 +79,14 @@
 
 "alert.eq.new_profile.title" = "新しいEQプロファイル";
 "alert.eq.new_profile.message" = "プロファイルの名前を入力してください。";
-"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.title" = "現在のプロファイルの名前を変更";
 "alert.eq.rename.message" = "新しいプロファイル名を入力してください。";
 
 // OSDMessage.swift
 "osd.pause" = "一時停止";
 "osd.resume" = "再開";
 "osd.volume" = "音量: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "再生速度: %@倍";
 "osd.aspect" = "アスペクト比: %@";
 "osd.crop" = "クロップ: %@";
 "osd.rotate" = "回転: %i°";
@@ -193,7 +194,7 @@
 "menu.exit_mini_player" = "ミュージックモードを終了する";
 "menu.pause" = "一時停止";
 "menu.resume" = "再生";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "再生速度: %@倍";
 "menu.chapters" = "チャプターパネルを表示";
 "menu.hide_chapters" = "チャプターパネルを隠す";
 "menu.playlist" = "プレイリストパネルを開く";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
 "alert.config.duplicate.title" = "設定の複製";
 "alert.config.duplicate.message" = "複製する設定ファイルの名前を入力してください。";
-"alert.config.empty_name" = "名前は空欄にできません。";
-"alert.config.name_existing" = "同じ名前の設定がすでに存在しています。";
 "alert.config.file_existing.title" = "ファイルが既に存在しています";
 "alert.config.file_existing.message" = "同じファイル名がすでに存在しています。OKを押してファイルをFinderから表示します。";
 "alert.config.cannot_create" = "設定ファイルが作成できません！\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "合計 %@";
 "playlist.total_length_with_selected" = "%@ / %@を選択中";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d個の項目";
 "pl_menu.play_next" = "次に再生";
 "pl_menu.play_in_new_window" = "新しいウィンドウで再生";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "音量";
 "mini_player.close" = "ミュージックモードの終了";
 "mini_player.back" = "ビデオモードに戻る";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизация… %d%%";
 "main.opening_stream" = "Открытие потока…";
+"main.seeking_indicator" = "Поиск…";
 "osc.precision" = "Точность";
 "osc.1s" = "1 сек.";
 "osc.100ms" = "100 миллисекунд";
@@ -262,8 +263,6 @@
 "alert.config.new.message" = "Введите имя для новой конфигурации.";
 "alert.config.duplicate.title" = "Дублировать конфигурацию";
 "alert.config.duplicate.message" = "Введите имя для дубля файла конфигурации.";
-"alert.config.empty_name" = "Имя не может быть пустым.";
-"alert.config.name_existing" = "Уже есть конфигурация с тем же именем.";
 "alert.config.file_existing.title" = "Файл уже существует";
 "alert.config.file_existing.message" = "Уже есть файл конфигурации с тем же именем. Нажмите ОК для показа этого файла в Finder.";
 "alert.config.cannot_create" = "Не удалось создать файл конфигурации!\n%@";
@@ -358,6 +357,11 @@
 
 "playlist.total_length" = "%@ в общей сложности";
 "playlist.total_length_with_selected" = "%@ из %@ выбрано";
+"playlist.sorting.header" = "Сортировка";
+"playlist.sorting.filename_ascending" = "Имя файла (по возрастанию)";
+"playlist.sorting.filename_descending" = "Имя файла (по убыванию)";
+"playlist.sorting.path_ascending" = "Путь к файлу (по возрастанию)";
+"playlist.sorting.path_descending" = "Путь к файлу (по убыванию)";
 "pl_menu.title_multi" = "%d элементов";
 "pl_menu.play_next" = "Воспроизвести следующим";
 "pl_menu.play_in_new_window" = "Воспроизвести в новом окне";
@@ -408,6 +412,7 @@
 "mini_player.volume" = "Громкость";
 "mini_player.close" = "Закрыть музыкальный режим";
 "mini_player.back" = "Вернуться в видео режим";
+"mini_player.sort" = "Сортировать плейлист";
 
 // Touch bar
 

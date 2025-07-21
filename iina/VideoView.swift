@@ -42,6 +42,9 @@ class VideoView: NSView {
 
   static let SRGB = CGColorSpaceCreateDeviceRGB()
 
+  // record the last mouse up event which lands on video view
+  var lastEventId: Int?
+
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
@@ -123,6 +126,7 @@ class VideoView: NSView {
   /// This appears to be a defect in the Cocoa framework. See the issue for details. As a workaround the mouse up event is caught in
   /// the view which then calls the window controller's method.
   override func mouseUp(with event: NSEvent) {
+    lastEventId = event.eventNumber
     // Only check for Big Sur or greater, not if the preference use legacy full screen is enabled as
     // that can be changed while running and once the window title has been removed and added back
     // AppKit malfunctions from then on. The check for running under Big Sur or later isn't really

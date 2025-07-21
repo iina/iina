@@ -391,8 +391,20 @@ return -1;\
   NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
   info[@"@iina_duration"] = duration == -1 ? [NSNumber numberWithInt:-1] : [NSNumber numberWithDouble:(double)duration / AV_TIME_BASE];
   AVDictionaryEntry *tag = NULL;
-  while ((tag = av_dict_get(metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))
-    info[[NSString stringWithCString:tag->key encoding:NSUTF8StringEncoding]] = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];
+  while ((tag = av_dict_get(metadata, "", tag, AV_DICT_IGNORE_SUFFIX))) {
+    // FFmpeg may return strings that are not valid. See issue #5602.
+    const NSString *key = [NSString stringWithCString:tag->key encoding:NSUTF8StringEncoding];
+    if (!key) {
+      LOG_WARN(@"Cannot construct a string for a metadata tag key");
+      continue;
+    }
+    const NSString *value = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];
+    if (!value) {
+      LOG_WARN(@"Cannot construct a string for the value of the metadata tag key: %@", key);
+      continue;
+    }
+    info[key] = value;
+  }
 
   avformat_close_input(&pFormatCtx);
   avformat_free_context(pFormatCtx);

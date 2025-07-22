@@ -425,7 +425,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  lazy var titlebarView: NSView? = { window?.contentView?.superview?.subviews.last }()
+  private var windowTitleBar: NSView? { get { window?.contentView?.superview?.subviews.last } }
 
   /** Get the `NSTextField` of widow's title. */
   var titleTextField: NSTextField? {
@@ -1515,13 +1515,16 @@ class MainWindowController: PlayerWindowController {
     // stylemask
     window.styleMask.remove(.borderless)
     if #available(macOS 10.16, *) {
+      let screen = window.screen ?? NSScreen.main!
       // Workaround for issue #5600. Adding titled to the styleMask causes AppKit to draw a black
       // window that disrupts the smooth transition from full screen mode. AppKit does not do this
-      // if instead we show and hide the title bar view.
-      if let titlebarView {
-        titlebarView.isHidden = false
+      // if instead we show and hide the title bar view. Unfortunately this workaround does not work
+      // if the screen has a camera housing. If titled is not removed AppKit forces the window to be
+      // smaller exposing the area around the camera. So the workaround only works on older Macs and
+      // when using an external monitor.
+      if let windowTitleBar, screen.cameraHousingHeight == nil {
+        windowTitleBar.isHidden = false
       } else {
-        log("Failed to find the tilebar view", level: .warning)
         window.styleMask.insert(.titled)
       }
       (window as! MainWindow).forceKeyAndMain = false
@@ -1534,7 +1537,11 @@ class MainWindowController: PlayerWindowController {
     // restore window frame and aspect ratio
     let videoSize = player.videoSizeForDisplay
     let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
-    let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
+    let useAnimation = {
+      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
+      guard #unavailable(macOS 26) else { return false }
+      return !Preference.bool(for: .disableAnimations)
+    }()
     if useAnimation {
       // firstly resize to a big frame with same aspect ratio for better visual experience
       let aspectFrame = aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
@@ -1552,8 +1559,13 @@ class MainWindowController: PlayerWindowController {
   /// For screens that contain a camera housing the content view will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
     guard let window = self.window else { return }
+    let useAnimation = {
+      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
+      guard #unavailable(macOS 26) else { return false }
+      return !Preference.bool(for: .disableAnimations)
+    }()
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
+    window.setFrame(screen.frame, display: true, animate: useAnimation)
     guard let unusable = screen.cameraHousingHeight else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
     // frame to avoid having part of the window obscured by the camera housing.
@@ -1568,13 +1580,16 @@ class MainWindowController: PlayerWindowController {
     // stylemask
     window.styleMask.insert(.borderless)
     if #available(macOS 10.16, *) {
+      let screen = window.screen ?? NSScreen.main!
       // Workaround for issue #5600. Removing titled from the styleMask causes AppKit to draw a
-      // black window that disrupts the smooth transition to full screen mode. AppKit does not do
-      // this if instead we show and hide the title bar view.
-      if let titlebarView {
-        titlebarView.isHidden = true
+      // black window that disrupts the smooth transition from full screen mode. AppKit does not do
+      // this if instead we show and hide the title bar view. Unfortunately this workaround does not
+      // work if the screen has a camera housing. If titled is not removed AppKit forces the window
+      // to be smaller exposing the area around the camera. So the workaround only works on older
+      // Macs and when using an external monitor.
+      if let windowTitleBar, screen.cameraHousingHeight == nil {
+        windowTitleBar.isHidden = true
       } else {
-        log("Failed to find the tilebar view", level: .warning)
         window.styleMask.remove(.titled)
       }
       (window as! MainWindow).forceKeyAndMain = true

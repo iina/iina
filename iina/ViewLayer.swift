@@ -80,27 +80,11 @@ class ViewLayer: CAOpenGLLayer {
 
   private var fbo: GLint = 1
 
-  /// Prefix for keys used in
-  /// [threadDictionary](https://developer.apple.com/documentation/foundation/thread/threaddictionary).
-  ///
-  /// This prefix causes the keys to be specific to the `VideoLayer` instance.
-  private var keyPrefix: String?
-
   /// When `true` the frame needs to be rendered.
-  /// - Note: This flag is a thread local variable.
-  private var needsFlip: Bool {
-    get { Thread.current.threadDictionary[needsFlipKey!] as? Bool ?? false }
-    set { Thread.current.threadDictionary[needsFlipKey!] = newValue }
-  }
-  private var needsFlipKey: String?
+  @Atomic private var needsFlip = false
 
   /// When `true` drawing will proceed even if mpv indicates nothing needs to be done.
-  /// - Note: This flag is a thread local variable.
-  private var forceDraw: Bool {
-    get { Thread.current.threadDictionary[forceDrawKey!] as? Bool ?? false }
-    set { Thread.current.threadDictionary[forceDrawKey!] = newValue }
-  }
-  private var forceDrawKey: String?
+  @Atomic private var forceDraw = false
 
   /// Indicates whether the view is being rendered as part of a live resizing operation.
   ///
@@ -137,9 +121,6 @@ class ViewLayer: CAOpenGLLayer {
     if bufferDepth > 8 {
       contentsFormat = .RGBA16Float
     }
-    keyPrefix = String(hashValue) + "."
-    forceDrawKey = keyPrefix! + "forceDraw"
-    needsFlipKey = keyPrefix! + "needsFlip"
     isAsynchronous = false
   }
 
@@ -161,9 +142,6 @@ class ViewLayer: CAOpenGLLayer {
     backgroundColor = previousLayer.backgroundColor
     wantsExtendedDynamicRangeContent = previousLayer.wantsExtendedDynamicRangeContent
     contentsFormat = previousLayer.contentsFormat
-    keyPrefix = String(hashValue) + "."
-    forceDrawKey = keyPrefix! + "forceDraw"
-    needsFlipKey = keyPrefix! + "needsFlip"
     inLiveResize = previousLayer.inLiveResize
     isAsynchronous = previousLayer.isAsynchronous
     Logger.log("Created view layer shadow copy")

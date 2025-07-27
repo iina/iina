@@ -1526,7 +1526,11 @@ class MainWindowController: PlayerWindowController {
     // restore window frame and aspect ratio
     let videoSize = player.videoSizeForDisplay
     let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
-    let useAnimation = !Preference.bool(for: .disableAnimations)
+    let useAnimation = {
+      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
+      guard #unavailable(macOS 26) else { return false }
+      return !Preference.bool(for: .disableAnimations)
+    }()
     if useAnimation {
       // firstly resize to a big frame with same aspect ratio for better visual experience
       let aspectFrame = aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
@@ -1544,8 +1548,13 @@ class MainWindowController: PlayerWindowController {
   /// For screens that contain a camera housing the content view will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
     guard let window = self.window else { return }
+    let useAnimation = {
+      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
+      guard #unavailable(macOS 26) else { return false }
+      return !Preference.bool(for: .disableAnimations)
+    }()
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
+    window.setFrame(screen.frame, display: true, animate: useAnimation)
     guard let unusable = screen.cameraHousingHeight else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
     // frame to avoid having part of the window obscured by the camera housing.

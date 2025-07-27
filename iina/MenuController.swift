@@ -534,10 +534,10 @@ class MenuController: NSObject, NSMenuDelegate {
     let devices = PlayerCore.active.getAudioDevices()
     let currAudioDevice = PlayerCore.active.mpv.getString(MPVProperty.audioDevice)
     audioDeviceMenu.removeAllItems()
-    devices.forEach { d in
-      let name = d["name"]!
-      let desc = d["description"]!
-      audioDeviceMenu.addItem(withTitle: "[\(desc)] \(name)", action: #selector(AppDelegate.menuSelectAudioDevice(_:)), tag: nil, obj: name, stateOn: name == currAudioDevice)
+    devices.forEach { device in
+      audioDeviceMenu.addItem(withTitle: String(describing: device),
+                              action: #selector(AppDelegate.menuSelectAudioDevice(_:)), tag: nil,
+                              obj: device.name, stateOn: device.name == currAudioDevice)
     }
   }
 

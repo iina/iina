@@ -10,7 +10,7 @@ import Foundation
 
 /// A mpv audio device.
 ///
-/// Thie represents one of the audio devices returned by mpv in the value of the property
+/// This represents one of the audio devices returned by mpv in the value of the property
 /// [audio-device-list](https://mpv.io/manual/stable/#command-interface-audio-device-list) or saved in IINA's
 /// settings as the preferred audio device.
 struct MPVAudioDevice: CustomStringConvertible {

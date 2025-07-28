@@ -59,7 +59,6 @@ struct Preference {
     static let fullScreenWhenOpen = Key("fullScreenWhenOpen")
 
     static let useLegacyFullScreen = Key("useLegacyFullScreen")
-    static let legacyFullScreenAnimation = Key("legacyFullScreenAnimation")
 
     /** Black out other monitors while fullscreen (bool) */
     static let blackOutMonitor = Key("blackOutMonitor")
@@ -821,7 +820,6 @@ struct Preference {
     .pauseWhenOpen: false,
     .fullScreenWhenOpen: false,
     .useLegacyFullScreen: false,
-    .legacyFullScreenAnimation: false,
     .showChapterPos: false,
     .resumeLastPosition: true,
     .preventScreenSaver: true,

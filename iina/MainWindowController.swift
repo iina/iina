@@ -644,18 +644,19 @@ class MainWindowController: PlayerWindowController {
     addObserver(to: .default, forName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
       let screenCount = NSScreen.screens.count
-      if self.fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && self.cachedScreenCount != screenCount {
-        self.removeBlackWindow()
-        self.blackOutOtherMonitors()
+      let countChanged = cachedScreenCount != screenCount
+      if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && countChanged {
+        removeBlackWindow()
+        blackOutOtherMonitors()
       }
       // Update the cached value
-      self.cachedScreenCount = screenCount
-      self.videoView.updateDisplayLink()
+      cachedScreenCount = screenCount
+      videoView.updateDisplayLink()
       // In normal full screen mode AppKit will automatically adjust the window frame if the window
       // is moved to a new screen such as when the window is on an external display and that display
       // is disconnected. In legacy full screen mode IINA is responsible for adjusting the window's
       // frame.
-      guard self.fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
+      guard countChanged, fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
       setWindowFrameForLegacyFullScreen()
     }
 
@@ -1512,6 +1513,7 @@ class MainWindowController: PlayerWindowController {
     windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
     // stylemask
     window.styleMask.remove(.borderless)
+    window.styleMask.insert(.resizable)
     if #available(macOS 10.16, *) {
       window.styleMask.insert(.titled)
       (window as! MainWindow).forceKeyAndMain = false
@@ -1524,7 +1526,11 @@ class MainWindowController: PlayerWindowController {
     // restore window frame and aspect ratio
     let videoSize = player.videoSizeForDisplay
     let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
-    let useAnimation = Preference.bool(for: .legacyFullScreenAnimation)
+    let useAnimation = {
+      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
+      guard #unavailable(macOS 26) else { return false }
+      return !Preference.bool(for: .disableAnimations)
+    }()
     if useAnimation {
       // firstly resize to a big frame with same aspect ratio for better visual experience
       let aspectFrame = aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
@@ -1542,8 +1548,13 @@ class MainWindowController: PlayerWindowController {
   /// For screens that contain a camera housing the content view will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
     guard let window = self.window else { return }
+    let useAnimation = {
+      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
+      guard #unavailable(macOS 26) else { return false }
+      return !Preference.bool(for: .disableAnimations)
+    }()
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
+    window.setFrame(screen.frame, display: true, animate: useAnimation)
     guard let unusable = screen.cameraHousingHeight else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
     // frame to avoid having part of the window obscured by the camera housing.
@@ -1557,6 +1568,7 @@ class MainWindowController: PlayerWindowController {
     windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
     // stylemask
     window.styleMask.insert(.borderless)
+    window.styleMask.remove(.resizable)
     if #available(macOS 10.16, *) {
       window.styleMask.remove(.titled)
       (window as! MainWindow).forceKeyAndMain = true

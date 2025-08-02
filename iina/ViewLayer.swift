@@ -247,6 +247,11 @@ class ViewLayer: CAOpenGLLayer {
       CATransaction.commit()
     }
 
+    // The call to commit will not render the explicit transaction if it is nested in an implicit
+    // transaction. This can happen when drawing is being forced after a change to the view such as
+    // resizing. Must call flush to ensure any implicit transaction is flushed.
+    CATransaction.flush()
+
     guard isUpdate && needsFlip else { return }
 
     // Must lock the OpenGL context before calling mpv render methods. The OpenGL context must

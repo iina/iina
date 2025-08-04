@@ -80,14 +80,17 @@ class ViewLayer: CAOpenGLLayer {
 
   private var fbo: GLint = 1
 
-  /// Lock used to allow the main thread priority access to `displayLock`.
-  private var mainThreadPriorityLock = MainThreadPriorityLock()
+  /// When `true` drawing will proceed even if mpv indicates nothing needs to be done.
+  @Atomic private var forceDraw = false
+
+  /// When `true` drawing of new video frames from mpv is suspended.
+  @Atomic var isSuspended = false
+
+  // Lock used to allow the main thread priority access to `displayLock`.
+  private let mainThreadPriorityLock = MainThreadPriorityLock()
 
   /// When `true` the frame needs to be rendered.
   @Atomic private var needsFlip = false
-
-  /// When `true` drawing will proceed even if mpv indicates nothing needs to be done.
-  @Atomic private var forceDraw = false
 
   /// Indicates whether the view is being rendered as part of a live resizing operation.
   ///
@@ -136,6 +139,9 @@ class ViewLayer: CAOpenGLLayer {
   /// [contentsScale](https://developer.apple.com/documentation/quartzcore/calayer/1410746-contentsscale).
   /// To trigger this start IINA playing on an external monitor with a different scale factor with a MacBook in closed clamshell mode then
   /// unplug the external monitor.
+  /// - Important: _Do not_ copy the value of `inLiveResize`. Setting that property triggers drawing which may cause a
+  ///     deadlock. This can be reproduced by playing a video in full screen mode and clicking on `Custom…` in the `Crop`
+  ///     submenu.
   /// - Parameter layer: The layer from which custom fields should be copied.
   override init(layer: Any) {
     let previousLayer = layer as! ViewLayer
@@ -148,7 +154,6 @@ class ViewLayer: CAOpenGLLayer {
     backgroundColor = previousLayer.backgroundColor
     wantsExtendedDynamicRangeContent = previousLayer.wantsExtendedDynamicRangeContent
     contentsFormat = previousLayer.contentsFormat
-    inLiveResize = previousLayer.inLiveResize
     isAsynchronous = previousLayer.isAsynchronous
     Logger.log("Created view layer shadow copy")
   }
@@ -161,15 +166,16 @@ class ViewLayer: CAOpenGLLayer {
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
                         forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
+    guard !forceDraw else { return true }
     // When in live resize, skip all drawing calls on the main thread.
     // Setting isAsynchronous = true is enough to prevent jittering.
-    guard !(inLiveResize && Thread.isMainThread) else { return false }
+    guard !(Thread.isMainThread && inLiveResize) else { return false }
+    if !inLiveResize {
+      isAsynchronous = false
+    }
     return videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return false }
-      if !inLiveResize {
-        isAsynchronous = false
-      }
-      return forceDraw || videoView.player.mpv.shouldRenderUpdateFrame()
+      return videoView.player.mpv.shouldRenderUpdateFrame()
     }
   }
 
@@ -264,7 +270,10 @@ class ViewLayer: CAOpenGLLayer {
   ///     main thread". See issue [#5038](https://github.com/iina/iina/issues/5038).
   override func display() {
 
-    // May need to block other threads to allow the main thread to lock displayLock.
+    // Testing revealed that the main thread encounters lock starvation while trying to acquire the
+    // display lock when the mpvGLQueue thread is constantly locking and unlocking the lock,
+    // sometimes causing the spinning beach ball of death to be displayed. Must block other threads
+    // when the main thread wants the lock.
     mainThreadPriorityLock.beforeLocking()
     displayLock.lock()
     defer { displayLock.unlock() }
@@ -275,7 +284,7 @@ class ViewLayer: CAOpenGLLayer {
     if Thread.isMainThread {
       super.display()
     } else {
-      // When not on the main thread use an explicit transaction.
+      // Must use an explicit transaction when not on the main thread.
       CATransaction.begin()
       super.display()
       CATransaction.commit()
@@ -286,6 +295,7 @@ class ViewLayer: CAOpenGLLayer {
     // resizing. Must call flush to ensure any implicit transaction is flushed.
     CATransaction.flush()
 
+    // If the frame was not drawn then must tell mpv to skip rendering this frame.
     guard isUpdate && needsFlip else { return }
 
     // Must lock the OpenGL context before calling mpv render methods. The OpenGL context must
@@ -313,11 +323,58 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   func update(force: Bool = false) {
-    mpvGLQueue.async { [self] in
-      if force { forceDraw = true }
-      needsFlip = true
-      display()
+    if force { forceDraw = true }
+    needsFlip = true
+    display()
+  }
+
+  /// A request to reload the content of this layer coming from mpv.
+  ///
+  /// Requests from mpv are processed in a background thread to avoid overloading the main thread, This differs from the mpv player
+  /// which uses the main thread for all rendering now that it is using a Metal layer.
+  /// - Note: IINA will block update requests from mpv while entering/exiting full screen mode. See issue
+  ///     [#5600](https://github.com/iina/iina/issues/5600).
+  func updateFromMPV() {
+    guard !isSuspended else { return }
+    mpvGLQueue.async { self.update() }
+  }
+
+  // MARK: - Suspending Background Rendering
+
+  /// Suspend drawing of new video frames from mpv.
+  ///
+  /// This is a workaround for momentary hangs that occur when entering and exiting full screen mode. Use of
+  /// `mainThreadPriorityLock` has reduced the conflicts between the main thread and the `mpvGLQueue` thread, but the
+  /// main thread still experiences blocking when entering and exiting full screen mode if the background rendering thread is active.
+  /// The lagging does not always occur as it is timing related. But when it does it is bad enough that the disruption caused by
+  /// suspending processing of frames is preferred. See issue [#5600](https://github.com/iina/iina/issues/5600).
+  /// - Important: The call to `suspend` only stops new tasks from executing. At the time this function is called a
+  ///     `mpvGLQueue` thread could be drawing a frame. IINA needs to wait to start entering or exiting full screen mode until the
+  ///     current drawing task finishes. To accomplish this suspension of the `mpvGLQueue` is performed by a task submitted to
+  ///     that queue. At that point the queue is know to be idle and the closure is submitted to the main thread.
+  /// - Parameter body: Closure to execute once drawing of new video frames has been suspended.
+  func suspendDrawingNewFrames(_ body: @escaping () -> ()) {
+    guard !isSuspended else {
+      // Internal error. Should never happen.
+      Logger.log("Ignored attempt to suspend drawing when already suspended", level: .error)
+      body()
+      return
     }
+    isSuspended = true
+    mpvGLQueue.async { [self] in
+      mpvGLQueue.suspend()
+      DispatchQueue.main.async { body() }
+    }
+  }
+
+  /// Resume drawing of new video frames from mpv.
+  func resumeDrawingNewFrames() {
+    guard isSuspended else {
+      Logger.log("Ignored attempt to resume drawing when not suspended", level: .error)
+      return
+    }
+    isSuspended = false
+    mpvGLQueue.resume()
   }
 
   private func framebufferSnapshot(width: Int, height: Int) -> NSImage? {

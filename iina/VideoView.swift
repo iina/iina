@@ -410,6 +410,14 @@ class VideoView: NSView {
       return "Unrecognized core video return code"
     }
   }
+
+  // MARK: - Suspending Background Rendering
+
+  func suspendDrawingNewFrames(_ body: @escaping () -> ()) {
+    videoLayer.suspendDrawingNewFrames(body)
+  }
+
+  func resumeDrawingNewFrames() { videoLayer.resumeDrawingNewFrames() }
 }
 
 // MARK: - HDR

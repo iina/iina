@@ -485,10 +485,10 @@ class PlayerCore: NSObject {
     miniPlayer.pendingShow = true
     initialWindow.close()
 
-    // Make sure playback does not start once the file is loaded. Playback will be started in the
-    // fileLoaded method once IINA is ready assuming the user has not enabled the setting to pause
-    // when media is opened.
-    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+    // If the IINA "Pause" setting is enabled under "When media is opened" then pause mpv playback
+    // before loading the file. Otherwise make sure mpv playback is enabled.
+    let pause = Preference.bool(for: .pauseWhenOpen)
+    mpv.setFlag(MPVOption.PlaybackControl.pause, pause ? true : false, level: .verbose)
 
     // Send load file command
     info.justOpenedFile = true
@@ -1938,14 +1938,10 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     log("File loaded")
 
-    // Normally playback will be paused at this point because PlayerCore sets playback to be paused
-    // before loading a file. This is required to be able to support the setting to pause when media
-    // is opened, otherwise there would be a race condition as to whether IINA can pause playback
-    // before mpv has started playing the media. However plugins have direct access to mpv and can
-    // load files. Ensure mpv is paused so IINA and mpv are in sync on the state of playback.
-    info.state = .paused
+    // Normally at this point the file will be playing. However if the IINA "Pause" setting is
+    // enabled under "When media is opened" IINA will have paused playback.
+    info.state =  mpv.getFlag(MPVOption.PlaybackControl.pause) ? .paused : .playing
     syncUI(.playButton)
-    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
 
     // Must force drawing to cover the case where this player was previously used to play a video
     // and is now playing an audio file without an album cover and without using music mode.
@@ -2009,13 +2005,10 @@ class PlayerCore: NSObject {
     }
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
-    if !(info.justOpenedFile && Preference.bool(for: .pauseWhenOpen)) {
-      mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
-    }
     syncUI(.playlist)
   }
 
-  func fileEnded(dueToStopCommand: Bool) {
+  func fileEnded(_ dueToStopCommand: Bool) {
     // if receive end-file when loading file, might be error
     // wait for idle
     if info.state == .loading {

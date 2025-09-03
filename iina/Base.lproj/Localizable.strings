@@ -392,6 +392,10 @@
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
 "subencoding.auto" = "Auto detect";
 
 "osc_toolbar.settings" = "Quick Settings";

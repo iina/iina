@@ -177,6 +177,7 @@
 		51AC1CAB2A9FBF3700DF7079 /* OpenSubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC1CAA2A9FBF3700DF7079 /* OpenSubClient.swift */; };
 		51C1BA3A291CA76700C1208A /* InfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C1BA39291CA76700C1208A /* InfoDictionary.swift */; };
 		51C889D52C42FF7F007B2584 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C889D42C42FF7F007B2584 /* PlayerState.swift */; };
+		51CA83E22E35AD6300A44B22 /* MPVAudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA83E12E35AD6300A44B22 /* MPVAudioDevice.swift */; };
 		51CACB9529D500290034CEE5 /* VideoPIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CACB9429D500290034CEE5 /* VideoPIPViewController.swift */; };
 		51DE55C92A6646710050AD06 /* Sysctl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE55C82A6646710050AD06 /* Sysctl.swift */; };
 		51E63DFB29CFB031008AFC20 /* PlaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E63DFA29CFB031008AFC20 /* PlaySlider.swift */; };
@@ -1211,6 +1212,7 @@
 		51C1BA39291CA76700C1208A /* InfoDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionary.swift; sourceTree = "<group>"; };
 		51C3ED782C234BFA004546F9 /* imgutils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgutils.h; sourceTree = "<group>"; };
 		51C889D42C42FF7F007B2584 /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
+		51CA83E12E35AD6300A44B22 /* MPVAudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVAudioDevice.swift; sourceTree = "<group>"; };
 		51CACB9429D500290034CEE5 /* VideoPIPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPIPViewController.swift; sourceTree = "<group>"; };
 		51DE55C82A6646710050AD06 /* Sysctl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sysctl.swift; sourceTree = "<group>"; };
 		51E63DFA29CFB031008AFC20 /* PlaySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySlider.swift; sourceTree = "<group>"; };
@@ -2485,6 +2487,7 @@
 				8450403F1E0ACADD0079C194 /* MPVNode.swift */,
 				842F55A41EA17E7E0081D475 /* IINACommand.swift */,
 				3412DB8D2C2FC64800BBC142 /* Equalizations.swift */,
+				51CA83E12E35AD6300A44B22 /* MPVAudioDevice.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -3209,6 +3212,7 @@
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
 				51165FBC2E1D91290060B817 /* ReadWriteAtomic.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,
+				51CA83E22E35AD6300A44B22 /* MPVAudioDevice.swift in Sources */,
 				840AF5841E73CE3900F4AF92 /* OpenSubSubtitle.swift in Sources */,
 				E32B157D21BC27B100CDBCEA /* JavascriptAPIMenu.swift in Sources */,
 				84AABE8B1DBF634600D138FD /* CharEncoding.swift in Sources */,

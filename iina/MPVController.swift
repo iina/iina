@@ -140,7 +140,8 @@ class MPVController: NSObject {
     MPVProperty.videoParamsRotate: MPV_FORMAT_INT64,
     MPVProperty.videoParamsPrimaries: MPV_FORMAT_STRING,
     MPVProperty.videoParamsGamma: MPV_FORMAT_STRING,
-    MPVProperty.idleActive: MPV_FORMAT_FLAG
+    MPVProperty.idleActive: MPV_FORMAT_FLAG,
+    MPVProperty.currentAo: MPV_FORMAT_STRING
   ]
 
   /// Map from mpv codec name to core media video codec types.
@@ -1461,6 +1462,9 @@ class MPVController: NSObject {
       }
       guard idleActive else { break }
       DispatchQueue.main.async { self.player.idleActiveChanged() }
+
+    case MPVProperty.currentAo:
+      DispatchQueue.main.async { self.player.currentAoChanged() }
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")

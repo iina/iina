@@ -733,7 +733,7 @@ struct Preference {
       case .musicMode: return makeSymbol(["music.microphone", "music.mic"], "toggle-album-art")
       case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
       case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
-      case .plugins: return makeSymbol(["puzzlepiece.extension"], "puzzlepiece.extension")
+      case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
       }
     }
 

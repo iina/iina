@@ -182,6 +182,8 @@ class MPVController: NSObject {
   /// hardware decoding support on this Mac. This is not comprehensive. This method only covers the recent codecs whose support
   /// for hardware decoding varies among Macs. This merely reduces the dependence upon the FFmpeg fallback to software decoding
   /// feature in some cases.
+  /// - ToDo: **REMOVE** workaround for FFmpeg not supporting AV1 hardware decoding when upgrading to a FFmpeg version
+  ///         that supports it.
   private func adjustCodecWhiteList() {
     // Allow the user to override this behavior.
     guard !userOptionsContains(MPVOption.Video.hwdecCodecs) else {
@@ -210,6 +212,17 @@ class MPVController: NSObject {
       // any of them retain the codec in the option value.
       for codecType in codecTypes {
         if HardwareDecodeCapabilities.shared.isSupported(codecType) {
+          if codecType == kCMVideoCodecType_AV1 {
+            // WORKAROUND missing support for AV1 hardware decoding.
+            // This Mac supports AV1 hardware decoding, but the version of FFmpeg IINA is using does
+            // not. FFmpeg will try to use hardware decoding, which will fail. FFmpeg will then fall
+            // back to software decoding. When FFmpeg does this it logs the warning message "Error
+            // while decoding frame (hardware decoding)!" which is alarming to users. Prevent this
+            // by removing AV1 from the codecs whitelist.
+            needsAdjustment = true
+            log("FFmpeg does not support av1 hardware decoding")
+            continue codecLoop
+          }
           adjusted.append(codec)
           continue codecLoop
         }

@@ -298,6 +298,10 @@ class VideoView: NSView {
   ///         full screen mode.
   func displayIdle() {
     displayIdleTimer?.invalidate()
+    // Because the display link is critical there is an internal setting that can be changed to
+    // disable shutting down the display link should any problems with this energy saving feature
+    // be discovered.
+    guard Preference.bool(for: .enableDisplayIdle) else { return }
     // The time of 6 seconds was picked to match up with the time QuickTime delays once playback is
     // paused before stopping audio. As mpv does not provide an event indicating a frame step has
     // completed the time used must not be too short or will catch mpv still drawing when stepping.

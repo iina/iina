@@ -490,6 +490,14 @@ class PlayerCore: NSObject {
     let pause = Preference.bool(for: .pauseWhenOpen)
     mpv.setFlag(MPVOption.PlaybackControl.pause, pause ? true : false, level: .verbose)
 
+    // Normally the display link is started when MainWindowController.windowDidLoad calls initVideo.
+    // However if this player is being reused then the window will have already been loaded and
+    // windowDidLoad will not be called. If playback is not paused make sure the display link is
+    // active.
+    if !pause, mainWindow.loaded {
+      mainWindow.videoView.displayActive()
+    }
+
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading

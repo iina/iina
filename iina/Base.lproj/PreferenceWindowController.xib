@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,6 +16,7 @@
                 <outlet property="prefDetailContentView" destination="5R5-77-bmq" id="om5-Bx-6J5"/>
                 <outlet property="prefDetailScrollView" destination="VYU-tb-v3l" id="vrz-s4-dn8"/>
                 <outlet property="prefSectionsStackView" destination="evY-SZ-c3s" id="N2h-NS-yNH"/>
+                <outlet property="scrollViewTopConstraint" destination="gJS-on-Kmb" id="U1Q-pi-zxX"/>
                 <outlet property="searchField" destination="rKj-eM-MTH" id="h5z-XD-hFu"/>
                 <outlet property="tableView" destination="vde-uJ-0ge" id="ezK-1d-1Px"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
@@ -27,7 +28,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="820" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1409"/>
             <value key="minSize" type="size" width="820" height="320"/>
             <view key="contentView" wantsLayer="YES" id="se5-gp-TjO" userLabel="PrefWindow Content View">
                 <rect key="frame" x="0.0" y="0.0" width="820" height="480"/>
@@ -37,7 +38,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="480"/>
                         <subviews>
                             <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKj-eM-MTH">
-                                <rect key="frame" x="9" y="420" width="182" height="30"/>
+                                <rect key="frame" x="9" y="422" width="182" height="28"/>
                                 <searchFieldCell key="cell" controlSize="large" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="ZLM-z2-CyT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -48,13 +49,13 @@
                                 </connections>
                             </searchField>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="38" horizontalPageScroll="10" verticalLineScroll="38" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Isy-K8-od9" userLabel="PrefNavPanelTable Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="200" height="420"/>
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="422"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="H3G-ed-YHx" userLabel="PrefNavPanel Clip View">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="420"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="422"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="sourceList" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" autosaveName="" rowHeight="36" rowSizeStyle="automatic" viewBased="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vde-uJ-0ge" userLabel="PrefNavPanel Table View">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="420"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="422"/>
                                             <size key="intercellSpacing" width="0.0" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>

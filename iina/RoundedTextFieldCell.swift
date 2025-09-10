@@ -17,12 +17,12 @@ class RoundedTextFieldCell: NSTextFieldCell {
     bezelStyle = .roundedBezel
   }
 
-  override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
-    super.draw(withFrame: cellFrame, in: controlView)
-  }
-
   override func drawingRect(forBounds rect: NSRect) -> NSRect {
-    return rect.insetBy(dx: paddingH, dy: paddingV)
+    if #available(macOS 26, *) {
+      return super.drawingRect(forBounds: rect)
+    } else {
+      return rect.insetBy(dx: paddingH, dy: paddingV)
+    }
   }
 
 }

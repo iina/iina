@@ -8,25 +8,16 @@
 
 import Cocoa
 
+/// For 10.12 or below only
 class RoundedColorWell: NSColorWell {
 
   var isMouseDown: Bool = false
 
   override func awakeFromNib() {
-    if #available(macOS 13, *) {
-      self.colorWellStyle = .minimal
-      super.awakeFromNib()
-      return
-    }
-    // disable default activation of color panel
     self.isBordered = false
   }
 
   override func draw(_ dirtyRect: NSRect) {
-    if #available(macOS 13, *) {
-      super.draw(dirtyRect)
-      return
-    }
     let circleRect = NSInsetRect(bounds, 3, 3)
 
     // darker if is pressing mouse button
@@ -45,24 +36,14 @@ class RoundedColorWell: NSColorWell {
   }
 
   override func mouseDown(with event: NSEvent) {
-    if #available(macOS 13, *) {
-      super.mouseDown(with: event)
-      return
-    }
     isMouseDown = true
     self.needsDisplay = true
   }
 
   override func mouseUp(with event: NSEvent) {
-    if #available(macOS 13, *) {
-      super.mouseUp(with: event)
-      return
-    }
     isMouseDown = false
     self.activate(true)
     self.needsDisplay = true
   }
-
-
 
 }

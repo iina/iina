@@ -182,16 +182,20 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subScaleResetBtn: NSButton!
   @IBOutlet weak var subPosSlider: NSSlider!
 
-  @IBOutlet weak var subTextColorWell: NSColorWell!
+  var subTextColorWell: NSColorWell!
+  var subTextBorderColorWell: NSColorWell!
+  var subTextBgColorWell: NSColorWell!
+
+  @IBOutlet weak var subTextColorWellContainer: NSView!
   @IBOutlet weak var subTextSizePopUp: NSPopUpButton!
-  @IBOutlet weak var subTextBorderColorWell: NSColorWell!
+  @IBOutlet weak var subTextBorderColorWellContainer: NSView!
   @IBOutlet weak var subTextBorderWidthPopUp: NSPopUpButton!
-  @IBOutlet weak var subTextBgColorWell: NSColorWell!
+  @IBOutlet weak var subTextBgColorWellContainer: NSView!
   @IBOutlet weak var subTextFontBtn: NSButton!
 
-  private lazy var eqSliders: [NSSlider] = [audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
-                                            audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10]
-  private lazy var colorWells: [NSColorWell] = [subTextColorWell, subTextBgColorWell, subTextBorderColorWell]
+  private lazy var eqSliders: [NSSlider] = [
+    audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
+    audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10]
 
   private var lastUsedProfileName: String = ""
   private var inputString: String = ""
@@ -216,6 +220,24 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.superview?.superview?.layer?.cornerRadius = 4
     }
 
+    // Color Wells
+    if #available(macOS 13.0, *) {
+      subTextColorWell = NSColorWell(style: .minimal)
+      subTextBgColorWell = NSColorWell(style: .minimal)
+      subTextBorderColorWell = NSColorWell(style: .minimal)
+    } else {
+      subTextColorWell = RoundedColorWell()
+      subTextBgColorWell = RoundedColorWell()
+      subTextBorderColorWell = RoundedColorWell()
+    }
+    [(subTextColorWellContainer, subTextColorWell),
+     (subTextBgColorWellContainer, subTextBgColorWell),
+     (subTextBorderColorWellContainer, subTextBorderColorWell)].forEach { (view, well) in
+      well.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(well)
+      Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": well])
+    }
+
     // colors
     withAllTableViews { tableView, _ in tableView.backgroundColor = NSColor(named: .sidebarTableBackground)! }
 
@@ -233,12 +255,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     switchHorizontalLine.layer?.opacity = 0.5
     switchHorizontalLine2.wantsLayer = true
     switchHorizontalLine2.layer?.opacity = 0.5
-
-    if #available(macOS 13.0, *) {
-      colorWells.forEach {
-        $0.colorWellStyle = .minimal
-      }
-    }
 
     // Localize decimal format of numbers
     speedSlider0_25xLabel.stringValue = "\(0.25.groupedStringUpTo6Decimals)x"

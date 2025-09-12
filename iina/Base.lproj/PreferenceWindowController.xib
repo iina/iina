@@ -18,6 +18,8 @@
                 <outlet property="prefSectionsStackView" destination="evY-SZ-c3s" id="N2h-NS-yNH"/>
                 <outlet property="scrollViewTopConstraint" destination="gJS-on-Kmb" id="U1Q-pi-zxX"/>
                 <outlet property="searchField" destination="rKj-eM-MTH" id="h5z-XD-hFu"/>
+                <outlet property="searchFieldBottomConstraint" destination="nOO-7o-aOI" id="HEB-cT-eiF"/>
+                <outlet property="searchFieldTopConstraint" destination="h6P-ZA-Btd" id="Sh5-nO-u6z"/>
                 <outlet property="tableView" destination="vde-uJ-0ge" id="ezK-1d-1Px"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>

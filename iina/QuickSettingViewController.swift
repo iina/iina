@@ -193,6 +193,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subTextBgColorWellContainer: NSView!
   @IBOutlet weak var subTextFontBtn: NSButton!
 
+  @IBOutlet weak var subtitleSwitch: NSSwitch!
+  @IBOutlet weak var secondarySubtitleSwitch: NSSwitch!
+  
   private lazy var eqSliders: [NSSlider] = [
     audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
     audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10]
@@ -236,6 +239,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       well.translatesAutoresizingMaskIntoConstraints = false
       view.addSubview(well)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": well])
+    }
+    
+    if #available(macOS 26, *) {
+      subtitleSwitch.controlSize = .small
+      secondarySubtitleSwitch.controlSize = .small
     }
 
     // colors

@@ -20,7 +20,9 @@ fileprivate let isMacOS11: Bool = {
 }()
 
 fileprivate let TitleBarHeightNormal: CGFloat = {
-  if #available(macOS 10.16, *) {
+  if #available(macOS 26, *) {
+    return 32
+  } else if #available(macOS 10.16, *) {
     return 28
   } else {
     return 22

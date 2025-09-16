@@ -26,7 +26,7 @@
 
 // Initial Window
 "initial.announcement" = "您正在使用 IINA 的 %@ 版本";
-"initial.beta.desc" = "如果你想回滚到发布版本，请从“设置” > “通用” 中取消勾选 “接收测试版（Beta）更新”，并从我们的<a href=\"https://iina.io\">官方网站</a>安装一个稳定版本。";
+"initial.beta.desc" = "如果你想回滚到发布版本，请从“设置” > “通用” 中取消勾选 “接收测试版本（Beta）更新”，并从我们的<a href=\"https://iina.io\">官方网站</a>安装一个稳定版本。";
 "initial.nightly.desc" = "我们不建议将 Nightly 作为日常使用的版本。目前 Nightly 不支持自动更新。请从我们的<a href=\"https://nightly.iina.io\"> Nightly 网站</a>手动下载更新的版本。";
 "initial.debug.desc" = "调试版本（Debug）通常没有对性能进行优化，所以不建议日常用。调试版本（Debug）不支持自动更新。";
 "initial.bug_report" = "通过<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>报告。";
@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "缓冲中… %d%%";
 "main.opening_stream" = "正在打开流媒体……";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "检索中…";
 "osc.precision" = "精确度";
 "osc.1s" = "1秒";
 "osc.100ms" = "100毫秒";
@@ -179,7 +179,7 @@
 "preference.ytdl_plugin_installed" = "由于安装了在线媒体插件，内置的 youtube-dl 支持已被禁用。";
 
 "menu.volume" = "音量: %@";
-"menu.volume_muted" = "音量：%@ （静音）";
+"menu.volume_muted" = "音量：%@（静音）";
 "menu.audio_delay" = "音频延迟: %@秒";
 "menu.sub_delay" = "字幕延迟: %@秒";
 "menu.sub_hide" = "隐藏字幕";
@@ -223,7 +223,7 @@
 "menu.manage_plugins" = "菜单管理器插件";
 "menu.developer_tool" = "菜单开发者工具";
 "menu.more_plugin" = "增加插件";
-"menu.conflicting_shortcuts" = "相互冲突的快捷键...";
+"menu.conflicting_shortcuts" = "相互冲突的快捷键…";
 "menu.reload_plugins" = "重新加载所有插件";
 "menu.show_plugins_panel" = "显示插件面板";
 "menu.hide_plugins_panel" = "隐藏插件面板";
@@ -244,7 +244,7 @@
 "alert.title_info" = "提示";
 
 "alert.fatal_error" = "严重错误：%@ \n程序将立即终止。";
-"alert.mpv_error" = "出现内部错误 %@ (%@) (设定选项 %@ 时)。";
+"alert.mpv_error" = "出现内部错误 %@（%@）(设定选项 %@ 时)。";
 
 "alert.unsupported_audio" = "不支持的外置音频文件。";
 "alert.unsupported_sub" = "不支持的外挂字幕。";
@@ -286,7 +286,7 @@
 "alert.screenshot.error_taking" = "截图失败！";
 
 "alert.sub.no_selected" = "请先选择一个已下载字幕。";
-"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语 (eng) 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
+"alert.sub_lang_not_set" = "请在使用 opensubtitles 之前设定字幕语言. 此次将会使用英语（eng） 。\n\n0.0.7 之后默认的字幕来源将会是 opensubtitles。如果您是中文用户，请在「偏好设置 > 字幕」中确认「字幕来源」为「shooter.cn」，以继续使用射手字幕。";
 "alert.sub.cannot_save_passwd" = "无法将密码保存到钥匙串：%@";
 "alert.sub.cannot_login" = "无法登录。请检查您的用户名、密码及网络状态。\n\n%@";
 "alert.sub.save_downloaded.title" = "保存已下载字幕";
@@ -314,13 +314,13 @@
 "alert.delete_history.title" = "删除播放历史记录";
 "alert.delete_history.message" = "确定删除所选项目？";
 
-"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持「拷贝」的解码器 (将占用两倍内存)。\n你可能需要再操作一次（例如剪切）才能看到效果。";
+"alert.filter_hwdec.message" = "你正在添加视频滤镜。然而，当前的硬件解码器不能很好地支持视频滤镜。你可以禁用硬件解码，或使用支持“拷贝”的解码器（将占用两倍内存）。\n你可能需要再操作一次（例如剪切）才能看到效果。";
 "alert.filter_hwdec.abort" = "放弃";
 "alert.filter_hwdec.turn_off" = "关闭硬件解码";
 "alert.filter_hwdec.use_copy" = "使用“自动（拷贝）”解码器";
 
 "alert.clear_cache.title" = "清除缩略图缓存";
-"alert.clear_cache.message" = "确定清除所有缩略图缓存?";
+"alert.clear_cache.message" = "确定清除所有缩略图缓存？";
 
 "alert.clear_history.title" = "清除播放历史";
 "alert.clear_history.message" = "确定删除所有播放历史吗？";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "总计 %@";
 "playlist.total_length_with_selected" = "选中 %@ / %@";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "排序";
+"playlist.sorting.filename_ascending" = "文件名升序";
+"playlist.sorting.filename_descending" = "文件名降序";
+"playlist.sorting.path_ascending" = "文件路径升序";
+"playlist.sorting.path_descending" = "文件路径降序";
 "pl_menu.title_multi" = "%d 个项目";
 "pl_menu.play_next" = "接下来播放";
 "pl_menu.play_in_new_window" = "在新窗口中播放";
@@ -371,13 +371,13 @@
 "pl_menu.delete_multi" = "将选中项移到废纸篓";
 "pl_menu.delete_after_play" = "播放后移到废纸篓";
 "pl_menu.delete_after_play_multi" = "播放后将选中项移到废纸篓";
-"pl_menu.show_in_finder" = "在“访达”中显示";
+"pl_menu.show_in_finder" = "在访达中显示";
 "pl_menu.add_file" = "添加文件…";
 "pl_menu.add_url" = "添加 URL…";
 "pl_menu.clear_playlist" = "清除播放列表";
 "pl_menu.matched_sub" = "已匹配 %d 个字幕";
 "pl_menu.add_sub" = "添加字幕…";
-"pl_menu.wrong_sub" = "错误的字幕!";
+"pl_menu.wrong_sub" = "错误的字幕！";
 "pl_menu.browser" = "在浏览器中打开";
 "pl_menu.copy_url" = "复制链接";
 "pl_menu.copy_url_multi" = "复制链接";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "音量";
 "mini_player.close" = "关闭音乐模式";
 "mini_player.back" = "返回视频模式";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "排序播放列表";
 
 // Touch bar
 
@@ -438,7 +438,7 @@
 "permissions.network-request.desc" = "此插件可以从这些网站生成请求或上传数据：";
 "permissions.network-request.any_site" = "任何网站";
 "permissions.show-osd.name" = "显示 OSD";
-"permissions.show-osd.desc" = "此插件可以显示 OSD (屏幕显示) 消息。";
+"permissions.show-osd.desc" = "此插件可以显示 OSD（屏幕显示）消息。";
 "permissions.show-alert.name" = "显示通知";
 "permissions.show-alert.desc" = "此插件可以显示弹出提醒。";
 "permissions.video-overlay.name" = "在视频上添加叠加层";

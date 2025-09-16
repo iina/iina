@@ -21,7 +21,7 @@ class PlaylistPlaybackProgressView: NSView {
 
 
   override func draw(_ dirtyRect: NSRect) {
-    let rect = NSRect(x: 0, y: 0, width: bounds.width * CGFloat(percentage), height: 5)
+    let rect = NSRect(x: 0, y: 0, width: bounds.width * CGFloat(percentage), height: bounds.height)
     NSColor.controlAccentColor.withAlphaComponent(0.7).setFill()
     NSBezierPath(rect: rect).fill()
   }

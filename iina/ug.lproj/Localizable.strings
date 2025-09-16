@@ -11,8 +11,8 @@
 "general.off" = "Off";
 "general.login" = "Login";
 "general.logout" = "Logout";
-"general.ok" = "OK";
-"general.cancel" = "Cancel";
+"general.ok" = "ماقۇل";
+"general.cancel" = "بىكار قىلىش";
 "general.username" = "Username";
 "general.password" = "Password";
 
@@ -45,7 +45,7 @@
 "osc.1ms" = "1 millisecond";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
+"quicksetting.item_default" = "سۈكۈتتە";
 "quicksetting.item_none" = "None";
 "quicksetting.hwdec" = "Hardware Decoding";
 "quicksetting.deinterlace" = "Deinterlace";
@@ -84,7 +84,7 @@
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
-"osd.resume" = "Resume";
+"osd.resume" = "داۋاملىق قويۇش";
 "osd.volume" = "Volume: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspect Ratio: %@";
@@ -143,7 +143,7 @@
 "osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferences";
-"preference.general" = "General";
+"preference.general" = "ھەممىباب";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
 "preference.subtitle" = "Subtitle";
@@ -193,7 +193,7 @@
 "menu.mini_player" = "Enter Music Mode";
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
-"menu.resume" = "Resume";
+"menu.resume" = "داۋاملىق قويۇش";
 "menu.speed" = "Speed: %@x";
 "menu.chapters" = "Show Chapters Panel";
 "menu.hide_chapters" = "Hide Chapters Panel";
@@ -364,14 +364,14 @@
 "playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.play_in_new_window" = "يېڭى كۆزنەكتە قويۇش";
 "pl_menu.remove" = "Remove";
 "pl_menu.remove_multi" = "Remove Selected";
 "pl_menu.delete" = "Move to Trash";
 "pl_menu.delete_multi" = "Move Selected Files to Trash";
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.show_in_finder" = "Show in Finder";
+"pl_menu.show_in_finder" = "Finder دا كۆرسىتىش";
 "pl_menu.add_file" = "Add File…";
 "pl_menu.add_url" = "Add URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";
@@ -427,7 +427,7 @@
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
+"touchbar.seek" = "ئاتلاپ كېتىش";
 "touchbar.time" = "Time Position";
 "touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Toggle Picture-in-Picture";

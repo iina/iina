@@ -17,10 +17,10 @@
 "6LO-6y-IsA.title" = "Màu sắc:";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Phụ đề chính";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Phụ đề phụ";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Mở track âm thanh bên ngoài…";
@@ -122,7 +122,7 @@
 "eDl-Si-LSa.title" = "Tương phản:";
 
 /* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
-"eE3-9i-hpU.label" = "Plugin";
+"eE3-9i-hpU.label" = "Tiện ích bổ sung";
 
 /* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
 "eLh-fu-pMj.title" = "Tông màu:";
@@ -215,13 +215,13 @@
 "UW4-by-XRS.title" = "Chế độ HDR";
 
 /* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
-"sE0-LN-T8i.title" = "Save the current EQ as a preset…";
+"sE0-LN-T8i.title" = "Lưu EQ hiện tại thành một preset…";
 
 /* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
-"2tD-0L-UUs.title" = "Rename the current EQ preset…";
+"2tD-0L-UUs.title" = "Đổi tên preset EQ hiện tại…";
 
 /* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
-"dvI-Rj-7qF.title" = "Remove the current EQ preset";
+"dvI-Rj-7qF.title" = "Xóa preset EQ hiện tại";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
 "LPh-nJ-GjN.title" = "Manual";

@@ -152,16 +152,16 @@
 "xr2-rB-O0x.title" = "다음의 경우 일시 정지/재생";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "\"음악 모드\"이거나 오디오만 재생 중일 때는 적용되지 않음";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "시작 윈도우 보기";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "파일을 수동으로 열 때:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Loop playlist";
+"5WC-Sp-6mg.title" = "재생목록 반복 재생";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
-"A1p-L4-jtC.title" = "Loop single file";
+"A1p-L4-jtC.title" = "단일 파일 반복 재생";

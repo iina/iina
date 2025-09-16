@@ -2,7 +2,7 @@
 "0bT-f6-rXb.title" = "默认: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "最大缓存大小(KB)：";
+"0yu-5Q-363.title" = "最大缓存大小（KB）：";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
 "2qf-cC-Lfi.title" = "自定义 youtube-dl 路径";
@@ -35,7 +35,7 @@
 "cyH-Md-FAD.title" = "启用 youtube-dl";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
-"dDD-g3-54w.title" = "Cache buffer 大小 (KB):";
+"dDD-g3-54w.title" = "缓存区大小（KB）：";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "用户代理:";
@@ -54,3 +54,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "额外参数:";
+
+/* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
+"SyQ-2U-zu8.title" = "在暂停等待缓存时显示加载图标";
+
+/* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
+"39x-Jr-gsA.title" = "在检索时显示加载图标";

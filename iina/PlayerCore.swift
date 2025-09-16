@@ -2205,6 +2205,9 @@ class PlayerCore: NSObject {
     // restart even while paused. See issue #5337.
     syncUI(.time)
     reloadSavedIINAfilters()
+    
+    info.justOpenedFile = false
+    info.justStartedFile = false
 
     NowPlayingInfoManager.shared.updateInfo()
 

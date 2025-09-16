@@ -2499,6 +2499,10 @@ class MainWindowController: PlayerWindowController {
   /// - Parameter window: Window to determine the screen for.
   /// - Returns: Screen to use for the given window.
   private func determineScreenToUse(_ window: NSWindow) -> NSScreen {
+    // If the window is currently showing on a screen, use this screen
+    if window.isOnActiveSpace, let currentScreen = window.screen {
+      return currentScreen
+    }
     guard let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String else {
       return window.selectDefaultScreen()
     }
@@ -2542,15 +2546,14 @@ class MainWindowController: PlayerWindowController {
       // - Resize the window to fit video size
       // - Use physical resolution on Retina displays
       // - Direct use of the mpv geometry option
-      let geometrySet = !(player.mpv.getString(MPVOption.Window.geometry) ?? "").isEmpty
       let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
       switch resizeTiming {
       case .always:
         needResizeWindow = true
       case .onlyWhenOpen:
-        needResizeWindow = player.info.justOpenedFile || geometrySet || shouldApplyInitialWindowSize
+        needResizeWindow = player.info.justOpenedFile || shouldApplyInitialWindowSize
       case .never:
-        needResizeWindow = geometrySet || shouldApplyInitialWindowSize
+        needResizeWindow = shouldApplyInitialWindowSize
       }
     } else {
       // video size changed during playback
@@ -2614,13 +2617,10 @@ class MainWindowController: PlayerWindowController {
       // user is navigating in playlist. remain same window width.
       let newHeight = frame.width / CGFloat(width) * CGFloat(height)
       let newSize = NSSize(width: frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-      rect = NSRect(origin: frame.origin, size: newSize)
+      rect = frame.centeredResize(to: newSize)
       log("Adjusted height of window preserving width: \(rect)")
     }
 
-    // maybe not a good position, consider putting these at playback-restart
-    player.info.justOpenedFile = false
-    player.info.justStartedFile = false
     shouldApplyInitialWindowSize = false
 
     if fsState.isFullscreen {

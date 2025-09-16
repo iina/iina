@@ -14,7 +14,7 @@
 "3CY-YS-rG6.title" = "Utilizează butoanele stânga/dreapta pentru:";
 
 /* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
-"5Nk-Mu-V2I.title" = "Base remaining time on playback speed";
+"5Nk-Mu-V2I.title" = "Bazează timpul rămas pe viteza de redare";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
@@ -32,7 +32,7 @@
 "92n-Uq-o4G.title" = "josul";
 
 /* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
-"9IR-Sf-wMq.title" = "Când setarea de accesibilitate macOS Reduce Motion este activată, IINA va reduce animațiile din interfața utilizatorului care sunt cunoscute a cauza probleme pentru cei cu tulburări vestibulare. În cazul în care acest lucru nu este suficient, această setare poate fi folosită pentru a reduce și mai mult mișcarea prin eliminarea animațiilor din interfața utilizatorului.";
+"9IR-Sf-wMq.title" = "Când setarea de accesibilitate \"macOS Reduce Motion\" este activată, IINA va reduce animațiile din interfața utilizatorului care sunt cunoscute a cauza probleme pentru cei cu tulburări vestibulare. În cazul în care acest lucru nu este suficient, această setare poate fi folosită pentru a reduce și mai mult mișcarea prin eliminarea animațiilor din interfața utilizatorului.";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% din ecran";
@@ -133,6 +133,9 @@
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "Înălțime:";
 
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
+"Ufv-Hk-vL5.title" = "Împiedică rotița de derulare să modifice volumul";
+
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "punct";
 
@@ -161,7 +164,7 @@
 "baY-O6-fcB.title" = "Activează Picture-in-Picture la minimizarea/re-afișarea ferestrei";
 
 /* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
-"cib-Cg-9kn.title" = "Only for video files";
+"cib-Cg-9kn.title" = "Numai pentru fișiere video";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x din video";
@@ -182,7 +185,7 @@
 "iRn-3s-oQH.title" = "ecranului";
 
 /* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
-"kCe-Ck-dUJ.title" = "Include files on a mounted remote drive";
+"kCe-Ck-dUJ.title" = "Include fișierele de pe o unitate de stocare montată la distanță";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "Afișează timpul și informațiile despre baterie în ecran complet";
@@ -230,7 +233,10 @@
 "suy-e8-j4i.title" = "Dimensiune text:";
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
-"vdi-lO-q6e.title" = "potrivește la ecran";
+"vdi-lO-q6e.title" = "Potrivește la ecran";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
+"vnb-DF-4g5.title" = "Împiedică rotița de derulare să modifice poziția de redare";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Activează OSD";

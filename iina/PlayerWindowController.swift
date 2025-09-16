@@ -693,6 +693,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       AppDelegate.shared.openFile(self)
     case .openURL:
       AppDelegate.shared.openURL(self)
+    case .deleteCurrentFile:
+      menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:
       menuActionHandler.menuDeleteCurrentFileHard(.dummy)
     default:

@@ -650,7 +650,7 @@ class MPVController: NSObject {
     // Set options that can be override by user's config. mpv will log user config when initialize,
     // so we put them here.
     chkErr(setOptionString(MPVOption.Video.vo, "libmpv", level: .verbose))
-    chkErr(setOptionString(MPVOption.Window.keepaspect, "no", level: .verbose))
+    chkErr(setOptionString(MPVOption.Window.keepaspect, "yes", level: .verbose))
     chkErr(setOptionString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
   }
 

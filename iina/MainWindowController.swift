@@ -1339,9 +1339,6 @@ class MainWindowController: PlayerWindowController {
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
-
-    // Let mpv decide the correct render region in full screen
-    player.mpv.setFlag(MPVOption.Window.keepaspect, true)
   }
 
   func windowDidEnterFullScreen(_ notification: Notification) {
@@ -1351,7 +1348,6 @@ class MainWindowController: PlayerWindowController {
     removeStandardButtonsFromFadeableViews()
     window?.titlebarAppearsTransparent = false
 
-    videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("entered full screen mode")
@@ -1412,16 +1408,6 @@ class MainWindowController: PlayerWindowController {
     }
 
     fsState.startAnimatingToWindow()
-
-    // If a window is closed while in full screen mode (control-w pressed) AppKit will still call
-    // this method. Because windows are tied to player cores and cores are cached and reused some
-    // processing must be performed to leave the window in a consistent state for reuse. However
-    // the windowWillClose method will have initiated unloading of the file being played. That
-    // operation is processed asynchronously by mpv. If the window is being closed due to IINA
-    // quitting then mpv could be in the process of shutting down. Must not access mpv while it is
-    // asynchronously processing stop and quit commands.
-    guard player.info.state.active else { return }
-    player.mpv.setFlag(MPVOption.Window.keepaspect, false)
   }
 
   func windowDidExitFullScreen(_ notification: Notification) {
@@ -1461,7 +1447,6 @@ class MainWindowController: PlayerWindowController {
     showUI()
     updateTimer()
 
-    videoViewConstraints.values.forEach { $0.constant = 0 }
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("exited full screen mode")
@@ -1611,29 +1596,6 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
-
-    // The `videoView` is not updated during full screen animation (unless using a custom one, however it could be
-    // unbearably laggy under current render meahcanism). Thus when entering full screen, we should keep `videoView`'s
-    // aspect ratio. Otherwise, when entered full screen, there will be an awkward animation that looks like
-    // `videoView` "resized" to screen size suddenly when mpv redraws the video content in correct aspect ratio.
-    if case let .animating(toFullScreen, _, _) = fsState {
-      let aspect: NSSize
-      let targetFrame: NSRect
-      if toFullScreen {
-        aspect = window.aspectRatio == .zero ? window.frame.size : window.aspectRatio
-        targetFrame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.contentView!.frame)
-      } else {
-        aspect = window.screen?.frame.size ?? NSScreen.main!.frame.size
-        targetFrame = aspect.grow(toSize: window.frame.size).centeredRect(in: window.contentView!.frame)
-      }
-
-      setConstraintsForVideoView([
-        .left: targetFrame.minX,
-        .right:  targetFrame.maxX - window.frame.width,
-        .bottom: -targetFrame.minY,
-        .top: window.frame.height - targetFrame.maxY
-      ])
-    }
 
     // interactive mode
     if isInInteractiveMode {

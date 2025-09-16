@@ -113,13 +113,13 @@
 "rIW-XP-zGZ.title" = "ReplayGain에 적용할 Pre-amplification Gain.";
 
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
-"J3e-oT-fy9.title" = "Allow the volume gain to clip";
+"J3e-oT-fy9.title" = "볼륨 게인 클리핑 허용";
 
 /* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
 "HQV-tY-NMj.title" = "이 옵션이 비활성화되어 있는 경우, 음량을 낮춰 클리핑을 방지합니다.";
 
 /* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
-"fOz-6g-MhS.title" = "Fallback:";
+"fOz-6g-MhS.title" = "폴백:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "ovT-D3-3jS"; */
 "ovT-D3-3jS.title" = "dB";

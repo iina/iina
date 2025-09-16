@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Перемотування…";
 "osc.precision" = "Точність";
 "osc.1s" = "1 секунда";
 "osc.100ms" = "100 мілісекунд";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "%@ загалом";
 "playlist.total_length_with_selected" = "%@ з %@ вибрано";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Сортування";
+"playlist.sorting.filename_ascending" = "Ім'я файлу за зростанням";
+"playlist.sorting.filename_descending" = "Ім'я файлу за спаданням";
+"playlist.sorting.path_ascending" = "Шлях файлу за зростанням";
+"playlist.sorting.path_descending" = "Шлях файлу за спаданням";
 "pl_menu.title_multi" = "Елементів: %d";
 "pl_menu.play_next" = "Відтворити наступний";
 "pl_menu.play_in_new_window" = "Відтворити в новому вікні";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Гучність";
 "mini_player.close" = "Закрити музичний режим";
 "mini_player.back" = "Повернутись у режим відео";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Сортувати список відтворення";
 
 // Touch bar
 

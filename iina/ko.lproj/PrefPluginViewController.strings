@@ -38,7 +38,7 @@
 "Ztn-MG-D7D.title" = "설치된 플러그인:";
 
 /* Class = "NSTextFieldCell"; placeholderString = "user/repo"; ObjectID = "b60-P6-AN2"; */
-"b60-P6-AN2.placeholderString" = "user/repo";
+"b60-P6-AN2.placeholderString" = "사용자/리포지토리";
 
 /* Class = "NSButtonCell"; title = "Show in Finder"; ObjectID = "drh-6w-3z1"; */
 "drh-6w-3z1.title" = "Finder에서 보기";
@@ -56,22 +56,22 @@
 "ixN-OS-w87.title" = "새로고침";
 
 /* Class = "NSTextFieldCell"; title = "Identifier"; ObjectID = "jlQ-sd-s0K"; */
-"jlQ-sd-s0K.title" = "Identifier";
+"jlQ-sd-s0K.title" = "식별자";
 
 /* Class = "NSTextFieldCell"; title = "Default plugins:"; ObjectID = "np4-XQ-xdI"; */
 "np4-XQ-xdI.title" = "기본 플러그인:";
 
 /* Class = "NSTextFieldCell"; title = "Failed to load the page."; ObjectID = "pkE-3K-CfZ"; */
-"pkE-3K-CfZ.title" = "Failed to load the page.";
+"pkE-3K-CfZ.title" = "페이지를 불러오는 데 실패했습니다.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qje-hT-j7H"; */
 "qje-hT-j7H.title" = "취소";
 
 /* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
-"r3r-Qh-rC9.title" = "Source";
+"r3r-Qh-rC9.title" = "소스";
 
 /* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "Install Package…";
+"sdU-FG-dTO.title" = "패키지 설치…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "플러그인";

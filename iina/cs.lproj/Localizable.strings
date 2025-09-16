@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se… %d%%";
 "main.opening_stream" = "Otevírám stream…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Vyhledávám…";
 "osc.precision" = "Přesnost";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekund";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "%@ celkem";
 "playlist.total_length_with_selected" = "Vybráno %@ z %@";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Řazení";
+"playlist.sorting.filename_ascending" = "Název souboru vzestupně";
+"playlist.sorting.filename_descending" = "Název souboru sestupně";
+"playlist.sorting.path_ascending" = "Cesta k souboru vzestupně";
+"playlist.sorting.path_descending" = "Cesta k souboru sestupně";
 "pl_menu.title_multi" = "Položek: %d";
 "pl_menu.play_next" = "Přehrát další";
 "pl_menu.play_in_new_window" = "Přehrát v novém okně";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Hlasitost";
 "mini_player.close" = "Zavřít hudební režim";
 "mini_player.back" = "Zpět do zobrazení videa";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Seřadit playlist";
 
 // Touch bar
 

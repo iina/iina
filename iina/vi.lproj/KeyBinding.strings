@@ -52,7 +52,7 @@
 "iina.toggle-flip" = "Chuyển đổi lật";
 "iina.toggle-mirror" = "Chuyển đổi gương";
 "iina.save-playlist" = "Lưu danh sách phát hiện tại";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Hiển thị tệp hiện tại trong Finder";
 "iina.delete-current-file" = "Xoá tập tin hiện tại";
 "iina.delete-current-file-hard" = "Xoá luôn tệp tin mà không chuyển vào thùng rác";
 "iina.find-online-subs" = "Tìm phụ đề trực tuyến";
@@ -100,8 +100,8 @@
 "opt.sub-delay" = "Độ trễ phụ đề";
 "opt.sub-pos" = "Vị trí phụ đề";
 "opt.sub-scale" = "Quy mô phụ đề";
-"opt.sub-visibility" = "Subtitle visibility";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.sub-visibility" = "Hiển thị phụ đề";
+"opt.secondary-sub-visibility" = "Hiển thị phụ đề phụ";
 "opt.sub-ass-style-override" = "Ghi đè kiểu ASS";
 
 "opt.fullscreen" = "Toàn màn hình";
@@ -112,7 +112,7 @@
 "read.set" = "Đặt {{property}} đến {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Nhân {{property}} với {{factor}}x";
-"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
-"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
+"read.cycle" = "Chuyển lần lượt {{property}}{{#dir_down}} xuống{{/dir_down}}";
+"read.cycle-values" = "Chuyển lần lượt {{property}} trong ({{{values}}})";
 "read.seek" = "Tìm kiếm {{#fwd}}chuyển đến{{/fwd}}{{#bwd}}trở lại{{/bwd}}{{#abs}}đến{{/abs}} {{value}}{{#sec}} {{/sec}}{{#per}}%{{/per}} {{#exact}}(chính xác){{/exact}}{{#kf}}(khung hình){{/kf}}";
-"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";
+"read.sub-seek" = "Tua đến phụ đề {{#skip_1}}tiếp theo{{/skip_1}}{{#skip_-1}}trước đó{{/skip_-1}}";

@@ -14,7 +14,7 @@
 "3CY-YS-rG6.title" = "左/右箭頭按鈕的功能：";
 
 /* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
-"5Nk-Mu-V2I.title" = "Base remaining time on playback speed";
+"5Nk-Mu-V2I.title" = "根據播放速率顯示剩餘時間";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
@@ -53,7 +53,7 @@
 "CJE-ap-IH8.title" = "僅在手動打開媒體時";
 
 /* Class = "NSButtonCell"; title = "File start"; ObjectID = "DAm-C4-5BQ"; */
-"DAm-C4-5BQ.title" = "開始文件";
+"DAm-C4-5BQ.title" = "開始檔案";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "顯示剩餘時間";
@@ -133,6 +133,9 @@
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "高：";
 
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
+"Ufv-Hk-vL5.title" = "阻止滾輪更改音量";
+
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "像素";
 
@@ -161,7 +164,7 @@
 "baY-O6-fcB.title" = "最小化/還原視窗時，自動切換「子母畫面」模式";
 
 /* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
-"cib-Cg-9kn.title" = "Only for video files";
+"cib-Cg-9kn.title" = "僅限影片檔案";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2 倍影片大小";
@@ -182,7 +185,7 @@
 "iRn-3s-oQH.title" = "部";
 
 /* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
-"kCe-Ck-dUJ.title" = "Include files on a mounted remote drive";
+"kCe-Ck-dUJ.title" = "包含已掛載網路磁碟機上的檔案";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "全螢幕時顯示系統時間及電量資訊";
@@ -231,6 +234,9 @@
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "符合螢幕大小";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
+"vnb-DF-4g5.title" = "防止滾輪更改播放進度";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "啟用「狀態改變資訊」";

@@ -11,7 +11,7 @@
 "HMa-Vz-EUk.title" = "아래 설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
 
 /* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Open Log Directory";
+"JDA-g3-RNX.title" = "로그 저장 디렉토리 열기";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "로그 기록하기";
@@ -35,7 +35,7 @@
 "nFf-vh-bNd.title" = "로그 레벨:";
 
 /* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Show Log Viewer";
+"Owx-92-Ogg.title" = "로그 뷰어 보기";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "세부내용";

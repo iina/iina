@@ -16,8 +16,8 @@
 "general.username" = "Tên đăng nhập";
 "general.password" = "Mật khẩu";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Giá trị không thể để trống.";
+"input.already_exists" = "Đã có giá trị này.";
 
 // Guide Window
 "guide.highlights" = "Vùng sáng";
@@ -26,8 +26,8 @@
 
 // Initial Window
 "initial.announcement" = "Bạn đang sử dụng phiên bản %@ của IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.beta.desc" = "Nếu bạn muốn quay lại phiên bản chính thức trước đó, hãy bỏ dấu tích khỏi \"nhận các phiên bản thử nghiệm Beta\" trong Cài đặt > Cài đặt chung, và cài một phiên bản chính thức từ <a href=\"https://iina.io\">website chính thức</a> của chúng tôi.";
+"initial.nightly.desc" = "Phiên bản thử nghiệm Nightly không được khuyên dùng làm phiên bản dùng thường xuyên. Những phiên bản thử nghiệm Nightly hiện tại không hỗ trợ cập nhật tự động. Vui lòng tải thủ công những phiên bản mới hơn từ <a href=\"https://nightly.iina.io\">website phiên bản thử nghiệm Nightly</a> của chúng tôi.";
 "initial.debug.desc" = "Các bản dựng gỡ lỗi thường không được tối ưu hóa về hiệu suất, vì vậy không nên sử dụng nó làm tay lái hàng ngày. Bản dựng gỡ lỗi không hỗ trợ cập nhật tự động.";
 "initial.bug_report" = "Báo cáo qua <a href=\"https://github.com/iina/iina/issues\">Sự cố GitHub</a>.";
 
@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Đang đệm… %d%%";
 "main.opening_stream" = "Mở luồng…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Đang tìm kiếm…";
 "osc.precision" = "Độ chính xác";
 "osc.1s" = "1 giây";
 "osc.100ms" = "100 mili giây";
@@ -50,43 +50,43 @@
 "quicksetting.hwdec" = "Bộ giải mã phần cứng";
 "quicksetting.deinterlace" = "Khử nhoè";
 "quicksetting.hdr" = "Chế độ HDR";
-"quicksetting.hide" = "Hide";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.hide" = "Ẩn";
+"quicksetting.reset_speed" = "Đặt tốc độ về 1x ";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
+"eq.preset.flat" = "Phẳng";
 "eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
+"eq.preset.classical" = "Cổ điển ";
+"eq.preset.dance" = "Khiêu vũ";
+"eq.preset.deep" = "Sâu lắng";
+"eq.preset.electronic" = "Điện tử";
 "eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.increase_bass" = "Tăng âm trầm";
+"eq.preset.increase_treble" = "Tăng âm bổng";
+"eq.preset.increase_vocal" = "Tăng lời hát ";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.latin" = "La tinh";
+"eq.preset.loundness" = "Âm lượng";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Giảm âm trầm";
+"eq.preset.reduce_treble" = "Giảm âm bổng";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Loa nhỏ";
+"eq.preset.spoken_word" = "Lời nói";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Bộ EQ mới";
+"alert.eq.new_profile.message" = "Hãy điền tên bộ EQ.";
+"alert.eq.rename.title" = "Đổi tên bộ hiện tại";
+"alert.eq.rename.message" = "Hãy điền tên bộ EQ mới.";
 
 // OSDMessage.swift
 "osd.pause" = "Tạm dừng";
 "osd.resume" = "Tiếp tục";
 "osd.volume" = "Âm lượng: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Tốc độ: %@x";
 "osd.aspect" = "Tỉ lệ khung hình: %@";
 "osd.crop" = "Cắt: %@";
 "osd.rotate" = "Xoay: %i°";
@@ -99,14 +99,14 @@
 "osd.sub_delay.later" = "Độ trễ phụ đề: %@s trễ hơn";
 "osd.sub_delay.earlier" = "Độ trễ phụ đề: %@s sớm hơn";
 "osd.subtitle_pos" = "Vị trí phụ đề: %@";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Phụ đề ẩn";
+"osd.sub_visible" = "Phụ đề hiện";
+"osd.sub_second_delay.nodelay" = "Độ trễ phụ đề phụ: Không độ trễ";
+"osd.sub_second_delay.later" = "Độ trễ phụ đề phụ: Trễ %@ giây";
+"osd.sub_second_delay.earlier" = "Độ trễ phụ đề phụ: Sớm %@ giây";
+"osd.sub_second_hidden" = "Phụ đề phụ ẩn";
+"osd.sub_second_pos" = "Vị trí phụ đề phụ: %@";
+"osd.sub_second_visible" = "Phụ đề phụ hiện";
 "osd.mute" = "Tắt tiếng";
 "osd.unmute" = "Bật tiếng";
 "osd.screenshot" = "Đã chụp màn hình";
@@ -126,21 +126,21 @@
 "osd.find_online_sub" = "Tìm phụ đề trực tuyến…";
 "osd.find_online_sub.source" = "từ";
 "osd.sub_not_found" = "Không tìm thấy phụ đề";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "Tìm thấy %d phụ đề.";
+"osd.sub_downloading" = "Đang tải %d phụ đề";
 "osd.sub_downloaded" = "Đã tải phụ đề";
 "osd.sub_saved" = "Đã lưu phụ đề";
 "osd.network_error" = "Lỗi mạng";
 "osd.file_error" = "Lỗi đọc tập tin";
 "osd.cannot_login" = "Không thể đăng nhập";
 "osd.canceled" = "Đã hủy";
-"osd.cannot_connect" = "Cannot connect";
-"osd.timed_out" = "Timed Out";
+"osd.cannot_connect" = "Không thể kết nối";
+"osd.timed_out" = "Hết thời hạn";
 "osd.filter_added" = "Bộ lọc đã thêm: %@";
 "osd.filter_removed" = "Bộ lọc đã xoá";
-"osd.file_loop" = "Loop Single File";
-"osd.playlist_loop" = "Loop Playlist";
-"osd.no_loop" = "Disable Looping";
+"osd.file_loop" = "Lặp file đơn";
+"osd.playlist_loop" = "Lặp playlist";
+"osd.no_loop" = "Tắt lặp";
 
 "preference.title" = "Cài đặt";
 "preference.general" = "Tổng quan";
@@ -163,29 +163,29 @@
 
 "preference.enable_adv_settings" = "Bật cài đặt nâng cao";
 
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.no" = "không";
+"preference.sub_override_level.force" = "bắt buộc";
+"preference.sub_override_level.scale" = "thu phóng";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Hiển thị phụ đề theo đúng kịch bản phụ đề, không ghi đè.";
+"preference.sub_override_level.descriptive_text.force" = "Áp dụng tất cả kiểu phụ đề";
+"preference.sub_override_level.descriptive_text.scale" = "Áp dụng thiết lập tỷ lệ cùng với các thiết lập kiểu đã chọn trong phần này.";
+"preference.sub_override_level.descriptive_text.strip" = "Loại bỏ hoàn toàn tất cả thẻ và kiểu ASS khỏi phụ đề.";
+"preference.sub_override_level.descriptive_text.yes" = "Áp dụng tất cả thiết lập kiểu trong phần này.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Cài đặt plugin Online Media từ ‘Plugins > Install from GitHub’ để sử dụng các tính năng nâng cao như tải video và tự động cập nhật yt-dlp.";
+"preference.ytdl_plugin_installed" = "Hỗ trợ youtube-dl tích hợp sẵn đã bị vô hiệu hóa vì bạn đã cài đặt plugin Online Media.";
 
 "menu.volume" = "Âm lượng: %@";
 "menu.volume_muted" = "Âm lượng: %@ (Đã tắt tiếng)";
 "menu.audio_delay" = "Độ trễ âm thanh: %@s";
 "menu.sub_delay" = "Độ trễ phụ đề: %@s";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Ẩn phụ đề";
+"menu.sub_show" = "Hiện phụ đề";
+"menu.sub_second_hide" = "Ẩn phụ đề phụ";
+"menu.sub_second_show" = "Hiện phụ đề phụ";
 "menu.fullscreen" = "Vào toàn màn hình";
 "menu.exit_fullscreen" = "Thoát toàn màn hình";
 "menu.pip" = "Dùng Hình-trong-Hình";
@@ -194,7 +194,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Tạm dừng";
 "menu.resume" = "Tiếp tục";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Tốc độ: %@x";
 "menu.chapters" = "Hiện bảng Chương xem";
 "menu.hide_chapters" = "Ẩn bảng điều khiển chương";
 "menu.playlist" = "Hiện bảng Danh sách phát";
@@ -203,41 +203,41 @@
 "menu.hide_video" = "Ẩn bảng điều khiển video";
 "menu.audio" = "Hiển thị bảng điều khiển âm thanh";
 "menu.hide_audio" = "Ẩn bảng điều khiển âm thanh";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.subtitles" = "Hiện bảng phụ đề";
+"menu.hide_subtitles" = "Ẩn bảng phụ đề";
 
-"menu.seek_forward" = "Step Forward %@s";
-"menu.seek_backward" = "Step Backward %@s";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volume + %@%%";
+"menu.seek_forward" = "Tua tới %@ giây";
+"menu.seek_backward" = "Tua lùi %@ giây";
+"menu.speed_up" = "Tăng tốc độ phát %@x";
+"menu.speed_down" = "Giảm tốc độ phát đi %@x";
+"menu.volume_up" = "Âm lượng + %@%%";
 "menu.volume_down" = "Âm lượng - %@%%";
-"menu.audio_delay_up" = "Audio Delay + %@s";
-"menu.audio_delay_down" = "Audio Delay - %@s";
-"menu.sub_delay_up" = "Subtitle Delay + %@s";
-"menu.sub_delay_down" = "Subtitle Delay - %@s";
+"menu.audio_delay_up" = "Tăng độ trễ âm thanh %@s";
+"menu.audio_delay_down" = "Giảm độ trễ âm thanh %@s";
+"menu.sub_delay_up" = "Tăng độ trễ phụ đề %@s";
+"menu.sub_delay_down" = "Giảm độ trễ phụ đề %@s";
 
 "menu.crop_custom" = "Tuỳ chỉnh…";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "Tìm phụ đề trực tuyến từ %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "Quản lý Plugin...";
+"menu.developer_tool" = "Công cụ dành cho nhà phát triển";
+"menu.more_plugin" = "Khác…";
+"menu.conflicting_shortcuts" = "Xung đột phím tắt…";
+"menu.reload_plugins" = "Tải lại tất cả plugin";
+"menu.show_plugins_panel" = "Hiện bảng plugin";
+"menu.hide_plugins_panel" = "Ẩn bảng plugin";
 
 "track.audio" = "Âm thanh";
 "track.none" = "<None>";
 "track.sub" = "Phụ đề";
 "track.video" = "Video";
 
-"subtrack.no_loaded" = "No Subtitles Loaded";
-"subtrack.no_external" = "No External Subtitles Found";
+"subtrack.no_loaded" = "Chưa tải phụ đề nào";
+"subtrack.no_external" = "Không tìm thấy phụ đề ngoài nào";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "Nhận cập nhật cho phiên bản Beta";
 
 "alert.title_error" = "Lỗi";
 "alert.title_warning" = "Cảnh báo";
@@ -246,31 +246,31 @@
 "alert.fatal_error" = "Lỗi nghiêm trọng: %@ \nỨng dụng sẽ đóng ngay bây giờ.";
 "alert.mpv_error" = "Lỗi nội bộ %@ (%@) khi đặt thiết lập %@.";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_audio" = "Tệp âm thanh ngoài không được hỗ trợ.";
+"alert.unsupported_sub" = "Tệp âm thanh ngoài không được hỗ trợ.";
 "alert.unsupported_url" = "URL không được hỗ trợ.";
 "alert.wrong_url_format" = "Sai định dạng URL.";
 
 "alert.error_open" = "Không thể mở tệp hoặc luồng!";
 "alert.error_finding_file" = "Không thể tìm thấy tệp %@!";
-"alert.error_loading_script" = "Cannot load script %@!";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
-"alert.error_deleting_file" = "Cannot delete the file.";
+"alert.error_loading_script" = "Không thể tải script %@!";
+"alert.error_saving_file" = "Đã xảy ra lỗi khi lưu %@: %@";
+"alert.error_deleting_file" = "Không thể xóa tệp.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Giá trị ‘%@’ không hợp lệ.\nVui lòng nhập giá trị trong khoảng từ 10 đến 10000, hoặc 0.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.file_existing.title" = "File Already Exists";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
-"alert.config.cannot_create" = "Cannot create config file!\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.new.title" = "Cấu hình nhập mới";
+"alert.config.new.message" = "Nhập tên cấu hình mới.";
+"alert.config.duplicate.title" = "Cấu hình trùng lặp";
+"alert.config.duplicate.message" = "Vui lòng nhập tên cho tệp cấu hình trùng lặp.";
+"alert.config.file_existing.title" = "Tệp đã tồn tại";
+"alert.config.file_existing.message" = "Một tệp cấu hình cùng tên đã tồn tại. Chọn OK để hiển thị tệp trong Finder.";
+"alert.config.cannot_create" = "Không thể tạo file cấu hình! \n%@";
+"alert.config.cannot_write" = "Không thể viết vào file cấu hình!";
+"alert.config.rename.title" = "Đổi tên cấu hình đầu vào";
+"alert.config.rename.message" = "Hãy đặt tên mới cho cấu hình.";
 
-"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.filter.incorrect" = "Gặp lỗi khi thiết lập bộ lọc. Vui lòng kiểm tra format của đầu vào.";
 "alert.add_filter.title" = "Bộ lọc mới";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 

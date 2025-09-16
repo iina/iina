@@ -16,8 +16,8 @@
 "general.username" = "Nama pengguna";
 "general.password" = "Kata sandi";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Nilai tidak boleh kosong.";
+"input.already_exists" = "Nilai sudah ada.";
 
 // Guide Window
 "guide.highlights" = "Sorotan";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Kamu memakai IINA versi %@";
 "initial.beta.desc" = "Jika anda ingin mengembalikan ke versi rilis, hilangkan \"terima pembaruan beta\" dari Pengaturan > Umum, dan instal versi stabil dari <a href=\"https://iina.io\">situs resmi</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Versi nightly tidak disarankan untuk digunakan sehari-hari. Versi nightly saat ini tidak mendukung pembaruan otomatis. Unduh versi baru secara manual dari <a href=\"https://nightly.iina.io\">situs nightly</a> kami.";
 "initial.debug.desc" = "Bangunan debug biasanya tidak dioptimalkan performanya, sehingga tidak disarankan untuk digunakan sebagai drive harian. Bangunan debug tidak mendukung pembaruan otomatis.";
 "initial.bug_report" = "Laporkan melalui <a href=\"https://github.com/iina/iina/issues\">Masalah GitHub</a>.";
 
@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Menyangga… %d%%";
 "main.opening_stream" = "Membuka stream…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Menggeser…";
 "osc.precision" = "Ketepatan";
 "osc.1s" = "1 detik";
 "osc.100ms" = "100 milidetik";
@@ -51,42 +51,42 @@
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Sembunyikan";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Atur ulang kecepatan menjadi 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
+"eq.preset.flat" = "Datar";
+"eq.preset.acoustic" = "Akustik";
+"eq.preset.classical" = "Klasik";
+"eq.preset.dance" = "Dansa";
+"eq.preset.deep" = "Dalam";
+"eq.preset.electronic" = "Elektronik";
 "eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.increase_bass" = "Tambah Bass";
+"eq.preset.increase_treble" = "Tambah Treble";
+"eq.preset.increase_vocal" = "Tambah Vokal";
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.loundness" = "Tingkat Suara";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.pop" = "";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Kurangi Bass";
+"eq.preset.reduce_treble" = "Kurangi Treble";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Speaker Kecil";
+"eq.preset.spoken_word" = "Audio Berbicara";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Profil EQ Baru";
+"alert.eq.new_profile.message" = "Silakan masukkan nama profil.";
+"alert.eq.rename.title" = "Ganti Nama Profil Saat Ini";
+"alert.eq.rename.message" = "Silakan masukkan nama profil baru.";
 
 // OSDMessage.swift
 "osd.pause" = "Jeda";
 "osd.resume" = "Lanjutkan";
 "osd.volume" = "Volume: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Kecepatan: %@x";
 "osd.aspect" = "Rasio Aspek: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Putar: %i°";
@@ -99,14 +99,14 @@
 "osd.sub_delay.later" = "Penundaan Terjemahan: %@ dtk lebih cepat";
 "osd.sub_delay.earlier" = "Penundaan Terjemahan: %@ dtk lebih lambat";
 "osd.subtitle_pos" = "Posisi Terjemahan: %@";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Takarir Tersembunyi";
+"osd.sub_visible" = "Takarir Terlihat";
+"osd.sub_second_delay.nodelay" = "Penundaan Takarir Sukender: Tanpa Penundaan";
+"osd.sub_second_delay.later" = "Penundaan Takarir Sekunder: %@ Dtk Lebih Cepat";
+"osd.sub_second_delay.earlier" = "Penundaan Takarir Sekunder: %@ Dtk Lebih Lambat";
+"osd.sub_second_hidden" = "Takarir Sekunder Tersembunyi";
+"osd.sub_second_pos" = "Posisi Takarir Sekunder: %@";
+"osd.sub_second_visible" = "Takarir Sekunder Terlihat";
 "osd.mute" = "Bisukan Suara";
 "osd.unmute" = "Nyalakan Suara";
 "osd.screenshot" = "Tangkapan Layar Berhasil";
@@ -126,8 +126,8 @@
 "osd.find_online_sub" = "Mencari terjemahan online…";
 "osd.find_online_sub.source" = "dari";
 "osd.sub_not_found" = "Terjemahan tidak ditemukan";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "Takarir %d ditemukan.";
+"osd.sub_downloading" = "Mengunduh takarir %d";
 "osd.sub_downloaded" = "Terjemahan terunduh";
 "osd.sub_saved" = "Terjemahan tersimpan";
 "osd.network_error" = "Jaringan bermasalah";
@@ -163,29 +163,29 @@
 
 "preference.enable_adv_settings" = "Aktifkan pengaturan lanjutan";
 
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.no" = "tidak";
+"preference.sub_override_level.force" = "paksa";
+"preference.sub_override_level.scale" = "skala";
 "preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "ya";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "Tampilkan takarir sesuai skrip takarir, tanpa penimpaan.";
+"preference.sub_override_level.descriptive_text.force" = "Terapkan semua gaya tampilan takarir.";
+"preference.sub_override_level.descriptive_text.scale" = "Terapkan pengaturan skala serta pengaturan gaya di bagian ini.";
+"preference.sub_override_level.descriptive_text.strip" = "Hapus paksa tag dan gaya tampilan ASS dari takarir.";
+"preference.sub_override_level.descriptive_text.yes" = "Terapkan semua pengaturan gaya di bagian ini.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Pasang plugin Media Online dari \"Plugin > Instal dari GitHub\" untuk menikmati fitur-fitur canggih seperti mengunduh video dan pembaruan yt-dlp otomatis.";
+"preference.ytdl_plugin_installed" = "Dukungan youtube-dl bawaan dinonaktifkan karena plugin media Online terpasang.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Dimatikan)";
 "menu.audio_delay" = "Penundaan Audio: %@ dtk";
 "menu.sub_delay" = "Penundaan Terjemahan: %@ dtk";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Sembunyikan Takarir";
+"menu.sub_show" = "Tampilkan Takarir";
+"menu.sub_second_hide" = "Sembunyikan Takarir Sekunder";
+"menu.sub_second_show" = "Tampilkan Takarir Sekunder";
 "menu.fullscreen" = "Masuk Layar Penuh";
 "menu.exit_fullscreen" = "Keluar dari Layar Penuh";
 "menu.pip" = "Masuk Picture-in-Picture";
@@ -194,7 +194,7 @@
 "menu.exit_mini_player" = "Keluar dari Mode Musik";
 "menu.pause" = "Jeda";
 "menu.resume" = "Lanjutkan";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Kecepatan: %@x";
 "menu.chapters" = "Lihat Panel Chapter";
 "menu.hide_chapters" = "Sembunyikan Panel Chapter";
 "menu.playlist" = "Tampilkan Panel Playlist";
@@ -208,8 +208,8 @@
 
 "menu.seek_forward" = "Majukan %@dtk";
 "menu.seek_backward" = "Mundurkan %@dtk";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Percepat %@x";
+"menu.speed_down" = "Perlambat %@x";
 "menu.volume_up" = "Volume + %@%%";
 "menu.volume_down" = "Volume - %@%%";
 "menu.audio_delay_up" = "Penundaan Audio + %@dtk";
@@ -220,13 +220,13 @@
 "menu.crop_custom" = "Kustom…";
 "menu.find_online_sub" = "Cari Terjemahan Online dari %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "Kelola Plugin…";
+"menu.developer_tool" = "Alat Pengembang";
+"menu.more_plugin" = "Lainnya…";
+"menu.conflicting_shortcuts" = "Tombol pintasan bentrok…";
+"menu.reload_plugins" = "Muat Ulang Semua Plugin";
+"menu.show_plugins_panel" = "Tampilkan Panel Plugin";
+"menu.hide_plugins_panel" = "Sembunyikan Panel Plugin";
 
 "track.audio" = "Audio";
 "track.none" = "<Tidak Ada>";
@@ -257,18 +257,18 @@
 "alert.error_saving_file" = "Terjadi kesalahan saat menyimpan %@: %@";
 "alert.error_deleting_file" = "Tidak dapat menghapus file.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Nilai \"%@\" tidak valid.\nBerikan nilai antara 10 dan 10000, atau 0.";
 
 "alert.config.new.title" = "Konfigurasi Input Baru";
 "alert.config.new.message" = "Masukkan nama untuk konfigurasi yang baru.";
 "alert.config.duplicate.title" = "Duplikat Konfigurasi";
 "alert.config.duplicate.message" = "Masukkan nama untuk duplikasi konfigurasi.";
 "alert.config.file_existing.title" = "File Sudah Ada";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "File konfigurasi dengan nama yang sama sudah ada. Pilih OK untuk menampilkan file di Finder.";
 "alert.config.cannot_create" = "Tidak dapat membuat file konfigurasi!\n%@";
 "alert.config.cannot_write" = "Tidak dapat menulis pada file konfig!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Ganti Nama Konfigurasi Input";
+"alert.config.rename.message" = "Silakan masukkan nama baru untuk konfigurasi.";
 
 "alert.filter.incorrect" = "Kesalahan terjadi saat menyetel filter. Mohon cek kembali format parameter Anda.";
 "alert.add_filter.title" = "Filter Baru";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "Total %@";
 "playlist.total_length_with_selected" = "%@ dari %@ terpilih";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Pengurutan";
+"playlist.sorting.filename_ascending" = "Nama File Menaik";
+"playlist.sorting.filename_descending" = "Nama File Menurun";
+"playlist.sorting.path_ascending" = "Jalur File Menaik";
+"playlist.sorting.path_descending" = "Jalur File Menurun";
 "pl_menu.title_multi" = "%d item";
 "pl_menu.play_next" = "Putar Berikutnya";
 "pl_menu.play_in_new_window" = "Putar di Window Baru";
@@ -401,7 +401,7 @@
 "osc_toolbar.music_mode" = "Aktifkan mode musik";
 "osc_toolbar.sub_track" = "Pilih trek terjemahan";
 "osc_toolbar.screenshot" = "Ambil tangkapan layar";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "Tampilkan panel plugin";
 
 "mini_player.album_art" = "Aktif/nonaktifkan Album Art";
 "mini_player.loop" = "Ulangi";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Tutup mode musik";
 "mini_player.back" = "Kembali ke mode video";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Urutkan daftar putar";
 
 // Touch bar
 

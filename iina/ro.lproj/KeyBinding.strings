@@ -56,7 +56,7 @@
 "iina.delete-current-file" = "Șterge fișierul curent";
 "iina.delete-current-file-hard" = "Șterge fișierul curent fără a-l muta în Coș";
 "iina.find-online-subs" = "Găsește subtitrări online";
-"iina.save-downloaded-sub" = "Salvează subitrările descărcate";
+"iina.save-downloaded-sub" = "Salvează subtitrările descărcate";
 
 "yes" = "Da";
 "no" = "Nu";
@@ -111,7 +111,7 @@
 
 "read.set" = "Setează {{property}} la {{value}}";
 "read.add" = "{{property}} {{value}}";
-"read.multiply" = "Mulitiplică {{property}} de {{factor}}x";
+"read.multiply" = "Multiplică {{property}} de {{factor}}x";
 "read.cycle" = "Ciclic {{property}}{{#dir_down}} în jos{{/dir_down}}";
 "read.cycle-values" = "Ciclic {{property}} în ({{{values}}})";
 "read.seek" = "Caută {{#fwd}}înainte{{/fwd}}{{#bwd}}înapoi{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";

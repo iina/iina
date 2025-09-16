@@ -16,20 +16,20 @@
 "general.username" = "उपयोगकर्ता नाम";
 "general.password" = "पारण शब्द";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "मान रिक्त नहीं हो सकता ।";
+"input.already_exists" = "वैल्यू पहले से मौजूद है|";
 
 // Guide Window
-"guide.highlights" = "Highlights";
+"guide.highlights" = "हाइलाइट";
 "guide.basic_settings" = "मार्गदर्शक. मूल_सेटिंग्स";
-"guide.faq" = "Frequently Asked Questions";
+"guide.faq" = "अक्सर पूछे जाने वाले प्रश्न";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "आप IINA का %@ संस्करण उपयोग कर रहे हैं";
+"initial.beta.desc" = "अगर आप रिलीज़ संस्करण पर वापस जाना चाहते हैं, तो सेटिंग्स > सामान्य से \"बीटा अपडेट प्राप्त करें\" को अनचेक करें और हमारी <a href=\"https://iina.io\">आधिकारिक वेबसाइट</a> से एक स्थिर रिलीज़ इंस्टॉल करें।";
+"initial.nightly.desc" = "रोज़मर्रा के उपयोग के लिए नाइटली का इस्तेमाल करने की सिफारिश नहीं की जाती। फिलहाल, नाइटली बिल्ड ऑटो अपडेट को सपोर्ट नहीं करते हैं। कृपया हमारी <a href=\"https://nightly.iina.io\">नाइटली वेबसाइट</a> से नए बिल्ड मैन्युअल रूप से डाउनलोड करें।";
+"initial.debug.desc" = "डीबग बिल्ड आमतौर पर परफॉर्मेंस के लिए ऑप्टिमाइज़ नहीं होते हैं, इसलिए उन्हें रोज़मर्रा के उपयोग के लिए इस्तेमाल करने की सिफारिश नहीं की जाती। डीबग बिल्ड ऑटो अपडेट को सपोर्ट नहीं करते हैं।";
+"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">गिटहब इश्यूज़</a> पर रिपोर्ट करें।";
 
 // Inspector Window
 "inspector.error" = "त्रुटि";
@@ -37,61 +37,61 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "बफरिंग… %d%%";
 "main.opening_stream" = "खुलने की धारा…";
-"main.seeking_indicator" = "Seeking…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"main.seeking_indicator" = "सीकिंग…";
+"osc.precision" = "सटीकता";
+"osc.1s" = "1 सेकंड";
+"osc.100ms" = "100 मिलीसेकंड";
+"osc.10ms" = "10 मिलीसेकंड";
+"osc.1ms" = "1 मिलीसेकंड";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "डिफ़ॉल्ट";
 "quicksetting.item_none" = "कोई नहीं";
-"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.hwdec" = "हार्डवेयर डिकोडिंग";
 "quicksetting.deinterlace" = "असंग्रथित";
-"quicksetting.hdr" = "HDR";
+"quicksetting.hdr" = "एचडीआर";
 "quicksetting.hide" = "छिपाना";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "स्पीड को 1x पर रीसेट करें";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.flat" = "फ़्लैट";
+"eq.preset.acoustic" = "अकॉस्टिक";
+"eq.preset.classical" = "शास्त्रीय";
+"eq.preset.dance" = "नृत्य";
+"eq.preset.deep" = "गहरा";
+"eq.preset.electronic" = "इलेक्ट्रॉनिक";
+"eq.preset.hip_hop" = "हिप हॉप";
+"eq.preset.increase_bass" = "बास बढ़ाएँ";
+"eq.preset.increase_treble" = "ट्रेबल बढ़ाएँ";
+"eq.preset.increase_vocal" = "वोकल बढ़ाएँ";
+"eq.preset.jazz" = "जैज़";
+"eq.preset.latin" = "लैटिन";
+"eq.preset.loundness" = "लाउडनेस";
+"eq.preset.lounge" = "लाउंज";
+"eq.preset.piano" = "पियानो";
+"eq.preset.pop" = "पॉप";
+"eq.preset.rnb" = "आर एंड बी";
+"eq.preset.reduce_bass" = "बास कम करें";
+"eq.preset.reduce_treble" = "ट्रेबल कम करें";
+"eq.preset.rock" = "रॉक";
+"eq.preset.small_speaker" = "छोटा स्पीकर";
+"eq.preset.spoken_word" = "स्पोकन वर्ड";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "नया ईक्यू प्रोफ़ाइल";
+"alert.eq.new_profile.message" = "कृपया एक प्रोफ़ाइल नाम दर्ज करें।";
+"alert.eq.rename.title" = "वर्तमान प्रोफ़ाइल का नाम बदलें";
+"alert.eq.rename.message" = "कृपया एक नया प्रोफ़ाइल नाम दर्ज करें।";
 
 // OSDMessage.swift
 "osd.pause" = "रोकें";
 "osd.resume" = "पुनः आरंभ";
 "osd.volume" = "ध्वनि: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "गति: %@x";
 "osd.aspect" = "आस्पेक्ट अनुपात: %@";
 "osd.crop" = "क्रॉप: %@";
 "osd.rotate" = "घुमाएँ: %i°";
 "osd.deinterlace" = "डीइंटरलेस: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "हार्डवेयर डिकोडिंग: %@";
 "osd.audio_delay.nodelay" = "ऑडियो विलंब: विलंब न करें";
 "osd.audio_delay.later" = "ऑडियो विलंब: %@s बाद में";
 "osd.audio_delay.earlier" = "ऑडियो विलंब: %@s पूर्व";
@@ -99,10 +99,10 @@
 "osd.sub_delay.later" = "उपशीर्षक देरी: %@s बाद में";
 "osd.sub_delay.earlier" = "उपशीर्षक देरी: %@s पूर्व";
 "osd.subtitle_pos" = "उपशीर्षक पद: %@";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_hidden" = "सबटाइटल्स छिपाए गए हैं";
+"osd.sub_visible" = "सबटाइटल्स दिखाई दे रहे हैं";
+"osd.sub_second_delay.nodelay" = "सेकंडरी सबटाइटल डिले: कोई डिले नहीं";
+"osd.sub_second_delay.later" = "सेकंडरी सबटाइटल डिले: %@ सेकंड बाद";
 "osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %@";
@@ -194,7 +194,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "रोकें";
 "menu.resume" = "पुनः आरंभ";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "गति: %@x";
 "menu.chapters" = "अध्याय पैनल दिखाएं";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "प्लेलिस्ट पैनल दिखाएं";

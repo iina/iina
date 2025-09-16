@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
 "main.opening_stream" = "開啟串流中⋯⋯";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "檢索中…";
 "osc.precision" = "精確度";
 "osc.1s" = "1秒";
 "osc.100ms" = "100毫秒";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "排序";
+"playlist.sorting.filename_ascending" = "檔名遞增排序";
+"playlist.sorting.filename_descending" = "檔名遞減排序";
+"playlist.sorting.path_ascending" = "路徑遞增排序";
+"playlist.sorting.path_descending" = "路徑遞減排序";
 "pl_menu.title_multi" = "%d 個項目";
 "pl_menu.play_next" = "即將播放";
 "pl_menu.play_in_new_window" = "在新視窗裡播放";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "音量";
 "mini_player.close" = "結束音樂模式";
 "mini_player.back" = "返回影片模式";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "排序播放清單";
 
 // Touch bar
 

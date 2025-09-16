@@ -9,47 +9,47 @@
 
 
 
-"crop" = "Crop";
-"crop.w" = "Width (default: video width)";
-"crop.h" = "Height (default: video height)";
-"crop.x" = "Origin X (default: center)";
-"crop.y" = "Origin Y (default: center)";
+"crop" = "كېسىش";
+"crop.w" = "كەڭلىكى (سۈكۈتتە: سىن كەڭلىكى)";
+"crop.h" = "ئېگىزلىكى (سۈكۈتتە: سىن ئېگىزلىكى)";
+"crop.x" = "X مەنبە (سۈكۈتتە: مەركىزى)";
+"crop.y" = "Y مەنبە (سۈكۈتتە: مەركىزى)";
 
-"expand" = "Expand";
-"expand.w" = "Width (default: video width)";
-"expand.h" = "Height (default: video height)";
-"expand.x" = "Origin X (default: center)";
-"expand.y" = "Origin Y (default: center)";
-"expand.aspect" = "Expands to fit an aspect (e.g: 4/3)";
-"expand.round" = "Rounds up to make divisible by this value";
+"expand" = "كېڭەيتىش";
+"expand.w" = "كەڭلىكى (سۈكۈتتە: سىن كەڭلىكى)";
+"expand.h" = "ئېگىزلىكى (سۈكۈتتە: سىن ئېگىزلىكى)";
+"expand.x" = "X مەنبە (سۈكۈتتە: مەركىزى)";
+"expand.y" = "Y مەنبە (سۈكۈتتە: مەركىزى)";
+"expand.aspect" = "مۇۋاپىق كېڭەيتىش (مەسىلەن: 4\\3)";
+"expand.round" = "بۆلۈنۈشچان قىلىپ پۈتۈنلەش";
 
-"sharpen" = "Sharpen";
-"sharpen.msize" = "Matrix size";
-"sharpen.amount" = "Amount";
+"sharpen" = "ئۆتكۈرلەشتۈرۈش";
+"sharpen.msize" = "ماترىكىس چوڭلۇقى";
+"sharpen.amount" = "مىقدارى";
 
-"blur" = "Blur";
-"blur.msize" = "Matrix size";
-"blur.amount" = "Amount";
+"blur" = "غۇۋالىشىش";
+"blur.msize" = "ماترىكىس چوڭلۇقى";
+"blur.amount" = "مىقدارى";
 
-"delogo" = "Delogo";
-"delogo.w" = "Width";
-"delogo.h" = "Height";
-"delogo.x" = "Origin X";
-"delogo.y" = "Origin Y";
+"delogo" = "سۈزۈش";
+"delogo.w" = "كەڭلىكى";
+"delogo.h" = "ئېگىزلىكى";
+"delogo.x" = "X مەنبە";
+"delogo.y" = "Y مەنبە";
 
-"negative" = "Negative";
+"negative" = "ئىنكار";
 
-"vflip" = "Flip";
-"hflip" = "Mirror";
+"vflip" = "ئېتىش";
+"hflip" = "ئەينەك";
 
-"lut3d" = "3D LUT";
-"lut3d.file" = "File path (you can also drag & drop the file into the input box)";
-"lut3d.interp" = "Interpolation mode";
+"lut3d" = "3D رەڭ جەدۋىلى";
+"lut3d.file" = "ھۆججەت ئادرېسى (كىرگۈزۈش رامكىسىغا سۆرەپ تاشلاپ قويسىڭىزمۇ بولىدۇ)";
+"lut3d.interp" = "كاندۇك تولدۇرۇش ھالىتى";
 
-"custom_mpv" = "Custom (mpv)";
-"custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv" = "خاس تەڭشەك (mvp)";
+"custom_mpv.name" = "سۈزگۈچ نامى";
+"custom_mpv.string" = "سۈزگۈچ قىممىتى";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
-"custom_ffmpeg.name" = "Filter name";
-"custom_ffmpeg.string" = "Filter value";
+"custom_ffmpeg" = "خاس تەڭشەك (FFmpeg)";
+"custom_ffmpeg.name" = "سۈزگۈچ نامى";
+"custom_ffmpeg.string" = "سۈزگۈچ قىممىتى";

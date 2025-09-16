@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Tri";
+"playlist.sorting.filename_ascending" = "Nom du fichier par ordre croissant";
+"playlist.sorting.filename_descending" = "Nom du fichier par ordre décroissant";
+"playlist.sorting.path_ascending" = "Chemin du fichier ascendant";
+"playlist.sorting.path_descending" = "Chemin d'accès descendant";
 "pl_menu.title_multi" = "%d éléments";
 "pl_menu.play_next" = "Jouer ensuite";
 "pl_menu.play_in_new_window" = "Ouvrir dans une nouvelle fenêtre";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Fermer le mode musique";
 "mini_player.back" = "Revenir en mode vidéo";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Trier la playlist";
 
 // Touch bar
 

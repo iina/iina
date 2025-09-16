@@ -54,3 +54,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "額外參數：";
+
+/* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
+"SyQ-2U-zu8.title" = "在暫停等候快取時顯示載入圖示";
+
+/* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
+"39x-Jr-gsA.title" = "在檢索時顯示載入圖示";

@@ -54,3 +54,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "Pokročilé možnosti:";
+
+/* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
+"SyQ-2U-zu8.title" = "Zobrazit ikonu načítání u pozastavení při čekání na mezipaměť";
+
+/* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
+"39x-Jr-gsA.title" = "Zobrazit ikonu načítání při vyhledávání";

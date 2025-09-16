@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Folosești o versiune %@ de IINA";
 "initial.beta.desc" = "Dacă vreți să reveniți la o versiune non-beta, debifați \"primește actualizări beta\" din Setări > General, și instalați o actualizare stabilă de pe <a href=\"https://iina.io\">site-ul nostru oficial</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Versiunea Nightly nu este recomandată pentru utilizare zilnică. In momentul de față, versiunile Nightly nu suportă actualizare automată. Vă rugăm să descărcați manual versiunile mai noi de pe <a href=\"https://nightly.iina.io\">site-ul nostru Nightly</a>.";
 "initial.debug.desc" = "Versiunile de debug de obicei nu sunt optimizate pentru performanță, ca urmare nu sunt recomandate în utilizarea de zi cu zi. Versiunile de debug nu suportă actualizări automate.";
 "initial.bug_report" = "Raportați pe <a href=\"https://github.com/iina/iina/issues\">pagina de probleme de pe GitHub</a>.";
 
@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering...%d%%";
 "main.opening_stream" = "Se deschide streamul…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Se caută…";
 "osc.precision" = "Precizie";
 "osc.1s" = "O secundă";
 "osc.100ms" = "100 milisecunde";
@@ -51,7 +51,7 @@
 "quicksetting.deinterlace" = "Deîntrețesere";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Se ascunde";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Resetați viteza la 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Plat";
@@ -67,7 +67,7 @@
 "eq.preset.jazz" = "Jazz";
 "eq.preset.latin" = "Latino";
 "eq.preset.loundness" = "Zgomot";
-"eq.preset.lounge" = "Lounge";
+"eq.preset.lounge" = "Camera de așteptare";
 "eq.preset.piano" = "Pian";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
@@ -79,14 +79,14 @@
 
 "alert.eq.new_profile.title" = "Profil EQ nou";
 "alert.eq.new_profile.message" = "Introduceți un nume pentru profil.";
-"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.title" = "Redenumiți profilul curent";
 "alert.eq.rename.message" = "Introduceți un nume nou pentru profil.";
 
 // OSDMessage.swift
 "osd.pause" = "Pauză";
 "osd.resume" = "Reia";
 "osd.volume" = "Volum: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Viteză: %@x";
 "osd.aspect" = "Raport de aspect: %@";
 "osd.crop" = "Decupare: %@";
 "osd.rotate" = "Rotește: %i°";
@@ -175,8 +175,8 @@
 "preference.sub_override_level.descriptive_text.strip" = "Elimină complet toate tag-urile și stilurile ASS din subtitrare.";
 "preference.sub_override_level.descriptive_text.yes" = "Aplică toate setările de stil din această secțiune.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Instalați extensia Online Media din \"Extensii > Instalați de pe GitHub\" pentru a vă bucura de caracteristici avansate precum descărcare video și actualizări automate yt-dlp.";
+"preference.ytdl_plugin_installed" = "Suportul youtube-dl încorporat este dezactivat deoarece aveți extensia Online Media instalată.";
 
 "menu.volume" = "Volum: %@";
 "menu.volume_muted" = "Volum: %@ (Mut)";
@@ -194,7 +194,7 @@
 "menu.exit_mini_player" = "Ieșiți din modul Muzică";
 "menu.pause" = "Pauză";
 "menu.resume" = "Reia";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Viteză: %@x";
 "menu.chapters" = "Afilșează panoul Capitole";
 "menu.hide_chapters" = "Ascunde panoul Capitole";
 "menu.playlist" = "Arată panoul Listă de redare";
@@ -208,8 +208,8 @@
 
 "menu.seek_forward" = "Sari înainte %@s";
 "menu.seek_backward" = "Sari înapoi %@s";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Accelerați de %@ ori";
+"menu.speed_down" = "Încetiniți de %@ ori";
 "menu.volume_up" = "Volum +%@%%";
 "menu.volume_down" = "Volum -%@%%";
 "menu.audio_delay_up" = "Întârziere audio +%@s";
@@ -220,13 +220,13 @@
 "menu.crop_custom" = "Personalizat…";
 "menu.find_online_sub" = "Găsește subtitrări online din %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "Gestionați extensiile…";
+"menu.developer_tool" = "Unealtă pentru dezvoltatori";
+"menu.more_plugin" = "Mai mult…";
+"menu.conflicting_shortcuts" = "Comenzi rapide contradictorii…";
+"menu.reload_plugins" = "Reîncarcă toate extensiile";
+"menu.show_plugins_panel" = "Afișează panoul de extensii";
+"menu.hide_plugins_panel" = "Ascunde panoul de extensii";
 
 "track.audio" = "Audio";
 "track.none" = "<None>";
@@ -257,7 +257,7 @@
 "alert.error_saving_file" = "A apărut o eroare la salvarea %@: %@";
 "alert.error_deleting_file" = "Fișierul nu poate fi șters.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Valoarea \"%@\" este invalidă.\nVă rugăm să furnizați o valoare între 10 și 10000, sau 0.";
 
 "alert.config.new.title" = "Configurație nouă de intrare";
 "alert.config.new.message" = "Te rog introdu un nume pentru noua configurație.";
@@ -346,8 +346,8 @@
 
 "alert.plugin_uninstall.title" = "Sunteți sigur ca doriți sa dezinstalați %@?";
 "alert.plugin_uninstall.message" = "Extensia va fi ștearsă de pe discul dvs.";
-"alert.plugin_reinstall.title" = "Plugin-ul %@ există deja";
-"alert.plugin_reinstall.message" = "Doriți să reinstalați plugin-ul?";
+"alert.plugin_reinstall.title" = "Extensia %@ există deja";
+"alert.plugin_reinstall.message" = "Doriți să reinstalați extensia?";
 "alert.duplicated_plugin_id" = "S-au detectat duplicate ale identificatoarelor de extensii. Două sau mai multe extensii au același identificator \"%@\". Acest lucru poate cauza comportamente anormale. Le puteți găsi în Preferințe - Extensii și le puteți raporta autorilor lor. Dacă o extensie este instalată local, puteți schimba manual identificatorul ei în fișierul Info.json al acesteia.";
 "alert.plugin_no_update" = "Nu s-a găsit nicio actualizare.";
 "alert.plugin_update_found.title" = "Actualizare găsită pentru %@";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "%@ în total";
 "playlist.total_length_with_selected" = "%@ din %@ selectat";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Sortare";
+"playlist.sorting.filename_ascending" = "Nume fișier ascendent";
+"playlist.sorting.filename_descending" = "Nume fișier descendent";
+"playlist.sorting.path_ascending" = "Calea fișierului ascendent";
+"playlist.sorting.path_descending" = "Calea fișierului descendent";
 "pl_menu.title_multi" = "%d elemente";
 "pl_menu.play_next" = "Redă în continuare";
 "pl_menu.play_in_new_window" = "Redă în Fereastră Nouă";
@@ -401,7 +401,7 @@
 "osc_toolbar.music_mode" = "Intră în modul Muzică";
 "osc_toolbar.sub_track" = "Alege pista de subtitrare";
 "osc_toolbar.screenshot" = "Faceți o captură de ecran";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "Afișează panoul de extensii";
 
 "mini_player.album_art" = "Comută coperta albumului";
 "mini_player.loop" = "Repetare";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Volum";
 "mini_player.close" = "Închide modul muzică";
 "mini_player.back" = "Înapoi la modul video";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Sortează playlist-ul";
 
 // Touch bar
 

@@ -6,8 +6,8 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignore";
-"cmd.seek" = "Seek";
+"cmd.ignore" = "ئېتىبارسىز قاراش";
+"cmd.seek" = "ئاتلاپ كېتىش";
 "cmd.revert-seek" = "Revert seek";
 "cmd.set" = "Set";
 "cmd.cycle" = "Cycle";
@@ -34,8 +34,8 @@
 "cmd.loadlist" = "Load playlist";
 "cmd.run" = "Run";
 
-"iina.flip" = "Flip";
-"iina.mirror" = "Mirror";
+"iina.flip" = "ئېتىش";
+"iina.mirror" = "ئەينەك";
 
 "iina.toggle-pip" = "Toggle Picture-in-Picture";
 "iina.toggle-music-mode" = "Toggle Music Mode";

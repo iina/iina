@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer… %d%%";
 "main.opening_stream" = "Apertura stream…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Ricerca…";
 "osc.precision" = "Precisione";
 "osc.1s" = "1 secondo";
 "osc.100ms" = "100 millisecondi";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "%@ sul totale";
 "playlist.total_length_with_selected" = "%@ di %@ selezionato";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Ordinamento";
+"playlist.sorting.filename_ascending" = "Nome file ↑";
+"playlist.sorting.filename_descending" = "Nome file ↓";
+"playlist.sorting.path_ascending" = "Percorso file ↑";
+"playlist.sorting.path_descending" = "Percorso file ↓";
 "pl_menu.title_multi" = "%d Elementi";
 "pl_menu.play_next" = "Riproduci il successivo";
 "pl_menu.play_in_new_window" = "Riproduci in una nuova finestra";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Chiudi la modalità musica";
 "mini_player.back" = "Torna alla modalità video";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Ordina la playlist";
 
 // Touch bar
 

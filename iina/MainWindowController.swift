@@ -1596,6 +1596,10 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
+    
+    if case .animating(_, _, _) = fsState, player.info.state == .paused {
+      forceDraw("Window entered full screen animation while paused")
+    }
 
     // interactive mode
     if isInInteractiveMode {

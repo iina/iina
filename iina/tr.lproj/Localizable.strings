@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Arabelleğe alınıyor... %%%d";
 "main.opening_stream" = "Akış açılıyor...";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Sarılıyor…";
 "osc.precision" = "Kesinlik";
 "osc.1s" = "1 saniye";
 "osc.100ms" = "100 milisaniye";
@@ -46,7 +46,7 @@
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Saptanmış";
-"quicksetting.item_none" = "Hiçbiri";
+"quicksetting.item_none" = "Yok";
 "quicksetting.hwdec" = "Donanımsal Kod Çözücü";
 "quicksetting.deinterlace" = "Taramasızlık";
 "quicksetting.hdr" = "HDR";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "toplamda %@";
 "playlist.total_length_with_selected" = "%@/%@ seçili";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Sıralama";
+"playlist.sorting.filename_ascending" = "Artan Dosya Adı";
+"playlist.sorting.filename_descending" = "Azalan Dosya Adı";
+"playlist.sorting.path_ascending" = "Artan Dosya Yolu";
+"playlist.sorting.path_descending" = "Azalan Dosya Yolu";
 "pl_menu.title_multi" = "%d Öğe";
 "pl_menu.play_next" = "Sonrakini Oynat";
 "pl_menu.play_in_new_window" = "Yeni Pencerede Oynat";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Ses düzeyi";
 "mini_player.close" = "Müzik kipini kapat";
 "mini_player.back" = "Video kipine geri dön";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Oynatma listesini sırala";
 
 // Touch bar
 

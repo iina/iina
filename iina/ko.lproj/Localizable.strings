@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "버퍼링… %d%%";
 "main.opening_stream" = "스트림 여는 중…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "찾는 중…";
 "osc.precision" = "정밀도";
 "osc.1s" = "1초";
 "osc.100ms" = "100밀리초";
@@ -169,11 +169,11 @@
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.no" = "자막 스크립트가 명시한 대로 자막 표시, 덮어쓰지 않음.";
 "preference.sub_override_level.descriptive_text.force" = "전체 자막 스타일 적용.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.scale" = "이 섹션의 스타일 설정 및 크기 설정 적용.";
+"preference.sub_override_level.descriptive_text.strip" = "자막의 모든 ASS 태그와 스타일 완전히 제거.";
+"preference.sub_override_level.descriptive_text.yes" = "이 섹션의 모든 스타일 설정 적용.";
 
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
@@ -220,13 +220,13 @@
 "menu.crop_custom" = "사용자 설정…";
 "menu.find_online_sub" = "%@에서 온라인 자막 찾기";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
+"menu.manage_plugins" = "플러그인 관리…";
+"menu.developer_tool" = "개발자 툴";
+"menu.more_plugin" = "더보기…";
 "menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.reload_plugins" = "모든 플러그인 새로고침";
+"menu.show_plugins_panel" = "플러그인 패널 표시";
+"menu.hide_plugins_panel" = "플러그인 패널 숨기기";
 
 "track.audio" = "오디오";
 "track.none" = "<없음>";
@@ -257,7 +257,7 @@
 "alert.error_saving_file" = "%@: %@을 저장하는 도중 오류가 발생했습니다.";
 "alert.error_deleting_file" = "파일을 삭제할 수 없습니다.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "값 \"%@\"는 올바르지 않습니다.\n10에서 10000 사이의 값 또는 0을 입력해 주세요.";
 
 "alert.config.new.title" = "새 설정 파일";
 "alert.config.new.message" = "새 설정 파일의 이름을 입력하십시오.";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "전체 %@";
 "playlist.total_length_with_selected" = "%@ 선택됨 / 전체 %@";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "정렬";
+"playlist.sorting.filename_ascending" = "이름 오름차순";
+"playlist.sorting.filename_descending" = "이름 내림차순";
+"playlist.sorting.path_ascending" = "파일 경로 오름차순";
+"playlist.sorting.path_descending" = "파일 경로 내림차순";
 "pl_menu.title_multi" = "%d개의 항목";
 "pl_menu.play_next" = "다음 항목 재생";
 "pl_menu.play_in_new_window" = "새 윈도우에서 재생";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "음량";
 "mini_player.close" = "음악 모드 닫기";
 "mini_player.back" = "비디오 모드로 복귀";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "플레이리스트 정렬";
 
 // Touch bar
 

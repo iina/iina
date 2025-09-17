@@ -2206,6 +2206,10 @@ class PlayerCore: NSObject {
     syncUI(.time)
     reloadSavedIINAfilters()
     
+    // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
+    // We can't put this in MPV_EVENT_VIDEO_RECONFIG because it can be emitted with the old video's size
+    // after switching to a new video.
+    // We should keep these flags until a MPV_EVENT_VIDEO_RECONFIG with the new video's size.
     info.justOpenedFile = false
     info.justStartedFile = false
 

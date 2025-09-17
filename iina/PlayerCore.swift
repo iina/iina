@@ -2144,7 +2144,9 @@ class PlayerCore: NSObject {
       info.isNetworkResource = false
     }
     receivedEndFileWhileLoading = false
-    if info.state.loaded {
+    // close the window if stopped
+    if info.state.loaded ||  // stopped by mpv
+        (info.state == .stopping && (currentWindow?.isVisible ?? false)) {  // user sent stop command
       DispatchQueue.main.async {
         self.currentController.close()
       }

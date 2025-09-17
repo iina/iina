@@ -1221,7 +1221,7 @@ class MainWindowController: PlayerWindowController {
   ///     [showWindow](https://developer.apple.com/documentation/appkit/nswindowcontroller/showwindow(_:))
   ///     will adjust the origin such that the window is within the current screen of the window. This will happen when
   ///     `determineScreenToUse` selects a different screen for the window based on `MainWindowLastPosition`.  To
-  ///     workaround the AppKit behavior requires allowing `showWindow` to complete and then reseting the origin to display the
+  ///     workaround the AppKit behavior requires allowing `showWindow` to complete and then resetting the origin to display the
   ///     window on the correct screen.
   /// - Parameter sender: The control sending the message; can be `nil`.
   override func showWindow(_ sender: Any?) {

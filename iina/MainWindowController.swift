@@ -1215,10 +1215,25 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Window delegate: Open / Close
 
-  /** A method being called when window open. Pretend to be a window delegate. */
+  /// Displays the window.
+  /// - Important: AppKit will refuse to move a window to a different screen before the window has been shown. If the origin
+  ///     places the window on a screen other than `window.screen` then
+  ///     [showWindow](https://developer.apple.com/documentation/appkit/nswindowcontroller/showwindow(_:))
+  ///     will adjust the origin such that the window is within the current screen of the window. This will happen when
+  ///     `determineScreenToUse` selects a different screen for the window based on `MainWindowLastPosition`.  To
+  ///     workaround the AppKit behavior requires allowing `showWindow` to complete and then reseting the origin to display the
+  ///     window on the correct screen.
+  /// - Parameter sender: The control sending the message; can be `nil`.
   override func showWindow(_ sender: Any?) {
+    let origin = window?.frame.origin
     super.showWindow(sender)
-
+    if let window, let origin, window.frame.origin != origin {
+      window.alphaValue = 0
+      DispatchQueue.main.async {
+        window.setFrameOrigin(origin)
+        window.alphaValue = 1
+      }
+    }
     resetCollectionBehavior()
     // update buffer indicator view
     updateBufferIndicatorView()

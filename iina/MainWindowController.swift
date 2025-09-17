@@ -2507,7 +2507,7 @@ class MainWindowController: PlayerWindowController {
       return window.selectDefaultScreen()
     }
     let rect = NSRectFromString(rectString)
-    guard let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.visibleFrame) }) else {
+    guard let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.frame) }) else {
       // The previous window origin is not on any screen. Could be an external screen is no longer
       // connected or the arrangement of the screens has changed.
       log("MainWindowLastPosition \(rect.origin) is not within any screens")

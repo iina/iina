@@ -355,7 +355,7 @@ class PlayerCore: NSObject {
       return
     }
     log("Open URL: \(url.absoluteString)")
-    let isNetwork = !url.isFileURL
+    let isNetwork = !url.isFileURL || url.pathExtension.starts(with: "m3u")
     if isNetwork {
       currentWindow?.close()
     }
@@ -363,7 +363,7 @@ class PlayerCore: NSObject {
       info.shouldAutoLoadFiles = true
     }
     info.hdrEnabled = Preference.bool(for: .enableHdrSupport)
-    let path = isNetwork ? url.absoluteString : url.path
+    let path = url.isFileURL ? url.path : url.absoluteString
     openMainWindow(path: path, url: url, isNetwork: isNetwork)
   }
 

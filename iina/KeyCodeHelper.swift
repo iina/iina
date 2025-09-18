@@ -269,7 +269,7 @@ class KeyCodeHelper {
 
   static func mpvKeyCode(from event: NSEvent) -> String {
     var keyString = ""
-    let keyChar: String
+    var keyChar: String
     let keyCode = event.keyCode
     var modifiers = event.modifierFlags
 
@@ -287,6 +287,10 @@ class KeyCodeHelper {
       }
       keyChar = keyName.0
     }
+    if keyChar == "#" {
+      keyChar = "SHARP"
+    }
+    
     /// Modifiers: use the same order as `KeyCodeHelper.modifiersInOrder`
     if modifiers.contains(.control) {
       keyString += "\(CTRL_KEY)+"

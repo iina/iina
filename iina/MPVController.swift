@@ -87,6 +87,7 @@ struct MPVHookValue {
 class MPVController: NSObject {
   struct UserData {
     static let screenshot: UInt64 = 1000000
+    static let screenshot_raw: UInt64 = 1000001
   }
 
   // The mpv_handle
@@ -1211,9 +1212,54 @@ class MPVController: NSObject {
           DispatchQueue.main.async {
             Utility.showAlert("screenshot.error_taking")
           }
-          return
+          break
         }
         DispatchQueue.main.async { self.player.screenshotCallback() }
+      } else if reply == MPVController.UserData.screenshot_raw {
+        let node = UnsafePointer<mpv_node>(OpaquePointer(event.pointee.data))
+        let dict = (try? MPVNode.parse(node!.pointee)) as! [String: Any?]
+
+        func nsImageFromBGR0(bytes: [UInt8], width: Int, height: Int) -> NSImage? {
+            let bitsPerComponent = 8
+            let bytesPerPixel = 4
+            let bytesPerRow = width * bytesPerPixel
+
+            guard let provider = CGDataProvider(data: NSData(bytes: bytes, length: bytes.count)) else {
+                return nil
+            }
+
+            let colorSpace = CGColorSpaceCreateDeviceRGB()
+
+            // Correct bitmap info for BGR0 (B, G, R, padding)
+            let bitmapInfo = CGBitmapInfo(rawValue:
+                CGImageAlphaInfo.noneSkipFirst.rawValue |
+                CGBitmapInfo.byteOrder32Little.rawValue
+            )
+
+            guard let cgImage = CGImage(
+                width: width,
+                height: height,
+                bitsPerComponent: bitsPerComponent,
+                bitsPerPixel: bytesPerPixel * bitsPerComponent,
+                bytesPerRow: bytesPerRow,
+                space: colorSpace,
+                bitmapInfo: bitmapInfo,
+                provider: provider,
+                decode: nil,
+                shouldInterpolate: true,
+                intent: .defaultIntent
+            ) else {
+                return nil
+            }
+
+            return NSImage(cgImage: cgImage, size: NSSize(width: width, height: height))
+        }
+
+        let image = nsImageFromBGR0(bytes: dict["data"] as! [UInt8], width: Int(dict["w"] as! Int64), height: Int(dict["h"] as! Int64))
+        if #available(macOS 13.0, *) {
+          guard let image else { break }
+          player.mainWindow.showAnalysis(with: image)
+        }
       }
 
     case MPV_EVENT_QUEUE_OVERFLOW:

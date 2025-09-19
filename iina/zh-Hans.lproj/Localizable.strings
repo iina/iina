@@ -208,8 +208,8 @@
 
 "menu.seek_forward" = "渐进 %@秒";
 "menu.seek_backward" = "渐退 %@秒";
-"menu.speed_up" = "加快播放速度快捷键";
-"menu.speed_down" = "降低播放速度快捷键";
+"menu.speed_up" = "加速 %@ 倍";
+"menu.speed_down" = "减速 %@ 倍";
 "menu.volume_up" = "音量 + %@%%";
 "menu.volume_down" = "音量 - %@%%";
 "menu.audio_delay_up" = "音频延迟 + %@秒";
@@ -222,7 +222,7 @@
 
 "menu.manage_plugins" = "菜单管理器插件";
 "menu.developer_tool" = "菜单开发者工具";
-"menu.more_plugin" = "增加插件";
+"menu.more_plugin" = "更多…";
 "menu.conflicting_shortcuts" = "相互冲突的快捷键…";
 "menu.reload_plugins" = "重新加载所有插件";
 "menu.show_plugins_panel" = "显示插件面板";

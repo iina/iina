@@ -493,7 +493,7 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var osdStackView: NSStackView!
   @IBOutlet weak var osdLabel: NSTextField!
   @IBOutlet weak var osdAccessoryText: NSTextField!
-  @IBOutlet weak var osdAccessoryProgress: NSProgressIndicator!
+  @IBOutlet weak var osdAccessoryProgress: FixedProgressBar!
 
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
@@ -613,7 +613,6 @@ class MainWindowController: PlayerWindowController {
     thumbnailPeekView.isHidden = true
 
     // other initialization
-    osdAccessoryProgress.usesThreadedAnimation = false
     titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     cachedScreenCount = NSScreen.screens.count
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {

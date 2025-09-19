@@ -7,30 +7,30 @@
 */
 
 "cmd.ignore" = "Ignore";
-"cmd.seek" = "Seek";
+"cmd.seek" = "มองหา";
 "cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
+"cmd.set" = "ตั้ง​ค่า";
+"cmd.cycle" = "วงจร";
 "cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
-"cmd.multiply" = "Multiply";
-"cmd.frame-step" = "Next frame";
-"cmd.frame-back-step" = "Previous frame";
+"cmd.add" = "เปลี่ยนแปลง";
+"cmd.multiply" = "คูณ";
+"cmd.frame-step" = "เฟรมถัดไป";
+"cmd.frame-back-step" = "เฟรมก่อนหน้า";
 "cmd.ab-loop" = "A-B loop";
 "cmd.sub-seek" = "Subtitle seek";
-"cmd.playlist-next" = "Next media";
-"cmd.playlist-prev" = "Previous media";
+"cmd.playlist-next" = "สื่อถัดไป";
+"cmd.playlist-prev" = "สื่อก่อนหน้า";
 "cmd.playlist-move" = "Move playlist item";
-"cmd.playlist-clear" = "Clear playlist";
+"cmd.playlist-clear" = "ล้างเพลย์ลิสต์";
 "cmd.playlist-remove" = "Remove current";
-"cmd.playlist-shuffle" = "Shuffle";
+"cmd.playlist-shuffle" = "สุ่ม";
 "cmd.write-watch-later-config" = "Record play history";
-"cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
+"cmd.stop" = "หยุด";
+"cmd.quit" = "ออก";
 "cmd.quit-watch-later" = "Quit (save progress)";
-"cmd.screenshot" = "Screenshot";
+"cmd.screenshot" = "จับภาพหน้าจอ";
 "cmd.screenshot-to-file" = "Screenshot to file";
-"cmd.loadfile" = "Load file";
+"cmd.loadfile" = "โหลดไฟล์";
 "cmd.loadlist" = "Load playlist";
 "cmd.run" = "Run";
 
@@ -84,7 +84,7 @@
 "opt.window-scale" = "Window scale";
 
 "opt.video" = "Video track";
-"opt.video-aspect" = "Video aspect";
+"opt.video-aspect-override" = "Video aspect";
 "opt.contrast" = "Contrast";
 "opt.brightness" = "Brightness";
 "opt.gamma" = "Gamma";

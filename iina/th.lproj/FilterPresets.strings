@@ -10,7 +10,7 @@
 
 
 "crop" = "ตัด";
-"crop.w" = "ความกว้าง";
+"crop.w" = "Width (default: video width)";
 "crop.h" = "ความสูง";
 "crop.x" = "จุด x เริ่มต้น";
 "crop.y" = "จุด y เริ่มต้น";
@@ -48,8 +48,8 @@
 
 "custom_mpv" = "";
 "custom_mpv.name" = "Filter name";
-"custom_mpv.string" = "Filter value";
+"custom_mpv.string" = "";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
+"custom_ffmpeg" = "";
 "custom_ffmpeg.name" = "Filter name";
 "custom_ffmpeg.string" = "Filter name";

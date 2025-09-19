@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferen… %d%%";
 "main.opening_stream" = "Stream openen…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Zoeken…";
 "osc.precision" = "Precisie";
 "osc.1s" = "1 seconde";
 "osc.100ms" = "100 milliseconden";
@@ -164,8 +164,8 @@
 "preference.enable_adv_settings" = "Geavanceerde instellingen inschakelen";
 
 "preference.sub_override_level.no" = "nee";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.force" = "forceer";
+"preference.sub_override_level.scale" = "schaal";
 "preference.sub_override_level.strip" = "volledig";
 "preference.sub_override_level.yes" = "ja";
 

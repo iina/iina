@@ -147,7 +147,7 @@ enum OSDMessage {
       return (text, .withPosition(percent))
 
     case .volume(let value):
-      let text = String(format: NSLocalizedString("osd.volume", comment: "Volume: %@"), value.stringWithMaxFractionDigits2)
+      let text = String(format: NSLocalizedString("osd.volume", comment: "Volume: %@"), String(format: "%.0f", value))
       return (text, .withProgress(value / Preference.double(for: .maxVolume)))
 
     case .speed(let value):

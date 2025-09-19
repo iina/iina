@@ -270,11 +270,11 @@ extension NSRect {
     if newOrigin.y < biggerRect.origin.y {
       newOrigin.y = biggerRect.origin.y
     }
-    if newOrigin.x + width > biggerRect.origin.x + biggerRect.width {
-      newOrigin.x = biggerRect.origin.x + biggerRect.width - width
+    if newOrigin.x + newSize.width > biggerRect.origin.x + biggerRect.width {
+      newOrigin.x = biggerRect.origin.x + biggerRect.width - newSize.width
     }
-    if newOrigin.y + height > biggerRect.origin.y + biggerRect.height {
-      newOrigin.y = biggerRect.origin.y + biggerRect.height - height
+    if newOrigin.y + newSize.height > biggerRect.origin.y + biggerRect.height {
+      newOrigin.y = biggerRect.origin.y + biggerRect.height - newSize.height
     }
     return NSRect(origin: newOrigin, size: newSize)
   }

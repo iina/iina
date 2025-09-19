@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
 "main.opening_stream" = "Lancement du stream…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Recherche…";
 "osc.precision" = "Précision";
 "osc.1s" = "1 seconde";
 "osc.100ms" = "100 millisecondes";
@@ -176,7 +176,7 @@
 "preference.sub_override_level.descriptive_text.yes" = "Appliquer tous les paramètres de style dans cette section.";
 
 "preference.ytdl_plugin_not_installed" = "Installez le plugin Media en ligne à partir de \"Plugins > Installer à partir de GitHub\" pour profiter des fonctionnalités avancées telles que le téléchargement vidéo et les mises à jour automatiques de yt-dlp.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_installed" = "La prise en charge intégrée de youtube-dl est désactivée puisque vous avez installé le plugin Online media.";
 
 "menu.volume" = "Volume : %@";
 "menu.volume_muted" = "Volume : %@ (coupé)";

@@ -1976,10 +1976,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     log("File loaded")
 
-    // Normally at this point the file will be playing. However if the IINA "Pause" setting is
-    // enabled under "When media is opened" IINA will have paused playback.
-    info.state =  mpv.getFlag(MPVOption.PlaybackControl.pause) ? .paused : .playing
-    syncUI(.playButton)
+    info.state = .loaded
 
     // Must force drawing to cover the case where this player was previously used to play a video
     // and is now playing an audio file without an album cover and without using music mode.
@@ -2030,9 +2027,7 @@ class PlayerCore: NSObject {
     if self.isInMiniPlayer {
       miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
     }
-    if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
-      mainWindow.toggleWindowFullScreen()
-    }
+
     // add to history
     if let url = info.currentURL {
       let duration = info.videoDuration ?? .zero
@@ -2479,6 +2474,15 @@ class PlayerCore: NSObject {
       currentController.pendingShow = false
       currentController.showWindow(self)
       AppDelegate.shared.openURLWindow.close()
+    }
+    if info.state == .loaded {
+      // Normally at this point the file will be playing. However if the IINA "Pause" setting is
+      // enabled under "When media is opened" IINA will have paused playback.
+      info.state =  mpv.getFlag(MPVOption.PlaybackControl.pause) ? .paused : .playing
+      syncUI(.playButton)
+      if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
+        mainWindow.toggleWindowFullScreen()
+      }
     }
   }
 

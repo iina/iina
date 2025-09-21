@@ -1222,14 +1222,20 @@ class MainWindowController: PlayerWindowController {
   ///     will adjust the origin such that the window is within the current screen of the window. This will happen when
   ///     `determineScreenToUse` selects a different screen for the window based on `MainWindowLastPosition`.  To
   ///     workaround the AppKit behavior requires allowing `showWindow` to complete and then resetting the origin to display the
-  ///     window on the correct screen.
+  ///     window on the correct screen. As of macOS Tahoe AppKit has been fixed, so the workaround will find the origin has not
+  ///     changed and will not kick in.
   /// - Parameter sender: The control sending the message; can be `nil`.
   override func showWindow(_ sender: Any?) {
     let origin = window?.frame.origin
     super.showWindow(sender)
     if let window, let origin, window.frame.origin != origin {
+      log("""
+          NSWindowController.showWindow changed origin from \(origin) to \(window.frame.origin), \
+          will reset origin
+          """)
       window.alphaValue = 0
       DispatchQueue.main.async {
+        self.log("Resetting origin changed by showWindow back to \(origin)")
         window.setFrameOrigin(origin)
         window.alphaValue = 1
       }

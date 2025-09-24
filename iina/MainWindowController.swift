@@ -1215,15 +1215,46 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Window delegate: Open / Close
 
-  /** A method being called when window open. Pretend to be a window delegate. */
+  /// Displays the window.
+  /// - Important: AppKit will refuse to move a window to a different screen before the window has been shown. If the origin
+  ///     places the window on a screen other than `window.screen` then
+  ///     [showWindow](https://developer.apple.com/documentation/appkit/nswindowcontroller/showwindow(_:))
+  ///     will adjust the origin such that the window is within the current screen of the window. This will happen when
+  ///     `determineScreenToUse` selects a different screen for the window based on `MainWindowLastPosition`.  To
+  ///     workaround the AppKit behavior requires allowing `showWindow` to complete and then resetting the origin to display the
+  ///     window on the correct screen. As of macOS Tahoe this AppKit defect has been fixed.
+  /// - Parameter sender: The control sending the message; can be `nil`.
   override func showWindow(_ sender: Any?) {
+    guard let window else { return }
+    log("Showing window at \(window.frame)")
+    let origin = window.frame.origin
     super.showWindow(sender)
-
+    if #unavailable(macOS 26), Preference.bool(for: .enableWrongScreenWorkaround),
+       NSScreen.screens.count > 1, window.frame.origin != origin {
+      log("NSWindowController.showWindow changed origin from \(origin) to \(window.frame.origin)")
+      if player.info.state == .loaded, Preference.bool(for: .fullScreenWhenOpen),
+         !fsState.isFullscreen, !player.isInMiniPlayer {
+        // PlayerCore.notifyWindowVideoSizeChanged will be toggling the window into full screen
+        // mode. Merely resetting the origin works when NSWindow.toggleFullScreen is called.
+        log("Resetting window origin to \(origin)")
+        window.setFrameOrigin(origin)
+      } else {
+        // When not immediately toggling into full screen mode resetting the origin will not work
+        // unless it is done in another task.
+        log("Applying workaround for AppKit using the wrong screen")
+        window.alphaValue = 0
+        DispatchQueue.main.async {
+          self.log("Resetting window origin to \(origin)")
+          window.setFrameOrigin(origin)
+          window.alphaValue = 1
+        }
+      }
+    }
     resetCollectionBehavior()
     // update buffer indicator view
     updateBufferIndicatorView()
     // start tracking mouse event
-    guard let w = self.window, let cv = w.contentView else { return }
+    guard let cv = window.contentView else { return }
     if cv.trackingAreas.isEmpty {
       cv.addTrackingArea(NSTrackingArea(rect: cv.bounds,
                                         options: [.activeAlways, .enabledDuringMouseDrag, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
@@ -2504,17 +2535,22 @@ class MainWindowController: PlayerWindowController {
   private func determineScreenToUse(_ window: NSWindow) -> NSScreen {
     // If the window is currently showing on a screen, use this screen
     if window.isOnActiveSpace, let currentScreen = window.screen {
+      NSScreen.log("Window is currently showing screen", currentScreen)
       return currentScreen
     }
     guard let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String else {
-      return window.selectDefaultScreen()
+      let selected = window.selectDefaultScreen()
+      NSScreen.log("MainWindowLastPosition not found, using default screen", selected)
+      return selected
     }
     let rect = NSRectFromString(rectString)
     guard let lastScreen = NSScreen.screens.first(where: { NSPointInRect(rect.origin, $0.frame) }) else {
       // The previous window origin is not on any screen. Could be an external screen is no longer
       // connected or the arrangement of the screens has changed.
-      log("MainWindowLastPosition \(rect.origin) is not within any screens")
-      return window.selectDefaultScreen()
+      let selected = window.selectDefaultScreen()
+      NSScreen.log("MainWindowLastPosition \(rect.origin) is not within any screens, using default screen",
+                   selected)
+      return selected
     }
     // Found a screen containing the previous window origin. Use that screen for the window.
     NSScreen.log("MainWindowLastPosition \(rect.origin) matched", lastScreen)
@@ -2564,6 +2600,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     if needResizeWindow {
+      log("Need to resize window")
       // get videoSize on screen
       var videoSize = originalVideoSize
       if Preference.bool(for: .usePhysicalResolution) {
@@ -2627,6 +2664,7 @@ class MainWindowController: PlayerWindowController {
     shouldApplyInitialWindowSize = false
 
     if fsState.isFullscreen {
+      log("In full screen mode, setting prior window frame")
       fsState.priorWindowedFrame = rect
     } else {
       let rectBefore = rect

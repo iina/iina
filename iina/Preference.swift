@@ -342,6 +342,9 @@ struct Preference {
     /// Internal setting to allow disabling the feature that detects when a display is idle and shuts down the display link to save energy
     /// in case a problem is found where the display link is shut down when it is needed.
     static let enableDisplayIdle = Key("enableDisplayIdle")
+
+    /// Workaround for AppKit defect where showWindow moves the window to a different screen (fixed as of macOS Tahoe).
+    static let enableWrongScreenWorkaround = Key("enableWrongScreenWorkaround")
   }
 
   // MARK: - Enums
@@ -988,7 +991,8 @@ struct Preference {
     .enableFFmpegImageDecoder: true,
     .enableHdrWorkaround: false,
     .enableNowPlayingArtwork: true,
-    .enableDisplayIdle: true
+    .enableDisplayIdle: true,
+    .enableWrongScreenWorkaround: true
   ]
 
 

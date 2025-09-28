@@ -787,10 +787,42 @@ extension NSScreen {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
-    // Unfortunately localizedName is not available until macOS Catalina.
+    var message = "\(label), \(screen.localizedName)"
+    if screen == NSScreen.main {
+      message += " (main screen)"
+    }
+    let screenNumberKey = NSDeviceDescriptionKey(rawValue: "NSScreenNumber")
+    if let displayId = screen.deviceDescription[screenNumberKey] as? CGDirectDisplayID {
+      message += ", on display \(displayId)"
+    }
+    message += ":"
+    message += "\n  Frame: \(screen.frame), visible \(screen.visibleFrame)"
+    message += "\n  \(formEDRMessage(screen))"
+    Logger.log(message, subsystem: subsystem)
+  }
+
+  /// Log EDR aspects of the given `NSScreen` object.
+  /// - parameter screen: The `NSScreen` object to log EDR aspects of.
+  static func logEDR(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
+    guard let screen = screen else {
+      Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
+      return
+    }
+    var message = "\(label), \(screen.localizedName):"
+    message += "\n  \(formEDRMessage(screen))"
+    Logger.log(message, subsystem: subsystem)
+  }
+
+  /// Return a string describing EDR aspects of the given screen.
+  /// - Parameter screen: The `NSScreen` object to form EDR aspects of.
+  /// - Returns: A string with EDR related details of the given screen for use in a log message.
+  private static func formEDRMessage(_ screen: NSScreen) -> String {
     let maxPossibleEDR = screen.maximumPotentialExtendedDynamicRangeColorComponentValue
     let canEnableEDR = maxPossibleEDR > 1.0
-    Logger.log("\(label): \"\(screen.localizedName)\" visible frame \(screen.visibleFrame) EDR: {supports=\(canEnableEDR) maxPotential=\(maxPossibleEDR) maxCurrent=\(screen.maximumExtendedDynamicRangeColorComponentValue)}", subsystem: subsystem)
+    return """
+      EDR: \(canEnableEDR ? "Supported" : "Not supported"), max potential \(maxPossibleEDR), \
+      max current \(screen.maximumExtendedDynamicRangeColorComponentValue)
+      """
   }
 }
 

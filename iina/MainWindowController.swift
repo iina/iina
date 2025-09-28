@@ -653,6 +653,7 @@ class MainWindowController: PlayerWindowController {
       // Update the cached value
       cachedScreenCount = screenCount
       videoView.updateDisplayLink()
+      DisplayController.shared.addNewDisplays()
       // In normal full screen mode AppKit will automatically adjust the window frame if the window
       // is moved to a new screen such as when the window is on an external display and that display
       // is disconnected. In legacy full screen mode IINA is responsible for adjusting the window's
@@ -694,9 +695,10 @@ class MainWindowController: PlayerWindowController {
 
     // As there have been issues in this area, log details about the screen selection process.
     NSScreen.log("window.screen", window.screen)
-    NSScreen.log("NSScreen.main", NSScreen.main)
     NSScreen.screens.enumerated().forEach { screen in
-      NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
+      if screen.element != window.screen {
+        NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
+      }
     }
 
     // If a video is not actively playing then the initial drawing of the view needs to be forced.

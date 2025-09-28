@@ -165,6 +165,7 @@
 		51165FC02E1D91940060B817 /* ReadWriteLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51165FBF2E1D91940060B817 /* ReadWriteLock.swift */; };
 		511BF43C2E12FF8800E9721E /* VolumeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BF43B2E12FF8800E9721E /* VolumeSlider.swift */; };
 		511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511BF43D2E1305C800E9721E /* MiniPlaySlider.swift */; };
+		5125117D2E89B2ED00CDAE9F /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5125117C2E89B2ED00CDAE9F /* Display.swift */; };
 		512B8FDD2BC2376E00AF41BF /* OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512B8FDC2BC2376E00AF41BF /* OutlineView.swift */; };
 		513A4FFA29B53F8100A8EA7D /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A4FF929B53F8100A8EA7D /* Atomic.swift */; };
 		515B5E5A2A579903001FCD49 /* iina-plugin in Copy Executables */ = {isa = PBXBuildFile; fileRef = E38558872A484A2D0083772D /* iina-plugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -182,6 +183,7 @@
 		51DE55C92A6646710050AD06 /* Sysctl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51DE55C82A6646710050AD06 /* Sysctl.swift */; };
 		51E63DFB29CFB031008AFC20 /* PlaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E63DFA29CFB031008AFC20 /* PlaySlider.swift */; };
 		51E63DFD29CFB04C008AFC20 /* PlaySliderLoopKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E63DFC29CFB04B008AFC20 /* PlaySliderLoopKnob.swift */; };
+		51EDB4722E85EE10007E5018 /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDB4712E85EE10007E5018 /* DisplayController.swift */; };
 		51F7974728C7E00200812D0D /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F7974628C7E00200812D0D /* Lock.swift */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
@@ -1198,6 +1200,7 @@
 		51165FBF2E1D91940060B817 /* ReadWriteLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLock.swift; sourceTree = "<group>"; };
 		511BF43B2E12FF8800E9721E /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
 		511BF43D2E1305C800E9721E /* MiniPlaySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlaySlider.swift; sourceTree = "<group>"; };
+		5125117C2E89B2ED00CDAE9F /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		512B8FDC2BC2376E00AF41BF /* OutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
 		513A4FF929B53F8100A8EA7D /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		51537C7229FA26DD00F9A472 /* Nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Nightly.xcconfig; sourceTree = "<group>"; };
@@ -1218,6 +1221,7 @@
 		51DE55C82A6646710050AD06 /* Sysctl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sysctl.swift; sourceTree = "<group>"; };
 		51E63DFA29CFB031008AFC20 /* PlaySlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySlider.swift; sourceTree = "<group>"; };
 		51E63DFC29CFB04B008AFC20 /* PlaySliderLoopKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderLoopKnob.swift; sourceTree = "<group>"; };
+		51EDB4712E85EE10007E5018 /* DisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
 		51F7974628C7E00200812D0D /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		5879479521A87DD700757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		5879479621A87E6100757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
@@ -2252,6 +2256,7 @@
 				84EC12881F504D2500137C1E /* FilterPresets.strings */,
 				E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */,
 				84C6D3631EB276E9009BF721 /* PlaybackHistory.swift */,
+				5125117C2E89B2ED00CDAE9F /* Display.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2476,6 +2481,7 @@
 				842904E11F0EC01600478376 /* AutoFileMatcher.swift */,
 				846121BC1F35FCA500ABB39C /* DraggingDetect.swift */,
 				5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */,
+				51EDB4712E85EE10007E5018 /* DisplayController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -3206,12 +3212,14 @@
 				519CCABD2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift in Sources */,
 				E38BA1C0253E54F2000B551D /* JavascriptAPIGlobal.swift in Sources */,
 				E39A11FD240F176E00A67F9F /* StringEncodingName.swift in Sources */,
+				5125117D2E89B2ED00CDAE9F /* Display.swift in Sources */,
 				E33FEEB52229A44F00B59711 /* JavascriptAPIUtils.swift in Sources */,
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
 				E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
 				E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */,
+				51EDB4722E85EE10007E5018 /* DisplayController.swift in Sources */,
 				841A599D1E1FF5800079E177 /* SleepPreventer.swift in Sources */,
 				51165FBC2E1D91290060B817 /* ReadWriteAtomic.swift in Sources */,
 				84ED99FF1E009C8100A5159B /* PrefAdvancedViewController.swift in Sources */,

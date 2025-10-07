@@ -757,14 +757,13 @@ return -1;\
       // For this stream to be cover artwork it must be an attached picture (APIC).
       if ((stream->disposition & AV_DISPOSITION_ATTACHED_PIC) == 0) { continue; }
 
-      // The stream must contain metadata with the key "title" and value "thumbnail".
-      AVDictionaryEntry *tag = NULL;
-      tag = av_dict_get(stream->metadata, "title", NULL, 0);
-      if (tag == NULL || strcmp(tag->value, "thumbnail") != 0) { continue; }
+      // And it must not be a stream of thumbnail images.
+      if ((stream->disposition & AV_DISPOSITION_TIMED_THUMBNAILS) != 0) { continue; }
 
-      // As well as metadata with the key "comment" and value "Cover (front)".
-      tag = av_dict_get(stream->metadata, "comment", NULL, 0);
-      if (tag == NULL || strcmp(tag->value, "Cover (front)") != 0) { continue; }
+      // If a stream passes these two checks mpv identifies it as album art. To match up with mpv
+      // this is all IINA checks as well. ID3v2 defines picture types, but I did not find any code
+      // in mpv checking to confirm the image is marked as front cover art. The list of picture
+      // types can be found here: https://id3.org/id3v2.3.0#Attached_picture
 
       // Found front cover artwork.
       packet = &stream->attached_pic;

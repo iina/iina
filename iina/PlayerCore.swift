@@ -485,6 +485,13 @@ class PlayerCore: NSObject {
       mainWindow.videoView.displayActive()
     }
 
+    // If this mpv core is being reused icc-profile-auto may have been left set to true. This option
+    // MUST be reset to false to avoid a crash that occurs if the mpv OSD is being used. Another way
+    // to fix this would be to add this option to the mpv reset-on-next-file option. However the
+    // user might override IINA and set that option themselves and not include icc-profile-auto.
+    // Better to directly reset icc-profile-auto. See issue #5727 for details.
+    mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
+
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading

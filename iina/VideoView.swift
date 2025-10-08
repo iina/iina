@@ -317,8 +317,10 @@ class VideoView: NSView {
     } else if let screenColorSpace {
       let name = screenColorSpace.localizedName ?? "unnamed"
       logHDR("Using the ICC profile of the color space \(name)")
-      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
+      // Set MPV_RENDER_PARAM_ICC_PROFILE before enabling icc-profile-auto to true as mpv requires
+      // that parameter be set in the render context when icc-profile-auto is in use.
       videoLayer.setRenderICCProfile(screenColorSpace)
+      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
     }
 
     let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB

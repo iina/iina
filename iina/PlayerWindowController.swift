@@ -283,6 +283,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       case MPVCommand.screenshot.rawValue:
         return player.screenshot(fromKeyBinding: keyBinding)
         
+      case MPVCommand.showProgress.rawValue:
+        showTimestampWithPosition()
+        returnValue = 0
+        
       default:
         returnValue = player.mpv.command(rawString: keyBinding.rawAction)
       }
@@ -700,6 +704,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     default:
       break
     }
+  }
+
+  internal func showTimestampWithPosition() {
+    guard player.info.state.loaded else { return }
+    let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
+    (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+    let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 0
+    
+    player.sendOSD(.seek(osdText, percentage))
   }
 
   internal func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {

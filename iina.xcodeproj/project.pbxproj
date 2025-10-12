@@ -496,8 +496,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				518376DD2C23DD2300574F00 /* libgcc_s.1.1.dylib in Copy Dylibs */,
-				518376DE2C23DD2300574F00 /* libstdc++.6.dylib in Copy Dylibs */,
 				34ACABB72C142A0C00F871A0 /* libarchive.13.dylib in Copy Dylibs */,
 				34ACABB82C142A0C00F871A0 /* libass.9.dylib in Copy Dylibs */,
 				34ACABB92C142A0C00F871A0 /* libavcodec.61.dylib in Copy Dylibs */,
@@ -2357,7 +2355,6 @@
 				34ACAB452C142A0300F871A0 /* libfontconfig.1.dylib */,
 				34ACAB6D2C142A0500F871A0 /* libfreetype.6.dylib */,
 				34ACAB3B2C142A0300F871A0 /* libfribidi.0.dylib */,
-				518376D92C23DB1400574F00 /* libgcc_s.1.1.dylib */,
 				34ACAB4F2C142A0400F871A0 /* libglib-2.0.0.dylib */,
 				34ACAB6B2C142A0500F871A0 /* libgmp.10.dylib */,
 				34ACAB312C142A0300F871A0 /* libgnutls.30.dylib */,
@@ -2391,7 +2388,6 @@
 				34ACAB622C142A0400F871A0 /* libsodium.26.dylib */,
 				34ACAB5E2C142A0400F871A0 /* libsoxr.0.dylib */,
 				34ACAB702C142A0500F871A0 /* libspeex.1.dylib */,
-				518376DB2C23DB2F00574F00 /* libstdc++.6.dylib */,
 				34ACAB6C2C142A0500F871A0 /* libswresample.5.dylib */,
 				34ACAB432C142A0300F871A0 /* libswscale.8.dylib */,
 				34ACAB4D2C142A0400F871A0 /* libtasn1.6.dylib */,
@@ -3025,8 +3021,8 @@
 						ProvisioningStyle = Manual;
 					};
 					84EB1ED51D2F51D3004FA5A1 = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 67CQ77V27R;
+        CreatedOnToolsVersion = 7.3.1;
+          DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};

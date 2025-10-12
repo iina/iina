@@ -200,6 +200,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   // MARK: - App Delegate
 
   func applicationWillFinishLaunching(_ notification: Notification) {
+    // Must expand before mpv initialization since it may depend on proper paths in env vars
+    expandAppEnvironmentVariables()
+
     // Must setup preferences before logging so log level is set correctly.
     registerUserDefaultValues()
 
@@ -434,6 +437,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     AppDelegate.shared.menuController?.updatePluginMenu()
 
     MemoryUsage.shared.logUsage("after launching finished")
+  }
+
+  func expandAppEnvironmentVariables() {
+    guard let executablePath = Bundle.main.executablePath else { return }
+    let executableDir = URL(fileURLWithPath: executablePath).deletingLastPathComponent()
+    let bundleDir = URL(fileURLWithPath: Bundle.main.bundlePath)
+    let contentsDir = bundleDir.appendingPathComponent("Contents")
+    let resourcesDir = Bundle.main.resourceURL!
+
+    for (key, value) in ProcessInfo.processInfo.environment {
+      setenv(
+        key,
+        value
+          .replacingOccurrences(of: "@executable_path", with: executableDir.path)
+          .replacingOccurrences(of: "@loader_path", with: executableDir.path)
+          .replacingOccurrences(of: "@bundle_path", with: bundleDir.path)
+          .replacingOccurrences(of: "@contents_path", with: contentsDir.path)
+          .replacingOccurrences(of: "@resources_path", with: resourcesDir.path),
+        1
+      )
+    }
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */

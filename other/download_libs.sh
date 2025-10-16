@@ -111,7 +111,7 @@ fi
 DEPS_PATH="$ROOT_PATH/deps"
 LIB_PATH="$DEPS_PATH/lib"
 EXEC_PATH="$DEPS_PATH/executable"
-YT_DLP_PATH="$EXEC_PATH/youtube-dl"
+YT_DLP_PATH="$EXEC_PATH/iina-ytdl"
 
 IFS=$'\n' read -r -d '' -a files < <(curl "${DYLIBS_DOWNLOAD_PATH}/filelist.txt" && printf '\0')
 

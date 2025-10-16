@@ -539,6 +539,7 @@ class MPVController: NSObject {
     }
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions,
                   verboseIfDefault: true)
+    chkErr(setOptionString(MPVOption.ProgramBehavior.scriptOpts, "ytdl_hook-ytdl_path=iina-ytdl", level: .verbose))
     chkErr(setOptionString(MPVOption.ProgramBehavior.resetOnNextFile,
             "\(MPVOption.PlaybackControl.abLoopA),\(MPVOption.PlaybackControl.abLoopB)", level: .verbose))
 

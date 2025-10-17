@@ -561,7 +561,7 @@ class PlayerCore: NSObject {
   }
 
   func startMPV() {
-    // set path for youtube-dl
+    // set path for ytdl
     let oldPath = String(cString: getenv("PATH")!)
     var path = Utility.exeDirURL.path + ":" + oldPath
     if let customYtdlPath = Preference.string(for: .ytdlSearchPath), !customYtdlPath.isEmpty {

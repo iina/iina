@@ -303,12 +303,12 @@
             </constraints>
             <point key="canvasLocation" x="-385" y="470.5"/>
         </customView>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="GHK-tq-Ssh" userLabel="Prefs &gt; Network &gt; youtube-dl">
+        <customView translatesAutoresizingMaskIntoConstraints="NO" id="GHK-tq-Ssh" userLabel="Prefs &gt; Network &gt; ytdl">
             <rect key="frame" x="0.0" y="0.0" width="480" height="152"/>
             <subviews>
                 <textField identifier="SectionTitleYtdl" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mRg-vm-guk">
                     <rect key="frame" x="-2" y="128" width="80" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="youtube-dl:" id="1Ex-0X-pjo">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="ytdl:" id="1Ex-0X-pjo">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -335,7 +335,7 @@
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="iwI-aJ-5PQ">
                     <rect key="frame" x="118" y="127" width="137" height="18"/>
-                    <buttonCell key="cell" type="check" title="Enable youtube-dl" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cyH-Md-FAD">
+                    <buttonCell key="cell" type="check" title="Enable ytdl" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="cyH-Md-FAD">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -367,7 +367,7 @@
                 </textField>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aSG-qR-qgc">
                     <rect key="frame" x="118" y="74" width="156" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Custom youtube-dl path:" id="2qf-cC-Lfi">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Custom ytdl path:" id="2qf-cC-Lfi">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -398,7 +398,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="74z-l3-NRT"/>
                     </constraints>
-                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="IINA will search youtube-dl in this folder. Restart needed." id="YqE-yV-BvQ">
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="IINA will search ytdl in this folder. Restart needed." id="YqE-yV-BvQ">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

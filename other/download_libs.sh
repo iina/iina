@@ -5,13 +5,10 @@ PROJECT_NAME='iina'
 # universal | arm64 | x86_64
 ARCH="universal"
 # github | iina (use iina to get the binary included in the latest release)
-YT_DLP_SOURCE="github"
-
-DYLIBS_DOWNLOAD_PATH="https://iina.io/dylibs/${ARCH}"
-YT_DLP_DOWNLOAD_PATH="https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos"
+YTDL_SOURCE="github"
 
 # Reset in case getopts has been used previously in the shell.
-if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src,help": -n 'parse-options' -- "$@"); then
+if ! OPTS=$(getopt -o "h": --long "arch:,ytdl-src,help": -n 'parse-options' -- "$@"); then
   echo "Failed parsing options." >&2
   exit 1
 fi
@@ -21,7 +18,7 @@ printUsageHelp() {
   echo "Usage:"
   echo "    $0 [-h|--help]:           Displays this help message"
   echo "    $0 [--arch] <ARCH>:       Architecture to download dylibs for: universal | arm64 | x86_64"
-  echo "    $0 [--yt-dlp-src] <SRC>:  Source to download youtube-dl from: github | iina"
+  echo "    $0 [--ytdl-src] <SRC>:  Source to download ytdl from: github | iina"
   echo
 }
 
@@ -53,13 +50,13 @@ while true; do
     ARCH=$2
     shift 2
     ;;
-  --yt-dlp-src)
+  --ytdl-src)
     if [[ -z "$2" ]]; then
-      echo "You need to specify a source when using --yt-dlp-src"
+      echo "You need to specify a source when using --ytdl-src"
       printUsageHelp
       exit 1
     fi
-    YT_DLP_SOURCE=$2
+    YTDL_SOURCE=$2
     shift 2
     ;;
   --)
@@ -70,15 +67,15 @@ while true; do
   esac
 done
 
-case $YT_DLP_SOURCE in
+case $YTDL_SOURCE in
 github)
-  YT_DLP_DOWNLOAD_PATH="https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos"
+  YTDL_DOWNLOAD_PATH="https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos"
   ;;
 iina)
-  YT_DLP_DOWNLOAD_PATH="https://iina.io/dylibs/youtube-dl"
+  YTDL_DOWNLOAD_PATH="https://iina.io/dylibs/youtube-dl"
   ;;
 *)
-  echo "Invalid youtube-dl source: $YT_DLP_SOURCE"
+  echo "Invalid ytdl source: $YTDL_SOURCE"
   printUsageHelp
   exit 1
   ;;
@@ -111,7 +108,7 @@ fi
 DEPS_PATH="$ROOT_PATH/deps"
 LIB_PATH="$DEPS_PATH/lib"
 EXEC_PATH="$DEPS_PATH/executable"
-YT_DLP_PATH="$EXEC_PATH/iina-ytdl"
+YTDL_PATH="$EXEC_PATH/iina-ytdl"
 
 IFS=$'\n' read -r -d '' -a files < <(curl "${DYLIBS_DOWNLOAD_PATH}/filelist.txt" && printf '\0')
 
@@ -124,5 +121,5 @@ for FILE in "${files[@]}"; do
 done
 
 mkdir -p "$EXEC_PATH"
-curl -L "$YT_DLP_DOWNLOAD_PATH" -o "$YT_DLP_PATH"
-chmod +x "$YT_DLP_PATH"
+curl -L "$YTDL_DOWNLOAD_PATH" -o "$YTDL_PATH"
+chmod +x "$YTDL_PATH"

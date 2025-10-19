@@ -103,9 +103,25 @@ class PlayerCore: NSObject {
     if shouldOpenInSeparateWindows {
       // open each url in its own window. accumulate the return values
       return urls.reduce(nil) { currentReturnValue, url in
-        if let openResult = newPlayerCore.openURLs([url]) {
+        // skip if url is already open in some player
+        
+        if !Preference.bool(for: .allowDuplicatePlayers) {
+          let activePlayerCores = playerCores.filter { $0.info.state != .idle }
+          let relevantActivePlayerCore = activePlayerCores.first { $0.info.currentURL == url }
+          
+          if let relevantActivePlayerCore {
+            relevantActivePlayerCore.mainWindow.window?.makeKeyAndOrderFront(nil)
+            return currentReturnValue
+          }
+        }
+
+        // open url, combine result into return value
+        let openResult = newPlayerCore.openURLs([url])
+
+        if let openResult {
           return (currentReturnValue ?? 0) + openResult
         }
+
         return currentReturnValue
       }
     } else {

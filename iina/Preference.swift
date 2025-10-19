@@ -39,6 +39,7 @@ struct Preference {
 
     static let actionAfterLaunch = Key("actionAfterLaunch")
     static let alwaysOpenInNewWindow = Key("alwaysOpenInNewWindow")
+    static let allowDuplicatePlayers = Key("allowDuplicatePlayers")
     static let enableCmdN = Key("enableCmdN")
 
     /** Record recent files */
@@ -799,6 +800,7 @@ struct Preference {
     .receiveBetaUpdate: false,
     .actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
     .alwaysOpenInNewWindow: true,
+    .allowDuplicatePlayers: false,
     .enableCmdN: false,
     .recordPlaybackHistory: true,
     .recordRecentFiles: true,

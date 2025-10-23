@@ -99,6 +99,9 @@ class ViewLayer: CAOpenGLLayer {
 
     glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 
+    // 检查 OpenGL 错误
+    checkOpenGLErrors()
+
     var i: GLint = 0
     glGetIntegerv(GLenum(GL_DRAW_FRAMEBUFFER_BINDING), &i)
     var dims: [GLint] = [0, 0, 0, 0]
@@ -120,10 +123,14 @@ class ViewLayer: CAOpenGLLayer {
             mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
             mpv_render_param()
           ]
-          mpv_render_context_render(context, &params);
+          let renderResult = mpv_render_context_render(context, &params)
+          if renderResult != 0 {
+            Logger.log("mpv render failed with error: \(renderResult)", level: .error, subsystem: Logger.makeSubsystem("video"))
+          }
           ignoreGLError()
         }
       } else {
+        Logger.log("mpvRenderContext is nil, showing black screen. This may indicate video rendering initialization failure.", level: .warning, subsystem: Logger.makeSubsystem("video"))
         glClearColor(0, 0, 0, 1)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
       }
@@ -231,5 +238,38 @@ class ViewLayer: CAOpenGLLayer {
 
   func ignoreGLError() {
     glGetError()
+  }
+
+  /** Check OpenGL errors and log them for debugging */
+  func checkOpenGLErrors() {
+    let error = glGetError()
+    if error != GL_NO_ERROR {
+      let errorString = getOpenGLErrorString(error)
+      Logger.log("OpenGL Error: \(errorString) (code: \(error))", level: .error, subsystem: Logger.makeSubsystem("video"))
+    }
+  }
+
+  /** Get human-readable OpenGL error string */
+  func getOpenGLErrorString(_ error: GLenum) -> String {
+    switch error {
+    case GLenum(GL_NO_ERROR):
+      return "GL_NO_ERROR"
+    case GLenum(GL_OUT_OF_MEMORY):
+      return "GL_OUT_OF_MEMORY"
+    case GLenum(GL_INVALID_ENUM):
+      return "GL_INVALID_ENUM"
+    case GLenum(GL_INVALID_VALUE):
+      return "GL_INVALID_VALUE"
+    case GLenum(GL_INVALID_OPERATION):
+      return "GL_INVALID_OPERATION"
+    case GLenum(GL_INVALID_FRAMEBUFFER_OPERATION):
+      return "GL_INVALID_FRAMEBUFFER_OPERATION"
+    case GLenum(GL_STACK_UNDERFLOW):
+      return "GL_STACK_UNDERFLOW"
+    case GLenum(GL_STACK_OVERFLOW):
+      return "GL_STACK_OVERFLOW"
+    default:
+      return "Unknown OpenGL Error"
+    }
   }
 }

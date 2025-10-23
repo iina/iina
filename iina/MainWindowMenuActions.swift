@@ -58,7 +58,18 @@ extension MainWindowController {
     // bigger size
     case 10, 11:
       let newWidth = window.frame.width + scaleStep * (size == 10 ? -1 : 1)
-      let newHeight = newWidth / (window.aspectRatio.width / window.aspectRatio.height)
+      let newHeight: CGFloat
+      
+      // For pseudo-video mode (audio with subtitles), allow flexible aspect ratio
+      if player.currentMediaIsAudio == .isAudio && !player.info.subTracks.isEmpty {
+        // In pseudo-video mode, maintain current aspect ratio or use a reasonable default
+        let currentAspectRatio = window.frame.width / window.frame.height
+        newHeight = newWidth / currentAspectRatio
+      } else {
+        // Normal video mode: use window aspect ratio
+        newHeight = newWidth / (window.aspectRatio.width / window.aspectRatio.height)
+      }
+      
       newFrame = window.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize))
     default:
       return

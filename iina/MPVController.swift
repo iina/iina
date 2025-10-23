@@ -23,7 +23,7 @@ fileprivate let no_str = "no"
  "debug" - very noisy technical information
  "trace" - extremely noisy
  */
-fileprivate let MPVLogLevel = "warn"
+fileprivate let MPVLogLevel = "debug"
 fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "error": .error,
                                                        "warn": .warning,
@@ -482,6 +482,9 @@ not applying FFmpeg 9599 workaround
     guard let mpv = mpv else {
       fatalError("mpvInitRendering() should be called after mpv handle being initialized!")
     }
+    
+    Logger.log("Initializing mpv rendering context", level: .debug, subsystem: Logger.makeSubsystem("video"))
+    
     let apiType = UnsafeMutableRawPointer(mutating: (MPV_RENDER_API_TYPE_OPENGL as NSString).utf8String)
     var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
                                                   get_proc_address_ctx: nil)
@@ -493,9 +496,24 @@ not applying FFmpeg 9599 workaround
         // mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: &advanced),
         mpv_render_param()
       ]
-      chkErr(mpv_render_context_create(&mpvRenderContext, mpv, &params))
+      
+      let result = mpv_render_context_create(&mpvRenderContext, mpv, &params)
+      if result != 0 {
+        Logger.log("Failed to create mpv render context with error: \(result)", level: .error, subsystem: Logger.makeSubsystem("video"))
+        Logger.log("This may cause black screen during video playback", level: .error, subsystem: Logger.makeSubsystem("video"))
+        // 不要 fatalError，而是记录错误并继续
+        return
+      }
+      
+      Logger.log("Successfully created mpv render context", level: .debug, subsystem: Logger.makeSubsystem("video"))
       openGLContext = CGLGetCurrentContext()
-      mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
+      
+      if let context = mpvRenderContext {
+        mpv_render_context_set_update_callback(context, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))
+        Logger.log("Set mpv render context update callback", level: .debug, subsystem: Logger.makeSubsystem("video"))
+      } else {
+        Logger.log("mpvRenderContext is nil after creation", level: .error, subsystem: Logger.makeSubsystem("video"))
+      }
     }
   }
 

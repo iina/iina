@@ -2427,9 +2427,19 @@ class MainWindowController: PlayerWindowController {
 
     // set aspect ratio
     let originalVideoSize = NSSize(width: width, height: height)
-    window.aspectRatio = originalVideoSize
-    if #available(macOS 10.12, *) {
-      pip.aspectRatio = originalVideoSize
+    
+    // For pseudo-video mode (audio with subtitles), allow flexible aspect ratio
+    // This allows users to resize the window freely while maintaining subtitle rendering
+    if player.currentMediaIsAudio == .isAudio && !player.info.subTracks.isEmpty {
+      // Don't set a fixed aspect ratio for pseudo-video mode
+      // This allows free window resizing while keeping subtitle functionality
+      Logger.log("Pseudo-video mode detected: allowing flexible window aspect ratio", level: .debug, subsystem: Logger.makeSubsystem("window"))
+    } else {
+      // Normal video mode: maintain aspect ratio
+      window.aspectRatio = originalVideoSize
+      if #available(macOS 10.12, *) {
+        pip.aspectRatio = originalVideoSize
+      }
     }
 
     videoView.videoSize = window.convertToBacking(videoView.frame).size
@@ -2545,24 +2555,41 @@ class MainWindowController: PlayerWindowController {
     let screenFrame = (window.screen ?? NSScreen.main!).visibleFrame
     let (videoWidth, videoHeight) = player.videoSizeForDisplay
     let newFrame: NSRect
-    // calculate 1x size
-    let useRetinaSize = Preference.bool(for: .usePhysicalResolution)
-    let logicalFrame = NSRect(x: window.frame.origin.x,
-                             y: window.frame.origin.y,
-                             width: CGFloat(videoWidth),
-                             height: CGFloat(videoHeight))
-    var finalSize = (useRetinaSize ? window.convertFromBacking(logicalFrame) : logicalFrame).size
-    // calculate scaled size
-    let scalef = CGFloat(scale)
-    finalSize.width *= scalef
-    finalSize.height *= scalef
-    // set size
-    if finalSize.width > screenFrame.size.width || finalSize.height > screenFrame.size.height {
-      // if final size is bigger than screen
-      newFrame = window.frame.centeredResize(to: window.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
+    
+    // For pseudo-video mode, use current window size as base for scaling
+    if player.currentMediaIsAudio == .isAudio && !player.info.subTracks.isEmpty {
+      // In pseudo-video mode, scale based on current window size to maintain flexibility
+      let currentSize = window.frame.size
+      let scalef = CGFloat(scale)
+      let finalSize = NSSize(width: currentSize.width * scalef, height: currentSize.height * scalef)
+      
+      if finalSize.width > screenFrame.size.width || finalSize.height > screenFrame.size.height {
+        // if final size is bigger than screen
+        newFrame = window.frame.centeredResize(to: window.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
+      } else {
+        // otherwise, resize the window normally
+        newFrame = window.frame.centeredResize(to: finalSize.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
+      }
     } else {
-      // otherwise, resize the window normally
-      newFrame = window.frame.centeredResize(to: finalSize.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
+      // Normal video mode: use video dimensions for scaling
+      let useRetinaSize = Preference.bool(for: .usePhysicalResolution)
+      let logicalFrame = NSRect(x: window.frame.origin.x,
+                               y: window.frame.origin.y,
+                               width: CGFloat(videoWidth),
+                               height: CGFloat(videoHeight))
+      var finalSize = (useRetinaSize ? window.convertFromBacking(logicalFrame) : logicalFrame).size
+      // calculate scaled size
+      let scalef = CGFloat(scale)
+      finalSize.width *= scalef
+      finalSize.height *= scalef
+      // set size
+      if finalSize.width > screenFrame.size.width || finalSize.height > screenFrame.size.height {
+        // if final size is bigger than screen
+        newFrame = window.frame.centeredResize(to: window.frame.size.shrink(toSize: screenFrame.size)).constrain(in: screenFrame)
+      } else {
+        // otherwise, resize the window normally
+        newFrame = window.frame.centeredResize(to: finalSize.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
+      }
     }
     window.setFrame(newFrame, display: true, animate: true)
   }

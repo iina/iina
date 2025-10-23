@@ -113,3 +113,6 @@ browser/Firefox_Open_In_IINA/*
 
 deps/executable/youtube-dl
 
+# Build logs
+build_logs/
+

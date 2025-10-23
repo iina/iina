@@ -502,8 +502,18 @@ class PlayerCore: NSObject {
   func initVideo() {
     // init mpv render context.
     // The video layer must be displayed once to get the OpenGL context initialized.
+    Logger.log("Initializing video rendering", level: .debug, subsystem: subsystem)
+    
     mainWindow.videoView.videoLayer.display()
     mpv.mpvInitRendering()
+    
+    // 检查渲染上下文是否成功创建
+    if mpv.mpvRenderContext == nil {
+      Logger.log("Warning: mpv render context is nil after initialization. Video may show black screen.", level: .warning, subsystem: subsystem)
+    } else {
+      Logger.log("Video rendering initialized successfully", level: .debug, subsystem: subsystem)
+    }
+    
     mainWindow.videoView.startDisplayLink()
   }
 
@@ -1048,12 +1058,15 @@ class PlayerCore: NSObject {
   }
   
   func loadExternalVideoFile(_ url: URL) {
+    Logger.log("Loading external video file: \(url.path)", level: .debug, subsystem: subsystem)
     mpv.command(.videoAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
-        Logger.log("Unsupported video: \(url.path)", level: .error, subsystem: self.subsystem)
+        Logger.log("Failed to load external video: \(url.path) with error code: \(code)", level: .error, subsystem: self.subsystem)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_audio")
         }
+      } else {
+        Logger.log("Successfully loaded external video: \(url.path)", level: .debug, subsystem: self.subsystem)
       }
     }
   }
@@ -1070,14 +1083,21 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalSubFile(_ url: URL, delay: Bool = false) {
+    Logger.log("Loading external subtitle file: \(url.path)", level: .debug, subsystem: subsystem)
+    
+    // Log current media state before loading subtitle
+    Logger.log("Pre-subtitle load state - Media type: \(currentMediaIsAudio), Current subtitle tracks: \(info.subTracks.count)", 
+               level: .debug, subsystem: subsystem)
+    
     if let track = info.subTracks.first(where: { $0.externalFilename == url.path }) {
+      Logger.log("Subtitle file already loaded, reloading track ID: \(track.id)", level: .debug, subsystem: subsystem)
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
     }
 
     mpv.command(.subAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
-        Logger.log("Unsupported sub: \(url.path)", level: .error, subsystem: self.subsystem)
+        Logger.log("Failed to load external subtitle file: \(url.path), error code: \(code)", level: .error, subsystem: self.subsystem)
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
         if delay {
           DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
@@ -1086,6 +1106,17 @@ class PlayerCore: NSObject {
         } else {
           DispatchQueue.main.async {
             Utility.showAlert("unsupported_sub")
+          }
+        }
+      } else {
+        Logger.log("Successfully loaded external subtitle file: \(url.path)", level: .debug, subsystem: self.subsystem)
+        
+        // Check if we need to enable pseudo-video mode after loading subtitle
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+          if self.currentMediaIsAudio == .isAudio && !self.info.subTracks.isEmpty {
+            Logger.log("External subtitle loaded for audio file, checking for pseudo-video mode", 
+                       level: .debug, subsystem: self.subsystem)
+            self.enablePseudoVideoForAudioWithSubtitles()
           }
         }
       }
@@ -1753,14 +1784,45 @@ class PlayerCore: NSObject {
     Logger.log("Track list changed", subsystem: subsystem)
     getTrackInfo()
     getSelectedTracks()
+    
+    // Log detailed track information for debugging
+    Logger.log("Track info - Audio: \(info.audioTracks.count), Video: \(info.videoTracks.count), Subtitle: \(info.subTracks.count)", 
+               level: .verbose, subsystem: subsystem)
+    
+    // Log subtitle track details
+    for (index, subTrack) in info.subTracks.enumerated() {
+      let trackType = subTrack.isExternal ? "external" : "embedded"
+      let trackLang = subTrack.lang ?? "unknown"
+      let trackCodec = subTrack.codec ?? "unknown"
+      Logger.log("Subtitle track \(index): ID=\(subTrack.id), Type=\(trackType), Lang=\(trackLang), Codec=\(trackCodec), External=\(subTrack.externalFilename ?? "none")", 
+                 level: .verbose, subsystem: subsystem)
+    }
+    
     let audioStatusWasUnkownBefore = currentMediaIsAudio == .unknown
     currentMediaIsAudio = checkCurrentMediaIsAudio()
     let audioStatusIsAvailableNow = currentMediaIsAudio != .unknown && audioStatusWasUnkownBefore
+    
+    // Check if we have subtitle tracks when determining whether to switch to mini player
+    let hasSubtitleTracks = !info.subTracks.isEmpty
+    Logger.log("Media type analysis - IsAudio: \(currentMediaIsAudio), HasSubtitles: \(hasSubtitleTracks)", 
+               level: .debug, subsystem: subsystem)
+    
+    // Check for pseudo-video mode whenever we have audio with subtitles
+    if currentMediaIsAudio == .isAudio && hasSubtitleTracks {
+      Logger.log("Audio file with subtitles detected, staying in main window to preserve subtitle display", 
+                 level: .debug, subsystem: subsystem)
+      // Enable pseudo-video mode for audio with subtitles
+      enablePseudoVideoForAudioWithSubtitles()
+    }
+    
     // if need to switch to music mode
     if audioStatusIsAvailableNow && Preference.bool(for: .autoSwitchToMusicMode) {
       if currentMediaIsAudio == .isAudio {
-        if !isInMiniPlayer && !mainWindow.fsState.isFullscreen && !switchedBackFromMiniPlayerManually {
-          Logger.log("Current media is audio, switch to mini player", subsystem: subsystem)
+        // Don't switch to mini player if there are subtitle tracks
+        if hasSubtitleTracks {
+          // Pseudo-video mode already enabled above
+        } else if !isInMiniPlayer && !mainWindow.fsState.isFullscreen && !switchedBackFromMiniPlayerManually {
+          Logger.log("Audio file without subtitles, switching to mini player", subsystem: subsystem)
           DispatchQueue.main.sync {
             switchToMiniPlayer(automatically: true)
           }
@@ -2119,6 +2181,7 @@ class PlayerCore: NSObject {
     info.videoTracks.removeAll(keepingCapacity: true)
     info.subTracks.removeAll(keepingCapacity: true)
     let trackCount = mpv.getInt(MPVProperty.trackListCount)
+    Logger.log("Loading track info - Total tracks: \(trackCount)", level: .verbose, subsystem: subsystem)
     for index in 0..<trackCount {
       // get info for each track
       guard let trackType = mpv.getString(MPVProperty.trackListNType(index)) else { continue }
@@ -2146,10 +2209,17 @@ class PlayerCore: NSObject {
       switch track.type {
       case .audio:
         info.audioTracks.append(track)
+        Logger.log("Audio track loaded - ID: \(track.id), Title: \(track.title ?? "none"), Lang: \(track.lang ?? "none"), Codec: \(track.codec ?? "none")", 
+                   level: .verbose, subsystem: subsystem)
       case .video:
         info.videoTracks.append(track)
+        Logger.log("Video track loaded - ID: \(track.id), Title: \(track.title ?? "none"), Lang: \(track.lang ?? "none"), Codec: \(track.codec ?? "none"), AlbumArt: \(track.isAlbumart)", 
+                   level: .verbose, subsystem: subsystem)
       case .sub:
         info.subTracks.append(track)
+        let externalInfo = track.isExternal ? " (External: \(track.externalFilename ?? "unknown"))" : " (Embedded)"
+        Logger.log("Subtitle track loaded - ID: \(track.id), Title: \(track.title ?? "none"), Lang: \(track.lang ?? "none"), Codec: \(track.codec ?? "none"), Default: \(track.isDefault), Selected: \(track.isSelected)\(externalInfo)", 
+                   level: .verbose, subsystem: subsystem)
       default:
         break
       }
@@ -2361,6 +2431,55 @@ class PlayerCore: NSObject {
       }
     }
     SleepPreventer.allowSleep()
+  }
+  
+  /// Enable pseudo-video mode for audio files with subtitles
+  /// This creates a black video background using lavfi-complex to allow subtitle rendering
+  func enablePseudoVideoForAudioWithSubtitles() {
+    guard currentMediaIsAudio == .isAudio, !info.subTracks.isEmpty else { 
+      Logger.log("Skipping pseudo-video mode: not audio or no subtitles", level: .debug, subsystem: subsystem)
+      return 
+    }
+    
+    Logger.log("Enabling pseudo-video mode for audio with subtitles", level: .debug, subsystem: subsystem)
+    Logger.log("Current subtitle tracks: \(info.subTracks.count)", level: .debug, subsystem: subsystem)
+    
+    // Use lavfi-complex to create a black video background
+    // Create a flexible size black video that can be resized
+    // Use a larger base size to allow for better scaling flexibility
+    let lavfiFilter = "color=c=black:s=1280x720:r=25[vo]"
+    
+    // Set the lavfi-complex option
+    mpv.setString("lavfi-complex", lavfiFilter)
+    
+    Logger.log("Pseudo-video mode enabled with lavfi filter: \(lavfiFilter)", level: .verbose, subsystem: subsystem)
+    
+    // Log subtitle rendering diagnostics
+    logSubtitleRenderingState()
+  }
+  
+  /// Log detailed subtitle rendering state for diagnostics
+  func logSubtitleRenderingState() {
+    Logger.log("=== Subtitle Rendering Diagnostics ===", level: .debug, subsystem: subsystem)
+    Logger.log("Media type: \(currentMediaIsAudio)", level: .debug, subsystem: subsystem)
+    Logger.log("Video tracks: \(info.videoTracks.count), Audio tracks: \(info.audioTracks.count), Subtitle tracks: \(info.subTracks.count)", level: .debug, subsystem: subsystem)
+    Logger.log("Selected subtitle ID: \(info.sid ?? 0)", level: .debug, subsystem: subsystem)
+    Logger.log("Window mode: \(isInMiniPlayer ? "Mini Player" : "Main Window")", level: .debug, subsystem: subsystem)
+    Logger.log("Video size: \(String(describing: mainWindow.videoView.videoSize))", level: .debug, subsystem: subsystem)
+    
+    // Check mpv properties
+    let subVisible = mpv.getFlag("sub-visibility")
+    let videoParamsExist = mpv.getString(MPVProperty.videoParams) != nil
+    Logger.log("sub-visibility: \(subVisible), video-params exist: \(videoParamsExist)", level: .debug, subsystem: subsystem)
+    
+    // Log subtitle track details
+    for (index, track) in info.subTracks.enumerated() {
+      let trackType = track.isExternal ? "External" : "Embedded"
+      let trackLang = track.lang ?? "unknown"
+      let trackCodec = track.codec ?? "unknown"
+      Logger.log("Subtitle track \(index): ID=\(track.id), Type=\(trackType), Lang=\(trackLang), Codec=\(trackCodec), External=\(track.externalFilename ?? "none")", 
+                 level: .verbose, subsystem: subsystem)
+    }
   }
 }
 

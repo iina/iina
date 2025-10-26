@@ -172,6 +172,7 @@ struct Preference {
     static let enableToneMapping = Key("enableToneMapping")
     static let toneMappingTargetPeak = Key("toneMappingTargetPeak")
     static let toneMappingAlgorithm = Key("toneMappingAlgorithm")
+    static let reduceEnergyUse = Key("reduceEnergyUse")
 
     static let audioDriverEnableAVFoundation = Key("audioDriverEnableAVFoundation")
     static let audioThreads = Key("audioThreads")
@@ -881,6 +882,7 @@ struct Preference {
     .enableToneMapping: false,
     .toneMappingTargetPeak: 0,
     .toneMappingAlgorithm: "auto",
+    .reduceEnergyUse: false,
     .audioDriverEnableAVFoundation: false,
     .audioThreads: 0,
     .audioLanguage: "",

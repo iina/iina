@@ -560,6 +560,30 @@ class PlayerCore: NSObject {
     }
   }
 
+  /// Configure mpv's energy use.
+  ///
+  /// If the IINA `reduceEnergyUse` setting is enabled this method will apply the mpv fast profile to reduce the amount of energy
+  /// mpv consumes.
+  ///
+  /// In mpv 0.37.0 option defaults were changed to improve the quality of the picture at the cost of additional processing. For example
+  /// the default for the [scale](https://mpv.io/manual/stable/#options-scale) option was changed from
+  /// [bilinear](https://mpv.io/manual/stable/#options-bilinear) (fastest, very low quality) to `lanczos` (provides a
+  /// good balance between quality and performance). This means IINA 1.4.0 performs more processing and consumes more energy
+  /// than IINA 1.3.5. Users with older Intel Macs noticed significantly increased GPU usage resulting in higher temperatures which then
+  /// caused higher fan speeds. These users expressed a desire to be able to disable the  picture improvements in order to reduce
+  /// energy use back to IINA 1.3.5 levels. The
+  /// [system requirements](https://github.com/mpv-player/mpv#system-requirements) for the mpv player
+  /// recommends using the builtin `fast` [profile](https://mpv.io/manual/stable/#profiles) when running on
+  /// machines with low power GPUs. See issue #5697.
+  /// - Important: Changing the `reduceEnergyUse` setting _requires_ IINA be restarted. Although mpv supports the ability
+  ///       restore the old values of options set by the profile, this ability must be enabled by the profile.  As of mpv 0.4.0 attempting
+  ///       to restore the fast profile reports: `Profile 'fast' contains no restore data`
+  private func configureEnergyUse() {
+    guard Preference.bool(for: PK.reduceEnergyUse) else { return }
+    log("Applying mpv fast profile to reduce energy use")
+    mpv.command(.applyProfile, args: ["fast"])
+  }
+
   func startMPV() {
     // set path for youtube-dl
     let oldPath = String(cString: getenv("PATH")!)
@@ -578,6 +602,8 @@ class PlayerCore: NSObject {
 
     mpv.mpvInit()
     events.emit(.mpvInitialized)
+
+    configureEnergyUse()
 
     let audioDevice = Preference.string(for: .audioDevice)!
     if !getAudioDevices().contains(where: { $0.name == audioDevice }) {

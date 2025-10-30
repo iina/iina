@@ -66,4 +66,11 @@
 
 + (nullable NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
 
+/// Extract lyrics from media file metadata.
+///
+/// This method will open the file and search for lyrics in the metadata.
+/// - Parameter url: URL of the file to extract lyrics from.
+/// - Returns: The lyrics as a string, or null if no lyrics were found.
++ (nullable NSString *)extractLyricsFromURL:(nonnull NSURL *)url;
+
 @end

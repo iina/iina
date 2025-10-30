@@ -317,6 +317,7 @@
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		CE9628082EB3985000FF6CBF /* LyricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9628072EB3985000FF6CBF /* LyricsManager.swift */; };
 		D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */; };
 		D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
 		D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A4D9892B1495270009AB4E /* LegacyMigration.swift */; };
@@ -1781,6 +1782,7 @@
 		C7DBA5EB1F07C5FD00C2B416 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		C7DC79CE1EC63821002DE23B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/HistoryWindowController.strings; sourceTree = "<group>"; };
 		C7E90B522087EC5700A58B6B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		CE9628072EB3985000FF6CBF /* LyricsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsManager.swift; sourceTree = "<group>"; };
 		D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCToolbarButton.swift; sourceTree = "<group>"; };
 		D1A4D9892B1495270009AB4E /* LegacyMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyMigration.swift; sourceTree = "<group>"; };
 		D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindow.swift; sourceTree = "<group>"; };
@@ -2472,6 +2474,7 @@
 				348F71952DE2A814006C587D /* MPVCommandWrappers.swift */,
 				84C6D3611EAF8D63009BF721 /* HistoryController.swift */,
 				84FBCB361EEACDDD0076C77C /* FFmpegController.h */,
+				CE9628072EB3985000FF6CBF /* LyricsManager.swift */,
 				84FBCB371EEACDDD0076C77C /* FFmpegController.m */,
 				842904E11F0EC01600478376 /* AutoFileMatcher.swift */,
 				846121BC1F35FCA500ABB39C /* DraggingDetect.swift */,
@@ -3224,6 +3227,7 @@
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
 				844C59E71F7C143D008D1B00 /* CacheManager.swift in Sources */,
 				E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */,
+				CE9628082EB3985000FF6CBF /* LyricsManager.swift in Sources */,
 				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
 				E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */,

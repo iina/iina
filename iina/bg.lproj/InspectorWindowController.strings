@@ -14,7 +14,7 @@
 "7QX-tu-rvs.title" = "FPS:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
-"9eq-rd-zGy.title" = "Title:";
+"9eq-rd-zGy.title" = "Заглавие:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
 "A4y-LL-x0z.title" = "Bit Rate:";
@@ -47,7 +47,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[2]" = "Файл";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[3]" = "Status";
+"Fqo-1c-3L1.ibShadowedLabels[3]" = "Състояние";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
 "I2E-6Z-Gnn.title" = "Driver:";
@@ -68,7 +68,7 @@
 "MME-KZ-jrG.title" = "Driver:";
 
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
-"OCm-zb-deg.title" = "Duration:";
+"OCm-zb-deg.title" = "Продължителност:";
 
 /* Class = "NSTextFieldCell"; title = "Selected"; ObjectID = "P65-zr-dOH"; */
 "P65-zr-dOH.title" = "Selected";
@@ -92,7 +92,7 @@
 "UuR-M1-YLj.label" = "Tracks";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
-"VGm-BL-xOI.label" = "Status";
+"VGm-BL-xOI.label" = "Състояние";
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
 "WrI-Sr-O2S.label" = "Файл";
@@ -167,7 +167,7 @@
 "mLo-Wc-BoO.title" = "Colorspace:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
-"zDk-Ie-EPs.headerCell.title" = "Name";
+"zDk-Ie-EPs.headerCell.title" = "Име";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
 "x6R-q7-efY.headerCell.title" = "Value";

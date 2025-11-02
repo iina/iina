@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
-"0DK-uZ-duj.title" = "Автоматически (с копированием)";
+"0DK-uZ-duj.title" = "Автоматически (с копированием в память)";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
 "2yO-To-el7.title" = "По умолчанию: 0 (автоматически)";
@@ -17,22 +17,22 @@
 "bxW-np-SGm.title" = "По умолчанию: 0 (автоматически)";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
-"cJP-ep-847.title" = "(100-1000)";
+"cJP-ep-847.title" = "(100–1000)";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
 "g4c-vG-URh.title" = "Громкость при запуске:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Всегда используйте выделенный GPU для рендеринга (если он есть). Это может улучшить производительность, но может снизить срок службы батареи.";
+"gCv-sJ-uQJ.title" = "Всегда использовать выделенный GPU для рендеринга (при наличии). Это может улучшить производительность, но может снизить срок службы аккумулятора.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Видео:";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
-"nwg-2K-G2G.title" = "Аппаратный декодер:";
+"nwg-2K-G2G.title" = "Аппаратное декодирование:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
-"rFu-rL-EJC.title" = "Отключён";
+"rFu-rL-EJC.title" = "Выключено";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
 "sLR-vV-xn2.title" = "Предпочитаемое аудиоустройство:";
@@ -50,13 +50,13 @@
 "up6-6A-4sn.title" = "Выход S/PDIF:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "Предпочитаемый язык:";
+"wjt-O6-KbC.title" = "Предпочитаемый язык (ISO 639-2):";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
-"3g4-jW-uJd.title" = "Загрузить ICC-профиль дисплея";
+"3g4-jW-uJd.title" = "Загружать цветовой профиль дисплея";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "Загрузить ICC-профиль текущего дисплея и использовать его для преобразования RGB-видео (только для SDR-видео)";
+"M2M-of-gjd.title" = "Загружать ICC-профиль текущего дисплея и использовать его для преобразования RGB-видео (только для SDR-видео)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
 "R7Z-9c-vPJ.title" = "Включить поддержку HDR";
@@ -89,19 +89,19 @@
 "gfq-nW-dDu.title" = "Выравнивание:";
 
 /* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
-"ZRL-b0-k1L.title" = "Регулировка усиления:";
+"ZRL-b0-k1L.title" = "Корректировка громкости:";
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
-"k7b-6o-lCK.title" = "Без регулировки";
+"k7b-6o-lCK.title" = "Выключена";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "Усиление трека";
+"w6E-lw-g7g.title" = "По значению ReplayGain для трека";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
-"ZJJ-1o-ZGD.title" = "Усиление альбома";
+"ZJJ-1o-ZGD.title" = "По значению ReplayGain для альбома";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
-"y61-Ah-c92.title" = "Отрегулируйте увеличение громкости в соответствии со значениями выравнивания громкости, хранящимися в метаданных файла.";
+"y61-Ah-c92.title" = "Возможность автоматически устанавливать одинаковый уровень громкости для треков на основании значений ReplayGain, хранящихся в тегах файлов.";
 
 /* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
 "9Q0-hw-PdU.title" = "Предусиление до применения коррекции громкости:";
@@ -125,10 +125,10 @@
 "ovT-D3-3jS.title" = "дБ";
 
 /* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
-"m2n-yd-a4n.title" = "Усиление, применяемое, если в файле нет тегов коррекции громкости (ReplayGain).";
+"m2n-yd-a4n.title" = "Усиление, применяемое, если в файле нет тегов коррекции громкости ReplayGain.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
 "Zco-Ba-Idk.title" = "Драйвер аудио:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation — это новый экспериментальный аудиодрайвер с поддержкой пространственного аудио (Spatial Audio). Однако, при использовании AVFoundation возможны некоторые проблемы, такие как задержка звука.";
+"2Md-pv-gSi.title" = "AVFoundation — это новый экспериментальный аудиодрайвер с поддержкой пространственного аудио (Spatial Audio). Однако при использовании AVFoundation возможны некоторые проблемы, такие как задержка звука.";

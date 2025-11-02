@@ -1533,6 +1533,7 @@ class MainWindowController: PlayerWindowController {
     window.styleMask.insert(.resizable)
     if #available(macOS 10.16, *) {
       window.styleMask.insert(.titled)
+      window.hasShadow = true
       (window as! MainWindow).forceKeyAndMain = false
       window.level = .normal
     } else {
@@ -1588,6 +1589,7 @@ class MainWindowController: PlayerWindowController {
     window.styleMask.remove(.resizable)
     if #available(macOS 10.16, *) {
       window.styleMask.remove(.titled)
+      window.hasShadow = false
       (window as! MainWindow).forceKeyAndMain = true
       window.level = .floating
     } else {

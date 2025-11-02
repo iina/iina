@@ -2936,7 +2936,6 @@ class MainWindowController: PlayerWindowController {
   /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
   /// - Parameter sender: The button invoking this action.
   @IBAction func rightButtonAction(_ sender: NSButton) {
-    log("$$$$$$$$ \(sender)")
     switch arrowBtnFunction {
     case .playlist, .seek:
       arrowButtonAction(left: false)

@@ -359,9 +359,9 @@
 "playlist.total_length_with_selected" = "تم تحديد %@ من %@";
 "playlist.sorting.header" = "";
 "playlist.sorting.filename_ascending" = "";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.filename_descending" = "اسم الملف تنازلي";
+"playlist.sorting.path_ascending" = "مسار الملف تصاعدي";
+"playlist.sorting.path_descending" = "مسار الملف تنازلي";
 "pl_menu.title_multi" = "%d عناصر";
 "pl_menu.play_next" = "تشغيل التالي";
 "pl_menu.play_in_new_window" = "تشغيل في نافذة جديدة";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "مستوى الصوت";
 "mini_player.close" = "إغلاق وضع الموسيقى";
 "mini_player.back" = "العودة إلى وضع الفيديو";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "ترتيب قائمة التشغيل";
 
 // Touch bar
 

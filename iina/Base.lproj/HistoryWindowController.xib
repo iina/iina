@@ -97,7 +97,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="606" height="243"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <size key="intercellSpacing" width="8" height="2"/>
-                                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="deviceWhite"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
                                         <tableColumn identifier="Filename" editable="NO" width="408" minWidth="200" maxWidth="5000" id="DIC-tR-R2F" userLabel="File Column">
@@ -262,6 +262,7 @@
                                     </connections>
                                 </outlineView>
                             </subviews>
+                            <nil key="backgroundColor"/>
                         </clipView>
                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Hfw-fb-gd5">
                             <rect key="frame" x="1" y="251" width="598" height="16"/>

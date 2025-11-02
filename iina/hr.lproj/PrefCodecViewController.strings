@@ -2,7 +2,7 @@
 "0DK-uZ-duj.title" = "Automatski (kopiraj)";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
-"2yO-To-el7.title" = "Zadano: 0 (Automatski)";
+"2yO-To-el7.title" = "Standardno: 0 (Automatski)";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
 "44m-ge-naq.title" = "Maksimalna glasnoća:";
@@ -14,7 +14,7 @@
 "YUr-aJ-xfC.title" = "Prisili korištenje određene grafičke kartice";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
-"bxW-np-SGm.title" = "Zadano: 0 (Automatski)";
+"bxW-np-SGm.title" = "Standardno: 0 (Automatski)";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
 "cJP-ep-847.title" = "(100-1000)";
@@ -23,7 +23,7 @@
 "g4c-vG-URh.title" = "Početna glasnoća:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Uvijek koristi određenu grafičku karticu za iscrtavanje (ako postoji). To može poboljšati performansu, ali može skratiti trajanje baterije.";
+"gCv-sJ-uQJ.title" = "Uvijek koristi određenu grafičku karticu za prikaz (ako postoji). To može poboljšati performansu, ali može skratiti vijek trajanje baterije.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Video:";
@@ -32,7 +32,7 @@
 "nwg-2K-G2G.title" = "Hardverski dekoder:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
-"rFu-rL-EJC.title" = "Onemogućeno";
+"rFu-rL-EJC.title" = "Deaktivirano";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
 "sLR-vV-xn2.title" = "Željeni zvučni uređaj:";
@@ -65,10 +65,10 @@
 "ZgQ-bc-yEE.title" = "Standardno aktiviraj HDR podršku tijekom reprodukcije HDR videa.";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "Aktiviraj prilagođavanje boja";
+"a5Y-gU-JTj.title" = "Aktiviraj mapiranje tonova";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
-"mNn-cb-IVw.title" = "Aktiviraj prilagođavanje boja slika za ekran";
+"mNn-cb-IVw.title" = "Aktiviraj mapiranje tonova slika na ekran";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
 "xVk-OA-kOf.title" = "Ciljani najviši ton:";
@@ -95,7 +95,7 @@
 "k7b-6o-lCK.title" = "Bez podešavanja";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "Track gain";
+"w6E-lw-g7g.title" = "Pojačavanje trake";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
 "ZJJ-1o-ZGD.title" = "Pojačanje albuma";
@@ -128,7 +128,7 @@
 "m2n-yd-a4n.title" = "Pojačanje koji se primjenjuje ako datoteka nema ReplayGain oznake.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "Pogon zvuka:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation je novi, eksperimentalni pogon zvuka koji nudi podršku za prostorni zvuk. Međutim, prilikom korištenja AVFoundationa možeš naići na neke probleme, poput kašnjenja zvuka.";

@@ -14,7 +14,7 @@
 "3CY-YS-rG6.title" = "Usar el botón izquierdo / derecho para:";
 
 /* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
-"5Nk-Mu-V2I.title" = "Base remaining time on playback speed";
+"5Nk-Mu-V2I.title" = "Tiempo restante base en velocidad de reproducción";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
@@ -134,7 +134,7 @@
 "Uc9-An-930.title" = "Altura:";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
-"Ufv-Hk-vL5.title" = "Prevent scroll wheel from changing volume";
+"Ufv-Hk-vL5.title" = "Evitar que la rueda de desplazamiento cambie el volumen";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "punto";
@@ -164,7 +164,7 @@
 "baY-O6-fcB.title" = "Alternar Imagen dentro de imagen al minimizar/desminimizar la ventana";
 
 /* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
-"cib-Cg-9kn.title" = "Only for video files";
+"cib-Cg-9kn.title" = "Sólo para archivos de vídeo";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x tamaño del vídeo";
@@ -185,7 +185,7 @@
 "iRn-3s-oQH.title" = "de la pantalla";
 
 /* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
-"kCe-Ck-dUJ.title" = "Include files on a mounted remote drive";
+"kCe-Ck-dUJ.title" = "Incluye archivos en una unidad remota montada";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "Mostrar el tiempo y la información de la batería cuando se está en pantalla completa";
@@ -236,7 +236,7 @@
 "vdi-lO-q6e.title" = "ajustarse a la pantalla";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
-"vnb-DF-4g5.title" = "Prevent scroll wheel from changing playback position";
+"vnb-DF-4g5.title" = "Evitar que la rueda de desplazamiento cambie la posición de reproducción";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Habilitar OSD";

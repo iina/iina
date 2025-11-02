@@ -95,7 +95,7 @@
 "BDr-G9-IRx.title" = "Saved Video Filters";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "BOF-NM-1cW"; */
-"BOF-NM-1cW.title" = "Preferences…";
+"BOF-NM-1cW.title" = "تنظیمات…";
 
 /* Class = "NSMenuItem"; title = "Scale Down"; ObjectID = "Bli-YK-Rl0"; */
 "Bli-YK-Rl0.title" = "Scale Down";
@@ -325,6 +325,9 @@
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "بازرس";
 
+/* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
+"0tJ-RQ-kuW.title" = "Log Viewer";
+
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "اندازه معمولی(ریتنا)";
 
@@ -501,3 +504,9 @@
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "شروع به صحبت کردن";
+
+/* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
+"Y6q-cI-vfM.title" = "افزونه";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
+"Qwb-26-zjX.title" = "بازکردن URL…";

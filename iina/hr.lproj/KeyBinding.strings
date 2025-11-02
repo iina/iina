@@ -6,9 +6,9 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignoriraj";
-"cmd.seek" = "Traži";
-"cmd.revert-seek" = "Preokreni traženje";
+"cmd.ignore" = "Zanemari";
+"cmd.seek" = "Navigiraj";
+"cmd.revert-seek" = "Preokreni navigiranje";
 "cmd.set" = "Postavi";
 "cmd.cycle" = "Listaj";
 "cmd.cycle-values" = "Listaj u";
@@ -17,13 +17,13 @@
 "cmd.frame-step" = "Sljedeći kadar";
 "cmd.frame-back-step" = "Prethodni kadar";
 "cmd.ab-loop" = "A-B petlja";
-"cmd.sub-seek" = "Traži titl";
+"cmd.sub-seek" = "Navigiranje po titlovima";
 "cmd.playlist-next" = "Sljedeći medij";
 "cmd.playlist-prev" = "Prethodni medij";
 "cmd.playlist-move" = "Premjesti stavku playliste";
 "cmd.playlist-clear" = "Izbriši playlistu";
 "cmd.playlist-remove" = "Ukloni trenutačnu";
-"cmd.playlist-shuffle" = "Odaberi nasumice";
+"cmd.playlist-shuffle" = "Primiješaj";
 "cmd.write-watch-later-config" = "Zapiši povijest reprodukcija";
 "cmd.stop" = "Prekini";
 "cmd.quit" = "Izlaz";
@@ -52,7 +52,7 @@
 "iina.toggle-flip" = "Uključi/Isključi okomito preokretanje";
 "iina.toggle-mirror" = "Uključi/Isključi vodoravno preokretanje";
 "iina.save-playlist" = "Spremi trenutačnu playlistu";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Prikaži trenutačnu datoteku u Finderu";
 "iina.delete-current-file" = "Izbriši trenutačnu datoteku";
 "iina.delete-current-file-hard" = "Odmah izbriši trenutačnu datoteku";
 "iina.find-online-subs" = "Pronađi titlove na internetu";
@@ -91,7 +91,7 @@
 "opt.saturation" = "Zasićenost";
 "opt.deinterlace" = "Preplitanje";
 
-"opt.audio" = "Zvučni zapis";
+"opt.audio" = "Audio traka";
 "opt.volume" = "Glasnoća";
 "opt.mute" = "Isključi zvuk";
 "opt.audio-delay" = "Kašnjenje zvuka";
@@ -101,7 +101,7 @@
 "opt.sub-pos" = "Položaj titlova";
 "opt.sub-scale" = "Veličina titlova";
 "opt.sub-visibility" = "Vidljivost titlova";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "Vidljivost sekundardnih titlova";
 "opt.sub-ass-style-override" = "Prepisivanje ASS stila";
 
 "opt.fullscreen" = "Cjeloekranski prikaz";
@@ -114,5 +114,5 @@
 "read.multiply" = "Pomnoži {{property}} × {{factor}}";
 "read.cycle" = "Listaj {{property}}{{#dir_down}} prema dolje{{/dir_down}}";
 "read.cycle-values" = "Listaj {{property}} u ({{{values}}})";
-"read.seek" = "Traži {{#fwd}}prema naprijed{{/fwd}}{{#bwd}}unatrag{{/bwd}}{{#abs}}do{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(točno){{/exact}}{{#kf}}(slika){{/kf}}";
-"read.sub-seek" = "Traži {{#skip_1}}sljedeći{{/skip_1}}{{#skip_-1}}prethodni{{/skip_-1}} titl";
+"read.seek" = "Navigiraj {{#fwd}}prema naprijed{{/fwd}}{{#bwd}}unatrag{{/bwd}}{{#abs}}do{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(točno){{/exact}}{{#kf}}(slika){{/kf}}";
+"read.sub-seek" = "Navigiraj do {{#skip_1}}sljedeći{{/skip_1}}{{#skip_-1}}prethodni{{/skip_-1}} titl";

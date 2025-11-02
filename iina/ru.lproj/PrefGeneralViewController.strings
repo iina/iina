@@ -1,11 +1,11 @@
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
-"1ce-4b-kgG.title" = "Показать панель открытых файлов";
+"1ce-4b-kgG.title" = "Показывать панель открытых файлов";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "Оставить окно открытым по окончании воспроизведения";
+"2iM-j7-AzQ.title" = "Оставлять окно открытым по окончании воспроизведения";
 
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
-"2rJ-mg-OuU.title" = "Сохранить в";
+"2rJ-mg-OuU.title" = "Сохранять в папку";
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
 "3XO-ks-TDg.title" = "PNG";
@@ -20,13 +20,13 @@
 "55O-ik-ql6.title" = "Включить меню «Открыть недавние»";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "Окно свернуто/развернуто";
+"5Y9-bX-K0f.title" = "При сворачивании / разворачивании окна";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "Плейлист:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Эта настройка вступит в силу после перезапуска IINA.";
+"8kU-8g-VgX.title" = "Эта настройка вступит в силу после перезапуска приложения.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
 "AVe-9Z-RgQ.title" = "Только в «музыкальном режиме»";
@@ -35,28 +35,28 @@
 "Ci8-j2-QS3.title" = "Показывать все открытые файлы в меню «Открыть недавние»";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
-"Ez8-qY-WAZ.title" = "Ежедневно";
+"Ez8-qY-WAZ.title" = "Каждый день";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
-"FbF-jJ-W5b.title" = "Поставить на паузу";
+"FbF-jJ-W5b.title" = "Ставить на паузу";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
 "GNV-VA-NBW.title" = "При открытии файла:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
-"Imf-6g-2Cd.title" = "Еженедельно";
+"Imf-6g-2Cd.title" = "Каждую неделю";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "Окно становится неактивным/активным";
+"J8g-aS-W6e.title" = "Когда окно становится активным / неактивным";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "Ничего не делать";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
-"KYi-0W-zOr.title" = "Выключить остальные мониторы в полноэкранном режиме";
+"KYi-0W-zOr.title" = "Выключать остальные дисплеи в полноэкранном режиме";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "По-прежнему не позволяет системе перейти в спящий режим.";
+"Kdk-iC-e1C.title" = "При этом компьютер все равно не перейдет в режим сна.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Автоматически переходить в «музыкальный режим» при воспроизведении аудио";
@@ -68,7 +68,7 @@
 "M0z-bI-88d.title" = "Всегда открывать файлы в новом окне";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
-"MlG-hl-goB.title" = "Войти в полноэкранный режим";
+"MlG-hl-goB.title" = "Переходить в полноэкранный режим";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
 "NVh-C5-b9i.title" = "JPEG (.jpeg)";
@@ -80,7 +80,7 @@
 "QJq-fO-hhK.title" = "Автоматически добавлять файлы из той же папки";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
-"REP-70-XOi.title" = "Ежемесячно";
+"REP-70-XOi.title" = "Каждый месяц";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
 "TvB-UM-FrS.title" = "Использовать устаревший полноэкранный режим";
@@ -89,7 +89,7 @@
 "XFC-Lr-LmP.title" = "Иначе в меню будут отображены только файлы, открытые вручную.";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "Завершить программу, когда все окна закрыты";
+"YLo-6E-tT7.title" = "Завершать приложение при закрытии всех окон";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/путь/к/папке/снимков/";
@@ -107,25 +107,25 @@
 "hWC-KJ-FuC.title" = "Проверять наличие обновлений";
 
 /* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
-"i4A-86-dGC.title" = "Пауза, когда компьютер переходит в режим сна";
+"i4A-86-dGC.title" = "Пауза при переходе компьютера в режим сна";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
 "iGS-qN-f5q.title" = "Включить историю воспроизведения";
 
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
-"jOB-D3-WT3.title" = "Продолжить с места последнего воспроизведение";
+"jOB-D3-WT3.title" = "Запоминать позицию в файле";
 
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "История:";
 
 /* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Показывать исполнителя и имя трека для аудио файлов при доступности";
+"kBI-Th-bBV.title" = "Показывать исполнителя и название для аудиофайлов, если возможно";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "Воспроизведение при входе в полноэкранный режим";
+"lOw-pu-Llm.title" = "Воспроизведение при переходе в полноэкранный режим";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
-"lvA-Rc-Sh6.title" = "Включая субтитры";
+"lvA-Rc-Sh6.title" = "Включать в снимок субтитры";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "oJY-Iz-3sO"; */
 "oJY-Iz-3sO.title" = "Формат:";
@@ -134,7 +134,7 @@
 "pdx-zt-kf2.title" = "Снимки экрана:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Предотвратить запуск экранной заставки во время воспроизведения";
+"r2u-P9-J5p.title" = "Блокировать запуск экранной заставки во время воспроизведения";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Каждый час";
@@ -146,22 +146,22 @@
 "uQR-Fx-oEm.title" = "Поведение:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Предпросмотр после снимка экрана";
+"xE7-Uu-19f.title" = "Открывать окно предпросмотра после снимка";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
-"xr2-rB-O0x.title" = "Остановить/продолжить воспроизведение, когда:";
+"xr2-rB-O0x.title" = "Пауза / воспроизведение:";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Не в «музыкальном режиме» или при воспроизведении только аудио";
+"yla-DT-YTx.title" = "Кроме «музыкального режима» или воспроизведения только аудио";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
-"z9T-8h-1T0.title" = "Показать окно приветствия";
+"z9T-8h-1T0.title" = "Показывать окно приветствия";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "Когда файл открывается вручную:";
+"jok-kc-HjX.title" = "Включать при открытии файла вручную:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Повтор плейлиста";
+"5WC-Sp-6mg.title" = "Повтор всего плейлиста";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
 "A1p-L4-jtC.title" = "Повтор одного файла";

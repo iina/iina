@@ -84,7 +84,7 @@
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
-"osd.resume" = "Resume";
+"osd.resume" = "جاری رکھیں";
 "osd.volume" = "Volume: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Aspect Ratio: %@";
@@ -193,7 +193,7 @@
 "menu.mini_player" = "Enter Music Mode";
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
-"menu.resume" = "Resume";
+"menu.resume" = "جاری رکھیں";
 "menu.speed" = "Speed: %@x";
 "menu.chapters" = "Show Chapters Panel";
 "menu.hide_chapters" = "Hide Chapters Panel";
@@ -364,14 +364,14 @@
 "playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.play_in_new_window" = "نئی ونڈو میں چلائیں";
 "pl_menu.remove" = "Remove";
 "pl_menu.remove_multi" = "Remove Selected";
 "pl_menu.delete" = "Move to Trash";
 "pl_menu.delete_multi" = "Move Selected Files to Trash";
 "pl_menu.delete_after_play" = "Move to Trash After Playback";
 "pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
-"pl_menu.show_in_finder" = "Show in Finder";
+"pl_menu.show_in_finder" = "فائنڈر ایپلیکیشن میں دکھائیں۔";
 "pl_menu.add_file" = "Add File…";
 "pl_menu.add_url" = "Add URL…";
 "pl_menu.clear_playlist" = "Clear Playlist";

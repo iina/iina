@@ -9,12 +9,12 @@
 
 "general.on" = "On";
 "general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
-"general.ok" = "OK";
+"general.login" = "Вписване";
+"general.logout" = "Изход";
+"general.ok" = "ОК";
 "general.cancel" = "Отмяна";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.username" = "Потребителско име";
+"general.password" = "Парола";
 
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Value already exists.";
@@ -22,17 +22,17 @@
 // Guide Window
 "guide.highlights" = "Highlights";
 "guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.faq" = "Често задавани въпроси";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
+"initial.announcement" = "Вие използвате %@ версия на IINA";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
 // Inspector Window
-"inspector.error" = "Error";
+"inspector.error" = "Грешка";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
@@ -56,7 +56,7 @@
 // EQ Presets
 "eq.preset.flat" = "Flat";
 "eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
+"eq.preset.classical" = "Класика";
 "eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Deep";
 "eq.preset.electronic" = "Electronic";
@@ -64,16 +64,16 @@
 "eq.preset.increase_bass" = "Increase Bass";
 "eq.preset.increase_treble" = "Increase Treble";
 "eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
+"eq.preset.jazz" = "Джаз";
+"eq.preset.latin" = "Латино";
 "eq.preset.loundness" = "Loundness";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.piano" = "Пиано";
+"eq.preset.pop" = "Поп";
 "eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "Reduce Bass";
 "eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
+"eq.preset.rock" = "Рок";
 "eq.preset.small_speaker" = "Small Speaker";
 "eq.preset.spoken_word" = "Spoken Word";
 
@@ -83,10 +83,10 @@
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
+"osd.pause" = "Пауза";
 "osd.resume" = "Resume";
 "osd.volume" = "Volume: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Скорост: %@x";
 "osd.aspect" = "Aspect Ratio: %@";
 "osd.crop" = "Crop: %@";
 "osd.rotate" = "Rotate: %i°";
@@ -118,19 +118,19 @@
 "osd.subtitle_scale" = "Subtitle Scale: %@x";
 "osd.add_to_playlist" = "Added %i Files to Playlist";
 "osd.clear_playlist" = "Cleared Playlist";
-"osd.video_eq.contrast" = "Contrast: %i";
-"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.contrast" = "Конътраст: %i";
+"osd.video_eq.gamma" = "Гама: %i";
 "osd.video_eq.hue" = "Hue: %i";
 "osd.video_eq.saturation" = "Saturation: %i";
-"osd.video_eq.brightness" = "Brightness: %i";
+"osd.video_eq.brightness" = "Яркост: %i";
 "osd.find_online_sub" = "Finding online subtitles…";
-"osd.find_online_sub.source" = "from";
-"osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.find_online_sub.source" = "от";
+"osd.sub_not_found" = "Няма намерени субтитри";
+"osd.sub_found" = "%d намерени субтитри.";
+"osd.sub_downloading" = "Изтегляне на %d субтитри";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
-"osd.network_error" = "Network error";
+"osd.network_error" = "Грешка в мрежата";
 "osd.file_error" = "Error reading file";
 "osd.cannot_login" = "Cannot login";
 "osd.canceled" = "Canceled";
@@ -147,7 +147,7 @@
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
 "preference.subtitle" = "Subtitle";
-"preference.network" = "Network";
+"preference.network" = "Мрежа";
 "preference.control" = "Control";
 "preference.keybindings" = "Key Bindings";
 "preference.advanced" = "Advanced";
@@ -192,9 +192,9 @@
 "menu.exit_pip" = "Exit Picture-in-Picture";
 "menu.mini_player" = "Enter Music Mode";
 "menu.exit_mini_player" = "Exit Music Mode";
-"menu.pause" = "Pause";
+"menu.pause" = "Пауза";
 "menu.resume" = "Resume";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Скорост: %@x";
 "menu.chapters" = "Show Chapters Panel";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Show Playlist Panel";
@@ -228,10 +228,10 @@
 "menu.show_plugins_panel" = "Show Plugins Panel";
 "menu.hide_plugins_panel" = "Hide Plugins Panel";
 
-"track.audio" = "Audio";
+"track.audio" = "Звук";
 "track.none" = "<None>";
-"track.sub" = "Subtitle";
-"track.video" = "Video";
+"track.sub" = "Субтитри";
+"track.video" = "Видео";
 
 "subtrack.no_loaded" = "No Subtitles Loaded";
 "subtrack.no_external" = "No External Subtitles Found";
@@ -239,9 +239,9 @@
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
 
-"alert.title_error" = "Error";
-"alert.title_warning" = "Warning";
-"alert.title_info" = "Information";
+"alert.title_error" = "Грешка";
+"alert.title_warning" = "Внимание";
+"alert.title_info" = "Информация";
 
 "alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
@@ -271,7 +271,7 @@
 "alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
-"alert.add_filter.title" = "New Filter";
+"alert.add_filter.title" = "Нов филтър";
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
@@ -357,14 +357,14 @@
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
-"playlist.sorting.header" = "Sorting";
+"playlist.sorting.header" = "Подреждане";
 "playlist.sorting.filename_ascending" = "Filename Ascending";
 "playlist.sorting.filename_descending" = "Filename Descending";
 "playlist.sorting.path_ascending" = "File Path Ascending";
 "playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Items";
 "pl_menu.play_next" = "Play Next";
-"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.play_in_new_window" = "Възпроизвеждане в нов прозорец";
 "pl_menu.remove" = "Remove";
 "pl_menu.remove_multi" = "Remove Selected";
 "pl_menu.delete" = "Move to Trash";
@@ -409,7 +409,7 @@
 "mini_player.remove" = "Remove from playlist";
 "mini_player.add" = "Add to playlist";
 "mini_player.delete" = "Delete all tracks from playlist";
-"mini_player.volume" = "Volume";
+"mini_player.volume" = "Сила на звука";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
 "mini_player.sort" = "Sort the playlist";

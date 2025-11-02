@@ -385,7 +385,7 @@ class MainWindowController: PlayerWindowController {
     case PK.arrowButtonAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
-        updateArrowButtonImage()
+        updateArrowButtons()
       }
     case PK.pinchAction.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -571,7 +571,7 @@ class MainWindowController: PlayerWindowController {
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     setupOSCToolbarButtons(buttons)
 
-    updateArrowButtonImage()
+    updateArrowButtons()
 
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
@@ -2836,13 +2836,27 @@ class MainWindowController: PlayerWindowController {
     bufferIndicatorView.isHidden = false
   }
 
-  func updateArrowButtonImage() {
+  /// Configure the OSC arrow buttons based on IINA's `Use left/right button for` setting.
+  ///
+  /// For most settings the button is configured to be a
+  /// [momentaryPushIn](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/momentarypushin)
+  /// button. However if the button is set to control playback speed the button is configured to be a
+  /// [multiLevelAccelerator](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/multilevelaccelerator)
+  /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
+  func updateArrowButtons() {
     if arrowBtnFunction == .playlist {
       leftArrowButton.image = #imageLiteral(resourceName: "nextl")
       rightArrowButton.image = #imageLiteral(resourceName: "nextr")
     } else {
       leftArrowButton.image = #imageLiteral(resourceName: "speedl")
       rightArrowButton.image = #imageLiteral(resourceName: "speed")
+    }
+    if arrowBtnFunction == .speed {
+      leftArrowButton.setButtonType(.multiLevelAccelerator)
+      rightArrowButton.setButtonType(.multiLevelAccelerator)
+    } else {
+      leftArrowButton.setButtonType(.momentaryPushIn)
+      rightArrowButton.setButtonType(.momentaryPushIn)
     }
   }
 
@@ -2873,8 +2887,20 @@ class MainWindowController: PlayerWindowController {
     player.sendOSD(player.info.isMuted ? .mute : .unMute)
   }
 
+  /// User has triggered the left button in the OSC.
+  ///
+  /// The behavior of the button depends upon the `Use left/right button for` setting found in the
+  /// `On Screen Controller` section on the `UI` tab of IINA's settings. For most settings the button is configured to be a
+  /// [momentaryPushIn](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/momentarypushin)
+  /// button. However if the button is set to control playback speed the button is configured to be a
+  /// [multiLevelAccelerator](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/multilevelaccelerator)
+  /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
+  /// - Parameter sender: The button invoking this action.
   @IBAction func leftButtonAction(_ sender: NSButton) {
-    if arrowBtnFunction == .speed {
+    switch arrowBtnFunction {
+    case .playlist, .seek:
+      arrowButtonAction(left: true)
+    case .speed:
       let speeds = AppData.availableSpeedValues.count
       // If fast forwarding change speed to 1x
       if speedValueIndex > speeds / 2 {
@@ -2901,16 +2927,23 @@ class MainWindowController: PlayerWindowController {
         maxPressure = max(maxPressure, sender.intValue)
       }
       arrowButtonAction(left: true)
-    } else {
-      // trigger action only when released button
-      if sender.intValue == 0 {
-        arrowButtonAction(left: true)
-      }
     }
   }
 
+  /// User has triggered the right button in the OSC.
+  ///
+  /// The behavior of the button depends upon the `Use left/right button for` setting found in the
+  /// `On Screen Controller` section on the `UI` tab of IINA's settings. For most settings the button is configured to be a
+  /// [momentaryPushIn](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/momentarypushin)
+  /// button. However if the button is set to control playback speed the button is configured to be a
+  /// [multiLevelAccelerator](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/multilevelaccelerator)
+  /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
+  /// - Parameter sender: The button invoking this action.
   @IBAction func rightButtonAction(_ sender: NSButton) {
-    if arrowBtnFunction == .speed {
+    switch arrowBtnFunction {
+    case .playlist, .seek:
+      arrowButtonAction(left: false)
+    case .speed:
       let speeds = AppData.availableSpeedValues.count
       // If rewinding change speed to 1x
       if speedValueIndex < speeds / 2 {
@@ -2937,11 +2970,6 @@ class MainWindowController: PlayerWindowController {
         maxPressure = max(maxPressure, sender.intValue)
       }
       arrowButtonAction(left: false)
-    } else {
-      // trigger action only when released button
-      if sender.intValue == 0 {
-        arrowButtonAction(left: false)
-      }
     }
   }
 

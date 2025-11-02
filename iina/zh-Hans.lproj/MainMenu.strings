@@ -325,6 +325,9 @@
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "检查器";
 
+/* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
+"0tJ-RQ-kuW.title" = "日志查看器";
+
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "原始大小（Retina）";
 
@@ -501,3 +504,9 @@
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "开始朗读";
+
+/* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
+"Y6q-cI-vfM.title" = "插件";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
+"Qwb-26-zjX.title" = "打开URL…";

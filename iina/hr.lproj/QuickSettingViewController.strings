@@ -17,16 +17,16 @@
 "6LO-6y-IsA.title" = "Boja:";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Primarni titlovi";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Secondary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Sekundarni titlovi";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "Učitaj vanjski audio zapis …";
+"8Ax-5X-osl.title" = "Učitaj externu audio traku …";
 
 /* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
-"AB5-UZ-euc.ibShadowedLabels[0]" = "Dodaj titl…";
+"AB5-UZ-euc.ibShadowedLabels[0]" = "Dodaj titl …";
 
 /* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
 "AKs-VQ-fKF.title" = "Kašnjenje zvuka:";
@@ -35,7 +35,7 @@
 "ANn-CR-JOV.title" = "Boja:";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
-"B0I-bX-HZS.title" = "1x";
+"B0I-bX-HZS.title" = "1 ×";
 
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
 "CYP-el-A6A.label" = "Video";
@@ -59,7 +59,7 @@
 "LEZ-fv-buL.title" = "0 s";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "Vanjski audio zapis:";
+"Lnu-kz-cql.title" = "Eksterna audio snimka:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
 "Lpw-ws-Ezh.title" = "-12 dB";
@@ -71,16 +71,16 @@
 "PLX-gY-e0h.title" = "4 ×";
 
 /* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
-"RA1-fF-OrB.title" = "Vanjski titl:";
+"RA1-fF-OrB.title" = "Eksterni titlovi:";
 
 /* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
-"Rbb-wh-cLc.ibShadowedLabels[0]" = "Traži na vezi…";
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "Traži na internetu …";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "Zasićenost:";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
-"VzC-tM-KT7.title" = "Video zapis:";
+"VzC-tM-KT7.title" = "Video traka:";
 
 /* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
 "W7H-mU-v3D.title" = "x";
@@ -155,10 +155,10 @@
 "lQt-I0-jHO.title" = "VIDEO";
 
 /* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
-"ldQ-YL-IEp.title" = "1x";
+"ldQ-YL-IEp.title" = "1 ×";
 
 /* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
-"m9e-IB-IDJ.title" = "Obreži:";
+"m9e-IB-IDJ.title" = "Odreži:";
 
 /* Class = "NSMenuItem"; title = "2.5"; ObjectID = "nPr-QJ-Ty3"; */
 "nPr-QJ-Ty3.title" = "2.5";
@@ -191,10 +191,10 @@
 "uqb-mz-A22.title" = "POZADINA";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
-"wBD-pZ-Bvu.title" = "Opcije stila titlova mogu narušiti ispravan prikaz ASS titlova, a neke od njih će biti onemogućene ovisno od vrste titla.";
+"wBD-pZ-Bvu.title" = "Opcije stila titlova mogu pokvariti prikaz ASS titlova, a neke od njih će se deaktivirati ovisno o vrsti titla.";
 
 /* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
-"x39-62-7KC.title" = "Zvučni zapis:";
+"x39-62-7KC.title" = "Audio traka:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
 "xfX-wr-DTJ.title" = "+5 s";
@@ -215,13 +215,13 @@
 "UW4-by-XRS.title" = "HDR";
 
 /* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
-"sE0-LN-T8i.title" = "Save the current EQ as a preset…";
+"sE0-LN-T8i.title" = "Spremi trenutačnu postavku ekvilajzera …";
 
 /* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
-"2tD-0L-UUs.title" = "Rename the current EQ preset…";
+"2tD-0L-UUs.title" = "Preimenuj trenutačnu postavku ekvilajzera …";
 
 /* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
-"dvI-Rj-7qF.title" = "Remove the current EQ preset";
+"dvI-Rj-7qF.title" = "Ukloni trenutačnu postavku ekvilajzera ";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
-"LPh-nJ-GjN.title" = "Manual";
+"LPh-nJ-GjN.title" = "Priručnik";

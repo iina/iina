@@ -175,8 +175,8 @@
 "preference.sub_override_level.descriptive_text.strip" = "자막의 모든 ASS 태그와 스타일 완전히 제거.";
 "preference.sub_override_level.descriptive_text.yes" = "이 섹션의 모든 스타일 설정 적용.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "\"플러그인 > GitHub에서 설치\"에서 온라인 미디어 플러그인을 설치하면 비디오 다운로드 및 자동 Yt-Dlp 업데이트와 같은 고급 기능을 사용할 수 있습니다.";
+"preference.ytdl_plugin_installed" = "온라인 미디어 플러그인이 설치되어 있어 내장된 youtube-dl 지원이 비활성화되어 있습니다.";
 
 "menu.volume" = "음량: %@";
 "menu.volume_muted" = "음량: %@ (음소거 됨)";
@@ -223,7 +223,7 @@
 "menu.manage_plugins" = "플러그인 관리…";
 "menu.developer_tool" = "개발자 툴";
 "menu.more_plugin" = "더보기…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.conflicting_shortcuts" = "충돌하는 단축키…";
 "menu.reload_plugins" = "모든 플러그인 새로고침";
 "menu.show_plugins_panel" = "플러그인 패널 표시";
 "menu.hide_plugins_panel" = "플러그인 패널 숨기기";

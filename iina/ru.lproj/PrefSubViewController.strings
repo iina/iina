@@ -8,7 +8,7 @@
 "1Tq-5k-o6R.title" = "Сверху";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
-"2XY-Un-0Fg.title" = "В полноэкранном режиме показывать субтитры под видео";
+"2XY-Un-0Fg.title" = "Показывать субтитры под видео в полноэкранном режиме";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Расположение:";
@@ -20,10 +20,10 @@
 "7pf-Kb-TNr.title" = "Предпочитать субтитры, содержащие в имени файла:";
 
 /* Class = "NSButtonCell"; title = "Scale subtitles with window size"; ObjectID = "8hj-ki-R0h"; */
-"8hj-ki-R0h.title" = "Масштабировать субтитры с размером окна";
+"8hj-ki-R0h.title" = "Масштабировать субтитры в соответствии с размером окна";
 
 /* Class = "NSTextFieldCell"; title = "Font spacing:"; ObjectID = "9EP-XB-lyO"; */
-"9EP-XB-lyO.title" = "Интервал шрифта:";
+"9EP-XB-lyO.title" = "Межзнаковый интервал:";
 
 /* Class = "NSTextFieldCell"; title = "Vertical position:"; ObjectID = "9N4-Zg-M7m"; */
 "9N4-Zg-M7m.title" = "Положение по вертикали:";
@@ -41,7 +41,7 @@
 "C3p-uP-8u8.title" = "Автоматически искать субтитры в интернете";
 
 /* Class = "NSTextFieldCell"; title = "Font:"; ObjectID = "C4C-XP-i2S"; */
-"C4C-XP-i2S.title" = "Шрифт";
+"C4C-XP-i2S.title" = "Гарнитура:";
 
 /* Class = "NSTextFieldCell"; title = " X:"; ObjectID = "CdS-9J-f2h"; */
 "CdS-9J-f2h.title" = " X:";
@@ -92,7 +92,7 @@
 "Y75-4k-2Du.title" = "Кодировка по умолчанию:";
 
 /* Class = "NSTextFieldCell"; title = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles."; ObjectID = "Z2M-dh-eq1"; */
-"Z2M-dh-eq1.title" = "Этот параметр будет сохранен как языковой код ISO 639-2 и применен для mpv и OpenSubtitles.org.";
+"Z2M-dh-eq1.title" = " Коды по ISO 639-2 (например, rus, eng). Применяются как для плеера, так и для OpenSubtitles.";
 
 /* Class = "NSTextFieldCell"; title = "Blur:"; ObjectID = "aO9-D6-KG8"; */
 "aO9-D6-KG8.title" = "Размытие:";
@@ -131,10 +131,10 @@
 "mFm-Q6-aja.title" = "Субтитры ASS:";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "nH7-kO-S15"; */
-"nH7-kO-S15.title" = "Выберите…";
+"nH7-kO-S15.title" = "Выбрать…";
 
 /* Class = "NSButtonCell"; title = "Italic"; ObjectID = "pNF-Fw-QtW"; */
-"pNF-Fw-QtW.title" = "Курсив";
+"pNF-Fw-QtW.title" = "Курсивный";
 
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "Отступ";
@@ -149,7 +149,7 @@
 "t5n-mc-dss.title" = "Рамка";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Отключено";
+"u31-eV-Arr.title" = "Выключена";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "Цвет:";

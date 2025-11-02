@@ -169,7 +169,7 @@
 "preference.sub_override_level.strip" = "volledig";
 "preference.sub_override_level.yes" = "yes";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.no" = "Verbeeld onderskrifte soos gespesifiseer deur die onderskrifskrip, sonder oorskrywing.";
 "preference.sub_override_level.descriptive_text.force" = "Pas alle onderskrifstyle toe.";
 "preference.sub_override_level.descriptive_text.scale" = "Pas die skaalinstellings toe saam met die stelinstellings in hierdie instellings.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
@@ -358,10 +358,10 @@
 "playlist.total_length" = "%@ in totaal";
 "playlist.total_length_with_selected" = "%@ van %@ geselekteer";
 "playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.filename_ascending" = "Lêernaam opgaande";
+"playlist.sorting.filename_descending" = "Lêernaam afgaande";
+"playlist.sorting.path_ascending" = "Lêerpad opgaande";
+"playlist.sorting.path_descending" = "Lêerpad afgaande";
 "pl_menu.title_multi" = "%d items";
 "pl_menu.play_next" = "Speel volgende af";
 "pl_menu.play_in_new_window" = "Speel af in nuwe venster";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Sluit musiekmodus";
 "mini_player.back" = "Keer terug na videomodus";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Sorteer die afspeellys";
 
 // Touch bar
 

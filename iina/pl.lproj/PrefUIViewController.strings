@@ -32,13 +32,13 @@
 "92n-Uq-o4G.title" = "dołu";
 
 /* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
-"9IR-Sf-wMq.title" = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations.";
+"9IR-Sf-wMq.title" = "Kiedy ustawienie dostępności macOS „Redukuj ruch” jest włączone, IINA zredukuje animacje styku użytkownika, o których wiadomo, że sprawiają problemy tym z zaburzeniami przedsionkowymi. Jeżeli to będzie niewystarczające, to ustawienie może być użyte, aby dodatkowo zredukować ruch poprzez wyeliminowanie animacji styku użytkownika.";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% ekranu";
 
 /* Class = "NSTextFieldCell"; title = "Accessibility:"; ObjectID = "AYW-Xu-ySw"; */
-"AYW-Xu-ySw.title" = "Accessibility:";
+"AYW-Xu-ySw.title" = "Dostępność:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "Okno:";
@@ -53,7 +53,7 @@
 "CJE-ap-IH8.title" = "Gdy plik multimedialny został otwarty ręcznie";
 
 /* Class = "NSButtonCell"; title = "File start"; ObjectID = "DAm-C4-5BQ"; */
-"DAm-C4-5BQ.title" = "File start";
+"DAm-C4-5BQ.title" = "Początek pliku";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Pokaż pozostały czas";
@@ -164,7 +164,7 @@
 "baY-O6-fcB.title" = "Przełącz tryb Obraz-w-obrazie poprzed minimalizowanie/maksymalizowanie okna";
 
 /* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
-"cib-Cg-9kn.title" = "Only for video files";
+"cib-Cg-9kn.title" = "Tylko dla plików wideo";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x rozmiaru obrazu";
@@ -206,7 +206,7 @@
 "mdD-if-Wqw.title" = "Przyciągaj do środka podczas przeciągania";
 
 /* Class = "NSButtonCell"; title = "Disable animations"; ObjectID = "mjs-jg-wm1"; */
-"mjs-jg-wm1.title" = "Disable animations";
+"mjs-jg-wm1.title" = "Wyłącz animacje";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
 "oJ8-74-L3z.title" = "Poprzedni/następny plik";

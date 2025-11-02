@@ -35,11 +35,11 @@
 "inspector.error" = "Ошибка";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Буферизация… %d%%";
+"main.buffering_indicator" = "Буферизация… %d% %";
 "main.opening_stream" = "Открытие потока…";
 "main.seeking_indicator" = "Поиск…";
 "osc.precision" = "Точность";
-"osc.1s" = "1 сек.";
+"osc.1s" = "1 секунда";
 "osc.100ms" = "100 миллисекунд";
 "osc.10ms" = "10 миллисекунд";
 "osc.1ms" = "миллисекунда";
@@ -51,7 +51,7 @@
 "quicksetting.deinterlace" = "Деинтерлейсинг";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Скрыть";
-"quicksetting.reset_speed" = "Сбросить скорость до 1x";
+"quicksetting.reset_speed" = "Сбросить скорость до 1×";
 
 // EQ Presets
 "eq.preset.flat" = "Без коррекции";
@@ -102,17 +102,17 @@
 "osd.sub_hidden" = "Субтитры скрыты";
 "osd.sub_visible" = "Субтитры отображаются";
 "osd.sub_second_delay.nodelay" = "Задержка вторых субтитров: без задержки";
-"osd.sub_second_delay.later" = "Задержка вторых субтитров: %@ сек. позже";
-"osd.sub_second_delay.earlier" = "Задержка вторых субтитров: %@ сек. раньше";
+"osd.sub_second_delay.later" = "Задержка вторых субтитров: на %@ с позже";
+"osd.sub_second_delay.earlier" = "Задержка вторых субтитров: на %@ с раньше";
 "osd.sub_second_hidden" = "Вторые субтитры скрыты";
 "osd.sub_second_pos" = "Позиция вторых субтитров: %@";
 "osd.sub_second_visible" = "Вторые субтитры видны";
 "osd.mute" = "Выключить звук";
 "osd.unmute" = "Включение звука";
 "osd.screenshot" = "Снимок экрана сохранен";
-"osd.abloop.a" = "Цикл: точка А";
-"osd.abloop.b" = "Цикл: точка Б";
-"osd.abloop.clear" = "Цикл: сброшен";
+"osd.abloop.a" = "Повтор A–B: точка А";
+"osd.abloop.b" = "Повтор A–B: точка B";
+"osd.abloop.clear" = "Повтор A–B: сброшено";
 "osd.stop" = "Остановить";
 "osd.chapter" = "Глава: %@";
 "osd.subtitle_scale" = "Масштаб субтитров: %@×";
@@ -156,9 +156,9 @@
 "preference.scripts" = "Скрипты";
 "preference.not_logged_in" = "Вход не выполнен";
 "preference.logged_in_as" = "Выполнен вход как %@";
-"preference.system_media_control" = "Использовать системный медиа-контроль";
+"preference.system_media_control" = "Использовать системное управление медиа";
 
-"preference.key_binding_hint_1" = "Чтобы изменить привязки клавиш в текущем файле конфигурации, сначала нажмите кнопку \"Дублировать…\", чтобы создать копию.";
+"preference.key_binding_hint_1" = "Чтобы изменить привязки клавиш в текущем файле конфигурации, сначала нажмите кнопку «Дублировать…», чтобы создать копию.";
 "preference.key_binding_hint_2" = "Дважды щелкните строку справа, чтобы отредактировать соответствующую привязку клавиш.";
 
 "preference.enable_adv_settings" = "Включить расширенные настройки";
@@ -169,11 +169,11 @@
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "yes";
 
-"preference.sub_override_level.descriptive_text.no" = "Показывать субтитры как задано в ASS, без переопределения пользователем.";
-"preference.sub_override_level.descriptive_text.force" = "Применить все стили, переопределяющие субтитры.";
-"preference.sub_override_level.descriptive_text.scale" = "Применить все стили субтитров, заданные в данном разделе, а также масштабирование шрифта.";
+"preference.sub_override_level.descriptive_text.no" = "Показывать субтитры ASS без переопределения пользователем.";
+"preference.sub_override_level.descriptive_text.force" = "Переопределять оформление стилями, заданными ниже, и принудительно применять другие настройки для субтитров.";
+"preference.sub_override_level.descriptive_text.scale" = "Переопределять оформление стилями, заданными ниже, и применять масштабирование шрифта.";
 "preference.sub_override_level.descriptive_text.strip" = "Игнорировать все стили и теги в субтитрах ASS.";
-"preference.sub_override_level.descriptive_text.yes" = "Применить все стили субтитров, заданные в данном разделе.";
+"preference.sub_override_level.descriptive_text.yes" = "Переопределять оформление стилями, заданными ниже.";
 
 "preference.ytdl_plugin_not_installed" = "Установите плагин Online Media из меню «Плагины > Установить с GitHub», чтобы получить дополнительные возможности, такие как загрузка видео и автоматическое обновление yt-dlp.";
 "preference.ytdl_plugin_installed" = "Встроенная поддержка youtube-dl отключена, так как у вас установлен плагин Online Media.";
@@ -188,7 +188,7 @@
 "menu.sub_second_show" = "Показать вторые субтитры";
 "menu.fullscreen" = "Перейти в полноэкранный режим";
 "menu.exit_fullscreen" = "Выйти из полноэкранного режима";
-"menu.pip" = "Войти в режим «Картинка в картинке»";
+"menu.pip" = "Перейти в режим «Картинка в картинке»";
 "menu.exit_pip" = "Выйти из режима «Картинка в картинке»";
 "menu.mini_player" = "Перейти в музыкальный режим";
 "menu.exit_mini_player" = "Выйти из музыкального режима";
@@ -202,20 +202,20 @@
 "menu.video" = "Показать панель видео";
 "menu.hide_video" = "Скрыть панель видео";
 "menu.audio" = "Показать панель аудио";
-"menu.hide_audio" = "Скрыть аудио-панель";
-"menu.subtitles" = "Показывать панель субтитров";
+"menu.hide_audio" = "Скрыть панель аудио";
+"menu.subtitles" = "Показать панель субтитров";
 "menu.hide_subtitles" = "Скрыть панель субтитров";
 
-"menu.seek_forward" = "Шаг вперед %@ с";
-"menu.seek_backward" = "Шаг назад %@ с";
-"menu.speed_up" = "Повысить скорость до %@x";
-"menu.speed_down" = "Снизить скорость до %@x";
-"menu.volume_up" = "Громкость + %@%%";
-"menu.volume_down" = "Громкость - %@%%";
-"menu.audio_delay_up" = "Задержка аудио + %@ с";
-"menu.audio_delay_down" = "Задержка аудио - %@ с";
-"menu.sub_delay_up" = "Задержка субтитров + %@ с";
-"menu.sub_delay_down" = "Задержка субтитров - %@ с";
+"menu.seek_forward" = "Вперед на %@ с";
+"menu.seek_backward" = "Назад на %@ с";
+"menu.speed_up" = "Повысить скорость до %@×";
+"menu.speed_down" = "Снизить скорость до %@×";
+"menu.volume_up" = "Громкость +%@% %";
+"menu.volume_down" = "Громкость −%@% %";
+"menu.audio_delay_up" = "Задержка аудио +%@ с";
+"menu.audio_delay_down" = "Задержка аудио −%@ с";
+"menu.sub_delay_up" = "Задержка субтитров +%@ с";
+"menu.sub_delay_down" = "Задержка субтитров −%@ с";
 
 "menu.crop_custom" = "Другое…";
 "menu.find_online_sub" = "Найти субтитры онлайн на %@";
@@ -243,19 +243,19 @@
 "alert.title_warning" = "Предупреждение";
 "alert.title_info" = "Информация";
 
-"alert.fatal_error" = "Фатальная ошибка: %@ \nПриложение будет завершено.";
+"alert.fatal_error" = "Критическая ошибка: %@ \nПриложение будет завершено.";
 "alert.mpv_error" = "Внутренняя ошибка %@ (%@) при установке опции %@.";
 
 "alert.unsupported_audio" = "Неподдерживаемая внешняя аудиодорожка.";
 "alert.unsupported_sub" = "Неподдерживаемые внешние субтитры.";
-"alert.unsupported_url" = "Неподдерживаемый URL.";
-"alert.wrong_url_format" = "Неверный формат URL.";
+"alert.unsupported_url" = "Неподдерживаемый адрес.";
+"alert.wrong_url_format" = "Неверный формат адреса.";
 
 "alert.error_open" = "Не удается открыть файл или поток!";
-"alert.error_finding_file" = "Невозможно найти файл %@!";
-"alert.error_loading_script" = "Не удалось загрузить скрипт %@!";
+"alert.error_finding_file" = "Не удается найти файл %@!";
+"alert.error_loading_script" = "Не удается загрузить скрипт %@!";
 "alert.error_saving_file" = "Ошибка при сохранении %@: %@";
-"alert.error_deleting_file" = "Невозможно удалить файл.";
+"alert.error_deleting_file" = "Не удается удалить файл.";
 
 "alert.target_peak.bad_value" = "Значение \"%@\" является недопустимым.\nПожалуйста, введите значение в диапазоне от 10 до 10000, либо 0.";
 
@@ -265,8 +265,8 @@
 "alert.config.duplicate.message" = "Введите имя для дубля файла конфигурации.";
 "alert.config.file_existing.title" = "Файл уже существует";
 "alert.config.file_existing.message" = "Уже есть файл конфигурации с тем же именем. Нажмите ОК для показа этого файла в Finder.";
-"alert.config.cannot_create" = "Не удалось создать файл конфигурации!\n%@";
-"alert.config.cannot_write" = "Не удалось записать файл конфигурации!";
+"alert.config.cannot_create" = "Не удается создать файл конфигурации!\n%@";
+"alert.config.cannot_write" = "Не удается записать файл конфигурации!";
 "alert.config.rename.title" = "Новое имя для конфигурации клавиш";
 "alert.config.rename.message" = "Пожалуйста, укажите новое имя конфигурации.";
 
@@ -274,21 +274,21 @@
 "alert.add_filter.title" = "Новый фильтр";
 "alert.add_filter.message" = "Введите строку фильтра в формате команд «vf» или «af» из mpv.";
 
-"alert.keybinding_config.error" = "Ошибка разбора файла конфигурации клавиш «%@»! Используется стандартная конфигурация клавиш IINA. Проверьте свою конфигурацию.";
+"alert.keybinding_config.error" = "Ошибка разбора файла конфигурации клавиш «%@»! Сброс до стандартной конфигурации клавиш IINA. Проверьте свою конфигурацию.";
 
-"alert.extra_option.cannot_read" = "Не удалось прочесть пользовательские параметры mpv.";
+"alert.extra_option.cannot_read" = "Не удается прочесть пользовательские параметры mpv.";
 "alert.extra_option.empty" = "Ключ или значение не могут быть пустыми!";
-"alert.extra_option.error" = "Ошибка установки параметра --%@=%@ со значением %d. Проверьте установленные параметры в Настройки > Дополнительно.";
+"alert.extra_option.error" = "Ошибка установки параметра --%@=%@ со значением %d. Проверьте установленные параметры в «Настройки > Дополнительно».";
 "alert.extra_option.config_folder" = "Ошибка при установке папки конфигурации «%@».";
 
 "alert.playlist.error_deleting" = "Ошибка удаления: %@";
 
-"alert.screenshot.error_taking" = "Невозможно сделать снимок экрана!";
+"alert.screenshot.error_taking" = "Не удается сделать снимок экрана!";
 
 "alert.sub.no_selected" = "Сначала выберите скачанные субтитры.";
 "alert.sub_lang_not_set" = "Перед использованием OpenSubtitles выберите в настройках предпочитаемый язык субтитров. Сейчас используется английский.";
-"alert.sub.cannot_save_passwd" = "Не удалось сохранить пароль в Keychain: %@";
-"alert.sub.cannot_login" = "Не удалось выполнить вход. Проверьте имя пользователя, пароль и состояние сети.\n\n%@";
+"alert.sub.cannot_save_passwd" = "Не удается сохранить пароль в Keychain: %@";
+"alert.sub.cannot_login" = "Не удается выполнить вход. Проверьте имя пользователя, пароль и состояние сети.\n\n%@";
 "alert.sub.save_downloaded.title" = "Сохранить загруженные субтитры";
 
 "alert.set_default.title" = "Установка IINA приложением по умолчанию";
@@ -304,20 +304,20 @@
 "alert.opensub.login.title" = "Войти в OpenSubtitles";
 "alert.opensub.login.message" = "Введите имя пользователя и пароль";
 
-"alert.open_url.title" = "Открыть URL";
-"alert.open_url.message" = "Введите URL:";
-"alert.choose_media_file.title" = "Выбрать медиафайл";
+"alert.open_url.title" = "Открыть адрес";
+"alert.open_url.message" = "Введите адрес:";
+"alert.choose_media_file.title" = "Выберите медиафайл";
 
-"alert.add_url.title" = "Добавить URL";
-"alert.add_url.message" = "Пожалуйста, введите URL-адрес:";
+"alert.add_url.title" = "Добавить адрес";
+"alert.add_url.message" = "Пожалуйста, введите адрес:";
 
 "alert.delete_history.title" = "Удалить историю воспроизведения";
 "alert.delete_history.message" = "Вы уверены, что хотите удалить выбранное?";
 
-"alert.filter_hwdec.message" = "Вы собираетесь применить видеофильтр, но текущий режим аппаратного декодирования плохо поддерживает видеофильтры. Вы можете либо отключить аппаратное декодирование, что повысит нагрузку на ЦП, либо переключиться на режим «Автоматически (с копированием)», который будет потреблять вдвое больше памяти.\nВозможно, вам придется повторить предыдущую операцию (например, настройку обрезки), чтобы она сработала.";
+"alert.filter_hwdec.message" = "Вы собираетесь применить видеофильтр, но текущий режим аппаратного декодирования плохо поддерживает видеофильтры. Вы можете либо отключить аппаратное декодирование, что повысит нагрузку на ЦП, либо переключиться на режим «Автоматически (с копированием в память)», который будет потреблять вдвое больше памяти.\nВозможно, вам придется повторить предыдущую операцию (например, настройку обрезки), чтобы она сработала.";
 "alert.filter_hwdec.abort" = "Отмена";
-"alert.filter_hwdec.turn_off" = "Отключить аппаратное декодирование";
-"alert.filter_hwdec.use_copy" = "Переключиться на «Автоматически (с копированием)»";
+"alert.filter_hwdec.turn_off" = "Выключить аппаратное декодирование";
+"alert.filter_hwdec.use_copy" = "Включить «Автоматически (с копированием в память)»";
 
 "alert.clear_cache.title" = "Очистить кэш миниатюр";
 "alert.clear_cache.message" = "Вы уверены, что хотите очистить кэш миниатюр?";
@@ -326,7 +326,7 @@
 "alert.clear_history.message" = "Вы действительно хотите удалить всю историю воспроизведения?";
 
 "alert.clear_watch_later.title" = "Очистить сохраненный прогресс воспроизведения";
-"alert.clear_watch_later.message" = "Вы уверены, что хотите удалить весь сохраненный прогресс воспроизведения (Посмотреть позже)?";
+"alert.clear_watch_later.message" = "Вы уверены, что хотите удалить весь сохраненный прогресс воспроизведения?";
 
 "alert.restore_alerts.title" = "Восстановить скрытые оповещения";
 "alert.restore_alerts.message" = "Вы уверены, что хотите включить скрытые оповещения?";
@@ -335,14 +335,14 @@
 
 "alert.no_video_track" = "Нет видеодорожки.";
 
-"alert.duplicate_config" = "Вы не можете редактировать настройки по умолчанию напрямую. Пожалуйста, скопируйте его перед редактированием.";
+"alert.duplicate_config" = "Вы не можете редактировать настройки по умолчанию напрямую. Пожалуйста, сделайте сначала дубликат.";
 
-"alert.assrt_register" = "Из-за ограничений квоты API рекомендуем использовать свой API токен. Токен по умолчанию предназначен для демонстрационного использования, и может не работать.";
+"alert.assrt_register" = "Из-за ограничений квоты API рекомендуем использовать свой API-токен. Токен по умолчанию предназначен для демонстрационного использования, и может не работать.";
 "alert.assrt_register.register" = "Зарегистрироваться";
 "alert.assrt_register.try" = "Попробовать снова";
-"alert.assrt_token_prompt.title" = "ведите свой API  токен";
-"alert.assrt_token_prompt.message" = "Зарегистрируйтесь на отрытом сайте. Получите свой токен на в проыиле пользователя и введите его ниже:";
-"alert.assrt_token_invalid" = "Ваш API токен кажется недействительен.";
+"alert.assrt_token_prompt.title" = "Введите свой API-токен";
+"alert.assrt_token_prompt.message" = "Зарегистрируйтесь на отрытом сайте. Получите свой токен в своем профиле пользователя и введите его ниже:";
+"alert.assrt_token_invalid" = "Похоже, ваш API-токен недействителен.";
 
 "alert.plugin_uninstall.title" = "Вы уверены, что хотите удалить %@?";
 "alert.plugin_uninstall.message" = "Плагин будет удален с диска.";
@@ -368,19 +368,19 @@
 "pl_menu.remove" = "Удалить";
 "pl_menu.remove_multi" = "Удалить выбранные";
 "pl_menu.delete" = "Переместить в Корзину";
-"pl_menu.delete_multi" = "Переместить выбранные в Корзину";
+"pl_menu.delete_multi" = "Переместить выбранное в Корзину";
 "pl_menu.delete_after_play" = "Переместить в Корзину после воспроизведения";
-"pl_menu.delete_after_play_multi" = "Переместить выбранные в Корзину после воспроизведения";
+"pl_menu.delete_after_play_multi" = "Переместить выбранное в Корзину после воспроизведения";
 "pl_menu.show_in_finder" = "Показать в Finder";
 "pl_menu.add_file" = "Добавить файл…";
-"pl_menu.add_url" = "Добавить URL…";
+"pl_menu.add_url" = "Добавить адрес…";
 "pl_menu.clear_playlist" = "Очистить плейлист";
 "pl_menu.matched_sub" = "%d подходящих субтитров";
 "pl_menu.add_sub" = "Добавить субтитры…";
 "pl_menu.wrong_sub" = "Неверные субтитры!";
 "pl_menu.browser" = "Открыть в браузере";
-"pl_menu.copy_url" = "Копировать ссылку";
-"pl_menu.copy_url_multi" = "Копировать ссылки";
+"pl_menu.copy_url" = "Копировать адрес";
+"pl_menu.copy_url_multi" = "Копировать адреса";
 
 "keymapping.title" = "Назначить клавиши";
 "keymapping.message" = "Нажмите любую клавишу для записи.";
@@ -388,11 +388,11 @@
 "filter.video_filters" = "Видеофильтры";
 "filter.audio_filters" = "Аудиофильтры";
 
-"hwdec.no" = "Отключить аппаратное декодирование. В этом режиме будет использоваться программный декодер, что увеличивает нагрузку на ЦП.";
-"hwdec.auto" = "Включить аппаратное декодирование. Этот режим быстрее, чем программное декодирование, но большинство видеофильтров не будут работать должным образом.";
-"hwdec.auto-copy" = "Включить аппаратное декодирование с копированием памяти. Этот режим использует вдвое больше оперативной памяти, чем обычное аппаратное декодирование, но все видеофильтры работают.";
+"hwdec.no" = "Выключить аппаратное декодирование. В данном варианте будет использоваться программное декодирование, что увеличивает нагрузку на ЦП.";
+"hwdec.auto" = "Аппаратное декодирование будет использоваться, если это возможно для текущего видеокодека. Если это невозможно, то будет использоваться программное декодирование.";
+"hwdec.auto-copy" = "Аппаратное декодирование будет использоваться, если это возможно для текущего видеокодека. Если это невозможно, то будет использоваться программное декодирование. В данном варианте применяются только те режимы, которые копируют декодированное видео обратно в оперативную память, что увеличивает ее потребление.";
 
-"subencoding.auto" = "Автоопределение";
+"subencoding.auto" = "Автоматически";
 
 "osc_toolbar.settings" = "Быстрые настройки";
 "osc_toolbar.playlist" = "Плейлист и главы";
@@ -416,20 +416,20 @@
 
 // Touch bar
 
-"touchbar.ahead_15" = "15 с вперёд";
-"touchbar.ahead_30" = "30 с вперёд";
-"touchbar.back_15" = "15 с назад";
-"touchbar.back_30" = "30 с назад";
+"touchbar.ahead_15" = "На 15 с вперед";
+"touchbar.ahead_30" = "На 30 с вперед";
+"touchbar.back_15" = "На 15 с назад";
+"touchbar.back_30" = "На 30 с назад";
 "touchbar.next_video" = "Следующее видео";
 "touchbar.prev_video" = "Предыдущее видео";
 "touchbar.increase_volume" = "Прибавить громкость";
 "touchbar.decrease_volume" = "Убавить громкость";
 "touchbar.rewind" = "Перемотка назад";
-"touchbar.fast_forward" = "Перемотка вперёд";
-"touchbar.play_pause" = "Воспроизведение / Пауза";
+"touchbar.fast_forward" = "Перемотка вперед";
+"touchbar.play_pause" = "Воспроизведение / пауза";
 "touchbar.seek" = "Перемотка";
-"touchbar.time" = "Временная позиция";
-"touchbar.remainingTimeOrTotalDuration" = "Оставшееся время / Общая продолжительность";
+"touchbar.time" = "Позиция (время)";
+"touchbar.remainingTimeOrTotalDuration" = "Осталось / общая продолжительность";
 "touchbar.toggle_pip" = "Режим «Картинка в картинке»";
 
 // Plugin permissions
@@ -437,22 +437,22 @@
 "permissions.network-request.name" = "Сеть";
 "permissions.network-request.desc" = "Этот плагин может выполнять запросы или загружать данные на эти сайты:";
 "permissions.network-request.any_site" = "Любой сайт";
-"permissions.show-osd.name" = "Показывать сообщения на экране";
-"permissions.show-osd.desc" = "Этот плагин сможет показывать сообщения на экране.";
+"permissions.show-osd.name" = "Экранное меню";
+"permissions.show-osd.desc" = "Этот плагин может показывать сообщения экранного меню.";
 "permissions.show-alert.name" = "Показывать уведомления";
-"permissions.show-alert.desc" = "Этот плагин сможет показывать всплывающие уведомления.";
+"permissions.show-alert.desc" = "Этот плагин может показывать всплывающие уведомления.";
 "permissions.video-overlay.name" = "Добавить оверлей на видео";
-"permissions.video-overlay.desc" = "Этот плагин сможет отображать дополнительный контент поверх видео.";
+"permissions.video-overlay.desc" = "Этот плагин может отображать дополнительный контент поверх видео.";
 "permissions.file-system.name" = "Доступ к диску";
-"permissions.file-system.desc" = "Этот плагин сможет получить доступ ко всем файлам на диске, включая конфиденциальную информацию. Он также сможет запускать другие программы, которые в теории могут навредить компьютеру. Пожалуйста, проверьте исходный код плагина.";
+"permissions.file-system.desc" = "Этот плагин может получать доступ ко всем файлам на диске, включая конфиденциальную информацию. Он также может запускать другие программы, которые в теории могут навредить компьютеру. Пожалуйста, проверьте исходный код плагина.";
 
 "plugin.install" = "Установить";
 "plugin.installed" = "Установлено";
 "plugin.not_installed" = "Не установлено";
 "plugin.local" = "Установлено локально";
 "alert.plugin.install_error" = "Произошла ошибка при установке: %@";
-"alert.invalid_url" = "Недопустимая URL-ссылка.";
-"plugin.install_error.invalid_url" = "Неправильная ссылка на плагин.";
+"alert.invalid_url" = "Недопустимый адрес.";
+"plugin.install_error.invalid_url" = "Недопустимый адрес.";
 "plugin.install_error.file_not_found" = "Не удалось найти пакет.";
 "plugin.install_error.cannot_download" = "Не удалось загрузить плагин.\n\nВывод установщика:%@\n";
 "plugin.install_error.cannot_unpackage" = "Не удалось распаковать плагин.\n\nВывод установщика:%@\n";

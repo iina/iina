@@ -5,7 +5,7 @@
 "0T7-Nu-SL7.title" = "Показать панель плейлиста";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Открыть URL…";
+"0m7-3r-twH.title" = "Открыть адрес…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Субтитры";
@@ -77,7 +77,7 @@
 "91n-xW-L37.title" = "Ускорить до 1,1×";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
-"9ee-7i-xs7.title" = "Задержка аудио - 0,1 с";
+"9ee-7i-xs7.title" = "Задержка аудио −0,1 с";
 
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<Нет>";
@@ -107,7 +107,7 @@
 "CKi-JE-yLT.title" = "Расширенный снимок экрана…";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
-"D1y-kv-85s.title" = "Зациклить файл";
+"D1y-kv-85s.title" = "Повтор одного файла";
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Аудиодорожка";
@@ -179,7 +179,7 @@
 "IXq-yq-uDF.title" = "Аудиоустройство";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
-"JJq-qH-toq.title" = "По горизонтали (зеркально)";
+"JJq-qH-toq.title" = "Горизонтально";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
 "Kby-lQ-HCW.title" = "Открыть…";
@@ -218,7 +218,7 @@
 "NdF-0z-k5s.title" = "Вставить";
 
 /* Class = "NSMenuItem"; title = "Vertical (Flip)"; ObjectID = "OIu-H0-Mht"; */
-"OIu-H0-Mht.title" = "По вертикали (вверх ногами)";
+"OIu-H0-Mht.title" = "Вертикально";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "OY7-WF-poV"; */
 "OY7-WF-poV.title" = "Убрать в Dock";
@@ -302,7 +302,7 @@
 "ZnF-yX-7jP.title" = "Настроить Touch Bar…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Зациклить плейлист";
+"aSc-P6-fiZ.title" = "Повтор плейлиста";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Окно";
@@ -317,13 +317,16 @@
 "bGN-E4-V5A.title" = "Mузыкальный режим";
 
 /* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
-"bfB-bn-KeM.title" = "Открыть URL в новом окне…";
+"bfB-bn-KeM.title" = "Открыть адрес в новом окне…";
 
 /* Class = "NSMenu"; title = "File"; ObjectID = "bib-Uj-vzu"; */
 "bib-Uj-vzu.title" = "Файл";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "Показать Инспектор";
+
+/* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
+"0tJ-RQ-kuW.title" = "Журнал сообщений";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "Реальный размер Retina";
@@ -368,7 +371,7 @@
 "hz9-B4-Xy5.title" = "Службы";
 
 /* Class = "NSMenuItem"; title = "A-B Loop"; ObjectID = "i3P-Xw-8D7"; */
-"i3P-Xw-8D7.title" = "Цикл А-Б";
+"i3P-Xw-8D7.title" = "Повтор A–B";
 
 /* Class = "NSMenuItem"; title = "Volume:"; ObjectID = "iQF-1S-9EK"; */
 "iQF-1S-9EK.title" = "Громкость:";
@@ -389,7 +392,7 @@
 "lYN-0x-lzT.title" = "Аудио";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.1s"; ObjectID = "lew-3S-oGY"; */
-"lew-3S-oGY.title" = "Задержка аудио + 0,1 с";
+"lew-3S-oGY.title" = "Задержка аудио +0,1 с";
 
 /* Class = "NSMenuItem"; title = "Go to Screenshot Folder"; ObjectID = "lj0-Oo-7nB"; */
 "lj0-Oo-7nB.title" = "Перейти к папке снимков экрана";
@@ -401,16 +404,16 @@
 "mGw-jm-5x2.title" = "Второстепенные субтитры";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
-"mND-N8-z6o.title" = "Войти в режим «Картинка в картинке»";
+"mND-N8-z6o.title" = "Перейти в режим «Картинка в картинке»";
 
 /* Class = "NSMenuItem"; title = "Flip"; ObjectID = "mT1-1m-HwN"; */
-"mT1-1m-HwN.title" = "Отразить";
+"mT1-1m-HwN.title" = "Перевернуть";
 
 /* Class = "NSMenuItem"; title = "Cycle Audio Tracks"; ObjectID = "n8f-ub-Udb"; */
 "n8f-ub-Udb.title" = "Переключение звуковых дорожек";
 
 /* Class = "NSMenu"; title = "Flip"; ObjectID = "n90-to-nRT"; */
-"n90-to-nRT.title" = "Отразить";
+"n90-to-nRT.title" = "Перевернуть";
 
 /* Class = "NSMenuItem"; title = "Delete Current File"; ObjectID = "npH-8B-XA4"; */
 "npH-8B-XA4.title" = "Удалить текущий файл";
@@ -501,3 +504,9 @@
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "Начать диктовку";
+
+/* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
+"Y6q-cI-vfM.title" = "Плагин";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
+"Qwb-26-zjX.title" = "Открыть адрес…";

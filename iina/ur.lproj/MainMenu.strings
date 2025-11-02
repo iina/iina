@@ -5,7 +5,7 @@
 "0T7-Nu-SL7.title" = "Show Playlist Panel";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Open URL…";
+"0m7-3r-twH.title" = "لنک کھولیں…";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Subtitle";
@@ -173,7 +173,7 @@
 "HyV-fh-RgO.title" = "Video";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
-"IAo-SY-fd9.title" = "Open…";
+"IAo-SY-fd9.title" = "کھولیں…";
 
 /* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
 "IXq-yq-uDF.title" = "Audio Device";
@@ -182,7 +182,7 @@
 "JJq-qH-toq.title" = "Horizontal (Mirror)";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
-"Kby-lQ-HCW.title" = "Open…";
+"Kby-lQ-HCW.title" = "کھولیں…";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "Show All";
@@ -191,7 +191,7 @@
 "LE2-aR-0XJ.title" = "Bring All to Front";
 
 /* Class = "NSMenuItem"; title = "Playback History"; ObjectID = "LND-1n-DU2"; */
-"LND-1n-DU2.title" = "Playback History";
+"LND-1n-DU2.title" = "گزشتہ چلائی گئی فائلیں";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.5s"; ObjectID = "Lc4-4W-thE"; */
 "Lc4-4W-thE.title" = "Audio Delay - 0.5s";
@@ -324,6 +324,9 @@
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "Inspector";
+
+/* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
+"0tJ-RQ-kuW.title" = "Log Viewer";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "Normal Size (Retina)";
@@ -501,3 +504,9 @@
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "Start Speaking";
+
+/* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
+"Y6q-cI-vfM.title" = "Plugin";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
+"Qwb-26-zjX.title" = "لنک کھولیں…";

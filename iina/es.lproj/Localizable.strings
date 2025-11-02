@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Estás usando una versión %@ de IINA";
 "initial.beta.desc" = "Si desea volver a una versión estable, desmarque \"recibir actualizaciones beta\" desde Ajustes > Generales, e instale una versión estable de nuestro <a href=\"https://iina.io\">sitio web oficial</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "No se recomienda usar versiones nocturnas para el uso diario. Actualmente las versiones nocturnas no soportan la actualización automática. Por favor, descargue manualmente nuevas versiones de nuestro <a href=\"https://nightly.iina.io\">sitio web nocturno</a>.";
 "initial.debug.desc" = "Las compilaciones de depuración normalmente no están optimizadas para el rendimiento, por lo que no se recomienda que se utilicen de manera habitual. Las compilaciones de depuración no soportan la actualización automática.";
 "initial.bug_report" = "Notifique a través de <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Buscando…";
 "osc.precision" = "Precisión";
 "osc.1s" = "1 segundo";
 "osc.100ms" = "100 milisegundos";
@@ -51,7 +51,7 @@
 "quicksetting.deinterlace" = "Desentrelazar";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Ocultar";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Restablecer velocidad a 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Plano";
@@ -79,7 +79,7 @@
 
 "alert.eq.new_profile.title" = "Nuevo Perfil de EQ";
 "alert.eq.new_profile.message" = "Por favor, introduzca un nombre de perfil.";
-"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.title" = "Renombrar Perfil Actual";
 "alert.eq.rename.message" = "Por favor, introduzca un nuevo nombre de perfil.";
 
 // OSDMessage.swift
@@ -175,8 +175,8 @@
 "preference.sub_override_level.descriptive_text.strip" = "Remueve radicalmente todas las etiquetas y estilos ASS del subtítulo.";
 "preference.sub_override_level.descriptive_text.yes" = "Aplicar todos los ajustes de estilo en esta sección.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Instale el plugin multimedia en línea de \"Plugins > Instalar desde GitHub\" para disfrutar de características avanzadas tales como descargas de vídeo y actualizaciones automáticas yt-dlp.";
+"preference.ytdl_plugin_installed" = "El soporte de youtube-dl integrado está deshabilitado ya que tienes el plugin de medios online instalado.";
 
 "menu.volume" = "Volumen: %@";
 "menu.volume_muted" = "Volumen: %@ (Silenciado)";
@@ -208,8 +208,8 @@
 
 "menu.seek_forward" = "Adelantar %@s";
 "menu.seek_backward" = "Retroceder %@s";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Aumentar velocidad a %@x";
+"menu.speed_down" = "Reducir velocidad a %@x";
 "menu.volume_up" = "Volumen + %@%%";
 "menu.volume_down" = "Volumen - %@%%";
 "menu.audio_delay_up" = "Retrasar audio + %@s";
@@ -220,13 +220,13 @@
 "menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Buscar subtítulos en línea desde %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
+"menu.manage_plugins" = "Gestionar plugins";
+"menu.developer_tool" = "Herramientas de desarrollo";
 "menu.more_plugin" = "Más…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.conflicting_shortcuts" = "Atajos de teclas con conflictos…";
+"menu.reload_plugins" = "Recargar todos los plugins";
+"menu.show_plugins_panel" = "Mostrar panel de plugins";
+"menu.hide_plugins_panel" = "Ocultar Panel de Plugins";
 
 "track.audio" = "Audio";
 "track.none" = "<Ninguno>";
@@ -257,7 +257,7 @@
 "alert.error_saving_file" = "Se ha producido un error al guardar %@: %@";
 "alert.error_deleting_file" = "No se puede eliminar el archivo.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "El valor \"%@\" no es válido.\nPor favor, proporcione un valor entre 10 y 10000, o 0.";
 
 "alert.config.new.title" = "Nueva configuración de entrada";
 "alert.config.new.message" = "Por favor, introduzca un nombre para la nueva configuración.";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionados";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Ordenado";
+"playlist.sorting.filename_ascending" = "Nombre de archivo ascendente";
+"playlist.sorting.filename_descending" = "Nombre de archivo descendente";
+"playlist.sorting.path_ascending" = "Ruta de archivo ascendente";
+"playlist.sorting.path_descending" = "Ruta del archivo descendente";
 "pl_menu.title_multi" = "%d Elementos";
 "pl_menu.play_next" = "Reproducir siguiente";
 "pl_menu.play_in_new_window" = "Reproducir en una nueva ventana";
@@ -401,7 +401,7 @@
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
 "osc_toolbar.screenshot" = "Capturar pantalla";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "Mostrar panel de plugins";
 
 "mini_player.album_art" = "Alternar imagen de álbum";
 "mini_player.loop" = "Repetir";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "Volumen";
 "mini_player.close" = "Cerrar modo de música";
 "mini_player.back" = "Volver al modo de vídeo";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Ordenar la lista de reproducción";
 
 // Touch bar
 

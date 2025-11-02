@@ -14,7 +14,7 @@
 "KTN-5r-mMm.ibShadowedLabels[1]" = "Права доступа";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[0]" = "О программе";
+"KTN-5r-mMm.ibShadowedLabels[0]" = "О плагине";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[2]" = "Настройки";
@@ -26,7 +26,7 @@
 "MyY-5s-tIm.title" = "Проверить обновления";
 
 /* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
-"Nmf-79-hFX.title" = "Пожалуйста, введите полный URL GitHub-репозитория или строку в формате «пользователь/репозиторий». Вы также можете выбрать его из списка плагинов по умолчанию.";
+"Nmf-79-hFX.title" = "Пожалуйста, введите полный адрес GitHub-репозитория или строку в формате «пользователь/репозиторий». Вы также можете выбрать его из списка плагинов по умолчанию.";
 
 /* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
 "T21-nd-TLF.label" = "Поддержка";

@@ -20,7 +20,7 @@
 "88M-pi-2Hc.ibShadowedLabels[0]" = "Основные субтитры";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Второстепенные субтитры";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Вторые субтитры";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
 "8Ax-5X-osl.title" = "Подключить аудиодорожку…";
@@ -47,7 +47,7 @@
 "Ew1-N1-0Pi.title" = "0,25×";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
-"GlZ-YU-dNm.title" = "РАМКА";
+"GlZ-YU-dNm.title" = "Рамка";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
 "YCG-xK-eAs.title" = "−5 с";
@@ -131,7 +131,7 @@
 "eXZ-HN-qL4.title" = "Субтитры:";
 
 /* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
-"g6B-DC-lJ0.title" = "ШРИФТ";
+"g6B-DC-lJ0.title" = "Шрифт";
 
 /* Class = "NSButtonCell"; title = "Font…"; ObjectID = "ghy-e7-7Of"; */
 "ghy-e7-7Of.title" = "Шрифт…";
@@ -188,7 +188,7 @@
 "upM-Lz-YwK.title" = "0 с";
 
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
-"uqb-mz-A22.title" = "ФОН";
+"uqb-mz-A22.title" = "Фон";
 
 /* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
 "wBD-pZ-Bvu.title" = "Опции стилизации могут повредить отображение ASS, и часть из них не работает с некоторыми субтитрами.";

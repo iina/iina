@@ -56,7 +56,7 @@
 "KYi-0W-zOr.title" = "Zatamni druge monitore kad je uključen cjeloekranski prikaz";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "I dalje sprječava da sustav prijeđe u stanje mirovanja.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Prebaci se automatski na „Modus glazbe” prilikom reprodukcije audio datoteke";
@@ -95,7 +95,7 @@
 "YeH-hk-7NN.title" = "/putanja/do/snimkaekrana/mapa";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
-"f0j-Dn-cxt.title" = "Podrška za beta inačice";
+"f0j-Dn-cxt.title" = "Primaj beta verzije";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
 "g2A-Kf-vct.title" = "Zaustavi nakon isključivanja cjeloekranskog prikaza";
@@ -104,13 +104,13 @@
 "gqT-CB-Puw.title" = "Kada se otvori:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
-"hWC-KJ-FuC.title" = "Provjeri ažuriranje";
+"hWC-KJ-FuC.title" = "Traži nove verzije ";
 
 /* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
 "i4A-86-dGC.title" = "Pauziraj kada uređaj spava";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
-"iGS-qN-f5q.title" = "Omogući povijest reprodukcije";
+"iGS-qN-f5q.title" = "Aktiviraj povijest reprodukcije";
 
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
 "jOB-D3-WT3.title" = "Nastavi posljednju reprodukciju";
@@ -119,7 +119,7 @@
 "jeK-46-2BG.title" = "Povijest:";
 
 /* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Prikaži pjevač i ime staze zvučni datoteka ako su dostupne";
+"kBI-Th-bBV.title" = "Prikaži pjevača i ime trake za audio datoteke, ako su dostupni";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Pokreni nakon uključivanja cjeloekranskog prikaza";
@@ -131,10 +131,10 @@
 "oJY-Iz-3sO.title" = "Format:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Snimke zaslona:";
+"pdx-zt-kf2.title" = "Snimke ekrana:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "Spriječi pokretanje čuvara ekrana tijekom reprodukcije";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Svaki sat";
@@ -152,16 +152,16 @@
 "xr2-rB-O0x.title" = "Pauziraj/nastavi kada:";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "Ne u „modusu glazbe” ili kada se reproducira samo zvuk";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Prikaži pozdravnu sliku";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "Kada se datoteka otvori ručno:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Loop playlist";
+"5WC-Sp-6mg.title" = "Ponavljaj playlistu";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
 "A1p-L4-jtC.title" = "Loop single file";

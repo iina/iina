@@ -11,10 +11,10 @@
 "HMa-Vz-EUk.title" = "Sljedeće postavke zahtijevaju ponovno pokretanje IINA-e kako bi stupile na snagu.";
 
 /* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Open Log Directory";
+"JDA-g3-RNX.title" = "Otvori direktorij dnevnika";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
-"LCd-uY-Yze.title" = "Omogući dnevnika";
+"LCd-uY-Yze.title" = "Aktiviraj zapisivanje u datoteku";
 
 /* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "MRT-u8-xTX"; */
 "MRT-u8-xTX.title" = "Odaberi …";
@@ -29,13 +29,13 @@
 "ehL-8Y-G8h.title" = "Koristi mapu konfguracije:";
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
-"phK-g9-Vbg.title" = "Koristi mpv-ov zaslon";
+"phK-g9-Vbg.title" = "Koristi mpv-ovo OSD sučelje";
 
 /* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
 "nFf-vh-bNd.title" = "Razina dnevnika:";
 
 /* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Show Log Viewer";
+"Owx-92-Ogg.title" = "Prikaži preglednik dnevnika";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Opširno";

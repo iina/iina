@@ -16,7 +16,7 @@
 "cmd.multiply" = "Умножить";
 "cmd.frame-step" = "Следующий кадр";
 "cmd.frame-back-step" = "Предыдущий кадр";
-"cmd.ab-loop" = "Цикл А-Б";
+"cmd.ab-loop" = "Повтор A–B";
 "cmd.sub-seek" = "Поиск субтитров";
 "cmd.playlist-next" = "Следующий файл";
 "cmd.playlist-prev" = "Предыдущий файл";
@@ -24,10 +24,10 @@
 "cmd.playlist-clear" = "Очистить плейлист";
 "cmd.playlist-remove" = "Убрать текущий файл";
 "cmd.playlist-shuffle" = "Перемешать";
-"cmd.write-watch-later-config" = "Сохранять историю воспроизведения";
+"cmd.write-watch-later-config" = "Сохранить историю воспроизведения";
 "cmd.stop" = "Остановить";
 "cmd.quit" = "Выйти";
-"cmd.quit-watch-later" = "Выйти (запомнить место)";
+"cmd.quit-watch-later" = "Выйти (запомнить позицию)";
 "cmd.screenshot" = "Снимок экрана";
 "cmd.screenshot-to-file" = "Снимок экрана в файл";
 "cmd.loadfile" = "Загрузить файл";
@@ -38,9 +38,9 @@
 "iina.mirror" = "Зеркально";
 
 "iina.toggle-pip" = "Режим «Картинка в картинке»";
-"iina.toggle-music-mode" = "Режим музыки";
+"iina.toggle-music-mode" = "Музыкальный режим";
 "iina.open-file" = "Открыть файл";
-"iina.open-url" = "Открыть URL";
+"iina.open-url" = "Открыть адрес";
 "iina.video-panel" = "Панель видео";
 "iina.audio-panel" = "Панель аудио";
 "iina.sub-panel" = "Панель субтитров";
@@ -49,8 +49,8 @@
 "iina.bigger-window" = "Увеличить окно";
 "iina.smaller-window" = "Уменьшить окно";
 "iina.fit-to-screen" = "По размеру экрана";
-"iina.toggle-flip" = "Отразить по вертикали (вверх ногами)";
-"iina.toggle-mirror" = "Отразить по горизонтали (зеркально)";
+"iina.toggle-flip" = "Перевернуть вертикально";
+"iina.toggle-mirror" = "Перевернуть горизонтально";
 "iina.save-playlist" = "Сохранить текущий плейлист";
 "iina.show-current-file-in-finder" = "Показать текущий файл в Finder";
 "iina.delete-current-file" = "Удалить текущий файл";
@@ -85,20 +85,20 @@
 
 "opt.video" = "видеодорожку";
 "opt.video-aspect-override" = "соотношение сторон";
-"opt.contrast" = "Контраст";
-"opt.brightness" = "Яркость";
-"opt.gamma" = "Гамма";
-"opt.saturation" = "Насыщенность";
+"opt.contrast" = "контраст";
+"opt.brightness" = "яркость";
+"opt.gamma" = "гамму";
+"opt.saturation" = "насыщенность";
 "opt.deinterlace" = "деинтерлейсинг";
 
 "opt.audio" = "аудиодорожку";
-"opt.volume" = "Громкость";
+"opt.volume" = "громкость";
 "opt.mute" = "режим «Без звука»";
-"opt.audio-delay" = "Задержка аудио";
+"opt.audio-delay" = "задержку аудио";
 
 "opt.sub" = "субтитры";
-"opt.sub-delay" = "Задержка субтитров";
-"opt.sub-pos" = "Позиция субтитров";
+"opt.sub-delay" = "задержку субтитров";
+"opt.sub-pos" = "позицию субтитров";
 "opt.sub-scale" = "масштаб субтитров";
 "opt.sub-visibility" = "видимость субтитров";
 "opt.secondary-sub-visibility" = "Видимость вторых субтитров";
@@ -107,12 +107,12 @@
 "opt.fullscreen" = "полноэкранный режим";
 "opt.ontop" = "режим «Поверх всех окон»";
 
-"opt.chapter" = "Глава";
+"opt.chapter" = "главу";
 
 "read.set" = "Установить {{property}} на {{value}}";
 "read.add" = "{{property}} {{value}}";
 "read.multiply" = "Увеличить {{property}} в {{factor}}x раз";
 "read.cycle" = "Переключить {{property}}{{#dir_down}} в обратном порядке{{/dir_down}}";
 "read.cycle-values" = "Переключить {{property}} между ({{{values}}})";
-"read.seek" = "Промотать {{#fwd}}вперёд на{{/fwd}}{{#bwd}}назад на{{/bwd}}{{#abs}}от начала на{{/abs}} {{value}}{{#sec}} с{{/sec}}{{#per}}%{{/per}} {{#exact}}(точно){{/exact}}{{#kf}}(по кадрам){{/kf}}";
+"read.seek" = "Промотать {{#fwd}}вперед на{{/fwd}}{{#bwd}}назад на{{/bwd}}{{#abs}}от начала на{{/abs}} {{value}}{{#sec}} с{{/sec}}{{#per}}%{{/per}} {{#exact}}(точно){{/exact}}{{#kf}}(по кадрам){{/kf}}";
 "read.sub-seek" = "Переключить на {{#skip_1}}следующие{{/skip_1}}{{#skip_-1}}предыдущие{{/skip_-1}} субтитры";

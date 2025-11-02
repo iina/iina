@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "バッファ中… %d%%";
 "main.opening_stream" = "ストリームを展開中…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "シーク中…";
 "osc.precision" = "精度";
 "osc.1s" = "1 秒";
 "osc.100ms" = "100 ミリ秒";
@@ -175,7 +175,7 @@
 "preference.sub_override_level.descriptive_text.strip" = "すべてのASSタグとスタイルをサブタイトルから大胆に取り除きます。";
 "preference.sub_override_level.descriptive_text.yes" = "このセクションのすべてのスタイル設定を適用します。";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_not_installed" = "「プラグイン > GitHubからインストール」からOnline Mediaプラグインをインストールし、高度な機能やビデオのダウンロード、yt-dlpの自動アップデートなどを楽しむことができます。";
 "preference.ytdl_plugin_installed" = "Online メディア プラグインがインストールされているため、組み込みの youtube-dl サポートは無効になっています。";
 
 "menu.volume" = "音量: %@";
@@ -208,8 +208,8 @@
 
 "menu.seek_forward" = "%@秒進む";
 "menu.seek_backward" = "%@秒戻る";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "再生速度を%@倍";
+"menu.speed_down" = "再生速度を%@倍";
 "menu.volume_up" = "音量 + %@%%";
 "menu.volume_down" = "音量 - %@%%";
 "menu.audio_delay_up" = "オーディオディレイ + %@s";
@@ -220,13 +220,13 @@
 "menu.crop_custom" = "カスタム…";
 "menu.find_online_sub" = "%@ からオンライン字幕を探す";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "プラグインを管理する…";
+"menu.developer_tool" = "開発者向けツール";
+"menu.more_plugin" = "さらに見る…";
+"menu.conflicting_shortcuts" = "キー割り当てが重複しています…";
+"menu.reload_plugins" = "すべてのプラグインを再読み込み";
+"menu.show_plugins_panel" = "プラグインパネルを表示";
+"menu.hide_plugins_panel" = "プラグインパネルを非表示";
 
 "track.audio" = "オーディオ";
 "track.none" = "<なし>";
@@ -257,7 +257,7 @@
 "alert.error_saving_file" = "%@の保存時にエラーが発生しました: %@";
 "alert.error_deleting_file" = "ファイルを削除できません。";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "値 \"%@\" は無効です。\n10～10000、または0の間の値を指定してください。";
 
 "alert.config.new.title" = "設定の新規作成";
 "alert.config.new.message" = "新しい設定ファイルの名前を入力を入力してください。";
@@ -357,11 +357,11 @@
 
 "playlist.total_length" = "合計 %@";
 "playlist.total_length_with_selected" = "%@ / %@を選択中";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "ソート中";
+"playlist.sorting.filename_ascending" = "ファイル名で昇順";
+"playlist.sorting.filename_descending" = "ファイル名で降順";
+"playlist.sorting.path_ascending" = "ファイルパスで昇順";
+"playlist.sorting.path_descending" = "ファイルパスで降順";
 "pl_menu.title_multi" = "%d個の項目";
 "pl_menu.play_next" = "次に再生";
 "pl_menu.play_in_new_window" = "新しいウィンドウで再生";
@@ -401,7 +401,7 @@
 "osc_toolbar.music_mode" = "ミュージックモード切り替え";
 "osc_toolbar.sub_track" = "字幕トラックを選択";
 "osc_toolbar.screenshot" = "スクリーンショットを撮影";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "プラグインパネルを表示";
 
 "mini_player.album_art" = "アルバムアートの切り替え";
 "mini_player.loop" = "リピート";
@@ -412,7 +412,7 @@
 "mini_player.volume" = "音量";
 "mini_player.close" = "ミュージックモードの終了";
 "mini_player.back" = "ビデオモードに戻る";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "プレイリストを並べ替える";
 
 // Touch bar
 

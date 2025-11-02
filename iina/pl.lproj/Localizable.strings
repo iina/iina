@@ -75,7 +75,7 @@
 "eq.preset.reduce_treble" = "Reduce Treble";
 "eq.preset.rock" = "Rock";
 "eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.spoken_word" = "Słowo mówione";
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
@@ -220,13 +220,13 @@
 "menu.crop_custom" = "Własne…";
 "menu.find_online_sub" = "Znajdź napisy online z %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
+"menu.manage_plugins" = "Zarządzaj wtyczkami…";
 "menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
+"menu.more_plugin" = "Więcej…";
 "menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
 "menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.show_plugins_panel" = "Pokaż panel wtyczek";
+"menu.hide_plugins_panel" = "Ukryj panel wtyczek";
 
 "track.audio" = "Dźwięk";
 "track.none" = "<Brak>";

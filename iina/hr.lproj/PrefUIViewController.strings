@@ -5,7 +5,7 @@
 "0eK-kv-btH.title" = "0,5 × veličina videa";
 
 /* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
-"1nM-AX-Ozm.title" = "Prilagodi…";
+"1nM-AX-Ozm.title" = "Prilagodi …";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "2YJ-bg-OdR"; */
 "2YJ-bg-OdR.title" = "% ekrana";
@@ -14,13 +14,13 @@
 "3CY-YS-rG6.title" = "Koristi gumb lijevo/desno za:";
 
 /* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
-"5Nk-Mu-V2I.title" = "Base remaining time on playback speed";
+"5Nk-Mu-V2I.title" = "Osnovno preostalo vrijeme pri brzini reprodukcije";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
 
 /* Class = "NSMenuItem"; title = "Floating"; ObjectID = "7Dv-q2-5TV"; */
-"7Dv-q2-5TV.title" = "Plutajuće";
+"7Dv-q2-5TV.title" = "Prikazivanje ispred svih prozora";
 
 /* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
 "7td-lH-8aK.title" = "Promijeni veličinu prozora na:";
@@ -53,7 +53,7 @@
 "CJE-ap-IH8.title" = "Kada se medij otvori ručno";
 
 /* Class = "NSButtonCell"; title = "File start"; ObjectID = "DAm-C4-5BQ"; */
-"DAm-C4-5BQ.title" = "File start";
+"DAm-C4-5BQ.title" = "Početak datoteke";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Prikaži preostalo vrijeme umjesto ukupnog trajanja";
@@ -110,10 +110,10 @@
 "ObY-7B-NTO.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
-"Ofm-qE-RgQ.title" = "Početna pozicija prozora:";
+"Ofm-qE-RgQ.title" = "Početni položaj prozora:";
 
 /* Class = "NSTextFieldCell"; title = "Suppress messages for:"; ObjectID = "RE5-Cf-ed9"; */
-"RE5-Cf-ed9.title" = "Suppress messages for:";
+"RE5-Cf-ed9.title" = "Suzbij poruke za:";
 
 /* Class = "NSButtonCell"; title = "Seek"; ObjectID = "RuR-Df-K2G"; */
 "RuR-Df-K2G.title" = "Traži";
@@ -122,10 +122,10 @@
 "S8H-Xr-uVa.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
-"SFX-ct-8MB.title" = "Uvijek prikaži tijekom reproduckije";
+"SFX-ct-8MB.title" = "Uvijek prikaži prozor ispred svih prozora tijekom reproduckije";
 
 /* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
-"ih8-5a-PYY.title" = "Always show float on top status in the title bar";
+"ih8-5a-PYY.title" = "Uvijek prikaži prozor stanja ispred svih prozora u naslovnoj traci";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Brzina";
@@ -134,7 +134,7 @@
 "Uc9-An-930.title" = "Visina:";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
-"Ufv-Hk-vL5.title" = "Prevent scroll wheel from changing volume";
+"Ufv-Hk-vL5.title" = "Spriječi da kotačić miša mijenja glasnoću";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "točka";
@@ -149,7 +149,7 @@
 "Xey-3m-f6G.title" = "Aktiviraj prikaz minijatura";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "Ydi-yB-FMe"; */
-"Ydi-yB-FMe.title" = "to the";
+"Ydi-yB-FMe.title" = "na";
 
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
 "Ymw-tr-6rw.title" = "Odstupanje po X-osi:";
@@ -164,13 +164,13 @@
 "baY-O6-fcB.title" = "Uključi/Isključi modus slika-u-slici sklapanjem/rasklapanjem prozora";
 
 /* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
-"cib-Cg-9kn.title" = "Only for video files";
+"cib-Cg-9kn.title" = "Samo za video datoteke";
 
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2 × veličina videa";
 
 /* Class = "NSButtonCell"; title = "Disabled"; ObjectID = "duf-3s-3bL"; */
-"duf-3s-3bL.title" = "Onemogućeno";
+"duf-3s-3bL.title" = "Deaktivirano";
 
 /* Class = "NSButtonCell"; title = "Use physical resolution on Retina displays"; ObjectID = "fsj-YE-OB7"; */
 "fsj-YE-OB7.title" = "Koristi fizičku rezoluciju na Retina ekranima";
@@ -185,7 +185,7 @@
 "iRn-3s-oQH.title" = "od ekrana";
 
 /* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
-"kCe-Ck-dUJ.title" = "Include files on a mounted remote drive";
+"kCe-Ck-dUJ.title" = "Uključi datoteke na eksternom disku";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "Prikaži podatake o vremenu i bateriji u cjeloekranskom prikazu";
@@ -236,7 +236,7 @@
 "vdi-lO-q6e.title" = "prilagodi veličini ekrana";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
-"vnb-DF-4g5.title" = "Prevent scroll wheel from changing playback position";
+"vnb-DF-4g5.title" = "Spriječi da kotačić miša mijenja položaj reprodukcije";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Aktiviraj OSD";

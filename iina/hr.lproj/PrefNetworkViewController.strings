@@ -1,14 +1,14 @@
 /* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "0bT-f6-rXb"; */
-"0bT-f6-rXb.title" = "Zadano: 153.600";
+"0bT-f6-rXb.title" = "Standardno: 153.600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "Maximum cache size (KB):";
+"0yu-5Q-363.title" = "Maksimalna veličina predmemorije (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
 "2qf-cC-Lfi.title" = "Zadana youtube-dl staza:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
-"3os-7u-lv8.title" = "Zadano: 153.600";
+"3os-7u-lv8.title" = "Standardno: 153.600";
 
 /* Class = "NSTextFieldCell"; title = "HTTP proxy:"; ObjectID = "9ut-ID-ffZ"; */
 "9ut-ID-ffZ.title" = "HTTP proxy:";
@@ -32,7 +32,7 @@
 "aNr-lv-K0r.title" = "Automatski";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
-"cyH-Md-FAD.title" = "Omogući youtube-dl";
+"cyH-Md-FAD.title" = "Aktiviraj youtube-dl";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
 "dDD-g3-54w.title" = "Veličina međuspremnika predmemorije (KB):";
@@ -41,7 +41,7 @@
 "eN6-Sk-kUa.title" = "Korisnički agent:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 36000"; ObjectID = "fab-7d-mMQ"; */
-"fab-7d-mMQ.title" = "Zadano: 36.000";
+"fab-7d-mMQ.title" = "Standardno: 36.000";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
 "fpV-al-bn7.title" = "Omogući predmemorija";
@@ -53,10 +53,10 @@
 "yrh-Jm-Q4e.title" = "Mreža:";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "Raw opcije:";
+"zCD-9d-ziV.title" = "Opcije neobrađenih podataka:";
 
 /* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
-"SyQ-2U-zu8.title" = "Show throbber when paused waiting for the cache";
+"SyQ-2U-zu8.title" = "Prikaži animiranu ikonu izvršavanja radnje prilikom pauziranja zbog čekanja na predmemoriju";
 
 /* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
-"39x-Jr-gsA.title" = "Show throbber when seeking";
+"39x-Jr-gsA.title" = "Prikaži animiranu ikonu izvršavanja radnje tijekom navigiranja";

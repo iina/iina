@@ -16,8 +16,8 @@
 "general.username" = "نام کاربری";
 "general.password" = "رمز عبور";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "مقدار نمی تواند خالی باشد.";
+"input.already_exists" = "مقدار از قبل وجود دارد.";
 
 // Guide Window
 "guide.highlights" = "تازه‌ها";
@@ -27,9 +27,9 @@
 // Initial Window
 "initial.announcement" = "شما در حال استفاده از نسخه %@ برنامه IINA میباشید";
 "initial.beta.desc" = "تیک گزینه‌ی “دریافت بروزرسانی‌های بتا” را از بخش تنظیمات - عمومی بردارید و یک نسخه‌ی پایدار را از <a href=\"https://iina.io\">سایت رسمی ما</a> نصب کنید.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "نسخه دیباگ معمولا کامل بهینه سازی نشده است ، پس برای استفاده روزانه پیشنهاد نمیشود. نسخه دیباگ از بروزرسانی خودکار پیشتیبانی نمیکنند.";
-"initial.bug_report" = "مشکلات را از طریق <a href=\"https://github.com/iina/iina/issues\"> با ما درمیان بگذارید</a>.";
+"initial.nightly.desc" = "نسخه‌های «بیلد شبانه» برای استفاده روزمره پیشنهاد نمی‌شود. این نسخه‌ها درحال حاضر از بروزرسانی خودکار پشتیبانی نمی‌کنند. لطفا برای دریافت دستی جدیدترین بروزرسانی این نسخه‌ها، به <a href=\"https://nightly.iina.io\"> وبسایت ما</a> مراجعه فرمایید.";
+"initial.debug.desc" = "نسخه‌های دیباگ معمولا به‌طور کامل بهینه‌سازی نشده‌اند، پس برای استفاده روزمره پیشنهاد نمی‌شوند. نسخه‌های دیباگ از بروزرسانی خودکار نیز پیشتیبانی نمی‌کنند.";
+"initial.bug_report" = "مشکلات را از طریق بخش <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> با ما در میان بگذارید.";
 
 // Inspector Window
 "inspector.error" = "خطا";
@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "در حال بارگذاری... %d%%";
 "main.opening_stream" = "در حال بازکردن استریم…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "در حال جست‌وجو…";
 "osc.precision" = "دقت";
 "osc.1s" = "۱ ثانیه";
 "osc.100ms" = "۱۰۰ میلی ثانیه";
@@ -51,42 +51,42 @@
 "quicksetting.deinterlace" = "تبدیل تصویر به غیر interlace";
 "quicksetting.hdr" = "اچ‌دی‌آر";
 "quicksetting.hide" = "پنهان کردن";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "بازنشانی سرعت به x1";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.flat" = "یکنواخت";
+"eq.preset.acoustic" = "آکوستیک";
+"eq.preset.classical" = "کلاسیک";
+"eq.preset.dance" = "رقص";
+"eq.preset.deep" = "عمیق";
+"eq.preset.electronic" = "الکترونیک";
+"eq.preset.hip_hop" = "هیپ‌هاپ";
+"eq.preset.increase_bass" = "افزایش بِیس";
+"eq.preset.increase_treble" = "افزایش صدای زیر";
+"eq.preset.increase_vocal" = "افزایش صدای خواندن";
+"eq.preset.jazz" = "جاز";
+"eq.preset.latin" = "لاتین";
+"eq.preset.loundness" = "بلندی";
+"eq.preset.lounge" = "لانژ";
+"eq.preset.piano" = "پیانو";
+"eq.preset.pop" = "پاپ";
+"eq.preset.rnb" = "آر اند بی/ریتم اند بلوز";
+"eq.preset.reduce_bass" = "کاهش بِیس";
+"eq.preset.reduce_treble" = "کاهش صدای زیر";
+"eq.preset.rock" = "راک";
+"eq.preset.small_speaker" = "بلندگوی کوچک";
+"eq.preset.spoken_word" = "کلام";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "نمایه اکولایزر جدید";
+"alert.eq.new_profile.message" = "لطفا یک نام وارد کنید.";
+"alert.eq.rename.title" = "تغییر نام نمایه‌ی فعلی";
+"alert.eq.rename.message" = "لطفا یک نام نمایه‌ی جدید وارد کنید.";
 
 // OSDMessage.swift
 "osd.pause" = "مکث";
 "osd.resume" = "ادامه";
 "osd.volume" = "بلندی صدا: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "سرعت: %@x";
 "osd.aspect" = "نسبت تصویر: %@";
 "osd.crop" = "برش: %@";
 "osd.rotate" = "چرخش: %i";
@@ -158,7 +158,7 @@
 "preference.logged_in_as" = "ورود به عنوان %@";
 "preference.system_media_control" = "از کنترل‌های چندرسانه‌ای سیستم استفاده شود";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
+"preference.key_binding_hint_1" = "برای ویرایش کلیدهای دوگانه در نمایه‌ی فعلی، دکمه‌ی «تکثیر...» را بزنید تا اول یک کپی بسازید.";
 "preference.key_binding_hint_2" = "";
 
 "preference.enable_adv_settings" = "فعال‌سازی تنظیمات پیشرفته";
@@ -169,32 +169,32 @@
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "بله";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.no" = "نمایش زیرنویس مطابق با ساختار تعریف‌شده‌ی خودِ زیرنویس، بدون اعمال تغییر.";
+"preference.sub_override_level.descriptive_text.force" = "اعمال همه‌ی سبک‌های زیرنویس.";
+"preference.sub_override_level.descriptive_text.scale" = "اعمال تنظیمات‌مقیاس، علاوه بر تنظیمات سَبک در این بخش.";
+"preference.sub_override_level.descriptive_text.strip" = "حذف بنیادی تمام تگ‌های ASS و سَبک‌ها، از زیرنویس.";
+"preference.sub_override_level.descriptive_text.yes" = "اعمال همه‌ی تنظیمات سَبک در این بخش.";
 
 "preference.ytdl_plugin_not_installed" = "";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_installed" = "چون افزونه‌ی Online media را نصب کرده‌اید، پشتیبانی از youtube-dl داخلی غیرفعال است.";
 
 "menu.volume" = "بلندی صدا: %@";
 "menu.volume_muted" = "صدا: %@ (بی صدا)";
 "menu.audio_delay" = "تاخیر صوت: %@ ثانيه";
 "menu.sub_delay" = "تاخیر زیرنویس: %@ ثانیه";
-"menu.sub_hide" = "Hide Subtitles";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "پنهان‌کردن زیرنویس";
+"menu.sub_show" = "نمایش زیرنویس";
+"menu.sub_second_hide" = "پنهان‌کردن زیرنویس دوم";
+"menu.sub_second_show" = "نمایش زیرنویس دوم";
 "menu.fullscreen" = "حالت تمام صفحه";
 "menu.exit_fullscreen" = "خروج از تمام صفحه";
 "menu.pip" = "استفاده از تصویر در تصویر";
 "menu.exit_pip" = "خروج از حالت تصویر در تصویر";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "ورود به حالت موسیقی";
+"menu.exit_mini_player" = "خروج از حالت موسیقی";
 "menu.pause" = "مکث";
 "menu.resume" = "ادامه";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "سرعت: %@x";
 "menu.chapters" = "پنل سرفصل های فیلم رو نشون بده";
 "menu.hide_chapters" = "پنل سرفصل های فیلم رو پنهان کن";
 "menu.playlist" = "نمایش لیست تماشا";
@@ -208,8 +208,8 @@
 
 "menu.seek_forward" = "%@ ثانیه به جلو";
 "menu.seek_backward" = "%@ ثانیه به عقب";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "افزایش سرعت به‌مقدار %@x";
+"menu.speed_down" = "کاهش سرعت به‌مقدار %@x";
 "menu.volume_up" = "افزایش صدا + %@%%";
 "menu.volume_down" = "کاهش صدا - %@%%";
 "menu.audio_delay_up" = "تاخیر صدا + %@ ثانيه";
@@ -218,15 +218,15 @@
 "menu.sub_delay_down" = "تاخیر زیرنویس - %@ ثانیه";
 
 "menu.crop_custom" = "سفارشی…";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.find_online_sub" = "پیداکردن آنلاین زیرنویس از %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "مدیریت افزونه‌ها…";
+"menu.developer_tool" = "ابزار‌های توسعه‌دهندگان";
+"menu.more_plugin" = "بیشتر…";
+"menu.conflicting_shortcuts" = "کلیدهای میانبر داری تضاد…";
+"menu.reload_plugins" = "بازنشانی دوباره‌ی افزونه‌ها";
+"menu.show_plugins_panel" = "نمایش پنل افزونه‌ها";
+"menu.hide_plugins_panel" = "پنهان‌کردن پنل افزونه‌ها";
 
 "track.audio" = "صدا";
 "track.none" = "<هیچکدام>";
@@ -237,27 +237,29 @@
 "subtrack.no_external" = "زیرنویسی پیدا نشد";
 
 // Alerts
-"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+"alert.beta_channel.title" = "دریافت به‌روزرسانی نسخه‌های آزمایشی";
 
 "alert.title_error" = "خطا";
 "alert.title_warning" = "هشدار";
 "alert.title_info" = "اطلاعات";
 
-"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
-"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
+"alert.fatal_error" = "خطای جدی %@ \n برنامه همین‌حالا بسته ‌می‌شود.";
+"alert.mpv_error" = "خطای داخلی %@ (%@) به‌هنگام تنظیم گزینه‌ی %@.";
 
-"alert.unsupported_audio" = "Unsupported external audio file.";
-"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_audio" = "فایل صوتی خارجی پشتیبانی‌نشده.
+";
+"alert.unsupported_sub" = "زیرنویس خارجی پشتیبانی‌نشده.
+";
 "alert.unsupported_url" = "این URL ساپورت نمی شود.";
 "alert.wrong_url_format" = "فرمت URL استباه است.";
 
 "alert.error_open" = "فایل یا استریم باز نمی شود!";
-"alert.error_finding_file" = "Cannot find %@ file!";
+"alert.error_finding_file" = "فایل %@ پیدا نشد!";
 "alert.error_loading_script" = "این اسکریپت باز نمی شود: %@";
-"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_saving_file" = "خطا در هنگام ذخیره‌ی %@: %@";
 "alert.error_deleting_file" = "فایل دیلیت نمی شود.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "مقدار «%@» معتبر نیست.\nلطفا مقداری بین ۱۰ تا ۱۰۰۰۰ و یا صفر، واردکنید.";
 
 "alert.config.new.title" = "New Input Configuration";
 "alert.config.new.message" = "Please enter a name for the new configuration.";
@@ -340,33 +342,33 @@
 "alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
 "alert.assrt_register.register" = "همين حالا ثبت نام كنيد";
 "alert.assrt_register.try" = "Try First";
-"alert.assrt_token_prompt.title" = "Enter your API token";
-"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
-"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+"alert.assrt_token_prompt.title" = "توکن API خود را وارد کنید";
+"alert.assrt_token_prompt.message" = "لطفا در صفحه‌وب بازشده ثبت‌نام کنید. توکن خود را از صفحه‌ی خانه کاربری خود برداشته و در پایین وارد کنید:";
+"alert.assrt_token_invalid" = "توکن Assrt API شما معتبر به‌نظر نمی‌رسد.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.plugin_reinstall.title" = "Plugin %@ already exists";
-"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
+"alert.plugin_uninstall.title" = "آیا از حذف %@ مطمئن هستید؟";
+"alert.plugin_uninstall.message" = "افزونه از حافظه‌ی دستگاه شما پاک ‌خواهدشد.";
+"alert.plugin_reinstall.title" = "پلاگین %@ در حال حاضر وجود دارد";
+"alert.plugin_reinstall.message" = "می‌خواهید افزونه را دوباره نصب کنید؟";
 "alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
 "alert.plugin_no_update" = "آپدیتی پیدا نشد.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_update_found.title" = "برای %@ به‌روزرسانی یافت‌شد";
+"alert.plugin_update_found.message" = "آخرین نسخه، %@ است. شما نسخه‌ی %@ را دارید. می‌خواهید به‌روزرسانی انجام‌دهید؟";
+"alert.plugin_permission" = "این افزونه به دسترسی‌های زیر نیاز دارد. لطفا قبل از ادامه، آن‌ها را بررسی‌کنید.";
+"alert.plugin_permission_added" = "این به‌روزرسانی به دسترسی‌های بیشتر نیاز دارد. لطفا قبل از ادامه، آن‌ها را بررسی‌کنید.";
 
-"playlist.total_length" = "%@ in total";
-"playlist.total_length_with_selected" = "%@ of %@ selected";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
-"pl_menu.title_multi" = "%d Items";
-"pl_menu.play_next" = "Play Next";
+"playlist.total_length" = "%@ در کل";
+"playlist.total_length_with_selected" = "%@ از %@ انتخاب شده";
+"playlist.sorting.header" = "مرتب‌سازی";
+"playlist.sorting.filename_ascending" = "صعودی بر اساس نام‌فایل";
+"playlist.sorting.filename_descending" = "نزولی بر اساس نام‌فایل";
+"playlist.sorting.path_ascending" = "صعودی بر اساس مسیر فایل";
+"playlist.sorting.path_descending" = "نزولی بر اساس مسیر فایل";
+"pl_menu.title_multi" = "%d مورد";
+"pl_menu.play_next" = "پخش بعدی";
 "pl_menu.play_in_new_window" = "پخش در پنجره جدید";
-"pl_menu.remove" = "Remove";
-"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.remove" = "حذف";
+"pl_menu.remove_multi" = "حذف انتخاب‌شده‌ها";
 "pl_menu.delete" = "بنداز سطل آشعال";
 "pl_menu.delete_multi" = "فایل های انتخاب شده رو بنداز سطل آشغال";
 "pl_menu.delete_after_play" = "بعد از پلی شدن، بندازش سطل آشغال";
@@ -374,45 +376,45 @@
 "pl_menu.show_in_finder" = "نمایش در Finder";
 "pl_menu.add_file" = "افزودن فایل…";
 "pl_menu.add_url" = "افزودن URL…";
-"pl_menu.clear_playlist" = "Clear Playlist";
-"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
-"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.clear_playlist" = "حذف پلی‌لیست";
+"pl_menu.matched_sub" = "%d زیرنویس سازگار";
+"pl_menu.add_sub" = "افزودن زیرنویس‌…";
 "pl_menu.wrong_sub" = "زیر نویس اشتباه است!";
-"pl_menu.browser" = "Open in Browser";
-"pl_menu.copy_url" = "Copy URL";
-"pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.browser" = "بازکردن در مرورگر";
+"pl_menu.copy_url" = "کپی‌کردن لینک";
+"pl_menu.copy_url_multi" = "کپی‌کردن لینک‌ها";
 
-"keymapping.title" = "Key Mapping";
-"keymapping.message" = "Press any key to record.";
+"keymapping.title" = "وصل‌کردن کلیدها";
+"keymapping.message" = "برای ثبت، یک کلید را فشاردهید.";
 
-"filter.video_filters" = "Video Filters";
+"filter.video_filters" = "فیلترهای ویدیویی";
 "filter.audio_filters" = "فیلترهای صدا";
 
-"hwdec.no" = "Disable hardware decoding.";
-"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
-"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+"hwdec.no" = "غیرفعال‌کردن رمزگشایی سخت‌افزاری.";
+"hwdec.auto" = "فعال‌کردن رمزگشایی سخت‌افزاری. با اینکه اکثر فیلترهای ویدیویی به‌درستی کار نخواهندکرد.";
+"hwdec.auto-copy" = "فعال‌کردن رمزگشایی سخت‌افزاری. این کار، مصرف حافظه را دوبرابر کرده اما با فیلترهای ویدیویی کار می‌کند.";
 
-"subencoding.auto" = "Auto detect";
+"subencoding.auto" = "تشخیص خودکار";
 
-"osc_toolbar.settings" = "Quick Settings";
-"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.settings" = "تنظیمات سریع";
+"osc_toolbar.playlist" = "پلی‌لیست و قسمت‌ها";
 "osc_toolbar.pip" = "تغییر به تصویر در تصویر";
-"osc_toolbar.full_screen" = "Toggle full screen";
-"osc_toolbar.music_mode" = "Enter music mode";
-"osc_toolbar.sub_track" = "Choose subtitle track";
-"osc_toolbar.screenshot" = "Take a screenshot";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.full_screen" = "تغییر به حالت تمام‌صفحه";
+"osc_toolbar.music_mode" = "ورود به حالت موسیقی";
+"osc_toolbar.sub_track" = "انتخاب مسیر زیرنویس";
+"osc_toolbar.screenshot" = "گرفتن اسکرین‌شات";
+"osc_toolbar.plugins" = "نمایش پنل افزونه‌ها";
 
-"mini_player.album_art" = "Toggle album art";
-"mini_player.loop" = "Repeat";
+"mini_player.album_art" = "تغییر به حالت پوستر آلبوم";
+"mini_player.loop" = "تکرار";
 "mini_player.shuffle" = "تصادفی";
-"mini_player.remove" = "Remove from playlist";
-"mini_player.add" = "Add to playlist";
-"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.remove" = "حذف از پلی‌لیست";
+"mini_player.add" = "افزودن به پلی‌لیست";
+"mini_player.delete" = "حذف همه‌ی تِرَک‌ها از پلی‌لیست";
 "mini_player.volume" = "صدا";
-"mini_player.close" = "Close music mode";
-"mini_player.back" = "Return to video mode";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.close" = "انتخاب حالت موسیقی";
+"mini_player.back" = "بازگشت به حالت ویدیو";
+"mini_player.sort" = "مرتب‌سازی پلی‌لیست";
 
 // Touch bar
 

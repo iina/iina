@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "אתה משתמש בגרסת %@ של IINA";
 "initial.beta.desc" = "אם ברצונך לחזור לגרסה הרגילה, הסר את הסימון \"קבל עדכוני בטא\" בהגדרות > כללי, והתקן את הגרסה הרגילה מ<a href=\"https://iina.io\">האתר הרשמי</a> שלנו.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "בניה לילית לא מומלצת לשימוש יומיומי. כרגע, בנייה לילית לא תומכת בעדכון אוטומטי. אנא הורד באופן ידני בניה עדכנית מ<a href=\"https://nightly.iina.io\">האתר</a> שלנו.";
 "initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
 "initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
 
@@ -70,7 +70,7 @@
 "eq.preset.lounge" = "טרקלין";
 "eq.preset.piano" = "פסנתר";
 "eq.preset.pop" = "פופ";
-"eq.preset.rnb" = "R&B";
+"eq.preset.rnb" = "רית׳ם אנד בלוז";
 "eq.preset.reduce_bass" = "הפחתת צלילים נמוכים";
 "eq.preset.reduce_treble" = "הפחתת צלילים גבוהים";
 "eq.preset.rock" = "רוק";

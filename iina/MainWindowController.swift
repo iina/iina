@@ -1854,7 +1854,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  private func showUI() {
+  func showUI() {
     if player.disableUI { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
@@ -1882,7 +1882,7 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: Show / Hide Timer
 
-  private func updateTimer() {
+  func updateTimer() {
     destroyTimer()
     createTimer()
   }

@@ -63,6 +63,7 @@ enum OSDMessage {
   case track(MPVTrack)
   case addToPlaylist(Int)
   case clearPlaylist
+  case controlBarAutoHide(Bool)
 
   case contrast(Int)
   case hue(Int)
@@ -335,6 +336,13 @@ enum OSDMessage {
 
     case .clearPlaylist:
       return (NSLocalizedString("osd.clear_playlist", comment: "Cleared Playlist"), .normal)
+
+    case .controlBarAutoHide(let enabled):
+      let status = enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")
+      return (
+        String(format: NSLocalizedString("osd.control_bar_auto_hide", comment: "On Screen Controller auto-hide: %@"), status),
+        .normal
+      )
 
     case .contrast(let value):
       return (

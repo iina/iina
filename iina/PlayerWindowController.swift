@@ -691,6 +691,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     let isHiding = !Preference.bool(for: .enableControlBarAutoHide) // toggle the current setting
     Preference.set(isHiding, for: .enableControlBarAutoHide)
 
+    player.sendOSD(.controlBarAutoHide(isHiding))
+
     if isHiding {
       // For auto-hiding to work, need to update the timer.
       player.mainWindow.updateTimer()

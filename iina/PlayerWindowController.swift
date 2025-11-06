@@ -688,8 +688,16 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   private func toggleControlBarAutoHide() {
-    let previous = Preference.bool(for: .enableControlBarAutoHide)
-    Preference.set(!previous, for: .enableControlBarAutoHide)
+    let isHiding = !Preference.bool(for: .enableControlBarAutoHide) // toggle the current setting
+    Preference.set(isHiding, for: .enableControlBarAutoHide)
+
+    if isHiding {
+      // For auto-hiding to work, need to update the timer.
+      player.mainWindow.updateTimer()
+    } else {
+      // The user wants the UI to be always visible, need to show it explicitly.
+      player.mainWindow.showUI()
+    }
   }
 
   internal func handleIINACommand(_ cmd: IINACommand) {

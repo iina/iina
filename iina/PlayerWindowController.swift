@@ -687,6 +687,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }
 
+  private func toggleControlBarAutoHide() {
+    let previous = Preference.bool(for: .enableControlBarAutoHide)
+    Preference.set(!previous, for: .enableControlBarAutoHide)
+  }
+
   internal func handleIINACommand(_ cmd: IINACommand) {
     switch cmd {
     case .openFile:
@@ -697,6 +702,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:
       menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+    case .toggleControlBarAutoHide:
+      toggleControlBarAutoHide()
     default:
       break
     }

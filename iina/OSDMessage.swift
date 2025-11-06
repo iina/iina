@@ -337,12 +337,13 @@ enum OSDMessage {
     case .clearPlaylist:
       return (NSLocalizedString("osd.clear_playlist", comment: "Cleared Playlist"), .normal)
 
-    case .controlBarAutoHide(let enabled):
-      let status = enabled ? NSLocalizedString("general.on", comment: "On") : NSLocalizedString("general.off", comment: "Off")
-      return (
-        String(format: NSLocalizedString("osd.control_bar_auto_hide", comment: "On Screen Controller auto-hide: %@"), status),
-        .normal
-      )
+    case .controlBarAutoHide(let isHiding):
+      let text = if isHiding {
+        NSLocalizedString("osd.control_bar_auto_hide_enabled", comment: "Auto-hiding On Screen Controller")
+      } else {
+        NSLocalizedString("osd.control_bar_auto_hide_disabled", comment: "On Screen Controller always visible")
+      }
+      return (text, .normal)
 
     case .contrast(let value):
       return (

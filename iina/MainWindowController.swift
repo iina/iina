@@ -627,7 +627,7 @@ class MainWindowController: PlayerWindowController {
     timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
-    
+
     if player.disableUI { hideUI() }
 
     // add user default observers

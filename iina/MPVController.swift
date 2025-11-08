@@ -443,6 +443,12 @@ class MPVController: NSObject {
     setUserOption(PK.replayGainFallback, type: .float, forName: MPVOption.Audio.replaygainFallback,
                   verboseIfDefault: true)
 
+    setUserOption(PK.gaplessAudio, type: .other, forName: MPVOption.Audio.gaplessAudio,
+                  verboseIfDefault: true) { key in
+      let value = Preference.integer(for: key)
+      return Preference.GaplessAudioOption(rawValue: value)?.mpvString ?? "weak"
+    }
+
     // - Sub
 
     chkErr(setOptionString(MPVOption.Subtitles.subAuto, "no", level: .verbose))

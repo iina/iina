@@ -41,6 +41,8 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   @IBOutlet weak var audioDevicePopUp: NSPopUpButton!
 
+  @IBOutlet weak var gaplessAudioDescriptionTextField: NSTextField!
+
   @IBOutlet weak var enableToneMappingBtn: NSButton!
   @IBOutlet weak var toneMappingTargetPeakTextField: NSTextField!
   @IBOutlet weak var toneMappingAlgorithmPopUpBtn: NSPopUpButton!
@@ -49,6 +51,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     super.viewDidLoad()
     audioLangTokenField.commaSeparatedValues = Preference.string(for: .audioLanguage) ?? ""
     updateHwdecDescription()
+    updateGaplessAudioDescription()
     updateToneMappingUI()
   }
 
@@ -152,6 +155,15 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
     hwdecDescriptionTextField.stringValue = hwdec.localizedDescription
   }
 
+  @IBAction func gaplessAudioAction(_ sender: Any) {
+    updateGaplessAudioDescription()
+  }
+
+  private func updateGaplessAudioDescription() {
+    let gaplessAudio: Preference.GaplessAudioOption = Preference.enum(for: .gaplessAudio)
+    gaplessAudioDescriptionTextField.stringValue = gaplessAudio.localizedDescription
+  }
+
   // Prefs → UI
   private func updateToneMappingUI() {
     toneMappingTargetPeakTextField.integerValue = Preference.integer(for: .toneMappingTargetPeak)
@@ -198,6 +210,10 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
 
   @IBAction func gainAdjustmentHelpAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.gainAdjustmentHelpLink)!)
+  }
+
+  @IBAction func gaplessAudioHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.gaplessAudioHelpLink)!)
   }
 
   @IBAction func audioDriverHelpAction(_ sender: Any) {

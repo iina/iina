@@ -193,6 +193,8 @@ struct Preference {
     static let replayGainClip = Key("replayGainClip")
     static let replayGainFallback = Key("replayGainFallback")
 
+    static let gaplessAudio = Key("gaplessAudio")
+
     static let userEQPresets = Key("userEQPresets")
 
     // Subtitle
@@ -788,6 +790,32 @@ struct Preference {
     }
   }
 
+  enum GaplessAudioOption: Int, InitializingFromKey {
+    case disabled = 0
+    case weak
+    case strong
+
+    static var defaultValue = GaplessAudioOption.weak
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var localizedDescription: String {
+      return NSLocalizedString("gaplessAudio." + mpvString, comment: mpvString)
+    }
+
+    var mpvString: String {
+      get {
+        switch self {
+        case .disabled: return "no"
+        case .weak : return "weak"
+        case .strong: return "yes"
+        }
+      }
+    }
+  }
+
   enum DefaultRepeatMode: Int {
     case playlist = 0
     case file
@@ -896,6 +924,7 @@ struct Preference {
     .replayGainPreamp: 0,
     .replayGainClip: false,
     .replayGainFallback: 0,
+    .gaplessAudio: GaplessAudioOption.weak.rawValue,
 
     .subAutoLoadIINA: IINAAutoLoadAction.iina.rawValue,
     .subAutoLoadPriorityString: "",

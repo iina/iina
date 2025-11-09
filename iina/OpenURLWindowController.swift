@@ -48,6 +48,8 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
   func showLoadingScreen(playerCore: PlayerCore) {
     _ = window
     overlayView.isHidden = false
+    // Must not leave the focus in the username or password text fields.
+    window?.makeFirstResponder(nil)
     self.playerCore = playerCore
     loadingURL = playerCore.info.currentURL?.absoluteString
     if #available(macOS 14, *) {
@@ -115,6 +117,8 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
                                   port: url.port)
       }
       overlayView.isHidden = false
+      // Must not leave the focus in the username or password text fields.
+      window?.makeFirstResponder(nil)
       playerCore = PlayerCore.activeOrNewForMenuAction(isAlternative: isAlternativeAction)
       playerCore!.openURL(url)
     } else {

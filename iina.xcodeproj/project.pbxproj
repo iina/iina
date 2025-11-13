@@ -347,6 +347,7 @@
 		E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34EAA82251A36CE00057F27 /* JavascriptAPIFile.swift */; };
 		E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */; };
 		E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AFA20F120F600F8C347 /* PreferenceViewController.swift */; };
+		51F0AAAB2F00000100AAAAAA /* PlaybackSpeedStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F0AAAA2F00000100AAAAAA /* PlaybackSpeedStep.swift */; };
 		E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306EE2147A8CE008FE492 /* JavascriptPlugin.swift */; };
 		E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F32147F78D008FE492 /* JavascriptAPICore.swift */; };
 		E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */; };
@@ -1199,6 +1200,7 @@
 		51165FBB2E1D91290060B817 /* ReadWriteAtomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteAtomic.swift; sourceTree = "<group>"; };
 		51165FBF2E1D91940060B817 /* ReadWriteLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteLock.swift; sourceTree = "<group>"; };
 		511BF43B2E12FF8800E9721E /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
+		51F0AAAA2F00000100AAAAAA /* PlaybackSpeedStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackSpeedStep.swift; sourceTree = "<group>"; };
 		511BF43D2E1305C800E9721E /* MiniPlaySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlaySlider.swift; sourceTree = "<group>"; };
 		5125117C2E89B2ED00CDAE9F /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		512B8FDC2BC2376E00AF41BF /* OutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
@@ -2464,6 +2466,7 @@
 				51DE55C82A6646710050AD06 /* Sysctl.swift */,
 				519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */,
 				51165FBB2E1D91290060B817 /* ReadWriteAtomic.swift */,
+				51F0AAAA2F00000100AAAAAA /* PlaybackSpeedStep.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -3290,6 +3293,7 @@
 				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
 				84E5221323FF3D080006FDA1 /* JavascriptAPIPlaylist.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
+				51F0AAAB2F00000100AAAAAA /* PlaybackSpeedStep.swift in Sources */,
 				847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */,
 				842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,

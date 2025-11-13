@@ -488,6 +488,7 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
+  @IBOutlet weak var oscSpeedChipLabel: NSTextField!
 
   @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var osdStackView: NSStackView!
@@ -600,6 +601,9 @@ class MainWindowController: PlayerWindowController {
     }
 
     player.initVideo()
+
+    // Hide speed chip by default; it will appear when speed != 1.00x
+    oscSpeedChipLabel?.isHidden = true
 
     // init quick setting view now
     let _ = quickSettingView
@@ -839,6 +843,10 @@ class MainWindowController: PlayerWindowController {
       oscTopMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
       oscTopMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
+      // Ensure uniform spacing after the time/slider row (only if arranged)
+      if #available(macOS 10.12, *), oscTopMainView.arrangedSubviews.contains(fragSliderView!) {
+        oscTopMainView.setCustomSpacing(6, after: fragSliderView)
+      }
     case .bottom:
       currentControlBar = controlBarBottom
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
@@ -851,6 +859,9 @@ class MainWindowController: PlayerWindowController {
       oscBottomMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
       oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
+      if #available(macOS 10.12, *), oscBottomMainView.arrangedSubviews.contains(fragSliderView!) {
+        oscBottomMainView.setCustomSpacing(6, after: fragSliderView)
+      }
     }
 
     if currentControlBar != nil {
@@ -872,6 +883,9 @@ class MainWindowController: PlayerWindowController {
         oscFloatingLeadingTrailingConstraint = nil
       }
     }
+
+    // Ensure speed indicators reflect current layout immediately after switching
+    updateSpeedLabel(speed: player.info.playSpeed)
   }
 
   // MARK: - Mouse / Trackpad events
@@ -2997,20 +3011,35 @@ class MainWindowController: PlayerWindowController {
   }
 
   func updateSpeedLabel(speed: Double) {
-    if (speed == 1) {
+    let isFloating = (oscPosition == .floating)
+
+    // Arrow-side speed labels are used only in Floating layout
+    if isFloating {
+      if speed == 1 {
+        leftArrowLabel.isHidden = true
+        rightArrowLabel.isHidden = true
+      } else if speed < 1 {
+        leftArrowLabel.isHidden = false
+        rightArrowLabel.isHidden = true
+        leftArrowLabel.stringValue = String(format: "%.2fx", speed)
+      } else { // speed > 1
+        leftArrowLabel.isHidden = true
+        rightArrowLabel.isHidden = false
+        rightArrowLabel.stringValue = String(format: "%.2fx", speed)
+      }
+    } else {
       leftArrowLabel.isHidden = true
       rightArrowLabel.isHidden = true
-    } else if speed < 1 {
-      leftArrowLabel.isHidden = false
-      rightArrowLabel.isHidden = true
-      leftArrowLabel.stringValue = String(format: "%.2fx", speed)
-    } else if speed > 1 {
-      leftArrowLabel.isHidden = true
-      rightArrowLabel.isHidden = false
-      let fmt = NumberFormatter()
-      fmt.numberStyle = .decimal
-      fmt.maximumSignificantDigits = 3
-      rightArrowLabel.stringValue = fmt.string(for: speed)! + "x"
+    }
+
+    // Compact OSC speed chip: shown only for Top/Bottom, hidden for Floating; also hide at exactly 1.00x
+    if let chip = oscSpeedChipLabel {
+      if isFloating || speed == 1 {
+        chip.isHidden = true
+      } else {
+        chip.isHidden = false
+        chip.stringValue = String(format: "%.2fx", speed)
+      }
     }
   }
 

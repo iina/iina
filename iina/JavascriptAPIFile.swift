@@ -146,7 +146,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
     case "write":
       handleMode = .write
     default:
-      throwError(withMessage: "file.handle: moude should be \"read\" or \"write\".")
+      throwError(withMessage: "file.handle: mode should be \"read\" or \"write\".")
       return nil
     }
     if let handle = JavascriptFileHandle(url: URL(fileURLWithPath: filePath), mode: handleMode) {

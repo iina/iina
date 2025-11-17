@@ -27,8 +27,15 @@
           # Override ffmpeg to use our version of libs
           ffmpeg = pkgs.ffmpeg_7.override {
             withSoxr = true;
+            soxr = pkgs.soxr;
+
+            withRubberband = true;
             rubberband = pkgs.rubberband;
+
+            withPlacebo = true;
             libplacebo = pkgs.libplacebo;
+
+            withJxl = true;
             libjxl = pkgs.libjxl;
           };
 

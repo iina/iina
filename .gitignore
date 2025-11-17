@@ -114,5 +114,7 @@ browser/Firefox_Open_In_IINA/*
 *.xcarchive
 /.vscode
 
-deps/executable/youtube-dl
+deps/include
+deps/lib
+deps/executable
 deps/plugins

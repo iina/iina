@@ -19,7 +19,7 @@
           pkgs = import nixpkgs { inherit system; };
 
           # Pull system's xcode in
-          xcode = pkgs.runCommandNoCC "system-xcode" { } ''
+          xcode = pkgs.runCommand "system-xcode" { } ''
             mkdir -p $out/bin
             ln -sf /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild $out/bin/xcodebuild
           '';
@@ -146,6 +146,7 @@
                   pkgs.libass
                   pkgs.libb2
                   pkgs.libbluray
+                  pkgs.libbs2b
                   pkgs.libidn2
                   pkgs.libjpeg_turbo
                   pkgs.libjxl
@@ -661,7 +662,7 @@
 
               # Rewrite SwiftPM workspace-state.json to fix absolute paths
               if [ -f .spm/workspace-state.json ]; then
-                old_prefix=$(grep -Eo "/tmp/nix-build-[^/]+/source" .spm/workspace-state.json | head -n1)
+                old_prefix=$(grep -Eo "/nix/var/nix/builds/nix-[^/]+/source" .spm/workspace-state.json | head -n1)
                 echo "Patching workspace-state.json: replacing $old_prefix → $PWD"
                 sed -i -E "s|$old_prefix|$PWD|g" .spm/workspace-state.json
               fi

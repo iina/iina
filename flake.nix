@@ -419,50 +419,74 @@
                 done
               }
 
+              declare -Ag BUNDLED_DEPS=()
+
               bundle_dep() {
-                local dep="$1"
-                local depbase
-                depbase=$(basename "$dep")
-                local dest="$frameworks/$depbase"
+                local dep="$1"   # path as found in otool -L (may be libbs2b.0.dylib)
 
-                if [ -f "$dest" ]; then
-                  echo "✅ Already bundled: $depbase"
+                # Canonical path for cycle detection
+                local dep_real
+                dep_real=$(realpath "$dep" 2>/dev/null || echo "$dep")
+
+                # Break cycles by *real* path
+                if [[ -n "''${BUNDLED_DEPS["$dep_real"]:-}" ]]; then
+                  echo "🔁 Already processed dep: $dep_real"
+                  return
+                fi
+                BUNDLED_DEPS["$dep_real"]=1
+
+                local request_base
+                request_base=$(basename "$dep")
+                local real_base
+                real_base=$(basename "$dep_real")
+                local dest="$frameworks/$request_base"
+
+                if [[ "$dep_real" == /usr/lib/* ]] || [[ "$dep_real" == /System/* ]] || [[ "$real_base" == libffi-trampoline.dylib ]]; then
+                  echo "🚫 Skipping system/non-target dep: $dep_real"
                   return
                 fi
 
-                if [[ "$dep" == /usr/lib/* ]] || [[ "$dep" == /System/* ]] || [[ "$depbase" == libffi-trampoline.dylib ]]; then
-                  echo "🚫 Skipping system/non-target dep: $dep"
+                if [ ! -f "$dep_real" ]; then
+                  echo "⚠️  Dep missing on disk, skipping: $dep_real"
                   return
                 fi
 
-                if [ ! -f "$dep" ]; then
-                  echo "⚠️  Dep missing on disk, skipping: $dep"
+                # Ensure the real payload file exists in Frameworks under some canonical name
+                local canonical="$frameworks/$real_base"
+                if [ ! -f "$canonical" ]; then
+                  echo "📥 Copying dep → Frameworks: $dep_real → $canonical"
+                  cp -L -p "$dep_real" "$canonical" || { echo "❌ Copy failed for $dep_real"; return; }
+                fi
+
+                # Ensure the *requested* name exists and points to the payload
+                if [ ! -e "$dest" ]; then
+                  echo "🔗 Copying $canonical → $dest"
+                  cp -L -p "$canonical" "$dest"
+                else
+                  echo "✏️ Normalizing already-bundled dep alias: $request_base"
+                fi
+
+                ensure_writable "$canonical"
+
+                if ! is_macho "$canonical"; then
+                  echo "🧾 Non-Mach-O dep (no patching): $real_base"
                   return
                 fi
 
-                echo "📥 Copying dep → Frameworks: $dep → $dest"
-                cp -L -p "$dep" "$dest" || { echo "❌ Copy failed for $dep"; return; }
-                ensure_writable "$dest"
+                echo "✏️ Setting install_name id on $real_base"
+                install_name_tool -id "@rpath/$request_base" "$canonical" || true
 
-                if ! is_macho "$dest"; then
-                  echo "🧾 Copied non-Mach-O dep (no patching): $depbase"
-                  return
-                fi
+                ensure_rpath "$canonical"
+                rewrite_deps_to_rpath "$canonical"
 
-                echo "✏️ Setting install_name id on $depbase"
-                install_name_tool -id "@rpath/$depbase" "$dest" || true
-
-                ensure_rpath "$dest"
-                rewrite_deps_to_rpath "$dest"
-
-                # Recurse into transitive deps
-                otool -L "$dest" | awk 'NF && $1 !~ /:$/ {print $1}' | while read -r sub; do
+                # Recurse into transitive deps based on their /nix/store path
+                otool -L "$canonical" | awk 'NF && $1 !~ /:$/ {print $1}' | while read -r sub; do
                   case "$sub" in
                     /nix/store/*)
                       local subbase
                       subbase=$(basename "$sub")
-                      echo "  🔗 Repointing subdep for $depbase: $sub → @rpath/$subbase"
-                      install_name_tool -change "$sub" "@rpath/$subbase" "$dest" || true
+                      echo "  🔗 Repointing subdep for $real_base: $sub → @rpath/$subbase"
+                      install_name_tool -change "$sub" "@rpath/$subbase" "$canonical" || true
                       bundle_dep "$sub"
                       ;;
                     *) : ;;

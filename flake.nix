@@ -632,15 +632,6 @@
               cp -RL ${depsLib}/.               deps/lib
               cp -RL ${depsExecutable}/.        deps/executable/
 
-              echo "🔃 Fixing compatibility"
-              cp deps/executable/yt-dlp             deps/executable/youtube-dl
-              cp deps/lib/librubberband.3.dylib     deps/lib/librubberband.2.dylib
-              cp deps/lib/libplacebo.349.dylib      deps/lib/libplacebo.338.dylib
-              cp deps/lib/libjpeg.62.dylib          deps/lib/libjpeg.8.dylib
-              cp deps/lib/libjxl_cms.0.11.dylib     deps/lib/libjxl_cms.0.10.dylib
-              cp deps/lib/libjxl_threads.0.11.dylib deps/lib/libjxl_threads.0.10.dylib
-              cp deps/lib/libjxl.0.11.dylib         deps/lib/libjxl.0.10.dylib
-
               echo "✏️ Rewriting install names to use @rpath"
               find deps/lib -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r dep; do
                 echo "✏️ Patching install names in $dep"

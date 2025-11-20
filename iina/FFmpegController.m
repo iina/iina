@@ -750,6 +750,7 @@ return -1;\
     }
 
     // Search the streams for one that contains front cover artwork.
+    int index = 0;
     AVPacket* packet = NULL;
     for (int i = 0; i < pFormatCtx->nb_streams; i++) {
       AVStream* stream = pFormatCtx->streams[i];
@@ -766,6 +767,7 @@ return -1;\
       // types can be found here: https://id3.org/id3v2.3.0#Attached_picture
 
       // Found front cover artwork.
+      index = i;
       packet = &stream->attached_pic;
       break;
     }
@@ -775,6 +777,7 @@ return -1;\
     }
 
     // Form an image from the stream's data.
+    LOG_DEBUG(@"Creating an image from stream %d using %d bytes", index, packet->size);
     NSData *data = [[NSData alloc] initWithBytes:packet->data length:packet->size];
     NSImage *image = [[NSImage alloc] initWithData:data];
     if (!image) {

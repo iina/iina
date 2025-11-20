@@ -255,8 +255,9 @@ class NowPlayingInfoManager {
       log("External artwork track is missing external-filename", url, level: .error)
       return nil
     }
+    log("Creating an image from external artwork file: \(filename)")
     guard let image = NSImage(contentsOfFile: filename) else {
-      log("Unable to create an image for external artwork file: \(filename)", level: .error)
+      log("Unable to create an image from external artwork file: \(filename)", level: .error)
       return nil
     }
     return image
@@ -437,8 +438,7 @@ class NowPlayingInfoManager {
   /// Search the given video tracks for front cover art.
   ///
   /// Container formats such as Matroska support embedding cover art. An external file can be specified as cover art using the mpv
-  /// option [cover-art-files](https://mpv.io/manual/stable/#options-cover-art-files). If the media being "played" is
-  /// an image file then it will be used as the artwork.
+  /// option [cover-art-files](https://mpv.io/manual/stable/#options-cover-art-files).
   /// - Parameters:
   ///   - player: The `PlayerCore` that is playing the media item.
   ///   - url: The URL of the media item.
@@ -450,18 +450,8 @@ class NowPlayingInfoManager {
     guard !tracks.isEmpty else { return false }
     log("Searching \(tracks.count) tracks for front cover artwork", url, level: .verbose)
     for track in tracks {
-      // Only interested in tracks representing an image.
-      guard track.isImage else { continue }
-      if track.isAlbumart {
-        guard let image = constructImage(url, track) else { continue }
-        foundFrontCoverArtwork(player, url, ticket, image)
-        return true
-      }
-      // The media item is an image.
-      guard let image = NSImage(contentsOf: url) else {
-        log("Unable to create an image from: \(url)", level: .error)
-        continue
-      }
+      // Only interested in tracks representing cover artwork.
+      guard track.isAlbumart, let image = constructImage(url, track) else { continue }
       foundFrontCoverArtwork(player, url, ticket, image)
       return true
     }

@@ -110,10 +110,24 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
     updateInfo()
     watchTableView.scrollRowToVisible(0)
+
+    let info = PlayerCore.lastActive.info
+    log("""
+      Video tracks:
+      \(info.videoTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose)
+    log("""
+      Audio tracks:
+      \(info.audioTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose)
+    log("""
+      Subtitle tracks:
+      \(info.subTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose)
   }
 
   override func showWindow(_ sender: Any?) {
-    Logger.log("Showing Inspector window", level: .verbose)
+    log("Showing Inspector window", level: .verbose)
 
     guard let _ = self.window else { return }  // trigger lazy load if not loaded
 
@@ -129,7 +143,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   }
 
   func windowWillClose(_ notification: Notification) {
-    Logger.log("Closing Inspector window", level: .verbose)
+    log("Closing Inspector window", level: .verbose)
     // Remove timer & listeners to conserve resources
     removeTimerAndListeners()
   }
@@ -334,7 +348,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
     }
   }
 
-  // MARK: NSTableView
+  // MARK: - NSTableView
 
   func numberOfRows(in tableView: NSTableView) -> Int {
     return watchProperties.count
@@ -372,7 +386,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
       }
       return cell
     default:
-      Logger.log("Unrecognized column: '\(identifier.rawValue)'", level: .error)
+      log("Unrecognized column: '\(identifier.rawValue)'", level: .error)
       return nil
     }
   }
@@ -473,7 +487,11 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   }
 
 
-  // MARK: Utils
+  // MARK: - Utils
+
+  private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: Logger.Sub.inspector)
+  }
 
   private func setLabelColor(_ label: NSTextField, by state: Bool) {
     label.textColor = state ? NSColor.labelColor : NSColor.disabledControlTextColor
@@ -493,4 +511,8 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
       super.draw(withFrame: cellFrame, in: controlView)
     }
   }
+}
+
+extension Logger.Sub {
+  static let inspector = Logger.makeSubsystem("inspector")
 }

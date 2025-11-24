@@ -49,6 +49,27 @@ class MPVTrack: NSObject {
     case secondSub = "secondSub"
   }
 
+  /// A textual representation of this instance.
+  /// - Note: Optional properties that are `nil` are not included in the description of the instance.
+  override var description: String {
+    var result =
+      """
+      Track \(idString)
+        type: \(type)\n
+      """
+    result += Mirror(reflecting: self).children.compactMap { child -> (String, String)? in
+      guard let label = child.label, label != "id", label != "type" else { return nil }
+      if case Optional<Any>.none = child.value { return nil }
+      var value = String(describing: child.value)
+      let prefix = "Optional("
+      if value.hasPrefix(prefix), value.hasSuffix(")") {
+        value = String(value.dropFirst(prefix.count).dropLast(1))
+      }
+      return (label, "\(value)")
+    }.sorted { $0.0 < $1.0 }.map { "  \($0): \($1)" }.joined(separator: "\n")
+    return result
+  }
+
   var id: Int
   var type: TrackType
   var srcId: Int?

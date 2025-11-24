@@ -270,7 +270,11 @@
                 )
                 [
                   ffmpeg
-                  mpv
+                  # Grab the real mpv binary instead of the /bin wrapper script
+                  (pkgs.runCommand "iina-mpv-executable" { } ''
+                    mkdir -p $out/bin
+                    cp -p ${mpv}/Applications/mpv.app/Contents/MacOS/mpv $out/bin/mpv
+                  '')
                   pkgs.vapoursynth
                   pkgs.python3
                   pkgs.yt-dlp

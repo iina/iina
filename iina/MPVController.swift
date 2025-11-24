@@ -1042,6 +1042,18 @@ class MPVController: NSObject {
     MPVNode.free(node)
   }
 
+  /// Returns the given node map value as an `Int`.
+  ///
+  /// This method is intended to be used when extracting values from a `MPV_FORMAT_NODE_MAP` `mpv_node` that contains
+  /// mixed types.
+  /// - Note: Zero is returned for `nil` values to match the behavior of `getInt`.
+  /// - Parameter value:Value from a mpv node map.
+  /// - Returns: The given value converted to an `Int`.
+  static func nodeValueAsInt(_ value: Any?) -> Int {
+    guard let asInt64 = value as? Int64 else { return 0 }
+    return Int(asInt64)
+  }
+
   // MARK: - Hooks
 
   func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {

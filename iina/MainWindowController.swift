@@ -174,6 +174,15 @@ class MainWindowController: PlayerWindowController {
 
   var lastMagnification: CGFloat = 0.0
   var frameWhenStartedPinching = NSRect()
+  var pinchOriginInWindow: NSPoint?
+  var pinchOriginInVideo: NSPoint?
+  var pinchOriginInVideoUnit: NSPoint?
+  var pinchScale: CGFloat = 1.0
+  var pinchInitialZoom: Double = 1.0
+  private let pinchZoomMultiplier: Double = 1.0
+  private let pinchMinZoom: Double = 1.0
+  private let pinchMaxZoom: Double = 4.5
+  private let pinchMaxPan: Double = 1.0
 
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
@@ -584,7 +593,7 @@ class MainWindowController: PlayerWindowController {
     addVideoViewToWindow()
 
     // gesture recognizer
-    cv.addGestureRecognizer(magnificationGestureRecognizer)
+    videoView.addGestureRecognizer(magnificationGestureRecognizer)
 
     // Work around a bug in macOS Ventura where HDR content becomes dimmed when playing in full
     // screen mode once overlaying views are fully hidden (issue #3844). After applying this
@@ -1173,6 +1182,7 @@ class MainWindowController: PlayerWindowController {
   @objc func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
     guard pinchAction != .none else { return }
     guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main?.visibleFrame else { return }
+    let isFullscreen = fsState.isFullscreen
 
     switch pinchAction {
     case .none:
@@ -1187,32 +1197,114 @@ class MainWindowController: PlayerWindowController {
         }
       }
     case .windowSize:
-      if fsState.isFullscreen { return }
-
-      // adjust window size
-      if recognizer.state == .began {
-        // began
-        lastMagnification = recognizer.magnification
-        videoView.videoLayer.inLiveResize = true
-        frameWhenStartedPinching = window.frame
-      } else if recognizer.state == .changed {
-        // changed
-        let offset = recognizer.magnification - lastMagnification + 1.0;
-        let newWidth = window.frame.width * offset
-        let newHeight = newWidth / window.aspectRatio.aspect
-
-        //Check against max & min threshold
-        if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
-          let newSize = NSSize(width: newWidth, height: newHeight);
-          window.setFrame(frameWhenStartedPinching.centeredResize(to: newSize), display: true)
+      if isFullscreen {
+        // Fullscreen: pinch to zoom video around the pinch origin.
+        if recognizer.state == .began {
+          lastMagnification = recognizer.magnification
+          pinchScale = 1.0
+          videoView.videoLayer.inLiveResize = true
+          frameWhenStartedPinching = window.frame
+          let currentZoom = player.mpv.getDouble(MPVOption.Video.videoZoom)
+          pinchInitialZoom = max(pinchMinZoom, 1.0 + currentZoom)
+          // Only update the pinch origin if starting from baseline; otherwise keep the prior origin to reduce jumps.
+          if pinchInitialZoom <= pinchMinZoom {
+            pinchOriginInWindow = recognizer.location(in: window.contentView)
+            pinchOriginInVideo = clampedVideoPoint(fromWindowPoint: pinchOriginInWindow ?? .zero)
+            pinchOriginInVideoUnit = normalizedVideoPoint(fromWindowPoint: pinchOriginInWindow ?? .zero)
+          }
+        } else if recognizer.state == .changed {
+          pinchScale = recognizer.magnification + 1.0
+          applyVideoZoom(scaleMultiplier: pinchScale)
+          lastMagnification = recognizer.magnification
+        } else if recognizer.state == .ended {
+          applyVideoZoom(scaleMultiplier: pinchScale)
+          videoView.videoLayer.inLiveResize = false
         }
+      } else {
+        // Windowed: resize the window as before.
+        if recognizer.state == .began {
+          lastMagnification = recognizer.magnification
+          videoView.videoLayer.inLiveResize = true
+          frameWhenStartedPinching = window.frame
+        } else if recognizer.state == .changed {
+          let offset = recognizer.magnification - lastMagnification + 1.0
+          let newWidth = window.frame.width * offset
+          let newHeight = newWidth / window.aspectRatio.aspect
 
-        lastMagnification = recognizer.magnification
-      } else if recognizer.state == .ended {
-        updateWindowParametersForMPV()
-        videoView.videoLayer.inLiveResize = false
+          if newHeight < screenFrame.height && newHeight > minSize.height && newWidth > minSize.width {
+            let newSize = NSSize(width: newWidth, height: newHeight)
+            window.setFrame(frameWhenStartedPinching.centeredResize(to: newSize), display: true)
+          }
+
+          lastMagnification = recognizer.magnification
+        } else if recognizer.state == .ended {
+          updateWindowParametersForMPV()
+          videoView.videoLayer.inLiveResize = false
+        }
       }
     }
+  }
+
+  private func clampedVideoPoint(fromWindowPoint point: NSPoint) -> NSPoint {
+    let viewPoint = videoView.convert(point, from: window?.contentView)
+    let bounds = videoView.bounds
+    guard bounds.width > 0, bounds.height > 0 else { return .zero }
+
+    let (videoWidth, videoHeight) = player.videoSizeForDisplay
+    let videoSize = NSSize(width: CGFloat(videoWidth), height: CGFloat(videoHeight))
+    let fitSize = videoSize.shrink(toSize: bounds.size)
+    let videoRect = fitSize.centeredRect(in: bounds)
+
+    guard videoRect.width > 0, videoRect.height > 0 else { return .zero }
+
+    let clampedX = max(videoRect.minX, min(videoRect.maxX - 1, viewPoint.x))
+    let clampedY = max(videoRect.minY, min(videoRect.maxY - 1, viewPoint.y))
+
+    return NSPoint(x: clampedX - videoRect.minX, y: clampedY - videoRect.minY)
+  }
+
+  private func normalizedVideoPoint(fromWindowPoint point: NSPoint) -> NSPoint? {
+    guard let rect = videoRectInView() else { return nil }
+    let clamped = clampedVideoPoint(fromWindowPoint: point)
+    guard rect.width > 0, rect.height > 0 else { return nil }
+    return NSPoint(x: clamped.x / rect.width, y: clamped.y / rect.height)
+  }
+
+  private func videoRectInView() -> NSRect? {
+    let bounds = videoView.bounds
+    guard bounds.width > 0, bounds.height > 0 else { return nil }
+    let (videoWidth, videoHeight) = player.videoSizeForDisplay
+    let videoSize = NSSize(width: CGFloat(videoWidth), height: CGFloat(videoHeight))
+    let fitSize = videoSize.shrink(toSize: bounds.size)
+    return fitSize.centeredRect(in: bounds)
+  }
+
+  private func applyVideoZoom(scaleMultiplier: CGFloat) {
+    let s0 = pinchInitialZoom
+    let s1 = min(pinchMaxZoom, max(pinchMinZoom, s0 * Double(scaleMultiplier) * pinchZoomMultiplier))
+    let zoomProp = s1 - 1.0
+
+    let origin = pinchOriginInVideoUnit ?? NSPoint(x: 0.5, y: 0.5)
+    // Adjust pan to keep the pinch origin under the cursor relative to the current zoom.
+    // mpv pan semantics: positive pan-x moves video right; positive pan-y moves video down.
+    let invScale = 1.0 / s1
+    let newPanX = clampPan(Double(0.5 - origin.x) * (1.0 - invScale))
+    let newPanY = clampPan(Double(origin.y - 0.5) * (1.0 - invScale))
+
+    player.mpv.setDouble(MPVOption.Video.videoZoom, zoomProp, level: .verbose)
+    player.mpv.setDouble(MPVOption.Video.videoPanX, newPanX, level: .verbose)
+    player.mpv.setDouble(MPVOption.Video.videoPanY, newPanY, level: .verbose)
+
+    // If we're effectively back to 1x, forget the stored origin so a new pinch can pick a fresh focal point.
+    if s1 <= pinchMinZoom + 0.0001 {
+      pinchOriginInWindow = nil
+      pinchOriginInVideo = nil
+      pinchOriginInVideoUnit = nil
+    }
+  }
+
+  private func clampPan(_ value: Double) -> Double {
+    return min(pinchMaxPan, max(-pinchMaxPan, value))
   }
 
   // MARK: - Window delegate: Open / Close

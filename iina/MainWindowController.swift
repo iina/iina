@@ -182,7 +182,6 @@ class MainWindowController: PlayerWindowController {
   private let pinchZoomMultiplier: Double = 1.0
   private let pinchMinZoom: Double = 1.0
   private let pinchMaxZoom: Double = 4.5
-  private let pinchMaxPan: Double = 1.0
 
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
@@ -1084,6 +1083,9 @@ class MainWindowController: PlayerWindowController {
       // ignore delta caused by abrupt momentum phases
       return
     }
+    if handlePanGesture(with: event) {
+      return
+    }
     /**
      reference: https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/EventOverview/HandlingTouchEvents/HandlingTouchEvents.html#//apple_ref/doc/uid/10000060i-CH13
 
@@ -1205,7 +1207,7 @@ class MainWindowController: PlayerWindowController {
           videoView.videoLayer.inLiveResize = true
           frameWhenStartedPinching = window.frame
           let currentZoom = player.mpv.getDouble(MPVOption.Video.videoZoom)
-          pinchInitialZoom = max(pinchMinZoom, 1.0 + currentZoom)
+          pinchInitialZoom = max(pinchMinZoom, mpvScale(fromZoom: currentZoom))
           // Only update the pinch origin if starting from baseline; otherwise keep the prior origin to reduce jumps.
           if pinchInitialZoom <= pinchMinZoom {
             pinchOriginInWindow = recognizer.location(in: window.contentView)
@@ -1279,17 +1281,25 @@ class MainWindowController: PlayerWindowController {
     return fitSize.centeredRect(in: bounds)
   }
 
+  private enum PanAxis {
+    case x
+    case y
+  }
+
   private func applyVideoZoom(scaleMultiplier: CGFloat) {
     let s0 = pinchInitialZoom
     let s1 = min(pinchMaxZoom, max(pinchMinZoom, s0 * Double(scaleMultiplier) * pinchZoomMultiplier))
-    let zoomProp = s1 - 1.0
+    let zoomProp = mpvZoom(fromScale: s1)
+    let bounds = videoView.bounds
+    let rect = videoRectInView() ?? bounds
 
     let origin = pinchOriginInVideoUnit ?? NSPoint(x: 0.5, y: 0.5)
     // Adjust pan to keep the pinch origin under the cursor relative to the current zoom.
     // mpv pan semantics: positive pan-x moves video right; positive pan-y moves video down.
-    let invScale = 1.0 / s1
-    let newPanX = clampPan(Double(0.5 - origin.x) * (1.0 - invScale))
-    let newPanY = clampPan(Double(origin.y - 0.5) * (1.0 - invScale))
+    let marginX = panMargin(forScale: s1, rect: rect, bounds: bounds, axis: .x)
+    let marginY = panMargin(forScale: s1, rect: rect, bounds: bounds, axis: .y)
+    let newPanX = clampPan(Double(0.5 - origin.x), reach: marginX)
+    let newPanY = clampPan(Double(origin.y - 0.5), reach: marginY)
 
     player.mpv.setDouble(MPVOption.Video.videoZoom, zoomProp, level: .verbose)
     player.mpv.setDouble(MPVOption.Video.videoPanX, newPanX, level: .verbose)
@@ -1303,8 +1313,96 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  private func clampPan(_ value: Double) -> Double {
-    return min(pinchMaxPan, max(-pinchMaxPan, value))
+  private func clampPan(_ value: Double, reach: Double) -> Double {
+    let limit = 0.5 - reach
+    guard limit > 0 else { return 0 }
+    return min(limit, max(-limit, value))
+  }
+
+  private func clampedNormalizedCenter(_ value: Double, reach: Double) -> Double {
+    return min(1.0 - reach, max(reach, value))
+  }
+
+  private func panMargin(forScale scale: Double, rect: NSRect, bounds: NSRect, axis: PanAxis) -> Double {
+    guard scale > 1.0 else { return 0.5 }
+    guard rect.width > 0, rect.height > 0, bounds.width > 0, bounds.height > 0 else { return 0.5 / scale }
+
+    let aspectVideo = rect.width / rect.height
+    let aspectView = bounds.width / bounds.height
+    let fillX: Double
+    let fillY: Double
+    if aspectVideo > aspectView {
+      fillX = 1.0
+      fillY = aspectView / aspectVideo
+    } else {
+      fillX = aspectVideo / aspectView
+      fillY = 1.0
+    }
+
+    let fill = (axis == .x) ? fillX : fillY
+    let reach = 0.5 / (scale * fill)
+    return min(0.5, max(0.0, reach))
+  }
+
+  private func mpvScale(fromZoom zoom: Double) -> Double {
+    return pow(2.0, zoom)
+  }
+
+  private func mpvZoom(fromScale scale: Double) -> Double {
+    return log2(scale)
+  }
+
+  private func handlePanGesture(with event: NSEvent) -> Bool {
+    guard fsState.isFullscreen else { return false }
+    guard !isInInteractiveMode else { return false }
+    guard event.hasPreciseScrollingDeltas else { return false }
+    guard event.momentumPhase.isEmpty else { return true }
+
+    let currentZoom = player.mpv.getDouble(MPVOption.Video.videoZoom)
+    let currentScale = max(pinchMinZoom, mpvScale(fromZoom: currentZoom))
+    guard currentScale > pinchMinZoom + 0.0001 else { return false }
+
+    guard let rect = videoRectInView(), rect.width > 0, rect.height > 0 else { return false }
+    let bounds = videoView.bounds
+    guard !isMouseEvent(event, inAnyOf: [sideBarView, titleBarView, subPopoverView, currentControlBar, fragSliderView, fragVolumeView]) else { return false }
+
+    var deltaX = event.scrollingDeltaX
+    var deltaY = event.scrollingDeltaY
+
+    if event.isDirectionInvertedFromDevice {
+      deltaX = -deltaX
+      deltaY = -deltaY
+    }
+
+    let panSpeed: Double = 2.3
+    let normalizedDeltaX = Double(deltaX) * panSpeed / (Double(rect.width) * currentScale)
+    let normalizedDeltaY = -Double(deltaY) * panSpeed / (Double(rect.height) * currentScale)
+
+    if abs(normalizedDeltaX) < 0.000001 && abs(normalizedDeltaY) < 0.000001 {
+      return true
+    }
+
+    let currentPanX = player.mpv.getDouble(MPVOption.Video.videoPanX)
+    let currentPanY = player.mpv.getDouble(MPVOption.Video.videoPanY)
+
+    let marginX = panMargin(forScale: currentScale, rect: rect, bounds: bounds, axis: .x)
+    let marginY = panMargin(forScale: currentScale, rect: rect, bounds: bounds, axis: .y)
+
+    let currentCenterX = 0.5 - currentPanX
+    let currentCenterY = 0.5 + currentPanY
+
+    let newCenterX = clampedNormalizedCenter(currentCenterX + normalizedDeltaX, reach: marginX)
+    let newCenterY = clampedNormalizedCenter(currentCenterY + normalizedDeltaY, reach: marginY)
+
+    let newPanX = clampPan(0.5 - newCenterX, reach: marginX)
+    let newPanY = clampPan(newCenterY - 0.5, reach: marginY)
+
+    player.mpv.setDouble(MPVOption.Video.videoPanX, newPanX, level: .verbose)
+    player.mpv.setDouble(MPVOption.Video.videoPanY, newPanY, level: .verbose)
+
+    pinchOriginInVideoUnit = NSPoint(x: newCenterX, y: newCenterY)
+
+    return true
   }
 
   // MARK: - Window delegate: Open / Close

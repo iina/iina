@@ -843,7 +843,7 @@ class MPVController: NSObject {
   // Set property
   func setFlag(_ name: String, _ flag: Bool, level: Logger.Level = .debug) {
     log("Set property: \(name)=\(flag)", level: level)
-    var data: Int = flag ? 1 : 0
+    var data: Int32 = flag ? 1 : 0
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
   }
 
@@ -885,7 +885,7 @@ class MPVController: NSObject {
   }
 
   func getFlag(_ name: String) -> Bool {
-    var data = Int64()
+    var data = Int32()
     mpv_get_property(mpv, name, MPV_FORMAT_FLAG, &data)
     return data > 0
   }

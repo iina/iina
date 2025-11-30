@@ -126,6 +126,9 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
     observers.append(NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main, using: self.fileLoaded))
 
     super.showWindow(sender)
+
+    // Log additional information for developers when the inspector window is shown.
+    MemoryUsage.shared.logUsage("after showing inspector window")
   }
 
   func windowWillClose(_ notification: Notification) {

@@ -33,6 +33,7 @@ class HistoryController: NSObject {
     // Avoid logging a scary error if the file does not exist.
     guard FileManager.default.fileExists(atPath: plistURL.path) else { return }
     do {
+      MemoryUsage.shared.logUsage("before reading history")
       let data = try Data(contentsOf: plistURL)
       let object = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, PlaybackHistory.self],
                                                           from: data)
@@ -43,6 +44,7 @@ class HistoryController: NSObject {
       }
       self.history = history
       log("Read \(history.count) playback history entries")
+      MemoryUsage.shared.logUsage("after reading history")
     } catch {
       log("Failed to read playback history file \(plistURL.path): \(error)", level: .error)
     }

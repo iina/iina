@@ -531,6 +531,7 @@ class MainWindowController: PlayerWindowController {
 
   override func windowDidLoad() {
     super.windowDidLoad()
+    MemoryUsage.shared.logUsage("after window loaded")
 
     guard let window = window else { return }
 
@@ -2735,6 +2736,7 @@ class MainWindowController: PlayerWindowController {
       newFrame = window.frame.centeredResize(to: finalSize.satisfyMinSizeWithSameAspectRatio(minSize)).constrain(in: screenFrame)
     }
     window.setFrame(newFrame, display: true, animate: true)
+    MemoryUsage.shared.logUsage("after window scale changed (\(newFrame.width)x\(newFrame.height))")
   }
 
   // MARK: - UI: Others

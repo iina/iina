@@ -591,6 +591,7 @@ class PlayerCore: NSObject {
     mpv.mpvInitRendering()
     mainWindow.videoView.startDisplayLink()
     log("Initialized rendering")
+    MemoryUsage.shared.logUsage("after rendering initialized")
   }
 
   // unload main window video view
@@ -1895,6 +1896,7 @@ class PlayerCore: NSObject {
   func fileStarted(path: String) {
     guard info.state.active else { return }
     log("File started")
+    MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
     currentMediaIsAudio = .unknown
@@ -2058,6 +2060,7 @@ class PlayerCore: NSObject {
     } else {
       info.shouldAutoLoadFiles = false
     }
+    MemoryUsage.shared.logUsage("after file ended")
   }
 
   func afChanged() {

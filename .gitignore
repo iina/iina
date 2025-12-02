@@ -114,7 +114,7 @@ browser/Firefox_Open_In_IINA/*
 *.xcarchive
 /.vscode
 
-deps/include
-deps/lib
-deps/executable
-deps/plugins
+deps/
+.home/
+.spm/
+.tmp/

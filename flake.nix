@@ -5,18 +5,22 @@
 
   outputs =
     { self, nixpkgs }:
-    {
+    let
       systems = [
         "aarch64-darwin"
         "x86_64-darwin"
       ];
 
-      archApps = builtins.map (system: self.packages.${system}.iina) self.systems;
-
-      packages = nixpkgs.lib.genAttrs self.systems (
+      perSystem = nixpkgs.lib.genAttrs systems (
         system:
         let
           pkgs = import nixpkgs { inherit system; };
+
+          scripts = {
+            normalizer = import ./nix/scripts/normalizer.nix { inherit pkgs; };
+            canonicalizeLibGroups = import ./nix/scripts/canonicalize-lib-groups.nix { inherit pkgs; };
+            resign = import ./nix/scripts/resign.nix { inherit pkgs; };
+          };
 
           # Pull system's xcode in
           xcode = pkgs.runCommand "system-xcode" { } ''
@@ -346,547 +350,349 @@
             '';
           };
 
-          # hared normalizer script
-          normalizer = pkgs.writeShellApplication {
-            name = "iina-normalize-app";
-            runtimeInputs = [
-              pkgs.coreutils
-              pkgs.findutils
-              pkgs.gawk
-              pkgs.gnugrep
-              pkgs.file
-            ];
-            text = ''
-              set -euo pipefail
+          # Package Python resources (stdlib + VapourSynth) for reuse in builds and dev shells
+          depsResources = pkgs.runCommand "iina-deps-resources" { } ''
+            set -euo pipefail
 
-              if [[ $# -lt 1 ]]; then
-                echo "usage: iina-normalize-app /path/to/IINA.app" >&2
-                exit 2
-              fi
+            mkdir -p "$out/Python/lib"
+            python_src=$(echo ${pkgs.python3}/lib/python* | awk '{print $1}')
+            python_basename="$(basename "$python_src")"
+            cp -rL --no-preserve=mode,ownership "$python_src" "$out/Python/lib/"
 
-              app="$1"
-              frameworks="$app/Contents/Frameworks"
+            python_target="$out/Python/lib/$python_basename"
+            chmod -R u+w "$python_target"
+            mkdir -p "$python_target/site-packages"
 
-              echo "🔧 iina-normalize-app: normalizing $app"
-              mkdir -p "$frameworks"
-
-              echo "📝 Making app contents writable"
-              find "$app" -type d -exec chmod u+rwx {} \;
-              find "$app" -type f -exec chmod u+rw  {} \;
-
-              # ✏️ Helpers
-              is_macho() {
-                # true for thin/fat Mach-O; false for scripts/text
-                file -b "$1" 2>/dev/null | grep -Eq 'Mach-O (universal binary|64-bit|arm64|x86_64)'
-              }
-
-              ensure_writable() { chmod u+rw "$1" 2>/dev/null || true; }
-
-              ensure_rpath() {
-                local f="$1"
-
-                if ! is_macho "$f"; then
-                  echo "🧾 Non-Mach-O, skipping rpath: $f"
-                  return
-                fi
-
-                if otool -l "$f" | grep -q '@executable_path/../Frameworks'; then
-                  echo "✅ LC_RPATH present → $f"
-                  return
-                fi
-                
-                echo "➕ LC_RPATH @executable_path/../Frameworks → $f"
-                install_name_tool -add_rpath "@executable_path/../Frameworks" "$f" || true
-              }
-
-              rewrite_deps_to_rpath() {
-                local bin="$1"
-
-                if ! is_macho "$bin"; then
-                  echo "🧾 Non-Mach-O, skipping dep rewrite: $bin"
-                  return
-                fi
-
-                echo "✏️ Rewriting deps → @rpath for: $bin"
-
-                # /nix/store/* → @rpath/<basename>
-                otool -L "$bin" | awk '/\/nix\/store/ && $1 !~ /:$/ {print $1}' | while read -r abs; do
-                  local base
-                  base=$(basename "$abs")
-                  echo "  🔁 /nix/store → @rpath: $abs → @rpath/$base"
-                  install_name_tool -change "$abs" "@rpath/$base" "$bin" || true
-                done
-
-                # bare dylibs (no /, no @) → @rpath/<basename>
-                otool -L "$bin" | awk 'NF && $1 !~ /:$/ && $1 ~ /^[^/@][^/]*\.dylib$/ {print $1}' | while read -r bare; do
-                  local base
-                  base=$(basename "$bare")
-                  echo "  🔁 bare → @rpath: $bare → @rpath/$base"
-                  install_name_tool -change "$bare" "@rpath/$base" "$bin" || true
-                done
-              }
-
-              declare -Ag BUNDLED_DEPS=()
-
-              bundle_dep() {
-                local dep="$1"   # path as found in otool -L (may be libbs2b.0.dylib)
-
-                # Canonical path for cycle detection
-                local dep_real
-                dep_real=$(realpath "$dep" 2>/dev/null || echo "$dep")
-
-                # Break cycles by *real* path
-                if [[ -n "''${BUNDLED_DEPS["$dep_real"]:-}" ]]; then
-                  echo "🔁 Already processed dep: $dep_real"
-                  return
-                fi
-                BUNDLED_DEPS["$dep_real"]=1
-
-                local request_base
-                request_base=$(basename "$dep")
-                local real_base
-                real_base=$(basename "$dep_real")
-                local dest="$frameworks/$request_base"
-
-                if [[ "$dep_real" == /usr/lib/* ]] || [[ "$dep_real" == /System/* ]] || [[ "$real_base" == libffi-trampoline.dylib ]]; then
-                  echo "🚫 Skipping system/non-target dep: $dep_real"
-                  return
-                fi
-
-                if [ ! -f "$dep_real" ]; then
-                  echo "⚠️  Dep missing on disk, skipping: $dep_real"
-                  return
-                fi
-
-                # Ensure the real payload file exists in Frameworks under some canonical name
-                local canonical="$frameworks/$real_base"
-                if [ ! -f "$canonical" ]; then
-                  echo "📥 Copying dep → Frameworks: $dep_real → $canonical"
-                  cp -L -p "$dep_real" "$canonical" || { echo "❌ Copy failed for $dep_real"; return; }
-                fi
-
-                # Ensure the *requested* name exists and points to the payload
-                if [ ! -e "$dest" ]; then
-                  echo "🔗 Copying $canonical → $dest"
-                  cp -L -p "$canonical" "$dest"
-                else
-                  echo "✏️ Normalizing already-bundled dep alias: $request_base"
-                fi
-
-                ensure_writable "$canonical"
-
-                if ! is_macho "$canonical"; then
-                  echo "🧾 Non-Mach-O dep (no patching): $real_base"
-                  return
-                fi
-
-                echo "✏️ Setting install_name id on $real_base"
-                install_name_tool -id "@rpath/$request_base" "$canonical" || true
-
-                ensure_rpath "$canonical"
-                rewrite_deps_to_rpath "$canonical"
-
-                # Recurse into transitive deps based on their /nix/store path
-                otool -L "$canonical" | awk 'NF && $1 !~ /:$/ {print $1}' | while read -r sub; do
-                  case "$sub" in
-                    /nix/store/*)
-                      local subbase
-                      subbase=$(basename "$sub")
-                      echo "  🔗 Repointing subdep for $real_base: $sub → @rpath/$subbase"
-                      install_name_tool -change "$sub" "@rpath/$subbase" "$canonical" || true
-                      bundle_dep "$sub"
-                      ;;
-                    *) : ;;
-                  esac
-                done
-              }
-
-              export -f ensure_writable ensure_rpath rewrite_deps_to_rpath bundle_dep
-
-              echo "🔍 Scanning app for dylib + executable dependencies…"
-
-              # executables + loadable libs
-              find "$app" -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r bin; do
-                echo "———"
-                echo "🔍 Inspecting: $bin"
-                ensure_writable "$bin"
-                ensure_rpath "$bin"
-
-                if ! is_macho "$bin"; then
-                  echo "🧾 Non-Mach-O target has no dylib deps to bundle"
-                  continue
-                fi
-
-                # bundle remaining absolute /nix/store deps
-                otool -L "$bin" | awk 'NF && $1 !~ /:$/ {print $1}' | while read -r dep; do
-                  case "$dep" in
-                    /nix/store/*)
-                      echo "  📦 Bundling needed dep for $bin: $dep"
-                      bundle_dep "$dep"
-                      ;;
-                    *) : ;;
-                  esac
-                done
-
-                rewrite_deps_to_rpath "$bin"
-              done
-
-              echo "✅ Normalization complete"
-            '';
-          };
-
-          canonicalizeLibGroups = pkgs.writeShellApplication {
-            name = "iina-canonicalize-lib-groups";
-            runtimeInputs = [
-              pkgs.findutils
-              pkgs.coreutils
-              pkgs.gawk
-            ];
-            text = ''
-              set -euo pipefail
-
-              frameworks="$1/Contents/Frameworks"
-
-              # Build the index in memory: each line is "STEM \t VERSION \t BASENAME"
-              lines="$(
-                find "$frameworks" -maxdepth 1 \( -type f -o -type l \) -name 'lib*.dylib' | while read -r dep; do
-                  base="$(basename "$dep")"
-                  if [[ "$base" =~ ^(lib[^.]+)\.([0-9]+(\.[0-9]+)*)\.dylib$ ]]; then
-                    printf '%s\t%s\t%s\n' "''${BASH_REMATCH[1]}" "''${BASH_REMATCH[2]}" "$base"
-                  elif [[ "$base" =~ ^(lib[^.]+)\.dylib$ ]]; then
-                    printf '%s\tUNVER\t%s\n' "''${BASH_REMATCH[1]}" "$base"
-                  fi
-                done
-              )"
-
-              # For each STEM, pick highest VERSION as canonical; relink others to it
-              printf '%s\n' "$lines" | cut -f1 | sort -u | while read -r stem; do
-                canon="$(
-                  printf '%s\n' "$lines" | awk -F'\t' -v s="$stem" '$1==s && $2!="UNVER"{print $2"\t"$3}' \
-                    | ${pkgs.coreutils}/bin/sort -V | tail -n1 | cut -f2
-                )"
-
-                # If no versioned file exists, fall back to unversioned
-                if [ -z "$canon" ]; then
-                  canon="$(printf '%s\n' "$lines" | awk -F'\t' -v s="$stem" '$1==s && $2=="UNVER"{print $3}' | head -n1)"
-                fi
-                [ -n "$canon" ] || continue
-
-                # Relink every other alias in the group to canonical (relative link)
-                (
-                  cd "$frameworks"
-                  printf '%s\n' "$lines" | awk -F'\t' -v s="$stem" '$1==s{print $3}' | while read -r alias; do
-                    [ "$alias" = "$canon" ] && continue
-                    rm -f -- "$alias"
-                    ln -s -- "$canon" "$alias"
-                  done
-                )
-              done
-
-              echo "✅ Canonicalized lib groups under $frameworks"
-            '';
-          };
-
-          resign = pkgs.writeShellApplication {
-            name = "iina-resign";
-            runtimeInputs = [
-              pkgs.findutils
-              pkgs.coreutils
-            ];
-            text = ''
-              set -euo pipefail
-              app="$1"
-
-              # Make sure everything we might sign is writable
-              find "$app" -type d -exec chmod u+rwx {} \;
-              find "$app" -type f -exec chmod u+rw  {} \;
-
-              # (optionally re-mark executables executable, in case)
-              find "$app/Contents/MacOS" -type f -perm -111 -exec chmod u+rw {} \;
-
-              /usr/bin/codesign --force --deep --sign - "$app"
-            '';
-          };
+            vapoursynth_site=$(echo ${pkgs.vapoursynth}/lib/python*/site-packages | awk '{print $1}')
+            cp -rL --no-preserve=mode,ownership "$vapoursynth_site"/. "$python_target/site-packages/"
+          '';
         in
-        {
-          iina = pkgs.stdenv.mkDerivation {
-            pname = "iina";
-            version = if self ? rev then builtins.substring 0 8 self.rev else "dev";
+        rec {
+          packages = rec {
+            iina = pkgs.stdenv.mkDerivation {
+              pname = "iina";
+              version = if self ? rev then builtins.substring 0 8 self.rev else "dev";
 
-            src = pkgs.nix-gitignore.gitignoreSource [ "flake.nix" "flake.lock" ] ./.;
+              src = pkgs.nix-gitignore.gitignoreSource [ "flake.nix" "flake.lock" ] ./.;
 
-            strictDeps = true;
+              strictDeps = true;
 
-            nativeBuildInputs = [
-              pkgs.coreutils
-              xcode
-              pkgs.rsync
-              pkgs.git
-              pkgs.gnused
-              pkgs.unzip
-              pkgs.zip
-            ];
+              nativeBuildInputs = [
+                pkgs.coreutils
+                xcode
+                pkgs.rsync
+                pkgs.git
+                pkgs.gnused
+                pkgs.unzip
+                pkgs.zip
+              ];
 
-            buildInputs = [
-              spmDeps
-              pkgs.yt-dlp
-            ];
+              buildInputs = [
+                spmDeps
+                pkgs.yt-dlp
+              ];
 
-            buildPhase = ''
-              echo "🔧 Setting up build environment"
-              export HOME=$PWD/.home
-              export CFFIXED_USER_HOME="$HOME"
-              export __XPC_CFFIXED_USER_HOME="$HOME"
-              export TMPDIR="$PWD/.tmp"; mkdir -p "$TMPDIR"
-              export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+              buildPhase = ''
+                echo "🔧 Setting up build environment"
+                export HOME=$PWD/.home
+                export CFFIXED_USER_HOME="$HOME"
+                export __XPC_CFFIXED_USER_HOME="$HOME"
+                export TMPDIR="$PWD/.tmp"; mkdir -p "$TMPDIR"
+                export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 
-              APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
-              export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin"
+                APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+                export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin"
 
-              unset CC CXX LD AR RANLIB NM STRIP OBJCOPY \
-                CFLAGS CXXFLAGS LDFLAGS SDKROOT CPATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH LIBRARY_PATH \
-                NIX_CFLAGS_COMPILE NIX_CFLAGS_LINK PKG_CONFIG_PATH
+                unset CC CXX LD AR RANLIB NM STRIP OBJCOPY \
+                  CFLAGS CXXFLAGS LDFLAGS SDKROOT CPATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH LIBRARY_PATH \
+                  NIX_CFLAGS_COMPILE NIX_CFLAGS_LINK PKG_CONFIG_PATH
 
-              export TOOLCHAINS=XcodeDefault
-              export SDKROOT=macosx
+                export TOOLCHAINS=XcodeDefault
+                export SDKROOT=macosx
 
-              echo "Using $TOOLCHAINS toolchain"
-              echo "Using $SDKROOT sdk"
+                echo "Using $TOOLCHAINS toolchain"
+                echo "Using $SDKROOT sdk"
 
-              echo "📦 Copying external deps"
-              mkdir -p deps
-              rm -rf deps/include deps/lib
+                echo "📦 Copying external deps"
+                mkdir -p deps
+                rm -rf deps/include deps/lib
 
-              mkdir -p deps/include deps/lib deps/executable
+                mkdir -p deps/include deps/lib deps/executable
 
-              cp -RL ${depsInc}/.               deps/include
-              cp -RL ${depsLib}/.               deps/lib
-              cp -RL ${depsExecutable}/.        deps/executable/
+                cp -RL ${depsInc}/.               deps/include
+                cp -RL ${depsLib}/.               deps/lib
+                cp -RL ${depsExecutable}/.        deps/executable/
 
-              echo "✏️ Rewriting install names to use @rpath"
-              find deps/lib -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r dep; do
-                echo "✏️ Patching install names in $dep"
-                chmod +w "$dep"
+                echo "✏️ Rewriting install names to use @rpath"
+                find deps/lib -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r dep; do
+                  echo "✏️ Patching install names in $dep"
+                  chmod +w "$dep"
 
-                # Change its ID to @rpath/<filename>
-                install_name_tool -id "@rpath/$(basename "$dep")" "$dep" || true
+                  # Change its ID to @rpath/<filename>
+                  install_name_tool -id "@rpath/$(basename "$dep")" "$dep" || true
 
-                # Rewrite dependencies that still point to /nix/store
-                otool -L "$dep" | awk '/\/nix\/store/ && $1 !~ /:$/ {print $1}' | while read -r nixdep; do
-                  base=$(basename "$nixdep")
-                  install_name_tool -change "$nixdep" "@rpath/$base" "$dep" || true
+                  # Rewrite dependencies that still point to /nix/store
+                  otool -L "$dep" | awk '/\/nix\/store/ && $1 !~ /:$/ {print $1}' | while read -r nixdep; do
+                    base=$(basename "$nixdep")
+                    install_name_tool -change "$nixdep" "@rpath/$base" "$dep" || true
+                  done
                 done
-              done
 
-              echo "📦 Copying SPM deps"
-              rsync -a ${spmDeps}/ ./
-              chmod -R u+rwx,g+rx,o+rx .
+                echo "📦 Copying SPM deps"
+                rsync -a ${spmDeps}/ ./
+                chmod -R u+rwx,g+rx,o+rx .
 
-              # Rewrite SwiftPM workspace-state.json to fix absolute paths
-              if [ -f .spm/workspace-state.json ]; then
-                old_prefix=$(grep -Eo "/nix/var/nix/builds/nix-[^/]+/source" .spm/workspace-state.json | head -n1)
-                echo "Patching workspace-state.json: replacing $old_prefix → $PWD"
-                sed -i -E "s|$old_prefix|$PWD|g" .spm/workspace-state.json
-              fi
+                # Rewrite SwiftPM workspace-state.json to fix absolute paths
+                if [ -f .spm/workspace-state.json ]; then
+                  old_prefix=$(grep -Eo "/nix/var/nix/builds/nix-[^/]+/source" .spm/workspace-state.json | head -n1)
+                  echo "Patching workspace-state.json: replacing $old_prefix → $PWD"
+                  sed -i -E "s|$old_prefix|$PWD|g" .spm/workspace-state.json
+                fi
 
-              # Build IINA
-              echo "🔨 Building IINA"
-              xcodebuild \
-                -workspace iina.xcodeproj/project.xcworkspace \
-                -scheme iina \
-                -configuration Release \
-                -sdk macosx \
-                -skipPackagePluginValidation \
-                -derivedDataPath "$PWD/build" \
-                -clonedSourcePackagesDirPath "$PWD/.spm" \
-                -packageCachePath "$PWD/.spm-cache" \
-                -disablePackageRepositoryCache \
-                -disableAutomaticPackageResolution \
-                -onlyUsePackageVersionsFromResolvedFile \
-                -IDEPackageSupportDisableManifestSandbox=YES \
-                -IDEPackageSupportDisablePluginExecutionSandbox=YES \
-                ARCHS="$(uname -m)" ONLY_ACTIVE_ARCH=YES \
-                SWIFT_ENABLE_EXPLICIT_MODULES=NO \
-                CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
-            '';
+                # Build IINA
+                echo "🔨 Building IINA"
+                xcodebuild \
+                  -workspace iina.xcodeproj/project.xcworkspace \
+                  -scheme iina \
+                  -configuration Release \
+                  -sdk macosx \
+                  -skipPackagePluginValidation \
+                  -derivedDataPath "$PWD/build" \
+                  -clonedSourcePackagesDirPath "$PWD/.spm" \
+                  -packageCachePath "$PWD/.spm-cache" \
+                  -disablePackageRepositoryCache \
+                  -disableAutomaticPackageResolution \
+                  -onlyUsePackageVersionsFromResolvedFile \
+                  -IDEPackageSupportDisableManifestSandbox=YES \
+                  -IDEPackageSupportDisablePluginExecutionSandbox=YES \
+                  ARCHS="$(uname -m)" ONLY_ACTIVE_ARCH=YES \
+                  SWIFT_ENABLE_EXPLICIT_MODULES=NO \
+                  CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=""
+              '';
 
-            installPhase = ''
-              mkdir -p $out/Applications
-              cp -R build/Build/Products/Release/IINA.app $out/Applications/
-            '';
+              installPhase = ''
+                mkdir -p $out/Applications
+                cp -R build/Build/Products/Release/IINA.app $out/Applications/
+              '';
 
-            preFixup = ''
-              export PATH=${pkgs.coreutils}/bin:$PATH
-            '';
+              preFixup = ''
+                export PATH=${pkgs.coreutils}/bin:$PATH
+              '';
 
-            postFixup = ''
-              app="$out/Applications/IINA.app"
-              macos="$app/Contents/MacOS"
-              frameworks="$app/Contents/Frameworks"
-              resources="$app/Contents/Resources"
-              plist="$app/Contents/Info.plist"
+              postFixup = ''
+                app="$out/Applications/IINA.app"
+                macos="$app/Contents/MacOS"
+                frameworks="$app/Contents/Frameworks"
+                resources="$app/Contents/Resources"
+                plist="$app/Contents/Info.plist"
 
-              mkdir -p "$frameworks"
-              mkdir -p "$resources"
+                mkdir -p "$frameworks"
+                mkdir -p "$resources"
 
-              echo "📦 Bundling ${depsIndirect} into IINA.app"
-              cp -RL ${depsIndirect}/. "$frameworks/"
+                echo "📦 Bundling ${depsResources} into IINA.app"
+                cp -RL ${depsResources}/. "$resources/"
 
-              echo "📦 Bundling ${depsExecutable} into IINA.app"
-              cp -RL ${depsExecutable}/. "$macos/"
+                echo "📦 Bundling ${depsIndirect} into IINA.app"
+                cp -RL ${depsIndirect}/. "$frameworks/"
 
-              echo "🐍 Bundling ${pkgs.python3} into IINA.app"
+                echo "📦 Bundling ${depsExecutable} into IINA.app"
+                cp -RL ${depsExecutable}/. "$macos/"
 
-              # Pick the single pythonX.Y dir from Nix’s python3
-              python_src_dir=$(echo ${pkgs.python3}/lib/python* | awk '{print $1}')
-              python_basename="$(basename "$python_src_dir")"
-              python_site="$resources/Python/lib/$python_basename/site-packages"
-              vapoursynth_site_src=$(echo ${pkgs.vapoursynth}/lib/python*/site-packages | awk '{print $1}')
+                echo "📦 Deep-bundling dynamic dependencies into IINA.app"
+                ${scripts.normalizer}/bin/iina-normalize-app "$app"
 
-              mkdir -p "$resources/Python/lib"
-              mkdir -p "$python_site"
+                echo "✏️ Canonicalize Lib Groups"
+                ${scripts.canonicalizeLibGroups}/bin/iina-canonicalize-lib-groups "$app"
 
-              # Copy Python's stdlib
-              cp -RL "$python_src_dir" "$resources/Python/lib/"
+                echo "✏️ Setting up environment variables"
 
-              # Copy VapourSynth’s Python package
-              cp -RL "$vapoursynth_site_src"/. "$python_site/"
+                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment dict'                                                                             "$plist" 2>/dev/null || true
+                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:PYTHONHOME          string "@executable_path/../Resources/Python"'                "$plist" 2>/dev/null || true
+                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:PYTHONHOME                 "@executable_path/../Resources/Python"'                "$plist"
+                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:PYTHONNOUSERSITE    string "1"'                                                   "$plist" 2>/dev/null || true
+                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:PYTHONNOUSERSITE           "1"'                                                   "$plist"
+                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:VAPOURSYNTH_LIBRARY string "@executable_path/../Frameworks/libvapoursynth.dylib"' "$plist" 2>/dev/null || true
+                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:VAPOURSYNTH_LIBRARY        "@executable_path/../Frameworks/libvapoursynth.dylib"' "$plist"
+                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:IINA_EXECUTABLE    string "@executable_path"'                                    "$plist" 2>/dev/null || true
+                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:IINA_EXECUTABLE           "@executable_path"'                                    "$plist"
 
-              echo "📦 Deep-bundling dynamic dependencies into IINA.app"
-              ${normalizer}/bin/iina-normalize-app "$app"
+                echo "🔏 Re-signing IINA.app..."
+                ${scripts.resign}/bin/iina-resign "$app"
+              '';
+            };
 
-              echo "✏️ Canonicalize Lib Groups"
-              ${canonicalizeLibGroups}/bin/iina-canonicalize-lib-groups "$app"
+            iina-universal = pkgs.stdenv.mkDerivation {
+              pname = "iina-universal";
+              version = if self ? rev then builtins.substring 0 8 self.rev else "dev";
 
-              echo "✏️ Setting up environment variables"
+              nativeBuildInputs = [
+                pkgs.rsync
+                pkgs.coreutils
+              ];
 
-              /usr/libexec/PlistBuddy -c 'Add :LSEnvironment dict'                                                                             "$plist" 2>/dev/null || true
-              /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:PYTHONHOME          string "@executable_path/../Resources/Python"'                "$plist" 2>/dev/null || true
-              /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:PYTHONHOME                 "@executable_path/../Resources/Python"'                "$plist"
-              /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:PYTHONNOUSERSITE    string "1"'                                                   "$plist" 2>/dev/null || true
-              /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:PYTHONNOUSERSITE           "1"'                                                   "$plist"
-              /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:VAPOURSYNTH_LIBRARY string "@executable_path/../Frameworks/libvapoursynth.dylib"' "$plist" 2>/dev/null || true
-              /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:VAPOURSYNTH_LIBRARY        "@executable_path/../Frameworks/libvapoursynth.dylib"' "$plist"
-              /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:IINA_EXECUTABLE    string "@executable_path"'                                    "$plist" 2>/dev/null || true
-              /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:IINA_EXECUTABLE           "@executable_path"'                                    "$plist"
+              buildCommand = ''
+                app="$out/Applications/IINA.app"
+                frameworks="$app/Contents/Frameworks"
 
-              echo "🔏 Re-signing IINA.app..."
-              ${resign}/bin/iina-resign "$app"
-            '';
+                export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+                APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+                export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin"
+
+                echo "📦 Combining universal IINA.app"
+
+                mkdir -p "$out/Applications"
+                # copy the contents of the source app into the target dir
+                ${pkgs.rsync}/bin/rsync -a ${builtins.elemAt self.archApps 0}/Applications/IINA.app/ "$app/"
+                chmod -R u+w "$app"
+
+                echo "🔍 Merging binaries across architectures"
+                find "$app" -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r dep; do
+                  if [[ -L "$dep" ]] || [[ ! -f "$dep" ]]; then
+                    echo "✅ Skipping non-file $dep"
+                    continue
+                  fi
+
+                  if ! file -b "$dep" | grep -qi 'Mach-O'; then
+                    echo "✅ Skipping non-Mach-O $dep"
+                    continue
+                  fi
+
+                  relpath=$(${pkgs.coreutils}/bin/realpath --relative-to="$app" "$dep")
+
+                  # collect candidate files from each arch build
+                  inputs=""
+                  for archroot in ${
+                    builtins.concatStringsSep " " (map (a: "\"${a}/Applications/IINA.app\"") self.archApps)
+                  }; do
+                    candidate="$archroot/$relpath"
+                    if [ -f "$candidate" ]; then
+                      inputs="$inputs $candidate"
+                    fi
+                  done
+
+                  # pick at most one file per arch to avoid duplicates
+                  arm64=""
+                  x86_64=""
+                  for f in $inputs; do
+                    info=$(lipo -info "$f" 2>/dev/null || true)
+
+                    if echo "$info" | grep -qw arm64 && [ -z "$arm64" ]; then
+                      arm64="$f"
+                    fi
+
+                    if echo "$info" | grep -qw x86_64 && [ -z "$x86_64" ]; then
+                      x86_64="$f"
+                    fi
+
+                    # if we ever see a fat that already has both, just use it as-is
+                    if echo "$info" | grep -q 'Architectures in the fat file' && \
+                       echo "$info" | grep -qw arm64 && echo "$info" | grep -qw x86_64; then
+                      arm64="$f"; x86_64="$f"; break
+                    fi
+                  done
+
+                  # if only one arch available, leave it alone
+                  if [ -z "$arm64" ] || [ -z "$x86_64" ]; then
+                    echo "✅ Skipping single-arch $dep"
+                    continue
+                  fi
+
+                  echo "🔨 Merging $relpath"
+                  tmp="$dep.universal.$$"
+
+                  # Ensure we can replace the file
+                  chmod u+w "$dep" 2>/dev/null || true
+
+                  # Guard against already universal binaries
+                  if [ "$arm64" = "$x86_64" ]; then
+                    cp -p "$arm64" "$tmp"
+                  else
+                    lipo -create -arch arm64 "$arm64" -arch x86_64 "$x86_64" -output "$tmp"
+                  fi
+                  
+                  # Preserve mode if possible (GNU coreutils); fall back to +x
+                  ${pkgs.coreutils}/bin/chmod --reference="$dep" "$tmp" 2>/dev/null || chmod +x "$tmp"
+
+                  mv -f "$tmp" "$dep"
+                done
+
+                echo "📦 Deep-bundling dynamic dependencies into IINA.app"
+                ${scripts.normalizer}/bin/iina-normalize-app "$app"
+
+                echo "✏️ Canonicalize Lib Groups"
+                ${scripts.canonicalizeLibGroups}/bin/iina-canonicalize-lib-groups "$app"
+
+                echo "🔏 Re-signing IINA.app..."
+                ${scripts.resign}/bin/iina-resign "$app"
+              '';
+
+              preFixup = ''
+                export PATH=${pkgs.coreutils}/bin:$PATH
+              '';
+            };
+
+            default = iina-universal;
           };
 
-          iina-universal = pkgs.stdenv.mkDerivation {
-            pname = "iina-universal";
-            version = if self ? rev then builtins.substring 0 8 self.rev else "dev";
+          devShells = {
+            default = pkgs.mkShell {
+              packages = [
+                xcode
+                pkgs.rsync
+                pkgs.gnused
+                pkgs.gnugrep
+                pkgs.coreutils
+              ];
 
-            nativeBuildInputs = [
-              pkgs.rsync
-              pkgs.coreutils
-            ];
+              shellHook = ''
+                set -euo pipefail
 
-            buildCommand = ''
-              app="$out/Applications/IINA.app"
-              frameworks="$app/Contents/Frameworks"
+                export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 
-              export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
-              APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
-              export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin"
+                deps_root="$PWD/deps"
+                mkdir -p "$deps_root"
 
-              echo "📦 Combining universal IINA.app"
+                link_tree() {
+                  local target="$1"
+                  local link="$2"
 
-              mkdir -p "$out/Applications"
-              # copy the contents of the source app into the target dir
-              ${pkgs.rsync}/bin/rsync -a ${builtins.elemAt self.archApps 0}/Applications/IINA.app/ "$app/"
-              chmod -R u+w "$app"
-
-              echo "🔍 Merging binaries across architectures"
-              find "$app" -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r dep; do
-                if [[ -L "$dep" ]] || [[ ! -f "$dep" ]]; then
-                  echo "✅ Skipping non-file $dep"
-                  continue
-                fi
-
-                if ! file -b "$dep" | grep -qi 'Mach-O'; then
-                  echo "✅ Skipping non-Mach-O $dep"
-                  continue
-                fi
-
-                relpath=$(${pkgs.coreutils}/bin/realpath --relative-to="$app" "$dep")
-
-                # collect candidate files from each arch build
-                inputs=""
-                for archroot in ${
-                  builtins.concatStringsSep " " (map (a: "\"${a}/Applications/IINA.app\"") self.archApps)
-                }; do
-                  candidate="$archroot/$relpath"
-                  if [ -f "$candidate" ]; then
-                    inputs="$inputs $candidate"
-                  fi
-                done
-
-                # pick at most one file per arch to avoid duplicates
-                arm64=""
-                x86_64=""
-                for f in $inputs; do
-                  info=$(lipo -info "$f" 2>/dev/null || true)
-
-                  if echo "$info" | grep -qw arm64 && [ -z "$arm64" ]; then
-                    arm64="$f"
+                  if [ -e "$link" ] && [ ! -L "$link" ]; then
+                    echo "⚠️  $link exists and is not a symlink; leaving it untouched."
+                    return
                   fi
 
-                  if echo "$info" | grep -qw x86_64 && [ -z "$x86_64" ]; then
-                    x86_64="$f"
+                  ln -sfn "$target" "$link"
+                }
+
+                link_tree ${depsInc} "$deps_root/include"
+                link_tree ${depsLib} "$deps_root/lib"
+                link_tree ${depsExecutable} "$deps_root/executable"
+                link_tree ${depsIndirect} "$deps_root/indirect"
+                link_tree ${depsResources} "$deps_root/resources"
+
+                echo "📦 Syncing SwiftPM deps"
+                rsync -a --chmod=Du+rwx,Fu+rw ${spmDeps}/ ./
+
+                if [ -f .spm/workspace-state.json ]; then
+                  chmod u+w .spm/workspace-state.json 2>/dev/null || true
+                  old_prefix=$(grep -Eo "/nix/var/nix/builds/nix-[^/]+/source" .spm/workspace-state.json | head -n1)
+                  if [ -n "$old_prefix" ]; then
+                    sed -i -E "s|$old_prefix|$PWD|g" .spm/workspace-state.json
                   fi
-
-                  # if we ever see a fat that already has both, just use it as-is
-                  if echo "$info" | grep -q 'Architectures in the fat file' && \
-                     echo "$info" | grep -qw arm64 && echo "$info" | grep -qw x86_64; then
-                    arm64="$f"; x86_64="$f"; break
-                  fi
-                done
-
-                # if only one arch available, leave it alone
-                if [ -z "$arm64" ] || [ -z "$x86_64" ]; then
-                  echo "✅ Skipping single-arch $dep"
-                  continue
                 fi
-
-                echo "🔨 Merging $relpath"
-                tmp="$dep.universal.$$"
-
-                # Ensure we can replace the file
-                chmod u+w "$dep" 2>/dev/null || true
-
-                # Guard against already universal binaries
-                if [ "$arm64" = "$x86_64" ]; then
-                  cp -p "$arm64" "$tmp"
-                else
-                  lipo -create -arch arm64 "$arm64" -arch x86_64 "$x86_64" -output "$tmp"
-                fi
-                
-                # Preserve mode if possible (GNU coreutils); fall back to +x
-                ${pkgs.coreutils}/bin/chmod --reference="$dep" "$tmp" 2>/dev/null || chmod +x "$tmp"
-
-                mv -f "$tmp" "$dep"
-              done
-
-              echo "📦 Deep-bundling dynamic dependencies into IINA.app"
-              ${normalizer}/bin/iina-normalize-app "$app"
-
-              echo "✏️ Canonicalize Lib Groups"
-              ${canonicalizeLibGroups}/bin/iina-canonicalize-lib-groups "$app"
-
-              echo "🔏 Re-signing IINA.app..."
-              ${resign}/bin/iina-resign "$app"
-            '';
-
-            preFixup = ''
-              export PATH=${pkgs.coreutils}/bin:$PATH
-            '';
+              '';
+            };
           };
-
-          default = self.packages.${system}.iina-universal;
         }
       );
+    in
+    {
+      inherit systems;
+
+      packages = nixpkgs.lib.genAttrs systems (system: (perSystem.${system}).packages);
+
+      devShells = nixpkgs.lib.genAttrs systems (system: (perSystem.${system}).devShells);
+
+      archApps = builtins.map (system: self.packages.${system}.iina) systems;
     };
 }

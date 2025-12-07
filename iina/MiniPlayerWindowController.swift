@@ -83,13 +83,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
       let button = window.standardWindowButton($0)
       button?.isHidden = true
-      // Update: since IINA now drops 10.12 support, removed this workaround to enable minimizing mini player
       // > The close button, being obscured by standard buttons, won't respond to clicking when window is inactive.
       // > i.e. clicking close button (or any position located in the standard buttons's frame) will only order the window
       // > to front, but it never becomes key or main window.
       // > Removing the button directly will also work but it causes crash on 10.12-, so for the sake of safety we don't use that way for now.
       // > Not a perfect solution. It should respond to the first click.
-      // button?.frame.size = .zero
+      // Update: Testing switching to calling removeFromSuperview did not work when running under
+      // macOS Sequoia 15.7.2. The button was still present in the title bar. Possibly in response
+      // to past crashes Apple updated the title bar implementation to ignore certain attempts to
+      // alter the title bar. Continuing to set the frame size to zero so mouse events reach our
+      // custom close button.
+      button?.frame.size = .zero
     }
 
     setToInitialWindowSize(display: false, animate: false)

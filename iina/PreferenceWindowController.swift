@@ -305,7 +305,7 @@ class PreferenceWindowController: NSWindowController {
 
     // Reset scroll position to top when switching tabs
     if let documentView = prefDetailScrollView.documentView {
-      documentView.scroll(NSPoint(x: 0, y: documentView.bounds.maxY))
+      documentView.scroll(NSPoint(x: 0, y: 0))
     }
 
     // find label

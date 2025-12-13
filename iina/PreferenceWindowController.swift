@@ -303,6 +303,11 @@ class PreferenceWindowController: NSWindowController {
     detailViewBottomConstraint?.isActive = !isScrollable
     prefDetailScrollView.verticalScrollElasticity = .none
 
+    // Reset scroll position to top when switching tabs
+    if let documentView = prefDetailScrollView.documentView {
+      documentView.scroll(NSPoint(x: 0, y: documentView.bounds.maxY))
+    }
+
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {
       maskView.perform(#selector(maskView.highlight(_:)), with: label, afterDelay: 0.25)

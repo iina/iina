@@ -1922,6 +1922,18 @@ class PlayerCore: NSObject {
       URL(string: path.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? path) :
       URL(fileURLWithPath: path)
     info.isNetworkResource = !info.currentURL!.isFileURL
+    
+    // Fix issue #5735: Show window immediately when file starts to avoid UI delay
+    // This ensures the window appears as soon as playback begins, not waiting for video size
+    if mainWindow.pendingShow {
+      mainWindow.pendingShow = false
+      mainWindow.showWindow(self)
+      AppDelegate.shared.openURLWindow.close()
+    }
+    if miniPlayer.pendingShow {
+      miniPlayer.pendingShow = false
+      miniPlayer.showWindow(self)
+    }
 
     // set "date last opened" attribute
     if let url = info.currentURL, url.isFileURL {
@@ -2211,9 +2223,15 @@ class PlayerCore: NSObject {
   func playbackRestarted() {
     log("Playback restarted")
 
-    // Important to synchronize the time as mpv may slightly alter the playback position during a
-    // restart even while paused. See issue #5337.
-    syncUI(.time)
+    // Fix issue #5755: Don't reset position during seek operations
+    // Only sync time if we're not currently seeking (seeking flag is cleared in event handler before this)
+    // The event handler already calls syncUI(.time) after this, so we don't need to call it here
+    // during normal playback restarts after seeks
+    if !info.isSeeking {
+      // Important to synchronize the time as mpv may slightly alter the playback position during a
+      // restart even while paused. See issue #5337.
+      syncUI(.time)
+    }
     reloadSavedIINAfilters()
     
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.

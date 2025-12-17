@@ -445,9 +445,17 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
         cell.textField?.stringValue = upnpItem.title
         // Add icon for containers
         if upnpItem.isContainer {
-          cell.imageView?.image = NSImage(systemSymbolName: "folder", accessibilityDescription: "Folder")
+          if #available(macOS 14.0, *) {
+            cell.imageView?.image = NSImage.findSFSymbol(["folder"], withConfiguration: nil)
+          } else {
+            cell.imageView?.image = NSImage(named: NSImage.folderName)
+          }
         } else {
-          cell.imageView?.image = NSImage(systemSymbolName: "play.circle", accessibilityDescription: "Media")
+          if #available(macOS 14.0, *) {
+            cell.imageView?.image = NSImage.findSFSymbol(["play.circle"], withConfiguration: nil)
+          } else {
+            cell.imageView?.image = NSImage(named: NSImage.applicationIconName)
+          }
         }
       } else if identifier.rawValue == "Duration" {
         cell.textField?.stringValue = upnpItem.formattedDuration ?? "--:--"

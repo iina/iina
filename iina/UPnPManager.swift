@@ -82,10 +82,9 @@ class UPnPManager {
     
     // Optionally set a small multicast TTL so packets stay on the local network.
     var ttl: UInt8 = 2
-    _ = withUnsafePointer(to: &ttl) {
-      $0.withMemoryRebound(to: Int32.self, capacity: 1) { ptr in
-        setsockopt(fd, IPPROTO_IP, IP_MULTICAST_TTL, ptr, socklen_t(MemoryLayout.size(ofValue: ttl)))
-      }
+    let ttlSize = socklen_t(MemoryLayout<UInt8>.size)
+    withUnsafePointer(to: &ttl) { ptr in
+      _ = setsockopt(fd, IPPROTO_IP, IP_MULTICAST_TTL, ptr, ttlSize)
     }
     
     discoverySocketFD = fd
@@ -142,6 +141,7 @@ class UPnPManager {
     destAddr.sin_family = sa_family_t(AF_INET)
     destAddr.sin_port = in_port_t(ssdpPort).bigEndian
     destAddr.sin_addr = in_addr(s_addr: inet_addr(ssdpAddress))
+    let destAddrSize = socklen_t(MemoryLayout.size(ofValue: destAddr))
     
     for st in searchTargets {
       let msearch = """
@@ -159,7 +159,7 @@ class UPnPManager {
         guard let baseAddress = bufferPtr.baseAddress else { return }
         withUnsafePointer(to: &destAddr) { addrPtr in
           addrPtr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockAddrPtr in
-            let sent = sendto(discoverySocketFD, baseAddress, data.count, 0, sockAddrPtr, socklen_t(MemoryLayout.size(ofValue: destAddr)))
+            let sent = sendto(discoverySocketFD, baseAddress, data.count, 0, sockAddrPtr, destAddrSize)
             if sent < 0 {
               Logger.log("Failed to send M-SEARCH (\(st)): \(errno)", level: .error, subsystem: self.subsystem)
             } else {

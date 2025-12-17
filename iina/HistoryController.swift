@@ -41,10 +41,27 @@ class HistoryController: NSObject {
         log("Unable to convert object read from playback history file to [PlaybackHistory]", level: .error)
         return
       }
-      self.history = history
-      log("Read \(history.count) playback history entries")
+      // Filter out invalid history entries to prevent launch failures when NAS is unreachable (fixes issue #5829)
+      // We validate URLs are properly formed but don't check if they're accessible to avoid blocking
+      let validHistory = history.filter { entry in
+        // Basic validation: ensure URL is well-formed
+        // Don't check if URL is accessible (e.g., NAS powered off) to avoid blocking app launch
+        let url = entry.url
+        guard url.scheme != nil, url.host != nil || url.isFileURL else {
+          log("Filtering invalid history entry: \(url.absoluteString)", level: .warning)
+          return false
+        }
+        return true
+      }
+      if validHistory.count < history.count {
+        log("Filtered out \(history.count - validHistory.count) invalid history entries", level: .warning)
+      }
+      self.history = validHistory
+      log("Read \(validHistory.count) playback history entries")
     } catch {
       log("Failed to read playback history file \(plistURL.path): \(error)", level: .error)
+      // On error, start with empty history to prevent app launch failure
+      self.history = []
     }
   }
 

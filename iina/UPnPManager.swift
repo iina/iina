@@ -57,18 +57,15 @@ class UPnPManager {
     discoverySocket = nil
   }
   
-  /// Send SSDP M-SEARCH request
+  /// Send SSDP M-SEARCH requests (using several common ST values to maximize compatibility)
   private func sendMSearch() {
-    let msearch = """
-    M-SEARCH * HTTP/1.1\r
-    HOST: \(ssdpAddress):\(ssdpPort)\r
-    MAN: "ssdp:discover"\r
-    ST: ssdp:all\r
-    MX: 3\r
-    \r\n
-    """
-    
-    guard let data = msearch.data(using: .utf8) else { return }
+    // Common search targets that most DLNA/UPnP media servers understand
+    let searchTargets = [
+      "ssdp:all",
+      "upnp:rootdevice",
+      "urn:schemas-upnp-org:device:MediaServer:1",
+      "urn:schemas-upnp-org:service:ContentDirectory:1"
+    ]
     
     // Create UDP connection for multicast
     let multicastEndpoint = NWEndpoint.hostPort(
@@ -80,8 +77,6 @@ class UPnPManager {
     parameters.allowLocalEndpointReuse = true
     parameters.includePeerToPeer = true
     
-    // For multicast, we'll use a UDP listener approach instead
-    // Create connection directly to multicast endpoint
     let connection = NWConnection(to: multicastEndpoint, using: parameters)
     
     connection.stateUpdateHandler = { [weak self] state in
@@ -89,16 +84,32 @@ class UPnPManager {
       switch state {
       case .ready:
         Logger.log("SSDP connection ready", subsystem: self.subsystem)
-        // Send M-SEARCH
-        connection.send(content: data, completion: .contentProcessed { error in
-          if let error = error {
-            Logger.log("Failed to send M-SEARCH: \(error)", level: .error, subsystem: self.subsystem)
-          } else {
-            Logger.log("M-SEARCH sent", subsystem: self.subsystem)
-            // Start receiving responses
-            self.receiveSSDPResponse(connection: connection)
-          }
-        })
+        
+        // Send one M-SEARCH per ST value
+        for st in searchTargets {
+          let msearch = """
+          M-SEARCH * HTTP/1.1\r
+          HOST: \(self.ssdpAddress):\(self.ssdpPort)\r
+          MAN: "ssdp:discover"\r
+          ST: \(st)\r
+          MX: 3\r
+          \r\n
+          """
+          
+          guard let data = msearch.data(using: .utf8) else { continue }
+          
+          connection.send(content: data, completion: .contentProcessed { error in
+            if let error = error {
+              Logger.log("Failed to send M-SEARCH (\(st)): \(error)", level: .error, subsystem: self.subsystem)
+            } else {
+              Logger.log("M-SEARCH sent (\(st))", subsystem: self.subsystem)
+            }
+          })
+        }
+        
+        // Start receiving responses after sending all queries
+        self.receiveSSDPResponse(connection: connection)
+        
       case .failed(let error):
         Logger.log("SSDP connection failed: \(error)", level: .error, subsystem: self.subsystem)
       default:
@@ -124,6 +135,11 @@ class UPnPManager {
             let response = String(data: data, encoding: .utf8) else {
         return
       }
+
+      // Debug logging: show a snippet of the raw SSDP response so we can see how
+      // real devices (like your DietPi server) respond on this network.
+      let snippet = response.prefix(300)
+      Logger.log("SSDP raw response (\(data.count) bytes):\n\(snippet)", subsystem: self.subsystem)
       
       self.parseSSDPResponse(response)
       
@@ -148,14 +164,13 @@ class UPnPManager {
       }
     }
     
-    // Check if this is a valid response (M-SEARCH reply or NOTIFY)
-    guard response.contains("HTTP/1.1 200") || response.contains("NOTIFY") else {
+    // Basic validity check: require LOCATION / USN headers, but avoid over-filtering by ST / NT.
+    guard headers["LOCATION"] != nil || headers["location"] != nil else {
       return
     }
-    
-    // Many devices use a variety of ST / NT values (MediaServer, upnp:rootdevice, etc.)
-    // Don't over-filter here; rely on later parsing to determine if the device exposes
-    // a ContentDirectory service.
+    guard headers["USN"] != nil || headers["usn"] != nil else {
+      return
+    }
     
     // Create device from response
     if let device = UPnPDevice.from(ssdpResponse: headers) {

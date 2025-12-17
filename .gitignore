@@ -114,3 +114,8 @@ browser/Firefox_Open_In_IINA/*
 deps/executable/youtube-dl
 deps/plugins
 
+# Environment files with secrets
+.envrc
+.env
+*.env
+

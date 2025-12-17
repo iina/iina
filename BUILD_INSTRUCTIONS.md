@@ -1,101 +1,235 @@
-# Build Instructions - UPnP/DLNA Feature
+# Building IINA with UPnP/DLNA Support
 
-## Quick Setup
+This guide covers how to build and maintain your fork of IINA with UPnP/DLNA support.
 
-The UPnP/DLNA files have been created but need to be added to the Xcode project. Follow these steps:
+## Prerequisites
 
-### Step 1: Add Files to Xcode Project
+- **macOS** (tested on macOS 15.6, but should work on macOS 11+)
+- **Xcode** (latest version recommended, tested with Xcode 26.2)
+- **Git** (for cloning and managing branches)
+- **Network permission** (macOS will prompt on first run)
 
-1. **Open the project** (already opened):
+## Building from Xcode (Recommended)
+
+### Initial Setup
+
+1. **Open the project in Xcode:**
    ```bash
+   cd /Users/jay/Work/projects/iina/iina
    open iina.xcodeproj
    ```
 
-2. **Add Swift files**:
-   - In Xcode, right-click on the `iina` folder in the Project Navigator
-   - Select "Add Files to 'iina'..."
-   - Navigate to `iina/` directory
-   - Select these files:
-     - `UPnPDevice.swift`
-     - `UPnPItem.swift`
-     - `UPnPManager.swift`
-     - `UPnPBrowserWindowController.swift`
-   - Make sure "Copy items if needed" is **UNCHECKED** (files are already in place)
-   - Make sure "Add to targets: iina" is **CHECKED**
-   - Click "Add"
+2. **Select the correct scheme:**
+   - In Xcode's toolbar, select **`iina`** from the scheme dropdown
+   - Configuration: **`Debug`** (for development) or **`Release`** (for distribution)
 
-3. **Add XIB file**:
-   - Right-click on `iina/Base.lproj/` folder
-   - Select "Add Files to 'iina'..."
-   - Select `UPnPBrowserWindowController.xib`
-   - Make sure "Copy items if needed" is **UNCHECKED**
-   - Make sure "Add to targets: iina" is **CHECKED**
-   - Click "Add"
+3. **Build:**
+   - Press **⌘B** (Command+B) or go to `Product` → `Build`
+   - Wait for the build to complete (first build may take 5-10 minutes)
 
-### Step 2: Verify Files Are Added
+4. **Run:**
+   - Press **⌘R** (Command+R) or go to `Product` → `Run`
+   - The app will launch from `~/Library/Developer/Xcode/DerivedData/iina-*/Build/Products/Debug/IINA.app`
 
-Check that all files appear in the Project Navigator:
-- ✅ `UPnPDevice.swift`
-- ✅ `UPnPItem.swift`
-- ✅ `UPnPManager.swift`
-- ✅ `UPnPBrowserWindowController.swift`
-- ✅ `UPnPBrowserWindowController.xib` (in Base.lproj folder)
+### Building from Terminal
 
-### Step 3: Build
-
-1. **Clean build folder**: `Product` → `Clean Build Folder` (⇧⌘K)
-2. **Build**: `Product` → `Build` (⌘B)
-
-### Step 4: Run
-
-1. **Run**: `Product` → `Run` (⌘R)
-2. **Test**: Menu → `File` → `Open from UPnP/DLNA Server...`
-
----
-
-## Alternative: Command Line Build (After Adding Files)
-
-Once files are added in Xcode, you can build from terminal:
+If you prefer command-line builds:
 
 ```bash
 cd /Users/jay/Work/projects/iina/iina
-xcodebuild -project iina.xcodeproj -scheme iina -configuration Debug build
+
+# Debug build
+xcodebuild -project iina.xcodeproj \
+  -scheme iina \
+  -configuration Debug \
+  build
+
+# Release build
+xcodebuild -project iina.xcodeproj \
+  -scheme iina \
+  -configuration Release \
+  build
 ```
 
----
+The built app will be in:
+```
+~/Library/Developer/Xcode/DerivedData/iina-*/Build/Products/Debug/IINA.app
+```
+
+### Running the Built App
+
+**Option 1: From Xcode**
+- Press **⌘R** after building
+
+**Option 2: From Terminal**
+```bash
+# Find the built app
+APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "IINA.app" -path "*/Debug/*" | head -1)
+
+# Launch it
+open "$APP_PATH"
+```
+
+**Option 3: Create an alias**
+```bash
+# Add to your ~/.zshrc or ~/.bash_profile
+alias iina-debug='open $(find ~/Library/Developer/Xcode/DerivedData -name "IINA.app" -path "*/Debug/*" | head -1)'
+```
+
+## Testing UPnP/DLNA
+
+1. **Launch the app** (from Xcode or terminal)
+
+2. **Grant network permission** (first time only):
+   - macOS will prompt: "IINA would like to access your local network"
+   - Click **Allow**
+   - You can also check/change this in: `System Settings` → `Privacy & Security` → `Local Network`
+
+3. **Open the UPnP browser:**
+   - **From welcome window:** Click "Open from UPnP/DLNA Server..."
+   - **From menu:** `File` → `Open from UPnP/DLNA Server...`
+
+4. **Wait for discovery:**
+   - The browser will automatically discover UPnP devices on your network
+   - Status will show "Found X devices" when complete
+   - Click a device in the left panel to browse its content
+
+5. **Play content:**
+   - Double-click any video file in the content browser
+   - Or select a file and click "Play"
+
+## Creating a Release Build
+
+For distribution or personal use:
+
+```bash
+cd /Users/jay/Work/projects/iina/iina
+
+# Build Release configuration
+xcodebuild -project iina.xcodeproj \
+  -scheme iina \
+  -configuration Release \
+  build
+
+# Find the Release app
+RELEASE_APP=$(find ~/Library/Developer/Xcode/DerivedData -name "IINA.app" -path "*/Release/*" | head -1)
+
+# Copy to Applications (optional)
+cp -R "$RELEASE_APP" /Applications/IINA-UPnP.app
+```
+
+## Maintaining Your Fork
+
+### Keeping Up with Upstream
+
+When the main IINA repo gets updates:
+
+```bash
+cd /Users/jay/Work/projects/iina/iina
+
+# Fetch latest from upstream
+git fetch origin
+
+# Merge upstream changes into your feature branch
+git checkout feature/upnp-dlna
+git merge origin/develop
+
+# Resolve any conflicts if they occur
+# Then rebuild in Xcode (⌘B)
+```
+
+### If Your PR Gets Accepted
+
+If the IINA maintainers accept your PR:
+
+1. **Your changes will be merged into `origin/develop`**
+2. **You can switch back to upstream:**
+   ```bash
+   git remote set-url origin https://github.com/iina/iina.git
+   git checkout develop
+   git pull origin develop
+   ```
+
+### If Your PR Gets Rejected
+
+If the PR is closed/rejected, maintain your fork:
+
+1. **Keep your fork updated:**
+   ```bash
+   # Add upstream as a remote (if not already)
+   git remote add upstream https://github.com/iina/iina.git
+   
+   # Fetch upstream changes
+   git fetch upstream
+   
+   # Merge upstream into your fork's main branch
+   git checkout develop
+   git merge upstream/develop
+   
+   # Rebase your feature branch on top
+   git checkout feature/upnp-dlna
+   git rebase develop
+   ```
+
+2. **Create releases on your fork:**
+   - On GitHub, go to your fork (`jgkme/iina-dlna`)
+   - Click **Releases** → **Create a new release**
+   - Tag: `v1.4.1-upnp` (or similar)
+   - Attach the built `.app` (zip it first)
 
 ## Troubleshooting
 
-### "File not found" errors
-- Make sure files are added to the Xcode project
-- Check that files are in the correct target (iina)
+### Build Errors
 
-### "Cannot find type" errors
-- Clean build folder (⇧⌘K)
-- Rebuild (⌘B)
+**"No such module 'X'"**
+- Clean build folder: `Product` → `Clean Build Folder` (⌘⇧K)
+- Delete DerivedData: `rm -rf ~/Library/Developer/Xcode/DerivedData/iina-*`
+- Rebuild
 
-### XIB connection errors
-- Open `UPnPBrowserWindowController.xib` in Xcode
-- Verify File's Owner is set to `UPnPBrowserWindowController`
-- Check that all outlets are connected
+**"Code signing errors"**
+- In Xcode: `Signing & Capabilities` → Select your development team
+- Or set to "Sign to Run Locally" for Debug builds
 
----
+**"Network permission denied"**
+- Check: `System Settings` → `Privacy & Security` → `Local Network` → `IINA`
+- Make sure it's enabled
 
-## What's Been Done
+### UPnP Discovery Issues
 
-✅ All Swift files created
-✅ XIB file created
-✅ Menu item added to MainMenu.xib
-✅ Localization strings added
-✅ AppDelegate integration complete
-✅ Security fixes applied
+**"Found 0 devices"**
+- Check that your UPnP server is running and accessible
+- Try VLC to confirm the server works
+- Check the Log window (`Window` → `Log`) for SSDP errors
+- Make sure your firewall isn't blocking UDP port 1900
 
-## What You Need to Do
+**"Found devices but 0 items"**
+- The device may not have a ContentDirectory service
+- Check the Log window for DIDL-Lite parsing errors
+- Some servers require authentication (not yet implemented)
 
-1. Add files to Xcode project (see Step 1 above)
-2. Build and test
+## File Structure
 
----
+Key files added for UPnP/DLNA:
 
-**Status**: Ready to build once files are added to Xcode project!
+```
+iina/
+├── UPnPManager.swift          # Core UPnP discovery and browsing
+├── UPnPDevice.swift            # Device model
+├── UPnPItem.swift              # Media item model
+├── UPnPBrowserWindowController.swift  # UI controller
+└── Base.lproj/
+    └── UPnPBrowserWindowController.xib  # UI layout
 
+Modified files:
+├── AppDelegate.swift           # Added menu action
+├── InitialWindowController.swift  # Added welcome button
+└── Info.plist                  # Added network permission
+```
+
+## Next Steps
+
+- **Test with different UPnP servers** (MiniDLNA, Plex, Kodi, etc.)
+- **Add authentication support** if needed
+- **Improve error handling** for network failures
+- **Add caching** for device descriptions
+- **Support for more media types** (audio, images)

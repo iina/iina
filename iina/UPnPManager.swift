@@ -225,6 +225,13 @@ class UPnPManager {
       
       // Parse device description
       if let fullDevice = self.parseDeviceDescription(xml: xmlString, baseDevice: device) {
+        // Only keep devices that look like real media servers and expose ContentDirectory
+        guard fullDevice.supportsContentDirectory,
+              fullDevice.deviceType.localizedCaseInsensitiveContains("MediaServer") else {
+          Logger.log("Ignoring non-media UPnP device: \(fullDevice.friendlyName) (\(fullDevice.deviceType))", subsystem: self.subsystem)
+          return
+        }
+        
         DispatchQueue.main.async {
           self.devices[fullDevice.id] = fullDevice
           self.onDeviceDiscovered?(fullDevice)
@@ -371,9 +378,35 @@ class UPnPManager {
     guard let xmlString = String(data: data, encoding: .utf8) else {
       throw UPnPError.invalidResponse
     }
+
+    // MiniDLNA (and many other servers) wrap the DIDL-Lite XML inside a SOAP
+    // <Result> element, with the DIDL content XML-escaped (e.g. &lt;DIDL-Lite ...&gt;).
+    // Extract and unescape that inner DIDL-Lite payload before parsing.
+    let didlXML: String
+    if let resultRange = xmlString.range(of: "<Result>([\\s\\S]*?)</Result>", options: .regularExpression) {
+      let resultTag = String(xmlString[resultRange])
+      let escaped = resultTag
+        .replacingOccurrences(of: "<Result>", with: "")
+        .replacingOccurrences(of: "</Result>", with: "")
+      
+      // Simple XML entity unescaping sufficient for DIDL-Lite from MiniDLNA.
+      didlXML = escaped
+        .replacingOccurrences(of: "&lt;", with: "<")
+        .replacingOccurrences(of: "&gt;", with: ">")
+        .replacingOccurrences(of: "&quot;", with: "\"")
+        .replacingOccurrences(of: "&apos;", with: "'")
+        .replacingOccurrences(of: "&amp;", with: "&")
+    } else {
+      // Fallback: assume the whole body is already DIDL-Lite.
+      didlXML = xmlString
+    }
+    
+    // Debug: log a snippet of the DIDL-Lite payload we are actually parsing.
+    let snippet = didlXML.prefix(800)
+    Logger.log("DIDL-Lite payload for objectID=\(objectID):\n\(snippet)", subsystem: subsystem)
     
     // Parse DIDL-Lite XML response
-    return try parseDIDLLite(xml: xmlString, baseURL: contentDirService.controlURL)
+    return try parseDIDLLite(xml: didlXML, baseURL: contentDirService.controlURL)
   }
   
   /// Parse DIDL-Lite XML to extract items

@@ -116,31 +116,42 @@ class AutoFileMatcher {
 
   private func addFilesToPlaylist() throws {
     var addedCurrentVideo = false
-    var needQuit = false
+    var filesBeforeCurrent: [String] = []
+    var filesAfterCurrent: [String] = []
 
     log("Adding files to playlist")
-    // add videos
+    // Separate files into those before and after the current file
     for video in filesGroupedByMediaType[.video]! + filesGroupedByMediaType[.audio]! {
-      // add to playlist
       if video.url.path == player.info.currentURL?.path {
         addedCurrentVideo = true
       } else if addedCurrentVideo {
-        try checkTicket()
-        player.appendToPlaylist(video.path, silent: true)
+        filesAfterCurrent.append(video.path)
       } else {
-        let count = player.mpv.getInt(MPVProperty.playlistCount)
-        let current = player.mpv.getInt(MPVProperty.playlistPos)
-        try checkTicket()
-        player.appendToPlaylist(video.path, silent: true)
-        player.mpv.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false,
-                           level: .verbose) { err in
-          if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }
-          if err != 0 {
-            self.log("Error \(err) when adding files to playlist", level: .error)
-          }
-        }
+        filesBeforeCurrent.append(video.path)
       }
-      if needQuit { break }
+    }
+
+    // Get current playlist position once (fixes issue #5850: race condition when adding files)
+    // This prevents the "plays odd files only" bug by avoiding position changes during insertion
+    let insertIndex = player.mpv.getInt(MPVProperty.playlistPos)
+    
+    // Add files before current position using insert
+    // Insert in reverse order so they end up in correct forward order
+    // (each insert at index N pushes the item that was at N to N+1)
+    for path in filesBeforeCurrent.reversed() {
+      try checkTicket()
+      player.mpv.playlistInsert(path, index: insertIndex)
+    }
+    
+    // Add files after current position (simple append)
+    for path in filesAfterCurrent {
+      try checkTicket()
+      player.appendToPlaylist(path, silent: true)
+    }
+
+    // Refresh playlist if we added any files
+    if !filesBeforeCurrent.isEmpty || !filesAfterCurrent.isEmpty {
+      player.postNotification(.iinaPlaylistChanged)
     }
   }
 

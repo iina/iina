@@ -471,6 +471,18 @@ class PlayerCore: NSObject {
     mainWindow.pendingShow = true
     miniPlayer.pendingShow = true
     initialWindow.close()
+    
+    // Fix issue #5719: Show window immediately for playlist files so user can access playlist
+    // even if first stream is slow or fails to load
+    let isPlaylistFile = Utility.playlistFileExt.contains(url.absoluteString.lowercasedPathExtension)
+    if isPlaylistFile {
+      // Show window immediately for playlist files
+      mainWindow.pendingShow = false
+      mainWindow.showWindow(self)
+      AppDelegate.shared.openURLWindow.close()
+      // Also try to get playlist immediately so it's accessible
+      getPlaylist()
+    }
 
     // If the IINA "Pause" setting is enabled under "When media is opened" then pause mpv playback
     // before loading the file. Otherwise make sure mpv playback is enabled.
@@ -1455,8 +1467,15 @@ class PlayerCore: NSObject {
   }
 
   func playFileInPlaylist(_ pos: Int) {
+    // Fix issue #5831: Double-click playlist not playing
+    // When changing playlist position, ensure playback starts if player was previously playing
+    let wasPaused = info.state == .paused
     mpv.setInt(MPVProperty.playlistPos, pos)
     getPlaylist()
+    // Resume playback if it was playing before (not paused)
+    if !wasPaused && info.state.active {
+      resume()
+    }
   }
 
   func navigateInPlaylist(nextMedia: Bool) {

@@ -7,14 +7,15 @@
 //
 
 import Foundation
-import Network
+import Darwin
 
 /// Manages UPnP device discovery and content browsing
 class UPnPManager {
   static let shared = UPnPManager()
   
   private var devices: [String: UPnPDevice] = [:]
-  private var discoverySocket: NWConnection?
+  private var discoverySocketFD: Int32 = -1
+  private var discoverySource: DispatchSourceRead?
   private var discoveryTimer: Timer?
   private let discoveryQueue = DispatchQueue(label: "com.iina.upnp.discovery")
   private let subsystem = Logger.makeSubsystem("upnp")
@@ -53,12 +54,80 @@ class UPnPManager {
   func stopDiscovery() {
     discoveryTimer?.invalidate()
     discoveryTimer = nil
-    discoverySocket?.cancel()
-    discoverySocket = nil
+    
+    discoverySource?.cancel()
+    discoverySource = nil
+    
+    if discoverySocketFD >= 0 {
+      close(discoverySocketFD)
+      discoverySocketFD = -1
+    }
+  }
+
+  /// Ensure the raw UDP socket and read source are set up for SSDP.
+  private func setupDiscoverySocketIfNeeded() {
+    guard discoverySocketFD < 0 else { return }
+    
+    let fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)
+    if fd < 0 {
+      Logger.log("Failed to create SSDP socket: \(errno)", level: .error, subsystem: subsystem)
+      return
+    }
+    
+    // Allow address reuse (multiple apps / sockets).
+    var yes: Int32 = 1
+    if setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &yes, socklen_t(MemoryLayout.size(ofValue: yes))) < 0 {
+      Logger.log("Failed to set SO_REUSEADDR on SSDP socket: \(errno)", level: .warning, subsystem: subsystem)
+    }
+    
+    // Optionally set a small multicast TTL so packets stay on the local network.
+    var ttl: UInt8 = 2
+    _ = withUnsafePointer(to: &ttl) {
+      $0.withMemoryRebound(to: Int32.self, capacity: 1) { ptr in
+        setsockopt(fd, IPPROTO_IP, IP_MULTICAST_TTL, ptr, socklen_t(MemoryLayout.size(ofValue: ttl)))
+      }
+    }
+    
+    discoverySocketFD = fd
+    
+    // Create a DispatchSource to receive packets asynchronously, similar to VLC's recv loop.
+    let source = DispatchSource.makeReadSource(fileDescriptor: fd, queue: discoveryQueue)
+    source.setEventHandler { [weak self] in
+      guard let self = self else { return }
+      
+      var addr = sockaddr_storage()
+      var addrLen = socklen_t(MemoryLayout.size(ofValue: addr))
+      var buffer = [UInt8](repeating: 0, count: 2048)
+      
+      let bytesRead = withUnsafeMutablePointer(to: &addr) { addrPtr -> ssize_t in
+        addrPtr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockAddrPtr in
+          return recvfrom(fd, &buffer, buffer.count, 0, sockAddrPtr, &addrLen)
+        }
+      }
+      
+      if bytesRead > 0 {
+        let data = Data(buffer[0..<bytesRead])
+        if let response = String(data: data, encoding: .utf8) {
+          let snippet = response.prefix(300)
+          Logger.log("SSDP raw response (\(data.count) bytes):\n\(snippet)", subsystem: self.subsystem)
+          self.parseSSDPResponse(response)
+        }
+      } else if bytesRead < 0 {
+        Logger.log("SSDP recvfrom error: \(errno)", level: .error, subsystem: self.subsystem)
+      }
+    }
+    source.setCancelHandler {
+      // The fd is closed in stopDiscovery()
+    }
+    discoverySource = source
+    source.resume()
   }
   
   /// Send SSDP M-SEARCH requests (using several common ST values to maximize compatibility)
   private func sendMSearch() {
+    setupDiscoverySocketIfNeeded()
+    guard discoverySocketFD >= 0 else { return }
+    
     // Common search targets that most DLNA/UPnP media servers understand
     let searchTargets = [
       "ssdp:all",
@@ -67,85 +136,37 @@ class UPnPManager {
       "urn:schemas-upnp-org:service:ContentDirectory:1"
     ]
     
-    // Create UDP connection for multicast
-    let multicastEndpoint = NWEndpoint.hostPort(
-      host: NWEndpoint.Host(ssdpAddress),
-      port: NWEndpoint.Port(integerLiteral: ssdpPort)
-    )
+    // Destination: 239.255.255.250:1900
+    var destAddr = sockaddr_in()
+    destAddr.sin_len = UInt8(MemoryLayout.size(ofValue: destAddr))
+    destAddr.sin_family = sa_family_t(AF_INET)
+    destAddr.sin_port = in_port_t(ssdpPort).bigEndian
+    destAddr.sin_addr = in_addr(s_addr: inet_addr(ssdpAddress))
     
-    let parameters = NWParameters.udp
-    parameters.allowLocalEndpointReuse = true
-    parameters.includePeerToPeer = true
-    
-    let connection = NWConnection(to: multicastEndpoint, using: parameters)
-    
-    connection.stateUpdateHandler = { [weak self] state in
-      guard let self = self else { return }
-      switch state {
-      case .ready:
-        Logger.log("SSDP connection ready", subsystem: self.subsystem)
-        
-        // Send one M-SEARCH per ST value
-        for st in searchTargets {
-          let msearch = """
-          M-SEARCH * HTTP/1.1\r
-          HOST: \(self.ssdpAddress):\(self.ssdpPort)\r
-          MAN: "ssdp:discover"\r
-          ST: \(st)\r
-          MX: 3\r
-          \r\n
-          """
-          
-          guard let data = msearch.data(using: .utf8) else { continue }
-          
-          connection.send(content: data, completion: .contentProcessed { error in
-            if let error = error {
-              Logger.log("Failed to send M-SEARCH (\(st)): \(error)", level: .error, subsystem: self.subsystem)
+    for st in searchTargets {
+      let msearch = """
+      M-SEARCH * HTTP/1.1\r
+      HOST: \(ssdpAddress):\(ssdpPort)\r
+      MAN: "ssdp:discover"\r
+      ST: \(st)\r
+      MX: 3\r
+      \r\n
+      """
+      
+      guard let data = msearch.data(using: .utf8) else { continue }
+      
+      data.withUnsafeBytes { bufferPtr in
+        guard let baseAddress = bufferPtr.baseAddress else { return }
+        withUnsafePointer(to: &destAddr) { addrPtr in
+          addrPtr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockAddrPtr in
+            let sent = sendto(discoverySocketFD, baseAddress, data.count, 0, sockAddrPtr, socklen_t(MemoryLayout.size(ofValue: destAddr)))
+            if sent < 0 {
+              Logger.log("Failed to send M-SEARCH (\(st)): \(errno)", level: .error, subsystem: self.subsystem)
             } else {
               Logger.log("M-SEARCH sent (\(st))", subsystem: self.subsystem)
             }
-          })
+          }
         }
-        
-        // Start receiving responses after sending all queries
-        self.receiveSSDPResponse(connection: connection)
-        
-      case .failed(let error):
-        Logger.log("SSDP connection failed: \(error)", level: .error, subsystem: self.subsystem)
-      default:
-        break
-      }
-    }
-    
-    connection.start(queue: discoveryQueue)
-    discoverySocket = connection
-  }
-  
-  /// Receive SSDP responses
-  private func receiveSSDPResponse(connection: NWConnection) {
-    connection.receiveMessage { [weak self] data, context, isComplete, error in
-      guard let self = self else { return }
-      
-      if let error = error {
-        Logger.log("SSDP receive error: \(error)", level: .error, subsystem: self.subsystem)
-        return
-      }
-      
-      guard let data = data,
-            let response = String(data: data, encoding: .utf8) else {
-        return
-      }
-
-      // Debug logging: show a snippet of the raw SSDP response so we can see how
-      // real devices (like your DietPi server) respond on this network.
-      let snippet = response.prefix(300)
-      Logger.log("SSDP raw response (\(data.count) bytes):\n\(snippet)", subsystem: self.subsystem)
-      
-      self.parseSSDPResponse(response)
-      
-      // Continue receiving
-      if connection.state == .ready {
-        self.receiveSSDPResponse(connection: connection)
       }
     }
   }

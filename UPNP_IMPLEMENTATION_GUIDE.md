@@ -10,67 +10,19 @@ Start with a minimal SSDP client and basic content browsing. This avoids externa
 
 ## Step-by-Step Implementation
 
-### Step 1: SSDP Discovery (Core Foundation)
+### Step 1: SSDP Discovery (BSD sockets, VLC-style)
 
-Create `iina/UPnPManager.swift`:
+`iina/UPnPManager.swift` implements SSDP discovery using a **plain UDP socket**, closely mirroring how VLC’s libupnp-based discovery works. The key ideas:
 
-```swift
-import Foundation
-import Network
+- Open a UDP socket (`socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)`).
+- Set `SO_REUSEADDR` and a small multicast TTL so packets stay on the local LAN.
+- Use `sendto()` to send multiple `M-SEARCH` queries to `239.255.255.250:1900` with common `ST` values (`ssdp:all`, `upnp:rootdevice`, media server and ContentDirectory URNs).
+- Use a `DispatchSourceRead` wrapping the socket and call `recvfrom()` in the handler to receive every SSDP reply.
+- For each reply, log a short snippet (for debugging) and feed the raw response string into `parseSSDPResponse(_:)`, which:
+  - parses headers (`LOCATION`, `USN`, `ST`, `NT`, etc.),
+  - then fetches and parses the device description XML to decide whether it exposes a `ContentDirectory` service.
 
-class UPnPManager {
-  static let shared = UPnPManager()
-  
-  private var listener: NWListener?
-  private var devices: [UPnPDevice] = []
-  
-  // SSDP multicast address and port
-  private let ssdpAddress = "239.255.255.250"
-  private let ssdpPort: UInt16 = 1900
-  
-  func startDiscovery() {
-    // Create UDP listener for SSDP M-SEARCH
-    let parameters = NWParameters.udp
-    parameters.allowLocalEndpointReuse = true
-    parameters.includePeerToPeer = true
-    
-    // Multicast group
-    let multicast = try? NWMulticastGroup(for: [.hostPort(host: ssdpAddress, port: ssdpPort)])
-    parameters.multicastGroup = multicast
-    
-    do {
-      listener = try NWListener(using: parameters, on: NWEndpoint.Port(any: 0))
-      listener?.newConnectionHandler = { connection in
-        self.handleConnection(connection)
-      }
-      listener?.start(queue: .global())
-      
-      // Send M-SEARCH request
-      sendMSearch()
-    } catch {
-      Logger.log("Failed to start UPnP discovery: \(error)", level: .error)
-    }
-  }
-  
-  private func sendMSearch() {
-    let msearch = """
-    M-SEARCH * HTTP/1.1\r
-    HOST: \(ssdpAddress):\(ssdpPort)\r
-    MAN: "ssdp:discover"\r
-    ST: urn:schemas-upnp-org:device:MediaServer:1\r
-    MX: 3\r
-    \r\n
-    """
-    
-    // Send via UDP multicast
-    // Implementation details...
-  }
-  
-  private func handleConnection(_ connection: NWConnection) {
-    // Handle SSDP responses
-  }
-}
-```
+This approach avoids the `NWConnection` quirks on some macOS setups and matches the robustness of VLC’s discovery: if VLC can see a UPnP/DLNA server, the BSD-socket-based discovery should see it as well.
 
 ### Step 2: Device Model
 

@@ -575,6 +575,19 @@ extension URL {
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
+  
+  /// Returns a sanitized version of the URL with user credentials removed.
+  /// This is used to prevent storing passwords in plaintext in playback history.
+  /// - Returns: A new URL with the same scheme, host, port, and path, but without user/password components.
+  var sanitizedForHistory: URL {
+    guard var components = URLComponents(url: self, resolvingAgainstBaseURL: false) else {
+      return self
+    }
+    // Remove user credentials to prevent storing passwords in plaintext
+    components.user = nil
+    components.password = nil
+    return components.url ?? self
+  }
 }
 
 

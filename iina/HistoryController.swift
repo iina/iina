@@ -72,11 +72,13 @@ class HistoryController: NSObject {
     $tasksOutstanding.withLock { $0 += 1 }
     queue.async { [self] in
       $history.withLock { history in
-        if let existingItem = history.first(where: { $0.mpvMd5 == url.path.md5 }),
+        // Sanitize URL to remove credentials before storing in history (fixes issue #2193)
+        let sanitizedURL = url.sanitizedForHistory
+        if let existingItem = history.first(where: { $0.mpvMd5 == sanitizedURL.path.md5 }),
            let index = history.firstIndex(of: existingItem) {
           history.remove(at: index)
         }
-        history.insert(PlaybackHistory(url: url, duration: duration), at: 0)
+        history.insert(PlaybackHistory(url: sanitizedURL, duration: duration), at: 0)
       }
       save()
       $tasksOutstanding.withLock { tasksOutstanding in

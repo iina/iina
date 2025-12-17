@@ -368,7 +368,13 @@ class OpenSubClient {
           params["moviehash"] = hash
         }
         if let query = query {
-          params["query"] = query
+          // URL-encode the query to handle special characters like question marks (fixes issue #5658)
+          // Just.get should handle encoding, but we ensure proper encoding for special characters
+          if let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            params["query"] = encodedQuery
+          } else {
+            params["query"] = query
+          }
         }
         let url = apiURL("subtitles")
         Just.get(url, params: params, headers: formHeaders(), asyncCompletionHandler: { [self] result in

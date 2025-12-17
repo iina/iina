@@ -166,7 +166,12 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     }
     // Fix issue #3324: Use URLComponents directly for better handling of encoded URLs with whitespace
     // URLComponents can properly parse URLs with encoded spaces and special characters
-    guard let urlComponents = URLComponents(string: pstr) ?? (NSURL(string: pstr)?.standardized.flatMap { URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
+    var urlComponents: URLComponents
+    if let components = URLComponents(string: pstr) {
+      urlComponents = components
+    } else if let nsurl = NSURL(string: pstr)?.standardized, let components = URLComponents(url: nsurl, resolvingAgainstBaseURL: false) {
+      urlComponents = components
+    } else {
       return (nil, false)
     }
     if !username.isEmpty {

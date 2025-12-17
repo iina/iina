@@ -143,17 +143,32 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
 #endif
     var pstr = trimmedUrlString
     if performPercentEncoding {
-      guard let urlValue = trimmedUrlString.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
-        return (nil, false)
+      // Fix issue #3324: Ensure whitespace and other special characters are properly encoded
+      // Check if URL is already percent-encoded before encoding again
+      let percentEncodedPattern = #"%(?:[0-9A-Fa-f]{2})"#
+      let isAlreadyEncoded = trimmedUrlString.range(of: percentEncodedPattern, options: .regularExpression) != nil
+      
+      if !isAlreadyEncoded {
+        // URL is not encoded, encode it properly including whitespace
+        guard let urlValue = trimmedUrlString.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
+          return (nil, false)
+        }
+        pstr = urlValue
+      } else {
+        // URL appears to be already encoded, use URLComponents which handles it better
+        pstr = trimmedUrlString
       }
-      pstr = urlValue
     }
     var hasScheme = true
     if let url = URL(string: pstr), url.scheme == nil {
       pstr = "http://" + pstr
       hasScheme = false
     }
-    guard let nsurl = NSURL(string: pstr)?.standardized, let urlComponents = NSURLComponents(url: nsurl, resolvingAgainstBaseURL: false) else { return (nil, false) }
+    // Fix issue #3324: Use URLComponents directly for better handling of encoded URLs with whitespace
+    // URLComponents can properly parse URLs with encoded spaces and special characters
+    guard let urlComponents = URLComponents(string: pstr) ?? (NSURL(string: pstr)?.standardized.flatMap { URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
+      return (nil, false)
+    }
     if !username.isEmpty {
       urlComponents.user = username
       if !password.isEmpty {

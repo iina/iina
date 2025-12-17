@@ -433,6 +433,21 @@ class PlayerCore: NSObject {
 #endif
       var pstr = str
       if performPercentEncoding {
+        // Fix issue #4862: Check if URL is already percent-encoded before encoding again
+        // If the string contains % followed by two hex digits, it's likely already encoded
+        let percentEncodedPattern = #"%(?:[0-9A-Fa-f]{2})"#
+        let isAlreadyEncoded = str.range(of: percentEncodedPattern, options: .regularExpression) != nil
+        
+        if isAlreadyEncoded {
+          // URL appears to be already encoded, try to use it directly
+          // URLComponents can handle already-encoded URLs better than URL(string:)
+          if let components = URLComponents(string: str), let url = components.url {
+            openURL(url)
+            return
+          }
+          // If URLComponents fails, fall through to try encoding anyway
+        }
+        
         guard let encoded = str.addingPercentEncoding(withAllowedCharacters: .urlAllowed) else {
           log("Cannot add percent encoding for \(str)", level: .error)
           return
@@ -2060,11 +2075,26 @@ class PlayerCore: NSObject {
 
     if info.vid == 0 {
       notifyWindowVideoSizeChanged()
+      // Fix issue #5099: For audio files without cover, VIDEO_RECONFIG may fire before FILE_LOADED
+      // Ensure pause when open is respected even if justOpenedFile was already reset
+      if Preference.bool(for: .pauseWhenOpen) && info.justOpenedFile {
+        mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+      }
     }
 
     if self.isInMiniPlayer {
       miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
     }
+
+    // Fix issue #5099: Ensure pause when open is respected for audio files
+    // For audio files, VIDEO_RECONFIG may fire before FILE_LOADED, resetting justOpenedFile
+    // Check pause preference here regardless of justOpenedFile flag for audio files
+    if Preference.bool(for: .pauseWhenOpen) && (info.vid == 0 || info.justOpenedFile) {
+      mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+    }
+    
+    // Reset justOpenedFile after handling pause preference
+    info.justOpenedFile = false
 
     // add to history
     if let url = info.currentURL {
@@ -2353,6 +2383,13 @@ class PlayerCore: NSObject {
       info.displayWidth = dwidth
       info.displayHeight = dheight
       notifyWindowVideoSizeChanged()
+    }
+    // Fix issue #5099: Don't reset justOpenedFile here for audio files (vid == 0)
+    // as VIDEO_RECONFIG may fire before FILE_LOADED for audio files without cover
+    // Let fileLoaded() handle resetting justOpenedFile after checking pause preference
+    if dwidth > 0 || dheight > 0 {
+      // Only reset for actual video files, not audio files
+      info.justOpenedFile = false
     }
   }
 

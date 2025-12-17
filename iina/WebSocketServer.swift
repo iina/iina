@@ -29,11 +29,23 @@ class WebSocketServer {
   lazy var serverQueue = DispatchQueue(label: "IINAWebSocketServer.\(self.label)")
   let subsystem: Logger.Subsystem
 
-  init?(port: UInt16, label: String, logger: Logger.Subsystem? = nil) {
+  init?(port: UInt16, label: String, logger: Logger.Subsystem? = nil, enableTLS: Bool = false) {
     self.label = label
     self.subsystem = logger ?? Logger.makeSubsystem("ws-server")
-    // TODO: Support TLS
-    let parameters = NWParameters(tls: nil)
+    
+    let parameters: NWParameters
+    if enableTLS {
+      // TLS support for secure connections
+      // Note: Requires proper certificate configuration for production use
+      let tlsOptions = NWProtocolTLS.Options()
+      parameters = NWParameters(tls: tlsOptions)
+      Logger.log("WebSocket server initialized with TLS support", subsystem: subsystem)
+    } else {
+      // Non-TLS for local/development use
+      // Security note: Connections are unencrypted. Use enableTLS: true for production.
+      parameters = NWParameters(tls: nil)
+      Logger.log("WebSocket server initialized without TLS (local use only)", level: .warning, subsystem: subsystem)
+    }
     parameters.allowLocalEndpointReuse = true
     parameters.includePeerToPeer = true
 

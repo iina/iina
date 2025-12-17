@@ -11,6 +11,7 @@ import Cocoa
 fileprivate extension NSUserInterfaceItemIdentifier {
   static let openFile = NSUserInterfaceItemIdentifier("openFile")
   static let openURL = NSUserInterfaceItemIdentifier("openURL")
+  static let openUPnP = NSUserInterfaceItemIdentifier("openUPnP")
 }
 
 fileprivate extension NSColor {
@@ -159,7 +160,55 @@ class InitialWindowController: NSWindowController {
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
     }
+    addUPnPButton()
     reloadData()
+  }
+  
+  private func addUPnPButton() {
+    // Recursively search for the Open URL button so we can position the UPnP button under it
+    guard let mainView = mainView,
+          let openURLButton = findOpenURLButton(in: mainView) else {
+      return
+    }
+    
+    // Create UPnP button
+    let upnpButton = InitialWindowViewActionButton()
+    upnpButton.identifier = .openUPnP
+    upnpButton.translatesAutoresizingMaskIntoConstraints = false
+    upnpButton.normalBackground = NSColor.initialWindowActionButtonBackground
+    upnpButton.hoverBackground = NSColor.initialWindowActionButtonBackgroundHover
+    upnpButton.pressedBackground = NSColor.initialWindowActionButtonBackgroundPressed
+    
+    // Create label
+    let label = NSTextField(labelWithString: "Open from UPnP/DLNA Server…")
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.font = NSFont.systemFont(ofSize: 13)
+    upnpButton.addSubview(label)
+    
+    mainView.addSubview(upnpButton)
+    
+    // Layout
+    NSLayoutConstraint.activate([
+      upnpButton.heightAnchor.constraint(equalToConstant: 28),
+      upnpButton.leadingAnchor.constraint(equalTo: openURLButton.leadingAnchor),
+      upnpButton.trailingAnchor.constraint(equalTo: openURLButton.trailingAnchor),
+      upnpButton.topAnchor.constraint(equalTo: openURLButton.bottomAnchor, constant: 4),
+      label.leadingAnchor.constraint(equalTo: upnpButton.leadingAnchor, constant: 12),
+      label.centerYAnchor.constraint(equalTo: upnpButton.centerYAnchor)
+    ])
+  }
+  
+  /// Depth‑first search to find the existing "Open URL…" button in the initial window hierarchy
+  private func findOpenURLButton(in view: NSView) -> InitialWindowViewActionButton? {
+    if let button = view as? InitialWindowViewActionButton, button.identifier == .openURL {
+      return button
+    }
+    for subview in view.subviews {
+      if let found = findOpenURLButton(in: subview) {
+        return found
+      }
+    }
+    return nil
   }
 
   private func setMaterial(_ theme: Preference.Theme?) {
@@ -396,6 +445,8 @@ class InitialWindowViewActionButton: NSView {
       AppDelegate.shared.openFile(self)
     } else if self.identifier == .openURL {
       AppDelegate.shared.openURL(self)
+    } else if self.identifier == .openUPnP {
+      AppDelegate.shared.openUPnP(self)
     } else {
       if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
         let windowController = window?.windowController as? InitialWindowController {

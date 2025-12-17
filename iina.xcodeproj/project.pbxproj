@@ -186,6 +186,8 @@
 		51EDB4722E85EE10007E5018 /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDB4712E85EE10007E5018 /* DisplayController.swift */; };
 		51F7974728C7E00200812D0D /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F7974628C7E00200812D0D /* Lock.swift */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
+		6A22481D11AE4E5897ED211B /* UPnPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583A046793E14E9FAB6FE764 /* UPnPDevice.swift */; };
+		7F81D8D576A24D459EB5BF38 /* UPnPBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C489CD7DC504FD1BC30D246 /* UPnPBrowserWindowController.xib */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
 		8400D5C91E1AB2F9006785F5 /* QuickSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */; };
@@ -315,10 +317,13 @@
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
+		B14AE0AAA78744B895078787 /* UPnPItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3698DB1878EA4D4288ABC278 /* UPnPItem.swift */; };
 		B4E446E825CB53920069F06E /* PromiseKit in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446E725CB53920069F06E /* PromiseKit */; };
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
+		B981E9B730AE45D6863225A8 /* UPnPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A1B56962D44BC69AD99B9F /* UPnPManager.swift */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		CF541226C2D14B68B6ED1997 /* UPnPBrowserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B94E019EB0441799C7BA7A /* UPnPBrowserWindowController.swift */; };
 		D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */; };
 		D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
 		D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A4D9892B1495270009AB4E /* LegacyMigration.swift */; };
@@ -577,6 +582,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		03B94E019EB0441799C7BA7A /* UPnPBrowserWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPBrowserWindowController.swift; sourceTree = "<group>"; };
 		0507C25E2B5617650043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		0507C25F2B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		0507C2602B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -1156,6 +1162,8 @@
 		34F8B6F42C6C7B0100AE4B16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefPluginViewController.xib; sourceTree = "<group>"; };
 		34F8B6F82C6C7B0300AE4B16 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PrefPluginViewController.strings; sourceTree = "<group>"; };
 		34FD798D291C76A600963EDE /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
+		35B123233F594FF388F97458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UPnPBrowserWindowController.xib; sourceTree = "<group>"; };
+		3698DB1878EA4D4288ABC278 /* UPnPItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPItem.swift; sourceTree = "<group>"; };
 		440DDE351E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		440DDE361E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		440DDE371E9010420063E211 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/QuickSettingViewController.strings; sourceTree = "<group>"; };
@@ -1223,6 +1231,7 @@
 		51E63DFC29CFB04B008AFC20 /* PlaySliderLoopKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderLoopKnob.swift; sourceTree = "<group>"; };
 		51EDB4712E85EE10007E5018 /* DisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
 		51F7974628C7E00200812D0D /* Lock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
+		583A046793E14E9FAB6FE764 /* UPnPDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPDevice.swift; sourceTree = "<group>"; };
 		5879479521A87DD700757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		5879479621A87E6100757A6F /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		5EF9F7E521FB42E900748374 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/MainMenu.strings"; sourceTree = "<group>"; };
@@ -1756,6 +1765,7 @@
 		B3D578841EBCE6B200757AAA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B3FC6F2F210FB42700E7F6AF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		B3FC6F31210FB48600E7F6AF /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		B9A1B56962D44BC69AD99B9F /* UPnPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPManager.swift; sourceTree = "<group>"; };
 		C70BC05C1E511D1000D8CB79 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		C715104121014A1E00C6963C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
 		C715104221014A2900C6963C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
@@ -2408,6 +2418,11 @@
 				8418A2F7213F5791003166AC /* OpenURLWindowController.xib */,
 				84C6D3651EB2A427009BF721 /* HistoryWindowController.swift */,
 				84996F921EC11CE6009A8A39 /* HistoryWindowController.xib */,
+				03B94E019EB0441799C7BA7A /* UPnPBrowserWindowController.swift */,
+				4C489CD7DC504FD1BC30D246 /* UPnPBrowserWindowController.xib */,
+				583A046793E14E9FAB6FE764 /* UPnPDevice.swift */,
+				3698DB1878EA4D4288ABC278 /* UPnPItem.swift */,
+				B9A1B56962D44BC69AD99B9F /* UPnPManager.swift */,
 				846352571EEEE11A0043F0CC /* ThumbnailPeekView.swift */,
 				849581EF1F02728700D3B359 /* InitialWindowController.swift */,
 				849581F51F03D55A00D3B359 /* InitialWindowController.xib */,
@@ -3034,6 +3049,7 @@
 				E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */,
 				84996F901EC11CE6009A8A39 /* HistoryWindowController.xib in Resources */,
 				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
+				7F81D8D576A24D459EB5BF38 /* UPnPBrowserWindowController.xib in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
 			);
@@ -3234,6 +3250,10 @@
 				E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */,
 				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
+				6A22481D11AE4E5897ED211B /* UPnPDevice.swift in Sources */,
+				B14AE0AAA78744B895078787 /* UPnPItem.swift in Sources */,
+				B981E9B730AE45D6863225A8 /* UPnPManager.swift in Sources */,
+				CF541226C2D14B68B6ED1997 /* UPnPBrowserWindowController.swift in Sources */,
 				E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
@@ -3450,6 +3470,14 @@
 				34B1FDB12C70484B00FB93A4 /* uk */,
 			);
 			name = PrefPluginViewController.xib;
+			sourceTree = "<group>";
+		};
+		4C489CD7DC504FD1BC30D246 /* UPnPBrowserWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				35B123233F594FF388F97458 /* Base */,
+			);
+			name = UPnPBrowserWindowController.xib;
 			sourceTree = "<group>";
 		};
 		8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */ = {
@@ -4721,6 +4749,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 51537C7229FA26DD00F9A472 /* Nightly.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 			};
 			name = Nightly;
@@ -4760,6 +4789,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 51A0F0F629FA2C8E000130CF /* Beta.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 			};
 			name = Beta;
@@ -4799,6 +4829,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988C2919E47900CD61A5 /* Debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -4807,6 +4838,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988D2919E47900CD61A5 /* Release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -5109,7 +5141,7 @@
 				51537C7129FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		84EB1ED11D2F51D3004FA5A1 /* Build configuration list for PBXProject "iina" */ = {
 			isa = XCConfigurationList;
@@ -5120,7 +5152,7 @@
 				51537C6E29FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */ = {
 			isa = XCConfigurationList;
@@ -5131,7 +5163,7 @@
 				51537C6F29FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		E385588F2A484A2D0083772D /* Build configuration list for PBXNativeTarget "iina-plugin" */ = {
 			isa = XCConfigurationList;
@@ -5142,7 +5174,7 @@
 				E385588E2A484A2D0083772D /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		E3DE8DD01FD8166A0021921C /* Build configuration list for PBXNativeTarget "iina-cli" */ = {
 			isa = XCConfigurationList;
@@ -5153,7 +5185,7 @@
 				51537C7029FA25D000F9A472 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

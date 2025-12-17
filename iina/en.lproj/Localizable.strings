@@ -463,3 +463,12 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
+
+// UPnP/DLNA Browser
+"upnp.browser.title" = "UPnP/DLNA Browser";
+"upnp.browser.status.discovering" = "Discovering devices...";
+"upnp.browser.status.found" = "Found %d devices";
+"upnp.browser.status.browsing" = "Browsing content...";
+"upnp.browser.status.items" = "Found %d items";
+"upnp.browser.status.error" = "Error: ";
+"upnp.browser.status.no_content" = "Device does not support content browsing";

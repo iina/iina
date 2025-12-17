@@ -58,6 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   // Windows
 
   lazy var openURLWindow: OpenURLWindowController = OpenURLWindowController()
+  lazy var upnpBrowserWindow: UPnPBrowserWindowController = UPnPBrowserWindowController()
   lazy var aboutWindow: AboutWindowController = AboutWindowController()
   lazy var fontPicker: FontPickerWindowController = FontPickerWindowController()
   lazy var inspector: InspectorWindowController = InspectorWindowController()
@@ -943,6 +944,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     openURLWindow.isAlternativeAction = sender.tag == AlternativeMenuItemTag
     openURLWindow.showWindow(nil)
     openURLWindow.resetWindowState()
+  }
+
+  @IBAction func openUPnP(_ sender: AnyObject) {
+    Logger.log("Menu - Open from UPnP/DLNA Server")
+    upnpBrowserWindow.showWindow(nil)
   }
 
   @IBAction func menuNewWindow(_ sender: Any) {

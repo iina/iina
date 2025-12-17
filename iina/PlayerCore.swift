@@ -978,6 +978,9 @@ class PlayerCore: NSObject {
     } else {
       mpv.command(.frameStep)
     }
+    // Fix issue #5491: Sync timestamp immediately after frame-step to ensure it updates
+    // Frame-step doesn't trigger a seek event, so we need to manually sync the time
+    syncUI(.time)
   }
 
   /// Takes a screenshot, attempting to augment mpv's `screenshot` command with additional functionality & control, for example
@@ -1340,6 +1343,16 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalAudioFile(_ url: URL) {
+    // Fix issue #5113: Check if URL is a directory (e.g., folder name ending with .AC3)
+    // If it's a directory, show an error instead of trying to load it as an audio file
+    if url.hasDirectoryPath {
+      log("Cannot load directory as audio file: \(url.path)", level: .error)
+      DispatchQueue.main.async {
+        Utility.showAlert("unsupported_audio")
+      }
+      return
+    }
+    
     mpv.command(.audioAdd, args: [url.path], checkError: false) { code in
       if code < 0 {
         self.log("Unsupported audio: \(url.path)", level: .error)
@@ -2182,16 +2195,32 @@ class PlayerCore: NSObject {
 
   func idleActiveChanged() {
     if receivedEndFileWhileLoading && info.state == .starting {
+      // Fix issue #3010: Don't close window on playback error - keep it open so user can see
+      // the failed URL in playlist and take actions (retry, remove, etc.)
       DispatchQueue.main.async { [unowned self] in
-        currentController.close()
+        // Ensure window is shown even if it wasn't shown yet
+        if mainWindow.pendingShow {
+          mainWindow.pendingShow = false
+          mainWindow.showWindow(self)
+          AppDelegate.shared.openURLWindow.close()
+        }
+        if miniPlayer.pendingShow {
+          miniPlayer.pendingShow = false
+          miniPlayer.showWindow(self)
+        }
+        
         if AppDelegate.shared.openURLWindow.window?.isVisible == true {
           AppDelegate.shared.openURLWindow.failedToLoadURL()
         } else {
+          // Show error alert but don't close the window
           Utility.showAlert("error_open")
         }
+        // Refresh playlist to show the failed item
+        getPlaylist()
       }
-      info.currentURL = nil
-      info.isNetworkResource = false
+      // Don't clear currentURL - keep it so user can see what failed
+      // info.currentURL = nil
+      // info.isNetworkResource = false
     }
     receivedEndFileWhileLoading = false
     // close the window if stopped

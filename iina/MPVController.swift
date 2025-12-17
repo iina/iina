@@ -419,6 +419,9 @@ class MPVController: NSObject {
 
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang,
                   level: .verbose)
+    // Fix issue #3500: Set subtitle language preference (slang) so mpv respects user's preferred subtitle language
+    setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang,
+                  level: .verbose)
     setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax, level: .verbose)
 
     var spdif: [String] = []

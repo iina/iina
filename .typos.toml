@@ -19,6 +19,7 @@ extend-ignore-re = [
 [default.extend-words]
 "abitrate" = "abitrate"
 "splitted" = "splitted"
+"UPnP" = "UPnP"
 
 [default.extend-identifiers]
 "caf" = "caf"

@@ -2667,7 +2667,7 @@ class MainWindowController: PlayerWindowController {
       // preserve the window size from the previous file instead of adjusting height
       let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
       if resizeTiming == .never && player.info.justStartedFile && !player.info.justOpenedFile {
-        // Preserve window size when reopening files with .never resize timing
+        // Preserve window size when re-opening files with .never resize timing
         rect = frame
         log("Preserved window size from previous file: \(rect)")
       } else {

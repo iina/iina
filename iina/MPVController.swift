@@ -612,6 +612,9 @@ class MPVController: NSObject {
       }
     }
     chkErr(setOptionalOptionString(MPVOption.Input.inputConf, inputConfPath, level: .verbose))
+    // Fix issue #4217: Disable mpv's default bindings to prevent conflicts with IINA's key binding system
+    // This ensures that when custom key bindings are used, mpv doesn't also execute default bindings
+    chkErr(setOptionString(MPVOption.Input.inputDefaultBindings, "no", level: .verbose))
 
     // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, MPVLogLevel))

@@ -107,7 +107,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       sortBtn.image?.isTemplate = true
     }
 
-    deleteBtn.toolTip = NSLocalizedString("mini_player.delete", comment: "delete")
+    // Fix issue #4691: Use correct tooltip for clear playlist button
+    deleteBtn.toolTip = NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist")
     loopBtn.toolTip = NSLocalizedString("mini_player.loop", comment: "loop")
     shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
     addBtn.toolTip = NSLocalizedString("mini_player.add", comment: "add")

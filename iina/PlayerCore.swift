@@ -2094,6 +2094,13 @@ class PlayerCore: NSObject {
         mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
       }
     }
+    
+    // Fix issue #5716: Apply alwaysFloatOnTop preference when file is loaded
+    // This ensures the window stays on top even after reopening the app
+    if Preference.bool(for: .alwaysFloatOnTop) {
+      let isPaused = info.state == .paused
+      mainWindow.setWindowFloatingOnTop(!isPaused)
+    }
 
     if self.isInMiniPlayer {
       miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0

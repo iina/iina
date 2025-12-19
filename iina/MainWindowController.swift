@@ -2598,7 +2598,10 @@ class MainWindowController: PlayerWindowController {
       case .onlyWhenOpen:
         needResizeWindow = player.info.justOpenedFile || shouldApplyInitialWindowSize
       case .never:
-        needResizeWindow = shouldApplyInitialWindowSize
+        // Fix issue #3322: When resizeWindowTiming is .never, only resize if this is the first file
+        // opened manually (justOpenedFile) or if we need to apply initial window size.
+        // Otherwise, preserve the window size from the previous file.
+        needResizeWindow = shouldApplyInitialWindowSize || (player.info.justOpenedFile && window.frame.size.width > 0 && window.frame.size.height > 0)
       }
     } else {
       // video size changed during playback
@@ -2660,11 +2663,20 @@ class MainWindowController: PlayerWindowController {
       rect = originalVideoSize.centeredRect(in: screenRect)
       log("Centered original sized window in screen: \(rect)")
     } else {
-      // user is navigating in playlist. remain same window width.
-      let newHeight = frame.width / CGFloat(width) * CGFloat(height)
-      let newSize = NSSize(width: frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
-      rect = frame.centeredResize(to: newSize)
-      log("Adjusted height of window preserving width: \(rect)")
+      // Fix issue #3322: When resizeWindowTiming is .never and opening a new file,
+      // preserve the window size from the previous file instead of adjusting height
+      let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
+      if resizeTiming == .never && player.info.justStartedFile && !player.info.justOpenedFile {
+        // Preserve window size when reopening files with .never resize timing
+        rect = frame
+        log("Preserved window size from previous file: \(rect)")
+      } else {
+        // user is navigating in playlist. remain same window width.
+        let newHeight = frame.width / CGFloat(width) * CGFloat(height)
+        let newSize = NSSize(width: frame.width, height: newHeight).satisfyMinSizeWithSameAspectRatio(minSize)
+        rect = frame.centeredResize(to: newSize)
+        log("Adjusted height of window preserving width: \(rect)")
+      }
     }
 
     shouldApplyInitialWindowSize = false

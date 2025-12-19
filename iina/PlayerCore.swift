@@ -504,6 +504,12 @@ class PlayerCore: NSObject {
     let pause = Preference.bool(for: .pauseWhenOpen)
     mpv.setFlag(MPVOption.PlaybackControl.pause, pause ? true : false, level: .verbose)
 
+    // Fix issue #5716: Apply alwaysFloatOnTop preference when opening a file
+    // This ensures the window stays on top even after reopening the app
+    if Preference.bool(for: .alwaysFloatOnTop) {
+      mainWindow.setWindowFloatingOnTop(!pause)
+    }
+
     // Normally the display link is started when MainWindowController.windowDidLoad calls initVideo.
     // However if this player is being reused then the window will have already been loaded and
     // windowDidLoad will not be called. If playback is not paused make sure the display link is

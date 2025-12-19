@@ -112,4 +112,11 @@ browser/Firefox_Open_In_IINA/*
 /.vscode
 
 deps/executable/youtube-dl
+deps/plugins
 
+# Environment files with secrets
+.envrc
+.env
+*.env
+
+releases/

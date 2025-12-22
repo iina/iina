@@ -159,6 +159,7 @@
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; };
 		50D56BE52EF8E07800A37C7D /* LyricsLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */; };
 		50D56BE72EF8E4C700A37C7D /* LRCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */; };
+		50D56BE92EF8E5D500A37C7D /* LyricsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */; };
 		51096C0B2CD88BEC00702C31 /* MPVOptionDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */; };
 		5111B18B2C8BCEAC00DEC0AC /* TouchBarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */; };
 		5114FA942DC704CE00D02435 /* NowPlayingInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */; };
@@ -1204,6 +1205,7 @@
 		49F7E3BF2920D65C002DA28E /* Availability.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Availability.xcconfig; sourceTree = "<group>"; };
 		50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsLine.swift; sourceTree = "<group>"; };
 		50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRCParser.swift; sourceTree = "<group>"; };
+		50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsEngine.swift; sourceTree = "<group>"; };
 		51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOptionDefaults.swift; sourceTree = "<group>"; };
 		5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarSettings.swift; sourceTree = "<group>"; };
 		5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfoManager.swift; sourceTree = "<group>"; };
@@ -2237,6 +2239,7 @@
 		50D56BE32EF8E04900A37C7D /* Lyrics */ = {
 			isa = PBXGroup;
 			children = (
+				50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */,
 				50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */,
 				50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */,
 			);
@@ -3253,6 +3256,7 @@
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				E33517602DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift in Sources */,
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
+				50D56BE92EF8E5D500A37C7D /* LyricsEngine.swift in Sources */,
 				E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */,
 				E38EA5A02F3009EF00FB51CE /* SettingsLocalizationKeysKeyBinding.swift in Sources */,
 				E33517522DFD206E00BBE169 /* SettingsPageUI.swift in Sources */,

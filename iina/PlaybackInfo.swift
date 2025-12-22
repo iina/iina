@@ -189,6 +189,7 @@ class PlaybackInfo {
 
   var isSubVisible = true
   var isSecondSubVisible = true
+  var isLyricsVisible = false
 
   var subEncoding: String?
 

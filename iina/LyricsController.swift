@@ -17,6 +17,12 @@ final class LyricsController {
 
     init(player: PlayerCore) {
         self.player = player
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(lyricsVisibilityChanged),
+            name: .iinaLyricsVisibilityChanged,
+            object: nil
+        )
     }
 
     // MARK: - Loading
@@ -66,4 +72,14 @@ final class LyricsController {
             next: engine.nextLine(at: time)
         )
     }
+    
+    @objc private func lyricsVisibilityChanged() {
+        if !player.info.isLyricsVisible {
+          // Hide Lyrics
+          onOverlayUpdate?(
+            LyricsOverlayState(previous: nil, current: nil, next: nil)
+          )
+        }
+    }
+
 }

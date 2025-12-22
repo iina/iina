@@ -212,9 +212,6 @@ class PlayerCore: NSObject {
 
   var receivedEndFileWhileLoading: Bool = false
 
-  // MARK: - Lyrics (experimental)
-  var lyricsEngine: LyricsEngine?
-
   var plugins: [JavascriptPluginInstance] = []
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
   var events = EventController()
@@ -1402,6 +1399,13 @@ class PlayerCore: NSObject {
   func toggleSecondSubVisibility(_ set: Bool? = nil) {
     let newState = set ?? !info.isSecondSubVisible
     mpv.setFlag(MPVOption.Subtitles.secondarySubVisibility, newState)
+  }
+
+  // MARK: - Lyrics (experimental)
+  func toggleLyricsVisibility(_set: Bool? = nil) {
+    let newState = _set ?? !info.isLyricsVisible
+    info.isLyricsVisible = newState
+    postNotification(.iinaLyricsVisibilityChanged)
   }
 
   func loadExternalSubFile(_ url: URL, delay: Bool = false) {

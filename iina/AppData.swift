@@ -156,6 +156,7 @@ extension Notification.Name {
   static let iinaSecondSubVisibilityChanged = Notification.Name("iinaSecondSubVisibilityChanged")
   static let iinaSubVisibilityChanged = Notification.Name("iinaSubVisibilityChanged")
   static let iinaHistoryTaskFinished = Notification.Name("iinaHistoryTaskFinished")
+  static let iinaLyricsVisibilityChanged = Notification.Name("iinaLyricsVisibilityChanged")
 }
 
 enum IINAError: Error {

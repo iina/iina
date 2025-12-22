@@ -160,6 +160,9 @@
 		50D56BE52EF8E07800A37C7D /* LyricsLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */; };
 		50D56BE72EF8E4C700A37C7D /* LRCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */; };
 		50D56BE92EF8E5D500A37C7D /* LyricsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */; };
+		50D56BEB2EF8F26400A37C7D /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BEA2EF8F25800A37C7D /* LyricsController.swift */; };
+		50D56BED2EF8FBB400A37C7D /* LyricsOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BEC2EF8FB9600A37C7D /* LyricsOverlayView.swift */; };
+		50D56BEF2EF8FC9A00A37C7D /* LyricsOverlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BEE2EF8FC8600A37C7D /* LyricsOverlayState.swift */; };
 		51096C0B2CD88BEC00702C31 /* MPVOptionDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */; };
 		5111B18B2C8BCEAC00DEC0AC /* TouchBarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */; };
 		5114FA942DC704CE00D02435 /* NowPlayingInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */; };
@@ -1206,6 +1209,9 @@
 		50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsLine.swift; sourceTree = "<group>"; };
 		50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRCParser.swift; sourceTree = "<group>"; };
 		50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsEngine.swift; sourceTree = "<group>"; };
+		50D56BEA2EF8F25800A37C7D /* LyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
+		50D56BEC2EF8FB9600A37C7D /* LyricsOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsOverlayView.swift; sourceTree = "<group>"; };
+		50D56BEE2EF8FC8600A37C7D /* LyricsOverlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsOverlayState.swift; sourceTree = "<group>"; };
 		51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOptionDefaults.swift; sourceTree = "<group>"; };
 		5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarSettings.swift; sourceTree = "<group>"; };
 		5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfoManager.swift; sourceTree = "<group>"; };
@@ -2239,6 +2245,7 @@
 		50D56BE32EF8E04900A37C7D /* Lyrics */ = {
 			isa = PBXGroup;
 			children = (
+				50D56BEE2EF8FC8600A37C7D /* LyricsOverlayState.swift */,
 				50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */,
 				50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */,
 				50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */,
@@ -2446,6 +2453,7 @@
 		84A0BAA31D2FAEA000BC8DA1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				50D56BEC2EF8FB9600A37C7D /* LyricsOverlayView.swift */,
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
 				D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */,
@@ -2538,6 +2546,7 @@
 			children = (
 				84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */,
 				84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */,
+				50D56BEA2EF8F25800A37C7D /* LyricsController.swift */,
 				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
 				348F71952DE2A814006C587D /* MPVCommandWrappers.swift */,
 				84C6D3611EAF8D63009BF721 /* HistoryController.swift */,
@@ -3267,6 +3276,7 @@
 				E36825512E01169F004E1E5F /* SettingsPageSubtitles.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
 				D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */,
+				50D56BED2EF8FBB400A37C7D /* LyricsOverlayView.swift in Sources */,
 				E3965E1A2487C99900607EB4 /* JavascriptPluginSubtitle.swift in Sources */,
 				84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */,
 				E34BC2A82C27C01800A94680 /* SettingsLocalization.swift in Sources */,
@@ -3278,6 +3288,7 @@
 				84D377631D6B66DE007F7396 /* MPVPlaylistItem.swift in Sources */,
 				E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */,
 				E337D5E22411B64A00B5729A /* JavascriptPolyfill.swift in Sources */,
+				50D56BEB2EF8F26400A37C7D /* LyricsController.swift in Sources */,
 				84E295C01E2CF9F5006388F7 /* ObjcUtils.m in Sources */,
 				8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */,
 				84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */,
@@ -3453,6 +3464,7 @@
 				51DE55C92A6646710050AD06 /* Sysctl.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */,
+				50D56BEF2EF8FC9A00A37C7D /* LyricsOverlayState.swift in Sources */,
 				50D56BE52EF8E07800A37C7D /* LyricsLine.swift in Sources */,
 				51AC1CAB2A9FBF3700DF7079 /* OpenSubClient.swift in Sources */,
 				E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */,

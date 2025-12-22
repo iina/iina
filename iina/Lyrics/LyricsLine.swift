@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LyricsLine {
+struct LyricsLine: Equatable {
     let time: TimeInterval
     let text: String
 }

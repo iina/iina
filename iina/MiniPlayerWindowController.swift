@@ -56,6 +56,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   var isVideoVisible = true
 
   var videoViewAspectConstraint: NSLayoutConstraint?
+  
+  // MARK: - Lyrics Overlay
+  private lazy var lyricsOverlayView = LyricsOverlayView()
+
 
   lazy var hideVolumePopover: DispatchWorkItem = {
     DispatchWorkItem {
@@ -116,6 +120,25 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     defaultAlbumArt.wantsLayer = true
     defaultAlbumArt.layer?.contents = #imageLiteral(resourceName: "default-album-art")
 
+    // Lyrics overlay (mounted above album art)
+    lyricsOverlayView.translatesAutoresizingMaskIntoConstraints = false
+    videoWrapperView.addSubview(lyricsOverlayView)
+
+    NSLayoutConstraint.activate([
+        lyricsOverlayView.leadingAnchor.constraint(equalTo: videoWrapperView.leadingAnchor),
+        lyricsOverlayView.trailingAnchor.constraint(equalTo: videoWrapperView.trailingAnchor),
+        lyricsOverlayView.topAnchor.constraint(equalTo: videoWrapperView.topAnchor),
+        lyricsOverlayView.bottomAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
+    ])
+    
+    // Connect LyricsController → overlay UI
+    player.lyricsController.onOverlayUpdate = { [weak self] state in
+      DispatchQueue.main.async {
+        self?.lyricsOverlayView.update(state: state)
+      }
+    }
+
+
     // close button
     closeButtonVE.action = #selector(self.close)
     closeButtonBox.action = #selector(self.close)
@@ -174,6 +197,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   // MARK: - Window delegate: Open / Close
 
   func windowWillClose(_ notification: Notification) {
+    player.lyricsController.onOverlayUpdate = nil
+    
     if player.info.state != .shuttingDown && player.info.state != .shutDown {
       // not needed if called when terminating the whole app
       player.overrideAutoSwitchToMusicMode = false

@@ -80,6 +80,9 @@ class MainWindowController: PlayerWindowController {
 
   lazy private var _videoView: VideoView = VideoView(frame: window!.contentView!.bounds, player: player)
 
+  // MARK: Lyrics Overlay (experimental)
+  private lazy var lyricsOverlayView = LyricsOverlayView()
+  
   /** The quick setting sidebar (video, audio, subtitles). */
   lazy var quickSettingView: QuickSettingViewController = {
     let quickSettingView = QuickSettingViewController()
@@ -579,6 +582,24 @@ class MainWindowController: PlayerWindowController {
     cv.autoresizesSubviews = false
     addVideoViewToWindow()
 
+    // MARK: - Lyrics Overlay (experimental)
+
+    lyricsOverlayView.translatesAutoresizingMaskIntoConstraints = false
+
+    // add lyrics overlay view
+    videoView.addSubview(lyricsOverlayView)
+
+    NSLayoutConstraint.activate([
+        lyricsOverlayView.leadingAnchor.constraint(equalTo: videoView.leadingAnchor),
+        lyricsOverlayView.trailingAnchor.constraint(equalTo: videoView.trailingAnchor),
+        lyricsOverlayView.topAnchor.constraint(equalTo: videoView.topAnchor),
+        lyricsOverlayView.bottomAnchor.constraint(equalTo: videoView.bottomAnchor)
+    ])
+
+    lyricsOverlayView.isHidden = !player.info.isLyricsVisible
+    lyricsOverlayView.alphaValue = player.info.isLyricsVisible ? 1.0 : 0.0
+    lyricsOverlayView.isHidden = false
+
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
@@ -671,6 +692,23 @@ class MainWindowController: PlayerWindowController {
       self.player.abLoopB = seconds
       self.player.sendOSD(.abLoopUpdate(.bSet, VideoTime(seconds).stringRepresentation))
     }
+    
+    // MARK: - Lyrics Overlay observer
+
+    addObserver(
+        to: .default,
+        forName: .iinaLyricsOverlayUpdated,
+        object: player.lyricsController
+    ) { [weak self] note in
+        guard
+            let self = self,
+            let state = note.userInfo?["state"] as? LyricsOverlayState,
+            self.player.info.isLyricsVisible
+        else { return }
+
+        self.lyricsOverlayView.update(state: state)
+    }
+
 
     player.events.emit(.windowLoaded)
 
@@ -1298,6 +1336,9 @@ class MainWindowController: PlayerWindowController {
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
     UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
+    
+    // MARK: - Lyrics Overlay cleanup (experimental)
+    lyricsOverlayView.removeFromSuperview()
     
     player.events.emit(.windowWillClose)
   }

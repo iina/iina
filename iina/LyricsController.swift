@@ -13,7 +13,7 @@ final class LyricsController {
 
     private var engine: LyricsEngine?
     private var currentLine: LyricsLine?
-    var onOverlayUpdate: ((LyricsOverlayState) -> Void)?
+
 
     init(player: PlayerCore) {
         self.player = player
@@ -40,6 +40,14 @@ final class LyricsController {
         currentLine = nil
     }
 
+    private func emitOverlayUpdate(_ state: LyricsOverlayState) {
+        NotificationCenter.default.post(
+            name: .iinaLyricsOverlayUpdated,
+            object: self,
+            userInfo: ["state": state]
+        )
+    }
+
     // MARK: - Time sync (called from PlayerCore)
     func syncTime(_ time: TimeInterval) {
         guard let engine else { return }
@@ -50,7 +58,7 @@ final class LyricsController {
 
         currentLine = state.current
       
-        onOverlayUpdate?(state)
+        emitOverlayUpdate(state)
 
         #if DEBUG
         if let line = state.current {
@@ -76,10 +84,11 @@ final class LyricsController {
     @objc private func lyricsVisibilityChanged() {
         if !player.info.isLyricsVisible {
           // Hide Lyrics
-          onOverlayUpdate?(
-            LyricsOverlayState(previous: nil, current: nil, next: nil)
-          )
+            emitOverlayUpdate(
+                LyricsOverlayState(previous: nil, current: nil, next: nil)
+            )
         }
     }
 
 }
+    

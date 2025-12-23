@@ -131,12 +131,21 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
         lyricsOverlayView.bottomAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
     ])
     
-    // Connect LyricsController → overlay UI
-    player.lyricsController.onOverlayUpdate = { [weak self] state in
-      DispatchQueue.main.async {
-        self?.lyricsOverlayView.update(state: state)
-      }
+    // MARK: - Lyrics Overlay binding (notification-based)
+
+    addObserver(
+        to: .default,
+        forName: .iinaLyricsOverlayUpdated,
+        object: nil
+    ) { [weak self] notification in
+        guard
+            let self = self,
+            let state = notification.userInfo?["state"] as? LyricsOverlayState
+        else { return }
+    
+        self.lyricsOverlayView.update(state: state)
     }
+
 
 
     // close button
@@ -197,7 +206,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   // MARK: - Window delegate: Open / Close
 
   func windowWillClose(_ notification: Notification) {
-    player.lyricsController.onOverlayUpdate = nil
     
     if player.info.state != .shuttingDown && player.info.state != .shutDown {
       // not needed if called when terminating the whole app

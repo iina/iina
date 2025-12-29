@@ -38,6 +38,11 @@ final class LyricsController {
     func clear() {
         engine = nil
         currentLine = nil
+        
+        // Explicitly clear overlay
+        emitOverlayUpdate(
+            LyricsOverlayState(previous: nil, current: nil, next: nil)
+        )
     }
 
     private func emitOverlayUpdate(_ state: LyricsOverlayState) {

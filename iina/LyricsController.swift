@@ -41,7 +41,7 @@ final class LyricsController {
         
         // Explicitly clear overlay
         emitOverlayUpdate(
-            LyricsOverlayState(previous: nil, current: nil, next: nil)
+            LyricsOverlayState(previous: nil, current: nil, next: nil, allLines: [], currentIndex: -1)
         )
     }
 
@@ -90,7 +90,7 @@ final class LyricsController {
         if !player.info.isLyricsVisible {
           // Hide Lyrics
             emitOverlayUpdate(
-                LyricsOverlayState(previous: nil, current: nil, next: nil)
+                LyricsOverlayState(previous: nil, current: nil, next: nil, allLines: [], currentIndex: -1)
             )
         }
     }

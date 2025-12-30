@@ -69,20 +69,53 @@ struct LyricsEngine {
         }
         return lines[index + 1]
     }
+    
+    // MARK: - Lines around current (for scrollable view)
+    
+    /// Returns an array of lines centered around the current line at the given time.
+    /// - Parameters:
+    ///   - time: Current playback time
+    ///   - count: Number of lines to return (should be odd: 5, 7, or 9)
+    /// - Returns: Array of lines with current line at the center index
+    func linesAroundCurrent(at time: TimeInterval, count: Int) -> [LyricsLine] {
+        guard !lines.isEmpty, count > 0 else { return [] }
+        
+        guard let current = currentLine(at: time),
+              let currentIndex = lines.firstIndex(where: { $0.time == current.time }) else {
+            // Before first line or no current line - return first N lines
+            return Array(lines.prefix(count))
+        }
+        
+        let halfCount = count / 2
+        let startIndex = max(0, currentIndex - halfCount)
+        let endIndex = min(lines.count, currentIndex + halfCount + 1)
+        
+        return Array(lines[startIndex..<endIndex])
+    }
   
     func overlayState(at time: TimeInterval) -> LyricsOverlayState {
         guard let current = currentLine(at: time) else {
-            return LyricsOverlayState(previous: nil, current: nil, next: nil)
+            return LyricsOverlayState(previous: nil, current: nil, next: nil, allLines: [], currentIndex: -1)
         }
 
         guard let index = lines.firstIndex(where: { $0.time == current.time }) else {
-            return LyricsOverlayState(previous: nil, current: current, next: nil)
+            return LyricsOverlayState(previous: nil, current: current, next: nil, allLines: [current], currentIndex: 0)
         }
 
         let prev = index > 0 ? lines[index - 1] : nil
         let next = index + 1 < lines.count ? lines[index + 1] : nil
+        
+        // Get 7 lines around current (default for now)
+        let allLines = linesAroundCurrent(at: time, count: 7)
+        let currentIndexInAllLines = allLines.firstIndex(where: { $0.time == current.time }) ?? -1
 
-        return LyricsOverlayState(previous: prev, current: current, next: next)
+        return LyricsOverlayState(
+            previous: prev,
+            current: current,
+            next: next,
+            allLines: allLines,
+            currentIndex: currentIndexInAllLines
+        )
     }
 
 }

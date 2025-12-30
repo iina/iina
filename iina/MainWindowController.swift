@@ -596,9 +596,9 @@ class MainWindowController: PlayerWindowController {
         lyricsOverlayView.bottomAnchor.constraint(equalTo: videoView.bottomAnchor)
     ])
 
+    // Set initial visibility state
     lyricsOverlayView.isHidden = !player.info.isLyricsVisible
     lyricsOverlayView.alphaValue = player.info.isLyricsVisible ? 1.0 : 0.0
-    lyricsOverlayView.isHidden = false
 
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
@@ -702,11 +702,32 @@ class MainWindowController: PlayerWindowController {
     ) { [weak self] note in
         guard
             let self = self,
-            let state = note.userInfo?["state"] as? LyricsOverlayState,
-            self.player.info.isLyricsVisible
+            let state = note.userInfo?["state"] as? LyricsOverlayState
         else { return }
 
+        // Update the view - it will handle visibility internally
         self.lyricsOverlayView.update(state: state)
+        
+        // Update visibility based on toggle state
+        let shouldBeVisible = self.player.info.isLyricsVisible && state.current != nil
+        self.lyricsOverlayView.isHidden = !shouldBeVisible
+    }
+    
+    // Also observe visibility changes to update the view immediately
+    addObserver(
+        to: .default,
+        forName: .iinaLyricsVisibilityChanged,
+        object: player
+    ) { [weak self] _ in
+        guard let self = self else { return }
+        let shouldBeVisible = self.player.info.isLyricsVisible
+        self.lyricsOverlayView.isHidden = !shouldBeVisible
+        
+        // If hiding, clear the view
+        if !shouldBeVisible {
+            let emptyState = LyricsOverlayState(previous: nil, current: nil, next: nil, allLines: [], currentIndex: -1)
+            self.lyricsOverlayView.update(state: emptyState, animated: true)
+        }
     }
 
 
@@ -2961,7 +2982,8 @@ class MainWindowController: PlayerWindowController {
   func isUITimerNeeded() -> Bool {
     let isShowingFadeableViews = animationState == .shown || animationState == .willShow
     let isShowingOSD = osdAnimationState == .shown || osdAnimationState == .willShow
-    return isShowingFadeableViews || isShowingOSD
+    let isShowingLyrics = player.info.isLyricsVisible
+    return isShowingFadeableViews || isShowingOSD || isShowingLyrics
   }
 
   override func updatePlayTime(withDuration duration: Bool, andProgressBar: Bool) {

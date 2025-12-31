@@ -18,7 +18,6 @@ final class LyricsController {
   // Falls back to engine's default if not set.
   var visibleLineCountProvider: (() -> Int)?
   
-  
   init(player: PlayerCore) {
     self.player = player
     NotificationCenter.default.addObserver(
@@ -30,12 +29,13 @@ final class LyricsController {
   }
   
   // MARK: - Loading
+  
   func loadLyrics(_ lines: [LyricsLine]) {
     engine = LyricsEngine(lines: lines)
     currentLine = nil
-    
   }
   
+  /// Clears all lyrics state (used when unloading or switching tracks).
   func clear() {
     engine = nil
     currentLine = nil
@@ -46,7 +46,18 @@ final class LyricsController {
     )
   }
   
+  /// Clears only the overlay/UI state while preserving the engine,
+  /// allowing lyrics to be re-shown without reloading.
+  private func clearOverlay() {
+    currentLine = nil
+    
+    emitOverlayUpdate(
+      LyricsOverlayState(previous: nil, current: nil, next: nil, allLines: [], currentIndex: -1)
+    )
+  }
+  
   // MARK: - Notifications
+  
   // Single outbound notification point for lyrics overlay UI updates.
   private func emitOverlayUpdate(_ state: LyricsOverlayState) {
     NotificationCenter.default.post(
@@ -57,28 +68,28 @@ final class LyricsController {
   }
   
   // MARK: - Time sync (called from PlayerCore)
+  
   func syncTime(_ time: TimeInterval) {
     guard let engine else { return }
     
-    // let state = engine.overlayState(at: time)
-    let defaultVisibleLineCount: Int = 7
+    let defaultVisibleLineCount = 7
     let visibleLineCount = visibleLineCountProvider?() ?? defaultVisibleLineCount
     let state = engine.overlayState(at: time, visibleLinesCount: visibleLineCount)
     
     guard state.current?.time != currentLine?.time else { return }
     
     currentLine = state.current
-    
     emitOverlayUpdate(state)
   }
   
   // MARK: - Visibility
-  // Responds to user toggling lyrics visibility off. Resets state to ensure clean UI.
+  
+  // Responds to user toggling lyrics visibility.
   @objc private func lyricsVisibilityChanged() {
     if !player.info.isLyricsVisible {
-      clear()
+      // Hide overlay but keep engine so lyrics can be restored.
+      clearOverlay()
     }
   }
   
 }
-

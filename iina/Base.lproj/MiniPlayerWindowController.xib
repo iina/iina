@@ -30,6 +30,7 @@
                 <outlet property="titleLabel" destination="h25-bp-EvL" id="HbE-Ji-c4o"/>
                 <outlet property="titleLabelTopConstraint" destination="Qaf-SS-SCV" id="NcC-8F-DTU"/>
                 <outlet property="toggleAlbumArtButton" destination="KFz-Kp-RxC" id="xjO-1X-eUP"/>
+                <outlet property="toggleLyricsButton" destination="bFb-AY-7p7" id="Cmq-8u-77D"/>
                 <outlet property="togglePlaylistButton" destination="a5L-QK-yog" id="yMA-2P-SHU"/>
                 <outlet property="videoWrapperView" destination="WD9-DD-LNj" id="Hfa-UA-t9H"/>
                 <outlet property="videoWrapperViewBottomConstraint" destination="m9y-eT-GRX" id="adV-UC-yzq"/>
@@ -200,6 +201,20 @@
                                             <action selector="togglePlaylist:" target="-2" id="0da-p5-HBI"/>
                                         </connections>
                                     </button>
+                                    <button toolTip="Toggle Lyrics" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-AY-7p7">
+                                        <rect key="frame" x="23" y="12" width="14" height="20"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="music.note" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vHj-ED-sbh">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="6su-y2-ov5"/>
+                                            <constraint firstAttribute="width" secondItem="bFb-AY-7p7" secondAttribute="height" multiplier="1:1" id="dqC-Eb-uDa"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="toggleLyricsAction:" target="-2" id="Ngt-H7-syi"/>
+                                        </connections>
+                                    </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="fUy-ap-8fj">
                                         <rect key="frame" x="49" y="15" width="17" height="14"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
@@ -234,8 +249,10 @@
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="top" secondItem="cDR-8J-QI7" secondAttribute="top" constant="12" id="Kzm-iJ-Vkp"/>
                                     <constraint firstItem="KFz-Kp-RxC" firstAttribute="centerY" secondItem="a5L-QK-yog" secondAttribute="centerY" id="LaN-Gb-lL9"/>
                                     <constraint firstItem="KFz-Kp-RxC" firstAttribute="left" secondItem="a5L-QK-yog" secondAttribute="right" constant="12" id="PpO-ZM-V3M"/>
+                                    <constraint firstItem="fUy-ap-8fj" firstAttribute="left" secondItem="bFb-AY-7p7" secondAttribute="right" constant="12" id="PuT-wA-srh"/>
                                     <constraint firstItem="fUy-ap-8fj" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="PvJ-Gl-h60"/>
                                     <constraint firstItem="nSh-lh-jim" firstAttribute="left" secondItem="fUy-ap-8fj" secondAttribute="right" constant="20" id="SGi-ju-KtN"/>
+                                    <constraint firstItem="bFb-AY-7p7" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="USF-Il-1Pj"/>
                                     <constraint firstAttribute="height" constant="48" id="fao-NR-5SG"/>
                                     <constraint firstItem="aC9-OK-a4x" firstAttribute="left" secondItem="nSh-lh-jim" secondAttribute="right" constant="24" id="kCv-eh-zx2"/>
                                     <constraint firstItem="998-mn-oHJ" firstAttribute="centerY" secondItem="aC9-OK-a4x" secondAttribute="centerY" id="ldG-Yz-2vC"/>
@@ -467,6 +484,7 @@
     <resources>
         <image name="backward" width="11" height="11"/>
         <image name="close" width="11" height="11"/>
+        <image name="music.note" catalog="system" width="11" height="15"/>
         <image name="mute" width="16" height="14"/>
         <image name="nextl" width="24" height="24"/>
         <image name="nextr" width="24" height="24"/>

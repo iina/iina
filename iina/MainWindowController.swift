@@ -695,15 +695,8 @@ class MainWindowController: PlayerWindowController {
     
     // MARK: - Lyrics Overlay observer
 
-    addObserver(
-        to: .default,
-        forName: .iinaLyricsOverlayUpdated,
-        object: player.lyricsController
-    ) { [weak self] note in
-        guard
-            let self = self,
-            let state = note.userInfo?["state"] as? LyricsOverlayState
-        else { return }
+    addObserver(to: .default, forName: .iinaLyricsOverlayUpdated, object: player.lyricsController) { [weak self] note in
+        guard let self = self, let state = note.userInfo?["state"] as? LyricsOverlayState else { return }
 
         // Update the view - it will handle visibility internally
         self.lyricsOverlayView.update(state: state)
@@ -714,11 +707,7 @@ class MainWindowController: PlayerWindowController {
     }
     
     // Also observe visibility changes to update the view immediately
-    addObserver(
-        to: .default,
-        forName: .iinaLyricsVisibilityChanged,
-        object: player
-    ) { [weak self] _ in
+    addObserver( to: .default, forName: .iinaLyricsVisibilityChanged, object: player) { [weak self] _ in
         guard let self = self else { return }
         let shouldBeVisible = self.player.info.isLyricsVisible
         self.lyricsOverlayView.isHidden = !shouldBeVisible
@@ -728,6 +717,10 @@ class MainWindowController: PlayerWindowController {
             let emptyState = LyricsOverlayState(previous: nil, current: nil, next: nil, allLines: [], currentIndex: -1)
             self.lyricsOverlayView.update(state: emptyState, animated: true)
         }
+    }
+
+    player.lyricsController.visibleLineCountProvider = { [weak self] in
+      self?.lyricsOverlayView.visibleLineCount() ?? 7
     }
 
 

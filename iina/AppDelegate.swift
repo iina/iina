@@ -932,7 +932,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         }
       }
       let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
-      if PlayerCore.openURLs(panel.urls, inverseOpenInNewWindowPref: isAlternative) == 0 {
+      if PlayerCore.openURLs(panel.urls) == 0 {
         Utility.showAlert("nothing_to_open")
       }
     }

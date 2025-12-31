@@ -93,7 +93,7 @@ struct LyricsEngine {
         return Array(lines[startIndex..<endIndex])
     }
   
-    func overlayState(at time: TimeInterval) -> LyricsOverlayState {
+    func overlayState(at time: TimeInterval, visibleLinesCount: Int) -> LyricsOverlayState {
         guard let current = currentLine(at: time) else {
             return LyricsOverlayState(previous: nil, current: nil, next: nil, allLines: [], currentIndex: -1)
         }
@@ -106,7 +106,7 @@ struct LyricsEngine {
         let next = index + 1 < lines.count ? lines[index + 1] : nil
         
         // Get 7 lines around current (default for now)
-        let allLines = linesAroundCurrent(at: time, count: 7)
+        let allLines = linesAroundCurrent(at: time, count: visibleLinesCount)
         let currentIndexInAllLines = allLines.firstIndex(where: { $0.time == current.time }) ?? -1
 
         return LyricsOverlayState(
@@ -117,28 +117,10 @@ struct LyricsEngine {
             currentIndex: currentIndexInAllLines
         )
     }
-
-}
-
-#if DEBUG
-func _lyricsDebugSanityCheck() {
-    let sample = """
-    [00:13.23]My mama was raised in the era when
-    [00:16.04]Clean water was only served to the fairer skin
-    [00:19.47]Doin' clothes, you woulda thought I had help
-    [00:21.76]But they wasn't satisfied unless I picked the cotton myself
-    [00:24.85]
-    [00:24.97]You see it's broke racism, that's that, don't touch anything in the store
-    """
-
-    let parsed = LRCParser.parse(sample)
-    let engine = LyricsEngine(lines: parsed)
-
-    print("=== Lyrics Debug Sanity Check ===")
-    for t in stride(from: 10.0, through: 30.0, by: 2.5) {
-        let line = engine.currentLine(at: t)
-        print(String(format: "t=%.2f → %@", t, line?.text ?? "nil"))
+    
+    func overlayState(at time: TimeInterval) -> LyricsOverlayState {
+        return overlayState(at: time, visibleLinesCount: 7)
     }
-    print("================================")
+
+
 }
-#endif

@@ -14,6 +14,8 @@ final class LyricsController {
     private var engine: LyricsEngine?
     private var currentLine: LyricsLine?
 
+    var visibleLineCountProvider: (() -> Int)?
+
 
     init(player: PlayerCore) {
         self.player = player
@@ -30,9 +32,6 @@ final class LyricsController {
         engine = LyricsEngine(lines: lines)
         currentLine = nil
 
-        #if DEBUG
-        print("🎵 Loaded lyrics: \(lines.count) lines")
-        #endif
     }
 
     func clear() {
@@ -57,19 +56,15 @@ final class LyricsController {
     func syncTime(_ time: TimeInterval) {
         guard let engine else { return }
 
-        let state = engine.overlayState(at: time)
+        // let state = engine.overlayState(at: time)
+        let visibleLineCount = visibleLineCountProvider?() ?? 7
+        let state = engine.overlayState(at: time, visibleLinesCount: visibleLineCount)
 
         guard state.current?.time != currentLine?.time else { return }
 
         currentLine = state.current
       
         emitOverlayUpdate(state)
-
-        #if DEBUG
-        if let line = state.current {
-            print("🎵 \(line.text)")
-        }
-        #endif
     }
 
 

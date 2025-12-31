@@ -160,7 +160,9 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
         }
     }
 
-
+    player.lyricsController.visibleLineCountProvider = { [weak self] in
+      self?.lyricsOverlayView.visibleLineCount() ?? 7
+    }
 
 
     // close button

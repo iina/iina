@@ -18,6 +18,12 @@ final class LyricsOverlayView: NSView {
   private let previousLabel = NSTextField(labelWithString: "")
   private let currentLabel  = NSTextField(labelWithString: "")
   private let nextLabel     = NSTextField(labelWithString: "")
+
+  private var backdropLeading: NSLayoutConstraint!
+  private var backdropTrailing: NSLayoutConstraint!
+  private var backdropTop: NSLayoutConstraint!
+  private var backdropBottom: NSLayoutConstraint!
+
   
   // New: Dynamic labels for scrollable view
   private var lineLabels: [NSTextField] = []
@@ -53,7 +59,7 @@ final class LyricsOverlayView: NSView {
     backdropView.blendingMode = .withinWindow
     backdropView.state = .active
     backdropView.wantsLayer = true
-    backdropView.layer?.cornerRadius = 8
+    backdropView.layer?.cornerRadius = max(8, bounds.height * 0.03)
     backdropView.layer?.masksToBounds = true
     
     addSubview(backdropView, positioned: .below, relativeTo: stackView)
@@ -92,11 +98,16 @@ final class LyricsOverlayView: NSView {
     backdropView.translatesAutoresizingMaskIntoConstraints = false
     
     // Backdrop hugs the text stack
+    backdropLeading = backdropView.leadingAnchor.constraint(equalTo: leadingAnchor)
+    backdropTrailing = backdropView.trailingAnchor.constraint(equalTo: trailingAnchor)
+    backdropTop = backdropView.topAnchor.constraint(equalTo: topAnchor)
+    backdropBottom = backdropView.bottomAnchor.constraint(equalTo: bottomAnchor)
+
     NSLayoutConstraint.activate([
-      backdropView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: -8),
-      backdropView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 8),
-      backdropView.topAnchor.constraint(equalTo: stackView.topAnchor, constant: -6),
-      backdropView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 6)
+      backdropLeading,
+      backdropTrailing,
+      backdropTop,
+      backdropBottom
     ])
     
     // Center lyrics vertically and constrain width to prevent window resizing
@@ -213,15 +224,19 @@ final class LyricsOverlayView: NSView {
   
   override func layout() {
     super.layout()
-    
-#if DEBUG
-    print("🎵 LyricsOverlayView layout — height =", bounds.height)
-#endif
+    let insetX = bounds.width * 0.1
+    let insetY = bounds.height * 0.1
+
+    backdropLeading.constant = insetX
+    backdropTrailing.constant = -insetX
+    backdropTop.constant = insetY
+    backdropBottom.constant = -insetY
+
     
     updateFonts(for: bounds.height)
     
     // Update label preferred max width for proper text wrapping
-    let maxLabelWidth = max(bounds.width - 48, 200) // 24pt margins on each side, minimum 200pt
+    let maxLabelWidth = max(bounds.width - insetX * 2, 200)
     for label in lineLabels {
       label.preferredMaxLayoutWidth = maxLabelWidth
     }
@@ -306,4 +321,40 @@ final class LyricsOverlayView: NSView {
       alphaValue = shouldShow ? 1.0 : 0.0
     }
   }
+
+  // MARK: - Visible line calculation
+
+  /// Calculates how many lyric lines can be displayed vertically
+  /// based purely on the overlay's current size and font metrics.
+  /// Always returns an odd number so the current line can be centered.
+  func visibleLineCount() -> Int {
+      // Guard against layout not ready yet
+      guard bounds.height > 0 else { return 7 }
+  
+      // These MUST match layout() logic
+      let insetY = bounds.height * 0.1
+      let availableHeight = bounds.height - insetY * 2
+  
+      // Match the same font sizing logic used in layout()
+      let baseFontSize = max(min(bounds.height * 0.045, 36), 14)
+  
+      // Estimate a single label's height
+      // 1.3–1.4x font size is correct for NSTextField line height
+      let estimatedLineHeight = baseFontSize * 1.35
+  
+      // Include stack spacing between labels
+      let lineSpacing = stackView.spacing
+  
+      let effectiveLineHeight = estimatedLineHeight + lineSpacing
+  
+      // Calculate how many lines fit
+      let rawCount = Int(availableHeight / effectiveLineHeight)
+  
+      // Clamp to sane bounds
+      let clamped = max(5, min(rawCount, 21))
+  
+      // Force odd so current line is centered
+      return clamped % 2 == 0 ? clamped - 1 : clamped
+  }
+
 }

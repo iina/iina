@@ -423,9 +423,17 @@ extension FloatingPoint {
 
 extension NSColor {
   var mpvColorString: String {
-    get {
-      return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)/\(self.alphaComponent)"
-    }
+    // Normalize to sRGB before extracting cmponents
+    let rgb = self.usingColorSpace(.sRGB) ?? self
+
+    var red: CGFloat = 0
+    var green: CGFloat = 0
+    var blue: CGFloat = 0
+    var alpha: CGFloat = 0
+
+    rgb.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    
+    return "\(red)/\(green)/\(blue)/\(alpha)"
   }
 
   convenience init?(mpvColorString: String) {

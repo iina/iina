@@ -453,8 +453,8 @@
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <binding destination="IBP-Mz-Maa" name="enabled" keyPath="values.alwaysOpenInNewWindow" id="cLO-w8-oTo"/>
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.allowDuplicatePlayers" id="hL4-Uh-WjB"/>
+                        <binding destination="IBP-Mz-Maa" name="enabled" keyPath="values.alwaysOpenInNewWindow" id="cLO-w8-oTo"/>
                     </connections>
                 </button>
             </subviews>
@@ -517,6 +517,7 @@
                 <constraint firstItem="b7I-2V-MYa" firstAttribute="leading" secondItem="QvG-Ma-br0" secondAttribute="leading" id="o0g-jc-tgK"/>
                 <constraint firstAttribute="trailing" secondItem="8iE-FU-0g0" secondAttribute="trailing" id="oIv-Ho-Lbb"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xi9-i5-9V4" secondAttribute="trailing" priority="100" id="oZd-sR-YOa"/>
+                <constraint firstAttribute="trailing" secondItem="g1N-U6-gyE" secondAttribute="trailing" constant="68" id="qdq-3V-Mds"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tUl-6f-ClP" secondAttribute="trailing" id="rJU-fV-3iD"/>
                 <constraint firstAttribute="bottom" secondItem="tUl-6f-ClP" secondAttribute="bottom" constant="8" id="s4G-EO-NkU"/>
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="leading" secondItem="6Hg-O4-cBP" secondAttribute="leading" id="snr-fe-bxJ"/>

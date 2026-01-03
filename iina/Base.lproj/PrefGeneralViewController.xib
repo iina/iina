@@ -482,7 +482,6 @@
                 <constraint firstItem="6Hg-O4-cBP" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="FS1-AW-faa"/>
                 <constraint firstItem="MWj-we-UuR" firstAttribute="top" secondItem="b7I-2V-MYa" secondAttribute="bottom" constant="16" id="GLc-3e-sDg"/>
                 <constraint firstItem="ONF-nX-zDm" firstAttribute="baseline" secondItem="ibu-Tq-kBr" secondAttribute="baseline" id="GtH-hr-0BD"/>
-                <constraint firstItem="g1N-U6-gyE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6zR-96-iKB" secondAttribute="leading" id="Gvx-qr-hKZ"/>
                 <constraint firstItem="ibu-Tq-kBr" firstAttribute="leading" secondItem="b7I-2V-MYa" secondAttribute="leading" id="Iut-G6-4zl"/>
                 <constraint firstItem="MFn-5H-egP" firstAttribute="height" secondItem="DUm-O0-pdI" secondAttribute="height" id="KEK-Lv-xLS"/>
                 <constraint firstItem="aKH-Me-5XB" firstAttribute="leading" secondItem="OXi-vL-mzp" secondAttribute="leading" id="NEg-jy-N85"/>
@@ -517,7 +516,7 @@
                 <constraint firstItem="b7I-2V-MYa" firstAttribute="leading" secondItem="QvG-Ma-br0" secondAttribute="leading" id="o0g-jc-tgK"/>
                 <constraint firstAttribute="trailing" secondItem="8iE-FU-0g0" secondAttribute="trailing" id="oIv-Ho-Lbb"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Xi9-i5-9V4" secondAttribute="trailing" priority="100" id="oZd-sR-YOa"/>
-                <constraint firstAttribute="trailing" secondItem="g1N-U6-gyE" secondAttribute="trailing" constant="68" id="qdq-3V-Mds"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g1N-U6-gyE" secondAttribute="trailing" id="qdq-3V-Mds"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tUl-6f-ClP" secondAttribute="trailing" id="rJU-fV-3iD"/>
                 <constraint firstAttribute="bottom" secondItem="tUl-6f-ClP" secondAttribute="bottom" constant="8" id="s4G-EO-NkU"/>
                 <constraint firstItem="QvG-Ma-br0" firstAttribute="leading" secondItem="6Hg-O4-cBP" secondAttribute="leading" id="snr-fe-bxJ"/>

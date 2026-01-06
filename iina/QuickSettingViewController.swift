@@ -246,6 +246,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": well])
     }
     
+    // Wire color wells to IBAction handlers
+    subTextColorWell.target = self
+    subTextColorWell.action = #selector(subTextColorAction(_:))
+
+    subTextBgColorWell.target = self
+    subTextBgColorWell.action = #selector(subTextBgColorAction(_:))
+
+    subTextBorderColorWell.target = self
+    subTextBorderColorWell.action = #selector(subTextBorderColorAction(_:))
+    
+    
     if #available(macOS 26, *) {
       subtitleSwitch.controlSize = .small
       secondarySubtitleSwitch.controlSize = .small

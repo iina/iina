@@ -1460,11 +1460,34 @@ class PlayerCore: NSObject {
   }
 
   func navigateInPlaylist(nextMedia: Bool) {
+    // Check if we're playing a UPnP item and handle navigation differently
+    if loadUPnPPlaybackContext() != nil {
+      // We're playing a UPnP item - handle navigation via UPnP browser
+      let browser = AppDelegate.shared.upnpBrowserWindow
+      if nextMedia {
+        browser.playNextUPnPItem()
+      } else {
+        browser.playPreviousUPnPItem()
+      }
+      return
+    }
+    
+    // Normal playlist navigation
     if nextMedia == false && (info.playlist.first?.isPlaying) ?? false {
       seek(absoluteSecond: 0)
     } else {
       mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
     }
+  }
+  
+  /// Load UPnP playback context from preferences (if any).
+  /// We no longer require the URL to match exactly; if a context exists, we treat the current file as part of that UPnP session.
+  func loadUPnPPlaybackContext() -> UPnPBrowserWindowController.UPnPPlaybackContext? {
+    guard let data = Preference.data(for: .upnpPlaybackContext),
+          let context = try? JSONDecoder().decode(UPnPBrowserWindowController.UPnPPlaybackContext.self, from: data) else {
+      return nil
+    }
+    return context
   }
 
   @discardableResult
@@ -2057,6 +2080,27 @@ class PlayerCore: NSObject {
       }
     } else {
       info.shouldAutoLoadFiles = false
+    }
+    // Post notification for file ended (natural or via internal stop command).
+    // Some UPnP servers / mpv report natural EOF as a stop, so we do not rely on `dueToStopCommand` here.
+    log("Posting .iinaFileEnded notification (dueToStopCommand=\(dueToStopCommand))", level: .debug)
+    postNotification(.iinaFileEnded)
+
+    // If we're in a UPnP session and auto-play-next is enabled, always try to advance.
+    // But don't auto-play if the player is stopping (user closed window) or shutting down.
+    // Note: When a video naturally ends, the state might be .idle, but we should still auto-play
+    // unless it's explicitly stopping (user action) or shutting down.
+    if Preference.bool(for: .upnpAutoPlayNext),
+       loadUPnPPlaybackContext() != nil,
+       info.state != .stopping,
+       info.state != .shuttingDown,
+       info.state != .shutDown {
+      log("Auto-playing next UPnP item from fileEnded (state: \(info.state), dueToStopCommand: \(dueToStopCommand))", level: .debug)
+      let browser = AppDelegate.shared.upnpBrowserWindow
+      browser.playNextUPnPItem()
+    } else if Preference.bool(for: .upnpAutoPlayNext),
+              loadUPnPPlaybackContext() != nil {
+      log("Skipping auto-play - player state is \(info.state)", level: .debug)
     }
   }
 

@@ -561,6 +561,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
           cellView.setPrefix(prefix)
           cellView.setTitle(String(filename[filename.index(filename.startIndex, offsetBy: prefix.count)...]))
         } else {
+          cellView.setPrefix(nil)
           cellView.setTitle(filename)
         }
         // playback progress and duration

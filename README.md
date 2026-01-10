@@ -134,3 +134,13 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **recorder** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 - **Multple Clips** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
 
+> 💡 **Want to build your own plugin?**
+> 
+> Explore the existing plugins listed here to learn how they work. If you create a new plugin or improve an existing one, feel free to contribute back by adding it to this list via a pull request.
+
+> 🚀 **Interested in creating an IINA plugin?**
+> 
+> Start by exploring the existing plugins here to understand patterns and best practices. Once you’ve built your own plugin, please contribute back by adding it to this README so others can discover and use it.
+
+
+

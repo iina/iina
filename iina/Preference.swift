@@ -932,7 +932,7 @@ struct Preference {
     .ignoreAssStyles: false,
     .subOverrideLevel: SubOverrideLevel.scale.rawValue,
     .secondarySubOverrideLevel: SubOverrideLevel.scale.rawValue,
-    .subTextFont: "sans-serif",
+    .subTextFont: Constants.String.mpvDefaultFont,
     .subTextSize: Float(55),
     .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBgColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,

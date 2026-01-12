@@ -40,7 +40,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     return ""
   }
 
-  var finishedPicking: ((String?) -> Void)?
+  var finishedPicking: ((String) -> Void)?
 
   private var enableSelectionChangeListener = true
 
@@ -71,6 +71,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
       tv.dataSource = self
       tv.delegate = self
     }
+    otherField.placeholderString = Constants.String.mpvDefaultFont
     searchField.delegate = self
     faceTableView.doubleAction = #selector(okBtnPressed)
     Logger.log("FontPickerWindow init done")
@@ -79,7 +80,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   func select(_ fontString: String ) {
     Logger.log("FontPickerWindow selecting \(fontString.quoted) (searching=\(isSearching))")
 
-    otherField.stringValue = fontString
+    otherField.stringValue = fontString == Constants.String.mpvDefaultFont ? "" : fontString
 
     updateTablesFromOtherFieldValue()
   }
@@ -87,6 +88,12 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   /// Updates all other UI state from the `otherField` value (i.e., the manually entered typeface name).
   private func updateTablesFromOtherFieldValue() {
     let selectedFace = otherField.stringValue
+    guard !selectedFace.isEmpty else {
+      // Deselect any previous table selections
+      familyTableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+      faceTableView.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+      return
+    }
 
     // Search for font. Unfortunately this requires checking all typefaces in the system.
     // But it's still quite fast.
@@ -151,7 +158,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   // - MARK: NSTextField delegate
 
-  // Type-to-filter updates
+  /// Type-to-filter updates
   func controlTextDidChange(_ notification: Notification) {
     familyTableView.deselectAll(searchField)
     let str = searchField.stringValue
@@ -171,11 +178,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   @IBAction func okBtnPressed(_ sender: AnyObject) {
     if let block = finishedPicking {
       let otherString = otherField.stringValue
-      if otherString.isEmpty {
-        block(chosenFace)
-      } else {
-        block(otherString)
-      }
+      block(otherString)
       // remove the listener
       finishedPicking = nil
     }

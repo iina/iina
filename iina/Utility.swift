@@ -377,7 +377,7 @@ class Utility {
    - parameters:
      - callback: A closure accepting the font name.
    */
-  static func quickFontPickerWindow(selecting initialSelection: String?, callback: @escaping (String?) -> Void) {
+  static func quickFontPickerWindow(selecting initialSelection: String?, callback: @escaping (String) -> Void) {
     let fontPicker = AppDelegate.shared.fontPicker
     let _ = fontPicker.window  // load if not loaded
     fontPicker.finishedPicking = callback

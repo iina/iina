@@ -1328,7 +1328,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     let subFont = mpv.getString(MPVOption.Subtitles.subFont)
     Utility.quickFontPickerWindow(selecting: subFont) { [self] result in
-      setSubFont(result ?? "")
+      setSubFont(result)
     }
   }
 

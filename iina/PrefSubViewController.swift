@@ -87,8 +87,9 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   }
 
   @IBAction func chooseSubFontAction(_ sender: AnyObject) {
-    Utility.quickFontPickerWindow(selecting: Preference.string(for: .subTextFont) ?? "sans-serif") { font in
-      Preference.set(font ?? "sans-serif", for: .subTextFont)
+    let subFont = Preference.string(for: .subTextFont)
+    Utility.quickFontPickerWindow(selecting: subFont) { font in
+      Preference.set(font, for: .subTextFont)
     }
   }
 

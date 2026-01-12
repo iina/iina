@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="FontPickerWindowController" customModule="IINA_Advance" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="FontPickerWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
                 <outlet property="faceTableView" destination="igd-1P-vQT" id="vk2-bn-1ZM"/>
                 <outlet property="familyTableView" destination="av5-Km-BXV" id="Ttw-xq-6IC"/>

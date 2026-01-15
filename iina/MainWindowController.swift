@@ -1632,9 +1632,9 @@ class MainWindowController: PlayerWindowController {
     guard let window = window else { return }
     
     if case .animating(_, _, _) = fsState {
-      forceDraw("window entered full screen animation while paused")
+      forceDraw("window resized during animated enter or exit full screen")
     } else if !videoView.videoLayer.inLiveResize {
-      forceDraw("window resized while paused")
+      forceDraw("window resized")
     }
 
     // interactive mode

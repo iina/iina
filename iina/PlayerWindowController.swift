@@ -655,10 +655,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   /// If a video is actively being played then there is no need to force a draw as the view is actively being drawn. Otherwise the view
   /// must be drawn. Video tracks can be images or cover art. Even when there isn't a video track drawing sometimes must be forced
   /// to clear a previous image, such as when an audio only file is played in the main window after it was used to play a video.
-  func forceDraw(_ reason: String) {
+  /// - Parameters:
+  ///   - reason: Reason for forcing drawing.
+  ///   - always: Draw even when playback is in progress and there isn't a video track. Used to clear any previous image.
+  func forceDraw(_ reason: String, always: Bool = false) {
     guard player.info.state.active else { return }
-    let notVideo = player.info.currentTrack(.video)?.isImage ?? true
-    guard player.info.state == .paused || notVideo else { return }
+    if !always {
+      let notVideo = player.info.currentTrack(.video)?.isImage ?? true
+      guard player.info.state == .paused || notVideo else { return }
+    }
     log("Forcing drawing, \(reason)")
     videoView.videoLayer.update(force: true)
   }

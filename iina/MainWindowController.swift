@@ -1832,7 +1832,7 @@ class MainWindowController: PlayerWindowController {
       v.isHidden = false
     }
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = UIAnimationDuration
+      context.duration = AccessibilityPreferences.adjustedDuration(UIAnimationDuration)
       fadeableViews.forEach { (v) in
         v.animator().alphaValue = 0
       }
@@ -1865,7 +1865,7 @@ class MainWindowController: PlayerWindowController {
     player.refreshSyncUITimer()
     standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = UIAnimationDuration
+      context.duration = AccessibilityPreferences.adjustedDuration(UIAnimationDuration)
       fadeableViews.forEach { (v) in
         v.animator().alphaValue = 1
       }

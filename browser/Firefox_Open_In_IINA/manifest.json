@@ -18,6 +18,11 @@
     "default_icon": "icon.png",
     "default_title": "Open In IINA"
   },
+  "commands": {
+    "_execute_browser_action": {
+      "description": "Open current page in IINA"
+    }
+  },
   "permissions": [
     "tabs",
     "activeTab",

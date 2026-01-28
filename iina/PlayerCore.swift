@@ -447,7 +447,17 @@ class PlayerCore: NSObject {
     }
   }
 
-
+  /// Open the given media in the main window.
+  /// - Important: This method will ensure playback is paused before running the load command. If playback is not paused, audio
+  ///     can start playing before video is shown. This is most noticeable with high resolution videos encoded with newer high
+  ///     compression codecs (such as AV1), when running on older Macs that lack support for hardware decoding of the codec
+  ///     used. Playback will be started once the video has been loaded and the size of the video is known (unless the "Pause"
+  ///     setting is enabled under "When media is opened"). Playback is only paused before loading when media is manually opened
+  ///     by the user in order to not disrupt gapless audio.
+  /// - Parameters:
+  ///   - path: Path to the media to open.
+  ///   - url: URL of the media to open.
+  ///   - isNetwork: Whether the media must be streamed over the network.
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
     log("Opening \(path) in main window")
     info.currentURL = url
@@ -472,17 +482,9 @@ class PlayerCore: NSObject {
     miniPlayer.pendingShow = true
     initialWindow.close()
 
-    // If the IINA "Pause" setting is enabled under "When media is opened" then pause mpv playback
-    // before loading the file. Otherwise make sure mpv playback is enabled.
-    let pause = Preference.bool(for: .pauseWhenOpen)
-    mpv.setFlag(MPVOption.PlaybackControl.pause, pause ? true : false, level: .verbose)
-
-    // Normally the display link is started when MainWindowController.windowDidLoad calls initVideo.
-    // However if this player is being reused then the window will have already been loaded and
-    // windowDidLoad will not be called. If playback is not paused make sure the display link is
-    // active.
-    if !pause, mainWindow.loaded {
-      mainWindow.videoView.displayActive()
+    if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
+      log("Pausing playback before running load command")
+      mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
     }
 
     // If this mpv core is being reused icc-profile-auto may have been left set to true. This option
@@ -820,7 +822,6 @@ class PlayerCore: NSObject {
   }
 
   /// Pause playback.
-  ///
   /// - Important: Setting the `pause` property will cause `mpv` to emit a `MPV_EVENT_PROPERTY_CHANGE` event. The
   ///     event will still be emitted even if the `mpv` core is idle. If the setting `Pause when machine goes to sleep` is
   ///     enabled then `PlayerWindowController` will call this method in response to a
@@ -831,10 +832,16 @@ class PlayerCore: NSObject {
   ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
     guard info.state.active else { return }
+    log("Pausing playback")
     mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
   }
 
+  /// Resume playback.
+  /// - Important: Although primary responsibility for ensuring the display link is running when playback is in progress belongs to
+  ///     the `pauseChanged` method, this method calls `displayActive` to provide more time for the display link to start up.
   func resume() {
+    log("Resuming playback")
+    mainWindow.videoView.displayActive()
     // Restart playback when reached EOF
     if mpv.getFlag(MPVProperty.eofReached) {
       seek(absoluteSecond: 0)
@@ -870,7 +877,10 @@ class PlayerCore: NSObject {
       info.state = .stopping
 
       // Make sure playback is paused to free up machine resources when quitting.
-      mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+      if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
+        log("Pausing playback before sending stop command")
+        mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+      }
     }
 
     // Must first stop the background task if it is running.
@@ -1454,15 +1464,53 @@ class PlayerCore: NSObject {
     postNotification(.iinaPlaylistChanged)
   }
 
+  /// Play the entry at the given position in the playlist.
+  /// - Important: This method will ensure playback is paused before changing the position in the playlist. If playback is not
+  ///     paused, audio can start playing before video is shown. This is most noticeable with high resolution videos encoded with
+  ///     newer high compression codecs (such as AV1), when running on older Macs that lack support for hardware decoding of the
+  ///     codec used. Playback will be started once the video has been loaded and the size of the video is known (unless the "Pause"
+  ///     setting is enabled under "When media is opened"). Playback is only paused when the user manually changes the position in
+  ///     the playlist in order to not disrupt gapless audio.
+  /// - Important: Although primary responsibility for ensuring the display link is running when playback is in progress belongs to
+  ///     the `pauseChanged` method, this method calls `displayActive` to provide more time for the display link to start up
+  ///     expecting that normally playback will be resumed by `notifyWindowVideoSizeChanged` once the file is loaded. Note
+  ///     that when this method pauses playback `pauseChanged` will call `displayIdle`. That is not a problem as that method
+  ///     does not immediately stop the display link. The link will still be running when `notifyWindowVideoSizeChanged`
+  ///     resumes playback.
+  /// - Parameter pos: Position of the entry in the playlist to be played.
   func playFileInPlaylist(_ pos: Int) {
+    mainWindow.videoView.displayActive()
+    if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
+      log("Pausing playback before playing entry at index \(pos) in the playlist")
+      mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+    }
     mpv.setInt(MPVProperty.playlistPos, pos)
     getPlaylist()
   }
 
+  /// Play the next or the previous entry in the playlist.
+  /// - Important: This method will ensure playback is paused before changing the position in the playlist. If playback is not
+  ///     paused, audio can start playing before video is shown. This is most noticeable with high resolution videos encoded with
+  ///     newer high compression codecs (such as AV1), when running on older Macs that lack support for hardware decoding of the
+  ///     codec used. Playback will be started once the video has been loaded and the size of the video is known (unless the "Pause"
+  ///     setting is enabled under "When media is opened"). Playback is only paused when the user manually changes the position in
+  ///     the playlist in order to not disrupt gapless audio.
+  /// - Important: Although primary responsibility for ensuring the display link is running when playback is in progress belongs to
+  ///     the `pauseChanged` method, this method calls `displayActive` to provide more time for the display link to start up
+  ///     expecting that normally playback will be resumed by `notifyWindowVideoSizeChanged` once the file is loaded. Note
+  ///     that when this method pauses playback `pauseChanged` will call `displayIdle`. That is not a problem as that method
+  ///     does not immediately stop the display link. The link will still be running when `notifyWindowVideoSizeChanged`
+  ///     resumes playback.
+  /// - Parameter nextMedia: When `true` play the next entry in the playlist; otherwise play the previous entry.
   func navigateInPlaylist(nextMedia: Bool) {
     if nextMedia == false && (info.playlist.first?.isPlaying) ?? false {
       seek(absoluteSecond: 0)
     } else {
+      mainWindow.videoView.displayActive()
+      if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
+        log("Pausing playback before playing \(nextMedia ? "next" : "previous") entry in playlist")
+        mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+      }
       mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
     }
   }
@@ -2483,9 +2531,16 @@ class PlayerCore: NSObject {
       AppDelegate.shared.openURLWindow.close()
     }
     if info.state == .loaded {
-      // Normally at this point the file will be playing. However if the IINA "Pause" setting is
-      // enabled under "When media is opened" IINA will have paused playback.
-      info.state =  mpv.getFlag(MPVOption.PlaybackControl.pause) ? .paused : .playing
+      // If the media was loaded manually then playback was paused to avoid audio starting to play
+      // before video is ready to be displayed. Now that the video is ready playback can be resumed
+      // unless the IINA "Pause" setting is enabled under "When media is opened".
+      let paused = mpv.getFlag(MPVOption.PlaybackControl.pause)
+      if paused, !Preference.bool(for: .pauseWhenOpen)  {
+        log("Resuming playback now that file has been loaded")
+        mainWindow.videoView.displayActive()
+        mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
+      }
+      info.state = paused ? .paused : .playing
       syncUI(.playButton)
       if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
         mainWindow.toggleWindowFullScreen()

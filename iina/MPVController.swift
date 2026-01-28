@@ -1182,6 +1182,9 @@ class MPVController: NSObject {
       // not leave this to the PlayerCore function and handle this now before calling fileEnded.
       if !dueToStopCommand, Preference.bool(for: .pauseWhenOpen) {
         setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+        // Normally a log message is emitted before calling mpv, but in this case, due to the race
+        // condition, playback must be paused as soon as possible, so logging is done afterward.
+        log("Pausing playback because \"pause when media is opened\" is enabled")
       }
       DispatchQueue.main.async { self.player.fileEnded(dueToStopCommand) }
 

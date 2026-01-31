@@ -28,11 +28,11 @@ fileprivate let no_str = "no"
 /// | debug | debug messages |
 /// | trace | very noisy debug messages |
 /// - Important: The mpv event system uses an event queue of limited size. If events are not read quickly enough the queue can
-///     overflow and silently discard events. Loss of events can trigger severe malfunctions. IINA's ability to include mpv log messages
-///     in the IINA log file relies up the mpv `MPV_EVENT_LOG_MESSAGE` event. There is a danger that mpv will emit log messages
-///     at a rate that exceeds IINA's ability to empty the event queue before it overflows. For this reason IINA intentionally limits the
-///     mpv log level to `warn`. If you change the lecel to debug a problem be aware that the event queue could overflow and drop
-///     events resulting in odd behavior.
+///     overflow resulting in events being dropped. Loss of events can trigger severe malfunctions. IINA's ability to include mpv log
+///     messages in the IINA log file relies up the mpv `MPV_EVENT_LOG_MESSAGE` event. There is a danger that mpv will emit log
+///     messages at a rate that exceeds IINA's ability to empty the event queue before it overflows. For this reason IINA intentionally
+///     limits the mpv log level to `warn`. If you change the level to debug a problem be aware that the event queue could overflow
+///     and drop events resulting in odd behavior.
 fileprivate let MPVLogLevel = "warn"
 fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "error": .error,
@@ -98,14 +98,15 @@ class MPVController: NSObject {
   /// [DispatchQueue](https://developer.apple.com/documentation/dispatch/dispatchqueue) for reading `mpv`
   /// events.
   /// - Important: The mpv event system uses an event queue of limited size. If events are not read quickly enough with
-  ///     `mpv_wait_event` the queue can overflow and silently discard events. IINA can recover from the loss of some types of
-  ///     mpv events, but certain mpv events are critical. If a critical event is silently discarded IINA will experience severe
+  ///     `mpv_wait_event` the queue can overflow resulting in events being dropped. IINA can recover from the loss of some
+  ///     types of mpv events, but certain mpv events are critical. If a critical event is discarded IINA will experience severe
   ///     malfunctions. For this reason this queue _must only_ be used for reading events. This also means processing of events
   ///     _must not be performed_ using this queue unless the work required can _always_ be accomplished _quickly_. Otherwise
   ///     processing _must be_ queued to another dispatch queue.
   /// - Important: To avoid using locking to prevent data races the convention is that processing involving data used by the UI is
   ///     never performed while running on this queue's thread and instead is queued for processing by the main thread .
-  lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller", qos: .userInitiated)
+  private lazy var queue = DispatchQueue(label: "com.colliderli.iina.controller",
+                                         qos: .userInitiated)
 
   unowned let player: PlayerCore
 
@@ -1202,6 +1203,18 @@ class MPVController: NSObject {
         }
         DispatchQueue.main.async { self.player.screenshotCallback() }
       }
+
+    case MPV_EVENT_QUEUE_OVERFLOW:
+      // The mpv event system uses an event queue of limited size. If events are not read quickly
+      // enough the queue can overflow resulting in events being dropped. This event indicates the
+      // ringbuffer overflowed and at least one event was dropped. IINA can recover from the loss of
+      // some types of mpv events, but certain mpv events are critical. If a critical event is
+      // discarded IINA will experience severe malfunctions. For this reason most of the work of
+      // processing an event is dispatched to other queues so that MPVController can move on to
+      // reading the next event. This event indicates something went wrong and IINA failed to read
+      // events fast enough. As IINA has been ignoring this event we don't know if this has been
+      // occurring. For now log this as an error. May want to switch to an alert in the future.
+      log("Critical failure, mpv events lost, queue overflowed", level: .error)
 
     default: break
       // let eventName = String(cString: mpv_event_name(eventId))

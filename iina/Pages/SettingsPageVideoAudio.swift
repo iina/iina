@@ -195,7 +195,7 @@ fileprivate class AudioOutputDevideView: WithSettingsLocalizationContext {
     audioDevicePopUp.translatesAutoresizingMaskIntoConstraints = false
     audioDevicePopUp.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     audioDevicePopUp.removeAllItems()
-    
+
     let audioDevices = PlayerCore.active.getAudioDevices()
     let audioDevice = Preference.string(for: .audioDevice)!
 
@@ -243,6 +243,7 @@ fileprivate class AudioOutputDevideView: WithSettingsLocalizationContext {
       audioDevicePopUp.lastItem!.representedObject = device
       audioDevicePopUp.select(audioDevicePopUp.lastItem!)
     }
+
     audioDevicePopUp.target = self
     audioDevicePopUp.action = #selector(audioDeviceAction)
 

@@ -127,6 +127,7 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
     var l10n: SettingsLocalization.Context!
     let listView: SettingsListView
     var titleKey: SettingsLocalization.Key?
+    var titleField: NSTextField!
 
     init(_ listView: SettingsListView, titleKey: SettingsLocalization.Key? = nil) {
       self.listView = listView
@@ -144,7 +145,6 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
     override func viewDidMoveToWindow() {
       if let key = titleKey {
         let title = l10n.localized(key)
-        let titleField: NSTextField
         if (SMALL_TITLE) {
           titleField = NSTextField(labelWithString: title.localizedUppercase)
           titleField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold)

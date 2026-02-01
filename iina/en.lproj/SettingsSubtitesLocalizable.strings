@@ -72,8 +72,6 @@
 "$AlsoSearchSubtitlesInFollowing" = "Also search subtitles in following directories";
 /* key="SIh-Sv-6XI" */
 "$Color" = "Color";
-/* key="TPK-CJ-HX7" */
-"$DownloadSubtitlesFrom" = "Download subtitles from";
 /* key="Vbl-Im-3UI" */
 "$Size" = "Size";
 /* key="WHk-sk-gmK" */
@@ -110,6 +108,13 @@
 "autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
 /* key="zaE-bH-XfT" */
 "$PreferredLanguage" = "Preferred language";
+/* */
+"$SubtitleSource" = "Subtitle source";
+"$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
+
+"$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
+
+"$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
 
 "subOverrideLevel.items.4" = "no";
 "subOverrideLevel.items.1" = "force";

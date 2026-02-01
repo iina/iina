@@ -233,6 +233,45 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
   func numberOfRows(in tableView: NSTableView) -> Int {
     return pages.count + 1
   }
+  
+  @objc
+  private func jumpToSection(_ sender: NSButton) {
+    guard let documentView = contentScrollView.documentView else { return }
+    let sectionName = sender.title
+
+    guard let view = documentView.allSubviews.first(where: {
+      ($0 as? SettingsListView)?.listTitle == sectionName
+    }) else { return }
+
+    guard let label = (view as? SettingsListView)?.container.titleField else { return }
+    let clipView = contentScrollView.contentView
+    let labelRect = label.convert(label.bounds, to: clipView)
+    
+    let vr = documentView.visibleRect
+    let y = labelRect.minY - vr.height * 0.33 - 40
+    let rect = NSRect(x: labelRect.minX, y: y, width: labelRect.width, height: vr.height - 40)
+    
+    var newOrigin = clipView.bounds.origin
+    if newOrigin.x > rect.origin.x {
+      newOrigin.x = rect.origin.x
+    }
+    if rect.origin.x > newOrigin.x + clipView.bounds.width - rect.width {
+      newOrigin.x = rect.origin.x - clipView.bounds.width + rect.width
+    }
+    if newOrigin.y > rect.origin.y {
+      newOrigin.y = rect.origin.y
+    }
+    if rect.origin.y > newOrigin.y + clipView.bounds.height - rect.height {
+      newOrigin.y = rect.origin.y - clipView.bounds.height + rect.height
+    }
+    
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = 0.25
+      clipView.animator().setBoundsOrigin(newOrigin)
+    }, completionHandler: {
+      self.contentScrollView.reflectScrolledClipView(clipView)
+    })
+  }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     let cell = NSTableCellView()
@@ -263,9 +302,9 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
       sectionNameStackView.orientation = .vertical
       sectionNameStackView.alignment = .leading
       for name in sectionNames {
-        let nameLabel = NSTextField(labelWithString: name)
-        nameLabel.textColor = .secondaryLabelColor
-        nameLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+        let nameLabel = NSButton(title: name, target: self, action: #selector(jumpToSection))
+        nameLabel.controlSize = .small
+        nameLabel.isBordered = false
         sectionNameStackView.addArrangedSubview(nameLabel)
       }
       sectionStackView.addArrangedSubview(sectionNameStackView)

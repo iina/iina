@@ -533,7 +533,11 @@ struct SettingsItem {
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
       popupButton.bezelStyle = .flexiblePush
-      popupButton.showsBorderOnlyWhileMouseInside = true
+      if #available(macOS 26, *) {
+        popupButton.showsBorderOnlyWhileMouseInside = false
+      } else {
+        popupButton.showsBorderOnlyWhileMouseInside = true
+      }
       return [popupButton, nsSwitch]
     }
 
@@ -1039,20 +1043,30 @@ class SettingsAccessory {
     }
   }
 
-  class LanguageSelector: NSView {
+  class LanguageSelector: NSView, WithSettingsLocalizationContext {
+    var l10n: SettingsLocalization.Context!
+
     private var key: Preference.Key? = nil
+    private var hasDesc = false
+    private let stackView: NSStackView
     private let audioLangTokenField: LanguageTokenField
     
     init() {
       self.audioLangTokenField = .init()
+      self.stackView = NSStackView()
       super.init(frame: NSRect())
 
       audioLangTokenField.translatesAutoresizingMaskIntoConstraints = false
       audioLangTokenField.bezelStyle = .roundedBezel
       audioLangTokenField.target = self
       audioLangTokenField.action = #selector(preferredLanguageAction(_:))
-      self.addSubview(audioLangTokenField)
-      audioLangTokenField.padding(.top(-4), .leading(SettingsSubListView.padding), .trailing(8), .bottom(8))
+      
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      stackView.orientation = .vertical
+      stackView.addArrangedSubview(audioLangTokenField)
+      self.addSubview(stackView)
+
+      stackView.padding(.top(-4), .leading(SettingsSubListView.padding), .trailing(8), .bottom(8))
     }
 
     @MainActor required init?(coder: NSCoder) {
@@ -1063,6 +1077,11 @@ class SettingsAccessory {
       self.key = key
       return self
     }
+    
+    func hasDescription() -> Self {
+      self.hasDesc = true
+      return self
+    }
 
     override func viewDidMoveToWindow() {
       guard window != nil else { return }
@@ -1070,7 +1089,15 @@ class SettingsAccessory {
       audioLangTokenField.awakeFromNib()
       if let key = key {
         audioLangTokenField.commaSeparatedValues = Preference.string(for: key) ?? ""
+        if hasDesc {
+          let descLabel = NSTextField(labelWithString: l10n.localized(.init("\(key.rawValue).desc")))
+          descLabel.makeMultiLine()
+          descLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+          descLabel.textColor = .secondaryLabelColor
+          stackView.addArrangedSubview(descLabel)
+        }
       }
+      
     }
 
     @objc func preferredLanguageAction(_ sender: LanguageTokenField) {

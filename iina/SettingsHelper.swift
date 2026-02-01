@@ -184,6 +184,17 @@ extension NSView {
   }
 }
 
+extension NSTextField {
+  @discardableResult
+  func makeMultiLine() -> Self {
+    self.lineBreakMode = .byWordWrapping
+    self.usesSingleLineMode = false
+    self.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    return self
+  }
+
+}
+
 class SettingsUIHelper {
   private var l10n: SettingsLocalization.Context
 

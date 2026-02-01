@@ -21,6 +21,8 @@ class SettingsPageSubtitles: SettingsPage {
     "SettingsSubtitesLocalizable"
   }
 
+  private lazy var autoLoadPriorityInput: AdvancedInput = AdvancedInput(l10n: localizationContext)
+  private lazy var autoLoadSearchDirInput: AdvancedInput = AdvancedInput(l10n: localizationContext)
   private lazy var subtitlesASSView: SubtitlesASSView = SubtitlesASSView(l10n: localizationContext)
   private lazy var subtitlesFontView: SubtitlesFontView = SubtitlesFontView(l10n: localizationContext)
   private lazy var subtitlesColorView: SubtitlesColorView = SubtitlesColorView(l10n: localizationContext)
@@ -29,6 +31,7 @@ class SettingsPageSubtitles: SettingsPage {
   private lazy var subtitlesMarginView: SubtitlesMarginView = SubtitlesMarginView(l10n: localizationContext)
   private lazy var subtitlesAlignView: SubtitlesAlignView = SubtitlesAlignView(l10n: localizationContext)
   private lazy var subtitlesEncodingView: SubtitlesEncodingView = SubtitlesEncodingView(l10n: localizationContext)
+  private lazy var subtitleSourceView: SubtitleSourceView = SubtitleSourceView(l10n: localizationContext)
 
   override func content() -> NSView {
     return sections {
@@ -50,7 +53,9 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.General(title: .text_Advanced)
           .withExpandingDetailView {
             SettingsItem.General(title: .text_SubtitlesHavePriorityWhenFilename)
+              .withDetailView(autoLoadPriorityInput.view)
             SettingsItem.General(title: .text_AlsoSearchSubtitlesInFollowing)
+              .withDetailView(autoLoadSearchDirInput.view)
           }
       }
     }
@@ -130,6 +135,9 @@ class SettingsPageSubtitles: SettingsPage {
   private func sectionOnlineSubtitles() -> [NSView] {
     return section {
       SettingsListView(title: .text_OnlineSubtitles) {
+        SettingsItem.General(title: .text_SubtitleSource)
+          .image(name: "server.rack")
+          .withDetailView(subtitleSourceView.view)
         SettingsItem.Switch()
           .image(name: ["text.magnifyingglass", "magnifyingglass"])
           .bindTo(.autoSearchOnlineSub)
@@ -143,10 +151,10 @@ class SettingsPageSubtitles: SettingsPage {
       SettingsListView(title: .text_Other) {
         SettingsItem.General(title: .text_PreferredLanguage)
           .image(name: "character.book.closed")
-          .hasDescription()
           .withDetailView(
             SettingsAccessory.LanguageSelector()
               .bind(to: .subLang)
+              .hasDescription()
           )
         SettingsItem.General(title: .text_DefaultEncoding)
           .withDetailView(subtitlesEncodingView.view)
@@ -222,12 +230,20 @@ fileprivate class SBaseView: WithSettingsLocalizationContext {
     self.view.translatesAutoresizingMaskIntoConstraints = false
   }
 
-  func makeLabel(_ key: SettingsLocalization.Key) -> NSTextField {
+  func makeLabel(_ key: SettingsLocalization.Key, isSmall: Bool = true) -> NSTextField {
     let label = NSTextField(labelWithString: l10n.localized(key))
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-    label.textColor = .secondaryLabelColor
+    if isSmall {
+      label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+      label.textColor = .secondaryLabelColor
+    }
     return label
+  }
+  
+  func makeButton(_ key: SettingsLocalization.Key) -> NSButton {
+    let btn = NSButton(title: l10n.localized(key), target: nil, action: nil)
+    btn.translatesAutoresizingMaskIntoConstraints = false
+    return btn
   }
 
   func makeColorWell() -> NSColorWell {
@@ -240,12 +256,14 @@ fileprivate class SBaseView: WithSettingsLocalizationContext {
     return colorWell
   }
 
-  func makeInput(_ key: Preference.Key) -> SInput {
+  func makeInput(_ key: Preference.Key, isFixedSize: Bool = true) -> SInput {
     let input = SInput()
     input.translatesAutoresizingMaskIntoConstraints = false
     input.bezelStyle = .roundedBezel
     input.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-    input.size(width: 48, height: 25)
+    if isFixedSize {
+      input.size(width: 48, height: 25)
+    }
     return input
   }
 
@@ -487,5 +505,98 @@ fileprivate class SubtitlesEncodingView: SBaseView {
     Preference.set(sender.selectedItem!.representedObject!, for: .defaultEncoding)
     PlayerCore.active.setSubEncoding((sender.selectedItem?.representedObject as? String) ?? "auto")
     PlayerCore.active.reloadAllSubs()
+  }
+}
+
+
+fileprivate class AdvancedInput: SBaseView {
+  let inputField: NSTextField
+  
+  override init(l10n: SettingsLocalization.Context) {
+    self.inputField = NSTextField()
+    super.init(l10n: l10n)
+    
+    inputField.controlSize = .small
+    inputField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+    
+    let stackView = NSStackView(views: [inputField])
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(stackView)
+    stackView.padding(.top, .leading(SettingsSubListView.padding), .trailing(8), .bottom(8))
+  }
+}
+
+
+fileprivate class SubtitleSourceView: SBaseView {
+  var subSourceStackView: NSStackView!
+  let subSourcePopUpButton: NSPopUpButton
+  let loginIndicator: NSProgressIndicator
+  
+  override init(l10n: SettingsLocalization.Context) {
+    self.subSourcePopUpButton = NSPopUpButton()
+    subSourcePopUpButton.translatesAutoresizingMaskIntoConstraints = false
+    subSourcePopUpButton.bind(.selectedObject, to: UserDefaults.standard, withKeyPath: Preference.Key.onlineSubProvider.rawValue)
+    self.subSourceStackView = nil
+    self.loginIndicator = NSProgressIndicator()
+    loginIndicator.translatesAutoresizingMaskIntoConstraints = false
+    loginIndicator.style = .spinning
+    loginIndicator.isHidden = true
+    super.init(l10n: l10n)
+    
+    let descLabel = makeLabel(.text_SubtitleSource_desc).makeMultiLine()
+    
+    // don't add legacy opensub support (is the API still alive?)
+    let legacyOpenSubLabel = makeLabel(.text_LegacyOpenSubAlert).makeMultiLine()
+//    let openSubAccountName = makeLabel(.text_NotLoggedIn)
+//    let openSubLoginBtn = makeButton(.text_Login)
+//    let legacyOpenSubSettingsView = makeStackView([openSubLoginBtn, openSubAccountName, loginIndicator])
+    let legacyOpenSubView = makeStackView([legacyOpenSubLabel])
+    legacyOpenSubView.orientation = .vertical
+
+    let assrtHelpBtn = NSButton(title: "", target: self, action: #selector(assrtHelpBtnAction))
+    assrtHelpBtn.bezelStyle = .helpButton
+    let assrtLabel = makeLabel(.text_AssrtAPIToken, isSmall: false)
+    let assrtTokenField = makeInput(.assrtToken, isFixedSize: false)
+    let assrtView = makeStackView([assrtLabel, assrtTokenField, assrtHelpBtn])
+    
+    let pluginDescLabel = makeLabel(.text_SubtitleSourcePluginDesc).makeMultiLine()
+    
+    subSourceStackView = makeStackView([subSourcePopUpButton, descLabel, legacyOpenSubView, assrtView, pluginDescLabel])
+    subSourceStackView.orientation = .vertical
+    subSourcePopUpButton.padding(.horizontal)
+
+    view.addSubview(subSourceStackView)
+    subSourceStackView.padding(.top, .bottom(8), .leading(SettingsSubListView.padding), .trailing(8))
+    
+    subSourcePopUpButton.target = self
+    subSourcePopUpButton.action = #selector(refreshSubSourceAccessoryView)
+    
+    refreshSubSources()
+    refreshSubSourceAccessoryView()
+  }
+  
+  @objc private func assrtHelpBtnAction(_ sender: AnyObject) {
+    NSWorkspace.shared.open(URL(string: AppData.wikiLink.appending("/Download-Online-Subtitles#assrt"))!)
+  }
+
+  private func refreshSubSources() {
+    OnlineSubtitle.populateMenu(subSourcePopUpButton.menu!)
+    let provider = Preference.string(for: .onlineSubProvider)
+    let index = subSourcePopUpButton.menu!.items.firstIndex { $0.representedObject as? String == provider }
+    subSourcePopUpButton.selectItem(at: index ?? 0)
+  }
+
+  @objc private func refreshSubSourceAccessoryView() {
+    let map = [OnlineSubtitle.Providers.openSub.id: 2, OnlineSubtitle.Providers.assrt.id: 3]
+    let id = subSourcePopUpButton.selectedItem?.representedObject as? String ?? ""
+    let isSourceFromPlugin = !id.hasPrefix(":")
+    for (index, view) in subSourceStackView.views.enumerated() {
+      if index == 0 || index == 1 { continue }
+      if index == 4 {
+        subSourceStackView.setVisibilityPriority(isSourceFromPlugin ? .mustHold : .notVisible, for: view)
+      } else {
+        subSourceStackView.setVisibilityPriority(index == map[id] ? .mustHold : .notVisible, for: view)
+      }
+    }
   }
 }

@@ -389,6 +389,12 @@
 		E38BA1C0253E54F2000B551D /* JavascriptAPIGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BA1BF253E54F2000B551D /* JavascriptAPIGlobal.swift */; };
 		E38BA1C4254110BE000B551D /* JavascriptMessageHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BA1C3254110BD000B551D /* JavascriptMessageHub.swift */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
+		E38EA5902F2EE41600FB51CE /* SettingsPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA58F2F2EE40E00FB51CE /* SettingsPageNetwork.swift */; };
+		E38EA5952F2EE4E300FB51CE /* SettingsControlLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5912F2EE4E300FB51CE /* SettingsControlLocalizable.strings */; };
+		E38EA5962F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5942F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings */; };
+		E38EA5972F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5922F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift */; };
+		E38EA5982F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5932F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift */; };
+		E38EA59A2F2F35FB00FB51CE /* SettingsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5992F2F35F500FB51CE /* SettingsPageControl.swift */; };
 		E3958565253133E80096811F /* SidebarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958563253133E80096811F /* SidebarTabView.swift */; };
 		E3958566253133E80096811F /* SidebarTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3958564253133E80096811F /* SidebarTabView.xib */; };
 		E3958586253309C90096811F /* PluginSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958585253309C90096811F /* PluginSidebarView.swift */; };
@@ -1954,6 +1960,12 @@
 		E38BA1BF253E54F2000B551D /* JavascriptAPIGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIGlobal.swift; sourceTree = "<group>"; };
 		E38BA1C3254110BD000B551D /* JavascriptMessageHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptMessageHub.swift; sourceTree = "<group>"; };
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
+		E38EA58F2F2EE40E00FB51CE /* SettingsPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageNetwork.swift; sourceTree = "<group>"; };
+		E38EA5912F2EE4E300FB51CE /* SettingsControlLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsControlLocalizable.strings; sourceTree = "<group>"; };
+		E38EA5922F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysControl.swift; sourceTree = "<group>"; };
+		E38EA5932F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysNetwork.swift; sourceTree = "<group>"; };
+		E38EA5942F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsNetworkLocalizable.strings; sourceTree = "<group>"; };
+		E38EA5992F2F35F500FB51CE /* SettingsPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageControl.swift; sourceTree = "<group>"; };
 		E393669923BDD1850070D626 /* IINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IINA.entitlements; sourceTree = "<group>"; };
 		E3958563253133E80096811F /* SidebarTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTabView.swift; sourceTree = "<group>"; };
 		E3958564253133E80096811F /* SidebarTabView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTabView.xib; sourceTree = "<group>"; };
@@ -2774,11 +2786,15 @@
 				E33517552DFD261900BBE169 /* SettingsUILocalizable.strings */,
 				E335175C2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings */,
 				E36825542E022B28004E1E5F /* SettingsSubtitesLocalizable.strings */,
+				E38EA5942F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings */,
+				E38EA5912F2EE4E300FB51CE /* SettingsControlLocalizable.strings */,
 				E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */,
 				E34BC2A92C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift */,
 				E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */,
 				E335175F2DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift */,
 				E36825522E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift */,
+				E38EA5932F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift */,
+				E38EA5922F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift */,
 			);
 			name = Localization;
 			sourceTree = "<group>";
@@ -2828,6 +2844,8 @@
 				E33517512DFD206800BBE169 /* SettingsPageUI.swift */,
 				E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */,
 				E36825502E01169F004E1E5F /* SettingsPageSubtitles.swift */,
+				E38EA58F2F2EE40E00FB51CE /* SettingsPageNetwork.swift */,
+				E38EA5992F2F35F500FB51CE /* SettingsPageControl.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -3110,6 +3128,8 @@
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
 				E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */,
 				84996F901EC11CE6009A8A39 /* HistoryWindowController.xib in Resources */,
+				E38EA5952F2EE4E300FB51CE /* SettingsControlLocalizable.strings in Resources */,
+				E38EA5962F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings in Resources */,
 				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
 				E34BC2932C27BB6000A94680 /* SettingsGeneralLocalizable.strings in Resources */,
 				E335175E2DFFC78F00BBE169 /* SettingsVideoAudioLocalizable.strings in Resources */,
@@ -3247,6 +3267,8 @@
 				8492C2881E7721A600CE5825 /* ISO639Helper.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
+				E38EA5972F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift in Sources */,
+				E38EA5982F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift in Sources */,
 				E34BC28B2C27731700A94680 /* SettingsPageGeneral.swift in Sources */,
 				E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */,
 				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
@@ -3339,6 +3361,7 @@
 				E33517592DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift in Sources */,
 				51F7974728C7E00200812D0D /* Lock.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
+				E38EA5902F2EE41600FB51CE /* SettingsPageNetwork.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
 				E395858A253314400096811F /* JavascriptAPISidebarView.swift in Sources */,
 				E33BA5C4204315740069A0F6 /* AssrtSubtitle.swift in Sources */,
@@ -3353,6 +3376,7 @@
 				E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
 				E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */,
+				E38EA59A2F2F35FB00FB51CE /* SettingsPageControl.swift in Sources */,
 				847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */,
 				E3DC53982A28F0DC002A5A48 /* JavascriptAPIInput.swift in Sources */,
 				841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */,

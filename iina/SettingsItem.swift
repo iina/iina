@@ -56,6 +56,100 @@ struct SettingsItem {
       customView.padding(.all)
     }
   }
+  
+  class LongInput: Base {
+    let label: NSTextField
+    let textField: NSTextField
+    
+    var iconView: NSImageView!
+    var imageName: [String]?
+
+    var key: Preference.Key?
+    var hasDesc: Bool = false
+    var descKey: SettingsLocalization.Key?
+
+    init() {
+      self.label = NSTextField(labelWithString: "")
+      label.translatesAutoresizingMaskIntoConstraints = false
+      self.textField = NSTextField()
+      textField.translatesAutoresizingMaskIntoConstraints = false
+      iconView = NSImageView()
+      iconView.translatesAutoresizingMaskIntoConstraints = false
+
+      super.init(frame: NSRect())
+      self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    @MainActor required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+    
+    func bindTo(_ key: Preference.Key) -> Self {
+      self.key = key
+      return self
+    }
+    
+    public func image(name: [String]) -> Self {
+      self.imageName = name
+      return self
+    }
+
+    func controlSize(_ size: NSControl.ControlSize) -> Self {
+      self.controlSize = size
+      return self
+    }
+    
+    func hasDescription(content: SettingsLocalization.Key? = nil) -> Self {
+      self.hasDesc = true
+      self.descKey = content
+      return self
+    }
+
+    override func viewDidMoveToWindow() {
+      setControlSize(label)
+      setControlSize(textField)
+      
+      if let key = key {
+        label.stringValue = l10n.localized(.init("\(key.rawValue).label"))
+        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+      }
+      
+      let labelStackView = NSStackView(views: [iconView, label])
+      
+      if let imageName, let symbol = NSImage.findSFSymbol(imageName) {
+        iconView.image = symbol
+        iconView.size(width: 24, height: 20)
+      } else {
+        iconView.isHidden = true
+        label.padding(.leading(30))
+      }
+      
+      labelStackView.translatesAutoresizingMaskIntoConstraints = false
+      labelStackView.orientation = .horizontal
+      labelStackView.spacing = 6
+
+      let stackView = NSStackView(views: [labelStackView, textField])
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      stackView.orientation = .vertical
+      stackView.alignment = .leading
+      
+      if hasDesc {
+        let descKey =  descKey ?? .init("\(key!.rawValue).desc")
+        let descLabel = NSTextField(labelWithString: l10n.localized(descKey))
+        descLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
+        descLabel.textColor = .secondaryLabelColor
+        stackView.addArrangedSubview(descLabel)
+        descLabel.padding(.leading(30))
+      }
+      
+      self.addSubview(stackView)
+      
+      textField.padding(.leading(30), .trailing)
+      
+      stackView.padding(.leading(6), .trailing(8), .vertical(8))
+    }
+  }
+
 
   class General: Base {
     var detailView: NSView?
@@ -83,6 +177,7 @@ struct SettingsItem {
       case .small: return 8
       case .regular: return 12
       case .large: return 14
+      case .extraLarge: return 18
       @unknown default: return 8
       }
     }
@@ -180,8 +275,8 @@ struct SettingsItem {
 
       backgroundView.addSubview(labelStackView)
 
-      if hasDesc, let key = key {
-        let descText = l10n.localized(descKey ?? .init("\(key.rawValue).desc"))
+      if hasDesc {
+        let descText = l10n.localized(descKey ?? .init("\(key!.rawValue).desc"))
         desc = NSTextField(labelWithString: descText)
         desc.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         desc.textColor = .secondaryLabelColor
@@ -626,6 +721,7 @@ struct SettingsItem {
     private var trailingLabel: SettingsLocalization.Key?
     private var customBinding = false
     private var customBindingBlock: ((NSTextField) -> Void)?
+    private var isLongText = false
 
     private var cachedStepperValue: Double?
     private var stepper: NSStepper?
@@ -882,6 +978,71 @@ fileprivate class NonClickableButton: NSButton {
 
 
 class SettingsAccessory {
+  /// A Base class for customized controls.
+  class Base: WithSettingsLocalizationContext {
+    var l10n: SettingsLocalization.Context!
+    let view: NSView
+    lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
+
+    init(l10n: SettingsLocalization.Context) {
+      self.l10n = l10n
+      self.view = NSView()
+      self.view.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func makeLabel(_ key: SettingsLocalization.Key, isSmall: Bool = true) -> NSTextField {
+      let label = NSTextField(labelWithString: l10n.localized(key))
+      label.translatesAutoresizingMaskIntoConstraints = false
+      if isSmall {
+        label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+        label.textColor = .secondaryLabelColor
+      }
+      return label
+    }
+    
+    func makeButton(_ key: SettingsLocalization.Key) -> NSButton {
+      let btn = NSButton(title: l10n.localized(key), target: nil, action: nil)
+      btn.translatesAutoresizingMaskIntoConstraints = false
+      return btn
+    }
+
+    func makeColorWell() -> NSColorWell {
+      let colorWell = NSColorWell()
+      colorWell.translatesAutoresizingMaskIntoConstraints = false
+      if #available(macOS 13.0, *) {
+        colorWell.colorWellStyle = .expanded
+      }
+      colorWell.size(height: 24)
+      return colorWell
+    }
+
+    func makeInput(_ key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true) -> NSTextField {
+      let input = fixedAlignmentRect ? TextFieldWithFixedAlignmentRect() : NSTextField()
+      input.translatesAutoresizingMaskIntoConstraints = false
+      input.bezelStyle = .roundedBezel
+      input.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+      if isFixedSize {
+        input.size(width: 48, height: 25)
+      }
+      return input
+    }
+
+    func makeStackView(_ views: [NSView], orientation: NSUserInterfaceLayoutOrientation = .horizontal) -> NSStackView {
+      let stackView = NSStackView(views: views)
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      stackView.orientation = orientation
+      stackView.alignment = orientation == .horizontal ? .centerY : .centerX
+      stackView.spacing = 8
+      return stackView
+    }
+  }
+  
+  fileprivate class TextFieldWithFixedAlignmentRect: NSTextField {
+    override func frame(forAlignmentRect alignmentRect: NSRect) -> NSRect {
+      return alignmentRect
+    }
+  }
+  
   class Selection: NSView, WithSettingsLocalizationContext {
     var l10n: SettingsLocalization.Context!
 

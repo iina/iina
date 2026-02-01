@@ -25,6 +25,8 @@ class SettingsWindow: NSWindow {
     SettingsPageUI(),
     SettingsPageVideoAudio(),
     SettingsPageSubtitles(),
+    SettingsPageNetwork(),
+    SettingsPageControl(),
   ])
 
   let contentScrollView: NSScrollView

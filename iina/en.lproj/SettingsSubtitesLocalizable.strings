@@ -41,7 +41,7 @@
 /* key="4Tb-Yh-PdP" */
 "$Position" = "Position";
 /* key="7pf-Kb-TNr" */
-"$SubtitlesHavePriorityWhenFilename" = "Subtitles have priority when filename containing";
+"subAutoLoadPriorityString.label" = "Subtitles have priority when filename containing";
 /* key="9EP-XB-lyO" */
 "subSpacing.label" = "Font spacing";
 /* key="9N4-Zg-M7m" */
@@ -69,7 +69,7 @@
 /* key="Qda-dp-nhg" */
 "$TextSubtitles" = "Text Subtitles";
 /* key="QsS-wD-2hY" */
-"$AlsoSearchSubtitlesInFollowing" = "Also search subtitles in following directories";
+"subAutoLoadSearchPath.label" = "Also search subtitles in following directories";
 /* key="SIh-Sv-6XI" */
 "$Color" = "Color";
 /* key="Vbl-Im-3UI" */

@@ -122,6 +122,7 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     addBtn.target = self
     addBtn.action = #selector(addOptionAction)
     delBtn.image = NSImage(systemSymbolName: "minus", accessibilityDescription: nil)
+    delBtn.isEnabled = false
     delBtn.target = self
     delBtn.action = #selector(removeOptionAction)
 

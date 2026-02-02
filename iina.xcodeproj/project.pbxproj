@@ -401,6 +401,9 @@
 		E38EA5A22F30750500FB51CE /* SettingsPageAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A12F30750000FB51CE /* SettingsPageAdvanced.swift */; };
 		E38EA5A52F30762300FB51CE /* SettingsLocalizationKeysAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A42F30762300FB51CE /* SettingsLocalizationKeysAdvanced.swift */; };
 		E38EA5A62F30762300FB51CE /* SettingsAdvancedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5A32F30762300FB51CE /* SettingsAdvancedLocalizable.strings */; };
+		E38EA5A82F3087A600FB51CE /* SettingsPageUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A72F30879E00FB51CE /* SettingsPageUtilities.swift */; };
+		E38EA5AB2F3088F300FB51CE /* SettingsUtilsLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5AA2F3088F300FB51CE /* SettingsUtilsLocalizable.strings */; };
+		E38EA5AC2F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A92F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift */; };
 		E3958565253133E80096811F /* SidebarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958563253133E80096811F /* SidebarTabView.swift */; };
 		E3958566253133E80096811F /* SidebarTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3958564253133E80096811F /* SidebarTabView.xib */; };
 		E3958586253309C90096811F /* PluginSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958585253309C90096811F /* PluginSidebarView.swift */; };
@@ -1978,6 +1981,9 @@
 		E38EA5A12F30750000FB51CE /* SettingsPageAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageAdvanced.swift; sourceTree = "<group>"; };
 		E38EA5A32F30762300FB51CE /* SettingsAdvancedLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsAdvancedLocalizable.strings; sourceTree = "<group>"; };
 		E38EA5A42F30762300FB51CE /* SettingsLocalizationKeysAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysAdvanced.swift; sourceTree = "<group>"; };
+		E38EA5A72F30879E00FB51CE /* SettingsPageUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUtilities.swift; sourceTree = "<group>"; };
+		E38EA5A92F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysUtils.swift; sourceTree = "<group>"; };
+		E38EA5AA2F3088F300FB51CE /* SettingsUtilsLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsUtilsLocalizable.strings; sourceTree = "<group>"; };
 		E393669923BDD1850070D626 /* IINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IINA.entitlements; sourceTree = "<group>"; };
 		E3958563253133E80096811F /* SidebarTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTabView.swift; sourceTree = "<group>"; };
 		E3958564253133E80096811F /* SidebarTabView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTabView.xib; sourceTree = "<group>"; };
@@ -2802,6 +2808,7 @@
 				E38EA5912F2EE4E300FB51CE /* SettingsControlLocalizable.strings */,
 				E38EA59D2F3009EF00FB51CE /* SettingsKeyBindingLocalizable.strings */,
 				E38EA5A32F30762300FB51CE /* SettingsAdvancedLocalizable.strings */,
+				E38EA5AA2F3088F300FB51CE /* SettingsUtilsLocalizable.strings */,
 				E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */,
 				E34BC2A92C27C95800A94680 /* SettingsLocalizationKeysGeneral.swift */,
 				E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */,
@@ -2811,6 +2818,7 @@
 				E38EA5922F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift */,
 				E38EA59E2F3009EF00FB51CE /* SettingsLocalizationKeysKeyBinding.swift */,
 				E38EA5A42F30762300FB51CE /* SettingsLocalizationKeysAdvanced.swift */,
+				E38EA5A92F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift */,
 			);
 			name = Localization;
 			sourceTree = "<group>";
@@ -2864,6 +2872,7 @@
 				E38EA5992F2F35F500FB51CE /* SettingsPageControl.swift */,
 				E38EA59B2F30011000FB51CE /* SettingsPageKeyBindings.swift */,
 				E38EA5A12F30750000FB51CE /* SettingsPageAdvanced.swift */,
+				E38EA5A72F30879E00FB51CE /* SettingsPageUtilities.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -3138,6 +3147,7 @@
 				8400D5D21E1AB312006785F5 /* InspectorWindowController.xib in Resources */,
 				8400D5CC1E1AB2FF006785F5 /* PlaylistViewController.xib in Resources */,
 				E38EA5A62F30762300FB51CE /* SettingsAdvancedLocalizable.strings in Resources */,
+				E38EA5AB2F3088F300FB51CE /* SettingsUtilsLocalizable.strings in Resources */,
 				E36825562E022B28004E1E5F /* SettingsSubtitesLocalizable.strings in Resources */,
 				8400D5ED1E1AB33F006785F5 /* PrefAdvancedViewController.xib in Resources */,
 				8400D5CF1E1AB306006785F5 /* CropSettingsViewController.xib in Resources */,
@@ -3302,6 +3312,7 @@
 				519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */,
 				511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */,
 				E34BC2AC2C27DAE900A94680 /* SettingsHelper.swift in Sources */,
+				E38EA5AC2F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift in Sources */,
 				842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
@@ -3351,6 +3362,7 @@
 				5125117D2E89B2ED00CDAE9F /* Display.swift in Sources */,
 				E33FEEB52229A44F00B59711 /* JavascriptAPIUtils.swift in Sources */,
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
+				E38EA5A82F3087A600FB51CE /* SettingsPageUtilities.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
 				E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,

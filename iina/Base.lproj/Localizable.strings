@@ -332,6 +332,10 @@
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
 "alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
 
+"alert.cleared" = "Cleared.";
+"alert.restored" = "Restored.";
+"alert.custom" = "%@";
+
 "alert.nothing_to_open" = "Nothing to open.";
 
 "alert.no_video_track" = "There is no video track.";

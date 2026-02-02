@@ -29,6 +29,7 @@ class SettingsWindow: NSWindow {
     SettingsPageControl(),
     SettingsPageKeyBindings(),
     SettingsPageAdvanced(),
+    SettingsPageUtilities(),
   ])
 
   let contentScrollView: NSScrollView

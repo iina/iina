@@ -34,11 +34,14 @@ doc = File.open(xml_file) { |f| Nokogiri::XML(f) }
 
 # Find the <userDefaultsController> node
 ud_node = doc.at_xpath('//userDefaultsController')
-raise 'Could not find <userDefaultsController> node' unless ud_node
-ud_id = ud_node['id']
 
-# Find all nodes with a <connections> child containing one or more <binding> tags
-nodes = doc.xpath("//*[connections/binding[@destination='#{ud_id}']]")
+if ud_node
+  ud_id = ud_node['id']
+  # Find all nodes with a <connections> child containing one or more <binding> tags
+  nodes = doc.xpath("//*[connections/binding[@destination='#{ud_id}']]")
+else
+  nodes = []
+end
 
 res_dict = {}
 

@@ -10,7 +10,6 @@ extension SettingsLocalization.Key {
   static let text_Choose = SettingsLocalization.Key("$Choose")
   static let text_Value = SettingsLocalization.Key("$Value")
   static let logLevelLabel = SettingsLocalization.Key("logLevel.label")
-  static let text_ShowLogViewer = SettingsLocalization.Key("$ShowLogViewer")
   static let text_Logging = SettingsLocalization.Key("$Logging")
   static let text_MPVSettings = SettingsLocalization.Key("$MPVSettings")
 }

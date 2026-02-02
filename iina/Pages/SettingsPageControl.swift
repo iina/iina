@@ -56,6 +56,7 @@ class SettingsPageControl: SettingsPage {
           .bindTo(.middleClickAction, ofType: Preference.MouseClickAction.self)
         SettingsItem.Switch()
           .bindTo(.videoViewAcceptsFirstMouse)
+          .image(name: ["macwindow.and.pointer.arrow", "macwindow.and.cursorarrow"])
       }
       SettingsListView {
         SettingsItem.PopupButton()

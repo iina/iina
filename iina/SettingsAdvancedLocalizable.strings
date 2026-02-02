@@ -22,8 +22,8 @@
 "$Value" = "Value";
 /* key="nFf-vh-bNd" */
 "logLevel.label" = "Log level";
-/* key="Owx-92-Ogg" */
-"$ShowLogViewer" = "Show Log Viewer";
+/* */
+"logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
 /* key="S9M-yY-q0w" */
 "logLevel.items.0" = "Verbose";
 /* key="hGq-ek-VHd" */

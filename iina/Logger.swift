@@ -75,14 +75,20 @@ class Logger: NSObject {
     }
   }
 
-  enum Level: Int, Comparable, CustomStringConvertible {
+  enum Level: Int, Comparable, CustomStringConvertible, CaseIterable, InitializingFromKey {
+    init?(key: Preference.Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    static var defaultValue: Logger.Level = .debug
+    
     static func < (lhs: Level, rhs: Level) -> Bool {
       return lhs.rawValue < rhs.rawValue
     }
 
     static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
 
-    case verbose
+    case verbose = 0
     case debug
     case warning
     case error

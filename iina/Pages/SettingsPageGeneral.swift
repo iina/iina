@@ -9,7 +9,7 @@
 import Foundation
 
 class SettingsPageGeneral: SettingsPage {
-  private lazy var fileChooseView: FileChooserView = FileChooserView()
+  private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.screenshotFolder)
 
   override var title: String {
     return NSLocalizedString("preference.general", comment: "General")
@@ -174,28 +174,6 @@ class SettingsPageGeneral: SettingsPage {
           .image(name: "photo.on.rectangle.angled")
           .bindTo(.screenshotShowPreview)
       }
-    }
-  }
-}
-
-
-fileprivate class FileChooserView {
-  var textField: NSTextField
-  var chooseButton: NSButton
-
-  init() {
-    textField = NSTextField(labelWithString: "")
-    textField.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.screenshotFolder.rawValue)
-    chooseButton = NSButton()
-    chooseButton.image = .init(systemSymbolName: "folder.fill", accessibilityDescription: nil)!
-    chooseButton.target = self
-    chooseButton.action = #selector(chooseFolder)
-  }
-
-  @objc func chooseFolder(_ sender: AnyObject) {
-    Utility.quickOpenPanel(title: "Choose screenshot save path", chooseDir: true, sheetWindow: chooseButton.window) { url in
-      Preference.set(url.path, for: .screenshotFolder)
-      UserDefaults.standard.synchronize()
     }
   }
 }

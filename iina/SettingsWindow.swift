@@ -27,6 +27,8 @@ class SettingsWindow: NSWindow {
     SettingsPageSubtitles(),
     SettingsPageNetwork(),
     SettingsPageControl(),
+    SettingsPageKeyBindings(),
+    SettingsPageAdvanced(),
   ])
 
   let contentScrollView: NSScrollView
@@ -157,6 +159,11 @@ class SettingsWindow: NSWindow {
     sectionNames = content.allSubviews.compactMap {
       if let view = $0 as? SettingsListView { view.listTitle } else { nil }
     }
+    // if no section name, add the page name to avoid layout issues
+    if sectionNames.isEmpty {
+      sectionNames.append(page.title)
+    }
+    
     self.title = page.title
 
     DispatchQueue.main.async {
@@ -286,7 +293,7 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
       sectionStackView.spacing = 8
 
       let indicatorImage = NSImageView(image: .init(systemSymbolName: "circlebadge.fill", accessibilityDescription: nil)!)
-      indicatorImage.contentTintColor = .secondaryLabelColor
+      indicatorImage.contentTintColor = .init(white: 0.5, alpha: 1)
       indicatorImage.translatesAutoresizingMaskIntoConstraints = false
 
       let line = VerticalLine(frame: NSRect(x: 0, y: 0, width: 1, height: 40))

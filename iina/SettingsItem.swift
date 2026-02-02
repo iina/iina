@@ -260,7 +260,7 @@ struct SettingsItem {
         helpButton.title = ""
         helpButton.translatesAutoresizingMaskIntoConstraints = false
         helpButton.bezelStyle = .helpButton
-        helpButton.controlSize = .small
+        helpButton.controlSize = .mini
         helpButton.target = self
         helpButton.action = #selector(openHelpLink)
         labelWithHelpButtonStackView.addArrangedSubview(helpButton)
@@ -979,7 +979,7 @@ fileprivate class NonClickableButton: NSButton {
 
 class SettingsAccessory {
   /// A Base class for customized controls.
-  class Base: WithSettingsLocalizationContext {
+  class Base: NSObject, WithSettingsLocalizationContext {
     var l10n: SettingsLocalization.Context!
     let view: NSView
     lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
@@ -1203,6 +1203,29 @@ class SettingsAccessory {
       initBinding()
     }
   }
+ 
+  
+  class FileChooserView {
+    var textField: NSTextField
+    var chooseButton: NSButton
+
+    init(_ key: Preference.Key) {
+      textField = NSTextField(labelWithString: "")
+      textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+      chooseButton = NSButton()
+      chooseButton.image = .init(systemSymbolName: "folder.fill", accessibilityDescription: nil)!
+      chooseButton.target = self
+      chooseButton.action = #selector(chooseFolder)
+    }
+
+    @objc func chooseFolder(_ sender: AnyObject) {
+      Utility.quickOpenPanel(title: "Choose a path", chooseDir: true, sheetWindow: chooseButton.window) { url in
+        Preference.set(url.path, for: .screenshotFolder)
+        UserDefaults.standard.synchronize()
+      }
+    }
+  }
+
 
   class LanguageSelector: NSView, WithSettingsLocalizationContext {
     var l10n: SettingsLocalization.Context!

@@ -52,7 +52,6 @@ extension SettingsLocalization.Key {
   static let text_OverrideLevel = SettingsLocalization.Key("$OverrideLevel")
   static let text_Align = SettingsLocalization.Key("$Align")
   static let text_ASSSubtitles = SettingsLocalization.Key("$ASSSubtitles")
-  static let text_Choose = SettingsLocalization.Key("$Choose")
   static let text_Margin = SettingsLocalization.Key("$Margin")
   static let text_AutoLoad = SettingsLocalization.Key("$AutoLoad")
   static let text_Border = SettingsLocalization.Key("$Border")

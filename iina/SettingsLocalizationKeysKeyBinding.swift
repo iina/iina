@@ -1,0 +1,17 @@
+extension SettingsLocalization.Key {
+  static let useMediaKeysLabel = SettingsLocalization.Key("useMediaKeys.label")
+  static let displayKeyBindingRawValuesLabel = SettingsLocalization.Key("displayKeyBindingRawValues.label")
+  static let text_Action = SettingsLocalization.Key("$Action")
+  static let text_ImportAnExistingConfigFile = SettingsLocalization.Key("$ImportAnExistingConfigFile")
+  static let text_Key = SettingsLocalization.Key("$Key")
+  static let text_KeyBindingSet = SettingsLocalization.Key("$KeyBindingSet")
+  static let text_ShowTheConfigFileIn = SettingsLocalization.Key("$ShowTheConfigFileIn")
+  static let text_Duplicate = SettingsLocalization.Key("$Duplicate")
+  static let text_Settings = SettingsLocalization.Key("$Settings")
+  static let text_NewKeyBindingSet = SettingsLocalization.Key("$NewKeyBindingSet")
+  static let text_CreateAnEmptySet = SettingsLocalization.Key("$CreateAnEmptySet")
+  static let text_DuplicateCurrentSet = SettingsLocalization.Key("$DuplicateCurrentSet")
+  static let text_AddKeyMapping = SettingsLocalization.Key("$AddKeyMapping")
+  static let text_Edit = SettingsLocalization.Key("$Edit")
+  static let text_Delete = SettingsLocalization.Key("$Delete")
+}

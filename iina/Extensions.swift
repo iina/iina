@@ -298,7 +298,8 @@ extension Array {
 
 extension NSMenu {
   @discardableResult
-  func addItem(withTitle string: String, action selector: Selector? = nil, target: AnyObject? = nil,
+  func addItem(withTitle string: String, image: [String]? = nil,
+               action selector: Selector? = nil, target: AnyObject? = nil,
                tag: Int? = nil, obj: Any? = nil, stateOn: Bool = false, enabled: Bool = true) -> NSMenuItem {
     let menuItem = NSMenuItem(title: string, action: selector, keyEquivalent: "")
     menuItem.tag = tag ?? -1
@@ -306,6 +307,11 @@ extension NSMenu {
     menuItem.target = target
     menuItem.state = stateOn ? .on : .off
     menuItem.isEnabled = enabled
+    
+    if let image = image {
+      menuItem.image = NSImage.findSFSymbol(image)
+    }
+    
     self.addItem(menuItem)
     return menuItem
   }

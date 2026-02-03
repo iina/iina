@@ -97,8 +97,8 @@ class AboutWindowController: NSWindowController {
       break
     }
 
-    if let contrubutionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf") {
-      detailTextView.readRTFD(fromFile: contrubutionFile)
+    if let contributionFile = Bundle.main.path(forResource: "Contribution", ofType: "rtf") {
+      detailTextView.readRTFD(fromFile: contributionFile)
       detailTextView.textColor = NSColor.secondaryLabelColor
     }
 

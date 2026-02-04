@@ -15,7 +15,7 @@ jobs:
             deployment_target: ""
     runs-on:  macos-26
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install dependencies
         run: ./other/download_libs.sh
@@ -29,7 +29,7 @@ jobs:
         run: tar cvJf ~/iina.tar.xz -C /Users/runner/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/Nightly IINA.app 
 
       - name: Save artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: IINA
           path: ~/iina.tar.xz

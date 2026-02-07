@@ -808,4 +808,36 @@ return -1;\
 }
 #endif
 
+// MARK: - Extracting Lyrics
+
++ (NSString *)extractLyricsFromURL:(nonnull NSURL *)url
+{
+  AVFormatContext *pFormatCtx = NULL;
+
+  @try {
+    int ret = avformat_open_input(&pFormatCtx, url.fileSystemRepresentation, NULL, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to open file %@ when searching for lyrics: %s (%d)", url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    AVDictionary *metadata = pFormatCtx->metadata;
+    
+    AVDictionaryEntry *tag = av_dict_get(metadata, "lyrics", NULL, AV_DICT_IGNORE_SUFFIX);
+    if (tag && tag->value && strlen(tag->value) > 0) {
+      NSString *lyrics = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];
+      if (lyrics && lyrics.length > 0) {
+        LOG_DEBUG(@"Found lyrics in metadata tag '%s' for file: %@", tag->key, url);
+        return lyrics;
+      }
+    }
+
+    LOG_DEBUG(@"No lyrics found in metadata for file: %@", url);
+    return NULL;
+  }
+  @finally {
+    avformat_close_input(&pFormatCtx);
+  }
+}
+
 @end

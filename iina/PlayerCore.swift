@@ -204,6 +204,8 @@ class PlayerCore: NSObject {
     return controller
   }()
 
+  lazy var lyricsManager: LyricsManager = LyricsManager(player: self)
+
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
   var syncUITimer: Timer?
@@ -2042,6 +2044,9 @@ class PlayerCore: NSObject {
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         AppDelegate.shared.noteNewRecentDocumentURL(url)
       }
+      
+      // Auto-load lyrics if available
+      lyricsManager.autoLoadLyrics(for: url)
     }
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")

@@ -360,15 +360,14 @@ class MPVController: NSObject {
 
     setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat,
                   verboseIfDefault: true) { key in
-      let v = Preference.integer(for: key)
-      let format = Preference.ScreenshotFormat(rawValue: v)
+      let format: Preference.ScreenshotFormat = Preference.enum(for: key)
       // Workaround for mpv issue  #15107, HDR screenshots are unimplemented (gpu/gpu-next).
       // If the screenshot format is set to JPEG XL then set the screenshot-sw option to yes. This
       // causes the screenshot to be rendered by software instead of the VO. If a HDR video is being
       // displayed in HDR then the resulting screenshot will be HDR.
       self.chkErr(self.setOptionFlag(MPVOption.Screenshot.screenshotSw, format == .jxl,
                                      verboseIfDefault: true))
-      return format?.string
+      return String(describing: format)
     }
 
     setUserOption(PK.screenshotTemplate, type: .string,
@@ -410,8 +409,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.hardwareDecoder, type: .other, forName: MPVOption.Video.hwdec,
                   verboseIfDefault: true) { key in
-      let value = Preference.integer(for: key)
-      return Preference.HardwareDecoderOption(rawValue: value)?.mpvString ?? "auto"
+      return String(describing: Preference.enum(for: key) as Preference.HardwareDecoderOption)
     }
 
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang,
@@ -430,8 +428,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.replayGain, type: .other, forName: MPVOption.Audio.replaygain,
                   verboseIfDefault: true) { key in
-      let value = Preference.integer(for: key)
-      return Preference.ReplayGainOption(rawValue: value)?.mpvString ?? "no"
+      return String(describing: Preference.enum(for: key) as Preference.ReplayGainOption)
     }
     setUserOption(PK.replayGainPreamp, type: .float, forName: MPVOption.Audio.replaygainPreamp,
                   verboseIfDefault: true)
@@ -442,8 +439,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.gaplessAudio, type: .other, forName: MPVOption.Audio.gaplessAudio,
                   verboseIfDefault: true) { key in
-      let value = Preference.integer(for: key)
-      return Preference.GaplessAudioOption(rawValue: value)?.mpvString ?? "weak"
+      return String(describing: Preference.enum(for: key) as Preference.GaplessAudioOption)
     }
 
     // - Sub
@@ -454,7 +450,7 @@ class MPVController: NSObject {
     player.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
-      (Preference.enum(for: key) as Preference.SubOverrideLevel).string
+      String(describing: Preference.enum(for: key) as Preference.SubOverrideLevel)
     }
     setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssOverride,
                   verboseIfDefault: true, transformer: subOverrideHandler)
@@ -494,14 +490,12 @@ class MPVController: NSObject {
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX,
                   verboseIfDefault: true) { key in
-      let v = Preference.integer(for: key)
-      return Preference.SubAlign(rawValue: v)?.stringForX
+      return String(describing: Preference.enum(for: key) as Preference.SubAlignX)
     }
 
     setUserOption(PK.subAlignY, type: .other, forName: MPVOption.Subtitles.subAlignY,
                   verboseIfDefault: true) { key in
-      let v = Preference.integer(for: key)
-      return Preference.SubAlign(rawValue: v)?.stringForY
+      return String(describing: Preference.enum(for: key) as Preference.SubAlignY)
     }
 
     setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX,
@@ -542,8 +536,8 @@ class MPVController: NSObject {
 
     setUserOption(PK.transportRTSPThrough, type: .other, forName: MPVOption.Network.rtspTransport,
                   verboseIfDefault: true) { key in
-      let v: Preference.RTSPTransportation = Preference.enum(for: .transportRTSPThrough)
-      return v.string
+      return String(describing: Preference.enum(for: .transportRTSPThrough) as
+                    Preference.RTSPTransportation)
     }
 
     setUserOption(PK.ytdlEnabled, type: .other, forName: MPVOption.ProgramBehavior.ytdl,

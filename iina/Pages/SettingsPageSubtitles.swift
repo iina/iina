@@ -396,7 +396,8 @@ fileprivate class SubtitlesAlignView: SettingsAccessory.Base {
   }
 
   private func makePopUp(_ key: Preference.Key) -> NSPopUpButton {
-    let allValues = Preference.SubAlign.self.allCases.map { $0.rawValue }
+    let allValues = key == .subAlignX ? Preference.SubAlignX.self.allCases.map { $0.rawValue } :
+      Preference.SubAlignY.self.allCases.map { $0.rawValue }
     let popupButton = NSPopUpButton()
     popupButton.bezelStyle = .toolbar
 

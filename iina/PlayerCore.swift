@@ -1327,7 +1327,8 @@ class PlayerCore: NSObject {
   }
 
   func toggleHardwareDecoding(_ enable: Bool) {
-    let value = Preference.HardwareDecoderOption(rawValue: Preference.integer(for: .hardwareDecoder))?.mpvString ?? "auto"
+    let value = String(describing: Preference.enum(for: .hardwareDecoder) as
+                       Preference.HardwareDecoderOption)
     mpv.setString(MPVOption.Video.hwdec, enable ? value : "no")
   }
 
@@ -2554,7 +2555,7 @@ class PlayerCore: NSObject {
       }
     }
 
-    if Logger.enabled && Logger.Level.preferred >= .verbose {
+    if Logger.isEmitting(.verbose) {
       var summary = wasTimerRunning ? (useTimer ? "restarting" : "didStop") : (useTimer ? "starting" : "notNeeded")
       if summary != "notNeeded" {  // too many calls; try not to flood the log
         if useTimer {

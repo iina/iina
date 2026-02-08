@@ -233,6 +233,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     logBuildDetails()
     logPlatformDetails()
     logScreenDetails()
+    Preference.logSettings()
 
     Logger.log("App will launch")
 

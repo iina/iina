@@ -197,5 +197,14 @@ fileprivate extension Preference {
     init?(key: Preference.Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
+
+    var description: String {
+      switch self {
+      case .hourly: "hourly"
+      case .daily: "daily"
+      case .weekly: "weekly"
+      case .monthly: "monthly"
+      }
+    }
   }
 }

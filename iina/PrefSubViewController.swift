@@ -202,7 +202,7 @@ class ASSOverrideLevelTransformer: ValueTransformer {
   override func transformedValue(_ value: Any?) -> Any? {
     guard let num = value as? NSNumber,
           let level = Preference.SubOverrideLevel(rawValue: num.intValue) else { return nil }
-    return level.string
+    return String(describing: level)
   }
 }
 

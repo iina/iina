@@ -76,17 +76,18 @@ class Logger: NSObject {
   }
 
   enum Level: Int, Comparable, CustomStringConvertible, CaseIterable, InitializingFromKey {
-    init?(key: Preference.Key) {
-      self.init(rawValue: Preference.integer(for: key))
-    }
 
-    static var defaultValue: Logger.Level = .debug
-    
+    static var defaultValue = Level.debug
+
     static func < (lhs: Level, rhs: Level) -> Bool {
       return lhs.rawValue < rhs.rawValue
     }
 
     static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
+
+    init?(key: Preference.Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
 
     case verbose = 0
     case debug
@@ -94,6 +95,15 @@ class Logger: NSObject {
     case error
 
     var description: String {
+      switch self {
+      case .verbose: return "verbose"
+      case .debug: return "debug"
+      case .warning: return "warning"
+      case .error: return "error"
+      }
+    }
+
+    var shortForm: String {
       switch self {
       case .verbose: return "v"
       case .debug: return "d"
@@ -196,7 +206,17 @@ class Logger: NSObject {
   private static func formatMessage(_ message: String, _ level: Level, _ subsystem: Subsystem,
                                     _ appendNewlineAtTheEnd: Bool, _ date: Date = Date()) -> String {
     let time = dateFormatter.string(from: date)
-    return "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
+    return "\(time) [\(subsystem.rawValue)][\(level.shortForm)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
+  }
+
+  /// Whether the logger is emitting messages at the given level.
+  /// - Parameter level: The log level to check.
+  /// - Returns: `true` if messages at the given level will be emitted; `false` if the logger is suppressing messages at this level.
+  static func isEmitting(_ level: Level) -> Bool {
+    #if !DEBUG
+    guard enabled else { return  false }
+    #endif
+    return Level.preferred <= level
   }
 
   /// Log a message.

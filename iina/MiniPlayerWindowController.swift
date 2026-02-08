@@ -127,7 +127,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     controlView.alphaValue = 0
     
     // tool tips
-    togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.description()
+    togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.localizedDescription()
     toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
     volumeButton.toolTip = NSLocalizedString("mini_player.volume", comment: "volume")
     closeButtonVE.toolTip = NSLocalizedString("mini_player.close", comment: "close")

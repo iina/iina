@@ -211,7 +211,7 @@ class InitialWindowController: NSWindowController {
     recentDocuments = makeRecentDocumentsList()
     recentFilesTableView.reloadData()
 
-    if Logger.enabled && Logger.Level.preferred >= .verbose {
+    if Logger.isEmitting(.verbose) {
       let last = lastPlaybackURL.flatMap { $0.resolvingSymlinksInPath().path } ?? "<none>"
       Logger.log("InitialWindow.reloadData(): LastPlaybackURL: \(last)", level: .verbose)
 

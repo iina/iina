@@ -925,7 +925,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   override func mouseDown(with event: NSEvent) {
-    if Logger.enabled && Logger.Level.preferred >= .verbose {
+    if Logger.isEmitting(.verbose) {
       log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose)
     }
     workaroundCursorDefect()
@@ -972,7 +972,7 @@ class MainWindowController: PlayerWindowController {
           if mousePosRelatedToWindow.distance(to: event.locationInWindow) <= minimumInitialDragDistance {
             return
           }
-          if Logger.enabled && Logger.Level.preferred >= .verbose {
+          if Logger.isEmitting(.verbose) {
             log("MainWindow mouseDrag: minimum dragging distance was met", level: .verbose)
           }
           isDragging = true
@@ -984,7 +984,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   override func mouseUp(with event: NSEvent) {
-    if Logger.enabled && Logger.Level.preferred >= .verbose {
+    if Logger.isEmitting(.verbose) {
       log("MainWindow mouseUp @ \(event.locationInWindow), isDragging: \(isDragging), isResizingSidebar: \(isResizingSidebar), clickCount: \(event.clickCount)",
                  level: .verbose)
     }

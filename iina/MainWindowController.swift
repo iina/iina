@@ -260,7 +260,7 @@ class MainWindowController: PlayerWindowController {
       case .animating(let toFullScreen, let legacy, let frame):
         if toFullScreen {
           self = .fullscreen(legacy: legacy, priorWindowedFrame: frame)
-        } else{
+        } else {
           self = .windowed
         }
       }
@@ -1338,7 +1338,20 @@ class MainWindowController: PlayerWindowController {
     NSMenu.setMenuBarVisible(true)
   }
 
+  /// The window is about to enter full screen mode.
+  ///
+  /// The `NSWindowDelegate` method
+  /// [windowWillEnterFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowwillenterfullscreen(_:))
+  /// is called after the AppKit
+  /// [toggleFullScreen](https://developer.apple.com/documentation/appkit/nswindow/togglefullscreen(_:))
+  /// method has been called when the window is not in full screen mode. Prepare the window to start transitioning to full screen mode.
+  /// - Attention: After altering this method you _must_ update the
+  ///     [windowDidFailToEnterFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidfailtoenterfullscreen(_:))
+  ///     method which is responsible for reverting changes made by this method should the transition to full screen mode fail.
+  /// - Parameter notification: A notification named
+  ///     [willEnterFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/willenterfullscreennotification).
   func windowWillEnterFullScreen(_ notification: Notification) {
+    log("Entering full screen mode")
     // When playback is paused the display link is stopped in order to avoid wasting energy on
     // needless processing. It must be running while transitioning to full screen mode.
     videoView.displayActive()
@@ -1373,7 +1386,15 @@ class MainWindowController: PlayerWindowController {
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
   }
 
+  /// The window has entered full screen mode.
+  ///
+  /// The `NSWindowDelegate` method
+  /// [windowDidEnterFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidenterfullscreen(_:))
+  /// is called after the transition into full screen mode has finished. Finish configuring the window for full screen mode.
+  /// - Parameter notification: A notification named
+  ///     [didEnterFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/didenterfullscreennotification).
   func windowDidEnterFullScreen(_ notification: Notification) {
+    log("Entered full screen mode")
     fsState.finishAnimating()
 
     titleTextField?.alphaValue = 1
@@ -1416,7 +1437,60 @@ class MainWindowController: PlayerWindowController {
     player.events.emit(.windowFullscreenChanged, data: true)
   }
 
+  /// Called if the window failed to enter full screen mode.
+  ///
+  /// The AppKit [toggleFullScreen](https://developer.apple.com/documentation/appkit/nswindow/togglefullscreen(_:))
+  /// method can fail. If that happens while transitioning into full screen mode the `NWWindowDelegate` method
+  /// [windowDidFailToEnterFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidfailtoenterfullscreen(_:))
+  /// is called. When this happens the changes made by `windowWillEnterFullScreen` must be reverted.
+  /// - Parameter window: The window that failed to enter to full screen mode.
+  func windowDidFailToEnterFullScreen(_ window: NSWindow) {
+    log("AppKit failed to enter full screen mode! Restoring previous windowed state", level: .warning)
+    guard case .animating(let toFullscreen, let legacy, let priorWindowedFrame) = fsState,
+            toFullscreen, !legacy else {
+      // Must not occur! Represents an error in IINA or AppKit.
+      log("Unable to restore windowed state: \(fsState)", level: .error)
+      return
+    }
+
+    // Reset the full screen state to indicate exiting full screen mode so that finishAnimating
+    // will correctly set the state to windowed.
+    fsState = .animating(toFullscreen: false, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
+    fsState.finishAnimating()
+
+    if oscPosition == .top {
+      oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTop
+      titleBarHeightConstraint.constant = TitleBarHeightWithOSC
+    } else {
+      addBackTitlebarViewToFadeableViews()
+    }
+    addBackStandardButtonsToFadeableViews()
+    titleBarView.isHidden = false
+    titleTextField?.alphaValue = 1
+    window.addTitlebarAccessoryViewController(titlebarAccessoryViewController)
+
+    if player.info.state == .playing {
+      setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
+    }
+
+    videoView.needsLayout = true
+    videoView.layoutSubtreeIfNeeded()
+    forceDraw("failed to enter full screen mode")
+  }
+
+  /// The window is about to exit full screen mode.
+  ///
+  /// The `NSWindowDelegate` method [windowWillExitFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowwillexitfullscreen(_:))
+  /// is called after the AppKit
+  /// [toggleFullScreen](https://developer.apple.com/documentation/appkit/nswindow/togglefullscreen(_:))
+  /// method has been called when the window is in full screen mode. Prepare the window to start transitioning to windowed mode.
+  /// - Attention: After altering this method you _must_ update the
+  ///     [windowDidFailToExitFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidfailtoexitfullscreen(_:))
+  ///     method which is responsible for reverting changes made by this method should the transition to wndowed mode fail.
+  /// - Parameter notification: A notification named
+  ///     [willExitFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/willexitfullscreennotification).
   func windowWillExitFullScreen(_ notification: Notification) {
+    log("Exiting full screen mode")
     // When playback is paused the display link is stopped in order to avoid wasting energy on
     // needless processing. It must be running while transitioning from full screen mode.
     videoView.displayActive()
@@ -1442,7 +1516,36 @@ class MainWindowController: PlayerWindowController {
     fsState.startAnimatingToWindow()
   }
 
+  /// The window has left full screen mode.
+  ///
+  /// The `NSWindowDelegate` method
+  /// [windowDidExitFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidexitfullscreen(_:))
+  /// is called after the transition to windowed mode initiated by calling
+  /// [toggleFullScreen](https://developer.apple.com/documentation/appkit/nswindow/togglefullscreen(_:))
+  /// completes. Finish configuring IINA for windowed mode.
+  /// - Important: The following unexpected sequence of calls from AppKit has been encountered:
+  ///     - windowWillExitFullScreen
+  ///     - windowDidFailToExitFullScreen
+  ///     - windowDidExitFullScreen
+  ///
+  ///     As this AppKit behavior is very hard to trigger it is not entirely clear why is happening. The working assumption is that this
+  ///     occurs when the app starts to terminate after failing to exit full screen mode. See issue
+  ///     [#5368](https://github.com/iina/iina/issues/5368) for more details.
+  /// - Parameter notification: A notification named
+  ///     [didExitFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/didexitfullscreennotification).
   func windowDidExitFullScreen(_ notification: Notification) {
+    log("Exited full screen mode")
+
+    if fsState.isFullscreen {
+      // IINA should not be in full screen mode at this point. The fsState should indicate IINA is
+      // animating to the windowed state. This happens when AppKit calls windowDidExitFullScreen
+      // after having called windowDidFailToExitFullScreen. As we think this is triggered when the
+      // app starts terminating we only change fsState to indicate IINA was animating to windowed
+      // mode. If this is not done the call to finishAnimating below will trigger a fatal error.
+      log("AppKit exited full screen mode without informing IINA", level: .warning)
+      fsState.startAnimatingToWindow()
+    }
+
     if Preference.bool(for: PK.disableAnimations) {
       // When animation is not used exiting full screen does not restore the previous size of the
       // window. Restore it now.
@@ -1498,6 +1601,42 @@ class MainWindowController: PlayerWindowController {
     player.events.emit(.windowFullscreenChanged, data: false)
   }
 
+  /// Called if the window failed to exit full screen mode.
+  ///
+  /// The AppKit [toggleFullScreen](https://developer.apple.com/documentation/appkit/nswindow/togglefullscreen(_:))
+  /// method can fail. If that happens while transitioning out of full screen mode the `NWWindowDelegate` method
+  /// [windowDidFailToExitFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidfailtoexitfullscreen(_:))
+  /// is called. When this happens the changes made by `windowWillExitFullScreen` must be reverted.
+  /// - Parameter window: The window that failed to exit to full screen mode.
+  func windowDidFailToExitFullScreen(_ window: NSWindow) {
+    log("AppKit failed to exit full screen mode! Restoring full screen state", level: .error)
+    guard case .animating(let toFullscreen, let legacy, let priorWindowedFrame) = fsState,
+            !toFullscreen, !legacy else {
+      // Must not occur! Represents an error in IINA or AppKit.
+      log("Unable to restore full screen state: \(fsState)", level: .error)
+      return
+    }
+
+    // Reset the full screen state to indicate entering full screen mode so that finishAnimating
+    // will correctly set the state to  full screen mode.
+    fsState = .animating(toFullscreen: true, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
+    fsState.finishAnimating()
+
+    if oscPosition == .top {
+      oscTopMainViewTopConstraint.constant = OSCTopMainViewMarginTopInFullScreen
+      titleBarHeightConstraint.constant = TitleBarHeightWithOSCInFullScreen
+    }
+
+    if Preference.bool(for: .displayTimeAndBatteryInFullScreen) {
+      fadeableViews.append(additionalInfoView)
+    }
+    updateAdditionalInfo()
+
+    videoView.needsLayout = true
+    videoView.layoutSubtreeIfNeeded()
+    forceDraw("failed to exit full screen mode")
+  }
+
   func toggleWindowFullScreen() {
     guard let window = self.window else { fatalError("make sure the window exists before animating") }
 
@@ -1505,22 +1644,32 @@ class MainWindowController: PlayerWindowController {
     case .windowed:
       guard !player.isInMiniPlayer else { return }
       if Preference.bool(for: .useLegacyFullScreen) {
+        log("Will enter legacy full screen mode")
         self.legacyAnimateToFullscreen()
       } else {
+        log("Requesting AppKit enter full screen mode")
         window.toggleFullScreen(self)
       }
     case let .fullscreen(legacy, oldFrame):
       if legacy {
+        log("Will exit legacy full screen mode")
         self.legacyAnimateToWindowed(framePriorToBeingInFullscreen: oldFrame)
       } else {
+        log("Requesting AppKit exit full screen mode")
         window.toggleFullScreen(self)
       }
-    default:
-      return
+    case let .animating(toFullscreen, legacy, _):
+      let legacyAppKit = legacy ? "IINA" : "AppKit"
+      let enteringExiting = toFullscreen ? "entering" : "exiting"
+      log("""
+        \(legacyAppKit) is currently \(enteringExiting) full screen mode, \
+        ignoring request to toggle full screen mode
+        """)
     }
   }
 
   private func restoreDockSettings() {
+    log("Restoring dock settings")
     NSApp.presentationOptions.remove(.autoHideMenuBar)
     NSApp.presentationOptions.remove(.autoHideDock)
   }

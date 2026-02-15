@@ -116,3 +116,31 @@ IINA is always looking for contributions, whether it's through bug reports, code
 * If you're looking to contribute code, please read [CONTRIBUTING.md](CONTRIBUTING.md) — it has information on IINA's process for handling contributions, and tips on how the code is structured to make your work easier.
 
 * If you'd like to translate IINA to your language, please visit [IINA's instance of Crowdin](https://translate.iina.io/). You can create an account for free and start translating. Please do not send a pull request to this repo directly, Crowdin will automatically sync new translations with our repo. If you want to translate IINA into a new language that is currently not on the list, feel free to open an issue.
+
+## IINA Plugins List
+
+### Official Plugins
+- **Online Media** (`iina/plugin-online-media`) - Enhances online streaming and downloading.
+- **OpenSubtitles** (`iina/plugin-opensub`) - Search and download subtitles.
+- **User Scripts** (`iina/plugin-userscript`) - Run custom JavaScript snippets.
+- **More Seeking** (`iina/plugin-more-seeking`) - Advanced seeking controls.
+
+### Community Plugins
+- **Jellyfin** (`mhajder/iina-jellyfin`) - Browse and play media from Jellyfin servers.
+- **Danmaku** (`xjbeta/iina-plugin-danmaku`) - Overlay comments/danmaku on video.
+- **Bookmarks** (`wyattowalsh/iina-plugin-bookmarks`) - Save and manage video timestamps.
+- **Clickable Subtitles** (`kerim/iina-clickable-subtitles`) - Click subtitles to define words (macOS Look Up).
+- **Jump to Frame** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
+- **recorder** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
+- **Multiple Clips** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
+
+> 💡 **Want to build your own plugin?**
+> 
+> Explore the existing plugins listed here to learn how they work. If you create a new plugin or improve an existing one, feel free to contribute back by adding it to this list via a pull request.
+
+> 🚀 **Interested in creating an IINA plugin?**
+> 
+> Start by exploring the existing plugins here to understand patterns and best practices. Once you’ve built your own plugin, please contribute back by adding it to this README so others can discover and use it.
+
+
+

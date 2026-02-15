@@ -1306,7 +1306,7 @@ class PlayerCore: NSObject {
       if code < 0 {
         self.log("Unsupported video: \(url.path)", level: .error)
         DispatchQueue.main.async {
-          Utility.showAlert("unsupported_audio")
+          Utility.showAlert("unsupported_video")
         }
       }
     }

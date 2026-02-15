@@ -333,6 +333,8 @@ struct Preference {
     static let upnpAutoPlayNext = Key("upnpAutoPlayNext")
     static let upnpBrowserBehavior = Key("upnpBrowserBehavior") // 0: close, 1: keep open, 2: reopen on end
     static let upnpPlaybackContext = Key("upnpPlaybackContext") // Store current playback context
+    static let upnpAutoRefreshEnabled = Key("upnpAutoRefreshEnabled") // Auto-refresh current folder
+    static let upnpAutoRefreshInterval = Key("upnpAutoRefreshInterval") // Refresh interval in seconds
 
     /// Workaround for issue [#4688](https://github.com/iina/iina/issues/4688)
     /// - Note: This workaround can cause significant slowdown at startup if the list of recent documents contains files on a mounted
@@ -1035,6 +1037,8 @@ struct Preference {
     .upnpAutoPlayNext: true,
     .upnpBrowserBehavior: 1, // 0: close, 1: keep open, 2: reopen on end
     .upnpPlaybackContext: Data(),
+    .upnpAutoRefreshEnabled: true, // Auto-refresh enabled by default
+    .upnpAutoRefreshInterval: 30, // Refresh every 30 seconds
 
     .enableRecentDocumentsWorkaround: false,
     .recentDocuments: [Any](),

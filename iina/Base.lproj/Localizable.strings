@@ -463,3 +463,34 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
+
+// UPnP/DLNA Browser
+"upnp.browser.title" = "UPnP/DLNA Browser";
+"upnp.browser.device_list" = "UPnP/DLNA Device List";
+"upnp.browser.favorites" = "Favorites";
+"upnp.browser.status.discovering" = "Discovering devices…";
+"upnp.browser.status.found" = "Found %d devices";
+"upnp.browser.status.browsing" = "Browsing content…";
+"upnp.browser.status.items" = "Found %d items";
+"upnp.browser.status.error" = "Error: ";
+"upnp.browser.status.no_content" = "Device does not support content browsing";
+"upnp.browser.menu.play" = "Play";
+"upnp.browser.menu.select_all" = "Select All";
+"upnp.browser.menu.expand_all" = "Expand All";
+"upnp.browser.menu.collapse_all" = "Collapse All";
+"upnp.browser.menu.add_favorite" = "Add to Favorites";
+"upnp.browser.menu.remove_favorite" = "Remove from Favorites";
+"upnp.browser.menu.columns" = "Columns";
+"upnp.browser.column.title" = "Title";
+"upnp.browser.column.duration" = "Duration";
+"upnp.browser.column.date" = "Date";
+"upnp.browser.column.author" = "Author";
+"upnp.browser.column.description" = "Description";
+"upnp.browser.column.size" = "File Size";
+"upnp.browser.column.type" = "Type";
+"upnp.browser.status.loading" = "Loading…";
+"upnp.browser.status.error_item" = "Error";
+"preference.upnp.browser_behavior" = "UPnP/DLNA Browser:";
+"preference.upnp.browser_behavior.close" = "Close browser when playing";
+"preference.upnp.browser_behavior.keep_open" = "Keep browser open";
+"preference.upnp.browser_behavior.reopen" = "Reopen browser when playback ends";

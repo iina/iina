@@ -490,20 +490,101 @@ class UPnPManager {
     }
     
     var duration: String?
-    if let durRange = xml.range(of: #"duration="([^"]+)""#, options: .regularExpression) {
-      let durMatch = String(xml[durRange])
-      duration = durMatch.replacingOccurrences(of: "duration=\"", with: "").replacingOccurrences(of: "\"", with: "")
+    // Try to find duration in <res> tag attributes first
+    if let resRange = xml.range(of: #"<res[^>]*>"#, options: .regularExpression) {
+      let resTag = String(xml[resRange])
+      if let durRange = resTag.range(of: #"duration="([^"]+)""#, options: .regularExpression) {
+        let durMatch = String(resTag[durRange])
+        duration = durMatch.replacingOccurrences(of: "duration=\"", with: "").replacingOccurrences(of: "\"", with: "")
+      }
+    }
+    // Also check for duration in item metadata
+    if duration == nil {
+      if let durRange = xml.range(of: #"duration="([^"]+)""#, options: .regularExpression) {
+        let durMatch = String(xml[durRange])
+        duration = durMatch.replacingOccurrences(of: "duration=\"", with: "").replacingOccurrences(of: "\"", with: "")
+      }
+    }
+    // Also check for upnp:duration tag
+    if duration == nil {
+      if let durRange = xml.range(of: #"<upnp:duration>(.*?)</upnp:duration>"#, options: .regularExpression) {
+        let durMatch = String(xml[durRange])
+        duration = durMatch.replacingOccurrences(of: "<upnp:duration>", with: "")
+          .replacingOccurrences(of: "</upnp:duration>", with: "")
+          .trimmingCharacters(in: .whitespaces)
+      }
+    }
+    
+    // Extract additional metadata
+    var album: String?
+    if let albumRange = xml.range(of: #"<upnp:album>(.*?)</upnp:album>"#, options: .regularExpression) {
+      let albumMatch = String(xml[albumRange])
+      album = albumMatch.replacingOccurrences(of: "<upnp:album>", with: "")
+        .replacingOccurrences(of: "</upnp:album>", with: "")
+        .trimmingCharacters(in: .whitespaces)
+    }
+    
+    var genre: String?
+    if let genreRange = xml.range(of: #"<upnp:genre>(.*?)</upnp:genre>"#, options: .regularExpression) {
+      let genreMatch = String(xml[genreRange])
+      genre = genreMatch.replacingOccurrences(of: "<upnp:genre>", with: "")
+        .replacingOccurrences(of: "</upnp:genre>", with: "")
+        .trimmingCharacters(in: .whitespaces)
+    }
+    
+    var date: String?
+    if let dateRange = xml.range(of: #"<dc:date>(.*?)</dc:date>"#, options: .regularExpression) {
+      let dateMatch = String(xml[dateRange])
+      date = dateMatch.replacingOccurrences(of: "<dc:date>", with: "")
+        .replacingOccurrences(of: "</dc:date>", with: "")
+        .trimmingCharacters(in: .whitespaces)
+    }
+    
+    var author: String?
+    if let authorRange = xml.range(of: #"<dc:creator>(.*?)</dc:creator>"#, options: .regularExpression) {
+      let authorMatch = String(xml[authorRange])
+      author = authorMatch.replacingOccurrences(of: "<dc:creator>", with: "")
+        .replacingOccurrences(of: "</dc:creator>", with: "")
+        .trimmingCharacters(in: .whitespaces)
+    }
+    
+    var description: String?
+    if let descRange = xml.range(of: #"<dc:description>(.*?)</dc:description>"#, options: .regularExpression) {
+      let descMatch = String(xml[descRange])
+      description = descMatch.replacingOccurrences(of: "<dc:description>", with: "")
+        .replacingOccurrences(of: "</dc:description>", with: "")
+        .trimmingCharacters(in: .whitespaces)
+    }
+    
+    var size: Int64?
+    if let sizeRange = xml.range(of: #"size="([^"]+)""#, options: .regularExpression) {
+      let sizeMatch = String(xml[sizeRange])
+      let sizeStr = sizeMatch.replacingOccurrences(of: "size=\"", with: "").replacingOccurrences(of: "\"", with: "")
+      size = Int64(sizeStr)
+    }
+    
+    var mimeType: String?
+    if let mimeRange = xml.range(of: #"protocolInfo="([^"]+)""#, options: .regularExpression) {
+      let mimeMatch = String(xml[mimeRange])
+      // Extract MIME type from protocolInfo (format: http-get:*:video/mp4:...)
+      let parts = mimeMatch.components(separatedBy: ":")
+      if parts.count >= 3 {
+        mimeType = parts[2]
+      }
     }
     
     let metadata = UPnPItem.ItemMetadata(
       artist: artist,
-      album: nil,
-      genre: nil,
+      album: album,
+      genre: genre,
       duration: duration,
-      size: nil,
-      mimeType: nil,
+      size: size,
+      mimeType: mimeType,
       resolution: nil,
-      bitrate: nil
+      bitrate: nil,
+      date: date,
+      author: author,
+      description: description
     )
     
     return UPnPItem(
@@ -547,7 +628,10 @@ class UPnPManager {
       size: nil,
       mimeType: nil,
       resolution: nil,
-      bitrate: nil
+      bitrate: nil,
+      date: nil,
+      author: nil,
+      description: nil
     )
     
     return UPnPItem(

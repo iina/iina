@@ -31,6 +31,9 @@ struct UPnPItem: Identifiable, Hashable {
     let mimeType: String?
     let resolution: String? // e.g., "1920x1080"
     let bitrate: Int? // kbps
+    let date: String? // Date string (various formats)
+    let author: String? // Creator/author
+    let description: String? // Description
   }
   
   var isPlayable: Bool {
@@ -46,6 +49,56 @@ struct UPnPItem: Identifiable, Hashable {
     guard let duration = metadata.duration else { return nil }
     // Parse ISO 8601 duration (PT1H23M45S) to readable format
     return parseISODuration(duration)
+  }
+  
+  /// Format file size for display
+  var formattedSize: String? {
+    guard let size = metadata.size else { return nil }
+    return formatBytes(size)
+  }
+  
+  /// Format date for display
+  var formattedDate: String? {
+    guard let dateStr = metadata.date else { return nil }
+    // Try to parse and format the date
+    // Try common date formats used by UPnP servers and present as a short, clean date (no time).
+    let isoFormatter = ISO8601DateFormatter()
+    if let date = isoFormatter.date(from: dateStr) {
+      let displayFormatter = DateFormatter()
+      displayFormatter.dateStyle = .short
+      displayFormatter.timeStyle = .none
+      return displayFormatter.string(from: date)
+    }
+    
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    
+    // yyyy-MM-dd
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    if let date = dateFormatter.date(from: dateStr) {
+      let displayFormatter = DateFormatter()
+      displayFormatter.dateStyle = .short
+      displayFormatter.timeStyle = .none
+      return displayFormatter.string(from: date)
+    }
+    
+    // yyyy-MM-dd HH:mm:ss
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    if let date = dateFormatter.date(from: dateStr) {
+      let displayFormatter = DateFormatter()
+      displayFormatter.dateStyle = .short
+      displayFormatter.timeStyle = .none
+      return displayFormatter.string(from: date)
+    }
+    
+    return dateStr // Return as-is if can't parse
+  }
+  
+  private func formatBytes(_ bytes: Int64) -> String {
+    let formatter = ByteCountFormatter()
+    formatter.allowedUnits = [.useKB, .useMB, .useGB, .useTB]
+    formatter.countStyle = .file
+    return formatter.string(fromByteCount: bytes)
   }
   
   private func parseISODuration(_ iso: String) -> String {

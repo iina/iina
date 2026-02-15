@@ -906,6 +906,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         if query.name.hasPrefix("mpv_") {
           let mpvOptionName = String(query.name.dropFirst(4))
           guard let mpvOptionValue = query.value else { continue }
+          guard Self.allowedMPVOptionsFromURL.contains(mpvOptionName) else {
+            Logger.log("Ignoring disallowed mpv option from URL scheme: \(mpvOptionName)", level: .warning)
+            continue
+          }
           Logger.log("Setting \(mpvOptionName) to \(mpvOptionValue)")
           player.mpv.setString(mpvOptionName, mpvOptionValue)
         }
@@ -914,6 +918,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Logger.log("Finished URL scheme handling")
     }
   }
+
+  private static let allowedMPVOptionsFromURL: Set<String> = [
+    "speed", "pause", "loop", "loop-file", "loop-playlist",
+    "ab-loop-a", "ab-loop-b", "ab-loop-count",
+    "volume", "mute", "audio-delay", "audio-device",
+    "audio-channels", "replaygain", "replaygain-preamp", "gapless-audio",
+    "sub-delay", "secondary-sub-delay", "sub-scale", "sub-pos", "secondary-sub-pos",
+    "sub-visibility", "secondary-sub-visibility",
+    "sub-font", "sub-font-size", "sub-color", "sub-back-color",
+    "sub-border-color", "sub-border-size",
+    "sub-shadow-color", "sub-shadow-offset",
+    "sub-margin-x", "sub-margin-y", "sub-align-x", "sub-align-y",
+    "sub-bold", "sub-italic", "sub-blur", "sub-spacing",
+    "sub-codepage", "sub-ass-override", "secondary-sub-ass-override",
+    "sub-ass-hinting", "sub-ass-line-spacing", "sub-ass-shaper", "sub-auto",
+    "vid", "aid", "sid", "secondary-sid", "alang", "slang", "vlang",
+    "deinterlace", "video-rotate", "video-aspect-override",
+    "panscan", "video-zoom", "video-scale-x", "video-scale-y",
+    "video-align-x", "video-align-y",
+    "fullscreen", "ontop", "window-scale", "keep-open", "geometry", "autofit",
+    "brightness", "contrast", "saturation", "gamma", "hue",
+  ]
 
   // MARK: - Menu actions
 

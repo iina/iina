@@ -657,18 +657,25 @@ class UPnPBrowserWindowController: NSWindowController {
     playSelectedItem()
   }
   
-  /// Prepare a player for UPnP playback by resetting speed and clearing stale watch-later data.
-  /// This prevents playback speed and resume position from leaking between different UPnP files.
+  /// Prepare a player for UPnP playback by disabling watch-later resume and resetting speed.
+  /// mpv's watch-later files store `speed` and `start` position. DLNA servers may redirect URLs
+  /// or reuse object IDs, so the watch-later hash may not match the original URL we have.
+  /// The only reliable approach is to disable `resume-playback` entirely for UPnP files.
   private func preparePlayerForUPnPPlayback(_ player: PlayerCore, url: URL, title: String) {
+    // Disable resume-playback BEFORE loadfile so mpv won't read any watch-later file.
+    // This prevents stale speed, volume, and position from being restored.
+    // (Will be re-enabled in handleFileLoaded after the file starts playing.)
+    player.mpv.setFlag(MPVOption.WatchLater.resumePlayback, false)
+    Logger.log("Disabled resume-playback for UPnP file load", subsystem: subsystem)
+    
     // Reset speed to 1x to prevent speed carrying over from a previous file
-    // (mpv's speed property persists across loadfile calls on the same player instance)
+    // on the same player instance (mpv's speed property persists across loadfile calls)
     player.mpv.setDouble(MPVOption.PlaybackControl.speed, 1.0)
     Logger.log("Reset playback speed to 1.0 for UPnP file", subsystem: subsystem)
     
-    // Delete any existing watch-later file for this URL to prevent resuming from a
-    // stale position. DLNA servers may reuse URLs for different content over time
-    // (e.g., "latest episode" at a stable URL), causing mpv to resume from the
-    // position of a completely different file that happened to share the same URL.
+    // Best-effort: delete any existing watch-later file for this URL.
+    // This may not match if the server redirected to a different URL, but it cleans up
+    // the common case where the URL is stable.
     let urlString = url.absoluteString
     let md5 = urlString.md5
     let watchLaterFile = Utility.watchLaterURL.appendingPathComponent(md5)
@@ -1019,8 +1026,25 @@ class UPnPBrowserWindowController: NSWindowController {
     }
   }
   
-  /// Handle file loaded - restart auto-play monitor if we're auto-playing
+  /// Handle file loaded - reset UPnP playback state and restart auto-play monitor
   @objc private func handleFileLoaded(_ notification: Notification) {
+    // Check if we're in a UPnP playback context
+    if currentPlaybackContext != nil || loadPlaybackContext() != nil {
+      let player = PlayerCore.lastActive
+      
+      // Force speed back to 1.0 AFTER file loads. This is the safety net that catches
+      // speed restored from watch-later (which happens during loadfile, after our
+      // pre-load reset). This runs after mpv's file-loaded event, so it overrides
+      // any watch-later restored speed.
+      player.mpv.setDouble(MPVOption.PlaybackControl.speed, 1.0)
+      Logger.log("Post-load: reset speed to 1.0 for UPnP file", subsystem: subsystem)
+      
+      // Restore resume-playback to user's preference (was disabled in preparePlayerForUPnPPlayback)
+      let resumeEnabled = Preference.bool(for: .resumeLastPosition)
+      player.mpv.setFlag(MPVOption.WatchLater.resumePlayback, resumeEnabled)
+      Logger.log("Post-load: restored resume-playback to \(resumeEnabled)", subsystem: subsystem)
+    }
+    
     // If we're auto-playing, restart the monitor for the new file
     if isAutoPlayingNext {
       Logger.log("File loaded during auto-play - restarting auto-play monitor", subsystem: subsystem)

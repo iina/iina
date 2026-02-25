@@ -768,6 +768,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       return
     }
 
+    // Remove com.apple.quarantine xattr from local files so macOS Gatekeeper does not
+    // show a "Verifying..." dialog on every subsequent "Open With" invocation.
+    // When a file is opened via drag-and-drop, Launch Services is bypassed and the
+    // quarantine check never fires. Via "Open With", Launch Services re-checks the
+    // xattr on every open if it has not been cleared. Stripping it here ensures the
+    // dialog only appears at most once — on the very first open — when macOS itself
+    // triggers the initial Gatekeeper scan before calling this callback.
+    for filename in pendingFilesForOpenFile {
+      removexattr((filename as NSString).fileSystemRepresentation, "com.apple.quarantine", 0)
+    }
+
     // open pending files
     pendingFilesForOpenFile.removeAll()
     if PlayerCore.openURLs(urls) == 0 {

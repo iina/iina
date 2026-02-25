@@ -133,6 +133,7 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **Jump to Frame** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
 - **recorder** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 - **Multiple Clips** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
+- **A-Z Loop** (`micro-JAY/iina-az-loop`) - Create multiple loop regions per video, save them for later, and jump between them instantly with keyboard shortcuts.
 
 > 💡 **Want to build your own plugin?**
 > 

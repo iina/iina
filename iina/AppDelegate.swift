@@ -1279,31 +1279,72 @@ class RemoteCommandController {
   func enable() {
     guard RemoteCommandController.useSystemMediaControl, !isEnabled else { return }
     let remoteCommand = MPRemoteCommandCenter.shared()
+
+    // For each command, apply a configured keybinding or fallback to default values.
     remoteCommand.playCommand.addTarget { _ in
-      PlayerCore.lastActive.resume()
+      if let action = PlayerCore.keyBindings["PLAY"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.resume()
+      }
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      PlayerCore.lastActive.pause()
+      if let action = PlayerCore.keyBindings["PAUSE"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.pause()
+      }
       return .success
     }
     remoteCommand.togglePlayPauseCommand.addTarget { _ in
-      let command = PlayerCore.keyBindings["PLAYPAUSE"]
-      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
+      if let action = PlayerCore.keyBindings["PLAYPAUSE"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.togglePause()
+      }
       return .success
     }
     remoteCommand.stopCommand.addTarget { _ in
-      PlayerCore.lastActive.stop()
+      if let action = PlayerCore.keyBindings["STOP"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.stop()
+      }
       return .success
     }
     remoteCommand.nextTrackCommand.addTarget { _ in
-      let command = PlayerCore.keyBindings["NEXT"]
-      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
+      if let action = PlayerCore.keyBindings["NEXT"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
+      }
       return .success
     }
     remoteCommand.previousTrackCommand.addTarget { _ in
-      let command = PlayerCore.keyBindings["PREV"]
-      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
+      if let action = PlayerCore.keyBindings["PREV"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
+      }
+      return .success
+    }
+    remoteCommand.skipForwardCommand.preferredIntervals = [15]
+    remoteCommand.skipForwardCommand.addTarget { event in
+      if let action = PlayerCore.keyBindings["FORWARD"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.seek(relativeSecond: (event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      }
+      return .success
+    }
+    remoteCommand.skipBackwardCommand.preferredIntervals = [15]
+    remoteCommand.skipBackwardCommand.addTarget { event in
+      if let action = PlayerCore.keyBindings["REWIND"]?.rawAction {
+        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      } else {
+        PlayerCore.lastActive.seek(relativeSecond: -(event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      }
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in
@@ -1313,16 +1354,6 @@ class RemoteCommandController {
     remoteCommand.changePlaybackRateCommand.supportedPlaybackRates = [0.5, 1, 1.5, 2]
     remoteCommand.changePlaybackRateCommand.addTarget { event in
       PlayerCore.lastActive.setSpeed(Double((event as! MPChangePlaybackRateCommandEvent).playbackRate))
-      return .success
-    }
-    remoteCommand.skipForwardCommand.preferredIntervals = [15]
-    remoteCommand.skipForwardCommand.addTarget { event in
-      PlayerCore.lastActive.seek(relativeSecond: (event as! MPSkipIntervalCommandEvent).interval, option: .exact)
-      return .success
-    }
-    remoteCommand.skipBackwardCommand.preferredIntervals = [15]
-    remoteCommand.skipBackwardCommand.addTarget { event in
-      PlayerCore.lastActive.seek(relativeSecond: -(event as! MPSkipIntervalCommandEvent).interval, option: .exact)
       return .success
     }
     remoteCommand.changePlaybackPositionCommand.addTarget { event in

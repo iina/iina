@@ -131,6 +131,7 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **Bookmarks** (`wyattowalsh/iina-plugin-bookmarks`) - Save and manage video timestamps.
 - **Clickable Subtitles** (`kerim/iina-clickable-subtitles`) - Click subtitles to define words (macOS Look Up).
 - **Jump to Frame** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
+- **PolyScript** (`SammoMichael/polyplugin-release`) - Dual subtitles, hover dictionary, and AI-assisted translation for language learning.
 - **recorder** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 - **Multiple Clips** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
 
@@ -141,6 +142,5 @@ IINA is always looking for contributions, whether it's through bug reports, code
 > 🚀 **Interested in creating an IINA plugin?**
 > 
 > Start by exploring the existing plugins here to understand patterns and best practices. Once you’ve built your own plugin, please contribute back by adding it to this README so others can discover and use it.
-
 
 

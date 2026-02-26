@@ -1280,17 +1280,16 @@ class RemoteCommandController {
     guard RemoteCommandController.useSystemMediaControl, !isEnabled else { return }
     let remoteCommand = MPRemoteCommandCenter.shared()
     remoteCommand.playCommand.addTarget { _ in
-      let command = PlayerCore.keyBindings["PLAY"]
-      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
+      PlayerCore.lastActive.resume()
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      let command = PlayerCore.keyBindings["PAUSE"]
-      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
+      PlayerCore.lastActive.pause()
       return .success
     }
     remoteCommand.togglePlayPauseCommand.addTarget { _ in
-      PlayerCore.lastActive.togglePause()
+      let command = PlayerCore.keyBindings["PLAYPAUSE"]
+      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
       return .success
     }
     remoteCommand.stopCommand.addTarget { _ in

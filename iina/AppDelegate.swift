@@ -1280,11 +1280,13 @@ class RemoteCommandController {
     guard RemoteCommandController.useSystemMediaControl, !isEnabled else { return }
     let remoteCommand = MPRemoteCommandCenter.shared()
     remoteCommand.playCommand.addTarget { _ in
-      PlayerCore.lastActive.resume()
+      let command = PlayerCore.keyBindings["PLAY"]
+      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      PlayerCore.lastActive.pause()
+      let command = PlayerCore.keyBindings["PAUSE"]
+      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
       return .success
     }
     remoteCommand.togglePlayPauseCommand.addTarget { _ in
@@ -1296,11 +1298,13 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.nextTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
+      let command = PlayerCore.keyBindings["NEXT"]
+      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
       return .success
     }
     remoteCommand.previousTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
+      let command = PlayerCore.keyBindings["PREV"]
+      _ = PlayerCore.lastActive.mpv.command(rawString: command!.rawAction)
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in

@@ -1282,48 +1282,48 @@ class RemoteCommandController {
 
     // For each command, apply a configured keybinding or fallback to default values.
     remoteCommand.playCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PLAY"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["PLAY"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.resume()
       }
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PAUSE"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["PAUSE"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.pause()
       }
       return .success
     }
     remoteCommand.togglePlayPauseCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PLAYPAUSE"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["PLAYPAUSE"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.togglePause()
       }
       return .success
     }
     remoteCommand.stopCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["STOP"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["STOP"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.stop()
       }
       return .success
     }
     remoteCommand.nextTrackCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["NEXT"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["NEXT"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
       }
       return .success
     }
     remoteCommand.previousTrackCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PREV"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["PREV"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
       }
@@ -1331,8 +1331,8 @@ class RemoteCommandController {
     }
     remoteCommand.skipForwardCommand.preferredIntervals = [15]
     remoteCommand.skipForwardCommand.addTarget { event in
-      if let action = PlayerCore.keyBindings["FORWARD"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["FORWARD"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.seek(relativeSecond: (event as! MPSkipIntervalCommandEvent).interval, option: .exact)
       }
@@ -1340,8 +1340,8 @@ class RemoteCommandController {
     }
     remoteCommand.skipBackwardCommand.preferredIntervals = [15]
     remoteCommand.skipBackwardCommand.addTarget { event in
-      if let action = PlayerCore.keyBindings["REWIND"]?.rawAction {
-        _ = PlayerCore.lastActive.mpv.command(rawString: action)
+      if let action = PlayerCore.keyBindings["REWIND"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.seek(relativeSecond: -(event as! MPSkipIntervalCommandEvent).interval, option: .exact)
       }

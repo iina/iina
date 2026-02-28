@@ -133,6 +133,7 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **Jump to Frame** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
 - **recorder** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 - **Multiple Clips** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
+- **File Viewer** (`qktechies/iina-plugin-file-viewer`) - bookmark folders, browse directory contents, and play video files directly within IINA.
 
 > 💡 **Want to build your own plugin?**
 > 

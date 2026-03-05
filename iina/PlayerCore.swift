@@ -2493,6 +2493,39 @@ class PlayerCore: NSObject {
     }
   }
 
+  /// Synchronize the video position cached in the `info.videoPosition` property.
+  ///
+  /// This method updates the `PlaybackInfo.videoPosition` property.  If the video is being streamed `videoDuration` will
+  /// also be updated.
+  /// - Important: When the end of a video file is reached mpv does not update the value of the property
+  ///     [time-pos](https://mpv.io/manual/stable/#command-interface-time-pos), leaving it reflecting the position
+  ///     of the last frame of the video. This is especially noticeable if the onscreen controller time labels are configured to show
+  ///     milliseconds. Due to this behavior of the `time-pos` property, this method checks to see of the end of the video has been
+  ///     reached and if so, sets `videoPosition` to match `videoDuration`.
+  private func syncPosition() {
+    if info.isNetworkResource {
+      info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
+    }
+    let eofReached = mpv.getFlag(MPVProperty.eofReached)
+    if eofReached, let duration = info.videoDuration?.second {
+      info.videoPosition?.second = duration
+    } else {
+      info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
+    }
+    info.constrainVideoPosition()
+  }
+
+  /// Synchronize the cached video position if the timer that updates the cache is not running.
+  ///
+  /// When portions of the UI that need the video position are visible (OSC, OSD), `syncUITimer` keeps the
+  /// `info.videoPosition` property synchronized with mpv. Code outside of the UI needs to call this method before accessing
+  /// the position to ensure the cache is up to date when the timer is not running..
+  func syncPositionIfNeeded() {
+    if let syncUITimer, syncUITimer.isValid { return }
+    guard info.state.active else { return }
+    syncPosition()
+  }
+
   // difficult to use option set
   enum SyncUIOption {
     case time
@@ -2523,20 +2556,7 @@ class PlayerCore: NSObject {
 
     case .time:
       let isNetworkStream = info.isNetworkResource
-      if isNetworkStream {
-        info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
-      }
-      // When the end of a video file is reached mpv does not update the value of the property
-      // time-pos, leaving it reflecting the position of the last frame of the video. This is
-      // especially noticeable if the onscreen controller time labels are configured to show
-      // milliseconds. Adjust the position if the end of the file has been reached.
-      let eofReached = mpv.getFlag(MPVProperty.eofReached)
-      if eofReached, let duration = info.videoDuration?.second {
-        info.videoPosition?.second = duration
-      } else {
-        info.videoPosition?.second = mpv.getDouble(MPVProperty.timePos)
-      }
-      info.constrainVideoPosition()
+      syncPosition()
       info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
         mpv.getDouble(MPVProperty.playtimeRemainingFull) :
         mpv.getDouble(MPVProperty.timeRemainingFull)

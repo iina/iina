@@ -320,8 +320,11 @@ fileprivate class StatusAPI: JavascriptAPI, CoreSubAPIExportable {
     case "idle":
       return player!.info.state == .idle
     case "position":
+      player!.syncPositionIfNeeded()
       return player!.info.videoPosition?.second ?? NSNull()
     case "duration":
+      // When streaming the duration changes. Syncing the position will also update the duration.
+      player!.syncPositionIfNeeded()
       return player!.info.videoDuration?.second ?? NSNull()
     case "speed":
       return player!.info.playSpeed

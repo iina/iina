@@ -166,6 +166,7 @@ class NowPlayingInfoManager {
       info[MPNowPlayingInfoPropertyChapterNumber] = player.info.chapter
     }
 
+    player.syncPositionIfNeeded()
     let duration = player.info.videoDuration?.second ?? 0
     let time = player.info.videoPosition?.second ?? 0
 

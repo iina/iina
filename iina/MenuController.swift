@@ -441,7 +441,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateChapterList() {
     chapterMenu.removeAllItems()
-    let info = PlayerCore.active.info
+    let player = PlayerCore.active
+    let info = player.info
     let chapters = info.chapters
     let padder = { (time: String) -> String in
       let standard = (chapters.last?.time.stringRepresentation ?? "").reversed()
@@ -449,6 +450,7 @@ class MenuController: NSObject, NSMenuDelegate {
         $0 == ":" ? ":" : "0"
       }).reversed())
     }
+    player.syncPositionIfNeeded()
     for (index, chapter) in chapters.enumerated() {
       let menuTitle = "\(padder(chapter.time.stringRepresentation)) – \(chapter.title)"
       let nextChapterTime = chapters[at: index+1]?.time ?? Constants.Time.infinite

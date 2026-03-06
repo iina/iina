@@ -1280,7 +1280,7 @@ class RemoteCommandController {
   ///
   /// IINA allows the user to bind a mpv command to the `FORWARD` and `REWIND` media keys. This method must:
   /// - Determine if there is a key binding for the given key and if not return the default of 15 seconds
-  /// - Determine if the key is bound to an IINA command and if so return an empy array indicating the property is not applicable
+  /// - Determine if the key is bound to an IINA command and if so return an empty array indicating the property is not applicable
   /// - Determine if the key is bound to the mpv
   ///     [seek](https://mpv.io/manual/stable/#command-interface-seek-%3Ctarget%3E-[%3Cflags%3E]) command
   ///     and if not, return an empty array
@@ -1301,23 +1301,23 @@ class RemoteCommandController {
     guard !keyBinding.isIINACommand else { return [] }
     let action = keyBinding.action
     guard action.count > 1, action[0] == MPVCommand.seek.rawValue else { return [] }
-    guard let target = Int(action[1]) else {
+    guard let target = Double(action[1]) else {
       log("""
-          Unable to parse seek target as an Integer in key binding:
+          Unable to parse seek target as a Double in key binding:
               \(key) \(keyBinding.rawAction)
           """, level: .error)
       return []
     }
     if action.count > 2 {
-      let validFlags: Set<String> = ["exact", "keyframes", "relative"]
+      let allowedFlags: Set<String> = ["exact", "keyframes", "relative"]
       // Multiple flags can be composed using `+`, and each one must be valid
       let flags = action[2].split(separator: "+")
 
-      guard flags.allSatisfy({ validFlags.contains(String($0)) }) else {
+      guard flags.allSatisfy({ allowedFlags.contains(String($0)) }) else {
         log("""
-            Unable to parse seek flag as one of "exact", "keyframes", or "relative":
+            Seek flag was not one of \(allowedFlags.map({ "'\($0)'" }).joined(separator: ", ")), not setting seek interval:
                 \(key) \(keyBinding.rawAction)
-            """, level: .error)
+            """
         return []
       }
     }
@@ -1450,15 +1450,18 @@ class RemoteCommandController {
       guard isEnabled else { return }
       // The user has modified the key bindings, possibly changing the mpv commands associated with
       // the FORWARD and REWIND media keys. The preferredIntervals values are set based on the mpv
-      // commands assigned to those keys. When expanded the macOS Now Playing module may display
-      // the interval in the seek backward and seek forward buttons. The user may have changed the
-      // number of seconds to seek causing the value displayed in the Now Playing module buttons to
-      // to be out of date. Merely updating the preferredIntervals values is insufficient to get the
-      // Now Playing module to update its buttons. Support for media keys and remote commands must
-      // be disabled and then re-enabled in a separate task.
+      // commands assigned to those keys. The Now Playing module may display the interval in the
+      // seek backward and seek forward buttons causing the value displayed in the Now Playing
+      // module buttons to to be out of date. Merely updating the preferredIntervals values is
+      // insufficient to get the Now Playing module to update its buttons. Support for media keys
+      // and remote commands must be disabled and then re-enabled.
       log("Restarting support for remote commands due to changes to key bindings")
       disable()
-      DispatchQueue.main.async { self.enable() }
+      // Immediately re-enabling media keys and remote commands only partially worked. The Now
+      // Playing module would update buttons if the module was expanded, but the buttons shown in
+      // the module's small form would still display the old interval. Work around this curious
+      // Now Playing behavior by delaying the re-enabling.
+      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { self.enable() }
     }
   }
 }

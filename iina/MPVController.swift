@@ -579,6 +579,10 @@ class MPVController: NSObject {
       }
     }
 
+    // Force mpv window creation. Required to render subtitles/OSD even for audio-only scenarios (e.g. mp3).
+    // Must be set BEFORE mpv_initialize(), since mpv_set_option_string only works pre-init.
+    chkErr(setOptionString(MPVOption.Window.forceWindow, "yes", level: .verbose))
+
     // Set user defined options.
     if Preference.bool(for: .enableAdvancedSettings) {
       if let userOptions = Preference.value(for: .userOptions) as? [[String]] {

@@ -51,9 +51,61 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   @IBOutlet weak var defaultAlbumArt: NSView!
   @IBOutlet weak var togglePlaylistButton: NSButton!
   @IBOutlet weak var toggleAlbumArtButton: NSButton!
-  
+
   var isPlaylistVisible = false
   var isVideoVisible = true
+
+  /// Native subtitle text overlay for audio-only files in music mode.
+  /// Positioned at the bottom of the video wrapper view, on top of the album art.
+  lazy var subtitleLabel: NSTextField = {
+    let label = NSTextField(wrappingLabelWithString: "")
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.isEditable = false
+    label.isSelectable = false
+    label.isBezeled = false
+    label.drawsBackground = false
+    label.textColor = .white
+    label.font = NSFont.systemFont(ofSize: 20, weight: .medium)
+    label.alignment = .center
+    label.maximumNumberOfLines = 0
+    label.lineBreakMode = .byWordWrapping
+    label.cell?.truncatesLastVisibleLine = true
+    // Add shadow for readability over album art
+    let shadow = NSShadow()
+    shadow.shadowColor = NSColor.black.withAlphaComponent(0.9)
+    shadow.shadowBlurRadius = 4
+    shadow.shadowOffset = NSSize(width: 0, height: -1)
+    label.shadow = shadow
+    label.isHidden = true
+    return label
+  }()
+
+  /// Work item to hide the subtitle smoothly to prevent blinking during seeks
+  private var hideSubtitleWorkItem: DispatchWorkItem?
+
+  func updateSubtitleLabel(with text: String) {
+    if text.isEmpty {
+      // If already hidden, or already waiting to hide, do nothing.
+      if subtitleLabel.isHidden || hideSubtitleWorkItem != nil {
+        return
+      }
+
+      // Delay hiding to prevent blinking during seeks where subText is temporarily empty
+      let workItem = DispatchWorkItem { [weak self] in
+        self?.subtitleLabel.isHidden = true
+        self?.subtitleLabel.stringValue = ""
+        self?.hideSubtitleWorkItem = nil
+      }
+      hideSubtitleWorkItem = workItem
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: workItem)
+    } else {
+      hideSubtitleWorkItem?.cancel()
+      hideSubtitleWorkItem = nil
+
+      subtitleLabel.stringValue = text
+      subtitleLabel.isHidden = false
+    }
+  }
 
   var videoViewAspectConstraint: NSLayoutConstraint?
 
@@ -121,7 +173,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     closeButtonBackgroundViewBox.isHidden = true
     closeButtonView.alphaValue = 0
     controlView.alphaValue = 0
-    
+
     // tool tips
     togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.description()
     toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
@@ -134,6 +186,14 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
     volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
     volumePopover.delegate = self
+
+    // Set up native subtitle overlay (on top of album art)
+    videoWrapperView.addSubview(subtitleLabel)
+    NSLayoutConstraint.activate([
+      subtitleLabel.leadingAnchor.constraint(equalTo: videoWrapperView.leadingAnchor, constant: 12),
+      subtitleLabel.trailingAnchor.constraint(equalTo: videoWrapperView.trailingAnchor, constant: -12),
+      subtitleLabel.bottomAnchor.constraint(equalTo: videoWrapperView.bottomAnchor, constant: -8)
+    ])
   }
 
   // MARK: - Mouse / Trackpad events
@@ -271,7 +331,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   override func handleVideoSizeChange() {
     guard let window = window else { return }
     let w = player.info.displayWidth, h = player.info.displayHeight
-    let (width, height) = (w == 0 && h == 0) ? (1, 1) :  player.videoSizeForDisplay
+
+    // For audio-only files (no real video tracks), we want to keep 1:1 aspect
+    // even if a synthetic lavfi-complex track added a video.
+    let hasRealVideoTrack = player.info.videoTracks.contains { !$0.isAlbumart }
+    let isAudioOnly = player.info.videoTracks.isEmpty || !hasRealVideoTrack
+
+    let (width, height) = (w == 0 && h == 0) || isAudioOnly ? (1, 1) :  player.videoSizeForDisplay
     let aspect = CGFloat(width) / CGFloat(height)
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect

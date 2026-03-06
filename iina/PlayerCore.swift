@@ -85,7 +85,7 @@ class PlayerCore: NSObject {
     let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
     return useNew ? newPlayerCore : active
   }
-  
+
   /**
    Depending on the `alwaysOpenInNewWindow` pref, opens the URLs in a single window, or multiple windows.
 
@@ -178,10 +178,10 @@ class PlayerCore: NSObject {
   private var backgroundTaskInUse = false
 
   var initialWindow: InitialWindowController!
-  
+
   var mainWindow: MainWindowController!
   var miniPlayer: MiniPlayerWindowController!
-  
+
   var currentController: PlayerWindowController {
     return isInMiniPlayer ? miniPlayer : mainWindow
   }
@@ -723,12 +723,17 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    // if received video size before switching to music mode, hide default album art
+    // For audio-only files (no real video tracks), we want to keep the album art
+    // and use 1:1 aspect even if a synthetic lavfi-complex track added a video.
+    let hasRealVideoTrack = info.videoTracks.contains { !$0.isAlbumart }
+    let isAudioOnly = info.videoTracks.isEmpty || !hasRealVideoTrack
+
     let width, height: Int
-    if info.vid != 0 {
+    if info.vid != 0 && !isAudioOnly {
       miniPlayer.defaultAlbumArt.isHidden = true
       (width, height) = videoSizeForDisplay
     } else {
+      miniPlayer.defaultAlbumArt.isHidden = false
       (width, height) = (1, 1)
     }
 
@@ -2196,7 +2201,7 @@ class PlayerCore: NSObject {
     // restart even while paused. See issue #5337.
     syncUI(.time)
     reloadSavedIINAfilters()
-    
+
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
     // We can't put this in MPV_EVENT_VIDEO_RECONFIG because it can be emitted with the old video's size
     // after switching to a new video.
@@ -2298,6 +2303,21 @@ class PlayerCore: NSObject {
         switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
       }
     }
+
+    // For audio-only files with subtitles:
+    // Inject lavfi-complex to create a synthetic continuous video track for mpv rendering.
+    // This keeps the internal mpv render clock active, preventing UI freezes
+    // (time, progress bar, subtitles) regardless of whether we are in the main window
+    // or the mini player. (In mini player, we simply cover this video with the album art).
+    if audioStatus == .isAudio && !info.subTracks.isEmpty {
+      let currentLavfi = mpv.getString(MPVOption.Miscellaneous.lavfiComplex) ?? ""
+      if currentLavfi.isEmpty {
+        let filter = "color=c=black:s=640x360:r=1[vo]"
+        mpv.setString(MPVOption.Miscellaneous.lavfiComplex, filter)
+        log("Injected lavfi-complex for audio subtitle rendering: \(filter)")
+      }
+    }
+
     postNotification(.iinaTracklistChanged)
   }
 
@@ -2506,7 +2526,7 @@ class PlayerCore: NSObject {
   @objc func syncUITime() {
     syncUI(.time)
   }
-  
+
   func syncUI(_ options: [SyncUIOption]) {
     for option in options {
       syncUI(option)
@@ -2556,6 +2576,11 @@ class PlayerCore: NSObject {
         }
         if isNetworkStream {
           self.mainWindow.updateNetworkState()
+        }
+        // Update native subtitle overlay in mini player for audio-only files
+        if self.isInMiniPlayer && self.currentMediaIsAudio == .isAudio {
+          let subText = self.mpv.getString(MPVProperty.subText) ?? ""
+          self.miniPlayer.updateSubtitleLabel(with: subText)
         }
       }
 

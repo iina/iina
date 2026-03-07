@@ -85,7 +85,7 @@ class PlayerCore: NSObject {
     let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
     return useNew ? newPlayerCore : active
   }
-  
+
   /**
    Depending on the `alwaysOpenInNewWindow` pref, opens the URLs in a single window, or multiple windows.
 
@@ -178,10 +178,10 @@ class PlayerCore: NSObject {
   private var backgroundTaskInUse = false
 
   var initialWindow: InitialWindowController!
-  
+
   var mainWindow: MainWindowController!
   var miniPlayer: MiniPlayerWindowController!
-  
+
   var currentController: PlayerWindowController {
     return isInMiniPlayer ? miniPlayer : mainWindow
   }
@@ -2196,7 +2196,7 @@ class PlayerCore: NSObject {
     // restart even while paused. See issue #5337.
     syncUI(.time)
     reloadSavedIINAfilters()
-    
+
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
     // We can't put this in MPV_EVENT_VIDEO_RECONFIG because it can be emitted with the old video's size
     // after switching to a new video.
@@ -2466,13 +2466,19 @@ class PlayerCore: NSObject {
 
     // Timer will start
 
-    syncUITimer = Timer.scheduledTimer(
+    let timer = Timer(
       timeInterval: timeInterval,
       target: self,
       selector: #selector(self.syncUITime),
       userInfo: nil,
       repeats: true
     )
+    // Add to .common mode so the timer also fires during event tracking (e.g.
+    // when a macOS menu bar dropdown is open). Timer.scheduledTimer only adds to
+    // .default mode which is suspended during menu tracking, causing the UI
+    // (progress bar, time labels) to freeze.
+    RunLoop.main.add(timer, forMode: .common)
+    syncUITimer = timer
   }
 
   func notifyWindowVideoSizeChanged() {
@@ -2506,7 +2512,7 @@ class PlayerCore: NSObject {
   @objc func syncUITime() {
     syncUI(.time)
   }
-  
+
   func syncUI(_ options: [SyncUIOption]) {
     for option in options {
       syncUI(option)

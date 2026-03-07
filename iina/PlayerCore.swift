@@ -682,6 +682,8 @@ class PlayerCore: NSObject {
   /// or not to switch to mini player automatically
   /// 2) On user initiated button actions
   ///
+  var cachedSubScale: Double = 1.0
+
   func switchToMiniPlayer(automatically: Bool = false, showMiniPlayer: Bool = true) {
     log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
@@ -752,6 +754,11 @@ class PlayerCore: NSObject {
       miniPlayer.setToInitialWindowSize(display: true, animate: false)
     }
 
+    if Preference.bool(for: .musicModeShowAlbumArt) {
+      cachedSubScale = mpv.getDouble(MPVOption.Subtitles.subScale)
+      mpv.setDouble(MPVOption.Subtitles.subScale, 0.0)
+    }
+
     isInMiniPlayer = true
 
     // restore layout
@@ -813,6 +820,10 @@ class PlayerCore: NSObject {
     // hide mini player
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
+
+    if Preference.bool(for: .musicModeShowAlbumArt) {
+      mpv.setDouble(MPVOption.Subtitles.subScale, cachedSubScale)
+    }
 
     mainWindow.pendingShow = true
     if showMainWindow {
@@ -2279,6 +2290,12 @@ class PlayerCore: NSObject {
     needReloadQuickSettingsView()
   }
 
+  func subTextChanged() {
+    guard isInMiniPlayer && currentMediaIsAudio == .isAudio else { return }
+    let subText = mpv.getString(MPVProperty.subText) ?? ""
+    miniPlayer.updateSubtitleLabel(with: subText)
+  }
+
   func subVisibilityChanged(_ visible: Bool) {
     guard info.isSubVisible != visible else { return }
     info.isSubVisible = visible
@@ -2310,19 +2327,7 @@ class PlayerCore: NSObject {
       }
     }
 
-    // For audio-only files with subtitles:
-    // Inject lavfi-complex to create a synthetic continuous video track for mpv rendering.
-    // This keeps the internal mpv render clock active, preventing UI freezes
-    // (time, progress bar, subtitles) regardless of whether we are in the main window
-    // or the mini player. (In mini player, we simply cover this video with the album art).
-    if audioStatus == .isAudio && !info.subTracks.isEmpty {
-      let currentLavfi = mpv.getString(MPVOption.Miscellaneous.lavfiComplex) ?? ""
-      if currentLavfi.isEmpty {
-        let filter = "color=c=black:s=640x360:r=1[vo]"
-        mpv.setString(MPVOption.Miscellaneous.lavfiComplex, filter)
-        log("Injected lavfi-complex for audio subtitle rendering: \(filter)")
-      }
-    }
+
 
     postNotification(.iinaTracklistChanged)
   }

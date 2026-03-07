@@ -332,12 +332,21 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     guard let window = window else { return }
     let w = player.info.displayWidth, h = player.info.displayHeight
 
-    // For audio-only files (no real video tracks), we want to keep 1:1 aspect
-    // even if a synthetic lavfi-complex track added a video.
+    // For audio-only files, use album art dimensions if available, otherwise 1:1.
     let hasRealVideoTrack = player.info.videoTracks.contains { !$0.isAlbumart }
     let isAudioOnly = player.info.videoTracks.isEmpty || !hasRealVideoTrack
 
-    let (width, height) = (w == 0 && h == 0) || isAudioOnly ? (1, 1) :  player.videoSizeForDisplay
+    let width, height: Int
+    if (w == 0 && h == 0) || isAudioOnly {
+      if let albumArt = player.info.videoTracks.first(where: { $0.isAlbumart }),
+         let artW = albumArt.demuxW, let artH = albumArt.demuxH, artW > 0, artH > 0 {
+        (width, height) = (artW, artH)
+      } else {
+        (width, height) = (1, 1)
+      }
+    } else {
+      (width, height) = player.videoSizeForDisplay
+    }
     let aspect = CGFloat(width) / CGFloat(height)
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect

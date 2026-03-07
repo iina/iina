@@ -723,8 +723,8 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    // For audio-only files (no real video tracks), we want to keep the album art
-    // and use 1:1 aspect even if a synthetic lavfi-complex track added a video.
+    // For audio-only files (no real video tracks), use the album art's native
+    // aspect ratio if available, otherwise default to 1:1.
     let hasRealVideoTrack = info.videoTracks.contains { !$0.isAlbumart }
     let isAudioOnly = info.videoTracks.isEmpty || !hasRealVideoTrack
 
@@ -734,7 +734,13 @@ class PlayerCore: NSObject {
       (width, height) = videoSizeForDisplay
     } else {
       miniPlayer.defaultAlbumArt.isHidden = false
-      (width, height) = (1, 1)
+      // Use album art dimensions if present
+      if let albumArt = info.videoTracks.first(where: { $0.isAlbumart }),
+         let artW = albumArt.demuxW, let artH = albumArt.demuxH, artW > 0, artH > 0 {
+        (width, height) = (artW, artH)
+      } else {
+        (width, height) = (1, 1)
+      }
     }
 
     let aspect = CGFloat(width) / CGFloat(height)

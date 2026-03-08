@@ -53,6 +53,11 @@ class SettingsPageKeyBindings: SettingsPage {
 }
 
 
+private extension NSUserInterfaceItemIdentifier {
+  static let columnID = NSUserInterfaceItemIdentifier("MainColumn")
+}
+
+
 fileprivate class ConfigEditor: SettingsAccessory.Base {
   fileprivate typealias KC = PrefKeyBindingViewController
   
@@ -69,8 +74,6 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
   
   var mappingController: NSArrayController
   
-  private let columnID = NSUserInterfaceItemIdentifier("MainColumn")
-
   static let defaultConfigMap: KeyValuePairs<String, String> = [
     "IINA Default": "iina-default-input",
     "mpv Default": "input",
@@ -149,12 +152,12 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
     kbTableMenu.delegate = self
     kbTableView.menu = kbTableMenu
     
-    let column = NSTableColumn(identifier: columnID)
+    let column = NSTableColumn(identifier: .columnID)
     column.title = "Items"
     kbTableView.addTableColumn(column)
     
     addConfBtn.translatesAutoresizingMaskIntoConstraints = false
-    addConfBtn.image = .init(systemSymbolName: "plus", accessibilityDescription: "Add Configuration")
+    addConfBtn.image = .init(systemSymbolName: "square.grid.3x1.folder.badge.plus", accessibilityDescription: "Add Configuration")
     addConfBtn.target = self
     addConfBtn.action = #selector(addConfBtnAction)
     delConfBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -168,7 +171,7 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
     
     let addKeyMappingBtn = makeButton(.text_AddKeyMapping)
     addKeyMappingBtn.imagePosition = .imageLeading
-    addKeyMappingBtn.image = .init(systemSymbolName: "plus", accessibilityDescription: nil)
+    addKeyMappingBtn.image = .findSFSymbol(["plus"])
     addKeyMappingBtn.target = self
     addKeyMappingBtn.action = #selector(addKeyMappingAction)
     
@@ -186,7 +189,7 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
 
     addKeyMappingBtn.padding(.leading(16))
     editorView.addSubview(editorStackView)
-    editorStackView.padding(.leading(16), .trailing(0), .top(0), .bottom(8))
+    editorStackView.padding(.leading(16), .trailing(0), .top(0), .bottom(12))
     
     NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: saveToConfFile)
 
@@ -412,11 +415,6 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
   private func changeButtonEnabledStatus() {
     let shouldEnableEdit = isCurrentConfigEditable()
     delConfBtn.isEnabled = shouldEnableEdit
-//    [showConfFileBtn, deleteConfFileBtn, addKmBtn].forEach { btn in
-//      btn.isEnabled = shouldEnableEdit
-//    }
-//    kbTableView.tableColumns.forEach { $0.isEditable = shouldEnableEdit }
-//    configHintLabel.stringValue = NSLocalizedString("preference.key_binding_hint_\(shouldEnableEdit ? "2" : "1")", comment: "preference.key_binding_hint")
   }
   
   /// Check whether or not a new config file with provided filename should be created.
@@ -457,45 +455,11 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
 
 extension ConfigEditor: NSTableViewDelegate, NSMenuDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    var resCell = tableView.makeView(withIdentifier: columnID, owner: self) as? KeyMappingCell
     guard let km = (mappingController.arrangedObjects as? [KeyMapping])?[at: row] else { return nil }
-    
-    if resCell == nil {
-      let cell = KeyMappingCell()
-      cell.identifier = columnID
-      
-      let actionLabel = NSTextField(labelWithString: km.actionForDisplay)
-      actionLabel.translatesAutoresizingMaskIntoConstraints = false
-      cell.addSubview(actionLabel)
-      
-      let keyBox = NSBox()
-      keyBox.translatesAutoresizingMaskIntoConstraints = false
-      keyBox.titlePosition = .noTitle
-      keyBox.boxType = .custom
-      keyBox.borderWidth = 1
-      keyBox.borderColor = .separatorColor
-      keyBox.fillColor = .controlBackgroundColor
-      keyBox.cornerRadius = 4
-      keyBox.contentViewMargins = .zero
-      let keyLabel = NSTextField(labelWithString: km.keyForDisplay)
-      keyLabel.translatesAutoresizingMaskIntoConstraints = false
-      keyBox.contentView?.addSubview(keyLabel)
-      keyLabel.padding(.horizontal(4)).center(with: keyBox.contentView, y: true)
-      
-      cell.addSubview(keyBox)
-      cell.keyLabel = keyLabel
-      cell.actionLabel = actionLabel
-      resCell = cell
+    let cell = (tableView.makeView(withIdentifier: .columnID, owner: self) as? KeyMappingCell) ?? KeyMappingCell()
 
-      keyBox.padding(.trailing(4)).size(height: 28)
-        .center(with: cell, y: true)
-      actionLabel.padding(.leading(4)).flexibleSpacingTo(view: keyBox)
-        .center(with: cell, y: true)
-    }
-    
-    resCell?.keyLabel?.stringValue = km.keyForDisplay
-    resCell?.actionLabel?.stringValue = km.actionForDisplay
-    return resCell
+    cell.setup(keyMapping: km)
+    return cell
   }
   
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
@@ -515,6 +479,42 @@ extension ConfigEditor: NSTableViewDelegate, NSMenuDelegate {
 
 
 fileprivate class KeyMappingCell: NSTableCellView {
-  var keyLabel: NSTextField?
-  var actionLabel: NSTextField?
+  var keyLabel: NSTextField!
+  var actionLabel: NSTextField!
+  
+  func setup(keyMapping km: KeyMapping) {
+    if keyLabel == nil || actionLabel == nil {
+      self.identifier = .columnID
+      
+      let actionLabel = NSTextField(labelWithString: km.actionForDisplay)
+      actionLabel.translatesAutoresizingMaskIntoConstraints = false
+      self.addSubview(actionLabel)
+      
+      let keyBox = NSBox()
+      keyBox.translatesAutoresizingMaskIntoConstraints = false
+      keyBox.titlePosition = .noTitle
+      keyBox.boxType = .custom
+      keyBox.borderWidth = 1
+      keyBox.borderColor = .separatorColor
+      keyBox.fillColor = .controlBackgroundColor
+      keyBox.cornerRadius = 4
+      keyBox.contentViewMargins = .zero
+      let keyLabel = NSTextField(labelWithString: km.keyForDisplay)
+      keyLabel.translatesAutoresizingMaskIntoConstraints = false
+      keyBox.contentView?.addSubview(keyLabel)
+      keyLabel.padding(.horizontal(4)).center(with: keyBox.contentView, y: true)
+      
+      self.addSubview(keyBox)
+      self.keyLabel = keyLabel
+      self.actionLabel = actionLabel
+      
+      keyBox.padding(.trailing(4)).size(height: 28)
+        .center(with: self, y: true)
+      actionLabel.padding(.leading(4)).flexibleSpacingTo(view: keyBox)
+        .center(with: self, y: true)
+    } else {
+      keyLabel.stringValue = km.keyForDisplay
+      actionLabel.stringValue = km.actionForDisplay
+    }
+  }
 }

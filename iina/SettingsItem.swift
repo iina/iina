@@ -54,6 +54,9 @@ struct SettingsItem {
       customView.translatesAutoresizingMaskIntoConstraints = false
       self.addSubview(customView)
       customView.padding(.all)
+      self.wantsLayer = true
+      self.layer?.cornerRadius = 6
+      self.layer?.masksToBounds = true
     }
   }
   

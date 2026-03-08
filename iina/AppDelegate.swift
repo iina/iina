@@ -1317,7 +1317,7 @@ class RemoteCommandController {
         log("""
             Seek flag was not one of \(allowedFlags.map({ "'\($0)'" }).joined(separator: ", ")), not setting seek interval:
                 \(key) \(keyBinding.rawAction)
-            """
+            """)
         return []
       }
     }

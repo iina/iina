@@ -273,6 +273,12 @@ class PlayerCore: NSObject {
     abLoopA != 0 && abLoopB != 0 && mpv.getString(MPVOption.PlaybackControl.abLoopCount) != "0"
   }
 
+  /// Whether to auto load files when opening the URL given in `pendingUrl`.
+  private var pendingAutoLoad = false
+
+  /// URL to open once an outstanding mpv stop command completes.
+  private var pendingUrl: URL?
+
   let playerNumber: Int
 
   static var keyBindings: [String: KeyMapping] = [:]
@@ -341,11 +347,28 @@ class PlayerCore: NSObject {
       log("empty file path or url", level: .error)
       return
     }
-    log("Open URL: \(url.absoluteString)")
-    let isNetwork = !url.isFileURL || url.pathExtension.starts(with: "m3u")
-    if isNetwork {
-      currentWindow?.close()
+    guard info.state != .stopping else {
+      // The mpv core is currently processing an asynchronous stop command. To avoid the complexity
+      // of coordinating two mpv commands executing at the same time, wait until the stop command
+      // finishes and the core becomes idle before sending the loadfile command. The stop command
+      // normally does not take long to complete, so this should not be noticeable to the user.
+      log("Waiting for stop command to finish before opening: \(url.absoluteString)")
+      pendingAutoLoad = shouldAutoLoad
+      pendingUrl = url
+      return
     }
+    let isNetwork = !url.isFileURL || url.pathExtension.starts(with: "m3u")
+    if isNetwork, info.state != .idle, let currentWindow {
+      // Replace the player window with the loading window. Closing the player window will result in
+      // an asynchronous stop command being sent to mpv. As described above, delay sending the
+      // loadfile command until the stop command finishes.
+      log("Closing window before opening: \(url.absoluteString)")
+      pendingAutoLoad = shouldAutoLoad
+      pendingUrl = url
+      currentWindow.close()
+      return
+    }
+    log("Open URL: \(url.absoluteString)")
     if shouldAutoLoad {
       info.shouldAutoLoadFiles = true
     }
@@ -2144,6 +2167,11 @@ class PlayerCore: NSObject {
       log("Playback has stopped")
       info.state = .idle
       postNotification(.iinaPlayerStopped)
+      if let pendingUrl {
+        self.pendingUrl = nil
+        log("Processing pending open")
+        open(pendingUrl, shouldAutoLoad: pendingAutoLoad)
+      }
     }
   }
 

@@ -49,11 +49,11 @@ class PlaybackInfo {
       // Block inappropriate state changes.
       guard oldValue != .loading || state != .idle, oldValue != .stopping || state == .idle,
             oldValue != .shuttingDown || state == .shutDown, oldValue != .shutDown else {
-        player.log("Blocked attempt to change state from \(oldValue) to \(state)", level: .verbose)
+        player.log("Blocked attempt to change state from \(oldValue) to \(state)", level: .error)
         state = oldValue
         return
       }
-      player.log("State changed from \(oldValue) to \(state)", level: .verbose)
+      player.log("State changed from \(oldValue) to \(state)")
       switch state {
       case .idle:
         SleepPreventer.updateSleepPrevention()

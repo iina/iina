@@ -761,7 +761,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       return
     }
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
-    
+    pendingFilesForOpenFile.removeAll()
+
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
       preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
@@ -769,7 +770,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
 
     // open pending files
-    pendingFilesForOpenFile.removeAll()
     if PlayerCore.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
     }

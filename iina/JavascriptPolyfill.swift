@@ -28,7 +28,8 @@ class JavascriptPolyfill {
   }
 
   func createTimer(callback: JSValue, ms: Double, repeats : Bool) -> String {
-    let timeInterval  = ms/1000.0
+    let clampedMs = repeats ? max(ms, 16.0) : ms
+    let timeInterval  = clampedMs/1000.0
     let uuid = NSUUID().uuidString
 
     DispatchQueue.main.async(execute: {
@@ -37,6 +38,7 @@ class JavascriptPolyfill {
                                        selector: #selector(self.callJSCallback),
                                        userInfo: callback,
                                        repeats: repeats)
+      timer.tolerance = timeInterval * 0.1
       self.timers[uuid] = timer
     })
     return uuid

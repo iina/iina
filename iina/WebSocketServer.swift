@@ -24,7 +24,6 @@ class WebSocketServer {
 
   var listener: NWListener
   var connections: [String: NWConnection] = [:]
-  var timer: Timer?
 
   lazy var serverQueue = DispatchQueue(label: "IINAWebSocketServer.\(self.label)")
   let subsystem: Logger.Subsystem

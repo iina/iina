@@ -89,10 +89,6 @@ class ThumbnailCache {
       return
     }
 
-    // version
-    let versionData = Data(bytesOf: version)
-    file.write(versionData)
-
     guard let fileAttr = try? FileManager.default.attributesOfItem(atPath: videoPath!.path) else {
       log("Cannot get video file attributes", level: .error)
       return
@@ -103,8 +99,6 @@ class ThumbnailCache {
       log("Cannot get video file size", level: .error)
       return
     }
-    let fileSizeData = Data(bytesOf: fileSize)
-    file.write(fileSizeData)
 
     // modified date
     guard let fileModifiedDate = fileAttr[.modificationDate] as? Date else {
@@ -112,8 +106,16 @@ class ThumbnailCache {
       return
     }
     let fileTimestamp = FileTimestamp(fileModifiedDate.timeIntervalSince1970)
-    let fileModificationDateData = Data(bytesOf: fileTimestamp)
-    file.write(fileModificationDateData)
+
+    // Coalesce all data into a single write to reduce I/O syscalls
+    var outputData = Data()
+
+    // version
+    outputData.append(Data(bytesOf: version))
+    // file size
+    outputData.append(Data(bytesOf: fileSize))
+    // modified date
+    outputData.append(Data(bytesOf: fileTimestamp))
 
     // data blocks
     for tb in thumbnails {
@@ -127,11 +129,12 @@ class ThumbnailCache {
         return
       }
       let blockLength = Int64(timestampData.count + jpegData.count)
-      let blockLengthData = Data(bytesOf: blockLength)
-      file.write(blockLengthData)
-      file.write(timestampData)
-      file.write(jpegData)
+      outputData.append(Data(bytesOf: blockLength))
+      outputData.append(timestampData)
+      outputData.append(jpegData)
     }
+
+    file.write(outputData)
 
     CacheManager.shared.needsRefresh = true
     log("Finished writing thumbnail cache.")

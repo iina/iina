@@ -616,7 +616,7 @@ class MainWindowController: PlayerWindowController {
     titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     cachedScreenCount = NSScreen.screens.count
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
-      $0?.state = .active
+      $0?.state = .followsWindowActiveState
     }
     // hide other views
     osdVisualEffectView.isHidden = true
@@ -2496,6 +2496,7 @@ class MainWindowController: PlayerWindowController {
       self.sideBarStatus = .hidden
       self.bottomView.subviews.removeAll()
       self.bottomView.isHidden = true
+      self.videoView.layer?.shadowOpacity = 0
       return
     }
 
@@ -2512,6 +2513,7 @@ class MainWindowController: PlayerWindowController {
       self.sideBarStatus = .hidden
       self.bottomView.subviews.removeAll()
       self.bottomView.isHidden = true
+      self.videoView.layer?.shadowOpacity = 0
       self.showUI()
       then()
     }

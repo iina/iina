@@ -18,7 +18,7 @@ class ScrollingTextField: NSTextField {
 
   private var state: State = .idle
 
-  let updateInterval: TimeInterval = 0.03
+  let updateInterval: TimeInterval = 0.05
   let timeToWaitBeforeStart: TimeInterval = 0.2
 
   private var scrollingTimer: Timer?
@@ -56,6 +56,7 @@ class ScrollingTextField: NSTextField {
     state = .scroll
     scrollingTimer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(moveText),
                                           userInfo: nil, repeats: true)
+    scrollingTimer?.tolerance = updateInterval * 0.15
   }
 
   private func reset() {

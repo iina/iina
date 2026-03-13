@@ -121,6 +121,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
     removeTimerAndListeners()
     updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
+    updateTimer?.tolerance = 0.2
 
     observers.append(NotificationCenter.default.addObserver(forName: .iinaFileLoaded, object: nil, queue: .main, using: self.fileLoaded))
     observers.append(NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main, using: self.fileLoaded))
@@ -301,6 +302,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   }
 
   @objc func dynamicUpdate() {
+    guard window?.occlusionState.contains(.visible) == true else { return }
     updateInfo(dynamic: true)
     /// Do not call `reloadData()` (no arg version) because it will clear the selection. Also, because we know the number of rows will not change,
     /// calling `reloadData(forRowIndexes:)` will get the same result but much more efficiently

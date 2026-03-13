@@ -2495,13 +2495,19 @@ class PlayerCore: NSObject {
 
     // Timer will start
 
-    syncUITimer = Timer.scheduledTimer(
+    let timer = Timer(
       timeInterval: timeInterval,
       target: self,
       selector: #selector(self.syncUITime),
       userInfo: nil,
       repeats: true
     )
+    // Add to .common mode so the timer also fires during event tracking (e.g.
+    // when a macOS menu bar dropdown is open). Timer.scheduledTimer only adds to
+    // .default mode which is suspended during menu tracking, causing the UI
+    // (progress bar, time labels) to freeze.
+    RunLoop.main.add(timer, forMode: .common)
+    syncUITimer = timer
   }
 
   func notifyWindowVideoSizeChanged() {

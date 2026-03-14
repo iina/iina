@@ -38,7 +38,9 @@ struct Preference {
     static let receiveBetaUpdate = Key("receiveBetaUpdate")
 
     static let actionAfterLaunch = Key("actionAfterLaunch")
-    static let alwaysOpenInNewWindow = Key("alwaysOpenInNewWindow")
+    static let alwaysOpenInNewWindow = Key("alwaysOpenInNewWindow") // now means "allow opening multiple windows"
+    static let groupSimultaneousOpensInPlaylist = Key("groupSimultaneousOpensInPlaylist")
+    static let allowDuplicatePlayers = Key("allowDuplicatePlayers")
     static let enableCmdN = Key("enableCmdN")
 
     /** Record recent files */
@@ -841,6 +843,8 @@ struct Preference {
     .receiveBetaUpdate: false,
     .actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
     .alwaysOpenInNewWindow: true,
+    .groupSimultaneousOpensInPlaylist: false,
+    .allowDuplicatePlayers: false,
     .enableCmdN: false,
     .recordPlaybackHistory: true,
     .recordRecentFiles: true,
@@ -946,7 +950,7 @@ struct Preference {
     .ignoreAssStyles: false,
     .subOverrideLevel: SubOverrideLevel.scale.rawValue,
     .secondarySubOverrideLevel: SubOverrideLevel.scale.rawValue,
-    .subTextFont: "sans-serif",
+    .subTextFont: Constants.String.mpvDefaultFont,
     .subTextSize: Float(55),
     .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBgColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,

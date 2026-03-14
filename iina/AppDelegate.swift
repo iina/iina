@@ -932,8 +932,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
           noteNewRecentDocumentURL(url)
         }
       }
-      let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
-      if PlayerCore.openURLs(panel.urls, inverseOpenInNewWindowPref: isAlternative) == 0 {
+      if PlayerCore.openURLs(panel.urls) == 0 {
         Utility.showAlert("nothing_to_open")
       }
     }
@@ -1282,6 +1281,65 @@ class RemoteCommandController {
 
   private var isEnabled = false
 
+  /// Returns the value to use for the [preferredIntervals](https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommand/preferredintervals) property.
+  ///
+  /// The [MPRemoteCommandCenter](https://developer.apple.com/documentation/MediaPlayer/MPRemoteCommandCenter)
+  /// expects the media keys tied to the  [seekBackwardCommand](https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/seekbackwardcommand) and the [seekForwardCommand](https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter/seekforwardcommand) to seek backward and
+  /// forward in the current media track. The
+  /// [MPSkipIntervalCommand](https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommand)
+  /// property [preferredIntervals](https://developer.apple.com/documentation/mediaplayer/mpskipintervalcommand/preferredintervals) provides the number of
+  /// seconds pressing the key will skip.
+  ///
+  /// IINA allows the user to bind a mpv command to the `FORWARD` and `REWIND` media keys. This method must:
+  /// - Determine if there is a key binding for the given key and if not return the default of 15 seconds
+  /// - Determine if the key is bound to an IINA command and if so return an empty array indicating the property is not applicable
+  /// - Determine if the key is bound to the mpv
+  ///     [seek](https://mpv.io/manual/stable/#command-interface-seek-%3Ctarget%3E-[%3Cflags%3E]) command
+  ///     and if not, return an empty array
+  /// - Parse the `target` value of the `seek` command as an integer, if it cannot be parsed log an error and  return an empty array
+  /// - If present, parse the `seek` command flags and if any flags other than `exact`, `keyframes` and `relative` are
+  ///     present then return an empty array as this is not a normal seek
+  /// - When all the above checks pass the key has been bound to a normal seek command and the absolute value of the seek
+  ///     command target parameter can be used as the interval
+  ///
+  /// To see the `preferredIntervals` value open
+  /// [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
+  /// and double click on the Now Playing module with IINA playing media. The expanded Now Playing module will contain seek
+  /// backward and seek forward buttons. The interval may be shown inside the button icons.
+  /// - Parameter key: Media key the value is for.
+  /// - Returns: Value to use for` preferredIntervals`.
+  private func formPreferredIntervalsValue(_ key: String) -> [NSNumber] {
+    guard let keyBinding = PlayerCore.keyBindings[key] else { return [15] }
+    guard !keyBinding.isIINACommand else { return [] }
+    let action = keyBinding.action
+    guard action.count > 1, action[0] == MPVCommand.seek.rawValue else { return [] }
+    guard let target = Double(action[1]) else {
+      log("""
+          Unable to parse seek target as a Double in key binding:
+              \(key) \(keyBinding.rawAction)
+          """, level: .error)
+      return []
+    }
+    if action.count > 2 {
+      let allowedFlags: Set<String> = ["exact", "keyframes", "relative"]
+      // Multiple flags can be composed using `+`, and each one must be valid
+      let flags = action[2].split(separator: "+")
+
+      guard flags.allSatisfy({ allowedFlags.contains(String($0)) }) else {
+        log("""
+            Seek flag was not one of \(allowedFlags.map({ "'\($0)'" }).joined(separator: ", ")), not setting seek interval:
+                \(key) \(keyBinding.rawAction)
+            """)
+        return []
+      }
+    }
+    // The seek command target may be negative to indicate seeking backwards, however the remote
+    // command dictates the direction and requires that the interval to be positive.
+    let seconds = abs(target)
+    log("Seek interval for the \(key) key is \(seconds) s")
+    return [NSNumber(value: seconds)]
+  }
+
   func disable() {
     guard isEnabled else { return }
     commands.forEach { $0.removeTarget(nil) }
@@ -1292,28 +1350,72 @@ class RemoteCommandController {
   func enable() {
     guard RemoteCommandController.useSystemMediaControl, !isEnabled else { return }
     let remoteCommand = MPRemoteCommandCenter.shared()
+
+    // For each command, apply a configured keybinding or fallback to default values.
     remoteCommand.playCommand.addTarget { _ in
-      PlayerCore.lastActive.resume()
+      if let action = PlayerCore.keyBindings["PLAY"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.resume()
+      }
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      PlayerCore.lastActive.pause()
+      if let action = PlayerCore.keyBindings["PAUSE"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.pause()
+      }
       return .success
     }
     remoteCommand.togglePlayPauseCommand.addTarget { _ in
-      PlayerCore.lastActive.togglePause()
+      if let action = PlayerCore.keyBindings["PLAYPAUSE"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.togglePause()
+      }
       return .success
     }
     remoteCommand.stopCommand.addTarget { _ in
-      PlayerCore.lastActive.stop()
+      if let action = PlayerCore.keyBindings["STOP"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.stop()
+      }
       return .success
     }
     remoteCommand.nextTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
+      if let action = PlayerCore.keyBindings["NEXT"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.navigateInPlaylist(nextMedia: true)
+      }
       return .success
     }
     remoteCommand.previousTrackCommand.addTarget { _ in
-      PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
+      if let action = PlayerCore.keyBindings["PREV"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.navigateInPlaylist(nextMedia: false)
+      }
+      return .success
+    }
+    remoteCommand.skipForwardCommand.preferredIntervals = formPreferredIntervalsValue("FORWARD")
+    remoteCommand.skipForwardCommand.addTarget { event in
+      if let action = PlayerCore.keyBindings["FORWARD"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.seek(relativeSecond: (event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      }
+      return .success
+    }
+    remoteCommand.skipBackwardCommand.preferredIntervals = formPreferredIntervalsValue("REWIND")
+    remoteCommand.skipBackwardCommand.addTarget { event in
+      if let action = PlayerCore.keyBindings["REWIND"] {
+        PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
+      } else {
+        PlayerCore.lastActive.seek(relativeSecond: -(event as! MPSkipIntervalCommandEvent).interval, option: .exact)
+      }
       return .success
     }
     remoteCommand.changeRepeatModeCommand.addTarget { _ in
@@ -1323,16 +1425,6 @@ class RemoteCommandController {
     remoteCommand.changePlaybackRateCommand.supportedPlaybackRates = [0.5, 1, 1.5, 2]
     remoteCommand.changePlaybackRateCommand.addTarget { event in
       PlayerCore.lastActive.setSpeed(Double((event as! MPChangePlaybackRateCommandEvent).playbackRate))
-      return .success
-    }
-    remoteCommand.skipForwardCommand.preferredIntervals = [15]
-    remoteCommand.skipForwardCommand.addTarget { event in
-      PlayerCore.lastActive.seek(relativeSecond: (event as! MPSkipIntervalCommandEvent).interval, option: .exact)
-      return .success
-    }
-    remoteCommand.skipBackwardCommand.preferredIntervals = [15]
-    remoteCommand.skipBackwardCommand.addTarget { event in
-      PlayerCore.lastActive.seek(relativeSecond: -(event as! MPSkipIntervalCommandEvent).interval, option: .exact)
       return .success
     }
     remoteCommand.changePlaybackPositionCommand.addTarget { event in
@@ -1364,6 +1456,25 @@ class RemoteCommandController {
       remoteCommand.skipForwardCommand,
       remoteCommand.stopCommand,
       remoteCommand.togglePlayPauseCommand]
+
+    NotificationCenter.default.addObserver(forName: .iinaGlobalKeyBindingsChanged, object: nil,
+                                           queue: .main) { [unowned self] _ in
+      guard isEnabled else { return }
+      // The user has modified the key bindings, possibly changing the mpv commands associated with
+      // the FORWARD and REWIND media keys. The preferredIntervals values are set based on the mpv
+      // commands assigned to those keys. The Now Playing module may display the interval in the
+      // seek backward and seek forward buttons causing the value displayed in the Now Playing
+      // module buttons to to be out of date. Merely updating the preferredIntervals values is
+      // insufficient to get the Now Playing module to update its buttons. Support for media keys
+      // and remote commands must be disabled and then re-enabled.
+      log("Restarting support for remote commands due to changes to key bindings")
+      disable()
+      // Immediately re-enabling media keys and remote commands only partially worked. The Now
+      // Playing module would update buttons if the module was expanded, but the buttons shown in
+      // the module's small form would still display the old interval. Work around this curious
+      // Now Playing behavior by delaying the re-enabling.
+      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { self.enable() }
+    }
   }
 }
 

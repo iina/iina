@@ -82,6 +82,7 @@ struct Constants {
     static let dot = "●"
     static let blackRightPointingTriangle = "▶︎"
     static let blackLeftPointingTriangle = "◀"
+    static let mpvDefaultFont = "sans-serif"
     static let videoTimePlaceholder = "--:--:--"
     static let trackNone = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"

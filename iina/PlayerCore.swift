@@ -87,30 +87,48 @@ class PlayerCore: NSObject {
   }
   
   /**
-   Depending on the `alwaysOpenInNewWindow` pref, opens the URLs in a single window, or multiple windows.
+   Opens the URLs in the right window or windows, depending on user settings.
 
    - Returns: `nil` if no further action is needed, like opened a BD Folder; otherwise the
    count of playable files.
    */
   @discardableResult
-  static func openURLs(
-    _ urls: [URL],
-    preferredCore: PlayerCore? = nil,
-    inverseOpenInNewWindowPref: Bool = false
-  ) -> Int? {
-    let shouldOpenInSeparateWindows = Preference.bool(for: .alwaysOpenInNewWindow) != inverseOpenInNewWindowPref
-
-    if shouldOpenInSeparateWindows {
-      // open each url in its own window. accumulate the return values
-      return urls.reduce(nil) { currentReturnValue, url in
-        if let openResult = newPlayerCore.openURLs([url]) {
-          return (currentReturnValue ?? 0) + openResult
-        }
-        return currentReturnValue
-      }
+  static func openURLs(_ urls: [URL]) -> Int? {
+    let openInCurrentWindow = !Preference.bool(for: .alwaysOpenInNewWindow)
+    if openInCurrentWindow {
+      // open all urls in the active window if any (or, all in one new window)
+      return activeOrNew.openURLs(urls)
+    } else if
+      urls.count > 1,
+      Preference.bool(for: .groupSimultaneousOpensInPlaylist)
+    {
+      // create new window, open all urls in that window
+      // this purposefully ignores `allowDuplicatePlayers`
+      return newPlayerCore.openURLs(urls)
     } else {
-      // open all urls in the same playlist
-      return (preferredCore ?? activeOrNew).openURLs(urls)
+      // open each url in its own new window. accumulate the return values
+      return urls.reduce(nil) { currentReturnValue, url in
+        // skip if url is already open in some player
+        if !Preference.bool(for: .allowDuplicatePlayers) {
+          let activePlayerCores = playerCores.filter { $0.info.state != .idle }
+          let relevantActivePlayerCore = activePlayerCores.first { $0.info.currentURL == url }
+          
+          if let relevantActivePlayerCore {
+            relevantActivePlayerCore.mainWindow.window?.makeKeyAndOrderFront(nil)
+            return currentReturnValue
+          }
+        }
+
+        // open url, combine open result into return value
+        let openResult = newPlayerCore.openURLs([url])
+
+        return
+          if let openResult {
+            (currentReturnValue ?? 0) + openResult
+          } else {
+            currentReturnValue
+          }
+      }
     }
   }
 
@@ -1320,6 +1338,15 @@ class PlayerCore: NSObject {
           Utility.showAlert("unsupported_audio")
         }
       }
+    }
+  }
+
+  /// Shows the Font Chooser window to select a new font for the player
+  func chooseSubFont() {
+    guard info.state.active else { return }
+    let subFont = mpv.getString(MPVOption.Subtitles.subFont)
+    Utility.quickFontPickerWindow(selecting: subFont) { [self] result in
+      setSubFont(result)
     }
   }
 

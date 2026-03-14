@@ -726,7 +726,6 @@ class PlayerCore: NSObject {
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
     let hasRealVideoTrack = info.videoTracks.contains { !$0.isAlbumart }
-    let isAudioOnly = info.videoTracks.isEmpty || !hasRealVideoTrack
 
     let width, height: Int
     if info.vid != 0 {

@@ -14,9 +14,11 @@ class UPnPManager {
   static let shared = UPnPManager()
   
   private var devices: [String: UPnPDevice] = [:]
+  private let devicesLock = NSLock()
   private var discoverySocketFD: Int32 = -1
   private var discoverySource: DispatchSourceRead?
   private var discoveryTimer: Timer?
+  private var isActivelySearching = false
   private let discoveryQueue = DispatchQueue(label: "com.iina.upnp.discovery")
   private let subsystem = Logger.makeSubsystem("upnp")
   
@@ -37,6 +39,10 @@ class UPnPManager {
     stopDiscovery()
     
     Logger.log("Starting UPnP device discovery", subsystem: subsystem)
+    setupDiscoverySocketIfNeeded()
+    guard discoverySocketFD >= 0 else { return }
+    
+    isActivelySearching = true
     
     // Send M-SEARCH request every 3 seconds for 15 seconds
     sendMSearch()
@@ -46,12 +52,15 @@ class UPnPManager {
     
     // Stop discovery after 15 seconds
     DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [weak self] in
-      self?.stopDiscovery()
+      self?.stopActiveSearch()
     }
   }
   
   /// Stop device discovery
   func stopDiscovery() {
+    stopActiveSearch()
+    isActivelySearching = false
+    
     discoveryTimer?.invalidate()
     discoveryTimer = nil
     
@@ -62,6 +71,12 @@ class UPnPManager {
       close(discoverySocketFD)
       discoverySocketFD = -1
     }
+  }
+  
+  private func stopActiveSearch() {
+    isActivelySearching = false
+    discoveryTimer?.invalidate()
+    discoveryTimer = nil
   }
 
   /// Ensure the raw UDP socket and read source are set up for SSDP.
@@ -78,6 +93,34 @@ class UPnPManager {
     var yes: Int32 = 1
     if setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &yes, socklen_t(MemoryLayout.size(ofValue: yes))) < 0 {
       Logger.log("Failed to set SO_REUSEADDR on SSDP socket: \(errno)", level: .warning, subsystem: subsystem)
+    }
+    if setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &yes, socklen_t(MemoryLayout.size(ofValue: yes))) < 0 {
+      Logger.log("Failed to set SO_REUSEPORT on SSDP socket: \(errno)", level: .warning, subsystem: subsystem)
+    }
+    
+    // Bind to SSDP port and join multicast group so we can receive NOTIFY packets.
+    var bindAddr = sockaddr_in()
+    bindAddr.sin_len = UInt8(MemoryLayout.size(ofValue: bindAddr))
+    bindAddr.sin_family = sa_family_t(AF_INET)
+    bindAddr.sin_port = in_port_t(ssdpPort).bigEndian
+    bindAddr.sin_addr = in_addr(s_addr: INADDR_ANY)
+    let bindAddrSize = socklen_t(MemoryLayout<sockaddr_in>.size)
+    
+    let bindResult = withUnsafePointer(to: &bindAddr) { ptr -> Int32 in
+      ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sockPtr in
+        bind(fd, sockPtr, bindAddrSize)
+      }
+    }
+    if bindResult < 0 {
+      Logger.log("Failed to bind SSDP socket to port \(ssdpPort): \(errno)", level: .warning, subsystem: subsystem)
+    }
+    
+    var multicastReq = ip_mreq(
+      imr_multiaddr: in_addr(s_addr: inet_addr(ssdpAddress)),
+      imr_interface: in_addr(s_addr: INADDR_ANY)
+    )
+    if setsockopt(fd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &multicastReq, socklen_t(MemoryLayout.size(ofValue: multicastReq))) < 0 {
+      Logger.log("Failed to join SSDP multicast group: \(errno)", level: .warning, subsystem: subsystem)
     }
     
     // Optionally set a small multicast TTL so packets stay on the local network.
@@ -109,7 +152,7 @@ class UPnPManager {
         if let response = String(data: data, encoding: .utf8) {
           let snippet = response.prefix(300)
           Logger.log("SSDP raw response (\(data.count) bytes):\n\(snippet)", subsystem: self.subsystem)
-          self.parseSSDPResponse(response)
+          self.parseSSDPMessage(response)
         }
       } else if bytesRead < 0 {
         Logger.log("SSDP recvfrom error: \(errno)", level: .error, subsystem: self.subsystem)
@@ -144,14 +187,13 @@ class UPnPManager {
     let destAddrSize = socklen_t(MemoryLayout.size(ofValue: destAddr))
     
     for st in searchTargets {
-      let msearch = """
-      M-SEARCH * HTTP/1.1\r
-      HOST: \(ssdpAddress):\(ssdpPort)\r
-      MAN: "ssdp:discover"\r
-      ST: \(st)\r
-      MX: 3\r
-      \r\n
-      """
+      let msearch =
+        "M-SEARCH * HTTP/1.1\r\n" +
+        "HOST: \(ssdpAddress):\(ssdpPort)\r\n" +
+        "MAN: \"ssdp:discover\"\r\n" +
+        "ST: \(st)\r\n" +
+        "MX: 3\r\n" +
+        "\r\n"
       
       guard let data = msearch.data(using: .utf8) else { continue }
       
@@ -171,10 +213,11 @@ class UPnPManager {
     }
   }
   
-  /// Parse SSDP response headers
-  private func parseSSDPResponse(_ response: String) {
+  /// Parse SSDP response / notify headers.
+  private func parseSSDPMessage(_ response: String) {
     var headers: [String: String] = [:]
     let lines = response.components(separatedBy: "\r\n")
+    let startLine = lines.first?.uppercased() ?? ""
     
     for line in lines {
       if line.isEmpty { continue }
@@ -185,11 +228,16 @@ class UPnPManager {
       }
     }
     
-    // Basic validity check: require LOCATION / USN headers, but avoid over-filtering by ST / NT.
-    guard headers["LOCATION"] != nil || headers["location"] != nil else {
+    if startLine.hasPrefix("NOTIFY") {
+      handleSSDPNotify(headers: headers)
       return
     }
-    guard headers["USN"] != nil || headers["usn"] != nil else {
+    
+    // Basic validity check: require LOCATION / USN headers, but avoid over-filtering by ST / NT.
+    guard headers["LOCATION"] != nil else {
+      return
+    }
+    guard headers["USN"] != nil else {
       return
     }
     
@@ -197,6 +245,41 @@ class UPnPManager {
     if let device = UPnPDevice.from(ssdpResponse: headers) {
       // Fetch full device description
       fetchDeviceDescription(device: device)
+    }
+  }
+  
+  private func handleSSDPNotify(headers: [String: String]) {
+    let nts = headers["NTS"]?.lowercased() ?? ""
+    let usn = headers["USN"] ?? ""
+    
+    if nts == "ssdp:byebye" {
+      removeDevice(withUSN: usn)
+      return
+    }
+    
+    // Handle alive/update notifications that include enough data to fetch description.
+    guard headers["LOCATION"] != nil,
+          headers["USN"] != nil else {
+      return
+    }
+    
+    if let device = UPnPDevice.from(ssdpResponse: headers) {
+      fetchDeviceDescription(device: device)
+    }
+  }
+  
+  private func removeDevice(withUSN usn: String) {
+    guard let uuidRange = usn.range(of: #"uuid:[^:]+"#, options: .regularExpression) else { return }
+    let deviceID = String(usn[uuidRange]).replacingOccurrences(of: "uuid:", with: "")
+    
+    devicesLock.lock()
+    let removed = devices.removeValue(forKey: deviceID)
+    devicesLock.unlock()
+    
+    guard removed != nil else { return }
+    DispatchQueue.main.async {
+      self.onDeviceRemoved?(deviceID)
+      Logger.log("UPnP device removed via byebye: \(deviceID)", subsystem: self.subsystem)
     }
   }
   
@@ -233,7 +316,7 @@ class UPnPManager {
         }
         
         DispatchQueue.main.async {
-          self.devices[fullDevice.id] = fullDevice
+          self.upsertDevice(fullDevice)
           self.onDeviceDiscovered?(fullDevice)
           Logger.log("Discovered device: \(fullDevice.friendlyName)", subsystem: self.subsystem)
         }
@@ -243,76 +326,32 @@ class UPnPManager {
   
   /// Parse device description XML
   private func parseDeviceDescription(xml: String, baseDevice: UPnPDevice) -> UPnPDevice? {
-    // Simple XML parsing (could be improved with XMLParser)
-    // For now, extract key information using regex/string matching
-    
-    var friendlyName = baseDevice.friendlyName
-    var manufacturer: String?
-    var modelName: String?
-    var services: [UPnPDevice.UPnPService] = []
-    
-    // Extract friendly name
-    if let range = xml.range(of: #"<friendlyName>(.*?)</friendlyName>"#, options: .regularExpression) {
-      let match = String(xml[range])
-      friendlyName = match.replacingOccurrences(of: "<friendlyName>", with: "")
-        .replacingOccurrences(of: "</friendlyName>", with: "")
-        .trimmingCharacters(in: .whitespaces)
+    guard let data = xml.data(using: .utf8) else {
+      Logger.log("Failed to encode device description XML as UTF-8", level: .error, subsystem: subsystem)
+      return nil
     }
     
-    // Extract manufacturer
-    if let range = xml.range(of: #"<manufacturer>(.*?)</manufacturer>"#, options: .regularExpression) {
-      let match = String(xml[range])
-      manufacturer = match.replacingOccurrences(of: "<manufacturer>", with: "")
-        .replacingOccurrences(of: "</manufacturer>", with: "")
-        .trimmingCharacters(in: .whitespaces)
+    let delegate = DeviceDescriptionXMLParserDelegate(baseURL: baseDevice.location)
+    let parser = XMLParser(data: data)
+    parser.delegate = delegate
+    guard parser.parse() else {
+      Logger.log("Failed to parse device description XML: \(parser.parserError?.localizedDescription ?? "unknown error")", level: .error, subsystem: subsystem)
+      return nil
     }
     
-    // Extract model name
-    if let range = xml.range(of: #"<modelName>(.*?)</modelName>"#, options: .regularExpression) {
-      let match = String(xml[range])
-      modelName = match.replacingOccurrences(of: "<modelName>", with: "")
-        .replacingOccurrences(of: "</modelName>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
-    // Extract services (simplified - would need proper XML parsing for production)
-    // Look for serviceList and extract service entries
-    // TODO: Implement proper XML parsing for service extraction
-    let _ = #"<service>[\s\S]*?<serviceType>(.*?)</serviceType>[\s\S]*?<serviceId>(.*?)</serviceId>[\s\S]*?<controlURL>(.*?)</controlURL>"#
-    
-    // For now, create a basic service entry if ContentDirectory is mentioned
-    if xml.contains("ContentDirectory") {
-      // Try to extract control URL
-      var controlURL = baseDevice.location
-      if let range = xml.range(of: #"<controlURL>(.*?)</controlURL>"#, options: .regularExpression) {
-        let match = String(xml[range])
-        let urlStr = match.replacingOccurrences(of: "<controlURL>", with: "")
-          .replacingOccurrences(of: "</controlURL>", with: "")
-          .trimmingCharacters(in: .whitespaces)
-        
-        if let url = URL(string: urlStr, relativeTo: baseDevice.location) {
-          controlURL = url
-        }
-      }
-      
-      let service = UPnPDevice.UPnPService(
-        serviceType: "urn:schemas-upnp-org:service:ContentDirectory:1",
-        serviceId: "ContentDirectory",
-        controlURL: controlURL,
-        eventSubURL: nil,
-        scpdURL: nil
-      )
-      services.append(service)
-    }
+    let friendlyName = delegate.friendlyName?.nonEmpty ?? baseDevice.friendlyName
+    let manufacturer = delegate.manufacturer?.nonEmpty
+    let modelName = delegate.modelName?.nonEmpty
+    let deviceType = delegate.deviceType?.nonEmpty ?? baseDevice.deviceType
     
     return UPnPDevice(
       id: baseDevice.id,
       friendlyName: friendlyName,
-      deviceType: baseDevice.deviceType,
+      deviceType: deviceType,
       manufacturer: manufacturer,
       modelName: modelName,
       location: baseDevice.location,
-      services: services,
+      services: delegate.services,
       discoveredAt: baseDevice.discoveredAt
     )
   }
@@ -321,17 +360,25 @@ class UPnPManager {
   
   /// Get all discovered devices
   func getDevices() -> [UPnPDevice] {
-    Array(devices.values)
+    devicesLock.lock()
+    let values = Array(devices.values)
+    devicesLock.unlock()
+    return values
   }
   
   /// Get device by ID
   func getDevice(id: String) -> UPnPDevice? {
-    devices[id]
+    devicesLock.lock()
+    let device = devices[id]
+    devicesLock.unlock()
+    return device
   }
   
   /// Clear all discovered devices
   func clearDevices() {
+    devicesLock.lock()
     devices.removeAll()
+    devicesLock.unlock()
   }
   
   // MARK: - Content Browsing
@@ -342,6 +389,80 @@ class UPnPManager {
       throw UPnPError.serviceNotFound
     }
     
+    var allItems: [UPnPItem] = []
+    var startIndex = 0
+    let pageSize = 100
+    let maxPages = 1000
+    var pageCount = 0
+    
+    while pageCount < maxPages {
+      pageCount += 1
+      let page = try await browseContentPage(
+        service: contentDirService,
+        objectID: objectID,
+        startingIndex: startIndex,
+        requestedCount: pageSize
+      )
+      allItems.append(contentsOf: page.items)
+      
+      let returned = page.numberReturned ?? page.items.count
+      if returned <= 0 {
+        break
+      }
+      startIndex += returned
+      
+      if let total = page.totalMatches, startIndex >= total {
+        break
+      }
+      if returned < pageSize {
+        break
+      }
+    }
+    
+    return allItems
+  }
+  
+  /// Search in a ContentDirectory using UPnP Search action.
+  func searchContent(device: UPnPDevice, objectID: String = "0", searchCriteria: String) async throws -> [UPnPItem] {
+    guard let contentDirService = device.contentDirectoryService else {
+      throw UPnPError.serviceNotFound
+    }
+    
+    var allItems: [UPnPItem] = []
+    var startIndex = 0
+    let pageSize = 100
+    let maxPages = 1000
+    var pageCount = 0
+    
+    while pageCount < maxPages {
+      pageCount += 1
+      let page = try await searchContentPage(
+        service: contentDirService,
+        objectID: objectID,
+        searchCriteria: searchCriteria,
+        startingIndex: startIndex,
+        requestedCount: pageSize
+      )
+      allItems.append(contentsOf: page.items)
+      
+      let returned = page.numberReturned ?? page.items.count
+      if returned <= 0 {
+        break
+      }
+      startIndex += returned
+      
+      if let total = page.totalMatches, startIndex >= total {
+        break
+      }
+      if returned < pageSize {
+        break
+      }
+    }
+    
+    return allItems
+  }
+  
+  private func browseContentPage(service: UPnPDevice.UPnPService, objectID: String, startingIndex: Int, requestedCount: Int) async throws -> BrowsePageResult {
     // Create SOAP request
     let soapBody = """
     <?xml version="1.0"?>
@@ -352,8 +473,8 @@ class UPnPManager {
           <ObjectID>\(objectID)</ObjectID>
           <BrowseFlag>BrowseDirectChildren</BrowseFlag>
           <Filter>*</Filter>
-          <StartingIndex>0</StartingIndex>
-          <RequestedCount>100</RequestedCount>
+          <StartingIndex>\(startingIndex)</StartingIndex>
+          <RequestedCount>\(requestedCount)</RequestedCount>
           <SortCriteria></SortCriteria>
         </u:Browse>
       </s:Body>
@@ -361,7 +482,7 @@ class UPnPManager {
     """
     
     // Create HTTP request
-    var request = URLRequest(url: contentDirService.controlURL)
+    var request = URLRequest(url: service.controlURL)
     request.httpMethod = "POST"
     request.setValue("text/xml; charset=\"utf-8\"", forHTTPHeaderField: "Content-Type")
     request.setValue("\"urn:schemas-upnp-org:service:ContentDirectory:1#Browse\"", forHTTPHeaderField: "SOAPAction")
@@ -378,270 +499,369 @@ class UPnPManager {
     guard let xmlString = String(data: data, encoding: .utf8) else {
       throw UPnPError.invalidResponse
     }
-
-    // MiniDLNA (and many other servers) wrap the DIDL-Lite XML inside a SOAP
-    // <Result> element, with the DIDL content XML-escaped (e.g. &lt;DIDL-Lite ...&gt;).
-    // Extract and unescape that inner DIDL-Lite payload before parsing.
-    let didlXML: String
-    if let resultRange = xmlString.range(of: "<Result>([\\s\\S]*?)</Result>", options: .regularExpression) {
-      let resultTag = String(xmlString[resultRange])
-      let escaped = resultTag
-        .replacingOccurrences(of: "<Result>", with: "")
-        .replacingOccurrences(of: "</Result>", with: "")
-      
-      // Simple XML entity unescaping sufficient for DIDL-Lite from MiniDLNA.
-      didlXML = escaped
-        .replacingOccurrences(of: "&lt;", with: "<")
-        .replacingOccurrences(of: "&gt;", with: ">")
-        .replacingOccurrences(of: "&quot;", with: "\"")
-        .replacingOccurrences(of: "&apos;", with: "'")
-        .replacingOccurrences(of: "&amp;", with: "&")
-    } else {
-      // Fallback: assume the whole body is already DIDL-Lite.
-      didlXML = xmlString
-    }
+    
+    let didlXML = extractDIDLLiteXML(fromSOAPResponse: xmlString)
     
     // Debug: log a snippet of the DIDL-Lite payload we are actually parsing.
     let snippet = didlXML.prefix(800)
-    Logger.log("DIDL-Lite payload for objectID=\(objectID):\n\(snippet)", subsystem: subsystem)
+    Logger.log("DIDL-Lite payload for objectID=\(objectID), start=\(startingIndex):\n\(snippet)", subsystem: subsystem)
     
     // Parse DIDL-Lite XML response
-    return try parseDIDLLite(xml: didlXML, baseURL: contentDirService.controlURL)
+    let items = try parseDIDLLite(xml: didlXML, baseURL: service.controlURL)
+    
+    let numberReturned = extractIntTagValue(for: "NumberReturned", in: xmlString)
+    let totalMatches = extractIntTagValue(for: "TotalMatches", in: xmlString)
+    
+    return BrowsePageResult(
+      items: items,
+      numberReturned: numberReturned,
+      totalMatches: totalMatches
+    )
+  }
+  
+  private func searchContentPage(service: UPnPDevice.UPnPService, objectID: String, searchCriteria: String, startingIndex: Int, requestedCount: Int) async throws -> BrowsePageResult {
+    let soapBody = """
+    <?xml version="1.0"?>
+    <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" 
+                s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+      <s:Body>
+        <u:Search xmlns:u="urn:schemas-upnp-org:service:ContentDirectory:1">
+          <ContainerID>\(objectID)</ContainerID>
+          <SearchCriteria>\(xmlEscaped(searchCriteria))</SearchCriteria>
+          <Filter>*</Filter>
+          <StartingIndex>\(startingIndex)</StartingIndex>
+          <RequestedCount>\(requestedCount)</RequestedCount>
+          <SortCriteria></SortCriteria>
+        </u:Search>
+      </s:Body>
+    </s:Envelope>
+    """
+    
+    var request = URLRequest(url: service.controlURL)
+    request.httpMethod = "POST"
+    request.setValue("text/xml; charset=\"utf-8\"", forHTTPHeaderField: "Content-Type")
+    request.setValue("\"urn:schemas-upnp-org:service:ContentDirectory:1#Search\"", forHTTPHeaderField: "SOAPAction")
+    request.httpBody = soapBody.data(using: .utf8)
+    request.timeoutInterval = 10.0
+    
+    let (data, response) = try await URLSession.shared.data(for: request)
+    
+    guard let httpResponse = response as? HTTPURLResponse,
+          (200...299).contains(httpResponse.statusCode) else {
+      throw UPnPError.browseFailed("HTTP error: \((response as? HTTPURLResponse)?.statusCode ?? 0)")
+    }
+    
+    guard let xmlString = String(data: data, encoding: .utf8) else {
+      throw UPnPError.invalidResponse
+    }
+    
+    let didlXML = extractDIDLLiteXML(fromSOAPResponse: xmlString)
+    let items = try parseDIDLLite(xml: didlXML, baseURL: service.controlURL)
+    let numberReturned = extractIntTagValue(for: "NumberReturned", in: xmlString)
+    let totalMatches = extractIntTagValue(for: "TotalMatches", in: xmlString)
+    
+    return BrowsePageResult(items: items, numberReturned: numberReturned, totalMatches: totalMatches)
   }
   
   /// Parse DIDL-Lite XML to extract items
   private func parseDIDLLite(xml: String, baseURL: URL) throws -> [UPnPItem] {
-    var items: [UPnPItem] = []
-    
-    // Extract items and containers using regex (simplified - proper XML parsing would be better)
-    // TODO: Implement proper XML parsing for item extraction
-    let _ = #"<(item|container)[\s\S]*?id="([^"]+)"[\s\S]*?parentID="([^"]+)"[\s\S]*?>(.*?)</(item|container)>"#
-    
-    // For a more robust implementation, we'd use XMLParser
-    // This is a simplified version for initial implementation
-    
-    // Split by item/container tags
-    let components = xml.components(separatedBy: "<item")
-    for component in components {
-      if component.contains("</item>") {
-        // Parse item
-        if let item = parseItem(from: component, baseURL: baseURL) {
-          items.append(item)
-        }
-      }
+    guard let data = xml.data(using: .utf8) else {
+      throw UPnPError.invalidResponse
     }
     
-    // Also check for containers
-    let containerComponents = xml.components(separatedBy: "<container")
-    for component in containerComponents {
-      if component.contains("</container>") {
-        // Parse container
-        if let container = parseContainer(from: component, baseURL: baseURL) {
-          items.append(container)
-        }
-      }
-    }
+    let delegate = DIDLLiteXMLParserDelegate(baseURL: baseURL)
+    let parser = XMLParser(data: data)
+    parser.delegate = delegate
     
-    return items
+    if parser.parse() {
+      return delegate.items
+    } else {
+      Logger.log("Failed to parse DIDL-Lite XML: \(parser.parserError?.localizedDescription ?? "unknown error")", level: .error, subsystem: subsystem)
+      throw UPnPError.xmlParseError
+    }
   }
   
-  /// Parse a single item from XML
-  private func parseItem(from xml: String, baseURL: URL) -> UPnPItem? {
-    // Extract ID
-    guard let idRange = xml.range(of: #"id="([^"]+)""#, options: .regularExpression) else {
+  private func extractDIDLLiteXML(fromSOAPResponse xml: String) -> String {
+    if let resultRange = xml.range(of: "<Result>([\\s\\S]*?)</Result>", options: .regularExpression) {
+      let resultTag = String(xml[resultRange])
+      let escaped = resultTag
+        .replacingOccurrences(of: "<Result>", with: "")
+        .replacingOccurrences(of: "</Result>", with: "")
+      return escaped.unescapedXML
+    }
+    return xml
+  }
+  
+  private func extractIntTagValue(for tag: String, in xml: String) -> Int? {
+    guard let range = xml.range(of: "<\(tag)>(.*?)</\(tag)>", options: .regularExpression) else {
       return nil
     }
-    let idMatch = String(xml[idRange])
-    let id = idMatch.replacingOccurrences(of: "id=\"", with: "").replacingOccurrences(of: "\"", with: "")
+    let match = String(xml[range])
+      .replacingOccurrences(of: "<\(tag)>", with: "")
+      .replacingOccurrences(of: "</\(tag)>", with: "")
+      .trimmingCharacters(in: .whitespacesAndNewlines)
+    return Int(match)
+  }
+  
+  private func xmlEscaped(_ raw: String) -> String {
+    raw.replacingOccurrences(of: "&", with: "&amp;")
+      .replacingOccurrences(of: "<", with: "&lt;")
+      .replacingOccurrences(of: ">", with: "&gt;")
+      .replacingOccurrences(of: "\"", with: "&quot;")
+      .replacingOccurrences(of: "'", with: "&apos;")
+  }
+  
+  private func upsertDevice(_ device: UPnPDevice) {
+    devicesLock.lock()
+    devices[device.id] = device
+    devicesLock.unlock()
+  }
+  
+  private struct BrowsePageResult {
+    let items: [UPnPItem]
+    let numberReturned: Int?
+    let totalMatches: Int?
+  }
+}
+
+private extension String {
+  var nonEmpty: String? {
+    let trimmed = trimmingCharacters(in: .whitespacesAndNewlines)
+    return trimmed.isEmpty ? nil : trimmed
+  }
+  
+  var unescapedXML: String {
+    replacingOccurrences(of: "&lt;", with: "<")
+      .replacingOccurrences(of: "&gt;", with: ">")
+      .replacingOccurrences(of: "&quot;", with: "\"")
+      .replacingOccurrences(of: "&apos;", with: "'")
+      .replacingOccurrences(of: "&amp;", with: "&")
+  }
+}
+
+private final class DeviceDescriptionXMLParserDelegate: NSObject, XMLParserDelegate {
+  private let baseURL: URL
+  private var currentElement = ""
+  private var currentValue = ""
+  
+  private var inService = false
+  private var serviceType: String?
+  private var serviceId: String?
+  private var controlURLString: String?
+  private var eventSubURLString: String?
+  private var scpdURLString: String?
+  
+  var friendlyName: String?
+  var manufacturer: String?
+  var modelName: String?
+  var deviceType: String?
+  var services: [UPnPDevice.UPnPService] = []
+  
+  init(baseURL: URL) {
+    self.baseURL = baseURL
+    super.init()
+  }
+  
+  func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
+    currentElement = qName ?? elementName
+    currentValue = ""
     
-    // Extract parentID
-    var parentID = "0"
-    if let parentRange = xml.range(of: #"parentID="([^"]+)""#, options: .regularExpression) {
-      let parentMatch = String(xml[parentRange])
-      parentID = parentMatch.replacingOccurrences(of: "parentID=\"", with: "").replacingOccurrences(of: "\"", with: "")
+    if elementName == "service" {
+      inService = true
+      serviceType = nil
+      serviceId = nil
+      controlURLString = nil
+      eventSubURLString = nil
+      scpdURLString = nil
+    }
+  }
+  
+  func parser(_ parser: XMLParser, foundCharacters string: String) {
+    currentValue += string
+  }
+  
+  func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    let value = currentValue.nonEmpty
+    let name = qName ?? elementName
+    
+    switch name {
+    case "friendlyName":
+      friendlyName = value ?? friendlyName
+    case "manufacturer":
+      manufacturer = value ?? manufacturer
+    case "modelName":
+      modelName = value ?? modelName
+    case "deviceType":
+      deviceType = value ?? deviceType
+    case "serviceType":
+      if inService { serviceType = value }
+    case "serviceId":
+      if inService { serviceId = value }
+    case "controlURL":
+      if inService { controlURLString = value }
+    case "eventSubURL":
+      if inService { eventSubURLString = value }
+    case "SCPDURL":
+      if inService { scpdURLString = value }
+    default:
+      break
     }
     
-    // Extract title
+    if elementName == "service" {
+      defer { inService = false }
+      guard let serviceType, let serviceId, let controlURLString else { return }
+      guard let controlURL = URL(string: controlURLString, relativeTo: baseURL)?.absoluteURL else { return }
+      
+      let eventSubURL = eventSubURLString.flatMap {
+        URL(string: $0, relativeTo: baseURL)?.absoluteURL
+      }
+      let scpdURL = scpdURLString.flatMap {
+        URL(string: $0, relativeTo: baseURL)?.absoluteURL
+      }
+      
+      services.append(
+        UPnPDevice.UPnPService(
+          serviceType: serviceType,
+          serviceId: serviceId,
+          controlURL: controlURL,
+          eventSubURL: eventSubURL,
+          scpdURL: scpdURL
+        )
+      )
+    }
+  }
+}
+
+private final class DIDLLiteXMLParserDelegate: NSObject, XMLParserDelegate {
+  private let baseURL: URL
+  private var currentElement = ""
+  private var currentValue = ""
+  private var currentRecord: DIDLRecord?
+  
+  private struct DIDLRecord {
+    let id: String
+    let parentID: String
+    let itemType: UPnPItem.ItemType
     var title = "Unknown"
-    if let titleRange = xml.range(of: #"<dc:title>(.*?)</dc:title>"#, options: .regularExpression) {
-      let titleMatch = String(xml[titleRange])
-      title = titleMatch.replacingOccurrences(of: "<dc:title>", with: "")
-        .replacingOccurrences(of: "</dc:title>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
-    // Extract resource URL
     var resourceURL: URL?
-    if let resRange = xml.range(of: #"<res[^>]*>(.*?)</res>"#, options: .regularExpression) {
-      let resMatch = String(xml[resRange])
-      let urlStr = resMatch.replacingOccurrences(of: "<res[^>]*>", with: "", options: .regularExpression)
-        .replacingOccurrences(of: "</res>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-      resourceURL = URL(string: urlStr)
-    }
-    
-    // Extract metadata
     var artist: String?
-    if let artistRange = xml.range(of: #"<dc:creator>(.*?)</dc:creator>"#, options: .regularExpression) {
-      let artistMatch = String(xml[artistRange])
-      artist = artistMatch.replacingOccurrences(of: "<dc:creator>", with: "")
-        .replacingOccurrences(of: "</dc:creator>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
-    var duration: String?
-    // Try to find duration in <res> tag attributes first
-    if let resRange = xml.range(of: #"<res[^>]*>"#, options: .regularExpression) {
-      let resTag = String(xml[resRange])
-      if let durRange = resTag.range(of: #"duration="([^"]+)""#, options: .regularExpression) {
-        let durMatch = String(resTag[durRange])
-        duration = durMatch.replacingOccurrences(of: "duration=\"", with: "").replacingOccurrences(of: "\"", with: "")
-      }
-    }
-    // Also check for duration in item metadata
-    if duration == nil {
-      if let durRange = xml.range(of: #"duration="([^"]+)""#, options: .regularExpression) {
-        let durMatch = String(xml[durRange])
-        duration = durMatch.replacingOccurrences(of: "duration=\"", with: "").replacingOccurrences(of: "\"", with: "")
-      }
-    }
-    // Also check for upnp:duration tag
-    if duration == nil {
-      if let durRange = xml.range(of: #"<upnp:duration>(.*?)</upnp:duration>"#, options: .regularExpression) {
-        let durMatch = String(xml[durRange])
-        duration = durMatch.replacingOccurrences(of: "<upnp:duration>", with: "")
-          .replacingOccurrences(of: "</upnp:duration>", with: "")
-          .trimmingCharacters(in: .whitespaces)
-      }
-    }
-    
-    // Extract additional metadata
     var album: String?
-    if let albumRange = xml.range(of: #"<upnp:album>(.*?)</upnp:album>"#, options: .regularExpression) {
-      let albumMatch = String(xml[albumRange])
-      album = albumMatch.replacingOccurrences(of: "<upnp:album>", with: "")
-        .replacingOccurrences(of: "</upnp:album>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
     var genre: String?
-    if let genreRange = xml.range(of: #"<upnp:genre>(.*?)</upnp:genre>"#, options: .regularExpression) {
-      let genreMatch = String(xml[genreRange])
-      genre = genreMatch.replacingOccurrences(of: "<upnp:genre>", with: "")
-        .replacingOccurrences(of: "</upnp:genre>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
-    var date: String?
-    if let dateRange = xml.range(of: #"<dc:date>(.*?)</dc:date>"#, options: .regularExpression) {
-      let dateMatch = String(xml[dateRange])
-      date = dateMatch.replacingOccurrences(of: "<dc:date>", with: "")
-        .replacingOccurrences(of: "</dc:date>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
-    var author: String?
-    if let authorRange = xml.range(of: #"<dc:creator>(.*?)</dc:creator>"#, options: .regularExpression) {
-      let authorMatch = String(xml[authorRange])
-      author = authorMatch.replacingOccurrences(of: "<dc:creator>", with: "")
-        .replacingOccurrences(of: "</dc:creator>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
-    var description: String?
-    if let descRange = xml.range(of: #"<dc:description>(.*?)</dc:description>"#, options: .regularExpression) {
-      let descMatch = String(xml[descRange])
-      description = descMatch.replacingOccurrences(of: "<dc:description>", with: "")
-        .replacingOccurrences(of: "</dc:description>", with: "")
-        .trimmingCharacters(in: .whitespaces)
-    }
-    
+    var duration: String?
     var size: Int64?
-    if let sizeRange = xml.range(of: #"size="([^"]+)""#, options: .regularExpression) {
-      let sizeMatch = String(xml[sizeRange])
-      let sizeStr = sizeMatch.replacingOccurrences(of: "size=\"", with: "").replacingOccurrences(of: "\"", with: "")
-      size = Int64(sizeStr)
-    }
-    
     var mimeType: String?
-    if let mimeRange = xml.range(of: #"protocolInfo="([^"]+)""#, options: .regularExpression) {
-      let mimeMatch = String(xml[mimeRange])
-      // Extract MIME type from protocolInfo (format: http-get:*:video/mp4:...)
-      let parts = mimeMatch.components(separatedBy: ":")
-      if parts.count >= 3 {
-        mimeType = parts[2]
-      }
-    }
-    
-    let metadata = UPnPItem.ItemMetadata(
-      artist: artist,
-      album: album,
-      genre: genre,
-      duration: duration,
-      size: size,
-      mimeType: mimeType,
-      resolution: nil,
-      bitrate: nil,
-      date: date,
-      author: author,
-      description: description
-    )
-    
-    return UPnPItem(
-      id: id,
-      title: title,
-      itemType: .item,
-      resourceURL: resourceURL,
-      parentID: parentID,
-      metadata: metadata
-    )
+    var date: String?
+    var author: String?
+    var description: String?
+    var albumArtURL: URL?
   }
   
-  /// Parse a container from XML
-  private func parseContainer(from xml: String, baseURL: URL) -> UPnPItem? {
-    // Similar to parseItem but for containers
-    guard let idRange = xml.range(of: #"id="([^"]+)""#, options: .regularExpression) else {
-      return nil
-    }
-    let idMatch = String(xml[idRange])
-    let id = idMatch.replacingOccurrences(of: "id=\"", with: "").replacingOccurrences(of: "\"", with: "")
+  var items: [UPnPItem] = []
+  
+  init(baseURL: URL) {
+    self.baseURL = baseURL
+    super.init()
+  }
+  
+  func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String: String] = [:]) {
+    currentElement = qName ?? elementName
+    currentValue = ""
     
-    var parentID = "0"
-    if let parentRange = xml.range(of: #"parentID="([^"]+)""#, options: .regularExpression) {
-      let parentMatch = String(xml[parentRange])
-      parentID = parentMatch.replacingOccurrences(of: "parentID=\"", with: "").replacingOccurrences(of: "\"", with: "")
-    }
-    
-    var title = "Unknown"
-    if let titleRange = xml.range(of: #"<dc:title>(.*?)</dc:title>"#, options: .regularExpression) {
-      let titleMatch = String(xml[titleRange])
-      title = titleMatch.replacingOccurrences(of: "<dc:title>", with: "")
-        .replacingOccurrences(of: "</dc:title>", with: "")
-        .trimmingCharacters(in: .whitespaces)
+    if elementName == "item" || elementName == "container" {
+      let id = attributeDict["id"] ?? ""
+      let parentID = attributeDict["parentID"] ?? "0"
+      let itemType: UPnPItem.ItemType = elementName == "container" ? .container : .item
+      currentRecord = DIDLRecord(id: id, parentID: parentID, itemType: itemType)
+      return
     }
     
-    let metadata = UPnPItem.ItemMetadata(
-      artist: nil,
-      album: nil,
-      genre: nil,
-      duration: nil,
-      size: nil,
-      mimeType: nil,
-      resolution: nil,
-      bitrate: nil,
-      date: nil,
-      author: nil,
-      description: nil
-    )
+    if elementName == "res" {
+      if let duration = attributeDict["duration"]?.nonEmpty {
+        currentRecord?.duration = duration
+      }
+      if let sizeString = attributeDict["size"], let size = Int64(sizeString) {
+        currentRecord?.size = size
+      }
+      if let protocolInfo = attributeDict["protocolInfo"]?.nonEmpty {
+        let parts = protocolInfo.components(separatedBy: ":")
+        if parts.count >= 3 {
+          currentRecord?.mimeType = parts[2].nonEmpty
+        }
+      }
+    }
+  }
+  
+  func parser(_ parser: XMLParser, foundCharacters string: String) {
+    currentValue += string
+  }
+  
+  func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+    guard currentRecord != nil else { return }
     
-    return UPnPItem(
-      id: id,
-      title: title,
-      itemType: .container,
-      resourceURL: nil,
-      parentID: parentID,
-      metadata: metadata
-    )
+    let value = currentValue.nonEmpty
+    let name = qName ?? elementName
+    
+    switch name {
+    case "dc:title", "title":
+      currentRecord?.title = value ?? "Unknown"
+    case "dc:creator", "creator":
+      currentRecord?.artist = value
+      currentRecord?.author = value
+    case "upnp:album", "album":
+      currentRecord?.album = value
+    case "upnp:genre", "genre":
+      currentRecord?.genre = value
+    case "dc:date", "date":
+      currentRecord?.date = value
+    case "dc:description", "description":
+      currentRecord?.description = value
+    case "upnp:duration":
+      if currentRecord?.duration == nil {
+        currentRecord?.duration = value
+      }
+    case "upnp:albumArtURI", "albumArtURI":
+      if let artString = value {
+        currentRecord?.albumArtURL = URL(string: artString, relativeTo: baseURL)?.absoluteURL
+      }
+    case "res":
+      if let resourceString = value,
+         let url = URL(string: resourceString, relativeTo: baseURL)?.absoluteURL {
+        currentRecord?.resourceURL = url
+      }
+    default:
+      break
+    }
+    
+    if elementName == "item" || elementName == "container" {
+      guard let record = currentRecord else { return }
+      
+      let metadata = UPnPItem.ItemMetadata(
+        artist: record.artist,
+        album: record.album,
+        genre: record.genre,
+        duration: record.duration,
+        size: record.size,
+        mimeType: record.mimeType,
+        resolution: nil,
+        bitrate: nil,
+        date: record.date,
+        author: record.author,
+        description: record.description,
+        albumArtURL: record.albumArtURL
+      )
+      
+      items.append(
+        UPnPItem(
+          id: record.id,
+          title: record.title,
+          itemType: record.itemType,
+          resourceURL: record.resourceURL,
+          parentID: record.parentID,
+          metadata: metadata
+        )
+      )
+      currentRecord = nil
+    }
   }
 }
 

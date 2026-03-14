@@ -16,6 +16,9 @@ class UPnPBrowserWindowController: NSWindowController {
   @IBOutlet weak var refreshButton: NSButton?
   @IBOutlet weak var playButton: NSButton?
   @IBOutlet weak var statusLabel: NSTextField?
+  @IBOutlet weak var backButton: NSButton?
+  @IBOutlet weak var searchField: NSSearchField?
+  @IBOutlet weak var pathLabel: NSTextField?
   
   private var devices: [UPnPDevice] = []
   private var contentCache: [String: [UPnPItem]] = [:] // objectID -> items
@@ -26,6 +29,15 @@ class UPnPBrowserWindowController: NSWindowController {
   /// The container whose contents are currently shown in the outline view.
   /// - "0" = device root, or flattened favorite root.
   private var currentContainerID: String = "0"
+  /// Best-effort title of the current container for logging/fallback refresh.
+  private var currentContainerTitle: String = "Root"
+  private var currentPathIDs: [String] = ["0"]
+  private var containerTitleByID: [String: String] = ["0": "Root"]
+  private var containerParentByID: [String: String] = [:]
+  private var isShowingSearchResults = false
+  
+  private var thumbnailCache: [String: NSImage] = [:]
+  private var thumbnailLoading: Set<String> = []
   /// Timer to monitor playback position and trigger auto-play next when near EOF.
   private var autoPlayTimer: Timer?
   /// Timer to periodically refresh the current folder content
@@ -305,6 +317,26 @@ class UPnPBrowserWindowController: NSWindowController {
     statusLabel.translatesAutoresizingMaskIntoConstraints = false
     bottomPanel.addSubview(statusLabel)
     
+    let pathLabel = NSTextField(labelWithString: "")
+    pathLabel.translatesAutoresizingMaskIntoConstraints = false
+    pathLabel.textColor = .secondaryLabelColor
+    pathLabel.lineBreakMode = .byTruncatingMiddle
+    bottomPanel.addSubview(pathLabel)
+    
+    let backButton = NSButton(title: NSLocalizedString("upnp.browser.back", comment: "Back"), target: self, action: #selector(goBack))
+    backButton.bezelStyle = .rounded
+    backButton.translatesAutoresizingMaskIntoConstraints = false
+    backButton.isEnabled = false
+    bottomPanel.addSubview(backButton)
+    
+    let searchField = NSSearchField(frame: .zero)
+    searchField.translatesAutoresizingMaskIntoConstraints = false
+    searchField.placeholderString = NSLocalizedString("upnp.browser.search.placeholder", comment: "Search current folder")
+    searchField.sendsSearchStringImmediately = true
+    searchField.target = self
+    searchField.action = #selector(searchFieldChanged(_:))
+    bottomPanel.addSubview(searchField)
+    
     // Create refresh button with menu for options
     let refreshButton = NSButton(title: "Refresh", target: self, action: #selector(refreshCurrentFolder))
     refreshButton.bezelStyle = .rounded
@@ -336,6 +368,9 @@ class UPnPBrowserWindowController: NSWindowController {
     self.refreshButton = refreshButton
     self.playButton = playButton
     self.statusLabel = statusLabel
+    self.backButton = backButton
+    self.searchField = searchField
+    self.pathLabel = pathLabel
     
     // Layout constraints
     NSLayoutConstraint.activate([
@@ -364,18 +399,32 @@ class UPnPBrowserWindowController: NSWindowController {
       statusLabel.leadingAnchor.constraint(equalTo: bottomPanel.leadingAnchor, constant: 12),
       statusLabel.centerYAnchor.constraint(equalTo: bottomPanel.centerYAnchor),
       
+      // Path label
+      pathLabel.leadingAnchor.constraint(equalTo: statusLabel.trailingAnchor, constant: 8),
+      pathLabel.centerYAnchor.constraint(equalTo: bottomPanel.centerYAnchor),
+      
       // Refresh button
       refreshButton.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -8),
       refreshButton.centerYAnchor.constraint(equalTo: bottomPanel.centerYAnchor),
       refreshButton.widthAnchor.constraint(equalToConstant: 70),
+      
+      // Search field
+      searchField.trailingAnchor.constraint(equalTo: refreshButton.leadingAnchor, constant: -8),
+      searchField.centerYAnchor.constraint(equalTo: bottomPanel.centerYAnchor),
+      searchField.widthAnchor.constraint(equalToConstant: 220),
+      
+      // Back button
+      backButton.trailingAnchor.constraint(equalTo: searchField.leadingAnchor, constant: -8),
+      backButton.centerYAnchor.constraint(equalTo: bottomPanel.centerYAnchor),
+      backButton.widthAnchor.constraint(equalToConstant: 62),
       
       // Play button
       playButton.trailingAnchor.constraint(equalTo: bottomPanel.trailingAnchor, constant: -12),
       playButton.centerYAnchor.constraint(equalTo: bottomPanel.centerYAnchor),
       playButton.widthAnchor.constraint(equalToConstant: 60),
       
-      // Status label trailing
-      statusLabel.trailingAnchor.constraint(lessThanOrEqualTo: refreshButton.leadingAnchor, constant: -8)
+      // Labels trailing
+      pathLabel.trailingAnchor.constraint(lessThanOrEqualTo: backButton.leadingAnchor, constant: -8)
     ])
     
     Logger.log("createUI completed - containerView frame: \(containerView.frame), subviews: \(containerView.subviews.count)", subsystem: subsystem)
@@ -413,6 +462,7 @@ class UPnPBrowserWindowController: NSWindowController {
       outlineView.dataSource = self
       outlineView.target = self
       outlineView.doubleAction = #selector(itemDoubleClicked)
+      applySavedSortDescriptor(to: outlineView)
       // Enable context menu
       let menu = NSMenu()
       menu.delegate = self as NSMenuDelegate
@@ -428,10 +478,12 @@ class UPnPBrowserWindowController: NSWindowController {
     
     // Setup buttons
     playButton?.isEnabled = false
-    refreshButton?.action = #selector(refreshDevices)
+    refreshButton?.action = #selector(refreshCurrentFolder)
     playButton?.action = #selector(playSelectedItem)
+    backButton?.action = #selector(goBack)
     
     statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.discovering", comment: "Discovering devices...")
+    updatePathUI()
   }
   
   @objc private func startDiscovery() {
@@ -444,6 +496,11 @@ class UPnPBrowserWindowController: NSWindowController {
     UPnPManager.shared.onDeviceDiscovered = { [weak self] device in
       DispatchQueue.main.async {
         self?.deviceDiscovered(device)
+      }
+    }
+    UPnPManager.shared.onDeviceRemoved = { [weak self] deviceID in
+      DispatchQueue.main.async {
+        self?.deviceRemoved(deviceID: deviceID)
       }
     }
     
@@ -461,11 +518,17 @@ class UPnPBrowserWindowController: NSWindowController {
   @objc private func refreshDevices() {
     devices.removeAll()
     contentCache.removeAll()
+    containerParentByID.removeAll()
+    containerTitleByID = ["0": "Root"]
+    currentPathIDs = ["0"]
     selectedDevice = nil
     selectedItem = nil
+    isShowingSearchResults = false
+    searchField?.stringValue = ""
     deviceTableView?.reloadData()
     contentOutlineView?.reloadData()
     playButton?.isEnabled = false
+    updatePathUI()
     
     UPnPManager.shared.clearDevices()
     startDiscovery()
@@ -481,19 +544,22 @@ class UPnPBrowserWindowController: NSWindowController {
       return
     }
     
-    // If we're viewing a favorite, refresh that container
+    // If we're viewing a non-root container, refresh that container directly.
+    // Favorites are often shown as flattened roots, so the parent container object
+    // might not exist in cache; in that case we still can refresh by container ID.
     if currentContainerID != "0" {
-      // Find the container item
-      if let containerItems = contentCache.values.first(where: { items in
-        items.contains(where: { $0.id == currentContainerID })
-      }),
-         let container = containerItems.first(where: { $0.id == currentContainerID }) {
-        Logger.log("Refreshing current container: \(container.title) (ID: \(currentContainerID))", subsystem: subsystem)
-        // Clear cache for this container to force reload
-        contentCache.removeValue(forKey: currentContainerID)
-        browseContainer(container, device: device)
-        return
-      }
+      let container = UPnPItem(
+        id: currentContainerID,
+        title: currentContainerTitle,
+        itemType: .container,
+        resourceURL: nil,
+        parentID: "0",
+        metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil, albumArtURL: nil)
+      )
+      Logger.log("Refreshing current container: \(container.title) (ID: \(currentContainerID))", subsystem: subsystem)
+      contentCache.removeValue(forKey: currentContainerID)
+      browseContainer(container, device: device, asRoot: true)
+      return
     }
     
     // Otherwise refresh the device root
@@ -508,6 +574,25 @@ class UPnPBrowserWindowController: NSWindowController {
       deviceTableView?.reloadData()
       Logger.log("Device discovered: \(device.friendlyName)", subsystem: subsystem)
     }
+  }
+  
+  private func deviceRemoved(deviceID: String) {
+    devices.removeAll { $0.id == deviceID }
+    deviceTableView?.reloadData()
+    
+    guard selectedDevice?.id == deviceID else { return }
+    selectedDevice = nil
+    selectedItem = nil
+    contentCache.removeAll()
+    currentContainerID = "0"
+    currentContainerTitle = "Root"
+    currentPathIDs = ["0"]
+    containerTitleByID = ["0": "Root"]
+    containerParentByID.removeAll()
+    isShowingSearchResults = false
+    contentOutlineView?.reloadData()
+    statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.device_not_found", comment: "Device not found")
+    updatePathUI()
   }
   
   @objc private func deviceDoubleClicked() {
@@ -529,14 +614,22 @@ class UPnPBrowserWindowController: NSWindowController {
     statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.browsing", comment: "Browsing content...")
     // Reset cache and set current container to root
     contentCache.removeAll()
+    containerParentByID.removeAll()
+    containerTitleByID = ["0": device.friendlyName]
+    currentPathIDs = ["0"]
     currentContainerID = "0"
+    currentContainerTitle = device.friendlyName
+    isShowingSearchResults = false
+    searchField?.stringValue = ""
+    updatePathUI()
     contentOutlineView?.reloadData()
     
     Task {
       do {
         let items = try await UPnPManager.shared.browseContent(device: device, objectID: "0")
         await MainActor.run {
-          self.contentCache["0"] = items
+          self.contentCache["0"] = self.sortedItems(items)
+          self.rememberParents(for: items, parentID: "0")
           self.contentOutlineView?.reloadData()
           self.statusLabel?.stringValue = String(format: NSLocalizedString("upnp.browser.status.items", comment: "Found %d items"), items.count)
           // Restart auto-refresh when browsing a new container
@@ -572,28 +665,49 @@ class UPnPBrowserWindowController: NSWindowController {
     return allItems
   }
   
-  private func browseContainer(_ container: UPnPItem, device: UPnPDevice) {
+  /// Browse a container's contents.
+  /// - Parameters:
+  ///   - container: The container item to browse.
+  ///   - device: The UPnP device.
+  ///   - asRoot: When `true` the container becomes the outline view root (used by favorites
+  ///     and direct navigation). When `false` the container is expanded as a subfolder
+  ///     inside the existing tree (used by outline view expansion).
+  private func browseContainer(_ container: UPnPItem, device: UPnPDevice, asRoot: Bool = false) {
     guard container.isContainer else { 
       Logger.log("browseContainer called on non-container item: \(container.title)", level: .error, subsystem: subsystem)
       return 
     }
     
-    guard let device = selectedDevice else {
-      Logger.log("No device selected for browsing container", level: .error, subsystem: subsystem)
-      return
+    Logger.log("Browsing container '\(container.title)' (ID: \(container.id), asRoot: \(asRoot))", subsystem: subsystem)
+    
+    if asRoot {
+      let previousContainerID = currentContainerID
+      currentContainerID = container.id
+      currentContainerTitle = container.title
+      containerTitleByID[container.id] = container.title
+      containerParentByID[container.id] = container.parentID
+      isShowingSearchResults = false
+      if let existingIndex = currentPathIDs.firstIndex(of: container.id) {
+        currentPathIDs = Array(currentPathIDs.prefix(existingIndex + 1))
+      } else if currentPathIDs.last == previousContainerID || currentPathIDs.last == container.parentID {
+        currentPathIDs.append(container.id)
+      } else if container.parentID == "0" {
+        currentPathIDs = ["0", container.id]
+      } else {
+        currentPathIDs = ["0", container.id]
+      }
+      updatePathUI()
     }
-    
-    Logger.log("Browsing container '\(container.title)' (ID: \(container.id))", subsystem: subsystem)
-    
-    // Update current container ID
-    currentContainerID = container.id
     
     // Check cache first - if already loaded and not empty, just reload and expand
     if let cachedItems = contentCache[container.id], !cachedItems.isEmpty {
       Logger.log("Container already cached with \(cachedItems.count) items, reloading and expanding", subsystem: subsystem)
-      contentOutlineView?.reloadItem(container, reloadChildren: true)
-      contentOutlineView?.expandItem(container)
-      // Restart auto-refresh when browsing a container
+      if asRoot {
+        contentOutlineView?.reloadData()
+      } else {
+        contentOutlineView?.reloadItem(container, reloadChildren: true)
+        contentOutlineView?.expandItem(container)
+      }
       startAutoRefreshIfNeeded()
       return
     }
@@ -606,17 +720,20 @@ class UPnPBrowserWindowController: NSWindowController {
         await MainActor.run {
           Logger.log("Loaded \(items.count) items from container '\(container.title)' (ID: \(container.id))", subsystem: subsystem)
           
-          // Store items in cache with their original parent ID
-          self.contentCache[container.id] = items
+          // Store items in cache
+          self.contentCache[container.id] = self.sortedItems(items)
+          self.rememberParents(for: items, parentID: container.id)
           
-          // Reload the container and its children
-          self.contentOutlineView?.reloadItem(container, reloadChildren: true)
-          
-          // Expand the container to show children
-          self.contentOutlineView?.expandItem(container)
+          if asRoot {
+            // Container is the outline view root (e.g. favorite) — full reload
+            self.contentOutlineView?.reloadData()
+          } else {
+            // Container is a subfolder within the tree — reload and expand it
+            self.contentOutlineView?.reloadItem(container, reloadChildren: true)
+            self.contentOutlineView?.expandItem(container)
+          }
           
           self.statusLabel?.stringValue = String(format: NSLocalizedString("upnp.browser.status.items", comment: "Found %d items"), items.count)
-          // Restart auto-refresh when browsing a container
           self.startAutoRefreshIfNeeded()
         }
       } catch {
@@ -653,8 +770,69 @@ class UPnPBrowserWindowController: NSWindowController {
     selectedItem = item
     outlineView.selectRowIndexes(IndexSet(integer: clickedRow), byExtendingSelection: false)
     
+    if item.isContainer, let device = selectedDevice {
+      browseContainer(item, device: device, asRoot: true)
+      return
+    }
+    
     // Play the item
     playSelectedItem()
+  }
+  
+  @objc private func goBack() {
+    guard currentPathIDs.count > 1, let device = selectedDevice else { return }
+    
+    currentPathIDs.removeLast()
+    guard let previousID = currentPathIDs.last else { return }
+    if previousID == "0" {
+      browseDevice(device)
+      return
+    }
+    
+    let container = UPnPItem(
+      id: previousID,
+      title: containerTitleByID[previousID] ?? "Folder",
+      itemType: .container,
+      resourceURL: nil,
+      parentID: containerParentByID[previousID] ?? "0",
+      metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil, albumArtURL: nil)
+    )
+    browseContainer(container, device: device, asRoot: true)
+  }
+  
+  @objc private func searchFieldChanged(_ sender: NSSearchField) {
+    let query = sender.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+    if query.isEmpty {
+      isShowingSearchResults = false
+      refreshCurrentFolder()
+      return
+    }
+    performSearch(query: query)
+  }
+  
+  private func performSearch(query: String) {
+    guard let device = selectedDevice else { return }
+    let containerID = currentContainerID
+    statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.searching", comment: "Searching...")
+    
+    Task {
+      do {
+        let escaped = query.replacingOccurrences(of: "\"", with: "\\\"")
+        let criteria = "dc:title contains \"\(escaped)\""
+        let items = try await UPnPManager.shared.searchContent(device: device, objectID: containerID, searchCriteria: criteria)
+        await MainActor.run {
+          self.isShowingSearchResults = true
+          self.contentCache[containerID] = self.sortedItems(items)
+          self.rememberParents(for: items, parentID: containerID)
+          self.contentOutlineView?.reloadData()
+          self.statusLabel?.stringValue = String(format: NSLocalizedString("upnp.browser.status.search_results", comment: "Search results: %d"), items.count)
+        }
+      } catch {
+        await MainActor.run {
+          self.statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.error", comment: "Error: ") + error.localizedDescription
+        }
+      }
+    }
   }
   
   /// Prepare a player for UPnP playback by disabling watch-later resume and resetting speed.
@@ -1002,16 +1180,33 @@ class UPnPBrowserWindowController: NSWindowController {
   @objc private func handlePlayerStopped(_ notification: Notification) {
     Logger.log("Player stopped notification received, isAutoPlayingNext: \(isAutoPlayingNext)", subsystem: subsystem)
     
-    // Don't stop auto-play if we're in the middle of auto-playing (transitioning between videos)
-    // The player stops briefly when switching videos, but we want to continue auto-play
+    // During auto-next transition mpv can briefly enter stopped/idle before the next item starts.
+    // Delay a little and verify state so user-triggered close during transition still reopens
+    // the UPnP browser, while normal transition continues without reopening.
     if isAutoPlayingNext {
-      Logger.log("Ignoring player stopped - currently auto-playing next item", subsystem: subsystem)
+      let player = notification.object as? PlayerCore
+      Logger.log("Player stopped while auto-playing next; deferring stop handling", subsystem: subsystem)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+        guard let self = self else { return }
+        let state = player?.info.state ?? PlayerCore.lastActive.info.state
+        if self.isAutoPlayingNext, state == .loading || state == .starting || state == .loaded || state == .playing || state == .paused {
+          Logger.log("Ignoring player stopped - transition still in progress (state: \(state))", subsystem: self.subsystem)
+          return
+        }
+        Logger.log("Handling player stopped after deferred check (state: \(state))", subsystem: self.subsystem)
+        self.isAutoPlayingNext = false
+        self.stopAutoPlay()
+        self.reopenBrowserIfNeeded()
+      }
       return
     }
     
     Logger.log("Stopping auto-play monitoring", subsystem: subsystem)
     stopAutoPlay()
-    
+    reopenBrowserIfNeeded()
+  }
+  
+  private func reopenBrowserIfNeeded() {
     // Handle browser behavior when video closes
     let behavior = Preference.integer(for: .upnpBrowserBehavior)
     Logger.log("Browser behavior setting: \(behavior) (0=close, 1=keep open, 2=reopen)", subsystem: subsystem)
@@ -1020,8 +1215,10 @@ class UPnPBrowserWindowController: NSWindowController {
       // behavior 1: Window was hidden with orderOut when playback started - show it again
       // behavior 2: Explicitly reopen browser when video ends
       Logger.log("Showing browser window (behavior=\(behavior))", subsystem: subsystem)
-      DispatchQueue.main.async { [weak self] in
-        self?.showWindow(nil)
+      DispatchQueue.main.async {
+        // Avoid leaving the generic network loading window visible for UPnP flows.
+        AppDelegate.shared.openURLWindow.close()
+        AppDelegate.shared.upnpBrowserWindow.showWindow(nil)
       }
     }
   }
@@ -1063,6 +1260,11 @@ class UPnPBrowserWindowController: NSWindowController {
       return
     }
     
+    guard !isShowingSearchResults else {
+      Logger.log("Auto-refresh suspended while showing search results", subsystem: subsystem)
+      return
+    }
+    
     // Only auto-refresh if we have a selected device and a valid container
     guard selectedDevice != nil, currentContainerID != "" else {
       Logger.log("No device or container selected for auto-refresh", subsystem: subsystem)
@@ -1085,7 +1287,8 @@ class UPnPBrowserWindowController: NSWindowController {
   @objc private func performAutoRefresh() {
     guard Preference.bool(for: .upnpAutoRefreshEnabled),
           let device = selectedDevice,
-          currentContainerID != "" else {
+          currentContainerID != "",
+          !isShowingSearchResults else {
       stopAutoRefresh()
       return
     }
@@ -1100,7 +1303,7 @@ class UPnPBrowserWindowController: NSWindowController {
           let items = try await UPnPManager.shared.browseContent(device: device, objectID: "0")
           await MainActor.run {
             let oldCount = self.contentCache["0"]?.count ?? 0
-            self.contentCache["0"] = items
+            self.contentCache["0"] = self.sortedItems(items)
             self.contentOutlineView?.reloadData()
             if items.count != oldCount {
               Logger.log("Auto-refresh: Container count changed from \(oldCount) to \(items.count)", subsystem: self.subsystem)
@@ -1113,33 +1316,25 @@ class UPnPBrowserWindowController: NSWindowController {
           }
         }
           }
-        } else {
-      // Refresh specific container - find it in cache
-      var foundContainer: UPnPItem?
-      for (_, items) in contentCache {
-        if let container = items.first(where: { $0.id == currentContainerID && $0.isContainer }) {
-          foundContainer = container
-          break
-        }
-      }
-      
-      if let container = foundContainer {
-        Task {
-          do {
-            let items = try await UPnPManager.shared.browseContent(device: device, objectID: container.id)
-            await MainActor.run {
-              let oldCount = self.contentCache[container.id]?.count ?? 0
-              self.contentCache[container.id] = items
-              self.contentOutlineView?.reloadItem(container, reloadChildren: true)
-              if items.count != oldCount {
-                Logger.log("Auto-refresh: Container '\(container.title)' count changed from \(oldCount) to \(items.count)", subsystem: self.subsystem)
-                self.statusLabel?.stringValue = String(format: NSLocalizedString("upnp.browser.status.items", comment: "Found %d items"), items.count)
-              }
+    } else {
+      let refreshingContainerID = currentContainerID
+      let refreshingContainerTitle = currentContainerTitle
+      Task {
+        do {
+          let items = try await UPnPManager.shared.browseContent(device: device, objectID: refreshingContainerID)
+          await MainActor.run {
+            let oldCount = self.contentCache[refreshingContainerID]?.count ?? 0
+            self.contentCache[refreshingContainerID] = self.sortedItems(items)
+            // Current non-root views (favorites and direct container browsing) are flattened roots.
+            self.contentOutlineView?.reloadData()
+            if items.count != oldCount {
+              Logger.log("Auto-refresh: Container '\(refreshingContainerTitle)' count changed from \(oldCount) to \(items.count)", subsystem: self.subsystem)
+              self.statusLabel?.stringValue = String(format: NSLocalizedString("upnp.browser.status.items", comment: "Found %d items"), items.count)
             }
-          } catch {
-            await MainActor.run {
-              Logger.log("Auto-refresh failed for container '\(container.title)': \(error)", level: .error, subsystem: self.subsystem)
-            }
+          }
+        } catch {
+          await MainActor.run {
+            Logger.log("Auto-refresh failed for container '\(refreshingContainerTitle)': \(error)", level: .error, subsystem: self.subsystem)
           }
         }
       }
@@ -1218,6 +1413,12 @@ class UPnPBrowserWindowController: NSWindowController {
     
     // Select the device
     selectedDevice = device
+    currentContainerID = favorite.containerID
+    currentContainerTitle = favorite.containerTitle
+    containerTitleByID[favorite.containerID] = favorite.containerTitle
+    currentPathIDs = ["0", favorite.containerID]
+    isShowingSearchResults = false
+    updatePathUI()
     deviceTableView?.reloadData()
     
     // Create a container item for the favorite
@@ -1227,13 +1428,98 @@ class UPnPBrowserWindowController: NSWindowController {
       itemType: .container,
       resourceURL: nil,
       parentID: "0",
-      metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil)
+      metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil, albumArtURL: nil)
     )
     
-    // Browse the favorite container
-    currentContainerID = favorite.containerID
-    browseContainer(container, device: device)
+    // Browse the favorite container as root (shows its children as top-level items)
+    browseContainer(container, device: device, asRoot: true)
     // Auto-refresh will be started by browseContainer
+  }
+
+  private func applySavedSortDescriptor(to outlineView: NSOutlineView) {
+    let sortKey = Preference.string(for: .upnpSortKey) ?? "title"
+    let ascending = Preference.bool(for: .upnpSortAscending)
+    outlineView.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: ascending)]
+  }
+
+  private func sortedItems(_ sourceItems: [UPnPItem], using sortDescriptor: NSSortDescriptor? = nil) -> [UPnPItem] {
+    var items = sourceItems
+    let descriptor = sortDescriptor ?? contentOutlineView?.sortDescriptors.first ?? NSSortDescriptor(key: "title", ascending: true)
+    let key = descriptor.key ?? "title"
+    let ascending = descriptor.ascending
+    
+    items.sort { item1, item2 in
+      let result: ComparisonResult
+      switch key {
+      case "title":
+        result = item1.title.localizedStandardCompare(item2.title)
+      case "duration":
+        let dur1 = item1.metadata.duration ?? ""
+        let dur2 = item2.metadata.duration ?? ""
+        result = dur1.localizedStandardCompare(dur2)
+      case "size":
+        let size1 = item1.metadata.size ?? 0
+        let size2 = item2.metadata.size ?? 0
+        result = size1 < size2 ? .orderedAscending : (size1 > size2 ? .orderedDescending : .orderedSame)
+      case "date":
+        let date1 = item1.metadata.date ?? ""
+        let date2 = item2.metadata.date ?? ""
+        result = date1.localizedStandardCompare(date2)
+      default:
+        result = item1.title.localizedStandardCompare(item2.title)
+      }
+      return ascending ? result == .orderedAscending : result == .orderedDescending
+    }
+    
+    return items
+  }
+  
+  private func rememberParents(for items: [UPnPItem], parentID: String) {
+    for item in items {
+      containerTitleByID[item.id] = item.title
+      if item.isContainer {
+        containerParentByID[item.id] = item.parentID.isEmpty ? parentID : item.parentID
+      }
+    }
+    updatePathUI()
+  }
+  
+  private func updatePathUI() {
+    let titles = currentPathIDs.map { id -> String in
+      if id == "0" {
+        return containerTitleByID["0"] ?? "Root"
+      }
+      return containerTitleByID[id] ?? id
+    }
+    pathLabel?.stringValue = titles.joined(separator: " > ")
+    backButton?.isEnabled = currentPathIDs.count > 1
+  }
+  
+  private func icon(for item: UPnPItem, outlineView: NSOutlineView) -> NSImage? {
+    if item.isContainer {
+      return NSImage(named: NSImage.folderName)
+    }
+    
+    if let artURL = item.metadata.albumArtURL {
+      let key = artURL.absoluteString
+      if let image = thumbnailCache[key] {
+        return image
+      }
+      if !thumbnailLoading.contains(key) {
+        thumbnailLoading.insert(key)
+        URLSession.shared.dataTask(with: artURL) { [weak self] data, _, _ in
+          guard let self = self else { return }
+          defer { self.thumbnailLoading.remove(key) }
+          guard let data = data, let image = NSImage(data: data) else { return }
+          DispatchQueue.main.async {
+            self.thumbnailCache[key] = image
+            outlineView.reloadItem(item)
+          }
+        }.resume()
+      }
+    }
+    
+    return NSImage(named: NSImage.multipleDocumentsName)
   }
 }
 
@@ -1318,7 +1604,7 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
         itemType: .item,
         resourceURL: nil,
         parentID: "0",
-        metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil)
+        metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil, albumArtURL: nil)
       )
     }
     
@@ -1332,7 +1618,7 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
         itemType: .item,
         resourceURL: nil,
         parentID: container.id,
-        metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil)
+        metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil, albumArtURL: nil)
       )
     }
     
@@ -1342,7 +1628,7 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
       itemType: .item,
       resourceURL: nil,
       parentID: "0",
-      metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil)
+      metadata: UPnPItem.ItemMetadata(artist: nil, album: nil, genre: nil, duration: nil, size: nil, mimeType: nil, resolution: nil, bitrate: nil, date: nil, author: nil, description: nil, albumArtURL: nil)
     )
   }
   
@@ -1376,6 +1662,12 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
     if cell == nil {
       cell = NSTableCellView()
       cell?.identifier = identifier
+      let imageView = NSImageView()
+      imageView.translatesAutoresizingMaskIntoConstraints = false
+      imageView.imageScaling = .scaleProportionallyUpOrDown
+      cell?.addSubview(imageView)
+      cell?.imageView = imageView
+      
       let textField = NSTextField()
       textField.isEditable = false
       textField.isBordered = false
@@ -1384,7 +1676,11 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
       cell?.addSubview(textField)
       cell?.textField = textField
       NSLayoutConstraint.activate([
-        textField.leadingAnchor.constraint(equalTo: cell!.leadingAnchor, constant: 4),
+        imageView.leadingAnchor.constraint(equalTo: cell!.leadingAnchor, constant: 4),
+        imageView.centerYAnchor.constraint(equalTo: cell!.centerYAnchor),
+        imageView.widthAnchor.constraint(equalToConstant: 16),
+        imageView.heightAnchor.constraint(equalToConstant: 16),
+        textField.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 6),
         textField.trailingAnchor.constraint(equalTo: cell!.trailingAnchor, constant: -4),
         textField.centerYAnchor.constraint(equalTo: cell!.centerYAnchor)
       ])
@@ -1393,61 +1689,49 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
     switch identifier.rawValue {
     case "Title":
       cell?.textField?.stringValue = upnpItem.title
+      cell?.imageView?.isHidden = false
+      cell?.imageView?.image = icon(for: upnpItem, outlineView: outlineView)
     case "Duration":
       cell?.textField?.stringValue = upnpItem.formattedDuration ?? ""
+      cell?.imageView?.isHidden = true
     case "Size":
       cell?.textField?.stringValue = upnpItem.formattedSize ?? ""
+      cell?.imageView?.isHidden = true
     case "Date":
       cell?.textField?.stringValue = upnpItem.formattedDate ?? ""
+      cell?.imageView?.isHidden = true
     case "Author":
       cell?.textField?.stringValue = upnpItem.metadata.author ?? ""
+      cell?.imageView?.isHidden = true
     case "Description":
       cell?.textField?.stringValue = upnpItem.metadata.description ?? ""
+      cell?.imageView?.isHidden = true
     case "Type":
       cell?.textField?.stringValue = upnpItem.metadata.mimeType ?? ""
+      cell?.imageView?.isHidden = true
     default:
       cell?.textField?.stringValue = upnpItem.title
+      cell?.imageView?.isHidden = true
     }
     
     return cell
   }
   
   func outlineView(_ outlineView: NSOutlineView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-    guard let sortDescriptor = outlineView.sortDescriptors.first,
-          let device = selectedDevice else { return }
+    guard let sortDescriptor = outlineView.sortDescriptors.first else { return }
     
     let key = sortDescriptor.key ?? "title"
     let ascending = sortDescriptor.ascending
+    Preference.set(key, for: .upnpSortKey)
+    Preference.set(ascending, for: .upnpSortAscending)
     
     var items: [UPnPItem] = []
     if let cachedItems = contentCache[currentContainerID] {
       items = cachedItems
     }
     
-    items.sort { item1, item2 in
-      let result: ComparisonResult
-      switch key {
-      case "title":
-        result = item1.title.localizedStandardCompare(item2.title)
-      case "duration":
-        let dur1 = item1.metadata.duration ?? ""
-        let dur2 = item2.metadata.duration ?? ""
-        result = dur1.localizedStandardCompare(dur2)
-      case "size":
-        let size1 = item1.metadata.size ?? 0
-        let size2 = item2.metadata.size ?? 0
-        result = size1 < size2 ? .orderedAscending : (size1 > size2 ? .orderedDescending : .orderedSame)
-      case "date":
-        let date1 = item1.metadata.date ?? ""
-        let date2 = item2.metadata.date ?? ""
-        result = date1.localizedStandardCompare(date2)
-      default:
-        result = item1.title.localizedStandardCompare(item2.title)
-      }
-      return ascending ? result == .orderedAscending : result == .orderedDescending
-    }
-    
-    contentCache[currentContainerID] = items
+    let sorted = sortedItems(items, using: sortDescriptor)
+    contentCache[currentContainerID] = sorted
     outlineView.reloadData()
   }
 }

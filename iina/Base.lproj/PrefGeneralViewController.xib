@@ -533,7 +533,7 @@
         </customView>
         <userDefaultsController representsSharedInstance="YES" id="IBP-Mz-Maa"/>
         <customView id="y7O-rd-dnT" userLabel="Prefs &gt; General &gt; Playlist">
-            <rect key="frame" x="0.0" y="0.0" width="572" height="170"/>
+            <rect key="frame" x="0.0" y="0.0" width="572" height="146"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitlePlaylist" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gO-wx-MWj">
@@ -575,37 +575,6 @@
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.playlistAutoPlayNext" id="vHd-Al-GNZ"/>
                     </connections>
                 </button>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UPnP-Browser-Label">
-                    <rect key="frame" x="118" y="55" width="150" height="16"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="UPnP/DLNA Browser:" id="UPnP-Browser-Label-Cell">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UPnP-Browser-Popup">
-                    <rect key="frame" x="273" y="51" width="250" height="25"/>
-                    <popUpButtonCell key="cell" type="push" title="Keep browser open" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="UPnP-Browser-Item-1" id="UPnP-Browser-Cell">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="message"/>
-                        <menu key="menu" id="UPnP-Browser-Menu">
-                            <items>
-                                <menuItem title="Close browser when playing" tag="0" id="UPnP-Browser-Item-0">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="Keep browser open" tag="1" state="on" id="UPnP-Browser-Item-1">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                                <menuItem title="Reopen browser when playback ends" tag="2" id="UPnP-Browser-Item-2">
-                                    <modifierMask key="keyEquivalentModifierMask"/>
-                                </menuItem>
-                            </items>
-                        </menu>
-                    </popUpButtonCell>
-                    <connections>
-                        <binding destination="IBP-Mz-Maa" name="selectedTag" keyPath="values.upnpBrowserBehavior" id="UPnP-Browser-Binding"/>
-                    </connections>
-                </popUpButton>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YDQ-cu-7vE">
                     <rect key="frame" x="120" y="56" width="366" height="16"/>
                     <buttonCell key="cell" type="check" title="Show artist and track name for audio files when available" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kBI-Th-bBV">
@@ -617,7 +586,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ey2-TT-Tl9">
-                    <rect key="frame" x="140" y="32" width="154" height="16"/>
+                    <rect key="frame" x="138" y="31" width="158" height="18"/>
                     <buttonCell key="cell" type="check" title="Only in &quot;music mode&quot;" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AVe-9Z-RgQ">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>

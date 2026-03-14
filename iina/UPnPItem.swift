@@ -34,6 +34,7 @@ struct UPnPItem: Identifiable, Hashable {
     let date: String? // Date string (various formats)
     let author: String? // Creator/author
     let description: String? // Description
+    let albumArtURL: URL?
   }
   
   var isPlayable: Bool {

@@ -15,7 +15,12 @@ extend-ignore-re = [
     "V\\[alue\\]",
     "ba!",
     # Ignore the token declaration in AssrtSubtitle.
-    "5IzWrb.*"
+    "5IzWrb.*",
+    # UPnP confuses the camel case parser (typos issue #1002).
+    "\\w*UPnP\\w*",
+    "\\w*[Uu]pnp\\w*",
+    "\\w*DLNA\\w*",
+    "\\w*[Dd]lna\\w*",
 ]
 
 [default.extend-words]
@@ -32,7 +37,3 @@ extend-ignore-re = [
 "tak" = "tak"
 "videoParamsMaxCll" = "videoParamsMaxCll"
 "CPSProcessSerNum" = "CPSProcessSerNum"
-"upnp" = "upnp"
-"dlna" = "dlna"
-"UPnP" = "UPnP"
-"DLNA" = "DLNA"

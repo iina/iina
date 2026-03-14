@@ -2367,14 +2367,12 @@ class PlayerCore: NSObject {
   }
 
   private func autoSearchOnlineSub() {
-    DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) { [self] in
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
       if Preference.bool(for: .autoSearchOnlineSub) && !info.isNetworkResource &&
         (info.videoDuration?.second ?? 0.0) >= Preference.double(for: .autoSearchThreshold) * 60 {
         info.$subTracks.withLock {
           if $0.isEmpty {
-            DispatchQueue.main.async {
-              self.mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
-            }
+            mainWindow.menuActionHandler.menuFindOnlineSub(.dummy)
           }
         }
       }

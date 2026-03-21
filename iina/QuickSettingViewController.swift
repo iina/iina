@@ -676,13 +676,13 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     return nil
   }
 
-  private func downloadedSubtitleDirectoryPath() -> String {
-    Utility.tempDirURL.appendingPathComponent("iina-io.iina.opensub", isDirectory: true).path + "/"
+  private func temporarySubtitleDirectoryPath() -> String {
+    Utility.tempDirURL.path.hasSuffix("/") ? Utility.tempDirURL.path : Utility.tempDirURL.path + "/"
   }
 
   private func isRemovableDownloadedSubtitle(_ track: MPVTrack) -> Bool {
     guard track.type == .sub, track.isExternal, let filename = track.externalFilename else { return false }
-    return filename.hasPrefix(downloadedSubtitleDirectoryPath())
+    return filename.hasPrefix(temporarySubtitleDirectoryPath())
   }
 
   private func updateSubtitleContextMenu(_ menu: NSMenu) {

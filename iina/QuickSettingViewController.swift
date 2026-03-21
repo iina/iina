@@ -96,6 +96,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   var currentTab: TabViewType = .video
 
   var observers: [NSObjectProtocol] = []
+  private let primarySubtitleContextMenu = NSMenu(title: "Primary Subtitle Actions")
+  private let secondarySubtitleContextMenu = NSMenu(title: "Secondary Subtitle Actions")
 
   @IBOutlet weak var videoTabScrollView: NSScrollView!
   @IBOutlet weak var audioTabScrollView: NSScrollView!
@@ -227,6 +229,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
     }
+    [primarySubtitleContextMenu, secondarySubtitleContextMenu].forEach {
+      $0.delegate = self
+      $0.autoenablesItems = false
+    }
+    subTableView.menu = primarySubtitleContextMenu
+    secSubTableView.menu = secondarySubtitleContextMenu
 
     // Color Wells
     if #available(macOS 13.0, *) {
@@ -658,6 +666,39 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     block(videoTableView, .video)
   }
 
+  private func subtitleTableView(for menu: NSMenu) -> NSTableView? {
+    if menu === primarySubtitleContextMenu {
+      return subTableView
+    }
+    if menu === secondarySubtitleContextMenu {
+      return secSubTableView
+    }
+    return nil
+  }
+
+  private func downloadedSubtitleDirectoryPath() -> String {
+    Utility.tempDirURL.appendingPathComponent("iina-io.iina.opensub", isDirectory: true).path + "/"
+  }
+
+  private func isRemovableDownloadedSubtitle(_ track: MPVTrack) -> Bool {
+    guard track.type == .sub, track.isExternal, let filename = track.externalFilename else { return false }
+    return filename.hasPrefix(downloadedSubtitleDirectoryPath())
+  }
+
+  private func updateSubtitleContextMenu(_ menu: NSMenu) {
+    menu.removeAllItems()
+
+    guard let tableView = subtitleTableView(for: menu) else { return }
+    let clickedRow = tableView.clickedRow
+    guard clickedRow > 0, let track = player.info.subTracks[at: clickedRow - 1] else { return }
+    guard isRemovableDownloadedSubtitle(track) else { return }
+
+    menu.addItem(withTitle: NSLocalizedString("quicksetting.sub_remove_downloaded", comment: "Remove Downloaded Subtitle"),
+                 action: #selector(removeDownloadedSubtitleFromMenu(_:)),
+                 target: self,
+                 obj: track)
+  }
+
   // MARK: - Actions
 
   // MARK: Tab buttons
@@ -920,6 +961,32 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
+  @objc func removeDownloadedSubtitleFromMenu(_ sender: NSMenuItem) {
+    guard let track = sender.representedObject as? MPVTrack,
+          isRemovableDownloadedSubtitle(track),
+          let filename = track.externalFilename else { return }
+
+    player.mpv.command(.subRemove, args: [String(track.id)], checkError: false, level: .verbose) { code in
+      guard code >= 0 else {
+        self.player.log("Failed removing subtitle track #\(track.id): error code \(code)", level: .error)
+        return
+      }
+
+      do {
+        try FileManager.default.removeItem(atPath: filename)
+      } catch CocoaError.fileNoSuchFile {
+        // Ignore if the temp subtitle file was already cleaned up.
+      } catch {
+        self.player.log("Failed removing downloaded subtitle file \(filename): \(error.localizedDescription)", level: .warning)
+      }
+
+      self.player.getTrackInfo()
+      self.player.getSelectedTracks()
+      self.player.postNotification(.iinaTracklistChanged)
+      self.updateControlsState()
+    }
+  }
+
   func showSubChooseMenu(forView view: NSView, showLoadedSubs: Bool = false) {
     let activeSubs = player.info.trackList(.sub) + player.info.trackList(.secondSub)
     let menu = NSMenu()
@@ -1136,6 +1203,11 @@ extension QuickSettingViewController: NSMenuDelegate {
   }
 
   func menuNeedsUpdate(_ menu: NSMenu) {
+    if menu === primarySubtitleContextMenu || menu === secondarySubtitleContextMenu {
+      updateSubtitleContextMenu(menu)
+      return
+    }
+
     let tag = eqPopUpButton.selectedTag()
     let saveItem = menu.item(withTag: eqSaveMenuItemTag)!
     let editingItems = [menu.item(withTag: eqRenameMenuItemTag)!, menu.item(withTag: eqDeleteMenuItemTag)!]

@@ -235,8 +235,8 @@ class OnlineSubtitle: NSObject {
         osdMessage = .cannotConnect
         log("\(prefix)\(cause.localizedDescription)", level: .error)
       case CommonError.networkError(let cause):
-        osdMessage = .networkError
         let error = cause ?? err
+        osdMessage = osdMessageForDetailedError(error, fallback: .networkError, providerName: provider.name)
         log("\(prefix)\(error.localizedDescription)", level: .error)
       case CommonError.timedOut(let cause):
         osdMessage = .timedOut
@@ -269,12 +269,21 @@ class OnlineSubtitle: NSObject {
         player.isSearchingOnlineSubtitle = false
         return
       default:
-        osdMessage = .networkError
-        log("\(prefix)\(err.localizedDescription)", level: .error)
+        let message = err.localizedDescription
+        osdMessage = osdMessageForDetailedError(err, fallback: .networkError, providerName: provider.name)
+        log("\(prefix)\(message)", level: .error)
       }
       player.sendOSD(osdMessage)
       player.isSearchingOnlineSubtitle = false
     }
+  }
+
+  private static func osdMessageForDetailedError(_ error: Error,
+                                                 fallback: OSDMessage,
+                                                 providerName: String) -> OSDMessage {
+    let message = error.localizedDescription.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !message.isEmpty else { return fallback }
+    return .customWithDetail(message, providerName)
   }
 
   static func populateMenu(_ menu: NSMenu, action: Selector? = nil, insertSeparator: Bool = true) {

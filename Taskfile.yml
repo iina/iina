@@ -1,0 +1,35 @@
+version: '3'
+
+vars:
+  DERIVED_DATA: DerivedData
+  APP_PATH: '{{.DERIVED_DATA}}/Build/Products/Debug/IINA.app'
+  EXAMPLE_VIDEO: example/video/big_buck_bunny.mp4
+
+tasks:
+  deps:
+    desc: Download prebuilt dylibs and youtube-dl
+    cmds:
+      - mkdir -p deps/lib deps/executable
+      - |
+        while IFS= read -r file; do
+          curl -fsSL "https://iina.io/dylibs/universal/$file" -o "deps/lib/$file" || exit 1
+        done < <(curl -fsSL "https://iina.io/dylibs/universal/filelist.txt")
+      - curl -fsSL "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos" -o deps/executable/youtube-dl
+      - chmod +x deps/executable/youtube-dl
+
+  build:
+    desc: Build IINA in Debug
+    cmds:
+      - xcodebuild -scheme iina -configuration Debug -derivedDataPath {{.DERIVED_DATA}} build
+
+  dev:
+    desc: Build and launch IINA locally
+    deps: [build]
+    cmds:
+      - open "$PWD/{{.APP_PATH}}"
+
+  dev-example:
+    desc: Build and launch IINA with the sample video
+    deps: [build]
+    cmds:
+      - open -a "$PWD/{{.APP_PATH}}" "$PWD/{{.EXAMPLE_VIDEO}}"

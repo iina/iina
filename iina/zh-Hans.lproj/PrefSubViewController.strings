@@ -177,3 +177,15 @@
 
 /* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
 "liY-E6-HCB.ibShadowedLabels[1]" = "二级字幕";
+
+/* Class = "NSTextFieldCell"; title = "sans-serif"; ObjectID = "azJ-oz-BKZ"; */
+"azJ-oz-BKZ.title" = "无衬线字体";
+
+/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
+"3H8-Ei-cTm.title" = "条形";
+
+/* Class = "NSTextFieldCell"; title = "Descriptive text"; ObjectID = "Oaz-i3-yO0"; */
+"Oaz-i3-yO0.title" = "描述性文本";
+
+/* Class = "NSTextFieldCell"; title = "%"; ObjectID = "JZo-4H-owW"; */
+"JZo-4H-owW.title" = "%";

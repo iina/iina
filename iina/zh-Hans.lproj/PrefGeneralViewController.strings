@@ -167,7 +167,13 @@
 "A1p-L4-jtC.title" = "单曲循环播放";
 
 /* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
-"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+"WZE-pS-9ne.title" = "同时打开多个文件时在播放列表中分组";
 
 /* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
-"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";
+"Z7U-cf-ezr.title" = "允许在多个窗口中打开同一文件";
+
+/* Class = "NSMenuItem"; title = "WebP (.webp)"; ObjectID = "KOO-mQ-9JG"; */
+"KOO-mQ-9JG.title" = "WebP（.webp）";
+
+/* Class = "NSMenuItem"; title = "JPEG XL (.jxl)"; ObjectID = "H5d-pS-Cum"; */
+"H5d-pS-Cum.title" = "JPEG XL（.jxl）";

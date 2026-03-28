@@ -24,6 +24,8 @@
                 <outlet property="subOverrideLevelSegmentedControl" destination="mqJ-QH-Pfa" id="hcK-8B-EzR"/>
                 <outlet property="subOverrideLevelSlider" destination="7UX-IL-hdk" id="fem-nv-O1m"/>
                 <outlet property="subOverrideLevelText" destination="FR3-Ar-5Dw" id="BSP-zH-sos"/>
+                <outlet property="subPosSegmentedControl" destination="pos-Sg-Ctl" id="psc-1a-abc"/>
+                <outlet property="subPosTextField" destination="HKD-K0-lsV" id="ptf-2b-bcd"/>
                 <outlet property="subShadowColorWell" destination="Gtc-ii-hE0" id="hh5-ON-mLf"/>
                 <outlet property="subSourcePopUpButton" destination="UHS-ce-8t5" id="zmW-Jx-JMg"/>
                 <outlet property="subSourceStackView" destination="bSz-xd-6o2" id="UOh-XZ-MhE"/>
@@ -1164,13 +1166,6 @@
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
-                    <connections>
-                        <binding destination="5Up-Ab-aAm" name="value" keyPath="values.subPos" id="BIO-yY-56q">
-                            <dictionary key="options">
-                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                            </dictionary>
-                        </binding>
-                    </connections>
                 </textField>
                 <textField identifier="AccessoryLabelVerticalPos" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9sd-YV-QMQ">
                     <rect key="frame" x="316" y="64" width="16" height="16"/>
@@ -1180,6 +1175,22 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pos-Sg-Ctl">
+                    <rect key="frame" x="120" y="178" width="304" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="psc-w-cst"/>
+                    </constraints>
+                    <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" segmentDistribution="fillEqually" style="rounded" trackingMode="selectOne" id="psc-cell">
+                        <font key="font" metaFont="smallSystem"/>
+                        <segments>
+                            <segment label="Primary Subtitles" selected="YES"/>
+                            <segment label="Secondary Subtitles" tag="1"/>
+                        </segments>
+                    </segmentedCell>
+                    <connections>
+                        <action selector="subPosSegmentedControlAction:" target="-2" id="psc-act"/>
+                    </connections>
+                </segmentedControl>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="pyx-K4-cgm">
                     <rect key="frame" x="118" y="31" width="327" height="18"/>
                     <buttonCell key="cell" type="check" title="Display subtitles in letterboxes while in full screen" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="2XY-Un-0Fg">
@@ -1292,13 +1303,15 @@
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9sd-YV-QMQ" secondAttribute="trailing" constant="20" symbolic="YES" id="b4z-Pm-kMs"/>
                 <constraint firstItem="HKD-K0-lsV" firstAttribute="leading" secondItem="eAH-hV-xRg" secondAttribute="trailing" constant="8" id="brp-Tf-Kqk"/>
                 <constraint firstItem="WeJ-3X-tJy" firstAttribute="top" secondItem="ZpT-fB-Daq" secondAttribute="top" constant="8" id="fSA-DB-ixN"/>
-                <constraint firstItem="kvJ-Tj-KMb" firstAttribute="top" secondItem="WeJ-3X-tJy" secondAttribute="top" id="hIu-B2-Hhm"/>
+                <constraint firstItem="kvJ-Tj-KMb" firstAttribute="top" secondItem="pos-Sg-Ctl" secondAttribute="bottom" constant="8" id="hIu-B2-Hhm"/>
                 <constraint firstAttribute="trailing" secondItem="pRe-wv-VVi" secondAttribute="trailing" id="mFg-UV-tG6"/>
                 <constraint firstItem="9sd-YV-QMQ" firstAttribute="baseline" secondItem="HKD-K0-lsV" secondAttribute="baseline" id="oaJ-pb-z4Y"/>
                 <constraint firstItem="WeJ-3X-tJy" firstAttribute="leading" secondItem="ZpT-fB-Daq" secondAttribute="leading" id="pJT-C6-3JH"/>
                 <constraint firstItem="pyx-K4-cgm" firstAttribute="top" secondItem="eAH-hV-xRg" secondAttribute="bottom" constant="16" id="rl5-bs-BFj"/>
                 <constraint firstItem="pRe-wv-VVi" firstAttribute="leading" secondItem="kvJ-Tj-KMb" secondAttribute="leading" id="sZg-mz-LOl"/>
                 <constraint firstItem="HKD-K0-lsV" firstAttribute="firstBaseline" secondItem="eAH-hV-xRg" secondAttribute="firstBaseline" id="vFi-8B-moM"/>
+                <constraint firstItem="pos-Sg-Ctl" firstAttribute="leading" secondItem="ZpT-fB-Daq" secondAttribute="leading" constant="120" id="psc-lead"/>
+                <constraint firstItem="pos-Sg-Ctl" firstAttribute="top" secondItem="WeJ-3X-tJy" secondAttribute="top" id="psc-top"/>
             </constraints>
             <point key="canvasLocation" x="-782" y="590"/>
         </customView>

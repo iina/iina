@@ -52,6 +52,9 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   @IBOutlet weak var subOverrideLevelText: NSTextField!
   @IBOutlet weak var subOverrideLevelDescriptiveText: NSTextField!
 
+  @IBOutlet weak var subPosTextField: NSTextField!
+  @IBOutlet weak var subPosSegmentedControl: NSSegmentedControl!
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -80,6 +83,11 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
 
     refreshSubSources()
     refreshSubSourceAccessoryView()
+
+    // Establish initial programmatic binding for vertical sub position (primary by default)
+    subPosTextField.bind(.value, to: UserDefaults.standard,
+                         withKeyPath: PK.subPos.rawValue,
+                         options: [.continuouslyUpdatesValue: true])
 
     NotificationCenter.default.addObserver(forName: .iinaPluginChanged, object: nil, queue: .main) { [unowned self] _ in
       self.refreshSubSources()
@@ -184,6 +192,13 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     subOverrideLevelSlider.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelValueTransformer()])
     subOverrideLevelText.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelTextTransformer()])
     subOverrideLevelDescriptiveText.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelDescriptiveTextTransformer()])
+  }
+
+  @IBAction func subPosSegmentedControlAction(_ sender: NSSegmentedControl) {
+    let keyPath = sender.selectedSegment == 0 ? PK.subPos.rawValue : PK.secondarySubPos.rawValue
+    subPosTextField.bind(.value, to: UserDefaults.standard,
+                         withKeyPath: keyPath,
+                         options: [.continuouslyUpdatesValue: true])
   }
 }
 

@@ -676,13 +676,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     return nil
   }
 
-  private func temporarySubtitleDirectoryPath() -> String {
-    Utility.tempDirURL.path.hasSuffix("/") ? Utility.tempDirURL.path : Utility.tempDirURL.path + "/"
+  private var temporarySubtitleDirectoryPath: String {
+    let path = Utility.tempDirURL.path
+    return path.hasSuffix("/") ? path : path + "/"
   }
 
   private func isRemovableDownloadedSubtitle(_ track: MPVTrack) -> Bool {
     guard track.type == .sub, track.isExternal, let filename = track.externalFilename else { return false }
-    return filename.hasPrefix(temporarySubtitleDirectoryPath())
+    return filename.hasPrefix(temporarySubtitleDirectoryPath)
   }
 
   private func updateSubtitleContextMenu(_ menu: NSMenu) {
@@ -966,9 +967,9 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
           isRemovableDownloadedSubtitle(track),
           let filename = track.externalFilename else { return }
 
-    player.mpv.command(.subRemove, args: [String(track.id)], checkError: false, level: .verbose) { code in
+    player.subRemove(id: track.id) { code in
       guard code >= 0 else {
-        self.player.log("Failed removing subtitle track #\(track.id): error code \(code)", level: .error)
+        self.mainWindow.log("Failed removing subtitle track #\(track.id): error code \(code)", level: .error)
         return
       }
 
@@ -977,7 +978,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       } catch CocoaError.fileNoSuchFile {
         // Ignore if the temp subtitle file was already cleaned up.
       } catch {
-        self.player.log("Failed removing downloaded subtitle file \(filename): \(error.localizedDescription)", level: .warning)
+        self.mainWindow.log("Failed removing downloaded subtitle file \(filename): \(error.localizedDescription)", level: .warning)
       }
 
       self.player.getTrackInfo()

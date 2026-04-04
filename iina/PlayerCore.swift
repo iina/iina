@@ -1385,6 +1385,11 @@ class PlayerCore: NSObject {
     }
   }
 
+  func subRemove(id: Int? = nil, completion: @escaping (Int32) -> Void = { _ in }) {
+    let args = id.map { [String($0)] } ?? []
+    mpv.command(.subRemove, args: args, checkError: false, level: .verbose, completion)
+  }
+
   func reloadAllSubs() {
     let currentSubName = info.currentTrack(.sub)?.externalFilename
     info.$subTracks.withLock {

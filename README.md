@@ -120,21 +120,21 @@ IINA is always looking for contributions, whether it's through bug reports, code
 ## IINA Plugins List
 
 ### Official Plugins
-- **Online Media** (`iina/plugin-online-media`) - Enhances online streaming and downloading.
-- **OpenSubtitles** (`iina/plugin-opensub`) - Search and download subtitles.
-- **User Scripts** (`iina/plugin-userscript`) - Run custom JavaScript snippets.
-- **More Seeking** (`iina/plugin-more-seeking`) - Advanced seeking controls.
+- **[More Seeking](https://github.com/iina/plugin-more-seeking)** (`iina/plugin-more-seeking`) - Advanced seeking controls.
+- **[Online Media](https://github.com/iina/plugin-online-media)** (`iina/plugin-online-media`) - Enhances online streaming and downloading.
+- **[OpenSubtitles](https://github.com/iina/plugin-opensub)** (`iina/plugin-opensub`) - Search and download subtitles.
+- **[User Scripts](https://github.com/iina/plugin-userscript)** (`iina/plugin-userscript`) - Run custom JavaScript snippets.
 
 ### Community Plugins
-- **Jellyfin** (`mhajder/iina-jellyfin`) - Browse and play media from Jellyfin servers.
-- **Danmaku** (`xjbeta/iina-plugin-danmaku`) - Overlay comments/danmaku on video.
-- **Bookmarks** (`wyattowalsh/iina-plugin-bookmarks`) - Save and manage video timestamps.
-- **Clickable Subtitles** (`kerim/iina-clickable-subtitles`) - Click subtitles to define words (macOS Look Up).
-- **Jump to Frame** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
-- **PolyScript** (`SammoMichael/polyplugin-release`) - Dual subtitles, hover dictionary, and AI-assisted translation for language learning.
-- **recorder** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
-- **Multiple Clips** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
-- **File Viewer** (`qktechies/iina-plugin-file-viewer`) - bookmark folders, browse directory contents, and play video files directly within IINA.
+- **[Bookmarks](https://github.com/wyattowalsh/iina-plugin-bookmarks)** (`wyattowalsh/iina-plugin-bookmarks`) - Save and manage video timestamps.
+- **[Clickable Subtitles](https://github.com/kerim/iina-clickable-subtitles)** (`kerim/iina-clickable-subtitles`) - Click subtitles to define words (macOS Look Up).
+- **[Danmaku](https://github.com/xjbeta/iina-plugin-danmaku)** (`xjbeta/iina-plugin-danmaku`) - Overlay comments/danmaku on video.
+- **[File Viewer](https://github.com/qktechies/iina-plugin-file-viewer)** (`qktechies/iina-plugin-file-viewer`) - bookmark folders, browse directory contents, and play video files directly within IINA.
+- **[Jellyfin](https://github.com/mhajder/iina-jellyfin)** (`mhajder/iina-jellyfin`) - Browse and play media from Jellyfin servers.
+- **[Jump to Frame](https://github.com/bbeny123/iina-jump-to-frame)** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
+- **[Multiple Clips](https://github.com/karthisnk/multi-cutter-iina)** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
+- **[PolyScript](https://github.com/SammoMichael/polyplugin-release)** (`SammoMichael/polyplugin-release`) - Dual subtitles, hover dictionary, and AI-assisted translation for language learning.
+- **[recorder](https://github.com/5thDimensionalVader/recorder-iina)** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 
 > 💡 **Want to build your own plugin?**
 > 

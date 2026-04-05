@@ -965,27 +965,21 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @objc func removeDownloadedSubtitleFromMenu(_ sender: NSMenuItem) {
     guard let track = sender.representedObject as? MPVTrack,
           isRemovableDownloadedSubtitle(track),
-          let filename = track.externalFilename else { return }
+          let filename = track.externalFilename,
+          player.subRemove(id: track.id) else { return }
 
-    player.subRemove(id: track.id) { code in
-      guard code >= 0 else {
-        self.mainWindow.log("Failed removing subtitle track #\(track.id): error code \(code)", level: .error)
-        return
-      }
-
-      do {
-        try FileManager.default.removeItem(atPath: filename)
-      } catch CocoaError.fileNoSuchFile {
-        // Ignore if the temp subtitle file was already cleaned up.
-      } catch {
-        self.mainWindow.log("Failed removing downloaded subtitle file \(filename): \(error.localizedDescription)", level: .warning)
-      }
-
-      self.player.getTrackInfo()
-      self.player.getSelectedTracks()
-      self.player.postNotification(.iinaTracklistChanged)
-      self.updateControlsState()
+    do {
+      try FileManager.default.removeItem(atPath: filename)
+    } catch CocoaError.fileNoSuchFile {
+      // Ignore if the temp subtitle file was already cleaned up.
+    } catch {
+      self.mainWindow.log("Failed removing downloaded subtitle file \(filename): \(error.localizedDescription)", level: .warning)
     }
+
+    self.player.getTrackInfo()
+    self.player.getSelectedTracks()
+    self.player.postNotification(.iinaTracklistChanged)
+    self.updateControlsState()
   }
 
   func showSubChooseMenu(forView view: NSView, showLoadedSubs: Bool = false) {

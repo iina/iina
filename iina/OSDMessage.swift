@@ -84,6 +84,7 @@ enum OSDMessage {
   case canceled
   case cannotConnect
   case timedOut
+  case onlineSubQuotaExceeded(String?)
 
   case fileLoop
   case playlistLoop
@@ -122,6 +123,7 @@ enum OSDMessage {
     case .fileError: fallthrough
     case .foundSub: fallthrough
     case .networkError: fallthrough
+    case .onlineSubQuotaExceeded: fallthrough
     case .savedSub: fallthrough
     case .startFindingSub: fallthrough
     case .timedOut:
@@ -440,6 +442,18 @@ enum OSDMessage {
       return (
         NSLocalizedString("osd.timed_out", comment: "Timed out"),
         .normal
+      )
+
+    case .onlineSubQuotaExceeded(let resetTime):
+      let detail: String
+      if let resetTime, !resetTime.isEmpty {
+        detail = String(format: NSLocalizedString("osd.sub_quota_exceeded.detail", comment: "Try again after %@"), resetTime)
+      } else {
+        detail = NSLocalizedString("osd.sub_quota_exceeded.detail_unknown", comment: "Try again later")
+      }
+      return (
+        NSLocalizedString("osd.sub_quota_exceeded", comment: "Subtitle download limit reached"),
+        .withText(detail)
       )
 
     case .fileLoop:

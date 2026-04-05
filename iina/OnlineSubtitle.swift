@@ -241,6 +241,9 @@ class OnlineSubtitle: NSObject {
       case CommonError.timedOut(let cause):
         osdMessage = .timedOut
         log("\(prefix)\(cause.localizedDescription)", level: .error)
+      case OpenSubClient.Error.errorResponse(let response):
+        osdMessage = osdMessageForOpenSubErrorResponse(response, fallback: .networkError, providerName: provider.name)
+        log("\(prefix)\(response.message)", level: .error)
       case Shooter.Error.cannotReadFile(let cause),
            OpenSub.Error.cannotReadFile(let cause):
         osdMessage = .fileError
@@ -269,21 +272,32 @@ class OnlineSubtitle: NSObject {
         player.isSearchingOnlineSubtitle = false
         return
       default:
-        let message = err.localizedDescription
-        osdMessage = osdMessageForDetailedError(err, fallback: .networkError, providerName: provider.name)
-        log("\(prefix)\(message)", level: .error)
+        osdMessage = .networkError
+        log("\(prefix)\(err.localizedDescription)", level: .error)
       }
-      player.sendOSD(osdMessage)
+      let timeout: Float? = shouldExtendTimeout(for: osdMessage) ? 5 : nil
+      player.sendOSD(osdMessage, forcedTimeout: timeout)
       player.isSearchingOnlineSubtitle = false
     }
   }
 
-  private static func osdMessageForDetailedError(_ error: Error,
-                                                 fallback: OSDMessage,
-                                                 providerName: String) -> OSDMessage {
-    let message = error.localizedDescription.trimmingCharacters(in: .whitespacesAndNewlines)
-    guard !message.isEmpty else { return fallback }
-    return .customWithDetail(message, providerName)
+  private static func osdMessageForOpenSubErrorResponse(_ response: OpenSubClient.ErrorResponse,
+                                                        fallback: OSDMessage,
+                                                        providerName: String) -> OSDMessage {
+    guard providerName == Providers.openSub.name, response.remaining == -1 else { return fallback }
+    let resetTime = response.resetTimeUtc.map {
+      DateFormatter.localizedString(from: $0, dateStyle: .none, timeStyle: .short)
+    }
+    return .onlineSubQuotaExceeded(resetTime)
+  }
+
+  private static func shouldExtendTimeout(for osdMessage: OSDMessage) -> Bool {
+    switch osdMessage {
+    case .onlineSubQuotaExceeded:
+      return true
+    default:
+      return false
+    }
   }
 
   static func populateMenu(_ menu: NSMenu, action: Selector? = nil, insertSeparator: Bool = true) {

@@ -136,6 +136,9 @@
 "osd.canceled" = "Canceled";
 "osd.cannot_connect" = "Cannot connect";
 "osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
 "osd.file_loop" = "Loop Single File";

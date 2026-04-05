@@ -129,6 +129,7 @@ fi
 DEPS_PATH="$ROOT_PATH/deps"
 LIB_PATH="$DEPS_PATH/lib"
 EXEC_PATH="$DEPS_PATH/executable"
+PLUGIN_PATH="$DEPS_PATH/plugins"
 YT_DLP_PATH="$EXEC_PATH/youtube-dl"
 
 IFS=$'\n' read -r -d '' -a files < <(curl -s "${DYLIBS_DOWNLOAD_PATH}/filelist.txt" && printf '\0')
@@ -160,5 +161,55 @@ echo -e "${YELLOW}Downloading yt-dlp...${NC}"
 curl -s -L "$YT_DLP_DOWNLOAD_PATH" -o "$YT_DLP_PATH" && echo -e "${GREEN}yt-dlp downloaded${NC}"
 chmod +x "$YT_DLP_PATH"
 
-echo -e "${GREEN}All downloads completed.${NC}"
+mkdir -p "$PLUGIN_PATH"
 
+fetch_latest_plugin_asset() {
+  local repo="$1"
+  curl -s -f -L "https://api.github.com/repos/${repo}/releases/latest" | python3 -c '
+import json
+import sys
+
+release = json.load(sys.stdin)
+assets = [asset for asset in release.get("assets", []) if asset.get("name", "").endswith(".iinaplgz")]
+if not assets:
+    raise SystemExit(1)
+asset = assets[0]
+print(asset["name"])
+print(asset["browser_download_url"])
+'
+}
+
+download_plugin() {
+  local repo="$1"
+  local prefix="$2"
+  local asset_info
+  local asset_name
+  local asset_url
+  local tmp_path
+
+  echo -e "${YELLOW}Downloading latest plugin release for ${repo}...${NC}"
+  asset_info=$(fetch_latest_plugin_asset "$repo") || {
+    echo -e "${RED}Failed to fetch the latest plugin asset for ${repo}.${NC}" >&2
+    return 1
+  }
+
+  asset_name=$(printf "%s\n" "$asset_info" | sed -n "1p")
+  asset_url=$(printf "%s\n" "$asset_info" | sed -n "2p")
+  tmp_path="${PLUGIN_PATH}/${asset_name}.download"
+
+  curl -s -f -L "$asset_url" -o "$tmp_path" || {
+    echo -e "${RED}Failed downloading ${asset_name}.${NC}" >&2
+    rm -f "$tmp_path"
+    return 1
+  }
+
+  find "$PLUGIN_PATH" -maxdepth 1 -type f -name "${prefix}-*.iinaplgz" -delete
+  mv "$tmp_path" "${PLUGIN_PATH}/${asset_name}"
+  echo -e "${GREEN}Downloaded ${asset_name}${NC}"
+}
+
+download_plugin "iina/plugin-online-media" "iina-plugin-ytdl" || exit 1
+download_plugin "iina/plugin-userscript" "iina-plugin-userscript" || exit 1
+download_plugin "iina/plugin-opensub" "iina-plugin-opensub" || exit 1
+
+echo -e "${GREEN}All downloads completed.${NC}"

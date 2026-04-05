@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Puskuroidaan… %d%%";
 "main.opening_stream" = "Avataan streamia…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Tarkkuus";
 "osc.1s" = "1 sekunti";
 "osc.100ms" = "100 millisekuntia";
@@ -78,13 +79,13 @@
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Tauko";
 "osd.resume" = "Jatka";
-"osd.volume" = "Äänenvoimakkuus: %i";
+"osd.volume" = "Äänenvoimakkuus: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Kuvasuhde: %@";
 "osd.crop" = "Rajaus: %@";
@@ -92,19 +93,19 @@
 "osd.deinterlace" = "Lomituksenpoisto: %@";
 "osd.hwdec" = "Laitteistopohjainen purku: %@";
 "osd.audio_delay.nodelay" = "Äänen viive: Ei viivästystä";
-"osd.audio_delay.later" = "Äänen viive: %.2fs myöhemmin";
-"osd.audio_delay.earlier" = "Äänen viive: %.2fs aiemmin";
+"osd.audio_delay.later" = "Äänen viive: %@s myöhemmin";
+"osd.audio_delay.earlier" = "Äänen viive: %@s aiemmin";
 "osd.sub_delay.nodelay" = "Äänen viive: Ei viivästystä";
-"osd.sub_delay.later" = "Tekstityksen viive: %.2fs myöhemmin";
-"osd.sub_delay.earlier" = "Tekstityksen viive: %.2fs aiemmin";
-"osd.subtitle_pos" = "Tekstityksen sijainti: %.1f";
+"osd.sub_delay.later" = "Tekstityksen viive: %@s myöhemmin";
+"osd.sub_delay.earlier" = "Tekstityksen viive: %@s aiemmin";
+"osd.subtitle_pos" = "Tekstityksen sijainti: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Mykistä";
 "osd.unmute" = "Poista mykistys";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "AB-silmukka: Tyhjennetty";
 "osd.stop" = "Pysäytä";
 "osd.chapter" = "Kappale: %@";
-"osd.subtitle_scale" = "Tekstityksen skaalaus: %.2fx";
+"osd.subtitle_scale" = "Tekstityksen skaalaus: %@x";
 "osd.add_to_playlist" = "Lisätty %i tiedostoa soittolistaan";
 "osd.clear_playlist" = "Soittolista tyhjennetty";
 "osd.video_eq.contrast" = "Kontrasti: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
-"menu.volume" = "Äänenvoimakkuus: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "Äänen viive: %.2fs";
-"menu.sub_delay" = "Tekstityksen viive: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
+"menu.volume" = "Äänenvoimakkuus: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "Äänen viive: %@s";
+"menu.sub_delay" = "Tekstityksen viive: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Näytä Tekstityspaneeli";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Astu eteenpäin %.0fs";
-"menu.seek_backward" = "Siirry taaksepäin %.0fs";
+"menu.seek_forward" = "Astu eteenpäin %@s";
+"menu.seek_backward" = "Siirry taaksepäin %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Äänenvoimakkuus + %.0f%%";
-"menu.volume_down" = "Äänenvoimakkuus - %.0f%%";
-"menu.audio_delay_up" = "Äänen viive + %.1fs";
-"menu.audio_delay_down" = "Äänen viive - %.1fs";
-"menu.sub_delay_up" = "Tekstityksen viive + %.1fs";
-"menu.sub_delay_down" = "Tekstityksen viive - %.1fs";
+"menu.volume_up" = "Äänenvoimakkuus + %@%%";
+"menu.volume_down" = "Äänenvoimakkuus - %@%%";
+"menu.audio_delay_up" = "Äänen viive + %@s";
+"menu.audio_delay_down" = "Äänen viive - %@s";
+"menu.sub_delay_up" = "Tekstityksen viive + %@s";
+"menu.sub_delay_down" = "Tekstityksen viive - %@s";
 
 "menu.crop_custom" = "Mukautettu…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Ääni";
 "track.none" = "<Ei mitään>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "Virhe tallennettaessa kohdetta %@: %@";
 "alert.error_deleting_file" = "Tiedostoa ei voida poistaa.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Uudet syöttöasetukset";
 "alert.config.new.message" = "Anna nimi uudelle konfiguraatiolle.";
 "alert.config.duplicate.title" = "Monista asetukset";
 "alert.config.duplicate.message" = "Anna nimi monistetulle asetustiedostolle.";
-"alert.config.empty_name" = "Nimi ei voi olla tyhjä.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Tiedosto on jo olemassa";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Asetustiedostoa ei voitu luoda!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ yhteensä";
 "playlist.total_length_with_selected" = "%@ / %@ valittu";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d kohdetta";
 "pl_menu.play_next" = "Play Next";
 "pl_menu.play_in_new_window" = "Toista uudessa ikkunassa";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Siirry musiikkitilaan";
 "osc_toolbar.sub_track" = "Valitse tekstitysraita";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Näytä albumin kansikuva";
 "mini_player.loop" = "Toista";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Äänenvoimakkuus";
 "mini_player.close" = "Sulje musiikkitila";
 "mini_player.back" = "Palaa videotilaan";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

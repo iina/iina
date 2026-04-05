@@ -64,7 +64,7 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
 
   // currently only being used for key command
   @objc func menuDeleteCurrentFileHard(_ sender: NSMenuItem) {
-    guard let url = player.info.currentURL else { return }
+    guard let url = player.info.currentURL, !player.info.isNetworkResource else { return }
     do {
       let index = player.mpv.getInt(MPVProperty.playlistPos)
       player.playlistRemove(index)
@@ -133,6 +133,8 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuJumpTo(_ sender: NSMenuItem) {
+    // Make certain the cached video position in the playback info is up to date.
+    player.syncUI(.time)
     Utility.quickPromptPanel("jump_to", inputValue: self.player.info.videoPosition?.stringRepresentationWithPrecision(3)) { input in
       if let vt = VideoTime(input) {
         self.player.seek(absoluteSecond: vt.second)
@@ -340,8 +342,11 @@ extension MainMenuActionHandler {
 extension MainMenuActionHandler {
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
-    Utility.quickOpenPanel(title: "Load external subtitle file", chooseDir: false, dir: currentDir,
-                           sheetWindow: player.currentWindow) { url in
+    // In addition to subtitle files allow the user to choose video files as mpv will look for and
+    // load embedded subtitle streams in the video file.
+    Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
+                           sheetWindow: player.currentWindow,
+                           allowedFileTypes: Utility.containsSubExt) { url in
       self.player.loadExternalSubFile(url, delay: true)
     }
   }
@@ -391,9 +396,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuSubFont(_ sender: NSMenuItem) {
-    Utility.quickFontPickerWindow() {
-      self.player.setSubFont($0 ?? "")
-    }
+    player.chooseSubFont()
   }
 
   @objc func menuFindOnlineSub(_ sender: NSMenuItem) {
@@ -482,6 +485,10 @@ extension MainMenuActionHandler {
   }
 
   @objc func reloadAllPlugins(_ sender: NSMenuItem) {
+    // Remove the developer tool menu item that retains the plugin instance
+    AppDelegate.shared.menuController.pluginMenu.items
+      .compactMap { $0.submenu }.flatMap { $0.items }
+      .forEach { $0.representedObject = nil }
     AppDelegate.shared.menuController.pluginMenu.removeAllItems()
 
     for player in PlayerCore.playerCores {

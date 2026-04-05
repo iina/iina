@@ -40,17 +40,23 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    if JavascriptPlugin.hasYTDL {
-      enableYTDLCheckBox.state = .off
-      sectionYTDLView.subviews.forEach {
-        if let control = $0 as? NSControl {
-          control.isEnabled = false
-        }
-      }
-      ytdlHelpLabel.stringValue = NSLocalizedString("preference.ytdl_plugin_installed", comment: "")
-    } else {
-      ytdlHelpLabel.stringValue = NSLocalizedString("preference.ytdl_plugin_not_installed", comment: "")
+    updateYTDLSettings()
+    NotificationCenter.default.addObserver(forName: .iinaPluginChanged, object: nil, queue: .main) { [unowned self] _ in
+      self.updateYTDLSettings()
     }
+  }
+
+  private func updateYTDLSettings() {
+    let hasYTDL = JavascriptPlugin.hasYTDL
+    enableYTDLCheckBox.state = hasYTDL ? .off : (Preference.bool(for: .ytdlEnabled) ? .on : .off)
+    sectionYTDLView.subviews.forEach {
+      if let control = $0 as? NSControl {
+        control.isEnabled = !hasYTDL
+      }
+    }
+    ytdlHelpLabel.stringValue = hasYTDL ?
+      NSLocalizedString("preference.ytdl_plugin_installed", comment: "") :
+      NSLocalizedString("preference.ytdl_plugin_not_installed", comment: "")
   }
 
   @IBAction func ytdlHelpAction(_ sender: Any) {

@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregant… %d%%";
 "main.opening_stream" = "Obrint fluxe de dades…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precisió";
 "osc.1s" = "1 segon";
 "osc.100ms" = "100 milisegons";
@@ -78,13 +79,13 @@
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Reprèn";
-"osd.volume" = "Volum: %i";
+"osd.volume" = "Volum: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Relació d'aspecte: %@";
 "osd.crop" = "Escapça: %@";
@@ -92,19 +93,19 @@
 "osd.deinterlace" = "Desentrellaça: %@";
 "osd.hwdec" = "Decodificació per maquinari: %@";
 "osd.audio_delay.nodelay" = "Retard de l'àudio: sense retard";
-"osd.audio_delay.later" = "Retard de l'àudio: %.2fs després";
-"osd.audio_delay.earlier" = "Retard de l'àudio: %.2fs abans";
+"osd.audio_delay.later" = "Retard de l'àudio: %@s després";
+"osd.audio_delay.earlier" = "Retard de l'àudio: %@s abans";
 "osd.sub_delay.nodelay" = "Retard dels subtítols: sense retard";
-"osd.sub_delay.later" = "Retard dels subtítols: %.2fs després";
-"osd.sub_delay.earlier" = "Retard dels subtítols: %.2fs abans";
-"osd.subtitle_pos" = "Posició dels subtítols: %.1f";
+"osd.sub_delay.later" = "Retard dels subtítols: %@s després";
+"osd.sub_delay.earlier" = "Retard dels subtítols: %@s abans";
+"osd.subtitle_pos" = "Posició dels subtítols: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Retard Secundari de Subtítols: Sense Retard";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %.2fs Abans";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %@s Abans";
 "osd.sub_second_hidden" = "Subtítols Secundaris Amagats";
-"osd.sub_second_pos" = "Posició Secundària de Subtítols: %.1f";
+"osd.sub_second_pos" = "Posició Secundària de Subtítols: %@";
 "osd.sub_second_visible" = "Subtítols Secundaris Visibles";
 "osd.mute" = "Silencia";
 "osd.unmute" = "Amb so";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "Bucle-AB: suprimit";
 "osd.stop" = "Atura";
 "osd.chapter" = "Capítol: %@";
-"osd.subtitle_scale" = "Escala dels subtítols: %.2fx";
+"osd.subtitle_scale" = "Escala dels subtítols: %@x";
 "osd.add_to_playlist" = "%i fitxer afegits a la llista de reproducció";
 "osd.clear_playlist" = "Llista de reproducció suprimida";
 "osd.video_eq.contrast" = "Contrast: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
-"menu.volume" = "Volum: %d";
-"menu.volume_muted" = "Volum: %d (Silenciat)";
-"menu.audio_delay" = "Retard d'àudio: %.2fs";
-"menu.sub_delay" = "Retard en els subtítols: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
+"menu.volume" = "Volum: %@";
+"menu.volume_muted" = "Volum: %@ (Silenciat)";
+"menu.audio_delay" = "Retard d'àudio: %@s";
+"menu.sub_delay" = "Retard en els subtítols: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Amagar Subtítols Secundaris";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "Avança %.0fs";
-"menu.seek_backward" = "Retrocedeix %.0fs";
+"menu.seek_forward" = "Avança %@s";
+"menu.seek_backward" = "Retrocedeix %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volum + %.0f%%";
-"menu.volume_down" = "Volum - %.0f%%";
-"menu.audio_delay_up" = "Retarda d'àudio + %.1fs";
-"menu.audio_delay_down" = "Retarda d'àudio - %.1fs";
-"menu.sub_delay_up" = "Retarda en els subtítols + %.1fs";
-"menu.sub_delay_down" = "Retarda en els subtítols - %.1fs";
+"menu.volume_up" = "Volum + %@%%";
+"menu.volume_down" = "Volum - %@%%";
+"menu.audio_delay_up" = "Retarda d'àudio + %@s";
+"menu.audio_delay_down" = "Retarda d'àudio - %@s";
+"menu.sub_delay_up" = "Retarda en els subtítols + %@s";
+"menu.sub_delay_down" = "Retarda en els subtítols - %@s";
 
 "menu.crop_custom" = "Personalitzat...";
 "menu.find_online_sub" = "Cerca subtítols en línia a %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Àudio";
 "track.none" = "<Cap>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "S'ha produït un error al desar %@: %@";
 "alert.error_deleting_file" = "No es pot suprimir el fitxer.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nova configuració d'entrada";
 "alert.config.new.message" = "Si us plau introdueix un nom per a la nova configuració.";
 "alert.config.duplicate.title" = "Duplica configuració";
 "alert.config.duplicate.message" = "Si us plau introdueix un nom per el fixer de configuració duplicat.";
-"alert.config.empty_name" = "El nom no pot estar buit.";
-"alert.config.name_existing" = "Ja existeix una configuració amb el mateix nom.";
 "alert.config.file_existing.title" = "El fitxer ja existeix";
 "alert.config.file_existing.message" = "Ja existeix un arxiu de configuració amb el mateix nom d'arxiu. Selecciona OK per veure l'arxiu a Finder.";
 "alert.config.cannot_create" = "No es pot crear el fitxer de configuració!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionats";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d elements";
 "pl_menu.play_next" = "Reprodueix el següent";
 "pl_menu.play_in_new_window" = "Reprodueix en una finestra nova";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Canvia a mode de música";
 "osc_toolbar.sub_track" = "Selecciona la pista dels subtítols";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Mescla la caràtula";
 "mini_player.loop" = "Repeteix";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Volum";
 "mini_player.close" = "Tanca el mode de música";
 "mini_player.back" = "Torna al mode de vídeo";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

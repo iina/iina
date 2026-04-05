@@ -26,10 +26,10 @@
 
 // Initial Window
 "initial.announcement" = "Ви користуєтеся %@ версією IINA";
-"initial.beta.desc" = "Зніміть відмітку «Отримувати бета-оновлення» через Параметри → Загальні та встановіть стабільну версію з нашого <a href=\"https://iina.io\">офіційного веб-сайту</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.beta.desc" = "Зніміть відмітку «Отримувати бета-оновлення» у розділі налаштувань Параметри → Загальні та встановіть стабільну версію <a href=\"https://iina.io\">з нашого офіційного веб-сайту</a>.";
+"initial.nightly.desc" = "Нічні (тестові) збірки не рекомендовані для щоденного використання. Наразі нічні збірки не підтримують автоматичні оновлення. Завантажуйте новіші збірки вручну <a href=\"https://nightly.iina.io\">з нашого веб-сайту</a>.";
 "initial.debug.desc" = "Збірки налагодження зазвичай не остаточно оптимізовані, тому не рекомендуються для щоденного використання. Збірки налагодження не підтримують автоматичне оновлення.";
-"initial.bug_report" = "Повідомити через <a href=\"https://github.com/iina/iina/issues\">GitHub проблеми</a>.";
+"initial.bug_report" = "Повідомити про проблему <a href=\"https://github.com/iina/iina/issues\">на GitHub</a>.";
 
 // Inspector Window
 "inspector.error" = "Помилка";
@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
 "main.opening_stream" = "Відкриття потоку…";
+"main.seeking_indicator" = "Перемотування…";
 "osc.precision" = "Точність";
 "osc.1s" = "1 секунда";
 "osc.100ms" = "100 мілісекунд";
@@ -50,7 +51,7 @@
 "quicksetting.deinterlace" = "Черезрядкова розгортка";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Сховати";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Скинути швидкість до 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Плоско";
@@ -58,16 +59,16 @@
 "eq.preset.classical" = "Класика";
 "eq.preset.dance" = "Танцювальна";
 "eq.preset.deep" = "Глибока";
-"eq.preset.electronic" = "Електронна";
-"eq.preset.hip_hop" = "Хіп хоп";
+"eq.preset.electronic" = "Електроніка";
+"eq.preset.hip_hop" = "Хіп-хоп";
 "eq.preset.increase_bass" = "Збільшити баси";
 "eq.preset.increase_treble" = "Збільшити високі частоти";
 "eq.preset.increase_vocal" = "Збільшити вокал";
 "eq.preset.jazz" = "Джаз";
 "eq.preset.latin" = "Латина";
-"eq.preset.loundness" = "Гучно";
+"eq.preset.loundness" = "Гучність";
 "eq.preset.lounge" = "Лаунж";
-"eq.preset.piano" = "Піано";
+"eq.preset.piano" = "Спокійно";
 "eq.preset.pop" = "Поп";
 "eq.preset.rnb" = "R&B";
 "eq.preset.reduce_bass" = "Зменшити низькі частоти";
@@ -84,27 +85,27 @@
 // OSDMessage.swift
 "osd.pause" = "Пауза";
 "osd.resume" = "Відновити";
-"osd.volume" = "Гучність: %i";
-"osd.speed" = "Speed: %@x";
+"osd.volume" = "Гучність: %@";
+"osd.speed" = "Швидкість: %@x";
 "osd.aspect" = "Пропорції: %@";
 "osd.crop" = "Обрізання: %@";
 "osd.rotate" = "Обертання: %i°";
 "osd.deinterlace" = "Черезрядкова розгортка: %@";
 "osd.hwdec" = "Апаратне декодування: %@";
 "osd.audio_delay.nodelay" = "Затримка звуку: без затримки";
-"osd.audio_delay.later" = "Затримка звуку: +%.2f с";
-"osd.audio_delay.earlier" = "Затримка звуку: –%.2f с";
+"osd.audio_delay.later" = "Затримка звуку: +%@ с";
+"osd.audio_delay.earlier" = "Затримка звуку: –%@ с";
 "osd.sub_delay.nodelay" = "Затримка субтитрів: без затримки";
-"osd.sub_delay.later" = "Затримка субтитрів: +%.2f с";
-"osd.sub_delay.earlier" = "Затримка субтитрів: –%.2f с";
-"osd.subtitle_pos" = "Позиція субтитрів: %.1f";
+"osd.sub_delay.later" = "Затримка субтитрів: +%@ с";
+"osd.sub_delay.earlier" = "Затримка субтитрів: –%@ с";
+"osd.subtitle_pos" = "Позиція субтитрів: %@";
 "osd.sub_hidden" = "Субтитри приховано";
 "osd.sub_visible" = "Видимість субтитрів";
 "osd.sub_second_delay.nodelay" = "Затримка додаткових субтитрів: Без затримки";
-"osd.sub_second_delay.later" = "Затримка додаткових субтитрів: %.2fс пізніше";
-"osd.sub_second_delay.earlier" = "Затримка додаткових субтитрів: %.2fс раніше";
+"osd.sub_second_delay.later" = "Затримка додаткових субтитрів: %@с пізніше";
+"osd.sub_second_delay.earlier" = "Затримка додаткових субтитрів: %@с раніше";
 "osd.sub_second_hidden" = "Додаткові субтитри приховані";
-"osd.sub_second_pos" = "Позиціювання додаткових субтитрів: %.1f";
+"osd.sub_second_pos" = "Позиціювання додаткових субтитрів: %@";
 "osd.sub_second_visible" = "Додаткові субтитри видимі";
 "osd.mute" = "Заглушити";
 "osd.unmute" = "Зі звуком";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "Цикл A—B: очищено";
 "osd.stop" = "Зупинити";
 "osd.chapter" = "Розділ: %@";
-"osd.subtitle_scale" = "Розмір субтитрів: %.2fx";
+"osd.subtitle_scale" = "Розмір субтитрів: %@x";
 "osd.add_to_playlist" = "Додано %i файлів до плейлиста";
 "osd.clear_playlist" = "Плейлист очищено";
 "osd.video_eq.contrast" = "Контрастність: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "Радикально вилучати всі теги ASS та стилі з субтитрів.";
 "preference.sub_override_level.descriptive_text.yes" = "Застосувати всі параметри стилів у цьому розділі.";
 
-"menu.volume" = "Гучність: %d";
-"menu.volume_muted" = "Гучність: %d (Без звуку)";
-"menu.audio_delay" = "Затримка звуку: %.2f с";
-"menu.sub_delay" = "Затримка субтитрів: %.2f с";
+"preference.ytdl_plugin_not_installed" = "Установіть плагін для онлайн-медіа в розділі «Плагіни > Установлення з GitHub» та отримайте функції завантаження відео та автоматичного оновлення yt-dlp.";
+"preference.ytdl_plugin_installed" = "Вбудована підтримка youtube-dl вимкнена, оскільки ви маєте встановленим плагін для онлайн-медіа.";
+
+"menu.volume" = "Гучність: %@";
+"menu.volume_muted" = "Гучність: %@ (Без звуку)";
+"menu.audio_delay" = "Затримка звуку: %@ с";
+"menu.sub_delay" = "Затримка субтитрів: %@ с";
 "menu.sub_hide" = "Приховати субтитри";
 "menu.sub_show" = "Показати субтитри";
 "menu.sub_second_hide" = "Приховати додаткові субтитри";
@@ -190,7 +194,7 @@
 "menu.exit_mini_player" = "Вийти з музичного режиму";
 "menu.pause" = "Пауза";
 "menu.resume" = "Відновити";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Швидкість: %@x";
 "menu.chapters" = "Показати панель розділів";
 "menu.hide_chapters" = "Приховати панель розділів";
 "menu.playlist" = "Показати панель плейлиста";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Показати панель субтитрів";
 "menu.hide_subtitles" = "Приховати панель субтитрів";
 
-"menu.seek_forward" = "Крок уперед на %.0f с";
-"menu.seek_backward" = "Крок назад на %.0f с";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Гучність +%.0f% %";
-"menu.volume_down" = "Гучність –%.0f% %";
-"menu.audio_delay_up" = "Затримка звуку на +%.1f с";
-"menu.audio_delay_down" = "Затримка звуку на –%.1f с";
-"menu.sub_delay_up" = "Затримка субтитрів на +%.1f с";
-"menu.sub_delay_down" = "Затримка субтитрів на –%.1f с";
+"menu.seek_forward" = "Крок уперед на %@ с";
+"menu.seek_backward" = "Крок назад на %@ с";
+"menu.speed_up" = "Прискорити до %@x";
+"menu.speed_down" = "Сповільнити до %@x";
+"menu.volume_up" = "Гучність +%@% %";
+"menu.volume_down" = "Гучність –%@% %";
+"menu.audio_delay_up" = "Затримка звуку на +%@ с";
+"menu.audio_delay_down" = "Затримка звуку на –%@ с";
+"menu.sub_delay_up" = "Затримка субтитрів на +%@ с";
+"menu.sub_delay_down" = "Затримка субтитрів на –%@ с";
 
 "menu.crop_custom" = "Інше…";
 "menu.find_online_sub" = "Знайти онлайн субтитри з %@";
+
+"menu.manage_plugins" = "Керування плагінами…";
+"menu.developer_tool" = "Інструменти розробника";
+"menu.more_plugin" = "Детальніше…";
+"menu.conflicting_shortcuts" = "Конфліктні комбінації клавіш…";
+"menu.reload_plugins" = "Перезавантажити всі плагіни";
+"menu.show_plugins_panel" = "Показати панель плагінів";
+"menu.hide_plugins_panel" = "Приховати панель плагінів";
 
 "track.audio" = "Аудіо";
 "track.none" = "<—>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "Помилка при збереженні %@: %@";
 "alert.error_deleting_file" = "Не можу видалити файл.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Значення \"%@\" є неприпустимим.\nБудь ласка, вкажіть значення від 10 до 10000 або 0.";
 
 "alert.config.new.title" = "Нові налаштування вводу";
 "alert.config.new.message" = "Будь ласка, введіть назву нових налаштувань.";
 "alert.config.duplicate.title" = "Дублювати налаштування";
 "alert.config.duplicate.message" = "Будь ласка, дайте назву дубльованому файлові налаштувань.";
-"alert.config.empty_name" = "Назва не може бути пустою.";
-"alert.config.name_existing" = "Конфігурація з такою ж назвою вже існує.";
 "alert.config.file_existing.title" = "Файл вже існує";
 "alert.config.file_existing.message" = "Файл конфігурації з такою самою назвою вже існує. Натисніть OK, щоб показати файл у Finder.";
 "alert.config.cannot_create" = "Не можу створити файл налаштувань!\n%@";
@@ -273,7 +283,7 @@
 
 "alert.playlist.error_deleting" = "Помилка при видаленні: %@";
 
-"alert.screenshot.error_taking" = "Не вдалося зробити скріншот!";
+"alert.screenshot.error_taking" = "Неможливо зробити зняток!";
 
 "alert.sub.no_selected" = "Будь ласка, спочатку виберіть завантажені субтитри.";
 "alert.sub_lang_not_set" = "Будь ласка, встановіть у параметрах основну мову субтитрів, перед тим як використовувати opensubtitles. Зараз буде використано англійську (eng).";
@@ -281,8 +291,8 @@
 "alert.sub.cannot_login" = "Не можу зайти. Будь ласка, перевірте ім'я, пароль та статус мережі.\n\n%@";
 "alert.sub.save_downloaded.title" = "Зберегти завантажені субтитри";
 
-"alert.set_default.title" = "Встановлюю IINA як стандартну програму";
-"alert.set_default.message" = "IINA буде встановлено як стандартну програму для всіх файлів, які він підтримує.";
+"alert.set_default.title" = "Встановлення IINA як застосунок за замовчуванням";
+"alert.set_default.message" = "IINA буде встановлено як застосунок за замовчуванням для всіх файлів, які він підтримує.";
 "alert.set_default.success" = "Закінчено: %d вдало та %d невдало.";
 
 "alert.add_watch.title" = "Додайте властивість перегляду";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ загалом";
 "playlist.total_length_with_selected" = "%@ з %@ вибрано";
+"playlist.sorting.header" = "Сортування";
+"playlist.sorting.filename_ascending" = "Ім'я файлу за зростанням";
+"playlist.sorting.filename_descending" = "Ім'я файлу за спаданням";
+"playlist.sorting.path_ascending" = "Шлях файлу за зростанням";
+"playlist.sorting.path_descending" = "Шлях файлу за спаданням";
 "pl_menu.title_multi" = "Елементів: %d";
 "pl_menu.play_next" = "Відтворити наступний";
 "pl_menu.play_in_new_window" = "Відтворити в новому вікні";
@@ -385,7 +400,8 @@
 "osc_toolbar.full_screen" = "Повноекранний режим";
 "osc_toolbar.music_mode" = "Перейти до музичного режиму";
 "osc_toolbar.sub_track" = "Наявні субтитри";
-"osc_toolbar.screenshot" = "Зробити скріншот";
+"osc_toolbar.screenshot" = "Зробити зняток";
+"osc_toolbar.plugins" = "Показати панель плагінів";
 
 "mini_player.album_art" = "Показати обкладинку альбому";
 "mini_player.loop" = "Повтор";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Гучність";
 "mini_player.close" = "Закрити музичний режим";
 "mini_player.back" = "Повернутись у режим відео";
+"mini_player.sort" = "Сортувати список відтворення";
 
 // Touch bar
 

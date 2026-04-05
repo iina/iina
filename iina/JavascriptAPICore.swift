@@ -132,7 +132,7 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
     return [
       "iina": iinaVersion,
       "build": build,
-      "mpv": player!.mpv.mpvVersion
+      "mpv": MPVOptionDefaults.shared.mpvVersion
     ]
   }
 }
@@ -143,7 +143,7 @@ fileprivate func serialize(track: MPVTrack) -> [String: Any] {
   return [
     "id": track.id,
     "title": track.title ?? NSNull(),
-    "formattedTitie": track.readableTitle,
+    "formattedTitle": track.readableTitle,
     "lang": track.lang ?? NSNull(),
     "codec": track.codec ?? NSNull(),
     "isDefault": track.isDefault,

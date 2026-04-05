@@ -16,8 +16,8 @@
 "general.username" = "Nazwa użytkownika";
 "general.password" = "Hasło";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Wartość nie może być pusta.";
+"input.already_exists" = "Wartość już istnieje.";
 
 // Guide Window
 "guide.highlights" = "Najważniejsze";
@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Używasz wersji %@ IINA";
 "initial.beta.desc" = "Jeśli chcesz wrócić do wersji stabilnej, odznacz \"otrzymuj aktualizacje wersji beta\" w Ustawienia > Ogólne, i zainstaluj stabilne wydanie z naszej <a href=\"https://iina.io\">oficjalnej strony</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Wersja \"Nightly\" nie jest zalecana do codziennego użytku. Aktualnie nie wspiera ona automatycznej aktualizacji. Proszę, pobierz ręcznie nowsze wersje z naszej <a href=\"https://nightly.iina.io\">strony internetowej nightly</a>.";
 "initial.debug.desc" = "Wersje \"Debug\" przeważnie nie są zoptymalizowane pod kątem wydajności, więc nie jest zalecane wykorzystywanie ich jako wersji codziennego użytku. Wersje \"Debug\" nie wspierają automatycznych aktualizacji.";
 "initial.bug_report" = "Zgłoś przez <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buforowanie… %d%%";
 "main.opening_stream" = "Otwieram strumień…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Dokładność";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekund";
@@ -50,17 +51,17 @@
 "quicksetting.deinterlace" = "Usuwanie przeplotu";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Ukryj";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Prędkość rzeczywista";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
+"eq.preset.flat" = "Płasko";
+"eq.preset.acoustic" = "Akustycznie";
+"eq.preset.classical" = "Klasyczny";
+"eq.preset.dance" = "Taniec";
+"eq.preset.deep" = "Głęboki";
+"eq.preset.electronic" = "Elektroniczne";
 "eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
+"eq.preset.increase_bass" = "Zwiększ bas";
 "eq.preset.increase_treble" = "Increase Treble";
 "eq.preset.increase_vocal" = "Increase Vocal";
 "eq.preset.jazz" = "Jazz";
@@ -74,17 +75,17 @@
 "eq.preset.reduce_treble" = "Reduce Treble";
 "eq.preset.rock" = "Rock";
 "eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.spoken_word" = "Słowo mówione";
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Pauza";
 "osd.resume" = "Wznów";
-"osd.volume" = "Głośność: %i";
+"osd.volume" = "Głośność: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Proporcje obrazu: %@";
 "osd.crop" = "Kadrowanie obrazu: %@";
@@ -92,19 +93,19 @@
 "osd.deinterlace" = "Usuwanie przeplotu: %@";
 "osd.hwdec" = "Dekodowanie sprzętowe: %@";
 "osd.audio_delay.nodelay" = "Opóźnienie dźwięku: Brak";
-"osd.audio_delay.later" = "Opóźnienie dźwięku: %.2fs pózniej";
-"osd.audio_delay.earlier" = "Opóźnienie dźwięku: %.2fs wcześniej";
+"osd.audio_delay.later" = "Opóźnienie dźwięku: %@s pózniej";
+"osd.audio_delay.earlier" = "Opóźnienie dźwięku: %@s wcześniej";
 "osd.sub_delay.nodelay" = "Opóźnienie napisów: Brak";
-"osd.sub_delay.later" = "Opóźnienie napisów: %.2fs później";
-"osd.sub_delay.earlier" = "Opóźnienie napisów: %.2fs wcześniej";
-"osd.subtitle_pos" = "Pozycja napisów: %.1f";
+"osd.sub_delay.later" = "Opóźnienie napisów: %@s później";
+"osd.sub_delay.earlier" = "Opóźnienie napisów: %@s wcześniej";
+"osd.subtitle_pos" = "Pozycja napisów: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = ".";
 "osd.mute" = "Wycisz dźwięk";
 "osd.unmute" = "Włącz dźwięk";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "Pętla-AB: wyczyszczono";
 "osd.stop" = "Zatrzymaj";
 "osd.chapter" = "Rozdział: %@";
-"osd.subtitle_scale" = "Skala napisów: %.2fx";
+"osd.subtitle_scale" = "Skala napisów: %@x";
 "osd.add_to_playlist" = "Dodano %i plików do playlisty";
 "osd.clear_playlist" = "Wyczyszczono playlistę";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
-"menu.volume" = "Głośność: %d";
-"menu.volume_muted" = "Głośność: %d (Wyciszono)";
-"menu.audio_delay" = "Opóźnienie audio: %.2fs";
-"menu.sub_delay" = "Opóźnienie napisów: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
+"menu.volume" = "Głośność: %@";
+"menu.volume_muted" = "Głośność: %@ (Wyciszono)";
+"menu.audio_delay" = "Opóźnienie audio: %@s";
+"menu.sub_delay" = "Opóźnienie napisów: %@s";
 "menu.sub_hide" = "Ukryj napisy";
 "menu.sub_show" = "Pokaż napisy";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Pokaż panel napisów";
 "menu.hide_subtitles" = "Ukryj panel napisów";
 
-"menu.seek_forward" = "Przewiń w przód o %.0fs";
-"menu.seek_backward" = "Przewiń w tył o %.0fs";
+"menu.seek_forward" = "Przewiń w przód o %@s";
+"menu.seek_backward" = "Przewiń w tył o %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Głośność +%.0f%%";
-"menu.volume_down" = "Głośność -%.0f%%";
-"menu.audio_delay_up" = "Opóźnienie audio +%.1fs";
-"menu.audio_delay_down" = "Opóźnienie audio -%.1fs";
-"menu.sub_delay_up" = "Opóźnienie napisów +%.1fs";
-"menu.sub_delay_down" = "Opóźnienie napisów -%.1fs";
+"menu.volume_up" = "Głośność +%@%%";
+"menu.volume_down" = "Głośność -%@%%";
+"menu.audio_delay_up" = "Opóźnienie audio +%@s";
+"menu.audio_delay_down" = "Opóźnienie audio -%@s";
+"menu.sub_delay_up" = "Opóźnienie napisów +%@s";
+"menu.sub_delay_down" = "Opóźnienie napisów -%@s";
 
 "menu.crop_custom" = "Własne…";
 "menu.find_online_sub" = "Znajdź napisy online z %@";
+
+"menu.manage_plugins" = "Zarządzaj wtyczkami…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "Więcej…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Pokaż panel wtyczek";
+"menu.hide_plugins_panel" = "Ukryj panel wtyczek";
 
 "track.audio" = "Dźwięk";
 "track.none" = "<Brak>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "Podczas zapisywania %@ wystąpił błąd: %@";
 "alert.error_deleting_file" = "Nie można usunąć pliku.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nowa konfiguracja wejściowa";
 "alert.config.new.message" = "Wprowadź nazwę nowej konfiguracji.";
 "alert.config.duplicate.title" = "Powiel konfigurację";
 "alert.config.duplicate.message" = "Proszę wprowadzić nazwę dla duplikatu pliku konfiguracyjnego.";
-"alert.config.empty_name" = "Nazwa nie może być pusta.";
-"alert.config.name_existing" = "Konfiguracja o tej samej nazwie już istnieje.";
 "alert.config.file_existing.title" = "Plik już istnieje";
 "alert.config.file_existing.message" = "Plik konfiguracyjny o tej samej nazwie już istnieje.";
 "alert.config.cannot_create" = "Nie można utworzyć pliku konfiguracyjnego!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "Całkowity czas %@";
 "playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d plików";
 "pl_menu.play_next" = "Odtwórz następny";
 "pl_menu.play_in_new_window" = "Odtwórz w nowym oknie";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Przejdź w tryb muzyczny";
 "osc_toolbar.sub_track" = "Wybierz ścieżkę napisów";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Przełącz okładkę albumu";
 "mini_player.loop" = "Powtarzaj";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Głośność";
 "mini_player.close" = "Zamknij tryb muzyczny";
 "mini_player.back" = "Wróć do trybu wideo";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

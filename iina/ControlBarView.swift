@@ -20,7 +20,11 @@ class ControlBarView: NSVisualEffectView {
   private var isAlignFeedbackSent = false
 
   override func awakeFromNib() {
-    self.roundCorners(withRadius: 6)
+    if #available(macOS 26, *) {
+      self.roundCorners(withRadius: 10)
+    } else {
+      self.roundCorners(withRadius: 6)
+    }
     self.translatesAutoresizingMaskIntoConstraints = false
   }
 

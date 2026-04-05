@@ -40,7 +40,7 @@ class JavascriptPlugin: NSObject {
   }
 
   static var hasYTDL: Bool {
-    return plugins.contains { $0.identifier == "io.iina.ytdl" }
+    return plugins.contains { $0.enabled && $0.identifier == "io.iina.ytdl" }
   }
 
   static var plugins = loadPlugins() {
@@ -208,7 +208,7 @@ class JavascriptPlugin: NSObject {
       "unzip '\(tempZipFile)' -d '\(tempDecompressDir)'",
       "mv '\(tempDecompressDir)'/* '\(tempFolder)'/"
     ].joined(separator: " && ")
-    let (process, stdout, stderr) = Process.run(["/bin/bash", "-c", cmd], at: pluginsRoot)
+    let (process, stdout, stderr) = Process.run(["/bin/sh", "-c", cmd], at: pluginsRoot)
 
     guard process.terminationStatus == 0 else {
       let outText = String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
@@ -291,7 +291,7 @@ class JavascriptPlugin: NSObject {
       "unzip '\(tempZipFile)' -d '\(tempDecompressDir)'",
       "mv '\(tempDecompressDir)'/*/* '\(tempFolder)'/"
     ].joined(separator: " && ")
-    let (process, stdout, stderr) = Process.run(["/bin/bash", "-c", cmd], at: pluginsRoot)
+    let (process, stdout, stderr) = Process.run(["/bin/sh", "-c", cmd], at: pluginsRoot)
 
     guard process.terminationStatus == 0 else {
       let outText = String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
@@ -428,6 +428,7 @@ class JavascriptPlugin: NSObject {
     if (enabled) {
       registerSubProviders()
     }
+    Logger.log("Loaded JS plugin: \(name) \(version)\(enabled ? "" : " (disabled)")")
   }
 
   func registerSubProviders() {

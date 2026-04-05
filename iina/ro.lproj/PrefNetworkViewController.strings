@@ -32,7 +32,7 @@
 "aNr-lv-K0r.title" = "Automat";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
-"cyH-Md-FAD.title" = "Activează youtube-dl";
+"cyH-Md-FAD.title" = "Activează Youtube-dl";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
 "dDD-g3-54w.title" = "Dimensiunea buffer-ului cache (KB):";
@@ -54,3 +54,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "Opțiuni raw:";
+
+/* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
+"SyQ-2U-zu8.title" = "Afișează animația de încărcare în timpul pauzei, când se așteaptă cache-ul";
+
+/* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
+"39x-Jr-gsA.title" = "Afișează animația de încărcare în timpul căutării";

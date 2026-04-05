@@ -113,7 +113,7 @@
 "DRb-Y8-xir.title" = "音軌";
 
 /* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
-"3xl-iD-85w.title" = "Load External Audio…";
+"3xl-iD-85w.title" = "載入外置音訊…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "減速至 0.9x";
@@ -269,7 +269,7 @@
 "UOE-MJ-8ku.title" = "暫停";
 
 /* Class = "NSMenu"; title = "Secondary Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Secondary Subtitle";
+"UwY-P2-Xdb.title" = "二級字幕";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "重做";
@@ -325,6 +325,9 @@
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "檢閱器";
 
+/* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
+"0tJ-RQ-kuW.title" = "日誌檢視器";
+
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "原來大小（Retina）";
 
@@ -332,7 +335,7 @@
 "c6Y-0e-vgf.title" = "音量 + 1%";
 
 /* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
-"che-dy-QUU.title" = "Show Current File in Finder";
+"che-dy-QUU.title" = "在訪達中顯示當前檔";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "顯示比例";
@@ -398,7 +401,7 @@
 "m7w-hc-Y2F.title" = "大寫";
 
 /* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Secondary Subtitle";
+"mGw-jm-5x2.title" = "二級字幕";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "進入子母畫面";
@@ -501,3 +504,9 @@
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "開始朗讀";
+
+/* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
+"Y6q-cI-vfM.title" = "外掛程式";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
+"Qwb-26-zjX.title" = "打開 URL⋯";

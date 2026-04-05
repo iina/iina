@@ -40,7 +40,7 @@ class SleepPreventer: NSObject {
   /// To see the power management assertion created by the activity run the command `pmset -g assertions` in  terminal.
   /// - Parameter allowScreenSaver: If `true` the screen saver will be allowed to start but the system will be prevented from
   ///     sleeping.
-  static func preventSleep(allowScreenSaver: Bool = false) {
+  static private func preventSleep(allowScreenSaver: Bool = false) {
     if activityToken != nil {
       guard self.allowScreenSaver != allowScreenSaver else { return }
       // The outstanding activity does not match what is requested. End the current activity and
@@ -57,7 +57,7 @@ class SleepPreventer: NSObject {
     Logger.log(logMessage, level: .verbose)
   }
 
-  static func allowSleep() {
+  static private func allowSleep() {
     guard let activityToken = activityToken else { return }
     ProcessInfo.processInfo.endActivity(activityToken)
     SleepPreventer.activityToken = nil
@@ -65,4 +65,29 @@ class SleepPreventer: NSObject {
     let logMessage = allowScreenSaver ? "Allowing system to sleep when inactive" : "Allowing screen saver to start when inactive"
     Logger.log(logMessage, level: .verbose)
   }
+
+  /// Re-evaluates whether sleep should be prevented by examining the states of all players, then applies any necessary changes.
+  ///
+  /// This method is safe to call repeatedly but should always be called on the main thread to prevent race conditions.
+  /// After this method returns, exactly one of the following states will be in effect:
+  /// 1. Prevent both display sleep & screen saver from starting (`ProcessInfo.ActivityOptions.idleDisplaySleepDisabled`)
+  /// 2. Prevent display sleep but allow screen saver to start (`ProcessInfo.ActivityOptions.idleSystemSleepDisabled`)
+  /// 3. Do not prevent display sleep or screen saver from starting.
+  static func updateSleepPrevention() {
+    if Preference.bool(for: .preventScreenSaver) {
+      // Look for players actively playing that are not in music mode and are not just playing audio.
+      for player in PlayerCore.nonIdle {
+        if player.info.state == .playing {
+          // Either prevent the screen saver from activating or prevent system from sleeping depending
+          // upon user setting.
+          let allowScreenSaver = Preference.bool(for: .allowScreenSaverForAudio) && (player.info.isAudio == .isAudio || player.isInMiniPlayer)
+          SleepPreventer.preventSleep(allowScreenSaver: allowScreenSaver)
+          return
+        }
+      }
+    }
+    // No players are actively playing.
+    SleepPreventer.allowSleep()
+  }
+
 }

@@ -5,34 +5,34 @@
 "0T7-Nu-SL7.title" = "Prikaži ploču playliste";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Otvori vezu…";
+"0m7-3r-twH.title" = "Otvori URL …";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Titl";
 
 /* Class = "NSMenuItem"; title = "Normal Size"; ObjectID = "1UK-8n-QPP"; */
-"1UK-8n-QPP.title" = "Normalna Veličina";
+"1UK-8n-QPP.title" = "Normalna veličina";
 
 /* Class = "NSMenu"; title = "Audio Device"; ObjectID = "2Dp-Ol-Zcf"; */
 "2Dp-Ol-Zcf.title" = "Audiouređaj";
 
 /* Class = "NSMenuItem"; title = "Jump to Beginning"; ObjectID = "2Ya-3g-1hy"; */
-"2Ya-3g-1hy.title" = "Idi na početka";
+"2Ya-3g-1hy.title" = "Idi na početak";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "2aU-bk-bmu"; */
 "2aU-bk-bmu.title" = "Izreži";
 
 /* Class = "NSMenuItem"; title = "Jump to…"; ObjectID = "2id-wn-xsC"; */
-"2id-wn-xsC.title" = "Idi na…";
+"2id-wn-xsC.title" = "Skoči na …";
 
 /* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Prikaži video postavke";
+"2t8-Ot-yoO.title" = "Prikaži ploču videa";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "Odaberi sve";
 
 /* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Prikaži audio postavke";
+"43n-Ed-5kT.title" = "Prikaži ploču audiosnimaka";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "Kašnjenje zvuka + 0,5 s";
@@ -47,13 +47,13 @@
 "5kV-Vb-QxS.title" = "O IINA";
 
 /* Class = "NSMenu"; title = "Rotation"; ObjectID = "5xN-ZB-VLI"; */
-"5xN-ZB-VLI.title" = "Zakretanje zaslona";
+"5xN-ZB-VLI.title" = "Okretanje";
 
 /* Class = "NSMenuItem"; title = "Enter Full Screen"; ObjectID = "6Eq-ni-6hG"; */
 "6Eq-ni-6hG.title" = "Pokreni cjeloekranski prikaz";
 
 /* Class = "NSMenuItem"; title = "Step Forward 5s"; ObjectID = "6yE-op-DTS"; */
-"6yE-op-DTS.title" = "Korak naprijed 5s";
+"6yE-op-DTS.title" = "Korak naprijed 5 s";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "7Bn-Mp-EvJ"; */
 "7Bn-Mp-EvJ.title" = "Transformacije";
@@ -71,7 +71,7 @@
 "8pV-XQ-AvB.title" = "Brzina:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Prikaži postavke titlova";
+"8y7-Cy-lKT.title" = "Prikaži ploču titlova";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "Ubrzaj za 1,1 ×";
@@ -83,10 +83,10 @@
 "9pa-9C-ueQ.title" = "<Ništa>";
 
 /* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Spremi preuzeti titl…";
+"9zk-co-roT.title" = "Spremi preuzeti titl …";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
-"AoP-K6-Kb5.title" = "Snimi zaslon";
+"AoP-K6-Kb5.title" = "Snimi snimku ekrana";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
 "ArE-2s-JIV.title" = "Ukloni logotip";
@@ -104,7 +104,7 @@
 "BtY-iQ-6Pf.title" = "Dijeli";
 
 /* Class = "NSMenuItem"; title = "Advanced Screenshot…"; ObjectID = "CKi-JE-yLT"; */
-"CKi-JE-yLT.title" = "Napredno snimanje ekrana …";
+"CKi-JE-yLT.title" = "Napredna snimka ekrana …";
 
 /* Class = "NSMenuItem"; title = "File Loop"; ObjectID = "D1y-kv-85s"; */
 "D1y-kv-85s.title" = "Ponavljanje datoteke";
@@ -113,7 +113,7 @@
 "DRb-Y8-xir.title" = "Audiotraka";
 
 /* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
-"3xl-iD-85w.title" = "Učitaj vanjski audio zapis …";
+"3xl-iD-85w.title" = "Učitaj eksternu audio snimku …";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "Uspori za 0,9 ×";
@@ -155,7 +155,7 @@
 "Gi5-1S-RQB.title" = "Playlista";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
-"Gqg-wU-RRo.title" = "Obreži";
+"Gqg-wU-RRo.title" = "Odreži";
 
 /* Class = "NSMenuItem"; title = "Reset Audio Delay"; ObjectID = "H3d-jR-YCr"; */
 "H3d-jR-YCr.title" = "Resetiraj kašnjenje zvuka";
@@ -179,7 +179,7 @@
 "IXq-yq-uDF.title" = "Audio uređaj";
 
 /* Class = "NSMenuItem"; title = "Horizontal (Mirror)"; ObjectID = "JJq-qH-toq"; */
-"JJq-qH-toq.title" = "Vodoravno (zrcalo)";
+"JJq-qH-toq.title" = "Vodoravno (zrcali)";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
 "Kby-lQ-HCW.title" = "Otvori …";
@@ -206,7 +206,7 @@
 "Mg3-WB-gjZ.title" = "Pronađi titlove na internetu …";
 
 /* Class = "NSMenuItem"; title = "Find Online Subtitles from" ObjectID = "5dT-kq-WV9"; */
-"5dT-kq-WV9.title" = "Pronađi titlove na internetu iz";
+"5dT-kq-WV9.title" = "Pronađi titlove na internetu na";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
 "Mjr-lL-oEt.title" = "Spremi trenutačnu playlistu …";
@@ -242,7 +242,7 @@
 "Qv1-xd-wj5.title" = "Novi prozor";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "R4o-n2-Eq4"; */
-"R4o-n2-Eq4.title" = "Uvećanje";
+"R4o-n2-Eq4.title" = "Zumiranje";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
 "Rqg-VS-aIj.title" = "Web-stranica";
@@ -269,7 +269,7 @@
 "UOE-MJ-8ku.title" = "Zaustavi";
 
 /* Class = "NSMenu"; title = "Secondary Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Secondary Subtitle";
+"UwY-P2-Xdb.title" = "Sekundarni titl";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Ponovi";
@@ -325,6 +325,9 @@
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "Inspektor";
 
+/* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
+"0tJ-RQ-kuW.title" = "Prikaz zapisnika";
+
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "Normalna veličina (Retina)";
 
@@ -332,7 +335,7 @@
 "c6Y-0e-vgf.title" = "Glasnoća + 1 %";
 
 /* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
-"che-dy-QUU.title" = "Show Current File in Finder";
+"che-dy-QUU.title" = "Prikaži trenutačnu datoteku u Finderu";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "Omjer";
@@ -350,7 +353,7 @@
 "deS-xK-iBb.title" = "Prekini i izbriši playlistu";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
-"eo2-Tt-SLx.title" = "Obreži";
+"eo2-Tt-SLx.title" = "Odreži";
 
 /* Class = "NSMenuItem"; title = "Audio Delay:"; ObjectID = "foC-r3-8mp"; */
 "foC-r3-8mp.title" = "Kašnjenje zvuka:";
@@ -380,7 +383,7 @@
 "jxT-CU-nIS.title" = "Reprodukcija";
 
 /* Class = "NSMenuItem"; title = "Load External Subtitle…"; ObjectID = "k6x-hf-ATi"; */
-"k6x-hf-ATi.title" = "Učitaj vanjski titl …";
+"k6x-hf-ATi.title" = "Učitaj eksterni titl …";
 
 /* Class = "NSMenuItem"; title = "Bigger Size"; ObjectID = "lDC-IC-peP"; */
 "lDC-IC-peP.title" = "Veća veličina";
@@ -398,7 +401,7 @@
 "m7w-hc-Y2F.title" = "Pretvori u velika slova";
 
 /* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Secondary Subtitle";
+"mGw-jm-5x2.title" = "Sekundarni titl";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "Pokreni sliku u slici";
@@ -464,7 +467,7 @@
 "uO1-9S-6Yy.title" = "Govor";
 
 /* Class = "NSMenuItem"; title = "Clear Menu"; ObjectID = "vNY-rz-j42"; */
-"vNY-rz-j42.title" = "Isprazni izbornik";
+"vNY-rz-j42.title" = "Izbriši izbornik";
 
 /* Class = "NSMenu"; title = "Saved Audio Filters"; ObjectID = "vuV-uP-CAD"; */
 "vuV-uP-CAD.title" = "Spremljeni audiofiltri";
@@ -473,7 +476,7 @@
 "w8n-XJ-Pgi.title" = "Uredi";
 
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
-"wex-rX-PcY.title" = "Postavi ispred";
+"wex-rX-PcY.title" = "Prikaži ispred svih prozora";
 
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Spremljeni audiofiltri";
@@ -501,3 +504,9 @@
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "Započni govor";
+
+/* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
+"Y6q-cI-vfM.title" = "Dodatak";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
+"Qwb-26-zjX.title" = "Otvori URL …";

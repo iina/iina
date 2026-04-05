@@ -56,7 +56,7 @@
 "KYi-0W-zOr.title" = "Ztmavit ostatní monitory během režimu celé obrazovky";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "Automatické uspání počítače zakázáno.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Při přehrávání zvukového souboru automaticky přepnout na „Hudební režim“";
@@ -134,7 +134,7 @@
 "pdx-zt-kf2.title" = "Snímky obrazovky:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "Zakázat spuštění spořiče obrazovky při přehrávání";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Každou hodinu";
@@ -152,13 +152,13 @@
 "xr2-rB-O0x.title" = "Pozastavit/pokračovat, když:";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "Povolit v „Hudebním režimu“ nebo při přehrávání zvukového souboru";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Zobrazit uvítací okno";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "Když je soubor otevřen ručně:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
 "5WC-Sp-6mg.title" = "Opakovat playlist";

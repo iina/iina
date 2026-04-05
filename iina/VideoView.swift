@@ -19,7 +19,7 @@ class VideoView: NSView {
     return layer
   }()
 
-  @Atomic var isUninited = false
+  @ReadWriteAtomic var isUninited = false
 
   var draggingTimer: Timer?
 
@@ -41,6 +41,9 @@ class VideoView: NSView {
   lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)")
 
   static let SRGB = CGColorSpaceCreateDeviceRGB()
+
+  // record the last mouse up event which lands on video view
+  var lastEventId: Int?
 
   // MARK: - Attributes
 
@@ -85,7 +88,7 @@ class VideoView: NSView {
   func uninit() {
     player.mpv.lockAndSetOpenGLContext()
     defer { player.mpv.unlockOpenGLContext() }
-    $isUninited.withLock() { isUninited in
+    $isUninited.withWriteLock() { isUninited in
       guard !isUninited else { return }
       isUninited = true
 
@@ -123,6 +126,7 @@ class VideoView: NSView {
   /// This appears to be a defect in the Cocoa framework. See the issue for details. As a workaround the mouse up event is caught in
   /// the view which then calls the window controller's method.
   override func mouseUp(with event: NSEvent) {
+    lastEventId = event.eventNumber
     // Only check for Big Sur or greater, not if the preference use legacy full screen is enabled as
     // that can be changed while running and once the window title has been removed and added back
     // AppKit malfunctions from then on. The check for running under Big Sur or later isn't really
@@ -227,11 +231,13 @@ class VideoView: NSView {
     checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
                 "CVDisplayLinkSetOutputCallback")
     checkResult(CVDisplayLinkStart(link), "CVDisplayLinkStart")
+    log("Display link started", level: .verbose)
   }
 
   @objc func stopDisplayLink() {
     guard let link = link, CVDisplayLinkIsRunning(link) else { return }
     checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
+    log("Display link stopped", level: .verbose)
   }
 
   // This should only be called if the window has changed displays
@@ -292,6 +298,10 @@ class VideoView: NSView {
   ///         full screen mode.
   func displayIdle() {
     displayIdleTimer?.invalidate()
+    // Because the display link is critical there is an internal setting that can be changed to
+    // disable shutting down the display link should any problems with this energy saving feature
+    // be discovered.
+    guard Preference.bool(for: .enableDisplayIdle) else { return }
     // The time of 6 seconds was picked to match up with the time QuickTime delays once playback is
     // paused before stopping audio. As mpv does not provide an event indicating a frame step has
     // completed the time used must not be too short or will catch mpv still drawing when stepping.
@@ -307,8 +317,10 @@ class VideoView: NSView {
     } else if let screenColorSpace {
       let name = screenColorSpace.localizedName ?? "unnamed"
       logHDR("Using the ICC profile of the color space \(name)")
-      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
+      // Set MPV_RENDER_PARAM_ICC_PROFILE before enabling icc-profile-auto to true as mpv requires
+      // that parameter be set in the render context when icc-profile-auto is in use.
       videoLayer.setRenderICCProfile(screenColorSpace)
+      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
     }
 
     let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB
@@ -407,8 +419,8 @@ extension VideoView {
   func refreshEdrMode() {
     guard player.mainWindow.loaded, player.info.state.loaded, let displayId = currentDisplay else { return }
     if let screen = self.window?.screen {
-      NSScreen.log("Refreshing HDR for \(player.subsystem.rawValue) @ display\(displayId)", screen,
-                   subsystem: hdrSubsystem)
+      NSScreen.logEDR("Refreshing HDR for \(player.subsystem.rawValue) on display\(displayId)",
+                      screen, subsystem: hdrSubsystem)
     }
     let edrEnabled = requestEdrMode()
     let edrAvailable = edrEnabled != false
@@ -442,12 +454,13 @@ extension VideoView {
       }
 
     case "bt.2020":
-      if #available(macOS 11.0, *) {
-        name = CGColorSpace.itur_2100_PQ
-      } else if #available(macOS 10.15.4, *) {
+      // Invert order of checks to avoid Xcode bug which incorrectly shows deprecation warning
+      if #unavailable(macOS 10.15.4) {
+        name = CGColorSpace.itur_2020_PQ_EOTF
+      } else if #unavailable(macOS 11.0) {
         name = CGColorSpace.itur_2020_PQ
       } else {
-        name = CGColorSpace.itur_2020_PQ_EOTF
+        name = CGColorSpace.itur_2100_PQ
       }
 
     case "bt.709":
@@ -519,7 +532,7 @@ extension VideoView {
     Logger.log(message, level: level, subsystem: hdrSubsystem)
   }
 
-  func log(_ message: String, level: Logger.Level = .debug) {
+  func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
   }
 }
@@ -531,7 +544,7 @@ fileprivate func displayLinkCallback(
   _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
   _ context: UnsafeMutableRawPointer?) -> CVReturn {
   let videoView = unsafeBitCast(context, to: VideoView.self)
-  videoView.$isUninited.withLock() { isUninited in
+  videoView.$isUninited.withReadLock() { isUninited in
     guard !isUninited else { return }
     videoView.player.mpv.mpvReportSwap()
   }

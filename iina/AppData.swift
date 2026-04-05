@@ -39,6 +39,7 @@ struct AppData {
   static let seekAmountMap = [0, 0.05, 0.1, 0.25, 0.5]
   static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
   static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
+  static let playbackSpeedMap = [0, 0.001, 0.002, 0.005, 0.01]
 
   static let encodings = CharEncoding.list
 
@@ -66,6 +67,7 @@ struct AppData {
   static let algorithmHelpLink = "https://mpv.io/manual/stable/#options-tone-mapping"
   static let disableAnimationsHelpLink = "https://developer.apple.com/design/human-interface-guidelines/accessibility#Motion"
   static let gainAdjustmentHelpLink = "https://mpv.io/manual/stable/#options-replaygain"
+  static let gaplessAudioHelpLink = "https://mpv.io/manual/stable/#options-gapless-audio"
   static let audioDriverHellpLink = "https://mpv.io/manual/stable/#audio-output-drivers-coreaudio"
 
   static let widthWhenNoVideo = 640
@@ -80,6 +82,7 @@ struct Constants {
     static let dot = "●"
     static let blackRightPointingTriangle = "▶︎"
     static let blackLeftPointingTriangle = "◀"
+    static let mpvDefaultFont = "sans-serif"
     static let videoTimePlaceholder = "--:--:--"
     static let trackNone = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"

@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufrer… %d%%";
 "main.opening_stream" = "Åpner strøm…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Presisjon";
 "osc.1s" = "1 sekund";
 "osc.100ms" = "100 millisekunder";
@@ -78,13 +79,13 @@
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Pause";
 "osd.resume" = "Gjenoppta";
-"osd.volume" = "Volum: %i";
+"osd.volume" = "Volum: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Bildeformat: %@";
 "osd.crop" = "Beskjæring: %@";
@@ -92,19 +93,19 @@
 "osd.deinterlace" = "Fjern sammenfletting: %@";
 "osd.hwdec" = "Maskinvaredekoding: %@";
 "osd.audio_delay.nodelay" = "Lydforsinkelse: ingen forsinkelse";
-"osd.audio_delay.later" = "Lydforsinkelse: %.2fs senere";
-"osd.audio_delay.earlier" = "Lydforsinkelse: %.2fs tidligere";
+"osd.audio_delay.later" = "Lydforsinkelse: %@s senere";
+"osd.audio_delay.earlier" = "Lydforsinkelse: %@s tidligere";
 "osd.sub_delay.nodelay" = "Undertekstforsinkelse: ingen forsinkelse";
-"osd.sub_delay.later" = "Undertekstforsinkelse: %.2fs senere";
-"osd.sub_delay.earlier" = "Undertekstforsinkelse: %.2fs tidligere";
-"osd.subtitle_pos" = "Undertekstposisjon: %.1f";
+"osd.sub_delay.later" = "Undertekstforsinkelse: %@s senere";
+"osd.sub_delay.earlier" = "Undertekstforsinkelse: %@s tidligere";
+"osd.subtitle_pos" = "Undertekstposisjon: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Demp";
 "osd.unmute" = "Opphev demping";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "AB-løkke: fjernet";
 "osd.stop" = "Stopp";
 "osd.chapter" = "Kapittel: %@";
-"osd.subtitle_scale" = "Undertekstskala: %.2fs";
+"osd.subtitle_scale" = "Undertekstskala: %@s";
 "osd.add_to_playlist" = "La til %i filer i spillelisten";
 "osd.clear_playlist" = "Tømte spilleliste";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
-"menu.volume" = "Volum: %d";
-"menu.volume_muted" = "Volum: %d (dempet)";
-"menu.audio_delay" = "Lydforsinkelse: %.2fs";
-"menu.sub_delay" = "Undertekstforsinkelse: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
+"menu.volume" = "Volum: %@";
+"menu.volume_muted" = "Volum: %@ (dempet)";
+"menu.audio_delay" = "Lydforsinkelse: %@s";
+"menu.sub_delay" = "Undertekstforsinkelse: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Vis undertekstpanel";
 "menu.hide_subtitles" = "Skjul undertekstpanel";
 
-"menu.seek_forward" = "Steg fremover: %.0fs";
-"menu.seek_backward" = "Steg bakover: %.0fs";
+"menu.seek_forward" = "Steg fremover: %@s";
+"menu.seek_backward" = "Steg bakover: %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volum + %.0f%%";
-"menu.volume_down" = "Volum - %.0f%%";
-"menu.audio_delay_up" = "Lydforsinkelse + %.1fs";
-"menu.audio_delay_down" = "Lydforsinkelse - %.1fs";
-"menu.sub_delay_up" = "Undertekstforsinkelse + %.1fs";
-"menu.sub_delay_down" = "Undertekstforsinkelse - %.1fs";
+"menu.volume_up" = "Volum + %@%%";
+"menu.volume_down" = "Volum - %@%%";
+"menu.audio_delay_up" = "Lydforsinkelse + %@s";
+"menu.audio_delay_down" = "Lydforsinkelse - %@s";
+"menu.sub_delay_up" = "Undertekstforsinkelse + %@s";
+"menu.sub_delay_down" = "Undertekstforsinkelse - %@s";
 
 "menu.crop_custom" = "Custom…";
 "menu.find_online_sub" = "Finn undertekster på nettet fra %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Lyd";
 "track.none" = "<None>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "Error occurred when saving %@: %@";
 "alert.error_deleting_file" = "Kan ikke slette filen.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Ny inndatakonfigurasjon";
 "alert.config.new.message" = "Angi et navn til den nye konfigurasjonen.";
 "alert.config.duplicate.title" = "Duplicate Configuration";
 "alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
-"alert.config.empty_name" = "The name cannot be empty.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Filen finnes allerede";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Cannot create config file!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ totalt";
 "playlist.total_length_with_selected" = "%@ av %@ valgt";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d objekter";
 "pl_menu.play_next" = "Spill neste";
 "pl_menu.play_in_new_window" = "Spill i nytt vindu";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Enter music mode";
 "osc_toolbar.sub_track" = "Choose subtitle track";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Volum";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

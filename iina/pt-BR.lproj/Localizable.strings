@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregando… %d%%";
 "main.opening_stream" = "Abrindo stream…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precisão";
 "osc.1s" = "1 segundo";
 "osc.100ms" = "100 milissegundos";
@@ -78,13 +79,13 @@
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
+"alert.eq.rename.title" = "Rename Current Profile";
 "alert.eq.rename.message" = "Please enter a new profile name.";
 
 // OSDMessage.swift
 "osd.pause" = "Em Pausa";
 "osd.resume" = "Reproduzindo";
-"osd.volume" = "Volume: %i";
+"osd.volume" = "Volume: %@";
 "osd.speed" = "Speed: %@x";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
@@ -92,19 +93,19 @@
 "osd.deinterlace" = "Desentrelaçar: %@";
 "osd.hwdec" = "Decodificação por hardware: %@";
 "osd.audio_delay.nodelay" = "Atraso de Audio: Sem Atraso";
-"osd.audio_delay.later" = "Atraso de Audio: %.2fs Atrasado";
-"osd.audio_delay.earlier" = "Atraso de Audio: %.2fs Antecipado";
+"osd.audio_delay.later" = "Atraso de Audio: %@s Atrasado";
+"osd.audio_delay.earlier" = "Atraso de Audio: %@s Antecipado";
 "osd.sub_delay.nodelay" = "Atraso de Legenda: Sem Atraso";
-"osd.sub_delay.later" = "Atraso de Legenda: %.2fs Atrasada";
-"osd.sub_delay.earlier" = "Atraso de Legenda: %.2fs Antecipada";
-"osd.subtitle_pos" = "Posição da Legenda: %.1f";
+"osd.sub_delay.later" = "Atraso de Legenda: %@s Atrasada";
+"osd.sub_delay.earlier" = "Atraso de Legenda: %@s Antecipada";
+"osd.subtitle_pos" = "Posição da Legenda: %@";
 "osd.sub_hidden" = "Subtitles Hidden";
 "osd.sub_visible" = "Subtitles Visible";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Sem Audio";
 "osd.unmute" = "Audio Ligado";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "AB-Loop: Desfeito";
 "osd.stop" = "Parado";
 "osd.chapter" = "Capítulo: %@";
-"osd.subtitle_scale" = "Escala da Legenda: %.2fx";
+"osd.subtitle_scale" = "Escala da Legenda: %@x";
 "osd.add_to_playlist" = "%i Arquivos Adicionados à Lista de Reprodução";
 "osd.clear_playlist" = "Lista de Reprodução Esvaziada";
 "osd.video_eq.contrast" = "Contraste: %i";
@@ -172,12 +173,15 @@
 "preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.yes" = "Aplicar todas as configurações de estilo nesta seção.";
 
-"menu.volume" = "Volume: %d";
-"menu.volume_muted" = "Volume: %d (Mudo)";
-"menu.audio_delay" = "Atraso de Áudio: %.2fs";
-"menu.sub_delay" = "Atraso de Legenda: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Mudo)";
+"menu.audio_delay" = "Atraso de Áudio: %@s";
+"menu.sub_delay" = "Atraso de Legenda: %@s";
 "menu.sub_hide" = "Ocultar legenda";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Mostrar Painel de Legendas";
 "menu.hide_subtitles" = "Ocultar Painel de Legendas";
 
-"menu.seek_forward" = "Ir adiante %.0fs";
-"menu.seek_backward" = "Ir pra trás %.0fs";
+"menu.seek_forward" = "Ir adiante %@s";
+"menu.seek_backward" = "Ir pra trás %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volume + %.0f%%";
-"menu.volume_down" = "Volume - %.0f%%";
-"menu.audio_delay_up" = "Atraso de Áudio + %.1fs";
-"menu.audio_delay_down" = "Atraso de Áudio - %.1fs";
-"menu.sub_delay_up" = "Atraso de legenda + %.1fs";
-"menu.sub_delay_down" = "Atraso de legenda - %.1fs";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Atraso de Áudio + %@s";
+"menu.audio_delay_down" = "Atraso de Áudio - %@s";
+"menu.sub_delay_up" = "Atraso de legenda + %@s";
+"menu.sub_delay_down" = "Atraso de legenda - %@s";
 
 "menu.crop_custom" = "Outro..";
 "menu.find_online_sub" = "Encontrar Legendas on-line em %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "Áudio";
 "track.none" = "<None>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "Erro ocorreu ao salvar %@: %@";
 "alert.error_deleting_file" = "Não consigo apagar o arquivo.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Nova configuração";
 "alert.config.new.message" = "Escolha um nome para a nova configuração.";
 "alert.config.duplicate.title" = "Configuração duplicada";
 "alert.config.duplicate.message" = "Por favor, escolha um nome para o arquivo de configuração duplicado.";
-"alert.config.empty_name" = "Nome não pode ser vazio.";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "Arquivo já existe";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "Não é possível criar arquivo de configuração!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ do total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Itens";
 "pl_menu.play_next" = "Tocar próximo";
 "pl_menu.play_in_new_window" = "Tocar em nova janela";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Entre no modo de música";
 "osc_toolbar.sub_track" = "Escolha a faixa de legendas";
 "osc_toolbar.screenshot" = "Capturar tela";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Alterar imagem do álbum";
 "mini_player.loop" = "Repetir";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Fechar modo música";
 "mini_player.back" = "Retornar ao modo vídeo";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

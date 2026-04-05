@@ -1,14 +1,14 @@
 /* Class = "NSTextFieldCell"; title = "Seek type:"; ObjectID = "1yb-m4-1sK"; */
-"1yb-m4-1sK.title" = "Seek type:";
+"1yb-m4-1sK.title" = "Vrsta navigacije:";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "6F4-gm-oBg"; */
 "6F4-gm-oBg.title" = "Uključi/isključi cjeloekranski prikaz";
 
 /* Class = "NSTextFieldCell"; title = "Exact seek is more precise but can cause lag and higher CPU usage."; ObjectID = "6FZ-Qm-0k0"; */
-"6FZ-Qm-0k0.title" = "Exact seek is more precise but can cause lag and higher CPU usage.";
+"6FZ-Qm-0k0.title" = "Točna navigacija je preciznija, ali može prouzročiti kašnjenje i veću upotrebu CPU-a.";
 
 /* Class = "NSMenuItem"; title = "Exact seek"; ObjectID = "70P-6t-4jC"; */
-"70P-6t-4jC.title" = "Exact seek";
+"70P-6t-4jC.title" = "Točna navigacija";
 
 /* Class = "NSMenuItem"; title = "Toggle fullscreen"; ObjectID = "7wy-xt-c8Z"; */
 "7wy-xt-c8Z.title" = "Uključi/isključi cjeloekranski prikaz";
@@ -35,7 +35,7 @@
 "Gyd-Qt-FEo.title" = "Pritisak srednje tipke miša:";
 
 /* Class = "NSButtonCell"; title = "Acccepts first mouse"; ObjectID = "gZK-ry-lQs"; */
-"gZK-ry-lQs.title" = "Accepts first mouse click when not focused";
+"gZK-ry-lQs.title" = "Prihvaća prvi klik miša kada nije u fokusu";
 
 /* Class = "NSMenuItem"; title = "Fullscreen"; ObjectID = "Hm3-dh-jgb"; */
 "Hm3-dh-jgb.title" = "Cjeloekranski prikaz";
@@ -62,7 +62,7 @@
 "QhO-As-ZLL.title" = "Pritisak tipke miša:";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "RCe-3m-q9N"; */
-"RCe-3m-q9N.title" = "Traži";
+"RCe-3m-q9N.title" = "Navigiraj";
 
 /* Class = "NSTextFieldCell"; title = "Right click to:"; ObjectID = "Rqy-g2-AP2"; */
 "Rqy-g2-AP2.title" = "Pritisak desne tipke miša:";
@@ -77,7 +77,7 @@
 "chS-d2-TG1.title" = "Ništa";
 
 /* Class = "NSTextFieldCell"; title = "Force Touch to:"; ObjectID = "dpH-PO-WKt"; */
-"dpH-PO-WKt.title" = "Force Touch to:";
+"dpH-PO-WKt.title" = "Snažni dodir za:";
 
 /* Class = "NSTextFieldCell"; title = "Mouse"; ObjectID = "eA4-AD-oUu"; */
 "eA4-AD-oUu.title" = "Miš";
@@ -104,7 +104,7 @@
 "oOk-y6-lek.title" = "Ništa";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for normal seek:"; ObjectID = "of2-ec-OkC"; */
-"of2-ec-OkC.title" = "Sensitivity for normal seek:";
+"of2-ec-OkC.title" = "Osjetljivost za normalnu navigaciju:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "unj-zt-RyU"; */
 "unj-zt-RyU.title" = "Ništa";
@@ -119,10 +119,10 @@
 "w54-7I-QfW.title" = "Ništa";
 
 /* Class = "NSMenuItem"; title = "Keyframe seek"; ObjectID = "wBB-fx-Mao"; */
-"wBB-fx-Mao.title" = "Keyframe seek";
+"wBB-fx-Mao.title" = "Navigacija na ključne kadrove";
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
-"wcS-tP-wav.title" = "Traži";
+"wcS-tP-wav.title" = "Navigiraj";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "Ništa";

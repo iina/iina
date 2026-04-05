@@ -50,11 +50,10 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 ./other/download_libs.sh
 ```
 
-  - Tips:
-    - Change the URL in the shell script if you want to download architecture-specific binaries. By default, it will download the universal ones. You can download other binaries by using `--arch <ARCH>` (universal, arm64, or amd64).
-    - The script downloads files using parallel downloads to speed up the process (5 parallel downloads by default). You can change this by using `--parallel <X>` (from 1 to...).
-    - If you want to build an older IINA version, make sure to download the corresponding dylibs. For example, `https://iina.io/dylibs/1.2.0/universal/fileList.txt`.
-
+> [!TIP]
+> - By default the shell script downloads universal binaries. You can download arch-specific binaries using `--arch <ARCH>` (`universal`, `arm64` or `x86_64`)
+> - Files are downloaded in parallel (5 concurrent downloads by default). You can change this using `--parallel <N>` (from 1 to...)
+> - If you want to build an older IINA version you must change `DYLIBS_DOWNLOAD_PATH` in the script to download the corresponding dylibs. For example, `https://iina.io/dylibs/1.2.0/universal/fileList.txt`.
 
 2. Open iina.xcodeproj in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
@@ -118,3 +117,32 @@ IINA is always looking for contributions, whether it's through bug reports, code
 * If you're looking to contribute code, please read [CONTRIBUTING.md](CONTRIBUTING.md) — it has information on IINA's process for handling contributions, and tips on how the code is structured to make your work easier.
 
 * If you'd like to translate IINA to your language, please visit [IINA's instance of Crowdin](https://translate.iina.io/). You can create an account for free and start translating. Please do not send a pull request to this repo directly, Crowdin will automatically sync new translations with our repo. If you want to translate IINA into a new language that is currently not on the list, feel free to open an issue.
+
+## IINA Plugins List
+
+### Official Plugins
+- **[More Seeking](https://github.com/iina/plugin-more-seeking)** (`iina/plugin-more-seeking`) - Advanced seeking controls.
+- **[Online Media](https://github.com/iina/plugin-online-media)** (`iina/plugin-online-media`) - Enhances online streaming and downloading.
+- **[OpenSubtitles](https://github.com/iina/plugin-opensub)** (`iina/plugin-opensub`) - Search and download subtitles.
+- **[User Scripts](https://github.com/iina/plugin-userscript)** (`iina/plugin-userscript`) - Run custom JavaScript snippets.
+
+### Community Plugins
+- **[Bookmarks](https://github.com/wyattowalsh/iina-plugin-bookmarks)** (`wyattowalsh/iina-plugin-bookmarks`) - Save and manage video timestamps.
+- **[Clickable Subtitles](https://github.com/kerim/iina-clickable-subtitles)** (`kerim/iina-clickable-subtitles`) - Click subtitles to define words (macOS Look Up).
+- **[Danmaku](https://github.com/xjbeta/iina-plugin-danmaku)** (`xjbeta/iina-plugin-danmaku`) - Overlay comments/danmaku on video.
+- **[File Viewer](https://github.com/qktechies/iina-plugin-file-viewer)** (`qktechies/iina-plugin-file-viewer`) - bookmark folders, browse directory contents, and play video files directly within IINA.
+- **[Jellyfin](https://github.com/mhajder/iina-jellyfin)** (`mhajder/iina-jellyfin`) - Browse and play media from Jellyfin servers.
+- **[Jump to Frame](https://github.com/bbeny123/iina-jump-to-frame)** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
+- **[Multiple Clips](https://github.com/karthisnk/multi-cutter-iina)** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
+- **[PolyScript](https://github.com/SammoMichael/polyplugin-release)** (`SammoMichael/polyplugin-release`) - Dual subtitles, hover dictionary, and AI-assisted translation for language learning.
+- **[recorder](https://github.com/5thDimensionalVader/recorder-iina)** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
+
+> 💡 **Want to build your own plugin?**
+> 
+> Explore the existing plugins listed here to learn how they work. If you create a new plugin or improve an existing one, feel free to contribute back by adding it to this list via a pull request.
+
+> 🚀 **Interested in creating an IINA plugin?**
+> 
+> Start by exploring the existing plugins here to understand patterns and best practices. Once you’ve built your own plugin, please contribute back by adding it to this README so others can discover and use it.
+
+

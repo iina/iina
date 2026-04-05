@@ -26,6 +26,9 @@ class Utility {
   static let blacklistExt = supportedFileExt[.sub]! + multipleFilePlaylistExt
   static let lut3dExt = ["3dl", "cube", "dat", "m3d"]
 
+  /// File types that are subtitles or can contain subtitles.
+  static let containsSubExt = supportedFileExt[.sub]! + supportedFileExt[.video]!
+
   enum ValidationResult {
     case ok
     case valueIsEmpty
@@ -243,10 +246,15 @@ class Utility {
     input.lineBreakMode = .byClipping
     input.usesSingleLineMode = true
     input.cell?.isScrollable = true
+    input.isBezeled = true
+    input.bezelStyle = .roundedBezel
+    if #available(macOS 11.0, *) {
+      input.controlSize = .large
+    }
     if let inputValue = inputValue {
       input.stringValue = inputValue
     }
-    let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 240, height: 20))
+    let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 240, height: 32))
     stackView.orientation = .vertical
     stackView.alignment = .centerX
     stackView.addArrangedSubview(input)
@@ -263,7 +271,7 @@ class Utility {
       label.textColor = .secondaryLabelColor
       label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
       stackView.addArrangedSubview(label)
-      stackView.frame = NSRect(x: 0, y: 0, width: 240, height: 42)
+      stackView.frame = NSRect(x: 0, y: 0, width: 240, height: 54)
 
       let validateInput = {
         switch validator(input.stringValue) {
@@ -369,10 +377,14 @@ class Utility {
    - parameters:
      - callback: A closure accepting the font name.
    */
-  static func quickFontPickerWindow(callback: @escaping (String?) -> Void) {
-    let appDelegate = AppDelegate.shared
-    appDelegate.fontPicker.finishedPicking = callback
-    appDelegate.fontPicker.showWindow(self)
+  static func quickFontPickerWindow(selecting initialSelection: String?, callback: @escaping (String) -> Void) {
+    let fontPicker = AppDelegate.shared.fontPicker
+    let _ = fontPicker.window  // load if not loaded
+    fontPicker.finishedPicking = callback
+    if let initialSelection {
+      fontPicker.select(initialSelection)
+    }
+    fontPicker.showWindow(self)
   }
 
   // MARK: - App functions

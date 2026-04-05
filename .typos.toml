@@ -14,6 +14,8 @@ extend-ignore-re = [
     'apiKey = "[^"]+"',
     "V\\[alue\\]",
     "ba!",
+    # Ignore the token declaration in AssrtSubtitle.
+    "5IzWrb.*"
 ]
 
 [default.extend-words]
@@ -22,8 +24,11 @@ extend-ignore-re = [
 
 [default.extend-identifiers]
 "caf" = "caf"
+# Xcode uses this property in XIBs.
+"customObjectInstantitationMethod" = "customObjectInstantitationMethod"
 "iy" = "iy"
 "reloadSavedIINAfilters" = "reloadSavedIINAfilters"
 "ScreenshootOSDView" = "ScreenshootOSDView"
 "tak" = "tak"
 "videoParamsMaxCll" = "videoParamsMaxCll"
+"CPSProcessSerNum" = "CPSProcessSerNum"

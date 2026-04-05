@@ -64,6 +64,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
   }()
 
+  var playlistView: PlaylistViewController {
+    return player.mainWindow.playlistView
+  }
+
   override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView] as [NSView?]}
 
   // MARK: - Initialization
@@ -79,13 +83,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
       let button = window.standardWindowButton($0)
       button?.isHidden = true
-      // Update: since IINA now drops 10.12 support, removed this workaround to enable minimizing mini player
       // > The close button, being obscured by standard buttons, won't respond to clicking when window is inactive.
       // > i.e. clicking close button (or any position located in the standard buttons's frame) will only order the window
       // > to front, but it never becomes key or main window.
       // > Removing the button directly will also work but it causes crash on 10.12-, so for the sake of safety we don't use that way for now.
       // > Not a perfect solution. It should respond to the first click.
-      // button?.frame.size = .zero
+      // Update: Testing switching to calling removeFromSuperview did not work when running under
+      // macOS Sequoia 15.7.2. The button was still present in the title bar. Possibly in response
+      // to past crashes Apple updated the title bar implementation to ignore certain attempts to
+      // alter the title bar. Continuing to set the frame size to zero so mouse events reach our
+      // custom close button.
+      button?.frame.size = .zero
     }
 
     setToInitialWindowSize(display: false, animate: false)
@@ -95,7 +103,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     // tracking area
     let trackingView = NSView()
     trackingView.translatesAutoresizingMaskIntoConstraints = false
-    window.contentView?.addSubview(trackingView, positioned: .above, relativeTo: nil)
+    window.contentView?.addSubview(trackingView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|"], ["v": trackingView])
     NSLayoutConstraint.activate([
       NSLayoutConstraint(item: trackingView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1, constant: 0),
@@ -171,17 +179,18 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       player.overrideAutoSwitchToMusicMode = false
       player.switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
     }
-    player.mainWindow.close()
+    player.stop()
+    player.events.emit(.windowWillClose)
   }
 
   // MARK: - Window delegate: Size
-  func windowDidResize(_ notification: Notification) {
-    guard let window = window, !window.inLiveResize else { return }
-    videoView.videoLayer.draw()
+
+  func windowWillStartLiveResize(_ notification: Notification) {
+    videoView.videoLayer.inLiveResize = true
   }
 
   func windowDidEndLiveResize(_ notification: Notification) {
-    guard let window = window else { return }
+    guard player.info.state.active, let window = window else { return }
     let windowHeight = normalWindowHeight()
     if isPlaylistVisible {
       // hide
@@ -197,6 +206,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
         isPlaylistVisible = true
       }
     }
+    videoView.videoLayer.inLiveResize = false
   }
 
   // MARK: - Window delegate: Activeness status
@@ -324,6 +334,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   // MARK: - IBActions
 
+  func showPlaylistAction(_ tab: PlaylistViewController.TabViewType) {
+    if !isPlaylistVisible {
+      playlistView.pleaseSwitchToTab(tab)
+      togglePlaylist(self)
+    } else if playlistView.currentTab == tab {
+      togglePlaylist(self)
+    } else {
+      playlistView.pleaseSwitchToTab(tab)
+    }
+  }
+
   @IBAction func togglePlaylist(_ sender: Any) {
     guard let window = window else { return }
     if isPlaylistVisible {
@@ -333,7 +354,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     } else {
       // show
       isPlaylistVisible = true
-      player.mainWindow.playlistView.reloadData(playlist: true, chapters: true)
+      playlistView.reloadData(playlist: true, chapters: true)
 
       var newFrame = window.frame
       newFrame.origin.y -= DefaultPlaylistHeight

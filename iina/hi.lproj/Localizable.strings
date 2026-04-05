@@ -16,20 +16,20 @@
 "general.username" = "उपयोगकर्ता नाम";
 "general.password" = "पारण शब्द";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "मान रिक्त नहीं हो सकता ।";
+"input.already_exists" = "वैल्यू पहले से मौजूद है|";
 
 // Guide Window
-"guide.highlights" = "Highlights";
+"guide.highlights" = "हाइलाइट";
 "guide.basic_settings" = "मार्गदर्शक. मूल_सेटिंग्स";
-"guide.faq" = "Frequently Asked Questions";
+"guide.faq" = "अक्सर पूछे जाने वाले प्रश्न";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.announcement" = "आप IINA का %@ संस्करण उपयोग कर रहे हैं";
+"initial.beta.desc" = "अगर आप रिलीज़ संस्करण पर वापस जाना चाहते हैं, तो सेटिंग्स > सामान्य से \"बीटा अपडेट प्राप्त करें\" को अनचेक करें और हमारी <a href=\"https://iina.io\">आधिकारिक वेबसाइट</a> से एक स्थिर रिलीज़ इंस्टॉल करें।";
+"initial.nightly.desc" = "रोज़मर्रा के उपयोग के लिए नाइटली का इस्तेमाल करने की सिफारिश नहीं की जाती। फिलहाल, नाइटली बिल्ड ऑटो अपडेट को सपोर्ट नहीं करते हैं। कृपया हमारी <a href=\"https://nightly.iina.io\">नाइटली वेबसाइट</a> से नए बिल्ड मैन्युअल रूप से डाउनलोड करें।";
+"initial.debug.desc" = "डीबग बिल्ड आमतौर पर परफॉर्मेंस के लिए ऑप्टिमाइज़ नहीं होते हैं, इसलिए उन्हें रोज़मर्रा के उपयोग के लिए इस्तेमाल करने की सिफारिश नहीं की जाती। डीबग बिल्ड ऑटो अपडेट को सपोर्ट नहीं करते हैं।";
+"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">गिटहब इश्यूज़</a> पर रिपोर्ट करें।";
 
 // Inspector Window
 "inspector.error" = "त्रुटि";
@@ -37,74 +37,75 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "बफरिंग… %d%%";
 "main.opening_stream" = "खुलने की धारा…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"main.seeking_indicator" = "सीकिंग…";
+"osc.precision" = "सटीकता";
+"osc.1s" = "1 सेकंड";
+"osc.100ms" = "100 मिलीसेकंड";
+"osc.10ms" = "10 मिलीसेकंड";
+"osc.1ms" = "1 मिलीसेकंड";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "डिफ़ॉल्ट";
 "quicksetting.item_none" = "कोई नहीं";
-"quicksetting.hwdec" = "Hardware Decoding";
+"quicksetting.hwdec" = "हार्डवेयर डिकोडिंग";
 "quicksetting.deinterlace" = "असंग्रथित";
-"quicksetting.hdr" = "HDR";
+"quicksetting.hdr" = "एचडीआर";
 "quicksetting.hide" = "छिपाना";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "स्पीड को 1x पर रीसेट करें";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
-"eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.flat" = "फ़्लैट";
+"eq.preset.acoustic" = "अकॉस्टिक";
+"eq.preset.classical" = "शास्त्रीय";
+"eq.preset.dance" = "नृत्य";
+"eq.preset.deep" = "गहरा";
+"eq.preset.electronic" = "इलेक्ट्रॉनिक";
+"eq.preset.hip_hop" = "हिप हॉप";
+"eq.preset.increase_bass" = "बास बढ़ाएँ";
+"eq.preset.increase_treble" = "ट्रेबल बढ़ाएँ";
+"eq.preset.increase_vocal" = "वोकल बढ़ाएँ";
+"eq.preset.jazz" = "जैज़";
+"eq.preset.latin" = "लैटिन";
+"eq.preset.loundness" = "लाउडनेस";
+"eq.preset.lounge" = "लाउंज";
+"eq.preset.piano" = "पियानो";
+"eq.preset.pop" = "पॉप";
+"eq.preset.rnb" = "आर एंड बी";
+"eq.preset.reduce_bass" = "बास कम करें";
+"eq.preset.reduce_treble" = "ट्रेबल कम करें";
+"eq.preset.rock" = "रॉक";
+"eq.preset.small_speaker" = "छोटा स्पीकर";
+"eq.preset.spoken_word" = "स्पोकन वर्ड";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "नया ईक्यू प्रोफ़ाइल";
+"alert.eq.new_profile.message" = "कृपया एक प्रोफ़ाइल नाम दर्ज करें।";
+"alert.eq.rename.title" = "वर्तमान प्रोफ़ाइल का नाम बदलें";
+"alert.eq.rename.message" = "कृपया एक नया प्रोफ़ाइल नाम दर्ज करें।";
 
 // OSDMessage.swift
 "osd.pause" = "रोकें";
 "osd.resume" = "पुनः आरंभ";
-"osd.volume" = "ध्वनि: %i";
-"osd.speed" = "Speed: %@x";
+"osd.volume" = "ध्वनि: %@";
+"osd.speed" = "गति: %@x";
 "osd.aspect" = "आस्पेक्ट अनुपात: %@";
 "osd.crop" = "क्रॉप: %@";
 "osd.rotate" = "घुमाएँ: %i°";
 "osd.deinterlace" = "डीइंटरलेस: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.hwdec" = "हार्डवेयर डिकोडिंग: %@";
 "osd.audio_delay.nodelay" = "ऑडियो विलंब: विलंब न करें";
-"osd.audio_delay.later" = "ऑडियो विलंब: %.2fs बाद में";
-"osd.audio_delay.earlier" = "ऑडियो विलंब: %.2fs पूर्व";
+"osd.audio_delay.later" = "ऑडियो विलंब: %@s बाद में";
+"osd.audio_delay.earlier" = "ऑडियो विलंब: %@s पूर्व";
 "osd.sub_delay.nodelay" = "उपशीर्षक देरी: विलंब न करें";
-"osd.sub_delay.later" = "उपशीर्षक देरी: %.2fs बाद में";
-"osd.sub_delay.earlier" = "उपशीर्षक देरी: %.2fs पूर्व";
-"osd.subtitle_pos" = "उपशीर्षक पद: %.1f";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
+"osd.sub_delay.later" = "उपशीर्षक देरी: %@s बाद में";
+"osd.sub_delay.earlier" = "उपशीर्षक देरी: %@s पूर्व";
+"osd.subtitle_pos" = "उपशीर्षक पद: %@";
+"osd.sub_hidden" = "सबटाइटल्स छिपाए गए हैं";
+"osd.sub_visible" = "सबटाइटल्स दिखाई दे रहे हैं";
+"osd.sub_second_delay.nodelay" = "सेकंडरी सबटाइटल डिले: कोई डिले नहीं";
+"osd.sub_second_delay.later" = "सेकंडरी सबटाइटल डिले: %@ सेकंड बाद";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "म्यूट";
 "osd.unmute" = "Unmute";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "AB-लूप: साफ़ किया गया";
 "osd.stop" = "रुकें";
 "osd.chapter" = "अध्याय: %@";
-"osd.subtitle_scale" = "उपशीर्षक स्केल: %.2fx";
+"osd.subtitle_scale" = "उपशीर्षक स्केल: %@x";
 "osd.add_to_playlist" = " प्लेलिस्ट में %i फ़ाइलें जोड़ी गईं";
 "osd.clear_playlist" = "क्लीयर प्लेलिस्ट";
 "osd.video_eq.contrast" = "कन्ट्रास्ट: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
-"menu.volume" = "ध्वनि: %d";
-"menu.volume_muted" = "Volume: %d (Muted)";
-"menu.audio_delay" = "ऑडियो विलंब: %.2fs";
-"menu.sub_delay" = "उपशीर्षक देरी: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
+"menu.volume" = "ध्वनि: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "ऑडियो विलंब: %@s";
+"menu.sub_delay" = "उपशीर्षक देरी: %@s";
 "menu.sub_hide" = "Hide Subtitles";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
@@ -190,7 +194,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "रोकें";
 "menu.resume" = "पुनः आरंभ";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "गति: %@x";
 "menu.chapters" = "अध्याय पैनल दिखाएं";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "प्लेलिस्ट पैनल दिखाएं";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Show Subtitles Panel";
 "menu.hide_subtitles" = "Hide Subtitles Panel";
 
-"menu.seek_forward" = "आगे कदम %.0fs";
-"menu.seek_backward" = "पीछे जाओ %.0fs";
+"menu.seek_forward" = "आगे कदम %@s";
+"menu.seek_backward" = "पीछे जाओ %@s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "ध्वनि + %.0f%%";
-"menu.volume_down" = "ध्वनि - %.0f%%";
-"menu.audio_delay_up" = "ऑडियो विलंब + %.1fs";
-"menu.audio_delay_down" = "ऑडियो विलंब - %.1fs";
-"menu.sub_delay_up" = "उपशीर्षक देरी + %.1fs";
-"menu.sub_delay_down" = "उपशीर्षक देरी - %.1fs";
+"menu.volume_up" = "ध्वनि + %@%%";
+"menu.volume_down" = "ध्वनि - %@%%";
+"menu.audio_delay_up" = "ऑडियो विलंब + %@s";
+"menu.audio_delay_down" = "ऑडियो विलंब - %@s";
+"menu.sub_delay_up" = "उपशीर्षक देरी + %@s";
+"menu.sub_delay_down" = "उपशीर्षक देरी - %@s";
 
 "menu.crop_custom" = "कस्टम…";
 "menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Hide Plugins Panel";
 
 "track.audio" = "ऑडियो";
 "track.none" = "<कोई नहीं>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "%@: %@ को सहेजते समय त्रुटि आई\n";
 "alert.error_deleting_file" = "फ़ाइल को हटा नहीं सकता।";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "नया इनपुट कॉन्फ़िगरेशन";
 "alert.config.new.message" = "कृपया नए कॉन्फ़िगरेशन के लिए एक नाम दर्ज करें।";
 "alert.config.duplicate.title" = "डुप्लिकेट कॉन्फ़िगरेशन";
 "alert.config.duplicate.message" = "कृपया डुप्लिकेट कॉन्फ़िगरेशन फ़ाइल के लिए नाम दर्ज करें।";
-"alert.config.empty_name" = "नाम खाली नहीं हो सकता।";
-"alert.config.name_existing" = "A config with the same name already exists.";
 "alert.config.file_existing.title" = "फ़ाइल पहले से ही मौजूद है";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "कॉन्फ़िगरेशन फ़ाइल नहीं बना सकता है!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "कुल %@";
 "playlist.total_length_with_selected" = "%@ में से %@ का चयन किया गया ";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d आइटम";
 "pl_menu.play_next" = "आगे चलाएं";
 "pl_menu.play_in_new_window" = "नई विंडो में चलाएं";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "संगीत मोड दर्ज करें";
 "osc_toolbar.sub_track" = "उपशीर्षक ट्रैक चुनें";
 "osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "ध्वनि";
 "mini_player.close" = "Close music mode";
 "mini_player.back" = "Return to video mode";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 

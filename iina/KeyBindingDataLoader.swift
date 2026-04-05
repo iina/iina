@@ -74,7 +74,7 @@ class KeyBindingDataLoader {
     ("speed", .num),
     ("---", .separator),
     ("video", .num),
-    ("video-aspect", .string),
+    ("video-aspect-override", .string),
     ("contrast", .num),
     ("brightness", .num),
     ("gamma", .num),

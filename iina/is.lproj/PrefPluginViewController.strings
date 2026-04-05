@@ -10,13 +10,13 @@
 /* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
 "EHl-kr-ZZf.title" = "Email";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[0]" = "Permissions";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[1]" = "Permissions";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "About"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[1]" = "Um";
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[0]" = "Um";
 
-/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Preferences"; ObjectID = "KTN-5r-mMm"; */
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
 "KTN-5r-mMm.ibShadowedLabels[2]" = "Valmöguleikar";
 
 /* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
@@ -46,7 +46,7 @@
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
 "enP-C1-4vu.title" = "Install from GitHub…";
 
-/* Class = "NSTabViewItem"; label = "Preferences"; ObjectID = "eyS-eb-H4e"; */
+/* Class = "NSTabViewItem"; label = "Settings"; ObjectID = "eyS-eb-H4e"; */
 "eyS-eb-H4e.label" = "Valmöguleikar";
 
 /* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
@@ -70,8 +70,8 @@
 /* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
 "r3r-Qh-rC9.title" = "Source";
 
-/* Class = "NSButtonCell"; title = "Install from a local package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "Install from a local package…";
+/* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "Install Package…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "Plugins";

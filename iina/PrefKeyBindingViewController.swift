@@ -87,6 +87,16 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   @IBOutlet weak var keyMappingSearchField: NSSearchField!
   @IBOutlet var mappingController: NSArrayController!
 
+  let configNameValidator: Utility.InputValidator<String> = { input in
+    if input.isEmpty {
+      return .valueIsEmpty
+    }
+    if KC.userConfigs[input] != nil || KC.defaultConfigs[input] != nil {
+      return .valueAlreadyExists
+    }
+    return .ok
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -152,7 +162,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   }
 
   @IBAction func newConfFileAction(_ sender: AnyObject) {
-    Utility.quickPromptPanel("config.new", sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.new", validator: configNameValidator, sheetWindow: view.window) { newName in
       guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       if !fm.createFile(atPath: newFilePath, contents: nil, attributes: nil) {
@@ -164,7 +174,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   }
 
   @IBAction func duplicateConfFileAction(_ sender: AnyObject) {
-    Utility.quickPromptPanel("config.duplicate", sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.duplicate", validator: configNameValidator, sheetWindow: view.window) { newName in
       guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       do {
@@ -180,7 +190,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   
   @IBAction func configFileListDoubleAction(_ sender: NSTableView) {
     guard shouldEnableEdit else { return }
-    Utility.quickPromptPanel("config.rename", sheetWindow: view.window) { newName in
+    Utility.quickPromptPanel("config.rename", validator: configNameValidator, sheetWindow: view.window) { newName in
       guard let newFilePath = self.newConfigFilePath(forName: newName) else { return }
 
       do {
@@ -272,11 +282,14 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
     
     func fallback() {
       isLoadingConfig = false
-      Utility.showAlert("keybinding_config.error", arguments: [currentConfName], sheetWindow: view.window)
+      DispatchQueue.main.async {
+        Utility.showAlert("keybinding_config.error", arguments: [configName ?? "Unknown"], sheetWindow: self.view.window)
+      }
       loadConfigFile(fallbackDefault)
     }
 
-    guard let configName = configName else { fallback(); return }
+    guard let configName = configName,
+          let confFilePath = getFilePath(forConfig: configName, showAlert: false) else { fallback(); return }
     
     cachedConfigNames = configNames
     confTableView.reloadData()
@@ -284,10 +297,10 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
       confTableView.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
     currentConfName = configName
-    currentConfFilePath = getFilePath(forConfig: configName)!
+    currentConfFilePath = confFilePath
     
     guard let mapping = KeyMapping.parseInputConf(at: currentConfFilePath) else { fallback(); return }
-
+    
     mappingController.content = nil
     mappingController.add(contentsOf: mapping)
     mappingController.setSelectionIndexes(IndexSet())
@@ -306,18 +319,6 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   /// - Parameter filename: the filename of the new config file
   /// - Returns: the path of the new config if could be created; nil otherwise.
   private func newConfigFilePath(forName filename: String) -> String? {
-    // Check if the name is empty
-    guard !filename.isEmpty else {
-      Utility.showAlert("config.empty_name", sheetWindow: self.view.window)
-      return nil
-    }
-
-    // Check if there already exists a config which has the same name
-    guard KC.userConfigs[filename] == nil && KC.defaultConfigs[filename] == nil else {
-      Utility.showAlert("config.name_existing", sheetWindow: self.view.window)
-      return nil
-    }
-
     // Check if there exists a config file with the same filename
     let filePath = Utility.userInputConfDirURL.appendingPathComponent(filename + ".conf").path
     if fm.fileExists(atPath: filePath) {

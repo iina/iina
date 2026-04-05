@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "Estás usando una versión %@ de IINA";
 "initial.beta.desc" = "Si desea volver a una versión estable, desmarque \"recibir actualizaciones beta\" desde Ajustes > Generales, e instale una versión estable de nuestro <a href=\"https://iina.io\">sitio web oficial</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "No se recomienda usar versiones nocturnas para el uso diario. Actualmente las versiones nocturnas no soportan la actualización automática. Por favor, descargue manualmente nuevas versiones de nuestro <a href=\"https://nightly.iina.io\">sitio web nocturno</a>.";
 "initial.debug.desc" = "Las compilaciones de depuración normalmente no están optimizadas para el rendimiento, por lo que no se recomienda que se utilicen de manera habitual. Las compilaciones de depuración no soportan la actualización automática.";
 "initial.bug_report" = "Notifique a través de <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
 "main.opening_stream" = "Abrir flujo de datos";
+"main.seeking_indicator" = "Buscando…";
 "osc.precision" = "Precisión";
 "osc.1s" = "1 segundo";
 "osc.100ms" = "100 milisegundos";
@@ -50,7 +51,7 @@
 "quicksetting.deinterlace" = "Desentrelazar";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Ocultar";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Restablecer velocidad a 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Plano";
@@ -84,27 +85,27 @@
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Reanudar";
-"osd.volume" = "Volumen: %i";
-"osd.speed" = "Speed: %@x";
+"osd.volume" = "Volumen: %@";
+"osd.speed" = "Velocidad: %@x";
 "osd.aspect" = "Proporción: %@";
 "osd.crop" = "Recortar: %@";
 "osd.rotate" = "Rotar: %i°";
 "osd.deinterlace" = "Desentrelazar: %@";
 "osd.hwdec" = "Decodificación de hardware: %@";
 "osd.audio_delay.nodelay" = "Retraso de audio: Sin Retraso";
-"osd.audio_delay.later" = "Retraso de audio: %.2fs Después";
-"osd.audio_delay.earlier" = "Retraso de audio: %.2fs Antes";
+"osd.audio_delay.later" = "Retraso de audio: %@s Después";
+"osd.audio_delay.earlier" = "Retraso de audio: %@s Antes";
 "osd.sub_delay.nodelay" = "Retraso de subtítulos: Sin Retraso";
-"osd.sub_delay.later" = "Retraso de subtítulos: %.2fs Después";
-"osd.sub_delay.earlier" = "Retraso de subtítulos: %.2fs Antes";
-"osd.subtitle_pos" = "Posición de subtítulos: %.1f";
+"osd.sub_delay.later" = "Retraso de subtítulos: %@s Después";
+"osd.sub_delay.earlier" = "Retraso de subtítulos: %@s Antes";
+"osd.subtitle_pos" = "Posición de subtítulos: %@";
 "osd.sub_hidden" = "Subtítulos Visibles";
 "osd.sub_visible" = "Subtítulos Visibles";
 "osd.sub_second_delay.nodelay" = "Retraso secundario de subtítulos: Sin demora";
-"osd.sub_second_delay.later" = "Retraso de Subtítulo Secundario: %.2fs Después";
-"osd.sub_second_delay.earlier" = "Retraso Secundario de Subtítulos: %.2fs Antes";
+"osd.sub_second_delay.later" = "Retraso de Subtítulo Secundario: %@s Después";
+"osd.sub_second_delay.earlier" = "Retraso Secundario de Subtítulos: %@s Antes";
 "osd.sub_second_hidden" = "Subtítulos Secundarios Escondidos";
-"osd.sub_second_pos" = "Posición Secundaria de Subtítulos: %.1f";
+"osd.sub_second_pos" = "Posición Secundaria de Subtítulos: %@";
 "osd.sub_second_visible" = "Subtítulos Secundarios Visibles";
 "osd.mute" = "Silenciar";
 "osd.unmute" = "No silenciar";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "Bucle-AB: Borrado";
 "osd.stop" = "Detener";
 "osd.chapter" = "Capítulo: %@";
-"osd.subtitle_scale" = "Escala de subtítulos: %.2fx";
+"osd.subtitle_scale" = "Escala de subtítulos: %@x";
 "osd.add_to_playlist" = "Se añadieron %i archivos a la lista de reproducción";
 "osd.clear_playlist" = "Lista de reproducción borrada";
 "osd.video_eq.contrast" = "Contraste: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "Remueve radicalmente todas las etiquetas y estilos ASS del subtítulo.";
 "preference.sub_override_level.descriptive_text.yes" = "Aplicar todos los ajustes de estilo en esta sección.";
 
-"menu.volume" = "Volumen: %d";
-"menu.volume_muted" = "Volumen: %d (Silenciado)";
-"menu.audio_delay" = "Retraso de audio: %.2fs";
-"menu.sub_delay" = "Retraso de subtítulos: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Instale el plugin multimedia en línea de \"Plugins > Instalar desde GitHub\" para disfrutar de características avanzadas tales como descargas de vídeo y actualizaciones automáticas yt-dlp.";
+"preference.ytdl_plugin_installed" = "El soporte de youtube-dl integrado está deshabilitado ya que tienes el plugin de medios online instalado.";
+
+"menu.volume" = "Volumen: %@";
+"menu.volume_muted" = "Volumen: %@ (Silenciado)";
+"menu.audio_delay" = "Retraso de audio: %@s";
+"menu.sub_delay" = "Retraso de subtítulos: %@s";
 "menu.sub_hide" = "Ocultar Subtítulos";
 "menu.sub_show" = "Mostrar Subtítulos";
 "menu.sub_second_hide" = "Esconder Subtítulos Secundarios";
@@ -190,7 +194,7 @@
 "menu.exit_mini_player" = "Salir del modo de música";
 "menu.pause" = "Pausar";
 "menu.resume" = "Reanudar";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Velocidad: %@x";
 "menu.chapters" = "Mostrar el panel de capítulos";
 "menu.hide_chapters" = "Ocultar el panel de capítulos";
 "menu.playlist" = "Mostrar el panel de la lista de reproducción";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Mostrar el panel de subtítulos";
 "menu.hide_subtitles" = "Ocultar el panel de subtítulos";
 
-"menu.seek_forward" = "Adelantar %.0fs";
-"menu.seek_backward" = "Retroceder %.0fs";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volumen + %.0f%%";
-"menu.volume_down" = "Volumen - %.0f%%";
-"menu.audio_delay_up" = "Retrasar audio + %.1fs";
-"menu.audio_delay_down" = "Retrasar audio - %.1fs";
-"menu.sub_delay_up" = "Retrasar subtítulos + %.1fs";
-"menu.sub_delay_down" = "Retrasar subtítulos - %.1fs";
+"menu.seek_forward" = "Adelantar %@s";
+"menu.seek_backward" = "Retroceder %@s";
+"menu.speed_up" = "Aumentar velocidad a %@x";
+"menu.speed_down" = "Reducir velocidad a %@x";
+"menu.volume_up" = "Volumen + %@%%";
+"menu.volume_down" = "Volumen - %@%%";
+"menu.audio_delay_up" = "Retrasar audio + %@s";
+"menu.audio_delay_down" = "Retrasar audio - %@s";
+"menu.sub_delay_up" = "Retrasar subtítulos + %@s";
+"menu.sub_delay_down" = "Retrasar subtítulos - %@s";
 
 "menu.crop_custom" = "Personalizado…";
 "menu.find_online_sub" = "Buscar subtítulos en línea desde %@";
+
+"menu.manage_plugins" = "Gestionar plugins";
+"menu.developer_tool" = "Herramientas de desarrollo";
+"menu.more_plugin" = "Más…";
+"menu.conflicting_shortcuts" = "Atajos de teclas con conflictos…";
+"menu.reload_plugins" = "Recargar todos los plugins";
+"menu.show_plugins_panel" = "Mostrar panel de plugins";
+"menu.hide_plugins_panel" = "Ocultar Panel de Plugins";
 
 "track.audio" = "Audio";
 "track.none" = "<Ninguno>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "Se ha producido un error al guardar %@: %@";
 "alert.error_deleting_file" = "No se puede eliminar el archivo.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "El valor \"%@\" no es válido.\nPor favor, proporcione un valor entre 10 y 10000, o 0.";
 
 "alert.config.new.title" = "Nueva configuración de entrada";
 "alert.config.new.message" = "Por favor, introduzca un nombre para la nueva configuración.";
 "alert.config.duplicate.title" = "Configuración duplicada";
 "alert.config.duplicate.message" = "Por favor, introduzca el nombre para el archivo de configuración duplicado.";
-"alert.config.empty_name" = "El nombre no puede estar vacío.";
-"alert.config.name_existing" = "Ya existe una configuración con el mismo nombre.";
 "alert.config.file_existing.title" = "El archivo ya existe";
 "alert.config.file_existing.message" = "Ya existe un archivo de configuración con el mismo nombre de archivo. Elija OK para mostrar el archivo en Finder.";
 "alert.config.cannot_create" = "¡No se puede crear el archivo de configuración!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionados";
+"playlist.sorting.header" = "Ordenado";
+"playlist.sorting.filename_ascending" = "Nombre de archivo ascendente";
+"playlist.sorting.filename_descending" = "Nombre de archivo descendente";
+"playlist.sorting.path_ascending" = "Ruta de archivo ascendente";
+"playlist.sorting.path_descending" = "Ruta del archivo descendente";
 "pl_menu.title_multi" = "%d Elementos";
 "pl_menu.play_next" = "Reproducir siguiente";
 "pl_menu.play_in_new_window" = "Reproducir en una nueva ventana";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Entrar en modo música";
 "osc_toolbar.sub_track" = "Elegir la pista de subtítulos";
 "osc_toolbar.screenshot" = "Capturar pantalla";
+"osc_toolbar.plugins" = "Mostrar panel de plugins";
 
 "mini_player.album_art" = "Alternar imagen de álbum";
 "mini_player.loop" = "Repetir";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Volumen";
 "mini_player.close" = "Cerrar modo de música";
 "mini_player.back" = "Volver al modo de vídeo";
+"mini_player.sort" = "Ordenar la lista de reproducción";
 
 // Touch bar
 

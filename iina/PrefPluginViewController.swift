@@ -11,7 +11,7 @@ import Cocoa
 
 fileprivate let defaultPlugins = [
   ["url": "iina/plugin-online-media", "id": "io.iina.ytdl"],
-  ["url": "iina/plugin-userscript", "id": "io.iina.userscript"],
+  ["url": "iina/plugin-userscript", "id": "io.iina.user-script"],
   ["url": "iina/plugin-opensub", "id": "io.iina.opensub"],
 ]
 
@@ -98,7 +98,6 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     newPluginSourceTextField.delegate = self
 
     clearPluginPage()
-
   }
 
   private func createPreferenceView() {
@@ -232,15 +231,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
       pluginPreferencesViewController.plugin = currentPlugin
     } else if sender.selectedTag() == 1 {
       // About
-      if let _ = currentPlugin.helpPageURL {
-        pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
-        if pluginHelpWebView == nil {
-          createHelpView()
-        }
-        loadHelpPage()
-      } else {
-        pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginHelpView)
-      }
+      updateAboutTab()
     }
   }
 
@@ -274,6 +265,22 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     uninstallBtn.isEnabled = !plugin.isExternal
 
     currentPlugin = plugin
+
+    updateAboutTab()
+  }
+
+  private func updateAboutTab() {
+    guard let currentPlugin = currentPlugin else { return }
+
+    if let _ = currentPlugin.helpPageURL {
+      pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
+      if pluginHelpWebView == nil {
+        createHelpView()
+      }
+      loadHelpPage()
+    } else {
+      pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginHelpView)
+    }
   }
 
   private func loadHelpPage() {
@@ -495,35 +502,33 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
 
   private func showNewPluginPermissions(_ plugin: JavascriptPlugin) {
     showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
-      if ok {
-        // check whether a duplicate plugin exists, if yes, replace
-        let isDuplicate = JavascriptPlugin.plugins.contains { $0.identifier == plugin.identifier }
-        if isDuplicate {
-          Utility.quickAskPanel("plugin_reinstall", titleArgs: [plugin.name], sheetWindow: self.view.window!) { response in
-            if response == .alertFirstButtonReturn {
-              let pos = JavascriptPlugin.plugins.firstIndex { $0.identifier == plugin.identifier }
-              if let pos = pos {
-                // uninstall the old plugins
-                let oldPlugin = JavascriptPlugin.plugins[pos]
-                oldPlugin.enabled = false
-                oldPlugin.remove()
-                self.clearPluginPage()
-                // install the new plugin
-                plugin.normalizePath()
-                JavascriptPlugin.plugins.insert(plugin, at: pos)
-                plugin.enabled = true
-                self.tableView.reloadData()
-              }
-            }
+      guard ok else {
+        plugin.remove()
+        return
+      }
+      // check whether a duplicate plugin exists, if yes, replace
+      if let pos = JavascriptPlugin.plugins.firstIndex(where: { $0.identifier == plugin.identifier }) {
+        Utility.quickAskPanel("plugin_reinstall", titleArgs: [plugin.name], sheetWindow: self.view.window!) { response in
+          if response == .alertFirstButtonReturn {
+            // uninstall the old plugins
+            let oldPlugin = JavascriptPlugin.plugins[pos]
+            oldPlugin.enabled = false
+            oldPlugin.remove()
+            self.clearPluginPage()
+            // install the new plugin
+            plugin.normalizePath()
+            JavascriptPlugin.plugins.insert(plugin, at: pos)
+            plugin.enabled = true
+            self.tableView.reloadData()
+          } else {
+            plugin.remove()
           }
-        } else {
-          plugin.normalizePath()
-          JavascriptPlugin.plugins.append(plugin)
-          plugin.enabled = true
-          self.tableView.reloadData()
         }
       } else {
-        plugin.remove()
+        plugin.normalizePath()
+        JavascriptPlugin.plugins.append(plugin)
+        plugin.enabled = true
+        self.tableView.reloadData()
       }
     }
   }

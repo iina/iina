@@ -1,8 +1,8 @@
 /* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
-"0DK-uZ-duj.title" = "自动 (拷贝)";
+"0DK-uZ-duj.title" = "自动（拷贝）";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
-"2yO-To-el7.title" = "默认: 0 (自动)";
+"2yO-To-el7.title" = "默认：0（自动）";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
 "44m-ge-naq.title" = "最大音量:";
@@ -14,16 +14,16 @@
 "YUr-aJ-xfC.title" = "强制使用独立显卡";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
-"bxW-np-SGm.title" = "默认: 0 (自动)";
+"bxW-np-SGm.title" = "默认：0（自动）";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
-"cJP-ep-847.title" = "(100-1000)";
+"cJP-ep-847.title" = "（100-1000）";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
 "g4c-vG-URh.title" = "固定初始音量:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "总是使用独立显卡(如果存在)。这可以提高渲染性能，但是可能增加耗电量。";
+"gCv-sJ-uQJ.title" = "总是使用独立显卡（如果存在）。这可以提高渲染性能，但是可能增加耗电量。";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "视频:";
@@ -56,7 +56,7 @@
 "3g4-jW-uJd.title" = "加载 ICC 配置文件";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "加载当前显示器的 ICC 配置文件并用于将视频 RGB 转换至屏幕输出。(仅适用于 SDR 模式)";
+"M2M-of-gjd.title" = "加载当前显示器的 ICC 配置文件并用于将视频 RGB 转换至屏幕输出。（仅适用于 SDR 模式）";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
 "R7Z-9c-vPJ.title" = "启用 HDR 支持";

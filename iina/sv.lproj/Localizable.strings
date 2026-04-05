@@ -17,7 +17,7 @@
 "general.password" = "Lösenord";
 
 "input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.already_exists" = "Värdet finns redan.";
 
 // Guide Window
 "guide.highlights" = "Höjdpunkter";
@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
+"main.seeking_indicator" = "Seeking…";
 "osc.precision" = "Precision";
 "osc.1s" = "1 sekund";
 "osc.100ms" = "100 millisekunder";
@@ -50,61 +51,61 @@
 "quicksetting.deinterlace" = "Avfläta";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Göm";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Återställ hastighet till 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
+"eq.preset.flat" = "Platt";
+"eq.preset.acoustic" = "Akustisk";
+"eq.preset.classical" = "Klassisk";
+"eq.preset.dance" = "Dans";
+"eq.preset.deep" = "Djup";
+"eq.preset.electronic" = "Elektronisk";
+"eq.preset.hip_hop" = "Hip-hop";
+"eq.preset.increase_bass" = "Öka bas";
+"eq.preset.increase_treble" = "Öka diskant";
 "eq.preset.increase_vocal" = "Increase Vocal";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
+"eq.preset.latin" = "Latinsk";
 "eq.preset.loundness" = "Loundness";
-"eq.preset.lounge" = "Lounge";
+"eq.preset.lounge" = "Salong";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Minska bas";
+"eq.preset.reduce_treble" = "Minska diskant";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
+"eq.preset.small_speaker" = "Liten högtalare";
 "eq.preset.spoken_word" = "Spoken Word";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Currnet Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Ny EQ-profil";
+"alert.eq.new_profile.message" = "Ange ett profilnamn.";
+"alert.eq.rename.title" = "Byt namn på aktuell profil";
+"alert.eq.rename.message" = "Ange ett nytt profilnamn.";
 
 // OSDMessage.swift
 "osd.pause" = "Pausa";
 "osd.resume" = "Fortsätt";
-"osd.volume" = "Volym: %i";
-"osd.speed" = "Speed: %@x";
+"osd.volume" = "Volym: %@";
+"osd.speed" = "Hastighet: %@x";
 "osd.aspect" = "Förhållande: %@";
 "osd.crop" = "Beskär: %@";
 "osd.rotate" = "Rotera: %i°";
 "osd.deinterlace" = "Avfläta: %@";
 "osd.hwdec" = "Hårdvaruavkodning: %@";
 "osd.audio_delay.nodelay" = "Ljudfördröjning: ingen fördröjning";
-"osd.audio_delay.later" = "Ljudfördröjning: %.2fs senare";
-"osd.audio_delay.earlier" = "Ljudfördröjning: %.2fs tidigare";
+"osd.audio_delay.later" = "Ljudfördröjning: %@s senare";
+"osd.audio_delay.earlier" = "Ljudfördröjning: %@s tidigare";
 "osd.sub_delay.nodelay" = "Undertextsfördröjning: Ingen fördröjning";
-"osd.sub_delay.later" = "Undertextsfördröjning: %.2fs senare";
-"osd.sub_delay.earlier" = "Undertextsfördröjning: %.2fs tidigare";
-"osd.subtitle_pos" = "Undertextposition: %.1f";
+"osd.sub_delay.later" = "Undertextsfördröjning: %@s senare";
+"osd.sub_delay.earlier" = "Undertextsfördröjning: %@s tidigare";
+"osd.subtitle_pos" = "Undertextposition: %@";
 "osd.sub_hidden" = "Undertexter dolda";
 "osd.sub_visible" = "Undertexter synliga";
 "osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %.2fs Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %.2fs Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %.1f";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
+"osd.sub_second_hidden" = "Sekundära undertexter dolda";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Tysta";
 "osd.unmute" = "Tysta av";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "A–B-loop: rensad";
 "osd.stop" = "Stoppa";
 "osd.chapter" = "Kapitel: %@";
-"osd.subtitle_scale" = "Undertextskala: %.2fx";
+"osd.subtitle_scale" = "Undertextskala: %@x";
 "osd.add_to_playlist" = "La till %i filer till spellistan";
 "osd.clear_playlist" = "Spellista rensad";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -125,8 +126,8 @@
 "osd.find_online_sub" = "Hittar undertexter online…";
 "osd.find_online_sub.source" = "från";
 "osd.sub_not_found" = "Inga undertexter hittades";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d undertexter hittades.";
+"osd.sub_downloading" = "Laddar ner %d undertexter";
 "osd.sub_downloaded" = "Undertext nedladdad";
 "osd.sub_saved" = "Undertext sparad";
 "osd.network_error" = "Nätverksfel";
@@ -162,7 +163,7 @@
 
 "preference.enable_adv_settings" = "Aktivera avancerade inställningar";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "nej";
 "preference.sub_override_level.force" = "tvinga";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "avlägsna";
@@ -174,14 +175,17 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
-"menu.volume" = "Volym: %d";
-"menu.volume_muted" = "Volym: %d (Tystat)";
-"menu.audio_delay" = "Ljudfördröjning: %.2fs";
-"menu.sub_delay" = "Undertextsfördröjning: %.2fs";
+"preference.ytdl_plugin_not_installed" = "Installera Online Media-tillägget från \"Tillägg > Installera från GitHub\" för att få tillgång till avancerade funktioner som videonedladdning och automatiska yt-dlp-uppdateringar.";
+"preference.ytdl_plugin_installed" = "Det inbyggda youtube-dl-stödet är inaktiverat då du har installerat Online Media-tillägget.";
+
+"menu.volume" = "Volym: %@";
+"menu.volume_muted" = "Volym: %@ (Tystat)";
+"menu.audio_delay" = "Ljudfördröjning: %@s";
+"menu.sub_delay" = "Undertextsfördröjning: %@s";
 "menu.sub_hide" = "Dölj undertexter";
 "menu.sub_show" = "Visa undertexter";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_second_hide" = "Dölj sekundära undertexter";
+"menu.sub_second_show" = "Visa sekundära undertexter";
 "menu.fullscreen" = "Gå in i helskärmsläge";
 "menu.exit_fullscreen" = "Lämna helskärmsläge";
 "menu.pip" = "Använd bild-i-bild";
@@ -190,7 +194,7 @@
 "menu.exit_mini_player" = "Stäng musikläget";
 "menu.pause" = "Pausa";
 "menu.resume" = "Fortsätt";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Hastighet: %@x";
 "menu.chapters" = "Visa kapitelpanel";
 "menu.hide_chapters" = "Dölj kapitelpanelen";
 "menu.playlist" = "Visa spellistepanel";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Visa undertextspanelen";
 "menu.hide_subtitles" = "Dölj undertextspanelen";
 
-"menu.seek_forward" = "Gå framåt %.0f s";
-"menu.seek_backward" = "Gå bakåt %.0f s";
+"menu.seek_forward" = "Gå framåt %@ s";
+"menu.seek_backward" = "Gå bakåt %@ s";
 "menu.speed_up" = "Speed Up by %@x";
 "menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "Volym +%.0f%%";
-"menu.volume_down" = "Volym -%.0f%%";
-"menu.audio_delay_up" = "Ljudfördröjning +%.1fs";
-"menu.audio_delay_down" = "Ljudfördröjning -%.1fs";
-"menu.sub_delay_up" = "Undertextsfördröjning +%.1fs";
-"menu.sub_delay_down" = "Undertextsfördröjning -%.1fs";
+"menu.volume_up" = "Volym +%@%%";
+"menu.volume_down" = "Volym -%@%%";
+"menu.audio_delay_up" = "Ljudfördröjning +%@s";
+"menu.audio_delay_down" = "Ljudfördröjning -%@s";
+"menu.sub_delay_up" = "Undertextsfördröjning +%@s";
+"menu.sub_delay_down" = "Undertextsfördröjning -%@s";
 
 "menu.crop_custom" = "Anpassad…";
 "menu.find_online_sub" = "Hitta undertexter online från %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Utvecklarverktyg";
+"menu.more_plugin" = "Mer…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Ladda om alla plugins";
+"menu.show_plugins_panel" = "Show Plugins Panel";
+"menu.hide_plugins_panel" = "Dölj plugin-panel";
 
 "track.audio" = "Ljud";
 "track.none" = "<Inget>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "Fel uppstod när %@ skulle sparas: %@";
 "alert.error_deleting_file" = "Kan ej radera denna fil.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
 
 "alert.config.new.title" = "Ny inmatningskonfiguration";
 "alert.config.new.message" = "Vänligen ange ett namn för den nya konfigurationen.";
 "alert.config.duplicate.title" = "Duplicera konfigurationsfil";
 "alert.config.duplicate.message" = "Vänligen ange ett namn för den duplicerade konfigurationsfilen.";
-"alert.config.empty_name" = "Namnet får ej vara tomt.";
-"alert.config.name_existing" = "En konfiguration med samma namn finns redan.";
 "alert.config.file_existing.title" = "Filen finns redan";
 "alert.config.file_existing.message" = "En konfigurationsfil med samma filnamn finns redan. Välj OK för att visa filen i Finder.";
 "alert.config.cannot_create" = "Kan inte skapa konfigurationsfil!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "Totalt %@";
 "playlist.total_length_with_selected" = "%@ av %@ markerade";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d objekt";
 "pl_menu.play_next" = "Spela nästa";
 "pl_menu.play_in_new_window" = "Spela upp i nytt fönster";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Gå in i musikläge";
 "osc_toolbar.sub_track" = "Välj undertextspår";
 "osc_toolbar.screenshot" = "Ta en skärmdump";
+"osc_toolbar.plugins" = "Show plugins panel";
 
 "mini_player.album_art" = "Växla skivomslag";
 "mini_player.loop" = "Upprepa";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Volym";
 "mini_player.close" = "Avsluta musikläge";
 "mini_player.back" = "Återgå till videoläge";
+"mini_player.sort" = "Sortera spellistan";
 
 // Touch bar
 

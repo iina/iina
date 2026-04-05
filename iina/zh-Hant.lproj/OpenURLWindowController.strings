@@ -8,7 +8,7 @@
 "XV7-VP-Ua2.placeholderString" = "請在此輸入 URL⋯⋯";
 
 /* Class = "NSTextFieldCell"; title = "URL is invalid."; ObjectID = "gaI-DT-l2c"; */
-"gaI-DT-l2c.title" = "無效的 URL。";
+"gaI-DT-l2c.title" = "網址無法使用";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "iNG-ee-EW6"; */
 "iNG-ee-EW6.title" = "取消";
@@ -23,7 +23,7 @@
 "wxH-ic-Uug.title" = "HTTP 認證";
 
 /* Class = "NSTextFieldCell"; title = "Loading Media……"; ObjectID = "3T9-gp-4UE"; */
-"3T9-gp-4UE.title" = "Loading Media……";
+"3T9-gp-4UE.title" = "媒體項目讀取中……";
 
 /* Class = "NSButtonCell"; title = "Open"; ObjectID = "zbf-uh-uGz"; */
-"zbf-uh-uGz.title" = "Stop Loading";
+"zbf-uh-uGz.title" = "停止讀取";

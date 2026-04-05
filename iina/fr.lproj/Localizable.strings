@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Mise en mémoire tampon… %d%%";
 "main.opening_stream" = "Lancement du stream…";
+"main.seeking_indicator" = "Recherche…";
 "osc.precision" = "Précision";
 "osc.1s" = "1 seconde";
 "osc.100ms" = "100 millisecondes";
@@ -84,7 +85,7 @@
 // OSDMessage.swift
 "osd.pause" = "En pause";
 "osd.resume" = "Reprendre";
-"osd.volume" = "Volume : %i";
+"osd.volume" = "Volume : %@";
 "osd.speed" = "Vitesse : %@x";
 "osd.aspect" = "Format d'image : %@";
 "osd.crop" = "Rognage : %@";
@@ -92,29 +93,29 @@
 "osd.deinterlace" = "Désentrelacer : %@";
 "osd.hwdec" = "Décodage matériel : %@";
 "osd.audio_delay.nodelay" = "Délai audio : aucun";
-"osd.audio_delay.later" = "Délai audio : %.2fs en avance";
-"osd.audio_delay.earlier" = "Délai audio : %.2fs en retard";
+"osd.audio_delay.later" = "Délai audio : %@s en avance";
+"osd.audio_delay.earlier" = "Délai audio : %@s en retard";
 "osd.sub_delay.nodelay" = "Délai des sous-titres : aucun";
-"osd.sub_delay.later" = "Délai des sous-titres : %.2fs en avance";
-"osd.sub_delay.earlier" = "Délai des sous-titres : %.2fs en retard";
-"osd.subtitle_pos" = "Position des sous-titres : %.1f";
+"osd.sub_delay.later" = "Délai des sous-titres : %@s en avance";
+"osd.sub_delay.earlier" = "Délai des sous-titres : %@s en retard";
+"osd.subtitle_pos" = "Position des sous-titres : %@";
 "osd.sub_hidden" = "Sous-titres masqués";
 "osd.sub_visible" = "Sous-titres visibles";
 "osd.sub_second_delay.nodelay" = "Délai des sous-titres secondaires : aucun";
-"osd.sub_second_delay.later" = "Délai des sous-titres secondaires : %.2fs en retard";
-"osd.sub_second_delay.earlier" = "Délai des sous-titres secondaires : %.2fs en avance";
+"osd.sub_second_delay.later" = "Délai des sous-titres secondaires : %@s en retard";
+"osd.sub_second_delay.earlier" = "Délai des sous-titres secondaires : %@s en avance";
 "osd.sub_second_hidden" = "Sous-titres secondaires masqués";
-"osd.sub_second_pos" = "Position de sous-titre secondaire : %.1f";
+"osd.sub_second_pos" = "Position de sous-titre secondaire : %@";
 "osd.sub_second_visible" = "Sous-titres secondaires visibles";
 "osd.mute" = "Son coupé";
 "osd.unmute" = "Son rétabli";
 "osd.screenshot" = "Une capture d'écran a été prise";
 "osd.abloop.a" = "Boucle AB : A";
 "osd.abloop.b" = "Boucle AB : B";
-"osd.abloop.clear" = "Boucle AB: vidé";
+"osd.abloop.clear" = "Boucle AB: vidée";
 "osd.stop" = "Arrêté";
 "osd.chapter" = "Chapitre : %@";
-"osd.subtitle_scale" = "Échelle des sous-titres : %.2fx";
+"osd.subtitle_scale" = "Échelle des sous-titres : %@x";
 "osd.add_to_playlist" = "%i fichiers ajoutés à la liste de lecture";
 "osd.clear_playlist" = "Liste de lecture vidée";
 "osd.video_eq.contrast" = "Contraste : %i";
@@ -157,7 +158,7 @@
 "preference.logged_in_as" = "Connecté en tant que %@";
 "preference.system_media_control" = "Utiliser les touches média système";
 
-"preference.key_binding_hint_1" = "Pour modifier les raccourcis clavier de cette configuration, cliquez sur le bouton \"Dupliquer…\" pour en créer une copie.";
+"preference.key_binding_hint_1" = "Pour modifier les raccourcis clavier de cette configuration, cliquez sur le bouton \"Dupliquer… \" pour en créer une copie.";
 "preference.key_binding_hint_2" = "Double-cliquez sur une ligne pour modifier le raccourci clavier correspondant.";
 
 "preference.enable_adv_settings" = "Activer les paramètres avancés";
@@ -174,17 +175,20 @@
 "preference.sub_override_level.descriptive_text.strip" = "Supprimez radicalement toutes les balises et tous les styles ASS du sous-titre.";
 "preference.sub_override_level.descriptive_text.yes" = "Appliquer tous les paramètres de style dans cette section.";
 
-"menu.volume" = "Volume : %d";
-"menu.volume_muted" = "Volume : %d (coupé)";
-"menu.audio_delay" = "Délai audio : %.2fs";
-"menu.sub_delay" = "Délai des sous-titres : %.2fs";
+"preference.ytdl_plugin_not_installed" = "Installez le plugin Media en ligne à partir de \"Plugins > Installer à partir de GitHub\" pour profiter des fonctionnalités avancées telles que le téléchargement vidéo et les mises à jour automatiques de yt-dlp.";
+"preference.ytdl_plugin_installed" = "La prise en charge intégrée de youtube-dl est désactivée puisque vous avez installé le plugin Online media.";
+
+"menu.volume" = "Volume : %@";
+"menu.volume_muted" = "Volume : %@ (coupé)";
+"menu.audio_delay" = "Délai audio : %@s";
+"menu.sub_delay" = "Délai des sous-titres : %@s";
 "menu.sub_hide" = "Masquer les sous-titres";
 "menu.sub_show" = "Afficher les sous-titres";
 "menu.sub_second_hide" = "Masquer les sous-titres secondaires";
 "menu.sub_second_show" = "Afficher les sous-titres secondaires";
 "menu.fullscreen" = "Plein écran";
 "menu.exit_fullscreen" = "Quitter le mode plein écran";
-"menu.pip" = "Passer en inscrustation";
+"menu.pip" = "Passer en incrustation";
 "menu.exit_pip" = "Quitter le mode Incrustation";
 "menu.mini_player" = "Activer le Mode Musique";
 "menu.exit_mini_player" = "Quitter le Mode Musique";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "Afficher le panneau des sous-titres";
 "menu.hide_subtitles" = "Masquer le panneau des sous-titres";
 
-"menu.seek_forward" = "Reculer de %.0fs";
-"menu.seek_backward" = "Avancer de %.0fs";
+"menu.seek_forward" = "Reculer de %@s";
+"menu.seek_backward" = "Avancer de %@s";
 "menu.speed_up" = "Accélérer de %@x";
 "menu.speed_down" = "Ralentir de %@x";
-"menu.volume_up" = "Volume +%.0f%%";
-"menu.volume_down" = "Volume -%.0f%%";
-"menu.audio_delay_up" = "Délai audio +%.1fs";
-"menu.audio_delay_down" = "Délai audio -%.1fs";
-"menu.sub_delay_up" = "Délai des sous-titres +%.1fs";
-"menu.sub_delay_down" = "Délai des sous-titres -%.1fs";
+"menu.volume_up" = "Volume +%@%%";
+"menu.volume_down" = "Volume -%@%%";
+"menu.audio_delay_up" = "Délai audio +%@s";
+"menu.audio_delay_down" = "Délai audio -%@s";
+"menu.sub_delay_up" = "Délai des sous-titres +%@s";
+"menu.sub_delay_down" = "Délai des sous-titres -%@s";
 
 "menu.crop_custom" = "Perso…";
 "menu.find_online_sub" = "Chercher des sous-titres en ligne sur %@";
+
+"menu.manage_plugins" = "Gérer les plugins…";
+"menu.developer_tool" = "Outils pour développeur";
+"menu.more_plugin" = "Plus…";
+"menu.conflicting_shortcuts" = "Conflit entre raccourcis clavier…";
+"menu.reload_plugins" = "Recharger tous les plugins";
+"menu.show_plugins_panel" = "Afficher le panneau des plugins";
+"menu.hide_plugins_panel" = "Masquer le panneau des plugins";
 
 "track.audio" = "Audio";
 "track.none" = "<Aucun>";
@@ -239,20 +251,18 @@
 "alert.unsupported_url" = "URL non supportée.";
 "alert.wrong_url_format" = "Mauvais format d'URL.";
 
-"alert.error_open" = "Impossible d'ouvrir ce fichier/stream !";
+"alert.error_open" = "Impossible d'ouvrir ce fichier / stream !";
 "alert.error_finding_file" = "Impossible de trouver le fichier %@ !";
 "alert.error_loading_script" = "Impossible de charger le script %@ !";
 "alert.error_saving_file" = "Une erreur est survenue lors de l'enregistrement de %@ : %@";
 "alert.error_deleting_file" = "Impossible de supprimer le fichier.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "La valeur \"%@\" est invalide.\nVeuillez fournir une valeur comprise entre 10 et 10000, ou 0.";
 
 "alert.config.new.title" = "Nouvelle configuration des touches";
 "alert.config.new.message" = "Veuillez entrer le nom de la nouvelle configuration.";
 "alert.config.duplicate.title" = "Dupliquer la configuration";
 "alert.config.duplicate.message" = "Veuillez entrer un nom pour le fichier de configuration dupliqué.";
-"alert.config.empty_name" = "Le nom ne peut pas être vide.";
-"alert.config.name_existing" = "Une configuration avec le même nom existe déjà.";
 "alert.config.file_existing.title" = "Le fichier existe déjà";
 "alert.config.file_existing.message" = "Un fichier de configuration avec le même nom de fichier existe déjà. Choisissez OK pour afficher le fichier dans le Finder.";
 "alert.config.cannot_create" = "Impossible de créer le fichier de configuration ! %@";
@@ -289,7 +299,7 @@
 "alert.add_watch.message" = "Veuillez renseigner un nom de propriété mpv valide.";
 
 "alert.jump_to.title" = "Sauter à";
-"alert.jump_to.message" = "Veuillez renseigner le timestamp où vous voulez sauter. Exemple : 20:35";
+"alert.jump_to.message" = "Veuillez renseigner l'endroit où vous voulez sauter. Exemple : 20:35";
 
 "alert.opensub.login.title" = "Login OpenSubtitles";
 "alert.opensub.login.message" = "Veuillez renseigner votre nom d'utilisateur et mot de passe";
@@ -304,7 +314,7 @@
 "alert.delete_history.title" = "Supprimer l'historique de lecture";
 "alert.delete_history.message" = "Souhaitez-vous vraiment supprimer les entrées sélectionnées ?";
 
-"alert.filter_hwdec.message" = "Vous êtes sur le point d'appliquer un filtre vidéo. Cependant, votre décodeur matériel actuel peut ne pas bien supporter les filtres vidéo. Vous pouvez désactiver le décodage matériel ou passer sur Auto(Copy), qui consommera deux fois plus de mémoire.\nVous devrez peut-être répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
+"alert.filter_hwdec.message" = "Vous êtes sur le point d'appliquer un filtre vidéo. Cependant, votre décodeur matériel actuel peut ne pas bien supporter les filtres vidéo. Vous pouvez désactiver le décodage matériel ou passer sur Auto(Copie), qui consommera deux fois plus de mémoire.\nVous devrez peut-être répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
 "alert.filter_hwdec.abort" = "Annuler";
 "alert.filter_hwdec.turn_off" = "Désactiver le décodage matériel";
 "alert.filter_hwdec.use_copy" = "Passer sur Auto(Copy)";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
+"playlist.sorting.header" = "Tri";
+"playlist.sorting.filename_ascending" = "Nom du fichier par ordre croissant";
+"playlist.sorting.filename_descending" = "Nom du fichier par ordre décroissant";
+"playlist.sorting.path_ascending" = "Chemin du fichier ascendant";
+"playlist.sorting.path_descending" = "Chemin d'accès descendant";
 "pl_menu.title_multi" = "%d éléments";
 "pl_menu.play_next" = "Jouer ensuite";
 "pl_menu.play_in_new_window" = "Ouvrir dans une nouvelle fenêtre";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "Activer le mode musique";
 "osc_toolbar.sub_track" = "Choisir une piste de sous-titres";
 "osc_toolbar.screenshot" = "Faire une capture d'écran";
+"osc_toolbar.plugins" = "Afficher le panneau des plugins";
 
 "mini_player.album_art" = "Activer/désactiver la pochette d'album";
 "mini_player.loop" = "Répéter";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Fermer le mode musique";
 "mini_player.back" = "Revenir en mode vidéo";
+"mini_player.sort" = "Trier la playlist";
 
 // Touch bar
 

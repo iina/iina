@@ -22,11 +22,20 @@ enum PlayerState: Int {
   /// was received.
   case starting
 
-  /// Player is playing the file.
+  /// Player has loaded the file.
   ///
   /// Initially entered when
   /// [MPV_EVENT_FILE_LOADED](https://mpv.io/manual/stable/#command-interface-mpv-event-file-loaded)
-  /// is received indicating file is loaded and playing.
+  /// is received.
+  case loaded
+
+  /// Play has gathered all required information, and begins playing. Note that mpv will first read
+  /// video/audio track info, then reports `MPV_EVENT_FILE_LOADED`. However the playback couldn't
+  /// start until a `MPV_EVENT_VIDEO_RECONFIG` is received.
+  ///
+  /// Initially entered when
+  /// [MPV_EVENT_VIDEO_RECONFIG](https://mpv.io/manual/stable/#command-interface-mpv-event-video-reconfig)
+  /// is received in `loaded` state.
   case playing
 
   /// Playback has paused.
@@ -61,5 +70,5 @@ enum PlayerState: Int {
   @inlinable var active: Bool { self.rawValue < PlayerState.stopping.rawValue }
 
   /// `True` if when the player is in this state the file is loaded, otherwise `false`.
-  @inlinable var loaded: Bool { active && self.rawValue >= PlayerState.playing.rawValue }
+  @inlinable var loaded: Bool { active && self.rawValue >= PlayerState.loaded.rawValue }
 }

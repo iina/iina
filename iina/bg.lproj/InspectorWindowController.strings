@@ -14,7 +14,7 @@
 "7QX-tu-rvs.title" = "FPS:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
-"9eq-rd-zGy.title" = "Title:";
+"9eq-rd-zGy.title" = "Заглавие:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
 "A4y-LL-x0z.title" = "Bit Rate:";
@@ -44,10 +44,10 @@
 "Fqo-1c-3L1.ibShadowedLabels[1]" = "Tracks";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[2]" = "File";
+"Fqo-1c-3L1.ibShadowedLabels[2]" = "Файл";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[3]" = "Status";
+"Fqo-1c-3L1.ibShadowedLabels[3]" = "Състояние";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
 "I2E-6Z-Gnn.title" = "Driver:";
@@ -59,16 +59,16 @@
 "Jxp-Wf-BhU.title" = "File Path:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
-"KqD-NM-WiK.title" = "Size:";
+"KqD-NM-WiK.title" = "Размер:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "Luq-rQ-aO4"; */
-"Luq-rQ-aO4.title" = "Channels:";
+"Luq-rQ-aO4.title" = "Канали:";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
 "MME-KZ-jrG.title" = "Driver:";
 
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
-"OCm-zb-deg.title" = "Duration:";
+"OCm-zb-deg.title" = "Продължителност:";
 
 /* Class = "NSTextFieldCell"; title = "Selected"; ObjectID = "P65-zr-dOH"; */
 "P65-zr-dOH.title" = "Selected";
@@ -92,10 +92,10 @@
 "UuR-M1-YLj.label" = "Tracks";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
-"VGm-BL-xOI.label" = "Status";
+"VGm-BL-xOI.label" = "Състояние";
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
-"WrI-Sr-O2S.label" = "File";
+"WrI-Sr-O2S.label" = "Файл";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
 "bki-sE-xCA.title" = "Codec:";
@@ -107,7 +107,7 @@
 "dtn-wS-j6U.title" = "Properties:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "f2P-qb-wRx"; */
-"f2P-qb-wRx.title" = "Size:";
+"f2P-qb-wRx.title" = "Размер:";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
 "f7a-XG-NCc.label" = "General";
@@ -125,7 +125,7 @@
 "iVK-Ck-Lyq.title" = "A/V Sync Diff:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
-"it3-05-Pwu.title" = "Channels:";
+"it3-05-Pwu.title" = "Канали:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
 "jCY-og-BAa.title" = "Source ID:";
@@ -167,7 +167,7 @@
 "mLo-Wc-BoO.title" = "Colorspace:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
-"zDk-Ie-EPs.headerCell.title" = "Name";
+"zDk-Ie-EPs.headerCell.title" = "Име";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
 "x6R-q7-efY.headerCell.title" = "Value";

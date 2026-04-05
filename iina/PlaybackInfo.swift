@@ -49,30 +49,27 @@ class PlaybackInfo {
       // Block inappropriate state changes.
       guard oldValue != .loading || state != .idle, oldValue != .stopping || state == .idle,
             oldValue != .shuttingDown || state == .shutDown, oldValue != .shutDown else {
-        player.log("Blocked attempt to change state from \(oldValue) to \(state)", level: .verbose)
+        player.log("Blocked attempt to change state from \(oldValue) to \(state)", level: .error)
         state = oldValue
         return
       }
-      player.log("State changed from \(oldValue) to \(state)", level: .verbose)
+      player.log("State changed from \(oldValue) to \(state)")
       switch state {
       case .idle:
-        PlayerCore.checkStatusForSleep()
+        SleepPreventer.updateSleepPrevention()
+        NowPlayingInfoManager.shared.updateInfo()
       case .playing:
-        PlayerCore.checkStatusForSleep()
+        SleepPreventer.updateSleepPrevention()
         if player == PlayerCore.lastActive {
-          if RemoteCommandController.useSystemMediaControl {
-            NowPlayingInfoManager.updateInfo(state: .playing)
-          }
+          NowPlayingInfoManager.shared.updateInfo()
           if player.mainWindow.pipStatus == .inPIP {
             player.mainWindow.pip.playing = true
           }
         }
       case .paused:
-        PlayerCore.checkStatusForSleep()
+        SleepPreventer.updateSleepPrevention()
         if player == PlayerCore.lastActive {
-          if RemoteCommandController.useSystemMediaControl {
-            NowPlayingInfoManager.updateInfo(state: .paused)
-          }
+          NowPlayingInfoManager.shared.updateInfo()
           if player.mainWindow.pipStatus == .inPIP {
             player.mainWindow.pip.playing = false
           }
@@ -106,6 +103,12 @@ class PlaybackInfo {
 
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
+
+  /// Remaining playback time.
+  ///
+  /// This will or will not reflect the speed at which playback is occurring depending upon whether the `scaleRemainingTime`
+  /// setting is enabled or not.
+  var videoRemaining: VideoTime?
 
   var cachedWindowScale: Double = 1.0
 

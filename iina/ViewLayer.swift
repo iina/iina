@@ -62,14 +62,13 @@ let attributeLookUp: [UInt32: String] = [
 ///
 /// This class is structured to make it easier to compare it to the reference implementation in the mpv player. Methods and statements
 /// are in the same order as found in the mpv source. However there are differences that cause the implementation to not match up. For
-/// example IINA draws using a background thread whereas mpv uses the main thread. For this reason the locking differs as IINA has to
-/// coordinate access to data that is shared between the main thread and the background thread.
+/// example IINA draws using a background thread whereas mpv uses the main thread. When IINA tested drawing on the main thread
+/// the sliding animation to show and hide the side panels was _very_ slugish and moving the floating OSC was jerky.
 class ViewLayer: CAOpenGLLayer {
 
   private weak var videoView: VideoView!
 
-  let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
-  @Atomic var blocked = false
+  private let mpvGLQueue = DispatchQueue(label: "com.colliderli.iina.mpvgl", qos: .userInteractive)
 
   private var bufferDepth: GLint = 8
 
@@ -81,8 +80,32 @@ class ViewLayer: CAOpenGLLayer {
 
   private var fbo: GLint = 1
 
-  private var needsMPVRender = false
-  private var forceRender = false
+  /// Lock used to allow the main thread priority access to `displayLock`.
+  private var mainThreadPriorityLock = MainThreadPriorityLock()
+
+  /// When `true` the frame needs to be rendered.
+  @Atomic private var needsFlip = false
+
+  /// When `true` drawing will proceed even if mpv indicates nothing needs to be done.
+  @Atomic private var forceDraw = false
+
+  /// Indicates whether the view is being rendered as part of a live resizing operation.
+  ///
+  /// This flag is used to manage setting of the
+  /// [isAsynchronous](https://developer.apple.com/documentation/quartzcore/caopengllayer/isasynchronous)
+  /// property. When `isAsynchronous` is `true` [canDraw](https://developer.apple.com/documentation/quartzcore/caopengllayer/candraw(incglcontext:pixelformat:forlayertime:displaytime:))
+  /// is called periodically to determine if the OpenGL content should be updated. This is used when the window is being resized. When [windowDidEndLiveResize](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidendliveresize(_:))
+  /// is called it is important to not set `isAsynchronous` to `false` until a draw has occurred. Setting this flag to `false`
+  /// will cause `canDraw` to set `isAsynchronous` to `false` only once another drawing is in process. This reduces the
+  /// likelihood of seeing a very short momentary black screen when exiting full screen mode.
+  @Atomic var inLiveResize: Bool = false {
+    didSet {
+      if inLiveResize {
+        isAsynchronous = true
+      }
+      update(force: true)
+    }
+  }
 
   /// Returns an initialized `ViewLayer` object.
   ///
@@ -122,7 +145,9 @@ class ViewLayer: CAOpenGLLayer {
     backgroundColor = previousLayer.backgroundColor
     wantsExtendedDynamicRangeContent = previousLayer.wantsExtendedDynamicRangeContent
     contentsFormat = previousLayer.contentsFormat
+    inLiveResize = previousLayer.inLiveResize
     isAsynchronous = previousLayer.isAsynchronous
+    Logger.log("Created view layer shadow copy")
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -133,20 +158,27 @@ class ViewLayer: CAOpenGLLayer {
 
   override func canDraw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
                         forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
-    videoView.$isUninited.withLock() { isUninited in
+    // When in live resize, skip all drawing calls on the main thread.
+    // Setting isAsynchronous = true is enough to prevent jittering.
+    guard !(inLiveResize && Thread.isMainThread) else { return false }
+    return videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return false }
-      if forceRender { return true }
-      return videoView.player.mpv.shouldRenderUpdateFrame()
+      if !inLiveResize {
+        isAsynchronous = false
+      }
+      return forceDraw || videoView.player.mpv.shouldRenderUpdateFrame()
     }
   }
 
   override func draw(inCGLContext ctx: CGLContextObj, pixelFormat pf: CGLPixelFormatObj,
                      forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) {
-    videoView.$isUninited.withLock() { isUninited in
+    videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return }
 
+      needsFlip = false
+      forceDraw = false
+
       let mpv = videoView.player.mpv!
-      needsMPVRender = false
 
       glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
 
@@ -186,42 +218,48 @@ class ViewLayer: CAOpenGLLayer {
     }
   }
 
-  func suspend() {
-    blocked = true
-    mpvGLQueue.suspend()
-  }
-
-  func resume() {
-    blocked = false
-    draw(forced: true)
-    mpvGLQueue.resume()
-  }
-
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj { cglPixelFormat }
 
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj { cglContext }
 
+  /// Reload the content of this layer.
+  /// - Important: Because this method is called by tasks on the `mpvGLQueue` an explicit
+  ///     [CATransaction](https://developer.apple.com/documentation/quartzcore/catransaction) **must**
+  ///     be used. Otherwise if `CA_ASSERT_MAIN_THREAD_TRANSACTIONS` is set to check for unintended UI operations on
+  ///     something other than the main thread, IINA will crash with a SIGABRT reporting "an implicit transaction wasn't created on a
+  ///     main thread". See issue [#5038](https://github.com/iina/iina/issues/5038).
   override func display() {
+
+    // May need to block other threads to allow the main thread to lock displayLock.
+    mainThreadPriorityLock.beforeLocking()
     displayLock.lock()
     defer { displayLock.unlock() }
+    mainThreadPriorityLock.afterLocked()
 
-    super.display()
+    let isUpdate = needsFlip
+
+    if Thread.isMainThread {
+      super.display()
+    } else {
+      // When not on the main thread use an explicit transaction.
+      CATransaction.begin()
+      super.display()
+      CATransaction.commit()
+    }
+
+    // The call to commit will not render the explicit transaction if it is nested in an implicit
+    // transaction. This can happen when drawing is being forced after a change to the view such as
+    // resizing. Must call flush to ensure any implicit transaction is flushed.
     CATransaction.flush()
 
-    // Must lock the OpenGL context before calling mpv render methods. Can't wait until we have
-    // checked the flags to see if a skip renderer is needed because the OpenGL context must always
-    // be locked before locking the isUninited lock to avoid deadlocks. The flags can't be checked
-    // without locking isUninited to avoid data races.
+    guard isUpdate && needsFlip else { return }
+
+    // Must lock the OpenGL context before calling mpv render methods. The OpenGL context must
+    // always be locked before locking the isUninited lock to avoid deadlocks.
     videoView.player.mpv.lockAndSetOpenGLContext()
     defer { videoView.player.mpv.unlockOpenGLContext() }
-    videoView.$isUninited.withLock() { isUninited in
+    videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return }
-
-      guard !forceRender else {
-        forceRender = false
-        return
-      }
-      guard needsMPVRender else { return }
 
       // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
       // This can happen when IINA is playing in another space, as might occur when just playing
@@ -237,22 +275,15 @@ class ViewLayer: CAOpenGLLayer {
           mpv_render_context_render(renderContext, &params)
         }
       }
-      needsMPVRender = false
     }
   }
 
-  func draw(forced: Bool = false) {
-    videoView.$isUninited.withLock() { isUninited in
-      // The properties forceRender and needsMPVRender are always accessed while holding isUninited's
-      // lock. This avoids the need for separate locks to avoid data races with these flags. No need
-      // to check isUninited at this point.
-      needsMPVRender = true
-      if forced { forceRender = true }
+  func update(force: Bool = false) {
+    mpvGLQueue.async { [self] in
+      if force { forceDraw = true }
+      needsFlip = true
+      display()
     }
-
-    // Must not call display while holding isUninited's lock as that method will attempt to acquire
-    // the lock and our locks do not support recursion.
-    display()
   }
 
   // MARK: - Core OpenGL Context and Pixel Format
@@ -362,7 +393,7 @@ class ViewLayer: CAOpenGLLayer {
     // deadlocks.
     videoView.player.mpv.lockAndSetOpenGLContext()
     defer { videoView.player.mpv.unlockOpenGLContext() }
-    videoView.$isUninited.withLock() { isUninited in
+    videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return }
 
       guard let renderContext = videoView.player.mpv.mpvRenderContext else { return }
@@ -421,5 +452,49 @@ class ViewLayer: CAOpenGLLayer {
 
   func ignoreGLError() {
     glGetError()
+  }
+}
+
+// MARK: - Main Thread Priority
+
+/// Lock used to give the main thread priority access to another lock.
+///
+/// Testing revealed that the main thread encounters lock starvation while trying to acquire `displayLock` when the `mpvGLQueue`
+/// thread is constantly locking and unlocking the lock during playback. This sometimes results in a severe hang causing the spinning
+/// beach ball of death to be displayed. This lock uses a
+/// [NSCondition](https://developer.apple.com/documentation/foundation/nscondition) to block other threads
+/// when the main thread needs to lock a lock, giving the main thread a chance to acquire the lock.
+private class MainThreadPriorityLock {
+
+  private let lock = NSCondition()
+
+  /// `True` when the main thread is waiting to lock a lock; `false` otherwise.
+  private var needsLock = false
+
+  /// All threads call this before attempting to lock a lock the main thread has trouble acquiring.
+  ///
+  /// When called by the main thread this function will record that the main thread is waiting for a lock. When called by other threads
+  /// this function will block the thread if the main thread is waiting, allowing it to proceed once the main thread has locked the lock.
+  func beforeLocking() {
+    lock.lock()
+    defer { lock.unlock() }
+    guard Thread.isMainThread else {
+      while needsLock { lock.wait() }
+      return
+    }
+    needsLock = true
+  }
+
+  /// All threads call this after locking a lock the main thread has trouble acquiring.
+  ///
+  /// When called by the main thread this function will record that the main thread has the lock and will allow any blocked threads to
+  /// proceed. When called by other threads this function does nothing. This avoids the caller only calling this when running on the
+  /// main thread.
+  func afterLocked() {
+    guard Thread.isMainThread else { return }
+    lock.lock()
+    defer { lock.unlock() }
+    needsLock = false
+    lock.broadcast()
   }
 }

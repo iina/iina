@@ -8,16 +8,17 @@
 
 import Cocoa
 
-class VideoPIPViewController: PIPViewController {
+class VideoPIPViewController: PIPViewController, NSWindowDelegate {
+
+  private var currentScreen: NSScreen?
 
   /// Force a draw, if needed.
   ///
-  /// If the image is changing there is no need to force a draw. However if playback is paused, or if playback is in progress but the video
-  /// track is an album art still image then drawing is required.
-  private func forceDraw() {
-    guard let controller = delegate as? MainWindowController, controller.player.info.state == .paused
-            || controller.player.info.currentTrack(.video)?.isAlbumart ?? false else { return }
-    controller.videoView.videoLayer.draw(forced: true)
+  /// The `forceDraw` method in `PlayerWindowController` will check to see if drawing is really needed and if so, force a
+  /// draw of the view.
+  private func forceDraw(_ reason: String) {
+    guard let controller = delegate as? MainWindowController else { return }
+    controller.forceDraw(reason)
   }
 
   /// Force a draw after entering PiP.
@@ -29,7 +30,13 @@ class VideoPIPViewController: PIPViewController {
   /// asynchronously.
   override func viewDidLayout() {
     super.viewDidLayout()
-    forceDraw()
+    forceDraw("entered PiP")
+    guard let window = view.window else {
+      // Internal error, should not occur.
+      Logger.log("VideoPIPViewController.viewDidLayout window is nil", level: .error)
+      return
+    }
+    window.delegate = self
   }
 
   /// Force a draw after exiting PiP.
@@ -38,6 +45,23 @@ class VideoPIPViewController: PIPViewController {
   /// happen and a frame is displayed. See issue #4268 and PR #4286 for details.
   override func viewDidDisappear() {
     super.viewDidDisappear()
-    forceDraw()
+    forceDraw("exited PiP")
+  }
+
+  /// PiP window has changed screens.
+  ///
+  /// When the PiP window moves to a new screen the configuration of the display link may need to be changed and the ability of the
+  /// screen to support HDR needs to be re-evaluated.
+  func windowDidChangeScreen(_ notification: Notification) {
+    let screen = self.view.window?.screen
+    guard currentScreen != screen else { return }
+    currentScreen = screen
+    NSScreen.log("PiP window moved to screen", screen)
+    guard let controller = self.delegate as? PlayerWindowController else {
+      // Internal error, should not occur.
+      Logger.log("VideoPIPViewController.windowDidChangeScreen delegate", level: .error)
+      return
+    }
+    controller.videoView.updateDisplayLink()
   }
 }

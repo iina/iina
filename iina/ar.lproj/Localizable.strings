@@ -27,7 +27,7 @@
 // Initial Window
 "initial.announcement" = "انت تستخدم %@ النسخه التجريبية من IINA";
 "initial.beta.desc" = "قم بإلغاء تحديد \"تلقي تحديثات بيتا\" من التفضيلات - عام، وتثبيت إصدار مستقر من <a href=\"https://iina.io\">موقعنا الرسمي</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "لا ينصح بنسخة البناء الليلي للاستخدام اليومي. في الوقت الراهن هذه النسخة لا تدعم التحديث التلقائي. الرجاء تحميل أحدث الإصدارات يدويا من موقعنا <a href=\"https://nightly.iina.io\">النسخة الليلية</a>.";
 "initial.debug.desc" = "عادة ما لا يتم تحسين إصدارات التصحيح للأداء، لذلك لا يوصى باستخدامها كمحرك أقراص يومي. إصدارات التصحيح لا تدعم التحديث التلقائي.";
 "initial.bug_report" = "الإبلاغ عبر <a href=\"https://github.com/iina/iina/issues\">GitHub مشكلات</a>.";
 
@@ -37,6 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "التخزين… %d%%";
 "main.opening_stream" = "فتح البث…";
+"main.seeking_indicator" = "…";
 "osc.precision" = "الدقة";
 "osc.1s" = "1 ثانية";
 "osc.100ms" = "100 مللي ثانية";
@@ -50,7 +51,7 @@
 "quicksetting.deinterlace" = "تشابك";
 "quicksetting.hdr" = "النطاق الديناميكي العالي HDR";
 "quicksetting.hide" = "إخفاء";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "إعادة تعيين السرعة إلى 1x";
 
 // EQ Presets
 "eq.preset.flat" = "مسطحة";
@@ -84,27 +85,27 @@
 // OSDMessage.swift
 "osd.pause" = "إيقاف مؤقت";
 "osd.resume" = "استئناف";
-"osd.volume" = "الصوت: %i";
-"osd.speed" = "Speed: %@x";
+"osd.volume" = "الصوت: %@";
+"osd.speed" = "السرعة: %@x";
 "osd.aspect" = "نسبة العرض والارتفاع: %@";
 "osd.crop" = "قص صورة: %@";
 "osd.rotate" = "تدوير: %i°";
 "osd.deinterlace" = "تشابك: %@";
 "osd.hwdec" = "فك ترميز: %@";
 "osd.audio_delay.nodelay" = "تأخير الصوت: لا تأخير";
-"osd.audio_delay.later" = "تأخير الصوت: %.2fثانية لاحقاً";
-"osd.audio_delay.earlier" = "تأخير الصوت: %.2fثانية سابقة";
+"osd.audio_delay.later" = "تأخير الصوت: %@ثانية لاحقاً";
+"osd.audio_delay.earlier" = "تأخير الصوت: %@ثانية سابقة";
 "osd.sub_delay.nodelay" = "تأخير الترجمة: لا تأخير";
-"osd.sub_delay.later" = "تأخير الترجمة: %.2fث لاحقاً";
-"osd.sub_delay.earlier" = "تأخير الترجمة: %.2fثانية سابقة";
-"osd.subtitle_pos" = "موضع الترجمة: %.1f";
+"osd.sub_delay.later" = "تأخير الترجمة: %@ث لاحقاً";
+"osd.sub_delay.earlier" = "تأخير الترجمة: %@ثانية سابقة";
+"osd.subtitle_pos" = "موضع الترجمة: %@";
 "osd.sub_hidden" = "الترجمات مخفية";
 "osd.sub_visible" = "الترجمات مرئية";
 "osd.sub_second_delay.nodelay" = "الترجمة الثانوية: لا تأخير";
-"osd.sub_second_delay.later" = "تأخير الترجمة الثانوية: %.2fsثانية بعد";
-"osd.sub_second_delay.earlier" = "تأخير الترجمة: %.2fثانية قبل";
+"osd.sub_second_delay.later" = "تأخير الترجمة الثانوية: %@sثانية بعد";
+"osd.sub_second_delay.earlier" = "تأخير الترجمة: %@ثانية قبل";
 "osd.sub_second_hidden" = "الترجمة الثانوية مخفية";
-"osd.sub_second_pos" = "موقع الترجمة الثانوية: %.1f";
+"osd.sub_second_pos" = "موقع الترجمة الثانوية: %@";
 "osd.sub_second_visible" = "الترجمة الثانوية مرئية";
 "osd.mute" = "كتم";
 "osd.unmute" = "إلغاء الكتم";
@@ -114,7 +115,7 @@
 "osd.abloop.clear" = "AB-Loop: مسح";
 "osd.stop" = "إيقاف";
 "osd.chapter" = "الفصل: %@";
-"osd.subtitle_scale" = "حجم الترجمة: %.2fx";
+"osd.subtitle_scale" = "حجم الترجمة: %@x";
 "osd.add_to_playlist" = "تم إضافة %i ملفات إلى قائمة التشغيل";
 "osd.clear_playlist" = "مسح قائمة التشغيل";
 "osd.video_eq.contrast" = "التباين: %i";
@@ -174,10 +175,13 @@
 "preference.sub_override_level.descriptive_text.strip" = "قم بتجريد جميع العلامات والأنماط من الترجمة بشكل جذري.";
 "preference.sub_override_level.descriptive_text.yes" = "تطبيق جميع إعدادات النمط في هذا القسم.";
 
-"menu.volume" = "الصوت: %d";
-"menu.volume_muted" = "الحجم: %d (مكتمل)";
-"menu.audio_delay" = "تأخير الصوت: %.2fث";
-"menu.sub_delay" = "تأخير الترجمه: %.2f ثانيه";
+"preference.ytdl_plugin_not_installed" = "قم بتثبيت ملحق الوسائط عبر الإنترنت من \"الإضافات > تثبيت من GitHub\" للاستمتاع بميزات متقدمة مثل تحميل الفيديو وتحديثات yt-dlp تلقائية.";
+"preference.ytdl_plugin_installed" = "تم تعطيل دعم youtube-dl المدمج نظرًا لتثبيت إضافة الوسائط عبر الإنترنت.";
+
+"menu.volume" = "الصوت: %@";
+"menu.volume_muted" = "الحجم: %@ (مكتمل)";
+"menu.audio_delay" = "تأخير الصوت: %@ث";
+"menu.sub_delay" = "تأخير الترجمه: %@ ثانيه";
 "menu.sub_hide" = "إخفاء الترجمات";
 "menu.sub_show" = "إظهار الترجمات";
 "menu.sub_second_hide" = "إخفاء الترجمة الثانوية";
@@ -190,7 +194,7 @@
 "menu.exit_mini_player" = "الخروج من وضع الموسيقى";
 "menu.pause" = "إيقاف مؤقت";
 "menu.resume" = "استئناف";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "السرعة: %@x";
 "menu.chapters" = "عرض لوحة الفصول";
 "menu.hide_chapters" = "إخفاء لوحة الفصول";
 "menu.playlist" = "عرض لوحة قائمة التشغيل";
@@ -202,19 +206,27 @@
 "menu.subtitles" = "إظهار لوحة الترجمات";
 "menu.hide_subtitles" = "إخفاء لوحة الترجمات";
 
-"menu.seek_forward" = "خطوة إلى الأمام %.0f ثانية";
-"menu.seek_backward" = "خطوة إلى الوراء %.0f ثانية";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
-"menu.volume_up" = "الصوت: %.0f";
-"menu.volume_down" = "الصوت: %.0f";
-"menu.audio_delay_up" = "تأخير الصوت: +%.1f ثانيه";
-"menu.audio_delay_down" = "تأخير الصوت: -%.1f ثانيه";
-"menu.sub_delay_up" = "تأخير الترجمه: +%.1f ثانيه";
-"menu.sub_delay_down" = "تأخير الترجمه: -%.1f ثانيه";
+"menu.seek_forward" = "خطوة إلى الأمام %@ ثانية";
+"menu.seek_backward" = "خطوة إلى الوراء %@ ثانية";
+"menu.speed_up" = "تسريع ب %@x";
+"menu.speed_down" = "تبطيء ب %@x";
+"menu.volume_up" = "الصوت: %@";
+"menu.volume_down" = "الصوت: %@";
+"menu.audio_delay_up" = "تأخير الصوت: +%@ ثانيه";
+"menu.audio_delay_down" = "تأخير الصوت: -%@ ثانيه";
+"menu.sub_delay_up" = "تأخير الترجمه: +%@ ثانيه";
+"menu.sub_delay_down" = "تأخير الترجمه: -%@ ثانيه";
 
 "menu.crop_custom" = "مخصص…";
 "menu.find_online_sub" = "ابحث عن ترجمات على الإنترنت من %@";
+
+"menu.manage_plugins" = "إدارة الإضافات…";
+"menu.developer_tool" = "أدوات المطور";
+"menu.more_plugin" = "المزيد…";
+"menu.conflicting_shortcuts" = "اختصارات المفاتيح متعارضة…";
+"menu.reload_plugins" = "إعادة تحميل جميع الإضافات";
+"menu.show_plugins_panel" = "إظهار لوحة الإضافات";
+"menu.hide_plugins_panel" = "إخفاء لوحة الإضافات";
 
 "track.audio" = "الصوت";
 "track.none" = "<None>";
@@ -245,14 +257,12 @@
 "alert.error_saving_file" = "حدث خطأ في أثناء الحفظ %@: %@";
 "alert.error_deleting_file" = "لا يمكن حذف الملف.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value betwen 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "القيمة \"%@\" غير صالحة.\nالرجاء استخدام قيمة بين 10 و 10000، أو 0.";
 
 "alert.config.new.title" = "تكوين مصدر إدخال جديد";
 "alert.config.new.message" = "الرجاء إدخال اسم للتكوين الجديد.";
 "alert.config.duplicate.title" = "تكرار الإعدادات";
 "alert.config.duplicate.message" = "الرجاء إدخال اسم لملف التكوين المكرر.";
-"alert.config.empty_name" = "الاسم لا يمكن أن يكون فارغاً.";
-"alert.config.name_existing" = "يوجد اعدادات بنفس الاسم مسبقاً.";
 "alert.config.file_existing.title" = "الملف موجود بالفعل";
 "alert.config.file_existing.message" = "يوجد بالفعل ملف تكوين بنفس اسم الملف. اختر موافق لإظهار الملف في Finder.";
 "alert.config.cannot_create" = "لا يمكن إنشاء ملف التكوين!\n%@";
@@ -347,6 +357,11 @@
 
 "playlist.total_length" = "%@ في المجموع";
 "playlist.total_length_with_selected" = "تم تحديد %@ من %@";
+"playlist.sorting.header" = "";
+"playlist.sorting.filename_ascending" = "";
+"playlist.sorting.filename_descending" = "اسم الملف تنازلي";
+"playlist.sorting.path_ascending" = "مسار الملف تصاعدي";
+"playlist.sorting.path_descending" = "مسار الملف تنازلي";
 "pl_menu.title_multi" = "%d عناصر";
 "pl_menu.play_next" = "تشغيل التالي";
 "pl_menu.play_in_new_window" = "تشغيل في نافذة جديدة";
@@ -386,6 +401,7 @@
 "osc_toolbar.music_mode" = "الدخول إلى وضع الموسيقى";
 "osc_toolbar.sub_track" = "اختيار مسار الترجمة";
 "osc_toolbar.screenshot" = "خذ لقطة شاشة";
+"osc_toolbar.plugins" = "إظهار لوحة الإضافات";
 
 "mini_player.album_art" = "تبديل صورة الألبوم";
 "mini_player.loop" = "تكرار";
@@ -396,6 +412,7 @@
 "mini_player.volume" = "مستوى الصوت";
 "mini_player.close" = "إغلاق وضع الموسيقى";
 "mini_player.back" = "العودة إلى وضع الفيديو";
+"mini_player.sort" = "ترتيب قائمة التشغيل";
 
 // Touch bar
 

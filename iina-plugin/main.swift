@@ -255,13 +255,23 @@ func packPlugin(_ args: ArraySlice<String>) -> Bool {
     exit(EXIT_FAILURE)
   }
   
-  let infoJsonPath = pluginDir.appendingPathComponent("Info.json").path
-  guard FileManager.default.fileExists(atPath: infoJsonPath) else {
+  let infoJsonURL = pluginDir.appendingPathComponent("Info.json")
+  guard FileManager.default.fileExists(atPath: infoJsonURL.path) else {
     print("Plugin directory doesn't contain Info.json.")
     exit(EXIT_FAILURE)
   }
   
-  let plgzFileName = pluginDir.lastPathComponent.appending(".iinaplgz")
+  guard
+    let data = try? Data(contentsOf: infoJsonURL, options: .mappedIfSafe),
+    let jsonResult = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves),
+    let jsonDict = jsonResult as? [String: Any],
+    let version = jsonDict["version"] as? String
+    else {
+    print("Cannot read plugin package content.")
+    exit(EXIT_FAILURE)
+  }
+
+  let plgzFileName = pluginDir.lastPathComponent + "-" + version + ".iinaplgz"
   let packagePath = currentDirURL.appendingPathComponent(plgzFileName).path
   if FileManager.default.fileExists(atPath: packagePath) {
     if !promptYesOrNo("File \(packagePath) already exists. Overwrite?") {
@@ -347,7 +357,13 @@ func unlinkPlugin(_ args: ArraySlice<String>) -> Bool {
 fileprivate var appSupportDir: URL {
   let appSupportPath = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
   let bundleID = Bundle.main.bundleIdentifier ?? "com.colliderli.iina"
-  return appSupportPath.first!.appendingPathComponent(bundleID).appendingPathComponent("plugins")
+  let url = appSupportPath.first!.appendingPathComponent(bundleID).appendingPathComponent("plugins")
+  do {
+    try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+  } catch {
+    print("Failed to create plugin directory in app support directory: \(error.localizedDescription)")
+  }
+  return url
 }
 
 fileprivate func url(_ file: String, in dir: URL) -> URL {

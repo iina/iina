@@ -83,42 +83,11 @@
         </customView>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="co6-LF-8Q2" userLabel="Prefs &gt; Advanced: Logging Section">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="99"/>
+            <rect key="frame" x="0.0" y="0.0" width="450" height="68"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField identifier="SectionTitleLogging" hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="JVL-Sw-TcX" userLabel="Logging">
-                    <rect key="frame" x="211" y="42" width="57" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Logging" id="BK9-mL-ip5">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button identifier="FunctionalButtonLogDirectory" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="shz-CZ-kqM">
-                    <rect key="frame" x="139" y="1" width="147" height="32"/>
-                    <buttonCell key="cell" type="push" title="Open log directory" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JDA-g3-RNX">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="openLogDir:" target="-2" id="dfR-Jf-uSQ"/>
-                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="CH7-kE-1sm"/>
-                    </connections>
-                </button>
-                <button identifier="FunctionalButtonShowLog" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XBa-zS-RVU">
-                    <rect key="frame" x="-6" y="1" width="147" height="32"/>
-                    <buttonCell key="cell" type="push" title="Show log viewer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Owx-92-Ogg">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="showLogWindow:" target="-2" id="mmy-v4-xs1"/>
-                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="LGK-Uc-oPe"/>
-                    </connections>
-                </button>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="upp-mq-cio">
-                    <rect key="frame" x="-1" y="75" width="62" height="16"/>
+                    <rect key="frame" x="-1" y="43" width="62" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Log level:" id="nFf-vh-bNd">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -126,7 +95,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Moa-ah-XjY">
-                    <rect key="frame" x="64" y="68" width="89" height="25"/>
+                    <rect key="frame" x="64" y="36" width="89" height="25"/>
                     <popUpButtonCell key="cell" type="push" title="Debug" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="hGq-ek-VHd" id="gTP-IE-Lyn">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" usesAppearanceFont="YES"/>
@@ -148,34 +117,80 @@
                         <binding destination="nyg-fH-Pug" name="selectedIndex" keyPath="values.logLevel" id="xvA-i4-5B0"/>
                     </connections>
                 </popUpButton>
+                <button identifier="FunctionalButtonShowLog" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XBa-zS-RVU">
+                    <rect key="frame" x="157" y="33" width="153" height="32"/>
+                    <buttonCell key="cell" type="push" title="Show Log Viewer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Owx-92-Ogg">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="showLogWindow:" target="-2" id="mmy-v4-xs1"/>
+                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="LGK-Uc-oPe"/>
+                    </connections>
+                </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="SHQ-mh-jeX">
-                    <rect key="frame" x="-1" y="35" width="153" height="30"/>
+                    <rect key="frame" x="-1" y="10" width="153" height="18"/>
                     <buttonCell key="cell" type="check" title="Enable logging to file" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="LCd-uY-Yze">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="yZh-10-RAa"/>
+                    </constraints>
                     <connections>
                         <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="tPN-n7-7Wr"/>
                         <binding destination="nyg-fH-Pug" name="value" keyPath="values.enableLogging" id="AvT-IQ-GhJ"/>
                     </connections>
                 </button>
+                <button identifier="FunctionalButtonLogDirectory" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="shz-CZ-kqM">
+                    <rect key="frame" x="157" y="1" width="153" height="32"/>
+                    <buttonCell key="cell" type="push" title="Open Log Directory" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JDA-g3-RNX">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="openLogDir:" target="-2" id="dfR-Jf-uSQ"/>
+                        <binding destination="nyg-fH-Pug" name="enabled" keyPath="values.enableAdvancedSettings" id="CH7-kE-1sm"/>
+                        <binding destination="nyg-fH-Pug" name="enabled2" keyPath="values.enableLogging" previousBinding="CH7-kE-1sm" id="N5B-kf-6pZ">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </button>
+                <textField identifier="SectionTitleLogging" hidden="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JVL-Sw-TcX" userLabel="Logging">
+                    <rect key="frame" x="399" y="52" width="53" height="16"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Logging" id="BK9-mL-ip5">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="SHQ-mh-jeX" firstAttribute="top" secondItem="Moa-ah-XjY" secondAttribute="bottom" constant="8" id="4VZ-s3-4oW"/>
+                <constraint firstItem="JVL-Sw-TcX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XBa-zS-RVU" secondAttribute="leading" id="30Z-TO-ypg"/>
+                <constraint firstItem="shz-CZ-kqM" firstAttribute="firstBaseline" secondItem="SHQ-mh-jeX" secondAttribute="firstBaseline" id="3Y3-fD-94U"/>
+                <constraint firstItem="XBa-zS-RVU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Moa-ah-XjY" secondAttribute="trailing" constant="12" id="5Ej-Y2-aQq"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XBa-zS-RVU" secondAttribute="trailing" constant="8" id="AsQ-gq-eBZ"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="upp-mq-cio" secondAttribute="trailing" id="FjG-MD-Vdp"/>
-                <constraint firstItem="XBa-zS-RVU" firstAttribute="top" secondItem="SHQ-mh-jeX" secondAttribute="bottom" constant="8" id="Pyr-EB-XxE"/>
-                <constraint firstItem="shz-CZ-kqM" firstAttribute="firstBaseline" secondItem="XBa-zS-RVU" secondAttribute="firstBaseline" id="Qky-MC-zUL"/>
+                <constraint firstItem="XBa-zS-RVU" firstAttribute="firstBaseline" secondItem="Moa-ah-XjY" secondAttribute="firstBaseline" id="Hsp-Tr-QlX"/>
                 <constraint firstItem="upp-mq-cio" firstAttribute="leading" secondItem="co6-LF-8Q2" secondAttribute="leading" constant="1" id="SXp-ff-zgb"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SHQ-mh-jeX" secondAttribute="trailing" id="TNL-q6-43x"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="shz-CZ-kqM" secondAttribute="trailing" id="WMD-zR-vHx"/>
-                <constraint firstItem="shz-CZ-kqM" firstAttribute="leading" secondItem="XBa-zS-RVU" secondAttribute="trailing" constant="12" symbolic="YES" id="Yvn-X2-D3S"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="shz-CZ-kqM" secondAttribute="trailing" constant="8" id="WMD-zR-vHx"/>
+                <constraint firstItem="shz-CZ-kqM" firstAttribute="leading" secondItem="SHQ-mh-jeX" secondAttribute="trailing" priority="900" constant="12" id="XrI-fY-KB0"/>
                 <constraint firstItem="Moa-ah-XjY" firstAttribute="firstBaseline" secondItem="upp-mq-cio" secondAttribute="firstBaseline" id="ZD7-0V-y8b"/>
-                <constraint firstAttribute="bottom" secondItem="XBa-zS-RVU" secondAttribute="bottom" constant="8" id="ahN-qy-RWR"/>
-                <constraint firstItem="upp-mq-cio" firstAttribute="top" secondItem="co6-LF-8Q2" secondAttribute="top" constant="8" id="fQE-GQ-Gdd"/>
-                <constraint firstItem="XBa-zS-RVU" firstAttribute="leading" secondItem="upp-mq-cio" secondAttribute="leading" id="fc4-QA-nkK"/>
+                <constraint firstItem="JVL-Sw-TcX" firstAttribute="top" secondItem="co6-LF-8Q2" secondAttribute="top" id="aAn-uv-4p8"/>
+                <constraint firstAttribute="trailing" secondItem="JVL-Sw-TcX" secondAttribute="trailing" id="bO8-Mi-4Q7"/>
+                <constraint firstItem="shz-CZ-kqM" firstAttribute="top" secondItem="XBa-zS-RVU" secondAttribute="bottom" constant="12" id="cWb-CL-uM1"/>
+                <constraint firstItem="Moa-ah-XjY" firstAttribute="top" secondItem="co6-LF-8Q2" secondAttribute="top" constant="8" id="f30-y5-foq"/>
+                <constraint firstItem="shz-CZ-kqM" firstAttribute="leading" secondItem="XBa-zS-RVU" secondAttribute="leading" id="kqb-hz-keY"/>
                 <constraint firstItem="shz-CZ-kqM" firstAttribute="width" secondItem="XBa-zS-RVU" secondAttribute="width" id="raG-0i-0Sb"/>
                 <constraint firstItem="SHQ-mh-jeX" firstAttribute="leading" secondItem="upp-mq-cio" secondAttribute="leading" id="t3X-rJ-9Eq"/>
                 <constraint firstItem="Moa-ah-XjY" firstAttribute="leading" secondItem="upp-mq-cio" secondAttribute="trailing" constant="8" symbolic="YES" id="uik-hF-wvS"/>
+                <constraint firstAttribute="bottom" secondItem="shz-CZ-kqM" secondAttribute="bottom" constant="8" id="wRB-7h-L5u"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Moa-ah-XjY" secondAttribute="trailing" id="z7h-Ux-AjK"/>
             </constraints>
             <point key="canvasLocation" x="-397" y="-38.5"/>
@@ -328,7 +343,7 @@
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hbF-n4-jl3">
                     <rect key="frame" x="338" y="27" width="148" height="32"/>
-                    <buttonCell key="cell" type="push" title="Choose directory…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRT-u8-xTX">
+                    <buttonCell key="cell" type="push" title="Choose…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MRT-u8-xTX">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>

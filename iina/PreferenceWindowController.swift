@@ -150,12 +150,15 @@ class PreferenceWindowController: NSWindowController {
   @IBOutlet weak var maskView: PrefSearchResultMaskView!
   @IBOutlet weak var prefDetailScrollView: NSScrollView!  // contains the prefs detail panel (on right)
   // Check `prefDetailContentView` constraints in the XIB for window content insets
+  @IBOutlet weak var scrollViewTopConstraint: NSLayoutConstraint!
   @IBOutlet weak var prefDetailContentView: NSView!       // contains the sections stack
   @IBOutlet weak var prefSectionsStackView: NSStackView!  // add prefs sections to this
   @IBOutlet var completionPopover: NSPopover!
   @IBOutlet weak var completionTableView: NSTableView!
   @IBOutlet weak var noResultLabel: NSTextField!
 
+  @IBOutlet weak var searchFieldTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var searchFieldBottomConstraint: NSLayoutConstraint!
   @IBOutlet weak var navTableSearchFieldSpacingConstraint: NSLayoutConstraint!
 
   private var detailViewBottomConstraint: NSLayoutConstraint?
@@ -182,6 +185,14 @@ class PreferenceWindowController: NSWindowController {
     tableView.dataSource = self
     completionTableView.delegate = self
     completionTableView.dataSource = self
+    
+    // It seems that on Tahoe RC, the sytstem will force to draw titlebar background if there's a scrollview
+    // that overlaps with the titlebar area. We just add an ugly workaround for now and wait for the new settings window.
+    if #available(macOS 26, *) {
+      scrollViewTopConstraint.constant = 32
+      searchFieldTopConstraint.constant = 40
+      searchFieldBottomConstraint.constant = 8
+    }
 
     detailViewBottomConstraint = prefDetailContentView.bottomAnchor.constraint(equalTo: prefDetailContentView.superview!.bottomAnchor)
 
@@ -292,6 +303,11 @@ class PreferenceWindowController: NSWindowController {
     detailViewBottomConstraint?.isActive = !isScrollable
     prefDetailScrollView.verticalScrollElasticity = .none
 
+    // Reset scroll position to top when switching tabs
+    if let documentView = prefDetailScrollView.documentView {
+      documentView.scroll(NSPoint(x: 0, y: 0))
+    }
+
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {
       maskView.perform(#selector(maskView.highlight(_:)), with: label, afterDelay: 0.25)
@@ -299,7 +315,11 @@ class PreferenceWindowController: NSWindowController {
         collapseView.setCollapsed(false, animated: false)
       }
     }
-    
+
+    // As per Apple's Human Interface Guidelines update the window’s title to reflect the currently
+    // visible tab. Although the window's title is hidden it still can be seen in the Window menu
+    // and in the dock menu.
+    vc.view.window?.title = vc.preferenceTabTitle
     return vc
   }
 

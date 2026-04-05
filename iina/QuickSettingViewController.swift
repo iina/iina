@@ -65,7 +65,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       case .video: return 0
       case .audio: return 1
       case .sub: return 2
-      default: return 0
       }
     }
 
@@ -99,7 +98,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   var observers: [NSObjectProtocol] = []
 
   @IBOutlet weak var videoTabScrollView: NSScrollView!
-  @IBOutlet weak var videoTabContentViewWidthConstraint: NSLayoutConstraint!
+  @IBOutlet weak var audioTabScrollView: NSScrollView!
+  @IBOutlet weak var subtitlesTabScrollView: NSScrollView!
 
   @IBOutlet weak var videoTabBtn: NSButton!
   @IBOutlet weak var audioTabBtn: NSButton!
@@ -182,15 +182,28 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subScaleResetBtn: NSButton!
   @IBOutlet weak var subPosSlider: NSSlider!
 
-  @IBOutlet weak var subTextColorWell: NSColorWell!
+  var subTextColorWell: NSColorWell!
+  var subTextBorderColorWell: NSColorWell!
+  var subTextBgColorWell: NSColorWell!
+
+  @IBOutlet weak var subTextColorWellContainer: NSView!
   @IBOutlet weak var subTextSizePopUp: NSPopUpButton!
-  @IBOutlet weak var subTextBorderColorWell: NSColorWell!
+  @IBOutlet weak var subTextBorderColorWellContainer: NSView!
   @IBOutlet weak var subTextBorderWidthPopUp: NSPopUpButton!
-  @IBOutlet weak var subTextBgColorWell: NSColorWell!
+  @IBOutlet weak var subTextBgColorWellContainer: NSView!
   @IBOutlet weak var subTextFontBtn: NSButton!
 
-  private lazy var eqSliders: [NSSlider] = [audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
-                                            audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10]
+  @IBOutlet weak var subtitleSwitch: NSSwitch!
+  @IBOutlet weak var secondarySubtitleSwitch: NSSwitch!
+  
+  private lazy var audioEQSliders: [NSSlider] = [
+    audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
+    audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10
+  ]
+
+  private lazy var videoEQSliders: [NSSlider] = [
+    brightnessSlider, contrastSlider, saturationSlider, gammaSlider, hueSlider
+  ]
 
   private var lastUsedProfileName: String = ""
   private var inputString: String = ""
@@ -203,10 +216,57 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    let tabScrollViews = [videoTabScrollView, audioTabScrollView, subtitlesTabScrollView]
+    for (view, item) in zip(tabScrollViews, tabView.tabViewItems) {
+      item.view = view
+    }
+
     withAllTableViews { (view, _) in
       view.delegate = self
       view.dataSource = self
       view.superview?.superview?.layer?.cornerRadius = 4
+    }
+
+    // Color Wells
+    if #available(macOS 13.0, *) {
+      subTextColorWell = NSColorWell(style: .minimal)
+      subTextBgColorWell = NSColorWell(style: .minimal)
+      subTextBorderColorWell = NSColorWell(style: .minimal)
+    } else {
+      subTextColorWell = RoundedColorWell()
+      subTextBgColorWell = RoundedColorWell()
+      subTextBorderColorWell = RoundedColorWell()
+    }
+    [(subTextColorWellContainer, subTextColorWell),
+     (subTextBgColorWellContainer, subTextBgColorWell),
+     (subTextBorderColorWellContainer, subTextBorderColorWell)].forEach { (view, well) in
+      well.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(well)
+      Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": well])
+    }
+    
+    // Wire color wells to IBAction handlers
+    subTextColorWell.target = self
+    subTextColorWell.action = #selector(subTextColorAction(_:))
+
+    subTextBgColorWell.target = self
+    subTextBgColorWell.action = #selector(subTextBgColorAction(_:))
+
+    subTextBorderColorWell.target = self
+    subTextBorderColorWell.action = #selector(subTextBorderColorAction(_:))
+    
+    
+    if #available(macOS 26, *) {
+      subtitleSwitch.controlSize = .small
+      secondarySubtitleSwitch.controlSize = .small
+
+      speedSlider.neutralValue = 8
+      (audioEQSliders + videoEQSliders + [audioDelaySlider, subDelaySlider, subScaleSlider]).forEach {
+        $0.neutralValue = 0
+      }
+
+      subPosSlider.tintProminence = .none
     }
 
     // colors
@@ -228,11 +288,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     switchHorizontalLine2.layer?.opacity = 0.5
 
     // Localize decimal format of numbers
-    speedSlider0_25xLabel.stringValue = "\(0.25.string)x"
-    // Unclear if these need to be localized. Better to be safe?
-    speedSlider1xLabel.stringValue = "\(1.string)x"
-    speedSlider4xLabel.stringValue = "\(4.string)x"
-    speedSlider16xLabel.stringValue = "\(16.string)x"
+    speedSlider0_25xLabel.stringValue = "\(0.25.groupedStringUpTo6Decimals)x"
+    speedSlider1xLabel.stringValue = "1x"
+    speedSlider4xLabel.stringValue = "4x"
+    speedSlider16xLabel.stringValue = "16x"
 
     customSpeedTextField.formatter = speedFormatter
 
@@ -466,7 +525,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     if let filter = player.info.audioEqFilter {
       guard let eqString = Regex("\\[(.+?)\\]").captures(in: filter.stringFormat)[at: 1] else { return }
       let filters = eqString.split(separator: ",")
-      zip(filters, eqSliders).forEach { (filter, slider) in
+      zip(filters, audioEQSliders).forEach { (filter, slider) in
         if let gain = filter.split(separator: "=").last {
           slider.doubleValue = Double(gain) ?? 0
         } else {
@@ -474,7 +533,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         }
       }
     } else {
-      eqSliders.forEach { $0.doubleValue = 0 }
+      audioEQSliders.forEach { $0.doubleValue = 0 }
     }
   }
 
@@ -597,12 +656,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     block(subTableView, .sub)
     block(secSubTableView, .secondSub)
     block(videoTableView, .video)
-  }
-
-  private func withAllAudioEqSliders(_ block: (NSSlider) -> Void) {
-    eqSliders.forEach {
-      block($0)
-    }
   }
 
   // MARK: - Actions
@@ -794,15 +847,20 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func audioDelayChangedAction(_ sender: NSSlider) {
     let eventType = NSApp.currentEvent!.type
-    if eventType == .leftMouseDown {
-      sender.allowsTickMarkValuesOnly = true
+    let sliderValue: Double
+    switch eventType {
+    case .leftMouseDown, .leftMouseDragged, .leftMouseUp:
+      // When dragging slider with the mouse, snap to the nearest 50ms (1/20 sec)
+      // Although it is possible to show tick marks at every step of 0.05 in the slider, it is visually unpleasant.
+      // So we draw less tick marks, and keep "Only stop on tick marks" disabled, and add our own logic to stop on
+      // "virtual tick marks" for these values.
+      sliderValue = (sender.doubleValue * 20.0).rounded() / 20.0
+      sender.doubleValue = sliderValue
+    default:
+      sliderValue = sender.doubleValue
     }
-    if eventType == .leftMouseUp {
-      sender.allowsTickMarkValuesOnly = false
-    }
-    let sliderValue = sender.doubleValue
     customAudioDelayTextField.doubleValue = sliderValue
-    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(customAudioDelayTextField.stringValue)s")
+    redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(sliderValue)s")
     if let event = NSApp.currentEvent {
       if event.type == .leftMouseUp {
         player.setAudioDelay(sliderValue)
@@ -821,7 +879,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   func applyEQ(_ profile: EQProfile) {
-    zip(eqSliders, profile.gains).forEach { (slider, gain) in
+    zip(audioEQSliders, profile.gains).forEach { (slider, gain) in
       slider.doubleValue = gain
     }
     player.setAudioEq(fromGains: profile.gains)
@@ -830,7 +888,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
 
   @IBAction func audioEqSliderAction(_ sender: NSSlider) {
-    player.setAudioEq(fromGains: eqSliders.map { $0.doubleValue })
+    player.setAudioEq(fromGains: audioEQSliders.map { $0.doubleValue })
     eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
   }
 
@@ -847,8 +905,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == 0 {
       let currentDir = player.info.currentURL?.deletingLastPathComponent()
+      // In addition to subtitle files allow the user to choose video files as mpv will look for
+      // and load embedded subtitle streams in the video file.
       Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
-                             sheetWindow: player.currentWindow, allowedFileTypes: Utility.supportedFileExt[.sub]) { url in
+                             sheetWindow: player.currentWindow,
+                             allowedFileTypes: Utility.containsSubExt) { url in
         // set a delay
         self.player.loadExternalSubFile(url, delay: true)
         self.subTableView.reloadData()
@@ -1002,9 +1063,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @IBAction func subFontAction(_ sender: AnyObject) {
-    Utility.quickFontPickerWindow() {
-      self.player.setSubFont($0 ?? "")
-    }
+    player.chooseSubFont()
   }
 
 }
@@ -1041,7 +1100,7 @@ extension QuickSettingViewController: NSMenuDelegate {
     switch tag {
     case eqSaveMenuItemTag:
       if let inputString = promptAudioEQProfileName(isNewProfile: true) {
-        let newProfile = EQProfile(fromCurrentSliders: eqSliders)
+        let newProfile = EQProfile(fromCurrentSliders: audioEQSliders)
         userEQs[inputString] = newProfile
         menuNeedsUpdate(eqPopUpButton.menu!)
         eqPopUpButton.select(findItem(inputString))

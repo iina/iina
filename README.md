@@ -69,7 +69,7 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 	```console
 	brew tap iina/homebrew-mpv-iina
-	brew install mpv-iina
+	brew install --HEAD mpv-iina
 	```
 
 	#### With MacPorts

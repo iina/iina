@@ -247,6 +247,7 @@
 "alert.mpv_error" = "İç hata: %@ (%@) %@ seçeneği hatalı.";
 
 "alert.unsupported_audio" = "Desteklenmeyen dış ses dosyası.";
+"alert.unsupported_video" = "Desteklenmeyen dış video dosyası.";
 "alert.unsupported_sub" = "Desteklenmeyen dış altyazı.";
 "alert.unsupported_url" = "Desteklenmeyen URL.";
 "alert.wrong_url_format" = "Yanlış URL biçimi.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Donanımsal çözücü devre dışı bırakıldı.";
 "hwdec.auto" = "Donanımsal çözücü etkin. Büyük olasılıkla çoğu video süzgeci düzgün çalışmayacaktır.";
 "hwdec.auto-copy" = "Donanımsal çözücü etkin. İki kat daha fazla bellek tüketecektir; ancak video süzgeçleri çalışacaktır.";
+
+"gaplessAudio.no" = "Ardışık ses dosyalarının çalınması, dosya değiştirme noktasında sessizliğe veya kesintiye neden olabilir.";
+"gaplessAudio.weak" = "Kod çözücünün çıkış ses biçimi değişirse ses aygıtı kapatılıp yeniden açılır ve bu da kesintisiz çalmayı bozar.";
+"gaplessAudio.yes" = "Ses aygıtı, çalınacak ilk dosya için seçilen parametreler kullanılarak açılır ve kesintisiz çalma için açık tutulur. Sonraki dosyalar yeniden örneklenebilir.";
 
 "subencoding.auto" = "Otomatik Algıla";
 

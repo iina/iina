@@ -20,7 +20,7 @@
 "cmd.sub-seek" = "Cerca subtítols";
 "cmd.playlist-next" = "Següent";
 "cmd.playlist-prev" = "Anterior";
-"cmd.playlist-move" = "Mou element de la llista de reproddució";
+"cmd.playlist-move" = "Mou element de la llista de reproducció";
 "cmd.playlist-clear" = "Buida la llista de reproducció";
 "cmd.playlist-remove" = "Suprimeix actual";
 "cmd.playlist-shuffle" = "Mescla";
@@ -37,7 +37,7 @@
 "iina.flip" = "Inverteix";
 "iina.mirror" = "Reflecteix";
 
-"iina.toggle-pip" = "Commuta Picture-in-Picture";
+"iina.toggle-pip" = "Commuta imatge-a-imatge";
 "iina.toggle-music-mode" = "Commuta al mode de música";
 "iina.open-file" = "Obre fitxer";
 "iina.open-url" = "Obre enllaç";
@@ -52,7 +52,7 @@
 "iina.toggle-flip" = "Commuta invertir";
 "iina.toggle-mirror" = "Commuta reflectir";
 "iina.save-playlist" = "Desa la llista de reproducció actual";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.show-current-file-in-finder" = "Mostra l'arxiu actual al Finder";
 "iina.delete-current-file" = "Suprimeix el fitxer actual";
 "iina.delete-current-file-hard" = "Suprimeix directament el fitxer actual sense moure'l a la paperera";
 "iina.find-online-subs" = "Cerca subtítols en línia";
@@ -89,7 +89,7 @@
 "opt.brightness" = "Brillantor";
 "opt.gamma" = "Gamma";
 "opt.saturation" = "Saturació";
-"opt.deinterlace" = "Desentrellaçament";
+"opt.deinterlace" = "Desentrellaçat";
 
 "opt.audio" = "Pista d'àudio";
 "opt.volume" = "Volum";
@@ -101,8 +101,8 @@
 "opt.sub-pos" = "Posició dels subtítols";
 "opt.sub-scale" = "Escala dels subtítols";
 "opt.sub-visibility" = "Visibilitat dels subtítols";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
-"opt.sub-ass-style-override" = "Sobreesciure estil ASS";
+"opt.secondary-sub-visibility" = "Visibilitat del subtítol secundari";
+"opt.sub-ass-style-override" = "Sobreescriu estil ASS";
 
 "opt.fullscreen" = "Pantalla completa";
 "opt.ontop" = "Sempre per damunt";

@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Kesalahan internal %@ (%@) saat menerapkan opsi %@.";
 
 "alert.unsupported_audio" = "File audio eksternal tidak didukung.";
+"alert.unsupported_video" = "File video eksternal tidak didukung.";
 "alert.unsupported_sub" = "File terjemahan eksternal tidak didukung.";
 "alert.unsupported_url" = "URL tidak didukung.";
 "alert.wrong_url_format" = "Format URL salah.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Matikan hardware decoding.";
 "hwdec.auto" = "Aktifkan hardware decoding. Namun beberapa filter video tidak akan bekerja dengan baik.";
 "hwdec.auto-copy" = "Aktifkan hardware decoding. Filter video akan bekerja, namun memakan memori dua kali lipat dari biasanya.";
+
+"gaplessAudio.no" = "Memutar berturutan file audio bisa menyebabkan hening atau gangguan pada titik perubahan file.";
+"gaplessAudio.weak" = "Bila format audio keluaran dekoder berubah, perangkat audio ditutup dan dibuka ulang, mengganggu pemutaran tanpa jeda.";
+"gaplessAudio.yes" = "Perangkat audio dibuka memakai parameter yang dipilih bagi file pertama yang diputar dan kemudian tetap dibuka untuk pemutaran tanpa jeda. File berikut mungkin dicuplik ulang.";
 
 "subencoding.auto" = "Deteksi otomatis";
 

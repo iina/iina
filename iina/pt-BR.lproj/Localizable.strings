@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Erro interno %@ (%@) ao ajustar a opção %@.";
 
 "alert.unsupported_audio" = "Audio externo não suportado.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Legenda externa não suportada.";
 "alert.unsupported_url" = "URL não suportada.";
 "alert.wrong_url_format" = "Formato errado de URL.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Está Desabilitado o decodificador de Hardware.";
 "hwdec.auto" = "Está Habilitado o decodificador de Hardware. No entanto, a maioria dos filtros não deve funcionar bem.";
 "hwdec.auto-copy" = "Está habilitada a decodificação por hardware. Ela consumirá o dobro da memória, mas funciona com filtros de vídeo.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "Auto detectar";
 

@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Sisäinen virhe %@ (%@) asetettaessa valintaa %@.";
 
 "alert.unsupported_audio" = "Ulkoista äänitiedostoa ei tuettu.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Ulkoista tekstitystä ei tuettu.";
 "alert.unsupported_url" = "URL-osoitetta ei tuettu.";
 "alert.wrong_url_format" = "Virheellinen URL-osoitteen muoto.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Poista laitteistopurku käytöstä.";
 "hwdec.auto" = "Ota käyttöön laitteistopurku. Useimmat videosuodattimet eivät kuitenkaan toimi kunnolla.";
 "hwdec.auto-copy" = "Ota käyttöön laitteistopurku. Kuluttaa muistia kaksinkertaisesti, mutta toimii videosuodattimien kanssa.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "Automaattinen tunnistus";
 

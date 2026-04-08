@@ -38,7 +38,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
 "main.opening_stream" = "Otváram stream…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Hľadám…";
 "osc.precision" = "Presnosť";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekúnd";
@@ -103,7 +103,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "osd.sub_hidden" = "Skryté titulky";
 "osd.sub_visible" = "Viditeľné titulky";
 "osd.sub_second_delay.nodelay" = "Oneskorenie sekundárnych titulkov: bez oneskorenia";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.later" = "Oneskorenie sekundárnych titulkov: %@s neskôr";
 "osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Skryté sekundárne titulky";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %@";
@@ -248,6 +248,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení možnosti %@.";
 
 "alert.unsupported_audio" = "Nepodporovaný externý zvukový súbor.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Nepodporované externé titulky.";
 "alert.unsupported_url" = "Nepodporované URL.";
 "alert.wrong_url_format" = "Zlý formát URL.";
@@ -392,6 +393,10 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "hwdec.no" = "Vypnúť Hardvérové Dekódovanie.";
 "hwdec.auto" = "Zapnúť Hardvérové Dekódovanie. Avšak, väčšina video filtrov nebude fungovať.";
 "hwdec.auto-copy" = "Zapnúť Hardvérové Dekódovanie. Dvojnásobne zaťažuje pamäť, ale video filtre budú fungovať.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "Auto detekcia";
 

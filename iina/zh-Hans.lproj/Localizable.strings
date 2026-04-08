@@ -247,6 +247,7 @@
 "alert.mpv_error" = "出现内部错误 %@（%@）(设定选项 %@ 时)。";
 
 "alert.unsupported_audio" = "不支持的外置音频文件。";
+"alert.unsupported_video" = "不支持的外部视频文件。";
 "alert.unsupported_sub" = "不支持的外挂字幕。";
 "alert.unsupported_url" = "不支持的 URL。";
 "alert.wrong_url_format" = "URL 格式错误。";
@@ -391,6 +392,10 @@
 "hwdec.no" = "禁用硬件解码。";
 "hwdec.auto" = "启用硬件解码。但大多数视频滤镜不会正常工作。";
 "hwdec.auto-copy" = "启用硬件解码。这将占用约两倍内存，但支持视频滤镜。";
+
+"gaplessAudio.no" = "在音频文件之间切换时可能会出现静音或卡顿。";
+"gaplessAudio.weak" = "如果解码器输出的音频格式发生改变，音频设备将被重启，并导致无缝播放卡顿。";
+"gaplessAudio.yes" = "音频设备使用首个播放文件的设定参数启动，并保持参数以实现无缝播放。后续文件可能因此被重新采样。";
 
 "subencoding.auto" = "自动识别";
 

@@ -247,6 +247,7 @@
 "alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
 
 "alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
+"alert.unsupported_video" = "지원되지 않는 외부 동영상 파일입니다.";
 "alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
 "alert.unsupported_url" = "지원되지 않는 URL입니다.";
 "alert.wrong_url_format" = "잘못된 URL 형식입니다.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "하드웨어 디코딩을 사용하지 않습니다.";
 "hwdec.auto" = "하드웨어 디코딩을 사용합니다.\n비디오 필터 대부분을 사용할 수 없게 됩니다.";
 "hwdec.auto-copy" = "하드웨어 디코딩을 사용합니다.\n두 배의 메모리를 사용하지만, 비디오 필터를 적용할 수 있습니다.";
+
+"gaplessAudio.no" = "오디오 파일을 연속 재생하면 파일이 바뀔 때 소리가 나지 않거나 끊길 수 있습니다.";
+"gaplessAudio.weak" = "디코더가 출력하는 오디오 형식이 바뀌면, 오디오 장치가 재시작되므로 끊김 없는 재생을 방해할 수 있습니다.";
+"gaplessAudio.yes" = "처음 재생한 파일의 형식으로 오디오 장치를 실행하고 끊김 없는 재생을 위해 계속 켜진 채로 유지합니다. 이후 파일은 리샘플링될 수 있습니다.";
 
 "subencoding.auto" = "자동 감지";
 

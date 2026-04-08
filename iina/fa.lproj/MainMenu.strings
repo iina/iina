@@ -281,22 +281,22 @@
 "WOL-Us-ByA.title" = "قطع صدا";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
-"Wbq-vt-hzX.title" = "Volume + 5%";
+"Wbq-vt-hzX.title" = "افزایش صدا + %%";
 
 /* Class = "NSMenuItem"; title = "Next Frame"; ObjectID = "XDC-Pc-rS1"; */
-"XDC-Pc-rS1.title" = "Next Frame";
+"XDC-Pc-rS1.title" = "فریم بعدی";
 
 /* Class = "NSMenuItem"; title = "Scale Up"; ObjectID = "XHu-Dl-Vq2"; */
-"XHu-Dl-Vq2.title" = "Scale Up";
+"XHu-Dl-Vq2.title" = "افزایش کیفیت";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "XPz-ml-OQ3"; */
-"XPz-ml-OQ3.title" = "Undo";
+"XPz-ml-OQ3.title" = "واگرد";
 
 /* Class = "NSMenuItem"; title = "Smaller Size"; ObjectID = "ZOF-MG-6II"; */
-"ZOF-MG-6II.title" = "Smaller Size";
+"ZOF-MG-6II.title" = "اندازه کوچک‌تر";
 
 /* Class = "NSMenuItem"; title = "Volume - 1%"; ObjectID = "Zhv-Bz-I5V"; */
-"Zhv-Bz-I5V.title" = "Volume - 1%";
+"Zhv-Bz-I5V.title" = "کاهش صدا - %%";
 
 /* Class = "NSMenuItem"; title = "Custom Touch Bar…"; ObjectID = "ZnF-yX-7jP"; */
 "ZnF-yX-7jP.title" = "Custom Touch Bar…";
@@ -314,7 +314,7 @@
 "ar5-3T-O9h.title" = "چرخش";
 
 /* Class = "NSMenuItem"; title = "Music Mode"; ObjectID = "bGN-E4-V5A"; */
-"bGN-E4-V5A.title" = "Music Mode";
+"bGN-E4-V5A.title" = "حالت موزیک";
 
 /* Class = "NSMenuItem"; title = "Open URL in New Window…"; ObjectID = "bfB-bn-KeM"; */
 "bfB-bn-KeM.title" = "باز کردن در پنجره جدید…";
@@ -326,7 +326,7 @@
 "bwz-r0-peR.title" = "بازرس";
 
 /* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
-"0tJ-RQ-kuW.title" = "Log Viewer";
+"0tJ-RQ-kuW.title" = "نمایشگر وقایع";
 
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "اندازه معمولی(ریتنا)";
@@ -401,7 +401,7 @@
 "m7w-hc-Y2F.title" = "حروف را بزرگ کن";
 
 /* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Secondary Subtitle";
+"mGw-jm-5x2.title" = "زیرنویس دوم";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "استفاده از تصویر در تصویر";
@@ -434,10 +434,10 @@
 "pWh-nh-0pN.title" = "ویرایش";
 
 /* Class = "NSMenuItem"; title = "Volume - 5%"; ObjectID = "pdj-9C-Fn1"; */
-"pdj-9C-Fn1.title" = "Volume - 5%";
+"pdj-9C-Fn1.title" = "کاهش صدا - %%";
 
 /* Class = "NSMenuItem"; title = "Previous Chapter"; ObjectID = "pqF-SZ-Ifz"; */
-"pqF-SZ-Ifz.title" = "Previous Chapter";
+"pqF-SZ-Ifz.title" = "بخش قبلی";
 
 /* Class = "NSMenuItem"; title = "Font…"; ObjectID = "rme-fr-5rr"; */
 "rme-fr-5rr.title" = "فونت…";
@@ -449,7 +449,7 @@
 "sgu-dK-IGE.title" = "Cycle Subtitles";
 
 /* Class = "NSMenuItem"; title = "Half Size"; ObjectID = "snW-S8-Cw5"; */
-"snW-S8-Cw5.title" = "Half Size";
+"snW-S8-Cw5.title" = "سایز نصف";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "tH0-KL-c9V"; */
 "tH0-KL-c9V.title" = "کپی";

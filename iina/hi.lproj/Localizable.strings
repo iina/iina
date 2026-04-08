@@ -247,6 +247,7 @@
 "alert.mpv_error" = "आंतरिक गलती %@ (%@) विकल्प सेट करते समय %@।";
 
 "alert.unsupported_audio" = "असमर्थित बाहरी ऑडियो फ़ाइल।";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "असमर्थित बाहरी उपशीर्षक।";
 "alert.unsupported_url" = "असमर्थित यूआरएल।";
 "alert.wrong_url_format" = "गलत यूआरएल प्रारूप।";
@@ -391,6 +392,10 @@
 "hwdec.no" = "हार्डवेयर डिकोडिंग अक्षम करें।";
 "hwdec.auto" = "हार्डवेयर डिकोडिंग सक्षम करें। हालाँकि, अधिकांश वीडियो फ़िल्टर ठीक से काम नहीं करेंगे।";
 "hwdec.auto-copy" = "हार्डवेयर डिकोडिंग सक्षम करें। यह मेमोरी को दोगुना कर देगा लेकिन वीडियो फिल्टर के साथ काम करेगा।";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "स्वयं पता लगाना";
 

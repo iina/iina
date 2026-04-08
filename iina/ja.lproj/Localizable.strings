@@ -247,6 +247,7 @@
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
 "alert.unsupported_url" = "対応していないURLです。";
 "alert.wrong_url_format" = "URLの形式が間違っています。";
@@ -391,6 +392,10 @@
 "hwdec.no" = "ハードウェアデコーディングを使用しません。";
 "hwdec.auto" = "ハードウェアデコーディングを使用します。多くのビデオフィルターは正常に動作しません。";
 "hwdec.auto-copy" = "ハードウェアデコーディングを使用します。二倍のメモリを使用しますが、ビデオフィルターを適用できます。";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "自動検出";
 

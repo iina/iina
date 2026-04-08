@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Puffern … %d%%";
 "main.opening_stream" = "Stream öffnen …";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Suche…";
 "osc.precision" = "Genauigkeit";
 "osc.1s" = "1 Sekunde";
 "osc.100ms" = "100 Millisekunden";
@@ -59,13 +59,13 @@
 "eq.preset.classical" = "Klassik";
 "eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Tief";
-"eq.preset.electronic" = "Electronic";
+"eq.preset.electronic" = "Elektronisch";
 "eq.preset.hip_hop" = "Hip-Hop";
 "eq.preset.increase_bass" = "Bass erhöhen";
 "eq.preset.increase_treble" = "Höhen anheben";
 "eq.preset.increase_vocal" = "Vocal erhöhen";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
+"eq.preset.latin" = "Lateinamerikanisch";
 "eq.preset.loundness" = "Lautheit";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Klavier";
@@ -163,20 +163,20 @@
 
 "preference.enable_adv_settings" = "Erweiterte Einstellungen";
 
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
+"preference.sub_override_level.no" = "Nein";
+"preference.sub_override_level.force" = "Erzwingen";
 "preference.sub_override_level.scale" = "skalieren";
 "preference.sub_override_level.strip" = "strip";
 "preference.sub_override_level.yes" = "ja";
 
 "preference.sub_override_level.descriptive_text.no" = "Untertitel anzeigen, wie von den Untertitelskripten angegeben, ohne Überschreibungen.";
 "preference.sub_override_level.descriptive_text.force" = "Alle Untertitelstile anwenden.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.scale" = "Die Skalierungseinstellung zusätzlich zu den Stileinstellungen in diesem Abschnitt anwenden.";
 "preference.sub_override_level.descriptive_text.strip" = "Alle ASS-Tags und Stile aus dem Untertitel komplett entfernen.";
 "preference.sub_override_level.descriptive_text.yes" = "Alle Stil-Einstellungen in diesem Abschnitt anwenden.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Installieren Sie das Online-Medien-Plugin über „Plugins > Von GitHub installieren“, um erweiterte Funktionen wie Video-Downloads und automatische yt-dlp-Updates zu nutzen.";
+"preference.ytdl_plugin_installed" = "Die integrierte youtube-dl-Unterstützung ist deaktiviert, da das Online-Medien-Plugin installiert ist.";
 
 "menu.volume" = "Lautstärke: %@";
 "menu.volume_muted" = "Lautstärke: %@ (Stumm)";
@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Interner Fehler „%@“ (%@) beim Setzen der Einstellung „%@“.";
 
 "alert.unsupported_audio" = "Externe Audiodatei nicht unterstützt.";
+"alert.unsupported_video" = "Nicht unterstützte externe Videodatei.";
 "alert.unsupported_sub" = "Externe Untertiteldatei nicht untersützt.";
 "alert.unsupported_url" = "Adresse nicht unterstützt.";
 "alert.wrong_url_format" = "Falsches Adressformat.";
@@ -257,7 +258,7 @@
 "alert.error_saving_file" = "Fehler beim Sichern von %@: %@";
 "alert.error_deleting_file" = "Datei konnte nicht gelöscht werden.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "Der Wert „%@“ ist ungültig.\nBitte geben Sie einen Wert zwischen 10 und 10000 oder 0 ein.";
 
 "alert.config.new.title" = "Neue Eingabekonfiguration";
 "alert.config.new.message" = "Bitte gib einen Namen für die neue Konfiguration ein.";
@@ -358,10 +359,10 @@
 "playlist.total_length" = "%@ insgesamt";
 "playlist.total_length_with_selected" = "%@ von %@ ausgewählt";
 "playlist.sorting.header" = "Sortieren";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.filename_ascending" = "Dateiname aufsteigend";
+"playlist.sorting.filename_descending" = "Dateiname absteigend";
+"playlist.sorting.path_ascending" = "Dateipfad aufsteigend";
+"playlist.sorting.path_descending" = "Dateipfad absteigend";
 "pl_menu.title_multi" = "%d Dateien";
 "pl_menu.play_next" = "Als Nächstes wiedergeben";
 "pl_menu.play_in_new_window" = "In neuem Fenster wiedergeben";
@@ -392,6 +393,10 @@
 "hwdec.auto" = "Hardwaredecoding aktiviert. Die meisten Videofilter werden nicht richtig funktionieren.";
 "hwdec.auto-copy" = "Hardwaredecoding aktiviert. Benötigt doppelten Speicher, funktioniert aber mit Videofiltern.";
 
+"gaplessAudio.no" = "Bei der Wiedergabe aufeinanderfolgender Audiodateien kann es beim Dateiwechsel zu Stille oder Unterbrechungen kommen.";
+"gaplessAudio.weak" = "Wenn sich das Audioformat der Decoder-Ausgabe ändert, wird das Audiogerät geschlossen und erneut geöffnet, was die lückenlose Wiedergabe unterbricht.";
+"gaplessAudio.yes" = "Das Audiogerät wird mit den Parametern der ersten wiedergegebenen Datei geöffnet und bleibt für die lückenlose Wiedergabe geöffnet. Nachfolgende Dateien werden ggf. neu abgetastet.";
+
 "subencoding.auto" = "Automatisch erkennen";
 
 "osc_toolbar.settings" = "Einstellungen";
@@ -401,7 +406,7 @@
 "osc_toolbar.music_mode" = "Musikmodus";
 "osc_toolbar.sub_track" = "Untertitelspur auswählen";
 "osc_toolbar.screenshot" = "Bildschirmfoto erstellen";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "Plugin-Bereich anzeigen";
 
 "mini_player.album_art" = "Albumcover ein-/ausblenden";
 "mini_player.loop" = "Wiederholen";
@@ -412,7 +417,7 @@
 "mini_player.volume" = "Laufwerk";
 "mini_player.close" = "Musikmodus schließen";
 "mini_player.back" = "Zurück zum Video Modus";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Wiedergabeliste sortieren";
 
 // Touch bar
 

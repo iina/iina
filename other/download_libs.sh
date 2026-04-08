@@ -165,18 +165,70 @@ mkdir -p "$PLUGIN_PATH"
 
 fetch_latest_plugin_asset() {
   local repo="$1"
-  curl -s -f -L "https://api.github.com/repos/${repo}/releases/latest" | python3 -c '
+  local response_file
+  local status_code
+
+  response_file=$(mktemp) || return 1
+  status_code=$(curl -s -L -o "$response_file" -w "%{http_code}" "https://api.github.com/repos/${repo}/releases/latest") || {
+    echo -e "${RED}Failed to contact GitHub for ${repo}.${NC}" >&2
+    rm -f "$response_file"
+    return 1
+  }
+
+  if [[ "$status_code" -lt 200 || "$status_code" -ge 300 ]]; then
+    echo -e "${RED}GitHub API returned HTTP ${status_code} for ${repo}.${NC}" >&2
+    python3 -c '
 import json
+import pathlib
 import sys
 
-release = json.load(sys.stdin)
+path = pathlib.Path(sys.argv[1])
+text = path.read_text(encoding="utf-8", errors="replace").strip()
+if not text:
+    raise SystemExit(0)
+try:
+    payload = json.loads(text)
+except json.JSONDecodeError:
+    print(text[:240], file=sys.stderr)
+    raise SystemExit(0)
+message = payload.get("message")
+if message:
+    print(message, file=sys.stderr)
+' "$response_file"
+    rm -f "$response_file"
+    return 1
+  fi
+
+  python3 -c '
+import json
+import pathlib
+import sys
+
+path = pathlib.Path(sys.argv[1])
+text = path.read_text(encoding="utf-8", errors="replace")
+try:
+    release = json.loads(text)
+except json.JSONDecodeError as exc:
+    print(f"Failed to decode GitHub API response as JSON: {exc}", file=sys.stderr)
+    preview = text.strip()
+    if preview:
+        print(preview[:240], file=sys.stderr)
+    raise SystemExit(1)
 assets = [asset for asset in release.get("assets", []) if asset.get("name", "").endswith(".iinaplgz")]
 if not assets:
+    message = release.get("message")
+    if message:
+        print(message, file=sys.stderr)
+    else:
+        print("Latest release does not contain a .iinaplgz asset.", file=sys.stderr)
     raise SystemExit(1)
 asset = assets[0]
 print(asset["name"])
 print(asset["browser_download_url"])
-'
+' "$response_file"
+  local status=$?
+  rm -f "$response_file"
+  return $status
 }
 
 download_plugin() {

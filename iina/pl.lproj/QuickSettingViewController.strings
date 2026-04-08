@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
-"1KQ-oZ-A2x.title" = "Prędkość:";
+"1KQ-oZ-A2x.title" = "Szybkość:";
 
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "1VY-EN-1mi"; */
 "1VY-EN-1mi.title" = "s";
@@ -17,13 +17,13 @@
 "6LO-6y-IsA.title" = "Kolor:";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[0]" = "Primary Subtitles";
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Napisy główne";
 
 /* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
-"88M-pi-2Hc.ibShadowedLabels[1]" = "Dodatkowe napisy";
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Napisy dodatkowe";
 
 /* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
-"8Ax-5X-osl.title" = "Wczytaj zewnętrzną ścieżkę audio…";
+"8Ax-5X-osl.title" = "Wczytaj zewnętrzną ścieżkę dźwięku…";
 
 /* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
 "AB5-UZ-euc.ibShadowedLabels[0]" = "Wczytaj napisy…";
@@ -38,31 +38,31 @@
 "B0I-bX-HZS.title" = "1x";
 
 /* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
-"CYP-el-A6A.label" = "Wideo";
+"CYP-el-A6A.label" = "Obraz";
 
 /* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
-"DdO-VX-HCz.title" = "0.25";
+"DdO-VX-HCz.title" = "0,25";
 
 /* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
-"Ew1-N1-0Pi.title" = "0.25x";
+"Ew1-N1-0Pi.title" = "0,25x";
 
 /* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
 "GlZ-YU-dNm.title" = "RAMKA";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
-"YCG-xK-eAs.title" = "-5s";
+"YCG-xK-eAs.title" = "− 5 s";
 
 /* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
-"JbG-Ur-b55.title" = "1.5";
+"JbG-Ur-b55.title" = "1,5";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "LEZ-fv-buL"; */
-"LEZ-fv-buL.title" = "0s";
+"LEZ-fv-buL.title" = "0 s";
 
 /* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
-"Lnu-kz-cql.title" = "Zewnętrzna ścieżka audio:";
+"Lnu-kz-cql.title" = "Zewnętrzny dźwięk:";
 
 /* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
-"Lpw-ws-Ezh.title" = "-12 dB";
+"Lpw-ws-Ezh.title" = "−12 dB";
 
 /* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
 "NxO-to-jcI.title" = "NAPISY";
@@ -74,13 +74,13 @@
 "RA1-fF-OrB.title" = "Zewnętrzne napisy:";
 
 /* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
-"Rbb-wh-cLc.ibShadowedLabels[0]" = "Szukaj online…";
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "Szukaj w Sieci…";
 
 /* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
 "Rky-lo-Buu.title" = "Nasycenie:";
 
 /* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
-"VzC-tM-KT7.title" = "Ścieżka video:";
+"VzC-tM-KT7.title" = "Ścieżka obrazu:";
 
 /* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
 "W7H-mU-v3D.title" = "x";
@@ -92,13 +92,13 @@
 "Wkz-wW-sOM.title" = "Opóźnienie napisów:";
 
 /* Class = "NSTextFieldCell"; title = "Aspect ratio:"; ObjectID = "YgL-iV-bca"; */
-"YgL-iV-bca.title" = "Proporcje obrazu:";
+"YgL-iV-bca.title" = "Współczynnik proporcji:";
 
 /* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
-"ZBd-13-lA1.title" = "Wygląd napisów:";
+"ZBd-13-lA1.title" = "Styl tekstu:";
 
 /* Class = "NSMenuItem"; title = "0.5"; ObjectID = "avJ-cW-Iws"; */
-"avJ-cW-Iws.title" = "0.5";
+"avJ-cW-Iws.title" = "0,5";
 
 /* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
 "bKb-pW-HnS.title" = "Dodatkowe napisy:";
@@ -161,10 +161,10 @@
 "m9e-IB-IDJ.title" = "Przytnij:";
 
 /* Class = "NSMenuItem"; title = "2.5"; ObjectID = "nPr-QJ-Ty3"; */
-"nPr-QJ-Ty3.title" = "2.5";
+"nPr-QJ-Ty3.title" = "2,5";
 
 /* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
-"p63-Nx-yJZ.title" = "16 x";
+"p63-Nx-yJZ.title" = "16x";
 
 /* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
 "r6x-z0-oFC.title" = "Gamma:";
@@ -179,13 +179,13 @@
 "to3-rc-Agv.title" = "Obrót:";
 
 /* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
-"uCX-EC-jXM.title" = "-5 sekund";
+"uCX-EC-jXM.title" = "− 5 s";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "udN-rq-omw"; */
-"udN-rq-omw.title" = "0 sekund";
+"udN-rq-omw.title" = "0 s";
 
 /* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
-"upM-Lz-YwK.title" = "0 sekund";
+"upM-Lz-YwK.title" = "0 s";
 
 /* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
 "uqb-mz-A22.title" = "TŁO";
@@ -197,10 +197,10 @@
 "x39-62-7KC.title" = "Ścieżka audio:";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
-"xfX-wr-DTJ.title" = "+5 sekund";
+"xfX-wr-DTJ.title" = "+ 5 s";
 
 /* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "Kt8-Kg-i2O"; */
-"Kt8-Kg-i2O.title" = "+5 sekund";
+"Kt8-Kg-i2O.title" = "+ 5 s";
 
 /* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
 "zcD-Tg-7Oi.title" = "Korektor:";
@@ -224,4 +224,4 @@
 "dvI-Rj-7qF.title" = "Usuń bieżące ustawienia EQ";
 
 /* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
-"LPh-nJ-GjN.title" = "Manual";
+"LPh-nJ-GjN.title" = "Ręczne";

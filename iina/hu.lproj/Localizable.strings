@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Hiba történt %@ (%@) az opció %@ beállítása közben.";
 
 "alert.unsupported_audio" = "Nem támogatott külsõ hang fájl.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Nem támogatott külsõ felirat.";
 "alert.unsupported_url" = "Nem támogatott URL.";
 "alert.wrong_url_format" = "Hibás URL formátum.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Hardver dekódolás kikapcsolása.";
 "hwdec.auto" = "Hardver dekódolás bekapcsolása. A legtöbb videószűrő azonban nem fog megfelelően működni.";
 "hwdec.auto-copy" = "Hardver dekódolás bekapcsolása. Dupla memóriát fogyaszt, de videoszűrőkkel működik.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "Automatikus felismerés";
 

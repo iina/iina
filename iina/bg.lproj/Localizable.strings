@@ -7,8 +7,8 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
+"general.on" = "Включено";
+"general.off" = "Изключено";
 "general.login" = "Вписване";
 "general.logout" = "Изход";
 "general.ok" = "ОК";
@@ -16,51 +16,51 @@
 "general.username" = "Потребителско име";
 "general.password" = "Парола";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "„Стойността не може да бъде празна.";
+"input.already_exists" = "„Стойността вече съществува.";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
+"guide.highlights" = "Акценти";
+"guide.basic_settings" = "Основни настройки";
 "guide.faq" = "Често задавани въпроси";
 
 // Initial Window
 "initial.announcement" = "Вие използвате %@ версия на IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.beta.desc" = "„Ако искате да се върнете към официална версия, демаркирайте „получаване на бета актуализации“ от Настройки > Общи и инсталирайте стабилна версия от нашия <a href=\"https://iina.io\">официален уебсайт</a>.";
+"initial.nightly.desc" = "Версията Nightly не се препоръчва за ежедневна употреба. Към момента тези версии не поддържат автоматично актуализиране. Моля, изтегляйте ръчно по-нови версии от нашия <a href=\"https://nightly.iina.io\">уебсайт за nightly билдове</a>.";
+"initial.debug.desc" = "Debug версиите обикновено не са оптимизирани за производителност, затова не се препоръчва да се използват за ежедневна употреба. Debug версиите не поддържат автоматично актуализиране.";
+"initial.bug_report" = "„Докладвайте чрез <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
 // Inspector Window
 "inspector.error" = "Грешка";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
-"main.opening_stream" = "Opening stream…";
-"main.seeking_indicator" = "Seeking…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"main.buffering_indicator" = "Буфериране… %d%%";
+"main.opening_stream" = "Отваряне на поток…";
+"main.seeking_indicator" = "Търсене…";
+"osc.precision" = "Точност";
+"osc.1s" = "1 секунда";
+"osc.100ms" = "100 милисекунди";
+"osc.10ms" = "10 милисекунди";
+"osc.1ms" = "1 милисекунда";
 
 // QuickSettingViewController.swift
-"quicksetting.item_default" = "Default";
-"quicksetting.item_none" = "None";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.item_default" = "По подразбиране";
+"quicksetting.item_none" = "Няма";
+"quicksetting.hwdec" = "Хардуерно декодиране";
+"quicksetting.deinterlace" = "Дейнтерлейсинг";
 "quicksetting.hdr" = "HDR";
-"quicksetting.hide" = "Hide";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.hide" = "Скрий";
+"quicksetting.reset_speed" = "Нулиране на скоростта до 1x";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
+"eq.preset.acoustic" = "Aкустика";
 "eq.preset.classical" = "Класика";
 "eq.preset.dance" = "Dance";
 "eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
+"eq.preset.electronic" = "Electronic ";
+"eq.preset.hip_hop" = "Hip hop";
 "eq.preset.increase_bass" = "Increase Bass";
 "eq.preset.increase_treble" = "Increase Treble";
 "eq.preset.increase_vocal" = "Increase Vocal";
@@ -71,27 +71,27 @@
 "eq.preset.piano" = "Пиано";
 "eq.preset.pop" = "Поп";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Намали ниски";
+"eq.preset.reduce_treble" = "Намали високи";
 "eq.preset.rock" = "Рок";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Малки високоговорители";
+"eq.preset.spoken_word" = "Говор";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Нов еквалайзер профил";
+"alert.eq.new_profile.message" = "Моля въведи име на профила";
+"alert.eq.rename.title" = "Преименувай текущия профил";
+"alert.eq.rename.message" = "Моля, въведете име за новия профил.";
 
 // OSDMessage.swift
 "osd.pause" = "Пауза";
-"osd.resume" = "Resume";
-"osd.volume" = "Volume: %@";
+"osd.resume" = "Продължаване";
+"osd.volume" = "Сила на звука";
 "osd.speed" = "Скорост: %@x";
-"osd.aspect" = "Aspect Ratio: %@";
-"osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
-"osd.deinterlace" = "Deinterlace: %@";
-"osd.hwdec" = "Hardware Decoding: %@";
+"osd.aspect" = "Съотношение на страните: %@";
+"osd.crop" = "Изрязване: %@";
+"osd.rotate" = "Завъртане: %i°";
+"osd.deinterlace" = "Дейнтерлейсинг: %@";
+"osd.hwdec" = "Хардуерно декодиране: %@";
 "osd.audio_delay.nodelay" = "Audio Delay: No Delay";
 "osd.audio_delay.later" = "Audio Delay: %@s Later";
 "osd.audio_delay.earlier" = "Audio Delay: %@s Earlier";
@@ -143,7 +143,7 @@
 "osd.no_loop" = "Disable Looping";
 
 "preference.title" = "Preferences";
-"preference.general" = "General";
+"preference.general" = "Общи";
 "preference.ui" = "UI";
 "preference.video_audio" = "Video/Audio";
 "preference.subtitle" = "Subtitle";
@@ -178,7 +178,7 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume: %@";
+"menu.volume" = "Сила на звука";
 "menu.volume_muted" = "Volume: %@ (Muted)";
 "menu.audio_delay" = "Audio Delay: %@s";
 "menu.sub_delay" = "Subtitle Delay: %@s";
@@ -193,7 +193,7 @@
 "menu.mini_player" = "Enter Music Mode";
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Пауза";
-"menu.resume" = "Resume";
+"menu.resume" = "Продължаване";
 "menu.speed" = "Скорост: %@x";
 "menu.chapters" = "Show Chapters Panel";
 "menu.hide_chapters" = "Hide Chapters Panel";
@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";
 "alert.unsupported_url" = "Unsupported URL.";
 "alert.wrong_url_format" = "Wrong URL format.";
@@ -392,6 +393,10 @@
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
 "subencoding.auto" = "Auto detect";
 
 "osc_toolbar.settings" = "Quick Settings";
@@ -427,7 +432,7 @@
 "touchbar.rewind" = "Rewind";
 "touchbar.fast_forward" = "Fast Forward";
 "touchbar.play_pause" = "Play / Pause";
-"touchbar.seek" = "Seek";
+"touchbar.seek" = "Превъртане";
 "touchbar.time" = "Time Position";
 "touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
 "touchbar.toggle_pip" = "Toggle Picture-in-Picture";

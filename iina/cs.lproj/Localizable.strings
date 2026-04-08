@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Vnitřní chyba %@ (%@) při nastavení možnosti %@.";
 
 "alert.unsupported_audio" = "Nepodporovaný externí zvukový soubor.";
+"alert.unsupported_video" = "Nepodporovaný externí videosoubor.";
 "alert.unsupported_sub" = "Nepodporované externí titulky.";
 "alert.unsupported_url" = "Nepodporovaná URL.";
 "alert.wrong_url_format" = "Chybný formát URL.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Hardwarové dekódování zakázáno.";
 "hwdec.auto" = "Hardwarové dekódování povoleno. Většina video filtrů však nebude pracovat správně.";
 "hwdec.auto-copy" = "Hardwarové dekódování povoleno. Spotřebuje dvojnásobek paměti, bude však kompatibilní s video filtry.";
+
+"gaplessAudio.no" = "Přehrávání po sobě jdoucích zvukových souborů může vést k tichu nebo přerušení v okamžiku změny souboru.";
+"gaplessAudio.weak" = "Pokud se změní formát zvuku na výstupu dekodéru, zvukové zařízení se ukončí a znovu spustí, což naruší hladké přechody při přehrávání.";
+"gaplessAudio.yes" = "Zvukové zařízení se spustí podle parametrů zvolených pro první přehrávaný soubor a zůstane spuštěné pro hladké přechody. Následující soubory mohou být převzorkovány.";
 
 "subencoding.auto" = "Automaticky";
 

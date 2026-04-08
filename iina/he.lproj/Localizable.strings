@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "מוריד נתונים… %d%%";
 "main.opening_stream" = "פותח זרם…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "מדלג…";
 "osc.precision" = "דיוק";
 "osc.1s" = "שניה";
 "osc.100ms" = "100 אלפיות שניה";
@@ -171,12 +171,12 @@
 
 "preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
 "preference.sub_override_level.descriptive_text.force" = "החל את כל סגנונות הכתוביות.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.scale" = "החל את הגדרת קנה המידה בנוסף להגדרות העיצוב בסעיף זה.";
+"preference.sub_override_level.descriptive_text.strip" = "הסר לחלוטין את כל תגי ה-ASS והעיצובים מהכתוביות.";
+"preference.sub_override_level.descriptive_text.yes" = "החל את כל הגדרות העיצוב בסעיף זה.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "התקן את תוסף מדיה מקוונת מתוך \"תוספים > התקן מ-GitHub\" כדי ליהנות מיכולות מתקדמות כמו הורדת וידאו ועדכוני yt-dlp אוטומטיים.";
+"preference.ytdl_plugin_installed" = "התמיכה המובנית ב-youtube-dl מושבתת מאחר שהתקנת את תוסף המדיה המקוונת.";
 
 "menu.volume" = "עוצמת שמע: %@";
 "menu.volume_muted" = "עוצמת שמע: %@ (מושתק)";
@@ -223,7 +223,7 @@
 "menu.manage_plugins" = "נהל תוספים…";
 "menu.developer_tool" = "כלי פיתוח";
 "menu.more_plugin" = "עוד…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.conflicting_shortcuts" = "קיצורי המקשים מתנגשים…";
 "menu.reload_plugins" = "טען מחדש את כל התוספים";
 "menu.show_plugins_panel" = "הצג פאנל תוספים";
 "menu.hide_plugins_panel" = "הסתר פאנל תוספים";
@@ -247,6 +247,7 @@
 "alert.mpv_error" = "שגיאה פנימית %@ (%@) בעת הגדרת האפשרות %@.";
 
 "alert.unsupported_audio" = "קובץ שמע חיצוני לא נתמך.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "הכתוביות החיצוניות לא נתמכות.";
 "alert.unsupported_url" = "כתובת לא נתמכת.";
 "alert.wrong_url_format" = "פורמט כתובת אתר שגוי.";
@@ -267,7 +268,7 @@
 "alert.config.file_existing.message" = "קובץ תצורה באותו שם קובץ כבר קיים. בחר אישור כדי להציג את הקובץ ב-Finder.";
 "alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
 "alert.config.cannot_write" = "הכתיבה לקובץ התצורה נכשלה!";
-"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.title" = "שנה שם תצורת קלט";
 "alert.config.rename.message" = "נא להזין שם עבור התצורה.";
 
 "alert.filter.incorrect" = "אירעה שגיאה בעת הגדרת המסננים. אנא בדוק את פורמט הפרמטר שהגדרת.";
@@ -358,10 +359,10 @@
 "playlist.total_length" = "%@ סך הכל";
 "playlist.total_length_with_selected" = "נבחרו %@ מתוך %@";
 "playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.filename_ascending" = "שם קובץ בסדר עולה";
+"playlist.sorting.filename_descending" = "שם קובץ בסדר יורד";
+"playlist.sorting.path_ascending" = "נתיב קובץ בסדר עולה";
+"playlist.sorting.path_descending" = "נתיב קובץ בסדר יורד";
 "pl_menu.title_multi" = "%d פריטים";
 "pl_menu.play_next" = "הפעל את הבא";
 "pl_menu.play_in_new_window" = "הפעלה בחלון חדש";
@@ -392,6 +393,10 @@
 "hwdec.auto" = "אפשר פענוח חומרה, אך רוב מסנני הווידאו לא יפעלו כראוי.";
 "hwdec.auto-copy" = "אפשר פענוח חומרה. יצרוך זיכרון כפול אבל יעבוד עם מסנני וידאו.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
 "subencoding.auto" = "זיהוי אוטומטי";
 
 "osc_toolbar.settings" = "הגדרות מהירות";
@@ -412,7 +417,7 @@
 "mini_player.volume" = "עוצמת קול";
 "mini_player.close" = "סגור מצב מוזיקה";
 "mini_player.back" = "חזור למצב וידאו";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "מיין את רשימת ההשמעה";
 
 // Touch bar
 

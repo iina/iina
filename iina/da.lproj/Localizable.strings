@@ -37,7 +37,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Indlæser… %d%%";
 "main.opening_stream" = "Åbner stream…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Søger…";
 "osc.precision" = "Præcision";
 "osc.1s" = "1 sekund";
 "osc.100ms" = "100 millisekunder";
@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Intern fejl %@ (%@) under ændring af %@.";
 
 "alert.unsupported_audio" = "Ikke understøttet ekstern lydfil.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Ikke understøttet ekstern undertekst.";
 "alert.unsupported_url" = "Ikke understøttet URL.";
 "alert.wrong_url_format" = "Forkert URL-format.";
@@ -357,7 +358,7 @@
 
 "playlist.total_length" = "%@ i alt";
 "playlist.total_length_with_selected" = "%@ af %@ valgte";
-"playlist.sorting.header" = "Sorting";
+"playlist.sorting.header" = "Sorterer";
 "playlist.sorting.filename_ascending" = "Filename Ascending";
 "playlist.sorting.filename_descending" = "Filename Descending";
 "playlist.sorting.path_ascending" = "File Path Ascending";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Deaktiver hardwareafkodning.";
 "hwdec.auto" = "Aktiver hardwareafkodning. De fleste videofiltre vil ikke virker korrekt.";
 "hwdec.auto-copy" = "Aktiver hardware afkodning. Kræver dobbelt så meget hukommelse, men virker med videofiltre.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "Find automatisk";
 

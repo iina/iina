@@ -6,15 +6,15 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignore";
-"cmd.seek" = "Seek";
-"cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
-"cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
-"cmd.multiply" = "Multiply";
-"cmd.frame-step" = "Next frame";
+"cmd.ignore" = "Игнориране";
+"cmd.seek" = "Превъртане";
+"cmd.revert-seek" = "Отмяна на превъртането";
+"cmd.set" = "Задаване";
+"cmd.cycle" = "Превключване";
+"cmd.cycle-values" = "Превключване напред";
+"cmd.add" = "Промяна";
+"cmd.multiply" = "Умножаване";
+"cmd.frame-step" = "Следващ кадър";
 "cmd.frame-back-step" = "Previous frame";
 "cmd.ab-loop" = "A-B loop";
 "cmd.sub-seek" = "Subtitle seek";

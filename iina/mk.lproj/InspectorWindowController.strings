@@ -14,7 +14,7 @@
 "7QX-tu-rvs.title" = "FPS:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
-"9eq-rd-zGy.title" = "Title:";
+"9eq-rd-zGy.title" = "Наслов:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
 "A4y-LL-x0z.title" = ":";
@@ -32,25 +32,25 @@
 "DHh-ne-10f.title" = "Hw Decoder:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Inspector";
+"F0z-JX-Cv5.title" = "Инспектор";
 
 /* Class = "NSTextFieldCell"; title = "Language:"; ObjectID = "FIw-CH-b05"; */
-"FIw-CH-b05.title" = "Language:";
+"FIw-CH-b05.title" = "Јазик:";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[0] = "General"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[0]" = "General";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[1]" = "Tracks";
+"Fqo-1c-3L1.ibShadowedLabels[1]" = "Следења";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[2]" = "File";
+"Fqo-1c-3L1.ibShadowedLabels[2]" = "Датотека";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[3]" = "Status";
+"Fqo-1c-3L1.ibShadowedLabels[3]" = "Статус";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
-"I2E-6Z-Gnn.title" = "Driver:";
+"I2E-6Z-Gnn.title" = "Драјвер:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
 "JN9-3E-OJp.title" = "Estimated Disp FPS";
@@ -65,7 +65,7 @@
 "Luq-rQ-aO4.title" = "Channels:";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
-"MME-KZ-jrG.title" = "Driver:";
+"MME-KZ-jrG.title" = "Драјвер:";
 
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
 "OCm-zb-deg.title" = "Duration:";
@@ -89,13 +89,13 @@
 "S3X-Df-UMB.title" = "Default";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
-"UuR-M1-YLj.label" = "Tracks";
+"UuR-M1-YLj.label" = "Следења";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
-"VGm-BL-xOI.label" = "Status";
+"VGm-BL-xOI.label" = "Статус";
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
-"WrI-Sr-O2S.label" = "File";
+"WrI-Sr-O2S.label" = "Датотека";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
 "bki-sE-xCA.title" = "Codec:";

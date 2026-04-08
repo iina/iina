@@ -54,7 +54,7 @@
 "quicksetting.reset_speed" = "Resetiraj brzinu na 1 ×";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
+"eq.preset.flat" = "Linearno";
 "eq.preset.acoustic" = "Akustična glazba";
 "eq.preset.classical" = "Klasična glazba";
 "eq.preset.dance" = "Plesna glazba";
@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Interna greška %@ (%@) pri postavljanju opcije %@.";
 
 "alert.unsupported_audio" = "Nepodržana eksterna audio datoteka.";
+"alert.unsupported_video" = "Nepodržana eksterna video datoteka.";
 "alert.unsupported_sub" = "Nepodržan eksterni titl.";
 "alert.unsupported_url" = "Nepodržana URL adresa.";
 "alert.wrong_url_format" = "Pogrešan format URL adrese.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Deaktiviraj hardversko dekodiranje.";
 "hwdec.auto" = "Aktiviraj hardversko dekodiranje. Međutim, većina video filtara neće ispravno raditi.";
 "hwdec.auto-copy" = "Aktiviraj hardversko dekodiranje. Troši dvostruko više memorije, ali raditi s video filtrima.";
+
+"gaplessAudio.no" = "Reprodukcija uzastopnih audio datoteka može uzrokovati tišinu ili prekid u trenutku mijenjanja datoteke.";
+"gaplessAudio.weak" = "Ako se promijeni audio format rezultata dekodera, audio uređaj se zatvara i ponovo otvara, što prekida reprodukciju bez prekida.";
+"gaplessAudio.yes" = "Audio uređaj se otvara pomoću parametara odabranih za prvu reproduciranu datoteku, a zatim ostaje otvoren za reprodukciju bez prekida. Sljedeće datoteke će se možda ponovo uzorkovati.";
 
 "subencoding.auto" = "Otkrij automatski";
 

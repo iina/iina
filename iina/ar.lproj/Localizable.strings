@@ -247,6 +247,7 @@
 "alert.mpv_error" = "خطأ داخلي %@ (%@) عند خيار الإعداد %@.";
 
 "alert.unsupported_audio" = "ملف صوت خارجي غير مدعوم.";
+"alert.unsupported_video" = "ملف صوت خارجي غير مدعوم.";
 "alert.unsupported_sub" = "ملف ترجمه خارجي غير مدعوم.";
 "alert.unsupported_url" = "رابط غير مدعوم.";
 "alert.wrong_url_format" = "تنسيق عنوان URL خاطئ.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "تعطيل فك ترميز الأجهزة.";
 "hwdec.auto" = "تمكين فك ترميز الأجهزة. مع العلم، إن معظم عوامل تصفية الفيديو لن تعمل بشكل صحيح.";
 "hwdec.auto-copy" = "تمكين فك ترميز الأجهزة. سوف يستهلك ضعف الذاكرة ولكنه يعمل مع عوامل تصفية الفيديو.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "إذا تغير تنسيق الصوت وإخراج الترميز، يتم إغلاق الجهاز الصوتي وإعادة فتحه، مما يعطل التشغيل اللاصق.";
+"gaplessAudio.yes" = "يتم فتح الجهاز الصوتي باستخدام المعلمات المختارة للملف الأول الذي يتم تشغيله ثم يتم إبقائه مفتوحاً للتشغيل غير القابل للاشتغال. الملفات التالية قد يعاد تحديدها.";
 
 "subencoding.auto" = "اكتشاف تلقائي";
 

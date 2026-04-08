@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Eroare internă %@ (%@) la setarea opțiunii %@.";
 
 "alert.unsupported_audio" = "Fișier audio extern neacceptat.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Subtitrare externă neacceptată. ";
 "alert.unsupported_url" = "URL neacceptat.";
 "alert.wrong_url_format" = "Format URL greșit.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Dezactivează decodarea hardware.";
 "hwdec.auto" = "Activează decodarea hardware. Cu toate acestea, multe filtre video nu vor funcționa corect.";
 "hwdec.auto-copy" = "Activează decodarea hardware. Va consuma dublul de memorie, dar va funcționa cu filtrele video.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 
 "subencoding.auto" = "Detectează automat";
 

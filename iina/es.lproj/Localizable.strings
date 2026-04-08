@@ -36,7 +36,7 @@
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
-"main.opening_stream" = "Abrir flujo de datos";
+"main.opening_stream" = "Abriendo transmisión…";
 "main.seeking_indicator" = "Buscando…";
 "osc.precision" = "Precisión";
 "osc.1s" = "1 segundo";
@@ -145,7 +145,7 @@
 "preference.title" = "Preferencias";
 "preference.general" = "General";
 "preference.ui" = "Interfaz";
-"preference.video_audio" = "Códecs";
+"preference.video_audio" = "Vídeo/Audio";
 "preference.subtitle" = "Subtítulos";
 "preference.network" = "Red";
 "preference.control" = "Controles";
@@ -158,7 +158,7 @@
 "preference.logged_in_as" = "Conectado como %@";
 "preference.system_media_control" = "Utilizar los controles multimedia del sistema";
 
-"preference.key_binding_hint_1" = "Para editar los atajos en el archivo de configuración actual, haga primero clic en el botón \"Duplicar …\" para crear una copia.";
+"preference.key_binding_hint_1" = "Para editar los atajos en el archivo de configuración actual, haga primero clic en el botón \"Duplicar…\" para crear una copia.";
 "preference.key_binding_hint_2" = "Haga doble clic en una fila del lado derecho para editar el atajo correspondiente.";
 
 "preference.enable_adv_settings" = "Habilitar configuración avanzada";
@@ -176,7 +176,7 @@
 "preference.sub_override_level.descriptive_text.yes" = "Aplicar todos los ajustes de estilo en esta sección.";
 
 "preference.ytdl_plugin_not_installed" = "Instale el plugin multimedia en línea de \"Plugins > Instalar desde GitHub\" para disfrutar de características avanzadas tales como descargas de vídeo y actualizaciones automáticas yt-dlp.";
-"preference.ytdl_plugin_installed" = "El soporte de youtube-dl integrado está deshabilitado ya que tienes el plugin de medios online instalado.";
+"preference.ytdl_plugin_installed" = "El soporte de youtube-dl integrado está deshabilitado, ya que tienes el plugin de medios online instalado.";
 
 "menu.volume" = "Volumen: %@";
 "menu.volume_muted" = "Volumen: %@ (Silenciado)";
@@ -188,8 +188,8 @@
 "menu.sub_second_show" = "Mostrar Subtítulos Secundarios";
 "menu.fullscreen" = "Ver a pantalla completa";
 "menu.exit_fullscreen" = "Salir de pantalla completa";
-"menu.pip" = "Ver en picture in picture";
-"menu.exit_pip" = "Salir de picture in picture";
+"menu.pip" = "Ver en Picture-in-Picture";
+"menu.exit_pip" = "Salir de Picture-in-Picture";
 "menu.mini_player" = "Entrar en modo música";
 "menu.exit_mini_player" = "Salir del modo de música";
 "menu.pause" = "Pausar";
@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Error interno %@ (%@) al configurar la opción %@.";
 
 "alert.unsupported_audio" = "Archivo de audio externo no compatible.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Subtítulo externo no compatible.";
 "alert.unsupported_url" = "URL no compatible.";
 "alert.wrong_url_format" = "Formato de URL incorrecto.";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Desactivar la descodificación por hardware.";
 "hwdec.auto" = "Activar la descodificación por hardware. Sin embargo, la mayoría de los filtros de vídeo no funcionarán correctamente.";
 "hwdec.auto-copy" = "Activar la descodificación por hardware. Consumirá el doble de memoria, pero funciona con filtros de vídeo.";
+
+"gaplessAudio.no" = "La reproducción de archivos de audio consecutivos puede provocar silencio o interrupciones en el punto de cambio de archivo.";
+"gaplessAudio.weak" = "Si cambia el formato de audio de la salida del decodificador, el dispositivo de audio se cierra y se vuelve a abrir, lo que interrumpe la reproducción sin pausas.";
+"gaplessAudio.yes" = "El dispositivo de audio se abre utilizando los parámetros seleccionados para el primer archivo reproducido y luego se mantiene abierto para una reproducción sin pausas. Los archivos siguientes pueden ser re-muestreados.";
 
 "subencoding.auto" = "Detección automática";
 

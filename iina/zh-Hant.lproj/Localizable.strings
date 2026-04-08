@@ -247,6 +247,7 @@
 "alert.mpv_error" = "發生內部錯誤 %@（%@）（設定 %@ 時）";
 
 "alert.unsupported_audio" = "不支援載入此音訊檔";
+"alert.unsupported_video" = "不支援的外部視訊檔。";
 "alert.unsupported_sub" = "不支援載入此字幕檔";
 "alert.unsupported_url" = "不支援這個 URL";
 "alert.wrong_url_format" = "URL 格式錯誤";
@@ -391,6 +392,11 @@
 "hwdec.no" = "停用硬體解碼。";
 "hwdec.auto" = "啟用硬體解碼。但是，大多數視訊濾鏡無法正常運作。";
 "hwdec.auto-copy" = "啟用硬體解碼。將使用大約兩倍的記憶體，但支援視訊濾鏡。";
+
+"gaplessAudio.no" = "播放連續的音訊檔案可能會導致檔案變更時出現靜音或中斷。";
+"gaplessAudio.weak" = "
+若解碼器輸出的音訊格式發生變化，音訊設備將關閉並重新開啟，中斷無縫播放。";
+"gaplessAudio.yes" = "使用為播放的第一個檔案選擇的參數開啟音訊設備，然後保持開啟狀態以進行無縫播放。以下檔案可能會被重新取樣。";
 
 "subencoding.auto" = "自動偵測";
 

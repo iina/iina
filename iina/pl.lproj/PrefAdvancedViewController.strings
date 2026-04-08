@@ -11,7 +11,7 @@
 "HMa-Vz-EUk.title" = "Zmiany w poniższych ustawieniach zostaną zastosowane dopiero po ponownym uruchomieniu aplikacji.";
 
 /* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Open Log Directory";
+"JDA-g3-RNX.title" = "Otwórz dziennik zdarzeń";
 
 /* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Włącz rejestrowanie zdarzeń";
@@ -32,10 +32,10 @@
 "phK-g9-Vbg.title" = "Wyświetlaj na filmie informacje o odtwarzaniu";
 
 /* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
-"nFf-vh-bNd.title" = "Log level:";
+"nFf-vh-bNd.title" = "Poziom rejestrowania logów:";
 
 /* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
-"Owx-92-Ogg.title" = "Show Log Viewer";
+"Owx-92-Ogg.title" = "Pokaż Przeglądarkę Logów";
 
 /* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
 "S9M-yY-q0w.title" = "Szczegóły";

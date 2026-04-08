@@ -10,6 +10,12 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "线程数:";
 
+/* Class = "NSMenuItem"; title = "Strong"; ObjectID = "6vc-ad-xaq"; */
+"6vc-ad-xaq.title" = "强";
+
+/* Class = "NSTextFieldCell"; title = "Gapless audio:"; ObjectID = "8Fa-ft-1tC"; */
+"8Fa-ft-1tC.title" = "无缝播放：";
+
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
 "YUr-aJ-xfC.title" = "强制使用独立显卡";
 
@@ -27,6 +33,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "视频:";
+
+/* Class = "NSMenuItem"; title = "Weak"; ObjectID = "nsT-r3-brW"; */
+"nsT-r3-brW.title" = "弱";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
 "nwg-2K-G2G.title" = "硬件解码器:";
@@ -93,6 +102,9 @@
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
 "k7b-6o-lCK.title" = "无调整";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "ti2-JH-nXX"; */
+"ti2-JH-nXX.title" = "禁用";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
 "w6E-lw-g7g.title" = "轨道增益";

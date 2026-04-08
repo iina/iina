@@ -149,7 +149,7 @@
 "preference.subtitle" = "Sottotitoli";
 "preference.network" = "Network";
 "preference.control" = "Controlli";
-"preference.keybindings" = "Abbreviazioni";
+"preference.keybindings" = "Scorciatoie";
 "preference.advanced" = "Avanzate";
 "preference.plugins" = "Componenti aggiuntivi";
 "preference.utilities" = "Utilità";
@@ -247,6 +247,7 @@
 "alert.mpv_error" = "Errore %@ (%@) nell'impostazioni dell'utente %@.";
 
 "alert.unsupported_audio" = "File audo esterno non supportato.";
+"alert.unsupported_video" = "File video esterno non supportato.";
 "alert.unsupported_sub" = "Sottotitoli esterni non supportati.";
 "alert.unsupported_url" = "URL non supportato.";
 "alert.wrong_url_format" = "Formato URL errato.";
@@ -382,8 +383,8 @@
 "pl_menu.copy_url" = "Copia URL";
 "pl_menu.copy_url_multi" = "Copia URLs";
 
-"keymapping.title" = "Abbreviazioni";
-"keymapping.message" = "Premi i nuovi tasti per aggiungere o modficare le abbreviazioni.";
+"keymapping.title" = "Scorciatoie da tastiera";
+"keymapping.message" = "Premi la combinazione di tasti.";
 
 "filter.video_filters" = "Filtri Video";
 "filter.audio_filters" = "Filtri Audio";
@@ -391,6 +392,10 @@
 "hwdec.no" = "Disabilita la decodifica hardware.";
 "hwdec.auto" = "Abilita la decodifica hardware. Tuttavia, la maggior parte dei filtri video non funzioneranno in modo corretto.";
 "hwdec.auto-copy" = "Abilita la decodifica hardware. In questo modo verrà utilizzata il doppio della memoria ma i filtri video funzioneranno in modo corretto.";
+
+"gaplessAudio.no" = "Durante la riproduzione di file audio consecutivi, potrebbe verificarsi una breve interruzione tra un brano e l'altro.";
+"gaplessAudio.weak" = "La riproduzione senza interruzioni potrebbe fallire per un breve istante se il formato causa la modifica del decoder o dell'uscita audio.";
+"gaplessAudio.yes" = "Il dispositivo audio è aperto con i parametri scelti per il primo file riprodotto ed è mantenuto aperto per la riproduzione senza interruzioni. I file successivi potrebbero essere sottoposti a ricampionamento.";
 
 "subencoding.auto" = "Rilevamento automatico";
 

@@ -248,6 +248,7 @@
 
 "alert.unsupported_audio" = "فایل صوتی خارجی پشتیبانی‌نشده.
 ";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "زیرنویس خارجی پشتیبانی‌نشده.
 ";
 "alert.unsupported_url" = "این URL ساپورت نمی شود.";
@@ -261,15 +262,15 @@
 
 "alert.target_peak.bad_value" = "مقدار «%@» معتبر نیست.\nلطفا مقداری بین ۱۰ تا ۱۰۰۰۰ و یا صفر، واردکنید.";
 
-"alert.config.new.title" = "New Input Configuration";
-"alert.config.new.message" = "Please enter a name for the new configuration.";
-"alert.config.duplicate.title" = "Duplicate Configuration";
-"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.new.title" = "تنظیمات جدید ورودی";
+"alert.config.new.message" = "لطفاً یک نام برای تنظیمات جدید وارد کنید.";
+"alert.config.duplicate.title" = "تنظیمات تکراری";
+"alert.config.duplicate.message" = "لطفاً یک نام برای تنظیمات تکراری جدید وارد کنید.";
 "alert.config.file_existing.title" = "فايل قبلا ساخته شده";
 "alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
 "alert.config.cannot_create" = "فایل Config غیرقابل ساختن است\n%@";
-"alert.config.cannot_write" = "Cannot write to config file!";
-"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.cannot_write" = "نمیتوان در فایل Config ذخیره کرد!";
+"alert.config.rename.title" = "تغییر نام تنظیمات ورودی";
 "alert.config.rename.message" = "Please enter the new name for the configuration.";
 
 "alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
@@ -279,7 +280,7 @@
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 
 "alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
-"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.empty" = "مقدار نمی تواند خالی باشد!";
 "alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
@@ -295,7 +296,7 @@
 
 "alert.set_default.title" = "ذخیره IINA به عنوان اپ پیشفرض";
 "alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
-"alert.set_default.success" = "Finished with %d success and %d failed.";
+"alert.set_default.success" = "اتمام با %d موفق و %d خطا.";
 
 "alert.add_watch.title" = "Add Watch Property";
 "alert.add_watch.message" = "Please enter a valid mpv property name.";
@@ -308,7 +309,7 @@
 
 "alert.open_url.title" = "باز کردن نشانی";
 "alert.open_url.message" = "لطفا URL را وارد کنید:";
-"alert.choose_media_file.title" = "Choose Media Files";
+"alert.choose_media_file.title" = "انتخاب کردن فایل";
 
 "alert.add_url.title" = "URL رو اضافه کن";
 "alert.add_url.message" = "لطفا URL را وارد کنید:";
@@ -394,6 +395,10 @@
 "hwdec.auto" = "فعال‌کردن رمزگشایی سخت‌افزاری. با اینکه اکثر فیلترهای ویدیویی به‌درستی کار نخواهندکرد.";
 "hwdec.auto-copy" = "فعال‌کردن رمزگشایی سخت‌افزاری. این کار، مصرف حافظه را دوبرابر کرده اما با فیلترهای ویدیویی کار می‌کند.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
 "subencoding.auto" = "تشخیص خودکار";
 
 "osc_toolbar.settings" = "تنظیمات سریع";
@@ -418,39 +423,39 @@
 
 // Touch bar
 
-"touchbar.ahead_15" = "15sec Ahead";
-"touchbar.ahead_30" = "30sec Ahead";
-"touchbar.back_15" = "15sec Back";
-"touchbar.back_30" = "30sec Back";
-"touchbar.next_video" = "Next Video";
-"touchbar.prev_video" = "Previous Video";
+"touchbar.ahead_15" = "۱۵ ثانیه جلو";
+"touchbar.ahead_30" = "۳۰ ثانیه جلو";
+"touchbar.back_15" = "۱۵ ثانیه عقب";
+"touchbar.back_30" = "۳۰ ثانیه عقب";
+"touchbar.next_video" = "ویدیو بعدی";
+"touchbar.prev_video" = "ویدیو قبلی";
 "touchbar.increase_volume" = "صدا +";
 "touchbar.decrease_volume" = "صدا -";
-"touchbar.rewind" = "Rewind";
-"touchbar.fast_forward" = "Fast Forward";
-"touchbar.play_pause" = "Play / Pause";
+"touchbar.rewind" = "عقب بردن";
+"touchbar.fast_forward" = "سریع به جلو";
+"touchbar.play_pause" = "پخش / مکث";
 "touchbar.seek" = "جستجو";
-"touchbar.time" = "Time Position";
-"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.time" = "موقعیت زمان";
+"touchbar.remainingTimeOrTotalDuration" = "زمان باقی مانده/کل زمان";
 "touchbar.toggle_pip" = "تغییر به تصویر در تصویر";
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
+"permissions.network-request.name" = "درخواست شبکه";
 "permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
 "permissions.network-request.any_site" = "Any site";
 "permissions.show-osd.name" = "Show OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.name" = "نمایش اعلان‌ها";
 "permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
 "permissions.video-overlay.name" = "Add overlays on videos";
 "permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
 "permissions.file-system.name" = "Access the file system";
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
+"plugin.install" = "نصب";
+"plugin.installed" = "نصب شده";
+"plugin.not_installed" = "نصب نشده";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";

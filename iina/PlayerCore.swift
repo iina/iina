@@ -1527,6 +1527,11 @@ class PlayerCore: NSObject {
   ///     that when this method pauses playback `pauseChanged` will call `displayIdle`. That is not a problem as that method
   ///     does not immediately stop the display link. The link will still be running when `notifyWindowVideoSizeChanged`
   ///     resumes playback.
+  /// - Important: The mpv
+  ///     [playlist-play-index](https://mpv.io/manual/stable/#command-interface-playlist-play-index)
+  ///     playlist manipulation command is intentionally used instead of setting the mpv
+  ///     [playlist-pos](https://mpv.io/manual/stable/#command-interface-playlist-pos) property so that double
+  ///     clicking in the playlist on the entry that is currently playing reloads that entry.
   /// - Parameter pos: Position of the entry in the playlist to be played.
   func playFileInPlaylist(_ pos: Int) {
     mainWindow.videoView.displayActive()
@@ -1534,7 +1539,7 @@ class PlayerCore: NSObject {
       log("Pausing playback before playing entry at index \(pos) in the playlist")
       mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
     }
-    mpv.setInt(MPVProperty.playlistPos, pos)
+    mpv.command(.playlistPlayIndex, args: [String(pos)], level: .verbose)
     getPlaylist()
   }
 

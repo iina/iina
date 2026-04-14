@@ -225,8 +225,8 @@
 "menu.more_plugin" = "Еще…";
 "menu.conflicting_shortcuts" = "Конфликтующие сочетания клавиш…";
 "menu.reload_plugins" = "Перезагрузить все плагины";
-"menu.show_plugins_panel" = "Показать панель расширений";
-"menu.hide_plugins_panel" = "Скрыть панель расширений";
+"menu.show_plugins_panel" = "Показать панель плагинов";
+"menu.hide_plugins_panel" = "Скрыть панель плагинов";
 
 "track.audio" = "Аудио";
 "track.none" = "<Нет>";
@@ -406,7 +406,7 @@
 "osc_toolbar.music_mode" = "Музыкальный режим";
 "osc_toolbar.sub_track" = "Субтитры";
 "osc_toolbar.screenshot" = "Снимок экрана";
-"osc_toolbar.plugins" = "Плагины";
+"osc_toolbar.plugins" = "Показать панель плагинов";
 
 "mini_player.album_art" = "Изменить обложку альбома";
 "mini_player.loop" = "Повторять";

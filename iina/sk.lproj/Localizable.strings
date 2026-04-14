@@ -104,7 +104,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "osd.sub_visible" = "Viditeľné titulky";
 "osd.sub_second_delay.nodelay" = "Oneskorenie sekundárnych titulkov: bez oneskorenia";
 "osd.sub_second_delay.later" = "Oneskorenie sekundárnych titulkov: %@s neskôr";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
+"osd.sub_second_delay.earlier" = "Posun sekundárnych titulkov: %@ s skôr";
 "osd.sub_second_hidden" = "Skryté sekundárne titulky";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %@";
 "osd.sub_second_visible" = "Viditeľné sekundárne titulky";
@@ -462,6 +462,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "plugin.install_error.file_not_found" = "Súbor balíčka sa nedá nájsť.";
 "plugin.install_error.cannot_download" = "Sťahovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_unpackage" = "Rozbaľovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
-"plugin.install_error.cannot_load" = "IINA nemôže načítať tento plug-in. Môže byť v chybnom formáte.";
+"plugin.install_error.cannot_load" = "IINA nemôže načítať tento plugin. Môže byť v chybnom formáte.";
 "plugin.check_for_updates" = "Skontrolovať aktualizácie";
 "plugin.updating" = "Sťahovanie aktualizácie…";

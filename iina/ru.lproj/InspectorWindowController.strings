@@ -2,7 +2,7 @@
 "0vG-Pg-DIl.title" = "Форсированная";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "Кадр./с:";
+"1dz-Vt-0MO.title" = "Кадры/с:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
 "4jf-w4-kkv.title" = "Путь к файлу:";
@@ -11,7 +11,7 @@
 "5H6-qJ-RDS.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "Кадр./с:";
+"7QX-tu-rvs.title" = "Кадры/с:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
 "9eq-rd-zGy.title" = "Название:";
@@ -62,7 +62,7 @@
 "KqD-NM-WiK.title" = "Размер:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "Luq-rQ-aO4"; */
-"Luq-rQ-aO4.title" = "Каналов:";
+"Luq-rQ-aO4.title" = "Каналы:";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
 "MME-KZ-jrG.title" = "Драйвер:";
@@ -113,10 +113,10 @@
 "f7a-XG-NCc.label" = "Общее";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
-"f7i-wX-uxQ.title" = "Трек:";
+"f7i-wX-uxQ.title" = "Дорожка:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Кадр./с, расчетное значение:";
+"g8p-Ec-awO.title" = "Кадры/с, расчетное значение:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
 "gDG-Eq-1Bc.title" = "ВИДЕО";
@@ -155,7 +155,7 @@
 "tNS-gW-PcC.title" = "Просмотр";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
-"vrP-XL-Weg.title" = "Частота дискр.:";
+"vrP-XL-Weg.title" = "Частота:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
 "xix-0S-ehE.title" = "Декодер:";

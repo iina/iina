@@ -21,7 +21,7 @@ class ControlBarView: NSVisualEffectView {
 
   override func awakeFromNib() {
     if #available(macOS 26, *) {
-      self.roundCorners(withRadius: 10)
+      self.applyLiquidGlass(cornerRadius: 10)
     } else {
       self.roundCorners(withRadius: 6)
     }

@@ -605,7 +605,9 @@ class MainWindowController: PlayerWindowController {
     let _ = quickSettingView
 
     // buffer indicator view
-    bufferIndicatorView.roundCorners(withRadius: 10)
+    if #unavailable(macOS 26) {
+      bufferIndicatorView.roundCorners(withRadius: 10)
+    }
     updateBufferIndicatorView()
 
     // thumbnail peek view
@@ -618,10 +620,23 @@ class MainWindowController: PlayerWindowController {
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
     }
+
+    // Apply Liquid Glass effects on macOS 26+
+    if #available(macOS 26, *) {
+      osdVisualEffectView.applyLiquidGlass(cornerRadius: 10)
+      additionalInfoView.applyLiquidGlass(cornerRadius: 10)
+      bufferIndicatorView.applyLiquidGlass(cornerRadius: 10)
+      sideBarView.applyLiquidGlass()
+      controlBarBottom.applyLiquidGlass()
+      titleBarView.applyLiquidGlass()
+      pipOverlayView.applyLiquidGlass()
+    } else {
+      osdVisualEffectView.roundCorners(withRadius: 10)
+      additionalInfoView.roundCorners(withRadius: 10)
+    }
+
     // hide other views
     osdVisualEffectView.isHidden = true
-    osdVisualEffectView.roundCorners(withRadius: 10)
-    additionalInfoView.roundCorners(withRadius: 10)
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
     timePreviewWhenSeek.isHidden = true

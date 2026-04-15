@@ -706,6 +706,35 @@ extension NSVisualEffectView {
   func roundCorners(withRadius cornerRadius: CGFloat) {
     maskImage = .maskImage(cornerRadius: cornerRadius)
   }
+
+  /// Overlay a Liquid Glass effect on this NSVisualEffectView on macOS 26+.
+  /// Disables the legacy vibrancy material and inserts an `NSGlassEffectView` underneath all subviews.
+  /// On older systems this method is a no-op.
+  /// - Parameter cornerRadius: Corner radius for the glass effect. Pass `nil` to use the system default.
+  /// - Returns: The inserted `NSGlassEffectView`, or `nil` if running on an older OS.
+  @discardableResult
+  func applyLiquidGlass(cornerRadius: CGFloat? = nil) -> NSView? {
+    if #available(macOS 26, *) {
+      // Disable legacy vibrancy so it doesn't block the glass material
+      self.state = .inactive
+      self.isHidden = false
+
+      let glassView = NSGlassEffectView()
+      if let cornerRadius = cornerRadius {
+        glassView.cornerRadius = cornerRadius
+      }
+      glassView.translatesAutoresizingMaskIntoConstraints = false
+      self.addSubview(glassView, positioned: .below, relativeTo: self.subviews.first)
+      NSLayoutConstraint.activate([
+        glassView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+        glassView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+        glassView.topAnchor.constraint(equalTo: self.topAnchor),
+        glassView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+      ])
+      return glassView
+    }
+    return nil
+  }
 }
 
 

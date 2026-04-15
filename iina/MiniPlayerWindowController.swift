@@ -119,7 +119,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     // close button
     closeButtonVE.action = #selector(self.close)
     closeButtonBox.action = #selector(self.close)
-    closeButtonBackgroundViewVE.roundCorners(withRadius: 8)
+    if #available(macOS 26, *) {
+      backgroundView.applyLiquidGlass()
+      playlistWrapperView.applyLiquidGlass()
+      closeButtonBackgroundViewVE.applyLiquidGlass(cornerRadius: 8)
+    } else {
+      closeButtonBackgroundViewVE.roundCorners(withRadius: 8)
+    }
 
     // hide controls initially
     closeButtonBackgroundViewBox.isHidden = true

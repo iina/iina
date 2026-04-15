@@ -236,7 +236,7 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
     case "ontop":
       return window.isOntop
     case "visible":
-      return window.window!.occlusionState == .visible
+      return window.window!.occlusionState.contains(.visible)
     case "sidebar":
       return window.sideBarStatus == .settings ? window.quickSettingView.currentTab.name : NSNull()
     case "screens":

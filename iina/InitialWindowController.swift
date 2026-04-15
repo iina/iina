@@ -162,11 +162,33 @@ class InitialWindowController: NSWindowController {
     reloadData()
   }
 
+  private var liquidGlassView: NSView?
+
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
     window.appearance = NSAppearance(iinaTheme: theme)
     if #available(macOS 26, *) {
-      visualEffectView.applyLiquidGlass()
+      // Make the window fully transparent so glass can show the desktop
+      window.isOpaque = false
+      window.backgroundColor = .clear
+
+      // Hide the old blur and gradient layers
+      visualEffectView.isHidden = true
+      leftOverlayView.isHidden = true
+
+      // Add a single full-size glass view as the base layer (once)
+      if liquidGlassView == nil {
+        let glassView = NSGlassEffectView()
+        glassView.translatesAutoresizingMaskIntoConstraints = false
+        mainView.addSubview(glassView, positioned: .below, relativeTo: mainView.subviews.first)
+        NSLayoutConstraint.activate([
+          glassView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+          glassView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+          glassView.topAnchor.constraint(equalTo: mainView.topAnchor),
+          glassView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
+        ])
+        liquidGlassView = glassView
+      }
     } else if #available(macOS 10.16, *) {
       let gradientLayer = CAGradientLayer()
       gradientLayer.colors = window.effectiveAppearance.isDark ?

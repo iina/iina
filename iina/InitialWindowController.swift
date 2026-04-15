@@ -165,7 +165,9 @@ class InitialWindowController: NSWindowController {
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
     window.appearance = NSAppearance(iinaTheme: theme)
-    if #available(macOS 10.16, *) {
+    if #available(macOS 26, *) {
+      visualEffectView.applyLiquidGlass()
+    } else if #available(macOS 10.16, *) {
       let gradientLayer = CAGradientLayer()
       gradientLayer.colors = window.effectiveAppearance.isDark ?
         [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :

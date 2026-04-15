@@ -45,6 +45,11 @@ class PlaySliderCell: NSSliderCell {
   // MARK:- Displaying the Cell
 
   override func drawKnob(_ knobRect: NSRect) {
+    // On macOS 26, use the system's Liquid Glass knob
+    if #available(macOS 26, *) {
+      super.drawKnob(knobRect)
+      return
+    }
     let isLightTheme = !controlView!.window!.effectiveAppearance.isDark
     if isLightTheme {
       drawKnobWithShadow(knobRect: knobRect)

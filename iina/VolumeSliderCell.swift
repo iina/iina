@@ -16,6 +16,11 @@ class VolumeSliderCell: NSSliderCell {
   }
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
+    // On macOS 26, let the system draw the full Liquid Glass slider
+    if #available(macOS 26, *) {
+      super.drawBar(inside: rect, flipped: flipped)
+      return
+    }
     NSGraphicsContext.saveGraphicsState()
     if maxValue > 100 {
       // round this value to obtain a pixel perfect clip line

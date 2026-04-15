@@ -18,7 +18,7 @@ class ControlBarView: NSVisualEffectView {
   var isDragging: Bool = false
 
   private var isAlignFeedbackSent = false
-  private var glassView: NSView?
+  private(set) var glassView: NSView?
 
   override func awakeFromNib() {
     if #available(macOS 26, *) {

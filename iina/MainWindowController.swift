@@ -623,6 +623,12 @@ class MainWindowController: PlayerWindowController {
         $0?.applyLiquidGlass(cornerRadius: 10)
       }
       controlBarFloating.setupLiquidGlass()
+      // Swap controlBarFloating → glassView in fadeableViews so show/hide animations target the glass
+      if let glass = controlBarFloating.glassView {
+        if let idx = fadeableViews.firstIndex(where: { $0 === controlBarFloating }) {
+          fadeableViews[idx] = glass
+        }
+      }
       [controlBarBottom, sideBarView, titleBarView, pipOverlayView].forEach {
         ($0 as? NSVisualEffectView)?.applyLiquidGlass()
       }
@@ -774,7 +780,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     // reset
-    ([controlBarFloating, controlBarBottom, oscTopMainView] as [NSView]).forEach { $0.isHidden = true }
+    ([controlBarFloating, controlBarFloating.glassView, controlBarBottom, oscTopMainView] as [NSView?]).compactMap({ $0 }).forEach { $0.isHidden = true }
     titleBarHeightConstraint.constant = TitleBarHeightNormal
 
     controlBarFloating.isDragging = false
@@ -868,7 +874,8 @@ class MainWindowController: PlayerWindowController {
     }
 
     if currentControlBar != nil {
-      fadeableViews.append(currentControlBar!)
+      // On macOS 26, animate the glass view instead of the hidden VEV
+      fadeableViews.append(controlBarFloating.glassView ?? currentControlBar!)
     }
     showUI()
 

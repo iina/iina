@@ -57,6 +57,7 @@ class ControlBarView: NSVisualEffectView {
 
       let glass = DraggableGlassEffectView()
       glass.controlBar = self
+      glass.alphaValue = 0.6
       glass.cornerRadius = 10
       glass.translatesAutoresizingMaskIntoConstraints = false
       parent.addSubview(glass, positioned: .above, relativeTo: self)

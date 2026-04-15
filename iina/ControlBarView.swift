@@ -8,6 +8,27 @@
 
 import Cocoa
 
+// MARK: - Draggable Glass Effect View
+
+/// NSGlassEffectView subclass that forwards background-drag events to a ControlBarView.
+/// Button/slider clicks pass through to subviews normally; only empty-area drags are forwarded.
+@available(macOS 26, *)
+class DraggableGlassEffectView: NSGlassEffectView {
+  weak var controlBar: ControlBarView?
+
+  override func mouseDown(with event: NSEvent) {
+    controlBar?.handleDragMouseDown(in: self, with: event)
+  }
+  override func mouseDragged(with event: NSEvent) {
+    controlBar?.handleDragMouseDragged(in: self, with: event)
+  }
+  override func mouseUp(with event: NSEvent) {
+    controlBar?.handleDragMouseUp(in: self)
+  }
+}
+
+// MARK: - ControlBarView
+
 class ControlBarView: NSVisualEffectView {
 
   @IBOutlet weak var xConstraint: NSLayoutConstraint!
@@ -30,12 +51,12 @@ class ControlBarView: NSVisualEffectView {
   }
 
   /// Replace the NSVisualEffectView background with Liquid Glass on macOS 26+.
-  /// Must be called after the view is fully added to the window hierarchy.
   func setupLiquidGlass() {
     if #available(macOS 26, *) {
       guard let parent = self.superview, glassView == nil else { return }
 
-      let glass = NSGlassEffectView()
+      let glass = DraggableGlassEffectView()
+      glass.controlBar = self
       glass.cornerRadius = 10
       glass.translatesAutoresizingMaskIntoConstraints = false
       parent.addSubview(glass, positioned: .above, relativeTo: self)
@@ -71,12 +92,9 @@ class ControlBarView: NSVisualEffectView {
     }
   }
 
-  // MARK: - Drag target
+  // MARK: - Drag handling
 
-  /// The view that should receive drag events (glass view on macOS 26, self otherwise).
-  var dragTargetView: NSView { glassView ?? self }
-
-  private func handleMouseDown(in view: NSView, with event: NSEvent) {
+  func handleDragMouseDown(in view: NSView, with event: NSEvent) {
     mousePosRelatedToView = NSEvent.mouseLocation
     mousePosRelatedToView!.x -= view.frame.origin.x
     mousePosRelatedToView!.y -= view.frame.origin.y
@@ -84,7 +102,7 @@ class ControlBarView: NSVisualEffectView {
     isDragging = true
   }
 
-  private func handleMouseDragged(in view: NSView, with event: NSEvent) {
+  func handleDragMouseDragged(in view: NSView, with event: NSEvent) {
     guard let mousePos = mousePosRelatedToView, let windowFrame = view.window?.frame else { return }
     let currentLocation = NSEvent.mouseLocation
     var newOrigin = CGPoint(
@@ -115,23 +133,22 @@ class ControlBarView: NSVisualEffectView {
     yConstraint.constant = newOrigin.y
   }
 
-  private func handleMouseUp(in view: NSView) {
+  func handleDragMouseUp(in view: NSView) {
     isDragging = false
     guard let windowFrame = view.window?.frame else { return }
     Preference.set(xConstraint.constant / windowFrame.width, for: .controlBarPositionHorizontal)
     Preference.set(yConstraint.constant / windowFrame.height, for: .controlBarPositionVertical)
   }
 
+  // Legacy path (macOS < 26)
   override func mouseDown(with event: NSEvent) {
-    handleMouseDown(in: glassView ?? self, with: event)
+    handleDragMouseDown(in: self, with: event)
   }
-
   override func mouseDragged(with event: NSEvent) {
-    handleMouseDragged(in: glassView ?? self, with: event)
+    handleDragMouseDragged(in: self, with: event)
   }
-
   override func mouseUp(with event: NSEvent) {
-    handleMouseUp(in: glassView ?? self)
+    handleDragMouseUp(in: self)
   }
 
 }

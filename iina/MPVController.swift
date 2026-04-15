@@ -1105,7 +1105,13 @@ class MPVController: NSObject {
       let userData = event.pointee.reply_userdata
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
-      guard let hook = $hooks.withLock({ $0[userData] }) else { break }
+      guard let hook = $hooks.withLock({ $0[userData] }) else {
+        // Hook not found, probably because it's from an unloaded plugin.
+        // Still need to call hook_continue otherwise it will stuck.
+        log("Hook \(hookID) not found", level: .warning)
+        mpv_hook_continue(self.mpv, hookID)
+        break
+      }
       hook.call {
         mpv_hook_continue(self.mpv, hookID)
       }

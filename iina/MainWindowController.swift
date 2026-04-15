@@ -617,20 +617,18 @@ class MainWindowController: PlayerWindowController {
     // other initialization
     titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     cachedScreenCount = NSScreen.screens.count
-    [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
-      $0?.state = .active
-    }
-
-    // Apply Liquid Glass effects on macOS 26+
+    // Apply Liquid Glass on macOS 26+; use legacy vibrancy on older systems
     if #available(macOS 26, *) {
-      osdVisualEffectView.applyLiquidGlass(cornerRadius: 10)
-      additionalInfoView.applyLiquidGlass(cornerRadius: 10)
-      bufferIndicatorView.applyLiquidGlass(cornerRadius: 10)
-      sideBarView.applyLiquidGlass()
-      controlBarBottom.applyLiquidGlass()
-      titleBarView.applyLiquidGlass()
-      pipOverlayView.applyLiquidGlass()
+      [osdVisualEffectView, additionalInfoView, bufferIndicatorView].forEach {
+        $0?.applyLiquidGlass(cornerRadius: 10)
+      }
+      [controlBarFloating, controlBarBottom, sideBarView, titleBarView, pipOverlayView].forEach {
+        ($0 as? NSVisualEffectView)?.applyLiquidGlass()
+      }
     } else {
+      [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
+        $0?.state = .active
+      }
       osdVisualEffectView.roundCorners(withRadius: 10)
       additionalInfoView.roundCorners(withRadius: 10)
     }

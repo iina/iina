@@ -707,24 +707,37 @@ extension NSVisualEffectView {
     maskImage = .maskImage(cornerRadius: cornerRadius)
   }
 
-  /// Overlay a Liquid Glass effect on this NSVisualEffectView on macOS 26+.
-  /// Disables the legacy vibrancy material and inserts an `NSGlassEffectView` underneath all subviews.
-  /// On older systems this method is a no-op.
+  /// Replace the legacy vibrancy effect with Liquid Glass on macOS 26+.
+  ///
+  /// NSVisualEffectView blocks Liquid Glass material, so this method:
+  /// 1. Neutralizes this view's own blur/vibrancy rendering
+  /// 2. Inserts an `NSGlassEffectView` in the **superview** behind this view
+  ///
+  /// The NSVisualEffectView remains as a transparent container for its subviews.
+  /// On older systems this method is a no-op. Safe to call multiple times.
+  ///
   /// - Parameter cornerRadius: Corner radius for the glass effect. Pass `nil` to use the system default.
-  /// - Returns: The inserted `NSGlassEffectView`, or `nil` if running on an older OS.
+  /// - Returns: The inserted `NSGlassEffectView`, or `nil` if not applicable.
   @discardableResult
   func applyLiquidGlass(cornerRadius: CGFloat? = nil) -> NSView? {
     if #available(macOS 26, *) {
-      // Disable legacy vibrancy so it doesn't block the glass material
-      self.state = .inactive
-      self.isHidden = false
+      guard let superview = self.superview else { return nil }
 
+      // Prevent duplicate glass views on repeated calls
+      let existingGlass = superview.subviews.first { $0 is NSGlassEffectView && $0.frame == self.frame }
+      if existingGlass != nil { return existingGlass }
+
+      // Neutralize the NSVisualEffectView so it doesn't block Liquid Glass
+      self.state = .inactive
+      self.maskImage = nil
+
+      // Insert glass view in superview, behind this view
       let glassView = NSGlassEffectView()
       if let cornerRadius = cornerRadius {
         glassView.cornerRadius = cornerRadius
       }
       glassView.translatesAutoresizingMaskIntoConstraints = false
-      self.addSubview(glassView, positioned: .below, relativeTo: self.subviews.first)
+      superview.addSubview(glassView, positioned: .below, relativeTo: self)
       NSLayoutConstraint.activate([
         glassView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
         glassView.trailingAnchor.constraint(equalTo: self.trailingAnchor),

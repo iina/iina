@@ -707,43 +707,61 @@ extension NSVisualEffectView {
     maskImage = .maskImage(cornerRadius: cornerRadius)
   }
 
-  /// Replace the legacy vibrancy effect with Liquid Glass on macOS 26+.
+  /// Replace this NSVisualEffectView with an `NSGlassEffectView` on macOS 26+.
   ///
-  /// NSVisualEffectView blocks Liquid Glass material, so this method:
-  /// 1. Neutralizes this view's own blur/vibrancy rendering
-  /// 2. Inserts an `NSGlassEffectView` in the **superview** behind this view
+  /// NSVisualEffectView blocks Liquid Glass, so this method hides the VEV,
+  /// moves its subviews into a new `NSGlassEffectView`, and migrates their
+  /// Auto Layout constraints. On older systems this is a no-op.
+  /// Safe to call multiple times (subsequent calls return the existing glass view).
   ///
-  /// The NSVisualEffectView remains as a transparent container for its subviews.
-  /// On older systems this method is a no-op. Safe to call multiple times.
-  ///
-  /// - Parameter cornerRadius: Corner radius for the glass effect. Pass `nil` to use the system default.
-  /// - Returns: The inserted `NSGlassEffectView`, or `nil` if not applicable.
+  /// - Parameter cornerRadius: Corner radius for the glass effect. Pass `nil` for system default.
+  /// - Returns: The `NSGlassEffectView`, or `nil` on older OS.
   @discardableResult
   func applyLiquidGlass(cornerRadius: CGFloat? = nil) -> NSView? {
     if #available(macOS 26, *) {
-      guard let superview = self.superview else { return nil }
+      guard let parent = self.superview else { return nil }
 
-      // Prevent duplicate glass views on repeated calls
-      let existingGlass = superview.subviews.first { $0 is NSGlassEffectView && $0.frame == self.frame }
-      if existingGlass != nil { return existingGlass }
+      // Prevent duplicates on repeated calls
+      if let existing = parent.subviews.first(where: { $0 is NSGlassEffectView }) {
+        return existing
+      }
 
-      // Neutralize the NSVisualEffectView so it doesn't block Liquid Glass
-      self.state = .inactive
-      self.maskImage = nil
-
-      // Insert glass view in superview, behind this view
+      // Create the glass view and position it where the VEV is
       let glassView = NSGlassEffectView()
       if let cornerRadius = cornerRadius {
         glassView.cornerRadius = cornerRadius
       }
       glassView.translatesAutoresizingMaskIntoConstraints = false
-      superview.addSubview(glassView, positioned: .below, relativeTo: self)
+      parent.addSubview(glassView, positioned: .above, relativeTo: self)
       NSLayoutConstraint.activate([
         glassView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
         glassView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         glassView.topAnchor.constraint(equalTo: self.topAnchor),
         glassView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
       ])
+
+      // Migrate subviews from VEV into the glass view, recreating constraints
+      let subviewsToMove = Array(self.subviews)
+      let constraintsToMigrate = self.constraints.filter { c in
+        subviewsToMove.contains(where: { c.firstItem === $0 || c.secondItem === $0 })
+      }
+      for subview in subviewsToMove {
+        glassView.addSubview(subview)
+      }
+      for old in constraintsToMigrate {
+        let first: AnyObject = (old.firstItem === self) ? glassView : old.firstItem ?? glassView
+        let second: AnyObject? = (old.secondItem === self) ? glassView : old.secondItem
+        let migrated = NSLayoutConstraint(
+          item: first, attribute: old.firstAttribute,
+          relatedBy: old.relation,
+          toItem: second, attribute: old.secondAttribute,
+          multiplier: old.multiplier, constant: old.constant)
+        migrated.priority = old.priority
+        migrated.isActive = true
+      }
+
+      // Hide the now-empty VEV so it doesn't block the glass
+      self.isHidden = true
       return glassView
     }
     return nil

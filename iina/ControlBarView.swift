@@ -18,39 +18,74 @@ class ControlBarView: NSVisualEffectView {
   var isDragging: Bool = false
 
   private var isAlignFeedbackSent = false
+  private var glassView: NSView?
 
   override func awakeFromNib() {
     if #available(macOS 26, *) {
-      // Keep the ControlBarView visible (it handles mouse dragging),
-      // but add an NSGlassEffectView inside as the background layer.
-      self.state = .inactive
-      self.maskImage = nil
-      let glassView = NSGlassEffectView()
-      glassView.cornerRadius = 10
-      glassView.translatesAutoresizingMaskIntoConstraints = false
-      self.addSubview(glassView, positioned: .below, relativeTo: self.subviews.first)
-      NSLayoutConstraint.activate([
-        glassView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-        glassView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-        glassView.topAnchor.constraint(equalTo: self.topAnchor),
-        glassView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-      ])
+      // Glass setup deferred to setupLiquidGlass() called from MainWindowController
     } else {
       self.roundCorners(withRadius: 6)
     }
     self.translatesAutoresizingMaskIntoConstraints = false
   }
 
-  override func mouseDown(with event: NSEvent) {
+  /// Replace the NSVisualEffectView background with Liquid Glass on macOS 26+.
+  /// Must be called after the view is fully added to the window hierarchy.
+  func setupLiquidGlass() {
+    if #available(macOS 26, *) {
+      guard let parent = self.superview, glassView == nil else { return }
+
+      let glass = NSGlassEffectView()
+      glass.cornerRadius = 10
+      glass.translatesAutoresizingMaskIntoConstraints = false
+      parent.addSubview(glass, positioned: .above, relativeTo: self)
+      NSLayoutConstraint.activate([
+        glass.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+        glass.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+        glass.topAnchor.constraint(equalTo: self.topAnchor),
+        glass.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+      ])
+
+      // Migrate subviews and their constraints into the glass view
+      let subviewsToMove = Array(self.subviews)
+      let constraintsToMigrate = self.constraints.filter { c in
+        subviewsToMove.contains(where: { c.firstItem === $0 || c.secondItem === $0 })
+      }
+      for subview in subviewsToMove {
+        glass.addSubview(subview)
+      }
+      for old in constraintsToMigrate {
+        let first: AnyObject = (old.firstItem === self) ? glass : old.firstItem ?? glass
+        let second: AnyObject? = (old.secondItem === self) ? glass : old.secondItem
+        let migrated = NSLayoutConstraint(
+          item: first, attribute: old.firstAttribute,
+          relatedBy: old.relation,
+          toItem: second, attribute: old.secondAttribute,
+          multiplier: old.multiplier, constant: old.constant)
+        migrated.priority = old.priority
+        migrated.isActive = true
+      }
+
+      self.isHidden = true
+      self.glassView = glass
+    }
+  }
+
+  // MARK: - Drag target
+
+  /// The view that should receive drag events (glass view on macOS 26, self otherwise).
+  var dragTargetView: NSView { glassView ?? self }
+
+  private func handleMouseDown(in view: NSView, with event: NSEvent) {
     mousePosRelatedToView = NSEvent.mouseLocation
-    mousePosRelatedToView!.x -= frame.origin.x
-    mousePosRelatedToView!.y -= frame.origin.y
-    isAlignFeedbackSent = abs(frame.origin.x - (window!.frame.width - frame.width) / 2) <= 5
+    mousePosRelatedToView!.x -= view.frame.origin.x
+    mousePosRelatedToView!.y -= view.frame.origin.y
+    isAlignFeedbackSent = abs(view.frame.origin.x - (view.window!.frame.width - view.frame.width) / 2) <= 5
     isDragging = true
   }
 
-  override func mouseDragged(with event: NSEvent) {
-    guard let mousePos = mousePosRelatedToView, let windowFrame = window?.frame else { return }
+  private func handleMouseDragged(in view: NSView, with event: NSEvent) {
+    guard let mousePos = mousePosRelatedToView, let windowFrame = view.window?.frame else { return }
     let currentLocation = NSEvent.mouseLocation
     var newOrigin = CGPoint(
       x: currentLocation.x - mousePos.x,
@@ -58,7 +93,7 @@ class ControlBarView: NSVisualEffectView {
     )
     // stick to center
     if Preference.bool(for: .controlBarStickToCenter) {
-      let xPosWhenCenter = (windowFrame.width - frame.width) / 2
+      let xPosWhenCenter = (windowFrame.width - view.frame.width) / 2
       if abs(newOrigin.x - xPosWhenCenter) <= 5 {
         newOrigin.x = xPosWhenCenter
         if !isAlignFeedbackSent {
@@ -70,22 +105,33 @@ class ControlBarView: NSVisualEffectView {
       }
     }
     // bound to window frame
-    let xMax = windowFrame.width - frame.width - 10
-    let yMax = windowFrame.height - frame.height - 25
+    let xMax = windowFrame.width - view.frame.width - 10
+    let yMax = windowFrame.height - view.frame.height - 25
     newOrigin = newOrigin.constrained(to: NSRect(x: 10, y: 0, width: xMax, height: yMax))
     // apply position
-    let newConstraint = newOrigin.x + frame.width / 2
-    xConstraint.constant = userInterfaceLayoutDirection == .rightToLeft ?
+    let newConstraint = newOrigin.x + view.frame.width / 2
+    xConstraint.constant = view.userInterfaceLayoutDirection == .rightToLeft ?
       windowFrame.width - newConstraint : newConstraint
     yConstraint.constant = newOrigin.y
   }
 
-  override func mouseUp(with event: NSEvent) {
+  private func handleMouseUp(in view: NSView) {
     isDragging = false
-    guard let windowFrame = window?.frame else { return }
-    // save final position
+    guard let windowFrame = view.window?.frame else { return }
     Preference.set(xConstraint.constant / windowFrame.width, for: .controlBarPositionHorizontal)
     Preference.set(yConstraint.constant / windowFrame.height, for: .controlBarPositionVertical)
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    handleMouseDown(in: glassView ?? self, with: event)
+  }
+
+  override func mouseDragged(with event: NSEvent) {
+    handleMouseDragged(in: glassView ?? self, with: event)
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    handleMouseUp(in: glassView ?? self)
   }
 
 }

@@ -622,7 +622,8 @@ class MainWindowController: PlayerWindowController {
       [osdVisualEffectView, additionalInfoView, bufferIndicatorView].forEach {
         $0?.applyLiquidGlass(cornerRadius: 10)
       }
-      [controlBarFloating, controlBarBottom, sideBarView, titleBarView, pipOverlayView].forEach {
+      // controlBarFloating handles its own glass in ControlBarView.awakeFromNib()
+      [controlBarBottom, sideBarView, titleBarView, pipOverlayView].forEach {
         ($0 as? NSVisualEffectView)?.applyLiquidGlass()
       }
     } else {

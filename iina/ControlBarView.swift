@@ -21,7 +21,20 @@ class ControlBarView: NSVisualEffectView {
 
   override func awakeFromNib() {
     if #available(macOS 26, *) {
-      self.applyLiquidGlass(cornerRadius: 10)
+      // Keep the ControlBarView visible (it handles mouse dragging),
+      // but add an NSGlassEffectView inside as the background layer.
+      self.state = .inactive
+      self.maskImage = nil
+      let glassView = NSGlassEffectView()
+      glassView.cornerRadius = 10
+      glassView.translatesAutoresizingMaskIntoConstraints = false
+      self.addSubview(glassView, positioned: .below, relativeTo: self.subviews.first)
+      NSLayoutConstraint.activate([
+        glassView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+        glassView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+        glassView.topAnchor.constraint(equalTo: self.topAnchor),
+        glassView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+      ])
     } else {
       self.roundCorners(withRadius: 6)
     }

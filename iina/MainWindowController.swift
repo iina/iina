@@ -633,6 +633,10 @@ class MainWindowController: PlayerWindowController {
         if let idx = fadeableViews.firstIndex(where: { $0 === controlBarFloating }) {
           fadeableViews[idx] = glass
         }
+        // Hide the glass view when the OSC is not in floating mode
+        if oscPosition != .floating {
+          glass.isHidden = true
+        }
       }
       [controlBarBottom, sideBarView, titleBarView, pipOverlayView].forEach {
         ($0 as? NSVisualEffectView)?.applyLiquidGlass()
@@ -782,6 +786,10 @@ class MainWindowController: PlayerWindowController {
     if let cb = currentControlBar {
       // remove current osc view from fadeable views
       fadeableViews = fadeableViews.filter { $0 != cb }
+    }
+    // Also remove the floating glass view — in floating mode it replaces controlBarFloating in fadeableViews
+    if let glass = controlBarFloating.glassView {
+      fadeableViews = fadeableViews.filter { $0 !== glass }
     }
 
     // reset

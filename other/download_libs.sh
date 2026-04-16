@@ -7,6 +7,7 @@ ARCH="universal"
 # github | iina (use iina to get the binary included in the latest release)
 YT_DLP_SOURCE="github"
 PARALLEL_DOWNLOADS=5
+SKIP_PLUGINS=false
 
 DYLIBS_DOWNLOAD_PATH="https://iina.io/dylibs/${ARCH}"
 YT_DLP_DOWNLOAD_PATH="https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_macos"
@@ -19,7 +20,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Reset in case getopts has been used previously in the shell.
-if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src:,parallel:,help": -n 'parse-options' -- "$@"); then
+if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src:,parallel:,skip-plugins,help": -n 'parse-options' -- "$@"); then
   echo -e "${RED}Failed parsing options.${NC}" >&2
   exit 1
 fi
@@ -31,6 +32,7 @@ printUsageHelp() {
   echo -e "    ${GREEN}$0 [--arch] <ARCH>:${NC}       Architecture to download dylibs for: universal | arm64 | x86_64"
   echo -e "    ${GREEN}$0 [--yt-dlp-src] <SRC>:${NC}  Source to download youtube-dl from: github | iina"
   echo -e "    ${GREEN}$0 [--parallel] <N>:${NC}      Number of parallel downloads (default: 5)"
+  echo -e "    ${GREEN}$0 [--skip-plugins]:${NC}      Skip downloading official plugins"
   echo
 }
 
@@ -79,6 +81,10 @@ while true; do
     fi
     PARALLEL_DOWNLOADS=$2
     shift 2
+    ;;
+  --skip-plugins)
+    SKIP_PLUGINS=true
+    shift
     ;;
   --)
     shift
@@ -162,6 +168,12 @@ curl -s -L "$YT_DLP_DOWNLOAD_PATH" -o "$YT_DLP_PATH" && echo -e "${GREEN}yt-dlp 
 chmod +x "$YT_DLP_PATH"
 
 mkdir -p "$PLUGIN_PATH"
+
+if [[ "$SKIP_PLUGINS" == true ]]; then
+  echo -e "${YELLOW}Skipping official plugin downloads.${NC}"
+  echo -e "${GREEN}All downloads completed.${NC}"
+  exit 0
+fi
 
 fetch_latest_plugin_asset() {
   local repo="$1"

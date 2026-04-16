@@ -78,6 +78,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet weak var pipDoNothing: NSButton!
   @IBOutlet weak var pipHideWindow: NSButton!
   @IBOutlet weak var pipMinimizeWindow: NSButton!
+  @IBOutlet weak var pipCloseWindow: NSButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -217,7 +218,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
 
   private func setupPipBehaviorRelatedControls() {
     let pipBehaviorOption = Preference.enum(for: .windowBehaviorWhenPip) as Preference.WindowBehaviorWhenPip
-    ([pipDoNothing, pipHideWindow, pipMinimizeWindow] as [NSButton])
+    ([pipDoNothing, pipHideWindow, pipMinimizeWindow, pipCloseWindow] as [NSButton])
         .first { $0.tag == pipBehaviorOption.rawValue }?.state = .on
   }
 
@@ -245,4 +246,3 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     return timing != 2
   }
 }
-

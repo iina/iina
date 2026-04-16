@@ -712,6 +712,7 @@ struct Preference {
     case doNothing = 0
     case hide
     case minimize
+    case close
 
     static var defaultValue = WindowBehaviorWhenPip.doNothing
 

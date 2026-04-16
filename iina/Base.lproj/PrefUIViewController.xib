@@ -12,6 +12,7 @@
                 <outlet property="oscPreviewImageView" destination="yaR-pw-wfD" id="18Z-EN-2f2"/>
                 <outlet property="oscToolbarStackView" destination="8jY-9m-q4O" id="J9u-Ui-dUT"/>
                 <outlet property="pipDoNothing" destination="o7N-Tm-Aly" id="xg5-HZ-Usj"/>
+                <outlet property="pipCloseWindow" destination="yvb-O2-evE" id="x2d-4X-euV"/>
                 <outlet property="pipHideWindow" destination="BMA-ed-2gf" id="UJv-H3-HDi"/>
                 <outlet property="pipMinimizeWindow" destination="YWw-1J-3Gr" id="5eN-rl-utd"/>
                 <outlet property="sectionAccessibilityView" destination="k9o-rY-z6u" id="p0I-TR-Sv6"/>
@@ -1379,6 +1380,16 @@ Picture:</string>
                                     <action selector="setupPipBehaviorRelatedControls:" target="-2" id="PF4-5Q-3H3"/>
                                 </connections>
                             </button>
+                            <button tag="3" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yvb-O2-evE">
+                                <rect key="frame" x="278" y="30" width="50" height="14"/>
+                                <buttonCell key="cell" type="radio" title="Close" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" inset="2" id="L9O-j4-5pJ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="message" size="11"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="setupPipBehaviorRelatedControls:" target="-2" id="R50-ZI-SVk"/>
+                                </connections>
+                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W5N-fX-5w2">
                                 <rect key="frame" x="16" y="8" width="174" height="14"/>
                                 <buttonCell key="cell" type="check" title="Automatically pause playback" bezelStyle="regularSquare" imagePosition="left" controlSize="small" state="on" inset="2" id="O8C-Vi-rSp">
@@ -1394,12 +1405,14 @@ Picture:</string>
                             <constraint firstItem="o7N-Tm-Aly" firstAttribute="baseline" secondItem="aYB-ub-yxd" secondAttribute="baseline" id="4cW-Ef-WnW"/>
                             <constraint firstItem="W5N-fX-5w2" firstAttribute="top" secondItem="aYB-ub-yxd" secondAttribute="bottom" constant="8" id="68o-jc-nYY"/>
                             <constraint firstItem="BMA-ed-2gf" firstAttribute="baseline" secondItem="o7N-Tm-Aly" secondAttribute="baseline" id="Bu7-Kt-Qwg"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YWw-1J-3Gr" secondAttribute="trailing" constant="8" id="D49-FS-oNE"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yvb-O2-evE" secondAttribute="trailing" constant="8" id="D49-FS-oNE"/>
                             <constraint firstItem="o7N-Tm-Aly" firstAttribute="leading" secondItem="aYB-ub-yxd" secondAttribute="trailing" constant="8" id="FPm-Lq-9po"/>
                             <constraint firstItem="aYB-ub-yxd" firstAttribute="top" secondItem="ucO-5V-y9Y" secondAttribute="top" constant="8" id="FSF-EM-tue"/>
                             <constraint firstItem="YWw-1J-3Gr" firstAttribute="leading" secondItem="BMA-ed-2gf" secondAttribute="trailing" constant="8" id="JGM-hK-the"/>
                             <constraint firstItem="BMA-ed-2gf" firstAttribute="leading" secondItem="o7N-Tm-Aly" secondAttribute="trailing" constant="8" id="K7p-4T-1F4"/>
+                            <constraint firstItem="yvb-O2-evE" firstAttribute="leading" secondItem="YWw-1J-3Gr" secondAttribute="trailing" constant="8" id="OQ7-rj-N2o"/>
                             <constraint firstItem="YWw-1J-3Gr" firstAttribute="baseline" secondItem="BMA-ed-2gf" secondAttribute="baseline" id="RlE-qd-6Yf"/>
+                            <constraint firstItem="yvb-O2-evE" firstAttribute="baseline" secondItem="YWw-1J-3Gr" secondAttribute="baseline" id="aRq-PG-cv9"/>
                             <constraint firstAttribute="bottom" secondItem="W5N-fX-5w2" secondAttribute="bottom" constant="8" id="XR3-iC-Bwy"/>
                             <constraint firstItem="aYB-ub-yxd" firstAttribute="leading" secondItem="ucO-5V-y9Y" secondAttribute="leading" constant="16" id="eiD-ON-QfE"/>
                             <constraint firstItem="W5N-fX-5w2" firstAttribute="leading" secondItem="ucO-5V-y9Y" secondAttribute="leading" constant="16" id="qO8-J2-ang"/>

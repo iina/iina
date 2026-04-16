@@ -154,6 +154,7 @@ class MainWindowController: PlayerWindowController {
   var shouldApplyInitialWindowSize = true
   var isWindowHidden: Bool = false
   var isWindowMiniaturizedDueToPip = false
+  var isWindowClosedDueToPip = false
 
   // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
@@ -1283,6 +1284,10 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillClose(_ notification: Notification) {
     shouldApplyInitialWindowSize = true
+    if isWindowClosedDueToPip {
+      UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
+      return
+    }
     // Close PIP
     if pipStatus == .inPIP {
       exitPIP()
@@ -3330,6 +3335,9 @@ extension MainWindowController: PIPViewControllerDelegate {
       case .minimize:
         isWindowMiniaturizedDueToPip = true
         window.miniaturize(self)
+      case .close:
+        isWindowClosedDueToPip = true
+        window.close()
         break
       }
       if Preference.bool(for: .pauseWhenPip) {
@@ -3353,7 +3361,7 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func doneExitingPIP() {
-    if isWindowHidden {
+    if isWindowHidden || isWindowClosedDueToPip {
       window?.makeKeyAndOrderFront(self)
     }
 
@@ -3371,6 +3379,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     isWindowMiniaturizedDueToPip = false
     isWindowHidden = false
+    isWindowClosedDueToPip = false
   }
 
   func prepareForPIPClosure(_ pip: PIPViewController) {
@@ -3395,7 +3404,11 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     // Bring the window to the front and deminiaturize it
     NSApp.activate(ignoringOtherApps: true)
-    window.deminiaturize(pip)
+    if isWindowClosedDueToPip {
+      window.makeKeyAndOrderFront(pip)
+    } else {
+      window.deminiaturize(pip)
+    }
   }
 
   func pipWillClose(_ pip: PIPViewController) {

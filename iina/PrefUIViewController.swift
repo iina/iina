@@ -53,6 +53,8 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet var sectionAccessibilityView: NSView!
 
   @IBOutlet weak var themeMenu: NSMenu!
+  @IBOutlet weak var liquidGlassCheckbox: NSButton!
+  @IBOutlet weak var liquidGlassRestartLabel: NSTextField!
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
   @IBOutlet weak var oscToolbarStackView: NSStackView!
@@ -87,6 +89,12 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
     setupPipBehaviorRelatedControls()
+
+    // Liquid Glass checkbox is only relevant on macOS 26+
+    if #unavailable(macOS 26) {
+      liquidGlassCheckbox.isHidden = true
+      liquidGlassRestartLabel.isHidden = true
+    }
   }
 
   @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {

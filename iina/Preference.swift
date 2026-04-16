@@ -62,6 +62,9 @@ struct Preference {
 
     static let useLegacyFullScreen = Key("useLegacyFullScreen")
 
+    /** Use Liquid Glass effect on macOS 26+ (bool) */
+    static let useLiquidGlass = Key("useLiquidGlass")
+
     /** Black out other monitors while fullscreen (bool) */
     static let blackOutMonitor = Key("blackOutMonitor")
 
@@ -859,6 +862,7 @@ struct Preference {
     .pauseWhenOpen: false,
     .fullScreenWhenOpen: false,
     .useLegacyFullScreen: false,
+    .useLiquidGlass: true,
     .showChapterPos: false,
     .resumeLastPosition: true,
     .preventScreenSaver: true,
@@ -1057,6 +1061,15 @@ struct Preference {
 
   static func data(for key: Key) -> Data? {
     return ud.data(forKey: key.rawValue)
+  }
+
+  /// Whether Liquid Glass effects should be applied.
+  /// Returns `true` only on macOS 26+ when the user has not disabled the preference.
+  static var effectiveLiquidGlass: Bool {
+    if #available(macOS 26, *) {
+      return bool(for: .useLiquidGlass)
+    }
+    return false
   }
 
   static func bool(for key: Key) -> Bool {

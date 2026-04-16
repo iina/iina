@@ -605,7 +605,7 @@ class MainWindowController: PlayerWindowController {
     let _ = quickSettingView
 
     // buffer indicator view
-    if #unavailable(macOS 26) {
+    if !Preference.effectiveLiquidGlass {
       bufferIndicatorView.roundCorners(withRadius: 10)
     }
     updateBufferIndicatorView()
@@ -617,8 +617,8 @@ class MainWindowController: PlayerWindowController {
     // other initialization
     titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
     cachedScreenCount = NSScreen.screens.count
-    // Apply Liquid Glass on macOS 26+; use legacy vibrancy on older systems
-    if #available(macOS 26, *) {
+    // Apply Liquid Glass on macOS 26+ (if enabled); use legacy vibrancy otherwise
+    if Preference.effectiveLiquidGlass {
       [osdVisualEffectView, additionalInfoView, bufferIndicatorView].forEach {
         $0?.applyLiquidGlass(cornerRadius: 10)
       }

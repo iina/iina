@@ -167,7 +167,7 @@ class InitialWindowController: NSWindowController {
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
     window.appearance = NSAppearance(iinaTheme: theme)
-    if #available(macOS 26, *) {
+    if #available(macOS 26, *), Preference.bool(for: .useLiquidGlass) {
       // Make the window fully transparent so glass can show the desktop
       window.isOpaque = false
       window.backgroundColor = .clear

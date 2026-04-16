@@ -119,7 +119,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     // close button
     closeButtonVE.action = #selector(self.close)
     closeButtonBox.action = #selector(self.close)
-    if #available(macOS 26, *) {
+    if Preference.effectiveLiquidGlass {
       backgroundView.applyLiquidGlass()
       playlistWrapperView.applyLiquidGlass()
       closeButtonBackgroundViewVE.applyLiquidGlass(cornerRadius: 8)

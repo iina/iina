@@ -46,7 +46,7 @@ class PlaySliderCell: NSSliderCell {
 
   override func drawKnob(_ knobRect: NSRect) {
     // On macOS 26, use the system's Liquid Glass knob
-    if #available(macOS 26, *) {
+    if #available(macOS 26, *), Preference.bool(for: .useLiquidGlass) {
       super.drawKnob(knobRect)
       return
     }

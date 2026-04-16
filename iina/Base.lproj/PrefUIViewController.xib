@@ -15,6 +15,8 @@
                 <outlet property="pipHideWindow" destination="BMA-ed-2gf" id="UJv-H3-HDi"/>
                 <outlet property="pipMinimizeWindow" destination="YWw-1J-3Gr" id="5eN-rl-utd"/>
                 <outlet property="sectionAccessibilityView" destination="k9o-rY-z6u" id="p0I-TR-Sv6"/>
+                <outlet property="liquidGlassCheckbox" destination="LG1-hk-aS9" id="LGB-hk-aS9"/>
+                <outlet property="liquidGlassRestartLabel" destination="LG4-hk-aS9" id="LGC-hk-aS9"/>
                 <outlet property="sectionAppearanceView" destination="M9c-Ak-HmK" id="96r-w6-H5K"/>
                 <outlet property="sectionOSCView" destination="gjB-It-iFS" id="cbg-O0-qMd"/>
                 <outlet property="sectionOSDView" destination="c8m-G4-or8" id="e6Y-FN-x1t"/>
@@ -1260,11 +1262,11 @@
             <point key="canvasLocation" x="14" y="942"/>
         </customView>
         <customView id="M9c-Ak-HmK" userLabel="Prefs &gt; UI &gt; Appearance">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="32"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleAppearance" horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="APB-Nm-aTA">
-                    <rect key="frame" x="-2" y="8" width="87" height="16"/>
+                    <rect key="frame" x="-2" y="56" width="87" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Appearance:" id="mM7-1Q-FyL">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1272,7 +1274,7 @@
                     </textFieldCell>
                 </textField>
                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FNR-0h-DtW">
-                    <rect key="frame" x="174" y="4" width="208" height="24"/>
+                    <rect key="frame" x="174" y="52" width="208" height="24"/>
                     <popUpButtonCell key="cell" type="push" title="Dark" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VvZ-mQ-wQB" id="Qe2-v8-Xh7">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="message"/>
@@ -1292,10 +1294,28 @@
                     </connections>
                 </popUpButton>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BMi-Ax-7wP">
-                    <rect key="frame" x="118" y="8" width="50" height="16"/>
+                    <rect key="frame" x="118" y="56" width="50" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Theme:" id="yLF-vu-1Gl">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LG1-hk-aS9" userLabel="Liquid Glass Checkbox">
+                    <rect key="frame" x="178" y="28" width="200" height="18"/>
+                    <buttonCell key="cell" type="check" title="Use Liquid Glass effect" bezelStyle="regularSquare" imagePosition="left" inset="2" id="LG2-hk-aS9">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="lH7-Vv-0M1" name="value" keyPath="values.useLiquidGlass" id="LG3-hk-aS9"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="LG4-hk-aS9" userLabel="Liquid Glass Restart Label">
+                    <rect key="frame" x="178" y="8" width="280" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Requires restarting IINA to take effect." id="LG5-hk-aS9">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -1309,7 +1329,11 @@
                 <constraint firstItem="FNR-0h-DtW" firstAttribute="leading" secondItem="BMi-Ax-7wP" secondAttribute="trailing" constant="8" id="Cgg-qX-jrX"/>
                 <constraint firstItem="APB-Nm-aTA" firstAttribute="leading" secondItem="M9c-Ak-HmK" secondAttribute="leading" id="Q4K-PC-JeY"/>
                 <constraint firstItem="FNR-0h-DtW" firstAttribute="baseline" secondItem="BMi-Ax-7wP" secondAttribute="baseline" id="n4H-Th-LRJ"/>
-                <constraint firstAttribute="bottom" secondItem="BMi-Ax-7wP" secondAttribute="bottom" constant="8" id="wlh-tx-VdQ"/>
+                <constraint firstItem="LG1-hk-aS9" firstAttribute="leading" secondItem="M9c-Ak-HmK" secondAttribute="leading" constant="180" id="LG6-hk-aS9"/>
+                <constraint firstItem="LG1-hk-aS9" firstAttribute="top" secondItem="BMi-Ax-7wP" secondAttribute="bottom" constant="8" id="LG7-hk-aS9"/>
+                <constraint firstItem="LG4-hk-aS9" firstAttribute="leading" secondItem="LG1-hk-aS9" secondAttribute="leading" id="LG8-hk-aS9"/>
+                <constraint firstItem="LG4-hk-aS9" firstAttribute="top" secondItem="LG1-hk-aS9" secondAttribute="bottom" constant="4" id="LG9-hk-aS9"/>
+                <constraint firstAttribute="bottom" secondItem="LG4-hk-aS9" secondAttribute="bottom" constant="8" id="LGA-hk-aS9"/>
             </constraints>
             <point key="canvasLocation" x="14" y="-292"/>
         </customView>

@@ -42,7 +42,7 @@ class ControlBarView: NSVisualEffectView {
   private(set) var glassView: NSView?
 
   override func awakeFromNib() {
-    if #available(macOS 26, *) {
+    if #available(macOS 26, *), Preference.bool(for: .useLiquidGlass) {
       // Glass setup deferred to setupLiquidGlass() called from MainWindowController
     } else {
       self.roundCorners(withRadius: 6)
@@ -53,6 +53,7 @@ class ControlBarView: NSVisualEffectView {
   /// Replace the NSVisualEffectView background with Liquid Glass on macOS 26+.
   func setupLiquidGlass() {
     if #available(macOS 26, *) {
+      guard Preference.bool(for: .useLiquidGlass) else { return }
       guard let parent = self.superview, glassView == nil else { return }
 
       let glass = DraggableGlassEffectView()

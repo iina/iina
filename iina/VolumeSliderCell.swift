@@ -17,7 +17,7 @@ class VolumeSliderCell: NSSliderCell {
 
   override func drawBar(inside rect: NSRect, flipped: Bool) {
     // On macOS 26, let the system draw the full Liquid Glass slider
-    if #available(macOS 26, *) {
+    if #available(macOS 26, *), Preference.bool(for: .useLiquidGlass) {
       super.drawBar(inside: rect, flipped: flipped)
       return
     }

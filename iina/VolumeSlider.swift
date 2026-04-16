@@ -14,7 +14,7 @@ class VolumeSlider: NSSlider {
 
   override func awakeFromNib() {
     super.awakeFromNib()
-    if #available(macOS 26, *) {
+    if #available(macOS 26, *), Preference.bool(for: .useLiquidGlass) {
       // Replace custom cell with standard NSSliderCell for full Liquid Glass animation
       let maxVol = Double(Preference.integer(for: .maxVolume))
       let standardCell = NSSliderCell()

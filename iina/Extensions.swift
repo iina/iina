@@ -719,6 +719,7 @@ extension NSVisualEffectView {
   @discardableResult
   func applyLiquidGlass(cornerRadius: CGFloat? = nil) -> NSView? {
     if #available(macOS 26, *) {
+      guard Preference.bool(for: .useLiquidGlass) else { return nil }
       guard let parent = self.superview else { return nil }
 
       // Prevent duplicates on repeated calls

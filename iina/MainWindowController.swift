@@ -874,8 +874,12 @@ class MainWindowController: PlayerWindowController {
     }
 
     if currentControlBar != nil {
-      // On macOS 26, animate the glass view instead of the hidden VEV
-      fadeableViews.append(controlBarFloating.glassView ?? currentControlBar!)
+      // On macOS 26 floating mode, animate the glass view instead of the hidden VEV
+      if isFloating, let glass = controlBarFloating.glassView {
+        fadeableViews.append(glass)
+      } else {
+        fadeableViews.append(currentControlBar!)
+      }
     }
     showUI()
 

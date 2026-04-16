@@ -19,9 +19,6 @@
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Engedélyezze a \"Legutóbbi fájlok\" menüt";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Doboz";
-
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Minimalizálva/nem minimalizálva";
 
@@ -37,14 +34,11 @@
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Kövesse nyomon az összes lejátszott fájlt a \"Legutóbbi fájlok\" menüben";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Doboz";
-
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "Naponta";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
-"FbF-jJ-W5b.title" = "Pause (Megállít)";
+"FbF-jJ-W5b.title" = "Szünet";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
 "GNV-VA-NBW.title" = "A média megnyitásakor:";
@@ -59,16 +53,19 @@
 "JfZ-D8-aF2.title" = "Ne csináljon semmit";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
-"KYi-0W-zOr.title" = "Más monitorok elsötéttíése teljes képernyős használat közben";
+"KYi-0W-zOr.title" = "Más monitorok elsötétítése teljes képernyőn";
+
+/* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
+"Kdk-iC-e1C.title" = "Még mindig megakadályozza a rendszer elalvását.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Audiofájl lejátszásakor váltson automatikusan \"zene\" módba";
+"KfL-r7-Uav.title" = "Automatikus váltás „zenei módra” hangfájl lejátszásakor";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Következő automatikus lejátszása";
 
-/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "Minding új ablakban nyisd meg";
+/* Class = "NSButtonCell"; title = "Allow multiple player windows"; ObjectID = "M0z-bI-88d"; */
+"M0z-bI-88d.title" = "Mindig új ablakban nyissa meg a médiát";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "Váltás teljes képernyőre";
@@ -121,7 +118,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Előzmények:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "Az előadó és a zeneszám nevének megjelenítése az audiofájlokhoz, ha elérhető";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
@@ -135,6 +132,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Képernyőképek:";
+
+/* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
+"r2u-P9-J5p.title" = "A képernyőkímélő elindulásának megakadályozása lejátszás közben";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Óránként";
@@ -151,5 +151,23 @@
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Szünet/folytatás, amikor:";
 
+/* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
+"yla-DT-YTx.title" = "\"Zene mód\"-ban nem lehetséges vagy lejátszás közben";
+
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Üdvözlő ablak megjelenítése";
+
+/* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
+"jok-kc-HjX.title" = "Ha egy fájlt kézzel nyit meg:";
+
+/* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
+"5WC-Sp-6mg.title" = "Lejátszási lista ismétlése";
+
+/* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
+"A1p-L4-jtC.title" = "Egyetlen fájl ismétlése";
+
+/* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
+"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+
+/* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
+"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";

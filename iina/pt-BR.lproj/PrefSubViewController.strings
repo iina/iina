@@ -10,9 +10,6 @@
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "Mostrar legendas em caixa quando em tela cheia";
 
-/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "cortar";
-
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Posição:";
 
@@ -66,9 +63,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "Digite uma lista separadas por virgulas.";
-
-/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "Se habilitado, todas leganda ASS serão feitas no estilo abaixo.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Legandas Texto:";
@@ -145,9 +139,6 @@
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "Margem";
 
-/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "Ignorar estilos ASS";
-
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Auto carregar:";
 
@@ -180,3 +171,9 @@
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "Esquerda";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[0]" = "Legenda primária";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[1]" = "Legenda secundária";

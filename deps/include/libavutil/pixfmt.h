@@ -33,6 +33,13 @@
 #define AVPALETTE_COUNT 256
 
 /**
+ * Maximum number of planes in any pixel format.
+ * This should be used when a maximum is needed, but code should not
+ * be written to require a maximum for no good reason.
+ */
+#define AV_VIDEO_MAX_PLANES 4
+
+/**
  * Pixel format.
  *
  * @note
@@ -83,7 +90,7 @@ enum AVPixelFormat {
     AV_PIX_FMT_BGR8,      ///< packed RGB 3:3:2,  8bpp, (msb)2B 3G 3R(lsb)
     AV_PIX_FMT_BGR4,      ///< packed RGB 1:2:1 bitstream,  4bpp, (msb)1B 2G 1R(lsb), a byte contains two pixels, the first pixel in the byte is the one composed by the 4 msb bits
     AV_PIX_FMT_BGR4_BYTE, ///< packed RGB 1:2:1,  8bpp, (msb)1B 2G 1R(lsb)
-    AV_PIX_FMT_RGB8,      ///< packed RGB 3:3:2,  8bpp, (msb)2R 3G 3B(lsb)
+    AV_PIX_FMT_RGB8,      ///< packed RGB 3:3:2,  8bpp, (msb)3R 3G 2B(lsb)
     AV_PIX_FMT_RGB4,      ///< packed RGB 1:2:1 bitstream,  4bpp, (msb)1R 2G 1B(lsb), a byte contains two pixels, the first pixel in the byte is the one composed by the 4 msb bits
     AV_PIX_FMT_RGB4_BYTE, ///< packed RGB 1:2:1,  8bpp, (msb)1R 2G 1B(lsb)
     AV_PIX_FMT_NV12,      ///< planar YUV 4:2:0, 12bpp, 1 plane for Y and 1 plane for the UV components, which are interleaved (first byte U and the following byte V)
@@ -112,21 +119,11 @@ enum AVPixelFormat {
     AV_PIX_FMT_BGR555BE,  ///< packed BGR 5:5:5, 16bpp, (msb)1X 5B 5G 5R(lsb), big-endian   , X=unused/undefined
     AV_PIX_FMT_BGR555LE,  ///< packed BGR 5:5:5, 16bpp, (msb)1X 5B 5G 5R(lsb), little-endian, X=unused/undefined
 
-#if FF_API_VAAPI
-    /** @name Deprecated pixel formats */
-    /**@{*/
-    AV_PIX_FMT_VAAPI_MOCO, ///< HW acceleration through VA API at motion compensation entry-point, Picture.data[3] contains a vaapi_render_state struct which contains macroblocks as well as various fields extracted from headers
-    AV_PIX_FMT_VAAPI_IDCT, ///< HW acceleration through VA API at IDCT entry-point, Picture.data[3] contains a vaapi_render_state struct which contains fields extracted from headers
-    AV_PIX_FMT_VAAPI_VLD,  ///< HW decoding through VA API, Picture.data[3] contains a VASurfaceID
-    /**@}*/
-    AV_PIX_FMT_VAAPI = AV_PIX_FMT_VAAPI_VLD,
-#else
     /**
      *  Hardware acceleration through VA-API, data[3] contains a
      *  VASurfaceID.
      */
     AV_PIX_FMT_VAAPI,
-#endif
 
     AV_PIX_FMT_YUV420P16LE,  ///< planar YUV 4:2:0, 24bpp, (1 Cr & Cb sample per 2x2 Y samples), little-endian
     AV_PIX_FMT_YUV420P16BE,  ///< planar YUV 4:2:0, 24bpp, (1 Cr & Cb sample per 2x2 Y samples), big-endian
@@ -216,8 +213,36 @@ enum AVPixelFormat {
     AV_PIX_FMT_GBRAP16BE,    ///< planar GBRA 4:4:4:4 64bpp, big-endian
     AV_PIX_FMT_GBRAP16LE,    ///< planar GBRA 4:4:4:4 64bpp, little-endian
     /**
-     *  HW acceleration through QSV, data[3] contains a pointer to the
-     *  mfxFrameSurface1 structure.
+     * HW acceleration through QSV, data[3] contains a pointer to the
+     * mfxFrameSurface1 structure.
+     *
+     * Before FFmpeg 5.0:
+     * mfxFrameSurface1.Data.MemId contains a pointer when importing
+     * the following frames as QSV frames:
+     *
+     * VAAPI:
+     * mfxFrameSurface1.Data.MemId contains a pointer to VASurfaceID
+     *
+     * DXVA2:
+     * mfxFrameSurface1.Data.MemId contains a pointer to IDirect3DSurface9
+     *
+     * FFmpeg 5.0 and above:
+     * mfxFrameSurface1.Data.MemId contains a pointer to the mfxHDLPair
+     * structure when importing the following frames as QSV frames:
+     *
+     * VAAPI:
+     * mfxHDLPair.first contains a VASurfaceID pointer.
+     * mfxHDLPair.second is always MFX_INFINITE.
+     *
+     * DXVA2:
+     * mfxHDLPair.first contains IDirect3DSurface9 pointer.
+     * mfxHDLPair.second is always MFX_INFINITE.
+     *
+     * D3D11:
+     * mfxHDLPair.first contains a ID3D11Texture2D pointer.
+     * mfxHDLPair.second contains the texture array index of the frame if the
+     * ID3D11Texture2D is an array texture, or always MFX_INFINITE if it is a
+     * normal texture.
      */
     AV_PIX_FMT_QSV,
     /**
@@ -269,8 +294,6 @@ enum AVPixelFormat {
     AV_PIX_FMT_BAYER_GBRG16BE, ///< bayer, GBGB..(odd line), RGRG..(even line), 16-bit samples, big-endian
     AV_PIX_FMT_BAYER_GRBG16LE, ///< bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, little-endian
     AV_PIX_FMT_BAYER_GRBG16BE, ///< bayer, GRGR..(odd line), BGBG..(even line), 16-bit samples, big-endian
-
-    AV_PIX_FMT_XVMC,///< XVideo Motion Acceleration via common packet passing
 
     AV_PIX_FMT_YUV440P10LE, ///< planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), little-endian
     AV_PIX_FMT_YUV440P10BE, ///< planar YUV 4:4:0,20bpp, (1 Cr & Cb sample per 1x2 Y samples), big-endian
@@ -360,6 +383,62 @@ enum AVPixelFormat {
 
     AV_PIX_FMT_X2RGB10LE, ///< packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), little-endian, X=unused/undefined
     AV_PIX_FMT_X2RGB10BE, ///< packed RGB 10:10:10, 30bpp, (msb)2X 10R 10G 10B(lsb), big-endian, X=unused/undefined
+    AV_PIX_FMT_X2BGR10LE, ///< packed BGR 10:10:10, 30bpp, (msb)2X 10B 10G 10R(lsb), little-endian, X=unused/undefined
+    AV_PIX_FMT_X2BGR10BE, ///< packed BGR 10:10:10, 30bpp, (msb)2X 10B 10G 10R(lsb), big-endian, X=unused/undefined
+
+    AV_PIX_FMT_P210BE,      ///< interleaved chroma YUV 4:2:2, 20bpp, data in the high bits, big-endian
+    AV_PIX_FMT_P210LE,      ///< interleaved chroma YUV 4:2:2, 20bpp, data in the high bits, little-endian
+
+    AV_PIX_FMT_P410BE,      ///< interleaved chroma YUV 4:4:4, 30bpp, data in the high bits, big-endian
+    AV_PIX_FMT_P410LE,      ///< interleaved chroma YUV 4:4:4, 30bpp, data in the high bits, little-endian
+
+    AV_PIX_FMT_P216BE,      ///< interleaved chroma YUV 4:2:2, 32bpp, big-endian
+    AV_PIX_FMT_P216LE,      ///< interleaved chroma YUV 4:2:2, 32bpp, little-endian
+
+    AV_PIX_FMT_P416BE,      ///< interleaved chroma YUV 4:4:4, 48bpp, big-endian
+    AV_PIX_FMT_P416LE,      ///< interleaved chroma YUV 4:4:4, 48bpp, little-endian
+
+    AV_PIX_FMT_VUYA,        ///< packed VUYA 4:4:4, 32bpp, VUYAVUYA...
+
+    AV_PIX_FMT_RGBAF16BE,   ///< IEEE-754 half precision packed RGBA 16:16:16:16, 64bpp, RGBARGBA..., big-endian
+    AV_PIX_FMT_RGBAF16LE,   ///< IEEE-754 half precision packed RGBA 16:16:16:16, 64bpp, RGBARGBA..., little-endian
+
+    AV_PIX_FMT_VUYX,        ///< packed VUYX 4:4:4, 32bpp, Variant of VUYA where alpha channel is left undefined
+
+    AV_PIX_FMT_P012LE,      ///< like NV12, with 12bpp per component, data in the high bits, zeros in the low bits, little-endian
+    AV_PIX_FMT_P012BE,      ///< like NV12, with 12bpp per component, data in the high bits, zeros in the low bits, big-endian
+
+    AV_PIX_FMT_Y212BE,      ///< packed YUV 4:2:2 like YUYV422, 24bpp, data in the high bits, zeros in the low bits, big-endian
+    AV_PIX_FMT_Y212LE,      ///< packed YUV 4:2:2 like YUYV422, 24bpp, data in the high bits, zeros in the low bits, little-endian
+
+    AV_PIX_FMT_XV30BE,      ///< packed XVYU 4:4:4, 32bpp, (msb)2X 10V 10Y 10U(lsb), big-endian, variant of Y410 where alpha channel is left undefined
+    AV_PIX_FMT_XV30LE,      ///< packed XVYU 4:4:4, 32bpp, (msb)2X 10V 10Y 10U(lsb), little-endian, variant of Y410 where alpha channel is left undefined
+
+    AV_PIX_FMT_XV36BE,      ///< packed XVYU 4:4:4, 48bpp, data in the high bits, zeros in the low bits, big-endian, variant of Y412 where alpha channel is left undefined
+    AV_PIX_FMT_XV36LE,      ///< packed XVYU 4:4:4, 48bpp, data in the high bits, zeros in the low bits, little-endian, variant of Y412 where alpha channel is left undefined
+
+    AV_PIX_FMT_RGBF32BE,    ///< IEEE-754 single precision packed RGB 32:32:32, 96bpp, RGBRGB..., big-endian
+    AV_PIX_FMT_RGBF32LE,    ///< IEEE-754 single precision packed RGB 32:32:32, 96bpp, RGBRGB..., little-endian
+
+    AV_PIX_FMT_RGBAF32BE,   ///< IEEE-754 single precision packed RGBA 32:32:32:32, 128bpp, RGBARGBA..., big-endian
+    AV_PIX_FMT_RGBAF32LE,   ///< IEEE-754 single precision packed RGBA 32:32:32:32, 128bpp, RGBARGBA..., little-endian
+
+    AV_PIX_FMT_P212BE,      ///< interleaved chroma YUV 4:2:2, 24bpp, data in the high bits, big-endian
+    AV_PIX_FMT_P212LE,      ///< interleaved chroma YUV 4:2:2, 24bpp, data in the high bits, little-endian
+
+    AV_PIX_FMT_P412BE,      ///< interleaved chroma YUV 4:4:4, 36bpp, data in the high bits, big-endian
+    AV_PIX_FMT_P412LE,      ///< interleaved chroma YUV 4:4:4, 36bpp, data in the high bits, little-endian
+
+    AV_PIX_FMT_GBRAP14BE,  ///< planar GBR 4:4:4:4 56bpp, big-endian
+    AV_PIX_FMT_GBRAP14LE,  ///< planar GBR 4:4:4:4 56bpp, little-endian
+
+    /**
+     * Hardware surfaces for Direct3D 12.
+     *
+     * data[0] points to an AVD3D12VAFrame
+     */
+    AV_PIX_FMT_D3D12,
+
     AV_PIX_FMT_NB         ///< number of pixel formats, DO NOT USE THIS if you want to link with shared libav* because the number of formats might differ between versions
 };
 
@@ -418,6 +497,7 @@ enum AVPixelFormat {
 #define AV_PIX_FMT_GBRP16    AV_PIX_FMT_NE(GBRP16BE,    GBRP16LE)
 #define AV_PIX_FMT_GBRAP10   AV_PIX_FMT_NE(GBRAP10BE,   GBRAP10LE)
 #define AV_PIX_FMT_GBRAP12   AV_PIX_FMT_NE(GBRAP12BE,   GBRAP12LE)
+#define AV_PIX_FMT_GBRAP14   AV_PIX_FMT_NE(GBRAP14BE,   GBRAP14LE)
 #define AV_PIX_FMT_GBRAP16   AV_PIX_FMT_NE(GBRAP16BE,   GBRAP16LE)
 
 #define AV_PIX_FMT_BAYER_BGGR16 AV_PIX_FMT_NE(BAYER_BGGR16BE,    BAYER_BGGR16LE)
@@ -446,39 +526,56 @@ enum AVPixelFormat {
 #define AV_PIX_FMT_NV20       AV_PIX_FMT_NE(NV20BE,  NV20LE)
 #define AV_PIX_FMT_AYUV64     AV_PIX_FMT_NE(AYUV64BE, AYUV64LE)
 #define AV_PIX_FMT_P010       AV_PIX_FMT_NE(P010BE,  P010LE)
+#define AV_PIX_FMT_P012       AV_PIX_FMT_NE(P012BE,  P012LE)
 #define AV_PIX_FMT_P016       AV_PIX_FMT_NE(P016BE,  P016LE)
 
 #define AV_PIX_FMT_Y210       AV_PIX_FMT_NE(Y210BE,  Y210LE)
+#define AV_PIX_FMT_Y212       AV_PIX_FMT_NE(Y212BE,  Y212LE)
+#define AV_PIX_FMT_XV30       AV_PIX_FMT_NE(XV30BE,  XV30LE)
+#define AV_PIX_FMT_XV36       AV_PIX_FMT_NE(XV36BE,  XV36LE)
 #define AV_PIX_FMT_X2RGB10    AV_PIX_FMT_NE(X2RGB10BE, X2RGB10LE)
+#define AV_PIX_FMT_X2BGR10    AV_PIX_FMT_NE(X2BGR10BE, X2BGR10LE)
+
+#define AV_PIX_FMT_P210       AV_PIX_FMT_NE(P210BE, P210LE)
+#define AV_PIX_FMT_P410       AV_PIX_FMT_NE(P410BE, P410LE)
+#define AV_PIX_FMT_P212       AV_PIX_FMT_NE(P212BE, P212LE)
+#define AV_PIX_FMT_P412       AV_PIX_FMT_NE(P412BE, P412LE)
+#define AV_PIX_FMT_P216       AV_PIX_FMT_NE(P216BE, P216LE)
+#define AV_PIX_FMT_P416       AV_PIX_FMT_NE(P416BE, P416LE)
+
+#define AV_PIX_FMT_RGBAF16    AV_PIX_FMT_NE(RGBAF16BE, RGBAF16LE)
+
+#define AV_PIX_FMT_RGBF32     AV_PIX_FMT_NE(RGBF32BE, RGBF32LE)
+#define AV_PIX_FMT_RGBAF32    AV_PIX_FMT_NE(RGBAF32BE, RGBAF32LE)
 
 /**
   * Chromaticity coordinates of the source primaries.
-  * These values match the ones defined by ISO/IEC 23001-8_2013 § 7.1.
+  * These values match the ones defined by ISO/IEC 23091-2_2019 subclause 8.1 and ITU-T H.273.
   */
 enum AVColorPrimaries {
     AVCOL_PRI_RESERVED0   = 0,
-    AVCOL_PRI_BT709       = 1,  ///< also ITU-R BT1361 / IEC 61966-2-4 / SMPTE RP177 Annex B
+    AVCOL_PRI_BT709       = 1,  ///< also ITU-R BT1361 / IEC 61966-2-4 / SMPTE RP 177 Annex B
     AVCOL_PRI_UNSPECIFIED = 2,
     AVCOL_PRI_RESERVED    = 3,
     AVCOL_PRI_BT470M      = 4,  ///< also FCC Title 47 Code of Federal Regulations 73.682 (a)(20)
 
     AVCOL_PRI_BT470BG     = 5,  ///< also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM
     AVCOL_PRI_SMPTE170M   = 6,  ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC
-    AVCOL_PRI_SMPTE240M   = 7,  ///< functionally identical to above
+    AVCOL_PRI_SMPTE240M   = 7,  ///< identical to above, also called "SMPTE C" even though it uses D65
     AVCOL_PRI_FILM        = 8,  ///< colour filters using Illuminant C
     AVCOL_PRI_BT2020      = 9,  ///< ITU-R BT2020
     AVCOL_PRI_SMPTE428    = 10, ///< SMPTE ST 428-1 (CIE 1931 XYZ)
     AVCOL_PRI_SMPTEST428_1 = AVCOL_PRI_SMPTE428,
     AVCOL_PRI_SMPTE431    = 11, ///< SMPTE ST 431-2 (2011) / DCI P3
     AVCOL_PRI_SMPTE432    = 12, ///< SMPTE ST 432-1 (2010) / P3 D65 / Display P3
-    AVCOL_PRI_EBU3213     = 22, ///< EBU Tech. 3213-E / JEDEC P22 phosphors
+    AVCOL_PRI_EBU3213     = 22, ///< EBU Tech. 3213-E (nothing there) / one of JEDEC P22 group phosphors
     AVCOL_PRI_JEDEC_P22   = AVCOL_PRI_EBU3213,
     AVCOL_PRI_NB                ///< Not part of ABI
 };
 
 /**
  * Color Transfer Characteristic.
- * These values match the ones defined by ISO/IEC 23001-8_2013 § 7.2.
+ * These values match the ones defined by ISO/IEC 23091-2_2019 subclause 8.2.
  */
 enum AVColorTransferCharacteristic {
     AVCOL_TRC_RESERVED0    = 0,
@@ -507,18 +604,18 @@ enum AVColorTransferCharacteristic {
 
 /**
  * YUV colorspace type.
- * These values match the ones defined by ISO/IEC 23001-8_2013 § 7.3.
+ * These values match the ones defined by ISO/IEC 23091-2_2019 subclause 8.3.
  */
 enum AVColorSpace {
-    AVCOL_SPC_RGB         = 0,  ///< order of coefficients is actually GBR, also IEC 61966-2-1 (sRGB)
-    AVCOL_SPC_BT709       = 1,  ///< also ITU-R BT1361 / IEC 61966-2-4 xvYCC709 / SMPTE RP177 Annex B
+    AVCOL_SPC_RGB         = 0,  ///< order of coefficients is actually GBR, also IEC 61966-2-1 (sRGB), YZX and ST 428-1
+    AVCOL_SPC_BT709       = 1,  ///< also ITU-R BT1361 / IEC 61966-2-4 xvYCC709 / derived in SMPTE RP 177 Annex B
     AVCOL_SPC_UNSPECIFIED = 2,
-    AVCOL_SPC_RESERVED    = 3,
+    AVCOL_SPC_RESERVED    = 3,  ///< reserved for future use by ITU-T and ISO/IEC just like 15-255 are
     AVCOL_SPC_FCC         = 4,  ///< FCC Title 47 Code of Federal Regulations 73.682 (a)(20)
     AVCOL_SPC_BT470BG     = 5,  ///< also ITU-R BT601-6 625 / ITU-R BT1358 625 / ITU-R BT1700 625 PAL & SECAM / IEC 61966-2-4 xvYCC601
-    AVCOL_SPC_SMPTE170M   = 6,  ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC
-    AVCOL_SPC_SMPTE240M   = 7,  ///< functionally identical to above
-    AVCOL_SPC_YCGCO       = 8,  ///< Used by Dirac / VC-2 and H.264 FRext, see ITU-T SG16
+    AVCOL_SPC_SMPTE170M   = 6,  ///< also ITU-R BT601-6 525 / ITU-R BT1358 525 / ITU-R BT1700 NTSC / functionally identical to above
+    AVCOL_SPC_SMPTE240M   = 7,  ///< derived from 170M primaries and D65 white point, 170M is derived from BT470 System M's primaries
+    AVCOL_SPC_YCGCO       = 8,  ///< used by Dirac / VC-2 and H.264 FRext, see ITU-T SG16
     AVCOL_SPC_YCOCG       = AVCOL_SPC_YCGCO,
     AVCOL_SPC_BT2020_NCL  = 9,  ///< ITU-R BT2020 non-constant luminance system
     AVCOL_SPC_BT2020_CL   = 10, ///< ITU-R BT2020 constant luminance system
@@ -540,9 +637,9 @@ enum AVColorSpace {
  * recommended, as it also defines the full range representation.
  *
  * Common definitions:
- *   - For RGB and luminance planes such as Y in YCbCr and I in ICtCp,
+ *   - For RGB and luma planes such as Y in YCbCr and I in ICtCp,
  *     'E' is the original value in range of 0.0 to 1.0.
- *   - For chrominance planes such as Cb,Cr and Ct,Cp, 'E' is the original
+ *   - For chroma planes such as Cb,Cr and Ct,Cp, 'E' is the original
  *     value in range of -0.5 to 0.5.
  *   - 'n' is the output bit depth.
  *   - For additional definitions such as rounding and clipping to valid n
@@ -554,13 +651,13 @@ enum AVColorRange {
     /**
      * Narrow or limited range content.
      *
-     * - For luminance planes:
+     * - For luma planes:
      *
      *       (219 * E + 16) * 2^(n-8)
      *
      *   F.ex. the range of 16-235 for 8 bits
      *
-     * - For chrominance planes:
+     * - For chroma planes:
      *
      *       (224 * E + 128) * 2^(n-8)
      *
@@ -571,13 +668,13 @@ enum AVColorRange {
     /**
      * Full range content.
      *
-     * - For RGB and luminance planes:
+     * - For RGB and luma planes:
      *
      *       (2^n - 1) * E
      *
      *   F.ex. the range of 0-255 for 8 bits
      *
-     * - For chrominance planes:
+     * - For chroma planes:
      *
      *       (2^n - 1) * E + 2^(n - 1)
      *

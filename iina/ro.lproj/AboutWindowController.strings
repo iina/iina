@@ -5,7 +5,7 @@
 "HMc-Oy-hBR.label" = "Mulțumiri";
 
 /* Class = "NSTextFieldCell"; title = "Translators:"; ObjectID = "JlJ-V6-PVY"; */
-"JlJ-V6-PVY.title" = "Traducători";
+"JlJ-V6-PVY.title" = "Traducători:";
 
 /* Class = "NSButtonCell"; title = "Contributors"; ObjectID = "XWg-VQ-fRV"; */
 "XWg-VQ-fRV.title" = "Contribuitori";
@@ -21,3 +21,6 @@
 
 /* Class = "NSButtonCell"; title = "Credits"; ObjectID = "zCH-uO-acx"; */
 "zCH-uO-acx.title" = "Mulțumiri";
+
+/* Class = "NSTextFieldCell"; title = "IINA localization is powered by Crowdin."; ObjectID = "HLj-vT-kNp"; */
+"HLj-vT-kNp.title" = "Localizarea IINA este făcută posibilă de Crowdin.";

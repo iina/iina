@@ -20,7 +20,11 @@ class ControlBarView: NSVisualEffectView {
   private var isAlignFeedbackSent = false
 
   override func awakeFromNib() {
-    self.roundCorners(withRadius: 6)
+    if #available(macOS 26, *) {
+      self.roundCorners(withRadius: 10)
+    } else {
+      self.roundCorners(withRadius: 6)
+    }
     self.translatesAutoresizingMaskIntoConstraints = false
   }
 
@@ -57,7 +61,9 @@ class ControlBarView: NSVisualEffectView {
     let yMax = windowFrame.height - frame.height - 25
     newOrigin = newOrigin.constrained(to: NSRect(x: 10, y: 0, width: xMax, height: yMax))
     // apply position
-    xConstraint.constant = newOrigin.x + frame.width / 2
+    let newConstraint = newOrigin.x + frame.width / 2
+    xConstraint.constant = userInterfaceLayoutDirection == .rightToLeft ?
+      windowFrame.width - newConstraint : newConstraint
     yConstraint.constant = newOrigin.y
   }
 

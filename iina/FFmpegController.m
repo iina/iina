@@ -7,28 +7,38 @@
 //
 
 #import "FFmpegController.h"
+#import <Accelerate/Accelerate.h>
 #import <Cocoa/Cocoa.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 #import <libavcodec/avcodec.h>
 #import <libavformat/avformat.h>
 #import <libswscale/swscale.h>
 #import <libavutil/imgutils.h>
 #import <libavutil/mastering_display_metadata.h>
+#pragma clang diagnostic pop
+
+#import "IINA-Swift.h"
+
+#define LOG_DEBUG(msg, ...) [FFmpegLogger debug:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
+#define LOG_ERROR(msg, ...) [FFmpegLogger error:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
+#define LOG_WARN(msg, ...) [FFmpegLogger warn:([NSString stringWithFormat:(msg), ##__VA_ARGS__])];
 
 #define THUMB_COUNT_DEFAULT 100
 
 #define CHECK_NOTNULL(ptr,msg) if (ptr == NULL) {\
-NSLog(@"Error when getting thumbnails: %@", msg);\
+LOG_ERROR(@"Error when getting thumbnails: %@", msg);\
 return -1;\
 }
 
 #define CHECK_SUCCESS(ret,msg) if (ret < 0) {\
-NSLog(@"Error when getting thumbnails: %@ (%d)", msg, ret);\
+LOG_ERROR(@"Error when getting thumbnails: %@ (%d)", msg, ret);\
 return -1;\
 }
 
 #define CHECK(ret,msg) if (!(ret)) {\
-NSLog(@"Error when getting thumbnails: %@", msg);\
+LOG_ERROR(@"Error when getting thumbnails: %@", msg);\
 return -1;\
 }
 
@@ -67,6 +77,7 @@ return -1;\
   return self;
 }
 
+// MARK: - Generating Thumbnails
 
 - (void)generateThumbnailForFile:(NSString *)file
                       thumbWidth:(int)thumbWidth
@@ -128,7 +139,7 @@ return -1;\
 
   // Check whether the denominator (AVRational.den) is zero to prevent division-by-zero
   if (videoAvgFrameRate.den == 0 || av_q2d(videoAvgFrameRate) == 0) {
-    NSLog(@"Avg frame rate = 0, ignore");
+    LOG_DEBUG(@"Avg frame rate = 0, ignore");
     return -1;
   }
 
@@ -146,7 +157,7 @@ return -1;\
   if (pCodecCtx->pix_fmt < 0 || pCodecCtx->pix_fmt >= AV_PIX_FMT_NB) {
     avcodec_free_context(&pCodecCtx);
     avformat_close_input(&pFormatCtx);
-    NSLog(@"Error when getting thumbnails: Pixel format is null");
+    LOG_ERROR(@"Error when getting thumbnails: Pixel format is null");
     return -1;
   }
 
@@ -280,7 +291,7 @@ return -1;\
   // Close the video file
   avformat_close_input(&pFormatCtx);
 
-  // NSLog(@"Thumbnails generated.");
+  // LOG_DEBUG(@"Thumbnails generated.");
   return 0;
 }
 
@@ -332,6 +343,8 @@ return -1;\
   }
 }
 
+// MARK: - Probing Video
+
 + (NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file
 {
   int ret;
@@ -343,7 +356,7 @@ return -1;\
   ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
   free(cFilename);
   if (ret < 0) {
-    NSLog(@"Error when opening file %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
+    LOG_ERROR(@"Error when opening file %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
     return NULL;
   }
 
@@ -351,22 +364,451 @@ return -1;\
   if (duration <= 0) {
     ret = avformat_find_stream_info(pFormatCtx, NULL);
     if (ret < 0) {
-      NSLog(@"Error when probing %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
+      LOG_ERROR(@"Error when probing %@ to obtain info: %s (%d)", file, av_err2str(ret), ret);
       duration = -1;
     } else
       duration = pFormatCtx->duration;
   }
 
+  // In addition to the duration IINA is interested metadata tags, especially the title tag. In many
+  // formats metadata is attached to the container itself. However in Ogg files metadata is attached
+  // to the stream. If the title tag is not found in the metadata from the container then search for
+  // an audio stream. If an audio stream with metadata containing a title tag is found then use the
+  // metadata from the stream instead of from the container. This addresses issue #5314.
+  AVDictionary *metadata = pFormatCtx->metadata;
+  if (av_dict_get(metadata, "title", NULL, 0) == NULL) {
+    ret = av_find_best_stream(pFormatCtx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
+    if (ret < 0) {
+      // Don't report an error when there isn't an audio stream.
+      if (ret != AVERROR_STREAM_NOT_FOUND) {
+        LOG_ERROR(@"Error when probing %@ to obtain best stream: %s (%d)", file, av_err2str(ret), ret);
+      }
+    } else if (av_dict_get(pFormatCtx->streams[ret]->metadata, "title", NULL, 0) != NULL) {
+      metadata = pFormatCtx->streams[ret]->metadata;
+    }
+  }
+
   NSMutableDictionary *info = [[NSMutableDictionary alloc] init];
   info[@"@iina_duration"] = duration == -1 ? [NSNumber numberWithInt:-1] : [NSNumber numberWithDouble:(double)duration / AV_TIME_BASE];
   AVDictionaryEntry *tag = NULL;
-  while ((tag = av_dict_get(pFormatCtx->metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))
-    info[[NSString stringWithCString:tag->key encoding:NSUTF8StringEncoding]] = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];
+  while ((tag = av_dict_get(metadata, "", tag, AV_DICT_IGNORE_SUFFIX))) {
+    // FFmpeg may return strings that are not valid. See issue #5602.
+    const NSString *key = [NSString stringWithCString:tag->key encoding:NSUTF8StringEncoding];
+    if (!key) {
+      LOG_WARN(@"Cannot construct a string for a metadata tag key");
+      continue;
+    }
+    const NSString *value = [NSString stringWithCString:tag->value encoding:NSUTF8StringEncoding];
+    if (!value) {
+      LOG_WARN(@"Cannot construct a string for the value of the metadata tag key: %@", key);
+      continue;
+    }
+    info[key] = value;
+  }
 
   avformat_close_input(&pFormatCtx);
   avformat_free_context(pFormatCtx);
 
   return info;
 }
+
+// MARK: - Decoding Image
+
++ (NSImage *)createNSImageWithContentsOfURL:(nonnull NSURL *)url
+{
+  // Variables holding objects that will need to be freed.
+  AVFormatContext *pFormatCtx = NULL;
+  AVCodecContext *pCodecCtx = NULL;
+  AVPacket *packet = NULL;
+  AVFrame *pFrame = NULL;
+  AVFrame *pFrameRGB = NULL;
+  uint8_t *pFrameRGBBuffer = NULL;
+  struct SwsContext *swsContext = NULL;
+  CGColorSpaceRef cgColorSpace = NULL;
+  CGContextRef cgContext = NULL;
+  CGImageRef cgImage = NULL;
+
+  @try {
+#if DEBUG
+    LOG_DEBUG(@"Creating image with contents of file: %s", url.fileSystemRepresentation)
+#endif
+
+    int ret = avformat_open_input(&pFormatCtx, url.fileSystemRepresentation, NULL, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Error when opening file %@ to construct NSImage: %s (%d)", url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Cannot get stream info: %s (%d)", av_err2str(ret), ret);
+      return NULL;
+    }
+
+    // Expecting image files to have one video stream.
+    if (pFormatCtx->nb_streams != 1) {
+      LOG_ERROR(@"Expected one stream found: %d", pFormatCtx->nb_streams);
+      return NULL;
+    }
+    const AVStream *pVideoStream = pFormatCtx->streams[0];
+    const enum AVMediaType codecType = pVideoStream->codecpar->codec_type;
+    if (codecType != AVMEDIA_TYPE_VIDEO) {
+      LOG_ERROR(@"Unexpected stream type: %s (%d)", av_get_media_type_string(codecType), codecType);
+      return NULL;
+    }
+    // Expecting the number of frames to be unknown (0) or 1.
+    if (pVideoStream->nb_frames > 1) {
+      LOG_ERROR(@"Expected one frame found: %lld", pVideoStream->nb_frames);
+      return NULL;
+    }
+
+    const AVCodec *pCodec = avcodec_find_decoder(pVideoStream->codecpar->codec_id);
+    if (!pCodec) {
+      LOG_ERROR(@"Cannot get decoder codec: %d", pVideoStream->codecpar->codec_id);
+      return NULL;
+    }
+
+    // This method is only intended to be used for JPEG XL or WebP encoded images. As only these
+    // formats have been tested, refuse to process other formats.
+    if (pCodec->id != AV_CODEC_ID_JPEGXL && pCodec->id != AV_CODEC_ID_WEBP) {
+      LOG_ERROR(@"Unexpected encoding: %s (%d)", pCodec->name, pCodec->id);
+      return NULL;
+    }
+
+    pCodecCtx = avcodec_alloc_context3(pCodec);
+    if (!pCodecCtx) {
+      LOG_ERROR(@"Cannot alloc codec context: %s (%d)", pCodec->name, pCodec->id);
+      return NULL;
+    }
+    avcodec_parameters_to_context(pCodecCtx, pVideoStream->codecpar);
+    if (pCodecCtx->pix_fmt < 0 || pCodecCtx->pix_fmt >= AV_PIX_FMT_NB) {
+      LOG_ERROR(@"Invalid pixel format: %d", pCodecCtx->pix_fmt);
+      return NULL;
+    }
+
+    // Permit use of multiple threads for decoding. By default thread count is set to one which
+    // disables use of multiple threads. Setting it to zero allows the codec to use multiple
+    // threads. This is only done if the codec has the capability of using multiple threads for
+    // decoding an individual frame as testing showed the WebP codec, which does not have this
+    // capability, reacted badly to being given permission to use multiple threads. When this
+    // property was set to anything other than one WebP decoding failed with "Resource temporarily
+    // unavailable". The JPEG XL codec has this capability and will take advantage of multiple
+    // threads. Testing on a MacBook Pro with the M1 Max chip showed a 40% reduction in the time to
+    // decode a JPEG XL screenshot of a 4K video when using multiple threads. Normally speed of
+    // decoding is not an issue, however mpv provides screenshot options that control the encoding
+    // compression and quality. Changing these settings can result in the creation of screenshots
+    // that take multiple seconds to decode. The thread count must be set before opening the codec.
+    if (pCodec->capabilities & AV_CODEC_CAP_OTHER_THREADS) {
+      pCodecCtx->thread_count = 0;
+    }
+
+    ret = avcodec_open2(pCodecCtx, pCodec, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Cannot open codec: %s (%d)", av_err2str(ret), ret);
+      return NULL;
+    }
+
+    packet = av_packet_alloc();
+    ret = av_read_frame(pFormatCtx, packet);
+    if (ret < 0) {
+      LOG_ERROR(@"Cannot read packet: %s (%d)", av_err2str(ret), ret);
+      return NULL;
+    }
+    if (packet->stream_index != 0) {
+      LOG_ERROR(@"Unexpected video stream: %d", packet->stream_index);
+      return NULL;
+    }
+
+    pFrame = av_frame_alloc();
+    if (!pFrame) {
+      LOG_ERROR(@"Cannot alloc frame");
+      return NULL;
+    }
+
+    ret = avcodec_send_packet(pCodecCtx, packet);
+    if (ret < 0) {
+      LOG_ERROR(@"Cannot send packet: %s (%d)", av_err2str(ret), ret);
+      return NULL;
+    }
+    ret = avcodec_receive_frame(pCodecCtx, pFrame);
+    if (ret < 0) {
+      LOG_ERROR(@"Cannot receive frame: %s (%d)", av_err2str(ret), ret);
+      return NULL;
+    }
+
+#if DEBUG
+    [FFmpegController logFrame:pCodec:pFrame];
+#endif
+
+    // CGImage requires the image frame to be converted to RGBA.
+    pFrameRGB = av_frame_alloc();
+    if (!pFrameRGB) {
+      LOG_ERROR(@"Cannot alloc RGBA frame");
+      return NULL;
+    }
+    pFrameRGB->width = pFrame->width;
+    pFrameRGB->height = pFrame->height;
+
+    // Determine the appropriate RGBA pixel format to convert to.
+    CGBitmapInfo bitmapInfo;
+    switch (pFrame->format) {
+      default:
+        // If this message is logged then the situation needs to be investigated to determine the
+        // correct conversion. Fall through and treat this as a SDR image.
+        LOG_WARN(@"Unexpected pixel format: %s (%d)", av_get_pix_fmt_name(pFrame->format),
+             pFrame->format);
+      case AV_PIX_FMT_ARGB: // WebP with screenshot-webp-lossless mpv option enabled.
+      case AV_PIX_FMT_RGB24: // JPEG XL SDR video.
+      case AV_PIX_FMT_RGBA64LE: // JPEG XL SDR video.
+      case AV_PIX_FMT_YUV420P: // WebP default.
+        pFrameRGB->format = AV_PIX_FMT_RGBA;
+        bitmapInfo = (CGBitmapInfo)kCGImageAlphaPremultipliedLast;
+        break;
+      case AV_PIX_FMT_RGB48LE: // JPEG XL HDR video.
+        // Workaround missing FFmpeg 6.0 scalar capabilities. As per Apple EDR requires using 16 bit
+        // floating point components in the image bit map. Therefore we want the scalar to convert
+        // the frame to the AV_PIX_FMT_RGBAF16LE pixel format. However when that was specified the
+        // call to sws_getContext returned NULL. The scalar printed the message "rgbaf16le is not
+        // supported as output pixel format" to the console. As a workaround we convert to
+        // AV_PIX_FMT_RGBA64LE and then convert the components to floating point.
+        pFrameRGB->format = AV_PIX_FMT_RGBA64LE;
+        bitmapInfo = kCGImageByteOrder16Little | kCGImageAlphaPremultipliedLast |
+            kCGBitmapFloatComponents;
+    }
+
+    // Determine required buffer size and allocate the buffer.
+    const int size = av_image_get_buffer_size(pFrameRGB->format, pFrame->width, pFrame->height, 1);
+    pFrameRGBBuffer = (uint8_t *)av_malloc(size);
+    if (!pFrameRGBBuffer) {
+      LOG_ERROR(@"Cannot alloc RGBA buffer");
+      return NULL;
+    }
+
+    // Assign appropriate parts of buffer to image planes in pFrameRGB.
+    ret = av_image_fill_arrays(pFrameRGB->data, pFrameRGB->linesize, pFrameRGBBuffer,
+        pFrameRGB->format, pFrameRGB->width, pFrameRGB->height, 1);
+    if (ret < 0) {
+      LOG_ERROR(@"Cannot fill data for RGBA frame: %s (%d)", av_err2str(ret), ret);
+      return NULL;
+    }
+
+    // Convert the image frame to RGBA using the FFmpeg scaler.
+    swsContext = sws_getContext(pFrame->width, pFrame->height, pFrame->format,
+        pFrameRGB->width, pFrameRGB->height, pFrameRGB->format, SWS_BILINEAR, NULL, NULL, NULL);
+    if (!swsContext) {
+      LOG_ERROR(@"Cannot alloc sws context");
+      return NULL;
+    }
+    sws_scale(swsContext, (const uint8_t* const *)pFrame->data, pFrame->linesize, 0, pFrame->height,
+        pFrameRGB->data, pFrameRGB->linesize);
+
+    // Obtain information about the pixel format that is needed to create the bitmap image.
+    const AVPixFmtDescriptor *pixFmtDesc = av_pix_fmt_desc_get(pFrameRGB->format);
+    if (!pixFmtDesc){
+      LOG_ERROR(@"Cannot get descriptor for pixel format: %s (%d)",
+            av_get_pix_fmt_name(pFrameRGB->format), pFrameRGB->format);
+      return NULL;
+    }
+    const int bitsPerPixel = av_get_bits_per_pixel(pixFmtDesc);
+    const int bitsPerComponent = bitsPerPixel / pixFmtDesc->nb_components;
+    const int bytesPerPixel = bitsPerPixel / 8;
+
+    if (pFrameRGB->format == AV_PIX_FMT_RGBA64LE) {
+      const int bytesPerComponent = bitsPerComponent / 8;
+
+      // Each row of pixels in memory may contain extra padding for performance reasons. The
+      // linesize gives the actual number of bytes each row consumes in the frame buffer.
+      const int strideInBytes = pFrameRGB->linesize[0];
+
+      // Apply the second part of the workaround for the FFmpeg scalar not supporting conversion to
+      // the pixel format AV_PIX_FMT_RGBAF16LE. Convert the pixel components to short floating point
+      // values. This is an in-place conversion, which is supported by vImageConvert_16Uto16F, so
+      // only one buffer is used.
+      const vImage_Buffer buffer = {.width = pFrameRGB->width * bytesPerPixel / bytesPerComponent,
+        .height = pFrameRGB->height, .rowBytes = strideInBytes, .data = pFrameRGB->data[0]};
+      const vImage_Error error = vImageConvert_16Uto16F(&buffer, &buffer, kvImageNoFlags);
+      if (error != kvImageNoError) {
+        LOG_ERROR(@"Method vImageConvert_16Uto16F failed: %ld", error);
+        return NULL;
+      }
+    }
+
+    // Determine the color space to use for the image.
+    switch (pFrame->color_primaries) {
+      default:
+        // If this message is logged then the situation needs to be investigated to determine the
+        // correct color space. Fall through and treat this as a SDR image.
+        LOG_WARN(@"Unexpected color primaries: %s (%d)",
+             av_color_primaries_name(pFrame->color_primaries), pFrame->color_primaries);
+      case AVCOL_PRI_UNSPECIFIED:
+      case AVCOL_PRI_BT709:
+        cgColorSpace = CGColorSpaceCreateDeviceRGB();
+        break;
+      case AVCOL_PRI_BT2020:
+        switch (pFrame->color_trc) {
+          default:
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
+            break;
+          case AVCOL_TRC_ARIB_STD_B67:
+            if (@available(macOS 11.0, *)) {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_HLG);
+            } else if (@available(macOS 10.15.6, *)) {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_HLG);
+            } else {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
+            }
+            break;
+          case AVCOL_TRC_SMPTE2084:
+            if (@available(macOS 11.0, *)) {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_PQ);
+            } else if (@available(macOS 10.15.4, *)) {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ);
+            } else {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ_EOTF);
+            }
+        }
+        break;
+      case AVCOL_PRI_SMPTE432:
+        switch (pFrame->color_trc) {
+          default:
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3);
+            break;
+          case AVCOL_TRC_ARIB_STD_B67:
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_HLG);
+            break;
+          case AVCOL_TRC_SMPTE2084:
+            if (@available(macOS 10.15.4, *)) {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ);
+            } else {
+              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ_EOTF);
+            }
+        }
+    }
+    if (!cgColorSpace) {
+      LOG_ERROR(@"Cannot create color space");
+      return NULL;
+    }
+
+#if DEBUG
+    LOG_DEBUG(@"Selected %s color space for bitmap image",
+        CFStringGetCStringPtr(CGColorSpaceCopyName(cgColorSpace), CFStringGetSystemEncoding()));
+    LOG_DEBUG(@"Creating bitmap image with %d bits per component and %d bytes per pixel",
+        bitsPerComponent, bytesPerPixel);
+#endif
+
+    cgContext = CGBitmapContextCreate(pFrameRGB->data[0], pFrameRGB->width, pFrameRGB->height,
+        bitsPerComponent, pFrameRGB->width * bytesPerPixel, cgColorSpace, bitmapInfo);
+    if (!cgContext) {
+      LOG_ERROR(@"Cannot create bitmap context");
+      return NULL;
+    }
+    cgImage = CGBitmapContextCreateImage(cgContext);
+    if (!cgImage) {
+      LOG_ERROR(@"Cannot create bitmap image");
+      return NULL;
+    }
+
+    NSImage *image = [[NSImage alloc] initWithCGImage:cgImage size: NSZeroSize];
+    if (!image) {
+      LOG_ERROR(@"Cannot create image");
+    }
+    return image;
+  }
+  @finally {
+    // All of these methods accept null, no need to check if the object was allocated.
+    CGImageRelease(cgImage);
+    CGContextRelease(cgContext);
+    CGColorSpaceRelease(cgColorSpace);
+    sws_freeContext(swsContext);
+    av_freep(&pFrameRGBBuffer);
+    av_frame_free(&pFrameRGB);
+    av_frame_free(&pFrame);
+    av_packet_free(&packet);
+    avcodec_free_context(&pCodecCtx);
+    avformat_close_input(&pFormatCtx);
+  }
+}
+
+// MARK: - Media Artwork
+
++ (NSImage *)readArtworkFromURL:(nonnull NSURL *)url
+{
+  AVFormatContext *pFormatCtx = NULL;
+
+  @try {
+    int ret = avformat_open_input(&pFormatCtx, url.fileSystemRepresentation, NULL, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to open file %@ when searching for artwork: %s (%d)", url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to obtain stream info from file %@ when searching for artwork: %s (%d)",
+                url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    // Search the streams for one that contains front cover artwork.
+    int index = 0;
+    AVPacket* packet = NULL;
+    for (int i = 0; i < pFormatCtx->nb_streams; i++) {
+      AVStream* stream = pFormatCtx->streams[i];
+
+      // For this stream to be cover artwork it must be an attached picture (APIC).
+      if ((stream->disposition & AV_DISPOSITION_ATTACHED_PIC) == 0) { continue; }
+
+      // And it must not be a stream of thumbnail images.
+      if ((stream->disposition & AV_DISPOSITION_TIMED_THUMBNAILS) != 0) { continue; }
+
+      // If a stream passes these two checks mpv identifies it as album art. To match up with mpv
+      // this is all IINA checks as well. ID3v2 defines picture types, but I did not find any code
+      // in mpv checking to confirm the image is marked as front cover art. The list of picture
+      // types can be found here: https://id3.org/id3v2.3.0#Attached_picture
+
+      // Found front cover artwork.
+      index = i;
+      packet = &stream->attached_pic;
+      break;
+    }
+
+    if (!packet) {
+      return NULL;
+    }
+
+    // Form an image from the stream's data.
+    LOG_DEBUG(@"Creating an image from stream %d using %d bytes", index, packet->size);
+    NSData *data = [[NSData alloc] initWithBytes:packet->data length:packet->size];
+    NSImage *image = [[NSImage alloc] initWithData:data];
+    if (!image) {
+      LOG_ERROR(@"Cannot create image from artwork for file: %@", url);
+    }
+    return image;
+  }
+  @finally {
+    avformat_close_input(&pFormatCtx);
+  }
+}
+
+// MARK: - Logging
+
+#if DEBUG
+/// Log details about the given decoded frame.
+/// - Parameters:
+///   - pCodec: The codec that decoded the frame.
+///   - pFrame: The decoded frame to log.
++ (void)logFrame:(const AVCodec *)pCodec
+                :(const AVFrame *)pFrame
+{
+  LOG_DEBUG(@"Decoded %s frame", pCodec->long_name);
+  LOG_DEBUG(@"Pixel format: %s (%d)", av_get_pix_fmt_name(pFrame->format), pFrame->format);
+  LOG_DEBUG(@"Color range: %s (%d)", av_color_range_name(pFrame->color_range), pFrame->color_range);
+  LOG_DEBUG(@"Color primaries: %s (%d)", av_color_primaries_name(pFrame->color_primaries), pFrame->color_primaries);
+  LOG_DEBUG(@"Color transfer: %s (%d)", av_color_transfer_name(pFrame->color_trc), pFrame->color_trc);
+  LOG_DEBUG(@"Color space: %s (%d)", av_color_space_name(pFrame->colorspace), pFrame->colorspace);
+  LOG_DEBUG(@"Width: %d", pFrame->width);
+  LOG_DEBUG(@"Height: %d", pFrame->height);
+}
+#endif
 
 @end

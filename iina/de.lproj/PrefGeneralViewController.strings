@@ -8,7 +8,7 @@
 "2rJ-mg-OuU.title" = "Sichern unter";
 
 /* Class = "NSMenuItem"; title = "PNG"; ObjectID = "3XO-ks-TDg"; */
-"3XO-ks-TDg.title" = "PNG";
+"3XO-ks-TDg.title" = "PNG (*.png)";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
 "3gs-3w-rg6.title" = "In die Zwischenablage kopieren";
@@ -18,9 +18,6 @@
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "„Benutzte Dokumente“-Menü aktivieren";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Wiedergabefenster wird im Dock abgelegt oder wiederhergestellt";
@@ -36,9 +33,6 @@
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Alle Dateien in „Benutzte Dokumente“ aufführen";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "Täglich";
@@ -61,20 +55,23 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Im Vollbildmodus andere Monitore abdunkeln";
 
+/* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
+"Kdk-iC-e1C.title" = "Verhindert immer noch, dass das System schläft.";
+
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Beim Abspielen von Musik automatisch in den Musikmodus wechseln";
+"KfL-r7-Uav.title" = "Beim Abspielen von Musik automatisch in den „Musikmodus“ wechseln";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Nächste Datei automatisch abspielen";
 
-/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+/* Class = "NSButtonCell"; title = "Allow multiple player windows"; ObjectID = "M0z-bI-88d"; */
 "M0z-bI-88d.title" = "Dateien immer in neuem Fenster öffnen";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "Vollbildmodus aktivieren";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
-"NVh-C5-b9i.title" = "JPEG (.jpeg)";
+"NVh-C5-b9i.title" = "JPEG (*.jpeg)";
 
 /* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
 "PhL-vP-i7L.title" = "Speicherort:";
@@ -95,7 +92,7 @@
 "YLo-6E-tT7.title" = "Beenden, wenn keine Fenster mehr geöffnet sind";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/path/to/screenshot/folder";
+"YeH-hk-7NN.title" = "~/Desktop";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Beta-Updates erhalten";
@@ -121,7 +118,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Verlauf:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "Interpret und Titel für Audiodateien anzeigen, wenn verfügbar";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
@@ -136,6 +133,9 @@
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Bildschirmfotos:";
 
+/* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
+"r2u-P9-J5p.title" = "Verhindern, dass der Bildschirmschoner während der Wiedergabe startet";
+
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Stündlich";
 
@@ -146,10 +146,28 @@
 "uQR-Fx-oEm.title" = "Verhalten:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Vorschau nach Screenshots anzeigen";
+"xE7-Uu-19f.title" = "Vorschau nach der Aufnahme von Bildschirmfotos anzeigen";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pause/Wiedergabe, wenn:";
 
+/* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
+"yla-DT-YTx.title" = "Nicht im „Musikmodus“ oder bei reiner Audiowiedergabe";
+
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Willkommensfenster anzeigen";
+
+/* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
+"jok-kc-HjX.title" = "Wenn eine Datei manuell geöffnet wird:";
+
+/* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
+"5WC-Sp-6mg.title" = "Wiedergabeliste wiederholen";
+
+/* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
+"A1p-L4-jtC.title" = "Einzelne Datei wiederholen";
+
+/* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
+"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+
+/* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
+"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";

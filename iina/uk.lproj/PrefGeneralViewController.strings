@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Show open file panel"; ObjectID = "1ce-4b-kgG"; */
-"1ce-4b-kgG.title" = "показати вікно відкривання файлів";
+"1ce-4b-kgG.title" = "Показати вікно відкривання файлів";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
 "2iM-j7-AzQ.title" = "Не закривати вікно після перегляду";
@@ -19,14 +19,11 @@
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Увімкнути меню «Відкрити останні»";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Ящик";
-
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Згорнуто / розгорнуто";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
-"6TV-DG-503.title" = "Підбірка:";
+"6TV-DG-503.title" = "Плейлист:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
 "8kU-8g-VgX.title" = "Для набуття чинності змін треба перезавантажити IINA.";
@@ -36,9 +33,6 @@
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Заносити всі переглянуті файли до меню «Відкрити останні»";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Ящик";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "щодня";
@@ -61,13 +55,16 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Затемнити інші вікна, коли у повноекранному режимі";
 
+/* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
+"Kdk-iC-e1C.title" = "Запобігає системі переходити в режим сну.";
+
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "Автоматично переходити до режиму музики при відтворюванні аудіофайла";
+"KfL-r7-Uav.title" = "Автоматично переходити до \"музичного режиму\" при відтворюванні аудіофайлу";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Відтворювати наступний файл автоматично";
 
-/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+/* Class = "NSButtonCell"; title = "Allow multiple player windows"; ObjectID = "M0z-bI-88d"; */
 "M0z-bI-88d.title" = "Завжди відкривати файл в новому вікні";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
@@ -95,7 +92,7 @@
 "YLo-6E-tT7.title" = "Завершити, коли всі вікна закрито";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/шлях/до/папки/знімків/екрану";
+"YeH-hk-7NN.title" = "/шлях/до/теки/знятків";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Отримувати бета-оновлення";
@@ -107,7 +104,7 @@
 "gqT-CB-Puw.title" = "Коли запущено:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
-"hWC-KJ-FuC.title" = "Перевіряти оновлення";
+"hWC-KJ-FuC.title" = "Перевіряти наявність оновлень";
 
 /* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
 "i4A-86-dGC.title" = "Зупиняти, коли комп'ютер переходить у режим сну";
@@ -121,7 +118,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Історія:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "Показувати виконавця та назву треку для аудіофайлів, коли це доступно";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
@@ -134,7 +131,10 @@
 "oJY-Iz-3sO.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Знімки екрана:";
+"pdx-zt-kf2.title" = "Знятки:";
+
+/* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
+"r2u-P9-J5p.title" = "Запобігає запуск режиму збереження екрана під час відтворення";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "щогодини";
@@ -151,5 +151,23 @@
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Зупинити / відновити, коли: ";
 
+/* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
+"yla-DT-YTx.title" = "Не під час \"музичного режиму\" або лише відтворення аудіо";
+
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "показати вікно привітання";
+
+/* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
+"jok-kc-HjX.title" = "Коли файл відкрито вручну:";
+
+/* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
+"5WC-Sp-6mg.title" = "Зациклити плейлист";
+
+/* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
+"A1p-L4-jtC.title" = "Зациклити один файл";
+
+/* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
+"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+
+/* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
+"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";

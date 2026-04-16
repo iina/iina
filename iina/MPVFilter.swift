@@ -57,9 +57,9 @@ class MPVFilter: NSObject {
    - parameter amount: Amount for la and ca. Should be in [-1.5, 1.5].
    */
   static func unsharp(amount: Float, msize: Int = 5) -> MPVFilter {
-    let amoutStr = amount.description
+    let amountStr = amount.description
     let msizeStr = msize.description
-    return MPVFilter(lavfiName: "unsharp", label: nil, params: [msizeStr, msizeStr, amoutStr, msizeStr, msizeStr, amoutStr])
+    return MPVFilter(lavfiName: "unsharp", label: nil, params: [msizeStr, msizeStr, amountStr, msizeStr, msizeStr, amountStr])
   }
 
   // MARK: - Members
@@ -230,29 +230,6 @@ class MPVFilter: NSObject {
   }
 
   // MARK: - Param getter
-
-  func cropParams(videoSize: NSSize) -> [String: Double] {
-    guard type == .crop else {
-      Logger.fatal("Trying to get crop params from a non-crop filter!")
-    }
-    guard let params = params else { return [:] }
-    // w and h should always valid
-    let w = Double(params["w"]!)!
-    let h = Double(params["h"]!)!
-    let x: Double, y: Double
-    // check x and y
-    if let testx = Double(params["x"] ?? ""), let testy = Double(params["y"] ?? "") {
-      x = testx
-      y = testy
-    } else {
-      let cx = Double(videoSize.width) / 2
-      let cy = Double(videoSize.height) / 2
-      x = cx - w / 2
-      y = cy - h / 2
-    }
-
-    return ["x": x, "y": y, "w": w, "h": h]
-  }
 
   /// Returns `true` if this filter is equal to the given filter `false` otherwise.
   ///

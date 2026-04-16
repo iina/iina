@@ -150,5 +150,5 @@ class Shooter {
 }
 
 extension Logger.Sub {
-  static let shooter = Logger.Subsystem(rawValue: "sub.shooter")
+  static let shooter = Logger.makeSubsystem("sub.shooter")
 }

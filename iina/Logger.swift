@@ -19,15 +19,59 @@ import Foundation
 /// - Important: The `createDirIfNotExist` method in `Utilities` **must not** be used by the logger. If an error occurs
 ///     that method will attempt to report it using the logger. If the logger is still being initialized this will result in a crash. For that reason
 ///     the logger uses its own similar method.
-struct Logger {
+class Logger: NSObject {
 
-  struct Subsystem: RawRepresentable {
-    var rawValue: String
+  class Log: NSObject {
+    @objc dynamic let subsystem: String
+    @objc dynamic let level: Int
+    @objc dynamic let message: String
+    @objc dynamic let date: String
+    let logString: String
+
+    init(subsystem: String, level: Int, message: String, date: String, logString: String) {
+      self.subsystem = subsystem
+      self.level = level
+      self.message = message
+      self.date = date
+      self.logString = logString
+    }
+
+    override var description: String {
+      return logString
+    }
+  }
+
+  @Atomic static var logs: [Logger.Log] = []
+
+  class Subsystem: RawRepresentable {
+    let rawValue: String
+    var added = false
 
     static let general = Subsystem(rawValue: "iina")
 
-    init(rawValue: String) {
+    required init(rawValue: String) {
       self.rawValue = rawValue
+    }
+  }
+
+  @Atomic static var subsystems: [Subsystem] = [.general]
+
+  static func makeSubsystem(_ rawValue: String) -> Subsystem {
+    $subsystems.withLock() { subsystems in
+      for (index, subsystem) in subsystems.enumerated() {
+        // The first subsystem will always be "iina"
+        if index == 0 { continue }
+        if rawValue < subsystem.rawValue {
+          let newSubsystem = Subsystem(rawValue: rawValue)
+          subsystems.insert(newSubsystem, at: index)
+          return newSubsystem
+        } else if rawValue == subsystem.rawValue {
+          return subsystem
+        }
+      }
+      let newSubsystem = Subsystem(rawValue: rawValue)
+      subsystems.append(newSubsystem)
+      return newSubsystem
     }
   }
 
@@ -36,12 +80,12 @@ struct Logger {
       return lhs.rawValue < rhs.rawValue
     }
 
+    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
+
     case verbose
     case debug
     case warning
     case error
-
-    static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
 
     var description: String {
       switch self {
@@ -83,7 +127,7 @@ struct Logger {
 
   private static let logFile: URL = logDirectory.appendingPathComponent("iina.log")
 
-  private static let loggerSubsystem = Logger.Subsystem(rawValue: "logger")
+  private static let loggerSubsystem = Logger.makeSubsystem("logger")
 
   private static var logFileHandle: FileHandle? = {
     FileManager.default.createFile(atPath: logFile.path, contents: nil, attributes: nil)
@@ -144,18 +188,66 @@ struct Logger {
   }
 
   private static func formatMessage(_ message: String, _ level: Level, _ subsystem: Subsystem,
-                                    _ appendNewlineAtTheEnd: Bool) -> String {
-    let time = dateFormatter.string(from: Date())
+                                    _ appendNewlineAtTheEnd: Bool, _ date: Date = Date()) -> String {
+    let time = dateFormatter.string(from: date)
     return "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
   }
 
-  static func log(_ message: String, level: Level = .debug, subsystem: Subsystem = .general, appendNewlineAtTheEnd: Bool = true) {
+  /// Log a message.
+  ///
+  /// Emit a message to the log file if logging is enabled and logging is configured to log messages at the given level.
+  /// - Important: The message is passed as a closure instead of a `String` so that if the message includes string interpolations
+  ///     the evaluation of the expressions and construction of the string can be delayed until it is known that the message will be
+  ///     written to the log file and not discarded due to logging either being disabled or configured to not emit messages at the given
+  ///     level. This method uses [autoclosure](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/closures/#Autoclosures) so that
+  ///     callers do not to need to supply an explicit closure.
+  /// - Parameters:
+  ///   - message: A closure that when executed gives the message to log.
+  ///   - level: The log level of the message.
+  ///   - subsystem: The subsystem emitting this message.
+  static func log(_ message: @autoclosure () -> String, level: Level = .debug,
+                  subsystem: Subsystem = .general) {
+    log(message, level: level, subsystem: subsystem)
+  }
+
+  /// Log a message.
+  ///
+  /// Emit a message to the log file if logging is enabled and logging is configured to log messages at the given level.
+  /// - Important: The message is passed as a closure instead of a `String` so that if the message includes string interpolations
+  ///     the evaluation of the expressions and construction of the string can be delayed until it is known that the message will be
+  ///     written to the log file and not discarded due to logging either being disabled or configured to not emit messages at the given
+  ///     level.
+  /// - Note: This method is intended to only be called by the above `log` method and utility `log` methods used in some
+  ///     classes to supply the subsystem associated with that class.
+  /// - Parameters:
+  ///   - message: A closure that when executed gives the message to log.
+  ///   - level: The log level of the message.
+  ///   - subsystem: The subsystem emitting this message.
+  static func log(_ message: () -> String, level: Level = .debug, subsystem: Subsystem = .general) {
     #if !DEBUG
     guard enabled else { return }
     #endif
 
-    guard level >= .preferred else { return }
-    let string = formatMessage(message, level, subsystem, appendNewlineAtTheEnd)
+    guard level.rawValue >= Preference.integer(for: .logLevel) else { return }
+
+    // Now that we know the message will not be discarded, call the closure to construct the message
+    // string to log.
+    let message = message()
+
+    let date = Date()
+    let string = formatMessage(message, level, subsystem, true, date)
+    let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
+    $logs.withLock() { logs in
+      if logs.isEmpty {
+        DispatchQueue.main.async {
+          Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
+            AppDelegate.shared.logWindow.syncLogs()
+          }
+        }
+      }
+      logs.append(log)
+    }
+
     print(string, terminator: "")
 
     #if DEBUG

@@ -1,0 +1,12 @@
+//
+//  Beta.xcconfig
+//  iina
+//
+//  Created by low-batt on 4/27/23.
+//  Copyright © 2023 lhc. All rights reserved.
+//
+
+#include "Release.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIconBeta
+CONFIGURATION = Beta

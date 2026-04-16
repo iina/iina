@@ -46,9 +46,11 @@ class EventController {
     static let fileLoaded = Name("iina.file-loaded")
     static let fileStarted = Name("iina.file-started")
     
-    static let mpvInitialized = Name("iina.mpv-inititalized")
+    static let mpvInitialized = Name("iina.mpv-initialized")
     static let thumbnailsReady = Name("iina.thumbnails-ready")
     static let pluginOverlayLoaded = Name("iina.plugin-overlay-loaded")
+
+    static let menuUpdate = Name("iina.menu-update")
   }
 
   var listeners: [Name: [String: EventCallable]] = [:]
@@ -68,10 +70,6 @@ class EventController {
     guard let t = listeners[name], let _ = t[id] else { return false }
     listeners[name]![id] = nil
     return true
-  }
-
-  func removeAllListener(for name: Name) {
-    listeners[name]?.removeAll()
   }
 
   func emit(_ eventName: Name, data: Any...) {

@@ -5,7 +5,7 @@
 "1dz-Vt-0MO.title" = "FPS:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
-"4jf-w4-kkv.title" = "Umístění souboru:";
+"4jf-w4-kkv.title" = "Cesta k souboru:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
 "5H6-qJ-RDS.title" = "Formát:";
@@ -53,10 +53,10 @@
 "I2E-6Z-Gnn.title" = "Ovladač:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Odhad zobrazených FPS";
+"JN9-3E-OJp.title" = "Odhad zobrazených FPS:";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
-"Jxp-Wf-BhU.title" = "Umístění souboru:";
+"Jxp-Wf-BhU.title" = "Cesta k souboru:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
 "KqD-NM-WiK.title" = "Velikost:";
@@ -165,3 +165,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "Barevný prostor:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
+"zDk-Ie-EPs.headerCell.title" = "Název";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
+"x6R-q7-efY.headerCell.title" = "Hodnota";

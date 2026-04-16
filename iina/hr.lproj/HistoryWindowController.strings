@@ -1,11 +1,11 @@
 /* Class = "NSMenuItem"; title = "Clear Recents"; ObjectID = "07n-bk-3ma"; */
-"07n-bk-3ma.title" = "Očisti nedavno";
+"07n-bk-3ma.title" = "Očisti nedavne";
 
 /* Class = "NSMenuItem"; title = "Full path"; ObjectID = "AZL-gY-Tob"; */
 "AZL-gY-Tob.title" = "Potpuna putanja";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "CqL-By-26A"; */
-"CqL-By-26A.title" = "Izbriši…";
+"CqL-By-26A.title" = "Izbriši …";
 
 /* Class = "NSTableColumn"; headerCell.title = "File"; ObjectID = "DIC-tR-R2F"; */
 "DIC-tR-R2F.headerCell.title" = "Datoteka";
@@ -13,14 +13,14 @@
 /* Class = "NSWindow"; title = "Playback History"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Povijest reprodukcija";
 
-/* Class = "NSMenuItem"; title = "Reveal in Finder"; ObjectID = "FPK-nx-hvF"; */
+/* Class = "NSMenuItem"; title = "Show in Finder"; ObjectID = "FPK-nx-hvF"; */
 "FPK-nx-hvF.title" = "Prikaži u Finderu";
 
 /* Class = "NSMenuItem"; title = "Search in"; ObjectID = "Gx5-gP-rzr"; */
 "Gx5-gP-rzr.title" = "Traži u";
 
 /* Class = "NSTableColumn"; headerCell.title = "Played at"; ObjectID = "M7K-6H-OPw"; */
-"M7K-6H-OPw.headerCell.title" = "Pokrenuto";
+"M7K-6H-OPw.headerCell.title" = "Vrijeme reprodukcije";
 
 /* Class = "NSTableColumn"; headerCell.title = "Progress"; ObjectID = "MJU-JY-7fx"; */
 "MJU-JY-7fx.headerCell.title" = "Napredak";
@@ -32,19 +32,16 @@
 "VH5-en-8FR.title" = "Mapa";
 
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
-"Wkp-Vn-JoJ.title" = "Naziv datoteke";
-
-/* Class = "NSMenu"; title = "Context Menu"; ObjectID = "lR3-1E-Rwr"; */
-"lR3-1E-Rwr.title" = "Kontekstni izbornik";
+"Wkp-Vn-JoJ.title" = "Ime datoteke";
 
 /* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
-"mXt-wb-fgT.title" = "Pokreni u novom prozoru";
+"mXt-wb-fgT.title" = "Reproduciraj u novom prozoru";
 
 /* Class = "NSMenuItem"; title = "No Recent Searches"; ObjectID = "ndC-eb-4GZ"; */
 "ndC-eb-4GZ.title" = "Nema nedavnih pretraga";
 
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
-"oMR-4K-aR2.title" = "Pokreni";
+"oMR-4K-aR2.title" = "Reproduciraj";
 
 /* Class = "NSTextFieldCell"; title = "Group by:"; ObjectID = "z6c-c4-dgd"; */
 "z6c-c4-dgd.title" = "Grupiraj po:";

@@ -257,7 +257,12 @@ const char *av_get_media_type_string(enum AVMediaType media_type);
  * Internal time base represented as fractional value
  */
 
+#ifdef __cplusplus
+/* ISO C++ forbids compound-literals. */
+#define AV_TIME_BASE_Q          av_make_q(1, AV_TIME_BASE)
+#else
 #define AV_TIME_BASE_Q          (AVRational){1, AV_TIME_BASE}
+#endif
 
 /**
  * @}
@@ -294,7 +299,6 @@ char av_get_picture_type_char(enum AVPictureType pict_type);
  */
 
 #include "common.h"
-#include "error.h"
 #include "rational.h"
 #include "version.h"
 #include "macros.h"
@@ -330,13 +334,6 @@ unsigned av_int_list_length_for_size(unsigned elsize,
  */
 #define av_int_list_length(list, term) \
     av_int_list_length_for_size(sizeof(*(list)), list, term)
-
-/**
- * Open a file using a UTF-8 filename.
- * The API of this function matches POSIX fopen(), errors are returned through
- * errno.
- */
-FILE *av_fopen_utf8(const char *path, const char *mode);
 
 /**
  * Return the fractional representation of the internal time base.

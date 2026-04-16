@@ -78,6 +78,9 @@ class JSPluginSub {
     func search(api: JavascriptAPISubtitle, id: String) -> Promise<[Subtitle]> {
       return Promise { resolver in
         let completed: @convention(block) (Any) -> Void = { subs in
+          if subs is NSNull {
+            resolver.reject(OnlineSubtitle.CommonError.dismissed)
+          }
           guard let subs = subs as? [JavascriptPluginSubtitleItem] else {
             resolver.reject(Error.pluginError("provider.search should return an array of subtitle items."))
             return

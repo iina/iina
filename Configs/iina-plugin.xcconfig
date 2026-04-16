@@ -1,0 +1,13 @@
+//
+//  iina-plugin.xcconfig
+//  iina-plugin
+//
+//  Created by low-batt on 7/6/23.
+//  Copyright © 2023 lhc. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
+PRODUCT_NAME = $(TARGET_NAME)

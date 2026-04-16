@@ -1,0 +1,12 @@
+//
+//  Nightly.xcconfig
+//  iina
+//
+//  Created by low-batt on 4/26/23.
+//  Copyright © 2023 lhc. All rights reserved.
+//
+
+#include "Release.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIconNightly
+CONFIGURATION = Nightly

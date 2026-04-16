@@ -28,8 +28,8 @@
 "cmd.stop" = "Stoppa";
 "cmd.quit" = "Avsluta";
 "cmd.quit-watch-later" = "Avsluta (spara position)";
-"cmd.screenshot" = "Skärmavbild";
-"cmd.screenshot-to-file" = "Skärmavbild till fil";
+"cmd.screenshot" = "Skärmdump";
+"cmd.screenshot-to-file" = "Skärmdumpa till fil";
 "cmd.loadfile" = "Läs in fil";
 "cmd.loadlist" = "Läs in spellista";
 "cmd.run" = "Kör";
@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Växla vänd";
 "iina.toggle-mirror" = "Växla spegla";
 "iina.save-playlist" = "Spara nuvarande spellista";
+"iina.show-current-file-in-finder" = "Visa aktuell fil i Finder";
 "iina.delete-current-file" = "Radera nuvarande fil";
 "iina.delete-current-file-hard" = "Radera nuvarande katalog omedelbart utan att flytta till papperskorgen";
 "iina.find-online-subs" = "Hitta undertexter online";
@@ -83,7 +84,7 @@
 "opt.window-scale" = "Fönsterskalning";
 
 "opt.video" = "Videospår";
-"opt.video-aspect" = "Videoförhållande";
+"opt.video-aspect-override" = "Videoförhållande";
 "opt.contrast" = "Kontrast";
 "opt.brightness" = "Ljusstyrka";
 "opt.gamma" = "Gammakorrigering";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Undertextposition";
 "opt.sub-scale" = "Undertextskala";
 "opt.sub-visibility" = "Undertextsynlighet";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "Åsidosätt ASS-stil";
 
 "opt.fullscreen" = "Fullskärm";

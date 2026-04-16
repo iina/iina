@@ -18,7 +18,7 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
   var viewIdentifier: String = "PrefNetworkViewController"
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_network"))!
+    return makeSymbol("network", fallbackImage: "pref_network")
   }
 
   var preferenceTabTitle: String {
@@ -26,6 +26,9 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
     return NSLocalizedString("preference.network", comment: "Network")
   }
 
+  @IBOutlet weak var ytdlHelpLabel: NSTextField!
+  @IBOutlet weak var enableYTDLCheckBox: NSButton!
+  
   override var sectionViews: [NSView] {
     return [sectionCacheView, sectionNetworkView, sectionYTDLView]
   }
@@ -36,7 +39,24 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do view setup here.
+
+    updateYTDLSettings()
+    NotificationCenter.default.addObserver(forName: .iinaPluginChanged, object: nil, queue: .main) { [unowned self] _ in
+      self.updateYTDLSettings()
+    }
+  }
+
+  private func updateYTDLSettings() {
+    let hasYTDL = JavascriptPlugin.hasYTDL
+    enableYTDLCheckBox.state = hasYTDL ? .off : (Preference.bool(for: .ytdlEnabled) ? .on : .off)
+    sectionYTDLView.subviews.forEach {
+      if let control = $0 as? NSControl {
+        control.isEnabled = !hasYTDL
+      }
+    }
+    ytdlHelpLabel.stringValue = hasYTDL ?
+      NSLocalizedString("preference.ytdl_plugin_installed", comment: "") :
+      NSLocalizedString("preference.ytdl_plugin_not_installed", comment: "")
   }
 
   @IBAction func ytdlHelpAction(_ sender: Any) {

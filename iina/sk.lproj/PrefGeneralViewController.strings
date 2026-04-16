@@ -11,16 +11,13 @@
 "3XO-ks-TDg.title" = "PNG";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "Zkopírovať";
+"3gs-3w-rg6.title" = "Skopírovať do schránky";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
 "4Qe-7S-8xK.title" = "Nastavenia:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "Povoliť \"Otvoriť Nedávne\"";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
+"55O-ik-ql6.title" = "Povoliť \"Otvoriť nedávne\"";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Zmenšené/zväčšené";
@@ -29,16 +26,13 @@
 "6TV-DG-503.title" = "Zoznam:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
-"8kU-8g-VgX.title" = "Vyžaduje reštartovať IINA, aby to fungovalo.";
+"8kU-8g-VgX.title" = "Vyžaduje sa reštartovať IINA, pre správne fungovanie.";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "Only in \"music mode\"";
+"AVe-9Z-RgQ.title" = "Iba v \"režime hudby\"";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Zaznamenať všetky prehrané súbory v \"Otvoriť Nedávne\"";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "Denne";
@@ -61,13 +55,16 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Zčernať ostatné monitory pri prehrávaní na celej obrazovke";
 
+/* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
+"Kdk-iC-e1C.title" = "Stále zabraňuje systému v spánku.";
+
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Prepnúť do \"Režim pre Hudbu\" automaticky pri otvorení zvukového súboru";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Prehrať ďalší súbor automaticky";
 
-/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+/* Class = "NSButtonCell"; title = "Allow multiple player windows"; ObjectID = "M0z-bI-88d"; */
 "M0z-bI-88d.title" = "Vždy otvoriť súbor v novom okne";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
@@ -121,8 +118,8 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "História:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "Show artist and track name for audio files when avaliable";
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
+"kBI-Th-bBV.title" = "Zobraziť umelca a názov stopy pre audio súbory, ak sú dostupné";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
 "lOw-pu-Llm.title" = "Spustiť pri zobrazení na celú obrazovku";
@@ -136,6 +133,9 @@
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "Screenshoty:";
 
+/* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
+"r2u-P9-J5p.title" = "Zabránenie spusteniu šetriča obrazovky počas prehrávania";
+
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Každú hodinu";
 
@@ -146,10 +146,28 @@
 "uQR-Fx-oEm.title" = "Prispôsobenie:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Show previews after taking screenshots";
+"xE7-Uu-19f.title" = "Zobraz náhľady po vytvorení snímok obrazovky";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pozastaviť/spustiť ak:";
 
+/* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
+"yla-DT-YTx.title" = "Nie počas „režimu hudby“ alebo pri prehrávaní zvukového súboru";
+
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Zobraziť uvítacie okno";
+
+/* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
+"jok-kc-HjX.title" = "Keď je súbor otvorený manuálne:";
+
+/* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
+"5WC-Sp-6mg.title" = "Opakovať playlist";
+
+/* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
+"A1p-L4-jtC.title" = "Opakovať jeden súbor";
+
+/* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
+"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+
+/* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
+"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";

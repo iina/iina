@@ -60,7 +60,7 @@ typedef struct AVCodecDescriptor {
     const char *const *mime_types;
     /**
      * If non-NULL, an array of profiles recognized for this codec.
-     * Terminated with FF_PROFILE_UNKNOWN.
+     * Terminated with AV_PROFILE_UNKNOWN.
      */
     const struct AVProfile *profiles;
 } AVCodecDescriptor;
@@ -90,6 +90,12 @@ typedef struct AVCodecDescriptor {
  * equal.
  */
 #define AV_CODEC_PROP_REORDER       (1 << 3)
+
+/**
+ * Video codec supports separate coding of fields in interlaced frames.
+ */
+#define AV_CODEC_PROP_FIELDS        (1 << 4)
+
 /**
  * Subtitle codec is bitmap based
  * Decoded AVSubtitle data can be read from the AVSubtitleRect->pict field.

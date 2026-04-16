@@ -20,9 +20,12 @@ struct AppData {
   // Stopgap for https://github.com/mpv-player/mpv/issues/4000
   static let availableSpeedValues: [Double] = [0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32]
 
-  /** min/max speed for playback **/
+  // Min/max speed for playback speed slider in Quick Settings
   static let minSpeed = 0.25
   static let maxSpeed = 16.0
+
+  /// Lowest possible speed allowed by mpv (0.01x)
+  static let mpvMinPlaybackSpeed = 0.01
 
   /** generate aspect and crop options in menu */
   static let aspects: [String] = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
@@ -36,6 +39,7 @@ struct AppData {
   static let seekAmountMap = [0, 0.05, 0.1, 0.25, 0.5]
   static let seekAmountMapMouse = [0, 0.5, 1, 2, 4]
   static let volumeMap = [0, 0.25, 0.5, 0.75, 1]
+  static let playbackSpeedMap = [0, 0.001, 0.002, 0.005, 0.01]
 
   static let encodings = CharEncoding.list
 
@@ -49,15 +53,22 @@ struct AppData {
 
   static let githubLink = "https://github.com/iina/iina"
   static let contributorsLink = "https://github.com/iina/iina/graphs/contributors"
+  static let crowdinMembersLink = "https://crowdin.com/project/iina"
   static let wikiLink = "https://github.com/iina/iina/wiki"
   static let websiteLink = "https://iina.io"
-  static let emailLink = "developers@iina.io"
   static let ytdlHelpLink = "https://github.com/rg3/youtube-dl/blob/master/README.md#readme"
   static let appcastLink = "https://www.iina.io/appcast.xml"
   static let appcastBetaLink = "https://www.iina.io/appcast-beta.xml"
   static let assrtRegisterLink = "https://secure.assrt.net/user/register.xml?redir=http%3A%2F%2Fassrt.net%2Fusercp.php"
   static let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
   static let firefoxExtensionLink = "https://addons.mozilla.org/addon/open-in-iina-x"
+  static let toneMappingHelpLink = "https://en.wikipedia.org/wiki/Tone_mapping"
+  static let targetPeakHelpLink = "https://mpv.io/manual/stable/#options-target-peak"
+  static let algorithmHelpLink = "https://mpv.io/manual/stable/#options-tone-mapping"
+  static let disableAnimationsHelpLink = "https://developer.apple.com/design/human-interface-guidelines/accessibility#Motion"
+  static let gainAdjustmentHelpLink = "https://mpv.io/manual/stable/#options-replaygain"
+  static let gaplessAudioHelpLink = "https://mpv.io/manual/stable/#options-gapless-audio"
+  static let audioDriverHellpLink = "https://mpv.io/manual/stable/#audio-output-drivers-coreaudio"
 
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360
@@ -69,7 +80,9 @@ struct Constants {
   struct String {
     static let degree = "°"
     static let dot = "●"
-    static let play = "▶︎"
+    static let blackRightPointingTriangle = "▶︎"
+    static let blackLeftPointingTriangle = "◀"
+    static let mpvDefaultFont = "sans-serif"
     static let videoTimePlaceholder = "--:--:--"
     static let trackNone = NSLocalizedString("track.none", comment: "<None>")
     static let chapter = "Chapter"
@@ -79,10 +92,10 @@ struct Constants {
     static let resume = NSLocalizedString("menu.resume", comment: "Resume")
     static let `default` = NSLocalizedString("quicksetting.item_default", comment: "Default")
     static let none = NSLocalizedString("quicksetting.item_none", comment: "None")
-    static let audioDelay = "Audio Delay"
-    static let subDelay = "Subtitle Delay"
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
+    static let miniPlayer = NSLocalizedString("menu.mini_player", comment: "Enter Music Mode")
+    static let exitMiniPlayer = NSLocalizedString("menu.exit_mini_player", comment: "Exit Music Mode")
     static let custom = NSLocalizedString("menu.crop_custom", comment: "Custom crop size")
     static let findOnlineSubtitles = NSLocalizedString("menu.find_online_sub", comment: "Find Online Subtitles")
     static let chaptersPanel = NSLocalizedString("menu.chapters", comment: "Show Chapters Panel")
@@ -95,9 +108,20 @@ struct Constants {
     static let hideAudioPanel = NSLocalizedString("menu.hide_audio", comment: "Hide Audio Panel")
     static let subtitlesPanel = NSLocalizedString("menu.subtitles", comment: "Show Subtitles Panel")
     static let hideSubtitlesPanel = NSLocalizedString("menu.hide_subtitles", comment: "Hide Subtitles Panel")
+    static let hideSubtitles = NSLocalizedString("menu.sub_hide", comment: "Hide Subtitles")
+    static let showSubtitles = NSLocalizedString("menu.sub_show", comment: "Show Subtitles")
+    static let hideSecondSubtitles = NSLocalizedString("menu.sub_second_hide", comment: "Hide Second Subtitles")
+    static let showSecondSubtitles = NSLocalizedString("menu.sub_second_show", comment: "Show Second Subtitles")
+    static let managePlugins = NSLocalizedString("menu.manage_plugins", comment: "Manage Plugins…")
+    static let showPluginsPanel = NSLocalizedString("menu.show_plugins_panel", comment: "Show Plugins Panel")
+    static let hidePluginsPanel = NSLocalizedString("menu.hide_plugins_panel", comment: "Hide Plugins Panel")
   }
   struct Time {
     static let infinite = VideoTime(999, 0, 0)
+  }
+  struct WindowAutosaveName {
+    static let videoFilters = "VideoFilters"
+    static let audioFilters = "AudioFilters"
   }
   struct FilterName {
     static let crop = "iina_crop"
@@ -127,4 +151,13 @@ extension Notification.Name {
   static let iinaPluginChanged = Notification.Name("IINAPluginChanged")
   static let iinaPlayerStopped = Notification.Name("iinaPlayerStopped")
   static let iinaPlayerShutdown = Notification.Name("iinaPlayerShutdown")
+  static let iinaPlaySliderLoopKnobChanged = Notification.Name("iinaPlaySliderLoopKnobChanged")
+  static let iinaLogoutCompleted = Notification.Name("iinaLoggedOutOfSubtitleProvider")
+  static let iinaSecondSubVisibilityChanged = Notification.Name("iinaSecondSubVisibilityChanged")
+  static let iinaSubVisibilityChanged = Notification.Name("iinaSubVisibilityChanged")
+  static let iinaHistoryTaskFinished = Notification.Name("iinaHistoryTaskFinished")
+}
+
+enum IINAError: Error {
+  case unsupportedMPVNodeFormat(UInt32)
 }

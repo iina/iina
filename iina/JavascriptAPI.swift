@@ -28,6 +28,7 @@ class JavascriptAPI: NSObject {
   func log(_ message: String, level: Logger.Level = .debug) {
     guard pluginInstance != nil else { return }
     Logger.log(message, level: level, subsystem: pluginInstance.subsystem)
+    pluginInstance.logHandler?(message, level)
   }
 
   func whenPermitted<T>(to permission: JavascriptPlugin.Permission, block: () -> T?) -> T? {
@@ -89,7 +90,11 @@ class JavascriptAPI: NSObject {
         throwError(withMessage: "The path should be an absolute path: \(path)")
         return (nil, false)
       }
-      return (absPath, false)
+      return (
+        absPath,
+        absPath.hasPrefix(pluginInstance.plugin.dataURL.path) ||
+        absPath.hasPrefix(pluginInstance.plugin.tmpURL.path)
+      )
     }!
   }
 
@@ -120,4 +125,26 @@ class JavascriptAPI: NSObject {
     }
     return expanded.path
   }
+}
+
+
+func createUInt8Array(fromData data: Data) -> JSValue? {
+  let context = JSContext.current()!
+  let length = data.count
+
+  let rawPtr = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: length)
+  _ = data.withUnsafeBytes { (dataPtr: UnsafeRawBufferPointer) in
+    rawPtr.initialize(from: dataPtr)
+  }
+  let deallocator: JSTypedArrayBytesDeallocator = { ptr, _ in
+    ptr?.deallocate()
+  }
+  let arrayBufferRef = JSObjectMakeTypedArrayWithBytesNoCopy(context.jsGlobalContextRef,
+                                                             kJSTypedArrayTypeUint8Array,
+                                                             rawPtr.baseAddress,
+                                                             length,
+                                                             deallocator,
+                                                             nil,
+                                                             nil)
+  return JSValue(jsValueRef: arrayBufferRef, in: context)
 }

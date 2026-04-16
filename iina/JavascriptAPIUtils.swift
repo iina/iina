@@ -25,13 +25,42 @@ fileprivate extension Process {
 @objc protocol JavascriptAPIUtilsExportable: JSExport {
   func fileInPath(_ file: String) -> Bool
   func resolvePath(_ path: String) -> String?
-  func exec(_ file: String, _ args: [String], _ cwd: JSValue?, _ stdoutHook_: JSValue?, _ stderrHook_: JSValue?) -> JSValue?
+  func exec(_ file: String, _ args_: Any, _ cwd: JSValue?, _ stdoutHook_: JSValue?, _ stderrHook_: JSValue?) -> JSValue?
   func ask(_ title: String) -> Bool
   func prompt(_ title: String) -> String?
   func chooseFile(_ title: String, _ options: [String: Any]) -> Any
+  func keychainWrite(_ service: String, _ name: String, _ password: String) -> Any
+  func keychainRead(_ service: String, _ name: String) -> Any
+  func open(_ url: String) -> Bool
 }
 
 class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
+  func keychainWrite(_ service: String, _ name: String, _ password: String) -> Any {
+    if service.isEmpty {
+      return false
+    }
+    let serviceName = "\(pluginInstance.plugin.identifier) - \(service)"
+    do {
+      try KeychainAccess.write(username: name, password: password, forService: .init(serviceName))
+      return true
+    } catch {
+      return false
+    }
+  }
+  
+  func keychainRead(_ service: String, _ name: String) -> Any {
+    if service.isEmpty {
+      return false
+    }
+    let serviceName = "\(pluginInstance.plugin.identifier) - \(service)"
+    do {
+      let (_, result) = try KeychainAccess.read(username: name, forService: .init(serviceName))
+      return result
+    } catch {
+      return false
+    }
+  }
+  
   override func extraSetup() {
     context.evaluateScript("""
     iina.utils.ERROR_BINARY_NOT_FOUND = -1;
@@ -49,7 +78,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
     if let _ = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) {
       return true
     }
-    if let path = parsePath(file).path {
+    if let path = parsePath(file, forceLocalPath: false).path {
       return FileManager.default.fileExists(atPath: path)
     }
     return false
@@ -62,8 +91,13 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
     return parsePath(path).path
   }
 
-  func exec(_ file: String, _ args: [String], _ cwd: JSValue?, _ stdoutHook_: JSValue?, _ stderrHook_: JSValue?) -> JSValue? {
+  func exec(_ file: String, _ args_: Any, _ cwd: JSValue?, _ stdoutHook_: JSValue?, _ stderrHook_: JSValue?) -> JSValue? {
     guard permitted(to: .accessFileSystem) else {
+      return nil
+    }
+    
+    guard let args = args_ as? [String] else {
+      throwError(withMessage: "The exec args parameter must be a string array")
       return nil
     }
 
@@ -73,16 +107,25 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       if !file.contains("/") {
         if let url = searchBinary(file, in: Utility.binariesURL) ?? searchBinary(file, in: Utility.exeDirURL) {
           // a binary included in IINA's bundle?
-          path = url.absoluteString
+          if #available(macOS 13.0, *) {
+            path = url.path(percentEncoded: false)
+          } else {
+            path = url.path
+          }
         } else {
           // assume it's a system command
-          path = "/bin/bash"
-          args.insert(file, at: 0)
-          args = ["-c", args.map {
-            $0.replacingOccurrences(of: " ", with: "\\ ")
-              .replacingOccurrences(of: "'", with: "\\'")
-              .replacingOccurrences(of: "\"", with: "\\\"")
-          }.joined(separator: " ")]
+          let useBash = false
+          if useBash {
+            path = "/bin/bash"
+            args.insert(file, at: 0)
+            args = ["-c", args.map {
+              $0.replacingOccurrences(of: " ", with: "\\ ")
+                .replacingOccurrences(of: "'", with: "\\'")
+                .replacingOccurrences(of: "\"", with: "\\\"")
+            }.joined(separator: " ")]
+          } else {
+            args.insert(file, at: 0)
+          }
         }
       } else {
         // it should be an existing file
@@ -143,17 +186,25 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         stderrContent += output
         stderrHook?.call(withArguments: [output])
       }
-      process.launch()
+      Logger.log("Executing \(path) \(args.joined(separator: " "))", subsystem: pluginInstance.subsystem)
+      do {
+        try process.run()
+      } catch {
+        reject.call(withArguments: ["Execution failed reporting: \(error.localizedDescription)"])
+        return
+      }
 
       self.pluginInstance.queue.async {
         process.waitUntilExit()
         stderr.fileHandleForReading.readabilityHandler = nil
         stdout.fileHandleForReading.readabilityHandler = nil
-        resolve.call(withArguments: [[
-          "status": process.terminationStatus,
-          "stdout": stdoutContent,
-          "stderr": stderrContent
-        ] as [String: Any]])
+        DispatchQueue.main.async {
+          resolve.call(withArguments: [[
+            "status": process.terminationStatus,
+            "stdout": stdoutContent,
+            "stderr": stderrContent
+          ] as [String: Any]])
+        }
       }
     }
   }
@@ -190,5 +241,30 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         resolve.call(withArguments: [result.path])
       }
     }
+  }
+
+  func open(_ url: String) -> Bool {
+    // always open web links
+    if let url = URL(string: url) {
+      if url.scheme == "https" || url.scheme == "http" {
+        NSWorkspace.shared.open(url)
+        return true
+      }
+    }
+    // might be a file path
+    let (path, isLocal) = parsePath(url)
+    guard let path = path else {
+      log("utils.open: path cannot be found", level: .error)
+      return false
+    }
+    let fileURL = URL(fileURLWithPath: path)
+    if isLocal {
+      NSWorkspace.shared.open(fileURL)
+      return true
+    }
+    return whenPermitted(to: .accessFileSystem) {
+      NSWorkspace.shared.open(fileURL)
+      return true
+    } ?? false
   }
 }

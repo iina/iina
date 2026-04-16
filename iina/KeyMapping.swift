@@ -8,7 +8,8 @@
 
 import Foundation
 
-fileprivate let IINA_PREFIX = "#@iina"
+fileprivate let IINA_PREFIX = "@iina"
+fileprivate let IINA_PREFIX_IN_FILE = "#" + IINA_PREFIX
 
 class KeyMapping: NSObject {
 
@@ -96,17 +97,13 @@ class KeyMapping: NSObject {
     }
   }
 
-  var isIgnored: Bool {
-    return privateRawAction == MPVCommand.ignore.rawValue
-  }
-
   @objc var prettyCommand: String {
     return KeyBindingTranslator.readableCommand(fromAction: action, isIINACommand: isIINACommand)
   }
 
   var confFileFormat: String {
     get {
-      let iinaCommandString = isIINACommand ? "\(IINA_PREFIX) " : ""
+      let iinaCommandString = isIINACommand ? "\(IINA_PREFIX_IN_FILE) " : ""
       let commentString = (comment == nil || comment!.isEmpty) ? "" : "   #\(comment!)"
       return "\(iinaCommandString)\(rawKey) \(action.joined(separator: " "))\(commentString)"
     }
@@ -138,10 +135,10 @@ class KeyMapping: NSObject {
       if line.trimmingCharacters(in: .whitespaces).isEmpty {
         continue
       } else if line.hasPrefix("#") {
-        if line.hasPrefix(IINA_PREFIX) {
+        if line.hasPrefix(IINA_PREFIX_IN_FILE) {
           // extended syntax
           isIINACommand = true
-          line = String(line[line.index(line.startIndex, offsetBy: IINA_PREFIX.count)...])
+          line = String(line[line.index(line.startIndex, offsetBy: IINA_PREFIX_IN_FILE.count)...])
         } else {
           // ignore comment line
           continue

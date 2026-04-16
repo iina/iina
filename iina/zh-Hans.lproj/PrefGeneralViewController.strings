@@ -19,9 +19,6 @@
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "启用「最近打开」菜单";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
-
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "最小化/还原时";
 
@@ -37,9 +34,6 @@
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "将所有播放过的文件加入“最近打开”菜单";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
-
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "每天";
 
@@ -47,7 +41,7 @@
 "FbF-jJ-W5b.title" = "暂停";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
-"GNV-VA-NBW.title" = "当媒体开启时:";
+"GNV-VA-NBW.title" = "打开媒体时:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
 "Imf-6g-2Cd.title" = "每周";
@@ -61,20 +55,23 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "全屏播放时使其他屏幕黑屏";
 
+/* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
+"Kdk-iC-e1C.title" = "仍然阻止系统睡眠。";
+
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "播放音频文件时自动切换到“音乐模式”";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "自动播放播放列表中下一个项目";
 
-/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+/* Class = "NSButtonCell"; title = "Allow multiple player windows"; ObjectID = "M0z-bI-88d"; */
 "M0z-bI-88d.title" = "总是在新窗口打开文件";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "进入全屏";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
-"NVh-C5-b9i.title" = "JPEG (.jpeg)";
+"NVh-C5-b9i.title" = "JPEG（.jpeg）";
 
 /* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
 "PhL-vP-i7L.title" = "位置:";
@@ -101,10 +98,10 @@
 "f0j-Dn-cxt.title" = "接收测试版本（Beta）更新";
 
 /* Class = "NSButtonCell"; title = "Pause upon leaving full screen"; ObjectID = "g2A-Kf-vct"; */
-"g2A-Kf-vct.title" = "退出全屏后暂停播放";
+"g2A-Kf-vct.title" = "退出全屏后暂停";
 
 /* Class = "NSTextFieldCell"; title = "At launch:"; ObjectID = "gqT-CB-Puw"; */
-"gqT-CB-Puw.title" = "启动时：";
+"gqT-CB-Puw.title" = "启动后:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
 "hWC-KJ-FuC.title" = "自动检查更新";
@@ -121,11 +118,11 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "历史:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "显示音频文件的曲目和艺术家信息";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "进入全屏时播放";
+"lOw-pu-Llm.title" = "进入全屏后播放";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "包括字幕";
@@ -136,11 +133,14 @@
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
 "pdx-zt-kf2.title" = "截图:";
 
+/* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
+"r2u-P9-J5p.title" = "在播放时阻止屏幕保护程序启动";
+
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "每小时";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpg)"; ObjectID = "tmy-ty-8uK"; */
-"tmy-ty-8uK.title" = "JPEG (.jpg)";
+"tmy-ty-8uK.title" = "JPEG（.jpg）";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "行为:";
@@ -151,5 +151,23 @@
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "自动暂停/播放:";
 
+/* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
+"yla-DT-YTx.title" = "在“音乐模式”或仅播放音频时不可用。";
+
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "显示欢迎窗口";
+
+/* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
+"jok-kc-HjX.title" = "手动打开文件时：";
+
+/* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
+"5WC-Sp-6mg.title" = "列表循环播放";
+
+/* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
+"A1p-L4-jtC.title" = "单曲循环播放";
+
+/* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
+"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+
+/* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
+"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";

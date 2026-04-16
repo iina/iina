@@ -1,8 +1,8 @@
 /* Class = "NSWindow"; title = "About"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "IINA에 관하여";
+"F0z-JX-Cv5.title" = "About";
 
 /* Class = "NSTabViewItem"; label = "Credits"; ObjectID = "HMc-Oy-hBR"; */
-"HMc-Oy-hBR.label" = "크레딧";
+"HMc-Oy-hBR.label" = "승인서";
 
 /* Class = "NSTextFieldCell"; title = "Translators:"; ObjectID = "JlJ-V6-PVY"; */
 "JlJ-V6-PVY.title" = "번역가들: ";
@@ -21,3 +21,6 @@
 
 /* Class = "NSButtonCell"; title = "Credits"; ObjectID = "zCH-uO-acx"; */
 "zCH-uO-acx.title" = "크레딧";
+
+/* Class = "NSTextFieldCell"; title = "IINA localization is powered by Crowdin."; ObjectID = "HLj-vT-kNp"; */
+"HLj-vT-kNp.title" = "IINA는 Crowdin을 통해 번역됩니다.";

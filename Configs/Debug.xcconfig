@@ -1,0 +1,20 @@
+//
+//  Debug.xcconfig
+//  iina
+//
+//  Created by Saagar Jha on 11/5/22.
+//  Copyright © 2022 lhc. All rights reserved.
+//
+
+#include "Shared.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug
+CONFIGURATION = Debug
+DEBUG_INFORMATION_FORMAT = dwarf
+ENABLE_TESTABILITY = YES
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) DEBUG=1
+MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE
+ONLY_ACTIVE_ARCH = YES
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) DEBUG
+SWIFT_OPTIMIZATION_LEVEL = -Onone

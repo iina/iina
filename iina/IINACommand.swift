@@ -30,6 +30,7 @@ enum IINACommand: String {
   case fitToScreen = "fit-to-screen"
 
   case saveCurrentPlaylist = "save-playlist"
+  case showCurrentFileInFinder = "show-current-file-in-finder"
   case deleteCurrentFile = "delete-current-file"
   case deleteCurrentFileHard = "delete-current-file-hard"
 

@@ -103,7 +103,7 @@ extern "C" {
  *      In addition, you were required to call all mpv_render*() API functions
  *      from the same thread on which mpv_render_context_create() was originally
  *      run (for the same the mpv_render_context). Not honoring it led to UB
- *      (deadlocks, use of invalid pthread_t handles), even if you moved your GL
+ *      (deadlocks, use of invalid mp_thread handles), even if you moved your GL
  *      context to a different thread correctly.
  *      These problems were addressed in API version 1.105 (mpv 0.30.0).
  *
@@ -574,8 +574,8 @@ typedef struct mpv_render_frame_info {
  *      MPV_ERROR_INVALID_PARAMETER: at least one of the provided parameters was
  *                                   not valid.
  */
-int mpv_render_context_create(mpv_render_context **res, mpv_handle *mpv,
-                              mpv_render_param *params);
+MPV_EXPORT int mpv_render_context_create(mpv_render_context **res, mpv_handle *mpv,
+                                         mpv_render_param *params);
 
 /**
  * Attempt to change a single parameter. Not all backends and parameter types
@@ -587,8 +587,8 @@ int mpv_render_context_create(mpv_render_context **res, mpv_handle *mpv,
  *         success, otherwise an error code depending on the parameter type
  *         and situation.
  */
-int mpv_render_context_set_parameter(mpv_render_context *ctx,
-                                     mpv_render_param param);
+MPV_EXPORT int mpv_render_context_set_parameter(mpv_render_context *ctx,
+                                                mpv_render_param param);
 
 /**
  * Retrieve information from the render context. This is NOT a counterpart to
@@ -609,8 +609,8 @@ int mpv_render_context_set_parameter(mpv_render_context *ctx,
  *         and situation. MPV_ERROR_NOT_IMPLEMENTED is used for unknown
  *         param.type, or if retrieving it is not supported.
  */
-int mpv_render_context_get_info(mpv_render_context *ctx,
-                                mpv_render_param param);
+MPV_EXPORT int mpv_render_context_get_info(mpv_render_context *ctx,
+                                           mpv_render_param param);
 
 typedef void (*mpv_render_update_fn)(void *cb_ctx);
 
@@ -630,9 +630,9 @@ typedef void (*mpv_render_update_fn)(void *cb_ctx);
  *                 redrawn
  * @param callback_ctx opaque argument to the callback
  */
-void mpv_render_context_set_update_callback(mpv_render_context *ctx,
-                                            mpv_render_update_fn callback,
-                                            void *callback_ctx);
+MPV_EXPORT void mpv_render_context_set_update_callback(mpv_render_context *ctx,
+                                                       mpv_render_update_fn callback,
+                                                       void *callback_ctx);
 
 /**
  * The API user is supposed to call this when the update callback was invoked
@@ -657,7 +657,7 @@ void mpv_render_context_set_update_callback(mpv_render_context *ctx,
  *         to the API user are set, or if the return value is 0, nothing needs
  *         to be done.
  */
-uint64_t mpv_render_context_update(mpv_render_context *ctx);
+MPV_EXPORT uint64_t mpv_render_context_update(mpv_render_context *ctx);
 
 /**
  * Flags returned by mpv_render_context_update(). Each value represents a bit
@@ -705,7 +705,7 @@ typedef enum mpv_render_update_flag {
  *               happens with unknown parameters.
  * @return error code
  */
-int mpv_render_context_render(mpv_render_context *ctx, mpv_render_param *params);
+MPV_EXPORT int mpv_render_context_render(mpv_render_context *ctx, mpv_render_param *params);
 
 /**
  * Tell the renderer that a frame was flipped at the given time. This is
@@ -718,7 +718,7 @@ int mpv_render_context_render(mpv_render_context *ctx, mpv_render_param *params)
  *
  * @param ctx a valid render context
  */
-void mpv_render_context_report_swap(mpv_render_context *ctx);
+MPV_EXPORT void mpv_render_context_report_swap(mpv_render_context *ctx);
 
 /**
  * Destroy the mpv renderer state.
@@ -729,7 +729,28 @@ void mpv_render_context_report_swap(mpv_render_context *ctx);
  * @param ctx a valid render context. After this function returns, this is not
  *            a valid pointer anymore. NULL is also allowed and does nothing.
  */
-void mpv_render_context_free(mpv_render_context *ctx);
+MPV_EXPORT void mpv_render_context_free(mpv_render_context *ctx);
+
+#ifdef MPV_CPLUGIN_DYNAMIC_SYM
+
+MPV_DEFINE_SYM_PTR(mpv_render_context_create)
+#define mpv_render_context_create pfn_mpv_render_context_create
+MPV_DEFINE_SYM_PTR(mpv_render_context_set_parameter)
+#define mpv_render_context_set_parameter pfn_mpv_render_context_set_parameter
+MPV_DEFINE_SYM_PTR(mpv_render_context_get_info)
+#define mpv_render_context_get_info pfn_mpv_render_context_get_info
+MPV_DEFINE_SYM_PTR(mpv_render_context_set_update_callback)
+#define mpv_render_context_set_update_callback pfn_mpv_render_context_set_update_callback
+MPV_DEFINE_SYM_PTR(mpv_render_context_update)
+#define mpv_render_context_update pfn_mpv_render_context_update
+MPV_DEFINE_SYM_PTR(mpv_render_context_render)
+#define mpv_render_context_render pfn_mpv_render_context_render
+MPV_DEFINE_SYM_PTR(mpv_render_context_report_swap)
+#define mpv_render_context_report_swap pfn_mpv_render_context_report_swap
+MPV_DEFINE_SYM_PTR(mpv_render_context_free)
+#define mpv_render_context_free pfn_mpv_render_context_free
+
+#endif
 
 #ifdef __cplusplus
 }

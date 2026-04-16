@@ -13,14 +13,14 @@
 /* Class = "NSWindow"; title = "Playback History"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Avspillingshistorikk";
 
-/* Class = "NSMenuItem"; title = "Reveal in Finder"; ObjectID = "FPK-nx-hvF"; */
+/* Class = "NSMenuItem"; title = "Show in Finder"; ObjectID = "FPK-nx-hvF"; */
 "FPK-nx-hvF.title" = "Vis i Finder";
 
 /* Class = "NSMenuItem"; title = "Search in"; ObjectID = "Gx5-gP-rzr"; */
 "Gx5-gP-rzr.title" = "Søk i";
 
 /* Class = "NSTableColumn"; headerCell.title = "Played at"; ObjectID = "M7K-6H-OPw"; */
-"M7K-6H-OPw.headerCell.title" = "Played at";
+"M7K-6H-OPw.headerCell.title" = "Spilt på";
 
 /* Class = "NSTableColumn"; headerCell.title = "Progress"; ObjectID = "MJU-JY-7fx"; */
 "MJU-JY-7fx.headerCell.title" = "Fremdrift";
@@ -33,9 +33,6 @@
 
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
 "Wkp-Vn-JoJ.title" = "Filnavn";
-
-/* Class = "NSMenu"; title = "Context Menu"; ObjectID = "lR3-1E-Rwr"; */
-"lR3-1E-Rwr.title" = "Kontekstmeny";
 
 /* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
 "mXt-wb-fgT.title" = "Spill av i nytt vindu";

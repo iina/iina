@@ -2,7 +2,7 @@
 "07n-bk-3ma.title" = "Limpar Recentes";
 
 /* Class = "NSMenuItem"; title = "Full path"; ObjectID = "AZL-gY-Tob"; */
-"AZL-gY-Tob.title" = "Caminho completo";
+"AZL-gY-Tob.title" = "Localização completa";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "CqL-By-26A"; */
 "CqL-By-26A.title" = "Eliminar…";
@@ -13,7 +13,7 @@
 /* Class = "NSWindow"; title = "Playback History"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Histórico de Reprodução";
 
-/* Class = "NSMenuItem"; title = "Reveal in Finder"; ObjectID = "FPK-nx-hvF"; */
+/* Class = "NSMenuItem"; title = "Show in Finder"; ObjectID = "FPK-nx-hvF"; */
 "FPK-nx-hvF.title" = "Mostrar no Finder";
 
 /* Class = "NSMenuItem"; title = "Search in"; ObjectID = "Gx5-gP-rzr"; */
@@ -33,9 +33,6 @@
 
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
 "Wkp-Vn-JoJ.title" = "Nome do ficheiro";
-
-/* Class = "NSMenu"; title = "Context Menu"; ObjectID = "lR3-1E-Rwr"; */
-"lR3-1E-Rwr.title" = "Menu de contexto";
 
 /* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
 "mXt-wb-fgT.title" = "Reproduzir numa Nova Janela";

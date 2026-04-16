@@ -13,8 +13,11 @@ extension NSPasteboard.PasteboardType {
   static let iinaOSCCurrentToolbarButtonType = NSPasteboard.PasteboardType("com.collider.iina.iinaOSCCurrentToolbarButtonType")
 }
 
-class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarCurrentItemsViewDelegate {
+class ToolbarSettingsSheetWindow: NSWindow {
+  override var canBecomeKey: Bool { return true }
+}
 
+class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarCurrentItemsViewDelegate {
   override var windowNibName: NSNib.Name {
     return NSNib.Name("PrefOSCToolbarSettingsSheetController")
   }
@@ -31,14 +34,13 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
     currentItemsView.currentItemsViewDelegate = self
     currentItemsView.initItems(fromItems: PrefUIViewController.oscToolbarButtons)
 
-    let allButtonTypes: [Preference.ToolBarButton] = [.settings, .playlist, .pip, .fullScreen, .musicMode, .subTrack]
+    let allButtonTypes: [Preference.ToolBarButton] = [.settings, .playlist, .pip, .fullScreen, .musicMode, .subTrack, .screenshot, .plugins]
     for type in allButtonTypes {
       let itemViewController = PrefOSCToolbarDraggingItemViewController(buttonType: type)
       itemViewController.availableItemsView = availableItemsView
       itemViewControllers.append(itemViewController)
       itemViewController.view.translatesAutoresizingMaskIntoConstraints = false
       availableItemsView.addView(itemViewController.view, in: .top)
-      Utility.quickConstraints(["H:[v(240)]", "V:[v(24)]"], ["v": itemViewController.view])
     }
   }
 
@@ -61,7 +63,7 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
 }
 
 
-class PrefOSCToolbarCurrentItem: NSImageView, NSPasteboardWriting {
+class PrefOSCToolbarCurrentItem: NSButton, NSPasteboardWriting {
 
   var currentItemsView: PrefOSCToolbarCurrentItemsView
   var buttonType: Preference.ToolBarButton
@@ -70,7 +72,8 @@ class PrefOSCToolbarCurrentItem: NSImageView, NSPasteboardWriting {
     self.buttonType = buttonType
     self.currentItemsView = superView
     super.init(frame: .zero)
-    self.image = buttonType.image()
+
+    OSCToolbarButton.setStyle(of: self, buttonType: buttonType)
   }
 
   required init?(coder: NSCoder) {
@@ -89,15 +92,7 @@ class PrefOSCToolbarCurrentItem: NSImageView, NSPasteboardWriting {
   }
 
   override func mouseDown(with event: NSEvent) {
-    let dragItem = NSDraggingItem(pasteboardWriter: self)
-    dragItem.draggingFrame = NSRect(origin: convert(event.locationInWindow, from: nil),
-                                    size: NSSize(width: 24, height: 24))
-    dragItem.imageComponentsProvider = {
-      let imageComponent = NSDraggingImageComponent(key: .icon)
-      imageComponent.contents = self.buttonType.image()
-      imageComponent.frame = NSRect(origin: .zero, size: NSSize(width: 14, height: 14))
-      return [imageComponent]
-    }
+    guard let dragItem = OSCToolbarButton.buildDragItem(from: self, pasteboardWriter: self, buttonType: buttonType) else { return }
 
     currentItemsView.itemBeingDragged = self
     beginDraggingSession(with: [dragItem], event: event, source: currentItemsView)
@@ -132,10 +127,8 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     self.items = items
     views.forEach { self.removeView($0) }
     for buttonType in items {
-      let item = PrefOSCToolbarCurrentItem(buttonType: buttonType, superView: self)
-      item.translatesAutoresizingMaskIntoConstraints = false
-      self.addView(item, in: .trailing)
-      Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": item])
+      let button = PrefOSCToolbarCurrentItem(buttonType: buttonType, superView: self)
+      self.addView(button, in: .trailing)
     }
   }
 
@@ -158,7 +151,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
       // remove the dragged view and insert a placeholder at its position.
       let index = views.firstIndex(of: itemBeingDragged)!
       removeView(itemBeingDragged)
-      Utility.quickConstraints(["H:[v(24)]", "V:[v(24)]"], ["v": placeholderView])
+      Utility.quickConstraints(["H:[v(\(Preference.ToolBarButton.frameSize))]", "V:[v(\(Preference.ToolBarButton.frameSize))]"], ["v": placeholderView])
       insertView(placeholderView, at: index, in: .trailing)
     }
   }
@@ -172,7 +165,11 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
 
   func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
     if operation == [] || operation == .delete {
-      updateItems()
+      let diameter = Preference.ToolBarButton.frameSize
+      // Do "poof" animation on item remove
+      NSAnimationEffect.disappearingItemDefault.show(centeredAt: screenPoint, size: NSSize(width: diameter, height: diameter), completionHandler: {
+        self.updateItems()
+      })
     }
   }
 
@@ -219,7 +216,9 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
 
     // get the expected drag destination position and index
     let pos = convert(sender.draggingLocation, from: nil)
-    var index = views.count - Int(floor((frame.width - pos.x) / 24)) - 1
+    let phWidth = Preference.ToolBarButton.frameSize
+    let phHeight = phWidth
+    var index = views.count - Int(floor((frame.width - pos.x) / phWidth)) - 1
     if index < 0 { index = 0 }
     dragDestIndex = index
 
@@ -227,7 +226,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     if views.contains(placeholderView) {
       removeView(placeholderView)
     }
-    Utility.quickConstraints(["H:[v(24)]", "V:[v(24)]"], ["v": placeholderView])
+    Utility.quickConstraints(["H:[v(\(phWidth))]", "V:[v(\(phHeight))]"], ["v": placeholderView])
     insertView(placeholderView, at: index, in: .trailing)
     // animate frames
     NSAnimationContext.runAnimationGroup({ context in
@@ -257,14 +256,11 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
     if let _ = pboard.availableType(from: [.iinaOSCAvailableToolbarButtonType]) {
       // dragging available item in; don't accept existing items
       if let rawButtonType = sender.draggingPasteboard.propertyList(forType: .iinaOSCAvailableToolbarButtonType) as? Int,
-        let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
-        items.count < 5,
-        dragDestIndex >= 0,
-        dragDestIndex <= views.count {
+          let buttonType = Preference.ToolBarButton(rawValue: rawButtonType),
+          items.count < 5,
+          dragDestIndex >= 0,
+          dragDestIndex <= views.count {
         let item = PrefOSCToolbarCurrentItem(buttonType: buttonType, superView: self)
-        item.translatesAutoresizingMaskIntoConstraints = false
-        item.image = buttonType.image()
-        Utility.quickConstraints(["H:[btn(24)]", "V:[btn(24)]"], ["btn": item])
         insertView(item, at: dragDestIndex, in: .trailing)
         updateItems()
         return true

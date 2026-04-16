@@ -8,13 +8,29 @@ on:
 
 jobs:
   build:
-    # FIXME: This builds with macOS 10.15. Move this to the 11.0 builders when possible. (See: https://github.com/actions/virtual-environments/issues/2486)
-    runs-on:  macos-latest
+    strategy:
+      matrix:
+        include:
+          - xcode: "26.0"
+            deployment_target: ""
+    runs-on:  macos-26
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
 
       - name: Install dependencies
         run: ./other/download_libs.sh
 
       - name: Build
-        run: xcodebuild -project iina.xcodeproj -scheme iina CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=NO -scheme iina -configuration Nightly ${{ matrix.deployment_target }}
+        env:
+          DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+
+      - name: Archive
+        run: tar cvJf ~/iina.tar.xz -C /Users/runner/Library/Developer/Xcode/DerivedData/iina-csbkugdtxazzqogjnydbothqrvib/Build/Products/Nightly IINA.app 
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: IINA
+          path: ~/iina.tar.xz
+

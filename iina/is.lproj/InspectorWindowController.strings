@@ -8,7 +8,7 @@
 "4jf-w4-kkv.title" = "File path:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
-"5H6-qJ-RDS.title" = "Format:";
+"5H6-qJ-RDS.title" = "Snið:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
 "7QX-tu-rvs.title" = "FPS:";
@@ -44,7 +44,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[1]" = "Tracks";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[2]" = "File";
+"Fqo-1c-3L1.ibShadowedLabels[2]" = "Skrá";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[3]" = "Status";
@@ -83,7 +83,7 @@
 "POj-mQ-zP9.title" = "Editions:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
-"PQD-yB-mm6.title" = "Format:";
+"PQD-yB-mm6.title" = "Snið:";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
 "S3X-Df-UMB.title" = "Default";
@@ -95,7 +95,7 @@
 "VGm-BL-xOI.label" = "Status";
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
-"WrI-Sr-O2S.label" = "File";
+"WrI-Sr-O2S.label" = "Skrá";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
 "bki-sE-xCA.title" = "Codec:";
@@ -140,7 +140,7 @@
 "mZG-ik-Led.title" = "ID:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "mgl-Et-20K"; */
-"mgl-Et-20K.title" = "Format:";
+"mgl-Et-20K.title" = "Snið:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
 "n0s-eM-42w.title" = "Codec:";
@@ -165,3 +165,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "Colorspace:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
+"zDk-Ie-EPs.headerCell.title" = "Nafn";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
+"x6R-q7-efY.headerCell.title" = "Value";

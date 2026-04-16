@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
 "3CY-YS-rG6.title" = "Boutons gauche/droite pour :";
 
+/* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
+"5Nk-Mu-V2I.title" = "";
+
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "Mo";
 
@@ -22,14 +25,20 @@
 /* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
 "7td-lH-8aK.title" = "Redimensionner la fenêtre à :";
 
-/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
-"82A-XQ-BvS.title" = "Masquer automatiquement après :";
+/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "XOh-46-9Jf"; */
+"XOh-46-9Jf.title" = "Masquer automatiquement après :";
 
 /* Class = "NSMenuItem"; title = "bottom"; ObjectID = "92n-Uq-o4G"; */
 "92n-Uq-o4G.title" = "bas";
 
+/* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
+"9IR-Sf-wMq.title" = "Lorsque le paramètre d'accessibilité pour réduire les mouvements de macOS est activé, IINA réduira les animations de l'interface utilisateur qui sont connues pour causer des problèmes à ceux qui ont des troubles de l'oreille interne. Si cela est insuffisant, ce paramètre peut être utilisé pour réduire davantage le mouvement en éliminant les animations de l'interface utilisateur.";
+
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% de l'écran";
+
+/* Class = "NSTextFieldCell"; title = "Accessibility:"; ObjectID = "AYW-Xu-ySw"; */
+"AYW-Xu-ySw.title" = "Accessibilité :";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "Fenêtre :";
@@ -43,6 +52,9 @@
 /* Class = "NSButtonCell"; title = "When media is opened manually"; ObjectID = "CJE-ap-IH8"; */
 "CJE-ap-IH8.title" = "Quand un fichier média est ouvert manuellement";
 
+/* Class = "NSButtonCell"; title = "File start"; ObjectID = "DAm-C4-5BQ"; */
+"DAm-C4-5BQ.title" = "Début du fichier";
+
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Afficher le temps restant à la place de la durée totale";
 
@@ -50,7 +62,7 @@
 "EUd-RD-g0T.title" = "Quand le mode Image dans l'image est activé :";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
-"F2e-CS-KXl.title" = "Informations à l'écran (OSD) :";
+"F2e-CS-KXl.title" = "Informations à l'écran :";
 
 /* Class = "NSTextFieldCell"; title = "Picture-in-\nPicture:"; ObjectID = "G8w-J7-1q1"; */
 "G8w-J7-1q1.title" = "Image dans\nl'image :";
@@ -82,6 +94,9 @@
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
 "MR7-Ac-SAO.title" = "1x la taille de la vidéo";
 
+/* Class = "NSButtonCell"; title = "Speed"; ObjectID = "MVv-Mx-GTD"; */
+"MVv-Mx-GTD.title" = "Vitesse";
+
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "Masquer automatiquement après :";
 
@@ -97,20 +112,29 @@
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "Position initiale de la fenêtre :";
 
+/* Class = "NSTextFieldCell"; title = "Suppress messages for:"; ObjectID = "RE5-Cf-ed9"; */
+"RE5-Cf-ed9.title" = "Supprimer les messages pour :";
+
+/* Class = "NSButtonCell"; title = "Seek"; ObjectID = "RuR-Df-K2G"; */
+"RuR-Df-K2G.title" = "Aller";
+
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Toujours flotter au-dessus pendant la lecture";
 
+/* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
+"ih8-5a-PYY.title" = "Toujours afficher l'état du flottement dans la barre de titre";
+
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Vitesse";
 
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
-"TdN-pM-HHk.title" = "Moyennement clair";
-
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "Hauteur :";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
+"Ufv-Hk-vL5.title" = "Empêcher la molette de changer le volume";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "points";
@@ -139,6 +163,9 @@
 /* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
 "baY-O6-fcB.title" = "Activer/désactiver Image dans l'image quand la fenêtre est placée dans le Dock";
 
+/* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
+"cib-Cg-9kn.title" = "Uniquement pour les fichiers vidéo";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x la taille de la vidéo";
 
@@ -151,8 +178,14 @@
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
 "g06-Ja-Ot8.title" = "Contrôleur à l'écran (OSC) :";
 
+/* Class = "NSButtonCell"; title = "Pause / Resume"; ObjectID = "i84-B8-gqD"; */
+"i84-B8-gqD.title" = "Pause / Lecture";
+
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "de l'écran";
+
+/* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
+"kCe-Ck-dUJ.title" = "Inclure les fichiers sur un périphérique externe";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "Afficher les infos de batterie et de temps en plein écran";
@@ -172,14 +205,14 @@
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "Attirer au centre lors du déplacement";
 
+/* Class = "NSButtonCell"; title = "Disable animations"; ObjectID = "mjs-jg-wm1"; */
+"mjs-jg-wm1.title" = "Désactiver les animations";
+
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
 "oJ8-74-L3z.title" = "Fichier média précédent / suivant";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "haut";
-
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
-"pV2-12-PmM.title" = "Très sombre";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
 "qbc-CY-bdK.title" = "du bord";
@@ -201,6 +234,9 @@
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "adapter à l'écran";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
+"vnb-DF-4g5.title" = "Empêcher la molette de changer la position de lecture";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Activer l'OSD";

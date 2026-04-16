@@ -20,8 +20,6 @@ class FirstRunManager {
     init(rawValue: String) {
       self.rawValue = rawValue
     }
-
-    static let joinBetaChannel = Key(rawValue: "joinBetaChannel")
   }
 
   static func isFirstRun(for key: Key) -> Bool {
@@ -34,5 +32,11 @@ class FirstRunManager {
       FileManager.default.createFile(atPath: fileURL.path, contents: nil, attributes: nil)
       return true
     }
+  }
+
+  static func unsetFirstRun(for key: Key) {
+    let filename = ".\(key.rawValue)"
+    let fileURL = Utility.appSupportDirUrl.appendingPathComponent(filename, isDirectory: false)
+    try? FileManager.default.removeItem(at: fileURL)
   }
 }

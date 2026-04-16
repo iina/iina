@@ -43,7 +43,7 @@
 "hflip" = "Espelho";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Caminho do arquivo (também pode-se arrastar e soltar o arquivo na caixa de entrada)";
+"lut3d.file" = "Localização do ficheiro (também pode arrastar o ficheiro para a caixa de entrada)";
 "lut3d.interp" = "Modo de interpolação";
 
 "custom_mpv" = "Personalizado (mpv)";

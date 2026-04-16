@@ -149,7 +149,7 @@ class JavascriptAPIXmlrpc: JavascriptAPI, JavascriptAPIXmlrpcExportable {
             "httpCode": err.httpCode,
             "reason": err.reason,
             "description": err.readableDescription,
-          ]])
+          ] as [String: Any]])
         }
       }
     }

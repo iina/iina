@@ -19,9 +19,6 @@
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
 "55O-ik-ql6.title" = "Använd menyn \"Öppna senaste\"";
 
-/* Class = "NSBox"; title = "Box"; ObjectID = "5RN-PV-pOZ"; */
-"5RN-PV-pOZ.title" = "Box";
-
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
 "5Y9-bX-K0f.title" = "Minimerad/återställd";
 
@@ -36,9 +33,6 @@
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
 "Ci8-j2-QS3.title" = "Spåra alla uppspelade filer i \"Öppna senaste\"-menyn";
-
-/* Class = "NSBox"; title = "Box"; ObjectID = "DZT-7n-S4M"; */
-"DZT-7n-S4M.title" = "Box";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "Dagligen";
@@ -61,13 +55,16 @@
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Släck övriga skärmar vid helskärmsläge";
 
+/* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
+"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Växla automatiskt till musikläge vid uppspelning av en ljudfil";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
 "Lac-Ol-g6E.title" = "Spela nästa objekt automatiskt";
 
-/* Class = "NSButtonCell"; title = "Always open media in new window"; ObjectID = "M0z-bI-88d"; */
+/* Class = "NSButtonCell"; title = "Allow multiple player windows"; ObjectID = "M0z-bI-88d"; */
 "M0z-bI-88d.title" = "Öppna alltid media i nytt fönster";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
@@ -95,7 +92,7 @@
 "YLo-6E-tT7.title" = "Avsluta efter att alla fönster har stängts";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
-"YeH-hk-7NN.title" = "/sökväg/till/mapp/för/skärmavbilder";
+"YeH-hk-7NN.title" = "/sökväg/till/mapp/för/skärmdumpar";
 
 /* Class = "NSButtonCell"; title = "Receive beta updates"; ObjectID = "f0j-Dn-cxt"; */
 "f0j-Dn-cxt.title" = "Ta emot beta-uppdateringar";
@@ -121,7 +118,7 @@
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "Historik:";
 
-/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when avaliable"; ObjectID = "kBI-Th-bBV"; */
+/* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
 "kBI-Th-bBV.title" = "Visa artist- och spårnamn för ljudfiler när de finns tillgängliga";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
@@ -134,7 +131,10 @@
 "oJY-Iz-3sO.title" = "Format:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Skärmavbilder:";
+"pdx-zt-kf2.title" = "Skärmdumpar:";
+
+/* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
+"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Timvis";
@@ -151,5 +151,23 @@
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Pausa/fortsätt när:";
 
+/* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
+"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Visa välkomstfönster";
+
+/* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
+"jok-kc-HjX.title" = "När en fil öppnas manuellt:";
+
+/* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
+"5WC-Sp-6mg.title" = "Loopa spellista";
+
+/* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
+"A1p-L4-jtC.title" = "Loopa en fil";
+
+/* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
+"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+
+/* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
+"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";

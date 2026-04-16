@@ -11,7 +11,7 @@ import Foundation
 fileprivate typealias KBI = KeyBindingItem
 
 fileprivate enum PropertyType {
-  case bool, num, string, choose, separator
+  case bool, num, string, separator
 }
 
 class KeyBindingDataLoader {
@@ -57,6 +57,7 @@ class KeyBindingDataLoader {
     KBI("open-file", type: .iinaCmd),
     KBI("open-url", type: .iinaCmd),
     KBI("save-playlist", type: .iinaCmd),
+    KBI("show-current-file-in-finder", type: .iinaCmd),
     KBI("delete-current-file", type: .iinaCmd),
     KBI("delete-current-file-hard", type: .iinaCmd),
     KBI.separator(),
@@ -73,7 +74,7 @@ class KeyBindingDataLoader {
     ("speed", .num),
     ("---", .separator),
     ("video", .num),
-    ("video-aspect", .string),
+    ("video-aspect-override", .string),
     ("contrast", .num),
     ("brightness", .num),
     ("gamma", .num),

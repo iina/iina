@@ -14,10 +14,13 @@
 "Z1e-XE-TR5.label" = "Licencia";
 
 /* Class = "NSButtonCell"; title = "License"; ObjectID = "jEf-xN-6xb"; */
-"jEf-xN-6xb.title" = "Licencia";
+"jEf-xN-6xb.title" = "LicenAcia";
 
 /* Class = "NSTabViewItem"; label = "Contributors"; ObjectID = "oIB-g4-IyG"; */
 "oIB-g4-IyG.label" = "Prispievatelia";
 
 /* Class = "NSButtonCell"; title = "Credits"; ObjectID = "zCH-uO-acx"; */
 "zCH-uO-acx.title" = "Poďakovanie";
+
+/* Class = "NSTextFieldCell"; title = "IINA localization is powered by Crowdin."; ObjectID = "HLj-vT-kNp"; */
+"HLj-vT-kNp.title" = "Lokalizáciu IINA zabezpečuje Crowdin.";

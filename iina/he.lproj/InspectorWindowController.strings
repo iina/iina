@@ -1,167 +1,173 @@
 /* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
-"0vG-Pg-DIl.title" = "Forced";
+"0vG-Pg-DIl.title" = "מאולצות";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
-"1dz-Vt-0MO.title" = "FPS:";
+"1dz-Vt-0MO.title" = "פריימים לשנייה:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
-"4jf-w4-kkv.title" = "File path:";
+"4jf-w4-kkv.title" = "נתיב קובץ:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
-"5H6-qJ-RDS.title" = "Format:";
+"5H6-qJ-RDS.title" = "פורמט:";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "7QX-tu-rvs"; */
-"7QX-tu-rvs.title" = "FPS:";
+"7QX-tu-rvs.title" = "פריימים לשנייה:";
 
 /* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "9eq-rd-zGy"; */
-"9eq-rd-zGy.title" = "Title:";
+"9eq-rd-zGy.title" = "כותרת:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "A4y-LL-x0z"; */
-"A4y-LL-x0z.title" = "Bit Rate:";
+"A4y-LL-x0z.title" = "קצב סיביות:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "Mistimed Frames:";
+"AYt-pH-UCi.title" = "פריימים שתוזמנו באופן שגוי:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Display FPS:";
+"AjU-1T-aGR.title" = "הצג פריימים לשנייה:";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
-"CrF-UR-udW.title" = "Dropped Frames:";
+"CrF-UR-udW.title" = "פריימים שהושמטו:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
-"DHh-ne-10f.title" = "Hw Decoder:";
+"DHh-ne-10f.title" = "מפענח חומרה:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "Inspector";
+"F0z-JX-Cv5.title" = "מפקח";
 
 /* Class = "NSTextFieldCell"; title = "Language:"; ObjectID = "FIw-CH-b05"; */
-"FIw-CH-b05.title" = "Language:";
+"FIw-CH-b05.title" = "שפה:";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[0] = "General"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[0]" = "General";
+"Fqo-1c-3L1.ibShadowedLabels[0]" = "כללי";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[1]" = "Tracks";
+"Fqo-1c-3L1.ibShadowedLabels[1]" = "רצועות";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[2]" = "File";
+"Fqo-1c-3L1.ibShadowedLabels[2]" = "קובץ";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[3]" = "Status";
+"Fqo-1c-3L1.ibShadowedLabels[3]" = "מצב";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
-"I2E-6Z-Gnn.title" = "Driver:";
+"I2E-6Z-Gnn.title" = "מנהל התקן:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Estimated Disp FPS";
+"JN9-3E-OJp.title" = "כמות פריימים מוצגים לשניה (משוער)";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
-"Jxp-Wf-BhU.title" = "File Path:";
+"Jxp-Wf-BhU.title" = "נתיב קובץ:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
-"KqD-NM-WiK.title" = "Size:";
+"KqD-NM-WiK.title" = "גודל:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "Luq-rQ-aO4"; */
-"Luq-rQ-aO4.title" = "Channels:";
+"Luq-rQ-aO4.title" = "ערוצים:";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
-"MME-KZ-jrG.title" = "Driver:";
+"MME-KZ-jrG.title" = "מנהל התקן:";
 
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
-"OCm-zb-deg.title" = "Duration:";
+"OCm-zb-deg.title" = "משך:";
 
 /* Class = "NSTextFieldCell"; title = "Selected"; ObjectID = "P65-zr-dOH"; */
-"P65-zr-dOH.title" = "Selected";
+"P65-zr-dOH.title" = "נבחר";
 
 /* Class = "NSTextFieldCell"; title = "Chapters:"; ObjectID = "PBk-VC-4gu"; */
-"PBk-VC-4gu.title" = "Chapters:";
+"PBk-VC-4gu.title" = "פרקים:";
 
 /* Class = "NSTextFieldCell"; title = "External"; ObjectID = "PLL-fC-blc"; */
-"PLL-fC-blc.title" = "External";
+"PLL-fC-blc.title" = "חיצוני";
 
 /* Class = "NSTextFieldCell"; title = "Editions:"; ObjectID = "POj-mQ-zP9"; */
-"POj-mQ-zP9.title" = "Editions:";
+"POj-mQ-zP9.title" = "מהדורות:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "PQD-yB-mm6"; */
-"PQD-yB-mm6.title" = "Format:";
+"PQD-yB-mm6.title" = "פורמט:";
 
 /* Class = "NSTextFieldCell"; title = "Default"; ObjectID = "S3X-Df-UMB"; */
-"S3X-Df-UMB.title" = "Default";
+"S3X-Df-UMB.title" = "ברירת מחדל";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
-"UuR-M1-YLj.label" = "Tracks";
+"UuR-M1-YLj.label" = "רצועות";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
-"VGm-BL-xOI.label" = "Status";
+"VGm-BL-xOI.label" = "מצב";
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
-"WrI-Sr-O2S.label" = "File";
+"WrI-Sr-O2S.label" = "קובץ";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
-"bki-sE-xCA.title" = "Codec:";
+"bki-sE-xCA.title" = "קודק:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "daB-hU-mku"; */
-"daB-hU-mku.title" = "Codec:";
+"daB-hU-mku.title" = "קודק:";
 
 /* Class = "NSTextFieldCell"; title = "Properties:"; ObjectID = "dtn-wS-j6U"; */
-"dtn-wS-j6U.title" = "Properties:";
+"dtn-wS-j6U.title" = "מאפיינים:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "f2P-qb-wRx"; */
-"f2P-qb-wRx.title" = "Size:";
+"f2P-qb-wRx.title" = "גודל:";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
-"f7a-XG-NCc.label" = "General";
+"f7a-XG-NCc.label" = "כללי";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
-"f7i-wX-uxQ.title" = "Track:";
+"f7i-wX-uxQ.title" = "רצועה:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
-"g8p-Ec-awO.title" = "Estimated Output FPS:";
+"g8p-Ec-awO.title" = "כמות פריימים משוערת לשניה:";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
-"gDG-Eq-1Bc.title" = "VIDEO";
+"gDG-Eq-1Bc.title" = "וידאו";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
-"iVK-Ck-Lyq.title" = "A/V Sync Diff:";
+"iVK-Ck-Lyq.title" = "הפרש סנכרון אודיו/וידאו:";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "it3-05-Pwu"; */
-"it3-05-Pwu.title" = "Channels:";
+"it3-05-Pwu.title" = "ערוצים:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "Source ID:";
+"jCY-og-BAa.title" = "מזהה מקור:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
-"jyV-Pd-UvH.title" = "Bit Rate:";
+"jyV-Pd-UvH.title" = "קצב ביטים:";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "llF-4b-Z8b"; */
-"llF-4b-Z8b.title" = "Sample Rate:";
+"llF-4b-Z8b.title" = "קצב דגימה:";
 
 /* Class = "NSTextFieldCell"; title = "ID:"; ObjectID = "mZG-ik-Led"; */
-"mZG-ik-Led.title" = "ID:";
+"mZG-ik-Led.title" = "מזהה:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "mgl-Et-20K"; */
-"mgl-Et-20K.title" = "Format:";
+"mgl-Et-20K.title" = "פורמט:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "n0s-eM-42w"; */
-"n0s-eM-42w.title" = "Codec:";
+"n0s-eM-42w.title" = "קודק:";
 
 /* Class = "NSTextFieldCell"; title = "AUDIO"; ObjectID = "nrG-IH-kFg"; */
-"nrG-IH-kFg.title" = "AUDIO";
+"nrG-IH-kFg.title" = "שמע";
 
 /* Class = "NSTextFieldCell"; title = "Total A/V Sync:"; ObjectID = "sbO-Cn-gpI"; */
-"sbO-Cn-gpI.title" = "Total A/V Sync:";
+"sbO-Cn-gpI.title" = "סה\"כ סנכרון אודיו/וידאו:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
-"tNS-gW-PcC.title" = "Watch";
+"tNS-gW-PcC.title" = "צפיה";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
-"vrP-XL-Weg.title" = "Sample Rate:";
+"vrP-XL-Weg.title" = "קצב דגימה:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
-"xix-0S-ehE.title" = "Decoder:";
+"xix-0S-ehE.title" = "מפענח:";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "Primaries:";
+"1kw-LO-KmJ.title" = "צבעי בסיס:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
-"mLo-Wc-BoO.title" = "Colorspace:";
+"mLo-Wc-BoO.title" = "טווח צבעים:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
+"zDk-Ie-EPs.headerCell.title" = "שם";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
+"x6R-q7-efY.headerCell.title" = "ערך";

@@ -1,14 +1,15 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Open In IINA",
   "description": "Open videos and audios in IINA.",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "options_page": "options.html",
   "background": {
-    "page": "background.html"
+    "service_worker": "background.js",
+    "type": "module"
   },
-  "browser_action": {
+  "action": {
     "default_icon": "icon.png",
     "default_title": "Open In IINA"
   },
@@ -16,7 +17,8 @@
     "tabs",
     "activeTab",
     "contextMenus",
-    "storage"
+    "storage",
+    "scripting"
   ],
   "icons": {
     "16": "icon16.png",

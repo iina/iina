@@ -10,9 +10,6 @@
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "Näytä tekstitykset letterboxissa koko näytön tilassa";
 
-/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "poista";
-
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Sijainti:";
 
@@ -66,9 +63,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "Syötä pilkulla erotettu luettelo merkkijonoja.";
-
-/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "Jos käytössä, kaikki ASS-tekstitykset piirretään käyttäen alla olevia tyylejä.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Tekstin tekstitys:";
@@ -145,23 +139,20 @@
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "Reunukset";
 
-/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "Ohita ASS-tyylit";
-
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Auto load:";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
-"slU-Ox-aeF.title" = "Center";
+"slU-Ox-aeF.title" = "Keskitetty";
 
 /* Class = "NSBox"; title = "Border"; ObjectID = "t5n-mc-dss"; */
 "t5n-mc-dss.title" = "Border";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Disabled";
+"u31-eV-Arr.title" = "Ei käytössä";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
-"vDc-dw-liI.title" = "Color:";
+"vDc-dw-liI.title" = "Väri:";
 
 /* Class = "NSTextFieldCell"; title = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues."; ObjectID = "vYb-qH-XkH"; */
 "vYb-qH-XkH.title" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 mintues.";
@@ -170,13 +161,19 @@
 "xGf-fF-4Hx.title" = "Y:";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "xid-E9-FC9"; */
-"xid-E9-FC9.title" = "Color:";
+"xid-E9-FC9.title" = "Väri:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
 "y1E-JR-KRI.title" = "Subtitles containing media filename";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "Preferred language:";
+"zaE-bH-XfT.title" = "Ensisijainen kieli:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "Left";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[0]" = "Primary Subtitles";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[1]" = "Secondary Subtitles";

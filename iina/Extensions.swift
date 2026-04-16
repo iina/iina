@@ -7,9 +7,26 @@
 //
 
 import Cocoa
+import CryptoKit
+import MediaPlayer
 
 extension NSSlider {
-  /** Returns the position of knob center by point */
+  /**
+   Returns the position of the knob's center point along the slider's track.
+
+   This method calculates the horizontal position of the center of the slider's knob based on the slider's current value (`doubleValue`), the minimum and maximum values, and the slider's dimensions. It can be useful for custom drawing, animations, or hit detection related to the knob's position.
+
+   - Returns: A `CGFloat` representing the x-coordinate of the knob's center along the slider's width.
+
+   - Important: Ensure that the slider's `maxValue` is greater than `minValue`. An assertion is used to validate this.
+
+   Example usage:
+   ```swift
+   let slider = NSSlider(value: 50, minValue: 0, maxValue: 100, target: nil, action: nil)
+   let knobPosition = slider.knobPointPosition()
+   print("The knob is positioned at x-coordinate: \(knobPosition)")
+   ```
+   */
   func knobPointPosition() -> CGFloat {
     let sliderOrigin = frame.origin.x + knobThickness / 2
     let sliderWidth = frame.width - knobThickness
@@ -19,23 +36,37 @@ extension NSSlider {
   }
 }
 
-extension NSSegmentedControl {
-  func selectSegment(withLabel label: String) {
-    self.selectedSegment = -1
-    for i in 0..<segmentCount {
-      if self.label(forSegment: i) == label {
-        self.selectedSegment = i
-      }
-    }
-  }
-}
+extension CGPoint {
+  /**
+   Uses the Pythagorean theorem to calculate the distance between two points.
 
-func - (lhs: NSPoint, rhs: NSPoint) -> NSPoint {
-  return NSMakePoint(lhs.x - rhs.x, lhs.y - rhs.y)
+   This method calculates the straight-line distance (Euclidean distance) between the current point and another `CGPoint`. It is useful for measuring distances in a two-dimensional coordinate system, such as when working with points on a canvas or in a graphics context.
+
+   - Parameter to: The target `CGPoint` to which the distance will be calculated.
+   - Returns: A `CGFloat` representing the distance between the two points.
+
+   Example usage:
+   ```swift
+   let pointA = CGPoint(x: 0, y: 0)
+   let pointB = CGPoint(x: 3, y: 4)
+   let distance = pointA.distance(to: pointB)
+   print("Distance between pointA and pointB is \(distance)")  // Output: 5.0
+   ```
+   */
+  func distance(to: CGPoint) -> CGFloat {
+    return sqrt(pow(self.x - to.x, 2) + pow(self.y - to.y, 2))
+  }
 }
 
 extension NSSize {
 
+  /**
+   Returns the aspect ratio (width divided by height) of the size.
+
+   This property asserts that neither width nor height is zero, and then calculates the aspect ratio.
+
+   - Returns: The aspect ratio of the size as a `CGFloat`.
+   */
   var aspect: CGFloat {
     get {
       assert(width != 0 && height != 0)
@@ -43,36 +74,47 @@ extension NSSize {
     }
   }
 
-  /** Resize to no smaller than a min size while keeping same aspect */
+  /**
+   Resizes the current size to be no smaller than a given minimum size while maintaining the same aspect ratio.
+
+   This method checks if the current size is already larger than the given minimum size, and if not, it resizes the current size to the minimum size, preserving the aspect ratio.
+
+   - Parameter minSize: The minimum size that the current size should satisfy.
+   - Returns: The resized `NSSize` that satisfies the minimum size requirement while keeping the same aspect ratio.
+   */
   func satisfyMinSizeWithSameAspectRatio(_ minSize: NSSize) -> NSSize {
-    if width >= minSize.width && height >= minSize.height {  // no need to resize if larger
+    if width >= minSize.width && height >= minSize.height {
       return self
     } else {
       return grow(toSize: minSize)
     }
   }
 
-  /** Resize to no larger than a max size while keeping same aspect */
+  /**
+   Resizes the current size to be no larger than a given maximum size while maintaining the same aspect ratio.
+
+   This method checks if the current size is already smaller than the given maximum size, and if not, it resizes the current size to the maximum size, preserving the aspect ratio.
+
+   - Parameter maxSize: The maximum size that the current size should satisfy.
+   - Returns: The resized `NSSize` that satisfies the maximum size requirement while keeping the same aspect ratio.
+   */
   func satisfyMaxSizeWithSameAspectRatio(_ maxSize: NSSize) -> NSSize {
-    if width <= maxSize.width && height <= maxSize.height {  // no need to resize if smaller
+    if width <= maxSize.width && height <= maxSize.height {
       return self
     } else {
       return shrink(toSize: maxSize)
     }
   }
 
+  /**
+   Crops the current size to fit within a target aspect ratio, reducing either the width or height to match the aspect ratio of the target rectangle.
+
+   - Parameter aspectRect: A rectangle or size structure that contains the desired aspect ratio.
+   - Returns: The cropped `NSSize` that fits within the given aspect ratio.
+   */
   func crop(withAspect aspectRect: Aspect) -> NSSize {
     let targetAspect = aspectRect.value
-    if aspect > targetAspect {  // self is wider, crop width, use same height
-      return NSSize(width: height * targetAspect, height: height)
-    } else {
-      return NSSize(width: width, height: width / targetAspect)
-    }
-  }
-
-  func expand(withAspect aspectRect: Aspect) -> NSSize {
-    let targetAspect = aspectRect.value
-    if aspect < targetAspect {  // self is taller, expand width, use same height
+    if aspect > targetAspect {
       return NSSize(width: height * targetAspect, height: height)
     } else {
       return NSSize(width: width, height: width / targetAspect)
@@ -136,20 +178,63 @@ extension NSSize {
       return NSSize(width: size.width, height: size.width / aspect)
     }
   }
+  /**
+   Returns a `NSRect` that represents the size centered within the given `NSRect`.
 
+   This method calculates a new rectangle (`NSRect`) where the current size (`NSSize`) is centered inside the provided rectangle (`rect`). It is useful when you need to center one view or size within another, maintaining its dimensions.
+
+   - Parameter rect: The rectangle within which to center the current size.
+   - Returns: A `NSRect` where the current size is centered inside the given rectangle.
+
+   Example usage:
+   ```swift
+   let size = NSSize(width: 100, height: 50)
+   let containerRect = NSRect(x: 0, y: 0, width: 300, height: 200)
+   let centeredRect = size.centeredRect(in: containerRect)
+   print(centeredRect)  // Output: NSRect(x: 100.0, y: 75.0, width: 100.0, height: 50.0)
+   ```
+   */
   func centeredRect(in rect: NSRect) -> NSRect {
     return NSRect(x: rect.origin.x + (rect.width - width) / 2,
                   y: rect.origin.y + (rect.height - height) / 2,
                   width: width,
                   height: height)
   }
+  /**
+   Multiplies both the width and height of the current size by a given multiplier.
 
+   This method returns a new `NSSize` where both the width and height are scaled by the given multiplier. It is useful for proportionally resizing an object.
+
+   - Parameter multiplier: The multiplier used to scale both width and height.
+   - Returns: A new `NSSize` with the dimensions scaled by the multiplier.
+
+   Example usage:
+   ```swift
+   let size = NSSize(width: 100, height: 50)
+   let scaledSize = size.multiply(2.0)
+   print(scaledSize)  // Output: NSSize(width: 200.0, height: 100.0)
+   ```
+   */
   func multiply(_ multiplier: CGFloat) -> NSSize {
     return NSSize(width: width * multiplier, height: height * multiplier)
   }
+  /**
+   Adds a given value to both the width and height of the current size.
 
-  func add(_ multiplier: CGFloat) -> NSSize {
-    return NSSize(width: width + multiplier, height: height + multiplier)
+   This method returns a new `NSSize` where the provided value is added to both the width and height. It is useful for increasing the size by a fixed amount.
+
+   - Parameter value: The value to be added to both the width and height.
+   - Returns: A new `NSSize` with the increased dimensions.
+
+   Example usage:
+   ```swift
+   let size = NSSize(width: 100, height: 50)
+   let newSize = size.add(10)
+   print(newSize)  // Output: NSSize(width: 110.0, height: 60.0)
+   ```
+   */
+  func add(_ value: CGFloat) -> NSSize {
+    return NSSize(width: width + value, height: height + value)
   }
 
 }
@@ -162,10 +247,6 @@ extension NSRect {
               y: min(pt1.y, pt2.y),
               width: abs(pt1.x - pt2.x),
               height: abs(pt1.y - pt2.y))
-  }
-
-  func multiply(_ multiplier: CGFloat) -> NSRect {
-    return NSRect(x: origin.x, y: origin.y, width: width * multiplier, height: height * multiplier)
   }
 
   func centeredResize(to newSize: NSSize) -> NSRect {
@@ -189,11 +270,11 @@ extension NSRect {
     if newOrigin.y < biggerRect.origin.y {
       newOrigin.y = biggerRect.origin.y
     }
-    if newOrigin.x + width > biggerRect.origin.x + biggerRect.width {
-      newOrigin.x = biggerRect.origin.x + biggerRect.width - width
+    if newOrigin.x + newSize.width > biggerRect.origin.x + biggerRect.width {
+      newOrigin.x = biggerRect.origin.x + biggerRect.width - newSize.width
     }
-    if newOrigin.y + height > biggerRect.origin.y + biggerRect.height {
-      newOrigin.y = biggerRect.origin.y + biggerRect.height - height
+    if newOrigin.y + newSize.height > biggerRect.origin.y + biggerRect.height {
+      newOrigin.y = biggerRect.origin.y + biggerRect.height - newSize.height
     }
     return NSRect(origin: newOrigin, size: newSize)
   }
@@ -247,6 +328,44 @@ extension Double {
       return "\(rounded)"
     }
   }
+
+  /// Returns this value rounded half down to an integral value.
+  ///
+  /// For example 0.5 will be rounded to 0.0, 0.51 will be rounded to 1.0.
+  /// - Note: This method is needed because at this time the Swift
+  ///     [rounded](https://developer.apple.com/documentation/swift/double/rounded(_:)) method does not
+  ///     support a [rounding rule](https://developer.apple.com/documentation/swift/floatingpointroundingrule)
+  ///     for [rounding half down](https://en.wikipedia.org/wiki/Rounding#Rounding_half_down).
+  /// - Returns: The integral value found by rounding this value.
+  func roundedHalfDown() -> Double {
+    let floor = floor(self)
+    return self <= floor + 0.5 ? floor : ceil(self)
+  }
+
+  func roundedTo2Decimals() -> Double {
+    let scaledUp = self * 1e2
+    let scaledUpRounded = scaledUp.rounded(.up)
+    let finalVal = scaledUpRounded / 1e2
+    return finalVal
+  }
+  
+  /// Formats this number as a decimal string, using the default locale.
+  ///
+  /// This should be used in most places where decimal numbers need to be printed. Do not rely on string interpolation alone
+  /// because the number will not be localized.
+  ///
+  /// For example, if the user's locale formats numbers like `1.234.567,89` (in particular, using
+  /// a comma to signify the decimal):
+  /// ```
+  /// let num: Double = 12.34
+  /// let badStr = "Value is \(num)"                                // badStr will *always* be "Value is 12.34"
+  /// let goodStr = "Value is \(num.groupedStringUpTo6Decimals)"  // goodStr will be "Value is 12,34"
+  /// ```
+  ///
+  /// Currently the output string is limited to 6 digits after the decimal. This matches the precision used by mpv's APIs.
+  var groupedStringUpTo6Decimals: String {
+    return fmtDecimalGroupingMaxFractionDigits6.string(from: self as NSNumber) ?? "NaN"
+  }
 }
 
 extension Comparable {
@@ -261,17 +380,28 @@ extension Comparable {
   }
 }
 
-extension BinaryInteger {
-  func clamped(to range: Range<Self>) -> Self {
-    if self < range.lowerBound {
-      return range.lowerBound
-    } else if self >= range.upperBound {
-      return range.upperBound.advanced(by: -1)
-    } else {
-      return self
-    }
-  }
-}
+// Formats a number to max 2 digits after the decimal, rounded, but will omit trailing zeroes, and no commas or other formatting for large numbers
+fileprivate let fmtDecimalMaxFractionDigits2: NumberFormatter = {
+  let fmt = NumberFormatter()
+  fmt.numberStyle = .decimal
+  fmt.usesGroupingSeparator = false
+  fmt.maximumFractionDigits = 2
+  return fmt
+}()
+
+/// Formatter for `Double`.
+/// - Displays up to 6 digits after the decimal before rounding.
+/// - Omits trailing zeroes.
+/// - Uses grouping separator (e.g. comma) for large numbers.
+fileprivate let fmtDecimalGroupingMaxFractionDigits6: NumberFormatter = {
+  let fmt = NumberFormatter()
+  fmt.numberStyle = .decimal
+  fmt.usesGroupingSeparator = true
+  fmt.minimumFractionDigits = 0
+  fmt.maximumFractionDigits = 6
+  fmt.usesSignificantDigits = false
+  return fmt
+}()
 
 extension FloatingPoint {
   func clamped(to range: Range<Self>) -> Self {
@@ -283,13 +413,27 @@ extension FloatingPoint {
       return self
     }
   }
+
+  /// Formats as String, rounding the number to 2 digits after the decimal
+  var stringWithMaxFractionDigits2: String {
+    return fmtDecimalMaxFractionDigits2.string(for: self)!
+  }
+
 }
 
 extension NSColor {
   var mpvColorString: String {
-    get {
-      return "\(self.redComponent)/\(self.greenComponent)/\(self.blueComponent)/\(self.alphaComponent)"
-    }
+    // Normalize to sRGB before extracting cmponents
+    let rgb = self.usingColorSpace(.sRGB) ?? self
+
+    var red: CGFloat = 0
+    var green: CGFloat = 0
+    var blue: CGFloat = 0
+    var alpha: CGFloat = 0
+
+    rgb.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+    
+    return "\(red)/\(green)/\(blue)/\(alpha)"
   }
 
   convenience init?(mpvColorString: String) {
@@ -311,53 +455,8 @@ extension NSColor {
   }
 }
 
-
-extension NSMutableAttributedString {
-  convenience init?(linkTo url: String, text: String, font: NSFont) {
-    self.init(string: text)
-    let range = NSRange(location: 0, length: self.length)
-    let nsurl = NSURL(string: url)!
-    self.beginEditing()
-    self.addAttribute(.link, value: nsurl, range: range)
-    self.addAttribute(.font, value: font, range: range)
-    self.endEditing()
-  }
-}
-
-
-extension UserDefaults {
-
-  func mpvColor(forKey key: String) -> String? {
-    guard let data = self.data(forKey: key) else { return nil }
-    guard let color = NSUnarchiver.unarchiveObject(with: data) as? NSColor else { return nil }
-    return color.usingColorSpace(.deviceRGB)?.mpvColorString
-  }
-}
-
-
-extension NSData {
-  func md5() -> NSString {
-    let digestLength = Int(CC_MD5_DIGEST_LENGTH)
-    let md5Buffer = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLength)
-
-    CC_MD5(bytes, CC_LONG(length), md5Buffer)
-
-    let output = NSMutableString(capacity: Int(CC_MD5_DIGEST_LENGTH * 2))
-    for i in 0..<digestLength {
-      output.appendFormat("%02x", md5Buffer[i])
-    }
-
-    md5Buffer.deallocate()
-    return NSString(format: output)
-  }
-}
-
 extension Data {
-  var md5: String {
-    get {
-      return (self as NSData).md5() as String
-    }
-  }
+  var md5: String { Insecure.MD5.hash(data: self).map { String(format: "%02x", $0) }.joined() }
 
   var chksum64: UInt64 {
     return withUnsafeBytes {
@@ -365,9 +464,13 @@ extension Data {
     }
   }
 
-  init<T>(bytesOf thing: T) {
-    var copyOfThing = thing // Hopefully CoW?
-    self.init(bytes: &copyOfThing, count: MemoryLayout.size(ofValue: thing))
+  init<T: BitwiseCopyable>(bytesOf thing: T) {
+    var mutableThing = thing
+    self.init(bytes: &mutableThing, count: MemoryLayout<T>.size)
+  }
+  
+  init<T: BitwiseCopyable>(bytesOf thing: [T]) {
+    self.init(bytes: thing, count: MemoryLayout<T>.size * thing.count)
   }
   
   func saveToFolder(_ url: URL, filename: String) -> URL? {
@@ -419,7 +522,11 @@ extension String {
   }
 
   func equalsIgnoreCase(_ other: String) -> Bool {
-    return localizedCompare(other) == .orderedSame
+    return localizedCaseInsensitiveCompare(other) == .orderedSame
+  }
+
+  var quoted: String {
+    return "\"\(self)\""
   }
 
   mutating func deleteLast(_ num: Int) {
@@ -457,6 +564,22 @@ extension NSMenuItem {
 
 
 extension URL {
+  /// A string representing the URL in the format mpv uses for
+  /// [playlist/N/filename](https://mpv.io/manual/stable/#command-interface-playlist/n/filename].
+  var mpvStr: String {
+    guard isFileURL else {
+      return absoluteString
+    }
+    guard #available(macOS 13.0, *) else {
+      return path
+    }
+    return path(percentEncoded: false)
+  }
+
+  var creationDate: Date? {
+    (try? resourceValues(forKeys: [.creationDateKey]))?.creationDate
+  }
+
   var isExistingDirectory: Bool {
     return (try? self.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
   }
@@ -468,20 +591,22 @@ extension NSTextField {
   func setHTMLValue(_ html: String) {
     let font = self.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
     let color = self.textColor ?? NSColor.labelColor
-    let style = String(format: "<style>body{font-family: '%@'; font-size:%fpx;}</style>", font.fontName, font.pointSize)
-    if let data = (style + html).data(using: .utf8), let string = NSMutableAttributedString(html: data, options: [.textEncodingName: "utf8"], documentAttributes: nil) {
-      string.enumerateAttributes(in: NSMakeRange(0, string.length) , options: []) { attrs, range, _ in
-        if attrs[.link] == nil {
-          string.setAttributes([.foregroundColor: color], range: range)
-        }
-      }
-      self.attributedStringValue = string
+    if let data = html.data(using: .utf8), let str = NSMutableAttributedString(html: data,
+                                                                               options: [.textEncodingName: "utf8"],
+                                                                               documentAttributes: nil) {
+      str.addAttributes([.font: font, .foregroundColor: color], range: NSMakeRange(0, str.length))
+      self.attributedStringValue = str
     }
   }
 
 }
 
 extension NSImage {
+  var cgImage: CGImage? {
+    var rect = CGRect.init(origin: .zero, size: self.size)
+    return self.cgImage(forProposedRect: &rect, context: nil, hints: nil)
+  }
+
   func tinted(_ tintColor: NSColor) -> NSImage {
     guard self.isTemplate else { return self }
 
@@ -495,6 +620,14 @@ extension NSImage {
     image.isTemplate = false
 
     return image
+  }
+
+  /// `cornerRadius`: if greater than 0, round the corners by this radius
+  func resized(newWidth: Int, newHeight: Int, cornerRadius: CGFloat = 0) -> NSImage {
+    if let cgImageNew = cgImage?.resized(newWidth: newWidth, newHeight: newHeight, cornerRadius: cornerRadius) {
+      return NSImage(cgImage: cgImageNew, size: NSSize(width: newWidth, height: newHeight))
+    }
+    return self
   }
 
   func rounded() -> NSImage {
@@ -539,16 +672,39 @@ extension NSImage {
     newImage.unlockFocus()
     return newImage
   }
+
+  /// Try to find a SF Symbol. This function will iterate through the provided list of SF Symbol name list to and return the
+  /// first available SF Symbol at runtime.
+  ///
+  /// Even though SF Symbol is available from macOS 11, we require at macOS 14 to use SF Symbol for the sake of consistency. On
+  /// older systems (macOS 13 and below), because SF Symbols are not complete enough for our usage, we don't use them at all.
+  /// If a better symbol is found in a later release of SF Symbol, place it at the first of the name list, so that IINA running
+  /// on the latest version of macOS can make use of it; IINA running on a older version of macOS will fallback to a symbol
+  /// in a previous release of SF Symbol. But the list of name must contain a symbol which is available in macOS 14 (SF Symbol 5).
+  ///
+  /// - Parameters:
+  ///   - names: A list name of the SF Symbol. The name requires higher SF Symbol version must be at front, with fallback SF Symbol
+  ///   names at later indexes. The last one must be available in macOS 14 (SF Symbol 5), otherwise a fatal error will occur.
+  ///   - configuration: The symbol configuration for the SF symbol. Optional.
+  @available(macOS 14.0, *)
+  static func findSFSymbol(_ names: [String], withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage {
+    for name in names {
+      if let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) {
+        if let configuration, let configured = symbol.withSymbolConfiguration(configuration) {
+          return configured
+        }
+        return symbol
+      }
+    }
+    fatalError("Could not find SF Symbol: \(names)")
+  }
+
 }
 
 
 extension NSVisualEffectView {
   func roundCorners(withRadius cornerRadius: CGFloat) {
-    if #available(macOS 10.14, *) {
-      maskImage = .maskImage(cornerRadius: cornerRadius)
-    } else {
-      layer?.cornerRadius = cornerRadius
-    }
+    maskImage = .maskImage(cornerRadius: cornerRadius)
   }
 }
 
@@ -578,15 +734,11 @@ extension NSUserInterfaceItemIdentifier {
   static let isChosen = NSUserInterfaceItemIdentifier("IsChosen")
   static let trackId = NSUserInterfaceItemIdentifier("TrackId")
   static let trackName = NSUserInterfaceItemIdentifier("TrackName")
-  static let isPlayingCell = NSUserInterfaceItemIdentifier("IsPlayingCell")
-  static let trackNameCell = NSUserInterfaceItemIdentifier("TrackNameCell")
   static let key = NSUserInterfaceItemIdentifier("Key")
   static let value = NSUserInterfaceItemIdentifier("Value")
-  static let action = NSUserInterfaceItemIdentifier("Action")
 }
 
 extension NSAppearance {
-  @available(macOS 10.14, *)
   convenience init?(iinaTheme theme: Preference.Theme) {
     switch theme {
     case .dark:
@@ -599,10 +751,24 @@ extension NSAppearance {
   }
 
   var isDark: Bool {
-    if #available(macOS 10.14, *) {
-      return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
+    return name == .darkAqua || name == .vibrantDark || name == .accessibilityHighContrastDarkAqua || name == .accessibilityHighContrastVibrantDark
+  }
+
+  // Performs the given closure with this appearance by temporarily making this the current appearance.
+  func applyAppearanceFor<T>(_ closure: ()  -> T) -> T {
+    if #available(macOS 11.0, *) {
+      var result: T?
+      self.performAsCurrentDrawingAppearance {
+        result = closure()
+      }
+      return result!
     } else {
-      return name == .vibrantDark
+      let previousAppearance = NSAppearance.current
+      NSAppearance.current = self
+      defer {
+        NSAppearance.current = previousAppearance
+      }
+      return closure()
     }
   }
 }
@@ -624,17 +790,47 @@ extension NSScreen {
   /// area in case additional problems are encountered in the future.
   /// - parameter label: Label to include in the log message.
   /// - parameter screen: The `NSScreen` object to log.
-  static func log(_ label: String, _ screen: NSScreen?) {
+  static func log(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
     guard let screen = screen else {
-      Logger.log("\(label): nil")
+      Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
-    // Unfortunately localizedName is not available until macOS Catalina.
-    if #available(macOS 10.15, *) {
-      Logger.log("\(label): \(screen.localizedName) visible frame \(screen.visibleFrame)")
-    } else {
-      Logger.log("\(label): visible frame \(screen.visibleFrame)")
+    var message = "\(label), \(screen.localizedName)"
+    if screen == NSScreen.main {
+      message += " (main screen)"
     }
+    let screenNumberKey = NSDeviceDescriptionKey(rawValue: "NSScreenNumber")
+    if let displayId = screen.deviceDescription[screenNumberKey] as? CGDirectDisplayID {
+      message += ", on display \(displayId)"
+    }
+    message += ":"
+    message += "\n  Frame: \(screen.frame), visible \(screen.visibleFrame)"
+    message += "\n  \(formEDRMessage(screen))"
+    Logger.log(message, subsystem: subsystem)
+  }
+
+  /// Log EDR aspects of the given `NSScreen` object.
+  /// - parameter screen: The `NSScreen` object to log EDR aspects of.
+  static func logEDR(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
+    guard let screen = screen else {
+      Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
+      return
+    }
+    var message = "\(label), \(screen.localizedName):"
+    message += "\n  \(formEDRMessage(screen))"
+    Logger.log(message, subsystem: subsystem)
+  }
+
+  /// Return a string describing EDR aspects of the given screen.
+  /// - Parameter screen: The `NSScreen` object to form EDR aspects of.
+  /// - Returns: A string with EDR related details of the given screen for use in a log message.
+  private static func formEDRMessage(_ screen: NSScreen) -> String {
+    let maxPossibleEDR = screen.maximumPotentialExtendedDynamicRangeColorComponentValue
+    let canEnableEDR = maxPossibleEDR > 1.0
+    return """
+      EDR: \(canEnableEDR ? "Supported" : "Not supported"), max potential \(maxPossibleEDR), \
+      max current \(screen.maximumExtendedDynamicRangeColorComponentValue)
+      """
   }
 }
 
@@ -645,7 +841,7 @@ extension NSWindow {
   /// This method searches for a screen to use in this order:
   /// - `window!.screen` The screen where most of the window is on; it is `nil` when the window is offscreen.
   /// - `NSScreen.main` The screen containing the window that is currently receiving keyboard events.
-  /// - `NSScreeen.screens[0]` The primary screen of the user’s system.
+  /// - `NSScreen.screens[0]` The primary screen of the user’s system.
   ///
   /// `PlayerCore` caches players along with their windows. This window may have been previously used on an external monitor
   /// that is no longer attached. In that case the `screen` property of the window will be `nil`.  Apple documentation is silent
@@ -672,15 +868,8 @@ extension Process {
 
     let (stdout, stderr) = (Pipe(), Pipe())
     let process = Process()
-    if #available(macOS 10.13, *) {
-      process.executableURL = URL(fileURLWithPath: cmd[0])
-      process.currentDirectoryURL = currentDir
-    } else {
-      process.launchPath = cmd[0]
-      if let path = currentDir?.path {
-        process.currentDirectoryPath = path
-      }
-    }
+    process.executableURL = URL(fileURLWithPath: cmd[0])
+    process.currentDirectoryURL = currentDir
     process.arguments = [String](cmd.dropFirst())
     process.standardOutput = stdout
     process.standardError = stderr
@@ -690,3 +879,110 @@ extension Process {
     return (process, stdout, stderr)
   }
 }
+
+extension CGImage {
+  var nsImage: NSImage { NSImage(cgImage: self, size: size) }
+  var size: CGSize { CGSize(width: width, height: height) }
+
+  /// `cornerRadius`: if greater than 0, round the corners by this radius
+  func resized(newWidth: Int, newHeight: Int, cornerRadius: CGFloat = 0) -> CGImage {
+    guard newWidth != width || newHeight != height else {
+      return self
+    }
+
+    guard newWidth > 0, newHeight > 0 else {
+      Logger.fatal("NSImage.resized: invalid width (\(newWidth)) or height (\(newHeight)) - both must be greater than 0")
+    }
+
+    // Use raw CoreGraphics calls instead of their NS equivalents. They are > 10x faster, and only downside is that the image's
+    // dimensions must be integer values instead of decimals.
+    let newImage = CGImage.buildBitmapImage(width: Int(newWidth), height: Int(newHeight)) { cgContext in
+      let outputRect = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+      if cornerRadius > 0.0 {
+        cgContext.beginPath()
+        cgContext.addPath(CGPath(roundedRect: outputRect, cornerWidth: cornerRadius, cornerHeight: cornerRadius, transform: nil))
+        cgContext.closePath()
+        cgContext.clip()
+      }
+      cgContext.draw(self, in: outputRect)
+    }
+
+    return newImage
+  }
+
+  /// Builds a bitmap image efficiently using CoreGraphics APIs.
+  ///
+  /// If it's found useful for any more situations, should put in its own class
+  static func buildBitmapImage(width: Int, height: Int, _ drawingCalls: (CGContext) -> Void) -> CGImage {
+    guard let compositeImageRep = CGImage.makeNewImgRep(width: width, height: height) else {
+      Logger.fatal("DrawImageInBitmapImageContext: Failed to create NSBitmapImageRep!")
+    }
+
+    guard let context = NSGraphicsContext(bitmapImageRep: compositeImageRep) else {
+      Logger.fatal("DrawImageInBitmapImageContext: Failed to create NSGraphicsContext!")
+    }
+
+    context.cgContext.interpolationQuality = .high
+    drawingCalls(context.cgContext)
+
+    return compositeImageRep.cgImage!
+  }
+
+  /// Creates RGB image with alpha channel
+  static func makeNewImgRep(width: Int, height: Int) -> NSBitmapImageRep? {
+    return NSBitmapImageRep(
+      bitmapDataPlanes: nil,
+      pixelsWide: width,
+      pixelsHigh: height,
+      bitsPerSample: 8,
+      samplesPerPixel: 4,
+      hasAlpha: true,
+      isPlanar: false,
+      colorSpaceName: NSColorSpaceName.calibratedRGB,
+      bytesPerRow: 0,
+      bitsPerPixel: 0)
+  }
+}
+
+extension CGSize {
+  var heightInt: Int { Int(height) }
+  var widthInt: Int { Int(width) }
+
+  /// Crops the current size to fit within a target aspect ratio, reducing either the width or height to match the aspect ratio of the
+  /// target rectangle.
+  /// - Parameter targetAspect: A rectangle or size structure that contains the desired aspect ratio.
+  /// - Returns: The cropped `NSSize` that fits within the given aspect ratio.
+  func crop(withAspect targetAspect: CGFloat) -> NSSize {
+    if aspect > targetAspect {  // self is wider, crop width, use same height
+      return NSSize(width: round(height * targetAspect), height: height)
+    } else {
+      return NSSize(width: width, height: round(width / targetAspect))
+    }
+  }
+
+  func getCropRect(withAspect aspect: CGFloat) -> NSRect {
+    let croppedSize = crop(withAspect: aspect)
+    let cropped = NSMakeRect(round((width - croppedSize.width) / 2),
+                             round((height - croppedSize.height) / 2),
+                             croppedSize.width,
+                             croppedSize.height)
+    return cropped
+  }
+}
+
+#if DEBUG
+extension DispatchQueue {
+
+  /// Returns the label assigned to the current dispatch queue at creation time.
+  ///
+  /// This method is a Swift wrapper around the
+  /// [dispatch_queue_get_label](https://developer.apple.com/documentation/dispatch/1452939-dispatch_queue_get_label)
+  /// method.
+  /// - Note: This method is intended only to be used when debugging IINA.
+  /// - Returns: The label of the queue, or `nil` if the queue was not provided a label during initialization.
+  static func currentQueueLabel() -> String? {
+    let label = __dispatch_queue_get_label(nil)
+    return String(cString: label, encoding: .utf8)
+  }
+}
+#endif

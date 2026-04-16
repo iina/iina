@@ -1,0 +1,7 @@
+# Exclude everything except the FFmpeg headers IINA needs.
+*
+!.gitignore
+!avformat.h
+!avio.h
+!version.h
+!version_major.h

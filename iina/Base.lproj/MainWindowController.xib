@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -40,7 +40,7 @@
                 <outlet property="oscFloatingTopView" destination="Unr-Y6-JoM" id="URb-3v-Gzc"/>
                 <outlet property="oscTopMainView" destination="fDY-vk-Ylv" id="phs-Yu-dGn"/>
                 <outlet property="oscTopMainViewTopConstraint" destination="dAZ-xc-uEC" id="qjt-RT-cqK"/>
-                <outlet property="osdAccessoryProgress" destination="i10-rt-9cb" id="ZdR-ZV-uoQ"/>
+                <outlet property="osdAccessoryProgress" destination="t7D-pn-2Jv" id="avK-qo-dY4"/>
                 <outlet property="osdAccessoryText" destination="lb1-5R-hR3" id="A7o-3l-NYe"/>
                 <outlet property="osdLabel" destination="Ofw-1d-N4T" id="9ei-8o-aYw"/>
                 <outlet property="osdStackView" destination="g0j-zS-jKv" id="aoo-Tm-yhj"/>
@@ -70,16 +70,16 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
-            <view key="contentView" id="se5-gp-TjO">
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1409"/>
+            <view key="contentView" id="se5-gp-TjO" customClass="MainWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <visualEffectView hidden="YES" wantsLayer="YES" horizontalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-jx-9pO">
-                        <rect key="frame" x="477" y="303" width="155" height="67"/>
+                        <rect key="frame" x="471" y="303" width="161" height="67"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJv-RK-JT8">
-                                <rect key="frame" x="16" y="4" width="123" height="30"/>
+                                <rect key="frame" x="16" y="4" width="129" height="30"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="P1S-9b-Nzw">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
@@ -107,13 +107,10 @@
                                         </constraints>
                                     </box>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-06-ksj">
-                                        <rect key="frame" x="73" y="0.0" width="50" height="30"/>
+                                        <rect key="frame" x="73" y="0.0" width="56" height="30"/>
                                         <subviews>
                                             <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1XY-X2-FcE">
-                                                <rect key="frame" x="0.0" y="8" width="42" height="16"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="38" id="rUi-Ot-gUr"/>
-                                                </constraints>
+                                                <rect key="frame" x="-2" y="8" width="60" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="100%" id="va1-P5-3b0">
                                                     <font key="font" metaFont="systemBold"/>
                                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -121,17 +118,18 @@
                                                 </textFieldCell>
                                             </textField>
                                             <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EpK-FB-bM0">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
                                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="battery" id="5rw-Sh-BRR"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="EpK-FB-bM0" secondAttribute="trailing" id="Ab1-a3-Ap7"/>
-                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="centerX" secondItem="Ybl-06-ksj" secondAttribute="centerX" constant="-4" id="Adp-7U-tTV"/>
                                             <constraint firstItem="EpK-FB-bM0" firstAttribute="leading" secondItem="Ybl-06-ksj" secondAttribute="leading" id="ICp-l0-UOF"/>
-                                            <constraint firstAttribute="width" constant="50" id="YE3-Bj-TCo"/>
+                                            <constraint firstAttribute="width" constant="56" id="YE3-Bj-TCo"/>
+                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="centerY" secondItem="Ybl-06-ksj" secondAttribute="centerY" constant="-0.5" id="ewn-Sz-UmC"/>
+                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="leading" secondItem="Ybl-06-ksj" secondAttribute="leading" id="f0s-Zh-SkE"/>
+                                            <constraint firstAttribute="trailing" secondItem="1XY-X2-FcE" secondAttribute="trailing" id="j0h-QD-M18"/>
                                             <constraint firstAttribute="bottom" secondItem="EpK-FB-bM0" secondAttribute="bottom" id="lce-Dz-NZo"/>
-                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="centerY" secondItem="Ybl-06-ksj" secondAttribute="centerY" constant="-1" id="sV7-2T-Ljb"/>
                                             <constraint firstAttribute="height" constant="30" id="skg-xR-yU1"/>
                                             <constraint firstItem="EpK-FB-bM0" firstAttribute="top" secondItem="Ybl-06-ksj" secondAttribute="top" id="xfk-HM-qEp"/>
                                         </constraints>
@@ -149,7 +147,7 @@
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-OF-zy6">
-                                <rect key="frame" x="14" y="38" width="127" height="21"/>
+                                <rect key="frame" x="14" y="38" width="133" height="21"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="DVg-p3-w5Q">
                                     <font key="font" metaFont="system" size="18"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -231,18 +229,18 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1L-U9o">
-                        <rect key="frame" x="0.0" y="0.0" width="640" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="20"/>
                         <subviews>
                             <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Qmi-hb-0aM" customClass="TimeLabelOverflowedStackView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="8" width="632" height="24"/>
+                                <rect key="frame" x="0.0" y="6" width="632" height="8"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="4rp-3T-TCc"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="8" id="4rp-3T-TCc"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="8" id="84H-65-Ego"/>
-                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="8" id="ANy-8g-kkb"/>
+                            <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="6" id="84H-65-Ego"/>
+                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="6" id="ANy-8g-kkb"/>
                             <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" constant="8" id="bOW-iG-HNY"/>
                             <constraint firstItem="Qmi-hb-0aM" firstAttribute="leading" secondItem="DFb-1L-U9o" secondAttribute="leading" id="c3E-rA-tSH"/>
                         </constraints>
@@ -336,12 +334,12 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <progressIndicator wantsLayer="YES" horizontalHuggingPriority="270" misplaced="YES" maxValue="1" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="i10-rt-9cb">
+                                    <customView horizontalHuggingPriority="270" translatesAutoresizingMaskIntoConstraints="NO" id="t7D-pn-2Jv" customClass="FixedProgressBar" customModule="IINA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="161" height="12"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="PvC-N6-ZBT"/>
+                                            <constraint firstAttribute="height" constant="12" id="4yX-eP-RNI"/>
                                         </constraints>
-                                    </progressIndicator>
+                                    </customView>
                                 </beginningViews>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
@@ -376,7 +374,7 @@
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstAttribute="trailing" secondItem="epo-S6-QVB" secondAttribute="trailing" constant="-240" id="PAj-s6-32e"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>
-                    <constraint firstItem="Qbi-jx-9pO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="RUl-l8-s3i"/>
+                    <constraint firstItem="Qbi-jx-9pO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" priority="200" constant="8" id="RUl-l8-s3i"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Vtd-0f-x7p"/>
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="XlV-7n-jPb"/>
                     <constraint firstItem="g0O-v5-RQj" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="8" id="a6R-6Y-zu3"/>
@@ -409,20 +407,20 @@
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
                     <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="MPG-2q-w6a"/>
-                        <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
-                    </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="MPG-2q-w6a"/>
+                        <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
+                    </constraints>
                     <connections>
                         <action selector="muteButtonAction:" target="-2" id="wUf-9f-uHT"/>
                     </connections>
                 </button>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider">
-                    <rect key="frame" x="26" y="4" width="74" height="17"/>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider" customClass="VolumeSlider" customModule="IINA" customModuleProvider="target">
+                    <rect key="frame" x="28" y="6" width="70" height="12"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="P2L-LI-jT7"/>
                     </constraints>
@@ -443,17 +441,17 @@
             <point key="canvasLocation" x="318" y="584"/>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="BE1-yC-oJL" customClass="TimeLabelOverflowedView" customModule="IINA" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="29"/>
+            <rect key="frame" x="0.0" y="4" width="500" height="28"/>
             <subviews>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT">
-                    <rect key="frame" x="48" y="-1" width="404" height="28"/>
+                <slider verticalHuggingPriority="750" mirrorLayoutDirectionWhenInternationalizing="never" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT" customClass="PlaySlider" customModule="IINA" customModuleProvider="target">
+                    <rect key="frame" x="50" y="6" width="400" height="16"/>
                     <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
                     <connections>
                         <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBD-MV-OuG" userLabel="Left Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="8" width="50" height="14"/>
+                    <rect key="frame" x="0.0" y="7" width="50" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="CMl-dC-PCr"/>
                     </constraints>
@@ -466,12 +464,12 @@
                         <binding destination="-2" name="font" keyPath="monospacedFont" id="uHM-ya-PZy"/>
                     </connections>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="450" y="8" width="50" height="14"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" mirrorLayoutDirectionWhenInternationalizing="never" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
+                    <rect key="frame" x="450" y="7" width="50" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="sDf-om-KlV"/>
                     </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="1XQ-Mt-jmZ">
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" baseWritingDirection="leftToRight" alignment="center" title="-:--:--" id="1XQ-Mt-jmZ">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -481,7 +479,7 @@
                     </connections>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOq-6a-7j7">
-                    <rect key="frame" x="196" y="16" width="44" height="12"/>
+                    <rect key="frame" x="196" y="15" width="44" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="Pw8-rd-mUu">
                         <font key="font" metaFont="system" size="10"/>
@@ -539,8 +537,8 @@
             </subviews>
             <constraints>
                 <constraint firstItem="QTI-wi-oyB" firstAttribute="centerY" secondItem="Xts-Pc-T8d" secondAttribute="centerY" id="HgA-Mc-Bhf"/>
-                <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Xts-Pc-T8d" secondAttribute="leading" id="NqC-Xk-Iqd"/>
-                <constraint firstAttribute="trailing" secondItem="QTI-wi-oyB" secondAttribute="trailing" constant="8" id="eQW-Mv-flr"/>
+                <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="Xts-Pc-T8d" secondAttribute="leading" id="NqC-Xk-Iqd"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QTI-wi-oyB" secondAttribute="trailing" id="eQW-Mv-flr"/>
                 <constraint firstAttribute="height" constant="24" id="sLY-0Y-Hql"/>
                 <constraint firstAttribute="width" constant="26" id="zCh-hV-cEH"/>
             </constraints>
@@ -551,42 +549,42 @@
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="10x-bg-xlj" userLabel="Left Button">
                     <rect key="frame" x="14" y="0.0" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="2E4-Ht-wMT"/>
-                        <constraint firstAttribute="width" secondItem="10x-bg-xlj" secondAttribute="height" multiplier="1:1" id="h3a-98-udy"/>
-                    </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speedl" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="ijT-3Y-AK2">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="2E4-Ht-wMT"/>
+                        <constraint firstAttribute="width" secondItem="10x-bg-xlj" secondAttribute="height" multiplier="1:1" id="h3a-98-udy"/>
+                    </constraints>
                     <connections>
                         <action selector="leftButtonAction:" target="-2" id="WRV-J4-Hq8"/>
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="gxw-pJ-Lcg">
                     <rect key="frame" x="62" y="0.0" width="24" height="24"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="mWQ-R0-GGr">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="gxw-pJ-Lcg" secondAttribute="height" multiplier="1:1" id="7Xg-CL-HXe"/>
                         <constraint firstAttribute="width" constant="24" id="7xv-qQ-n43"/>
                     </constraints>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="mWQ-R0-GGr">
-                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
                     <connections>
                         <action selector="playButtonAction:" target="-2" id="JbM-wO-FAa"/>
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="EIi-qd-glM" userLabel="Right Button">
                     <rect key="frame" x="110" y="0.0" width="24" height="24"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="EIi-qd-glM" secondAttribute="height" multiplier="1:1" id="3Wl-xU-eqe"/>
-                        <constraint firstAttribute="width" constant="24" id="KMp-bQ-6E5"/>
-                    </constraints>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speed" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="Aiu-eh-hd9">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="EIi-qd-glM" secondAttribute="height" multiplier="1:1" id="3Wl-xU-eqe"/>
+                        <constraint firstAttribute="width" constant="24" id="KMp-bQ-6E5"/>
+                    </constraints>
                     <connections>
                         <action selector="rightButtonAction:" target="-2" id="mQT-3l-E7s"/>
                     </connections>
@@ -594,14 +592,14 @@
             </subviews>
             <constraints>
                 <constraint firstItem="10x-bg-xlj" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="4a0-xW-jtL"/>
-                <constraint firstItem="10x-bg-xlj" firstAttribute="leading" secondItem="Yv6-0K-6E4" secondAttribute="leading" constant="14" id="8Hx-gQ-ez7"/>
+                <constraint firstItem="10x-bg-xlj" firstAttribute="left" secondItem="Yv6-0K-6E4" secondAttribute="left" constant="14" id="8Hx-gQ-ez7"/>
                 <constraint firstItem="EIi-qd-glM" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="MRS-GF-0U6"/>
                 <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerX" secondItem="Yv6-0K-6E4" secondAttribute="centerX" id="PrE-1U-klM"/>
-                <constraint firstItem="EIi-qd-glM" firstAttribute="leading" secondItem="gxw-pJ-Lcg" secondAttribute="trailing" constant="24" id="WtE-JF-0m3"/>
+                <constraint firstItem="EIi-qd-glM" firstAttribute="left" secondItem="gxw-pJ-Lcg" secondAttribute="right" constant="24" id="WtE-JF-0m3"/>
                 <constraint firstAttribute="height" constant="24" id="Y49-r6-uWL"/>
-                <constraint firstItem="gxw-pJ-Lcg" firstAttribute="leading" secondItem="10x-bg-xlj" secondAttribute="trailing" constant="24" id="aEy-x5-Ctd"/>
+                <constraint firstItem="gxw-pJ-Lcg" firstAttribute="left" secondItem="10x-bg-xlj" secondAttribute="right" constant="24" id="aEy-x5-Ctd"/>
                 <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="dBB-Jk-nlO"/>
-                <constraint firstAttribute="trailing" secondItem="EIi-qd-glM" secondAttribute="trailing" constant="14" id="enq-Gg-JrN"/>
+                <constraint firstAttribute="right" secondItem="EIi-qd-glM" secondAttribute="right" constant="14" id="enq-Gg-JrN"/>
             </constraints>
             <point key="canvasLocation" x="377" y="703"/>
         </customView>
@@ -638,22 +636,22 @@
             <point key="canvasLocation" x="591" y="676"/>
         </stackView>
         <customView id="maF-Zr-K8w">
-            <rect key="frame" x="0.0" y="0.0" width="26" height="20"/>
+            <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ztc-Kn-fxI">
-                    <rect key="frame" x="0.0" y="1" width="18" height="18"/>
+                    <rect key="frame" x="6" y="1" width="18" height="18"/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ontop_off" imagePosition="only" alignment="center" alternateImage="ontop" refusesFirstResponder="YES" state="on" inset="2" id="jAf-Be-kY3">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="ontopButtonnAction:" target="-2" id="4pa-eu-aT5"/>
+                        <action selector="ontopButtonAction:" target="-2" id="4pa-eu-aT5"/>
                     </connections>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="Ztc-Kn-fxI" firstAttribute="leading" secondItem="maF-Zr-K8w" secondAttribute="leading" id="5nm-To-7E8"/>
+                <constraint firstItem="Ztc-Kn-fxI" firstAttribute="leading" secondItem="maF-Zr-K8w" secondAttribute="leading" constant="6" id="5nm-To-7E8"/>
                 <constraint firstAttribute="trailing" secondItem="Ztc-Kn-fxI" secondAttribute="trailing" constant="8" id="FaP-IV-C3Y"/>
                 <constraint firstItem="Ztc-Kn-fxI" firstAttribute="top" secondItem="maF-Zr-K8w" secondAttribute="top" constant="1" id="df2-wS-ZbO"/>
                 <constraint firstAttribute="bottom" secondItem="Ztc-Kn-fxI" secondAttribute="bottom" constant="1" id="ms6-RQ-I8s"/>
@@ -667,7 +665,7 @@
         </customView>
     </objects>
     <resources>
-        <image name="battery" width="24" height="12"/>
+        <image name="battery" width="57" height="30"/>
         <image name="mute" width="16" height="14"/>
         <image name="ontop" width="16" height="14"/>
         <image name="ontop_off" width="16" height="14"/>

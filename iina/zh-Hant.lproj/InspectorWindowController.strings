@@ -161,7 +161,13 @@
 "xix-0S-ehE.title" = "解碼器：";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "Primaries:";
+"1kw-LO-KmJ.title" = "初選:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "色彩空間：";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
+"zDk-Ie-EPs.headerCell.title" = "选项";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
+"x6R-q7-efY.headerCell.title" = "值";

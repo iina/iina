@@ -1,5 +1,5 @@
 /* Class = "NSWindow"; title = "About"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "O nama";
+"F0z-JX-Cv5.title" = "O programu";
 
 /* Class = "NSTabViewItem"; label = "Credits"; ObjectID = "HMc-Oy-hBR"; */
 "HMc-Oy-hBR.label" = "Zasluge";
@@ -21,3 +21,6 @@
 
 /* Class = "NSButtonCell"; title = "Credits"; ObjectID = "zCH-uO-acx"; */
 "zCH-uO-acx.title" = "Zasluge";
+
+/* Class = "NSTextFieldCell"; title = "IINA localization is powered by Crowdin."; ObjectID = "HLj-vT-kNp"; */
+"HLj-vT-kNp.title" = "IINA se prevodi na platformi Crowdin.";

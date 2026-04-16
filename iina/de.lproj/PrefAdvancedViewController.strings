@@ -10,14 +10,14 @@
 /* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
 "HMa-Vz-EUk.title" = "Für die folgenden Einstellungen muss IINA neu gestartet werden.";
 
-/* Class = "NSButtonCell"; title = "Open log directory"; ObjectID = "JDA-g3-RNX"; */
-"JDA-g3-RNX.title" = "Log-Ordner öffnen";
+/* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
+"JDA-g3-RNX.title" = "Protokollverzeichnis öffnen";
 
-/* Class = "NSButtonCell"; title = "Enable logging"; ObjectID = "LCd-uY-Yze"; */
+/* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
 "LCd-uY-Yze.title" = "Logging aktivieren";
 
-/* Class = "NSButtonCell"; title = "Choose directory…"; ObjectID = "MRT-u8-xTX"; */
-"MRT-u8-xTX.title" = "Ordner wählen …";
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Wählen …";
 
 /* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
 "Qmc-Tb-d7d.title" = "Einstellungen";
@@ -30,3 +30,21 @@
 
 /* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
 "phK-g9-Vbg.title" = "mpv-OSD benutzen";
+
+/* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
+"nFf-vh-bNd.title" = "Protokollstufe:";
+
+/* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
+"Owx-92-Ogg.title" = "Protokollanzeige öffnen";
+
+/* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
+"S9M-yY-q0w.title" = "Ausführlich";
+
+/* Class = "NSMenuItem"; title = "Debug"; ObjectID = "hGq-ek-VHd"; */
+"hGq-ek-VHd.title" = "Debug";
+
+/* Class = "NSMenuItem"; title = "Warning"; ObjectID = "exP-JC-h7t"; */
+"exP-JC-h7t.title" = "Warnung";
+
+/* Class = "NSMenuItem"; title = "Error"; ObjectID = "sl8-Df-vbX"; */
+"sl8-Df-vbX.title" = "Fehler";

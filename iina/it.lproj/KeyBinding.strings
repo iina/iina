@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Inverti capovolgi";
 "iina.toggle-mirror" = "Inverti specchia";
 "iina.save-playlist" = "Salva playlist corrente";
+"iina.show-current-file-in-finder" = "Mostra il file corrente nel Finder";
 "iina.delete-current-file" = "Sposta nel cestino file corrente";
 "iina.delete-current-file-hard" = "Elimina il file corrente senza spostarlo nel cestino";
 "iina.find-online-subs" = "Trova sottotitoli online";
@@ -83,7 +84,7 @@
 "opt.window-scale" = "Dimensione finestra";
 
 "opt.video" = "Traccia video";
-"opt.video-aspect" = "Aspetto video";
+"opt.video-aspect-override" = "Aspetto video";
 "opt.contrast" = "Contrasto";
 "opt.brightness" = "Luminosità";
 "opt.gamma" = "Gamma";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Posizione sottotitotli";
 "opt.sub-scale" = "Dimensione sottotitotli";
 "opt.sub-visibility" = "Visibilità sottotitotli";
+"opt.secondary-sub-visibility" = "Visibilità dei sottotitoli secondari";
 "opt.sub-ass-style-override" = "Sovrascrivi stili ASS";
 
 "opt.fullscreen" = "A tutto schermo";

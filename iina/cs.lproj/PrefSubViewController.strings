@@ -10,9 +10,6 @@
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "Zobrazit titulky v rámečcích během režimu celé obrazovky";
 
-/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "Základní";
-
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Umístění:";
 
@@ -62,13 +59,10 @@
 "LiG-iV-AQK.title" = "Ostatní:";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
-"Luv-2B-9v8.title" = "Složky oddělte dvojtečkou (:). Relativní cesty a \"wildcards\" (*) na konci jsou povolené.";
+"Luv-2B-9v8.title" = "Složky oddělte dvojtečkou (:). Relativní cesty a zástupné znaky (*) na konci jsou povolené.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "Seznam řetězců oddělte čárkami.";
-
-/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "Všechny ASS titulky budou vykreslené pomocí následujících stylů.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Textové titulky:";
@@ -92,7 +86,7 @@
 "X7X-18-FJg.title" = "Pokročilé";
 
 /* Class = "NSMenuItem"; title = "Detect intelligently by IINA"; ObjectID = "XiL-eE-jah"; */
-"XiL-eE-jah.title" = "Titulky rozpoznat automaticky";
+"XiL-eE-jah.title" = "Detekovat inteligentně";
 
 /* Class = "NSTextFieldCell"; title = "Default encoding:"; ObjectID = "Y75-4k-2Du"; */
 "Y75-4k-2Du.title" = "Výchozí kódování:";
@@ -145,9 +139,6 @@
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "Okraje";
 
-/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "Ignorovat ASS styly";
-
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Automatické načítání:";
 
@@ -158,7 +149,7 @@
 "t5n-mc-dss.title" = "Okraj";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Vypnuto";
+"u31-eV-Arr.title" = "Zakázáno";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "Barva:";
@@ -173,10 +164,16 @@
 "xid-E9-FC9.title" = "Barva:";
 
 /* Class = "NSMenuItem"; title = "Subtitles containing media filename"; ObjectID = "y1E-JR-KRI"; */
-"y1E-JR-KRI.title" = "Titulky obsahující název souboru";
+"y1E-JR-KRI.title" = "Titulků obsahující název souboru";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "Upřednostňovaný jazyk:";
+"zaE-bH-XfT.title" = "Preferovaný jazyk:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "Vlevo";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[0]" = "Primární titulky";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[1]" = "Druhé titulky";

@@ -13,8 +13,8 @@
 /* Class = "NSWindow"; title = "Playback History"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Playback History";
 
-/* Class = "NSMenuItem"; title = "Reveal in Finder"; ObjectID = "FPK-nx-hvF"; */
-"FPK-nx-hvF.title" = "Reveal in Finder";
+/* Class = "NSMenuItem"; title = "Show in Finder"; ObjectID = "FPK-nx-hvF"; */
+"FPK-nx-hvF.title" = "Show in Finder";
 
 /* Class = "NSMenuItem"; title = "Search in"; ObjectID = "Gx5-gP-rzr"; */
 "Gx5-gP-rzr.title" = "Search in";
@@ -34,9 +34,6 @@
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
 "Wkp-Vn-JoJ.title" = "Filename";
 
-/* Class = "NSMenu"; title = "Context Menu"; ObjectID = "lR3-1E-Rwr"; */
-"lR3-1E-Rwr.title" = "Context Menu";
-
 /* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
 "mXt-wb-fgT.title" = "Play in New Window";
 
@@ -44,7 +41,7 @@
 "ndC-eb-4GZ.title" = "No Recent Searches";
 
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
-"oMR-4K-aR2.title" = "Play";
+"oMR-4K-aR2.title" = "Predvajaj";
 
 /* Class = "NSTextFieldCell"; title = "Group by:"; ObjectID = "z6c-c4-dgd"; */
 "z6c-c4-dgd.title" = "Group by:";

@@ -57,26 +57,36 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   }
 
   func loadFile(_ path: String) {
-    guard player!.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
+    guard permitted(to: .displayVideoOverlay) else {
+      throwError(withMessage: "overlay API called without permission.")
+      return
+    }
+    guard player!.mainWindow.loaded && permitted(to: .displayVideoOverlay) else {
       throwError(withMessage: "overlay.loadFile called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
-    Utility.executeOnMainThread {
-      pluginInstance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
-      pluginInstance.overlayViewLoaded = true
-      inSimpleMode = false
+    
+    DispatchQueue.main.async {
+      self.pluginInstance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
+      self.pluginInstance.overlayViewLoaded = true
+      self.inSimpleMode = false
     }
     messageHub.clearListeners()
   }
 
   func simpleMode() {
-    guard player!.mainWindow.isWindowLoaded && permitted(to: .displayVideoOverlay) else {
+    guard permitted(to: .displayVideoOverlay) else {
+      throwError(withMessage: "overlay API called without permission.")
+      return
+    }
+    guard player!.mainWindow.isWindowLoaded else {
       throwError(withMessage: "overlay.simpleMode called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
     if (inSimpleMode) { return }
+    pluginInstance.overlayView.isEnteringSimpleMode = true
     pluginInstance.overlayView.loadHTMLString(simpleModeHTMLString, baseURL: nil)
     pluginInstance.overlayViewLoaded = true
     inSimpleMode = true
@@ -90,11 +100,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
       log("overlay.setStyle is only available in simple mode.", level: .error)
       return
     }
-    pluginInstance.overlayView.evaluateJavaScript("window.iina._simpleModeSetStyle(`\(style)`)") { (_, error) in
-      if let error = error {
-        self.log(error.localizedDescription, level: .error)
-      }
-    }
+    pluginInstance.overlayView.setSimpleModeStyle(style)
   }
 
   func setContent(_ content: String) {
@@ -104,11 +110,7 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
       log("overlay.setContent is only available in simple mode.", level: .error)
       return
     }
-    pluginInstance.overlayView.evaluateJavaScript("window.iina._simpleModeSetContent(`\(content)`)") { (_, error) in
-      if let error = error {
-        self.log(error.localizedDescription, level: .error)
-      }
-    }
+    pluginInstance.overlayView.setSimpleModeContent(content)
   }
 
 

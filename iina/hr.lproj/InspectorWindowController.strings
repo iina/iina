@@ -1,11 +1,11 @@
 /* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
-"0vG-Pg-DIl.title" = "Prisiljen";
+"0vG-Pg-DIl.title" = "Prisiljeno";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
 "1dz-Vt-0MO.title" = "Broj kadrova u sekundi:";
 
 /* Class = "NSTextFieldCell"; title = "File path:"; ObjectID = "4jf-w4-kkv"; */
-"4jf-w4-kkv.title" = "Put datoteke:";
+"4jf-w4-kkv.title" = "Putanja datoteke:";
 
 /* Class = "NSTextFieldCell"; title = "Format:"; ObjectID = "5H6-qJ-RDS"; */
 "5H6-qJ-RDS.title" = "Format:";
@@ -41,7 +41,7 @@
 "Fqo-1c-3L1.ibShadowedLabels[0]" = "Općenito";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[1] = "Tracks"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[1]" = "Zapisi";
+"Fqo-1c-3L1.ibShadowedLabels[1]" = "Trake";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[2] = "File"; ObjectID = "Fqo-1c-3L1"; */
 "Fqo-1c-3L1.ibShadowedLabels[2]" = "Datoteka";
@@ -50,13 +50,13 @@
 "Fqo-1c-3L1.ibShadowedLabels[3]" = "Stanje";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
-"I2E-6Z-Gnn.title" = "Vozač:";
+"I2E-6Z-Gnn.title" = "Pogon:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
 "JN9-3E-OJp.title" = "Približni broj prikazanih kadrova u sekundi";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
-"Jxp-Wf-BhU.title" = "Put datoteke:";
+"Jxp-Wf-BhU.title" = "Putanja datoteke:";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
 "KqD-NM-WiK.title" = "Veličina:";
@@ -65,19 +65,19 @@
 "Luq-rQ-aO4.title" = "Kanali:";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
-"MME-KZ-jrG.title" = "Vozač:";
+"MME-KZ-jrG.title" = "Pogon:";
 
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
 "OCm-zb-deg.title" = "Trajanje:";
 
 /* Class = "NSTextFieldCell"; title = "Selected"; ObjectID = "P65-zr-dOH"; */
-"P65-zr-dOH.title" = "Odabran";
+"P65-zr-dOH.title" = "Odabrano";
 
 /* Class = "NSTextFieldCell"; title = "Chapters:"; ObjectID = "PBk-VC-4gu"; */
 "PBk-VC-4gu.title" = "Poglavlja:";
 
 /* Class = "NSTextFieldCell"; title = "External"; ObjectID = "PLL-fC-blc"; */
-"PLL-fC-blc.title" = "Vanjski";
+"PLL-fC-blc.title" = "Externi";
 
 /* Class = "NSTextFieldCell"; title = "Editions:"; ObjectID = "POj-mQ-zP9"; */
 "POj-mQ-zP9.title" = "Izdanja:";
@@ -89,7 +89,7 @@
 "S3X-Df-UMB.title" = "Standardno";
 
 /* Class = "NSTabViewItem"; label = "Tracks"; ObjectID = "UuR-M1-YLj"; */
-"UuR-M1-YLj.label" = "Zapisi";
+"UuR-M1-YLj.label" = "Trake";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
 "VGm-BL-xOI.label" = "Stanje";
@@ -113,7 +113,7 @@
 "f7a-XG-NCc.label" = "Općenito";
 
 /* Class = "NSTextFieldCell"; title = "Track:"; ObjectID = "f7i-wX-uxQ"; */
-"f7i-wX-uxQ.title" = "Zapis:";
+"f7i-wX-uxQ.title" = "Traka:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Output FPS:"; ObjectID = "g8p-Ec-awO"; */
 "g8p-Ec-awO.title" = "Približni broj kadrova u sekundi rezultata:";
@@ -161,7 +161,13 @@
 "xix-0S-ehE.title" = "Dekoder:";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "Primaries:";
+"1kw-LO-KmJ.title" = "Primarne boje:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
-"mLo-Wc-BoO.title" = "Colorspace:";
+"mLo-Wc-BoO.title" = "Prostor boja:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
+"zDk-Ie-EPs.headerCell.title" = "Ime";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
+"x6R-q7-efY.headerCell.title" = "Vrijednost";

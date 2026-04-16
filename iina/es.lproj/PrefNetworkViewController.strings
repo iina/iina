@@ -2,7 +2,7 @@
 "0bT-f6-rXb.title" = "Predeterminado: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "Tamaño predeterminado del caché (KB):";
+"0yu-5Q-363.title" = "Tamaño máximo de caché (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
 "2qf-cC-Lfi.title" = "Ruta personalizada de youtube-dl:";
@@ -54,3 +54,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "Opciones sin procesar:";
+
+/* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
+"SyQ-2U-zu8.title" = "Mostrar indicador de carga cuando esté pausado esperando la caché";
+
+/* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
+"39x-Jr-gsA.title" = "Mostrar indicador de carga al buscar";

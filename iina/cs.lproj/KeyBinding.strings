@@ -52,6 +52,7 @@
 "iina.toggle-flip" = "Přepnout převrácení";
 "iina.toggle-mirror" = "Přepnout zrcadlení";
 "iina.save-playlist" = "Uložit aktuální playlist";
+"iina.show-current-file-in-finder" = "Zobrazit aktuální soubor v aplikaci Finder";
 "iina.delete-current-file" = "Odstranit aktuální soubor";
 "iina.delete-current-file-hard" = "Ihned smazat aktuální soubor";
 "iina.find-online-subs" = "Vyhledat titulky online";
@@ -78,12 +79,12 @@
 "absolute-percent+keyframe" = " % (snímek)";
 
 "opt.pause" = "pozastavení";
-"opt.speed" = "Rychlost";
+"opt.speed" = "rychlost";
 
 "opt.window-scale" = "poměr stran okna";
 
 "opt.video" = "video stopu";
-"opt.video-aspect" = "poměr stran videa";
+"opt.video-aspect-override" = "poměr stran videa";
 "opt.contrast" = "kontrast";
 "opt.brightness" = "jas";
 "opt.gamma" = "gama korekci";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "umístění titulků";
 "opt.sub-scale" = "velikost titulků";
 "opt.sub-visibility" = "zobrazení titulků";
+"opt.secondary-sub-visibility" = "Zobrazení druhých titulků";
 "opt.sub-ass-style-override" = "přepsání ASS stylu";
 
 "opt.fullscreen" = "režim celé obrazovky";

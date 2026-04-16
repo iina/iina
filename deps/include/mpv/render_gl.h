@@ -93,7 +93,7 @@ extern "C" {
  *                MPV_RENDER_PARAM_WL_DISPLAY for Wayland)
  * - nVidia/Linux: Both GLX and EGL should work (GLX is required if vdpau is
  *                 used, e.g. due to old drivers.)
- * - OSX: CGL is required (CGLGetCurrentContext() returning non-NULL)
+ * - macOS: CGL is required (CGLGetCurrentContext() returning non-NULL)
  * - iOS: EAGL is required (EAGLContext.currentContext returning non-nil)
  *
  * Once these things are setup, hardware decoding can be enabled/disabled at
@@ -120,11 +120,6 @@ typedef struct mpv_opengl_init_params {
      * Value passed as ctx parameter to get_proc_address().
      */
     void *get_proc_address_ctx;
-    /**
-     * This should not be used. It is deprecated and will be removed or ignored
-     * when the opengl_cb API is removed.
-     */
-    const char *extra_exts;
 } mpv_opengl_init_params;
 
 /**

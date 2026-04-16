@@ -15,14 +15,11 @@ class VideoView: NSView {
   var link: CVDisplayLink?
 
   lazy var videoLayer: ViewLayer = {
-    let layer = ViewLayer()
-    layer.videoView = self
+    let layer = ViewLayer(self)
     return layer
   }()
 
-  var videoSize: NSSize?
-
-  var isUninited = false
+  @ReadWriteAtomic var isUninited = false
 
   var draggingTimer: Timer?
 
@@ -37,9 +34,16 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
-  var pendingRedrawsAfterEnteringPIP = 0;
+  private var displayIdleTimer: Timer?
 
-  lazy var hdrSubsystem = Logger.Subsystem(rawValue: "hdr")
+  private lazy var hdrSubsystem = Logger.makeSubsystem("hdr\(player.playerNumber)")
+
+  lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)")
+
+  static let SRGB = CGColorSpaceCreateDeviceRGB()
+
+  // record the last mouse up event which lands on video view
+  var lastEventId: Int?
 
   // MARK: - Attributes
 
@@ -53,11 +57,13 @@ class VideoView: NSView {
 
   // MARK: - Init
 
-  override init(frame: CGRect) {
+  init(frame: CGRect, player: PlayerCore) {
+    self.player = player
     super.init(frame: frame)
 
     // set up layer
     layer = videoLayer
+    videoLayer.colorspace = VideoView.SRGB
     videoLayer.contentsScale = NSScreen.main!.backingScaleFactor
     wantsLayer = true
 
@@ -70,35 +76,29 @@ class VideoView: NSView {
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])
   }
 
-  convenience init(frame: CGRect, player: PlayerCore) {
-    self.init(frame: frame)
-    self.player = player
-  }
-
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
+  /// Uninitialize this view.
+  ///
+  /// This method will stop drawing and free the mpv render context. This is done before sending a quit command to mpv.
+  /// - Important: Once mpv has been instructed to quit accessing the mpv core can result in a crash, therefore locks must be
+  ///     used to coordinate uninitializing the view so that other threads do not attempt to use the mpv core while it is shutting down.
   func uninit() {
     player.mpv.lockAndSetOpenGLContext()
     defer { player.mpv.unlockOpenGLContext() }
+    $isUninited.withWriteLock() { isUninited in
+      guard !isUninited else { return }
+      isUninited = true
 
-    guard !isUninited else { return }
-
-    player.mpv.mpvUninitRendering()
-    isUninited = true
+      stopDisplayLink()
+      player.mpv.mpvUninitRendering()
+    }
   }
 
   deinit {
     uninit()
-  }
-
-  override func layout() {
-    super.layout()
-    if pendingRedrawsAfterEnteringPIP != 0 && superview != nil {
-      pendingRedrawsAfterEnteringPIP -= 1
-      videoLayer.draw(forced: true)
-    }
   }
 
   override func draw(_ dirtyRect: NSRect) {
@@ -107,6 +107,14 @@ class VideoView: NSView {
 
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
     return Preference.bool(for: .videoViewAcceptsFirstMouse)
+  }
+
+  /// Workaround for issue #4183, Cursor remains visible after resuming playback with the touchpad using secondary click
+  ///
+  /// See `MainWindowController.workaroundCursorDefect` and the issue for details on this workaround.
+  override func rightMouseDown(with event: NSEvent) {
+    player.mainWindow.rightMouseDown(with: event)
+    super.rightMouseDown(with: event)
   }
 
   /// Workaround for issue #3211, Legacy fullscreen is broken (11.0.1)
@@ -118,6 +126,7 @@ class VideoView: NSView {
   /// This appears to be a defect in the Cocoa framework. See the issue for details. As a workaround the mouse up event is caught in
   /// the view which then calls the window controller's method.
   override func mouseUp(with event: NSEvent) {
+    lastEventId = event.eventNumber
     // Only check for Big Sur or greater, not if the preference use legacy full screen is enabled as
     // that can be changed while running and once the window title has been removed and added back
     // AppKit malfunctions from then on. The check for running under Big Sur or later isn't really
@@ -196,33 +205,54 @@ class VideoView: NSView {
 
   // MARK: Display link
 
-  func startDisplayLink() {
-    if link == nil {
-      CVDisplayLinkCreateWithActiveCGDisplays(&link)
-    }
+  /// Returns a [Core Video](https://developer.apple.com/documentation/corevideo) display link.
+  ///
+  /// If a display link has already been created then that link will be returned, otherwise a display link will be created and returned.
+  ///
+  /// - Note: Issue [#4520](https://github.com/iina/iina/issues/4520) reports a case where it appears the call to
+  ///[CVDisplayLinkCreateWithActiveCGDisplays](https://developer.apple.com/documentation/corevideo/1456863-cvdisplaylinkcreatewithactivecgd) is failing. In case that failure is
+  ///encountered again this method is careful to log any failure and include the [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes) in the alert displayed
+  /// by `Logger.fatal`.
+  /// - Returns: A [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k).
+  private func obtainDisplayLink() -> CVDisplayLink {
+    if let link = link { return link }
+    let result = CVDisplayLinkCreateWithActiveCGDisplays(&link)
+    checkResult(result, "CVDisplayLinkCreateWithActiveCGDisplays")
     guard let link = link else {
-      Logger.fatal("Cannot Create display link!")
+      Logger.fatal("Cannot create display link: \(codeToString(result)) (\(result))")
     }
+    return link
+  }
+
+  func startDisplayLink() {
+    let link = obtainDisplayLink()
+    guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
-    CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: player.mpv))
-    CVDisplayLinkStart(link)
+    checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
+                "CVDisplayLinkSetOutputCallback")
+    checkResult(CVDisplayLinkStart(link), "CVDisplayLinkStart")
+    log("Display link started", level: .verbose)
   }
 
-  func stopDisplayLink() {
+  @objc func stopDisplayLink() {
     guard let link = link, CVDisplayLinkIsRunning(link) else { return }
-    CVDisplayLinkStop(link)
+    checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
+    log("Display link stopped", level: .verbose)
   }
 
+  // This should only be called if the window has changed displays
   func updateDisplayLink() {
     guard let window = window, let link = link, let screen = window.screen else { return }
     let displayId = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
+
+    // Do nothing if on the same display
     if (currentDisplay == displayId) { return }
     currentDisplay = displayId
 
-    CVDisplayLinkSetCurrentCGDisplay(link, displayId)
+    checkResult(CVDisplayLinkSetCurrentCGDisplay(link, displayId), "CVDisplayLinkSetCurrentCGDisplay")
     let actualData = CVDisplayLinkGetActualOutputVideoRefreshPeriod(link)
     let nominalData = CVDisplayLinkGetNominalOutputVideoRefreshPeriod(link)
-    var actualFps: Double = 0;
+    var actualFps: Double = 0
 
     if (nominalData.flags & Int32(CVTimeFlags.isIndefinite.rawValue)) < 1 {
       let nominalFps = Double(nominalData.timeScale) / Double(nominalData.timeValue)
@@ -232,151 +262,278 @@ class VideoView: NSView {
       }
 
       if abs(actualFps - nominalFps) > 1 {
-        Logger.log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
-        actualFps = nominalFps;
+        log("Falling back to nominal display refresh rate: \(nominalFps) from \(actualFps)")
+        actualFps = nominalFps
       }
     } else {
-      Logger.log("Falling back to standard display refresh rate: 60 from \(actualFps)")
-      actualFps = 60;
+      log("Falling back to standard display refresh rate: 60 from \(actualFps)")
+      actualFps = 60
     }
-    player.mpv.setDouble(MPVOption.Video.overrideDisplayFps, actualFps)
+    player.mpv.setDouble(MPVOption.Video.displayFpsOverride, actualFps)
 
-    if #available(macOS 10.15, *) {
-      refreshEdrMode()
-    } else {
-      setICCProfile(displayId)
-    }
+    refreshEdrMode()
   }
 
-  func setICCProfile(_ displayId: UInt32) {
+  // MARK: - Reducing Energy Use
+
+  /// Starts the display link if it has been stopped in order to save energy.
+  func displayActive() {
+    displayIdleTimer?.invalidate()
+    startDisplayLink()
+  }
+
+  /// Reduces energy consumption when the display link does not need to be running.
+  ///
+  /// Adherence to energy efficiency best practices requires that IINA be absolutely idle when there is no reason to be performing any
+  /// processing, such as when playback is paused. The [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k)
+  /// is a high-priority thread that runs at the refresh rate of a display. If the display is not being updated it is desirable to stop the
+  /// display link in order to not waste energy on needless processing.
+  ///
+  /// However, IINA will pause playback for short intervals when performing certain operations. In such cases it does not make sense to
+  /// shutdown the display link only to have to immediately start it again. To avoid this a `Timer` is used to delay shutting down the
+  /// display link. If playback becomes active again before the timer has fired then the `Timer` will be invalidated and the display link
+  /// will not be shutdown.
+  ///
+  /// - Note: In addition to playback the display link must be running for operations such seeking, stepping and entering and leaving
+  ///         full screen mode.
+  func displayIdle() {
+    displayIdleTimer?.invalidate()
+    // Because the display link is critical there is an internal setting that can be changed to
+    // disable shutting down the display link should any problems with this energy saving feature
+    // be discovered.
+    guard Preference.bool(for: .enableDisplayIdle) else { return }
+    // The time of 6 seconds was picked to match up with the time QuickTime delays once playback is
+    // paused before stopping audio. As mpv does not provide an event indicating a frame step has
+    // completed the time used must not be too short or will catch mpv still drawing when stepping.
+    displayIdleTimer = Timer(timeInterval: 6.0, target: self, selector: #selector(stopDisplayLink), userInfo: nil, repeats: false)
+    RunLoop.current.add(displayIdleTimer!, forMode: .default)
+  }
+
+  private func setICCProfile() {
+    let screenColorSpace = player.mainWindow.window?.screen?.colorSpace
     if !Preference.bool(for: .loadIccProfile) {
-      player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
-    } else {
-      typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
-      guard let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else { return }
-
-      var argResult: ProfileData = (uuid, nil)
-      withUnsafeMutablePointer(to: &argResult) { data in
-        ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
-          if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
-            let deviceID = info["DeviceID"] as! CFUUID
-            let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
-            let uuid = ptr.pointee.uuid
-
-            if current == 1, deviceID == uuid {
-              let profileURL = info["DeviceProfileURL"] as! URL
-              ptr.pointee.profileUrl = profileURL
-              return false
-            }
-          }
-          return true
-        }, data)
-      }
-
-      if let iccProfilePath = argResult.profileUrl?.path, FileManager.default.fileExists(atPath: iccProfilePath) {
-        player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
-      }
+      logHDR("Not using ICC profile due to user preference")
+      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
+    } else if let screenColorSpace {
+      let name = screenColorSpace.localizedName ?? "unnamed"
+      logHDR("Using the ICC profile of the color space \(name)")
+      // Set MPV_RENDER_PARAM_ICC_PROFILE before enabling icc-profile-auto to true as mpv requires
+      // that parameter be set in the render context when icc-profile-auto is in use.
+      videoLayer.setRenderICCProfile(screenColorSpace)
+      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
     }
 
-    if videoLayer.colorspace != nil {
-      videoLayer.colorspace = nil;
+    let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB
+    if videoLayer.colorspace != sdrColorSpace {
+      let name: String = {
+        if let name = sdrColorSpace.name { return name as String }
+        if let screenColorSpace, let name = screenColorSpace.localizedName { return name }
+        return "Unspecified"
+      }()
+      log("Setting layer color space to \(name)")
+      videoLayer.colorspace = sdrColorSpace
       videoLayer.wantsExtendedDynamicRangeContent = false
       player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.toneMapping, "auto")
+      player.mpv.setString(MPVOption.GPURendererOptions.toneMappingParam, "default")
+      player.mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, false)
+    }
+  }
+
+  // MARK: - Error Logging
+
+  /// Check the result of calling a [Core Video](https://developer.apple.com/documentation/corevideo) method.
+  ///
+  /// If the result code is not [kCVReturnSuccess](https://developer.apple.com/documentation/corevideo/kcvreturnsuccess)
+  /// then a warning message will be logged. Failures are only logged because previously the result was not checked. We want to see if
+  /// calls have been failing before taking any action other than logging.
+  /// - Note: Error checking was added in response to issue [#4520](https://github.com/iina/iina/issues/4520)
+  ///         where a core video method unexpectedly failed.
+  /// - Parameters:
+  ///   - result: The [CVReturn](https://developer.apple.com/documentation/corevideo/cvreturn)
+  ///           [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes)
+  ///           returned by the core video method.
+  ///   - method: The core video method that returned the result code.
+  private func checkResult(_ result: CVReturn, _ method: String) {
+    guard result != kCVReturnSuccess else { return }
+    log("Core video method \(method) returned: \(codeToString(result)) (\(result))", level: .warning)
+  }
+
+  /// Return a string describing the given [CVReturn](https://developer.apple.com/documentation/corevideo/cvreturn)
+  ///           [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes).
+  ///
+  /// What is needed is an API similar to `strerr` for a `CVReturn` code. A search of Apple documentation did not find such a
+  /// method.
+  /// - Parameter code: The [CVReturn](https://developer.apple.com/documentation/corevideo/cvreturn)
+  ///           [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes)
+  ///           returned by a core video method.
+  /// - Returns: A description of what the code indicates.
+  private func codeToString(_ code: CVReturn) -> String {
+    switch code {
+    case kCVReturnSuccess:
+      return "Function executed successfully without errors"
+    case kCVReturnInvalidArgument:
+      return "At least one of the arguments passed in is not valid. Either out of range or the wrong type"
+    case kCVReturnAllocationFailed:
+      return "The allocation for a buffer or buffer pool failed. Most likely because of lack of resources"
+    case kCVReturnInvalidDisplay:
+      return "A CVDisplayLink cannot be created for the given DisplayRef"
+    case kCVReturnDisplayLinkAlreadyRunning:
+      return "The CVDisplayLink is already started and running"
+    case kCVReturnDisplayLinkNotRunning:
+      return "The CVDisplayLink has not been started"
+    case kCVReturnDisplayLinkCallbacksNotSet:
+      return "The output callback is not set"
+    case kCVReturnInvalidPixelFormat:
+      return "The requested pixelformat is not supported for the CVBuffer type"
+    case kCVReturnInvalidSize:
+      return "The requested size (most likely too big) is not supported for the CVBuffer type"
+    case kCVReturnInvalidPixelBufferAttributes:
+      return "A CVBuffer cannot be created with the given attributes"
+    case kCVReturnPixelBufferNotOpenGLCompatible:
+      return "The Buffer cannot be used with OpenGL as either its size, pixelformat or attributes are not supported by OpenGL"
+    case kCVReturnPixelBufferNotMetalCompatible:
+      return "The Buffer cannot be used with Metal as either its size, pixelformat or attributes are not supported by Metal"
+    case kCVReturnWouldExceedAllocationThreshold:
+      return """
+        The allocation request failed because it would have exceeded a specified allocation threshold \
+        (see kCVPixelBufferPoolAllocationThresholdKey)
+        """
+    case kCVReturnPoolAllocationFailed:
+      return "The allocation for the buffer pool failed. Most likely because of lack of resources. Check if your parameters are in range"
+    case kCVReturnInvalidPoolAttributes:
+      return "A CVBufferPool cannot be created with the given attributes"
+    case kCVReturnRetry:
+      return "a scan hasn't completely traversed the CVBufferPool due to a concurrent operation. The client can retry the scan"
+    default:
+      return "Unrecognized core video return code"
     }
   }
 }
 
 // MARK: - HDR
 
-@available(macOS 10.15, *)
 extension VideoView {
   func refreshEdrMode() {
-    guard player.mainWindow.loaded else { return }
-    guard player.mpv.fileLoaded else { return }
-    guard let displayId = currentDisplay else { return };
+    guard player.mainWindow.loaded, player.info.state.loaded, let displayId = currentDisplay else { return }
+    if let screen = self.window?.screen {
+      NSScreen.logEDR("Refreshing HDR for \(player.subsystem.rawValue) on display\(displayId)",
+                      screen, subsystem: hdrSubsystem)
+    }
     let edrEnabled = requestEdrMode()
     let edrAvailable = edrEnabled != false
     if player.info.hdrAvailable != edrAvailable {
       player.mainWindow.quickSettingView.setHdrAvailability(to: edrAvailable)
     }
-    if edrEnabled != true { setICCProfile(displayId) }
+    if edrEnabled != true { setICCProfile() }
   }
 
   func requestEdrMode() -> Bool? {
     guard let mpv = player.mpv else { return false }
 
     guard let primaries = mpv.getString(MPVProperty.videoParamsPrimaries), let gamma = mpv.getString(MPVProperty.videoParamsGamma) else {
-      Logger.log("HDR primaries and gamma not available", level: .debug, subsystem: hdrSubsystem);
-      return false;
+      logHDR("Video gamma and primaries not available")
+      return false
     }
+  
+    let peak = mpv.getDouble(MPVProperty.videoParamsSigPeak)
+    logHDR("Video gamma=\(gamma), primaries=\(primaries), sig_peak=\(peak)")
 
-    var name: CFString? = nil;
+    // HDR videos use a Hybrid Log Gamma (HLG) or a Perceptual Quantization (PQ) transfer function.
+    guard gamma == "hlg" || gamma == "pq" else { return false }
+
+    var name: CFString? = nil
     switch primaries {
     case "display-p3":
-      switch gamma {
-      case "pq":
-        if #available(macOS 10.15.4, *) {
-          name = CGColorSpace.displayP3_PQ
-        } else {
-          name = CGColorSpace.displayP3_PQ_EOTF
-        }
-      case "hlg":
-        name = CGColorSpace.displayP3_HLG
-      default:
-        name = CGColorSpace.displayP3
+      if #available(macOS 10.15.4, *) {
+        name = CGColorSpace.displayP3_PQ
+      } else {
+        name = CGColorSpace.displayP3_PQ_EOTF
       }
 
     case "bt.2020":
-      switch gamma {
-      case "pq":
-        if #available(macOS 11.0, *) {
-          name = CGColorSpace.itur_2100_PQ
-        } else if #available(macOS 10.15.4, *) {
-          name = CGColorSpace.itur_2020_PQ
-        } else {
-          name = CGColorSpace.itur_2020_PQ_EOTF
-        }
-      case "hlg":
-        if #available(macOS 11.0, *) {
-          name = CGColorSpace.itur_2100_HLG
-        } else if #available(macOS 10.15.6, *) {
-          name = CGColorSpace.itur_2020_HLG
-        } else {
-          fallthrough
-        }
-      default:
-        name = CGColorSpace.itur_2020
+      // Invert order of checks to avoid Xcode bug which incorrectly shows deprecation warning
+      if #unavailable(macOS 10.15.4) {
+        name = CGColorSpace.itur_2020_PQ_EOTF
+      } else if #unavailable(macOS 11.0) {
+        name = CGColorSpace.itur_2020_PQ
+      } else {
+        name = CGColorSpace.itur_2100_PQ
       }
 
     case "bt.709":
-      return false; // SDR
+      return false // SDR
 
     default:
-      Logger.log("Unknown HDR color space information gamma=\(gamma) primaries=\(primaries)", level: .debug, subsystem: hdrSubsystem);
-      return false;
+      logHDR("Unsupported color space: gamma=\(gamma) primaries=\(primaries)", level: .warning)
+      return false
     }
 
     guard (window?.screen?.maximumPotentialExtendedDynamicRangeColorComponentValue ?? 1.0) > 1.0 else {
-      Logger.log("HDR video was found but the display does not support EDR mode", level: .debug, subsystem: hdrSubsystem);
-      return false;
+      logHDR("HDR video was found but the display does not support EDR mode")
+      return false
     }
 
     guard player.info.hdrEnabled else { return nil }
 
-    if videoLayer.colorspace?.name == name {
-      Logger.log("HDR mode has been enabled, skipping", level: .debug, subsystem: hdrSubsystem);
-      return true;
-    }
-
-    Logger.log("Will activate HDR color space instead of using ICC profile", level: .debug, subsystem: hdrSubsystem);
+    logHDR("Using HDR color space instead of ICC profile")
 
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name!)
-    mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
-    mpv.setString(MPVOption.GPURendererOptions.targetTrc, gamma)
+    mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
-    return true;
+    // PQ videos will be display as it was, HLG videos will be converted to PQ
+    mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")
+    mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, true)
+
+    if Preference.bool(for: .enableToneMapping) {
+      var targetPeak = Preference.integer(for: .toneMappingTargetPeak)
+      // If the target peak is set to zero then IINA attempts to determine peak brightness of the
+      // display.
+      if targetPeak == 0 {
+        if let displayInfo = CoreDisplay_DisplayCreateInfoDictionary(currentDisplay!)?.takeRetainedValue() as? [String: AnyObject] {
+          logHDR("Successfully obtained information about the display")
+          // Apple Silicon Macs use the key NonReferencePeakHDRLuminance.
+          if let hdrLuminance = displayInfo["NonReferencePeakHDRLuminance"] as? Int {
+            logHDR("Found NonReferencePeakHDRLuminance: \(hdrLuminance)")
+            targetPeak = hdrLuminance
+          } else if let hdrLuminance = displayInfo["DisplayBacklight"] as? Int {
+            // Intel Macs use the key DisplayBacklight.
+            logHDR("Found DisplayBacklight: \(hdrLuminance)")
+            targetPeak = hdrLuminance
+          } else {
+            logHDR("Didn't find NonReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400")
+            logHDR("Display info dictionary: \(displayInfo)")
+            targetPeak = 400
+          }
+        } else {
+          logHDR("Unable to obtain display information, assuming HDR400", level: .warning)
+          targetPeak = 400
+        }
+      }
+      let algorithm = Preference.ToneMappingAlgorithmOption(rawValue: Preference.integer(for: .toneMappingAlgorithm))?.mpvString
+        ?? Preference.ToneMappingAlgorithmOption.defaultValue.mpvString
+
+      logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm)")
+      mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
+      mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)
+    } else {
+      mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
+      mpv.setString(MPVOption.GPURendererOptions.toneMapping, "")
+    }
+    return true
+  }
+
+  // MARK: - Utils
+
+  func logHDR(_ message: String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: hdrSubsystem)
+  }
+
+  func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: subsystem)
   }
 }
 
@@ -386,7 +543,10 @@ fileprivate func displayLinkCallback(
   _ flagsIn: CVOptionFlags,
   _ flagsOut: UnsafeMutablePointer<CVOptionFlags>,
   _ context: UnsafeMutableRawPointer?) -> CVReturn {
-  let mpv = unsafeBitCast(context, to: MPVController.self)
-  mpv.mpvReportSwap()
+  let videoView = unsafeBitCast(context, to: VideoView.self)
+  videoView.$isUninited.withReadLock() { isUninited in
+    guard !isUninited else { return }
+    videoView.player.mpv.mpvReportSwap()
+  }
   return kCVReturnSuccess
 }

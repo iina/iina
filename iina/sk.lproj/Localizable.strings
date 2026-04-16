@@ -16,14 +16,29 @@
 "general.username" = "Meno používateľa";
 "general.password" = "Heslo";
 
+"input.value_is_empty" = "Hodnota nemôže byť prázdna.";
+"input.already_exists" = "Hodnota už existuje.";
+
 // Guide Window
 "guide.highlights" = "Novinky";
 "guide.basic_settings" = "Základné nastavenia";
 "guide.faq" = "Často kladené otázky";
 
+// Initial Window
+"initial.announcement" = "Používate %@ beta verziu aplikácie IINA";
+"initial.beta.desc" = "Odškrtnite \"Sťahovať beta aktualizácie\" v Nastavenia - Všeobecné a nainštalujte stabilnú verziu z našej <a href=\"https://iina.io\">oficiálnej stránky</a>.";
+"initial.nightly.desc" = "
+Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasnosti nočné zostavy nepodporujú automatickú aktualizáciu. Nové zostavy si prosím stiahnite ručne z našej <a href=\"https://nightly.iina.io\">stránky s nočnými zostavami</a>.";
+"initial.debug.desc" = "Ladiace zostavenie obvykle nie sú optimalizované pre výkon, nie sú teda odporúčané pre každodenné použitie. Ladiaci zostavenie nepodporujú automatické aktualizácie.";
+"initial.bug_report" = "Nahláste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
+
+// Inspector Window
+"inspector.error" = "Chyba";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
 "main.opening_stream" = "Otváram stream…";
+"main.seeking_indicator" = "Hľadám…";
 "osc.precision" = "Presnosť";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekúnd";
@@ -36,24 +51,63 @@
 "quicksetting.hwdec" = "Hardvérové dekódovanie";
 "quicksetting.deinterlace" = "Deinterlace";
 "quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Skryť";
+"quicksetting.reset_speed" = "Resetovať rýchlosť na 1x";
+
+// EQ Presets
+"eq.preset.flat" = "Plochá";
+"eq.preset.acoustic" = "Akustická";
+"eq.preset.classical" = "Klasická";
+"eq.preset.dance" = "Tanečná";
+"eq.preset.deep" = "Hlboká";
+"eq.preset.electronic" = "Elektronická";
+"eq.preset.hip_hop" = "Hip-Hop";
+"eq.preset.increase_bass" = "Zvýšenie basov";
+"eq.preset.increase_treble" = "Zvýšenie výšok";
+"eq.preset.increase_vocal" = "Zvýšenie hlasu";
+"eq.preset.jazz" = "Džez";
+"eq.preset.latin" = "Latinčina";
+"eq.preset.loundness" = "Hlasitosť";
+"eq.preset.lounge" = "Salónik";
+"eq.preset.piano" = "Klavírna";
+"eq.preset.pop" = "Pop";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "Zníženie basov";
+"eq.preset.reduce_treble" = "Zníženie výšok";
+"eq.preset.rock" = "Rock";
+"eq.preset.small_speaker" = "Malý reproduktor ";
+"eq.preset.spoken_word" = "Hovorové slovo";
+
+"alert.eq.new_profile.title" = "Nový EQ profil";
+"alert.eq.new_profile.message" = "Prosím, zadajte meno profilu.";
+"alert.eq.rename.title" = "Premenovať Aktuálny Profil";
+"alert.eq.rename.message" = "Zadajte nové meno profilu.";
 
 // OSDMessage.swift
 "osd.pause" = "Pozastaviť";
 "osd.resume" = "Pokračovať";
-"osd.volume" = "Hlasitosť: %i";
-"osd.speed" = "Rýchlosť: %.2f x";
+"osd.volume" = "Hlasitosť: %@";
+"osd.speed" = "Rýchlosť: %@x";
 "osd.aspect" = "Pomer strán: %@";
 "osd.crop" = "Orezať: %@";
 "osd.rotate" = "Otočiť: %i°";
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardvérové dekódovanie: %@";
 "osd.audio_delay.nodelay" = "Posunutie zvuku: Žiadne";
-"osd.audio_delay.later" = "Posunutie zvuku: +%.2f s";
-"osd.audio_delay.earlier" = "Posunutie zvuku: -%.2f s";
+"osd.audio_delay.later" = "Posunutie zvuku: +%@ s";
+"osd.audio_delay.earlier" = "Posunutie zvuku: -%@ s";
 "osd.sub_delay.nodelay" = "Posunutie titulkov: Žiadne";
-"osd.sub_delay.later" = "Posunutie titulkov: +%.2f s";
-"osd.sub_delay.earlier" = "Posunutie titulkov: -%.2f s";
-"osd.subtitle_pos" = "Umiestnenie titulkov: %.1f";
+"osd.sub_delay.later" = "Posunutie titulkov: +%@ s";
+"osd.sub_delay.earlier" = "Posunutie titulkov: -%@ s";
+"osd.subtitle_pos" = "Umiestnenie titulkov: %@";
+"osd.sub_hidden" = "Skryté titulky";
+"osd.sub_visible" = "Viditeľné titulky";
+"osd.sub_second_delay.nodelay" = "Oneskorenie sekundárnych titulkov: bez oneskorenia";
+"osd.sub_second_delay.later" = "Oneskorenie sekundárnych titulkov: %@s neskôr";
+"osd.sub_second_delay.earlier" = "Posun sekundárnych titulkov: %@ s skôr";
+"osd.sub_second_hidden" = "Skryté sekundárne titulky";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
+"osd.sub_second_visible" = "Viditeľné sekundárne titulky";
 "osd.mute" = "Stlmiť";
 "osd.unmute" = "Zosilniť";
 "osd.screenshot" = "Snímka obrazovky vyhotovená";
@@ -62,7 +116,7 @@
 "osd.abloop.clear" = "AB-slučka: Vymazaná";
 "osd.stop" = "Zastaviť";
 "osd.chapter" = "Kapitola: %@";
-"osd.subtitle_scale" = "Veľkosť titulkov: %.2fx";
+"osd.subtitle_scale" = "Veľkosť titulkov: %@x";
 "osd.add_to_playlist" = "Súbory pridané do playlistu: %i";
 "osd.clear_playlist" = "Playlist vymazaný";
 "osd.video_eq.contrast" = "Kontrast: %i";
@@ -73,17 +127,21 @@
 "osd.find_online_sub" = "Hľadám titulky na internete…";
 "osd.find_online_sub.source" = "na";
 "osd.sub_not_found" = "Titulky nenájdené";
-"osd.sub_found" = "Nájdené titulky: %d. Sťahujem…";
+"osd.sub_found" = "Nájdených %d titulkov.";
+"osd.sub_downloading" = "Sťahovanie %d titulkov";
 "osd.sub_downloaded" = "Titulky stiahnuté";
 "osd.sub_saved" = "Titulky uložené";
 "osd.network_error" = "Problém so sieťou";
 "osd.file_error" = "Chyba pri čítaní súboru";
 "osd.cannot_login" = "Nie je možné prihlásiť";
 "osd.canceled" = "Zrušené";
+"osd.cannot_connect" = "Nie je možné sa pripojiť";
+"osd.timed_out" = "Čas vypršal";
 "osd.filter_added" = "Pridaný filter: %@";
 "osd.filter_removed" = "Odstránený filter";
-"osd.file_loop" = "File Loop: %@";
-"osd.playlist_loop" = "Playlist Loop: %@";
+"osd.file_loop" = "Opakuj jeden súbor";
+"osd.playlist_loop" = "Opakuj playlist";
+"osd.no_loop" = "Zakázať opakovanie";
 
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
@@ -94,7 +152,7 @@
 "preference.control" = "Ovládanie";
 "preference.keybindings" = "Klávesové skratky";
 "preference.advanced" = "Pokročilé";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "Pluginy";
 "preference.utilities" = "Pomocné programy";
 "preference.scripts" = "Skripty";
 "preference.not_logged_in" = "Neprihlásený";
@@ -106,42 +164,75 @@
 
 "preference.enable_adv_settings" = "Povoliť pokročilé nastavenia";
 
-"menu.volume" = "Hlasitosť: %d";
-"menu.audio_delay" = "Posunutie zvuku: %.2f s";
-"menu.sub_delay" = "Posunutie titulkov: %.2f s";
+"preference.sub_override_level.no" = "nie";
+"preference.sub_override_level.force" = "sila";
+"preference.sub_override_level.scale" = "veľkosť";
+"preference.sub_override_level.strip" = "Základný";
+"preference.sub_override_level.yes" = "áno";
+
+"preference.sub_override_level.descriptive_text.no" = "Vykresli titulky podľa špecifikácie skriptov titulkov bez prepísania.";
+"preference.sub_override_level.descriptive_text.force" = "Použiť všetky štýly titulkov.";
+"preference.sub_override_level.descriptive_text.scale" = "Okrem nastavení štýlu v tejto časti použite aj nastavenie mierky.";
+"preference.sub_override_level.descriptive_text.strip" = "Radikálne odstráňte všetky značky a štýly ASS z nadpisu.";
+"preference.sub_override_level.descriptive_text.yes" = "Použite všetky nastavenia štýlu v tejto časti.";
+
+"preference.ytdl_plugin_not_installed" = "Nainštalujte si plugin Online Media z ponuky „Pluginy > Nainštalovať z GitHub“ a využívajte pokročilé funkcie, ako je napríklad sťahovanie videí a automatické aktualizácie yt-dlp.";
+"preference.ytdl_plugin_installed" = "Vstavaná podpora youtube-dl je vypnutá, pretože máte nainštalovaný doplnok Online médiá.";
+
+"menu.volume" = "Hlasitosť: %@";
+"menu.volume_muted" = "Hlasitosť: %@ (stíšene)";
+"menu.audio_delay" = "Posunutie zvuku: %@ s";
+"menu.sub_delay" = "Posunutie titulkov: %@ s";
+"menu.sub_hide" = "Skryť titulky";
+"menu.sub_show" = "Zobraziť titulky";
+"menu.sub_second_hide" = "Skryť sekundárne titulky";
+"menu.sub_second_show" = "Zobraziť sekundárne titulky";
 "menu.fullscreen" = "Spustiť režim celej obrazovky";
 "menu.exit_fullscreen" = "Ukončiť režim celej obrazovky";
 "menu.pip" = "Zapnúť Picture-in-Picture";
 "menu.exit_pip" = "Vypnúť Picture-in-Picture";
+"menu.mini_player" = "Zapnúť režim pre hudbu";
+"menu.exit_mini_player" = "Ukončiť režim pre hudbu";
 "menu.pause" = "Pozastaviť";
 "menu.resume" = "Pokračovať";
-"menu.speed" = "Rýchlosť: %.2fx";
-"menu.chapters" = "Show Chapters Panel";
-"menu.hide_chapters" = "Hide Chapters Panel";
-"menu.playlist" = "Show Playlist Panel";
-"menu.hide_playlist" = "Hide Playlist Panel";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
-"menu.audio" = "Show Audio Panel";
-"menu.hide_audio" = "Hide Audio Panel";
-"menu.subtitles" = "Show Subtitles Panel";
-"menu.hide_subtitles" = "Hide Subtitles Panel";
+"menu.speed" = "Rýchlosť: %@x";
+"menu.chapters" = "Zobraziť panel s kapitolami";
+"menu.hide_chapters" = "Skryť panel s kapitolami";
+"menu.playlist" = "Zobraziť panel playlistu";
+"menu.hide_playlist" = "Skryť panel playlistu";
+"menu.video" = "Zobraziť panel videa";
+"menu.hide_video" = "Skryť panel videa";
+"menu.audio" = "Zobraziť panel audia";
+"menu.hide_audio" = "Skryť panel audia";
+"menu.subtitles" = "Zobraziť panel tituliek";
+"menu.hide_subtitles" = "Skryť panel tituliek";
 
-"menu.seek_forward" = "Posunúť dopredu %.0f s";
-"menu.seek_backward" = "Posunúť dozadu %.0f s";
-"menu.speed_up" = "Zrýchliť na %.1fx";
-"menu.speed_down" = "Spomaliť na %.1fx";
-"menu.volume_up" = "Hlasitosť +%.0f%%";
-"menu.volume_down" = "Hlasitosť -%.0f%%";
-"menu.audio_delay_up" = "Posunutie zvuku +%.1f s";
-"menu.audio_delay_down" = "Posunutie zvuku -%.1f s";
-"menu.sub_delay_up" = "Posunutie titulkov +%.1f s";
-"menu.sub_delay_down" = "Posunutie titulkov -%.1f s";
+"menu.seek_forward" = "Posunúť dopredu %@ s";
+"menu.seek_backward" = "Posunúť dozadu %@ s";
+"menu.speed_up" = "Zrýchliť na %@x";
+"menu.speed_down" = "Spomaliť na %@x";
+"menu.volume_up" = "Hlasitosť +%@%%";
+"menu.volume_down" = "Hlasitosť -%@%%";
+"menu.audio_delay_up" = "Posunutie zvuku +%@ s";
+"menu.audio_delay_down" = "Posunutie zvuku -%@ s";
+"menu.sub_delay_up" = "Posunutie titulkov +%@ s";
+"menu.sub_delay_down" = "Posunutie titulkov -%@ s";
 
-"menu.crop_custom" = "Vlastné...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.crop_custom" = "Vlastné…";
+"menu.find_online_sub" = "Nájsť titulky online na %@";
 
+"menu.manage_plugins" = "Spravovať doplnky…";
+"menu.developer_tool" = "Nástroje pre vývojárov";
+"menu.more_plugin" = "Viac…";
+"menu.conflicting_shortcuts" = "Konfliktné klávesové skratky…";
+"menu.reload_plugins" = "Načítať všetky pluginy";
+"menu.show_plugins_panel" = "Zobraziť Panel Doplnkov";
+"menu.hide_plugins_panel" = "Skryť Panel Doplnkov";
+
+"track.audio" = "Zvuk";
 "track.none" = "<Prázdne>";
+"track.sub" = "Titulok";
+"track.video" = "Video";
 
 "subtrack.no_loaded" = "Titulky nenačítané";
 "subtrack.no_external" = "Externé titulky nenájdené";
@@ -155,9 +246,9 @@
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikácia sa teraz ukončí.";
 "alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení možnosti %@.";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "Nepodporovaný externý zvukový súbor.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Nepodporované externé titulky.";
 "alert.unsupported_url" = "Nepodporované URL.";
 "alert.wrong_url_format" = "Zlý formát URL.";
@@ -168,16 +259,18 @@
 "alert.error_saving_file" = "Nastala chyba pri ukladaní %@: %@";
 "alert.error_deleting_file" = "Súbor nemožno vymazať.";
 
+"alert.target_peak.bad_value" = "Hodnota „%@“ je neplatná.\nProsím zadajte hodnotu medzi 10 a 10000 alebo 0.";
+
 "alert.config.new.title" = "Nová konfigurácia vstupu";
 "alert.config.new.message" = "Zadajte názov pre novú konfiguráciu.";
 "alert.config.duplicate.title" = "Duplikovať konfiguráciu";
 "alert.config.duplicate.message" = "Zadajte názov pre duplikovaný konfiguračný súbor.";
-"alert.config.empty_name" = "Názov nemôže byť prázdny.";
-"alert.config.name_existing" = "Názov už existuje.";
 "alert.config.file_existing.title" = "Súbor už existuje";
-"alert.config.file_existing.message" = "Toto sa nemalo stať. Zvoľte OK na prepísanie alebo Zrušiť na zobrazenie súboru vo Finderi.";
+"alert.config.file_existing.message" = "Konfiguračný súbor s rovnakým názvom už existuje. Zvoľte OK, aby sa súbor zobrazil v aplikácii Finder.";
 "alert.config.cannot_create" = "Nedá sa vytvoriť konfiguračný súbor!\n%@";
 "alert.config.cannot_write" = "Nedá sa zapisovať do konfiguračného súboru!";
+"alert.config.rename.title" = "Premenovať konfigurácia vstupu";
+"alert.config.rename.message" = "Zadajte názov pre novú konfiguráciu.";
 
 "alert.filter.incorrect" = "Vyskytla sa chyba pri nastavovaní filtra. Skontrolujte formát parametra.";
 "alert.add_filter.title" = "Nový filter";
@@ -192,10 +285,13 @@
 
 "alert.playlist.error_deleting" = "Chyba pri odstraňovaní: %@";
 
+"alert.screenshot.error_taking" = "Nemôžem vytvoriť snímku obrazovky!";
+
 "alert.sub.no_selected" = "Najprv vyberte stiahnuté titulky.";
 "alert.sub_lang_not_set" = "Pred vyhľadávaním na OpenSubtitles nastavte v nastaveniach preferovaný jazyk titulkov. Teraz bude použitý jazyk English(eng).";
 "alert.sub.cannot_save_passwd" = "Heslo sa nedá uložiť do Kľúčenky: %@";
 "alert.sub.cannot_login" = "Nedá sa prihlásiť. Skontrolujte používateľské meno, heslo a stav siete. \n\n%@";
+"alert.sub.save_downloaded.title" = "Uložiť stiahnuté titulky";
 
 "alert.set_default.title" = "Nastaviť IINA ako predvolenú aplikáciu";
 "alert.set_default.message" = "IINA bude nastavená ako predvolená aplikácia pre všetky typy súborov, ktoré podporuje.";
@@ -234,8 +330,8 @@
 "alert.clear_watch_later.title" = "Vymazať uložené priebehy prehrávania";
 "alert.clear_watch_later.message" = "Naozaj chcete vymazať všetky uložené priebehy prehrávania (dáta \"pozrieť neskôr\")?";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "Obnoviť potlačené upozornenia";
+"alert.restore_alerts.message" = "Naozaj chcete obnoviť potlačené upozornenia?";
 
 "alert.nothing_to_open" = "Žiaden súbor.";
 
@@ -250,17 +346,24 @@
 "alert.assrt_token_prompt.message" = "Zaregistrujte sa na otvorenej webstránke. Váš token z domovskej stránky vložte sem:";
 "alert.assrt_token_invalid" = "Váš Assrt API token je neplatný.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "Ste si istý, že chcete odinštalovať %@?";
+"alert.plugin_uninstall.message" = "Doplnok bude odinštalovaný z disku.";
+"alert.plugin_reinstall.title" = "Doplnok %@ už existuje";
+"alert.plugin_reinstall.message" = "Chcete preinštalovať doplnok?";
+"alert.duplicated_plugin_id" = "Detekované duplicitné identifikátory plug-inu. Dva alebo viac plug-inov majú rovnaký identifikátor „%@“. To môže spôsobiť neobvyklé správanie. Nájdite ich prosím v Nastavenia > Plug-iny a nahláste to ich autorom. Ak je plug-in nainštalovaný lokálne, môžete tiež manuálne zmeniť jeho identifikátor v súbore Info.json.";
+"alert.plugin_no_update" = "Nenašli sa žiadne aktualizácie.";
+"alert.plugin_update_found.title" = "Je dostupná nová verzia %@";
+"alert.plugin_update_found.message" = "Najnovšia dostupná verzia je %@. Nainštalovaná je %@. Prajete si teraz stiahnuť aktualizáciu?";
+"alert.plugin_permission" = "Tento plug-in vyžaduje nasledujúce oprávnenia. Pred pokračovaním vykonajte ich kontrolu.";
+"alert.plugin_permission_added" = "Táto aktualizácia vyžaduje ďalšie oprávnenia. Pred pokračovaním vykonajte ich kontrolu.";
 
 "playlist.total_length" = "%@ celkovo";
 "playlist.total_length_with_selected" = "%@ z %@ označených";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
 "pl_menu.title_multi" = "%d Položky";
 "pl_menu.play_next" = "Prehraj Ďalšie";
 "pl_menu.play_in_new_window" = "Prehraj v Novom Okne";
@@ -270,7 +373,7 @@
 "pl_menu.delete_multi" = "Presunúť Vybrané Súbory do Koša";
 "pl_menu.delete_after_play" = "Presunúť do Koša po Prehraní";
 "pl_menu.delete_after_play_multi" = "Presunúť Vybrané Súbory do Koša po Prehraní";
-"pl_menu.reveal_in_finder" = "Zobraziť vo Finderi";
+"pl_menu.show_in_finder" = "Zobraziť vo Finderi";
 "pl_menu.add_file" = "Pridať Súbor…";
 "pl_menu.add_url" = "Pridať URL…";
 "pl_menu.clear_playlist" = "Vyčistiť Playlist";
@@ -291,6 +394,10 @@
 "hwdec.auto" = "Zapnúť Hardvérové Dekódovanie. Avšak, väčšina video filtrov nebude fungovať.";
 "hwdec.auto-copy" = "Zapnúť Hardvérové Dekódovanie. Dvojnásobne zaťažuje pamäť, ale video filtre budú fungovať.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
 "subencoding.auto" = "Auto detekcia";
 
 "osc_toolbar.settings" = "Rýchle Nastavenia";
@@ -299,16 +406,19 @@
 "osc_toolbar.full_screen" = "Prepnúť zobrazenie na celú obrazovku";
 "osc_toolbar.music_mode" = "Zapnúť režim pre hudbu";
 "osc_toolbar.sub_track" = "Vyber titulky";
+"osc_toolbar.screenshot" = "Vytvoriť snímku obrazovky";
+"osc_toolbar.plugins" = "Zobraziť panel doplnkov";
 
 "mini_player.album_art" = "Prepnúť obal albumu";
 "mini_player.loop" = "Opakovať";
-"mini_player.shuffle" = "Shuffle";
+"mini_player.shuffle" = "Náhodne";
 "mini_player.remove" = "Odstrániť z playlistu";
 "mini_player.add" = "Pridať do playlistu";
 "mini_player.delete" = "Odstrániť všetky skladby z playlistu";
 "mini_player.volume" = "Hlasitosť";
 "mini_player.close" = "Zavrieť mód pre hudbu";
 "mini_player.back" = "Späť do video zobrazenia";
+"mini_player.sort" = "Sort the playlist";
 
 // Touch bar
 
@@ -330,28 +440,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
-"permissions.file-system.name" = "Access the file system";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.network-request.name" = "Sieťová Požiadavka";
+"permissions.network-request.desc" = "Tento plugin môže prijímať alebo odosielať dáta na tieto webstránky:";
+"permissions.network-request.any_site" = "Akákoľvek stránka";
+"permissions.show-osd.name" = "Zozbraziť OSD";
+"permissions.show-osd.desc" = "Tento plugin môže zobraziť OSD (On Screen Display = Displej Na Obrazovku) správy.";
+"permissions.show-alert.name" = "Zobraziť upozornenie";
+"permissions.show-alert.desc" = "Tento plug-in môže zobrazovať vyskakovacie upozornenie.";
+"permissions.video-overlay.name" = "Pridať prekrytie cez video";
+"permissions.video-overlay.desc" = "Tento plug-in môže vykresľovať cez video ďalší obsah.";
+"permissions.file-system.name" = "Prístup k súborovému systému";
+"permissions.file-system.desc" = "Tento plug-in môže čítať alebo zapisovať súbory na disk, vrátane citlivých informácií. Môže tiež využívať iné programy alebo aplikácie, ktoré môžu poškodiť váš počítač. Uistite sa teda, že ste overili jeho zdroj.";
 
-"plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
-"alert.invalid_url" = "The URL is invalid.";
-"plugin.install_error.invalid_url" = "The URL is invalid.";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
-"plugin.updating" = "Downloading update…";
+"plugin.install" = "Inštalovať";
+"plugin.installed" = "Nainštalované";
+"plugin.not_installed" = "Nenainštalované";
+"plugin.local" = "Nainštalované lokálne";
+"alert.plugin.install_error" = "Pri inštalácii sa vyskytla chyba: %@";
+"alert.invalid_url" = "URL je neplatná.";
+"plugin.install_error.invalid_url" = "URL je neplatná.";
+"plugin.install_error.file_not_found" = "Súbor balíčka sa nedá nájsť.";
+"plugin.install_error.cannot_download" = "Sťahovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
+"plugin.install_error.cannot_unpackage" = "Rozbaľovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
+"plugin.install_error.cannot_load" = "IINA nemôže načítať tento plugin. Môže byť v chybnom formáte.";
+"plugin.check_for_updates" = "Skontrolovať aktualizácie";
+"plugin.updating" = "Sťahovanie aktualizácie…";

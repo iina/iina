@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
 "3CY-YS-rG6.title" = "左/右箭頭按鈕的功能：";
 
+/* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
+"5Nk-Mu-V2I.title" = "根據播放速率顯示剩餘時間";
+
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
 
@@ -22,14 +25,20 @@
 /* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
 "7td-lH-8aK.title" = "調整視窗大小至：";
 
-/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
-"82A-XQ-BvS.title" = "自動隱藏：";
+/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "XOh-46-9Jf"; */
+"XOh-46-9Jf.title" = "自動隱藏：";
 
 /* Class = "NSMenuItem"; title = "bottom"; ObjectID = "92n-Uq-o4G"; */
 "92n-Uq-o4G.title" = "底";
 
+/* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
+"9IR-Sf-wMq.title" = "當 macOS 的『減少動態效果』輔助功能設定開啟時，IINA 會減少可能對視覺變化敏感的使用者造成不適的動態效果。如果需要進一步減少動態效果，可以透過此設定來完全消除這些效果。";
+
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% 螢幕大小";
+
+/* Class = "NSTextFieldCell"; title = "Accessibility:"; ObjectID = "AYW-Xu-ySw"; */
+"AYW-Xu-ySw.title" = "協助工具:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "視窗：";
@@ -42,6 +51,9 @@
 
 /* Class = "NSButtonCell"; title = "When media is opened manually"; ObjectID = "CJE-ap-IH8"; */
 "CJE-ap-IH8.title" = "僅在手動打開媒體時";
+
+/* Class = "NSButtonCell"; title = "File start"; ObjectID = "DAm-C4-5BQ"; */
+"DAm-C4-5BQ.title" = "開始檔案";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "顯示剩餘時間";
@@ -82,6 +94,9 @@
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
 "MR7-Ac-SAO.title" = "1 倍影片大小";
 
+/* Class = "NSButtonCell"; title = "Speed"; ObjectID = "MVv-Mx-GTD"; */
+"MVv-Mx-GTD.title" = "速度";
+
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "自動隱藏：";
 
@@ -97,20 +112,29 @@
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "初始視窗位置：";
 
+/* Class = "NSTextFieldCell"; title = "Suppress messages for:"; ObjectID = "RE5-Cf-ed9"; */
+"RE5-Cf-ed9.title" = "停止消息：";
+
+/* Class = "NSButtonCell"; title = "Seek"; ObjectID = "RuR-Df-K2G"; */
+"RuR-Df-K2G.title" = "跳轉";
+
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "秒";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "播放時浮動於上方";
 
+/* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
+"ih8-5a-PYY.title" = "在視窗標題中顯示浮動於上方圖示";
+
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "速度";
 
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
-"TdN-pM-HHk.title" = "中等亮度";
-
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "高：";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
+"Ufv-Hk-vL5.title" = "阻止滾輪更改音量";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "像素";
@@ -139,6 +163,9 @@
 /* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
 "baY-O6-fcB.title" = "最小化/還原視窗時，自動切換「子母畫面」模式";
 
+/* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
+"cib-Cg-9kn.title" = "僅限影片檔案";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2 倍影片大小";
 
@@ -151,8 +178,14 @@
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
 "g06-Ja-Ot8.title" = "播放控制器：";
 
+/* Class = "NSButtonCell"; title = "Pause / Resume"; ObjectID = "i84-B8-gqD"; */
+"i84-B8-gqD.title" = "暫停 / 繼續";
+
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "部";
+
+/* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
+"kCe-Ck-dUJ.title" = "包含已掛載網路磁碟機上的檔案";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "全螢幕時顯示系統時間及電量資訊";
@@ -172,14 +205,14 @@
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "拖移時吸附到視窗中心";
 
+/* Class = "NSButtonCell"; title = "Disable animations"; ObjectID = "mjs-jg-wm1"; */
+"mjs-jg-wm1.title" = "禁用視窗動態效果";
+
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
 "oJ8-74-L3z.title" = "上一個/下一個媒體";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "頂";
-
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
-"pV2-12-PmM.title" = "極致深色";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
 "qbc-CY-bdK.title" = "距離螢幕";
@@ -201,6 +234,9 @@
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "符合螢幕大小";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
+"vnb-DF-4g5.title" = "防止滾輪更改播放進度";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "啟用「狀態改變資訊」";

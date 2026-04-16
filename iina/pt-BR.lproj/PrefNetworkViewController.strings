@@ -2,7 +2,7 @@
 "0bT-f6-rXb.title" = "Padrão: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "Tamanho do Cache de pré-leitura (KB):";
+"0yu-5Q-363.title" = "Maximum cache size (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
 "2qf-cC-Lfi.title" = "Caminho customizado para youtube-dl:";
@@ -41,7 +41,7 @@
 "eN6-Sk-kUa.title" = "Agente de utilizador:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 36000"; ObjectID = "fab-7d-mMQ"; */
-"fab-7d-mMQ.title" = "Default: 36000";
+"fab-7d-mMQ.title" = "Padrão: 36000";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
 "fpV-al-bn7.title" = "Habilitar cache";
@@ -54,3 +54,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "Opções raw:";
+
+/* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
+"SyQ-2U-zu8.title" = "Show throbber when paused waiting for the cache";
+
+/* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
+"39x-Jr-gsA.title" = "Show throbber when seeking";

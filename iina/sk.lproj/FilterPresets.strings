@@ -9,7 +9,7 @@
 
 
 
-"crop" = "Orezanie";
+"crop" = "Orezať";
 "crop.w" = "Šírka (predvolené: šírka videa)";
 "crop.h" = "Výška (predvolené: výška videa)";
 "crop.x" = "Začiatok X (predvolené: stred)";
@@ -43,7 +43,7 @@
 "hflip" = "Zrkadliť";
 
 "lut3d" = "3D LUT";
-"lut3d.file" = "Súbor";
+"lut3d.file" = "Cesta k súboru (dá sa použiť drag & drop)";
 "lut3d.interp" = "Režim interpolácie";
 
 "custom_mpv" = "Vlastné (mpv)";

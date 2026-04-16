@@ -46,6 +46,17 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   private var currentFilter: MPVFilter?
   private var currentSavedFilter: SavedFilter?
 
+  init(filterType: String, autosaveName: String) {
+    self.filterType = filterType
+    super.init(window: nil)
+    self.windowFrameAutosaveName = autosaveName
+    Logger.log("Init \(windowFrameAutosaveName)", level: .verbose)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func windowDidLoad() {
     super.windowDidLoad()
     loaded = true
@@ -60,12 +71,15 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     splitView.setPosition(splitView.frame.height - 140, ofDividerAt: 0)
 
     savedFilters = (Preference.array(for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters) ?? []).compactMap(SavedFilter.init(dict:))
-    filters = PlayerCore.active.mpv.getFilters(filterType)
+    filters = PlayerCore.lastActive.mpv.getFilters(filterType)
     currentFiltersTableView.reloadData()
     savedFiltersTableView.reloadData()
 
     keyRecordView.delegate = self
     editFilterKeyRecordView.delegate = self
+
+    // Double-click saved filter to edit
+    savedFiltersTableView.doubleAction = #selector(self.editSavedFilterAction(_:))
 
     updateButtonStatus()
 
@@ -84,7 +98,13 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   @objc
   func reloadTable() {
-    filters = PlayerCore.active.mpv.getFilters(filterType)
+    let pc = PlayerCore.lastActive
+    // When IINA is terminating player windows are closed, which causes the iinaMainWindowChanged
+    // notification to be posted and that results in the observer established above calling this
+    // method. Thus this method may be called after IINA has commanded mpv to shutdown. Once mpv has
+    // been told to shutdown mpv APIs must not be called as it can trigger a crash in mpv.
+    guard pc.info.state.active else { return }
+    filters = pc.mpv.getFilters(filterType)
     filterIsSaved = [Bool](repeatElement(false, count: filters.count))
     savedFilters.forEach { savedFilter in
       if let asObject = MPVFilter(rawString: savedFilter.filterString),
@@ -100,7 +120,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func setFilters() {
-    PlayerCore.active.mpv.setFilters(filterType, filters: filters)
+    PlayerCore.lastActive.mpv.setFilters(filterType, filters: filters)
   }
 
   deinit {
@@ -109,12 +129,12 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   func addFilter(_ filter: MPVFilter) -> Bool {
     if filterType == MPVProperty.vf {
-      guard PlayerCore.active.addVideoFilter(filter) else {
+      guard PlayerCore.lastActive.addVideoFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
         return false
       }
     } else {
-      guard PlayerCore.active.addAudioFilter(filter) else {
+      guard PlayerCore.lastActive.addAudioFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
         return false
       }
@@ -131,7 +151,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   private func syncSavedFilter() {
     Preference.set(savedFilters.map { $0.toDict() }, for: filterType == MPVProperty.af ? .savedAudioFilters : .savedVideoFilters)
-    (NSApp.delegate as? AppDelegate)?.menuController?.updateSavedFilters(forType: filterType, from: savedFilters)
+    AppDelegate.shared.menuController?.updateSavedFilters(forType: filterType, from: savedFilters)
     UserDefaults.standard.synchronize()
   }
 
@@ -160,7 +180,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func removeFilterAction(_ sender: Any) {
-    let pc = PlayerCore.active
+    let pc = PlayerCore.lastActive
     let selectedRow = currentFiltersTableView.selectedRow
     if selectedRow >= 0 {
       let success: Bool
@@ -190,7 +210,7 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   @IBAction func toggleSavedFilterAction(_ sender: NSButton) {
     let row = savedFiltersTableView.row(for: sender)
     let savedFilter = savedFilters[row]
-    let pc = PlayerCore.active
+    let pc = PlayerCore.lastActive
 
     // choose appropriate add/remove functions for .af/.vf
     var addFilterFunction: (String) -> Bool
@@ -245,11 +265,19 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func editSavedFilterAction(_ sender: NSButton) {
-    let row = savedFiltersTableView.row(for: sender)
+    var row = savedFiltersTableView.clickedRow  // if double-clicking
+    if row < 0 {
+      row = savedFiltersTableView.row(for: sender)  // If using Edit button
+    }
+    guard row >= 0 && row < savedFiltersTableView.numberOfRows else {
+      Logger.log("Cannot edit saved filter! Invalid row: \(row)", level: .verbose)
+      return
+    }
+    Logger.log("Editing saved filter for row \(row)", level: .verbose)
     currentSavedFilter = savedFilters[row]
     editFilterNameTextField.stringValue = currentSavedFilter!.name
     editFilterStringTextField.stringValue = currentSavedFilter!.filterString
-    editFilterKeyRecordView.currentRawKey = currentSavedFilter!.shortcutKey
+    editFilterKeyRecordView.currentKey = currentSavedFilter!.shortcutKey
     editFilterKeyRecordView.currentKeyModifiers = currentSavedFilter!.shortcutKeyModifiers
     editFilterKeyRecordViewLabel.stringValue = currentSavedFilter!.readableShortCutKey
     window!.beginSheet(editFilterSheet)
@@ -322,7 +350,7 @@ extension FilterWindowController {
     if let currentFilter = currentFilter {
       let filter = SavedFilter(name: saveFilterNameTextField.stringValue,
                                filterString: currentFilter.stringFormat,
-                               shortcutKey: keyRecordView.currentRawKey,
+                               shortcutKey: keyRecordView.currentKey,
                                modifiers: keyRecordView.currentKeyModifiers)
       savedFilters.append(filter)
       reloadTable()
@@ -339,8 +367,7 @@ extension FilterWindowController {
     if let currentFilter = currentSavedFilter {
       currentFilter.name = editFilterNameTextField.stringValue
       currentFilter.filterString = editFilterStringTextField.stringValue
-      // FIXME: shouldn't be shift-modified; should examine this carefully
-      currentFilter.shortcutKey = editFilterKeyRecordView.currentRawKey.lowercased()
+      currentFilter.shortcutKey = editFilterKeyRecordView.currentKey
       currentFilter.shortcutKeyModifiers = editFilterKeyRecordView.currentKeyModifiers
       reloadTable()
       syncSavedFilter()
@@ -355,12 +382,14 @@ extension FilterWindowController {
 
 
 class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+  private static let textAndTableWidthDifference = 20.0
 
   @IBOutlet weak var filterWindow: FilterWindowController!
   @IBOutlet weak var tableView: NSTableView!
   @IBOutlet weak var scrollContentView: NSView!
   @IBOutlet weak var addButton: NSButton!
-  
+  @IBOutlet weak var presetsClipViewWidthConstraint: NSLayoutConstraint!
+
   private var currentPreset: FilterPreset?
   private var currentBindings: [String: NSControl] = [:]
   private var presets: [FilterPreset] = []
@@ -369,6 +398,25 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     tableView.dataSource = self
     tableView.delegate = self
     presets = filterWindow.filterType == MPVProperty.vf ? FilterPreset.vfPresets : FilterPreset.afPresets
+
+    // Different locales have different text width requirements. Examine all content and fit table to widest item.
+    var maxWidth = 0.0
+    for preset in presets {
+      let presetString = NSMutableAttributedString(string: preset.localizedName)
+      let fontSize = NSFont.systemFontSize(for: .regular)
+      let textFont = NSFont.systemFont(ofSize: fontSize)
+      presetString.addAttribute(.font, value: textFont, range: NSRange(location: 0, length: presetString.length))
+      let textWidth = presetString.size().width
+      if textWidth > maxWidth {
+        maxWidth = textWidth
+      }
+    }
+    presetsClipViewWidthConstraint.constant = maxWidth + NewFilterSheetViewController.textAndTableWidthDifference
+
+    // Select first filter preset in table if nothing already selected
+    if tableView.selectedRowIndexes.isEmpty {
+      tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    }
   }
 
   func numberOfRows(in tableView: NSTableView) -> Int {
@@ -409,14 +457,8 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       stackView.addArrangedSubview(input)
       self.currentBindings[name] = input
     }
-    if let paramOrder = preset.paramOrder {
-      for name in paramOrder {
-        generateInputs(name, preset.params[name]!)
-      }
-    } else {
-      for (name, param) in preset.params {
-        generateInputs(name, param)
-      }
+    for name in preset.paramOrder {
+      generateInputs(name, preset.params[name]!)
     }
   }
 
@@ -503,7 +545,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
     }
     // create filter
     if filterWindow.addFilter(preset.transformer(instance)) {
-      PlayerCore.active.sendOSD(.addFilter(preset.localizedName))
+      PlayerCore.lastActive.sendOSD(.addFilter(preset.localizedName))
     }
   }
 

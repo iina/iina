@@ -1,0 +1,86 @@
+/* Class = "NSButtonCell"; title = "Install"; ObjectID = "3xh-dU-HuR"; */
+"3xh-dU-HuR.title" = "Installeer";
+
+/* Class = "NSTabViewItem"; label = "Permissions"; ObjectID = "ALD-n6-A0r"; */
+"ALD-n6-A0r.label" = "Toestemmings";
+
+/* Class = "NSTextFieldCell"; title = "Author"; ObjectID = "Dkk-JQ-qHA"; */
+"Dkk-JQ-qHA.title" = "Outeur";
+
+/* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
+"EHl-kr-ZZf.title" = "E-pos";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[1]" = "Toestemmings";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[0]" = "Oor";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[2]" = "Voorkeure";
+
+/* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
+"Ka5-V3-g5E.title" = "Help";
+
+/* Class = "NSButtonCell"; title = "Check for Updates"; ObjectID = "MyY-5s-tIm"; */
+"MyY-5s-tIm.title" = "Soek na bywerkings";
+
+/* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
+"Nmf-79-hFX.title" = "Vul die volledige bronadres van die GitHub-opslagplek of ’n string in die “user/repo”-formaat. U kan ook een kies uit die verstekinproppe.";
+
+/* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
+"T21-nd-TLF.label" = "Ondersteuning";
+
+/* Class = "NSButtonCell"; title = "Website"; ObjectID = "X6J-6H-IPn"; */
+"X6J-6H-IPn.title" = "Webwerf";
+
+/* Class = "NSTextFieldCell"; title = "Installed plugins:"; ObjectID = "Ztn-MG-D7D"; */
+"Ztn-MG-D7D.title" = "Geïnstalleerde inproppe:";
+
+/* Class = "NSTextFieldCell"; placeholderString = "user/repo"; ObjectID = "b60-P6-AN2"; */
+"b60-P6-AN2.placeholderString" = "user/repo";
+
+/* Class = "NSButtonCell"; title = "Show in Finder"; ObjectID = "drh-6w-3z1"; */
+"drh-6w-3z1.title" = "Toon in Finder";
+
+/* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
+"enP-C1-4vu.title" = "Installeer vanuit GitHub…";
+
+/* Class = "NSTabViewItem"; label = "Settings"; ObjectID = "eyS-eb-H4e"; */
+"eyS-eb-H4e.label" = "Voorkeure";
+
+/* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
+"fnl-uA-X7r.title" = "U kan ’n nuwe inprop installeer vanaf GitHub of ’n lokale .iinaplgz-pakket. Inproppe wat vanaf GitHub geïnstalleer is kan outomaties bygewerk word.";
+
+/* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
+"ixN-OS-w87.title" = "Herlaai";
+
+/* Class = "NSTextFieldCell"; title = "Identifier"; ObjectID = "jlQ-sd-s0K"; */
+"jlQ-sd-s0K.title" = "Identifiseerder";
+
+/* Class = "NSTextFieldCell"; title = "Default plugins:"; ObjectID = "np4-XQ-xdI"; */
+"np4-XQ-xdI.title" = "Verstekinproppe:";
+
+/* Class = "NSTextFieldCell"; title = "Failed to load the page."; ObjectID = "pkE-3K-CfZ"; */
+"pkE-3K-CfZ.title" = "Kon nie die bladsy laai nie.";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qje-hT-j7H"; */
+"qje-hT-j7H.title" = "Kanselleer";
+
+/* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
+"r3r-Qh-rC9.title" = "Bron";
+
+/* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "Install Package…";
+
+/* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
+"tfn-0I-n6p.title" = "Inproppe";
+
+/* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "uW4-Bs-Wg3"; */
+"uW4-Bs-Wg3.title" = "Inproppe";
+
+/* Class = "NSButtonCell"; title = "Uninstall"; ObjectID = "ue8-hU-kLm"; */
+"ue8-hU-kLm.title" = "Deïnstalleer";
+
+/* Class = "NSTextFieldCell"; title = "Install a new plugin from GitHub"; ObjectID = "zvu-Up-fQJ"; */
+"zvu-Up-fQJ.title" = "Installeer ’n nuwe inprop vanaf GitHub";

@@ -26,13 +26,13 @@
 "2id-wn-xsC.title" = "Saltar para…";
 
 /* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Show Video Panel";
+"2t8-Ot-yoO.title" = "Mostrar painel de vídeo";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "Selccionar tudo";
 
 /* Class = "NSMenuItem"; title = "Show Audio Panel"; ObjectID = "43n-Ed-5kT"; */
-"43n-Ed-5kT.title" = "Show Audio Panel";
+"43n-Ed-5kT.title" = "Mostrar painel de áudio";
 
 /* Class = "NSMenuItem"; title = "Audio Delay + 0.5s"; ObjectID = "4ae-MT-2L1"; */
 "4ae-MT-2L1.title" = "Atraso de Áudio + 0.5s";
@@ -71,7 +71,7 @@
 "8pV-XQ-AvB.title" = "Velocidade:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Show Subtitles Panel";
+"8y7-Cy-lKT.title" = "Mostrar painel de legendas";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "Aumentar velocidade para 1.1x";
@@ -82,8 +82,8 @@
 /* Class = "NSMenuItem"; title = "<None>"; ObjectID = "9pa-9C-ueQ"; */
 "9pa-9C-ueQ.title" = "<None>";
 
-/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle"; ObjectID = "9zk-co-roT"; */
-"9zk-co-roT.title" = "Guardar legenda transferida";
+/* Class = "NSMenuItem"; title = "Save Downloaded Subtitle…"; ObjectID = "9zk-co-roT"; */
+"9zk-co-roT.title" = "Guardar legenda transferida…";
 
 /* Class = "NSMenuItem"; title = "Take a Screenshot"; ObjectID = "AoP-K6-Kb5"; */
 "AoP-K6-Kb5.title" = "Tirar Captura de Ecrã";
@@ -111,6 +111,9 @@
 
 /* Class = "NSMenu"; title = "Audio Track"; ObjectID = "DRb-Y8-xir"; */
 "DRb-Y8-xir.title" = "Faixa de áudio";
+
+/* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
+"3xl-iD-85w.title" = "Load External Audio…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "Reduzir velocidade para 0.9x";
@@ -202,6 +205,9 @@
 /* Class = "NSMenuItem"; title = "Find Online Subtitles…"; ObjectID = "Mg3-WB-gjZ"; */
 "Mg3-WB-gjZ.title" = "Encontrar Legendas Online…";
 
+/* Class = "NSMenuItem"; title = "Find Online Subtitles from" ObjectID = "5dT-kq-WV9"; */
+"5dT-kq-WV9.title" = "Find Online Subtitles from";
+
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
 "Mjr-lL-oEt.title" = "Guardar lista de reprodução atual…";
 
@@ -239,7 +245,7 @@
 "R4o-n2-Eq4.title" = "Ampliar";
 
 /* Class = "NSMenuItem"; title = "Website"; ObjectID = "Rqg-VS-aIj"; */
-"Rqg-VS-aIj.title" = "Website";
+"Rqg-VS-aIj.title" = "Site";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
 "SHd-63-Xoh.title" = "Ajustar ao Ecrã";
@@ -262,8 +268,8 @@
 /* Class = "NSMenuItem"; title = "Pause"; ObjectID = "UOE-MJ-8ku"; */
 "UOE-MJ-8ku.title" = "Pausa";
 
-/* Class = "NSMenu"; title = "Second Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Segunda legenda";
+/* Class = "NSMenu"; title = "Secondary Subtitle"; ObjectID = "UwY-P2-Xdb"; */
+"UwY-P2-Xdb.title" = "Secondary Subtitle";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Desfazer";
@@ -319,11 +325,17 @@
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
 "bwz-r0-peR.title" = "Ispector";
 
+/* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
+"0tJ-RQ-kuW.title" = "Consola";
+
 /* Class = "NSMenuItem"; title = "Normal Size (Retina)"; ObjectID = "c1x-bx-69F"; */
 "c1x-bx-69F.title" = "Tamanho Normal (Retina)";
 
 /* Class = "NSMenuItem"; title = "Volume + 1%"; ObjectID = "c6Y-0e-vgf"; */
 "c6Y-0e-vgf.title" = "Volume + 1%";
+
+/* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
+"che-dy-QUU.title" = "Show Current File in Finder";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "Proporção";
@@ -388,8 +400,8 @@
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "m7w-hc-Y2F"; */
 "m7w-hc-Y2F.title" = "Tornar Letras Maiúsculas";
 
-/* Class = "NSMenuItem"; title = "Second Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Segunda legenda";
+/* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
+"mGw-jm-5x2.title" = "Secondary Subtitle";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "Usar Picture in Picture";
@@ -492,3 +504,9 @@
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
 "zpw-Ac-F3M.title" = "Começar a falar";
+
+/* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
+"Y6q-cI-vfM.title" = "Plugin";
+
+/* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
+"Qwb-26-zjX.title" = "Abrir URL…";

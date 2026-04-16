@@ -16,14 +16,28 @@
 "general.username" = "用戶名";
 "general.password" = "密碼";
 
+"input.value_is_empty" = "此項為必填項目。";
+"input.already_exists" = "此內容已經被其他項目使用。";
+
 // Guide Window
 "guide.highlights" = "更新亮點";
 "guide.basic_settings" = "基本設定";
 "guide.faq" = "常見問題";
 
+// Initial Window
+"initial.announcement" = "您正在使用IINA的%@版本";
+"initial.beta.desc" = "如果您希望回到正式版，請進入「設定 > 一般」，將「接收 Beta 更新」取消勾選，然後從 <a href=\"https://iina.io\">官方網站</a>下載正式版進行安裝。";
+"initial.nightly.desc" = "不推薦您使用「每日構建版 Nightly Build」做為日常使用首選。每日構建版不支援自動更新，請至 <a href=\"https://nightly.iina.io\">每日構建版網站頁面</a> 自行下載更新。";
+"initial.debug.desc" = "「除錯版本 Debug Build」通常沒有針對性能進行最佳化。因此不推薦作為日常使用首選，且此版本不支援自動更新。";
+"initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
+
+// Inspector Window
+"inspector.error" = "錯誤";
+
 // MainWindowController.swift
 "main.buffering_indicator" = "緩衝處理中⋯ %d%%";
 "main.opening_stream" = "開啟串流中⋯⋯";
+"main.seeking_indicator" = "檢索中…";
 "osc.precision" = "精確度";
 "osc.1s" = "1秒";
 "osc.100ms" = "100毫秒";
@@ -36,24 +50,63 @@
 "quicksetting.hwdec" = "硬體解碼";
 "quicksetting.deinterlace" = "去交錯";
 "quicksetting.hdr" = "高動態範圍成效";
+"quicksetting.hide" = "隱藏";
+"quicksetting.reset_speed" = "恢復正常速度";
+
+// EQ Presets
+"eq.preset.flat" = "平坦";
+"eq.preset.acoustic" = "原聲";
+"eq.preset.classical" = "古典";
+"eq.preset.dance" = "舞曲";
+"eq.preset.deep" = "厚重";
+"eq.preset.electronic" = "電子";
+"eq.preset.hip_hop" = "嘻哈";
+"eq.preset.increase_bass" = "增強低音";
+"eq.preset.increase_treble" = "增強高音";
+"eq.preset.increase_vocal" = "增強人聲";
+"eq.preset.jazz" = "爵士";
+"eq.preset.latin" = "拉丁";
+"eq.preset.loundness" = "增強音量";
+"eq.preset.lounge" = "慵懶";
+"eq.preset.piano" = "鋼琴模式";
+"eq.preset.pop" = "流行音樂";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "降低低音";
+"eq.preset.reduce_treble" = "降低高音";
+"eq.preset.rock" = "搖滾";
+"eq.preset.small_speaker" = "小型喇叭";
+"eq.preset.spoken_word" = "語音模式";
+
+"alert.eq.new_profile.title" = "新的 EQ 設定檔";
+"alert.eq.new_profile.message" = "請輸入設定檔名稱";
+"alert.eq.rename.title" = "重新命名此設定檔";
+"alert.eq.rename.message" = "請輸入新的設定檔名稱";
 
 // OSDMessage.swift
 "osd.pause" = "暫停";
 "osd.resume" = "繼續";
-"osd.volume" = "音量：%i";
-"osd.speed" = "速度：%.2fx";
+"osd.volume" = "音量：%@";
+"osd.speed" = "速度：%@x";
 "osd.aspect" = "顯示比例：%@";
 "osd.crop" = "裁切：%@";
 "osd.rotate" = "旋轉：%i°";
 "osd.deinterlace" = "去交錯：%@";
 "osd.hwdec" = "硬體解碼: %@";
 "osd.audio_delay.nodelay" = "音訊延遲：無";
-"osd.audio_delay.later" = "音訊延遲：延遲 %.2f 秒";
-"osd.audio_delay.earlier" = "音訊延遲：提前 %.2f 秒";
+"osd.audio_delay.later" = "音訊延遲：延遲 %@ 秒";
+"osd.audio_delay.earlier" = "音訊延遲：提前 %@ 秒";
 "osd.sub_delay.nodelay" = "字幕延遲：無";
-"osd.sub_delay.later" = "字幕延遲：延遲 %.2f 秒";
-"osd.sub_delay.earlier" = "字幕延遲：提前 %.2f 秒";
-"osd.subtitle_pos" = "字幕位置：%.1f";
+"osd.sub_delay.later" = "字幕延遲：延遲 %@ 秒";
+"osd.sub_delay.earlier" = "字幕延遲：提前 %@ 秒";
+"osd.subtitle_pos" = "字幕位置：%@";
+"osd.sub_hidden" = "已隱藏字幕";
+"osd.sub_visible" = "已顯示字幕";
+"osd.sub_second_delay.nodelay" = "小字幕延遲：無";
+"osd.sub_second_delay.later" = "小字幕間隔：延遲 %@ 秒";
+"osd.sub_second_delay.earlier" = "小字幕間隔：提前 %@ 秒";
+"osd.sub_second_hidden" = "已隱藏小字幕";
+"osd.sub_second_pos" = "小字幕位置：%@";
+"osd.sub_second_visible" = "已顯示小字幕";
 "osd.mute" = "靜音";
 "osd.unmute" = "取消靜音";
 "osd.screenshot" = "已儲存畫面截圖";
@@ -62,7 +115,7 @@
 "osd.abloop.clear" = "AB循環：清除";
 "osd.stop" = "停止";
 "osd.chapter" = "章節：%@";
-"osd.subtitle_scale" = "字幕縮放：%.2f 倍";
+"osd.subtitle_scale" = "字幕縮放：%@ 倍";
 "osd.add_to_playlist" = "已新增%i個檔案至播放列表";
 "osd.clear_playlist" = "播放列表已清除";
 "osd.video_eq.contrast" = "對比度：%i";
@@ -73,17 +126,21 @@
 "osd.find_online_sub" = "正在搜尋線上字幕⋯";
 "osd.find_online_sub.source" = "從";
 "osd.sub_not_found" = "找不到字幕";
-"osd.sub_found" = "已找到 %d 個字幕，下載中⋯";
+"osd.sub_found" = "找到 %d 種字幕。";
+"osd.sub_downloading" = "正在下載 %d 種字幕";
 "osd.sub_downloaded" = "字幕下載完成";
 "osd.sub_saved" = "字幕已保存";
 "osd.network_error" = "網路連線錯誤";
 "osd.file_error" = "讀取檔案發生錯誤";
 "osd.cannot_login" = "無法登入";
 "osd.canceled" = "已取消";
+"osd.cannot_connect" = "無法連接";
+"osd.timed_out" = "已逾時";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
-"osd.file_loop" = "文件循環";
-"osd.playlist_loop" = "播放列表循環";
+"osd.file_loop" = "循環播放單一檔案";
+"osd.playlist_loop" = "循環播放全部檔案";
+"osd.no_loop" = "取消循環播放檔案";
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
@@ -94,7 +151,7 @@
 "preference.control" = "控制";
 "preference.keybindings" = "快速鍵";
 "preference.advanced" = "進階設定";
-"preference.plugins" = "Plugins";
+"preference.plugins" = "外掛程式";
 "preference.utilities" = "實用工具";
 "preference.scripts" = "工序指令";
 "preference.not_logged_in" = "尚未登入";
@@ -106,16 +163,38 @@
 
 "preference.enable_adv_settings" = "啟用進階設定";
 
-"menu.volume" = "音量：%d";
-"menu.audio_delay" = "音訊延遲：%.2f 秒";
-"menu.sub_delay" = "字幕延遲：%.2f 秒";
+"preference.sub_override_level.no" = "否";
+"preference.sub_override_level.force" = "強制執行";
+"preference.sub_override_level.scale" = "縮放";
+"preference.sub_override_level.strip" = "過濾";
+"preference.sub_override_level.yes" = "是";
+
+"preference.sub_override_level.descriptive_text.no" = "使用字幕檔的指定樣式，不做任何調整或修改。";
+"preference.sub_override_level.descriptive_text.force" = "強制覆蓋所有樣式設定，讓外觀以使用者設定的字幕樣式顯示。";
+"preference.sub_override_level.descriptive_text.scale" = "啟用樣式覆蓋之外，讓字幕依據播放視窗大小做自動縮放。";
+"preference.sub_override_level.descriptive_text.strip" = "忽略字幕檔的指定樣式，讓外觀以使用者設定的字幕樣式顯示。";
+"preference.sub_override_level.descriptive_text.yes" = "啟用樣式覆蓋，讓外觀以使用者設定的字幕樣式顯示。";
+
+"preference.ytdl_plugin_not_installed" = "從「設定」中切換至外掛程式分頁，點擊「Install from GitHub」安裝線上媒體插件；即可啟用影片下載及 yt-dlp 自動更新等進階功能。";
+"preference.ytdl_plugin_installed" = "由於已經安裝了「線上媒體外掛」，因此將內建的 youtube-dl 做禁用。";
+
+"menu.volume" = "音量：%@";
+"menu.volume_muted" = "音量：%@ (靜音)";
+"menu.audio_delay" = "音訊延遲：%@ 秒";
+"menu.sub_delay" = "字幕延遲：%@ 秒";
+"menu.sub_hide" = "隱藏字幕";
+"menu.sub_show" = "顯示字幕";
+"menu.sub_second_hide" = "隱藏副字幕";
+"menu.sub_second_show" = "顯示副字幕";
 "menu.fullscreen" = "進入全螢幕";
 "menu.exit_fullscreen" = "離開全螢幕";
 "menu.pip" = "進入子母畫面";
 "menu.exit_pip" = "結束子母畫面";
+"menu.mini_player" = "進入音樂模式";
+"menu.exit_mini_player" = "離開音樂模式";
 "menu.pause" = "暫停";
 "menu.resume" = "繼續";
-"menu.speed" = "速度：%.2fx";
+"menu.speed" = "速度：%@x";
 "menu.chapters" = "顯示章節面板";
 "menu.hide_chapters" = "隱藏章節面板";
 "menu.playlist" = "顯示播放列表面板";
@@ -127,21 +206,32 @@
 "menu.subtitles" = "顯示字幕面板";
 "menu.hide_subtitles" = "隱藏字幕面板";
 
-"menu.seek_forward" = "快轉 %.0fs";
-"menu.seek_backward" = "倒轉 %.0fs";
-"menu.speed_up" = "增加速度至 %.1fx";
-"menu.speed_down" = "減慢速度至 %.1fx";
-"menu.volume_up" = "音量 + %.0f%%";
-"menu.volume_down" = "音量 - %.0f%%";
-"menu.audio_delay_up" = "音訊延遲 + %.1f 秒";
-"menu.audio_delay_down" = "音訊延遲 - %.1f 秒";
-"menu.sub_delay_up" = "字幕延遲 + %.1f 秒";
-"menu.sub_delay_down" = "字幕延遲 - %.1f 秒";
+"menu.seek_forward" = "快轉 %@s";
+"menu.seek_backward" = "倒轉 %@s";
+"menu.speed_up" = "加速%@倍";
+"menu.speed_down" = "減速%@倍";
+"menu.volume_up" = "音量 + %@%%";
+"menu.volume_down" = "音量 - %@%%";
+"menu.audio_delay_up" = "音訊延遲 + %@ 秒";
+"menu.audio_delay_down" = "音訊延遲 - %@ 秒";
+"menu.sub_delay_up" = "字幕延遲 + %@ 秒";
+"menu.sub_delay_down" = "字幕延遲 - %@ 秒";
 
-"menu.crop_custom" = "自訂...";
-"menu.find_online_sub" = "Find Online Subtitles from %@";
+"menu.crop_custom" = "自定⋯";
+"menu.find_online_sub" = "從 %@ 尋找線上字幕";
 
+"menu.manage_plugins" = "管理外掛……";
+"menu.developer_tool" = "開發者工具";
+"menu.more_plugin" = "更多…";
+"menu.conflicting_shortcuts" = "快捷鍵衝突...";
+"menu.reload_plugins" = "重新載入全部外掛";
+"menu.show_plugins_panel" = "顯示外掛面板";
+"menu.hide_plugins_panel" = "隱藏外掛面板";
+
+"track.audio" = "音訊";
 "track.none" = "<無>";
+"track.sub" = "字幕";
+"track.video" = "視訊";
 
 "subtrack.no_loaded" = "沒有已載入的字幕";
 "subtrack.no_external" = "沒有找到外部字幕";
@@ -155,9 +245,9 @@
 
 "alert.fatal_error" = "ㄧ嚴重錯誤：%@ \n，IINA 即將關閉。";
 "alert.mpv_error" = "發生內部錯誤 %@（%@）（設定 %@ 時）";
-"alert.sleep" = "Cannot prevent display sleep! (0x%0X8)";
 
 "alert.unsupported_audio" = "不支援載入此音訊檔";
+"alert.unsupported_video" = "不支援的外部視訊檔。";
 "alert.unsupported_sub" = "不支援載入此字幕檔";
 "alert.unsupported_url" = "不支援這個 URL";
 "alert.wrong_url_format" = "URL 格式錯誤";
@@ -168,16 +258,18 @@
 "alert.error_saving_file" = "儲存檔案 %@ 時發生錯誤：%@";
 "alert.error_deleting_file" = "無法刪除此檔案";
 
+"alert.target_peak.bad_value" = "數值「%@」無效。 \n請提供 0 或是 10 到 10000 之間的值。";
+
 "alert.config.new.title" = "新增快速鍵設定檔";
 "alert.config.new.message" = "請輸入一個設定檔名稱";
 "alert.config.duplicate.title" = "複製設定檔";
 "alert.config.duplicate.message" = "請輸入複製的設定檔名稱";
-"alert.config.empty_name" = "名稱不能留空";
-"alert.config.name_existing" = "名稱已經存在";
 "alert.config.file_existing.title" = "檔案已經存在";
-"alert.config.file_existing.message" = "這不該發生。按一下「好」來覆寫，或是按一下「取消」在 Finder 中顯示檔案。";
+"alert.config.file_existing.message" = "一個具有相同文件名的配置文件已存在。選擇“確定”在Finder中顯示該文件。";
 "alert.config.cannot_create" = "無法建立設定檔\n%@";
 "alert.config.cannot_write" = "無法寫入設定檔";
+"alert.config.rename.title" = "重命名輸入配置";
+"alert.config.rename.message" = "請輸入新的配置名稱。";
 
 "alert.filter.incorrect" = "設定濾鏡時出現錯誤，請檢查參數格式";
 "alert.add_filter.title" = "新增濾鏡";
@@ -192,10 +284,13 @@
 
 "alert.playlist.error_deleting" = "刪除 %@ 時發生錯誤";
 
+"alert.screenshot.error_taking" = "擷圖失敗！";
+
 "alert.sub.no_selected" = "請先選取一個已下載的字幕檔";
 "alert.sub_lang_not_set" = "在使用 OpenSubtitles 前請先在「偏好設定」中設定字幕的偏好語言，目前將使用英文（eng）。";
 "alert.sub.cannot_save_passwd" = "無法將您這個密碼「%@」儲存到鑰匙圈";
 "alert.sub.cannot_login" = "登入失敗，請檢查您的使用者帳戶、密碼、網路連線。\n\n%@";
+"alert.sub.save_downloaded.title" = "儲存已下載的字幕";
 
 "alert.set_default.title" = "將 IINA 設為預設應用程式";
 "alert.set_default.message" = "即將把 IINA 設為所有受支援檔案格式的預設應用程式";
@@ -234,8 +329,8 @@
 "alert.clear_watch_later.title" = "清除儲存的播放進度";
 "alert.clear_watch_later.message" = "確定要清除所有儲存的播放進度，即「watch later」資料嗎？";
 
-"alert.restore_alerts.title" = "Restore Suppressed Alerts";
-"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+"alert.restore_alerts.title" = "復原已關閉的警告";
+"alert.restore_alerts.message" = "你確定想要復原這些關閉的警告嗎？";
 
 "alert.nothing_to_open" = "沒有可打開的檔案。";
 
@@ -250,17 +345,24 @@
 "alert.assrt_token_prompt.message" = "請在彈出的網頁中註冊帳號，然後進入使用者首頁檢視 API token 並在下方輸入：";
 "alert.assrt_token_invalid" = "你的射手網(偽) API token 格式無效。";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
-"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
-"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
-"alert.plugin_no_update" = "No update found.";
-"alert.plugin_update_found.title" = "Update found for %@";
-"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
-"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
-"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.plugin_uninstall.title" = "你確定想要移除 %@？";
+"alert.plugin_uninstall.message" = "這外掛程式將從你的磁碟移除。";
+"alert.plugin_reinstall.title" = "插件%@已存在";
+"alert.plugin_reinstall.message" = "您是否希望重新安裝此插件？";
+"alert.duplicated_plugin_id" = "偵測到重複的外掛程式識別碼，有兩個或更多外掛程式使用的相同的識別碼「%@」，這將造成不正常的行為。請在「偏好設定 - 外掛程式」中找到它們，並回報給外掛程式的作者。如果外掛程式安裝於本機，你可以手動在外掛程式的 Info.json 檔案中手動變更該外掛的識別碼。";
+"alert.plugin_no_update" = "未找到更新。";
+"alert.plugin_update_found.title" = "找到 %@ 的更新";
+"alert.plugin_update_found.message" = "最新版本是 %@，你的版本是 %@，要更新嗎？";
+"alert.plugin_permission" = "本外掛程式需要以下權限，請在繼續之前先審核這些權限。";
+"alert.plugin_permission_added" = "此更新需要額外的權限，請在繼續之前先審核這些權限。";
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";
+"playlist.sorting.header" = "排序";
+"playlist.sorting.filename_ascending" = "檔名遞增排序";
+"playlist.sorting.filename_descending" = "檔名遞減排序";
+"playlist.sorting.path_ascending" = "路徑遞增排序";
+"playlist.sorting.path_descending" = "路徑遞減排序";
 "pl_menu.title_multi" = "%d 個項目";
 "pl_menu.play_next" = "即將播放";
 "pl_menu.play_in_new_window" = "在新視窗裡播放";
@@ -270,7 +372,7 @@
 "pl_menu.delete_multi" = "將所選檔案丟到垃圾桶";
 "pl_menu.delete_after_play" = "播放完畢後丟到垃圾桶";
 "pl_menu.delete_after_play_multi" = "播放完畢後，將已所選的檔案丟到垃圾桶";
-"pl_menu.reveal_in_finder" = "顯示於 Finder";
+"pl_menu.show_in_finder" = "顯示於 Finder";
 "pl_menu.add_file" = "加入檔案⋯";
 "pl_menu.add_url" = "加入 URL⋯";
 "pl_menu.clear_playlist" = "清除播放列表";
@@ -291,6 +393,11 @@
 "hwdec.auto" = "啟用硬體解碼。但是，大多數視訊濾鏡無法正常運作。";
 "hwdec.auto-copy" = "啟用硬體解碼。將使用大約兩倍的記憶體，但支援視訊濾鏡。";
 
+"gaplessAudio.no" = "播放連續的音訊檔案可能會導致檔案變更時出現靜音或中斷。";
+"gaplessAudio.weak" = "
+若解碼器輸出的音訊格式發生變化，音訊設備將關閉並重新開啟，中斷無縫播放。";
+"gaplessAudio.yes" = "使用為播放的第一個檔案選擇的參數開啟音訊設備，然後保持開啟狀態以進行無縫播放。以下檔案可能會被重新取樣。";
+
 "subencoding.auto" = "自動偵測";
 
 "osc_toolbar.settings" = "快速設定";
@@ -299,6 +406,8 @@
 "osc_toolbar.full_screen" = "切換全螢幕";
 "osc_toolbar.music_mode" = "進入音樂模式";
 "osc_toolbar.sub_track" = "選擇字幕軌道";
+"osc_toolbar.screenshot" = "螢幕擷取";
+"osc_toolbar.plugins" = "顯示外掛程式面板";
 
 "mini_player.album_art" = "顯示封面圖庫";
 "mini_player.loop" = "重覆播放";
@@ -309,6 +418,7 @@
 "mini_player.volume" = "音量";
 "mini_player.close" = "結束音樂模式";
 "mini_player.back" = "返回影片模式";
+"mini_player.sort" = "排序播放清單";
 
 // Touch bar
 
@@ -330,28 +440,28 @@
 
 // Plugin permissions
 
-"permissions.network-request.name" = "Network Request";
-"permissions.network-request.desc" = "This plugin can make requst or upload data to these websites:";
-"permissions.network-request.any_site" = "Any site";
-"permissions.show-osd.name" = "Show OSD";
-"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
-"permissions.show-alert.name" = "Show Alerts";
-"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
-"permissions.video-overlay.name" = "Add overlay on videos";
-"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.network-request.name" = "網路請求";
+"permissions.network-request.desc" = "此外掛可以送出或傳送數據至這些網站：";
+"permissions.network-request.any_site" = "任何站台";
+"permissions.show-osd.name" = "顯示 OSD";
+"permissions.show-osd.desc" = "這個外掛可以顯示 OSD（螢幕顯示選單）訊息。";
+"permissions.show-alert.name" = "顯示警告";
+"permissions.show-alert.desc" = "此外掛可以顯示彈出警告。";
+"permissions.video-overlay.name" = "於影片新增重疊顯示";
+"permissions.video-overlay.desc" = "此外掛可以在影片上渲染額外內容。";
 "permissions.file-system.name" = "存取檔案系統";
-"permissions.file-system.desc" = "This plugin can read or write files on your disk, including sensitive information. It can also call other programs or applications that can harm your computer. So be sure to verify the source.";
+"permissions.file-system.desc" = "此外掛可以讀取或寫入你的磁碟上的檔案，包含敏感資訊。它也可以呼叫其他可能破壞電腦的程式或軟體。請確定你有驗證此外掛的來源。";
 
 "plugin.install" = "安裝";
 "plugin.installed" = "已安裝";
 "plugin.not_installed" = "尚未安裝";
-"plugin.local" = "Installed locally";
-"alert.plugin.install_error" = "Error occured during the installation: %@";
+"plugin.local" = "已安裝於本機";
+"alert.plugin.install_error" = "安裝時發生錯誤：%@";
 "alert.invalid_url" = "無效的 URL。";
 "plugin.install_error.invalid_url" = "無效的 URL。";
-"plugin.install_error.file_not_found" = "Cannot find the package file.";
-"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
-"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.install_error.file_not_found" = "無法找到套件檔案。";
+"plugin.install_error.cannot_download" = "無法下載外掛程式。\n\n詳細內容:%@\n";
+"plugin.install_error.cannot_unpackage" = "無法打開外掛程式。\n\n詳細內容：%@\n";
+"plugin.install_error.cannot_load" = "IINA 無法載入此外掛程式，可能使用了錯誤的格式。";
 "plugin.check_for_updates" = "檢查更新";
 "plugin.updating" = "正在下載更新…";

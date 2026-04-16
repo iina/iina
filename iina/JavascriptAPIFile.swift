@@ -16,7 +16,7 @@ import JavaScriptCore
   func read(_ path: String, _ options: [String: Any]) -> Any?
   func trash(_ path: String)
   func delete(_ path: String)
-  func revealInFinder(_ path: String)
+  func showInFinder(_ path: String)
   func handle(_ path: String, _ mode: String) -> JavascriptFileHandle?
 }
 
@@ -56,6 +56,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func write(_ path: String, _ content: String) {
+    log("file.write \(path): \(content.count)", level: .debug)
     let (filePath_, local) = parsePath(path)
     guard let filePath = filePath_ else { return }
 
@@ -92,6 +93,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func trash(_ path: String) {
+    log("file.trash \(path)", level: .debug)
     guard let filePath = parsePath(path).path else { return }
 
     do {
@@ -102,6 +104,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func delete(_ path: String) {
+    log("file.delete \(path)", level: .debug)
     let (filePath_, local) = parsePath(path)
     guard let filePath = filePath_ else { return }
 
@@ -117,6 +120,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
   }
 
   func move(_ source: String, _ dest: String) {
+    log("file.move \(source) -> \(dest)", level: .debug)
     guard let sourcePath = parsePath(source).path, let destPath = parsePath(dest).path else { return }
 
     do {
@@ -126,7 +130,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
     }
   }
 
-  func revealInFinder(_ path: String) {
+  func showInFinder(_ path: String) {
     guard let filePath = parsePath(path).path else { return }
 
     NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: filePath)])
@@ -142,7 +146,7 @@ class JavascriptAPIFile: JavascriptAPI, JavascriptAPIFileExportable {
     case "write":
       handleMode = .write
     default:
-      throwError(withMessage: "file.handle: moude should be \"read\" or \"write\".")
+      throwError(withMessage: "file.handle: mode should be \"read\" or \"write\".")
       return nil
     }
     if let handle = JavascriptFileHandle(url: URL(fileURLWithPath: filePath), mode: handleMode) {
@@ -235,48 +239,5 @@ class JavascriptFileHandle: NSObject, JavascriptFileHandleExportable {
 
   func close() {
     handle.closeFile()
-  }
-
-  private func createUInt8Array(fromData data: Data) -> JSValue? {
-    let context = JSContext.current()!
-    let length = data.count
-
-    // JSObjectMakeTypedArrayWithBytesNoCopy is only available on macOS 10.12.
-    if #available(macOS 10.12, *) {
-      let rawPtr = UnsafeMutableBufferPointer<UInt8>.allocate(capacity: length)
-      _ = data.withUnsafeBytes { (dataPtr: UnsafeRawBufferPointer) in
-        rawPtr.initialize(from: dataPtr)
-      }
-      let deallocator: JSTypedArrayBytesDeallocator = { ptr, _ in
-        ptr?.deallocate()
-      }
-      let arrayBufferRef = JSObjectMakeTypedArrayWithBytesNoCopy(context.jsGlobalContextRef,
-                                                                 kJSTypedArrayTypeUint8Array,
-                                                                 rawPtr.baseAddress,
-                                                                 length,
-                                                                 deallocator,
-                                                                 nil,
-                                                                 nil)
-      return JSValue(jsValueRef: arrayBufferRef, in: context)
-    } else {
-      // Inefficient fallback
-      let getter: @convention(block) (Int) -> UInt8 = { offset in
-        return data[offset]
-
-      }
-      context.setObject(getter, forKeyedSubscript: "__iina_data_getter" as NSString)
-
-      let array = context.evaluateScript("""
-          Uint8Array.from(function* () {
-            for (let i = 0; i < \(length); i++) {
-              yield __iina_data_getter(i);
-            }
-          }())
-          """)
-
-      context.setObject(nil, forKeyedSubscript: "__iina_data_getter" as NSString)
-      return array
-
-    }
   }
 }

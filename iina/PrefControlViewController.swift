@@ -20,7 +20,7 @@ class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbed
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_control"))!
+    return makeSymbol("computermouse", fallbackImage: "pref_control")
   }
 
   override var sectionViews: [NSView] {

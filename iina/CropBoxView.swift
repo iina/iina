@@ -9,20 +9,8 @@
 import Cocoa
 
 fileprivate extension NSColor {
-  static let cropBoxFill: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .cropBoxFill)!
-    } else {
-      return NSColor(calibratedWhite: 0.5, alpha: 0.3)
-    }
-  }()
-  static let cropBoxBorder: NSColor = {
-    if #available(macOS 10.14, *) {
-      return .controlAccentColor
-    } else {
-      return NSColor(calibratedRed: 0.4, green: 0.6, blue: 1, alpha: 1)
-    }
-  }()
+  static let cropBoxFill = NSColor(named: .cropBoxFill)!
+  static let cropBoxBorder = NSColor.controlAccentColor
 }
 
 class CropBoxView: NSView {
@@ -34,8 +22,6 @@ class CropBoxView: NSView {
 
   /** Original video size. */
   var actualSize: NSSize = NSSize()
-  /** VideoView's frame. */
-  var videoRect: NSRect = NSRect()
   /** Crop box's frame. */
   var boxRect: NSRect = NSRect()
 
@@ -54,7 +40,7 @@ class CropBoxView: NSView {
     case top, bottom, left, right
   }
 
-  // top and botom are related to view's coordinate
+  // top and bottom are related to view's coordinate
   private var rectTop: NSRect!
   private var rectBottom: NSRect!
   private var rectLeft: NSRect!
@@ -63,15 +49,14 @@ class CropBoxView: NSView {
   // MARK: - Rect size settings
 
   // call by mainWindowController. when view resized
-  func resized(with videoRect: NSRect) {
-    self.videoRect = videoRect
+  func resized() {
     updateBoxRect()
     updateCursorRects()
     needsDisplay = true
   }
 
   // set boxRect, and update selectedRect
-  func boxRectchanged(to rect: NSRect) {
+  func boxRectChanged(to rect: NSRect) {
     boxRect = rect
     updateSelectedRect()
   }
@@ -84,13 +69,13 @@ class CropBoxView: NSView {
     needsDisplay = true
   }
 
-  // update selectedRect from (boxRect in videoRect)
+  // update selectedRect from boxRect
   private func updateSelectedRect() {
-    let xScale = actualSize.width / videoRect.width
-    let yScale = actualSize.height / videoRect.height
+    let xScale = actualSize.width / frame.width
+    let yScale = actualSize.height / frame.height
 
-    var ix = (boxRect.origin.x - videoRect.origin.x) * xScale
-    var iy = (boxRect.origin.y - videoRect.origin.y) * xScale
+    var ix = (boxRect.origin.x - frame.origin.x) * xScale
+    var iy = (boxRect.origin.y - frame.origin.y) * xScale
     var iw = boxRect.width * xScale
     var ih = boxRect.height * yScale
 
@@ -104,11 +89,11 @@ class CropBoxView: NSView {
 
   // update boxRect from (videoRect * selectedRect)
   private func updateBoxRect() {
-    let xScale =  videoRect.width / actualSize.width
-    let yScale =  videoRect.height / actualSize.height
+    let xScale =  frame.width / actualSize.width
+    let yScale =  frame.height / actualSize.height
 
-    let ix = selectedRect.minX * xScale + videoRect.minX
-    let iy = selectedRect.minY * xScale + videoRect.minY
+    let ix = selectedRect.minX * xScale + frame.minX
+    let iy = selectedRect.minY * xScale + frame.minY
     let iw = selectedRect.width * xScale
     let ih = selectedRect.height * yScale
 
@@ -133,7 +118,7 @@ class CropBoxView: NSView {
     } else if rectRight.contains(mousePos) {
       isDragging = true
       dragSide = .right
-    } else if videoRect.contains(mousePos) {
+    } else if frame.contains(mousePos) {
       // free select
       isFreeSelecting = true
       window?.invalidateCursorRects(for: self)
@@ -143,7 +128,7 @@ class CropBoxView: NSView {
   }
 
   override func mouseDragged(with event: NSEvent) {
-    let mousePos = convert(event.locationInWindow, from: nil).constrained(to: videoRect)
+    let mousePos = convert(event.locationInWindow, from: nil).constrained(to: frame)
 
     if isDragging {
       // resizing selected box
@@ -168,14 +153,14 @@ class CropBoxView: NSView {
         newBoxRect.size.width -= diff
       }
 
-      boxRectchanged(to: newBoxRect)
+      boxRectChanged(to: newBoxRect)
       needsDisplay = true
       updateCursorRects()
       lastMousePos = mousePos
     } else if isFreeSelecting {
       // free selecting
       let newBoxRect = NSRect(vertexPoint: lastMousePos!, and: mousePos)
-      boxRectchanged(to: newBoxRect)
+      boxRectChanged(to: newBoxRect)
       needsDisplay = true
     } else {
       super.mouseDragged(with: event)
@@ -205,7 +190,6 @@ class CropBoxView: NSView {
     path.lineWidth = 2
     path.fill()
     path.stroke()
-
   }
 
   // MARK: - Cursor rects
@@ -220,13 +204,12 @@ class CropBoxView: NSView {
   func updateCursorRects() {
     let x = boxRect.origin.x
     let y = boxRect.origin.y
-    let w = boxRect.width
-    let h = boxRect.height
-
-    rectTop = NSMakeRect(x, y-2, w, 4)
-    rectBottom = NSMakeRect(x, y+h-2, w, 4)
-    rectLeft = NSMakeRect(x-2, y+2, 4, h-4)
-    rectRight = NSMakeRect(x+w-2, y+2, 4, h-4)
+    let w = boxRect.size.width
+    let h = boxRect.size.height
+    rectTop = NSMakeRect(x, y-2, w, 4).standardized
+    rectBottom = NSMakeRect(x, y+h-2, w, 4).standardized
+    rectLeft = NSMakeRect(x-2, y+2, 4, h-4).standardized
+    rectRight = NSMakeRect(x+w-2, y+2, 4, h-4).standardized
 
     window?.invalidateCursorRects(for: self)
   }

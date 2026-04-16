@@ -40,15 +40,15 @@
 #include <string.h>
 
 #include "attributes.h"
+#include "error.h"
 #include "macros.h"
-#include "version.h"
-#include "libavutil/avconfig.h"
+#include "mem.h"
 
-#if AV_HAVE_BIGENDIAN
-#   define AV_NE(be, le) (be)
-#else
-#   define AV_NE(be, le) (le)
-#endif
+#ifdef HAVE_AV_CONFIG_H
+#   include "config.h"
+#   include "intmath.h"
+#   include "internal.h"
+#endif /* HAVE_AV_CONFIG_H */
 
 //rounded division & shift
 #define RSHIFT(a,b) ((a) > 0 ? ((a) + ((1<<(b))>>1))>>(b) : ((a) + ((1<<(b))>>1)-1)>>(b))
@@ -89,31 +89,7 @@
 #define FFABSU(a) ((a) <= 0 ? -(unsigned)(a) : (unsigned)(a))
 #define FFABS64U(a) ((a) <= 0 ? -(uint64_t)(a) : (uint64_t)(a))
 
-/**
- * Comparator.
- * For two numerical expressions x and y, gives 1 if x > y, -1 if x < y, and 0
- * if x == y. This is useful for instance in a qsort comparator callback.
- * Furthermore, compilers are able to optimize this to branchless code, and
- * there is no risk of overflow with signed types.
- * As with many macros, this evaluates its argument multiple times, it thus
- * must not have a side-effect.
- */
-#define FFDIFFSIGN(x,y) (((x)>(y)) - ((x)<(y)))
-
-#define FFMAX(a,b) ((a) > (b) ? (a) : (b))
-#define FFMAX3(a,b,c) FFMAX(FFMAX(a,b),c)
-#define FFMIN(a,b) ((a) > (b) ? (b) : (a))
-#define FFMIN3(a,b,c) FFMIN(FFMIN(a,b),c)
-
-#define FFSWAP(type,a,b) do{type SWAP_tmp= b; b= a; a= SWAP_tmp;}while(0)
-#define FF_ARRAY_ELEMS(a) (sizeof(a) / sizeof((a)[0]))
-
 /* misc math functions */
-
-#ifdef HAVE_AV_CONFIG_H
-#   include "config.h"
-#   include "intmath.h"
-#endif
 
 #ifndef av_ceil_log2
 #   define av_ceil_log2     av_ceil_log2_c
@@ -405,6 +381,8 @@ static av_always_inline int64_t av_sat_sub64_c(int64_t a, int64_t b) {
 
 /**
  * Clip a float value into the amin-amax range.
+ * If a is nan or -inf amin will be returned.
+ * If a is +inf amax will be returned.
  * @param a value to clip
  * @param amin minimum value of the clip range
  * @param amax maximum value of the clip range
@@ -415,13 +393,13 @@ static av_always_inline av_const float av_clipf_c(float a, float amin, float ama
 #if defined(HAVE_AV_CONFIG_H) && defined(ASSERT_LEVEL) && ASSERT_LEVEL >= 2
     if (amin > amax) abort();
 #endif
-    if      (a < amin) return amin;
-    else if (a > amax) return amax;
-    else               return a;
+    return FFMIN(FFMAX(a, amin), amax);
 }
 
 /**
  * Clip a double value into the amin-amax range.
+ * If a is nan or -inf amin will be returned.
+ * If a is +inf amax will be returned.
  * @param a value to clip
  * @param amin minimum value of the clip range
  * @param amax maximum value of the clip range
@@ -432,9 +410,7 @@ static av_always_inline av_const double av_clipd_c(double a, double amin, double
 #if defined(HAVE_AV_CONFIG_H) && defined(ASSERT_LEVEL) && ASSERT_LEVEL >= 2
     if (amin > amax) abort();
 #endif
-    if      (a < amin) return amin;
-    else if (a > amax) return amax;
-    else               return a;
+    return FFMIN(FFMAX(a, amin), amax);
 }
 
 /** Compute ceil(log2(x)).
@@ -474,9 +450,6 @@ static av_always_inline av_const int av_parity_c(uint32_t v)
 {
     return av_popcount(v) & 1;
 }
-
-#define MKTAG(a,b,c,d) ((a) | ((b) << 8) | ((c) << 16) | ((unsigned)(d) << 24))
-#define MKBETAG(a,b,c,d) ((d) | ((c) << 8) | ((b) << 16) | ((unsigned)(a) << 24))
 
 /**
  * Convert a UTF-8 character (up to 4 bytes) to its 32-bit UCS-4 encoded form.
@@ -596,13 +569,5 @@ static av_always_inline av_const int av_parity_c(uint32_t v)
             PUT_16BIT\
         }\
     }\
-
-
-
-#include "mem.h"
-
-#ifdef HAVE_AV_CONFIG_H
-#    include "internal.h"
-#endif /* HAVE_AV_CONFIG_H */
 
 #endif /* AVUTIL_COMMON_H */

@@ -9,13 +9,7 @@
 import Cocoa
 
 fileprivate extension NSColor {
-  static let playlistProgressBar: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .playlistProgressBar)!
-    } else {
-      return NSColor(calibratedWhite: 1, alpha: 0.6)
-    }
-  }()
+  static let playlistProgressBar = NSColor(named: .playlistProgressBar)!
 }
 
 class PlaylistPlaybackProgressView: NSView {
@@ -28,7 +22,7 @@ class PlaylistPlaybackProgressView: NSView {
 
   override func draw(_ dirtyRect: NSRect) {
     let rect = NSRect(x: 0, y: 0, width: bounds.width * CGFloat(percentage), height: bounds.height)
-    PlaylistPlaybackProgressView.fillColor.setFill()
+    NSColor.controlAccentColor.withAlphaComponent(0.7).setFill()
     NSBezierPath(rect: rect).fill()
   }
 

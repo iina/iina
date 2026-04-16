@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="appIcon" destination="nrn-G9-P2A" id="2hO-5g-HzS"/>
                 <outlet property="betaIndicatorView" destination="7SF-fn-3LF" id="uST-Lq-V3d"/>
+                <outlet property="betaTextField" destination="aUL-kg-QKC" id="7wg-qM-67K"/>
                 <outlet property="lastFileContainerView" destination="XbN-3R-9zz" id="lHL-TU-uYf"/>
                 <outlet property="lastFileIcon" destination="vtJ-oi-9dH" id="eev-dC-4IX"/>
                 <outlet property="lastFileNameLabel" destination="RvZ-oS-vUK" id="KCl-dD-B82"/>
@@ -28,7 +29,7 @@
         <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="IINAWelcomeWindow" animationBehavior="default" titlebarAppearsTransparent="YES" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="931" y="455" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <view key="contentView" wantsLayer="YES" misplaced="YES" id="se5-gp-TjO" customClass="InitialWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -211,7 +212,7 @@
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SF-fn-3LF" customClass="BetaIndicatorView" customModule="IINA" customModuleProvider="target">
+                                    <customView hidden="YES" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SF-fn-3LF" customClass="BetaIndicatorView" customModule="IINA" customModuleProvider="target">
                                         <rect key="frame" x="66" y="148" width="44" height="17"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aUL-kg-QKC">
@@ -230,9 +231,10 @@
                                             <constraint firstItem="aUL-kg-QKC" firstAttribute="leading" secondItem="7SF-fn-3LF" secondAttribute="leading" constant="6" id="vl2-LH-gVe"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="announcementLabel" destination="TXf-wb-B1j" id="DSl-sX-m8b"/>
                                             <outlet property="betaPopover" destination="PNC-fD-zO6" id="Yxv-YS-O92"/>
-                                            <outlet property="text1" destination="bfI-Zo-NmI" id="TCc-2g-O5Z"/>
-                                            <outlet property="text2" destination="J6H-Zq-l1r" id="eLL-LH-Gh4"/>
+                                            <outlet property="text1" destination="5sw-ed-fdl" id="jTz-0k-yv7"/>
+                                            <outlet property="text2" destination="eyw-wY-nUV" id="S5I-b1-jXh"/>
                                         </connections>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="XbN-3R-9zz" customClass="InitialWindowViewActionButton" customModule="IINA" customModuleProvider="target">
@@ -353,70 +355,57 @@
                 <outlet property="contentViewController" destination="lbU-lU-KMm" id="ohp-zi-klj"/>
             </connections>
         </popover>
-        <customView misplaced="YES" id="eOd-9p-Doi">
-            <rect key="frame" x="0.0" y="14" width="318" height="201"/>
+        <customView id="eOd-9p-Doi">
+            <rect key="frame" x="0.0" y="0.0" width="318" height="124"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JeM-En-IT9">
-                    <rect key="frame" x="10" y="170" width="232" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You are using a beta version of IINA" id="H7D-2H-wQn">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TXf-wb-B1j">
+                    <rect key="frame" x="18" y="88" width="40" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="lwC-kY-Nqh">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x0E-Rq-FzQ">
-                    <rect key="frame" x="10" y="142" width="109" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Want to rollback?" id="s3U-4u-gYp">
-                        <font key="font" metaFont="system"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="5sw-ed-fdl">
+                    <rect key="frame" x="18" y="66" width="33" height="14"/>
+                    <textFieldCell key="cell" selectable="YES" allowsUndo="NO" title="Label" allowsEditingTextAttributes="YES" id="Yih-Jo-OZc">
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bfI-Zo-NmI">
-                    <rect key="frame" x="10" y="96" width="298" height="42"/>
-                    <textFieldCell key="cell" controlSize="small" selectable="YES" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="3aN-Hg-GkT">
-                        <font key="font" metaFont="menu" size="11"/>
-                        <string key="title">Uncheck "receive beta updates" from Preferences - General, and install a stable release from our &lt;a href="https://iina.io"&gt;official website&lt;/a&gt;.</string>
-                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oJG-p5-OcL">
-                    <rect key="frame" x="10" y="72" width="87" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Found a bug?" id="I6R-Jl-2Jk">
-                        <font key="font" metaFont="system"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lAE-Si-ag3">
+                    <rect key="frame" x="18" y="42" width="282" height="16"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Found a bug?" id="llJ-1b-38L">
+                        <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J6H-Zq-l1r">
-                    <rect key="frame" x="10" y="12" width="298" height="56"/>
-                    <textFieldCell key="cell" controlSize="small" selectable="YES" sendsActionOnEndEditing="YES" allowsEditingTextAttributes="YES" id="BIz-NQ-0qD">
-                        <font key="font" metaFont="menu" size="11"/>
-                        <string key="title">Report to us via &lt;a href="mailto:developers@iina.io"&gt;email&lt;/a&gt; or &lt;a href="https://github.com/iina/iina/issues"&gt;GitHub issue&lt;/a&gt;.</string>
-                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="eyw-wY-nUV">
+                    <rect key="frame" x="18" y="20" width="282" height="14"/>
+                    <textFieldCell key="cell" selectable="YES" allowsUndo="NO" title="Label" allowsEditingTextAttributes="YES" id="eEO-DW-buJ">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="JeM-En-IT9" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="AY4-Km-u1t"/>
-                <constraint firstItem="bfI-Zo-NmI" firstAttribute="top" secondItem="x0E-Rq-FzQ" secondAttribute="bottom" constant="4" id="IaP-C3-eUq"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="x0E-Rq-FzQ" secondAttribute="trailing" constant="12" id="Ld7-Q1-O3h"/>
-                <constraint firstItem="oJG-p5-OcL" firstAttribute="top" secondItem="bfI-Zo-NmI" secondAttribute="bottom" constant="8" id="OKZ-Do-iv6"/>
-                <constraint firstAttribute="trailing" secondItem="J6H-Zq-l1r" secondAttribute="trailing" constant="12" id="X3n-7S-kpI"/>
-                <constraint firstItem="oJG-p5-OcL" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="amp-nD-I6M"/>
-                <constraint firstItem="J6H-Zq-l1r" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="bbx-Q0-icq"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JeM-En-IT9" secondAttribute="trailing" constant="12" id="dfG-Eq-CxM"/>
-                <constraint firstItem="x0E-Rq-FzQ" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="gGd-bD-g13"/>
-                <constraint firstAttribute="bottom" secondItem="J6H-Zq-l1r" secondAttribute="bottom" constant="12" id="ldh-4r-Apj"/>
-                <constraint firstItem="x0E-Rq-FzQ" firstAttribute="top" secondItem="JeM-En-IT9" secondAttribute="bottom" constant="12" id="mdC-nG-JPh"/>
-                <constraint firstAttribute="trailing" secondItem="bfI-Zo-NmI" secondAttribute="trailing" constant="12" id="pMt-Y6-W4r"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oJG-p5-OcL" secondAttribute="trailing" constant="12" id="rPR-0o-Jkw"/>
-                <constraint firstItem="JeM-En-IT9" firstAttribute="top" secondItem="eOd-9p-Doi" secondAttribute="top" constant="12" id="sl1-Fu-eSl"/>
-                <constraint firstItem="J6H-Zq-l1r" firstAttribute="top" secondItem="oJG-p5-OcL" secondAttribute="bottom" constant="4" id="zW7-GS-fBm"/>
-                <constraint firstItem="bfI-Zo-NmI" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="12" id="zWg-IR-ee3"/>
+                <constraint firstItem="lAE-Si-ag3" firstAttribute="top" secondItem="5sw-ed-fdl" secondAttribute="bottom" constant="8" symbolic="YES" id="9lw-Ye-jJe"/>
+                <constraint firstAttribute="bottom" secondItem="eyw-wY-nUV" secondAttribute="bottom" constant="20" symbolic="YES" id="JHe-SG-JOu"/>
+                <constraint firstItem="eyw-wY-nUV" firstAttribute="top" secondItem="lAE-Si-ag3" secondAttribute="bottom" constant="8" symbolic="YES" id="KXe-cU-rwe"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5sw-ed-fdl" secondAttribute="trailing" constant="20" symbolic="YES" id="OMf-Ln-buG"/>
+                <constraint firstItem="5sw-ed-fdl" firstAttribute="leading" secondItem="TXf-wb-B1j" secondAttribute="leading" id="SsG-B6-7Ch"/>
+                <constraint firstItem="eyw-wY-nUV" firstAttribute="leading" secondItem="lAE-Si-ag3" secondAttribute="leading" id="Y0s-kk-CsR"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TXf-wb-B1j" secondAttribute="trailing" id="qwd-oj-mJz"/>
+                <constraint firstAttribute="trailing" secondItem="lAE-Si-ag3" secondAttribute="trailing" constant="20" symbolic="YES" id="tUY-8z-WSH"/>
+                <constraint firstItem="TXf-wb-B1j" firstAttribute="top" secondItem="eOd-9p-Doi" secondAttribute="top" constant="20" symbolic="YES" id="uoD-8E-ZJL"/>
+                <constraint firstItem="5sw-ed-fdl" firstAttribute="top" secondItem="TXf-wb-B1j" secondAttribute="bottom" constant="8" symbolic="YES" id="xii-9p-T6L"/>
+                <constraint firstItem="lAE-Si-ag3" firstAttribute="leading" secondItem="5sw-ed-fdl" secondAttribute="leading" id="xtR-UQ-q5F"/>
+                <constraint firstItem="TXf-wb-B1j" firstAttribute="leading" secondItem="eOd-9p-Doi" secondAttribute="leading" constant="20" symbolic="YES" id="yfb-t6-OIU"/>
+                <constraint firstAttribute="trailing" secondItem="eyw-wY-nUV" secondAttribute="trailing" constant="20" symbolic="YES" id="zHz-Cr-KyC"/>
             </constraints>
             <point key="canvasLocation" x="200" y="635"/>
         </customView>

@@ -2,7 +2,7 @@
 "0bT-f6-rXb.title" = "Predvolené: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "Predvolená veľkosť cache (KB):";
+"0yu-5Q-363.title" = "Maximálna veľkosť cache (KB):";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
 "2qf-cC-Lfi.title" = "Vlastná youtube-dl path:";
@@ -14,7 +14,7 @@
 "9ut-ID-ffZ.title" = "HTTP proxy:";
 
 /* Class = "NSTextFieldCell"; title = "Format: <key>=<value>[,<key>=<value>[,…]]"; ObjectID = "GBe-wd-tne"; */
-"GBe-wd-tne.title" = "Formát: <názov>=<hodnota>[,<názov>=<hodnota>[,…]]";
+"GBe-wd-tne.title" = "Formát: <key>=<value>[,<key>=<value>[,…]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefetch:"; ObjectID = "J96-32-M9A"; */
 "J96-32-M9A.title" = "Sekundy na predbežné načítanie:";
@@ -23,7 +23,7 @@
 "LNk-io-MM7.title" = "Vyrovnávacia pamäť:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
-"RwW-JS-iTv.title" = "Vyžadujú reštartovať IINA pre správne fungovanie.";
+"RwW-JS-iTv.title" = "Vyžaduje sa reštart IINA pre správne fungovanie.";
 
 /* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
 "YqE-yV-BvQ.title" = "IINA prehľadá youtube-dl v tomto adresári. Vyžaduje sa reštart.";
@@ -41,7 +41,7 @@
 "eN6-Sk-kUa.title" = "Používateľský agent:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 36000"; ObjectID = "fab-7d-mMQ"; */
-"fab-7d-mMQ.title" = "Default: 36000";
+"fab-7d-mMQ.title" = "Predvolené: 36000";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
 "fpV-al-bn7.title" = "Povoliť cache";
@@ -54,3 +54,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
 "zCD-9d-ziV.title" = "Pokročilé nastavenia:";
+
+/* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
+"SyQ-2U-zu8.title" = "Show throbber when paused waiting for the cache";
+
+/* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
+"39x-Jr-gsA.title" = "Show throbber when seeking";

@@ -6,15 +6,15 @@
   Copyright © 2017 lhc. All rights reserved.
 */
 
-"cmd.ignore" = "Ignore";
-"cmd.seek" = "Seek";
-"cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
-"cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
-"cmd.multiply" = "Multiply";
-"cmd.frame-step" = "Next frame";
+"cmd.ignore" = "Игнориране";
+"cmd.seek" = "Превъртане";
+"cmd.revert-seek" = "Отмяна на превъртането";
+"cmd.set" = "Задаване";
+"cmd.cycle" = "Превключване";
+"cmd.cycle-values" = "Превключване напред";
+"cmd.add" = "Промяна";
+"cmd.multiply" = "Умножаване";
+"cmd.frame-step" = "Следващ кадър";
 "cmd.frame-back-step" = "Previous frame";
 "cmd.ab-loop" = "A-B loop";
 "cmd.sub-seek" = "Subtitle seek";
@@ -26,7 +26,7 @@
 "cmd.playlist-shuffle" = "Shuffle";
 "cmd.write-watch-later-config" = "Record play history";
 "cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
+"cmd.quit" = "Изход";
 "cmd.quit-watch-later" = "Quit (save progress)";
 "cmd.screenshot" = "Screenshot";
 "cmd.screenshot-to-file" = "Screenshot to file";
@@ -34,8 +34,8 @@
 "cmd.loadlist" = "Load playlist";
 "cmd.run" = "Run";
 
-"iina.flip" = "Flip";
-"iina.mirror" = "Mirror";
+"iina.flip" = "Преобръщане";
+"iina.mirror" = "Огледално";
 
 "iina.toggle-pip" = "Toggle Picture-in-Picture";
 "iina.toggle-music-mode" = "Toggle Music Mode";
@@ -52,13 +52,14 @@
 "iina.toggle-flip" = "Toggle flip";
 "iina.toggle-mirror" = "Toggle mirror";
 "iina.save-playlist" = "Save current playlist";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Delete current file";
 "iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
 "iina.find-online-subs" = "Find online subtitles";
 "iina.save-downloaded-sub" = "Save downloaded subtitle";
 
-"yes" = "Yes";
-"no" = "No";
+"yes" = "Да";
+"no" = "Не";
 "to" = "to";
 "by" = "by";
 "in" = "in";
@@ -77,13 +78,13 @@
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
+"opt.pause" = "Пауза";
 "opt.speed" = "Speed";
 
 "opt.window-scale" = "Window scale";
 
 "opt.video" = "Video track";
-"opt.video-aspect" = "Video aspect";
+"opt.video-aspect-override" = "Video aspect";
 "opt.contrast" = "Contrast";
 "opt.brightness" = "Brightness";
 "opt.gamma" = "Gamma";
@@ -91,7 +92,7 @@
 "opt.deinterlace" = "Deinterlace";
 
 "opt.audio" = "Audio track";
-"opt.volume" = "Volume";
+"opt.volume" = "Сила на звука";
 "opt.mute" = "Mute";
 "opt.audio-delay" = "Audio delay";
 
@@ -100,9 +101,10 @@
 "opt.sub-pos" = "Subtitle position";
 "opt.sub-scale" = "Subtitle scale";
 "opt.sub-visibility" = "Subtitle visibility";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS style override";
 
-"opt.fullscreen" = "Fullscreen";
+"opt.fullscreen" = "Цял екран";
 "opt.ontop" = "Float on top";
 
 "opt.chapter" = "Chapter";

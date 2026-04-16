@@ -21,7 +21,7 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_general"))!
+    return makeSymbol("gear", fallbackImage: "pref_general")
   }
 
   override var sectionViews: [NSView] {
@@ -58,32 +58,8 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
 
   @IBAction func rememberRecentChanged(_ sender: NSButton) {
     if sender.state == .off {
-      NSDocumentController.shared.clearRecentDocuments(self)
-    }
-  }
-
-  @IBAction func receiveBetaUpdatesChanged(_ sender: NSButton) {
-    SUUpdater.shared().feedURL = URL(string: sender.state == .on ? AppData.appcastBetaLink : AppData.appcastLink)!
-  }
-
-}
-
-
-class SUUpdaterProxy: NSObject {
-  @objc dynamic var automaticallyChecksForUpdates: Bool {
-    get {
-      return SUUpdater.shared().automaticallyChecksForUpdates
-    }
-    set {
-      SUUpdater.shared().automaticallyChecksForUpdates = newValue
-    }
-  }
-  @objc dynamic var updateCheckInterval: Double {
-    get {
-      return SUUpdater.shared().updateCheckInterval
-    }
-    set {
-      SUUpdater.shared().updateCheckInterval = newValue
+      AppDelegate.shared.clearRecentDocuments(self)
     }
   }
 }
+

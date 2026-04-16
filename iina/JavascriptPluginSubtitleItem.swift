@@ -12,7 +12,7 @@ import JavaScriptCore
 @objc protocol JavascriptPluginSubtitleItemExportable: JSExport {
   var data: JSValue { get }
   var desc: JSValue? { get set }
-  func __setDownlaodCallback(_ callback: JSValue)
+  func __setDownloadCallback(_ callback: JSValue)
 }
 
 class JavascriptPluginSubtitleItem: NSObject, JavascriptPluginSubtitleItemExportable {
@@ -36,7 +36,7 @@ class JavascriptPluginSubtitleItem: NSObject, JavascriptPluginSubtitleItemExport
     setDesc(desc)
   }
 
-  func __setDownlaodCallback(_ callback: JSValue) {
+  func __setDownloadCallback(_ callback: JSValue) {
     download = JSManagedValue(value: callback);
     JSContext.current()!.virtualMachine.addManagedReference(download, withOwner: owner)
   }

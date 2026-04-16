@@ -10,18 +10,26 @@ import Cocoa
 
 class PreferenceViewController: NSViewController {
 
-  var stackView: NSStackView!
+  var stackView: NSStackView?
 
   var sectionViews: [NSView] {
     return []
   }
 
+  func makeSymbol(_ name: String, fallbackImage: NSImage.Name) -> NSImage {
+    guard #available(macOS 14, *) else { return NSImage(named: fallbackImage)! }
+    let configuration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+    return NSImage.findSFSymbol([name], withConfiguration: configuration)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
+    guard !sectionViews.isEmpty else { return }
 
     let views = sectionViews.flatMap { [$0, NSBox.horizontalLine()] }.dropLast()
 
     stackView = NSStackView(views: Array(views))
+    guard let stackView else { return }
     stackView.orientation = .vertical
     stackView.alignment = .leading
     stackView.spacing = 16

@@ -41,17 +41,18 @@
 "iina.toggle-music-mode" = "Musikmodus ein-/ausschalten";
 "iina.open-file" = "Datei öffnen";
 "iina.open-url" = "Adresse öffnen";
-"iina.video-panel" = "Videoeinstellungen ein-/ausblenden";
-"iina.audio-panel" = "Audioeinstellungen ein-/ausblenden";
-"iina.sub-panel" = "Untertiteleinstellungen ein-/ausblenden";
-"iina.playlist-panel" = "Wiedergabeliste ein-/ausblenden";
-"iina.chapter-panel" = "Kapitel ein-/ausblenden";
+"iina.video-panel" = "Videoeinstellungen";
+"iina.audio-panel" = "Audioeinstellungen";
+"iina.sub-panel" = "Untertiteleinstellungen";
+"iina.playlist-panel" = "Wiedergabeliste";
+"iina.chapter-panel" = "Kapitel";
 "iina.bigger-window" = "Fenster vergrößern";
 "iina.smaller-window" = "Fenster verkleinern";
 "iina.fit-to-screen" = "An Bildschirm anpassen";
 "iina.toggle-flip" = "Drehen ein-/ausschalten";
 "iina.toggle-mirror" = "Spiegeln ein-/ausschalten";
 "iina.save-playlist" = "Aktuelle Wiedergabeliste sichern";
+"iina.show-current-file-in-finder" = "Aktuelle Datei im Finder anzeigen";
 "iina.delete-current-file" = "Wiedergegebene Datei löschen";
 "iina.delete-current-file-hard" = "Wiedergegebene Datei unwiderruflich löschen";
 "iina.find-online-subs" = "Online nach Untertiteln suchen";
@@ -83,7 +84,7 @@
 "opt.window-scale" = "Fenstergröße";
 
 "opt.video" = "Videospur";
-"opt.video-aspect" = "Seitenverhältnis";
+"opt.video-aspect-override" = "Seitenverhältnis";
 "opt.contrast" = "Kontrast";
 "opt.brightness" = "Helligkeit";
 "opt.gamma" = "Gamma";
@@ -100,6 +101,7 @@
 "opt.sub-pos" = "Position";
 "opt.sub-scale" = "Größe";
 "opt.sub-visibility" = "Sichtbarkeit";
+"opt.secondary-sub-visibility" = "Sichtbarkeit des zweiten Untertitels";
 "opt.sub-ass-style-override" = "ASS-Stil überschreiben";
 
 "opt.fullscreen" = "Vollbild";

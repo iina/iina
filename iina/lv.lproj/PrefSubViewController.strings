@@ -5,19 +5,16 @@
 "0fB-es-DmV.title" = "Online Subtitles:";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "1Tq-5k-o6R"; */
-"1Tq-5k-o6R.title" = "Top";
+"1Tq-5k-o6R.title" = "Augšā";
 
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "Display subtitles in letterboxes while in full screen";
-
-/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "strip";
 
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
 "4Tb-Yh-PdP.title" = "Position:";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
-"6i0-Sx-V7F.title" = "Bottom";
+"6i0-Sx-V7F.title" = "Apakšā";
 
 /* Class = "NSTextFieldCell"; title = "Subtitles have priority when filename containing:"; ObjectID = "7pf-Kb-TNr"; */
 "7pf-Kb-TNr.title" = "Subtitles have priority when filename containing:";
@@ -66,9 +63,6 @@
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "Please enter a comma-separated list of strings.";
-
-/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "If enabled, all ASS subtitles will be drawn using the styles below.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "Text subtitles:";
@@ -145,9 +139,6 @@
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "Margin";
 
-/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "Ignore ASS styles";
-
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
 "raf-Yu-ck0.title" = "Auto load:";
 
@@ -158,7 +149,7 @@
 "t5n-mc-dss.title" = "Border";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "u31-eV-Arr"; */
-"u31-eV-Arr.title" = "Disabled";
+"u31-eV-Arr.title" = "Izslēgta";
 
 /* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "vDc-dw-liI"; */
 "vDc-dw-liI.title" = "Color:";
@@ -176,7 +167,13 @@
 "y1E-JR-KRI.title" = "Subtitles containing media filename";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "zaE-bH-XfT"; */
-"zaE-bH-XfT.title" = "Preferred language:";
+"zaE-bH-XfT.title" = "Vēlamā valoda:";
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "Left";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[0]" = "Primary Subtitles";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[1]" = "Secondary Subtitles";

@@ -7,11 +7,12 @@
 //
 
 import Cocoa
-import WebKit
+@preconcurrency import WebKit
 
 fileprivate let defaultPlugins = [
-  ["url": "iina/plugin-demo", "id": "io.iina.demo"],
   ["url": "iina/plugin-online-media", "id": "io.iina.ytdl"],
+  ["url": "iina/plugin-userscript", "id": "io.iina.user-script"],
+  ["url": "iina/plugin-opensub", "id": "io.iina.opensub"],
 ]
 
 fileprivate extension NSUserInterfaceItemIdentifier {
@@ -24,7 +25,7 @@ fileprivate extension NSPasteboard.PasteboardType {
   static let iinaPluginID = NSPasteboard.PasteboardType(rawValue: "com.colliderli.iina.pluginID")
 }
 
-class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
+class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbeddable {
   override var nibName: NSNib.Name {
     return NSNib.Name("PrefPluginViewController")
   }
@@ -34,14 +35,13 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_general"))!
+    return makeSymbol("puzzlepiece.extension", fallbackImage: "pref_general")
   }
 
   var preferenceContentIsScrollable: Bool {
     return false
   }
 
-  var plugins: [JavascriptPlugin] = []
   var currentPlugin: JavascriptPlugin?
 
   @IBOutlet weak var tabView: NSTabView!
@@ -53,7 +53,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBOutlet weak var pluginAuthorLabel: NSTextField!
   @IBOutlet weak var pluginIdentifierLabel: NSTextField!
   @IBOutlet weak var pluginDescLabel: NSTextField!
-  @IBOutlet weak var pluginSourceLabel: NSTextField!
+  @IBOutlet weak var pluginSourceTextView: NSTextView!
   @IBOutlet weak var pluginCheckUpdatesBtn: NSButton!
   @IBOutlet weak var pluginPermissionsView: PrefPluginPermissionListView!
   @IBOutlet weak var pluginWebsiteEmailStackView: NSStackView!
@@ -66,7 +66,8 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBOutlet weak var pluginHelpWebViewLoadingIndicator: NSProgressIndicator!
   @IBOutlet weak var pluginHelpLoadingFailedView: NSView!
   @IBOutlet weak var pluginPreferencesContentView: NSView!
-
+  @IBOutlet weak var uninstallBtn: NSButton!
+  
   @IBOutlet var newPluginSheet: NSWindow!
   @IBOutlet weak var newPluginSourceTextField: NSTextField!
   @IBOutlet weak var newPluginInstallBtn: NSButton!
@@ -184,6 +185,9 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     config.userContentController.add(self, name: "iina")
     
     pluginPreferencesWebView = NonscrollableWebview(frame: .zero, configuration: config)
+    if #available(macOS 13.3, *) {
+      pluginPreferencesWebView.isInspectable = true
+    }
     pluginPreferencesViewController = PrefPluginPreferencesViewController()
     pluginPreferencesViewController.view = pluginPreferencesWebView
 
@@ -214,25 +218,20 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
   @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
     tabView.selectTabViewItem(at: sender.selectedSegment)
     guard let currentPlugin = currentPlugin else { return }
-    if sender.selectedSegment == 2 {
+    if sender.selectedTag() == 2 {
       // Preferences
-      guard let prefURL = currentPlugin.preferencesPageURL else { return }
       if pluginPreferencesWebView == nil {
         createPreferenceView()
       }
+      guard let prefURL = currentPlugin.preferencesPageURL else {
+        pluginPreferencesWebView.loadHTMLString("<html><body></body></html>", baseURL: nil)
+        return
+      }
       pluginPreferencesWebView.loadFileURL(prefURL, allowingReadAccessTo: currentPlugin.root)
       pluginPreferencesViewController.plugin = currentPlugin
-    } else if sender.selectedSegment == 1 {
+    } else if sender.selectedTag() == 1 {
       // About
-      if let _ = currentPlugin.helpPageURL {
-        pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
-        if pluginHelpWebView == nil {
-          createHelpView()
-        }
-        loadHelpPage()
-      } else {
-        pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginHelpView)
-      }
+      updateAboutTab()
     }
   }
 
@@ -253,10 +252,35 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorEmail == nil ? .notVisible : .mustHold, for: pluginEmailBtn)
     pluginWebsiteEmailStackView.setVisibilityPriority(plugin.authorURL == nil ? .notVisible : .mustHold, for: pluginWebsiteBtn)
     pluginPermissionsView.setPlugin(plugin)
-    pluginSourceLabel.stringValue = plugin.githubURLString ?? NSLocalizedString("plugin.local", comment: "")
+    if let url = plugin.githubURLString {
+      pluginSourceTextView.textStorage?.setAttributedString(.init(string: url, attributes: [.link: URL(string: url)!]))
+      pluginSourceTextView.isSelectable = true
+    } else {
+      pluginSourceTextView.textStorage?.setAttributedString(.init(string: NSLocalizedString("plugin.local", comment: "")))
+      pluginSourceTextView.isSelectable = false
+    }
+    pluginSourceTextView.textStorage?.font = .systemFont(ofSize: NSFont.systemFontSize)
     pluginCheckUpdatesBtn.isHidden = plugin.githubRepo == nil || plugin.githubVersion == nil
+    // if the plugin is symlinked, disable the uninstall button since it can accidentally delete the project folder
+    uninstallBtn.isEnabled = !plugin.isExternal
 
     currentPlugin = plugin
+
+    updateAboutTab()
+  }
+
+  private func updateAboutTab() {
+    guard let currentPlugin = currentPlugin else { return }
+
+    if let _ = currentPlugin.helpPageURL {
+      pluginSupportStackView.setVisibilityPriority(.mustHold, for: pluginHelpView)
+      if pluginHelpWebView == nil {
+        createHelpView()
+      }
+      loadHelpPage()
+    } else {
+      pluginSupportStackView.setVisibilityPriority(.notVisible, for: pluginHelpView)
+    }
   }
 
   private func loadHelpPage() {
@@ -306,7 +330,13 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     let block = {
       let alert = NSAlert()
       let permissionListView = PrefPluginPermissionListView()
-      let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 280, height: 300))
+      let permissionWidth: Int
+      if #available(macOS 11.0, *) {
+        permissionWidth = 500
+      } else {
+        permissionWidth = 280
+      }
+      let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: permissionWidth, height: 300))
       permissionListView.translatesAutoresizingMaskIntoConstraints = false
       alert.messageText = NSLocalizedString("alert.title_warning", comment: "Warning")
       alert.informativeText = NSLocalizedString(previousPlugin == nil ? "alert.plugin_permission" : "alert.plugin_permission_added", comment: "")
@@ -411,6 +441,12 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
       }
     }
   }
+  
+  @objc func installPluginAction(localPackageURL url: URL) {
+    self.queue.async {
+      self.installPlugin(fromLocalPackageURL: url)
+    }
+  }
 
   @IBAction func endSheet(_ sender: NSButton) {
     view.window!.endSheet(sender.window!)
@@ -428,7 +464,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     }
   }
 
-  @IBAction func revealPlugin(_ sender: Any) {
+  @IBAction func showPlugin(_ sender: Any) {
     guard let currentPlugin = currentPlugin else { return }
     NSWorkspace.shared.activateFileViewerSelecting([currentPlugin.root])
   }
@@ -466,13 +502,33 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
 
   private func showNewPluginPermissions(_ plugin: JavascriptPlugin) {
     showPermissionsSheet(forPlugin: plugin, previousPlugin: nil) { ok in
-      if ok {
+      guard ok else {
+        plugin.remove()
+        return
+      }
+      // check whether a duplicate plugin exists, if yes, replace
+      if let pos = JavascriptPlugin.plugins.firstIndex(where: { $0.identifier == plugin.identifier }) {
+        Utility.quickAskPanel("plugin_reinstall", titleArgs: [plugin.name], sheetWindow: self.view.window!) { response in
+          if response == .alertFirstButtonReturn {
+            // uninstall the old plugins
+            let oldPlugin = JavascriptPlugin.plugins[pos]
+            oldPlugin.enabled = false
+            oldPlugin.remove()
+            self.clearPluginPage()
+            // install the new plugin
+            plugin.normalizePath()
+            JavascriptPlugin.plugins.insert(plugin, at: pos)
+            plugin.enabled = true
+            self.tableView.reloadData()
+          } else {
+            plugin.remove()
+          }
+        }
+      } else {
         plugin.normalizePath()
         JavascriptPlugin.plugins.append(plugin)
         plugin.enabled = true
         self.tableView.reloadData()
-      } else {
-        plugin.remove()
       }
     }
   }
@@ -500,7 +556,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
     pluginCheckUpdatesProgressIndicator.startAnimation(self)
     pluginCheckUpdatesBtn.isEnabled = false
     pluginCheckUpdatesBtn.title = NSLocalizedString("plugin.updating", comment: "")
-    
+
     defer {
       self.pluginCheckUpdatesProgressIndicator.stopAnimation(self)
       pluginCheckUpdatesBtn.title = NSLocalizedString("plugin.check_for_updates", comment: "")
@@ -515,7 +571,7 @@ class PrefPluginViewController: NSViewController, PreferenceWindowEmbeddable {
         }
         newPlugin.normalizePath()
         newPlugin.reloadGlobalInstance()
-        PlayerCore.reloadPluginForAll(newPlugin)
+        PlayerCore.reloadPluginForAll(newPlugin, forced: true)
         self.currentPlugin = newPlugin
         self.tableView.reloadData()
         self.loadPluginPage(newPlugin)
@@ -622,8 +678,7 @@ extension PrefPluginViewController: WKNavigationDelegate {
     if webView == pluginPreferencesWebView {
       guard
         let url = navigationAction.request.url,
-        let currentPluginPrefPageURL = currentPlugin?.preferencesPageURL,
-        url.absoluteString.starts(with: currentPluginPrefPageURL.absoluteString)
+        url.absoluteString.starts(with: currentPlugin?.preferencesPageURL?.absoluteString ?? "000") || url.absoluteString == "about:blank"
       else {
         Logger.log("Loading page from \(navigationAction.request.url?.absoluteString ?? "?") is not allowed", level: .error)
           decisionHandler(.cancel)
@@ -680,7 +735,7 @@ extension PrefPluginViewController: WKScriptMessageHandler {
       var value: Any? = nil
       if let v = plugin.preferences[prefName] {
         value = v
-      } else if let v = plugin.defaultPrefernces[prefName] {
+      } else if let v = plugin.defaultPreferences[prefName] {
         value = v
       }
       let result: String

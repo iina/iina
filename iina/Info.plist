@@ -2,10 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Folder</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.folder</string>
+			</array>
+		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
@@ -15,11 +25,15 @@
 				<string>mks</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_mkv.icns</string>
+			<string>doc_mkv</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Matroska video</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -31,7 +45,9 @@
 				<string>mka</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_mkv.icns</string>
+			<string>doc_mkv</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Matroska audio</string>
 			<key>CFBundleTypeRole</key>
@@ -53,11 +69,15 @@
 				<string>ra</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_rm.icns</string>
+			<string>doc_rm</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Real Media file</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -69,11 +89,15 @@
 				<string>asf</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_asf.icns</string>
+			<string>doc_asf</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Advanced Systems Format (ASF) media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -85,11 +109,15 @@
 				<string>aac</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_aac.icns</string>
+			<string>doc_aac</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Advanced Audio Coding (AAC) media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -105,11 +133,35 @@
 				<string>f4b</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_flv.icns</string>
+			<string>doc_flv</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Flash Video file</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>XML</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>gif</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>doc_gif</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
+			<key>CFBundleTypeName</key>
+			<string>GIF image</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -121,11 +173,15 @@
 				<string>webm</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_webm.icns</string>
+			<string>doc_webm</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>WebM media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -138,11 +194,15 @@
 				<string>3g2</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_3gp.icns</string>
+			<string>doc_3gp</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>3GPP media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -154,11 +214,15 @@
 				<string>mp3</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_mp3.icns</string>
+			<string>doc_mp3</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>MPEG Layer III (MP3) audio</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -171,11 +235,15 @@
 				<string>oga</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_ogg.icns</string>
+			<string>doc_ogg</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>OGG audio</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -188,11 +256,15 @@
 				<string>ogv</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_ogg.icns</string>
+			<string>doc_ogg</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>OGG video</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -206,11 +278,15 @@
 				<string>m2ts</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_ts.icns</string>
+			<string>doc_ts</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>MPEG transport stream (TS) media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -222,11 +298,15 @@
 				<string>avi</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_avi.icns</string>
+			<string>doc_avi</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>AVI media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -238,11 +318,15 @@
 				<string>wav</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_wav.icns</string>
+			<string>doc_wav</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Waveform Audio File (WAV) audio</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -255,11 +339,15 @@
 				<string>m4b</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_m4a.icns</string>
+			<string>doc_m4a</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>MPEG-4 audio</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -272,11 +360,15 @@
 				<string>wma</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_wmv.icns</string>
+			<string>doc_wmv</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Windows Media Video/Audio (WMV/WMA) media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -289,11 +381,15 @@
 				<string>mov</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_qt.icns</string>
+			<string>doc_qt</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>QuickTime media</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -305,11 +401,15 @@
 				<string>flac</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_flac.icns</string>
+			<string>doc_flac</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Free Lossless Audio Codec (FLAC) audio</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -322,11 +422,15 @@
 				<string>mpg</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_mp4.icns</string>
+			<string>doc_mp4</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>MPEG video</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -340,11 +444,15 @@
 				<string>m4b</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_mp4.icns</string>
+			<string>doc_mp4</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>MPEG-4 video</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -367,11 +475,15 @@
 				<string>*</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_other_v.icns</string>
+			<string>doc_other_v</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Video file</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -387,8 +499,6 @@
 				<string>aiff</string>
 				<string>ape</string>
 				<string>caf</string>
-				<string>mid</string>
-				<string>midi</string>
 				<string>pcm</string>
 				<string>vox</string>
 				<string>tta</string>
@@ -397,11 +507,15 @@
 				<string>cue</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_other_a.icns</string>
+			<string>doc_other_a</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Audio file</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -415,11 +529,15 @@
 				<string>pls</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_list.icns</string>
+			<string>doc_list</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>Playlist</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSTypeIsPackage</key>
 			<false/>
 			<key>NSPersistentStoreTypeKey</key>
@@ -431,11 +549,15 @@
 				<string>iinaplugin</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_plugin.icns</string>
+			<string>doc_plugin</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>IINA Plugin</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>io.iina.iinaplugin</string>
@@ -449,31 +571,23 @@
 				<string>iinaplgz</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>doc_plugin.icns</string>
+			<string>doc_plugin</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>IINA Plugin Package</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>io.iina.iinaplgz</string>
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
 	<string>AppIcon.icns</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -487,10 +601,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.video</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSAppTransportSecurity</key>
@@ -508,16 +618,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2017-2022
-Collider LI, et al.
-Released under GPLv3.</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
 	<key>NSPrefersDisplaySafeAreaCompatibilityMode</key>
 	<false/>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
 	<key>NSServices</key>
 	<array>
 		<dict>
@@ -543,14 +645,16 @@ Released under GPLv3.</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
-			<key>UTTypeIconFile</key>
-			<string>doc_plugin.icns</string>
-			<key>UTTypeDescription</key>
-			<string>IINA Plugin Package</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>com.pkware.zip-archive</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>IINA Plugin Package</string>
+			<key>UTTypeIconFile</key>
+			<string>doc_plugin</string>
+			<key>UTTypeIcons</key>
+			<dict/>
 			<key>UTTypeIdentifier</key>
 			<string>io.iina.iinaplgz</string>
 			<key>UTTypeTagSpecification</key>
@@ -570,7 +674,9 @@ Released under GPLv3.</string>
 			<key>UTTypeDescription</key>
 			<string>IINA Plugin</string>
 			<key>UTTypeIconFile</key>
-			<string>doc_plugin.icns</string>
+			<string>doc_plugin</string>
+			<key>UTTypeIcons</key>
+			<dict/>
 			<key>UTTypeIdentifier</key>
 			<string>io.iina.iinaplugin</string>
 			<key>UTTypeTagSpecification</key>
@@ -611,7 +717,7 @@ Released under GPLv3.</string>
 				<string>public.audio</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Monkey's Audio Lossless Audio</string>
+			<string>Monkey&apos;s Audio Lossless Audio</string>
 			<key>UTTypeIdentifier</key>
 			<string>io.iina.ape</string>
 			<key>UTTypeTagSpecification</key>
@@ -1139,23 +1245,6 @@ Released under GPLv3.</string>
 				<string>public.audio</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>MIDI File</string>
-			<key>UTTypeIdentifier</key>
-			<string>io.iina.mid</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>mid</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.audio</string>
-			</array>
-			<key>UTTypeDescription</key>
 			<string>Matroska Audio File</string>
 			<key>UTTypeIdentifier</key>
 			<string>io.iina.mka</string>
@@ -1232,6 +1321,77 @@ Released under GPLv3.</string>
 				</array>
 			</dict>
 		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.compuserve.gif</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>GIF image</string>
+			<key>UTTypeIconFile</key>
+			<string>doc_gif</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>io.iina.gif</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gif</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>image/gif</string>
+				</array>
+			</dict>
+		</dict>
+    <dict>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.audio</string>
+      </array>
+      <key>UTTypeDescription</key>
+      <string>Direct Stream Digital DSF File</string>
+      <key>UTTypeIdentifier</key>
+      <string>io.iina.dsf</string>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <array>
+          <string>dsf</string>
+        </array>
+      </dict>
+    </dict>
+    <dict>
+      <key>UTTypeConformsTo</key>
+      <array>
+        <string>public.audio</string>
+      </array>
+      <key>UTTypeDescription</key>
+      <string>Direct Stream Digital DFF File</string>
+      <key>UTTypeIdentifier</key>
+      <string>io.iina.dff</string>
+      <key>UTTypeTagSpecification</key>
+      <dict>
+        <key>public.filename-extension</key>
+        <array>
+          <string>dff</string>
+        </array>
+      </dict>
+    </dict>
 	</array>
+	<key>com.colliderli.iina.build.branch</key>
+	<string>IINA_BUILD_BRANCH</string>
+	<key>com.colliderli.iina.build.commit</key>
+	<string>IINA_BUILD_COMMIT</string>
+	<key>com.colliderli.iina.build.configuration</key>
+	<string>$(CONFIGURATION)</string>
+	<key>com.colliderli.iina.build.date</key>
+	<string>IINA_BUILD_DATE</string>
+	<key>com.colliderli.iina.build.sdk</key>
+	<string>$(SDK_VERSION)</string>
+	<key>com.colliderli.iina.build.xcode</key>
+	<string>$(XCODE_VERSION_ACTUAL)</string>
 </dict>
 </plist>

@@ -10,11 +10,8 @@
 /* Class = "NSButtonCell"; title = "Display subtitles in letterboxes while in full screen"; ObjectID = "2XY-Un-0Fg"; */
 "2XY-Un-0Fg.title" = "전체 화면일 때 자막을 레터박스에 표시";
 
-/* Class = "NSTextFieldCell"; title = "strip"; ObjectID = "3H8-Ei-cTm"; */
-"3H8-Ei-cTm.title" = "strip";
-
 /* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "4Tb-Yh-PdP"; */
-"4Tb-Yh-PdP.title" = "위치:";
+"4Tb-Yh-PdP.title" = "위치";
 
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "6i0-Sx-V7F"; */
 "6i0-Sx-V7F.title" = "아래쪽";
@@ -59,16 +56,13 @@
 "Iax-cc-YIO.title" = "OpenSubtitles 계정:";
 
 /* Class = "NSTextFieldCell"; title = "Other:"; ObjectID = "LiG-iV-AQK"; */
-"LiG-iV-AQK.title" = "기타:";
+"LiG-iV-AQK.title" = "기타";
 
 /* Class = "NSTextFieldCell"; title = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed."; ObjectID = "Luv-2B-9v8"; */
 "Luv-2B-9v8.title" = "디렉토리를 콜론(:)으로 구분하십시오. 상대경로와 경로문자열의 끝에 와일드카드(*)를 사용할 수 있습니다.";
 
 /* Class = "NSTextFieldCell"; title = "Please enter a comma-separated list of strings."; ObjectID = "Mk1-sv-QB8"; */
 "Mk1-sv-QB8.title" = "문자열 목록은 쉼표로 구분하여 입력하십시오.";
-
-/* Class = "NSTextFieldCell"; title = "If enabled, all ASS subtitles will be drawn using the styles below."; ObjectID = "OcF-0z-7qe"; */
-"OcF-0z-7qe.title" = "선택하면 모든 ASS 자막은 아래 설정에 따라 표시됩니다.";
 
 /* Class = "NSTextFieldCell"; title = "Text subtitles:"; ObjectID = "Qda-dp-nhg"; */
 "Qda-dp-nhg.title" = "텍스트 자막";
@@ -145,11 +139,8 @@
 /* Class = "NSBox"; title = "Margin"; ObjectID = "pRe-wv-VVi"; */
 "pRe-wv-VVi.title" = "여백";
 
-/* Class = "NSButtonCell"; title = "Ignore ASS styles"; ObjectID = "rZf-bj-qbV"; */
-"rZf-bj-qbV.title" = "모든 ASS 효과 무시";
-
 /* Class = "NSTextFieldCell"; title = "Auto load:"; ObjectID = "raf-Yu-ck0"; */
-"raf-Yu-ck0.title" = "자동 자막열기:";
+"raf-Yu-ck0.title" = "자동 자막열기";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "slU-Ox-aeF"; */
 "slU-Ox-aeF.title" = "가운데";
@@ -180,3 +171,9 @@
 
 /* Class = "NSMenuItem"; title = "Left"; ObjectID = "zml-kt-LN8"; */
 "zml-kt-LN8.title" = "왼쪽";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[0]" = "메인 자막";
+
+/* Class = "NSSegmentedCell"; liY-E6-HCB.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "liY-E6-HCB"; */
+"liY-E6-HCB.ibShadowedLabels[1]" = "보조 자막";

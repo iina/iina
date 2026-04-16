@@ -29,7 +29,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   var preferenceTabImage: NSImage {
-    return NSImage(named: NSImage.Name("pref_ui"))!
+    return makeSymbol("macwindow", fallbackImage: "pref_ui")
   }
 
   static var oscToolbarButtons: [Preference.ToolBarButton] {
@@ -39,7 +39,7 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   }
 
   override var sectionViews: [NSView] {
-    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView, sectionPictureInPictureView]
+    return [sectionAppearanceView, sectionWindowView, sectionOSCView, sectionOSDView, sectionThumbnailView, sectionPictureInPictureView, sectionAccessibilityView]
   }
 
   private let toolbarSettingsSheetController = PrefOSCToolbarSettingsSheetController()
@@ -50,7 +50,8 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
   @IBOutlet var sectionOSDView: NSView!
   @IBOutlet var sectionThumbnailView: NSView!
   @IBOutlet var sectionPictureInPictureView: NSView!
-    
+  @IBOutlet var sectionAccessibilityView: NSView!
+
   @IBOutlet weak var themeMenu: NSMenu!
   @IBOutlet weak var oscPreviewImageView: NSImageView!
   @IBOutlet weak var oscPositionPopupButton: NSPopUpButton!
@@ -86,18 +87,6 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     setupGeometryRelatedControls()
     setupResizingRelatedControls()
     setupPipBehaviorRelatedControls()
-
-    let removeThemeMenuItemWithTag = { (tag: Int) in
-      if let item = self.themeMenu.item(withTag: tag) {
-        self.themeMenu.removeItem(item)
-      }
-    }
-    if #available(macOS 10.14, *) {
-      removeThemeMenuItemWithTag(Preference.Theme.mediumLight.rawValue)
-      removeThemeMenuItemWithTag(Preference.Theme.ultraDark.rawValue)
-    } else {
-      removeThemeMenuItemWithTag(Preference.Theme.system.rawValue)
-    }
   }
 
   @IBAction func oscPositionPopupBtnAction(_ sender: NSPopUpButton) {
@@ -163,14 +152,14 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
 
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
-    let buttons = PrefUIViewController.oscToolbarButtons
-    for buttonType in buttons {
-      let button = NSImageView()
-      button.image = buttonType.image()
-      button.translatesAutoresizingMaskIntoConstraints = false
-      let buttonWidth = buttons.count == 5 ? "20" : "24"
-      Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(24)]"], ["btn": button])
+    for buttonType in PrefUIViewController.oscToolbarButtons {
+      let button = NSButton()
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType)
       oscToolbarStackView.addView(button, in: .trailing)
+      // Button is actually disabled so that its mouseDown goes to its superview instead
+      button.isEnabled = false
+      // But don't gray it out
+      (button.cell! as! NSButtonCell).imageDimsWhenDisabled = false
     }
   }
 
@@ -234,6 +223,10 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
 
   private func setSubViews(of view: NSBox, enabled: Bool) {
     view.contentView?.subviews.forEach { ($0 as? NSControl)?.isEnabled = enabled }
+  }
+
+  @IBAction func disableAnimationsHelpAction(_ sender: Any) {
+    NSWorkspace.shared.open(URL(string: AppData.disableAnimationsHelpLink)!)
   }
 }
 

@@ -11,69 +11,21 @@ import Cocoa
 fileprivate extension NSUserInterfaceItemIdentifier {
   static let openFile = NSUserInterfaceItemIdentifier("openFile")
   static let openURL = NSUserInterfaceItemIdentifier("openURL")
-  static let resumeLast = NSUserInterfaceItemIdentifier("resumeLast")
 }
 
 fileprivate extension NSColor {
-  static let initialWindowActionButtonBackground: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowActionButtonBackground)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0)
-    }
-  }()
-  static let initialWindowActionButtonBackgroundHover: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowActionButtonBackgroundHover)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0.25)
-    }
-  }()
-  static let initialWindowActionButtonBackgroundPressed: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowActionButtonBackgroundPressed)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0.35)
-    }
-  }()
-  static let initialWindowLastFileBackground: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowLastFileBackground)!
-    } else {
-      return NSColor(calibratedWhite: 1, alpha: 0.1)
-    }
-  }()
-  static let initialWindowLastFileBackgroundHover: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowLastFileBackgroundHover)!
-    } else {
-      return NSColor(calibratedWhite: 0.5, alpha: 0.1)
-    }
-  }()
-  static let initialWindowLastFileBackgroundPressed: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowLastFileBackgroundPressed)!
-    } else {
-      return NSColor(calibratedWhite: 0, alpha: 0.1)
-    }
-  }()
-  static let initialWindowBetaLabel: NSColor = {
-    if #available(macOS 10.14, *) {
-      return NSColor(named: .initialWindowBetaLabel)!
-    } else {
-      return NSColor(calibratedRed: 1, green: 0.6, blue: 0.2, alpha: 1)
-    }
-  }()
+  static let initialWindowActionButtonBackground = NSColor(named: .initialWindowActionButtonBackground)!
+  static let initialWindowActionButtonBackgroundHover = NSColor(named: .initialWindowActionButtonBackgroundHover)!
+  static let initialWindowActionButtonBackgroundPressed = NSColor(named: .initialWindowActionButtonBackgroundPressed)!
+  static let initialWindowLastFileBackground = NSColor(named: .initialWindowLastFileBackground)!
+  static let initialWindowLastFileBackgroundHover = NSColor(named: .initialWindowLastFileBackgroundHover)!
+  static let initialWindowLastFileBackgroundPressed = NSColor(named: .initialWindowLastFileBackgroundPressed)!
+  static let initialWindowBetaLabel = NSColor(named: .initialWindowBetaLabel)!
+  static let initialWindowNightlyLabel = NSColor(named: .initialWindowNightlyLabel)!
+  static let initialWindowDebugLabel = NSColor(named: .initialWindowDebugLabel)!
 }
 
 fileprivate class GrayHighlightRowView: NSTableRowView {
-  private func fillWithColor(_ color: NSColor) {
-    let selectionRect = NSInsetRect(self.bounds, 2.5, 2.5)
-    color.setFill()
-    let selectionPath = NSBezierPath.init(roundedRect: selectionRect, xRadius: 4, yRadius: 4)
-    selectionPath.fill()
-  }
-  
   override func drawSelection(in dirtyRect: NSRect) {
     if self.selectionHighlightStyle != .none {
       let selectionRect = NSInsetRect(self.bounds, 0, 0)
@@ -113,6 +65,7 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var leftOverlayView: NSView!
   @IBOutlet weak var mainView: NSView!
   @IBOutlet weak var betaIndicatorView: BetaIndicatorView!
+  @IBOutlet weak var betaTextField: NSTextField!
   @IBOutlet weak var lastFileContainerView: InitialWindowViewActionButton!
   @IBOutlet weak var lastFileIcon: NSImageView!
   @IBOutlet weak var lastFileNameLabel: NSTextField!
@@ -138,7 +91,7 @@ class InitialWindowController: NSWindowController {
   }
 
   lazy var recentDocuments: [URL] = {
-    NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+    makeRecentDocumentsList()
   }()
   private var lastPlaybackURL: URL?
 
@@ -151,9 +104,18 @@ class InitialWindowController: NSWindowController {
     fatalError("init(coder:) has not been implemented")
   }
 
+  private func makeRecentDocumentsList() -> [URL] {
+    // Need to call resolvingSymlinksInPath() on both sides, because it changes "/private/var" to "/var" as a special case,
+    // even though "/var" points to "/private/var" (i.e. it changes it the opposite direction from what is expected).
+    // This is probably a kludge on Apple's part to avoid breaking legacy FreeBSD code.
+    NSDocumentController.shared.recentDocumentURLs.filter { $0.resolvingSymlinksInPath() != lastPlaybackURL?.resolvingSymlinksInPath() }
+  }
+
   override func windowDidLoad() {
     super.windowDidLoad()
     loaded = true
+
+    appIcon.unregisterDraggedTypes()
 
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden
@@ -163,10 +125,24 @@ class InitialWindowController: NSWindowController {
 
     mainView.wantsLayer = true
 
-    let (version, build) = Utility.iinaVersion()
-    let isStableRelease = !version.contains("-")
-    versionLabel.stringValue = isStableRelease ? version : "\(version) (\(build))"
-    betaIndicatorView.isHidden = isStableRelease
+    let infoDict = InfoDictionary.shared
+    let (version, build) = infoDict.version
+
+    betaTextField.stringValue = infoDict.buildType.description
+
+    switch infoDict.buildType {
+    case .release:
+      versionLabel.stringValue = version
+    case .beta:
+      versionLabel.stringValue = "\(version) (build \(build))"
+      betaIndicatorView.isHidden = false
+    case .nightly:
+      versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
+      betaIndicatorView.isHidden = false
+    case .debug:
+      versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
+      betaIndicatorView.isHidden = false
+    }
 
     loadLastPlaybackInfo()
 
@@ -188,20 +164,14 @@ class InitialWindowController: NSWindowController {
 
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
-    if #available(macOS 10.14, *) {
-      window.appearance = NSAppearance(iinaTheme: theme)
-      if #available(macOS 10.16, *) {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = window.effectiveAppearance.isDark ?
-          [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
-          [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
-        leftOverlayView.wantsLayer = true
-        leftOverlayView.layer = gradientLayer
-      }
-    } else {
-      window.appearance = NSAppearance(named: .vibrantDark)
-      mainView.layer?.backgroundColor = CGColor(gray: 0.1, alpha: 1)
-      visualEffectView.material = .ultraDark
+    window.appearance = NSAppearance(iinaTheme: theme)
+    if #available(macOS 10.16, *) {
+      let gradientLayer = CAGradientLayer()
+      gradientLayer.colors = window.effectiveAppearance.isDark ?
+        [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
+        [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
+      leftOverlayView.wantsLayer = true
+      leftOverlayView.layer = gradientLayer
     }
   }
 
@@ -240,8 +210,21 @@ class InitialWindowController: NSWindowController {
 
   func reloadData() {
     loadLastPlaybackInfo()
-    recentDocuments = NSDocumentController.shared.recentDocumentURLs.filter { $0 != lastPlaybackURL }
+    recentDocuments = makeRecentDocumentsList()
     recentFilesTableView.reloadData()
+
+    if Logger.enabled && Logger.Level.preferred >= .verbose {
+      let last = lastPlaybackURL.flatMap { $0.resolvingSymlinksInPath().path } ?? "<none>"
+      Logger.log("InitialWindow.reloadData(): LastPlaybackURL: \(last)", level: .verbose)
+
+      for (index, url) in NSDocumentController.shared.recentDocumentURLs.enumerated() {
+        Logger.log("InitialWindow.reloadData(): RecentDocuments_Unfiltered[\(index)]: \(url.resolvingSymlinksInPath().path)", level: .verbose)
+      }
+
+      for (index, url) in recentDocuments.enumerated() {
+        Logger.log("InitialWindow.reloadData(): Loaded RecentDocuments[\(index)]: \(url.resolvingSymlinksInPath().path)", level: .verbose)
+      }
+    }
     
     if lastFileContainerView.isHidden && recentFilesTableView.numberOfRows > 0 {
       recentFilesTableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
@@ -269,7 +252,7 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
     return [
       "filename": url.lastPathComponent,
       "docIcon": NSWorkspace.shared.icon(forFile: url.path)
-    ]
+    ] as [String: Any]
   }
 
   // facilitates highlight on hover
@@ -345,10 +328,10 @@ extension InitialWindowController: NSTableViewDelegate, NSTableViewDataSource {
 
   func updateLastFileButtonHighlight() {
     if recentFilesTableView.selectedRow >= 0 {
-      // remove "LastFle" button highlight
+      // remove "LastFile" button highlight
       lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowActionButtonBackground.cgColor
     } else {
-      // re-highlight "LastFle" button
+      // re-highlight "LastFile" button
       lastFileContainerView.layer?.backgroundColor = NSColor.initialWindowLastFileBackground.cgColor
     }
   }
@@ -383,8 +366,6 @@ class InitialWindowViewActionButton: NSView {
   var hoverBackground = NSColor.initialWindowActionButtonBackgroundHover
   var pressedBackground = NSColor.initialWindowActionButtonBackgroundPressed
 
-  var action: Selector?
-
   override func awakeFromNib() {
     self.wantsLayer = true
     self.layer?.cornerRadius = 6
@@ -412,9 +393,9 @@ class InitialWindowViewActionButton: NSView {
   override func mouseDown(with event: NSEvent) {
     self.layer?.backgroundColor = pressedBackground.cgColor
     if self.identifier == .openFile {
-      (NSApp.delegate as! AppDelegate).openFile(self)
+      AppDelegate.shared.openFile(self)
     } else if self.identifier == .openURL {
-      (NSApp.delegate as! AppDelegate).openURL(self)
+      AppDelegate.shared.openURL(self)
     } else {
       if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
         let windowController = window?.windowController as? InitialWindowController {
@@ -433,27 +414,43 @@ class InitialWindowViewActionButton: NSView {
 class BetaIndicatorView: NSView {
 
   @IBOutlet var betaPopover: NSPopover!
+  @IBOutlet var announcementLabel: NSTextField!
   @IBOutlet var text1: NSTextField!
   @IBOutlet var text2: NSTextField!
 
   override func awakeFromNib() {
-    self.layer?.backgroundColor = NSColor.initialWindowBetaLabel.cgColor
+    let buildType = InfoDictionary.shared.buildType
+    switch buildType {
+    case .nightly:
+      self.layer?.backgroundColor = NSColor.initialWindowNightlyLabel.cgColor
+    case .beta:
+      self.layer?.backgroundColor = NSColor.initialWindowBetaLabel.cgColor
+    case .debug:
+      self.layer?.backgroundColor = NSColor.initialWindowDebugLabel.cgColor
+    default:
+      break
+    }
+
+    announcementLabel.stringValue = String(format: NSLocalizedString("initial.announcement", comment: "Version announcement"), buildType.rawValue)
+    text1.setHTMLValue(NSLocalizedString("initial." + buildType.rawValue.lowercased() + ".desc", comment: "Build type desc"))
+    text2.setHTMLValue(NSLocalizedString("initial.bug_report", comment: "Bug report desc"))
+
     self.layer?.cornerRadius = 4
     self.addTrackingArea(NSTrackingArea(rect: self.bounds, options: [.activeInKeyWindow, .mouseEnteredAndExited], owner: self, userInfo: nil))
-
-    text1.setHTMLValue(text1.stringValue)
-    text2.setHTMLValue(text2.stringValue)
   }
 
   override func mouseEntered(with event: NSEvent) {
+    guard InfoDictionary.shared.buildType != .debug else { return }
     NSCursor.pointingHand.push()
   }
 
   override func mouseExited(with event: NSEvent) {
+    guard InfoDictionary.shared.buildType != .debug else { return }
     NSCursor.pop()
   }
 
   override func mouseUp(with event: NSEvent) {
+    guard InfoDictionary.shared.buildType != .debug else { return }
     if betaPopover.isShown {
       betaPopover.close()
     } else {

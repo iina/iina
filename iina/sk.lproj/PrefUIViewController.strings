@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
 "3CY-YS-rG6.title" = "Použiť ľavé/pravé tlačítko na:";
 
+/* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
+"5Nk-Mu-V2I.title" = "Base remaining time on playback speed";
+
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
 
@@ -22,14 +25,20 @@
 /* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
 "7td-lH-8aK.title" = "Zmeniť veľkosť okna na:";
 
-/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
-"82A-XQ-BvS.title" = "Automaticky skryť po:";
+/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "XOh-46-9Jf"; */
+"XOh-46-9Jf.title" = "Automaticky skryť po:";
 
 /* Class = "NSMenuItem"; title = "bottom"; ObjectID = "92n-Uq-o4G"; */
 "92n-Uq-o4G.title" = "dole";
 
+/* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
+"9IR-Sf-wMq.title" = "Ak je funkcia obmedzenia pohybu povolená v možnostiach prístupnosti systému macOS, IINA obmedzí pohyblivé prvky používateľského rozhrania, o ktorých je známe, že spôsobujú problémy ľuďom s vestibulárnymi poruchami. Ak by to nebolo dostačujúce, toto nastavenie bude možné použiť na ďalšie obmedzenie pohybu odstránením animácií používateľského rozhrania.";
+
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% obrazovky";
+
+/* Class = "NSTextFieldCell"; title = "Accessibility:"; ObjectID = "AYW-Xu-ySw"; */
+"AYW-Xu-ySw.title" = "Dostupnosť:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "Okno:";
@@ -42,6 +51,9 @@
 
 /* Class = "NSButtonCell"; title = "When media is opened manually"; ObjectID = "CJE-ap-IH8"; */
 "CJE-ap-IH8.title" = "Keď je súbor otvorený manuálne";
+
+/* Class = "NSButtonCell"; title = "File start"; ObjectID = "DAm-C4-5BQ"; */
+"DAm-C4-5BQ.title" = "Otvorenie súboru";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Zobraziť zostávajúci čas";
@@ -82,6 +94,9 @@
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
 "MR7-Ac-SAO.title" = "1x veľkosť videa";
 
+/* Class = "NSButtonCell"; title = "Speed"; ObjectID = "MVv-Mx-GTD"; */
+"MVv-Mx-GTD.title" = "Rýchlosť";
+
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "Automaticky skryť po:";
 
@@ -97,20 +112,29 @@
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "Počiatočná pozícia okna:";
 
+/* Class = "NSTextFieldCell"; title = "Suppress messages for:"; ObjectID = "RE5-Cf-ed9"; */
+"RE5-Cf-ed9.title" = "Potláčať správy pre:";
+
+/* Class = "NSButtonCell"; title = "Seek"; ObjectID = "RuR-Df-K2G"; */
+"RuR-Df-K2G.title" = "Posunúť";
+
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Vždy zobraziť na vrchu počas prehrávania";
 
+/* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
+"ih8-5a-PYY.title" = "Vždy zobrazovať plávajúci stav navrchu v záhlaví";
+
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Rýchlosť";
 
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
-"TdN-pM-HHk.title" = "Stredne svetlý";
-
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "Výška:";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
+"Ufv-Hk-vL5.title" = "Prevent scroll wheel from changing volume";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "bodov";
@@ -139,6 +163,9 @@
 /* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
 "baY-O6-fcB.title" = "Zapnúť/vypnúť Picture-in-Picture zmenšením/zväčšením okna";
 
+/* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
+"cib-Cg-9kn.title" = "Only for video files";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x veľkosť videa";
 
@@ -151,8 +178,14 @@
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
 "g06-Ja-Ot8.title" = "Ovládač:";
 
+/* Class = "NSButtonCell"; title = "Pause / Resume"; ObjectID = "i84-B8-gqD"; */
+"i84-B8-gqD.title" = "Pozastaviť / Spustiť";
+
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "obrazovky";
+
+/* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
+"kCe-Ck-dUJ.title" = "Include files on a mounted remote drive";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "Zobraziť čas a info o batérii počas prehrávania na celej obrazovke";
@@ -172,14 +205,14 @@
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "Prichytiť do stredu pri ťahaní";
 
+/* Class = "NSButtonCell"; title = "Disable animations"; ObjectID = "mjs-jg-wm1"; */
+"mjs-jg-wm1.title" = "Vypnúť animácie";
+
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
 "oJ8-74-L3z.title" = "Predchádzajúci / Ďalší Súbor";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "hore";
-
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
-"pV2-12-PmM.title" = "Veľmi tmavý";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
 "qbc-CY-bdK.title" = "do";
@@ -202,11 +235,14 @@
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "vyplniť obrazovku";
 
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
+"vnb-DF-4g5.title" = "Prevent scroll wheel from changing playback position";
+
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Povoliť OSD";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
-"xP1-Vh-27X.title" = "Panel Nástrojov:";
+"xP1-Vh-27X.title" = "Panel nástrojov:";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "xrJ-Um-BrJ"; */
 "xrJ-Um-BrJ.title" = "% obrazovky";

@@ -7,15 +7,15 @@
 */
 
 "cmd.ignore" = "Ігнараваць";
-"cmd.seek" = "Seek";
-"cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
-"cmd.cycle" = "Cycle";
+"cmd.seek" = "Пераматаць";
+"cmd.revert-seek" = "Перамотка назад";
+"cmd.set" = "Задаць";
+"cmd.cycle" = "Пераключыць";
 "cmd.cycle-values" = "Cycle in";
-"cmd.add" = "Change";
-"cmd.multiply" = "Multiply";
-"cmd.frame-step" = "Next frame";
-"cmd.frame-back-step" = "Previous frame";
+"cmd.add" = "Змяніць";
+"cmd.multiply" = "Памножыць";
+"cmd.frame-step" = "Наступны кадр";
+"cmd.frame-back-step" = "Папярэдні кадр";
 "cmd.ab-loop" = "A-B loop";
 "cmd.sub-seek" = "Subtitle seek";
 "cmd.playlist-next" = "Next media";
@@ -23,24 +23,24 @@
 "cmd.playlist-move" = "Move playlist item";
 "cmd.playlist-clear" = "Clear playlist";
 "cmd.playlist-remove" = "Remove current";
-"cmd.playlist-shuffle" = "Shuffle";
+"cmd.playlist-shuffle" = "Перамяшаць";
 "cmd.write-watch-later-config" = "Record play history";
-"cmd.stop" = "Stop";
-"cmd.quit" = "Quit";
+"cmd.stop" = "Спыніць";
+"cmd.quit" = "Выйсці";
 "cmd.quit-watch-later" = "Quit (save progress)";
-"cmd.screenshot" = "Screenshot";
+"cmd.screenshot" = "Скрыншот";
 "cmd.screenshot-to-file" = "Screenshot to file";
 "cmd.loadfile" = "Load file";
 "cmd.loadlist" = "Load playlist";
 "cmd.run" = "Run";
 
-"iina.flip" = "Flip";
-"iina.mirror" = "Mirror";
+"iina.flip" = "Перавярнуць";
+"iina.mirror" = "Адлюстраваць";
 
 "iina.toggle-pip" = "Toggle Picture-in-Picture";
 "iina.toggle-music-mode" = "Toggle Music Mode";
 "iina.open-file" = "Open file";
-"iina.open-url" = "Open URL";
+"iina.open-url" = "Адкрыць URL-адрас";
 "iina.video-panel" = "Video panel";
 "iina.audio-panel" = "Audio panel";
 "iina.sub-panel" = "Subtitle panel";
@@ -52,24 +52,25 @@
 "iina.toggle-flip" = "Toggle flip";
 "iina.toggle-mirror" = "Toggle mirror";
 "iina.save-playlist" = "Save current playlist";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
 "iina.delete-current-file" = "Delete current file";
 "iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
 "iina.find-online-subs" = "Find online subtitles";
 "iina.save-downloaded-sub" = "Save downloaded subtitle";
 
-"yes" = "Yes";
-"no" = "No";
-"to" = "to";
-"by" = "by";
-"in" = "in";
-"add" = "increase";
-"minus" = "decrease";
-"forward" = "forward";
-"backward" = "backward";
-"seek-to" = "to";
+"yes" = "Так";
+"no" = "Не";
+"to" = "на";
+"by" = "ад";
+"in" = "у";
+"add" = "павялічыць";
+"minus" = "паменшыць";
+"forward" = "наперад";
+"backward" = "назад";
+"seek-to" = "на";
 
-"relative" = "s";
-"absolute" = "s";
+"relative" = "с";
+"absolute" = "с";
 "absolute-percent" = "%";
 "relative-percent" = "%";
 "relative+exact" = "s (exact)";
@@ -77,13 +78,13 @@
 "absolute+keyframe" = "s (keyframe)";
 "absolute-percent+keyframe" = "% (keyframe)";
 
-"opt.pause" = "Pause";
-"opt.speed" = "Speed";
+"opt.pause" = "Паўза";
+"opt.speed" = "Хуткасць";
 
 "opt.window-scale" = "Window scale";
 
 "opt.video" = "Video track";
-"opt.video-aspect" = "Video aspect";
+"opt.video-aspect-override" = "Video aspect";
 "opt.contrast" = "Contrast";
 "opt.brightness" = "Brightness";
 "opt.gamma" = "Gamma";
@@ -100,12 +101,13 @@
 "opt.sub-pos" = "Subtitle position";
 "opt.sub-scale" = "Subtitle scale";
 "opt.sub-visibility" = "Subtitle visibility";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
 "opt.sub-ass-style-override" = "ASS style override";
 
 "opt.fullscreen" = "Fullscreen";
 "opt.ontop" = "Float on top";
 
-"opt.chapter" = "Chapter";
+"opt.chapter" = "Раздзел";
 
 "read.set" = "Set {{property}} to {{value}}";
 "read.add" = "{{property}} {{value}}";

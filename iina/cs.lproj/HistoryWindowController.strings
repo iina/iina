@@ -13,8 +13,8 @@
 /* Class = "NSWindow"; title = "Playback History"; ObjectID = "F0z-JX-Cv5"; */
 "F0z-JX-Cv5.title" = "Historie přehrávání";
 
-/* Class = "NSMenuItem"; title = "Reveal in Finder"; ObjectID = "FPK-nx-hvF"; */
-"FPK-nx-hvF.title" = "Zobrazit ve Finderu";
+/* Class = "NSMenuItem"; title = "Show in Finder"; ObjectID = "FPK-nx-hvF"; */
+"FPK-nx-hvF.title" = "Zobrazit v aplikaci Finder";
 
 /* Class = "NSMenuItem"; title = "Search in"; ObjectID = "Gx5-gP-rzr"; */
 "Gx5-gP-rzr.title" = "Prohledat:";
@@ -33,9 +33,6 @@
 
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
 "Wkp-Vn-JoJ.title" = "Názvy souborů";
-
-/* Class = "NSMenu"; title = "Context Menu"; ObjectID = "lR3-1E-Rwr"; */
-"lR3-1E-Rwr.title" = "Kontextové menu";
 
 /* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
 "mXt-wb-fgT.title" = "Přehrát v novém okně";

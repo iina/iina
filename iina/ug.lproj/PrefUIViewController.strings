@@ -13,6 +13,9 @@
 /* Class = "NSTextFieldCell"; title = "Use left/right button for:"; ObjectID = "3CY-YS-rG6"; */
 "3CY-YS-rG6.title" = "Use left/right button for:";
 
+/* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
+"5Nk-Mu-V2I.title" = "Base remaining time on playback speed";
+
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
 
@@ -22,14 +25,20 @@
 /* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
 "7td-lH-8aK.title" = "Resize window to:";
 
-/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "82A-XQ-BvS"; */
-"82A-XQ-BvS.title" = "Auto hide after:";
+/* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "XOh-46-9Jf"; */
+"XOh-46-9Jf.title" = "Auto hide after:";
 
 /* Class = "NSMenuItem"; title = "bottom"; ObjectID = "92n-Uq-o4G"; */
 "92n-Uq-o4G.title" = "bottom";
 
+/* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
+"9IR-Sf-wMq.title" = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations.";
+
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% of screen";
+
+/* Class = "NSTextFieldCell"; title = "Accessibility:"; ObjectID = "AYW-Xu-ySw"; */
+"AYW-Xu-ySw.title" = "Accessibility:";
 
 /* Class = "NSTextFieldCell"; title = "Window:"; ObjectID = "AmS-Sl-b2h"; */
 "AmS-Sl-b2h.title" = "Window:";
@@ -42,6 +51,9 @@
 
 /* Class = "NSButtonCell"; title = "When media is opened manually"; ObjectID = "CJE-ap-IH8"; */
 "CJE-ap-IH8.title" = "When media is opened manually";
+
+/* Class = "NSButtonCell"; title = "File start"; ObjectID = "DAm-C4-5BQ"; */
+"DAm-C4-5BQ.title" = "File start";
 
 /* Class = "NSButtonCell"; title = "Show remaining time instead of total duration"; ObjectID = "EAa-gN-8dL"; */
 "EAa-gN-8dL.title" = "Show remaining time instead of total duration";
@@ -82,6 +94,9 @@
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
 "MR7-Ac-SAO.title" = "1x video size";
 
+/* Class = "NSButtonCell"; title = "Speed"; ObjectID = "MVv-Mx-GTD"; */
+"MVv-Mx-GTD.title" = "Speed";
+
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
 "NUr-hY-gfo.title" = "Auto hide after:";
 
@@ -97,20 +112,29 @@
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
 "Ofm-qE-RgQ.title" = "Initial window position:";
 
+/* Class = "NSTextFieldCell"; title = "Suppress messages for:"; ObjectID = "RE5-Cf-ed9"; */
+"RE5-Cf-ed9.title" = "Suppress messages for:";
+
+/* Class = "NSButtonCell"; title = "Seek"; ObjectID = "RuR-Df-K2G"; */
+"RuR-Df-K2G.title" = "ئاتلاپ كېتىش";
+
 /* Class = "NSTextFieldCell"; title = "s"; ObjectID = "S8H-Xr-uVa"; */
 "S8H-Xr-uVa.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Always float on top while playing"; ObjectID = "SFX-ct-8MB"; */
 "SFX-ct-8MB.title" = "Always float on top while playing";
 
+/* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
+"ih8-5a-PYY.title" = "Always show float on top status in the title bar";
+
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Speed";
 
-/* Class = "NSMenuItem"; title = "Medium Light"; ObjectID = "TdN-pM-HHk"; */
-"TdN-pM-HHk.title" = "Medium Light";
-
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "Height:";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
+"Ufv-Hk-vL5.title" = "Prevent scroll wheel from changing volume";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "point";
@@ -139,6 +163,9 @@
 /* Class = "NSButtonCell"; title = "Toggle Picture-in-Picture by minimizing/un-minimizing the window"; ObjectID = "baY-O6-fcB"; */
 "baY-O6-fcB.title" = "Toggle Picture-in-Picture by minimizing/un-minimizing the window";
 
+/* Class = "NSButtonCell"; title = "Only for video files"; ObjectID = "cib-Cg-9kn"; */
+"cib-Cg-9kn.title" = "Only for video files";
+
 /* Class = "NSMenuItem"; title = "2x video size"; ObjectID = "dUG-QD-CXL"; */
 "dUG-QD-CXL.title" = "2x video size";
 
@@ -151,8 +178,14 @@
 /* Class = "NSTextFieldCell"; title = "On Screen Controller:"; ObjectID = "g06-Ja-Ot8"; */
 "g06-Ja-Ot8.title" = "On Screen Controller:";
 
+/* Class = "NSButtonCell"; title = "Pause / Resume"; ObjectID = "i84-B8-gqD"; */
+"i84-B8-gqD.title" = "Pause / Resume";
+
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "of the screen";
+
+/* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
+"kCe-Ck-dUJ.title" = "Include files on a mounted remote drive";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "Display time and battery info when in full screen";
@@ -172,14 +205,14 @@
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
 "mdD-if-Wqw.title" = "Snap to center when dragging";
 
+/* Class = "NSButtonCell"; title = "Disable animations"; ObjectID = "mjs-jg-wm1"; */
+"mjs-jg-wm1.title" = "Disable animations";
+
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
 "oJ8-74-L3z.title" = "Previous / Next Media";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "top";
-
-/* Class = "NSMenuItem"; title = "Ultra Dark"; ObjectID = "pV2-12-PmM"; */
-"pV2-12-PmM.title" = "Ultra Dark";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "qbc-CY-bdK"; */
 "qbc-CY-bdK.title" = "to the";
@@ -201,6 +234,9 @@
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "fit the screen";
+
+/* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
+"vnb-DF-4g5.title" = "Prevent scroll wheel from changing playback position";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Enable OSD";

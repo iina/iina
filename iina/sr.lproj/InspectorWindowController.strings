@@ -74,7 +74,7 @@
 "P65-zr-dOH.title" = "Selected";
 
 /* Class = "NSTextFieldCell"; title = "Chapters:"; ObjectID = "PBk-VC-4gu"; */
-"PBk-VC-4gu.title" = "Chapters:";
+"PBk-VC-4gu.title" = "Поглавља:";
 
 /* Class = "NSTextFieldCell"; title = "External"; ObjectID = "PLL-fC-blc"; */
 "PLL-fC-blc.title" = "External";
@@ -165,3 +165,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "Colorspace:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
+"zDk-Ie-EPs.headerCell.title" = "Name";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
+"x6R-q7-efY.headerCell.title" = "Value";

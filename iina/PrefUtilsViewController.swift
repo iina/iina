@@ -9,6 +9,10 @@
 import Cocoa
 import UniformTypeIdentifiers
 
+/// Set of import UTType identifiers which are unusual from IINA's other types. They must  be
+/// explicitly included because they are not a subtype of `audiovisual-content`.
+fileprivate let specialIdentifiers = ["io.iina.playlist", "io.iina.cue"]
+
 class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbeddable {
 
   override var nibName: NSNib.Name {
@@ -90,11 +94,17 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
         continue
       }
 
-      Logger.log("UTImportedType: \(identifier.quoted) ➤ \(exts)", level: .verbose)
+      Logger.log("\(identifier):", level: .verbose)
+
       for ext in exts {
         if #available(macOS 11.0, *) {
-          let uttypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
-          for uttype in uttypesForExt {
+          Logger.log("  \(ext):", level: .verbose)
+          let requiredSupertype: UTType? = specialIdentifiers.contains(identifier) ? nil : .audiovisualContent
+
+          let subtypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: requiredSupertype)
+
+          for uttype in subtypesForExt {
+            Logger.log("    \(uttype.identifier) ⊂ \(uttype.supertypes.map{$0.identifier.deletingPrefix("public.")})", level: .verbose)
             utiTargetSet.insert(uttype.identifier)
           }
         } else {
@@ -108,9 +118,9 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
     }
 
     for identifier in utiTargetSet {
-      Logger.log("Setting default for UTI: \(identifier.quoted)", level: .verbose)
       let status = LSSetDefaultRoleHandlerForContentType(identifier as CFString, .all, cfBundleID)
       if status == kOSReturnSuccess {
+        Logger.log("Set default for UTI: \(identifier.quoted)", level: .verbose)
         successCount += 1
       } else {
         Logger.log("Failed for \(identifier.quoted): return value \(status)", level: .error)

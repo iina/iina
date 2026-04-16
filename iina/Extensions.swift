@@ -529,6 +529,11 @@ extension String {
     return "\"\(self)\""
   }
 
+  func deletingPrefix(_ prefix: String) -> String {
+    guard self.hasPrefix(prefix) else { return self }
+    return String(self.dropFirst(prefix.count))
+  }
+
   mutating func deleteLast(_ num: Int) {
     removeLast(Swift.min(num, count))
   }

@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "Uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>."; ObjectID = "3aN-Hg-GkT"; */
-"3aN-Hg-GkT.title" = "環境設定 > 一般 から「ベータ版のアップデート通知を受け取る」のチェックを外し、<a href=\"https://iina.io\">公式サイト</a>から最新の安定版をインストールしてください。";
+"3aN-Hg-GkT.title" = "設定 > 一般 から \"ベータ版のアップデート通知を受け取る\" のチェックを外し、<a href=\"https://iina.io\">公式Webサイト</a>から安定版をインストールしてください。";
 
 /* Class = "NSTextFieldCell"; title = "Report to us via <a href=\"mailto:developers@iina.io\">email</a> or <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>."; ObjectID = "BIz-NQ-0qD"; */
 "BIz-NQ-0qD.title" = "<a href=\"mailto:developers@iina.io\">メール</a> または <a href=\"https://github.com/iina/iina/issues\">GitHub issue</a>に報告してください。";
@@ -11,10 +11,10 @@
 "H7D-2H-wQn.title" = "ベータ版のIINAを利用中です";
 
 /* Class = "NSTextFieldCell"; title = "Found a bug?"; ObjectID = "I6R-Jl-2Jk"; */
-"I6R-Jl-2Jk.title" = "不具合を見つけましたか？";
+"I6R-Jl-2Jk.title" = "バグを見つけましたか?";
 
 /* Class = "NSTextFieldCell"; title = "Resume"; ObjectID = "KWZ-BM-GBN"; */
-"KWZ-BM-GBN.title" = "続きから再生";
+"KWZ-BM-GBN.title" = "再開";
 
 /* Class = "NSTextFieldCell"; title = "BETA"; ObjectID = "g2g-dy-qBH"; */
 "g2g-dy-qBH.title" = "ベータ";

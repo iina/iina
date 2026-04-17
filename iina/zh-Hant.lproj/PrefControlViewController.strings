@@ -76,6 +76,9 @@
 /* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
 "SYg-hW-b6r.title" = "調整音量";
 
+/* Class = "NSMenuItem"; title = "Adjust playback speed"; ObjectID = "XXq-G1-9sl"; */
+"XXq-G1-9sl.title" = "Adjust playback speed";
+
 /* Class = "NSMenuItem"; title = "Reset speed"; ObjectID = "Vv4-AU-kGj"; */
 "Vv4-AU-kGj.title" = "Reset speed";
 
@@ -150,6 +153,12 @@
 
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
 "wcS-tP-wav.title" = "尋找";
+
+/* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "CXf-Ca-OhE"; */
+"CXf-Ca-OhE.title" = "調整音量";
+
+/* Class = "NSMenuItem"; title = "Adjust playback speed"; ObjectID = "nJZ-9M-DHk"; */
+"nJZ-9M-DHk.title" = "Adjust playback speed";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "無";

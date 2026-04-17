@@ -8,6 +8,17 @@
 
 import Cocoa
 
+// MARK: - Liquid Glass strategy toggle
+
+/// Toggle between the two Liquid Glass strategies for visual comparison.
+/// `true`  — set OSC container as `NSGlassEffectView.contentView` (per Apple's contract,
+///           enables adaptive tint / legibility treatments / defined z-order).
+/// `false` — legacy path: `addSubview` OSC controls directly into the glass view.
+///           Kept temporarily so the two renderings can be A/B compared.
+/// Flip this and rebuild; the new path is recommended and should become the only path
+/// once validated across OSC, OSD, sidebar, and titlebar.
+let kUseGlassContentViewAPI = true
+
 // MARK: - Draggable Glass Effect View
 
 /// NSGlassEffectView subclass that forwards background-drag events to a ControlBarView.
@@ -24,6 +35,18 @@ class DraggableGlassEffectView: NSGlassEffectView {
   }
   override func mouseUp(with event: NSEvent) {
     controlBar?.handleDragMouseUp(in: self)
+  }
+}
+
+/// Content wrapper that lets mouse events on empty areas fall through to the parent
+/// `NSGlassEffectView` so background-drag handling still works when this view is used
+/// as the glass view's `contentView`. Clicks landing on a real subview (button/slider)
+/// are delivered normally.
+@available(macOS 26, *)
+class DragPassthroughView: NSView {
+  override func hitTest(_ point: NSPoint) -> NSView? {
+    let hit = super.hitTest(point)
+    return hit === self ? nil : hit
   }
 }
 
@@ -58,7 +81,6 @@ class ControlBarView: NSVisualEffectView {
 
       let glass = DraggableGlassEffectView()
       glass.controlBar = self
-      glass.alphaValue = 0.3
       glass.cornerRadius = 10
       glass.translatesAutoresizingMaskIntoConstraints = false
       parent.addSubview(glass, positioned: .above, relativeTo: self)
@@ -69,24 +91,50 @@ class ControlBarView: NSVisualEffectView {
         glass.bottomAnchor.constraint(equalTo: self.bottomAnchor),
       ])
 
-      // Migrate subviews and their constraints into the glass view
+      // Migrate subviews and their constraints off of `self`
       let subviewsToMove = Array(self.subviews)
       let constraintsToMigrate = self.constraints.filter { c in
         subviewsToMove.contains(where: { c.firstItem === $0 || c.secondItem === $0 })
       }
-      for subview in subviewsToMove {
-        glass.addSubview(subview)
-      }
-      for old in constraintsToMigrate {
-        let first: AnyObject = (old.firstItem === self) ? glass : old.firstItem ?? glass
-        let second: AnyObject? = (old.secondItem === self) ? glass : old.secondItem
-        let migrated = NSLayoutConstraint(
-          item: first, attribute: old.firstAttribute,
-          relatedBy: old.relation,
-          toItem: second, attribute: old.secondAttribute,
-          multiplier: old.multiplier, constant: old.constant)
-        migrated.priority = old.priority
-        migrated.isActive = true
+
+      if kUseGlassContentViewAPI {
+        // Recommended: host OSC controls inside glass.contentView so AppKit applies its
+        // adaptive tint / legibility treatments and guarantees correct z-order.
+        let wrapper = DragPassthroughView()
+        wrapper.translatesAutoresizingMaskIntoConstraints = false
+        for subview in subviewsToMove {
+          wrapper.addSubview(subview)
+        }
+        for old in constraintsToMigrate {
+          let first: AnyObject = (old.firstItem === self) ? wrapper : old.firstItem ?? wrapper
+          let second: AnyObject? = (old.secondItem === self) ? wrapper : old.secondItem
+          let migrated = NSLayoutConstraint(
+            item: first, attribute: old.firstAttribute,
+            relatedBy: old.relation,
+            toItem: second, attribute: old.secondAttribute,
+            multiplier: old.multiplier, constant: old.constant)
+          migrated.priority = old.priority
+          migrated.isActive = true
+        }
+        glass.contentView = wrapper
+      } else {
+        // Legacy: violates Apple's contract (subviews other than contentView have undefined
+        // z-order vs. the glass layer). Kept behind the toggle for A/B visual comparison.
+        glass.alphaValue = 0.1
+        for subview in subviewsToMove {
+          glass.addSubview(subview)
+        }
+        for old in constraintsToMigrate {
+          let first: AnyObject = (old.firstItem === self) ? glass : old.firstItem ?? glass
+          let second: AnyObject? = (old.secondItem === self) ? glass : old.secondItem
+          let migrated = NSLayoutConstraint(
+            item: first, attribute: old.firstAttribute,
+            relatedBy: old.relation,
+            toItem: second, attribute: old.secondAttribute,
+            multiplier: old.multiplier, constant: old.constant)
+          migrated.priority = old.priority
+          migrated.isActive = true
+        }
       }
 
       self.isHidden = true

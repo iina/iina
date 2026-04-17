@@ -13,11 +13,12 @@
 "general.logout" = "ログアウト";
 "general.ok" = "OK";
 "general.cancel" = "キャンセル";
-"general.username" = "ユーザー名";
+"general.username" = "ユーザ名";
 "general.password" = "パスワード";
+"general.na" = "N/A";
 
-"input.value_is_empty" = "この項目は必須です。";
-"input.already_exists" = "すでに他の項目で使用されています。";
+"input.value_is_empty" = "値は空欄にできません。";
+"input.already_exists" = "値はすでに存在します。";
 
 // Guide Window
 "guide.highlights" = "ハイライト";
@@ -26,28 +27,28 @@
 
 // Initial Window
 "initial.announcement" = "IINAバージョン %@ を使用しています";
-"initial.beta.desc" = "リリースバージョンに戻したい場合は、「設定 > 一般」の「ベータアップデートを受信」のチェックを外してください。その後 <a href=\"https://iina.io\">公式ウェブサイト</a> から安定版リリースをインストールします。";
-"initial.nightly.desc" = "";
-"initial.debug.desc" = "デバッグビルドは大抵性能的に最適化されていません。そのため、常用することは推奨しません。デバッグビルドは自動アップデートに対応していません。";
-"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> で報告";
+"initial.beta.desc" = "リリースバージョンにロールバックする場合は、設定 > 一般 の \"ベータアップデートを受信\" のチェックを外し、<a href=\"https://iina.io\">公式Webサイト</a> から安定版リリースをインストールしてください。";
+"initial.nightly.desc" = "Nightlyを常用することは推奨されません。Nightlyビルドは、現在自動アップデートに対応していません。新しいビルドは<a href=\"https://nightly.iina.io\">Nightly Webサイト</a>から手動でダウンロードしてください。";
+"initial.debug.desc" = "デバッグビルドは通常パフォーマンスが最適化されていないので、常用することは推奨されません。デバッグビルドは自動アップデートに対応していません。";
+"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> で報告してください。";
 
 // Inspector Window
 "inspector.error" = "エラー";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "バッファ中… %d%%";
-"main.opening_stream" = "ストリームを展開中…";
+"main.buffering_indicator" = "バッファリング中… %d%%";
+"main.opening_stream" = "ストリームを開いています…";
 "main.seeking_indicator" = "シーク中…";
 "osc.precision" = "精度";
 "osc.1s" = "1 秒";
-"osc.100ms" = "100 ミリ秒";
-"osc.10ms" = "10 ミリ秒";
-"osc.1ms" = "1 ミリ秒";
+"osc.100ms" = "100ミリ秒";
+"osc.10ms" = "10ミリ秒";
+"osc.1ms" = "1ミリ秒";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "デフォルト";
 "quicksetting.item_none" = "なし";
-"quicksetting.hwdec" = "ハードウェアデコード";
+"quicksetting.hwdec" = "ハードウェアデコーディング";
 "quicksetting.deinterlace" = "インターレース解除";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "隠す";
@@ -61,8 +62,8 @@
 "eq.preset.deep" = "ディープ";
 "eq.preset.electronic" = "エレクトロニック";
 "eq.preset.hip_hop" = "ヒップホップ";
-"eq.preset.increase_bass" = "低音を増やす";
-"eq.preset.increase_treble" = "高域を増やす";
+"eq.preset.increase_bass" = "低音を上げる";
+"eq.preset.increase_treble" = "高音を上げる";
 "eq.preset.increase_vocal" = "ボーカルを強調";
 "eq.preset.jazz" = "ジャズ";
 "eq.preset.latin" = "ラテン";
@@ -247,7 +248,7 @@
 "alert.mpv_error" = "内部エラー %@ (%@) がユーザーオプション %@ の設定中に発生しました。";
 
 "alert.unsupported_audio" = "対応していない外部のオーディオファイルです。";
-"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_video" = "対応していない外部のビデオファイルです。";
 "alert.unsupported_sub" = "対応していない外部の字幕ファイルです。";
 "alert.unsupported_url" = "対応していないURLです。";
 "alert.wrong_url_format" = "URLの形式が間違っています。";
@@ -393,9 +394,9 @@
 "hwdec.auto" = "ハードウェアデコーディングを使用します。多くのビデオフィルターは正常に動作しません。";
 "hwdec.auto-copy" = "ハードウェアデコーディングを使用します。二倍のメモリを使用しますが、ビデオフィルターを適用できます。";
 
-"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
-"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"gaplessAudio.no" = "連続したオーディオファイルを再生する場合は、ファイル変更時に無音または中断が生じることがあります。";
+"gaplessAudio.weak" = "デコーダ出力のオーディオフォーマットを変更した場合、オーディオデバイスが閉じられてから再度開かれるため、ギャップレス再生が中断されます。";
+"gaplessAudio.yes" = "オーディオデバイスは、最初に再生するファイルで選択されたパラメータを使用して開かれた後、ギャップレス再生のため開かれたままになります。次のファイルが再サンプリングされる場合があります。";
 
 "subencoding.auto" = "自動検出";
 
@@ -435,7 +436,7 @@
 "touchbar.seek" = "シーク";
 "touchbar.time" = "再生位置";
 "touchbar.remainingTimeOrTotalDuration" = "残り時間/合計時間";
-"touchbar.toggle_pip" = "ピクチャー・イン・ピクチャーの切り替え";
+"touchbar.toggle_pip" = "ピクチャインピクチャの切り替え";
 
 // Plugin permissions
 

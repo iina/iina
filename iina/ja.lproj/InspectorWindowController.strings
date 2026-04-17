@@ -20,7 +20,7 @@
 "A4y-LL-x0z.title" = "ビットレート:";
 
 /* Class = "NSTextFieldCell"; title = "Mistimed Frames:"; ObjectID = "AYt-pH-UCi"; */
-"AYt-pH-UCi.title" = "フレームのずれ:";
+"AYt-pH-UCi.title" = "タイミングずれフレーム:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
 "AjU-1T-aGR.title" = "表示FPS:";
@@ -29,10 +29,10 @@
 "CrF-UR-udW.title" = "ドロップフレーム:";
 
 /* Class = "NSTextFieldCell"; title = "Hw Decoder:"; ObjectID = "DHh-ne-10f"; */
-"DHh-ne-10f.title" = "Hw デコーダー:";
+"DHh-ne-10f.title" = "HW デコーダ:";
 
 /* Class = "NSWindow"; title = "Inspector"; ObjectID = "F0z-JX-Cv5"; */
-"F0z-JX-Cv5.title" = "インスペクター";
+"F0z-JX-Cv5.title" = "インスペクタ";
 
 /* Class = "NSTextFieldCell"; title = "Language:"; ObjectID = "FIw-CH-b05"; */
 "FIw-CH-b05.title" = "言語:";
@@ -47,10 +47,10 @@
 "Fqo-1c-3L1.ibShadowedLabels[2]" = "ファイル";
 
 /* Class = "NSSegmentedCell"; Fqo-1c-3L1.ibShadowedLabels[3] = "Status"; ObjectID = "Fqo-1c-3L1"; */
-"Fqo-1c-3L1.ibShadowedLabels[3]" = "状態";
+"Fqo-1c-3L1.ibShadowedLabels[3]" = "状況";
 
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "I2E-6Z-Gnn"; */
-"I2E-6Z-Gnn.title" = "ドライバー:";
+"I2E-6Z-Gnn.title" = "ドライバ:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
 "JN9-3E-OJp.title" = "推定表示FPS";
@@ -74,7 +74,7 @@
 "P65-zr-dOH.title" = "選択";
 
 /* Class = "NSTextFieldCell"; title = "Chapters:"; ObjectID = "PBk-VC-4gu"; */
-"PBk-VC-4gu.title" = "チャプター数:";
+"PBk-VC-4gu.title" = "チャプタ数:";
 
 /* Class = "NSTextFieldCell"; title = "External"; ObjectID = "PLL-fC-blc"; */
 "PLL-fC-blc.title" = "外部";
@@ -92,7 +92,7 @@
 "UuR-M1-YLj.label" = "トラック一覧";
 
 /* Class = "NSTabViewItem"; label = "Status"; ObjectID = "VGm-BL-xOI"; */
-"VGm-BL-xOI.label" = "状態";
+"VGm-BL-xOI.label" = "状況";
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
 "WrI-Sr-O2S.label" = "ファイル";
@@ -128,7 +128,7 @@
 "it3-05-Pwu.title" = "チャンネル一覧:";
 
 /* Class = "NSTextFieldCell"; title = "Source ID:"; ObjectID = "jCY-og-BAa"; */
-"jCY-og-BAa.title" = "ソース ID:";
+"jCY-og-BAa.title" = "ソースID:";
 
 /* Class = "NSTextFieldCell"; title = "Bit Rate:"; ObjectID = "jyV-Pd-UvH"; */
 "jyV-Pd-UvH.title" = "ビットレート:";
@@ -152,19 +152,22 @@
 "sbO-Cn-gpI.title" = "合計A/V同期:";
 
 /* Class = "NSTextFieldCell"; title = "Watch"; ObjectID = "tNS-gW-PcC"; */
-"tNS-gW-PcC.title" = "監視する";
+"tNS-gW-PcC.title" = "視聴";
 
 /* Class = "NSTextFieldCell"; title = "Sample Rate:"; ObjectID = "vrP-XL-Weg"; */
 "vrP-XL-Weg.title" = "サンプルレート:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
-"xix-0S-ehE.title" = "デコーダー:";
+"xix-0S-ehE.title" = "デコーダ:";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "主要:";
+"1kw-LO-KmJ.title" = "原色:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
-"mLo-Wc-BoO.title" = "カラースペース:";
+"mLo-Wc-BoO.title" = "色空間:";
+
+/* Class = "NSTextFieldCell"; title = "Pixel Format:"; ObjectID = "UrR-u2-hFz"; */
+"UrR-u2-hFz.title" = "ピクセルフォーマット:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
 "zDk-Ie-EPs.headerCell.title" = "名前";

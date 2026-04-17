@@ -76,20 +76,23 @@
 /* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "SYg-hW-b6r"; */
 "SYg-hW-b6r.title" = "音量調節";
 
+/* Class = "NSMenuItem"; title = "Adjust playback speed"; ObjectID = "XXq-G1-9sl"; */
+"XXq-G1-9sl.title" = "再生速度を調整";
+
 /* Class = "NSMenuItem"; title = "Reset speed"; ObjectID = "Vv4-AU-kGj"; */
-"Vv4-AU-kGj.title" = "Reset speed";
+"Vv4-AU-kGj.title" = "速度をリセット";
 
 /* Class = "NSMenuItem"; title = "Adjust playback speed"; ObjectID = "XXq-G1-9sl"; */
-"XXq-G1-9sl.title" = "Adjust playback speed";
+"XXq-G1-9sl.title" = "再生速度を調整";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for volume:"; ObjectID = "YQH-1a-WcM"; */
 "YQH-1a-WcM.title" = "音量調節の感度:";
 
 /* Class = "NSMenuItem"; title = "Reset speed"; ObjectID = "Zbp-ok-mMJ"; */
-"Zbp-ok-mMJ.title" = "Reset speed";
+"Zbp-ok-mMJ.title" = "速度をリセット";
 
 /* Class = "NSTextFieldCell"; title = "Sensitivity for speed:"; ObjectID = "aa0-Qo-1nw"; */
-"aa0-Qo-1nw.title" = "Sensitivity for speed:";
+"aa0-Qo-1nw.title" = "速度の感度:";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "chS-d2-TG1"; */
 "chS-d2-TG1.title" = "なし";
@@ -116,7 +119,7 @@
 "iLX-jW-Tdw.title" = "A-Bリピート";
 
 /* Class = "NSMenuItem"; title = "Reset speed"; ObjectID = "ig1-kk-RZu"; */
-"ig1-kk-RZu.title" = "Reset speed";
+"ig1-kk-RZu.title" = "速度をリセット";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "jnR-2I-4x4"; */
 "jnR-2I-4x4.title" = "なし";
@@ -125,7 +128,7 @@
 "mOX-Fi-oTv.title" = "一時停止 / 再生";
 
 /* Class = "NSMenuItem"; title = "Adjust playback speed"; ObjectID = "nJZ-9M-DHk"; */
-"nJZ-9M-DHk.title" = "Adjust playback speed";
+"nJZ-9M-DHk.title" = "再生速度を調整";
 
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "oOk-y6-lek"; */
 "oOk-y6-lek.title" = "なし";
@@ -151,6 +154,12 @@
 /* Class = "NSMenuItem"; title = "Seek"; ObjectID = "wcS-tP-wav"; */
 "wcS-tP-wav.title" = "シーク";
 
+/* Class = "NSMenuItem"; title = "Adjust volume"; ObjectID = "CXf-Ca-OhE"; */
+"CXf-Ca-OhE.title" = "音量調節";
+
+/* Class = "NSMenuItem"; title = "Adjust playback speed"; ObjectID = "nJZ-9M-DHk"; */
+"nJZ-9M-DHk.title" = "再生速度を調整";
+
 /* Class = "NSMenuItem"; title = "None"; ObjectID = "wkV-Gq-B0T"; */
 "wkV-Gq-B0T.title" = "なし";
 
@@ -161,4 +170,4 @@
 "ibM-4r-SQA.title" = "ピクチャー・イン・ピクチャーの切り替え";
 
 /* Class = "NSMenuItem"; title = "Enter/Exit picture-in-picture"; ObjectID = "3Pm-nn-HpB"; */
-"3Pm-nn-HpB.title" = "ピクチャー・イン・ピクチャーの切り替え";
+"3Pm-nn-HpB.title" = "ピクチャインピクチャの切り替え";

@@ -1,8 +1,8 @@
 /* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
-"0DK-uZ-duj.title" = "自動 (コピー)";
+"0DK-uZ-duj.title" = "自動（コピー）";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
-"2yO-To-el7.title" = "デフォルト: 0 (自動)";
+"2yO-To-el7.title" = "デフォルト: 0 （自動）";
 
 /* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
 "44m-ge-naq.title" = "最大音量:";
@@ -11,10 +11,10 @@
 "50C-1R-wlJ.title" = "スレッド数:";
 
 /* Class = "NSMenuItem"; title = "Strong"; ObjectID = "6vc-ad-xaq"; */
-"6vc-ad-xaq.title" = "Strong";
+"6vc-ad-xaq.title" = "強め";
 
 /* Class = "NSTextFieldCell"; title = "Gapless audio:"; ObjectID = "8Fa-ft-1tC"; */
-"8Fa-ft-1tC.title" = "Gapless audio:";
+"8Fa-ft-1tC.title" = "ギャップレスオーディオ:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
 "YUr-aJ-xfC.title" = "専用GPUの使用を強制する";
@@ -35,10 +35,10 @@
 "m5P-5f-5uo.title" = "ビデオ:";
 
 /* Class = "NSMenuItem"; title = "Weak"; ObjectID = "nsT-r3-brW"; */
-"nsT-r3-brW.title" = "Weak";
+"nsT-r3-brW.title" = "弱め";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
-"nwg-2K-G2G.title" = "ハードウェアデコーダー:";
+"nwg-2K-G2G.title" = "ハードウェアデコーダ:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
 "rFu-rL-EJC.title" = "使用しない";
@@ -68,13 +68,13 @@
 "M2M-of-gjd.title" = "現在のディスプレイのICCプロファイルをロードし、ビデオRGBをスクリーン出力に変換するために使用します。(SDRモードの場合のみ)";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
-"R7Z-9c-vPJ.title" = "HDRを有効にする";
+"R7Z-9c-vPJ.title" = "HDRを有効化";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
 "ZgQ-bc-yEE.title" = "HDRビデオを再生するときは、自動的にHDRモードを有効にする。";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "トーンマッピングを有効にする";
+"a5Y-gU-JTj.title" = "トーンマッピングを有効化";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
 "mNn-cb-IVw.title" = "ディスプレイに画像のトーンマッピングを有効にする";
@@ -140,7 +140,7 @@
 "m2n-yd-a4n.title" = "ファイルにリプレイゲインタグがない場合に適用するゲイン";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "オーディオドライバー:";
+"Zco-Ba-Idk.title" = "オーディオドライバ:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
 "2Md-pv-gSi.title" = "AVFoundation は、空間オーディオをサポートする新しい実験的なオーディオドライバですが、オーディオの遅延などの問題が発生する可能性があります。";

@@ -23,7 +23,7 @@
 "AYt-pH-UCi.title" = "Рассинхронизация кадров:";
 
 /* Class = "NSTextFieldCell"; title = "Display FPS:"; ObjectID = "AjU-1T-aGR"; */
-"AjU-1T-aGR.title" = "Кадр./с (дисплей):";
+"AjU-1T-aGR.title" = "Кадры/с (дисплей):";
 
 /* Class = "NSTextFieldCell"; title = "Dropped Frames:"; ObjectID = "CrF-UR-udW"; */
 "CrF-UR-udW.title" = "Пропущенных кадров:";
@@ -53,7 +53,7 @@
 "I2E-6Z-Gnn.title" = "Драйвер:";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "Кадр./с (дисплей), расчетное значение:";
+"JN9-3E-OJp.title" = "Кадры/с (дисплей), расчетное значение:";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "Путь к файлу:";
@@ -165,6 +165,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
 "mLo-Wc-BoO.title" = "Цветовое пространство:";
+
+/* Class = "NSTextFieldCell"; title = "Pixel Format:"; ObjectID = "UrR-u2-hFz"; */
+"UrR-u2-hFz.title" = "Формат пикселей:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
 "zDk-Ie-EPs.headerCell.title" = "Название";

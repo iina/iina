@@ -747,43 +747,25 @@ extension NSVisualEffectView {
         subviewsToMove.contains(where: { c.firstItem === $0 || c.secondItem === $0 })
       }
 
-      if kUseGlassContentViewAPI {
-        // Recommended: nest inside glass.contentView so AppKit applies adaptive tint /
-        // legibility treatments. Mirrors ControlBarView.setupLiquidGlass().
-        let wrapper = NSView()
-        wrapper.translatesAutoresizingMaskIntoConstraints = false
-        for subview in subviewsToMove {
-          wrapper.addSubview(subview)
-        }
-        for old in constraintsToMigrate {
-          let first: AnyObject = (old.firstItem === self) ? wrapper : old.firstItem ?? wrapper
-          let second: AnyObject? = (old.secondItem === self) ? wrapper : old.secondItem
-          let migrated = NSLayoutConstraint(
-            item: first, attribute: old.firstAttribute,
-            relatedBy: old.relation,
-            toItem: second, attribute: old.secondAttribute,
-            multiplier: old.multiplier, constant: old.constant)
-          migrated.priority = old.priority
-          migrated.isActive = true
-        }
-        glassView.contentView = wrapper
-      } else {
-        // Legacy: violates Apple's contentView contract. Kept behind the toggle for A/B.
-        for subview in subviewsToMove {
-          glassView.addSubview(subview)
-        }
-        for old in constraintsToMigrate {
-          let first: AnyObject = (old.firstItem === self) ? glassView : old.firstItem ?? glassView
-          let second: AnyObject? = (old.secondItem === self) ? glassView : old.secondItem
-          let migrated = NSLayoutConstraint(
-            item: first, attribute: old.firstAttribute,
-            relatedBy: old.relation,
-            toItem: second, attribute: old.secondAttribute,
-            multiplier: old.multiplier, constant: old.constant)
-          migrated.priority = old.priority
-          migrated.isActive = true
-        }
+      // Nest inside glass.contentView so AppKit applies adaptive tint /
+      // legibility treatments. Mirrors ControlBarView.setupLiquidGlass().
+      let wrapper = NSView()
+      wrapper.translatesAutoresizingMaskIntoConstraints = false
+      for subview in subviewsToMove {
+        wrapper.addSubview(subview)
       }
+      for old in constraintsToMigrate {
+        let first: AnyObject = (old.firstItem === self) ? wrapper : old.firstItem ?? wrapper
+        let second: AnyObject? = (old.secondItem === self) ? wrapper : old.secondItem
+        let migrated = NSLayoutConstraint(
+          item: first, attribute: old.firstAttribute,
+          relatedBy: old.relation,
+          toItem: second, attribute: old.secondAttribute,
+          multiplier: old.multiplier, constant: old.constant)
+        migrated.priority = old.priority
+        migrated.isActive = true
+      }
+      glassView.contentView = wrapper
 
       // Hide the now-empty VEV so it doesn't block the glass
       self.isHidden = true

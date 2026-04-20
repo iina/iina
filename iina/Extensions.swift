@@ -308,7 +308,7 @@ extension NSMenu {
     menuItem.state = stateOn ? .on : .off
     menuItem.isEnabled = enabled
     
-    if #available(macOS 11.0, *), let image = image {
+    if let image = image {
       menuItem.image = NSImage.findSFSymbol(image)
     }
     
@@ -706,7 +706,6 @@ extension NSImage {
   }
 
   // A failable version of `findSFSymbol`, primarily used for settings pages.
-  @available(macOS 11.0, *)
   static func findSFSymbol(_ names: [String]) -> NSImage? {
     for name in names {
       if let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) {
@@ -772,20 +771,11 @@ extension NSAppearance {
 
   // Performs the given closure with this appearance by temporarily making this the current appearance.
   func applyAppearanceFor<T>(_ closure: ()  -> T) -> T {
-    if #available(macOS 11.0, *) {
-      var result: T?
-      self.performAsCurrentDrawingAppearance {
-        result = closure()
-      }
-      return result!
-    } else {
-      let previousAppearance = NSAppearance.current
-      NSAppearance.current = self
-      defer {
-        NSAppearance.current = previousAppearance
-      }
-      return closure()
+    var result: T?
+    self.performAsCurrentDrawingAppearance {
+      result = closure()
     }
+    return result!
   }
 }
 

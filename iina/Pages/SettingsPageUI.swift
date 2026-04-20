@@ -6,7 +6,6 @@
 //  Copyright © 2025 lhc. All rights reserved.
 //
 
-@available(macOS 11.0, *)
 class SettingsPageUI: SettingsPage {
   private lazy var windowInitialSizeView: WindowInitialSizeView = WindowInitialSizeView(l10n: localizationContext)
   private lazy var windowInitialPositionView: WindowInitialPositionView = WindowInitialPositionView(l10n: localizationContext)
@@ -216,7 +215,6 @@ class SettingsPageUI: SettingsPage {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class WindowInitialSizeView: WithSettingsLocalizationContext {
   var l10n: SettingsLocalization.Context!
   let container: NSView
@@ -251,7 +249,6 @@ fileprivate class WindowInitialSizeView: WithSettingsLocalizationContext {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class WindowInitialPositionView: WithSettingsLocalizationContext {
   var l10n: SettingsLocalization.Context!
   let container: NSView
@@ -305,7 +302,6 @@ fileprivate class WindowInitialPositionView: WithSettingsLocalizationContext {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class ResizeWindowView: WithSettingsLocalizationContext {
   var l10n: SettingsLocalization.Context!
   lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
@@ -328,7 +324,6 @@ fileprivate class ResizeWindowView: WithSettingsLocalizationContext {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class OSCLayoutView: WithSettingsLocalizationContext {
   var l10n: SettingsLocalization.Context!
   lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
@@ -376,7 +371,6 @@ fileprivate class OSCLayoutView: WithSettingsLocalizationContext {
 }
 
 
-@available(macOS 11.0, *)
 private class OSCToolbarView: WithSettingsLocalizationContext {
   var l10n: SettingsLocalization.Context!
   lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)

@@ -248,9 +248,7 @@ class Utility {
     input.cell?.isScrollable = true
     input.isBezeled = true
     input.bezelStyle = .roundedBezel
-    if #available(macOS 11.0, *) {
-      input.controlSize = .large
-    }
+    input.controlSize = .large
     if let inputValue = inputValue {
       input.stringValue = inputValue
     }
@@ -562,14 +560,10 @@ class Utility {
   }
 
   static func icon(for url: URL) -> NSImage {
-    if #available(macOS 11.0, *) {
-      if let uttype = UTType.types(tag: url.pathExtension, tagClass: .filenameExtension, conformingTo: nil).first {
-        return NSWorkspace.shared.icon(for: uttype)
-      } else {
-        return NSWorkspace.shared.icon(for: .data)
-      }
+    if let uttype = UTType.types(tag: url.pathExtension, tagClass: .filenameExtension, conformingTo: nil).first {
+      return NSWorkspace.shared.icon(for: uttype)
     } else {
-      return NSWorkspace.shared.icon(forFileType: url.pathExtension)
+      return NSWorkspace.shared.icon(for: .data)
     }
   }
 

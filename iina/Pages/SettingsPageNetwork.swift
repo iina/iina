@@ -6,7 +6,6 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-@available(macOS 11.0, *)
 class SettingsPageNetwork: SettingsPage {
   override var title: String {
     return NSLocalizedString("preference.network", comment: "Network")

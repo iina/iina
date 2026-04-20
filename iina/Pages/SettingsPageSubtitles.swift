@@ -8,7 +8,6 @@
 
 import Foundation
 
-@available(macOS 11.0, *)
 class SettingsPageSubtitles: SettingsPage {
   override var title: String {
     return NSLocalizedString("preference.subtitle", comment: "Subtitles")
@@ -216,7 +215,6 @@ fileprivate class SButton: NSButton {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesASSView: SettingsAccessory.Base {
   let segmentControl: NSSegmentedControl
 
@@ -265,7 +263,6 @@ fileprivate class SubtitlesASSView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesFontView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
@@ -310,7 +307,6 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesColorView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
@@ -329,7 +325,6 @@ fileprivate class SubtitlesColorView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesBorderView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
@@ -348,7 +343,6 @@ fileprivate class SubtitlesBorderView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesShadowView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
@@ -367,7 +361,6 @@ fileprivate class SubtitlesShadowView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesMarginView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
@@ -386,7 +379,6 @@ fileprivate class SubtitlesMarginView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesAlignView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
@@ -419,7 +411,6 @@ fileprivate class SubtitlesAlignView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitlesEncodingView: SettingsAccessory.Base {
   let popupButton: NSPopUpButton
 
@@ -455,7 +446,6 @@ fileprivate class SubtitlesEncodingView: SettingsAccessory.Base {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class SubtitleSourceView: SettingsAccessory.Base {
   var subSourceStackView: NSStackView!
   let subSourcePopUpButton: NSPopUpButton

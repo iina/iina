@@ -92,17 +92,9 @@ class PrefUtilsViewController: PreferenceViewController, PreferenceWindowEmbedda
 
       Logger.log("UTImportedType: \(identifier.quoted) ➤ \(exts)", level: .verbose)
       for ext in exts {
-        if #available(macOS 11.0, *) {
-          let uttypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
-          for uttype in uttypesForExt {
-            utiTargetSet.insert(uttype.identifier)
-          }
-        } else {
-          let unmanagedArray = UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, ext as CFString, nil)
-          let utiArray = unmanagedArray!.takeUnretainedValue() as NSArray as! [String]
-          for uti in utiArray {
-            utiTargetSet.insert(uti)
-          }
+        let uttypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
+        for uttype in uttypesForExt {
+          utiTargetSet.insert(uttype.identifier)
         }
       }
     }

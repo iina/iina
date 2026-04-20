@@ -19,7 +19,6 @@ extension NSTextField {
 
 }
 
-@available(macOS 11.0, *)
 class SettingsUIHelper {
   private var l10n: SettingsLocalization.Context
 

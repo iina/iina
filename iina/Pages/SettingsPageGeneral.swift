@@ -8,7 +8,6 @@
 
 import Foundation
 
-@available(macOS 11.0, *)
 class SettingsPageGeneral: SettingsPage {
   private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.screenshotFolder)
 

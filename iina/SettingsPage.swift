@@ -9,7 +9,6 @@
 import Cocoa
 
 
-@available(macOS 11.0, *)
 @resultBuilder
 struct SettingsViewsBuilder {
   static func buildBlock(_ components: NSView...) -> [NSView] {
@@ -21,7 +20,6 @@ struct SettingsViewsBuilder {
   }
 }
 
-@available(macOS 11.0, *)
 @resultBuilder
 struct SettingsItemsBuilder {
   static func buildBlock(_ components: SettingsItem.Base...) -> [SettingsItem.Base] {
@@ -29,7 +27,6 @@ struct SettingsItemsBuilder {
   }
 }
 
-@available(macOS 11.0, *)
 @resultBuilder
 struct SettingsSubItemsBuilder {
   static func buildBlock(_ components: SettingsItem.Base...) -> [SettingsItem.Base] {
@@ -40,7 +37,6 @@ struct SettingsSubItemsBuilder {
   }
 }
 
-@available(macOS 11.0, *)
 @resultBuilder
 struct SettingsSubListBuilder {
   static func buildBlock(_ components: SettingsItem.Base...) -> SettingsSubListView {
@@ -48,7 +44,6 @@ struct SettingsSubListBuilder {
   }
 }
 
-@available(macOS 11.0, *)
 @resultBuilder
 struct SettingsSectionBuilder {
   static func buildBlock(_ components: SettingsContainer...) -> [NSView] {
@@ -60,7 +55,6 @@ protocol SettingsContainer {
   func getContainer() -> NSView
 }
 
-@available(macOS 11.0, *)
 class SettingsPage {
   var identifier: String { "" }
   var title: String { "" }
@@ -121,7 +115,6 @@ class SettingsPage {
 }
 
 
-@available(macOS 11.0, *)
 class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContext {
   var container: Container!
 
@@ -242,7 +235,6 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
 }
 
 
-@available(macOS 11.0, *)
 class SettingsSubListView: SettingsListView {
   static let padding: CGFloat = 28
 

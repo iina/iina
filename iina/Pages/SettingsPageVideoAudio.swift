@@ -8,7 +8,6 @@
 
 import Foundation
 
-@available(macOS 11.0, *)
 class SettingsPageVideoAudio: SettingsPage {
   private lazy var audioOutputDeviceView: AudioOutputDeviceView = AudioOutputDeviceView(l10n: localizationContext)
 
@@ -181,7 +180,6 @@ fileprivate enum AudioDriver: Int, InitializingFromKey, CaseIterable {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class AudioOutputDeviceView: WithSettingsLocalizationContext {
   var l10n: SettingsLocalization.Context!
   lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)

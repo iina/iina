@@ -6,7 +6,6 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-@available(macOS 11.0, *)
 class SettingsPageKeyBindings: SettingsPage {
   override var title: String {
     return NSLocalizedString("preference.keybindings", comment: "Key Bindings")
@@ -59,7 +58,6 @@ private extension NSUserInterfaceItemIdentifier {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class ConfigEditor: SettingsAccessory.Base {
   fileprivate typealias KC = PrefKeyBindingViewController
   
@@ -465,7 +463,6 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
   }
 }
 
-@available(macOS 11.0, *)
 extension ConfigEditor: NSTableViewDelegate, NSMenuDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let km = (mappingController.arrangedObjects as? [KeyMapping])?[at: row] else { return nil }
@@ -514,7 +511,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
       keyBox.contentViewMargins = .zero
 
       // When highlighting, the text will become color due to `NSColor.selectedTextColor`.
-      // Since we have a custom NSBox underneith the text, we don't want the text field
+      // Since we have a custom NSBox underneath the text, we don't want the text field
       // to change color to selected text color. The only way to prevent the system from
       // changing color is use `NSAttributedString` in the text field.
       let attributedString = NSAttributedString(

@@ -132,11 +132,7 @@ class VideoView: NSView {
     // AppKit malfunctions from then on. The check for running under Big Sur or later isn't really
     // needed as it would be fine to always call the controller. The check merely makes it clear
     // that this is only needed due to macOS changes starting with Big Sur.
-    if #available(macOS 11, *) {
-      player.mainWindow.mouseUp(with: event)
-    } else {
-      super.mouseUp(with: event)
-    }
+    player.mainWindow.mouseUp(with: event)
   }
 
   // MARK: Drag and drop
@@ -447,21 +443,10 @@ extension VideoView {
     var name: CFString? = nil
     switch primaries {
     case "display-p3":
-      if #available(macOS 10.15.4, *) {
-        name = CGColorSpace.displayP3_PQ
-      } else {
-        name = CGColorSpace.displayP3_PQ_EOTF
-      }
+      name = CGColorSpace.displayP3_PQ
 
     case "bt.2020":
-      // Invert order of checks to avoid Xcode bug which incorrectly shows deprecation warning
-      if #unavailable(macOS 10.15.4) {
-        name = CGColorSpace.itur_2020_PQ_EOTF
-      } else if #unavailable(macOS 11.0) {
-        name = CGColorSpace.itur_2020_PQ
-      } else {
-        name = CGColorSpace.itur_2100_PQ
-      }
+      name = CGColorSpace.itur_2100_PQ
 
     case "bt.709":
       return false // SDR

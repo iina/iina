@@ -8,7 +8,6 @@
 
 import Cocoa
 
-@available(macOS 11.0, *)
 struct SettingsItem {
   class Base: NSView, WithSettingsLocalizationContext  {
     var l10n: SettingsLocalization.Context!
@@ -907,7 +906,6 @@ struct SettingsItem {
 }
 
 
-@available(macOS 11.0, *)
 fileprivate class ClickableView: NSView {
   var showBottomRoundCorner = false {
     didSet { setRoundCorners() }
@@ -983,7 +981,6 @@ fileprivate class NonClickableButton: NSButton {
 }
 
 
-@available(macOS 11.0, *)
 class SettingsAccessory {
   /// A Base class for customized controls.
   class Base: NSObject, WithSettingsLocalizationContext {

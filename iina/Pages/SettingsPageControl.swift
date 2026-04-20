@@ -6,7 +6,6 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-@available(macOS 11.0, *)
 class SettingsPageControl: SettingsPage {
   override var title: String {
     return NSLocalizedString("preference.control", comment: "control")
@@ -82,7 +81,6 @@ class SettingsPageControl: SettingsPage {
   }
 }
 
-@available(macOS 11.0, *)
 fileprivate class SliderView: SettingsAccessory.Base {
   init(l10n: SettingsLocalization.Context, key: Preference.Key) {
     super.init(l10n: l10n)

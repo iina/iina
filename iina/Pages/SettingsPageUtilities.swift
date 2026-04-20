@@ -8,7 +8,6 @@
 
 import UniformTypeIdentifiers
 
-@available(macOS 11.0, *)
 class SettingsPageUtilities: SettingsPage {
   override var title: String {
     return NSLocalizedString("preference.utilities", comment: "Utilities")
@@ -230,17 +229,9 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
 
       Logger.log("UTImportedType: \(identifier.quoted) ➤ \(exts)", level: .verbose)
       for ext in exts {
-        if #available(macOS 11.0, *) {
-          let uttypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
-          for uttype in uttypesForExt {
-            utiTargetSet.insert(uttype.identifier)
-          }
-        } else {
-          let unmanagedArray = UTTypeCreateAllIdentifiersForTag(kUTTagClassFilenameExtension, ext as CFString, nil)
-          let utiArray = unmanagedArray!.takeUnretainedValue() as NSArray as! [String]
-          for uti in utiArray {
-            utiTargetSet.insert(uti)
-          }
+        let uttypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
+        for uttype in uttypesForExt {
+          utiTargetSet.insert(uttype.identifier)
         }
       }
     }
@@ -267,7 +258,6 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
   }
 }
 
-@available(macOS 11.0, *)
 fileprivate class BrowserExtensionView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)

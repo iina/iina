@@ -11,10 +11,8 @@ import Mustache
 import WebKit
 
 fileprivate let isMacOS11: Bool = {
-  if #available(macOS 11.0, *) {
-    if #unavailable(macOS 12.0) {
-        return true
-    }
+  if #unavailable(macOS 12.0) {
+      return true
   }
   return false
 }()
@@ -22,11 +20,8 @@ fileprivate let isMacOS11: Bool = {
 fileprivate let TitleBarHeightNormal: CGFloat = {
   if #available(macOS 26, *) {
     return 32
-  } else if #available(macOS 10.16, *) {
-    return 28
-  } else {
-    return 22
   }
+  return 28
 }()
 fileprivate let TitleBarHeightWithOSC: CGFloat = TitleBarHeightNormal + 24 + 10
 fileprivate let TitleBarHeightWithOSCInFullScreen: CGFloat = 24 + 10
@@ -918,7 +913,7 @@ class MainWindowController: PlayerWindowController {
   /// This erroneous behavior has been reported to Apple as: "Regression in NSCursor.setHiddenUntilMouseMoves"
   /// Feedback number FB11963121
   private func workaroundCursorDefect() {
-    guard #available(macOS 11, *), animationState == .hidden else { return }
+    guard animationState == .hidden else { return }
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
@@ -1682,15 +1677,11 @@ class MainWindowController: PlayerWindowController {
     // stylemask
     window.styleMask.remove(.borderless)
     window.styleMask.insert(.resizable)
-    if #available(macOS 10.16, *) {
-      window.styleMask.insert(.titled)
-      window.hasShadow = true
-      (window as! MainWindow).forceKeyAndMain = false
-      window.level = .normal
-    } else {
-      window.styleMask.remove(.fullScreen)
-    }
- 
+    window.styleMask.insert(.titled)
+    window.hasShadow = true
+    (window as! MainWindow).forceKeyAndMain = false
+    window.level = .normal
+
     restoreDockSettings()
     // restore window frame and aspect ratio
     let videoSize = player.videoSizeForDisplay
@@ -1738,14 +1729,11 @@ class MainWindowController: PlayerWindowController {
     // stylemask
     window.styleMask.insert(.borderless)
     window.styleMask.remove(.resizable)
-    if #available(macOS 10.16, *) {
-      window.styleMask.remove(.titled)
-      window.hasShadow = false
-      (window as! MainWindow).forceKeyAndMain = true
-      window.level = .floating
-    } else {
-      window.styleMask.insert(.fullScreen)
-    }
+    window.styleMask.remove(.titled)
+    window.hasShadow = false
+    (window as! MainWindow).forceKeyAndMain = true
+    window.level = .floating
+
     // cancel aspect ratio
     window.resizeIncrements = NSSize(width: 1, height: 1)
     // auto hide menubar and dock
@@ -2077,7 +2065,7 @@ class MainWindowController: PlayerWindowController {
       // This problem has been reported to Apple as:
       // "setTitleWithRepresentedFilename throws NSInvalidArgumentException: NSNextStepFrame _displayName"
       // Feedback number FB9789129
-      if Preference.bool(for: .useLegacyFullScreen), #available(macOS 11, *) {
+      if Preference.bool(for: .useLegacyFullScreen) {
         window?.title = player.info.currentURL?.lastPathComponent ?? ""
       } else {
         window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")

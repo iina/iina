@@ -963,7 +963,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {
-    if #available(macOS 11.0, *), IINA_ENABLE_NEW_SETTINGS {
+    if IINA_ENABLE_NEW_SETTINGS {
       SettingsWindow.default.show()
     } else {
       preferenceWindowController.showWindow(self)

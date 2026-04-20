@@ -650,22 +650,10 @@ return -1;\
             cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
             break;
           case AVCOL_TRC_ARIB_STD_B67:
-            if (@available(macOS 11.0, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_HLG);
-            } else if (@available(macOS 10.15.6, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_HLG);
-            } else {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
-            }
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_HLG);
             break;
           case AVCOL_TRC_SMPTE2084:
-            if (@available(macOS 11.0, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_PQ);
-            } else if (@available(macOS 10.15.4, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ);
-            } else {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ_EOTF);
-            }
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_PQ);
         }
         break;
       case AVCOL_PRI_SMPTE432:
@@ -677,11 +665,7 @@ return -1;\
             cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_HLG);
             break;
           case AVCOL_TRC_SMPTE2084:
-            if (@available(macOS 10.15.4, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ);
-            } else {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ_EOTF);
-            }
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ);
         }
     }
     if (!cgColorSpace) {

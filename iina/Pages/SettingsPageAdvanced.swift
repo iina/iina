@@ -6,7 +6,6 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-@available(macOS 11.0, *)
 class SettingsPageAdvanced: SettingsPage {
   override var title: String {
     return NSLocalizedString("preference.advanced", comment: "Advanced")
@@ -87,7 +86,6 @@ class SettingsPageAdvanced: SettingsPage {
   }
 }
 
-@available(macOS 11.0, *)
 fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate, NSTableViewDataSource {
   let tableView: NSTableView
   let addBtn: NSButton

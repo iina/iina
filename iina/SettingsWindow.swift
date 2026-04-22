@@ -228,6 +228,7 @@ class SettingsWindow: NSWindow {
   private var stopCall = true
 }
 
+
 extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
   func numberOfRows(in tableView: NSTableView) -> Int {
     return pages.count + 1

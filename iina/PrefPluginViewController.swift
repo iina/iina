@@ -294,40 +294,6 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     }
   }
 
-  private func handleInstallationError(_ error: Error) {
-    let message: String
-    if let pluginError = error as? JavascriptPlugin.PluginError {
-      switch pluginError {
-      case .fileNotFound(let url):
-        Logger.log("Plugin install error: file not found: \"\(url)\"", level: .error)
-        message = NSLocalizedString("plugin.install_error.file_not_found", comment: "")
-      case .invalidURL(let url):
-        Logger.log("Plugin install error: URL is invalid: \"\(url)\"", level: .error)
-        message = NSLocalizedString("plugin.install_error.invalid_url", comment: "")
-      case .cannotDownload(let out, let err):
-        Logger.log("Plugin install error: cannot download", level: .error)
-        Logger.log("\nSTDOUT_BEGIN\(out)\nSTDOUT_END", level: .debug)
-        Logger.log("\nSTDERR_BEGIN\(err)\nSTDERR_END", level: .error)
-        let str = NSLocalizedString("plugin.install_error.cannot_download", comment: "")
-        message = String(format: str, err)
-      case .cannotUnpackage(_, let err):
-        let str = NSLocalizedString("plugin.install_error.cannot_unpackage", comment: "")
-        message = String(format: str, err)
-      case .cannotLoadPlugin:
-        message = NSLocalizedString("plugin.install_error.cannot_load", comment: "")
-      }
-    } else {
-      message = error.localizedDescription
-    }
-    if Thread.isMainThread {
-      Utility.showAlert("plugin.install_error", arguments: [message], sheetWindow: self.view.window!)
-    } else {
-      DispatchQueue.main.sync {
-        Utility.showAlert("plugin.install_error", arguments: [message], sheetWindow: self.view.window!)
-      }
-    }
-  }
-
   private func showPermissionsSheet(forPlugin plugin: JavascriptPlugin, previousPlugin: JavascriptPlugin?, handler: @escaping (Bool) -> Void) {
     let block = {
       let alert = NSAlert()

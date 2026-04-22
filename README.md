@@ -17,7 +17,7 @@
 ## Features
 
 * Based on [mpv](https://github.com/mpv-player/mpv), which provides the best decoding capacity on macOS
-* Designed with modern versions of macOS (10.15+) in mind
+* Designed with modern versions of macOS (11.0+) in mind
 * All the features you need for video and music: subtitles, playlists, chapters…and much, much more!
 * Force Touch, picture-in-picture and advanced Touch Bar support
 * Customizable user interface including multiple color schemes and on screen controller (OSC) layout positioning
@@ -139,11 +139,11 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **[recorder](https://github.com/5thDimensionalVader/recorder-iina)** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 
 > 💡 **Want to build your own plugin?**
-> 
+>
 > Explore the existing plugins listed here to learn how they work. If you create a new plugin or improve an existing one, feel free to contribute back by adding it to this list via a pull request.
 
 > 🚀 **Interested in creating an IINA plugin?**
-> 
+>
 > Start by exploring the existing plugins here to understand patterns and best practices. Once you’ve built your own plugin, please contribute back by adding it to this README so others can discover and use it.
 
 

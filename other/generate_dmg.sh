@@ -26,30 +26,32 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Reset in case getopts has been used previously in the shell.
-if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src:,parallel:,help": -n 'parse-options' -- "$@"); then
-  echo -e "${RED}Failed parsing options.${NC}" >&2
-  exit 1
-fi
-
 printUsageHelp() {
   echo
   echo -e "${BLUE}Usage:${NC}"
-  echo -e "    ${GREEN}$0 [-h|--help]:${NC}           Displays this help message"
-  echo -e "    ${GREEN}$0 [-v|--verbose]:${NC}        Show details during disk image creation"
+  echo -e "    ${GREEN}$0 -h:${NC}        Displays this help message"
+  echo -e "    ${GREEN}$0 -v:${NC}        Show details during disk image creation"
   echo
 }
+
+args=`getopt hv $*`
+if [ $? -ne 0 ]; then
+  printUsageHelp
+  echo -e "${RED}Failed parsing options.${NC}" >&2
+  exit 1
+fi
+set -- $args
 
 VERBOSE=1
 while true; do
   case "$1" in
-  -h | --help)
+  -h)
     printUsageHelp
     exit 0
     ;;
-  -v | --verbose)
+  -v)
     VERBOSE=0
-    shift 1
+    shift
     ;;
   --)
     shift

@@ -54,8 +54,7 @@ class ScrollingTextField: NSTextField {
     appendedStringCopyWidth = NSAttributedString(string: appendedStringCopy, attributes: attributes).size().width
     scrollingString = NSAttributedString(string: stringValue + appendedStringCopy, attributes: attributes)
     state = .scroll
-    scrollingTimer = Timer.scheduledTimer(timeInterval: updateInterval, target: self, selector: #selector(moveText),
-                                          userInfo: nil, repeats: true)
+    scrollingTimer = Timer.scheduledTimerInCommonMode(timeInterval: updateInterval, target: self, selector: #selector(moveText))
   }
 
   private func reset() {

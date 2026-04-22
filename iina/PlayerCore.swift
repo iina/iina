@@ -2575,13 +2575,10 @@ class PlayerCore: NSObject {
     guard useTimer else { return }
 
     // Timer will start
-
-    syncUITimer = Timer.scheduledTimer(
+    syncUITimer = Timer.scheduledTimerInCommonMode(
       timeInterval: timeInterval,
       target: self,
       selector: #selector(self.syncUITime),
-      userInfo: nil,
-      repeats: true
     )
   }
 

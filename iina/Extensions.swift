@@ -976,6 +976,36 @@ extension CGSize {
   }
 }
 
+/// Creates a repeating scheduled on the main run loop in `.common` mode, so it continues to fire
+/// during UI tracking. Note that common mode is default + tracking, and `RunLoop.Mode.tracking` is
+/// a special run loop mode that the system switches into when the user is actively interacting with
+/// certain UI elements, including scrolling, dragging controls, holding on buttons, etc.
+extension Timer {
+  @discardableResult
+  static func scheduledTimerInCommonMode(
+    timeInterval ti: TimeInterval,
+    target: Any,
+    selector: Selector,
+    userInfo: Any? = nil,
+    repeats: Bool = true,
+  ) -> Timer {
+    let timer = Timer(timeInterval: ti, target: target, selector: selector, userInfo: userInfo, repeats: repeats)
+    RunLoop.main.add(timer, forMode: .common)
+    return timer
+  }
+
+  @discardableResult
+  static func scheduledTimerInCommonMode(
+    withTimeInterval interval: TimeInterval,
+    repeats: Bool = true,
+    block: @escaping (Timer) -> Void
+  ) -> Timer {
+    let timer = Timer(timeInterval: interval, repeats: repeats, block: block)
+    RunLoop.main.add(timer, forMode: .common)
+    return timer
+  }
+}
+
 #if DEBUG
 extension DispatchQueue {
 

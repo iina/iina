@@ -11,7 +11,7 @@ import MediaPlayer
 import Sparkle
 
 let IINA_ENABLE_PLUGIN_SYSTEM = true
-let IINA_ENABLE_NEW_SETTINGS = false
+let IINA_ENABLE_NEW_SETTINGS = UserDefaults.standard.bool(forKey: "enableNewSettings")
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)

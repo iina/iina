@@ -19,12 +19,6 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Reset in case getopts has been used previously in the shell.
-if ! OPTS=$(getopt -o "h": --long "arch:,yt-dlp-src:,parallel:,skip-plugins,help": -n 'parse-options' -- "$@"); then
-  echo -e "${RED}Failed parsing options.${NC}" >&2
-  exit 1
-fi
-
 printUsageHelp() {
   echo
   echo -e "${BLUE}Usage:${NC}"
@@ -49,38 +43,65 @@ realpath() (
   echo "$REALPATH"
 )
 
-while true; do
+while [[ $# -gt 0 ]]; do
   case "$1" in
   -h | --help)
     printUsageHelp
     exit 0
     ;;
   --arch)
-    if [[ -z "$2" ]]; then
-      echo -e "${RED}You need to specify an architecture when using --arch${NC}"
+    if [[ -z "$2" || "$2" == -* ]]; then
+      echo -e "${RED}You need to specify an architecture when using --arch${NC}" >&2
       printUsageHelp
       exit 1
     fi
     ARCH=$2
     shift 2
     ;;
+  --arch=*)
+    ARCH=${1#*=}
+    if [[ -z "$ARCH" ]]; then
+      echo -e "${RED}You need to specify an architecture when using --arch${NC}" >&2
+      printUsageHelp
+      exit 1
+    fi
+    shift
+    ;;
   --yt-dlp-src)
-    if [[ -z "$2" ]]; then
-      echo -e "${RED}You need to specify a source when using --yt-dlp-src${NC}"
+    if [[ -z "$2" || "$2" == -* ]]; then
+      echo -e "${RED}You need to specify a source when using --yt-dlp-src${NC}" >&2
       printUsageHelp
       exit 1
     fi
     YT_DLP_SOURCE=$2
     shift 2
     ;;
+  --yt-dlp-src=*)
+    YT_DLP_SOURCE=${1#*=}
+    if [[ -z "$YT_DLP_SOURCE" ]]; then
+      echo -e "${RED}You need to specify a source when using --yt-dlp-src${NC}" >&2
+      printUsageHelp
+      exit 1
+    fi
+    shift
+    ;;
   --parallel)
-    if [[ -z "$2" ]]; then
-      echo -e "${RED}You need to specify a number of parallel downloads when using --parallel${NC}"
+    if [[ -z "$2" || "$2" == -* ]]; then
+      echo -e "${RED}You need to specify a number of parallel downloads when using --parallel${NC}" >&2
       printUsageHelp
       exit 1
     fi
     PARALLEL_DOWNLOADS=$2
     shift 2
+    ;;
+  --parallel=*)
+    PARALLEL_DOWNLOADS=${1#*=}
+    if [[ -z "$PARALLEL_DOWNLOADS" ]]; then
+      echo -e "${RED}You need to specify a number of parallel downloads when using --parallel${NC}" >&2
+      printUsageHelp
+      exit 1
+    fi
+    shift
     ;;
   --skip-plugins)
     SKIP_PLUGINS=true
@@ -90,9 +111,23 @@ while true; do
     shift
     break
     ;;
-  *) break ;;
+  -*)
+    echo -e "${RED}Unknown option: $1${NC}" >&2
+    printUsageHelp
+    exit 1
+    ;;
+  *)
+    echo -e "${RED}Unexpected argument: $1${NC}" >&2
+    printUsageHelp
+    exit 1
+    ;;
   esac
 done
+if [[ $# -gt 0 ]]; then
+  echo -e "${RED}Unexpected argument: $1${NC}" >&2
+  printUsageHelp
+  exit 1
+fi
 
 case $YT_DLP_SOURCE in
 github)

@@ -2818,36 +2818,16 @@ class PlayerCore: NSObject {
       let raw = mpv.getNode(MPVProperty.trackList)
       guard let list = raw as? [[String: Any]] else {
         // Internal error, should not occur.
-        log("Cast of mpv node failed: \(String(describing: raw))", level: .error)
+        log("Cast of mpv node failed while getting track list: \(String(describing: raw))",
+            level: .error)
         return
       }
       for dict in list {
-        guard let type = dict["type"] as? String else { continue }
-        guard let isDefault = dict["default"] as? Bool, let isForced = dict["forced"] as? Bool,
-              let isImage = dict["image"] as? Bool, let isSelected = dict["selected"] as? Bool,
-              let isExternal = dict["external"] as? Bool else {
+        guard let track = MPVTrack(dict) else {
           // Internal error, should not occur.
           log("Unable to construct MPVTrack from mpv node map: \(dict)", level: .error)
           continue
         }
-        let id = MPVController.nodeValueAsInt(dict["id"])
-        let track = MPVTrack(id: id, type: MPVTrack.TrackType(rawValue: type)!,
-                             isDefault: isDefault, isForced: isForced, isImage: isImage,
-                             isSelected: isSelected, isExternal: isExternal)
-        track.srcId = MPVController.nodeValueAsInt(dict["src-id"])
-        track.title = dict["title"] as? String
-        track.lang = dict["lang"] as? String
-        track.codec = dict["codec"] as? String
-        track.externalFilename = dict["external-filename"] as? String
-        track.isAlbumart = dict["albumart"] as? Bool ?? false
-        track.decoderDesc = dict["decoder-desc"] as? String
-        track.demuxW = MPVController.nodeValueAsInt(dict["demux-w"])
-        track.demuxH = MPVController.nodeValueAsInt(dict["demux-h"])
-        track.demuxFps = dict["demux-fps"] as? Double
-        track.demuxChannelCount = MPVController.nodeValueAsInt(dict["demux-channel-count"])
-        track.demuxChannels = dict["demux-channels"] as? String
-        track.demuxSamplerate = MPVController.nodeValueAsInt(dict["demux-samplerate"])
-
         // add to lists
         switch track.type {
         case .audio:

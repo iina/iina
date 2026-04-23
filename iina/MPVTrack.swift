@@ -133,6 +133,36 @@ class MPVTrack: NSObject {
     self.isExternal = isExternal
   }
 
+  /// Returns a `MVPTrack` object or `nil` if initialization fails..
+  /// - Note: Failure of this initializer occurs if the given dictionary is missing required properties.
+  /// - Parameter dict: A dictionary containing the properties of the track.
+  convenience init?(_ dict: [String: Any]) {
+    guard let idAsNodeValue = dict["id"], let typeAsString = dict["type"] as? String,
+          let type =  MPVTrack.TrackType(rawValue: typeAsString),
+          let isDefault = dict["default"] as? Bool, let isForced = dict["forced"] as? Bool,
+          let isImage = dict["image"] as? Bool, let isSelected = dict["selected"] as? Bool,
+          let isExternal = dict["external"] as? Bool else {
+      // Internal error, should not occur.
+      return nil
+    }
+    let id = MPVController.nodeValueAsInt(idAsNodeValue)
+    self.init(id: id, type: type, isDefault: isDefault, isForced: isForced, isImage: isImage,
+              isSelected: isSelected, isExternal: isExternal)
+    srcId = MPVController.nodeValueAsInt(dict["src-id"])
+    title = dict["title"] as? String
+    lang = dict["lang"] as? String
+    codec = dict["codec"] as? String
+    externalFilename = dict["external-filename"] as? String
+    isAlbumart = dict["albumart"] as? Bool ?? false
+    decoderDesc = dict["decoder-desc"] as? String
+    demuxW = MPVController.nodeValueAsInt(dict["demux-w"])
+    demuxH = MPVController.nodeValueAsInt(dict["demux-h"])
+    demuxFps = dict["demux-fps"] as? Double
+    demuxChannelCount = MPVController.nodeValueAsInt(dict["demux-channel-count"])
+    demuxChannels = dict["demux-channels"] as? String
+    demuxSamplerate = MPVController.nodeValueAsInt(dict["demux-samplerate"])
+  }
+
   // Utils
 
   var isImageSub: Bool {

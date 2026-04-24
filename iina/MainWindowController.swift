@@ -2569,11 +2569,12 @@ class MainWindowController: PlayerWindowController {
         let (videoWidth, videoHeight) = player.videoSizeForDisplay
         let displayAspectRatio = CGFloat(videoWidth) / CGFloat(videoHeight)
 
-        let height = round(120 / displayAspectRatio)
+        let width = CGFloat(UserDefaults.standard.integer(forKey: "thumbnailWidth"))
+        let height = round(width / displayAspectRatio)
         let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
         let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
         let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
-        thumbnailPeekView.frame.size = NSSize(width: 120, height: height)
+        thumbnailPeekView.frame.size = NSSize(width: width, height: height)
         thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
       } else {
         thumbnailPeekView.isHidden = true

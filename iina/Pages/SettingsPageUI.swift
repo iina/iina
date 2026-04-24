@@ -174,6 +174,9 @@ class SettingsPageUI: SettingsPage {
             SettingsItem.Switch()
               .bindTo(.enableThumbnailForRemoteFiles)
           }
+        SettingsItem.Input()
+          .bindTo(.thumbnailWidth)
+          .trailingLabel(.text_pt)
       }
     }
   }

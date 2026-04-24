@@ -1382,7 +1382,7 @@ class RemoteCommandController {
 
     // For each command, apply a configured keybinding or fallback to default values.
     remoteCommand.playCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PLAY"] {
+      if let action = PlayerCore.keyBindings["PLAYONLY"] {
         PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.resume()
@@ -1390,7 +1390,7 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PAUSE"] {
+      if let action = PlayerCore.keyBindings["PAUSEONLY"] {
         PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.pause()

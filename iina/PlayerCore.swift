@@ -636,6 +636,10 @@ class PlayerCore: NSObject {
   func initVideo() {
     // init mpv render context.
     mpv.mpvInitRendering()
+    // `force-window=immediate` makes audio-only subtitle rendering work with `vo=libmpv`,
+    // but setting it before render initialization can race the VO thread against IINA's
+    // render context setup. Switch to `immediate` only after the render context exists.
+    mpv.setString(MPVOption.Window.forceWindow, "immediate", level: .verbose)
     mainWindow.videoView.startDisplayLink()
     log("Initialized rendering")
     MemoryUsage.shared.logUsage("after rendering initialized")
@@ -3207,7 +3211,14 @@ class PlayerCore: NSObject {
 
   private func forceDrawForAudioOnlyMainWindow(_ reason: String) {
     guard mainWindow.loaded, !isInMiniPlayer, currentMediaIsAudio == .isAudio else { return }
+    mainWindow.videoView.displayActive()
     mainWindow.forceDraw(reason)
+    if info.state == .paused {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+        guard let self, !self.isInMiniPlayer, self.currentMediaIsAudio == .isAudio, self.info.state == .paused else { return }
+        self.mainWindow.videoView.displayIdle()
+      }
+    }
   }
 
   private func requestAudioOnlyMainWindowRedraw(_ reason: String) {

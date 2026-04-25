@@ -143,6 +143,7 @@ class MPVController: NSObject {
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
+    MPVProperty.subText: MPV_FORMAT_STRING,
     MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
     MPVOption.Equalizer.contrast: MPV_FORMAT_INT64,
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
@@ -558,6 +559,10 @@ class MPVController: NSObject {
                   verboseIfDefault: true) { key in
       Preference.bool(for: key) ? "avfoundation" : "coreaudio"
     }
+
+    // Keep a render surface available for audio-only playback so mpv can still draw subtitles/OSD.
+    // This must be set before mpv_initialize().
+    chkErr(setOptionString(MPVOption.Window.forceWindow, "yes", level: .verbose))
 
     // Set user defined conf dir.
     if Preference.bool(for: .enableAdvancedSettings),
@@ -1407,12 +1412,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      let displayValue = data >= 1 ? data : -1/data
-      let truncated = round(displayValue * 100) / 100
-      DispatchQueue.main.async { [self] in
-        player.sendOSD(.subScale(truncated))
-        player.needReloadQuickSettingsView()
-      }
+      DispatchQueue.main.async { self.player.subScaleChanged(data) }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough
@@ -1426,6 +1426,9 @@ class MPVController: NSObject {
         break
       }
       DispatchQueue.main.async { self.player.subPosChanged(data) }
+
+    case MPVProperty.subText:
+      DispatchQueue.main.async { self.player.subTextChanged() }
 
     case MPVOption.Equalizer.contrast:
       guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {

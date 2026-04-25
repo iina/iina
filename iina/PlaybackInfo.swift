@@ -118,6 +118,25 @@ class PlaybackInfo {
     if position.second > duration.second { position.second = duration.second }
   }
 
+  var hasRealVideoTrack: Bool {
+    videoTracks.contains { !$0.isAlbumart }
+  }
+
+  var albumArtTrack: MPVTrack? {
+    videoTracks.first(where: { $0.isAlbumart })
+  }
+
+  var musicModeArtworkSize: (Int, Int)? {
+    guard let albumArtTrack,
+          let width = albumArtTrack.demuxW,
+          let height = albumArtTrack.demuxH,
+          width > 0,
+          height > 0 else {
+      return nil
+    }
+    return (width, height)
+  }
+
   var isAudio: MediaIsAudioStatus {
     guard !isNetworkResource else { return .notAudio }
     let noVideoTrack = videoTracks.isEmpty
@@ -125,8 +144,7 @@ class PlaybackInfo {
     if noVideoTrack && noAudioTrack {
       return .unknown
     }
-    let allVideoTracksAreAlbumCover = !videoTracks.contains { !$0.isAlbumart }
-    return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
+    return (noVideoTrack || !hasRealVideoTrack) ? .isAudio : .notAudio
   }
 
   var justStartedFile: Bool = false

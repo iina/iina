@@ -233,6 +233,10 @@ class PlayerCore: NSObject {
   /// functionality for the duration of this player even if the preference is `true`. But if they manually change the
   /// "music mode" status again, change this to `false` so that the preference is honored again.
   var overrideAutoSwitchToMusicMode = false
+  private var cachedMiniPlayerSubScale: Double?
+  private var isMiniPlayerSubtitleRenderSuppressed = false
+  private var isInternalMiniPlayerSubScaleChange = false
+  private var pendingAudioOnlyMainWindowRedraw: DispatchWorkItem?
 
   var isSearchingOnlineSubtitle = false
 
@@ -767,15 +771,8 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    // if received video size before switching to music mode, hide default album art
-    let width, height: Int
-    if info.vid != 0 {
-      miniPlayer.defaultAlbumArt.isHidden = true
-      (width, height) = videoSizeForDisplay
-    } else {
-      (width, height) = (1, 1)
-    }
-
+    refreshMiniPlayerArtwork()
+    let (width, height) = musicModeVideoSizeForDisplay()
     let aspect = CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
     miniPlayer.window?.layoutIfNeeded()
@@ -801,6 +798,7 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
+    refreshMiniPlayerSubtitleOverlay()
     miniPlayer.pendingShow = true
     if showMiniPlayer {
       notifyWindowVideoSizeChanged()
@@ -844,8 +842,11 @@ class PlayerCore: NSObject {
     }
 
     // hide mini player
+    restoreMiniPlayerSubtitleRendering()
+    miniPlayer.clearSubtitleLabel(immediately: true)
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
+    refreshMiniPlayerSubtitleOverlay()
 
     mainWindow.pendingShow = true
     if showMainWindow {
@@ -853,6 +854,7 @@ class PlayerCore: NSObject {
       mainWindow.updateTitle()
       notifyWindowVideoSizeChanged()
     }
+    requestAudioOnlyMainWindowRedraw("exited music mode")
     mainWindow.forceDraw("exited music mode")
     events.emit(.musicModeChanged, data: false)
   }
@@ -2011,6 +2013,7 @@ class PlayerCore: NSObject {
       URL(string: path.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? path) :
       URL(fileURLWithPath: path)
     info.isNetworkResource = !info.currentURL!.isFileURL
+    refreshMiniPlayerSubtitleOverlay()
 
     // set "date last opened" attribute
     if let url = info.currentURL, url.isFileURL {
@@ -2140,8 +2143,11 @@ class PlayerCore: NSObject {
     }
 
     if self.isInMiniPlayer {
-      miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
+      refreshMiniPlayerArtwork()
+      miniPlayer.handleVideoSizeChange()
     }
+    refreshMiniPlayerSubtitleOverlay()
+    requestAudioOnlyMainWindowRedraw("file loaded")
 
     // add to history
     if let url = info.currentURL {
@@ -2329,6 +2335,8 @@ class PlayerCore: NSObject {
     // restart even while paused. See issue #5337.
     syncUI(.time)
     reloadSavedIINAfilters()
+    refreshMiniPlayerSubtitleOverlay()
+    requestAudioOnlyMainWindowRedraw("playback restarted")
     
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
     // We can't put this in MPV_EVENT_VIDEO_RECONFIG because it can be emitted with the old video's size
@@ -2379,6 +2387,26 @@ class PlayerCore: NSObject {
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
+    refreshMiniPlayerSubtitleOverlay()
+    requestAudioOnlyMainWindowRedraw("subtitle track changed")
+  }
+
+  func subScaleChanged(_ scale: Double) {
+    if isMiniPlayerSubtitleRenderSuppressed && !isInternalMiniPlayerSubScaleChange && scale != 0 {
+      cachedMiniPlayerSubScale = scale
+      isInternalMiniPlayerSubScaleChange = true
+      mpv.setDouble(MPVOption.Subtitles.subScale, 0.0, level: .verbose)
+      return
+    }
+
+    let isInternalChange = isInternalMiniPlayerSubScaleChange
+    isInternalMiniPlayerSubScaleChange = false
+    if !isInternalChange && scale != 0 {
+      let displayValue = scale >= 1 ? scale : -1 / scale
+      let truncated = round(displayValue * 100) / 100
+      sendOSD(.subScale(truncated))
+    }
+    needReloadQuickSettingsView()
   }
 
   func speedChanged(_ speed: Double) {
@@ -2406,6 +2434,13 @@ class PlayerCore: NSObject {
     info.isSubVisible = visible
     sendOSD(visible ? .subVisible : .subHidden)
     postNotification(.iinaSubVisibilityChanged)
+    refreshMiniPlayerSubtitleOverlay()
+    requestAudioOnlyMainWindowRedraw("subtitle visibility changed")
+  }
+
+  func subTextChanged() {
+    refreshMiniPlayerSubtitleOverlay()
+    requestAudioOnlyMainWindowRedraw("subtitle text changed")
   }
 
   func trackListChanged() {
@@ -2431,6 +2466,13 @@ class PlayerCore: NSObject {
         switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
       }
     }
+
+    if isInMiniPlayer {
+      refreshMiniPlayerArtwork()
+      miniPlayer.handleVideoSizeChange()
+    }
+    refreshMiniPlayerSubtitleOverlay()
+    requestAudioOnlyMainWindowRedraw("track list changed")
     postNotification(.iinaTracklistChanged)
   }
 
@@ -2462,6 +2504,12 @@ class PlayerCore: NSObject {
     info.vid = Int(mpv.getInt(MPVOption.TrackSelection.vid))
     postNotification(.iinaVIDChanged)
     sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
+    if isInMiniPlayer {
+      refreshMiniPlayerArtwork()
+      miniPlayer.handleVideoSizeChange()
+    }
+    refreshMiniPlayerSubtitleOverlay()
+    requestAudioOnlyMainWindowRedraw("video track changed")
   }
 
   func windowScaleChanged() {
@@ -3089,13 +3137,89 @@ class PlayerCore: NSObject {
   var currentMediaIsAudio = CurrentMediaIsAudioStatus.unknown
 
   func checkCurrentMediaIsAudio() -> CurrentMediaIsAudioStatus {
-    let noVideoTrack = info.videoTracks.isEmpty
-    let noAudioTrack = info.audioTracks.isEmpty
-    if noVideoTrack && noAudioTrack {
+    switch info.isAudio {
+    case .unknown:
       return .unknown
+    case .isAudio:
+      return .isAudio
+    case .notAudio:
+      return .notAudio
     }
-    let allVideoTracksAreAlbumCover = !info.videoTracks.contains { !$0.isAlbumart }
-    return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
+  }
+
+  func musicModeVideoSizeForDisplay() -> (Int, Int) {
+    guard currentMediaIsAudio == .isAudio else {
+      return videoSizeForDisplay
+    }
+    return info.musicModeArtworkSize ?? (1, 1)
+  }
+
+  private func refreshMiniPlayerArtwork() {
+    guard miniPlayer.loaded else { return }
+    miniPlayer.defaultAlbumArt.isHidden = currentMediaIsAudio != .isAudio || info.albumArtTrack != nil
+  }
+
+  private func setMiniPlayerSubtitleRenderingSuppressed(_ suppressed: Bool) {
+    if suppressed {
+      guard !isMiniPlayerSubtitleRenderSuppressed else { return }
+      cachedMiniPlayerSubScale = mpv.getDouble(MPVOption.Subtitles.subScale)
+      isMiniPlayerSubtitleRenderSuppressed = true
+      isInternalMiniPlayerSubScaleChange = true
+      mpv.setDouble(MPVOption.Subtitles.subScale, 0.0, level: .verbose)
+      return
+    }
+
+    restoreMiniPlayerSubtitleRendering()
+  }
+
+  private func restoreMiniPlayerSubtitleRendering() {
+    guard isMiniPlayerSubtitleRenderSuppressed else { return }
+    isMiniPlayerSubtitleRenderSuppressed = false
+    let restoredSubScale = cachedMiniPlayerSubScale ?? mpv.getDouble(MPVOption.Subtitles.subScale)
+    cachedMiniPlayerSubScale = nil
+    isInternalMiniPlayerSubScaleChange = true
+    mpv.setDouble(MPVOption.Subtitles.subScale, restoredSubScale, level: .verbose)
+  }
+
+  func refreshMiniPlayerSubtitleOverlay() {
+    guard miniPlayer.loaded else { return }
+
+    let shouldUseOverlay = isInMiniPlayer &&
+      currentMediaIsAudio == .isAudio &&
+      miniPlayer.isVideoVisible &&
+      info.isSubVisible &&
+      info.sid != 0
+
+    guard shouldUseOverlay else {
+      restoreMiniPlayerSubtitleRendering()
+      miniPlayer.clearSubtitleLabel(immediately: true)
+      return
+    }
+
+    setMiniPlayerSubtitleRenderingSuppressed(true)
+    let subtitleText = mpv.getString(MPVProperty.subText) ?? ""
+    if subtitleText.isEmpty {
+      miniPlayer.clearSubtitleLabel()
+    } else {
+      miniPlayer.updateSubtitleLabel(with: subtitleText)
+    }
+  }
+
+  private func forceDrawForAudioOnlyMainWindow(_ reason: String) {
+    guard mainWindow.loaded, !isInMiniPlayer, currentMediaIsAudio == .isAudio else { return }
+    mainWindow.forceDraw(reason)
+  }
+
+  private func requestAudioOnlyMainWindowRedraw(_ reason: String) {
+    forceDrawForAudioOnlyMainWindow(reason)
+
+    pendingAudioOnlyMainWindowRedraw?.cancel()
+    let workItem = DispatchWorkItem { [weak self] in
+      self?.pendingAudioOnlyMainWindowRedraw = nil
+      self?.forceDrawForAudioOnlyMainWindow("\(reason) (deferred)")
+    }
+    pendingAudioOnlyMainWindowRedraw = workItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.08, execute: workItem)
   }
 }
 

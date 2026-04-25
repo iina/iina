@@ -80,4 +80,5 @@ extension SettingsLocalization.Key {
   static let text_ResizeTheWindowToFit = SettingsLocalization.Key("$ResizeTheWindowToFit")
   static let text_Layout = SettingsLocalization.Key("$Layout")
   static let text_Toolbar = SettingsLocalization.Key("$Toolbar")
+  static let text_ToolbarWidthDesc = SettingsLocalization.Key("$ToolbarWidthDesc")
 }

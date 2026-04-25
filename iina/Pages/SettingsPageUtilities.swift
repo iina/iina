@@ -121,8 +121,7 @@ class SettingsPageUtilities: SettingsPage {
     guard let window = (sender as? NSView)?.window else { return }
     Utility.quickAskPanel("clear_cache", sheetWindow: window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
-      try? FileManager.default.removeItem(atPath: Utility.thumbnailCacheURL.path)
-      Utility.createDirIfNotExist(url: Utility.thumbnailCacheURL)
+      ThumbnailCache.clearThumbnailCache()
       self.updateThumbnailCacheStat()
     }
   }

@@ -166,3 +166,4 @@
 "$InitialWindowSize" = "Initial window size";
 
 "thumbnailWidth.label" = "Thumbnail width";
+"$ToolbarWidthDesc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";

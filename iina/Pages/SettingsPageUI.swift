@@ -177,6 +177,7 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.Input()
           .bindTo(.thumbnailWidth)
           .trailingLabel(.text_pt)
+          .hasDescription(content: .text_ToolbarWidthDesc)
       }
     }
   }

@@ -110,7 +110,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   // MARK: - Logs
-  private let observedPrefKeys: [Preference.Key] = [.logLevel]
+  private let observedPrefKeys: [Preference.Key] = [.logLevel, .thumbnailWidth]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath = keyPath, let change = change else { return }
@@ -120,6 +120,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       if let newValue = change[.newKey] as? Int {
         Logger.Level.preferred = Logger.Level(rawValue: newValue.clamped(to: 0...3))!
       }
+    case Preference.Key.thumbnailWidth.rawValue:
+      ThumbnailCache.clearThumbnailCache()
 
     default:
       return

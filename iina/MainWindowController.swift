@@ -110,6 +110,8 @@ class MainWindowController: PlayerWindowController {
   /** For auto hiding UI after a timeout. */
   var hideControlTimer: Timer?
   var hideOSDTimer: Timer?
+  /// Some audio-only transitions need a deferred redraw after the shared video view has settled.
+  private var pendingAudioOnlyRedraw: DispatchWorkItem?
 
   /** For blacking out other screens. */
   var screens: [NSScreen] = []
@@ -3006,6 +3008,34 @@ class MainWindowController: PlayerWindowController {
     super.updateVolume()
     guard !player.info.isMuted else { return }
     muteButton.image = volumeIcon()
+  }
+
+  func requestAudioOnlyRedraw(_ reason: String) {
+    forceAudioOnlyRedraw(reason)
+
+    pendingAudioOnlyRedraw?.cancel()
+    let workItem = DispatchWorkItem { [weak self] in
+      self?.pendingAudioOnlyRedraw = nil
+      self?.forceAudioOnlyRedraw("\(reason) (deferred)")
+    }
+    pendingAudioOnlyRedraw = workItem
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.08, execute: workItem)
+  }
+
+  private func forceAudioOnlyRedraw(_ reason: String) {
+    guard loaded, !player.isInMiniPlayer, player.currentMediaIsAudio == .isAudio else { return }
+    videoView.displayActive()
+    forceDraw(reason)
+    if player.info.state == .paused {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+        guard let self,
+              self.loaded,
+              !self.player.isInMiniPlayer,
+              self.player.currentMediaIsAudio == .isAudio,
+              self.player.info.state == .paused else { return }
+        self.videoView.displayIdle()
+      }
+    }
   }
 
   // MARK: - IBActions

@@ -12,7 +12,8 @@
 # Before running this script you must in Xcode edit the iina scheme and set the
 # build configuration to the desired type of IINA release (Beta, Debug, Nightly or
 # Release) and then build an IINA.app that can be run on any Mac. This script will
-# refuse to generate a DMG if the app is not universal.
+# refuse to generate a DMG if the app is not universal. This script also tests
+# that the Safari extension can be installed and uninstalled.
 
 # IMPORTANT! This script requires that create-dmg has been installed.
 # See: https://github.com/create-dmg/create-dmg
@@ -149,6 +150,30 @@ if ! lipo "$IINA_BINARY_PATH" -verify_arch x86_64; then
   echo -e "${RED}IINA.app is missing support for x86_64.${NC}" >&2
   exit 1
 fi
+
+# As testing the Safari extension alters the user's environment make it clear
+# to the user the extension is being installed and uninstalled.
+echo -e "${YELLOW}Confirming Safari extension exists and can be installed…${NC}"
+EXTENSION_PATH="${APP_PATH}/Contents/PlugIns/OpenInIINA.appex"
+if [ ! -e "$EXTENSION_PATH" ]; then
+  echo -e "${RED}IINA.app is missing the Safari extension.${NC}" >&2
+  exit 1
+fi
+echo -e "${YELLOW}Installing Safari extension…${NC}"
+if ! pluginkit -a "$EXTENSION_PATH"; then
+  echo -e "${RED}Unable to install Safari extension.${NC}" >&2
+  exit 1
+fi
+if ! pluginkit -mAvvv -p com.apple.Safari.extension | grep -q "$EXTENSION_PATH"; then
+  echo -e "${RED}Plugin not found in Safari extension list.${NC}" >&2
+  exit 1
+fi
+echo -e "${YELLOW}Uninstalling Safari extension…${NC}"
+if ! pluginkit -r "$EXTENSION_PATH"; then
+  echo -e "${RED}Unable to uninstall Safari extension.${NC}" >&2
+  exit 1
+fi
+echo -e "${GREEN}Confirmed Safari extension is installable.${NC}"
 
 # Find the Xcode build configuration. The app icon differs based on the configuration.
 CONFIGURATION=$(echo "$SETTINGS" | sed -rn 's/.*CONFIGURATION = (.*)/\1/p')

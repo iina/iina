@@ -34,6 +34,9 @@ Temporary Items
 build/
 DerivedData/
 
+## nix build result symlink
+result
+
 ## Xcode generated
 */project.xcworkspace/xcshareddata/
 
@@ -111,6 +114,7 @@ browser/Firefox_Open_In_IINA/*
 *.xcarchive
 /.vscode
 
-deps/executable/youtube-dl
-deps/plugins
-
+deps/
+.home/
+.spm/
+.tmp/

@@ -2787,7 +2787,10 @@ class PlayerCore: NSObject {
         }
       } else {
         log("Request new thumbnails")
-        ffmpegController.generateThumbnail(forFile: url.path, thumbWidth:Int32(Preference.integer(for: .thumbnailWidth)))
+        ffmpegController.generateThumbnail(
+          forFile: url.path,
+          thumbWidth:Int32(Preference.integer(for: .thumbnailWidth)) * 2
+        )
       }
     }
   }

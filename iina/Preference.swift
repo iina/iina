@@ -899,7 +899,7 @@ struct Preference {
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,
     .enableThumbnailForRemoteFiles: false,
-    .thumbnailWidth: 240,
+    .thumbnailWidth: 120,
     .autoSwitchToMusicMode: true,
     .musicModeShowPlaylist: false,
     .musicModeShowAlbumArt: true,

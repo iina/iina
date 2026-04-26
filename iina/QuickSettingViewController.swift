@@ -320,6 +320,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     observe(.iinaSIDChanged) { [unowned self] _ in
       self.subTableView.reloadData()
       self.secSubTableView.reloadData()
+      reload()
     }
     observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
     observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
@@ -481,7 +482,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off
 
     if let currSub = player.info.currentTrack(.sub) {
-      // FIXME: CollorWells cannot be disable?
       let enableTextSettings = !(currSub.isAssSub || currSub.isImageSub)
       [subTextColorWell, subTextSizePopUp, subTextBgColorWell, subTextBorderColorWell, subTextBorderWidthPopUp, subTextFontBtn].forEach { $0.isEnabled = enableTextSettings }
     }

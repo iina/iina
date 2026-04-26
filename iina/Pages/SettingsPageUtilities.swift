@@ -7,6 +7,7 @@
 //
 
 import UniformTypeIdentifiers
+import SafariServices.SFSafariApplication
 
 class SettingsPageUtilities: SettingsPage {
   override var title: String {
@@ -72,6 +73,11 @@ class SettingsPageUtilities: SettingsPage {
   
   private func updateThumbnailCacheStat() {
     thumbCacheSizeLabel.stringValue = "\(FloatingPointByteCountFormatter.string(fromByteCount: CacheManager.shared.getCacheSize(), countStyle: .binary))B"
+  }
+
+  override init () {
+    super.init()
+    self.updateThumbnailCacheStat()
   }
 
   @objc func setIINAAsDefaultAction(_ sender: Any) {
@@ -267,16 +273,25 @@ fileprivate class BrowserExtensionView: SettingsAccessory.Base {
     ffBtn.imagePosition = .imageTrailing
     ffBtn.target = self
     ffBtn.action = #selector(extFirefoxBtnAction)
-    let stackView = makeStackView([chromeBtn, ffBtn])
+    let safariBtn = makeButton(.text_Chrome)
+    safariBtn.image = .findSFSymbol(["arrow.right"])
+    safariBtn.imagePosition = .imageTrailing
+    safariBtn.target = self
+    safariBtn.action = #selector(extSafariBtnAction)
+    let stackView = makeStackView([chromeBtn, ffBtn, safariBtn])
     view.addSubview(stackView)
     stackView.padding(.top(0), .bottom(16), .leading(SettingsSubListView.padding), .trailing(8))
   }
   
   @objc func extChromeBtnAction(_ sender: Any) {
-    NSWorkspace.shared.open(URL(string: AppData.chromeExtensionLink)!)
+    NSWorkspace.shared.open([URL(string: AppData.chromeExtensionLink)!], withApplicationAt: NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.google.Chrome") ?? NSWorkspace.shared.urlForApplication(toOpen: URL(string: "http://")!)!, configuration: NSWorkspace.OpenConfiguration())
   }
 
   @objc func extFirefoxBtnAction(_ sender: Any) {
-    NSWorkspace.shared.open(URL(string: AppData.firefoxExtensionLink)!)
+    NSWorkspace.shared.open([URL(string: AppData.firefoxExtensionLink)!], withApplicationAt: NSWorkspace.shared.urlForApplication(withBundleIdentifier: "org.mozilla.firefox") ?? NSWorkspace.shared.urlForApplication(toOpen: URL(string: "http://")!)!, configuration: NSWorkspace.OpenConfiguration())
+  }
+  
+  @objc func extSafariBtnAction() {
+    SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.colliderli.iina.OpenInIINA")
   }
 }

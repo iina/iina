@@ -9,7 +9,11 @@
 import Foundation
 
 class SettingsPageVideoAudio: SettingsPage {
-  private lazy var audioOutputDeviceView: AudioOutputDeviceView = AudioOutputDeviceView(l10n: localizationContext)
+  private lazy var audioOutputDeviceView: AudioOutputDeviceView = AudioOutputDeviceView()
+
+  override var identifier: String {
+    "video.audio"
+  }
 
   override var title: String {
     return NSLocalizedString("preference.video_audio", comment: "Codec")
@@ -23,7 +27,7 @@ class SettingsPageVideoAudio: SettingsPage {
     "SettingsVideoAudioLocalizable"
   }
 
-  override func content() -> NSView {
+  override func content() -> [SettingsSection] {
     return sections {
       sectionVideo()
       sectionAudio()
@@ -31,9 +35,9 @@ class SettingsPageVideoAudio: SettingsPage {
     }
   }
 
-  private func sectionVideo() -> [NSView] {
+  private func sectionVideo() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Video) {
+      SettingsList(title: .text_Video) {
         SettingsItem.Input()
           .image(name: "number")
           .bindTo(.videoThreads)
@@ -49,14 +53,14 @@ class SettingsPageVideoAudio: SettingsPage {
           .hasDescription()
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
           .bindTo(.loadIccProfile)
           .hasDescription()
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .image(name: ["sun.lefthalf.filled", "sun.max"])
           .bindTo(.enableHdrSupport)
@@ -79,9 +83,9 @@ class SettingsPageVideoAudio: SettingsPage {
     }
   }
 
-  private func sectionAudio() -> [NSView] {
+  private func sectionAudio() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Audio) {
+      SettingsList(title: .text_Audio) {
         SettingsItem.General(title: .audioDriverEnableAVFoundationLabel)
           .image(name: "waveform")
           .withHelpLink(AppData.audioDriverHellpLink)
@@ -101,7 +105,7 @@ class SettingsPageVideoAudio: SettingsPage {
           .hasDescription(content: .videoThreadsDesc)
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.SwitchWithInput()
           .image(name: "speaker.wave.3")
           .labelKey(.enableInitialVolume)
@@ -112,10 +116,10 @@ class SettingsPageVideoAudio: SettingsPage {
           .hasDescription()
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.General(title: .text_PreferredAudioDevice)
           .image(name: "hifispeaker.and.homepod")
-          .withDetailView(audioOutputDeviceView.view)
+          .withDetailView(audioOutputDeviceView)
         SettingsItem.General(title: .text_SPDIFOutput)
           .image(name: "audio.jack.stereo")
           .withExpandingDetailView {
@@ -128,7 +132,7 @@ class SettingsPageVideoAudio: SettingsPage {
           }
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.General(title: .text_PreferredLanguage)
           .image(name: "character.book.closed")
           .withDetailView(
@@ -139,9 +143,9 @@ class SettingsPageVideoAudio: SettingsPage {
     }
   }
 
-  private func sectionReplayGain() -> [NSView] {
+  private func sectionReplayGain() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_ReplayGain) {
+      SettingsList(title: .text_ReplayGain) {
         SettingsItem.PopupButton()
           .image(name: "speaker.plus")
           .bindTo(.replayGain, ofType: Preference.ReplayGainOption.self)
@@ -187,18 +191,20 @@ fileprivate enum AudioDriver: Int, InitializingFromKey, CaseIterable {
 }
 
 
-fileprivate class AudioOutputDeviceView: WithSettingsLocalizationContext {
-  var l10n: SettingsLocalization.Context!
-  lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
+fileprivate class AudioOutputDeviceView: SettingsContainer {
+  lazy var itemID = SettingsContainerUUID.next()
 
   let view: NSView
   let audioDevicePopUp: NSPopUpButton
 
-  init(l10n: SettingsLocalization.Context) {
-    self.l10n = l10n
+  init() {
     self.view = NSView()
     self.audioDevicePopUp = NSPopUpButton()
+  }
 
+  func makeView(context: SettingsLocalization.Context) -> NSView {
+    let l10n = context
+    let ui = SettingsUIHelper(l10n)
     audioDevicePopUp.translatesAutoresizingMaskIntoConstraints = false
     audioDevicePopUp.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     audioDevicePopUp.removeAllItems()
@@ -255,7 +261,9 @@ fileprivate class AudioOutputDeviceView: WithSettingsLocalizationContext {
     audioDevicePopUp.action = #selector(audioDeviceAction)
 
     view.addSubview(audioDevicePopUp)
-    audioDevicePopUp.padding(.top(-4), .bottom(8), .leading(SettingsSubListView.padding), .trailing(8))
+    audioDevicePopUp.padding(.top(-4), .bottom(8), .leading(SettingsSubList.indent), .trailing(8))
+
+    return view
   }
 
   @objc func audioDeviceAction(_ sender: Any) {

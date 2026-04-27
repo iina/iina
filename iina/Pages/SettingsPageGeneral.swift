@@ -11,6 +11,10 @@ import Foundation
 class SettingsPageGeneral: SettingsPage {
   private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.screenshotFolder)
 
+  override var identifier: String {
+    "general"
+  }
+
   override var title: String {
     return NSLocalizedString("preference.general", comment: "General")
   }
@@ -23,7 +27,7 @@ class SettingsPageGeneral: SettingsPage {
     "SettingsGeneralLocalizable"
   }
 
-  override func content() -> NSView {
+  override func content() -> [SettingsSection] {
     return sections {
       sectionBehavior()
       sectionHistory()
@@ -32,9 +36,9 @@ class SettingsPageGeneral: SettingsPage {
     }
   }
 
-  private func sectionBehavior() -> [NSView] {
+  private func sectionBehavior() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Behavior) {
+      SettingsList(title: .text_Behavior) {
         SettingsItem.PopupButton()
           .image(name: "custom.menubar.rectangle.badge.sparkles")
           .bindTo(.actionAfterLaunch, ofType: Preference.ActionAfterLaunch.self)
@@ -46,7 +50,7 @@ class SettingsPageGeneral: SettingsPage {
             SettingsItem.Switch()
               .bindTo(.fullScreenWhenOpen)
           }
-        SettingsItem.General(title: .text_PauseresumeWhen)
+        SettingsItem.General(title: .pauseresumeWhen)
           .image(name: "custom.playpause.arrow.trianglehead.clockwise")
           .withExpandingDetailView {
             SettingsItem.Switch()
@@ -62,7 +66,7 @@ class SettingsPageGeneral: SettingsPage {
           }
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .image(name: "macwindow.on.rectangle")
           .bindTo(.alwaysOpenInNewWindow)
@@ -80,7 +84,7 @@ class SettingsPageGeneral: SettingsPage {
           .bindTo(.keepOpenOnFileEnd)
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .image(name: ["arrow.up.left.and.arrow.down.right.rectangle", "rectangle.expand.diagonal"])
           .bindTo(.useLegacyFullScreen)
@@ -97,13 +101,13 @@ class SettingsPageGeneral: SettingsPage {
           }
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .image(name: "music.note.list")
           .bindTo(.autoSwitchToMusicMode)
       }
 
-      SettingsListView {
+      SettingsList {
         SettingsItem.SwitchWithPopupButton(title: .text_CheckForUpdates)
           .image(name: "arrowshape.up.circle")
           .bindSwitchToCustom {
@@ -120,9 +124,9 @@ class SettingsPageGeneral: SettingsPage {
     }
   }
 
-  private func sectionHistory() -> [NSView] {
+  private func sectionHistory() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_History) {
+      SettingsList(title: .text_History) {
         SettingsItem.Switch()
           .image(name: "custom.arrow.clockwise.badge.clock")
           .bindTo(.resumeLastPosition)
@@ -141,9 +145,9 @@ class SettingsPageGeneral: SettingsPage {
     }
   }
 
-  private func sectionPlayList() -> [NSView] {
+  private func sectionPlayList() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Playlist) {
+      SettingsList(title: .text_Playlist) {
         SettingsItem.Switch()
           .image(name: "custom.list.bullet.badge.plus")
           .bindTo(.playlistAutoAdd)
@@ -166,9 +170,9 @@ class SettingsPageGeneral: SettingsPage {
     }
   }
 
-  private func sectionScreenshots() -> [NSView] {
+  private func sectionScreenshots() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Screenshots) {
+      SettingsList(title: .text_Screenshots) {
         SettingsItem.Switch()
           .image(name: "camera.on.rectangle")
           .bindTo(.screenshotSaveToFile)

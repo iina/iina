@@ -9,13 +9,66 @@
 import Cocoa
 
 
+protocol SettingsContainer {
+  var itemID: Int { get }
+  func makeView(context: SettingsLocalization.Context) -> NSView
+  func getChildren() -> [any SettingsContainer]
+  func registerSearchEntry(context: SettingsSearch.Context)
+}
+
+extension SettingsContainer {
+  func getChildren() -> [any SettingsContainer] { [] }
+  func registerSearchEntry(context: SettingsSearch.Context) { }
+
+  func find(where predicate: (any SettingsContainer) -> Bool) -> SettingsContainer? {
+    if predicate(self) {
+      return self
+    }
+    for item in getChildren() {
+      if let res = item.find(where: predicate) {
+        return res
+      }
+    }
+    return nil
+  }
+}
+
+
+enum SettingsContainerUUID {
+  static private var counter: Int = 70000
+  static func next() -> Int {
+    counter += 1
+    return counter
+  }
+}
+
+
+class SettingsView: NSView {
+  private var tag_: Int
+
+  override var tag: Int {
+    get { tag_ }
+    set { tag_ = newValue }
+  }
+
+  init(tag: Int) {
+    self.tag_ = tag
+    super.init(frame: .zero)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+
 @resultBuilder
 struct SettingsViewsBuilder {
-  static func buildBlock(_ components: NSView...) -> [NSView] {
+  static func buildBlock(_ components: SettingsSection...) -> [SettingsSection] {
     return components
   }
 
-  static func buildBlock(_ components: [NSView]...) -> [NSView] {
+  static func buildBlock(_ components: [SettingsSection]...) -> [SettingsSection] {
     components.flatMap { $0 }
   }
 }
@@ -30,8 +83,8 @@ struct SettingsItemsBuilder {
 @resultBuilder
 struct SettingsSubItemsBuilder {
   static func buildBlock(_ components: SettingsItem.Base...) -> [SettingsItem.Base] {
-    for c in components {
-      c.controlSize = .small
+    for component in components {
+      component.controlSize = .small
     }
     return components
   }
@@ -39,21 +92,18 @@ struct SettingsSubItemsBuilder {
 
 @resultBuilder
 struct SettingsSubListBuilder {
-  static func buildBlock(_ components: SettingsItem.Base...) -> SettingsSubListView {
-    return SettingsSubListView(components)
+  static func buildBlock(_ components: SettingsItem.Base...) -> SettingsSubList {
+    return SettingsSubList(components)
   }
 }
 
 @resultBuilder
 struct SettingsSectionBuilder {
-  static func buildBlock(_ components: SettingsContainer...) -> [NSView] {
-    return components.map { $0.getContainer() }
+  static func buildBlock(_ components: SettingsContainer...) -> [SettingsContainer] {
+    return components
   }
 }
 
-protocol SettingsContainer {
-  func getContainer() -> NSView
-}
 
 class SettingsPage {
   var identifier: String { "" }
@@ -74,37 +124,50 @@ class SettingsPage {
     SettingsLocalization.Context(tableName: localizationTable)
   }()
 
-  final func getContent() -> NSView {
-    let view = content()
-    // inject l10n context
-    SettingsLocalization.injectContext(view, localizationContext)
+  lazy var builtSections: [SettingsSection] = {
+    content()
+  }()
+
+  final func getView() -> NSView {
+    let view = makeContentView()
 
     let containerView = NSView()
     containerView.translatesAutoresizingMaskIntoConstraints = false
     containerView.addSubview(view)
-    view.padding(.horizontal(4), .bottom(8), .top)
+    view.padding(to: containerView, .horizontal(4), .bottom(8), .top)
     return containerView
   }
 
-  func content() -> NSView {
-    return NSView()
+  func content() -> [SettingsSection] {
+    return []
   }
 
-  final func section(@SettingsSectionBuilder _ containers: () -> [NSView]) -> [NSView] {
-    return containers()
+  final func section(@SettingsSectionBuilder _ containers: () -> [SettingsContainer]) -> SettingsSection {
+    SettingsSection(spacing: sectionSpacing, containers())
   }
 
-  final func sections(@SettingsViewsBuilder _ sections: () -> [NSView]) -> NSStackView {
-    let views: [NSView] = sections()
+  final func sections(@SettingsViewsBuilder _ sections: () -> [SettingsSection]) -> [SettingsSection] {
+    sections()
+  }
+
+  private func makeContentView() -> NSView {
+    let views = builtSections.map {
+      $0.makeView(context: localizationContext)
+    }
     let stackView = NSStackView(views: views)
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.orientation = .vertical
     stackView.spacing = self.sectionSpacing
     views.forEach {
-      $0.padding(.horizontal)
+      $0.padding(to: stackView, .horizontal)
       stackView.setVisibilityPriority(.mustHold, for: $0)
     }
     return stackView
+  }
+
+  func registerSearchEntries() {
+    let context = SettingsSearch.Context(l10n: localizationContext, page: identifier, section: nil, parent: nil)
+    builtSections.forEach { $0.registerSearchEntry(context: context) }
   }
 
   func makeSymbol(_ name: String, fallbackImage: NSImage.Name) -> NSImage {
@@ -115,28 +178,184 @@ class SettingsPage {
 }
 
 
-class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContext {
-  var container: Container!
-
+class SettingsSection: SettingsContainer {
+  lazy var itemID = SettingsContainerUUID.next()
+  let spacing: CGFloat
   var titleKey: SettingsLocalization.Key?
-  var listTitle: String?
-  var l10n: SettingsLocalization.Context!
+  let children: [SettingsContainer]
+
+  init(titleKey: SettingsLocalization.Key? = nil, spacing: CGFloat, _ children: [SettingsContainer]) {
+    self.spacing = spacing
+    self.titleKey = titleKey
+    self.children = children
+
+    if self.titleKey == nil,
+       let firstList = children.first as? SettingsList,
+       let titleKey = firstList.titleKey
+    {
+      self.titleKey = titleKey
+      firstList.titleKey = nil
+    }
+  }
+
+  func getChildren() -> [any SettingsContainer] {
+    children
+  }
+
+  func makeView(context: SettingsLocalization.Context) -> NSView {
+    let view = View()
+    let childViews = children.map { $0.makeView(context: context) }
+    let stackView = NSStackView(views: childViews)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.orientation = .vertical
+    stackView.spacing = spacing
+    childViews.forEach {
+      $0.padding(to: stackView, .horizontal)
+      stackView.setVisibilityPriority(.mustHold, for: $0)
+    }
+    view.addSubview(stackView)
+
+    if let titleKey {
+      let title = context.localized(titleKey)
+      view.sectionTitle = title
+      let titleField = NSTextField(labelWithString: title)
+      titleField.font = NSFont.systemFont(ofSize: 14, weight: .bold)
+      titleField.translatesAutoresizingMaskIntoConstraints = false
+      titleField.textColor = NSColor.secondaryLabelColor
+      view.titleField = titleField
+      view.addSubview(titleField)
+      titleField.padding(to: view, .top, .leading(16), .trailing(8))
+      stackView.spacing(to: titleField, .top(12)).padding(to: view, .leading, .trailing, .bottom)
+    } else {
+      stackView.padding(to: view, .all)
+    }
+
+    return view
+  }
+
+  func registerSearchEntry(context: SettingsSearch.Context) {
+    let context = context.with(section: titleKey.map { context.l10n.localized($0) })
+    return children.forEach { $0.registerSearchEntry(context: context) }
+  }
+
+  class View: NSView {
+    var sectionTitle: String?
+    var titleField: NSTextField?
+  }
+}
+
+
+class SettingsList: SettingsContainer {
+  lazy var itemID = SettingsContainerUUID.next()
+  var titleKey: SettingsLocalization.Key?
+  var items: [SettingsItem.Base]
+  var horizontalPadding: CGFloat { 8 }
 
   static private let SMALL_TITLE = false
 
-  class Container: NSView, WithSettingsLocalizationContext {
-    var l10n: SettingsLocalization.Context!
-    let listView: SettingsListView
-    var titleKey: SettingsLocalization.Key?
-    var titleField: NSTextField!
+  init(title: SettingsLocalization.Key? = nil, _ items: [SettingsItem.Base]? = nil) {
+    self.titleKey = title
+    self.items = items ?? []
+  }
 
-    init(_ listView: SettingsListView, titleKey: SettingsLocalization.Key? = nil) {
+  convenience init(title: SettingsLocalization.Key? = nil, @SettingsItemsBuilder _ items: () -> [SettingsItem.Base]) {
+    self.init(title: title, items())
+  }
+
+  func getChildren() -> [any SettingsContainer] {
+    items
+  }
+
+  func makeView(context: SettingsLocalization.Context) -> NSView {
+    let listView = makeListView(context: context)
+    let container = ContainerView(listView: listView)
+    container.addSubview(listView)
+
+    guard let titleKey else {
+      listView.padding(to: container, .vertical, .horizontal(horizontalPadding))
+      return container
+    }
+
+    let title = context.localized(titleKey)
+    let titleField = NSTextField(labelWithString: SettingsList.SMALL_TITLE ? title.localizedUppercase : title)
+    titleField.font = SettingsList.SMALL_TITLE ?
+      NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold) :
+      NSFont.systemFont(ofSize: 14, weight: .bold)
+    titleField.translatesAutoresizingMaskIntoConstraints = false
+    titleField.textColor = NSColor.secondaryLabelColor
+    container.titleField = titleField
+    container.addSubview(titleField)
+    titleField.padding(to: container, .top, .leading(16), .trailing(8))
+    listView.spacing(to: titleField, .top(SettingsList.SMALL_TITLE ? 8 : 12))
+    listView.padding(to: container, .bottom, .horizontal(8))
+    return container
+  }
+
+  func registerSearchEntry(context: SettingsSearch.Context) {
+    items.forEach { $0.registerSearchEntry(context: context) }
+  }
+
+  func makeListView(context: SettingsLocalization.Context) -> View {
+    let listView = View()
+    addItems(to: listView, context: context)
+    return listView
+  }
+
+  func addItems(to listView: View, context: SettingsLocalization.Context) {
+    items.forEach {
+      $0.isFirstItem = false
+      $0.isLastItem = false
+    }
+    items.first?.isFirstItem = true
+    items.last?.isLastItem = true
+
+    let itemViews = items.map { item -> NSView in
+      item.makeView(context: context)
+    }
+    itemViews.forEach {
+      listView.contentView!.addSubview($0)
+      $0.padding(to: listView.contentView, .horizontal)
+    }
+    itemViews.first?.padding(to: listView.contentView, .top(0))
+    itemViews.last?.padding(to: listView.contentView, .bottom)
+    zip(itemViews.dropFirst(), itemViews.dropLast()).forEach { (bottomItem, topItem) in
+      bottomItem.spacing(to: topItem, .top)
+      let separator = NSBox()
+      separator.translatesAutoresizingMaskIntoConstraints = false
+      separator.boxType = .separator
+      separator.titlePosition = .noTitle
+      listView.contentView!.addSubview(separator)
+      separator.padding(to: topItem, .bottom, .leading(36), .trailing)
+    }
+  }
+
+  /// A container view for displaying the list with a title.
+  class ContainerView: NSView {
+    let listView: SettingsList.View
+    var titleField: NSTextField?
+
+    init(listView: SettingsList.View) {
       self.listView = listView
       super.init(frame: NSRect())
-
-      self.titleKey = titleKey
       self.translatesAutoresizingMaskIntoConstraints = false
-      self.addSubview(listView)
+    }
+
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+  }
+
+  class View: NSBox {
+    init() {
+      super.init(frame: NSRect())
+      self.translatesAutoresizingMaskIntoConstraints = false
+      self.titlePosition = .noTitle
+      self.contentViewMargins = NSSize(width: 0, height: 0)
+
+      if #available(macOS 26, *) {
+        self.boxType = .custom
+        self.cornerRadius = SettingsPage.corderRadius
+      }
     }
 
     required init?(coder: NSCoder) {
@@ -144,123 +363,58 @@ class SettingsListView: NSBox, SettingsContainer, WithSettingsLocalizationContex
     }
 
     override func viewDidMoveToWindow() {
-      if let key = titleKey {
-        let title = l10n.localized(key)
-        if (SMALL_TITLE) {
-          titleField = NSTextField(labelWithString: title.localizedUppercase)
-          titleField.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold)
+      guard window != nil else { return }
+      viewDidChangeEffectiveAppearance()
+    }
+
+    override func viewDidChangeEffectiveAppearance() {
+      if #available(macOS 26, *) {
+        if effectiveAppearance.isDark {
+          self.borderColor = .separatorColor
+          self.fillColor = .underPageBackgroundColor
         } else {
-          titleField = NSTextField(labelWithString: title)
-          titleField.font = NSFont.systemFont(ofSize: 14, weight: .bold)
+          self.borderColor = .black.withAlphaComponent(0.05)
+          self.fillColor = .black.withAlphaComponent(0.02)
         }
-        titleField.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(titleField)
-        titleField.padding(.top, .leading(16), .trailing(8))
-        titleField.textColor = NSColor.secondaryLabelColor
-        listView.spacing(to: titleField, .top(SMALL_TITLE ? 8 : 12))
-        listView.padding(.bottom, .horizontal(8))
-      } else {
-        listView.padding(.vertical, .horizontal(8))
-      }
-    }
-  }
-
-  init(title: SettingsLocalization.Key? = nil, _ items: [SettingsItem.Base]? = nil) {
-    super.init(frame: NSRect())
-    self.translatesAutoresizingMaskIntoConstraints = false
-
-    self.titleKey = title
-    self.container = Container(self, titleKey: title)
-    self.titlePosition = .noTitle
-    self.contentViewMargins = NSSize(width: 0, height: 0)
-    
-    if #available(macOS 26, *) {
-      self.boxType = .custom
-      self.cornerRadius = SettingsPage.corderRadius
-    }
-
-    if let items = items {
-      addItems(items)
-    }
-  }
-
-  convenience init(title: SettingsLocalization.Key? = nil, @SettingsItemsBuilder _ items: () -> [SettingsItem.Base]) {
-    self.init(title: title, items())
-  }
-
-  func getContainer() -> NSView {
-    return container
-  }
-
-  private func addItems(_ subItems: [SettingsItem.Base]) {
-    subItems.forEach {
-      self.contentView!.addSubview($0)
-      $0.padding(.horizontal)
-    }
-    subItems.first?.padding(.top(0))
-    subItems.first?.isFirstItem = true
-    subItems.last?.padding(.bottom)
-    subItems.last?.isLastItem = true
-    zip(subItems.dropFirst(), subItems.dropLast()).forEach { (bottomItem, topItem) in
-      bottomItem.spacing(to: topItem, .top)
-      let separator = NSBox()
-      separator.translatesAutoresizingMaskIntoConstraints = false
-      separator.boxType = .separator
-      separator.titlePosition = .noTitle
-      self.contentView!.addSubview(separator)
-      separator.padding(to: topItem, .bottom, .leading(36), .trailing)
-    }
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  override func viewDidMoveToWindow() {
-    self.listTitle = titleKey.map(l10n.localized(_:))
-    self.viewDidChangeEffectiveAppearance()
-  }
-  
-  override func viewDidChangeEffectiveAppearance() {
-    if #available(macOS 26, *) {
-      if effectiveAppearance.isDark {
-        self.borderColor = .separatorColor
-        self.fillColor = .underPageBackgroundColor
-      } else {
-        self.borderColor = .black.withAlphaComponent(0.05)
-        self.fillColor = .black.withAlphaComponent(0.02)
       }
     }
   }
 }
 
 
-class SettingsSubListView: SettingsListView {
-  static let padding: CGFloat = 28
+class SettingsSubList: SettingsList {
+  static let indent: CGFloat = 28
+  override var horizontalPadding: CGFloat { 0 }
 
-  init(_ items: [SettingsItem.Base]? = nil) {
-    super.init(items)
+  override func makeListView(context: SettingsLocalization.Context) -> View {
+    items.forEach { $0.controlSize = .small }
 
-    self.fillColor = .clear
-    self.boxType = .custom
-    self.borderWidth = 0
+    let listView = View()
+    addItems(to: listView, context: context)
 
     let separator = NSBox()
     separator.translatesAutoresizingMaskIntoConstraints = false
     separator.boxType = .separator
     separator.titlePosition = .noTitle
-    self.contentView!.addSubview(separator)
-    separator.padding(.top, .leading(36), .trailing)
-
-    items?.forEach { $0.controlSize = .small }
+    listView.contentView!.addSubview(separator)
+    separator.padding(to: listView.contentView, .top, .leading(36), .trailing)
+    return listView
   }
 
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  override func viewDidChangeEffectiveAppearance() {
-    return
+  class View: SettingsList.View {
+    override init() {
+      super.init()
+      self.fillColor = .clear
+      self.boxType = .custom
+      self.borderWidth = 0
+    }
+
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidChangeEffectiveAppearance() {
+      return
+    }
   }
 }
-

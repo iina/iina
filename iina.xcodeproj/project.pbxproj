@@ -404,6 +404,7 @@
 		E38EA5AE2F31429F00FB51CE /* SettingsPagePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5AD2F31429900FB51CE /* SettingsPagePlugin.swift */; };
 		E38EA5B12F3142C700FB51CE /* SettingsPluginLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5B02F3142C700FB51CE /* SettingsPluginLocalizable.strings */; };
 		E38EA5B22F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5AF2F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift */; };
+		E392B8CC2FB2263F005F2C24 /* SettingsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */; };
 		E3958565253133E80096811F /* SidebarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958563253133E80096811F /* SidebarTabView.swift */; };
 		E3958566253133E80096811F /* SidebarTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3958564253133E80096811F /* SidebarTabView.xib */; };
 		E3958586253309C90096811F /* PluginSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958585253309C90096811F /* PluginSidebarView.swift */; };
@@ -1960,6 +1961,7 @@
 		E38EA5AD2F31429900FB51CE /* SettingsPagePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPagePlugin.swift; sourceTree = "<group>"; };
 		E38EA5AF2F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysPlugin.swift; sourceTree = "<group>"; };
 		E38EA5B02F3142C700FB51CE /* SettingsPluginLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsPluginLocalizable.strings; sourceTree = "<group>"; };
+		E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSearch.swift; sourceTree = "<group>"; };
 		E393669923BDD1850070D626 /* IINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IINA.entitlements; sourceTree = "<group>"; };
 		E3958563253133E80096811F /* SidebarTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTabView.swift; sourceTree = "<group>"; };
 		E3958564253133E80096811F /* SidebarTabView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTabView.xib; sourceTree = "<group>"; };
@@ -2852,6 +2854,7 @@
 				E34BC28C2C27733200A94680 /* SettingsPage.swift */,
 				E34BC28E2C27A68100A94680 /* SettingsItem.swift */,
 				E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */,
+				E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */,
 				E3EC8C402F92E69C00FBB51E /* PluginManager.swift */,
 				E3EC8C452F9475BC00FBB51E /* PluginStorePanel.swift */,
 			);
@@ -3387,6 +3390,7 @@
 				E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */,
 				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
+				E392B8CC2FB2263F005F2C24 /* SettingsSearch.swift in Sources */,
 				E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,

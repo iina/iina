@@ -10,14 +10,18 @@ import WebKit
 import Just
 
 class SettingsPagePlugin: SettingsPage {
+  override var identifier: String {
+    "plugin"
+  }
+  
   override var title: String {
     return NSLocalizedString("preference.plugins", comment: "Plugins")
   }
-  
+
   override var image: NSImage {
     return makeSymbol("puzzlepiece.extension", fallbackImage: "plugin")
   }
-  
+
   override var localizationTable: String {
     "SettingsPluginLocalizable"
   }
@@ -30,26 +34,26 @@ class SettingsPagePlugin: SettingsPage {
   fileprivate lazy var listView: PluginListView = .init(l10n: localizationContext, page: self)
   fileprivate lazy var updateView: PluginUpdateView = .init(l10n: localizationContext, page: self)
 
-  override func content() -> NSView {
+  override func content() -> [SettingsSection] {
     return sections {
       sectionInstall()
       sectionPluginList()
     }
   }
-  
-  private func sectionInstall() -> [NSView] {
+
+  private func sectionInstall() -> SettingsSection {
     return section {
-      SettingsListView() {
+      SettingsList() {
         SettingsItem.Custom()
           .view(installView.view)
       }
     }
   }
 
-  private func sectionPluginList() -> [NSView] {
+  private func sectionPluginList() -> SettingsSection {
     return section {
       updateView
-      SettingsListView() {
+      SettingsList() {
         SettingsItem.Custom()
           .view(listView.view)
       }
@@ -65,21 +69,21 @@ fileprivate class PluginInstallView: SettingsAccessory.Base {
   init(l10n: SettingsLocalization.Context, page: SettingsPagePlugin) {
     self.page = page
     super.init(l10n: l10n)
-    
-    let githubBtn = makeButton(.text_InstallFromGitHub)
+
+    let githubBtn = ui.button(.text_InstallFromGitHub)
     githubBtn.target = self
     githubBtn.action = #selector(installPluginFromGitHub)
-    let localBtn = makeButton(.text_InstallPackage)
+    let localBtn = ui.button(.text_InstallPackage)
     localBtn.target = self
     localBtn.action = #selector(installPluginFromLocalPackage)
 
-    let btnStackView = makeStackView([githubBtn, localBtn])
-    
-    let installLabel = makeLabel(.text_YouCanInstallANew).makeMultiLine()
-    
-    let stackView = makeStackView([installLabel, btnStackView], orientation: .vertical)
+    let btnStackView = ui.hStack(githubBtn, localBtn)
+
+    let installLabel = ui.label(.text_YouCanInstallANew).makeMultiLine()
+
+    let stackView = ui.vStack(installLabel, btnStackView)
     stackView.alignment = .leading
-    
+
     view.addSubview(stackView)
     stackView.padding(.all(12))
   }
@@ -101,9 +105,12 @@ fileprivate class PluginInstallView: SettingsAccessory.Base {
 }
 
 
-fileprivate class PluginUpdateView: NSView, SettingsContainer {
+fileprivate class PluginUpdateView: SettingsContainer {
+  lazy var itemID = SettingsContainerUUID.next()
+  let view: NSView
+
   func getContainer() -> NSView {
-    return self
+    return view
   }
 
   enum Status {
@@ -118,10 +125,10 @@ fileprivate class PluginUpdateView: NSView, SettingsContainer {
 
   init(l10n: SettingsLocalization.Context, page: SettingsPagePlugin) {
     self.page = page
+    self.view = .init(frame: .zero)
     self.checkUpdateLabel = NSTextField(labelWithString: "Checking for updates…")
     self.checkUpdateButton = NSButton()
     checkUpdateButton.translatesAutoresizingMaskIntoConstraints = false
-    super.init(frame: .zero)
 
     checkUpdateLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold)
     checkUpdateLabel.textColor = .secondaryLabelColor
@@ -138,14 +145,18 @@ fileprivate class PluginUpdateView: NSView, SettingsContainer {
     checkUpdateStackView.translatesAutoresizingMaskIntoConstraints = false
     checkUpdateStackView.orientation = .horizontal
 
-    self.translatesAutoresizingMaskIntoConstraints = false
-    self.addSubview(checkUpdateStackView)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(checkUpdateStackView)
 
     checkUpdateStackView.padding(.top(8), .bottom, .horizontal(16))
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  func makeView(context: SettingsLocalization.Context) -> NSView {
+    return view
   }
 
   @objc func checkForUpdates(_ sender: AnyObject) {
@@ -183,19 +194,31 @@ fileprivate extension NSPasteboard.PasteboardType {
 
 
 fileprivate class PluginListView: SettingsAccessory.Base {
+  // TODO: this is a workaround.
+  // SettingsItem.Custom should also adopt the "build first, render later" design.
+  class TableView: NSTableView {
+    weak var listView: PluginListView!
+
+    override func viewDidMoveToWindow() {
+      super.viewDidMoveToWindow()
+      listView.checkForAllPluginUpdates()
+    }
+  }
+
   static var currentPlugin: JavascriptPlugin?
   static var pluginHasUpdate: [String: Bool] = [:]
   static var isCheckingForUpdates: Bool = false
 
-  let tableView: NSTableView
+  let tableView: TableView
   unowned let page: SettingsPagePlugin
 
   init(l10n: SettingsLocalization.Context, page: SettingsPagePlugin) {
-    self.tableView = NSTableView()
+    self.tableView = TableView()
     self.page = page
 
     super.init(l10n: l10n)
-    
+    tableView.listView = self
+
     let column = NSTableColumn(identifier: .pluginItem)
     column.title = "Items"
     tableView.style = .plain
@@ -208,8 +231,6 @@ fileprivate class PluginListView: SettingsAccessory.Base {
 
     view.addSubview(tableView)
     tableView.padding(.all(0))
-
-    checkForAllPluginUpdates()
   }
 
   func checkForAllPluginUpdates() {
@@ -258,10 +279,10 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
     private lazy var pluginManager: PluginManager = PluginManager(window: self.nameLabel.window!)
     weak private var listView: PluginListView!
-    
+
     func setup(plugin: JavascriptPlugin, listView: PluginListView) {
       self.plugin = plugin
-      
+
       if nameLabel == nil {
         self.identifier = .pluginItem
         self.listView = listView
@@ -269,7 +290,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
         // left
         nameLabel = NSTextField(labelWithString: plugin.name)
         nameLabel.font = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .bold)
-        
+
         enabledSwitch = NSSwitch()
         enabledSwitch.state = plugin.enabled ? .on : .off
         enabledSwitch.controlSize = .mini
@@ -317,18 +338,18 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
         [enabledSwitch, nameLabel, progressIndicator, versionLabel, updateBtn, devLabel, actionsBtn].forEach {
           nameStackView.addArrangedSubview($0)
         }
-        
+
         // bottom
         descLabel = NSTextField(labelWithString: plugin.desc ?? "No description")
         descLabel.lineBreakMode = .byTruncatingTail
         descLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         descLabel.textColor = .secondaryLabelColor
-        
+
         let stackView = NSStackView(views: [nameStackView, descLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.alignment = .leading
-        
+
         self.aboutBtn = NSButton()
         aboutBtn.size(width: 18, height: 18)
         aboutBtn.image = .findSFSymbol(["info.circle"])
@@ -337,10 +358,10 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
         aboutBtn.translatesAutoresizingMaskIntoConstraints = false
         aboutBtn.target = self
         aboutBtn.action = #selector(aboutBtnAction)
-        
+
         self.addSubview(stackView)
         self.addSubview(aboutBtn)
-        
+
         stackView.padding(.top(12), .bottom(4), .leading(8), .trailing(20))
         aboutBtn.padding(.trailing(8))
           .center(with: self, y: true)
@@ -362,7 +383,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
     @objc func actionsBtnAction(_ sender: NSButton) {
       PluginListView.currentPlugin = plugin
-      
+
       let l10n = listView.l10n!
       let actionMenu = NSMenu()
       actionMenu.addItem(withTitle: l10n.localized(.text_Uninstall), image: ["trash"],
@@ -372,10 +393,10 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
                          action: #selector(showPluginInFinderAction), target: listView)
       NSMenu.popUpContextMenu(actionMenu, with: NSApp.currentEvent!, for: sender)
     }
-    
+
     @objc func aboutBtnAction(_ sender: NSButton) {
       PluginListView.currentPlugin = plugin
-      
+
       let sheetWindow = PluginDetailsWindow(l10n: listView.l10n, plugin: plugin, window: window!)
       window!.beginSheet(sheetWindow)
     }
@@ -412,11 +433,11 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
     return JavascriptPlugin.plugins.count
   }
-  
+
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
     return 60
   }
-  
+
   func selectionShouldChange(in tableView: NSTableView) -> Bool {
     return false
   }
@@ -428,7 +449,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     let identifier: NSUserInterfaceItemIdentifier = .pluginItem
     guard let plugin = JavascriptPlugin.plugins[at: row] else { return nil }
-    
+
     let view = (tableView.makeView(withIdentifier: identifier, owner: self) as? ItemView) ?? ItemView()
     view.setup(plugin: plugin, listView: self)
     return view
@@ -474,7 +495,7 @@ extension PluginListView {
       }
     }
   }
-  
+
   @objc func showPluginInFinderAction(_ sender: Any) {
     guard let currentPlugin = PluginListView.currentPlugin else { return }
     NSWorkspace.shared.activateFileViewerSelecting([currentPlugin.root])
@@ -491,13 +512,13 @@ fileprivate class PluginDetailsWindow: NSWindow {
   private let loadingIndicator: NSProgressIndicator
   private let loadingFailedView: NSTextField
   private var currentTab: Tab = .about
-  
+
   unowned let window: NSWindow
-  
+
   enum Tab: Int {
     case settings = 0, about, help
   }
-  
+
   init(l10n: SettingsLocalization.Context, plugin: JavascriptPlugin, window: NSWindow) {
     self.l10n = l10n
     self.window = window
@@ -506,7 +527,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
 
     self.okButton = NSButton(title: l10n.localized(.text_OK), target: nil, action: nil)
     okButton.translatesAutoresizingMaskIntoConstraints = false
-    
+
     self.loadingIndicator = NSProgressIndicator()
     loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
 
@@ -528,11 +549,11 @@ fileprivate class PluginDetailsWindow: NSWindow {
 
     okButton.target = self
     okButton.action = #selector(dismissSheet)
-    
+
     let nameLabel = NSTextField(labelWithString: plugin.name)
     nameLabel.translatesAutoresizingMaskIntoConstraints = false
     nameLabel.font = .systemFont(ofSize: NSFont.systemFontSize, weight: .bold)
-    
+
     let versionLabel = NSTextField(labelWithString: plugin.version)
     versionLabel.translatesAutoresizingMaskIntoConstraints = false
     versionLabel.textColor = .secondaryLabelColor
@@ -542,7 +563,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     iconView.image = .findSFSymbol(["puzzlepiece.extension"])
     iconView.translatesAutoresizingMaskIntoConstraints = false
     iconView.size(width: 24, height: 24)
-    
+
     segControl.segmentCount = 3
     segControl.segmentStyle = .texturedSquare
     if #available(macOS 26.0, *) {
@@ -562,7 +583,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
       segControl.setImage(.findSFSymbol([seg.0]), forSegment: i)
       segControl.setLabel(l10n.localized(seg.1), forSegment: i)
     }
-    
+
     contentView.addSubview(iconView)
     iconView.padding(.leading(16), .top(20))
     contentView.addSubview(nameLabel)
@@ -573,7 +594,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     segControl.padding(.top(16), .trailing(16))
     contentView.addSubview(okButton)
     okButton.padding(.bottom(16), .trailing(16))
-    
+
     createWebView()
     contentView.addSubview(webView)
     webView.padding(.horizontal(16))
@@ -625,7 +646,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     """, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
 
     config.userContentController.add(self, name: "iina")
-    
+
     self.webView = WKWebView(frame: .zero, configuration: config)
     if #available(macOS 13.3, *) {
       webView.isInspectable = true
@@ -674,7 +695,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     }
     webView.loadHTMLString(generateHTML(body: body), baseURL: nil)
   }
-  
+
   private func generateHelpPage() {
     if let helpURL = plugin.helpPageURL {
       if helpURL.isFileURL {
@@ -686,7 +707,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
       webView.loadHTMLString(generateHTML(body: "This plugin does not have a help page."), baseURL: nil)
     }
   }
-  
+
   private func generateHTML(body: String) -> String {
     return """
     <!DOCTYPE html>
@@ -754,11 +775,11 @@ extension PluginDetailsWindow: WKScriptMessageHandler, WKNavigationDelegate {
   func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
     // Since all tabs share the same webview, we don't want uncontrolled message from anywhere, e.g. the help page
     guard currentTab == .settings else { return }
-    
+
     guard let dict = message.body as? [Any], dict.count == 2 else { return }
     guard let name = dict[0] as? String else { return }
     guard let data = dict[1] as? [Any], let prefName = data[0] as? String else { return }
-    
+
     if name == "set" {
       plugin.preferences[prefName] = data[1]
     } else if name == "get" {

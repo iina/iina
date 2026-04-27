@@ -7,6 +7,10 @@
 //
 
 class SettingsPageKeyBindings: SettingsPage {
+  override var identifier: String {
+    "key.bindings"
+  }
+  
   override var title: String {
     return NSLocalizedString("preference.keybindings", comment: "Key Bindings")
   }
@@ -21,16 +25,16 @@ class SettingsPageKeyBindings: SettingsPage {
 
   private lazy var configEditor: ConfigEditor = .init(l10n: localizationContext)
 
-  override func content() -> NSView {
+  override func content() -> [SettingsSection] {
     return sections {
       sectionMediaControl()
       sectionConfiguration()
     }
   }
 
-  private func sectionMediaControl() -> [NSView] {
+  private func sectionMediaControl() -> SettingsSection {
     return section {
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .bindTo(.useMediaKeys)
           .image(name: ["playpause.circle", "playpause"])
@@ -39,9 +43,9 @@ class SettingsPageKeyBindings: SettingsPage {
     }
   }
 
-  private func sectionConfiguration() -> [NSView] {
+  private func sectionConfiguration() -> SettingsSection {
     return section {
-      SettingsListView {
+      SettingsList {
         SettingsItem.General(title: .text_KeyBindingSet)
           .image(name: ["book.and.wrench", "wrench.adjustable", "wrench"])
           .withValueView(configEditor.chooserView)
@@ -167,7 +171,7 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
     delConfBtn.target = self
     delConfBtn.action = #selector(deleteConfFileAction)
 
-    let chooserStackView = makeStackView([chooserPopupButton, delConfBtn, addConfBtn])
+    let chooserStackView = ui.hStack(chooserPopupButton, delConfBtn, addConfBtn)
     chooserView.addSubview(chooserStackView)
     chooserStackView.padding(.all(8))
 
@@ -182,13 +186,11 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
     let headerViewContainer = NSView()
     headerViewContainer.translatesAutoresizingMaskIntoConstraints = false
     headerViewContainer.size(height: 32)
-    let headerView = makeStackView([searchField, addKeyMappingBtn])
+    let headerView = ui.hStack(searchField, addKeyMappingBtn)
     headerViewContainer.addSubview(headerView)
     headerView.padding(.top(8), .leading(16), .trailing(16))
 
-    let editorStackView = makeStackView([headerViewContainer, kbTableView], orientation: .vertical)
-    editorStackView.alignment = .leading
-    editorStackView.spacing = 0
+    let editorStackView = ui.vStack(align: .leading, spacing: 0, headerViewContainer, kbTableView)
 
     searchField.setContentHuggingPriority(.defaultLow, for: .horizontal)
     searchField.bind(

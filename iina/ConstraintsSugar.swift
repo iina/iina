@@ -131,9 +131,16 @@ extension NSView {
     let noArg = x == nil && y == nil
     if x == true || noArg {
       self.superview!.addConstraint(self.centerXAnchor.constraint(equalTo: aView.centerXAnchor))
-    } else if y == true || noArg {
+    }
+    if y == true || noArg {
       self.superview!.addConstraint(self.centerYAnchor.constraint(equalTo: aView.centerYAnchor))
     }
+    return self
+  }
+
+  @discardableResult
+  func alignBaseLine(with aView: NSView) -> Self {
+    self.superview!.addConstraint(self.firstBaselineAnchor.constraint(equalTo: aView.firstBaselineAnchor))
     return self
   }
 

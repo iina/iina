@@ -8,6 +8,7 @@
 "actionAfterLaunch.items.2" = "Do nothing";
 /* id="M0z-bI-88d" */
 "alwaysOpenInNewWindow.label" = "Allow multiple player windows";
+
 /* id="WZE-pS-9ne" */
 "groupSimultaneousOpensInPlaylist.label" = "Group media in playlist when opening multiple files at once";
 /* id="Z7U-cf-ezr" */
@@ -123,7 +124,7 @@
 /* key="uQR-Fx-oEm" */
 "$Behavior" = "Behavior";
 /* key="xr2-rB-O0x" */
-"$PauseresumeWhen" = "Pause/resume when";
+"pauseresumeWhen" = "Pause/resume when";
 
 "$CheckForUpdates.items.3600" = "Hourly";
 "$CheckForUpdates.items.86400" = "Daily";

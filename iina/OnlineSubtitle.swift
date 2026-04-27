@@ -291,6 +291,17 @@ class OnlineSubtitle: NSObject {
     return .onlineSubQuotaExceeded(resetTime)
   }
 
+  private static func osdMessageForDetailedError(_ error: Swift.Error,
+                                                 fallback: OSDMessage,
+                                                 providerName: String) -> OSDMessage {
+    switch error {
+    case OpenSubClient.Error.errorResponse(let response):
+      return osdMessageForOpenSubErrorResponse(response, fallback: fallback, providerName: providerName)
+    default:
+      return fallback
+    }
+  }
+
   private static func shouldExtendTimeout(for osdMessage: OSDMessage) -> Bool {
     switch osdMessage {
     case .onlineSubQuotaExceeded:

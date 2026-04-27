@@ -317,11 +317,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
     observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
     observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
-    observe(.iinaSIDChanged) { [unowned self] _ in
-      self.subTableView.reloadData()
-      self.secSubTableView.reloadData()
-      reload()
-    }
+    observe(.iinaSIDChanged) { [unowned self] _ in self.reload() }
     observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
     observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
   }

@@ -222,6 +222,8 @@ class PlayerCore: NSObject {
     return controller
   }()
 
+  private var subFileMonitor: FileMonitor? = nil
+
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
   var syncUITimer: Timer?
@@ -911,6 +913,7 @@ class PlayerCore: NSObject {
   func stop() {
     guard info.state != .shutDown else { return }
     savePlaybackPosition()
+    stopWatchingSubFile()
 
     // The player may already be stopped in which case the state must not be set to stopping.
     if info.state != .idle {
@@ -1441,6 +1444,38 @@ class PlayerCore: NSObject {
     }
     mainWindow?.quickSettingView.reload()
   }
+
+  private func startWatchingSubFile() {
+    guard let currentSubTrack = info.currentTrack(.sub) else { return }
+    guard let externalFilename = currentSubTrack.externalFilename else {
+      log("Sub track \(currentSubTrack.id) is not an external file", level: .verbose)
+      return
+    }
+
+    // Stop previous watch (if any)
+    stopWatchingSubFile()
+
+    let subURL = URL(fileURLWithPath: externalFilename)
+    let fileMonitor = FileMonitor(url: subURL)
+    fileMonitor.fileDidChange = { [self] in
+      mpv.command(.subReload, args: [String(currentSubTrack.id)], checkError: false) { [self] code in
+        if code >= 0 { return }
+        log("Failed reloading sub track \(currentSubTrack.id): error code \(code)", level: .error)
+      }
+    }
+    subFileMonitor = fileMonitor
+    log("Starting FS watch of sub file \(subURL.path.quoted)", level: .verbose)
+    fileMonitor.startMonitoring()
+  }
+
+  private func stopWatchingSubFile() {
+    guard let subFileMonitor else { return }
+
+    log("Stopping FS watch of sub file \(subFileMonitor.url.path.quoted)", level: .verbose)
+    subFileMonitor.stopMonitoring()
+    self.subFileMonitor = nil
+  }
+
 
   func setAudioDelay(_ delay: Double) {
     mpv.setDouble(MPVOption.Audio.audioDelay, delay)
@@ -2027,6 +2062,9 @@ class PlayerCore: NSObject {
       }
     }
 
+    // Stop watchers from prev media (if any)
+    stopWatchingSubFile()
+
     NowPlayingInfoManager.shared.updateInfo(withTitle: true)
 
     // Auto load
@@ -2358,6 +2396,7 @@ class PlayerCore: NSObject {
   func sidChanged() {
     guard info.state.active else { return }
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
+    startWatchingSubFile()
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
   }

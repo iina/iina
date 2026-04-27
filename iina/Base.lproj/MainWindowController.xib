@@ -50,6 +50,7 @@
                 <outlet property="playSlider" destination="eBP-6g-bAT" id="lGv-18-YeQ"/>
                 <outlet property="rightArrowButton" destination="EIi-qd-glM" id="U46-Gl-e8D"/>
                 <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
+                <outlet property="oscSpeedChipLabel" destination="SpD-lb-LBL" id="spd-outlet-1"/>
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
                 <outlet property="sideBarRightConstraint" destination="PAj-s6-32e" id="DOs-2k-JEG"/>
                 <outlet property="sideBarView" destination="epo-S6-QVB" id="5eE-aM-VUd"/>
@@ -487,6 +488,14 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="260" verticalHuggingPriority="750" alphaValue="0.6" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SpD-lb-LBL" userLabel="Speed Chip Label">
+                    <rect key="frame" x="224" y="15" width="60" height="12"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="" id="SpD-lb-CEL">
+                        <font key="font" metaFont="system" size="10"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="E6z-SF-UDn"/>
@@ -496,9 +505,13 @@
                 <constraint firstItem="eBP-6g-bAT" firstAttribute="centerY" secondItem="NBD-MV-OuG" secondAttribute="centerY" id="dX4-4l-aJM"/>
                 <constraint firstItem="NBD-MV-OuG" firstAttribute="leading" secondItem="BE1-yC-oJL" secondAttribute="leading" constant="2" id="fcm-ao-T7h"/>
                 <constraint firstItem="eBP-6g-bAT" firstAttribute="top" secondItem="BE1-yC-oJL" secondAttribute="top" constant="6" id="oEb-w7-DDS"/>
-                <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="plE-qU-XZt"/>
+                <constraint firstAttribute="trailing" secondItem="SpD-lb-LBL" secondAttribute="trailing" constant="2" id="plE-qU-XZt"/>
                 <constraint firstItem="eBP-6g-bAT" firstAttribute="leading" secondItem="NBD-MV-OuG" secondAttribute="trailing" constant="2" id="uHE-D2-HgP"/>
                 <constraint firstItem="GgV-Cc-sk0" firstAttribute="leading" secondItem="eBP-6g-bAT" secondAttribute="trailing" constant="2" id="vzW-0s-yR6"/>
+                <constraint firstItem="SpD-lb-LBL" firstAttribute="centerY" secondItem="NBD-MV-OuG" secondAttribute="centerY" id="spd-cy-1"/>
+                <constraint firstItem="SpD-lb-LBL" firstAttribute="leading" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="6" id="spd-lr-1"/>
+                <constraint firstItem="SpD-lb-LBL" firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="spd-w-4b"/>
+                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="spd-w-4"/>
             </constraints>
             <point key="canvasLocation" x="236" y="506"/>
         </customView>

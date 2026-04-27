@@ -27,6 +27,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   let subsystem: Logger.Subsystem
 
+  /// Upper bound for scroll-driven playback speed adjustments used by both
+  /// proportional and Option+scroll paths. Keep in one place for consistency.
+  static let playbackSpeedScrollUpperBound: Double = 4.0
+
   init(playerCore: PlayerCore) {
     self.player = playerCore
     subsystem = Logger.makeSubsystem("window\(player.playerNumber)")
@@ -155,6 +159,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   internal var scrollDirection: ScrollDirection?
+
+  /// Accumulator for precise scrolling when using Option-key stepping for playback speed.
+  /// Values of absolute magnitude >= 1.0 trigger a single step and decrease the accumulator accordingly.
+  internal var playbackSpeedOptionAccumulator: Double = 0
 
   /** We need to pause the video when a user starts seeking by scrolling.
    This property records whether the video is paused initially so we can
@@ -455,16 +463,26 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       scrollDirection = nil
     }
 
+    // detect modifier keys once
+    let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+    let optDown = flags.contains(.option)
+
     let scrollAction: Preference.ScrollAction
     if seekOverride {
       scrollAction = .seek
     } else if volumeOverride {
       scrollAction = .volume
     } else {
-      scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
-      // show volume popover when volume seek begins and hide on end
-      if let miniPlayer = self as? MiniPlayerWindowController, scrollAction == .volume {
-        miniPlayer.handleVolumePopover(isTrackpadBegan, isTrackpadEnd, isMouse)
+      // Option-key override: adjust playback speed regardless of user mapping
+      // (but do not override when over seek/volume specific views)
+      if optDown {
+        scrollAction = .playbackSpeed
+      } else {
+        scrollAction = scrollDirection == .horizontal ? horizontalScrollAction : verticalScrollAction
+        // show volume popover when volume seek begins and hide on end
+        if let miniPlayer = self as? MiniPlayerWindowController, scrollAction == .volume {
+          miniPlayer.handleVolumePopover(isTrackpadBegan, isTrackpadEnd, isMouse)
+        }
       }
     }
 
@@ -514,10 +532,28 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       player.setVolume(newVolume)
       volumeSlider.doubleValue = newVolume
     case .playbackSpeed:
-      let min = 0.05
-      let max = 4.0
-      let newSpeed = round(1000 * (player.info.playSpeed + (player.info.playSpeed * AppData.playbackSpeedMap[playbackSpeedScrollAmount] * delta)).clamped(to: min...max)) / 1000
-      player.setSpeed(newSpeed)
+      if optDown {
+        // Option-key: step through 0.25x increments.
+        // For mouse wheels, treat each notch as 1 unit. For precise deltas (trackpad), accumulate until |accum| >= 1.
+        let contribution = isPrecise ? delta : (delta == 0 ? 0 : (delta > 0 ? 1 : -1))
+        if isTrackpadBegan { playbackSpeedOptionAccumulator = 0 }
+        playbackSpeedOptionAccumulator += contribution
+        let proportionalMax = Self.playbackSpeedScrollUpperBound
+        while abs(playbackSpeedOptionAccumulator) >= 1 {
+          let direction = playbackSpeedOptionAccumulator > 0 ? 1 : -1
+          let current = player.info.playSpeed
+          let stepped = PlaybackSpeedStep.step(from: current, direction: direction, max: proportionalMax)
+          player.setSpeed(stepped)
+          playbackSpeedOptionAccumulator -= Double(direction)
+        }
+        if isTrackpadEnd { playbackSpeedOptionAccumulator = 0 }
+      } else {
+        // Default proportional behavior (unchanged)
+        let min = 0.05
+        let max = Self.playbackSpeedScrollUpperBound
+        let newSpeed = round(1000 * (player.info.playSpeed + (player.info.playSpeed * AppData.playbackSpeedMap[playbackSpeedScrollAmount] * delta)).clamped(to: min...max)) / 1000
+        player.setSpeed(newSpeed)
+      }
     default:
       break
     }

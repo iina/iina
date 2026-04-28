@@ -121,6 +121,7 @@ class MPVController: NSObject {
     MPVProperty.trackList: MPV_FORMAT_NONE,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
+    MPVProperty.audioDeviceList: MPV_FORMAT_NONE,
     MPVOption.TrackSelection.vid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.aid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.sid: MPV_FORMAT_INT64,
@@ -1246,6 +1247,9 @@ class MPVController: NSObject {
   private func handlePropertyChange(_ name: String, _ property: mpv_event_property) {
 
     switch name {
+
+    case MPVProperty.audioDeviceList:
+      DispatchQueue.main.async { self.player.audioDeviceListChanged() }
 
     case MPVProperty.videoParams:
       DispatchQueue.main.async { self.player.needReloadQuickSettingsView() }

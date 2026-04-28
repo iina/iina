@@ -2184,6 +2184,25 @@ class PlayerCore: NSObject {
     sendOSD(.track(info.currentTrack(.audio) ?? .noneAudioTrack))
   }
 
+  /// The mpv [audio-device-list](https://mpv.io/manual/stable/#command-interface-audio-device-list)
+  /// property changed.
+  /// - Important: The mpv [audio-device](https://mpv.io/manual/stable/#command-interface-audio-device)
+  ///     property value is not guaranteed to reflect the audio device that is actually in use. When a selected device is removed the
+  ///     value of this property continues to reflect the device that is no longer present even though `libmpv` has switched to
+  ///     another audio device. This will cause the IINA `Audio Device` menu to malfunction. To handle the problematic behavior
+  ///     of the `audio-device` property, whenever the device list changes this method checks if the device returned by
+  ///     `audio-device` is present in the new list of audio devices. If the audio device cannot be found the `audio-device`
+  ///     property is set to `auto` so that both IINA and mpv are in agreement on the selected audio device. For more information
+  ///     see issue [#6034](https://github.com/iina/iina/issues/6034).
+  func audioDeviceListChanged() {
+    guard info.state.active else { return }
+    let devices = getAudioDevices()
+    let device = mpv.getString(MPVProperty.audioDevice)
+    guard !devices.contains(where: {$0.name == device}) else { return }
+    log("Selected audio device is no longer present, setting selected device to auto")
+    setAudioDevice("auto")
+  }
+
   func chapterChanged() {
     guard info.state.active else { return }
     info.chapter = Int(mpv.getInt(MPVProperty.chapter))

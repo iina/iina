@@ -9,7 +9,7 @@
 import Cocoa
 
 
-class VideoView: NSView {
+class VideoView: NSOpenGLView {
 
   weak var player: PlayerCore!
   var link: CVDisplayLink?

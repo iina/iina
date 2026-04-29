@@ -61,7 +61,7 @@ class LegacyMigration {
 
       // Deserialize & convert legacy pref value to modern string format:
       guard let legacyData = Preference.data(for: legacyKey) else { continue }
-      guard let color = NSUnarchiver.unarchiveObject(with: legacyData) as? NSColor,
+      guard let color = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: legacyData),
             let mpvColorString = color.usingColorSpace(.deviceRGB)?.mpvColorString else {
         Logger.log("Failed to convert color value from legacy pref \(legacyKey.rawValue)", level: .error)
         continue

@@ -8,10 +8,6 @@
 
 import Cocoa
 
-fileprivate extension NSColor {
-  static let playlistProgressBar = NSColor(named: .playlistProgressBar)!
-}
-
 class PlaylistPlaybackProgressView: NSView {
 
   private static let fillColor = NSColor.playlistProgressBar

@@ -8,14 +8,8 @@
 
 import Cocoa
 
-fileprivate extension NSColor {
-  static let cropBoxFill = NSColor(named: .cropBoxFill)!
-  static let cropBoxBorder = NSColor.controlAccentColor
-}
-
 class CropBoxView: NSView {
-
-  private let boxStrokeColor = NSColor.cropBoxBorder
+  private let boxStrokeColor = NSColor.controlAccentColor
   private let boxFillColor = NSColor.cropBoxFill
 
   weak var settingsViewController: CropBoxViewController!

@@ -13,18 +13,6 @@ fileprivate extension NSUserInterfaceItemIdentifier {
   static let openURL = NSUserInterfaceItemIdentifier("openURL")
 }
 
-fileprivate extension NSColor {
-  static let initialWindowActionButtonBackground = NSColor(named: .initialWindowActionButtonBackground)!
-  static let initialWindowActionButtonBackgroundHover = NSColor(named: .initialWindowActionButtonBackgroundHover)!
-  static let initialWindowActionButtonBackgroundPressed = NSColor(named: .initialWindowActionButtonBackgroundPressed)!
-  static let initialWindowLastFileBackground = NSColor(named: .initialWindowLastFileBackground)!
-  static let initialWindowLastFileBackgroundHover = NSColor(named: .initialWindowLastFileBackgroundHover)!
-  static let initialWindowLastFileBackgroundPressed = NSColor(named: .initialWindowLastFileBackgroundPressed)!
-  static let initialWindowBetaLabel = NSColor(named: .initialWindowBetaLabel)!
-  static let initialWindowNightlyLabel = NSColor(named: .initialWindowNightlyLabel)!
-  static let initialWindowDebugLabel = NSColor(named: .initialWindowDebugLabel)!
-}
-
 fileprivate class GrayHighlightRowView: NSTableRowView {
   override func drawSelection(in dirtyRect: NSRect) {
     if self.selectionHighlightStyle != .none {

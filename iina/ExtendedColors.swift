@@ -36,8 +36,3 @@ extension NSColor.Name {
   static let sidebarTabTint = NSColor.Name("SidebarTabTint")
   static let sidebarTabTintActive = NSColor.Name("SidebarTabTintActive")
 }
-
-extension NSColor {
-  static let sidebarTabTint: NSColor = NSColor(named: .sidebarTabTint)!
-  static let sidebarTabTintActive: NSColor = NSColor(named: .sidebarTabTintActive)!
-}

@@ -100,10 +100,10 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 5. Link the *yt-dlp* dependency to deps/executable 
  
-  ```console
-  mkdir -p deps/executable
-  ln -s $(which yt-dlp) deps/executable/youtube-dl
-  ```
+   ```console
+   mkdir -p deps/executable
+   ln -s $(which yt-dlp) deps/executable/youtube-dl
+   ```
 
 6. Open `iina.xcodeproj` in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
 

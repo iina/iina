@@ -128,7 +128,7 @@ class MPVTrack: NSObject {
       default:
         break
       }
-      let info = components.joined(separator: ", ")
+      let info = components.joined(separator: ", ").parenthesized
       // default
       let isDefault = isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
       // final string

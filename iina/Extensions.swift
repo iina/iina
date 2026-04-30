@@ -535,6 +535,10 @@ extension String {
     return "\"\(self)\""
   }
 
+  var parenthesized: String {
+      return "(\(self))"
+  }
+
   mutating func deleteLast(_ num: Int) {
     removeLast(Swift.min(num, count))
   }

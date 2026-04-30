@@ -87,7 +87,11 @@ extension MainWindowController {
   }
 
   @objc func menuSwitchToMiniPlayer(_ sender: NSMenuItem) {
-    player.switchToMiniPlayer()
+    if player.isInMiniPlayer {
+      player.switchBackFromMiniPlayer()
+    } else {
+      player.switchToMiniPlayer()
+    }
   }
 
   @objc func menuSetDelogo(_ sender: NSMenuItem) {

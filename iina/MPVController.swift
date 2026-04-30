@@ -12,8 +12,6 @@ import VideoToolbox
 
 fileprivate let yes_str = "yes"
 fileprivate let no_str = "no"
-fileprivate let MiniPlayerObservedSubTextAssProperty = "sub-text/ass"
-fileprivate let MiniPlayerObservedSubTextAssFullProperty = "sub-text/ass-full"
 
 /// Change this variable to adjust mpv log level.
 ///
@@ -146,9 +144,6 @@ class MPVController: NSObject {
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
     MPVProperty.subText: MPV_FORMAT_STRING,
-    MiniPlayerObservedSubTextAssProperty: MPV_FORMAT_STRING,
-    MPVProperty.subTextAss: MPV_FORMAT_STRING,
-    MiniPlayerObservedSubTextAssFullProperty: MPV_FORMAT_STRING,
     MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
     MPVOption.Equalizer.contrast: MPV_FORMAT_INT64,
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
@@ -564,10 +559,6 @@ class MPVController: NSObject {
                   verboseIfDefault: true) { key in
       Preference.bool(for: key) ? "avfoundation" : "coreaudio"
     }
-
-    // Keep a render surface available for audio-only playback so mpv can still draw subtitles/OSD.
-    // This must be set before mpv_initialize().
-    chkErr(setOptionString(MPVOption.Window.forceWindow, "yes", level: .verbose))
 
     // Set user defined conf dir.
     if Preference.bool(for: .enableAdvancedSettings),
@@ -1432,10 +1423,7 @@ class MPVController: NSObject {
       }
       DispatchQueue.main.async { self.player.subPosChanged(data) }
 
-    case MPVProperty.subText,
-         MiniPlayerObservedSubTextAssProperty,
-         MPVProperty.subTextAss,
-         MiniPlayerObservedSubTextAssFullProperty:
+    case MPVProperty.subText:
       DispatchQueue.main.async { self.player.subTextChanged() }
 
     case MPVOption.Equalizer.contrast:

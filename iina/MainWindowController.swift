@@ -112,6 +112,9 @@ class MainWindowController: PlayerWindowController {
   var hideOSDTimer: Timer?
   /// Some audio-only transitions need a deferred redraw after the shared video view has settled.
   private var pendingAudioOnlyRedraw: DispatchWorkItem?
+  private var cachedAudioOnlyVideoAlignY: Double?
+  private var cachedAudioOnlyVideoMarginRatioBottom: Double?
+  private var cachedAudioOnlySubUseMargins: Bool?
 
   /** For blacking out other screens. */
   var screens: [NSScreen] = []
@@ -3010,7 +3013,16 @@ class MainWindowController: PlayerWindowController {
     muteButton.image = volumeIcon()
   }
 
+  func refreshAudioOnlySubtitleLayout() {
+    if shouldUseAudioOnlySubtitleLayout {
+      applyAudioOnlySubtitleLayout()
+    } else {
+      restoreAudioOnlySubtitleLayout()
+    }
+  }
+
   func requestAudioOnlyRedraw(_ reason: String) {
+    refreshAudioOnlySubtitleLayout()
     forceAudioOnlyRedraw(reason)
 
     pendingAudioOnlyRedraw?.cancel()
@@ -3036,6 +3048,52 @@ class MainWindowController: PlayerWindowController {
         self.videoView.displayIdle()
       }
     }
+  }
+
+  private var shouldUseAudioOnlySubtitleLayout: Bool {
+    guard player.info.state.active,
+          !player.isInMiniPlayer,
+          player.currentMediaIsAudio == .isAudio,
+          player.info.isSubVisible,
+          player.info.sid != 0,
+          let currentSub = player.info.currentTrack(.sub),
+          !currentSub.isImageSub else {
+      return false
+    }
+    if currentSub.isAssSub {
+      return false
+    }
+    guard let externalFilename = currentSub.externalFilename else {
+      return true
+    }
+    let ext = URL(fileURLWithPath: externalFilename).pathExtension.lowercased()
+    return ext != "ass" && ext != "ssa"
+  }
+
+  private func applyAudioOnlySubtitleLayout() {
+    if cachedAudioOnlyVideoAlignY == nil {
+      cachedAudioOnlyVideoAlignY = player.mpv.getDouble(MPVOption.Video.videoAlignY)
+      cachedAudioOnlyVideoMarginRatioBottom = player.mpv.getDouble(MPVOption.Video.videoMarginRatioBottom)
+      cachedAudioOnlySubUseMargins = player.mpv.getFlag(MPVOption.Subtitles.subUseMargins)
+    }
+
+    player.mpv.setDouble(MPVOption.Video.videoAlignY, -1, level: .verbose)
+    player.mpv.setDouble(MPVOption.Video.videoMarginRatioBottom, 0.25, level: .verbose)
+    player.mpv.setFlag(MPVOption.Subtitles.subUseMargins, true, level: .verbose)
+  }
+
+  private func restoreAudioOnlySubtitleLayout() {
+    guard let cachedAudioOnlyVideoAlignY,
+          let cachedAudioOnlyVideoMarginRatioBottom,
+          let cachedAudioOnlySubUseMargins else { return }
+
+    player.mpv.setDouble(MPVOption.Video.videoAlignY, cachedAudioOnlyVideoAlignY, level: .verbose)
+    player.mpv.setDouble(MPVOption.Video.videoMarginRatioBottom, cachedAudioOnlyVideoMarginRatioBottom, level: .verbose)
+    player.mpv.setFlag(MPVOption.Subtitles.subUseMargins, cachedAudioOnlySubUseMargins, level: .verbose)
+
+    self.cachedAudioOnlyVideoAlignY = nil
+    self.cachedAudioOnlyVideoMarginRatioBottom = nil
+    self.cachedAudioOnlySubUseMargins = nil
   }
 
   // MARK: - IBActions
@@ -3289,7 +3347,11 @@ class MainWindowController: PlayerWindowController {
     case .fullScreen:
       toggleWindowFullScreen()
     case .musicMode:
-      player.switchToMiniPlayer()
+      if player.isInMiniPlayer {
+        player.switchBackFromMiniPlayer()
+      } else {
+        player.switchToMiniPlayer()
+      }
     case .pip:
       if pipStatus == .inPIP {
         exitPIP()

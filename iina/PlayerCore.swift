@@ -535,6 +535,10 @@ class PlayerCore: NSObject {
     // Better to directly reset icc-profile-auto. See issue #5727 for details.
     mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
 
+    // Delay force-window until an actual file load to avoid Xcode-launched app startup hanging
+    // while mpv tries to create a VO before IINA has entered its normal media-open path.
+    mpv.setString(MPVOption.Window.forceWindow, "yes", level: .verbose)
+
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading
@@ -783,6 +787,7 @@ class PlayerCore: NSObject {
     }
 
     isInMiniPlayer = true
+    mainWindow.refreshAudioOnlySubtitleLayout()
 
     // restore layout
     if needRestoreLayout {
@@ -910,6 +915,7 @@ class PlayerCore: NSObject {
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
     guard info.state != .shutDown else { return }
+    mainWindow.refreshAudioOnlySubtitleLayout()
     savePlaybackPosition()
 
     // The player may already be stopped in which case the state must not be set to stopping.
@@ -2012,6 +2018,7 @@ class PlayerCore: NSObject {
       URL(fileURLWithPath: path)
     info.isNetworkResource = !info.currentURL!.isFileURL
     miniPlayer.refreshSubtitleOverlay()
+    mainWindow.refreshAudioOnlySubtitleLayout()
 
     // set "date last opened" attribute
     if let url = info.currentURL, url.isFileURL {

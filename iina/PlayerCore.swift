@@ -751,6 +751,7 @@ class PlayerCore: NSObject {
     let _ = miniPlayer.window
 
     miniPlayer.updateTitle()
+    miniPlayer.updateLyricsControls(clearOverlayWhenHidden: false)
     refreshSyncUITimer()
     let playlistView = mainWindow.playlistView.view
     let videoView = mainWindow.videoView
@@ -1404,8 +1405,15 @@ class PlayerCore: NSObject {
   // MARK: - Lyrics (experimental)
   func toggleLyricsVisibility(_set: Bool? = nil) {
     let newState = _set ?? !info.isLyricsVisible
+    guard info.isLyricsVisible != newState else { return }
     info.isLyricsVisible = newState
     postNotification(.iinaLyricsVisibilityChanged)
+  }
+
+  private func setLyricsAvailability(_ hasLyrics: Bool) {
+    guard info.hasLyrics != hasLyrics else { return }
+    info.hasLyrics = hasLyrics
+    postNotification(.iinaLyricsAvailabilityChanged)
   }
 
   func loadExternalSubFile(_ url: URL, delay: Bool = false) {
@@ -2105,21 +2113,25 @@ class PlayerCore: NSObject {
     info.state = .loaded
 
     // MARK: - Lyrics (experimental)
-    if let url = info.currentURL {
-        let lrcURL = url.deletingPathExtension().appendingPathExtension("lrc")
+    var didLoadLyrics = false
+    if let url = info.currentURL, url.isFileURL {
+      let lrcURL = url.deletingPathExtension().appendingPathExtension("lrc")
 
-        if FileManager.default.fileExists(atPath: lrcURL.path),
-           let contents = try? String(contentsOf: lrcURL) {
-
-            let lines = LRCParser.parse(contents)
-            lyricsController.loadLyrics(lines)
-
-            log("Loaded lyrics: \(lines.count) lines")
-        } else {
-            lyricsController.clear()
-            log("No lyrics found for file")
+      if FileManager.default.fileExists(atPath: lrcURL.path),
+         let contents = try? String(contentsOf: lrcURL) {
+        let lines = LRCParser.parse(contents)
+        if !lines.isEmpty {
+          lyricsController.loadLyrics(lines)
+          didLoadLyrics = true
+          log("Loaded lyrics: \(lines.count) lines")
         }
+      }
     }
+    if !didLoadLyrics {
+      lyricsController.clear()
+      log("No lyrics found for file")
+    }
+    setLyricsAvailability(didLoadLyrics)
 
     // Must force drawing to cover the case where this player was previously used to play a video
     // and is now playing an audio file without an album cover and without using music mode.

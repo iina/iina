@@ -823,6 +823,7 @@ struct Preference {
     case subTrack
     case screenshot
     case plugins
+    case lyrics
 
     var description: String {
       switch self {
@@ -834,6 +835,7 @@ struct Preference {
       case .subTrack: "subTrack"
       case .screenshot: "screenshot"
       case .plugins: "plugins"
+      case .lyrics: "lyrics"
       }
     }
 
@@ -852,6 +854,7 @@ struct Preference {
       case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
       case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
       case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
+      case .lyrics: return makeSymbol(["music.note"], "toggle-album-art")
       }
     }
 
@@ -866,6 +869,7 @@ struct Preference {
       case .subTrack: key = "sub_track"
       case .screenshot: key = "screenshot"
       case .plugins: key = "plugins"
+      case .lyrics: key = "lyrics"
       }
       return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }
@@ -956,7 +960,7 @@ struct Preference {
     .controlBarStickToCenter: true,
     .controlBarAutoHideTimeout: Float(2.5),
     .enableControlBarAutoHide: true,
-    .controlBarToolbarButtons: [ToolBarButton.plugins.rawValue, ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
+    .controlBarToolbarButtons: [ToolBarButton.lyrics.rawValue, ToolBarButton.plugins.rawValue, ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
     .oscPosition: OSCPosition.floating.rawValue,
     .disablePlaySliderScrolling: false,
     .disableVolumeSliderScrolling: false,

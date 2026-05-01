@@ -709,6 +709,7 @@ class MainWindowController: PlayerWindowController {
     // Also observe visibility changes to update the view immediately
     addObserver( to: .default, forName: .iinaLyricsVisibilityChanged, object: player) { [weak self] _ in
         guard let self = self else { return }
+        self.updateLyricsToolbarButtons()
         let shouldBeVisible = self.player.info.isLyricsVisible
         self.lyricsOverlayView.isHidden = !shouldBeVisible
         
@@ -788,8 +789,28 @@ class MainWindowController: PlayerWindowController {
     for buttonType in buttons {
       let button = NSButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: buttons.count > 4)
+      if buttonType == .lyrics {
+        updateLyricsToolbarButton(button)
+      }
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
+    }
+  }
+
+  private func updateLyricsToolbarButton(_ button: NSButton) {
+    let symbolName = player.info.isLyricsVisible ? "music.note" : "music.note.slash"
+    if #available(macOS 11.0, *),
+       let image = NSImage(systemSymbolName: symbolName, accessibilityDescription: Preference.ToolBarButton.lyrics.localizedDescription()) {
+      let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+      button.image = image.withSymbolConfiguration(configuration)
+    } else {
+      button.image = Preference.ToolBarButton.lyrics.image()
+    }
+  }
+
+  private func updateLyricsToolbarButtons() {
+    for case let button as NSButton in fragToolbarView.views where button.tag == Preference.ToolBarButton.lyrics.rawValue {
+      updateLyricsToolbarButton(button)
     }
   }
 
@@ -1905,6 +1926,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     player.events.emit(.windowResized, data: window.frame)
+    player.lyricsController.refreshCurrentOverlay()
   }
 
   func windowWillStartLiveResize(_ notification: Notification) {
@@ -1918,6 +1940,7 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
+    player.lyricsController.refreshCurrentOverlay()
   }
 
   func windowDidChangeBackingProperties(_ notification: Notification) {
@@ -3343,6 +3366,8 @@ class MainWindowController: PlayerWindowController {
       player.screenshot()
     case .plugins:
       showPluginSidebar(tab: nil)
+    case .lyrics:
+      player.toggleLyricsVisibility()
     }
   }
 

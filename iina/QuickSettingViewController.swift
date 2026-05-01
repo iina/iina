@@ -196,9 +196,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBOutlet weak var subtitleSwitch: NSSwitch!
   @IBOutlet weak var secondarySubtitleSwitch: NSSwitch!
   
-  // MARK: lyrics (experimental)
-  @IBOutlet weak var lyricsSwitch: NSSwitch!
-  
   private lazy var audioEQSliders: [NSSlider] = [
     audioEqSlider1, audioEqSlider2, audioEqSlider3, audioEqSlider4, audioEqSlider5,
     audioEqSlider6, audioEqSlider7, audioEqSlider8, audioEqSlider9, audioEqSlider10
@@ -323,11 +320,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     observe(.iinaSIDChanged) { [unowned self] _ in self.reload() }
     observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
     observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
-    
-    // MARK: lyrics (experimental)
-    observe(.iinaLyricsVisibilityChanged) { [unowned self] _ in
-      self.lyricsSwitch?.state = player.info.isLyricsVisible ? .on : .off
-    }
   }
 
   // MARK: - Right to Left Constraints
@@ -484,8 +476,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   private func updateSubTabControl() {
     hideSwitch.state = player.info.isSubVisible ? .on : .off
     secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off
-    // MARK: lyrics tab ( experimental)
-    lyricsSwitch?.state = player.info.isLyricsVisible ? .on : .off
 
     if let currSub = player.info.currentTrack(.sub) {
       let enableTextSettings = !(currSub.isAssSub || currSub.isImageSub)
@@ -906,15 +896,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @IBAction func hideSecSubAction(_ sender: NSSwitch) {
     player.toggleSecondSubVisibility()
-  }
-  
-  // MARK: lyrics toggle action (experimental)
-  @IBAction func toggleLyricsAction(_ sender: NSSwitch) {
-    player.toggleLyricsVisibility(_set: sender.state == .on)
-
-    #if DEBUG
-    print("🎵 isLyricsVisible =", player.info.isLyricsVisible)
-    #endif
   }
 
   @IBAction func loadExternalSubAction(_ sender: NSSegmentedControl) {

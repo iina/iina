@@ -126,38 +126,28 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     videoWrapperView.addSubview(lyricsOverlayView)
 
     NSLayoutConstraint.activate([
-        lyricsOverlayView.leadingAnchor.constraint(equalTo: videoWrapperView.leadingAnchor),
-        lyricsOverlayView.trailingAnchor.constraint(equalTo: videoWrapperView.trailingAnchor),
-        lyricsOverlayView.topAnchor.constraint(equalTo: videoWrapperView.topAnchor),
-        lyricsOverlayView.bottomAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
+      lyricsOverlayView.leadingAnchor.constraint(equalTo: videoWrapperView.leadingAnchor),
+      lyricsOverlayView.trailingAnchor.constraint(equalTo: videoWrapperView.trailingAnchor),
+      lyricsOverlayView.topAnchor.constraint(equalTo: videoWrapperView.topAnchor),
+      lyricsOverlayView.bottomAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
     ])
-    
+
     // MARK: - Lyrics Overlay binding (notification-based)
 
-    addObserver(to: .default, forName: .iinaLyricsOverlayUpdated, object: nil) { [weak self] notification in
-        guard let self = self,
+    addObserver(to: .default, forName: .iinaLyricsOverlayUpdated, object: player.lyricsController) { [weak self] notification in
+      guard let self = self,
             let state = notification.userInfo?["state"] as? LyricsOverlayState else { return }
-        let shouldShow = self.player.info.isLyricsVisible && state.current != nil
-        self.lyricsOverlayView.isHidden = !shouldShow
-        if shouldShow {
-            self.lyricsOverlayView.update(state: state)
-        }
+      let shouldShow = self.player.info.hasLyrics && self.player.info.isLyricsVisible && state.current != nil
+      self.lyricsOverlayView.isHidden = !shouldShow
+      if shouldShow {
+        self.lyricsOverlayView.update(state: state)
+      }
     }
-    addObserver(to: .default, forName: .iinaLyricsVisibilityChanged, object: nil) { [weak self] _ in
-        guard let self = self else { return }
-        let isVisible = self.player.info.isLyricsVisible
-        self.toggleLyricsButton.state = isVisible ? .on : .off
-        self.lyricsOverlayView.isHidden = !isVisible
-
-        // Update button icon
-        if #available(macOS 11.0, *) {
-          self.updateLyricsButtonIcon(isVisible: isVisible)
-        }
-
-        if !isVisible {
-            let emptyState = LyricsOverlayState()
-            self.lyricsOverlayView.update(state: emptyState, animated: true)
-        }
+    addObserver(to: .default, forName: .iinaLyricsVisibilityChanged, object: player) { [weak self] _ in
+      self?.updateLyricsControls()
+    }
+    addObserver(to: .default, forName: .iinaLyricsAvailabilityChanged, object: player) { [weak self] _ in
+      self?.updateLyricsControls()
     }
 
     player.lyricsController.visibleLineCountProvider = { [weak self] in
@@ -178,16 +168,12 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     // tool tips
     togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.localizedDescription()
     toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
-    toggleLyricsButton.toolTip = "Toggle Lyrics"
+    toggleLyricsButton.toolTip = Preference.ToolBarButton.lyrics.localizedDescription()
     volumeButton.toolTip = NSLocalizedString("mini_player.volume", comment: "volume")
     closeButtonVE.toolTip = NSLocalizedString("mini_player.close", comment: "close")
     backButtonVE.toolTip = NSLocalizedString("mini_player.back", comment: "back")
 
-    toggleLyricsButton.state = player.info.isLyricsVisible ? .on : .off
-
-    if #available(macOS 11.0, *) {
-      updateLyricsButtonIcon(isVisible: player.info.isLyricsVisible)
-    }
+    updateLyricsControls(clearOverlayWhenHidden: false)
 
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)
@@ -264,6 +250,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       }
     }
     videoView.videoLayer.inLiveResize = false
+    player.lyricsController.refreshCurrentOverlay()
   }
 
   // MARK: - Window delegate: Activeness status
@@ -442,6 +429,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   @IBAction func toggleLyricsAction(_ sender: NSButton) {
+    guard player.info.hasLyrics else {
+      sender.state = .off
+      return
+    }
     player.toggleLyricsVisibility(_set: sender.state == .on)
   }
 
@@ -473,6 +464,22 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
 
   // MARK: - Lyrics Button Icon Update
+
+  func updateLyricsControls(clearOverlayWhenHidden: Bool = true) {
+    let isVisible = player.info.hasLyrics && player.info.isLyricsVisible
+    toggleLyricsButton.isHidden = !player.info.hasLyrics
+    toggleLyricsButton.state = isVisible ? .on : .off
+    lyricsOverlayView.isHidden = !isVisible
+
+    if #available(macOS 11.0, *) {
+      updateLyricsButtonIcon(isVisible: isVisible)
+    }
+
+    if clearOverlayWhenHidden && !isVisible {
+      lyricsOverlayView.update(state: LyricsOverlayState(), animated: true)
+    }
+  }
+
   @available(macOS 11.0, *)
   private func updateLyricsButtonIcon(isVisible: Bool) {
       let symbolName = isVisible ? "music.note" : "music.note.slash"

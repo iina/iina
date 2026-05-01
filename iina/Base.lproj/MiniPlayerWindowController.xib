@@ -201,7 +201,7 @@
                                             <action selector="togglePlaylist:" target="-2" id="0da-p5-HBI"/>
                                         </connections>
                                     </button>
-                                    <button toolTip="Toggle Lyrics" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-AY-7p7">
+                                    <button hidden="YES" toolTip="Toggle Lyrics" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-AY-7p7">
                                         <rect key="frame" x="23" y="12" width="14" height="20"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="music.note" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vHj-ED-sbh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

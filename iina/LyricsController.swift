@@ -13,6 +13,7 @@ final class LyricsController {
   
   private var engine: LyricsEngine?
   private var currentLine: LyricsLine?
+  private var lastSyncedTime: TimeInterval?
   
   // Injected from UI layer to avoid circular dependency between controller and view.
   // Falls back to engine's default if not set.
@@ -39,6 +40,7 @@ final class LyricsController {
   func clear() {
     engine = nil
     currentLine = nil
+    lastSyncedTime = nil
     
     // Emit empty overlay to clear UI immediately rather than waiting for next playback sync.
     emitOverlayUpdate(
@@ -70,14 +72,24 @@ final class LyricsController {
   // MARK: - Time sync (called from PlayerCore)
   
   func syncTime(_ time: TimeInterval) {
+    syncTime(time, force: false)
+  }
+
+  func refreshCurrentOverlay() {
+    guard let lastSyncedTime else { return }
+    syncTime(lastSyncedTime, force: true)
+  }
+
+  private func syncTime(_ time: TimeInterval, force: Bool) {
+    lastSyncedTime = time
     guard let engine else { return }
-    
+
     let defaultVisibleLineCount = 7
     let visibleLineCount = visibleLineCountProvider?() ?? defaultVisibleLineCount
     let state = engine.overlayState(at: time, visibleLinesCount: visibleLineCount)
-    
-    guard state.current?.time != currentLine?.time else { return }
-    
+
+    guard force || state.current?.time != currentLine?.time else { return }
+
     currentLine = state.current
     emitOverlayUpdate(state)
   }

@@ -203,7 +203,7 @@
                                     </button>
                                     <button hidden="YES" toolTip="Toggle Lyrics" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-AY-7p7">
                                         <rect key="frame" x="23" y="12" width="14" height="20"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="music.note" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vHj-ED-sbh">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="quote.bubble.fill" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="vHj-ED-sbh">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -484,7 +484,7 @@
     <resources>
         <image name="backward" width="11" height="11"/>
         <image name="close" width="11" height="11"/>
-        <image name="music.note" catalog="system" width="11" height="15"/>
+        <image name="quote.bubble.fill" catalog="system" width="16" height="15"/>
         <image name="mute" width="16" height="14"/>
         <image name="nextl" width="24" height="24"/>
         <image name="nextr" width="24" height="24"/>

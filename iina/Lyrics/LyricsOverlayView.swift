@@ -49,6 +49,7 @@ final class LyricsOverlayView: NSView {
   // MARK: - State
   
   private var currentState: LyricsOverlayState?
+  private var lastRenderedBoundsSize: NSSize = .zero
   
   // MARK: - Init
   
@@ -136,6 +137,7 @@ final class LyricsOverlayView: NSView {
     ensureLabelCount(for: allLines.count)
     syncArrangedSubviews()
     guard !lineLabels.isEmpty else { return }
+    lastRenderedBoundsSize = bounds.size
     let baseSize = max(min(bounds.height * Metrics.fontScale, Metrics.fontMax), Metrics.fontMin)
     let clampedCurrentIndex = min(currentIndex, lineLabels.count - 1)
     for (index, line) in allLines.enumerated() {
@@ -186,6 +188,12 @@ final class LyricsOverlayView: NSView {
     let maxLabelWidth = max(bounds.width - insetX * 2, Metrics.maxLabelWidthFallback)
     for label in lineLabels {
       label.preferredMaxLayoutWidth = maxLabelWidth
+    }
+    if let currentState,
+       bounds.size != lastRenderedBoundsSize,
+       !currentState.allLines.isEmpty,
+       currentState.currentIndex >= 0 {
+      render(allLines: currentState.allLines, currentIndex: currentState.currentIndex)
     }
   }
   

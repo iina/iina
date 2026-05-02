@@ -8,6 +8,33 @@
 
 import Foundation
 
+struct LyricsLine: Equatable {
+  let time: TimeInterval
+  let text: String
+}
+
+struct LyricsOverlayState: Equatable {
+  let previous: LyricsLine?
+  let current: LyricsLine?
+  let next: LyricsLine?
+  let allLines: [LyricsLine]
+  let currentIndex: Int
+
+  init(
+    previous: LyricsLine? = nil,
+    current: LyricsLine? = nil,
+    next: LyricsLine? = nil,
+    allLines: [LyricsLine] = [],
+    currentIndex: Int = -1
+  ) {
+    self.previous = previous
+    self.current = current
+    self.next = next
+    self.allLines = allLines
+    self.currentIndex = currentIndex
+  }
+}
+
 struct LyricsEngine {
   
   private enum Constants {
@@ -55,46 +82,15 @@ struct LyricsEngine {
     return lines[max(0, high)]
   }
   
-  // MARK: - Neighbors
-  
-  func previousLine(at time: TimeInterval) -> LyricsLine? {
-    // firstIndex(where:) will pick the earliest duplicate timestamp when duplicates exist.
-    guard
-      let current = currentLine(at: time),
-      let index = lines.firstIndex(of: current),
-      index > 0
-    else {
-      return nil
-    }
-    return lines[index - 1]
-  }
-  
-  func nextLine(at time: TimeInterval) -> LyricsLine? {
-    guard
-      let current = currentLine(at: time),
-      let index = lines.firstIndex(of: current),
-      index < lines.count - 1
-    else {
-      return nil
-    }
-    return lines[index + 1]
-  }
-  
   // MARK: - Lines around current (for scrollable view)
   
-  /// Returns an array of lines centered around the current line at the given time.
+  /// Returns an array of lines centered around the current line.
   /// - Parameters:
-  ///   - time: Current playback time
+  ///   - currentIndex: Index of the current line in `lines`.
   ///   - count: Number of lines to return (should be odd: 5, 7, or 9)
   /// - Returns: Array of lines with current line at the center index
-  func linesAroundCurrent(at time: TimeInterval, count: Int) -> [LyricsLine] {
-    guard !lines.isEmpty, count > 0 else { return [] }
-    
-    guard let current = currentLine(at: time),
-          let currentIndex = lines.firstIndex(where: { $0.time == current.time }) else {
-      // Before first line or no current line - return first N lines
-      return Array(lines.prefix(count))
-    }
+  func linesAroundCurrent(index currentIndex: Int, count: Int) -> [LyricsLine] {
+    guard !lines.isEmpty, count > 0, lines.indices.contains(currentIndex) else { return [] }
     
     // count is expected to be odd; if even, the current line shifts right by one.
     let halfCount = count / 2
@@ -118,7 +114,7 @@ struct LyricsEngine {
     let next = index + 1 < lines.count ? lines[index + 1] : nil
     
     // Collect the requested window around the current line (no padding near edges).
-    let allLines = linesAroundCurrent(at: time, count: visibleLinesCount)
+    let allLines = linesAroundCurrent(index: index, count: visibleLinesCount)
     let currentIndexInAllLines = allLines.firstIndex(where: { $0.time == current.time }) ?? Constants.missingIndex
     
     return LyricsOverlayState(

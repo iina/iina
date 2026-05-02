@@ -157,12 +157,10 @@
 		49542982216C34950058F680 /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 49542981216C34950058F680 /* ToolbarItemIcon.pdf */; };
 		49542986216C34950058F680 /* OpenInIINA.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; };
-		50D56BE52EF8E07800A37C7D /* LyricsLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */; };
 		50D56BE72EF8E4C700A37C7D /* LRCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */; };
 		50D56BE92EF8E5D500A37C7D /* LyricsEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */; };
 		50D56BEB2EF8F26400A37C7D /* LyricsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BEA2EF8F25800A37C7D /* LyricsController.swift */; };
 		50D56BED2EF8FBB400A37C7D /* LyricsOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BEC2EF8FB9600A37C7D /* LyricsOverlayView.swift */; };
-		50D56BEF2EF8FC9A00A37C7D /* LyricsOverlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D56BEE2EF8FC8600A37C7D /* LyricsOverlayState.swift */; };
 		51096C0B2CD88BEC00702C31 /* MPVOptionDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */; };
 		5111B18B2C8BCEAC00DEC0AC /* TouchBarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */; };
 		5114FA942DC704CE00D02435 /* NowPlayingInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */; };
@@ -1206,12 +1204,10 @@
 		4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = OpenInIINA.xcconfig; sourceTree = "<group>"; };
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = /System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
 		49F7E3BF2920D65C002DA28E /* Availability.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Availability.xcconfig; sourceTree = "<group>"; };
-		50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsLine.swift; sourceTree = "<group>"; };
 		50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRCParser.swift; sourceTree = "<group>"; };
 		50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsEngine.swift; sourceTree = "<group>"; };
 		50D56BEA2EF8F25800A37C7D /* LyricsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsController.swift; sourceTree = "<group>"; };
 		50D56BEC2EF8FB9600A37C7D /* LyricsOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsOverlayView.swift; sourceTree = "<group>"; };
-		50D56BEE2EF8FC8600A37C7D /* LyricsOverlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsOverlayState.swift; sourceTree = "<group>"; };
 		51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOptionDefaults.swift; sourceTree = "<group>"; };
 		5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarSettings.swift; sourceTree = "<group>"; };
 		5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfoManager.swift; sourceTree = "<group>"; };
@@ -2245,10 +2241,9 @@
 		50D56BE32EF8E04900A37C7D /* Lyrics */ = {
 			isa = PBXGroup;
 			children = (
-				50D56BEE2EF8FC8600A37C7D /* LyricsOverlayState.swift */,
+				50D56BEC2EF8FB9600A37C7D /* LyricsOverlayView.swift */,
 				50D56BE82EF8E5CB00A37C7D /* LyricsEngine.swift */,
 				50D56BE62EF8E4BA00A37C7D /* LRCParser.swift */,
-				50D56BE42EF8E05D00A37C7D /* LyricsLine.swift */,
 			);
 			path = Lyrics;
 			sourceTree = "<group>";
@@ -2453,7 +2448,6 @@
 		84A0BAA31D2FAEA000BC8DA1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				50D56BEC2EF8FB9600A37C7D /* LyricsOverlayView.swift */,
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
 				D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */,
@@ -2672,6 +2666,7 @@
 		84D377681D7413D8007F7396 /* Accessories */ = {
 			isa = PBXGroup;
 			children = (
+				50D56BE32EF8E04900A37C7D /* Lyrics */,
 				E39EA3522E7CFD5600E0BD32 /* FixedProgressBar.swift */,
 				51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */,
 				E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */,
@@ -2758,7 +2753,6 @@
 		84EB1ED81D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXGroup;
 			children = (
-				50D56BE32EF8E04900A37C7D /* Lyrics */,
 				84FF846D1D2FF698001B318A /* deps */,
 				84A0BAA21D2FAE8200BC8DA1 /* Assets */,
 				84A0BAA71D2FAF9700BC8DA1 /* Controllers */,
@@ -3464,8 +3458,6 @@
 				51DE55C92A6646710050AD06 /* Sysctl.swift in Sources */,
 				845FB0C71D39462E00C011E0 /* ControlBarView.swift in Sources */,
 				E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */,
-				50D56BEF2EF8FC9A00A37C7D /* LyricsOverlayState.swift in Sources */,
-				50D56BE52EF8E07800A37C7D /* LyricsLine.swift in Sources */,
 				51AC1CAB2A9FBF3700DF7079 /* OpenSubClient.swift in Sources */,
 				E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */,
 				51E63DFB29CFB031008AFC20 /* PlaySlider.swift in Sources */,

@@ -810,6 +810,7 @@ class PlayerCore: NSObject {
     if showMiniPlayer {
       notifyWindowVideoSizeChanged()
     }
+    lyricsController.refreshCurrentOverlay()
     mainWindow.forceDraw("entered music mode")
     events.emit(.musicModeChanged, data: true)
   }
@@ -858,6 +859,7 @@ class PlayerCore: NSObject {
       mainWindow.updateTitle()
       notifyWindowVideoSizeChanged()
     }
+    lyricsController.refreshCurrentOverlay()
     mainWindow.forceDraw("exited music mode")
     events.emit(.musicModeChanged, data: false)
   }
@@ -1402,7 +1404,7 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.Subtitles.secondarySubVisibility, newState)
   }
 
-  // MARK: - Lyrics (experimental)
+  // MARK: - Lyrics
   func toggleLyricsVisibility(_set: Bool? = nil) {
     let newState = _set ?? !info.isLyricsVisible
     guard info.isLyricsVisible != newState else { return }
@@ -2112,7 +2114,7 @@ class PlayerCore: NSObject {
 
     info.state = .loaded
 
-    // MARK: - Lyrics (experimental)
+    // MARK: - Lyrics
     var didLoadLyrics = false
     if let url = info.currentURL, url.isFileURL {
       let lrcURL = url.deletingPathExtension().appendingPathExtension("lrc")
@@ -2716,8 +2718,8 @@ class PlayerCore: NSObject {
       let isNetworkStream = info.isNetworkResource
       syncPosition()
 
-      // MARK: - Lyrics Sync (experimental)
-      if let time = info.videoPosition?.second {
+      // MARK: - Lyrics Sync
+      if info.hasLyrics, info.isLyricsVisible, let time = info.videoPosition?.second {
         lyricsController.syncTime(time)
       }
       info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?

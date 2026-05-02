@@ -80,7 +80,7 @@ class MainWindowController: PlayerWindowController {
 
   lazy private var _videoView: VideoView = VideoView(frame: window!.contentView!.bounds, player: player)
 
-  // MARK: Lyrics Overlay (experimental)
+  // MARK: Lyrics Overlay
   private lazy var lyricsOverlayView = LyricsOverlayView()
   
   /** The quick setting sidebar (video, audio, subtitles). */
@@ -582,7 +582,7 @@ class MainWindowController: PlayerWindowController {
     cv.autoresizesSubviews = false
     addVideoViewToWindow()
 
-    // MARK: - Lyrics Overlay (experimental)
+    // MARK: - Lyrics Overlay
 
     lyricsOverlayView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -709,7 +709,6 @@ class MainWindowController: PlayerWindowController {
     // Also observe visibility changes to update the view immediately
     addObserver( to: .default, forName: .iinaLyricsVisibilityChanged, object: player) { [weak self] _ in
         guard let self = self else { return }
-        self.updateLyricsToolbarButtons()
         let shouldBeVisible = self.player.info.isLyricsVisible
         self.lyricsOverlayView.isHidden = !shouldBeVisible
         
@@ -789,28 +788,8 @@ class MainWindowController: PlayerWindowController {
     for buttonType in buttons {
       let button = NSButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: buttons.count > 4)
-      if buttonType == .lyrics {
-        updateLyricsToolbarButton(button)
-      }
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
-    }
-  }
-
-  private func updateLyricsToolbarButton(_ button: NSButton) {
-    let symbolName = player.info.isLyricsVisible ? "music.note" : "music.note.slash"
-    if #available(macOS 11.0, *),
-       let image = NSImage(systemSymbolName: symbolName, accessibilityDescription: Preference.ToolBarButton.lyrics.localizedDescription()) {
-      let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-      button.image = image.withSymbolConfiguration(configuration)
-    } else {
-      button.image = Preference.ToolBarButton.lyrics.image()
-    }
-  }
-
-  private func updateLyricsToolbarButtons() {
-    for case let button as NSButton in fragToolbarView.views where button.tag == Preference.ToolBarButton.lyrics.rawValue {
-      updateLyricsToolbarButton(button)
     }
   }
 
@@ -1372,7 +1351,7 @@ class MainWindowController: PlayerWindowController {
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
     UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
     
-    // MARK: - Lyrics Overlay cleanup (experimental)
+    // MARK: - Lyrics Overlay cleanup
     lyricsOverlayView.removeFromSuperview()
     
     player.events.emit(.windowWillClose)
@@ -3400,6 +3379,11 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
+    DispatchQueue.main.async { [weak self] in
+      guard let self else { return }
+      self.videoView.layoutSubtreeIfNeeded()
+      self.player.lyricsController.refreshCurrentOverlay()
+    }
 
     if let window = self.window {
       let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
@@ -3444,6 +3428,11 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipStatus = .notInPIP
 
     addVideoViewToWindow()
+    DispatchQueue.main.async { [weak self] in
+      guard let self else { return }
+      self.videoView.layoutSubtreeIfNeeded()
+      self.player.lyricsController.refreshCurrentOverlay()
+    }
 
     // Similarly, we need to run a redraw here as well. We check to make sure we are paused, because
     // this causes a janky animation in either case but as it's not necessary while the video is

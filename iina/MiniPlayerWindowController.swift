@@ -216,7 +216,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   // MARK: - Window delegate: Open / Close
 
   func windowWillClose(_ notification: Notification) {
-    
     if player.info.state != .shuttingDown && player.info.state != .shutDown {
       // not needed if called when terminating the whole app
       player.overrideAutoSwitchToMusicMode = false
@@ -463,7 +462,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
 
-  // MARK: - Lyrics Button Icon Update
+  // MARK: - Lyrics Controls
 
   func updateLyricsControls(clearOverlayWhenHidden: Bool = true) {
     let isVisible = player.info.hasLyrics && player.info.isLyricsVisible
@@ -471,28 +470,9 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     toggleLyricsButton.state = isVisible ? .on : .off
     lyricsOverlayView.isHidden = !isVisible
 
-    if #available(macOS 11.0, *) {
-      updateLyricsButtonIcon(isVisible: isVisible)
-    }
-
     if clearOverlayWhenHidden && !isVisible {
       lyricsOverlayView.update(state: LyricsOverlayState(), animated: true)
     }
-  }
-
-  @available(macOS 11.0, *)
-  private func updateLyricsButtonIcon(isVisible: Bool) {
-      let symbolName = isVisible ? "music.note" : "music.note.slash"
-
-      let config = NSImage.SymbolConfiguration(
-          pointSize: 11,
-          weight: .regular
-      )
-
-      toggleLyricsButton.image = NSImage(
-          systemSymbolName: symbolName,
-          accessibilityDescription: "Lyrics"
-      )?.withSymbolConfiguration(config)
   }
 
 }

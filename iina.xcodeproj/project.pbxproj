@@ -172,6 +172,7 @@
 		518376DD2C23DD2300574F00 /* libgcc_s.1.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 518376D92C23DB1400574F00 /* libgcc_s.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		518376DE2C23DD2300574F00 /* libstdc++.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 518376DB2C23DB2F00574F00 /* libstdc++.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		51854CDA2A1C489300C40B78 /* FFmpegLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51854CD92A1C489300C40B78 /* FFmpegLogger.swift */; };
+		518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */ = {isa = PBXBuildFile; fileRef = 518DB7012FA6A2120024F0B0 /* write_info_plist_header.sh */; };
 		5196819A29EC963F00B05D55 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5196819929EC963F00B05D55 /* CoreDisplay.framework */; };
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
 		519CCABD2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */; };
@@ -1216,6 +1217,7 @@
 		518376D92C23DB1400574F00 /* libgcc_s.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgcc_s.1.1.dylib; path = deps/lib/libgcc_s.1.1.dylib; sourceTree = "<group>"; };
 		518376DB2C23DB2F00574F00 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "deps/lib/libstdc++.6.dylib"; sourceTree = "<group>"; };
 		51854CD92A1C489300C40B78 /* FFmpegLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegLogger.swift; sourceTree = "<group>"; };
+		518DB7012FA6A2120024F0B0 /* write_info_plist_header.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = write_info_plist_header.sh; sourceTree = "<group>"; };
 		5196819929EC963F00B05D55 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = /System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
 		519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareDecodeCapabilities.swift; sourceTree = "<group>"; };
@@ -2240,6 +2242,14 @@
 			name = Generated;
 			sourceTree = "<group>";
 		};
+		518DB7002FA6A1480024F0B0 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				518DB7012FA6A2120024F0B0 /* write_info_plist_header.sh */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
 		8452DD7F1D3A1F2A008A543A /* Preference */ = {
 			isa = PBXGroup;
 			children = (
@@ -2745,6 +2755,7 @@
 				8452DD7F1D3A1F2A008A543A /* Preference */,
 				E3CAD4AD2146DB23000B373A /* Javascript */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
+				518DB7002FA6A1480024F0B0 /* Scripts */,
 			);
 			indentWidth = 2;
 			path = iina;
@@ -3153,6 +3164,7 @@
 				E38EA5962F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings in Resources */,
 				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
 				E3EC8C482F95AD9600FBB51E /* SettingsGeneralLocalizable.strings in Resources */,
+				518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */,
 				E3EC8C4C2F95AD9D00FBB51E /* SettingsVideoAudioLocalizable.strings in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
@@ -3168,10 +3180,10 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"$(SRCROOT)/iina/write_info_plist_header.sh",
 			);
 			inputPaths = (
 				"$(CONFIGURATION_BUILD_DIR)/$(EXECUTABLE_FOLDER_PATH)/$(EXECUTABLE_NAME)",
+				"$(SRCROOT)/iina/write_info_plist_header.sh",
 			);
 			name = "Write Info.h";
 			outputFileListPaths = (
@@ -4848,7 +4860,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2026\nCollider LI, et al.\nReleased under GPLv3.";
@@ -4895,7 +4907,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2026\nCollider LI, et al.\nReleased under GPLv3.";
@@ -4954,7 +4966,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GL_SILENCE_DEPRECATION=1",
 					"$(inherited)",
@@ -4976,7 +4988,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2026\nCollider LI, et al.\nReleased under GPLv3.";

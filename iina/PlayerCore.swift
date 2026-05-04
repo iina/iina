@@ -787,7 +787,6 @@ class PlayerCore: NSObject {
     }
 
     isInMiniPlayer = true
-    mainWindow.refreshAudioOnlySubtitleLayout()
 
     // restore layout
     if needRestoreLayout {
@@ -803,7 +802,7 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
-    miniPlayer.refreshSubtitleOverlay()
+
     miniPlayer.pendingShow = true
     if showMiniPlayer {
       notifyWindowVideoSizeChanged()
@@ -849,7 +848,6 @@ class PlayerCore: NSObject {
     // hide mini player
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
-    miniPlayer.refreshSubtitleOverlay()
 
     mainWindow.pendingShow = true
     if showMainWindow {
@@ -857,7 +855,7 @@ class PlayerCore: NSObject {
       mainWindow.updateTitle()
       notifyWindowVideoSizeChanged()
     }
-    mainWindow.requestAudioOnlyRedraw("exited music mode")
+
     mainWindow.forceDraw("exited music mode")
     events.emit(.musicModeChanged, data: false)
   }
@@ -915,7 +913,7 @@ class PlayerCore: NSObject {
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
     guard info.state != .shutDown else { return }
-    mainWindow.refreshAudioOnlySubtitleLayout()
+
     savePlaybackPosition()
 
     // The player may already be stopped in which case the state must not be set to stopping.
@@ -2017,8 +2015,6 @@ class PlayerCore: NSObject {
       URL(string: path.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? path) :
       URL(fileURLWithPath: path)
     info.isNetworkResource = !info.currentURL!.isFileURL
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.refreshAudioOnlySubtitleLayout()
 
     // set "date last opened" attribute
     if let url = info.currentURL, url.isFileURL {
@@ -2151,8 +2147,6 @@ class PlayerCore: NSObject {
       miniPlayer.refreshArtworkVisibility()
       miniPlayer.handleVideoSizeChange()
     }
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.requestAudioOnlyRedraw("file loaded")
 
     // add to history
     if let url = info.currentURL {
@@ -2340,8 +2334,7 @@ class PlayerCore: NSObject {
     // restart even while paused. See issue #5337.
     syncUI(.time)
     reloadSavedIINAfilters()
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.requestAudioOnlyRedraw("playback restarted")
+
     
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
     // We can't put this in MPV_EVENT_VIDEO_RECONFIG because it can be emitted with the old video's size
@@ -2392,22 +2385,14 @@ class PlayerCore: NSObject {
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.requestAudioOnlyRedraw("subtitle track changed")
+
   }
 
   func subScaleChanged(_ scale: Double) {
-    switch miniPlayer.handleSubtitleScaleChange(scale) {
-    case .correctedToHidden:
-      return
-    case .handledInternally:
-      break
-    case .userInitiated:
-      guard scale != 0 else { break }
-      let displayValue = scale >= 1 ? scale : -1 / scale
-      let truncated = round(displayValue * 100) / 100
-      sendOSD(.subScale(truncated))
-    }
+    guard scale != 0 else { return }
+    let displayValue = scale >= 1 ? scale : -1 / scale
+    let truncated = round(displayValue * 100) / 100
+    sendOSD(.subScale(truncated))
     needReloadQuickSettingsView()
   }
 
@@ -2436,13 +2421,7 @@ class PlayerCore: NSObject {
     info.isSubVisible = visible
     sendOSD(visible ? .subVisible : .subHidden)
     postNotification(.iinaSubVisibilityChanged)
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.requestAudioOnlyRedraw("subtitle visibility changed")
-  }
 
-  func subTextChanged() {
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.requestAudioOnlyRedraw("subtitle text changed")
   }
 
   func trackListChanged() {
@@ -2473,8 +2452,7 @@ class PlayerCore: NSObject {
       miniPlayer.refreshArtworkVisibility()
       miniPlayer.handleVideoSizeChange()
     }
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.requestAudioOnlyRedraw("track list changed")
+
     postNotification(.iinaTracklistChanged)
   }
 
@@ -2510,8 +2488,7 @@ class PlayerCore: NSObject {
       miniPlayer.refreshArtworkVisibility()
       miniPlayer.handleVideoSizeChange()
     }
-    miniPlayer.refreshSubtitleOverlay()
-    mainWindow.requestAudioOnlyRedraw("video track changed")
+
   }
 
   func windowScaleChanged() {
@@ -3149,7 +3126,6 @@ class PlayerCore: NSObject {
     }
   }
 }
-
 
 extension PlayerCore: FFmpegControllerDelegate {
 

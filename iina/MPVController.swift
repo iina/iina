@@ -143,7 +143,6 @@ class MPVController: NSObject {
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subScale: MPV_FORMAT_DOUBLE,
-    MPVProperty.subText: MPV_FORMAT_STRING,
     MPVOption.Subtitles.subVisibility: MPV_FORMAT_FLAG,
     MPVOption.Equalizer.contrast: MPV_FORMAT_INT64,
     MPVOption.Equalizer.brightness: MPV_FORMAT_INT64,
@@ -1423,9 +1422,6 @@ class MPVController: NSObject {
       }
       DispatchQueue.main.async { self.player.subPosChanged(data) }
 
-    case MPVProperty.subText:
-      DispatchQueue.main.async { self.player.subTextChanged() }
-
     case MPVOption.Equalizer.contrast:
       guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.Equalizer.contrast, property.format)
@@ -1557,7 +1553,6 @@ class MPVController: NSObject {
   }
 
   // MARK: - User Options
-
 
   private enum UserOptionType {
     case bool, int, float, string, color, other

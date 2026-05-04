@@ -14,12 +14,6 @@ fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
 
 class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
-  enum SubtitleScaleChangeResult {
-    case correctedToHidden
-    case handledInternally
-    case userInitiated
-  }
-
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MiniPlayerWindowController")
   }
@@ -60,44 +54,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   var isPlaylistVisible = false
   var isVideoVisible = true
-
-  /// Caches the user's subtitle scale while the mini player shows subtitles in its custom overlay.
-  private var cachedSubScale: Double?
-  /// Tracks whether mpv subtitle rendering is currently suppressed in favor of the mini player overlay.
-  private var isSubRenderSuppressed = false
-  /// Prevents the subtitle scale OSD from reacting to `sub-scale` changes initiated by the mini player itself.
-  private var isManagedSubScaleChange = false
-
-  private lazy var subtitleOverlayView: MiniPlayerSubtitleOverlayView = {
-    let view = MiniPlayerSubtitleOverlayView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.isHidden = true
-    return view
-  }()
-
-  lazy var plainSubtitleLabel: NSTextField = {
-    let label = NSTextField(wrappingLabelWithString: "")
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.isEditable = false
-    label.isSelectable = false
-    label.isBezeled = false
-    label.drawsBackground = false
-    label.textColor = .white
-    label.font = NSFont.systemFont(ofSize: 20, weight: .medium)
-    label.alignment = .center
-    label.maximumNumberOfLines = 0
-    label.lineBreakMode = .byWordWrapping
-    label.cell?.truncatesLastVisibleLine = true
-    let shadow = NSShadow()
-    shadow.shadowColor = NSColor.black.withAlphaComponent(0.9)
-    shadow.shadowBlurRadius = 4
-    shadow.shadowOffset = NSSize(width: 0, height: -1)
-    label.shadow = shadow
-    label.isHidden = true
-    return label
-  }()
-
-  private var hideSubtitleWorkItem: DispatchWorkItem?
 
   var videoViewAspectConstraint: NSLayoutConstraint?
 
@@ -183,19 +139,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
     volumePopover.delegate = self
 
-    videoWrapperView.addSubview(subtitleOverlayView)
-    NSLayoutConstraint.activate([
-      subtitleOverlayView.leadingAnchor.constraint(equalTo: videoWrapperView.leadingAnchor),
-      subtitleOverlayView.trailingAnchor.constraint(equalTo: videoWrapperView.trailingAnchor),
-      subtitleOverlayView.topAnchor.constraint(equalTo: videoWrapperView.topAnchor),
-      subtitleOverlayView.bottomAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
-    ])
-    subtitleOverlayView.addSubview(plainSubtitleLabel)
-    NSLayoutConstraint.activate([
-      plainSubtitleLabel.leadingAnchor.constraint(equalTo: subtitleOverlayView.leadingAnchor, constant: 12),
-      plainSubtitleLabel.trailingAnchor.constraint(equalTo: subtitleOverlayView.trailingAnchor, constant: -12),
-      plainSubtitleLabel.bottomAnchor.constraint(equalTo: subtitleOverlayView.bottomAnchor, constant: -8)
-    ])
   }
 
   // MARK: - Mouse / Trackpad events
@@ -362,71 +305,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   func refreshArtworkVisibility() {
     guard loaded else { return }
-    defaultAlbumArt.isHidden = player.currentMediaIsAudio != .isAudio || player.info.albumArtTrack != nil
+    let hasSubtitles = player.info.isSubVisible && player.info.sid != 0
+    defaultAlbumArt.isHidden = player.currentMediaIsAudio != .isAudio || player.info.albumArtTrack != nil || hasSubtitles
   }
 
   func setToInitialWindowSize(display: Bool = true, animate: Bool = true) {
     guard let window = window else { return }
     window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: display, animate: animate)
-  }
-
-  func refreshSubtitleOverlay() {
-    guard loaded else { return }
-
-    let shouldUseOverlay = player.isInMiniPlayer &&
-      player.currentMediaIsAudio == .isAudio &&
-      isVideoVisible &&
-      player.info.isSubVisible &&
-      player.info.sid != 0
-
-    guard shouldUseOverlay else {
-      restoreSubtitleRendering()
-      clearSubtitleOverlay(immediately: true)
-      return
-    }
-
-    setSubtitleRenderingSuppressed(true)
-    let subtitleText = player.mpv.getString(MPVProperty.subText) ?? ""
-    if subtitleText.isEmpty {
-      clearSubtitleOverlay()
-    } else {
-      updatePlainSubtitleLabel(with: subtitleText)
-    }
-  }
-
-  func handleSubtitleScaleChange(_ scale: Double) -> SubtitleScaleChangeResult {
-    if isSubRenderSuppressed && !isManagedSubScaleChange && scale != 0 {
-      cachedSubScale = scale
-      isManagedSubScaleChange = true
-      player.mpv.setDouble(MPVOption.Subtitles.subScale, 0.0, level: .verbose)
-      return .correctedToHidden
-    }
-
-    let didHandleInternally = isManagedSubScaleChange
-    isManagedSubScaleChange = false
-    return didHandleInternally ? .handledInternally : .userInitiated
-  }
-
-  private func setSubtitleRenderingSuppressed(_ suppressed: Bool) {
-    if suppressed {
-      guard !isSubRenderSuppressed else { return }
-      cachedSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale)
-      isSubRenderSuppressed = true
-      isManagedSubScaleChange = true
-      player.mpv.setDouble(MPVOption.Subtitles.subScale, 0.0, level: .verbose)
-      return
-    }
-
-    restoreSubtitleRendering()
-  }
-
-  private func restoreSubtitleRendering() {
-    guard isSubRenderSuppressed else { return }
-    isSubRenderSuppressed = false
-    let restoredSubScale = cachedSubScale ?? player.mpv.getDouble(MPVOption.Subtitles.subScale)
-    cachedSubScale = nil
-    isManagedSubScaleChange = true
-    player.mpv.setDouble(MPVOption.Subtitles.subScale, restoredSubScale, level: .verbose)
   }
 
   // MARK: - NSPopoverDelegate
@@ -510,42 +395,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       window.setFrame(frame, display: true, animate: false)
     }
     Preference.set(isVideoVisible, for: .musicModeShowAlbumArt)
-    refreshSubtitleOverlay()
-  }
-
-  func clearSubtitleOverlay(immediately: Bool = false) {
-    hideSubtitleWorkItem?.cancel()
-    hideSubtitleWorkItem = nil
-
-    if immediately {
-      plainSubtitleLabel.isHidden = true
-      plainSubtitleLabel.stringValue = ""
-      subtitleOverlayView.isHidden = true
-      return
-    }
-
-    guard !subtitleOverlayView.isHidden else { return }
-    let workItem = DispatchWorkItem { [weak self] in
-      self?.plainSubtitleLabel.isHidden = true
-      self?.plainSubtitleLabel.stringValue = ""
-      self?.subtitleOverlayView.isHidden = true
-      self?.hideSubtitleWorkItem = nil
-    }
-    hideSubtitleWorkItem = workItem
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: workItem)
-  }
-
-  func updatePlainSubtitleLabel(with text: String) {
-    guard !text.isEmpty else {
-      clearSubtitleOverlay()
-      return
-    }
-
-    hideSubtitleWorkItem?.cancel()
-    hideSubtitleWorkItem = nil
-    subtitleOverlayView.isHidden = false
-    plainSubtitleLabel.stringValue = text
-    plainSubtitleLabel.isHidden = false
   }
 
   @IBAction func backBtnAction(_ sender: NSButton) {
@@ -585,10 +434,3 @@ fileprivate extension NSRect {
   }
 }
 
-fileprivate final class MiniPlayerSubtitleOverlayView: NSView {
-  override var isFlipped: Bool { true }
-
-  override func hitTest(_ point: NSPoint) -> NSView? {
-    nil
-  }
-}

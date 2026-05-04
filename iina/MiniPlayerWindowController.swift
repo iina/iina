@@ -305,7 +305,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   func refreshArtworkVisibility() {
     guard loaded else { return }
-    let hasSubtitles = player.info.isSubVisible && player.info.sid != 0
+    let hasSubtitles = (player.info.isSubVisible && player.info.sid != 0) || (player.info.isSecondSubVisible && player.info.secondSid != 0)
     defaultAlbumArt.isHidden = player.currentMediaIsAudio != .isAudio || player.info.albumArtTrack != nil || hasSubtitles
   }
 

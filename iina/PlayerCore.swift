@@ -2371,6 +2371,9 @@ class PlayerCore: NSObject {
     info.secondSid = Int(mpv.getInt(MPVOption.Subtitles.secondarySid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.secondSub) ?? .noneSubTrack))
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
   }
 
   func secondSubVisibilityChanged(_ visible: Bool) {
@@ -2378,6 +2381,9 @@ class PlayerCore: NSObject {
     info.isSecondSubVisible = visible
     sendOSD(visible ? .secondSubVisible : .secondSubHidden)
     postNotification(.iinaSecondSubVisibilityChanged)
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
   }
 
   func sidChanged() {
@@ -2385,7 +2391,9 @@ class PlayerCore: NSObject {
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
-
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
   }
 
   func subScaleChanged(_ scale: Double) {
@@ -2421,7 +2429,9 @@ class PlayerCore: NSObject {
     info.isSubVisible = visible
     sendOSD(visible ? .subVisible : .subHidden)
     postNotification(.iinaSubVisibilityChanged)
-
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
   }
 
   func trackListChanged() {

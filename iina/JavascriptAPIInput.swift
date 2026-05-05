@@ -50,23 +50,34 @@ class JavascriptAPIInput: JavascriptAPI, JavascriptAPIInputExportable {
   }
   
   func onMouseUp(_ button: String, _ callback: JSValue, _ priority: JSValue) {
+    guard isValidMouseInput(button) else { return }
     addListener(.mouseUp, button, callback, priority, normalizeKey: false)
   }
 
   func onMouseDown(_ button: String, _ callback: JSValue, _ priority: JSValue) {
+    guard isValidMouseInput(button) else { return }
     addListener(.mouseDown, button, callback, priority, normalizeKey: false)
   }
 
   func onMouseDrag(_ button: String, _ callback: JSValue, _ priority: JSValue) {
+    guard isValidMouseInput(button) else { return }
     addListener(.mouseDrag, button, callback, priority, normalizeKey: false)
+  }
+
+  private func isValidMouseInput(_ button: String) -> Bool {
+    return button == PluginInputManager.Input.mouse ||
+           button == PluginInputManager.Input.rightMouse ||
+           button == PluginInputManager.Input.otherMouse
   }
 
   fileprivate func addListener(
     _ event: PluginInputManager.Event,
     _ key: String,  _ callback: JSValue, _ priority: JSValue, normalizeKey: Bool = true
   ) {
+    let normalizedKey = normalizeKey ? KeyCodeHelper.normalizeMpv(key) : key
+    guard !normalizedKey.isEmpty else { return }
     pluginInstance.input.addListener(
-      forInput: normalizeKey ? KeyCodeHelper.normalizeMpv(key) : key,
+      forInput: normalizedKey,
       event: event,
       callback: callback,
       priority: priority.isNumber ? Int(priority.toInt32()) : PluginInputManager.Priority.low.rawValue,

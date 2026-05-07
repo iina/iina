@@ -3258,11 +3258,7 @@ class MainWindowController: PlayerWindowController {
     case .fullScreen:
       toggleWindowFullScreen()
     case .musicMode:
-      if player.isInMiniPlayer {
-        player.switchBackFromMiniPlayer()
-      } else {
-        player.switchToMiniPlayer()
-      }
+      player.switchToMiniPlayer()
     case .pip:
       if pipStatus == .inPIP {
         exitPIP()

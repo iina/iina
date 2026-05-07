@@ -699,11 +699,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case .openURL:
       AppDelegate.shared.openURL(self)
     case .toggleMusicMode:
-      if player.isInMiniPlayer {
-        player.switchBackFromMiniPlayer()
-      } else {
-        player.switchToMiniPlayer()
-      }
+      player.switchToMiniPlayer()
     case .deleteCurrentFile:
       menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:

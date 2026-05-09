@@ -38,7 +38,7 @@ For each lib being examined during the above search::
       track them for error logging purposes).
 2. Insert each (base_id, compatibility_version, variant_basename, variant_full_path) combo into name_variants_multimap.
 
-II. Compile canonical_name_multimap and assemble canonical libs:
+II. Compile canonical_name_multimap and assemble canonical libs
 
 For all entries in name_variants_multimap:
 1. For each base_id, determine best canonical_name for each version:
@@ -109,7 +109,7 @@ def make_arg_parser() -> argparse.ArgumentParser:
   )
   
   group = arg_parser.add_mutually_exclusive_group(required=True)
-  group.add_argument('--canonicalize', action='store_true', help="Renames all libs in Frameworks directory to their canonical names, and also adds all their transitive dependencies to the Frameworks directory using their cannonical names. Also, for all libs found in Frameworks directory & all executables found in the MacOS directory, rewrites all `/nix/store` lib references to `@rpath` references with each lib's canonical name. Also adds missing LC_RPATH entries to all libs.")
+  group.add_argument('--canonicalize', action='store_true', help="Renames all libs in Frameworks directory to their canonical names, and also adds all their transitive dependencies to the Frameworks directory using their canonical names. Also, for all libs found in Frameworks directory & all executables found in the MacOS directory, rewrites all `/nix/store` lib references to `@rpath` references with each lib's canonical name. Also adds missing LC_RPATH entries to all libs.")
   group.add_argument('--add-canonical-links', action='store_true', help="Add symbolic links for any missing canonically named libs to the Frameworks directory.")
   group.add_argument('--print-only', action='store_true', help="Search for all /nix/store references among all dependencies, print them, then exit without doing any modifications.")
   
@@ -138,10 +138,6 @@ def parse_base(file_path: str) -> Optional[tuple[str, str]]:
 
 # --- Util: Basic file system operations
 
-# Set given file's permissions to R+W by the owner.
-def ensure_file_is_writable(file_path: str):
-	os.chmod(file_path, stat.S_IRUSR | stat.S_IWUSR)
-
 # Returns a list of (base_name, full_path) tuples for all files in the given directory.
 def ls_files_in_dir(dir_path: str) -> list[tuple[str, str]]:
   all_children: map[tuple[str, str]] = map(lambda name: (name, os.path.join(dir_path, name)), os.listdir(dir_path))
@@ -161,12 +157,7 @@ def ensure_lc_rpath_present(lib_path: str):
   subprocess.run(['install_name_tool', '-add_rpath', LC_RPATH, lib_path])
 
 def rewrite_lib_entry(current_entry: str, to: str, bin_path: str):
-  subprocess.run(['install_name_tool', '-change', current_entry, to, bin_path], capture_output=False, text=True)
-
-# Return `otool -L` stdouut output as list of lines for given bin_path (Mach-O lib or executable binary)
-def otool_list_shared_libs(bin_path: str) -> list[str]:
-  otool_result = subprocess.run(['otool', '-L', bin_path], capture_output=True, text=True)
-  return otool_result.stdout.splitlines()
+  subprocess.run(['install_name_tool', '-change', current_entry, to, bin_path])
 
 # Gets lib references in the given Mach-O lib or executable binary whose path starts with '/nix/store/'.
 # - bin_path: file system path to the Mach-O lib or executable binary to be examined.
@@ -175,7 +166,8 @@ def otool_list_shared_libs(bin_path: str) -> list[str]:
 def otool_find_lib_refs(bin_path: str, nix_store_handler: Callable[[str, str, str, str], None], \
   rpath_handler: Optional[Callable[[str, str, str, str], None]] = None):
 
-  for line in otool_list_shared_libs(bin_path):
+  otool_result = subprocess.run(['otool', '-L', bin_path], capture_output=True, text=True)
+  for line in  otool_result.stdout.splitlines():
     # Skip header lines which contain the source file path.
     # We are interested in the lines under them which are indented.
     if len(line) > 0 and line[0].isspace():
@@ -202,7 +194,7 @@ def otool_find_lib_refs(bin_path: str, nix_store_handler: Callable[[str, str, st
 # --- Classes ---
 
 class LibMetaDB:
-  # Map: {base_id: {variant_basename: {variant_compatibility_version: variant_full_path}}}
+  # Map: {base_id: {variant_compatibility_version: {variant_basename: variant_full_path}}}
   # By assembling the data first, we can elimminate the (many) duplicates before doing ELF work which will speed things
   # up greatly.
   name_variants_map: dict[str, dict[str, dict[str, str]]] = {}
@@ -211,15 +203,15 @@ class LibMetaDB:
   # can't strictly assume that every @rpath entry found was created by a previous run of this script.
   rpaths_map: dict[str, dict[str, str]] = {}
   
-  def store_lib_variant(self, base_id: str, variant_basename: str, variant_compat_version: str, variant_full_path: str):
+  def store_lib_variant(self, base_id: str, variant_compat_version: str, variant_basename: str, variant_full_path: str):
     variants_map = self.name_variants_map.get(base_id, dict())
     variant_subversions_map = variants_map.get(variant_compat_version, dict())
     variant_subversions_map[variant_basename] = variant_full_path
     variants_map[variant_compat_version] = variant_subversions_map
     self.name_variants_map[base_id] = variants_map
   
-  def store_rpath_variant(self, base_id: str, variant_basename: str, variant_compat_version: str, _):
-    rpaths_map = self.rpaths_map.get(base_id, dict())
+  def store_rpath_variant(self, base_id: str, variant_compat_version: str, variant_basename: str):
+    rpaths_map: dict[str, str] = self.rpaths_map.get(base_id, dict())
     existing_basename = rpaths_map.get(variant_compat_version, '')
     if existing_basename and existing_basename != variant_basename:
       # Potentially not good. Proceed anyway but emit warning.
@@ -278,7 +270,7 @@ class LibMetaDB:
             return
           # Need to search this ref for any transitive refs:
           libs_searched[ref_path] = False
-          self.store_lib_variant(base_id, ref_basename, compat_version, ref_path)
+          self.store_lib_variant(base_id, compat_version, ref_basename, ref_path)
           
         def rpath_handler(_, ref_path, compat_version, current_version):
           base_tuple = parse_base(ref_path)
@@ -291,7 +283,7 @@ class LibMetaDB:
           
           if LOG_VERBOSE:
             print(f'Found @rpath ref: {ref_path} compat: {compat_version} curr: {current_version}')
-          self.store_rpath_variant(base_id, ref_basename, compat_version, ref_path)
+          self.store_rpath_variant(base_id, compat_version, ref_basename)
           
         if LOG_VERBOSE:
           print(f'Scanning: {file_path}')
@@ -393,7 +385,7 @@ def main():
   lib_db.populate_from_disk(lib_dir, executable_dir)
  
   for base_id, variants in lib_db.name_variants_map.items():
-    print(f'Variants of lib {base_id}: {variants}')
+    print(f'Variants of {base_id}: {variants}')
 
   # Now compile the canonical name database, which will determine the best variant for each lib and store the 
   # canonical name for each version.
@@ -406,7 +398,7 @@ def main():
   if args.add_canonical_links:
     print(f"Adding symlinks for missing canonically named libs…")
     
-    def cname_handler(canonical_name: str, compat_version: str, src_path: str):
+    def link_to_cname(canonical_name: str, _, src_path: str):
       dst_path = os.path.join(lib_dir, canonical_name)
       if os.path.isfile(dst_path):
         if LOG_VERBOSE:
@@ -415,7 +407,7 @@ def main():
       print(f"Adding link: {src_path} → {dst_path}")
       os.symlink(src_path, dst_path, target_is_directory=False)
 
-    cname_db.for_all_canonical_names(cname_handler)
+    cname_db.for_all_canonical_names(link_to_cname)
     print(f"Adding symlinks: done")
     return
   
@@ -427,17 +419,17 @@ def main():
   os.makedirs(lib_staging_dir_path, exist_ok=True)
   print(f'Copying libs into {lib_staging_dir_path}')
 
-  # Total count of libs copied, with different vesions of the same lib counted as multiple.
+  # Total count of libs copied, with different versions of the same lib counted as multiple.
   copied_libs_count: int = 0
   
-  def cname_handler(canonical_name: str, compat_version: str, src_path: str):
+  def copy_to_cname(canonical_name: str, compat_version: str, src_path: str):
     print(f'Canonical name for v{compat_version}: {canonical_name}')
     dst_path = os.path.join(lib_staging_dir_path, canonical_name)
     shutil.copyfile(src_path, dst_path, follow_symlinks=True)
     nonlocal copied_libs_count
     copied_libs_count += 1
 
-  cname_db.for_all_canonical_names(cname_handler)
+  cname_db.for_all_canonical_names(copy_to_cname)
   print(f'Copied {copied_libs_count} libs into {lib_staging_dir_path}')
   
   # (Optional if "--purge" is specified). Removes unused lib files and links from Frameworks directory.
@@ -477,10 +469,9 @@ def main():
     if not (lib_path.endswith('.dylib') or lib_path.endswith('.so')):
       continue
     
-    ensure_file_is_writable(lib_path)
     ensure_lc_rpath_present(lib_path)
     print(f"✏️ Setting install_name id on {lib_basename}")
-    subprocess.run(['install_name_tool', '-id', f'@rpath/{lib_basename}', lib_path], capture_output=True, text=True)
+    subprocess.run(['install_name_tool', '-id', f'@rpath/{lib_basename}', lib_path])
     otool_find_lib_refs(lib_path, nix_store_handler)
     
     shutil.move(lib_path, os.path.join(lib_dir, lib_basename))
@@ -493,7 +484,7 @@ def main():
   for exe_base_name, exe_path in ls_files_in_dir(executable_dir):
     if exe_base_name == ".yt-dlp-wrapped":
       # Is there a way to prevent this file from being generated in the first place?
-      print(f"Removing unneeded file: {exe_path}:")
+      print(f"Removing unneeded file: {exe_path}")
       os.remove(exe_path)
       continue
     

@@ -220,11 +220,9 @@
                   pkgs.libdvdcss
                   pkgs.libdvdnav
                   pkgs.libffi
-                  pkgs.libjxl
                   pkgs.libogg
                   pkgs.libopenmpt
                   pkgs.libopus
-                  pkgs.libplacebo
                   pkgs.librist
                   pkgs.libssh
                   pkgs.libtheora
@@ -236,7 +234,6 @@
                   pkgs.ocl-icd
                   pkgs.openal
                   pkgs.openjpeg
-                  pkgs.rubberband
                   pkgs.SDL2
                   pkgs.sdl3
                   pkgs.srt

@@ -1,7 +1,7 @@
 {
   description = "IINA – The modern video player for macOS.";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   outputs =
     { self, nixpkgs }:
@@ -16,10 +16,32 @@
         let
           pkgs = import nixpkgs { inherit system; };
 
-          scripts = {
-            normalizer = import ./nix/scripts/normalizer.nix { inherit pkgs; };
-            canonicalizeLibGroups = import ./nix/scripts/canonicalize-lib-groups.nix { inherit pkgs; };
-            resign = import ./nix/scripts/resign.nix { inherit pkgs; };
+          resign = pkgs.writeShellApplication {
+            name = "iina-resign";
+            runtimeInputs = [ pkgs.findutils pkgs.coreutils ];
+            text = ''
+              set -euo pipefail
+              app="$1"
+
+              find "$app" -type d -exec chmod u+rwx {} \;
+              find "$app" -type f -exec chmod u+rw  {} \;
+              find "$app/Contents/MacOS" -type f -perm -111 -exec chmod u+rw {} \;
+
+              /usr/bin/codesign --force --deep --sign - "$app"
+            '';
+          };
+
+          libTool = pkgs.stdenv.mkDerivation {
+            pname = "iina-lib-tool";
+            version = "1.0";
+
+            propagatedBuildInputs = [
+            (pkgs.python3.withPackages (pythonPackages: with pythonPackages; [
+              # Add Python packages here
+            ]))];
+
+            dontUnpack = true;
+            installPhase = "install -Dm755 ${./other/lib_tool.py} $out/bin/iina-lib-tool";
           };
 
           # Pull system's xcode in
@@ -29,7 +51,7 @@
           '';
 
           # Override ffmpeg to use our version of libs
-          ffmpeg = pkgs.ffmpeg_7.override {
+          ffmpeg = (pkgs.ffmpeg.override {
             withSoxr = true;
             soxr = pkgs.soxr;
 
@@ -44,16 +66,18 @@
 
             withJxl = true;
             libjxl = pkgs.libjxl;
-          };
+          }).overrideAttrs (_: {
+            # Skip tests to speed up build
+            doCheck = false;
+            });
 
-          # Override mpv with vapoursynth support
+          # Override mpv with desired features support
           mpv = pkgs.mpv-unwrapped.override {
             ffmpeg = ffmpeg;
             lua = pkgs.luajit;
-            vapoursynth = pkgs.vapoursynth;
 
-            # enable features we want
-            vapoursynthSupport = true;
+            # Enable features we want
+            vapoursynthSupport = false;
             javascriptSupport = true;
             cmsSupport = true;
             rubberbandSupport = true;
@@ -63,7 +87,7 @@
             vulkanSupport = true;
             zimgSupport = true;
 
-            # disable linux-only bits
+            # Disable Linux-only bits
             alsaSupport = false;
             jackaudioSupport = false;
             pipewireSupport = false;
@@ -77,8 +101,8 @@
             sixelSupport = false;
           };
 
-          # Collect include deps as per readme.md
-          depsInc = pkgs.linkFarm "iina-deps-inc" [
+          # Collect include deps (header files) as per readme.md
+          depsInclude = pkgs.linkFarm "iina-deps-inc" [
             {
               name = "mpv";
               path = "${pkgs.lib.getDev mpv}/include/mpv";
@@ -102,10 +126,6 @@
             {
               name = "libavutil";
               path = "${pkgs.lib.getDev ffmpeg}/include/libavutil";
-            }
-            {
-              name = "libpostproc";
-              path = "${pkgs.lib.getDev ffmpeg}/include/libpostproc";
             }
             {
               name = "libswresample";
@@ -178,7 +198,6 @@
                   pkgs.snappy
                   pkgs.soxr
                   pkgs.speex
-                  pkgs.vapoursynth
                   pkgs.vid-stab
                   pkgs.vulkan-loader
                   pkgs.xorg.libX11
@@ -189,34 +208,8 @@
                   pkgs.zeromq
                   pkgs.zimg
                   pkgs.zstd
-                ]
-            )
-          );
 
-          # Collect indirect deps
-          depsIndirect = pkgs.linkFarm "iina-deps-indirect" (
-            pkgs.lib.flatten (
-              map
-                (
-                  pkg:
-                  let
-                    libdir = "${pkgs.lib.getLib pkg}/lib";
-                    files = builtins.attrNames (builtins.readDir libdir);
-                  in
-                  pkgs.lib.concatMap (
-                    file:
-                    if pkgs.lib.hasSuffix ".dylib" file then
-                      [
-                        {
-                          name = file;
-                          path = "${libdir}/${file}";
-                        }
-                      ]
-                    else
-                      [ ]
-                  ) files
-                )
-                [
+                  # Indirect libs
                   pkgs.bzip2
                   pkgs.expat
                   pkgs.lame
@@ -248,7 +241,6 @@
                   pkgs.sdl3
                   pkgs.srt
                   pkgs.svt-av1
-                  pkgs.vapoursynth
                   pkgs.x264
                   pkgs.x265
                   pkgs.zlib
@@ -279,8 +271,6 @@
                     mkdir -p $out/bin
                     cp -p ${mpv}/Applications/mpv.app/Contents/MacOS/mpv $out/bin/mpv
                   '')
-                  pkgs.vapoursynth
-                  pkgs.python3
                   pkgs.yt-dlp
                 ]
             )
@@ -289,7 +279,7 @@
           # Collect SwiftPM deps as separate derivation for them to be cached
           spmDeps = pkgs.stdenv.mkDerivation {
             pname = "iina-spm-deps";
-            version = if self ? rev then builtins.substring 0 8 self.rev else "dev";
+            version = "${self.shortRev or self.dirtyShortRev}";
 
             # Only include SwiftPM-related files as input
             src = pkgs.lib.cleanSourceWith {
@@ -349,29 +339,12 @@
               cp -R . $out/
             '';
           };
-
-          # Package Python resources (stdlib + VapourSynth) for reuse in builds and dev shells
-          depsResources = pkgs.runCommand "iina-deps-resources" { } ''
-            set -euo pipefail
-
-            mkdir -p "$out/Python/lib"
-            python_src=$(echo ${pkgs.python3}/lib/python* | awk '{print $1}')
-            python_basename="$(basename "$python_src")"
-            cp -rL --no-preserve=mode,ownership "$python_src" "$out/Python/lib/"
-
-            python_target="$out/Python/lib/$python_basename"
-            chmod -R u+w "$python_target"
-            mkdir -p "$python_target/site-packages"
-
-            vapoursynth_site=$(echo ${pkgs.vapoursynth}/lib/python*/site-packages | awk '{print $1}')
-            cp -rL --no-preserve=mode,ownership "$vapoursynth_site"/. "$python_target/site-packages/"
-          '';
         in
         rec {
           packages = rec {
             iina = pkgs.stdenv.mkDerivation {
               pname = "iina";
-              version = if self ? rev then builtins.substring 0 8 self.rev else "dev";
+              version = "${self.shortRev or self.dirtyShortRev}";
 
               src = pkgs.nix-gitignore.gitignoreSource [ "flake.nix" "flake.lock" ] ./.;
 
@@ -380,6 +353,7 @@
               nativeBuildInputs = [
                 pkgs.coreutils
                 xcode
+                libTool
                 pkgs.rsync
                 pkgs.git
                 pkgs.gnused
@@ -393,7 +367,10 @@
               ];
 
               buildPhase = ''
-                echo "🔧 Setting up build environment"
+                echo "[${system}] 🔧 Setting up build environment"
+                git_rev="${self.rev or self.dirtyRev}"
+                git_branch="???"  # FIXME: Find way to get the actual git branch
+                echo "Git revision: $git_rev"
                 export HOME=$PWD/.home
                 export CFFIXED_USER_HOME="$HOME"
                 export __XPC_CFFIXED_USER_HOME="$HOME"
@@ -413,34 +390,21 @@
                 echo "Using $TOOLCHAINS toolchain"
                 echo "Using $SDKROOT sdk"
 
-                echo "📦 Copying external deps"
+                echo "[${system}] 📦 Copying external deps"
                 mkdir -p deps
                 rm -rf deps/include deps/lib
 
                 mkdir -p deps/include deps/lib deps/executable
-
-                cp -RL ${depsInc}/.               deps/include
+                cp -RL ${depsInclude}/.           deps/include
                 cp -RL ${depsLib}/.               deps/lib
                 cp -RL ${depsExecutable}/.        deps/executable/
 
-                echo "✏️ Rewriting install names to use @rpath"
-                find deps/lib -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r dep; do
-                  echo "✏️ Patching install names in $dep"
-                  chmod +w "$dep"
-
-                  # Change its ID to @rpath/<filename>
-                  install_name_tool -id "@rpath/$(basename "$dep")" "$dep" || true
-
-                  # Rewrite dependencies that still point to /nix/store
-                  otool -L "$dep" | awk '/\/nix\/store/ && $1 !~ /:$/ {print $1}' | while read -r nixdep; do
-                    base=$(basename "$nixdep")
-                    install_name_tool -change "$nixdep" "@rpath/$base" "$dep" || true
-                  done
-                done
-
-                echo "📦 Copying SPM deps"
+                echo "[${system}] 📦 Copying SPM deps"
                 rsync -a ${spmDeps}/ ./
                 chmod -R u+rwx,g+rx,o+rx .
+
+                echo "[${system}] 📦 Adding canonical links"
+                ${libTool}/bin/iina-lib-tool --add-canonical-links "./deps/lib" "./deps/executable"
 
                 # Rewrite SwiftPM workspace-state.json to fix absolute paths
                 if [ -f .spm/workspace-state.json ]; then
@@ -450,7 +414,7 @@
                 fi
 
                 # Build IINA
-                echo "🔨 Building IINA"
+                echo "[${system}] 🔨 Building IINA"
                 xcodebuild \
                   -workspace iina.xcodeproj/project.xcworkspace \
                   -scheme iina \
@@ -483,49 +447,37 @@
                 app="$out/Applications/IINA.app"
                 macos="$app/Contents/MacOS"
                 frameworks="$app/Contents/Frameworks"
-                resources="$app/Contents/Resources"
                 plist="$app/Contents/Info.plist"
 
                 mkdir -p "$frameworks"
-                mkdir -p "$resources"
 
-                echo "📦 Bundling ${depsResources} into IINA.app"
-                cp -RL ${depsResources}/. "$resources/"
-
-                echo "📦 Bundling ${depsIndirect} into IINA.app"
-                cp -RL ${depsIndirect}/. "$frameworks/"
-
-                echo "📦 Bundling ${depsExecutable} into IINA.app"
+                echo "[${system}] 📦 Bundling ${depsExecutable} into IINA.app"
                 cp -RL ${depsExecutable}/. "$macos/"
 
-                echo "📦 Deep-bundling dynamic dependencies into IINA.app"
-                ${scripts.normalizer}/bin/iina-normalize-app "$app"
+                echo "[${system}] 📦 Deep-bundling dynamic dependencies into IINA.app"
+                ${libTool}/bin/iina-lib-tool --canonicalize --purge "$frameworks" "$macos"
 
-                echo "✏️ Canonicalize Lib Groups"
-                ${scripts.canonicalizeLibGroups}/bin/iina-canonicalize-lib-groups "$app"
+                echo "[${system}] ✏️ Setting up environment variables"
 
-                echo "✏️ Setting up environment variables"
+                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment dict'                                          "$plist" 2>/dev/null || true
+                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:IINA_EXECUTABLE    string "@executable_path"'  "$plist" 2>/dev/null || true
+                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:IINA_EXECUTABLE           "@executable_path"'  "$plist"
+                # Overwrite Git info from build (which were set to placeholders because Xcode script could not determine them at build time)
+                /usr/libexec/PlistBuddy -c "Set :com.colliderli.iina.build.commit        $git_rev"            "$plist"
+                /usr/libexec/PlistBuddy -c "Set :com.colliderli.iina.build.branch        $git_branch"         "$plist"
 
-                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment dict'                                                                             "$plist" 2>/dev/null || true
-                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:PYTHONHOME          string "@executable_path/../Resources/Python"'                "$plist" 2>/dev/null || true
-                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:PYTHONHOME                 "@executable_path/../Resources/Python"'                "$plist"
-                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:PYTHONNOUSERSITE    string "1"'                                                   "$plist" 2>/dev/null || true
-                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:PYTHONNOUSERSITE           "1"'                                                   "$plist"
-                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:VAPOURSYNTH_LIBRARY string "@executable_path/../Frameworks/libvapoursynth.dylib"' "$plist" 2>/dev/null || true
-                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:VAPOURSYNTH_LIBRARY        "@executable_path/../Frameworks/libvapoursynth.dylib"' "$plist"
-                /usr/libexec/PlistBuddy -c 'Add :LSEnvironment:IINA_EXECUTABLE    string "@executable_path"'                                    "$plist" 2>/dev/null || true
-                /usr/libexec/PlistBuddy -c 'Set :LSEnvironment:IINA_EXECUTABLE           "@executable_path"'                                    "$plist"
-
-                echo "🔏 Re-signing IINA.app..."
-                ${scripts.resign}/bin/iina-resign "$app"
+                # echo "[${system}] 🔏 Re-signing IINA.app..."
+                # ${resign}/bin/iina-resign "$app"
               '';
             };
 
+            # --- IINA Universal ---
             iina-universal = pkgs.stdenv.mkDerivation {
               pname = "iina-universal";
-              version = if self ? rev then builtins.substring 0 8 self.rev else "dev";
+              version = "${self.shortRev or self.dirtyShortRev}";
 
               nativeBuildInputs = [
+                libTool
                 pkgs.rsync
                 pkgs.coreutils
               ];
@@ -609,7 +561,7 @@
                   else
                     lipo -create -arch arm64 "$arm64" -arch x86_64 "$x86_64" -output "$tmp"
                   fi
-                  
+
                   # Preserve mode if possible (GNU coreutils); fall back to +x
                   ${pkgs.coreutils}/bin/chmod --reference="$dep" "$tmp" 2>/dev/null || chmod +x "$tmp"
 
@@ -617,13 +569,17 @@
                 done
 
                 echo "📦 Deep-bundling dynamic dependencies into IINA.app"
-                ${scripts.normalizer}/bin/iina-normalize-app "$app"
-
-                echo "✏️ Canonicalize Lib Groups"
-                ${scripts.canonicalizeLibGroups}/bin/iina-canonicalize-lib-groups "$app"
+                ${libTool}/bin/iina-lib-tool --canonicalize "$frameworks" "$app/Contents/MacOS"
 
                 echo "🔏 Re-signing IINA.app..."
-                ${scripts.resign}/bin/iina-resign "$app"
+                ${resign}/bin/iina-resign "$app"
+
+                echo "[${system}] 📦 Copying include dir"
+                mkdir -p "$out/include"
+                cp -RL ${depsInclude}/. $out/include
+
+                app_real=$(realpath "$app" 2>/dev/null || echo "$app")
+                echo "✅✅ Done! Universal IINA.app is ready at $app_real"
               '';
 
               preFixup = ''
@@ -664,11 +620,9 @@
                   ln -sfn "$target" "$link"
                 }
 
-                link_tree ${depsInc} "$deps_root/include"
+                link_tree ${depsInclude} "$deps_root/include"
                 link_tree ${depsLib} "$deps_root/lib"
                 link_tree ${depsExecutable} "$deps_root/executable"
-                link_tree ${depsIndirect} "$deps_root/indirect"
-                link_tree ${depsResources} "$deps_root/resources"
 
                 echo "📦 Syncing SwiftPM deps"
                 rsync -a --chmod=Du+rwx,Fu+rw ${spmDeps}/ ./

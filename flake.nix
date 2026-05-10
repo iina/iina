@@ -6,6 +6,7 @@
   outputs =
     { self, nixpkgs }:
     let
+
       systems = [
         "aarch64-darwin"
         "x86_64-darwin"
@@ -34,12 +35,7 @@
           libTool = pkgs.stdenv.mkDerivation {
             pname = "iina-lib-tool";
             version = "1.0";
-
-            propagatedBuildInputs = [
-            (pkgs.python3.withPackages (pythonPackages: with pythonPackages; [
-              # Add Python packages here
-            ]))];
-
+            propagatedBuildInputs = [ pkgs.python3 ];
             dontUnpack = true;
             installPhase = "install -Dm755 ${./other/lib_tool.py} $out/bin/iina-lib-tool";
           };
@@ -262,12 +258,6 @@
                   }) (builtins.attrNames (builtins.readDir bindir))
                 )
                 [
-                  ffmpeg
-                  # Grab the real mpv binary instead of the /bin wrapper script
-                  (pkgs.runCommand "iina-mpv-executable" { } ''
-                    mkdir -p $out/bin
-                    cp -p ${mpv}/Applications/mpv.app/Contents/MacOS/mpv $out/bin/mpv
-                  '')
                   pkgs.yt-dlp
                 ]
             )
@@ -295,10 +285,6 @@
 
             nativeBuildInputs = [
               xcode
-              pkgs.git
-              pkgs.gnused
-              pkgs.unzip
-              pkgs.zip
             ];
 
             buildPhase = ''
@@ -352,10 +338,7 @@
                 xcode
                 libTool
                 pkgs.rsync
-                pkgs.git
                 pkgs.gnused
-                pkgs.unzip
-                pkgs.zip
               ];
 
               buildInputs = [
@@ -366,8 +349,11 @@
               buildPhase = ''
                 echo "[${system}] 🔧 Setting up build environment"
                 git_rev="${self.rev or self.dirtyRev}"
-                git_branch="???"  # FIXME: Find way to get the actual git branch
-                echo "Git revision: $git_rev"
+                # Nix flakes cannot currently access branch info. Doing so may violate the stated goal of maximum 
+                # reproducibility, as the same git revision can be associated with an arbitrary number of branches. 
+                # Just use a placeholder for now:
+                git_branch="<nix-build>"
+                echo "Git bramch: $git_branch, revision: $git_rev"
                 export HOME=$PWD/.home
                 export CFFIXED_USER_HOME="$HOME"
                 export __XPC_CFFIXED_USER_HOME="$HOME"

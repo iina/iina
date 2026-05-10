@@ -52,6 +52,8 @@ if [[ "$NIX_BUILD" = true ]]; then
 
   cd "$projDir"
 
+  nixArgs="--print-build-logs --verbose"
+
   if [[ "$DEBUG_NIX" = true ]]; then
     nixStoreRefs=`grep '/nix/store/' "$projDir/iina.xcodeproj/project.pbxproj" || true`
     if [ -n "$nixStoreRefs" ]; then
@@ -60,9 +62,9 @@ if [[ "$NIX_BUILD" = true ]]; then
       echo "Aborting build."
       exit 1
     fi
-    $nixExec build --keep-failed --print-build-logs --verbose
+    $nixExec build $nixArgs --keep-failed
   else
-    $nixExec build --print-build-logs --verbose
+    $nixExec build $nixArgs
   fi
 fi
 

@@ -114,7 +114,7 @@ class PlayerCore: NSObject {
           let relevantActivePlayerCore = activePlayerCores.first { $0.info.currentURL == url }
           
           if let relevantActivePlayerCore {
-            relevantActivePlayerCore.mainWindow.window?.makeKeyAndOrderFront(nil)
+            relevantActivePlayerCore.currentController.window?.makeKeyAndOrderFront(nil)
             return currentReturnValue
           }
         }

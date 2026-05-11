@@ -3390,8 +3390,6 @@ extension MainWindowController: PIPViewControllerDelegate {
       // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
       pip.dismiss(pipVideo!)
     }
-    player.events.emit(.pipChanged, data: false)
-    NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": false])
   }
 
   func doneExitingPIP() {
@@ -3413,6 +3411,8 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     isWindowMiniaturizedDueToPip = false
     isWindowHidden = false
+    player.events.emit(.pipChanged, data: false)
+    NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": false])
   }
 
   func prepareForPIPClosure(_ pip: PIPViewController) {

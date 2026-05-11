@@ -756,8 +756,8 @@ class MainWindowController: PlayerWindowController {
 
     func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
       let buttons = fragToolbarView.subviews as! [NSButton]
-      let button = buttons.first(where: { $0.tag == button.rawValue })
-      button?.contentTintColor = isHighlighted ? .controlAccentColor : nil
+      let currentButton = buttons.first(where: { $0.tag == button.rawValue })
+      currentButton?.image = isHighlighted ? button.alternateImage() : button.image()
     }
 
     let enable = (notification.userInfo?["enable"] as? Bool ?? false)

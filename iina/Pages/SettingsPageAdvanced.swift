@@ -79,6 +79,11 @@ class SettingsPageAdvanced: SettingsPage {
           .extraViews(fileChooseView.textField, fileChooseView.chooseButton)
       }
       SettingsListView {
+        SettingsItem.PopupButton()
+          .image(name: ["gearshape.2"])
+          .bindTo(.mpvProfile, ofType: Preference.MpvProfile.self)
+      }
+      SettingsListView {
         SettingsItem.General(title: .text_AdditionalMpvOptions)
           .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
           .extraViews(mpvOptionsEditor.delBtn, mpvOptionsEditor.addBtn)

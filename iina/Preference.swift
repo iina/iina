@@ -348,6 +348,8 @@ struct Preference {
 
     /// Workaround for AppKit defect where showWindow moves the window to a different screen (fixed as of macOS Tahoe).
     static let enableWrongScreenWorkaround = Key("enableWrongScreenWorkaround")
+
+    static let mpvProfile = Key("mpvProfile")
   }
 
   // MARK: - Enums
@@ -939,6 +941,28 @@ struct Preference {
     }
   }
 
+  enum MpvProfile: Int, InitializingFromKey, CaseIterable {
+    static let defaultValue: Preference.MpvProfile = .default
+
+    init?(key: Preference.Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .default: "default"
+      case .fast : "fast"
+      case .high_quality: "high-quality"
+      case .low_latency: "low-latency"
+      }
+    }
+
+    case `default` = 0
+    case fast
+    case high_quality
+    case low_latency
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -1141,7 +1165,9 @@ struct Preference {
     .enableHdrWorkaround: false,
     .enableNowPlayingArtwork: true,
     .enableDisplayIdle: true,
-    .enableWrongScreenWorkaround: true
+    .enableWrongScreenWorkaround: true,
+
+    .mpvProfile: "default",
   ]
 
 
@@ -1331,6 +1357,7 @@ struct Preference {
            .loadIccProfile,
            .musicModeShowAlbumArt,
            .musicModeShowPlaylist,
+           .mpvProfile,
            .pauseWhenGoesToSleep,
            .pauseWhenInactive,
            .pauseWhenLeavingFullScreen,

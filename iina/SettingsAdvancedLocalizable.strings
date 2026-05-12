@@ -33,6 +33,12 @@
 /* key="sl8-Df-vbX" */
 "logLevel.items.3" = "Error";
 
+"mpvProfile.label" = "mpv Builtin profile";
+"mpvProfile.items.0" = "Default";
+"mpvProfile.items.1" = "Fast";
+"mpvProfile.items.2" = "High quality";
+"mpvProfile.items.3" = "Low latency";
+
 "$Logging" = "Logging";
 "$MPVSettings" = "mpv Settings";
 "$OpenLogWindow" = "Open the log viewer";

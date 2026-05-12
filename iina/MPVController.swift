@@ -339,6 +339,12 @@ class MPVController: NSObject {
       player.displayOSD = false
     }
 
+    // set mpv builtin profile
+    let profile = Preference.integer(for: .mpvProfile)
+    if profile != Preference.MpvProfile.default.rawValue {
+      chkErr(setOptionString(MPVOption.ProgramBehavior.profile, Preference.MpvProfile(rawValue: profile)!.description, level: .verbose))
+    }
+
     // log
     if Logger.enabled {
       let path = Logger.logDirectory.appendingPathComponent("mpv.log").path

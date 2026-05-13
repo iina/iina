@@ -859,7 +859,7 @@ struct Preference {
     func alternateImage() -> NSImage? {
       switch self {
       case .settings: return makeSymbol(["gearshape.fill"], NSImage.actionTemplateName)
-      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet.fill"], "playlist")
+      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"], "playlist")
       case .pip: return makeSymbol(["pip.exit"], "pip")
       case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"], "fullscreen")
       case .plugins: return makeSymbol(["puzzlepiece.extension.fill"], "plugin")

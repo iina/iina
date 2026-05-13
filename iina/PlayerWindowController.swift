@@ -702,6 +702,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:
       menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+    case .resetControlBarPosition:
+      player.mainWindow.resetFloatingOSCPosition()
     default:
       break
     }

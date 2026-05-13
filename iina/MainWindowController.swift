@@ -1817,44 +1817,7 @@ class MainWindowController: PlayerWindowController {
       cropSettingsView?.cropBoxView.resized()
     }
 
-    // update control bar position
-    if oscPosition == .floating {
-      let cph = Preference.float(for: .controlBarPositionHorizontal)
-      let cpv = Preference.float(for: .controlBarPositionVertical)
-
-      let windowWidth = window.frame.width
-      let margin: CGFloat = 10
-      let minWindowWidth: CGFloat = 480 // 460 + 20 margin
-      var xPos: CGFloat
-
-      if windowWidth < minWindowWidth {
-        // osc is compressed
-        xPos = windowWidth / 2
-      } else {
-        // osc has full width
-        let oscHalfWidth: CGFloat = 230
-        xPos = windowWidth * CGFloat(cph)
-        if xPos - oscHalfWidth < margin {
-          xPos = oscHalfWidth + margin
-        } else if xPos + oscHalfWidth + margin > windowWidth {
-          xPos = windowWidth - oscHalfWidth - margin
-        }
-      }
-
-      let windowHeight = window.frame.height
-      var yPos = windowHeight * CGFloat(cpv)
-      let oscHeight: CGFloat = 67
-      let yMargin: CGFloat = 25
-
-      if yPos < 0 {
-        yPos = 0
-      } else if yPos + oscHeight + yMargin > windowHeight {
-        yPos = windowHeight - oscHeight - yMargin
-      }
-
-      controlBarFloating.xConstraint.constant = xPos
-      controlBarFloating.yConstraint.constant = yPos
-    }
+    updateFloatingControlBarPosition()
     
     // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
     if isMacOS11 && oscPosition == .floating {
@@ -3324,6 +3287,8 @@ class MainWindowController: PlayerWindowController {
       player.screenshot()
     case .plugins:
       showPluginSidebar(tab: nil)
+    case .resetPosition:
+      resetFloatingOSCPosition()
     }
   }
 
@@ -3336,6 +3301,54 @@ class MainWindowController: PlayerWindowController {
     } else {
       window?.collectionBehavior = [.managed, .fullScreenPrimary]
     }
+  }
+
+  internal func resetFloatingOSCPosition() {
+    let defaultHorizontal = (Preference.defaultPreference[.controlBarPositionHorizontal] as? Float) ?? 0.5
+    let defaultVertical = (Preference.defaultPreference[.controlBarPositionVertical] as? Float) ?? 0.1
+    Preference.set(defaultHorizontal, for: .controlBarPositionHorizontal)
+    Preference.set(defaultVertical, for: .controlBarPositionVertical)
+    updateFloatingControlBarPosition()
+  }
+
+  private func updateFloatingControlBarPosition() {
+    guard let window = window, oscPosition == .floating else { return }
+
+    let cph = Preference.float(for: .controlBarPositionHorizontal)
+    let cpv = Preference.float(for: .controlBarPositionVertical)
+
+    let windowWidth = window.frame.width
+    let margin: CGFloat = 10
+    let minWindowWidth: CGFloat = 480 // 460 + 20 margin
+    var xPos: CGFloat
+
+    if windowWidth < minWindowWidth {
+      // osc is compressed
+      xPos = windowWidth / 2
+    } else {
+      // osc has full width
+      let oscHalfWidth: CGFloat = 230
+      xPos = windowWidth * CGFloat(cph)
+      if xPos - oscHalfWidth < margin {
+        xPos = oscHalfWidth + margin
+      } else if xPos + oscHalfWidth + margin > windowWidth {
+        xPos = windowWidth - oscHalfWidth - margin
+      }
+    }
+
+    let windowHeight = window.frame.height
+    var yPos = windowHeight * CGFloat(cpv)
+    let oscHeight: CGFloat = 67
+    let yMargin: CGFloat = 25
+
+    if yPos < 0 {
+      yPos = 0
+    } else if yPos + oscHeight + yMargin > windowHeight {
+      yPos = windowHeight - oscHeight - yMargin
+    }
+
+    controlBarFloating.xConstraint.constant = xPos
+    controlBarFloating.yConstraint.constant = yPos
   }
 
 }

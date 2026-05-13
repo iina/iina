@@ -33,6 +33,7 @@ enum IINACommand: String {
   case showCurrentFileInFinder = "show-current-file-in-finder"
   case deleteCurrentFile = "delete-current-file"
   case deleteCurrentFileHard = "delete-current-file-hard"
+  case resetControlBarPosition = "reset-control-bar-position"
 
   case findOnlineSubs = "find-online-subs"
   case saveDownloadedSub = "save-downloaded-sub"

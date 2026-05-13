@@ -6,6 +6,7 @@
   outputs =
     { self, nixpkgs }:
     let
+      appName = "IINA";
 
       systems = [
         "aarch64-darwin"
@@ -42,8 +43,8 @@
 
           # Pull system's xcode in
           xcode = pkgs.runCommand "system-xcode" { } ''
-            mkdir -p $out/bin
-            ln -sf /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild $out/bin/xcodebuild
+            mkdir -p "$out/bin"
+            ln -sf /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild "$out/bin/xcodebuild"
           '';
 
           # Override ffmpeg to use our version of libs
@@ -243,26 +244,6 @@
             )
           );
 
-          # Collect executables to expose them for plugins
-          depsExecutable = pkgs.linkFarm "iina-deps-executable" (
-            pkgs.lib.flatten (
-              map
-                (
-                  pkg:
-                  let
-                    bindir = "${pkgs.lib.getBin pkg}/bin";
-                  in
-                  builtins.map (file: {
-                    name = baseNameOf file;
-                    path = "${bindir}/${file}";
-                  }) (builtins.attrNames (builtins.readDir bindir))
-                )
-                [
-                  pkgs.yt-dlp
-                ]
-            )
-          );
-
           # Collect SwiftPM deps as separate derivation for them to be cached
           spmDeps = pkgs.stdenv.mkDerivation {
             pname = "iina-spm-deps";
@@ -343,14 +324,13 @@
 
               buildInputs = [
                 spmDeps
-                pkgs.yt-dlp
               ];
 
               buildPhase = ''
-                echo "[${system}] 🔧 Setting up build environment"
+                echo "[${system}] 🔧 Setting up build environment for ${appName}"
                 git_rev="${self.rev or self.dirtyRev}"
-                # Nix flakes cannot currently access branch info. Doing so may violate the stated goal of maximum 
-                # reproducibility, as the same git revision can be associated with an arbitrary number of branches. 
+                # Nix flakes cannot currently access branch info. Doing so may violate the stated goal of maximum
+                # reproducibility, as the same git revision can be associated with an arbitrary number of branches.
                 # Just use a placeholder for now:
                 git_branch="<nix-build>"
                 echo "Git bramch: $git_branch, revision: $git_rev"
@@ -380,7 +360,6 @@
                 mkdir -p deps/include deps/lib deps/executable
                 cp -RL ${depsInclude}/.           deps/include
                 cp -RL ${depsLib}/.               deps/lib
-                cp -RL ${depsExecutable}/.        deps/executable/
 
                 echo "[${system}] 📦 Copying SPM deps"
                 rsync -a ${spmDeps}/ ./
@@ -397,7 +376,7 @@
                 fi
 
                 # Build IINA
-                echo "[${system}] 🔨 Building IINA"
+                echo "[${system}] 🔨 Building ${appName}"
                 xcodebuild \
                   -workspace iina.xcodeproj/project.xcworkspace \
                   -scheme iina \
@@ -418,8 +397,8 @@
               '';
 
               installPhase = ''
-                mkdir -p $out/Applications
-                cp -R build/Build/Products/Release/IINA.app $out/Applications/
+                mkdir -p "$out/Applications"
+                cp -R "build/Build/Products/Release/${appName}.app" "$out/Applications/"
               '';
 
               preFixup = ''
@@ -427,17 +406,14 @@
               '';
 
               postFixup = ''
-                app="$out/Applications/IINA.app"
+                app="$out/Applications/${appName}.app"
                 macos="$app/Contents/MacOS"
                 frameworks="$app/Contents/Frameworks"
                 plist="$app/Contents/Info.plist"
 
                 mkdir -p "$frameworks"
 
-                echo "[${system}] 📦 Bundling ${depsExecutable} into IINA.app"
-                cp -RL ${depsExecutable}/. "$macos/"
-
-                echo "[${system}] 📦 Deep-bundling dynamic dependencies into IINA.app"
+                echo "[${system}] 📦 Deep-bundling dynamic dependencies into ${appName}.app"
                 ${libTool}/bin/iina-lib-tool --canonicalize --purge "$frameworks" "$macos"
 
                 echo "[${system}] ✏️ Setting up environment variables"
@@ -449,7 +425,7 @@
                 /usr/libexec/PlistBuddy -c "Set :com.colliderli.iina.build.commit        $git_rev"            "$plist"
                 /usr/libexec/PlistBuddy -c "Set :com.colliderli.iina.build.branch        $git_branch"         "$plist"
 
-                # echo "[${system}] 🔏 Re-signing IINA.app..."
+                # echo "[${system}] 🔏 Re-signing ${appName}.app..."
                 # ${resign}/bin/iina-resign "$app"
               '';
             };
@@ -466,95 +442,27 @@
               ];
 
               buildCommand = ''
-                app="$out/Applications/IINA.app"
+                app="$out/Applications/${appName}.app"
                 frameworks="$app/Contents/Frameworks"
 
                 export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
                 APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
                 export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin"
 
-                echo "📦 Combining universal IINA.app"
+                echo "📦 Combining universal ${appName}.app"
 
                 mkdir -p "$out/Applications"
                 # copy the contents of the source app into the target dir
-                ${pkgs.rsync}/bin/rsync -a ${builtins.elemAt self.archApps 0}/Applications/IINA.app/ "$app/"
+                ${pkgs.rsync}/bin/rsync -a "${builtins.elemAt self.archApps 0}/Applications/${appName}.app/" "$app/"
                 chmod -R u+w "$app"
 
-                echo "🔍 Merging binaries across architectures"
-                find "$app" -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) | while read -r dep; do
-                  if [[ -L "$dep" ]] || [[ ! -f "$dep" ]]; then
-                    echo "✅ Skipping non-file $dep"
-                    continue
-                  fi
+                archroot0="${builtins.elemAt self.archApps 0}/Applications/${appName}.app"
+                archroot1="${builtins.elemAt self.archApps 1}/Applications/${appName}.app"
 
-                  if ! file -b "$dep" | grep -qi 'Mach-O'; then
-                    echo "✅ Skipping non-Mach-O $dep"
-                    continue
-                  fi
+                ${libTool}/bin/iina-lib-tool --merge-architectures "$frameworks" "$app/Contents/MacOS" \
+                  --archroot0 "$archroot0" --archroot1 "$archroot1"
 
-                  relpath=$(${pkgs.coreutils}/bin/realpath --relative-to="$app" "$dep")
-
-                  # collect candidate files from each arch build
-                  inputs=""
-                  for archroot in ${
-                    builtins.concatStringsSep " " (map (a: "\"${a}/Applications/IINA.app\"") self.archApps)
-                  }; do
-                    candidate="$archroot/$relpath"
-                    if [ -f "$candidate" ]; then
-                      inputs="$inputs $candidate"
-                    fi
-                  done
-
-                  # pick at most one file per arch to avoid duplicates
-                  arm64=""
-                  x86_64=""
-                  for f in $inputs; do
-                    info=$(lipo -info "$f" 2>/dev/null || true)
-
-                    if echo "$info" | grep -qw arm64 && [ -z "$arm64" ]; then
-                      arm64="$f"
-                    fi
-
-                    if echo "$info" | grep -qw x86_64 && [ -z "$x86_64" ]; then
-                      x86_64="$f"
-                    fi
-
-                    # if we ever see a fat that already has both, just use it as-is
-                    if echo "$info" | grep -q 'Architectures in the fat file' && \
-                       echo "$info" | grep -qw arm64 && echo "$info" | grep -qw x86_64; then
-                      arm64="$f"; x86_64="$f"; break
-                    fi
-                  done
-
-                  # if only one arch available, leave it alone
-                  if [ -z "$arm64" ] || [ -z "$x86_64" ]; then
-                    echo "✅ Skipping single-arch $dep"
-                    continue
-                  fi
-
-                  echo "🔨 Merging $relpath"
-                  tmp="$dep.universal.$$"
-
-                  # Ensure we can replace the file
-                  chmod u+w "$dep" 2>/dev/null || true
-
-                  # Guard against already universal binaries
-                  if [ "$arm64" = "$x86_64" ]; then
-                    cp -p "$arm64" "$tmp"
-                  else
-                    lipo -create -arch arm64 "$arm64" -arch x86_64 "$x86_64" -output "$tmp"
-                  fi
-
-                  # Preserve mode if possible (GNU coreutils); fall back to +x
-                  ${pkgs.coreutils}/bin/chmod --reference="$dep" "$tmp" 2>/dev/null || chmod +x "$tmp"
-
-                  mv -f "$tmp" "$dep"
-                done
-
-                echo "📦 Deep-bundling dynamic dependencies into IINA.app"
-                ${libTool}/bin/iina-lib-tool --canonicalize "$frameworks" "$app/Contents/MacOS"
-
-                echo "🔏 Re-signing IINA.app..."
+                echo "🔏 Re-signing ${appName}.app..."
                 ${resign}/bin/iina-resign "$app"
 
                 echo "[${system}] 📦 Copying include dir"
@@ -562,7 +470,7 @@
                 cp -RL ${depsInclude}/. $out/include
 
                 app_real=$(realpath "$app" 2>/dev/null || echo "$app")
-                echo "✅✅ Done! Universal IINA.app is ready at $app_real"
+                echo "✅✅ Done! Universal ${appName}.app is ready at $app_real"
               '';
 
               preFixup = ''
@@ -605,7 +513,6 @@
 
                 link_tree ${depsInclude} "$deps_root/include"
                 link_tree ${depsLib} "$deps_root/lib"
-                link_tree ${depsExecutable} "$deps_root/executable"
 
                 echo "📦 Syncing SwiftPM deps"
                 rsync -a --chmod=Du+rwx,Fu+rw ${spmDeps}/ ./

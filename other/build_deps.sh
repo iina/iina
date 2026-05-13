@@ -8,107 +8,122 @@ REPLACE_INCLUDES=false
 MIN_NIX_VERSION="2.34.6"
 DEBUG_NIX=false
 
-get_script_dir()
-{
-    local SOURCE_PATH="${BASH_SOURCE[0]}"
-    local SYMLINK_DIR
-    local SCRIPT_DIR
-    # Resolve symlinks recursively
-    while [ -L "$SOURCE_PATH" ]; do
-        # Get symlink directory
-        SYMLINK_DIR="$( cd -P "$( dirname "$SOURCE_PATH" )" >/dev/null 2>&1 && pwd )"
-        # Resolve symlink target (relative or absolute)
-        SOURCE_PATH="$(readlink "$SOURCE_PATH")"
-        # Check if candidate path is relative or absolute
-        if [[ $SOURCE_PATH != /* ]]; then
-            # Candidate path is relative, resolve to full path
-            SOURCE_PATH=$SYMLINK_DIR/$SOURCE_PATH
-        fi
-    done
-    # Get final script directory path from fully resolved source path
-    SCRIPT_DIR="$(cd -P "$( dirname "$SOURCE_PATH" )" >/dev/null 2>&1 && pwd)"
-    echo "$SCRIPT_DIR"
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+print_script_dir() {
+  local SOURCE_PATH="${BASH_SOURCE[0]}"
+  local SYMLINK_DIR
+  local SCRIPT_DIR
+  # Resolve symlinks recursively
+  while [ -L "$SOURCE_PATH" ]; do
+    # Get symlink directory
+    SYMLINK_DIR="$( cd -P "$( dirname "$SOURCE_PATH" )" >/dev/null 2>&1 && pwd )"
+    # Resolve symlink target (relative or absolute)
+    SOURCE_PATH="$(readlink "$SOURCE_PATH")"
+    # Check if candidate path is relative or absolute
+    if [[ $SOURCE_PATH != /* ]]; then
+      # Candidate path is relative, resolve to full path
+      SOURCE_PATH=$SYMLINK_DIR/$SOURCE_PATH
+    fi
+  done
+  # Get final script directory path from fully resolved source path
+  SCRIPT_DIR="$(cd -P "$( dirname "$SOURCE_PATH" )" >/dev/null 2>&1 && pwd)"
+  echo "$SCRIPT_DIR"
 }
 
 set -euo pipefail
-scriptDir="$(get_script_dir)"
-projDir=`realpath ${scriptDir}/..`
-echo "Project root directory seems to be: $projDir"
+SCRIPT_DIR="$(print_script_dir)"
+PROJ_DIR="$(realpath ${SCRIPT_DIR}/..)"
+echo "Project root directory seems to be: $PROJ_DIR"
 
 if [[ "$NIX_BUILD" = true ]]; then
-  nixExec=$(which nix)
+  NIX_EXE="$(which nix)"
 
-  if [[ -z "$nixExec" ]]; then
-    echo "ERROR: Could not find 'nix' command. Please ensure Nix $MIN_NIX_VERSION or higher is installed."
+  if [[ -z "$NIX_EXE" ]]; then
+    echo -e "${RED}ERROR: Could not find 'nix' command. Please ensure Nix $MIN_NIX_VERSION or higher is installed.${NC}" >&2
+    echo -e "${RED}Recommended: install Determinate Nix for MacOS: https://docs.determinate.systems/${NC}" >&2
+    echo -e "${RED}Aborting build.${NC}" >&2
     exit 1
   fi
 
-  if [[ ! -f $projDir/flake.nix ]]; then
-    echo "ERROR: Could not find 'flake.nix' (expected location: $projDir/flake.nix)."
-    echo "Please ensure it is present and this script is located in $projDir/other/"
-    echo "Aborting build."
+  if [[ ! -f $PROJ_DIR/flake.nix ]]; then
+    echo -e "${RED}ERROR: Could not find 'flake.nix' (expected location: $PROJ_DIR/flake.nix).${NC}" >&2
+    echo -e "${RED}Please ensure it is present and this script is located in $PROJ_DIR/other/${NC}" >&2
+    echo -e "${RED}Aborting build.${NC}" >&2
     exit 1
   fi
 
-  cd "$projDir"
+  cd "$PROJ_DIR"
 
-  nixArgs="--print-build-logs --verbose"
+  NIX_ARGS="--print-build-logs --verbose"
 
   if [[ "$DEBUG_NIX" = true ]]; then
-    nixStoreRefs=`grep '/nix/store/' "$projDir/iina.xcodeproj/project.pbxproj" || true`
+    nixStoreRefs=$(grep '/nix/store/' "$PROJ_DIR/iina.xcodeproj/project.pbxproj" || true)
     if [ -n "$nixStoreRefs" ]; then
-      echo "ERROR: Found reference(s) to '/nix/store/' in project.pbxproj!"
-      echo "Ensure all framework references in the project files use relative paths which begin with 'deps/lib/'"
-      echo "Aborting build."
+      echo -e "${RED}ERROR: Found reference(s) to '/nix/store/' in project.pbxproj!${NC}" >&2
+      echo -e "${RED}Ensure all framework references in the project files use relative paths which begin with 'deps/lib/'${NC}" >&2
+      echo -e "${RED}Aborting build.${NC}" >&2
       exit 1
     fi
-    $nixExec build $nixArgs --keep-failed
+    "$NIX_EXE" build $NIX_ARGS --keep-failed
   else
-    $nixExec build $nixArgs
+    "$NIX_EXE" build $NIX_ARGS
   fi
+else
+  echo -e "${YELLOW}Skipping Nix build.${NC}"
 fi
 
-appContentsDir="$projDir/result/Applications/IINA.app/Contents"
+APP_CONTENTS_DIR="$PROJ_DIR/result/Applications/IINA.app/Contents"
 
 if [[ "$REPLACE_LIBS" = true ]]; then
-  srcLibDir="$appContentsDir/Frameworks"
-  dstLibDir="$projDir/deps/lib"
-  echo "📎 Replacing libs @ $dstLibDir …"
-  rm -rf "$dstLibDir"
-  mkdir -p "$dstLibDir"
+  SRC_DIR="$APP_CONTENTS_DIR/Frameworks"
+  DST_DIR="$PROJ_DIR/deps/lib"
+  echo -e "${YELLOW}📎 Replacing libs @ $DST_DIR …${NC}"
+  rm -rf "$DST_DIR"
+  mkdir -p "$DST_DIR"
 
-  for srclib in $(ls $srcLibDir)
-  do
+  for srclib in "$SRC_DIR/"*; do
     if [[ "$srclib" == *".dylib" ]]; then
-      cp -v "$srcLibDir/$srclib" "$dstLibDir/"
+      cp -v "$srclib" "$DST_DIR/"
     fi
   done
+else
+  echo -e "${YELLOW}Skipping deps/lib.${NC}"
 fi
 
 if [[ "$REPLACE_EXECUTABLES" = true ]]; then
-  srcExecutablesDir="$appContentsDir/MacOS"
-  dstExecutablesDir="$projDir/deps/executable"
-  echo "📎 Replacing executables @ $dstExecutablesDir …"
-  rm -rf "$dstExecutablesDir"
-  mkdir -p "$dstExecutablesDir"
-  for executable in $(ls $srcExecutablesDir)
-  do
-    if [[ "$executable" != *"iina"* ]] && [[ "$executable" != *"IINA"* ]]; then
-      cp -v "$srcExecutablesDir/$executable" "$dstExecutablesDir/"
+  SRC_DIR="$APP_CONTENTS_DIR/MacOS"
+  DST_DIR="$PROJ_DIR/deps/executable"
+  echo -e "${YELLOW}📎 Replacing executables @ $DST_DIR …${NC}"
+  rm -rf "$DST_DIR"
+  mkdir -p "$DST_DIR"
+  for executable in "$SRC_DIR/"*; do
+    filename="${executable##*/}"
+    if [[ "$filename" != *"iina"* ]] && [[ "$filename" != 'IINA' ]]; then
+      cp -v "$executable" "$DST_DIR/"
     fi
   done
+else
+  echo -e "${YELLOW}Skipping deps/executable.${NC}"
 fi
 
 if [[ "$REPLACE_INCLUDES" = true ]]; then
-  srcIncludeDir="$projDir/result/include"
-  dstIncludeDir="$projDir/deps/include"
-  echo "📎 Replacing include files @ $dstIncludeDir …"
-  mkdir -p "$dstIncludeDir"
-  find "$dstIncludeDir" -name "*.h" -print0 | xargs -0 rm
-  rsync -rv "$srcIncludeDir/" "$dstIncludeDir/"
-  chmod -R u+rw "$dstIncludeDir"
+  SRC_DIR="$PROJ_DIR/result/include"
+  DST_DIR="$PROJ_DIR/deps/include"
+  echo -e "${YELLOW}📎 Replacing include files @ $DST_DIR …${NC}"
+  mkdir -p "$DST_DIR"
+  find "$DST_DIR" -name "*.h" -print0 | xargs -0 rm
+  rsync -rv "$SRC_DIR/" "$DST_DIR/"
+  chmod -R u+rw "$DST_DIR"
+else
+  echo -e "${YELLOW}Skipping deps/include.${NC}"
 fi
 
 echo ""
-echo "✅ Done"
+echo -e "${GREEN}✅ Done${NC}"
 

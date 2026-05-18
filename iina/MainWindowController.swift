@@ -615,7 +615,7 @@ class MainWindowController: PlayerWindowController {
     thumbnailPeekView.isHidden = true
     timePreviewVisualEffectView.isHidden = true
     timePreviewVisualEffectView.roundCorners(withRadius: 5)
-    timePreviewTextField.font = NSFont.monospacedDigitSystemFont(ofSize: 0, weight: .regular)
+    timePreviewTextField.font = monospacedFont
 
     // other initialization
     titleBarBottomBorder.fillColor = NSColor.titleBarBorder

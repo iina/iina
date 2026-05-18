@@ -453,7 +453,8 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
-  @IBOutlet weak var timePreviewWhenSeek: NSTextField!
+  @IBOutlet weak var timePreviewTextField: NSTextField!
+  @IBOutlet weak var timePreviewVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var settingsButton: NSButton!
@@ -610,7 +611,11 @@ class MainWindowController: PlayerWindowController {
 
     // thumbnail peek view
     window.contentView?.addSubview(thumbnailPeekView)
+    window.contentView?.addSubview(timePreviewVisualEffectView)
     thumbnailPeekView.isHidden = true
+    timePreviewVisualEffectView.isHidden = true
+    timePreviewVisualEffectView.roundCorners(withRadius: 5)
+    timePreviewTextField.font = NSFont.monospacedDigitSystemFont(ofSize: 0, weight: .regular)
 
     // other initialization
     titleBarBottomBorder.fillColor = NSColor.titleBarBorder
@@ -624,7 +629,6 @@ class MainWindowController: PlayerWindowController {
     additionalInfoView.roundCorners(withRadius: 10)
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
-    timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
     
@@ -1155,7 +1159,7 @@ class MainWindowController: PlayerWindowController {
       if controlBarFloating.isDragging { return }
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
-        timePreviewWhenSeek.isHidden = false
+        timePreviewVisualEffectView.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
       refreshSeekTimeAndThumbnail(from: event)
@@ -1180,7 +1184,7 @@ class MainWindowController: PlayerWindowController {
     } else if obj == 1 {
       // slider
       isMouseInSlider = false
-      timePreviewWhenSeek.isHidden = true
+      timePreviewVisualEffectView.isHidden = true
       refreshSeekTimeAndThumbnail(from: event)
       thumbnailPeekView.isHidden = true
     }
@@ -1410,7 +1414,7 @@ class MainWindowController: PlayerWindowController {
     setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
     thumbnailPeekView.isHidden = true
-    timePreviewWhenSeek.isHidden = true
+    timePreviewVisualEffectView.isHidden = true
     isMouseInSlider = false
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
@@ -1537,7 +1541,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     thumbnailPeekView.isHidden = true
-    timePreviewWhenSeek.isHidden = true
+    timePreviewVisualEffectView.isHidden = true
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
@@ -2547,7 +2551,7 @@ class MainWindowController: PlayerWindowController {
     let isCoveredByOSD = !osdVisualEffectView.isHidden && isMouseEvent(event, inAnyOf: [osdVisualEffectView])
     let isCoveredBySidebar = !sideBarView.isHidden && isMouseEvent(event, inAnyOf: [sideBarView])
     if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
-      updateTimeLabel(event.locationInWindow)
+      updateTimePreviewAndThumbnail(event.locationInWindow)
     } else {
       thumbnailPeekView.isHidden = true
     }
@@ -2568,7 +2572,7 @@ class MainWindowController: PlayerWindowController {
     guard oscPosition != .top else { return false }
     // The layout preference for the on screen controller is set to the default floating layout.
     // Must insure the top of the thumbnail would be below the top of the window.
-    let topOfThumbnail = timePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
+    let topOfThumbnail = timePreviewYPos + timePreviewVisualEffectView.frame.height + thumbnailHeight
     // Normally the height of the usable area of the window can be obtained from the content
     // layout. But when the legacy full screen preference is enabled the layout height may be
     // larger than the content view if the display contains a camera housing. Use the lower of
@@ -2577,48 +2581,6 @@ class MainWindowController: PlayerWindowController {
     return topOfThumbnail <= windowContentHeight
   }
 
-  /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ posInWindow: NSPoint) {
-    let mouseXPos = playSlider.convert(posInWindow, from: nil).x
-    let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
-    var timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
-    if oscPosition == .bottom {
-      timeLabelYPos -= 2
-    }
-    timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
-    let sliderFrame = playSlider.bounds
-    let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
-    var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
-    if percentage < 0 {
-      percentage = 0
-    }
-
-    if let duration = player.info.videoDuration {
-      let previewTime = duration * percentage
-      timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
-
-      if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
-        thumbnailPeekView.imageView.image = image.rotate(rotation)
-        thumbnailPeekView.isHidden = false
-
-        // In some formats (like most of Japanese TV video formats), display aspect ratios (DAR) are different from the
-        // sample aspect ratio (SAR). A typical configuration is SAR 1440x1080i (4:3) w/ DAR 1920x1080 (16:9). We use video
-        // display size to consider pixel formats as well as rotation from metadata properly display the thumbnail.
-        let (videoWidth, videoHeight) = player.videoSizeForDisplay
-        let displayAspectRatio = CGFloat(videoWidth) / CGFloat(videoHeight)
-
-        let width = CGFloat(UserDefaults.standard.integer(forKey: "thumbnailWidth"))
-        let height = round(width / displayAspectRatio)
-        let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
-        let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
-        let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
-        thumbnailPeekView.frame.size = NSSize(width: width, height: height)
-        thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
-      } else {
-        thumbnailPeekView.isHidden = true
-      }
-    }
-  }
 
   func updateBufferIndicatorView() {
     guard loaded else { return }
@@ -3288,17 +3250,7 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active, player.info.state != .loading else { return }
     super.playSliderChanges(sender)
 
-    // seek and update time
-    let percentage = 100 * sender.doubleValue / sender.maxValue
-    // label
-    var timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
-    if oscPosition == .bottom {
-      timeLabelYPos -= 2
-    }
-    timePreviewWhenSeek.frame.origin = CGPoint(
-      x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: timeLabelYPos)
-    timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
+    updateTimePreview(sender.doubleValue / sender.maxValue)
   }
 
   @objc func toolBarButtonAction(_ sender: NSButton) {
@@ -3326,6 +3278,68 @@ class MainWindowController: PlayerWindowController {
       showPluginSidebar(tab: nil)
     }
   }
+
+  // MARK: - Time Preveiew & Thumbnail
+
+  /** Display time label when mouse over slider */
+  private func updateTimePreviewAndThumbnail(_ posInWindow: NSPoint) {
+    guard let duration = player.info.videoDuration else {
+      thumbnailPeekView.isHidden = true
+      timePreviewVisualEffectView.isHidden = true
+      return
+    }
+
+    let mouseXPos = playSlider.convert(posInWindow, from: nil).x
+    let percentage = max(0, Double((mouseXPos - 3) / (playSlider.bounds.width - 6)))
+
+    let previewTime = duration * percentage
+    updateTimePreview(percentage)
+    let sliderFrameInWindow = playSlider.convert(playSlider.frame, to: nil)
+
+    if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
+      thumbnailPeekView.imageView.image = image.rotate(rotation)
+      thumbnailPeekView.isHidden = false
+
+      // In some formats (like most of Japanese TV video formats), display aspect ratios (DAR) are different from the
+      // sample aspect ratio (SAR). A typical configuration is SAR 1440x1080i (4:3) w/ DAR 1920x1080 (16:9). We use video
+      // display size to consider pixel formats as well as rotation from metadata properly display the thumbnail.
+      let (videoWidth, videoHeight) = player.videoSizeForDisplay
+      let displayAspectRatio = CGFloat(videoWidth) / CGFloat(videoHeight)
+
+      let width = CGFloat(UserDefaults.standard.integer(forKey: "thumbnailWidth"))
+      let height = round(width / displayAspectRatio)
+      let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewVisualEffectView.frame.origin.y, thumbnailHeight: height)
+      let yPos: CGFloat
+      if showAbove {
+        yPos = max(sliderFrameInWindow.maxY, timePreviewVisualEffectView.frame.maxY) + 5
+      } else {
+        yPos = min(sliderFrameInWindow.minY, timePreviewVisualEffectView.frame.minY) - height - 5
+      }
+      thumbnailPeekView.frame.size = NSSize(width: width, height: height)
+      thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
+    }
+  }
+
+  private func updateTimePreview(_ percentage: Double) {
+    guard let duration = player.info.videoDuration else { return }
+    let time = duration * percentage
+    timePreviewTextField.stringValue = time.stringRepresentation
+    if let chapter = player.info.getCurrentChapter(forVideoTime: time) {
+      timePreviewTextField.stringValue += " \(chapter.title)"
+    }
+
+    let sliderFrame = playSlider.convert(playSlider.bounds, to: nil)
+    let timeLabelYPos: CGFloat
+    if oscPosition == .top {
+      timeLabelYPos = sliderFrame.origin.y - timePreviewVisualEffectView.bounds.height - 5
+    } else {
+      timeLabelYPos = sliderFrame.origin.y + playSlider.frame.height + 5
+    }
+    timePreviewVisualEffectView.frame.origin = CGPoint(
+      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewVisualEffectView.frame.width / 2),
+      y: timeLabelYPos)
+  }
+
 
   // MARK: - Utility
 

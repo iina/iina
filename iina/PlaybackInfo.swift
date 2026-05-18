@@ -244,7 +244,7 @@ class PlaybackInfo {
   var chapters: [MPVChapter] = []
   var chapter = 0
 
-  func getCurrentChapter(forVideoTime time: VideoTime) -> MPVChapter? {
+  func getChapter(forVideoTime time: VideoTime) -> MPVChapter? {
     return chapters.last(where: { $0.time <= time })
   }
 

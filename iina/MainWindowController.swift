@@ -3323,10 +3323,11 @@ class MainWindowController: PlayerWindowController {
   private func updateTimePreview(_ percentage: Double) {
     guard let duration = player.info.videoDuration else { return }
     let time = duration * percentage
-    timePreviewTextField.stringValue = time.stringRepresentation
-    if let chapter = player.info.getCurrentChapter(forVideoTime: time) {
-      timePreviewTextField.stringValue += " \(chapter.title)"
+    var labels: [String] = [time.stringRepresentation]
+    if let chapter = player.info.getChapter(forVideoTime: time) {
+      labels.insert(chapter.title, at: 0)
     }
+    timePreviewTextField.stringValue = labels.joined(separator: "\n")
 
     let sliderFrame = playSlider.convert(playSlider.bounds, to: nil)
     let timeLabelYPos: CGFloat

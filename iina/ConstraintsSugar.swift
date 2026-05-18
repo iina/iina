@@ -82,7 +82,7 @@ struct ALConstraint {
 
 extension NSView {
   @discardableResult
-  func padding(to aView: NSView? = nil, _ constraintList: ALConstraint...) -> Self {
+  func padding(_ constraintList: ALConstraint..., from aView: NSView? = nil) -> Self {
     let constraints = constraintList.flatMap { c in
       ALConstraint.Direction.list.compactMap {
         c.direction.contains($0) ? ALConstraint(direction: $0, relation: c.relation, constant: c.constant)  : nil
@@ -126,7 +126,7 @@ extension NSView {
   }
 
   @discardableResult
-  func center(with aView: NSView? = nil, x: Bool? = nil, y: Bool? = nil) -> Self {
+  func center(x: Bool? = nil, y: Bool? = nil, with aView: NSView? = nil) -> Self {
     let aView = aView ?? self.superview!
     let noArg = x == nil && y == nil
     if x == true || noArg {
@@ -163,7 +163,7 @@ extension NSView {
   }
 
   @discardableResult
-  func spacing(to aView: NSView? = nil, _ constraintList: ALConstraint...) -> Self {
+  func spacing(_ constraintList: ALConstraint..., from aView: NSView? = nil) -> Self {
     for constraint in constraintList {
       let attr1: NSLayoutConstraint.Attribute
       let attr2: NSLayoutConstraint.Attribute

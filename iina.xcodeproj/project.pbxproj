@@ -332,9 +332,7 @@
 		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
 		E32B157D21BC27B100CDBCEA /* JavascriptAPIMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */; };
 		E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */; };
-		E33517522DFD206E00BBE169 /* SettingsPageUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517512DFD206800BBE169 /* SettingsPageUI.swift */; };
 		E33517542DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */; };
-		E33517592DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */; };
 		E33517602DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E335175F2DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
 		E337D5E22411B64A00B5729A /* JavascriptPolyfill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */; };
@@ -348,7 +346,6 @@
 		E33FEEB52229A44F00B59711 /* JavascriptAPIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33FEEB42229A44F00B59711 /* JavascriptAPIUtils.swift */; };
 		E342832F20B7149800139865 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E342832E20B7149800139865 /* Logger.swift */; };
 		E34A0E012053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34A0E032053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib */; };
-		E34BC28B2C27731700A94680 /* SettingsPageGeneral.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC28A2C27731700A94680 /* SettingsPageGeneral.swift */; };
 		E34BC28D2C27733200A94680 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC28C2C27733200A94680 /* SettingsPage.swift */; };
 		E34BC28F2C27A68100A94680 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC28E2C27A68100A94680 /* SettingsItem.swift */; };
 		E34BC2A82C27C01800A94680 /* SettingsLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */; };
@@ -367,7 +364,6 @@
 		E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */; };
 		E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E353070321496CE4008FE492 /* PrefPluginViewController.swift */; };
 		E360A5CD2C23C1BC006EA412 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */; };
-		E36825512E01169F004E1E5F /* SettingsPageSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36825502E01169F004E1E5F /* SettingsPageSubtitles.swift */; };
 		E36825532E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36825522E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift */; };
 		E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */; };
 		E374160C20F138A900B4F7F9 /* CollapseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E374160B20F138A900B4F7F9 /* CollapseView.swift */; };
@@ -375,6 +371,16 @@
 		E374161120F3C0AB00B4F7F9 /* PrefUtilsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E374161320F3C0AB00B4F7F9 /* PrefUtilsViewController.xib */; };
 		E3785B072A83039600787CB7 /* JavascriptAPIWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3785B062A83039600787CB7 /* JavascriptAPIWebSocket.swift */; };
 		E3785B092A83380E00787CB7 /* WebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3785B082A83380E00787CB7 /* WebSocketServer.swift */; };
+		E38099C32FC05B2E00D3333E /* SettingsPageAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099B82FC05B2E00D3333E /* SettingsPageAdvanced.swift */; };
+		E38099C42FC05B2E00D3333E /* SettingsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099B92FC05B2E00D3333E /* SettingsPageControl.swift */; };
+		E38099C52FC05B2E00D3333E /* SettingsPageGeneral.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BA2FC05B2E00D3333E /* SettingsPageGeneral.swift */; };
+		E38099C62FC05B2E00D3333E /* SettingsPageKeyBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */; };
+		E38099C72FC05B2E00D3333E /* SettingsPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */; };
+		E38099C82FC05B2E00D3333E /* SettingsPagePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */; };
+		E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */; };
+		E38099CA2FC05B2E00D3333E /* SettingsPageUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */; };
+		E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */; };
+		E38099CC2FC05B2E00D3333E /* SettingsPageVideoAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099C12FC05B2E00D3333E /* SettingsPageVideoAudio.swift */; };
 		E38372922443634500F57718 /* LanguageTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38372912443634500F57718 /* LanguageTokenField.swift */; };
 		E3839C5724FFF201007D0AB4 /* PluginStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */; };
 		E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */; };
@@ -386,22 +392,16 @@
 		E38BA1C0253E54F2000B551D /* JavascriptAPIGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BA1BF253E54F2000B551D /* JavascriptAPIGlobal.swift */; };
 		E38BA1C4254110BE000B551D /* JavascriptMessageHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BA1C3254110BD000B551D /* JavascriptMessageHub.swift */; };
 		E38BD4AF20054BD9007635FC /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38BD4AE20054BD9007635FC /* MainWindow.swift */; };
-		E38EA5902F2EE41600FB51CE /* SettingsPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA58F2F2EE40E00FB51CE /* SettingsPageNetwork.swift */; };
 		E38EA5952F2EE4E300FB51CE /* SettingsControlLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5912F2EE4E300FB51CE /* SettingsControlLocalizable.strings */; };
 		E38EA5962F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5942F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings */; };
 		E38EA5972F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5922F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift */; };
 		E38EA5982F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5932F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift */; };
-		E38EA59A2F2F35FB00FB51CE /* SettingsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5992F2F35F500FB51CE /* SettingsPageControl.swift */; };
-		E38EA59C2F30011C00FB51CE /* SettingsPageKeyBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA59B2F30011000FB51CE /* SettingsPageKeyBindings.swift */; };
 		E38EA59F2F3009EF00FB51CE /* SettingsKeyBindingLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA59D2F3009EF00FB51CE /* SettingsKeyBindingLocalizable.strings */; };
 		E38EA5A02F3009EF00FB51CE /* SettingsLocalizationKeysKeyBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA59E2F3009EF00FB51CE /* SettingsLocalizationKeysKeyBinding.swift */; };
-		E38EA5A22F30750500FB51CE /* SettingsPageAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A12F30750000FB51CE /* SettingsPageAdvanced.swift */; };
 		E38EA5A52F30762300FB51CE /* SettingsLocalizationKeysAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A42F30762300FB51CE /* SettingsLocalizationKeysAdvanced.swift */; };
 		E38EA5A62F30762300FB51CE /* SettingsAdvancedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5A32F30762300FB51CE /* SettingsAdvancedLocalizable.strings */; };
-		E38EA5A82F3087A600FB51CE /* SettingsPageUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A72F30879E00FB51CE /* SettingsPageUtilities.swift */; };
 		E38EA5AB2F3088F300FB51CE /* SettingsUtilsLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5AA2F3088F300FB51CE /* SettingsUtilsLocalizable.strings */; };
 		E38EA5AC2F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5A92F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift */; };
-		E38EA5AE2F31429F00FB51CE /* SettingsPagePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5AD2F31429900FB51CE /* SettingsPagePlugin.swift */; };
 		E38EA5B12F3142C700FB51CE /* SettingsPluginLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5B02F3142C700FB51CE /* SettingsPluginLocalizable.strings */; };
 		E38EA5B22F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5AF2F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift */; };
 		E392B8CC2FB2263F005F2C24 /* SettingsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */; };
@@ -1861,9 +1861,7 @@
 		E32712B624F2B8D200359DAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMenu.swift; sourceTree = "<group>"; };
 		E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginMenuItem.swift; sourceTree = "<group>"; };
-		E33517512DFD206800BBE169 /* SettingsPageUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUI.swift; sourceTree = "<group>"; };
 		E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysUI.swift; sourceTree = "<group>"; };
-		E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageVideoAudio.swift; sourceTree = "<group>"; };
 		E335175F2DFFC93100BBE169 /* SettingsLocalizationKeysVideoAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysVideoAudio.swift; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
 		E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPolyfill.swift; sourceTree = "<group>"; };
@@ -1882,7 +1880,6 @@
 		E342832E20B7149800139865 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E34A0E022053F93A00B50097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PrefOSCToolbarSettingsSheetController.xib; sourceTree = "<group>"; };
 		E34A0E052053F93E00B50097 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefOSCToolbarSettingsSheetController.strings"; sourceTree = "<group>"; };
-		E34BC28A2C27731700A94680 /* SettingsPageGeneral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageGeneral.swift; sourceTree = "<group>"; };
 		E34BC28C2C27733200A94680 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		E34BC28E2C27A68100A94680 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalization.swift; sourceTree = "<group>"; };
@@ -1923,7 +1920,6 @@
 		E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIConsole.swift; sourceTree = "<group>"; };
 		E353070321496CE4008FE492 /* PrefPluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginViewController.swift; sourceTree = "<group>"; };
 		E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
-		E36825502E01169F004E1E5F /* SettingsPageSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageSubtitles.swift; sourceTree = "<group>"; };
 		E36825522E022B10004E1E5F /* SettingsLocalizationKeysSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysSubtitles.swift; sourceTree = "<group>"; };
 		E36E8D7A24F6052F00B8C097 /* GuideWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideWindowController.swift; sourceTree = "<group>"; };
 		E374160B20F138A900B4F7F9 /* CollapseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapseView.swift; sourceTree = "<group>"; };
@@ -1932,6 +1928,16 @@
 		E374161520F3C0AD00B4F7F9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefUtilsViewController.strings"; sourceTree = "<group>"; };
 		E3785B062A83039600787CB7 /* JavascriptAPIWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIWebSocket.swift; sourceTree = "<group>"; };
 		E3785B082A83380E00787CB7 /* WebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServer.swift; sourceTree = "<group>"; };
+		E38099B82FC05B2E00D3333E /* SettingsPageAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageAdvanced.swift; sourceTree = "<group>"; };
+		E38099B92FC05B2E00D3333E /* SettingsPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageControl.swift; sourceTree = "<group>"; };
+		E38099BA2FC05B2E00D3333E /* SettingsPageGeneral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageGeneral.swift; sourceTree = "<group>"; };
+		E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageKeyBindings.swift; sourceTree = "<group>"; };
+		E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageNetwork.swift; sourceTree = "<group>"; };
+		E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPagePlugin.swift; sourceTree = "<group>"; };
+		E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageSubtitles.swift; sourceTree = "<group>"; };
+		E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUI.swift; sourceTree = "<group>"; };
+		E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUtilities.swift; sourceTree = "<group>"; };
+		E38099C12FC05B2E00D3333E /* SettingsPageVideoAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageVideoAudio.swift; sourceTree = "<group>"; };
 		E38372912443634500F57718 /* LanguageTokenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTokenField.swift; sourceTree = "<group>"; };
 		E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStandaloneWindow.swift; sourceTree = "<group>"; };
 		E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIStandaloneWindow.swift; sourceTree = "<group>"; };
@@ -1943,22 +1949,16 @@
 		E38BA1BF253E54F2000B551D /* JavascriptAPIGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIGlobal.swift; sourceTree = "<group>"; };
 		E38BA1C3254110BD000B551D /* JavascriptMessageHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptMessageHub.swift; sourceTree = "<group>"; };
 		E38BD4AE20054BD9007635FC /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
-		E38EA58F2F2EE40E00FB51CE /* SettingsPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageNetwork.swift; sourceTree = "<group>"; };
 		E38EA5912F2EE4E300FB51CE /* SettingsControlLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsControlLocalizable.strings; sourceTree = "<group>"; };
 		E38EA5922F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysControl.swift; sourceTree = "<group>"; };
 		E38EA5932F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysNetwork.swift; sourceTree = "<group>"; };
 		E38EA5942F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsNetworkLocalizable.strings; sourceTree = "<group>"; };
-		E38EA5992F2F35F500FB51CE /* SettingsPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageControl.swift; sourceTree = "<group>"; };
-		E38EA59B2F30011000FB51CE /* SettingsPageKeyBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageKeyBindings.swift; sourceTree = "<group>"; };
 		E38EA59D2F3009EF00FB51CE /* SettingsKeyBindingLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsKeyBindingLocalizable.strings; sourceTree = "<group>"; };
 		E38EA59E2F3009EF00FB51CE /* SettingsLocalizationKeysKeyBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysKeyBinding.swift; sourceTree = "<group>"; };
-		E38EA5A12F30750000FB51CE /* SettingsPageAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageAdvanced.swift; sourceTree = "<group>"; };
 		E38EA5A32F30762300FB51CE /* SettingsAdvancedLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsAdvancedLocalizable.strings; sourceTree = "<group>"; };
 		E38EA5A42F30762300FB51CE /* SettingsLocalizationKeysAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysAdvanced.swift; sourceTree = "<group>"; };
-		E38EA5A72F30879E00FB51CE /* SettingsPageUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUtilities.swift; sourceTree = "<group>"; };
 		E38EA5A92F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysUtils.swift; sourceTree = "<group>"; };
 		E38EA5AA2F3088F300FB51CE /* SettingsUtilsLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsUtilsLocalizable.strings; sourceTree = "<group>"; };
-		E38EA5AD2F31429900FB51CE /* SettingsPagePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPagePlugin.swift; sourceTree = "<group>"; };
 		E38EA5AF2F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysPlugin.swift; sourceTree = "<group>"; };
 		E38EA5B02F3142C700FB51CE /* SettingsPluginLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsPluginLocalizable.strings; sourceTree = "<group>"; };
 		E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSearch.swift; sourceTree = "<group>"; };
@@ -2848,7 +2848,7 @@
 		E360A5CB2C23C181006EA412 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				E368254D2E01166B004E1E5F /* Pages */,
+				E38099C22FC05B2E00D3333E /* Pages */,
 				E34BC2902C27BB4000A94680 /* Localization */,
 				E360A5CC2C23C1BC006EA412 /* SettingsWindow.swift */,
 				E34BC28C2C27733200A94680 /* SettingsPage.swift */,
@@ -2861,21 +2861,21 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		E368254D2E01166B004E1E5F /* Pages */ = {
+		E38099C22FC05B2E00D3333E /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				E34BC28A2C27731700A94680 /* SettingsPageGeneral.swift */,
-				E33517512DFD206800BBE169 /* SettingsPageUI.swift */,
-				E33517582DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift */,
-				E36825502E01169F004E1E5F /* SettingsPageSubtitles.swift */,
-				E38EA58F2F2EE40E00FB51CE /* SettingsPageNetwork.swift */,
-				E38EA5992F2F35F500FB51CE /* SettingsPageControl.swift */,
-				E38EA59B2F30011000FB51CE /* SettingsPageKeyBindings.swift */,
-				E38EA5A12F30750000FB51CE /* SettingsPageAdvanced.swift */,
-				E38EA5AD2F31429900FB51CE /* SettingsPagePlugin.swift */,
-				E38EA5A72F30879E00FB51CE /* SettingsPageUtilities.swift */,
+				E38099B82FC05B2E00D3333E /* SettingsPageAdvanced.swift */,
+				E38099B92FC05B2E00D3333E /* SettingsPageControl.swift */,
+				E38099BA2FC05B2E00D3333E /* SettingsPageGeneral.swift */,
+				E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */,
+				E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */,
+				E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */,
+				E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */,
+				E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */,
+				E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */,
+				E38099C12FC05B2E00D3333E /* SettingsPageVideoAudio.swift */,
 			);
-			path = Pages;
+			name = Pages;
 			sourceTree = "<group>";
 		};
 		E38558882A484A2D0083772D /* iina-plugin */ = {
@@ -3253,19 +3253,16 @@
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
 				E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */,
 				E38EA5A02F3009EF00FB51CE /* SettingsLocalizationKeysKeyBinding.swift in Sources */,
-				E33517522DFD206E00BBE169 /* SettingsPageUI.swift in Sources */,
 				8452DD851D3B956D008A543A /* Preference.swift in Sources */,
 				8488D6E31E1183D300D5B952 /* PrefSubViewController.swift in Sources */,
 				846352581EEEE11A0043F0CC /* ThumbnailPeekView.swift in Sources */,
 				84E745D61DFDD4FD00588DED /* KeyCodeHelper.swift in Sources */,
-				E36825512E01169F004E1E5F /* SettingsPageSubtitles.swift in Sources */,
 				840D479B1DFEF649000D9A64 /* KeyRecordViewController.swift in Sources */,
 				D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */,
 				E3965E1A2487C99900607EB4 /* JavascriptPluginSubtitle.swift in Sources */,
 				84F5D4951E44D5230060A838 /* KeyBindingCriterion.swift in Sources */,
 				E34BC2A82C27C01800A94680 /* SettingsLocalization.swift in Sources */,
 				846121BD1F35FCA500ABB39C /* DraggingDetect.swift in Sources */,
-				E38EA5A22F30750500FB51CE /* SettingsPageAdvanced.swift in Sources */,
 				84A886EC1E2573A5008755BB /* JustExtension.swift in Sources */,
 				51854CDA2A1C489300C40B78 /* FFmpegLogger.swift in Sources */,
 				84D0FB811F5E5A4000C6A6A7 /* CropBoxViewController.swift in Sources */,
@@ -3276,7 +3273,6 @@
 				8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */,
 				84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */,
 				E3CB258B2222885E00A62C47 /* JavascriptAPIOverlay.swift in Sources */,
-				E38EA59C2F30011C00FB51CE /* SettingsPageKeyBindings.swift in Sources */,
 				E337D5E6241EF60400B5729A /* JavascriptAPISubtitle.swift in Sources */,
 				84A09A0E1F2DF596000FF343 /* MiniPlayerWindowController.swift in Sources */,
 				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
@@ -3309,7 +3305,6 @@
 				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
 				E38EA5972F2EE4E300FB51CE /* SettingsLocalizationKeysControl.swift in Sources */,
 				E38EA5982F2EE4E300FB51CE /* SettingsLocalizationKeysNetwork.swift in Sources */,
-				E34BC28B2C27731700A94680 /* SettingsPageGeneral.swift in Sources */,
 				E374160F20F3AF7E00B4F7F9 /* PrefUtilsViewController.swift in Sources */,
 				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
@@ -3346,8 +3341,17 @@
 				E35306EF2147A8CE008FE492 /* JavascriptPlugin.swift in Sources */,
 				845ABEAC1D4D19C000BFB15B /* MPVTrack.swift in Sources */,
 				513A4FFA29B53F8100A8EA7D /* Atomic.swift in Sources */,
+				E38099C32FC05B2E00D3333E /* SettingsPageAdvanced.swift in Sources */,
+				E38099C42FC05B2E00D3333E /* SettingsPageControl.swift in Sources */,
+				E38099C52FC05B2E00D3333E /* SettingsPageGeneral.swift in Sources */,
+				E38099C62FC05B2E00D3333E /* SettingsPageKeyBindings.swift in Sources */,
+				E38099C72FC05B2E00D3333E /* SettingsPageNetwork.swift in Sources */,
+				E38099C82FC05B2E00D3333E /* SettingsPagePlugin.swift in Sources */,
+				E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */,
+				E38099CA2FC05B2E00D3333E /* SettingsPageUI.swift in Sources */,
+				E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */,
+				E38099CC2FC05B2E00D3333E /* SettingsPageVideoAudio.swift in Sources */,
 				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,
-				E38EA5AE2F31429F00FB51CE /* SettingsPagePlugin.swift in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
 				84CFC92623F8DDE000381E5B /* PlayerWindowController.swift in Sources */,
 				E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */,
@@ -3369,7 +3373,6 @@
 				5125117D2E89B2ED00CDAE9F /* Display.swift in Sources */,
 				E33FEEB52229A44F00B59711 /* JavascriptAPIUtils.swift in Sources */,
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
-				E38EA5A82F3087A600FB51CE /* SettingsPageUtilities.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
 				E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
@@ -3403,10 +3406,8 @@
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
 				51165FC02E1D91940060B817 /* ReadWriteLock.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
-				E33517592DFFC6DB00BBE169 /* SettingsPageVideoAudio.swift in Sources */,
 				51F7974728C7E00200812D0D /* Lock.swift in Sources */,
 				84C8D58F1D794CE600D98A0E /* MPVFilter.swift in Sources */,
-				E38EA5902F2EE41600FB51CE /* SettingsPageNetwork.swift in Sources */,
 				84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */,
 				E395858A253314400096811F /* JavascriptAPISidebarView.swift in Sources */,
 				E3EC8C462F9475C600FBB51E /* PluginStorePanel.swift in Sources */,
@@ -3422,7 +3423,6 @@
 				E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
 				E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */,
-				E38EA59A2F2F35FB00FB51CE /* SettingsPageControl.swift in Sources */,
 				847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */,
 				E3DC53982A28F0DC002A5A48 /* JavascriptAPIInput.swift in Sources */,
 				841B14281E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift in Sources */,

@@ -67,7 +67,7 @@ class PluginStorePanel: NSWindow {
     contentView?.addSubview(hostingView)
     contentView?.addSubview(closeBtn)
 
-    hostingView.padding(.top(0), .horizontal(0)).spacing(to: closeBtn, .bottom)
+    hostingView.padding(.top(0), .horizontal(0)).spacing(.bottom, from: closeBtn)
     closeBtn.padding(.bottom(16), .trailing(16))
   }
 

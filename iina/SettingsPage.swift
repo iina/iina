@@ -55,7 +55,7 @@ class SettingsView: NSView {
     self.tag_ = tag
     super.init(frame: .zero)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -134,7 +134,7 @@ class SettingsPage {
     let containerView = NSView()
     containerView.translatesAutoresizingMaskIntoConstraints = false
     containerView.addSubview(view)
-    view.padding(to: containerView, .horizontal(4), .bottom(8), .top)
+    view.padding(.horizontal(4), .bottom(8), .top, from: containerView)
     return containerView
   }
 
@@ -159,7 +159,7 @@ class SettingsPage {
     stackView.orientation = .vertical
     stackView.spacing = self.sectionSpacing
     views.forEach {
-      $0.padding(to: stackView, .horizontal)
+      $0.padding(.horizontal, from: stackView)
       stackView.setVisibilityPriority(.mustHold, for: $0)
     }
     return stackView
@@ -210,7 +210,7 @@ class SettingsSection: SettingsContainer {
     stackView.orientation = .vertical
     stackView.spacing = spacing
     childViews.forEach {
-      $0.padding(to: stackView, .horizontal)
+      $0.padding(.horizontal, from: stackView)
       stackView.setVisibilityPriority(.mustHold, for: $0)
     }
     view.addSubview(stackView)
@@ -224,10 +224,10 @@ class SettingsSection: SettingsContainer {
       titleField.textColor = NSColor.secondaryLabelColor
       view.titleField = titleField
       view.addSubview(titleField)
-      titleField.padding(to: view, .top, .leading(16), .trailing(8))
-      stackView.spacing(to: titleField, .top(12)).padding(to: view, .leading, .trailing, .bottom)
+      titleField.padding(.top, .leading(16), .trailing(8), from: view)
+      stackView.spacing(.top(12), from: titleField).padding(.leading, .trailing, .bottom, from: view)
     } else {
-      stackView.padding(to: view, .all)
+      stackView.padding(.all, from: view)
     }
 
     return view
@@ -272,7 +272,7 @@ class SettingsList: SettingsContainer {
     container.addSubview(listView)
 
     guard let titleKey else {
-      listView.padding(to: container, .vertical, .horizontal(horizontalPadding))
+      listView.padding(.vertical, .horizontal(horizontalPadding), from: container)
       return container
     }
 
@@ -285,9 +285,9 @@ class SettingsList: SettingsContainer {
     titleField.textColor = NSColor.secondaryLabelColor
     container.titleField = titleField
     container.addSubview(titleField)
-    titleField.padding(to: container, .top, .leading(16), .trailing(8))
-    listView.spacing(to: titleField, .top(SettingsList.SMALL_TITLE ? 8 : 12))
-    listView.padding(to: container, .bottom, .horizontal(8))
+    titleField.padding(.top, .leading(16), .trailing(8), from: container)
+    listView.spacing(.top(SettingsList.SMALL_TITLE ? 8 : 12), from: titleField)
+    listView.padding(.bottom, .horizontal(8), from: container)
     return container
   }
 
@@ -314,18 +314,18 @@ class SettingsList: SettingsContainer {
     }
     itemViews.forEach {
       listView.contentView!.addSubview($0)
-      $0.padding(to: listView.contentView, .horizontal)
+      $0.padding(.horizontal, from: listView.contentView)
     }
-    itemViews.first?.padding(to: listView.contentView, .top(0))
-    itemViews.last?.padding(to: listView.contentView, .bottom)
+    itemViews.first?.padding(.top(0), from: listView.contentView)
+    itemViews.last?.padding(.bottom, from: listView.contentView)
     zip(itemViews.dropFirst(), itemViews.dropLast()).forEach { (bottomItem, topItem) in
-      bottomItem.spacing(to: topItem, .top)
+      bottomItem.spacing(.top, from: topItem)
       let separator = NSBox()
       separator.translatesAutoresizingMaskIntoConstraints = false
       separator.boxType = .separator
       separator.titlePosition = .noTitle
       listView.contentView!.addSubview(separator)
-      separator.padding(to: topItem, .bottom, .leading(36), .trailing)
+      separator.padding(.bottom, .leading(36), .trailing, from: topItem)
     }
   }
 
@@ -397,7 +397,7 @@ class SettingsSubList: SettingsList {
     separator.boxType = .separator
     separator.titlePosition = .noTitle
     listView.contentView!.addSubview(separator)
-    separator.padding(to: listView.contentView, .top, .leading(36), .trailing)
+    separator.padding(.top, .leading(36), .trailing, from: listView.contentView)
     return listView
   }
 

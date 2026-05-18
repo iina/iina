@@ -107,10 +107,10 @@ class SettingsWindow: NSWindow {
 
     if #available(macOS 26, *) {
       searchBox.padding(.top(40), .horizontal(8))
-      sidebarScrollView.spacing(to: searchBox, .top(16))
+      sidebarScrollView.spacing(.top(16), from: searchBox)
     } else {
       searchBox.padding(.top(52), .horizontal(8))
-      sidebarScrollView.spacing(to: searchBox, .top(8))
+      sidebarScrollView.spacing(.top(8), from: searchBox)
     }
 
     let contentViewController = NSViewController()
@@ -169,7 +169,7 @@ class SettingsWindow: NSWindow {
     let content = page.getView()
     content.autoresizingMask = [.width, .height]
     contentScrollView.documentView = content
-    content.padding(to: contentScrollView.contentView, .horizontal)
+    content.padding(.horizontal, from: contentScrollView.contentView)
     contentScrollView.documentView!.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
 
     sectionNames = content.allSubviews.compactMap {
@@ -348,11 +348,11 @@ extension SettingsWindow {
       self.window = window
       super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
       tableView.translatesAutoresizingMaskIntoConstraints = false
       tableView.style = .plain
@@ -492,7 +492,7 @@ extension SettingsWindow {
 
           titleLabel.padding(.trailing(8), .bottom(8))
           iconView.padding(.leading(8), .bottom(8))
-            .spacing(to: titleLabel, .trailing(8))
+            .spacing(.trailing(8), from: titleLabel)
             .size(width: 16, height: 16)
         }
         titleLabel.stringValue = entry.page
@@ -525,7 +525,7 @@ extension SettingsWindow {
           addSubview(titleLabel)
 
           sectionLabel.padding(.leading(8), .bottom(6))
-            .spacing(to: titleLabel, .trailing(4))
+            .spacing(.trailing(4), from: titleLabel)
           titleLabel.padding(.trailing(8), .bottom(6))
         }
         sectionLabel.stringValue = entry.section ?? entry.pageTitle ?? ""
@@ -569,12 +569,12 @@ extension SettingsWindow {
           titleLabel.translatesAutoresizingMaskIntoConstraints = false
           addSubview(titleLabel)
 
-          sectionLabel.padding(.leading(8)).spacing(to: parentLabel, .trailing(4))
-            .center(with: parentLabel, y: true)
+          sectionLabel.padding(.leading(8)).spacing(.trailing(4), from: parentLabel)
+            .center(y: true, with: parentLabel)
           parentLabel.padding(.top(6), .trailing(8))
-            .spacing(to: titleLabel, .bottom(4))
-          icon.padding(.leading(12)).spacing(to: titleLabel, .trailing(4))
-            .size(width: 11, height: 11).center(with: titleLabel, y: true)
+            .spacing(.bottom(4), from: titleLabel)
+          icon.padding(.leading(12)).spacing(.trailing(4), from: titleLabel)
+            .size(width: 11, height: 11).center(y: true, with: titleLabel)
           titleLabel.padding(.trailing(8), .bottom(6))
         }
 

@@ -384,8 +384,8 @@ fileprivate class OSCLayoutView: WithSettingsLocalizationContext, SettingsContai
 
     for (i, btn) in buttons.enumerated() {
       container.addSubview(btn)
-      btn.spacing(to: imageViews[i], .top(8)).padding(.bottom(12))
-        .center(with: imageViews[i], x: true)
+      btn.spacing(.top(8), from: imageViews[i]).padding(.bottom(12))
+        .center(x: true, with: imageViews[i])
     }
 
     view.addSubview(container)
@@ -462,7 +462,7 @@ private class OSCToolbarView: SettingsContainer {
     customizeButton.action = #selector(customizeOSCToolbarAction(_:))
     customizeButton.translatesAutoresizingMaskIntoConstraints = false
     container.addSubview(customizeButton)
-    customizeButton.center(with: box, y: true)
+    customizeButton.center(y: true, with: box)
     SettingsUIHelper.hEquallySpaced([box, customizeButton], 8, leading: SettingsSubList.indent, trailing: 8)
 
     view.addSubview(container)

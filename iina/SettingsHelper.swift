@@ -166,7 +166,7 @@ class SettingsUIHelper {
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
-      view.spacing(to: views[i - 1], .leading(space))
+      view.spacing(.leading(space), from: views[i - 1])
     }
     if let trailing = trailing {
       views.last!.padding(.trailing(greaterThan: trailing))
@@ -179,7 +179,7 @@ class SettingsUIHelper {
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
-      view.spacing(to: views[i - 1], .top(space))
+      view.spacing(.top(space), from: views[i - 1])
     }
     if let bottom = bottom {
       views.last!.padding(.bottom(bottom))

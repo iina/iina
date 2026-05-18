@@ -560,7 +560,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
       keyLabel.translatesAutoresizingMaskIntoConstraints = false
       keyBox.contentView?.addSubview(keyLabel)
       keyBox.size(height: 28)
-      keyLabel.padding(.horizontal(4)).center(with: keyBox.contentView, y: true)
+      keyLabel.padding(.horizontal(4)).center(y: true, with: keyBox.contentView)
 
       self.keyLabel = keyLabel
       self.actionLabel = actionLabel

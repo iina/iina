@@ -384,7 +384,7 @@ struct SettingsItem {
       valueStackView.padding(.trailing(8))
 //       valueStackView.padding(.top(verticalPaddingFixed), .trailing(8))
 //      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(y: true)
-      image.size(width: 24, height: 20).spacing(to: labelStackView, .trailing(6))
+      image.size(width: 24, height: 20).spacing(.trailing(6), from: labelStackView)
         .padding(.top(11))
       disclosureButton.padding(.trailing(12)).center(y: true)
       labelStackView.center(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)

@@ -13,7 +13,7 @@ class SettingsPagePlugin: SettingsPage {
   override var identifier: String {
     "plugin"
   }
-  
+
   override var title: String {
     return NSLocalizedString("preference.plugins", comment: "Plugins")
   }
@@ -372,7 +372,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
         stackView.padding(.top(12), .bottom(4), .leading(8), .trailing(20))
         aboutBtn.padding(.trailing(8))
-          .center(with: self, y: true)
+          .center(y: true, with: self)
       } else {
         nameLabel.stringValue = plugin.name
         versionLabel.stringValue = plugin.version
@@ -596,9 +596,9 @@ fileprivate class PluginDetailsWindow: NSWindow {
     contentView.addSubview(iconView)
     iconView.padding(.leading(16), .top(20))
     contentView.addSubview(nameLabel)
-    nameLabel.padding(.top(16)).spacing(to: iconView, .leading(8))
+    nameLabel.padding(.top(16)).spacing(.leading(8), from: iconView)
     contentView.addSubview(versionLabel)
-    versionLabel.spacing(to: nameLabel, .top(4)).spacing(to: iconView, .leading(8))
+    versionLabel.spacing(.top(4), from: nameLabel).spacing(.leading(8), from: iconView)
     contentView.addSubview(segControl)
     segControl.padding(.top(16), .trailing(16))
     contentView.addSubview(okButton)
@@ -607,18 +607,18 @@ fileprivate class PluginDetailsWindow: NSWindow {
     createWebView()
     contentView.addSubview(webView)
     webView.padding(.horizontal(16))
-      .spacing(to: segControl, .top(12))
-      .spacing(to: okButton, .bottom(16))
+      .spacing(.top(12), from: segControl)
+      .spacing(.bottom(16), from: okButton)
 
     loadingIndicator.style = .spinning
     loadingIndicator.isHidden = true
     contentView.addSubview(loadingIndicator)
-    loadingIndicator.center(with: contentView, x: true).padding(.top(80))
+    loadingIndicator.center(x: true, with: contentView).padding(.top(80))
 
     loadingFailedView.textColor = .systemRed
     loadingFailedView.isHidden = true
     contentView.addSubview(loadingFailedView)
-    loadingFailedView.center(with: contentView, x: true).padding(.top(80))
+    loadingFailedView.center(x: true, with: contentView).padding(.top(80))
 
     // select settings tab by default
     segControl.selectedSegment = 0

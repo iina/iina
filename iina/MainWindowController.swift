@@ -3309,11 +3309,10 @@ class MainWindowController: PlayerWindowController {
       let width = CGFloat(UserDefaults.standard.integer(forKey: "thumbnailWidth"))
       let height = round(width / displayAspectRatio)
       let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewVisualEffectView.frame.origin.y, thumbnailHeight: height)
-      let yPos: CGFloat
-      if showAbove {
-        yPos = max(sliderFrameInWindow.maxY, timePreviewVisualEffectView.frame.maxY) + 5
+      let yPos = if showAbove {
+        max(sliderFrameInWindow.maxY, timePreviewVisualEffectView.frame.maxY) + 5
       } else {
-        yPos = min(sliderFrameInWindow.minY, timePreviewVisualEffectView.frame.minY) - height - 5
+        min(sliderFrameInWindow.minY, timePreviewVisualEffectView.frame.minY) - height - 5
       }
       thumbnailPeekView.frame.size = NSSize(width: width, height: height)
       thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
@@ -3323,11 +3322,12 @@ class MainWindowController: PlayerWindowController {
   private func updateTimePreview(_ percentage: Double) {
     guard let duration = player.info.videoDuration else { return }
     let time = duration * percentage
-    var labels: [String] = [time.stringRepresentation]
-    if let chapter = player.info.getChapter(forVideoTime: time) {
-      labels.insert(chapter.title, at: 0)
+    let chapterTitle = if let chapter = player.info.getChapter(forVideoTime: time) {
+      chapter.title + "\n"
+    } else {
+      ""
     }
-    timePreviewTextField.stringValue = labels.joined(separator: "\n")
+    timePreviewTextField.stringValue = chapterTitle + time.stringRepresentation
 
     let sliderFrame = playSlider.convert(playSlider.bounds, to: nil)
     let timeLabelYPos: CGFloat

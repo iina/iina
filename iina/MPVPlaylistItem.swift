@@ -23,12 +23,14 @@ class MPVPlaylistItem: NSObject, Identifiable {
   var isNetworkResource: Bool
 
   var title: String?
+  var playlistPath: String?
 
-  init(filename: String, isCurrent: Bool, isPlaying: Bool, title: String?) {
+  init(filename: String, isCurrent: Bool, isPlaying: Bool, title: String?, playlistPath: String? = nil) {
     self.filename = filename
     self.isCurrent = isCurrent
     self.isPlaying = isPlaying
     self.title = title
+    self.playlistPath = playlistPath
     self.isNetworkResource = Regex.url.matches(filename)
   }
 }

@@ -71,7 +71,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1410"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1662"/>
             <view key="contentView" id="se5-gp-TjO" customClass="MainWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -170,11 +170,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                         <subviews>
                             <imageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YkI-ii-zaW">
-                                <rect key="frame" x="277" y="166" width="87" height="68"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="playing-in-pip" id="0QW-Vy-zmW"/>
+                                <rect key="frame" x="270" y="147.5" width="100" height="106"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="WDx-y6-Obx"/>
+                                    <constraint firstAttribute="width" constant="100" id="g2D-1v-5p4"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" image="pip" catalog="system" id="0QW-Vy-zmW"/>
+                                <symbolConfiguration key="symbolConfiguration" weight="thin">
+                                    <nil key="locale"/>
+                                </symbolConfiguration>
                             </imageView>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-jX-kfL">
-                                <rect key="frame" x="196" y="142" width="248" height="16"/>
+                                <rect key="frame" x="196" y="126" width="248" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="This video is playing in picture in picture" id="gdE-b5-kod">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -407,7 +414,7 @@
             <rect key="frame" x="0.0" y="0.0" width="104" height="24"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                    <rect key="frame" x="0.0" y="-4" width="24" height="31"/>
+                    <rect key="frame" x="0.0" y="-3.5" width="24.5" height="31"/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speaker.wave.2.fill" catalog="system" imagePosition="only" alignment="center" alternateImage="speaker.slash.fill" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -679,10 +686,10 @@
     <resources>
         <image name="battery" width="57" height="30"/>
         <image name="pause" width="24" height="24"/>
-        <image name="pin" catalog="system" width="16" height="17"/>
-        <image name="pin.fill" catalog="system" width="16" height="17"/>
+        <image name="pin" catalog="system" width="15" height="17"/>
+        <image name="pin.fill" catalog="system" width="15" height="17"/>
+        <image name="pip" catalog="system" width="20" height="16"/>
         <image name="play" width="24" height="24"/>
-        <image name="playing-in-pip" width="87" height="68"/>
         <image name="speaker.slash.fill" catalog="system" width="14" height="16"/>
         <image name="speaker.wave.2.fill" catalog="system" width="19" height="14"/>
         <image name="speed" width="24" height="24"/>

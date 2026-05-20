@@ -601,12 +601,23 @@ class MenuController: NSObject, NSMenuDelegate {
 
   func updatePluginMenu() {
     let isDisplayingPluginsPanel = PlayerCore.active.mainWindow.sideBarStatus == .plugins
+    let managePluginsItem = NSMenuItem(title: Constants.String.managePlugins, action: #selector(AppDelegate.showPluginPreferences(_:)), keyEquivalent: "")
+    let showPanelItem = NSMenuItem(title: isDisplayingPluginsPanel ? Constants.String.hidePluginsPanel : Constants.String.showPluginsPanel, action: #selector(MainMenuActionHandler.showPluginsPanel(_:)), keyEquivalent: "")
+    let developerTool = NSMenuItem()
+    let reloadPluginsItem = NSMenuItem(title: NSLocalizedString("menu.conflicting_shortcuts", comment: "Conflicting key shortcuts…"), action: nil, keyEquivalent: "")
+
+    if #available (macOS 26, *) {
+      managePluginsItem.image = .findSFSymbol(["gear"])
+      showPanelItem.image = .findSFSymbol(["puzzlepiece.extension"])
+      developerTool.image = .findSFSymbol(["terminal"])
+      reloadPluginsItem.image = .findSFSymbol(["arrow.counterclockwise"])
+    }
+
     pluginMenu.removeAllItems()
-    pluginMenu.addItem(withTitle: Constants.String.managePlugins, action: #selector(AppDelegate.showPluginPreferences(_:)), keyEquivalent: "")
-    pluginMenu.addItem(withTitle: isDisplayingPluginsPanel ? Constants.String.hidePluginsPanel : Constants.String.showPluginsPanel, action: #selector(MainMenuActionHandler.showPluginsPanel(_:)), keyEquivalent: "")
+    pluginMenu.addItem(managePluginsItem)
+    pluginMenu.addItem(showPanelItem)
     pluginMenu.addItem(.separator())
 
-    let developerTool = NSMenuItem()
     developerTool.title = NSLocalizedString("menu.developer_tool", comment: "Developer Tool")
     developerTool.submenu = NSMenu()
 
@@ -666,7 +677,8 @@ class MenuController: NSObject, NSMenuDelegate {
     if #available(macOS 12.0, *) {
       pluginMenu.addItem(developerTool)
     }
-    pluginMenu.addItem(withTitle: NSLocalizedString("menu.reload_plugins", comment: "Reload All Plugins"), action: #selector(MainMenuActionHandler.reloadAllPlugins(_:)), keyEquivalent: "")
+    pluginMenu.addItem(reloadPluginsItem)
+
   }
 
   @discardableResult

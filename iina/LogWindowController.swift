@@ -146,9 +146,12 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     tableView.allowsColumnReordering = false
     tableView.columnAutoresizingStyle = .lastColumnOnlyAutoresizingStyle
 
-    let tableViewMenu = NSMenu()
-    tableViewMenu.addItem(withTitle: NSLocalizedString("logwindow.copy", comment: "Copy"), action: #selector(menuCopy), keyEquivalent: "")
-    tableView.menu = tableViewMenu
+    tableView.menu = NSMenu()
+    let copyItem = NSMenuItem(title: NSLocalizedString("logwindow.copy", comment: "Copy"), action: #selector(menuCopy), keyEquivalent: "")
+    if #available(macOS 26, *) {
+      copyItem.image = .findSFSymbol(["document.on.document"])
+    }
+    tableView.menu?.addItem(copyItem)
 
     func makeColumn(key: String, minWidth: CGFloat? = nil, maxWidth: CGFloat? = nil, noTitle: Bool = false) -> NSTableColumn {
       let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(key))

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -482,8 +482,8 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="705-dt-Zwl" userLabel="SpeedReset Button">
-                                <rect key="frame" x="331" y="382" width="16" height="21"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="e2B-Ie-9hS">
+                                <rect key="frame" x="331" y="382.5" width="16" height="21"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.clockwise.circle.fill" catalog="system" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="e2B-Ie-9hS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="message" size="11"/>
                                 </buttonCell>
@@ -856,7 +856,7 @@
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cjG-f1-Mkg" userLabel="Brightness Square Button">
                                         <rect key="frame" x="0.0" y="94" width="15" height="19"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" inset="2" id="63a-cd-eXa">
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.clockwise.circle.fill" catalog="system" imagePosition="overlaps" alignment="center" refusesFirstResponder="YES" inset="2" id="63a-cd-eXa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -1013,7 +1013,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl" userLabel="AudioTab Clip View">
                 <rect key="frame" x="0.0" y="0.0" width="360" height="536"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" userLabel="AudioTab Flipped View" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="-11" width="360" height="547"/>
@@ -1039,7 +1039,7 @@
                                         <rect key="frame" x="0.0" y="428" width="360" height="75"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vgF-KN-yHf" userLabel="AudioTrackTable Clip View">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="FLg-2m-Zaq" userLabel="AudioTrackTable Table View">
                                                     <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
@@ -1558,23 +1558,23 @@
                                         </customSpacing>
                                     </stackView>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u9C-Fk-Aag">
-                                        <rect key="frame" x="20" y="179" width="247" height="24"/>
+                                        <rect key="frame" x="20" y="179" width="266" height="24"/>
                                         <popUpButtonCell key="cell" type="push" title="Save the current EQ as a preset…" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" tag="-3" imageScaling="proportionallyDown" inset="2" autoenablesItems="NO" altersStateOfSelectedItem="NO" selectedItem="sE0-LN-T8i" id="WKa-AJ-OEZ">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="message"/>
                                             <menu key="menu" autoenablesItems="NO" id="7k5-w9-dRQ">
                                                 <items>
-                                                    <menuItem title="Save the current EQ as a preset…" tag="-3" id="sE0-LN-T8i">
+                                                    <menuItem title="Save the current EQ as a preset…" secondaryImage="square.and.arrow.down" catalog="system" tag="-3" id="sE0-LN-T8i">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                     </menuItem>
-                                                    <menuItem title="Rename the current EQ preset…" tag="-2" id="2tD-0L-UUs">
+                                                    <menuItem title="Rename the current EQ preset…" secondaryImage="pencil" catalog="system" tag="-2" id="2tD-0L-UUs">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                     </menuItem>
-                                                    <menuItem title="Remove the current EQ preset" tag="-1" id="dvI-Rj-7qF">
+                                                    <menuItem title="Remove the current EQ preset" secondaryImage="delete.backward" catalog="system" tag="-1" id="dvI-Rj-7qF">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                     </menuItem>
                                                     <menuItem isSeparatorItem="YES" tag="-1000" id="o0F-oJ-6GY"/>
-                                                    <menuItem title="Manual" tag="1000" id="LPh-nJ-GjN">
+                                                    <menuItem title="Manual" secondaryImage="waveform.and.person.filled" catalog="system" tag="1000" id="LPh-nJ-GjN">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                     </menuItem>
                                                     <menuItem isSeparatorItem="YES" tag="-1000" id="wBP-97-nRB"/>
@@ -1695,8 +1695,8 @@
                 <rect key="frame" x="-100" y="-100" width="360" height="15"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
-            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="17z-n6-rH9" userLabel="AudioTab Vertical Scroller">
-                <rect key="frame" x="343" y="0.0" width="17" height="528.5"/>
+            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="17z-n6-rH9" userLabel="AudioTab Vertical Scroller">
+                <rect key="frame" x="343" y="0.0" width="17" height="536"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <point key="canvasLocation" x="329" y="-680"/>
@@ -2184,8 +2184,8 @@
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8ZC-Wx-nt7">
-                                        <rect key="frame" x="326" y="310" width="16" height="21"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshFreestandingTemplate" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="ojj-5V-n3t">
+                                        <rect key="frame" x="326" y="310.5" width="16" height="21"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.clockwise.circle.fill" catalog="system" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="ojj-5V-n3t">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="message" size="11"/>
                                         </buttonCell>
@@ -2555,10 +2555,15 @@
         </scrollView>
     </objects>
     <resources>
-        <image name="NSRefreshFreestandingTemplate" width="19" height="19"/>
+        <image name="NSRefreshFreestandingTemplate" width="20" height="20"/>
+        <image name="arrow.clockwise.circle.fill" catalog="system" width="15" height="15"/>
+        <image name="delete.backward" catalog="system" width="17" height="14"/>
+        <image name="pencil" catalog="system" width="14" height="13"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
         <image name="tab_audio" width="26" height="18"/>
         <image name="tab_sub" width="26" height="18"/>
         <image name="tab_video" width="26" height="18"/>
         <image name="triangle-down" width="10" height="14"/>
+        <image name="waveform.and.person.filled" catalog="system" width="19" height="17"/>
     </resources>
 </document>

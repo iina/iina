@@ -842,29 +842,29 @@ CA
         </menuItem>
     </objects>
     <resources>
-        <image name="apple.terminal" catalog="system" width="19" height="14"/>
+        <image name="apple.terminal" catalog="system" width="18" height="14"/>
         <image name="arrow.counterclockwise" catalog="system" width="14" height="16"/>
-        <image name="arrow.trianglehead.left.and.right.righttriangle.left.righttriangle.right" catalog="system" width="19" height="16"/>
-        <image name="arrow.up.forward" catalog="system" width="14" height="12"/>
-        <image name="arrow.up.forward.square" catalog="system" width="16" height="14"/>
-        <image name="arrow.up.left.and.arrow.down.right.rectangle" catalog="system" width="19" height="14"/>
-        <image name="aspectratio" catalog="system" width="19" height="14"/>
-        <image name="backward.end.alt.fill" catalog="system" width="25" height="12"/>
-        <image name="backward.end.fill" catalog="system" width="16" height="12"/>
+        <image name="arrow.trianglehead.left.and.right.righttriangle.left.righttriangle.right" catalog="system" width="18" height="16"/>
+        <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
+        <image name="arrow.up.forward.square" catalog="system" width="15" height="14"/>
+        <image name="arrow.up.left.and.arrow.down.right.rectangle" catalog="system" width="18" height="14"/>
+        <image name="aspectratio" catalog="system" width="18" height="14"/>
+        <image name="backward.end.alt.fill" catalog="system" width="24" height="12"/>
+        <image name="backward.end.fill" catalog="system" width="15" height="12"/>
         <image name="backward.fill" catalog="system" width="20" height="12"/>
         <image name="backward.frame" catalog="system" width="16" height="12"/>
-        <image name="bookmark.fill" catalog="system" width="13" height="16"/>
+        <image name="bookmark.fill" catalog="system" width="14" height="16"/>
         <image name="camera.filters" catalog="system" width="16" height="16"/>
-        <image name="camera.shutter.button" catalog="system" width="20" height="17"/>
-        <image name="captions.bubble" catalog="system" width="18" height="16"/>
-        <image name="chevron.backward.2" catalog="system" width="16" height="14"/>
-        <image name="chevron.backward.to.line" catalog="system" width="12" height="14"/>
-        <image name="chevron.forward.2" catalog="system" width="16" height="14"/>
-        <image name="chevron.forward.to.line" catalog="system" width="12" height="14"/>
-        <image name="chevron.left.forwardslash.chevron.right" catalog="system" width="22" height="15"/>
+        <image name="camera.shutter.button" catalog="system" width="19" height="17"/>
+        <image name="captions.bubble" catalog="system" width="17" height="16"/>
+        <image name="chevron.backward.2" catalog="system" width="15" height="14"/>
+        <image name="chevron.backward.to.line" catalog="system" width="11" height="14"/>
+        <image name="chevron.forward.2" catalog="system" width="15" height="14"/>
+        <image name="chevron.forward.to.line" catalog="system" width="11" height="14"/>
+        <image name="chevron.left.forwardslash.chevron.right" catalog="system" width="21" height="15"/>
         <image name="circle.lefthalf.striped.horizontal.inverse" catalog="system" width="15" height="15"/>
         <image name="clock.arrow.trianglehead.counterclockwise.rotate.90" catalog="system" width="16" height="15"/>
-        <image name="crop" catalog="system" width="18" height="16"/>
+        <image name="crop" catalog="system" width="17" height="16"/>
         <image name="custom.captions.bubble.arrow.trianglehead.clockwise" width="11" height="12"/>
         <image name="custom.captions.bubble.arrow.trianglehead.counterclockwise" width="11" height="12"/>
         <image name="custom.captions.bubble.badge.arrow.down" width="15" height="12"/>
@@ -880,46 +880,46 @@ CA
         <image name="custom.waveform.arrow.trianglehead.counterclockwise" width="11" height="12"/>
         <image name="custom.waveform.rectangle.stack" width="12" height="12"/>
         <image name="dial.low" catalog="system" width="18" height="16"/>
-        <image name="display" catalog="system" width="20" height="15"/>
-        <image name="finder" catalog="system" width="17" height="15"/>
-        <image name="forward.end.alt.fill" catalog="system" width="25" height="12"/>
+        <image name="display" catalog="system" width="19" height="15"/>
+        <image name="finder" catalog="system" width="16" height="15"/>
+        <image name="forward.end.alt.fill" catalog="system" width="24" height="12"/>
         <image name="forward.fill" catalog="system" width="20" height="12"/>
         <image name="forward.frame" catalog="system" width="16" height="12"/>
         <image name="globe" catalog="system" width="15" height="15"/>
         <image name="globe.asia.australia" catalog="system" width="15" height="15"/>
-        <image name="hifispeaker.2" catalog="system" width="19" height="18"/>
+        <image name="hifispeaker.2" catalog="system" width="18" height="18"/>
         <image name="info.circle" catalog="system" width="15" height="15"/>
         <image name="link" catalog="system" width="17" height="17"/>
-        <image name="list.bullet.rectangle" catalog="system" width="19" height="14"/>
+        <image name="list.bullet.rectangle" catalog="system" width="18" height="14"/>
         <image name="macwindow.badge.plus" catalog="system" width="21" height="16"/>
-        <image name="minus.magnifyingglass" catalog="system" width="15" height="15"/>
-        <image name="music.microphone" catalog="system" width="15" height="16"/>
-        <image name="pause.fill" catalog="system" width="12" height="13"/>
-        <image name="photo" catalog="system" width="19" height="14"/>
-        <image name="photo.stack" catalog="system" width="18" height="18"/>
-        <image name="pin" catalog="system" width="16" height="17"/>
-        <image name="pip.enter" catalog="system" width="21" height="16"/>
-        <image name="plus.magnifyingglass" catalog="system" width="15" height="15"/>
+        <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
+        <image name="music.microphone" catalog="system" width="16" height="16"/>
+        <image name="pause.fill" catalog="system" width="11" height="13"/>
+        <image name="photo" catalog="system" width="18" height="14"/>
+        <image name="photo.stack" catalog="system" width="17" height="18"/>
+        <image name="pin" catalog="system" width="15" height="17"/>
+        <image name="pip.enter" catalog="system" width="20" height="16"/>
+        <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="questionmark.circle" catalog="system" width="15" height="15"/>
-        <image name="rectangle.landscape.rotate" catalog="system" width="20" height="19"/>
-        <image name="repeat" catalog="system" width="18" height="14"/>
-        <image name="repeat.1" catalog="system" width="18" height="14"/>
-        <image name="speaker.minus" catalog="system" width="20" height="14"/>
-        <image name="speaker.plus" catalog="system" width="20" height="14"/>
+        <image name="rectangle.landscape.rotate" catalog="system" width="19" height="19"/>
+        <image name="repeat" catalog="system" width="17" height="14"/>
+        <image name="repeat.1" catalog="system" width="17" height="14"/>
+        <image name="speaker.minus" catalog="system" width="19" height="14"/>
+        <image name="speaker.plus" catalog="system" width="19" height="14"/>
         <image name="speaker.slash" catalog="system" width="14" height="16"/>
-        <image name="square.and.arrow.down" catalog="system" width="16" height="17"/>
-        <image name="square.resize" catalog="system" width="16" height="14"/>
-        <image name="square.resize.down" catalog="system" width="16" height="14"/>
-        <image name="square.resize.up" catalog="system" width="16" height="14"/>
-        <image name="stop.fill" catalog="system" width="15" height="13"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
+        <image name="square.resize" catalog="system" width="15" height="14"/>
+        <image name="square.resize.down" catalog="system" width="15" height="14"/>
+        <image name="square.resize.up" catalog="system" width="15" height="14"/>
+        <image name="stop.fill" catalog="system" width="14" height="13"/>
         <image name="text.page.badge.magnifyingglass" catalog="system" width="15" height="18"/>
-        <image name="textformat" catalog="system" width="19" height="12"/>
-        <image name="textformat.size.larger" catalog="system" width="12" height="12"/>
-        <image name="textformat.size.smaller" catalog="system" width="10" height="9"/>
-        <image name="timeline.selection" catalog="system" width="26" height="14"/>
+        <image name="textformat" catalog="system" width="18" height="12"/>
+        <image name="textformat.size.larger" catalog="system" width="11" height="12"/>
+        <image name="textformat.size.smaller" catalog="system" width="9" height="9"/>
+        <image name="timeline.selection" catalog="system" width="25" height="14"/>
         <image name="trash" catalog="system" width="15" height="17"/>
-        <image name="wand.and.sparkles" catalog="system" width="16" height="15"/>
-        <image name="waveform" catalog="system" width="16" height="16"/>
+        <image name="wand.and.sparkles" catalog="system" width="17" height="15"/>
+        <image name="waveform" catalog="system" width="15" height="16"/>
         <image name="waveform.badge.plus" catalog="system" width="18" height="17"/>
     </resources>
 </document>

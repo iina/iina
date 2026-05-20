@@ -582,20 +582,19 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func volumeIcon() -> NSImage? {
-    guard !player.info.isMuted else { return NSImage(named: "mute") }
-    switch Int(player.info.volume) {
-    case 0:
-      return NSImage(named: "volume-0")
-    case 1...33:
-      return NSImage(named: "volume-1")
-    case 34...66:
-      return NSImage(named: "volume-2")
-    case 67...1000:
-      return NSImage(named: "volume")
-    default:
+    guard !player.info.isMuted else { return .findSFSymbol(["speaker.slash.fill"]) }
+    let volume = Int(player.info.volume)
+    guard volume >= 0 else {
       log("Volume level \(player.info.volume) is invalid", level: .error)
       return nil
     }
+    let symbol = switch Int(player.info.volume) {
+    case 0: "speaker.fill"
+    case 1...33: "speaker.wave.1.fill"
+    case 34...66: "speaker.wave.2.fill"
+    default: "speaker.wave.3.fill"
+    }
+    return .findSFSymbol([symbol])
   }
 
   func updateVolume() {

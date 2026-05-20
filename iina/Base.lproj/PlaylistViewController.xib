@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -272,8 +272,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="24"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xKm-J1-NZs" userLabel="Remove Button">
-                                                <rect key="frame" x="190" y="0.0" width="24" height="24"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="hOV-D6-H5l">
+                                                <rect key="frame" x="190" y="3" width="24" height="19"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="minus" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="hOV-D6-H5l">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -285,8 +285,8 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7my-AM-8Ts">
-                                                <rect key="frame" x="214" y="0.0" width="24" height="24"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trash" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="4GG-b4-WLp">
+                                                <rect key="frame" x="214" y="-3" width="24" height="32"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="trash" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="4GG-b4-WLp">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -298,9 +298,9 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IHI-5g-OMg">
-                                                <rect key="frame" x="2" y="0.0" width="24" height="24"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="loop" imagePosition="only" alignment="center" alternateImage="loop_dark" lineBreakMode="truncatingTail" allowsMixedState="YES" imageScaling="proportionallyDown" inset="2" id="PRy-Mk-gwn">
-                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                <rect key="frame" x="2" y="-2" width="24" height="29"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="repeat" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" allowsMixedState="YES" imageScaling="proportionallyDown" inset="2" id="PRy-Mk-gwn">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <constraints>
@@ -311,8 +311,8 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xhU-qn-3aa">
-                                                <rect key="frame" x="26" y="0.0" width="24" height="24"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="shuffle" imagePosition="only" alignment="center" alternateImage="shuffle-dark" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="Xx9-xM-Avl">
+                                                <rect key="frame" x="26" y="-2" width="24" height="29"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="shuffle" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="Xx9-xM-Avl">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -332,8 +332,8 @@
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W9C-Z7-hiI" userLabel="Add Button">
-                                                <rect key="frame" x="166" y="0.0" width="24" height="24"/>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="tOv-Aj-8c4">
+                                                <rect key="frame" x="166" y="-2" width="24" height="28"/>
+                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="plus" catalog="system" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="tOv-Aj-8c4">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -572,7 +572,7 @@
                     <rect key="frame" x="8" y="32" width="334" height="42"/>
                     <clipView key="contentView" drawsBackground="NO" id="6rI-3b-JZo">
                         <rect key="frame" x="0.0" y="0.0" width="334" height="42"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" id="puj-Kl-qOI">
                                 <rect key="frame" x="0.0" y="0.0" width="512" height="42"/>
@@ -666,13 +666,11 @@
     </objects>
     <resources>
         <image name="arrow.up.arrow.down" catalog="system" width="19" height="15"/>
-        <image name="loop" width="15" height="15"/>
-        <image name="loop_dark" width="15" height="15"/>
-        <image name="minus" width="14" height="14"/>
-        <image name="plus" width="14" height="14"/>
-        <image name="shuffle" width="15" height="15"/>
-        <image name="shuffle-dark" width="15" height="15"/>
+        <image name="minus" catalog="system" width="15" height="4"/>
+        <image name="plus" catalog="system" width="15" height="13"/>
+        <image name="repeat" catalog="system" width="18" height="14"/>
+        <image name="shuffle" catalog="system" width="19" height="14"/>
         <image name="sub-track" width="14" height="14"/>
-        <image name="trash" width="14" height="14"/>
+        <image name="trash" catalog="system" width="15" height="17"/>
     </resources>
 </document>

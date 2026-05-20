@@ -97,11 +97,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     playlistTableView.menu?.delegate = self
 
-    [deleteBtn, loopBtn, shuffleBtn].forEach {
-      $0?.image?.isTemplate = true
-      $0?.alternateImage?.isTemplate = true
-    }
-
     deleteBtn.toolTip = NSLocalizedString("mini_player.delete", comment: "delete")
     loopBtn.toolTip = NSLocalizedString("mini_player.loop", comment: "loop")
     shuffleBtn.toolTip = NSLocalizedString("mini_player.shuffle", comment: "shuffle")
@@ -205,12 +200,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
   func updateLoopBtnStatus() {
     guard isViewLoaded else { return }
     let loopMode = player.getLoopMode()
-    switch loopMode {
-    case .off:  loopBtn.state = .off
-    case .file: loopBtn.state = .on
-    default:    loopBtn.state = .mixed
+    loopBtn.image = switch loopMode {
+    case .off:  NSImage.findSFSymbol(["repeat"])
+    case .file: NSImage.init(named: "custom.repeat.1.rectangle.fill")
+    default:    NSImage.init(named: "custom.repeat.rectangle.fill")
     }
-    loopBtn.alternateImage = NSImage.init(named: loopBtn.state == .on ? "loop_file" : "loop_dark")
   }
 
   // MARK: - Tab switching

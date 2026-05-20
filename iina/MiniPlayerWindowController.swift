@@ -138,7 +138,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
     volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
     volumePopover.delegate = self
-
   }
 
   // MARK: - Mouse / Trackpad events
@@ -433,4 +432,3 @@ fileprivate extension NSRect {
     return newRect
   }
 }
-

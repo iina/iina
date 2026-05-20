@@ -170,17 +170,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                         <subviews>
                             <imageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YkI-ii-zaW">
-                                <rect key="frame" x="259" y="132" width="122" height="136"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="vep-VL-kFW"/>
-                                </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="pip" catalog="system" id="0QW-Vy-zmW"/>
-                                <symbolConfiguration key="symbolConfiguration" configurationType="pointSize" pointSize="80">
-                                    <nil key="locale"/>
-                                </symbolConfiguration>
+                                <rect key="frame" x="277" y="166" width="87" height="68"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="playing-in-pip" id="0QW-Vy-zmW"/>
                             </imageView>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-jX-kfL">
-                                <rect key="frame" x="196" y="126" width="248" height="16"/>
+                                <rect key="frame" x="196" y="142" width="248" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="This video is playing in picture in picture" id="gdE-b5-kod">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -196,17 +190,17 @@
                         </constraints>
                     </visualEffectView>
                     <visualEffectView hidden="YES" wantsLayer="YES" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
-                        <rect key="frame" x="240" y="140" width="160" height="120"/>
+                        <rect key="frame" x="240" y="152" width="160" height="96"/>
                         <subviews>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uZe-PA-1Id">
-                                <rect key="frame" x="64" y="68" width="32" height="32"/>
+                                <rect key="frame" x="64" y="44" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uZe-PA-1Id" secondAttribute="height" multiplier="1:1" id="2KD-iY-Rbo"/>
                                     <constraint firstAttribute="width" constant="32" id="7BK-Wc-K9S"/>
                                 </constraints>
                             </progressIndicator>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
-                                <rect key="frame" x="24" y="20" width="113" height="40"/>
+                                <rect key="frame" x="24" y="20" width="113" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Buffering... 100%" id="3fe-fP-yMB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -230,7 +224,6 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2gH-wF-EpI" secondAttribute="trailing" id="TQS-Yy-cH6"/>
                             <constraint firstItem="hlZ-5D-Wag" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="bOz-TB-YLY"/>
                             <constraint firstAttribute="bottom" secondItem="2gH-wF-EpI" secondAttribute="bottom" constant="20" id="ddz-PD-RB3"/>
-                            <constraint firstAttribute="height" constant="120" id="n5i-dJ-osH"/>
                             <constraint firstItem="uZe-PA-1Id" firstAttribute="top" secondItem="oX4-0N-but" secondAttribute="top" constant="20" id="sio-TN-E1P"/>
                             <constraint firstItem="2gH-wF-EpI" firstAttribute="top" secondItem="uZe-PA-1Id" secondAttribute="bottom" constant="8" id="swz-Rz-9Hv"/>
                             <constraint firstItem="2gH-wF-EpI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oX4-0N-but" secondAttribute="leading" id="ufO-Jb-vdH"/>
@@ -689,8 +682,8 @@
         <image name="pause" width="24" height="24"/>
         <image name="pin" catalog="system" width="16" height="17"/>
         <image name="pin.fill" catalog="system" width="16" height="17"/>
-        <image name="pip" catalog="system" width="21" height="16"/>
         <image name="play" width="24" height="24"/>
+        <image name="playing-in-pip" width="87" height="68"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
         <image name="volume" width="16" height="14"/>

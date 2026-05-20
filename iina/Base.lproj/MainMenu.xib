@@ -257,7 +257,7 @@ CA
                             <menuItem title="Jump to Beginning" secondaryImage="backward.end.fill" catalog="system" id="2Ya-3g-1hy">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Jump to…" keyEquivalent="j" id="2id-wn-xsC"/>
+                            <menuItem title="Jump to…" secondaryImage="arrow.right.and.line.vertical.and.arrow.left" catalog="system" keyEquivalent="j" id="2id-wn-xsC"/>
                             <menuItem isSeparatorItem="YES" id="T6N-uN-XPW"/>
                             <menuItem title="Speed:" enabled="NO" id="8pV-XQ-AvB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -844,6 +844,7 @@ CA
     <resources>
         <image name="apple.terminal" catalog="system" width="18" height="14"/>
         <image name="arrow.counterclockwise" catalog="system" width="14" height="16"/>
+        <image name="arrow.right.and.line.vertical.and.arrow.left" catalog="system" width="23" height="15"/>
         <image name="arrow.trianglehead.left.and.right.righttriangle.left.righttriangle.right" catalog="system" width="18" height="16"/>
         <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
         <image name="arrow.up.forward.square" catalog="system" width="15" height="14"/>

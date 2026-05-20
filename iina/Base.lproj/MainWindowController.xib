@@ -92,8 +92,8 @@
             <rect key="frame" x="0.0" y="0.0" width="104" height="24"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
+                    <rect key="frame" x="0.0" y="-4" width="24" height="31"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speaker.wave.2.fill" catalog="system" imagePosition="only" alignment="center" alternateImage="speaker.slash.fill" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -291,12 +291,14 @@
         </stackView>
     </objects>
     <resources>
+        <image name="battery" width="57" height="30"/>
         <image name="mute" width="16" height="14"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
         <image name="playing-in-pip" width="87" height="68"/>
+        <image name="speaker.slash.fill" catalog="system" width="14" height="16"/>
+        <image name="speaker.wave.2.fill" catalog="system" width="19" height="14"/>
         <image name="speed" width="24" height="24"/>
         <image name="speedl" width="24" height="24"/>
-        <image name="volume" width="16" height="14"/>
     </resources>
 </document>

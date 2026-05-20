@@ -466,19 +466,19 @@ CA
                             <menuItem title="Audio Delay:" enabled="NO" id="foC-r3-8mp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay + 0.5s" secondaryImage="custom.waveform.arrow.trianglehead.clockwise" id="4ae-MT-2L1">
+                            <menuItem title="Audio Delay + 0.5s" secondaryImage="custom.waveform.arrow.trianglehead.clockwise.rotate.90" id="4ae-MT-2L1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay + 0.1s" secondaryImage="custom.waveform.arrow.trianglehead.clockwise" alternate="YES" id="lew-3S-oGY">
+                            <menuItem title="Audio Delay + 0.1s" secondaryImage="custom.waveform.arrow.trianglehead.clockwise.rotate.90" alternate="YES" id="lew-3S-oGY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay - 0.5s" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise" id="Lc4-4W-thE">
+                            <menuItem title="Audio Delay - 0.5s" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise.rotate.90" id="Lc4-4W-thE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay - 0.1s" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise" alternate="YES" id="9ee-7i-xs7">
+                            <menuItem title="Audio Delay - 0.1s" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise.rotate.90" alternate="YES" id="9ee-7i-xs7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Reset Audio Delay" secondaryImage="arrow.counterclockwise" catalog="system" id="H3d-jR-YCr">
+                            <menuItem title="Reset Audio Delay" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise" id="H3d-jR-YCr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xKj-xX-Nny"/>
@@ -569,32 +569,32 @@ CA
                             <menuItem title="Scale Down" secondaryImage="textformat.size.smaller" catalog="system" tag="-5" id="Bli-YK-Rl0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Reset Subtitle Scale" secondaryImage="arrow.counterclockwise" catalog="system" id="P1a-ot-P31">
+                            <menuItem title="Reset Subtitle Scale" secondaryImage="custom.textformat.size.arrow.trianglehead.counterclockwise" id="P1a-ot-P31">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="UZ7-ew-L1i"/>
                             <menuItem title="Subtitle Delay: " enabled="NO" id="THG-4o-U6A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Subtitle Delay + 0.5s" secondaryImage="custom.captions.bubble.arrow.trianglehead.clockwise" id="pAo-L5-qTO">
+                            <menuItem title="Subtitle Delay + 0.5s" secondaryImage="custom.captions.bubble.arrow.trianglehead.clockwise.rotate.90" id="pAo-L5-qTO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Subtitle Delay + 0.1s" secondaryImage="custom.captions.bubble.arrow.trianglehead.clockwise" alternate="YES" id="0Cz-OE-85L">
+                            <menuItem title="Subtitle Delay + 0.1s" secondaryImage="custom.captions.bubble.arrow.trianglehead.clockwise.rotate.90" alternate="YES" id="0Cz-OE-85L">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Subtitle Delay - 0.5s" secondaryImage="custom.captions.bubble.arrow.trianglehead.counterclockwise" id="LsU-Qz-dax">
+                            <menuItem title="Subtitle Delay - 0.5s" secondaryImage="custom.captions.bubble.arrow.trianglehead.counterclockwise.rotate.90" id="LsU-Qz-dax">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="lSt-4f-ewa"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Subtitle Delay - 0.1s" secondaryImage="custom.captions.bubble.arrow.trianglehead.counterclockwise" alternate="YES" id="fyL-tr-6Bu">
+                            <menuItem title="Subtitle Delay - 0.1s" image="custom.captions.bubble.arrow.trianglehead.counterclockwise.rotate.90" alternate="YES" id="fyL-tr-6Bu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="qbG-lZ-Ubx"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Reset Subtitle Delay" secondaryImage="arrow.counterclockwise" catalog="system" id="SLr-6g-Mgh">
+                            <menuItem title="Reset Subtitle Delay" secondaryImage="custom.captions.bubble.arrow.trianglehead.counterclockwise" id="SLr-6g-Mgh">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HAm-FJ-1KF"/>
@@ -865,8 +865,9 @@ CA
         <image name="circle.lefthalf.striped.horizontal.inverse" catalog="system" width="15" height="15"/>
         <image name="clock.arrow.trianglehead.counterclockwise.rotate.90" catalog="system" width="16" height="15"/>
         <image name="crop" catalog="system" width="17" height="16"/>
-        <image name="custom.captions.bubble.arrow.trianglehead.clockwise" width="11" height="12"/>
+        <image name="custom.captions.bubble.arrow.trianglehead.clockwise.rotate.90" width="12" height="11"/>
         <image name="custom.captions.bubble.arrow.trianglehead.counterclockwise" width="11" height="12"/>
+        <image name="custom.captions.bubble.arrow.trianglehead.counterclockwise.rotate.90" width="12" height="11"/>
         <image name="custom.captions.bubble.badge.arrow.down" width="15" height="12"/>
         <image name="custom.captions.bubble.badge.magnifyingglass" width="15" height="12"/>
         <image name="custom.captions.bubble.badge.plus" width="15" height="12"/>
@@ -876,8 +877,10 @@ CA
         <image name="custom.link.square" width="10" height="10"/>
         <image name="custom.photo.rectangle.stack" width="12" height="12"/>
         <image name="custom.seal.slash" width="12" height="12"/>
-        <image name="custom.waveform.arrow.trianglehead.clockwise" width="11" height="12"/>
+        <image name="custom.textformat.size.arrow.trianglehead.counterclockwise" width="11" height="12"/>
+        <image name="custom.waveform.arrow.trianglehead.clockwise.rotate.90" width="12" height="11"/>
         <image name="custom.waveform.arrow.trianglehead.counterclockwise" width="11" height="12"/>
+        <image name="custom.waveform.arrow.trianglehead.counterclockwise.rotate.90" width="12" height="11"/>
         <image name="custom.waveform.rectangle.stack" width="12" height="12"/>
         <image name="dial.low" catalog="system" width="18" height="16"/>
         <image name="display" catalog="system" width="19" height="15"/>

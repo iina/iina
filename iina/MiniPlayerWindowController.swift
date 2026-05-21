@@ -404,6 +404,16 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
   }
 
+  override func handleIINACommand(_ cmd: IINACommand) {
+    super.handleIINACommand(cmd)
+    switch cmd {
+    case .toggleMusicMode:
+      player.switchBackFromMiniPlayer()
+    default:
+      break
+    }
+  }
+
   // MARK: - Utils
 
   private func normalWindowHeight() -> CGFloat {

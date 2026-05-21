@@ -3279,6 +3279,16 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  override func handleIINACommand(_ cmd: IINACommand) {
+    super.handleIINACommand(cmd)
+    switch cmd {
+    case .toggleMusicMode:
+      player.switchToMiniPlayer()
+    default:
+      break
+    }
+  }
+
   // MARK: - Time Preveiew & Thumbnail
 
   /** Display time label when mouse over slider */

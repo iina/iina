@@ -299,13 +299,22 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     guard player.currentMediaIsAudio == .isAudio else {
       return player.videoSizeForDisplay
     }
-    return player.info.musicModeArtworkSize ?? (1, 1)
+    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
+    if let albumArtTrack,
+       let width = albumArtTrack.demuxW,
+       let height = albumArtTrack.demuxH,
+       width > 0,
+       height > 0 {
+      return (width, height)
+    }
+    return (1, 1)
   }
 
   func refreshArtworkVisibility() {
     guard loaded else { return }
+    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
     let hasSubtitles = (player.info.isSubVisible && player.info.sid != 0) || (player.info.isSecondSubVisible && player.info.secondSid != 0)
-    defaultAlbumArt.isHidden = player.currentMediaIsAudio != .isAudio || player.info.albumArtTrack != nil || hasSubtitles
+    defaultAlbumArt.isHidden = player.currentMediaIsAudio != .isAudio || albumArtTrack != nil || hasSubtitles
   }
 
   func setToInitialWindowSize(display: Bool = true, animate: Bool = true) {

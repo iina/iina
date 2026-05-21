@@ -698,8 +698,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       AppDelegate.shared.openFile(self)
     case .openURL:
       AppDelegate.shared.openURL(self)
-    case .toggleMusicMode:
-      player.switchToMiniPlayer()
     case .deleteCurrentFile:
       menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:

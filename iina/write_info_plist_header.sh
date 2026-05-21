@@ -43,6 +43,20 @@ BRANCH=$($GIT rev-parse --abbrev-ref HEAD)
 COMMIT=$($GIT rev-parse HEAD)
 DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 
+# If Xcode User Script Sandboxing is enabled then git will malfunction because Xcode will deny
+# access to the files in the .git directory. The files git needs can't be added as script inputs
+# because Xcode does not support adding directories as input. In case someone enables this Xcode
+# feature confirm git returned the required information, otherwise fail the build.
+if [[ -z "$BRANCH" ]]; then
+  error Unable to determine git branch
+  exit 1
+fi
+# If git returned the branch then it should be able to return the commit, but check anyway.
+if [[ -z "$COMMIT" ]]; then
+  error Unable to determine git commit
+  exit 1
+fi
+
 # Write the Info.plist header file.
 cat <<-EOF > "$INFOPLIST_PREFIX_HEADER"
 #define IINA_BUILD_BRANCH ${BRANCH}

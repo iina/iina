@@ -10,67 +10,73 @@ import UniformTypeIdentifiers
 import SafariServices.SFSafariApplication
 
 class SettingsPageUtilities: SettingsPage {
+  override var identifier: String {
+    "utilities"
+  }
+  
   override var title: String {
     return NSLocalizedString("preference.utilities", comment: "Utilities")
   }
-  
+
   override var image: NSImage {
     return makeSymbol("wrench.and.screwdriver", fallbackImage: "pref_utils")
   }
-  
+
   override var localizationTable: String {
     "SettingsUtilsLocalizable"
   }
-  
+
   private lazy var setAsDefaultSheet = SetAsDefaultSheetWindow(l10n: localizationContext)
   private lazy var browserExtensionView = BrowserExtensionView(l10n: localizationContext)
   private lazy var thumbCacheSizeLabel: NSTextField = makeLabel()
 
-  override func content() -> NSView {
+  override func content() -> [SettingsSection] {
     return sections {
-      sectionDefaultApp()
-    }
-  }
-  
-  private func sectionDefaultApp() -> [NSView] {
-    return section {
-      SettingsListView(title: .text_DefaultApplication) {
-        SettingsItem.General(title: .text_SetIINAAsTheDefault)
-          .image(name: ["app.badge.checkmark.fill", "app"])
-          .extraViews(actionButton(action: #selector(setIINAAsDefaultAction)))
+      section {
+        SettingsList(title: .text_DefaultApplication) {
+          SettingsItem.General(title: .text_SetIINAAsTheDefault)
+            .image(name: ["app.badge.checkmark.fill", "app"])
+            .extraViews(actionButton(action: #selector(setIINAAsDefaultAction)))
+        }
       }
-      SettingsListView(title: .text_RestoreAlerts) {
-        SettingsItem.General(title: .text_RestoreSuppressedAlerts)
-          .image(name: "arrow.counterclockwise")
-          .extraViews(actionButton(action: #selector(resetSuppressedAlertsBtnAction)))
-          .hasDescription(content: .text_RestoreAllAlertsThat)
+      section {
+        SettingsList(title: .text_RestoreAlerts) {
+          SettingsItem.General(title: .text_RestoreSuppressedAlerts)
+            .image(name: "arrow.counterclockwise")
+            .extraViews(actionButton(action: #selector(resetSuppressedAlertsBtnAction)))
+            .hasDescription(content: .text_RestoreAllAlertsThat)
+        }
       }
-      SettingsListView(title: .text_ClearCache) {
-        SettingsItem.General(title: .text_ClearSavedPlaybackProgress)
-          .image(name: "clock")
-          .extraViews(actionButton(action: #selector(clearWatchLaterBtnAction), symbolName: ["trash"]))
-          .hasDescription(content: .text_DeleteAllWatchLater)
-        SettingsItem.General(title: .text_ClearPlaybackHistory)
-          .image(name: ["document.badge.clock", "doc.badge.clock", "doc"])
-          .extraViews(thumbCacheSizeLabel, actionButton(action: #selector(clearCacheBtnAction), symbolName: ["trash"]))
-          .hasDescription(content: .text_DeleteAllPlaybackHistories)
-        SettingsItem.General(title: .text_ClearThumbnailCache)
-          .image(name: "photo")
-          .extraViews(thumbCacheSizeLabel, actionButton(action: #selector(clearCacheBtnAction), symbolName: ["trash"]))
+      section {
+        SettingsList(title: .text_ClearCache) {
+          SettingsItem.General(title: .text_ClearSavedPlaybackProgress)
+            .image(name: "clock")
+            .extraViews(actionButton(action: #selector(clearWatchLaterBtnAction), symbolName: ["trash"]))
+            .hasDescription(content: .text_DeleteAllWatchLater)
+          SettingsItem.General(title: .text_ClearPlaybackHistory)
+            .image(name: ["document.badge.clock", "doc.badge.clock", "doc"])
+            .extraViews(thumbCacheSizeLabel, actionButton(action: #selector(clearCacheBtnAction), symbolName: ["trash"]))
+            .hasDescription(content: .text_DeleteAllPlaybackHistories)
+          SettingsItem.General(title: .text_ClearThumbnailCache)
+            .image(name: "photo")
+            .extraViews(thumbCacheSizeLabel, actionButton(action: #selector(clearCacheBtnAction), symbolName: ["trash"]))
+        }
       }
-      SettingsListView(title: .text_BrowserExtensions) {
-        SettingsItem.General(title: .text_GetBrowserExtensionsForIINA)
-          .image(name: "globe")
-          .hasDescription(content: .text_OpenLinksOrCurrentWebpage)
-          .withDetailView(browserExtensionView.view)
+      section {
+        SettingsList(title: .text_BrowserExtensions) {
+          SettingsItem.General(title: .text_GetBrowserExtensionsForIINA)
+            .image(name: "globe")
+            .hasDescription(content: .text_OpenLinksOrCurrentWebpage)
+            .withDetailView(browserExtensionView)
+        }
       }
     }
   }
 
-  func actionButton(action: Selector, symbolName: [String] = []) -> NSButton {
+  private func actionButton(action: Selector, symbolName: [String] = []) -> NSButton {
     return NSButton(title: "", image: .findSFSymbol(symbolName + ["arrow.right"])!, target: self, action: action)
   }
-  
+
   private func updateThumbnailCacheStat() {
     thumbCacheSizeLabel.stringValue = "\(FloatingPointByteCountFormatter.string(fromByteCount: CacheManager.shared.getCacheSize(), countStyle: .binary))B"
   }
@@ -142,18 +148,18 @@ fileprivate func makeLabel() -> NSTextField {
 
 fileprivate class SetAsDefaultSheetWindow: NSWindow {
   var contextWindow: NSWindow!
-  
+
   private let label: NSTextField
   private let okButton: NSButton
   private let cancelButton: NSButton
-  
+
   private let videoCheckBox: NSButton
   private let audioCheckBox: NSButton
   private let playListCheckBox: NSButton
 
   init(l10n: SettingsLocalization.Context) {
     let style: NSWindow.StyleMask = [.titled, .resizable, .fullSizeContentView]
-    
+
     self.okButton = NSButton(title: l10n.localized(.text_OK), target: nil, action: nil)
     okButton.translatesAutoresizingMaskIntoConstraints = false
     self.cancelButton = NSButton(title: l10n.localized(.text_Cancel), target: nil, action: nil)
@@ -171,29 +177,29 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
                styleMask: style,
                backing: .buffered,
                defer: false)
-    
+
     okButton.target = self
     okButton.action = #selector(okBtnAction)
     cancelButton.target = self
     cancelButton.action = #selector(cancelBtnAction)
-    
+
     let stackView = NSStackView(views: [label, videoCheckBox, audioCheckBox, playListCheckBox])
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.orientation = .vertical
     stackView.spacing = 8
     stackView.alignment = .leading
-    
+
     contentView?.addSubview(stackView)
     contentView?.addSubview(okButton)
     contentView?.addSubview(cancelButton)
-    
+
     stackView.padding(.leading(24), .trailing(24), .top(24))
       .spacing(to: okButton, .bottom(16))
     cancelButton.center(with: okButton, y: true)
     okButton.padding(.bottom(24), .trailing(24))
       .spacing(to: cancelButton, .leading(8))
   }
-  
+
   @objc func okBtnAction(_ sender: Any) {
     guard let window = contextWindow else { return }
     guard
@@ -261,7 +267,7 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
 
 fileprivate class BrowserExtensionView: SettingsAccessory.Base {
   func linkButton(_ key: SettingsLocalization.Key, _ selector: Selector, _ symbolName: [String] = []) -> NSButton {
-    let button = makeButton(key)
+    let button = ui.button(key)
     button.image = .findSFSymbol(symbolName + ["square.and.arrow.down"])
     button.imagePosition = .imageTrailing
     button.target = self
@@ -271,15 +277,15 @@ fileprivate class BrowserExtensionView: SettingsAccessory.Base {
 
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
-    
+
     let chromeBtn = linkButton(.text_Chrome, #selector(extChromeBtnAction))
     let firefoxBtn = linkButton(.text_Firefox, #selector(extFirefoxBtnAction))
     let safariBtn = linkButton(.text_Safari, #selector(extSafariBtnAction), ["safari"])
-    let stackView = makeStackView([safariBtn, chromeBtn, firefoxBtn])
+    let stackView = ui.hStack(safariBtn, chromeBtn, firefoxBtn)
     view.addSubview(stackView)
-    stackView.padding(.top(0), .bottom(16), .leading(SettingsSubListView.padding), .trailing(8))
+    stackView.padding(.top(0), .bottom(16), .leading(SettingsSubList.indent), .trailing(8))
   }
-  
+
   @objc func extChromeBtnAction(_ sender: Any) {
     NSWorkspace.shared.open([URL(string: AppData.chromeExtensionLink)!], withApplicationAt: NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.google.Chrome") ?? NSWorkspace.shared.urlForApplication(toOpen: URL(string: "http://")!)!, configuration: NSWorkspace.OpenConfiguration())
   }
@@ -287,7 +293,7 @@ fileprivate class BrowserExtensionView: SettingsAccessory.Base {
   @objc func extFirefoxBtnAction(_ sender: Any) {
     NSWorkspace.shared.open([URL(string: AppData.firefoxExtensionLink)!], withApplicationAt: NSWorkspace.shared.urlForApplication(withBundleIdentifier: "org.mozilla.firefox") ?? NSWorkspace.shared.urlForApplication(toOpen: URL(string: "http://")!)!, configuration: NSWorkspace.OpenConfiguration())
   }
-  
+
   @objc func extSafariBtnAction() {
     SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.colliderli.iina.OpenInIINA")
   }

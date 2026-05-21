@@ -26,7 +26,7 @@ class AutoFileMatcher {
   private var subtitles: [FileInfo] = []
   private var subsGroupedBySeries: [String: [FileInfo]] = [:]
   private var unmatchedVideos: [FileInfo] = []
-  
+
   private let subsystem: Logger.Subsystem
 
   private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
@@ -42,6 +42,10 @@ class AutoFileMatcher {
   /// checkTicket
   private func checkTicket() throws {
     try player.checkTicket(ticket)
+  }
+
+  private var mediaFiles: [FileInfo] {
+    filesGroupedByMediaType[.video]! + filesGroupedByMediaType[.audio]!
   }
 
   private func getAllMediaFiles() throws {
@@ -199,7 +203,7 @@ class AutoFileMatcher {
     let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.enum(for: .subAutoLoadIINA)
     guard subAutoLoadOption != .disabled else { return }
 
-    for video in filesGroupedByMediaType[.video]! {
+    for video in mediaFiles {
       var matchedSubs = Set<FileInfo>()
       log("Matching for \(video.filename)")
 
@@ -287,7 +291,7 @@ class AutoFileMatcher {
     }
 
     try checkTicket()
-    player.info.currentVideosInfo = filesGroupedByMediaType[.video]!
+    player.info.currentVideosInfo = mediaFiles
   }
 
   private func forceMatchUnmatchedVideos() throws {
@@ -314,7 +318,7 @@ class AutoFileMatcher {
           if dist < minDistToVideo { minDistToVideo = dist }
         }
         guard minDistToVideo != .max else { continue }
-        sub.minDist = filesGroupedByMediaType[.video]!.filter { sub.dist[$0] == minDistToVideo }
+        sub.minDist = mediaFiles.filter { sub.dist[$0] == minDistToVideo }
       }
 
       // match them
@@ -355,7 +359,7 @@ class AutoFileMatcher {
 
       // group video and sub files
       log("Grouping video files...")
-      videosGroupedBySeries = FileGroup.group(files: filesGroupedByMediaType[.video]!).flatten()
+      videosGroupedBySeries = FileGroup.group(files: mediaFiles).flatten()
       log("Finished with \(videosGroupedBySeries.count) groups")
 
       log("Grouping sub files...")

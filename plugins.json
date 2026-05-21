@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Anime4K",
+    "url": "https://github.com/yorkyang2333/iina-anime4k",
+    "desc": "Apply Anime4K shaders for real-time anime upscaling.",
+    "id": "com.yorkyang2333.anime4k"
+  },
+  {
+    "name": "Bookmarks",
+    "url": "https://github.com/wyattowalsh/iina-plugin-bookmarks",
+    "desc": "Save and manage video timestamps.",
+    "id": "com.wyattowalsh.iina-plugin-bookmarks"
+  },
+  {
+    "name": "Clickable Subtitles",
+    "url": "https://github.com/kerim/iina-clickable-subtitles",
+    "desc": "Click subtitles to define words (macOS Look Up).",
+    "id": "io.github.niyaro.iina-clickable-subtitles"
+  },
+  {
+    "name": "Danmaku",
+    "url": "https://github.com/xjbeta/iina-plugin-danmaku",
+    "desc": "Overlay comments/danmaku on video.",
+    "id": "com.xjbeta.danmaku"
+  },
+  {
+    "name": "Danmaku Cosmos",
+    "url": "https://github.com/karappo-yu/iina-plugin-danmaku-cosmos",
+    "desc": "Niconico/Bilibili danmaku with CSS/Canvas dual rendering, Comment Art support.",
+    "id": "com.danmaku-cosmos.iina-plugin"
+  },
+  {
+    "name": "Episode Info",
+    "url": "https://github.com/Zain-Imam/iina-episode-info",
+    "desc": "TMDB episode/movie info overlay on pause, with built-in subtitle search.",
+    "id": "com.Zain-Imam.episodeinfo"
+  },
+  {
+    "name": "File Viewer",
+    "url": "https://github.com/qktechies/iina-plugin-file-viewer",
+    "desc": "bookmark folders, browse directory contents, and play video files directly within IINA.",
+    "id": "com.qkong.iina-plugin-file-viewer"
+  },
+  {
+    "name": "Jellyfin",
+    "url": "https://github.com/mhajder/iina-jellyfin",
+    "desc": "Browse and play media from Jellyfin servers.",
+    "id": "com.mhajder.iina-jellyfin"
+  },
+  {
+    "name": "Jump to Frame",
+    "url": "https://github.com/bbeny123/iina-jump-to-frame",
+    "desc": "Navigate video by specific frame number.",
+    "id": "io.iina.jump-to-frame"
+  },
+  {
+    "name": "Hold to Speed",
+    "url": "https://github.com/Tommy12356F/iina-hold-to-speed",
+    "desc": "Hold Space to play at 2× speed, just like YouTube.",
+    "id": "com.vedant.hold-to-speed"
+  },
+  {
+    "name": "ListenBrainz Scrobbler",
+    "url": "https://git.notfire.cc/notfire/iina-listenbrainz",
+    "desc": "Scrobble your music to ListenBrainz.",
+    "id": "cc.notfire.iina-listenbrainz"
+  },
+  {
+    "name": "Multiple Clips",
+    "url": "https://github.com/karthisnk/multi-cutter-iina",
+    "desc": "multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.",
+    "id": "com.recorder.iina-plugin"
+  },
+  {
+    "name": "PiP Toggle for IINA",
+    "url": "https://github.com/nastarandarjani/iina-pip-toggle",
+    "desc": "Simple plugin to toggle Picture-in-Picture (PiP) to fullscreen.",
+    "id": "com.user.piptoggle"
+  },
+  {
+    "name": "Playlist Pro",
+    "url": "https://github.com/CatCodeDanix/iina-playlist-pro",
+    "desc": "Seamless management of local and online playlists.",
+    "id": "com.danialabdoli.playlistpro"
+  },
+  {
+    "name": "PolyScript",
+    "url": "https://github.com/SammoMichael/polyplugin-release",
+    "desc": "Dual subtitles, hover dictionary, and AI-assisted translation for language learning.",
+    "id": "app.polyscript.iina-plugin"
+  },
+  {
+    "name": "recorder",
+    "url": "https://github.com/5thDimensionalVader/recorder-iina",
+    "desc": "to clip a video using ffmpeg.",
+    "id": "com.recorder.iina-plugin"
+  },
+  {
+    "name": "Skip Intro",
+    "url": "https://github.com/pparanoiidd/iina-skip-intro",
+    "desc": "Detect and skip intros, recaps and credits.",
+    "id": "com.pparanoiidd.skipintro"
+  },
+  {
+    "name": "Trakt Scrobbler",
+    "url": "https://github.com/i3p9/iina-trakt-scrobbler",
+    "desc": "Trakt.tv scrobbler plugin for IINA.",
+    "id": "io.github.fahim.iinatraktscrobbler"
+  }
+]

@@ -114,7 +114,7 @@ class PlayerCore: NSObject {
           let relevantActivePlayerCore = activePlayerCores.first { $0.info.currentURL == url }
           
           if let relevantActivePlayerCore {
-            relevantActivePlayerCore.mainWindow.window?.makeKeyAndOrderFront(nil)
+            relevantActivePlayerCore.currentController.window?.makeKeyAndOrderFront(nil)
             return currentReturnValue
           }
         }
@@ -539,6 +539,10 @@ class PlayerCore: NSObject {
     // Better to directly reset icc-profile-auto. See issue #5727 for details.
     mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
 
+    // Delay force-window until an actual file load to avoid Xcode-launched app startup hanging
+    // while mpv tries to create a VO before IINA has entered its normal media-open path.
+    mpv.setString(MPVOption.Window.forceWindow, "yes", level: .verbose)
+
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading
@@ -636,6 +640,10 @@ class PlayerCore: NSObject {
   func initVideo() {
     // init mpv render context.
     mpv.mpvInitRendering()
+    // `force-window=immediate` makes audio-only subtitle rendering work with `vo=libmpv`,
+    // but setting it before render initialization can race the VO thread against IINA's
+    // render context setup. Switch to `immediate` only after the render context exists.
+    mpv.setString(MPVOption.Window.forceWindow, "immediate", level: .verbose)
     mainWindow.videoView.startDisplayLink()
     log("Initialized rendering")
     MemoryUsage.shared.logUsage("after rendering initialized")
@@ -772,15 +780,8 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    // if received video size before switching to music mode, hide default album art
-    let width, height: Int
-    if info.vid != 0 {
-      miniPlayer.defaultAlbumArt.isHidden = true
-      (width, height) = videoSizeForDisplay
-    } else {
-      (width, height) = (1, 1)
-    }
-
+    miniPlayer.refreshArtworkVisibility()
+    let (width, height) = miniPlayer.videoSizeForDisplayInMusicMode()
     let aspect = CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
     miniPlayer.window?.layoutIfNeeded()
@@ -806,6 +807,7 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
+
     miniPlayer.pendingShow = true
     if showMiniPlayer {
       notifyWindowVideoSizeChanged()
@@ -859,7 +861,9 @@ class PlayerCore: NSObject {
       mainWindow.updateTitle()
       notifyWindowVideoSizeChanged()
     }
+ 
     lyricsController.refreshCurrentOverlay()
+
     mainWindow.forceDraw("exited music mode")
     events.emit(.musicModeChanged, data: false)
   }
@@ -2026,7 +2030,6 @@ class PlayerCore: NSObject {
     MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
-    currentMediaIsAudio = .unknown
 
     info.currentURL = path.contains("://") ?
       URL(string: path.addingPercentEncoding(withAllowedCharacters: .urlAllowed) ?? path) :
@@ -2182,7 +2185,8 @@ class PlayerCore: NSObject {
     }
 
     if self.isInMiniPlayer {
-      miniPlayer.defaultAlbumArt.isHidden = self.info.vid != 0
+      miniPlayer.refreshArtworkVisibility()
+      miniPlayer.handleVideoSizeChange()
     }
 
     // add to history
@@ -2224,6 +2228,25 @@ class PlayerCore: NSObject {
     mainWindow?.volumeSlider.isHidden = (info.aid == 0)
     postNotification(.iinaAIDChanged)
     sendOSD(.track(info.currentTrack(.audio) ?? .noneAudioTrack))
+  }
+
+  /// The mpv [audio-device-list](https://mpv.io/manual/stable/#command-interface-audio-device-list)
+  /// property changed.
+  /// - Important: The mpv [audio-device](https://mpv.io/manual/stable/#command-interface-audio-device)
+  ///     property value is not guaranteed to reflect the audio device that is actually in use. When a selected device is removed the
+  ///     value of this property continues to reflect the device that is no longer present even though `libmpv` has switched to
+  ///     another audio device. This will cause the IINA `Audio Device` menu to malfunction. To handle the problematic behavior
+  ///     of the `audio-device` property, whenever the device list changes this method checks if the device returned by
+  ///     `audio-device` is present in the new list of audio devices. If the audio device cannot be found the `audio-device`
+  ///     property is set to `auto` so that both IINA and mpv are in agreement on the selected audio device. For more information
+  ///     see issue [#6034](https://github.com/iina/iina/issues/6034).
+  func audioDeviceListChanged() {
+    guard info.state.active else { return }
+    let devices = getAudioDevices()
+    let device = mpv.getString(MPVProperty.audioDevice)
+    guard !devices.contains(where: {$0.name == device}) else { return }
+    log("Selected audio device is no longer present, setting selected device to auto")
+    setAudioDevice("auto")
   }
 
   func chapterChanged() {
@@ -2388,6 +2411,9 @@ class PlayerCore: NSObject {
     info.secondSid = Int(mpv.getInt(MPVOption.Subtitles.secondarySid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.secondSub) ?? .noneSubTrack))
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
   }
 
   func secondSubVisibilityChanged(_ visible: Bool) {
@@ -2395,6 +2421,9 @@ class PlayerCore: NSObject {
     info.isSecondSubVisible = visible
     sendOSD(visible ? .secondSubVisible : .secondSubHidden)
     postNotification(.iinaSecondSubVisibilityChanged)
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
   }
 
   func sidChanged() {
@@ -2402,6 +2431,17 @@ class PlayerCore: NSObject {
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
+  }
+
+  func subScaleChanged(_ scale: Double) {
+    guard scale != 0 else { return }
+    let displayValue = scale >= 1 ? scale : -1 / scale
+    let truncated = round(displayValue * 100) / 100
+    sendOSD(.subScale(truncated))
+    needReloadQuickSettingsView()
   }
 
   func speedChanged(_ speed: Double) {
@@ -2429,6 +2469,9 @@ class PlayerCore: NSObject {
     info.isSubVisible = visible
     sendOSD(visible ? .subVisible : .subHidden)
     postNotification(.iinaSubVisibilityChanged)
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+    }
   }
 
   func trackListChanged() {
@@ -2439,8 +2482,7 @@ class PlayerCore: NSObject {
     log("Track list changed")
     getTrackInfo()
     getSelectedTracks()
-    let audioStatus = checkCurrentMediaIsAudio()
-    currentMediaIsAudio = audioStatus
+    let audioStatus = info.isAudio
 
     // if need to switch to music mode
     if Preference.bool(for: .autoSwitchToMusicMode) {
@@ -2454,6 +2496,12 @@ class PlayerCore: NSObject {
         switchBackFromMiniPlayer(automatically: true, showMainWindow: false)
       }
     }
+
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+      miniPlayer.handleVideoSizeChange()
+    }
+
     postNotification(.iinaTracklistChanged)
   }
 
@@ -2485,6 +2533,11 @@ class PlayerCore: NSObject {
     info.vid = Int(mpv.getInt(MPVOption.TrackSelection.vid))
     postNotification(.iinaVIDChanged)
     sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
+    if isInMiniPlayer {
+      miniPlayer.refreshArtworkVisibility()
+      miniPlayer.handleVideoSizeChange()
+    }
+
   }
 
   func windowScaleChanged() {
@@ -2780,7 +2833,7 @@ class PlayerCore: NSObject {
 
   func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil, external: Bool = false) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectedly
-    guard mainWindow.loaded, info.state.active,
+    guard !isInMiniPlayer, mainWindow.loaded, info.state.active,
           Preference.bool(for: .enableOSD) || osd.alwaysEnabled, !osd.isDisabled else { return }
     if info.disableOSDForFileLoading && !external {
       guard case .fileStart = osd else {
@@ -3107,26 +3160,7 @@ class PlayerCore: NSObject {
     }
     self.info.setCachedMetadata(path, result)
   }
-
-  enum CurrentMediaIsAudioStatus {
-    case unknown
-    case isAudio
-    case notAudio
-  }
-
-  var currentMediaIsAudio = CurrentMediaIsAudioStatus.unknown
-
-  func checkCurrentMediaIsAudio() -> CurrentMediaIsAudioStatus {
-    let noVideoTrack = info.videoTracks.isEmpty
-    let noAudioTrack = info.audioTracks.isEmpty
-    if noVideoTrack && noAudioTrack {
-      return .unknown
-    }
-    let allVideoTracksAreAlbumCover = !info.videoTracks.contains { !$0.isAlbumart }
-    return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
-  }
 }
-
 
 extension PlayerCore: FFmpegControllerDelegate {
 

@@ -98,15 +98,22 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 	port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
 	```
 
-5. Open `iina.xcodeproj` in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
+5. Link the *yt-dlp* dependency to deps/executable
 
-6. Remove all references to `.dylib` files from the Frameworks group in the sidebar and add all the `.dylib` files in `deps/lib` to that group by clicking  "Add Files to iina..." in the context menu.
+   ```console
+   mkdir -p deps/executable
+   ln -s $(which yt-dlp) deps/executable/youtube-dl
+   ```
 
-7. Add all the imported `.dylib` files into the "Copy Dylibs" phase under "Build Phases" tab of the iina target.
+6. Open `iina.xcodeproj` in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
-8. Make sure the necessary `.dylib` files are present in the "Link Binary With Libraries" phase under "Build Phases". Xcode should have already added all dylibs under this section.
+7. Remove all references to `.dylib` files from the Frameworks group in the sidebar and add all the `.dylib` files in `deps/lib` to that group by clicking  "Add Files to iina..." in the context menu.
 
-9. Build the project.
+8. Add all the imported `.dylib` files into the "Copy Dylibs" phase under "Build Phases" tab of the iina target.
+
+9. Make sure the necessary `.dylib` files are present in the "Link Binary With Libraries" phase under "Build Phases". Xcode should have already added all dylibs under this section.
+
+10. Build the project.
 
 ## Contributing
 
@@ -135,17 +142,17 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **[File Viewer](https://github.com/qktechies/iina-plugin-file-viewer)** (`qktechies/iina-plugin-file-viewer`) - bookmark folders, browse directory contents, and play video files directly within IINA.
 - **[Jellyfin](https://github.com/mhajder/iina-jellyfin)** (`mhajder/iina-jellyfin`) - Browse and play media from Jellyfin servers.
 - **[Jump to Frame](https://github.com/bbeny123/iina-jump-to-frame)** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
+- **[Hold to Speed](https://github.com/Tommy12356F/iina-hold-to-speed)** (`Tommy12356F/iina-hold-to-speed`) - Hold Space to play at 2× speed, just like YouTube.
 - **[ListenBrainz Scrobbler](https://git.notfire.cc/notfire/iina-listenbrainz)** - Scrobble your music to ListenBrainz.
 - **[Multiple Clips](https://github.com/karthisnk/multi-cutter-iina)** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
 - **[PiP Toggle for IINA](https://github.com/nastarandarjani/iina-pip-toggle)** (`nastarandarjani/iina-pip-toggle`) - Simple plugin to toggle Picture-in-Picture (PiP) to fullscreen.
+- **[Playlist Pro](https://github.com/CatCodeDanix/iina-playlist-pro)** (`CatCodeDanix/iina-playlist-pro`) - Seamless management of local and online playlists.
 - **[PolyScript](https://github.com/SammoMichael/polyplugin-release)** (`SammoMichael/polyplugin-release`) - Dual subtitles, hover dictionary, and AI-assisted translation for language learning.
 - **[recorder](https://github.com/5thDimensionalVader/recorder-iina)** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 - **[Skip Intro](https://github.com/pparanoiidd/iina-skip-intro)** (`pparanoiidd/iina-skip-intro`) - Detect and skip intros, recaps and credits.
+- **[Trakt Scrobbler](https://github.com/i3p9/iina-trakt-scrobbler)** (`i3p9/iina-trakt-scrobbler`) - Trakt.tv scrobbler plugin for IINA.
+
 
 > 💡 **Want to build your own plugin?**
 >
 > Explore the existing plugins listed here to learn how they work. If you create a new plugin or improve an existing one, feel free to contribute back by adding it to this list via a pull request.
-
-> 🚀 **Interested in creating an IINA plugin?**
->
-> Start by exploring the existing plugins here to understand patterns and best practices. Once you’ve built your own plugin, please contribute back by adding it to this README so others can discover and use it.

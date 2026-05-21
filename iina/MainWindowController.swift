@@ -39,7 +39,6 @@ fileprivate let OSDAnimationDuration = 0.5
 fileprivate let SideBarAnimationDuration = 0.2
 fileprivate let CropAnimationDuration = 0.2
 
-
 fileprivate extension NSStackView.VisibilityPriority {
   static let detachEarly = NSStackView.VisibilityPriority(rawValue: 850)
   static let detachEarlier = NSStackView.VisibilityPriority(rawValue: 800)
@@ -313,7 +312,11 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  var sideBarStatus: SideBarViewType = .hidden
+  var sideBarStatus: SideBarViewType = .hidden {
+    didSet {
+      NotificationCenter.default.post(name: .iinaSidebarStatusChanged, object: nil)
+    }
+  }
 
   enum PIPStatus {
     case notInPIP
@@ -452,7 +455,8 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
-  @IBOutlet weak var timePreviewWhenSeek: NSTextField!
+  @IBOutlet weak var timePreviewTextField: NSTextField!
+  @IBOutlet weak var timePreviewVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var settingsButton: NSButton!
@@ -627,10 +631,14 @@ class MainWindowController: PlayerWindowController {
 
     // thumbnail peek view
     window.contentView?.addSubview(thumbnailPeekView)
+    window.contentView?.addSubview(timePreviewVisualEffectView)
     thumbnailPeekView.isHidden = true
+    timePreviewVisualEffectView.isHidden = true
+    timePreviewVisualEffectView.roundCorners(withRadius: 5)
+    timePreviewTextField.font = monospacedFont
 
     // other initialization
-    titleBarBottomBorder.fillColor = NSColor(named: .titleBarBorder)!
+    titleBarBottomBorder.fillColor = NSColor.titleBarBorder
     cachedScreenCount = NSScreen.screens.count
     [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
       $0?.state = .active
@@ -641,10 +649,9 @@ class MainWindowController: PlayerWindowController {
     additionalInfoView.roundCorners(withRadius: 10)
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
-    timePreviewWhenSeek.isHidden = true
     bottomView.isHidden = true
     pipOverlayView.isHidden = true
-    
+
     if player.disableUI { hideUI() }
 
     // add user default observers
@@ -724,6 +731,12 @@ class MainWindowController: PlayerWindowController {
     }
 
 
+    // Observers for toolbar buttons
+    let notifications: [Notification.Name] = [.iinaPIPStatusChanged, .iinaFullscreenChanged, .iinaSidebarStatusChanged]
+    notifications.forEach {
+      NotificationCenter.default.addObserver(self, selector: #selector(updateOSCToolbarButtons(_:)), name: $0, object: nil)
+    }
+
     player.events.emit(.windowLoaded)
 
     // Must workaround an AppKit defect in some versions of macOS. This defect is known to exist in
@@ -790,6 +803,31 @@ class MainWindowController: PlayerWindowController {
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: buttons.count > 4)
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
+    }
+  }
+
+  @objc
+  private func updateOSCToolbarButtons(_ notification: Notification) {
+
+    func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
+      let buttons = fragToolbarView.subviews as! [NSButton]
+      let currentButton = buttons.first(where: { $0.tag == button.rawValue })
+      currentButton?.image = isHighlighted ? button.alternateImage() : button.image()
+    }
+
+    let enable = (notification.userInfo?["enable"] as? Bool ?? false)
+    switch notification.name {
+    case .iinaPIPStatusChanged:
+      highlight(.pip, enable)
+    case .iinaFullscreenChanged:
+      highlight(.fullScreen, enable)
+    case .iinaSidebarStatusChanged:
+      // no userInfo is provided in this notification
+      highlight(.settings, sideBarStatus == .settings)
+      highlight(.plugins, sideBarStatus == .plugins)
+      highlight(.playlist, sideBarStatus == .playlist)
+    default:
+      break
     }
   }
 
@@ -1172,7 +1210,7 @@ class MainWindowController: PlayerWindowController {
       if controlBarFloating.isDragging { return }
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
-        timePreviewWhenSeek.isHidden = false
+        timePreviewVisualEffectView.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
       refreshSeekTimeAndThumbnail(from: event)
@@ -1197,7 +1235,7 @@ class MainWindowController: PlayerWindowController {
     } else if obj == 1 {
       // slider
       isMouseInSlider = false
-      timePreviewWhenSeek.isHidden = true
+      timePreviewVisualEffectView.isHidden = true
       refreshSeekTimeAndThumbnail(from: event)
       thumbnailPeekView.isHidden = true
     }
@@ -1430,7 +1468,7 @@ class MainWindowController: PlayerWindowController {
     setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
     thumbnailPeekView.isHidden = true
-    timePreviewWhenSeek.isHidden = true
+    timePreviewVisualEffectView.isHidden = true
     isMouseInSlider = false
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
@@ -1486,6 +1524,7 @@ class MainWindowController: PlayerWindowController {
     
     updateAdditionalInfo()
     player.events.emit(.windowFullscreenChanged, data: true)
+    NotificationCenter.default.post(name: .iinaFullscreenChanged, object: nil, userInfo: ["enable": true])
   }
 
   /// Called if the window failed to enter full screen mode.
@@ -1556,7 +1595,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     thumbnailPeekView.isHidden = true
-    timePreviewWhenSeek.isHidden = true
+    timePreviewVisualEffectView.isHidden = true
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
@@ -1650,6 +1689,7 @@ class MainWindowController: PlayerWindowController {
     updateWindowParametersForMPV()
 
     player.events.emit(.windowFullscreenChanged, data: false)
+    NotificationCenter.default.post(name: .iinaFullscreenChanged, object: nil, userInfo: ["enable": false])
   }
 
   /// Called if the window failed to exit full screen mode.
@@ -1987,7 +2027,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidMiniaturize(_ notification: Notification) {
-    if Preference.bool(for: .togglePipByMinimizingWindow) && (!Preference.bool(for: .togglePipByMinimizingWindowForVideoOnly) ||  player.checkCurrentMediaIsAudio() == .notAudio) && !isWindowMiniaturizedDueToPip {
+    if Preference.bool(for: .togglePipByMinimizingWindow) && (!Preference.bool(for: .togglePipByMinimizingWindowForVideoOnly) ||  player.info.isAudio == .notAudio) && !isWindowMiniaturizedDueToPip {
       enterPIP()
     }
     player.events.emit(.windowMiniaturized)
@@ -1998,7 +2038,7 @@ class MainWindowController: PlayerWindowController {
       player.resume()
       isPausedDueToMiniaturization = false
     }
-    if Preference.bool(for: .togglePipByMinimizingWindow) && (!Preference.bool(for: .togglePipByMinimizingWindowForVideoOnly) ||  player.checkCurrentMediaIsAudio() == .notAudio) && !isWindowMiniaturizedDueToPip {
+    if Preference.bool(for: .togglePipByMinimizingWindow) && (!Preference.bool(for: .togglePipByMinimizingWindowForVideoOnly) ||  player.info.isAudio == .notAudio) && !isWindowMiniaturizedDueToPip {
       exitPIP()
     }
     player.events.emit(.windowDeminiaturized)
@@ -2567,7 +2607,7 @@ class MainWindowController: PlayerWindowController {
     let isCoveredByOSD = !osdVisualEffectView.isHidden && isMouseEvent(event, inAnyOf: [osdVisualEffectView])
     let isCoveredBySidebar = !sideBarView.isHidden && isMouseEvent(event, inAnyOf: [sideBarView])
     if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
-      updateTimeLabel(event.locationInWindow)
+      updateTimePreviewAndThumbnail(event.locationInWindow)
     } else {
       thumbnailPeekView.isHidden = true
     }
@@ -2588,7 +2628,7 @@ class MainWindowController: PlayerWindowController {
     guard oscPosition != .top else { return false }
     // The layout preference for the on screen controller is set to the default floating layout.
     // Must insure the top of the thumbnail would be below the top of the window.
-    let topOfThumbnail = timePreviewYPos + timePreviewWhenSeek.frame.height + thumbnailHeight
+    let topOfThumbnail = timePreviewYPos + timePreviewVisualEffectView.frame.height + thumbnailHeight
     // Normally the height of the usable area of the window can be obtained from the content
     // layout. But when the legacy full screen preference is enabled the layout height may be
     // larger than the content view if the display contains a camera housing. Use the lower of
@@ -2597,48 +2637,6 @@ class MainWindowController: PlayerWindowController {
     return topOfThumbnail <= windowContentHeight
   }
 
-  /** Display time label when mouse over slider */
-  private func updateTimeLabel(_ posInWindow: NSPoint) {
-    let mouseXPos = playSlider.convert(posInWindow, from: nil).x
-    let timeLabelXPos = round(mouseXPos + playSlider.frame.origin.x - timePreviewWhenSeek.frame.width / 2)
-    var timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
-    if oscPosition == .bottom {
-      timeLabelYPos -= 2
-    }
-    timePreviewWhenSeek.frame.origin = NSPoint(x: timeLabelXPos, y: timeLabelYPos)
-    let sliderFrame = playSlider.bounds
-    let sliderFrameInWindow = playSlider.superview!.convert(playSlider.frame.origin, to: nil)
-    var percentage = Double((mouseXPos - 3) / (sliderFrame.width - 6))
-    if percentage < 0 {
-      percentage = 0
-    }
-
-    if let duration = player.info.videoDuration {
-      let previewTime = duration * percentage
-      timePreviewWhenSeek.stringValue = previewTime.stringRepresentation
-
-      if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
-        thumbnailPeekView.imageView.image = image.rotate(rotation)
-        thumbnailPeekView.isHidden = false
-
-        // In some formats (like most of Japanese TV video formats), display aspect ratios (DAR) are different from the
-        // sample aspect ratio (SAR). A typical configuration is SAR 1440x1080i (4:3) w/ DAR 1920x1080 (16:9). We use video
-        // display size to consider pixel formats as well as rotation from metadata properly display the thumbnail.
-        let (videoWidth, videoHeight) = player.videoSizeForDisplay
-        let displayAspectRatio = CGFloat(videoWidth) / CGFloat(videoHeight)
-
-        let width = CGFloat(UserDefaults.standard.integer(forKey: "thumbnailWidth"))
-        let height = round(width / displayAspectRatio)
-        let timePreviewFrameInWindow = timePreviewWhenSeek.superview!.convert(timePreviewWhenSeek.frame.origin, to: nil)
-        let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewFrameInWindow.y, thumbnailHeight: height)
-        let yPos = showAbove ? timePreviewFrameInWindow.y + timePreviewWhenSeek.frame.height : sliderFrameInWindow.y - height
-        thumbnailPeekView.frame.size = NSSize(width: width, height: height)
-        thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
-      } else {
-        thumbnailPeekView.isHidden = true
-      }
-    }
-  }
 
   func updateBufferIndicatorView() {
     guard loaded else { return }
@@ -3309,17 +3307,7 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active, player.info.state != .loading else { return }
     super.playSliderChanges(sender)
 
-    // seek and update time
-    let percentage = 100 * sender.doubleValue / sender.maxValue
-    // label
-    var timeLabelYPos = playSlider.frame.origin.y + playSlider.frame.height
-    if oscPosition == .bottom {
-      timeLabelYPos -= 2
-    }
-    timePreviewWhenSeek.frame.origin = CGPoint(
-      x: round(sender.knobPointPosition() - timePreviewWhenSeek.frame.width / 2),
-      y: timeLabelYPos)
-    timePreviewWhenSeek.stringValue = (player.info.videoDuration! * percentage * 0.01).stringRepresentation
+    updateTimePreview(sender.doubleValue / sender.maxValue)
   }
 
   @objc func toolBarButtonAction(_ sender: NSButton) {
@@ -3349,6 +3337,79 @@ class MainWindowController: PlayerWindowController {
       player.toggleLyricsVisibility()
     }
   }
+
+  override func handleIINACommand(_ cmd: IINACommand) {
+    super.handleIINACommand(cmd)
+    switch cmd {
+    case .toggleMusicMode:
+      player.switchToMiniPlayer()
+    default:
+      break
+    }
+  }
+
+  // MARK: - Time Preveiew & Thumbnail
+
+  /** Display time label when mouse over slider */
+  private func updateTimePreviewAndThumbnail(_ posInWindow: NSPoint) {
+    guard let duration = player.info.videoDuration else {
+      thumbnailPeekView.isHidden = true
+      timePreviewVisualEffectView.isHidden = true
+      return
+    }
+
+    let mouseXPos = playSlider.convert(posInWindow, from: nil).x
+    let percentage = max(0, Double((mouseXPos - 3) / (playSlider.bounds.width - 6)))
+
+    let previewTime = duration * percentage
+    updateTimePreview(percentage)
+    let sliderFrameInWindow = playSlider.convert(playSlider.frame, to: nil)
+
+    if player.info.thumbnailsReady, let image = player.info.getThumbnail(forSecond: previewTime.second)?.image {
+      thumbnailPeekView.imageView.image = image.rotate(rotation)
+      thumbnailPeekView.isHidden = false
+
+      // In some formats (like most of Japanese TV video formats), display aspect ratios (DAR) are different from the
+      // sample aspect ratio (SAR). A typical configuration is SAR 1440x1080i (4:3) w/ DAR 1920x1080 (16:9). We use video
+      // display size to consider pixel formats as well as rotation from metadata properly display the thumbnail.
+      let (videoWidth, videoHeight) = player.videoSizeForDisplay
+      let displayAspectRatio = CGFloat(videoWidth) / CGFloat(videoHeight)
+
+      let width = CGFloat(UserDefaults.standard.integer(forKey: "thumbnailWidth"))
+      let height = round(width / displayAspectRatio)
+      let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewVisualEffectView.frame.origin.y, thumbnailHeight: height)
+      let yPos = if showAbove {
+        max(sliderFrameInWindow.maxY, timePreviewVisualEffectView.frame.maxY) + 5
+      } else {
+        min(sliderFrameInWindow.minY, timePreviewVisualEffectView.frame.minY) - height - 5
+      }
+      thumbnailPeekView.frame.size = NSSize(width: width, height: height)
+      thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
+    }
+  }
+
+  private func updateTimePreview(_ percentage: Double) {
+    guard let duration = player.info.videoDuration else { return }
+    let time = duration * percentage
+    let chapterTitle = if let chapter = player.info.getChapter(forVideoTime: time) {
+      chapter.title + "\n"
+    } else {
+      ""
+    }
+    timePreviewTextField.stringValue = chapterTitle + time.stringRepresentation
+
+    let sliderFrame = playSlider.convert(playSlider.bounds, to: nil)
+    let timeLabelYPos: CGFloat
+    if oscPosition == .top {
+      timeLabelYPos = sliderFrame.origin.y - timePreviewVisualEffectView.bounds.height - 5
+    } else {
+      timeLabelYPos = sliderFrame.origin.y + playSlider.frame.height + 5
+    }
+    timePreviewVisualEffectView.frame.origin = CGPoint(
+      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewVisualEffectView.frame.width / 2),
+      y: timeLabelYPos)
+  }
+
 
   // MARK: - Utility
 
@@ -3406,6 +3467,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     }
 
     player.events.emit(.pipChanged, data: true)
+    NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": true])
   }
 
   func exitPIP() {
@@ -3417,7 +3479,6 @@ extension MainWindowController: PIPViewControllerDelegate {
       // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
       pip.dismiss(pipVideo!)
     }
-    player.events.emit(.pipChanged, data: false)
   }
 
   func doneExitingPIP() {
@@ -3444,6 +3505,8 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     isWindowMiniaturizedDueToPip = false
     isWindowHidden = false
+    player.events.emit(.pipChanged, data: false)
+    NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": false])
   }
 
   func prepareForPIPClosure(_ pip: PIPViewController) {

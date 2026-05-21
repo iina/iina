@@ -25,21 +25,8 @@ fileprivate func indicatorIcon(withColor color: NSColor) -> NSImage {
   return NSImage(systemSymbolName: "circle.fill", accessibilityDescription: nil)!.withSymbolConfiguration(.init(scale: .small))!.tinted(color)
 }
 
-// Used to measure the row height of the multi-line text label
-fileprivate let sizingTextField: NSTextField = {
-  let tf = NSTextField(labelWithString: "")
-  tf.maximumNumberOfLines = 0
-  tf.lineBreakMode = .byWordWrapping
-  tf.cell?.wraps = true
-  tf.cell?.isScrollable = false
-  tf.font = logFont
-  return tf
-}()
-
 class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate, NSSearchFieldDelegate {
   private let tableView = NSTableView()
-  private var rowHeightCache: [Int: CGFloat] = [:]
-  private var cachedColumnWidth: CGFloat = 0
   private let scrollView = NSScrollView()
 
   @Atomic private var buffer: [Logger.Log] = []
@@ -85,7 +72,6 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
       subtitleString += String(describing: filteredLogLevel)
       window.subtitle = subtitleString
 
-      rowHeightCache.removeAll(keepingCapacity: true)
     }
   }
 
@@ -154,6 +140,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     tableView.delegate = self
     tableView.style = .inset
     tableView.usesAlternatingRowBackgroundColors = true
+    tableView.usesAutomaticRowHeights = true
     tableView.userInterfaceLayoutDirection = .leftToRight
     tableView.allowsMultipleSelection = true
     tableView.allowsColumnReordering = false
@@ -172,6 +159,8 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
       }
       if let maxWidth {
         column.maxWidth = maxWidth
+      } else {
+        column.resizingMask = .autoresizingMask
       }
       return column
     }
@@ -364,11 +353,10 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   }
 
   private func scrollToBottom() {
-    // macOS couldn't calculate the frame size correctly when the row height is variable and
-    // is not rendered. After the first scroll, all rows should be rendered, which makes the
-    // second frame size correct. Scroll the second time to correctly scroll to the last row.
-    tableView.scroll(NSPoint(x: 0, y: tableView.frame.size.height))
-    tableView.scroll(NSPoint(x: 0, y: tableView.frame.size.height))
+    guard tableView.numberOfRows > 0 else { return }
+    // Force layout so auto row heights are up to date before scrolling.
+    tableView.layoutSubtreeIfNeeded()
+    tableView.scrollRowToVisible(tableView.numberOfRows - 1)
   }
 
   @objc private func checkIfAtBottom() {
@@ -472,10 +460,16 @@ extension LogWindowController: NSTableViewDelegate {
       cell.textField?.stringValue = log.subsystem
     case "message":
       cell.textField?.stringValue = log.message
+      cell.textField?.preferredMaxLayoutWidth = column.width - textFieldHorizontalPadding * 2
     default:
       break
     }
     return cell
+  }
+
+  // Only provide an estimation for NSTableView, actual height will be calculated from Autolayout
+  func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    return 18
   }
 
   func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
@@ -493,56 +487,40 @@ extension LogWindowController: NSTableViewDelegate {
       cell.addSubview(imageView)
       cell.imageView = imageView
       imageView.size(width: 12, height: 12)
-      imageView.padding(ALConstraint.top(2.5))
+      imageView.padding(.top(2.5))
       imageView.center(x: true)
     } else {
-      let textField = NSTextField(labelWithString: "")
+      let textField = NSTextField(wrappingLabelWithString: "")
       textField.font = logFont
+      textField.isSelectable = false
       textField.translatesAutoresizingMaskIntoConstraints = false
+      cell.addSubview(textField)
+      cell.textField = textField
 
       if columnID == "message" {
         textField.lineBreakMode = .byWordWrapping
         textField.maximumNumberOfLines = 0
         textField.cell?.isScrollable = false
+        textField.padding(.vertical(textFieldVerticalPadding))
       } else {
         textField.lineBreakMode = .byTruncatingTail
         textField.maximumNumberOfLines = 1
+        textField.padding(.top(textFieldVerticalPadding))
       }
-
-      cell.addSubview(textField)
-      cell.textField = textField
-
-      textField.padding(.vertical(textFieldVerticalPadding), .horizontal(textFieldHorizontalPadding))
+      textField.padding(.horizontal(textFieldHorizontalPadding))
     }
     return cell
   }
 
-  func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-    let columnWidth = tableView.tableColumns[3].width
-    if columnWidth != cachedColumnWidth {
-      cachedColumnWidth = columnWidth
-      rowHeightCache.removeAll(keepingCapacity: true)
-    }
-
-    if let cached = rowHeightCache[row] {
-      return cached
-    }
-
-    let availableWidth = columnWidth - textFieldHorizontalPadding * 2
-
-    let message = (arrayController.arrangedObjects as! [Logger.Log])[row].message.trimmingCharacters(in: .newlines)
-    sizingTextField.stringValue = message
-    sizingTextField.preferredMaxLayoutWidth = availableWidth
-
-    let textHeight = sizingTextField.intrinsicContentSize.height
-    let rowHeight = textHeight + textFieldVerticalPadding * 2
-
-    rowHeightCache[row] = rowHeight
-    return rowHeight
-  }
-
   @objc private func columnDidResize() {
-    tableView.noteHeightOfRows(withIndexesChanged: IndexSet(integersIn: 0..<tableView.numberOfRows))
+    let messageColumn = tableView.tableColumns[3]
+    let maxWidth = messageColumn.width - textFieldHorizontalPadding * 2
+
+    tableView.enumerateAvailableRowViews { rowView, row in
+      guard let cell = rowView.view(atColumn: 3) as? NSTableCellView else { return }
+      cell.textField?.preferredMaxLayoutWidth = maxWidth
+      cell.textField?.invalidateIntrinsicContentSize()
+    }
   }
 
 }

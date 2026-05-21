@@ -121,6 +121,7 @@ class MPVController: NSObject {
     MPVProperty.trackList: MPV_FORMAT_NONE,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
+    MPVProperty.audioDeviceList: MPV_FORMAT_NONE,
     MPVOption.TrackSelection.vid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.aid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.sid: MPV_FORMAT_INT64,
@@ -1247,6 +1248,9 @@ class MPVController: NSObject {
 
     switch name {
 
+    case MPVProperty.audioDeviceList:
+      DispatchQueue.main.async { self.player.audioDeviceListChanged() }
+
     case MPVProperty.videoParams:
       DispatchQueue.main.async { self.player.needReloadQuickSettingsView() }
 
@@ -1403,12 +1407,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      let displayValue = data >= 1 ? data : -1/data
-      let truncated = round(displayValue * 100) / 100
-      DispatchQueue.main.async { [self] in
-        player.sendOSD(.subScale(truncated))
-        player.needReloadQuickSettingsView()
-      }
+      DispatchQueue.main.async { self.player.subScaleChanged(data) }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough
@@ -1554,7 +1553,6 @@ class MPVController: NSObject {
   }
 
   // MARK: - User Options
-
 
   private enum UserOptionType {
     case bool, int, float, string, color, other

@@ -912,6 +912,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       for query in queries {
         if query.name.hasPrefix("mpv_") {
           let mpvOptionName = String(query.name.dropFirst(4))
+          guard !mpvOptionName.contains("input-command") else {
+            Logger.log("mpv option \(mpvOptionName) rejected when parsing URL", level: .warning)
+            continue
+          }
           guard let mpvOptionValue = query.value else { continue }
           Logger.log("Setting \(mpvOptionName) to \(mpvOptionValue)")
           player.mpv.setString(mpvOptionName, mpvOptionValue)

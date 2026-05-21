@@ -7,18 +7,22 @@
 //
 
 class SettingsPageAdvanced: SettingsPage {
+  override var identifier: String {
+    "advanced"
+  }
+  
   override var title: String {
     return NSLocalizedString("preference.advanced", comment: "Advanced")
   }
-  
+
   override var image: NSImage {
     return makeSymbol("flask", fallbackImage: "pref_advanced")
   }
-  
+
   override var localizationTable: String {
     "SettingsAdvancedLocalizable"
   }
-  
+
   private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.userDefinedConfDir)
   private lazy var mpvOptionsEditor: MPVOptionsEditor = .init(l10n: localizationContext)
   private lazy var openLogFolderBtn: NSButton = {
@@ -27,17 +31,17 @@ class SettingsPageAdvanced: SettingsPage {
     return btn
   }()
 
-  override func content() -> NSView {
+  override func content() -> [SettingsSection] {
     return sections {
       sectionEnableAdvanced()
       sectionLogging()
       sectionMPV()
     }
   }
-  
-  private func sectionEnableAdvanced() -> [NSView] {
+
+  private func sectionEnableAdvanced() -> SettingsSection {
     return section {
-      SettingsListView() {
+      SettingsList() {
         SettingsItem.Switch()
           .bindTo(.enableAdvancedSettings)
           .image(name: ["flask"])
@@ -47,9 +51,9 @@ class SettingsPageAdvanced: SettingsPage {
     }
   }
 
-  private func sectionLogging() -> [NSView] {
+  private func sectionLogging() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Logging) {
+      SettingsList(title: .text_Logging) {
         SettingsItem.PopupButton()
           .bindTo(.logLevel, ofType: Logger.Level.self)
           .image(name: "cylinder.split.1x2")
@@ -57,28 +61,28 @@ class SettingsPageAdvanced: SettingsPage {
           .bindTo(.enableLogging)
           .extraViews(openLogFolderBtn)
       }
-      SettingsListView {
+      SettingsList {
         SettingsItem.General(title: .text_OpenLogWindow)
           .image(name: "macwindow")
           .extraViews(NSButton(image: .findSFSymbol(["arrow.right"])!, target: AppDelegate.shared, action: #selector(AppDelegate.showLogWindow)))
       }
     }
   }
-  
-  private func sectionMPV() -> [NSView] {
+
+  private func sectionMPV() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_MPVSettings) {
+      SettingsList(title: .text_MPVSettings) {
         SettingsItem.Switch()
           .bindTo(.useMpvOsd)
           .image(name: "ellipsis.bubble")
       }
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .image(name: ["folder.badge.gearshape", "folder.badge.gear"])
           .bindTo(.useUserDefinedConfDir)
           .extraViews(fileChooseView.textField, fileChooseView.chooseButton)
       }
-      SettingsListView {
+      SettingsList {
         SettingsItem.General(title: .text_AdditionalMpvOptions)
           .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
           .extraViews(mpvOptionsEditor.delBtn, mpvOptionsEditor.addBtn)
@@ -90,23 +94,28 @@ class SettingsPageAdvanced: SettingsPage {
 }
 
 fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate, NSTableViewDataSource {
-  let tableView: NSTableView
-  let addBtn: NSButton
-  let delBtn: NSButton
+  private static let dragType = NSPasteboard.PasteboardType("com.colliderli.iina.mpv-option-row")
+
+  let tableView: NSTableView = NSTableView()
+  let scrollView: NSScrollView = NSScrollView()
+  let addBtn: NSButton = NSButton()
+  let delBtn: NSButton = NSButton()
 
   var options: [[String]] = []
 
   override init(l10n: SettingsLocalization.Context) {
-    self.tableView = NSTableView()
-    self.addBtn = NSButton()
-    self.delBtn = NSButton()
     addBtn.bezelStyle = .push
     delBtn.bezelStyle = .push
 
     super.init(l10n: l10n)
-    
+
     let monoFont = NSFont.monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)
-    
+
+    scrollView.documentView = tableView
+    scrollView.drawsBackground = false
+    tableView.backgroundColor = .clear
+    tableView.focusRingType = .none
+    tableView.registerForDraggedTypes([MPVOptionsEditor.dragType])
     tableView.delegate = self
     tableView.dataSource = self
     let columnKey = NSTableColumn(identifier: .key)
@@ -119,11 +128,13 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     (columnValue.dataCell as? NSCell)?.font = monoFont
     tableView.addTableColumn(columnValue)
     tableView.columnAutoresizingStyle = .sequentialColumnAutoresizingStyle
+    tableView.rowHeight = 18
 
-    let stackView = makeStackView([tableView], orientation: .vertical)
+    let stackView = ui.vStack(scrollView)
     view.addSubview(stackView)
-    stackView.padding(.leading(SettingsSubListView.padding), .trailing(0), .bottom(0), .top(0))
-    
+    stackView.padding(.leading(SettingsSubList.indent + 8), .trailing(0), .bottom(8), .top(0))
+    stackView.size(height: 120)
+
     addBtn.image = .findSFSymbol(["plus"])
     addBtn.target = self
     addBtn.action = #selector(addOptionAction)
@@ -138,12 +149,12 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     }
     options = op
   }
-  
+
   private func saveToUserDefaults() {
     Preference.set(options, for: .userOptions)
     UserDefaults.standard.synchronize()
   }
-  
+
   @objc func addOptionAction(_ sender: AnyObject) {
     options.append(["name", "value"])
     tableView.reloadData()
@@ -198,5 +209,30 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
       tableView.reloadData()
     }
     delBtn.isEnabled = tableView.selectedRow != -1
+  }
+
+  func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> (any NSPasteboardWriting)? {
+    let item = NSPasteboardItem()
+    item.setString(String(row), forType: MPVOptionsEditor.dragType)
+    return item
+  }
+
+  func tableView(_ tableView: NSTableView, validateDrop info: any NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+    guard dropOperation == .above else { return [] }
+    return .move
+  }
+
+  func tableView(_ tableView: NSTableView, acceptDrop info: any NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+    guard let str = info.draggingPasteboard.string(forType: MPVOptionsEditor.dragType),
+          let srcRow = Int(str),
+          srcRow != row, srcRow != row - 1 else { return false }
+    let option = options.remove(at: srcRow)
+    let destRow = srcRow < row ? row - 1 : row
+    options.insert(option, at: destRow)
+    tableView.beginUpdates()
+    tableView.moveRow(at: srcRow, to: destRow)
+    tableView.endUpdates()
+    saveToUserDefaults()
+    return true
   }
 }

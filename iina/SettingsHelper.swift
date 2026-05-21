@@ -26,6 +26,12 @@ class SettingsUIHelper {
     self.l10n = l10n
   }
 
+  func button(_ key: SettingsLocalization.Key) -> NSButton {
+    let btn = NSButton(title: l10n.localized(key), target: nil, action: nil)
+    btn.translatesAutoresizingMaskIntoConstraints = false
+    return btn
+  }
+
   func popupButton(_ items: [(SettingsLocalization.Key, Int)]) -> NSPopUpButton {
     let button = NSPopUpButton()
     button.bezelStyle = .accessoryBarAction
@@ -49,24 +55,58 @@ class SettingsUIHelper {
     return textField
   }
 
-  func label(_ key: SettingsLocalization.Key) -> NSTextField {
+  func input(_ key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true) -> NSTextField {
+    let input = fixedAlignmentRect ? TextFieldWithFixedAlignmentRect() : NSTextField()
+    input.translatesAutoresizingMaskIntoConstraints = false
+    input.bezelStyle = .roundedBezel
+    input.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+    if isFixedSize {
+      input.size(width: 48, height: 25)
+    }
+    return input
+  }
+
+  func label(_ key: SettingsLocalization.Key, isSmall: Bool = true, isSecondary: Bool = true) -> NSTextField {
     let textField = NSTextField(labelWithString: l10n.localized(key))
-    textField.controlSize = .small
-    textField.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+    textField.translatesAutoresizingMaskIntoConstraints = false
+    if isSmall {
+      textField.controlSize = .small
+      textField.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+    }
+    if isSecondary {
+      textField.textColor = .secondaryLabelColor
+    }
     return textField
   }
 
-  func hStack(align: NSLayoutConstraint.Attribute = .firstBaseline, _ views: NSView...) -> NSStackView {
+  func colorWell(_ key: Preference.Key) -> NSColorWell {
+    let colorWell = NSColorWell()
+    colorWell.translatesAutoresizingMaskIntoConstraints = false
+    if #available(macOS 13.0, *) {
+      colorWell.colorWellStyle = .expanded
+    }
+    colorWell.size(height: 24)
+    colorWell.bind(.value, to: UserDefaults.standard,
+                   withKeyPath: key.rawValue,
+                   options: [.valueTransformer: MPVColorStringTransformer()])
+    return colorWell
+  }
+
+  func hStack(align: NSLayoutConstraint.Attribute = .centerY, spacing: CGFloat = 8, _ views: NSView...) -> NSStackView {
     let stackView = NSStackView(views: views)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.orientation = .horizontal
     stackView.alignment = align
+    stackView.spacing = spacing
     return stackView
   }
 
-  func vStack(_ views: NSView...) -> NSStackView {
+  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: CGFloat = 8, _ views: NSView...) -> NSStackView {
     let stackView = NSStackView(views: views)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.orientation = .vertical
-    stackView.alignment = .leading
+    stackView.alignment = align
+    stackView.spacing = spacing
     return stackView
   }
 
@@ -80,6 +120,12 @@ class SettingsUIHelper {
     let imageView = NSImageView(image: .findSFSymbol([symbol])!)
     imageView.size(width: size, height: size)
     return imageView
+  }
+
+  fileprivate class TextFieldWithFixedAlignmentRect: NSTextField {
+    override func frame(forAlignmentRect alignmentRect: NSRect) -> NSRect {
+      return alignmentRect
+    }
   }
 
   private class RadioTagTransformer: ValueTransformer {

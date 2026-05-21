@@ -7,29 +7,33 @@
 //
 
 class SettingsPageNetwork: SettingsPage {
+  override var identifier: String {
+    "network"
+  }
+  
   override var title: String {
     return NSLocalizedString("preference.network", comment: "Network")
   }
-  
+
   override var image: NSImage {
     return makeSymbol("globe", fallbackImage: "pref_network")
   }
-  
+
   override var localizationTable: String {
     "SettingsNetworkLocalizable"
   }
-  
-  override func content() -> NSView {
+
+  override func content() -> [SettingsSection] {
     return sections {
       sectionCache()
       sectionNetwork()
       sectionYTDL()
     }
   }
-  
-  private func sectionCache() -> [NSView] {
+
+  private func sectionCache() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Cache) {
+      SettingsList(title: .text_Cache) {
         SettingsItem.Switch()
           .image(name: ["inset.filled.topthird.middlethird.bottomthird.rectangle", ""])
           .bindTo(.enableCache)
@@ -47,10 +51,10 @@ class SettingsPageNetwork: SettingsPage {
       }
     }
   }
-  
-  private func sectionNetwork() -> [NSView] {
+
+  private func sectionNetwork() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_Network) {
+      SettingsList(title: .text_Network) {
         SettingsItem.LongInput()
           .bindTo(.userAgent)
           .image(name: ["person.crop.circle"])
@@ -63,15 +67,15 @@ class SettingsPageNetwork: SettingsPage {
       }
     }
   }
-  
-  private func sectionYTDL() -> [NSView] {
+
+  private func sectionYTDL() -> SettingsSection {
     return section {
-      SettingsListView(title: .text_YTDL) {
+      SettingsList(title: .text_YTDL) {
         SettingsItem.General(title: .text_onlineMediaPluginAdvice)
           .image(name: "puzzlepiece.extension")
           .hasDescription(content: .text_ytdlWarning)
       }
-      SettingsListView {
+      SettingsList {
         SettingsItem.Switch()
           .bindTo(.ytdlEnabled)
           .image(name: "square.and.arrow.down")

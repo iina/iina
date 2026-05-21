@@ -10,32 +10,6 @@ import Cocoa
 import CryptoKit
 import MediaPlayer
 
-extension NSSlider {
-  /**
-   Returns the position of the knob's center point along the slider's track.
-
-   This method calculates the horizontal position of the center of the slider's knob based on the slider's current value (`doubleValue`), the minimum and maximum values, and the slider's dimensions. It can be useful for custom drawing, animations, or hit detection related to the knob's position.
-
-   - Returns: A `CGFloat` representing the x-coordinate of the knob's center along the slider's width.
-
-   - Important: Ensure that the slider's `maxValue` is greater than `minValue`. An assertion is used to validate this.
-
-   Example usage:
-   ```swift
-   let slider = NSSlider(value: 50, minValue: 0, maxValue: 100, target: nil, action: nil)
-   let knobPosition = slider.knobPointPosition()
-   print("The knob is positioned at x-coordinate: \(knobPosition)")
-   ```
-   */
-  func knobPointPosition() -> CGFloat {
-    let sliderOrigin = frame.origin.x + knobThickness / 2
-    let sliderWidth = frame.width - knobThickness
-    assert(maxValue > minValue)
-    let knobPos = sliderOrigin + sliderWidth * CGFloat((doubleValue - minValue) / (maxValue - minValue))
-    return knobPos
-  }
-}
-
 extension CGPoint {
   /**
    Uses the Pythagorean theorem to calculate the distance between two points.

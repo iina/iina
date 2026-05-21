@@ -159,6 +159,9 @@ extension Notification.Name {
   static let iinaLyricsVisibilityChanged = Notification.Name("iinaLyricsVisibilityChanged")
   static let iinaLyricsAvailabilityChanged = Notification.Name("iinaLyricsAvailabilityChanged")
   static let iinaLyricsOverlayUpdated = Notification.Name("iinaLyricsOverlayUpdated")
+  static let iinaPIPStatusChanged = Notification.Name("iinaPIPStatusChanged")
+  static let iinaFullscreenChanged = Notification.Name("iinaFullscreenChanged")
+  static let iinaSidebarStatusChanged = Notification.Name("iinaSidebarStatusChanged")
 }
 
 enum IINAError: Error {

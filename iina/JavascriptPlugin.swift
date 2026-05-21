@@ -265,6 +265,10 @@ class JavascriptPlugin: NSObject {
     // If there is a iinaplgz file inside the latest release, use the plgz file
     
     let response = Just.get("https://api.github.com/repos\(url.path)/releases/latest")
+    guard response.ok else {
+      throw PluginError.cannotDownload(response.reason, response.text ?? "")
+    }
+
     if let json = response.json as? [String: Any],
        let assets = json["assets"] as? [[String: Any]],
        let plgzItem = assets.first(where: { ($0["name"] as? String)?.hasSuffix(".iinaplgz") ?? false }),

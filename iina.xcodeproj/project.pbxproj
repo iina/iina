@@ -176,6 +176,7 @@
 		518376DD2C23DD2300574F00 /* libgcc_s.1.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 518376D92C23DB1400574F00 /* libgcc_s.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		518376DE2C23DD2300574F00 /* libstdc++.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 518376DB2C23DB2F00574F00 /* libstdc++.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		51854CDA2A1C489300C40B78 /* FFmpegLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51854CD92A1C489300C40B78 /* FFmpegLogger.swift */; };
+		518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */ = {isa = PBXBuildFile; fileRef = 518DB7012FA6A2120024F0B0 /* write_info_plist_header.sh */; };
 		5196819A29EC963F00B05D55 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5196819929EC963F00B05D55 /* CoreDisplay.framework */; };
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
 		519CCABD2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */; };
@@ -407,6 +408,7 @@
 		E38EA5AE2F31429F00FB51CE /* SettingsPagePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5AD2F31429900FB51CE /* SettingsPagePlugin.swift */; };
 		E38EA5B12F3142C700FB51CE /* SettingsPluginLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E38EA5B02F3142C700FB51CE /* SettingsPluginLocalizable.strings */; };
 		E38EA5B22F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EA5AF2F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift */; };
+		E392B8CC2FB2263F005F2C24 /* SettingsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */; };
 		E3958565253133E80096811F /* SidebarTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958563253133E80096811F /* SidebarTabView.swift */; };
 		E3958566253133E80096811F /* SidebarTabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3958564253133E80096811F /* SidebarTabView.xib */; };
 		E3958586253309C90096811F /* PluginSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3958585253309C90096811F /* PluginSidebarView.swift */; };
@@ -438,7 +440,6 @@
 		E3EC8C4E2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3EC8C4D2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings */; };
 		E3EC8C502F95B0A700FBB51E /* ConstraintsSugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */; };
 		E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */; };
-		E3F698872120D878005792C9 /* ExtendedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F698862120D878005792C9 /* ExtendedColors.swift */; };
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 		E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */; };
 		E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */; };
@@ -1224,6 +1225,7 @@
 		518376D92C23DB1400574F00 /* libgcc_s.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgcc_s.1.1.dylib; path = deps/lib/libgcc_s.1.1.dylib; sourceTree = "<group>"; };
 		518376DB2C23DB2F00574F00 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "deps/lib/libstdc++.6.dylib"; sourceTree = "<group>"; };
 		51854CD92A1C489300C40B78 /* FFmpegLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFmpegLogger.swift; sourceTree = "<group>"; };
+		518DB7012FA6A2120024F0B0 /* write_info_plist_header.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = write_info_plist_header.sh; sourceTree = "<group>"; };
 		5196819929EC963F00B05D55 /* CoreDisplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDisplay.framework; path = /System/Library/Frameworks/CoreDisplay.framework; sourceTree = "<group>"; };
 		519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityPreferences.swift; sourceTree = "<group>"; };
 		519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareDecodeCapabilities.swift; sourceTree = "<group>"; };
@@ -1967,6 +1969,7 @@
 		E38EA5AD2F31429900FB51CE /* SettingsPagePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPagePlugin.swift; sourceTree = "<group>"; };
 		E38EA5AF2F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysPlugin.swift; sourceTree = "<group>"; };
 		E38EA5B02F3142C700FB51CE /* SettingsPluginLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsPluginLocalizable.strings; sourceTree = "<group>"; };
+		E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSearch.swift; sourceTree = "<group>"; };
 		E393669923BDD1850070D626 /* IINA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IINA.entitlements; sourceTree = "<group>"; };
 		E3958563253133E80096811F /* SidebarTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTabView.swift; sourceTree = "<group>"; };
 		E3958564253133E80096811F /* SidebarTabView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SidebarTabView.xib; sourceTree = "<group>"; };
@@ -1999,7 +2002,6 @@
 		E3EC8C4D2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsSubtitesLocalizable.strings; sourceTree = "<group>"; };
 		E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsSugar.swift; sourceTree = "<group>"; };
 		E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDef.swift; sourceTree = "<group>"; };
-		E3F698862120D878005792C9 /* ExtendedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedColors.swift; sourceTree = "<group>"; };
 		E3FC31451FE1501E00B9B86F /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
 		E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginInputManager.swift; sourceTree = "<group>"; };
 		E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptDevTool.swift; sourceTree = "<group>"; };
@@ -2256,6 +2258,14 @@
 				84F7258E1D486185000DEF1B /* MPVProperty.swift */,
 			);
 			name = Generated;
+			sourceTree = "<group>";
+		};
+		518DB7002FA6A1480024F0B0 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				518DB7012FA6A2120024F0B0 /* write_info_plist_header.sh */,
+			);
+			name = Scripts;
 			sourceTree = "<group>";
 		};
 		8452DD7F1D3A1F2A008A543A /* Preference */ = {
@@ -2522,7 +2532,6 @@
 				E3C12F6A201F281F00297964 /* FirstRunManager.swift */,
 				E342832E20B7149800139865 /* Logger.swift */,
 				51F7974628C7E00200812D0D /* Lock.swift */,
-				E3F698862120D878005792C9 /* ExtendedColors.swift */,
 				E301EFD921312AB300BC8588 /* KeychainAccess.swift */,
 				E38B3215214FF700000F6D27 /* EventController.swift */,
 				E39A11FC240F176E00A67F9F /* StringEncodingName.swift */,
@@ -2765,6 +2774,7 @@
 				8452DD7F1D3A1F2A008A543A /* Preference */,
 				E3CAD4AD2146DB23000B373A /* Javascript */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
+				518DB7002FA6A1480024F0B0 /* Scripts */,
 			);
 			indentWidth = 2;
 			path = iina;
@@ -2864,6 +2874,7 @@
 				E34BC28C2C27733200A94680 /* SettingsPage.swift */,
 				E34BC28E2C27A68100A94680 /* SettingsItem.swift */,
 				E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */,
+				E392B8CB2FB2263A005F2C24 /* SettingsSearch.swift */,
 				E3EC8C402F92E69C00FBB51E /* PluginManager.swift */,
 				E3EC8C452F9475BC00FBB51E /* PluginStorePanel.swift */,
 			);
@@ -3173,6 +3184,7 @@
 				E38EA5962F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings in Resources */,
 				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
 				E3EC8C482F95AD9600FBB51E /* SettingsGeneralLocalizable.strings in Resources */,
+				518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */,
 				E3EC8C4C2F95AD9D00FBB51E /* SettingsVideoAudioLocalizable.strings in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
@@ -3188,10 +3200,10 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"$(SRCROOT)/iina/write_info_plist_header.sh",
 			);
 			inputPaths = (
 				"$(CONFIGURATION_BUILD_DIR)/$(EXECUTABLE_FOLDER_PATH)/$(EXECUTABLE_NAME)",
+				"$(SRCROOT)/iina/write_info_plist_header.sh",
 			);
 			name = "Write Info.h";
 			outputFileListPaths = (
@@ -3335,7 +3347,6 @@
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
 				E3785B092A83380E00787CB7 /* WebSocketServer.swift in Sources */,
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
-				E3F698872120D878005792C9 /* ExtendedColors.swift in Sources */,
 				E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */,
 				E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */,
 				E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */,
@@ -3402,6 +3413,7 @@
 				E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */,
 				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
+				E392B8CC2FB2263F005F2C24 /* SettingsSearch.swift in Sources */,
 				E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
@@ -4872,7 +4884,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2026\nCollider LI, et al.\nReleased under GPLv3.";
@@ -4919,7 +4931,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2026\nCollider LI, et al.\nReleased under GPLv3.";
@@ -4978,7 +4990,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GL_SILENCE_DEPRECATION=1",
 					"$(inherited)",
@@ -5000,7 +5012,7 @@
 			baseConfigurationReference = 496498882919E47900CD61A5 /* iina.xcconfig */;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = "GL_SILENCE_DEPRECATION=1";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.video";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2017-2026\nCollider LI, et al.\nReleased under GPLv3.";

@@ -59,5 +59,6 @@ extension SettingsLocalization.Key {
   static let text_Screenshots = SettingsLocalization.Key("$Screenshots")
   static let text_Hourly = SettingsLocalization.Key("$Hourly")
   static let text_Behavior = SettingsLocalization.Key("$Behavior")
-  static let text_PauseresumeWhen = SettingsLocalization.Key("$PauseresumeWhen")
+  
+  static let pauseresumeWhen = SettingsLocalization.Key("pauseresumeWhen")
 }

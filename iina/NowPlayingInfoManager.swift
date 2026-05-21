@@ -134,7 +134,7 @@ class NowPlayingInfoManager {
     // discardArtwork as that method works directly on the nowPlayingInfo dictionary.
     var info = center.nowPlayingInfo ?? [String: Any]()
     if withTitle {
-      if player.currentMediaIsAudio == .isAudio {
+      if player.info.isAudio == .isAudio {
         info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
         let (title, album, artist) = player.getMusicMetadata()
         info[MPMediaItemPropertyTitle] = title

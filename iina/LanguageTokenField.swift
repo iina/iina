@@ -128,17 +128,7 @@ class LanguageTokenField: NSTokenField {
 
   func controlTextDidChange(_ obj: Notification) {
     guard let layoutManager = layoutManager else { return }
-    // WORKAROUND Xcode 26.4 defect where referencing NSTextAttachment.character causes a
-    // compilation error. As NSAttachmentCharacter was obsoleted in Swift 4.2, Xcode versions
-    // before 26.4 will not allow it to be used. As support for Swift 6.3 was added in 26.4 we can
-    // key off the Swift support to workaround the Xcode 26.4 defect without breaking support for
-    // older working versions of Xcode.
-    let attachmentChar: Character
-#if compiler(>=6.3)
-    attachmentChar = Character(UnicodeScalar(NSAttachmentCharacter)!)
-#else
-    attachmentChar = Character(UnicodeScalar(NSTextAttachment.character)!)
-#endif
+    let attachmentChar = Character(UnicodeScalar(NSTextAttachment.character)!)
     let finished = layoutManager.attributedString().string.split(separator: attachmentChar).count == 0
     if finished {
       Logger.log("LTF Submitting changes from controlTextDidChange()", level: .verbose)

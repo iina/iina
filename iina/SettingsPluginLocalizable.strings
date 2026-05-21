@@ -1,5 +1,7 @@
 /* key="3xh-dU-HuR" */
 "$Install" = "Install";
+"$Installed" = "Installed";
+"$Installing" = "Installing";
 /* key="Dkk-JQ-qHA" */
 "$Author" = "Author";
 /* key="EHl-kr-ZZf" */
@@ -16,8 +18,6 @@
 "$InstalledPlugins" = "Installed plugins:";
 /* key="drh-6w-3z1" */
 "$ShowInFinder" = "Show in Finder";
-/* key="enP-C1-4vu" */
-"$InstallFromGitHub" = "Install from GitHub…";
 /* key="fnl-uA-X7r" */
 "$YouCanInstallANew" = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically.";
 /* key="ixN-OS-w87" */
@@ -33,7 +33,7 @@
 /* key="r3r-Qh-rC9" */
 "$Source" = "Source";
 /* key="sdU-FG-dTO" */
-"$InstallPackage" = "Install Package…";
+"$InstallLocalPackage" = "Install Local Package…";
 /* key="tfn-0I-n6p" */
 "$Plugins" = "Plugins";
 /* key="ue8-hU-kLm" */
@@ -41,6 +41,13 @@
 /* key="zvu-Up-fQJ" */
 "$InstallANewPluginFrom" = "Install a new plugin from GitHub";
 
-"$OK" = "OK";
+"$GetPlugins" = "Get Plugins…";
+"$InputGithubURL" = "Input a Github URL:";
+"$OrSelectFrom" = "Or select from available plugins:";
+"$OfficialPlugins" = "Official Plugins";
+"$CommunityPlugins" = "Community Plugins";
+"$NoSelection" = "No Selection";
+"$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
+
 "$About" = "About";
 "$Settings" = "Settings";

@@ -845,6 +845,7 @@ struct Preference {
     case screenshot
     case plugins
     case liveText
+    case lyrics
 
     var description: String {
       switch self {
@@ -857,6 +858,7 @@ struct Preference {
       case .screenshot: "screenshot"
       case .plugins: "plugins"
       case .liveText: "liveText"
+      case .lyrics: "lyrics"
       }
     }
 
@@ -876,6 +878,7 @@ struct Preference {
       case .screenshot: return makeSymbol(["camera.shutter.button", "camera.fill"])
       case .plugins: return makeSymbol(["puzzlepiece.extension", "puzzlepiece"], size: 13.5)
       case .liveText: return makeSymbol(["document.viewfinder", "doc.viewfinder", "doc.text.viewfinder"])
+      case .lyrics: return makeSymbol(["quote.bubble"], "tab_sub")
       }
     }
 
@@ -903,6 +906,7 @@ struct Preference {
       case .screenshot: key = "screenshot"
       case .plugins: key = "plugins"
       case .liveText: key = "live_text"
+      case .lyrics: key = "lyrics"
       }
       return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }

@@ -439,6 +439,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateVideoTabControl() {
+    guard player.info.state.active else { return }
     if let index = AppData.aspectsInPanel.firstIndex(of: player.info.unsureAspect) {
       aspectSegment.selectedSegment = index
     } else {
@@ -467,6 +468,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateAudioTabControl() {
+    guard player.info.state.active else { return }
     let audioDelay = player.mpv.getDouble(MPVOption.Audio.audioDelay)
     audioDelaySlider.doubleValue = audioDelay
     customAudioDelayTextField.doubleValue = audioDelay
@@ -474,6 +476,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateSubTabControl() {
+    guard player.info.state.active else { return }
     hideSwitch.state = player.info.isSubVisible ? .on : .off
     secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off
 

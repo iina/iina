@@ -2289,7 +2289,11 @@ class MainWindowController: PlayerWindowController {
         Logger.fatal("viewController is not a NSViewController")
     }
     sidebarAnimationState = .willShow
-    let width = type.width().clamped(to: 0...sidebarMaxWidth)
+    let width = if type == .playlist {
+      type.width().clamped(to: 0...sidebarMaxWidth)
+    } else {
+      type.width()
+    }
     sideBarWidthConstraint.constant = width
     // The macOS setting could change at any point in time. Remember which type of animation is
     // being used. Avoid using fading when disabling animations as that animation will initially
@@ -2318,6 +2322,11 @@ class MainWindowController: PlayerWindowController {
         sideBarView.animator().isHidden = false
       } else {
         sideBarRightConstraint.animator().constant = 0
+      }
+      if let window, window.frame.width < width / 0.8 {
+        let newSize = window.frame.size.shrink	(toSize: .init(width: width / 0.8, height: .infinity))
+        let frame = window.frame.centeredResize(to: newSize)
+        window.animator().setFrame(frame, display: true, animate: true)
       }
     }) {
       self.sidebarAnimationState = .shown

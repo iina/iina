@@ -106,7 +106,7 @@ fileprivate class SliderView: SettingsAccessory.Base {
 
     label.padding(.leading(SettingsSubList.indent + 8), .vertical(12))
     slider.padding(.trailing(16))
-      .center(y: true, with: label)
+      .center(.y, with: label)
       .flexibleSpacingTo(view: label)
   }
 }

@@ -372,7 +372,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
         stackView.padding(.top(12), .bottom(4), .leading(8), .trailing(20))
         aboutBtn.padding(.trailing(8))
-          .center(y: true, with: self)
+          .center(.y, with: self)
       } else {
         nameLabel.stringValue = plugin.name
         versionLabel.stringValue = plugin.version
@@ -596,9 +596,9 @@ fileprivate class PluginDetailsWindow: NSWindow {
     contentView.addSubview(iconView)
     iconView.padding(.leading(16), .top(20))
     contentView.addSubview(nameLabel)
-    nameLabel.padding(.top(16)).spacing(.leading(8), from: iconView)
+    nameLabel.padding(.top(16)).spacing(.leading(8), to: iconView)
     contentView.addSubview(versionLabel)
-    versionLabel.spacing(.top(4), from: nameLabel).spacing(.leading(8), from: iconView)
+    versionLabel.spacing(.top(4), to: nameLabel).spacing(.leading(8), to: iconView)
     contentView.addSubview(segControl)
     segControl.padding(.top(16), .trailing(16))
     contentView.addSubview(okButton)
@@ -607,18 +607,18 @@ fileprivate class PluginDetailsWindow: NSWindow {
     createWebView()
     contentView.addSubview(webView)
     webView.padding(.horizontal(16))
-      .spacing(.top(12), from: segControl)
-      .spacing(.bottom(16), from: okButton)
+      .spacing(.top(12), to: segControl)
+      .spacing(.bottom(16), to: okButton)
 
     loadingIndicator.style = .spinning
     loadingIndicator.isHidden = true
     contentView.addSubview(loadingIndicator)
-    loadingIndicator.center(x: true, with: contentView).padding(.top(80))
+    loadingIndicator.center(.x, with: contentView).padding(.top(80))
 
     loadingFailedView.textColor = .systemRed
     loadingFailedView.isHidden = true
     contentView.addSubview(loadingFailedView)
-    loadingFailedView.center(x: true, with: contentView).padding(.top(80))
+    loadingFailedView.center(.x, with: contentView).padding(.top(80))
 
     // select settings tab by default
     segControl.selectedSegment = 0

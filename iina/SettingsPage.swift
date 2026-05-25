@@ -225,7 +225,7 @@ class SettingsSection: SettingsContainer {
       view.titleField = titleField
       view.addSubview(titleField)
       titleField.padding(.top, .leading(16), .trailing(8), from: view)
-      stackView.spacing(.top(12), from: titleField).padding(.leading, .trailing, .bottom, from: view)
+      stackView.spacing(.top(12), to: titleField).padding(.leading, .trailing, .bottom, from: view)
     } else {
       stackView.padding(.all, from: view)
     }
@@ -286,7 +286,7 @@ class SettingsList: SettingsContainer {
     container.titleField = titleField
     container.addSubview(titleField)
     titleField.padding(.top, .leading(16), .trailing(8), from: container)
-    listView.spacing(.top(SettingsList.SMALL_TITLE ? 8 : 12), from: titleField)
+    listView.spacing(.top(SettingsList.SMALL_TITLE ? 8 : 12), to: titleField)
     listView.padding(.bottom, .horizontal(8), from: container)
     return container
   }
@@ -319,7 +319,7 @@ class SettingsList: SettingsContainer {
     itemViews.first?.padding(.top(0), from: listView.contentView)
     itemViews.last?.padding(.bottom, from: listView.contentView)
     zip(itemViews.dropFirst(), itemViews.dropLast()).forEach { (bottomItem, topItem) in
-      bottomItem.spacing(.top, from: topItem)
+      bottomItem.spacing(.top, to: topItem)
       let separator = NSBox()
       separator.translatesAutoresizingMaskIntoConstraints = false
       separator.boxType = .separator

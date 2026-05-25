@@ -194,10 +194,10 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
     contentView?.addSubview(cancelButton)
 
     stackView.padding(.leading(24), .trailing(24), .top(24))
-      .spacing(.bottom(16), from: okButton)
-    cancelButton.center(y: true, with: okButton)
+      .spacing(.bottom(16), to: okButton)
+    cancelButton.center(.y, with: okButton)
     okButton.padding(.bottom(24), .trailing(24))
-      .spacing(.leading(8), from: cancelButton)
+      .spacing(.leading(8), to: cancelButton)
   }
 
   @objc func okBtnAction(_ sender: Any) {

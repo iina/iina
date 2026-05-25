@@ -488,7 +488,7 @@ extension LogWindowController: NSTableViewDelegate {
       cell.imageView = imageView
       imageView.size(width: 12, height: 12)
       imageView.padding(.top(2.5))
-      imageView.center(x: true)
+      imageView.center(.x)
     } else {
       let textField = NSTextField(wrappingLabelWithString: "")
       textField.font = logFont

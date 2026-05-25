@@ -75,17 +75,23 @@ struct ALConstraint {
     if let val = val { (rel, constant) = (.equal, val) }
     else if let lessVal = lessVal { (rel, constant) = (.lessThanOrEqual, lessVal) }
     else if let greatVal = greatVal { (rel, constant) = (.greaterThanOrEqual, greatVal) }
-    else { fatalError("A constraint must has a value") }
+    else { fatalError("A constraint must have a value") }
     return .init(direction: direction, relation: rel, constant: constant)
   }
 }
 
 extension NSView {
+  struct OrientationOptions: OptionSet {
+    let rawValue: Int
+    static let x = OrientationOptions(rawValue: 1 << 0)
+    static let y = OrientationOptions(rawValue: 1 << 1)
+  }
+
   @discardableResult
   func padding(_ constraintList: ALConstraint..., from aView: NSView? = nil) -> Self {
     let constraints = constraintList.flatMap { c in
       ALConstraint.Direction.list.compactMap {
-        c.direction.contains($0) ? ALConstraint(direction: $0, relation: c.relation, constant: c.constant)  : nil
+        c.direction.contains($0) ? ALConstraint(direction: $0, relation: c.relation, constant: c.constant) : nil
       }
     }
     for constraint in constraints {
@@ -126,20 +132,19 @@ extension NSView {
   }
 
   @discardableResult
-  func center(x: Bool? = nil, y: Bool? = nil, with aView: NSView? = nil) -> Self {
+  func center(_ align: OrientationOptions = [.x, .y], with aView: NSView? = nil) -> Self {
     let aView = aView ?? self.superview!
-    let noArg = x == nil && y == nil
-    if x == true || noArg {
+    if align.contains(.x) {
       self.superview!.addConstraint(self.centerXAnchor.constraint(equalTo: aView.centerXAnchor))
     }
-    if y == true || noArg {
+    if align.contains(.y) {
       self.superview!.addConstraint(self.centerYAnchor.constraint(equalTo: aView.centerYAnchor))
     }
     return self
   }
 
   @discardableResult
-  func alignBaseLine(with aView: NSView) -> Self {
+  func alignBaseline(with aView: NSView) -> Self {
     self.superview!.addConstraint(self.firstBaselineAnchor.constraint(equalTo: aView.firstBaselineAnchor))
     return self
   }
@@ -163,7 +168,7 @@ extension NSView {
   }
 
   @discardableResult
-  func spacing(_ constraintList: ALConstraint..., from aView: NSView? = nil) -> Self {
+  func spacing(_ constraintList: ALConstraint..., to aView: NSView) -> Self {
     for constraint in constraintList {
       let attr1: NSLayoutConstraint.Attribute
       let attr2: NSLayoutConstraint.Attribute
@@ -177,7 +182,6 @@ extension NSView {
       default:
         fatalError()
       }
-      let aView = aView ?? self.superview!
       let view1 = constraint.isMax ? aView : self
       let view2 = constraint.isMax ? self : aView
       NSLayoutConstraint(item: view1, attribute: attr1, relatedBy: constraint.relation,

@@ -107,10 +107,10 @@ class SettingsWindow: NSWindow {
 
     if #available(macOS 26, *) {
       searchBox.padding(.top(40), .horizontal(8))
-      sidebarScrollView.spacing(.top(16), from: searchBox)
+      sidebarScrollView.spacing(.top(16), to: searchBox)
     } else {
       searchBox.padding(.top(52), .horizontal(8))
-      sidebarScrollView.spacing(.top(8), from: searchBox)
+      sidebarScrollView.spacing(.top(8), to: searchBox)
     }
 
     let contentViewController = NSViewController()
@@ -492,7 +492,7 @@ extension SettingsWindow {
 
           titleLabel.padding(.trailing(8), .bottom(8))
           iconView.padding(.leading(8), .bottom(8))
-            .spacing(.trailing(8), from: titleLabel)
+            .spacing(.trailing(8), to: titleLabel)
             .size(width: 16, height: 16)
         }
         titleLabel.stringValue = entry.page
@@ -525,7 +525,7 @@ extension SettingsWindow {
           addSubview(titleLabel)
 
           sectionLabel.padding(.leading(8), .bottom(6))
-            .spacing(.trailing(4), from: titleLabel)
+            .spacing(.trailing(4), to: titleLabel)
           titleLabel.padding(.trailing(8), .bottom(6))
         }
         sectionLabel.stringValue = entry.section ?? entry.pageTitle ?? ""
@@ -569,12 +569,12 @@ extension SettingsWindow {
           titleLabel.translatesAutoresizingMaskIntoConstraints = false
           addSubview(titleLabel)
 
-          sectionLabel.padding(.leading(8)).spacing(.trailing(4), from: parentLabel)
-            .center(y: true, with: parentLabel)
+          sectionLabel.padding(.leading(8)).spacing(.trailing(4), to: parentLabel)
+            .center(.y, with: parentLabel)
           parentLabel.padding(.top(6), .trailing(8))
-            .spacing(.bottom(4), from: titleLabel)
-          icon.padding(.leading(12)).spacing(.trailing(4), from: titleLabel)
-            .size(width: 11, height: 11).center(y: true, with: titleLabel)
+            .spacing(.bottom(4), to: titleLabel)
+          icon.padding(.leading(12)).spacing(.trailing(4), to: titleLabel)
+            .size(width: 11, height: 11).center(.y, with: titleLabel)
           titleLabel.padding(.trailing(8), .bottom(6))
         }
 
@@ -686,7 +686,7 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
       line.translatesAutoresizingMaskIntoConstraints = false
       line.size(width: 16)
       line.addSubview(indicatorImage)
-      indicatorImage.center(x: true).size(width: 8, height: 8)
+      indicatorImage.center(.x).size(width: 8, height: 8)
 
       self.sectionIndicatorTopConstraint = indicatorImage.centerYAnchor.constraint(equalTo: line.topAnchor, constant: 8)
       sectionIndicatorTopConstraint?.isActive = true
@@ -705,7 +705,7 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
       sectionStackView.addArrangedSubview(sectionNameStackView)
 
       cell.addSubview(sectionStackView)
-      sectionStackView.center(y: true).padding(.leading(8), .trailing(4))
+      sectionStackView.center(.y).padding(.leading(8), .trailing(4))
 
       self.sectionNameStackView = sectionNameStackView
       return cell
@@ -733,7 +733,7 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
     labelStackView.translatesAutoresizingMaskIntoConstraints = false
 
     cell.addSubview(labelStackView)
-    labelStackView.center(y: true).padding(.horizontal)
+    labelStackView.center(.y).padding(.horizontal)
     return cell
   }
 

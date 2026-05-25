@@ -383,11 +383,11 @@ struct SettingsItem {
         .constraint(equalTo: backgroundView.topAnchor, constant: verticalPadding + 8).isActive = true
       valueStackView.padding(.trailing(8))
 //       valueStackView.padding(.top(verticalPaddingFixed), .trailing(8))
-//      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(y: true)
-      image.size(width: 24, height: 20).spacing(.trailing(6), from: labelStackView)
+//      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(.y)
+      image.size(width: 24, height: 20).spacing(.trailing(6), to: labelStackView)
         .padding(.top(11))
-      disclosureButton.padding(.trailing(12)).center(y: true)
-      labelStackView.center(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)
+      disclosureButton.padding(.trailing(12)).center(.y)
+      labelStackView.center(.y).flexibleSpacingTo(view: valueStackView, trailing: 8)
         .padding(.leading(36), .vertical(greaterThan: verticalPadding))
 
       prepareExpandableView()

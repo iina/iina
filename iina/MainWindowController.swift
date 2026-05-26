@@ -112,7 +112,7 @@ class MainWindowController: PlayerWindowController {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var liveTextOverlayView: NSView?
-  var isLiveTextHighlightActive: Bool = false
+  var isLiveTextUserInteractionActive: Bool = false
   var isVideoLoaded: Bool = false
 
   var shouldApplyInitialWindowSize = true
@@ -1998,7 +1998,7 @@ class MainWindowController: PlayerWindowController {
 
   func showUI() {
     if player.disableUI { return }
-    guard !isLiveTextHighlightActive else { return }
+    guard !isLiveTextUserInteractionActive else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false

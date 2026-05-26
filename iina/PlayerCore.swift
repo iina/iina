@@ -2387,7 +2387,7 @@ class PlayerCore: NSObject {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { self.info.disableOSDForFileLoading = false }
   }
 
-func refreshEdrMode() {
+  func refreshEdrMode() {
     guard mainWindow.loaded else { return }
     // No need to refresh if playback is being stopped. Must not attempt to refresh if mpv is
     // terminating as accessing mpv once shutdown has been initiated can trigger a crash.

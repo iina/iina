@@ -2433,6 +2433,10 @@ func refreshEdrMode() {
     if isInMiniPlayer {
       miniPlayer.refreshArtworkVisibility()
     }
+    if #available(macOS 13, *) {
+      mainWindow.clearAnalysis()
+      mainWindow.requestLiveTextAnalysis()
+    }
   }
 
   func subScaleChanged(_ scale: Double) {

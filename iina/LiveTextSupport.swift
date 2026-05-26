@@ -42,7 +42,7 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
 
   func updateLiveTextOverlay() {
     guard let overlayView = liveTextOverlayView else { return }
-    let shouldShow = Preference.bool(for: .enableLiveText) && Preference.bool(for: .liveTextOverlay)
+    let shouldShow = Preference.bool(for: .enableLiveText) && Preference.bool(for: .liveTextOverlay) && player.info.state == .paused
     if shouldShow && overlayView.superview == nil {
       overlayView.frame = videoView.bounds
       videoView.addSubview(overlayView)

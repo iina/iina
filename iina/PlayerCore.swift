@@ -2029,7 +2029,10 @@ class PlayerCore: NSObject {
   func fileStarted(path: String) {
     guard info.state.active else { return }
     log("File started")
-    if #available(macOS 13, *) { mainWindow.clearAnalysis() }
+    if #available(macOS 13, *) {
+      mainWindow.clearAnalysis()
+      mainWindow.updateLiveTextOverlay()
+    }
     MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
@@ -2194,7 +2197,10 @@ class PlayerCore: NSObject {
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
     syncUI(.playlist)
-    if #available(macOS 13, *) { mainWindow.requestLiveTextAnalysis() }
+    if #available(macOS 13, *) {
+      mainWindow.requestLiveTextAnalysis()
+      mainWindow.updateLiveTextOverlay()
+    }
   }
 
   func fileEnded(_ dueToStopCommand: Bool) {
@@ -2359,6 +2365,7 @@ class PlayerCore: NSObject {
 
     if #available(macOS 13, *) {
       if paused { mainWindow.requestLiveTextAnalysis() } else { mainWindow.clearAnalysis() }
+      mainWindow.updateLiveTextOverlay()
     }
   }
 
@@ -2382,6 +2389,7 @@ class PlayerCore: NSObject {
     if #available(macOS 13, *) {
       mainWindow.clearAnalysis()
       mainWindow.requestLiveTextAnalysis()
+      mainWindow.updateLiveTextOverlay()
     }
 
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { self.info.disableOSDForFileLoading = false }
@@ -2436,6 +2444,7 @@ class PlayerCore: NSObject {
     if #available(macOS 13, *) {
       mainWindow.clearAnalysis()
       mainWindow.requestLiveTextAnalysis()
+      mainWindow.updateLiveTextOverlay()
     }
   }
 

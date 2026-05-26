@@ -150,6 +150,7 @@
 		34ACABF92C142A0C00F871A0 /* libzimg.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 34ACAB662C142A0500F871A0 /* libzimg.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		34ACABFA2C142A0C00F871A0 /* libzmq.5.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 34ACAB382C142A0300F871A0 /* libzmq.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		34ACABFB2C142A0C00F871A0 /* libzstd.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 34ACAB4E2C142A0400F871A0 /* libzstd.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		34C4D19C2FC58482006B829F /* LiveTextSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C4D19B2FC58482006B829F /* LiveTextSupport.swift */; };
 		34F294C02C0B68B300F14962 /* Contribution.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 34F294BF2C0B68B300F14962 /* Contribution.rtf */; };
 		34F8B6F62C6C7B0100AE4B16 /* PrefPluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34F8B6F52C6C7B0100AE4B16 /* PrefPluginViewController.xib */; };
 		34FD798E291C76A600963EDE /* LogWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FD798D291C76A600963EDE /* LogWindowController.swift */; };
@@ -1105,6 +1106,7 @@
 		34B1FDAF2C70484A00FB93A4 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/PrefPluginViewController.strings; sourceTree = "<group>"; };
 		34B1FDB02C70484B00FB93A4 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/PrefPluginViewController.strings; sourceTree = "<group>"; };
 		34B1FDB12C70484B00FB93A4 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/PrefPluginViewController.strings; sourceTree = "<group>"; };
+		34C4D19B2FC58482006B829F /* LiveTextSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTextSupport.swift; sourceTree = "<group>"; };
 		34F294492C0A1BDE00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		34F2944A2C0A1BDE00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		34F2944C2C0A1BDE00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/PlaylistViewController.strings; sourceTree = "<group>"; };
@@ -2424,6 +2426,7 @@
 				D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */,
 				84CFC92523F8DDE000381E5B /* PlayerWindowController.swift */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
+				34C4D19B2FC58482006B829F /* LiveTextSupport.swift */,
 				51CACB9429D500290034CEE5 /* VideoPIPViewController.swift */,
 				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
@@ -3330,6 +3333,7 @@
 				E3A239C12FCB4D2400CE6ACC /* SidebarController.swift in Sources */,
 				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
 				519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */,
+				34C4D19C2FC58482006B829F /* LiveTextSupport.swift in Sources */,
 				511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */,
 				E34BC2AC2C27DAE900A94680 /* SettingsHelper.swift in Sources */,
 				E38EA5AC2F3088F300FB51CE /* SettingsLocalizationKeysUtils.swift in Sources */,

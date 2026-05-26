@@ -46,3 +46,9 @@
 "$AlgorithmToUseForTone" = "Algorithm to use for tone mapping images onto the display.";
 "$Decoding" = "Decoding";
 "$ColorHDR" = "Color and HDR";
+
+/* Live Text */
+"enableLiveText.label" = "Enable Live Text";
+"enableLiveText.desc" = "Analyze paused video frames for text recognition using Live Text. Requires macOS 13 or later.";
+"liveTextOverlay.label" = "Show Live Text overlay";
+"liveTextOverlay.desc" = "Insert the Live Text overlay into the video view. When disabled, analysis still runs but the overlay is hidden.";

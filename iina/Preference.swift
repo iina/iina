@@ -103,6 +103,9 @@ struct Preference {
     static let screenshotTemplate = Key("screenShotTemplate")
     static let screenshotShowPreview = Key("screenshotShowPreview")
 
+    static let enableLiveText = Key("enableLiveText")
+    static let liveTextOverlay = Key("liveTextOverlay")
+
     static let playlistAutoAdd = Key("playlistAutoAdd")
     static let playlistAutoPlayNext = Key("playlistAutoPlayNext")
     static let playlistShowMetadata = Key("playlistShowMetadata")
@@ -836,6 +839,7 @@ struct Preference {
     case subTrack
     case screenshot
     case plugins
+    case liveText
 
     var description: String {
       switch self {
@@ -847,6 +851,7 @@ struct Preference {
       case .subTrack: "subTrack"
       case .screenshot: "screenshot"
       case .plugins: "plugins"
+      case .liveText: "liveText"
       }
     }
 
@@ -866,6 +871,7 @@ struct Preference {
       case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
       case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
       case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
+      case .liveText: return makeSymbol(["text.viewfinder"], "custom.text.viewfinder.slash")
       }
     }
 
@@ -876,6 +882,7 @@ struct Preference {
       case .pip: return makeSymbol(["pip.exit"], "pip")
       case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"], "fullscreen")
       case .plugins: return makeSymbol(["puzzlepiece.extension.fill"], "plugin")
+      case .liveText: return makeSymbol(["custom.text.viewfinder.slash"], "custom.text.viewfinder.slash")
       default: return nil
       }
     }
@@ -891,6 +898,7 @@ struct Preference {
       case .subTrack: key = "sub_track"
       case .screenshot: key = "screenshot"
       case .plugins: key = "plugins"
+      case .liveText: key = "live_text"
       }
       return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }
@@ -1191,6 +1199,9 @@ struct Preference {
     .screenshotFormat: ScreenshotFormat.png.rawValue,
     .screenshotTemplate: "%F-%n",
     .screenshotShowPreview: true,
+
+    .enableLiveText: false,
+    .liveTextOverlay: true,
 
     .watchProperties: [String](),
     .savedVideoFilters: [SavedFilter](),

@@ -49,6 +49,21 @@ class SettingsPageVideo: SettingsPage {
           .bindTo(.forceDedicatedGPU)
           .hasDescription()
       }
+
+      if #available(macOS 13, *) {
+        SettingsList {
+          SettingsItem.Switch()
+            .image(name: "text.viewfinder")
+            .bindTo(.enableLiveText)
+            .hasDescription()
+            .withDetailView {
+              SettingsItem.Switch()
+                .image(name: "document.viewfinder")
+                .bindTo(.liveTextOverlay)
+                .hasDescription()
+            }
+        }
+      }
     }
   }
 

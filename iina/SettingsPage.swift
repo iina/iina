@@ -99,8 +99,20 @@ struct SettingsSubListBuilder {
 
 @resultBuilder
 struct SettingsSectionBuilder {
-  static func buildBlock(_ components: SettingsContainer...) -> [SettingsContainer] {
-    return components
+  static func buildExpression(_ expression: SettingsContainer) -> [SettingsContainer] {
+    [expression]
+  }
+
+  static func buildBlock(_ components: [SettingsContainer]...) -> [SettingsContainer] {
+    components.flatMap { $0 }
+  }
+
+  static func buildOptional(_ component: [SettingsContainer]?) -> [SettingsContainer] {
+    component ?? []
+  }
+
+  static func buildLimitedAvailability(_ component: [SettingsContainer]) -> [SettingsContainer] {
+    component
   }
 }
 

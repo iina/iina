@@ -33,4 +33,7 @@ extension SettingsLocalization.Key {
   static let text_EnableToneMappingImagesOnto = SettingsLocalization.Key("$EnableToneMappingImagesOnto")
   static let text_Algorithm = SettingsLocalization.Key("$Algorithm")
   static let text_AlgorithmToUseForTone = SettingsLocalization.Key("$AlgorithmToUseForTone")
+  static let text_ReplayGain = SettingsLocalization.Key("$ReplayGain")
+  static let enableLiveTextLabel = SettingsLocalization.Key("enableLiveText.label")
+  static let enableLiveTextDesc = SettingsLocalization.Key("enableLiveText.desc")
 }

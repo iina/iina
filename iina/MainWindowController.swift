@@ -9,7 +9,6 @@
 import Cocoa
 import Mustache
 import WebKit
-import VisionKit
 
 fileprivate let isMacOS11: Bool = {
   if #unavailable(macOS 12.0) {
@@ -35,7 +34,7 @@ fileprivate let minimumInitialDragDistance: CGFloat = 3.0
 
 fileprivate let layoutSides: [NSLayoutConstraint.Attribute] = [.top, .bottom, .leading, .trailing]
 
-class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDelegate {
+class MainWindowController: PlayerWindowController {
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MainWindowController")
@@ -112,6 +111,8 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
 
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
+  var liveTextOverlayView: NSView?
+  var isLiveTextHighlightActive: Bool = false
   var isVideoLoaded: Bool = false
 
   var shouldApplyInitialWindowSize = true
@@ -298,6 +299,8 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
     .useLiquidGlassOSC,
     .useLiquidGlassOSD,
     .useLiquidGlassSidebar,
+    .enableLiveText,
+    .liveTextOverlay
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -308,6 +311,7 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
         setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
+        if #available(macOS 13, *) { updateLiveTextOverlayInsets() }
       }
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
@@ -367,6 +371,18 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
     case PK.useLiquidGlassOSD.rawValue:
       [timePreviewView, osdView, additionalInfoView, bufferIndicatorView].forEach {
         $0?.setStyle(Preference.liquidGlass(.osd) ? .liquidGlass : .visualEffect)
+      }
+     case PK.enableLiveText.rawValue:
+      let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
+      setupOSCToolbarButtons(buttons)
+      if #available(macOS 13, *) { updateLiveTextOverlay() }
+    case PK.liveTextOverlay.rawValue:
+      if let newValue = change[.newKey] as? Bool {
+        let buttons = fragToolbarView.subviews as! [NSButton]
+        if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
+          btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
+        }
+        if #available(macOS 13, *) { updateLiveTextOverlay() }
       }
     default:
       return
@@ -612,15 +628,7 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
 
     if player.disableUI { hideUI() }
 
-    if #available(macOS 13, *) {
-      let overlayView = ImageAnalysisOverlayView()
-      overlayView.preferredInteractionTypes = .automatic
-      overlayView.autoresizingMask = [.width, .height]
-      overlayView.delegate = self
-      let videoView = player.mainWindow.videoView
-      overlayView.frame = videoView.bounds
-      videoView.addSubview(overlayView)
-    }
+    if #available(macOS 13, *) { setupLiveTextOverlay() }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)
@@ -794,10 +802,15 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
+    let liveTextEnabled = Preference.bool(for: .enableLiveText)
+    let effectiveButtons = buttons.filter { $0 != .liveText || liveTextEnabled }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
-    for buttonType in buttons {
+    for buttonType in effectiveButtons {
       let button = NSButton()
-      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: buttons.count > 4)
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: effectiveButtons.count > 4)
+      if buttonType == .liveText && Preference.bool(for: .liveTextOverlay) {
+        button.image = buttonType.alternateImage()
+      }
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
     }
@@ -1947,7 +1960,7 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
-  private func hideUI(force: Bool = false) {
+  func hideUI(force: Bool = false) {
     // Don't hide UI when in PIP
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return
@@ -1983,8 +1996,9 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
     }
   }
 
-  private func showUI() {
+  func showUI() {
     if player.disableUI { return }
+    guard !isLiveTextHighlightActive else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false
@@ -2741,32 +2755,6 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
     }
   }
 
-  @available(macOS 13, *)
-  func showAnalysis(with image: NSImage) {
-    let analyzer = ImageAnalyzer()
-    Task { [weak self] in
-      do {
-        let analysis = try await analyzer.analyze(image, orientation: .up, configuration: .init([.text]))
-        await MainActor.run {
-          guard let self else { return }
-          let overlayView = self.videoView.subviews[0] as! ImageAnalysisOverlayView
-          overlayView.analysis = analysis
-        }
-      } catch {
-        fatalError("Error")
-      }
-    }
-  }
-
-  // MARK: ImageAnalysisOverlayViewDelegate
-
-  @available(macOS 13.0, *)
-  func overlayView(_ overlayView: ImageAnalysisOverlayView,
-             shouldBeginAt point: CGPoint, forAnalysisType
-             analysisType: ImageAnalysisOverlayView.InteractionTypes) -> Bool {
-      return true
-  }
-
   // MARK: - Sync UI with playback
 
   func isUITimerNeeded() -> Bool {
@@ -3016,6 +3004,8 @@ class MainWindowController: PlayerWindowController, ImageAnalysisOverlayViewDele
       player.screenshot()
     case .plugins:
       sidebars.showPlugin(tab: nil)
+    case .liveText:
+      Preference.set(!Preference.bool(for: .liveTextOverlay), for: .liveTextOverlay)
     }
   }
 

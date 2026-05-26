@@ -2029,6 +2029,7 @@ class PlayerCore: NSObject {
   func fileStarted(path: String) {
     guard info.state.active else { return }
     log("File started")
+    if #available(macOS 13, *) { mainWindow.clearAnalysis() }
     MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
@@ -2193,6 +2194,7 @@ class PlayerCore: NSObject {
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
     syncUI(.playlist)
+    if #available(macOS 13, *) { mainWindow.requestLiveTextAnalysis() }
   }
 
   func fileEnded(_ dueToStopCommand: Bool) {
@@ -2356,7 +2358,7 @@ class PlayerCore: NSObject {
     syncUI(.playButton)
 
     if #available(macOS 13, *) {
-      mpv.asyncCommand(.screenshotRaw, replyUserdata: MPVController.UserData.screenshot_raw)
+      if paused { mainWindow.requestLiveTextAnalysis() } else { mainWindow.clearAnalysis() }
     }
   }
 
@@ -2377,10 +2379,15 @@ class PlayerCore: NSObject {
 
     NowPlayingInfoManager.shared.updateInfo()
 
+    if #available(macOS 13, *) {
+      mainWindow.clearAnalysis()
+      mainWindow.requestLiveTextAnalysis()
+    }
+
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { self.info.disableOSDForFileLoading = false }
   }
 
-  func refreshEdrMode() {
+func refreshEdrMode() {
     guard mainWindow.loaded else { return }
     // No need to refresh if playback is being stopped. Must not attempt to refresh if mpv is
     // terminating as accessing mpv once shutdown has been initiated can trigger a crash.

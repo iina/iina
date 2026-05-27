@@ -112,8 +112,14 @@ class MainWindowController: PlayerWindowController {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var liveTextOverlayView: NSView?
-  var isLiveTextUserInteractionActive: Bool = false
   var isVideoLoaded: Bool = false
+
+  var isLiveTextSelected: Bool = false
+  var isLiveTextMenuOpen: Bool = false
+  var isLiveTextHighlighted: Bool = false
+  var isLiveTextUserInteractionActive: Bool {
+    isLiveTextSelected || isLiveTextMenuOpen || isLiveTextHighlighted
+  }
 
   var shouldApplyInitialWindowSize = true
   var isWindowHidden: Bool = false

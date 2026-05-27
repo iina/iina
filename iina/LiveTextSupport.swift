@@ -74,27 +74,27 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
   }
 
   func overlayView(_ overlayView: ImageAnalysisOverlayView, willOpen menu: NSMenu) {
-    isLiveTextUserInteractionActive = true
-    hideUI(force: true)
+    isLiveTextMenuOpen = true
+    refreshUI()
   }
 
   func overlayView(_ overlayView: ImageAnalysisOverlayView, didClose menu: NSMenu) {
-    isLiveTextUserInteractionActive = false
-    showUI()
+    isLiveTextMenuOpen = false
+    refreshUI()
   }
 
   func textSelectionDidChange(_ overlayView: ImageAnalysisOverlayView) {
-    if overlayView.hasActiveTextSelection {
-      isLiveTextUserInteractionActive = true
-      hideUI(force: true)
-    } else {
-      isLiveTextUserInteractionActive = false
-    }
+    isLiveTextSelected = overlayView.hasActiveTextSelection
+    refreshUI()
   }
 
   func overlayView(_ overlayView: ImageAnalysisOverlayView, highlightSelectedItemsDidChange highlightSelectedItems: Bool) {
-    isLiveTextUserInteractionActive = highlightSelectedItems
-    if highlightSelectedItems {
+    isLiveTextHighlighted = highlightSelectedItems
+    refreshUI()
+  }
+
+  func refreshUI() {
+    if isLiveTextUserInteractionActive {
       hideUI(force: true)
     } else {
       showUI()

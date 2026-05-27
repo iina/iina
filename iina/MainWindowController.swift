@@ -116,6 +116,8 @@ class MainWindowController: PlayerWindowController {
     return player.mpv.getInt(MPVProperty.videoParamsRotate)
   }()
 
+  var osdView: OSDView!
+
   // MARK: - Status
 
   override var isOntop: Bool {
@@ -488,12 +490,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var leftArrowLabel: NSTextField!
   @IBOutlet weak var rightArrowLabel: NSTextField!
 
-  @IBOutlet weak var osdVisualEffectView: NSVisualEffectView!
-  @IBOutlet weak var osdStackView: NSStackView!
-  @IBOutlet weak var osdLabel: NSTextField!
-  @IBOutlet weak var osdAccessoryText: NSTextField!
-  @IBOutlet weak var osdAccessoryProgress: FixedProgressBar!
-
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
   lazy var pluginOverlayViewContainer: NSView! = {
@@ -616,15 +612,23 @@ class MainWindowController: PlayerWindowController {
     timePreviewVisualEffectView.roundCorners(withRadius: 5)
     timePreviewTextField.font = monospacedFont
 
+    // osd
+    osdView = OSDView(mainWindow: self)
+    if #available(macOS 26.0, *) {
+      osdView.setStyle(.liquidGlass)
+    }
+    window.contentView?.addSubview(osdView)
+    osdView.padding(.leading(8), .trailing(greaterThan: 8), .bottom(greaterThan: 8))
+      .spacing(.top(8), to: titleBarView)
+
     // other initialization
     titleBarBottomBorder.fillColor = NSColor.titleBarBorder
     cachedScreenCount = NSScreen.screens.count
-    [titleBarView, osdVisualEffectView, controlBarBottom, controlBarFloating, sideBarView, osdVisualEffectView, pipOverlayView].forEach {
+    [titleBarView, controlBarBottom, controlBarFloating, sideBarView, pipOverlayView].forEach {
       $0?.state = .active
     }
     // hide other views
-    osdVisualEffectView.isHidden = true
-    osdVisualEffectView.roundCorners(withRadius: 10)
+    osdView.isHidden = true
     additionalInfoView.roundCorners(withRadius: 10)
     leftArrowLabel.isHidden = true
     rightArrowLabel.isHidden = true
@@ -915,7 +919,7 @@ class MainWindowController: PlayerWindowController {
       let keyCode = KeyCodeHelper.mpvKeyCode(from: event)
       let normalizedKeyCode = KeyCodeHelper.normalizeMpv(keyCode)
 
-      if normalizedKeyCode == "ESC", osdStackView.performKeyEquivalent(with: event) {
+      if normalizedKeyCode == "ESC", osdView.performKeyEquivalent(with: event) {
         log("ESC key was handled by OSD", level: .verbose)
         return
       }
@@ -2125,48 +2129,6 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: OSD
 
-  private func setOSDViews(fromMessage message: OSDMessage) {
-    osdLastMessage = message
-
-    let (osdString, osdType) = message.message()
-    osdLabel.stringValue = osdString
-
-    // Most OSD messages are displayed based on the configured language direction.
-    osdAccessoryProgress.userInterfaceLayoutDirection = osdStackView.userInterfaceLayoutDirection
-    osdAccessoryText.baseWritingDirection = .natural
-    osdLabel.baseWritingDirection = .natural
-    switch osdType {
-    case .normal:
-      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryText)
-      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryProgress)
-    case .withPosition(let value):
-      // OSD messages displaying the playback position must always be displayed left to right.
-      osdAccessoryProgress.userInterfaceLayoutDirection = .leftToRight
-      osdLabel.baseWritingDirection = .leftToRight
-      fallthrough
-    case .withProgress(let value):
-      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryText)
-      osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryProgress)
-      osdAccessoryProgress.doubleValue = value
-    case .withLeftToRightText(let text):
-      // OSD messages displaying the playback position must always be displayed left to right.
-      osdAccessoryText.baseWritingDirection = .leftToRight
-      fallthrough
-    case .withText(let text):
-      // data for mustache rendering
-      let osdData: [String: String] = [
-        "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "position": player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
-        "chapterCount": player.info.chapters.count.description
-      ]
-
-      osdStackView.setVisibilityPriority(.mustHold, for: osdAccessoryText)
-      osdStackView.setVisibilityPriority(.notVisible, for: osdAccessoryProgress)
-      osdAccessoryText.stringValue = try! (try! Template(string: text)).render(osdData)
-    }
-  }
-
   /// Show a message in the on screen display.
   /// - Parameters:
   ///   - message: The `OSDMessage` to display.
@@ -2192,19 +2154,12 @@ class MainWindowController: PlayerWindowController {
       osdAnimationState = .shown
     }
 
-    let osdTextSize = Preference.float(for: .osdTextSize)
-    osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
-    osdAccessoryText.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize * 0.5).clamped(to: 11...25), weight: .regular)
+    osdView.updateViews(fromMessage: message, player: player)
 
-    setOSDViews(fromMessage: message)
+    osdView.alphaValue = 1
+    osdView.isHidden = false
+    osdView.layoutSubtreeIfNeeded()
 
-    osdVisualEffectView.alphaValue = 1
-    osdVisualEffectView.isHidden = false
-    osdVisualEffectView.layoutSubtreeIfNeeded()
-
-    osdStackView.views(in: .bottom).forEach {
-      osdStackView.removeView($0)
-    }
     if let accessoryView = accessoryView {
       isShowingPersistentOSD = true
       if context != nil {
@@ -2215,8 +2170,7 @@ class MainWindowController: PlayerWindowController {
       heightConstraint.priority = .defaultLow
       heightConstraint.isActive = true
 
-      osdStackView.addView(accessoryView, in: .bottom)
-      Utility.quickConstraints(["H:|-0-[v(>=240)]-0-|"], ["v": accessoryView])
+      osdView.addAccessoryView(accessoryView)
 
       // enlarge window if too small
       let winFrame = window!.frame
@@ -2232,7 +2186,7 @@ class MainWindowController: PlayerWindowController {
         context.duration = AccessibilityPreferences.adjustedDuration(0.3)
         context.allowsImplicitAnimation = true
         window!.setFrame(newFrame, display: true)
-        osdVisualEffectView.layoutSubtreeIfNeeded()
+        osdView.layoutSubtreeIfNeeded()
       }, completionHandler: {
         accessoryView.layer?.opacity = 1
       })
@@ -2249,12 +2203,12 @@ class MainWindowController: PlayerWindowController {
     NSAnimationContext.runAnimationGroup({ (context) in
       self.osdAnimationState = .willHide
       context.duration = OSDAnimationDuration
-      osdVisualEffectView.animator().alphaValue = 0
+      osdView.animator().alphaValue = 0
     }) {
       if self.osdAnimationState == .willHide {
         self.osdAnimationState = .hidden
-        self.osdVisualEffectView.isHidden = true
-        self.osdStackView.views(in: .bottom).forEach { self.osdStackView.removeView($0) }
+        self.osdView.isHidden = true
+        self.osdView.removeAccessoryView()
       }
     }
     isShowingPersistentOSD = false
@@ -2547,7 +2501,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
-    let isCoveredByOSD = !osdVisualEffectView.isHidden && isMouseEvent(event, inAnyOf: [osdVisualEffectView])
+    let isCoveredByOSD = !osdView.isHidden && isMouseEvent(event, inAnyOf: [osdView])
     let isCoveredBySidebar = !sideBarView.isHidden && isMouseEvent(event, inAnyOf: [sideBarView])
     if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
       updateTimePreviewAndThumbnail(event.locationInWindow)
@@ -2954,7 +2908,8 @@ class MainWindowController: PlayerWindowController {
         return
       }
 
-      setOSDViews(fromMessage: message)
+      self.osdLastMessage = message
+      osdView.updateViews(fromMessage: message, player: player)
     }
   }
 

@@ -333,8 +333,6 @@
 		E32B157D21BC27B100CDBCEA /* JavascriptAPIMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */; };
 		E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */; };
 		E33517542DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */; };
-		E3BBBBBB0000000000000016 /* SettingsLocalizationKeysVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000015 /* SettingsLocalizationKeysVideo.swift */; };
-		E3BBBBBB0000000000000018 /* SettingsLocalizationKeysAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000017 /* SettingsLocalizationKeysAudio.swift */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
 		E337D5E22411B64A00B5729A /* JavascriptPolyfill.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */; };
 		E337D5E4241C12BE00B5729A /* PrefPluginPermissionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */; };
@@ -381,8 +379,6 @@
 		E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */; };
 		E38099CA2FC05B2E00D3333E /* SettingsPageUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */; };
 		E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */; };
-		E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */; };
-		E3BBBBBB0000000000000004 /* SettingsPageAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000003 /* SettingsPageAudio.swift */; };
 		E38372922443634500F57718 /* LanguageTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38372912443634500F57718 /* LanguageTokenField.swift */; };
 		E3839C5724FFF201007D0AB4 /* PluginStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */; };
 		E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */; };
@@ -416,8 +412,16 @@
 		E39EA3532E7CFD5B00E0BD32 /* FixedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39EA3522E7CFD5600E0BD32 /* FixedProgressBar.swift */; };
 		E39EDD832CE2EB9600978036 /* PluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39EDD822CE2EB9600978036 /* PluginViewController.xib */; };
 		E39EDD842CE2EB9600978036 /* PluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39EDD812CE2EB9600978036 /* PluginViewController.swift */; };
+		E3A239A82FC6D45000CE6ACC /* TranslucentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */; };
+		E3A239AA2FC6D88F00CE6ACC /* OSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239A92FC6D88C00CE6ACC /* OSDView.swift */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
+		E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */; };
+		E3BBBBBB0000000000000004 /* SettingsPageAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000003 /* SettingsPageAudio.swift */; };
+		E3BBBBBB0000000000000012 /* SettingsVideoLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000011 /* SettingsVideoLocalizable.strings */; };
+		E3BBBBBB0000000000000014 /* SettingsAudioLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000013 /* SettingsAudioLocalizable.strings */; };
+		E3BBBBBB0000000000000016 /* SettingsLocalizationKeysVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000015 /* SettingsLocalizationKeysVideo.swift */; };
+		E3BBBBBB0000000000000018 /* SettingsLocalizationKeysAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000017 /* SettingsLocalizationKeysAudio.swift */; };
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */; };
 		E3CB258B2222885E00A62C47 /* JavascriptAPIOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */; };
@@ -434,8 +438,6 @@
 		E3EC8C462F9475C600FBB51E /* PluginStorePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC8C452F9475BC00FBB51E /* PluginStorePanel.swift */; };
 		E3EC8C482F95AD9600FBB51E /* SettingsGeneralLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3EC8C472F95AD9600FBB51E /* SettingsGeneralLocalizable.strings */; };
 		E3EC8C4A2F95AD9900FBB51E /* SettingsUILocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3EC8C492F95AD9900FBB51E /* SettingsUILocalizable.strings */; };
-		E3BBBBBB0000000000000012 /* SettingsVideoLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000011 /* SettingsVideoLocalizable.strings */; };
-		E3BBBBBB0000000000000014 /* SettingsAudioLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000013 /* SettingsAudioLocalizable.strings */; };
 		E3EC8C4E2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3EC8C4D2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings */; };
 		E3EC8C502F95B0A700FBB51E /* ConstraintsSugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */; };
 		E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */; };
@@ -1865,8 +1867,6 @@
 		E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMenu.swift; sourceTree = "<group>"; };
 		E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginMenuItem.swift; sourceTree = "<group>"; };
 		E33517532DFD25E100BBE169 /* SettingsLocalizationKeysUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysUI.swift; sourceTree = "<group>"; };
-		E3BBBBBB0000000000000015 /* SettingsLocalizationKeysVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysVideo.swift; sourceTree = "<group>"; };
-		E3BBBBBB0000000000000017 /* SettingsLocalizationKeysAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysAudio.swift; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
 		E337D5E12411B64900B5729A /* JavascriptPolyfill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPolyfill.swift; sourceTree = "<group>"; };
 		E337D5E3241C12BE00B5729A /* PrefPluginPermissionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPluginPermissionListView.swift; sourceTree = "<group>"; };
@@ -1941,8 +1941,6 @@
 		E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageSubtitles.swift; sourceTree = "<group>"; };
 		E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUI.swift; sourceTree = "<group>"; };
 		E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUtilities.swift; sourceTree = "<group>"; };
-		E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageVideo.swift; sourceTree = "<group>"; };
-		E3BBBBBB0000000000000003 /* SettingsPageAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageAudio.swift; sourceTree = "<group>"; };
 		E38372912443634500F57718 /* LanguageTokenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTokenField.swift; sourceTree = "<group>"; };
 		E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStandaloneWindow.swift; sourceTree = "<group>"; };
 		E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIStandaloneWindow.swift; sourceTree = "<group>"; };
@@ -1977,9 +1975,17 @@
 		E39EA3522E7CFD5600E0BD32 /* FixedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedProgressBar.swift; sourceTree = "<group>"; };
 		E39EDD812CE2EB9600978036 /* PluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginViewController.swift; sourceTree = "<group>"; };
 		E39EDD822CE2EB9600978036 /* PluginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PluginViewController.xib; sourceTree = "<group>"; };
+		E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentView.swift; sourceTree = "<group>"; };
+		E3A239A92FC6D88C00CE6ACC /* OSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDView.swift; sourceTree = "<group>"; };
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
+		E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageVideo.swift; sourceTree = "<group>"; };
+		E3BBBBBB0000000000000003 /* SettingsPageAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageAudio.swift; sourceTree = "<group>"; };
+		E3BBBBBB0000000000000011 /* SettingsVideoLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsVideoLocalizable.strings; sourceTree = "<group>"; };
+		E3BBBBBB0000000000000013 /* SettingsAudioLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsAudioLocalizable.strings; sourceTree = "<group>"; };
+		E3BBBBBB0000000000000015 /* SettingsLocalizationKeysVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysVideo.swift; sourceTree = "<group>"; };
+		E3BBBBBB0000000000000017 /* SettingsLocalizationKeysAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysAudio.swift; sourceTree = "<group>"; };
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
 		E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPI.swift; sourceTree = "<group>"; };
 		E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIOverlay.swift; sourceTree = "<group>"; };
@@ -1995,8 +2001,6 @@
 		E3EC8C452F9475BC00FBB51E /* PluginStorePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStorePanel.swift; sourceTree = "<group>"; };
 		E3EC8C472F95AD9600FBB51E /* SettingsGeneralLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsGeneralLocalizable.strings; sourceTree = "<group>"; };
 		E3EC8C492F95AD9900FBB51E /* SettingsUILocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsUILocalizable.strings; sourceTree = "<group>"; };
-		E3BBBBBB0000000000000011 /* SettingsVideoLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsVideoLocalizable.strings; sourceTree = "<group>"; };
-		E3BBBBBB0000000000000013 /* SettingsAudioLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsAudioLocalizable.strings; sourceTree = "<group>"; };
 		E3EC8C4D2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsSubtitesLocalizable.strings; sourceTree = "<group>"; };
 		E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsSugar.swift; sourceTree = "<group>"; };
 		E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDef.swift; sourceTree = "<group>"; };
@@ -2755,6 +2759,7 @@
 				84A0BAA81D2FAFCD00BC8DA1 /* Data */,
 				845ABEAD1D4D19CF00BFB15B /* Models */,
 				847557121F405F2B0006B0FF /* Menu */,
+				E3A239A62FC6D3F000CE6ACC /* MainWindow */,
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				E360A5CB2C23C181006EA412 /* Settings */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
@@ -2893,6 +2898,15 @@
 				E38558892A484A2D0083772D /* main.swift */,
 			);
 			path = "iina-plugin";
+			sourceTree = "<group>";
+		};
+		E3A239A62FC6D3F000CE6ACC /* MainWindow */ = {
+			isa = PBXGroup;
+			children = (
+				E3A239A92FC6D88C00CE6ACC /* OSDView.swift */,
+				E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */,
+			);
+			path = MainWindow;
 			sourceTree = "<group>";
 		};
 		E3CAD4AD2146DB23000B373A /* Javascript */ = {
@@ -3400,6 +3414,7 @@
 				8488D6DC1E1167EF00D5B952 /* FloatingPointByteCountFormatter.swift in Sources */,
 				8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */,
 				84AABE941DBFAF1A00D138FD /* FontPickerWindowController.swift in Sources */,
+				E3A239A82FC6D45000CE6ACC /* TranslucentView.swift in Sources */,
 				844C59E71F7C143D008D1B00 /* CacheManager.swift in Sources */,
 				E3EC8C502F95B0A700FBB51E /* ConstraintsSugar.swift in Sources */,
 				E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */,
@@ -3463,6 +3478,7 @@
 				51E63DFB29CFB031008AFC20 /* PlaySlider.swift in Sources */,
 				84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */,
 				84E5221323FF3D080006FDA1 /* JavascriptAPIPlaylist.swift in Sources */,
+				E3A239AA2FC6D88F00CE6ACC /* OSDView.swift in Sources */,
 				E38EA5B22F3142C700FB51CE /* SettingsLocalizationKeysPlugin.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
 				847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */,

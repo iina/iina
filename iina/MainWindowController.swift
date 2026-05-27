@@ -2795,7 +2795,7 @@ class MainWindowController: PlayerWindowController {
       log("Centered original sized window in screen: \(rect)")
     } else {
       // user is navigating in playlist. remain same window area.
-      rect = frame.centeredResize(forVideoWidth: Float(width), andHeight: Float(height))
+      rect = frame.areaPreservingResized(newWidth: CGFloat(width), height: CGFloat(height))
       log("Adjusted height of window preserving area: \(rect)")
     }
 

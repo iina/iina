@@ -231,8 +231,8 @@ extension NSRect {
   }
 
   // This function preserves the size of the new rect with the old rect
-  func centeredResize(forVideoWidth width: Float, andHeight height: Float) -> NSRect {
-    let targetAspectRatio = CGFloat(width / height)
+  func areaPreservingResized(newWidth width: CGFloat, height: CGFloat) -> NSRect {
+    let targetAspectRatio = width / height
     let currentArea = size.width * size.height
 
     let newWidth = sqrt(currentArea * targetAspectRatio)

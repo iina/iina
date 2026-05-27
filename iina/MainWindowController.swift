@@ -118,6 +118,7 @@ class MainWindowController: PlayerWindowController {
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
+  var sideBarView: SideBarView!
 
   // MARK: - Status
 
@@ -461,7 +462,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var settingsButton: NSButton!
   @IBOutlet weak var playlistButton: NSButton!
-  @IBOutlet weak var sideBarView: NSVisualEffectView!
   @IBOutlet weak var bottomView: NSView!
   @IBOutlet weak var bufferIndicatorView: NSVisualEffectView!
   @IBOutlet weak var bufferProgressLabel: NSTextField!
@@ -523,7 +523,7 @@ class MainWindowController: PlayerWindowController {
     super.windowDidLoad()
     MemoryUsage.shared.logUsage("after window loaded")
 
-    guard let window = window else { return }
+    guard let window, let cv = window.contentView else { return }
 
     window.styleMask.insert(.fullSizeContentView)
 
@@ -549,9 +549,6 @@ class MainWindowController: PlayerWindowController {
 
     window.aspectRatio = AppData.sizeWhenNoVideo
 
-    // sidebar views
-    sideBarView.isHidden = true
-
     // osc views
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
@@ -570,7 +567,6 @@ class MainWindowController: PlayerWindowController {
     fadeableViews.append(titlebarAccessoryView)
 
     // video view
-    guard let cv = window.contentView else { return }
     cv.autoresizesSubviews = false
     addVideoViewToWindow()
 
@@ -600,25 +596,29 @@ class MainWindowController: PlayerWindowController {
     updateBufferIndicatorView()
 
     // thumbnail peek view
-    window.contentView?.addSubview(thumbnailPeekView)
-    window.contentView?.addSubview(timePreviewVisualEffectView)
+    cv.addSubview(thumbnailPeekView)
+    cv.addSubview(timePreviewVisualEffectView)
     thumbnailPeekView.isHidden = true
     timePreviewVisualEffectView.isHidden = true
     timePreviewVisualEffectView.roundCorners(withRadius: 5)
     timePreviewTextField.font = monospacedFont
 
-    // osd
+    // create translucent views
     osdView = OSDView(mainWindow: self)
+    cv.addSubview(osdView)
+    additionalInfoView = AdditionalInfoView(mainWindow: self)
+    cv.addSubview(additionalInfoView)
+    sideBarView = SideBarView(mainWindow: self)
+    cv.addSubview(sideBarView)
+
+    // osd
     if #available(macOS 26.0, *) {
       osdView.setStyle(.liquidGlass)
     }
-    window.contentView?.addSubview(osdView)
     osdView.padding(.leading(8), .trailing(greaterThan: 8), .bottom(greaterThan: 8))
       .spacing(.top(8), to: titleBarView)
 
     // additional info view
-    additionalInfoView = AdditionalInfoView(mainWindow: self)
-    window.contentView?.addSubview(additionalInfoView)
     additionalInfoView.padding(.leading(greaterThan: 8), .bottom(greaterThan: 8))
       .spacing(.top(8), to: titleBarView)
       .spacing(.trailing(8), to: sideBarView)
@@ -627,10 +627,21 @@ class MainWindowController: PlayerWindowController {
       additionalInfoView.setStyle(.liquidGlass)
     }
 
+    // sidebar
+    sideBarView.padding(.bottom(6)).spacing(.top(6), to: titleBarView)
+    sideBarWidthConstraint = sideBarView.widthAnchor.constraint(equalToConstant: 60)
+    sideBarWidthConstraint.isActive = true
+    sideBarRightConstraint = cv.trailingAnchor.constraint(equalTo: sideBarView.trailingAnchor , constant: 0)
+    sideBarRightConstraint.isActive = true
+    sideBarView.isHidden = true
+    if #available(macOS 26.0, *) {
+      sideBarView.setStyle(.liquidGlass)
+    }
+
     // other initialization
     titleBarBottomBorder.fillColor = NSColor.titleBarBorder
     cachedScreenCount = NSScreen.screens.count
-    [titleBarView, controlBarBottom, controlBarFloating, sideBarView, pipOverlayView].forEach {
+    [titleBarView, controlBarBottom, controlBarFloating, pipOverlayView].forEach {
       $0?.state = .active
     }
     // hide other views
@@ -2237,11 +2248,17 @@ class MainWindowController: PlayerWindowController {
 
     // adjust sidebar width
     guard let view = (viewController as? NSViewController)?.view else {
-        Logger.fatal("viewController is not a NSViewController")
+      Logger.fatal("viewController is not a NSViewController")
     }
     sidebarAnimationState = .willShow
     let width = type.width().clamped(to: 0...sidebarMaxWidth)
+    let trailingMargin: CGFloat = if #available(macOS 26.0, *), sideBarView.style == .liquidGlass {
+      6
+    } else {
+      0
+    }
     sideBarWidthConstraint.constant = width
+
     // The macOS setting could change at any point in time. Remember which type of animation is
     // being used. Avoid using fading when disabling animations as that animation will initially
     // malfunction if used with a short duration.
@@ -2254,11 +2271,8 @@ class MainWindowController: PlayerWindowController {
       sideBarView.isHidden = false
     }
     // add view and constraints
-    sideBarView.addSubview(view)
-    let constraintsH = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v]|", options: [], metrics: nil, views: ["v": view])
-    let constraintsV = NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|", options: [], metrics: nil, views: ["v": view])
-    NSLayoutConstraint.activate(constraintsH)
-    NSLayoutConstraint.activate(constraintsV)
+    sideBarView.setContent(view)
+    view.padding(.all)
     var viewController = viewController
     viewController.downShift = titleBarView.frame.height
     // show sidebar
@@ -2268,7 +2282,7 @@ class MainWindowController: PlayerWindowController {
       if useFade {
         sideBarView.animator().isHidden = false
       } else {
-        sideBarRightConstraint.animator().constant = 0
+        sideBarRightConstraint.animator().constant = trailingMargin
       }
     }) {
       self.sidebarAnimationState = .shown

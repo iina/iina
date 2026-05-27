@@ -18,7 +18,8 @@ class TranslucentView: NSView {
   private var padding: (CGFloat, CGFloat)
   private var content: NSView?
   private var container: NSView?
-  private var style: Style = .visualEffect
+  var style: Style = .visualEffect
+  private var appliedStyle: Style?
 
   init(liquidGlassCornerRadius: CGFloat = 16, vevCornerRadius: CGFloat = 8, padding: (CGFloat, CGFloat)) {
     self.liquidGlassCornerRadius = liquidGlassCornerRadius
@@ -46,7 +47,8 @@ class TranslucentView: NSView {
   }
 
   func setStyle(_ newStyle: Style, force: Bool = false) {
-    let force = force || (style != newStyle)
+    self.style = newStyle
+    let force = force || (appliedStyle != newStyle)
     guard let content, force else { return }
 
     let wrapper = NSView()
@@ -89,5 +91,7 @@ class TranslucentView: NSView {
     subviews.forEach { $0.removeFromSuperview() }
     addSubview(container!)
     container!.padding(.all)
+
+    appliedStyle = style
   }
 }

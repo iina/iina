@@ -415,6 +415,7 @@
 		E3A239A82FC6D45000CE6ACC /* TranslucentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */; };
 		E3A239AA2FC6D88F00CE6ACC /* OSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239A92FC6D88C00CE6ACC /* OSDView.swift */; };
 		E3A239AC2FC70EC300CE6ACC /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */; };
+		E3A239AE2FC7267300CE6ACC /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239AD2FC7267000CE6ACC /* SideBarView.swift */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
 		E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */; };
@@ -1979,6 +1980,7 @@
 		E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentView.swift; sourceTree = "<group>"; };
 		E3A239A92FC6D88C00CE6ACC /* OSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDView.swift; sourceTree = "<group>"; };
 		E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
+		E3A239AD2FC7267000CE6ACC /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
@@ -2905,6 +2907,7 @@
 		E3A239A62FC6D3F000CE6ACC /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
+				E3A239AD2FC7267000CE6ACC /* SideBarView.swift */,
 				E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */,
 				E3A239A92FC6D88C00CE6ACC /* OSDView.swift */,
 				E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */,
@@ -3337,6 +3340,7 @@
 				E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */,
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
+				E3A239AE2FC7267300CE6ACC /* SideBarView.swift in Sources */,
 				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
 				519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */,
 				511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */,

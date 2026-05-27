@@ -31,7 +31,6 @@ class SettingsPageAudio: SettingsPage {
     return sections {
       sectionHardware()
       sectionVolume()
-      sectionReplayGain()
       sectionOther()
     }
   }
@@ -39,6 +38,10 @@ class SettingsPageAudio: SettingsPage {
   private func sectionHardware() -> SettingsSection {
     return section {
       SettingsList(title: .text_Hardware) {
+        SettingsItem.Input(title: .videoThreadsLabel)
+          .image(name: "number")
+          .bindTo(.audioThreads)
+          .hasDescription(content: .videoThreadsDesc)
         SettingsItem.General(title: .audioDriverEnableAVFoundationLabel)
           .image(name: "waveform")
           .withHelpLink(AppData.audioDriverHellpLink)
@@ -52,10 +55,6 @@ class SettingsPageAudio: SettingsPage {
                 return 0
               }))
           )
-        SettingsItem.Input(title: .videoThreadsLabel)
-          .image(name: "number")
-          .bindTo(.audioThreads)
-          .hasDescription(content: .videoThreadsDesc)
       }
 
       SettingsList {
@@ -88,6 +87,29 @@ class SettingsPageAudio: SettingsPage {
           .bindTo(.maxVolume)
           .hasDescription()
       }
+
+      SettingsList {
+        SettingsItem.PopupButton()
+          .image(name: "speaker.plus")
+          .bindTo(.replayGain, ofType: Preference.ReplayGainOption.self)
+          .disableSubListOnTag(0)
+          .hasDescription()
+          .withHelpLink(AppData.gainAdjustmentHelpLink)
+          .withDetailView {
+            SettingsItem.Input()
+              .bindTo(.replayGainPreamp)
+              .trailingLabel(.text_dB)
+              .hasDescription()
+            SettingsItem.Switch()
+              .bindTo(.replayGainClip)
+              .hasDescription()
+          }
+        SettingsItem.Input()
+          .image(name: "square.dotted")
+          .bindTo(.replayGainFallback)
+          .trailingLabel(.text_dB)
+          .hasDescription()
+      }
     }
   }
 
@@ -110,33 +132,6 @@ class SettingsPageAudio: SettingsPage {
             SettingsAccessory.LanguageSelector()
               .bind(to: .audioLanguage)
           )
-      }
-    }
-  }
-
-  private func sectionReplayGain() -> SettingsSection {
-    return section {
-      SettingsList(title: .text_ReplayGain) {
-        SettingsItem.PopupButton()
-          .image(name: "speaker.plus")
-          .bindTo(.replayGain, ofType: Preference.ReplayGainOption.self)
-          .disableSubListOnTag(0)
-          .hasDescription()
-          .withHelpLink(AppData.gainAdjustmentHelpLink)
-          .withDetailView {
-            SettingsItem.Input()
-              .bindTo(.replayGainPreamp)
-              .trailingLabel(.text_dB)
-              .hasDescription()
-            SettingsItem.Switch()
-              .bindTo(.replayGainClip)
-              .hasDescription()
-          }
-        SettingsItem.Input()
-          .image(name: "square.dotted")
-          .bindTo(.replayGainFallback)
-          .trailingLabel(.text_dB)
-          .hasDescription()
       }
     }
   }

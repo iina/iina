@@ -16,7 +16,6 @@ extension SettingsLocalization.Key {
   static let text_Audio = SettingsLocalization.Key("$Audio")
   static let text_SPDIFOutput = SettingsLocalization.Key("$SPDIFOutput")
   static let text_PreferredLanguage = SettingsLocalization.Key("$PreferredLanguage")
-  static let text_ReplayGain = SettingsLocalization.Key("$ReplayGain")
   static let text_GainAdjustment = SettingsLocalization.Key("$GainAdjustment")
   static let text_AdjustVolumeGainAccordingTo = SettingsLocalization.Key("$AdjustVolumeGainAccordingTo")
   static let text_PreampGain = SettingsLocalization.Key("$PreampGain")

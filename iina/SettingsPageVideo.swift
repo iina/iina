@@ -54,7 +54,7 @@ class SettingsPageVideo: SettingsPage {
 
   private func sectionColor() -> SettingsSection {
     return section {
-      SettingsList(title: .text_VideoColor) {
+      SettingsList(title: .text_ColorHDR) {
         SettingsItem.Switch()
           .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
           .bindTo(.loadIccProfile)

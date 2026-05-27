@@ -674,12 +674,12 @@ extension NSImage {
   /// first available SF Symbol at runtime.
   ///
   /// Use this function only for stock SF Symbol. If a symbol is customized and imported from SF Symbol.app, it is available for all
-  /// systems, so we should use `NSImage(named:)`or the auto generated names by Xcode directly. Perferablly, we use stock SF Symbols;
-  /// the next tier is customized and imported SF Symbols; we only use a forgien symbol if that is absolutely necessary.
+  /// systems, so we should use `NSImage(named:)`or the auto generated names by Xcode directly. Preferably, we use stock SF Symbols;
+  /// the next tier is customized and imported SF Symbols; we only use a foreign symbol if that is absolutely necessary.
   ///
   /// - Parameters:
   ///   - names: A list name of the SF Symbol. The name requires higher SF Symbol version must be at front, with fallback SF Symbol
-  ///   names at later indexes. If no candidate is availble, a `nil` will be returned.
+  ///   names at later indexes. If no candidate is available, a `nil` will be returned.
   ///   - configuration: The symbol configuration for the SF symbol. Optional.
   static func findSFSymbol(_ names: [String], withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage? {
     for name in names {

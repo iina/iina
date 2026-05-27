@@ -23,7 +23,8 @@ class SettingsWindow: NSWindow {
   static let `default`: SettingsWindow = SettingsWindow([
     SettingsPageGeneral(),
     SettingsPageUI(),
-    SettingsPageVideoAudio(),
+    SettingsPageVideo(),
+    SettingsPageAudio(),
     SettingsPageSubtitles(),
     SettingsPageNetwork(),
     SettingsPageControl(),

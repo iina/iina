@@ -10,10 +10,6 @@
             <connections>
                 <outlet property="bottomBarBottomConstraint" destination="vP1-IE-sbB" id="G77-vL-Wf8"/>
                 <outlet property="bottomView" destination="Tdb-EA-alw" id="5Xv-Ja-j4G"/>
-                <outlet property="bufferDetailLabel" destination="hlZ-5D-Wag" id="3Ld-2C-wGO"/>
-                <outlet property="bufferIndicatorView" destination="oX4-0N-but" id="fXY-gn-jfQ"/>
-                <outlet property="bufferProgressLabel" destination="2gH-wF-EpI" id="23t-nJ-ksf"/>
-                <outlet property="bufferSpin" destination="uZe-PA-1Id" id="PdW-fg-yqB"/>
                 <outlet property="controlBarBottom" destination="DFb-1L-U9o" id="U9w-bH-8zM"/>
                 <outlet property="controlBarFloating" destination="OiF-pA-8Sd" id="7C1-6a-ZK6"/>
                 <outlet property="fragControlView" destination="hDm-KI-3o4" id="ITm-fa-cWL"/>
@@ -57,7 +53,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1084"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1410"/>
             <view key="contentView" id="se5-gp-TjO" customClass="MainWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,46 +79,6 @@
                             <constraint firstItem="YkI-ii-zaW" firstAttribute="centerX" secondItem="Nrz-jZ-Luf" secondAttribute="centerX" id="JAE-TE-I2W"/>
                             <constraint firstItem="pxV-jX-kfL" firstAttribute="top" secondItem="YkI-ii-zaW" secondAttribute="bottom" constant="8" id="VX9-W1-IMy"/>
                             <constraint firstItem="YkI-ii-zaW" firstAttribute="centerY" secondItem="Nrz-jZ-Luf" secondAttribute="centerY" id="hhc-1u-xpc"/>
-                        </constraints>
-                    </visualEffectView>
-                    <visualEffectView hidden="YES" wantsLayer="YES" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="oX4-0N-but">
-                        <rect key="frame" x="240" y="152" width="160" height="96"/>
-                        <subviews>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="uZe-PA-1Id">
-                                <rect key="frame" x="64" y="44" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="uZe-PA-1Id" secondAttribute="height" multiplier="1:1" id="2KD-iY-Rbo"/>
-                                    <constraint firstAttribute="width" constant="32" id="7BK-Wc-K9S"/>
-                                </constraints>
-                            </progressIndicator>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2gH-wF-EpI">
-                                <rect key="frame" x="24" y="20" width="113" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Buffering... 100%" id="3fe-fP-yMB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-5D-Wag">
-                                <rect key="frame" x="64" y="8" width="32" height="11"/>
-                                <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="WOE-SX-krh">
-                                    <font key="font" metaFont="menu" size="9"/>
-                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="width" priority="250" constant="160" id="CKq-QQ-TvO"/>
-                            <constraint firstAttribute="bottom" secondItem="hlZ-5D-Wag" secondAttribute="bottom" constant="8" id="DDG-Yw-RfA"/>
-                            <constraint firstItem="2gH-wF-EpI" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Nfu-GM-Wcw"/>
-                            <constraint firstItem="uZe-PA-1Id" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="Qfn-MA-rHy"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2gH-wF-EpI" secondAttribute="trailing" id="TQS-Yy-cH6"/>
-                            <constraint firstItem="hlZ-5D-Wag" firstAttribute="centerX" secondItem="oX4-0N-but" secondAttribute="centerX" id="bOz-TB-YLY"/>
-                            <constraint firstAttribute="bottom" secondItem="2gH-wF-EpI" secondAttribute="bottom" constant="20" id="ddz-PD-RB3"/>
-                            <constraint firstItem="uZe-PA-1Id" firstAttribute="top" secondItem="oX4-0N-but" secondAttribute="top" constant="20" id="sio-TN-E1P"/>
-                            <constraint firstItem="2gH-wF-EpI" firstAttribute="top" secondItem="uZe-PA-1Id" secondAttribute="bottom" constant="8" id="swz-Rz-9Hv"/>
-                            <constraint firstItem="2gH-wF-EpI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oX4-0N-but" secondAttribute="leading" id="ufO-Jb-vdH"/>
                         </constraints>
                     </visualEffectView>
                     <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1L-U9o">
@@ -213,12 +169,10 @@
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Vtd-0f-x7p"/>
-                    <constraint firstItem="oX4-0N-but" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="XlV-7n-jPb"/>
                     <constraint firstAttribute="bottom" secondItem="OiF-pA-8Sd" secondAttribute="bottom" priority="750" constant="50" id="cRP-R4-zYY"/>
                     <constraint firstAttribute="bottom" secondItem="DFb-1L-U9o" secondAttribute="bottom" id="eLf-C3-GlT"/>
                     <constraint firstItem="DFb-1L-U9o" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="gbo-9y-nvn"/>
                     <constraint firstAttribute="bottom" secondItem="Nrz-jZ-Luf" secondAttribute="bottom" id="kHE-py-RY5"/>
-                    <constraint firstItem="oX4-0N-but" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="kfR-hG-8ee"/>
                     <constraint firstAttribute="trailing" secondItem="Nrz-jZ-Luf" secondAttribute="trailing" id="mJs-PF-Ex5"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="ofB-WP-9dW"/>
                     <constraint firstAttribute="trailing" secondItem="TRx-2V-Gr3" secondAttribute="trailing" id="te1-wi-BbH"/>
@@ -508,8 +462,8 @@
     <resources>
         <image name="mute" width="16" height="14"/>
         <image name="pause" width="24" height="24"/>
-        <image name="pin" catalog="system" width="15" height="17"/>
-        <image name="pin.fill" catalog="system" width="15" height="17"/>
+        <image name="pin" catalog="system" width="16" height="17"/>
+        <image name="pin.fill" catalog="system" width="16" height="17"/>
         <image name="play" width="24" height="24"/>
         <image name="playing-in-pip" width="87" height="68"/>
         <image name="speed" width="24" height="24"/>

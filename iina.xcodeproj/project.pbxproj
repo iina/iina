@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
 		3412DB8E2C2FC64C00BBC142 /* Equalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412DB8D2C2FC64800BBC142 /* Equalizations.swift */; };
+		3465CC8F2FC72181008DBFB6 /* BufferIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */; };
 		348F71962DE2A819006C587D /* MPVCommandWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F71952DE2A814006C587D /* MPVCommandWrappers.swift */; };
 		34ACAB722C142A0500F871A0 /* libintl.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34ACAB2D2C142A0300F871A0 /* libintl.8.dylib */; };
 		34ACAB732C142A0500F871A0 /* libgraphite2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34ACAB2E2C142A0300F871A0 /* libgraphite2.3.dylib */; };
@@ -709,6 +710,7 @@
 		2FE1FCB01F98D3DB004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		2FE1FCB11F98D3DB004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		3412DB8D2C2FC64800BBC142 /* Equalizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equalizations.swift; sourceTree = "<group>"; };
+		3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferIndicatorView.swift; sourceTree = "<group>"; };
 		348B000028DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
 		348B000128DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
 		348B000228DC688E0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/CropSettingsViewController.strings"; sourceTree = "<group>"; };
@@ -2910,6 +2912,7 @@
 				E3A239AD2FC7267000CE6ACC /* SideBarView.swift */,
 				E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */,
 				E3A239A92FC6D88C00CE6ACC /* OSDView.swift */,
+				3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */,
 				E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */,
 			);
 			path = MainWindow;
@@ -3469,6 +3472,7 @@
 				D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */,
 				8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
+				3465CC8F2FC72181008DBFB6 /* BufferIndicatorView.swift in Sources */,
 				E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */,
 				84D377671D737F58007F7396 /* MPVChapter.swift in Sources */,

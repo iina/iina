@@ -118,6 +118,7 @@ class MainWindowController: PlayerWindowController {
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
+  var bufferIndicatorView: BufferIndicatorView!
   var sideBarView: SideBarView!
 
   // MARK: - Status
@@ -463,7 +464,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var settingsButton: NSButton!
   @IBOutlet weak var playlistButton: NSButton!
   @IBOutlet weak var bottomView: NSView!
-  @IBOutlet weak var bufferIndicatorView: NSVisualEffectView!
   @IBOutlet weak var bufferProgressLabel: NSTextField!
   @IBOutlet weak var bufferSpin: NSProgressIndicator!
   @IBOutlet weak var bufferDetailLabel: NSTextField!
@@ -591,10 +591,6 @@ class MainWindowController: PlayerWindowController {
     // init quick setting view now
     let _ = quickSettingView
 
-    // buffer indicator view
-    bufferIndicatorView.roundCorners(withRadius: 10)
-    updateBufferIndicatorView()
-
     // thumbnail peek view
     cv.addSubview(thumbnailPeekView)
     cv.addSubview(timePreviewVisualEffectView)
@@ -623,8 +619,16 @@ class MainWindowController: PlayerWindowController {
       .spacing(.top(8), to: titleBarView)
       .spacing(.trailing(8), to: sideBarView)
     additionalInfoView.isHidden = true
+
+    // buffer indicator view
+    bufferIndicatorView = BufferIndicatorView(mainWindow: self)
+    window.contentView?.addSubview(bufferIndicatorView)
+    bufferIndicatorView.center()
+    bufferIndicatorView.update()
+
     if #available(macOS 26.0, *) {
       additionalInfoView.setStyle(.liquidGlass)
+      bufferIndicatorView.setStyle(.liquidGlass)
     }
 
     // sidebar
@@ -1308,7 +1312,7 @@ class MainWindowController: PlayerWindowController {
     }
     resetCollectionBehavior()
     // update buffer indicator view
-    updateBufferIndicatorView()
+    bufferIndicatorView.update()
     // start tracking mouse event
     guard let cv = window.contentView else { return }
     if cv.trackingAreas.isEmpty {
@@ -2542,20 +2546,6 @@ class MainWindowController: PlayerWindowController {
     return topOfThumbnail <= windowContentHeight
   }
 
-
-  func updateBufferIndicatorView() {
-    guard loaded else { return }
-
-    if player.info.isNetworkResource {
-      bufferIndicatorView.isHidden = false
-      bufferSpin.startAnimation(nil)
-      bufferProgressLabel.stringValue = NSLocalizedString("main.opening_stream", comment:"Opening stream…")
-      bufferDetailLabel.stringValue = ""
-    } else {
-      bufferIndicatorView.isHidden = true
-    }
-  }
-
   // MARK: - UI: Window size / aspect
 
   private var currentWindowAspectRatio: NSSize {
@@ -2926,33 +2916,6 @@ class MainWindowController: PlayerWindowController {
     if paused {
       speedValueIndex = AppData.availableSpeedValues.count / 2
     }
-  }
-
-  /// Update the state of the throbber indicating buffering or seeking is occurring.
-  /// - Important: The mpv
-  ///     [cache-buffering-state](https://mpv.io/manual/stable/#command-interface-cache-buffering-state)
-  ///     property is only valid when
-  ///     [paused-for-cache](https://mpv.io/manual/stable/#command-interface-paused-for-cache) is `true`
-  ///     and can not be used to provide an indication of progress when seeking.
-  func updateNetworkState() {
-    guard player.info.pausedForCache && Preference.bool(for: .showBufferingThrobber)
-            || player.info.isSeeking && Preference.bool(for: .showSeekingThrobber) else {
-      bufferIndicatorView.isHidden = true
-      return
-    }
-    let usedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheUsed,
-                                                         countStyle: .binary)
-    let speedStr = FloatingPointByteCountFormatter.string(fromByteCount: player.info.cacheSpeed)
-    if player.info.pausedForCache {
-      let bufferingState = player.info.bufferingState
-      bufferProgressLabel.stringValue = String(format:
-        NSLocalizedString("main.buffering_indicator", comment:"Buffering… %d%%"), bufferingState)
-    } else {
-      bufferProgressLabel.stringValue = NSLocalizedString("main.seeking_indicator",
-                                                          comment: "Seeking…")
-    }
-    bufferDetailLabel.stringValue = "\(usedStr)B (\(speedStr)B/s)"
-    bufferIndicatorView.isHidden = false
   }
 
   /// Configure the OSC arrow buttons based on IINA's `Use left/right button for` setting.

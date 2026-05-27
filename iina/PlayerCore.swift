@@ -2768,7 +2768,7 @@ class PlayerCore: NSObject {
           self.mainWindow.additionalInfoView.update()
         }
         if isNetworkStream {
-          self.mainWindow.updateNetworkState()
+          self.mainWindow.bufferIndicatorView.updateNetworkState()
         }
       }
 

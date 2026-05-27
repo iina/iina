@@ -16,7 +16,7 @@ class SettingsPageControl: SettingsPage {
   }
 
   override var image: NSImage {
-    return makeSymbol("computermouse", fallbackImage: "pref_control")
+    return .findSFSymbol(["computermouse", "command"], withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

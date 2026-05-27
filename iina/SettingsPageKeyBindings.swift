@@ -16,7 +16,7 @@ class SettingsPageKeyBindings: SettingsPage {
   }
 
   override var image: NSImage {
-    return makeSymbol("keyboard", fallbackImage: "pref_kb")
+    return .findSFSymbol("keyboard", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {
@@ -178,7 +178,7 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
     addKeyMappingBtn.translatesAutoresizingMaskIntoConstraints = false
     addKeyMappingBtn.imagePosition = .imageOnly
     addKeyMappingBtn.bezelStyle = .circular
-    addKeyMappingBtn.image = .findSFSymbol(["plus"])
+    addKeyMappingBtn.image = .findSFSymbol("plus")
     addKeyMappingBtn.target = self
     addKeyMappingBtn.action = #selector(addKeyMappingAction)
     addKeyMappingBtn.size(width: 26, height: 26)
@@ -452,7 +452,7 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
   private func changeButtonEnabledStatus() {
     let shouldEnableEdit = isCurrentConfigEditable()
     delConfBtn.isEnabled = shouldEnableEdit
-    addKeyMappingBtn.image = .findSFSymbol(shouldEnableEdit ? ["plus"]: ["custom.lock.badge.questionmark"])
+    addKeyMappingBtn.image = shouldEnableEdit ? .findSFSymbol("plus") : .customLockBadgeQuestionmark
   }
 
   /// Check whether or not a new config file with provided filename should be created.
@@ -532,8 +532,9 @@ fileprivate class KeyMappingCell: NSTableCellView {
       spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
       func createActionButton(symbol: String, action: Selector) -> ButtonWithObject {
+        let image = .findSFSymbol(symbol) ?? NSImage.init(named: symbol)!
         let button = ButtonWithObject(
-          title: "", image: .findSFSymbol([symbol])!, target: editor, action: action)
+          title: "", image: image, target: editor, action: action)
         button.bezelStyle = .circular
         button.size(width: 20, height: 20)
         button.isHidden = true

@@ -122,7 +122,7 @@ class SettingsUIHelper {
   }
 
   func image(_ symbol: String, size: CGFloat = 16) -> NSImageView {
-    let imageView = NSImageView(image: .findSFSymbol([symbol])!)
+    let imageView = NSImageView(image: .findSFSymbol(symbol)!)
     imageView.size(width: size, height: size)
     return imageView
   }

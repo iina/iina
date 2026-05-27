@@ -16,7 +16,7 @@ class SettingsPageNetwork: SettingsPage {
   }
 
   override var image: NSImage {
-    return makeSymbol("globe", fallbackImage: "pref_network")
+    return .findSFSymbol("globe", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

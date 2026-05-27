@@ -24,7 +24,7 @@ class SettingsPageUI: SettingsPage {
   }
 
   override var image: NSImage {
-    return makeSymbol("macwindow", fallbackImage: "pref_ui")
+    return .findSFSymbol("macwindow", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

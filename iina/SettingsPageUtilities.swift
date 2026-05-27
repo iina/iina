@@ -19,7 +19,7 @@ class SettingsPageUtilities: SettingsPage {
   }
 
   override var image: NSImage {
-    return makeSymbol("wrench.and.screwdriver", fallbackImage: "pref_utils")
+    return .findSFSymbol("wrench.and.screwdriver", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

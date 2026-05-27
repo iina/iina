@@ -18,7 +18,7 @@ class SettingsPageSubtitles: SettingsPage {
   }
 
   override var image: NSImage {
-    return makeSymbol("captions.bubble", fallbackImage: "pref_sub")
+    return .findSFSymbol("captions.bubble", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {
@@ -294,13 +294,13 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
 
     let sizeInput = ui.input(.subTextSize)
 
-    let boldButton = SButton(image: .findSFSymbol(["bold"]))
+    let boldButton = SButton(image: .findSFSymbol("bold"))
     boldButton.translatesAutoresizingMaskIntoConstraints = false
     boldButton.setButtonType(.toggle)
     boldButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subBold.rawValue)
     boldButton.size(width: 32, height: 25)
 
-    let italicButton = SButton(image: .findSFSymbol(["italic"]))
+    let italicButton = SButton(image: .findSFSymbol("italic"))
     italicButton.translatesAutoresizingMaskIntoConstraints = false
     italicButton.setButtonType(.toggle)
     italicButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subItalic.rawValue)

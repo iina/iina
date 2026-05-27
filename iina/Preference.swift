@@ -842,7 +842,7 @@ struct Preference {
     private func makeSymbol(_ names: [String], _ fallbackImage: NSImage.Name) -> NSImage {
         guard #available(macOS 14.0, *) else { return NSImage(named: fallbackImage)! }
         let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-        return NSImage.findSFSymbol(names, withConfiguration: configuration)
+        return NSImage.findSFSymbol(names, withConfiguration: configuration)!
       }
 
     func image() -> NSImage {

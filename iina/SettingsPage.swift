@@ -112,6 +112,8 @@ class SettingsPage {
   var image: NSImage { NSImage() }
   var sectionSpacing: CGFloat { 16 }
 
+  let symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+
   static var corderRadius: CGFloat = {
     if #available(macOS 26, *) {
       12
@@ -170,12 +172,6 @@ class SettingsPage {
   func registerSearchEntries() {
     let context = SettingsSearch.Context(l10n: localizationContext, page: identifier, section: nil, parent: nil)
     builtSections.forEach { $0.registerSearchEntry(context: context) }
-  }
-
-  func makeSymbol(_ name: String, fallbackImage: NSImage.Name) -> NSImage {
-    guard #available(macOS 14, *) else { return NSImage(named: fallbackImage)! }
-    let configuration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)
-    return NSImage.findSFSymbol([name], withConfiguration: configuration)
   }
 }
 

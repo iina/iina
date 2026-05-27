@@ -619,10 +619,10 @@ class MenuController: NSObject, NSMenuDelegate {
       keyEquivalent: "")
 
     if #available (macOS 26, *) {
-      managePluginsItem.image = .findSFSymbol(["gear"])
-      showPanelItem.image = .findSFSymbol(["puzzlepiece.extension"])
-      developerTool.image = .findSFSymbol(["terminal"])
-      reloadPluginsItem.image = .findSFSymbol(["arrow.counterclockwise"])
+      managePluginsItem.image = .findSFSymbol("gear")
+      showPanelItem.image = .findSFSymbol("puzzlepiece.extension")
+      developerTool.image = .findSFSymbol("terminal")
+      reloadPluginsItem.image = .findSFSymbol("arrow.counterclockwise")
     }
 
     pluginMenu.removeAllItems()

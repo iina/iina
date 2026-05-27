@@ -565,7 +565,7 @@ extension SettingsWindow {
           parentLabel.translatesAutoresizingMaskIntoConstraints = false
           addSubview(parentLabel)
 
-          let icon = NSImageView(image: .findSFSymbol("arrow.turn.down.right")!)
+          let icon = NSImageView(image: .sf("arrow.turn.down.right")!)
           icon.translatesAutoresizingMaskIntoConstraints = false
           addSubview(icon)
 

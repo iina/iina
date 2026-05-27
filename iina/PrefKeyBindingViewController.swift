@@ -23,7 +23,7 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   }
 
   var preferenceTabImage: NSImage {
-    return .findSFSymbol("keyboard", withConfiguration: symbolConfiguration)!
+    return .sf("keyboard", withConfiguration: symbolConfiguration)!
   }
 
   var preferenceContentIsScrollable: Bool {

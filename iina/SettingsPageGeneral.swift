@@ -20,7 +20,7 @@ class SettingsPageGeneral: SettingsPage {
   }
 
   override var image: NSImage {
-    return .findSFSymbol("gear", withConfiguration: symbolConfiguration)!
+    return .sf("gear", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

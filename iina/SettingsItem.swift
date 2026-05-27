@@ -126,7 +126,7 @@ struct SettingsItem {
 
       let labelStackView = NSStackView(views: [iconView, label])
 
-      if let imageName, let symbol = NSImage.findSFSymbol(imageName) {
+      if let imageName, let symbol = NSImage.sf(imageName) {
         iconView.image = symbol
         iconView.size(width: 24, height: 20)
       } else {
@@ -344,7 +344,7 @@ struct SettingsItem {
 
       image = NSImageView()
       image.translatesAutoresizingMaskIntoConstraints = false
-      if let imageName, let symbol = NSImage.findSFSymbol(imageName) {
+      if let imageName, let symbol = NSImage.sf(imageName) {
         image.image = symbol
       } else {
         image.isHidden = true

@@ -55,7 +55,7 @@ class Logger: NSObject {
 
     init(rawValue: String, symbolName: [String] = []) {
       self.rawValue = rawValue
-      self.image = .findSFSymbol(symbolName)
+      self.image = .sf(symbolName)
     }
   }
 

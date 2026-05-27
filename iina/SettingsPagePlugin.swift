@@ -19,7 +19,7 @@ class SettingsPagePlugin: SettingsPage {
   }
 
   override var image: NSImage {
-    return .findSFSymbol(["puzzlepiece.extension", "gearshape.2"], withConfiguration: symbolConfiguration)!
+    return .sf("puzzlepiece.extension", "gearshape.2", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {
@@ -147,7 +147,7 @@ fileprivate class PluginUpdateView: SettingsContainer {
     checkUpdateLabel.textColor = .secondaryLabelColor
     checkUpdateLabel.translatesAutoresizingMaskIntoConstraints = false
 
-    checkUpdateButton.image = .findSFSymbol("arrow.clockwise.circle")
+    checkUpdateButton.image = .sf("arrow.clockwise.circle")
     checkUpdateButton.imagePosition = .imageOnly
     checkUpdateButton.isBordered = false
     checkUpdateButton.size(width: 16, height: 16)
@@ -320,7 +320,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
         updateBtn = NSButton()
         updateBtn.isBordered = false
-        updateBtn.image = .findSFSymbol("arrow.up.circle")
+        updateBtn.image = .sf("arrow.up.circle")
         updateBtn.contentTintColor = .systemOrange
         updateBtn.isHidden = !PluginListView.pluginHasUpdate[plugin.identifier, default: false]
         updateBtn.target = self
@@ -346,7 +346,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
         progressIndicator.controlSize = .mini
 
         self.actionsBtn = NSButton()
-        actionsBtn.image = .findSFSymbol("ellipsis")
+        actionsBtn.image = .sf("ellipsis")
         actionsBtn.isBordered = false
         actionsBtn.target = self
         actionsBtn.action = #selector(actionsBtnAction)
@@ -369,7 +369,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
         self.aboutBtn = NSButton()
         aboutBtn.size(width: 18, height: 18)
-        aboutBtn.image = .findSFSymbol("info.circle")
+        aboutBtn.image = .sf("info.circle")
         aboutBtn.imageScaling = .scaleProportionallyUpOrDown
         aboutBtn.isBordered = false
         aboutBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -578,7 +578,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     versionLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
 
     let iconView = NSImageView()
-    iconView.image = .findSFSymbol(["puzzlepiece.extension", "gearshape.2"])
+    iconView.image = .sf("puzzlepiece.extension", "gearshape.2")
     iconView.translatesAutoresizingMaskIntoConstraints = false
     iconView.size(width: 24, height: 24)
 
@@ -598,7 +598,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
       (["questionmark.circle"], .text_Help),
     ]
     for (i, seg) in segments.enumerated() {
-      segControl.setImage(.findSFSymbol(seg.0), forSegment: i)
+      segControl.setImage(.sf(seg.0), forSegment: i)
       segControl.setLabel(l10n.localized(seg.1), forSegment: i)
     }
 

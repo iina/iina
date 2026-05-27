@@ -20,7 +20,7 @@ class PrefControlViewController: PreferenceViewController, PreferenceWindowEmbed
   }
 
   var preferenceTabImage: NSImage {
-    return .findSFSymbol(["computermouse", "command"], withConfiguration: symbolConfiguration)!
+    return .sf("computermouse", "command", withConfiguration: symbolConfiguration)!
   }
 
   override var sectionViews: [NSView] {

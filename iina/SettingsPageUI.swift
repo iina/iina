@@ -24,7 +24,7 @@ class SettingsPageUI: SettingsPage {
   }
 
   override var image: NSImage {
-    return .findSFSymbol("macwindow", withConfiguration: symbolConfiguration)!
+    return .sf("macwindow", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

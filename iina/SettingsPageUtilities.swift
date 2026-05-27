@@ -19,7 +19,7 @@ class SettingsPageUtilities: SettingsPage {
   }
 
   override var image: NSImage {
-    return .findSFSymbol("wrench.and.screwdriver", withConfiguration: symbolConfiguration)!
+    return .sf("wrench.and.screwdriver", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {
@@ -74,7 +74,7 @@ class SettingsPageUtilities: SettingsPage {
   }
 
   private func actionButton(action: Selector, symbolName: [String] = []) -> NSButton {
-    return NSButton(title: "", image: .findSFSymbol(symbolName + ["arrow.right"])!, target: self, action: action)
+    return NSButton(title: "", image: .sf(symbolName + ["arrow.right"])!, target: self, action: action)
   }
 
   private func updateThumbnailCacheStat() {
@@ -268,7 +268,7 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
 fileprivate class BrowserExtensionView: SettingsAccessory.Base {
   func linkButton(_ key: SettingsLocalization.Key, _ selector: Selector, _ symbolName: [String] = []) -> NSButton {
     let button = ui.button(key)
-    button.image = .findSFSymbol(symbolName + ["square.and.arrow.down"])
+    button.image = .sf(symbolName + ["square.and.arrow.down"])
     button.imagePosition = .imageTrailing
     button.target = self
     button.action = selector

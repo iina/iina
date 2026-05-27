@@ -300,7 +300,7 @@ extension NSMenu {
     menuItem.isEnabled = enabled
     
     if let image = image {
-      menuItem.image = .findSFSymbol(image)
+      menuItem.image = .sf(image)
     }
     
     self.addItem(menuItem)
@@ -681,7 +681,7 @@ extension NSImage {
   ///   - names: A list name of the SF Symbol. The name requires higher SF Symbol version must be at front, with fallback SF Symbol
   ///   names at later indexes. If no candidate is available, a `nil` will be returned.
   ///   - configuration: The symbol configuration for the SF symbol. Optional.
-  static func findSFSymbol(_ names: [String], withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage? {
+  static func sf(_ names: [String], withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage? {
     for name in names {
       if let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) {
         if let configuration, let configured = symbol.withSymbolConfiguration(configuration) {
@@ -693,8 +693,9 @@ extension NSImage {
     return nil
   }
 
-  static func findSFSymbol(_ name: String, withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage? {
-    return findSFSymbol([name], withConfiguration: configuration)
+  /// This helper function should be used instead of the one above when possible.
+  static func sf(_ names: String..., withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage? {
+    sf(names, withConfiguration: configuration)
   }
 }
 

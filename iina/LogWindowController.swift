@@ -43,7 +43,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     didSet {
       guard let button = toolbarItem(withID: .followButton) else { return }
       let symbolName = following ? "arrow.up.left.circle.fill" : "arrow.up.left.circle"
-      button.image = .findSFSymbol(symbolName)
+      button.image = .sf(symbolName)
     }
   }
   private var filteredLogLevel = Logger.Level.preferred {
@@ -149,7 +149,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     tableView.menu = NSMenu()
     let copyItem = NSMenuItem(title: NSLocalizedString("logwindow.copy", comment: "Copy"), action: #selector(menuCopy), keyEquivalent: "")
     if #available(macOS 26, *) {
-      copyItem.image = .findSFSymbol("document.on.document")
+      copyItem.image = .sf("document.on.document")
     }
     tableView.menu?.addItem(copyItem)
 
@@ -226,7 +226,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     item.label = NSLocalizedString("logwindow.now", comment: "Now")
     item.paletteLabel = NSLocalizedString("logwindow.now", comment: "Now")
     item.toolTip = NSLocalizedString("logwindow.now.desc", comment: "Follow latest logs")
-    item.image = .findSFSymbol("arrow.up.left.circle")
+    item.image = .sf("arrow.up.left.circle")
     item.action = #selector(followAction)
     return item
   }

@@ -16,7 +16,7 @@ class SettingsPageNetwork: SettingsPage {
   }
 
   override var image: NSImage {
-    return .findSFSymbol("globe", withConfiguration: symbolConfiguration)!
+    return .sf("globe", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

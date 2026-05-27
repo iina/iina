@@ -18,7 +18,7 @@ class PrefNetworkViewController: PreferenceViewController, PreferenceWindowEmbed
   var viewIdentifier: String = "PrefNetworkViewController"
 
   var preferenceTabImage: NSImage {
-    return .findSFSymbol("globe", withConfiguration: symbolConfiguration)!
+    return .sf("globe", withConfiguration: symbolConfiguration)!
   }
 
   var preferenceTabTitle: String {

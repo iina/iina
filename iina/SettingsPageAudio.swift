@@ -20,7 +20,7 @@ class SettingsPageAudio: SettingsPage {
   }
 
   override var image: NSImage {
-    return .findSFSymbol("waveform", withConfiguration: symbolConfiguration)!
+    return .sf("waveform", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {

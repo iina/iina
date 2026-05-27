@@ -1,5 +1,5 @@
 //
-//  SettingsPageVideoAudio.swift
+//  SettingsPageAudio.swift
 //  iina
 //
 //  Created by Hechen Li on 6/15/25.
@@ -8,87 +8,40 @@
 
 import Foundation
 
-class SettingsPageVideoAudio: SettingsPage {
+class SettingsPageAudio: SettingsPage {
   private lazy var audioOutputDeviceView: AudioOutputDeviceView = AudioOutputDeviceView()
 
   override var identifier: String {
-    "video.audio"
+    "audio"
   }
 
   override var title: String {
-    return NSLocalizedString("preference.video_audio", comment: "Codec")
+    return NSLocalizedString("preference.audio", comment: "Audio")
   }
 
   override var image: NSImage {
-    return makeSymbol("play.rectangle.on.rectangle", fallbackImage: "pref_av")
+    return makeSymbol("waveform", fallbackImage: "pref_av")
   }
 
   override var localizationTable: String {
-    "SettingsVideoAudioLocalizable"
+    "SettingsAudioLocalizable"
   }
 
   override func content() -> [SettingsSection] {
     return sections {
-      sectionVideo()
-      sectionAudio()
-      sectionReplayGain()
+      sectionHardware()
+      sectionVolume()
+      sectionOther()
     }
   }
 
-  private func sectionVideo() -> SettingsSection {
+  private func sectionHardware() -> SettingsSection {
     return section {
-      SettingsList(title: .text_Video) {
-        SettingsItem.Input()
+      SettingsList(title: .text_Hardware) {
+        SettingsItem.Input(title: .videoThreadsLabel)
           .image(name: "number")
-          .bindTo(.videoThreads)
-          .hasDescription()
-        SettingsItem.General(title: .hardwareDecoderLabel)
-          .image(name: "cpu")
-          .withDetailView(
-            SettingsAccessory.Selection()
-              .bindTo(.hardwareDecoder, ofType: Preference.HardwareDecoderOption.self)
-          )
-        SettingsItem.Switch()
-          .bindTo(.forceDedicatedGPU)
-          .hasDescription()
-      }
-
-      SettingsList {
-        SettingsItem.Switch()
-          .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
-          .bindTo(.loadIccProfile)
-          .hasDescription()
-      }
-
-      SettingsList {
-        SettingsItem.Switch()
-          .image(name: ["sun.lefthalf.filled", "sun.max"])
-          .bindTo(.enableHdrSupport)
-          .hasDescription()
-      }
-
-      SettingsList {
-        SettingsItem.Switch()
-          .image(name: "chart.xyaxis.line")
-          .bindTo(.enableToneMapping)
-          .withHelpLink(AppData.toneMappingHelpLink)
-          .withDetailView {
-            SettingsItem.Input()
-              .bindTo(.toneMappingTargetPeak)
-              .trailingLabel(.text_nits)
-              .hasDescription()
-              .withHelpLink(AppData.targetPeakHelpLink)
-            SettingsItem.PopupButton()
-              .bindTo(.toneMappingAlgorithm, ofType: Preference.ToneMappingAlgorithmOption.self)
-              .withHelpLink(AppData.algorithmHelpLink)
-          }
-      }
-    }
-  }
-
-  private func sectionAudio() -> SettingsSection {
-    return section {
-      SettingsList(title: .text_Audio) {
+          .bindTo(.audioThreads)
+          .hasDescription(content: .videoThreadsDesc)
         SettingsItem.General(title: .audioDriverEnableAVFoundationLabel)
           .image(name: "waveform")
           .withHelpLink(AppData.audioDriverHellpLink)
@@ -101,31 +54,6 @@ class SettingsPageVideoAudio: SettingsPage {
                 }
                 return 0
               }))
-          )
-        SettingsItem.Input(title: .videoThreadsLabel)
-          .image(name: "number")
-          .bindTo(.audioThreads)
-          .hasDescription(content: .videoThreadsDesc)
-      }
-
-      SettingsList {
-        SettingsItem.SwitchWithInput()
-          .image(name: "speaker.wave.3")
-          .labelKey(.enableInitialVolume)
-          .bindInputTo(.initialVolume)
-          .bindSwitchTo(.enableInitialVolume)
-        SettingsItem.Input()
-          .bindTo(.maxVolume)
-          .hasDescription()
-      }
-
-      SettingsList {
-        SettingsItem.General(title: .gaplessAudioLabel)
-          .image(name: "custom.waveform.2.arrow.trianglehead.2.clockwise.rotate.90")
-          .withHelpLink(AppData.gaplessAudioHelpLink)
-          .withDetailView(
-            SettingsAccessory.Selection()
-              .bindTo(.gaplessAudio, ofType: Preference.GaplessAudioOption.self)
           )
       }
 
@@ -144,21 +72,23 @@ class SettingsPageVideoAudio: SettingsPage {
               .bindTo(.spdifDTSHD)
           }
       }
-
-      SettingsList {
-        SettingsItem.General(title: .text_PreferredLanguage)
-          .image(name: "character.book.closed")
-          .withDetailView(
-            SettingsAccessory.LanguageSelector()
-              .bind(to: .audioLanguage)
-          )
-      }
     }
   }
 
-  private func sectionReplayGain() -> SettingsSection {
+  private func sectionVolume() -> SettingsSection {
     return section {
-      SettingsList(title: .text_ReplayGain) {
+      SettingsList(title: .text_Volume) {
+        SettingsItem.SwitchWithInput()
+          .image(name: "speaker.wave.3")
+          .labelKey(.enableInitialVolume)
+          .bindInputTo(.initialVolume)
+          .bindSwitchTo(.enableInitialVolume)
+        SettingsItem.Input()
+          .bindTo(.maxVolume)
+          .hasDescription()
+      }
+
+      SettingsList {
         SettingsItem.PopupButton()
           .image(name: "speaker.plus")
           .bindTo(.replayGain, ofType: Preference.ReplayGainOption.self)
@@ -179,6 +109,29 @@ class SettingsPageVideoAudio: SettingsPage {
           .bindTo(.replayGainFallback)
           .trailingLabel(.text_dB)
           .hasDescription()
+      }
+    }
+  }
+
+  private func sectionOther() -> SettingsSection {
+    return section {
+      SettingsList(title: .text_AudioOther) {
+        SettingsItem.General(title: .gaplessAudioLabel)
+          .image(name: "custom.waveform.2.arrow.trianglehead.2.clockwise.rotate.90")
+          .withHelpLink(AppData.gaplessAudioHelpLink)
+          .withDetailView(
+            SettingsAccessory.Selection()
+              .bindTo(.gaplessAudio, ofType: Preference.GaplessAudioOption.self)
+          )
+      }
+
+      SettingsList {
+        SettingsItem.General(title: .text_PreferredLanguage)
+          .image(name: "character.book.closed")
+          .withDetailView(
+            SettingsAccessory.LanguageSelector()
+              .bind(to: .audioLanguage)
+          )
       }
     }
   }

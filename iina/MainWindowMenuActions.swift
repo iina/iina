@@ -71,6 +71,11 @@ extension MainWindowController {
     setWindowFloatingOnTop(!isOntop)
   }
 
+  @objc func menuLockAspectRatio(_ sender: NSMenuItem) {
+    let unlock = Preference.bool(for: .unlockWindowAspectRatio)
+    Preference.set(!unlock, for: .unlockWindowAspectRatio)
+  }
+
   @objc func menuTogglePIP(_ sender: NSMenuItem) {
     switch pipStatus {
     case .notInPIP:

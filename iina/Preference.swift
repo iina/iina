@@ -163,6 +163,8 @@ struct Preference {
 
     static let disableAnimations = Key("disableAnimations")
 
+    static let unlockWindowAspectRatio = Key("unlockWindowAspectRatio")
+
     // Codec
 
     static let videoThreads = Key("videoThreads")
@@ -1032,6 +1034,7 @@ struct Preference {
     .togglePipByMinimizingWindow: false,
     .togglePipByMinimizingWindowForVideoOnly: false,
     .disableAnimations: false,
+    .unlockWindowAspectRatio: false,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,

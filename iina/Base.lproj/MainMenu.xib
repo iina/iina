@@ -378,6 +378,9 @@ CA
                             <menuItem title="Float on Top" secondaryImage="pin" catalog="system" id="wex-rX-PcY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Lock Window Aspect Ratio" image="lock.rectangle" catalog="system" id="Saz-zT-RXt">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="xpM-h7-A4R"/>
                             <menuItem title="Enter Music Mode" secondaryImage="music.microphone" catalog="system" id="bGN-E4-V5A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -744,6 +747,7 @@ CA
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
                 <outlet property="loadExternalAudio" destination="3xl-iD-85w" id="e85-xo-lzs"/>
                 <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>
+                <outlet property="lockAspectRatio" destination="Saz-zT-RXt" id="wW5-HK-O3t"/>
                 <outlet property="miniPlayer" destination="bGN-E4-V5A" id="gMc-FE-SVO"/>
                 <outlet property="mirror" destination="JJq-qH-toq" id="EWI-VS-c7Q"/>
                 <outlet property="mute" destination="WOL-Us-ByA" id="Hry-sv-WhY"/>
@@ -895,6 +899,7 @@ CA
         <image name="info.circle" catalog="system" width="15" height="15"/>
         <image name="link" catalog="system" width="17" height="17"/>
         <image name="list.bullet.rectangle" catalog="system" width="18" height="14"/>
+        <image name="lock.rectangle" catalog="system" width="18" height="14"/>
         <image name="macwindow.badge.plus" catalog="system" width="21" height="16"/>
         <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="music.microphone" catalog="system" width="16" height="16"/>

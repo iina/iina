@@ -139,6 +139,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fullScreen: NSMenuItem!
   @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
+  @IBOutlet weak var lockAspectRatio: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
   @IBOutlet weak var rotationMenu: NSMenu!
@@ -291,6 +292,7 @@ class MenuController: NSObject, NSMenuDelegate {
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
+    lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
 
     // -- aspect
     var aspectList = AppData.aspects
@@ -513,6 +515,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let isOntop = player.isInMiniPlayer ? player.miniPlayer.isOntop : player.mainWindow.isOntop
     let isDelogo = player.info.delogoFilter != nil
     alwaysOnTop.state = isOntop ? .on : .off
+    lockAspectRatio.state = Preference.bool(for: .unlockWindowAspectRatio) ? .off : .on
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip

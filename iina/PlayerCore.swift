@@ -2765,7 +2765,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async { [self] in
         currentController.updatePlayTime(withDuration: isNetworkStream, andProgressBar: true)
         if !self.isInMiniPlayer && mainWindow.fsState.isFullscreen && mainWindow.displayTimeAndBatteryInFullScreen && !mainWindow.additionalInfoView.isHidden {
-          self.mainWindow.updateAdditionalInfo()
+          self.mainWindow.additionalInfoView.update()
         }
         if isNetworkStream {
           self.mainWindow.updateNetworkState()

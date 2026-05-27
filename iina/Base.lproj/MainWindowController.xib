@@ -8,12 +8,6 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
-                <outlet property="additionalInfoBattery" destination="1XY-X2-FcE" id="FA8-zH-CvA"/>
-                <outlet property="additionalInfoBatteryView" destination="Ybl-06-ksj" id="NdR-gs-P1p"/>
-                <outlet property="additionalInfoLabel" destination="4mb-jy-Y1w" id="rgV-hQ-MH2"/>
-                <outlet property="additionalInfoStackView" destination="HJv-RK-JT8" id="T3L-fd-A60"/>
-                <outlet property="additionalInfoTitle" destination="3uh-OF-zy6" id="N6w-Hh-fQ1"/>
-                <outlet property="additionalInfoView" destination="Qbi-jx-9pO" id="bdV-ZH-SkC"/>
                 <outlet property="bottomBarBottomConstraint" destination="vP1-IE-sbB" id="G77-vL-Wf8"/>
                 <outlet property="bottomView" destination="Tdb-EA-alw" id="5Xv-Ja-j4G"/>
                 <outlet property="bufferDetailLabel" destination="hlZ-5D-Wag" id="3Ld-2C-wGO"/>
@@ -71,96 +65,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <visualEffectView hidden="YES" wantsLayer="YES" horizontalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Qbi-jx-9pO">
-                        <rect key="frame" x="471" y="303" width="161" height="67"/>
-                        <subviews>
-                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJv-RK-JT8">
-                                <rect key="frame" x="16" y="4" width="129" height="30"/>
-                                <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="P1S-9b-Nzw">
-                                        <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
-                                        <subviews>
-                                            <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-jy-Y1w">
-                                                <rect key="frame" x="4" y="6" width="54" height="21"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="99:99" id="IyU-0H-hyV">
-                                                    <font key="font" metaFont="system" size="18"/>
-                                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="5DG-K5-hY5"/>
-                                            <constraint firstItem="4mb-jy-Y1w" firstAttribute="leading" secondItem="P1S-9b-Nzw" secondAttribute="leading" constant="6" id="uIG-HT-ytR"/>
-                                            <constraint firstItem="4mb-jy-Y1w" firstAttribute="centerY" secondItem="P1S-9b-Nzw" secondAttribute="centerY" constant="-1" id="upo-MA-6Us"/>
-                                            <constraint firstAttribute="trailing" secondItem="4mb-jy-Y1w" secondAttribute="trailing" id="zV1-95-4CW"/>
-                                        </constraints>
-                                    </customView>
-                                    <box horizontalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="2BS-K2-xJO">
-                                        <rect key="frame" x="62" y="9" width="5" height="12"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="2HL-LZ-uj7"/>
-                                        </constraints>
-                                    </box>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ybl-06-ksj">
-                                        <rect key="frame" x="73" y="0.0" width="56" height="30"/>
-                                        <subviews>
-                                            <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1XY-X2-FcE">
-                                                <rect key="frame" x="-2" y="8" width="60" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="100%" id="va1-P5-3b0">
-                                                    <font key="font" metaFont="systemBold"/>
-                                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <imageView wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EpK-FB-bM0">
-                                                <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
-                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="battery" id="5rw-Sh-BRR"/>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="EpK-FB-bM0" secondAttribute="trailing" id="Ab1-a3-Ap7"/>
-                                            <constraint firstItem="EpK-FB-bM0" firstAttribute="leading" secondItem="Ybl-06-ksj" secondAttribute="leading" id="ICp-l0-UOF"/>
-                                            <constraint firstAttribute="width" constant="56" id="YE3-Bj-TCo"/>
-                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="centerY" secondItem="Ybl-06-ksj" secondAttribute="centerY" constant="-0.5" id="ewn-Sz-UmC"/>
-                                            <constraint firstItem="1XY-X2-FcE" firstAttribute="leading" secondItem="Ybl-06-ksj" secondAttribute="leading" id="f0s-Zh-SkE"/>
-                                            <constraint firstAttribute="trailing" secondItem="1XY-X2-FcE" secondAttribute="trailing" id="j0h-QD-M18"/>
-                                            <constraint firstAttribute="bottom" secondItem="EpK-FB-bM0" secondAttribute="bottom" id="lce-Dz-NZo"/>
-                                            <constraint firstAttribute="height" constant="30" id="skg-xR-yU1"/>
-                                            <constraint firstItem="EpK-FB-bM0" firstAttribute="top" secondItem="Ybl-06-ksj" secondAttribute="top" id="xfk-HM-qEp"/>
-                                        </constraints>
-                                    </customView>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
-                            <textField focusRingType="none" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-OF-zy6">
-                                <rect key="frame" x="14" y="38" width="133" height="21"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="DVg-p3-w5Q">
-                                    <font key="font" metaFont="system" size="18"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="HJv-RK-JT8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qbi-jx-9pO" secondAttribute="leading" constant="16" id="4JZ-kz-GjJ"/>
-                            <constraint firstItem="3uh-OF-zy6" firstAttribute="top" secondItem="Qbi-jx-9pO" secondAttribute="top" constant="8" id="8rt-mu-Log"/>
-                            <constraint firstAttribute="trailing" secondItem="3uh-OF-zy6" secondAttribute="trailing" constant="16" id="LfP-Gv-tbK"/>
-                            <constraint firstItem="3uh-OF-zy6" firstAttribute="leading" secondItem="Qbi-jx-9pO" secondAttribute="leading" constant="16" id="Nip-Zi-DhD"/>
-                            <constraint firstItem="HJv-RK-JT8" firstAttribute="top" secondItem="3uh-OF-zy6" secondAttribute="bottom" constant="4" id="WEg-qx-fA6"/>
-                            <constraint firstAttribute="bottom" secondItem="HJv-RK-JT8" secondAttribute="bottom" constant="4" id="lUv-4l-9RZ"/>
-                            <constraint firstItem="HJv-RK-JT8" firstAttribute="trailing" secondItem="3uh-OF-zy6" secondAttribute="trailing" id="m0K-bE-aKW"/>
-                        </constraints>
-                    </visualEffectView>
                     <visualEffectView hidden="YES" blendingMode="behindWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="Nrz-jZ-Luf">
                         <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                         <subviews>
@@ -321,7 +225,6 @@
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstAttribute="trailing" secondItem="epo-S6-QVB" secondAttribute="trailing" constant="-240" id="PAj-s6-32e"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>
-                    <constraint firstItem="Qbi-jx-9pO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" priority="200" constant="8" id="RUl-l8-s3i"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Vtd-0f-x7p"/>
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="XlV-7n-jPb"/>
                     <constraint firstAttribute="bottom" secondItem="OiF-pA-8Sd" secondAttribute="bottom" priority="750" constant="50" id="cRP-R4-zYY"/>
@@ -332,13 +235,11 @@
                     <constraint firstItem="oX4-0N-but" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="centerX" id="kfR-hG-8ee"/>
                     <constraint firstAttribute="trailing" secondItem="Nrz-jZ-Luf" secondAttribute="trailing" id="mJs-PF-Ex5"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="ofB-WP-9dW"/>
-                    <constraint firstItem="Qbi-jx-9pO" firstAttribute="top" secondItem="TRx-2V-Gr3" secondAttribute="bottom" constant="8" id="r5V-EL-YbE"/>
                     <constraint firstAttribute="trailing" secondItem="TRx-2V-Gr3" secondAttribute="trailing" id="te1-wi-BbH"/>
                     <constraint firstAttribute="bottom" secondItem="Tdb-EA-alw" secondAttribute="bottom" constant="-60" id="vP1-IE-sbB"/>
                     <constraint firstItem="TRx-2V-Gr3" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="wGB-mn-a6f"/>
                     <constraint firstItem="Tdb-EA-alw" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="wYH-h6-46f"/>
                     <constraint firstAttribute="bottom" secondItem="epo-S6-QVB" secondAttribute="bottom" id="zBx-AY-VlK"/>
-                    <constraint firstItem="epo-S6-QVB" firstAttribute="leading" secondItem="Qbi-jx-9pO" secondAttribute="trailing" constant="8" id="zbm-D9-epN"/>
                 </constraints>
             </view>
             <connections>
@@ -620,7 +521,6 @@
         </visualEffectView>
     </objects>
     <resources>
-        <image name="battery" width="57" height="30"/>
         <image name="mute" width="16" height="14"/>
         <image name="pause" width="24" height="24"/>
         <image name="pin" catalog="system" width="15" height="17"/>

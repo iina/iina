@@ -230,6 +230,23 @@ extension NSRect {
                   height: newSize.height)
   }
 
+  // This function preserves the size of the new rect with the old rect
+  func centeredResize(forVideoWidth width: Float, andHeight height: Float) -> NSRect {
+    let targetAspectRatio = CGFloat(width / height)
+    let currentArea = size.width * size.height
+
+    let newWidth = sqrt(currentArea * targetAspectRatio)
+    let size = NSSize(width: newWidth, height:  currentArea / newWidth)
+      .satisfyMinSizeWithSameAspectRatio(AppData.mainWindowMinSize)
+
+    return NSRect(
+      x: midX - size.width / 2,
+      y: midY - size.height / 2,
+      width: size.width,
+      height: size.height
+    )
+  }
+
   func constrain(in biggerRect: NSRect) -> NSRect {
     // new size
     var newSize = size

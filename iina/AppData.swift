@@ -73,6 +73,7 @@ struct AppData {
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360
   static let sizeWhenNoVideo = NSSize(width: widthWhenNoVideo, height: heightWhenNoVideo)
+  static let mainWindowMinSize = NSMakeSize(285, 120)
 }
 
 

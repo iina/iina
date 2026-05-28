@@ -18,13 +18,18 @@ class TranslucentView: NSView {
   private var padding: (CGFloat, CGFloat)
   private var content: NSView?
   private var container: NSView?
-  var style: Style = .visualEffect
+  var style: Style
   private var appliedStyle: Style?
 
   init(liquidGlassCornerRadius: CGFloat = 16, vevCornerRadius: CGFloat = 8, padding: (CGFloat, CGFloat)) {
     self.liquidGlassCornerRadius = liquidGlassCornerRadius
     self.vevCornerRadius = vevCornerRadius
     self.padding = padding
+    self.style = if #available(macOS 26, *) {
+      .liquidGlass
+    } else {
+      .visualEffect
+    }
     super.init(frame: .zero)
 
     self.translatesAutoresizingMaskIntoConstraints = false
@@ -54,28 +59,6 @@ class TranslucentView: NSView {
     let wrapper = NSView()
     wrapper.translatesAutoresizingMaskIntoConstraints = false
 
-    switch newStyle {
-    case .liquidGlass:
-      if #available(macOS 26.0, *) {
-        let view = NSGlassEffectView()
-        view.cornerRadius = liquidGlassCornerRadius
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentView = content
-        container = view
-      } else {
-        fatalError()
-      }
-    case .visualEffect:
-      let view = NSVisualEffectView()
-      view.translatesAutoresizingMaskIntoConstraints = false
-      view.blendingMode = .withinWindow
-      view.material = .popover
-      view.addSubview(content)
-      view.wantsLayer = true
-      view.layer?.cornerRadius = vevCornerRadius
-      container = view
-    }
-
     // [    [         [--padding--[      ]]]]
     // self container wrapper     content
     //
@@ -85,8 +68,28 @@ class TranslucentView: NSView {
     wrapper.addSubview(content)
     content.padding(.horizontal(padding.0), .vertical(padding.1))
 
-    container!.addSubview(wrapper)
-    wrapper.padding(.all)
+    switch newStyle {
+    case .liquidGlass:
+      if #available(macOS 26.0, *) {
+        let view = NSGlassEffectView()
+        view.cornerRadius = liquidGlassCornerRadius
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentView = wrapper
+        container = view
+      } else {
+        fatalError()
+      }
+    case .visualEffect:
+      let view = NSVisualEffectView()
+      view.translatesAutoresizingMaskIntoConstraints = false
+      view.blendingMode = .withinWindow
+      view.material = .popover
+      view.addSubview(wrapper)
+      wrapper.padding(.all)
+      view.wantsLayer = true
+      view.layer?.cornerRadius = vevCornerRadius
+      container = view
+    }
 
     subviews.forEach { $0.removeFromSuperview() }
     addSubview(container!)

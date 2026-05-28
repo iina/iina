@@ -120,6 +120,7 @@ class MainWindowController: PlayerWindowController {
   var additionalInfoView: AdditionalInfoView!
   var bufferIndicatorView: BufferIndicatorView!
   var sideBarView: SideBarView!
+  var timePreviewView: TimePreviewView!
 
   // MARK: - Status
 
@@ -457,16 +458,9 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
-  @IBOutlet weak var timePreviewTextField: NSTextField!
-  @IBOutlet weak var timePreviewVisualEffectView: NSVisualEffectView!
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
-  @IBOutlet weak var settingsButton: NSButton!
-  @IBOutlet weak var playlistButton: NSButton!
   @IBOutlet weak var bottomView: NSView!
-  @IBOutlet weak var bufferProgressLabel: NSTextField!
-  @IBOutlet weak var bufferSpin: NSProgressIndicator!
-  @IBOutlet weak var bufferDetailLabel: NSTextField!
   @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
@@ -593,11 +587,14 @@ class MainWindowController: PlayerWindowController {
 
     // thumbnail peek view
     cv.addSubview(thumbnailPeekView)
-    cv.addSubview(timePreviewVisualEffectView)
+    self.timePreviewView = TimePreviewView(mainWindow: self)
+    cv.addSubview(timePreviewView)
     thumbnailPeekView.isHidden = true
-    timePreviewVisualEffectView.isHidden = true
-    timePreviewVisualEffectView.roundCorners(withRadius: 5)
-    timePreviewTextField.font = monospacedFont
+    timePreviewView.isHidden = true
+    timePreviewView.textField.font = monospacedFont
+    if #available(macOS 26.0, *) {
+      timePreviewView.setStyle(.liquidGlass)
+    }
 
     // create translucent views
     osdView = OSDView(mainWindow: self)
@@ -1182,7 +1179,7 @@ class MainWindowController: PlayerWindowController {
       if controlBarFloating.isDragging { return }
       isMouseInSlider = true
       if !controlBarFloating.isDragging {
-        timePreviewVisualEffectView.isHidden = false
+        timePreviewView.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
       refreshSeekTimeAndThumbnail(from: event)
@@ -1207,7 +1204,7 @@ class MainWindowController: PlayerWindowController {
     } else if obj == 1 {
       // slider
       isMouseInSlider = false
-      timePreviewVisualEffectView.isHidden = true
+      timePreviewView.isHidden = true
       refreshSeekTimeAndThumbnail(from: event)
       thumbnailPeekView.isHidden = true
     }
@@ -1437,7 +1434,7 @@ class MainWindowController: PlayerWindowController {
     setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
     thumbnailPeekView.isHidden = true
-    timePreviewVisualEffectView.isHidden = true
+    timePreviewView.isHidden = true
     isMouseInSlider = false
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
@@ -1564,7 +1561,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     thumbnailPeekView.isHidden = true
-    timePreviewVisualEffectView.isHidden = true
+    timePreviewView.isHidden = true
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
@@ -2537,7 +2534,7 @@ class MainWindowController: PlayerWindowController {
     guard oscPosition != .top else { return false }
     // The layout preference for the on screen controller is set to the default floating layout.
     // Must insure the top of the thumbnail would be below the top of the window.
-    let topOfThumbnail = timePreviewYPos + timePreviewVisualEffectView.frame.height + thumbnailHeight
+    let topOfThumbnail = timePreviewYPos + timePreviewView.frame.height + thumbnailHeight
     // Normally the height of the usable area of the window can be obtained from the content
     // layout. But when the legacy full screen preference is enabled the layout height may be
     // larger than the content view if the display contains a camera housing. Use the lower of
@@ -3236,7 +3233,7 @@ class MainWindowController: PlayerWindowController {
   private func updateTimePreviewAndThumbnail(_ posInWindow: NSPoint) {
     guard let duration = player.info.videoDuration else {
       thumbnailPeekView.isHidden = true
-      timePreviewVisualEffectView.isHidden = true
+      timePreviewView.isHidden = true
       return
     }
 
@@ -3259,11 +3256,11 @@ class MainWindowController: PlayerWindowController {
 
       let width = CGFloat(UserDefaults.standard.integer(forKey: "thumbnailWidth"))
       let height = round(width / displayAspectRatio)
-      let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewVisualEffectView.frame.origin.y, thumbnailHeight: height)
+      let showAbove = canShowThumbnailAbove(timePreviewYPos: timePreviewView.frame.origin.y, thumbnailHeight: height)
       let yPos = if showAbove {
-        max(sliderFrameInWindow.maxY, timePreviewVisualEffectView.frame.maxY) + 5
+        max(sliderFrameInWindow.maxY, timePreviewView.frame.maxY) + 5
       } else {
-        min(sliderFrameInWindow.minY, timePreviewVisualEffectView.frame.minY) - height - 5
+        min(sliderFrameInWindow.minY, timePreviewView.frame.minY) - height - 5
       }
       thumbnailPeekView.frame.size = NSSize(width: width, height: height)
       thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
@@ -3278,17 +3275,17 @@ class MainWindowController: PlayerWindowController {
     } else {
       ""
     }
-    timePreviewTextField.stringValue = chapterTitle + time.stringRepresentation
+    timePreviewView.textField.stringValue = chapterTitle + time.stringRepresentation
 
     let sliderFrame = playSlider.convert(playSlider.bounds, to: nil)
     let timeLabelYPos: CGFloat
     if oscPosition == .top {
-      timeLabelYPos = sliderFrame.origin.y - timePreviewVisualEffectView.bounds.height - 5
+      timeLabelYPos = sliderFrame.origin.y - timePreviewView.bounds.height - 5
     } else {
       timeLabelYPos = sliderFrame.origin.y + playSlider.frame.height + 5
     }
-    timePreviewVisualEffectView.frame.origin = CGPoint(
-      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewVisualEffectView.frame.width / 2),
+    timePreviewView.frame.origin = CGPoint(
+      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewView.frame.width / 2),
       y: timeLabelYPos)
   }
 

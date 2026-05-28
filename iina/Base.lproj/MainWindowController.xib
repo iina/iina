@@ -37,8 +37,6 @@
                 <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
                 <outlet property="thumbnailPeekView" destination="vej-bg-g6C" id="sws-ib-t4r"/>
-                <outlet property="timePreviewTextField" destination="qOq-6a-7j7" id="ngM-1f-G5D"/>
-                <outlet property="timePreviewVisualEffectView" destination="S36-44-g7Z" id="Ftw-sI-zzC"/>
                 <outlet property="titleBarBottomBorder" destination="iA3-pt-6Jm" id="RD4-8v-bHB"/>
                 <outlet property="titleBarHeightConstraint" destination="1Dw-Bg-FRS" id="EC5-S5-p2j"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
@@ -53,7 +51,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1410"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1662"/>
             <view key="contentView" id="se5-gp-TjO" customClass="MainWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -433,37 +431,12 @@
             </constraints>
             <point key="canvasLocation" x="713" y="-57"/>
         </customView>
-        <customView id="A4M-zT-NFs">
-            <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <point key="canvasLocation" x="375" y="504"/>
-        </customView>
-        <visualEffectView blendingMode="withinWindow" material="toolTip" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="S36-44-g7Z">
-            <rect key="frame" x="0.0" y="0.0" width="128" height="20"/>
-            <subviews>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qOq-6a-7j7">
-                    <rect key="frame" x="0.0" y="2" width="128" height="16"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="Pw8-rd-mUu">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstItem="qOq-6a-7j7" firstAttribute="leading" secondItem="S36-44-g7Z" secondAttribute="leading" constant="2" id="7CJ-D5-iT3"/>
-                <constraint firstItem="qOq-6a-7j7" firstAttribute="top" secondItem="S36-44-g7Z" secondAttribute="top" constant="2" id="IGd-0I-r5a"/>
-                <constraint firstAttribute="trailing" secondItem="qOq-6a-7j7" secondAttribute="trailing" constant="2" id="UOf-Xl-baW"/>
-                <constraint firstAttribute="bottom" secondItem="qOq-6a-7j7" secondAttribute="bottom" constant="2" id="eq2-l5-BLv"/>
-            </constraints>
-            <point key="canvasLocation" x="141" y="600"/>
-        </visualEffectView>
     </objects>
     <resources>
         <image name="mute" width="16" height="14"/>
         <image name="pause" width="24" height="24"/>
-        <image name="pin" catalog="system" width="16" height="17"/>
-        <image name="pin.fill" catalog="system" width="16" height="17"/>
+        <image name="pin" catalog="system" width="15" height="17"/>
+        <image name="pin.fill" catalog="system" width="15" height="17"/>
         <image name="play" width="24" height="24"/>
         <image name="playing-in-pip" width="87" height="68"/>
         <image name="speed" width="24" height="24"/>

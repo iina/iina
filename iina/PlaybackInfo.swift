@@ -103,6 +103,7 @@ class PlaybackInfo {
 
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
+  var smpteTimecode: SMPTETimecode?
 
   /// Remaining playback time.
   ///

@@ -66,4 +66,6 @@
 
 + (nullable NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
 
++ (nullable NSString *)readSMPTETimecodeFromURL:(nonnull NSURL *)url;
+
 @end

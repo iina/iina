@@ -714,6 +714,58 @@ return -1;\
   }
 }
 
+// MARK: - SMPTE Timecode
+
+static NSString *timecodeFromMetadata(AVDictionary *metadata)
+{
+  AVDictionaryEntry *tag = NULL;
+  while ((tag = av_dict_get(metadata, "", tag, AV_DICT_IGNORE_SUFFIX))) {
+    if (!tag->key || !tag->value) { continue; }
+
+    NSString *key = [NSString stringWithUTF8String:tag->key].lowercaseString;
+    NSString *value = [NSString stringWithUTF8String:tag->value];
+    if (value.length == 0) { continue; }
+    if ([key containsString:@"timecode"] || [key isEqualToString:@"reel_name"]) {
+      return value;
+    }
+  }
+  return NULL;
+}
+
++ (NSString *)readSMPTETimecodeFromURL:(nonnull NSURL *)url
+{
+  if (!url.isFileURL) { return NULL; }
+
+  AVFormatContext *pFormatCtx = NULL;
+  @try {
+    int ret = avformat_open_input(&pFormatCtx, url.fileSystemRepresentation, NULL, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to open file %@ when searching for SMPTE timecode: %s (%d)", url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    ret = avformat_find_stream_info(pFormatCtx, NULL);
+    if (ret < 0) {
+      LOG_ERROR(@"Failed to obtain stream info from file %@ when searching for SMPTE timecode: %s (%d)",
+                url, av_err2str(ret), ret);
+      return NULL;
+    }
+
+    NSString *formatTimecode = timecodeFromMetadata(pFormatCtx->metadata);
+    if (formatTimecode) { return formatTimecode; }
+
+    for (int i = 0; i < pFormatCtx->nb_streams; i++) {
+      AVStream *stream = pFormatCtx->streams[i];
+      NSString *streamTimecode = timecodeFromMetadata(stream->metadata);
+      if (streamTimecode) { return streamTimecode; }
+    }
+    return NULL;
+  }
+  @finally {
+    avformat_close_input(&pFormatCtx);
+  }
+}
+
 // MARK: - Media Artwork
 
 + (NSImage *)readArtworkFromURL:(nonnull NSURL *)url

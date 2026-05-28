@@ -9,15 +9,19 @@
 import Cocoa
 import VisionKit
 
+fileprivate let subsystem = Logger.makeSubsystem("Live Text", ["viewfinder.text"])
+fileprivate func liveTextLog(_ str: String, level: Logger.Level = .debug) {
+  Logger.log(str, level: level, subsystem: subsystem)
+}
+
 @available(macOS 13, *)
 extension MainWindowController: ImageAnalysisOverlayViewDelegate {
 
   func setupLiveTextOverlay() {
     let overlayView = ImageAnalysisOverlayView()
     overlayView.preferredInteractionTypes = .automatic
-    overlayView.autoresizingMask = [.width, .height]
     overlayView.delegate = self
-    overlayView.frame = videoView.bounds
+    overlayView.translatesAutoresizingMaskIntoConstraints = false
     liveTextOverlayView = overlayView
     updateLiveTextOverlayInsets()
     if Preference.bool(for: .enableLiveText) && Preference.bool(for: .liveTextOverlay) {
@@ -25,13 +29,26 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     }
   }
 
+  @MainActor func contentView(for overlayView: ImageAnalysisOverlayView) -> NSView? {
+    return videoView
+  }
+
+  @MainActor func contentsRect(for overlayView: ImageAnalysisOverlayView) -> CGRect {
+    return videoView.videoLayer.contentsRect
+  }
+
   func clearAnalysis() {
-    (liveTextOverlayView as? ImageAnalysisOverlayView)?.analysis = nil
+    guard let overlay = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
+    overlay.analysis = nil
+    updateLiveTextOverlay()
+    liveTextLog("Image analysis invalidated")
   }
 
   func requestLiveTextAnalysis() {
     guard player.info.state == .paused, Preference.bool(for: .enableLiveText) else { return }
     player.mpv.asyncCommand(.screenshotRaw, replyUserdata: MPVController.UserData.screenshot_raw)
+    // showAnalysis(with: image)
+    liveTextLog("Image analysis requested")
   }
 
   func updateLiveTextOverlayInsets() {
@@ -46,8 +63,11 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     if shouldShow && overlayView.superview == nil {
       overlayView.frame = videoView.bounds
       videoView.addSubview(overlayView)
+      overlayView.padding(.all(0))
+      liveTextLog("Image analysis overlay view inserted to video view")
     } else if !shouldShow {
       overlayView.removeFromSuperview()
+      liveTextLog("Image analysis overlay view removed from video view")
     }
   }
 
@@ -57,9 +77,11 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     Task { [weak self, overlayView] in
       do {
         let analysis = try await analyzer.analyze(image, orientation: .up, configuration: .init([.text]))
+        liveTextLog("Image analysis results acquired")
         await MainActor.run {
-          guard self != nil else { return }
+          guard let self else { return }
           overlayView.analysis = analysis
+          self.updateLiveTextOverlay()
         }
       } catch {
         fatalError("Error")

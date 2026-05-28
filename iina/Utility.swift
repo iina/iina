@@ -580,6 +580,15 @@ class Utility {
     }
   }
 
+  static func isLiveTextEnabled() -> Bool {
+    guard #available(macOS 13, *) else { return false }
+    let defaults = UserDefaults.standard
+    if defaults.object(forKey: "AppleLiveTextEnabled") == nil {
+      return true
+    }
+    return defaults.bool(forKey: "AppleLiveTextEnabled")
+  }
+
 
   // MARK: - Util classes
 

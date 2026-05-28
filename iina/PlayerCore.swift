@@ -2031,7 +2031,6 @@ class PlayerCore: NSObject {
     log("File started")
     if #available(macOS 13, *) {
       mainWindow.clearAnalysis()
-      mainWindow.updateLiveTextOverlay()
     }
     MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
@@ -2199,7 +2198,6 @@ class PlayerCore: NSObject {
     syncUI(.playlist)
     if #available(macOS 13, *) {
       mainWindow.requestLiveTextAnalysis()
-      mainWindow.updateLiveTextOverlay()
     }
   }
 
@@ -2365,7 +2363,6 @@ class PlayerCore: NSObject {
 
     if #available(macOS 13, *) {
       if paused { mainWindow.requestLiveTextAnalysis() } else { mainWindow.clearAnalysis() }
-      mainWindow.updateLiveTextOverlay()
     }
   }
 
@@ -2389,7 +2386,6 @@ class PlayerCore: NSObject {
     if #available(macOS 13, *) {
       mainWindow.clearAnalysis()
       mainWindow.requestLiveTextAnalysis()
-      mainWindow.updateLiveTextOverlay()
     }
 
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { self.info.disableOSDForFileLoading = false }
@@ -2444,7 +2440,6 @@ class PlayerCore: NSObject {
     if #available(macOS 13, *) {
       mainWindow.clearAnalysis()
       mainWindow.requestLiveTextAnalysis()
-      mainWindow.updateLiveTextOverlay()
     }
   }
 

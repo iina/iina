@@ -50,7 +50,7 @@ class SettingsPageVideo: SettingsPage {
           .hasDescription()
       }
 
-      if #available(macOS 13, *) {
+      if AppDelegate.shared.liveTextAvailable {
         SettingsList {
           SettingsItem.Switch()
             .image(name: "text.viewfinder")

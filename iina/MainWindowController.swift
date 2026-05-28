@@ -634,7 +634,9 @@ class MainWindowController: PlayerWindowController {
 
     if player.disableUI { hideUI() }
 
-    if #available(macOS 13, *) { setupLiveTextOverlay() }
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+      setupLiveTextOverlay()
+    }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)
@@ -1397,6 +1399,10 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+      clearAnalysis()
+    }
+
     // Set the appearance to match the theme so the titlebar matches the theme
     let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
     window?.appearance = NSAppearance(iinaTheme: iinaTheme)
@@ -1435,6 +1441,10 @@ class MainWindowController: PlayerWindowController {
       view.isHidden = false
     }
     window?.titlebarAppearsTransparent = false
+
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+      requestLiveTextAnalysis()
+    }
 
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
@@ -1525,6 +1535,10 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+      clearAnalysis()
+    }
+
     titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: false)
 
     thumbnailPeekView.isHidden = true
@@ -1564,6 +1578,10 @@ class MainWindowController: PlayerWindowController {
       // mode. If this is not done the call to finishAnimating below will trigger a fatal error.
       log("AppKit exited full screen mode without informing IINA", level: .warning)
       fsState.startAnimatingToWindow()
+    }
+
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+      requestLiveTextAnalysis()
     }
 
     if Preference.bool(for: PK.disableAnimations) {
@@ -1864,6 +1882,9 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillStartLiveResize(_ notification: Notification) {
     videoView.videoLayer.inLiveResize = true
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable, Preference.bool(for: .unlockWindowAspectRatio) {
+      clearAnalysis()
+    }
   }
 
   // resize framebuffer in videoView after resizing.
@@ -1873,6 +1894,9 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable, Preference.bool(for: .unlockWindowAspectRatio) {
+      requestLiveTextAnalysis()
+    }
   }
 
   func windowDidChangeBackingProperties(_ notification: Notification) {

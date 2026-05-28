@@ -33,10 +33,6 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     return videoView
   }
 
-  @MainActor func contentsRect(for overlayView: ImageAnalysisOverlayView) -> CGRect {
-    return videoView.videoLayer.contentsRect
-  }
-
   func clearAnalysis() {
     guard let overlay = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
     overlay.analysis = nil
@@ -46,9 +42,15 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
 
   func requestLiveTextAnalysis() {
     guard player.info.state == .paused, Preference.bool(for: .enableLiveText) else { return }
-    player.mpv.asyncCommand(.screenshotRaw, replyUserdata: MPVController.UserData.screenshot_raw)
-    // showAnalysis(with: image)
     liveTextLog("Image analysis requested")
+    Task { [weak self] in
+      guard let self else { return }
+      guard let image = await self.videoView.videoLayer.captureSnapshot() else {
+        liveTextLog("Failed to capture frame for image analysis", level: .warning)
+        return
+      }
+      await MainActor.run { self.showAnalysis(with: image) }
+    }
   }
 
   func updateLiveTextOverlayInsets() {

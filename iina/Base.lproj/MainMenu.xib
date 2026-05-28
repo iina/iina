@@ -394,6 +394,16 @@ CA
                             <menuItem title="Lock Window Aspect Ratio" id="Saz-zT-RXt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Show Live Text Overlay" secondaryImage="document.viewfinder.fill" catalog="system" id="lq9-av-Um9">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="Y2U-Wt-9Fl" name="hidden" keyPath="values.enableLiveText" id="Adw-GN-KET">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="xpM-h7-A4R"/>
                             <menuItem title="Enter Music Mode" id="bGN-E4-V5A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -803,6 +813,7 @@ CA
                 <outlet property="screenshot" destination="AoP-K6-Kb5" id="dhl-4W-7yS"/>
                 <outlet property="secondSubTrackMenu" destination="UwY-P2-Xdb" id="D3B-WW-bAk"/>
                 <outlet property="showCurrentFileInFinder" destination="che-dy-QUU" id="p1H-Xj-dbg"/>
+                <outlet property="showLiveTextOverlay" destination="lq9-av-Um9" id="dUS-7o-mpZ"/>
                 <outlet property="smallerSize" destination="ZOF-MG-6II" id="0jA-m5-Qy7"/>
                 <outlet property="speedDown" destination="HsE-LN-Nd6" id="0ZB-lc-ngV"/>
                 <outlet property="speedDownSlightly" destination="DUP-nm-BJt" id="Ym7-LJ-eQp"/>

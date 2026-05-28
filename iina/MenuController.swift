@@ -140,6 +140,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var lockAspectRatio: NSMenuItem!
+  @IBOutlet weak var showLiveTextOverlay: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
   @IBOutlet weak var rotationMenu: NSMenu!
@@ -293,6 +294,7 @@ class MenuController: NSObject, NSMenuDelegate {
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
     lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
+    showLiveTextOverlay.action = #selector(MainWindowController.menuToggleLiveTextOverlay(_:))
 
     // -- aspect
     var aspectList = AppData.aspects
@@ -517,6 +519,7 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.state = isOntop ? .on : .off
     lockAspectRatio.state = Preference.unlockWindowAspectRatio ? .off : .on
     lockAspectRatio.isEnabled = Preference.bool(for: .edgeToEdgeVideo)
+    showLiveTextOverlay.state = Preference.bool(for: .liveTextOverlay) ? .on : .off
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip

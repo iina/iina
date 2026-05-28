@@ -2781,6 +2781,10 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  @objc func menuToggleLiveTextOverlay(_ item: NSMenuItem) {
+    Preference.set(!Preference.bool(for: .liveTextOverlay), for: .liveTextOverlay)
+  }
+
   // MARK: - Sync UI with playback
 
   func isUITimerNeeded() -> Bool {
@@ -3031,7 +3035,7 @@ class MainWindowController: PlayerWindowController {
     case .plugins:
       sidebars.showPlugin(tab: nil)
     case .liveText:
-      Preference.set(!Preference.bool(for: .liveTextOverlay), for: .liveTextOverlay)
+      menuToggleLiveTextOverlay(.dummy)
     }
   }
 

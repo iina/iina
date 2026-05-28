@@ -69,8 +69,10 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
       liveTextLog("Image analysis overlay view inserted to video view")
     } else if !shouldShow {
       overlayView.removeFromSuperview()
+      isLiveTextHighlighted = false
       liveTextLog("Image analysis overlay view removed from video view")
     }
+    refreshUI()
   }
 
   func showAnalysis(with image: NSImage) {

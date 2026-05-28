@@ -811,14 +811,11 @@ class MainWindowController: PlayerWindowController {
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
     let liveTextEnabled = Preference.bool(for: .enableLiveText)
-    let effectiveButtons = buttons.filter { $0 != .liveText || liveTextEnabled }
+    let effectiveButtons = buttons.filter { $0 != .liveText || (AppDelegate.shared.liveTextAvailable && liveTextEnabled) }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     for buttonType in effectiveButtons {
       let button = NSButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: effectiveButtons.count > 4)
-      if buttonType == .liveText && Preference.bool(for: .liveTextOverlay) {
-        button.image = buttonType.alternateImage()
-      }
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
     }
@@ -826,7 +823,6 @@ class MainWindowController: PlayerWindowController {
 
   @objc
   private func updateOSCToolbarButtons(_ notification: Notification) {
-
     func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
       let buttons = fragToolbarView.subviews as! [NSButton]
       let currentButton = buttons.first(where: { $0.tag == button.rawValue })

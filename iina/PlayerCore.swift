@@ -2149,7 +2149,8 @@ class PlayerCore: NSObject {
     // add to history
     if let url = info.currentURL {
       let duration = info.videoDuration ?? .zero
-      HistoryController.shared.add(url, duration: duration.second)
+      let mediaTitle = mpv.getString(MPVProperty.mediaTitle)
+      HistoryController.shared.add(url, duration: duration.second, title: mediaTitle)
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         AppDelegate.shared.noteNewRecentDocumentURL(url)
       }

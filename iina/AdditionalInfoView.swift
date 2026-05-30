@@ -59,7 +59,7 @@ class AdditionalInfoView: TranslucentView {
 
     super.init(liquidGlassCornerRadius: 16, vevCornerRadius: 10, padding: (16, 8))
 
-    if let clockImage = NSImage.findSFSymbol(["clock"])?
+    if let clockImage = NSImage.sf(["clock"])?
       .withSymbolConfiguration(.init(pointSize: 18, weight: .bold)) {
       let timeImage = NSImageView(image: clockImage)
       timeImage.translatesAutoresizingMaskIntoConstraints = false

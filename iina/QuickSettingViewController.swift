@@ -97,14 +97,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   var observers: [NSObjectProtocol] = []
 
-  @IBOutlet weak var videoTabScrollView: NSScrollView!
-  @IBOutlet weak var audioTabScrollView: NSScrollView!
-  @IBOutlet weak var subtitlesTabScrollView: NSScrollView!
+  var tabViewController: NSTabViewController!
+  var layoutTabBtn: NSButton!
+  var videoTabBtn: NSButton!
+  var audioTabBtn: NSButton!
+  var subTabBtn: NSButton!
 
-  @IBOutlet weak var videoTabBtn: NSButton!
-  @IBOutlet weak var audioTabBtn: NSButton!
-  @IBOutlet weak var subTabBtn: NSButton!
-  @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var videoTabScrollView: SidebarScrollView!
+  @IBOutlet weak var audioTabScrollView: SidebarScrollView!
+  @IBOutlet weak var subtitlesTabScrollView: SidebarScrollView!
+
+  @IBOutlet weak var tabButtonsStackView: NSStackView!
 
   @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
 
@@ -217,9 +220,66 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.tabViewController = AnimatedTabViewController()
+    view.addSubview(tabViewController.view)
+
+    tabViewController.view.padding(.bottom, .horizontal)
+      .spacing(.top(1), to: tabButtonsStackView)
+
+    tabViewController.tabView.padding(.all)
+    tabViewController.tabView.wantsLayer = true
+
+    // set up the tab buttons
+
+    func makeTabButton(_ title: String, image: NSImage?, tag: Int) -> NSButton {
+      let item = TabButton(title: title,
+                           target: self, action: #selector(tabBtnAction))
+      item.bezelStyle = .smallSquare
+      item.isBordered = false
+      if let image {
+        image.size = .init(width: 26, height: 18)
+        item.image = image
+        item.imageScaling = .scaleProportionallyUpOrDown
+        item.imagePosition = .imageAbove
+      }
+      item.font = .systemFont(ofSize: 11, weight: .regular)
+      item.tag = tag
+      return item
+    }
+
+    let dismissBtn = NSButton(image: .sf("chevron.right")!,
+                              target: self.mainWindow,
+                              action: #selector(MainWindowController.hideSideBar(_:)))
+    dismissBtn.size(width: 20, height: 40)
+    tabButtonsStackView.addArrangedSubview(dismissBtn)
+
+    self.layoutTabBtn = makeTabButton("Layout", image: .tabLayout, tag: 3)
+    tabButtonsStackView.addArrangedSubview(layoutTabBtn)
+    let separator = NSBox()
+    separator.boxType = .separator
+    separator.size(width: 2, height: 32)
+    tabButtonsStackView.addArrangedSubview(separator)
+    self.videoTabBtn = makeTabButton("Video", image: .tabVideo, tag: 0)
+    tabButtonsStackView.addArrangedSubview(videoTabBtn)
+    self.audioTabBtn = makeTabButton("Audio", image: .tabAudio, tag: 1)
+    tabButtonsStackView.addArrangedSubview(audioTabBtn)
+    self.subTabBtn = makeTabButton("Subtitles", image: .tabSub, tag: 2)
+    tabButtonsStackView.addArrangedSubview(subTabBtn)
+
+    // add pages
+
+    func createViewController(_ view: NSView) -> NSViewController {
+      let vc = NSViewController()
+      vc.view = view
+      return vc
+    }
+
     let tabScrollViews = [videoTabScrollView, audioTabScrollView, subtitlesTabScrollView]
-    for (view, item) in zip(tabScrollViews, tabView.tabViewItems) {
-      item.view = view
+
+    for view in tabScrollViews {
+      view?.horizontalScroll = self.switchTabByScroll(_:)
+      let viewItem = NSTabViewItem(viewController: createViewController(view!))
+      tabViewController.addTabViewItem(viewItem)
     }
 
     withAllTableViews { (view, _) in
@@ -539,16 +599,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   private func switchToTab(_ tab: TabViewType) {
     guard isViewLoaded else { return }
     currentTab = tab
-    tabView.selectTabViewItem(at: tab.buttonTag)
+    tabViewController.selectedTabViewItemIndex = tab.buttonTag
     updateTabActiveStatus()
     reload()
   }
 
   private func updateTabActiveStatus() {
     let currentTag = currentTab.buttonTag
-    [videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
+    [layoutTabBtn, videoTabBtn, audioTabBtn, subTabBtn].forEach { btn in
       let isActive = currentTag == btn!.tag
-      btn!.contentTintColor = isActive ? .sidebarTabTintActive : .sidebarTabTint
+      btn!.state = isActive ? .on : .off
     }
   }
 
@@ -587,6 +647,18 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     } else {
       // cache the request
       pendingSwitchRequest = tab
+    }
+  }
+
+  func switchTabByScroll(_ isForward: Bool) {
+    if isForward {
+      if currentTab.buttonTag < 2 {
+        switchToTab(.init(buttonTag: currentTab.buttonTag + 1))
+      }
+    } else {
+      if currentTab.buttonTag > 0 {
+        switchToTab(.init(buttonTag: currentTab.buttonTag - 1))
+      }
     }
   }
 
@@ -1159,8 +1231,42 @@ extension QuickSettingViewController: NSMenuDelegate {
   }
 }
 
+
 class QuickSettingView: NSView {
-
   override func mouseDown(with event: NSEvent) {}
+}
 
+
+fileprivate class TabButton: NSButton {
+  class Cell: NSButtonCell {
+    override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+      if state == .on {
+        NSColor.sidebarTabBtnBackground.setFill()
+        let frame = NSInsetRect(cellFrame, 0, -4)
+        let rect = NSBezierPath(roundedRect: frame, xRadius: 16, yRadius: 16)
+        rect.fill()
+
+        NSColor.sidebarTabBtnBorder.setStroke()
+        rect.lineWidth = 1
+        rect.stroke()
+      }
+
+      super.draw(withFrame: cellFrame, in: controlView)
+    }
+
+    override func drawInterior(withFrame cellFrame: NSRect, in controlView: NSView) {
+      (controlView as? NSButton)?.contentTintColor = state == .on ?
+        .sidebarTabTintActive : .sidebarTabTint
+      super.drawInterior(withFrame: cellFrame, in: controlView)
+    }
+  }
+
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+    self.cell = Cell()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 }

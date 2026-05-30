@@ -2275,7 +2275,11 @@ class MainWindowController: PlayerWindowController {
     sideBarView.setContent(view)
     view.padding(.all)
     var viewController = viewController
-    viewController.downShift = titleBarView.frame.height
+    viewController.downShift = if #available(macOS 26.0, *), sideBarView.style == .liquidGlass {
+      0
+    } else {
+      titleBarView.frame.height
+    }
     // show sidebar
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration)
@@ -2290,6 +2294,10 @@ class MainWindowController: PlayerWindowController {
       self.sideBarStatus = type
       self.window?.resetCursorRects()
     }
+  }
+
+  @objc func hideSideBar(_ sender: AnyObject) {
+    hideSideBar(animate: true)
   }
 
   func hideSideBar(animate: Bool = true, after: @escaping () -> Void = { }) {

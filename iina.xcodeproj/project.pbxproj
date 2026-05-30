@@ -418,6 +418,7 @@
 		E3A239AA2FC6D88F00CE6ACC /* OSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239A92FC6D88C00CE6ACC /* OSDView.swift */; };
 		E3A239AC2FC70EC300CE6ACC /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */; };
 		E3A239AE2FC7267300CE6ACC /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239AD2FC7267000CE6ACC /* SideBarView.swift */; };
+		E3A239B12FCB4D0900CE6ACC /* AnimatedTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
 		E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */; };
@@ -1985,6 +1986,7 @@
 		E3A239A92FC6D88C00CE6ACC /* OSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDView.swift; sourceTree = "<group>"; };
 		E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
 		E3A239AD2FC7267000CE6ACC /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
+		E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabViewController.swift; sourceTree = "<group>"; };
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
@@ -2466,10 +2468,6 @@
 				51CACB9429D500290034CEE5 /* VideoPIPViewController.swift */,
 				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
-				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
-				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
-				8460FBA71D6497490081841B /* PlaylistViewController.swift */,
-				8400D5CE1E1AB2FF006785F5 /* PlaylistViewController.xib */,
 				E39EDD812CE2EB9600978036 /* PluginViewController.swift */,
 				E39EDD822CE2EB9600978036 /* PluginViewController.xib */,
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
@@ -2768,6 +2766,7 @@
 				845ABEAD1D4D19CF00BFB15B /* Models */,
 				847557121F405F2B0006B0FF /* Menu */,
 				E3A239A62FC6D3F000CE6ACC /* MainWindow */,
+				E3A239AF2FCB4CE800CE6ACC /* Sidebar */,
 				84A0BAA31D2FAEA000BC8DA1 /* Views */,
 				E360A5CB2C23C181006EA412 /* Settings */,
 				8452DD7F1D3A1F2A008A543A /* Preference */,
@@ -2918,7 +2917,19 @@
 				3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */,
 				E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */,
 			);
-			path = MainWindow;
+			name = MainWindow;
+			sourceTree = "<group>";
+		};
+		E3A239AF2FCB4CE800CE6ACC /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */,
+				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
+				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
+				8460FBA71D6497490081841B /* PlaylistViewController.swift */,
+				8400D5CE1E1AB2FF006785F5 /* PlaylistViewController.xib */,
+			);
+			name = Sidebar;
 			sourceTree = "<group>";
 		};
 		E3CAD4AD2146DB23000B373A /* Javascript */ = {
@@ -3446,6 +3457,7 @@
 				E39EA3532E7CFD5B00E0BD32 /* FixedProgressBar.swift in Sources */,
 				E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */,
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
+				E3A239B12FCB4D0900CE6ACC /* AnimatedTabViewController.swift in Sources */,
 				51165FC02E1D91940060B817 /* ReadWriteLock.swift in Sources */,
 				84EB1F051D2F5C5B004FA5A1 /* AppData.swift in Sources */,
 				51F7974728C7E00200812D0D /* Lock.swift in Sources */,

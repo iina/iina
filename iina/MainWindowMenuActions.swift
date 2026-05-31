@@ -109,6 +109,6 @@ extension MainWindowController {
   }
 
   @objc func toggleLiveTextOverlay(_ sender: NSMenuItem) {
-    Preference.set(!Preference.bool(for: .liveTextOverlay), for: .liveTextOverlay)
+    Preference.set(!Preference.bool(for: .enableLiveText), for: .enableLiveText)
   }
 }

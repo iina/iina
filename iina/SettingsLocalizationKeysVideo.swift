@@ -36,6 +36,4 @@ extension SettingsLocalization.Key {
   static let text_ReplayGain = SettingsLocalization.Key("$ReplayGain")
   static let enableLiveTextLabel = SettingsLocalization.Key("enableLiveText.label")
   static let enableLiveTextDesc = SettingsLocalization.Key("enableLiveText.desc")
-  static let liveTextOverlayLabel = SettingsLocalization.Key("liveTextOverlay.label")
-  static let liveTextOverlayDesc = SettingsLocalization.Key("liveTextOverlay.desc")
 }

@@ -519,7 +519,7 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.state = isOntop ? .on : .off
     lockAspectRatio.state = Preference.unlockWindowAspectRatio ? .off : .on
     lockAspectRatio.isEnabled = Preference.bool(for: .edgeToEdgeVideo)
-    showLiveTextOverlay.state = Preference.bool(for: .liveTextOverlay) ? .on : .off
+    showLiveTextOverlay.state = Preference.bool(for: .enableLiveText) ? .on : .off
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip

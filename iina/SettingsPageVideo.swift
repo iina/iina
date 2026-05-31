@@ -56,12 +56,6 @@ class SettingsPageVideo: SettingsPage {
             .image(name: "text.viewfinder")
             .bindTo(.enableLiveText)
             .hasDescription()
-            .withDetailView {
-              SettingsItem.Switch()
-                .image(name: "document.viewfinder")
-                .bindTo(.liveTextOverlay)
-                .hasDescription()
-            }
         }
       }
     }

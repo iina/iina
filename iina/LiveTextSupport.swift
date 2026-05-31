@@ -24,7 +24,7 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     overlayView.translatesAutoresizingMaskIntoConstraints = false
     liveTextOverlayView = overlayView
     updateLiveTextOverlayInsets()
-    if Preference.bool(for: .enableLiveText) && Preference.bool(for: .liveTextOverlay) {
+    if Preference.bool(for: .enableLiveText) {
       videoView.addSubview(overlayView)
     }
   }
@@ -61,7 +61,7 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
 
   func updateLiveTextOverlay() {
     guard let overlayView = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
-    let shouldShow = Preference.bool(for: .enableLiveText) && Preference.bool(for: .liveTextOverlay) && player.info.state == .paused
+    let shouldShow = Preference.bool(for: .enableLiveText) && player.info.state == .paused
     if shouldShow && overlayView.superview == nil {
       overlayView.frame = videoView.bounds
       videoView.addSubview(overlayView)

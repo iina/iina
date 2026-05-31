@@ -305,8 +305,7 @@ class MainWindowController: PlayerWindowController {
     .useLiquidGlassOSC,
     .useLiquidGlassOSD,
     .useLiquidGlassSidebar,
-    .enableLiveText,
-    .liveTextOverlay
+    .enableLiveText
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -378,17 +377,15 @@ class MainWindowController: PlayerWindowController {
       [timePreviewView, osdView, additionalInfoView, bufferIndicatorView].forEach {
         $0?.setStyle(Preference.liquidGlass(.osd) ? .liquidGlass : .visualEffect)
       }
-     case PK.enableLiveText.rawValue:
-      let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
-      setupOSCToolbarButtons(buttons)
-      if #available(macOS 13, *) { updateLiveTextOverlay() }
-    case PK.liveTextOverlay.rawValue:
+    case PK.enableLiveText.rawValue:
       if let newValue = change[.newKey] as? Bool {
         let buttons = fragToolbarView.subviews as! [NSButton]
         if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
-        if #available(macOS 13, *) { updateLiveTextOverlay() }
+        if #available(macOS 13, *) {
+          if newValue { requestLiveTextAnalysis() } else { updateLiveTextOverlay() }
+        }
       }
     default:
       return
@@ -810,12 +807,15 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
-    let liveTextEnabled = Preference.bool(for: .enableLiveText)
-    let effectiveButtons = buttons.filter { $0 != .liveText || (AppDelegate.shared.liveTextAvailable && liveTextEnabled) }
+    let effectiveButtons = buttons.filter { $0 != .liveText || AppDelegate.shared.liveTextAvailable }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
+    let liveTextEnabled = Preference.bool(for: .enableLiveText)
     for buttonType in effectiveButtons {
       let button = NSButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: effectiveButtons.count > 4)
+      if buttonType == .liveText && liveTextEnabled {
+        button.image = Preference.ToolBarButton.liveText.alternateImage()
+      }
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
     }
@@ -2782,7 +2782,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   @objc func menuToggleLiveTextOverlay(_ item: NSMenuItem) {
-    Preference.set(!Preference.bool(for: .liveTextOverlay), for: .liveTextOverlay)
+    Preference.set(!Preference.bool(for: .enableLiveText), for: .enableLiveText)
   }
 
   // MARK: - Sync UI with playback
@@ -3035,7 +3035,7 @@ class MainWindowController: PlayerWindowController {
     case .plugins:
       sidebars.showPlugin(tab: nil)
     case .liveText:
-      menuToggleLiveTextOverlay(.dummy)
+      Preference.set(!Preference.bool(for: .enableLiveText), for: .enableLiveText)
     }
   }
 

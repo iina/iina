@@ -104,7 +104,6 @@ struct Preference {
     static let screenshotShowPreview = Key("screenshotShowPreview")
 
     static let enableLiveText = Key("enableLiveText")
-    static let liveTextOverlay = Key("liveTextOverlay")
 
     static let playlistAutoAdd = Key("playlistAutoAdd")
     static let playlistAutoPlayNext = Key("playlistAutoPlayNext")
@@ -1201,7 +1200,6 @@ struct Preference {
     .screenshotShowPreview: true,
 
     .enableLiveText: false,
-    .liveTextOverlay: true,
 
     .watchProperties: [String](),
     .savedVideoFilters: [SavedFilter](),

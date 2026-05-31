@@ -175,6 +175,8 @@ class MainWindowController: PlayerWindowController {
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
 
+  var titlebarOnTopButton: NSButton!
+
   // Left and right arrow buttons
 
   /** The maximum pressure recorded when clicking on the arrow buttons. */
@@ -439,7 +441,6 @@ class MainWindowController: PlayerWindowController {
   }
 
   var titlebarAccessoryViewController: NSTitlebarAccessoryViewController!
-  @IBOutlet var titlebarAccessoryView: NSView!
 
   /** Current OSC view. */
   var currentControlBar: NSView?
@@ -454,7 +455,6 @@ class MainWindowController: PlayerWindowController {
 
   @IBOutlet weak var titleBarView: NSVisualEffectView!
   @IBOutlet weak var titleBarBottomBorder: NSBox!
-  @IBOutlet weak var titlebarOnTopButton: NSButton!
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var controlBarBottom: NSVisualEffectView!
@@ -530,7 +530,10 @@ class MainWindowController: PlayerWindowController {
     titleBarView.layerContentsRedrawPolicy = .onSetNeedsDisplay
 
     titlebarAccessoryViewController = NSTitlebarAccessoryViewController()
-    titlebarAccessoryViewController.view = titlebarAccessoryView
+    titlebarOnTopButton = NSButton(image: .sf("pin")!, target: self, action: #selector(ontopButtonAction))
+    titlebarOnTopButton.frame.size.width = 30
+    titlebarOnTopButton.isBordered = false
+    titlebarAccessoryViewController.view = titlebarOnTopButton
     titlebarAccessoryViewController.layoutAttribute = .right
     window.addTitlebarAccessoryViewController(titlebarAccessoryViewController)
     updateOnTopIcon()
@@ -558,7 +561,7 @@ class MainWindowController: PlayerWindowController {
     // fade-able views
     fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
     fadeableViews.append(titleBarView)
-    fadeableViews.append(titlebarAccessoryView)
+    fadeableViews.append(titlebarAccessoryViewController.view)
 
     // video view
     cv.autoresizesSubviews = false
@@ -2141,7 +2144,7 @@ class MainWindowController: PlayerWindowController {
 
   func updateOnTopIcon() {
     titlebarOnTopButton.isHidden = Preference.bool(for: .alwaysShowOnTopIcon) ? false : !isOntop
-    titlebarOnTopButton.state = isOntop ? .on : .off
+    titlebarOnTopButton.image = isOntop ? .sf("pin.fill") : .sf("pin")
   }
 
   // MARK: - UI: OSD
@@ -3099,7 +3102,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  @IBAction func ontopButtonAction(_ sender: NSButton) {
+  @objc func ontopButtonAction(_ sender: NSButton) {
     setWindowFloatingOnTop(!isOntop)
   }
 

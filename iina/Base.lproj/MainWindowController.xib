@@ -40,8 +40,6 @@
                 <outlet property="titleBarBottomBorder" destination="iA3-pt-6Jm" id="RD4-8v-bHB"/>
                 <outlet property="titleBarHeightConstraint" destination="1Dw-Bg-FRS" id="EC5-S5-p2j"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
-                <outlet property="titlebarAccessoryView" destination="maF-Zr-K8w" id="nvF-H7-z8G"/>
-                <outlet property="titlebarOnTopButton" destination="Ztc-Kn-fxI" id="xCA-hX-VpW"/>
                 <outlet property="volumeSlider" destination="SAG-kc-FAt" id="zM0-Gg-vfy"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -408,35 +406,10 @@
             <autoresizingMask key="autoresizingMask"/>
             <point key="canvasLocation" x="587" y="727"/>
         </stackView>
-        <customView id="maF-Zr-K8w">
-            <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ztc-Kn-fxI">
-                    <rect key="frame" x="6" y="-3" width="18" height="26"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="pin" catalog="system" imagePosition="only" alignment="center" alternateImage="pin.fill" refusesFirstResponder="YES" state="on" inset="2" id="jAf-Be-kY3">
-                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="ontopButtonAction:" target="-2" id="4pa-eu-aT5"/>
-                    </connections>
-                </button>
-            </subviews>
-            <constraints>
-                <constraint firstItem="Ztc-Kn-fxI" firstAttribute="leading" secondItem="maF-Zr-K8w" secondAttribute="leading" constant="6" id="5nm-To-7E8"/>
-                <constraint firstAttribute="trailing" secondItem="Ztc-Kn-fxI" secondAttribute="trailing" constant="8" id="FaP-IV-C3Y"/>
-                <constraint firstItem="Ztc-Kn-fxI" firstAttribute="top" secondItem="maF-Zr-K8w" secondAttribute="top" constant="1" id="df2-wS-ZbO"/>
-                <constraint firstAttribute="bottom" secondItem="Ztc-Kn-fxI" secondAttribute="bottom" constant="1" id="ms6-RQ-I8s"/>
-            </constraints>
-            <point key="canvasLocation" x="713" y="-57"/>
-        </customView>
     </objects>
     <resources>
         <image name="mute" width="16" height="14"/>
         <image name="pause" width="24" height="24"/>
-        <image name="pin" catalog="system" width="15" height="17"/>
-        <image name="pin.fill" catalog="system" width="15" height="17"/>
         <image name="play" width="24" height="24"/>
         <image name="playing-in-pip" width="87" height="68"/>
         <image name="speed" width="24" height="24"/>

@@ -60,18 +60,19 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
   }
 
   func updateLiveTextOverlay() {
-    guard let overlayView = liveTextOverlayView else { return }
+    guard let overlayView = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
     let shouldShow = Preference.bool(for: .enableLiveText) && Preference.bool(for: .liveTextOverlay) && player.info.state == .paused
     if shouldShow && overlayView.superview == nil {
       overlayView.frame = videoView.bounds
       videoView.addSubview(overlayView)
       overlayView.padding(.all(0))
       liveTextLog("Image analysis overlay view inserted to video view")
-    } else if !shouldShow {
+    } else if !shouldShow || overlayView.analysis == nil {
       overlayView.removeFromSuperview()
       isLiveTextHighlighted = false
       liveTextLog("Image analysis overlay view removed from video view")
     }
+    window?.layoutIfNeeded()
     refreshUI()
   }
 

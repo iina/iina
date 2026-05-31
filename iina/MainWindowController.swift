@@ -121,6 +121,8 @@ class MainWindowController: PlayerWindowController {
   var bufferIndicatorView: BufferIndicatorView!
   var sideBarView: SideBarView!
   var timePreviewView: TimePreviewView!
+  var titlebarOnTopButton: NSButton!
+  var thumbnailPeekView: ThumbnailPeekView!
 
   // MARK: - Status
 
@@ -174,8 +176,6 @@ class MainWindowController: PlayerWindowController {
 
   /** Views that will show/hide when cursor moving in/out the window. */
   var fadeableViews: [NSView] = []
-
-  var titlebarOnTopButton: NSButton!
 
   // Left and right arrow buttons
 
@@ -461,7 +461,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var bottomView: NSView!
-  @IBOutlet var thumbnailPeekView: ThumbnailPeekView!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
@@ -589,6 +588,7 @@ class MainWindowController: PlayerWindowController {
     let _ = quickSettingView
 
     // thumbnail peek view
+    thumbnailPeekView = ThumbnailPeekView()
     cv.addSubview(thumbnailPeekView)
     self.timePreviewView = TimePreviewView(mainWindow: self)
     cv.addSubview(timePreviewView)

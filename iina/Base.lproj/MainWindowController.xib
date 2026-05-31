@@ -36,7 +36,6 @@
                 <outlet property="rightArrowButton" destination="EIi-qd-glM" id="U46-Gl-e8D"/>
                 <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
                 <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
-                <outlet property="thumbnailPeekView" destination="vej-bg-g6C" id="sws-ib-t4r"/>
                 <outlet property="titleBarBottomBorder" destination="iA3-pt-6Jm" id="RD4-8v-bHB"/>
                 <outlet property="titleBarHeightConstraint" destination="1Dw-Bg-FRS" id="EC5-S5-p2j"/>
                 <outlet property="titleBarView" destination="TRx-2V-Gr3" id="kOU-nP-MAP"/>
@@ -378,29 +377,6 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
             <point key="canvasLocation" x="133" y="727"/>
         </stackView>
-        <customView wantsLayer="YES" id="vej-bg-g6C" customClass="ThumbnailPeekView" customModule="IINA" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HHm-A9-jIP">
-                    <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="oxN-cQ-vJx"/>
-                </imageView>
-            </subviews>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="HHm-A9-jIP" secondAttribute="trailing" id="S6X-Sh-qpJ"/>
-                <constraint firstItem="HHm-A9-jIP" firstAttribute="top" secondItem="vej-bg-g6C" secondAttribute="top" id="kFV-6J-FYW"/>
-                <constraint firstAttribute="bottom" secondItem="HHm-A9-jIP" secondAttribute="bottom" id="nLX-0l-gEv"/>
-                <constraint firstItem="HHm-A9-jIP" firstAttribute="leading" secondItem="vej-bg-g6C" secondAttribute="leading" id="tSq-Pp-P0C"/>
-            </constraints>
-            <shadow key="shadow" blurRadius="2">
-                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-            </shadow>
-            <connections>
-                <outlet property="imageView" destination="HHm-A9-jIP" id="KtN-I3-vJb"/>
-            </connections>
-            <point key="canvasLocation" x="152" y="504"/>
-        </customView>
         <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" id="KfP-G9-8pD">
             <rect key="frame" x="0.0" y="0.0" width="106" height="24"/>
             <autoresizingMask key="autoresizingMask"/>

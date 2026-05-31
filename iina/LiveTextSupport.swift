@@ -29,10 +29,6 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     }
   }
 
-  @MainActor func contentView(for overlayView: ImageAnalysisOverlayView) -> NSView? {
-    return videoView
-  }
-
   func clearAnalysis() {
     guard let overlay = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
     overlay.analysis = nil

@@ -2299,10 +2299,6 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  @objc func hideSideBar(_ sender: AnyObject) {
-    hideSideBar(animate: true)
-  }
-
   func hideSideBar(animate: Bool = true, after: @escaping () -> Void = { }) {
     sidebarAnimationState = .willHide
     let currWidth = sideBarWidthConstraint.constant

@@ -248,8 +248,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
 
     let dismissBtn = NSButton(image: .sf("chevron.right")!,
-                              target: self.mainWindow,
-                              action: #selector(MainWindowController.hideSideBar(_:)))
+                              target: self, action: #selector(dismissSidebar(_:)))
     dismissBtn.size(width: 20, height: 40)
     tabButtonsStackView.addArrangedSubview(dismissBtn)
 
@@ -380,6 +379,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     observe(.iinaSIDChanged) { [unowned self] _ in self.reload() }
     observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
     observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
+  }
+
+  @objc func dismissSidebar(_ sender: AnyObject) {
+    mainWindow.hideSideBar(animate: true)
   }
 
   // MARK: - Right to Left Constraints
@@ -1234,6 +1237,7 @@ extension QuickSettingViewController: NSMenuDelegate {
 
 class QuickSettingView: NSView {
   override func mouseDown(with event: NSEvent) {}
+  override func mouseUp(with event: NSEvent) {}
 }
 
 

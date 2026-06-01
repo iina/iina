@@ -135,7 +135,7 @@ struct SMPTETimecode {
     (separator == ";" || separator == ",") && nominalFramesPerSecond % 30 == 0
   }
 
-  init?(_ string: String, fps: Double) {
+  init?(_ string: String, fps: Double, at position: VideoTime = .zero) {
     guard fps > 0, fps.isFinite else { return nil }
 
     let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -162,12 +162,13 @@ struct SMPTETimecode {
     self.fps = fps
     self.nominalFramesPerSecond = nominalFramesPerSecond
     self.separator = separator == "," ? ";" : (separator == "." ? ":" : separator)
-    startFrame = SMPTETimecode.frameNumber(hours: hours,
-                                           minutes: minutes,
-                                           seconds: seconds,
-                                           frames: frames,
-                                           nominalFramesPerSecond: nominalFramesPerSecond,
-                                           dropFrame: separator == ";" || separator == ",")
+    let frame = SMPTETimecode.frameNumber(hours: hours,
+                                          minutes: minutes,
+                                          seconds: seconds,
+                                          frames: frames,
+                                          nominalFramesPerSecond: nominalFramesPerSecond,
+                                          dropFrame: separator == ";" || separator == ",")
+    startFrame = frame - max(0, Int((position.second * fps).rounded(.down)))
   }
 
   func stringValue(at position: VideoTime) -> String {

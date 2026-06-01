@@ -2162,7 +2162,12 @@ class PlayerCore: NSObject {
   }
 
   private func loadSMPTETimecode(fps: Double) {
+    updateSMPTETimecode(fps: fps, position: info.videoPosition ?? .zero)
+  }
+
+  private func updateSMPTETimecode(fps: Double? = nil, position: VideoTime) {
     let fps = firstPositive(fps,
+                            mpv.getDouble(MPVProperty.currentTracksVideoDemuxFps),
                             mpv.getDouble(MPVProperty.containerFps),
                             mpv.getDouble(MPVProperty.estimatedVfFps),
                             mpv.getDouble(MPVProperty.displayFps))
@@ -2171,45 +2176,19 @@ class PlayerCore: NSObject {
       return
     }
 
-    if let startTimecode = smpteTimecodeMetadata(), let timecode = SMPTETimecode(startTimecode, fps: fps) {
+    if let value = mpv.getString("video-frame-info/smpte-timecode"), !value.isEmpty,
+       let timecode = SMPTETimecode(value, fps: fps, at: position) {
       info.smpteTimecode = timecode
-      log("Loaded SMPTE timecode starting at \(startTimecode)", level: .verbose)
+    } else if let value = mpv.getString("video-frame-info/estimated-smpte-timecode"), !value.isEmpty,
+              let timecode = SMPTETimecode(value, fps: fps, at: position) {
+      info.smpteTimecode = timecode
     } else {
       info.smpteTimecode = SMPTETimecode("00:00:00:00", fps: fps)
     }
   }
 
-  private func firstPositive(_ values: Double...) -> Double? {
-    values.first { $0 > 0 && $0.isFinite }
-  }
-
-  private func smpteTimecodeMetadata() -> String? {
-    if let url = info.currentURL, url.isFileURL,
-       let value = FFmpegController.readSMPTETimecode(from: url), !value.isEmpty {
-      log("Found SMPTE timecode in FFmpeg metadata: \(value)", level: .verbose)
-      return value
-    }
-
-    let preferredKeys = ["timecode", "TIMECODE", "SMPTE_TIMECODE", "com.apple.quicktime.timecode"]
-    for key in preferredKeys {
-      if let value = mpv.getString("metadata/by-key/\(key)"), !value.isEmpty {
-        log("Found SMPTE timecode in mpv metadata key \(key): \(value)", level: .verbose)
-        return value
-      }
-    }
-
-    let count = mpv.getInt(MPVProperty.metadataListCount)
-    guard count > 0 else { return nil }
-    for index in 0..<count {
-      guard let key = mpv.getString(MPVProperty.metadataListNKey(index)) else { continue }
-      let normalizedKey = key.replacingOccurrences(of: "_", with: "-").lowercased()
-      guard normalizedKey.contains("timecode") else { continue }
-      if let value = mpv.getString(MPVProperty.metadataListNValue(index)), !value.isEmpty {
-        log("Found SMPTE timecode in mpv metadata key \(key): \(value)", level: .verbose)
-        return value
-      }
-    }
-    return nil
+  private func firstPositive(_ values: Double?...) -> Double? {
+    values.compactMap { $0 }.first { $0 > 0 && $0.isFinite }
   }
 
   func fileEnded(_ dueToStopCommand: Bool) {
@@ -2783,6 +2762,7 @@ class PlayerCore: NSObject {
       info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
         mpv.getDouble(MPVProperty.playtimeRemainingFull) :
         mpv.getDouble(MPVProperty.timeRemainingFull)
+      updateSMPTETimecode(position: info.videoPosition ?? .zero)
       if isNetworkStream {
         // Update cache info
         info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)

@@ -9,7 +9,7 @@
 import Cocoa
 import VisionKit
 
-fileprivate let subsystem = Logger.makeSubsystem("Live Text", ["viewfinder.text"])
+fileprivate let subsystem = Logger.makeSubsystem("livetext", ["text.viewfinder"])
 fileprivate func liveTextLog(_ str: String, level: Logger.Level = .debug) {
   Logger.log(str, level: level, subsystem: subsystem)
 }
@@ -17,36 +17,15 @@ fileprivate func liveTextLog(_ str: String, level: Logger.Level = .debug) {
 @available(macOS 13, *)
 extension MainWindowController: ImageAnalysisOverlayViewDelegate {
 
-  func setupLiveTextOverlay() {
+  @discardableResult
+  func setupLiveTextOverlay() -> ImageAnalysisOverlayView {
     let overlayView = ImageAnalysisOverlayView()
     overlayView.preferredInteractionTypes = .automatic
     overlayView.delegate = self
     overlayView.translatesAutoresizingMaskIntoConstraints = false
     liveTextOverlayView = overlayView
     updateLiveTextOverlayInsets()
-    if Preference.bool(for: .enableLiveText) {
-      videoView.addSubview(overlayView)
-    }
-  }
-
-  func clearAnalysis() {
-    guard let overlay = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
-    overlay.analysis = nil
-    updateLiveTextOverlay()
-    liveTextLog("Image analysis invalidated")
-  }
-
-  func requestLiveTextAnalysis() {
-    guard player.info.state == .paused, Preference.bool(for: .enableLiveText) else { return }
-    liveTextLog("Image analysis requested")
-    Task { [weak self] in
-      guard let self else { return }
-      guard let image = await self.videoView.videoLayer.captureSnapshot() else {
-        liveTextLog("Failed to capture frame for image analysis", level: .warning)
-        return
-      }
-      await MainActor.run { self.showAnalysis(with: image) }
-    }
+    return overlayView
   }
 
   func updateLiveTextOverlayInsets() {
@@ -55,39 +34,46 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: 8, left: 8, bottom: isBottom ? 48 : 8, right: 8)
   }
 
-  func updateLiveTextOverlay() {
-    guard let overlayView = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
-    let shouldShow = Preference.bool(for: .enableLiveText) && player.info.state == .paused
-    if shouldShow && overlayView.superview == nil {
-      overlayView.frame = videoView.bounds
-      videoView.addSubview(overlayView)
-      overlayView.padding(.all(0))
-      liveTextLog("Image analysis overlay view inserted to video view")
-    } else if !shouldShow || overlayView.analysis == nil {
-      overlayView.removeFromSuperview()
-      isLiveTextHighlighted = false
-      liveTextLog("Image analysis overlay view removed from video view")
-    }
-    window?.layoutIfNeeded()
-    refreshUI()
-  }
-
-  func showAnalysis(with image: NSImage) {
-    guard let overlayView = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
-    let analyzer = ImageAnalyzer()
-    Task { [weak self, overlayView] in
+  func requestLiveTextAnalysis() {
+    guard player.info.state == .paused, Preference.bool(for: .enableLiveText) else { return }
+    liveTextLog("Image analysis requested")
+    liveTextAnalysisTask?.cancel()
+    liveTextAnalysisTask = Task { [weak self] in
+      guard let self else { return }
       do {
-        let analysis = try await analyzer.analyze(image, orientation: .up, configuration: .init([.text]))
+        guard let image = await self.videoView.videoLayer.captureSnapshot() else {
+          liveTextLog("Failed to capture frame for image analysis", level: .warning)
+          return
+        }
+        try Task.checkCancellation()
+        let analysis = try await ImageAnalyzer().analyze(image, orientation: .up, configuration: .init([.text]))
         liveTextLog("Image analysis results acquired")
         await MainActor.run {
-          guard let self else { return }
-          overlayView.analysis = analysis
-          self.updateLiveTextOverlay()
+          let overlay = self.setupLiveTextOverlay()
+          overlay.analysis = analysis
+          overlay.frame = self.videoView.bounds
+          self.videoView.addSubview(overlay)
+          overlay.padding(.all(0))
+          liveTextLog("Image analysis overlay view inserted to video view")
+          self.refreshUI()
         }
+      } catch is CancellationError {
+        liveTextLog("Image analysis cancelled")
       } catch {
-        fatalError("Error")
+        liveTextLog("Image analysis failed: \(error)", level: .warning)
       }
     }
+  }
+
+  func clearAnalysis() {
+    liveTextAnalysisTask?.cancel()
+    liveTextAnalysisTask = nil
+    (liveTextOverlayView as? ImageAnalysisOverlayView)?.analysis = nil
+    liveTextOverlayView?.removeFromSuperview()
+    liveTextOverlayView = nil
+    isLiveTextHighlighted = false
+    liveTextLog("Image analysis invalidated and overlay view removed from video view")
+    refreshUI()
   }
 
   func overlayView(_ overlayView: ImageAnalysisOverlayView,

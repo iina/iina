@@ -48,5 +48,5 @@
 "$ColorHDR" = "Color and HDR";
 
 /* Live Text */
-"enableLiveText.label" = "Enable Live Text";
+"enableLiveText.label" = "Live Text";
 "enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";

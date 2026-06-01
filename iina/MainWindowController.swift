@@ -112,6 +112,7 @@ class MainWindowController: PlayerWindowController {
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var liveTextOverlayView: NSView?
+  var liveTextAnalysisTask: Task<Void, Never>?
   var isVideoLoaded: Bool = false
 
   var isLiveTextSelected: Bool = false
@@ -384,7 +385,7 @@ class MainWindowController: PlayerWindowController {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
         if #available(macOS 13, *) {
-          if newValue { requestLiveTextAnalysis() } else { updateLiveTextOverlay() }
+          if newValue { requestLiveTextAnalysis() } else { clearAnalysis() }
         }
       }
     default:
@@ -630,10 +631,6 @@ class MainWindowController: PlayerWindowController {
     pipOverlayView.isHidden = true
 
     if player.disableUI { hideUI() }
-
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
-      setupLiveTextOverlay()
-    }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)

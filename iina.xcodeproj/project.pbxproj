@@ -433,6 +433,7 @@
 		E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB258E222799B800A62C47 /* MPVHook.swift */; };
 		E3CB75BB1FD998F5004DB10A /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886F21E26CA24008755BB /* Regex.swift */; };
 		E3CB75BD1FDACB82004DB10A /* SavedFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */; };
+		E3D94E7E2FCDE42F00B08618 /* Titlebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D94E7D2FCDE42C00B08618 /* Titlebar.swift */; };
 		E3DBD23E218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */; };
 		E3DBD23F218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3DBD23D218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib */; };
 		E3DC53982A28F0DC002A5A48 /* JavascriptAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DC53972A28F0DC002A5A48 /* JavascriptAPIInput.swift */; };
@@ -2001,6 +2002,7 @@
 		E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIOverlay.swift; sourceTree = "<group>"; };
 		E3CB258E222799B800A62C47 /* MPVHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVHook.swift; sourceTree = "<group>"; };
 		E3CB75BC1FDACB82004DB10A /* SavedFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilter.swift; sourceTree = "<group>"; };
+		E3D94E7D2FCDE42C00B08618 /* Titlebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Titlebar.swift; sourceTree = "<group>"; };
 		E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowContributorAvatarItem.swift; sourceTree = "<group>"; };
 		E3DBD23D218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindowContributorAvatarItem.xib; sourceTree = "<group>"; };
 		E3DC53972A28F0DC002A5A48 /* JavascriptAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIInput.swift; sourceTree = "<group>"; };
@@ -2910,6 +2912,7 @@
 		E3A239A62FC6D3F000CE6ACC /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
+				E3D94E7D2FCDE42C00B08618 /* Titlebar.swift */,
 				3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */,
 				E3A239AD2FC7267000CE6ACC /* SideBarView.swift */,
 				E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */,
@@ -3323,6 +3326,7 @@
 				E3CB258B2222885E00A62C47 /* JavascriptAPIOverlay.swift in Sources */,
 				E337D5E6241EF60400B5729A /* JavascriptAPISubtitle.swift in Sources */,
 				84A09A0E1F2DF596000FF343 /* MiniPlayerWindowController.swift in Sources */,
+				E3D94E7E2FCDE42F00B08618 /* Titlebar.swift in Sources */,
 				84BEEC421DFEE46200F945CA /* StreamReader.swift in Sources */,
 				E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */,
 				84C644601E92BA2700B1410B /* TimeLabelOverflowedView.swift in Sources */,

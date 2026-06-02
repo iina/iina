@@ -132,13 +132,13 @@ extension NSView {
   }
 
   @discardableResult
-  func center(_ align: OrientationOptions = [.x, .y], with aView: NSView? = nil) -> Self {
+  func center(_ align: OrientationOptions = [.x, .y], with aView: NSView? = nil, offset: CGFloat = 0) -> Self {
     let aView = aView ?? self.superview!
     if align.contains(.x) {
-      self.superview!.addConstraint(self.centerXAnchor.constraint(equalTo: aView.centerXAnchor))
+      self.superview!.addConstraint(self.centerXAnchor.constraint(equalTo: aView.centerXAnchor, constant: offset))
     }
     if align.contains(.y) {
-      self.superview!.addConstraint(self.centerYAnchor.constraint(equalTo: aView.centerYAnchor))
+      self.superview!.addConstraint(self.centerYAnchor.constraint(equalTo: aView.centerYAnchor, constant: offset))
     }
     return self
   }

@@ -295,7 +295,7 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
     lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
     if #available(macOS 13, *) {
-      enableTextLive.action = #selector(MainWindowController.menuToggleLiveTextOverlay(_:))
+      enableTextLive.action = #selector(MainWindowController.menuToggleLiveText(_:))
     } else {
       enableTextLive.isHidden = true
     }
@@ -887,6 +887,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (smallerSize, true, [IINACommand.smallerWindow.rawValue], false, nil, nil),
       (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
       (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
+      (enableTextLive, true, [IINACommand.liveText.rawValue], false, nil, nil),
       (pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),

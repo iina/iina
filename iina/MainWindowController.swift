@@ -2778,7 +2778,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  @objc func menuToggleLiveTextOverlay(_ item: NSMenuItem) {
+  @objc func menuToggleLiveText(_ item: NSMenuItem) {
     Preference.set(!Preference.bool(for: .enableLiveText), for: .enableLiveText)
   }
 
@@ -3041,6 +3041,8 @@ class MainWindowController: PlayerWindowController {
     switch cmd {
     case .toggleMusicMode:
       player.switchToMiniPlayer()
+    case .liveText:
+      menuToggleLiveText(.dummy)
     default:
       break
     }

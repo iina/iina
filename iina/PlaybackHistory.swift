@@ -14,6 +14,7 @@ fileprivate let KeyMpvMd5 = "IINAPHMpvmd5"
 fileprivate let KeyPlayed = "IINAPHPlayed"
 fileprivate let KeyAddedDate = "IINAPHDate"
 fileprivate let KeyDuration = "IINAPHDuration"
+fileprivate let KeyTitle = "IINAPHTitle"
 
 /// An entry in the playback history file.
 /// - Important: This class conforms to [NSSecureCoding](https://developer.apple.com/documentation/foundation/nssecurecoding).
@@ -22,6 +23,12 @@ class PlaybackHistory: NSObject, NSSecureCoding {
 
   /// Indicate this class supports secure coding.
   static var supportsSecureCoding: Bool { true }
+
+  private static let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
+    return dateFormatter
+  }()
 
   var url: URL
   var name: String
@@ -32,6 +39,21 @@ class PlaybackHistory: NSObject, NSSecureCoding {
 
   var duration: VideoTime
   var mpvProgress: VideoTime?
+
+  var title: String?
+
+  /// A description of this playback history entry suitable to include in a log message.
+  override var description: String {
+    var description = """
+      added: \(PlaybackHistory.dateFormatter.string(from: addedDate)) \
+      duration: \(duration.stringRepresentation)
+      """
+    if let mpvProgress { description += " progress: \(mpvProgress.stringRepresentation)" }
+    description += "\n  \(url)"
+    if let title { description += "\n  \(title)" }
+    description += "\n  MD5: \(mpvMd5)"
+    return description
+  }
 
   required init?(coder aDecoder: NSCoder) {
     guard
@@ -45,6 +67,7 @@ class PlaybackHistory: NSObject, NSSecureCoding {
 
     let played = aDecoder.decodeBool(forKey: KeyPlayed)
     let duration = aDecoder.decodeDouble(forKey: KeyDuration)
+    let title = aDecoder.decodeObject(of: NSString.self, forKey: KeyTitle)
 
     self.url = url as URL
     self.name = name as String
@@ -52,17 +75,19 @@ class PlaybackHistory: NSObject, NSSecureCoding {
     self.played = played
     self.addedDate = date as Date
     self.duration = VideoTime(duration)
+    self.title = title as String?
 
     self.mpvProgress = Utility.playbackProgressFromWatchLater(mpvMd5)
   }
 
-  init(url: URL, duration: Double, name: String? = nil) {
+  init(url: URL, duration: Double, name: String? = nil, title: String?) {
     self.url = url
     self.name = name ?? url.lastPathComponent
     self.mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
     self.played = true
     self.addedDate = Date()
     self.duration = VideoTime(duration)
+    self.title = title
   }
 
   func encode(with aCoder: NSCoder) {
@@ -72,6 +97,6 @@ class PlaybackHistory: NSObject, NSSecureCoding {
     aCoder.encode(played, forKey: KeyPlayed)
     aCoder.encode(addedDate, forKey: KeyAddedDate)
     aCoder.encode(duration.second, forKey: KeyDuration)
+    aCoder.encode(title, forKey: KeyTitle)
   }
-
 }

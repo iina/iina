@@ -12,6 +12,12 @@ class HistoryController: NSObject {
 
   static let shared = HistoryController(plistFileURL: Utility.playbackHistoryURL)
 
+#if DEBUG
+  /// As logging of all history entries can produce a huge number of log messages this feature is only included in debug builds and
+  /// must be enabled by setting this property to `true` when you need investigate history file contents.
+  private static let logAllHistoryEntries = false
+#endif
+
   /// Cached copy of the playback history stored in the history file.
   ///
   /// This is accessed by both the main thread and a background thread and must be referenced under a lock.
@@ -45,6 +51,21 @@ class HistoryController: NSObject {
       self.history = history
       log("Read \(history.count) playback history entries")
       MemoryUsage.shared.logUsage("after reading history")
+
+      // As logging of all history entries can produce a huge number of log messages this feature is
+      // only included in debug builds.
+#if DEBUG
+      // IINA must be built with the property logAllHistoryEntries set to true when you want the
+      // history file contents to be logged when it is read.
+      guard HistoryController.logAllHistoryEntries, !history.isEmpty,
+            Logger.isEmitting(.verbose) else { return }
+      log("Playback history:", level: .verbose)
+      var index = 0
+      for entry in history {
+        log("History[\(index)] \(String(describing: entry))", level: .verbose)
+        index += 1
+      }
+#endif
     } catch {
       log("Failed to read playback history file \(plistURL.path): \(error)", level: .error)
     }
@@ -69,7 +90,8 @@ class HistoryController: NSObject {
   /// - Parameters:
   ///   - url: URL of the media being played.
   ///   - duration: Total duration of the media.
-  func add(_ url: URL, duration: Double) {
+  ///   - title: Title of the media (if available).
+  func add(_ url: URL, duration: Double, title: String?) {
     guard Preference.bool(for: .recordPlaybackHistory) else { return }
     $tasksOutstanding.withLock { $0 += 1 }
     queue.async { [self] in
@@ -78,7 +100,9 @@ class HistoryController: NSObject {
            let index = history.firstIndex(of: existingItem) {
           history.remove(at: index)
         }
-        history.insert(PlaybackHistory(url: url, duration: duration), at: 0)
+        let entry = PlaybackHistory(url: url, duration: duration, title: title)
+        history.insert(entry, at: 0)
+        log("Adding to history: \(String(describing: entry))", level: .verbose)
       }
       save()
       $tasksOutstanding.withLock { tasksOutstanding in

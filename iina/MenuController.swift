@@ -139,6 +139,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fullScreen: NSMenuItem!
   @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
+  @IBOutlet weak var lockAspectRatio: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
   @IBOutlet weak var rotationMenu: NSMenu!
@@ -291,6 +292,7 @@ class MenuController: NSObject, NSMenuDelegate {
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
+    lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
 
     // -- aspect
     var aspectList = AppData.aspects
@@ -513,6 +515,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let isOntop = player.isInMiniPlayer ? player.miniPlayer.isOntop : player.mainWindow.isOntop
     let isDelogo = player.info.delogoFilter != nil
     alwaysOnTop.state = isOntop ? .on : .off
+    lockAspectRatio.state = Preference.bool(for: .unlockWindowAspectRatio) ? .off : .on
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
@@ -601,12 +604,32 @@ class MenuController: NSObject, NSMenuDelegate {
 
   func updatePluginMenu() {
     let isDisplayingPluginsPanel = PlayerCore.active.mainWindow.sideBarStatus == .plugins
+    let managePluginsItem = NSMenuItem(
+      title: Constants.String.managePlugins,
+      action: #selector(AppDelegate.showPluginPreferences(_:)),
+      keyEquivalent: "")
+    let showPanelItem = NSMenuItem(
+      title: isDisplayingPluginsPanel ? Constants.String.hidePluginsPanel : Constants.String.showPluginsPanel,
+      action: #selector(MainMenuActionHandler.showPluginsPanel(_:)),
+      keyEquivalent: "")
+    let developerTool = NSMenuItem()
+    let reloadPluginsItem = NSMenuItem(
+      title: NSLocalizedString("menu.reload_plugins", comment: "Reload All Plugins"),
+      action: #selector(AppDelegate.reloadAllPlugins(_:)),
+      keyEquivalent: "")
+
+    if #available (macOS 26, *) {
+      managePluginsItem.image = .sf("gear")
+      showPanelItem.image = .sf("puzzlepiece.extension")
+      developerTool.image = .sf("terminal")
+      reloadPluginsItem.image = .sf("arrow.counterclockwise")
+    }
+
     pluginMenu.removeAllItems()
-    pluginMenu.addItem(withTitle: Constants.String.managePlugins, action: #selector(AppDelegate.showPluginPreferences(_:)), keyEquivalent: "")
-    pluginMenu.addItem(withTitle: isDisplayingPluginsPanel ? Constants.String.hidePluginsPanel : Constants.String.showPluginsPanel, action: #selector(MainMenuActionHandler.showPluginsPanel(_:)), keyEquivalent: "")
+    pluginMenu.addItem(managePluginsItem)
+    pluginMenu.addItem(showPanelItem)
     pluginMenu.addItem(.separator())
 
-    let developerTool = NSMenuItem()
     developerTool.title = NSLocalizedString("menu.developer_tool", comment: "Developer Tool")
     developerTool.submenu = NSMenu()
 
@@ -666,7 +689,8 @@ class MenuController: NSObject, NSMenuDelegate {
     if #available(macOS 12.0, *) {
       pluginMenu.addItem(developerTool)
     }
-    pluginMenu.addItem(withTitle: NSLocalizedString("menu.reload_plugins", comment: "Reload All Plugins"), action: #selector(MainMenuActionHandler.reloadAllPlugins(_:)), keyEquivalent: "")
+    pluginMenu.addItem(reloadPluginsItem)
+
   }
 
   @discardableResult

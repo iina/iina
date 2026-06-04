@@ -9,12 +9,13 @@
 import Cocoa
 
 struct SettingsItem {
-  class Base: NSView, WithSettingsLocalizationContext  {
+  class Base: NSObject, SettingsContainer {
+    lazy var itemID = SettingsContainerUUID.next()
     var l10n: SettingsLocalization.Context!
 
     var isFirstItem = false
     var isLastItem = false
-    
+
     var controlSize: NSControl.ControlSize = .regular
 
     func setControlSize(_ label: NSTextField) {
@@ -30,68 +31,63 @@ struct SettingsItem {
         label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
       }
     }
+
+    func makeView(context: SettingsLocalization.Context) -> NSView {
+      self.l10n = context
+      let view = NSView()
+      view.translatesAutoresizingMaskIntoConstraints = false
+      return view
+    }
+
+    func registerSearchEntry(context: SettingsSearch.Context) {
+      return
+    }
   }
 
   class Custom: Base {
     var customView: NSView!
 
-    init() {
-      super.init(frame: NSRect())
-      self.translatesAutoresizingMaskIntoConstraints = false
+    override init() {
+      super.init()
     }
-    
-    @MainActor required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
-    
+
     func view(_ view: NSView) -> Self {
       self.customView = view
       return self
     }
 
-    override func viewDidMoveToWindow() {
-      guard window != nil else { return }
+    override func makeView(context: SettingsLocalization.Context) -> NSView {
+      self.l10n = context
+      let view = View(tag: itemID)
+      view.translatesAutoresizingMaskIntoConstraints = false
       customView.translatesAutoresizingMaskIntoConstraints = false
-      self.addSubview(customView)
+      view.addSubview(customView)
       customView.padding(.all)
-      self.wantsLayer = true
-      self.layer?.cornerRadius = 6
-      self.layer?.masksToBounds = true
+      view.wantsLayer = true
+      view.layer?.cornerRadius = 6
+      view.layer?.masksToBounds = true
+      return view
     }
+
+    class View: SettingsView { }
   }
-  
+
   class LongInput: Base {
-    let label: NSTextField
-    let textField: NSTextField
-    
-    var iconView: NSImageView!
     var imageName: [String]?
 
     var key: Preference.Key?
     var hasDesc: Bool = false
     var descKey: SettingsLocalization.Key?
 
-    init() {
-      self.label = NSTextField(labelWithString: "")
-      label.translatesAutoresizingMaskIntoConstraints = false
-      self.textField = NSTextField()
-      textField.translatesAutoresizingMaskIntoConstraints = false
-      iconView = NSImageView()
-      iconView.translatesAutoresizingMaskIntoConstraints = false
+    override init() {
+      super.init()
+    }
 
-      super.init(frame: NSRect())
-      self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    @MainActor required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
-    
     func bindTo(_ key: Preference.Key) -> Self {
       self.key = key
       return self
     }
-    
+
     public func image(name: [String]) -> Self {
       self.imageName = name
       return self
@@ -101,32 +97,43 @@ struct SettingsItem {
       self.controlSize = size
       return self
     }
-    
+
     func hasDescription(content: SettingsLocalization.Key? = nil) -> Self {
       self.hasDesc = true
       self.descKey = content
       return self
     }
 
-    override func viewDidMoveToWindow() {
+    override func makeView(context: SettingsLocalization.Context) -> NSView {
+      self.l10n = context
+      let view = View(tag: itemID)
+      view.translatesAutoresizingMaskIntoConstraints = false
+
+      let label = NSTextField(labelWithString: "")
+      label.translatesAutoresizingMaskIntoConstraints = false
+      let textField = NSTextField()
+      textField.translatesAutoresizingMaskIntoConstraints = false
+      let iconView = NSImageView()
+      iconView.translatesAutoresizingMaskIntoConstraints = false
+
       setControlSize(label)
       setControlSize(textField)
-      
+
       if let key = key {
         label.stringValue = l10n.localized(.init("\(key.rawValue).label"))
         textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
       }
-      
+
       let labelStackView = NSStackView(views: [iconView, label])
-      
-      if let imageName, let symbol = NSImage.findSFSymbol(imageName) {
+
+      if let imageName, let symbol = NSImage.sf(imageName) {
         iconView.image = symbol
         iconView.size(width: 24, height: 20)
       } else {
         iconView.isHidden = true
         label.padding(.leading(30))
       }
-      
+
       labelStackView.translatesAutoresizingMaskIntoConstraints = false
       labelStackView.orientation = .horizontal
       labelStackView.spacing = 6
@@ -135,7 +142,7 @@ struct SettingsItem {
       stackView.translatesAutoresizingMaskIntoConstraints = false
       stackView.orientation = .vertical
       stackView.alignment = .leading
-      
+
       if hasDesc {
         let descKey =  descKey ?? .init("\(key!.rawValue).desc")
         let descLabel = NSTextField(labelWithString: l10n.localized(descKey))
@@ -145,18 +152,31 @@ struct SettingsItem {
         descLabel.makeMultiLine()
         descLabel.padding(.leading(30))
       }
-      
-      self.addSubview(stackView)
-      
+
+      view.addSubview(stackView)
+
       textField.padding(.leading(30), .trailing)
-      
+
       stackView.padding(.leading(6), .trailing(8), .vertical(8))
+      return view
     }
+
+    override func registerSearchEntry(context: SettingsSearch.Context) {
+      let l10n = context.l10n
+      context.add(itemID,
+                  (key?.rawValue).map { l10n.localized(.init($0 + ".label")) },
+                  isMain: true)
+      context.add(itemID,
+                  (descKey?.rawValue).map { l10n.localized(.init($0 + ".desc")) },
+                  isMain: true)
+    }
+
+    class View: SettingsView { }
   }
 
 
   class General: Base {
-    var detailView: NSView?
+    var detailContainer: SettingsContainer?
     var valueView: NSView?
     var extraViews: [NSView] = []
 
@@ -164,10 +184,11 @@ struct SettingsItem {
     var desc: NSTextField!
     var labelStackView: NSStackView!
     var image: NSImageView!
-    var mainView: NSView!
     var valueStackView: NSStackView!
     var expandingStackView: NSStackView?
     var disclosureButton: NSButton!
+    var renderedDetailView: NSView?
+    weak var renderedView: View?
 
     var labelLocalizationKey: SettingsLocalization.Key?
     var imageName: [String]?
@@ -189,7 +210,6 @@ struct SettingsItem {
     var isExpandable = false
     var isExpandableAndClickable: Bool = true
     var isExpanded = false
-    private var missingL10n = false
 
     var key: Preference.Key?
 
@@ -197,8 +217,7 @@ struct SettingsItem {
 
     init(title l10nKey: SettingsLocalization.Key? = nil) {
       self.labelLocalizationKey = l10nKey
-      super.init(frame: NSRect())
-      self.translatesAutoresizingMaskIntoConstraints = false
+      super.init()
     }
 
     public func hasDescription() -> Self {
@@ -232,22 +251,56 @@ struct SettingsItem {
       return self
     }
 
-    private func populateViews() {
+    func getChildren() -> [any SettingsContainer] {
+      if let detailContainer {
+        return [detailContainer]
+      }
+      return []
+    }
+
+    override func makeView(context: SettingsLocalization.Context) -> NSView {
+      self.l10n = context
+      let view = View(owner: self, tag: itemID)
+      view.translatesAutoresizingMaskIntoConstraints = false
+      self.renderedView = view
+      populateViews(on: view)
+      initBinding()
+      return view
+    }
+
+    private func localizedTitle(_ context: SettingsLocalization.Context? = nil) -> String {
+      let l10n = context ?? l10n!
+      if let labelLocalizationKey = labelLocalizationKey {
+        return l10n.localized(labelLocalizationKey)
+      } else if let key = key {
+        let l10nKey = labelLocalizationKey ?? .init("\(key.rawValue).label")
+        return l10n.localized(l10nKey)
+      } else {
+        return "# Localization Missing"
+      }
+    }
+
+    override func registerSearchEntry(context: SettingsSearch.Context) {
+      let l10n = context.l10n
+      context.add(itemID, localizedTitle(l10n), isMain: true)
+      if hasDesc {
+        context.add(itemID, l10n.localized(descKey ?? .init("\(key!.rawValue).desc")))
+      }
+      if let detailContainer {
+        let newContext = context.with(parent: itemID)
+        detailContainer.registerSearchEntry(context: newContext)
+      }
+    }
+
+    private func populateViews(on view: View) {
       backgroundView = ClickableView()
       backgroundView.showTopRoundCorner = isFirstItem
       backgroundView.showBottomRoundCorner = isLastItem
       backgroundView.translatesAutoresizingMaskIntoConstraints = false
-      self.addSubview(backgroundView)
+      view.addSubview(backgroundView)
       backgroundView.padding(.all)
 
-      if let labelLocalizationKey = labelLocalizationKey {
-        label = NSTextField(labelWithString: l10n.localized(labelLocalizationKey))
-      } else if let key = key {
-        let l10nKey = labelLocalizationKey ?? .init("\(key.rawValue).label")
-        label = NSTextField(labelWithString: l10n.localized(l10nKey))
-      } else {
-        label = NSTextField(labelWithString: "# Localization Missing")
-      }
+      label = NSTextField(labelWithString: localizedTitle())
       label.translatesAutoresizingMaskIntoConstraints = false
       label.controlSize = controlSize
       label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -291,7 +344,7 @@ struct SettingsItem {
 
       image = NSImageView()
       image.translatesAutoresizingMaskIntoConstraints = false
-      if let imageName, let symbol = NSImage.findSFSymbol(imageName) {
+      if let imageName, let symbol = NSImage.sf(imageName) {
         image.image = symbol
       } else {
         image.isHidden = true
@@ -310,11 +363,8 @@ struct SettingsItem {
       backgroundView.addSubview(disclosureButton)
 
       let valueViews = self.getValueViews()
-      valueViews.forEach { view in
-        view.translatesAutoresizingMaskIntoConstraints = false
-        if let l10n = l10n {
-          SettingsLocalization.injectContext(view, l10n)
-        }
+      valueViews.forEach {
+        $0.translatesAutoresizingMaskIntoConstraints = false
       }
 
       valueStackView = NSStackView()
@@ -333,11 +383,11 @@ struct SettingsItem {
         .constraint(equalTo: backgroundView.topAnchor, constant: verticalPadding + 8).isActive = true
       valueStackView.padding(.trailing(8))
 //       valueStackView.padding(.top(verticalPaddingFixed), .trailing(8))
-//      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(y: true)
-      image.size(width: 24, height: 20).spacing(to: labelStackView, .trailing(6))
+//      valueStackView.padding(.vertical(verticalPadding), .trailing(8)).center(.y)
+      image.size(width: 24, height: 20).spacing(.trailing(6), to: labelStackView)
         .padding(.top(11))
-      disclosureButton.padding(.trailing(12)).center(y: true)
-      labelStackView.center(y: true).flexibleSpacingTo(view: valueStackView, trailing: 8)
+      disclosureButton.padding(.trailing(12)).center(.y)
+      labelStackView.center(.y).flexibleSpacingTo(view: valueStackView, trailing: 8)
         .padding(.leading(36), .vertical(greaterThan: verticalPadding))
 
       prepareExpandableView()
@@ -352,35 +402,29 @@ struct SettingsItem {
 
     func initBinding() {}
 
-    override func viewDidMoveToWindow() {
-      guard window != nil else { return }
-      populateViews()
-      initBinding()
-    }
-
     @discardableResult
-    func withExpandingDetailView(@SettingsSubListBuilder _ view: () -> NSView) -> Self {
+    func withExpandingDetailView(@SettingsSubListBuilder _ view: () -> SettingsSubList) -> Self {
       isExpandable = true
-      detailView = view()
+      detailContainer = view()
       return self
     }
 
     @discardableResult
-    func withExpandingDetailView(_ view: NSView) -> Self {
+    func withExpandingDetailView(_ view: SettingsContainer) -> Self {
       isExpandable = true
-      detailView = view
+      detailContainer = view
       return self
     }
 
     @discardableResult
-    func withDetailView(@SettingsSubListBuilder _ view: () -> NSView) -> Self {
-      detailView = view()
+    func withDetailView(@SettingsSubListBuilder _ view: () -> SettingsSubList) -> Self {
+      detailContainer = view()
       return self
     }
 
     @discardableResult
-    func withDetailView(_ view: NSView) -> Self {
-      detailView = view
+    func withDetailView(_ view: SettingsContainer) -> Self {
+      detailContainer = view
       return self
     }
 
@@ -391,11 +435,10 @@ struct SettingsItem {
     }
 
     private func prepareExpandableView() {
-      guard let detailView = detailView else { return }
+      guard let detailContainer else { return }
+      let detailView = detailContainer.makeView(context: l10n)
+      renderedDetailView = detailView
       detailView.translatesAutoresizingMaskIntoConstraints = false
-      if let l10n = l10n {
-        SettingsLocalization.injectContext(detailView, l10n)
-      }
 
       backgroundView.removeFromSuperview()
       backgroundView.clickable = isExpandable && isExpandableAndClickable
@@ -404,7 +447,7 @@ struct SettingsItem {
       expandingStackView!.orientation = .vertical
       expandingStackView!.spacing = 0
       expandingStackView?.translatesAutoresizingMaskIntoConstraints = false
-      self.addSubview(expandingStackView!)
+      renderedView?.addSubview(expandingStackView!)
       expandingStackView!.padding(.all)
       expandingStackView!.addArrangedSubview(backgroundView)
       expandingStackView!.addArrangedSubview(detailView)
@@ -420,14 +463,10 @@ struct SettingsItem {
       }
     }
 
-    override func mouseUp(with event: NSEvent) {
+    func handleMouseUp() {
       guard isExpandable && isExpandableAndClickable else { return }
 
       toggleExpandable()
-    }
-
-    required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
     }
 
     @objc private func openHelpLink(_ sender: NSButton!) {
@@ -436,35 +475,59 @@ struct SettingsItem {
       }
     }
 
-    func toggleExpandable(_ setValue: Bool? = nil) {
+    func toggleExpandable(_ setValue: Bool? = nil, animated: Bool = true) {
       if let setValue = setValue {
         isExpanded = setValue
       } else {
         isExpanded.toggle()
       }
 
+      guard let renderedDetailView else { return }
+
       if isExpanded {
         disclosureButton.state = .on
-        expandingStackView!.setVisibilityPriority(.mustHold, for: detailView!)
+        expandingStackView!.setVisibilityPriority(.mustHold, for: renderedDetailView)
         backgroundView.enableRoundCorner = false
       } else {
         disclosureButton.state = .off
-        expandingStackView!.setVisibilityPriority(.notVisible, for: detailView!)
+        expandingStackView!.setVisibilityPriority(.notVisible, for: renderedDetailView)
         backgroundView.enableRoundCorner = true
       }
 
-      let duration = AccessibilityPreferences.adjustedDuration(0.25)
-      NSAnimationContext.runAnimationGroup({ context in
-        context.duration = duration
-        context.allowsImplicitAnimation = true
-        self.window?.layoutIfNeeded()
-      }, completionHandler: nil)
-
-      DispatchQueue.main.asyncAfter(deadline: .now() + duration / 3) {
+      if animated {
+        let duration = AccessibilityPreferences.adjustedDuration(0.25)
         NSAnimationContext.runAnimationGroup({ context in
           context.duration = duration
-          self.detailView?.alphaValue = self.isExpanded ? 1 : 0
+          context.allowsImplicitAnimation = true
+          self.renderedView?.window?.layoutIfNeeded()
         }, completionHandler: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration / 3) {
+          NSAnimationContext.runAnimationGroup({ context in
+            context.duration = duration
+            self.renderedDetailView?.alphaValue = self.isExpanded ? 1 : 0
+          }, completionHandler: nil)
+        }
+      } else {
+        self.renderedDetailView?.alphaValue = self.isExpanded ? 1 : 0
+        self.renderedView?.window?.layoutIfNeeded()
+      }
+    }
+
+    class View: SettingsView {
+      unowned let owner: General
+
+      init(owner: General, tag: Int) {
+        self.owner = owner
+        super.init(tag: tag)
+      }
+
+      required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+      }
+
+      override func mouseUp(with event: NSEvent) {
+        owner.handleMouseUp()
       }
     }
   }
@@ -475,12 +538,17 @@ struct SettingsItem {
     private var customBinding = false
     private var customBindingBlock: ((NSPopUpButton) -> Void)?
     private var tagForDisabled: Int?
+    private var availableTags: Set<Int>? = nil
 
     override func getValueViews() -> [NSView] {
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
-      popupButton.bezelStyle = .flexiblePush
+      if #available(macOS 12, *) {
+        popupButton.bezelStyle = .flexiblePush
+      }
       if #available(macOS 26, *) {
+        popupButton.showsBorderOnlyWhileMouseInside = false
+      } else if #unavailable(macOS 12) {
         popupButton.showsBorderOnlyWhileMouseInside = false
       } else {
         popupButton.showsBorderOnlyWhileMouseInside = true
@@ -488,6 +556,21 @@ struct SettingsItem {
       popupButton.target = self
       popupButton.action = #selector(popupChanged)
       return [popupButton]
+    }
+
+    override func registerSearchEntry(context: SettingsSearch.Context) {
+      super.registerSearchEntry(context: context)
+      let l10n = context.l10n
+      guard let l10nKey = key?.rawValue ?? labelLocalizationKey?.rawValue else { return }
+      for (tag, _) in valueTypes {
+        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
+        context.add(itemID, title)
+      }
+    }
+
+    func availableTags(_ tags: Set<Int>) -> Self {
+      self.availableTags = tags
+      return self
     }
 
     func bindTo<T>(_ key: Preference.Key, ofType t: T.Type) -> Self
@@ -519,6 +602,7 @@ struct SettingsItem {
     override func initBinding() {
       guard let l10nKey = key?.rawValue ?? labelLocalizationKey?.rawValue else { return }
       for (tag, _) in valueTypes {
+        guard availableTags?.contains(tag) != false else { continue }
         let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
         popupButton.addItem(withTitle: title)
         popupButton.lastItem?.tag = tag
@@ -535,7 +619,7 @@ struct SettingsItem {
     }
 
     @objc func popupChanged(_ sender: NSPopUpButton) {
-      guard let detailView = detailView, let tag = tagForDisabled else { return }
+      guard let detailView = renderedDetailView, let tag = tagForDisabled else { return }
 
       let enabled = sender.selectedTag() != tag
       setSubControls(detailView, enabled: enabled)
@@ -554,7 +638,8 @@ struct SettingsItem {
   class Switch: General {
     var nsSwitch: NSSwitch!
     private var customBinding = false
-    private var customBindingBlock: ((NSSwitch) -> Void)?
+    private var customBindingBlock: ((Switch) -> Void)?
+    var stateChangeCallback: ((Switch) -> Void)?
 
     override func getValueViews() -> [NSView] {
       nsSwitch = NSSwitch()
@@ -569,7 +654,7 @@ struct SettingsItem {
       return self
     }
 
-    func bindToCustom(block: @escaping (NSSwitch) -> Void) -> Self {
+    func bindToCustom(block: @escaping (Switch) -> Void) -> Self {
       self.customBinding = true
       self.customBindingBlock = block
       return self
@@ -584,21 +669,33 @@ struct SettingsItem {
       if let key = key {
         nsSwitch.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
       } else if customBinding, let customBindingBlock = customBindingBlock {
-        customBindingBlock(nsSwitch)
+        customBindingBlock(self)
       }
       DispatchQueue.main.async {
-        self.switchChanged(self.nsSwitch)
+        self.switchChanged(nil)
       }
     }
 
-    @objc func switchChanged(_ sender: NSSwitch) {
-      guard let detailView = detailView else { return }
+    /// Update the switch state programmatically.
+    func setIsOn(_ isOn: Bool) {
+      nsSwitch.state = isOn ? .on : .off
+      switchChanged(nil)
+    }
 
-      let enabled = sender.state == .on
+    @objc func switchChanged(_ sender: NSSwitch?) {
+      guard let detailView = renderedDetailView else { return }
+
+      let enabled = nsSwitch.state == .on
       if !isExpandableAndClickable {
         toggleExpandable(enabled)
       }
       setSubControls(detailView, enabled: enabled)
+
+      if sender != nil {
+        // Only call the callback when the user manually clicked the switch.
+        // Otherwise, we assume it's already handled programmatically.
+        stateChangeCallback?(self)
+      }
     }
 
     private func setSubControls(_ view: NSView, enabled: Bool) {
@@ -631,8 +728,12 @@ struct SettingsItem {
       nsSwitch.target = self
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
-      popupButton.bezelStyle = .flexiblePush
+      if #available(macOS 12, *) {
+        popupButton.bezelStyle = .flexiblePush
+      }
       if #available(macOS 26, *) {
+        popupButton.showsBorderOnlyWhileMouseInside = false
+      } else if #unavailable(macOS 12) {
         popupButton.showsBorderOnlyWhileMouseInside = false
       } else {
         popupButton.showsBorderOnlyWhileMouseInside = true
@@ -705,7 +806,7 @@ struct SettingsItem {
     @objc func switchChanged(_ sender: NSSwitch) {
       let enableSubControls = sender.state == .on
       setSubControls(popupButton, enabled: enableSubControls)
-      if let detailView = detailView {
+      if let detailView = renderedDetailView {
         setSubControls(detailView, enabled: enableSubControls)
       }
     }
@@ -776,6 +877,7 @@ struct SettingsItem {
       setControlSize(textField)
       let stack = NSStackView(views: [textField])
       if let stepper {
+        stepper.controlSize = controlSize
         stack.addView(stepper, in: .trailing)
         stack.spacing = 2
       }
@@ -889,7 +991,7 @@ struct SettingsItem {
     @objc func switchChanged(_ sender: NSSwitch) {
       let enableSubControls = sender.state == .on
       setSubControls(textField, enabled: enableSubControls)
-      if let detailView = detailView {
+      if let detailView = renderedDetailView {
         setSubControls(detailView, enabled: enableSubControls)
       }
     }
@@ -960,7 +1062,7 @@ fileprivate class ClickableView: NSView {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func viewDidChangeEffectiveAppearance() {
     backgroundColor = if #available(macOS 26, *) {
       if effectiveAppearance.isDark {
@@ -983,7 +1085,8 @@ fileprivate class NonClickableButton: NSButton {
 
 class SettingsAccessory {
   /// A Base class for customized controls.
-  class Base: NSObject, WithSettingsLocalizationContext {
+  class Base: NSObject, WithSettingsLocalizationContext, SettingsContainer {
+    lazy var itemID = SettingsContainerUUID.next()
     var l10n: SettingsLocalization.Context!
     let view: NSView
     lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
@@ -994,64 +1097,17 @@ class SettingsAccessory {
       self.view.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    func makeLabel(_ key: SettingsLocalization.Key, isSmall: Bool = true) -> NSTextField {
-      let label = NSTextField(labelWithString: l10n.localized(key))
-      label.translatesAutoresizingMaskIntoConstraints = false
-      if isSmall {
-        label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-        label.textColor = .secondaryLabelColor
-      }
-      return label
-    }
-    
-    func makeButton(_ key: SettingsLocalization.Key) -> NSButton {
-      let btn = NSButton(title: l10n.localized(key), target: nil, action: nil)
-      btn.translatesAutoresizingMaskIntoConstraints = false
-      return btn
+    func registerSearchEntry(context: SettingsSearch.Context) {
+      return
     }
 
-    func makeColorWell(_ key: Preference.Key) -> NSColorWell {
-      let colorWell = NSColorWell()
-      colorWell.translatesAutoresizingMaskIntoConstraints = false
-      if #available(macOS 13.0, *) {
-        colorWell.colorWellStyle = .expanded
-      }
-      colorWell.size(height: 24)
-      colorWell.bind(.value, to: UserDefaults.standard,
-                     withKeyPath: key.rawValue,
-                     options: [.valueTransformer: MPVColorStringTransformer()])
-      return colorWell
-    }
-
-    func makeInput(_ key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true) -> NSTextField {
-      let input = fixedAlignmentRect ? TextFieldWithFixedAlignmentRect() : NSTextField()
-      input.translatesAutoresizingMaskIntoConstraints = false
-      input.bezelStyle = .roundedBezel
-      input.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      if isFixedSize {
-        input.size(width: 48, height: 25)
-      }
-      return input
-    }
-
-    func makeStackView(_ views: [NSView], orientation: NSUserInterfaceLayoutOrientation = .horizontal) -> NSStackView {
-      let stackView = NSStackView(views: views)
-      stackView.translatesAutoresizingMaskIntoConstraints = false
-      stackView.orientation = orientation
-      stackView.alignment = orientation == .horizontal ? .centerY : .centerX
-      stackView.spacing = 8
-      return stackView
+    func makeView(context: SettingsLocalization.Context) -> NSView {
+      return view
     }
   }
-  
-  fileprivate class TextFieldWithFixedAlignmentRect: NSTextField {
-    override func frame(forAlignmentRect alignmentRect: NSRect) -> NSRect {
-      return alignmentRect
-    }
-  }
-  
-  class Selection: NSView, WithSettingsLocalizationContext {
-    var l10n: SettingsLocalization.Context!
+
+  class Selection: NSObject, SettingsContainer {
+    lazy var itemID = SettingsContainerUUID.next()
 
     private class ClickableBox: NSBox {
       var listener: (() -> Void)?
@@ -1061,12 +1117,15 @@ class SettingsAccessory {
       }
     }
 
-    let view: NSBox
+    let view: SettingsView
+    let box: NSBox
     let stackView: NSStackView
     var key: Preference.Key? = nil
     var items: [Int: NSBox] = [:]
     var customtransformer: (((Int) -> Any), (Any?) -> Int)?
     var localizationKey: Preference.Key?
+
+    var builtView: NSView?
 
     private var valueTypes: [(Int, String)] = []
     @objc private var selectedValue: Int = 0 {
@@ -1076,29 +1135,90 @@ class SettingsAccessory {
     }
 
     init(l10nKey: Preference.Key? = nil, topPadding: CGFloat = -4) {
-      self.view = NSBox()
+      self.view = SettingsView(tag: -1)
+      self.box = NSBox()
       self.stackView = NSStackView()
       self.localizationKey = l10nKey
-      super.init(frame: NSRect())
-      self.translatesAutoresizingMaskIntoConstraints = false
-
       view.translatesAutoresizingMaskIntoConstraints = false
-      view.boxType = .custom
-      view.borderWidth = 0
-      view.titlePosition = .noTitle
-      view.contentView = stackView
+
+      box.translatesAutoresizingMaskIntoConstraints = false
+      box.boxType = .custom
+      box.borderWidth = 0
+      box.titlePosition = .noTitle
+      box.contentView = stackView
 
       stackView.translatesAutoresizingMaskIntoConstraints = false
       stackView.orientation = .vertical
       stackView.spacing = 4
       stackView.setHuggingPriority(.defaultLow, for: .horizontal)
-      // not sure from which version, need further tests
-      let topConstraint: CGFloat = if #available(macOS 26, *) { -4 } else { 0 }
-      stackView.padding(.top(topConstraint), .bottom(0), .horizontal)
+      stackView.padding(.top(topConstraintOffset), .bottom(0), .horizontal)
     }
 
     @MainActor required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
+    }
+
+    func makeView(context: SettingsLocalization.Context) -> NSView {
+      if let builtView {
+        return builtView
+      }
+
+      let l10n = context
+      guard let l10nKey = localizationKey?.rawValue ?? key?.rawValue else {
+        fatalError("No localization key provided")
+      }
+      for (tag, _) in valueTypes {
+        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
+        let desc = l10n.localized(.init("\(l10nKey).items.\(tag).desc"))
+        let box = ClickableBox()
+        box.translatesAutoresizingMaskIntoConstraints = false
+        box.boxType = .custom
+        box.titlePosition = .noTitle
+        let itemTitle = NSTextField(labelWithString: title)
+        let itemDesc = NSTextField(labelWithString: desc)
+        itemDesc.textColor = .secondaryLabelColor
+        itemDesc.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+        itemDesc.lineBreakMode = .byWordWrapping
+        itemDesc.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        let itemStackView = NSStackView(views: [itemTitle, itemDesc])
+        itemStackView.translatesAutoresizingMaskIntoConstraints = false
+        itemStackView.spacing = 2
+        itemStackView.orientation = .vertical
+        itemStackView.alignment = .leading
+        itemStackView.setHuggingPriority(.init(100), for: .horizontal)
+        box.contentView = itemStackView
+        box.cornerRadius = 6
+        box.listener = { [unowned self] in
+          if let transformer = self.customtransformer {
+            Preference.set(transformer.0(tag), for: self.key!)
+          } else {
+            Preference.set(tag, for: self.key!)
+          }
+        }
+        items[tag] = box
+        itemStackView.padding(.vertical(6), .horizontal(12))
+        stackView.addArrangedSubview(box)
+      }
+
+      view.addSubview(box)
+      box.padding(.top, .leading(SettingsSubList.indent), .trailing(8), .bottom(8))
+
+      initBinding()
+      builtView = view
+
+      view.tag = itemID
+      return view
+    }
+
+    func registerSearchEntry(context: SettingsSearch.Context) {
+      let l10n = context.l10n
+      guard let l10nKey = localizationKey?.rawValue ?? key?.rawValue else { return }
+      for (tag, _) in valueTypes {
+        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
+        let desc = l10n.localized(.init("\(l10nKey).items.\(tag).desc"))
+        context.add(itemID, title)
+        context.add(itemID, desc)
+      }
     }
 
     func order(_ order: [Int]) -> Self {
@@ -1167,52 +1287,9 @@ class SettingsAccessory {
         }
       }
     }
-
-    override func viewDidMoveToWindow() {
-      guard window != nil, stackView.arrangedSubviews.isEmpty else { return }
-
-      guard let l10nKey = localizationKey?.rawValue ?? key?.rawValue else { return }
-      for (tag, _) in valueTypes {
-        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
-        let desc = l10n.localized(.init("\(l10nKey).items.\(tag).desc"))
-        let box = ClickableBox()
-        box.translatesAutoresizingMaskIntoConstraints = false
-        box.boxType = .custom
-        box.titlePosition = .noTitle
-        let itemTitle = NSTextField(labelWithString: title)
-        let itemDesc = NSTextField(labelWithString: desc)
-        itemDesc.textColor = .secondaryLabelColor
-        itemDesc.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-        itemDesc.lineBreakMode = .byWordWrapping
-        itemDesc.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        let itemStackView = NSStackView(views: [itemTitle, itemDesc])
-        itemStackView.translatesAutoresizingMaskIntoConstraints = false
-        itemStackView.spacing = 2
-        itemStackView.orientation = .vertical
-        itemStackView.alignment = .leading
-        itemStackView.setHuggingPriority(.init(100), for: .horizontal)
-        box.contentView = itemStackView
-        box.cornerRadius = 6
-        box.listener = { [unowned self] in
-          if let transformer = self.customtransformer {
-            Preference.set(transformer.0(tag), for: self.key!)
-          } else {
-            Preference.set(tag, for: self.key!)
-          }
-        }
-        items[tag] = box
-        itemStackView.padding(.vertical(6), .horizontal(12))
-        stackView.addArrangedSubview(box)
-      }
-
-      self.addSubview(view)
-      view.padding(.top, .leading(SettingsSubListView.padding), .trailing(8), .bottom(8))
-
-      initBinding()
-    }
   }
- 
-  
+
+
   class FileChooserView {
     var textField: NSTextField
     var chooseButton: NSButton
@@ -1238,30 +1315,33 @@ class SettingsAccessory {
   }
 
 
-  class LanguageSelector: NSView, WithSettingsLocalizationContext {
-    var l10n: SettingsLocalization.Context!
+  class LanguageSelector: NSObject, SettingsContainer {
+    var itemID = SettingsContainerUUID.next()
 
+    let view: NSView
     private var key: Preference.Key? = nil
     private var hasDesc = false
     private let stackView: NSStackView
     private let audioLangTokenField: LanguageTokenField
-    
-    init() {
+
+    override init() {
+      self.view = NSView()
       self.audioLangTokenField = .init()
       self.stackView = NSStackView()
-      super.init(frame: NSRect())
+      super.init()
 
       audioLangTokenField.translatesAutoresizingMaskIntoConstraints = false
       audioLangTokenField.bezelStyle = .roundedBezel
       audioLangTokenField.target = self
       audioLangTokenField.action = #selector(preferredLanguageAction(_:))
-      
+
       stackView.translatesAutoresizingMaskIntoConstraints = false
       stackView.orientation = .vertical
+      stackView.alignment = .leading
       stackView.addArrangedSubview(audioLangTokenField)
-      self.addSubview(stackView)
+      view.addSubview(stackView)
 
-      stackView.padding(.top(-4), .leading(SettingsSubListView.padding), .trailing(8), .bottom(8))
+      stackView.padding(.top(topConstraintOffset), .leading(SettingsSubList.indent), .trailing(8), .bottom(8))
     }
 
     @MainActor required init?(coder: NSCoder) {
@@ -1272,15 +1352,14 @@ class SettingsAccessory {
       self.key = key
       return self
     }
-    
+
     func hasDescription() -> Self {
       self.hasDesc = true
       return self
     }
 
-    override func viewDidMoveToWindow() {
-      guard window != nil else { return }
-
+    func makeView(context: SettingsLocalization.Context) -> NSView {
+      let l10n = context
       audioLangTokenField.awakeFromNib()
       if let key = key {
         audioLangTokenField.commaSeparatedValues = Preference.string(for: key) ?? ""
@@ -1292,7 +1371,7 @@ class SettingsAccessory {
           stackView.addArrangedSubview(descLabel)
         }
       }
-      
+      return view
     }
 
     @objc func preferredLanguageAction(_ sender: LanguageTokenField) {

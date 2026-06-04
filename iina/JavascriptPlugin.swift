@@ -265,6 +265,10 @@ class JavascriptPlugin: NSObject {
     // If there is a iinaplgz file inside the latest release, use the plgz file
     
     let response = Just.get("https://api.github.com/repos\(url.path)/releases/latest")
+    guard response.ok else {
+      throw PluginError.cannotDownload(response.reason, response.text ?? "")
+    }
+
     if let json = response.json as? [String: Any],
        let assets = json["assets"] as? [[String: Any]],
        let plgzItem = assets.first(where: { ($0["name"] as? String)?.hasSuffix(".iinaplgz") ?? false }),
@@ -548,6 +552,33 @@ class JavascriptPlugin: NSObject {
     Utility.createDirIfNotExist(url: url)
     return url
   }()
+
+  func localizedPermissions(_ permissions: Set<Permission>? = nil, newLine: String = "\n") -> [(name: String, desc: String, isDangerous: Bool)] {
+    let permissions = permissions ?? self.permissions
+
+    let sorted = permissions.sorted { (a, b) in
+      let da = a.isDangerous, db = b.isDangerous
+      if da == db { return a.rawValue < b.rawValue }
+      return da
+    }
+
+    return sorted.map { permission in
+      func localize(_ key: String) -> String {
+        return NSLocalizedString("permissions.\(permission.rawValue).\(key)", comment: "")
+      }
+      var desc = localize("desc")
+      if case .networkRequest = permission {
+        if domainList.contains("*") {
+          desc += "\(newLine)- \(localize("any_site"))"
+        } else {
+          desc += "\(newLine)- "
+          desc += domainList.joined(separator: "\(newLine)- ")
+        }
+      }
+
+      return (name: localize("name"), desc: desc, isDangerous: permission.isDangerous)
+    }
+  }
 }
 
 

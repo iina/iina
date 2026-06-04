@@ -51,7 +51,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   @IBOutlet weak var defaultAlbumArt: NSView!
   @IBOutlet weak var togglePlaylistButton: NSButton!
   @IBOutlet weak var toggleAlbumArtButton: NSButton!
-  
+
   var isPlaylistVisible = false
   var isVideoVisible = true
 
@@ -125,7 +125,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     closeButtonBackgroundViewBox.isHidden = true
     closeButtonView.alphaValue = 0
     controlView.alphaValue = 0
-    
+
     // tool tips
     togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.localizedDescription()
     toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
@@ -274,8 +274,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   override func handleVideoSizeChange() {
     guard let window = window else { return }
-    let w = player.info.displayWidth, h = player.info.displayHeight
-    let (width, height) = (w == 0 && h == 0) ? (1, 1) :  player.videoSizeForDisplay
+    let (width, height) = videoSizeForDisplayInMusicMode()
     let aspect = CGFloat(width) / CGFloat(height)
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect
@@ -294,6 +293,28 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     videoViewAspectConstraint = NSLayoutConstraint(item: videoView, attribute: .width, relatedBy: .equal,
                                                    toItem: videoView, attribute: .height, multiplier: aspect, constant: 0)
     videoViewAspectConstraint?.isActive = true
+  }
+
+  func videoSizeForDisplayInMusicMode() -> (Int, Int) {
+    guard player.info.isAudio == .isAudio else {
+      return player.videoSizeForDisplay
+    }
+    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
+    if let albumArtTrack,
+       let width = albumArtTrack.demuxW,
+       let height = albumArtTrack.demuxH,
+       width > 0,
+       height > 0 {
+      return (width, height)
+    }
+    return (1, 1)
+  }
+
+  func refreshArtworkVisibility() {
+    guard loaded else { return }
+    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
+    let hasSubtitles = (player.info.isSubVisible && player.info.sid != 0) || (player.info.isSecondSubVisible && player.info.secondSid != 0)
+    defaultAlbumArt.isHidden = player.info.isAudio != .isAudio || albumArtTrack != nil || hasSubtitles
   }
 
   func setToInitialWindowSize(display: Bool = true, animate: Bool = true) {
@@ -401,6 +422,16 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       volumePopover.performClose(self)
     } else {
       volumePopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
+    }
+  }
+
+  override func handleIINACommand(_ cmd: IINACommand) {
+    super.handleIINACommand(cmd)
+    switch cmd {
+    case .toggleMusicMode:
+      player.switchBackFromMiniPlayer()
+    default:
+      break
     }
   }
 

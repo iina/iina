@@ -10,32 +10,6 @@ import Cocoa
 import CryptoKit
 import MediaPlayer
 
-extension NSSlider {
-  /**
-   Returns the position of the knob's center point along the slider's track.
-
-   This method calculates the horizontal position of the center of the slider's knob based on the slider's current value (`doubleValue`), the minimum and maximum values, and the slider's dimensions. It can be useful for custom drawing, animations, or hit detection related to the knob's position.
-
-   - Returns: A `CGFloat` representing the x-coordinate of the knob's center along the slider's width.
-
-   - Important: Ensure that the slider's `maxValue` is greater than `minValue`. An assertion is used to validate this.
-
-   Example usage:
-   ```swift
-   let slider = NSSlider(value: 50, minValue: 0, maxValue: 100, target: nil, action: nil)
-   let knobPosition = slider.knobPointPosition()
-   print("The knob is positioned at x-coordinate: \(knobPosition)")
-   ```
-   */
-  func knobPointPosition() -> CGFloat {
-    let sliderOrigin = frame.origin.x + knobThickness / 2
-    let sliderWidth = frame.width - knobThickness
-    assert(maxValue > minValue)
-    let knobPos = sliderOrigin + sliderWidth * CGFloat((doubleValue - minValue) / (maxValue - minValue))
-    return knobPos
-  }
-}
-
 extension CGPoint {
   /**
    Uses the Pythagorean theorem to calculate the distance between two points.
@@ -256,6 +230,23 @@ extension NSRect {
                   height: newSize.height)
   }
 
+  // This function preserves the size of the new rect with the old rect
+  func areaPreservingResized(newWidth width: CGFloat, height: CGFloat) -> NSRect {
+    let targetAspectRatio = width / height
+    let currentArea = size.width * size.height
+
+    let newWidth = sqrt(currentArea * targetAspectRatio)
+    let size = NSSize(width: newWidth, height:  currentArea / newWidth)
+      .satisfyMinSizeWithSameAspectRatio(AppData.mainWindowMinSize)
+
+    return NSRect(
+      x: midX - size.width / 2,
+      y: midY - size.height / 2,
+      width: size.width,
+      height: size.height
+    )
+  }
+
   func constrain(in biggerRect: NSRect) -> NSRect {
     // new size
     var newSize = size
@@ -309,7 +300,7 @@ extension NSMenu {
     menuItem.isEnabled = enabled
     
     if let image = image {
-      menuItem.image = NSImage.findSFSymbol(image)
+      menuItem.image = .sf(image)
     }
     
     self.addItem(menuItem)
@@ -682,18 +673,15 @@ extension NSImage {
   /// Try to find a SF Symbol. This function will iterate through the provided list of SF Symbol name list to and return the
   /// first available SF Symbol at runtime.
   ///
-  /// Even though SF Symbol is available from macOS 11, we require at macOS 14 to use SF Symbol for the sake of consistency. On
-  /// older systems (macOS 13 and below), because SF Symbols are not complete enough for our usage, we don't use them at all.
-  /// If a better symbol is found in a later release of SF Symbol, place it at the first of the name list, so that IINA running
-  /// on the latest version of macOS can make use of it; IINA running on a older version of macOS will fallback to a symbol
-  /// in a previous release of SF Symbol. But the list of name must contain a symbol which is available in macOS 14 (SF Symbol 5).
+  /// Use this function only for stock SF Symbol. If a symbol is customized and imported from SF Symbol.app, it is available for all
+  /// systems, so we should use `NSImage(named:)`or the auto generated names by Xcode directly. Preferably, we use stock SF Symbols;
+  /// the next tier is customized and imported SF Symbols; we only use a foreign symbol if that is absolutely necessary.
   ///
   /// - Parameters:
   ///   - names: A list name of the SF Symbol. The name requires higher SF Symbol version must be at front, with fallback SF Symbol
-  ///   names at later indexes. The last one must be available in macOS 14 (SF Symbol 5), otherwise a fatal error will occur.
+  ///   names at later indexes. If no candidate is available, a `nil` will be returned.
   ///   - configuration: The symbol configuration for the SF symbol. Optional.
-  @available(macOS 14.0, *)
-  static func findSFSymbol(_ names: [String], withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage {
+  static func sf(_ names: [String], withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage? {
     for name in names {
       if let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) {
         if let configuration, let configured = symbol.withSymbolConfiguration(configuration) {
@@ -701,28 +689,13 @@ extension NSImage {
         }
         return symbol
       }
-      for name in names {
-        if let symbol = NSImage(named: name) {
-          return symbol
-        }
-      }
-    }
-    fatalError("Could not find SF Symbol: \(names)")
-  }
-
-  // A failable version of `findSFSymbol`, primarily used for settings pages.
-  static func findSFSymbol(_ names: [String]) -> NSImage? {
-    for name in names {
-      if let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil) {
-        return symbol
-      }
-    }
-    for name in names {
-      if let symbol = NSImage(named: name) {
-        return symbol
-      }
     }
     return nil
+  }
+
+  /// This helper function should be used instead of the one above when possible.
+  static func sf(_ names: String..., withConfiguration configuration: NSImage.SymbolConfiguration? = nil) -> NSImage? {
+    sf(names, withConfiguration: configuration)
   }
 }
 

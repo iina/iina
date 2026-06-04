@@ -30,6 +30,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   private let scrollView = NSScrollView()
 
   @Atomic private var buffer: [Logger.Log] = []
+  @objc private dynamic var logs: [Logger.Log] = []
   private let arrayController = NSArrayController()
   private var isWindowVisible: Bool {
     window?.occlusionState.contains(.visible) ?? false
@@ -43,7 +44,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     didSet {
       guard let button = toolbarItem(withID: .followButton) else { return }
       let symbolName = following ? "arrow.up.left.circle.fill" : "arrow.up.left.circle"
-      button.image = .findSFSymbol([symbolName])
+      button.image = .sf(symbolName)
     }
   }
   private var filteredLogLevel = Logger.Level.preferred {
@@ -98,6 +99,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
       arrayController.selectsInsertedObjects = false
       arrayController.avoidsEmptySelection = false
       arrayController.clearsFilterPredicateOnInsertion = false
+      arrayController.bind(.contentArray, to: self, withKeyPath: "logs", options: nil)
       arrayController.bind(.filterPredicate, to: self, withKeyPath: "predicate", options: nil)
       tableView.bind(.content, to: arrayController, withKeyPath: "arrangedObjects", options: nil)
       tableView.bind(.selectionIndexes, to: arrayController, withKeyPath: "selectionIndexes", options: nil)
@@ -146,9 +148,12 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     tableView.allowsColumnReordering = false
     tableView.columnAutoresizingStyle = .lastColumnOnlyAutoresizingStyle
 
-    let tableViewMenu = NSMenu()
-    tableViewMenu.addItem(withTitle: NSLocalizedString("logwindow.copy", comment: "Copy"), action: #selector(menuCopy), keyEquivalent: "")
-    tableView.menu = tableViewMenu
+    tableView.menu = NSMenu()
+    let copyItem = NSMenuItem(title: NSLocalizedString("logwindow.copy", comment: "Copy"), action: #selector(menuCopy), keyEquivalent: "")
+    if #available(macOS 26, *) {
+      copyItem.image = .sf("document.on.document")
+    }
+    tableView.menu?.addItem(copyItem)
 
     func makeColumn(key: String, minWidth: CGFloat? = nil, maxWidth: CGFloat? = nil, noTitle: Bool = false) -> NSTableColumn {
       let column = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(key))
@@ -223,7 +228,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     item.label = NSLocalizedString("logwindow.now", comment: "Now")
     item.paletteLabel = NSLocalizedString("logwindow.now", comment: "Now")
     item.toolTip = NSLocalizedString("logwindow.now.desc", comment: "Follow latest logs")
-    item.image = .findSFSymbol(["arrow.up.left.circle"])
+    item.image = .sf("arrow.up.left.circle")
     item.action = #selector(followAction)
     return item
   }
@@ -422,7 +427,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
 
     if !toFlush.isEmpty {
       checkIfAtBottom()
-      arrayController.add(contentsOf: toFlush)
+      logs.append(contentsOf: toFlush)
       if following {
         scrollToBottom()
       }
@@ -488,7 +493,7 @@ extension LogWindowController: NSTableViewDelegate {
       cell.imageView = imageView
       imageView.size(width: 12, height: 12)
       imageView.padding(.top(2.5))
-      imageView.center(x: true)
+      imageView.center(.x)
     } else {
       let textField = NSTextField(wrappingLabelWithString: "")
       textField.font = logFont
@@ -521,8 +526,6 @@ extension LogWindowController: NSTableViewDelegate {
       cell.textField?.preferredMaxLayoutWidth = maxWidth
       cell.textField?.invalidateIntrinsicContentSize()
     }
-
-    tableView.noteHeightOfRows(withIndexesChanged: IndexSet(integersIn: 0..<tableView.numberOfRows))
   }
 
 }

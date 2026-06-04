@@ -936,6 +936,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       for query in queries {
         if query.name.hasPrefix("mpv_") {
           let mpvOptionName = String(query.name.dropFirst(4))
+          guard !mpvOptionName.contains("input-command") else {
+            Logger.log("mpv option \(mpvOptionName) rejected when parsing URL", level: .warning)
+            continue
+          }
           guard let mpvOptionValue = query.value else { continue }
           Logger.log("Setting \(mpvOptionName) to \(mpvOptionValue)")
           player.mpv.setString(mpvOptionName, mpvOptionValue)
@@ -1038,6 +1042,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   @IBAction func websiteAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.websiteLink)!)
+  }
+
+  @objc func reloadAllPlugins(_ sender: NSMenuItem) {
+    // Remove the developer tool menu item that retains the plugin instance
+    AppDelegate.shared.menuController.pluginMenu.items
+      .compactMap { $0.submenu }.flatMap { $0.items }
+      .forEach { $0.representedObject = nil }
+    AppDelegate.shared.menuController.pluginMenu.removeAllItems()
+
+    for player in PlayerCore.playerCores {
+      player.clearPlugins()
+    }
+
+    JavascriptPlugin.recreateAllPlugins()
+    JavascriptPlugin.loadGlobalInstances()
+
+    for player in PlayerCore.playerCores {
+      for plugin in JavascriptPlugin.plugins {
+        player.reloadPlugin(plugin, forced: true)
+      }
+      // Try to emit the events that are already emitted.
+      // Of course this is not exhaustive, so users shouldn't rely on this function
+      if player.mainWindow.loaded {
+        player.events.emit(.windowLoaded)
+      }
+      player.events.emit(.mpvInitialized)
+      if player.info.state == .playing {
+        player.events.emit(.fileLoaded)
+        player.events.emit(.fileStarted)
+      }
+    }
   }
 
   /// Dump contents of all player cores to a txt file. Strictly for debugging. No localization needed.

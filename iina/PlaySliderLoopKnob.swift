@@ -113,7 +113,7 @@ final class PlaySliderLoopKnob: NSView {
   // MARK:- Drawing
 
   private func knobColor() -> NSColor {
-    return NSColor(named: .mainSliderLoopKnob)!
+    return NSColor.mainSliderLoopKnob
   }
 
   /// Draw the knob.

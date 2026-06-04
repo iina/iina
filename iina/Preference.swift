@@ -163,6 +163,8 @@ struct Preference {
 
     static let disableAnimations = Key("disableAnimations")
 
+    static let unlockWindowAspectRatio = Key("unlockWindowAspectRatio")
+
     // Codec
 
     static let videoThreads = Key("videoThreads")
@@ -837,21 +839,33 @@ struct Preference {
       }
     }
 
-    func image() -> NSImage {
-      func makeSymbol(_ names: [String], _ fallbackImage: NSImage.Name) -> NSImage {
+    private func makeSymbol(_ names: [String], _ fallbackImage: NSImage.Name) -> NSImage {
         guard #available(macOS 14.0, *) else { return NSImage(named: fallbackImage)! }
         let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-        return NSImage.findSFSymbol(names, withConfiguration: configuration)
+        return NSImage.sf(names, withConfiguration: configuration)!
       }
+
+    func image() -> NSImage {
       switch self {
       case .settings: return makeSymbol(["gearshape"], NSImage.actionTemplateName)
       case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"], "playlist")
-      case .pip: return makeSymbol(["pip.swap"], "pip")
+      case .pip: return makeSymbol(["pip.enter"], "pip")
       case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"], "fullscreen")
-      case .musicMode: return makeSymbol(["music.microphone", "music.mic"], "toggle-album-art")
+      case .musicMode: return makeSymbol(["music.microphone"], "toggle-album-art")
       case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
       case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
       case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
+      }
+    }
+
+    func alternateImage() -> NSImage? {
+      switch self {
+      case .settings: return makeSymbol(["gearshape.fill"], NSImage.actionTemplateName)
+      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"], "playlist")
+      case .pip: return makeSymbol(["pip.exit"], "pip")
+      case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"], "fullscreen")
+      case .plugins: return makeSymbol(["puzzlepiece.extension.fill"], "plugin")
+      default: return nil
       }
     }
 
@@ -1020,6 +1034,7 @@ struct Preference {
     .togglePipByMinimizingWindow: false,
     .togglePipByMinimizingWindowForVideoOnly: false,
     .disableAnimations: false,
+    .unlockWindowAspectRatio: false,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,

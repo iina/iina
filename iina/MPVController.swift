@@ -1407,12 +1407,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      let displayValue = data >= 1 ? data : -1/data
-      let truncated = round(displayValue * 100) / 100
-      DispatchQueue.main.async { [self] in
-        player.sendOSD(.subScale(truncated))
-        player.needReloadQuickSettingsView()
-      }
+      DispatchQueue.main.async { self.player.subScaleChanged(data) }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough
@@ -1558,7 +1553,6 @@ class MPVController: NSObject {
   }
 
   // MARK: - User Options
-
 
   private enum UserOptionType {
     case bool, int, float, string, color, other

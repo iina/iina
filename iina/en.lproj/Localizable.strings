@@ -13,9 +13,11 @@
 "general.logout" = "Logout";
 "general.ok" = "OK";
 "general.cancel" = "Cancel";
+"general.done" = "Done";
 "general.username" = "Username";
 "general.password" = "Password";
 "general.na" = "N/A";
+"general.no_result" = "No Result";
 
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Value already exists.";
@@ -150,6 +152,8 @@
 "preference.general" = "General";
 "preference.ui" = "Interface";
 "preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Audio";
 "preference.subtitle" = "Subtitle";
 "preference.network" = "Network";
 "preference.control" = "Control";
@@ -366,6 +370,8 @@
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
 "alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";

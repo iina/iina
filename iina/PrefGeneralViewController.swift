@@ -21,7 +21,7 @@ class PrefGeneralViewController: PreferenceViewController, PreferenceWindowEmbed
   }
 
   var preferenceTabImage: NSImage {
-    return makeSymbol("gear", fallbackImage: "pref_general")
+    return .sf("gear", withConfiguration: symbolConfiguration)!
   }
 
   override var sectionViews: [NSView] {

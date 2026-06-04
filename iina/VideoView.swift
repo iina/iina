@@ -34,6 +34,7 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
+  var isIdle = true
   private var displayIdleTimer: Timer?
 
   private lazy var hdrSubsystem = Logger.makeSubsystem("hdr\(player.playerNumber)", ["circle.righthalf.filled"])
@@ -274,6 +275,7 @@ class VideoView: NSView {
 
   /// Starts the display link if it has been stopped in order to save energy.
   func displayActive() {
+    isIdle = false
     displayIdleTimer?.invalidate()
     startDisplayLink()
   }
@@ -293,6 +295,7 @@ class VideoView: NSView {
   /// - Note: In addition to playback the display link must be running for operations such seeking, stepping and entering and leaving
   ///         full screen mode.
   func displayIdle() {
+    isIdle = true
     displayIdleTimer?.invalidate()
     // Because the display link is critical there is an internal setting that can be changed to
     // disable shutting down the display link should any problems with this energy saving feature

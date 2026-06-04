@@ -231,8 +231,6 @@
                   pkgs.ocl-icd
                   pkgs.openal
                   pkgs.openjpeg
-                  pkgs.SDL2
-                  pkgs.sdl3
                   pkgs.srt
                   pkgs.svt-av1
                   pkgs.x264
@@ -358,15 +356,15 @@
                 rm -rf deps/include deps/lib
 
                 mkdir -p deps/include deps/lib deps/executable
-                cp -RL ${depsInclude}/.           deps/include
-                cp -RL ${depsLib}/.               deps/lib
+                cp -RL "${depsInclude}/."           deps/include
+                cp -RL "${depsLib}/."               deps/lib
 
                 echo "[${system}] 📦 Copying SPM deps"
-                rsync -a ${spmDeps}/ ./
+                rsync -a "${spmDeps}/" ./
                 chmod -R u+rwx,g+rx,o+rx .
 
                 echo "[${system}] 📦 Adding canonical links"
-                ${libTool}/bin/iina-lib-tool --add-canonical-links "./deps/lib" "./deps/executable"
+                ${libTool}/bin/iina-lib-tool --canonicalize --prune "./deps/lib" "./deps/executable"
 
                 # Rewrite SwiftPM workspace-state.json to fix absolute paths
                 if [ -f .spm/workspace-state.json ]; then
@@ -414,7 +412,7 @@
                 mkdir -p "$frameworks"
 
                 echo "[${system}] 📦 Deep-bundling dynamic dependencies into ${appName}.app"
-                ${libTool}/bin/iina-lib-tool --canonicalize --purge "$frameworks" "$macos"
+                ${libTool}/bin/iina-lib-tool --canonicalize "$frameworks" "$macos"
 
                 echo "[${system}] ✏️ Setting up environment variables"
 
@@ -459,8 +457,8 @@
                 archroot0="${builtins.elemAt self.archApps 0}/Applications/${appName}.app"
                 archroot1="${builtins.elemAt self.archApps 1}/Applications/${appName}.app"
 
-                ${libTool}/bin/iina-lib-tool --merge-architectures "$frameworks" "$app/Contents/MacOS" \
-                  --archroot0 "$archroot0" --archroot1 "$archroot1"
+                ${libTool}/bin/iina-lib-tool --merge-architectures --canonicalize "$frameworks" "$app/Contents/MacOS" \
+                --archroot0 "$archroot0" --archroot1 "$archroot1"
 
                 echo "🔏 Re-signing ${appName}.app..."
                 ${resign}/bin/iina-resign "$app"

@@ -36,43 +36,43 @@ print_script_dir() {
   echo "$SCRIPT_DIR"
 }
 
+NIX_EXE="$(which nix)"
 set -euo pipefail
 SCRIPT_DIR="$(print_script_dir)"
 PROJ_DIR="$(realpath ${SCRIPT_DIR}/..)"
 echo "Project root directory seems to be: $PROJ_DIR"
 
 if [[ "$NIX_BUILD" = true ]]; then
-  NIX_EXE="$(which nix)"
 
   if [[ -z "$NIX_EXE" ]]; then
     echo -e "${RED}ERROR: Could not find 'nix' command. Please ensure Nix $MIN_NIX_VERSION or higher is installed.${NC}" >&2
-    echo -e "${RED}Recommended: install Determinate Nix for MacOS: https://docs.determinate.systems/${NC}" >&2
-    echo -e "${RED}Aborting build.${NC}" >&2
+    echo -e "Recommended: install Determinate Nix for MacOS: https://docs.determinate.systems/" >&2
+    echo -e "Aborting build." >&2
     exit 1
   fi
 
   if [[ ! -f $PROJ_DIR/flake.nix ]]; then
     echo -e "${RED}ERROR: Could not find 'flake.nix' (expected location: $PROJ_DIR/flake.nix).${NC}" >&2
     echo -e "${RED}Please ensure it is present and this script is located in $PROJ_DIR/other/${NC}" >&2
-    echo -e "${RED}Aborting build.${NC}" >&2
+    echo -e "Aborting build." >&2
     exit 1
   fi
 
   cd "$PROJ_DIR"
 
-  NIX_ARGS="--print-build-logs --verbose"
+  NIX_ARGS="build --print-build-logs --verbose"
 
   if [[ "$DEBUG_NIX" = true ]]; then
     nixStoreRefs=$(grep '/nix/store/' "$PROJ_DIR/iina.xcodeproj/project.pbxproj" || true)
     if [ -n "$nixStoreRefs" ]; then
       echo -e "${RED}ERROR: Found reference(s) to '/nix/store/' in project.pbxproj!${NC}" >&2
       echo -e "${RED}Ensure all framework references in the project files use relative paths which begin with 'deps/lib/'${NC}" >&2
-      echo -e "${RED}Aborting build.${NC}" >&2
+      echo -e "Aborting build." >&2
       exit 1
     fi
-    "$NIX_EXE" build $NIX_ARGS --keep-failed
+    "$NIX_EXE" $NIX_ARGS --keep-failed
   else
-    "$NIX_EXE" build $NIX_ARGS
+    "$NIX_EXE" $NIX_ARGS
   fi
 else
   echo -e "${YELLOW}Skipping Nix build.${NC}"

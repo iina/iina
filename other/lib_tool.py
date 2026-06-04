@@ -95,6 +95,10 @@ APP_EXECUTABLES_RELPATH = "Contents/MacOS"
 # Set of lib IDs to exclude.
 # Skip 'libffi-trampoline' (apparently a typo of 'libffi-trampolines'?)
 ID_BLACKLIST: set[str] = {'libffi-trampoline'}
+USR_LIB_WHITELIST: dict[str, tuple[str, str]] = {
+  'libiconv': ('7', '/usr/lib/libiconv.2.dylib'),
+  'libz': ('1', '/usr/lib/libz.1.dylib')
+}
 
 # --- Command line options ---
 
@@ -109,17 +113,15 @@ def make_arg_parser() -> argparse.ArgumentParser:
       help=f"Path to the 'executable' or '$app_bundle/{APP_EXECUTABLES_RELPATH}' directory"
   )
 
-  group = parser.add_mutually_exclusive_group(required=True)
+  group = parser.add_argument_group()
   group.add_argument('--canonicalize', action='store_true',
                      help="Renames all libs in Frameworks directory to their canonical names, and also adds all their transitive dependencies to the Frameworks directory using their canonical names. Also, for all libs found in Frameworks directory & all executables found in the MacOS directory, rewrites all `/nix/store` lib references to `@rpath` references with each lib's canonical name. Also adds missing LC_RPATH entries to all libs.")
-  group.add_argument('--add-canonical-links', action='store_true',
-                     help="Add symbolic links for any missing canonically named libs to the Frameworks directory.")
   group.add_argument('--merge-architectures', action='store_true',
                      help="Merge x86_64 & Apple Silicon files to create universal binaries.")
   group.add_argument('--print-only', action='store_true',
                      help="Search for all /nix/store references among all dependencies, print them, then exit without doing any modifications.")
 
-  parser.add_argument('--purge', action='store_true',
+  parser.add_argument('--prune', action='store_true',
                       help="Remove all non-canonical libs from Frameworks directory so that only canonical libs remain.")
 
   parser.add_argument('-v', '--verbose', action='store_true',
@@ -176,25 +178,40 @@ def for_all_executables_in_executable_dir(exec_dir: str, handler: Callable[[str,
 # --- Lib metadata extraction & manipulation ---
 
 # Calls otool and install_name_tool
-def ensure_lc_rpath_present(lib_path: str):
+def fix_lc_rpath(lib_path: str):
+  has_rpath = False
+  has_correct_rpath = False
+  rpath_path_pattern = r'\s+path (/nix/store/.+) \(offset \d+\)'
   result = subprocess.run(['otool', '-l', lib_path], capture_output=True, text=True)
   for line in result.stdout.splitlines():
     if LC_RPATH in line:
-      print(f'✅ LC_RPATH correctly set → {lib_path}')
-      return
+      has_correct_rpath = True
+    else:
+      match = re.match(rpath_path_pattern, line)
+      if not match:
+        continue
+      has_rpath = True
+      rpath = match.group(1)
+      print(f'➖ Removing incorrect LC_RPATH from {lib_path} ↛ "{rpath}"')
+      subprocess.run(['install_name_tool', '-delete_rpath', rpath, lib_path])
 
-  print(f'➕ LC_RPATH {LC_RPATH} → {lib_path}')
-  subprocess.run(['install_name_tool', '-add_rpath', LC_RPATH, lib_path])
+  if has_correct_rpath:
+    print(f'✅ Has correct LC_RPATH: {lib_path}')
+    return
 
-def rewrite_lib_entry(current_entry: str, to: str, bin_path: str):
-  subprocess.run(['install_name_tool', '-change', current_entry, to, bin_path])
+  if has_rpath:
+    print(f'➕ LC_RPATH {LC_RPATH} → {lib_path}')
+    subprocess.run(['install_name_tool', '-add_rpath', LC_RPATH, lib_path])
+
+def rewrite_lib_reference(current_ref: str, to: str, bin_path: str):
+  subprocess.run(['install_name_tool', '-change', current_ref, to, bin_path])
 
 # Gets lib references in the given Mach-O lib or executable binary whose path starts with '/nix/store/'.
 # - bin_path: file system path to the Mach-O lib or executable binary to be examined.
-# - nix_store_handler: will be called for all entries beginning with '/nix/store/'.
-# - rpath_handler: optional callback which, if provided, will be called for all entries beginning with '@rpath/'.
-def otool_find_lib_refs(bin_path: str, nix_store_handler: Callable[[str, str, str, str], None], \
-  rpath_handler: Optional[Callable[[str, str, str, str], None]] = None, print_all=False):
+# - handle_nix_store: will be called for all entries beginning with '/nix/store/'.
+# - handle_rpath: optional callback which, if provided, will be called for all entries beginning with '@rpath/'.
+def otool_find_lib_refs(bin_path: str, handle_nix_store: Callable[[str, str, str, str], None], \
+  handle_rpath: Optional[Callable[[str, str, str, str], None]] = None, print_all=False):
 
   ref_entry_pattern = r'(.*) \(compatibility version ([^,]+), current version ([^\)]+)\)'
   otool_result = subprocess.run(['otool', '-L', bin_path], capture_output=True, text=True)
@@ -211,10 +228,10 @@ def otool_find_lib_refs(bin_path: str, nix_store_handler: Callable[[str, str, st
 
       ref_path = match.group(1)
 
-      if rpath_handler and ref_path.startswith('@rpath/'):
-        compat_version = simplify_version(match.group(2))
-        current_version = simplify_version(match.group(3))
-        rpath_handler(bin_path, ref_path, compat_version, current_version)
+      if handle_rpath and ref_path.startswith('@rpath/'):
+        compat_version: str = simplify_version(match.group(2))
+        current_version: str = simplify_version(match.group(3))
+        handle_rpath(bin_path, ref_path, compat_version, current_version)
         continue
 
       # We only care about local libs, which start out generated by Nix
@@ -223,11 +240,18 @@ def otool_find_lib_refs(bin_path: str, nix_store_handler: Callable[[str, str, st
 
       compat_version = simplify_version(match.group(2))
       current_version = simplify_version(match.group(3))
-      nix_store_handler(bin_path, ref_path, compat_version, current_version)
+      handle_nix_store(bin_path, ref_path, compat_version, current_version)
 
-# --- Classes ---
 
+# Class: LibMetaDB
+# This class is responsible for scanning the libs in the Frameworks directory and their transitive dependencies to build
+# a map of all the lib variants found, organized by their base ID and compatibility version. This metadata is used to
+# determine the canonical name for each lib, which is then used to copy the libs to the libStaging directory and rewrite
+# their references.
 class LibMetaDB:
+  lib_dir_path: str
+  executable_dir_path: str
+
   # Map: {base_id: {variant_compatibility_version: {variant_basename: variant_full_path}}}
   # By assembling the data first, we can elimminate the (many) duplicates before doing ELF work which will speed things
   # up greatly.
@@ -239,7 +263,9 @@ class LibMetaDB:
 
   log_verbose: bool
 
-  def __init__(self, log_verbose: bool):
+  def __init__(self, lib_dir_path: str, executable_dir_path: str, log_verbose: bool):
+    self.lib_dir_path = lib_dir_path
+    self.executable_dir_path = executable_dir_path
     self.log_verbose = log_verbose
 
   def __store_lib_variant(self,
@@ -261,7 +287,7 @@ class LibMetaDB:
     rpaths_map[variant_compat_version] = variant_basename
     self.rpaths_map[base_id] = rpaths_map
 
-  def populate_from_disk(self, lib_dir: str, executable_dir: str, print_all: bool):
+  def populate_from_disk(self, print_all: bool):
     print(f'Scanning for lib dependencies…')
 
     libs_searched: dict[str, bool] = {}
@@ -269,13 +295,13 @@ class LibMetaDB:
     def mark_unsearched(_, file_path):
       libs_searched[file_path] = False
     # Add libs in Frameworks directory to search list. These are the "roots" of our search.
-    for_all_libs_in_lib_dir(lib_dir, mark_unsearched)
+    for_all_libs_in_lib_dir(self.lib_dir_path, mark_unsearched)
 
     # Add executables in MacOS directory to search list (more "roots" of our search).
-    for_all_executables_in_executable_dir(executable_dir, mark_unsearched)
+    for_all_executables_in_executable_dir(self.executable_dir_path, mark_unsearched)
 
     # Here we want to get a survey of *all* canonical libs which need to be modified
-    def nix_store_handler(_, ref_path, compat_version, current_version):
+    def handle_nix_store(_, ref_path, compat_version, current_version):
       if self.log_verbose:
         print(f'Found ref: {ref_path} compat: {compat_version} curr: {current_version}')
       base_tuple = parse_base(ref_path)
@@ -292,7 +318,7 @@ class LibMetaDB:
       libs_searched[ref_path] = False
       self.__store_lib_variant(base_id, compat_version, ref_basename, ref_path)
 
-    def rpath_handler(_, ref_path, compat_version, current_version):
+    def handle_rpath(_, ref_path, compat_version, current_version):
       base_tuple = parse_base(ref_path)
       if not base_tuple:
         return
@@ -326,157 +352,12 @@ class LibMetaDB:
 
         if self.log_verbose:
           print(f'Scanning: {file_path}')
-        otool_find_lib_refs(file_path, nix_store_handler, rpath_handler, print_all=print_all)
+        otool_find_lib_refs(file_path, handle_nix_store, handle_rpath, print_all=print_all)
 
-
-class CanonicalNameDB:
-  lib_db: LibMetaDB
-
-  # Map: canonical_name_map = {base_id: {compat_version: canonical_name}}
-  # Note: all versions must be simplified using simplify_version()! Otherwise string-based comparisons will fail.
-  canonical_name_map: dict[str, dict[str, str]] = {}
-
-  # The data in this class is all derived from lib_db. An instance of this class should not be created until after
-  # lib_db is fully populated.
-  def __init__(self, lib_db: LibMetaDB):
-    self.lib_db = lib_db
-
-    for base_id, variants_map in self.lib_db.name_variants_map.items():
-      lib_version_count = len(variants_map)
-      multiple_versions_found: bool = lib_version_count > 1
-      if multiple_versions_found:
-        print(f'Found multiple variants ({lib_version_count}) for {base_id}: {variants_map.keys()}')
-
-      for variant_compat_ver, variant_subversions_map in variants_map.items():
-        # Determine the best canonical name (higher, most specific version)
-        best_variant_name: str = ''
-        best_variant_version_split: list[str] = []
-        for variant_name in variant_subversions_map.keys():
-          variant_name_split = variant_name.split('.')
-          if len(variant_name_split) < 2:
-            print(f'⚠️ ERROR: failed to parse version from name, skipping: {variant_name}')
-            continue
-          last_elem = variant_name_split[-1]
-          if last_elem != "dylib" and last_elem != "so":
-            print(f'⚠️ ERROR: failed to parse version from name, skipping: {variant_name}')
-            continue
-          variant_version_split = variant_name_split[1:-1]
-
-          if not best_variant_version_split:
-            best_variant_name = variant_name
-            best_variant_version_split = variant_version_split
-            continue
-
-          i = 0
-          while i < len(variant_version_split):
-            if (i >= len(best_variant_version_split)) or (variant_version_split[i] > best_variant_version_split[i]):
-              best_variant_name = variant_name
-              best_variant_version_split = variant_version_split
-              break
-            i += 1
-
-        canonical_name: str
-        if multiple_versions_found:
-          # 2026-05-06 This is a workaround for a libiconv dependency issue (ffmpeg 8.0 + mpv 0.41), where different
-          # libs require two different versions of it as a transitive dependency. These versions are internally
-          # labelled v7 or v10, respectively, but both have the same filename (`libiconv.2.lib`). We resolve the
-          # issue by renaming both files and rewriting all references to them using the new names.
-          base_id_new: str = base_id + variant_compat_ver
-          canonical_name = best_variant_name.replace(base_id, base_id_new)
-          print(f'Deriving novel canonical name for {best_variant_name}, compatVersion {variant_compat_ver} '
-                + f'→ {canonical_name}')
-          best_variant_path: str = variant_subversions_map[best_variant_name]
-          # Store the new canonical name back into the map, so we can find its source path when copying files.
-          variant_subversions_map[canonical_name] = best_variant_path
-        else:
-          canonical_name = best_variant_name
-          canonical_versions_map = self.canonical_name_map.get(base_id, dict())
-
-        canonical_versions_map: dict[str, str] = self.canonical_name_map.get(base_id, dict())
-        canonical_versions_map[variant_compat_ver] = canonical_name
-        self.canonical_name_map[base_id] = canonical_versions_map
-
-  def get_canonical_name(self, base_id: str, compat_version: str) -> Optional[str]:
-    canonical_versions_map: dict[str, str] = self.canonical_name_map.get(base_id, {})
-    if not canonical_versions_map:
-      # Try rpaths
-      canonical_versions_map = self.lib_db.rpaths_map.get(base_id, {})
-      if not canonical_versions_map:
-        print(f'⚠️ Could not find any versions for id={base_id} in canonical name map or rpaths map!')
-        return None
-    canonical_name = canonical_versions_map.get(compat_version, '')
-    if not canonical_name:
-      print(f'⚠️ Could not find canonical name for id={base_id} compatVersion={compat_version}')
-      return None
-    return canonical_name
-
-  def for_all_canonical_names(self, handler: Callable[[str, str, str], None]):
-    for base_id, canonical_versions_map in self.canonical_name_map.items():
-      variants_map: dict[str, dict[str, str]] = self.lib_db.name_variants_map[base_id]
-      for compat_version, canonical_name in canonical_versions_map.items():
-        variant_subversions_map: dict[str, str] = variants_map[compat_version]
-        src_path: str = variant_subversions_map.get(canonical_name, '')
-        if not src_path:
-          continue
-
-        handler(canonical_name, compat_version, src_path)
-
-# --- MAIN ---
-
-def main():
-  arg_parser: argparse.ArgumentParser = make_arg_parser()
-  try:
-    args = arg_parser.parse_args()
-  except SystemExit:
-    # argparse already prints the error; exit gracefully
-    sys.exit(1)
-
-  lib_dir = args.lib_dir
-  executable_dir = args.executable_dir
-  log_verbose = args.verbose
-  if log_verbose:
-    print(f'Parsed arguments: {args}')
-    print(f'Verbose logging enabled')
-
-  # --- FIRST PASS ---
-  # Scan all libs with otool, collecting dependency metadata to populate lib_db
-
-  lib_db = LibMetaDB(log_verbose=log_verbose)
-  lib_db.populate_from_disk(lib_dir, executable_dir, print_all=args.print_only)
-
-  for base_id, variants in lib_db.name_variants_map.items():
-    print(f'Variants of {base_id}: {variants}')
-
-  # Now compile the canonical name database, which will determine the best variant for each lib and store the
-  # canonical name for each version.
-  cname_db = CanonicalNameDB(lib_db)
-
-  if args.print_only:
-    print(f"⚠️ Exiting script now without modifying any files, as --print-only arg was provided.")
-    return
-
-  if args.add_canonical_links:
-    print(f"Adding symlinks for missing canonically named libs…")
-
-    def link_to_cname(canonical_name: str, _, src_path: str):
-      dst_path = os.path.join(lib_dir, canonical_name)
-      if os.path.isfile(dst_path):
-        if log_verbose:
-          print(f"Already exists: {dst_path}")
-        return
-      print(f"Adding link: {src_path} → {dst_path}")
-      os.symlink(src_path, dst_path, target_is_directory=False)
-
-    cname_db.for_all_canonical_names(link_to_cname)
-    print(f"Adding symlinks: done")
-    return
-
-  if args.merge_architectures:
+  # --merge-architectures
+  # --------------------------------------------------------------------------
+  def merge_architectures(self, archroot0: str, archroot1: str):
     print(f'🔍 Merging binaries across architectures')
-
-    if not args.archroot0 or not args.archroot1:
-      print(f'⚠️ Both --archroot0 and --archroot1 are required when --merge-architectures is given')
-      exit(1)
 
     def merge_bin(basename, path0, path1, dst_dir):
       arm64 = ''
@@ -519,108 +400,261 @@ def main():
       shutil.copy2(tmpfile, dst_path)
 
     # Merge lib dirs
-    libs0 = os.path.join(args.archroot0, APP_FRAMEWORKS_RELPATH)
-    libs1 = os.path.join(args.archroot1, APP_FRAMEWORKS_RELPATH)
+    libs0 = os.path.join(archroot0, APP_FRAMEWORKS_RELPATH)
+    libs1 = os.path.join(archroot1, APP_FRAMEWORKS_RELPATH)
 
     def merge_lib(lib_basename, _):
       path0 = os.path.join(libs0, lib_basename)
       path1 = os.path.join(libs1, lib_basename)
       print(f'Merging libs in: [{path0}, {path1}]')
-      merge_bin(lib_basename, path0, path1, lib_dir)
+      merge_bin(lib_basename, path0, path1, self.lib_dir_path)
 
-    for_all_libs_in_lib_dir(lib_dir, merge_lib)
+    for_all_libs_in_lib_dir(self.lib_dir_path, merge_lib)
 
     # Merge executable dirs
 
-    exe0 = os.path.join(args.archroot0, APP_FRAMEWORKS_RELPATH)
-    exe1 = os.path.join(args.archroot1, APP_FRAMEWORKS_RELPATH)
+    exe0 = os.path.join(archroot0, APP_FRAMEWORKS_RELPATH)
+    exe1 = os.path.join(archroot1, APP_FRAMEWORKS_RELPATH)
 
     def merge_exe(exe_basename, _):
       path0 = os.path.join(exe0, exe_basename)
       path1 = os.path.join(exe1, exe_basename)
       print(f'Merging executables in: [{path0}, {path1}]')
-      merge_bin(exe_basename, path0, path1, executable_dir)
+      merge_bin(exe_basename, path0, path1, self.executable_dir_path)
 
-    for_all_executables_in_executable_dir(executable_dir, merge_exe)
+    for_all_executables_in_executable_dir(self.executable_dir_path, merge_exe)
 
     print(f'🔍 Merging binaries across architectures: done')
-    # Fall through and canonicalize the merged files.
 
-  print(f"Canonicalizing libs in {lib_dir}…")
-  # Create libStaging, then copy all libs to be processed into it.
-  # This side-steps any thorny issues which might be caused by symlinks, makes purging Frameworks directory easier.
-  lib_staging_dir_path = os.path.join(lib_dir, '../libStaging')
-  os.makedirs(lib_staging_dir_path, exist_ok=True)
-  print(f'Copying libs into {lib_staging_dir_path}')
 
-  # Total count of libs copied, with different versions of the same lib counted as multiple.
-  copied_libs_count: int = 0
+# Class: CanonicalNameDB
+# This class is responsible for determining the canonical name for each lib based on the metadata in LibMetaDB, and then
+# performing operations related to the canonical names, such as copying libs to libStaging with their canonical names,
+# rewriting references to use the canonical names, and adding missing LC_RPATH entries.
+class CanonicalNameDB:
+  lib_db: LibMetaDB
 
-  def copy_to_cname(canonical_name: str, compat_version: str, src_path: str):
-    print(f'Canonical name for v{compat_version}: {canonical_name}')
-    dst_path = os.path.join(lib_staging_dir_path, canonical_name)
-    shutil.copyfile(src_path, dst_path)
-    nonlocal copied_libs_count
-    copied_libs_count += 1
+  # Map: canonical_name_map = {base_id: {compat_version: canonical_name}}
+  # Note: all versions must be simplified using simplify_version()! Otherwise string-based comparisons will fail.
+  canonical_name_map: dict[str, dict[str, str]] = {}
 
-  cname_db.for_all_canonical_names(copy_to_cname)
-  print(f'Copied {copied_libs_count} libs into {lib_staging_dir_path}')
+  # The data in this class is all derived from lib_db. An instance of this class should not be created until after
+  # lib_db is fully populated.
+  def __init__(self, lib_db: LibMetaDB):
+    self.lib_db = lib_db
 
-  # (Optional if "--purge" is specified). Removes unused lib files and links from Frameworks directory.
-  # Note: this is not recursive. Sparkle.framework and any other directories will be untouched.
-  # This step should not be used when building the IINA universal binary because arch-specific libs which have
-  # already been processed may not be present in our data structures, and thus not moved to libStaging,
-  # but they would still be deleted from Frameworks if --purge is used.
-  if args.purge:
-    print(f'Removing old lib files and links from {lib_dir}')
-    old_lib_links = [f for f in os.listdir(lib_dir) if os.path.islink(os.path.join(lib_dir, f))]
-    for old_lib_link in old_lib_links:
-      link_path = os.path.join(lib_dir, old_lib_link)
-      os.unlink(link_path)
-    for _, oldlib_path in ls_files_in_dir(lib_dir):
-      os.remove(oldlib_path)
+    for base_id, variants_map in self.lib_db.name_variants_map.items():
+      usr_lib_entry = USR_LIB_WHITELIST.get(base_id, None)
+      if usr_lib_entry:
+        popped = variants_map.pop(usr_lib_entry[0], '')
+        if popped:
+          print(f'Is provided by macOS; skipping "{base_id}", version {usr_lib_entry[0]}: {popped}')
 
-  # --- SECOND PASS ---
-  # Add missing LC_RPATH entries, rewrite lib references to use @rpath & canonical names.
+      lib_version_count = len(variants_map)
+      if lib_version_count == 0:
+        # Skip
+        continue
+      if lib_version_count > 1:
+        # We can't handle this currently, but it should not happen
+        print(f'⚠️ ERROR: unexpectedly found multiple remaining versions ({lib_version_count}) for {base_id}! Exiting!')
+        sys.exit(99)
+      variant_compat_ver, variant_subversions_map = next(iter(variants_map.items()))
 
-  def nix_store_handler(current_file_path, ref_path, compat_version, _):
-    base_tuple = parse_base(ref_path)
-    if not base_tuple:
-      return
-    (_, base_id) = base_tuple
-    sub_canonical_name = cname_db.get_canonical_name(base_id, compat_version)
-    if not sub_canonical_name:
-      return
-    replacement_path = f'@rpath/{sub_canonical_name}'
-    print(f"🔗 Repointing subdep for {os.path.basename(current_file_path)}: {ref_path} → {replacement_path}")
-    rewrite_lib_entry(ref_path, replacement_path, current_file_path)
+      # Determine the best canonical name (higher, most specific version)
+      best_variant_name: str = ''
+      best_variant_version_split: list[str] = []
+      for variant_name in variant_subversions_map.keys():
+        variant_name_split = variant_name.split('.')
+        if len(variant_name_split) < 2:
+          print(f'⚠️ ERROR: failed to parse version from name, skipping: {variant_name}')
+          continue
+        last_elem = variant_name_split[-1]
+        if last_elem != "dylib" and last_elem != "so":
+          print(f'⚠️ ERROR: failed to parse version from name, skipping: {variant_name}')
+          continue
+        variant_version_split = variant_name_split[1:-1]
 
-  # Process the libs in libStaging directory.
-  # After each file is processed, it is moved from libStaging to Frameworks.
-  print(f'🔧 Normalizing libs in {lib_staging_dir_path} & moving each to {os.path.basename(lib_dir)}')
-  def normalize_lib(lib_basename, lib_path):
-    print(f'Processing: {lib_basename}')
-    print(f"✏️ Setting install_name id on {lib_basename}")
-    subprocess.run(['install_name_tool', '-id', f'@rpath/{lib_basename}', lib_path])
-    otool_find_lib_refs(lib_path, nix_store_handler)
+        if not best_variant_version_split:
+          best_variant_name = variant_name
+          best_variant_version_split = variant_version_split
+          continue
 
-    shutil.move(lib_path, os.path.join(lib_dir, lib_basename))
+        i = 0
+        while i < len(variant_version_split):
+          if (i >= len(best_variant_version_split)) or (variant_version_split[i] > best_variant_version_split[i]):
+            best_variant_name = variant_name
+            best_variant_version_split = variant_version_split
+            break
+          i += 1
 
-  for_all_libs_in_lib_dir(lib_staging_dir_path, normalize_lib)
+      canonical_name: str = best_variant_name
+      canonical_versions_map: dict[str, str] = self.canonical_name_map.get(base_id, dict())
+      canonical_versions_map[variant_compat_ver] = canonical_name
+      self.canonical_name_map[base_id] = canonical_versions_map
 
-  # Remove libStaging now that all libs have been transferred.
-  shutil.rmtree(lib_staging_dir_path)
+  def __get_canonical_name(self, base_id: str, compat_version: str) -> Optional[str]:
+    canonical_versions_map: dict[str, str] = self.canonical_name_map.get(base_id, {})
+    if not canonical_versions_map:
+      # Try rpaths
+      canonical_versions_map = self.lib_db.rpaths_map.get(base_id, {})
+      if not canonical_versions_map:
+        print(f'⚠️ Could not find any versions for id={base_id} in canonical name map or rpaths map!')
+        return None
+    canonical_name = canonical_versions_map.get(compat_version, '')
+    if not canonical_name:
+      print(f'⚠️ Could not find canonical name for id={base_id} compatVersion={compat_version}')
+      return None
+    return canonical_name
 
-  # Now process the executable binaries in MacOS directory.
-  print(f'🔧 Normalizing executables in {executable_dir}')
-  def normalize_exe(exe_base_name, exe_path):
-    print(f'Processing: {exe_base_name}')
-    ensure_lc_rpath_present(exe_path)
-    otool_find_lib_refs(exe_path, nix_store_handler)
+  def __for_all_canonical_names(self, handler: Callable[[str, str, str], None]):
+    for base_id, canonical_versions_map in self.canonical_name_map.items():
+      variants_map: dict[str, dict[str, str]] = self.lib_db.name_variants_map[base_id]
+      for compat_version, canonical_name in canonical_versions_map.items():
+        variant_subversions_map: dict[str, str] = variants_map[compat_version]
+        src_path: str = variant_subversions_map.get(canonical_name, '')
+        if not src_path:
+          continue
 
-  for_all_executables_in_executable_dir(executable_dir, normalize_exe)
+        handler(canonical_name, compat_version, src_path)
 
-  print(f"Canonicalizing libs: done")
+  # --canonicalize
+  # --------------------------------------------------------------------------
+  def canonicalize_libs(self, prune: bool):
+    lib_dir = self.lib_db.lib_dir_path
+    executable_dir = self.lib_db.executable_dir_path
+
+    print(f"Canonicalizing libs in {lib_dir}…")
+    # Create libStaging, then copy all libs to be processed into it.
+    # This side-steps any thorny issues which might be caused by symlinks, makes purging Frameworks directory easier.
+    lib_staging_dir_path = os.path.join(lib_dir, '../libStaging')
+    os.makedirs(lib_staging_dir_path, exist_ok=True)
+    print(f'Copying libs into {lib_staging_dir_path}')
+
+    # Total count of libs copied, with different versions of the same lib counted as multiple.
+    copied_libs_count: int = 0
+
+    def copy_to_cname(canonical_name: str, compat_version: str, src_path: str):
+      print(f'Canonical name for v{compat_version} = {canonical_name} → {src_path}')
+      dst_path = os.path.join(lib_staging_dir_path, canonical_name)
+      shutil.copyfile(src_path, dst_path)
+      nonlocal copied_libs_count
+      copied_libs_count += 1
+
+    self.__for_all_canonical_names(copy_to_cname)
+    print(f'Copied {copied_libs_count} libs into {lib_staging_dir_path}')
+
+    # (Optional if "--prune" is specified). Removes unused lib files and links from Frameworks directory.
+    # Note: this is not recursive. Sparkle.framework and any other directories will be untouched.
+    # This step should not be used when building the IINA universal binary because arch-specific libs which have
+    # already been processed may not be present in our data structures, and thus not moved to libStaging,
+    # but they would still be deleted from Frameworks if --prune is used.
+    if prune:
+      print(f'✂️ Removing old lib files and links from {lib_dir}')
+      all_children: map[tuple[str, str]] = map(lambda name: (name, os.path.join(lib_dir, name)), os.listdir(lib_dir))
+      old_lib_links = [child for child in all_children if os.path.islink(child[1])]
+      for link_basename, link_path in old_lib_links:
+        if link_basename.startswith('.libiconv'):
+          print(f'Will not remove lib file: {link_path}')
+        else:
+          os.unlink(link_path)
+
+      for oldlib_basename, oldlib_path in ls_files_in_dir(lib_dir):
+        if oldlib_basename.startswith('.libiconv'):
+          print(f'Will not remove lib file: {oldlib_basename}')
+        else:
+          os.remove(oldlib_path)
+
+    # Second pass. Add missing LC_RPATH entries, rewrite lib references to use @rpath & canonical names.
+
+    def handle_nix_store(current_file_path, ref_path, compat_version, _):
+      base_tuple = parse_base(ref_path)
+      if not base_tuple:
+        return
+      (_, base_id) = base_tuple
+      replacement_path = ''
+      # First check for built-in system libraries which are also provided by Nix, but we want to point them to the
+      # system versions instead of the Nix versions to avoid packaging issues & to save space.
+      usr_lib_entry = USR_LIB_WHITELIST.get(base_id, None)
+      if usr_lib_entry and compat_version == usr_lib_entry[0]:
+        replacement_path = usr_lib_entry[1]
+      else:
+        sub_canonical_name = self.__get_canonical_name(base_id, compat_version)
+        if not sub_canonical_name:
+          return
+        replacement_path = f'@rpath/{sub_canonical_name}'
+      print(f"🔗 Repointing subdep for {os.path.basename(current_file_path)}: {ref_path} → {replacement_path}")
+      rewrite_lib_reference(ref_path, replacement_path, current_file_path)
+
+    # Process the libs in libStaging directory.
+    # After each file is processed, it is moved from libStaging to Frameworks.
+    print(f'🔧 Normalizing libs in {lib_staging_dir_path} & moving each to {os.path.basename(lib_dir)}')
+    def normalize_lib(lib_basename, lib_path):
+      print(f'Processing: {lib_basename}')
+      print(f"✏️ Setting install_name id on {lib_basename}")
+      subprocess.run(['install_name_tool', '-id', f'@rpath/{lib_basename}', lib_path])
+      fix_lc_rpath(lib_path)
+      otool_find_lib_refs(lib_path, handle_nix_store)
+
+      shutil.move(lib_path, os.path.join(lib_dir, lib_basename))
+
+    for_all_libs_in_lib_dir(lib_staging_dir_path, normalize_lib)
+
+    # Remove libStaging now that all libs have been transferred.
+    shutil.rmtree(lib_staging_dir_path)
+
+    # Now process the executable binaries in MacOS directory.
+    print(f'🔧 Normalizing executables in {executable_dir}')
+    def normalize_exe(exe_base_name, exe_path):
+      print(f'Processing: {exe_base_name}')
+      fix_lc_rpath(exe_path)
+      otool_find_lib_refs(exe_path, handle_nix_store)
+
+    for_all_executables_in_executable_dir(executable_dir, normalize_exe)
+
+    print(f"Canonicalizing libs: done")
+
+
+# MAIN
+# --------------------------------------------------------------------------
+
+def main():
+  arg_parser: argparse.ArgumentParser = make_arg_parser()
+  try:
+    args = arg_parser.parse_args()
+  except SystemExit:
+    # argparse already prints the error; exit gracefully
+    sys.exit(1)
+
+  lib_dir = args.lib_dir
+  executable_dir = args.executable_dir
+  log_verbose = args.verbose
+  if log_verbose:
+    print(f'Parsed arguments: {args}')
+    print(f'Verbose logging enabled')
+
+  # First pass. Scan all libs with otool, collecting dependency metadata to populate lib_db
+  lib_db = LibMetaDB(lib_dir_path=lib_dir, executable_dir_path=executable_dir, log_verbose=log_verbose)
+  lib_db.populate_from_disk(print_all=args.print_only)
+
+  for base_id, variants in lib_db.name_variants_map.items():
+    print(f'Variants of {base_id}: {variants}')
+
+  # Now compile the canonical name database, which will determine the best variant for each lib and store the
+  # canonical name for each version.
+  cname_db = CanonicalNameDB(lib_db)
+
+  if args.print_only:
+    print(f"⚠️ Exiting script now without modifying any files, as --print-only arg was provided.")
+  else:
+    if args.merge_architectures:
+      if not args.archroot0 or not args.archroot1:
+        print(f'⚠️ Both --archroot0 and --archroot1 are required when --merge-architectures is given')
+        exit(1)
+
+      lib_db.merge_architectures(args.archroot0, args.archroot1)
+
+    if args.canonicalize:
+      cname_db.canonicalize_libs(prune=args.prune)
 
 if __name__ == '__main__':
     main()

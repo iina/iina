@@ -10,6 +10,7 @@ import Cocoa
 
 fileprivate let MenuItemTagShowInFinder = 100
 fileprivate let MenuItemTagDelete = 101
+fileprivate let MenuItemTagDeleteFile = 102
 fileprivate let MenuItemTagSearchFilename = 200
 fileprivate let MenuItemTagSearchFullPath = 201
 fileprivate let MenuItemTagPlay = 300
@@ -44,12 +45,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     .fileLocation: { $0.url.deletingLastPathComponent().path }
   ]
 
-  override var windowNibName: NSNib.Name {
-    return NSNib.Name("HistoryWindowController")
-  }
-
-  @IBOutlet weak var outlineView: NSOutlineView!
-  @IBOutlet weak var historySearchField: NSSearchField!
+  let scrollView = NSScrollView()
+  let outlineView = OutlineView()
 
   var groupBy: SortOption = .lastPlayed
   var searchOption: SearchOption = .fullPath
@@ -57,20 +54,66 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var historyData: [String: [PlaybackHistory]] = [:]
   private var historyDataKeys: [String] = []
 
-  override func windowDidLoad() {
-    super.windowDidLoad()
+  init() {
+    let window = NSWindow(
+      contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+      styleMask: [.titled, .closable, .resizable, .miniaturizable],
+      backing: .buffered,
+      defer: false
+    )
+    window.title = "Playback History"
+    window.setFrameAutosaveName("PlaybackHistoryWindow")
+    window.minSize = NSMakeSize(400, 200)
+    super.init(window: window)
+
+    let toolbar = NSToolbar(identifier: "HitoryWindowToolbar")
+    toolbar.delegate = self
+    toolbar.displayMode = .iconOnly
+    toolbar.allowsUserCustomization = false
+    toolbar.autosavesConfiguration = false
+    if #available(macOS 13, *) {
+      toolbar.centeredItemIdentifiers = [Self.groupBy]
+    }
+    window.toolbar = toolbar
+    window.toolbarStyle = .unified
 
     NotificationCenter.default.addObserver(forName: .iinaHistoryUpdated, object: nil, queue: .main) { [unowned self] _ in
       self.reloadData()
     }
 
+    scrollView.documentView = outlineView
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.hasHorizontalScroller = false
+    window.contentView?.addSubview(scrollView)
+    scrollView.padding(.all)
+
+    outlineView.style = .fullWidth
+    outlineView.columnAutoresizingStyle = .firstColumnOnlyAutoresizingStyle
+    outlineView.allowsMultipleSelection = true
+    outlineView.autosaveName = "HistoryWindowTable"
+    outlineView.allowsColumnReordering = false
+    outlineView.allowsExpansionToolTips = true
+
+    [(NSUserInterfaceItemIdentifier.filename, "Media", 200, 5000), (.progress, "Progress", 110, 1000), (.time, "Played at", 60, 300)].map {
+      let column = NSTableColumn(identifier: $0.0)
+      column.title = $0.1
+      column.minWidth = $0.2
+      column.maxWidth = $0.3
+      return column
+    }.forEach { outlineView.addTableColumn($0) }
+
     prepareData()
     outlineView.delegate = self
     outlineView.dataSource = self
+    outlineView.menu = makeContextMenu()
     outlineView.menu?.delegate = self
     outlineView.target = self
     outlineView.doubleAction = #selector(doubleAction)
     outlineView.expandItem(nil, expandChildren: true)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   func reloadData() {
@@ -140,6 +183,15 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
+  private func removeFileAfterConfirmation(_ entries: [PlaybackHistory]) {
+    Utility.quickAskPanel("delete_file", sheetWindow: window) { respond in
+      guard respond == .alertFirstButtonReturn else { return }
+      entries.forEach {
+        try? FileManager.default.trashItem(at: $0.url, resultingItemURL: nil)
+      }
+    }
+  }
+
   // MARK: Key event
 
   override func keyDown(with event: NSEvent) {
@@ -147,17 +199,26 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     if flags == .command  {
       switch event.charactersIgnoringModifiers! {
       case "f":
-        window!.makeFirstResponder(historySearchField)
+        // window!.makeFirstResponder(historySearchField)
+        break
       case "a":
         outlineView.selectAll(nil)
+      case "\r":
+        playInNewWindowAction(nil)
+      case "l":
+        showInFinderAction(nil)
       default:
         break
       }
     } else {
       let key = KeyCodeHelper.mpvKeyCode(from: event)
-      if key == "DEL" || key == "BS" {
-        let entries = outlineView.selectedRowIndexes.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
-        removeAfterConfirmation(entries)
+      switch key {
+      case "DEL", "BS":
+        deleteAction(nil)
+      case "ENTER":
+        playAction(nil)
+      default:
+        break
       }
     }
   }
@@ -194,47 +255,73 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
-  func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-    if let entry = item as? PlaybackHistory {
-      if tableColumn?.identifier == .time {
-        return getTimeString(from: entry)
-      } else if tableColumn?.identifier == .progress {
-        return entry.duration.stringRepresentation
-      }
-    }
-    return item
-  }
-
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
     if let identifier = tableColumn?.identifier {
-      guard let cell: NSTableCellView = outlineView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView else { return nil }
-      guard let entry = item as? PlaybackHistory else { return cell }
-      if identifier == .filename {
-        // Filename cell
-        let filenameView = cell as! HistoryFilenameCellView
+      guard let entry = item as? PlaybackHistory else { return nil }
+      switch identifier {
+      case .filename:
+        let cell = (outlineView.makeView(withIdentifier: .filename, owner: nil) as? HistoryFilenameCellView) ?? HistoryFilenameCellView()
         let fileExists = !entry.url.isFileURL || FileManager.default.fileExists(atPath: entry.url.path)
-        filenameView.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
-        filenameView.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
-        filenameView.docImage.image = Utility.icon(for: entry.url)
-      } else if identifier == .progress {
+        cell.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
+        cell.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
+        cell.docImage.image = Utility.icon(for: entry.url)
+        return cell
+      case .progress:
         // Progress cell
-        let progressView = cell as! HistoryProgressCellView
+        let cell = (outlineView.makeView(withIdentifier: .progress, owner: nil) as? HistoryProgressCellView) ?? HistoryProgressCellView()
         // Do not animate! Causes unneeded slowdown
-        progressView.indicator.usesThreadedAnimation = false
+        cell.indicator.usesThreadedAnimation = false
         if let progress = entry.mpvProgress {
-          progressView.textField?.stringValue = progress.stringRepresentation
-          progressView.indicator.isHidden = false
-          progressView.indicator.doubleValue = (progress / entry.duration) ?? 0
+          cell.textField?.stringValue = progress.stringRepresentation
+          cell.indicator.isHidden = false
+          cell.indicator.doubleValue = (progress / entry.duration) ?? 0
         } else {
-          progressView.textField?.stringValue = ""
-          progressView.indicator.isHidden = true
+          cell.textField?.stringValue = ""
+          cell.indicator.isHidden = true
         }
+        return cell
+      case .time:
+        let cell = (outlineView.makeView(withIdentifier: .time, owner: nil) as? NSTableCellView) ?? makeTimeCellView()
+        cell.textField?.stringValue = getTimeString(from: entry)
+        return cell
+      default:
+        return nil
       }
-      return cell
     } else {
       // group columns
-      return outlineView.makeView(withIdentifier: .group, owner: nil)
+      let cell = (outlineView.makeView(withIdentifier: .group, owner: nil) as? NSTableCellView) ?? makeGroupCellView()
+      if let key = item as? String {
+        cell.textField?.stringValue = key
+      }
+      return cell
     }
+  }
+
+  private func makeTimeCellView() -> NSTableCellView {
+    let cell = NSTableCellView()
+    cell.identifier = .time
+    let textField = NSTextField(labelWithString: "")
+    textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.font = .monospacedSystemFont(ofSize: 13, weight: .regular)
+    cell.addSubview(textField)
+    textField.padding(.leading(4), .trailing)
+    textField.center(.y)
+    textField.textColor = .secondaryLabelColor
+    cell.textField = textField
+    return cell
+  }
+
+  private func makeGroupCellView() -> NSTableCellView {
+    let cell = NSTableCellView()
+    cell.identifier = .group
+    let textField = NSTextField(labelWithString: "")
+    textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.lineBreakMode = .byTruncatingTail
+    cell.addSubview(textField)
+    textField.padding(.leading(4), .trailing)
+    textField.center(.y)
+    cell.textField = textField
+    return cell
   }
 
   private func getTimeString(from entry: PlaybackHistory) -> String {
@@ -247,7 +334,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   // MARK: - Searching
 
-  @IBAction func searchFieldAction(_ sender: NSSearchField) {
+  @objc func searchFieldAction(_ sender: NSSearchField) {
     let searchString = sender.stringValue
     guard !searchString.isEmpty else {
       reloadData()
@@ -267,94 +354,235 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   // MARK: - Menu
 
-  private var selectedEntries: [PlaybackHistory] = []
+  func makeContextMenu() -> NSMenu {
+    let playItem = NSMenuItem(title: "Play", action: #selector(playAction(_:)), keyEquivalent: "\r")
+    playItem.keyEquivalentModifierMask = []
+    playItem.image = .sf("play")
+    playItem.tag = MenuItemTagPlay
+    let playInNewWindowItem = NSMenuItem(title: "Play in New Window", action: #selector(playInNewWindowAction(_:)), keyEquivalent: "\r")
+    playInNewWindowItem.image = .sf("play.square")
+    playInNewWindowItem.tag = MenuItemTagPlayInNewWindow
 
-  func menuNeedsUpdate(_ menu: NSMenu) {
-    let selectedRowIndexes = outlineView.selectedRowIndexes
-    let clickedRow = outlineView.clickedRow
-    var indexSet = IndexSet()
-    if menu.identifier == .contextMenu {
-      if clickedRow != -1 {
-        if selectedRowIndexes.contains(clickedRow) {
-          indexSet = selectedRowIndexes
-        } else {
-          indexSet.insert(clickedRow)
-        }
-      }
-      selectedEntries = indexSet.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
-    }
+    let showInFinderItem = NSMenuItem(title: "Show in Finder", action: #selector(showInFinderAction(_:)), keyEquivalent: "l")
+    showInFinderItem.image = .sf("finder")
+    showInFinderItem.tag = MenuItemTagShowInFinder
+    let deleteItem = NSMenuItem(title: "Delete…", action: #selector(deleteAction(_:)), keyEquivalent: "\u{8}")
+    deleteItem.keyEquivalentModifierMask = []
+    deleteItem.image = .sf("delete.backward")
+    deleteItem.tag = MenuItemTagDelete
+    let deleteFileItem = NSMenuItem(title: "Delete File…", action: #selector(deleteFileAction(_:)), keyEquivalent: "\u{8}")
+    deleteFileItem.image = .sf("trash")
+    deleteFileItem.tag = MenuItemTagDeleteFile
+
+    let menu = NSMenu()
+    menu.identifier = .contextMenu
+    [playItem, playInNewWindowItem, .separator(), showInFinderItem, .separator(), deleteItem, deleteFileItem].forEach { menu.addItem($0) }
+    return menu
+  }
+
+  private var selectedEntries: [PlaybackHistory] {
+    var indexSet = outlineView.selectedRowIndexes
+    indexSet.insert(outlineView.clickedRow)
+    return indexSet.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
+  }
+
+  private var selectedFiles: [URL] {
+    if selectedEntries.isEmpty { return [] }
+    return selectedEntries.map { $0.url }.filter { FileManager.default.fileExists(atPath: $0.path) }
   }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     switch menuItem.tag {
-    case MenuItemTagShowInFinder:
-      if selectedEntries.isEmpty { return false }
-      return selectedEntries.contains { FileManager.default.fileExists(atPath: $0.url.path) }
+    case MenuItemTagShowInFinder, MenuItemTagDeleteFile:
+      return !selectedFiles.isEmpty
     case MenuItemTagDelete, MenuItemTagPlay, MenuItemTagPlayInNewWindow:
       return !selectedEntries.isEmpty
-    case MenuItemTagSearchFilename:
-      menuItem.state = searchOption == .filename ? .on : .off
-    case MenuItemTagSearchFullPath:
-      menuItem.state = searchOption == .fullPath ? .on : .off
     default:
       break
     }
     return menuItem.isEnabled
   }
 
-  // MARK: - IBActions
+  // MARK: - Action
 
-  @IBAction func playAction(_ sender: AnyObject) {
-    guard let firstEntry = selectedEntries.first else { return }
-    PlayerCore.active.openURL(firstEntry.url)
+  @objc func playAction(_ sender: Any?) {
+    guard !selectedFiles.isEmpty else { return }
+    PlayerCore.active.openURLs(selectedFiles, shouldAutoLoad: false)
   }
 
-  @IBAction func playInNewWindowAction(_ sender: AnyObject) {
-    guard let firstEntry = selectedEntries.first else { return }
-    PlayerCore.newPlayerCore.openURL(firstEntry.url)
+  @objc func playInNewWindowAction(_ sender: Any?) {
+    guard !selectedFiles.isEmpty else { return }
+    PlayerCore.newPlayerCore.openURLs(selectedFiles, shouldAutoLoad: false)
   }
 
-  @IBAction func groupByChangedAction(_ sender: NSPopUpButton) {
+  @objc func showInFinderAction(_ sender: Any?) {
+    guard !selectedFiles.isEmpty else { return }
+    NSWorkspace.shared.activateFileViewerSelecting(selectedFiles)
+  }
+
+  @objc func deleteAction(_ sender: Any?) {
+    if !selectedFiles.isEmpty {
+      removeAfterConfirmation(self.selectedEntries)
+    }
+  }
+
+  @objc func deleteFileAction(_ sender: Any?) {
+    if !selectedFiles.isEmpty {
+      removeFileAfterConfirmation(self.selectedEntries)
+    }
+  }
+
+  @objc func searchInOption(_ sender: NSMenuItem) {
+    searchOption = sender.tag == MenuItemTagSearchFilename ? .filename : .fullPath
+  }
+
+  @objc func groupByChangedAction(_ sender: NSSegmentedControl) {
     groupBy = SortOption(rawValue: sender.selectedTag()) ?? .lastPlayed
     reloadData()
   }
-
-  @IBAction func showInFinderAction(_ sender: AnyObject) {
-    let urls = selectedEntries.compactMap { FileManager.default.fileExists(atPath: $0.url.path) ? $0.url: nil }
-    NSWorkspace.shared.activateFileViewerSelecting(urls)
-  }
-
-  @IBAction func deleteAction(_ sender: AnyObject) {
-    removeAfterConfirmation(self.selectedEntries)
-  }
-
-  @IBAction func searchOptionFilenameAction(_ sender: AnyObject) {
-    searchOption = .filename
-  }
-
-  @IBAction func searchOptionFullPathAction(_ sender: AnyObject) {
-    searchOption = .fullPath
-  }
-
 }
 
+// MARK: - Toolbar
+
+extension HistoryWindowController: NSToolbarDelegate {
+  private static let groupBy = NSToolbarItem.Identifier("GrouopBy")
+  private static let searchField = NSToolbarItem.Identifier("SearchField")
+  private static let toolbarItems = [groupBy, .flexibleSpace, searchField]
+
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    Self.toolbarItems
+  }
+
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    Self.toolbarItems
+  }
+
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    switch itemIdentifier {
+    case Self.groupBy:
+      let item = NSToolbarItem(itemIdentifier: itemIdentifier)
+      item.label = "Group By"
+      let segmentedControl = NSSegmentedControl(labels: ["Date", "Folder"], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
+      segmentedControl.setTag(SortOption.lastPlayed.rawValue, forSegment: 0)
+      segmentedControl.setTag(SortOption.fileLocation.rawValue, forSegment: 1)
+      segmentedControl.selectedSegment = 0
+      item.view = segmentedControl
+      return item
+
+    case Self.searchField:
+      let item = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
+      item.preferredWidthForSearchField = 100
+      let searchField = item.searchField
+      searchField.target = self
+      searchField.action = #selector(searchFieldAction(_:))
+      searchField.searchMenuTemplate = makeSearchMenu()
+      searchField.recentsAutosaveName = "IINAHistorySearchField"
+      return item
+
+    default: return nil
+    }
+  }
+
+  func makeSearchMenu() -> NSMenu {
+    let searchIn: NSMenuItem
+    if #available(macOS 14, *) {
+      searchIn = NSMenuItem.sectionHeader(title: "Search in")
+    } else {
+      searchIn = NSMenuItem(title: "Search in", action: nil, keyEquivalent: "")
+      searchIn.isEnabled = false
+    }
+
+    let filenameItem = NSMenuItem(title: "Filename", action: #selector(searchInOption(_:)), keyEquivalent: "")
+    filenameItem.tag = MenuItemTagSearchFilename
+    filenameItem.target = self
+    filenameItem.image = .sf("document")
+
+    let fullPathItem = NSMenuItem(title: "Full Path", action: #selector(searchInOption(_:)), keyEquivalent: "")
+    fullPathItem.tag = MenuItemTagSearchFullPath
+    fullPathItem.target = self
+    fullPathItem.image = .sf("folder")
+
+    if #unavailable(macOS 14) {
+      [filenameItem, fullPathItem].forEach { $0.indentationLevel = 1 }
+    }
+
+    // Managed by AppKit; placeholders
+    let noRecents = NSMenuItem(title: "No Recent Searches", action: nil, keyEquivalent: "")
+    noRecents.tag = NSSearchField.noRecentsMenuItemTag
+    noRecents.isEnabled = false
+    let recentsTitle = NSMenuItem(title: "Recent Searches", action: nil, keyEquivalent: "")
+    recentsTitle.tag = NSSearchField.recentsTitleMenuItemTag
+    recentsTitle.isEnabled = false
+    let recentItem = NSMenuItem(title: "Item", action: nil, keyEquivalent: "")
+    recentItem.tag = NSSearchField.recentsMenuItemTag
+    if #unavailable(macOS 14) {
+      recentItem.indentationLevel = 1
+    }
+    let clear = NSMenuItem(title: "Clear Recents", action: nil, keyEquivalent: "")
+    clear.tag = NSSearchField.clearRecentsMenuItemTag
+    clear.image = .sf("trash")
+
+    let menu = NSMenu()
+    [searchIn, filenameItem, fullPathItem, .separator(), noRecents, recentsTitle, recentItem, .separator(), clear].forEach { menu.addItem($0) }
+
+    return menu
+  }
+}
 
 // MARK: - Other classes
 
 class HistoryFilenameCellView: NSTableCellView {
+  let docImage = NSImageView()
 
-  @IBOutlet var docImage: NSImageView!
+  init() {
+    super.init(frame: .zero)
+    self.identifier = .filename
 
+    docImage.translatesAutoresizingMaskIntoConstraints = false
+    docImage.imageScaling = .scaleProportionallyDown
+    addSubview(docImage)
+
+    let textField = NSTextField(labelWithString: "")
+    textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.lineBreakMode = .byTruncatingMiddle
+    addSubview(textField)
+    self.textField = textField
+
+    docImage.size(width: 18, height: 18)
+    docImage.padding(.leading)
+    docImage.spacing(.trailing(4), to: textField)
+    textField.padding(.trailing)
+    [docImage, textField].forEach { $0.center(.y) }
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 }
 
 class HistoryProgressCellView: NSTableCellView {
+  let indicator = NSProgressIndicator()
 
-  @IBOutlet var indicator: NSProgressIndicator!
+  init() {
+    super.init(frame: .zero)
+    self.identifier = .progress
 
-  /// Prepares the receiver for service after it has been loaded from an Interface Builder archive, or nib file.
-  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
-  ///     timeline indicators should not flip in a right-to-left language. This can not be set in the XIB.
-  override func awakeFromNib() {
+    indicator.translatesAutoresizingMaskIntoConstraints = false
     indicator.userInterfaceLayoutDirection = .leftToRight
+    let textField = NSTextField(labelWithString: "")
+    textField.translatesAutoresizingMaskIntoConstraints = false
+    self.textField = textField
+    addSubview(indicator)
+    addSubview(textField)
+
+    [indicator, textField].forEach { $0.center(.y) }
+    indicator.padding(.leading)
+    indicator.widthAnchor.constraint(greaterThanOrEqualToConstant: 30).isActive = true
+    indicator.spacing(.trailing(6), to: textField)
+    textField.padding(.trailing)
+  }
+  
+  @MainActor required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }

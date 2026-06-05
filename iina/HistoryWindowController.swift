@@ -56,8 +56,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   let scrollView = NSScrollView()
   let outlineView = OutlineView()
 
-  var groupBy: SortOption = .lastPlayed
-  var searchOption: SearchOption = .fullPath
+  private var groupBy: SortOption = .lastPlayed
+  private var searchOption: SearchOption = .fullPath
+
+  private var searchToolbarItem: NSSearchToolbarItem?
 
   private var historyData: [String: [PlaybackHistory]] = [:]
   private var historyDataKeys: [String] = []
@@ -79,9 +81,6 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     toolbar.displayMode = .iconOnly
     toolbar.allowsUserCustomization = false
     toolbar.autosavesConfiguration = false
-    if #available(macOS 13, *) {
-      toolbar.centeredItemIdentifiers = [Self.groupBy]
-    }
     window.toolbar = toolbar
     window.toolbarStyle = .unified
 
@@ -206,6 +205,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
+  private func removeAllAfterConfirmation() {
+    Utility.quickAskPanel("delete_all_history", sheetWindow: window) { respond in
+      guard respond == .alertFirstButtonReturn else { return }
+      HistoryController.shared.removeAll()
+    }
+  }
+
   private func removeFileAfterConfirmation(_ entries: [PlaybackHistory]) {
     Utility.quickAskPanel("delete_file", sheetWindow: window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
@@ -223,8 +229,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     if flags == .command  {
       switch event.charactersIgnoringModifiers! {
       case "f":
-        // window!.makeFirstResponder(historySearchField)
-        break
+        searchToolbarItem?.beginSearchInteraction()
       case "a":
         outlineView.selectAll(nil)
       case "\r":
@@ -455,6 +460,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
+  @objc func clear(_ sender: Any) {
+    removeAllAfterConfirmation()
+  }
+
   @objc func deleteFileAction(_ sender: Any?) {
     if !selectedFiles.isEmpty {
       removeFileAfterConfirmation(self.selectedEntries)
@@ -484,9 +493,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 // MARK: - Toolbar
 
 extension HistoryWindowController: NSToolbarDelegate {
+  private static let clear = NSToolbarItem.Identifier("Clear")
   private static let groupBy = NSToolbarItem.Identifier("GrouopBy")
   private static let searchField = NSToolbarItem.Identifier("SearchField")
-  private static let toolbarItems = [groupBy, .flexibleSpace, searchField]
+  private static let toolbarItems = [groupBy, .space, clear, .space, searchField]
 
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     Self.toolbarItems
@@ -498,6 +508,13 @@ extension HistoryWindowController: NSToolbarDelegate {
 
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
     switch itemIdentifier {
+    case Self.clear:
+      let item = NSToolbarItem(itemIdentifier: itemIdentifier)
+      let button = NSButton(image: .sf("trash")!, target: self, action: #selector(clear(_:)))
+      item.label = "Clear Playback History"
+      item.view = button
+      return item
+
     case Self.groupBy:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
       item.label = "Group By"
@@ -511,7 +528,9 @@ extension HistoryWindowController: NSToolbarDelegate {
       submenu.addItem(withTitle: "Date", action: #selector(groupByChangedAction(_:)))
       submenu.addItem(withTitle: "Folder and Website", action: #selector(groupByChangedAction(_:)))
       submenu.items[0].tag = SortOption.lastPlayed.rawValue
+      submenu.items[0].image = .sf("calendar.badge.clock")
       submenu.items[1].tag = SortOption.fileLocation.rawValue
+      submenu.items[1].image = .sf("folder")
       menu.submenu = submenu
       item.menuFormRepresentation = menu
       return item
@@ -524,6 +543,7 @@ extension HistoryWindowController: NSToolbarDelegate {
       searchField.action = #selector(searchFieldAction(_:))
       searchField.searchMenuTemplate = makeSearchMenu()
       searchField.recentsAutosaveName = "IINAHistorySearchField"
+      self.searchToolbarItem = item
       return item
 
     default: return nil

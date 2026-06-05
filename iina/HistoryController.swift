@@ -130,6 +130,14 @@ class HistoryController: NSObject {
     save()
   }
 
+  func removeAll() {
+    $history.withLock { history in
+      log("Removing all playback history entries")
+      history = []
+    }
+    save()
+  }
+
   private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: Logger.Sub.history)
   }

@@ -325,6 +325,8 @@
 
 "alert.delete_history.title" = "Delete Playback History";
 "alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_all_history.title" = "Clear Playback History";
+"alert.delete_all_history.message" = "Are you sure to delete all playback history?";
 "alert.delete_file.title" = "Delete File";
 "alert.delete_file.message" = "Are you sure to trash the selected files?";
 

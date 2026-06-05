@@ -97,11 +97,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     window.contentView?.addSubview(scrollView)
     scrollView.padding(.all)
 
-    outlineView.style = .fullWidth
+    outlineView.style = .inset
+    outlineView.usesAutomaticRowHeights = true
     outlineView.columnAutoresizingStyle = .firstColumnOnlyAutoresizingStyle
     outlineView.allowsMultipleSelection = true
     outlineView.autosaveName = "HistoryWindowTable"
     outlineView.allowsColumnReordering = false
+    outlineView.indentationPerLevel = 8
 
     [(NSUserInterfaceItemIdentifier.filename, "Media", 200, 5000), (.progress, "Progress", 110, 1000), (.time, "Played at", 60, 300)].map {
       let column = NSTableColumn(identifier: $0.0)
@@ -198,6 +200,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       entries.forEach {
         try? FileManager.default.trashItem(at: $0.url, resultingItemURL: nil)
       }
+      self.reloadData()
     }
   }
 
@@ -270,16 +273,21 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       switch identifier {
       case .filename:
         let cell = (outlineView.makeView(withIdentifier: .filename, owner: nil) as? HistoryFilenameCellView) ?? HistoryFilenameCellView()
-        let fileExists = !entry.url.isFileURL || FileManager.default.fileExists(atPath: entry.url.path)
-        cell.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
+        let isFile = entry.url.isFileURL
+        let fileExists = !isFile || FileManager.default.fileExists(atPath: entry.url.path)
+        cell.textField?.stringValue = entry.title ?? "No title"
         cell.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
-        cell.docImage.image = Utility.icon(for: entry.url)
+        cell.filename.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
+        cell.filename.textColor = fileExists ? .secondaryLabelColor : .disabledControlTextColor
+        if isFile {
+          cell.docImage.image = Utility.icon(for: entry.url)
+        } else {
+          cell.docImage.image = .sf("network")
+        }
         return cell
       case .progress:
         // Progress cell
         let cell = (outlineView.makeView(withIdentifier: .progress, owner: nil) as? HistoryProgressCellView) ?? HistoryProgressCellView()
-        // Do not animate! Causes unneeded slowdown
-        cell.indicator.usesThreadedAnimation = false
         if let progress = entry.mpvProgress {
           cell.textField?.stringValue = progress.stringRepresentation
           cell.indicator.isHidden = false
@@ -471,7 +479,7 @@ extension HistoryWindowController: NSToolbarDelegate {
     case Self.groupBy:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
       item.label = "Group By"
-      let segmentedControl = NSSegmentedControl(labels: ["Date", "Folder / Domain"], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
+      let segmentedControl = NSSegmentedControl(labels: ["Date", "Folder or Website"], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
       segmentedControl.setTag(SortOption.lastPlayed.rawValue, forSegment: 0)
       segmentedControl.setTag(SortOption.fileLocation.rawValue, forSegment: 1)
       segmentedControl.selectedSegment = 0
@@ -542,6 +550,7 @@ extension HistoryWindowController: NSToolbarDelegate {
 
 class HistoryFilenameCellView: NSTableCellView {
   let docImage = NSImageView()
+  let filename = NSTextField(labelWithString: "")
 
   init() {
     super.init(frame: .zero)
@@ -558,11 +567,22 @@ class HistoryFilenameCellView: NSTableCellView {
     addSubview(textField)
     self.textField = textField
 
+    filename.translatesAutoresizingMaskIntoConstraints = false
+    filename.lineBreakMode = .byTruncatingMiddle
+    filename.allowsExpansionToolTips = true
+    filename.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+    addSubview(filename)
+    textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    filename.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+
     docImage.size(width: 18, height: 18)
     docImage.padding(.leading)
-    docImage.spacing(.trailing(4), to: textField)
-    textField.padding(.trailing)
-    [docImage, textField].forEach { $0.center(.y) }
+    docImage.spacing(.trailing(8), to: textField)
+    docImage.spacing(.trailing(8), to: filename)
+    docImage.center(.y)
+    textField.padding(.top, .trailing)
+    filename.spacing(.top(1), to: textField)
+    filename.padding(.bottom(2), .trailing)
   }
   
   required init?(coder: NSCoder) {
@@ -570,8 +590,14 @@ class HistoryFilenameCellView: NSTableCellView {
   }
 }
 
+class ProgressIndicator: NSLevelIndicator {
+  override func hitTest(_ point: NSPoint) -> NSView? {
+    return nil
+  }
+}
+
 class HistoryProgressCellView: NSTableCellView {
-  let indicator = NSProgressIndicator()
+  let indicator = ProgressIndicator()
 
   init() {
     super.init(frame: .zero)
@@ -579,6 +605,13 @@ class HistoryProgressCellView: NSTableCellView {
 
     indicator.translatesAutoresizingMaskIntoConstraints = false
     indicator.userInterfaceLayoutDirection = .leftToRight
+    indicator.minValue = 0
+    indicator.maxValue = 1.0
+    indicator.levelIndicatorStyle = .continuousCapacity
+    indicator.controlSize = .mini
+    indicator.fillColor = .controlAccentColor
+    indicator.warningValue = 2
+    indicator.criticalValue = 2
     let textField = NSTextField(labelWithString: "")
     textField.translatesAutoresizingMaskIntoConstraints = false
     self.textField = textField

@@ -66,7 +66,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     window.minSize = NSMakeSize(400, 200)
     super.init(window: window)
 
-    let toolbar = NSToolbar(identifier: "HitoryWindowToolbar")
+    let toolbar = NSToolbar(identifier: "HistoryWindowToolbar")
     toolbar.delegate = self
     toolbar.displayMode = .iconOnly
     toolbar.allowsUserCustomization = false
@@ -84,6 +84,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     scrollView.documentView = outlineView
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.hasHorizontalScroller = false
+    scrollView.hasVerticalScroller = true
+    scrollView.autohidesScrollers = true
     window.contentView?.addSubview(scrollView)
     scrollView.padding(.all)
 
@@ -370,7 +372,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     deleteItem.keyEquivalentModifierMask = []
     deleteItem.image = .sf("delete.backward")
     deleteItem.tag = MenuItemTagDelete
-    let deleteFileItem = NSMenuItem(title: "Delete File…", action: #selector(deleteFileAction(_:)), keyEquivalent: "\u{8}")
+    let deleteFileItem = NSMenuItem(title: "Move to Trash…", action: #selector(deleteFileAction(_:)), keyEquivalent: "\u{8}")
     deleteFileItem.image = .sf("trash")
     deleteFileItem.tag = MenuItemTagDeleteFile
 

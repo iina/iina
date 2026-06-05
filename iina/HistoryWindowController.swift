@@ -42,7 +42,15 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   private let getKey: [SortOption: (PlaybackHistory) -> String] = [
     .lastPlayed: { DateFormatter.localizedString(from: $0.addedDate, dateStyle: .medium, timeStyle: .none) },
-    .fileLocation: { $0.url.deletingLastPathComponent().path }
+    .fileLocation: {
+      if $0.url.isFileURL {
+        $0.url.deletingLastPathComponent().path
+      } else if #available(macOS 13, *) {
+        $0.url.host(percentEncoded: false) ?? "-"
+      } else {
+        $0.url.host ?? "-"
+      }
+    }
   ]
 
   let scrollView = NSScrollView()
@@ -94,7 +102,6 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     outlineView.allowsMultipleSelection = true
     outlineView.autosaveName = "HistoryWindowTable"
     outlineView.allowsColumnReordering = false
-    outlineView.allowsExpansionToolTips = true
 
     [(NSUserInterfaceItemIdentifier.filename, "Media", 200, 5000), (.progress, "Progress", 110, 1000), (.time, "Played at", 60, 300)].map {
       let column = NSTableColumn(identifier: $0.0)
@@ -464,7 +471,7 @@ extension HistoryWindowController: NSToolbarDelegate {
     case Self.groupBy:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
       item.label = "Group By"
-      let segmentedControl = NSSegmentedControl(labels: ["Date", "Folder"], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
+      let segmentedControl = NSSegmentedControl(labels: ["Date", "Folder / Domain"], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
       segmentedControl.setTag(SortOption.lastPlayed.rawValue, forSegment: 0)
       segmentedControl.setTag(SortOption.fileLocation.rawValue, forSegment: 1)
       segmentedControl.selectedSegment = 0
@@ -547,6 +554,7 @@ class HistoryFilenameCellView: NSTableCellView {
     let textField = NSTextField(labelWithString: "")
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.lineBreakMode = .byTruncatingMiddle
+    textField.allowsExpansionToolTips = true
     addSubview(textField)
     self.textField = textField
 

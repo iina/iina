@@ -9,7 +9,7 @@
 
 class AnimatedTabViewController: NSTabViewController {
   var transitionDuration: TimeInterval = 0.3
-  private var previousIndex: Int = 0
+  private var previousIndex: Int = -1
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,7 +26,8 @@ class AnimatedTabViewController: NSTabViewController {
     options: NSViewController.TransitionOptions = [],
     completionHandler completion: (() -> Void)? = nil
   ) {
-    if Preference.bool(for: .disableAnimations) {
+    if Preference.bool(for: .disableAnimations) || previousIndex < 0 {
+      previousIndex = selectedTabViewItemIndex
       super.transition(from: fromVC, to: toVC, options: options, completionHandler: completion)
       return
     }

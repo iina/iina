@@ -427,16 +427,16 @@ fileprivate class WindowInitialPositionView: WithSettingsLocalizationContext, Se
     self.view.alignment = .leading
 
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.image("arrow.left.to.line"), ui.label(.text_XOffset), textFieldX, popupButtonXUnit)
+      ui.hStack(align: .firstBaseline, ui.image("arrow.left.to.line"), ui.smallLabel(bindTo: .text_XOffset), textFieldX, popupButtonXUnit)
     )
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.label(.text_toThe), popupButtonXPos, ui.label(.text_sideOfTheScreen))
+      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.smallLabel(bindTo: .text_toThe), popupButtonXPos, ui.smallLabel(bindTo: .text_sideOfTheScreen))
     )
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.image("arrow.up.to.line"), ui.label(.text_YOffset), textFieldY, popupButtonYUnit)
+      ui.hStack(align: .firstBaseline, ui.image("arrow.up.to.line"), ui.smallLabel(bindTo: .text_YOffset), textFieldY, popupButtonYUnit)
     )
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.label(.text_toThe), popupButtonYPos, ui.label(.text_sideOfTheScreen))
+      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.smallLabel(bindTo: .text_toThe), popupButtonYPos, ui.smallLabel(bindTo: .text_sideOfTheScreen))
     )
 
     container.addSubview(view)

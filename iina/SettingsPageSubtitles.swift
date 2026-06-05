@@ -292,7 +292,7 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
     fontButton.bind(.title, to: UserDefaults.standard, withKeyPath: Preference.Key.subTextFont.rawValue)
     fontButton.size(height: 25)
 
-    let sizeInput = ui.input(.subTextSize)
+    let sizeInput = ui.input(bindTo: .subTextSize)
 
     let boldButton = SButton(image: .sf("bold"))
     boldButton.translatesAutoresizingMaskIntoConstraints = false
@@ -326,11 +326,11 @@ fileprivate class SubtitlesColorView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
 
-    let colorLabel = ui.label(.text_Color)
-    let colorWell = ui.colorWell(.subTextColorString)
+    let colorLabel = ui.smallLabel(bindTo: .text_Color)
+    let colorWell = ui.colorWell(bindTo: .subTextColorString)
 
-    let backgroundLabel = ui.label(.text_Background)
-    let backgroundWell = ui.colorWell(.subBgColorString)
+    let backgroundLabel = ui.smallLabel(bindTo: .text_Background)
+    let backgroundWell = ui.colorWell(bindTo: .subBgColorString)
 
     let stackView = ui.hStack(colorLabel, colorWell, backgroundLabel, backgroundWell)
 
@@ -344,11 +344,11 @@ fileprivate class SubtitlesBorderView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
 
-    let widthLabel = ui.label(.text_Size)
-    let widthInput = ui.input(.subBorderSize)
+    let widthLabel = ui.smallLabel(bindTo: .text_Size)
+    let widthInput = ui.input(bindTo: .subBorderSize)
 
-    let colorLabel = ui.label(.text_Color)
-    let colorWell = ui.colorWell(.subBorderColorString)
+    let colorLabel = ui.smallLabel(bindTo: .text_Color)
+    let colorWell = ui.colorWell(bindTo: .subBorderColorString)
 
     let stackView = ui.hStack(widthLabel, widthInput, colorLabel, colorWell)
 
@@ -362,11 +362,11 @@ fileprivate class SubtitlesShadowView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
 
-    let sizeLabel = ui.label(.text_Offset)
-    let sizeInput = ui.input(.subShadowSize)
+    let sizeLabel = ui.smallLabel(bindTo: .text_Offset)
+    let sizeInput = ui.input(bindTo: .subShadowSize)
 
-    let colorLabel = ui.label(.text_Color)
-    let colorWell = ui.colorWell(.subShadowColorString)
+    let colorLabel = ui.smallLabel(bindTo: .text_Color)
+    let colorWell = ui.colorWell(bindTo: .subShadowColorString)
 
     let stackView = ui.hStack(sizeLabel, sizeInput, colorLabel, colorWell)
 
@@ -380,11 +380,11 @@ fileprivate class SubtitlesMarginView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
 
-    let xLabel = ui.label(.text_X)
-    let xInput = ui.input(.subMarginX)
+    let xLabel = ui.smallLabel(bindTo: .text_X)
+    let xInput = ui.input(bindTo: .subMarginX)
 
-    let yLabel = ui.label(.text_Y)
-    let yInput = ui.input(.subMarginY)
+    let yLabel = ui.smallLabel(bindTo: .text_Y)
+    let yInput = ui.input(bindTo: .subMarginY)
 
     let stackView = ui.hStack(xLabel, xInput, yLabel, yInput)
 
@@ -398,10 +398,10 @@ fileprivate class SubtitlesAlignView: SettingsAccessory.Base {
   override init(l10n: SettingsLocalization.Context) {
     super.init(l10n: l10n)
 
-    let xLabel = ui.label(.text_X)
+    let xLabel = ui.smallLabel(bindTo: .text_X)
     let xPopUp = makePopUp(.subAlignX)
 
-    let yLabel = ui.label(.text_Y)
+    let yLabel = ui.smallLabel(bindTo: .text_Y)
     let yPopUp = makePopUp(.subAlignY)
 
     let stackView = ui.hStack(xLabel, xPopUp, yLabel, yPopUp)
@@ -478,22 +478,22 @@ fileprivate class SubtitleSourceView: SettingsAccessory.Base {
     loginIndicator.isHidden = true
     super.init(l10n: l10n)
 
-    let descLabel = ui.label(.text_SubtitleSource_desc).makeMultiLine()
+    let descLabel = ui.smallLabel(bindTo: .text_SubtitleSource_desc).makeMultiLine()
 
     // don't add legacy opensub support (is the API still alive?)
-    let legacyOpenSubLabel = ui.label(.text_LegacyOpenSubAlert).makeMultiLine()
-//    let openSubAccountName = ui.label(.text_NotLoggedIn)
+    let legacyOpenSubLabel = ui.smallLabel(bindTo: .text_LegacyOpenSubAlert).makeMultiLine()
+//    let openSubAccountName = ui.smallLabel(bindTo: .text_NotLoggedIn)
 //    let openSubLoginBtn = ui.button(.text_Login)
 //    let legacyOpenSubSettingsView = makeStackView([openSubLoginBtn, openSubAccountName, loginIndicator])
     let legacyOpenSubView = ui.vStack(legacyOpenSubLabel)
 
     let assrtHelpBtn = NSButton(title: "", target: self, action: #selector(assrtHelpBtnAction))
     assrtHelpBtn.bezelStyle = .helpButton
-    let assrtLabel = ui.label(.text_AssrtAPIToken, isSmall: false)
-    let assrtTokenField = ui.input(.assrtToken, isFixedSize: false)
+    let assrtLabel = ui.label(bindTo: .text_AssrtAPIToken, isSecondary: true)
+    let assrtTokenField = ui.input(bindTo: .assrtToken, isFixedSize: false)
     let assrtView = ui.hStack(assrtLabel, assrtTokenField, assrtHelpBtn)
 
-    let pluginDescLabel = ui.label(.text_SubtitleSourcePluginDesc).makeMultiLine()
+    let pluginDescLabel = ui.smallLabel(bindTo: .text_SubtitleSourcePluginDesc).makeMultiLine()
 
     subSourceStackView = ui.vStack(
       subSourcePopUpButton, descLabel, legacyOpenSubView, assrtView, pluginDescLabel

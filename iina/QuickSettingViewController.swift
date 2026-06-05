@@ -49,16 +49,19 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   let sliderSteps = 24.0
 
   enum TabViewType: Equatable {
+    case layout
     case video
     case audio
     case sub
 
     init(buttonTag: Int) {
-      self = [.video, .audio, .sub][at: buttonTag] ?? .video
+      self = [.layout, .video, .audio, .sub][at: buttonTag] ?? .video
     }
 
     init?(name: String) {
       switch name {
+      case "layout":
+        self = .layout
       case "video":
         self = .video
       case "audio":
@@ -72,14 +75,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     var buttonTag: Int {
       switch self {
-      case .video: return 0
-      case .audio: return 1
-      case .sub: return 2
+      case .layout: return 0
+      case .video: return 1
+      case .audio: return 2
+      case .sub: return 3
       }
     }
 
     var name: String {
       switch self {
+      case .layout: return "layout"
       case .video: return "video"
       case .audio: return "audio"
       case .sub: return "sub"
@@ -108,6 +113,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   var audioTabBtn: NSButton!
   var subTabBtn: NSButton!
 
+  var layoutTabScrollView: SidebarScrollView!
   @IBOutlet weak var videoTabScrollView: SidebarScrollView!
   @IBOutlet weak var audioTabScrollView: SidebarScrollView!
   @IBOutlet weak var subtitlesTabScrollView: SidebarScrollView!
@@ -234,6 +240,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     tabViewController.tabView.padding(.all)
     tabViewController.tabView.wantsLayer = true
 
+    layoutTabScrollView = SidebarLayoutPane(player: player)
+
     // set up the tab buttons
 
     func makeTabButton(_ title: String, image: NSImage?, tag: Int) -> NSButton {
@@ -257,17 +265,17 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     dismissBtn.size(width: 20, height: 40)
     tabButtonsStackView.addArrangedSubview(dismissBtn)
 
-    self.layoutTabBtn = makeTabButton("Layout", image: .tabLayout, tag: 3)
+    self.layoutTabBtn = makeTabButton("Layout", image: .tabLayout, tag: 0)
     tabButtonsStackView.addArrangedSubview(layoutTabBtn)
     let separator = NSBox()
     separator.boxType = .separator
     separator.size(width: 2, height: 32)
     tabButtonsStackView.addArrangedSubview(separator)
-    self.videoTabBtn = makeTabButton("Video", image: .tabVideo, tag: 0)
+    self.videoTabBtn = makeTabButton("Video", image: .tabVideo, tag: 1)
     tabButtonsStackView.addArrangedSubview(videoTabBtn)
-    self.audioTabBtn = makeTabButton("Audio", image: .tabAudio, tag: 1)
+    self.audioTabBtn = makeTabButton("Audio", image: .tabAudio, tag: 2)
     tabButtonsStackView.addArrangedSubview(audioTabBtn)
-    self.subTabBtn = makeTabButton("Subtitles", image: .tabSub, tag: 2)
+    self.subTabBtn = makeTabButton("Subtitles", image: .tabSub, tag: 3)
     tabButtonsStackView.addArrangedSubview(subTabBtn)
 
     // add pages
@@ -278,13 +286,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       return vc
     }
 
-    let tabScrollViews = [videoTabScrollView, audioTabScrollView, subtitlesTabScrollView]
+    let tabScrollViews = [layoutTabScrollView, videoTabScrollView, audioTabScrollView, subtitlesTabScrollView]
 
     for view in tabScrollViews {
       view?.horizontalScroll = self.switchTabByScroll(_:)
       let viewItem = NSTabViewItem(viewController: createViewController(view!))
       tabViewController.addTabViewItem(viewItem)
     }
+    tabViewController.selectedTabViewItemIndex = TabViewType.video.buttonTag
 
     withAllTableViews { (view, _) in
       view.delegate = self
@@ -623,6 +632,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   func reload() {
     guard isViewLoaded else { return }
     switch currentTab {
+    case .layout:
+      return
     case .audio:
       audioTableView.reloadData()
       updateAudioTabControl()

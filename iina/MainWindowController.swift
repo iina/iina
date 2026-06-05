@@ -32,6 +32,8 @@ fileprivate extension NSStackView.VisibilityPriority {
 // The minimum distance that the user must drag before their click or tap gesture is interpreted as a drag gesture:
 fileprivate let minimumInitialDragDistance: CGFloat = 3.0
 
+fileprivate let layoutSides: [NSLayoutConstraint.Attribute] = [.top, .bottom, .leading, .trailing]
+
 class MainWindowController: PlayerWindowController {
 
   override var windowNibName: NSNib.Name {
@@ -287,6 +289,7 @@ class MainWindowController: PlayerWindowController {
     .controlBarToolbarButtons,
     .alwaysShowOnTopIcon,
     .unlockWindowAspectRatio,
+    .edgeToEdgeVideo,
     .compactUI,
   ]
 
@@ -341,8 +344,11 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.alwaysShowOnTopIcon.rawValue:
       titleBarView.updateOnTopIcon()
+    case PK.edgeToEdgeVideo.rawValue:
+      setupVideoViewConstraints()
+      fallthrough
     case PK.unlockWindowAspectRatio.rawValue:
-      handleVideoSizeChange()
+      handleVideoSizeChange(keepWindowSize: true)
     case PK.compactUI.rawValue:
       setWindowToolbar()
     default:
@@ -453,10 +459,7 @@ class MainWindowController: PlayerWindowController {
 
     window.aspectRatio = AppData.sizeWhenNoVideo
     setWindowToolbar()
-
-    // video view
     cv.autoresizesSubviews = false
-    addVideoViewToWindow()
 
     // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
@@ -473,8 +476,6 @@ class MainWindowController: PlayerWindowController {
       view.layer?.opacity = 0.01
       cv.addSubview(view)
     }
-
-    player.initVideo()
 
     // init quick setting view now
     let _ = sidebars.quickSettingView
@@ -543,6 +544,10 @@ class MainWindowController: PlayerWindowController {
     setupOSCToolbarButtons(buttons)
 
     updateArrowButtons()
+
+    // video view
+    addVideoViewToWindow()
+    player.initVideo()
 
     // fade-able views
 
@@ -675,15 +680,32 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  private func addVideoViewToWindow() {
+  func addVideoViewToWindow() {
     guard let cv = window?.contentView else { return }
+    if videoView.superview != nil {
+      videoView.removeFromSuperview()
+    }
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.translatesAutoresizingMaskIntoConstraints = false
-    // add constraints
-    ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
-      videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal, toItem: cv, attribute: attr, multiplier: 1, constant: 0)
-      videoViewConstraints[attr]!.isActive = true
+    setupVideoViewConstraints()
+  }
+
+  private func setupVideoViewConstraints() {
+    guard let cv = window?.contentView else { return }
+
+    layoutSides.forEach { videoViewConstraints[$0].flatMap(cv.removeConstraint) }
+    if Preference.bool(for: .edgeToEdgeVideo) {
+      layoutSides.forEach { attr in
+        videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal,
+                                                        toItem: cv, attribute: attr, multiplier: 1, constant: 0)
+      }
+    } else {
+      videoViewConstraints[.top] = videoView.topAnchor.constraint(equalTo: cv.topAnchor)
+      videoViewConstraints[.bottom] = videoView.bottomAnchor.constraint(equalTo: cv.bottomAnchor)
+      videoViewConstraints[.leading] = videoView.leadingAnchor.constraint(equalTo: sidebars.leadingSidebar.view.trailingAnchor)
+      videoViewConstraints[.trailing] = videoView.trailingAnchor.constraint(equalTo: sidebars.trailingSidebar.view.leadingAnchor)
     }
+    layoutSides.forEach { videoViewConstraints[$0]?.isActive = true }
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
@@ -1707,7 +1729,7 @@ class MainWindowController: PlayerWindowController {
       forceDraw("window resized")
     }
 
-    if Preference.bool(for: .unlockWindowAspectRatio) && videoView.isIdle {
+    if Preference.unlockWindowAspectRatio && videoView.isIdle {
       forceDraw("window resized with aspect ratio unlocked and paused")
     }
 
@@ -2215,7 +2237,7 @@ class MainWindowController: PlayerWindowController {
       context.duration = AccessibilityPreferences.adjustedDuration(CropAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       bottomBarBottomConstraint.animator().constant = 0
-      ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      layoutSides.forEach { attr in
         videoViewConstraints[attr]!.animator().constant = newConstants[attr]!
       }
     }) {
@@ -2247,7 +2269,7 @@ class MainWindowController: PlayerWindowController {
     // if exit without animation
     if immediately {
       bottomBarBottomConstraint.constant = -InteractiveModeBottomViewHeight
-      ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      layoutSides.forEach { attr in
         videoViewConstraints[attr]!.constant = 0
       }
       self.cropSettingsView?.cropBoxView.removeFromSuperview()
@@ -2263,7 +2285,7 @@ class MainWindowController: PlayerWindowController {
       context.duration = AccessibilityPreferences.adjustedDuration(CropAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
       bottomBarBottomConstraint.animator().constant = -InteractiveModeBottomViewHeight
-      ([.top, .bottom, .left, .right] as [NSLayoutConstraint.Attribute]).forEach { attr in
+      layoutSides.forEach { attr in
         videoViewConstraints[attr]!.animator().constant = 0
       }
     }) {
@@ -2316,12 +2338,12 @@ class MainWindowController: PlayerWindowController {
 
   private var currentWindowAspectRatio: NSSize {
     guard let window else { return .zero }
-    return Preference.bool(for: .unlockWindowAspectRatio) ? window.frame.size : window.aspectRatio
+    return Preference.unlockWindowAspectRatio ? window.frame.size : window.aspectRatio
   }
 
   private func setWindowAspectRatio(_ aspectRatio: NSSize) {
     guard let window else { return }
-    if Preference.bool(for: .unlockWindowAspectRatio) {
+    if Preference.unlockWindowAspectRatio {
       window.aspectRatio = .zero
       window.resizeIncrements = .init(width: 1, height: 1)
     } else {
@@ -2433,8 +2455,12 @@ class MainWindowController: PlayerWindowController {
     return lastScreen
   }
 
-  /** Set window size when info available, or video size changed. */
   override func handleVideoSizeChange() {
+    handleVideoSizeChange(keepWindowSize: false)
+  }
+
+  /** Set window size when info available, or video size changed. */
+  func handleVideoSizeChange(keepWindowSize: Bool) {
     guard let window = window else { return }
 
     // When starting to play the file try and find the screen the window was previously on.
@@ -2472,7 +2498,7 @@ class MainWindowController: PlayerWindowController {
       }
     } else {
       // video size changed during playback
-      needResizeWindow = true
+      needResizeWindow = !keepWindowSize
     }
 
     if needResizeWindow {
@@ -2543,7 +2569,7 @@ class MainWindowController: PlayerWindowController {
       log("Constrained window frame to be in screen: \(rect)")
     }
 
-    if Preference.bool(for: .unlockWindowAspectRatio) && !player.info.justOpenedFile {
+    if Preference.unlockWindowAspectRatio && !player.info.justOpenedFile {
       // do nothing when window aspect ratio is unlocked
       // however, if this is the first time opening the window, still apply the sizing logic
     } else if fsState.isFullscreen {

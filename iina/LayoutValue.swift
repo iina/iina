@@ -9,7 +9,11 @@
 
 struct LayoutValue {
   let value: CGFloat
-  let compactValue: CGFloat
+  let compactValue: CGFloat?
+
+  var isFixed: Bool {
+    compactValue == nil
+  }
 
   private struct Listener {
     let layout: LayoutValue
@@ -39,25 +43,31 @@ struct LayoutValue {
     }
   }
 
-  init(_ value: CGFloat, _ compactValue: CGFloat) {
+  init(_ value: CGFloat, _ compactValue: CGFloat? = nil) {
     self.value = value
     self.compactValue = compactValue
   }
 
   func get() -> CGFloat {
-    Preference.bool(for: .compactUI) ? compactValue : value
+    isFixed ? value :
+    Preference.bool(for: .compactUI) ? compactValue! : value
   }
 
   func use(_ block: @escaping (CGFloat) -> Void, applyNow: Bool = true) {
-    let listener = Listener(layout: self, block: block)
-    Store.shared.listeners.append(listener)
-    if applyNow {
-      apply(isCompact: Preference.bool(for: .compactUI), listener.block)
+    if isFixed {
+      block(value)
+    } else {
+      let listener = Listener(layout: self, block: block)
+      Store.shared.listeners.append(listener)
+      if applyNow {
+        apply(isCompact: Preference.bool(for: .compactUI), listener.block)
+      }
     }
   }
 
   private func apply(isCompact: Bool, _ block: (CGFloat) -> Void) {
-    block(isCompact ? compactValue : value)
+    guard !isFixed else { return }
+    block(isCompact ? compactValue! : value)
   }
 }
 

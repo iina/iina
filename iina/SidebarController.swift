@@ -118,9 +118,9 @@ class SidebarController {
       panel.widthConstraint.isActive = true
       switch panel.side {
       case .leading:
-        panel.edgeConstraint = panel.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0)
+        panel.edgeConstraint = panel.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: -60)
       case .trailing:
-        panel.edgeConstraint = contentView.trailingAnchor.constraint(equalTo: panel.view.trailingAnchor, constant: 0)
+        panel.edgeConstraint = contentView.trailingAnchor.constraint(equalTo: panel.view.trailingAnchor, constant: -60)
       }
       panel.edgeConstraint.isActive = true
       panel.view.isHidden = true

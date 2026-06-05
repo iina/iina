@@ -165,6 +165,7 @@ struct Preference {
 
     static let unlockWindowAspectRatio = Key("unlockWindowAspectRatio")
     static let compactUI = Key("compactUI")
+    static let edgeToEdgeVideo = Key("edgeToEdgeVideo")
 
     // Codec
 
@@ -421,7 +422,7 @@ struct Preference {
     }
   }
 
-  enum OSCPosition: Int, InitializingFromKey {
+  enum OSCPosition: Int, InitializingFromKey, CaseIterable {
     case floating = 0
     case top
     case bottom
@@ -954,6 +955,12 @@ struct Preference {
     }
   }
 
+  // MARK: - Getters
+
+  static var unlockWindowAspectRatio: Bool {
+    Preference.bool(for: .unlockWindowAspectRatio) || !Preference.bool(for: .edgeToEdgeVideo)
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -1037,6 +1044,7 @@ struct Preference {
     .disableAnimations: false,
     .unlockWindowAspectRatio: false,
     .compactUI: false,
+    .edgeToEdgeVideo: true,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,

@@ -438,7 +438,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @objc func deleteAction(_ sender: Any?) {
-    if !selectedFiles.isEmpty {
+    if !selectedEntries.isEmpty {
       removeAfterConfirmation(self.selectedEntries)
     }
   }
@@ -451,6 +451,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   @objc func searchInOption(_ sender: NSMenuItem) {
     searchOption = sender.tag == MenuItemTagSearchFilename ? .filename : .fullPath
+    sender.menu?.items.forEach { $0.state = .off }
+    sender.state = .on
   }
 
   @objc func groupByChangedAction(_ sender: NSSegmentedControl) {
@@ -518,6 +520,8 @@ extension HistoryWindowController: NSToolbarDelegate {
     fullPathItem.tag = MenuItemTagSearchFullPath
     fullPathItem.target = self
     fullPathItem.image = .sf("folder")
+
+    (searchOption == .filename ? filenameItem : fullPathItem).state = .on
 
     if #unavailable(macOS 14) {
       [filenameItem, fullPathItem].forEach { $0.indentationLevel = 1 }

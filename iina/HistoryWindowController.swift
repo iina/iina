@@ -177,6 +177,18 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     for entry in historyList {
       addToData(entry, forKey: getKey[groupBy]!(entry))
     }
+
+    switch groupBy {
+    case .lastPlayed:
+      historyDataKeys.sort { lhs, rhs in
+        let lDate = historyData[lhs]?.map(\.addedDate).max() ?? .distantPast
+        let rDate = historyData[rhs]?.map(\.addedDate).max() ?? .distantPast
+        return lDate > rDate
+      }
+    case .fileLocation:
+      historyDataKeys.sort { $0.localizedStandardCompare($1) == .orderedAscending }
+    }
+
   }
 
   private func addToData(_ entry: PlaybackHistory, forKey key: String) {

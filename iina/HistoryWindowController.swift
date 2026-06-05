@@ -455,8 +455,16 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     sender.state = .on
   }
 
-  @objc func groupByChangedAction(_ sender: NSSegmentedControl) {
-    groupBy = SortOption(rawValue: sender.selectedTag()) ?? .lastPlayed
+  @objc func groupByChangedAction(_ sender: Any) {
+    let tag: Int
+    if let control = sender as? NSSegmentedControl {
+      tag = control.selectedTag()
+    } else if let item = sender as? NSMenuItem {
+      tag = item.tag
+    } else {
+      return
+    }
+    groupBy = SortOption(rawValue: tag) ?? .lastPlayed
     reloadData()
   }
 }
@@ -481,11 +489,19 @@ extension HistoryWindowController: NSToolbarDelegate {
     case Self.groupBy:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
       item.label = "Group By"
-      let segmentedControl = NSSegmentedControl(labels: ["Date", "Folder or Website"], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
+      let segmentedControl = NSSegmentedControl(images: [.sf("calendar.badge.clock")!, .sf("folder")!], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
       segmentedControl.setTag(SortOption.lastPlayed.rawValue, forSegment: 0)
       segmentedControl.setTag(SortOption.fileLocation.rawValue, forSegment: 1)
       segmentedControl.selectedSegment = 0
       item.view = segmentedControl
+      let menu = NSMenuItem(title: "Group by", action: nil, keyEquivalent: "")
+      let submenu = NSMenu()
+      submenu.addItem(withTitle: "Date", action: #selector(groupByChangedAction(_:)))
+      submenu.addItem(withTitle: "Folder and Website", action: #selector(groupByChangedAction(_:)))
+      submenu.items[0].tag = SortOption.lastPlayed.rawValue
+      submenu.items[1].tag = SortOption.fileLocation.rawValue
+      menu.submenu = submenu
+      item.menuFormRepresentation = menu
       return item
 
     case Self.searchField:

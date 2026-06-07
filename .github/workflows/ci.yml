@@ -1,5 +1,8 @@
 name: CI
 
+permissions:
+  contents: read
+
 on:
   push:
       branches: [develop]
@@ -21,6 +24,7 @@ jobs:
         run: ./other/download_libs.sh $DOWNLOAD_LIBS_ARGS
         env:
           DOWNLOAD_LIBS_ARGS: ${{ github.event_name == 'pull_request' && '--skip-plugins' || '' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=NO -scheme iina -configuration Nightly ${{ matrix.deployment_target }}

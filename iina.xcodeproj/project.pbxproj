@@ -328,6 +328,7 @@
 		D1B4E24E2A3AFC9100E36F1D /* MiniPlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */; };
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
 		E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */; };
+		E31E62FB2FD3851A005527B2 /* LayoutValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FA2FD38516005527B2 /* LayoutValue.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
 		E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */; };
 		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
@@ -419,6 +420,7 @@
 		E3A239AC2FC70EC300CE6ACC /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */; };
 		E3A239AE2FC7267300CE6ACC /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239AD2FC7267000CE6ACC /* SideBarView.swift */; };
 		E3A239B12FCB4D0900CE6ACC /* AnimatedTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */; };
+		E3A239C12FCB4D2400CE6ACC /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239C02FCB4D2400CE6ACC /* SidebarController.swift */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
 		E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */; };
@@ -1867,6 +1869,7 @@
 		E1298BD021A517CA00B646AD /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		E301EFD921312AB300BC8588 /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
 		E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginOverlayView.swift; sourceTree = "<group>"; };
+		E31E62FA2FD38516005527B2 /* LayoutValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutValue.swift; sourceTree = "<group>"; };
 		E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistPlaybackProgressView.swift; sourceTree = "<group>"; };
 		E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitleItem.swift; sourceTree = "<group>"; };
 		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
@@ -1988,6 +1991,7 @@
 		E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
 		E3A239AD2FC7267000CE6ACC /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedTabViewController.swift; sourceTree = "<group>"; };
+		E3A239C02FCB4D2400CE6ACC /* SidebarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLWindowController.swift; sourceTree = "<group>"; };
@@ -2462,6 +2466,7 @@
 		84A0BAA31D2FAEA000BC8DA1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E31E62FA2FD38516005527B2 /* LayoutValue.swift */,
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
 				D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */,
@@ -2926,6 +2931,7 @@
 		E3A239AF2FCB4CE800CE6ACC /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				E3A239C02FCB4D2400CE6ACC /* SidebarController.swift */,
 				E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */,
 				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
 				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
@@ -3362,6 +3368,7 @@
 				8476440A1D48CC3D004F6DF5 /* MPVCommand.swift in Sources */,
 				84C8D5911D796F9700D98A0E /* Aspect.swift in Sources */,
 				E3A239AE2FC7267300CE6ACC /* SideBarView.swift in Sources */,
+				E3A239C12FCB4D2400CE6ACC /* SidebarController.swift in Sources */,
 				E3383689202651CF00ABC812 /* PrefOSCToolbarDraggingItemViewController.swift in Sources */,
 				519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */,
 				511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */,
@@ -3459,6 +3466,7 @@
 				843FFD4D1D5DAA01001F3A44 /* RoundedTextFieldCell.swift in Sources */,
 				E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */,
 				E39EA3532E7CFD5B00E0BD32 /* FixedProgressBar.swift in Sources */,
+				E31E62FB2FD3851A005527B2 /* LayoutValue.swift in Sources */,
 				E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */,
 				8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */,
 				E3A239B12FCB4D0900CE6ACC /* AnimatedTabViewController.swift in Sources */,

@@ -19,7 +19,7 @@ class TimePreviewView: TranslucentView {
     textField.usesSingleLineMode = false
     textField.alignment = .center
 
-    super.init(liquidGlassCornerRadius: 12, vevCornerRadius: 8, padding: (4, 4))
+    super.init(liquidGlassCornerRadius: 16, vevCornerRadius: 8, padding: (4, 4))
 
     let container = NSView()
     container.addSubview(textField)

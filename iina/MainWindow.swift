@@ -61,8 +61,10 @@ class MainWindow: NSWindow {
 
 class MainWindowContentView: NSView {
   override func resetCursorRects() {
-    guard let controller = window?.windowController as? MainWindowController, controller.sideBarStatus == .playlist else { return }
-    addCursorRect(controller.playlistDraggingRect, cursor: .resizeLeftRight)
+    guard let controller = window?.windowController as? MainWindowController else { return }
+    for side in [SidebarController.Side.leading, .trailing] where controller.sidebars.sideBar(for: side).status == .playlist {
+      addCursorRect(controller.sidebars.playlistDraggingRect(for: side), cursor: .resizeLeftRight)
+    }
   }
 
   /// Invoked automatically when the view’s geometry changes such that its tracking areas need to be recalculated.

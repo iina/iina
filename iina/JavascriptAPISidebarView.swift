@@ -23,7 +23,7 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
   private lazy var messageHub = JavascriptMessageHub(reference: self)
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
-    player!.mainWindow.pluginView.removePluginTab(withIdentifier: instance.plugin.identifier)
+    player!.mainWindow.sidebars.pluginView.removePluginTab(withIdentifier: instance.plugin.identifier)
   }
 
   func loadFile(_ path: String) {
@@ -48,7 +48,7 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
       return
     }
     let id = pluginInstance.plugin.identifier
-    player!.mainWindow.showPluginSidebar(tab: id, force: true, hideIfAlreadyShown: false)
+    player!.mainWindow.sidebars.showPlugin(tab: id, force: true, hideIfAlreadyShown: false)
   }
 
   func hide() {
@@ -56,7 +56,7 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
       throwError(withMessage: "sidebar.hide called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
-    player!.mainWindow.hideSideBar()
+    player!.mainWindow.sidebars.hide(.plugins)
   }
 
   func postMessage(_ name: String, _ data: JSValue) {

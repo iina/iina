@@ -52,11 +52,6 @@ class AnimatedTabViewController: NSTabViewController {
     super.transition(from: fromVC, to: toVC, options: [],
                      completionHandler: completion)
   }
-
-
-  override func scrollWheel(with event: NSEvent) {
-    print(1)
-  }
 }
 
 

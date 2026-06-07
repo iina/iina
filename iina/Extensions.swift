@@ -994,6 +994,14 @@ extension Timer {
   }
 }
 
+extension NSEvent {
+  func inAnyOf(_ views: [NSView?]) -> Bool {
+    return views.compactMap{ $0 }.contains { view in
+      view.isMousePoint(view.convert(locationInWindow, from: nil), in: view.bounds)
+    }
+  }
+}
+
 #if DEBUG
 extension DispatchQueue {
 

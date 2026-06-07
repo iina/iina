@@ -81,7 +81,6 @@
                 <outlet property="switchHorizontalLine" destination="PyM-xa-vx9" id="LX2-Xa-lH4"/>
                 <outlet property="switchHorizontalLine2" destination="qYi-uQ-6qo" id="doE-zM-QU3"/>
                 <outlet property="tabButtonsStackView" destination="dNi-Ib-2vd" id="cfu-4E-Tls"/>
-                <outlet property="tabView" destination="udA-m2-eJb" id="zL4-73-AVP"/>
                 <outlet property="videoTabScrollView" destination="SHU-hX-9MT" id="2Ju-pD-rhR"/>
                 <outlet property="videoTableView" destination="rsV-qL-l7b" id="A8k-AU-noQ"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>

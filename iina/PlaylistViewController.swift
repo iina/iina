@@ -22,13 +22,18 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     return NSNib.Name("PlaylistViewController")
   }
 
-  weak var mainWindow: MainWindowController! {
-    didSet {
-      self.player = mainWindow.player
-    }
+  init(mainWindow: MainWindowController) {
+    self.mainWindow = mainWindow
+    self.player = mainWindow.player
+    super.init(nibName: nil, bundle: nil)
   }
 
-  weak var player: PlayerCore!
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  unowned let mainWindow: MainWindowController
+  unowned let player: PlayerCore
 
   /** Similar to the one in `QuickSettingViewController`.
    Since IBOutlet is `nil` when the view is not loaded at first time,
@@ -403,7 +408,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       if playableFiles.count != 0 {
         self.player.addToPlaylist(paths: playableFiles.map { $0.path },
                                   at: self.player.info.$playlist.withLock { $0.count })
-        self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
+        self.player.mainWindow.sidebars.playlistView.reloadData(playlist: true, chapters: false)
         self.player.sendOSD(.addToPlaylist(playableFiles.count))
       }
     }
@@ -413,7 +418,7 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     Utility.quickPromptPanel("add_url") { url in
       if Regex.url.matches(url) {
         self.player.appendToPlaylist(url)
-        self.player.mainWindow.playlistView.reloadData(playlist: true, chapters: false)
+        self.player.mainWindow.sidebars.playlistView.reloadData(playlist: true, chapters: false)
         self.player.sendOSD(.addToPlaylist(1))
       } else {
         Utility.showAlert("wrong_url_format")

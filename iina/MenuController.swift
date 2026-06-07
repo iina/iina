@@ -490,10 +490,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     let player = PlayerCore.active
-    let playlistPanelVisible = player.isInMiniPlayer ? player.miniPlayer.isPlaylistVisible : player.mainWindow.sideBarStatus == .playlist
-    let isDisplayingPlaylist = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .playlist
+    let playlistPanelVisible = player.isInMiniPlayer ? player.miniPlayer.isPlaylistVisible : player.mainWindow.sidebars.isShowing(.playlist)
+    let isDisplayingPlaylist = playlistPanelVisible && player.mainWindow.sidebars.playlistView.currentTab == .playlist
     playlistPanel?.title = isDisplayingPlaylist ? Constants.String.hidePlaylistPanel : Constants.String.playlistPanel
-    let isDisplayingChapters = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .chapters
+    let isDisplayingChapters = playlistPanelVisible && player.mainWindow.sidebars.playlistView.currentTab == .chapters
     chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
     pause.title = player.info.state == .paused ? Constants.String.resume : Constants.String.pause
     abLoop.state = player.isABLoopActive ? .on : .off
@@ -506,8 +506,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateVideoMenu() {
     let player = PlayerCore.active
-    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
-          player.mainWindow.quickSettingView.currentTab == .video
+    let isDisplayingSettings = player.mainWindow.sidebars.isShowing(.settings) &&
+          player.mainWindow.sidebars.quickSettingView.currentTab == .video
     quickSettingsVideo?.title = isDisplayingSettings ? Constants.String.hideVideoPanel :
         Constants.String.videoPanel
     let isInFullScreen = player.mainWindow.fsState.isFullscreen
@@ -525,8 +525,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateAudioMenu() {
     let player = PlayerCore.active
-    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
-          player.mainWindow.quickSettingView.currentTab == .audio
+    let isDisplayingSettings = player.mainWindow.sidebars.isShowing(.settings) &&
+          player.mainWindow.sidebars.quickSettingView.currentTab == .audio
     quickSettingsAudio?.title = isDisplayingSettings ? Constants.String.hideAudioPanel :
         Constants.String.audioPanel
     let volFmtString: String
@@ -562,8 +562,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateSubMenu() {
     let player = PlayerCore.active
-    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
-          player.mainWindow.quickSettingView.currentTab == .sub
+    let isDisplayingSettings = player.mainWindow.sidebars.isShowing(.settings) &&
+          player.mainWindow.sidebars.quickSettingView.currentTab == .sub
     quickSettingsSub?.title = isDisplayingSettings ? Constants.String.hideSubtitlesPanel :
         Constants.String.subtitlesPanel
     hideSubtitles.title = player.info.isSubVisible ? Constants.String.hideSubtitles :
@@ -603,7 +603,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   func updatePluginMenu() {
-    let isDisplayingPluginsPanel = PlayerCore.active.mainWindow.sideBarStatus == .plugins
+    let isDisplayingPluginsPanel = PlayerCore.active.mainWindow.sidebars.isShowing(.plugins)
     let managePluginsItem = NSMenuItem(
       title: Constants.String.managePlugins,
       action: #selector(AppDelegate.showPluginPreferences(_:)),

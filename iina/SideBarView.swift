@@ -13,6 +13,10 @@ class SideBarView: TranslucentView {
     self.mainWindow = mainWindow
 
     super.init(liquidGlassCornerRadius: 12, vevCornerRadius: 0, padding: (0, 0))
+
+    LayoutValue.panelCornerRadius.use { [weak self] value in
+      self?.setCornerRadius(liquidGlass: value, vev: 0)
+    }
   }
 
   @MainActor required init?(coder: NSCoder) {

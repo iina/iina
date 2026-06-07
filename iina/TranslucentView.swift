@@ -97,4 +97,23 @@ class TranslucentView: NSView {
 
     appliedStyle = style
   }
+
+  func setCornerRadius(liquidGlass: CGFloat, vev: CGFloat) {
+    liquidGlassCornerRadius = liquidGlass
+    vevCornerRadius = vev
+    switch appliedStyle {
+    case .liquidGlass:
+      if #available(macOS 26.0, *) {
+        let view = container as! NSGlassEffectView
+        view.cornerRadius = liquidGlassCornerRadius
+      } else {
+        fatalError()
+      }
+    case .visualEffect:
+      let view = container as! NSVisualEffectView
+      view.layer?.cornerRadius = vevCornerRadius
+    default:
+      break
+    }
+  }
 }

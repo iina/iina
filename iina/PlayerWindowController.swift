@@ -126,7 +126,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     case PK.playlistShowMetadata.rawValue, PK.playlistShowMetadataInMusicMode.rawValue:
       if player.isPlaylistVisible {
-        player.mainWindow.playlistView.playlistTableView.reloadData()
+        player.mainWindow.sidebars.playlistView.playlistTableView.reloadData()
       }
     case PK.autoSwitchToMusicMode.rawValue:
       player.overrideAutoSwitchToMusicMode = false
@@ -367,8 +367,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func mouseUp(with event: NSEvent) {
-    guard !self.isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
-    
+    guard !event.inAnyOf(mouseActionDisabledViews) else { return }
+
     PluginInputManager.handle(
       input: PluginInputManager.Input.mouse, event: .mouseUp, player: player,
       arguments: mouseEventArgs(event), defaultHandler: { [self] in
@@ -406,8 +406,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func rightMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
-    
+    guard !event.inAnyOf(mouseActionDisabledViews) else { return }
+
     PluginInputManager.handle(
       input: PluginInputManager.Input.rightMouse, event: .mouseUp, player: player,
       arguments: mouseEventArgs(event), defaultHandler: {
@@ -416,7 +416,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func otherMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
+    guard !event.inAnyOf(mouseActionDisabledViews) else { return }
     
     PluginInputManager.handle(
       input: PluginInputManager.Input.otherMouse, event: .mouseUp, player: player,
@@ -705,12 +705,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     default:
       break
     }
-  }
-
-  internal func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
-    return views.filter { $0 != nil }.reduce(false, { (result, view) in
-      return result || view!.isMousePoint(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
-    })
   }
 
   // MARK: - Utils

@@ -194,7 +194,7 @@ class VideoView: NSView {
 
   override func draggingEnded(_ sender: NSDraggingInfo) {
     if playlistShown {
-      player.mainWindow.hideSideBar()
+      player.mainWindow.sidebars.hideAllSideBars()
     }
     playlistShown = false
     lastMousePosition = nil
@@ -424,7 +424,7 @@ extension VideoView {
     let edrEnabled = requestEdrMode()
     let edrAvailable = edrEnabled != false
     if player.info.hdrAvailable != edrAvailable {
-      player.mainWindow.quickSettingView.setHdrAvailability(to: edrAvailable)
+      player.mainWindow.sidebars.quickSettingView.setHdrAvailability(to: edrAvailable)
     }
     if edrEnabled != true { setICCProfile() }
   }

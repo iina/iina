@@ -36,6 +36,16 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     return NSNib.Name("QuickSettingViewController")
   }
 
+  init(mainWindow: MainWindowController) {
+    self.mainWindow = mainWindow
+    self.player = mainWindow.player
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   let sliderSteps = 24.0
 
   enum TabViewType: Equatable {
@@ -85,13 +95,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
    */
   private var pendingSwitchRequest: TabViewType?
 
-  weak var player: PlayerCore!
-
-  weak var mainWindow: MainWindowController! {
-    didSet {
-      self.player = mainWindow.player
-    }
-  }
+  unowned let player: PlayerCore
+  unowned let mainWindow: MainWindowController
 
   var currentTab: TabViewType = .video
 
@@ -382,7 +387,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   @objc func dismissSidebar(_ sender: AnyObject) {
-    mainWindow.hideSideBar(animate: true)
+    mainWindow.sidebars.hide(.settings)
   }
 
   // MARK: - Right to Left Constraints
@@ -751,7 +756,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func cropChangedAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == sender.segmentCount - 1 {
       // User clicked on "Custom...": show custom crop UI
-      mainWindow.hideSideBar {
+      mainWindow.sidebars.hideAllSideBars {
         self.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
       }
     } else {

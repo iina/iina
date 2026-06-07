@@ -20,11 +20,18 @@ class PluginViewController: NSViewController, SidebarViewController {
     return NSNib.Name("PluginViewController")
   }
 
-  weak var mainWindow: MainWindowController! {
-    didSet {
-      self.player = mainWindow.player
-    }
+  init(mainWindow: MainWindowController) {
+    self.mainWindow = mainWindow
+    self.player = mainWindow.player
+    super.init(nibName: nil, bundle: nil)
   }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  unowned let mainWindow: MainWindowController
+  unowned let player: PlayerCore
 
   @IBOutlet weak var pluginTabsView: NSView!
   @IBOutlet weak var pluginTabsViewHeightConstraint: NSLayoutConstraint!
@@ -34,9 +41,6 @@ class PluginViewController: NSViewController, SidebarViewController {
 
   private var pluginTabsStackView: NSStackView!
   private var pluginTabs: [String: SidebarTabView] = [:]
-
-
-  weak var player: PlayerCore!
 
   var currentPluginID: String?
   private var pendingSwitchRequest: String?

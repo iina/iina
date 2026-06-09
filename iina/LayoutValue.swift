@@ -73,5 +73,5 @@ struct LayoutValue {
 
 
 extension LayoutValue {
-  static let panelCornerRadius: LayoutValue = .init(18, 12)
+  static let panelCornerRadius: LayoutValue = .init(0)
 }

@@ -35,8 +35,10 @@ class Titlebar: NSView {
   weak var mainWindow: MainWindowController!
 
   var background: NSVisualEffectView
-  var titlebarOnTopButton: NSButton
   var titleBarBottomBorder: NSBox
+
+  var onTopButton: NSButton
+  var removeBlackBarButton: NSButton
 
   var container: NSStackView!
   var titlebarContainer: NSView!
@@ -61,10 +63,19 @@ class Titlebar: NSView {
     self.titleBarBottomBorder = NSBox()
     titleBarBottomBorder.translatesAutoresizingMaskIntoConstraints = false
 
-    self.titlebarOnTopButton = NSButton(image: .sf("pin")!,
-                                        target: mainWindow,
-                                        action: #selector(MainWindowController.ontopButtonAction))
-    titlebarOnTopButton.translatesAutoresizingMaskIntoConstraints = false
+    self.onTopButton = NSButton(
+      image: .sf("pin")!,
+      target: mainWindow,
+      action: #selector(MainWindowController.ontopButtonAction)
+    )
+    onTopButton.translatesAutoresizingMaskIntoConstraints = false
+
+    self.removeBlackBarButton = NSButton(
+      image: .removeBlackbars,
+      target: mainWindow,
+      action: #selector(MainWindowController.removeVideoViewBlackBars)
+    )
+    removeBlackBarButton.translatesAutoresizingMaskIntoConstraints = false
 
     super.init(frame: .zero)
 
@@ -83,13 +94,17 @@ class Titlebar: NSView {
     titleBarBottomBorder.fillColor = .titleBarBorder
     titleBarBottomBorder.padding(.horizontal, .bottom).size(height: 1)
 
-    titlebarOnTopButton.frame.size.width = 30
-    titlebarOnTopButton.isBordered = false
+    onTopButton.frame.size.width = 30
+    onTopButton.isBordered = false
     updateOnTopIcon()
+
+    removeBlackBarButton.frame.size.width = 30
+    removeBlackBarButton.isBordered = false
+    updateRemoveBlackBarButton()
 
     if useSystemTitle {
       let titlebarAccessoryViewController = NSTitlebarAccessoryViewController()
-      titlebarAccessoryViewController.view = titlebarOnTopButton
+      titlebarAccessoryViewController.view = onTopButton
       titlebarAccessoryViewController.layoutAttribute = .right
       mainWindow.window!.addTitlebarAccessoryViewController(titlebarAccessoryViewController)
     } else {
@@ -142,9 +157,14 @@ class Titlebar: NSView {
       titlebarContainer.addSubview(titleTextField)
       titleTextField.spacing(.leading(2), to: docIcon).center(.y)
 
-      titlebarContainer.addSubview(titlebarOnTopButton)
-      titlebarOnTopButton.padding(.trailing(8)).center(.y, offset: 1)
-      titleTextField.spacing(.trailing(greaterThan: 8), to: titlebarOnTopButton)
+      let accessoryView = NSStackView(views: [removeBlackBarButton, onTopButton])
+      accessoryView.translatesAutoresizingMaskIntoConstraints = false
+      accessoryView.orientation = .horizontal
+      accessoryView.spacing = 8
+
+      titlebarContainer.addSubview(accessoryView)
+      accessoryView.padding(.trailing(8)).center(.y)
+      titleTextField.spacing(.trailing(greaterThan: 8), to: accessoryView)
 
       // osc
 
@@ -182,8 +202,13 @@ class Titlebar: NSView {
 
   func updateOnTopIcon() {
     let isOntop = mainWindow.isOntop
-    titlebarOnTopButton.isHidden = Preference.bool(for: .alwaysShowOnTopIcon) ? false : !isOntop
-    titlebarOnTopButton.image = isOntop ? .sf("pin.fill") : .sf("pin")
+    onTopButton.isHidden = Preference.bool(for: .alwaysShowOnTopIcon) ? false : !isOntop
+    onTopButton.image = isOntop ? .sf("pin.fill") : .sf("pin")
+  }
+
+  func updateRemoveBlackBarButton() {
+    let shouldShow = Preference.unlockWindowAspectRatio
+    removeBlackBarButton.isHidden = !shouldShow
   }
 
   func updateTitle() {
@@ -287,8 +312,6 @@ class Titlebar: NSView {
   }
 
   private func updateMask() {
-    // Bail out before init finishes wiring up the titlebar constraints (which run in lockstep
-    // with the sidebar slide animations that drive the mask).
     guard titleLeadingConstraint != nil, trailingConstraint != nil else { return }
 
     let mask = CAGradientLayer()

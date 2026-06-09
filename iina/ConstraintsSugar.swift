@@ -192,6 +192,21 @@ extension NSView {
   }
 
   @discardableResult
+  func size(width: LayoutValue? = nil, height: LayoutValue? = nil) -> Self {
+    if let width = width {
+      let constraint = self.widthAnchor.constraint(equalToConstant: 0)
+      width.use { [weak constraint] in constraint?.constant = $0 }
+      constraint.isActive = true
+    }
+    if let height = height {
+      let constraint = self.heightAnchor.constraint(equalToConstant: 0)
+      height.use { [weak constraint] in constraint?.constant = $0 }
+      constraint.isActive = true
+    }
+    return self
+  }
+
+  @discardableResult
   func center(_ align: OrientationOptions = [.x, .y], with aView: NSView? = nil, offset: CGFloat = 0) -> Self {
     let aView = aView ?? self.superview!
     if align.contains(.x) {

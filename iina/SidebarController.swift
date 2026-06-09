@@ -21,18 +21,27 @@ protocol SidebarViewController {
 /// Owns the two side panels (left/right), the view controllers that can be embedded in them, and
 /// all animation, hit-testing, and resize logic. `MainWindowController` delegates mouse events
 /// through `handleMouseDown(_:)` / `handleMouseDragged(_:)` / `handleMouseUp(_:)`.
-class SidebarController {
+class SidebarController: NSObject {
   /// Side of the window where a sidebar is attached.
   enum Side {
     case leading, trailing
   }
 
   /// What's currently embedded in a sidebar panel.
-  enum ViewType {
+  enum ViewType: CaseIterable {
     case hidden
     case settings
     case playlist
     case plugins
+
+    var prefKey: Preference.Key? {
+      switch self {
+      case .settings: .sidebarSettingsDisplayAtLeading
+      case .playlist: .sidebarPlaylistDisplayAtLeading
+      case .plugins: .sidebarPluginsDisplayAtLeading
+      case .hidden: nil
+      }
+    }
 
     var width: CGFloat {
       switch self {
@@ -65,14 +74,8 @@ class SidebarController {
       self.view = view
     }
 
-    /// Inset from the window edge when shown. Liquid Glass insets the panel slightly so its rounded
-    /// corners are visible; the legacy style sits flush against the edge.
     var visibleEdgeMargin: CGFloat {
-      if #available(macOS 26.0, *), view.style == .liquidGlass {
-        Preference.bool(for: .compactUI) ? 4 : 5
-      } else {
-        0
-      }
+      0
     }
   }
 
@@ -80,6 +83,11 @@ class SidebarController {
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
+    super.init()
+
+    ViewType.allCases.compactMap { $0.prefKey }.forEach {
+      UserDefaults.standard.addObserver(self, forKeyPath: $0.rawValue, options: .new, context: nil)
+    }
   }
 
   lazy var leadingSidebar: Panel = Panel(side: .leading, view: SideBarView(mainWindow: mainWindow))
@@ -132,6 +140,22 @@ class SidebarController {
 
   // MARK: - Queries
 
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath else { return }
+    ViewType.allCases.forEach { viweType in
+      if viweType.prefKey?.rawValue == keyPath, isShowing(viweType) {
+        hideAllSideBars(animate: false) {
+          switch viweType {
+          case .settings: self.showSettings()
+          case .playlist: self.showPlaylist()
+          case .plugins: self.showPlugin(tab: nil)
+          default: break
+          }
+        }
+      }
+    }
+  }
+
   func sideBar(for side: Side) -> Panel {
     side == .leading ? leadingSidebar : trailingSidebar
   }
@@ -157,7 +181,14 @@ class SidebarController {
 
   private func side(for type: ViewType) -> Side {
     switch type {
-    case .playlist, .settings, .plugins, .hidden: return .trailing
+    case .playlist:
+      return Preference.bool(for: .sidebarPlaylistDisplayAtLeading) ? .leading : .trailing
+    case .settings:
+      return Preference.bool(for: .sidebarSettingsDisplayAtLeading) ? .leading : .trailing
+    case .plugins:
+      return Preference.bool(for: .sidebarPluginsDisplayAtLeading) ? .leading : .trailing
+    default:
+      return .trailing
     }
   }
 
@@ -203,7 +234,7 @@ class SidebarController {
       return true
     }
     let isSingleClick = event.clickCount <= 1 && mainWindow.videoView.lastEventId == event.eventNumber
-    if isSingleClick && isAnyVisible {
+    if isSingleClick && isAnyVisible && Preference.bool(for: .edgeToEdgeVideo) {
       hideAllSideBars()
       return true
     }

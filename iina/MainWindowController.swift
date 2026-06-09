@@ -348,6 +348,7 @@ class MainWindowController: PlayerWindowController {
       setupVideoViewConstraints()
       fallthrough
     case PK.unlockWindowAspectRatio.rawValue:
+      titleBarView.updateRemoveBlackBarButton()
       handleVideoSizeChange(keepWindowSize: true)
     case PK.compactUI.rawValue:
       setWindowToolbar()
@@ -508,8 +509,9 @@ class MainWindowController: PlayerWindowController {
     if #available(macOS 26.0, *) {
       osdView.setStyle(.liquidGlass)
     }
-    osdView.padding(.leading(8), .trailing(greaterThan: 8), .bottom(greaterThan: 8))
+    osdView.padding(.trailing(greaterThan: 8), .bottom(greaterThan: 8))
       .spacing(.top(8), to: titleBarView)
+      .spacing(.leading(8), to: sidebars.leadingSidebar.view)
 
     // additional info view
 
@@ -548,6 +550,7 @@ class MainWindowController: PlayerWindowController {
     // video view
     addVideoViewToWindow()
     player.initVideo()
+    videoView.postsFrameChangedNotifications = true
 
     // fade-able views
 
@@ -575,6 +578,16 @@ class MainWindowController: PlayerWindowController {
     }
 
     // add notification observers
+
+    addObserver(to: .default, forName: NSView.frameDidChangeNotification, object: videoView) { [unowned self] _ in
+      if case .animating(_, _, _) = fsState {
+        forceDraw("window resized during animated enter or exit full screen")
+      } else if !videoView.videoLayer.inLiveResize {
+        forceDraw("window resized")
+      } else if Preference.unlockWindowAspectRatio && videoView.isIdle {
+        forceDraw("window resized with aspect ratio unlocked and paused")
+      }
+    }
 
     addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
       self.sidebars.quickSettingView.reload()
@@ -706,6 +719,21 @@ class MainWindowController: PlayerWindowController {
       videoViewConstraints[.trailing] = videoView.trailingAnchor.constraint(equalTo: sidebars.trailingSidebar.view.leadingAnchor)
     }
     layoutSides.forEach { videoViewConstraints[$0]?.isActive = true }
+  }
+
+  @objc func removeVideoViewBlackBars() {
+    guard let window, Preference.unlockWindowAspectRatio else { return }
+
+    let currentSize = videoView.frame.size
+    let videoSize = player.videoSizeForDisplay
+    let newSize = currentSize.crop(withAspect: CGFloat(videoSize.0) / CGFloat(videoSize.1))
+    let dw = newSize.width - currentSize.width
+    let dh = newSize.height - currentSize.height
+    let currWindowSize = window.frame.size
+    let newWindowSize = NSSize(width: currWindowSize.width + dw, height: currWindowSize.height + dh)
+    let newFrame = window.frame.centeredResize(to: newWindowSize)
+
+    window.setFrame(newFrame, display: true, animate: true)
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
@@ -1722,16 +1750,6 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
-
-    if case .animating(_, _, _) = fsState {
-      forceDraw("window resized during animated enter or exit full screen")
-    } else if !videoView.videoLayer.inLiveResize {
-      forceDraw("window resized")
-    }
-
-    if Preference.unlockWindowAspectRatio && videoView.isIdle {
-      forceDraw("window resized with aspect ratio unlocked and paused")
-    }
 
     // update control bar position
     if oscPosition == .floating {

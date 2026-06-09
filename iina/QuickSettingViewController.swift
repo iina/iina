@@ -15,6 +15,12 @@ fileprivate let eqRenameMenuItemTag = -2
 fileprivate let eqSaveMenuItemTag = -3
 fileprivate let eqCustomMenuItemTag = 1000
 
+
+fileprivate extension LayoutValue {
+  static let tabHeight = LayoutValue(64, 56)
+}
+
+
 /// Formatter for `customSpeedTextField`.
 ///
 /// Configure the number formatter in code instead of the XIB so it is easier to follow.
@@ -236,6 +242,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     tabViewController.view.padding(.bottom, .horizontal)
       .spacing(.top(1), to: tabButtonsStackView)
+    tabButtonsStackView.size(height: .tabHeight)
 
     tabViewController.tabView.padding(.all)
     tabViewController.tabView.wantsLayer = true

@@ -8,8 +8,10 @@
 
 
 fileprivate extension LayoutValue {
-  static let sidebarMargin = LayoutValue(18, 12)
-  static let stackViewSpacing = LayoutValue(16, 10)
+  static let sidebarMargin = LayoutValue(18, 14)
+  static let stackViewSpacing = LayoutValue(20, 16)
+  static let containerPadding = LayoutValue(12, 10)
+  static let stackViewSubListSpacing = LayoutValue(12, 8)
 }
 
 
@@ -17,8 +19,11 @@ class SidebarLayoutPane: SidebarScrollView {
   let ui = UIHelper()
   weak var player: PlayerCore!
 
+  private var videoSettingsStack: NSStackView!
   private var lockAspectSwitch: NSSwitch!
+  private var lockWindowAspectStack: NSStackView!
   private var oscLayoutSelector: OSCLayoutSelector!
+  private var removeBlackBarBtn: SideBarButton!
 
   init(player: PlayerCore) {
     self.player = player
@@ -35,21 +40,44 @@ class SidebarLayoutPane: SidebarScrollView {
       ui.toggleButton(bindTo: .compactUI, isSmall: true)
     ))
 
-    stack.addArrangedSubview(ui.hStack(
-      ui.image("lock.rectangle", size: 20),
-      ui.label("Lock Window Aspect Ratio"),
-      ui.flexibleSpace(),
-      createLockAspectSwitch()
-    ))
+//    stack.addArrangedSubview(createSectionTitle("Video"))
 
-    stack.addArrangedSubview(createOSCSettingsView())
+    videoSettingsStack = ui.vStack(spacing: .stackViewSubListSpacing)
 
-    stack.addArrangedSubview(ui.hStack(
+    videoSettingsStack.addArrangedSubview(ui.hStack(
       ui.image("custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle", size: 20),
       ui.label("Edge-to-Edge Video"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .edgeToEdgeVideo, isSmall: true)
     ))
+
+    self.lockWindowAspectStack = ui.hStack(
+      ui.image("lock.rectangle", size: 20),
+      ui.label("Lock Window Aspect Ratio"),
+      ui.flexibleSpace(),
+      ui.toggleButton(bindTo: .unlockWindowAspectRatio, isSmall: true, inverted: true)
+    )
+    videoSettingsStack.addArrangedSubview(lockWindowAspectStack)
+
+    self.removeBlackBarBtn = SideBarButton("Remove black bars", image: .removeBlackbars)
+    removeBlackBarBtn.target = self
+    removeBlackBarBtn.action = #selector(removeBlackBars)
+    removeBlackBarBtn.size(height: 32)
+    videoSettingsStack.addArrangedSubview(removeBlackBarBtn)
+    removeBlackBarBtn.padding(.horizontal)
+
+    updateVideoSettingsStack()
+
+    stack.addArrangedSubview(Container(videoSettingsStack) {
+      $0.padding(.horizontal(.containerPadding), .vertical(.containerPadding))
+    })
+
+    stack.addArrangedSubview(createOSCSettingsView())
+
+    stack.addArrangedSubview(createSidebarSettingsView())
+
+    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.edgeToEdgeVideo.rawValue, options: .new, context: nil)
+    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.unlockWindowAspectRatio.rawValue, options: .new, context: nil)
 
     documentView = FlippedView()
     documentView!.translatesAutoresizingMaskIntoConstraints = false
@@ -62,58 +90,177 @@ class SidebarLayoutPane: SidebarScrollView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    updateAspectSwitch()
-  }
-
-  private func createLockAspectSwitch() -> NSSwitch {
-    self.lockAspectSwitch = NSSwitch()
-    lockAspectSwitch.controlSize = .small
-    lockAspectSwitch.target = self
-    lockAspectSwitch.action = #selector(lockAspectSwitchAction(_:))
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.edgeToEdgeVideo.rawValue, options: .new, context: nil)
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.unlockWindowAspectRatio.rawValue, options: .new, context: nil)
-    updateAspectSwitch()
-    return lockAspectSwitch
-  }
-
-  @objc private func lockAspectSwitchAction(_ sender: NSSwitch) {
-    Preference.set(sender.state == .off, for: .unlockWindowAspectRatio)
-  }
-
-  private func updateAspectSwitch() {
+  func updateVideoSettingsStack() {
     if Preference.bool(for: .edgeToEdgeVideo) {
-      lockAspectSwitch.isEnabled = true
-      lockAspectSwitch.state = Preference.bool(for: .unlockWindowAspectRatio) ? .off : .on
+      videoSettingsStack.setVisibilityPriority(.mustHold, for: lockWindowAspectStack)
     } else {
-      lockAspectSwitch.isEnabled = false
-      lockAspectSwitch.state = .off
+      videoSettingsStack.setVisibilityPriority(.notVisible, for: lockWindowAspectStack)
     }
+    // remove black bar button
+    if Preference.unlockWindowAspectRatio {
+      videoSettingsStack.setVisibilityPriority(.mustHold, for: removeBlackBarBtn)
+    } else {
+      videoSettingsStack.setVisibilityPriority(.notVisible, for: removeBlackBarBtn)
+    }
+  }
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    updateVideoSettingsStack()
+  }
+
+  @objc private func removeBlackBars(_ sender: AnyObject) {
+    player.mainWindow.removeVideoViewBlackBars()
   }
 
   private func createOSCSettingsView() -> NSView {
     let container = NSView()
-    container.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    container.setContentHuggingPriority(.init(200), for: .horizontal)
 
     self.oscLayoutSelector = OSCLayoutSelector()
 
-    let label = ui.label("On Screen Controller", font: .boldSystemFont(ofSize: 13), isSecondary: true)
+    let label = createSectionTitle("On Screen Controller")
     let stack = ui.hStack(oscLayoutSelector.views)
+
 
     container.addSubview(label)
     container.addSubview(stack)
-    label.padding(.top(8), .leading, .trailing(greaterThan: 0))
+    label.padding(.top, .leading, .trailing(greaterThan: 0))
     stack.padding(.bottom(8), .horizontal(greaterThan: 0)).center(.x)
       .spacing(.top(.stackViewSpacing), to: label)
 
     return container
   }
 
+  private func createSectionTitle(_ text: String) -> NSView {
+    func separator() -> NSBox {
+      let box = NSBox()
+      box.boxType = .separator
+      box.size(height: 1)
+      return box
+    }
+
+    let a = separator()
+    let b = separator()
+
+    let label = ui.hStack(
+      a,
+      ui.label(text, font: .boldSystemFont(ofSize: 12), isSecondary: true),
+      b,
+    )
+    a.widthAnchor.constraint(equalTo: b.widthAnchor).isActive = true
+    return label
+  }
+
   private func createSidebarSettingsView() -> NSView {
     let container = NSView()
-    container.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+    container.setContentHuggingPriority(.init(200), for: .horizontal)
+
+    let label = createSectionTitle("Sidebar Position")
+    let config = [
+      ("gearshape.fill", "Settings", Preference.Key.sidebarSettingsDisplayAtLeading),
+      ("list.bullet.rectangle.fill", "Playlist and Chapters", Preference.Key.sidebarPlaylistDisplayAtLeading),
+      ("puzzlepiece.extension.fill", "Plugins", Preference.Key.sidebarPluginsDisplayAtLeading),
+    ]
+    let stack = ui.vStack(
+      spacing: .stackViewSubListSpacing,
+      config.map { img, text, key in
+        ui.hStack(
+          ui.image(img),
+          ui.label(text),
+          ui.flexibleSpace(),
+          SidebarPosSwitch(key),
+        )
+      }
+    )
+
+    container.addSubview(label)
+    container.addSubview(stack)
+    label.padding(.top, .leading, .trailing(greaterThan: 0))
+    stack.padding(.bottom(8), .horizontal)
+      .spacing(.top(.stackViewSpacing), to: label)
 
     return container
+  }
+}
+
+
+fileprivate class SideBarButton: NSView {
+  weak var target: AnyObject?
+  var action: Selector?
+
+  var isHighlighted = false {
+    didSet {
+      (layer as? CAGradientLayer)?.colors = [
+        NSColor.gray.withAlphaComponent(isHighlighted ? 0.15 : 0.1).cgColor,
+        NSColor.gray.withAlphaComponent(isHighlighted ? 0.2 : 0.15).cgColor
+      ]
+    }
+  }
+
+  init(_ text: String, image: NSImage? = nil) {
+    super.init(frame: .zero)
+    translatesAutoresizingMaskIntoConstraints = false
+    wantsLayer = true
+    let background = CAGradientLayer()
+    background.borderColor = NSColor.separatorColor.cgColor
+    background.borderWidth = 1
+    background.cornerRadius = 8
+    background.colors = [
+      NSColor.gray.withAlphaComponent(0.1).cgColor,
+      NSColor.gray.withAlphaComponent(0.15).cgColor
+    ]
+    background.locations = [0, 1]
+    background.startPoint = .zero
+    background.endPoint = .init(x: 0, y: 1)
+    layer = background
+
+    let container = NSStackView()
+    container.translatesAutoresizingMaskIntoConstraints = false
+    container.orientation = .horizontal
+    container.spacing = 8
+    container.alignment = .firstBaseline
+    if let image {
+      let imageView = NSImageView(image: image)
+      container.addArrangedSubview(imageView)
+    }
+    let label = NSTextField(labelWithString: text)
+    container.addArrangedSubview(label)
+
+    addSubview(container)
+    container.center()
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    isHighlighted = true
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    isHighlighted = false
+    let pt = convert(event.locationInWindow, from: nil)
+    guard bounds.contains(pt), let target, let action else { return }
+    NSApp.sendAction(action, to: target, from: self)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+
+fileprivate class Container: NSBox {
+  init(_ view: NSView, _ block: (NSView) -> Void) {
+    super.init(frame: .zero)
+    contentView = view
+    translatesAutoresizingMaskIntoConstraints = false
+    boxType = .custom
+    borderColor = .separatorColor
+    cornerRadius = 8
+    fillColor = .gray.withAlphaComponent(0.1)
+    block(view)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }
 
@@ -191,5 +338,86 @@ fileprivate class OSCLayoutSelector: NSBox {
     item.contentView = content
     content.padding(.all(12))
     return item
+  }
+}
+
+
+fileprivate class SidebarPosSwitch: NSView {
+  private let key: Preference.Key
+  private let indicator: NSView
+  private let imageView: NSImageView
+  private var indicatorConstraint: NSLayoutConstraint!
+
+  var isLeading: Bool {
+    didSet {
+      updateIndicator()
+    }
+  }
+
+  var leadingConstant: CGFloat {
+    isLeading ? 2 : 16
+  }
+
+  var indicatorImage: String {
+    isLeading ? "chevron.forward" : "chevron.backward"
+  }
+
+  init(_ key: Preference.Key) {
+    self.key = key
+    self.indicator = NSView()
+    indicator.translatesAutoresizingMaskIntoConstraints = false
+    self.imageView = NSImageView()
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    self.isLeading = Preference.bool(for: key)
+
+    super.init(frame: .zero)
+
+    UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+
+    translatesAutoresizingMaskIntoConstraints = false
+    wantsLayer = true
+    layer!.cornerRadius = 4
+    layer!.backgroundColor = NSColor.controlColor.cgColor
+    size(width: 30, height: 18)
+
+    addSubview(indicator)
+    indicator.shadow = NSShadow()
+    indicator.shadow!.shadowBlurRadius = 2
+    indicator.shadow!.shadowColor = .gray
+    indicator.wantsLayer = true
+    indicator.layer!.cornerRadius = 3
+    indicator.layer!.backgroundColor = NSColor.white.cgColor
+    indicator.padding(.top(2), .bottom(2)).size(width: 12)
+    indicatorConstraint = indicator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingConstant)
+    indicatorConstraint.isActive = true
+
+    indicator.addSubview(imageView)
+    imageView.image = .sf(indicatorImage)
+    imageView.imageScaling = .scaleProportionallyDown
+    imageView.contentTintColor = .gray
+    imageView.padding(.all(2))
+  }
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard keyPath == key.rawValue else { return }
+    isLeading = Preference.bool(for: key)
+  }
+
+  private func updateIndicator() {
+    NSAnimationContext.runAnimationGroup { context in
+      context.allowsImplicitAnimation = true
+      self.indicatorConstraint.animator().constant = leadingConstant
+      self.imageView.image = .sf(indicatorImage)
+    }
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    let pt = convert(event.locationInWindow, from: nil)
+    guard bounds.contains(pt) else { return }
+    Preference.set(!isLeading, for: key)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }

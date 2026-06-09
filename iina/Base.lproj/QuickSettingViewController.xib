@@ -94,7 +94,7 @@
                 <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="200" verticalStackHuggingPriority="250" horizontalHuggingPriority="200" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNi-Ib-2vd" userLabel="TabButtons Stack View">
                     <rect key="frame" x="8" y="211" width="344" height="56"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="56" identifier="tabHeightConstraint" id="OsF-5u-ZcS"/>
+                        <constraint firstAttribute="height" constant="56" placeholder="YES" identifier="tabHeightConstraint" id="OsF-5u-ZcS"/>
                     </constraints>
                 </stackView>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="L78-cf-BxB" userLabel="BelowTabButtons Horizontal Line">
@@ -1507,7 +1507,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u9C-Fk-Aag">
-                                        <rect key="frame" x="20" y="179" width="268" height="24"/>
+                                        <rect key="frame" x="20" y="179" width="266" height="24"/>
                                         <popUpButtonCell key="cell" type="push" title="Save the current EQ as a preset…" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" tag="-3" imageScaling="proportionallyDown" inset="2" autoenablesItems="NO" altersStateOfSelectedItem="NO" selectedItem="sE0-LN-T8i" id="WKa-AJ-OEZ">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="message"/>

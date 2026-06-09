@@ -167,6 +167,10 @@ struct Preference {
     static let compactUI = Key("compactUI")
     static let edgeToEdgeVideo = Key("edgeToEdgeVideo")
 
+    static let sidebarSettingsDisplayAtLeading = Key("sidebarSettingsDisplayAtLeading")
+    static let sidebarPlaylistDisplayAtLeading = Key("sidebarPlaylistDisplayAtLeading")
+    static let sidebarPluginsDisplayAtLeading = Key("sidebarPluginsDisplayAtLeading")
+
     // Codec
 
     static let videoThreads = Key("videoThreads")
@@ -1045,6 +1049,10 @@ struct Preference {
     .unlockWindowAspectRatio: false,
     .compactUI: false,
     .edgeToEdgeVideo: true,
+
+    .sidebarSettingsDisplayAtLeading: false,
+    .sidebarPlaylistDisplayAtLeading: false,
+    .sidebarPluginsDisplayAtLeading: false,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,

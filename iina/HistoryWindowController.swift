@@ -391,21 +391,16 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   func makeContextMenu() -> NSMenu {
     let playItem = NSMenuItem(title: "Play", action: #selector(playAction(_:)), keyEquivalent: "\r")
     playItem.keyEquivalentModifierMask = []
-    playItem.image = .sf("play")
     playItem.tag = MenuItemTagPlay
     let playInNewWindowItem = NSMenuItem(title: "Play in New Window", action: #selector(playInNewWindowAction(_:)), keyEquivalent: "\r")
-    playInNewWindowItem.image = .sf("play.square")
     playInNewWindowItem.tag = MenuItemTagPlayInNewWindow
 
     let showInFinderItem = NSMenuItem(title: "Show in Finder", action: #selector(showInFinderAction(_:)), keyEquivalent: "l")
-    showInFinderItem.image = .sf("finder")
     showInFinderItem.tag = MenuItemTagShowInFinder
     let deleteItem = NSMenuItem(title: "Delete…", action: #selector(deleteAction(_:)), keyEquivalent: "\u{8}")
     deleteItem.keyEquivalentModifierMask = []
-    deleteItem.image = .sf("delete.backward")
     deleteItem.tag = MenuItemTagDelete
     let deleteFileItem = NSMenuItem(title: "Move to Trash…", action: #selector(deleteFileAction(_:)), keyEquivalent: "\u{8}")
-    deleteFileItem.image = .sf("trash")
     deleteFileItem.tag = MenuItemTagDeleteFile
 
     let menu = NSMenu()
@@ -528,9 +523,7 @@ extension HistoryWindowController: NSToolbarDelegate {
       submenu.addItem(withTitle: "Date", action: #selector(groupByChangedAction(_:)))
       submenu.addItem(withTitle: "Folder and Website", action: #selector(groupByChangedAction(_:)))
       submenu.items[0].tag = SortOption.lastPlayed.rawValue
-      submenu.items[0].image = .sf("calendar.badge.clock")
       submenu.items[1].tag = SortOption.fileLocation.rawValue
-      submenu.items[1].image = .sf("folder")
       menu.submenu = submenu
       item.menuFormRepresentation = menu
       return item
@@ -562,12 +555,10 @@ extension HistoryWindowController: NSToolbarDelegate {
     let filenameItem = NSMenuItem(title: "Filename", action: #selector(searchInOption(_:)), keyEquivalent: "")
     filenameItem.tag = MenuItemTagSearchFilename
     filenameItem.target = self
-    filenameItem.image = .sf("document")
 
     let fullPathItem = NSMenuItem(title: "Full Path", action: #selector(searchInOption(_:)), keyEquivalent: "")
     fullPathItem.tag = MenuItemTagSearchFullPath
     fullPathItem.target = self
-    fullPathItem.image = .sf("folder")
 
     (searchOption == .filename ? filenameItem : fullPathItem).state = .on
 

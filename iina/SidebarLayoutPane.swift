@@ -342,79 +342,31 @@ fileprivate class OSCLayoutSelector: NSBox {
 }
 
 
-fileprivate class SidebarPosSwitch: NSView {
+fileprivate class SidebarPosSwitch: NSSegmentedControl {
   private let key: Preference.Key
-  private let indicator: NSView
-  private let imageView: NSImageView
-  private var indicatorConstraint: NSLayoutConstraint!
-
-  var isLeading: Bool {
-    didSet {
-      updateIndicator()
-    }
-  }
-
-  var leadingConstant: CGFloat {
-    isLeading ? 2 : 16
-  }
-
-  var indicatorImage: String {
-    isLeading ? "chevron.forward" : "chevron.backward"
-  }
 
   init(_ key: Preference.Key) {
     self.key = key
-    self.indicator = NSView()
-    indicator.translatesAutoresizingMaskIntoConstraints = false
-    self.imageView = NSImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    self.isLeading = Preference.bool(for: key)
-
     super.init(frame: .zero)
 
-    UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    segmentCount = 2
+    setTag(0, forSegment: 0)
+    setTag(1, forSegment: 1)
+    setImage(.sf("sidebar.leading"), forSegment: 0)
+    setImage(.sf("sidebar.trailing"), forSegment: 1)
 
-    translatesAutoresizingMaskIntoConstraints = false
-    wantsLayer = true
-    layer!.cornerRadius = 4
-    layer!.backgroundColor = NSColor.controlColor.cgColor
-    size(width: 30, height: 18)
-
-    addSubview(indicator)
-    indicator.shadow = NSShadow()
-    indicator.shadow!.shadowBlurRadius = 2
-    indicator.shadow!.shadowColor = .gray
-    indicator.wantsLayer = true
-    indicator.layer!.cornerRadius = 3
-    indicator.layer!.backgroundColor = NSColor.white.cgColor
-    indicator.padding(.top(2), .bottom(2)).size(width: 12)
-    indicatorConstraint = indicator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingConstant)
-    indicatorConstraint.isActive = true
-
-    indicator.addSubview(imageView)
-    imageView.image = .sf(indicatorImage)
-    imageView.imageScaling = .scaleProportionallyDown
-    imageView.contentTintColor = .gray
-    imageView.padding(.all(2))
+    UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .initial, context: nil)
   }
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard keyPath == key.rawValue else { return }
-    isLeading = Preference.bool(for: key)
+    selectSegment(withTag: Preference.bool(for: key) ? 0 : 1)
   }
 
-  private func updateIndicator() {
-    NSAnimationContext.runAnimationGroup { context in
-      context.allowsImplicitAnimation = true
-      self.indicatorConstraint.animator().constant = leadingConstant
-      self.imageView.image = .sf(indicatorImage)
-    }
-  }
-
-  override func mouseUp(with event: NSEvent) {
-    let pt = convert(event.locationInWindow, from: nil)
-    guard bounds.contains(pt) else { return }
-    Preference.set(!isLeading, for: key)
+  override func sendAction(_ action: Selector?, to target: Any?) -> Bool {
+    let isLeading = (selectedTag() == 0)
+    Preference.set(isLeading, for: key)
+    return true
   }
 
   required init?(coder: NSCoder) {

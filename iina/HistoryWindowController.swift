@@ -15,6 +15,8 @@ fileprivate let MenuItemTagSearchFilename = 200
 fileprivate let MenuItemTagSearchFullPath = 201
 fileprivate let MenuItemTagPlay = 300
 fileprivate let MenuItemTagPlayInNewWindow = 301
+fileprivate let MenuItemTagExpandAll = 400
+fileprivate let MenuItemTagCollapseAll = 401
 
 fileprivate extension NSUserInterfaceItemIdentifier {
   static let time = NSUserInterfaceItemIdentifier("Time")
@@ -60,6 +62,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var searchOption: SearchOption = .fullPath
 
   private var searchToolbarItem: NSSearchToolbarItem?
+  private var expandCollapseControl: NSSegmentedControl?
 
   private var historyData: [String: [PlaybackHistory]] = [:]
   private var historyDataKeys: [String] = []
@@ -86,6 +89,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
     NotificationCenter.default.addObserver(forName: .iinaHistoryUpdated, object: nil, queue: .main) { [unowned self] _ in
       self.reloadData()
+    }
+
+    [NSOutlineView.itemDidExpandNotification, NSOutlineView.itemDidCollapseNotification].forEach {
+      NotificationCenter.default.addObserver(forName: $0, object: outlineView, queue: .main) { [unowned self] _ in
+        self.updateExpandCollapseSegmentState()
+      }
     }
 
     scrollView.documentView = outlineView
@@ -131,6 +140,14 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     adjustTimeColumnMinWidth()
     outlineView.reloadData()
     outlineView.expandItem(nil, expandChildren: true)
+    updateExpandCollapseSegmentState()
+  }
+
+  private func updateExpandCollapseSegmentState() {
+    guard let control = expandCollapseControl else { return }
+    // Segment 0 = Expand All, Segment 1 = Collapse All
+    control.setEnabled(hasCollapsedGroup, forSegment: 0)
+    control.setEnabled(hasExpandedGroup, forSegment: 1)
   }
 
   // Change min width of "Played at" column
@@ -298,11 +315,14 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
           cell.filename.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
           cell.filename.textColor = fileExists ? .secondaryLabelColor : .disabledControlTextColor
           cell.textField?.isHidden = true
+          cell.title.isHidden = false
+          cell.filename.isHidden = false
         } else {
           cell.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
           cell.textField?.textColor = fileExists ? .secondaryLabelColor : .disabledControlTextColor
           cell.title.isHidden = true
           cell.filename.isHidden = true
+          cell.textField?.isHidden = false
         }
         if isFile {
           cell.docImage.image = Utility.icon(for: entry.url)
@@ -435,10 +455,36 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       return !selectedFiles.isEmpty
     case MenuItemTagDelete, MenuItemTagPlay, MenuItemTagPlayInNewWindow:
       return !selectedEntries.isEmpty
+    case MenuItemTagExpandAll:
+      return hasCollapsedGroup
+    case MenuItemTagCollapseAll:
+      return hasExpandedGroup
     default:
       break
     }
     return menuItem.isEnabled
+  }
+
+  private var hasExpandedGroup: Bool {
+    let count = outlineView.numberOfChildren(ofItem: nil)
+    for i in 0..<count {
+      let item = outlineView.child(i, ofItem: nil)
+      if outlineView.isExpandable(item) && outlineView.isItemExpanded(item) {
+        return true
+      }
+    }
+    return false
+  }
+
+  private var hasCollapsedGroup: Bool {
+    let count = outlineView.numberOfChildren(ofItem: nil)
+    for i in 0..<count {
+      let item = outlineView.child(i, ofItem: nil)
+      if outlineView.isExpandable(item) && !outlineView.isItemExpanded(item) {
+        return true
+      }
+    }
+    return false
   }
 
   // MARK: - Action
@@ -480,6 +526,23 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     sender.state = .on
   }
 
+  @objc func expandCollapseAction(_ sender: Any) {
+    let shouldExpand: Bool
+    if let control = sender as? NSSegmentedControl {
+      shouldExpand = control.selectedSegment == 0
+    } else if let item = sender as? NSMenuItem {
+      shouldExpand = item.tag == MenuItemTagExpandAll
+    } else {
+      return
+    }
+    if shouldExpand {
+      outlineView.expandItem(nil, expandChildren: true)
+    } else {
+      outlineView.collapseItem(nil, collapseChildren: true)
+    }
+    updateExpandCollapseSegmentState()
+  }
+
   @objc func groupByChangedAction(_ sender: Any) {
     let tag: Int
     if let control = sender as? NSSegmentedControl {
@@ -499,8 +562,9 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 extension HistoryWindowController: NSToolbarDelegate {
   private static let clear = NSToolbarItem.Identifier("Clear")
   private static let groupBy = NSToolbarItem.Identifier("GrouopBy")
+  private static let expandCollapse = NSToolbarItem.Identifier("ExpandCollapse")
   private static let searchField = NSToolbarItem.Identifier("SearchField")
-  private static let toolbarItems = [groupBy, .space, clear, .space, searchField]
+  private static let toolbarItems = [groupBy, expandCollapse, .space, clear, .space, searchField]
 
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     Self.toolbarItems
@@ -537,6 +601,31 @@ extension HistoryWindowController: NSToolbarDelegate {
       submenu.items[1].tag = SortOption.fileLocation.rawValue
       menu.submenu = submenu
       item.menuFormRepresentation = menu
+      return item
+
+    case Self.expandCollapse:
+      let item = NSToolbarItem(itemIdentifier: itemIdentifier)
+      item.label = "Expand/Collapse"
+      let segmentedControl = NSSegmentedControl(
+        images: [.sf("chevron.down.circle")!, .sf("chevron.up.circle")!],
+        trackingMode: .momentary,
+        target: self,
+        action: #selector(expandCollapseAction(_:))
+      )
+      segmentedControl.setToolTip("Expand All", forSegment: 0)
+      segmentedControl.setToolTip("Collapse All", forSegment: 1)
+      item.view = segmentedControl
+      self.expandCollapseControl = segmentedControl
+      let menu = NSMenuItem(title: "Expand/Collapse", action: nil, keyEquivalent: "")
+      let submenu = NSMenu()
+      let expandItem = NSMenuItem(title: "Expand All", action: #selector(expandCollapseAction(_:)), keyEquivalent: "")
+      expandItem.tag = MenuItemTagExpandAll
+      let collapseItem = NSMenuItem(title: "Collapse All", action: #selector(expandCollapseAction(_:)), keyEquivalent: "")
+      collapseItem.tag = MenuItemTagCollapseAll
+      [expandItem, collapseItem].forEach { submenu.addItem($0) }
+      menu.submenu = submenu
+      item.menuFormRepresentation = menu
+      updateExpandCollapseSegmentState()
       return item
 
     case Self.searchField:

@@ -678,11 +678,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   func switchTabByScroll(_ isForward: Bool) {
     if isForward {
-      if currentTab.buttonTag < 2 {
+      if currentTab.buttonTag < TabViewType.sub.buttonTag {
         switchToTab(.init(buttonTag: currentTab.buttonTag + 1))
       }
     } else {
-      if currentTab.buttonTag > 0 {
+      if currentTab.buttonTag > TabViewType.layout.buttonTag {
         switchToTab(.init(buttonTag: currentTab.buttonTag - 1))
       }
     }
@@ -1268,10 +1268,12 @@ fileprivate class TabButton: NSButton {
   class Cell: NSButtonCell {
     override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
       if state == .on {
-        NSColor.sidebarTabBtnBackground.setFill()
         let frame = NSInsetRect(cellFrame, 0, -4)
         let rect = NSBezierPath(roundedRect: frame, xRadius: 16, yRadius: 16)
-        rect.fill()
+
+        if let gradient = NSGradient(starting: .gray.withAlphaComponent(0.1), ending: .gray.withAlphaComponent(0.2)) {
+          gradient.draw(in: rect, angle: 90)
+        }
 
         NSColor.sidebarTabBtnBorder.setStroke()
         rect.lineWidth = 1

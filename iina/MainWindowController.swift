@@ -84,6 +84,7 @@ class MainWindowController: PlayerWindowController {
 
   var titleBarView: Titlebar!
   var titleBarHeightConstraint: NSLayoutConstraint!
+  var oscBottomView: OSCBottomView!
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
@@ -384,14 +385,12 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var fragControlViewMiddleButtons2Constraint: NSLayoutConstraint!
 
   @IBOutlet weak var controlBarFloating: ControlBarView!
-  @IBOutlet weak var controlBarBottom: NSVisualEffectView!
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var bottomView: NSView!
 
   @IBOutlet weak var oscFloatingTopView: NSStackView!
   @IBOutlet weak var oscFloatingBottomView: NSView!
-  @IBOutlet weak var oscBottomMainView: NSStackView!
 
   @IBOutlet var fragControlView: NSStackView!
   @IBOutlet var fragToolbarView: NSStackView!
@@ -494,6 +493,8 @@ class MainWindowController: PlayerWindowController {
     }
 
     // create translucent views
+    oscBottomView = OSCBottomView(mainWindow: self)
+    cv.addSubview(oscBottomView)
     osdView = OSDView(mainWindow: self)
     cv.addSubview(osdView)
     additionalInfoView = AdditionalInfoView(mainWindow: self)
@@ -503,6 +504,10 @@ class MainWindowController: PlayerWindowController {
     titleBarView = Titlebar(mainWindow: self)
     cv.addSubview(titleBarView)
     sidebars.installSubviews(in: cv)
+
+    // osc bottom
+
+    oscBottomView.padding(.horizontal, .bottom)
 
     // osd
 
@@ -559,7 +564,7 @@ class MainWindowController: PlayerWindowController {
 
     // other initialization
     cachedScreenCount = NSScreen.screens.count
-    [controlBarBottom, controlBarFloating, pipOverlayView].forEach {
+    [controlBarFloating, pipOverlayView].forEach {
       $0?.state = .active
     }
     // hide other views
@@ -786,12 +791,12 @@ class MainWindowController: PlayerWindowController {
     }
 
     // reset
-    ([controlBarFloating, controlBarBottom] as [NSView]).forEach { $0.isHidden = true }
+    ([controlBarFloating, oscBottomView] as [NSView]).forEach { $0.isHidden = true }
 
     controlBarFloating.isDragging = false
 
     // detach all fragment views
-    [oscFloatingTopView, titleBarView.oscView, oscBottomMainView].forEach { stackView in
+    [oscFloatingTopView, titleBarView.oscView, oscBottomView.oscView].forEach { stackView in
       stackView!.views.forEach {
         stackView!.removeView($0)
       }
@@ -852,7 +857,8 @@ class MainWindowController: PlayerWindowController {
       oscTopMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     case .bottom:
-      currentControlBar = controlBarBottom
+      let oscBottomMainView = oscBottomView.oscView!
+      currentControlBar = oscBottomView
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
       oscBottomMainView.addView(fragVolumeView, in: .trailing)

@@ -10,7 +10,6 @@
             <connections>
                 <outlet property="bottomBarBottomConstraint" destination="vP1-IE-sbB" id="G77-vL-Wf8"/>
                 <outlet property="bottomView" destination="Tdb-EA-alw" id="5Xv-Ja-j4G"/>
-                <outlet property="controlBarBottom" destination="DFb-1L-U9o" id="U9w-bH-8zM"/>
                 <outlet property="controlBarFloating" destination="OiF-pA-8Sd" id="7C1-6a-ZK6"/>
                 <outlet property="fragControlView" destination="hDm-KI-3o4" id="ITm-fa-cWL"/>
                 <outlet property="fragControlViewLeftView" destination="8Ej-eH-OR9" id="Grg-cg-qxF"/>
@@ -25,7 +24,6 @@
                 <outlet property="leftArrowLabel" destination="Yg9-Sd-sWy" id="fps-VD-ZgC"/>
                 <outlet property="leftLabel" destination="NBD-MV-OuG" id="7xb-a1-6NR"/>
                 <outlet property="muteButton" destination="2py-h1-0km" id="baB-6t-gO7"/>
-                <outlet property="oscBottomMainView" destination="Qmi-hb-0aM" id="PM5-Ic-nvt"/>
                 <outlet property="oscFloatingBottomView" destination="hb6-oe-rHm" id="ZKe-zm-evE"/>
                 <outlet property="oscFloatingTopView" destination="Unr-Y6-JoM" id="URb-3v-Gzc"/>
                 <outlet property="pipOverlayView" destination="Nrz-jZ-Luf" id="EU7-oY-Bwp"/>
@@ -71,23 +69,6 @@
                             <constraint firstItem="YkI-ii-zaW" firstAttribute="centerY" secondItem="Nrz-jZ-Luf" secondAttribute="centerY" id="hhc-1u-xpc"/>
                         </constraints>
                     </visualEffectView>
-                    <visualEffectView wantsLayer="YES" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="DFb-1L-U9o">
-                        <rect key="frame" x="0.0" y="0.0" width="640" height="20"/>
-                        <subviews>
-                            <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="Qmi-hb-0aM" customClass="TimeLabelOverflowedStackView" customModule="IINA" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="6" width="632" height="8"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="8" id="4rp-3T-TCc"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Qmi-hb-0aM" secondAttribute="bottom" constant="6" id="84H-65-Ego"/>
-                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="top" secondItem="DFb-1L-U9o" secondAttribute="top" constant="6" id="ANy-8g-kkb"/>
-                            <constraint firstAttribute="trailing" secondItem="Qmi-hb-0aM" secondAttribute="trailing" constant="8" id="bOW-iG-HNY"/>
-                            <constraint firstItem="Qmi-hb-0aM" firstAttribute="leading" secondItem="DFb-1L-U9o" secondAttribute="leading" id="c3E-rA-tSH"/>
-                        </constraints>
-                    </visualEffectView>
                     <visualEffectView wantsLayer="YES" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" blendingMode="withinWindow" material="popover" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="OiF-pA-8Sd" userLabel="Control Bar" customClass="ControlBarView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="110" y="50" width="440" height="67"/>
                         <subviews>
@@ -126,14 +107,11 @@
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="DFb-1L-U9o" secondAttribute="trailing" id="3qV-vK-qlg"/>
                     <constraint firstItem="OiF-pA-8Sd" firstAttribute="centerX" secondItem="se5-gp-TjO" secondAttribute="leading" priority="249" constant="330" id="9z2-rX-b7C"/>
                     <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Vtd-0f-x7p"/>
                     <constraint firstAttribute="bottom" secondItem="OiF-pA-8Sd" secondAttribute="bottom" priority="750" constant="50" id="cRP-R4-zYY"/>
-                    <constraint firstAttribute="bottom" secondItem="DFb-1L-U9o" secondAttribute="bottom" id="eLf-C3-GlT"/>
-                    <constraint firstItem="DFb-1L-U9o" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="gbo-9y-nvn"/>
                     <constraint firstAttribute="bottom" secondItem="Nrz-jZ-Luf" secondAttribute="bottom" id="kHE-py-RY5"/>
                     <constraint firstAttribute="trailing" secondItem="Nrz-jZ-Luf" secondAttribute="trailing" id="mJs-PF-Ex5"/>
                     <constraint firstAttribute="bottom" secondItem="Tdb-EA-alw" secondAttribute="bottom" constant="-60" id="vP1-IE-sbB"/>

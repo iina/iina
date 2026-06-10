@@ -277,8 +277,10 @@ class SidebarController: NSObject {
   private func setTitlebarConstraint(for side: Side, _ constant: CGFloat) {
     if side == .leading {
       mainWindow.titleBarView.setLeadingConstraint(constant)
+      mainWindow.oscBottomView.setLeadingConstraint(constant)
     } else {
       mainWindow.titleBarView.setTrailingConstraint(constant)
+      mainWindow.oscBottomView.setTrailingConstraint(constant)
     }
   }
 

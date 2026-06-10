@@ -66,7 +66,7 @@ class TranslucentView: NSView {
     // and its content, so we need the wrapper
 
     wrapper.addSubview(content)
-    content.padding(.horizontal(padding.0), .vertical(padding.1))
+    addContentPadding()
 
     switch newStyle {
     case .liquidGlass:
@@ -96,6 +96,10 @@ class TranslucentView: NSView {
     container!.padding(.all)
 
     appliedStyle = style
+  }
+
+  func addContentPadding() {
+    content!.padding(.horizontal(padding.0), .vertical(padding.1))
   }
 
   func setCornerRadius(liquidGlass: CGFloat, vev: CGFloat) {

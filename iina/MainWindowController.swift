@@ -1875,7 +1875,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillStartLiveResize(_ notification: Notification) {
     videoView.videoLayer.inLiveResize = true
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable, Preference.bool(for: .unlockWindowAspectRatio) {
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
       clearAnalysis()
     }
   }
@@ -1887,7 +1887,7 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable, Preference.bool(for: .unlockWindowAspectRatio) {
+    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
       requestLiveTextAnalysis()
     }
   }

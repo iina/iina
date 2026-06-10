@@ -798,22 +798,17 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       result.addItem(withTitle: title)
       result.addItem(NSMenuItem.separator())
       result.addItem(withTitle: NSLocalizedString("pl_menu.play_next", comment: "Play Next"), action: #selector(self.contextMenuPlayNext(_:)))
-        .image = .sf("text.line.first.and.arrowtriangle.forward")
       result.addItem(withTitle: NSLocalizedString("pl_menu.play_in_new_window", comment: "Play in New Window"), action: #selector(self.contextMenuPlayInNewWindow(_:)))
-        .image = .sf("macwindow.badge.plus")
       result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.remove" : "pl_menu.remove_multi", comment: "Remove"), action: #selector(self.contextMenuRemove(_:)))
-        .image = .sf("delete.backward")
 
       if !player.isInMiniPlayer {
         result.addItem(NSMenuItem.separator())
         if isSingleItem {
           result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
           result.addItem(withTitle: NSLocalizedString("pl_menu.add_sub", comment: "Add Subtitle…"), action: #selector(self.contextMenuAddSubtitle(_:)))
-            .image = .init(named: "custom.captions.bubble.badge.plus")
         }
         if matchedSubCount != 0 {
           result.addItem(withTitle: NSLocalizedString("pl_menu.wrong_sub", comment: "Wrong Subtitle"), action: #selector(self.contextMenuWrongSubtitle(_:)))
-            .image = .init(named: "custom.captions.bubble.slash")
         }
       }
 
@@ -824,20 +819,16 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       }.count
       if networkCount != 0 {
         result.addItem(withTitle: NSLocalizedString("pl_menu.browser", comment: "Open in Browser"), action: #selector(self.contextOpenInBrowser(_:)))
-          .image = .sf("globe")
         result.addItem(withTitle: NSLocalizedString(networkCount == 1 ? "pl_menu.copy_url" : "pl_menu.copy_url_multi", comment: "Copy URL(s)"), action: #selector(self.contextCopyURL(_:)))
-          .image = .sf("link")
         result.addItem(NSMenuItem.separator())
       }
       // file related operations
       let localCount = rows.count - networkCount
       if localCount != 0 {
         result.addItem(withTitle: NSLocalizedString(localCount == 1 ? "pl_menu.delete" : "pl_menu.delete_multi", comment: "Delete"), action: #selector(self.contextMenuDeleteFile(_:)))
-          .image = .sf("trash")
         // result.addItem(withTitle: NSLocalizedString(isSingleItem ? "pl_menu.delete_after_play" : "pl_menu.delete_after_play_multi", comment: "Delete After Playback"), action: #selector(self.contextMenuDeleteFileAfterPlayback(_:)))
 
         result.addItem(withTitle: NSLocalizedString("pl_menu.show_in_finder", comment: "Show in Finder"), action: #selector(self.contextMenuShowInFinder(_:)))
-          .image = .sf("finder")
         result.addItem(NSMenuItem.separator())
       }
     }
@@ -858,7 +849,6 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
     if hasPluginMenuItems {
       result.addItem(withTitle: NSLocalizedString("preference.plugins", comment: "Plugins"))
-        .image = .sf("puzzlepiece.extension")
       for (plugin, items) in pluginMenuItems {
         for item in items {
           add(menuItemDef: item, to: result, for: plugin)
@@ -868,15 +858,8 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
 
     result.addItem(withTitle: NSLocalizedString("pl_menu.add_file", comment: "Add File"), action: #selector(self.addFileAction(_:)))
-      .image = .sf("document.badge.plus")
     result.addItem(withTitle: NSLocalizedString("pl_menu.add_url", comment: "Add URL"), action: #selector(self.addURLAction(_:)))
-      .image = .sf("link.badge.plus")
     result.addItem(withTitle: NSLocalizedString("pl_menu.clear_playlist", comment: "Clear Playlist"), action: #selector(self.clearPlaylistBtnAction(_:)))
-      .image = .sf("delete.left.fill")
-
-    if #unavailable (macOS 26.0) {
-      result.items.forEach { $0.image = nil }
-    }
     return result
   }
 

@@ -32,7 +32,7 @@
                                     <action selector="showAboutWindow:" target="Voe-Tx-rLC" id="HGv-E1-lQH"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Check for Updates..." secondaryImage="square.and.arrow.down" catalog="system" id="gMo-qL-m08">
+                            <menuItem title="Check for Updates..." id="gMo-qL-m08">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="checkForUpdates:" target="wTK-gz-aTs" id="MFD-wN-SXh"/>
@@ -80,50 +80,63 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
-                            <menuItem title="Open…" secondaryImage="arrow.up.forward" catalog="system" keyEquivalent="o" id="IAo-SY-fd9">
+                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="openFile:" target="Voe-Tx-rLC" id="Aev-CZ-Gfe"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open in New Window…" secondaryImage="arrow.up.forward.square" catalog="system" tag="1" alternate="YES" keyEquivalent="o" id="z9W-ga-j3b">
+                            <menuItem title="Open in New Window…" tag="1" alternate="YES" keyEquivalent="o" id="z9W-ga-j3b">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="openFile:" target="Voe-Tx-rLC" id="jeI-mz-AmY"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open URL…" secondaryImage="link" catalog="system" keyEquivalent="O" id="0m7-3r-twH">
+                            <menuItem title="Open URL…" keyEquivalent="O" id="0m7-3r-twH">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="openURL:" target="Voe-Tx-rLC" id="uUI-BF-zJu"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open URL in New Window…" secondaryImage="custom.link.square" tag="1" alternate="YES" keyEquivalent="O" id="bfB-bn-KeM">
+                            <menuItem title="Open URL in New Window…" tag="1" alternate="YES" keyEquivalent="O" id="bfB-bn-KeM">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="openURL:" target="Voe-Tx-rLC" id="7MD-t2-mMA"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Open Recent" id="tXI-mr-wws">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
+                                    <items>
+                                        <menuItem title="Clear Menu" id="vNY-rz-j42">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="clearRecentDocuments:" target="-1" id="Daa-9d-B3U"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" hidden="YES" id="bEr-t9-Pyn"/>
-                            <menuItem title="New Window" secondaryImage="macwindow.badge.plus" catalog="system" hidden="YES" keyEquivalent="n" id="Qv1-xd-wj5">
+                            <menuItem title="New Window" hidden="YES" keyEquivalent="n" id="Qv1-xd-wj5">
                                 <connections>
                                     <action selector="menuNewWindow:" target="Voe-Tx-rLC" id="J5Q-v3-yX9"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m38-SL-vHw"/>
-                            <menuItem title="Playback History" secondaryImage="clock.arrow.trianglehead.counterclockwise.rotate.90" catalog="system" keyEquivalent="H" id="LND-1n-DU2">
+                            <menuItem title="Playback History" keyEquivalent="H" id="LND-1n-DU2">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
                                     <action selector="showHistoryWindow:" target="Voe-Tx-rLC" id="yVv-sR-1DQ"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="N0Z-h7-JSg"/>
-                            <menuItem title="Show Current File in Finder" secondaryImage="finder" catalog="system" id="che-dy-QUU">
+                            <menuItem title="Show Current File in Finder" id="che-dy-QUU">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Delete Current File" secondaryImage="trash" catalog="system" id="npH-8B-XA4">
+                            <menuItem title="Delete Current File" id="npH-8B-XA4">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Save Current Playlist..." secondaryImage="square.and.arrow.down" catalog="system" id="Mjr-lL-oEt">
+                            <menuItem title="Save Current Playlist..." id="Mjr-lL-oEt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -235,70 +248,70 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Playback" id="GEO-Iw-cKr">
                         <items>
-                            <menuItem title="Pause" secondaryImage="pause.fill" catalog="system" id="UOE-MJ-8ku">
+                            <menuItem title="Pause" id="UOE-MJ-8ku">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Stop and Clear Playlists" secondaryImage="stop.fill" catalog="system" id="deS-xK-iBb">
+                            <menuItem title="Stop and Clear Playlists" id="deS-xK-iBb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="0Kt-sZ-ss0"/>
-                            <menuItem title="Step Forward 5s" secondaryImage="chevron.forward.2" catalog="system" id="6yE-op-DTS">
+                            <menuItem title="Step Forward 5s" id="6yE-op-DTS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Next Frame" secondaryImage="forward.frame" catalog="system" alternate="YES" id="XDC-Pc-rS1">
+                            <menuItem title="Next Frame" alternate="YES" id="XDC-Pc-rS1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Step Backward 5s" secondaryImage="chevron.backward.2" catalog="system" tag="1" id="Sif-85-FF1">
+                            <menuItem title="Step Backward 5s" tag="1" id="Sif-85-FF1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Previous Frame" secondaryImage="backward.frame" catalog="system" tag="1" alternate="YES" id="oxF-BB-lBy">
+                            <menuItem title="Previous Frame" tag="1" alternate="YES" id="oxF-BB-lBy">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Jump to Beginning" secondaryImage="backward.end.fill" catalog="system" id="2Ya-3g-1hy">
+                            <menuItem title="Jump to Beginning" id="2Ya-3g-1hy">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Jump to…" secondaryImage="arrow.right.and.line.vertical.and.arrow.left" catalog="system" keyEquivalent="j" id="2id-wn-xsC"/>
+                            <menuItem title="Jump to…" keyEquivalent="j" id="2id-wn-xsC"/>
                             <menuItem isSeparatorItem="YES" id="T6N-uN-XPW"/>
                             <menuItem title="Speed:" enabled="NO" id="8pV-XQ-AvB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Speed Up to 2x" secondaryImage="forward.fill" catalog="system" id="Lqa-OG-EEg">
+                            <menuItem title="Speed Up to 2x" id="Lqa-OG-EEg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Speed Up to 1.1x" secondaryImage="forward.fill" catalog="system" tag="2" alternate="YES" id="91n-xW-L37">
+                            <menuItem title="Speed Up to 1.1x" tag="2" alternate="YES" id="91n-xW-L37">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Speed Down to 0.5x" secondaryImage="backward.fill" catalog="system" tag="1" id="HsE-LN-Nd6">
+                            <menuItem title="Speed Down to 0.5x" tag="1" id="HsE-LN-Nd6">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Speed Down to 0.9x" secondaryImage="backward.fill" catalog="system" tag="3" alternate="YES" id="DUP-nm-BJt">
+                            <menuItem title="Speed Down to 0.9x" tag="3" alternate="YES" id="DUP-nm-BJt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Reset Speed" secondaryImage="arrow.counterclockwise" catalog="system" tag="5" id="5Gn-90-oDu">
+                            <menuItem title="Reset Speed" tag="5" id="5Gn-90-oDu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="k1k-sG-1C3"/>
-                            <menuItem title="Take a Screenshot" secondaryImage="camera.shutter.button" catalog="system" keyEquivalent="S" id="AoP-K6-Kb5">
+                            <menuItem title="Take a Screenshot" keyEquivalent="S" id="AoP-K6-Kb5">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Go to Screenshot Folder" image="photo.stack" catalog="system" id="lj0-Oo-7nB">
+                            <menuItem title="Go to Screenshot Folder" id="lj0-Oo-7nB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Advanced Screenshot..." hidden="YES" id="CKi-JE-yLT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="pEu-eU-Er6"/>
-                            <menuItem title="A-B Loop" secondaryImage="timeline.selection" catalog="system" id="i3P-Xw-8D7">
+                            <menuItem title="A-B Loop" id="i3P-Xw-8D7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="File Loop" secondaryImage="repeat.1" catalog="system" id="D1y-kv-85s">
+                            <menuItem title="File Loop" id="D1y-kv-85s">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EZg-oY-9Ip"/>
-                            <menuItem title="Show Playlist Panel" secondaryImage="list.bullet.rectangle" catalog="system" id="0T7-Nu-SL7">
+                            <menuItem title="Show Playlist Panel" id="0T7-Nu-SL7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Playlist Loop" secondaryImage="repeat" catalog="system" id="aSc-P6-fiZ">
+                            <menuItem title="Playlist Loop" id="aSc-P6-fiZ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Playlist" id="Gi5-1S-RQB">
@@ -306,14 +319,14 @@ CA
                                 <menu key="submenu" title="Playlist" systemMenu="font" id="aXa-aM-Jaq"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Ij8-te-g5C"/>
-                            <menuItem title="Next Media" secondaryImage="forward.end.alt.fill" catalog="system" id="GR6-4V-lRT">
+                            <menuItem title="Next Media" id="GR6-4V-lRT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Previous Media" secondaryImage="backward.end.alt.fill" catalog="system" id="oqG-7L-NLD">
+                            <menuItem title="Previous Media" id="oqG-7L-NLD">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="KQu-z8-ZqI"/>
-                            <menuItem title="Show Chapters Panel" secondaryImage="bookmark.fill" catalog="system" id="DwM-3d-Eb9">
+                            <menuItem title="Show Chapters Panel" id="DwM-3d-Eb9">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Chapters" id="Fal-I4-PZk">
@@ -321,10 +334,10 @@ CA
                                 <menu key="submenu" title="Chapters" id="d9c-me-L2H"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Ckh-LI-dhO"/>
-                            <menuItem title="Next Chapter" secondaryImage="chevron.forward.to.line" catalog="system" id="F6G-Ln-fqI">
+                            <menuItem title="Next Chapter" id="F6G-Ln-fqI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Previous Chapter" secondaryImage="chevron.backward.to.line" catalog="system" id="pqF-SZ-Ifz">
+                            <menuItem title="Previous Chapter" id="pqF-SZ-Ifz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -334,11 +347,11 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Video" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Show Video Panel" secondaryImage="photo" catalog="system" id="2t8-Ot-yoO">
+                            <menuItem title="Show Video Panel" id="2t8-Ot-yoO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HGF-Qh-LZk"/>
-                            <menuItem title="Cycle Video Tracks" secondaryImage="custom.photo.rectangle.stack" id="taT-mP-2Kv">
+                            <menuItem title="Cycle Video Tracks" id="taT-mP-2Kv">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Video Track" id="j8P-Gb-HR7">
@@ -346,59 +359,59 @@ CA
                                 <menu key="submenu" title="Video Track" systemMenu="font" id="FTu-CF-O0R"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="CHq-3f-f42"/>
-                            <menuItem title="Half Size" secondaryImage="square.resize.down" catalog="system" id="snW-S8-Cw5">
+                            <menuItem title="Half Size" id="snW-S8-Cw5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Normal Size" secondaryImage="square.resize" catalog="system" id="1UK-8n-QPP">
+                            <menuItem title="Normal Size" id="1UK-8n-QPP">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Normal Size (Retina)" secondaryImage="custom.display.badge.sparkles" hidden="YES" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
+                            <menuItem title="Normal Size (Retina)" hidden="YES" alternate="YES" keyEquivalent="1" id="c1x-bx-69F">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                             </menuItem>
-                            <menuItem title="Double Size" secondaryImage="square.resize.up" catalog="system" id="Hal-18-Tnf">
+                            <menuItem title="Double Size" id="Hal-18-Tnf">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Fit to Screen" secondaryImage="display" catalog="system" id="SHd-63-Xoh">
+                            <menuItem title="Fit to Screen" id="SHd-63-Xoh">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Ap4-Sw-qOT"/>
-                            <menuItem title="Bigger Size" secondaryImage="plus.magnifyingglass" catalog="system" tag="11" id="lDC-IC-peP">
+                            <menuItem title="Bigger Size" tag="11" id="lDC-IC-peP">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Smaller Size" secondaryImage="minus.magnifyingglass" catalog="system" tag="10" id="ZOF-MG-6II">
+                            <menuItem title="Smaller Size" tag="10" id="ZOF-MG-6II">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="F7U-cD-2ou"/>
-                            <menuItem title="Enter Picture in Picture" secondaryImage="pip.enter" catalog="system" id="mND-N8-z6o">
+                            <menuItem title="Enter Picture in Picture" id="mND-N8-z6o">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Enter Full Screen" secondaryImage="arrow.up.left.and.arrow.down.right.rectangle" catalog="system" id="6Eq-ni-6hG">
+                            <menuItem title="Enter Full Screen" id="6Eq-ni-6hG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Float on Top" secondaryImage="pin" catalog="system" id="wex-rX-PcY">
+                            <menuItem title="Float on Top" id="wex-rX-PcY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Lock Window Aspect Ratio" image="lock.rectangle" catalog="system" id="Saz-zT-RXt">
+                            <menuItem title="Lock Window Aspect Ratio" id="Saz-zT-RXt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xpM-h7-A4R"/>
-                            <menuItem title="Enter Music Mode" secondaryImage="music.microphone" catalog="system" id="bGN-E4-V5A">
+                            <menuItem title="Enter Music Mode" id="bGN-E4-V5A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="4J5-eU-sei"/>
-                            <menuItem title="Aspect Ratio" secondaryImage="aspectratio" catalog="system" id="d15-8v-dXA">
+                            <menuItem title="Aspect Ratio" id="d15-8v-dXA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" id="KIb-Ix-D8J"/>
                             </menuItem>
-                            <menuItem title="Crop" secondaryImage="crop" catalog="system" id="Gqg-wU-RRo">
+                            <menuItem title="Crop" id="Gqg-wU-RRo">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Crop" id="eo2-Tt-SLx"/>
                             </menuItem>
-                            <menuItem title="Rotation" secondaryImage="rectangle.landscape.rotate" catalog="system" id="ar5-3T-O9h">
+                            <menuItem title="Rotation" id="ar5-3T-O9h">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Rotation" id="5xN-ZB-VLI"/>
                             </menuItem>
-                            <menuItem title="Flip" secondaryImage="arrow.trianglehead.left.and.right.righttriangle.left.righttriangle.right" catalog="system" id="mT1-1m-HwN">
+                            <menuItem title="Flip" id="mT1-1m-HwN">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Flip" id="n90-to-nRT">
                                     <items>
@@ -411,14 +424,14 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Deinterlace" secondaryImage="circle.lefthalf.striped.horizontal.inverse" catalog="system" id="yHI-7D-OaI">
+                            <menuItem title="Deinterlace" id="yHI-7D-OaI">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Delogo" secondaryImage="custom.seal.slash" id="ArE-2s-JIV">
+                            <menuItem title="Delogo" id="ArE-2s-JIV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kNp-jq-01c"/>
-                            <menuItem title="Video Filters…" secondaryImage="camera.filters" catalog="system" keyEquivalent="F" id="PyY-pR-jz7">
+                            <menuItem title="Video Filters…" keyEquivalent="F" id="PyY-pR-jz7">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Saved Video Filters" id="BDr-G9-IRx">
@@ -432,65 +445,65 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Audio" id="sW8-ri-eA5">
                         <items>
-                            <menuItem title="Show Audio Panel" secondaryImage="waveform" catalog="system" id="43n-Ed-5kT">
+                            <menuItem title="Show Audio Panel" id="43n-Ed-5kT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Fs0-R8-rnS"/>
-                            <menuItem title="Cycle Audio Tracks" secondaryImage="custom.waveform.rectangle.stack" tag="1" id="n8f-ub-Udb">
+                            <menuItem title="Cycle Audio Tracks" tag="1" id="n8f-ub-Udb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Audio Track" id="GF1-xB-KcA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Audio Track" systemMenu="font" id="DRb-Y8-xir"/>
                             </menuItem>
-                            <menuItem title="Load External Audio…" secondaryImage="waveform.badge.plus" catalog="system" id="3xl-iD-85w">
+                            <menuItem title="Load External Audio…" id="3xl-iD-85w">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="H9C-r1-7eo"/>
                             <menuItem title="Volume:" enabled="NO" id="iQF-1S-9EK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Volume + 5%" secondaryImage="speaker.plus" catalog="system" tag="10" id="Wbq-vt-hzX">
+                            <menuItem title="Volume + 5%" tag="10" id="Wbq-vt-hzX">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Volume + 1%" secondaryImage="speaker.plus" catalog="system" tag="1" alternate="YES" id="c6Y-0e-vgf">
+                            <menuItem title="Volume + 1%" tag="1" alternate="YES" id="c6Y-0e-vgf">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Volume - 5%" secondaryImage="speaker.minus" catalog="system" tag="10" id="pdj-9C-Fn1">
+                            <menuItem title="Volume - 5%" tag="10" id="pdj-9C-Fn1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Volume - 1%" secondaryImage="speaker.minus" catalog="system" tag="1" alternate="YES" id="Zhv-Bz-I5V">
+                            <menuItem title="Volume - 1%" tag="1" alternate="YES" id="Zhv-Bz-I5V">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Mute" secondaryImage="speaker.slash" catalog="system" id="WOL-Us-ByA">
+                            <menuItem title="Mute" id="WOL-Us-ByA">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="NlU-cH-tnU"/>
                             <menuItem title="Audio Delay:" enabled="NO" id="foC-r3-8mp">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay + 0.5s" secondaryImage="custom.waveform.arrow.trianglehead.clockwise.rotate.90" id="4ae-MT-2L1">
+                            <menuItem title="Audio Delay + 0.5s" id="4ae-MT-2L1">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay + 0.1s" secondaryImage="custom.waveform.arrow.trianglehead.clockwise.rotate.90" alternate="YES" id="lew-3S-oGY">
+                            <menuItem title="Audio Delay + 0.1s" alternate="YES" id="lew-3S-oGY">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay - 0.5s" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise.rotate.90" id="Lc4-4W-thE">
+                            <menuItem title="Audio Delay - 0.5s" id="Lc4-4W-thE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Audio Delay - 0.1s" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise.rotate.90" alternate="YES" id="9ee-7i-xs7">
+                            <menuItem title="Audio Delay - 0.1s" alternate="YES" id="9ee-7i-xs7">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Reset Audio Delay" secondaryImage="custom.waveform.arrow.trianglehead.counterclockwise" id="H3d-jR-YCr">
+                            <menuItem title="Reset Audio Delay" id="H3d-jR-YCr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xKj-xX-Nny"/>
-                            <menuItem title="Audio Device" secondaryImage="hifispeaker.2" catalog="system" id="IXq-yq-uDF">
+                            <menuItem title="Audio Device" id="IXq-yq-uDF">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Audio Device" id="2Dp-Ol-Zcf"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="MVW-Uu-gB1"/>
-                            <menuItem title="Audio Filters…" secondaryImage="dial.low" catalog="system" keyEquivalent="G" id="8Zh-hU-Cc4">
+                            <menuItem title="Audio Filters…" keyEquivalent="G" id="8Zh-hU-Cc4">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                             </menuItem>
                             <menuItem title="Saved Audio Filters" id="wgZ-DO-nn3">
@@ -504,11 +517,11 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Subtitles" id="EKp-Qx-4Mn">
                         <items>
-                            <menuItem title="Show Subtitles Panel" secondaryImage="captions.bubble" catalog="system" id="8y7-Cy-lKT">
+                            <menuItem title="Show Subtitles Panel" id="8y7-Cy-lKT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="EvW-J9-wqJ"/>
-                            <menuItem title="Cycle Subtitles" secondaryImage="custom.captions.bubble.rectangle.stack" tag="2" id="sgu-dK-IGE">
+                            <menuItem title="Cycle Subtitles" tag="2" id="sgu-dK-IGE">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Subtitle" id="uGZ-lo-pJJ">
@@ -524,7 +537,7 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Hide Subtitles" secondaryImage="custom.captions.bubble.slash" id="smo-rw-rg7" userLabel="Hide Subtitles">
+                            <menuItem title="Hide Subtitles" id="smo-rw-rg7" userLabel="Hide Subtitles">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Secondary Subtitle" id="mGw-jm-5x2">
@@ -543,65 +556,65 @@ CA
                             <menuItem title="Hide Secondary Subtitles" id="BOm-ia-wOV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Load External Subtitle…" secondaryImage="custom.captions.bubble.badge.plus" id="k6x-hf-ATi">
+                            <menuItem title="Load External Subtitle…" id="k6x-hf-ATi">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="yh3-Pu-MGm"/>
-                            <menuItem title="Find Online Subtitles…" secondaryImage="custom.captions.bubble.badge.magnifyingglass" id="Mg3-WB-gjZ">
+                            <menuItem title="Find Online Subtitles…" id="Mg3-WB-gjZ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Find Online Subtitles from" id="5dT-kq-WV9">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Find Online Subtitles from" id="i0H-bE-bH8"/>
                             </menuItem>
-                            <menuItem title="Save Downloaded Subtitle…" secondaryImage="custom.captions.bubble.badge.arrow.down" id="9zk-co-roT">
+                            <menuItem title="Save Downloaded Subtitle…" id="9zk-co-roT">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="58S-lP-UEY"/>
-                            <menuItem title="Encoding" secondaryImage="globe.asia.australia" catalog="system" id="Pci-OQ-Vni">
+                            <menuItem title="Encoding" id="Pci-OQ-Vni">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Encoding" id="Pf6-5i-B1E" userLabel="Encode Menu"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="sMg-1y-9zx"/>
-                            <menuItem title="Scale Up" secondaryImage="textformat.size.larger" catalog="system" tag="5" id="XHu-Dl-Vq2">
+                            <menuItem title="Scale Up" tag="5" id="XHu-Dl-Vq2">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="q2J-8e-6YW"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Scale Down" secondaryImage="textformat.size.smaller" catalog="system" tag="-5" id="Bli-YK-Rl0">
+                            <menuItem title="Scale Down" tag="-5" id="Bli-YK-Rl0">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Reset Subtitle Scale" secondaryImage="custom.textformat.size.arrow.trianglehead.counterclockwise" id="P1a-ot-P31">
+                            <menuItem title="Reset Subtitle Scale" id="P1a-ot-P31">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="UZ7-ew-L1i"/>
                             <menuItem title="Subtitle Delay: " enabled="NO" id="THG-4o-U6A">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Subtitle Delay + 0.5s" secondaryImage="custom.captions.bubble.arrow.trianglehead.clockwise.rotate.90" id="pAo-L5-qTO">
+                            <menuItem title="Subtitle Delay + 0.5s" id="pAo-L5-qTO">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Subtitle Delay + 0.1s" secondaryImage="custom.captions.bubble.arrow.trianglehead.clockwise.rotate.90" alternate="YES" id="0Cz-OE-85L">
+                            <menuItem title="Subtitle Delay + 0.1s" alternate="YES" id="0Cz-OE-85L">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Subtitle Delay - 0.5s" secondaryImage="custom.captions.bubble.arrow.trianglehead.counterclockwise.rotate.90" id="LsU-Qz-dax">
+                            <menuItem title="Subtitle Delay - 0.5s" id="LsU-Qz-dax">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="lSt-4f-ewa"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Subtitle Delay - 0.1s" image="custom.captions.bubble.arrow.trianglehead.counterclockwise.rotate.90" alternate="YES" id="fyL-tr-6Bu">
+                            <menuItem title="Subtitle Delay - 0.1s" alternate="YES" id="fyL-tr-6Bu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="qbG-lZ-Ubx"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Reset Subtitle Delay" secondaryImage="custom.captions.bubble.arrow.trianglehead.counterclockwise" id="SLr-6g-Mgh">
+                            <menuItem title="Reset Subtitle Delay" id="SLr-6g-Mgh">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="HAm-FJ-1KF"/>
-                            <menuItem title="Font..." secondaryImage="textformat" catalog="system" id="rme-fr-5rr">
+                            <menuItem title="Font..." id="rme-fr-5rr">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -631,8 +644,8 @@ CA
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
-                            <menuItem title="Inspector" secondaryImage="info.circle" catalog="system" keyEquivalent="i" id="bwz-r0-peR"/>
-                            <menuItem title="Log Viewer" secondaryImage="text.page.badge.magnifyingglass" catalog="system" keyEquivalent="l" id="0tJ-RQ-kuW">
+                            <menuItem title="Inspector" keyEquivalent="i" id="bwz-r0-peR"/>
+                            <menuItem title="Log Viewer" keyEquivalent="l" id="0tJ-RQ-kuW">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="showLogWindow:" target="Voe-Tx-rLC" id="2EU-WD-3kO"/>
@@ -652,32 +665,32 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                         <items>
-                            <menuItem title="IINA Help" secondaryImage="questionmark.circle" catalog="system" keyEquivalent="?" id="FKE-Sm-Kum">
+                            <menuItem title="IINA Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                 <connections>
                                     <action selector="helpAction:" target="Voe-Tx-rLC" id="aqh-p6-pB4"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Dump Debug Info" secondaryImage="apple.terminal" catalog="system" id="Mbl-Pv-GuB">
+                            <menuItem title="Dump Debug Info" id="Mbl-Pv-GuB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="dumpDebugInfo:" target="Voe-Tx-rLC" id="54x-yF-LJc"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ZO8-wH-FBe"/>
-                            <menuItem title="Release Highlights" secondaryImage="wand.and.sparkles" catalog="system" id="kOx-hc-aQG">
+                            <menuItem title="Release Highlights" id="kOx-hc-aQG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="showHighlights:" target="Voe-Tx-rLC" id="VXT-LI-ofl"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="Cxg-P0-6hm"/>
-                            <menuItem title="GitHub" secondaryImage="chevron.left.forwardslash.chevron.right" catalog="system" id="A9w-iE-gVg">
+                            <menuItem title="GitHub" id="A9w-iE-gVg">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="githubAction:" target="Voe-Tx-rLC" id="Qaj-Kz-mRQ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Website" secondaryImage="globe" catalog="system" id="Rqg-VS-aIj">
+                            <menuItem title="Website" id="Rqg-VS-aIj">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="websiteAction:" target="Voe-Tx-rLC" id="tO9-9Q-OBu"/>
@@ -831,104 +844,5 @@ CA
                 <outlet property="updaterDelegate" destination="Voe-Tx-rLC" id="AvP-Na-qhG"/>
             </connections>
         </customObject>
-        <menuItem title="Open Recent" id="tXI-mr-wws">
-            <modifierMask key="keyEquivalentModifierMask"/>
-            <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
-                <items>
-                    <menuItem title="Clear Menu" id="vNY-rz-j42">
-                        <modifierMask key="keyEquivalentModifierMask"/>
-                        <connections>
-                            <action selector="clearRecentDocuments:" target="-1" id="Daa-9d-B3U"/>
-                        </connections>
-                    </menuItem>
-                </items>
-            </menu>
-        </menuItem>
     </objects>
-    <resources>
-        <image name="apple.terminal" catalog="system" width="18" height="14"/>
-        <image name="arrow.counterclockwise" catalog="system" width="14" height="16"/>
-        <image name="arrow.right.and.line.vertical.and.arrow.left" catalog="system" width="23" height="15"/>
-        <image name="arrow.trianglehead.left.and.right.righttriangle.left.righttriangle.right" catalog="system" width="18" height="16"/>
-        <image name="arrow.up.forward" catalog="system" width="13" height="12"/>
-        <image name="arrow.up.forward.square" catalog="system" width="15" height="14"/>
-        <image name="arrow.up.left.and.arrow.down.right.rectangle" catalog="system" width="18" height="14"/>
-        <image name="aspectratio" catalog="system" width="18" height="14"/>
-        <image name="backward.end.alt.fill" catalog="system" width="24" height="12"/>
-        <image name="backward.end.fill" catalog="system" width="15" height="12"/>
-        <image name="backward.fill" catalog="system" width="20" height="12"/>
-        <image name="backward.frame" catalog="system" width="16" height="12"/>
-        <image name="bookmark.fill" catalog="system" width="14" height="16"/>
-        <image name="camera.filters" catalog="system" width="16" height="16"/>
-        <image name="camera.shutter.button" catalog="system" width="19" height="17"/>
-        <image name="captions.bubble" catalog="system" width="17" height="16"/>
-        <image name="chevron.backward.2" catalog="system" width="15" height="14"/>
-        <image name="chevron.backward.to.line" catalog="system" width="11" height="14"/>
-        <image name="chevron.forward.2" catalog="system" width="15" height="14"/>
-        <image name="chevron.forward.to.line" catalog="system" width="11" height="14"/>
-        <image name="chevron.left.forwardslash.chevron.right" catalog="system" width="21" height="15"/>
-        <image name="circle.lefthalf.striped.horizontal.inverse" catalog="system" width="15" height="15"/>
-        <image name="clock.arrow.trianglehead.counterclockwise.rotate.90" catalog="system" width="16" height="15"/>
-        <image name="crop" catalog="system" width="17" height="16"/>
-        <image name="custom.captions.bubble.arrow.trianglehead.clockwise.rotate.90" width="12" height="11"/>
-        <image name="custom.captions.bubble.arrow.trianglehead.counterclockwise" width="11" height="12"/>
-        <image name="custom.captions.bubble.arrow.trianglehead.counterclockwise.rotate.90" width="12" height="11"/>
-        <image name="custom.captions.bubble.badge.arrow.down" width="15" height="12"/>
-        <image name="custom.captions.bubble.badge.magnifyingglass" width="15" height="12"/>
-        <image name="custom.captions.bubble.badge.plus" width="15" height="12"/>
-        <image name="custom.captions.bubble.rectangle.stack" width="12" height="12"/>
-        <image name="custom.captions.bubble.slash" width="12" height="12"/>
-        <image name="custom.display.badge.sparkles" width="16" height="13"/>
-        <image name="custom.link.square" width="10" height="10"/>
-        <image name="custom.photo.rectangle.stack" width="12" height="12"/>
-        <image name="custom.seal.slash" width="12" height="12"/>
-        <image name="custom.textformat.size.arrow.trianglehead.counterclockwise" width="11" height="12"/>
-        <image name="custom.waveform.arrow.trianglehead.clockwise.rotate.90" width="12" height="11"/>
-        <image name="custom.waveform.arrow.trianglehead.counterclockwise" width="11" height="12"/>
-        <image name="custom.waveform.arrow.trianglehead.counterclockwise.rotate.90" width="12" height="11"/>
-        <image name="custom.waveform.rectangle.stack" width="12" height="12"/>
-        <image name="dial.low" catalog="system" width="18" height="16"/>
-        <image name="display" catalog="system" width="19" height="15"/>
-        <image name="finder" catalog="system" width="16" height="15"/>
-        <image name="forward.end.alt.fill" catalog="system" width="24" height="12"/>
-        <image name="forward.fill" catalog="system" width="20" height="12"/>
-        <image name="forward.frame" catalog="system" width="16" height="12"/>
-        <image name="globe" catalog="system" width="15" height="15"/>
-        <image name="globe.asia.australia" catalog="system" width="15" height="15"/>
-        <image name="hifispeaker.2" catalog="system" width="18" height="18"/>
-        <image name="info.circle" catalog="system" width="15" height="15"/>
-        <image name="link" catalog="system" width="17" height="17"/>
-        <image name="list.bullet.rectangle" catalog="system" width="18" height="14"/>
-        <image name="lock.rectangle" catalog="system" width="18" height="14"/>
-        <image name="macwindow.badge.plus" catalog="system" width="21" height="16"/>
-        <image name="minus.magnifyingglass" catalog="system" width="16" height="15"/>
-        <image name="music.microphone" catalog="system" width="16" height="16"/>
-        <image name="pause.fill" catalog="system" width="11" height="13"/>
-        <image name="photo" catalog="system" width="18" height="14"/>
-        <image name="photo.stack" catalog="system" width="17" height="18"/>
-        <image name="pin" catalog="system" width="15" height="17"/>
-        <image name="pip.enter" catalog="system" width="20" height="16"/>
-        <image name="plus.magnifyingglass" catalog="system" width="16" height="15"/>
-        <image name="questionmark.circle" catalog="system" width="15" height="15"/>
-        <image name="rectangle.landscape.rotate" catalog="system" width="19" height="19"/>
-        <image name="repeat" catalog="system" width="17" height="14"/>
-        <image name="repeat.1" catalog="system" width="17" height="14"/>
-        <image name="speaker.minus" catalog="system" width="19" height="14"/>
-        <image name="speaker.plus" catalog="system" width="19" height="14"/>
-        <image name="speaker.slash" catalog="system" width="14" height="16"/>
-        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
-        <image name="square.resize" catalog="system" width="15" height="14"/>
-        <image name="square.resize.down" catalog="system" width="15" height="14"/>
-        <image name="square.resize.up" catalog="system" width="15" height="14"/>
-        <image name="stop.fill" catalog="system" width="14" height="13"/>
-        <image name="text.page.badge.magnifyingglass" catalog="system" width="15" height="18"/>
-        <image name="textformat" catalog="system" width="18" height="12"/>
-        <image name="textformat.size.larger" catalog="system" width="11" height="12"/>
-        <image name="textformat.size.smaller" catalog="system" width="9" height="9"/>
-        <image name="timeline.selection" catalog="system" width="25" height="14"/>
-        <image name="trash" catalog="system" width="15" height="17"/>
-        <image name="wand.and.sparkles" catalog="system" width="17" height="15"/>
-        <image name="waveform" catalog="system" width="15" height="16"/>
-        <image name="waveform.badge.plus" catalog="system" width="18" height="17"/>
-    </resources>
 </document>

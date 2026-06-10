@@ -618,13 +618,6 @@ class MenuController: NSObject, NSMenuDelegate {
       action: #selector(AppDelegate.reloadAllPlugins(_:)),
       keyEquivalent: "")
 
-    if #available (macOS 26, *) {
-      managePluginsItem.image = .sf("gear")
-      showPanelItem.image = .sf("puzzlepiece.extension")
-      developerTool.image = .sf("terminal")
-      reloadPluginsItem.image = .sf("arrow.counterclockwise")
-    }
-
     pluginMenu.removeAllItems()
     pluginMenu.addItem(managePluginsItem)
     pluginMenu.addItem(showPanelItem)

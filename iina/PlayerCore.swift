@@ -2177,7 +2177,14 @@ class PlayerCore: NSObject {
     if let url = info.currentURL {
       let duration = info.videoDuration ?? .zero
       let mediaTitle = mpv.getString(MPVProperty.mediaTitle)
-      HistoryController.shared.add(url, duration: duration.second, title: mediaTitle,
+      // Unfortunately the mpv media-title property returns the filename when there isn't a title.
+      // Don't store a title unless the media actually has one.
+      let titleToUse: String? = {
+        guard let mediaTitle else { return nil }
+        guard mediaTitle != url.lastPathComponent else { return nil }
+        return mediaTitle
+      }()
+      HistoryController.shared.add(url, duration: duration.second, title: titleToUse,
                                    ignorePathInWatchLaterConfig)
       if Preference.bool(for: .recordRecentFiles) && Preference.bool(for: .trackAllFilesInRecentOpenMenu) {
         AppDelegate.shared.noteNewRecentDocumentURL(url)

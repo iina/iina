@@ -126,7 +126,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     prepareData()
     outlineView.delegate = self
     outlineView.dataSource = self
-    outlineView.menu = makeContextMenu()
+    outlineView.menu = NSMenu()
     outlineView.menu?.delegate = self
     outlineView.target = self
     outlineView.doubleAction = #selector(doubleAction)
@@ -306,11 +306,11 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
     if let identifier = tableColumn?.identifier {
       guard let entry = item as? PlaybackHistory else { return nil }
+      let isFile = entry.url.isFileURL
+      let fileExists = !isFile || FileManager.default.fileExists(atPath: entry.url.path)
       switch identifier {
       case .filename:
         let cell = (outlineView.makeView(withIdentifier: .filename, owner: nil) as? HistoryFilenameCellView) ?? HistoryFilenameCellView()
-        let isFile = entry.url.isFileURL
-        let fileExists = !isFile || FileManager.default.fileExists(atPath: entry.url.path)
         if let title = entry.title {
           cell.title.stringValue = title
           cell.title.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
@@ -321,7 +321,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
           cell.filename.isHidden = false
         } else {
           cell.textField?.stringValue = entry.url.isFileURL ? entry.name : entry.url.absoluteString
-          cell.textField?.textColor = fileExists ? .secondaryLabelColor : .disabledControlTextColor
+          cell.textField?.textColor = fileExists ? .controlTextColor : .disabledControlTextColor
           cell.title.isHidden = true
           cell.filename.isHidden = true
           cell.textField?.isHidden = false
@@ -335,7 +335,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       case .progress:
         // Progress cell
         let cell = (outlineView.makeView(withIdentifier: .progress, owner: nil) as? HistoryProgressCellView) ?? HistoryProgressCellView()
-        if let progress = entry.mpvProgress, let ratio = (progress / entry.duration), ratio.isFinite {
+        if let progress = entry.mpvProgress, let ratio = (progress / entry.duration), ratio.isFinite && fileExists {
           cell.textField?.stringValue = progress.stringRepresentation
           cell.indicator.isHidden = false
           cell.indicator.doubleValue = min(max(ratio, 0), 1)
@@ -353,7 +353,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       }
     } else {
       // group columns
-      let cell = (outlineView.makeView(withIdentifier: .group, owner: nil) as? NSTableCellView) ?? makeGroupCellView()
+      let cell = makeGroupCellView()
       if let key = item as? String {
         cell.textField?.stringValue = key
       }
@@ -371,7 +371,6 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     textField.padding(.leading(4), .trailing)
     textField.center(.y)
     textField.textColor = .secondaryLabelColor
-    textField.alignment = .right
     cell.textField = textField
     return cell
   }
@@ -390,11 +389,16 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   private func getTimeString(from entry: PlaybackHistory) -> String {
+    let formatter = DateFormatter()
     if groupBy == .lastPlayed {
-      return DateFormatter.localizedString(from: entry.addedDate, dateStyle: .none, timeStyle: .short)
+      formatter.setLocalizedDateFormatFromTemplate("jmm")
     } else {
-      return DateFormatter.localizedString(from: entry.addedDate, dateStyle: .short, timeStyle: .short)
+      formatter.setLocalizedDateFormatFromTemplate("yyMMddjmm")
     }
+    formatter.dateFormat = formatter.dateFormat
+      .replacingOccurrences(of: "(?<!h)h(?!h)", with: "hh", options: .regularExpression)
+      .replacingOccurrences(of: "(?<!H)H(?!H)", with: "HH", options: .regularExpression)
+    return formatter.string(from: entry.addedDate)
   }
 
   // MARK: - Searching
@@ -419,7 +423,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   // MARK: - Menu
 
-  func makeContextMenu() -> NSMenu {
+  func menuNeedsUpdate(_ menu: NSMenu) {
     let playItem = NSMenuItem(title: NSLocalizedString("history_window.menu.play", comment: "Play"), action: #selector(playAction(_:)), keyEquivalent: "\r")
     playItem.keyEquivalentModifierMask = []
     playItem.tag = MenuItemTagPlay
@@ -434,10 +438,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     let deleteFileItem = NSMenuItem(title: NSLocalizedString("history_window.menu.delete_file", comment: "Move to Trash…"), action: #selector(deleteFileAction(_:)), keyEquivalent: "\u{8}")
     deleteFileItem.tag = MenuItemTagDeleteFile
 
-    let menu = NSMenu()
     menu.identifier = .contextMenu
+    menu.removeAllItems()
     [playItem, playInNewWindowItem, .separator(), showInFinderItem, .separator(), deleteItem, deleteFileItem].forEach { menu.addItem($0) }
-    return menu
+    if PlayerCore.nonIdle.count == 0 {
+      menu.removeItem(at: 1)
+    }
   }
 
   private var selectedEntries: [PlaybackHistory] {
@@ -451,12 +457,19 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     return selectedEntries.map { $0.url }.filter { FileManager.default.fileExists(atPath: $0.path) }
   }
 
+  private var selectedPlayableEntries: [URL] {
+    if selectedEntries.isEmpty { return [] }
+    return selectedEntries.map { $0.url }.filter { !$0.isFileURL || FileManager.default.fileExists(atPath: $0.path) }
+  }
+
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     switch menuItem.tag {
     case MenuItemTagShowInFinder, MenuItemTagDeleteFile:
       return !selectedFiles.isEmpty
-    case MenuItemTagDelete, MenuItemTagPlay, MenuItemTagPlayInNewWindow:
+    case MenuItemTagDelete:
       return !selectedEntries.isEmpty
+    case MenuItemTagPlay, MenuItemTagPlayInNewWindow:
+      return !selectedPlayableEntries.isEmpty
     case MenuItemTagExpandAll:
       return hasCollapsedGroup
     case MenuItemTagCollapseAll:
@@ -492,13 +505,13 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   // MARK: - Action
 
   @objc func playAction(_ sender: Any?) {
-    guard !selectedFiles.isEmpty else { return }
-    PlayerCore.active.openURLs(selectedFiles, shouldAutoLoad: false)
+    guard !selectedPlayableEntries.isEmpty else { return }
+    PlayerCore.active.openURLs(selectedPlayableEntries, shouldAutoLoad: false)
   }
 
   @objc func playInNewWindowAction(_ sender: Any?) {
-    guard !selectedFiles.isEmpty else { return }
-    PlayerCore.newPlayerCore.openURLs(selectedFiles, shouldAutoLoad: false)
+    guard !selectedPlayableEntries.isEmpty else { return }
+    PlayerCore.newPlayerCore.openURLs(selectedPlayableEntries, shouldAutoLoad: false)
   }
 
   @objc func showInFinderAction(_ sender: Any?) {

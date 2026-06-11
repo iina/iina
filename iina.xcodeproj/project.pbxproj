@@ -330,6 +330,7 @@
 		E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */; };
 		E31E62FB2FD3851A005527B2 /* LayoutValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FA2FD38516005527B2 /* LayoutValue.swift */; };
 		E31E62FD2FD8F4C9005527B2 /* OSCBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */; };
+		E31E62FF2FD90288005527B2 /* OSCFloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */; };
 		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
 		E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */; };
 		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
@@ -1874,6 +1875,7 @@
 		E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginOverlayView.swift; sourceTree = "<group>"; };
 		E31E62FA2FD38516005527B2 /* LayoutValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutValue.swift; sourceTree = "<group>"; };
 		E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCBottomView.swift; sourceTree = "<group>"; };
+		E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCFloatingView.swift; sourceTree = "<group>"; };
 		E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistPlaybackProgressView.swift; sourceTree = "<group>"; };
 		E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitleItem.swift; sourceTree = "<group>"; };
 		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
@@ -2483,7 +2485,6 @@
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
 				E39EDD812CE2EB9600978036 /* PluginViewController.swift */,
 				E39EDD822CE2EB9600978036 /* PluginViewController.xib */,
-				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */,
 				8400D5D41E1AB312006785F5 /* InspectorWindowController.xib */,
 				84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */,
@@ -2924,7 +2925,9 @@
 		E3A239A62FC6D3F000CE6ACC /* MainWindow */ = {
 			isa = PBXGroup;
 			children = (
+				E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */,
 				E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */,
+				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				E3D94E7D2FCDE42C00B08618 /* Titlebar.swift */,
 				3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */,
 				E3A239AD2FC7267000CE6ACC /* SideBarView.swift */,
@@ -3418,6 +3421,7 @@
 				E38099C62FC05B2E00D3333E /* SettingsPageKeyBindings.swift in Sources */,
 				E38099C72FC05B2E00D3333E /* SettingsPageNetwork.swift in Sources */,
 				E38099C82FC05B2E00D3333E /* SettingsPagePlugin.swift in Sources */,
+				E31E62FF2FD90288005527B2 /* OSCFloatingView.swift in Sources */,
 				E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */,
 				E38099CA2FC05B2E00D3333E /* SettingsPageUI.swift in Sources */,
 				E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */,

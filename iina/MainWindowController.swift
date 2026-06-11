@@ -85,6 +85,7 @@ class MainWindowController: PlayerWindowController {
   var titleBarView: Titlebar!
   var titleBarHeightConstraint: NSLayoutConstraint!
   var oscBottomView: OSCBottomView!
+  var oscFloatingView: OSCFloatingView!
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
@@ -384,13 +385,9 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var fragControlViewMiddleButtons1Constraint: NSLayoutConstraint!
   @IBOutlet weak var fragControlViewMiddleButtons2Constraint: NSLayoutConstraint!
 
-  @IBOutlet weak var controlBarFloating: ControlBarView!
   @IBOutlet weak var leftArrowButton: NSButton!
   @IBOutlet weak var rightArrowButton: NSButton!
   @IBOutlet weak var bottomView: NSView!
-
-  @IBOutlet weak var oscFloatingTopView: NSStackView!
-  @IBOutlet weak var oscFloatingBottomView: NSView!
 
   @IBOutlet var fragControlView: NSStackView!
   @IBOutlet var fragToolbarView: NSStackView!
@@ -415,7 +412,6 @@ class MainWindowController: PlayerWindowController {
   }()
 
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
-  private var oscFloatingLeadingTrailingConstraint: [NSLayoutConstraint]?
 
   override var mouseActionDisabledViews: [NSView?] {
     sidebars.mouseActionDisabledViews + [currentControlBar, titleBarView]
@@ -480,6 +476,21 @@ class MainWindowController: PlayerWindowController {
     // init quick setting view now
     let _ = sidebars.quickSettingView
 
+    // create translucent views
+    oscBottomView = OSCBottomView(mainWindow: self)
+    cv.addSubview(oscBottomView)
+    oscFloatingView = OSCFloatingView(mainWindow: self)
+    cv.addSubview(oscFloatingView)
+    osdView = OSDView(mainWindow: self)
+    cv.addSubview(osdView)
+    additionalInfoView = AdditionalInfoView(mainWindow: self)
+    cv.addSubview(additionalInfoView)
+    bufferIndicatorView = BufferIndicatorView(mainWindow: self)
+    cv.addSubview(bufferIndicatorView)
+    titleBarView = Titlebar(mainWindow: self)
+    cv.addSubview(titleBarView)
+    sidebars.installSubviews(in: cv)
+
     // thumbnail peek view
     thumbnailPeekView = ThumbnailPeekView()
     cv.addSubview(thumbnailPeekView)
@@ -491,19 +502,6 @@ class MainWindowController: PlayerWindowController {
     if #available(macOS 26.0, *) {
       timePreviewView.setStyle(.liquidGlass)
     }
-
-    // create translucent views
-    oscBottomView = OSCBottomView(mainWindow: self)
-    cv.addSubview(oscBottomView)
-    osdView = OSDView(mainWindow: self)
-    cv.addSubview(osdView)
-    additionalInfoView = AdditionalInfoView(mainWindow: self)
-    cv.addSubview(additionalInfoView)
-    bufferIndicatorView = BufferIndicatorView(mainWindow: self)
-    cv.addSubview(bufferIndicatorView)
-    titleBarView = Titlebar(mainWindow: self)
-    cv.addSubview(titleBarView)
-    sidebars.installSubviews(in: cv)
 
     // osc bottom
 
@@ -564,7 +562,7 @@ class MainWindowController: PlayerWindowController {
 
     // other initialization
     cachedScreenCount = NSScreen.screens.count
-    [controlBarFloating, pipOverlayView].forEach {
+    [pipOverlayView].forEach {
       $0?.state = .active
     }
     // hide other views
@@ -791,12 +789,12 @@ class MainWindowController: PlayerWindowController {
     }
 
     // reset
-    ([controlBarFloating, oscBottomView] as [NSView]).forEach { $0.isHidden = true }
+    [oscFloatingView, oscBottomView].forEach { $0.isHidden = true }
 
-    controlBarFloating.isDragging = false
+    oscFloatingView.isDragging = false
 
     // detach all fragment views
-    [oscFloatingTopView, titleBarView.oscView, oscBottomView.oscView].forEach { stackView in
+    [oscFloatingView.oscTopView, titleBarView.oscView, oscBottomView.oscView].forEach { stackView in
       stackView!.views.forEach {
         stackView!.removeView($0)
       }
@@ -821,28 +819,28 @@ class MainWindowController: PlayerWindowController {
     // add fragment views
     switch oscPosition {
     case .floating:
-      currentControlBar = controlBarFloating
+      currentControlBar = oscFloatingView
       fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewRightView)
-      oscFloatingTopView.addView(fragVolumeView, in: .leading)
-      oscFloatingTopView.addView(fragToolbarView, in: .trailing)
-      oscFloatingTopView.addView(fragControlView, in: .center)
+      oscFloatingView.oscTopView.addView(fragVolumeView, in: .leading)
+      oscFloatingView.oscTopView.addView(fragToolbarView, in: .trailing)
+      oscFloatingView.oscTopView.addView(fragControlView, in: .center)
 
       // Setting the visibility priority to detach only will cause freeze when resizing the window
       // (and triggering the detach) in macOS 11.
       if !isMacOS11 {
-        oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-        oscFloatingTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
-        oscFloatingTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
+        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+        oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       }
-      oscFloatingBottomView.addSubview(fragSliderView)
+      oscFloatingView.oscBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": fragControlView])
       // center control bar
       let cph = Preference.float(for: .controlBarPositionHorizontal)
       let cpv = Preference.float(for: .controlBarPositionVertical)
-      controlBarFloating.xConstraint.constant = window!.frame.width * CGFloat(cph)
-      controlBarFloating.yConstraint.constant = window!.frame.height * CGFloat(cpv)
+      oscFloatingView.xConstraint.constant = window!.frame.width * CGFloat(cph)
+      oscFloatingView.yConstraint.constant = window!.frame.height * CGFloat(cpv)
     case .top:
       let oscTopMainView = titleBarView.oscView!
       currentControlBar = nil
@@ -879,16 +877,9 @@ class MainWindowController: PlayerWindowController {
     if isFloating {
       fragControlViewMiddleButtons1Constraint.constant = 24
       fragControlViewMiddleButtons2Constraint.constant = 24
-      oscFloatingLeadingTrailingConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=10)-[v]-(>=10)-|",
-                                                                            options: [], metrics: nil, views: ["v": controlBarFloating as Any])
-      NSLayoutConstraint.activate(oscFloatingLeadingTrailingConstraint!)
     } else {
       fragControlViewMiddleButtons1Constraint.constant = 16
       fragControlViewMiddleButtons2Constraint.constant = 16
-      if let constraints = oscFloatingLeadingTrailingConstraint {
-        controlBarFloating.superview?.removeConstraints(constraints)
-        oscFloatingLeadingTrailingConstraint = nil
-      }
     }
   }
 
@@ -946,7 +937,7 @@ class MainWindowController: PlayerWindowController {
     }
     workaroundCursorDefect()
     // do nothing if it's related to floating OSC
-    guard !controlBarFloating.isDragging else { return }
+    guard !oscFloatingView.isDragging else { return }
     mousePosRelatedToWindow = event.locationInWindow
     let consumedBySidebar = sidebars.handleMouseDown(event, at: event.locationInWindow)
     // currently, it only passes the event to plugins in super
@@ -960,7 +951,7 @@ class MainWindowController: PlayerWindowController {
       return
     }
     if !fsState.isFullscreen {
-      guard !controlBarFloating.isDragging else { return }
+      guard !oscFloatingView.isDragging else { return }
 
       if let mousePosRelatedToWindow = mousePosRelatedToWindow {
         if !isDragging {
@@ -1104,9 +1095,9 @@ class MainWindowController: PlayerWindowController {
       updateTimer()
     } else if obj == 1 {
       // slider
-      if controlBarFloating.isDragging { return }
+      if oscFloatingView.isDragging { return }
       isMouseInSlider = true
-      if !controlBarFloating.isDragging {
+      if !oscFloatingView.isDragging {
         timePreviewView.isHidden = false
         thumbnailPeekView.isHidden = !player.info.thumbnailsReady
       }
@@ -1124,7 +1115,7 @@ class MainWindowController: PlayerWindowController {
     if obj == 0 {
       // main window
       isMouseInWindow = false
-      if controlBarFloating.isDragging { return }
+      if oscFloatingView.isDragging { return }
       destroyTimer()
       hideUI()
       // reset after moved out of window
@@ -1792,8 +1783,8 @@ class MainWindowController: PlayerWindowController {
         yPos = windowHeight - oscHeight - yMargin
       }
 
-      controlBarFloating.xConstraint.constant = xPos
-      controlBarFloating.yConstraint.constant = yPos
+      oscFloatingView.xConstraint.constant = xPos
+      oscFloatingView.yConstraint.constant = yPos
     }
 
     // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
@@ -1810,18 +1801,18 @@ class MainWindowController: PlayerWindowController {
                     - maxWidth*2
                     - margin) < 0
 
-      let views = oscFloatingTopView.views
+      let views = oscFloatingView.oscTopView.views
       if hide {
         if views.contains(fragVolumeView)
             && views.contains(fragToolbarView) {
-          oscFloatingTopView.removeView(fragVolumeView)
-          oscFloatingTopView.removeView(fragToolbarView)
+          oscFloatingView.oscTopView.removeView(fragVolumeView)
+          oscFloatingView.oscTopView.removeView(fragToolbarView)
         }
       } else {
         if !views.contains(fragVolumeView)
             && !views.contains(fragToolbarView) {
-          oscFloatingTopView.addView(fragVolumeView, in: .leading)
-          oscFloatingTopView.addView(fragToolbarView, in: .trailing)
+          oscFloatingView.oscTopView.addView(fragVolumeView, in: .leading)
+          oscFloatingView.oscTopView.addView(fragToolbarView, in: .trailing)
         }
       }
     }
@@ -1928,7 +1919,7 @@ class MainWindowController: PlayerWindowController {
 
   @objc func hideUIAndCursor() {
     // don't hide UI when dragging control bar
-    if controlBarFloating.isDragging { return }
+    if oscFloatingView.isDragging { return }
     hideUI()
     NSCursor.setHiddenUntilMouseMoves(true)
   }
@@ -2049,7 +2040,7 @@ class MainWindowController: PlayerWindowController {
         window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")
       }
     }
-    titleBarView.updateTitle()
+    titleBarView?.updateTitle()
     addDocIconToFadeableViews()
   }
 

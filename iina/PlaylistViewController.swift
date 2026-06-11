@@ -789,10 +789,13 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     let isSingleItem = rows.count == 1
 
     if !rows.isEmpty {
-      let firstURL = player.info.$playlist.withLock { $0[rows.first!] }
-      let matchedSubCount = player.info.getMatchedSubs(firstURL.filename)?.count ?? 0
+      let matchedSubCount = rows.map { index in
+        player.info.$playlist.withLock {
+          player.info.getMatchedSubs($0[index].filename)?.count ?? 0
+        }
+      }.reduce(0, +)
       let title: String = isSingleItem ?
-        firstURL.filenameForDisplay :
+        player.info.$playlist.withLock { $0[rows.first!] }.filenameForDisplay:
         String(format: NSLocalizedString("pl_menu.title_multi", comment: "%d Items"), rows.count)
 
       result.addItem(withTitle: title)
@@ -807,10 +810,11 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
       if !player.isInMiniPlayer && (isSingleItem || matchedSubCount != 0) {
         result.addItem(NSMenuItem.separator())
         if #available(macOS 14.0, *) {
-          result.addItem(.sectionHeader(title: NSLocalizedString("pl_menu.subtitles", comment: "Subtitles")))
+          result.addItem(.sectionHeader(title: String(format: NSLocalizedString("pl_menu.subtitles", comment: "Subtitles (%@ loaded)"), matchedSubCount)))
+        } else {
+          result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
         }
         if isSingleItem {
-          result.addItem(withTitle: String(format: NSLocalizedString("pl_menu.matched_sub", comment: "Matched %d Subtitle(s)"), matchedSubCount))
           result.addItem(withTitle: NSLocalizedString("pl_menu.add_sub", comment: "Add Subtitle…"), action: #selector(self.contextMenuAddSubtitle(_:)))
         }
         if matchedSubCount != 0 {

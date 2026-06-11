@@ -509,6 +509,33 @@
 "logwindow.copy" = "Copy";
 "logwindow.logs" = "logs";
 
+// History window
+"history_window.title" = "Playback History";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Progress";
+"history_window.col.played_at" = "Played at";
+"history_window.menu.play" = "Play";
+"history_window.menu.play_new_window" = "Play in New Window";
+"history_window.menu.show_in_finder" = "Show in Finder";
+"history_window.menu.delete" = "Delete…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Clear Playback History";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Date";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Search in";
+"history_window.search.filename" = "Filename";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "No Recent Searches";
+"history_window.search.recents_title" = "Recent Searches";
+"history_window.search.clear_recents" = "Clear Recents";
+
 // Sidebar
 
 "sidebar.aspect_ratio" = "Aspect Ratio";

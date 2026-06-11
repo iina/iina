@@ -74,7 +74,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
       backing: .buffered,
       defer: false
     )
-    window.title = "Playback History"
+    window.title = NSLocalizedString("history_window.title", comment: "Playback History")
     window.setFrameAutosaveName("PlaybackHistoryWindow")
     window.minSize = NSMakeSize(400, 200)
     super.init(window: window)
@@ -113,7 +113,9 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     outlineView.allowsColumnReordering = false
     outlineView.indentationPerLevel = 8
 
-    [(NSUserInterfaceItemIdentifier.filename, "Media", 200, 5000), (.progress, "Progress", 110, 1000), (.time, "Played at", 60, 300)].map {
+    [(NSUserInterfaceItemIdentifier.filename, NSLocalizedString("history_window.col.filename", comment: "Media"), 200, 5000),
+     (.progress, NSLocalizedString("history_window.col.progress", comment: "Progress"), 110, 1000),
+     (.time, NSLocalizedString("history_window.col.played_at", comment: "Played at"), 60, 300)].map {
       let column = NSTableColumn(identifier: $0.0)
       column.title = $0.1
       column.minWidth = $0.2
@@ -418,18 +420,18 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   // MARK: - Menu
 
   func makeContextMenu() -> NSMenu {
-    let playItem = NSMenuItem(title: "Play", action: #selector(playAction(_:)), keyEquivalent: "\r")
+    let playItem = NSMenuItem(title: NSLocalizedString("history_window.menu.play", comment: "Play"), action: #selector(playAction(_:)), keyEquivalent: "\r")
     playItem.keyEquivalentModifierMask = []
     playItem.tag = MenuItemTagPlay
-    let playInNewWindowItem = NSMenuItem(title: "Play in New Window", action: #selector(playInNewWindowAction(_:)), keyEquivalent: "\r")
+    let playInNewWindowItem = NSMenuItem(title: NSLocalizedString("history_window.menu.play_new_window", comment: "Play in New Window"), action: #selector(playInNewWindowAction(_:)), keyEquivalent: "\r")
     playInNewWindowItem.tag = MenuItemTagPlayInNewWindow
 
-    let showInFinderItem = NSMenuItem(title: "Show in Finder", action: #selector(showInFinderAction(_:)), keyEquivalent: "l")
+    let showInFinderItem = NSMenuItem(title: NSLocalizedString("history_window.menu.show_in_finder", comment: "Show in Finder"), action: #selector(showInFinderAction(_:)), keyEquivalent: "l")
     showInFinderItem.tag = MenuItemTagShowInFinder
-    let deleteItem = NSMenuItem(title: "Delete…", action: #selector(deleteAction(_:)), keyEquivalent: "\u{8}")
+    let deleteItem = NSMenuItem(title: NSLocalizedString("history_window.menu.delete", comment: "Delete…"), action: #selector(deleteAction(_:)), keyEquivalent: "\u{8}")
     deleteItem.keyEquivalentModifierMask = []
     deleteItem.tag = MenuItemTagDelete
-    let deleteFileItem = NSMenuItem(title: "Move to Trash…", action: #selector(deleteFileAction(_:)), keyEquivalent: "\u{8}")
+    let deleteFileItem = NSMenuItem(title: NSLocalizedString("history_window.menu.delete_file", comment: "Move to Trash…"), action: #selector(deleteFileAction(_:)), keyEquivalent: "\u{8}")
     deleteFileItem.tag = MenuItemTagDeleteFile
 
     let menu = NSMenu()
@@ -579,24 +581,24 @@ extension HistoryWindowController: NSToolbarDelegate {
     case Self.clear:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
       let button = NSButton(image: .sf("trash")!, target: self, action: #selector(clear(_:)))
-      item.label = "Clear Playback History"
+      item.label = NSLocalizedString("history_window.toolbar.clear", comment: "Clear Playback History")
       item.view = button
       return item
 
     case Self.groupBy:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-      item.label = "Group By"
+      item.label = NSLocalizedString("history_window.toolbar.group_by", comment: "Group By")
       let segmentedControl = NSSegmentedControl(images: [.sf("calendar.badge.clock")!, .sf("folder")!], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
       segmentedControl.setTag(SortOption.lastPlayed.rawValue, forSegment: 0)
       segmentedControl.setTag(SortOption.fileLocation.rawValue, forSegment: 1)
-      segmentedControl.setToolTip("Sort by Date", forSegment: 0)
-      segmentedControl.setToolTip("Sort by Folder and Website", forSegment: 1)
+      segmentedControl.setToolTip(NSLocalizedString("history_window.toolbar.group_by.date_tooltip", comment: "Sort by Date"), forSegment: 0)
+      segmentedControl.setToolTip(NSLocalizedString("history_window.toolbar.group_by.location_tooltip", comment: "Sort by Folder and Website"), forSegment: 1)
       segmentedControl.selectedSegment = 0
       item.view = segmentedControl
-      let menu = NSMenuItem(title: "Group by", action: nil, keyEquivalent: "")
+      let menu = NSMenuItem(title: NSLocalizedString("history_window.toolbar.group_by.menu", comment: "Group by"), action: nil, keyEquivalent: "")
       let submenu = NSMenu()
-      submenu.addItem(withTitle: "Date", action: #selector(groupByChangedAction(_:)))
-      submenu.addItem(withTitle: "Folder and Website", action: #selector(groupByChangedAction(_:)))
+      submenu.addItem(withTitle: NSLocalizedString("history_window.toolbar.group_by.date", comment: "Date"), action: #selector(groupByChangedAction(_:)))
+      submenu.addItem(withTitle: NSLocalizedString("history_window.toolbar.group_by.location", comment: "Folder and Website"), action: #selector(groupByChangedAction(_:)))
       submenu.items[0].tag = SortOption.lastPlayed.rawValue
       submenu.items[1].tag = SortOption.fileLocation.rawValue
       menu.submenu = submenu
@@ -605,22 +607,22 @@ extension HistoryWindowController: NSToolbarDelegate {
 
     case Self.expandCollapse:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-      item.label = "Expand/Collapse"
+      item.label = NSLocalizedString("history_window.toolbar.expand_collapse", comment: "Expand/Collapse")
       let segmentedControl = NSSegmentedControl(
         images: [.sf("chevron.down.circle")!, .sf("chevron.up.circle")!],
         trackingMode: .momentary,
         target: self,
         action: #selector(expandCollapseAction(_:))
       )
-      segmentedControl.setToolTip("Expand All", forSegment: 0)
-      segmentedControl.setToolTip("Collapse All", forSegment: 1)
+      segmentedControl.setToolTip(NSLocalizedString("history_window.toolbar.expand_all", comment: "Expand All"), forSegment: 0)
+      segmentedControl.setToolTip(NSLocalizedString("history_window.toolbar.collapse_all", comment: "Collapse All"), forSegment: 1)
       item.view = segmentedControl
       self.expandCollapseControl = segmentedControl
-      let menu = NSMenuItem(title: "Expand/Collapse", action: nil, keyEquivalent: "")
+      let menu = NSMenuItem(title: NSLocalizedString("history_window.toolbar.expand_collapse", comment: "Expand/Collapse"), action: nil, keyEquivalent: "")
       let submenu = NSMenu()
-      let expandItem = NSMenuItem(title: "Expand All", action: #selector(expandCollapseAction(_:)), keyEquivalent: "")
+      let expandItem = NSMenuItem(title: NSLocalizedString("history_window.toolbar.expand_all", comment: "Expand All"), action: #selector(expandCollapseAction(_:)), keyEquivalent: "")
       expandItem.tag = MenuItemTagExpandAll
-      let collapseItem = NSMenuItem(title: "Collapse All", action: #selector(expandCollapseAction(_:)), keyEquivalent: "")
+      let collapseItem = NSMenuItem(title: NSLocalizedString("history_window.toolbar.collapse_all", comment: "Collapse All"), action: #selector(expandCollapseAction(_:)), keyEquivalent: "")
       collapseItem.tag = MenuItemTagCollapseAll
       [expandItem, collapseItem].forEach { submenu.addItem($0) }
       menu.submenu = submenu
@@ -646,17 +648,17 @@ extension HistoryWindowController: NSToolbarDelegate {
   func makeSearchMenu() -> NSMenu {
     let searchIn: NSMenuItem
     if #available(macOS 14, *) {
-      searchIn = NSMenuItem.sectionHeader(title: "Search in")
+      searchIn = NSMenuItem.sectionHeader(title: NSLocalizedString("history_window.search.search_in", comment: "Search in"))
     } else {
-      searchIn = NSMenuItem(title: "Search in", action: nil, keyEquivalent: "")
+      searchIn = NSMenuItem(title: NSLocalizedString("history_window.search.search_in", comment: "Search in"), action: nil, keyEquivalent: "")
       searchIn.isEnabled = false
     }
 
-    let filenameItem = NSMenuItem(title: "Filename", action: #selector(searchInOption(_:)), keyEquivalent: "")
+    let filenameItem = NSMenuItem(title: NSLocalizedString("history_window.search.filename", comment: "Filename"), action: #selector(searchInOption(_:)), keyEquivalent: "")
     filenameItem.tag = MenuItemTagSearchFilename
     filenameItem.target = self
 
-    let fullPathItem = NSMenuItem(title: "Full Path", action: #selector(searchInOption(_:)), keyEquivalent: "")
+    let fullPathItem = NSMenuItem(title: NSLocalizedString("history_window.search.full_path", comment: "Full Path"), action: #selector(searchInOption(_:)), keyEquivalent: "")
     fullPathItem.tag = MenuItemTagSearchFullPath
     fullPathItem.target = self
 
@@ -667,18 +669,18 @@ extension HistoryWindowController: NSToolbarDelegate {
     }
 
     // Managed by AppKit; placeholders
-    let noRecents = NSMenuItem(title: "No Recent Searches", action: nil, keyEquivalent: "")
+    let noRecents = NSMenuItem(title: NSLocalizedString("history_window.search.no_recents", comment: "No Recent Searches"), action: nil, keyEquivalent: "")
     noRecents.tag = NSSearchField.noRecentsMenuItemTag
     noRecents.isEnabled = false
-    let recentsTitle = NSMenuItem(title: "Recent Searches", action: nil, keyEquivalent: "")
+    let recentsTitle = NSMenuItem(title: NSLocalizedString("history_window.search.recents_title", comment: "Recent Searches"), action: nil, keyEquivalent: "")
     recentsTitle.tag = NSSearchField.recentsTitleMenuItemTag
     recentsTitle.isEnabled = false
-    let recentItem = NSMenuItem(title: "Item", action: nil, keyEquivalent: "")
+    let recentItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
     recentItem.tag = NSSearchField.recentsMenuItemTag
     if #unavailable(macOS 14) {
       recentItem.indentationLevel = 1
     }
-    let clear = NSMenuItem(title: "Clear Recents", action: nil, keyEquivalent: "")
+    let clear = NSMenuItem(title: NSLocalizedString("history_window.search.clear_recents", comment: "Clear Recents"), action: nil, keyEquivalent: "")
     clear.tag = NSSearchField.clearRecentsMenuItemTag
     clear.image = .sf("trash")
 

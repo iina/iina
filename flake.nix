@@ -51,8 +51,11 @@
         '';
 
         # Override ffmpeg to use our version of libs
-        ffmpeg = (pkgs.ffmpeg.override {
-          withDebug = false; # Build using debug options
+        ffmpeg = (pkgs.ffmpeg-headless.override {
+          withDebug = false;    # Build using debug options
+          withStripping = true; # Strip symbols from the resulting binaries to reduce size
+
+          withSmallDeps  = true;
 
           withSoxr = true;
           soxr = pkgs.soxr;
@@ -63,11 +66,38 @@
           withRubberband = true;
           rubberband = pkgs.rubberband;
 
-          withPlacebo = true;
+          withPlacebo = false;
           libplacebo = pkgs.libplacebo;
 
           withJxl = true;
           libjxl = pkgs.libjxl;
+
+          # May want to enable some of these in the future
+          withOpenmpt = false;  # Tracked music files decoder, not included in IINA historically
+          withOpus = false;     # Opus audio codec, not included in IINA historically
+          withRist = false;     # RIST protocol support, not useful for mpv (yet?)
+          withSvtav1 = false;   # SVT-AV1 encoder, adds >12 MB to app size
+          withVulkan = false;   # IINA can't use gpu-next yet
+          withZvbi = false;     # Teletext suport, not useful for mpv
+          withDvdnav = false;
+          withDvdread = false;
+
+          # Unlikely to ever enable these
+          withOpencl = false;   # Vulkan predecessor, not supported on modern macOS
+          withVdpau = false;    # nVidia HW acceleration, not supported on modern macOS
+          withXlib = false;     # X11 support, not suppported on modern OSes
+
+          # Don't build docs; we don't use them
+          withHtmlDoc = false;
+          withManPages = false;
+          withPodDoc = false;
+          withTxtDoc = false;
+
+          # Don't build executables; we only want the libs
+          buildFfmpeg = false;
+          buildFfplay = false;
+          buildFfprobe = false;
+          buildQtFaststart = false;
 
         }).overrideAttrs (old: {
           # Skip tests to speed up build
@@ -79,15 +109,14 @@
           ffmpeg = ffmpeg;
           lua = pkgs.luajit;
 
-          # Enable features we want
           vapoursynthSupport = false;
           javascriptSupport = true;
           cmsSupport = true;
           rubberbandSupport = true;
           archiveSupport = true;
           bluraySupport = true;
-          openalSupport = true;
-          vulkanSupport = true;
+          openalSupport = false;
+          vulkanSupport = false;
           zimgSupport = true;
 
           # Disable Linux-only bits
@@ -179,7 +208,6 @@
               pkgs.libbluray
               pkgs.libbs2b
               pkgs.libidn2
-              pkgs.libjpeg_turbo
               pkgs.libjxl
               pkgs.libplacebo
               pkgs.libpng
@@ -196,14 +224,12 @@
               pkgs.nettle
               pkgs.p11-kit
               pkgs.pcre2
-              pkgs.python3
               pkgs.rubberband
               pkgs.shaderc
               pkgs.snappy
               pkgs.soxr
               pkgs.speex
               pkgs.vid-stab
-              pkgs.vulkan-loader
               pkgs.xorg.libX11
               pkgs.xorg.libXau
               pkgs.xorg.libxcb
@@ -221,30 +247,18 @@
               pkgs.libcaca
               pkgs.libcxx
               pkgs.libdovi
-              pkgs.libdvdcss
-              pkgs.libdvdnav
-              pkgs.libffi
               pkgs.libogg
-              pkgs.libopenmpt
-              pkgs.libopus
-              pkgs.librist
               pkgs.libssh
               pkgs.libtheora
-              pkgs.libvdpau
               pkgs.libvmaf
               pkgs.libvorbis
-              pkgs.libxml2
               pkgs.llvmPackages.openmp
               pkgs.ocl-icd
-              pkgs.openal
               pkgs.openjpeg
               pkgs.srt
-              pkgs.svt-av1
               pkgs.x264
               pkgs.x265
-              pkgs.zlib
               pkgs.zstd.out
-              pkgs.zvbi
             ]
           )
         );

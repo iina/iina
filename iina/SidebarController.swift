@@ -220,7 +220,8 @@ class SidebarController: NSObject {
     // triggers Titlebar.layout(), which refreshes the fade mask off the new sidebar frame.
     setTitlebarConstraint(
       for: side,
-      titlebarConstantWhenShown(width: clamped, margin: panel.visibleEdgeMargin, side: side)
+      titlebarConstantWhenShown(width: clamped, margin: panel.visibleEdgeMargin, side: side),
+      animated: false
     )
     return true
   }
@@ -274,13 +275,13 @@ class SidebarController: NSObject {
     width + margin
   }
 
-  private func setTitlebarConstraint(for side: Side, _ constant: CGFloat) {
+  private func setTitlebarConstraint(for side: Side, _ constant: CGFloat, animated: Bool = true) {
     if side == .leading {
-      mainWindow.titleBarView.setLeadingConstraint(constant)
-      mainWindow.oscBottomView.setLeadingConstraint(constant)
+      mainWindow.titleBarView.setLeadingConstraint(constant, animated: animated)
+      mainWindow.oscBottomView.setLeadingConstraint(constant, animated: animated)
     } else {
-      mainWindow.titleBarView.setTrailingConstraint(constant)
-      mainWindow.oscBottomView.setTrailingConstraint(constant)
+      mainWindow.titleBarView.setTrailingConstraint(constant, animated: animated)
+      mainWindow.oscBottomView.setTrailingConstraint(constant, animated: animated)
     }
   }
 
@@ -314,7 +315,7 @@ class SidebarController: NSObject {
     view.padding(.all)
     var viewController = viewController
     viewController.downShift = if #available(macOS 26.0, *), panel.view.style == .liquidGlass {
-      panel.side == .leading ? 22 : 0
+      panel.side == .leading ? 27 : 0
     } else {
       mainWindow.titleBarView.frame.height
     }

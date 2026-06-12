@@ -166,6 +166,7 @@ struct Preference {
     static let unlockWindowAspectRatio = Key("unlockWindowAspectRatio")
     static let compactUI = Key("compactUI")
     static let edgeToEdgeVideo = Key("edgeToEdgeVideo")
+    static let dockedControlBarAndTitlebar = Key("dockedControlBarAndTitlebar")
 
     static let sidebarSettingsDisplayAtLeading = Key("sidebarSettingsDisplayAtLeading")
     static let sidebarPlaylistDisplayAtLeading = Key("sidebarPlaylistDisplayAtLeading")
@@ -965,6 +966,10 @@ struct Preference {
     Preference.bool(for: .unlockWindowAspectRatio) || !Preference.bool(for: .edgeToEdgeVideo)
   }
 
+  static var isDocked: Bool {
+    !Preference.bool(for: .edgeToEdgeVideo) && Preference.bool(for: .dockedControlBarAndTitlebar)
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -1049,6 +1054,7 @@ struct Preference {
     .unlockWindowAspectRatio: false,
     .compactUI: false,
     .edgeToEdgeVideo: true,
+    .dockedControlBarAndTitlebar: false,
 
     .sidebarSettingsDisplayAtLeading: false,
     .sidebarPlaylistDisplayAtLeading: false,

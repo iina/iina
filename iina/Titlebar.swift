@@ -34,23 +34,25 @@ class Titlebar: NSView {
 
   weak var mainWindow: MainWindowController!
 
-  var background: NSVisualEffectView
-  var titleBarBottomBorder: NSBox
+  private var background: NSVisualEffectView
+  private var titleBarBottomBorder: NSBox
 
-  var onTopButton: NSButton
-  var removeBlackBarButton: NSButton
+  private var onTopButton: NSButton
+  private var removeBlackBarButton: NSButton
 
-  var container: NSStackView!
-  var titlebarContainer: NSView!
-  var titleHeightConstraint: NSLayoutConstraint!
-  var titleLeadingConstraint: NSLayoutConstraint!
-  var trailingConstraint: NSLayoutConstraint!
-  var titleTextField: NSTextField!
-  var docIcon: NSImageView!
+  private var container: NSStackView!
+  private var titlebarContainer: NSView!
+  private var titleHeightConstraint: NSLayoutConstraint!
+  private var titleLeadingConstraint: NSLayoutConstraint!
+  private var trailingConstraint: NSLayoutConstraint!
+  private var topConstraint: NSLayoutConstraint!
+  private var verticalConstraint: NSLayoutConstraint!
+  private var titleTextField: NSTextField!
+  private var docIcon: NSImageView!
 
-  var oscContainer: NSView!
+  private var oscContainer: NSView!
   var oscView: TimeLabelOverflowedStackView!
-  var oscLeadingConstraint: NSLayoutConstraint!
+  private var oscLeadingConstraint: NSLayoutConstraint!
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
@@ -121,7 +123,9 @@ class Titlebar: NSView {
       container.orientation = .vertical
       container.alignment = .centerX
       container.spacing = 0
-      container.padding(.vertical, .leading)
+      container.padding(.bottom, .leading)
+      topConstraint = container.topAnchor.constraint(equalTo: topAnchor)
+      topConstraint.isActive = true
 
       self.trailingConstraint = trailingAnchor
         .constraint(equalTo: container.trailingAnchor)
@@ -188,7 +192,23 @@ class Titlebar: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  func updateVerticalConstraint(isDisplaying: Bool) {
+    guard let superview else { return }
+    if let verticalConstraint {
+      superview.removeConstraint(verticalConstraint)
+    }
+    if isDisplaying {
+      verticalConstraint = topAnchor.constraint(equalTo: superview.topAnchor)
+    } else {
+      verticalConstraint = bottomAnchor.constraint(equalTo: superview.topAnchor)
+    }
+    verticalConstraint.isActive = true
+  }
+
   func update(hasOSC: Bool, inFullScreen: Bool) {
+    // when in full screen, the OSC should have a top padding
+    topConstraint.constant = inFullScreen ? 8 : 0
+    // show/hide title or OSC
     container.setVisibilityPriority(.mustHold, for: titlebarContainer)
     if hasOSC {
       container.setVisibilityPriority(.mustHold, for: oscContainer)
@@ -197,6 +217,10 @@ class Titlebar: NSView {
       }
     } else {
       container.setVisibilityPriority(.notVisible, for: oscContainer)
+    }
+    // show systsem titlebar when in fullscreen
+    if !useSystemTitle {
+      window?.titleVisibility = inFullScreen ? .visible : .hidden
     }
   }
 
@@ -228,12 +252,17 @@ class Titlebar: NSView {
     if animated {
       titleLeadingConstraint.animator().constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.animator().constant = constant + 6
+    } else {
+      titleLeadingConstraint.constant = constant == 0 ? 0 : constant + 8
+      oscLeadingConstraint.constant = constant + 6
     }
   }
 
   func setTrailingConstraint(_ constant: CGFloat, animated: Bool = true) {
     if animated {
       trailingConstraint.animator().constant = constant
+    } else {
+      trailingConstraint.constant = constant
     }
   }
 

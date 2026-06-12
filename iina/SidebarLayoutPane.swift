@@ -22,6 +22,7 @@ class SidebarLayoutPane: SidebarScrollView {
   private var videoSettingsStack: NSStackView!
   private var lockAspectSwitch: NSSwitch!
   private var lockWindowAspectStack: NSStackView!
+  private var dockedUIStack: NSStackView!
   private var oscLayoutSelector: OSCLayoutSelector!
   private var removeBlackBarBtn: SideBarButton!
 
@@ -59,6 +60,14 @@ class SidebarLayoutPane: SidebarScrollView {
     )
     videoSettingsStack.addArrangedSubview(lockWindowAspectStack)
 
+    self.dockedUIStack = ui.hStack(
+      ui.image("dock.arrow.down.rectangle", size: 20),
+      ui.label("Docked Control Bar and Titlebar"),
+      ui.flexibleSpace(),
+      ui.toggleButton(bindTo: .dockedControlBarAndTitlebar, isSmall: true)
+    )
+    videoSettingsStack.addArrangedSubview(dockedUIStack)
+
     self.removeBlackBarBtn = SideBarButton("Remove black bars", image: .removeBlackbars)
     removeBlackBarBtn.target = self
     removeBlackBarBtn.action = #selector(removeBlackBars)
@@ -78,6 +87,7 @@ class SidebarLayoutPane: SidebarScrollView {
 
     UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.edgeToEdgeVideo.rawValue, options: .new, context: nil)
     UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.unlockWindowAspectRatio.rawValue, options: .new, context: nil)
+    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.dockedControlBarAndTitlebar.rawValue, options: .new, context: nil)
 
     documentView = FlippedView()
     documentView!.translatesAutoresizingMaskIntoConstraints = false
@@ -93,8 +103,10 @@ class SidebarLayoutPane: SidebarScrollView {
   func updateVideoSettingsStack() {
     if Preference.bool(for: .edgeToEdgeVideo) {
       videoSettingsStack.setVisibilityPriority(.mustHold, for: lockWindowAspectStack)
+      videoSettingsStack.setVisibilityPriority(.notVisible, for: dockedUIStack)
     } else {
       videoSettingsStack.setVisibilityPriority(.notVisible, for: lockWindowAspectStack)
+      videoSettingsStack.setVisibilityPriority(.mustHold, for: dockedUIStack)
     }
     // remove black bar button
     if Preference.unlockWindowAspectRatio {

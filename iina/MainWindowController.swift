@@ -133,7 +133,7 @@ class MainWindowController: PlayerWindowController {
   var frameWhenStartedPinching = NSRect()
 
   /** Views that will show/hide when cursor moving in/out the window. */
-  var fadeableViews: [NSView] = []
+  let fadeableViews = FadeableViewController()
 
   // Left and right arrow buttons
 
@@ -293,6 +293,7 @@ class MainWindowController: PlayerWindowController {
     .unlockWindowAspectRatio,
     .edgeToEdgeVideo,
     .compactUI,
+    .dockedControlBarAndTitlebar,
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -339,6 +340,7 @@ class MainWindowController: PlayerWindowController {
         if !newValue {
           additionalInfoView.isHidden = true
         }
+        fadeableViews.update()
       }
     case PK.controlBarToolbarButtons.rawValue:
       if let newValue = change[.newKey] as? [Int] {
@@ -346,10 +348,14 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.alwaysShowOnTopIcon.rawValue:
       titleBarView.updateOnTopIcon()
+    case PK.dockedControlBarAndTitlebar.rawValue:
+      setupVideoViewConstraints()
+      fadeableViews.update()
     case PK.edgeToEdgeVideo.rawValue:
       setupVideoViewConstraints()
       fallthrough
     case PK.unlockWindowAspectRatio.rawValue:
+      fadeableViews.update()
       titleBarView.updateRemoveBlackBarButton()
       handleVideoSizeChange(keepWindowSize: true)
     case PK.compactUI.rawValue:
@@ -375,8 +381,6 @@ class MainWindowController: PlayerWindowController {
       return window?.standardWindowButton(.closeButton)?.superview?.subviews.compactMap({ $0 as? NSTextField }).first
     }
   }
-
-  var titlebarAccessoryViewController: NSTitlebarAccessoryViewController!
 
   /** Current OSC view. */
   var currentControlBar: NSView?
@@ -505,7 +509,7 @@ class MainWindowController: PlayerWindowController {
 
     // osc bottom
 
-    oscBottomView.padding(.horizontal, .bottom)
+    oscBottomView.padding(.horizontal)
 
     // osd
 
@@ -520,7 +524,7 @@ class MainWindowController: PlayerWindowController {
 
     additionalInfoView.padding(.leading(greaterThan: 8), .bottom(greaterThan: 8))
       .spacing(.top(8), to: titleBarView)
-      .spacing(.trailing(8), to: sidebars.leadingSidebar.view)
+      .spacing(.trailing(8), to: sidebars.trailingSidebar.view)
     additionalInfoView.isHidden = true
 
     // buffer indicator view
@@ -535,7 +539,8 @@ class MainWindowController: PlayerWindowController {
 
     // titlebar
 
-    titleBarView.padding(.top, .horizontal)
+    titleBarView.padding(.horizontal)
+    titleBarView.updateVerticalConstraint(isDisplaying: true)
 
     // osc views
 
@@ -557,8 +562,41 @@ class MainWindowController: PlayerWindowController {
 
     // fade-able views
 
-    fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
-    fadeableViews.append(titleBarView)
+    standardWindowButtons.forEach {
+      fadeableViews.add($0) { [unowned self] in
+        fsState == .windowed && !Preference.isDocked ? .auto : .alwaysShown
+      }
+    }
+
+    fadeableViews.add(titleBarView) { [unowned self] in
+      if fsState == .windowed {
+        Preference.isDocked ? .alwaysShown : .auto
+      } else { // full screen
+        oscPosition == .top ? .auto : .alwaysHidden
+      }
+    }
+
+    fadeableViews.add(additionalInfoView) { [unowned self] in
+      if fsState == .windowed {
+        .alwaysHidden
+      } else {
+        Preference.bool(for: .displayTimeAndBatteryInFullScreen) ? .auto : .alwaysHidden
+      }
+    }
+
+    fadeableViews.add(oscBottomView) { [unowned self] in
+      if oscPosition == .bottom {
+        Preference.isDocked ? .alwaysShown : .auto
+      } else {
+        .alwaysHidden
+      }
+    }
+
+    fadeableViews.add(oscFloatingView) { [unowned self] in
+      oscPosition == .floating ? .auto : .alwaysHidden
+    }
+
+    fadeableViews.update()
 
     // other initialization
     cachedScreenCount = NSScreen.screens.count
@@ -669,7 +707,7 @@ class MainWindowController: PlayerWindowController {
   private func setWindowToolbar() {
     guard let window else { return }
 
-    if Preference.bool(for: .compactUI) {
+    if Preference.bool(for: .compactUI) || fsState != .windowed {
       window.toolbar = nil
     } else {
       window.toolbar = NSToolbar()
@@ -716,8 +754,11 @@ class MainWindowController: PlayerWindowController {
                                                         toItem: cv, attribute: attr, multiplier: 1, constant: 0)
       }
     } else {
-      videoViewConstraints[.top] = videoView.topAnchor.constraint(equalTo: cv.topAnchor)
-      videoViewConstraints[.bottom] = videoView.bottomAnchor.constraint(equalTo: cv.bottomAnchor)
+      let docked = Preference.bool(for: .dockedControlBarAndTitlebar)
+      videoViewConstraints[.top] = videoView.topAnchor
+        .constraint(equalTo: docked ? titleBarView.bottomAnchor : cv.topAnchor)
+      videoViewConstraints[.bottom] = videoView.bottomAnchor
+        .constraint(equalTo: docked ? oscBottomView.topAnchor : cv.bottomAnchor)
       videoViewConstraints[.leading] = videoView.leadingAnchor.constraint(equalTo: sidebars.leadingSidebar.view.trailingAnchor)
       videoViewConstraints[.trailing] = videoView.trailingAnchor.constraint(equalTo: sidebars.trailingSidebar.view.leadingAnchor)
     }
@@ -783,11 +824,6 @@ class MainWindowController: PlayerWindowController {
     let isSwitchingFromTop = oscPosition == .top
     let isFloating = newPosition == .floating
 
-    if let cb = currentControlBar {
-      // remove current osc view from fadeable views
-      fadeableViews = fadeableViews.filter { $0 != cb }
-    }
-
     // reset
     [oscFloatingView, oscBottomView].forEach { $0.isHidden = true }
 
@@ -806,13 +842,11 @@ class MainWindowController: PlayerWindowController {
     let isInFullScreen = fsState.isFullscreen
     titleBarView.update(hasOSC: isSwitchingToTop, inFullScreen: isInFullScreen)
 
-    if isSwitchingToTop && isInFullScreen {
-      addBackTitlebarViewToFadeableViews()
-    }
     if isSwitchingFromTop && isInFullScreen {
       titleBarView.isHidden = true
-      removeTitlebarViewFromFadeableViews()
     }
+
+    oscBottomView.updateVerticalConstraint(isDisplaying: newPosition == .bottom)
 
     oscPosition = newPosition
 
@@ -855,6 +889,7 @@ class MainWindowController: PlayerWindowController {
       oscTopMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
       oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     case .bottom:
+      oscBottomView.isHidden = false
       let oscBottomMainView = oscBottomView.oscView!
       currentControlBar = oscBottomView
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
@@ -869,9 +904,7 @@ class MainWindowController: PlayerWindowController {
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
     }
 
-    if currentControlBar != nil {
-      fadeableViews.append(currentControlBar!)
-    }
+    fadeableViews.update()
     showUI()
 
     if isFloating {
@@ -1341,13 +1374,12 @@ class MainWindowController: PlayerWindowController {
       titleBarView.update(hasOSC: true, inFullScreen: true)
     } else {
       // stop animation and hide titleBarView
-      removeTitlebarViewFromFadeableViews()
       titleBarView.isHidden = true
+      titleBarView.updateVerticalConstraint(isDisplaying: false)
     }
     standardWindowButtons.forEach { $0.alphaValue = 0 }
     titleTextField?.alphaValue = 0
 
-    window!.removeTitlebarAccessoryViewController(at: 0)
     setWindowFloatingOnTop(false, updateOnTopStatus: false)
 
     thumbnailPeekView.isHidden = true
@@ -1356,6 +1388,8 @@ class MainWindowController: PlayerWindowController {
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
+    setWindowToolbar()
+    fadeableViews.update()
   }
 
   /// The window has entered full screen mode.
@@ -1370,7 +1404,10 @@ class MainWindowController: PlayerWindowController {
     fsState.finishAnimating()
 
     titleTextField?.alphaValue = 1
-    removeStandardButtonsFromFadeableViews()
+    for view in standardWindowButtons {
+      view.alphaValue = 1
+      view.isHidden = false
+    }
     window?.titlebarAppearsTransparent = false
 
     videoView.needsLayout = true
@@ -1380,10 +1417,7 @@ class MainWindowController: PlayerWindowController {
     if Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
     }
-
-    if Preference.bool(for: .displayTimeAndBatteryInFullScreen) {
-      fadeableViews.append(additionalInfoView)
-    }
+    fadeableViews.update()
 
     if player.info.state == .paused {
       if Preference.bool(for: .playWhenEnteringFullScreen) {
@@ -1434,12 +1468,11 @@ class MainWindowController: PlayerWindowController {
     if oscPosition == .top {
       titleBarView.update(hasOSC: true, inFullScreen: false)
     } else {
-      addBackTitlebarViewToFadeableViews()
+      titleBarView.updateVerticalConstraint(isDisplaying: true)
     }
-    addBackStandardButtonsToFadeableViews()
-    titleBarView.isHidden = false
     titleTextField?.alphaValue = 1
-    window.addTitlebarAccessoryViewController(titlebarAccessoryViewController)
+    setWindowToolbar()
+    fadeableViews.update()
 
     if player.info.state == .playing {
       setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
@@ -1473,6 +1506,8 @@ class MainWindowController: PlayerWindowController {
     // show titleBarView
     if oscPosition == .top {
       titleBarView.update(hasOSC: true, inFullScreen: false)
+    } else {
+      titleBarView.updateVerticalConstraint(isDisplaying: true)
     }
 
     thumbnailPeekView.isHidden = true
@@ -1480,11 +1515,8 @@ class MainWindowController: PlayerWindowController {
     additionalInfoView.isHidden = true
     isMouseInSlider = false
 
-    if let index = fadeableViews.firstIndex(of: additionalInfoView) {
-      fadeableViews.remove(at: index)
-    }
-
     fsState.startAnimatingToWindow()
+    fadeableViews.update()
   }
 
   /// The window has left full screen mode.
@@ -1522,15 +1554,12 @@ class MainWindowController: PlayerWindowController {
       // window. Restore it now.
       window!.setFrame(fsState.priorWindowedFrame!, display: true, animate: false)
     }
-    if oscPosition != .top {
-      addBackTitlebarViewToFadeableViews()
-    }
-    addBackStandardButtonsToFadeableViews()
-    titleBarView.isHidden = false
 
     window?.titlebarAppearsTransparent = true
 
     fsState.finishAnimating()
+    setWindowToolbar()
+    fadeableViews.update()
 
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()
@@ -1544,8 +1573,6 @@ class MainWindowController: PlayerWindowController {
     }
 
     player.touchBarSupport.toggleTouchBarEsc(enteringFullScr: false)
-
-    window!.addTitlebarAccessoryViewController(titlebarAccessoryViewController)
 
     // Must not access mpv while it is asynchronously processing stop and quit commands.
     // See comments in windowWillExitFullScreen for details.
@@ -1596,11 +1623,12 @@ class MainWindowController: PlayerWindowController {
 
     if oscPosition == .top {
       titleBarView.update(hasOSC: true, inFullScreen: true)
+    } else {
+      titleBarView.updateVerticalConstraint(isDisplaying: false)
     }
+    setWindowToolbar()
+    fadeableViews.update()
 
-    if Preference.bool(for: .displayTimeAndBatteryInFullScreen) {
-      fadeableViews.append(additionalInfoView)
-    }
     additionalInfoView.update()
 
     videoView.needsLayout = true
@@ -2041,7 +2069,14 @@ class MainWindowController: PlayerWindowController {
       }
     }
     titleBarView?.updateTitle()
-    addDocIconToFadeableViews()
+
+    // Sometimes the doc icon may not be available, eg. when opened an online video.
+    // We should try to add it every time when window title changed.
+    if let docIcon = window?.standardWindowButton(.documentIconButton) {
+      fadeableViews.add(docIcon) { [unowned self] in
+        fsState == .windowed ? .auto : .alwaysShown
+      }
+    }
   }
 
   // MARK: - UI: OSD
@@ -2136,42 +2171,6 @@ class MainWindowController: PlayerWindowController {
   private func setConstraintsForVideoView(_ constraints: [NSLayoutConstraint.Attribute: CGFloat]) {
     for (attr, value) in constraints {
       videoViewConstraints[attr]?.constant = value
-    }
-  }
-
-  // MARK: - UI: "Fadeable" views
-
-  private func removeStandardButtonsFromFadeableViews() {
-    fadeableViews = fadeableViews.filter { view in
-      !standardWindowButtons.contains {
-        $0 == view
-      }
-    }
-    for view in standardWindowButtons {
-      view.alphaValue = 1
-      view.isHidden = false
-    }
-  }
-
-  private func removeTitlebarViewFromFadeableViews() {
-    if let index = (self.fadeableViews.firstIndex { $0 === titleBarView }) {
-      self.fadeableViews.remove(at: index)
-    }
-  }
-
-  private func addBackStandardButtonsToFadeableViews() {
-    fadeableViews.append(contentsOf: standardWindowButtons as [NSView])
-  }
-
-  private func addBackTitlebarViewToFadeableViews() {
-    fadeableViews.append(titleBarView)
-  }
-
-  // Sometimes the doc icon may not be available, eg. when opened an online video.
-  // We should try to add it every time when window title changed.
-  private func addDocIconToFadeableViews() {
-    if let docIcon = window?.standardWindowButton(.documentIconButton), !fadeableViews.contains(docIcon) {
-      fadeableViews.append(docIcon)
     }
   }
 

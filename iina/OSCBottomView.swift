@@ -19,6 +19,7 @@ class OSCBottomView: NSView {
   private var container: NSView!
   private var leadingConstraint: NSLayoutConstraint!
   private var trailingConstraint: NSLayoutConstraint!
+  private var verticalConstraint: NSLayoutConstraint!
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
@@ -52,12 +53,29 @@ class OSCBottomView: NSView {
   func setLeadingConstraint(_ constant: CGFloat, animated: Bool = true) {
     if animated {
       leadingConstraint.animator().constant = constant
+    } else {
+      leadingConstraint.constant = constant
     }
   }
 
   func setTrailingConstraint(_ constant: CGFloat, animated: Bool = true) {
     if animated {
       trailingConstraint.animator().constant = constant
+    } else {
+      trailingConstraint.constant = constant
     }
+  }
+
+  func updateVerticalConstraint(isDisplaying: Bool) {
+    guard let superview else { return }
+    if let verticalConstraint {
+      superview.removeConstraint(verticalConstraint)
+    }
+    if isDisplaying {
+      verticalConstraint = bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+    } else {
+      verticalConstraint = topAnchor.constraint(equalTo: superview.bottomAnchor)
+    }
+    verticalConstraint.isActive = true
   }
 }

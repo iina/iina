@@ -536,7 +536,7 @@ class CanonicalNameDB:
     print(f"Canonicalizing libs in {lib_dir}…")
     # Create libStaging, then copy all libs to be processed into it.
     # This side-steps any thorny issues which might be caused by symlinks, makes purging Frameworks directory easier.
-    lib_staging_dir_path = os.path.join(lib_dir, '../libStaging')
+    lib_staging_dir_path = os.path.abspath(os.path.join(lib_dir, '../libStaging'))
     os.makedirs(lib_staging_dir_path, exist_ok=True)
     print(f'Copying libs into {lib_staging_dir_path}')
 
@@ -545,7 +545,7 @@ class CanonicalNameDB:
 
     def copy_to_cname(canonical_name: str, compat_version: str, src_path: str):
       print(f'Canonical name for v{compat_version} = {canonical_name} → {src_path}')
-      dst_path = os.path.join(lib_staging_dir_path, canonical_name)
+      dst_path = os.path.abspath(os.path.join(lib_staging_dir_path, canonical_name))
       shutil.copyfile(src_path, dst_path)
       nonlocal copied_libs_count
       copied_libs_count += 1

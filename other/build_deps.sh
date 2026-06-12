@@ -126,4 +126,5 @@ fi
 
 echo ""
 echo -e "${GREEN}✅ Done${NC}"
+afplay /System/Library/Sounds/Glass.aiff
 

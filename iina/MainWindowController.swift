@@ -1792,6 +1792,9 @@ class MainWindowController: PlayerWindowController {
     if isInInteractiveMode {
       return window.frame.size
     }
+    if !window.inLiveResize, #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+      clearAnalysis()
+    }
     if frameSize.height <= AppData.mainWindowMinSize.height || frameSize.width <= AppData.mainWindowMinSize.width {
       return currentWindowAspectRatio.grow(toSize: AppData.mainWindowMinSize)
     }
@@ -1800,6 +1803,9 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
+    if !window.inLiveResize, #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+      requestLiveTextAnalysis()
+    }
 
     // update control bar position
     if oscPosition == .floating {

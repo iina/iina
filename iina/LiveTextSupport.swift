@@ -10,7 +10,7 @@ import Cocoa
 import VisionKit
 
 fileprivate let subsystem = Logger.makeSubsystem("livetext", ["text.viewfinder"])
-fileprivate func liveTextLog(_ str: String, level: Logger.Level = .debug) {
+fileprivate func liveTextLog(_ str: @autoclosure () -> String, level: Logger.Level = .debug) {
   Logger.log(str, level: level, subsystem: subsystem)
 }
 

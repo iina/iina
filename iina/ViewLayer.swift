@@ -216,10 +216,11 @@ class ViewLayer: CAOpenGLLayer {
       }
       glFlush()
 
-      snapshotLock.lock()
-      let handler = pendingSnapshotHandler
-      pendingSnapshotHandler = nil
-      snapshotLock.unlock()
+      let handler = snapshotLock.withLock { () -> ((NSImage?) -> Void)? in
+        let handler = pendingSnapshotHandler
+        pendingSnapshotHandler = nil
+        return handler
+      }
       if let handler {
         let image = framebufferSnapshot(width: Int(dims[2]), height: Int(dims[3]))
         handler(image)
@@ -229,19 +230,20 @@ class ViewLayer: CAOpenGLLayer {
 
   // MARK: - Snapshot
 
-  private let snapshotLock = NSLock()
+  private let snapshotLock = Lock()
   private var pendingSnapshotHandler: ((NSImage?) -> Void)?
 
   /// Capture the next rendered frame as an `NSImage`. Forces a redraw so this works while paused.
   func captureSnapshot() async -> NSImage? {
     await withCheckedContinuation { continuation in
-      snapshotLock.lock()
       // Drop any previous in-flight request — only the latest caller wins.
-      let previous = pendingSnapshotHandler
-      pendingSnapshotHandler = { image in
-        continuation.resume(returning: image)
+      let previous = snapshotLock.withLock { () -> ((NSImage?) -> Void)? in
+        let previous = pendingSnapshotHandler
+        pendingSnapshotHandler = { image in
+          continuation.resume(returning: image)
+        }
+        return previous
       }
-      snapshotLock.unlock()
       previous?(nil)
       update(force: true)
     }

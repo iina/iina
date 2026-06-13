@@ -386,7 +386,7 @@
               rsync -a "${spmDeps}/" ./
               chmod -R u+rwx,g+rx,o+rx .
 
-              echo "[${system}] 📦 Adding canonical links"
+              echo "[${system}] 📦 Canonicalizing libs"
               ${libTool}/bin/iina-lib-tool --canonicalize --prune "./deps/lib" "./deps/executable"
 
               # Rewrite SwiftPM workspace-state.json to fix absolute paths

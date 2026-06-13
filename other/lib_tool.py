@@ -67,14 +67,6 @@ For all files in libStaging directory:
 For all executables in MacOS directory:
 1. Add missing LC_RPATH entries pointing to @executable_path/../Frameworks.
 2. Replace /opt/nix references with @rpath references using the canonical names from canonical_name_multimap.
-
-Mode --add-canonical-links:
----------------------------
-Same as (I) & (II) above, but instead of copying canonical libs to libStaging, just add symbolic links to them to the
-lib directory (if file is already present, skip it). No modifications are made to the lib or executable files in this
-mode.
-
-This option is needed to prevent `xcodebuild` from failing when executed via the Nix build process.
 """
 
 import os
@@ -93,8 +85,10 @@ APP_FRAMEWORKS_RELPATH = "Contents/Frameworks"
 APP_EXECUTABLES_RELPATH = "Contents/MacOS"
 
 # Set of lib IDs to exclude.
-# Skip 'libffi-trampoline' (apparently a typo of 'libffi-trampolines'?)
-IDS_TO_IGNORE: set[str] = {'libffi-trampoline'}
+IDS_TO_IGNORE: set[str] = {
+  'libswift_Concurrency', # This needs to be included for pre-MacOS 12 builds
+  'libffi-trampoline',    # Skip 'libffi-trampoline' (apparently a typo of 'libffi-trampolines'?)
+}
 
 # Map of libs which are already provided by macOS and should not be packaged in the bundle.
 # For a list of system-provided libs, see:
@@ -562,17 +556,10 @@ class CanonicalNameDB:
       print(f'✂️ Removing old lib files and links from {lib_dir}')
       all_children: map[tuple[str, str]] = map(lambda name: (name, os.path.join(lib_dir, name)), os.listdir(lib_dir))
       old_lib_links = [child for child in all_children if os.path.islink(child[1])]
-      for link_basename, link_path in old_lib_links:
-        if link_basename.startswith('.libiconv'):
-          print(f'Will not remove lib file: {link_path}')
-        else:
-          os.unlink(link_path)
-
-      for oldlib_basename, oldlib_path in ls_files_in_dir(lib_dir):
-        if oldlib_basename.startswith('.libiconv'):
-          print(f'Will not remove lib file: {oldlib_basename}')
-        else:
-          os.remove(oldlib_path)
+      for _, link_path in old_lib_links:
+        os.unlink(link_path)
+      for _, lib_path in ls_files_in_dir(lib_dir):
+        os.remove(lib_path)
 
     # Second pass. Add missing LC_RPATH entries, rewrite lib references to use @rpath & canonical names.
 

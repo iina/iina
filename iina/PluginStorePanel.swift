@@ -499,16 +499,32 @@ struct RepoDetailView: View {
       .font(.callout)
       .foregroundColor(.secondary)
 
-      Text("Updated \(Self.relativeFormatter.localizedString(for: repo.pushedAt ?? repo.updatedAt, relativeTo: Date()))")
+      Text(formatUpdateDate(repo.pushedAt ?? repo.updatedAt))
         .font(.caption)
         .foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
   }
 
+  private func formatUpdateDate(_ date: Date) -> String {
+    let days = Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
+    if days < 30 {
+      return "Updated \(Self.relativeFormatter.localizedString(for: date, relativeTo: Date()))"
+    } else {
+      return "Updated on \(Self.absoluteFormatter.string(from: date))"
+    }
+  }
+
   private static let relativeFormatter: RelativeDateTimeFormatter = {
     let f = RelativeDateTimeFormatter()
     f.unitsStyle = .full
+    return f
+  }()
+
+  private static let absoluteFormatter: DateFormatter = {
+    let f = DateFormatter()
+    f.dateStyle = .medium
+    f.timeStyle = .none
     return f
   }()
 

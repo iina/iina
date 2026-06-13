@@ -294,6 +294,9 @@ class MainWindowController: PlayerWindowController {
     .edgeToEdgeVideo,
     .compactUI,
     .dockedControlBarAndTitlebar,
+    .useLiquidGlassOSC,
+    .useLiquidGlassOSD,
+    .useLiquidGlassSidebar,
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -360,6 +363,10 @@ class MainWindowController: PlayerWindowController {
       handleVideoSizeChange(keepWindowSize: true)
     case PK.compactUI.rawValue:
       setWindowToolbar()
+    case PK.useLiquidGlassOSD.rawValue:
+      [timePreviewView, osdView, additionalInfoView, bufferIndicatorView].forEach {
+        $0?.setStyle(Preference.liquidGlass(.osd) ? .liquidGlass : .visualEffect)
+      }
     default:
       return
     }
@@ -503,9 +510,6 @@ class MainWindowController: PlayerWindowController {
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
     timePreviewView.textField.font = monospacedFont
-    if #available(macOS 26.0, *) {
-      timePreviewView.setStyle(.liquidGlass)
-    }
 
     // osc bottom
 
@@ -513,9 +517,6 @@ class MainWindowController: PlayerWindowController {
 
     // osd
 
-    if #available(macOS 26.0, *) {
-      osdView.setStyle(.liquidGlass)
-    }
     osdView.padding(.trailing(greaterThan: 8), .bottom(greaterThan: 8))
       .spacing(.top(8), to: titleBarView)
       .spacing(.leading(8), to: sidebars.leadingSidebar.view)
@@ -532,15 +533,13 @@ class MainWindowController: PlayerWindowController {
     bufferIndicatorView.center()
     bufferIndicatorView.update()
 
-    if #available(macOS 26.0, *) {
-      additionalInfoView.setStyle(.liquidGlass)
-      bufferIndicatorView.setStyle(.liquidGlass)
+    [timePreviewView, osdView, additionalInfoView, bufferIndicatorView].forEach {
+      $0?.setStyle(Preference.liquidGlass(.osd) ? .liquidGlass : .visualEffect)
     }
 
     // titlebar
 
     titleBarView.padding(.horizontal)
-    titleBarView.updateVerticalConstraint(isDisplaying: true)
 
     // osc views
 
@@ -1370,13 +1369,7 @@ class MainWindowController: PlayerWindowController {
     window?.appearance = NSAppearance(iinaTheme: iinaTheme)
 
     // show titlebar
-    if oscPosition == .top {
-      titleBarView.update(hasOSC: true, inFullScreen: true)
-    } else {
-      // stop animation and hide titleBarView
-      titleBarView.isHidden = true
-      titleBarView.updateVerticalConstraint(isDisplaying: false)
-    }
+    titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: true)
     standardWindowButtons.forEach { $0.alphaValue = 0 }
     titleTextField?.alphaValue = 0
 
@@ -1465,14 +1458,10 @@ class MainWindowController: PlayerWindowController {
     fsState = .animating(toFullscreen: false, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
     fsState.finishAnimating()
 
-    if oscPosition == .top {
-      titleBarView.update(hasOSC: true, inFullScreen: false)
-    } else {
-      titleBarView.updateVerticalConstraint(isDisplaying: true)
-    }
-    titleTextField?.alphaValue = 1
+    titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: false)
     setWindowToolbar()
     fadeableViews.update()
+    showUI()
 
     if player.info.state == .playing {
       setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
@@ -1503,12 +1492,7 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
-    // show titleBarView
-    if oscPosition == .top {
-      titleBarView.update(hasOSC: true, inFullScreen: false)
-    } else {
-      titleBarView.updateVerticalConstraint(isDisplaying: true)
-    }
+    titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: false)
 
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
@@ -1621,13 +1605,10 @@ class MainWindowController: PlayerWindowController {
     fsState = .animating(toFullscreen: true, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
     fsState.finishAnimating()
 
-    if oscPosition == .top {
-      titleBarView.update(hasOSC: true, inFullScreen: true)
-    } else {
-      titleBarView.updateVerticalConstraint(isDisplaying: false)
-    }
+    titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: true)
     setWindowToolbar()
     fadeableViews.update()
+    showUI()
 
     additionalInfoView.update()
 

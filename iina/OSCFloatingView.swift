@@ -15,6 +15,7 @@ fileprivate extension LayoutValue {
 
 class OSCFloatingView: TranslucentView {
   weak var mainWindow: MainWindowController!
+  private let prefObserver = Preference.Observer()
 
   var oscTopView: NSStackView!
   var oscBottomView: TimeLabelOverflowedStackView!
@@ -56,6 +57,10 @@ class OSCFloatingView: TranslucentView {
     setContent(container)
 
     widthAnchor.constraint(greaterThanOrEqualToConstant: 200).isActive = true
+
+    prefObserver.add(.useLiquidGlassOSC, block: { [unowned self] _ in
+      setStyle(Preference.liquidGlass(.osc) ? .liquidGlass : .visualEffect)
+    }, runNow: true)
   }
 
   override func viewDidMoveToSuperview() {

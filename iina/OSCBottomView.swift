@@ -13,6 +13,8 @@ fileprivate extension LayoutValue {
 
 class OSCBottomView: NSView {
   weak var mainWindow: MainWindowController!
+  private let prefObserver = Preference.Observer()
+
   var oscView: TimeLabelOverflowedStackView!
 
   private var translucentView: TranslucentView!
@@ -44,6 +46,10 @@ class OSCBottomView: NSView {
     leadingConstraint.isActive = true
     trailingConstraint = trailingAnchor.constraint(equalTo: translucentView.trailingAnchor, constant: 0)
     trailingConstraint.isActive = true
+
+    prefObserver.add(.useLiquidGlassOSC, block: { [unowned self] _ in
+      translucentView.setStyle(Preference.liquidGlass(.osc) ? .liquidGlass : .visualEffect)
+    }, runNow: true)
   }
 
   @MainActor required init?(coder: NSCoder) {

@@ -28,7 +28,6 @@ class Titlebar: NSView {
   var isTransparant = false {
     didSet {
       updateShadow()
-      updateMask()
     }
   }
 
@@ -36,6 +35,8 @@ class Titlebar: NSView {
 
   private var background: NSVisualEffectView
   private var titleBarBottomBorder: NSBox
+  private var backgroundLeadingConstraint: NSLayoutConstraint!
+  private var backgroundTrailingConstraint: NSLayoutConstraint!
 
   private var onTopButton: NSButton
   private var removeBlackBarButton: NSButton
@@ -50,8 +51,8 @@ class Titlebar: NSView {
   private var titleTextField: NSTextField!
   private var docIcon: NSImageView!
 
-  private var oscContainer: NSView!
   var oscView: TimeLabelOverflowedStackView!
+  private var oscContainer: NSView!
   private var oscLeadingConstraint: NSLayoutConstraint!
 
   init(mainWindow: MainWindowController) {
@@ -89,7 +90,11 @@ class Titlebar: NSView {
     background.layerContentsRedrawPolicy = .onSetNeedsDisplay
     background.state = .active
     addSubview(background)
-    background.padding(.top, .horizontal, .bottom(1))
+    background.padding(.top, .bottom(1))
+    backgroundLeadingConstraint = background.leadingAnchor.constraint(equalTo: leadingAnchor)
+    backgroundLeadingConstraint.isActive = true
+    backgroundTrailingConstraint = trailingAnchor.constraint(equalTo: background.trailingAnchor)
+    backgroundTrailingConstraint.isActive = true
 
     titleBarBottomBorder.boxType = .separator
     addSubview(titleBarBottomBorder)
@@ -192,7 +197,7 @@ class Titlebar: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func updateVerticalConstraint(isDisplaying: Bool) {
+  private func updateVerticalConstraint(isDisplaying: Bool) {
     guard let superview else { return }
     if let verticalConstraint {
       superview.removeConstraint(verticalConstraint)
@@ -222,6 +227,8 @@ class Titlebar: NSView {
     if !useSystemTitle {
       window?.titleVisibility = inFullScreen ? .visible : .hidden
     }
+    // update vertical constraint
+    updateVerticalConstraint(isDisplaying: !inFullScreen || hasOSC)
   }
 
   func updateOnTopIcon() {
@@ -252,17 +259,21 @@ class Titlebar: NSView {
     if animated {
       titleLeadingConstraint.animator().constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.animator().constant = constant + 6
+      backgroundLeadingConstraint.animator().constant = constant
     } else {
       titleLeadingConstraint.constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.constant = constant + 6
+      backgroundLeadingConstraint.constant = constant
     }
   }
 
   func setTrailingConstraint(_ constant: CGFloat, animated: Bool = true) {
     if animated {
       trailingConstraint.animator().constant = constant
+      backgroundTrailingConstraint.animator().constant = constant
     } else {
       trailingConstraint.constant = constant
+      backgroundTrailingConstraint.constant = constant
     }
   }
 
@@ -318,16 +329,6 @@ class Titlebar: NSView {
     NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: url.path)
   }
 
-  override func layout() {
-    super.layout()
-    updateMask()
-  }
-
-  override func updateLayer() {
-    super.updateLayer()
-    updateMask()
-  }
-
   private func updateShadow() {
     if isTransparant {
       let shadow = NSShadow()
@@ -338,50 +339,6 @@ class Titlebar: NSView {
     } else {
       titleTextField.shadow = nil
     }
-  }
-
-  private func updateMask() {
-    guard titleLeadingConstraint != nil, trailingConstraint != nil else { return }
-
-    let mask = CAGradientLayer()
-    mask.frame = bounds
-
-    if isTransparant {
-      mask.colors = [CGColor(gray: 0, alpha: 1), CGColor(gray: 0, alpha: 0)]
-      mask.locations = [0, 1]
-      mask.startPoint = CGPoint(x: 0, y: 1)
-      mask.endPoint   = CGPoint(x: 0, y: 0)
-    } else {
-      // 4-stop horizontal gradient that fades the titlebar behind whichever sidebar(s)
-      // overlap it. Both edges are driven by the sidebars' real frames so the fade tracks
-      // them through the slide animation, not the (decoupled) doc-icon constraint.
-      let w = bounds.width
-      let leadInner = sidebarInnerEdge(for: .leading, in: w)
-      let trailInner = sidebarInnerEdge(for: .trailing, in: w)
-      let leadStart = max(0, leadInner - 100) / w
-      var leadEnd   = leadInner / w
-      var trailStart = trailInner / w
-      let trailEnd  = min(w, trailInner + 100) / w
-      // Keep locations monotonically increasing in the rare case both sidebars are wide
-      // enough to overlap.
-      if leadEnd > trailStart {
-        let mid = (leadEnd + trailStart) / 2
-        leadEnd = mid
-        trailStart = mid
-      }
-
-      mask.colors = [
-        CGColor(gray: 0, alpha: 0),
-        CGColor(gray: 0, alpha: 1),
-        CGColor(gray: 0, alpha: 1),
-        CGColor(gray: 0, alpha: 0),
-      ]
-      mask.locations = [leadStart, leadEnd, trailStart, trailEnd].map { NSNumber(value: Double($0)) }
-      mask.startPoint = CGPoint(x: 0, y: 0.5)
-      mask.endPoint   = CGPoint(x: 1, y: 0.5)
-    }
-
-    background.layer!.mask = mask
   }
 
   /// Inner edge (toward the video center) of the sidebar on the given side, in titlebar coords.

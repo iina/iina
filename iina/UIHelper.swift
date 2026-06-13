@@ -50,9 +50,9 @@ class UIHelper {
     return textField
   }
 
-  func toggleButton(bindTo key: Preference.Key, isSmall: Bool = false, inverted: Bool = false) -> NSSwitch {
+  func toggleButton(bindTo key: Preference.Key, size: NSControl.ControlSize = .regular, inverted: Bool = false) -> NSSwitch {
     let btn = NSSwitch()
-    btn.controlSize = isSmall ? .small : .regular
+    btn.controlSize = size
     let opt: [NSBindingOption : Any] = inverted ? [
       .valueTransformerName: NSValueTransformerName(rawValue: "NSNegateBoolean")
     ] : [:]

@@ -80,13 +80,33 @@ class SidebarController: NSObject {
   }
 
   unowned let mainWindow: MainWindowController
+  let prefObserver = Preference.Observer()
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
     super.init()
 
-    ViewType.allCases.compactMap { $0.prefKey }.forEach {
-      UserDefaults.standard.addObserver(self, forKeyPath: $0.rawValue, options: .new, context: nil)
+    // observe sidebar positions
+    prefObserver.addAll(ViewType.allCases.compactMap { $0.prefKey }) { [unowned self] key in
+      ViewType.allCases
+        .filter { $0.prefKey == key && isShowing($0) }
+        .forEach { viewType in
+          hideAllSideBars(animate: false) {
+            switch viewType {
+            case .settings: self.showSettings()
+            case .playlist: self.showPlaylist()
+            case .plugins: self.showPlugin(tab: nil)
+            default: break
+            }
+          }
+        }
+    }
+
+    // observe liquid glass status
+    prefObserver.add(.useLiquidGlassSidebar) { [unowned self] _ in
+      sideBars.forEach {
+        $0.view.setStyle(Preference.liquidGlass(.sidebar) ? .liquidGlass : .visualEffect)
+      }
     }
   }
 
@@ -132,7 +152,7 @@ class SidebarController: NSObject {
       }
       panel.edgeConstraint.isActive = true
       panel.view.isHidden = true
-      if #available(macOS 26.0, *) {
+      if Preference.liquidGlass(.sidebar) {
         panel.view.setStyle(.liquidGlass)
       }
     }
@@ -140,20 +160,7 @@ class SidebarController: NSObject {
 
   // MARK: - Queries
 
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath else { return }
-    ViewType.allCases.forEach { viweType in
-      if viweType.prefKey?.rawValue == keyPath, isShowing(viweType) {
-        hideAllSideBars(animate: false) {
-          switch viweType {
-          case .settings: self.showSettings()
-          case .playlist: self.showPlaylist()
-          case .plugins: self.showPlugin(tab: nil)
-          default: break
-          }
-        }
-      }
-    }
+  private func sidebarPosChanged(_ key: Preference.Key) {
   }
 
   func sideBar(for side: Side) -> Panel {

@@ -11,15 +11,19 @@ fileprivate extension LayoutValue {
   static let sidebarMargin = LayoutValue(18, 14)
   static let stackViewSpacing = LayoutValue(20, 16)
   static let containerPadding = LayoutValue(12, 10)
-  static let stackViewSubListSpacing = LayoutValue(12, 8)
+  static let videoSettingsSpacing = LayoutValue(12, 8)
+  static let sidebarSettingsSpacing = LayoutValue(10, 6)
+  static let liquidGlassSettingsSpacing = LayoutValue(6, 5)
 }
 
 
 class SidebarLayoutPane: SidebarScrollView {
   let ui = UIHelper()
+  let prefObserver = Preference.Observer()
   weak var player: PlayerCore!
 
   private var videoSettingsStack: NSStackView!
+  private var themeSettingStack: NSStackView!
   private var lockAspectSwitch: NSSwitch!
   private var lockWindowAspectStack: NSStackView!
   private var dockedUIStack: NSStackView!
@@ -34,29 +38,80 @@ class SidebarLayoutPane: SidebarScrollView {
     
     let stack = ui.vStack(spacing: .stackViewSpacing)
 
-    stack.addArrangedSubview(ui.hStack(
+    themeSettingStack = ui.vStack(
+      spacing: .videoSettingsSpacing,
+      ui.hStack(
+        ui.image("lightspectrum.horizontal", size: 20),
+        ui.label("Theme"),
+        ui.flexibleSpace(),
+        ThemeSwitch(.themeMaterial),
+      )
+    )
+
+    if #available(macOS 26.0, *) {
+      themeSettingStack.addArrangedSubview(ui.vStack(
+        spacing: .videoSettingsSpacing,
+        ui.hStack(
+          ui.image("liquid.glass", size: 20),
+          ui.label("Liquid Glass"),
+          ui.flexibleSpace(),
+        ),
+        ui.vStack(
+          spacing: .liquidGlassSettingsSpacing,
+          ui.hStack(
+            ui.space(),
+            ui.image("osd", size: 16),
+            ui.label("On Screen Display", isSmall: true),
+            ui.flexibleSpace(),
+            ui.toggleButton(bindTo: .useLiquidGlassOSD, size: .mini)
+          ),
+          ui.hStack(
+            ui.space(),
+            ui.image("osc.floating", size: 16),
+            ui.label("On Screen Controller", isSmall: true),
+            ui.flexibleSpace(),
+            ui.toggleButton(bindTo: .useLiquidGlassOSC, size: .mini)
+          ),
+          ui.hStack(
+            ui.space(),
+            ui.image("sidebar.squares.trailing", size: 16),
+            ui.label("Sidebar", isSmall: true),
+            ui.flexibleSpace(),
+            ui.toggleButton(bindTo: .useLiquidGlassSidebar, size: .mini)
+          ),
+        )
+      ))
+    }
+
+    stack.addArrangedSubview(Container(themeSettingStack) {
+      $0.padding(.all(.containerPadding))
+    })
+
+    stack.addArrangedSubview(Container(ui.hStack(
       ui.image("rectangle.grid.3x2.fill", size: 20),
       ui.label("Compact Interface"),
       ui.flexibleSpace(),
-      ui.toggleButton(bindTo: .compactUI, isSmall: true)
-    ))
+      ui.toggleButton(bindTo: .compactUI, size: .small)
+    )) {
+      $0.padding(.all(.containerPadding))
+    })
 
 //    stack.addArrangedSubview(createSectionTitle("Video"))
 
-    videoSettingsStack = ui.vStack(spacing: .stackViewSubListSpacing)
+    videoSettingsStack = ui.vStack(spacing: .videoSettingsSpacing)
 
     videoSettingsStack.addArrangedSubview(ui.hStack(
       ui.image("custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle", size: 20),
       ui.label("Edge-to-Edge Video"),
       ui.flexibleSpace(),
-      ui.toggleButton(bindTo: .edgeToEdgeVideo, isSmall: true)
+      ui.toggleButton(bindTo: .edgeToEdgeVideo, size: .small)
     ))
 
     self.lockWindowAspectStack = ui.hStack(
       ui.image("lock.rectangle", size: 20),
       ui.label("Lock Window Aspect Ratio"),
       ui.flexibleSpace(),
-      ui.toggleButton(bindTo: .unlockWindowAspectRatio, isSmall: true, inverted: true)
+      ui.toggleButton(bindTo: .unlockWindowAspectRatio, size: .small, inverted: true)
     )
     videoSettingsStack.addArrangedSubview(lockWindowAspectStack)
 
@@ -64,7 +119,7 @@ class SidebarLayoutPane: SidebarScrollView {
       ui.image("dock.arrow.down.rectangle", size: 20),
       ui.label("Docked Control Bar and Titlebar"),
       ui.flexibleSpace(),
-      ui.toggleButton(bindTo: .dockedControlBarAndTitlebar, isSmall: true)
+      ui.toggleButton(bindTo: .dockedControlBarAndTitlebar, size: .small)
     )
     videoSettingsStack.addArrangedSubview(dockedUIStack)
 
@@ -78,16 +133,20 @@ class SidebarLayoutPane: SidebarScrollView {
     updateVideoSettingsStack()
 
     stack.addArrangedSubview(Container(videoSettingsStack) {
-      $0.padding(.horizontal(.containerPadding), .vertical(.containerPadding))
+      $0.padding(.all(.containerPadding))
     })
 
     stack.addArrangedSubview(createOSCSettingsView())
 
     stack.addArrangedSubview(createSidebarSettingsView())
 
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.edgeToEdgeVideo.rawValue, options: .new, context: nil)
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.unlockWindowAspectRatio.rawValue, options: .new, context: nil)
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.dockedControlBarAndTitlebar.rawValue, options: .new, context: nil)
+    prefObserver.addAll(
+      .edgeToEdgeVideo,
+      .unlockWindowAspectRatio,
+      .dockedControlBarAndTitlebar,
+    ) { [unowned self] _ in
+      updateVideoSettingsStack()
+    }
 
     documentView = FlippedView()
     documentView!.translatesAutoresizingMaskIntoConstraints = false
@@ -114,10 +173,6 @@ class SidebarLayoutPane: SidebarScrollView {
     } else {
       videoSettingsStack.setVisibilityPriority(.notVisible, for: removeBlackBarBtn)
     }
-  }
-
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    updateVideoSettingsStack()
   }
 
   @objc private func removeBlackBars(_ sender: AnyObject) {
@@ -174,7 +229,7 @@ class SidebarLayoutPane: SidebarScrollView {
       ("puzzlepiece.extension.fill", "Plugins", Preference.Key.sidebarPluginsDisplayAtLeading),
     ]
     let stack = ui.vStack(
-      spacing: .stackViewSubListSpacing,
+      spacing: .sidebarSettingsSpacing,
       config.map { img, text, key in
         ui.hStack(
           ui.image(img),
@@ -309,23 +364,18 @@ fileprivate class OSCLayoutSelector: NSBox {
 
   let ui = UIHelper()
   var views: [Item]!
+  private let prefObserver = Preference.Observer()
 
   init() {
     super.init(frame: .zero)
 
     self.views = Preference.OSCPosition.allCases.map(createView)
 
-    updateItems()
-    UserDefaults.standard.addObserver(self, forKeyPath: Preference.Key.oscPosition.rawValue, options: .new, context: nil)
+    prefObserver.add(.oscPosition, block: { [unowned self] _ in updateItems() }, runNow: true)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }
-
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath, keyPath == Preference.Key.oscPosition.rawValue else { return }
-    updateItems()
   }
 
   func updateItems() {
@@ -354,8 +404,44 @@ fileprivate class OSCLayoutSelector: NSBox {
 }
 
 
+fileprivate class ThemeSwitch: NSSegmentedControl {
+  private let key: Preference.Key
+  let prefObserver = Preference.Observer()
+
+  init(_ key: Preference.Key) {
+    self.key = key
+    super.init(frame: .zero)
+
+    segmentCount = 3
+    setTag(0, forSegment: 0)
+    setTag(2, forSegment: 1)
+    setTag(4, forSegment: 2)
+    setImage(.sf("moonphase.full.moon"), forSegment: 0)
+    setLabel("Dark", forSegment: 0)
+    setImage(.sf("moonphase.new.moon"), forSegment: 1)
+    setLabel("Light", forSegment: 1)
+    setImage(.sf("moonphase.first.quarter"), forSegment: 2)
+    setLabel("Auto", forSegment: 2)
+
+    prefObserver.add(key, block: { [unowned self] _ in
+      selectSegment(withTag: Preference.integer(for: key))
+    }, runNow: true)
+  }
+
+  override func sendAction(_ action: Selector?, to target: Any?) -> Bool {
+    Preference.set(selectedTag(), for: key)
+    return true
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+
 fileprivate class SidebarPosSwitch: NSSegmentedControl {
   private let key: Preference.Key
+  let prefObserver = Preference.Observer()
 
   init(_ key: Preference.Key) {
     self.key = key
@@ -367,12 +453,9 @@ fileprivate class SidebarPosSwitch: NSSegmentedControl {
     setImage(.sf("sidebar.leading"), forSegment: 0)
     setImage(.sf("sidebar.trailing"), forSegment: 1)
 
-    UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .initial, context: nil)
-  }
-
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard keyPath == key.rawValue else { return }
-    selectSegment(withTag: Preference.bool(for: key) ? 0 : 1)
+    prefObserver.add(key, block: { [unowned self] _ in
+      selectSegment(withTag: Preference.bool(for: key) ? 0 : 1)
+    }, runNow: true)
   }
 
   override func sendAction(_ action: Selector?, to target: Any?) -> Bool {

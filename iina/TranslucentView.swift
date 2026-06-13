@@ -8,7 +8,6 @@
 
 class TranslucentView: NSView {
   enum Style {
-    @available(macOS 26.0, *)
     case liquidGlass
     case visualEffect
   }
@@ -81,6 +80,7 @@ class TranslucentView: NSView {
       }
     case .visualEffect:
       let view = NSVisualEffectView()
+      view.clipsToBounds = true
       view.translatesAutoresizingMaskIntoConstraints = false
       view.blendingMode = .withinWindow
       view.material = .popover

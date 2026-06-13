@@ -323,6 +323,7 @@ struct GitHubRepo: Codable {
   let language: String?
   let htmlUrl: URL
   let updatedAt: Date
+  let pushedAt: Date?
   let owner: Owner
 
   struct Owner: Codable {
@@ -340,6 +341,7 @@ struct GitHubRepo: Codable {
     case language
     case htmlUrl = "html_url"
     case updatedAt = "updated_at"
+    case pushedAt = "pushed_at"
     case owner
   }
 }
@@ -497,7 +499,7 @@ struct RepoDetailView: View {
       .font(.callout)
       .foregroundColor(.secondary)
 
-      Text("Updated \(Self.relativeFormatter.localizedString(for: repo.updatedAt, relativeTo: Date()))")
+      Text("Updated \(Self.relativeFormatter.localizedString(for: repo.pushedAt ?? repo.updatedAt, relativeTo: Date()))")
         .font(.caption)
         .foregroundColor(.secondary)
     }

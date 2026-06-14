@@ -2933,7 +2933,6 @@
 				845FB0C61D39462E00C011E0 /* ControlBarView.swift */,
 				E3D94E7D2FCDE42C00B08618 /* Titlebar.swift */,
 				3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */,
-				E3A239AD2FC7267000CE6ACC /* SideBarView.swift */,
 				E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */,
 				E3A239A92FC6D88C00CE6ACC /* OSDView.swift */,
 				3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */,
@@ -2945,6 +2944,7 @@
 		E3A239AF2FCB4CE800CE6ACC /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
+				E3A239AD2FC7267000CE6ACC /* SideBarView.swift */,
 				E3A239C02FCB4D2400CE6ACC /* SidebarController.swift */,
 				E3D94E7F2FD0519600B08618 /* SidebarLayoutPane.swift */,
 				E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */,

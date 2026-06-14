@@ -8,7 +8,9 @@
 
 
 class AnimatedTabViewController: NSTabViewController {
-  var transitionDuration: TimeInterval = 0.3
+  let transitionDuration: TimeInterval = 0.3
+  private let prefObserver = Preference.Observer()
+
   private var previousIndex: Int = -1
 
   override func viewDidLoad() {
@@ -17,7 +19,14 @@ class AnimatedTabViewController: NSTabViewController {
     view.translatesAutoresizingMaskIntoConstraints = false
     tabView.wantsLayer = true
     tabStyle = .unspecified
-    transitionOptions = [.slideLeft, .slideRight]
+
+    prefObserver.add(.disableAnimations, runNow: true) { [unowned self] _ in
+      if Preference.bool(for: .disableAnimations) {
+        transitionOptions = []
+      } else {
+        transitionOptions = [.slideLeft, .slideRight]
+      }
+    }
   }
 
   override func transition(
@@ -61,7 +70,9 @@ class SidebarScrollView: NSScrollView {
   var horizontalScroll: ((Bool) -> Void)?
 
   private var deltaX: CGFloat = 0
-  private let swipeThreshold: CGFloat = 30.0
+  private var deltaY: CGFloat = 0
+  private let angleThreshold: CGFloat = 5
+  private let normThreshold: CGFloat = 80
 
   override func scrollWheel(with event: NSEvent) {
     super.scrollWheel(with: event)
@@ -72,15 +83,18 @@ class SidebarScrollView: NSScrollView {
     switch event.phase {
     case .began:
       deltaX = 0
+      deltaY = 0
     case .changed:
       deltaX += event.scrollingDeltaX
+      deltaY += event.scrollingDeltaY
     case .ended:
-      if deltaX > swipeThreshold {
-        horizontalScroll?(false)
-      } else if deltaX < -swipeThreshold {
-        horizontalScroll?(true)
+      let angle = abs(deltaX / deltaY)
+      let norm = sqrt(deltaX * deltaX + deltaY * deltaY)
+      if angle > angleThreshold && norm > normThreshold {
+        horizontalScroll?(deltaX < 0)
       }
       deltaX = 0
+      deltaY = 0
     default:
       break
     }

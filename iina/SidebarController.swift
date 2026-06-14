@@ -88,22 +88,20 @@ class SidebarController: NSObject {
 
     // observe sidebar positions
     prefObserver.addAll(ViewType.allCases.compactMap { $0.prefKey }) { [unowned self] key in
-      ViewType.allCases
-        .filter { $0.prefKey == key && isShowing($0) }
-        .forEach { viewType in
-          hideAllSideBars(animate: false) {
-            switch viewType {
-            case .settings: self.showSettings()
-            case .playlist: self.showPlaylist()
-            case .plugins: self.showPlugin(tab: nil)
-            default: break
-            }
+      guard let viewType = ViewType.allCases.first(where: { $0.prefKey == key }) else { return }
+      if (isShowing(viewType)) {
+        hideAllSideBars(animate: false) {
+          switch viewType {
+          case .settings: self.showSettings()
+          case .playlist: self.showPlaylist()
+          case .plugins: self.showPlugin(tab: nil)
+          default: break
           }
         }
+      }
     }
 
-    // observe liquid glass status
-    prefObserver.add(.useLiquidGlassSidebar) { [unowned self] _ in
+    prefObserver.add(.useLiquidGlassSidebar, runNow: true) { [unowned self] _ in
       sideBars.forEach {
         $0.view.setStyle(Preference.liquidGlass(.sidebar) ? .liquidGlass : .visualEffect)
       }
@@ -318,14 +316,11 @@ class SidebarController: NSObject {
       panel.edgeConstraint.constant = -width
       panel.view.isHidden = false
     }
+    panel.status = type
     panel.view.setContent(view)
     view.padding(.all)
     var viewController = viewController
-    viewController.downShift = if #available(macOS 26.0, *), panel.view.style == .liquidGlass {
-      panel.side == .leading ? 27 : 0
-    } else {
-      mainWindow.titleBarView.frame.height
-    }
+    viewController.downShift = 0
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration)
@@ -341,8 +336,8 @@ class SidebarController: NSObject {
       }
     }) {
       panel.animationState = .shown
-      panel.status = type
       self.mainWindow.window?.resetCursorRects()
+      self.mainWindow.setWindowToolbar()
     }
   }
 
@@ -357,7 +352,9 @@ class SidebarController: NSObject {
       return
     }
     let currWidth = panel.widthConstraint.constant
+    panel.status = .hidden
     panel.animationState = .willHide
+    mainWindow.setWindowToolbar()
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0
@@ -371,7 +368,6 @@ class SidebarController: NSObject {
     }) {
       // A new show may have started during the hide animation; only finalize if we still mean to hide.
       guard panel.animationState == .willHide else { return }
-      panel.status = .hidden
       panel.view.subviews.removeAll()
       panel.view.isHidden = true
       // When fading, the view stays in its visible position during the animation. Push it

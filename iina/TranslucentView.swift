@@ -15,8 +15,8 @@ class TranslucentView: NSView {
   private var liquidGlassCornerRadius: CGFloat
   private var vevCornerRadius: CGFloat
   private var padding: (CGFloat, CGFloat)
-  private var content: NSView?
-  private var container: NSView?
+  var content: NSView?
+  var container: NSView?
   var style: Style
   private var appliedStyle: Style?
 

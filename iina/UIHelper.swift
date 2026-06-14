@@ -136,8 +136,9 @@ class UIHelper {
     return view
   }
 
-  func image(_ symbol: String, size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil) -> NSImageView {
-    let imageView = NSImageView(image: .sf(symbol) ?? .init(imageLiteralResourceName: symbol))
+  func image(_ symbol: String..., size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil) -> NSImageView {
+    let image = .sf(symbol) ?? NSImage(named: .init(symbol[0]))
+    let imageView = NSImageView(image: image ?? .sf("square.split.diagonal.2x2")!)
     imageView.imageScaling = .scaleProportionallyUpOrDown
     imageView.size(width: width ?? size, height: height ?? size)
     return imageView

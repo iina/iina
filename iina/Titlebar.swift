@@ -8,20 +8,20 @@
 
 fileprivate let TitleBarHeightNormal: CGFloat = {
   if #available(macOS 26, *) {
-    return 34
+    return 32
   }
   return 28
 }()
 
 fileprivate extension LayoutValue {
-  static let titlebarHeight = LayoutValue(TitleBarHeightNormal + 6, TitleBarHeightNormal)
+  static let titlebarHeight = LayoutValue(TitleBarHeightNormal + 8, TitleBarHeightNormal)
   static let oscBottomMargin = LayoutValue(10, 6)
 }
 
 
 class Titlebar: NSView {
   /// Default inset for the title container from the leading edge — clears the traffic lights.
-  static let docIconLeadingPadding: CGFloat = 82
+  static let docIconLeadingPadding: CGFloat = 86
 
   let useSystemTitle = false
 
@@ -306,7 +306,7 @@ class Titlebar: NSView {
     while true {
       components.append(current)
       let parent = current.deletingLastPathComponent()
-      if parent == current { break }  // reached root
+      if parent.path == "/" { break }  // reached root
       current = parent
     }
 

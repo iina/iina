@@ -242,6 +242,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     guard let window = window, let theme = theme else { return }
 
     window.appearance = NSAppearance(iinaTheme: theme)
+    window.backgroundColor = window.effectiveAppearance.isDark ? .black : .white
   }
 
   // MARK: - Mouse / Trackpad events

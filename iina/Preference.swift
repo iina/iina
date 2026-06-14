@@ -1608,7 +1608,7 @@ extension Preference {
   class Observer: NSObject {
     private var observedKeys: [Key: (Key) -> Void] = [:]
 
-    func add(_ key: Key, block: @escaping (Key) -> Void, runNow: Bool = false) {
+    func add(_ key: Key, runNow: Bool = false, block: @escaping (Key) -> Void) {
       if observedKeys[key] == nil {
         UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: [.new], context: nil)
       }
@@ -1618,13 +1618,13 @@ extension Preference {
       observedKeys[key] = block
     }
 
-    func addAll(_ keys: Key..., block: @escaping (Key) -> Void, runNow: Bool = false) {
-      addAll(keys, block: block, runNow: runNow)
+    func addAll(_ keys: Key..., runNow: Bool = false, block: @escaping (Key) -> Void) {
+      addAll(keys, runNow: runNow, block: block)
     }
 
-    func addAll(_ keys: [Key], block: @escaping (Key) -> Void, runNow: Bool = false) {
+    func addAll(_ keys: [Key], runNow: Bool = false, block: @escaping (Key) -> Void) {
       for key in keys {
-        add(key, block: block, runNow: runNow)
+        add(key, runNow: runNow, block: block)
       }
     }
 

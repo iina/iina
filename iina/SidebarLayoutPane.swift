@@ -8,8 +8,8 @@
 
 
 fileprivate extension LayoutValue {
-  static let sidebarMargin = LayoutValue(18, 14)
-  static let stackViewSpacing = LayoutValue(20, 16)
+  static let sidebarMargin = LayoutValue(16, 14)
+  static let stackViewSpacing = LayoutValue(18, 16)
   static let containerPadding = LayoutValue(12, 10)
   static let videoSettingsSpacing = LayoutValue(12, 8)
   static let sidebarSettingsSpacing = LayoutValue(10, 6)
@@ -41,7 +41,7 @@ class SidebarLayoutPane: SidebarScrollView {
     themeSettingStack = ui.vStack(
       spacing: .videoSettingsSpacing,
       ui.hStack(
-        ui.image("lightspectrum.horizontal", size: 20),
+        ui.image("circle.lefthalf.filled", "circle.lefthalf.fill", size: 20),
         ui.label("Theme"),
         ui.flexibleSpace(),
         ThemeSwitch(.themeMaterial),
@@ -95,8 +95,6 @@ class SidebarLayoutPane: SidebarScrollView {
     )) {
       $0.padding(.all(.containerPadding))
     })
-
-//    stack.addArrangedSubview(createSectionTitle("Video"))
 
     videoSettingsStack = ui.vStack(spacing: .videoSettingsSpacing)
 
@@ -152,7 +150,7 @@ class SidebarLayoutPane: SidebarScrollView {
     documentView!.translatesAutoresizingMaskIntoConstraints = false
     documentView!.padding(.top, .leading, .trailing, from: contentView)
     documentView!.addSubview(stack)
-    stack.padding(.all(.sidebarMargin))
+    stack.padding(.horizontal(.sidebarMargin), .vertical(4))
   }
   
   @MainActor required init?(coder: NSCoder) {
@@ -228,7 +226,7 @@ class SidebarLayoutPane: SidebarScrollView {
       ("list.bullet.rectangle.fill", "Playlist and Chapters", Preference.Key.sidebarPlaylistDisplayAtLeading),
       ("puzzlepiece.extension.fill", "Plugins", Preference.Key.sidebarPluginsDisplayAtLeading),
     ]
-    let stack = ui.vStack(
+    let stack = Container(ui.vStack(
       spacing: .sidebarSettingsSpacing,
       config.map { img, text, key in
         ui.hStack(
@@ -238,7 +236,9 @@ class SidebarLayoutPane: SidebarScrollView {
           SidebarPosSwitch(key),
         )
       }
-    )
+    )) {
+      $0.padding(.all(.containerPadding))
+    }
 
     container.addSubview(label)
     container.addSubview(stack)
@@ -371,7 +371,7 @@ fileprivate class OSCLayoutSelector: NSBox {
 
     self.views = Preference.OSCPosition.allCases.map(createView)
 
-    prefObserver.add(.oscPosition, block: { [unowned self] _ in updateItems() }, runNow: true)
+    prefObserver.add(.oscPosition, runNow: true) { [unowned self] _ in updateItems() }
   }
   
   required init?(coder: NSCoder) {
@@ -416,16 +416,13 @@ fileprivate class ThemeSwitch: NSSegmentedControl {
     setTag(0, forSegment: 0)
     setTag(2, forSegment: 1)
     setTag(4, forSegment: 2)
-    setImage(.sf("moonphase.full.moon"), forSegment: 0)
     setLabel("Dark", forSegment: 0)
-    setImage(.sf("moonphase.new.moon"), forSegment: 1)
     setLabel("Light", forSegment: 1)
-    setImage(.sf("moonphase.first.quarter"), forSegment: 2)
     setLabel("Auto", forSegment: 2)
 
-    prefObserver.add(key, block: { [unowned self] _ in
+    prefObserver.add(key, runNow: true) { [unowned self] _ in
       selectSegment(withTag: Preference.integer(for: key))
-    }, runNow: true)
+    }
   }
 
   override func sendAction(_ action: Selector?, to target: Any?) -> Bool {
@@ -453,9 +450,9 @@ fileprivate class SidebarPosSwitch: NSSegmentedControl {
     setImage(.sf("sidebar.leading"), forSegment: 0)
     setImage(.sf("sidebar.trailing"), forSegment: 1)
 
-    prefObserver.add(key, block: { [unowned self] _ in
+    prefObserver.add(key, runNow: true) { [unowned self] _ in
       selectSegment(withTag: Preference.bool(for: key) ? 0 : 1)
-    }, runNow: true)
+    }
   }
 
   override func sendAction(_ action: Selector?, to target: Any?) -> Bool {

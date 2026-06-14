@@ -58,9 +58,9 @@ class OSCFloatingView: TranslucentView {
 
     widthAnchor.constraint(greaterThanOrEqualToConstant: 200).isActive = true
 
-    prefObserver.add(.useLiquidGlassOSC, block: { [unowned self] _ in
+    prefObserver.add(.useLiquidGlassOSC, runNow: true) { [unowned self] _ in
       setStyle(Preference.liquidGlass(.osc) ? .liquidGlass : .visualEffect)
-    }, runNow: true)
+    }
   }
 
   override func viewDidMoveToSuperview() {

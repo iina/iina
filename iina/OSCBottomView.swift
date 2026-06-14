@@ -47,9 +47,9 @@ class OSCBottomView: NSView {
     trailingConstraint = trailingAnchor.constraint(equalTo: translucentView.trailingAnchor, constant: 0)
     trailingConstraint.isActive = true
 
-    prefObserver.add(.useLiquidGlassOSC, block: { [unowned self] _ in
+    prefObserver.add(.useLiquidGlassOSC, runNow: true) { [unowned self] _ in
       translucentView.setStyle(Preference.liquidGlass(.osc) ? .liquidGlass : .visualEffect)
-    }, runNow: true)
+    }
   }
 
   @MainActor required init?(coder: NSCoder) {

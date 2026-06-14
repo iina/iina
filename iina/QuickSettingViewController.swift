@@ -16,11 +16,6 @@ fileprivate let eqSaveMenuItemTag = -3
 fileprivate let eqCustomMenuItemTag = 1000
 
 
-fileprivate extension LayoutValue {
-  static let tabHeight = LayoutValue(64, 56)
-}
-
-
 /// Formatter for `customSpeedTextField`.
 ///
 /// Configure the number formatter in code instead of the XIB so it is easier to follow.
@@ -36,6 +31,14 @@ fileprivate let speedFormatter: NumberFormatter = {
   fmt.minimum = NSNumber(floatLiteral: AppData.mpvMinPlaybackSpeed)
   return fmt
 }()
+
+
+fileprivate let tabConfig = [
+  ("Layout", NSImage.sf("paintpalette.fill"), 0),
+  ("Video", NSImage.tabVideo, 1),
+  ("Audio", NSImage.tabAudio, 2),
+  ("Subtitles", NSImage.tabSub, 3),
+]
 
 class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
   override var nibName: NSNib.Name {
@@ -108,25 +111,33 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   unowned let player: PlayerCore
   unowned let mainWindow: MainWindowController
+  private let ui = UIHelper()
+  private let prefObserver = Preference.Observer()
 
   var currentTab: TabViewType = .video
 
-  var observers: [NSObjectProtocol] = []
+  private var observers: [NSObjectProtocol] = []
 
-  var tabViewController: NSTabViewController!
-  var layoutTabBtn: NSButton!
-  var videoTabBtn: NSButton!
-  var audioTabBtn: NSButton!
-  var subTabBtn: NSButton!
+  private var tabButtonsStackView: NSStackView!
+  private var tabButtonsSegmentControl: NSSegmentedControl!
+  private var tabButtonsLeadingConstraint: NSLayoutConstraint!
+  private var tabButtonsTrailingConstraint: NSLayoutConstraint!
+  private var tabButtonsHeightConstraint: NSLayoutConstraint!
+  private var topConstraint: NSLayoutConstraint!
+
+  private var tabViewController: NSTabViewController!
+  private var layoutTabBtn: NSButton!
+  private var videoTabBtn: NSButton!
+  private var audioTabBtn: NSButton!
+  private var subTabBtn: NSButton!
+  private var dismissBtn: NSButton!
+  private var closeSidebarBtn: NSButton!
+  private var closeSidebarBtnSizeConstraint: NSLayoutConstraint!
 
   var layoutTabScrollView: SidebarScrollView!
   @IBOutlet weak var videoTabScrollView: SidebarScrollView!
   @IBOutlet weak var audioTabScrollView: SidebarScrollView!
   @IBOutlet weak var subtitlesTabScrollView: SidebarScrollView!
-
-  @IBOutlet weak var tabButtonsStackView: NSStackView!
-
-  @IBOutlet weak var buttonTopConstraint: NSLayoutConstraint!
 
   @IBOutlet weak var videoTableView: NSTableView!
   @IBOutlet weak var audioTableView: NSTableView!
@@ -230,19 +241,31 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   var downShift: CGFloat = 0 {
     didSet {
-      buttonTopConstraint.constant = downShift
+      topConstraint.constant = downShift
     }
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.tabButtonsStackView = NSStackView()
+    tabButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
+    tabButtonsStackView.orientation = .horizontal
+    view.addSubview(tabButtonsStackView)
+    topConstraint = tabButtonsStackView.topAnchor.constraint(equalTo: view.topAnchor)
+    topConstraint.isActive = true
+    tabButtonsLeadingConstraint = tabButtonsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+    tabButtonsLeadingConstraint.isActive = true
+    tabButtonsTrailingConstraint = view.trailingAnchor.constraint(equalTo: tabButtonsStackView.trailingAnchor)
+    tabButtonsTrailingConstraint.isActive = true
+    tabButtonsHeightConstraint = tabButtonsStackView.heightAnchor.constraint(equalToConstant: 64)
+    tabButtonsHeightConstraint.isActive = true
+
     self.tabViewController = AnimatedTabViewController()
     view.addSubview(tabViewController.view)
 
     tabViewController.view.padding(.bottom, .horizontal)
       .spacing(.top(1), to: tabButtonsStackView)
-    tabButtonsStackView.size(height: .tabHeight)
 
     tabViewController.tabView.padding(.all)
     tabViewController.tabView.wantsLayer = true
@@ -250,6 +273,34 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     layoutTabScrollView = SidebarLayoutPane(player: player)
 
     // set up the tab buttons
+
+    self.tabButtonsSegmentControl = NSSegmentedControl()
+    tabButtonsSegmentControl.segmentCount = 4
+
+    for config in tabConfig {
+      tabButtonsSegmentControl.setImage(config.1, forSegment: config.2)
+      tabButtonsSegmentControl.setTag(config.2, forSegment: config.2)
+    }
+    tabButtonsSegmentControl.target = self
+    tabButtonsSegmentControl.action = #selector(tabBtnSegmentControlAction(_:))
+
+    self.closeSidebarBtn = NSButton(
+      image: .sf("sidebar.squares.leading")!,
+      target: self, action: #selector(dismissSidebar)
+    )
+    closeSidebarBtn.widthAnchor.constraint(equalTo: closeSidebarBtn.heightAnchor).isActive = true
+    closeSidebarBtnSizeConstraint = closeSidebarBtn.widthAnchor.constraint(equalToConstant: 28)
+    closeSidebarBtnSizeConstraint.isActive = true
+    if #available(macOS 26.0, *) {
+      if #available(macOS 27.0, *) {
+        closeSidebarBtn.bezelStyle = .glass
+        closeSidebarBtn.borderShape = .circle
+      } else {
+        closeSidebarBtn.bezelStyle = .circular
+      }
+    } else {
+      closeSidebarBtn.bezelStyle = .circular
+    }
 
     func makeTabButton(_ title: String, image: NSImage?, tag: Int) -> NSButton {
       let item = TabButton(title: title,
@@ -267,23 +318,36 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       return item
     }
 
-    let dismissBtn = NSButton(image: .sf("chevron.right")!,
-                              target: self, action: #selector(dismissSidebar(_:)))
-    dismissBtn.size(width: 20, height: 40)
-    tabButtonsStackView.addArrangedSubview(dismissBtn)
-
-    self.layoutTabBtn = makeTabButton("Layout", image: .tabLayout, tag: 0)
-    tabButtonsStackView.addArrangedSubview(layoutTabBtn)
-    let separator = NSBox()
-    separator.boxType = .separator
-    separator.size(width: 2, height: 32)
-    tabButtonsStackView.addArrangedSubview(separator)
+    self.dismissBtn = NSButton(
+      image: .sf("chevron.forward")!,
+      target: self, action: #selector(dismissSidebar(_:))
+    )
+    self.layoutTabBtn = makeTabButton("Layout", image: .sf("paintpalette.fill"), tag: 0)
     self.videoTabBtn = makeTabButton("Video", image: .tabVideo, tag: 1)
-    tabButtonsStackView.addArrangedSubview(videoTabBtn)
     self.audioTabBtn = makeTabButton("Audio", image: .tabAudio, tag: 2)
-    tabButtonsStackView.addArrangedSubview(audioTabBtn)
     self.subTabBtn = makeTabButton("Subtitles", image: .tabSub, tag: 3)
-    tabButtonsStackView.addArrangedSubview(subTabBtn)
+
+    prefObserver.addAll(.compactUI, .sidebarSettingsDisplayAtLeading, runNow: true) {
+      [unowned self] key in
+      let compactUI = Preference.bool(for: .compactUI)
+      let isLeading = Preference.bool(for: .sidebarSettingsDisplayAtLeading)
+
+      let height: CGFloat = (compactUI && !isLeading) ? 48 : 52
+      tabButtonsHeightConstraint.constant = height
+
+      if #available(macOS 26.0, *), !compactUI {
+        tabButtonsSegmentControl.controlSize = .extraLarge
+      } else {
+        tabButtonsSegmentControl.controlSize = .large
+      }
+
+      closeSidebarBtnSizeConstraint.constant =  compactUI ? 28 : 36
+
+      if key == .sidebarSettingsDisplayAtLeading {
+        updateTabButtons()
+        updateTabActiveStatus()
+      }
+    }
 
     // add pages
 
@@ -404,6 +468,28 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   @objc func dismissSidebar(_ sender: AnyObject) {
     mainWindow.sidebars.hide(.settings)
+  }
+
+  private func updateTabButtons() {
+    tabButtonsStackView.arrangedSubviews.forEach {
+      tabButtonsStackView.removeArrangedSubview($0)
+      $0.removeFromSuperview()
+    }
+    if Preference.bool(for: .sidebarSettingsDisplayAtLeading) {
+      closeSidebarBtn.image = .sf("sidebar.squares.leading")
+      tabButtonsLeadingConstraint.constant = 96
+      tabButtonsTrailingConstraint.constant = 10
+      tabButtonsStackView.distribution = .equalSpacing
+      tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
+      tabButtonsStackView.addArrangedSubview(closeSidebarBtn)
+    } else {
+      closeSidebarBtn.image = .sf("sidebar.squares.trailing")
+      tabButtonsLeadingConstraint.constant = 10
+      tabButtonsTrailingConstraint.constant = 10
+      tabButtonsStackView.distribution = .equalSpacing
+      tabButtonsStackView.addArrangedSubview(closeSidebarBtn)
+      tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
+    }
   }
 
   // MARK: - Right to Left Constraints
@@ -634,6 +720,14 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       let isActive = currentTag == btn!.tag
       btn!.state = isActive ? .on : .off
     }
+
+    let isLeading = Preference.bool(for: .sidebarSettingsDisplayAtLeading)
+    for config in tabConfig {
+      // don't show label if isLeading
+      let isSelected = config.2 == currentTag && !isLeading
+      tabButtonsSegmentControl.setLabel(isSelected ? config.0 : "", forSegment: config.2)
+    }
+    tabButtonsSegmentControl.selectedSegment = currentTag
   }
 
   func reload() {
@@ -759,8 +853,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   // MARK: Tab buttons
 
-  @IBAction func tabBtnAction(_ sender: NSButton) {
+  @objc private func tabBtnAction(_ sender: NSButton) {
     switchToTab(.init(buttonTag: sender.tag))
+  }
+
+  @objc private func tabBtnSegmentControlAction(_ sender: NSSegmentedControl) {
+    switchToTab(.init(buttonTag: sender.selectedTag()))
   }
 
   // MARK: Video tab

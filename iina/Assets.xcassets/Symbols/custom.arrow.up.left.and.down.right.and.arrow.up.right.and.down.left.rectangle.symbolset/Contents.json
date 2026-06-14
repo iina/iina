@@ -3,6 +3,9 @@
     "author" : "xcode",
     "version" : 1
   },
+  "properties" : {
+    "symbol-rendering-intent" : "template"
+  },
   "symbols" : [
     {
       "filename" : "custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle.svg",

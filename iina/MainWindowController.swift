@@ -456,7 +456,7 @@ class MainWindowController: PlayerWindowController {
     // w.isMovableByWindowBackground  = true
 
     // set background color to black
-    window.backgroundColor = .black
+    window.backgroundColor = window.effectiveAppearance.isDark ? .black : .white
 
     // size
     window.minSize = AppData.mainWindowMinSize
@@ -703,11 +703,18 @@ class MainWindowController: PlayerWindowController {
     forceDraw("window loaded")
   }
 
-  private func setWindowToolbar() {
+  func setWindowToolbar() {
     guard let window else { return }
 
-    if Preference.bool(for: .compactUI) || fsState != .windowed {
+    let compactUI = Preference.bool(for: .compactUI)
+    let hasLeadingSidebar = sidebars.leadingSidebar.status != .hidden
+
+    if (compactUI && !hasLeadingSidebar) || fsState != .windowed {
       window.toolbar = nil
+    } else if hasLeadingSidebar {
+      window.toolbar = NSToolbar()
+      window.toolbarStyle = .unified
+      window.toolbar?.displayMode = .iconOnly
     } else {
       window.toolbar = NSToolbar()
       window.toolbarStyle = .unifiedCompact

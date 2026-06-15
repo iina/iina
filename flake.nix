@@ -62,9 +62,6 @@
           withRubberband = true;
           rubberband = pkgs.rubberband;
 
-          withPlacebo = false;
-          libplacebo = pkgs.libplacebo;
-
           withJxl = true;
           libjxl = pkgs.libjxl;
 
@@ -84,8 +81,9 @@
           withDvdread = false;
           withMp3lame = false;   # MP3 LAME audio codec encoder, not super useful for IINA
           withOpenapv = false;   # APV video encoder, not very useful for IINA
-          withOpenmpt = false;   # Tracked music files decoder, not included in IINA historically
+          withOpenmpt = false;   # Tracker music files decoder (various formats), not included in IINA historically
           withOpus = false;      # Opus audio codec, not included in IINA historically
+          withPlacebo = false;
           withRist = false;      # RIST protocol support, not useful for IINA (yet?)
           withSrt = false;       # Secure Reliable Transport (SRT) protocol, not useful for IINA
           withSsh = false;       # SFTP protocol support, not useful for IINA
@@ -211,55 +209,52 @@
               (pkgs.libhwy.overrideAttrs (old: {
                 cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DBUILD_SHARED_LIBS=ON" ];
               }))
-              pkgs.brotli
-              pkgs.dav1d
-              pkgs.fontconfig
-              pkgs.freetype
-              pkgs.fribidi
-              pkgs.gettext
-              pkgs.glib
-              pkgs.gmp
-              pkgs.gnutls
-              pkgs.graphite2
-              pkgs.harfbuzz
-              pkgs.lcms2
-              pkgs.libarchive
-              pkgs.libass
+              pkgs.brotli         # Brotli compression, used for ass, fontconfig, bluray, & more
+              pkgs.dav1d          # AV1 video decoder
+              pkgs.fontconfig     # Font configuration library
+              pkgs.freetype       # FreeType font rendering engine
+              pkgs.fribidi        # Hebrew and Arabic support
+              pkgs.gettext        # Internationalization library
+              pkgs.glib           # GTK GLib utility library required by harfbuzz
+              pkgs.gmp            # Provides arbirary precision arithmetic, required by several libs
+              pkgs.gnutls         # TLS support, needed for network streams
+              pkgs.graphite2      # Compiles Graphite-enabled fonts, used by harfbuzz
+              pkgs.harfbuzz       # Text shaping engine, used by avdevice, avfilter, ass
+              pkgs.lcms2          # Little CMS color management lib, required by placebo, jxl
+              pkgs.libarchive     # Archive support
+              pkgs.libass         # ASS subtitle renderer
               pkgs.libb2
-              pkgs.libbluray
-              pkgs.libidn2
-              pkgs.libjpeg_turbo  # Needed for libjpeg
-              pkgs.libjxl
-              pkgs.libplacebo
-              pkgs.libpng
+              pkgs.libbluray      # Blu-ray support
+              pkgs.libidn2        # Converts between ASCII & UTF domain names, used by gnutls
+              pkgs.libjpeg_turbo  # Needed to provide libjpeg
+              pkgs.libjxl         # JPEG-XL support
+              pkgs.libplacebo     # Required by mpv
+              pkgs.libpng         # PNG image format support
               pkgs.libsamplerate
-              pkgs.libsodium
               pkgs.libtasn1
               pkgs.libuchardet
               pkgs.libunibreak
               pkgs.libunistring
-              pkgs.libwebp
-              pkgs.luajit
-              pkgs.lz4
-              pkgs.mujs  # JavaScript engine, needed for mpv's JS support
+              pkgs.libwebp        # WebP image de/encoder
+              pkgs.luajit         # Lua Just-In-Time compiler, required by mpv
+              pkgs.lz4            # LZ4 compression, used by libarchive
+              pkgs.mujs           # JavaScript engine, needed for mpv's JS support
               pkgs.nettle
               pkgs.p11-kit
               pkgs.pcre2
               pkgs.rubberband
-              pkgs.shaderc  # Referenced by libplacebo, even though it requires Vulkan which we don't use
+              pkgs.shaderc        # Referenced by libplacebo, even though it requires Vulkan which we don't use
               pkgs.snappy
-              pkgs.soxr
-              pkgs.speex
-              pkgs.xz
-              pkgs.zimg
-              pkgs.zstd
+              pkgs.soxr           # SoX Resampler, needed for high-quality audio resampling
+              pkgs.speex          # Used by avcodec, avdevice, avfilter, avformat
+              pkgs.xz             # LZMA2 compression, needed by libarchive
+              pkgs.zimg           # Image scaling & colorspace conversion library, needed by mpv
+              pkgs.zstd           # Needed by libarchive
 
               # Indirect libs
-              pkgs.bzip2
-              pkgs.expat     # Needed for fontconfig
-              pkgs.lame
-              pkgs.libdovi
-              pkgs.zstd.out
+              pkgs.libcxx         # C standard library
+              pkgs.expat          # Needed by fontconfig
+              pkgs.libdovi        # Dolby Vision, needed by libplacebo
             ]
           )
         );

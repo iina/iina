@@ -4,9 +4,9 @@ NIX_BUILD=true
 REPLACE_LIBS=true
 REPLACE_EXECUTABLES=true
 REPLACE_INCLUDES=false
+DEBUG_NIX=false
 
 MIN_NIX_VERSION="2.34.6"
-DEBUG_NIX=false
 
 # Colors for output
 RED='\033[0;31m'
@@ -36,11 +36,132 @@ print_script_dir() {
   echo "$SCRIPT_DIR"
 }
 
+printUsageHelp() {
+  echo
+  echo -e "Usage:"
+  echo -e "${GREEN}$0 [-h|--help] [--nix-build[=yes|=no] [--debug[=yes|=no] [--replace-libs[=yes|=no] [--replace-executables[=yes|=no] [--replace-includes[=yes|=no]${NC}"
+  echo -e ""
+  echo -e "Arguments:"
+  echo -e "    ${GREEN}-h, --help${NC}             Displays this help message"
+  echo -e "    ${GREEN}--nix-build${NC}            Whether to do a new Nix build: yes | no (default: yes)"
+  echo -e "    ${GREEN}--debug${NC}                Enable debugging (Nix build only): yes | no (default: no)"
+  echo -e "    ${GREEN}--replace-libs${NC}         Whether to replace deps/lib: yes | no (default: yes)"
+  echo -e "    ${GREEN}--replace-executables${NC}  Whether to replace deps/executable: yes | no (default: yes)"
+  echo -e "    ${GREEN}--replace-includes${NC}     Whether to replace deps/include: yes | no (default: no)"
+  echo
+}
+
 NIX_EXE="$(which nix)"
 set -euo pipefail
 SCRIPT_DIR="$(print_script_dir)"
 PROJ_DIR="$(realpath ${SCRIPT_DIR}/..)"
+APP_CONTENTS_DIR="$PROJ_DIR/result/Applications/IINA.app/Contents"
 echo "Project root directory seems to be: $PROJ_DIR"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -h | --help)
+    printUsageHelp
+    exit 0
+    ;;
+  --nix-build)
+    NIX_BUILD=true
+    shift
+    ;;
+  --nix-build=*)
+    YESNO=${1#*=}
+    if [[ -z "$YESNO" ]] || [[ "$YESNO" = "yes" ]]; then
+      NIX_BUILD=true
+    elif [[ "$YESNO" = "no" ]]; then
+      NIX_BUILD=false
+    else
+      printUsageHelp
+      exit 1
+    fi
+    shift
+    ;;
+  --debug)
+    DEBUG_NIX=true
+    shift
+    ;;
+  --debug=*)
+    YESNO=${1#*=}
+    if [[ -z "$YESNO" ]] || [[ "$YESNO" = "yes" ]]; then
+      DEBUG_NIX=true
+    elif [[ "$YESNO" = "no" ]]; then
+      DEBUG_NIX=false
+    else
+      printUsageHelp
+      exit 1
+    fi
+    shift
+    ;;
+  --replace-libs)
+    REPLACE_LIBS=true
+    shift
+    ;;
+  --replace-libs=*)
+    YESNO=${1#*=}
+    if [[ -z "$YESNO" ]] || [[ "$YESNO" = "yes" ]]; then
+      REPLACE_LIBS=true
+    elif [[ "$YESNO" = "no" ]]; then
+      REPLACE_LIBS=false
+    else
+      printUsageHelp
+      exit 1
+    fi
+    shift
+    ;;
+  --replace-executables)
+    REPLACE_EXECUTABLES=true
+    shift
+    ;;
+  --replace-executables=*)
+    YESNO=${1#*=}
+    if [[ -z "$YESNO" ]] || [[ "$YESNO" = "yes" ]]; then
+      REPLACE_EXECUTABLES=true
+    elif [[ "$YESNO" = "no" ]]; then
+      REPLACE_EXECUTABLES=false
+    else
+      printUsageHelp
+      exit 1
+    fi
+    shift
+    ;;
+  --replace-includes)
+    REPLACE_INCLUDES=true
+    shift
+    ;;
+  --replace-includes=*)
+    YESNO=${1#*=}
+    if [[ -z "$YESNO" ]] || [[ "$YESNO" = "yes" ]]; then
+      REPLACE_INCLUDES=true
+    elif [[ "$YESNO" = "no" ]]; then
+      REPLACE_INCLUDES=false
+    else
+      printUsageHelp
+      exit 1
+    fi
+    shift
+    ;;
+  -*)
+    echo -e "${RED}Unknown option: $1${NC}" >&2
+    printUsageHelp
+    exit 1
+    ;;
+  *)
+    echo -e "${RED}Unexpected argument: $1${NC}" >&2
+    printUsageHelp
+    exit 1
+    ;;
+  esac
+done
+if [[ $# -gt 0 ]]; then
+  echo -e "${RED}Unexpected argument: $1${NC}" >&2
+  printUsageHelp
+  exit 1
+fi
+
 
 if [[ "$NIX_BUILD" = true ]]; then
 
@@ -78,7 +199,6 @@ else
   echo -e "${YELLOW}Skipping Nix build.${NC}"
 fi
 
-APP_CONTENTS_DIR="$PROJ_DIR/result/Applications/IINA.app/Contents"
 
 if [[ "$REPLACE_LIBS" = true ]]; then
   SRC_DIR="$APP_CONTENTS_DIR/Frameworks"
@@ -96,6 +216,7 @@ else
   echo -e "${YELLOW}Skipping deps/lib.${NC}"
 fi
 
+
 if [[ "$REPLACE_EXECUTABLES" = true ]]; then
   SRC_DIR="$APP_CONTENTS_DIR/MacOS"
   DST_DIR="$PROJ_DIR/deps/executable"
@@ -111,6 +232,7 @@ if [[ "$REPLACE_EXECUTABLES" = true ]]; then
 else
   echo -e "${YELLOW}Skipping deps/executable.${NC}"
 fi
+
 
 if [[ "$REPLACE_INCLUDES" = true ]]; then
   SRC_DIR="$PROJ_DIR/result/include"

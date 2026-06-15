@@ -96,8 +96,6 @@ IDS_TO_IGNORE: set[str] = {
 USR_LIB_ITEMS: dict[str, tuple[str, str]] = {
   'libbz2': ('2', '/usr/lib/libbz2.dylib'),
   'libcharset': ('1', '/usr/lib/libcharset.1.dylib'),
-  'libc++': ('1', '/usr/lib/libc++.dylib'),
-  'libc++abi': ('1', '/usr/lib/libc++abi.dylib'),
   'libffi': ('9', '/usr/lib/libffi.dylib'),
   'libiconv': ('7', '/usr/lib/libiconv.2.dylib'),
   'liblzma': ('14', '/usr/lib/liblzma.5.dylib'),
@@ -314,7 +312,7 @@ class LibMetaDB:
         return
       (ref_basename, base_id) = base_tuple
       if base_id in IDS_TO_IGNORE:
-        print(f'Ref is in blacklist, skipping: {ref_path}')
+        print(f'Ref is in ignore list, skipping: {ref_path}')
         return
       if libs_searched.get(ref_path, False):
         # print(f'Ref already checked, skipping: {ref_path}')

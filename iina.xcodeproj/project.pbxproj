@@ -435,6 +435,8 @@
 		E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C12F6A201F281F00297964 /* FirstRunManager.swift */; };
 		E3C228072FDF4E0C009A1A89 /* SidebarVideoPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C228062FDF4E02009A1A89 /* SidebarVideoPane.swift */; };
 		E3C228092FDF5EFF009A1A89 /* SidebarTrackSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C228082FDF5EF8009A1A89 /* SidebarTrackSelector.swift */; };
+		E3C2280B2FDFB7C7009A1A89 /* SidebarAudioPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C2280A2FDFB7C1009A1A89 /* SidebarAudioPane.swift */; };
+		E3C2280D2FDFBE30009A1A89 /* SidebarSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C2280C2FDFBE25009A1A89 /* SidebarSliderView.swift */; };
 		E3CAD4AF2146DB47000B373A /* JavascriptAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */; };
 		E3CB258B2222885E00A62C47 /* JavascriptAPIOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */; };
 		E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB258E222799B800A62C47 /* MPVHook.swift */; };
@@ -2014,7 +2016,8 @@
 		E3C12F6A201F281F00297964 /* FirstRunManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRunManager.swift; sourceTree = "<group>"; };
 		E3C228062FDF4E02009A1A89 /* SidebarVideoPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarVideoPane.swift; sourceTree = "<group>"; };
 		E3C228082FDF5EF8009A1A89 /* SidebarTrackSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarTrackSelector.swift; sourceTree = "<group>"; };
-		E3C2280A2FDFB7C1009A1A89 /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		E3C2280A2FDFB7C1009A1A89 /* SidebarAudioPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarAudioPane.swift; sourceTree = "<group>"; };
+		E3C2280C2FDFBE25009A1A89 /* SidebarSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSliderView.swift; sourceTree = "<group>"; };
 		E3CAD4AE2146DB47000B373A /* JavascriptAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPI.swift; sourceTree = "<group>"; };
 		E3CB258A2222885E00A62C47 /* JavascriptAPIOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIOverlay.swift; sourceTree = "<group>"; };
 		E3CB258E222799B800A62C47 /* MPVHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVHook.swift; sourceTree = "<group>"; };
@@ -2949,12 +2952,13 @@
 		E3A239AF2FCB4CE800CE6ACC /* Sidebar */ = {
 			isa = PBXGroup;
 			children = (
-				E3C2280A2FDFB7C1009A1A89 /* Untitled.swift */,
+				E3C2280C2FDFBE25009A1A89 /* SidebarSliderView.swift */,
 				E3C228082FDF5EF8009A1A89 /* SidebarTrackSelector.swift */,
 				E3A239AD2FC7267000CE6ACC /* SideBarView.swift */,
 				E3A239C02FCB4D2400CE6ACC /* SidebarController.swift */,
 				E3D94E7F2FD0519600B08618 /* SidebarLayoutPane.swift */,
 				E3C228062FDF4E02009A1A89 /* SidebarVideoPane.swift */,
+				E3C2280A2FDFB7C1009A1A89 /* SidebarAudioPane.swift */,
 				E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */,
 				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
 				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
@@ -3369,6 +3373,7 @@
 				84D0FB7E1F5E519300C6A6A7 /* FreeSelectingViewController.swift in Sources */,
 				E34BC28D2C27733200A94680 /* SettingsPage.swift in Sources */,
 				E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */,
+				E3C2280D2FDFBE30009A1A89 /* SidebarSliderView.swift in Sources */,
 				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
 				E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */,
@@ -3438,6 +3443,7 @@
 				E38099CA2FC05B2E00D3333E /* SettingsPageUI.swift in Sources */,
 				E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */,
 				E3A239AC2FC70EC300CE6ACC /* AdditionalInfoView.swift in Sources */,
+				E3C2280B2FDFB7C7009A1A89 /* SidebarAudioPane.swift in Sources */,
 				E31E63012FDB96F0005527B2 /* FadeableViewController.swift in Sources */,
 				E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */,
 				E3BBBBBB0000000000000004 /* SettingsPageAudio.swift in Sources */,

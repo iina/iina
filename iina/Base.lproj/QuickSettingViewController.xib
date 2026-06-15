@@ -383,7 +383,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="705-dt-Zwl" userLabel="SpeedReset Button">
-                                <rect key="frame" x="331" y="382.5" width="16" height="21"/>
+                                <rect key="frame" x="331" y="382" width="16" height="21"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.clockwise.circle.fill" catalog="system" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="e2B-Ie-9hS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="message" size="11"/>
@@ -914,7 +914,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="oVx-Sp-Lhl" userLabel="AudioTab Clip View">
                 <rect key="frame" x="0.0" y="0.0" width="360" height="536"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="NZU-RD-Dm3" userLabel="AudioTab Flipped View" customClass="FlippedView" customModule="IINA" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="-11" width="360" height="547"/>
@@ -940,7 +940,7 @@
                                         <rect key="frame" x="0.0" y="428" width="360" height="75"/>
                                         <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="vgF-KN-yHf" userLabel="AudioTrackTable Clip View">
                                             <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" tableStyle="fullWidth" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="FLg-2m-Zaq" userLabel="AudioTrackTable Table View">
                                                     <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
@@ -1597,7 +1597,7 @@
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="17z-n6-rH9" userLabel="AudioTab Vertical Scroller">
-                <rect key="frame" x="343" y="0.0" width="17" height="528.5"/>
+                <rect key="frame" x="343" y="0.0" width="17" height="536"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <point key="canvasLocation" x="329" y="-680"/>
@@ -2085,7 +2085,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="8ZC-Wx-nt7">
-                                        <rect key="frame" x="326" y="310.5" width="16" height="21"/>
+                                        <rect key="frame" x="326" y="310" width="16" height="21"/>
                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="arrow.clockwise.circle.fill" catalog="system" imagePosition="only" alignment="center" controlSize="small" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="ojj-5V-n3t">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="message" size="11"/>
@@ -2458,10 +2458,20 @@
     <resources>
         <image name="NSRefreshFreestandingTemplate" width="19" height="19"/>
         <image name="arrow.clockwise.circle.fill" catalog="system" width="15" height="15"/>
+<<<<<<< HEAD
         <image name="tab_audio" width="26" height="18"/>
         <image name="tab_sub" width="26" height="18"/>
         <image name="tab_video" width="26" height="18"/>
+||||||| parent of 4a7e8b9d (ui: new audio sidebar)
+        <image name="delete.backward" catalog="system" width="17" height="14"/>
+        <image name="pencil" catalog="system" width="14" height="13"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
+=======
+        <image name="delete.backward" catalog="system" width="17" height="14"/>
+        <image name="pencil" catalog="system" width="13" height="13"/>
+        <image name="square.and.arrow.down" catalog="system" width="16" height="17"/>
+>>>>>>> 4a7e8b9d (ui: new audio sidebar)
         <image name="triangle-down" width="10" height="14"/>
-        <image name="waveform.and.person.filled" catalog="system" width="19" height="17"/>
+        <image name="waveform.and.person.filled" catalog="system" width="20" height="17"/>
     </resources>
 </document>

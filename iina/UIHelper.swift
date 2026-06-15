@@ -10,9 +10,11 @@
 class UIHelper {
   static let shared = UIHelper()
 
-  func button(_ key: String) -> NSButton {
+  func button(_ key: String, target: NSObject? = nil, action: Selector? = nil) -> NSButton {
     let btn = NSButton(title: localized(key), target: nil, action: nil)
     btn.translatesAutoresizingMaskIntoConstraints = false
+    btn.target = target
+    btn.action = action
     return btn
   }
 

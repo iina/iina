@@ -8,14 +8,6 @@
 
 import Cocoa
 
-fileprivate let eqUserDefinedProfileMenuItemTag = 0
-fileprivate let eqPresetProfileMenuItemTag = 1
-fileprivate let eqDeleteMenuItemTag = -1
-fileprivate let eqRenameMenuItemTag = -2
-fileprivate let eqSaveMenuItemTag = -3
-fileprivate let eqCustomMenuItemTag = 1000
-
-
 fileprivate let tabConfig = [
   ("Layout", NSImage.sf("paintpalette.fill"), 0),
   ("Video", NSImage.tabVideo, 1),
@@ -115,7 +107,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   private var layoutTabScrollView: SidebarScrollView!
   private var videoTabScrollView: SidebarScrollView!
-  @IBOutlet weak var audioTabScrollView: SidebarScrollView!
+  private var audioTabScrollView: SidebarScrollView!
   @IBOutlet weak var subtitlesTabScrollView: SidebarScrollView!
 
   @IBOutlet weak var videoTableView: NSTableView!
@@ -215,7 +207,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     brightnessSlider, contrastSlider, saturationSlider, gammaSlider, hueSlider
   ]
 
-  private var lastUsedProfileName: String = ""
   private var inputString: String = ""
 
   var downShift: CGFloat = 0 {
@@ -251,6 +242,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
     layoutTabScrollView = SidebarLayoutPane(player: player)
     videoTabScrollView = SidebarVideoPane(player: player)
+    audioTabScrollView = SidebarAudioPane(player: player)
 
     // set up the tab buttons
 
@@ -417,27 +409,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     speedSlider4xLabel.stringValue = "4x"
     speedSlider16xLabel.stringValue = "16x"
 
-    if let data = UserDefaults.standard.data(forKey: Preference.Key.userEQPresets.rawValue),
-       let dict = try? JSONDecoder().decode(Dictionary<String, EQProfile>.self, from: data) {
-      userEQs = dict
-    }
-
-    eqPopUpButton.menu!.delegate = self
-    presetEQs.forEach { preset in
-      eqPopUpButton.menu?.addItem(withTitle: preset.name, tag: eqPresetProfileMenuItemTag, obj: preset.localizationKey)
-    }
-    eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
-    lastUsedProfileName = eqPopUpButton.selectedItem!.title
-
-    // notifications
-    player.observe(.iinaTracklistChanged) { [unowned self] _ in
-      self.withAllTableViews { view, _ in view.reloadData() }
-    }
-    player.observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
-    player.observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
-    player.observe(.iinaSIDChanged) { [unowned self] _ in self.reload() }
-    player.observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
-    player.observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
   }
 
   @objc func dismissSidebar(_ sender: AnyObject) {
@@ -484,7 +455,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
   private func updateControlsState() {
-    updateAudioTabControl()
+//    updateAudioTabControl()
     updateSubTabControl()
     updateAudioEqState()
   }
@@ -580,9 +551,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     case .layout:
       return
     case .audio:
-      audioTableView.reloadData()
-      updateAudioTabControl()
-      updateAudioEqState()
+      break
+//      audioTableView.reloadData()
+//      updateAudioTabControl()
+//      updateAudioEqState()
     case .video:
       videoTableView.reloadData()
     case .sub:
@@ -838,19 +810,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     redraw(indicator: audioDelaySliderIndicator, constraint: audioDelaySliderConstraint, slider: audioDelaySlider, value: "\(sender.stringValue)s")
   }
 
-  func applyEQ(_ profile: EQProfile) {
-    zip(audioEQSliders, profile.gains).forEach { (slider, gain) in
-      slider.doubleValue = gain
-    }
-    player.setAudioEq(fromGains: profile.gains)
-  }
-
-
-
-  @IBAction func audioEqSliderAction(_ sender: NSSlider) {
-    player.setAudioEq(fromGains: audioEQSliders.map { $0.doubleValue })
-    eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
-  }
 
   // MARK: Sub tab
 
@@ -1027,99 +986,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   }
 
 }
-
-extension QuickSettingViewController: NSMenuDelegate {
-  private func promptAudioEQProfileName(isNewProfile: Bool) -> String? {
-    let key = isNewProfile ? "eq.new_profile" : "eq.rename"
-    let nameList = eqPopUpButton.itemArray
-      .filter{ $0.tag == eqPresetProfileMenuItemTag || $0.tag == eqUserDefinedProfileMenuItemTag }
-      .map{ $0.title }
-    let validator: Utility.InputValidator<String> = { input in
-      if input.isEmpty {
-        return .valueIsEmpty
-      }
-      if nameList.contains( where: { $0 == input } ) {
-        return .valueAlreadyExists
-      } else {
-        return .ok
-      }
-    }
-    var inputString: String?
-    Utility.quickPromptPanel(key, validator: validator, callback: { inputString = $0 })
-    return inputString
-  }
-  
-  func findItem(_ name: String, _ tag: Int = eqUserDefinedProfileMenuItemTag) -> NSMenuItem? {
-    return eqPopUpButton.itemArray.filter{ $0.tag == tag }.first { $0.title == name }
-  }
-
-  @IBAction func eqPopUpButtonAction(_ sender: NSPopUpButton) {
-    let tag = sender.selectedTag()
-    let name = sender.titleOfSelectedItem
-    let representedObject = sender.selectedItem?.representedObject as? String
-    switch tag {
-    case eqSaveMenuItemTag:
-      if let inputString = promptAudioEQProfileName(isNewProfile: true) {
-        let newProfile = EQProfile(fromCurrentSliders: audioEQSliders)
-        userEQs[inputString] = newProfile
-        menuNeedsUpdate(eqPopUpButton.menu!)
-        eqPopUpButton.select(findItem(inputString))
-        lastUsedProfileName = inputString
-      } else {
-        eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
-      }
-    case eqRenameMenuItemTag:
-      if let inputString = promptAudioEQProfileName(isNewProfile: false) {
-        let profile = userEQs.removeValue(forKey: lastUsedProfileName)
-        userEQs[inputString] = profile
-        menuNeedsUpdate(eqPopUpButton.menu!)
-        eqPopUpButton.select(findItem(inputString))
-        lastUsedProfileName = inputString
-      } else {
-        eqPopUpButton.select(findItem(lastUsedProfileName))
-      }
-    case eqDeleteMenuItemTag:
-      userEQs.removeValue(forKey: lastUsedProfileName)
-      menuNeedsUpdate(eqPopUpButton.menu!)
-      eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
-    case eqCustomMenuItemTag:
-      lastUsedProfileName = sender.selectedItem!.title
-    case eqPresetProfileMenuItemTag:
-      guard let preset = presetEQs.first(where: { $0.localizationKey == representedObject }) else { break }
-      lastUsedProfileName = preset.name
-      applyEQ(preset)
-    default: // user defined EQ Profiles
-      guard let pair = userEQs.first(where: { $0.0 == name }) else { break }
-      lastUsedProfileName = pair.0
-      applyEQ(pair.1)
-    }
-  }
-
-  func menuNeedsUpdate(_ menu: NSMenu) {
-    let tag = eqPopUpButton.selectedTag()
-    let saveItem = menu.item(withTag: eqSaveMenuItemTag)!
-    let editingItems = [menu.item(withTag: eqRenameMenuItemTag)!, menu.item(withTag: eqDeleteMenuItemTag)!]
-
-    editingItems.forEach { $0.isEnabled = (tag == eqUserDefinedProfileMenuItemTag) }
-    saveItem.isEnabled = (tag == eqCustomMenuItemTag)
-
-    let selectedName = eqPopUpButton.titleOfSelectedItem!
-    let selectedTag = eqPopUpButton.selectedTag()
-    var items = menu.items
-    items.removeAll { $0.tag == eqUserDefinedProfileMenuItemTag }
-    if !userEQs.isEmpty {
-      items.append(NSMenuItem.separator())
-    }
-    menu.items = items
-    userEQs.forEach { (name, eq) in
-      menu.addItem(withTitle: name, tag: eqUserDefinedProfileMenuItemTag)
-    }
-    eqPopUpButton.select(findItem(selectedName, selectedTag))
-    eqPopUpButton.itemArray.forEach { $0.state = .off }
-    eqPopUpButton.selectedItem?.state = .on
-  }
-}
-
 
 class QuickSettingView: NSView {
   override func mouseDown(with event: NSEvent) {}

@@ -131,6 +131,9 @@ fileprivate class AspectRatioView: NSScrollView {
 
     translatesAutoresizingMaskIntoConstraints = false
     drawsBackground = false
+    hasVerticalScroller = false
+    hasHorizontalScroller = true
+    autohidesScrollers = true
 
     self.segmentControl = NSSegmentedControl(
       labels: AppData.aspectsInPanel,
@@ -196,6 +199,9 @@ fileprivate class CropView: NSScrollView {
 
     translatesAutoresizingMaskIntoConstraints = false
     drawsBackground = false
+    hasVerticalScroller = false
+    hasHorizontalScroller = true
+    autohidesScrollers = true
 
     self.segmentControl = NSSegmentedControl(
       labels: AppData.cropsInPanel + [NSLocalizedString("menu.crop_custom", comment: "")],
@@ -370,117 +376,37 @@ fileprivate let speedFormatter: NumberFormatter = {
 }()
 
 
-fileprivate class SpeedView: NSView {
-  private unowned let player: PlayerCore
-  private var slider: NSSlider!
-  private var input: NSTextField!
-  private var indicator: NSTextField!
-  private var indicatorConstraint: NSLayoutConstraint!
-  private var resetButton: NSButton!
+fileprivate class SpeedView: SidebarSliderView {
+  override var titleImage: NSImage? {
+    .sf("chevron.forward.dotted.chevron.forward", "forward.fill")
+  }
+  override var titleKey: String { "sidebar.speed" }
 
-  private let sliderSteps = 24.0
-  private let sliderWidth: CGFloat = 240
+  override var tickMarkLabels: [String] {
+    ["\(0.25.groupedStringUpTo6Decimals)x", "1x", "4x", "16x"]
+  }
 
-  init(player: PlayerCore) {
-    self.player = player
-    super.init(frame: .zero)
+  override var notificationKey: Notification.Name {
+    .iinaSpeedChanged
+  }
 
-    translatesAutoresizingMaskIntoConstraints = false
-
-    self.slider = NSSlider()
-    slider.translatesAutoresizingMaskIntoConstraints = false
-    slider.controlSize = .small
+  override func setup() {
     slider.minValue = 0
     slider.maxValue = 24
-    slider.tickMarkPosition = .below
     slider.numberOfTickMarks = 25
     if #available(macOS 26, *) {
       slider.neutralValue = 8
     }
-    slider.target = self
-    slider.action = #selector(speedChangedAction)
-
-    self.indicator = NSTextField(labelWithString: "")
-    indicator.translatesAutoresizingMaskIntoConstraints = false
-    indicator.font = .systemFont(ofSize: 10)
-
-    self.input = NSTextField()
-    input.translatesAutoresizingMaskIntoConstraints = false
-    input.usesSingleLineMode = true
     input.formatter = speedFormatter
-    input.target = self
-    input.action = #selector(customSpeedEditFinishedAction)
-
-    self.resetButton = NSButton(
-      image: .sf("arrow.counterclockwise.circle.fill")!,
-      target: self, action: #selector(resetSpeedAction)
-    )
-    resetButton.bezelStyle = .smallSquare
-    resetButton.isBordered = false
     resetButton.toolTip = NSLocalizedString("quicksetting.reset_speed", comment: "Reset speed to 1x")
-
-    let labelStack = ui.hStack(
-      spacing: 8,
-      ui.image("chevron.forward.dotted.chevron.forward", "forward.fill", size: 16),
-      ui.label("sidebar.speed", font: .boldSystemFont(ofSize: 12)),
-      ui.flexibleSpace(),
-      resetButton,
-    )
-
-    let tickMarkLabels = [(0.25).groupedStringUpTo6Decimals, "1", "4", "16"]
-    let knobWidth = slider.knobThickness
-
-    let tickMarkView = NSView()
-    tickMarkView.translatesAutoresizingMaskIntoConstraints = false
-    for (i, label) in tickMarkLabels.enumerated() {
-      let label = NSTextField(labelWithString: "\(label)x")
-      label.translatesAutoresizingMaskIntoConstraints = false
-      label.font = .systemFont(ofSize: 10)
-      tickMarkView.addSubview(label)
-      let xPos = knobWidth / 2 + CGFloat(i) * (sliderWidth - knobWidth) / 3
-      let constraint = label.centerXAnchor
-        .constraint(equalTo: tickMarkView.leadingAnchor, constant: xPos)
-      constraint.priority = .defaultHigh
-      constraint.isActive = true
-      label.padding(.vertical, .horizontal(greaterThan: 0))
-    }
-
-    addSubview(labelStack)
-    addSubview(slider)
-    addSubview(indicator)
-    addSubview(input)
-    addSubview(tickMarkView)
-
-    indicator.padding(.horizontal(greaterThan: 0))
-      .spacing(.bottom(2), to: slider)
-    self.indicatorConstraint = indicator.centerXAnchor
-      .constraint(equalTo: slider.leadingAnchor)
-    indicatorConstraint.priority = .init(800)
-    indicatorConstraint.isActive = true
-
-    labelStack.padding(.horizontal, .top)
-    slider.padding(.leading, .bottom(16))
-      .spacing(.top(18), to: labelStack)
-      .size(width: sliderWidth)
-    input.padding(.trailing).spacing(.leading(8), to: slider)
-      .center(.y, with: slider)
-    tickMarkView.padding(.leading, .bottom)
-      .size(width: sliderWidth)
-
-    player.observe(.iinaSpeedChanged) { [unowned self] _ in
-      update()
-    }
-  }
-
-  override func viewDidMoveToSuperview() {
-    update()
   }
 
   /// Return the slider value that represents the given playback speed.
   /// - Parameter speed: Playback speed.
   /// - Returns: Appropriate slider value.
   private func convertSpeedToSliderValue(_ speed: Double) -> Double {
-    log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
+    let sliderSteps = 24.0
+    return log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
   }
 
   /// Ensure that the given `Double` is a speed which is valid for mpv.
@@ -508,56 +434,44 @@ fileprivate class SpeedView: NSView {
     updateIndicator()
   }
 
-  private func updateIndicator() {
-    /// Use `customSpeedTextField.stringValue` to take advantage of its formatter
-    /// (e.g. `16` will be displayed instead of `16.0`)
-    indicator.stringValue = "\(input.stringValue)x"
-
-    let offset: CGFloat = 6
-    let sliderInnerWidth = sliderWidth - offset * 2
-    indicatorConstraint.constant = offset + sliderInnerWidth * CGFloat((slider.doubleValue - slider.minValue) / (slider.maxValue - slider.minValue))
-    layout()
+  override func indicatorLabel() -> String {
+    "\(input.stringValue)x"
   }
 
-  private func update() {
-    guard player.info.state.active else { return }
-
+  override func update() {
     let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
     slider.allowsTickMarkValuesOnly = false
     updateSpeed(to: speed)
   }
 
-  @objc private func speedChangedAction(_ sender: NSSlider) {
+  override func sliderAction() {
     // Each step is 64^(1/24)
     //   0       1   ..    7      8      9   ..   24
     // 0.250x 0.297x .. 0.841x 1.000x 1.189x .. 16.00x
-    sender.allowsTickMarkValuesOnly = true
-    let sliderValue = sender.doubleValue
+    slider.allowsTickMarkValuesOnly = true
+    let sliderValue = slider.doubleValue
     // Attempt to round speed to 2 decimal places. If user is using the slider, any more
     // precision than that is just a distraction
+    let sliderSteps = 24.0
     let newSpeed = (AppData.minSpeed * pow(AppData.maxSpeed / AppData.minSpeed, sliderValue / sliderSteps)).roundedTo2Decimals()
     updateSpeed(to: newSpeed)
   }
 
-  @objc private func customSpeedEditFinishedAction(_ sender: NSTextField) {
-    if sender.stringValue.isEmpty {
-      sender.stringValue = "1"
+  override func customEditFinishedAction() {
+    if input.stringValue.isEmpty {
+      input.stringValue = "1"
     }
     slider.allowsTickMarkValuesOnly = false
     /// Unfortunately, the text field has not applied validation/formatting to the number at this point.
     /// We will do that manually via `constrainSpeed`.
-    updateSpeed(to: sender.doubleValue)
-    if let window = sender.window {
+    updateSpeed(to: input.doubleValue)
+    if let window = input.window {
       window.makeFirstResponder(window.contentView)
     }
   }
 
-  @objc private func resetSpeedAction(_ sender: AnyObject) {
+  override func resetButtonAction() {
     player.setSpeed(1.0)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 }
 

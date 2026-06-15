@@ -507,7 +507,6 @@
 
 // Sidebar
 
-"sidebar.video_track" = "Video Track";
 "sidebar.aspect_ratio" = "Aspect Ratio";
 "sidebar.crop" = "Crop";
 "sidebar.rotation" = "Rotation";
@@ -518,3 +517,12 @@
 "sidebar.saturation" = "Saturation";
 "sidebar.gamma" = "Gamma";
 "sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Load External Audio Track…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Save the current EQ as a preset…";
+"sidebar.rename_eq" = "Rename the current EQ preset…";
+"sidebar.remove_eq" = "Remove the current EQ preset";
+"sidebar.manual_eq" = "Manual";

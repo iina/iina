@@ -504,3 +504,17 @@
 "logwindow.clear_subsystem_selections" = "Clear Selections";
 "logwindow.copy" = "Copy";
 "logwindow.logs" = "logs";
+
+// Sidebar
+
+"sidebar.video_track" = "Video Track";
+"sidebar.aspect_ratio" = "Aspect Ratio";
+"sidebar.crop" = "Crop";
+"sidebar.rotation" = "Rotation";
+"sidebar.speed" = "Speed";
+
+"sidebar.brightness" = "Brightness";
+"sidebar.contrast" = "Contrast";
+"sidebar.saturation" = "Saturation";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";

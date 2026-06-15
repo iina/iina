@@ -16,23 +16,6 @@ fileprivate let eqSaveMenuItemTag = -3
 fileprivate let eqCustomMenuItemTag = 1000
 
 
-/// Formatter for `customSpeedTextField`.
-///
-/// Configure the number formatter in code instead of the XIB so it is easier to follow.
-fileprivate let speedFormatter: NumberFormatter = {
-  let fmt = NumberFormatter()
-  fmt.numberStyle = .decimal
-  fmt.usesGroupingSeparator = true
-  fmt.maximumSignificantDigits = 25  // just make very big
-  fmt.minimumFractionDigits = 0
-  fmt.maximumFractionDigits = 6  // matches mpv behavior
-  fmt.usesSignificantDigits = false
-  fmt.roundingMode = .halfDown   // matches mpv behavior
-  fmt.minimum = NSNumber(floatLiteral: AppData.mpvMinPlaybackSpeed)
-  return fmt
-}()
-
-
 fileprivate let tabConfig = [
   ("Layout", NSImage.sf("paintpalette.fill"), 0),
   ("Video", NSImage.tabVideo, 1),
@@ -54,8 +37,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  let sliderSteps = 24.0
 
   enum TabViewType: Equatable {
     case layout
@@ -116,8 +97,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
 
   var currentTab: TabViewType = .video
 
-  private var observers: [NSObjectProtocol] = []
-
   private var tabButtonsStackView: NSStackView!
   private var tabButtonsSegmentControl: NSSegmentedControl!
   private var tabButtonsLeadingConstraint: NSLayoutConstraint!
@@ -134,8 +113,8 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   private var closeSidebarBtn: NSButton!
   private var closeSidebarBtnSizeConstraint: NSLayoutConstraint!
 
-  var layoutTabScrollView: SidebarScrollView!
-  @IBOutlet weak var videoTabScrollView: SidebarScrollView!
+  private var layoutTabScrollView: SidebarScrollView!
+  private var videoTabScrollView: SidebarScrollView!
   @IBOutlet weak var audioTabScrollView: SidebarScrollView!
   @IBOutlet weak var subtitlesTabScrollView: SidebarScrollView!
 
@@ -271,6 +250,7 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     tabViewController.tabView.wantsLayer = true
 
     layoutTabScrollView = SidebarLayoutPane(player: player)
+    videoTabScrollView = SidebarVideoPane(player: player)
 
     // set up the tab buttons
 
@@ -437,8 +417,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     speedSlider4xLabel.stringValue = "4x"
     speedSlider16xLabel.stringValue = "16x"
 
-    customSpeedTextField.formatter = speedFormatter
-
     if let data = UserDefaults.standard.data(forKey: Preference.Key.userEQPresets.rawValue),
        let dict = try? JSONDecoder().decode(Dictionary<String, EQProfile>.self, from: data) {
       userEQs = dict
@@ -451,19 +429,15 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
     lastUsedProfileName = eqPopUpButton.selectedItem!.title
 
-    func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
-      observers.append(NotificationCenter.default.addObserver(forName: name, object: player, queue: .main, using: block))
-    }
-
     // notifications
-    observe(.iinaTracklistChanged) { [unowned self] _ in
+    player.observe(.iinaTracklistChanged) { [unowned self] _ in
       self.withAllTableViews { view, _ in view.reloadData() }
     }
-    observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
-    observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
-    observe(.iinaSIDChanged) { [unowned self] _ in self.reload() }
-    observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
-    observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
+    player.observe(.iinaVIDChanged) { [unowned self] _ in self.videoTableView.reloadData() }
+    player.observe(.iinaAIDChanged) { [unowned self] _ in self.audioTableView.reloadData() }
+    player.observe(.iinaSIDChanged) { [unowned self] _ in self.reload() }
+    player.observe(.iinaSecondSubVisibilityChanged) { [unowned self] _ in secHideSwitch.state = player.info.isSecondSubVisible ? .on : .off }
+    player.observe(.iinaSubVisibilityChanged) { [unowned self] _ in hideSwitch.state = player.info.isSubVisible ? .on : .off }
   }
 
   @objc func dismissSidebar(_ sender: AnyObject) {
@@ -492,90 +466,12 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     }
   }
 
-  // MARK: - Right to Left Constraints
-
-  /// Prepares the receiver for service after it has been loaded from an Interface Builder archive, or nib file.
-  ///
-  /// If the user interface layout direction is right to left then certain layout constraints that assume a left to right layout will need to be
-  /// replaced. That will be handled by the `viewWillLayout` method. This method will disable these constraints to avoid triggering
-  /// constraint errors before the constraints can be replaced.
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    guard speedSlider.userInterfaceLayoutDirection == .rightToLeft else { return }
-    NSLayoutConstraint.deactivate([
-      speedSlider1xLabelCenterXConstraint,
-      speedSlider4xLabelCenterXConstraint,
-      speedSlider1xLabelPrevLabelConstraint,
-      speedSlider4xLabelPrevLabelConstraint,
-      speedSlider16xLabelPrevLabelConstraint])
-  }
-
-  /// Calculate the constraint multiplier for a speed slider label.
-  ///
-  /// This method calculates the appropriate multiplier to use in a
-  /// [centerX](https://developer.apple.com/documentation/uikit/nslayoutconstraint/attribute/centerx)
-  /// constraint for a text field that sits under the speed slider and displays the speed associated with a particular tick mark.
-  /// - Parameter speed: Playback speed the label indicates.
-  /// - Returns: Multiplier to use in the constraint.
-  private func calculateSliderLabelMultiplier(speed: Double) -> CGFloat {
-    let tickIndex = Int(convertSpeedToSliderValue(speedSlider.closestTickMarkValue(toValue: speed)))
-    let tickRect = speedSlider.rectOfTickMark(at: tickIndex)
-    let tickCenterX = tickRect.origin.x + tickRect.width / 2
-    let containerViewX = speedSlider.frame.origin.x + tickCenterX
-    return containerViewX / speedSliderContainerView.frame.width
-  }
-
-  /// Called just before the `layout()` method of the view controller's view is called.
-  ///
-  /// If the user interface layout direction is right to left then this method will replace certain layout constraints with ones that properly
-  /// position the reversed views.
-  override func viewWillLayout() {
-    // When the layout is right to left the first time this method is called the views will not have
-    // been reversed. Once the views have been repositioned this method will be called again. Must
-    // wait for that to happen before adjusting constraints to avoid triggering constraint errors.
-    // Detect this based on the order of the speed slider labels.
-    guard speedSliderContainerView.userInterfaceLayoutDirection == .rightToLeft,
-          speedSlider16xLabel.frame.origin.x < speedSlider0_25xLabel.frame.origin.x else {
-      super.viewWillLayout()
-      return
-    }
-
-    // Deactivate the layout constraints that will be replaced.
-    NSLayoutConstraint.deactivate([
-      speedSlider1xLabelCenterXConstraint,
-      speedSlider4xLabelCenterXConstraint,
-      speedSlider1xLabelPrevLabelConstraint,
-      speedSlider4xLabelPrevLabelConstraint,
-      speedSlider16xLabelPrevLabelConstraint])
-
-    // The multiplier in the constraints that position the 1x and 4x labels must be changed to
-    // reflect the reversed views.
-    speedSlider1xLabelCenterXConstraint = NSLayoutConstraint(
-      item: speedSlider1xLabel as Any, attribute: .centerX, relatedBy: .equal, toItem: speedSlider,
-      attribute: .right, multiplier: calculateSliderLabelMultiplier(speed: 1), constant: 0)
-    speedSlider4xLabelCenterXConstraint = NSLayoutConstraint(
-      item: speedSlider4xLabel as Any, attribute: .centerX, relatedBy: .equal, toItem: speedSlider,
-      attribute: .right, multiplier: calculateSliderLabelMultiplier(speed: 4), constant: 0)
-
-    // The constraints that impose an order on the labels must be changed to reflect the reversed
-    // views.
-    speedSlider1xLabelPrevLabelConstraint = NSLayoutConstraint(
-      item: speedSlider1xLabel as Any, attribute: .right, relatedBy: .lessThanOrEqual,
-      toItem: speedSlider0_25xLabel, attribute: .left, multiplier: 1, constant: 0)
-    speedSlider4xLabelPrevLabelConstraint = NSLayoutConstraint(
-      item: speedSlider4xLabel as Any, attribute: .right, relatedBy: .lessThanOrEqual,
-      toItem: speedSlider1xLabel, attribute: .left, multiplier: 1, constant: 0)
-    speedSlider16xLabelPrevLabelConstraint = NSLayoutConstraint(
-      item: speedSlider16xLabel as Any, attribute: .right, relatedBy: .lessThanOrEqual,
-      toItem: speedSlider4xLabel, attribute: .left, multiplier: 1, constant: 0)
-
-    NSLayoutConstraint.activate([
-      speedSlider1xLabelCenterXConstraint,
-      speedSlider4xLabelCenterXConstraint,
-      speedSlider1xLabelPrevLabelConstraint,
-      speedSlider4xLabelPrevLabelConstraint,
-      speedSlider16xLabelPrevLabelConstraint])
-    super.viewWillLayout()
+  private func redraw(indicator: NSTextField, constraint: NSLayoutConstraint, slider: NSSlider, value: String) {
+    indicator.stringValue = value
+    let offset: CGFloat = 6
+    let sliderInnerWidth = slider.frame.width - offset * 2
+    constraint.constant = offset + sliderInnerWidth * CGFloat((slider.doubleValue - slider.minValue) / (slider.maxValue - slider.minValue))
+    view.layout()
   }
 
   // MARK: - Validate UI
@@ -587,54 +483,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     updateControlsState()
   }
 
-  deinit {
-    observers.forEach {
-      NotificationCenter.default.removeObserver($0)
-    }
-  }
-
   private func updateControlsState() {
-    updateVideoTabControl()
     updateAudioTabControl()
     updateSubTabControl()
-    updateVideoEqState()
     updateAudioEqState()
-  }
-
-  /// Return the slider value that represents the given playback speed.
-  /// - Parameter speed: Playback speed.
-  /// - Returns: Appropriate slider value.
-  private func convertSpeedToSliderValue(_ speed: Double) -> Double {
-    log(speed / AppData.minSpeed) / log(AppData.maxSpeed / AppData.minSpeed) * sliderSteps
-  }
-
-  private func updateVideoTabControl() {
-    guard player.info.state.active else { return }
-    if let index = AppData.aspectsInPanel.firstIndex(of: player.info.unsureAspect) {
-      aspectSegment.selectedSegment = index
-    } else {
-      aspectSegment.selectedSegment = -1
-    }
-    if let index = AppData.cropsInPanel.firstIndex(of: player.info.unsureCrop) {
-      cropSegment.selectedSegment = index
-    } else {
-      // Select last segment ("Custom...")
-      cropSegment.selectedSegment = cropSegment.segmentCount - 1
-    }
-    rotateSegment.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
-
-    hardwareDecodingSwitch.state = player.info.hwdecEnabled ? .on : .off
-    deinterlaceSwitch.state = player.info.deinterlace ? .on : .off
-    hdrSwitch.isEnabled = player.info.hdrAvailable
-    hdrSwitch.state = (player.info.hdrAvailable && player.info.hdrEnabled) ? .on : .off
-    
-    // These strings are also contained in the strings file of this view. Remove these lines if the localization of these strings are complete enough.
-    hardwareDecodingLabel.stringValue = NSLocalizedString("quicksetting.hwdec", comment: "Hardware Decoding")
-    deinterlaceLabel.stringValue = NSLocalizedString("quicksetting.deinterlace", comment: "Deinterlace")
-    hdrLabel.stringValue = NSLocalizedString("quicksetting.hdr", comment: "HDR")
-
-    let speed = player.mpv.getDouble(MPVOption.PlaybackControl.speed)
-    updateSpeed(to: speed)
   }
 
   private func updateAudioTabControl() {
@@ -680,14 +532,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
         subTextBorderWidthPopUp.select(item)
       }
     }
-  }
-
-  private func updateVideoEqState() {
-    brightnessSlider.intValue = Int32(player.info.brightness)
-    contrastSlider.intValue = Int32(player.info.contrast)
-    saturationSlider.intValue = Int32(player.info.saturation)
-    gammaSlider.intValue = Int32(player.info.gamma)
-    hueSlider.intValue = Int32(player.info.hue)
   }
 
   private func updateAudioEqState() {
@@ -741,20 +585,10 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
       updateAudioEqState()
     case .video:
       videoTableView.reloadData()
-      updateVideoTabControl()
-      updateVideoEqState()
     case .sub:
       subTableView.reloadData()
       secSubTableView.reloadData()
       updateSubTabControl()
-    }
-  }
-
-  func setHdrAvailability(to available: Bool) {
-    player.info.hdrAvailable = available
-    if isViewLoaded {
-      hdrSwitch.isEnabled = available
-      hdrSwitch.state = (available && player.info.hdrEnabled) ? .on : .off
     }
   }
 
@@ -846,7 +680,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     block(audioTableView, .audio)
     block(subTableView, .sub)
     block(secSubTableView, .secondSub)
-    block(videoTableView, .video)
   }
 
   // MARK: - Actions
@@ -908,74 +741,6 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
   @IBAction func hdrAction(_ sender: NSSwitch) {
     self.player.info.hdrEnabled = sender.state == .on
     self.player.refreshEdrMode()
-  }
-
-  private func redraw(indicator: NSTextField, constraint: NSLayoutConstraint, slider: NSSlider, value: String) {
-    indicator.stringValue = value
-    let offset: CGFloat = 6
-    let sliderInnerWidth = slider.frame.width - offset * 2
-    constraint.constant = offset + sliderInnerWidth * CGFloat((slider.doubleValue - slider.minValue) / (slider.maxValue - slider.minValue))
-    view.layout()
-  }
-
-  @IBAction func resetSpeedAction(_ sender: AnyObject) {
-    player.setSpeed(1.0)
-  }
-
-  @IBAction func speedChangedAction(_ sender: NSSlider) {
-    // Each step is 64^(1/24)
-    //   0       1   ..    7      8      9   ..   24
-    // 0.250x 0.297x .. 0.841x 1.000x 1.189x .. 16.00x
-    let eventType = NSApp.currentEvent!.type
-    if eventType == .leftMouseDown {
-      sender.allowsTickMarkValuesOnly = true
-    }
-    if eventType == .leftMouseUp {
-      sender.allowsTickMarkValuesOnly = false
-    }
-    let sliderValue = sender.doubleValue
-    // Attempt to round speed to 2 decimal places. If user is using the slider, any more
-    // precision than that is just a distraction
-    let newSpeed = (AppData.minSpeed * pow(AppData.maxSpeed / AppData.minSpeed, sliderValue / sliderSteps)).roundedTo2Decimals()
-    updateSpeed(to: newSpeed)
-  }
-
-  @IBAction func customSpeedEditFinishedAction(_ sender: NSTextField) {
-    if sender.stringValue.isEmpty {
-      sender.stringValue = "1"
-    }
-    /// Unfortunately, the text field has not applied validation/formatting to the number at this point.
-    /// We will do that manually via `constrainSpeed`.
-    updateSpeed(to: sender.doubleValue)
-    if let window = sender.window {
-      window.makeFirstResponder(window.contentView)
-    }
-  }
-
-  /// Ensure that the given `Double` is a speed which is valid for mpv.
-  ///
-  /// - This is necessary because libmpv cannot be relied on to report the correct number & will reply
-  /// with a property change event which echoes the number which was submitted, even if it is not the
-  /// same as the number which mpv is actually using (it will internally round the number to 6 digits
-  /// after the decimal but tell us that it used the non-rounded number).
-  /// - `NumberFormatter` doesn't provide APIs to validate or correct an `NSNumber`.
-  /// But we can get the same effect by converting to a `String` and back again.
-  private func constrainSpeed(_ inputSpeed: Double) -> Double {
-    let newSpeedString: String = speedFormatter.string(from: inputSpeed as NSNumber) ?? "1"
-    return Double(truncating: speedFormatter.number(from: newSpeedString)!)
-  }
-
-  private func updateSpeed(to inputSpeed: Double) {
-    let newSpeed = constrainSpeed(inputSpeed)
-    speedSlider.doubleValue = convertSpeedToSliderValue(newSpeed)
-    customSpeedTextField.doubleValue = newSpeed
-    speedResetBtn.isHidden = newSpeed == 1.0
-    if player.info.playSpeed != newSpeed {
-      player.setSpeed(newSpeed)
-    }
-    /// Use `customSpeedTextField.stringValue` to take advantage of its formatter
-    /// (e.g. `16` will be displayed instead of `16.0`)
-    redraw(indicator: speedSliderIndicator, constraint: speedSliderConstraint, slider: speedSlider, value: "\(customSpeedTextField.stringValue)x")
   }
 
   @IBAction func equalizerSliderAction(_ sender: NSSlider) {

@@ -1252,7 +1252,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { self.player.audioDeviceListChanged() }
 
     case MPVProperty.videoParams:
-      DispatchQueue.main.async { self.player.needReloadQuickSettingsView() }
+      DispatchQueue.main.async { self.player.postNotification(.iinaVideoParamsChanged) }
 
     case MPVProperty.videoParamsRotate:
       guard let rotation = UnsafePointer<Int>(OpaquePointer(property.data))?.pointee else {
@@ -1321,7 +1321,7 @@ class MPVController: NSObject {
           player.info.deinterlace = data
           player.sendOSD(.deinterlace(data))
         }
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaDeinterlaceChanged)
       }
 
     case MPVOption.Video.hwdec:
@@ -1331,7 +1331,7 @@ class MPVController: NSObject {
           player.info.hwdec = data
           player.sendOSD(.hwdec(player.info.hwdecEnabled))
         }
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaHwdecChanged)
       }
 
     case MPVOption.Video.videoRotate:
@@ -1372,7 +1372,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.audioDelay = data
         player.sendOSD(.audioDelay(data))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaAudioDelayChanged)
       }
 
     case MPVOption.Subtitles.subVisibility:
@@ -1416,11 +1416,11 @@ class MPVController: NSObject {
         logPropertyValueError(name, property.format)
         break
       }
-      guard name == MPVOption.Subtitles.subPos else {
+      if name == MPVOption.Subtitles.subPos {
+        DispatchQueue.main.async { self.player.subPosChanged(data) }
+      } else {
         DispatchQueue.main.async { self.player.secondarySubPosChanged(data) }
-        break
       }
-      DispatchQueue.main.async { self.player.subPosChanged(data) }
 
     case MPVOption.Equalizer.contrast:
       guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
@@ -1431,7 +1431,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.contrast = intData
         player.sendOSD(.contrast(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.hue:
@@ -1443,7 +1443,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.hue = intData
         player.sendOSD(.hue(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.brightness:
@@ -1455,7 +1455,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.brightness = intData
         player.sendOSD(.brightness(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.gamma:
@@ -1467,7 +1467,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.gamma = intData
         player.sendOSD(.gamma(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.saturation:
@@ -1479,7 +1479,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.saturation = intData
         player.sendOSD(.saturation(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     // following properties may change before file loaded
@@ -1493,7 +1493,6 @@ class MPVController: NSObject {
     case MPVProperty.vf:
       DispatchQueue.main.async { [self] in
         player.vfChanged()
-        player.needReloadQuickSettingsView()
       }
 
     case MPVProperty.af:

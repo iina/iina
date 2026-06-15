@@ -134,6 +134,8 @@ class PlayerCore: NSObject {
 
   // MARK: - Fields
 
+  private var observers: [NSObjectProtocol] = []
+
   lazy var subsystem = Logger.makeSubsystem("player\(label!)", ["play.circle"])
 
   func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
@@ -332,6 +334,17 @@ class PlayerCore: NSObject {
     TouchBarSettings.shared.addObserver(self, forKey: .PresentationModeFnModes)
     TouchBarSettings.shared.addObserver(self, forKey: .PresentationModeGlobal)
     TouchBarSettings.shared.addObserver(self, forKey: .PresentationModePerApp)
+  }
+
+  func observe(_ name: Notification.Name, block: @escaping (Notification) -> Void) {
+    observers.append(NotificationCenter.default.addObserver(
+      forName: name, object: self, queue: .main, using: block))
+  }
+
+  deinit {
+    observers.forEach {
+      NotificationCenter.default.removeObserver($0)
+    }
   }
 
   // MARK: - Plugins
@@ -2305,11 +2318,6 @@ class PlayerCore: NSObject {
     postNotification(.iinaMediaTitleChanged)
   }
 
-  func needReloadQuickSettingsView() {
-    guard info.state.active else { return }
-    mainWindow.sidebars.quickSettingView.reload()
-  }
-
   func ontopChanged() {
     guard mainWindow.loaded, info.state.active else { return }
     let ontop = mpv.getFlag(MPVOption.Window.ontop)
@@ -2372,12 +2380,12 @@ class PlayerCore: NSObject {
 
   func secondarySubDelayChanged(_ delay: Double) {
     sendOSD(.secondSubDelay(delay))
-    needReloadQuickSettingsView()
+    postNotification(.iinaSecondSubDelayChanged)
   }
 
   func secondarySubPosChanged(_ position: Double) {
     sendOSD(.secondSubPos(position))
-    needReloadQuickSettingsView()
+    postNotification(.iinaSecondSubPositionChanged)
   }
 
   func secondarySidChanged() {
@@ -2415,7 +2423,7 @@ class PlayerCore: NSObject {
     let displayValue = scale >= 1 ? scale : -1 / scale
     let truncated = round(displayValue * 100) / 100
     sendOSD(.subScale(truncated))
-    needReloadQuickSettingsView()
+    postNotification(.iinaSubScaleChanged)
   }
 
   func speedChanged(_ speed: Double) {
@@ -2423,19 +2431,19 @@ class PlayerCore: NSObject {
     info.playSpeed = speed
     sendOSD(.speed(speed))
     mainWindow.updateSpeedLabel(speed: speed)
-    needReloadQuickSettingsView()
+    postNotification(.iinaSpeedChanged)
     NowPlayingInfoManager.shared.updateInfo()
   }
 
   func subDelayChanged(_ delay: Double) {
     info.subDelay = delay
     sendOSD(.subDelay(delay))
-    needReloadQuickSettingsView()
+    postNotification(.iinaSubDelayChanged)
   }
 
   func subPosChanged(_ position: Double) {
     sendOSD(.subPos(position))
-    needReloadQuickSettingsView()
+    postNotification(.iinaSubPositionChanged)
   }
 
   func subVisibilityChanged(_ visible: Bool) {

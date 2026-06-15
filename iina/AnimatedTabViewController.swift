@@ -66,6 +66,24 @@ class AnimatedTabViewController: NSTabViewController {
 
 
 class SidebarScrollView: NSScrollView {
+  class Container: NSBox {
+    init(_ view: NSView, _ block: (NSView) -> Void) {
+      super.init(frame: .zero)
+      contentView = view
+      translatesAutoresizingMaskIntoConstraints = false
+      clipsToBounds = true
+      boxType = .custom
+      borderColor = .separatorColor
+      cornerRadius = 8
+      fillColor = .gray.withAlphaComponent(0.1)
+      block(view)
+    }
+
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+  }
+
   // swipe gesture callback, argument is true if is forward
   var horizontalScroll: ((Bool) -> Void)?
 
@@ -74,6 +92,20 @@ class SidebarScrollView: NSScrollView {
   private let angleThreshold: CGFloat = 5
   private let normThreshold: CGFloat = 80
 
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+
+    drawsBackground = false
+
+    documentView = FlippedView()
+    documentView!.translatesAutoresizingMaskIntoConstraints = false
+    documentView!.padding(.top, .leading, .trailing, from: contentView)
+  }
+  
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+  }
+  
   override func scrollWheel(with event: NSEvent) {
     super.scrollWheel(with: event)
 

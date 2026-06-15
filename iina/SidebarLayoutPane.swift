@@ -8,17 +8,15 @@
 
 
 fileprivate extension LayoutValue {
-  static let sidebarMargin = LayoutValue(16, 14)
-  static let stackViewSpacing = LayoutValue(18, 16)
-  static let containerPadding = LayoutValue(12, 10)
-  static let videoSettingsSpacing = LayoutValue(12, 8)
   static let sidebarSettingsSpacing = LayoutValue(10, 6)
   static let liquidGlassSettingsSpacing = LayoutValue(6, 5)
 }
 
 
+fileprivate let ui = UIHelper.shared
+
+
 class SidebarLayoutPane: SidebarScrollView {
-  let ui = UIHelper()
   let prefObserver = Preference.Observer()
   weak var player: PlayerCore!
 
@@ -34,12 +32,10 @@ class SidebarLayoutPane: SidebarScrollView {
     self.player = player
     super.init(frame: .zero)
 
-    drawsBackground = false
-    
-    let stack = ui.vStack(spacing: .stackViewSpacing)
+    let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
 
     themeSettingStack = ui.vStack(
-      spacing: .videoSettingsSpacing,
+      spacing: .sidebarItemSpacing,
       ui.hStack(
         ui.image("circle.lefthalf.filled", "circle.lefthalf.fill", size: 20),
         ui.label("Theme"),
@@ -50,7 +46,7 @@ class SidebarLayoutPane: SidebarScrollView {
 
     if #available(macOS 26.0, *) {
       themeSettingStack.addArrangedSubview(ui.vStack(
-        spacing: .videoSettingsSpacing,
+        spacing: .sidebarItemSpacing,
         ui.hStack(
           ui.image("liquid.glass", size: 20),
           ui.label("Liquid Glass"),
@@ -84,7 +80,7 @@ class SidebarLayoutPane: SidebarScrollView {
     }
 
     stack.addArrangedSubview(Container(themeSettingStack) {
-      $0.padding(.all(.containerPadding))
+      $0.padding(.all(.sidebarContainerPadding))
     })
 
     stack.addArrangedSubview(Container(ui.hStack(
@@ -93,10 +89,10 @@ class SidebarLayoutPane: SidebarScrollView {
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .compactUI, size: .small)
     )) {
-      $0.padding(.all(.containerPadding))
+      $0.padding(.all(.sidebarContainerPadding))
     })
 
-    videoSettingsStack = ui.vStack(spacing: .videoSettingsSpacing)
+    videoSettingsStack = ui.vStack(spacing: .sidebarItemSpacing)
 
     videoSettingsStack.addArrangedSubview(ui.hStack(
       ui.image("custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle", size: 20),
@@ -131,7 +127,7 @@ class SidebarLayoutPane: SidebarScrollView {
     updateVideoSettingsStack()
 
     stack.addArrangedSubview(Container(videoSettingsStack) {
-      $0.padding(.all(.containerPadding))
+      $0.padding(.all(.sidebarContainerPadding))
     })
 
     stack.addArrangedSubview(createOSCSettingsView())
@@ -146,9 +142,6 @@ class SidebarLayoutPane: SidebarScrollView {
       updateVideoSettingsStack()
     }
 
-    documentView = FlippedView()
-    documentView!.translatesAutoresizingMaskIntoConstraints = false
-    documentView!.padding(.top, .leading, .trailing, from: contentView)
     documentView!.addSubview(stack)
     stack.padding(.horizontal(.sidebarMargin), .vertical(4))
   }
@@ -186,12 +179,11 @@ class SidebarLayoutPane: SidebarScrollView {
     let label = createSectionTitle("On Screen Controller")
     let stack = ui.hStack(oscLayoutSelector.views)
 
-
     container.addSubview(label)
     container.addSubview(stack)
     label.padding(.top, .leading, .trailing(greaterThan: 0))
     stack.padding(.bottom(8), .horizontal(greaterThan: 0)).center(.x)
-      .spacing(.top(.stackViewSpacing), to: label)
+      .spacing(.top(.sidebarStackViewSpacing), to: label)
 
     return container
   }
@@ -237,14 +229,14 @@ class SidebarLayoutPane: SidebarScrollView {
         )
       }
     )) {
-      $0.padding(.all(.containerPadding))
+      $0.padding(.all(.sidebarContainerPadding))
     }
 
     container.addSubview(label)
     container.addSubview(stack)
     label.padding(.top, .leading, .trailing(greaterThan: 0))
     stack.padding(.bottom(8), .horizontal)
-      .spacing(.top(.stackViewSpacing), to: label)
+      .spacing(.top(.sidebarStackViewSpacing), to: label)
 
     return container
   }
@@ -314,24 +306,6 @@ fileprivate class SideBarButton: NSView {
 }
 
 
-fileprivate class Container: NSBox {
-  init(_ view: NSView, _ block: (NSView) -> Void) {
-    super.init(frame: .zero)
-    contentView = view
-    translatesAutoresizingMaskIntoConstraints = false
-    boxType = .custom
-    borderColor = .separatorColor
-    cornerRadius = 8
-    fillColor = .gray.withAlphaComponent(0.1)
-    block(view)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
-
-
 fileprivate class OSCLayoutSelector: NSBox {
   class Item: NSBox {
     let position: Preference.OSCPosition
@@ -362,7 +336,6 @@ fileprivate class OSCLayoutSelector: NSBox {
     }
   }
 
-  let ui = UIHelper()
   var views: [Item]!
   private let prefObserver = Preference.Observer()
 
@@ -392,7 +365,7 @@ fileprivate class OSCLayoutSelector: NSBox {
   private func createView(_ position: Preference.OSCPosition) -> Item {
     let content = ui.vStack(
       align: .centerX,
-      ui.image("osc.\(position.description)", width: 40, height: 28),
+      ui.image("osc.\(position.description)", width: 40, height: 28, scaleUp: true),
       ui.label(NSLocalizedString("osc_pos.\(position.description)", comment: ""), isSmall: true)
     )
     content.distribution = .fillEqually

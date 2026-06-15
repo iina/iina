@@ -8,6 +8,8 @@
 
 
 class UIHelper {
+  static let shared = UIHelper()
+
   func button(_ key: String) -> NSButton {
     let btn = NSButton(title: localized(key), target: nil, action: nil)
     btn.translatesAutoresizingMaskIntoConstraints = false
@@ -98,25 +100,28 @@ class UIHelper {
     return stackView
   }
 
-  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: CGFloat = 8, _ views: NSView...) -> NSStackView {
-    return vStack(align: align, spacing: LayoutValue(spacing), views)
+  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: CGFloat = 8, wantsToGrow: Bool = false, _ views: NSView...) -> NSStackView {
+    return vStack(align: align, spacing: LayoutValue(spacing), wantsToGrow: wantsToGrow, views)
   }
 
-  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: CGFloat = 8, _ views: [NSView]) -> NSStackView {
-    return vStack(align: align, spacing: LayoutValue(spacing), views)
+  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: CGFloat = 8, wantsToGrow: Bool = false, _ views: [NSView]) -> NSStackView {
+    return vStack(align: align, spacing: LayoutValue(spacing), wantsToGrow: wantsToGrow, views)
   }
 
-  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: LayoutValue, _ views: NSView...) -> NSStackView {
-    return vStack(align: align, spacing: spacing, views)
+  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: LayoutValue, wantsToGrow: Bool = false, _ views: NSView...) -> NSStackView {
+    return vStack(align: align, spacing: spacing, wantsToGrow: wantsToGrow, views)
   }
 
-  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: LayoutValue, _ views: [NSView]) -> NSStackView {
+  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: LayoutValue, wantsToGrow: Bool = false, _ views: [NSView]) -> NSStackView {
     let stackView = NSStackView(views: views)
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.orientation = .vertical
     stackView.alignment = align
     spacing.use { [weak stackView] in
       stackView?.spacing = $0
+    }
+    if wantsToGrow {
+      stackView.setHuggingPriority(.init(100), for: .horizontal)
     }
     return stackView
   }
@@ -136,10 +141,16 @@ class UIHelper {
     return view
   }
 
-  func image(_ symbol: String..., size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil) -> NSImageView {
-    let image = .sf(symbol) ?? NSImage(named: .init(symbol[0]))
+  func image(_ symbol: String..., size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil, scaleUp: Bool = false) -> NSImageView {
+    image(
+      .sf(symbol) ?? NSImage(named: .init(symbol[0])),
+      size: size, width: width, height: height, scaleUp: scaleUp
+    )
+  }
+
+  func image(_ image: NSImage?, size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil, scaleUp: Bool = true) -> NSImageView {
     let imageView = NSImageView(image: image ?? .sf("square.split.diagonal.2x2")!)
-    imageView.imageScaling = .scaleProportionallyUpOrDown
+    imageView.imageScaling = scaleUp ? .scaleProportionallyUpOrDown : .scaleProportionallyDown
     imageView.size(width: width ?? size, height: height ?? size)
     return imageView
   }

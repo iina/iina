@@ -74,4 +74,8 @@ struct LayoutValue {
 
 extension LayoutValue {
   static let panelCornerRadius: LayoutValue = .init(0)
+  static let sidebarMargin = LayoutValue(16, 14)
+  static let sidebarStackViewSpacing = LayoutValue(18, 16)
+  static let sidebarContainerPadding = LayoutValue(12, 10)
+  static let sidebarItemSpacing = LayoutValue(12, 8)
 }

@@ -216,7 +216,7 @@
               pkgs.fribidi        # Hebrew and Arabic support
               pkgs.gettext        # Internationalization library
               pkgs.glib           # GTK GLib utility library required by harfbuzz
-              pkgs.gmp            # Provides arbirary precision arithmetic, required by several libs
+              pkgs.gmp            # Provides arbitrary precision arithmetic, required by several libs
               pkgs.gnutls         # TLS support, needed for network streams
               pkgs.graphite2      # Compiles Graphite-enabled fonts, used by harfbuzz
               pkgs.harfbuzz       # Text shaping engine, used by avdevice, avfilter, ass

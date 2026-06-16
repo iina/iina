@@ -194,6 +194,9 @@ class PlayerCore: NSObject {
   }
 
   private var backgroundTaskInUse = false
+  private lazy var playlistFileMonitor = PlaylistFileMonitor { [weak self] in
+    self?.removeMissingPlaylistItems()
+  }
 
   var initialWindow: InitialWindowController!
   
@@ -524,6 +527,7 @@ class PlayerCore: NSObject {
     info.audioTracks = []
     info.chapters = []
     info.playlist = []
+    playlistFileMonitor.stop()
     info.subTracks = []
     info.thumbnails = []
     info.thumbnailsReady = false
@@ -691,6 +695,7 @@ class PlayerCore: NSObject {
   ///     down was in progress and will call this method again to continue the process of shutting down..
   func shutdown() {
     info.state = .shuttingDown
+    playlistFileMonitor.stop()
     guard !backgroundTaskInUse else { return }
     log("Shutting down")
     savePlayerState()
@@ -720,6 +725,7 @@ class PlayerCore: NSObject {
     let suffix = isMPVInitiated ? " (initiated by mpv)" : ""
     log("Player has shutdown\(suffix)")
     info.state = .shutDown
+    playlistFileMonitor.stop()
     if isMPVInitiated {
       // The user must have used mpv's IPC interface to send a quit command directly to mpv. Must
       // perform the actions that were skipped when IINA's normal shutdown process was bypassed.
@@ -945,6 +951,8 @@ class PlayerCore: NSObject {
         mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
       }
     }
+
+    playlistFileMonitor.stop()
 
     // Must first stop the background task if it is running.
     if backgroundTaskInUse {
@@ -1537,6 +1545,77 @@ class PlayerCore: NSObject {
   func clearPlaylist() {
     mpv.command(.playlistClear)
     postNotification(.iinaPlaylistChanged)
+  }
+
+  private func schedulePlaylistFileMonitorRefresh() {
+    if Thread.isMainThread {
+      refreshPlaylistFileMonitor()
+    } else {
+      DispatchQueue.main.async { [weak self] in
+        self?.refreshPlaylistFileMonitor()
+      }
+    }
+  }
+
+  private func refreshPlaylistFileMonitor() {
+    guard info.state.active else {
+      playlistFileMonitor.stop()
+      return
+    }
+
+    getPlaylist()
+    let workingDirectory = mpv.getString(MPVProperty.workingDirectory)
+    let paths = info.$playlist.withLock { playlist in
+      playlist.compactMap { localPlaylistFilePath(for: $0, workingDirectory: workingDirectory) }
+    }
+    playlistFileMonitor.update(paths: paths)
+  }
+
+  private func localPlaylistFilePath(for item: MPVPlaylistItem, workingDirectory: String?) -> String? {
+    guard !item.isNetworkResource else { return nil }
+    if NSString(string: item.filename).isAbsolutePath {
+      return URL(fileURLWithPath: item.filename).standardizedFileURL.path
+    }
+    guard let baseURL = localPlaylistBaseURL(for: item, workingDirectory: workingDirectory) else { return nil }
+    return URL(fileURLWithPath: item.filename, relativeTo: baseURL).standardizedFileURL.path
+  }
+
+  private func localPlaylistBaseURL(for item: MPVPlaylistItem, workingDirectory: String?) -> URL? {
+    if let playlistPath = item.playlistPath, !playlistPath.isEmpty, !Regex.url.matches(playlistPath) {
+      if NSString(string: playlistPath).isAbsolutePath {
+        return URL(fileURLWithPath: playlistPath).deletingLastPathComponent().standardizedFileURL
+      }
+      guard let workingDirectory, !workingDirectory.isEmpty, !Regex.url.matches(workingDirectory) else { return nil }
+      let workingDirectoryURL = URL(fileURLWithPath: workingDirectory, isDirectory: true)
+      return URL(fileURLWithPath: playlistPath, relativeTo: workingDirectoryURL).standardizedFileURL.deletingLastPathComponent()
+    }
+
+    guard let workingDirectory, !workingDirectory.isEmpty, !Regex.url.matches(workingDirectory) else { return nil }
+    return URL(fileURLWithPath: workingDirectory, isDirectory: true).standardizedFileURL
+  }
+
+  private func removeMissingPlaylistItems() {
+    guard info.state.active else {
+      playlistFileMonitor.stop()
+      return
+    }
+
+    getPlaylist()
+    let workingDirectory = mpv.getString(MPVProperty.workingDirectory)
+    let missingItems = info.$playlist.withLock { playlist -> IndexSet in
+      var indexSet = IndexSet()
+      for (index, item) in playlist.enumerated() {
+        guard let path = localPlaylistFilePath(for: item, workingDirectory: workingDirectory) else { continue }
+        if !FileManager.default.fileExists(atPath: path) {
+          indexSet.insert(index)
+        }
+      }
+      return indexSet
+    }
+
+    guard !missingItems.isEmpty else { return }
+    log("Removing \(missingItems.count) missing playlist item(s)")
+    playlistRemove(missingItems)
   }
 
   /// Play the entry at the given position in the playlist.
@@ -2148,6 +2227,7 @@ class PlayerCore: NSObject {
     // call `trackListChanged` to load tracks and check whether need to switch to music mode
     trackListChanged()
     getPlaylist()
+    refreshPlaylistFileMonitor()
     getChapters()
     syncAbLoop()
     refreshSyncUITimer()
@@ -2940,7 +3020,8 @@ class PlayerCore: NSObject {
         let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
                                            isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
                                            isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
-                                           title: mpv.getString(MPVProperty.playlistNTitle(index)))
+                                           title: mpv.getString(MPVProperty.playlistNTitle(index)),
+                                           playlistPath: mpv.getString(MPVProperty.playlistNPlaylistPath(index)))
         playlist.append(playlistItem)
       }
     }
@@ -2966,6 +3047,9 @@ class PlayerCore: NSObject {
   // MARK: - Notifications
 
   func postNotification(_ name: Notification.Name) {
+    if name == .iinaPlaylistChanged {
+      schedulePlaylistFileMonitorRefresh()
+    }
     NotificationCenter.default.post(Notification(name: name, object: self))
   }
 

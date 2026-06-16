@@ -528,6 +528,7 @@ class PlayerCore: NSObject {
     info.thumbnails = []
     info.thumbnailsReady = false
     info.videoDuration = nil
+    info.smpteTimecode = nil
     info.videoHeight = nil
     info.videoPosition = nil
     info.videoTracks = []
@@ -2139,6 +2140,7 @@ class PlayerCore: NSObject {
     }
     info.videoPosition = VideoTime(pos)
     info.videoRemaining = VideoTime(remaining)
+    loadSMPTETimecode(fps: mpv.getDouble(MPVProperty.currentTracksVideoDemuxFps))
     triedUsingExactSeekForCurrentFile = false
     checkUnsyncedWindowOptions()
     // generate thumbnails if window has loaded video
@@ -2180,6 +2182,36 @@ class PlayerCore: NSObject {
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
     syncUI(.playlist)
+  }
+
+  private func loadSMPTETimecode(fps: Double) {
+    updateSMPTETimecode(fps: fps, position: info.videoPosition ?? .zero)
+  }
+
+  private func updateSMPTETimecode(fps: Double? = nil, position: VideoTime) {
+    let fps = firstPositive(fps,
+                            mpv.getDouble(MPVProperty.currentTracksVideoDemuxFps),
+                            mpv.getDouble(MPVProperty.containerFps),
+                            mpv.getDouble(MPVProperty.estimatedVfFps),
+                            mpv.getDouble(MPVProperty.displayFps))
+    guard let fps else {
+      info.smpteTimecode = nil
+      return
+    }
+
+    if let value = mpv.getString("video-frame-info/smpte-timecode"), !value.isEmpty,
+       let timecode = SMPTETimecode(value, fps: fps, at: position) {
+      info.smpteTimecode = timecode
+    } else if let value = mpv.getString("video-frame-info/estimated-smpte-timecode"), !value.isEmpty,
+              let timecode = SMPTETimecode(value, fps: fps, at: position) {
+      info.smpteTimecode = timecode
+    } else {
+      info.smpteTimecode = SMPTETimecode("00:00:00:00", fps: fps)
+    }
+  }
+
+  private func firstPositive(_ values: Double?...) -> Double? {
+    values.compactMap { $0 }.first { $0 > 0 && $0.isFinite }
   }
 
   func fileEnded(_ dueToStopCommand: Bool) {
@@ -2753,6 +2785,7 @@ class PlayerCore: NSObject {
       info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
         mpv.getDouble(MPVProperty.playtimeRemainingFull) :
         mpv.getDouble(MPVProperty.timeRemainingFull)
+      updateSMPTETimecode(position: info.videoPosition ?? .zero)
       if isNetworkStream {
         // Update cache info
         info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)

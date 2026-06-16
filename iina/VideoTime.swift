@@ -124,3 +124,106 @@ func /(lhs: VideoTime?, rhs: VideoTime?) -> Double? {
 func -(lhs: VideoTime, rhs: VideoTime) -> VideoTime {
   return VideoTime(lhs.second - rhs.second)
 }
+
+struct SMPTETimecode {
+  private let startFrame: Int
+  private let fps: Double
+  private let nominalFramesPerSecond: Int
+  private let separator: Character
+
+  private var isDropFrame: Bool {
+    (separator == ";" || separator == ",") && nominalFramesPerSecond % 30 == 0
+  }
+
+  init?(_ string: String, fps: Double, at position: VideoTime = .zero) {
+    guard fps > 0, fps.isFinite else { return nil }
+
+    let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+    let separators = trimmed.filter { $0 == ":" || $0 == ";" || $0 == "." || $0 == "," }
+    guard separators.count == 3, let separator = separators.last else { return nil }
+
+    let parts = trimmed.split(whereSeparator: { $0 == ":" || $0 == ";" || $0 == "." || $0 == "," })
+    guard parts.count == 4,
+          let hours = Int(parts[0]),
+          let minutes = Int(parts[1]),
+          let seconds = Int(parts[2]),
+          let frames = Int(parts[3]) else {
+      return nil
+    }
+
+    let nominalFramesPerSecond = Int(fps.rounded())
+    guard nominalFramesPerSecond > 0,
+          (0..<60).contains(minutes),
+          (0..<60).contains(seconds),
+          (0..<nominalFramesPerSecond).contains(frames) else {
+      return nil
+    }
+
+    self.fps = fps
+    self.nominalFramesPerSecond = nominalFramesPerSecond
+    self.separator = separator == "," ? ";" : (separator == "." ? ":" : separator)
+    let frame = SMPTETimecode.frameNumber(hours: hours,
+                                          minutes: minutes,
+                                          seconds: seconds,
+                                          frames: frames,
+                                          nominalFramesPerSecond: nominalFramesPerSecond,
+                                          dropFrame: separator == ";" || separator == ",")
+    startFrame = frame - max(0, Int((position.second * fps).rounded(.down)))
+  }
+
+  func stringValue(at position: VideoTime) -> String {
+    let elapsedFrames = frameCount(for: position)
+    return SMPTETimecode.stringValue(for: startFrame + elapsedFrames,
+                                     nominalFramesPerSecond: nominalFramesPerSecond,
+                                     separator: separator,
+                                     dropFrame: isDropFrame)
+  }
+
+  func durationStringValue(for duration: VideoTime) -> String {
+    SMPTETimecode.stringValue(for: frameCount(for: duration),
+                              nominalFramesPerSecond: nominalFramesPerSecond,
+                              separator: ":",
+                              dropFrame: false)
+  }
+
+  private func frameCount(for time: VideoTime) -> Int {
+    max(0, Int((time.second * fps).rounded(.down)))
+  }
+
+  private static func frameNumber(hours: Int, minutes: Int, seconds: Int, frames: Int,
+                                  nominalFramesPerSecond: Int, dropFrame: Bool) -> Int {
+    let totalMinutes = hours * 60 + minutes
+    let totalFrames = ((hours * 3600) + (minutes * 60) + seconds) * nominalFramesPerSecond + frames
+    guard dropFrame, nominalFramesPerSecond % 30 == 0 else { return totalFrames }
+
+    let droppedFrames = 2 * (nominalFramesPerSecond / 30)
+    return totalFrames - droppedFrames * (totalMinutes - totalMinutes / 10)
+  }
+
+  private static func stringValue(for frameNumber: Int, nominalFramesPerSecond: Int,
+                                  separator: Character, dropFrame: Bool) -> String {
+    var frameNumber = frameNumber
+    let framesPerHour = nominalFramesPerSecond * 60 * 60
+    let framesPer24Hours = framesPerHour * 24
+    frameNumber = ((frameNumber % framesPer24Hours) + framesPer24Hours) % framesPer24Hours
+
+    if dropFrame, nominalFramesPerSecond % 30 == 0 {
+      let droppedFrames = 2 * (nominalFramesPerSecond / 30)
+      let framesPer10Minutes = nominalFramesPerSecond * 60 * 10 - droppedFrames * 9
+      let framesPerMinute = nominalFramesPerSecond * 60 - droppedFrames
+      let tenMinuteChunks = frameNumber / framesPer10Minutes
+      let remainingFrames = frameNumber % framesPer10Minutes
+      frameNumber += droppedFrames * 9 * tenMinuteChunks
+      if remainingFrames >= droppedFrames {
+        frameNumber += droppedFrames * ((remainingFrames - droppedFrames) / framesPerMinute)
+      }
+    }
+
+    let hours = frameNumber / framesPerHour
+    let minutes = (frameNumber / (nominalFramesPerSecond * 60)) % 60
+    let seconds = (frameNumber / nominalFramesPerSecond) % 60
+    let frames = frameNumber % nominalFramesPerSecond
+
+    return String(format: "%02d:%02d:%02d%@%02d", hours, minutes, seconds, String(separator), frames)
+  }
+}

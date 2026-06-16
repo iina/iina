@@ -3352,7 +3352,12 @@ class MainWindowController: PlayerWindowController {
     } else {
       ""
     }
-    timePreviewTextField.stringValue = chapterTitle + time.stringRepresentation
+    if DurationDisplayTextField.precision == DurationDisplayTextField.smptePrecision,
+       let smpteTimecode = player.info.smpteTimecode {
+      timePreviewTextField.stringValue = chapterTitle + smpteTimecode.stringValue(at: time)
+    } else {
+      timePreviewTextField.stringValue = chapterTitle + time.stringRepresentation
+    }
 
     let sliderFrame = playSlider.convert(playSlider.bounds, to: nil)
     let timeLabelYPos: CGFloat

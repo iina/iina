@@ -15,11 +15,13 @@ class DurationDisplayTextField: NSTextField {
     case remaining // displays the remaining time in the movie
   }
 
+  static let smptePrecision: UInt = 4
   static var precision : UInt = UInt(Preference.integer(for: .timeDisplayPrecision))
   var mode: DisplayMode = .duration { didSet { updateText() } }
   var duration: VideoTime = .zero
   var current: VideoTime = .zero
   var remaining: VideoTime = .zero
+  var smpteTimecode: SMPTETimecode?
 
   /** Switches the display mode between duration and remaining time */
   private func switchMode() {
@@ -33,23 +35,35 @@ class DurationDisplayTextField: NSTextField {
 
 
   func updateText(with duration: VideoTime, given current: VideoTime,
-                  and remaining: VideoTime) {
+                  and remaining: VideoTime, smpteTimecode: SMPTETimecode? = nil) {
     self.duration = duration
     self.current = current
     self.remaining = remaining
+    self.smpteTimecode = smpteTimecode
     updateText()
   }
   
   private func updateText() {
     let precision = DurationDisplayTextField.precision
     let stringValue: String
-    switch mode {
-    case .current:
-      stringValue = current.stringRepresentationWithPrecision(precision)
-    case .duration:
-      stringValue = duration.stringRepresentationWithPrecision(precision)
-    case .remaining:
-      stringValue = "-\(remaining.stringRepresentationWithPrecision(precision))"
+    if precision == DurationDisplayTextField.smptePrecision, let smpteTimecode {
+      switch mode {
+      case .current:
+        stringValue = smpteTimecode.stringValue(at: current)
+      case .duration:
+        stringValue = smpteTimecode.stringValue(at: duration)
+      case .remaining:
+        stringValue = "-\(smpteTimecode.durationStringValue(for: remaining))"
+      }
+    } else {
+      switch mode {
+      case .current:
+        stringValue = current.stringRepresentationWithPrecision(precision)
+      case .duration:
+        stringValue = duration.stringRepresentationWithPrecision(precision)
+      case .remaining:
+        stringValue = "-\(remaining.stringRepresentationWithPrecision(precision))"
+      }
     }
     self.stringValue = stringValue
   }
@@ -76,6 +90,10 @@ class DurationDisplayTextField: NSTextField {
                    target: self, tag: index,
                    stateOn: precision == index)
     }
+    menu.addItem(withTitle: "SMPTE",
+                 action: #selector(self.setPrecision(_:)),
+                 target: self, tag: Int(DurationDisplayTextField.smptePrecision),
+                 stateOn: precision == DurationDisplayTextField.smptePrecision)
     NSMenu.popUpContextMenu(menu, with: event, for: self)
   }
 

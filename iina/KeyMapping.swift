@@ -11,6 +11,29 @@ import Foundation
 fileprivate let IINA_PREFIX = "@iina"
 fileprivate let IINA_PREFIX_IN_FILE = "#" + IINA_PREFIX
 
+/// mpv input.conf binding modifier. The default `.command` is a plain
+/// `KEY ACTION` row. `.click` / `.press` / `.release` correspond to
+/// mpv's `#@click` / `#@press` / `#@release` suffix on the action,
+/// which lets the same physical key emit different commands depending
+/// on the input event (single click, long press, key release).
+/// See `.specite/iterations/mpv-config-driven-refactor/SPEC.md`
+/// requirement 8 / PLAN Phase 5.
+enum BindingKind: String {
+  case command
+  case click
+  case press
+  case release
+
+  /// The `#@<rawValue>` token written to `input.conf`, or empty for
+  /// the default `.command` kind (no suffix emitted).
+  var confSuffix: String {
+    switch self {
+    case .command: return ""
+    default: return "#@" + rawValue
+    }
+  }
+}
+
 class KeyMapping: NSObject {
 
   // TODO: this is UI logic. Move it out of here.
@@ -56,6 +79,13 @@ class KeyMapping: NSObject {
   }
 
   var isIINACommand: Bool
+
+  /// mpv binding modifier for this row. `.command` is the default
+  /// (plain `KEY ACTION`); `.click` / `.press` / `.release` correspond
+  /// to mpv's `#@<kind>` action suffix. Defaults to `.command` so the
+  /// vast majority of rows (and all pre-existing call sites) behave
+  /// exactly as before.
+  let binding: BindingKind
 
   var rawKey: String {
     didSet {
@@ -116,22 +146,27 @@ class KeyMapping: NSObject {
   var confFileFormat: String {
     get {
       let iinaCommandString = isIINACommand ? "\(IINA_PREFIX_IN_FILE) " : ""
+      // Emit the `#@<kind>` suffix only for non-default bindings so
+      // round-tripping through `generateInputConf` preserves click /
+      // press / release semantics.
+      let bindingSuffix = binding.confSuffix.isEmpty ? "" : " \(binding.confSuffix)"
       let commentString = (comment == nil || comment!.isEmpty) ? "" : "   #\(comment!)"
-      return "\(iinaCommandString)\(rawKey) \(action.joined(separator: " "))\(commentString)"
+      return "\(iinaCommandString)\(rawKey) \(action.joined(separator: " "))\(bindingSuffix)\(commentString)"
     }
   }
 
-  init(rawKey: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil) {
+  init(rawKey: String, rawAction: String, isIINACommand: Bool = false, comment: String? = nil, binding: BindingKind = .command) {
     self.rawKey = rawKey
     self.normalizedMpvKey = KeyCodeHelper.normalizeMpv(rawKey)
     self.isIINACommand = isIINACommand
     self.comment = comment
+    self.binding = binding
     self.privateRawAction = rawAction
     self.action = rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty }
   }
 
   public override var description: String {
-    return "KeyMapping(\"\(rawKey)\"->\"\(action.joined(separator: " "))\" iina=\(isIINACommand))"
+    return "KeyMapping(\"\(rawKey)\"->\"\(action.joined(separator: " "))\" iina=\(isIINACommand) binding=\(binding.rawValue))"
   }
 
   // MARK: Static functions
@@ -157,6 +192,30 @@ class KeyMapping: NSObject {
         }
       }
       var comment: String? = nil
+      // SPEC Phase 5 / requirement 8: detect mpv's `#@click` / `#@press` /
+      // `#@release` action-suffix BEFORE the comment-split step below.
+      // The suffix appears at end of line as a separate token
+      // (e.g. "SPACE cycle pause                  #@click"); without
+      // this pre-check the comment-split would swallow `#@click` into
+      // the `comment` field and the binding kind would be lost.
+      // We scan the trimmed tail for any of the three known suffixes;
+      // on a match we record the kind and strip the suffix (plus any
+      // preceding whitespace) from `line` so the subsequent key/action
+      // split produces a clean action. A regular comment may still
+      // follow on the same line and is handled by the comment-split
+      // below as usual.
+      var bindingKind: BindingKind = .command
+      let trimmedTail = line.trimmingCharacters(in: .whitespaces)
+      for kind in [BindingKind.click, .press, .release] {
+        let suffix = "#@" + kind.rawValue
+        if trimmedTail.hasSuffix(suffix) {
+          bindingKind = kind
+          if let suffixRange = line.range(of: suffix, options: .backwards) {
+            line = String(line[..<suffixRange.lowerBound])
+          }
+          break
+        }
+      }
       if let sharpIndex = line.firstIndex(of: "#") {
         comment = String(line[line.index(after: sharpIndex)...])
         line = String(line[...line.index(before: sharpIndex)])
@@ -170,7 +229,7 @@ class KeyMapping: NSObject {
       let key = String(splitted[0]).trimmingCharacters(in: .whitespaces)
       let action = String(splitted[1]).trimmingCharacters(in: .whitespaces)
 
-      mapping.append(KeyMapping(rawKey: key, rawAction: action, isIINACommand: isIINACommand, comment: comment))
+      mapping.append(KeyMapping(rawKey: key, rawAction: action, isIINACommand: isIINACommand, comment: comment, binding: bindingKind))
     }
     return mapping
   }

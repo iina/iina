@@ -10,6 +10,7 @@ import Foundation
 
 class SettingsPageGeneral: SettingsPage {
   private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.screenshotFolder)
+  private lazy var screenshotFormatOptionsView = ScreenshotFormatOptionsView()
 
   override var identifier: String {
     "general"
@@ -82,6 +83,7 @@ class SettingsPageGeneral: SettingsPage {
         SettingsItem.Switch()
           .image(name: "custom.macwindow.badge.pause")
           .bindTo(.keepOpenOnFileEnd)
+          .mpvName("keep-open")
       }
 
       SettingsList {
@@ -105,6 +107,10 @@ class SettingsPageGeneral: SettingsPage {
         SettingsItem.Switch()
           .image(name: "music.note.list")
           .bindTo(.autoSwitchToMusicMode)
+        SettingsItem.Switch()
+          .bindTo(.inputMediaKeys)
+          .mpvName("input-media-keys")
+          .hasDescription()
       }
 
       SettingsList {
@@ -130,6 +136,10 @@ class SettingsPageGeneral: SettingsPage {
         SettingsItem.Switch()
           .image(name: "custom.arrow.clockwise.badge.clock")
           .bindTo(.resumeLastPosition)
+        SettingsItem.Switch()
+          .bindTo(.savePositionOnQuit)
+          .mpvName("save-position-on-quit")
+          .hasDescription()
         SettingsItem.Switch()
           .image(name: "custom.play.rectangle.badge.clock")
           .bindTo(.recordPlaybackHistory)
@@ -179,6 +189,7 @@ class SettingsPageGeneral: SettingsPage {
           .extraViews(fileChooseView.textField, fileChooseView.chooseButton)
         SettingsItem.PopupButton()
           .bindTo(.screenshotFormat, ofType: Preference.ScreenshotFormat.self)
+          .mpvName("screenshot-format")
         SettingsItem.Switch()
           .image(name: "list.clipboard")
           .bindTo(.screenshotCopyToClipboard)
@@ -188,6 +199,13 @@ class SettingsPageGeneral: SettingsPage {
         SettingsItem.Switch()
           .image(name: "custom.photo.badge.eye")
           .bindTo(.screenshotShowPreview)
+        SettingsItem.LongInput()
+          .bindTo(.screenshotTemplate)
+          .mpvName("screenshot-template")
+          .hasDescription()
+        SettingsItem.General(title: .text_ScreenshotFormatOptions)
+          .image(name: "gearshape.fill")
+          .withExpandingDetailView(screenshotFormatOptionsView)
       }
     }
   }
@@ -215,5 +233,74 @@ fileprivate extension Preference {
       case .monthly: "monthly"
       }
     }
+  }
+}
+
+
+fileprivate class ScreenshotFormatOptionsView: WithSettingsLocalizationContext, SettingsContainer {
+  lazy var itemID = SettingsContainerUUID.next()
+  var l10n: SettingsLocalization.Context!
+  let container: NSView
+  let view: NSStackView
+  lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
+
+  init() {
+    self.l10n = nil
+    self.container = NSView()
+    self.view = NSStackView()
+    self.view.translatesAutoresizingMaskIntoConstraints = false
+    self.view.orientation = .vertical
+    self.view.alignment = .leading
+    self.view.spacing = 8
+
+    buildOptions()
+
+    container.addSubview(view)
+    view.padding(.vertical(8), .leading(SettingsSubList.indent), .trailing(8))
+  }
+
+  private func buildOptions() {
+    let format: Preference.ScreenshotFormat = Preference.enum(for: .screenshotFormat)
+
+    switch format {
+    case .png:
+      view.addArrangedSubview(
+        makeInput(.screenshotPngCompression)
+      )
+    case .jpg, .jpeg:
+      view.addArrangedSubview(
+        makeInput(.screenshotJpegQuality)
+      )
+      view.addArrangedSubview(makeSwitch(.screenshotJpegSourceChroma))
+    case .webp:
+      view.addArrangedSubview(makeSwitch(.screenshotWebpLossless))
+      view.addArrangedSubview(
+        makeInput(.screenshotWebpQuality)
+      )
+    case .jxl:
+      view.addArrangedSubview(
+        makeInput(.screenshotJxlDistance)
+      )
+      view.addArrangedSubview(
+        makeInput(.screenshotJxlEffort)
+      )
+    }
+
+    view.addArrangedSubview(makeSwitch(.screenshotHighBitDepth))
+  }
+
+  private func makeInput(_ key: Preference.Key) -> NSTextField {
+    ui.input(key)
+  }
+
+  private func makeSwitch(_ key: Preference.Key) -> NSSwitch {
+    let sw = NSSwitch()
+    sw.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+    return sw
+  }
+
+  func makeView(context: SettingsLocalization.Context) -> NSView {
+    self.l10n = context
+    return container
   }
 }

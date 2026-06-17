@@ -67,6 +67,7 @@ class SettingsPageUI: SettingsPage {
             self.geometryBindings.initControl(\.windowSizeSwitch, $0)
           }
           .bindExpandableView()
+          .mpvName("geometry")
         SettingsItem.Switch(title: .text_InitialWindowPosition)
           .image(name: "arrow.up.and.down.and.arrow.left.and.right")
           .withExpandingDetailView(windowInitialPositionView)
@@ -74,6 +75,7 @@ class SettingsPageUI: SettingsPage {
             self.geometryBindings.initControl(\.windowPosSwitch, $0)
           }
           .bindExpandableView()
+          .mpvName("geometry")
       }
 
       SettingsList {
@@ -96,6 +98,32 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.Switch()
           .image(name: "pin.square")
           .bindTo(.alwaysShowOnTopIcon)
+      }
+
+      SettingsList {
+        SettingsItem.Input()
+          .image(name: "arrow.up.left.bottomright.rectangle")
+          .bindTo(.autofitLarger)
+          .mpvName("autofit-larger")
+          .hasDescription()
+        SettingsItem.Input()
+          .image(name: "custom.computermouse")
+          .bindTo(.cursorAutohide)
+          .mpvName("cursor-autohide")
+          .hasDescription()
+      }
+
+      SettingsList {
+        SettingsItem.Switch()
+          .image(name: "rectangle.dashed")
+          .bindTo(.border)
+          .mpvName("border")
+          .hasDescription()
+        SettingsItem.Switch()
+          .image(name: "square.dashed")
+          .bindTo(.hidpiWindowScale)
+          .mpvName("hidpi-window-scale")
+          .hasDescription()
       }
     }
   }

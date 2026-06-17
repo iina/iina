@@ -161,6 +161,8 @@ struct MPVOption {
     static let ytdlFormat = "ytdl-format"
     /** --ytdl-raw-options=<key>=<value>[ */
     static let ytdlRawOptions = "ytdl-raw-options"
+    /** --ytdl-raw-options-append=<key>=<value> — appends one entry to the ytdl-raw-options list (does NOT replace). */
+    static let ytdlRawOptionsAppend = "ytdl-raw-options-append"
     /** --js-memory-report=<yes|no> */
     static let jsMemoryReport = "js-memory-report"
     /** --load-stats-overlay=<yes|no> */

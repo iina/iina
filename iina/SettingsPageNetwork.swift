@@ -64,6 +64,7 @@ class SettingsPageNetwork: SettingsPage {
           .hasDescription()
         SettingsItem.PopupButton()
           .bindTo(.transportRTSPThrough, ofType: Preference.RTSPTransportation.self)
+          .mpvName("rtsp-transport")
       }
     }
   }
@@ -78,6 +79,7 @@ class SettingsPageNetwork: SettingsPage {
       SettingsList {
         SettingsItem.Switch()
           .bindTo(.ytdlEnabled)
+          .mpvName("ytdl")
           .image(name: "square.and.arrow.down")
           .withHelpLink(AppData.ytdlHelpLink)
           .withDetailView {
@@ -86,6 +88,7 @@ class SettingsPageNetwork: SettingsPage {
               .hasDescription()
             SettingsItem.LongInput()
               .bindTo(.ytdlRawOptions)
+              .mpvName("ytdl-raw-options-append")
               .hasDescription()
           }
       }

@@ -443,6 +443,76 @@ class Utility {
     return appAsUrl
   }()
 
+  // MARK: - User mpv config dir
+
+  /// URL of the `mpv/` configuration folder the prior iteration shipped
+  /// inside the app bundle (`Contents/Resources/mpv/`). Since the
+  /// `ui-driven-mpv-options` iteration removed the Copy Files build
+  /// phase (PLAN Phase 1), the bundle no longer ships the `mpv/` tree.
+  /// `Bundle.main.url(forResource:withExtension:)` therefore returns
+  /// `nil` on every launch and this `let` falls back to
+  /// `appSupportDirUrl` (the warning is benign in the new regime).
+  ///
+  /// Downstream callers iterate over both this URL and
+  /// `materializedMPVConfigDirURL` for OSD font lookup and
+  /// `mpv.conf` scanning (`MPVSentinel.recordFromConfigFiles`).
+  /// Both URLs effectively point at the user's Application Support
+  /// directory now; the dual-lookup loop is preserved for safety so
+  /// the code keeps working if the bundle ever ships `mpv/` again.
+  static let bundledMPVConfigDirURL: URL = {
+    if let url = Bundle.main.url(forResource: AppData.mpvConfigFolderName, withExtension: nil) {
+      return url
+    }
+    Logger.log("Bundled mpv config directory not found in app bundle; falling back to appSupportDirUrl", level: .warning)
+    return appSupportDirUrl
+  }()
+
+  /// URL of the user-only mpv config dir under the user's Application
+  /// Support directory. The directory is NOT auto-created here; callers
+  /// that need to write into it must create it themselves. Downstream
+  /// readers (`MPVSentinel.recordFromConfigFiles`,
+  /// `writeMergedInputConf`, OSD font resolution, the Font picker's
+  /// default directory) all guard with `fileExists` checks, so a
+  /// non-existent directory is handled gracefully. This lets a clean
+  /// install avoid creating
+  /// `~/Library/Application Support/com.colliderli.iina/mpv/` until the
+  /// user actually drops a file there. See `ui-driven-mpv-options` SPEC
+  /// requirement 4 / PLAN Phase 1.
+  static let materializedMPVConfigDirURL: URL = {
+    appSupportDirUrl.appendingPathComponent(AppData.mpvConfigFolderName, isDirectory: true)
+  }()
+
+  /// Merge the IINA-side editor's `input.conf` with the user's `mpv/input.conf`
+  /// into a single temp file under `destinationDir`, returning the merged
+  /// file URL. The IINA-side file is the source of truth for IINA custom
+  /// bindings; the user's `mpv/input.conf` is appended as a second layer so
+  /// `script-binding uosc/*` and `@click`/`@press`/`@release` modifiers take
+  /// effect. See SPEC requirement 7 / PLAN Phase 8.
+  static func writeMergedInputConf(iinaConfPath: String?, userConfPath: String?,
+                                   destinationDir: URL) -> URL? {
+    var combined = ""
+    if let iinaPath = iinaConfPath,
+       let data = try? String(contentsOfFile: iinaPath, encoding: .utf8) {
+      combined += data
+      if !combined.hasSuffix("\n") { combined += "\n" }
+    }
+    if let userPath = userConfPath,
+       FileManager.default.fileExists(atPath: userPath),
+       let data = try? String(contentsOfFile: userPath, encoding: .utf8) {
+      combined += "\n# --- user mpv/input.conf (appended by IINA) ---\n"
+      combined += data
+      if !combined.hasSuffix("\n") { combined += "\n" }
+    }
+    let mergedURL = destinationDir.appendingPathComponent("mpv-input-merged.conf")
+    do {
+      try combined.write(to: mergedURL, atomically: true, encoding: .utf8)
+      return mergedURL
+    } catch {
+      Logger.log("Failed to write merged input.conf: \(error.localizedDescription)", level: .error)
+      return nil
+    }
+  }
+
   static let userInputConfDirURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.userInputConfFolder, isDirectory: true)
     createDirIfNotExist(url: url)

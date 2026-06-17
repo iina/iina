@@ -52,3 +52,14 @@
 "$SPDIFOutput" = "S/PDIF output";
 "$PreferredLanguage" = "Preferred language";
 "$dB" = "dB";
+
+/* ad-lavc-downmix */
+"adLavcDownmix.label" = "Downmix multichannel audio to stereo";
+"adLavcDownmix.desc" = "Enable software downmixing of multichannel audio to stereo. Default: no.";
+
+/* audio-channels */
+"audioChannels.label" = "Audio output channels";
+"audioChannels.desc" = "Selects the audio output channel layout. Default: stereo.";
+/* audio-file-auto */
+"audioFileAuto.label" = "Auto-load external audio files";
+"audioFileAuto.desc" = "When opening a video, also look for an external audio file with the same name. Default: fuzzy.";

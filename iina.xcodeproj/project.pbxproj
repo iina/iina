@@ -158,6 +158,8 @@
 		49542986216C34950058F680 /* OpenInIINA.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 49542973216C34950058F680 /* OpenInIINA.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		496B19921E2968530035AF10 /* PIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 496B19911E2968530035AF10 /* PIP.framework */; };
 		51096C0B2CD88BEC00702C31 /* MPVOptionDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* MPVSentinel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F3 /* MPVSentinel.swift */; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* MpvScriptMessageCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A4 /* MpvScriptMessageCenter.swift */; };
 		5111B18B2C8BCEAC00DEC0AC /* TouchBarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */; };
 		5114FA942DC704CE00D02435 /* NowPlayingInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */; };
 		51165FBC2E1D91290060B817 /* ReadWriteAtomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51165FBB2E1D91290060B817 /* ReadWriteAtomic.swift */; };
@@ -383,6 +385,10 @@
 		E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */; };
 		E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */; };
 		E3BBBBBB0000000000000004 /* SettingsPageAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000003 /* SettingsPageAudio.swift */; };
+		E3CC00000000000000000002 /* SettingsPageVideoAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CC00000000000000000001 /* SettingsPageVideoAdvanced.swift */; };
+		E3CC00000000000000000004 /* SettingsPageOSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CC00000000000000000003 /* SettingsPageOSD.swift */; };
+		E3CC00000000000000000006 /* SettingsLocalizationKeysVideoAdvanced.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CC00000000000000000005 /* SettingsLocalizationKeysVideoAdvanced.swift */; };
+		E3CC00000000000000000008 /* SettingsLocalizationKeysOSD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CC00000000000000000007 /* SettingsLocalizationKeysOSD.swift */; };
 		E38372922443634500F57718 /* LanguageTokenField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38372912443634500F57718 /* LanguageTokenField.swift */; };
 		E3839C5724FFF201007D0AB4 /* PluginStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */; };
 		E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */; };
@@ -436,12 +442,18 @@
 		E3EC8C4A2F95AD9900FBB51E /* SettingsUILocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3EC8C492F95AD9900FBB51E /* SettingsUILocalizable.strings */; };
 		E3BBBBBB0000000000000012 /* SettingsVideoLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000011 /* SettingsVideoLocalizable.strings */; };
 		E3BBBBBB0000000000000014 /* SettingsAudioLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3BBBBBB0000000000000013 /* SettingsAudioLocalizable.strings */; };
+		E3CC0000000000000000000A /* SettingsVideoAdvancedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3CC00000000000000000009 /* SettingsVideoAdvancedLocalizable.strings */; };
+		E3CC0000000000000000000C /* SettingsOSDLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3CC0000000000000000000B /* SettingsOSDLocalizable.strings */; };
 		E3EC8C4E2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3EC8C4D2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings */; };
 		E3EC8C502F95B0A700FBB51E /* ConstraintsSugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */; };
 		E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */; };
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 		E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */; };
 		E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */; };
+		E5A500010000000000000003 /* KeyMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A500010000000000000001 /* KeyMappingTests.swift */; };
+		E5A500010000000000000023 /* PreferenceDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A500010000000000000021 /* PreferenceDefaultsTests.swift */; };
+		B01D0001000000000000A001 /* SettingsItemBadgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01D0001000000000000A002 /* SettingsItemBadgeTests.swift */; };
+		B01D0002000000000000A001 /* CoverageAuditTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01D0002000000000000A002 /* CoverageAuditTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -465,6 +477,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E38558862A484A2D0083772D;
 			remoteInfo = "iina-plugin";
+		};
+		E5A500010000000000000008 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84EB1ED51D2F51D3004FA5A1;
+			remoteInfo = iina;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1205,6 +1224,8 @@
 		496B19911E2968530035AF10 /* PIP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PIP.framework; path = /System/Library/PrivateFrameworks/PIP.framework; sourceTree = "<group>"; };
 		49F7E3BF2920D65C002DA28E /* Availability.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Availability.xcconfig; sourceTree = "<group>"; };
 		51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVOptionDefaults.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A7B8C9D0E1F3 /* MPVSentinel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVSentinel.swift; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A4 /* MpvScriptMessageCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MpvScriptMessageCenter.swift; sourceTree = "<group>"; };
 		5111B18A2C8BCEAC00DEC0AC /* TouchBarSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchBarSettings.swift; sourceTree = "<group>"; };
 		5114FA932DC704CE00D02435 /* NowPlayingInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfoManager.swift; sourceTree = "<group>"; };
 		51165FBB2E1D91290060B817 /* ReadWriteAtomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteAtomic.swift; sourceTree = "<group>"; };
@@ -1943,6 +1964,10 @@
 		E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUtilities.swift; sourceTree = "<group>"; };
 		E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageVideo.swift; sourceTree = "<group>"; };
 		E3BBBBBB0000000000000003 /* SettingsPageAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageAudio.swift; sourceTree = "<group>"; };
+		E3CC00000000000000000001 /* SettingsPageVideoAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageVideoAdvanced.swift; sourceTree = "<group>"; };
+		E3CC00000000000000000003 /* SettingsPageOSD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageOSD.swift; sourceTree = "<group>"; };
+		E3CC00000000000000000005 /* SettingsLocalizationKeysVideoAdvanced.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysVideoAdvanced.swift; sourceTree = "<group>"; };
+		E3CC00000000000000000007 /* SettingsLocalizationKeysOSD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalizationKeysOSD.swift; sourceTree = "<group>"; };
 		E38372912443634500F57718 /* LanguageTokenField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageTokenField.swift; sourceTree = "<group>"; };
 		E3839C5624FFF201007D0AB4 /* PluginStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStandaloneWindow.swift; sourceTree = "<group>"; };
 		E3839C5824FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIStandaloneWindow.swift; sourceTree = "<group>"; };
@@ -1997,6 +2022,8 @@
 		E3EC8C492F95AD9900FBB51E /* SettingsUILocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsUILocalizable.strings; sourceTree = "<group>"; };
 		E3BBBBBB0000000000000011 /* SettingsVideoLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsVideoLocalizable.strings; sourceTree = "<group>"; };
 		E3BBBBBB0000000000000013 /* SettingsAudioLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsAudioLocalizable.strings; sourceTree = "<group>"; };
+		E3CC00000000000000000009 /* SettingsVideoAdvancedLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsVideoAdvancedLocalizable.strings; sourceTree = "<group>"; };
+		E3CC0000000000000000000B /* SettingsOSDLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsOSDLocalizable.strings; sourceTree = "<group>"; };
 		E3EC8C4D2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsSubtitesLocalizable.strings; sourceTree = "<group>"; };
 		E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsSugar.swift; sourceTree = "<group>"; };
 		E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDef.swift; sourceTree = "<group>"; };
@@ -2096,6 +2123,12 @@
 		FB011A0421F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB011A0621F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		FB011A0721F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		E4C0000100000000000C0014 /* README-mpv-config.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "README-mpv-config.md"; path = "iina/Resources/mpv-bundle/README-mpv-config.md"; sourceTree = SOURCE_ROOT; };
+		E5A500010000000000000001 /* KeyMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyMappingTests.swift; sourceTree = "<group>"; };
+		E5A500010000000000000021 /* PreferenceDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceDefaultsTests.swift; sourceTree = "<group>"; };
+		B01D0001000000000000A002 /* SettingsItemBadgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemBadgeTests.swift; sourceTree = "<group>"; };
+		B01D0002000000000000A002 /* CoverageAuditTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverageAuditTests.swift; sourceTree = "<group>"; };
+		E5A500010000000000000002 /* iinaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iinaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2199,6 +2232,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E3DE8DC71FD8166A0021921C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5A500010000000000000005 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2664,6 +2704,8 @@
 			children = (
 				E39EA3522E7CFD5600E0BD32 /* FixedProgressBar.swift */,
 				51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */,
+				A1B2C3D4E5F6A7B8C9D0E1F3 /* MPVSentinel.swift */,
+				B2C3D4E5F6A7B8C9D0E1F2A4 /* MpvScriptMessageCenter.swift */,
 				E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */,
 				E3DBD23D218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib */,
 				9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */,
@@ -2728,6 +2770,7 @@
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
+				E5A50001000000000000000C /* Tests */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -2741,6 +2784,7 @@
 				E3DE8DCA1FD8166A0021921C /* iina-cli */,
 				49542973216C34950058F680 /* OpenInIINA.appex */,
 				E38558872A484A2D0083772D /* iina-plugin */,
+				E5A500010000000000000002 /* iinaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2761,6 +2805,7 @@
 				E3CAD4AD2146DB23000B373A /* Javascript */,
 				84A0BAA61D2FAF8400BC8DA1 /* Utils */,
 				518DB7002FA6A1480024F0B0 /* Scripts */,
+				E4C0000100000000000C0014 /* README-mpv-config.md */,
 			);
 			indentWidth = 2;
 			path = iina;
@@ -2805,6 +2850,8 @@
 				E3EC8C492F95AD9900FBB51E /* SettingsUILocalizable.strings */,
 				E3BBBBBB0000000000000011 /* SettingsVideoLocalizable.strings */,
 				E3BBBBBB0000000000000013 /* SettingsAudioLocalizable.strings */,
+				E3CC00000000000000000009 /* SettingsVideoAdvancedLocalizable.strings */,
+				E3CC0000000000000000000B /* SettingsOSDLocalizable.strings */,
 				E3EC8C4D2F95ADA000FBB51E /* SettingsSubtitesLocalizable.strings */,
 				E38EA5942F2EE4E300FB51CE /* SettingsNetworkLocalizable.strings */,
 				E38EA5912F2EE4E300FB51CE /* SettingsControlLocalizable.strings */,
@@ -2883,6 +2930,10 @@
 				E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */,
 				E3BBBBBB0000000000000001 /* SettingsPageVideo.swift */,
 				E3BBBBBB0000000000000003 /* SettingsPageAudio.swift */,
+				E3CC00000000000000000001 /* SettingsPageVideoAdvanced.swift */,
+				E3CC00000000000000000003 /* SettingsPageOSD.swift */,
+				E3CC00000000000000000005 /* SettingsLocalizationKeysVideoAdvanced.swift */,
+				E3CC00000000000000000007 /* SettingsLocalizationKeysOSD.swift */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -2922,6 +2973,17 @@
 				E3DE8DCC1FD8166A0021921C /* main.swift */,
 			);
 			path = "iina-cli";
+			sourceTree = "<group>";
+		};
+		E5A50001000000000000000C /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E5A500010000000000000001 /* KeyMappingTests.swift */,
+				E5A500010000000000000021 /* PreferenceDefaultsTests.swift */,
+				B01D0001000000000000A002 /* SettingsItemBadgeTests.swift */,
+				B01D0002000000000000A002 /* CoverageAuditTests.swift */,
+			);
+			path = "iina/Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3017,6 +3079,23 @@
 			productReference = E3DE8DCA1FD8166A0021921C /* iina-cli */;
 			productType = "com.apple.product-type.tool";
 		};
+		E5A500010000000000000006 /* iinaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5A50001000000000000000B /* Build configuration list for PBXNativeTarget "iinaTests" */;
+			buildPhases = (
+				E5A500010000000000000004 /* Sources */,
+				E5A500010000000000000005 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5A500010000000000000007 /* PBXTargetDependency */,
+			);
+			name = iinaTests;
+			productName = iinaTests;
+			productReference = E5A500010000000000000002 /* iinaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3047,6 +3126,11 @@
 						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Manual;
+					};
+					E5A500010000000000000006 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 67CQ77V27R;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -3103,6 +3187,7 @@
 				E3DE8DC91FD8166A0021921C /* iina-cli */,
 				E38558862A484A2D0083772D /* iina-plugin */,
 				49542972216C34950058F680 /* OpenInIINA */,
+				E5A500010000000000000006 /* iinaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -3176,6 +3261,8 @@
 				518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */,
 				E3BBBBBB0000000000000012 /* SettingsVideoLocalizable.strings in Resources */,
 				E3BBBBBB0000000000000014 /* SettingsAudioLocalizable.strings in Resources */,
+				E3CC0000000000000000000A /* SettingsVideoAdvancedLocalizable.strings in Resources */,
+				E3CC0000000000000000000C /* SettingsOSDLocalizable.strings in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
 			);
@@ -3363,6 +3450,10 @@
 				E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */,
 				E3BBBBBB0000000000000002 /* SettingsPageVideo.swift in Sources */,
 				E3BBBBBB0000000000000004 /* SettingsPageAudio.swift in Sources */,
+				E3CC00000000000000000002 /* SettingsPageVideoAdvanced.swift in Sources */,
+				E3CC00000000000000000004 /* SettingsPageOSD.swift in Sources */,
+				E3CC00000000000000000006 /* SettingsLocalizationKeysVideoAdvanced.swift in Sources */,
+				E3CC00000000000000000008 /* SettingsLocalizationKeysOSD.swift in Sources */,
 				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
 				84CFC92623F8DDE000381E5B /* PlayerWindowController.swift in Sources */,
@@ -3443,6 +3534,8 @@
 				512B8FDD2BC2376E00AF41BF /* OutlineView.swift in Sources */,
 				8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */,
 				51096C0B2CD88BEC00702C31 /* MPVOptionDefaults.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* MPVSentinel.swift in Sources */,
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* MpvScriptMessageCenter.swift in Sources */,
 				D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */,
 				8450404A1E0B13230079C194 /* CropBoxView.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
@@ -3489,6 +3582,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5A500010000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5A500010000000000000003 /* KeyMappingTests.swift in Sources */,
+				E5A500010000000000000023 /* PreferenceDefaultsTests.swift in Sources */,
+				B01D0001000000000000A001 /* SettingsItemBadgeTests.swift in Sources */,
+				B01D0002000000000000A001 /* CoverageAuditTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3506,6 +3610,11 @@
 			isa = PBXTargetDependency;
 			target = E38558862A484A2D0083772D /* iina-plugin */;
 			targetProxy = 5180D7782C17DB0D00CC9C1C /* PBXContainerItemProxy */;
+		};
+		E5A500010000000000000007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84EB1ED51D2F51D3004FA5A1 /* iina */;
+			targetProxy = E5A500010000000000000008 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5269,6 +5378,44 @@
 			};
 			name = Release;
 		};
+		E5A500010000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/deps/include",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.iinaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IINA.app/Contents/MacOS/IINA";
+			};
+			name = Debug;
+		};
+		E5A50001000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/deps/include",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.iinaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IINA.app/Contents/MacOS/IINA";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5326,6 +5473,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E5A50001000000000000000B /* Build configuration list for PBXNativeTarget "iinaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5A500010000000000000009 /* Debug */,
+				E5A50001000000000000000A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

@@ -41,6 +41,7 @@ class SettingsPageAudio: SettingsPage {
         SettingsItem.Input(title: .videoThreadsLabel)
           .image(name: "number")
           .bindTo(.audioThreads)
+          .mpvName("ad-lavc-threads")
           .hasDescription(content: .videoThreadsDesc)
         SettingsItem.General(title: .audioDriverEnableAVFoundationLabel)
           .image(name: "waveform")
@@ -85,6 +86,7 @@ class SettingsPageAudio: SettingsPage {
           .bindSwitchTo(.enableInitialVolume)
         SettingsItem.Input()
           .bindTo(.maxVolume)
+          .mpvName("volume-max")
           .hasDescription()
       }
 
@@ -92,21 +94,25 @@ class SettingsPageAudio: SettingsPage {
         SettingsItem.PopupButton()
           .image(name: "speaker.plus")
           .bindTo(.replayGain, ofType: Preference.ReplayGainOption.self)
+          .mpvName("replaygain")
           .disableSubListOnTag(0)
           .hasDescription()
           .withHelpLink(AppData.gainAdjustmentHelpLink)
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.replayGainPreamp)
+              .mpvName("replaygain-preamp")
               .trailingLabel(.text_dB)
               .hasDescription()
             SettingsItem.Switch()
               .bindTo(.replayGainClip)
+              .mpvName("replaygain-clip")
               .hasDescription()
           }
         SettingsItem.Input()
           .image(name: "square.dotted")
           .bindTo(.replayGainFallback)
+          .mpvName("replaygain-fallback")
           .trailingLabel(.text_dB)
           .hasDescription()
       }
@@ -132,6 +138,22 @@ class SettingsPageAudio: SettingsPage {
             SettingsAccessory.LanguageSelector()
               .bind(to: .audioLanguage)
           )
+        SettingsItem.Switch()
+          .image(name: "waveform")
+          .bindTo(.adLavcDownmix)
+          .mpvName("ad-lavc-downmix")
+          .hasDescription()
+      }
+
+      SettingsList {
+        SettingsItem.PopupButton()
+          .bindTo(.audioChannels, ofType: Preference.AudioChannelsOption.self)
+          .mpvName("audio-channels")
+          .hasDescription()
+        SettingsItem.PopupButton()
+          .bindTo(.audioFileAuto, ofType: Preference.AudioFileAutoOption.self)
+          .mpvName("audio-file-auto")
+          .hasDescription()
       }
     }
   }

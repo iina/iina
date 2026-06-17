@@ -127,3 +127,11 @@
 "subOverrideLevel.items.3.desc" = "Apply the scale setting in addition to the style settings in this section.";
 "subOverrideLevel.items.2.desc" = "Radically strip all ASS tags and styles from the subtitle.";
 "subOverrideLevel.items.0.desc" = "Apply all the style settings in this section.";
+
+/* sub-file-paths */
+"subFilePaths.label" = "Additional subtitle paths";
+"subFilePaths.desc" = "Extra directories to search for subtitles. Multiple paths can be separated by colons (:).";
+
+/* SPEC ui-driven-mpv-options Phase 4: mpv's sub-auto option */
+"subAuto.label" = "Auto-load subtitles (mpv sub-auto)";
+"subAuto.desc" = "Controls how mpv searches for external subtitle files alongside the video. Values: no, exact, fuzzy, or all. Default: fuzzy.";

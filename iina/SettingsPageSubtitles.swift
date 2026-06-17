@@ -52,6 +52,10 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.PopupButton()
           .image(name: ["bolt.badge.automatic", "bolt.badge.a"])
           .bindTo(.subAutoLoadIINA, ofType: Preference.IINAAutoLoadAction.self)
+        SettingsItem.Input()
+          .bindTo(.subAuto)
+          .mpvName("sub-auto")
+          .hasDescription()
         SettingsItem.General(title: .text_Advanced)
           .withExpandingDetailView {
             SettingsItem.LongInput()
@@ -102,8 +106,10 @@ class SettingsPageSubtitles: SettingsPage {
           .withExpandingDetailView {
             SettingsItem.Input()
               .bindTo(.subBlur)
+              .mpvName("sub-blur")
             SettingsItem.Input()
               .bindTo(.subSpacing)
+              .mpvName("sub-spacing")
           }
       }
     }
@@ -121,6 +127,7 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.Input()
           .image(name: "arrow.up.and.down")
           .bindTo(.subPos)
+          .mpvName("sub-pos")
           .trailingLabel(.text_Percent)
       }
 
@@ -128,12 +135,14 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.Switch()
           .image(name: ["arrow.up.left.and.arrow.down.right.rectangle", "arrow.up.backward.and.arrow.down.forward"])
           .bindTo(.subScaleWithWindow)
+          .mpvName("sub-scale-by-window")
       }
 
       SettingsList {
         SettingsItem.Switch()
           .image(name: ["inset.filled.bottomthird.rectangle", "rectangle.bottomthird.inset.filled", "rectangle.bottomthird.inset.fill"])
           .bindTo(.displayInLetterBox)
+          .mpvName("sub-use-margins")
       }
     }
   }
@@ -157,6 +166,7 @@ class SettingsPageSubtitles: SettingsPage {
       SettingsList(title: .text_Other) {
         SettingsItem.General(title: .text_PreferredLanguage)
           .image(name: "character.book.closed")
+          .mpvName("slang")
           .withDetailView(
             SettingsAccessory.LanguageSelector()
               .bind(to: .subLang)
@@ -164,6 +174,15 @@ class SettingsPageSubtitles: SettingsPage {
           )
         SettingsItem.General(title: .text_DefaultEncoding)
           .withDetailView(subtitlesEncodingView)
+      }
+
+      SettingsList {
+        SettingsItem.LongInput()
+          .image(name: ["folder"])
+          .bindTo(.subFilePaths)
+          .mpvName("sub-file-paths")
+          .controlSize(.small)
+          .hasDescription()
       }
     }
   }

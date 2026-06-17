@@ -1,0 +1,49 @@
+/* SettingsVideoAdvancedLocalizable.strings */
+
+/* Section titles */
+"$Scaling" = "Scaling";
+"$ColorHDR" = "Color and HDR";
+"$Decoding" = "Decoding";
+
+/* Scaling */
+"scale.label" = "UpScaler";
+"scale.desc" = "Default: empty (mpv default)";
+"cscale.label" = "Chroma upscaler";
+"dscale.label" = "Downscaler";
+"scaleAntiring.label" = "Anti-ringing strength";
+"scaleAntiring.desc" = "0.0–1.0, default: 0";
+"correctDownscaling.label" = "Correct downscaling";
+"linearDownscaling.label" = "Linear downscaling";
+"sigmoidUpscaling.label" = "Sigmoid upscaling";
+"dither.label" = "Dither";
+"dither.desc" = "fruit, ordered, random, no, default: fruit";
+"blendSubtitles.label" = "Blend subtitles";
+
+/* Color / HDR */
+"hdrComputePeak.label" = "HDR compute peak";
+"hdrPeakPercentile.label" = "HDR peak percentile";
+"hdrPeakPercentile.desc" = "0.0–100.0, default: 99.995";
+"hdrContrastRecovery.label" = "HDR contrast recovery";
+"hdrContrastRecovery.desc" = "0.0–2.0, default: 0";
+"iccForceContrast.label" = "ICC force contrast";
+"iccForceContrast.desc" = "0 = no-op, 1 = inf, >1 = value";
+"targetColorspaceHint.label" = "Target colorspace hint";
+"targetTrc.label" = "Target TRC";
+"targetTrc.desc" = "e.g. auto, srgb, pq, hlg";
+"targetPeak.label" = "Target peak";
+"targetPeak.desc" = "nits, default: 0 (auto)";
+"gpuContext.label" = "GPU context";
+"gpuContext.desc" = "e.g. autoselect, macvk";
+"libplaceboOpts.label" = "libplacebo options";
+"libplaceboOpts.desc" = "e.g. upscaler=ewa_lanczossharp";
+
+/* Decoder */
+"vdLavcDr.label" = "Direct rendering (vd-lavc-dr)";
+"hwdecSoftwareFallback.label" = "Hardware decoder software fallback";
+"hwdecSoftwareFallback.desc" = "Fall back to software decoding after this many failed frames. 0=yes (always), no=never. Default: 3.";
+"forceWindow.label" = "Force window";
+"forceWindow.desc" = "Force video output window. Values: yes, no, immediate. Default: immediate.";
+"vdLavcSoftwareFallback.label" = "Software fallback";
+"vdLavcSoftwareFallback.desc" = "Default: 60";
+"demuxerLavfFormat.label" = "Demuxer format";
+"forceSeekable.label" = "Force seekable";

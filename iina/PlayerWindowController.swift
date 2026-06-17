@@ -284,6 +284,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         return player.screenshot(fromKeyBinding: keyBinding)
         
       default:
+        // SPEC Phase 5 / requirement 8: for `KeyMapping` rows whose
+        // `binding` is `.click` / `.press` / `.release` we use the same
+        // raw-string passthrough as for plain `.command` rows. mpv's own
+        // input.conf parser is what differentiates the three event phases;
+        // IINA-side dispatch cannot yet tell mpv which phase triggered
+        // the command.
+        // TODO(SPEC:Phase-5): forward the NSEvent phase (down/up/click)
+        // to mpv so `#@<kind>` bindings dispatched from IINA behave
+        // identically to mpv's own input handling.
         returnValue = player.mpv.command(rawString: keyBinding.rawAction)
       }
 

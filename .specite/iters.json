@@ -1,0 +1,14 @@
+{
+    "iterations": [
+        {
+            "time": "2026-06-17T10:51:19.347352",
+            "name": "ui-driven-mpv-options",
+            "stage": "executed"
+        },
+        {
+            "time": "2026-06-16T07:41:09.145018",
+            "name": "mpv-config-driven-refactor",
+            "stage": "planned"
+        }
+    ]
+}

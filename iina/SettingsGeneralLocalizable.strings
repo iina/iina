@@ -90,7 +90,25 @@
 /* id="xE7-Uu-19f" */
 "screenshotShowPreview.label" = "Show previews after taking screenshots";
 /* id="iGS-qN-f5q" */
-"recordPlaybackHistory.label" = "Enable playback history";
+"text_ScreenshotFormatOptions" = "Format options";
+/* id="screenshotJpegQuality.label" */
+"screenshotJpegQuality.label" = "JPEG quality";
+"screenshotJpegQuality.desc" = "JPEG quality (0-100). Higher values give better quality but larger files.";
+"screenshotPngCompression.label" = "PNG compression";
+"screenshotPngCompression.desc" = "PNG compression level (0-9). Higher values give smaller files but slower encoding.";
+"screenshotWebpLossless.label" = "WebP lossless";
+"screenshotWebpLossless.desc" = "Use lossless WebP compression.";
+"screenshotWebpQuality.label" = "WebP quality";
+"screenshotWebpQuality.desc" = "WebP quality (0-100). Only used when lossless is disabled.";
+"screenshotJxlDistance.label" = "JPEG XL distance";
+"screenshotJxlDistance.desc" = "JPEG XL distance parameter (0-1). Lower values give higher quality.";
+"screenshotJxlEffort.label" = "JPEG XL effort";
+"screenshotJxlEffort.desc" = "JPEG XL encoding effort (1-10). Higher values give better compression but slower encoding.";
+"screenshotHighBitDepth.label" = "High bit depth";
+"screenshotHighBitDepth.desc" = "Write 16-bit PNG/WebP/JPEG XL when the video depth is higher than 8-bit.";
+"screenshotJpegSourceChroma.label" = "JPEG source chroma";
+"screenshotJpegSourceChroma.desc" = "Write JPEG with the source chroma subsampling.";
+/* id="recordPlaybackHistory.label" */
 /* id="55O-ik-ql6" */
 "recordRecentFiles.label" = "Enable \"Open Recent\" menu";
 /* id="Ci8-j2-QS3" */
@@ -130,3 +148,11 @@
 "$CheckForUpdates.items.86400" = "Daily";
 "$CheckForUpdates.items.604800" = "Weekly";
 "$CheckForUpdates.items.2629800" = "Monthly";
+
+/* SPEC ui-driven-mpv-options Phase 4: new rows */
+"savePositionOnQuit.label" = "Save playback position on quit";
+"savePositionOnQuit.desc" = "mpv's save-position-on-quit. When enabled, mpv writes a watch-later file on exit so playback can resume. This is separate from IINA's own resume feature.";
+"inputMediaKeys.label" = "Media keys (mpv)";
+"inputMediaKeys.desc" = "Let mpv handle system media key events (play, pause, next, previous). Default: no.";
+"screenShotTemplate.label" = "Screenshot filename template";
+"screenShotTemplate.desc" = "mpv screenshot template. Specifiers: %f=filename, %F=filename without extension, %P=timestamp (HH:MM:SS.mmm), %n=sequence number.";

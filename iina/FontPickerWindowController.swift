@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, NSControlTextEditingDelegate {
 
@@ -26,6 +27,12 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   var fontNames: [FontInfo] = []
   var filteredFontNames: [FontInfo] = []
   var isSearching = false
+
+  /// Button that opens an `NSOpenPanel` for selecting a font *file* (`.otf` /
+  /// `.ttf` / `.ttc`) from the bundled/materialized `mpv/fonts/` directory.
+  /// Added programmatically to avoid fragile hand-edits to the xib.
+  /// See SPEC `mpv-config-driven-refactor` Phase 6.
+  private var fontFileButton: NSButton!
 
   private var chosenFontMembers: [[Any]] {
     guard familyTableView.selectedRow >= 0 else { return [] }
@@ -74,7 +81,41 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     otherField.placeholderString = Constants.String.mpvDefaultFont
     searchField.delegate = self
     faceTableView.doubleAction = #selector(okBtnPressed)
+    addFontFileButton()
     Logger.log("FontPickerWindow init done")
+  }
+
+  /// Adds a "Select font file…" button to the window's accessory view area
+  /// that opens an `NSOpenPanel` restricted to the bundled/materialized
+  /// `mpv/fonts/` directory. The selected file's basename is written to
+  /// `otherField` so the existing OK path forwards it as the chosen value.
+  /// See SPEC `mpv-config-driven-refactor` Phase 6 / requirement 11.
+  private func addFontFileButton() {
+    fontFileButton = NSButton(title: NSLocalizedString("menu.fontfile", value: "Select font file…", comment: ""), target: self, action: #selector(fontFileButtonClicked))
+    fontFileButton.bezelStyle = .rounded
+    fontFileButton.controlSize = .small
+    fontFileButton.translatesAutoresizingMaskIntoConstraints = false
+    guard let contentView = window?.contentView else { return }
+    contentView.addSubview(fontFileButton)
+    NSLayoutConstraint.activate([
+      fontFileButton.trailingAnchor.constraint(equalTo: (otherField.superview ?? contentView).trailingAnchor, constant: 0),
+      fontFileButton.bottomAnchor.constraint(equalTo: otherField.topAnchor, constant: -4),
+    ])
+  }
+
+  @objc private func fontFileButtonClicked() {
+    let panel = NSOpenPanel()
+    panel.title = NSLocalizedString("title.fontfile", value: "Choose a font file", comment: "")
+    let fontTypes: [UTType] = ["otf", "ttf", "ttc"].compactMap { UTType(filenameExtension: $0) }
+    panel.allowedContentTypes = fontTypes.isEmpty ? [.font] : fontTypes
+    panel.directoryURL = Utility.materializedMPVConfigDirURL.appendingPathComponent("fonts")
+    panel.canChooseDirectories = false
+    panel.allowsMultipleSelection = false
+    panel.beginSheetModal(for: window!) { [weak self] response in
+      guard response == .OK, let url = panel.url else { return }
+      self?.otherField.stringValue = url.lastPathComponent
+      self?.updatePreview()
+    }
   }
 
   func select(_ fontString: String ) {

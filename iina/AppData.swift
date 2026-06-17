@@ -47,6 +47,11 @@ struct AppData {
   static let watchLaterFolder = "watch_later"
   static let pluginsFolder = "plugins"
   static let binariesFolder = "bin"
+
+  // Bundled mpv config (see iina/Resources/mpv-bundle/README-mpv-config.md)
+  static let mpvConfigFolderName = "mpv"
+  static let mpvConfigFileName = "mpv.conf"
+  static let ytdlBinaryName = "yt-dlp"
   static let historyFile = "history.plist"
   static let thumbnailCacheFolder = "thumb_cache"
   static let screenshotCacheFolder = "screenshot_cache"

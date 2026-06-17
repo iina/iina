@@ -555,12 +555,27 @@ class PlayerCore: NSObject {
 
     // Delay force-window until an actual file load to avoid Xcode-launched app startup hanging
     // while mpv tries to create a VO before IINA has entered its normal media-open path.
-    mpv.setString(MPVOption.Window.forceWindow, "yes", level: .verbose)
+    // Skip the override when the user has explicitly set force-window in
+    // mpv.conf (see SPEC requirement 2 / PLAN Phase 2) or in the
+    // "Additional mpv options" preference table (Phase 3).
+    if !MPVSentinel.wasSetInConfig(MPVOption.Window.forceWindow)
+        && !mpv.userOptionsContains(MPVOption.Window.forceWindow) {
+      mpv.setString(MPVOption.Window.forceWindow, "yes", level: .verbose)
+    }
 
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading
     mpv.command(.loadfile, args: [path], level: .verbose)
+
+    // SPEC:Phase-7+ — sync mpv's effective option values back into IINA's
+    // UserDefaults so the Settings UI reflects what the user's `mpv.conf`
+    // actually resolved. Runs after the file load command so mpv is
+    // fully initialized (config-dir, scripts, profile, and VO all
+    // present) and every option is queryable. Idempotent and safe to
+    // call repeatedly — only writes when the IINA preference is still
+    // at its empty/default value, so user-set IINA preferences always win.
+    mpv.syncMPVConfigToPreferences()
 
     if Preference.bool(for: .autoRepeat) {
        let loopMode = Preference.DefaultRepeatMode(rawValue: Preference.integer(for: .defaultRepeatMode))
@@ -583,7 +598,26 @@ class PlayerCore: NSObject {
 
   static func setKeyBindings(_ keyMappings: [KeyMapping]) {
     Logger.log("Set key bindings (\(keyMappings.count) mappings)")
-    // If multiple bindings map to the same key, choose the last one
+    // If multiple bindings map to the same key, choose the last one.
+    //
+    // SPEC Phase 5 limitation: mpv's `#@click` / `#@press` / `#@release`
+    // action suffix lets the same physical key (e.g. SPACE) emit up to
+    // three different commands. `KeyMapping.parseInputConf` now parses
+    // each suffix into a distinct `KeyMapping` row with the matching
+    // `BindingKind`, so the full triplet survives parsing. However this
+    // dispatch dict is keyed by `normalizedMpvKey` and can only retain
+    // one row per key — so for the SPACE triplet only the last row
+    // (typically `#@release`) survives in IINA-side dispatch.
+    //
+    // This is acceptable because the click/press/release semantics are
+    // ultimately handled by mpv itself when it parses the merged
+    // `input.conf` (see SPEC Phase 8). IINA's `keyBindings` dict drives
+    // IINA-internal command dispatch and menu equivalents only; it is
+    // not the path through which `#@<kind>` bindings reach mpv.
+    // TODO(SPEC:Phase-5): when IINA-side click/press/release dispatch
+    // is needed, switch this dict to `[String: [KeyMapping]]` and teach
+    // `PlayerWindowController.handleKeyBinding` to pick the row matching
+    // the incoming NSEvent phase.
     var keyBindingsDict: [String: KeyMapping] = [:]
     var orderedKeyList: [String] = []
     keyMappings.forEach {
@@ -626,12 +660,30 @@ class PlayerCore: NSObject {
   }
 
   func startMPV() {
-    // set path for youtube-dl
+    // Set PATH so mpv's `ytdl_hook.lua` finds a usable `yt-dlp` binary.
+    // The UI-driven mpv-options strategy (see
+    // `.specite/iterations/ui-driven-mpv-options/SPEC.md`) no longer ships
+    // a bundled `mpv/` tree, so the bundled/materialised mpv/ dirs are no
+    // longer candidates. The lookup order (first existing executable wins)
+    // is now:
+    //   1. user's `ytdlSearchPath` preference (a folder)
+    //   2. <bundle>/Contents/MacOS           (IINA's own bin dir)
+    // Each candidate dir is only prepended when it actually contains an
+    // executable `yt-dlp`; the inherited system PATH is always kept as
+    // the final fallback entry. Users who want yt-dlp install it via the
+    // standard mpv config-dir (Advanced escape hatch) or system PATH.
     let oldPath = String(cString: getenv("PATH")!)
-    var path = Utility.exeDirURL.path + ":" + oldPath
-    if let customYtdlPath = Preference.string(for: .ytdlSearchPath), !customYtdlPath.isEmpty {
-      path = customYtdlPath + ":" + path
-    }
+    let ytdlCandidates: [String?] = [
+      Preference.string(for: .ytdlSearchPath).flatMap { $0.isEmpty ? nil : $0 },
+      Utility.exeDirURL.path
+    ]
+    let ytdlDirs = ytdlCandidates
+      .compactMap { $0 }
+      .filter { dir in
+        let exe = (dir as NSString).appendingPathComponent("yt-dlp")
+        return FileManager.default.isExecutableFile(atPath: exe)
+      }
+    let path = (ytdlDirs + [oldPath]).joined(separator: ":")
     setenv("PATH", path, 1)
     log("Set path to \(path)")
 
@@ -657,7 +709,13 @@ class PlayerCore: NSObject {
     // `force-window=immediate` makes audio-only subtitle rendering work with `vo=libmpv`,
     // but setting it before render initialization can race the VO thread against IINA's
     // render context setup. Switch to `immediate` only after the render context exists.
-    mpv.setString(MPVOption.Window.forceWindow, "immediate", level: .verbose)
+    // Skip the override when the user has explicitly set force-window in
+    // mpv.conf (see SPEC requirement 2 / PLAN Phase 2) or in the
+    // "Additional mpv options" preference table (Phase 3).
+    if !MPVSentinel.wasSetInConfig(MPVOption.Window.forceWindow)
+        && !mpv.userOptionsContains(MPVOption.Window.forceWindow) {
+      mpv.setString(MPVOption.Window.forceWindow, "immediate", level: .verbose)
+    }
     mainWindow.videoView.startDisplayLink()
     log("Initialized rendering")
     MemoryUsage.shared.logUsage("after rendering initialized")

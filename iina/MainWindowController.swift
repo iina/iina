@@ -2167,6 +2167,40 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  /// Resolve the OSD label font per SPEC `mpv-config-driven-refactor` Phase 6.
+  ///
+  /// Precedence: (1) `Preference.osdFont`, (2) mpv's effective `osd-font`
+  /// (from the user's `mpv.conf`), (3) `Preference.subTextFont`, (4) system
+  /// default. Font-file basenames (`.otf`/`.ttf`/`.ttc`) are looked up in the
+  /// bundled `mpv/fonts/` directory; if the file is not loadable as a macOS
+  /// font family, the next candidate in the chain is tried.
+  private func resolvedOSDFont(size: CGFloat) -> NSFont {
+    let candidates: [String] = [
+      Preference.string(for: .osdFont),
+      player.mpv.osdFontFromMpv,
+      Preference.string(for: .subTextFont),
+    ].compactMap { $0?.trimmingCharacters(in: .whitespaces) }
+      .filter { !$0.isEmpty && $0 != Constants.String.mpvDefaultFont }
+
+    for name in candidates {
+      if let font = NSFont(name: name, size: size) {
+        return font
+      }
+      // Font-file basename: try the bundled/materialized fonts dir.
+      if name.hasSuffix(".otf") || name.hasSuffix(".ttf") || name.hasSuffix(".ttc") {
+        for dir in [Utility.materializedMPVConfigDirURL, Utility.bundledMPVConfigDirURL] {
+          let fileURL = dir.appendingPathComponent("fonts").appendingPathComponent(name)
+          guard FileManager.default.fileExists(atPath: fileURL.path) else { continue }
+          CTFontManagerRegisterFontsForURL(fileURL as CFURL, .process, nil)
+          if let font = NSFont(name: (name as NSString).deletingPathExtension, size: size) {
+            return font
+          }
+        }
+      }
+    }
+    return NSFont.monospacedDigitSystemFont(ofSize: size, weight: .regular)
+  }
+
   /// Show a message in the on screen display.
   /// - Parameters:
   ///   - message: The `OSDMessage` to display.
@@ -2193,7 +2227,11 @@ class MainWindowController: PlayerWindowController {
     }
 
     let osdTextSize = Preference.float(for: .osdTextSize)
-    osdLabel.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize), weight: .regular)
+    // SPEC requirement 10: resolve OSD font from (1) Preference.osdFont,
+    // (2) mpv's osd-font (from the user's mpv.conf), (3) Preference.subTextFont,
+    // (4) system default. Font-file basenames (.otf/.ttf/.ttc) are looked up
+    // in the bundled fonts dir; if not loadable as a family, fall back.
+    osdLabel.font = resolvedOSDFont(size: CGFloat(osdTextSize))
     osdAccessoryText.font = NSFont.monospacedDigitSystemFont(ofSize: CGFloat(osdTextSize * 0.5).clamped(to: 11...25), weight: .regular)
 
     setOSDViews(fromMessage: message)
@@ -3361,9 +3399,13 @@ class MainWindowController: PlayerWindowController {
     } else {
       timeLabelYPos = sliderFrame.origin.y + playSlider.frame.height + 5
     }
-    timePreviewVisualEffectView.frame.origin = CGPoint(
-      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewVisualEffectView.frame.width / 2),
-      y: timeLabelYPos)
+    // Split arithmetic into locals to help the Swift type-checker (was
+    // triggering "unable to type-check this expression in reasonable time").
+    let sliderWidth: CGFloat = sliderFrame.size.width
+    let previewWidth: CGFloat = timePreviewVisualEffectView.frame.width
+    let centeredX: CGFloat = sliderFrame.origin.x + sliderWidth * CGFloat(percentage)
+    let timePreviewX: CGFloat = round(centeredX - previewWidth / 2)
+    timePreviewVisualEffectView.frame.origin = CGPoint(x: timePreviewX, y: timeLabelYPos)
   }
 
 

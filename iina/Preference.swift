@@ -131,6 +131,11 @@ struct Preference {
 
     static let osdAutoHideTimeout = Key("osdAutoHideTimeout")
     static let osdTextSize = Key("osdTextSize")
+    /// OSD font family name or font-file basename (e.g. `"Microsoft Yahei"` or
+    /// `"uosc_icons.otf"`). Mirrors mpv's `osd-font` option. Empty string
+    /// means "fall back to mpv's `osd-font`, then `subTextFont`".
+    /// See SPEC `mpv-config-driven-refactor` Phase 6.
+    static let osdFont = Key("osdFont")
 
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
@@ -175,6 +180,96 @@ struct Preference {
     static let enableToneMapping = Key("enableToneMapping")
     static let toneMappingTargetPeak = Key("toneMappingTargetPeak")
     static let toneMappingAlgorithm = Key("toneMappingAlgorithm")
+
+    // SPEC mpv-config-driven-refactor Phase 7: unwired mpv option keys.
+    // These mirror mpv options the user's mpv.conf sets but IINA previously
+    // dropped. Empty/default values mean "let mpv's default apply".
+
+    // VideoAdvanced (GPU / scale / colour / HDR)
+    static let scale = Key("scale")
+    static let cscale = Key("cscale")
+    static let dscale = Key("dscale")
+    static let scaleAntiring = Key("scaleAntiring")
+    static let correctDownscaling = Key("correctDownscaling")
+    static let linearDownscaling = Key("linearDownscaling")
+    static let sigmoidUpscaling = Key("sigmoidUpscaling")
+    static let hdrComputePeak = Key("hdrComputePeak")
+    static let hdrPeakPercentile = Key("hdrPeakPercentile")
+    static let hdrContrastRecovery = Key("hdrContrastRecovery")
+    static let dither = Key("dither")
+    static let libplaceboOpts = Key("libplaceboOpts")
+    static let iccForceContrast = Key("iccForceContrast")
+    static let vdLavcDr = Key("vdLavcDr")
+    /// SPEC:Phase-7 revert. The Phase 3 "correction 1" introduced
+    /// `hwdecSoftwareFallback` (NEW key) + the wrong assumption that
+    /// `hwdec-software-fallback` was the canonical mpv option name.
+    /// mpv 0.38.0 (the libmpv IINA ships) has the option named
+    /// `vd-lavc-software-fallback` instead. Reverted: `vdLavcSoftwareFallback`
+    /// is the live key; the Phase 3 `hwdecSoftwareFallback` key has
+    /// been removed (any persisted user value is orphaned but the
+    /// default — and the only curated value — is also 60, so the
+    /// transition is invisible).
+    static let vdLavcSoftwareFallback = Key("vdLavcSoftwareFallback")
+    static let gpuContext = Key("gpuContext")
+    static let targetColorspaceHint = Key("targetColorspaceHint")
+    static let targetTrc = Key("targetTrc")
+    static let targetPeak = Key("targetPeak")
+    static let blendSubtitles = Key("blendSubtitles")
+    static let demuxerLavfFormat = Key("demuxerLavfFormat")
+
+    // OSD block
+    static let osdOnSeek = Key("osdOnSeek")
+    static let osdBarH = Key("osdBarH")
+    static let osdBarBorderSize = Key("osdBarBorderSize")
+    static let osdBorderSize = Key("osdBorderSize")
+    static let osdFontSize = Key("osdFontSize")
+    static let osdFractions = Key("osdFractions")
+    static let osdPlayingMsg = Key("osdPlayingMsg")
+    static let osdDuration = Key("osdDuration")
+    static let osdPlayingMsgDuration = Key("osdPlayingMsgDuration")
+    static let osc = Key("osc")
+
+    // Audio
+    static let adLavcDownmix = Key("adLavcDownmix")
+    static let audioChannels = Key("audioChannels")
+    static let audioFileAuto = Key("audioFileAuto")
+
+    // Subtitle
+    static let subFilePaths = Key("subFilePaths")
+    /// SPEC ui-driven-mpv-options Phase 3: mpv's own `sub-auto` option,
+    /// distinct from IINA's `subAutoLoadIINA` (IINA's own sub-loading logic).
+    static let subAuto = Key("subAuto")
+
+    // Screenshot
+    static let screenshotJpegQuality = Key("screenshotJpegQuality")
+    static let screenshotJpegSourceChroma = Key("screenshotJpegSourceChroma")
+    static let screenshotPngCompression = Key("screenshotPngCompression")
+    static let screenshotWebpLossless = Key("screenshotWebpLossless")
+    static let screenshotWebpQuality = Key("screenshotWebpQuality")
+    static let screenshotJxlDistance = Key("screenshotJxlDistance")
+    static let screenshotJxlEffort = Key("screenshotJxlEffort")
+    static let screenshotHighBitDepth = Key("screenshotHighBitDepth")
+
+    // Window / playback
+    static let border = Key("border")
+    static let hidpiWindowScale = Key("hidpiWindowScale")
+    static let autofitLarger = Key("autofitLarger")
+    static let cursorAutohide = Key("cursorAutohide")
+    static let forceSeekable = Key("forceSeekable")
+    static let imageDisplayDuration = Key("imageDisplayDuration")
+    static let loopFilePref = Key("loopFilePref")
+    static let loopPlaylistPref = Key("loopPlaylistPref")
+
+    /// SPEC ui-driven-mpv-options Phase 3: mpv `force-window` option.
+    static let forceWindow = Key("forceWindow")
+    /// SPEC ui-driven-mpv-options Phase 3: mpv `save-position-on-quit`,
+    /// decoupled from the legacy `resumeLastPosition` key (which still
+    /// controls `resume-playback`).
+    static let savePositionOnQuit = Key("savePositionOnQuit")
+    /// SPEC ui-driven-mpv-options Phase 3: mpv `input-media-keys`,
+    /// distinct from IINA's `useMediaKeys` (system media key handling
+    /// via SPMediaKeyHandling).
+    static let inputMediaKeys = Key("inputMediaKeys")
 
     static let audioDriverEnableAVFoundation = Key("audioDriverEnableAVFoundation")
     static let audioThreads = Key("audioThreads")
@@ -350,6 +445,16 @@ struct Preference {
 
     /// Workaround for AppKit defect where showWindow moves the window to a different screen (fixed as of macOS Tahoe).
     static let enableWrongScreenWorkaround = Key("enableWrongScreenWorkaround")
+
+    /// SPEC ui-driven-mpv-options Phase 2: preferences schema version. Bumped
+    /// whenever `defaultPreference` changes semantically (e.g. curated mpv
+    /// defaults are baked in) so callers can detect / migrate. The value is
+    /// only a marker — `UserDefaults.standard.register(defaults:)` fills
+    /// fresh-install gaps; already-persisted keys keep the user's explicit
+    /// choice (correct precedence). Incremented to `3` in Phase 3 when the
+    /// curated mpv.conf defaults were baked into the **NEW** coverage-table
+    /// rows (screenshot block, hwdec-software-fallback, geometry, etc.).
+    static let prefVersion = Key("prefVersion")
   }
 
   // MARK: - Enums
@@ -953,6 +1058,182 @@ struct Preference {
     }
   }
 
+  // SPEC Phase 7: mpv option enums for Settings dropdowns. These let users
+  // configure mpv scaler / dither / TRC options via IINA Settings without
+  // needing an mpv.conf file. The Int rawValue is stored in UserDefaults;
+  // the `description` returns the mpv option string value.
+
+  enum ScaleOption: Int, InitializingFromKey, CaseIterable {
+    case `default` = 0   // mpv default (bilinear for scale)
+    case bilinear
+    case bicubic_fast
+    case lanczos
+    case spline36
+    case spline64
+    case ewa_lanczos
+    case ewa_lanczossharp
+    case ewa_lanczossoft
+    case mitchell
+    case catmull_rom
+
+    // SPEC ui-driven-mpv-options Phase 2: curated to `bilinear` to match
+    // the user's `mpv/mpv.conf` `scale=bilinear` / `cscale=bilinear` /
+    // `dscale=bilinear` defaults on a clean install.
+    static var defaultValue = ScaleOption.bilinear
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .default: ""    // empty = use mpv's built-in default
+      case .bilinear: "bilinear"
+      case .bicubic_fast: "bicubic_fast"
+      case .lanczos: "lanczos"
+      case .spline36: "spline36"
+      case .spline64: "spline64"
+      case .ewa_lanczos: "ewa_lanczos"
+      case .ewa_lanczossharp: "ewa_lanczossharp"
+      case .ewa_lanczossoft: "ewa_lanczossoft"
+      case .mitchell: "mitchell"
+      case .catmull_rom: "catmull_rom"
+      }
+    }
+  }
+
+  enum DitherOption: Int, InitializingFromKey, CaseIterable {
+    case `default` = 0
+    case fruit
+    case ordered
+    case random
+    case no
+
+    // SPEC ui-driven-mpv-options Phase 2: curated to `no` to match
+    // `mpv/mpv.conf` `dither=no`.
+    static var defaultValue = DitherOption.no
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .default: ""
+      case .fruit: "fruit"
+      case .ordered: "ordered"
+      case .random: "random"
+      case .no: "no"
+      }
+    }
+  }
+
+  enum TargetTrcOption: Int, InitializingFromKey, CaseIterable {
+    case `default` = 0
+    case auto
+    case srgb
+    case pq
+    case hlg
+    case gamma22
+    case linear
+    case bt1886
+
+    static var defaultValue = TargetTrcOption.default
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .default: ""
+      case .auto: "auto"
+      case .srgb: "srgb"
+      case .pq: "pq"
+      case .hlg: "hlg"
+      case .gamma22: "gamma22"
+      case .linear: "linear"
+      case .bt1886: "bt.1886"
+      }
+    }
+  }
+
+  enum OscOption: Int, InitializingFromKey, CaseIterable {
+    case `default` = 0
+    case yes
+    case no
+    case forced
+
+    // SPEC ui-driven-mpv-options Phase 2: curated to `no` to match
+    // `mpv/mpv.conf` `osc=no`.
+    static var defaultValue = OscOption.no
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .default: ""
+      case .yes: "yes"
+      case .no: "no"
+      case .forced: "forced"
+      }
+    }
+  }
+
+  enum AudioFileAutoOption: Int, InitializingFromKey, CaseIterable {
+    case `default` = 0
+    case no
+    case exact
+    case fuzzy
+    case all
+
+    // SPEC ui-driven-mpv-options Phase 2: curated to `fuzzy` to match
+    // `mpv/mpv.conf` `audio-file-auto=fuzzy`.
+    static var defaultValue = AudioFileAutoOption.fuzzy
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .default: ""
+      case .no: "no"
+      case .exact: "exact"
+      case .fuzzy: "fuzzy"
+      case .all: "all"
+      }
+    }
+  }
+
+  enum AudioChannelsOption: Int, InitializingFromKey, CaseIterable {
+    case `default` = 0
+    case mono
+    case stereo
+    case auto
+    case auto_safe
+
+    // SPEC ui-driven-mpv-options Phase 2: curated to `stereo` to match
+    // `mpv/mpv.conf` `audio-channels=stereo`.
+    static var defaultValue = AudioChannelsOption.stereo
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .default: ""
+      case .mono: "mono"
+      case .stereo: "stereo"
+      case .auto: "auto"
+      case .auto_safe: "auto-safe"
+      }
+    }
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -984,7 +1265,16 @@ struct Preference {
     .disableOSDSpeedMsg: false,
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),
-    .softVolume: 100,
+    // SPEC ui-driven-mpv-options Phase 2: curated to `Microsoft Yahei` to
+    // match `mpv/mpv.conf` `osd-font="Microsoft Yahei"`. The 4-tier
+    // resolution precedence in `MainWindowController.resolvedOSDFont`
+    // still applies (pref → mpv → sub font → system).
+    .osdFont: "Microsoft Yahei",
+    // SPEC ui-driven-mpv-options Phase 2: curated to 80 to match
+    // `mpv/mpv.conf` `volume=80`. Legacy key is `softVolume` (the SPEC
+    // coverage table guessed `volume`; the actual mpv `volume` option is
+    // driven by this key via `MPVController.mpvInit`).
+    .softVolume: 80,
     .arrowButtonAction: ArrowButtonAction.speed.rawValue,
     .pauseWhenOpen: false,
     .fullScreenWhenOpen: false,
@@ -1013,7 +1303,7 @@ struct Preference {
     .defaultRepeatMode: DefaultRepeatMode.playlist.rawValue,
 
     .usePhysicalResolution: true,
-    .initialWindowSizePosition: "",
+    .initialWindowSizePosition: "50%:50%",
     .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
     .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
     .showRemainingTime: false,
@@ -1046,8 +1336,10 @@ struct Preference {
     .toneMappingAlgorithm: ToneMappingAlgorithmOption.defaultValue.rawValue,
     .audioDriverEnableAVFoundation: false,
     .audioThreads: 0,
-    .audioLanguage: "",
-    .maxVolume: 100,
+    // SPEC ui-driven-mpv-options Phase 2: curated to `en,eng,zh,chi` to
+    // match `mpv/mpv.conf` `alang=en,eng,zh,chi`.
+    .audioLanguage: "en,eng,zh,chi",
+    .maxVolume: 200,
     .spdifAC3: false,
     .spdifDTS: false,
     .spdifDTSHD: false,
@@ -1068,8 +1360,15 @@ struct Preference {
     .subOverrideLevel: SubOverrideLevel.scale.rawValue,
     .secondarySubOverrideLevel: SubOverrideLevel.scale.rawValue,
     .subTextFont: Constants.String.mpvDefaultFont,
-    .subTextSize: Float(55),
-    .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,
+    // SPEC ui-driven-mpv-options Phase 2: curated to 43 to match
+    // `mpv/mpv.conf` `sub-font-size=43`. (SPEC coverage table guessed the
+    // key name `subTextSize`; confirmed by grep — the actual legacy key is
+    // indeed `subTextSize`, wired at `MPVController.swift` `setUserOption(
+    // PK.subTextSize, type: .float, forName: MPVOption.Subtitles.subFontSize, ...)`.)
+    .subTextSize: Float(43),
+    .subTextColorString: NSColor(srgbRed: 1, green: 1, blue: 1,
+                                  alpha: CGFloat(0xf0) / 255)
+        .usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBgColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBold: false,
     .subItalic: false,
@@ -1084,7 +1383,10 @@ struct Preference {
     .subMarginX: Float(25),
     .subMarginY: Float(22),
     .subPos: Float(100),
-    .subLang: "",
+    // SPEC ui-driven-mpv-options Phase 2: curated to `chi,zh-CN,jpn,sc,chs`
+    // to match `mpv/mpv.conf` `slang=chi,zh-CN,jpn,sc,chs`. Legacy key is
+    // `subLang` (the SPEC coverage table guessed `subtitleLanguage`).
+    .subLang: "chi,zh-CN,jpn,sc,chs",
     .legacyOnlineSubSource: 1, /* openSub */
     .onlineSubProvider: OnlineSubtitle.Providers.openSub.id,
     .displayInLetterBox: true,
@@ -1105,7 +1407,7 @@ struct Preference {
     .transportRTSPThrough: RTSPTransportation.tcp.rawValue,
     .ytdlEnabled: true,
     .ytdlSearchPath: "",
-    .ytdlRawOptions: "",
+    .ytdlRawOptions: "cookies-from-browser=edge",
     .httpProxy: "",
 
     .currentInputConfigName: "IINA Default",
@@ -1116,8 +1418,13 @@ struct Preference {
     .logLevel: Logger.Level.debug.rawValue,
     .displayKeyBindingRawValues: false,
     .userOptions: [[String]](),
+    // UI-driven strategy: do not ship a bundled mpv config-dir. The
+    // default is off (revert of the prior mpv-config-driven-refactor
+    // iteration's `true`). Users who want to bring their own mpv
+    // config-dir enable the Advanced escape hatch manually; see
+    // ui-driven-mpv-options SPEC requirement 5 / PLAN Phase 1.
     .useUserDefinedConfDir: false,
-    .userDefinedConfDir: "~/.config/mpv/",
+    .userDefinedConfDir: "",
     .iinaEnablePluginSystem: false,
 
     .keepOpenOnFileEnd: true,
@@ -1142,7 +1449,7 @@ struct Preference {
     .screenshotFolder: "~/Pictures/Screenshots",
     .screenshotIncludeSubtitle: true,
     .screenshotFormat: ScreenshotFormat.png.rawValue,
-    .screenshotTemplate: "%F-%n",
+    .screenshotTemplate: "~~desktop/MPV-%P-N%n",
     .screenshotShowPreview: true,
 
     .watchProperties: [String](),
@@ -1156,7 +1463,51 @@ struct Preference {
     .enableHdrWorkaround: false,
     .enableNowPlayingArtwork: true,
     .enableDisplayIdle: true,
-    .enableWrongScreenWorkaround: true
+    .enableWrongScreenWorkaround: true,
+
+    // SPEC ui-driven-mpv-options Phase 2: curated defaults baked from
+    // `mpv/mpv.conf` (main section) for the rows marked ✓ in the SPEC
+    // coverage table. Rows marked **NEW** (screenshot*, gpuContext, target*,
+    // blendSubtitles, demuxerLavfFormat, imageDisplayDuration, loop*Pref)
+    // remain at the neutral Phase 7 value and are wired in Phase 3.
+    // SPEC:Phase-7 revert — `vdLavcSoftwareFallback` was incorrectly
+    // listed as **NEW** by Phase 3 (which renamed it to
+    // `hwdecSoftwareFallback`); the reverted key is not NEW and is
+    // included in this block.
+    .scale: ScaleOption.bilinear.rawValue,
+    .cscale: ScaleOption.bilinear.rawValue,
+    .dscale: ScaleOption.bilinear.rawValue,
+    .scaleAntiring: 0, .correctDownscaling: false, .linearDownscaling: false,
+    .sigmoidUpscaling: false, .hdrComputePeak: false, .hdrPeakPercentile: 100,
+    .hdrContrastRecovery: 0, .dither: DitherOption.no.rawValue,
+    .libplaceboOpts: "preset=fast", .iccForceContrast: 1000,
+    .vdLavcDr: true, .vdLavcSoftwareFallback: 60,
+    .gpuContext: "",
+    .targetColorspaceHint: false, .targetTrc: 0, .targetPeak: 0,
+    .blendSubtitles: false, .demuxerLavfFormat: "",
+    .osdOnSeek: "msg-bar", .osdBarH: 2, .osdBarBorderSize: Float(0.2), .osdBorderSize: 0,
+    .osdFontSize: 40, .osdFractions: true, .osdPlayingMsg: "${filename}",
+    .osdDuration: 2000, .osdPlayingMsgDuration: 3000, .osc: OscOption.no.rawValue,
+    .adLavcDownmix: true,
+    .audioChannels: AudioChannelsOption.stereo.rawValue,
+    .audioFileAuto: AudioFileAutoOption.fuzzy.rawValue,
+    .subFilePaths: "ass:srt:sub:subs:subtitles",
+    .screenshotJpegQuality: 100, .screenshotJpegSourceChroma: false,
+    .screenshotPngCompression: 5, .screenshotWebpLossless: true,
+    .screenshotWebpQuality: 100, .screenshotJxlDistance: 0,
+    .screenshotJxlEffort: 5, .screenshotHighBitDepth: true,
+    .border: false, .hidpiWindowScale: true, .autofitLarger: "100%x100%",
+    .cursorAutohide: "1000", .forceSeekable: true, .imageDisplayDuration: "",
+    .loopFilePref: "", .loopPlaylistPref: "",
+    .forceWindow: "immediate", .savePositionOnQuit: false,
+    .inputMediaKeys: false, .subAuto: "fuzzy",
+
+    // SPEC ui-driven-mpv-options Phase 2: preferences schema version marker.
+    // See `Preference.Key.prefVersion`. `3` = Phase 3 curated defaults
+    // (screenshot block, hwdec-software-fallback, geometry, save-position-on-quit,
+    // input-media-keys, sub-auto, sub-color, volume-max, ytdl-raw-options,
+    // force-window, screenshot-template) baked into the NEW coverage-table rows.
+    .prefVersion: 3
   ]
 
 

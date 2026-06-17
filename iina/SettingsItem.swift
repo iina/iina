@@ -18,6 +18,14 @@ struct SettingsItem {
 
     var controlSize: NSControl.ControlSize = .regular
 
+    /// SPEC ui-driven-mpv-options Phase 5: the mpv option name this row
+    /// binds to. When non-nil and `MPVSentinel.wasSetInConfig(_:)` returns
+    /// true (i.e. the user's `mpv.conf` overrides the Settings value),
+    /// `General.makeView` appends an "Overridden by your mpv.conf" badge
+    /// to the row. Set via the chained `.mpvName(_:)` accessor; see
+    /// `.specite/iterations/ui-driven-mpv-options/SPEC.md`.
+    var mpvOptionName: String?
+
     func setControlSize(_ label: NSTextField) {
       label.controlSize = controlSize
       switch controlSize {
@@ -30,6 +38,16 @@ struct SettingsItem {
       default:
         label.font = NSFont.systemFont(ofSize: NSFont.systemFontSize)
       }
+    }
+
+    /// SPEC ui-driven-mpv-options Phase 5: stores the mpv option name
+    /// this row binds to and returns `self` for chaining. The badge
+    /// is rendered by `General.makeView` when the user's `mpv.conf`
+    /// contains this key. Pass the raw mpv option name (e.g. `"osd-font-size"`,
+    /// `"scale"`), NOT the IINA `Preference.Key` rawValue.
+    func mpvName(_ name: String) -> Self {
+      self.mpvOptionName = name
+      return self
     }
 
     func makeView(context: SettingsLocalization.Context) -> NSView {
@@ -340,6 +358,27 @@ struct SettingsItem {
         desc.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         desc.lineBreakMode = .byWordWrapping
         labelStackView.addArrangedSubview(desc)
+      }
+
+      // SPEC ui-driven-mpv-options Phase 5: append an "Overridden by your
+      // mpv.conf" badge when the user has explicitly set the option this row
+      // binds to in their `mpv.conf`. Sentinel is read at makeView time;
+      // mpv.conf is scanned once at `MPVController.mpvInit` and does not
+      // change during a single launch.
+      if let mpvName = mpvOptionName, MPVSentinel.wasSetInConfig(mpvName) {
+        let badgeText = NSLocalizedString("settings.overridden_by_mpv_conf",
+                                          value: "Overridden by your mpv.conf",
+                                          comment: "Badge shown on a Settings row when the user's mpv.conf overrides the value")
+        let tooltipFormat = NSLocalizedString("settings.overridden_by_mpv_conf.tooltip",
+                                              value: "Set in your mpv.conf as %@",
+                                              comment: "Tooltip for the 'Overridden by your mpv.conf' badge; %@ is the mpv option name")
+        let badge = NSTextField(labelWithString: badgeText)
+        badge.font = NSFont.systemFont(ofSize: 12)
+        badge.textColor = .secondaryLabelColor
+        badge.lineBreakMode = .byWordWrapping
+        badge.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        badge.toolTip = String(format: tooltipFormat, mpvName)
+        labelStackView.addArrangedSubview(badge)
       }
 
       image = NSImageView()

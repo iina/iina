@@ -1,0 +1,31 @@
+/* SettingsOSDLocalizable.strings */
+
+/* Section titles */
+"$OSDFont" = "OSD Font";
+"$OSDDisplay" = "OSD Display";
+"$OSDBar" = "OSD Bar";
+
+/* Font */
+"osdFont.label" = "OSD font";
+"osdFont.desc" = "Font family name or font-file basename from mpv/fonts/. Leave empty to use mpv's osd-font.";
+
+/* Display */
+"osdFontSize.label" = "OSD font size";
+"osdFontSize.desc" = "Default: 0 (mpv default)";
+"osdDuration.label" = "OSD duration";
+"osdDuration.desc" = "ms, default: 1000";
+"osdPlayingMsgDuration.label" = "Playing message duration";
+"osdPlayingMsgDuration.desc" = "ms, default: 0";
+"osdPlayingMsg.label" = "Playing message";
+"osdOnSeek.label" = "OSD on seek";
+"osc.label" = "OSC mode";
+"osc.desc" = "yes, no, or forced";
+
+/* Bar */
+"osdBarH.label" = "OSD bar height";
+"osdBarH.desc" = "0–1, default: 0";
+"osdBarBorderSize.label" = "OSD bar border size";
+"osdBarBorderSize.desc" = "Default: 0";
+"osdBorderSize.label" = "OSD border size";
+"osdBorderSize.desc" = "Default: 0";
+"osdFractions.label" = "Show fractions in time";

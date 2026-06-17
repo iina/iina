@@ -319,6 +319,11 @@ class MPVController: NSObject {
     // Create a new mpv instance and an associated client API handle to control the mpv instance.
     mpv = mpv_create()
 
+    // Record explicit mpv.conf keys BEFORE any forced option is set, so the
+    // sentinel can be consulted by the userOptionsContains-style guards below.
+    // See SPEC requirement 2 and PLAN Phase 2.
+    MPVSentinel.recordFromConfigFiles()
+
     // User default settings
 
     if Preference.bool(for: .enableInitialVolume) {
@@ -334,7 +339,11 @@ class MPVController: NSObject {
     // disable internal OSD
     let useMpvOsd = Preference.bool(for: .enableAdvancedSettings) && Preference.bool(for: .useMpvOsd)
     if !useMpvOsd {
-      chkErr(setOptionString(MPVOption.OSD.osdLevel, "0", level: .verbose))
+      // Skip the override when the user has explicitly set osd-level in
+      // mpv.conf (see SPEC requirement 2 / PLAN Phase 2).
+      if !MPVSentinel.wasSetInConfig(MPVOption.OSD.osdLevel) {
+        chkErr(setOptionString(MPVOption.OSD.osdLevel, "0", level: .verbose))
+      }
     } else {
       player.displayOSD = false
     }
@@ -374,9 +383,32 @@ class MPVController: NSObject {
     setUserOption(PK.screenshotTemplate, type: .string,
                   forName: MPVOption.Screenshot.screenshotTemplate)
 
-    // Disable mpv's media key system as it now uses the MediaPlayer Framework.
-    // Dropped media key support in 10.11 and 10.12.
-    chkErr(setOptionString(MPVOption.Input.inputMediaKeys, no_str, level: .verbose))
+    // SPEC ui-driven-mpv-options Phase 3: screenshot quality/format options
+    // wired with skipIfDefault: false so curated defaults are always applied.
+    setUserOption(PK.screenshotJpegQuality, type: .int,
+                  forName: MPVOption.Screenshot.screenshotJpegQuality, skipIfDefault: false)
+    setUserOption(PK.screenshotJpegSourceChroma, type: .bool,
+                  forName: MPVOption.Screenshot.screenshotJpegSourceChroma, skipIfDefault: false)
+    setUserOption(PK.screenshotPngCompression, type: .int,
+                  forName: MPVOption.Screenshot.screenshotPngCompression, skipIfDefault: false)
+    setUserOption(PK.screenshotWebpLossless, type: .bool,
+                  forName: MPVOption.Screenshot.screenshotWebpLossless, skipIfDefault: false)
+    setUserOption(PK.screenshotWebpQuality, type: .int,
+                  forName: MPVOption.Screenshot.screenshotWebpQuality, skipIfDefault: false)
+    setUserOption(PK.screenshotJxlDistance, type: .int,
+                  forName: MPVOption.Screenshot.screenshotJxlDistance, skipIfDefault: false)
+    setUserOption(PK.screenshotJxlEffort, type: .int,
+                  forName: MPVOption.Screenshot.screenshotJxlEffort, skipIfDefault: false)
+    setUserOption(PK.screenshotHighBitDepth, type: .bool,
+                  forName: MPVOption.Screenshot.screenshotHighBitDepth, skipIfDefault: false)
+
+    // SPEC ui-driven-mpv-options Phase 3: replaced the hard-forced
+    // input-media-keys=no with a setUserOption call so the value is
+    // user-configurable through IINA preferences. IINA uses the MediaPlayer
+    // Framework for media keys; mpv's own input-media-keys is disabled by
+    // default (curated value: no).
+    setUserOption(PK.inputMediaKeys, type: .bool, forName: MPVOption.Input.inputMediaKeys,
+                  skipIfDefault: false)
 
     setUserOption(PK.keepOpenOnFileEnd, type: .other, forName: MPVOption.Window.keepOpen,
                   level: .verbose) { key in
@@ -392,14 +424,35 @@ class MPVController: NSObject {
       return keepOpenPl ? "always" : (keepOpen ? "yes" : "no")
     }
 
-    chkErr(setOptionString("watch-later-directory", Utility.watchLaterURL.path, level: .verbose))
-    setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.WatchLater.savePositionOnQuit,
-                  verboseIfDefault: true)
+    // Skip the override when the user has explicitly set
+    // watch-later-directory in mpv.conf (see SPEC requirement 2 /
+    // PLAN Phase 2).
+    if !MPVSentinel.wasSetInConfig("watch-later-directory") {
+      chkErr(setOptionString("watch-later-directory", Utility.watchLaterURL.path, level: .verbose))
+    }
+    // SPEC ui-driven-mpv-options Phase 3: decoupled save-position-on-quit
+    // from resumeLastPosition. The legacy resumeLastPosition key now only
+    // controls resume-playback (line below). savePositionOnQuit is a new
+    // key with curated default false (= no), matching mpv.conf.
+    setUserOption(PK.savePositionOnQuit, type: .bool, forName: MPVOption.WatchLater.savePositionOnQuit,
+                  skipIfDefault: false)
     setUserOption(PK.resumeLastPosition, type: .bool, forName: MPVOption.WatchLater.resumePlayback,
                   verboseIfDefault: true)
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry,
                   level: .verbose)
+
+    // SPEC ui-driven-mpv-options Phase 3: force-window as a user-configurable
+    // preference. NOT set pre-init here: force-window=immediate (the curated
+    // default) makes mpv spawn the VO thread during mpv_initialize, but
+    // vo=libmpv requires IINA's render context which doesn't exist until
+    // PlayerCore.initVideo() calls mpvInitRendering(). Setting it here
+    // produces "vo/libmpv: No render context set" and a fatal -4 later.
+    // PlayerCore.openFile() sets force-window=yes, then initVideo() upgrades
+    // it to immediate AFTER the render context exists. Both PlayerCore calls
+    // are guarded by MPVSentinel + userOptionsContains so a user who has
+    // explicitly set force-window in mpv.conf / Additional mpv options keeps
+    // their value.
 
     // - Codec
 
@@ -445,7 +498,11 @@ class MPVController: NSObject {
 
     // - Sub
 
-    chkErr(setOptionString(MPVOption.Subtitles.subAuto, "no", level: .verbose))
+    // SPEC ui-driven-mpv-options Phase 3: replaced the hard-forced
+    // sub-auto=no with a setUserOption call so the value is
+    // user-configurable through IINA preferences. Curated default is "fuzzy".
+    setUserOption(PK.subAuto, type: .string, forName: MPVOption.Subtitles.subAuto,
+                  skipIfDefault: false)
     chkErr(setOptionalOptionString(MPVOption.Subtitles.subCodepage,
                                    Preference.string(for: .defaultEncoding), verboseIfDefault: true))
     player.info.subEncoding = Preference.string(for: .defaultEncoding)
@@ -549,8 +606,23 @@ class MPVController: NSObject {
       }
       return v ? "yes" : "no"
     }
+    // SPEC:Phase-3 intended the `-append` form so an IINA-side value
+    // ADDS to whatever the user's `mpv.conf` already configured. But the
+    // libmpv IINA ships (mpv 0.38.0) does NOT have `ytdl-raw-options-
+    // append` — only `ytdl-raw-options` (verified via
+    // `strings libmpv.2.dylib | grep ytdl`, Phase 7). Using `-append`
+    // returned MPV_ERROR_OPTION_NOT_FOUND (-5) and surfaced an
+    // `alert.mpv_error` to the user. We use plain `ytdl-raw-options`
+    // (overwrite semantics); for a single entry the end state is
+    // identical, and the user's `mpv.conf` line
+    // `ytdl-raw-options-append = cookies-from-browser=edge` is already
+    // silently ignored by mpv 0.38.0 (unknown option at parse time).
+    // `Preference.Key.ytdlRawOptions` name and type are unchanged.
     setUserOption(PK.ytdlRawOptions, type: .string, forName: MPVOption.ProgramBehavior.ytdlRawOptions,
                   verboseIfDefault: true)
+    // see SPEC:Phase-2 — reset-on-next-file is intentionally not guarded by
+    // MPVSentinel; the user's value (if any) is allowed to override only
+    // through the "Additional mpv options" preference, not via mpv.conf.
     chkErr(setOptionString(MPVOption.ProgramBehavior.resetOnNextFile,
             "\(MPVOption.PlaybackControl.abLoopA),\(MPVOption.PlaybackControl.abLoopB)", level: .verbose))
 
@@ -559,16 +631,117 @@ class MPVController: NSObject {
       Preference.bool(for: key) ? "avfoundation" : "coreaudio"
     }
 
+    // SPEC:Phase-7 — wire the previously-unwired mpv options. All use
+    // verboseIfDefault so an empty/zero IINA preference is a no-op: mpv's
+    // own default (or the user's mpv.conf value) applies.
+
+    // GPURendererOptions (scale / colour / HDR)
+    setUserOption(PK.scale, type: .other, forName: MPVOption.GPURendererOptions.scale,
+                  verboseIfDefault: true) { key in
+      let v: Preference.ScaleOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+    setUserOption(PK.cscale, type: .other, forName: MPVOption.GPURendererOptions.cscale,
+                  verboseIfDefault: true) { key in
+      let v: Preference.ScaleOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+    setUserOption(PK.dscale, type: .other, forName: MPVOption.GPURendererOptions.dscale,
+                  verboseIfDefault: true) { key in
+      let v: Preference.ScaleOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+    setUserOption(PK.scaleAntiring, type: .float, forName: MPVOption.GPURendererOptions.scaleAntiring, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.correctDownscaling, type: .bool, forName: MPVOption.GPURendererOptions.correctDownscaling, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.linearDownscaling, type: .bool, forName: MPVOption.GPURendererOptions.linearDownscaling, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.sigmoidUpscaling, type: .bool, forName: MPVOption.GPURendererOptions.sigmoidUpscaling, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.dither, type: .other, forName: MPVOption.GPURendererOptions.dither,
+                  verboseIfDefault: true) { key in
+      let v: Preference.DitherOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+    setUserOption(PK.hdrComputePeak, type: .bool, forName: MPVOption.GPURendererOptions.hdrComputePeak, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.hdrPeakPercentile, type: .float, forName: MPVOption.GPURendererOptions.hdrPeakPercentile, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.hdrContrastRecovery, type: .float, forName: MPVOption.GPURendererOptions.hdrContrastRecovery, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.libplaceboOpts, type: .string, forName: MPVOption.GPURendererOptions.libplaceboOpts, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.iccForceContrast, type: .int, forName: MPVOption.GPURendererOptions.iccForceContrast, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.gpuContext, type: .string, forName: MPVOption.GPURendererOptions.gpuContext, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.targetColorspaceHint, type: .bool, forName: MPVOption.GPURendererOptions.targetColorspaceHint, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.targetTrc, type: .other, forName: MPVOption.GPURendererOptions.targetTrc,
+                  verboseIfDefault: true) { key in
+      let v: Preference.TargetTrcOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+    setUserOption(PK.targetPeak, type: .float, forName: MPVOption.GPURendererOptions.targetPeak, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.blendSubtitles, type: .bool, forName: MPVOption.GPURendererOptions.blendSubtitles, verboseIfDefault: true, skipIfDefault: true)
+
+    // Codec (decoder)
+    setUserOption(PK.vdLavcDr, type: .bool, forName: MPVOption.Video.vdLavcDr, verboseIfDefault: true, skipIfDefault: true)
+    // SPEC:Phase-7 revert. The Phase 3 "correction 1" was WRONG — mpv
+    // 0.38.0 (the libmpv IINA ships) has `vd-lavc-software-fallback`
+    // as the option name; `hwdec-software-fallback` was added in a
+    // later mpv version and returns MPV_ERROR_OPTION_NOT_FOUND (-5) on
+    // 0.38.0, surfacing as `alert.mpv_error`. The user's mpv.conf
+    // `vd-lavc-software-fallback=60` was never a typo — it was always
+    // the real name. Reverted to the pre-Phase-3 wiring: `vdLavcSoftwareFallback`
+    // key + `MPVOption.Video.vdLavcSoftwareFallback` constant (string
+    // `"vd-lavc-software-fallback"`), default 60.
+    setUserOption(PK.vdLavcSoftwareFallback, type: .int,
+                  forName: MPVOption.Video.vdLavcSoftwareFallback, skipIfDefault: false)
+
+    // OSD
+    setUserOption(PK.osdOnSeek, type: .string, forName: MPVOption.OSD.osdOnSeek, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdBarH, type: .int, forName: MPVOption.OSD.osdBarH, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdBarBorderSize, type: .float, forName: MPVOption.OSD.osdBarBorderSize, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdBorderSize, type: .float, forName: MPVOption.OSD.osdBorderSize, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdFontSize, type: .int, forName: MPVOption.OSD.osdFontSize, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdFractions, type: .bool, forName: MPVOption.OSD.osdFractions, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdPlayingMsg, type: .string, forName: MPVOption.OSD.osdPlayingMsg, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdDuration, type: .int, forName: MPVOption.OSD.osdDuration, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osdPlayingMsgDuration, type: .int, forName: MPVOption.OSD.osdPlayingMsgDuration, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.osc, type: .other, forName: MPVOption.OSD.osc,
+                  verboseIfDefault: true) { key in
+      let v: Preference.OscOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+
+    // Audio
+    setUserOption(PK.adLavcDownmix, type: .bool, forName: MPVOption.Audio.adLavcDownmix, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.audioChannels, type: .other, forName: MPVOption.Audio.audioChannels,
+                  verboseIfDefault: true) { key in
+      let v: Preference.AudioChannelsOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+    setUserOption(PK.audioFileAuto, type: .other, forName: MPVOption.Audio.audioFileAuto,
+                  verboseIfDefault: true) { key in
+      let v: Preference.AudioFileAutoOption = Preference.enum(for: key)
+      return v == .default ? nil : String(describing: v)
+    }
+
+    // Subtitle
+    setUserOption(PK.subFilePaths, type: .string, forName: MPVOption.Subtitles.subFilePaths, verboseIfDefault: true, skipIfDefault: true)
+
+    // Demuxer
+    setUserOption(PK.demuxerLavfFormat, type: .string, forName: MPVOption.Demuxer.demuxerLavfFormat, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.forceSeekable, type: .bool, forName: MPVOption.Demuxer.forceSeekable, verboseIfDefault: true, skipIfDefault: true)
+
+    // Window / playback
+    setUserOption(PK.border, type: .bool, forName: MPVOption.Window.border, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.hidpiWindowScale, type: .bool, forName: MPVOption.Window.hidpiWindowScale, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.autofitLarger, type: .string, forName: MPVOption.Window.autofitLarger, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.cursorAutohide, type: .string, forName: MPVOption.Window.cursorAutohide, verboseIfDefault: true, skipIfDefault: true)
+    setUserOption(PK.imageDisplayDuration, type: .string, forName: MPVOption.Window.imageDisplayDuration, verboseIfDefault: true, skipIfDefault: true)
+
     // Set user defined conf dir.
-    if Preference.bool(for: .enableAdvancedSettings),
-       Preference.bool(for: .useUserDefinedConfDir),
-       var userConfDir = Preference.string(for: .userDefinedConfDir) {
-      userConfDir = NSString(string: userConfDir).standardizingPath
-      setOptionString("config", "yes")
-      let status = setOptionString(MPVOption.ProgramBehavior.configDir, userConfDir)
-      if status < 0 {
-        Utility.showAlert("extra_option.config_folder", arguments: [userConfDir], disableMenus: true)
-      }
+    // If the user has configured a custom mpv config-dir via Preferences →
+    // Advanced (the "Use config directory" escape hatch, ui-driven-mpv-options
+    // SPEC requirement 5), apply it now. The default is empty (no bundled
+    // config-dir is shipped); users who want to bring their own mpv.conf
+    // directory set this manually.
+    if let rawUserConfDir = Preference.string(for: .userDefinedConfDir),
+       !rawUserConfDir.isEmpty {
+      let userConfDir = NSString(string: rawUserConfDir).standardizingPath
+      setConfigDir(path: userConfDir)
     }
 
     // Set user defined options.
@@ -600,7 +773,17 @@ class MPVController: NSObject {
         inputConfPath = currentConfigFilePath
       }
     }
-    chkErr(setOptionalOptionString(MPVOption.Input.inputConf, inputConfPath, level: .verbose))
+    // SPEC:Phase-8 — merge the IINA-side editor's input.conf with the user's
+    // mpv/input.conf so both IINA custom bindings and the user's script-binding
+    // / @click / @press / @release modifiers take effect.
+    let userInputConf = Utility.materializedMPVConfigDirURL.appendingPathComponent("input.conf")
+    let mergedURL = Utility.writeMergedInputConf(
+      iinaConfPath: inputConfPath,
+      userConfPath: userInputConf.path,
+      destinationDir: Utility.appSupportDirUrl
+    )
+    chkErr(setOptionalOptionString(MPVOption.Input.inputConf,
+                                  mergedURL?.path ?? inputConfPath, level: .verbose))
 
     // Receive log messages at warn level.
     chkErr(mpv_request_log_messages(mpv, MPVLogLevel))
@@ -617,6 +800,18 @@ class MPVController: NSObject {
     // Observe properties.
     observeProperties.forEach { (k, v) in
       mpv_observe_property(mpv, 0, k, v)
+    }
+
+    // vo=libmpv MUST be set before mpv_initialize. force-window=immediate
+    // (the default, applied above via PK.forceWindow) causes mpv to spawn the
+    // VO thread during mpv_initialize. If vo is still at its default ("gpu")
+    // at that point, the VO thread probes Vulkan (`displayvk`) and crashes in
+    // libmpv builds with Vulkan enabled (EXC_BAD_ACCESS in mppl_log_create,
+    // backtrace: vo_thread -> preinit -> ra_ctx_create -> display_init ->
+    // mpvk_init -> mppl_log_create). Setting vo=libmpv pre-init makes the VO
+    // thread use IINA's render API instead. See SPEC requirement 2.
+    if !MPVSentinel.wasSetInConfig(MPVOption.Video.vo) {
+      chkErr(setOptionString(MPVOption.Video.vo, "libmpv", level: .verbose))
     }
 
     // Initialize an uninitialized mpv instance. If the mpv instance is already running, an error is returned.
@@ -660,10 +855,113 @@ class MPVController: NSObject {
     applyHardwareAccelerationWorkaround()
 
     // Set options that can be override by user's config. mpv will log user config when initialize,
-    // so we put them here.
-    chkErr(setOptionString(MPVOption.Video.vo, "libmpv", level: .verbose))
-    chkErr(setOptionString(MPVOption.Window.keepaspect, "yes", level: .verbose))
-    chkErr(setOptionString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
+    // so we put them here. Each forced option is gated on MPVSentinel so a
+    // user who has explicitly set the key in mpv.conf keeps their value
+    // instead of being clobbered. See SPEC requirement 2 / PLAN Phase 2.
+    // NOTE: vo=libmpv is set PRE-init above (before mpv_initialize) because
+    // force-window=immediate spawns the VO thread during init.
+    if !MPVSentinel.wasSetInConfig(MPVOption.Window.keepaspect) {
+      chkErr(setOptionString(MPVOption.Window.keepaspect, "yes", level: .verbose))
+    }
+    if !MPVSentinel.wasSetInConfig(MPVOption.Video.gpuHwdecInterop) {
+      chkErr(setOptionString(MPVOption.Video.gpuHwdecInterop, "auto", level: .verbose))
+    }
+  }
+
+  /// Sync mpv's effective option values back into IINA's UserDefaults so
+  /// the Settings UI reflects what the user's `mpv.conf` actually resolved.
+  /// Only writes when the IINA preference is still at its empty/default
+  /// value — user-set IINA preferences always win over mpv.conf.
+  /// Called by `PlayerCore.openFile` after the file load command so mpv
+  /// is fully initialized. Idempotent. See SPEC requirement 6.
+  func syncMPVConfigToPreferences() {
+    // String options: only sync if IINA pref is empty.
+    let stringPairs: [(Preference.Key, String)] = [
+      (.libplaceboOpts, MPVOption.GPURendererOptions.libplaceboOpts),
+      (.gpuContext, MPVOption.GPURendererOptions.gpuContext),
+      (.osdOnSeek, MPVOption.OSD.osdOnSeek),
+      (.osdPlayingMsg, MPVOption.OSD.osdPlayingMsg),
+      (.subFilePaths, MPVOption.Subtitles.subFilePaths),
+      (.demuxerLavfFormat, MPVOption.Demuxer.demuxerLavfFormat),
+      (.autofitLarger, MPVOption.Window.autofitLarger),
+      (.cursorAutohide, MPVOption.Window.cursorAutohide),
+      (.imageDisplayDuration, MPVOption.Window.imageDisplayDuration),
+    ]
+    for (prefKey, mpvName) in stringPairs {
+      let current = Preference.string(for: prefKey) ?? ""
+      if current.isEmpty {
+        if let mpvValue = getString(mpvName), !mpvValue.isEmpty {
+          // Don't write mpv's internal sentinel values like "<no>".
+          if !mpvValue.hasPrefix("<") {
+            Preference.set(mpvValue, for: prefKey)
+            log("Synced \(mpvName)=\(mpvValue) from mpv.conf to IINA preference")
+          }
+        }
+      }
+    }
+
+    // Int options: only sync if IINA pref is 0 (our default).
+    let intPairs: [(Preference.Key, String)] = [
+      (.iccForceContrast, MPVOption.GPURendererOptions.iccForceContrast),
+      (.vdLavcSoftwareFallback, MPVOption.Video.vdLavcSoftwareFallback),
+      (.osdBarH, MPVOption.OSD.osdBarH),
+      (.osdFontSize, MPVOption.OSD.osdFontSize),
+      (.osdDuration, MPVOption.OSD.osdDuration),
+      (.osdPlayingMsgDuration, MPVOption.OSD.osdPlayingMsgDuration),
+    ]
+    for (prefKey, mpvName) in intPairs {
+      if Preference.integer(for: prefKey) == 0 {
+        let mpvValue = getInt(mpvName)
+        if mpvValue != 0 {
+          Preference.set(mpvValue, for: prefKey)
+          log("Synced \(mpvName)=\(mpvValue) from mpv.conf to IINA preference")
+        }
+      }
+    }
+
+    // Float options: only sync if IINA pref is 0 (our default).
+    let floatPairs: [(Preference.Key, String)] = [
+      (.scaleAntiring, MPVOption.GPURendererOptions.scaleAntiring),
+      (.hdrPeakPercentile, MPVOption.GPURendererOptions.hdrPeakPercentile),
+      (.hdrContrastRecovery, MPVOption.GPURendererOptions.hdrContrastRecovery),
+      (.targetPeak, MPVOption.GPURendererOptions.targetPeak),
+      (.osdBarBorderSize, MPVOption.OSD.osdBarBorderSize),
+      (.osdBorderSize, MPVOption.OSD.osdBorderSize),
+    ]
+    for (prefKey, mpvName) in floatPairs {
+      if Preference.float(for: prefKey) == 0 {
+        let mpvValue = getDouble(mpvName)
+        if mpvValue != 0 {
+          Preference.set(Float(mpvValue), for: prefKey)
+          log("Synced \(mpvName)=\(mpvValue) from mpv.conf to IINA preference")
+        }
+      }
+    }
+
+    // Bool options: only sync if IINA pref is false (our default) and mpv is true.
+    // We don't sync false→false or true→false to avoid surprising the user.
+    let boolPairs: [(Preference.Key, String)] = [
+      (.correctDownscaling, MPVOption.GPURendererOptions.correctDownscaling),
+      (.linearDownscaling, MPVOption.GPURendererOptions.linearDownscaling),
+      (.sigmoidUpscaling, MPVOption.GPURendererOptions.sigmoidUpscaling),
+      (.hdrComputePeak, MPVOption.GPURendererOptions.hdrComputePeak),
+      (.targetColorspaceHint, MPVOption.GPURendererOptions.targetColorspaceHint),
+      (.blendSubtitles, MPVOption.GPURendererOptions.blendSubtitles),
+      (.vdLavcDr, MPVOption.Video.vdLavcDr),
+      (.osdFractions, MPVOption.OSD.osdFractions),
+      (.adLavcDownmix, MPVOption.Audio.adLavcDownmix),
+      (.forceSeekable, MPVOption.Demuxer.forceSeekable),
+      (.border, MPVOption.Window.border),
+      (.hidpiWindowScale, MPVOption.Window.hidpiWindowScale),
+    ]
+    for (prefKey, mpvName) in boolPairs {
+      if !Preference.bool(for: prefKey) {
+        if getFlag(mpvName) {
+          Preference.set(true, for: prefKey)
+          log("Synced \(mpvName)=yes from mpv.conf to IINA preference")
+        }
+      }
+    }
   }
 
   /// Initialize the `mpv` renderer.
@@ -887,6 +1185,21 @@ class MPVController: NSObject {
     let str: String? = cstr == nil ? nil : String(cString: cstr!)
     mpv_free(cstr)
     return str
+  }
+
+  /// Cached value of mpv's `osd-font` option, read once after `mpv_initialize`
+  /// resolves the user's `mpv.conf`. Used by `MainWindowController` to resolve
+  /// IINA's native OSD label font. Returns `nil` if the option is at mpv's
+  /// default (unset). See SPEC `mpv-config-driven-refactor` Phase 6.
+  private var _cachedOsdFont: String?
+  /// Set to `true` once `_cachedOsdFont` has been populated.
+  private var osdFontCached = false
+  var osdFontFromMpv: String? {
+    if !osdFontCached {
+      _cachedOsdFont = getString(MPVOption.OSD.osdFont)
+      osdFontCached = true
+    }
+    return _cachedOsdFont
   }
 
   /** Get filter. only "af" or "vf" is supported for name */
@@ -1227,6 +1540,28 @@ class MPVController: NSObject {
       // events fast enough. As IINA has been ignoring this event we don't know if this has been
       // occurring. For now log this as an error. May want to switch to an alert in the future.
       log("Critical failure, mpv events lost, queue overflowed", level: .error)
+
+    case MPV_EVENT_CLIENT_MESSAGE:
+      // mpv's `script-message` command is delivered via the C API as
+      // MPV_EVENT_CLIENT_MESSAGE. The first argument (args[0]) is the
+      // message name used for dispatch; args[1...] are the payload.
+      // See SPEC requirement 9 and PLAN Phase 4.
+      let dataOpaquePtr = OpaquePointer(event.pointee.data)
+      if let msg = UnsafeMutablePointer<mpv_event_client_message>(dataOpaquePtr)?.pointee {
+        let numArgs = Int(msg.num_args)
+        let allArgs: [String] = (0..<numArgs).compactMap { i in
+          guard let cStr = msg.args[i] else { return nil }
+          return String(cString: cStr)
+        }
+        guard allArgs.count >= 1 else { break }
+        let name = allArgs[0]
+        let payload = Array(allArgs.dropFirst())
+        // The event loop runs on the controller background queue.
+        // NotificationCenter subscribers may touch UI, so dispatch to main.
+        DispatchQueue.main.async {
+          MpvScriptMessageCenter.shared.handle(name: name, args: payload)
+        }
+      }
 
     default: break
       // let eventName = String(cString: mpv_event_name(eventId))
@@ -1615,6 +1950,21 @@ class MPVController: NSObject {
     return mpv_set_option_string(mpv, name, value)
   }
 
+  /// Apply mpv's `config-dir` (and the related `config`, `load-auto-profiles`,
+  /// `load-scripts` toggles) to the given path. The two `load-*` toggles are
+  /// the mpv defaults, but pinning them here removes ambiguity about whether
+  /// the bundled `scripts/` and `[profile]` sections will be honoured at
+  /// runtime. See SPEC requirement 1 and PLAN Phase 1.
+  private func setConfigDir(path: String) {
+    chkErr(setOptionString("config", "yes", level: .verbose))
+    chkErr(setOptionString(MPVOption.ProgramBehavior.loadAutoProfiles, "yes", level: .verbose))
+    chkErr(setOptionString(MPVOption.ProgramBehavior.loadScripts, "yes", level: .verbose))
+    let status = setOptionString(MPVOption.ProgramBehavior.configDir, path)
+    if status < 0 {
+      Utility.showAlert("extra_option.config_folder", arguments: [path], disableMenus: true)
+    }
+  }
+
   private func setOptionalOptionColor(_ name: String, _ value: String?,
                                        level: Logger.Level = .debug,
                                        verboseIfDefault: Bool = false) -> Int32 {
@@ -1634,7 +1984,7 @@ class MPVController: NSObject {
 
   private func setOptionalOptionString(_ name: String, _ value: String?, level: Logger.Level = .debug,
                                        verboseIfDefault: Bool = false) -> Int32 {
-    guard let value = value else { return 0 }
+    guard let value = value, !value.isEmpty else { return 0 }
     return setOptionString(name, value, level: level, verboseIfDefault: verboseIfDefault)
   }
 
@@ -1655,6 +2005,7 @@ class MPVController: NSObject {
   private func setUserOption(_ key: Preference.Key, type: UserOptionType, forName name: String,
                              sync: Bool = true, level: Logger.Level = .debug,
                              verboseIfDefault: Bool = false,
+                             skipIfDefault: Bool = false,
                              transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
 
@@ -1662,16 +2013,25 @@ class MPVController: NSObject {
 
     switch type {
     case .int:
-      code = setOptionInt(name, Preference.integer(for: key), level: level,
-                          verboseIfDefault: verboseIfDefault)
+      let value = Preference.integer(for: key)
+      if !(skipIfDefault && value == 0) {
+        code = setOptionInt(name, value, level: level,
+                            verboseIfDefault: verboseIfDefault)
+      }
 
     case .float:
-      code = setOptionFloat(name, Preference.float(for: key), level: level,
-                            verboseIfDefault: verboseIfDefault)
+      let value = Preference.float(for: key)
+      if !(skipIfDefault && value == 0) {
+        code = setOptionFloat(name, value, level: level,
+                              verboseIfDefault: verboseIfDefault)
+      }
 
     case .bool:
-      code = setOptionFlag(name, Preference.bool(for: key), level: level,
-                           verboseIfDefault: verboseIfDefault)
+      let value = Preference.bool(for: key)
+      if !(skipIfDefault && !value) {
+        code = setOptionFlag(name, value, level: level,
+                             verboseIfDefault: verboseIfDefault)
+      }
 
     case .string:
       code = setOptionalOptionString(name, Preference.string(for: key), level: level,
@@ -1733,7 +2093,7 @@ class MPVController: NSObject {
         setFlag(info.optionName, value)
 
       case .string:
-        if let value = Preference.string(for: info.prefKey) {
+        if let value = Preference.string(for: info.prefKey), !value.isEmpty {
           setString(info.optionName, value)
         }
 
@@ -1828,7 +2188,9 @@ class MPVController: NSObject {
   /// Searches the list of user configured `mpv` options and returns `true` if the given option is present.
   /// - Parameter option: Option to look for.
   /// - Returns: `true` if the `mpv` option is found, `false` otherwise.
-  private func userOptionsContains(_ option: String) -> Bool {
+  /// SPEC ui-driven-mpv-options Phase 3: changed from private to internal
+  /// so PlayerCore can guard the force-window hardcode with this check.
+  func userOptionsContains(_ option: String) -> Bool {
     guard Preference.bool(for: .enableAdvancedSettings),
           let userOptions = Preference.value(for: .userOptions) as? [[String]] else { return false }
     return userOptions.contains { $0[0] == option }

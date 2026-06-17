@@ -41,6 +41,7 @@ class SettingsPageVideo: SettingsPage {
           .hasDescription()
         SettingsItem.General(title: .hardwareDecoderLabel)
           .image(name: "cpu")
+          .mpvName("hwdec")
           .withDetailView(
             SettingsAccessory.Selection()
               .bindTo(.hardwareDecoder, ofType: Preference.HardwareDecoderOption.self)

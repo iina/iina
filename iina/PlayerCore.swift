@@ -1467,7 +1467,6 @@ class PlayerCore: NSObject {
         setTrack(currentSub.id, forType: .sub)
       }
     }
-    mainWindow?.sidebars.quickSettingView.reload()
   }
 
   func setAudioDelay(_ delay: Double) {
@@ -2380,12 +2379,12 @@ class PlayerCore: NSObject {
 
   func secondarySubDelayChanged(_ delay: Double) {
     sendOSD(.secondSubDelay(delay))
-    postNotification(.iinaSecondSubDelayChanged)
+    postNotification(.iinaSubDelayChanged)
   }
 
   func secondarySubPosChanged(_ position: Double) {
     sendOSD(.secondSubPos(position))
-    postNotification(.iinaSecondSubPositionChanged)
+    postNotification(.iinaSubPositionChanged)
   }
 
   func secondarySidChanged() {
@@ -2402,7 +2401,7 @@ class PlayerCore: NSObject {
     guard info.isSecondSubVisible != visible else { return }
     info.isSecondSubVisible = visible
     sendOSD(visible ? .secondSubVisible : .secondSubHidden)
-    postNotification(.iinaSecondSubVisibilityChanged)
+    postNotification(.iinaSubVisibilityChanged)
     if isInMiniPlayer {
       miniPlayer.refreshArtworkVisibility()
     }

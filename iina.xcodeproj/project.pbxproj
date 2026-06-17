@@ -328,6 +328,7 @@
 		D1B4E24E2A3AFC9100E36F1D /* MiniPlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */; };
 		E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = E301EFD921312AB300BC8588 /* KeychainAccess.swift */; };
 		E30D2EBD21F5FD2600E1FF0D /* PluginOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */; };
+		E318D9092FE096A10025DBC5 /* SidebarSubtitlesPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = E318D9082FE096960025DBC5 /* SidebarSubtitlesPane.swift */; };
 		E31E62FB2FD3851A005527B2 /* LayoutValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FA2FD38516005527B2 /* LayoutValue.swift */; };
 		E31E62FD2FD8F4C9005527B2 /* OSCBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */; };
 		E31E62FF2FD90288005527B2 /* OSCFloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */; };
@@ -1878,6 +1879,7 @@
 		E1298BD021A517CA00B646AD /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		E301EFD921312AB300BC8588 /* KeychainAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainAccess.swift; sourceTree = "<group>"; };
 		E30D2EBC21F5FD2600E1FF0D /* PluginOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginOverlayView.swift; sourceTree = "<group>"; };
+		E318D9082FE096960025DBC5 /* SidebarSubtitlesPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSubtitlesPane.swift; sourceTree = "<group>"; };
 		E31E62FA2FD38516005527B2 /* LayoutValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutValue.swift; sourceTree = "<group>"; };
 		E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCBottomView.swift; sourceTree = "<group>"; };
 		E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCFloatingView.swift; sourceTree = "<group>"; };
@@ -2959,6 +2961,7 @@
 				E3D94E7F2FD0519600B08618 /* SidebarLayoutPane.swift */,
 				E3C228062FDF4E02009A1A89 /* SidebarVideoPane.swift */,
 				E3C2280A2FDFB7C1009A1A89 /* SidebarAudioPane.swift */,
+				E318D9082FE096960025DBC5 /* SidebarSubtitlesPane.swift */,
 				E3A239B02FCB4D0300CE6ACC /* AnimatedTabViewController.swift */,
 				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
 				8400D5CB1E1AB2F9006785F5 /* QuickSettingViewController.xib */,
@@ -3522,6 +3525,7 @@
 				348F71962DE2A819006C587D /* MPVCommandWrappers.swift in Sources */,
 				51C1BA3A291CA76700C1208A /* InfoDictionary.swift in Sources */,
 				E301EFDA21312AB300BC8588 /* KeychainAccess.swift in Sources */,
+				E318D9092FE096A10025DBC5 /* SidebarSubtitlesPane.swift in Sources */,
 				8434BAA71D5DF2DA003BECF2 /* Extensions.swift in Sources */,
 				E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */,
 				847557141F405F8C0006B0FF /* MainWindowMenuActions.swift in Sources */,

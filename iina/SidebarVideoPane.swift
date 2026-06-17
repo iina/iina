@@ -27,7 +27,7 @@ class SidebarVideoPane: SidebarScrollView {
       player: player,
       observedKeys: [.iinaVIDChanged]
     )) {
-      $0.padding(.horizontal, .vertical(.sidebarContainerPadding))
+      $0.padding(.horizontal, .vertical)
     })
 
     stack.addArrangedSubview(Container(createSettingsView()) {
@@ -47,7 +47,7 @@ class SidebarVideoPane: SidebarScrollView {
     })
 
     documentView!.addSubview(stack)
-    stack.padding(.horizontal(.sidebarMargin), .vertical(4))
+    stack.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
   }
   
   required init?(coder: NSCoder) {

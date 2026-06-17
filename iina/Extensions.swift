@@ -433,21 +433,36 @@ extension NSColor {
     return "\(red)/\(green)/\(blue)/\(alpha)"
   }
 
-  convenience init?(mpvColorString: String) {
-    let splitted = mpvColorString.split(separator: "/").map { (seq) -> Double? in
-      return Double(String(seq))
-    }
-    // check nil
-    if (!splitted.contains {$0 == nil}) {
-      if splitted.count == 3 {  // if doesn't have alpha value
-        self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(1))
-      } else if splitted.count == 4 {  // if has alpha value
-        self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(splitted[3]!))
+  convenience init?(mpvColorString str: String) {
+    // mpv can return hex color string
+    if str.starts(with: "#") {
+      let hex = str.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+      let scanner = Scanner(string: hex)
+      var rgb: UInt64 = 0
+      scanner.scanHexInt64(&rgb)
+
+      let r = Double((rgb >> 32) & 0xFF) / 255
+      let g = Double((rgb >> 16) & 0xFF) / 255
+      let b = Double((rgb >> 8) & 0xFF) / 255
+      let a = Double(rgb & 0xFF) / 255
+
+      self.init(red: r, green: g, blue: b, alpha: a)
+    } else {
+      let splitted = str.split(separator: "/").map { (seq) -> Double? in
+        return Double(String(seq))
+      }
+      // check nil
+      if (!splitted.contains {$0 == nil}) {
+        if splitted.count == 3 {  // if doesn't have alpha value
+          self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(1))
+        } else if splitted.count == 4 {  // if has alpha value
+          self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(splitted[3]!))
+        } else {
+          return nil
+        }
       } else {
         return nil
       }
-    } else {
-      return nil
     }
   }
 }

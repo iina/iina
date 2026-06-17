@@ -30,11 +30,14 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     tableView.addTableColumn(NSTableColumn(identifier: .trackName))
     tableView.headerView = nil
     tableView.backgroundColor = .clear
+    tableView.gridStyleMask = [.solidHorizontalGridLineMask]
 
     translatesAutoresizingMaskIntoConstraints = false
     documentView = tableView
     drawsBackground = false
-    size(height: 75)
+    wantsLayer = true
+    layer?.cornerRadius = 8
+    size(height: 98)
 
     player.observe(.iinaTracklistChanged) { [weak self] _ in
       self?.tableView.reloadData()
@@ -55,7 +58,7 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-    return 22
+    return 26
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -107,11 +110,12 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
       selectedIndicator.translatesAutoresizingMaskIntoConstraints = false
       super.init(frame: frameRect)
 
-      let textField = NSTextField(wrappingLabelWithString: "")
+      let textField = NSTextField(labelWithString: "")
       textField.isSelectable = false
       textField.translatesAutoresizingMaskIntoConstraints = false
+      textField.lineBreakMode = .byTruncatingMiddle
       addSubview(textField)
-      textField.padding(.leading(12), .trailing, .vertical(2))
+      textField.padding(.leading(12), .trailing).center(.y)
       self.textField = textField
 
       selectedIndicator.wantsLayer = true
@@ -120,7 +124,7 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
         layer.cornerRadius = 2
       }
       addSubview(selectedIndicator)
-      selectedIndicator.padding(.leading, .vertical(2))
+      selectedIndicator.padding(.leading, .vertical(5))
         .size(width: 4)
     }
     

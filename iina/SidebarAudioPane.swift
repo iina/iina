@@ -26,7 +26,7 @@ class SidebarAudioPane: SidebarScrollView {
       player: player,
       observedKeys: [.iinaAIDChanged]
     )) {
-      $0.padding(.horizontal, .vertical(.sidebarContainerPadding))
+      $0.padding(.horizontal, .vertical)
     })
 
     let loadExternalAudioBtn = ui.button(
@@ -49,7 +49,7 @@ class SidebarAudioPane: SidebarScrollView {
     })
 
     documentView!.addSubview(stack)
-    stack.padding(.horizontal(.sidebarMargin), .vertical(4))
+    stack.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
   }
 
   @objc private func loadExternalAudioAction(_ sender: NSButton) {

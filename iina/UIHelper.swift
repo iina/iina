@@ -38,8 +38,12 @@ class UIHelper {
     return textField
   }
 
-  func label(_ key: String, font: NSFont? = nil, isSmall: Bool = false, isSecondary: Bool = false) -> NSTextField {
-    let textField = NSTextField(labelWithString: localized(key))
+  func label(_ key: String, wrapping: Bool = false, font: NSFont? = nil, isSmall: Bool = false, isSecondary: Bool = false) -> NSTextField {
+    let textField = if wrapping {
+      NSTextField(wrappingLabelWithString: localized(key))
+    } else {
+      NSTextField(labelWithString: localized(key))
+    }
     textField.translatesAutoresizingMaskIntoConstraints = false
     if isSmall {
       textField.controlSize = .small
@@ -141,6 +145,13 @@ class UIHelper {
     view.widthAnchor.constraint(greaterThanOrEqualToConstant: minWidth).isActive = true
     view.setContentHuggingPriority(.defaultLow, for: .horizontal)
     return view
+  }
+
+  func separator() -> NSBox {
+    let box = NSBox(frame: .zero)
+    box.translatesAutoresizingMaskIntoConstraints = false
+    box.boxType = .separator
+    return box
   }
 
   func image(_ symbol: String..., size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil, scaleUp: Bool = false) -> NSImageView {

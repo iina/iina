@@ -153,11 +153,8 @@ extension Notification.Name {
   static let iinaAudioDelayChanged = Notification.Name("iinaAudioDelayChanged")
   static let iinaSubScaleChanged = Notification.Name("iinaSubScaleChanged")
   static let iinaSubPositionChanged = Notification.Name("iinaSubPositionChanged")
-  static let iinaSecondSubPositionChanged = Notification.Name("iinaSecondSubPositionChanged")
   static let iinaSubDelayChanged = Notification.Name("iinaSubDelayChanged")
-  static let iinaSecondSubDelayChanged = Notification.Name("iinaSecondSubDelayChanged")
   static let iinaSubVisibilityChanged = Notification.Name("iinaSubVisibilityChanged")
-  static let iinaSecondSubVisibilityChanged = Notification.Name("iinaSecondSubVisibilityChanged")
 
   static let iinaKeyBindingInputChanged = Notification.Name("IINAKeyBindingInputChanged")
   static let iinaFileLoaded = Notification.Name("IINAFileLoaded")

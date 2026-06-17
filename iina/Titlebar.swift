@@ -25,7 +25,7 @@ class Titlebar: NSView {
 
   let useSystemTitle = false
 
-  var isTransparant = false {
+  var isTransparent = false {
     didSet {
       updateShadow()
     }
@@ -298,7 +298,7 @@ class Titlebar: NSView {
     menu.autoenablesItems = false
 
     let url = URL(fileURLWithPath: filename)
-    let point = NSPoint(x: -30, y: 0)  // make sure the first menu item is at the title's positon
+    let point = NSPoint(x: -30, y: 0)  // make sure the first menu item is at the title's position
 
     var current = url.standardizedFileURL
     var components: [URL] = []
@@ -330,7 +330,7 @@ class Titlebar: NSView {
   }
 
   private func updateShadow() {
-    if isTransparant {
+    if isTransparent {
       let shadow = NSShadow()
       shadow.shadowColor = .black
       shadow.shadowBlurRadius = 8

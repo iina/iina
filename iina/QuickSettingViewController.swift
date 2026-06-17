@@ -9,20 +9,17 @@
 import Cocoa
 
 fileprivate let tabConfig = [
-  ("Layout", NSImage.sf("paintpalette.fill"), 0),
+  ("Layout", NSImage.sf("paintbrush.fill"), 0),
   ("Video", NSImage.tabVideo, 1),
   ("Audio", NSImage.tabAudio, 2),
   ("Subtitles", NSImage.tabSub, 3),
 ]
 
-class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, SidebarViewController {
-  override var nibName: NSNib.Name {
-    return NSNib.Name("QuickSettingViewController")
-  }
-
+class QuickSettingViewController: NSViewController, SidebarViewController {
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
     self.player = mainWindow.player
+
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -114,6 +111,11 @@ class QuickSettingViewController: NSViewController, NSTableViewDataSource, NSTab
     didSet {
       topConstraint.constant = downShift
     }
+  }
+
+  override func loadView() {
+    self.view = NSView()
+    view.translatesAutoresizingMaskIntoConstraints = false
   }
 
   override func viewDidLoad() {

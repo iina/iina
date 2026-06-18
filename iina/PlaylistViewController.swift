@@ -206,9 +206,9 @@ class PlaylistViewController: NSViewController, NSTableViewDataSource, NSTableVi
     guard isViewLoaded else { return }
     let loopMode = player.getLoopMode()
     loopBtn.image = switch loopMode {
-    case .off:  NSImage.sf("repeat")!
-    case .file: .customRepeat1RectangleFill
-    default:    .customRepeatRectangleFill
+    case .off:  .sf("repeat")
+    case .file: .sf("custom.repeat.1.rectangle.fill")
+    default:    .sf("custom.repeat.rectangle.fill")
     }
   }
 

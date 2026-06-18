@@ -79,7 +79,7 @@ fileprivate class PluginInstallView: SettingsAccessory.Base {
 
     let btnStackView = ui.hStack(githubBtn, localBtn)
 
-    let installLabel = ui.label(.text_YouCanInstallANew).makeMultiLine()
+    let installLabel = ui.smallLabel(bindTo: .text_YouCanInstallANew).makeMultiLine()
 
     let stackView = ui.vStack(installLabel, btnStackView)
     stackView.alignment = .leading

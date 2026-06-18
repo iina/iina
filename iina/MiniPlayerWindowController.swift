@@ -65,10 +65,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }()
 
   var playlistView: PlaylistViewController {
-    return player.mainWindow.playlistView
+    return player.mainWindow.sidebars.playlistView
   }
 
-  override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView] as [NSView?]}
+  override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView]}
 
   // MARK: - Initialization
 
@@ -148,12 +148,12 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   override func scrollWheel(with event: NSEvent) {
-    if isMouseEvent(event, inAnyOf: [playSlider]) && playSlider.isEnabled {
+    if event.inAnyOf([playSlider]) && playSlider.isEnabled {
       seekOverride = true
-    } else if isMouseEvent(event, inAnyOf: [volumeSliderView]) && volumeSlider.isEnabled {
+    } else if event.inAnyOf([volumeSliderView]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
-      guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
+      guard !event.inAnyOf([backgroundView]) else { return }
     }
 
     super.scrollWheel(with: event)

@@ -214,7 +214,7 @@ extension MainMenuActionHandler {
   @objc func menuChangeCrop(_ sender: NSMenuItem) {
     if let cropStr = sender.representedObject as? String {
       if cropStr == "Custom" {
-        player.mainWindow.hideSideBar {
+        player.mainWindow.sidebars.hideAllSideBars {
           self.player.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
         }
         return
@@ -481,6 +481,6 @@ extension MainMenuActionHandler {
   // MARK: - Plugin
 
   @objc func showPluginsPanel(_ sender: NSMenuItem) {
-    player.mainWindow.showPluginSidebar(tab: nil)
+    player.mainWindow.sidebars.showPlugin(tab: nil)
   }
 }

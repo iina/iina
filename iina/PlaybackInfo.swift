@@ -83,11 +83,8 @@ class PlaybackInfo {
 
   var currentURL: URL? {
     didSet {
-      if let url = currentURL {
-        mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
-      } else {
-        mpvMd5 = nil
-      }
+      guard currentURL == nil else { return }
+      mpvMd5 = nil
     }
   }
   var isNetworkResource: Bool = false

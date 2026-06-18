@@ -50,6 +50,10 @@ struct Preference {
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = Key("themeMaterial")
 
+    static let useLiquidGlassOSD = Key("useLiquidGlassOSD")
+    static let useLiquidGlassOSC = Key("useLiquidGlassOSC")
+    static let useLiquidGlassSidebar = Key("useLiquidGlassSidebar")
+
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = Key("softVolume")
 
@@ -164,6 +168,13 @@ struct Preference {
     static let disableAnimations = Key("disableAnimations")
 
     static let unlockWindowAspectRatio = Key("unlockWindowAspectRatio")
+    static let compactUI = Key("compactUI")
+    static let edgeToEdgeVideo = Key("edgeToEdgeVideo")
+    static let dockedControlBarAndTitlebar = Key("dockedControlBarAndTitlebar")
+
+    static let sidebarSettingsDisplayAtLeading = Key("sidebarSettingsDisplayAtLeading")
+    static let sidebarPlaylistDisplayAtLeading = Key("sidebarPlaylistDisplayAtLeading")
+    static let sidebarPluginsDisplayAtLeading = Key("sidebarPluginsDisplayAtLeading")
 
     // Codec
 
@@ -420,7 +431,7 @@ struct Preference {
     }
   }
 
-  enum OSCPosition: Int, InitializingFromKey {
+  enum OSCPosition: Int, InitializingFromKey, CaseIterable {
     case floating = 0
     case top
     case bottom
@@ -953,6 +964,32 @@ struct Preference {
     }
   }
 
+  // MARK: - Getters
+
+  static var unlockWindowAspectRatio: Bool {
+    Preference.bool(for: .unlockWindowAspectRatio) || !Preference.bool(for: .edgeToEdgeVideo)
+  }
+
+  static var isDocked: Bool {
+    !Preference.bool(for: .edgeToEdgeVideo) && Preference.bool(for: .dockedControlBarAndTitlebar)
+  }
+
+  enum LiquidGlassOption {
+    case osc, osd, sidebar
+  }
+
+  static func liquidGlass(_ component: LiquidGlassOption) -> Bool {
+    guard #available(macOS 26.0, *) else { return false }
+    return switch component {
+    case .osc:
+      Preference.bool(for: .useLiquidGlassOSC)
+    case .osd:
+      Preference.bool(for: .useLiquidGlassOSD)
+    case .sidebar:
+      Preference.bool(for: .useLiquidGlassSidebar)
+    }
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -977,6 +1014,9 @@ struct Preference {
     .playlistWidth: 270,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
+    .useLiquidGlassOSD: true,
+    .useLiquidGlassOSC: true,
+    .useLiquidGlassSidebar: true,
     .enableOSD: true,
     .disableOSDFileStartMsg: false,
     .disableOSDPauseResumeMsgs: false,
@@ -1035,6 +1075,13 @@ struct Preference {
     .togglePipByMinimizingWindowForVideoOnly: false,
     .disableAnimations: false,
     .unlockWindowAspectRatio: false,
+    .compactUI: false,
+    .edgeToEdgeVideo: true,
+    .dockedControlBarAndTitlebar: false,
+
+    .sidebarSettingsDisplayAtLeading: false,
+    .sidebarPlaylistDisplayAtLeading: false,
+    .sidebarPluginsDisplayAtLeading: false,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,
@@ -1551,5 +1598,48 @@ struct Preference {
   ///   - level: The log level of the message.
   private static func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
+  }
+}
+
+
+// - MARK: Observer
+
+extension Preference {
+  class Observer: NSObject {
+    private var observedKeys: [Key: (Key) -> Void] = [:]
+
+    func add(_ key: Key, runNow: Bool = false, block: @escaping (Key) -> Void) {
+      if observedKeys[key] == nil {
+        UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: [.new], context: nil)
+      }
+      if runNow {
+        block(key)
+      }
+      observedKeys[key] = block
+    }
+
+    func addAll(_ keys: Key..., runNow: Bool = false, block: @escaping (Key) -> Void) {
+      addAll(keys, runNow: runNow, block: block)
+    }
+
+    func addAll(_ keys: [Key], runNow: Bool = false, block: @escaping (Key) -> Void) {
+      for key in keys {
+        add(key, runNow: runNow, block: block)
+      }
+    }
+
+    deinit {
+      observedKeys.keys.forEach {
+        UserDefaults.standard.removeObserver(self, forKeyPath: $0.rawValue)
+        print("removed \($0.rawValue)")
+      }
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+      guard let keyPath,
+            let key = Key(rawValue: keyPath),
+            let block = observedKeys[key] else { return }
+      block(key)
+    }
   }
 }

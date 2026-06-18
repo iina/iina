@@ -67,6 +67,7 @@ private extension NSUserInterfaceItemIdentifier {
 fileprivate class ConfigEditor: SettingsAccessory.Base {
   fileprivate typealias KC = PrefKeyBindingViewController
 
+  private let prefObserver = Preference.Observer()
   let chooserView: NSView
   let editorView: NSView
 
@@ -204,20 +205,11 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
     editorStackView.padding(.leading(16), .trailing, .vertical)
 
     NotificationCenter.default.addObserver(forName: .iinaKeyBindingChanged, object: nil, queue: .main, using: saveToConfFile)
-    UserDefaults.standard.addObserver(
-      self,
-      forKeyPath: Preference.Key.displayKeyBindingRawValues.rawValue,
-      options: [.new, .old],
-      context: nil
-    )
 
-    loadConfigFile(Preference.string(for: .currentInputConfigName), true)
-  }
-
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    if keyPath == Preference.Key.displayKeyBindingRawValues.rawValue {
+    prefObserver.add(.displayKeyBindingRawValues) { [unowned self] _ in
       kbTableView.reloadData()
     }
+    loadConfigFile(Preference.string(for: .currentInputConfigName), true)
   }
 
   /// This function firstly reloads the table data, select the config file row, then load the config file.

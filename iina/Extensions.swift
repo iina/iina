@@ -433,21 +433,36 @@ extension NSColor {
     return "\(red)/\(green)/\(blue)/\(alpha)"
   }
 
-  convenience init?(mpvColorString: String) {
-    let splitted = mpvColorString.split(separator: "/").map { (seq) -> Double? in
-      return Double(String(seq))
-    }
-    // check nil
-    if (!splitted.contains {$0 == nil}) {
-      if splitted.count == 3 {  // if doesn't have alpha value
-        self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(1))
-      } else if splitted.count == 4 {  // if has alpha value
-        self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(splitted[3]!))
+  convenience init?(mpvColorString str: String) {
+    // mpv can return hex color string
+    if str.starts(with: "#") {
+      let hex = str.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+      let scanner = Scanner(string: hex)
+      var rgb: UInt64 = 0
+      scanner.scanHexInt64(&rgb)
+
+      let r = Double((rgb >> 32) & 0xFF) / 255
+      let g = Double((rgb >> 16) & 0xFF) / 255
+      let b = Double((rgb >> 8) & 0xFF) / 255
+      let a = Double(rgb & 0xFF) / 255
+
+      self.init(red: r, green: g, blue: b, alpha: a)
+    } else {
+      let splitted = str.split(separator: "/").map { (seq) -> Double? in
+        return Double(String(seq))
+      }
+      // check nil
+      if (!splitted.contains {$0 == nil}) {
+        if splitted.count == 3 {  // if doesn't have alpha value
+          self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(1))
+        } else if splitted.count == 4 {  // if has alpha value
+          self.init(red: CGFloat(splitted[0]!), green: CGFloat(splitted[1]!), blue: CGFloat(splitted[2]!), alpha: CGFloat(splitted[3]!))
+        } else {
+          return nil
+        }
       } else {
         return nil
       }
-    } else {
-      return nil
     }
   }
 }
@@ -673,9 +688,9 @@ extension NSImage {
   /// Try to find a SF Symbol. This function will iterate through the provided list of SF Symbol name list to and return the
   /// first available SF Symbol at runtime.
   ///
-  /// Use this function only for stock SF Symbol. If a symbol is customized and imported from SF Symbol.app, it is available for all
-  /// systems, so we should use `NSImage(named:)`or the auto generated names by Xcode directly. Preferably, we use stock SF Symbols;
-  /// the next tier is customized and imported SF Symbols; we only use a foreign symbol if that is absolutely necessary.
+  /// Use this function only for stock SF Symbols and imported/customized symbols. If none of the names are found in the
+  /// system symbol catalog, the list of strings will be used to search the bundled symbols. Preferably, use stock SF
+  /// Symbols; the next tier is customized and imported SF Symbols; use a non-SF symbol only if absolutely necessary.
   ///
   /// - Parameters:
   ///   - names: A list name of the SF Symbol. The name requires higher SF Symbol version must be at front, with fallback SF Symbol
@@ -687,6 +702,11 @@ extension NSImage {
         if let configuration, let configured = symbol.withSymbolConfiguration(configuration) {
           return configured
         }
+        return symbol
+      }
+    }
+    for name in names {
+      if let symbol = NSImage(named: name) {
         return symbol
       }
     }
@@ -986,6 +1006,14 @@ extension Timer {
     let timer = Timer(timeInterval: interval, repeats: repeats, block: block)
     RunLoop.main.add(timer, forMode: .common)
     return timer
+  }
+}
+
+extension NSEvent {
+  func inAnyOf(_ views: [NSView?]) -> Bool {
+    return views.compactMap{ $0 }.contains { view in
+      view.isMousePoint(view.convert(locationInWindow, from: nil), in: view.bounds)
+    }
   }
 }
 

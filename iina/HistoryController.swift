@@ -91,16 +91,18 @@ class HistoryController: NSObject {
   ///   - url: URL of the media being played.
   ///   - duration: Total duration of the media.
   ///   - title: Title of the media (if available).
-  func add(_ url: URL, duration: Double, title: String?) {
+  ///   - ignorePath: When `true`, only the URL's filename will be used for the sum if the URL does not contain a scheme.
+  func add(_ url: URL, duration: Double, title: String?, _ ignorePath: Bool) {
     guard Preference.bool(for: .recordPlaybackHistory) else { return }
     $tasksOutstanding.withLock { $0 += 1 }
     queue.async { [self] in
+      let mpvMd5 = Utility.mpvWatchLaterMd5(url, ignorePath)
       $history.withLock { history in
-        if let existingItem = history.first(where: { $0.mpvMd5 == url.path.md5 }),
+        if let existingItem = history.first(where: { $0.mpvMd5 == mpvMd5 }),
            let index = history.firstIndex(of: existingItem) {
           history.remove(at: index)
         }
-        let entry = PlaybackHistory(url: url, duration: duration, title: title)
+        let entry = PlaybackHistory(url: url, duration: duration, title: title, mpvMd5: mpvMd5)
         history.insert(entry, at: 0)
         log("Adding to history: \(String(describing: entry))", level: .verbose)
       }
@@ -124,6 +126,14 @@ class HistoryController: NSObject {
     $history.withLock { history in
       log("Removing \(entries.count) playback history entries")
       history = history.filter { !entries.contains($0) }
+    }
+    save()
+  }
+
+  func removeAll() {
+    $history.withLock { history in
+      log("Removing all playback history entries")
+      history = []
     }
     save()
   }

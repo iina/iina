@@ -22,17 +22,16 @@ extension NSTextField {
 // not sure from which version, need further tests
 let topConstraintOffset: CGFloat = if #available(macOS 26, *) { -4 } else { 0 }
 
-class SettingsUIHelper {
+class SettingsUIHelper: UIHelper {
   private var l10n: SettingsLocalization.Context
 
   init(_ l10n: SettingsLocalization.Context) {
     self.l10n = l10n
+    super.init()
   }
 
   func button(_ key: SettingsLocalization.Key) -> NSButton {
-    let btn = NSButton(title: l10n.localized(key), target: nil, action: nil)
-    btn.translatesAutoresizingMaskIntoConstraints = false
-    return btn
+    button(key.rawValue)
   }
 
   func popupButton(_ items: [(SettingsLocalization.Key, Int)]) -> NSPopUpButton {
@@ -49,88 +48,16 @@ class SettingsUIHelper {
     return button
   }
 
-  func textInput(value: String = "", width: CGFloat = 64) -> NSTextField {
-    let textField = NSTextField()
-    textField.stringValue = value
-    textField.controlSize = .small
-    textField.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-    textField.size(width: width)
-    return textField
+  func smallLabel(bindTo key: SettingsLocalization.Key) -> NSTextField {
+    label(key.rawValue, isSmall: true, isSecondary: true)
   }
 
-  func input(_ key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true) -> NSTextField {
-    let input = fixedAlignmentRect ? TextFieldWithFixedAlignmentRect() : NSTextField()
-    input.translatesAutoresizingMaskIntoConstraints = false
-    input.bezelStyle = .roundedBezel
-    input.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-    if isFixedSize {
-      input.size(width: 48, height: 25)
-    }
-    return input
+  func label(bindTo key: SettingsLocalization.Key, isSmall: Bool = false, isSecondary: Bool = false) -> NSTextField {
+    label(key.rawValue, isSmall: isSmall, isSecondary: isSecondary)
   }
 
-  func label(_ key: SettingsLocalization.Key, isSmall: Bool = true, isSecondary: Bool = true) -> NSTextField {
-    let textField = NSTextField(labelWithString: l10n.localized(key))
-    textField.translatesAutoresizingMaskIntoConstraints = false
-    if isSmall {
-      textField.controlSize = .small
-      textField.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-    }
-    if isSecondary {
-      textField.textColor = .secondaryLabelColor
-    }
-    return textField
-  }
-
-  func colorWell(_ key: Preference.Key) -> NSColorWell {
-    let colorWell = NSColorWell()
-    colorWell.translatesAutoresizingMaskIntoConstraints = false
-    if #available(macOS 13.0, *) {
-      colorWell.colorWellStyle = .expanded
-    } else {
-      colorWell.size(width: 30)
-    }
-    colorWell.size(height: 24)
-    colorWell.bind(.value, to: UserDefaults.standard,
-                   withKeyPath: key.rawValue,
-                   options: [.valueTransformer: MPVColorStringTransformer()])
-    return colorWell
-  }
-
-  func hStack(align: NSLayoutConstraint.Attribute = .centerY, spacing: CGFloat = 8, _ views: NSView...) -> NSStackView {
-    let stackView = NSStackView(views: views)
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.orientation = .horizontal
-    stackView.alignment = align
-    stackView.spacing = spacing
-    return stackView
-  }
-
-  func vStack(align: NSLayoutConstraint.Attribute = .leading, spacing: CGFloat = 8, _ views: NSView...) -> NSStackView {
-    let stackView = NSStackView(views: views)
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.orientation = .vertical
-    stackView.alignment = align
-    stackView.spacing = spacing
-    return stackView
-  }
-
-  func space(width: CGFloat = 0, height: CGFloat = 0) -> NSView {
-    let view = NSView()
-    view.size(width: width, height: height)
-    return view
-  }
-
-  func image(_ symbol: String, size: CGFloat = 16) -> NSImageView {
-    let imageView = NSImageView(image: .sf(symbol)!)
-    imageView.size(width: size, height: size)
-    return imageView
-  }
-
-  fileprivate class TextFieldWithFixedAlignmentRect: NSTextField {
-    override func frame(forAlignmentRect alignmentRect: NSRect) -> NSRect {
-      return alignmentRect
-    }
+  override func localized(_ key: String) -> String {
+    l10n.localized(.init(key))
   }
 
   private class RadioTagTransformer: ValueTransformer {

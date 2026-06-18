@@ -323,6 +323,7 @@ struct GitHubRepo: Codable {
   let language: String?
   let htmlUrl: URL
   let updatedAt: Date
+  let pushedAt: Date?
   let owner: Owner
 
   struct Owner: Codable {
@@ -340,6 +341,7 @@ struct GitHubRepo: Codable {
     case language
     case htmlUrl = "html_url"
     case updatedAt = "updated_at"
+    case pushedAt = "pushed_at"
     case owner
   }
 }
@@ -497,16 +499,32 @@ struct RepoDetailView: View {
       .font(.callout)
       .foregroundColor(.secondary)
 
-      Text("Updated \(Self.relativeFormatter.localizedString(for: repo.updatedAt, relativeTo: Date()))")
+      Text(formatUpdateDate(repo.pushedAt ?? repo.updatedAt))
         .font(.caption)
         .foregroundColor(.secondary)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
   }
 
+  private func formatUpdateDate(_ date: Date) -> String {
+    let days = Calendar.current.dateComponents([.day], from: date, to: Date()).day ?? 0
+    if days < 30 {
+      return "Updated \(Self.relativeFormatter.localizedString(for: date, relativeTo: Date()))"
+    } else {
+      return "Updated on \(Self.absoluteFormatter.string(from: date))"
+    }
+  }
+
   private static let relativeFormatter: RelativeDateTimeFormatter = {
     let f = RelativeDateTimeFormatter()
     f.unitsStyle = .full
+    return f
+  }()
+
+  private static let absoluteFormatter: DateFormatter = {
+    let f = DateFormatter()
+    f.dateStyle = .medium
+    f.timeStyle = .none
     return f
   }()
 

@@ -19,11 +19,32 @@ struct ALConstraint {
     static let list: [Direction] = [.minX, .maxX, .minY, .maxY]
   }
 
+  enum ConstantType {
+    case fixed(CGFloat)
+    case dynamic(LayoutValue)
+
+    init?(_ constant: CGFloat?) {
+      if let constant {
+        self = .fixed(constant)
+      } else {
+        return nil
+      }
+    }
+
+    init?(_ layout: LayoutValue?) {
+      if let layout {
+        self = .dynamic(layout)
+      } else {
+        return nil
+      }
+    }
+  }
+
   let direction: Direction
   let relation: NSLayoutConstraint.Relation
-  let constant: CGFloat
+  let constant: ConstantType
 
-  init(direction: Direction, relation: NSLayoutConstraint.Relation, constant: CGFloat) {
+  init(direction: Direction, relation: NSLayoutConstraint.Relation, constant: ConstantType) {
     self.direction = direction
     self.relation = relation
     self.constant = constant
@@ -41,37 +62,66 @@ struct ALConstraint {
   static let vertical = vertical(0)
   static let all = all(0)
 
+  
+  static func top(_ val: LayoutValue? = nil, lessThan lessVal: LayoutValue? = nil, greaterThan greatVal: LayoutValue? = nil) -> ALConstraint {
+    return getConstraint(.minY, .init(val), .init(lessVal), .init(greatVal))
+  }
+
+  static func bottom(_ val: LayoutValue? = nil, lessThan lessVal: LayoutValue? = nil, greaterThan greatVal: LayoutValue? = nil) -> ALConstraint {
+    return getConstraint(.maxY, .init(val), .init(lessVal), .init(greatVal))
+  }
+
+  static func leading(_ val: LayoutValue? = nil, lessThan lessVal: LayoutValue? = nil, greaterThan greatVal: LayoutValue? = nil) -> ALConstraint {
+    return getConstraint(.minX, .init(val), .init(lessVal), .init(greatVal))
+  }
+
+  static func trailing(_ val: LayoutValue? = nil, lessThan lessVal: LayoutValue? = nil, greaterThan greatVal: LayoutValue? = nil) -> ALConstraint {
+    return getConstraint(.maxX, .init(val), .init(lessVal), .init(greatVal))
+  }
+
+  static func horizontal(_ val: LayoutValue? = nil, lessThan lessVal: LayoutValue? = nil, greaterThan greatVal: LayoutValue? = nil) -> ALConstraint {
+    return getConstraint(.horizontal, .init(val), .init(lessVal), .init(greatVal))
+  }
+
+  static func vertical(_ val: LayoutValue? = nil, lessThan lessVal: LayoutValue? = nil, greaterThan greatVal: LayoutValue? = nil) -> ALConstraint {
+    return getConstraint(.vertical, .init(val), .init(lessVal), .init(greatVal))
+  }
+
+  static func all(_ val: LayoutValue? = nil, lessThan lessVal: LayoutValue? = nil, greaterThan greatVal: LayoutValue? = nil) -> ALConstraint {
+    return getConstraint(.all, .init(val), .init(lessVal), .init(greatVal))
+  }
+
   static func top(_ val: CGFloat? = nil, lessThan lessVal: CGFloat? = nil, greaterThan greatVal: CGFloat? = nil) -> ALConstraint {
-    return getConstraint(.minY, val, lessVal, greatVal)
+    return getConstraint(.minY, .init(val), .init(lessVal), .init(greatVal))
   }
 
   static func bottom(_ val: CGFloat? = nil, lessThan lessVal: CGFloat? = nil, greaterThan greatVal: CGFloat? = nil) -> ALConstraint {
-    return getConstraint(.maxY, val, lessVal, greatVal)
+    return getConstraint(.maxY, .init(val), .init(lessVal), .init(greatVal))
   }
 
   static func leading(_ val: CGFloat? = nil, lessThan lessVal: CGFloat? = nil, greaterThan greatVal: CGFloat? = nil) -> ALConstraint {
-    return getConstraint(.minX, val, lessVal, greatVal)
+    return getConstraint(.minX, .init(val), .init(lessVal), .init(greatVal))
   }
 
   static func trailing(_ val: CGFloat? = nil, lessThan lessVal: CGFloat? = nil, greaterThan greatVal: CGFloat? = nil) -> ALConstraint {
-    return getConstraint(.maxX, val, lessVal, greatVal)
+    return getConstraint(.maxX, .init(val), .init(lessVal), .init(greatVal))
   }
 
   static func horizontal(_ val: CGFloat? = nil, lessThan lessVal: CGFloat? = nil, greaterThan greatVal: CGFloat? = nil) -> ALConstraint {
-    return getConstraint(.horizontal, val, lessVal, greatVal)
+    return getConstraint(.horizontal, .init(val), .init(lessVal), .init(greatVal))
   }
 
   static func vertical(_ val: CGFloat? = nil, lessThan lessVal: CGFloat? = nil, greaterThan greatVal: CGFloat? = nil) -> ALConstraint {
-    return getConstraint(.vertical, val, lessVal, greatVal)
+    return getConstraint(.vertical, .init(val), .init(lessVal), .init(greatVal))
   }
 
   static func all(_ val: CGFloat? = nil, lessThan lessVal: CGFloat? = nil, greaterThan greatVal: CGFloat? = nil) -> ALConstraint {
-    return getConstraint(.all, val, lessVal, greatVal)
+    return getConstraint(.all, .init(val), .init(lessVal), .init(greatVal))
   }
 
-  private static func getConstraint(_ direction: Direction, _ val: CGFloat?, _ lessVal: CGFloat?, _ greatVal: CGFloat?) -> ALConstraint {
+  private static func getConstraint(_ direction: Direction, _ val: ConstantType?, _ lessVal: ConstantType?, _ greatVal: ConstantType?) -> ALConstraint {
     let rel: NSLayoutConstraint.Relation
-    let constant: CGFloat
+    let constant: ConstantType
     if let val = val { (rel, constant) = (.equal, val) }
     else if let lessVal = lessVal { (rel, constant) = (.lessThanOrEqual, lessVal) }
     else if let greatVal = greatVal { (rel, constant) = (.greaterThanOrEqual, greatVal) }
@@ -112,9 +162,19 @@ extension NSView {
       let aView = aView ?? self.superview!
       let view1 = constraint.isMax ? aView : self
       let view2 = constraint.isMax ? self : aView
-      NSLayoutConstraint(item: view1, attribute: attr1, relatedBy: constraint.relation,
-                         toItem: view2, attribute: attr2,
-                         multiplier: 1, constant: constraint.constant).isActive = true
+
+      switch constraint.constant {
+      case .fixed(let constant):
+        NSLayoutConstraint(item: view1, attribute: attr1, relatedBy: constraint.relation,
+                           toItem: view2, attribute: attr2,
+                           multiplier: 1, constant: constant).isActive = true
+      case .dynamic(let value):
+        let constraint = NSLayoutConstraint(item: view1, attribute: attr1, relatedBy: constraint.relation,
+                                            toItem: view2, attribute: attr2,
+                                            multiplier: 1, constant: value.get())
+        value.use { [weak constraint] in constraint?.constant = $0 }
+        constraint.isActive = true
+      }
     }
 
     return self
@@ -132,13 +192,28 @@ extension NSView {
   }
 
   @discardableResult
-  func center(_ align: OrientationOptions = [.x, .y], with aView: NSView? = nil) -> Self {
+  func size(width: LayoutValue? = nil, height: LayoutValue? = nil) -> Self {
+    if let width = width {
+      let constraint = self.widthAnchor.constraint(equalToConstant: 0)
+      width.use { [weak constraint] in constraint?.constant = $0 }
+      constraint.isActive = true
+    }
+    if let height = height {
+      let constraint = self.heightAnchor.constraint(equalToConstant: 0)
+      height.use { [weak constraint] in constraint?.constant = $0 }
+      constraint.isActive = true
+    }
+    return self
+  }
+
+  @discardableResult
+  func center(_ align: OrientationOptions = [.x, .y], with aView: NSView? = nil, offset: CGFloat = 0) -> Self {
     let aView = aView ?? self.superview!
     if align.contains(.x) {
-      self.superview!.addConstraint(self.centerXAnchor.constraint(equalTo: aView.centerXAnchor))
+      self.superview!.addConstraint(self.centerXAnchor.constraint(equalTo: aView.centerXAnchor, constant: offset))
     }
     if align.contains(.y) {
-      self.superview!.addConstraint(self.centerYAnchor.constraint(equalTo: aView.centerYAnchor))
+      self.superview!.addConstraint(self.centerYAnchor.constraint(equalTo: aView.centerYAnchor, constant: offset))
     }
     return self
   }
@@ -184,9 +259,19 @@ extension NSView {
       }
       let view1 = constraint.isMax ? aView : self
       let view2 = constraint.isMax ? self : aView
-      NSLayoutConstraint(item: view1, attribute: attr1, relatedBy: constraint.relation,
-                         toItem: view2, attribute: attr2, multiplier: 1,
-                         constant: constraint.constant).isActive = true
+
+      switch constraint.constant {
+      case .fixed(let constant):
+        NSLayoutConstraint(item: view1, attribute: attr1, relatedBy: constraint.relation,
+                           toItem: view2, attribute: attr2, multiplier: 1,
+                           constant: constant).isActive = true
+      case .dynamic(let value):
+        let constraint = NSLayoutConstraint(item: view1, attribute: attr1, relatedBy: constraint.relation,
+                                            toItem: view2, attribute: attr2, multiplier: 1,
+                                            constant: value.get())
+        value.use { [weak constraint] in constraint?.constant = $0 }
+        constraint.isActive = true
+      }
     }
 
     return self

@@ -328,6 +328,10 @@ extension SettingsWindow {
         self.isHidden = true
       })
     }
+
+    override func hitTest(_ point: NSPoint) -> NSView? {
+      return nil
+    }
   }
 }
 

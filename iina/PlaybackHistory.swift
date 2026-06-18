@@ -80,10 +80,10 @@ class PlaybackHistory: NSObject, NSSecureCoding {
     self.mpvProgress = Utility.playbackProgressFromWatchLater(mpvMd5)
   }
 
-  init(url: URL, duration: Double, name: String? = nil, title: String?) {
+  init(url: URL, duration: Double, name: String? = nil, title: String?, mpvMd5: String) {
     self.url = url
     self.name = name ?? url.lastPathComponent
-    self.mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
+    self.mpvMd5 = mpvMd5
     self.played = true
     self.addedDate = Date()
     self.duration = VideoTime(duration)

@@ -247,7 +247,8 @@ fileprivate let SideBottomTag = 1
 
 
 fileprivate class GeometryBindings: NSObject {
-  let key = Preference.Key.initialWindowSizePosition.rawValue
+  private let key = Preference.Key.initialWindowSizePosition
+  private let prefObserver = Preference.Observer()
 
   var windowSizeSwitch: SettingsItem.Switch!
   var windowSizeSide: NSPopUpButton!
@@ -264,11 +265,9 @@ fileprivate class GeometryBindings: NSObject {
 
   override init() {
     super.init()
-    UserDefaults.standard.addObserver(self, forKeyPath: key, options: [.new, .old], context: nil)
-  }
-
-  deinit {
-    UserDefaults.standard.removeObserver(self, forKeyPath: key)
+    prefObserver.add(key) { [unowned self] _ in
+      updateControls()
+    }
   }
 
   func initControl<T>(_ keyPath: ReferenceWritableKeyPath<GeometryBindings, T?>, _ value: T) {
@@ -338,12 +337,6 @@ fileprivate class GeometryBindings: NSObject {
       windowSizeSwitch.setIsOn(false)
       windowPosSwitch.setIsOn(false)
     }
-  }
-
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard !(change?[NSKeyValueChangeKey.oldKey] is NSNull) else { return }
-
-    updateControls()
   }
 }
 
@@ -427,16 +420,16 @@ fileprivate class WindowInitialPositionView: WithSettingsLocalizationContext, Se
     self.view.alignment = .leading
 
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.image("arrow.left.to.line"), ui.label(.text_XOffset), textFieldX, popupButtonXUnit)
+      ui.hStack(align: .firstBaseline, ui.image("arrow.left.to.line"), ui.smallLabel(bindTo: .text_XOffset), textFieldX, popupButtonXUnit)
     )
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.label(.text_toThe), popupButtonXPos, ui.label(.text_sideOfTheScreen))
+      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.smallLabel(bindTo: .text_toThe), popupButtonXPos, ui.smallLabel(bindTo: .text_sideOfTheScreen))
     )
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.image("arrow.up.to.line"), ui.label(.text_YOffset), textFieldY, popupButtonYUnit)
+      ui.hStack(align: .firstBaseline, ui.image("arrow.up.to.line"), ui.smallLabel(bindTo: .text_YOffset), textFieldY, popupButtonYUnit)
     )
     view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.label(.text_toThe), popupButtonYPos, ui.label(.text_sideOfTheScreen))
+      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.smallLabel(bindTo: .text_toThe), popupButtonYPos, ui.smallLabel(bindTo: .text_sideOfTheScreen))
     )
 
     container.addSubview(view)

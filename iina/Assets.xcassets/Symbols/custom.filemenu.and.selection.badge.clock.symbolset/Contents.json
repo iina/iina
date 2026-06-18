@@ -3,6 +3,9 @@
     "author" : "xcode",
     "version" : 1
   },
+  "properties" : {
+    "symbol-rendering-intent" : "template"
+  },
   "symbols" : [
     {
       "filename" : "custom.filemenu.and.selection.badge.clock.svg",

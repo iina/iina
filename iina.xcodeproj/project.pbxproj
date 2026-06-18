@@ -203,7 +203,6 @@
 		D14BC6742FAD31990059E900 /* libgnutls.30.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D14BC5FC2FAD31990059E900 /* libgnutls.30.dylib */; };
 		D14BC6752FAD31990059E900 /* libharfbuzz.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D14BC5FE2FAD31990059E900 /* libharfbuzz.0.dylib */; };
 		D14BC6762FAD31990059E900 /* libglib-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D14BC5FA2FAD31990059E900 /* libglib-2.0.0.dylib */; };
-		D14BC6792FAD31990059E900 /* libexpat.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D14BC5F52FAD31990059E900 /* libexpat.1.dylib */; };
 		D14BC67A2FAD31990059E900 /* libbrotlienc.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D14BC5E72FAD31990059E900 /* libbrotlienc.1.dylib */; };
 		D14BC67B2FAD31990059E900 /* libbrotlidec.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D14BC5E62FAD31990059E900 /* libbrotlidec.1.dylib */; };
 		D14BC67C2FAD31990059E900 /* libjxl_threads.0.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D14BC6072FAD31990059E900 /* libjxl_threads.0.11.dylib */; };
@@ -290,7 +289,6 @@
 		D14BC71C2FAD322D0059E900 /* libglib-2.0.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = D14BC5FA2FAD31990059E900 /* libglib-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D14BC71D2FAD322E0059E900 /* libfreetype.6.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = D14BC5F82FAD31990059E900 /* libfreetype.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D14BC71E2FAD32300059E900 /* libfontconfig.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = D14BC5F72FAD31990059E900 /* libfontconfig.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D14BC7202FAD32330059E900 /* libexpat.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = D14BC5F52FAD31990059E900 /* libexpat.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D14BC7242FAD32380059E900 /* libdovi.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = D14BC5F12FAD31990059E900 /* libdovi.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D14BC7252FAD32390059E900 /* libdav1d.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = D14BC5F02FAD31990059E900 /* libdav1d.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D14BC7262FAD323A0059E900 /* libcrypto.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = D14BC5EF2FAD31990059E900 /* libcrypto.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -541,7 +539,6 @@
 				D14BC6E72FAD31DA0059E900 /* libswresample.6.dylib in Copy Dylibs */,
 				D14BC7252FAD32390059E900 /* libdav1d.7.dylib in Copy Dylibs */,
 				D14BC7022FAD32070059E900 /* libnettle.8.dylib in Copy Dylibs */,
-				D14BC7202FAD32330059E900 /* libexpat.1.dylib in Copy Dylibs */,
 				D14BC6F42FAD31F10059E900 /* librubberband.3.dylib in Copy Dylibs */,
 				D14BC6CA2FAD31AF0059E900 /* libzimg.2.dylib in Copy Dylibs */,
 				D14BC7342FAD324E0059E900 /* libavformat.62.dylib in Copy Dylibs */,
@@ -1719,7 +1716,6 @@
 		D14BC5EF2FAD31990059E900 /* libcrypto.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.3.dylib; path = deps/lib/libcrypto.3.dylib; sourceTree = "<absolute>"; };
 		D14BC5F02FAD31990059E900 /* libdav1d.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdav1d.7.dylib; path = deps/lib/libdav1d.7.dylib; sourceTree = "<absolute>"; };
 		D14BC5F12FAD31990059E900 /* libdovi.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdovi.3.dylib; path = deps/lib/libdovi.3.dylib; sourceTree = "<absolute>"; };
-		D14BC5F52FAD31990059E900 /* libexpat.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libexpat.1.dylib; path = deps/lib/libexpat.1.dylib; sourceTree = "<absolute>"; };
 		D14BC5F72FAD31990059E900 /* libfontconfig.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfontconfig.1.dylib; path = deps/lib/libfontconfig.1.dylib; sourceTree = "<absolute>"; };
 		D14BC5F82FAD31990059E900 /* libfreetype.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.6.dylib; path = deps/lib/libfreetype.6.dylib; sourceTree = "<absolute>"; };
 		D14BC5F92FAD31990059E900 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = deps/lib/libfribidi.0.dylib; sourceTree = "<absolute>"; };
@@ -2108,7 +2104,6 @@
 				D14BC6742FAD31990059E900 /* libgnutls.30.dylib in Frameworks */,
 				D14BC6752FAD31990059E900 /* libharfbuzz.0.dylib in Frameworks */,
 				D14BC6762FAD31990059E900 /* libglib-2.0.0.dylib in Frameworks */,
-				D14BC6792FAD31990059E900 /* libexpat.1.dylib in Frameworks */,
 				D14BC67A2FAD31990059E900 /* libbrotlienc.1.dylib in Frameworks */,
 				D14BC67B2FAD31990059E900 /* libbrotlidec.1.dylib in Frameworks */,
 				D14BC67C2FAD31990059E900 /* libjxl_threads.0.11.dylib in Frameworks */,
@@ -2330,7 +2325,6 @@
 				D14BC5EF2FAD31990059E900 /* libcrypto.3.dylib */,
 				D14BC5F02FAD31990059E900 /* libdav1d.7.dylib */,
 				D14BC5F12FAD31990059E900 /* libdovi.3.dylib */,
-				D14BC5F52FAD31990059E900 /* libexpat.1.dylib */,
 				D14BC5F72FAD31990059E900 /* libfontconfig.1.dylib */,
 				D14BC5F82FAD31990059E900 /* libfreetype.6.dylib */,
 				D14BC5F92FAD31990059E900 /* libfribidi.0.dylib */,

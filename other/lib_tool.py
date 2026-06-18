@@ -96,6 +96,7 @@ IDS_TO_IGNORE: set[str] = {
 USR_LIB_ITEMS: dict[str, tuple[str, str]] = {
   'libbz2': ('2', '/usr/lib/libbz2.dylib'),
   'libcharset': ('1', '/usr/lib/libcharset.1.dylib'),
+  'libexpat': ('13', '/usr/lib/libexpat.1.dylib'),
   'libffi': ('9', '/usr/lib/libffi.dylib'),
   'libiconv': ('7', '/usr/lib/libiconv.2.dylib'),
   'liblzma': ('14', '/usr/lib/liblzma.5.dylib'),

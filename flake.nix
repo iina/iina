@@ -206,45 +206,43 @@
             ) [
               ffmpeg
               mpv
-              (pkgs.libhwy.overrideAttrs (old: {
-                cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DBUILD_SHARED_LIBS=ON" ];
-              }))
-              pkgs.brotli         # Brotli compression, used for ass, fontconfig, bluray, & more
+              libhwy
+              pkgs.brotli         # Brotli compression. Used for ass, fontconfig, bluray, & more
               pkgs.dav1d          # AV1 video decoder
               pkgs.fontconfig     # Font configuration library
               pkgs.freetype       # FreeType font rendering engine
               pkgs.fribidi        # Hebrew and Arabic support
               pkgs.gettext        # Internationalization library
-              pkgs.glib           # GTK GLib utility library required by harfbuzz
-              pkgs.gmp            # Provides arbitrary precision arithmetic, required by several libs
+              pkgs.glib           # GTK GLib utility library. Required by harfbuzz
+              pkgs.gmp            # Provides arbitrary precision arithmetic. Required by several libs
               pkgs.gnutls         # TLS support, needed for network streams
-              pkgs.graphite2      # Compiles Graphite-enabled fonts, used by harfbuzz
-              pkgs.harfbuzz       # Text shaping engine, used by avdevice, avfilter, ass
-              pkgs.lcms2          # Little CMS color management lib, required by placebo, jxl
+              pkgs.graphite2      # Compiles Graphite-enabled fonts. Used by harfbuzz
+              pkgs.harfbuzz       # Text shaping engine. Used by avdevice, avfilter, ass
+              pkgs.lcms2          # Little CMS color management lib. Required by placebo, jxl
               pkgs.libarchive     # Archive support
               pkgs.libass         # ASS subtitle renderer
-              pkgs.libb2
+              pkgs.libb2          # BLAKE2 hashing library
               pkgs.libbluray      # Blu-ray support
-              pkgs.libidn2        # Converts between ASCII & UTF domain names, used by gnutls
+              pkgs.libidn2        # Converts between ASCII & UTF domain names. Used by gnutls
               pkgs.libjpeg_turbo  # Needed to provide libjpeg
               pkgs.libjxl         # JPEG-XL support
               pkgs.libplacebo     # Required by mpv
               pkgs.libpng         # PNG image format support
-              pkgs.libsamplerate
-              pkgs.libtasn1
-              pkgs.libuchardet
-              pkgs.libunibreak
-              pkgs.libunistring
+              pkgs.libsamplerate  # Sample Rate Converter for audio
+              pkgs.libtasn1       # ASN.1 library used by GnuTLS, p11-kit
+              pkgs.libuchardet    # Character encoding detection library
+              pkgs.libunibreak    # Unicode line breaking & word/grapheme breaking
+              pkgs.libunistring   # Unicode string handling
               pkgs.libwebp        # WebP image de/encoder
-              pkgs.luajit         # Lua Just-In-Time compiler, required by mpv
-              pkgs.lz4            # LZ4 compression, used by libarchive
-              pkgs.mujs           # JavaScript engine, needed for mpv's JS support
-              pkgs.nettle
-              pkgs.p11-kit
-              pkgs.pcre2
-              pkgs.rubberband
-              pkgs.shaderc        # Referenced by libplacebo, even though it requires Vulkan which we don't use
-              pkgs.snappy
+              pkgs.luajit         # Lua Just-In-Time compiler. Required by mpv
+              pkgs.lz4            # LZ4 compression. Used by libarchive
+              pkgs.mujs           # JavaScript engine. Needed for mpv's JS support
+              pkgs.nettle         # GnuTLS dependency (cryptographic algorithms)
+              pkgs.p11-kit        # Tools for managing PKCS#11 modules (crypto keys / tokens)
+              pkgs.pcre2          # Perl-compatible regular expression pattern matching
+              pkgs.rubberband     # Enables FFmpeg to perform audio tempo & pitch modifications
+              pkgs.shaderc        # Referenced by libplacebo, even though it requires Vulkan which IINA doesn't use
+              pkgs.snappy         # Snappy compression
               pkgs.soxr           # SoX Resampler, needed for high-quality audio resampling
               pkgs.speex          # Used by avcodec, avdevice, avfilter, avformat
               pkgs.xz             # LZMA2 compression, needed by libarchive
@@ -253,7 +251,6 @@
 
               # Indirect libs
               pkgs.libcxx         # C standard library
-              pkgs.expat          # Needed by fontconfig
               pkgs.libdovi        # Dolby Vision, needed by libplacebo
             ]
           )
@@ -296,11 +293,18 @@
             export TOOLCHAINS=XcodeDefault
             export SDKROOT=macosx
 
+            if [ "$system" == "aarch64-darwin" ]; then
+              export XCODE_BUILD_DESTINATION='platform=macOS,arch=arm64'
+            else
+              export XCODE_BUILD_DESTINATION='platform=macOS,arch=x86_64'
+            fi
+
             mkdir -p .spm .spm-cache build
 
             xcodebuild \
               -workspace iina.xcodeproj/project.xcworkspace \
               -scheme iina \
+              -destination "$XCODE_BUILD_DESTINATION" \
               -resolvePackageDependencies \
               -derivedDataPath "$PWD/build" \
               -clonedSourcePackagesDirPath "$PWD/.spm" \
@@ -349,7 +353,7 @@
               # reproducibility, as the same git revision can be associated with an arbitrary number of branches.
               # Just use a placeholder for now:
               git_branch="<nix-build>"
-              echo "Git bramch: $git_branch, revision: $git_rev"
+              echo "Git branch: $git_branch, revision: $git_rev"
               export HOME=$PWD/.home
               export CFFIXED_USER_HOME="$HOME"
               export __XPC_CFFIXED_USER_HOME="$HOME"
@@ -358,6 +362,12 @@
 
               APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
               export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin"
+
+              if [ "$system" == "aarch64-darwin" ]; then
+                export XCODE_BUILD_DESTINATION='platform=macOS,arch=arm64'
+              else
+                export XCODE_BUILD_DESTINATION='platform=macOS,arch=x86_64'
+              fi
 
               unset CC CXX LD AR RANLIB NM STRIP OBJCOPY \
                 CFLAGS CXXFLAGS LDFLAGS SDKROOT CPATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH LIBRARY_PATH \
@@ -396,6 +406,7 @@
               xcodebuild \
                 -workspace iina.xcodeproj/project.xcworkspace \
                 -scheme iina \
+                -destination "$XCODE_BUILD_DESTINATION" \
                 -configuration Release \
                 -sdk macosx \
                 -skipPackagePluginValidation \

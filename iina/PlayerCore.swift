@@ -2030,7 +2030,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     log("File started")
     if #available(macOS 13, *) {
-      mainWindow.clearAnalysis()
+      mainWindow.clearLiveTextAnalysis()
     }
     MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
@@ -2362,7 +2362,7 @@ class PlayerCore: NSObject {
     syncUI(.playButton)
 
     if #available(macOS 13, *) {
-      if paused { mainWindow.requestLiveTextAnalysis() } else { mainWindow.clearAnalysis() }
+      if paused { mainWindow.requestLiveTextAnalysis() } else { mainWindow.clearLiveTextAnalysis() }
     }
   }
 
@@ -2384,7 +2384,7 @@ class PlayerCore: NSObject {
     NowPlayingInfoManager.shared.updateInfo()
 
     if #available(macOS 13, *) {
-      mainWindow.clearAnalysis()
+      mainWindow.clearLiveTextAnalysis()
       mainWindow.requestLiveTextAnalysis()
     }
 
@@ -2438,7 +2438,7 @@ class PlayerCore: NSObject {
       miniPlayer.refreshArtworkVisibility()
     }
     if #available(macOS 13, *) {
-      mainWindow.clearAnalysis()
+      mainWindow.clearLiveTextAnalysis()
       mainWindow.requestLiveTextAnalysis()
     }
   }

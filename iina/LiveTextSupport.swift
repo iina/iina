@@ -65,7 +65,7 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     }
   }
 
-  func clearAnalysis() {
+  func clearLiveTextAnalysis() {
     liveTextAnalysisTask?.cancel()
     liveTextAnalysisTask = nil
     (liveTextOverlayView as? ImageAnalysisOverlayView)?.analysis = nil

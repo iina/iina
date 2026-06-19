@@ -385,7 +385,7 @@ class MainWindowController: PlayerWindowController {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
         if #available(macOS 13, *) {
-          if newValue { requestLiveTextAnalysis() } else { clearAnalysis() }
+          if newValue { requestLiveTextAnalysis() } else { clearLiveTextAnalysis() }
         }
       }
     default:
@@ -1393,7 +1393,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
-      clearAnalysis()
+      clearLiveTextAnalysis()
     }
 
     // Set the appearance to match the theme so the titlebar matches the theme
@@ -1529,7 +1529,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
-      clearAnalysis()
+      clearLiveTextAnalysis()
     }
 
     titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: false)
@@ -1793,7 +1793,7 @@ class MainWindowController: PlayerWindowController {
       return window.frame.size
     }
     if !window.inLiveResize, #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
-      clearAnalysis()
+      clearLiveTextAnalysis()
     }
     if frameSize.height <= AppData.mainWindowMinSize.height || frameSize.width <= AppData.mainWindowMinSize.width {
       return currentWindowAspectRatio.grow(toSize: AppData.mainWindowMinSize)
@@ -1882,7 +1882,7 @@ class MainWindowController: PlayerWindowController {
   func windowWillStartLiveResize(_ notification: Notification) {
     videoView.videoLayer.inLiveResize = true
     if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
-      clearAnalysis()
+      clearLiveTextAnalysis()
     }
   }
 

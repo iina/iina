@@ -15,6 +15,9 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Libs to omit when copying libs from Nix result into deps/lib.
+IGNORED_LIBS=("libswift_Concurrency.dylib" "libplacebo.349.dylib")
+
 print_script_dir() {
   local SOURCE_PATH="${BASH_SOURCE[0]}"
   local SYMLINK_DIR
@@ -209,7 +212,19 @@ if [[ "$REPLACE_LIBS" = true ]]; then
 
   for srclib in "$SRC_DIR/"*; do
     if [[ "$srclib" == *".dylib" ]]; then
-      cp -v "$srclib" "$DST_DIR/"
+      libBasename=$(basename "$srclib")
+      skipLib=false
+      for ignored in "${IGNORED_LIBS[@]}"; do
+        if [[ "$libBasename" == "$ignored" ]]; then
+          skipLib=true
+          break
+        fi
+      done
+      if [[ "$skipLib" = true ]]; then
+        echo -e "Skipping lib: $libBasename"
+      else
+        cp -v "$srclib" "$DST_DIR/"
+      fi
     fi
   done
 else

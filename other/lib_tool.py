@@ -457,7 +457,7 @@ class CanonicalNameDB:
       if lib_version_count == 0:
         # Skip
         continue
-      if lib_version_count > 1:
+      if lib_version_count > 1 and base_id != 'libplacebo':
         # We can't handle this currently, but it should not happen
         print(f'⚠️ ERROR: unexpectedly found multiple remaining versions ({lib_version_count}) for {base_id}! Exiting!')
         sys.exit(99)
@@ -537,8 +537,11 @@ class CanonicalNameDB:
     copied_libs_count: int = 0
 
     def copy_to_cname(canonical_name: str, compat_version: str, src_path: str):
-      print(f'Canonical name for v{compat_version} = {canonical_name} → {src_path}')
       dst_path = os.path.abspath(os.path.join(lib_staging_dir_path, canonical_name))
+      dst_exists: bool = os.path.exists(dst_path)
+      print(f'Canonical name for v{compat_version} = {canonical_name} ← {src_path} (exist={"Y" if dst_exists else "N"})')
+      if dst_exists:
+        return
       shutil.copyfile(src_path, dst_path)
       nonlocal copied_libs_count
       copied_libs_count += 1

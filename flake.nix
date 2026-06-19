@@ -1,7 +1,7 @@
 {
   description = "IINA – The modern video player for macOS.";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
   outputs = { self, nixpkgs }: let
     appName = "IINA";
@@ -50,10 +50,20 @@
           ln -sf /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild "$out/bin/xcodebuild"
         '';
 
-        # Override ffmpeg to use our version of libs
+        # FFmpeg 8 must be built with a newer version of nasm than provided by nixpkgs 25.05.
+        # Rather than build a newer version of this tool, pull in the system's version.
+        nasm = pkgs.runCommand "system-nasm" { } ''
+          mkdir -p "$out/bin"
+          ln -sf /opt/homebrew/bin/nasm "$out/bin/nasm"
+        '';
+
         ffmpeg = (pkgs.ffmpeg-headless.override {
-          withDebug = false;    # Build using debug options
-          withStripping = true; # Strip symbols from the resulting binaries to reduce size
+          # Upgrade to FFmpeg 8.1.1 as nixpkgs 25.05 provides FFmpeg 7.1.1.
+          version = "8.1.1";
+          hash = "sha256-FdKhhCveEo5UodEoyUh3aBHABv3OT2VXmwBXE1ce3p0=";
+
+          withDebug = false;      # Build using debug options
+          withStripping = false;  # Strip symbols from the resulting binaries to reduce size
           withSmallDeps  = true;
 
           withSoxr = true;
@@ -72,6 +82,8 @@
           withTheora = false;     # Theora video codec, not included in IINA historically
           withVorbis = false;     # Vorbis audio codec, not included in IINA historically
 
+          withXml2 = false;       # Crashing due to missing library without this.
+
           withX264 = false;      # H.264 video encoder, not super useful for IINA (& adds >4 MB to app size)
           withX265 = false;      # H.265 video encoder, not super useful for IINA (& adds >31 MB to app size)
           withAom = false;       # AV1 video encoder, not very useful for IINA
@@ -80,7 +92,6 @@
           withDvdnav = false;
           withDvdread = false;
           withMp3lame = false;   # MP3 LAME audio codec encoder, not super useful for IINA
-          withOpenapv = false;   # APV video encoder, not very useful for IINA
           withOpenmpt = false;   # Tracker music files decoder (various formats), not included in IINA historically
           withOpus = false;      # Opus audio codec, not included in IINA historically
           withPlacebo = false;
@@ -116,12 +127,26 @@
           buildQtFaststart = false;
 
         }).overrideAttrs (old: {
+          # The postproc configure flag was removed in FFmpeg 8.
+          configureFlags = builtins.filter(x: x != "--enable-postproc") old.configureFlags;
           # Skip tests to speed up build
           doCheck = false;
+          nativeBuildInputs = old.nativeBuildInputs ++ [nasm];
         });
 
-        # Override mpv with desired features support
-        mpv = pkgs.mpv-unwrapped.override {
+        # The upgraded mpv requires a newer version of libplacebo than provided by nixpkgs 25.05.
+        libplacebo = pkgs.libplacebo.overrideAttrs (finalAttrs: {
+          version = "7.351.0";
+          src = pkgs.fetchFromGitLab {
+            domain = "code.videolan.org";
+            owner = "videolan";
+            repo = "libplacebo";
+            rev = "v${finalAttrs.version}";
+            hash = "sha256-ccoEFpp6tOFdrfMyE0JNKKMAdN4Q95tP7j7vzUj+lSQ=";
+          };
+        });
+
+        mpv = (pkgs.mpv-unwrapped.override {
           ffmpeg = ffmpeg;
           lua = pkgs.luajit;
 
@@ -150,7 +175,31 @@
           cddaSupport = false;
           dvbinSupport = false;
           sixelSupport = false;
-        };
+        }).overrideAttrs (finalAttrs: previousAttrs: {
+          # Upgrade to mpv 0.41.0 as nixpkgs 25.05 provides mpv 0.40.0.
+          version = "v0.41.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "mpv-player";
+            repo = "mpv";
+            tag = "v${finalAttrs:version}";
+            hash = "sha256-gJWqfvPE6xOKlgj2MzZgXiyOKxksJlY/tL6T/BeG19c=";
+          };
+          # The mpv package in nixpkgs 25.05 passes a sdl2 option to meson that is not present in
+          # mpv 0.41.0.
+          mesonFlags = builtins.filter(x: x != "-Dsdl2=disabled") previousAttrs.mesonFlags;
+          patches =
+            []
+            # If needed include the fix for IINA issue #5956, the mpv regression described in mpv
+            # issue #17436 and fixed in mpv PR #17448. The fix is expected to be included in
+            # mpv 0.42.0.
+            ++ pkgs.lib.optionals (pkgs.lib.versionAtLeast finalAttrs.version "v0.40.0"
+                && pkgs.lib.versionOlder finalAttrs.version "v0.42.0") [
+              (pkgs.fetchpatch2 {
+                url = "https://github.com/mpv-player/mpv/pull/17448.patch";
+                hash = "sha256-kXnlu8SJ/GEnFljnXK4ri6CrgDBXvOTjnQo3jdPAbSA=";
+              })
+            ];
+        });
 
         # Collect include deps (header files) as per readme.md
         depsInclude = pkgs.linkFarm "iina-deps-inc" [
@@ -205,6 +254,7 @@
               }) (builtins.attrNames (builtins.readDir libdir))
             ) [
               ffmpeg
+              libplacebo          # Required by mpv
               mpv
               libhwy
               pkgs.brotli         # Brotli compression. Used for ass, fontconfig, bluray, & more
@@ -226,7 +276,6 @@
               pkgs.libidn2        # Converts between ASCII & UTF domain names. Used by gnutls
               pkgs.libjpeg_turbo  # Needed to provide libjpeg
               pkgs.libjxl         # JPEG-XL support
-              pkgs.libplacebo     # Required by mpv
               pkgs.libpng         # PNG image format support
               pkgs.libsamplerate  # Sample Rate Converter for audio
               pkgs.libtasn1       # ASN.1 library used by GnuTLS, p11-kit

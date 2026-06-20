@@ -24,6 +24,7 @@ extension SettingsLocalization.Key {
   static let toneMappingAlgorithmItem7 = SettingsLocalization.Key("toneMappingAlgorithm.items.7")
   static let text_Decoding = SettingsLocalization.Key("$Decoding")
   static let text_ColorHDR = SettingsLocalization.Key("$ColorHDR")
+  static let text_LiveText = SettingsLocalization.Key("$LiveText")
   // Also used by the audio page for the audio threads input
   static let videoThreadsLabel = SettingsLocalization.Key("videoThreads.label")
   static let videoThreadsDesc = SettingsLocalization.Key("videoThreads.desc")

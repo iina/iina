@@ -28,6 +28,9 @@ class SettingsPageVideo: SettingsPage {
   override func content() -> [SettingsSection] {
     return sections {
       sectionDecoding()
+      if AppDelegate.shared.liveTextAvailable {
+        sectionLiveText()
+      }
       sectionColor()
     }
   }
@@ -49,14 +52,16 @@ class SettingsPageVideo: SettingsPage {
           .bindTo(.forceDedicatedGPU)
           .hasDescription()
       }
+    }
+  }
 
-      if AppDelegate.shared.liveTextAvailable {
-        SettingsList {
-          SettingsItem.Switch()
-            .image(name: "text.viewfinder")
-            .bindTo(.enableLiveText)
-            .hasDescription()
-        }
+  private func sectionLiveText() -> SettingsSection {
+    return section {
+      SettingsList(title: .text_LiveText) {
+        SettingsItem.Switch()
+          .image(name: "text.viewfinder")
+          .bindTo(.enableLiveText)
+          .hasDescription()
       }
     }
   }

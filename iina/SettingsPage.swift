@@ -64,12 +64,20 @@ class SettingsView: NSView {
 
 @resultBuilder
 struct SettingsViewsBuilder {
-  static func buildBlock(_ components: SettingsSection...) -> [SettingsSection] {
-    return components
+  static func buildExpression(_ expression: SettingsSection) -> [SettingsSection] {
+    [expression]
+  }
+
+  static func buildExpression(_ expression: [SettingsSection]) -> [SettingsSection] {
+    expression
   }
 
   static func buildBlock(_ components: [SettingsSection]...) -> [SettingsSection] {
     components.flatMap { $0 }
+  }
+
+  static func buildOptional(_ component: [SettingsSection]?) -> [SettingsSection] {
+    component ?? []
   }
 }
 

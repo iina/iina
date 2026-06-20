@@ -6,6 +6,12 @@
     "id": "com.yorkyang2333.anime4k"
   },
   {
+    "name": "Bilingual Audio",
+    "url": "https://github.com/glechic/iina-bilingual-audio",
+    "desc": "Play two audio tracks with left/right channel separation for bilingual viewing.",
+    "id": "com.bilingual-audio.iina-plugin"
+  },
+  {
     "name": "Bookmarks",
     "url": "https://github.com/wyattowalsh/iina-plugin-bookmarks",
     "desc": "Save and manage video timestamps.",

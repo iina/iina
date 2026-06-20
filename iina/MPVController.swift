@@ -1827,7 +1827,7 @@ class MPVController: NSObject {
   /// Searches the list of user configured `mpv` options and returns `true` if the given option is present.
   /// - Parameter option: Option to look for.
   /// - Returns: `true` if the `mpv` option is found, `false` otherwise.
-  private func userOptionsContains(_ option: String) -> Bool {
+  func userOptionsContains(_ option: String) -> Bool {
     guard Preference.bool(for: .enableAdvancedSettings),
           let userOptions = Preference.value(for: .userOptions) as? [[String]] else { return false }
     return userOptions.contains { $0[0] == option }

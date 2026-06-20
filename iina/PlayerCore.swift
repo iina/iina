@@ -18,6 +18,13 @@ class PlayerCore: NSObject {
   /// restored when the movies is played again. Using the following value as the minimum for loop points avoids this issue.
   static private let minLoopPointTime = 0.000001
 
+  /// Match FFmpeg's default stream analysis window for RTP streams.
+  ///
+  /// mpv favors low-latency stream startup by using no lavf analyze duration in some network cases.
+  /// For RTP MPEG-TS live TV streams this can leave libavformat with too little data to detect
+  /// stream parameters before decoding begins.
+  static private let rtpLavfAnalyzeduration = "5"
+
   // MARK: - Multiple instances
 
   static let first: PlayerCore = createPlayerCore()
@@ -655,6 +662,7 @@ class PlayerCore: NSObject {
     }
 
     mpv.mpvInit()
+    addRTPStreamProbeOptionsHook()
     events.emit(.mpvInitialized)
 
     let audioDevice = Preference.string(for: .audioDevice)!
@@ -1975,6 +1983,39 @@ class PlayerCore: NSObject {
   func getGeometry() -> GeometryDef? {
     let geometry = mpv.getString(MPVOption.Window.geometry) ?? ""
     return GeometryDef.parse(geometry)
+  }
+
+  /// Adds an mpv `on_load` hook to improve RTP MPEG-TS live stream probing.
+  ///
+  /// This intentionally uses file-local options so the larger analyze window is scoped to the RTP
+  /// entry currently being opened. It also catches RTP entries loaded from playlists, because mpv
+  /// runs this hook for each item after playlist expansion.
+  private func addRTPStreamProbeOptionsHook() {
+    let shouldSetProbeInfo = !mpv.userOptionsContains(MPVOption.Demuxer.demuxerLavfProbeInfo)
+    let shouldSetAnalyzeduration = !mpv.userOptionsContains(MPVOption.Demuxer.demuxerLavfAnalyzeduration)
+    guard shouldSetProbeInfo || shouldSetAnalyzeduration else { return }
+
+    func callback(next: @escaping () -> Void) {
+      defer { next() }
+      guard let path = mpv.getString(MPVProperty.streamOpenFilename) ?? mpv.getString(MPVProperty.path),
+            Self.isRTPStream(path) else { return }
+
+      log("Applying RTP stream probing workaround for: \(path)", level: .verbose)
+      if shouldSetProbeInfo {
+        mpv.setString(MPVProperty.fileLocalOptions(MPVOption.Demuxer.demuxerLavfProbeInfo), "yes",
+                      level: .verbose)
+      }
+      if shouldSetAnalyzeduration {
+        mpv.setString(MPVProperty.fileLocalOptions(MPVOption.Demuxer.demuxerLavfAnalyzeduration),
+                      Self.rtpLavfAnalyzeduration, level: .verbose)
+      }
+    }
+
+    mpv.addHook(MPVHook.onLoad, hook: MPVHookValue(withBlock: callback))
+  }
+
+  private static func isRTPStream(_ path: String) -> Bool {
+    path.range(of: "rtp://", options: [.caseInsensitive, .anchored]) != nil
   }
 
   /// Uses an mpv `on_before_start_file` hook to honor mpv's `shuffle` command via IINA CLI.

@@ -2193,6 +2193,10 @@ class PlayerCore: NSObject {
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
     syncUI(.playlist)
+    
+    if let time = info.currentURL?.queryTimeSeconds {
+      seek(absoluteSecond: time)
+    }
   }
 
   func fileEnded(_ dueToStopCommand: Bool) {

@@ -1,6 +1,11 @@
 {
   description = "IINA – The modern video player for macOS.";
 
+  # Nix Packages has adopted Apple's perceived macOS support policy of only supporting the latest 3
+  # versions. Also of concern, Nixpkgs 26.05 is the last release that supports Intel Macs. Rather
+  # than applying overrides to newer versions of Nix packages to lower the minimum supported macOS
+  # version, this flake uses nixpkgs 25.05 (supports macOS 11.3+) and applies overrides to upgrade
+  # packages to newer versions.
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 
   outputs = { self, nixpkgs }: let
@@ -146,10 +151,21 @@
           };
         });
 
+        # Upgrade to the version supplied by nixpkgs 26.05.
+        svt-av1 = pkgs.svt-av1.overrideAttrs (finalAttrs: previousAttrs: {
+          version = "3.1.2";
+          src = pkgs.fetchFromGitLab {
+            owner = "AOMediaCodec";
+            repo = "SVT-AV1";
+            rev = "v${finalAttrs.version}";
+            hash = "sha256-/CpcxdyC4qf9wdzzySMYw17FbjYpasT+QVykXSlx28U=";
+          };
+        });
+
         ffmpeg = (pkgs.ffmpeg-headless.override {
           # Upgrade to FFmpeg 8.1.1 as nixpkgs 25.05 provides FFmpeg 7.1.1.
           version = "8.1.1";
-          hash = "sha256-FdKhhCveEo5UodEoyUh3aBHABv3OT2VXmwBXE1ce3p0=";
+          hash = "sha256-WPGfjTZjsgpR5QiANRWF4g6LF2ejGzFQUrLjhzw9cfQ=";
 
           withDebug = false;      # Build using debug options
           withStripping = false;  # Strip symbols from the resulting binaries to reduce size
@@ -176,6 +192,9 @@
           withSoxr = true;
           soxr = pkgs.soxr;
 
+          withSvtav1 = true;      # SVT-AV1 encoder, used for screenshots in AVIF format
+          svt-av1 = svt-av1;
+
           withRubberband = true;
           rubberband = pkgs.rubberband;
 
@@ -193,24 +212,23 @@
 
           withX264 = false;      # H.264 video encoder, not super useful for IINA (& adds >4 MB to app size)
           withX265 = false;      # H.265 video encoder, not super useful for IINA (& adds >31 MB to app size)
-          withAom = false;       # AV1 video encoder, not very useful for IINA
+          withAom = false;       # AV1 video encoder, IINA prefers SVT-AV1 (better performance)
           withBs2b = false;      # Bass to Binaural audio filter (uncommon)
-          withCaca = false;      # ASCII art video output, not useful for IINA
+          withCaca = false;      # ASCII art video output, not used by IINA
           withDvdnav = false;
           withDvdread = false;
           withMp3lame = false;   # MP3 LAME audio codec encoder, not super useful for IINA
           withOpenmpt = false;   # Tracker music files decoder (various formats), not included in IINA historically
           withOpus = false;      # Opus audio codec, not included in IINA historically
           withPlacebo = false;
-          withRist = false;      # RIST protocol support, not useful for IINA (yet?)
-          withSrt = false;       # Secure Reliable Transport (SRT) protocol, not useful for IINA
-          withSsh = false;       # SFTP protocol support, not useful for IINA
-          withSvtav1 = false;    # SVT-AV1 encoder, adds >12 MB to app size
+          withRist = false;      # RIST protocol support, not used by IINA (yet?)
+          withSrt = false;       # Secure Reliable Transport (SRT) protocol, not used by IINA
+          withSsh = false;       # SFTP protocol support, not used by IINA
           withVidStab = false;   # Video stabilization filter, requires Linux
-          withVmaf = false;      # Video quality measurement tool, not useful for IINA
+          withVmaf = false;      # Video quality measurement tool, not used by IINA
           withVulkan = false;    # IINA can't use gpu-next yet
           withZmq = false;       # ZeroMQ messaging library for FFmpeg streaming; not used by mpv or IINA
-          withZvbi = false;      # Teletext support, not useful for IINA
+          withZvbi = false;      # Teletext support, not used by IINA
 
           # Unlikely to ever enable these
           withOpencl = false;    # Vulkan predecessor, not supported on modern macOS

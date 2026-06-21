@@ -47,9 +47,6 @@ For all entries in name_variants_multimap:
    different formatting, use the most specific version available (i.e., favor trailing '.0' versions).
    Example: given the 3 variants: {'libfoo.2.dylib', 'libfoo.2.1.dylib', 'libfoo.2.1.0.dylib'}, the canonical name
    will be 'libfoo.2.1.0.dylib'.
-   - Special workaround for 'libiconv':
-     If a base_id has more than one compatibility_version, rename the canonical name for each to include its
-     compatibility_version, to ensure both can be included without conflict.
 2. Store best variant name in canonical_name_multimap.
 
 III. Second Pass: Rename libs, rewrite lib references to use @rpath & cnames, add missing LC_RPATH entries
@@ -93,6 +90,7 @@ IDS_TO_IGNORE: set[str] = {
 # Map of libs which are already provided by macOS and should not be packaged in the bundle.
 # For a list of system-provided libs, see:
 # `ls /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib`
+# This is a dict of {base_id -> (compatibility_version, lib_path)}
 USR_LIB_ITEMS: dict[str, tuple[str, str]] = {
   'libbz2': ('2', '/usr/lib/libbz2.dylib'),
   'libcharset': ('1', '/usr/lib/libcharset.1.dylib'),

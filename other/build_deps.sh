@@ -16,7 +16,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Libs to omit when copying libs from Nix result into deps/lib.
-IGNORED_LIBS=("libswift_Concurrency.dylib" "libplacebo.349.dylib")
+IGNORED_LIBS=("libswift_Concurrency.dylib")
 
 print_script_dir() {
   local SOURCE_PATH="${BASH_SOURCE[0]}"

@@ -57,6 +57,95 @@
           ln -sf /opt/homebrew/bin/nasm "$out/bin/nasm"
         '';
 
+        # Upgrade to the version supplied by nixpkgs 26.05.
+        dav1d = pkgs.dav1d.overrideAttrs (finalAttrs: previousAttrs: {
+          version = "1.5.3";
+          src = pkgs.fetchFromGitHub {
+            owner = "videolan";
+            repo = "dav1d";
+            rev = finalAttrs.version;
+            hash = "sha256-E3da/LJ8HNy1osExmupovqnL8JHgVNzPUCG5F8TJKXQ=";
+          };
+        });
+
+        # Upgrade to the version supplied by nixpkgs 26.05.
+        expat = pkgs.expat.overrideAttrs (finalAttrs: previousAttrs: {
+          version = "2.8.0";
+          tag = "R_${pkgs.lib.replaceStrings [ "." ] [ "_" ] finalAttrs.version}";
+          src = pkgs.fetchurl {
+            url = "https://github.com/libexpat/libexpat/releases/download/${finalAttrs.tag}/${finalAttrs.pname}-${finalAttrs.version}.tar.xz";
+            hash = "sha256-o3v64KqXdb2FIevYXcRW1Ibw/zETj2yR/ZAupzJiRUI=";
+          };
+        });
+
+        # Upgrade to the version supplied by nixpkgs 26.05.
+        fontconfig = (pkgs.fontconfig.override {
+          expat = expat;
+          freetype = freetype;
+        }).overrideAttrs (finalAttrs: previousAttrs: {
+          version = "2.17.1";
+          src = pkgs.fetchurl {
+            url = "https://gitlab.freedesktop.org/api/v4/projects/890/packages/generic/fontconfig/${finalAttrs.version}/fontconfig-${finalAttrs.version}.tar.xz";
+            hash = "sha256-n1yuk/T//B+8Ba6ZzfxwjNYN/WYS/8BRKCcCXAJvpUE=";
+          };
+        });
+
+        # Upgrade to the version supplied by nixpkgs 26.05.
+        freetype = pkgs.freetype.overrideAttrs (finalAttrs: previousAttrs: {
+          version = "2.14.2";
+          src = pkgs.fetchurl {
+            url = "mirror://savannah/freetype/freetype-${finalAttrs.version}.tar.xz";
+            sha256 = "sha256-S2Lcq0ySChqGA2mTMiGBQ2LmmeJvVXklFtZx5v9VteE=";
+          };
+        });
+
+        # Upgrade to the version supplied by nixpkgs 25.11.
+        harfbuzz = (pkgs.harfbuzz.override {
+          freetype = freetype;
+        }).overrideAttrs (finalAttrs: previousAttrs: {
+          version = "12.1.0";
+          src = pkgs.fetchurl {
+            url = "https://github.com/harfbuzz/harfbuzz/releases/download/${finalAttrs.version}/harfbuzz-${finalAttrs.version}.tar.xz";
+            hash = "sha256-5cgbf24LEC37AAz6QkU4uOiWq3ii9Lil7IyuYqtDNp4=";
+          };
+        });
+
+        # Upgrade to the version supplied by nixpkgs 26.05.
+        libass = (pkgs.libass.override {
+          fontconfigSupport = true;
+          fontconfig = fontconfig;
+          freetype = freetype;
+          harfbuzz = harfbuzz;
+        }).overrideAttrs (finalAttrs: previousAttrs: {
+          version = "0.17.4";
+          src = pkgs.fetchurl {
+            url = "https://github.com/libass/libass/releases/download/${finalAttrs.version}/libass-${finalAttrs.version}.tar.xz";
+            hash = "sha256-ePEXm4ONAl6cJuj+8z+AkvZWEURP+hv8DPrGozURoFo=";
+          };
+          enableParallelBuilding = true;
+          nativeBuildInputs = previousAttrs.nativeBuildInputs ++ [nasm];
+        });
+
+        # Must use the upgraded fontconfig.
+        libbluray = (pkgs.libbluray.override {
+          fontconfig = fontconfig;
+        }).overrideAttrs (finalAttrs: previousAttrs: {
+          enableParallelBuilding = true;
+        });
+
+        # Upgrade to the version supplied by nixpkgs 26.05.
+        libjxl = pkgs.libjxl.overrideAttrs (finalAttrs: previousAttrs: {
+          version = "0.11.2";
+          src = pkgs.fetchFromGitHub {
+            owner = "libjxl";
+            repo = "libjxl";
+            tag = "v${finalAttrs.version}";
+            hash = "sha256-L4/BY68ZBCpebQxryR7D1CxrsneYvw8B8EvW2mkF7bA=";
+            # There are various submodules in `third_party/`.
+            fetchSubmodules = true;
+          };
+        });
+
         ffmpeg = (pkgs.ffmpeg-headless.override {
           # Upgrade to FFmpeg 8.1.1 as nixpkgs 25.05 provides FFmpeg 7.1.1.
           version = "8.1.1";
@@ -66,6 +155,24 @@
           withStripping = false;  # Strip symbols from the resulting binaries to reduce size
           withSmallDeps  = true;
 
+          withAss = true;         # (Advanced) SubStation Alpha subtitle rendering
+          libass = libass;
+
+          withBluray = true;
+          libbluray = libbluray;
+
+          withDav1d = true;       # AV1 decoder (focused on speed and correctness)
+          dav1d = dav1d;
+
+          withFontconfig = true;
+          fontconfig = fontconfig;
+
+          withFreetype = true;
+          freetype = freetype;
+
+          withHarfbuzz = true;
+          harfbuzz = harfbuzz;
+
           withSoxr = true;
           soxr = pkgs.soxr;
 
@@ -73,7 +180,7 @@
           rubberband = pkgs.rubberband;
 
           withJxl = true;
-          libjxl = pkgs.libjxl;
+          libjxl = libjxl;
 
           withGnutls = true;
 
@@ -148,6 +255,10 @@
 
         mpv = (pkgs.mpv-unwrapped.override {
           ffmpeg = ffmpeg;
+          freetype = freetype;
+          libass = libass;
+          libbluray = libbluray;
+          libplacebo = libplacebo;
           lua = pkgs.luajit;
 
           archiveSupport = true;
@@ -185,8 +296,11 @@
             hash = "sha256-gJWqfvPE6xOKlgj2MzZgXiyOKxksJlY/tL6T/BeG19c=";
           };
           # The mpv package in nixpkgs 25.05 passes a sdl2 option to meson that is not present in
-          # mpv 0.41.0.
-          mesonFlags = builtins.filter(x: x != "-Dsdl2=disabled") previousAttrs.mesonFlags;
+          # mpv 0.41.0. Disable the building of man pages to speed up the build.
+          mesonFlags = builtins.filter(x: x != "-Dsdl2=disabled") previousAttrs.mesonFlags
+            ++ ["-Dmanpage-build=disabled"];
+          # Disabling building of man pages requires the package outputs be adjusted accordingly.
+          outputs = builtins.filter(x: x != "man") previousAttrs.outputs;
           patches =
             []
             # If needed include the fix for IINA issue #5956, the mpv regression described in mpv
@@ -253,29 +367,29 @@
                 path = "${libdir}/${file}";
               }) (builtins.attrNames (builtins.readDir libdir))
             ) [
+              dav1d               # AV1 video decoder
               ffmpeg
+              fontconfig          # Font configuration library
+              freetype            # FreeType font rendering engine
+              harfbuzz            # Text shaping engine. Used by avdevice, avfilter, ass
+              libass              # ASS subtitle renderer
+              libbluray           # Blu-ray support
+              libhwy
+              libjxl              # JPEG-XL support
               libplacebo          # Required by mpv
               mpv
-              libhwy
               pkgs.brotli         # Brotli compression. Used for ass, fontconfig, bluray, & more
-              pkgs.dav1d          # AV1 video decoder
-              pkgs.fontconfig     # Font configuration library
-              pkgs.freetype       # FreeType font rendering engine
               pkgs.fribidi        # Hebrew and Arabic support
               pkgs.gettext        # Internationalization library
               pkgs.glib           # GTK GLib utility library. Required by harfbuzz
               pkgs.gmp            # Provides arbitrary precision arithmetic. Required by several libs
               pkgs.gnutls         # TLS support, needed for network streams
               pkgs.graphite2      # Compiles Graphite-enabled fonts. Used by harfbuzz
-              pkgs.harfbuzz       # Text shaping engine. Used by avdevice, avfilter, ass
               pkgs.lcms2          # Little CMS color management lib. Required by placebo, jxl
               pkgs.libarchive     # Archive support
-              pkgs.libass         # ASS subtitle renderer
               pkgs.libb2          # BLAKE2 hashing library
-              pkgs.libbluray      # Blu-ray support
               pkgs.libidn2        # Converts between ASCII & UTF domain names. Used by gnutls
               pkgs.libjpeg_turbo  # Needed to provide libjpeg
-              pkgs.libjxl         # JPEG-XL support
               pkgs.libpng         # PNG image format support
               pkgs.libsamplerate  # Sample Rate Converter for audio
               pkgs.libtasn1       # ASN.1 library used by GnuTLS, p11-kit
@@ -290,7 +404,7 @@
               pkgs.p11-kit        # Tools for managing PKCS#11 modules (crypto keys / tokens)
               pkgs.pcre2          # Perl-compatible regular expression pattern matching
               pkgs.rubberband     # Enables FFmpeg to perform audio tempo & pitch modifications
-              pkgs.shaderc        # Referenced by libplacebo, even though it requires Vulkan which IINA doesn't use
+              pkgs.shaderc        # Referenced by libplacebo, despite requiring Vulkan which IINA doesn't use
               pkgs.snappy         # Snappy compression
               pkgs.soxr           # SoX Resampler, needed for high-quality audio resampling
               pkgs.speex          # Used by avcodec, avdevice, avfilter, avformat

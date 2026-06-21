@@ -457,7 +457,7 @@ class CanonicalNameDB:
       if lib_version_count == 0:
         # Skip
         continue
-      if lib_version_count > 1 and base_id != 'libplacebo':
+      if lib_version_count > 1:
         # We can't handle this currently, but it should not happen
         print(f'⚠️ ERROR: unexpectedly found multiple remaining versions ({lib_version_count}) for {base_id}! Exiting!')
         sys.exit(99)

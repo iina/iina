@@ -16,9 +16,44 @@
 
 import Foundation
 
+
 fileprivate func toPercent(_ value: Double, _ bound: Double) -> Double {
   return (value + bound).clamped(to: 0...(bound * 2)) / (bound * 2)
 }
+
+
+fileprivate func makeAttributedString(
+  part1: String,
+  fontSize part1FontSize: CGFloat,
+  isSecondary part1IsSecondary: Bool,
+  part2: String,
+  fontSize part2FontSize: CGFloat,
+  isSecondary part2IsSecondary: Bool,
+) -> NSAttributedString? {
+  let attrString = NSMutableAttributedString()
+  attrString.append(NSAttributedString(string: part1, attributes: [
+    .font: NSFont.monospacedDigitSystemFont(ofSize: part1FontSize, weight: .regular),
+    .foregroundColor: part1IsSecondary ? NSColor.secondaryLabelColor : NSColor.labelColor,
+  ]))
+  attrString.append(NSAttributedString(string: part2, attributes: [
+    .font: NSFont.monospacedDigitSystemFont(ofSize: part2FontSize, weight: .regular),
+    .foregroundColor: part2IsSecondary ? NSColor.secondaryLabelColor : NSColor.labelColor,
+  ]))
+  return attrString
+}
+
+
+fileprivate func defaultAttributedString(_ string: String, separator: Character, fontSize: CGFloat, smallFontSize: CGFloat) -> NSAttributedString? {
+  let parts = string.split(separator: separator, maxSplits: 1)
+  if parts.count == 2 {
+    return makeAttributedString(
+      part1: String(parts[0]), fontSize: smallFontSize, isSecondary: true,
+      part2: String(parts[1]), fontSize: fontSize, isSecondary: false,
+    )
+  }
+  return nil
+}
+
 
 enum OSDType {
   case normal
@@ -26,7 +61,6 @@ enum OSDType {
   case withProgress(Double)
   case withPosition(Double)
   case withLeftToRightText(String)
-//  case withButton(String)
 }
 
 enum OSDMessage {
@@ -35,7 +69,7 @@ enum OSDMessage {
 
   case pause
   case resume
-  case seek(String, Double)  // text, percentage
+  case seek(String, String, Double)  // current, total, percentage
   case volume(Double)
   case speed(Double)
   case aspect(String)
@@ -132,7 +166,7 @@ enum OSDMessage {
     }
   }
 
-  func message() -> (String, OSDType) {
+  func titleAndType() -> (String, OSDType) {
     switch self {
     case .fileStart(let filename):
       return (filename, .normal)
@@ -145,8 +179,8 @@ enum OSDMessage {
       return (NSLocalizedString("osd.resume", comment: "Resume"),
               .withLeftToRightText("{{position}} / {{duration}}"))
 
-    case .seek(let text, let percent):
-      return (text, .withPosition(percent))
+    case .seek(let current, let total, let percent):
+      return (current + " / " + total, .withPosition(percent))
 
     case .volume(let value):
       let text = String(format: NSLocalizedString("osd.volume", comment: "Volume: %@"), String(format: "%.0f", value))
@@ -480,5 +514,48 @@ enum OSDMessage {
     case .customWithDetail(let message, let detail):
       return (message, .withText(detail))
     }
+  }
+
+  func attributedTitle(_ label: String, fontSize: CGFloat, smallFontSize: CGFloat) -> NSAttributedString? {
+    switch self {
+    case .seek(let current, let total, _):
+      return makeAttributedString(
+        part1: current, fontSize: fontSize, isSecondary: false,
+        part2: " / " + total, fontSize: smallFontSize, isSecondary: true
+      )
+    case .volume, .speed, .aspect, .crop, .rotate, .deinterlace,
+        .audioDelay, .subPos, .subDelay, .secondSubPos, .secondSubDelay,
+        .brightness, .contrast, .saturation, .gamma, .hue,
+        .track, .chapter,
+        .hwdec, .abLoop, .abLoopUpdate:
+      return defaultAttributedString(label, separator: ":", fontSize: fontSize, smallFontSize: smallFontSize)
+    default:
+      return nil
+    }
+  }
+
+  func image() -> NSImage? {
+    // icons don't look great in OSDs
+    return nil
+
+//    switch self {
+//    case .volume(let val):
+//      let intVal = (Int(val / 30) + 1).clamped(to: 1...3)
+//      return .sf("speaker.wave.\(intVal).fill")
+//    case .mute: return .sf("speaker.slash.fill")
+//    case .unMute: return .sf("speaker.fill")
+//    case .speed: return .sf("chevron.forward.dotted.chevron.forward")
+//    case .pause: return .sf("pause.fill")
+//    case .resume: return .sf("play.fill")
+//    case .stop: return .sf("stop.fill")
+//    case .abLoop, .abLoopUpdate: return .sf("arrow.2.squarepath")
+//    case .playlistLoop: return .sf("repeat")
+//    case .fileLoop: return .sf("repeat.1")
+//    case .noLoop: return .sf("repeat.badge.xmark", "repeat.badge.xmark.circle.fill")
+//    case .audioDelay, .subDelay, .secondSubDelay:
+//      return .sf("clock.arrow.trianglehead.counterclockwise.rotate.90")
+//    default:
+//      return nil
+//    }
   }
 }

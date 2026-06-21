@@ -2625,11 +2625,11 @@ class MainWindowController: PlayerWindowController {
       switch osdLastMessage {
       case .pause, .resume:
         message = osdLastMessage
-      case .seek(_, _):
-        let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
-        (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+      case .seek(_, _, _):
+        let current = player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder
+        let total = player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder
         let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
-        message = .seek(osdText, percentage)
+        message = .seek(current, total, percentage)
       default:
         return
       }

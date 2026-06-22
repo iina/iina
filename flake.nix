@@ -163,9 +163,9 @@
         });
 
         ffmpeg = (pkgs.ffmpeg-headless.override {
-          # Upgrade to FFmpeg 8.1.1 as nixpkgs 25.05 provides FFmpeg 7.1.1.
-          version = "8.1.1";
-          hash = "sha256-WPGfjTZjsgpR5QiANRWF4g6LF2ejGzFQUrLjhzw9cfQ=";
+          # Upgrade to FFmpeg 8.1.2 as nixpkgs 25.05 provides FFmpeg 7.1.1.
+          version = "8.1.2";
+          hash = "sha256-wJ3c8VVo/tK84K7bKYs/UWcln4mSO+tf/w5NLNjKhiI=";
 
           withDebug = false;      # Build using debug options
           withStripping = false;  # Strip symbols from the resulting binaries to reduce size

@@ -252,6 +252,12 @@ class MainWindowController: PlayerWindowController {
     case intermediate
   }
 
+  enum CustomFloatingWindowStatus {
+    case notInCustomFloatingWindow
+    case inCustomFloatingWindow
+    case intermediate
+  }
+
   enum InteractiveMode {
     case crop
     case freeSelecting
@@ -439,6 +445,9 @@ class MainWindowController: PlayerWindowController {
   }
 
   var pipVideo: NSViewController!
+  var customFloatingWindowController: CustomFloatingWindowController?
+  var customFloatingWindowStatus = CustomFloatingWindowStatus.notInCustomFloatingWindow
+  var isWindowHiddenDueToCustomFloatingWindow = false
 
   // MARK: - Initialization
 
@@ -746,6 +755,15 @@ class MainWindowController: PlayerWindowController {
     cv.addSubview(videoView, positioned: .below, relativeTo: nil)
     videoView.translatesAutoresizingMaskIntoConstraints = false
     setupVideoViewConstraints()
+  }
+
+  func detachVideoViewFromWindow() {
+    guard let cv = window?.contentView else { return }
+    layoutSides.forEach {
+      videoViewConstraints[$0].flatMap(cv.removeConstraint)
+      videoViewConstraints[$0] = nil
+    }
+    videoView.removeFromSuperview()
   }
 
   private func setupVideoViewConstraints() {
@@ -1298,6 +1316,9 @@ class MainWindowController: PlayerWindowController {
     if pipStatus == .inPIP {
       exitPIP()
     }
+    if customFloatingWindowStatus == .inCustomFloatingWindow {
+      exitCustomFloatingWindow(restoreMainWindow: false)
+    }
     // stop playing
     if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
       restoreDockSettings()
@@ -1622,6 +1643,7 @@ class MainWindowController: PlayerWindowController {
 
     switch fsState {
     case .windowed:
+      guard customFloatingWindowStatus == .notInCustomFloatingWindow else { return }
       guard !player.isInMiniPlayer else { return }
       if Preference.bool(for: .useLegacyFullScreen) {
         log("Will enter legacy full screen mode")
@@ -2952,6 +2974,8 @@ class MainWindowController: PlayerWindowController {
     switch cmd {
     case .toggleMusicMode:
       player.switchToMiniPlayer()
+    case .toggleCustomFloatingWindow:
+      toggleCustomFloatingWindow()
     default:
       break
     }
@@ -3172,5 +3196,98 @@ extension MainWindowController: PIPViewControllerDelegate {
       state.contentDuration = duration
       state.setPlaybackRate(playing ? player.info.playSpeed : 0, elapsedTime: elapsed, timeControlStatus: playing ? 2 : 0)
     }
+  }
+}
+
+// MARK: - Custom Floating Window
+
+extension MainWindowController: CustomFloatingWindowControllerDelegate {
+
+  func toggleCustomFloatingWindow() {
+    switch customFloatingWindowStatus {
+    case .notInCustomFloatingWindow:
+      enterCustomFloatingWindow()
+    case .inCustomFloatingWindow:
+      exitCustomFloatingWindow()
+    case .intermediate:
+      return
+    }
+  }
+
+  func enterCustomFloatingWindow() {
+    guard customFloatingWindowStatus == .notInCustomFloatingWindow,
+          let window = window,
+          !fsState.isFullscreen,
+          player.info.state.active else { return }
+
+    if pipStatus == .inPIP {
+      exitPIP()
+    }
+
+    customFloatingWindowStatus = .intermediate
+    showUI()
+    detachVideoViewFromWindow()
+
+    let controller = CustomFloatingWindowController(
+      videoView: videoView,
+      title: window.title,
+      initialFrame: initialCustomFloatingWindowFrame()
+    )
+    controller.delegate = self
+    customFloatingWindowController = controller
+
+    controller.showWindow(self)
+    controller.window?.makeKeyAndOrderFront(self)
+    window.orderOut(self)
+    isWindowHiddenDueToCustomFloatingWindow = true
+
+    customFloatingWindowStatus = .inCustomFloatingWindow
+  }
+
+  func exitCustomFloatingWindow() {
+    exitCustomFloatingWindow(restoreMainWindow: true)
+  }
+
+  private func exitCustomFloatingWindow(restoreMainWindow: Bool) {
+    guard customFloatingWindowStatus == .inCustomFloatingWindow else { return }
+    customFloatingWindowStatus = .intermediate
+    customFloatingWindowController?.delegate = nil
+    customFloatingWindowController?.close()
+    customFloatingWindowController = nil
+    finishExitingCustomFloatingWindow(restoreMainWindow: restoreMainWindow)
+  }
+
+  func customFloatingWindowWillClose(_ controller: CustomFloatingWindowController) {
+    guard customFloatingWindowController === controller,
+          customFloatingWindowStatus == .inCustomFloatingWindow else { return }
+    customFloatingWindowStatus = .intermediate
+    customFloatingWindowController = nil
+    finishExitingCustomFloatingWindow(restoreMainWindow: true)
+  }
+
+  private func finishExitingCustomFloatingWindow(restoreMainWindow: Bool) {
+    addVideoViewToWindow()
+    if restoreMainWindow && isWindowHiddenDueToCustomFloatingWindow {
+      window?.makeKeyAndOrderFront(self)
+    }
+    if isWindowHiddenDueToCustomFloatingWindow {
+      isWindowHiddenDueToCustomFloatingWindow = false
+    }
+    customFloatingWindowStatus = .notInCustomFloatingWindow
+    forceDraw("exited custom floating window")
+  }
+
+  private func initialCustomFloatingWindowFrame() -> NSRect {
+    let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
+    let (videoWidth, videoHeight) = player.videoSizeForDisplay
+    let aspectSize = NSSize(width: videoWidth, height: videoHeight)
+    let maxSize = NSSize(width: min(screenFrame.width * 0.36, 520), height: min(screenFrame.height * 0.36, 320))
+    var size = aspectSize.shrink(toSize: maxSize)
+    size = size.satisfyMinSizeWithSameAspectRatio(NSSize(width: 240, height: 135))
+    let origin = NSPoint(
+      x: screenFrame.maxX - size.width - 24,
+      y: screenFrame.minY + 24
+    )
+    return NSRect(origin: origin, size: size)
   }
 }

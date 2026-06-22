@@ -77,6 +77,7 @@ extension MainWindowController {
   }
 
   @objc func menuTogglePIP(_ sender: NSMenuItem) {
+    guard customFloatingWindowStatus == .notInCustomFloatingWindow else { return }
     switch pipStatus {
     case .notInPIP:
       enterPIP()

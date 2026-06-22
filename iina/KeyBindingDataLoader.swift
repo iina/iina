@@ -53,6 +53,7 @@ class KeyBindingDataLoader {
     KBI("sub-panel", type: .iinaCmd),
     KBI("playlist-panel", type: .iinaCmd),
     KBI("chapter-panel", type: .iinaCmd),
+    KBI("toggle-custom-floating-window", type: .iinaCmd),
     KBI.separator(),
     KBI("open-file", type: .iinaCmd),
     KBI("open-url", type: .iinaCmd),
@@ -185,4 +186,3 @@ class KeyBindingDataLoader {
   }
 
 }
-

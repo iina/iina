@@ -318,6 +318,10 @@
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		CEE257A82FE9B59A0044829A /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = CEE257A42FE9B59A0044829A /* AppIcon.icon */; };
+		CEE257A92FE9B59A0044829A /* AppIconNightly.icon in Resources */ = {isa = PBXBuildFile; fileRef = CEE257A72FE9B59A0044829A /* AppIconNightly.icon */; };
+		CEE257AA2FE9B59A0044829A /* AppIconBeta.icon in Resources */ = {isa = PBXBuildFile; fileRef = CEE257A52FE9B59A0044829A /* AppIconBeta.icon */; };
+		CEE257AB2FE9B59A0044829A /* AppIconDebug.icon in Resources */ = {isa = PBXBuildFile; fileRef = CEE257A62FE9B59A0044829A /* AppIconDebug.icon */; };
 		D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */; };
 		D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
 		D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A4D9892B1495270009AB4E /* LegacyMigration.swift */; };
@@ -1734,6 +1738,10 @@
 		C78987301E34EF170005769F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C7DBA5EB1F07C5FD00C2B416 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InitialWindowController.strings; sourceTree = "<group>"; };
 		C7E90B522087EC5700A58B6B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		CEE257A42FE9B59A0044829A /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		CEE257A52FE9B59A0044829A /* AppIconBeta.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIconBeta.icon; sourceTree = "<group>"; };
+		CEE257A62FE9B59A0044829A /* AppIconDebug.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIconDebug.icon; sourceTree = "<group>"; };
+		CEE257A72FE9B59A0044829A /* AppIconNightly.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIconNightly.icon; sourceTree = "<group>"; };
 		D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCToolbarButton.swift; sourceTree = "<group>"; };
 		D1A4D9892B1495270009AB4E /* LegacyMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyMigration.swift; sourceTree = "<group>"; };
 		D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPlayerWindow.swift; sourceTree = "<group>"; };
@@ -2378,6 +2386,10 @@
 				845AC09E1E1AE6C10080B614 /* Localizable.strings */,
 				34F294BF2C0B68B300F14962 /* Contribution.rtf */,
 				8483FAFF1EDFF325000F55D6 /* Credits.rtf */,
+				CEE257A42FE9B59A0044829A /* AppIcon.icon */,
+				CEE257A52FE9B59A0044829A /* AppIconBeta.icon */,
+				CEE257A62FE9B59A0044829A /* AppIconDebug.icon */,
+				CEE257A72FE9B59A0044829A /* AppIconNightly.icon */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -3110,6 +3122,10 @@
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
 				8492C2861E771FB200CE5825 /* ISO639.strings in Resources */,
 				8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */,
+				CEE257A82FE9B59A0044829A /* AppIcon.icon in Resources */,
+				CEE257A92FE9B59A0044829A /* AppIconNightly.icon in Resources */,
+				CEE257AA2FE9B59A0044829A /* AppIconBeta.icon in Resources */,
+				CEE257AB2FE9B59A0044829A /* AppIconDebug.icon in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				8400D5F31E1AB348006785F5 /* PrefSubViewController.xib in Resources */,

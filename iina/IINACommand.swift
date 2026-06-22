@@ -11,6 +11,7 @@ import Foundation
 enum IINACommand: String {
 
   case togglePIP = "toggle-pip"
+  case toggleCustomFloatingWindow = "toggle-custom-floating-window"
   case openFile = "open-file"
   case openURL = "open-url"
 

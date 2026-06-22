@@ -997,6 +997,20 @@ struct Preference {
     }
   }
 
+  static var isLiveTextAvailable: Bool = {
+    guard #available(macOS 13, *) else { return false }
+    let defaults = UserDefaults.standard
+    if defaults.object(forKey: "AppleLiveTextEnabled") == nil {
+      return true
+    }
+    return defaults.bool(forKey: "AppleLiveTextEnabled")
+  }()
+
+  static var isLiveTextEnabled: Bool {
+    guard isLiveTextAvailable else { return false }
+    return Preference.bool(for: .enableLiveText)
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [

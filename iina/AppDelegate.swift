@@ -38,8 +38,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /** Cached URL when launching from URL scheme. */
   var pendingURL: String?
 
-  let liveTextAvailable = Utility.isLiveTextEnabled()
-
   /** Cached file paths received in `application(_:openFile:)`. */
   private var pendingFilesForOpenFile: [String] = []
   /** The timer for `OpenFileRepeatTime` and `application(_:openFile:)`. */

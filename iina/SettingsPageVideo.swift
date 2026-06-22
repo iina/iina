@@ -28,7 +28,7 @@ class SettingsPageVideo: SettingsPage {
   override func content() -> [SettingsSection] {
     return sections {
       sectionDecoding()
-      if AppDelegate.shared.liveTextAvailable {
+      if Preference.isLiveTextAvailable {
         sectionLiveText()
       }
       sectionColor()

@@ -379,14 +379,12 @@ class MainWindowController: PlayerWindowController {
         $0?.setStyle(Preference.liquidGlass(.osd) ? .liquidGlass : .visualEffect)
       }
     case PK.enableLiveText.rawValue:
-      if let newValue = change[.newKey] as? Bool {
+      if #available(macOS 13, *), let newValue = change[.newKey] as? Bool {
         let buttons = fragToolbarView.subviews as! [NSButton]
         if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
-        if #available(macOS 13, *) {
-          if newValue { requestLiveTextAnalysis() } else { clearLiveTextAnalysis() }
-        }
+        if newValue { requestLiveTextAnalysis() } else { clearLiveTextAnalysis() }
       }
     default:
       return
@@ -804,7 +802,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
-    let effectiveButtons = buttons.filter { $0 != .liveText || AppDelegate.shared.liveTextAvailable }
+    let effectiveButtons = buttons.filter { $0 != .liveText || Preference.isLiveTextEnabled }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     let liveTextEnabled = Preference.bool(for: .enableLiveText)
     for buttonType in effectiveButtons {
@@ -1392,7 +1390,7 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
       clearLiveTextAnalysis()
     }
 
@@ -1435,7 +1433,7 @@ class MainWindowController: PlayerWindowController {
     }
     window?.titlebarAppearsTransparent = false
 
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
       requestLiveTextAnalysis()
     }
 
@@ -1489,6 +1487,10 @@ class MainWindowController: PlayerWindowController {
       return
     }
 
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
+      requestLiveTextAnalysis()
+    }
+
     // Reset the full screen state to indicate exiting full screen mode so that finishAnimating
     // will correctly set the state to windowed.
     fsState = .animating(toFullscreen: false, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
@@ -1516,7 +1518,7 @@ class MainWindowController: PlayerWindowController {
   /// method has been called when the window is in full screen mode. Prepare the window to start transitioning to windowed mode.
   /// - Attention: After altering this method you _must_ update the
   ///     [windowDidFailToExitFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidfailtoexitfullscreen(_:))
-  ///     method which is responsible for reverting changes made by this method should the transition to wndowed mode fail.
+  ///     method which is responsible for reverting changes made by this method should the transition to windowed mode fail.
   /// - Parameter notification: A notification named
   ///     [willExitFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/willexitfullscreennotification).
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1528,7 +1530,7 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
       clearLiveTextAnalysis()
     }
 
@@ -1573,7 +1575,7 @@ class MainWindowController: PlayerWindowController {
       fsState.startAnimatingToWindow()
     }
 
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
       requestLiveTextAnalysis()
     }
 
@@ -1642,6 +1644,10 @@ class MainWindowController: PlayerWindowController {
       // Must not occur! Represents an error in IINA or AppKit.
       log("Unable to restore full screen state: \(fsState)", level: .error)
       return
+    }
+
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
+      requestLiveTextAnalysis()
     }
 
     // Reset the full screen state to indicate entering full screen mode so that finishAnimating
@@ -1792,7 +1798,7 @@ class MainWindowController: PlayerWindowController {
     if isInInteractiveMode {
       return window.frame.size
     }
-    if !window.inLiveResize, #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if !window.inLiveResize, #available(macOS 13, *), Preference.isLiveTextEnabled {
       clearLiveTextAnalysis()
     }
     if frameSize.height <= AppData.mainWindowMinSize.height || frameSize.width <= AppData.mainWindowMinSize.width {
@@ -1803,7 +1809,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
-    if !window.inLiveResize, #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if !window.inLiveResize, #available(macOS 13, *), Preference.isLiveTextEnabled {
       requestLiveTextAnalysis()
     }
 
@@ -1881,7 +1887,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillStartLiveResize(_ notification: Notification) {
     videoView.videoLayer.inLiveResize = true
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
       clearLiveTextAnalysis()
     }
   }
@@ -1893,7 +1899,7 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
-    if #available(macOS 13, *), AppDelegate.shared.liveTextAvailable {
+    if #available(macOS 13, *), Preference.isLiveTextEnabled {
       requestLiveTextAnalysis()
     }
   }

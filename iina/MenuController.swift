@@ -138,6 +138,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fitToScreen: NSMenuItem!
   @IBOutlet weak var fullScreen: NSMenuItem!
   @IBOutlet weak var pictureInPicture: NSMenuItem!
+  var customFloatingWindowMenuItem: NSMenuItem?
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var lockAspectRatio: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
@@ -291,6 +292,10 @@ class MenuController: NSObject, NSMenuDelegate {
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
+    let floatingItem = NSMenuItem(title: Constants.String.customFloatingWindow, action: #selector(MainWindowController.menuToggleCustomFloatingWindow(_:)), keyEquivalent: "")
+    floatingItem.tag = -2
+    videoMenu.insertItem(floatingItem, at: videoMenu.index(of: pictureInPicture) + 1)
+    customFloatingWindowMenuItem = floatingItem
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
     lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
 
@@ -520,6 +525,8 @@ class MenuController: NSObject, NSMenuDelegate {
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
+    let isInCustom = player.mainWindow.customFloatingWindowStatus == .inCustomFloatingWindow
+    customFloatingWindowMenuItem?.title = isInCustom ? Constants.String.exitCustomFloatingWindow : Constants.String.customFloatingWindow
     miniPlayer.title = player.isInMiniPlayer ? Constants.String.exitMiniPlayer : Constants.String.miniPlayer
     delogo.state = isDelogo ? .on : .off
   }
@@ -881,6 +888,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
       (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
       (pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil),
+      (customFloatingWindowMenuItem!, true, [IINACommand.toggleCustomFloatingWindow.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
       (cycleSubtitles, false, ["cycle", "sub"], false, nil, nil),

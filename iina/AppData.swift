@@ -95,6 +95,8 @@ struct Constants {
     static let none = NSLocalizedString("quicksetting.item_none", comment: "None")
     static let pip = NSLocalizedString("menu.pip", comment: "Enter Picture-in-Picture")
     static let exitPIP = NSLocalizedString("menu.exit_pip", comment: "Exit Picture-in-Picture")
+    static let customFloatingWindow = NSLocalizedString("menu.custom_floating_window", comment: "Toggle Floating Video Window")
+    static let exitCustomFloatingWindow = NSLocalizedString("menu.exit_custom_floating_window", comment: "Exit Floating Video Window")
     static let miniPlayer = NSLocalizedString("menu.mini_player", comment: "Enter Music Mode")
     static let exitMiniPlayer = NSLocalizedString("menu.exit_mini_player", comment: "Exit Music Mode")
     static let custom = NSLocalizedString("menu.crop_custom", comment: "Custom crop size")

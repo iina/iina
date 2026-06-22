@@ -88,6 +88,10 @@ extension MainWindowController {
     }
   }
 
+  @objc func menuToggleCustomFloatingWindow(_ sender: NSMenuItem) {
+    toggleCustomFloatingWindow()
+  }
+
   @objc func menuToggleFullScreen(_ sender: NSMenuItem) {
     toggleWindowFullScreen()
   }

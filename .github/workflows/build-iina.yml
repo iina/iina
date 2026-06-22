@@ -1,0 +1,32 @@
+name: Build IINA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: codex/custom-floating-window
+
+      - name: Install dependencies
+        run: ./other/download_libs.sh --skip-plugins
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=NO -scheme iina -configuration Nightly
+
+      - name: Archive
+        run: |
+          APP=$(find /Users/runner/Library/Developer/Xcode/DerivedData -name "IINA.app" -type d -maxdepth 5 | head -1)
+          echo "Found: $APP"
+          tar cvJf ~/iina.tar.xz -C "$(dirname "$APP")" IINA.app
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: IINA
+          path: ~/iina.tar.xz

@@ -591,7 +591,13 @@ class PlayerCore: NSObject {
         inputConfPath = currentConfigFilePath
       }
     }
-    setKeyBindings(KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!)
+    var bindings = KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!
+    let customBinding = KeyMapping(rawKey: "Ctrl+Alt+Meta+p", rawAction: "toggle-custom-floating-window", isIINACommand: true)
+    let key = customBinding.normalizedMpvKey
+    if !bindings.contains(where: { $0.normalizedMpvKey == key }) {
+      bindings.append(customBinding)
+    }
+    setKeyBindings(bindings)
   }
 
   static func setKeyBindings(_ keyMappings: [KeyMapping]) {

@@ -524,7 +524,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
       spacer.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
       func createActionButton(symbol: String, action: Selector) -> ButtonWithObject {
-        let image = .sf(symbol) ?? NSImage.init(named: symbol)!
+        let image = NSImage.sf(symbol)!
         let button = ButtonWithObject(
           title: "", image: image, target: editor, action: action)
         button.bezelStyle = .circular

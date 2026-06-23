@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="25084" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25084"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -48,7 +48,7 @@
             <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="300" height="72"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1662"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1410"/>
             <value key="minSize" type="size" width="300" height="72"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="300" height="72"/>
@@ -201,15 +201,11 @@
                                         </connections>
                                     </button>
                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="fUy-ap-8fj">
-                                        <rect key="frame" x="49" y="15" width="17" height="14"/>
-                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
+                                        <rect key="frame" x="44" y="15" width="22" height="15"/>
+                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume.3.fill" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="9bz-eY-31X">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="o7f-KV-JoD"/>
-                                            <constraint firstAttribute="width" secondItem="fUy-ap-8fj" secondAttribute="height" multiplier="17:14" id="tjj-et-8gi"/>
-                                        </constraints>
                                         <connections>
                                             <action selector="volumeBtnAction:" target="-2" id="ynf-E4-jte"/>
                                         </connections>
@@ -407,11 +403,11 @@
             </connections>
         </viewController>
         <customView id="JoU-Y0-cxJ">
-            <rect key="frame" x="0.0" y="2" width="183" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="190" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ene-VG-UYY" customClass="VolumeSlider" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="37" y="8" width="100" height="14"/>
+                    <rect key="frame" x="45" y="8" width="100" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="22P-mK-lYF"/>
                     </constraints>
@@ -421,10 +417,7 @@
                     </connections>
                 </slider>
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MP6-sS-T7f">
-                    <rect key="frame" x="143" y="8" width="34" height="14"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="UDC-wZ-xua"/>
-                    </constraints>
+                    <rect key="frame" x="151" y="8" width="22" height="14"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="50" id="aot-6J-Jp7">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -432,31 +425,28 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="5Og-lg-qvH">
-                    <rect key="frame" x="12" y="8" width="17" height="14"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="volume" imagePosition="only" alignment="center" alternateImage="mute" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="6jy-7B-dv6">
+                    <rect key="frame" x="15" y="8" width="22" height="15"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speaker.wave.3.fill" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" id="6jy-7B-dv6">
                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="5Og-lg-qvH" secondAttribute="height" multiplier="17:14" id="Sh7-eY-TU8"/>
-                        <constraint firstAttribute="height" constant="14" id="cUj-wp-dxX"/>
-                    </constraints>
                     <connections>
                         <action selector="muteButtonAction:" target="-2" id="u5U-Dm-QKi"/>
                     </connections>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="5Og-lg-qvH" firstAttribute="leading" secondItem="JoU-Y0-cxJ" secondAttribute="leading" constant="12" id="21L-XX-pZ8"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MP6-sS-T7f" secondAttribute="trailing" id="DI3-Fr-ZSl"/>
                 <constraint firstItem="MP6-sS-T7f" firstAttribute="centerY" secondItem="JoU-Y0-cxJ" secondAttribute="centerY" id="IEM-58-wBy"/>
+                <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="8" symbolic="YES" id="It3-TD-sDW"/>
                 <constraint firstItem="Ene-VG-UYY" firstAttribute="top" secondItem="JoU-Y0-cxJ" secondAttribute="top" constant="8" id="JXq-kB-fdn"/>
-                <constraint firstItem="MP6-sS-T7f" firstAttribute="leading" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="8" id="Jfv-7v-xAE"/>
-                <constraint firstAttribute="trailing" secondItem="MP6-sS-T7f" secondAttribute="trailing" constant="8" id="Nkd-PC-I2B"/>
+                <constraint firstAttribute="trailing" secondItem="Ene-VG-UYY" secondAttribute="trailing" constant="45" id="Jfv-7v-xAE"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="5Og-lg-qvH" secondAttribute="trailing" constant="8" id="RdS-Ny-4dC"/>
                 <constraint firstItem="5Og-lg-qvH" firstAttribute="centerY" secondItem="JoU-Y0-cxJ" secondAttribute="centerY" id="U0k-sl-lgS"/>
                 <constraint firstAttribute="bottom" secondItem="Ene-VG-UYY" secondAttribute="bottom" constant="8" id="Yba-0E-lbi"/>
-                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="5Og-lg-qvH" secondAttribute="trailing" constant="8" id="agK-tV-GdH"/>
+                <constraint firstItem="Ene-VG-UYY" firstAttribute="leading" secondItem="JoU-Y0-cxJ" secondAttribute="leading" constant="45" id="agK-tV-GdH"/>
             </constraints>
-            <point key="canvasLocation" x="63.5" y="349.5"/>
+            <point key="canvasLocation" x="21" y="63"/>
         </customView>
         <popover behavior="t" id="yea-QL-Hlq">
             <connections>
@@ -467,13 +457,13 @@
     <resources>
         <image name="backward" width="11" height="11"/>
         <image name="close" width="11" height="11"/>
-        <image name="mute" width="16" height="14"/>
         <image name="nextl" width="24" height="24"/>
         <image name="nextr" width="24" height="24"/>
         <image name="pause" width="24" height="24"/>
         <image name="play" width="24" height="24"/>
         <image name="playlist" width="14" height="14"/>
+        <image name="speaker.wave.3.fill" catalog="system" width="22" height="15"/>
         <image name="toggle-album-art" width="14" height="14"/>
-        <image name="volume" width="16" height="14"/>
+        <image name="volume.3.fill" catalog="system" width="22" height="15"/>
     </resources>
 </document>

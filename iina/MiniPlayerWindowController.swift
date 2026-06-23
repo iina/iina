@@ -339,18 +339,28 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     if isTrackpadBegan {
        // enabling animation here causes user not seeing their volume changes during popover transition
        volumePopover.animates = false
-       volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+       showVolumePopover()
      } else if isTrackpadEnd {
        DispatchQueue.main.asyncAfter(deadline: .now(), execute: hideVolumePopover)
      } else if isMouse {
        // if it's a mouse, simply show popover then hide after a while when user stops scrolling
        if !volumePopover.isShown {
          volumePopover.animates = false
-         volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+         showVolumePopover()
        }
        let timeout = Preference.double(for: .osdAutoHideTimeout)
        DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: hideVolumePopover)
      }
+  }
+
+  private func showVolumePopover() {
+    // Use the superview as the anchor to bypass NSButton's alignment rect adjustments,
+    // which would otherwise snap the popover arrow to the SF symbol's visual bounds.
+    guard let superview = volumeButton.superview else {
+      volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+      return
+    }
+    volumePopover.show(relativeTo: volumeButton.frame, of: superview, preferredEdge: .minY)
   }
 
   // MARK: - IBActions
@@ -421,7 +431,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     if volumePopover.isShown {
       volumePopover.performClose(self)
     } else {
-      volumePopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
+      showVolumePopover()
     }
   }
 

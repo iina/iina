@@ -123,7 +123,7 @@ class PluginViewController: SidebarViewController {
       tabButtonsSegmentControl.controlSize = .large
     }
     tabButtonsSegmentControl.setImage(getPluginIcon(isSmall: isCompact), forSegment: 0)
-    tabButtonsSegmentControl.setImage(.triangleDown, forSegment: 1)
+    tabButtonsSegmentControl.setImage(.sf("chevron.down"), forSegment: 1)
 
     closeSidebarBtnSizeConstraint.constant =  isCompact ? 28 : 36
   }

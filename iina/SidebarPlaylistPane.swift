@@ -56,23 +56,24 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     addFileMenu.addItem(
       withTitle: NSLocalizedString("sidebar.add_url", comment: ""), action: #selector(addURLAction), target: self)
 
-    func makeButton(_ title: String, _ image: NSImage, _ action: Selector) -> NSButton {
-      let btn = NSButton(image: image, target: self, action: action)
+    func makeButton(_ title: String, _ imageName: String, _ action: Selector) -> NSButton {
+      let config = NSImage.SymbolConfiguration(pointSize: 13, weight: .regular)
+      let btn = NSButton(image: .sf(imageName, withConfiguration: config)!, target: self, action: action)
       btn.isBordered = false
       btn.toolTip = NSLocalizedString("mini_player.\(title)", comment: title)
+      btn.imageScaling = .scaleNone
       return btn
     }
 
-    loopBtn = makeButton("loop", .loop, #selector(loopBtnAction))
+    loopBtn = makeButton("loop", "repeat", #selector(loopBtnAction))
     loopBtn.bezelStyle = .smallSquare
-    loopBtn.setButtonType(.toggle)
-    loopBtn.allowsMixedState = true
-    loopBtn.alternateImage = .loopDark
-    shuffleBtn = makeButton("shuffle", .sf("shuffle")!, #selector(shuffleBtnAction))
-    sortBtn = makeButton("sort", .sf("arrow.up.arrow.down")!, #selector(sortBtnAction))
-    addBtn = makeButton("add", .plus, #selector(addToPlaylistBtnAction))
-    removeBtn = makeButton("remove", .minus, #selector(removeBtnAction))
-    deleteBtn = makeButton("delete", .sf("trash")!, #selector(clearPlaylistBtnAction))
+    loopBtn.setButtonType(.momentaryPushIn)
+    updateLoopBtnStatus()
+    shuffleBtn = makeButton("shuffle", "shuffle", #selector(shuffleBtnAction))
+    sortBtn = makeButton("sort", "arrow.up.arrow.down", #selector(sortBtnAction))
+    addBtn = makeButton("add", "plus", #selector(addToPlaylistBtnAction))
+    removeBtn = makeButton("remove", "minus", #selector(removeBtnAction))
+    deleteBtn = makeButton("delete", "trash", #selector(clearPlaylistBtnAction))
 
     totalLengthLabel = NSTextField(labelWithString: "")
     totalLengthLabel.textColor = .secondaryLabelColor
@@ -173,12 +174,11 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   func updateLoopBtnStatus() {
     guard player.info.state.active else { return }
     let loopMode = player.getLoopMode()
-    loopBtn.state = switch loopMode {
-    case .off: .off
-    case .file: .on
-    default: .mixed
+    loopBtn.image = switch loopMode {
+    case .off:  .sf("repeat")
+    case .file: .sf("custom.repeat.1.rectangle.fill")
+    default:    .sf("custom.repeat.rectangle.fill")
     }
-    loopBtn.alternateImage = NSImage.init(named: loopBtn.state == .on ? "loop_file" : "loop_dark")
   }
 
 

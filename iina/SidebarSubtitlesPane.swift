@@ -177,7 +177,7 @@ fileprivate class LoadSubtitleView: NSView {
     loadSubSegment.trackingMode = .momentary
     loadSubSegment.target = self
     loadSubSegment.action = #selector(loadExternalSubAction)
-    loadSubSegment.setImage(.triangleDown, forSegment: 1)
+    loadSubSegment.setImage(.sf("chevron.down"), forSegment: 1)
 
     let searchOnlineButton = ui.button(
       "sidebar.search_online", target: self, action: #selector(searchOnlineAction)

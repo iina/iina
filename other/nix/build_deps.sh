@@ -179,7 +179,7 @@ if [[ "$NIX_BUILD" = true ]]; then
 
   if [[ ! -f $NIX_DIR/flake.nix ]]; then
     echo -e "${RED}ERROR: Could not find 'flake.nix' (expected location: $NIX_DIR/flake.nix).${NC}" >&2
-    echo -e "${RED}Please ensure it is present and this script is located in the same diretory.${NC}" >&2
+    echo -e "${RED}Please ensure it is present and this script is located in the same directory.${NC}" >&2
     echo -e "Aborting build." >&2
     exit 1
   fi

@@ -14,34 +14,76 @@ fileprivate func liveTextLog(_ str: @autoclosure () -> String, level: Logger.Lev
   Logger.log(str, level: level, subsystem: subsystem)
 }
 
-@available(macOS 13, *)
-extension MainWindowController: ImageAnalysisOverlayViewDelegate {
 
-  @discardableResult
-  func setupLiveTextOverlay() -> ImageAnalysisOverlayView {
-    let overlayView = ImageAnalysisOverlayView()
-    overlayView.preferredInteractionTypes = .automatic
-    overlayView.delegate = self
-    overlayView.translatesAutoresizingMaskIntoConstraints = false
-    liveTextOverlayView = overlayView
-    updateLiveTextOverlayInsets()
-    return overlayView
+@preconcurrency
+@MainActor
+class LiveTextController {
+  private weak var mainWindow: MainWindowController!
+
+  var overlayView: NSView?
+  var analysisTask: Task<Void, Never>?
+
+  var isSelected: Bool = false
+  var isMenuOpen: Bool = false
+  var isHighlighted: Bool = false
+  var isActive: Bool {
+    isSelected || isMenuOpen || isHighlighted
   }
 
-  func updateLiveTextOverlayInsets() {
-    guard let view = liveTextOverlayView as? ImageAnalysisOverlayView else { return }
+  init(mainWindow: MainWindowController) {
+    self.mainWindow = mainWindow
+  }
+
+  func updateOverlayInsets() {
+    guard #available(macOS 13.0, *) else { return }
+    guard let view = overlayView as? ImageAnalysisOverlayView else { return }
     let isBottom = Preference.enum(for: .oscPosition) as Preference.OSCPosition == .bottom
     view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: 8, left: 8, bottom: isBottom ? 48 : 8, right: 8)
   }
 
-  func requestLiveTextAnalysis() {
-    guard player.info.state == .paused, Preference.bool(for: .enableLiveText) else { return }
+  func requestAnalysis() {
+    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled else { return }
+    requestAnalysisImpl()
+  }
+
+  func clearAnalysis() {
+    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled else { return }
+    clearAnalysisImpl()
+  }
+
+  func refreshUI() {
+    if isActive {
+      mainWindow.hideUI(force: true)
+    } else {
+      mainWindow.showUI()
+    }
+  }
+}
+
+
+@available(macOS 13.0, *)
+extension LiveTextController: ImageAnalysisOverlayViewDelegate {
+  @discardableResult
+  func setupLiveTextOverlay() -> ImageAnalysisOverlayView {
+    let view = ImageAnalysisOverlayView()
+    view.preferredInteractionTypes = .automatic
+    view.delegate = self
+    view.translatesAutoresizingMaskIntoConstraints = false
+    overlayView = view
+    updateOverlayInsets()
+    return view
+  }
+
+  func requestAnalysisImpl() {
+    guard mainWindow.player.info.state == .paused, Preference.isLiveTextEnabled else { return }
     liveTextLog("Image analysis requested")
-    liveTextAnalysisTask?.cancel()
-    liveTextAnalysisTask = Task { [weak self] in
+    analysisTask?.cancel()
+
+    let videoView = mainWindow.videoView
+    analysisTask = Task { [weak self] in
       guard let self else { return }
       do {
-        guard let image = await self.videoView.videoLayer.captureSnapshot() else {
+        guard let image = await videoView.videoLayer.captureSnapshot() else {
           liveTextLog("Failed to capture frame for image analysis", level: .warning)
           return
         }
@@ -51,8 +93,8 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
         await MainActor.run {
           let overlay = self.setupLiveTextOverlay()
           overlay.analysis = analysis
-          overlay.frame = self.videoView.bounds
-          self.videoView.addSubview(overlay)
+          overlay.frame = videoView.bounds
+          videoView.addSubview(overlay)
           overlay.padding(.all(0))
           liveTextLog("Image analysis overlay view inserted to video view")
           self.refreshUI()
@@ -65,13 +107,13 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
     }
   }
 
-  func clearLiveTextAnalysis() {
-    liveTextAnalysisTask?.cancel()
-    liveTextAnalysisTask = nil
-    (liveTextOverlayView as? ImageAnalysisOverlayView)?.analysis = nil
-    liveTextOverlayView?.removeFromSuperview()
-    liveTextOverlayView = nil
-    isLiveTextHighlighted = false
+  func clearAnalysisImpl() {
+    analysisTask?.cancel()
+    analysisTask = nil
+    (overlayView as? ImageAnalysisOverlayView)?.analysis = nil
+    overlayView?.removeFromSuperview()
+    overlayView = nil
+    isHighlighted = false
     liveTextLog("Image analysis invalidated and overlay view removed from video view")
     refreshUI()
   }
@@ -83,30 +125,22 @@ extension MainWindowController: ImageAnalysisOverlayViewDelegate {
   }
 
   func overlayView(_ overlayView: ImageAnalysisOverlayView, willOpen menu: NSMenu) {
-    isLiveTextMenuOpen = true
+    isMenuOpen = true
     refreshUI()
   }
 
   func overlayView(_ overlayView: ImageAnalysisOverlayView, didClose menu: NSMenu) {
-    isLiveTextMenuOpen = false
+    isMenuOpen = false
     refreshUI()
   }
 
   func textSelectionDidChange(_ overlayView: ImageAnalysisOverlayView) {
-    isLiveTextSelected = overlayView.hasActiveTextSelection
+    isSelected = overlayView.hasActiveTextSelection
     refreshUI()
   }
 
   func overlayView(_ overlayView: ImageAnalysisOverlayView, highlightSelectedItemsDidChange highlightSelectedItems: Bool) {
-    isLiveTextHighlighted = highlightSelectedItems
+    isHighlighted = highlightSelectedItems
     refreshUI()
-  }
-
-  func refreshUI() {
-    if isLiveTextUserInteractionActive {
-      hideUI(force: true)
-    } else {
-      showUI()
-    }
   }
 }

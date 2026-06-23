@@ -2426,7 +2426,6 @@
 				D1B4E24D2A3AFC9100E36F1D /* MiniPlayerWindow.swift */,
 				84CFC92523F8DDE000381E5B /* PlayerWindowController.swift */,
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
-				34C4D19B2FC58482006B829F /* LiveTextSupport.swift */,
 				51CACB9429D500290034CEE5 /* VideoPIPViewController.swift */,
 				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
@@ -2880,6 +2879,7 @@
 				E3A239A92FC6D88C00CE6ACC /* OSDView.swift */,
 				3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */,
 				E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */,
+				34C4D19B2FC58482006B829F /* LiveTextSupport.swift */,
 			);
 			name = MainWindow;
 			sourceTree = "<group>";

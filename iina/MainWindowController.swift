@@ -109,18 +109,10 @@ class MainWindowController: PlayerWindowController {
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
 
+  lazy var liveText = LiveTextController(mainWindow: self)
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
-  var liveTextOverlayView: NSView?
-  var liveTextAnalysisTask: Task<Void, Never>?
   var isVideoLoaded: Bool = false
-
-  var isLiveTextSelected: Bool = false
-  var isLiveTextMenuOpen: Bool = false
-  var isLiveTextHighlighted: Bool = false
-  var isLiveTextUserInteractionActive: Bool {
-    isLiveTextSelected || isLiveTextMenuOpen || isLiveTextHighlighted
-  }
 
   var shouldApplyInitialWindowSize = true
   var isWindowHidden: Bool = false
@@ -317,7 +309,7 @@ class MainWindowController: PlayerWindowController {
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
         setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
-        if #available(macOS 13, *) { updateLiveTextOverlayInsets() }
+        liveText.updateOverlayInsets()
       }
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
@@ -384,7 +376,11 @@ class MainWindowController: PlayerWindowController {
         if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
-        if newValue { requestLiveTextAnalysis() } else { clearLiveTextAnalysis() }
+        if newValue {
+          liveText.requestAnalysis()
+        } else {
+          liveText.clearAnalysis()
+        }
       }
     default:
       return
@@ -1390,9 +1386,7 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      clearLiveTextAnalysis()
-    }
+    liveText.clearAnalysis()
 
     // Set the appearance to match the theme so the titlebar matches the theme
     let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
@@ -1433,9 +1427,7 @@ class MainWindowController: PlayerWindowController {
     }
     window?.titlebarAppearsTransparent = false
 
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      requestLiveTextAnalysis()
-    }
+    liveText.requestAnalysis()
 
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
@@ -1487,9 +1479,7 @@ class MainWindowController: PlayerWindowController {
       return
     }
 
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      requestLiveTextAnalysis()
-    }
+    liveText.requestAnalysis()
 
     // Reset the full screen state to indicate exiting full screen mode so that finishAnimating
     // will correctly set the state to windowed.
@@ -1530,9 +1520,7 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      clearLiveTextAnalysis()
-    }
+    liveText.clearAnalysis()
 
     titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: false)
 
@@ -1575,9 +1563,7 @@ class MainWindowController: PlayerWindowController {
       fsState.startAnimatingToWindow()
     }
 
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      requestLiveTextAnalysis()
-    }
+    liveText.requestAnalysis()
 
     if Preference.bool(for: PK.disableAnimations) {
       // When animation is not used exiting full screen does not restore the previous size of the
@@ -1646,9 +1632,7 @@ class MainWindowController: PlayerWindowController {
       return
     }
 
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      requestLiveTextAnalysis()
-    }
+    liveText.requestAnalysis()
 
     // Reset the full screen state to indicate entering full screen mode so that finishAnimating
     // will correctly set the state to  full screen mode.
@@ -1798,8 +1782,8 @@ class MainWindowController: PlayerWindowController {
     if isInInteractiveMode {
       return window.frame.size
     }
-    if !window.inLiveResize, #available(macOS 13, *), Preference.isLiveTextEnabled {
-      clearLiveTextAnalysis()
+    if !window.inLiveResize {
+      liveText.clearAnalysis()
     }
     if frameSize.height <= AppData.mainWindowMinSize.height || frameSize.width <= AppData.mainWindowMinSize.width {
       return currentWindowAspectRatio.grow(toSize: AppData.mainWindowMinSize)
@@ -1809,8 +1793,8 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
-    if !window.inLiveResize, #available(macOS 13, *), Preference.isLiveTextEnabled {
-      requestLiveTextAnalysis()
+    if !window.inLiveResize {
+      liveText.requestAnalysis()
     }
 
     // update control bar position
@@ -1887,9 +1871,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillStartLiveResize(_ notification: Notification) {
     videoView.videoLayer.inLiveResize = true
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      clearLiveTextAnalysis()
-    }
+    liveText.clearAnalysis()
   }
 
   // resize framebuffer in videoView after resizing.
@@ -1899,9 +1881,7 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
-    if #available(macOS 13, *), Preference.isLiveTextEnabled {
-      requestLiveTextAnalysis()
-    }
+    liveText.requestAnalysis()
   }
 
   func windowDidChangeBackingProperties(_ notification: Notification) {
@@ -2033,7 +2013,7 @@ class MainWindowController: PlayerWindowController {
 
   func showUI() {
     if player.disableUI { return }
-    guard !isLiveTextUserInteractionActive else { return }
+    guard !liveText.isActive else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false

@@ -2029,9 +2029,11 @@ class PlayerCore: NSObject {
   func fileStarted(path: String) {
     guard info.state.active else { return }
     log("File started")
-    if #available(macOS 13, *) {
-      mainWindow.clearLiveTextAnalysis()
+
+    Task { @MainActor in
+      mainWindow.liveText.clearAnalysis()
     }
+
     MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
@@ -2196,8 +2198,9 @@ class PlayerCore: NSObject {
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
     syncUI(.playlist)
-    if #available(macOS 13, *) {
-      mainWindow.requestLiveTextAnalysis()
+
+    Task { @MainActor in
+      mainWindow.liveText.requestAnalysis()
     }
   }
 
@@ -2361,8 +2364,12 @@ class PlayerCore: NSObject {
     }
     syncUI(.playButton)
 
-    if #available(macOS 13, *) {
-      if paused { mainWindow.requestLiveTextAnalysis() } else { mainWindow.clearLiveTextAnalysis() }
+    Task { @MainActor in
+      if paused {
+        mainWindow.liveText.requestAnalysis()
+      } else {
+        mainWindow.liveText.clearAnalysis()
+      }
     }
   }
 
@@ -2383,9 +2390,9 @@ class PlayerCore: NSObject {
 
     NowPlayingInfoManager.shared.updateInfo()
 
-    if #available(macOS 13, *) {
-      mainWindow.clearLiveTextAnalysis()
-      mainWindow.requestLiveTextAnalysis()
+    Task { @MainActor in
+      mainWindow.liveText.clearAnalysis()
+      mainWindow.liveText.requestAnalysis()
     }
 
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { self.info.disableOSDForFileLoading = false }
@@ -2437,9 +2444,9 @@ class PlayerCore: NSObject {
     if isInMiniPlayer {
       miniPlayer.refreshArtworkVisibility()
     }
-    if #available(macOS 13, *) {
-      mainWindow.clearLiveTextAnalysis()
-      mainWindow.requestLiveTextAnalysis()
+    Task { @MainActor in
+      mainWindow.liveText.clearAnalysis()
+      mainWindow.liveText.requestAnalysis()
     }
   }
 

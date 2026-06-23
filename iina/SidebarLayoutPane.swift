@@ -37,7 +37,7 @@ class SidebarLayoutPane: SidebarScrollView {
     themeSettingStack = ui.vStack(
       spacing: .sidebarItemSpacing,
       ui.hStack(
-        ui.image("circle.lefthalf.filled", "circle.lefthalf.fill", size: 20),
+        ui.image("circle.lefthalf.filled", "circle.lefthalf.fill", size: 20, config: .sidebarIconConfig),
         ui.label("Theme"),
         ui.flexibleSpace(),
         ThemeSwitch(.themeMaterial),
@@ -48,7 +48,7 @@ class SidebarLayoutPane: SidebarScrollView {
       themeSettingStack.addArrangedSubview(ui.vStack(
         spacing: .sidebarItemSpacing,
         ui.hStack(
-          ui.image("liquid.glass", size: 20),
+          ui.image("liquid.glass", size: 20, config: .sidebarIconConfig),
           ui.label("Liquid Glass"),
           ui.flexibleSpace(),
         ),
@@ -56,21 +56,21 @@ class SidebarLayoutPane: SidebarScrollView {
           spacing: .liquidGlassSettingsSpacing,
           ui.hStack(
             ui.space(),
-            ui.image("osd", size: 16),
+            ui.image("osd", size: 16, config: .sidebarIconConfig),
             ui.label("On Screen Display", isSmall: true),
             ui.flexibleSpace(),
             ui.toggleButton(bindTo: .useLiquidGlassOSD, size: .mini)
           ),
           ui.hStack(
             ui.space(),
-            ui.image("osc.floating", size: 16),
+            ui.image("osc.floating", size: 16, config: .sidebarIconConfig),
             ui.label("On Screen Controller", isSmall: true),
             ui.flexibleSpace(),
             ui.toggleButton(bindTo: .useLiquidGlassOSC, size: .mini)
           ),
           ui.hStack(
             ui.space(),
-            ui.image("sidebar.squares.trailing", size: 16),
+            ui.image("sidebar.squares.trailing", size: 16, config: .sidebarIconConfig),
             ui.label("Sidebar", isSmall: true),
             ui.flexibleSpace(),
             ui.toggleButton(bindTo: .useLiquidGlassSidebar, size: .mini)
@@ -84,7 +84,7 @@ class SidebarLayoutPane: SidebarScrollView {
     })
 
     stack.addArrangedSubview(Container(ui.hStack(
-      ui.image("rectangle.grid.3x2.fill", size: 20),
+      ui.image("rectangle.grid.3x2.fill", size: 20, config: .sidebarIconConfig),
       ui.label("Compact Interface"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .compactUI, size: .small)
@@ -95,14 +95,15 @@ class SidebarLayoutPane: SidebarScrollView {
     videoSettingsStack = ui.vStack(spacing: .sidebarItemSpacing)
 
     videoSettingsStack.addArrangedSubview(ui.hStack(
-      ui.image("custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle", size: 20),
+      ui.image("custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle",
+               size: 20, config: .sidebarIconConfig),
       ui.label("Edge-to-Edge Video"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .edgeToEdgeVideo, size: .small)
     ))
 
     self.lockWindowAspectStack = ui.hStack(
-      ui.image("lock.rectangle", size: 20),
+      ui.image("custom.lock.rectangle", size: 20, config: .sidebarIconConfig),
       ui.label("Lock Window Aspect Ratio"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .unlockWindowAspectRatio, size: .small, inverted: true)
@@ -110,7 +111,7 @@ class SidebarLayoutPane: SidebarScrollView {
     videoSettingsStack.addArrangedSubview(lockWindowAspectStack)
 
     self.dockedUIStack = ui.hStack(
-      ui.image("dock.arrow.down.rectangle", size: 20),
+      ui.image("dock.arrow.down.rectangle", size: 20, config: .sidebarIconConfig),
       ui.label("Docked Control Bar and Titlebar"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .dockedControlBarAndTitlebar, size: .small)
@@ -222,7 +223,7 @@ class SidebarLayoutPane: SidebarScrollView {
       spacing: .sidebarSettingsSpacing,
       config.map { img, text, key in
         ui.hStack(
-          ui.image(img),
+          ui.image(img, config: .sidebarIconConfig),
           ui.label(text),
           ui.flexibleSpace(),
           SidebarPosSwitch(key),
@@ -261,7 +262,7 @@ fileprivate class SideBarButton: NSView {
     translatesAutoresizingMaskIntoConstraints = false
     wantsLayer = true
     let background = CAGradientLayer()
-    background.borderColor = NSColor.separatorColor.cgColor
+    background.borderColor = NSColor.sidebarContainerBorder.cgColor
     background.borderWidth = 1
     background.cornerRadius = 8
     background.colors = [
@@ -324,7 +325,7 @@ fileprivate class OSCLayoutSelector: NSBox {
     
     var isActive: Bool = false {
       didSet {
-        animator().borderColor = isActive ? .controlAccentColor : .separatorColor
+        animator().borderColor = isActive ? .controlAccentColor : .sidebarContainerBorder
         animator().borderWidth = isActive ? 2 : 1
         animator().fillColor = isActive ? .controlAccentColor.withAlphaComponent(0.1) :
           .gray.withAlphaComponent(0.1)

@@ -73,7 +73,8 @@ class SidebarAudioPane: SidebarScrollView {
 
 fileprivate class AudioDelayView: SidebarSliderView {
   override var titleImage: NSImage? {
-    .sf("clock.arrow.trianglehead.counterclockwise.rotate.90", "clock.arrow.circlepath")
+    .sf("clock.arrow.trianglehead.counterclockwise.rotate.90", "clock.arrow.circlepath",
+        withConfiguration: .sidebarIconConfig)
   }
   override var titleKey: String { "sidebar.delay" }
   override var tickMarkLabels: [String] {
@@ -193,7 +194,7 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
 
     let labelStack = ui.hStack(
       spacing: 8,
-      ui.image("slider.vertical.3", size: 16),
+      ui.image("slider.vertical.3", size: 16, config: .sidebarIconConfig),
       ui.label("sidebar.eq", font: .boldSystemFont(ofSize: 12)),
       ui.flexibleSpace(),
     )

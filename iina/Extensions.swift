@@ -707,6 +707,9 @@ extension NSImage {
     }
     for name in names {
       if let symbol = NSImage(named: name) {
+        if let configuration, let configured = symbol.withSymbolConfiguration(configuration) {
+          return configured
+        }
         return symbol
       }
     }

@@ -6,11 +6,6 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-fileprivate extension NSUserInterfaceItemIdentifier {
-//  static let selected = NSUserInterfaceItemIdentifier("selected")
-//  static let trackName = NSUserInterfaceItemIdentifier("trackName")
-}
-
 class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
   private let trackType: MPVTrack.TrackType
   private unowned let player: PlayerCore
@@ -71,8 +66,11 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     let columnID = column.identifier
     let identifier = NSUserInterfaceItemIdentifier("\(columnID.rawValue)Cell")
 
-    let cell = tableView.makeView(withIdentifier: identifier, owner: self) as? CellView
-      ?? makeCell(identifier: identifier, columnID: columnID)
+    let cell = tableView.makeView(withIdentifier: identifier, owner: self) as? CellView ?? {
+      let cell = CellView()
+      cell.identifier = identifier
+      return cell
+    }()
     let isChosen = track == selectedTrack
     switch columnID {
     case .trackName:

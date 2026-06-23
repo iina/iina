@@ -37,6 +37,10 @@
 "toneMappingAlgorithm.items.6" = "gamma";
 "toneMappingAlgorithm.items.7" = "linear";
 
+/* Live Text */
+"enableLiveText.label" = "Live Text";
+"enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
+
 /* Section titles and inline labels */
 "$Video" = "Video";
 "$nits" = "nits";
@@ -46,3 +50,4 @@
 "$AlgorithmToUseForTone" = "Algorithm to use for tone mapping images onto the display.";
 "$Decoding" = "Decoding";
 "$ColorHDR" = "Color and HDR";
+"$LiveText" = "Live Text";

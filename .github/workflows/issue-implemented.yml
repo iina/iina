@@ -1,0 +1,78 @@
+name: Comment on implemented issues
+
+on:
+  issues:
+    types: [closed]
+
+permissions:
+  issues: write          # GITHUB_TOKEN is read-only by default; needed to comment
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    # Only when closed as "completed" (implemented) — not "not planned" / "duplicate".
+    if: github.event.issue.state_reason == 'completed'
+    steps:
+      # Decide whether we should post, based on who closed it and how.
+      - uses: actions/github-script@v7
+        id: should_comment
+        with:
+          script: |
+            const issue  = context.payload.issue;
+            const closer = context.payload.sender.login;
+            const author = issue.user.login;
+
+            // (a) Author closed their own issue -> skip (self-resolved / not-a-bug / etc.)
+            if (closer === author) {
+              core.info('Closed by the issue author — skipping.');
+              return core.setOutput('post', 'false');
+            }
+
+            // (b) Closer left a comment around the time of closing -> skip (already explained).
+            const closedAt = new Date(issue.closed_at).getTime();
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              per_page: 100,
+            });
+            const WINDOW_MS = 600_000; // 10 minutes
+            const closedWithMessage = comments.some(c =>
+              c.user.login === closer &&
+              Math.abs(new Date(c.created_at).getTime() - closedAt) <= WINDOW_MS
+            );
+            if (closedWithMessage) {
+              core.info('Closed with an accompanying comment — skipping.');
+              return core.setOutput('post', 'false');
+            }
+
+            core.setOutput('post', 'true');
+
+      # Post the explanatory comment.
+      - uses: actions/github-script@v7
+        if: steps.should_comment.outputs.post == 'true'
+        with:
+          script: |
+            const body = [
+              "**This issue has been closed as completed.**",
+              "",
+              "The changes that address it have been merged into the **`develop`** branch, which holds the sources for the development version of IINA. They might **not yet in a stable release**. To try them now you can:",
+              "",
+              "- Download an [IINA Nightly build][nightly] (see [What is an IINA Nightly build?][nightly-faq]), or",
+              "- [Build IINA yourself][build] from the `develop` branch.",
+              "",
+              "These changes will be included in a future release of IINA. Further tweaks related to this issue are still expected.",
+              "",
+              "Thanks for helping improve IINA! 🎉",
+              "",
+              "[nightly]: https://nightly.iina.io",
+              "[nightly-faq]: https://github.com/iina/iina/wiki/FAQ#what-is-an-iina-nightly-build",
+              "[build]: https://github.com/iina/iina/wiki/FAQ",
+            ].join("\n");
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });

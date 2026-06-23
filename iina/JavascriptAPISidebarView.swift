@@ -48,7 +48,7 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
       return
     }
     let id = pluginInstance.plugin.identifier
-    player!.mainWindow.sidebars.showPlugin(tab: id, force: true, hideIfAlreadyShown: false)
+    player!.mainWindow.sidebars.show(sidebar: .plugins, tab: id, force: true, hideIfAlreadyShown: false)
   }
 
   func hide() {

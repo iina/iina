@@ -85,7 +85,7 @@ class PlayerCore: NSObject {
     let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
     return useNew ? newPlayerCore : active
   }
-  
+
   /**
    Opens the URLs in the right window or windows, depending on user settings.
 
@@ -112,7 +112,7 @@ class PlayerCore: NSObject {
         if !Preference.bool(for: .allowDuplicatePlayers) {
           let activePlayerCores = playerCores.filter { $0.info.state != .idle }
           let relevantActivePlayerCore = activePlayerCores.first { $0.info.currentURL == url }
-          
+
           if let relevantActivePlayerCore {
             relevantActivePlayerCore.currentController.window?.makeKeyAndOrderFront(nil)
             return currentReturnValue
@@ -198,10 +198,10 @@ class PlayerCore: NSObject {
   private var backgroundTaskInUse = false
 
   var initialWindow: InitialWindowController!
-  
+
   var mainWindow: MainWindowController!
   var miniPlayer: MiniPlayerWindowController!
-  
+
   var currentController: PlayerWindowController {
     return isInMiniPlayer ? miniPlayer : mainWindow
   }
@@ -787,7 +787,9 @@ class PlayerCore: NSObject {
 
     miniPlayer.updateTitle()
     refreshSyncUITimer()
-    let playlistView = mainWindow.sidebars.playlistView.view
+    let playlistView = mainWindow.sidebars.playlistView
+    // force initialize the view
+    let _ = playlistView.view
     let videoView = mainWindow.videoView
     // reset down shift for playlistView
     mainWindow.sidebars.playlistView.downShift = 0
@@ -797,10 +799,10 @@ class PlayerCore: NSObject {
     }
 
     // move playlist view
-    playlistView.removeFromSuperview()
-    mainWindow.sidebars.playlistView.useCompactTabHeight = true
-    miniPlayer.playlistWrapperView.addSubview(playlistView)
-    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": playlistView])
+    playlistView.view.removeFromSuperview()
+//    playlistView.isInMiniPlayer = true
+    miniPlayer.playlistWrapperView.addSubview(playlistView.view)
+    playlistView.view.padding(.all)
     // move video view
     videoView.removeFromSuperview()
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
@@ -833,12 +835,15 @@ class PlayerCore: NSObject {
     }
 
     currentController.setupUI()
+    mainWindow.oscFloatingView.setupConstraints()
+    mainWindow.oscFloatingView.updatePosition()
 
     miniPlayer.pendingShow = true
     if showMiniPlayer {
       notifyWindowVideoSizeChanged()
     }
     mainWindow.forceDraw("entered music mode")
+    postNotification(.iinaMusicModeChanged)
     events.emit(.musicModeChanged, data: true)
   }
 
@@ -863,9 +868,8 @@ class PlayerCore: NSObject {
                  level: .verbose, subsystem: subsystem)
     }
     mainWindow.sidebars.playlistView.view.removeFromSuperview()
-    mainWindow.sidebars.playlistView.useCompactTabHeight = false
+    mainWindow.sidebars.playlistView.isInMiniPlayer = false
     // add back video view
-    let mainWindowContentView = mainWindow.window!.contentView
     miniPlayer.videoViewAspectConstraint?.isActive = false
     miniPlayer.videoViewAspectConstraint = nil
     mainWindow.addVideoViewToWindow()
@@ -881,7 +885,11 @@ class PlayerCore: NSObject {
       notifyWindowVideoSizeChanged()
     }
 
+    mainWindow.oscFloatingView.setupConstraints()
+    mainWindow.oscFloatingView.updatePosition()
+
     mainWindow.forceDraw("exited music mode")
+    postNotification(.iinaMusicModeChanged)
     events.emit(.musicModeChanged, data: false)
   }
 
@@ -2029,6 +2037,11 @@ class PlayerCore: NSObject {
   func fileStarted(path: String) {
     guard info.state.active else { return }
     log("File started")
+
+    Task { @MainActor in
+      mainWindow.liveText.clearAnalysis()
+    }
+
     MemoryUsage.shared.logUsage("after file started")
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
@@ -2192,7 +2205,10 @@ class PlayerCore: NSObject {
     }
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
-    syncUI(.playlist)
+
+    Task { @MainActor in
+      mainWindow.liveText.requestAnalysis()
+    }
   }
 
   func fileEnded(_ dueToStopCommand: Bool) {
@@ -2246,7 +2262,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     info.chapter = Int(mpv.getInt(MPVProperty.chapter))
     syncUI(.time)
-    syncUI(.chapterList)
+    postNotification(.iinaChapterListChanged)
     postNotification(.iinaMediaTitleChanged)
   }
 
@@ -2354,6 +2370,14 @@ class PlayerCore: NSObject {
       mainWindow.setWindowFloatingOnTop(!paused)
     }
     syncUI(.playButton)
+
+    Task { @MainActor in
+      if paused {
+        mainWindow.liveText.requestAnalysis()
+      } else {
+        mainWindow.liveText.clearAnalysis()
+      }
+    }
   }
 
   func playbackRestarted() {
@@ -2363,7 +2387,7 @@ class PlayerCore: NSObject {
     // restart even while paused. See issue #5337.
     syncUI(.time)
     reloadSavedIINAfilters()
-    
+
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
     // We can't put this in MPV_EVENT_VIDEO_RECONFIG because it can be emitted with the old video's size
     // after switching to a new video.
@@ -2372,6 +2396,11 @@ class PlayerCore: NSObject {
     info.justStartedFile = false
 
     NowPlayingInfoManager.shared.updateInfo()
+
+    Task { @MainActor in
+      mainWindow.liveText.clearAnalysis()
+      mainWindow.liveText.requestAnalysis()
+    }
 
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { self.info.disableOSDForFileLoading = false }
   }
@@ -2421,6 +2450,10 @@ class PlayerCore: NSObject {
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
     if isInMiniPlayer {
       miniPlayer.refreshArtworkVisibility()
+    }
+    Task { @MainActor in
+      mainWindow.liveText.clearAnalysis()
+      mainWindow.liveText.requestAnalysis()
     }
   }
 
@@ -2732,15 +2765,12 @@ class PlayerCore: NSObject {
     case time
     case playButton
     case volume
-    case chapterList
-    case playlist
-    case loop
   }
 
   @objc func syncUITime() {
     syncUI(.time)
   }
-  
+
   func syncUI(_ options: [SyncUIOption]) {
     for option in options {
       syncUI(option)
@@ -2759,8 +2789,8 @@ class PlayerCore: NSObject {
       let isNetworkStream = info.isNetworkResource
       syncPosition()
       info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
-        mpv.getDouble(MPVProperty.playtimeRemainingFull) :
-        mpv.getDouble(MPVProperty.timeRemainingFull)
+      mpv.getDouble(MPVProperty.playtimeRemainingFull) :
+      mpv.getDouble(MPVProperty.timeRemainingFull)
       if isNetworkStream {
         // Update cache info
         info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
@@ -2789,27 +2819,6 @@ class PlayerCore: NSObject {
     case .volume:
       DispatchQueue.main.async {
         self.currentController.updateVolume()
-      }
-
-    case .chapterList:
-      DispatchQueue.main.async {
-        // this should avoid sending reload when table view is not ready
-        if self.isInMiniPlayer ? self.miniPlayer.isPlaylistVisible : self.mainWindow.sidebars.isShowing(.playlist) {
-          self.log("Syncing UI: chapterList")
-          self.mainWindow.sidebars.playlistView.chapterTableView.reloadData()
-        }
-      }
-
-    case .playlist:
-      DispatchQueue.main.async {
-        if self.isPlaylistVisible {
-          self.mainWindow.sidebars.playlistView.playlistTableView.reloadData()
-        }
-      }
-
-    case .loop:
-      DispatchQueue.main.async {
-        self.mainWindow.sidebars.playlistView.updateLoopBtnStatus()
       }
     }
   }
@@ -2968,7 +2977,7 @@ class PlayerCore: NSObject {
     // This will avoid concurrent modification crashes
     info.chapters = chapters
 
-    syncUI(.chapterList)
+    postNotification(.iinaChapterListChanged)
   }
 
   // MARK: - Notifications

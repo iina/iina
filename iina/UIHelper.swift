@@ -154,9 +154,10 @@ class UIHelper {
     return box
   }
 
-  func image(_ symbol: String..., size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil, scaleUp: Bool = false) -> NSImageView {
+  func image(_ symbol: String..., size: CGFloat = 16, width: CGFloat? = nil, height: CGFloat? = nil,
+             config: NSImage.SymbolConfiguration? = nil, scaleUp: Bool = false) -> NSImageView {
     image(
-      .sf(symbol) ?? NSImage(named: .init(symbol[0])),
+      .sf(symbol, withConfiguration: config) ?? NSImage(named: .init(symbol[0])),
       size: size, width: width, height: height, scaleUp: scaleUp
     )
   }

@@ -65,19 +65,19 @@ class SidebarVideoPane: SidebarScrollView {
       wantsToGrow: true,
       ui.hStack(
         align: .centerY,
-        ui.image("aspectratio", size: 16),
+        ui.image("aspectratio", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.aspect_ratio", font: .boldSystemFont(ofSize: 12))
       ),
       AspectRatioView(player: player),
       ui.hStack(
         align: .centerY,
-        ui.image("crop", size: 16),
+        ui.image("crop", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.crop", font: .boldSystemFont(ofSize: 12))
       ),
       CropView(player: player),
       ui.hStack(
         align: .centerY,
-        ui.image("rotate.left", size: 16),
+        ui.image("rotate.left", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.rotation", font: .boldSystemFont(ofSize: 12))
       ),
       RotationView(player: player),
@@ -99,14 +99,14 @@ class SidebarVideoPane: SidebarScrollView {
       wantsToGrow: true,
       ui.hStack(
         spacing: 8,
-        ui.image("cpu", size: 16),
+        ui.image("cpu", size: 16, config: .sidebarIconConfig),
         ui.label("quicksetting.hwdec"),
         ui.flexibleSpace(),
         HwdecSwitch(player: player),
       ),
       ui.hStack(
         spacing: 8,
-        ui.image("sun.max", size: 16),
+        ui.image("sun.max", size: 16, config: .sidebarIconConfig),
         ui.label("quicksetting.hdr"),
         ui.flexibleSpace(),
         HDRSwitch(player: player)
@@ -119,8 +119,154 @@ class SidebarVideoPane: SidebarScrollView {
   }
 }
 
+fileprivate class HorizontalScrollViewWithIndicator: NSView {
+  enum IndicatorDirection {
+    case leading, trailing, hidden
+  }
 
-fileprivate class AspectRatioView: NSScrollView {
+  let scrollView = ScrollView()
+  private var indicator: NSButton!
+  private var indicatorDirection: IndicatorDirection = .trailing {
+    didSet {
+      switch indicatorDirection {
+      case .hidden:
+        indicator.isHidden = true
+      case .leading:
+        indicator.isHidden = false
+        indicator.image = .sf("chevron.backward")
+      case .trailing:
+        indicator.isHidden = false
+        indicator.image = .sf("chevron.forward")
+      }
+    }
+  }
+
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+
+    translatesAutoresizingMaskIntoConstraints = false
+
+    scrollView.parent = self
+    addSubview(scrollView)
+
+    self.indicator = NSButton(
+      image: .sf("chevron.forward")!,
+      target: self,
+      action: #selector(indicatorAction)
+    )
+    indicator.translatesAutoresizingMaskIntoConstraints = false
+    indicator.bezelStyle = .smallSquare
+    indicator.isBordered = false
+    addSubview(indicator)
+    indicator.size(width: 8).padding(.trailing).center(.y)
+    scrollView.padding(.vertical, .leading).spacing(.trailing(4), to: indicator)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  @objc private func indicatorAction(_ sender: NSButton) {
+    guard let width = scrollView.documentView?.frame.width else { return }
+
+    let point = if indicatorDirection == .trailing {
+      NSPoint(x: width - scrollView.contentSize.width, y: 0)
+    } else {
+      NSPoint(x: 0, y: 0)
+    }
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = 0.3
+      scrollView.contentView.animator().setBoundsOrigin(point)
+    })
+  }
+
+  class ScrollView: NSScrollView {
+    var parent: HorizontalScrollViewWithIndicator!
+
+    override init(frame frameRect: NSRect) {
+      super.init(frame: frameRect)
+
+      translatesAutoresizingMaskIntoConstraints = false
+      drawsBackground = false
+      hasVerticalScroller = false
+      hasHorizontalScroller = false
+      verticalScrollElasticity = .none
+
+      contentView.postsBoundsChangedNotifications = true
+      NotificationCenter.default.addObserver(
+        self,
+        selector: #selector(contentDidScroll),
+        name: NSView.boundsDidChangeNotification,
+        object: contentView
+      )
+    }
+
+    required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+
+    deinit {
+      NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func contentDidScroll(_ note: Notification) {
+      updateMask()
+    }
+
+    private func updateMask() {
+      guard let documentView else { return }
+
+      let visibleWidth = contentView.bounds.width
+      let contentWidth = documentView.frame.width
+      let originX      = contentView.bounds.origin.x
+
+      guard contentWidth > visibleWidth else {
+        parent.indicatorDirection = .hidden
+        return
+      }
+
+      let eps: CGFloat = 1
+      let hasTrailing  = originX <= eps
+      let hasLeading = originX + visibleWidth >= contentWidth - eps
+
+      parent.indicatorDirection = hasLeading ? .leading : hasTrailing ? .trailing : .hidden
+    }
+
+    /// Translate vertical scrolling events to horizontal for mouse control
+    override func scrollWheel(with event: NSEvent) {
+      if event.scrollingDeltaX != 0 {
+        super.scrollWheel(with: event)
+        return
+      }
+
+      guard let cg = event.cgEvent?.copy() else {
+        super.scrollWheel(with: event)
+        return
+      }
+
+      let lineV = cg.getDoubleValueField(.scrollWheelEventDeltaAxis1)
+      cg.setDoubleValueField(.scrollWheelEventDeltaAxis1, value: 0)
+      cg.setDoubleValueField(.scrollWheelEventDeltaAxis2, value: lineV)
+
+      let pxV = cg.getDoubleValueField(.scrollWheelEventPointDeltaAxis1)
+      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis1, value: 0)
+      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis2, value: pxV)
+
+      let fpV = cg.getDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1)
+      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1, value: 0)
+      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis2, value: fpV)
+
+      guard let swapped = NSEvent(cgEvent: cg) else {
+        super.scrollWheel(with: event)
+        return
+      }
+
+      super.scrollWheel(with: swapped)
+    }
+  }
+}
+
+fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
   private unowned let player: PlayerCore
   private var segmentControl: NSSegmentedControl!
   private var input: NSTextField!
@@ -128,12 +274,6 @@ fileprivate class AspectRatioView: NSScrollView {
   init(player: PlayerCore) {
     self.player = player
     super.init(frame: .zero)
-
-    translatesAutoresizingMaskIntoConstraints = false
-    drawsBackground = false
-    hasVerticalScroller = false
-    hasHorizontalScroller = true
-    autohidesScrollers = true
 
     self.segmentControl = NSSegmentedControl(
       labels: AppData.aspectsInPanel,
@@ -148,7 +288,7 @@ fileprivate class AspectRatioView: NSScrollView {
     input.target = self
     input.action = #selector(aspectRatioAction)
 
-    documentView = ui.hStack(
+    scrollView.documentView = ui.hStack(
       spacing: 8, segmentControl, input
     )
     size(height: 24)
@@ -189,19 +329,13 @@ fileprivate class AspectRatioView: NSScrollView {
 }
 
 
-fileprivate class CropView: NSScrollView {
+fileprivate class CropView: HorizontalScrollViewWithIndicator {
   private unowned let player: PlayerCore
   private var segmentControl: NSSegmentedControl!
 
   init(player: PlayerCore) {
     self.player = player
     super.init(frame: .zero)
-
-    translatesAutoresizingMaskIntoConstraints = false
-    drawsBackground = false
-    hasVerticalScroller = false
-    hasHorizontalScroller = true
-    autohidesScrollers = true
 
     self.segmentControl = NSSegmentedControl(
       labels: AppData.cropsInPanel + [NSLocalizedString("menu.crop_custom", comment: "")],
@@ -210,7 +344,7 @@ fileprivate class CropView: NSScrollView {
     )
     segmentControl.selectedSegment = 0
 
-    documentView = segmentControl
+    scrollView.documentView = segmentControl
     size(height: 24)
 
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
@@ -379,7 +513,8 @@ fileprivate let speedFormatter: NumberFormatter = {
 
 fileprivate class SpeedView: SidebarSliderView {
   override var titleImage: NSImage? {
-    .sf("chevron.forward.dotted.chevron.forward", "forward.fill")
+    .sf("chevron.forward.dotted.chevron.forward", "forward.fill",
+        withConfiguration: .sidebarIconConfig)
   }
   override var titleKey: String { "sidebar.speed" }
 

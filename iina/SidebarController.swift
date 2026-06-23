@@ -13,10 +13,6 @@ fileprivate let PlaylistMinWidth: CGFloat = 240
 fileprivate let PlaylistMaxWidth: CGFloat = 800
 fileprivate let SideBarAnimationDuration = 0.24
 
-/// View controllers that can be embedded in a sidebar implement this.
-protocol SidebarViewController {
-  var downShift: CGFloat { get set }
-}
 
 /// Owns the two side panels (left/right), the view controllers that can be embedded in them, and
 /// all animation, hit-testing, and resize logic. `MainWindowController` delegates mouse events
@@ -61,15 +57,19 @@ class SidebarController: NSObject {
   /// hidden (slid off-screen) and a small positive margin (`visibleEdgeMargin` or `0`) when shown.
   class Panel {
     let side: Side
-    let view: SideBarView
+    let view: SideBarContainer
     var widthConstraint: NSLayoutConstraint!
     var edgeConstraint: NSLayoutConstraint!
-    var status: ViewType = .hidden {
-      didSet { NotificationCenter.default.post(name: .iinaSidebarStatusChanged, object: nil) }
+    var status: ViewType = .hidden
+    var animationState: MainWindowController.UIAnimationState = .hidden {
+      didSet {
+        if animationState == .hidden || animationState == .shown {
+          NotificationCenter.default.post(name: .iinaSidebarStatusChanged, object: nil)
+        }
+      }
     }
-    var animationState: MainWindowController.UIAnimationState = .hidden
 
-    init(side: Side, view: SideBarView) {
+    init(side: Side, view: SideBarContainer) {
       self.side = side
       self.view = view
     }
@@ -91,12 +91,7 @@ class SidebarController: NSObject {
       guard let viewType = ViewType.allCases.first(where: { $0.prefKey == key }) else { return }
       if (isShowing(viewType)) {
         hideAllSideBars(animate: false) {
-          switch viewType {
-          case .settings: self.showSettings()
-          case .playlist: self.showPlaylist()
-          case .plugins: self.showPlugin(tab: nil)
-          default: break
-          }
+          self.show(sidebar: viewType)
         }
       }
     }
@@ -108,8 +103,14 @@ class SidebarController: NSObject {
     }
   }
 
-  lazy var leadingSidebar: Panel = Panel(side: .leading, view: SideBarView(mainWindow: mainWindow))
-  lazy var trailingSidebar: Panel = Panel(side: .trailing, view: SideBarView(mainWindow: mainWindow))
+  lazy var leadingSidebar: Panel = Panel(
+    side: .leading,
+    view: SideBarContainer(mainWindow: mainWindow, isLeading: true)
+  )
+  lazy var trailingSidebar: Panel = Panel(
+    side: .trailing,
+    view: SideBarContainer(mainWindow: mainWindow, isLeading: false)
+  )
   var sideBars: [Panel] { [leadingSidebar, trailingSidebar] }
 
   /// Set while the user is dragging the playlist resize handle. Drives cursor change.
@@ -131,7 +132,14 @@ class SidebarController: NSObject {
   lazy var quickSettingView = QuickSettingViewController(mainWindow: mainWindow)
   lazy var playlistView = PlaylistViewController(mainWindow: mainWindow)
   lazy var pluginView = PluginViewController(mainWindow: mainWindow)
-  lazy var subPopoverView = playlistView.subPopover?.contentViewController?.view
+
+  private func viewController(for viewType: ViewType) -> SidebarViewController? {
+    switch viewType {
+    case .settings: quickSettingView
+    case .playlist: playlistView
+    default: nil
+    }
+  }
 
   // MARK: - Layout setup (called from windowDidLoad)
 
@@ -158,15 +166,17 @@ class SidebarController: NSObject {
 
   // MARK: - Queries
 
-  private func sidebarPosChanged(_ key: Preference.Key) {
-  }
-
   func sideBar(for side: Side) -> Panel {
     side == .leading ? leadingSidebar : trailingSidebar
   }
 
-  func isShowing(_ type: ViewType) -> Bool {
-    sideBars.contains { $0.status == type }
+  func isShowing(_ type: ViewType, tab: QuickSettingViewController.TabType? = nil) -> Bool {
+    if let tab {
+      sideBars.contains { viewController(for: $0.status)?.currentTab == tab }
+    } else {
+      // only return whether sidebar type is showing
+      sideBars.contains { $0.status == type }
+    }
   }
 
   var isAnyVisible: Bool {
@@ -175,13 +185,13 @@ class SidebarController: NSObject {
 
   /// Views that should swallow mouse events instead of letting them reach the video area.
   var mouseActionDisabledViews: [NSView?] {
-    [trailingSidebar.view, leadingSidebar.view, subPopoverView]
+    [trailingSidebar.view, leadingSidebar.view]
   }
 
   func isEventCoveringVisibleSidebar(_ event: NSEvent) -> Bool {
     sideBars.contains { panel in
       !panel.view.isHidden && event.inAnyOf([panel.view])
-    } || event.inAnyOf([subPopoverView])
+    }
   }
 
   private func side(for type: ViewType) -> Side {
@@ -240,7 +250,7 @@ class SidebarController: NSObject {
       return true
     }
     let isSingleClick = event.clickCount <= 1 && mainWindow.videoView.lastEventId == event.eventNumber
-    if isSingleClick && isAnyVisible && Preference.bool(for: .edgeToEdgeVideo) {
+    if isSingleClick && isAnyVisible && Preference.bool(for: .edgeToEdgeVideo) && !isEventCoveringVisibleSidebar(event) {
       hideAllSideBars()
       return true
     }
@@ -299,9 +309,6 @@ class SidebarController: NSObject {
   /// sidebar appear instantly.
   private func showSideBar(viewController: SidebarViewController, type: ViewType) {
     guard !mainWindow.isInInteractiveMode else { return }
-    guard let view = (viewController as? NSViewController)?.view else {
-      Logger.fatal("viewController is not a NSViewController")
-    }
     let panel = sideBar(for: side(for: type))
     let width = type.width.clamped(to: 0...sidebarMaxWidth)
     let margin = panel.visibleEdgeMargin
@@ -317,9 +324,8 @@ class SidebarController: NSObject {
       panel.view.isHidden = false
     }
     panel.status = type
-    panel.view.setContent(view)
-    view.padding(.all)
-    var viewController = viewController
+    panel.view.setContent(viewController.view)
+    viewController.view.padding(.all)
     viewController.downShift = 0
 
     NSAnimationContext.runAnimationGroup({ context in
@@ -408,8 +414,7 @@ class SidebarController: NSObject {
   /// - Otherwise it shows on the configured side, displacing any other type currently there.
   private func toggleSideBar(type: ViewType,
                              viewController: SidebarViewController,
-                             isSameTab: () -> Bool,
-                             switchTab: () -> Void,
+                             tab: SidebarViewController.TabType?,
                              force: Bool,
                              hideIfAlreadyShown: Bool) {
     let targetSide = side(for: type)
@@ -419,10 +424,12 @@ class SidebarController: NSObject {
       return  // don't interrupt in-flight animation on the target side
     }
 
+    let switchTab = { if let tab = tab { viewController.pleaseSwitchToTab(tab) } }
+
     // If this type is already visible (possibly on the other side after a config change), treat
     // a same-tab request as toggle-off and a different-tab request as a tab switch in place.
     if let visiblePanel = sideBars.first(where: { $0.status == type }) {
-      if isSameTab() {
+      if tab == nil || viewController.currentTab == tab {
         if hideIfAlreadyShown { hideSideBar(side: visiblePanel.side) }
       } else {
         switchTab()
@@ -435,45 +442,32 @@ class SidebarController: NSObject {
       showSideBar(viewController: viewController, type: type)
     } else {
       // Target side currently shows a different type — replace it.
-      hideSideBar(side: targetSide) {
+      hideSideBar(side: targetSide, animate: false) {
         self.showSideBar(viewController: viewController, type: type)
       }
     }
   }
 
-  func showSettings(tab: QuickSettingViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
-    let view = quickSettingView
-    toggleSideBar(
-      type: .settings,
-      viewController: view,
-      isSameTab: { tab == nil || view.currentTab == tab },
-      switchTab: { if let tab = tab { view.pleaseSwitchToTab(tab) } },
-      force: force,
-      hideIfAlreadyShown: hideIfAlreadyShown
-    )
-  }
+  func show(sidebar: ViewType? = nil, tab: String? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
+    let view: SidebarViewController = if let sidebar {
+      switch sidebar {
+      case .settings: quickSettingView
+      case .playlist: playlistView
+      case .plugins: pluginView
+      default: fatalError("sidebar must be settings, playlist or plugin")
+      }
+    } else {
+      if let tab {
+        [quickSettingView, playlistView, pluginView].first { $0.findTab(named: tab) != nil }!
+      } else {
+        fatalError("sidebar or tab is required")
+      }
+    }
+    let tabType = tab.flatMap(view.findTab(named:))
 
-  func showPlaylist(tab: PlaylistViewController.TabViewType? = nil, force: Bool = false, hideIfAlreadyShown: Bool = true) {
-    let view = playlistView
-    toggleSideBar(
-      type: .playlist,
-      viewController: view,
-      isSameTab: { tab == nil || view.currentTab == tab },
-      switchTab: { if let tab = tab { view.pleaseSwitchToTab(tab) } },
-      force: force,
-      hideIfAlreadyShown: hideIfAlreadyShown
-    )
-  }
+    let sidebar = sidebar ?? (view == quickSettingView ? .settings : view == playlistView ? .playlist : .plugins)
 
-  func showPlugin(tab: String?, force: Bool = false, hideIfAlreadyShown: Bool = true) {
-    let view = pluginView
-    toggleSideBar(
-      type: .plugins,
-      viewController: view,
-      isSameTab: { tab == nil || view.currentPluginID == tab },
-      switchTab: { if let tab = tab { view.pleaseSwitchToTab(tab) } },
-      force: force,
-      hideIfAlreadyShown: hideIfAlreadyShown
-    )
+    toggleSideBar(type: sidebar, viewController: view, tab: tabType,
+                  force: force, hideIfAlreadyShown: hideIfAlreadyShown)
   }
 }

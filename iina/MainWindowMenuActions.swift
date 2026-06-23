@@ -11,23 +11,23 @@ import Cocoa
 extension MainWindowController {
 
   @objc func menuShowPlaylistPanel(_ sender: NSMenuItem) {
-    sidebars.showPlaylist(tab: .playlist)
+    sidebars.show(tab: "playlist")
   }
 
   @objc func menuShowChaptersPanel(_ sender: NSMenuItem) {
-    sidebars.showPlaylist(tab: .chapters)
+    sidebars.show(tab: "chapters")
   }
 
   @objc func menuShowVideoQuickSettings(_ sender: NSMenuItem) {
-    sidebars.showSettings(tab: .video)
+    sidebars.show(tab: "video")
   }
 
   @objc func menuShowAudioQuickSettings(_ sender: NSMenuItem) {
-    sidebars.showSettings(tab: .audio)
+    sidebars.show(tab: "audio")
   }
 
   @objc func menuShowSubQuickSettings(_ sender: NSMenuItem) {
-    sidebars.showSettings(tab: .sub)
+    sidebars.show(tab: "sub")
   }
 
   @objc func menuChangeWindowSize(_ sender: NSMenuItem) {

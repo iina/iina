@@ -481,6 +481,6 @@ extension MainMenuActionHandler {
   // MARK: - Plugin
 
   @objc func showPluginsPanel(_ sender: NSMenuItem) {
-    player.mainWindow.sidebars.showPlugin(tab: nil)
+    player.mainWindow.sidebars.show(sidebar: .plugins)
   }
 }

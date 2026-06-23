@@ -355,7 +355,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   // MARK: - IBActions
 
-  func showPlaylistAction(_ tab: PlaylistViewController.TabViewType) {
+  func showPlaylistAction(_ tab: SidebarViewController.TabType) {
     if !isPlaylistVisible {
       playlistView.pleaseSwitchToTab(tab)
       togglePlaylist(self)
@@ -375,7 +375,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     } else {
       // show
       isPlaylistVisible = true
-      playlistView.reloadData(playlist: true, chapters: true)
+//      playlistView.reloadData(playlist: true, chapters: true)
 
       var newFrame = window.frame
       newFrame.origin.y -= DefaultPlaylistHeight

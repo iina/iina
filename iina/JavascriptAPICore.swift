@@ -287,13 +287,7 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
       window.setWindowFloatingOnTop(val)
     case "sidebar":
       if let name = value as? String {
-        if let tabType = QuickSettingViewController.TabViewType(name: name) {
-          window.sidebars.showSettings(tab: tabType, force: true, hideIfAlreadyShown: false)
-        } else if let tabType = PlaylistViewController.TabViewType(name: name) {
-          window.sidebars.showPlaylist(tab: tabType, force: true, hideIfAlreadyShown: false)
-        } else {
-          log("core.window.sidebar: Unknown sidebar name \"\(name)\"", level: .error)
-        }
+        window.sidebars.show(tab: name, force: true, hideIfAlreadyShown: false)
       } else {
         window.sidebars.hideAllSideBars()
       }

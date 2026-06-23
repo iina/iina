@@ -9,20 +9,19 @@
 fileprivate extension LayoutValue {
   static let oscPaddingTop = LayoutValue(14, 10)
   static let oscPaddingBottom = LayoutValue(8, 5)
-
 }
 
 
 class OSCFloatingView: TranslucentView {
+  private let width: CGFloat = 460
   weak var mainWindow: MainWindowController!
   private let prefObserver = Preference.Observer()
 
   var oscTopView: NSStackView!
   var oscBottomView: TimeLabelOverflowedStackView!
 
-  var xConstraint: NSLayoutConstraint!
-  var yConstraint: NSLayoutConstraint!
-//  private leadingTrailingConstraints: NSLayoutConstraint!
+  private var xConstraint: NSLayoutConstraint!
+  private var yConstraint: NSLayoutConstraint!
 
   var mousePosRelatedToView: CGPoint?
 
@@ -50,8 +49,8 @@ class OSCFloatingView: TranslucentView {
     oscBottomView.padding(.bottom(.oscPaddingBottom), .horizontal(8))
       .spacing(.top(8), to: oscTopView)
 
-    let widthConstraint = widthAnchor.constraint(equalToConstant: 440)
-    widthConstraint.priority = .defaultLow
+    let widthConstraint = widthAnchor.constraint(equalToConstant: width)
+    widthConstraint.priority = .init(300)
     widthConstraint.isActive = true
 
     setContent(container)
@@ -61,18 +60,88 @@ class OSCFloatingView: TranslucentView {
     prefObserver.add(.useLiquidGlassOSC, runNow: true) { [unowned self] _ in
       setStyle(Preference.liquidGlass(.osc) ? .liquidGlass : .visualEffect)
     }
+
+    NotificationCenter.default
+      .addObserver(forName: .iinaSidebarStatusChanged, object: nil, queue: .main) { [weak self] _ in
+      self?.initPosition()
+    }
   }
 
-  override func viewDidMoveToSuperview() {
-    padding(.horizontal(greaterThan: 1))
+  private var constraintParent: NSView?
+  private var constraintsAll: [NSLayoutConstraint] = []
 
-    xConstraint = centerXAnchor.constraint(equalTo: superview!.leadingAnchor)
+  func setupConstraints() {
+    if let constraintParent {
+      removeConstraint(xConstraint)
+      constraintParent.removeConstraints(constraintsAll)
+      constraintsAll.removeAll()
+    }
+
+    let videoView = if mainWindow.pipStatus == .inPIP || mainWindow.player.isInMiniPlayer {
+      mainWindow.window!.contentView!
+    } else {
+      mainWindow.videoView
+    }
+    constraintParent = videoView
+    constraintsAll.append(videoView.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor))
+    constraintsAll.append(videoView.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor))
+
+    xConstraint = centerXAnchor.constraint(equalTo: videoView.leadingAnchor)
     xConstraint.priority = .defaultLow
     xConstraint.isActive = true
 
-    yConstraint = superview!.bottomAnchor.constraint(equalTo: bottomAnchor)
+    yConstraint = videoView.bottomAnchor.constraint(equalTo: bottomAnchor)
     yConstraint.priority = .defaultHigh
-    yConstraint.isActive = true
+    constraintsAll.append(yConstraint)
+
+    constraintsAll.forEach { $0.isActive = true }
+  }
+
+  func initPosition() {
+    let videoView = mainWindow.videoView
+    let cph = Preference.float(for: .controlBarPositionHorizontal)
+    let cpv = Preference.float(for: .controlBarPositionVertical)
+    xConstraint.constant = videoView.frame.width * CGFloat(cph)
+    yConstraint.constant = videoView.frame.height * CGFloat(cpv)
+  }
+
+  func updatePosition() {
+    let videoView = mainWindow.videoView
+    let windowWidth = videoView.frame.width
+    let windowHeight = videoView.frame.height
+    let cph = Preference.float(for: .controlBarPositionHorizontal)
+    let cpv = Preference.float(for: .controlBarPositionVertical)
+
+    let margin: CGFloat = 0
+    let minWindowWidth: CGFloat = width
+    var xPos: CGFloat
+
+    if windowWidth < minWindowWidth {
+      // osc is compressed
+      xPos = windowWidth / 2
+    } else {
+      // osc has full width
+      let oscHalfWidth: CGFloat = width * 0.5
+      xPos = windowWidth * CGFloat(cph)
+      if xPos - oscHalfWidth < margin {
+        xPos = oscHalfWidth + margin
+      } else if xPos + oscHalfWidth + margin > windowWidth {
+        xPos = windowWidth - oscHalfWidth - margin
+      }
+    }
+
+    var yPos = windowHeight * CGFloat(cpv)
+    let oscHeight: CGFloat = 67
+    let yMargin: CGFloat = 25
+
+    if yPos < 0 {
+      yPos = 0
+    } else if yPos + oscHeight + yMargin > windowHeight {
+      yPos = windowHeight - oscHeight - yMargin
+    }
+
+    xConstraint.constant = xPos
+    yConstraint.constant = yPos
   }
 
   override func mouseDown(with event: NSEvent) {
@@ -84,7 +153,8 @@ class OSCFloatingView: TranslucentView {
   }
 
   override func mouseDragged(with event: NSEvent) {
-    guard let mousePos = mousePosRelatedToView, let windowFrame = window?.frame else { return }
+    guard let mousePos = mousePosRelatedToView else { return }
+    let windowFrame = mainWindow.videoView.frame
     let currentLocation = NSEvent.mouseLocation
     var newOrigin = CGPoint(
       x: currentLocation.x - mousePos.x,
@@ -104,9 +174,9 @@ class OSCFloatingView: TranslucentView {
       }
     }
     // bound to window frame
-    let xMax = windowFrame.width - frame.width - 10
+    let xMax = windowFrame.width - frame.width
     let yMax = windowFrame.height - frame.height - 25
-    newOrigin = newOrigin.constrained(to: NSRect(x: 10, y: 0, width: xMax, height: yMax))
+    newOrigin = newOrigin.constrained(to: NSRect(x: 0, y: 0, width: xMax, height: yMax))
     // apply position
     let newConstraint = newOrigin.x + frame.width / 2
     xConstraint.constant = userInterfaceLayoutDirection == .rightToLeft ?
@@ -116,7 +186,7 @@ class OSCFloatingView: TranslucentView {
 
   override func mouseUp(with event: NSEvent) {
     isDragging = false
-    guard let windowFrame = window?.frame else { return }
+    let windowFrame = mainWindow.videoView.frame
     // save final position
     Preference.set(xConstraint.constant / windowFrame.width, for: .controlBarPositionHorizontal)
     Preference.set(yConstraint.constant / windowFrame.height, for: .controlBarPositionVertical)

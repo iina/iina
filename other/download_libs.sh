@@ -214,9 +214,14 @@ fetch_latest_plugin_asset() {
   local repo="$1"
   local response_file
   local status_code
+  local curl_args=()
+
+  if [[ -n "${GITHUB_TOKEN:-}" ]]; then
+    curl_args=(-H "Authorization: Bearer ${GITHUB_TOKEN}")
+  fi
 
   response_file=$(mktemp) || return 1
-  status_code=$(curl -s -L -o "$response_file" -w "%{http_code}" "https://api.github.com/repos/${repo}/releases/latest") || {
+  status_code=$(curl -s -L "${curl_args[@]}" -o "$response_file" -w "%{http_code}" "https://api.github.com/repos/${repo}/releases/latest") || {
     echo -e "${RED}Failed to contact GitHub for ${repo}.${NC}" >&2
     rm -f "$response_file"
     return 1

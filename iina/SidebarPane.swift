@@ -1,17 +1,28 @@
 //
-//  AnimatedTabViewController.swift
+//  SidebarPane.swift
 //  iina
 //
 //  Created by Hechen Li on 2026-05-30.
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
+extension NSImage.SymbolConfiguration {
+  static let sidebarIconConfig = {
+    if #available(macOS 26.0, *) {
+      NSImage.SymbolConfiguration(pointSize: 12, weight: .bold)
+    } else {
+      NSImage.SymbolConfiguration(pointSize: 12, weight: .regular)
+    }
+  }()
+}
 
-class AnimatedTabViewController: NSTabViewController {
+
+class SidebarTabViewController: NSTabViewController {
   let transitionDuration: TimeInterval = 0.3
   private let prefObserver = Preference.Observer()
 
-  private var previousIndex: Int = -1
+  // -1 for the first tab switch, don't show animation in this case
+  var previousIndex: Int = -1
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,7 +48,7 @@ class AnimatedTabViewController: NSTabViewController {
   ) {
     if Preference.bool(for: .disableAnimations) || previousIndex < 0 {
       previousIndex = selectedTabViewItemIndex
-      super.transition(from: fromVC, to: toVC, options: options, completionHandler: completion)
+      super.transition(from: fromVC, to: toVC, options: [], completionHandler: completion)
       return
     }
 
@@ -65,7 +76,11 @@ class AnimatedTabViewController: NSTabViewController {
 }
 
 
-class SidebarScrollView: NSScrollView {
+protocol SidebarPane: NSView {
+  var horizontalScroll: ((Bool) -> Void)? { get set }
+}
+
+class SidebarScrollView: NSScrollView, SidebarPane {
   class Container: NSBox {
     init(_ view: NSView, _ block: (NSView) -> Void) {
       super.init(frame: .zero)
@@ -73,7 +88,7 @@ class SidebarScrollView: NSScrollView {
       translatesAutoresizingMaskIntoConstraints = false
       clipsToBounds = true
       boxType = .custom
-      borderColor = .separatorColor
+      borderColor = .sidebarContainerBorder
       cornerRadius = 8
       fillColor = .gray.withAlphaComponent(0.1)
       block(view)
@@ -96,6 +111,8 @@ class SidebarScrollView: NSScrollView {
     super.init(frame: frameRect)
 
     drawsBackground = false
+    hasVerticalScroller = true
+    autohidesScrollers = true
 
     documentView = FlippedView()
     documentView!.translatesAutoresizingMaskIntoConstraints = false

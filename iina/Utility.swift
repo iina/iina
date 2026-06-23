@@ -580,7 +580,6 @@ class Utility {
     }
   }
 
-
   // MARK: - Util classes
 
   class FontAttributes {

@@ -21,6 +21,7 @@ enum IINACommand: String {
   case chapterPanel = "chapter-panel"
 
   case toggleMusicMode = "toggle-music-mode"
+  case liveText = "live-text"
 
   case flip = "toggle-flip"
   case mirror = "toggle-mirror"

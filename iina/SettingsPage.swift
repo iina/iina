@@ -64,12 +64,20 @@ class SettingsView: NSView {
 
 @resultBuilder
 struct SettingsViewsBuilder {
-  static func buildBlock(_ components: SettingsSection...) -> [SettingsSection] {
-    return components
+  static func buildExpression(_ expression: SettingsSection) -> [SettingsSection] {
+    [expression]
+  }
+
+  static func buildExpression(_ expression: [SettingsSection]) -> [SettingsSection] {
+    expression
   }
 
   static func buildBlock(_ components: [SettingsSection]...) -> [SettingsSection] {
     components.flatMap { $0 }
+  }
+
+  static func buildOptional(_ component: [SettingsSection]?) -> [SettingsSection] {
+    component ?? []
   }
 }
 
@@ -99,8 +107,20 @@ struct SettingsSubListBuilder {
 
 @resultBuilder
 struct SettingsSectionBuilder {
-  static func buildBlock(_ components: SettingsContainer...) -> [SettingsContainer] {
-    return components
+  static func buildExpression(_ expression: SettingsContainer) -> [SettingsContainer] {
+    [expression]
+  }
+
+  static func buildBlock(_ components: [SettingsContainer]...) -> [SettingsContainer] {
+    components.flatMap { $0 }
+  }
+
+  static func buildOptional(_ component: [SettingsContainer]?) -> [SettingsContainer] {
+    component ?? []
+  }
+
+  static func buildLimitedAvailability(_ component: [SettingsContainer]) -> [SettingsContainer] {
+    component
   }
 }
 

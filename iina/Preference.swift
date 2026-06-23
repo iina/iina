@@ -103,6 +103,8 @@ struct Preference {
     static let screenshotTemplate = Key("screenShotTemplate")
     static let screenshotShowPreview = Key("screenshotShowPreview")
 
+    static let enableLiveText = Key("enableLiveText")
+
     static let playlistAutoAdd = Key("playlistAutoAdd")
     static let playlistAutoPlayNext = Key("playlistAutoPlayNext")
     static let playlistShowMetadata = Key("playlistShowMetadata")
@@ -836,6 +838,7 @@ struct Preference {
     case subTrack
     case screenshot
     case plugins
+    case liveText
 
     var description: String {
       switch self {
@@ -847,6 +850,7 @@ struct Preference {
       case .subTrack: "subTrack"
       case .screenshot: "screenshot"
       case .plugins: "plugins"
+      case .liveText: "liveText"
       }
     }
 
@@ -866,6 +870,7 @@ struct Preference {
       case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
       case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
       case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
+      case .liveText: return makeSymbol(["document.viewfinder"], "custom.character.cursor.ibeam.rectangle.fill")
       }
     }
 
@@ -876,6 +881,7 @@ struct Preference {
       case .pip: return makeSymbol(["pip.exit"], "pip")
       case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"], "fullscreen")
       case .plugins: return makeSymbol(["puzzlepiece.extension.fill"], "plugin")
+      case .liveText: return makeSymbol(["viewfinder.circle.fill"], "custom.character.cursor.ibeam.rectangle.fill")
       default: return nil
       }
     }
@@ -891,6 +897,7 @@ struct Preference {
       case .subTrack: key = "sub_track"
       case .screenshot: key = "screenshot"
       case .plugins: key = "plugins"
+      case .liveText: key = "live_text"
       }
       return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }
@@ -988,6 +995,20 @@ struct Preference {
     case .sidebar:
       Preference.bool(for: .useLiquidGlassSidebar)
     }
+  }
+
+  static var isLiveTextAvailable: Bool = {
+    guard #available(macOS 13, *) else { return false }
+    let defaults = UserDefaults.standard
+    if defaults.object(forKey: "AppleLiveTextEnabled") == nil {
+      return true
+    }
+    return defaults.bool(forKey: "AppleLiveTextEnabled")
+  }()
+
+  static var isLiveTextEnabled: Bool {
+    guard isLiveTextAvailable else { return false }
+    return Preference.bool(for: .enableLiveText)
   }
 
   // MARK: - Defaults
@@ -1191,6 +1212,8 @@ struct Preference {
     .screenshotFormat: ScreenshotFormat.png.rawValue,
     .screenshotTemplate: "%F-%n",
     .screenshotShowPreview: true,
+
+    .enableLiveText: false,
 
     .watchProperties: [String](),
     .savedVideoFilters: [SavedFilter](),

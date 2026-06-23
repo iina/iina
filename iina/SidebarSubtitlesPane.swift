@@ -26,7 +26,7 @@ class SidebarSubtitlesPane: SidebarScrollView {
       wantsToGrow: true,
       ui.hStack(
         spacing: 8,
-        ui.image("1.square.fill", size: 16),
+        ui.image("1.square.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.primary", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         VisibilitySwitch(player: player, isPrimary: true),
@@ -45,7 +45,7 @@ class SidebarSubtitlesPane: SidebarScrollView {
       wantsToGrow: true,
       ui.hStack(
         spacing: 8,
-        ui.image("2.square.fill", size: 16),
+        ui.image("2.square.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.secondary", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         VisibilitySwitch(player: player, isPrimary: false),
@@ -219,7 +219,8 @@ fileprivate class SubDelayView: SidebarSliderView {
   var isPrimary: Bool = true
 
   override var titleImage: NSImage? {
-    .sf("clock.arrow.trianglehead.counterclockwise.rotate.90", "clock.arrow.circlepath")
+    .sf("clock.arrow.trianglehead.counterclockwise.rotate.90", "clock.arrow.circlepath",
+        withConfiguration: .sidebarIconConfig)
   }
   override var titleKey: String { "sidebar.delay" }
   override var tickMarkLabels: [String] {
@@ -335,7 +336,7 @@ fileprivate class SubPositionDelayView: NSView {
       delayView,
       ui.hStack(
         spacing: 8,
-        ui.image("arrow.up.and.down", size: 16),
+        ui.image("arrow.up.and.down", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.position", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
       ),
@@ -409,6 +410,7 @@ fileprivate class SubStyleView: NSView {
     scaleResetButton.isBordered = false
 
     self.fontChooser = NSButton()
+    fontChooser.bezelStyle = .push
     fontChooser.widthAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
     fontChooser.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     fontChooser.target = self
@@ -432,7 +434,7 @@ fileprivate class SubStyleView: NSView {
 
     let scaleStack = ui.hStack(
       spacing: 8,
-      ui.image("plus.magnifyingglass", size: 16),
+      ui.image("plus.magnifyingglass", size: 16, config: .sidebarIconConfig),
       ui.label("sidebar.scale", font: .boldSystemFont(ofSize: 12)),
       scaleSlider,
       scaleResetButton,
@@ -444,7 +446,7 @@ fileprivate class SubStyleView: NSView {
       scaleStack,
       ui.hStack(
         spacing: 8,
-        ui.image("textformat", size: 16),
+        ui.image("textformat", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.font", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         fontChooser,
@@ -452,21 +454,22 @@ fileprivate class SubStyleView: NSView {
       ),
       ui.hStack(
         spacing: 8,
-        ui.image("paintpalette.fill", size: 16),
+        ui.image("paintpalette.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.color", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         createColorWell(\.textColorWell, tag: 1),
       ),
       ui.hStack(
         spacing: 8,
-        ui.image("inset.filled.rectangle", "rectangle.inset.filled", "rectangle.inset.fill", size: 16),
+        ui.image("inset.filled.rectangle", "rectangle.inset.filled", "rectangle.inset.fill",
+                 size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.background", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         createColorWell(\.backgroundColorWell, tag: 2),
       ),
       ui.hStack(
         spacing: 8,
-        ui.image("paintpalette.fill", size: 16),
+        ui.image("paintpalette.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.border", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         borderSizePicker,
@@ -495,7 +498,7 @@ fileprivate class SubStyleView: NSView {
     if #available(macOS 13.0, *) {
       colorWell.colorWellStyle = .expanded
     } else {
-      colorWell.size(width: 30)
+      colorWell.size(width: 24)
     }
     colorWell.size(height: 24)
     colorWell.target = self

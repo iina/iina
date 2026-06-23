@@ -45,8 +45,6 @@ class MainWindowController: PlayerWindowController {
     return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
   }()
 
-  // MARK: - Constants
-
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
 
@@ -109,6 +107,7 @@ class MainWindowController: PlayerWindowController {
   var mousePosRelatedToWindow: CGPoint?
   var isDragging: Bool = false
 
+  lazy var liveText = LiveTextController(mainWindow: self)
   var pipStatus = PIPStatus.notInPIP
   var isInInteractiveMode: Bool = false
   var isVideoLoaded: Bool = false
@@ -297,6 +296,7 @@ class MainWindowController: PlayerWindowController {
     .useLiquidGlassOSC,
     .useLiquidGlassOSD,
     .useLiquidGlassSidebar,
+    .enableLiveText
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
@@ -307,6 +307,7 @@ class MainWindowController: PlayerWindowController {
     case PK.oscPosition.rawValue:
       if let newValue = change[.newKey] as? Int {
         setupOnScreenController(withPosition: Preference.OSCPosition(rawValue: newValue) ?? .floating)
+        liveText.updateOverlayInsets()
       }
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
@@ -366,6 +367,18 @@ class MainWindowController: PlayerWindowController {
     case PK.useLiquidGlassOSD.rawValue:
       [timePreviewView, osdView, additionalInfoView, bufferIndicatorView].forEach {
         $0?.setStyle(Preference.liquidGlass(.osd) ? .liquidGlass : .visualEffect)
+      }
+    case PK.enableLiveText.rawValue:
+      if #available(macOS 13, *), let newValue = change[.newKey] as? Bool {
+        let buttons = fragToolbarView.subviews as! [NSButton]
+        if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
+          btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
+        }
+        if newValue {
+          liveText.requestAnalysis()
+        } else {
+          liveText.clearAnalysis()
+        }
       }
     default:
       return
@@ -541,8 +554,15 @@ class MainWindowController: PlayerWindowController {
 
     titleBarView.padding(.horizontal)
 
+    // video view
+
+    addVideoViewToWindow()
+    player.initVideo()
+    videoView.postsFrameChangedNotifications = true
+
     // osc views
 
+    oscFloatingView.setupConstraints()
     fragControlView.addView(fragControlViewLeftView, in: .center)
     fragControlView.addView(fragControlViewMiddleView, in: .center)
     fragControlView.addView(fragControlViewRightView, in: .center)
@@ -550,14 +570,8 @@ class MainWindowController: PlayerWindowController {
     fragControlView.userInterfaceLayoutDirection = .leftToRight
     setupOnScreenController(withPosition: oscPosition)
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
-    setupOSCToolbarButtons(buttons)
-
     updateArrowButtons()
-
-    // video view
-    addVideoViewToWindow()
-    player.initVideo()
-    videoView.postsFrameChangedNotifications = true
+    setupOSCToolbarButtons(buttons)
 
     // fade-able views
 
@@ -666,7 +680,10 @@ class MainWindowController: PlayerWindowController {
     // Observers for toolbar buttons
     let notifications: [Notification.Name] = [.iinaPIPStatusChanged, .iinaFullscreenChanged, .iinaSidebarStatusChanged]
     notifications.forEach {
-      NotificationCenter.default.addObserver(self, selector: #selector(updateOSCToolbarButtons(_:)), name: $0, object: nil)
+      NotificationCenter.default
+        .addObserver(forName: $0, object: nil, queue: .main) { [weak self] n in
+          self?.updateOSCToolbarButtons(n)
+        }
     }
 
     player.events.emit(.windowLoaded)
@@ -783,10 +800,15 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
+    let effectiveButtons = buttons.filter { $0 != .liveText || Preference.isLiveTextEnabled }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
-    for buttonType in buttons {
+    let liveTextEnabled = Preference.bool(for: .enableLiveText)
+    for buttonType in effectiveButtons {
       let button = NSButton()
-      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: buttons.count > 4)
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: effectiveButtons.count > 4)
+      if buttonType == .liveText && liveTextEnabled {
+        button.image = Preference.ToolBarButton.liveText.alternateImage()
+      }
       button.action = #selector(self.toolBarButtonAction(_:))
       fragToolbarView.addView(button, in: .trailing)
     }
@@ -794,7 +816,6 @@ class MainWindowController: PlayerWindowController {
 
   @objc
   private func updateOSCToolbarButtons(_ notification: Notification) {
-
     func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
       let buttons = fragToolbarView.subviews as! [NSButton]
       let currentButton = buttons.first(where: { $0.tag == button.rawValue })
@@ -818,7 +839,6 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func setupOnScreenController(withPosition newPosition: Preference.OSCPosition) {
-
     guard !oscIsInitialized || oscPosition != newPosition else { return }
     oscIsInitialized = true
 
@@ -872,11 +892,7 @@ class MainWindowController: PlayerWindowController {
       oscFloatingView.oscBottomView.addSubview(fragSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
       Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": fragControlView])
-      // center control bar
-      let cph = Preference.float(for: .controlBarPositionHorizontal)
-      let cpv = Preference.float(for: .controlBarPositionVertical)
-      oscFloatingView.xConstraint.constant = window!.frame.width * CGFloat(cph)
-      oscFloatingView.yConstraint.constant = window!.frame.height * CGFloat(cpv)
+      oscFloatingView.initPosition()
     case .top:
       let oscTopMainView = titleBarView.oscView!
       currentControlBar = nil
@@ -1367,6 +1383,8 @@ class MainWindowController: PlayerWindowController {
       exitInteractiveMode(immediately: true)
     }
 
+    liveText.clearAnalysis()
+
     // Set the appearance to match the theme so the titlebar matches the theme
     let iinaTheme = Preference.enum(for: .themeMaterial) as Preference.Theme
     window?.appearance = NSAppearance(iinaTheme: iinaTheme)
@@ -1405,6 +1423,8 @@ class MainWindowController: PlayerWindowController {
       view.isHidden = false
     }
     window?.titlebarAppearsTransparent = false
+
+    liveText.requestAnalysis()
 
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
@@ -1456,6 +1476,8 @@ class MainWindowController: PlayerWindowController {
       return
     }
 
+    liveText.requestAnalysis()
+
     // Reset the full screen state to indicate exiting full screen mode so that finishAnimating
     // will correctly set the state to windowed.
     fsState = .animating(toFullscreen: false, legacy: legacy, priorWindowedFrame: priorWindowedFrame)
@@ -1483,7 +1505,7 @@ class MainWindowController: PlayerWindowController {
   /// method has been called when the window is in full screen mode. Prepare the window to start transitioning to windowed mode.
   /// - Attention: After altering this method you _must_ update the
   ///     [windowDidFailToExitFullScreen](https://developer.apple.com/documentation/appkit/nswindowdelegate/windowdidfailtoexitfullscreen(_:))
-  ///     method which is responsible for reverting changes made by this method should the transition to wndowed mode fail.
+  ///     method which is responsible for reverting changes made by this method should the transition to windowed mode fail.
   /// - Parameter notification: A notification named
   ///     [willExitFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/willexitfullscreennotification).
   func windowWillExitFullScreen(_ notification: Notification) {
@@ -1494,6 +1516,8 @@ class MainWindowController: PlayerWindowController {
     if isInInteractiveMode {
       exitInteractiveMode(immediately: true)
     }
+
+    liveText.clearAnalysis()
 
     titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: false)
 
@@ -1535,6 +1559,8 @@ class MainWindowController: PlayerWindowController {
       log("AppKit exited full screen mode without informing IINA", level: .warning)
       fsState.startAnimatingToWindow()
     }
+
+    liveText.requestAnalysis()
 
     if Preference.bool(for: PK.disableAnimations) {
       // When animation is not used exiting full screen does not restore the previous size of the
@@ -1602,6 +1628,8 @@ class MainWindowController: PlayerWindowController {
       log("Unable to restore full screen state: \(fsState)", level: .error)
       return
     }
+
+    liveText.requestAnalysis()
 
     // Reset the full screen state to indicate entering full screen mode so that finishAnimating
     // will correctly set the state to  full screen mode.
@@ -1751,6 +1779,9 @@ class MainWindowController: PlayerWindowController {
     if isInInteractiveMode {
       return window.frame.size
     }
+    if !window.inLiveResize {
+      liveText.clearAnalysis()
+    }
     if frameSize.height <= AppData.mainWindowMinSize.height || frameSize.width <= AppData.mainWindowMinSize.width {
       return currentWindowAspectRatio.grow(toSize: AppData.mainWindowMinSize)
     }
@@ -1759,44 +1790,13 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidResize(_ notification: Notification) {
     guard let window = window else { return }
+    if !window.inLiveResize {
+      liveText.requestAnalysis()
+    }
 
     // update control bar position
     if oscPosition == .floating {
-      let cph = Preference.float(for: .controlBarPositionHorizontal)
-      let cpv = Preference.float(for: .controlBarPositionVertical)
-
-      let windowWidth = window.frame.width
-      let margin: CGFloat = 10
-      let minWindowWidth: CGFloat = 480 // 460 + 20 margin
-      var xPos: CGFloat
-
-      if windowWidth < minWindowWidth {
-        // osc is compressed
-        xPos = windowWidth / 2
-      } else {
-        // osc has full width
-        let oscHalfWidth: CGFloat = 230
-        xPos = windowWidth * CGFloat(cph)
-        if xPos - oscHalfWidth < margin {
-          xPos = oscHalfWidth + margin
-        } else if xPos + oscHalfWidth + margin > windowWidth {
-          xPos = windowWidth - oscHalfWidth - margin
-        }
-      }
-
-      let windowHeight = window.frame.height
-      var yPos = windowHeight * CGFloat(cpv)
-      let oscHeight: CGFloat = 67
-      let yMargin: CGFloat = 25
-
-      if yPos < 0 {
-        yPos = 0
-      } else if yPos + oscHeight + yMargin > windowHeight {
-        yPos = windowHeight - oscHeight - yMargin
-      }
-
-      oscFloatingView.xConstraint.constant = xPos
-      oscFloatingView.yConstraint.constant = yPos
+      oscFloatingView.updatePosition()
     }
 
     // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
@@ -1834,6 +1834,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillStartLiveResize(_ notification: Notification) {
     videoView.videoLayer.inLiveResize = true
+    liveText.clearAnalysis()
   }
 
   // resize framebuffer in videoView after resizing.
@@ -1843,6 +1844,7 @@ class MainWindowController: PlayerWindowController {
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
+    liveText.requestAnalysis()
   }
 
   func windowDidChangeBackingProperties(_ notification: Notification) {
@@ -1936,7 +1938,7 @@ class MainWindowController: PlayerWindowController {
     NSCursor.setHiddenUntilMouseMoves(true)
   }
 
-  private func hideUI(force: Bool = false) {
+  func hideUI(force: Bool = false) {
     // Don't hide UI when in PIP
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return
@@ -1972,8 +1974,9 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  private func showUI() {
+  func showUI() {
     if player.disableUI { return }
+    guard !liveText.isActive else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false
@@ -2721,14 +2724,18 @@ class MainWindowController: PlayerWindowController {
   }
 
   @objc func chosenSubFromMenu(_ sender: NSMenuItem) {
-      if let fileInfo = sender.representedObject as? FileInfo {
-        player.loadExternalSubFile(fileInfo.url)
-      } else if let sub = sender.representedObject as? MPVTrack {
-        player.setTrack(sub.id, forType: .sub)
-      } else {
-        player.setTrack(0, forType: .sub)
-      }
+    if let fileInfo = sender.representedObject as? FileInfo {
+      player.loadExternalSubFile(fileInfo.url)
+    } else if let sub = sender.representedObject as? MPVTrack {
+      player.setTrack(sub.id, forType: .sub)
+    } else {
+      player.setTrack(0, forType: .sub)
     }
+  }
+
+  @objc func menuToggleLiveText(_ item: NSMenuItem) {
+    Preference.set(!Preference.bool(for: .enableLiveText), for: .enableLiveText)
+  }
 
   // MARK: - Sync UI with playback
 
@@ -2740,6 +2747,7 @@ class MainWindowController: PlayerWindowController {
 
   override func updatePlayTime(withDuration duration: Bool, andProgressBar: Bool) {
     super.updatePlayTime(withDuration: duration, andProgressBar: andProgressBar)
+    syncPIPPlaybackState()
 
     if osdAnimationState == .shown, let osdLastMessage = self.osdLastMessage {
       let message: OSDMessage
@@ -2765,6 +2773,7 @@ class MainWindowController: PlayerWindowController {
     if paused {
       speedValueIndex = AppData.availableSpeedValues.count / 2
     }
+    syncPIPPlaybackState()
   }
 
   /// Configure the OSC arrow buttons based on IINA's `Use left/right button for` setting.
@@ -2970,15 +2979,17 @@ class MainWindowController: PlayerWindowController {
         enterPIP()
       }
     case .playlist:
-      sidebars.showPlaylist()
+      sidebars.show(sidebar: .playlist)
     case .settings:
-      sidebars.showSettings()
+      sidebars.show(sidebar: .settings)
     case .subTrack:
       showSubChooseMenu(forView: sender, showLoadedSubs: true)
     case .screenshot:
       player.screenshot()
     case .plugins:
-      sidebars.showPlugin(tab: nil)
+      sidebars.show(sidebar: .plugins)
+    case .liveText:
+      Preference.set(!Preference.bool(for: .enableLiveText), for: .enableLiveText)
     }
   }
 
@@ -2987,6 +2998,8 @@ class MainWindowController: PlayerWindowController {
     switch cmd {
     case .toggleMusicMode:
       player.switchToMiniPlayer()
+    case .liveText:
+      menuToggleLiveText(.dummy)
     default:
       break
     }
@@ -3085,6 +3098,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     pip.presentAsPicture(inPicture: pipVideo)
     pipOverlayView.isHidden = false
+    syncPIPPlaybackState()
 
     if let window = self.window {
       let windowShouldDoNothing = window.styleMask.contains(.fullScreen) || window.isMiniaturized
@@ -3106,19 +3120,24 @@ extension MainWindowController: PIPViewControllerDelegate {
       }
     }
 
+    oscFloatingView.setupConstraints()
+    oscFloatingView.updatePosition()
+
     player.events.emit(.pipChanged, data: true)
     NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": true])
   }
 
   func exitPIP() {
     guard pipStatus == .inPIP else { return }
-    if pipShouldClose(pip) {
-      // Prod Swift to pick the dismiss(_ viewController: NSViewController)
-      // overload over dismiss(_ sender: Any?). A change in the way implicitly
-      // unwrapped optionals are handled in Swift means that the wrong method
-      // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
-      pip.dismiss(pipVideo!)
-    }
+    prepareForPIPClosure(pip)
+    // Prod Swift to pick the dismiss(_ viewController: NSViewController)
+    // overload over dismiss(_ sender: Any?). A change in the way implicitly
+    // unwrapped optionals are handled in Swift means that the wrong method
+    // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
+    pip.dismiss(pipVideo!)
+
+    oscFloatingView.setupConstraints()
+    oscFloatingView.updatePosition()
   }
 
   func doneExitingPIP() {
@@ -3156,12 +3175,8 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipOverlayView.isHidden = true
 
     // Set frame to animate back to
-    if fsState.isFullscreen {
-      let newVideoSize = videoView.frame.size.shrink(toSize: window.frame.size)
-      pip.replacementRect = newVideoSize.centeredRect(in: .init(origin: .zero, size: window.frame.size))
-    } else {
-      pip.replacementRect = window.contentView?.frame ?? .zero
-    }
+    let newVideoSize = videoView.frame.size.shrink(toSize: window.frame.size)
+    pip.replacementRect = newVideoSize.centeredRect(in: .init(origin: .zero, size: window.frame.size))
     pip.replacementWindow = window
 
     // Bring the window to the front and deminiaturize it
@@ -3171,11 +3186,6 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func pipWillClose(_ pip: PIPViewController) {
     prepareForPIPClosure(pip)
-  }
-
-  func pipShouldClose(_ pip: PIPViewController) -> Bool {
-    prepareForPIPClosure(pip)
-    return true
   }
 
   func pipDidClose(_ pip: PIPViewController) {
@@ -3193,5 +3203,22 @@ extension MainWindowController: PIPViewControllerDelegate {
   func pipActionStop(_ pip: PIPViewController) {
     // Stopping PIP pauses playback
     player.pause()
+  }
+
+  func pipAction(_ pip: PIPViewController, skipInterval interval: TimeInterval) {
+    player.seek(relativeSecond: interval, option: .relative)
+  }
+
+  func syncPIPPlaybackState() {
+    guard pipStatus == .inPIP,
+          pip.responds(to: NSSelectorFromString("updatePlaybackStateUsingBlock:")) else { return }
+    let playing = player.info.state == .playing
+    let elapsed = player.info.videoPosition?.second ?? 0
+    let duration = player.info.videoDuration?.second ?? 0
+    pip.updatePlaybackState { state in
+      state.contentType = 1
+      state.contentDuration = duration
+      state.setPlaybackRate(playing ? player.info.playSpeed : 0, elapsedTime: elapsed, timeControlStatus: playing ? 2 : 0)
+    }
   }
 }

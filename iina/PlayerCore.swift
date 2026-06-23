@@ -1433,7 +1433,7 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.Subtitles.secondarySubVisibility, newState)
   }
 
-  func loadExternalSubFile(_ url: URL, delay: Bool = false) {
+  func loadExternalSubFile(_ url: URL, delay: Bool = false, suppressError: Bool = false) {
     var track: MPVTrack?
     info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.path }) }
     if let track = track {
@@ -1444,6 +1444,8 @@ class PlayerCore: NSObject {
     mpv.command(.subAdd, args: [url.path], checkError: false, level: .verbose) { code in
       if code < 0 {
         self.log("Unsupported sub: \(url.path)", level: .error)
+        // only show alert when the subtitle is added manually
+        guard !suppressError else { return }
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
         if delay {
           DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
@@ -2092,7 +2094,7 @@ class PlayerCore: NSObject {
             guard !loadedSubs.contains(sub) else { continue }
             loadedSubs.insert(sub)
             try checkTicket(currentTicket)
-            loadExternalSubFile(sub)
+            loadExternalSubFile(sub, suppressError: true)
           }
           // set sub to the first one
           try checkTicket(currentTicket)

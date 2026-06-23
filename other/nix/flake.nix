@@ -46,7 +46,7 @@
             ]))
           ];
           dontUnpack = true;
-          installPhase = "install -Dm755 ${./other/lib_tool.py} $out/bin/iina-lib-tool";
+          installPhase = "install -Dm755 ${./lib_tool.py} $out/bin/iina-lib-tool";
         };
 
         # Pull system's xcode in
@@ -444,11 +444,11 @@
 
           # Only include SwiftPM-related files as input
           src = pkgs.lib.cleanSourceWith {
-            src = ./.;
+            src = ./../..;
             filter =
               path: type:
               let
-                relPath = pkgs.lib.removePrefix (toString ./. + "/") (toString path);
+                relPath = pkgs.lib.removePrefix (toString ./../.. + "/") (toString path);
               in
               pkgs.lib.hasSuffix "Package.resolved" relPath
               || pkgs.lib.hasSuffix "Package.swift" relPath
@@ -511,7 +511,7 @@
             pname = "iina";
             version = "${self.shortRev or self.dirtyShortRev}";
 
-            src = pkgs.nix-gitignore.gitignoreSource [ "flake.nix" "flake.lock" ] ./.;
+            src = pkgs.nix-gitignore.gitignoreSource [ "flake.nix" "flake.lock" ] ./../..;
 
             strictDeps = true;
 
@@ -689,52 +689,6 @@
           default = iina-universal;
         };
 
-        devShells = {
-          default = pkgs.mkShell {
-            packages = [
-              xcode
-              pkgs.rsync
-              pkgs.gnused
-              pkgs.gnugrep
-              pkgs.coreutils
-            ];
-
-            shellHook = ''
-              set -euo pipefail
-
-              export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
-
-              deps_root="$PWD/deps"
-              mkdir -p "$deps_root"
-
-              link_tree() {
-                local target="$1"
-                local link="$2"
-
-                if [ -e "$link" ] && [ ! -L "$link" ]; then
-                  echo "⚠️ $link exists and is not a symlink; leaving it untouched."
-                  return
-                fi
-
-                ln -sfn "$target" "$link"
-              }
-
-              link_tree ${depsInclude} "$deps_root/include"
-              link_tree ${depsLib} "$deps_root/lib"
-
-              echo "📦 Syncing SwiftPM deps"
-              rsync -a --chmod=Du+rwx,Fu+rw ${spmDeps}/ ./
-
-              if [ -f .spm/workspace-state.json ]; then
-                chmod u+w .spm/workspace-state.json 2>/dev/null || true
-                old_prefix=$(grep -Eo "/nix/var/nix/builds/nix-[^/]+/source" .spm/workspace-state.json | head -n1)
-                if [ -n "$old_prefix" ]; then
-                  sed -i -E "s|$old_prefix|$PWD|g" .spm/workspace-state.json
-                fi
-              fi
-            '';
-          };
-        };
       }
     );
   in {

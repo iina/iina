@@ -57,8 +57,10 @@ printUsageHelp() {
 NIX_EXE="$(which nix)"
 set -euo pipefail
 SCRIPT_DIR="$(print_script_dir)"
-PROJ_DIR="$(realpath ${SCRIPT_DIR}/..)"
-APP_CONTENTS_DIR="$PROJ_DIR/result/Applications/IINA.app/Contents"
+PROJ_DIR="$(realpath ${SCRIPT_DIR}/../..)"
+NIX_DIR="$PROJ_DIR/other/nix"
+NIX_RESULT_DIR="$SCRIPT_DIR/result"
+APP_CONTENTS_DIR="$NIX_RESULT_DIR/Applications/IINA.app/Contents"
 echo "Project root directory seems to be: $PROJ_DIR"
 
 while [[ $# -gt 0 ]]; do
@@ -175,14 +177,15 @@ if [[ "$NIX_BUILD" = true ]]; then
     exit 1
   fi
 
-  if [[ ! -f $PROJ_DIR/flake.nix ]]; then
-    echo -e "${RED}ERROR: Could not find 'flake.nix' (expected location: $PROJ_DIR/flake.nix).${NC}" >&2
-    echo -e "${RED}Please ensure it is present and this script is located in $PROJ_DIR/other/${NC}" >&2
+  if [[ ! -f $NIX_DIR/flake.nix ]]; then
+    echo -e "${RED}ERROR: Could not find 'flake.nix' (expected location: $NIX_DIR/flake.nix).${NC}" >&2
+    echo -e "${RED}Please ensure it is present and this script is located in the same diretory.${NC}" >&2
     echo -e "Aborting build." >&2
     exit 1
   fi
 
-  cd "$PROJ_DIR"
+  echo "Changing current dir to: $NIX_DIR"
+  cd "$NIX_DIR"
 
   NIX_ARGS="build --print-build-logs --verbose"
 
@@ -250,7 +253,7 @@ fi
 
 
 if [[ "$REPLACE_INCLUDES" = true ]]; then
-  SRC_DIR="$PROJ_DIR/result/include"
+  SRC_DIR="$NIX_RESULT_DIR/include"
   DST_DIR="$PROJ_DIR/deps/include"
   echo -e "${YELLOW}📎 Replacing include files @ $DST_DIR …${NC}"
   mkdir -p "$DST_DIR"

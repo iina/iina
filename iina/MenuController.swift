@@ -292,7 +292,8 @@ class MenuController: NSObject, NSMenuDelegate {
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
-    let floatingItem = NSMenuItem(title: Constants.String.customFloatingWindow, action: #selector(MainMenuActionHandler.menuToggleCustomFloatingWindow(_:)), keyEquivalent: "")
+    let floatingItem = NSMenuItem(title: Constants.String.customFloatingWindow, action: #selector(menuToggleCustomFloatingWindow(_:)), keyEquivalent: "")
+    floatingItem.target = self
     floatingItem.tag = -2
     let pictureInPictureIndex = videoMenu.index(of: pictureInPicture)
     videoMenu.insertItem(floatingItem, at: pictureInPictureIndex >= 0 ? pictureInPictureIndex + 1 : videoMenu.numberOfItems)
@@ -529,6 +530,7 @@ class MenuController: NSObject, NSMenuDelegate {
     let isInCustom = player.mainWindow.customFloatingWindowStatus == .inCustomFloatingWindow
     customFloatingWindowMenuItem?.title = Constants.String.customFloatingWindow
     customFloatingWindowMenuItem?.state = isInCustom ? .on : .off
+    customFloatingWindowMenuItem?.isEnabled = player.info.state.active || isInCustom
     miniPlayer.title = player.isInMiniPlayer ? Constants.String.exitMiniPlayer : Constants.String.miniPlayer
     delogo.state = isDelogo ? .on : .off
   }
@@ -869,6 +871,10 @@ class MenuController: NSObject, NSMenuDelegate {
       menuItem.representedObject = filter.filterString
       menu.addItem(menuItem)
     }
+  }
+
+  @objc func menuToggleCustomFloatingWindow(_ sender: NSMenuItem) {
+    PlayerCore.active.mainWindow.toggleCustomFloatingWindow()
   }
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {

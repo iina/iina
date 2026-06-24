@@ -32,7 +32,7 @@ class CustomFloatingWindowController: NSWindowController, NSWindowDelegate {
     let contentView = NSView(frame: NSRect(origin: .zero, size: initialFrame.size))
     let window = CustomFloatingPanel(
       contentRect: initialFrame,
-      styleMask: [.titled, .closable, .resizable, .miniaturizable, .nonactivatingPanel],
+      styleMask: [.borderless, .resizable, .nonactivatingPanel],
       backing: .buffered,
       defer: false
     )
@@ -43,6 +43,7 @@ class CustomFloatingWindowController: NSWindowController, NSWindowDelegate {
     window.hidesOnDeactivate = false
     window.isReleasedWhenClosed = false
     window.backgroundColor = .black
+    window.isMovableByWindowBackground = true
     window.minSize = NSSize(width: 240, height: 135)
     window.aspectRatio = initialFrame.size
 

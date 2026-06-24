@@ -292,7 +292,7 @@ class MenuController: NSObject, NSMenuDelegate {
     // -- screen
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
-    let floatingItem = NSMenuItem(title: Constants.String.customFloatingWindow, action: #selector(MainWindowController.menuToggleCustomFloatingWindow(_:)), keyEquivalent: "")
+    let floatingItem = NSMenuItem(title: Constants.String.customFloatingWindow, action: #selector(MainMenuActionHandler.menuToggleCustomFloatingWindow(_:)), keyEquivalent: "")
     floatingItem.tag = -2
     let pictureInPictureIndex = videoMenu.index(of: pictureInPicture)
     videoMenu.insertItem(floatingItem, at: pictureInPictureIndex >= 0 ? pictureInPictureIndex + 1 : videoMenu.numberOfItems)
@@ -527,7 +527,8 @@ class MenuController: NSObject, NSMenuDelegate {
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
     let isInCustom = player.mainWindow.customFloatingWindowStatus == .inCustomFloatingWindow
-    customFloatingWindowMenuItem?.title = isInCustom ? Constants.String.exitCustomFloatingWindow : Constants.String.customFloatingWindow
+    customFloatingWindowMenuItem?.title = Constants.String.customFloatingWindow
+    customFloatingWindowMenuItem?.state = isInCustom ? .on : .off
     miniPlayer.title = player.isInMiniPlayer ? Constants.String.exitMiniPlayer : Constants.String.miniPlayer
     delogo.state = isDelogo ? .on : .off
   }

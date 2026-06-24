@@ -88,6 +88,10 @@ extension MainMenuActionHandler {
     }
   }
 
+  @objc func menuToggleCustomFloatingWindow(_ sender: NSMenuItem) {
+    player.mainWindow.toggleCustomFloatingWindow()
+  }
+
   @objc func menuStop(_ sender: NSMenuItem) {
     // FIXME: handle stop
     player.sendOSD(.stop)

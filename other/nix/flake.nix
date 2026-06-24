@@ -22,6 +22,8 @@
           inherit system;
         };
 
+        ### Tools / Commands ###
+
         resign = pkgs.writeShellApplication {
           name = "iina-resign";
           runtimeInputs = [ pkgs.findutils pkgs.coreutils ];
@@ -40,11 +42,7 @@
         libTool = pkgs.stdenv.mkDerivation {
           pname = "iina-lib-tool";
           version = "1.0";
-          propagatedBuildInputs = [
-            (pkgs.python3.withPackages (pythonPackages: with pythonPackages; [
-              packaging
-            ]))
-          ];
+          propagatedBuildInputs = [ pkgs.python3 ];
           dontUnpack = true;
           installPhase = "install -Dm755 ${./lib_tool.py} $out/bin/iina-lib-tool";
         };
@@ -61,6 +59,8 @@
           mkdir -p "$out/bin"
           ln -sf /opt/homebrew/bin/nasm "$out/bin/nasm"
         '';
+
+        ### Package Overrides ###
 
         # Upgrade to the version supplied by nixpkgs 26.05.
         dav1d = pkgs.dav1d.overrideAttrs (finalAttrs: previousAttrs: {
@@ -85,8 +85,8 @@
 
         # Upgrade to the version supplied by nixpkgs 26.05.
         fontconfig = (pkgs.fontconfig.override {
-          expat = expat;
-          freetype = freetype;
+          inherit expat;
+          inherit freetype;
         }).overrideAttrs (finalAttrs: previousAttrs: {
           version = "2.17.1";
           src = pkgs.fetchurl {
@@ -106,7 +106,7 @@
 
         # Upgrade to the version supplied by nixpkgs 25.11.
         harfbuzz = (pkgs.harfbuzz.override {
-          freetype = freetype;
+          inherit freetype;
         }).overrideAttrs (finalAttrs: previousAttrs: {
           version = "12.1.0";
           src = pkgs.fetchurl {
@@ -118,9 +118,9 @@
         # Upgrade to the version supplied by nixpkgs 26.05.
         libass = (pkgs.libass.override {
           fontconfigSupport = true;
-          fontconfig = fontconfig;
-          freetype = freetype;
-          harfbuzz = harfbuzz;
+          inherit fontconfig;
+          inherit freetype;
+          inherit harfbuzz;
         }).overrideAttrs (finalAttrs: previousAttrs: {
           version = "0.17.4";
           src = pkgs.fetchurl {
@@ -133,9 +133,13 @@
 
         # Must use the upgraded fontconfig.
         libbluray = (pkgs.libbluray.override {
-          fontconfig = fontconfig;
+          inherit fontconfig;
         }).overrideAttrs (finalAttrs: previousAttrs: {
           enableParallelBuilding = true;
+        });
+
+        libhwy = pkgs.libhwy.overrideAttrs (old: {
+          cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DBUILD_SHARED_LIBS=ON" ];
         });
 
         # Upgrade to the version supplied by nixpkgs 26.05.
@@ -172,34 +176,34 @@
           withSmallDeps  = true;
 
           withAss = true;         # (Advanced) SubStation Alpha subtitle rendering
-          libass = libass;
+          inherit libass;
 
           withBluray = true;
-          libbluray = libbluray;
+          inherit libbluray;
 
           withDav1d = true;       # AV1 decoder (focused on speed and correctness)
-          dav1d = dav1d;
+          inherit dav1d;
 
           withFontconfig = true;
-          fontconfig = fontconfig;
+          inherit fontconfig;
 
           withFreetype = true;
-          freetype = freetype;
+          inherit freetype;
 
           withHarfbuzz = true;
-          harfbuzz = harfbuzz;
+          inherit harfbuzz;
 
           withSoxr = true;
           soxr = pkgs.soxr;
 
           withSvtav1 = true;      # SVT-AV1 encoder, used for screenshots in AVIF format
-          svt-av1 = svt-av1;
+          inherit svt-av1;
 
           withRubberband = true;
           rubberband = pkgs.rubberband;
 
           withJxl = true;
-          libjxl = libjxl;
+          inherit libjxl;
 
           withGnutls = true;
 
@@ -257,7 +261,7 @@
           # Skip tests to speed up build
           doCheck = false;
           nativeBuildInputs = old.nativeBuildInputs ++ [nasm];
-        });
+        });  # END ffmpeg
 
         # The upgraded mpv requires a newer version of libplacebo than provided by nixpkgs 25.05.
         libplacebo = pkgs.libplacebo.overrideAttrs (finalAttrs: {
@@ -272,11 +276,12 @@
         });
 
         mpv = (pkgs.mpv-unwrapped.override {
-          ffmpeg = ffmpeg;
-          freetype = freetype;
-          libass = libass;
-          libbluray = libbluray;
-          libplacebo = libplacebo;
+          inherit ffmpeg;
+          inherit freetype;
+          inherit libass;
+          inherit libbluray;
+          inherit libplacebo;
+
           lua = pkgs.luajit;
 
           archiveSupport = true;
@@ -331,7 +336,9 @@
                 hash = "sha256-kXnlu8SJ/GEnFljnXK4ri6CrgDBXvOTjnQo3jdPAbSA=";
               })
             ];
-        });
+        });  # END mpv
+
+        ### Dep Aggregations ###
 
         # Collect include deps (header files) as per readme.md
         depsInclude = pkgs.linkFarm "iina-deps-inc" [
@@ -367,11 +374,7 @@
             name = "libswscale";
             path = "${pkgs.lib.getDev ffmpeg}/include/libswscale";
           }
-        ];
-
-        libhwy = pkgs.libhwy.overrideAttrs (old: {
-          cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DBUILD_SHARED_LIBS=ON" ];
-        });
+        ];  # END depsInclude
 
         # Collect lib deps as per readme.md
         depsLib = pkgs.linkFarm "iina-deps-lib" (
@@ -434,13 +437,15 @@
               pkgs.libcxx         # C standard library
               pkgs.libdovi        # Dolby Vision, needed by libplacebo
             ]
-          )
-        );
+          )  # END pkgs.lib.flatten
+        );   # END depsLib
 
         # Collect SwiftPM deps as separate derivation for them to be cached
         spmDeps = pkgs.stdenv.mkDerivation {
           pname = "iina-spm-deps";
           version = "${self.shortRev or self.dirtyShortRev}";
+          dontFixup = true;
+          nativeBuildInputs = [ xcode ];
 
           # Only include SwiftPM-related files as input
           src = pkgs.lib.cleanSourceWith {
@@ -454,12 +459,6 @@
               || pkgs.lib.hasSuffix "Package.swift" relPath
               || pkgs.lib.hasPrefix "iina.xcodeproj" relPath;
           };
-
-          dontFixup = true;
-
-          nativeBuildInputs = [
-            xcode
-          ];
 
           buildPhase = ''
             export HOME=$PWD/.home
@@ -502,18 +501,17 @@
             mkdir -p $out
             cp -R . $out/
           '';
-        };
+        };  # END spmDeps
 
-      in rec {
+      in {
         packages = rec {
 
           iina = pkgs.stdenv.mkDerivation {
             pname = "iina";
             version = "${self.shortRev or self.dirtyShortRev}";
+            strictDeps = true;
 
             src = pkgs.nix-gitignore.gitignoreSource [ "flake.nix" "flake.lock" ] ./../..;
-
-            strictDeps = true;
 
             nativeBuildInputs = [
               pkgs.coreutils
@@ -521,9 +519,6 @@
               libTool
               pkgs.rsync
               pkgs.gnused
-            ];
-
-            buildInputs = [
               spmDeps
             ];
 
@@ -636,7 +631,7 @@
               # echo "[${system}] 🔏 Re-signing ${appName}.app..."
               # ${resign}/bin/iina-resign "$app"
             '';
-          };
+          };  # END iina
 
           # --- IINA Universal ---
           iina-universal = pkgs.stdenv.mkDerivation {
@@ -684,20 +679,16 @@
             preFixup = ''
               export PATH=${pkgs.coreutils}/bin:$PATH
             '';
-          };
+          };  # END iina-universal
 
           default = iina-universal;
-        };
+        };  # END packages
 
-      }
-    );
+      }  # END rec
+    );  # END perSystem
   in {
     inherit systems;
-
     packages = nixpkgs.lib.genAttrs systems (system: (perSystem.${system}).packages);
-
-    devShells = nixpkgs.lib.genAttrs systems (system: (perSystem.${system}).devShells);
-
     archApps = builtins.map (system: self.packages.${system}.iina) systems;
   };
 }

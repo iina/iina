@@ -294,7 +294,8 @@ class MenuController: NSObject, NSMenuDelegate {
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     let floatingItem = NSMenuItem(title: Constants.String.customFloatingWindow, action: #selector(MainWindowController.menuToggleCustomFloatingWindow(_:)), keyEquivalent: "")
     floatingItem.tag = -2
-    videoMenu.insertItem(floatingItem, at: videoMenu.index(of: pictureInPicture) + 1)
+    let pictureInPictureIndex = videoMenu.index(of: pictureInPicture)
+    videoMenu.insertItem(floatingItem, at: pictureInPictureIndex >= 0 ? pictureInPictureIndex + 1 : videoMenu.numberOfItems)
     customFloatingWindowMenuItem = floatingItem
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
     lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
@@ -870,7 +871,7 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   func updateKeyEquivalentsFrom(_ keyBindings: [KeyMapping]) {
-    let settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
+    var settings: [(NSMenuItem, Bool, [String], Bool, ClosedRange<Double>?, String?)] = [
       (showCurrentFileInFinder, true, [IINACommand.showCurrentFileInFinder.rawValue], false, nil, nil),
       (deleteCurrentFile, true, [IINACommand.deleteCurrentFile.rawValue], false, nil, nil),
       (savePlaylist, true, [IINACommand.saveCurrentPlaylist.rawValue], false, nil, nil),
@@ -888,7 +889,6 @@ class MenuController: NSObject, NSMenuDelegate {
       (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
       (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
       (pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil),
-      (customFloatingWindowMenuItem!, true, [IINACommand.toggleCustomFloatingWindow.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
       (cycleSubtitles, false, ["cycle", "sub"], false, nil, nil),
@@ -938,6 +938,9 @@ class MenuController: NSObject, NSMenuDelegate {
       (alwaysOnTop, false, ["cycle", "ontop"], false, nil, nil),
       (fullScreen, false, ["cycle", "fullscreen"], false, nil, nil),
     ]
+    if let customFloatingWindowMenuItem = customFloatingWindowMenuItem {
+      settings.append((customFloatingWindowMenuItem, true, [IINACommand.toggleCustomFloatingWindow.rawValue], false, nil, nil))
+    }
 
     var otherActionsMenuItems: [NSMenuItem] = []
 

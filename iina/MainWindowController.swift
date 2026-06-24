@@ -3231,7 +3231,8 @@ extension MainWindowController: CustomFloatingWindowControllerDelegate {
     let controller = CustomFloatingWindowController(
       videoView: videoView,
       title: window.title,
-      initialFrame: initialCustomFloatingWindowFrame()
+      initialFrame: initialCustomFloatingWindowFrame(),
+      nextResponder: menuActionHandler
     )
     controller.delegate = self
     customFloatingWindowController = controller

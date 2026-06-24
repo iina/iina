@@ -11,30 +11,44 @@ protocol CustomFloatingWindowControllerDelegate: AnyObject {
   func customFloatingWindowWillClose(_ controller: CustomFloatingWindowController)
 }
 
+class CustomFloatingPanel: NSPanel {
+
+  override var canBecomeKey: Bool {
+    true
+  }
+
+  override var canBecomeMain: Bool {
+    true
+  }
+}
+
 class CustomFloatingWindowController: NSWindowController, NSWindowDelegate {
 
   weak var delegate: CustomFloatingWindowControllerDelegate?
   private let videoView: VideoView
 
-  init(videoView: VideoView, title: String, initialFrame: NSRect) {
+  init(videoView: VideoView, title: String, initialFrame: NSRect, nextResponder: NSResponder?) {
     self.videoView = videoView
     let contentView = NSView(frame: NSRect(origin: .zero, size: initialFrame.size))
-    let window = NSWindow(
+    let window = CustomFloatingPanel(
       contentRect: initialFrame,
-      styleMask: [.titled, .closable, .resizable, .miniaturizable],
+      styleMask: [.titled, .closable, .resizable, .miniaturizable, .nonactivatingPanel],
       backing: .buffered,
       defer: false
     )
     window.title = title
     window.contentView = contentView
-    window.level = .iinaFloating
-    window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
+    window.level = .screenSaver
+    window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .ignoresCycle, .stationary, .transient]
+    window.hidesOnDeactivate = false
     window.isReleasedWhenClosed = false
     window.backgroundColor = .black
     window.minSize = NSSize(width: 240, height: 135)
+    window.aspectRatio = initialFrame.size
 
     super.init(window: window)
     window.delegate = self
+    window.nextResponder = nextResponder
     attachVideoView(to: contentView)
   }
 

@@ -215,6 +215,8 @@
               withBluray = true;
               inherit libbluray;
 
+              withBs2b = true; # Bass to Binaural audio filter (uncommon)
+
               withDav1d = true; # AV1 decoder (focused on speed and correctness)
               inherit dav1d;
 
@@ -251,7 +253,6 @@
               withX264 = false; # H.264 video encoder, not super useful for IINA (& adds >4 MB to app size)
               withX265 = false; # H.265 video encoder, not super useful for IINA (& adds >31 MB to app size)
               withAom = false; # AV1 video encoder, IINA prefers SVT-AV1 (better performance)
-              withBs2b = false; # Bass to Binaural audio filter (uncommon)
               withCaca = false; # ASCII art video output, not used by IINA
               withDvdnav = false;
               withDvdread = false;
@@ -321,7 +322,7 @@
               lua = pkgs.luajit;
 
               archiveSupport = true;
-              bs2bSupport = false;
+              bs2bSupport = true;
               bluraySupport = true;
               cacaSupport = false;
               cmsSupport = true;

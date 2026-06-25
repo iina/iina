@@ -34,6 +34,8 @@
 		513A4FFA29B53F8100A8EA7D /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513A4FF929B53F8100A8EA7D /* Atomic.swift */; };
 		513B53F42FE8706C00628B37 /* libSvtAv1Enc.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 513B53F32FE8706C00628B37 /* libSvtAv1Enc.3.dylib */; };
 		513B53F52FE8707D00628B37 /* libSvtAv1Enc.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 513B53F32FE8706C00628B37 /* libSvtAv1Enc.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		513B53FD2FEC9FA200628B37 /* libbs2b.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 513B53FC2FEC9FA200628B37 /* libbs2b.0.dylib */; };
+		513B53FE2FEC9FB400628B37 /* libbs2b.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 513B53FC2FEC9FA200628B37 /* libbs2b.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		515B5E5A2A579903001FCD49 /* iina-plugin in Copy Executables */ = {isa = PBXBuildFile; fileRef = E38558872A484A2D0083772D /* iina-plugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		516B264D2EDA579700E3CB69 /* MemoryUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B264C2EDA579600E3CB69 /* MemoryUsage.swift */; };
 		51854CDA2A1C489300C40B78 /* FFmpegLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51854CD92A1C489300C40B78 /* FFmpegLogger.swift */; };
@@ -501,6 +503,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				513B53FE2FEC9FB400628B37 /* libbs2b.0.dylib in Copy Dylibs */,
 				513B53F52FE8707D00628B37 /* libSvtAv1Enc.3.dylib in Copy Dylibs */,
 				D14BC70F2FAD32190059E900 /* libjxl_cms.0.11.dylib in Copy Dylibs */,
 				D14BC6ED2FAD31E60059E900 /* libsoxr.0.dylib in Copy Dylibs */,
@@ -1105,6 +1108,7 @@
 		512B8FDC2BC2376E00AF41BF /* OutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
 		513A4FF929B53F8100A8EA7D /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		513B53F32FE8706C00628B37 /* libSvtAv1Enc.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSvtAv1Enc.3.dylib; path = deps/lib/libSvtAv1Enc.3.dylib; sourceTree = "<group>"; };
+		513B53FC2FEC9FA200628B37 /* libbs2b.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbs2b.0.dylib; path = deps/lib/libbs2b.0.dylib; sourceTree = "<group>"; };
 		51537C7229FA26DD00F9A472 /* Nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Nightly.xcconfig; sourceTree = "<group>"; };
 		515B5E592A579782001FCD49 /* iina-plugin.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iina-plugin.xcconfig"; sourceTree = "<group>"; };
 		516B264C2EDA579600E3CB69 /* MemoryUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryUsage.swift; sourceTree = "<group>"; };
@@ -2035,6 +2039,7 @@
 				D14BC6572FAD31990059E900 /* libfontconfig.1.dylib in Frameworks */,
 				D14BC65B2FAD31990059E900 /* libhogweed.6.dylib in Frameworks */,
 				D14BC65C2FAD31990059E900 /* libtasn1.6.dylib in Frameworks */,
+				513B53FD2FEC9FA200628B37 /* libbs2b.0.dylib in Frameworks */,
 				D14BC65E2FAD31990059E900 /* libswscale.9.dylib in Frameworks */,
 				D14BC65F2FAD31990059E900 /* liblcms2.2.dylib in Frameworks */,
 				D14BC6622FAD31990059E900 /* libdovi.3.dylib in Frameworks */,
@@ -2266,6 +2271,7 @@
 				D14BC5E52FAD31990059E900 /* libbrotlicommon.1.dylib */,
 				D14BC5E62FAD31990059E900 /* libbrotlidec.1.dylib */,
 				D14BC5E72FAD31990059E900 /* libbrotlienc.1.dylib */,
+				513B53FC2FEC9FA200628B37 /* libbs2b.0.dylib */,
 				D14BC5EA2FAD31990059E900 /* libc++.1.0.dylib */,
 				D14BC5EB2FAD31990059E900 /* libc++abi.1.0.dylib */,
 				D14BC5EF2FAD31990059E900 /* libcrypto.3.dylib */,

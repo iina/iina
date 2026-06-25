@@ -854,34 +854,33 @@ struct Preference {
       }
     }
 
-    private func makeSymbol(_ names: [String], _ fallbackImage: NSImage.Name) -> NSImage {
-        guard #available(macOS 14.0, *) else { return NSImage(named: fallbackImage)! }
+    private func makeSymbol(_ names: [String]) -> NSImage {
         let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
         return NSImage.sf(names, withConfiguration: configuration)!
       }
 
     func image() -> NSImage {
       switch self {
-      case .settings: return makeSymbol(["gearshape"], NSImage.actionTemplateName)
-      case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"], "playlist")
-      case .pip: return makeSymbol(["pip.enter"], "pip")
-      case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"], "fullscreen")
-      case .musicMode: return makeSymbol(["music.microphone"], "toggle-album-art")
-      case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
-      case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
-      case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
-      case .liveText: return makeSymbol(["document.viewfinder"], "custom.character.cursor.ibeam.rectangle.fill")
+      case .settings: return makeSymbol(["gearshape"])
+      case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"])
+      case .pip: return makeSymbol(["pip.enter"])
+      case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"])
+      case .musicMode: return makeSymbol(["microphone.dynamic.on.stand", "music.microphone", "music.mic"])
+      case .subTrack: return makeSymbol(["captions.bubble.fill"])
+      case .screenshot: return makeSymbol(["camera.shutter.button", "camera.fill"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension", "puzzlepiece"])
+      case .liveText: return makeSymbol(["document.viewfinder", "doc.viewfinder", "doc.text.viewfinder"])
       }
     }
 
     func alternateImage() -> NSImage? {
       switch self {
-      case .settings: return makeSymbol(["gearshape.fill"], NSImage.actionTemplateName)
-      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"], "playlist")
-      case .pip: return makeSymbol(["pip.exit"], "pip")
-      case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"], "fullscreen")
-      case .plugins: return makeSymbol(["puzzlepiece.extension.fill"], "plugin")
-      case .liveText: return makeSymbol(["viewfinder.circle.fill"], "custom.character.cursor.ibeam.rectangle.fill")
+      case .settings: return makeSymbol(["gearshape.fill"])
+      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"])
+      case .pip: return makeSymbol(["pip.exit"])
+      case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension.fill", "puzzlepiece.fill"])
+      case .liveText: return makeSymbol(["viewfinder.circle.fill"])
       default: return nil
       }
     }

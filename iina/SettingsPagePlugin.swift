@@ -19,7 +19,7 @@ class SettingsPagePlugin: SettingsPage {
   }
 
   override var image: NSImage {
-    return .sf("puzzlepiece.extension", "gearshape.2", withConfiguration: symbolConfiguration)!
+    return .sf("puzzlepiece.extension", "puzzlepiece", withConfiguration: symbolConfiguration)!
   }
 
   override var localizationTable: String {
@@ -578,7 +578,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     versionLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
 
     let iconView = NSImageView()
-    iconView.image = .sf("puzzlepiece.extension", "gearshape.2")
+    iconView.image = .sf("puzzlepiece.extension", "puzzlepiece")
     iconView.translatesAutoresizingMaskIntoConstraints = false
     iconView.size(width: 24, height: 24)
 

@@ -1348,8 +1348,8 @@ class MPVController: NSObject {
         break
       }
       DispatchQueue.main.async { [self] in
-        player.syncUI(.volume)
         player.info.isMuted = data
+        player.syncUI(.volume)
         player.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
       }
 

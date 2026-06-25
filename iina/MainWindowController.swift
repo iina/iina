@@ -2803,7 +2803,6 @@ class MainWindowController: PlayerWindowController {
   override func updateVolume() {
     guard loaded else { return }
     super.updateVolume()
-    guard !player.info.isMuted else { return }
     muteButton.image = volumeIcon()
   }
 

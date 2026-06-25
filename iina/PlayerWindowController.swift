@@ -597,7 +597,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   func updateVolume() {
     volumeSlider.doubleValue = player.info.volume
-    muteButton.state = player.info.isMuted ? .on : .off
   }
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {

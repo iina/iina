@@ -253,8 +253,6 @@ fileprivate class ScreenshotFormatOptionsView: WithSettingsLocalizationContext, 
     self.view.alignment = .leading
     self.view.spacing = 8
 
-    buildOptions()
-
     container.addSubview(view)
     view.padding(.vertical(8), .leading(SettingsSubList.indent), .trailing(8))
   }
@@ -301,6 +299,7 @@ fileprivate class ScreenshotFormatOptionsView: WithSettingsLocalizationContext, 
 
   func makeView(context: SettingsLocalization.Context) -> NSView {
     self.l10n = context
+    buildOptions()
     return container
   }
 }

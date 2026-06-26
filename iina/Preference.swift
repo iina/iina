@@ -1182,7 +1182,7 @@ struct Preference {
     .enableLogging: false,
     .logLevel: Logger.Level.debug.rawValue,
     .displayKeyBindingRawValues: false,
-    .userOptions: [[String]](),
+    .userOptions: [["sub-visibility", "yes"], ["subs-with-matching-audio", "yes"]],
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
     .iinaEnablePluginSystem: false,

@@ -33,7 +33,6 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     wantsLayer = true
     layer?.cornerRadius = 8
     size(height: 98)
-    verticalScrollElasticity = .none
 
     player.observe(.iinaTracklistChanged) { [weak self] _ in
       self?.tableView.reloadData()
@@ -42,6 +41,15 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
       player.observe(key) { [weak self] _ in
         self?.tableView.reloadData()
       }
+    }
+  }
+
+  override func layout() {
+    super.layout()
+    if let documentView = documentView {
+      // Restore the native macOS vertical bounce effect ONLY if the list is actually scrollable.
+      // If it fits completely, disable elasticity to prevent unnecessary scroll trapping.
+      verticalScrollElasticity = documentView.bounds.height > contentView.bounds.height ? .automatic : .none
     }
   }
 

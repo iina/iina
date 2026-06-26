@@ -116,3 +116,10 @@ deps/plugins
 
 .opencode/agents/
 .opencode/commands/
+
+# AI tool / local artifacts (never track)
+.fractal/
+AGENTS.md
+default.profraw
+.claude/
+PROMPTS.md

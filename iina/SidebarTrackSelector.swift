@@ -33,6 +33,7 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     wantsLayer = true
     layer?.cornerRadius = 8
     size(height: 98)
+    verticalScrollElasticity = .none
 
     player.observe(.iinaTracklistChanged) { [weak self] _ in
       self?.tableView.reloadData()
@@ -42,6 +43,20 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
         self?.tableView.reloadData()
       }
     }
+  }
+
+  override func scrollWheel(with event: NSEvent) {
+    // If the content is small enough to fit in the view, it doesn't need to scroll.
+    // In this case, strictly forward ALL scroll events to the parent (the sidebar)
+    // so it doesn't trap the cursor and cause "focus stealing".
+    // We DO NOT forward mid-gesture when it IS scrollable and hits the edge, 
+    // because that breaks the trackpad momentum state machine (causing the damping effect).
+    if let documentView = documentView, documentView.bounds.height <= contentView.bounds.height {
+      nextResponder?.scrollWheel(with: event)
+      return
+    }
+
+    super.scrollWheel(with: event)
   }
   
   required init?(coder: NSCoder) {

@@ -109,13 +109,64 @@ class SidebarVideoPane: SidebarScrollView {
         ui.image("sun.max", size: 16, config: .sidebarIconConfig),
         ui.label("quicksetting.hdr"),
         ui.flexibleSpace(),
-        HDRSwitch(player: player)
+        HDRControlView(player: player)
       )
     )
 
     container.addSubview(stack)
     stack.padding(.all)
     return container
+  }
+}
+
+fileprivate class HDRControlView: NSStackView {
+  private unowned let player: PlayerCore
+  private var hdrSwitch: NSSwitch!
+  private var unsupportedLabel: NSTextField!
+
+  init(player: PlayerCore) {
+    self.player = player
+    super.init(frame: .zero)
+    orientation = .horizontal
+    alignment = .centerY
+    spacing = 0
+    translatesAutoresizingMaskIntoConstraints = false
+
+    hdrSwitch = NSSwitch()
+    if #available(macOS 26, *) {
+      hdrSwitch.controlSize = .small
+    }
+    hdrSwitch.target = self
+    hdrSwitch.action = #selector(hdrAction)
+
+    unsupportedLabel = ui.label("quicksetting.unsupported", isSecondary: true)
+
+    addArrangedSubview(hdrSwitch)
+    addArrangedSubview(unsupportedLabel)
+
+    update()
+
+    player.observe(.iinaHDRChanged) { [unowned self] _ in
+      update()
+    }
+  }
+
+  private func update() {
+    let available = player.info.hdrAvailable
+    hdrSwitch.isHidden = !available
+    unsupportedLabel.isHidden = available
+    if available {
+      hdrSwitch.state = player.info.hdrEnabled ? .on : .off
+    }
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  @objc private func hdrAction(_ sender: NSSwitch) {
+    self.player.info.hdrEnabled = sender.state == .on
+    self.player.refreshEdrMode()
   }
 }
 
@@ -467,39 +518,7 @@ fileprivate class HwdecSwitch: NSSwitch {
   }
 }
 
-fileprivate class HDRSwitch: NSSwitch {
-  private unowned let player: PlayerCore
 
-  init(player: PlayerCore) {
-    self.player = player
-    super.init(frame: .zero)
-
-    if #available(macOS 26, *) {
-      controlSize = .small
-    }
-    target = self
-    action = #selector(hdrAction)
-    update()
-
-    player.observe(.iinaHDRChanged) { [unowned self] _ in
-      update()
-    }
-  }
-
-  private func update() {
-    isEnabled = player.info.hdrAvailable
-    state = (player.info.hdrAvailable && player.info.hdrEnabled) ? .on : .off
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  @objc private func hdrAction(_ sender: AnyObject) {
-    self.player.info.hdrEnabled = sender.state == .on
-    self.player.refreshEdrMode()
-  }
-}
 
 
 fileprivate let speedFormatter: NumberFormatter = {

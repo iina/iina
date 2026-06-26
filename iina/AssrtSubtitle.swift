@@ -134,7 +134,7 @@ class Assrt {
         self.token = token
         usesUserToken = true
       } else {
-        self.token = "5IzWrb2J099vmA96ECQXwdRSe9xdoBUv"
+        self.token = ""
       }
     }
 

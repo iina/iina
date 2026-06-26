@@ -219,23 +219,25 @@ Implementation steps:
    555-556), do not add a guard — the SPEC lists it as
    "documented gap"; leave the existing behaviour and add a
    `// see SPEC Phase 2` comment.
-4. The `vo=libmpv` block must additionally be skipped if a
-   `[HDR_DolbyVision]` profile is the active profile at file
-   load time. Implement via a one-line `mpv_get_property_string`
-   call inside the file-load callback to check the current profile
-   name; if it contains "DolbyVision", skip the forced `vo`.
-   Add a `// FIXME(SPEC:Phase-2): only suppress for active DV
-   profile` if the active-profile check proves fragile.
+4. The `vo=libmpv` block is set PRE-init (before `mpv_initialize`) so
+   that `force-window=immediate` does not race the VO thread into a
+   standalone-display context (Vulkan `displayvk` crash,
+   `mppl_log_create(NULL)`). There is NO per-profile skip: IINA's libmpv
+   render API requires `vo=libmpv` unconditionally — `[HDR_DolbyVision]`'s
+   `vo=gpu-next` cannot work inside IINA (see SPEC requirement 4
+   ARCHITECTURE LIMITATION). The previous FIXME about checking the
+   active profile name is withdrawn.
 5. In `iina/PlayerCore.swift:558, 660`, the `force-window` block
    is set via `setOptionString`; apply the same guard there.
 
 Verification:
 - Build succeeds.
 - Open a file with `DOVI` in its name; confirm `mpv.log` shows
-  `vo=gpu-next` and `gpu-context=macvk` applied by the
-  `[HDR_DolbyVision]` profile; confirm `vo` is not re-set to
-  `libmpv` post-init. (Acceptable log line: `Option vo changed:
-  gpu-next` with no subsequent `vo=libmpv` overwrite.)
+  `vo/libmpv` active (NOT `vo/gpu-next`). The `[HDR_DolbyVision]`
+  profile's `vo=gpu-next` is overridden by IINA's pre-init
+  `vo=libmpv` because IINA uses the libmpv render API — see SPEC
+  requirement 4 ARCHITECTURE LIMITATION. The app must NOT crash
+  (regression check for the `displayvk` Vulkan init crash).
 - Open a normal mp4; confirm `vo=libmpv` is still applied (IINA's
   default) because the user did NOT set `vo` in `mpv.conf`.
 - Confirm `input-media-keys` is `no` (the user's value), not
@@ -262,9 +264,12 @@ Files touched (Phase 2 scope):
   - `input-media-keys=no` (line 390)
   - `watch-later-directory` (line 411)
   - `sub-auto=no` (line 468)
-  - `vo=libmpv` (line 692) — includes `// FIXME(SPEC:Phase-2)` comment
-    noting the `[HDR_DolbyVision]` profile-level `vo=gpu-next` is handled
-    by mpv's auto-profile mechanism at file-load time
+   - `vo=libmpv` (now set PRE-init, before `mpv_initialize`) —
+     unconditionally forced because IINA's libmpv render API cannot
+     coexist with standalone-display VOs (`vo=gpu`, `vo=gpu-next`).
+     See SPEC requirement 4 ARCHITECTURE LIMITATION. The previous
+     FIXME about `[HDR_DolbyVision]` profile-level `vo=gpu-next` is
+     withdrawn.
   - `keepaspect=yes` (line 700)
   - `gpu-hwdec-interop=auto` (line 703)
   - `reset-on-next-file` — intentionally NOT guarded (documented as
@@ -290,8 +295,10 @@ Build verification:
 
 Remaining manual verification (requires launching the app with real
 media files — deferred to Phase 9 cross-phase smoke):
-- Open a `DOVI` file → confirm `vo=gpu-next` survives (not clobbered
-  by `vo=libmpv`).
+- Open a `DOVI` file → confirm `vo=libmpv` is active (the
+  `[HDR_DolbyVision]` profile's `vo=gpu-next` cannot work inside
+  IINA; see SPEC requirement 4 ARCHITECTURE LIMITATION). App must
+  not crash (regression check for `displayvk` Vulkan init crash).
 - Open a normal mp4 → confirm `vo=libmpv` still applied.
 - Confirm `input-media-keys` and `sub-auto` reflect user's `mpv.conf`
   values (`no` and `fuzzy` respectively), not IINA's forced defaults.
@@ -1015,8 +1022,11 @@ Implementation steps:
      <date>/`; confirm all expected option lines are present
      (e.g. `ytdl-raw-options-append: cookies-from-browser=edge`,
      `config-dir: <materialized-mpv>`).
-   - Open a file with `DOVI` in the name → confirm `vo=gpu-next`
-     is in effect (visible in `mpv.log` as the active profile).
+    - Open a file with `DOVI` in the name → confirm `vo=libmpv`
+      is in effect (the `[HDR_DolbyVision]` profile's `vo=gpu-next`
+      is architecturally incompatible with IINA's libmpv render API;
+      see SPEC requirement 4 ARCHITECTURE LIMITATION). App must not
+      crash (regression check for the `displayvk` Vulkan init crash).
 5. Document the manual results in
    `.specite/iterations/mpv-config-driven-refactor/VERIFICATION.md`
    (one-line per acceptance criterion; PASS/FAIL).
@@ -1056,7 +1066,8 @@ deferred to the user:
 - Press `i` → stats overlay.
 - Right-click → uosc context menu.
 - Open a YouTube URL → playback + yt-dlp from bundled path.
-- Open a DOVI file → confirm `vo=gpu-next` survives.
+- Open a DOVI file → confirm `vo=libmpv` is active and app does not
+  crash (regression check for the `displayvk` Vulkan init crash).
 
 Run after all 9 phases complete:
 
@@ -1080,17 +1091,17 @@ Run after all 9 phases complete:
 ## Risks And Mitigations
 
 - **Forced-option removal breaks an existing IINA workaround.**
-  Some forced values (notably `vo=libmpv`) exist to work around
-  known libmpv-on-macOS issues (e.g. GPU context stability).
-  The `userOptionsContains` guard only suppresses the override
-  when the user has explicitly set the option; the default
-  behaviour is unchanged. The `[HDR_DolbyVision]` profile's
-  `vo=gpu-next` is a known-good case; the active-profile
-  detection in Phase 2 step 4 may need tuning if mpv's profile
-  name is not exposed as a gettable property. Mitigation: if
-  active-profile detection is fragile, fall back to a
-  filename-pattern check (`filename:match("DOVI")`) that
-  matches the user's profile-cond.
+   Some forced values (notably `vo=libmpv`) exist to work around
+   known libmpv-on-macOS issues (e.g. GPU context stability, and
+   the `displayvk` Vulkan init crash when `force-window=immediate`
+   races the VO thread pre-init). The `userOptionsContains` guard
+   only suppresses the override when the user has explicitly set
+   the option; the default behaviour is unchanged. NOTE: the
+   `[HDR_DolbyVision]` profile's `vo=gpu-next` is NOT a known-good
+   case — it is architecturally incompatible with IINA's libmpv
+   render API (see SPEC requirement 4 ARCHITECTURE LIMITATION).
+   Active-profile detection was withdrawn; `vo=libmpv` is forced
+   unconditionally pre-init.
 - **`mpv/` Copy Files phase breaks the Xcode project.** Adding
   many PBXFileReferences and one PBXCopyFilesBuildPhase by hand
   is error-prone (missing IDs, wrong dstSubfolderSpec). The

@@ -74,12 +74,13 @@ the floor. Scope is the macOS app (`iina/`) only — config + plugin layer.
    - `watch-later-directory` (line 395)
    - `reset-on-next-file` (line 555)
 
-   Use the same `userOptionsContains` guard pattern that already exists for
-   `hwdec-codecs` (`MPVController.swift:1831`): if the user's `mpv.conf` set
-   the key, skip the IINA hardcode. For `vo=libmpv`, retain the forced value
-   but ONLY if the user did not set `vo` in `mpv.conf` AND the active
-   profile did not set `vo` (so the `[HDR_DolbyVision]` profile's
-   `vo=gpu-next` survives).
+    Use the same `userOptionsContains` guard pattern that already exists for
+    `hwdec-codecs` (`MPVController.swift:1831`): if the user's `mpv.conf` set
+    the key, skip the IINA hardcode. For `vo=libmpv`, the forced value is
+    applied PRE-init (before `mpv_initialize`) because IINA uses the libmpv
+    render API which is incompatible with standalone-display VOs; see
+    requirement 4 ARCHITECTURE LIMITATION for why the `[HDR_DolbyVision]`
+    profile's `vo=gpu-next` cannot be honoured.
 3. **Bundle the two uosc font assets** (`uosc_icons.otf`,
    `uosc_textures.ttf`) into `Contents/Resources/mpv/fonts/`. They live in
    the same `mpv/fonts/` directory as the user's input, so uosc's default
@@ -186,9 +187,18 @@ the floor. Scope is the macOS app (`iina/`) only — config + plugin layer.
    `keep-open=yes`, `ytdl=yes`, `volume=80`, `sub-font-size=43`,
    `screenshot-template="~~desktop/MPV-%P-N%n"`. The 6 `[profile]`
    sections parse without warnings in `mpv.log`.
-4. Opening a file whose name contains `DOVI` keeps `vo=gpu-next` and
-   `gpu-context=macvk` (the `[HDR_DolbyVision]` profile wins, IINA's
-   `vo=libmpv` post-init no longer clobbers it).
+4. ARCHITECTURE LIMITATION (revised): IINA uses the libmpv render API,
+   which renders mpv output into IINA's own NSView. This is incompatible
+   with standalone-display VOs (`vo=gpu`, `vo=gpu-next`,
+   `vo=gpu-next==libplacebo`), which create their own GPU/display context.
+   Therefore the `[HDR_DolbyVision]` profile's `vo=gpu-next` CANNOT be
+   honoured inside IINA — opening a DOVI file must still use
+   `vo=libmpv` (IINA forces it pre-init, see `MPVController.mpvInit`).
+   The profile's OTHER keys (`gpu-context=macvk`, `tone-mapping=st2094-40`)
+   are harmless under `vo=libmpv` (mpv ignores unused VO options) but have
+   no effect. HDR via profile `vo=gpu-next` is out of scope for this
+   iteration; a future HDR path would require routing HDR metadata
+   through libmpv's render API instead.
 5. The `[ontop_playback]` profile activates `ontop=yes` while not paused
    and removes it when paused.
 6. Pressing right-mouse over the video area opens uosc's context menu

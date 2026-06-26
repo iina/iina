@@ -251,6 +251,9 @@ extension MainMenuActionHandler {
     player.toggleDeinterlace(sender.state != .on)
   }
 
+  // Video/Audio/Subtitle advanced menu actions are in MenuController.swift
+  // (they use target = MenuController to stay enabled without a player window).
+
   @objc
   func menuToggleVideoFilterString(_ sender: NSMenuItem) {
     if let string = (sender.representedObject as? String) {

@@ -343,6 +343,9 @@ class MenuController: NSObject, NSMenuDelegate {
     updateSavedFilters(forType: MPVProperty.vf,
                        from: Preference.array(for: .savedVideoFilters)?.compactMap(SavedFilter.init(dict:)) ?? [])
 
+    // -- scaling, HDR, dither, blend (dynamically appended to Video menu)
+    appendVideoAdvancedMenuItems()
+
     // Audio menu
 
     audioMenu.delegate = self
@@ -371,6 +374,9 @@ class MenuController: NSObject, NSMenuDelegate {
     savedAudioFiltersMenu.delegate = self
     updateSavedFilters(forType: MPVProperty.af,
                        from: Preference.array(for: .savedAudioFilters)?.compactMap(SavedFilter.init(dict:)) ?? [])
+
+    // -- audio channels, downmix (dynamically appended to Audio menu)
+    appendAudioAdvancedMenuItems()
 
     // Subtitle
 
@@ -407,6 +413,9 @@ class MenuController: NSObject, NSMenuDelegate {
     subFont.action = #selector(MainMenuActionHandler.menuSubFont(_:))
     // Separate Auto from other encoding types
     encodingMenu.insertItem(NSMenuItem.separator(), at: 1)
+
+    // -- sub-auto (dynamically appended to Subtitle menu)
+    appendSubtitleAdvancedMenuItems()
 
     // Plugin
 
@@ -521,6 +530,219 @@ class MenuController: NSObject, NSMenuDelegate {
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
     miniPlayer.title = player.isInMiniPlayer ? Constants.String.exitMiniPlayer : Constants.String.miniPlayer
     delogo.state = isDelogo ? .on : .off
+    // Update dynamically appended Video advanced toggles
+    updateVideoAdvancedToggleStates()
+  }
+
+  /// Refresh check states of the dynamically appended Video advanced toggles.
+  private func updateVideoAdvancedToggleStates() {
+    for item in videoMenu.items {
+      guard let action = item.action else { continue }
+      switch action {
+      case #selector(menuToggleHDRComputePeak(_:)):
+        item.state = Preference.bool(for: .hdrComputePeak) ? .on : .off
+      case #selector(menuToggleTargetColorspaceHint(_:)):
+        item.state = Preference.bool(for: .targetColorspaceHint) ? .on : .off
+      case #selector(menuToggleBlendSubtitles(_:)):
+        item.state = Preference.bool(for: .blendSubtitles) ? .on : .off
+      case #selector(menuToggleBorderless(_:)):
+        item.state = Preference.bool(for: .border) ? .on : .off
+      case #selector(menuToggleHidpiWindowScale(_:)):
+        item.state = Preference.bool(for: .hidpiWindowScale) ? .on : .off
+      default: break
+      }
+    }
+  }
+
+  // MARK: - Video menu advanced items (scaling, HDR, dither, blend)
+
+  /// Dynamically appended submenu + toggle items for VideoAdvanced options.
+  /// Added at the end of the Video menu so the XIB-defined items stay stable.
+  /// All items use `target = self` (MenuController) so they remain enabled even
+  /// when no player window is key (responder chain has no MainMenuActionHandler).
+  private func appendVideoAdvancedMenuItems() {
+    videoMenu.addItem(NSMenuItem.separator())
+
+    // Scaler submenu (scale / cscale / dscale)
+    let scalingItem = NSMenuItem(title: NSLocalizedString("menu.scaling", value: "Scaling", comment: "Video menu"), action: nil, keyEquivalent: "")
+    let scalingMenu = NSMenu(title: "Scaling")
+    for (label, pk, mpvName) in [
+      (NSLocalizedString("menu.upscaler", value: "Upscaler", comment: "Video menu"), Preference.Key.scale, MPVOption.GPURendererOptions.scale),
+      (NSLocalizedString("menu.chroma_upscaler", value: "Chroma upscaler", comment: "Video menu"), Preference.Key.cscale, MPVOption.GPURendererOptions.cscale),
+      (NSLocalizedString("menu.downscaler", value: "Downscaler", comment: "Video menu"), Preference.Key.dscale, MPVOption.GPURendererOptions.dscale)
+    ] {
+      let item = NSMenuItem(title: label, action: nil, keyEquivalent: "")
+      let submenu = NSMenu(title: label)
+      for case_obj in Preference.ScaleOption.allCases {
+        let title = String(describing: case_obj)
+        let sub = NSMenuItem(title: title, action: #selector(menuSetScaler(_:)), keyEquivalent: "")
+        sub.target = self
+        sub.representedObject = [pk.rawValue, case_obj.rawValue, mpvName] as [Any]
+        submenu.addItem(sub)
+      }
+      item.submenu = submenu
+      scalingMenu.addItem(item)
+    }
+    scalingItem.submenu = scalingMenu
+    videoMenu.addItem(scalingItem)
+
+    // HDR toggles
+    appendToggle(to: videoMenu, title: NSLocalizedString("menu.hdr_compute_peak", value: "HDR Compute Peak", comment: "Video menu"),
+                 pk: .hdrComputePeak, action: #selector(menuToggleHDRComputePeak(_:)))
+    appendToggle(to: videoMenu, title: NSLocalizedString("menu.target_colorspace_hint", value: "Target Colorspace Hint", comment: "Video menu"),
+                 pk: .targetColorspaceHint, action: #selector(menuToggleTargetColorspaceHint(_:)))
+
+    // Dither submenu
+    let ditherItem = NSMenuItem(title: NSLocalizedString("menu.dither", value: "Dither", comment: "Video menu"), action: nil, keyEquivalent: "")
+    let ditherMenu = NSMenu(title: "Dither")
+    for case_obj in Preference.DitherOption.allCases {
+      let title = String(describing: case_obj)
+      let sub = NSMenuItem(title: title, action: #selector(menuSetDither(_:)), keyEquivalent: "")
+      sub.target = self
+      sub.representedObject = case_obj.rawValue
+      ditherMenu.addItem(sub)
+    }
+    ditherItem.submenu = ditherMenu
+    videoMenu.addItem(ditherItem)
+
+    // Blend subtitles toggle
+    appendToggle(to: videoMenu, title: NSLocalizedString("menu.blend_subtitles", value: "Blend Subtitles", comment: "Video menu"),
+                 pk: .blendSubtitles, action: #selector(menuToggleBlendSubtitles(_:)))
+
+    // Window appearance toggles (borderless, hidpi)
+    appendToggle(to: videoMenu, title: NSLocalizedString("menu.borderless", value: "Borderless", comment: "Video menu"),
+                 pk: .border, action: #selector(menuToggleBorderless(_:)))
+    appendToggle(to: videoMenu, title: NSLocalizedString("menu.hidpi_window_scale", value: "HiDPI Window Scale", comment: "Video menu"),
+                 pk: .hidpiWindowScale, action: #selector(menuToggleHidpiWindowScale(_:)))
+  }
+
+  /// Append a single toggle menu item bound to a bool Preference key.
+  /// Uses `target = self` so the item stays enabled without a player window.
+  private func appendToggle(to menu: NSMenu, title: String, pk: Preference.Key, action: Selector) {
+    let item = NSMenuItem(title: title, action: action, keyEquivalent: "")
+    item.target = self
+    item.representedObject = pk.rawValue
+    menu.addItem(item)
+  }
+
+  // MARK: - Menu action handlers (Video/Audio/Subtitle advanced)
+
+  @objc func menuSetScaler(_ sender: NSMenuItem) {
+    guard let arr = sender.representedObject as? [Any],
+          arr.count == 3,
+          let pkRaw = arr[0] as? String,
+          let scaleRaw = arr[1] as? Int,
+          let mpvName = arr[2] as? String else { return }
+    guard let pk = Preference.Key(rawValue: pkRaw) else { return }
+    Preference.set(scaleRaw, for: pk)
+    let v: Preference.ScaleOption = Preference.enum(for: pk)
+    PlayerCore.activeOrNew.mpv.setString(mpvName, String(describing: v))
+  }
+
+  @objc func menuSetDither(_ sender: NSMenuItem) {
+    guard let raw = sender.representedObject as? Int else { return }
+    Preference.set(raw, for: .dither)
+    let v: Preference.DitherOption = Preference.enum(for: .dither)
+    PlayerCore.activeOrNew.mpv.setString(MPVOption.GPURendererOptions.dither, String(describing: v))
+  }
+
+  @objc func menuToggleHDRComputePeak(_ sender: NSMenuItem) {
+    let newValue = sender.state != .on
+    Preference.set(newValue, for: .hdrComputePeak)
+    PlayerCore.activeOrNew.mpv.setFlag(MPVOption.GPURendererOptions.hdrComputePeak, newValue)
+  }
+
+  @objc func menuToggleTargetColorspaceHint(_ sender: NSMenuItem) {
+    let newValue = sender.state != .on
+    Preference.set(newValue, for: .targetColorspaceHint)
+    PlayerCore.activeOrNew.mpv.setFlag(MPVOption.GPURendererOptions.targetColorspaceHint, newValue)
+  }
+
+  @objc func menuToggleBlendSubtitles(_ sender: NSMenuItem) {
+    let newValue = sender.state != .on
+    Preference.set(newValue, for: .blendSubtitles)
+    PlayerCore.activeOrNew.mpv.setFlag(MPVOption.GPURendererOptions.blendSubtitles, newValue)
+  }
+
+  @objc func menuToggleBorderless(_ sender: NSMenuItem) {
+    let newValue = sender.state != .on
+    Preference.set(newValue, for: .border)
+    PlayerCore.activeOrNew.mpv.setFlag(MPVOption.Window.border, newValue)
+  }
+
+  @objc func menuToggleHidpiWindowScale(_ sender: NSMenuItem) {
+    let newValue = sender.state != .on
+    Preference.set(newValue, for: .hidpiWindowScale)
+    PlayerCore.activeOrNew.mpv.setFlag(MPVOption.Window.hidpiWindowScale, newValue)
+  }
+
+  @objc func menuSetAudioChannels(_ sender: NSMenuItem) {
+    guard let raw = sender.representedObject as? Int else { return }
+    Preference.set(raw, for: .audioChannels)
+    let v: Preference.AudioChannelsOption = Preference.enum(for: .audioChannels)
+    PlayerCore.activeOrNew.mpv.setString(MPVOption.Audio.audioChannels, String(describing: v))
+  }
+
+  @objc func menuToggleDownmix(_ sender: NSMenuItem) {
+    let newValue = sender.state != .on
+    Preference.set(newValue, for: .adLavcDownmix)
+    PlayerCore.activeOrNew.mpv.setFlag(MPVOption.Audio.adLavcDownmix, newValue)
+  }
+
+  @objc func menuSetSubAuto(_ sender: NSMenuItem) {
+    guard let value = sender.representedObject as? String else { return }
+    Preference.set(value, for: .subAuto)
+    PlayerCore.activeOrNew.mpv.setString(MPVOption.Subtitles.subAuto, value)
+  }
+
+  // MARK: - Audio menu advanced items (channels, downmix)
+
+  private func appendAudioAdvancedMenuItems() {
+    audioMenu.addItem(NSMenuItem.separator())
+
+    // Audio channels submenu
+    let channelsItem = NSMenuItem(title: NSLocalizedString("menu.audio_channels", value: "Audio Channels", comment: "Audio menu"), action: nil, keyEquivalent: "")
+    let channelsMenu = NSMenu(title: "Audio Channels")
+    for case_obj in Preference.AudioChannelsOption.allCases {
+      let title = String(describing: case_obj)
+      let sub = NSMenuItem(title: title, action: #selector(menuSetAudioChannels(_:)), keyEquivalent: "")
+      sub.target = self
+      sub.representedObject = case_obj.rawValue
+      channelsMenu.addItem(sub)
+    }
+    channelsItem.submenu = channelsMenu
+    audioMenu.addItem(channelsItem)
+
+    // Downmix toggle
+    appendToggle(to: audioMenu, title: NSLocalizedString("menu.downmix", value: "Downmix to Stereo", comment: "Audio menu"),
+                 pk: .adLavcDownmix, action: #selector(menuToggleDownmix(_:)))
+  }
+
+  private func updateAudioAdvancedToggleStates() {
+    for item in audioMenu.items {
+      guard let action = item.action else { continue }
+      if action == #selector(menuToggleDownmix(_:)) {
+        item.state = Preference.bool(for: .adLavcDownmix) ? .on : .off
+      }
+    }
+  }
+
+  // MARK: - Subtitle menu advanced items (sub-auto)
+
+  private func appendSubtitleAdvancedMenuItems() {
+    subMenu.addItem(NSMenuItem.separator())
+
+    // Sub-auto submenu (auto-load mode)
+    let subAutoItem = NSMenuItem(title: NSLocalizedString("menu.sub_auto", value: "Auto-load Subtitles", comment: "Subtitle menu"), action: nil, keyEquivalent: "")
+    let subAutoMenu = NSMenu(title: "Auto-load")
+    for value in ["no", "exact", "fuzzy", "all"] {
+      let sub = NSMenuItem(title: value, action: #selector(menuSetSubAuto(_:)), keyEquivalent: "")
+      sub.target = self
+      sub.representedObject = value
+      subAutoMenu.addItem(sub)
+    }
+    subAutoItem.submenu = subAutoMenu
+    subMenu.addItem(subAutoItem)
   }
 
   private func updateAudioMenu() {
@@ -541,6 +763,8 @@ class MenuController: NSObject, NSMenuDelegate {
     volumeIndicator.title = String(format: volFmtString, volumeString)
     let audioDelayString = player.info.audioDelay.groupedStringUpTo6Decimals
     audioDelayIndicator.title = String(format: NSLocalizedString("menu.audio_delay", comment: "Audio Delay:"), audioDelayString)
+    // Update dynamically appended Audio advanced toggles
+    updateAudioAdvancedToggleStates()
   }
 
   private func updateAudioDevice() {

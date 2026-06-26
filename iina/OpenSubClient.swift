@@ -105,7 +105,7 @@ class OpenSubClient {
   /// The API key identifies the _application_ using the
   /// [REST API](https://opensubtitles.stoplight.io/docs/opensubtitles-api/e3750fd63a100-getting-started),
   /// not the  [Open Subtitles](https://www.opensubtitles.com/) user.
-  private let apiKey = "SPX87dlUuuHpxeh5u3rd7dHekOT6oYpx"
+  private let apiKey = Bundle.main.infoDictionary?["OpenSubtitlesApiKey"] as? String ?? ""
 
   /// [JSON decoder](https://developer.apple.com/documentation/foundation/jsondecoder) properly configured
   /// to decode responses from API methods.

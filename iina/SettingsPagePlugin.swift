@@ -262,16 +262,29 @@ fileprivate class PluginListView: SettingsAccessory.Base {
         }
 
         var dict: [String: Bool] = [:]
+        var hasError = false
         for plugin in JavascriptPlugin.plugins {
-          let version = try await plugin.checkNewVersion()
-          dict[plugin.identifier] = version != nil
+          do {
+            let version = try await plugin.checkNewVersion()
+            dict[plugin.identifier] = version != nil
+          } catch let error {
+            Logger.log("Error checking update for \(plugin.identifier): \(error)", level: .error)
+            hasError = true
+            dict[plugin.identifier] = false
+          }
         }
         PluginListView.pluginHasUpdate = dict
 
         let numOfUpdates = UInt(dict.values.filter{ $0 }.count)
         Logger.log("Finished checking for plugin updates, \(numOfUpdates) updates found")
 
-        updateView.update(.foundUpdate(numOfUpdates))
+        if numOfUpdates > 0 {
+          updateView.update(.foundUpdate(numOfUpdates))
+        } else if hasError {
+          updateView.update(.error)
+        } else {
+          updateView.update(.foundUpdate(0))
+        }
         self.tableView.reloadData()
       } catch let error {
         Logger.log("Error checking for plugin updates: \(error)", level: .error)

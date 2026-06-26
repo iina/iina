@@ -489,25 +489,51 @@ class JavascriptPlugin: NSObject {
   }
 
   func checkNewVersion() async throws -> String? {
-    try await withCheckedThrowingContinuation { continuation in
-      guard let ghVersion = githubVersion, let ghRepo = githubRepo else {
-        continuation.resume(returning: nil)
-        return
-      }
-      Just.get("https://raw.githubusercontent.com/\(ghRepo)/master/Info.json", asyncCompletionHandler:  { result in
-        if result.ok,
-           let json = result.json as? [String: Any],
-           let newGHVersion = json["ghVersion"] as? Int,
-           let newVersion = json["version"] as? String {
-          if newGHVersion > ghVersion {
-            continuation.resume(returning: newVersion)
-          } else {
-            continuation.resume(returning: nil)
-          }
-        } else {
-          continuation.resume(throwing: PluginError.cannotDownload(result.description, result.text ?? ""))
+    guard let ghVersion = githubVersion, let ghRepo = githubRepo else {
+      return nil
+    }
+
+    var json: [String: Any]? = nil
+    var lastError: Error? = nil
+
+    for branch in ["main", "master"] {
+      do {
+        json = try await withCheckedThrowingContinuation { continuation in
+          Just.get("https://raw.githubusercontent.com/\(ghRepo)/\(branch)/Info.json", asyncCompletionHandler: { result in
+            if result.ok, let resultJson = result.json as? [String: Any] {
+              continuation.resume(returning: resultJson)
+            } else if result.statusCode == 404 {
+              continuation.resume(returning: nil)
+            } else {
+              continuation.resume(throwing: PluginError.cannotDownload(result.description, result.text ?? ""))
+            }
+          })
         }
-      })
+        if json != nil {
+          break
+        }
+      } catch {
+        lastError = error
+      }
+    }
+
+    guard let json = json else {
+      if let error = lastError {
+        throw error
+      } else {
+        throw PluginError.cannotDownload("Info.json not found on main or master", "")
+      }
+    }
+
+    guard let newGHVersion = json["ghVersion"] as? Int,
+          let newVersion = json["version"] as? String else {
+      throw PluginError.cannotDownload("Invalid Info.json format", "")
+    }
+
+    if newGHVersion > ghVersion {
+      return newVersion
+    } else {
+      return nil
     }
   }
 

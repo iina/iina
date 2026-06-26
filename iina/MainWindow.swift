@@ -62,8 +62,8 @@ class MainWindow: NSWindow {
 class MainWindowContentView: NSView {
   override func resetCursorRects() {
     guard let controller = window?.windowController as? MainWindowController else { return }
-    for side in [SidebarController.Side.leading, .trailing] where controller.sidebars.sideBar(for: side).status == .playlist {
-      addCursorRect(controller.sidebars.playlistDraggingRect(for: side), cursor: .resizeLeftRight)
+    for side in [SidebarController.Side.leading, .trailing] where controller.sidebars.sideBar(for: side).status != .hidden {
+      addCursorRect(controller.sidebars.resizeHandleRect(for: side), cursor: .resizeLeftRight)
     }
   }
 

@@ -26,7 +26,13 @@ class QuickSettingViewController: SidebarViewController {
   override var leadingPrefKey: Preference.Key {
     .sidebarSettingsDisplayAtLeading
   }
-  
+  override var widthPrefKey: Preference.Key {
+    .sidebarSettingsWidth
+  }
+  override var widthRange: ClosedRange<CGFloat> {
+    300...500
+  }
+
   override var allTabs: [TabType] {
     [.layout, .video, .audio, .sub]
   }

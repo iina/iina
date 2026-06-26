@@ -77,6 +77,12 @@ class SidebarViewController: NSViewController {
 
   var sidebarType: SidebarController.ViewType { fatalError() }
   var leadingPrefKey: Preference.Key { fatalError() }
+  var widthPrefKey: Preference.Key { fatalError() }
+  var widthRange: ClosedRange<CGFloat> { fatalError() }
+  var width: CGFloat {
+    CGFloat(Preference.integer(for: widthPrefKey)).clamped(to: widthRange)
+  }
+
   var defaultTab: TabType { fatalError() }
   var allTabs: [TabType] { fatalError() }
   var useTabView: Bool { true }

@@ -149,6 +149,8 @@ struct Preference {
     static let disableVolumeSliderScrolling = Key("disableVolumeSliderScrolling")
 
     static let playlistWidth = Key("playlistWidth")
+    static let sidebarSettingsWidth = Key("sidebarSettingsWidth")
+    static let sidebarPluginsWidth = Key("sidebarPluginsWidth")
     static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")
 
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
@@ -1032,6 +1034,8 @@ struct Preference {
     .disablePlaySliderScrolling: false,
     .disableVolumeSliderScrolling: false,
     .playlistWidth: 270,
+    .sidebarSettingsWidth: 360,
+    .sidebarPluginsWidth: 360,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
     .useLiquidGlassOSD: true,
@@ -1315,7 +1319,8 @@ struct Preference {
     // See the list in this method's documentation comment for why these settings are not logged.
     let doNotLog: [Key] = [.assrtToken, .controlBarPositionHorizontal, .controlBarPositionVertical,
       .musicModeShowAlbumArt, .musicModeShowPlaylist, .openSubUsername, .playlistWidth,
-      .recentDocuments, .savedAudioFilters, .savedVideoFilters, .softVolume, .watchProperties]
+      .sidebarSettingsWidth, .sidebarPluginsWidth, .recentDocuments, .savedAudioFilters,
+      .savedVideoFilters, .softVolume, .watchProperties]
     // There isn't an enumeration of the settings, so we use the keys in the dictionary containing
     // the defaults. Filter the list to remove the keys we do not want to log and then sort the keys
     // so the log messages are ordered for easier reading.

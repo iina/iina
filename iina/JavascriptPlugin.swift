@@ -521,7 +521,8 @@ class JavascriptPlugin: NSObject {
       if let error = lastError {
         throw error
       } else {
-        throw PluginError.cannotDownload("Info.json not found on main or master", "")
+        // Both branches returned 404, so we assume no update is available.
+        return nil
       }
     }
 

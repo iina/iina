@@ -834,6 +834,8 @@ struct Preference {
     case bt_2390
     case gamma
     case linear
+    case st2094_40
+    case spline
 
     static var defaultValue = ToneMappingAlgorithmOption.auto
 
@@ -851,6 +853,8 @@ struct Preference {
       case .bt_2390: "bt.2390"
       case .gamma: "gamma"
       case .linear: "linear"
+      case .st2094_40: "st2094-40"
+      case .spline: "spline"
       }
     }
   }

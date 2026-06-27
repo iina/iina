@@ -23,18 +23,21 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
   private lazy var messageHub = JavascriptMessageHub(reference: self)
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
-    player!.mainWindow.sidebars.pluginView.removePluginTab(withIdentifier: instance.plugin.identifier)
+    // removePluginTab is not called here to avoid exclusivity conflicts during deinit.
+    // reloadPlugin (called after clearPlugins) will trigger updatePluginTabs to refresh
+    // the tab list, automatically removing stale tabs.
   }
 
   func loadFile(_ path: String) {
+    guard let instance = pluginInstance else { return }
     guard player!.mainWindow.loaded else {
       throwError(withMessage: "sidebar.loadFile called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
-    let rootURL = pluginInstance.plugin.root
+    let rootURL = instance.plugin.root
     let url = rootURL.appendingPathComponent(path)
     Utility.executeOnMainThread {
-      let nav = pluginInstance.sidebarTabView.load(URLRequest(url: url))
+      let nav = instance.sidebarTabView.load(URLRequest(url: url))
       if nav == nil {
         throwError(withMessage: "Failed to load ")
       }
@@ -43,11 +46,12 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
   }
 
   func show() {
+    guard let instance = pluginInstance else { return }
     guard player!.mainWindow.loaded else {
       throwError(withMessage: "sidebar.show called when window is not available. Please call it after receiving the \"iina.window-loaded\" event.")
       return
     }
-    let id = pluginInstance.plugin.identifier
+    let id = instance.plugin.identifier
     player!.mainWindow.sidebars.show(sidebar: .plugins, tab: id, force: true, hideIfAlreadyShown: false)
   }
 
@@ -60,7 +64,8 @@ class JavascriptAPISidebarView: JavascriptAPI, JavascriptAPISidebarViewExportabl
   }
 
   func postMessage(_ name: String, _ data: JSValue) {
-    messageHub.postMessage(to: pluginInstance.sidebarTabView, name: name, data: data)
+    guard let instance = pluginInstance else { return }
+    messageHub.postMessage(to: instance.sidebarTabView, name: name, data: data)
   }
 
   func onMessage(_ name: String, _ callback: JSValue) {

@@ -20,8 +20,7 @@ class SidebarController: NSObject {
     case leading, trailing
   }
 
-  /// What's currently embedded in a sidebar panel. Per-type config (position/width prefs, width
-  /// range) lives on the embedded `SidebarViewController` subclasses, reached via `viewController(for:)`.
+  /// What's currently embedded in a sidebar panel.
   enum ViewType {
     case hidden
     case settings
@@ -120,7 +119,6 @@ class SidebarController: NSObject {
     }
   }
 
-  /// All embedded sidebar view controllers.
   private var viewControllers: [SidebarViewController] {
     [quickSettingView, playlistView, pluginView]
   }
@@ -251,7 +249,6 @@ class SidebarController: NSObject {
     return NSRect(x: originX, y: sf.minY, width: 4, height: sf.height)
   }
 
-  /// Window-relative cap applied on top of each sidebar's own `widthRange`.
   private var sidebarMaxWidth: CGFloat {
     guard let window = mainWindow.window else { return .greatestFiniteMagnitude }
     return window.frame.width * 0.8

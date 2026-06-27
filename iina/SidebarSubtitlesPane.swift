@@ -314,6 +314,7 @@ fileprivate class SubPositionDelayView: NSView {
     primarySwitch.setLabel(NSLocalizedString("sidebar.secondary", comment: ""), forSegment: 1)
     primarySwitch.selectedSegment = 0
     primarySwitch.setContentHuggingPriority(.init(100), for: .horizontal)
+    primarySwitch.segmentDistribution = .fillEqually
 
     self.positionSlider = NSSlider()
     positionSlider.minValue = 0

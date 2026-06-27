@@ -1033,7 +1033,7 @@ struct Preference {
     .oscPosition: OSCPosition.floating.rawValue,
     .disablePlaySliderScrolling: false,
     .disableVolumeSliderScrolling: false,
-    .playlistWidth: 270,
+    .playlistWidth: 360,
     .sidebarSettingsWidth: 360,
     .sidebarPluginsWidth: 360,
     .prefetchPlaylistVideoDuration: true,

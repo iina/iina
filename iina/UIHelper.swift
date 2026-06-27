@@ -55,6 +55,9 @@ class UIHelper {
     if let font {
       textField.font = font
     }
+    textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    textField.allowsDefaultTighteningForTruncation = true
+    textField.lineBreakMode = .byTruncatingTail
     return textField
   }
 

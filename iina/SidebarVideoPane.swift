@@ -195,7 +195,7 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
       contentView.postsBoundsChangedNotifications = true
       NotificationCenter.default.addObserver(
         self,
-        selector: #selector(contentDidScroll),
+        selector: #selector(updateMask),
         name: NSView.boundsDidChangeNotification,
         object: contentView
       )
@@ -209,11 +209,12 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
       NotificationCenter.default.removeObserver(self)
     }
 
-    @objc private func contentDidScroll(_ note: Notification) {
+    override func layout() {
+      super.layout()
       updateMask()
     }
 
-    private func updateMask() {
+    @objc private func updateMask(_ notification: Notification? = nil) {
       guard let documentView else { return }
 
       let visibleWidth = contentView.bounds.width
@@ -678,6 +679,7 @@ fileprivate class EqualizerView: NSView {
         label, slider, resetButton
       ))
 
+      label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
       if let firstLabel {
         label.widthAnchor.constraint(equalTo: firstLabel.widthAnchor).isActive = true
       } else {

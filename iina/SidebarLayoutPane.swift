@@ -179,6 +179,7 @@ class SidebarLayoutPane: SidebarScrollView {
 
     let label = createSectionTitle("On Screen Controller")
     let stack = ui.hStack(oscLayoutSelector.views)
+    stack.distribution = .fillEqually
 
     container.addSubview(label)
     container.addSubview(stack)

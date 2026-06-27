@@ -93,6 +93,31 @@ class SidebarVideoPane: SidebarScrollView {
     container.setContentHuggingPriority(.init(100), for: .horizontal)
     container.translatesAutoresizingMaskIntoConstraints = false
 
+    let hdrSwitch = NSSwitch()
+    if #available(macOS 26, *) {
+      hdrSwitch.controlSize = .small
+    }
+    hdrSwitch.target = self
+    hdrSwitch.action = #selector(hdrAction(_:))
+
+    let hdrRow = ui.hStack(
+      spacing: 8,
+      ui.image("sun.max", size: 16, config: .sidebarIconConfig),
+      ui.label("quicksetting.hdr"),
+      ui.flexibleSpace(),
+      hdrSwitch
+    )
+
+    let updateHDR = { [unowned self, weak hdrRow, weak hdrSwitch] in
+      let available = self.player.info.hdrAvailable
+      hdrRow?.isHidden = !available
+      if available {
+        hdrSwitch?.state = self.player.info.hdrEnabled ? .on : .off
+      }
+    }
+    updateHDR()
+    player.observe(.iinaHDRChanged) { _ in updateHDR() }
+
     let stack = ui.vStack(
       align: .leading,
       spacing: .sidebarItemSpacing,
@@ -104,64 +129,12 @@ class SidebarVideoPane: SidebarScrollView {
         ui.flexibleSpace(),
         HwdecSwitch(player: player),
       ),
-      ui.hStack(
-        spacing: 8,
-        ui.image("sun.max", size: 16, config: .sidebarIconConfig),
-        ui.label("quicksetting.hdr"),
-        ui.flexibleSpace(),
-        HDRControlView(player: player)
-      )
+      hdrRow
     )
 
     container.addSubview(stack)
     stack.padding(.all)
     return container
-  }
-}
-
-fileprivate class HDRControlView: NSStackView {
-  private unowned let player: PlayerCore
-  private var hdrSwitch: NSSwitch!
-  private var unsupportedLabel: NSTextField!
-
-  init(player: PlayerCore) {
-    self.player = player
-    super.init(frame: .zero)
-    orientation = .horizontal
-    alignment = .centerY
-    spacing = 0
-    translatesAutoresizingMaskIntoConstraints = false
-
-    hdrSwitch = NSSwitch()
-    if #available(macOS 26, *) {
-      hdrSwitch.controlSize = .small
-    }
-    hdrSwitch.target = self
-    hdrSwitch.action = #selector(hdrAction)
-
-    unsupportedLabel = ui.label("quicksetting.unsupported", isSecondary: true)
-
-    addArrangedSubview(hdrSwitch)
-    addArrangedSubview(unsupportedLabel)
-
-    update()
-
-    player.observe(.iinaHDRChanged) { [unowned self] _ in
-      update()
-    }
-  }
-
-  private func update() {
-    let available = player.info.hdrAvailable
-    hdrSwitch.isHidden = !available
-    unsupportedLabel.isHidden = available
-    if available {
-      hdrSwitch.state = player.info.hdrEnabled ? .on : .off
-    }
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 
   @objc private func hdrAction(_ sender: NSSwitch) {

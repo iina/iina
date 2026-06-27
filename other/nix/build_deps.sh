@@ -3,7 +3,7 @@
 NIX_BUILD=true
 REPLACE_LIBS=true
 REPLACE_EXECUTABLES=true
-REPLACE_INCLUDES=false
+REPLACE_INCLUDES=true
 DEBUG_NIX=false
 
 MIN_NIX_VERSION="2.34.6"
@@ -50,7 +50,7 @@ printUsageHelp() {
   echo -e "    ${GREEN}--debug${NC}                Enable debugging (Nix build only): yes | no (default: no)"
   echo -e "    ${GREEN}--replace-libs${NC}         Whether to replace deps/lib: yes | no (default: yes)"
   echo -e "    ${GREEN}--replace-executables${NC}  Whether to replace deps/executable: yes | no (default: yes)"
-  echo -e "    ${GREEN}--replace-includes${NC}     Whether to replace deps/include: yes | no (default: no)"
+  echo -e "    ${GREEN}--replace-includes${NC}     Whether to replace deps/include: yes | no (default: yes)"
   echo
 }
 

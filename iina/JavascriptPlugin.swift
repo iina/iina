@@ -355,7 +355,27 @@ class JavascriptPlugin: NSObject {
     }
 
     self.root = url
-    self.name = name
+
+    // e.g. "localized": { "fr": { "name": ..., "description": ..., "sidebarTab": { "name": ... } } }
+    let l10nDict = jsonDict["localized"] as? [String: [String: Any]] ?? [:]
+    let preferredLang = Bundle.preferredLocalizations(from: Array(l10nDict.keys)).first
+    let preferredL10n: [String: Any]? = preferredLang.flatMap { l10nDict[$0] }
+
+    func l10n(_ key: String, fallback: String?) -> String? {
+      if let preferredL10n, let value = preferredL10n[key] as? String {
+        return value
+      }
+      return fallback
+    }
+
+    func l10nNested(_ key: String, _ subKey: String, fallback: String?) -> String? {
+      if let preferredL10n, let value = (preferredL10n[key] as? [String: Any])?[subKey] as? String {
+        return value
+      }
+      return fallback
+    }
+
+    self.name = l10n("name", fallback: name) ?? name
     self.version = version
     self.entryPath = entry
     self.globalEntryPath = jsonDict["globalEntry"] as? String
@@ -363,18 +383,18 @@ class JavascriptPlugin: NSObject {
     self.authorURL = author["url"]
     self.authorEmail = author["email"]
     self.identifier = identifier
-    self.desc = jsonDict["description"] as? String
+    self.desc = l10n("description", fallback: jsonDict["description"] as? String)
     self.preferencesPage = jsonDict["preferencesPage"] as? String
     self.helpPage = jsonDict["helpPage"] as? String
     self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
     self.subProviders = jsonDict["subtitleProviders"] as? [[String: String]]
-    
+
     if externalURL != nil {
       self.isExternal = true
     }
 
     if let sidebarTabDef = jsonDict["sidebarTab"] as? [String: String] {
-      self.sidebarTabName = sidebarTabDef["name"]
+      self.sidebarTabName = l10nNested("sidebarTab", "name", fallback: sidebarTabDef["name"])
     } else {
       self.sidebarTabName = nil
     }

@@ -155,8 +155,12 @@ class PluginViewController: SidebarViewController {
     guard isViewLoaded else { return }
     if currentTab.name == identifier {
       pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
+      switchToTab(.pluginPlaceholder)
     }
-    updatePluginTabs()
+    if let item = pluginMenu.items
+      .first(where: { $0.representedObject as? String == identifier }) {
+      pluginMenu.removeItem(item)
+    }
   }
 
   override func tabBtnSegmentControlAction(_ sender: NSSegmentedControl) {

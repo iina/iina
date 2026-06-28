@@ -407,7 +407,7 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
   lazy var pluginOverlayViewContainer: NSView! = {
-    guard let window = window, let cv = window.contentView else { return nil }
+    guard let window, let cv = window.contentView else { return nil }
     let view = NSView(frame: .zero)
     view.translatesAutoresizingMaskIntoConstraints = false
     cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
@@ -1779,7 +1779,7 @@ class MainWindowController: PlayerWindowController {
   // MARK: - Window delegate: Size
 
   func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-    guard let window = window else { return frameSize }
+    guard loaded, let window else { return frameSize }
     // disable resizing in interactive mode, little benefit but complicates the layout logic
     if interactiveMode.isActive {
       return window.frame.size
@@ -1794,7 +1794,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidResize(_ notification: Notification) {
-    guard let window = window else { return }
+    guard loaded, let window = window else { return }
     if !window.inLiveResize {
       liveText.requestAnalysis()
     }
@@ -1867,7 +1867,7 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Window delegate: Activeness status
   func windowDidMove(_ notification: Notification) {
-    guard let window = window else { return }
+    guard loaded, let window else { return }
     player.events.emit(.windowMoved, data: window.frame)
   }
 
@@ -2325,7 +2325,7 @@ class MainWindowController: PlayerWindowController {
 
   /** Set window size when info available, or video size changed. */
   func handleVideoSizeChange(keepWindowSize: Bool) {
-    guard let window = window else { return }
+    guard loaded, let window else { return }
 
     // When starting to play the file try and find the screen the window was previously on.
     let screen = player.info.justStartedFile ? determineScreenToUse(window) : window.selectDefaultScreen()
@@ -2476,7 +2476,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func setWindowScale(_ scale: Double) {
-    guard let window = window, fsState == .windowed else { return }
+    guard loaded, let window, fsState == .windowed else { return }
     let screenFrame = (window.screen ?? NSScreen.main!).visibleFrame
     let (videoWidth, videoHeight) = player.videoSizeForDisplay
     let newFrame: NSRect
@@ -3026,7 +3026,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
   func prepareForPIPClosure(_ pip: PIPViewController) {
     guard pipStatus == .inPIP else { return }
-    guard let window = window else { return }
+    guard let window else { return }
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
 

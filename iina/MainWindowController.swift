@@ -1800,8 +1800,8 @@ class MainWindowController: PlayerWindowController {
     }
 
     // update control bar position
-    if oscPosition == .floating, let view = oscFloatingView {
-      view.updatePosition()
+    if oscPosition == .floating {
+      oscFloatingView.updatePosition()
     }
 
     // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
@@ -2929,9 +2929,8 @@ class MainWindowController: PlayerWindowController {
     } else {
       timeLabelYPos = sliderFrame.origin.y + playSlider.frame.height + 5
     }
-    let newX = sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewView.frame.width / 2
     timePreviewView.frame.origin = CGPoint(
-      x: round(newX),
+      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewView.frame.width / 2),
       y: timeLabelYPos)
   }
 

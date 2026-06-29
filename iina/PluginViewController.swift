@@ -21,12 +21,6 @@ class PluginViewController: SidebarViewController {
   override var leadingPrefKey: Preference.Key {
     .sidebarPluginsDisplayAtLeading
   }
-  override var widthPrefKey: Preference.Key {
-    .sidebarPluginsWidth
-  }
-  override var widthRange: ClosedRange<CGFloat> {
-    300...500
-  }
 
   private lazy var allTabs_: [(id: String, name: String)] = getAllTabs()
 

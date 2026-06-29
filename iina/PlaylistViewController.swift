@@ -23,12 +23,6 @@ class PlaylistViewController: SidebarViewController {
   override var leadingPrefKey: Preference.Key {
     .sidebarPlaylistDisplayAtLeading
   }
-  override var widthPrefKey: Preference.Key {
-    .playlistWidth
-  }
-  override var widthRange: ClosedRange<CGFloat> {
-    300...500
-  }
 
   override var allTabs: [SidebarViewController.TabType] {
     [.playlist, .chapters]

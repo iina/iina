@@ -38,7 +38,7 @@ class UIHelper {
     return textField
   }
 
-  func label(_ key: String, wrapping: Bool = false, font: NSFont? = nil, isSmall: Bool = false, isSecondary: Bool = false) -> NSTextField {
+  func label(_ key: String, wrapping: Bool = false, font: NSFont? = nil, isSmall: Bool = false, isSecondary: Bool = false, canCompress: Bool = true) -> NSTextField {
     let textField = if wrapping {
       NSTextField(wrappingLabelWithString: localized(key))
     } else {
@@ -55,9 +55,11 @@ class UIHelper {
     if let font {
       textField.font = font
     }
-    textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    textField.allowsDefaultTighteningForTruncation = true
-    textField.lineBreakMode = .byTruncatingTail
+    if canCompress {
+      textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+      textField.allowsDefaultTighteningForTruncation = true
+      textField.lineBreakMode = .byTruncatingTail
+    }
     return textField
   }
 

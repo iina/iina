@@ -74,14 +74,10 @@ class SidebarSliderView: NSView {
       tickMarkView.addSubview(label)
       label.padding(.vertical)
       if i == 0 {
-        // pin the leading edge for the first label
         label.leadingAnchor.constraint(equalTo: tickMarkView.leadingAnchor).isActive = true
       } else if i == tickMarkLabels.count - 1 {
-        // pin the trailing edge for the last label
         label.trailingAnchor.constraint(equalTo: tickMarkView.trailingAnchor).isActive = true
       } else {
-        // center the middle labels. Only these are tracked for repositioning in layout(); the
-        // array index is offset by one from the tick index (the first label is excluded).
         let constraint = label.centerXAnchor.constraint(equalTo: tickMarkView.leadingAnchor, constant: 0)
         constraint.isActive = true
         tickMarkTextFieldsConstraints.append(constraint)

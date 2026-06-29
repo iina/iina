@@ -222,9 +222,8 @@ class SidebarController: NSObject {
     if let side = resizingSidebarSide {
       resizingSidebarSide = nil
       let panel = sideBar(for: side)
-      if let key = viewController(for: panel.status)?.widthPrefKey {
-        Preference.set(Int(panel.widthConstraint.constant), for: key)
-      }
+      let key: Preference.Key = side == .leading ? .leadingSidebarWidth : .trailingSidebarWidth
+      Preference.set(Int(panel.widthConstraint.constant), for: key)
       return true
     }
     let isSingleClick = event.clickCount <= 1 && mainWindow.videoView.lastEventId == event.eventNumber
@@ -276,6 +275,14 @@ class SidebarController: NSObject {
       mainWindow.titleBarView.setTrailingConstraint(constant, animated: animated)
       mainWindow.oscBottomView.setTrailingConstraint(constant, animated: animated)
     }
+  }
+
+  private func replaceSideBar(with viewController: SidebarViewController, type: ViewType, in panel: Panel) {
+    panel.status = type
+    panel.view.setContent(viewController.view)
+    viewController.view.padding(.all)
+    viewController.downShift = 0
+    NotificationCenter.default.post(name: .iinaSidebarStatusChanged, object: nil)
   }
 
   /// Show the given sidebar on its configured side.
@@ -419,10 +426,7 @@ class SidebarController: NSObject {
     if targetPanel.status == .hidden {
       showSideBar(viewController: viewController, type: type)
     } else {
-      // Target side currently shows a different type — replace it.
-      hideSideBar(side: targetSide, animate: false) {
-        self.showSideBar(viewController: viewController, type: type)
-      }
+      replaceSideBar(with: viewController, type: type, in: targetPanel)
     }
   }
 

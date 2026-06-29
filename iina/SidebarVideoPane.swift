@@ -651,7 +651,7 @@ fileprivate class EqualizerView: NSView {
     var firstLabel: NSTextField?
 
     for c in configs {
-      let label = ui.label("sidebar.\(c.labelKey)", isSmall: true)
+      let label = ui.label("sidebar.\(c.labelKey)", isSmall: true, canCompress: false)
 
       let slider = NSSlider()
       slider.tag = c.tag
@@ -679,7 +679,6 @@ fileprivate class EqualizerView: NSView {
         label, slider, resetButton
       ))
 
-      label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
       if let firstLabel {
         label.widthAnchor.constraint(equalTo: firstLabel.widthAnchor).isActive = true
       } else {

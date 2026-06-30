@@ -23,7 +23,7 @@
 "5Y9-bX-K0f.title" = "Згорнуто / розгорнуто";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
-"6TV-DG-503.title" = "Плейлист:";
+"6TV-DG-503.title" = "Список награвання:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "8kU-8g-VgX"; */
 "8kU-8g-VgX.title" = "Для набуття чинності змін треба перезавантажити IINA.";
@@ -35,7 +35,7 @@
 "Ci8-j2-QS3.title" = "Заносити всі переглянуті файли до меню «Відкрити останні»";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
-"Ez8-qY-WAZ.title" = "щодня";
+"Ez8-qY-WAZ.title" = "Щодня";
 
 /* Class = "NSButtonCell"; title = "Pause"; ObjectID = "FbF-jJ-W5b"; */
 "FbF-jJ-W5b.title" = "Зупинити";
@@ -44,13 +44,13 @@
 "GNV-VA-NBW.title" = "Коли файл відкрито:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
-"Imf-6g-2Cd.title" = "щотижня";
+"Imf-6g-2Cd.title" = "Щотижня";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
 "J8g-aS-W6e.title" = "Вікно неактивне / активне";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
-"JfZ-D8-aF2.title" = "нічого не робити";
+"JfZ-D8-aF2.title" = "Нічого не робити";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
 "KYi-0W-zOr.title" = "Затемнити інші вікна, коли у повноекранному режимі";
@@ -77,16 +77,16 @@
 "PhL-vP-i7L.title" = "Призначення:";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
-"QJq-fO-hhK.title" = "Додавати файли з однієї папки автоматично";
+"QJq-fO-hhK.title" = "Додавати файли з однієї теки автоматично";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
-"REP-70-XOi.title" = "щомісяця";
+"REP-70-XOi.title" = "Щомісяця";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "Задіяти старий повноекранний режим";
+"TvB-UM-FrS.title" = "Використати старий повноекранний режим";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "Інакше в цьому меню відображатимуться файли, що відкривалися лише вручну.";
+"XFC-Lr-LmP.title" = "В іншому випадку в цьому меню будуть показані лише ті файли, які було відкрито вручну.";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
 "YLo-6E-tT7.title" = "Завершити, коли всі вікна закрито";
@@ -131,13 +131,13 @@
 "oJY-Iz-3sO.title" = "Формат:";
 
 /* Class = "NSTextFieldCell"; title = "Screenshots:"; ObjectID = "pdx-zt-kf2"; */
-"pdx-zt-kf2.title" = "Знятки:";
+"pdx-zt-kf2.title" = "Знімки екрану:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
 "r2u-P9-J5p.title" = "Запобігає запуск режиму збереження екрана під час відтворення";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
-"slG-Jb-54B.title" = "щогодини";
+"slG-Jb-54B.title" = "Щогодини";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpg)"; ObjectID = "tmy-ty-8uK"; */
 "tmy-ty-8uK.title" = "JPEG (.jpg)";
@@ -146,7 +146,7 @@
 "uQR-Fx-oEm.title" = "Поведінка:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "Показати попередній перегляд при створенні скріншотів";
+"xE7-Uu-19f.title" = "Показувати попередній перегляд після створення знімків екрана";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
 "xr2-rB-O0x.title" = "Зупинити / відновити, коли: ";
@@ -155,19 +155,19 @@
 "yla-DT-YTx.title" = "Не під час \"музичного режиму\" або лише відтворення аудіо";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
-"z9T-8h-1T0.title" = "показати вікно привітання";
+"z9T-8h-1T0.title" = "Показувати вікно привітання";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
 "jok-kc-HjX.title" = "Коли файл відкрито вручну:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Зациклити плейлист";
+"5WC-Sp-6mg.title" = "Зациклити список награвання";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
 "A1p-L4-jtC.title" = "Зациклити один файл";
 
 /* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
-"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+"WZE-pS-9ne.title" = "Об'єднати медіафайли у список награвання під час одночасного відкриття декількох файлів";
 
 /* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
-"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";
+"Z7U-cf-ezr.title" = "Дозволити відкриття того самого файлу у декількох вікнах";

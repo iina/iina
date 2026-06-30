@@ -13,9 +13,12 @@
 "general.logout" = "로그아웃";
 "general.ok" = "승인";
 "general.cancel" = "취소";
+"general.done" = "완료";
 "general.username" = "사용자";
 "general.password" = "암호";
-"general.na" = "N/A";
+"general.na" = "해당없음";
+"general.no_result" = "결과 없음";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "값을 비워둘 수 없습니다.";
 "input.already_exists" = "값이 이미 존재합니다.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "취소됨";
 "osd.cannot_connect" = "연결할 수 없음";
 "osd.timed_out" = "시간 초과됨";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
 "osd.file_loop" = "단일 파일 반복 재생";
@@ -145,8 +151,10 @@
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";
-"preference.ui" = "화면";
-"preference.video_audio" = "비디오/오디오";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "비디오";
+"preference.audio" = "오디오";
 "preference.subtitle" = "자막";
 "preference.network" = "네트워크";
 "preference.control" = "제어";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "mpv 플레이어의 vf 또는 af 명령의 형식으로 필터 설정 문자열을 입력하십시오.";
 
 "alert.keybinding_config.error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "사용자가 지정한 mpv 추가 옵션을 읽을 수 없습니다.";
 "alert.extra_option.empty" = "항목과 그 설정값을 반드시 지정해야 합니다!";
-"alert.extra_option.error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "\"%@\"를 설정 디렉토리로 지정하는 도중 오류가 발생했습니다.";
 
 "alert.playlist.error_deleting" = "삭제 오류: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "최근에 재생한 기록 삭제";
 "alert.delete_history.message" = "선택한 재생 기록을 삭제하시겠습니까?";
+"alert.delete_all_history.title" = "재생 기록 지우기";
+"alert.delete_all_history.message" = "재생 기록을 지우겠습니까？";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "사용자 비디오 필터를 적용합니다. 그러나 현재 사용 중인 하드웨어 디코더가 비디오 필터를 제대로 지원하지 않을 수도 있습니다. 사용자 필터를 사용하지 않도록 설정하거나, 두 배의 메모리를 사용하는 자동(복사) 방식으로 전환하여 사용할 수 있습니다.\n이전에 설정했던 작업(예를 들어 화면 자르기 설정)이 동작하게 하려면 다시 설정해야 하는 경우도 있습니다.";
 "alert.filter_hwdec.abort" = "중단";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "비활성화된 알림 복구하기";
 "alert.restore_alerts.message" = "비활성화된 모든 알림을 다시 활성화 하시겠습니까?";
+
+"alert.cleared" = "지워졌습니다.";
+"alert.restored" = "복구됨";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "열 수 있는 파일이 없습니다.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "최신 버전은 %@입니다. %@에서 업데이트 하시겠습니까?";
 "alert.plugin_permission" = "이 플러그인은 다음과 같은 권한을 필요로 합니다. 진행하기 전에 확인해 주세요.";
 "alert.plugin_permission_added" = "이 업데이트는 추가적인 승인이 필요합니다. 진행하기 전에 다시 한번 읽어주세요.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "전체 %@";
 "playlist.total_length_with_selected" = "%@ 선택됨 / 전체 %@";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "브라우저에서 열기";
 "pl_menu.copy_url" = "URL 복사";
 "pl_menu.copy_url_multi" = "여러 URL 복사";
+"pl_menu.playback" = "재생";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "플러그인";
+"pl_menu.playlist" = "재생목록";
 
 "keymapping.title" = "단축키 지정";
 "keymapping.message" = "단축키로 사용할 키를 누르십시오.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "자막 선택";
 "osc_toolbar.screenshot" = "스크린샷 찍기";
 "osc_toolbar.plugins" = "플러그인 패널 보기";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "자유 이동";
+"osc_pos.top" = "위쪽";
+"osc_pos.bottom" = "아래쪽";
 
 "mini_player.album_art" = "앨범 아트 켜기/끄기";
 "mini_player.loop" = "반복";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA가 이 플러그인을 로드할 수 없습니다. 플러그인이 잘못된 형식일 수 있습니다.";
 "plugin.check_for_updates" = "업데이트 확인";
 "plugin.updating" = "업데이트 다운로드 중...";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "로그 보기";
+"logwindow.time" = "시간";
+"logwindow.subsystem" = "서브시스템";
+"logwindow.message" = "메시지";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "저장";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "복사하기";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "재생 기록";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "재생 진행 상태";
+"history_window.col.played_at" = "최근 재생 시간";
+"history_window.menu.play" = "재생";
+"history_window.menu.play_new_window" = "새 윈도우에서 재생";
+"history_window.menu.show_in_finder" = "Finder에서 보기";
+"history_window.menu.delete" = "삭제…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "재생 기록 지우기";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "날짜별";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "찾기";
+"history_window.search.filename" = "파일 이름";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "최근 검색한 항목이 없습니다";
+"history_window.search.recents_title" = "최근 검색한 항목";
+"history_window.search.clear_recents" = "최근 목록 지우기";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "비디오";
+"sidebar.audio" = "오디오";
+"sidebar.sub" = "자막";
+"sidebar.plugins" = "플러그인";
+"sidebar.playlist" = "재생목록";
+"sidebar.chapters" = "챕터";
+
+"sidebar.aspect_ratio" = "화면비";
+"sidebar.crop" = "자르기";
+"sidebar.rotation" = "회전";
+"sidebar.speed" = "재생속도";
+
+"sidebar.brightness" = "밝기";
+"sidebar.contrast" = "대비";
+"sidebar.saturation" = "채도";
+"sidebar.gamma" = "감마";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "외부 오디오 트랙 불러오기…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "현재 EQ를 프리셋으로 저장…";
+"sidebar.rename_eq" = "현재 EQ 프리셋 이름 변경…";
+"sidebar.remove_eq" = "현재 EQ 프리셋 삭제";
+"sidebar.manual_eq" = "수동";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "자막 열기…";
+"sidebar.search_online" = "온라인 검색…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "서체";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "외곽선";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "자막 효과를 적용하면 ASS 자막이 잘 표시되지 않을 수도 있으며, 일부 설정은 자막 유형에 따라 사용할 수 없을 수도 있습니다.";
+
+"sidebar.add_file" = "파일 추가…";
+"sidebar.add_url" = "URL 추가…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

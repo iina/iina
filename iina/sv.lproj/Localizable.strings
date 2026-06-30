@@ -13,9 +13,12 @@
 "general.logout" = "Logga ut";
 "general.ok" = "OK";
 "general.cancel" = "Avbryt";
+"general.done" = "Klar";
 "general.username" = "Användarnamn";
 "general.password" = "Lösenord";
 "general.na" = "N/A";
+"general.no_result" = "Inga resultat";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Värdet finns redan.";
@@ -38,7 +41,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
 "main.opening_stream" = "Öppnar ström…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Söker…";
 "osc.precision" = "Precision";
 "osc.1s" = "1 sekund";
 "osc.100ms" = "100 millisekunder";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Avbruten";
 "osd.cannot_connect" = "Kan inte ansluta";
 "osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "La till filter: %@";
 "osd.filter_removed" = "Tog bort filter";
 "osd.file_loop" = "Repetera enstaka fil";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Inställningar";
 "preference.general" = "Allmänt";
-"preference.ui" = "Gränssnitt";
-"preference.video_audio" = "Ljud/video";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Ljud";
 "preference.subtitle" = "Undertext";
 "preference.network" = "Nätverk";
 "preference.control" = "Kontroll";
@@ -166,7 +174,7 @@
 
 "preference.sub_override_level.no" = "nej";
 "preference.sub_override_level.force" = "tvinga";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.scale" = "skala";
 "preference.sub_override_level.strip" = "avlägsna";
 "preference.sub_override_level.yes" = "ja";
 
@@ -221,7 +229,7 @@
 "menu.crop_custom" = "Anpassad…";
 "menu.find_online_sub" = "Hitta undertexter online från %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
+"menu.manage_plugins" = "Hantera plugins…";
 "menu.developer_tool" = "Utvecklarverktyg";
 "menu.more_plugin" = "Mer…";
 "menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Vänligen ange en filtersträng i formatet för mpv:s vf- eller af-kommando.";
 
 "alert.keybinding_config.error" = "Fel vid tolkning av konfigurationfilen \"%@\" för snabbtangenter! Återgår till snabbtangentsinställningen IINA Förval. Vänligen kontrollera din konfiguration.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Kan ej läsa användardefinierade extra mpv-alternativ.";
 "alert.extra_option.empty" = "Nyckel eller värde får ej vara tomt!";
-"alert.extra_option.error" = "Fel vid inställning av tillval --%@=%@ med returvärde %d. Vänligen kontrollera dina extra tillvalsinställningar i Inställningar > Avancerat.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Fel vid inställning av konfigurationskatalog \"%@\".";
 
 "alert.playlist.error_deleting" = "Fel vid radering: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Radera uppspelningshistorik";
 "alert.delete_history.message" = "Är du säker på att du vill radera valda objekt?";
+"alert.delete_all_history.title" = "Rensa uppspelningshistorik";
+"alert.delete_all_history.message" = "Är du säker på att du vill radera all uppspelningshistorik?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Du är på väg att aktivera ett videofilter, men det kan hända att din nuvarade hårdvaruavkodare inte stöder videofilter väl. Du kan antingen stänga av hårdvaruavkodning eller byta till Auto(Kopiera), vilket kommer att använda dubbla mängden minne.\nDu må behöva upprepa den föregående åtgärden (t.ex. att ange beskärning) för att få det att fungera.";
 "alert.filter_hwdec.abort" = "Avbryt";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Återställ dolda varningar";
 "alert.restore_alerts.message" = "Är du säker på att du vill återställa dolda varningar?";
+
+"alert.cleared" = "Rensat.";
+"alert.restored" = "Återställt.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Inget att öppna.";
 
@@ -356,14 +375,16 @@
 "alert.plugin_update_found.message" = "Den senaste versionen är %@. Du har %@. Vill du uppdatera?";
 "alert.plugin_permission" = "Detta tillägget kräver följande behörigheter. Vänligen granska dem innan du fortsätter.";
 "alert.plugin_permission_added" = "Denna uppdateringen kräver ytterligare behörigheter. Vänligen granska dem innan du fortsätter.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "Totalt %@";
 "playlist.total_length_with_selected" = "%@ av %@ markerade";
 "playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.filename_ascending" = "Filnamn stigande";
+"playlist.sorting.filename_descending" = "Filnamn fallande";
+"playlist.sorting.path_ascending" = "Filsökväg stigande";
+"playlist.sorting.path_descending" = "Filsökväg fallande";
 "pl_menu.title_multi" = "%d objekt";
 "pl_menu.play_next" = "Spela nästa";
 "pl_menu.play_in_new_window" = "Spela upp i nytt fönster";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Öppna i webbläsare";
 "pl_menu.copy_url" = "Kopiera URL";
 "pl_menu.copy_url_multi" = "Kopiera URL:er";
+"pl_menu.playback" = "Uppspelning";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plugin";
+"pl_menu.playlist" = "Spellista";
 
 "keymapping.title" = "Kortkommando";
 "keymapping.message" = "Tryck på valfri tangent för att fånga.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Välj undertextspår";
 "osc_toolbar.screenshot" = "Ta en skärmdump";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Svävande";
+"osc_pos.top" = "Topp";
+"osc_pos.bottom" = "Botten";
 
 "mini_player.album_art" = "Växla skivomslag";
 "mini_player.loop" = "Upprepa";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA kan inte ladda detta tillägget. Det kanske är i fel format.";
 "plugin.check_for_updates" = "Sök efter uppdateringar";
 "plugin.updating" = "Laddar ner uppdateringen…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Loggvisare";
+"logwindow.time" = "Tid";
+"logwindow.subsystem" = "Subsystem";
+"logwindow.message" = "Meddelande";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Spara";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Kopiera";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Uppspelningshistorik";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Förlopp";
+"history_window.col.played_at" = "Spelad vid";
+"history_window.menu.play" = "Spela upp";
+"history_window.menu.play_new_window" = "Spela upp i nytt fönster";
+"history_window.menu.show_in_finder" = "Visa i Finder";
+"history_window.menu.delete" = "Radera…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Rensa uppspelningshistorik";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Datum";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Sök i";
+"history_window.search.filename" = "Filnamn";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Inga tidigare sökningar";
+"history_window.search.recents_title" = "Senaste sökningar";
+"history_window.search.clear_recents" = "Rensa senaste";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Ljud";
+"sidebar.sub" = "Undertexter";
+"sidebar.plugins" = "Tillägg";
+"sidebar.playlist" = "Spellista";
+"sidebar.chapters" = "Kapitel";
+
+"sidebar.aspect_ratio" = "Bildförhållande";
+"sidebar.crop" = "Beskär";
+"sidebar.rotation" = "Rotation";
+"sidebar.speed" = "Hastighet";
+
+"sidebar.brightness" = "Ljusstyrka";
+"sidebar.contrast" = "Kontrast";
+"sidebar.saturation" = "Mättnad";
+"sidebar.gamma" = "Gammakorrigering";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Läs in externt ljudspår…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Save the current EQ as a preset…";
+"sidebar.rename_eq" = "Rename the current EQ preset…";
+"sidebar.remove_eq" = "Remove the current EQ preset";
+"sidebar.manual_eq" = "Manuell";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Läs in undertext…";
+"sidebar.search_online" = "Sök online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Typsnitt";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Kant";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Stilalternativ för undertexter kan störa ASS-rendering, och vissa kommer att avaktiveras beroende på undertexttyp.";
+
+"sidebar.add_file" = "Lägg till fil…";
+"sidebar.add_url" = "Lägg till URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

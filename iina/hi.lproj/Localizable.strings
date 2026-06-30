@@ -13,9 +13,12 @@
 "general.logout" = "लोग आउट";
 "general.ok" = "ठीक";
 "general.cancel" = "रद्द";
+"general.done" = "ठीक है";
 "general.username" = "उपयोगकर्ता नाम";
 "general.password" = "पारण शब्द";
 "general.na" = "N/A";
+"general.no_result" = "कोई परिणाम नही";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "मान रिक्त नहीं हो सकता ।";
 "input.already_exists" = "वैल्यू पहले से मौजूद है|";
@@ -137,6 +140,9 @@
 "osd.canceled" = "रद्द";
 "osd.cannot_connect" = "Cannot connect";
 "osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "जोड़ा गया फ़िल्टर: %@";
 "osd.filter_removed" = "फ़िल्टर हटाया गया";
 "osd.file_loop" = "Loop Single File";
@@ -145,8 +151,10 @@
 
 "preference.title" = "पसंद";
 "preference.general" = "सामान्य";
-"preference.ui" = "यूआई";
-"preference.video_audio" = "वीडियो/ऑडियो";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "वीडियो";
+"preference.audio" = "ऑडियो";
 "preference.subtitle" = "उपशीर्षक";
 "preference.network" = "नेटवर्क";
 "preference.control" = "नियंत्रण";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "कृपया mpv के vf या af कमांड के प्रारूप में एक फिल्टर स्ट्रिंग दर्ज करें।";
 
 "alert.keybinding_config.error" = "कीबाइंडिंग कॉन्फ़िगरेशन फ़ाइल पार्स करने में त्रुटि \"%@\"! IINA डिफ़ॉल्ट कीबाइंडिंग सेटिंग में गिरावट। कृपया अपना कॉन्फ़िगरेशन जांचें।";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "अतिरिक्त परिभाषित एमपीवी विकल्पों को उपयोगकर्ता पढ़ नहीं सकता।";
 "alert.extra_option.empty" = "कुंजी या मान रिक्त नहीं हो सकता!";
-"alert.extra_option.error" = "रिटर्न सेटिंग %d के साथ विकल्प --%@=%@ को सेट करने में त्रुटि। कृपया वरीयता> उन्नत में अपनी अतिरिक्त विकल्प सेटिंग्स की जाँच करें।";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "कॉन्फ़िगरेशन निर्देशिका को सेट करने में त्रुटि \"%@\".";
 
 "alert.playlist.error_deleting" = "हटाने में त्रुटि: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "प्लेबैक इतिहास हटाएं";
 "alert.delete_history.message" = "क्या आप चयनित प्रविष्टियों को हटाना सुनिश्चित करते हैं?";
+"alert.delete_all_history.title" = "प्लेबैक इतिहास मिटा दें";
+"alert.delete_all_history.message" = "क्या आप सभी प्लेबैक इतिहास हटाना चाहते हैं?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "आप एक वीडियो फ़्लिटर लागू करने वाले हैं। हालाँकि, आपका वर्तमान हार्डवेयर डिकोडर अच्छी तरह से वीडियो फिल्टर का समर्थन नहीं कर सकता है। आप या तो हार्डवेयर डिकोडिंग को अक्षम कर सकते हैं या ऑटो (कॉपी) पर स्विच कर सकते हैं, जो मेमोरी का दोगुना उपभोग करेगा।\nआपको इसे काम करने के लिए पिछला ऑपरेशन (जैसे फसल सेट करना) दोहराना पड़ सकता है।";
 "alert.filter_hwdec.abort" = "निरस्त करें";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
 "alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
+"alert.cleared" = "साफ़ किया गया।";
+"alert.restored" = "Restored.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "कुछ भी नहीं खोलने के लिए।";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
 "alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "कुल %@";
 "playlist.total_length_with_selected" = "%@ में से %@ का चयन किया गया ";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "ब्राउज़र में खोलें";
 "pl_menu.copy_url" = "यूआरएल कॉपी करें";
 "pl_menu.copy_url_multi" = "सारे यूआरएल कॉपी करें";
+"pl_menu.playback" = "प्लेबैक";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plugin";
+"pl_menu.playlist" = "प्लेलिस्ट";
 
 "keymapping.title" = "कुंजी मानचित्रण";
 "keymapping.message" = "रिकॉर्ड करने के लिए कोई भी कुंजी दबाएँ।";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "उपशीर्षक ट्रैक चुनें";
 "osc_toolbar.screenshot" = "Take a screenshot";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "तैरता";
+"osc_pos.top" = "टॉप";
+"osc_pos.bottom" = "तल";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "अद्यतन के लिए जाँच";
 "plugin.updating" = "Downloading update…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log Viewer";
+"logwindow.time" = "Time";
+"logwindow.subsystem" = "Subsystem";
+"logwindow.message" = "Message";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "सहेजें";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "कॉपी";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "प्लेबैक इतिहास";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "प्रगति";
+"history_window.col.played_at" = "पर खेला गया";
+"history_window.menu.play" = "चलाएं";
+"history_window.menu.play_new_window" = "नई विंडो में खेलते हैं";
+"history_window.menu.show_in_finder" = "खोजक में पता चलता है";
+"history_window.menu.delete" = "हटाना…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "प्लेबैक इतिहास मिटा दें";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "दिनांक";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "की खोज में";
+"history_window.search.filename" = "फ़ाइल का नाम";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "हाल की कोई खोज नहीं";
+"history_window.search.recents_title" = "हाल की खोजें";
+"history_window.search.clear_recents" = "साफ़ करें";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "वीडियो";
+"sidebar.audio" = "ऑडियो";
+"sidebar.sub" = "उपशीर्षक";
+"sidebar.plugins" = "Plugins";
+"sidebar.playlist" = "प्लेलिस्ट";
+"sidebar.chapters" = "अध्याय";
+
+"sidebar.aspect_ratio" = "आस्पेक्ट अनुपात";
+"sidebar.crop" = "क्रॉप";
+"sidebar.rotation" = "घुमाना";
+"sidebar.speed" = "गति";
+
+"sidebar.brightness" = "चमक";
+"sidebar.contrast" = "कन्ट्रास्ट";
+"sidebar.saturation" = "संतृप्ति";
+"sidebar.gamma" = "गामा";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "बाहरी ऑडियो ट्रैक लोड करें…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Save the current EQ as a preset…";
+"sidebar.rename_eq" = "Rename the current EQ preset…";
+"sidebar.remove_eq" = "Remove the current EQ preset";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "लोड उपशीर्षक…";
+"sidebar.search_online" = "ऑनलाइन खोजें…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "फ़ॉन्ट";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "सीमा";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "उपशीर्षक शैली के विकल्प ASS प्रतिपादन को तोड़ सकते हैं, और उनमें से कुछ उपशीर्षक प्रकार के आधार पर अक्षम हो जाएंगे।";
+
+"sidebar.add_file" = "फाइल जोडें…";
+"sidebar.add_url" = "यू आर एल जोड़िये…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

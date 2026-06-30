@@ -13,9 +13,12 @@
 "general.logout" = "Αποσύνδεση";
 "general.ok" = "ΟΚ";
 "general.cancel" = "Άκυρο";
+"general.done" = "Τέλος";
 "general.username" = "Όνομα Χρήστη";
 "general.password" = "Κωδικός";
 "general.na" = "N/A";
+"general.no_result" = "No Result";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Η τιμή δε μπορεί να είναι κενή.";
 "input.already_exists" = "Η τιμή υπάρχει ήδη.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Ακυρώθηκε";
 "osd.cannot_connect" = "Cannot connect";
 "osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Προστέθηκε Φίλτρο: %@";
 "osd.filter_removed" = "Φίλτρο Αφαιρέθηκε";
 "osd.file_loop" = "Loop Single File";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Προτιμήσεις";
 "preference.general" = "Γενικά";
-"preference.ui" = "Περιβάλλον Χρήστη";
-"preference.video_audio" = "Βίντεο/Ήχος";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Audio";
 "preference.subtitle" = "Υπότιτλοι";
 "preference.network" = "Δίκτυο";
 "preference.control" = "Έλεγχος";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Παρακαλώ εισάγετε μια συμβολοσειρά φίλτρου στην μορφή εντολής mpv, ή vf, ή af.";
 
 "alert.keybinding_config.error" = "Σφάλμα ανάλυσης του αρχείου ρυθμίσεων συντομεύσεων πληκτρολογίου \"%@\"! Επιστροφή στην προεπιλεγμένη ρύθμιση συντομεύσεων πληκτρολογίου του IINA. Παρακαλώ ελέγξτε τις ρυθμίσεις σας.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Αδυναμία ανάγνωσης επιλογών mpv του χρήστη.";
 "alert.extra_option.empty" = "Το πεδίο δεν μπορεί να είναι κενό!";
-"alert.extra_option.error" = "Σφάλμα ρύθμισης --%@=%@ με τιμή επιστροφής %d. Παρακαλώ ελέγξτε τις επιπλέον ρυθμίσεις σας στις Προτιμήσεις > Προηγμένα.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Αδυναμία ορισμού φακέλου ρυθμίσεων \"%@\".";
 
 "alert.playlist.error_deleting" = "Σφάλμα κατά τη διαγραφή: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Διαγραφή Ιστορικού Αναπαραγωγής";
 "alert.delete_history.message" = "Είστε σίγουροι ότι θέλετε να διαγράψετε τις επιλεγμένες καταχωρήσεις;";
+"alert.delete_all_history.title" = "Εκκαθάριση Ιστορικού Αναπαραγωγής";
+"alert.delete_all_history.message" = "Θέλετε σίγουρα να διαγράψετε όλο το ιστορικό αναπαραγωγής;";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Πρόκειται να εμφαρμόσετε ένα φίλτρο βίντεο. Ωστόσο, ο τρέχων αποκωδικοποιητής υλικού σας ενδέχεται να μην υποστηρίζει σωστά τα φίλτρα βίντεο. Μπορείτε είτε να απενεργοποιήσετε την αποκωδικοποίηση υλικού, ή να μεταβείτε σε λειτουργία Αυτόματο(Αντιγραφή), κάτι που καταναλώνει διπλάσιο χώρο μνήμης.\nΜπορεί να χρειαστεί να επαναλάβετε προηγούμενες βήματα (όπως ρύθμισης της περικοπής) για να το κάνετε να λειτουργήσει.";
 "alert.filter_hwdec.abort" = "Απόρριψη";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
 "alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
+"alert.cleared" = "Εκκαθαρισμένο.";
+"alert.restored" = "Αποκαταστημένο.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Δεν υπάρχει κάτι για άνοιγμα.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
 "alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Open in Browser";
 "pl_menu.copy_url" = "Αντιγραφή διεύθυνσης URL";
 "pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.playback" = "Αναπαραγωγή";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Πρόσθετο";
+"pl_menu.playlist" = "Λίστα Αναπαραγωγής";
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Choose subtitle track";
 "osc_toolbar.screenshot" = "Take a screenshot";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Αιωρούμενο";
+"osc_pos.top" = "Top";
+"osc_pos.bottom" = "Bottom";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log Viewer";
+"logwindow.time" = "Time";
+"logwindow.subsystem" = "Subsystem";
+"logwindow.message" = "Message";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Αποθήκευση";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Αντιγραφή";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Ιστορικό Αναπαραγωγής";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Πρόοδος";
+"history_window.col.played_at" = "Παίχτηκε στις";
+"history_window.menu.play" = "Αναπαραγωγή";
+"history_window.menu.play_new_window" = "Αναπαραγωγή σε Νέο Παράθυρο";
+"history_window.menu.show_in_finder" = "Εμφάνιση στον Finder";
+"history_window.menu.delete" = "Διαγραφή…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Εκκαθάριση Ιστορικού Αναπαραγωγής";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Ημερομηνία";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Αναζήτηση Σε";
+"history_window.search.filename" = "Όνομα Αρχείου";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Δεν υπάρχουν Πρόσφατες Αναζητήσεις";
+"history_window.search.recents_title" = "Πρόσφατες Αναζητήσεις";
+"history_window.search.clear_recents" = "Εκκαθάριση Προσφάτων";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Audio";
+"sidebar.sub" = "Υπότιτλοι";
+"sidebar.plugins" = "Πρόσθετα";
+"sidebar.playlist" = "Λίστα Αναπαραγωγής";
+"sidebar.chapters" = "Κεφάλαια";
+
+"sidebar.aspect_ratio" = "Αναλογία Διαστάσεων";
+"sidebar.crop" = "Περικοπή";
+"sidebar.rotation" = "Περιστροφή";
+"sidebar.speed" = "Ταχύτητα";
+
+"sidebar.brightness" = "Φωτεινότητα";
+"sidebar.contrast" = "Αντίθεση";
+"sidebar.saturation" = "Κορεσμός";
+"sidebar.gamma" = "Γάμμα";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Φόρτωση Εξωτερικού Κομματιού Ήχου…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Αποθήκευση του τρέχοντος EQ ως προκαθορισμένο…";
+"sidebar.rename_eq" = "Μετονομασία του τρέχοντος EQ προκαθορισμένου…";
+"sidebar.remove_eq" = "Αφαίρεση της τρέχουσας προεπιλογής EQ";
+"sidebar.manual_eq" = "Εγχειρίδιο";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Φόρτωση Υπότιτλου…";
+"sidebar.search_online" = "Εύρεση στο Διαδίκτυο…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Font";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Border";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Οι επιλογές στυλ υποτίτλων μπορεί να σπάσουν την απόδοση ASS και μερικές από αυτές θα απενεργοποιηθούν ανάλογα με τον τύπο υποτίτλων.";
+
+"sidebar.add_file" = "Add File…";
+"sidebar.add_url" = "Add URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

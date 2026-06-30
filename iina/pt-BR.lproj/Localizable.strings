@@ -13,12 +13,15 @@
 "general.logout" = "Encerrar sessão";
 "general.ok" = "OK";
 "general.cancel" = "Cancelar";
+"general.done" = "Pronto";
 "general.username" = "Usuário";
 "general.password" = "Senha";
-"general.na" = "N/A";
+"general.na" = "Não Disponível";
+"general.no_result" = "Nenhum resultado";
+"general.no_title" = "No Title";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "Valor não pode ser vazio.";
+"input.already_exists" = "Valor já existe.";
 
 // Guide Window
 "guide.highlights" = "Destaques";
@@ -28,7 +31,7 @@
 // Initial Window
 "initial.announcement" = "Você está usando uma versão %@ do IINA";
 "initial.beta.desc" = "Se quiser reverter para uma versão oficial, desmarque a opção \"receber atualizações beta\" em Configurações > Geral e instale uma versão estável do nosso <a href=\"https://iina.io\">site oficial</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
+"initial.nightly.desc" = "Compilações Nightly não são recomendadas para uso diário. Atualmente as compilações Nightly não suportam a atualização automática. Por favor, baixe manualmente versões mais recentes do nosso <a href=\"https://nightly.iina.io\">site Nightly</a>.";
 "initial.debug.desc" = "Compilações de depuração geralmente não são otimizadas para desempenho, então não são recomendadas para uso diário. Compilações de depuração não suportam atualização automática.";
 "initial.bug_report" = "Denuncie via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
 
@@ -38,7 +41,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregando… %d%%";
 "main.opening_stream" = "Abrindo stream…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Buscando…";
 "osc.precision" = "Precisão";
 "osc.1s" = "1 segundo";
 "osc.100ms" = "100 milissegundos";
@@ -52,42 +55,42 @@
 "quicksetting.deinterlace" = "Desentrelaçar";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Esconder";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.reset_speed" = "Redefinir velocidade para 1x";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
-"eq.preset.hip_hop" = "Hip Hop";
-"eq.preset.increase_bass" = "Increase Bass";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
+"eq.preset.flat" = "Plano";
+"eq.preset.acoustic" = "Acústico";
+"eq.preset.classical" = "Clássico";
+"eq.preset.dance" = "Dança";
+"eq.preset.deep" = "Profundo";
+"eq.preset.electronic" = "Eletrônico";
+"eq.preset.hip_hop" = "Hip-Hop";
+"eq.preset.increase_bass" = "Aumentar Grave";
+"eq.preset.increase_treble" = "Aumentar Agudo";
+"eq.preset.increase_vocal" = "Aumentar Vocal";
 "eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
+"eq.preset.latin" = "Latino";
 "eq.preset.loundness" = "Loundness";
 "eq.preset.lounge" = "Lounge";
 "eq.preset.piano" = "Piano";
 "eq.preset.pop" = "Pop";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.reduce_bass" = "Reduzir Graves";
+"eq.preset.reduce_treble" = "Reduzir Agudo";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Alto-falantes Pequenos";
+"eq.preset.spoken_word" = "Palavra Falada";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
-"alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.new_profile.title" = "Novo Perfil EQ";
+"alert.eq.new_profile.message" = "Por favor, insira um nome do perfil.";
+"alert.eq.rename.title" = "Renomear Perfil Atual";
+"alert.eq.rename.message" = "Por favor, insira um novo nome de perfil.";
 
 // OSDMessage.swift
 "osd.pause" = "Em Pausa";
 "osd.resume" = "Reproduzindo";
 "osd.volume" = "Volume: %@";
-"osd.speed" = "Speed: %@x";
+"osd.speed" = "Velocidade: %@x";
 "osd.aspect" = "Proporção: %@";
 "osd.crop" = "Cortar: %@";
 "osd.rotate" = "Rotacionar: %i°";
@@ -100,14 +103,14 @@
 "osd.sub_delay.later" = "Atraso de Legenda: %@s Atrasada";
 "osd.sub_delay.earlier" = "Atraso de Legenda: %@s Antecipada";
 "osd.subtitle_pos" = "Posição da Legenda: %@";
-"osd.sub_hidden" = "Subtitles Hidden";
-"osd.sub_visible" = "Subtitles Visible";
-"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
-"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
-"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
-"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
-"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.sub_hidden" = "Legendas Ocultas";
+"osd.sub_visible" = "Legendas Visíveis";
+"osd.sub_second_delay.nodelay" = "Atraso de Subtítulo Secundário: Sem Atraso";
+"osd.sub_second_delay.later" = "Atraso de Subtítulo Secundário: %@s Mais Tarde";
+"osd.sub_second_delay.earlier" = "Atraso de Subtítulo Secundário: %@s Anteriores";
+"osd.sub_second_hidden" = "Legendas Secundárias Ocultas";
+"osd.sub_second_pos" = "Posição do Subtítulo Secundário: %@";
+"osd.sub_second_visible" = "Legendas Secundárias Visíveis";
 "osd.mute" = "Sem Audio";
 "osd.unmute" = "Audio Ligado";
 "osd.screenshot" = "Imagem Capturada";
@@ -127,8 +130,8 @@
 "osd.find_online_sub" = "Buscando legendas online…";
 "osd.find_online_sub.source" = "de";
 "osd.sub_not_found" = "Nenhuma legenda encontrada";
-"osd.sub_found" = "%d subtitles found.";
-"osd.sub_downloading" = "Downloading %d subtitles";
+"osd.sub_found" = "%d legendas encontradas.";
+"osd.sub_downloading" = "Baixando %d legendas";
 "osd.sub_downloaded" = "Legenda baixada";
 "osd.sub_saved" = "Legenda salva";
 "osd.network_error" = "Erro de rede";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Cancelado";
 "osd.cannot_connect" = "Impossível conectar";
 "osd.timed_out" = "Tempo esgotado";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Filtro adicionado: %@";
 "osd.filter_removed" = "Filtro removido";
 "osd.file_loop" = "Repetir Arquivo Único";
@@ -146,7 +152,9 @@
 "preference.title" = "Preferencias";
 "preference.general" = "Geral";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Decodificador";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Vídeo";
+"preference.audio" = "Áudio";
 "preference.subtitle" = "Legendas";
 "preference.network" = "Rede";
 "preference.control" = "Controles";
@@ -164,29 +172,29 @@
 
 "preference.enable_adv_settings" = "Habilitar configurações avançadas";
 
-"preference.sub_override_level.no" = "no";
+"preference.sub_override_level.no" = "não";
 "preference.sub_override_level.force" = "forçar";
-"preference.sub_override_level.scale" = "scale";
+"preference.sub_override_level.scale" = "escala";
 "preference.sub_override_level.strip" = "cortar";
 "preference.sub_override_level.yes" = "sim";
 
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
+"preference.sub_override_level.descriptive_text.no" = "Renderizar legendas como especificado pelos scripts da legenda, sem substituições.";
+"preference.sub_override_level.descriptive_text.force" = "Aplicar estilos em todas as legendas.";
+"preference.sub_override_level.descriptive_text.scale" = "Aplicar a configuração de escala, além das configurações de estilo nesta seção.";
+"preference.sub_override_level.descriptive_text.strip" = "Remova radicalmente todas as tags e estilos ASS da legenda.";
 "preference.sub_override_level.descriptive_text.yes" = "Aplicar todas as configurações de estilo nesta seção.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+"preference.ytdl_plugin_not_installed" = "Instale o plugin de Mídia On-line a partir de \"Plugins > Instalar a partir do GitHub\" para desfrutar de recursos avançados como o vídeo e o download automático de atualizações yt-dlp.";
+"preference.ytdl_plugin_installed" = "O suporte integrado ao youtube-dl está desativado porque você tem o plugin de mídia Online instalado.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Mudo)";
 "menu.audio_delay" = "Atraso de Áudio: %@s";
 "menu.sub_delay" = "Atraso de Legenda: %@s";
-"menu.sub_hide" = "Ocultar legenda";
-"menu.sub_show" = "Show Subtitles";
-"menu.sub_second_hide" = "Hide Secondary Subtitles";
-"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.sub_hide" = "Ocultar Legendas";
+"menu.sub_show" = "Mostrar Legendas";
+"menu.sub_second_hide" = "Ocultar Legendas Secundárias";
+"menu.sub_second_show" = "Mostrar Legendas Secundárias";
 "menu.fullscreen" = "Entrar em Tela Cheia";
 "menu.exit_fullscreen" = "Sair da Tela Cheia";
 "menu.pip" = "Entrar em Picture-in-Picture";
@@ -195,11 +203,11 @@
 "menu.exit_mini_player" = "Sair Modo Música";
 "menu.pause" = "Pausar";
 "menu.resume" = "Reproduzir";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "Velocidade: %@x";
 "menu.chapters" = "Mostrar Capitulos";
 "menu.hide_chapters" = "Ocultar Painel de Capítulos";
-"menu.playlist" = "Mostrar painel de playlist";
-"menu.hide_playlist" = "Ocultar Painel de Playlist";
+"menu.playlist" = "Mostrar Painel de Lista de Reprodução";
+"menu.hide_playlist" = "Ocultar Painel de Lista de Reprodução";
 "menu.video" = "Mostrar Painel de Vídeo";
 "menu.hide_video" = "Ocultar Painel de Vídeo";
 "menu.audio" = "Mostrar Painel de Áudio";
@@ -209,8 +217,8 @@
 
 "menu.seek_forward" = "Ir adiante %@s";
 "menu.seek_backward" = "Ir pra trás %@s";
-"menu.speed_up" = "Speed Up by %@x";
-"menu.speed_down" = "Speed Down by %@x";
+"menu.speed_up" = "Aumentar Velocidade em %@x";
+"menu.speed_down" = "Diminuir Velocidade em %@x";
 "menu.volume_up" = "Volume + %@%%";
 "menu.volume_down" = "Volume - %@%%";
 "menu.audio_delay_up" = "Atraso de Áudio + %@s";
@@ -221,13 +229,13 @@
 "menu.crop_custom" = "Outro..";
 "menu.find_online_sub" = "Encontrar Legendas on-line em %@";
 
-"menu.manage_plugins" = "Manage Plugins…";
-"menu.developer_tool" = "Developer Tool";
-"menu.more_plugin" = "More…";
-"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
-"menu.reload_plugins" = "Reload All Plugins";
-"menu.show_plugins_panel" = "Show Plugins Panel";
-"menu.hide_plugins_panel" = "Hide Plugins Panel";
+"menu.manage_plugins" = "Gerenciar Plugins…";
+"menu.developer_tool" = "Ferramenta de Desenvolvedor";
+"menu.more_plugin" = "Mais…";
+"menu.conflicting_shortcuts" = "Atalhos de teclado conflitantes…";
+"menu.reload_plugins" = "Recarregar Todos os Plugins";
+"menu.show_plugins_panel" = "Mostrar Painel de Plugins";
+"menu.hide_plugins_panel" = "Ocultar Painel de Plugins";
 
 "track.audio" = "Áudio";
 "track.none" = "<None>";
@@ -248,7 +256,7 @@
 "alert.mpv_error" = "Erro interno %@ (%@) ao ajustar a opção %@.";
 
 "alert.unsupported_audio" = "Audio externo não suportado.";
-"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_video" = "Arquivo de vídeo externo não suportado.";
 "alert.unsupported_sub" = "Legenda externa não suportada.";
 "alert.unsupported_url" = "URL não suportada.";
 "alert.wrong_url_format" = "Formato errado de URL.";
@@ -259,28 +267,31 @@
 "alert.error_saving_file" = "Erro ocorreu ao salvar %@: %@";
 "alert.error_deleting_file" = "Não consigo apagar o arquivo.";
 
-"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+"alert.target_peak.bad_value" = "O valor \"%@\" é inválido.\nPor favor, forneça um valor entre 10 e 10000, ou 0.";
 
 "alert.config.new.title" = "Nova configuração";
 "alert.config.new.message" = "Escolha um nome para a nova configuração.";
 "alert.config.duplicate.title" = "Configuração duplicada";
 "alert.config.duplicate.message" = "Por favor, escolha um nome para o arquivo de configuração duplicado.";
 "alert.config.file_existing.title" = "Arquivo já existe";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "Já existe um arquivo de configuração com o mesmo nome de arquivo. Escolha OK para mostrar o arquivo no Finder.";
 "alert.config.cannot_create" = "Não é possível criar arquivo de configuração!\n%@";
 "alert.config.cannot_write" = "Não é possível escrever no arquivo de configuração!";
-"alert.config.rename.title" = "Rename Input Configuration";
-"alert.config.rename.message" = "Please enter the new name for the configuration.";
+"alert.config.rename.title" = "Renomear Configuração de Entrada";
+"alert.config.rename.message" = "Por favor, insira o novo nome para a configuração.";
 
 "alert.filter.incorrect" = "Erro ao ajustar os filtros. Verifique os parâmetros.";
 "alert.add_filter.title" = "Novo Filtro";
 "alert.add_filter.message" = "Por favor, digite uma string de filtro no formato de comando vf ou af de mpv.";
 
 "alert.keybinding_config.error" = "Erro ao ler o arquivo de configurações de teclas \"%@\"! Usarei o padrão de teclas do INNA. Verifique sua configuração.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Não é possível ler opções mpv extras definidas pelo usuário.";
 "alert.extra_option.empty" = "Chave ou valor não pode ser vazio!";
-"alert.extra_option.error" = "Erro ao ajustar opção --%@=%@ que retornou %d. Verifique seus ajustes extras em Preferencias > Avançado.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Erro ao ajustar o diretório de configuração \"%@\".";
 
 "alert.playlist.error_deleting" = "Erro ao deletar: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Deletar histórico de reproduções";
 "alert.delete_history.message" = "Tem certeza que deseja deletar?";
+"alert.delete_all_history.title" = "Limpar histórico de reprodução";
+"alert.delete_all_history.message" = "Tem certeza que deseja excluir todo o histórico de reprodução?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Você está prestes a aplicar um filtro de vídeo. No entanto, seu decodificador de hardware atual pode não suportar bem filtros de vídeo. Você pode desabilitar a decodificação por hardware ou usar Auto(Copiar), que vai consumir o dobro de memória.\nVocê pode precisar repetir a ultima operação (por exemplo, ajustar o corte) para fazê-la funcionar.";
 "alert.filter_hwdec.abort" = "Abortar";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Restaurar Alertas Suprimidos";
 "alert.restore_alerts.message" = "Tem certeza que deseja restaurar os alertas suprimidos?";
+
+"alert.cleared" = "Limpo.";
+"alert.restored" = "Restaurado.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Nada para abrir.";
 
@@ -356,14 +375,16 @@
 "alert.plugin_update_found.message" = "A versão mais recente é %@. Você tem %@. Gostaria de atualizar?";
 "alert.plugin_permission" = "Este plugin requer as seguintes permissões. Por favor, revise-as antes de prosseguir.";
 "alert.plugin_permission_added" = "Esta atualização requer permissões adicionais. Por favor, revise-as antes de prosseguir.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ do total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Classificar";
+"playlist.sorting.filename_ascending" = "Nome do Arquivo em Ordem Crescente";
+"playlist.sorting.filename_descending" = "Nome do Arquivo em Ordem Decrescente";
+"playlist.sorting.path_ascending" = "Caminho do Arquivo em Ordem Crescente";
+"playlist.sorting.path_descending" = "Caminho do Arquivo em Ordem Decrescente";
 "pl_menu.title_multi" = "%d Itens";
 "pl_menu.play_next" = "Tocar próximo";
 "pl_menu.play_in_new_window" = "Tocar em nova janela";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Abrir no navegador";
 "pl_menu.copy_url" = "Copiar URL";
 "pl_menu.copy_url_multi" = "Copiar URLs";
+"pl_menu.playback" = "Reprodução";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Extensão";
+"pl_menu.playlist" = "Lista de Reprodução";
 
 "keymapping.title" = "Mapeamento de teclas";
 "keymapping.message" = "Pressione algo para iniciar gravação.";
@@ -394,9 +421,9 @@
 "hwdec.auto" = "Está Habilitado o decodificador de Hardware. No entanto, a maioria dos filtros não deve funcionar bem.";
 "hwdec.auto-copy" = "Está habilitada a decodificação por hardware. Ela consumirá o dobro da memória, mas funciona com filtros de vídeo.";
 
-"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
-"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"gaplessAudio.no" = "A reprodução de arquivos de áudio consecutivos pode resultar em silêncio ou interrupção no momento da mudança de arquivo.";
+"gaplessAudio.weak" = "Se o formato de áudio da saída do decodificador for alterado, o dispositivo de áudio é fechado e reaberto, interrompendo a reprodução sem interrupções.";
+"gaplessAudio.yes" = "O dispositivo de áudio é aberto usando os parâmetros escolhidos para o primeiro arquivo reproduzido e, em seguida, permanece aberto para reprodução contínua. Os arquivos seguintes podem ser mostrados novamente.";
 
 "subencoding.auto" = "Auto detectar";
 
@@ -407,7 +434,12 @@
 "osc_toolbar.music_mode" = "Entre no modo de música";
 "osc_toolbar.sub_track" = "Escolha a faixa de legendas";
 "osc_toolbar.screenshot" = "Capturar tela";
-"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.plugins" = "Mostrar painel de plugins";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Flutuante";
+"osc_pos.top" = "Topo";
+"osc_pos.bottom" = "Embaixo";
 
 "mini_player.album_art" = "Alterar imagem do álbum";
 "mini_player.loop" = "Repetir";
@@ -418,7 +450,7 @@
 "mini_player.volume" = "Volume";
 "mini_player.close" = "Fechar modo música";
 "mini_player.back" = "Retornar ao modo vídeo";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Ordenar a lista de reprodução";
 
 // Touch bar
 
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA não pode carregar este plugin. Ele pode estar no formato errado.";
 "plugin.check_for_updates" = "Buscar por atualizações";
 "plugin.updating" = "Baixando a atualização…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Visualizador de log";
+"logwindow.time" = "Tempo";
+"logwindow.subsystem" = "Subsistema";
+"logwindow.message" = "Mensagem";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Salvar";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Copiar";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Histórico de Reprodução";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Progresso";
+"history_window.col.played_at" = "Reproduzido em";
+"history_window.menu.play" = "Tocar";
+"history_window.menu.play_new_window" = "Tocar em nova Janela";
+"history_window.menu.show_in_finder" = "Mostrar no Finder";
+"history_window.menu.delete" = "Deletar…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Limpar histórico de reprodução";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Data";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Procurar em";
+"history_window.search.filename" = "Nome";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Nenhuma busca recente";
+"history_window.search.recents_title" = "Buscas Recentes";
+"history_window.search.clear_recents" = "Limpar Recentes";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Vídeo";
+"sidebar.audio" = "Áudio";
+"sidebar.sub" = "Legendas";
+"sidebar.plugins" = "Plugins";
+"sidebar.playlist" = "Lista de Reprodução";
+"sidebar.chapters" = "Capítulos";
+
+"sidebar.aspect_ratio" = "Proporção";
+"sidebar.crop" = "Cortar";
+"sidebar.rotation" = "Rotação";
+"sidebar.speed" = "Velocidade";
+
+"sidebar.brightness" = "Brilho";
+"sidebar.contrast" = "Contraste";
+"sidebar.saturation" = "Cor";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Carregar Faixa de Áudio Externa…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Salvar o EQ atual como uma predefinição…";
+"sidebar.rename_eq" = "Renomear a predefinição de EQ atual…";
+"sidebar.remove_eq" = "Remover a predefinição de EQ atual";
+"sidebar.manual_eq" = "Renomear o EQ atual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Carregar Legenda…";
+"sidebar.search_online" = "Buscar Online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Fonte";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Borda";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Estilizar legendas pode quabrar a renderização ASS, porem alguns estilos talvez sejam desabilitados dependendo da legenda.";
+
+"sidebar.add_file" = "Adicionar Arquivo…";
+"sidebar.add_url" = "Adicionar URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

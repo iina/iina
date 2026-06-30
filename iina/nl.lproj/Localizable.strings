@@ -13,9 +13,12 @@
 "general.logout" = "Log uit";
 "general.ok" = "Oke";
 "general.cancel" = "Annuleer";
+"general.done" = "Gereed";
 "general.username" = "Gebruikersnaam";
 "general.password" = "Wachtwoord";
 "general.na" = "N/A";
+"general.no_result" = "Geen resultaat";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Waarde kan niet leeg zijn.";
 "input.already_exists" = "Waarde bestaat al.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Geannuleerd";
 "osd.cannot_connect" = "Kan niet verbinden";
 "osd.timed_out" = "Time-out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Filter toegevoegd: %@";
 "osd.filter_removed" = "Filter verwijderd";
 "osd.file_loop" = "Enkel bestand herhalen";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Voorkeuren";
 "preference.general" = "Algemeen";
-"preference.ui" = "Weergave";
-"preference.video_audio" = "Video/Audio";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Audio";
 "preference.subtitle" = "Ondertiteling";
 "preference.network" = "Netwerk";
 "preference.control" = "Bediening";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Voer een filtertekst met de structuur van mpv's vf/af-commando's in.";
 
 "alert.keybinding_config.error" = "Fout bij het lezen van sneltoetsen-configuratiebestand \"%@\"! De IINA standaardinstellingen worden hersteld. Controleer je configuratie.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Kan de ingestelde mpv-opties niet lezen.";
 "alert.extra_option.empty" = "Naam en waarde kunnen niet leeg zijn.";
-"alert.extra_option.error" = "Fout bij het instellen van optie --%@=%@ met retourwaarde %d. Controleer de opties in Voorkeuren > Geavanceerd.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Fout bij het instellen van configuratiemap \"%@\".";
 
 "alert.playlist.error_deleting" = "Fout bij het verwijderen: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Verwijder afspeelgeschiedenis";
 "alert.delete_history.message" = "Weet je zeker dat je de geselecteerde onderdelen wilt verwijderen?";
+"alert.delete_all_history.title" = "Wis afspeelgeschiedenis";
+"alert.delete_all_history.message" = "Weet je zeker dat je de afspeelgeschiedenis wilt wissen?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Energiebesparing via hardware-acceleratie, je huidige instelling, is niet mogelijk met de gekozen videofilter. Wil je van afspeelmethode wisselen? Mogelijk moet je de filter daarna opnieuw toepassen.";
 "alert.filter_hwdec.abort" = "Annuleer";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Onderdrukte waarschuwingen herstellen";
 "alert.restore_alerts.message" = "Weet u zeker dat u onderdrukte meldingen wilt herstellen?";
+
+"alert.cleared" = "Geleegd.";
+"alert.restored" = "Hersteld.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Niets om te openen.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "De laatste versie is %@. Je hebt %@. Wil je updaten?";
 "alert.plugin_permission" = "Deze plugin vereist de volgende machtigingen. Controleer deze voordat u verdergaat.";
 "alert.plugin_permission_added" = "Deze update vereist extra machtigingen. Controleer ze voordat u verdergaat.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in totaal";
 "playlist.total_length_with_selected" = "%@ van %@ geselecteerd";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Open in browser";
 "pl_menu.copy_url" = "Kopieer URL";
 "pl_menu.copy_url_multi" = "Kopieer URLs";
+"pl_menu.playback" = "Afspelen";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plugin";
+"pl_menu.playlist" = "Afspeellijst";
 
 "keymapping.title" = "Sneltoetsen";
 "keymapping.message" = "Druk op een toets om de opname te starten.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Kies ondertiteling";
 "osc_toolbar.screenshot" = "Schermafdruk maken";
 "osc_toolbar.plugins" = "Plug-inspaneel weergeven";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Zwevend";
+"osc_pos.top" = "Boven";
+"osc_pos.bottom" = "Onder";
 
 "mini_player.album_art" = "Wijzig albumhoes";
 "mini_player.loop" = "Herhaal";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA kan deze plug-in niet laden. Deze kan in het verkeerde formaat geleverd zijn.";
 "plugin.check_for_updates" = "Zoek naar updates";
 "plugin.updating" = "Update downloaden…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log viewer";
+"logwindow.time" = "Tijd";
+"logwindow.subsystem" = "Subsysteem";
+"logwindow.message" = "Bericht";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Bewaar";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Kopieer";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Afspeelgeschiedenis";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Afspeelpositie";
+"history_window.col.played_at" = "Laatst afgespeeld";
+"history_window.menu.play" = "Speel";
+"history_window.menu.play_new_window" = "Speel af in nieuw venster";
+"history_window.menu.show_in_finder" = "Toon in Finder";
+"history_window.menu.delete" = "Verwijder…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Wis afspeelgeschiedenis";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Datum";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Zoek in";
+"history_window.search.filename" = "Bestand";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Geen recente zoekopdrachten";
+"history_window.search.recents_title" = "Recente zoekopdrachten";
+"history_window.search.clear_recents" = "Recente zoekopdrachten wissen";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Audio";
+"sidebar.sub" = "Ondertiteling";
+"sidebar.plugins" = "Plugins";
+"sidebar.playlist" = "Afspeellijst";
+"sidebar.chapters" = "Hoofdstukken";
+
+"sidebar.aspect_ratio" = "Beeldverhouding";
+"sidebar.crop" = "Bijsnijden";
+"sidebar.rotation" = "Roteer";
+"sidebar.speed" = "Snelheid";
+
+"sidebar.brightness" = "Helderheid";
+"sidebar.contrast" = "Contrast";
+"sidebar.saturation" = "Verzadiging";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Laad extern audiospoor…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "De huidige EQ opslaan als een voorinstelling…";
+"sidebar.rename_eq" = "Hernoem de huidige EQ voorinstelling…";
+"sidebar.remove_eq" = "Verwijder de huidige EQ voorinstelling";
+"sidebar.manual_eq" = "Handmatig";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Laad ondertiteling…";
+"sidebar.search_online" = "Zoek online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Lettertype";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Rand";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Stijlopties kunnen fouten opleveren bij de weergave van ASS-ondertiteling. Bij sommige soorten ondertiteling zullen enkele opties niet worden meegenomen.";
+
+"sidebar.add_file" = "Voeg bestand toe…";
+"sidebar.add_url" = "Voeg URL toe…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

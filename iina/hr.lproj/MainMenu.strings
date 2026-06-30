@@ -143,7 +143,7 @@
 "Fal-I4-PZk.title" = "Poglavlja";
 
 /* Class = "NSMenu"; title = "Playback"; ObjectID = "GEO-Iw-cKr"; */
-"GEO-Iw-cKr.title" = "Reproduciranje";
+"GEO-Iw-cKr.title" = "Reprodukcija";
 
 /* Class = "NSMenuItem"; title = "Audio Track"; ObjectID = "GF1-xB-KcA"; */
 "GF1-xB-KcA.title" = "Audiotraka";
@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Prikaži ispred svih prozora";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Spremljeni audiofiltri";
 
@@ -512,4 +518,4 @@
 "Qwb-26-zjX.title" = "Otvori URL …";
 
 /* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
-"kOx-hc-aQG.title" = "Release Highlights";
+"kOx-hc-aQG.title" = "Novosti o izdanju";

@@ -13,9 +13,12 @@
 "general.logout" = "Odhlásit se";
 "general.ok" = "OK";
 "general.cancel" = "Zrušit";
+"general.done" = "Hotovo";
 "general.username" = "Uživatel";
 "general.password" = "Heslo";
-"general.na" = "N/A";
+"general.na" = "Není k dispozici";
+"general.no_result" = "Žádný výsledek";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Název nemůže být prázdný.";
 "input.already_exists" = "Název již existuje.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Zrušeno";
 "osd.cannot_connect" = "Nelze se spojit";
 "osd.timed_out" = "Časový limit vypršel";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Přidán filtr: %@";
 "osd.filter_removed" = "Filtr odebrán";
 "osd.file_loop" = "Opakovat jeden soubor";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Nastavení";
 "preference.general" = "Obecné";
-"preference.ui" = "Uživatelské rozhraní";
-"preference.video_audio" = "Video/zvuk";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Zvuk";
 "preference.subtitle" = "Titulky";
 "preference.network" = "Síť";
 "preference.control" = "Ovládání";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Zadejte řetězec filtru ve formátu mpv příkazu vf nebo af.";
 
 "alert.keybinding_config.error" = "Chyba analýzy konfiguračního souboru klávesových zkratek „%@“! Vraťte se k výchozímu IINA nastavení klávesových zkratek. Zkontrolujte prosím vaši konfiguraci.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
 "alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
-"alert.extra_option.error" = "Při nastavování --%@=%@ se vyskytla chyba číslo %d. Zkontrolujte vaše nastavení dalších možností v Nastavení > Pokročilé.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Chyba při nastavování konfiguračního adresáře „%@“.";
 
 "alert.playlist.error_deleting" = "%@ nelze smazat";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Smazat historii přehrávání";
 "alert.delete_history.message" = "Opravdu chcete smazat zvolené záznamy?";
+"alert.delete_all_history.title" = "Smazat historii přehrávání";
+"alert.delete_all_history.message" = "Opravdu chcete smazat celou historii přehrávání?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Chystáte se použít video filtr, avšak váš současný hardware nemusí optimálně video filtry podporovat. Můžete buď vypnout hardwarové dekódování, nebo přepnout na automatické nastavení, které spotřebuje dvojnásobek paměti.\nMůže být nutné zopakovat předchozí krok (například, nastavení ořezu).";
 "alert.filter_hwdec.abort" = "Přerušit";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Obnovit potlačená upozornění";
 "alert.restore_alerts.message" = "Opravdu chcete obnovit potlačená upozornění?";
+
+"alert.cleared" = "Smazáno";
+"alert.restored" = "Obnoveno.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Žádný soubor k přehrání.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "Nejnovější dostupná verze k dispozici je %@. Nainstalována je %@. Přejete si nyní stáhnout aktualizaci?";
 "alert.plugin_permission" = "Tento plug-in vyžaduje následující oprávnění. Před pokračováním proveďte jejich kontrolu.";
 "alert.plugin_permission_added" = "Tato aktualizace vyžaduje další oprávnění. Před pokračováním proveďte jejich kontrolu.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ celkem";
 "playlist.total_length_with_selected" = "Vybráno %@ z %@";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Otevřít v prohlížeči";
 "pl_menu.copy_url" = "Kopírovat URL";
 "pl_menu.copy_url_multi" = "Kopírovat URL";
+"pl_menu.playback" = "Přehrávání";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plug-in";
+"pl_menu.playlist" = "Playlist";
 
 "keymapping.title" = "Klávesové zkratky";
 "keymapping.message" = "Pro záznam stiskněte jakoukoliv klávesu.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Vybrat stopu titulků";
 "osc_toolbar.screenshot" = "Zachytit snímek obrazovky";
 "osc_toolbar.plugins" = "Zobrazit panel plug-inů";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Plovoucí";
+"osc_pos.top" = "Nahoru";
+"osc_pos.bottom" = "Dolů";
 
 "mini_player.album_art" = "Přepnout zobrazení grafiky alba";
 "mini_player.loop" = "Opakovat";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA nemůže načíst tento plug-in. Může být v chybném formátu.";
 "plugin.check_for_updates" = "Vyhledávat aktualizace";
 "plugin.updating" = "Stahuje se aktualizace…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Prohlížeč protokolů";
+"logwindow.time" = "Čas";
+"logwindow.subsystem" = "Subsystém";
+"logwindow.message" = "Zpráva";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Uložit";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Kopírovat";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Historie přehrávání";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Pozice";
+"history_window.col.played_at" = "Přehráno";
+"history_window.menu.play" = "Přehrát";
+"history_window.menu.play_new_window" = "Přehrát v novém okně";
+"history_window.menu.show_in_finder" = "Zobrazit v aplikaci Finder";
+"history_window.menu.delete" = "Smazat…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Smazat historii přehrávání";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Data";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Prohledat:";
+"history_window.search.filename" = "Názvy souborů";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Žádná poslední hledání";
+"history_window.search.recents_title" = "Poslední hledání";
+"history_window.search.clear_recents" = "Vyprázdnit nabídku";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Zvuk";
+"sidebar.sub" = "Titulky";
+"sidebar.plugins" = "Plug-iny";
+"sidebar.playlist" = "Playlist";
+"sidebar.chapters" = "Kapitola";
+
+"sidebar.aspect_ratio" = "Poměr stran";
+"sidebar.crop" = "Oříznout";
+"sidebar.rotation" = "Otočit";
+"sidebar.speed" = "rychlost";
+
+"sidebar.brightness" = "jas";
+"sidebar.contrast" = "kontrast";
+"sidebar.saturation" = "sytost";
+"sidebar.gamma" = "gama korekci";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Načíst externí zvukovou stopu…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Uložit aktuální nastavení ekvalizéru…";
+"sidebar.rename_eq" = "Přejmenovat aktuální nastavení ekvalizéru…";
+"sidebar.remove_eq" = "Odstranit aktuální nastavení ekvalizéru";
+"sidebar.manual_eq" = "Manuální";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Načíst titulky…";
+"sidebar.search_online" = "Vyhledat online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Písmo";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Okraj";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Volby stylu titulků mohou porušit vykreslování ASS, některé z nich budou zakázány v závislosti na typu titulků.";
+
+"sidebar.add_file" = "Přidat soubor…";
+"sidebar.add_url" = "Přidat URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

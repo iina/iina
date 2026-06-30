@@ -13,9 +13,12 @@
 "general.logout" = "登出";
 "general.ok" = "確定";
 "general.cancel" = "取消";
+"general.done" = "完成";
 "general.username" = "用戶名";
 "general.password" = "密碼";
-"general.na" = "N/A";
+"general.na" = "不適用";
+"general.no_result" = "沒有結果";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "此項為必填項目。";
 "input.already_exists" = "此內容已經被其他項目使用。";
@@ -137,6 +140,9 @@
 "osd.canceled" = "已取消";
 "osd.cannot_connect" = "無法連接";
 "osd.timed_out" = "已逾時";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
 "osd.file_loop" = "循環播放單一檔案";
@@ -145,8 +151,10 @@
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
-"preference.ui" = "使用者介面";
-"preference.video_audio" = "視訊/音訊";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "視訊";
+"preference.audio" = "音訊";
 "preference.subtitle" = "字幕";
 "preference.network" = "網路";
 "preference.control" = "控制";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "請輸入符合 mpv 的 vf 或 af 格式的濾鏡指令";
 
 "alert.keybinding_config.error" = "剖析快速鍵設定檔「%@」時發生錯誤，即將使用 IINA 預設快速鍵設定檔替代。請檢查您的設定檔。";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "無法讀取使用者定義額外的 mpv 設定";
 "alert.extra_option.empty" = "Key 或 value 不能留空！";
-"alert.extra_option.error" = "無法設定 --%@=%@（返回值：%d）。請於「偏好設定 > 進階」中檢查您的額外選項設定。";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "設定設定檔案夾「%@」時發生錯誤";
 
 "alert.playlist.error_deleting" = "刪除 %@ 時發生錯誤";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "刪除播放記錄";
 "alert.delete_history.message" = "確定要刪除所選的播放記錄嗎？";
+"alert.delete_all_history.title" = "清除播放記錄";
+"alert.delete_all_history.message" = "確定要清除所有播放記錄嗎？";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "您正在新增視訊濾鏡。然而，目前的硬體解碼器無法完整支援視訊濾鏡。您可以停用硬體解碼，或使用支援「拷貝」的解碼器（將會佔用兩倍記憶體）。\n您可能需要重複上一個操作（例如裁切）才能看到效果。";
 "alert.filter_hwdec.abort" = "中止";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "復原已關閉的警告";
 "alert.restore_alerts.message" = "你確定想要復原這些關閉的警告嗎？";
+
+"alert.cleared" = "已清除。";
+"alert.restored" = "已恢復";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "沒有可打開的檔案。";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "最新版本是 %@，你的版本是 %@，要更新嗎？";
 "alert.plugin_permission" = "本外掛程式需要以下權限，請在繼續之前先審核這些權限。";
 "alert.plugin_permission_added" = "此更新需要額外的權限，請在繼續之前先審核這些權限。";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "在瀏覽器中打開";
 "pl_menu.copy_url" = "拷貝 URL";
 "pl_menu.copy_url_multi" = "拷貝多個 URL";
+"pl_menu.playback" = "播放";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "外掛程式";
+"pl_menu.playlist" = "播放列表";
 
 "keymapping.title" = "快速鍵";
 "keymapping.message" = "按下按鍵即可設定";
@@ -409,6 +436,11 @@
 "osc_toolbar.sub_track" = "選擇字幕軌道";
 "osc_toolbar.screenshot" = "螢幕擷取";
 "osc_toolbar.plugins" = "顯示外掛程式面板";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "浮動";
+"osc_pos.top" = "頂端";
+"osc_pos.bottom" = "底部";
 
 "mini_player.album_art" = "顯示封面圖庫";
 "mini_player.loop" = "重覆播放";
@@ -466,3 +498,96 @@
 "plugin.install_error.cannot_load" = "IINA 無法載入此外掛程式，可能使用了錯誤的格式。";
 "plugin.check_for_updates" = "檢查更新";
 "plugin.updating" = "正在下載更新…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "日誌檢視器";
+"logwindow.time" = "時間";
+"logwindow.subsystem" = "子系統";
+"logwindow.message" = "訊息";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "儲存";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "拷貝";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "播放記錄";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "進度";
+"history_window.col.played_at" = "播放時間";
+"history_window.menu.play" = "播放";
+"history_window.menu.play_new_window" = "以新視窗播放";
+"history_window.menu.show_in_finder" = "顯示於 Finder";
+"history_window.menu.delete" = "刪除…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "清除播放記錄";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "日期";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "搜尋";
+"history_window.search.filename" = "檔案名稱";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "沒有最近的搜尋項目";
+"history_window.search.recents_title" = "最近的搜尋項目";
+"history_window.search.clear_recents" = "清除記錄";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "視訊";
+"sidebar.audio" = "音訊";
+"sidebar.sub" = "字幕";
+"sidebar.plugins" = "外掛程式";
+"sidebar.playlist" = "播放列表";
+"sidebar.chapters" = "章節";
+
+"sidebar.aspect_ratio" = "顯示比例";
+"sidebar.crop" = "裁切";
+"sidebar.rotation" = "旋轉";
+"sidebar.speed" = "速度";
+
+"sidebar.brightness" = "亮度";
+"sidebar.contrast" = "對比度";
+"sidebar.saturation" = "飽和度";
+"sidebar.gamma" = "伽瑪";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "載入外部音軌⋯";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "將目前數值設為 EQ 預設值";
+"sidebar.rename_eq" = "更改目前 EQ 預設值";
+"sidebar.remove_eq" = "移除目前 EQ 預設值";
+"sidebar.manual_eq" = "手冊";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "載入字幕⋯";
+"sidebar.search_online" = "線上搜尋⋯";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "字體";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "邊框";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "字幕樣式可能破壞 ASS 渲染。某些字幕格式無法使用下列部分選項。";
+
+"sidebar.add_file" = "加入檔案⋯";
+"sidebar.add_url" = "加入 URL⋯";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

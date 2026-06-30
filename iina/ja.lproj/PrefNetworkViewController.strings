@@ -2,10 +2,10 @@
 "0bT-f6-rXb.title" = "デフォルト: 153600";
 
 /* Class = "NSTextFieldCell"; title = "Default cache size (KB):"; ObjectID = "0yu-5Q-363"; */
-"0yu-5Q-363.title" = "最大キャッシュサイズ(KB):";
+"0yu-5Q-363.title" = "最大キャッシュサイズ（KB）:";
 
 /* Class = "NSTextFieldCell"; title = "Custom youtube-dl path:"; ObjectID = "2qf-cC-Lfi"; */
-"2qf-cC-Lfi.title" = "youtube-dlのカスタムパスを設定:";
+"2qf-cC-Lfi.title" = "youtube-dlのカスタムパス:";
 
 /* Class = "NSTextFieldCell"; title = "Default: 153600"; ObjectID = "3os-7u-lv8"; */
 "3os-7u-lv8.title" = "デフォルト: 153600";
@@ -17,25 +17,25 @@
 "GBe-wd-tne.title" = "フォーマット: <key>=<value>[,<key>=<value>[,…]]";
 
 /* Class = "NSTextFieldCell"; title = "Seconds to prefetch:"; ObjectID = "J96-32-M9A"; */
-"J96-32-M9A.title" = "事前読み込み秒数:";
+"J96-32-M9A.title" = "プリフェッチ秒数:";
 
 /* Class = "NSTextFieldCell"; title = "Cache:"; ObjectID = "LNk-io-MM7"; */
 "LNk-io-MM7.title" = "キャッシュ:";
 
 /* Class = "NSTextFieldCell"; title = "Requires restarting IINA to take effect."; ObjectID = "RwW-JS-iTv"; */
-"RwW-JS-iTv.title" = "設定を有効にするにはIINAを再起動する必要があります。";
+"RwW-JS-iTv.title" = "有効にするにはIINAを再起動する必要があります。";
 
 /* Class = "NSTextFieldCell"; title = "IINA will search youtube-dl in this folder. Restart needed."; ObjectID = "YqE-yV-BvQ"; */
-"YqE-yV-BvQ.title" = "IINAはyoutube-dlをこのフォルダー内で探します。再起動が必要です。";
+"YqE-yV-BvQ.title" = "youtube-dlをこのフォルダ内で検索します。再起動が必要です。";
 
 /* Class = "NSMenuItem"; title = "Auto"; ObjectID = "aNr-lv-K0r"; */
 "aNr-lv-K0r.title" = "自動";
 
 /* Class = "NSButtonCell"; title = "Enable youtube-dl"; ObjectID = "cyH-Md-FAD"; */
-"cyH-Md-FAD.title" = "youtube-dlを有効化";
+"cyH-Md-FAD.title" = "youtube-dlを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Cache buffer size (KB):"; ObjectID = "dDD-g3-54w"; */
-"dDD-g3-54w.title" = "バッファのキャッシュサイズ (KB):";
+"dDD-g3-54w.title" = "キャッシュバッファのサイズ（KB）:";
 
 /* Class = "NSTextFieldCell"; title = "User agent:"; ObjectID = "eN6-Sk-kUa"; */
 "eN6-Sk-kUa.title" = "ユーザエージェント:";
@@ -44,19 +44,19 @@
 "fab-7d-mMQ.title" = "デフォルト: 36000";
 
 /* Class = "NSButtonCell"; title = "Enable cache"; ObjectID = "fpV-al-bn7"; */
-"fpV-al-bn7.title" = "キャッシュを有効化";
+"fpV-al-bn7.title" = "キャッシュを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Transport RTSP stream through:"; ObjectID = "hfn-h6-NCd"; */
-"hfn-h6-NCd.title" = "RTSPの通信方式:";
+"hfn-h6-NCd.title" = "RTSPストリーム転送（経由）:";
 
 /* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "yrh-Jm-Q4e"; */
 "yrh-Jm-Q4e.title" = "ネットワーク:";
 
 /* Class = "NSTextFieldCell"; title = "Raw options:"; ObjectID = "zCD-9d-ziV"; */
-"zCD-9d-ziV.title" = "パラメータ:";
+"zCD-9d-ziV.title" = "rawオプション:";
 
 /* Class = "NSButtonCell"; title = "Show throbber when paused waiting for the cache"; ObjectID = "SyQ-2U-zu8"; */
-"SyQ-2U-zu8.title" = "キャッシュ待ちの一時停止時にthrobberを表示";
+"SyQ-2U-zu8.title" = "キャッシュ待ちの一時停止中にアニメーションを表示";
 
 /* Class = "NSButtonCell"; title = "Show throbber when seeking"; ObjectID = "39x-Jr-gsA"; */
-"39x-Jr-gsA.title" = "シーク時にthrobberを表示";
+"39x-Jr-gsA.title" = "シーク中にアニメーションを表示";

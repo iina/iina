@@ -11,11 +11,14 @@
 "general.off" = "Выкл";
 "general.login" = "Войти";
 "general.logout" = "Выйти";
-"general.ok" = "OK";
+"general.ok" = "ОК";
 "general.cancel" = "Отмена";
+"general.done" = "Готово";
 "general.username" = "Имя пользователя";
 "general.password" = "Пароль";
 "general.na" = "Н/д";
+"general.no_result" = "Нет результатов";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Значение не может быть пустым.";
 "input.already_exists" = "Значение уже существует.";
@@ -84,8 +87,8 @@
 "alert.eq.rename.message" = "Пожалуйста, введите новое имя профиля.";
 
 // OSDMessage.swift
-"osd.pause" = "Приостановить";
-"osd.resume" = "Возобновить";
+"osd.pause" = "Пауза";
+"osd.resume" = "Воспроизведение";
 "osd.volume" = "Громкость: %@";
 "osd.speed" = "Скорость: %@×";
 "osd.aspect" = "Соотношение сторон: %@";
@@ -108,13 +111,13 @@
 "osd.sub_second_hidden" = "Вторые субтитры скрыты";
 "osd.sub_second_pos" = "Позиция вторых субтитров: %@";
 "osd.sub_second_visible" = "Вторые субтитры видны";
-"osd.mute" = "Выключить звук";
-"osd.unmute" = "Включение звука";
+"osd.mute" = "Звук выключен";
+"osd.unmute" = "Звук включен";
 "osd.screenshot" = "Снимок экрана сохранен";
 "osd.abloop.a" = "Повтор A–B: точка А";
 "osd.abloop.b" = "Повтор A–B: точка B";
 "osd.abloop.clear" = "Повтор A–B: сброшено";
-"osd.stop" = "Остановить";
+"osd.stop" = "Остановка";
 "osd.chapter" = "Глава: %@";
 "osd.subtitle_scale" = "Масштаб субтитров: %@×";
 "osd.add_to_playlist" = "Добавлено %i файлов в плейлист";
@@ -125,9 +128,9 @@
 "osd.video_eq.saturation" = "Насыщенность: %i";
 "osd.video_eq.brightness" = "Яркость: %i";
 "osd.find_online_sub" = "Поиск субтитров в интернете…";
-"osd.find_online_sub.source" = "из";
+"osd.find_online_sub.source" = "с";
 "osd.sub_not_found" = "Субтитры не найдены";
-"osd.sub_found" = "%d субтитров найдено.";
+"osd.sub_found" = "Субтитров найдено: %d.";
 "osd.sub_downloading" = "Загрузка %d субтитров";
 "osd.sub_downloaded" = "Субтитры скачаны";
 "osd.sub_saved" = "Субтитры сохранены";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Отменено";
 "osd.cannot_connect" = "Не удалось установить соединение";
 "osd.timed_out" = "Время вышло";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Добавлен фильтр: %@";
 "osd.filter_removed" = "Фильтр удален";
 "osd.file_loop" = "Повтор одного файла";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
-"preference.ui" = "Интерфейс";
-"preference.video_audio" = "Кодек";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Видео";
+"preference.audio" = "Аудио";
 "preference.subtitle" = "Субтитры";
 "preference.network" = "Сеть";
 "preference.control" = "Управление";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Введите строку фильтра в формате команд «vf» или «af» из mpv.";
 
 "alert.keybinding_config.error" = "Ошибка разбора файла конфигурации клавиш «%@»! Сброс до стандартной конфигурации клавиш IINA. Проверьте свою конфигурацию.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Не удается прочесть пользовательские параметры mpv.";
 "alert.extra_option.empty" = "Ключ или значение не могут быть пустыми!";
-"alert.extra_option.error" = "Ошибка установки параметра --%@=%@ со значением %d. Проверьте установленные параметры в «Настройки > Дополнительно».";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Ошибка при установке папки конфигурации «%@».";
 
 "alert.playlist.error_deleting" = "Ошибка удаления: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Удалить историю воспроизведения";
 "alert.delete_history.message" = "Вы уверены, что хотите удалить выбранное?";
+"alert.delete_all_history.title" = "Очистить историю воспроизведения";
+"alert.delete_all_history.message" = "Вы действительно хотите удалить всю историю воспроизведения?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Вы собираетесь применить видеофильтр, но текущий режим аппаратного декодирования плохо поддерживает видеофильтры. Вы можете либо отключить аппаратное декодирование, что повысит нагрузку на ЦП, либо переключиться на режим «Автоматически (с копированием в память)», который будет потреблять вдвое больше памяти.\nВозможно, вам придется повторить предыдущую операцию (например, настройку обрезки), чтобы она сработала.";
 "alert.filter_hwdec.abort" = "Отмена";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Восстановить скрытые оповещения";
 "alert.restore_alerts.message" = "Вы уверены, что хотите включить скрытые оповещения?";
+
+"alert.cleared" = "Очищено.";
+"alert.restored" = "Восстановлено.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Нечего открывать.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "Последняя версия %@. У вас %@. Хотите обновить?";
 "alert.plugin_permission" = "Этот плагин запрашивает следующие разрешения. Проверьте их, перед тем как продолжить.";
 "alert.plugin_permission_added" = "Это обновление требует дополнительные разрешения. Проверьте их, перед тем как продолжить.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ в общей сложности";
 "playlist.total_length_with_selected" = "%@ из %@ выбрано";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Открыть в браузере";
 "pl_menu.copy_url" = "Копировать адрес";
 "pl_menu.copy_url_multi" = "Копировать адреса";
+"pl_menu.playback" = "Воспроизведение";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Плагин";
+"pl_menu.playlist" = "Плейлист";
 
 "keymapping.title" = "Назначить клавиши";
 "keymapping.message" = "Нажмите любую клавишу для записи.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Субтитры";
 "osc_toolbar.screenshot" = "Снимок экрана";
 "osc_toolbar.plugins" = "Показать панель плагинов";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Свободное";
+"osc_pos.top" = "Сверху";
+"osc_pos.bottom" = "Снизу";
 
 "mini_player.album_art" = "Изменить обложку альбома";
 "mini_player.loop" = "Повторять";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA не может загрузить этот плагин. Возможно, у него неверный формат.";
 "plugin.check_for_updates" = "Проверить обновления";
 "plugin.updating" = "Загружаю обновление…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Журнал сообщений";
+"logwindow.time" = "Время";
+"logwindow.subsystem" = "Подсистема";
+"logwindow.message" = "Сообщение";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Сохранить";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Скопировать";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "История воспроизведения";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Прогресс";
+"history_window.col.played_at" = "Воспроизведено";
+"history_window.menu.play" = "Воспроизвести";
+"history_window.menu.play_new_window" = "Воспроизвести в новом окне";
+"history_window.menu.show_in_finder" = "Показать в Finder";
+"history_window.menu.delete" = "Удалить…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Очистить историю воспроизведения";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "По дате";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Поиск в";
+"history_window.search.filename" = "Имени файла";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Нет недавних поисковых запросов";
+"history_window.search.recents_title" = "Недавние поисковые запросы";
+"history_window.search.clear_recents" = "Очистить недавние";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Видео";
+"sidebar.audio" = "Аудио";
+"sidebar.sub" = "Субтитры";
+"sidebar.plugins" = "Плагины";
+"sidebar.playlist" = "Плейлист";
+"sidebar.chapters" = "Глава";
+
+"sidebar.aspect_ratio" = "Соотношение сторон";
+"sidebar.crop" = "Кадрирование";
+"sidebar.rotation" = "Повернуть";
+"sidebar.speed" = "скорость";
+
+"sidebar.brightness" = "яркость";
+"sidebar.contrast" = "контраст";
+"sidebar.saturation" = "насыщенность";
+"sidebar.gamma" = "гамму";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Подключить аудиодорожку…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Сохранить настройку эквалайзера…";
+"sidebar.rename_eq" = "Переименовать настройку эквалайзера…";
+"sidebar.remove_eq" = "Удалить настройку эквалайзера";
+"sidebar.manual_eq" = "Ручной режим";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Подключить субтитры…";
+"sidebar.search_online" = "Найти онлайн…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Шрифт";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Рамка";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Опции стилизации могут повредить отображение ASS, и часть из них не работает с некоторыми субтитрами.";
+
+"sidebar.add_file" = "Добавить файл…";
+"sidebar.add_url" = "Добавить адрес…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

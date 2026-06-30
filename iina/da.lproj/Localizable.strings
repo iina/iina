@@ -13,9 +13,12 @@
 "general.logout" = "Log ud";
 "general.ok" = "OK";
 "general.cancel" = "Annuller";
+"general.done" = "Udført";
 "general.username" = "Brugernavn";
 "general.password" = "Kodeord";
-"general.na" = "N/A";
+"general.na" = "Ikke tilgængelig";
+"general.no_result" = "Ingen resultater";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Værdien kan ikke være tom.";
 "input.already_exists" = "Værdien findes allerede.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Annulleret";
 "osd.cannot_connect" = "Kan ikke forbinde";
 "osd.timed_out" = "Intet svar";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Tilføjet filter: %@";
 "osd.filter_removed" = "Fjernet filter";
 "osd.file_loop" = "Gentag medie";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Indstillinger";
 "preference.general" = "Generelt";
-"preference.ui" = "UI";
-"preference.video_audio" = "Codec";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Lyd";
 "preference.subtitle" = "Undertekster";
 "preference.network" = "Netværk";
 "preference.control" = "Kontrol";
@@ -248,7 +256,7 @@
 "alert.mpv_error" = "Intern fejl %@ (%@) under ændring af %@.";
 
 "alert.unsupported_audio" = "Ikke understøttet ekstern lydfil.";
-"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_video" = "Ikke understøttet ekstern videofil.";
 "alert.unsupported_sub" = "Ikke understøttet ekstern undertekst.";
 "alert.unsupported_url" = "Ikke understøttet URL.";
 "alert.wrong_url_format" = "Forkert URL-format.";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Venligst indtast en filter streng af mpvs vf eller af kommando.";
 
 "alert.keybinding_config.error" = "Fejl under opsætning af tastegenveje \"%@\"! Går tilbage til standard IINA opsætning. Venligst tjek konfigurationen.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Kan ikke læse brugerdefinerede ekstra mpv indstillinger.";
 "alert.extra_option.empty" = "Nøgle eller værdi må ikke være tom!";
-"alert.extra_option.error" = "Fejl under indstilling af --%@=%@ med værdi %d. Venligst tjek dine ekstra indstillinger i Indstillinger > Avanceret.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Fejl under konfiguration af config mappen \"%@\".";
 
 "alert.playlist.error_deleting" = "Fejl under sletning af: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Slet afspilningshistorik";
 "alert.delete_history.message" = "Er du sikker på du ønsker at slette det valgte?";
+"alert.delete_all_history.title" = "Ryd afspilningshistorik";
+"alert.delete_all_history.message" = "Er du sikker du vil slette al afspilningshistorik?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Du er ved at aktivere et videofilter. Men din nuværende hardware encoder supportere mulighvis ikke videofiltre. Du kan enten deaktivere hardware decoding eller skifte til auto(kopi), hvilket optager dobbelt hukommelse.";
 "alert.filter_hwdec.abort" = "Afbryd";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Gendan skjulte advarsler";
 "alert.restore_alerts.message" = "Er du sikker på at du vil gendanne skjulte advarsler?";
+
+"alert.cleared" = "Ryddet.";
+"alert.restored" = "Gendannet.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Intet at åbne.";
 
@@ -356,14 +375,16 @@
 "alert.plugin_update_found.message" = "Den seneste version er %@. Du har %@. Vil du opdatere?";
 "alert.plugin_permission" = "Denne tilføjelse kræver følgende tilladelser. Tjek dem venligst før du fortsætter.";
 "alert.plugin_permission_added" = "Denne opdatering kræver flere tilladelser. Tjek dem venligst inden du fortsætter.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ i alt";
 "playlist.total_length_with_selected" = "%@ af %@ valgte";
 "playlist.sorting.header" = "Sorterer";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.filename_ascending" = "Filnavn stigende";
+"playlist.sorting.filename_descending" = "Filnavn faldende";
+"playlist.sorting.path_ascending" = "Filsti stigende";
+"playlist.sorting.path_descending" = "Filsti faldende";
 "pl_menu.title_multi" = "%d emner";
 "pl_menu.play_next" = "Afspil næste";
 "pl_menu.play_in_new_window" = "Afspil i nyt vindue";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Åbn i browser";
 "pl_menu.copy_url" = "Kopier URL";
 "pl_menu.copy_url_multi" = "Kopier URL'er";
+"pl_menu.playback" = "Afspilning";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Tilføjelse";
+"pl_menu.playlist" = "Spilleliste";
 
 "keymapping.title" = "Taste kortlægning";
 "keymapping.message" = "Tryk på en vilkårlig tast for at optage.";
@@ -394,9 +421,9 @@
 "hwdec.auto" = "Aktiver hardwareafkodning. De fleste videofiltre vil ikke virker korrekt.";
 "hwdec.auto-copy" = "Aktiver hardware afkodning. Kræver dobbelt så meget hukommelse, men virker med videofiltre.";
 
-"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
-"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"gaplessAudio.no" = "Afspilning af flere lydfiler i træk kan resultere i stilhed eller afbrydelse på tidspunktet for filændring.";
+"gaplessAudio.weak" = "Hvis lydformatet fra dekoderens output ændres, lukkes og genåbnes lydenheden, hvilket forstyrrer uafbrudt afspilning.";
+"gaplessAudio.yes" = "Lydenheden åbnes ved hjælp af parametre der er valgt for den første fil der afspilles, og bliver derefter holdt åben for uafbrudt afspilning. Efterfølgende filer kan blive gentestet.";
 
 "subencoding.auto" = "Find automatisk";
 
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Vælg undertekst spor";
 "osc_toolbar.screenshot" = "Tag et skærmbillede";
 "osc_toolbar.plugins" = "Vis tilføjelsespanel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Flydende";
+"osc_pos.top" = "Top";
+"osc_pos.bottom" = "Nederst";
 
 "mini_player.album_art" = "Slå album art Til/Fra";
 "mini_player.loop" = "Gentag";
@@ -418,7 +450,7 @@
 "mini_player.volume" = "Lydstyrke";
 "mini_player.close" = "Luk musik-tilstand";
 "mini_player.back" = "Vend tilbage til video-tilstand";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Sorter spillelisten";
 
 // Touch bar
 
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA kan ikke indlæse denne tilføjelse. Den er måske i det forkerte format.";
 "plugin.check_for_updates" = "Tjek for opdateringer";
 "plugin.updating" = "Downloader opdatering…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Logvisning";
+"logwindow.time" = "Klokkeslæt";
+"logwindow.subsystem" = "Subsystem";
+"logwindow.message" = "Besked";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Gem";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Kopier";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Afspilningshistorik";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Placering";
+"history_window.col.played_at" = "Afspillet";
+"history_window.menu.play" = "Afspil";
+"history_window.menu.play_new_window" = "Afspil i nyt vindue";
+"history_window.menu.show_in_finder" = "Vis i Finder";
+"history_window.menu.delete" = "Slet…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Ryd afspilningshistorik";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Dato";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Søg i";
+"history_window.search.filename" = "Filnavn";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Ingen tidligere søgninger";
+"history_window.search.recents_title" = "Seneste søgninger";
+"history_window.search.clear_recents" = "Tøm seneste";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Lyd";
+"sidebar.sub" = "Undertekster";
+"sidebar.plugins" = "Udvidelser";
+"sidebar.playlist" = "Spilleliste";
+"sidebar.chapters" = "Kapitel";
+
+"sidebar.aspect_ratio" = "Billedformat";
+"sidebar.crop" = "Beskær";
+"sidebar.rotation" = "Rotation";
+"sidebar.speed" = "Hastighed";
+
+"sidebar.brightness" = "Lysstyrke";
+"sidebar.contrast" = "Kontrast";
+"sidebar.saturation" = "Mætning";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Åben ekstern lydfil...";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Gem nuværende EQ som en forudindstilling...";
+"sidebar.rename_eq" = "Skift navn på den nuværende EQ-forudindstilling...";
+"sidebar.remove_eq" = "Fjern den nuværende EQ-forudindstilling";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Åben undertekster…";
+"sidebar.search_online" = "Søg Online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Skrifttype";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Grænse";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Understileindstillinger kan ødelægge ASS-gengivelse, og nogle af dem vil blive deaktiveret afhængigt af underteksttype.";
+
+"sidebar.add_file" = "Tilføj arkiv…";
+"sidebar.add_url" = "Tilføj URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

@@ -20,8 +20,8 @@
 "cmd.sub-seek" = "Seek da Legenda";
 "cmd.playlist-next" = "Mídia seguinte";
 "cmd.playlist-prev" = "Mídia anterior";
-"cmd.playlist-move" = "Mover item da playlist";
-"cmd.playlist-clear" = "Limpar playlist";
+"cmd.playlist-move" = "Mover item da lista de reprodução";
+"cmd.playlist-clear" = "Limpar lista de reprodução";
 "cmd.playlist-remove" = "Remover atual";
 "cmd.playlist-shuffle" = "Misturar";
 "cmd.write-watch-later-config" = "Gravar historico de reprodução";
@@ -31,7 +31,7 @@
 "cmd.screenshot" = "Captura de Tela";
 "cmd.screenshot-to-file" = "Captura de Tela para arquivo";
 "cmd.loadfile" = "Carregar arquivo";
-"cmd.loadlist" = "Carregar playlist";
+"cmd.loadlist" = "Carregar lista de reprodução";
 "cmd.run" = "Executar";
 
 "iina.flip" = "Inverter";
@@ -44,15 +44,15 @@
 "iina.video-panel" = "Video painel";
 "iina.audio-panel" = "Audio painel";
 "iina.sub-panel" = "Legenda painel";
-"iina.playlist-panel" = "Playlist painel";
+"iina.playlist-panel" = "Painel de lista de reprodução";
 "iina.chapter-panel" = "Chapitulo painel";
 "iina.bigger-window" = "Janela Maior";
 "iina.smaller-window" = "Janela menor";
 "iina.fit-to-screen" = "Caber na Tela";
 "iina.toggle-flip" = "Alternar invertido";
 "iina.toggle-mirror" = "Alternar espelho";
-"iina.save-playlist" = "Salvar playlist atual";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.save-playlist" = "Salvar lista de reprodução atual";
+"iina.show-current-file-in-finder" = "Mostrar arquivo atual no Finder";
 "iina.delete-current-file" = "Deletar arquivo atual";
 "iina.delete-current-file-hard" = "Excluir o arquivo atual diretamente sem mover para o lixo";
 "iina.find-online-subs" = "Encontrar legendas online";
@@ -101,7 +101,7 @@
 "opt.sub-pos" = "Posição da Legenda";
 "opt.sub-scale" = "Escala da Legenda";
 "opt.sub-visibility" = "Visibilidade da Legenda";
-"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.secondary-sub-visibility" = "Visibilidade da legenda secundária";
 "opt.sub-ass-style-override" = "Substituição do estilo ASS";
 
 "opt.fullscreen" = "Tela-Cheia";

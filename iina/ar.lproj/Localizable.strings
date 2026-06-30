@@ -13,9 +13,12 @@
 "general.logout" = "تسجيل الخروج";
 "general.ok" = "حسناً";
 "general.cancel" = "إلغاء";
+"general.done" = "تم";
 "general.username" = "اسم المستخدم";
 "general.password" = "كلمة المرور";
 "general.na" = "N/A";
+"general.no_result" = "لا توجد نتيجة";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "لا يمكن أن تكون القيمة فارغة.";
 "input.already_exists" = "القيمة موجودة مسبقاً.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "ملغاة";
 "osd.cannot_connect" = "لا يمكن الاتصال";
 "osd.timed_out" = "انتهت المهلة";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "تمت إضافة فلتر: %@";
 "osd.filter_removed" = "إزالة الفلتر";
 "osd.file_loop" = "تكرار ملف واحد";
@@ -145,8 +151,10 @@
 
 "preference.title" = "التفضيلات";
 "preference.general" = "عام";
-"preference.ui" = "واجهة التشغيل";
-"preference.video_audio" = "فيديو/صوت";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "الفيديو";
+"preference.audio" = "الصوت";
 "preference.subtitle" = "الترجمة";
 "preference.network" = "الشبكة";
 "preference.control" = "التحكم";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "الرجاء إدخال سلسلة فلتر في شكل أمر mpv أو af.";
 
 "alert.keybinding_config.error" = "حدث خطأ أثناء تحليل ملف تكوين الربط المفاتيح\"%@\"! العودة إلى إعدادات ربط المفتاح الافتراضي لـ IINA. الرجاء التحقق من الإعدادات الخاصة بك.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "لا يمكن قراءة خيارات mpv الإضافية المحددة للمستخدم.";
 "alert.extra_option.empty" = "المفتاح أو القيمة لا يمكن أن تكون فارغة!";
-"alert.extra_option.error" = "خطأ في خيار الإعداد --%@=%@ مع قيمة الإرجاع %d. الرجاء التحقق من إعدادات الخيار الإضافي الخاص بك في التفضيل > متقدم.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "خطأ في إعداد دليل الإعداد\"%@\".";
 
 "alert.playlist.error_deleting" = "خطأ في الحذف: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "حذف سجل التشغيل";
 "alert.delete_history.message" = "هل أنت متأكد من حذف الإدخالات المحددة؟";
+"alert.delete_all_history.title" = "مسح سجل التشغيل";
+"alert.delete_all_history.message" = "هل أنت متأكد من حذف جميع سجلات التشغيل؟";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "أنت على وشك تطبيق فلتر فيديو. ومع ذلك، فترميز الأجهزة الحالية قد لا يدعم فلاتر الفيديو جيداً. يمكنك تعطيل فك ترميز الأجهزة أو التبديل إلى تلقائي (نسخ)، الذي سيستهلك ضعف الذاكرة.\nقد تحتاج إلى تكرار العملية السابقة (مثل إعداد حجم الفيديو) لجعلها تعمل.";
 "alert.filter_hwdec.abort" = "إيقاف";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "استعادة التنبيهات المقموعة";
 "alert.restore_alerts.message" = "هل أنت متأكد من أنك تريد استعادة التنبيهات المقموعة؟";
+
+"alert.cleared" = "تم.";
+"alert.restored" = "تمت الاستعادة";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "لا شيء لفتحه.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "أحدث إصدار هو %@. لديك %@. هل ترغب في التحديث؟";
 "alert.plugin_permission" = "هذه الإضافة تتطلب الأذونات التالية. الرجاء مراجعتها قبل المتابعة.";
 "alert.plugin_permission_added" = "يتطلب هذا التحديث أذونات إضافية. يرجى مراجعتها قبل المتابعة.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ في المجموع";
 "playlist.total_length_with_selected" = "تم تحديد %@ من %@";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "فتح في المتصفح";
 "pl_menu.copy_url" = "نسخ عنوان URL";
 "pl_menu.copy_url_multi" = "نسخ عناوين URL";
+"pl_menu.playback" = "التشغيل";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "الإضافات";
+"pl_menu.playlist" = "قائمة التشغيل";
 
 "keymapping.title" = "ارتباطات المفاتيح";
 "keymapping.message" = "اضغط على أي زر للتسجيل.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "اختيار مسار الترجمة";
 "osc_toolbar.screenshot" = "خذ لقطة شاشة";
 "osc_toolbar.plugins" = "إظهار لوحة الإضافات";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "عائمة";
+"osc_pos.top" = "الأعلى";
+"osc_pos.bottom" = "الأسفل";
 
 "mini_player.album_art" = "تبديل صورة الألبوم";
 "mini_player.loop" = "تكرار";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "لا يمكن لـ IINA تحميل هذه الإضافة. قد يكون في شكل خاطئ.";
 "plugin.check_for_updates" = "التحقق من وجود تحديثات";
 "plugin.updating" = "ينزّل التّحديث...";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "عارض السجل";
+"logwindow.time" = "وقت";
+"logwindow.subsystem" = "نظام فرعي";
+"logwindow.message" = "رسالة";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "حفظ";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "نسخ";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "تاريخ التشغيل";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "التقدم";
+"history_window.col.played_at" = "تم تشغيله في";
+"history_window.menu.play" = "تشغيل";
+"history_window.menu.play_new_window" = "تشغيل في نافذة جديدة";
+"history_window.menu.show_in_finder" = "كشف في Finder";
+"history_window.menu.delete" = "حذف…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "مسح سجل التشغيل";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "التاريخ";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "البحث في";
+"history_window.search.filename" = "اسم الملف";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "لا توجد عمليات بحث حديثة";
+"history_window.search.recents_title" = "عمليات البحث الأخيرة";
+"history_window.search.clear_recents" = "مسح الحديثة";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "الفيديو";
+"sidebar.audio" = "الصوت";
+"sidebar.sub" = "الترجمات";
+"sidebar.plugins" = "الإضافات";
+"sidebar.playlist" = "قائمة التشغيل";
+"sidebar.chapters" = "الفصول";
+
+"sidebar.aspect_ratio" = "نسبة الارتفاع إلى العرض";
+"sidebar.crop" = "اقتصاص";
+"sidebar.rotation" = "التدوير";
+"sidebar.speed" = "السرعة";
+
+"sidebar.brightness" = "السطوع";
+"sidebar.contrast" = "التباين";
+"sidebar.saturation" = "التشبع";
+"sidebar.gamma" = "جاما";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "استخدام ملف صوت خارجي…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "حفظ الإعداد المسبق الحالي للموازن الصوتي (EQ)…";
+"sidebar.rename_eq" = "إعادة تسمية الإعداد المسبق الحالي للموازن الصوتي (EQ)…";
+"sidebar.remove_eq" = "إزالة الإعداد المسبق الحالي للموازن الصوتي (EQ)";
+"sidebar.manual_eq" = "يدوي";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "إضافة ترجمه…";
+"sidebar.search_online" = "البحث عبر الإنترنت…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "الخط";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "الحدود";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "قد تؤدي خيارات نمط الترجمة إلى كسر عرض ASS، وبعضها سيتم تعطيله تبعاً لنوع الترجمة.";
+
+"sidebar.add_file" = "إضافة ملف…";
+"sidebar.add_url" = "إضافة عنوان URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

@@ -13,9 +13,12 @@
 "general.logout" = "Вийти";
 "general.ok" = "ОК";
 "general.cancel" = "Скасувати";
+"general.done" = "Готово";
 "general.username" = "Ім'я користувача";
 "general.password" = "Пароль";
-"general.na" = "N/A";
+"general.na" = "Немає даних";
+"general.no_result" = "Нічого не знайдено";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Значення не може бути порожнім.";
 "input.already_exists" = "Значення вже існує.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Скасовано";
 "osd.cannot_connect" = "Не вдалося підключитися";
 "osd.timed_out" = "Час вийшов";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Доданий фільтр: %@";
 "osd.filter_removed" = "Видалений фільтр";
 "osd.file_loop" = "Повтор одного файлу";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";
-"preference.ui" = "Інтерфейс";
-"preference.video_audio" = "Відео та звук";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Відео";
+"preference.audio" = "Аудіо";
 "preference.subtitle" = "Субтитри";
 "preference.network" = "Мережа";
 "preference.control" = "Керування";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Будь ласка, введіть рядок фільтру в форматі vf- чи af-команди mpv.";
 
 "alert.keybinding_config.error" = "Помилка при розборі файлу налаштувань клавіатурних скорочень \"%@\"! Поверніться до стандартних налаштувань клавіатурних скорочень IINA. Будь ласка, перевірте свої налаштування.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Не можу прочитати додаткові властивості mpv, що визначені користувачем.";
 "alert.extra_option.empty" = "Ключ або значення не може бути порожнім!";
-"alert.extra_option.error" = "Помилка при встановленні властивості --%@=%@ зі значенням %d. Будь ласка, перевірте ваші додаткові опції через Параметри → Експертні.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Помилка при створенні директорії налаштувань \"%@\".";
 
 "alert.playlist.error_deleting" = "Помилка при видаленні: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Видалити історію перегляду";
 "alert.delete_history.message" = "Впевнені, що хочете видалити вибрані елементи?";
+"alert.delete_all_history.title" = "Почистити історію перегляду";
+"alert.delete_all_history.message" = "Упевнені, що хочете видалити всю історію відтворення?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Ви зараз застосуєте відеофільтр. Хоча ваш апаратний декодер, можливо, нормально не підтримує відеофільтри. Ви можете вимкнути апаратне декодування або перемкнутися в режим Авто (Копія), що використовує вдвічі більше пам'яті.\n\nВам треба буде повторити попередню операцію (наприклад, встановлення обрізування), щоб воно запрацювало.";
 "alert.filter_hwdec.abort" = "Скасувати";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Відновити приховані оповіщення";
 "alert.restore_alerts.message" = "Ви дійсно бажаєте відновити приховані сповіщення?";
+
+"alert.cleared" = "Очищено.";
+"alert.restored" = "Відновлено.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Немає чого відкривати.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "Найновіша версія %@. Ваша версія %@. Хотіли би ви оновити?";
 "alert.plugin_permission" = "Цей плагін потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
 "alert.plugin_permission_added" = "Це оновлення потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ загалом";
 "playlist.total_length_with_selected" = "%@ з %@ вибрано";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Відкрити в браузері";
 "pl_menu.copy_url" = "Копіювати URL";
 "pl_menu.copy_url_multi" = "Копіювати кілька URL";
+"pl_menu.playback" = "Відтворення";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Плагін";
+"pl_menu.playlist" = "Плейлист";
 
 "keymapping.title" = "Призначення клавіш";
 "keymapping.message" = "Натисніть будь-яку клавішу для записування.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Наявні субтитри";
 "osc_toolbar.screenshot" = "Зробити зняток";
 "osc_toolbar.plugins" = "Показати панель плагінів";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Вільна";
+"osc_pos.top" = "Вгорі";
+"osc_pos.bottom" = "Внизу";
 
 "mini_player.album_art" = "Показати обкладинку альбому";
 "mini_player.loop" = "Повтор";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA не може завантажити цей плагін. Можливо, формат плагіну невірний.";
 "plugin.check_for_updates" = "Перевірити наявність оновлень";
 "plugin.updating" = "Завантаження оновлення…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Переглядач журналу";
+"logwindow.time" = "Час";
+"logwindow.subsystem" = "Підсистема";
+"logwindow.message" = "Повідомлення";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Зберегти";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Копіювати";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Історія перегляду";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Прогрес";
+"history_window.col.played_at" = "Час перегляду";
+"history_window.menu.play" = "Відтворити";
+"history_window.menu.play_new_window" = "Відтворити в новому вікні";
+"history_window.menu.show_in_finder" = "Показати у Finder";
+"history_window.menu.delete" = "Видалити…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Почистити історію перегляду";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Дата";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Шукати в";
+"history_window.search.filename" = "Ім'я файлу";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Немає останніх запитів";
+"history_window.search.recents_title" = "Останні запити";
+"history_window.search.clear_recents" = "Видалити останні";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Відео";
+"sidebar.audio" = "Аудіо";
+"sidebar.sub" = "Субтитри";
+"sidebar.plugins" = "Плаґіни";
+"sidebar.playlist" = "Плейлист";
+"sidebar.chapters" = "Розділи";
+
+"sidebar.aspect_ratio" = "Пропорції";
+"sidebar.crop" = "Обрізати";
+"sidebar.rotation" = "Обертання";
+"sidebar.speed" = "швидкість";
+
+"sidebar.brightness" = "яскравість";
+"sidebar.contrast" = "контрастність";
+"sidebar.saturation" = "насиченість";
+"sidebar.gamma" = "гаму";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Завантажити зовнішню аудіодоріжку…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Зберегти поточний EQ як шаблон…";
+"sidebar.rename_eq" = "Перейменувати поточний шаблон EQ…";
+"sidebar.remove_eq" = "Видалити поточний шаблон EQ";
+"sidebar.manual_eq" = "Вручну";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Завантажити…";
+"sidebar.search_online" = "Знайти в Інтернеті…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Шрифт";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Контур";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Параметри стилю субтитрів можуть порушити ASS-відображення, та, в залежності від типу субтитрів, деякі параметри можуть бути вимкнені.";
+
+"sidebar.add_file" = "Додати файл…";
+"sidebar.add_url" = "Додати URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

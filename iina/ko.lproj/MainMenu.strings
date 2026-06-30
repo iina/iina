@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "모든 윈도우 위에 두기";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "저장된 오디오 필터";
 
@@ -512,4 +518,4 @@
 "Qwb-26-zjX.title" = "URL 열기…";
 
 /* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
-"kOx-hc-aQG.title" = "Release Highlights";
+"kOx-hc-aQG.title" = "공개된 버전 하이라이트";

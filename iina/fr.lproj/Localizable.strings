@@ -13,9 +13,12 @@
 "general.logout" = "Déconnexion";
 "general.ok" = "OK";
 "general.cancel" = "Annuler";
+"general.done" = "OK";
 "general.username" = "Nom d'utilisateur";
 "general.password" = "Mot de passe";
 "general.na" = "N/A";
+"general.no_result" = "Aucun résultat";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "La valeur ne peut être vide.";
 "input.already_exists" = "La valeur existe déjà.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Annulé";
 "osd.cannot_connect" = "Connexion impossible";
 "osd.timed_out" = "Délai de connexion expiré";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Filtre ajouté : %@";
 "osd.filter_removed" = "Filtre supprimé";
 "osd.file_loop" = "Lire en boucle le fichier uniquement";
@@ -146,7 +152,9 @@
 "preference.title" = "Préférences";
 "preference.general" = "Général";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Vidéo/Audio";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Vidéo";
+"preference.audio" = "Audio";
 "preference.subtitle" = "Sous-titres";
 "preference.network" = "Réseau";
 "preference.control" = "Contrôles";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Veuillez renseigner une chaîne de caractères au format de la commande vf ou af de mpv.";
 
 "alert.keybinding_config.error" = "Une erreur est survenue lors de la lecture du fichier de configuration des touches \"%@\" ! Utilisation de la configuration des touches par défaut d'IINA. Veuillez vérifier votre fichier configuration.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Impossible de lire les options extra de mpv définies par l'utilisateur.";
 "alert.extra_option.empty" = "La clé et/ou la valeur ne peuvent pas être vides !";
-"alert.extra_option.error" = "Erreur de la configuration de l'option --%@=%@ avec le code retour %d. Veuillez vérifier votre configuration des options extra dans Préferences > Avancé.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Erreur lors de la configuration du dossier de config : \"%@\".";
 
 "alert.playlist.error_deleting" = "Erreur lors de la suppression de : %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Supprimer l'historique de lecture";
 "alert.delete_history.message" = "Souhaitez-vous vraiment supprimer les entrées sélectionnées ?";
+"alert.delete_all_history.title" = "Effacer l'historique de lecture";
+"alert.delete_all_history.message" = "Souhaitez-vous vraiment effacer l'historique de lecture ?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Vous êtes sur le point d'appliquer un filtre vidéo. Cependant, votre décodeur matériel actuel peut ne pas bien supporter les filtres vidéo. Vous pouvez désactiver le décodage matériel ou passer sur Auto(Copie), qui consommera deux fois plus de mémoire.\nVous devrez peut-être répéter l'opération précédente (par exemple, activer le rognage) pour que tout fonctionne.";
 "alert.filter_hwdec.abort" = "Annuler";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Rétablir les alertes masquées";
 "alert.restore_alerts.message" = "Êtes-vous sûr de vouloir rétablir les alertes sélectionnées ?";
+
+"alert.cleared" = "Effacées.";
+"alert.restored" = "Rétabli.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Aucun fichier à ouvrir.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "La dernière version est %@. Vous avez %@. Voulez-vous mettre à jour ?";
 "alert.plugin_permission" = "Ce module externe demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
 "alert.plugin_permission_added" = "Ce module externe demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Ouvrir dans le navigateur";
 "pl_menu.copy_url" = "Copier l'URL";
 "pl_menu.copy_url_multi" = "Copier les URLs";
+"pl_menu.playback" = "Lecture";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Module externe";
+"pl_menu.playlist" = "Liste de lecture";
 
 "keymapping.title" = "Configurer une touche";
 "keymapping.message" = "Appuyez sur la touche à configurer.";
@@ -395,8 +422,8 @@
 "hwdec.auto-copy" = "Active le décodage matériel. Cela va consommer 2x plus de ressources, mais les filtres vidéos fonctionneront.";
 
 "gaplessAudio.no" = "La lecture de fichiers audio consécutifs peut entraîner un silence ou une perturbation au moment du changement de fichier.";
-"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"gaplessAudio.weak" = "Si le format audio en sortie du décodeur change, le périphérique audio est fermé puis rouvert, perturbant l'audio sans interruption.";
+"gaplessAudio.yes" = "Le périphérique audio est ouvert avec les paramètres du premier fichier, puis conservé pour l’audio sans interruption. Les fichiers suivants peuvent être rééchantillonnés.";
 
 "subencoding.auto" = "Détection automatique";
 
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Choisir une piste de sous-titres";
 "osc_toolbar.screenshot" = "Faire une capture d'écran";
 "osc_toolbar.plugins" = "Afficher le panneau des plugins";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Flottant";
+"osc_pos.top" = "En haut";
+"osc_pos.bottom" = "En bas";
 
 "mini_player.album_art" = "Activer/désactiver la pochette d'album";
 "mini_player.loop" = "Répéter";
@@ -465,3 +497,96 @@
 "plugin.install_error.cannot_load" = "IINA ne parvient pas à charger ce module externe. Il est peut-être dans un mauvais format.";
 "plugin.check_for_updates" = "Rechercher des mises à jour";
 "plugin.updating" = "Téléchargement de la mise à jour…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Affichage des journaux";
+"logwindow.time" = "Heure";
+"logwindow.subsystem" = "Sous-système";
+"logwindow.message" = "Message";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Sauvegarder";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Copier";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Historique de lecture";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Progression";
+"history_window.col.played_at" = "Lu à";
+"history_window.menu.play" = "Ouvrir";
+"history_window.menu.play_new_window" = "Ouvrir dans une nouvelle fenêtre";
+"history_window.menu.show_in_finder" = "Afficher dans le Finder";
+"history_window.menu.delete" = "Supprimer…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Effacer l'historique de lecture";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Date";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Chercher dans";
+"history_window.search.filename" = "Nom du fichier";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Pas de recherches récentes";
+"history_window.search.recents_title" = "Recherches récentes";
+"history_window.search.clear_recents" = "Enlever les récents";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Vidéo";
+"sidebar.audio" = "Audio";
+"sidebar.sub" = "Sous-titres";
+"sidebar.plugins" = "Modules externes";
+"sidebar.playlist" = "Liste de lecture";
+"sidebar.chapters" = "Chapitres";
+
+"sidebar.aspect_ratio" = "Format d'image";
+"sidebar.crop" = "Rogner";
+"sidebar.rotation" = "Rotation";
+"sidebar.speed" = "Vitesse";
+
+"sidebar.brightness" = "Luminosité";
+"sidebar.contrast" = "Contraste";
+"sidebar.saturation" = "Saturation";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Ajouter une piste audio externe…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Enregistrer l'EQ actuel en tant que pré-réglage…";
+"sidebar.rename_eq" = "Renommer le préréglage EQ actuel…";
+"sidebar.remove_eq" = "Supprimer le préréglage EQ actuel";
+"sidebar.manual_eq" = "Manuel";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Ajouter des sous-titres…";
+"sidebar.search_online" = "Chercher en ligne…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Police de caractères";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Bordure";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Les options de sous-style peuvent casser le rendu ASS, et certaines d'entre elles seront désactivées selon le type de sous-titre.";
+
+"sidebar.add_file" = "Ajouter un fichier…";
+"sidebar.add_url" = "Ajouter une URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";

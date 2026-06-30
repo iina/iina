@@ -56,7 +56,7 @@
 "KYi-0W-zOr.title" = "Desligar outros monitores enquanto em tela cheia";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "Ainda impede que o sistema entre em repouso.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Mudar para \"modo de música\" automaticamente ao reproduzir um arquivo de áudio";
@@ -134,7 +134,7 @@
 "pdx-zt-kf2.title" = "Capturas:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "Impedir que o protetor de tela inicie durante a reprodução";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "TodaHora";
@@ -152,22 +152,22 @@
 "xr2-rB-O0x.title" = "Pausar/Reproduzir quando:";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "Não enquanto estiver em \"modo de música\" ou apenas reproduzindo áudio";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Mostrar tela de boas-vindas";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "When a file is opened manually:";
+"jok-kc-HjX.title" = "Quando um arquivo é aberto manualmente:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "Loop playlist";
+"5WC-Sp-6mg.title" = "Repetir Lista de Reprodução";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
-"A1p-L4-jtC.title" = "Loop single file";
+"A1p-L4-jtC.title" = "Repetir arquivo único";
 
 /* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
-"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+"WZE-pS-9ne.title" = "Agrupar mídia na lista de reprodução ao abrir vários arquivos de uma vez";
 
 /* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
-"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";
+"Z7U-cf-ezr.title" = "Permitir abrir o mesmo arquivo em várias janelas";

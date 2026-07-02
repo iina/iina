@@ -57,7 +57,7 @@ class PluginViewController: SidebarViewController {
     placeholderView.translatesAutoresizingMaskIntoConstraints = false
     let message = SidebarScrollView.Container(
       ui.label("sidebar.plugins_placeholder",
-               wrapping: true, isSmall: true, isSecondary: true)
+               wrapping: true, isSmall: true, isSecondary: true, canCompress: false)
     ) {
       $0.padding(.all(.sidebarContainerPadding))
     }

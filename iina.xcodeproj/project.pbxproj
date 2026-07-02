@@ -393,7 +393,6 @@
 		E3965E1A2487C99900607EB4 /* JavascriptPluginSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3965E192487C99900607EB4 /* JavascriptPluginSubtitle.swift */; };
 		E39A11FD240F176E00A67F9F /* StringEncodingName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39A11FC240F176E00A67F9F /* StringEncodingName.swift */; };
 		E39EA3532E7CFD5B00E0BD32 /* FixedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39EA3522E7CFD5600E0BD32 /* FixedProgressBar.swift */; };
-		E39EDD832CE2EB9600978036 /* PluginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E39EDD822CE2EB9600978036 /* PluginViewController.xib */; };
 		E39EDD842CE2EB9600978036 /* PluginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39EDD812CE2EB9600978036 /* PluginViewController.swift */; };
 		E3A239A82FC6D45000CE6ACC /* TranslucentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */; };
 		E3A239AA2FC6D88F00CE6ACC /* OSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239A92FC6D88C00CE6ACC /* OSDView.swift */; };
@@ -1806,7 +1805,6 @@
 		E39A11FC240F176E00A67F9F /* StringEncodingName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEncodingName.swift; sourceTree = "<group>"; };
 		E39EA3522E7CFD5600E0BD32 /* FixedProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedProgressBar.swift; sourceTree = "<group>"; };
 		E39EDD812CE2EB9600978036 /* PluginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginViewController.swift; sourceTree = "<group>"; };
-		E39EDD822CE2EB9600978036 /* PluginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PluginViewController.xib; sourceTree = "<group>"; };
 		E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentView.swift; sourceTree = "<group>"; };
 		E3A239A92FC6D88C00CE6ACC /* OSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSDView.swift; sourceTree = "<group>"; };
 		E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
@@ -2282,7 +2280,6 @@
 				51CACB9429D500290034CEE5 /* VideoPIPViewController.swift */,
 				84D123B31ECAA405004E0D53 /* TouchBarSupport.swift */,
 				8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */,
-				E39EDD822CE2EB9600978036 /* PluginViewController.xib */,
 				8450403B1E0A9EE20079C194 /* InspectorWindowController.swift */,
 				8400D5D41E1AB312006785F5 /* InspectorWindowController.xib */,
 				84E48D4C1E0F1090002C7A3F /* FilterWindowController.swift */,
@@ -2964,7 +2961,6 @@
 				8483FB001EDFF325000F55D6 /* Credits.rtf in Resources */,
 				34F8B6F62C6C7B0100AE4B16 /* PrefPluginViewController.xib in Resources */,
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
-				E39EDD832CE2EB9600978036 /* PluginViewController.xib in Resources */,
 				E34A0E012053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib in Resources */,
 				E34E909A24F821280073BF04 /* GuideWindowController.xib in Resources */,
 				34F294C02C0B68B300F14962 /* Contribution.rtf in Resources */,

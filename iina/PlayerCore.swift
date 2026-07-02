@@ -537,6 +537,7 @@ class PlayerCore: NSObject {
     info.audioTracks = []
     info.chapters = []
     info.playlist = []
+    info.isShuffled = false
     info.subTracks = []
     info.thumbnails = []
     info.thumbnailsReady = false
@@ -1268,7 +1269,17 @@ class PlayerCore: NSObject {
   }
 
   func toggleShuffle() {
-    mpv.command(.playlistShuffle)
+    // Make shuffling reversible (issue #718). mpv's `playlist-unshuffle` restores the
+    // order that existed before the matching `playlist-shuffle`, so track the state and
+    // toggle between the two commands. `info.isShuffled` is reset to `false` whenever the
+    // playlist is otherwise modified, since an unshuffle would no longer be valid then.
+    if info.isShuffled {
+      mpv.command(.playlistUnshuffle)
+      info.isShuffled = false
+    } else {
+      mpv.command(.playlistShuffle)
+      info.isShuffled = true
+    }
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -1484,6 +1495,7 @@ class PlayerCore: NSObject {
 
   func appendToPlaylist(_ path: String, silent: Bool = false) {
     mpv.playlistAppend(path)
+    info.isShuffled = false
     if !silent {
       postNotification(.iinaPlaylistChanged)
     }
@@ -1491,12 +1503,14 @@ class PlayerCore: NSObject {
 
   func playlistMove(_ from: Int, to: Int) {
     mpv.playlistMove(from, to: to)
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
   func playlistReorder(newPlaylist: [MPVPlaylistItem]) {
     guard Set(info.playlist) == Set(newPlaylist) else { return }
     if info.playlist == newPlaylist { return }
+    info.isShuffled = false
     mpv.command(.playlistClear)
     guard let currentPlaying = newPlaylist.firstIndex(where: { $0.isPlaying } ) else {
       for item in newPlaylist {
@@ -1517,6 +1531,7 @@ class PlayerCore: NSObject {
 
   func addToPlaylist(paths: [String], at index: Int = -1) {
     getPlaylist()
+    info.isShuffled = false
     for path in paths {
       mpv.playlistAppend(path)
     }
@@ -1531,6 +1546,7 @@ class PlayerCore: NSObject {
 
   func playlistRemove(_ index: Int) {
     mpv.playlistRemove(index)
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -1541,11 +1557,13 @@ class PlayerCore: NSObject {
       mpv.playlistRemove(i - count)
       count += 1
     }
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
   func clearPlaylist() {
     mpv.command(.playlistClear)
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -2019,6 +2037,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async { [self] in
         log("Running on_before_start_file hook: shuffling playlist")
         mpv.command(.playlistShuffle)
+        info.isShuffled = true
         /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
         mpv.command(.playlistPlayIndex, args: ["0"])
         next()

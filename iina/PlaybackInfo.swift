@@ -235,6 +235,14 @@ class PlaybackInfo {
   ///     To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock. The cache
   ///     properties are private to force all access to be through class methods that properly coordinate thread access.
   @Atomic var playlist: [MPVPlaylistItem] = []
+
+  /// Whether the playlist is currently shuffled via the shuffle button.
+  ///
+  /// Tracks whether a `playlist-shuffle` is in effect so it can be reverted with
+  /// `playlist-unshuffle`. Reset to `false` whenever the playlist is otherwise modified (a new
+  /// media is opened, items added/removed/moved), because an unshuffle is no longer valid then.
+  /// See `PlayerCore.toggleShuffle()` and issue #718.
+  var isShuffled = false
   private var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
   private var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
 

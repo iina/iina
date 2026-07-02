@@ -70,6 +70,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     loopBtn.setButtonType(.momentaryPushIn)
     updateLoopBtnStatus()
     shuffleBtn = makeButton("shuffle", "shuffle", #selector(shuffleBtnAction))
+    updateShuffleBtnStatus()
     sortBtn = makeButton("sort", "arrow.up.arrow.down", #selector(sortBtnAction))
     addBtn = makeButton("add", "plus", #selector(addToPlaylistBtnAction))
     removeBtn = makeButton("remove", "minus", #selector(removeBtnAction))
@@ -151,6 +152,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     player.observe(.iinaPlaylistChanged) { [unowned self] _ in
       playlistTotalLengthIsReady = false
       updateTable()
+      updateShuffleBtnStatus()
     }
 
     player.observe(.iinaLoopStatusChanged) { [unowned self] _ in
@@ -163,6 +165,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   private func update() {
     updateTable()
     updateLoopBtnStatus()
+    updateShuffleBtnStatus()
   }
 
   private func updateTable() {
@@ -179,6 +182,12 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     case .file: .sf("custom.repeat.1.rectangle.fill")
     default:    .sf("custom.repeat.rectangle.fill")
     }
+  }
+
+  /// Tint the shuffle button while a shuffle is in effect, so it reads as a toggle (issue #718).
+  func updateShuffleBtnStatus() {
+    guard player.info.state.active else { return }
+    shuffleBtn.contentTintColor = player.info.isShuffled ? .controlAccentColor : nil
   }
 
 

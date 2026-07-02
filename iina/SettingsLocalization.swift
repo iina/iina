@@ -9,16 +9,17 @@
 import Foundation
 
 struct SettingsLocalization {
-  struct Key: RawRepresentable {
-    typealias RawValue = String
-    var rawValue: String
+  struct Key {
+    let rawValue: String
+    let isGeneral: Bool
 
-    init(_ rawValue: String) {
+    init(_ rawValue: String, isGeneral: Bool = false) {
       self.rawValue = rawValue
+      self.isGeneral = isGeneral
     }
 
-    init?(rawValue: String) {
-      self.rawValue = rawValue
+    static func general(_ rawValue: String) -> Key {
+      Key(rawValue, isGeneral: true)
     }
   }
 }
@@ -79,14 +80,12 @@ extension SettingsLocalization.Key {
   static let text_LiveText = SettingsLocalization.Key("$LiveText")
   static let videoThreadsLabel = SettingsLocalization.Key("videoThreads.label")
   static let videoThreadsDesc = SettingsLocalization.Key("videoThreads.desc")
-  static let text_Video = SettingsLocalization.Key("$Video")
   static let text_nits = SettingsLocalization.Key("$nits")
 
   // Audio
   static let audioDriverEnableAVFoundationLabel = SettingsLocalization.Key("audioDriverEnableAVFoundation.label")
   static let gaplessAudioLabel = SettingsLocalization.Key("gaplessAudio.label")
   static let preferredAudioDeviceLabel = SettingsLocalization.Key("preferredAudioDevice.label")
-  static let text_Audio = SettingsLocalization.Key("$Audio")
   static let text_SPDIFOutput = SettingsLocalization.Key("$SPDIFOutput")
   static let text_PreferredLanguage = SettingsLocalization.Key("$PreferredLanguage")
   static let text_dB = SettingsLocalization.Key("$dB")

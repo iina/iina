@@ -38,7 +38,7 @@ class SidebarLayoutPane: SidebarScrollView {
       spacing: .sidebarItemSpacing,
       ui.hStack(
         ui.image("circle.lefthalf.filled", "circle.lefthalf.fill", size: 20, config: .sidebarIconConfig),
-        ui.label("Theme"),
+        ui.label("settings.themeMaterial.desc"),
         ui.flexibleSpace(),
         ThemeSwitch(.themeMaterial),
       )
@@ -49,7 +49,7 @@ class SidebarLayoutPane: SidebarScrollView {
         spacing: .sidebarItemSpacing,
         ui.hStack(
           ui.image("liquid.glass", size: 20, config: .sidebarIconConfig),
-          ui.label("Liquid Glass"),
+          ui.label("sidebar.liquid_glass"),
           ui.flexibleSpace(),
         ),
         ui.vStack(
@@ -57,21 +57,21 @@ class SidebarLayoutPane: SidebarScrollView {
           ui.hStack(
             ui.space(),
             ui.image("osd", size: 16, config: .sidebarIconConfig),
-            ui.label("On Screen Display", isSmall: true),
+            ui.label("settings.$OnScreenDisplay", isSmall: true),
             ui.flexibleSpace(),
             ui.toggleButton(bindTo: .useLiquidGlassOSD, size: .mini)
           ),
           ui.hStack(
             ui.space(),
             ui.image("osc.floating", size: 16, config: .sidebarIconConfig),
-            ui.label("On Screen Controller", isSmall: true),
+            ui.label("settings.$OnScreenController", isSmall: true),
             ui.flexibleSpace(),
             ui.toggleButton(bindTo: .useLiquidGlassOSC, size: .mini)
           ),
           ui.hStack(
             ui.space(),
             ui.image("sidebar.squares.trailing", size: 16, config: .sidebarIconConfig),
-            ui.label("Sidebar", isSmall: true),
+            ui.label("sidebar.sidebar", isSmall: true),
             ui.flexibleSpace(),
             ui.toggleButton(bindTo: .useLiquidGlassSidebar, size: .mini)
           ),
@@ -85,7 +85,7 @@ class SidebarLayoutPane: SidebarScrollView {
 
     stack.addArrangedSubview(Container(ui.hStack(
       ui.image("rectangle.grid.3x2.fill", size: 20, config: .sidebarIconConfig),
-      ui.label("Compact Interface"),
+      ui.label("sidebar.compact_interface"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .compactUI, size: .small)
     )) {
@@ -97,14 +97,14 @@ class SidebarLayoutPane: SidebarScrollView {
     videoSettingsStack.addArrangedSubview(ui.hStack(
       ui.image("custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle",
                size: 20, config: .sidebarIconConfig),
-      ui.label("Edge-to-Edge Video"),
+      ui.label("sidebar.edge_to_edge_video"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .edgeToEdgeVideo, size: .small)
     ))
 
     self.lockWindowAspectStack = ui.hStack(
       ui.image("custom.lock.rectangle", size: 20, config: .sidebarIconConfig),
-      ui.label("Lock Window Aspect Ratio"),
+      ui.label("sidebar.lock_window_aspect"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .unlockWindowAspectRatio, size: .small, inverted: true)
     )
@@ -112,13 +112,13 @@ class SidebarLayoutPane: SidebarScrollView {
 
     self.dockedUIStack = ui.hStack(
       ui.image("dock.arrow.down.rectangle", size: 20, config: .sidebarIconConfig),
-      ui.label("Docked Control Bar and Titlebar"),
+      ui.label("sidebar.docked"),
       ui.flexibleSpace(),
       ui.toggleButton(bindTo: .dockedControlBarAndTitlebar, size: .small)
     )
     videoSettingsStack.addArrangedSubview(dockedUIStack)
 
-    self.removeBlackBarBtn = SideBarButton("Remove black bars", image: .removeBlackbars)
+    self.removeBlackBarBtn = SideBarButton(ui.localized("sidebar.fit_window_to_video"), image: .removeBlackbars)
     removeBlackBarBtn.target = self
     removeBlackBarBtn.action = #selector(removeBlackBars)
     removeBlackBarBtn.size(height: 32)
@@ -177,7 +177,7 @@ class SidebarLayoutPane: SidebarScrollView {
 
     self.oscLayoutSelector = OSCLayoutSelector()
 
-    let label = createSectionTitle("On Screen Controller")
+    let label = createSectionTitle("settings.$OnScreenController")
     let stack = ui.hStack(oscLayoutSelector.views)
     stack.distribution = .fillEqually
 
@@ -214,11 +214,11 @@ class SidebarLayoutPane: SidebarScrollView {
     let container = NSView()
     container.setContentHuggingPriority(.init(200), for: .horizontal)
 
-    let label = createSectionTitle("Sidebar Position")
+    let label = createSectionTitle("sidebar.sidebar_position")
     let config = [
-      ("gearshape.fill", "Settings", Preference.Key.sidebarSettingsDisplayAtLeading),
-      ("list.bullet.rectangle.fill", "Playlist and Chapters", Preference.Key.sidebarPlaylistDisplayAtLeading),
-      ("puzzlepiece.extension.fill", "Plugins", Preference.Key.sidebarPluginsDisplayAtLeading),
+      ("gearshape.fill", "sidebar.settings", Preference.Key.sidebarSettingsDisplayAtLeading),
+      ("list.bullet.rectangle.fill", "sidebar.playlist_and_chapters", Preference.Key.sidebarPlaylistDisplayAtLeading),
+      ("puzzlepiece.extension.fill", "sidebar.plugins", Preference.Key.sidebarPluginsDisplayAtLeading),
     ]
     let stack = Container(ui.vStack(
       spacing: .sidebarSettingsSpacing,
@@ -391,9 +391,9 @@ fileprivate class ThemeSwitch: NSSegmentedControl {
     setTag(0, forSegment: 0)
     setTag(2, forSegment: 1)
     setTag(4, forSegment: 2)
-    setLabel("Dark", forSegment: 0)
-    setLabel("Light", forSegment: 1)
-    setLabel("Auto", forSegment: 2)
+    setLabel(ui.localized("settings.themeMaterial.items.0"), forSegment: 0)
+    setLabel(ui.localized("settings.themeMaterial.items.2"), forSegment: 1)
+    setLabel(ui.localized("general.auto"), forSegment: 2)
 
     prefObserver.add(key, runNow: true) { [unowned self] _ in
       selectSegment(withTag: Preference.integer(for: key))

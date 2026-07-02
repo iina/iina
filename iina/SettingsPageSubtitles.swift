@@ -15,7 +15,7 @@ class SettingsPageSubtitles: SettingsPage {
   }
   
   override var title: String {
-    return NSLocalizedString("preference.subtitle", comment: "Subtitles")
+    return NSLocalizedString("sidebar.sub", comment: "Subtitles")
   }
 
   override var image: NSImage {

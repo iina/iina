@@ -52,6 +52,9 @@ class SettingsUIHelper: UIHelper {
   }
 
   func localized(_ key: SettingsLocalization.Key) -> String {
+    if key.isGeneral {
+      return NSLocalizedString(key.rawValue, comment: key.rawValue)
+    }
     return localized(key.rawValue)
   }
 

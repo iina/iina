@@ -17,7 +17,7 @@ class SettingsPageAudio: SettingsPage {
   }
 
   override var title: String {
-    return NSLocalizedString("preference.audio", comment: "Audio")
+    return NSLocalizedString("sidebar.audio", comment: "Audio")
   }
 
   override var image: NSImage {

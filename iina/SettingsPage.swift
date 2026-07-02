@@ -85,8 +85,20 @@ struct SettingsViewsBuilder {
 
 @resultBuilder
 struct SettingsItemsBuilder {
-  static func buildBlock(_ components: SettingsItem.Base...) -> [SettingsItem.Base] {
-    return components
+  static func buildBlock(_ components: [SettingsItem.Base]...) -> [SettingsItem.Base] {
+    return components.flatMap { $0 }
+  }
+
+  static func buildExpression(_ expression: SettingsItem.Base) -> [SettingsItem.Base] {
+    [expression]
+  }
+
+  static func buildOptional(_ component: [SettingsItem.Base]?) -> [SettingsItem.Base] {
+    return component ?? []
+  }
+
+  static func buildLimitedAvailability(_ component: [SettingsItem.Base]) -> [SettingsItem.Base] {
+    component
   }
 }
 
@@ -132,6 +144,7 @@ class SettingsPage {
   var title: String { "" }
   var localizationTable: String { "" }
   var image: NSImage { NSImage() }
+  var helpInfo: String? { nil }
   var sectionSpacing: CGFloat { 16 }
 
   let symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)

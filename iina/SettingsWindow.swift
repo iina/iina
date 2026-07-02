@@ -154,8 +154,11 @@ class SettingsWindow: NSWindow {
     self.isMovableByWindowBackground = true
     self.titlebarAppearsTransparent = true
     self.toolbarStyle = .unified
-    self.toolbar = NSToolbar()
-    self.toolbar?.displayMode = .iconOnly
+    let toolbar = NSToolbar()
+    toolbar.allowsUserCustomization = false
+    toolbar.delegate = self
+    toolbar.displayMode = .iconOnly
+    self.toolbar = toolbar
 
     pages.forEach { $0.registerSearchEntries() }
     SettingsSearch.makeTries()
@@ -186,6 +189,14 @@ class SettingsWindow: NSWindow {
     }
 
     self.title = page.title
+    if let toolbar {
+      for _ in 0..<toolbar.items.count {
+        toolbar.removeItem(at: 0)
+      }
+      if page.helpInfo != nil {
+        toolbar.insertItem(withItemIdentifier: .moreInfo, at: 0)
+      }
+    }
 
     DispatchQueue.main.async {
       self.updateSectionIndicator()
@@ -787,6 +798,53 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
       tableView.insertRows(at: IndexSet(integer: tableView.selectedRow + 1), withAnimation: options)
     }
     currentPageIndex = tableView.selectedRow
+  }
+}
+
+
+fileprivate extension NSToolbarItem.Identifier {
+  static let moreInfo = NSToolbarItem.Identifier(rawValue: "moreInfo")
+}
+
+
+extension SettingsWindow: NSToolbarDelegate {
+  func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return [.moreInfo]
+  }
+
+  func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
+    return []
+  }
+
+  func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    if itemIdentifier == .moreInfo {
+      let item = NSToolbarItem(itemIdentifier: .moreInfo)
+      item.view = NSButton(image: .sf("info.circle")!,
+                           target: self,
+                           action: #selector(showMoreInfo))
+      return item
+    }
+    return nil
+  }
+
+  @objc private func showMoreInfo(_ sender: NSButton) {
+    guard let idx = currentPageIndex, let page = pages[at: idx],
+          let info = page.helpInfo else { return }
+    let popover = NSPopover()
+    popover.behavior = .transient
+    let view = NSView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.widthAnchor.constraint(equalToConstant: 300).isActive = true
+    let label = NSTextField(wrappingLabelWithString: info)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(label)
+    label.padding(.all(16))
+    let vc = NSViewController()
+    vc.view = view
+    popover.contentViewController = vc
+    // if #available(macOS 14.0, *)
+    // switch to popover.show(relativeTo:NSToolbarItem) when min macOS version becomes 10.14
+    popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY)
   }
 }
 

@@ -33,6 +33,10 @@ class SettingsPageUI: SettingsPage {
     "SettingsUILocalizable"
   }
 
+  override var helpInfo: String? {
+    ui.localized("more_ui_settings")
+  }
+
   override func pageLoaded() {
     geometryBindings.updateControls()
   }
@@ -55,6 +59,21 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.PopupButton()
           .image(name: "moonphase.first.quarter")
           .bindTo(.themeMaterial, ofType: Preference.Theme.self)
+        if #available(macOS 26.0, *) { 
+          SettingsItem.General(title: .general("sidebar.liquid_glass"))
+            .image(name: "liquid.glass")
+            .withExpandingDetailView {
+              SettingsItem.Switch(title: .text_OnScreenDisplay)
+                .bindTo(.useLiquidGlassOSD)
+              SettingsItem.Switch(title: .text_OnScreenController)
+                .bindTo(.useLiquidGlassOSC)
+              SettingsItem.Switch(title: .general("sidebar.sidebar"))
+                .bindTo(.useLiquidGlassSidebar)
+            }
+        }
+        SettingsItem.Switch(title: .general("sidebar.compact_interface"))
+          .image(name: "rectangle.grid.3x2.fill")
+          .bindTo(.compactUI)
       }
     }
   }

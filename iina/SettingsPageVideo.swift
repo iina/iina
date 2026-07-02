@@ -14,7 +14,7 @@ class SettingsPageVideo: SettingsPage {
   }
 
   override var title: String {
-    return NSLocalizedString("preference.video", comment: "Video")
+    return NSLocalizedString("sidebar.video", comment: "Video")
   }
 
   override var image: NSImage {

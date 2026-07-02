@@ -19,6 +19,7 @@
 "general.na" = "N/A";
 "general.no_result" = "No Result";
 "general.no_title" = "No Title";
+"general.auto" = "Auto";
 
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Value already exists.";
@@ -548,6 +549,17 @@
 "sidebar.playlist" = "Playlist";
 "sidebar.chapters" = "Chapters";
 
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "Sidebar";
+"sidebar.sidebar_position" = "Sidebar Position";
+"sidebar.compact_interface" = "Compact Interface";
+"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
+"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
+"sidebar.docked" = "Docked Control Bar and Titlebar";
+"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.settings" = "Settings";
+"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+
 "sidebar.aspect_ratio" = "Aspect Ratio";
 "sidebar.crop" = "Crop";
 "sidebar.rotation" = "Rotation";
@@ -806,6 +818,7 @@
 "settings.subSpacing.label" = "Font spacing";
 
 // Settings - UI
+"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
 "settings.alwaysFloatOnTop.label" = "Always float on top while playing";
 "settings.alwaysShowOnTopIcon.label" = "Always show float on top status in the title bar";
 "settings.arrowBtnAction.items.0" = "Speed";
@@ -880,7 +893,6 @@
 "settings.$AlwaysWhenPlaying" = "Always when playing a new file";
 "settings.$Appearance" = "Appearance";
 "settings.$AssrtAPIToken" = "Assrt API token";
-"settings.$Audio" = "Audio";
 "settings.$Author" = "Author";
 "settings.$AutoLoad" = "Auto Load";
 "settings.$Background" = "Background";
@@ -985,7 +997,6 @@
 "settings.$Toolbar" = "Toolbar";
 "settings.$Trackpad" = "Trackpad";
 "settings.$Uninstall" = "Uninstall";
-"settings.$Video" = "Video";
 "settings.$Volume" = "Volume";
 "settings.$Website" = "Website";
 "settings.$WhenEnteringPIP" = "When entering Picture-in-Picture";

@@ -168,8 +168,8 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
     self.cancelButton = NSButton(title: ui.localized(.text_Cancel), target: nil, action: nil)
     cancelButton.translatesAutoresizingMaskIntoConstraints = false
     self.label = NSTextField(labelWithString: ui.localized(.text_PleaseSelectTheMediaTypes))
-    self.videoCheckBox = NSButton(title: ui.localized(.text_Video), target: nil, action: nil)
-    self.audioCheckBox = NSButton(title: ui.localized(.text_Audio), target: nil, action: nil)
+    self.videoCheckBox = NSButton(title: ui.localized(.general("sidebar.video")), target: nil, action: nil)
+    self.audioCheckBox = NSButton(title: ui.localized(.general("sidebar.audio")), target: nil, action: nil)
     self.playListCheckBox = NSButton(title: ui.localized(.text_Playlist), target: nil, action: nil)
     [videoCheckBox, audioCheckBox, playListCheckBox].forEach {
       $0.setButtonType(.switch)

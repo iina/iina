@@ -454,15 +454,9 @@ class MainWindowController: PlayerWindowController {
 
     // size
     window.minSize = AppData.mainWindowMinSize
-    if let wf = windowFrameFromGeometry() {
-      window.setFrame(wf, display: false)
-    }
-
     window.aspectRatio = AppData.sizeWhenNoVideo
     setWindowToolbar()
     cv.autoresizesSubviews = false
-
-    // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // Work around a bug in macOS Ventura where HDR content becomes dimmed when playing in full
@@ -615,6 +609,10 @@ class MainWindowController: PlayerWindowController {
     pipOverlayView.isHidden = true
 
     if player.disableUI { hideUI() }
+
+    if let wf = windowFrameFromGeometry() {
+      window.setFrame(wf, display: false)
+    }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)

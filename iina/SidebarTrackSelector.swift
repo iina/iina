@@ -33,6 +33,7 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     wantsLayer = true
     layer?.cornerRadius = 8
     size(height: 98)
+    verticalScrollElasticity = .automatic
 
     player.observe(.iinaTracklistChanged) { [weak self] _ in
       self?.tableView.reloadData()
@@ -42,6 +43,50 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
         self?.tableView.reloadData()
       }
     }
+  }
+
+  private var isTrackingCurrentGesture = false
+  private var isTouchActive = false
+  private var lastTouchEndedTimestamp: TimeInterval = 0
+
+  override func scrollWheel(with event: NSEvent) {
+    // If the content is small enough to fit in the view, it doesn't need to scroll.
+    // In this case, strictly forward ALL scroll events to the parent (the sidebar)
+    // so it doesn't trap the cursor and cause "focus stealing".
+    if let documentView = documentView, documentView.bounds.height <= contentView.bounds.height {
+      nextResponder?.scrollWheel(with: event)
+      return
+    }
+
+    // Ensure gestures that started outside this view (e.g. over the parent sidebar)
+    // are not trapped when this view scrolls under the cursor mid-gesture.
+    if event.hasPreciseScrollingDeltas && (event.phase != [] || event.momentumPhase != []) {
+      if event.phase == .mayBegin || event.phase == .began {
+        isTrackingCurrentGesture = true
+        isTouchActive = true
+      } else if event.phase == .changed {
+        if !isTouchActive {
+          isTrackingCurrentGesture = false
+        }
+      } else if event.phase == .ended || event.phase == .cancelled {
+        isTouchActive = false
+        lastTouchEndedTimestamp = event.timestamp
+      } else if event.momentumPhase == .began {
+        if !isTrackingCurrentGesture || (event.timestamp - lastTouchEndedTimestamp) >= 0.1 {
+          isTrackingCurrentGesture = false
+        }
+      } else if event.momentumPhase == .ended || event.momentumPhase == .cancelled {
+        isTrackingCurrentGesture = false
+        isTouchActive = false
+      }
+
+      if !isTrackingCurrentGesture {
+        nextResponder?.scrollWheel(with: event)
+        return
+      }
+    }
+
+    super.scrollWheel(with: event)
   }
   
   required init?(coder: NSCoder) {

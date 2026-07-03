@@ -476,8 +476,17 @@ class MainWindowController: PlayerWindowController {
     videoViewContainer = NSView()
     videoViewContainer.translatesAutoresizingMaskIntoConstraints = false
 
-    // init quick setting view now
-    let _ = sidebars.quickSettingView
+    DispatchQueue.main.async { [weak self] in
+      if #available(macOS 14, *) {
+        self?.sidebars.quickSettingView.loadViewIfNeeded()
+        self?.sidebars.playlistView.loadViewIfNeeded()
+        self?.sidebars.pluginView.loadViewIfNeeded()
+      } else {
+        _ = self?.sidebars.quickSettingView.view
+        _ = self?.sidebars.playlistView.view
+        _ = self?.sidebars.pluginView.view
+      }
+    }
 
     // create translucent views
     oscBottomView = OSCBottomView(mainWindow: self)

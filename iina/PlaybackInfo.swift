@@ -235,6 +235,8 @@ class PlaybackInfo {
   ///     To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock. The cache
   ///     properties are private to force all access to be through class methods that properly coordinate thread access.
   @Atomic var playlist: [MPVPlaylistItem] = []
+
+  var isShuffled = false
   private var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
   private var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
 

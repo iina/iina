@@ -42,6 +42,8 @@ class Logger: NSObject {
     }
   }
 
+  @Atomic static var buffer: [Logger.Log] = []
+
   class Subsystem: RawRepresentable {
     let rawValue: String
     let image: NSImage?
@@ -278,8 +280,12 @@ class Logger: NSObject {
     let date = Date()
     let string = formatMessage(message, level, subsystem, true, date)
     let log = Log(subsystem: subsystem.rawValue, level: level, message: message, date: dateFormatter.string(from: date), logString: string)
+
+    $buffer.withLock {
+      $0.append(log)
+    }
     Task { @MainActor in
-      AppDelegate.shared.logWindow.append(log)
+      NotificationCenter.default.post(name: .iinaLogAppended, object: nil)
     }
 
     print(string, terminator: "")

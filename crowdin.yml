@@ -3,7 +3,5 @@ project_id: 383539
 branch: develop
 preserve_hierarchy: true
 files:
-  - source: /iina/en.lproj/Localizable.strings
-    ignore:
-      - /iina/en.lproj/Settings*.strings
+  - source: /iina/en.lproj/*.strings
     translation: /iina/%osx_code%/%original_file_name%

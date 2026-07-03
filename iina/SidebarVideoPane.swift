@@ -258,6 +258,9 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
     }
 
     private var isVerticalGesture = false
+    private var isTrackingCurrentGesture = false
+    private var isTouchActive = false
+    private var lastTouchEndedTimestamp: TimeInterval = 0
 
     override func scrollWheel(with event: NSEvent) {
       // If the horizontal options are few enough to fully fit without scrolling,
@@ -267,11 +270,13 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
         return
       }
       
-      // For trackpad gestures, lock the scroll axis at the beginning of the swipe.
-      // This prevents the horizontal scroll view from capturing slightly-diagonal vertical swipes
-      // and eating the vertical delta (which causes the sidebar to get "stuck").
-      if event.hasPreciseScrollingDeltas {
+      // For trackpad gestures, lock the scroll axis at the beginning of the swipe,
+      // and ensure gestures that started outside this view (e.g. over the parent sidebar)
+      // are not trapped when this view scrolls under the cursor mid-gesture.
+      if event.hasPreciseScrollingDeltas && (event.phase != [] || event.momentumPhase != []) {
         if event.phase == .began || event.phase == .mayBegin {
+          isTrackingCurrentGesture = true
+          isTouchActive = true
           if event.scrollingDeltaX != 0 || event.scrollingDeltaY != 0 {
             isVerticalGesture = abs(event.scrollingDeltaY) > abs(event.scrollingDeltaX)
           } else {
@@ -279,9 +284,23 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
             // the main sidebar vertical scrolling is the primary user interaction.
             isVerticalGesture = true
           }
+        } else if event.phase == .changed {
+          if !isTouchActive {
+            isTrackingCurrentGesture = false
+          }
+        } else if event.phase == .ended || event.phase == .cancelled {
+          isTouchActive = false
+          lastTouchEndedTimestamp = event.timestamp
+        } else if event.momentumPhase == .began {
+          if !isTrackingCurrentGesture || (event.timestamp - lastTouchEndedTimestamp) >= 0.1 {
+            isTrackingCurrentGesture = false
+          }
+        } else if event.momentumPhase == .ended || event.momentumPhase == .cancelled {
+          isTrackingCurrentGesture = false
+          isTouchActive = false
         }
         
-        if isVerticalGesture {
+        if !isTrackingCurrentGesture || isVerticalGesture {
           nextResponder?.scrollWheel(with: event)
           return
         }

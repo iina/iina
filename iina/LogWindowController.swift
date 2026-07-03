@@ -29,7 +29,6 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   private let tableView = NSTableView()
   private let scrollView = NSScrollView()
 
-  @Atomic private var buffer: [Logger.Log] = []
   @objc private dynamic var logs: [Logger.Log] = []
   private let arrayController = NSArrayController()
   private var isWindowVisible: Bool {
@@ -106,6 +105,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
 
       NotificationCenter.default.addObserver(self, selector: #selector(occlusionChanged(_:)),
                                              name: NSWindow.didChangeOcclusionStateNotification, object: window)
+      NotificationCenter.default.addObserver(self, selector: #selector(scheduleFlush), name: .iinaLogAppended, object: nil)
 
       let toolbar = NSToolbar(identifier: "iina.logWindow.toolbar")
       toolbar.delegate = self
@@ -398,17 +398,8 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
     updatePredicate()
   }
 
-  func append(_ log: Logger.Log) {
-    $buffer.withLock {
-      $0.append(log)
-    }
-    if isWindowVisible {
-      scheduleFlush()
-    }
-  }
-
-  private func scheduleFlush() {
-    guard flushTimer == nil else { return }
+  @objc private func scheduleFlush() {
+    guard flushTimer == nil && isWindowVisible else { return }
     flushTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { [weak self] _ in
       self?.flushTimer = nil
       self?.flushBuffer()
@@ -416,7 +407,7 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   }
 
   private func flushBuffer() {
-    let toFlush: [Logger.Log] = $buffer.withLock {
+    let toFlush: [Logger.Log] = Logger.$buffer.withLock {
       let copy = $0
       $0.removeAll(keepingCapacity: true)
       return copy

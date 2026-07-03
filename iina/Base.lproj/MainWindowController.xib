@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="25084" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,6 @@
                 <outlet property="fragControlViewMiddleView" destination="Yv6-0K-6E4" id="8vA-vh-qiH"/>
                 <outlet property="fragControlViewRightView" destination="Xts-Pc-T8d" id="yhF-yH-Cdh"/>
                 <outlet property="fragSliderView" destination="BE1-yC-oJL" id="KXu-MZ-mx8"/>
-                <outlet property="fragToolbarView" destination="KfP-G9-8pD" id="R84-gZ-D93"/>
                 <outlet property="fragVolumeView" destination="N3B-DL-XOA" id="4VW-Wa-AD7"/>
                 <outlet property="leftArrowButton" destination="10x-bg-xlj" id="HOT-Yl-7aO"/>
                 <outlet property="leftArrowLabel" destination="Yg9-Sd-sWy" id="fps-VD-ZgC"/>
@@ -47,7 +46,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                         <subviews>
                             <imageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YkI-ii-zaW">
-                                <rect key="frame" x="261" y="155" width="118" height="90"/>
+                                <rect key="frame" x="261" y="155" width="118.5" height="90.5"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="pip" catalog="system" id="0QW-Vy-zmW"/>
                                 <symbolConfiguration key="symbolConfiguration" configurationType="pointSize" pointSize="80" weight="thin">
                                     <nil key="locale"/>
@@ -95,7 +94,7 @@
             <rect key="frame" x="0.0" y="0.0" width="104" height="24"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                    <rect key="frame" x="0.0" y="-3" width="24" height="30"/>
+                    <rect key="frame" x="0.0" y="-2.5" width="24.5" height="30"/>
                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speaker.wave.3.fill" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
                         <behavior key="behavior" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -287,15 +286,10 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
             <point key="canvasLocation" x="133" y="727"/>
         </stackView>
-        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" id="KfP-G9-8pD">
-            <rect key="frame" x="0.0" y="0.0" width="106" height="24"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <point key="canvasLocation" x="587" y="727"/>
-        </stackView>
     </objects>
     <resources>
         <image name="pause" width="24" height="24"/>
-        <image name="pip" catalog="system" width="21" height="16"/>
+        <image name="pip" catalog="system" width="20" height="16"/>
         <image name="play" width="24" height="24"/>
         <image name="speaker.wave.3.fill" catalog="system" width="22" height="15"/>
         <image name="speed" width="24" height="24"/>

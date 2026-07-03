@@ -83,6 +83,8 @@ class MainWindowController: PlayerWindowController {
   var oscBottomView: OSCBottomView!
   var oscFloatingView: OSCFloatingView!
 
+  var oscToolbarView: NSStackView!
+
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
   var bufferIndicatorView: BufferIndicatorView!
@@ -350,7 +352,7 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.enableLiveText.rawValue:
       if #available(macOS 13, *), let newValue = change[.newKey] as? Bool {
-        let buttons = fragToolbarView.subviews as! [NSButton]
+        let buttons = oscToolbarView.subviews as! [NSButton]
         if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
@@ -394,7 +396,6 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var bottomView: NSView!
 
   @IBOutlet var fragControlView: NSStackView!
-  @IBOutlet var fragToolbarView: NSStackView!
   @IBOutlet var fragVolumeView: NSView!
   @IBOutlet var fragSliderView: NSView!
   @IBOutlet var fragControlViewMiddleView: NSView!
@@ -502,9 +503,16 @@ class MainWindowController: PlayerWindowController {
     timePreviewView.isHidden = true
     timePreviewView.textField.font = monospacedFont
 
-    // osc bottom
+    // osc
 
     oscBottomView.padding(.horizontal)
+
+    self.oscToolbarView = NSStackView()
+    oscToolbarView.translatesAutoresizingMaskIntoConstraints = false
+    oscToolbarView.orientation = .horizontal
+    oscToolbarView.alignment = .centerY
+    oscToolbarView.spacing = 0
+    oscToolbarView.size(height: 24)
 
     // osd
 
@@ -812,7 +820,7 @@ class MainWindowController: PlayerWindowController {
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
     let effectiveButtons = buttons.filter { $0 != .liveText || Preference.isLiveTextEnabled }
-    fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
+    oscToolbarView.views.forEach { oscToolbarView.removeView($0) }
     let liveTextEnabled = Preference.bool(for: .enableLiveText)
     for buttonType in effectiveButtons {
       let button = NSButton()
@@ -821,14 +829,14 @@ class MainWindowController: PlayerWindowController {
         button.image = Preference.ToolBarButton.liveText.alternateImage()
       }
       button.action = #selector(self.toolBarButtonAction(_:))
-      fragToolbarView.addView(button, in: .trailing)
+      oscToolbarView.addView(button, in: .trailing)
     }
   }
 
   @objc
   private func updateOSCToolbarButtons(_ notification: Notification) {
     func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
-      let buttons = fragToolbarView.subviews as! [NSButton]
+      let buttons = oscToolbarView.subviews as! [NSButton]
       let currentButton = buttons.first(where: { $0.tag == button.rawValue })
       currentButton?.image = isHighlighted ? button.alternateImage() : button.image()
     }
@@ -868,7 +876,7 @@ class MainWindowController: PlayerWindowController {
         stackView!.removeView($0)
       }
     }
-    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach {
+    [fragSliderView, fragControlView, oscToolbarView, fragVolumeView].forEach {
         $0!.removeFromSuperview()
     }
 
@@ -890,14 +898,14 @@ class MainWindowController: PlayerWindowController {
       fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewRightView)
       oscFloatingView.oscTopView.addView(fragVolumeView, in: .leading)
-      oscFloatingView.oscTopView.addView(fragToolbarView, in: .trailing)
+      oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
       oscFloatingView.oscTopView.addView(fragControlView, in: .center)
 
       // Setting the visibility priority to detach only will cause freeze when resizing the window
       // (and triggering the detach) in macOS 11.
       if !isMacOS11 {
         oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
         oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       }
       oscFloatingView.oscBottomView.addSubview(fragSliderView)
@@ -910,13 +918,13 @@ class MainWindowController: PlayerWindowController {
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
       oscTopMainView.addView(fragVolumeView, in: .trailing)
-      oscTopMainView.addView(fragToolbarView, in: .trailing)
+      oscTopMainView.addView(oscToolbarView, in: .trailing)
       oscTopMainView.addView(fragControlView, in: .leading)
       oscTopMainView.addView(fragSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscTopMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
       oscTopMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
-      oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
+      oscTopMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     case .bottom:
       oscBottomView.isHidden = false
       let oscBottomMainView = oscBottomView.oscView!
@@ -924,13 +932,13 @@ class MainWindowController: PlayerWindowController {
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
       fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
       oscBottomMainView.addView(fragVolumeView, in: .trailing)
-      oscBottomMainView.addView(fragToolbarView, in: .trailing)
+      oscBottomMainView.addView(oscToolbarView, in: .trailing)
       oscBottomMainView.addView(fragControlView, in: .leading)
       oscBottomMainView.addView(fragSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscBottomMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
       oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
-      oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
+      oscBottomMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     }
 
     fadeableViews.update()
@@ -1808,7 +1816,7 @@ class MainWindowController: PlayerWindowController {
 
     // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
     if isMacOS11 && oscPosition == .floating {
-      guard let maxWidth = [fragVolumeView, fragToolbarView].compactMap({ $0?.frame.width }).max() else {
+      guard let maxWidth = [fragVolumeView, oscToolbarView].compactMap({ $0?.frame.width }).max() else {
         return
       }
 
@@ -1823,15 +1831,15 @@ class MainWindowController: PlayerWindowController {
       let views = oscFloatingView.oscTopView.views
       if hide {
         if views.contains(fragVolumeView)
-            && views.contains(fragToolbarView) {
+            && views.contains(oscToolbarView) {
           oscFloatingView.oscTopView.removeView(fragVolumeView)
-          oscFloatingView.oscTopView.removeView(fragToolbarView)
+          oscFloatingView.oscTopView.removeView(oscToolbarView)
         }
       } else {
         if !views.contains(fragVolumeView)
-            && !views.contains(fragToolbarView) {
+            && !views.contains(oscToolbarView) {
           oscFloatingView.oscTopView.addView(fragVolumeView, in: .leading)
-          oscFloatingView.oscTopView.addView(fragToolbarView, in: .trailing)
+          oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
         }
       }
     }
@@ -1946,6 +1954,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func hideUI(force: Bool = false) {
+    return
     // Don't hide UI when in PIP
     guard pipStatus == .notInPIP || animationState == .hidden else {
       return

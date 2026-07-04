@@ -778,7 +778,7 @@ class PlaylistTrackCellView: NSTableCellView {
     trackNameLabel.lineBreakMode = .byTruncatingMiddle
     trackNameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     self.infoLabel = ui.label("", font: .boldSystemFont(ofSize: 11), isSecondary: true)
-    self.durationLabel = ui.label("", isSmall: true, isSecondary: true)
+    self.durationLabel = ui.label("", isSmall: true, isSecondary: true, canCompress: false)
     self.stackView = ui.hStack(
       spacing: 4,
       prefixBtn,

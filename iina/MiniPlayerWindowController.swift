@@ -298,12 +298,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     closeButtonBackground.padding(.all)
 
     self.closeButton = NSButton()
-    closeButton.image = .close
+    closeButton.image = .sf("xmark.circle.fill")
     closeButton.action = #selector(self.close)
+    closeButton.target = self
     self.backButton = NSButton()
-    backButton.image = .backward
+    backButton.image = .sf("arrow.uturn.backward.circle.fill")
+    backButton.action = #selector(self.backBtnAction(_:))
     backButton.target = self
-    backButton.action = #selector(backBtnAction(_:))
     backButton.toolTip = NSLocalizedString("mini_player.back", comment: "back")
     closeButton.toolTip = NSLocalizedString("mini_player.close", comment: "close")
     [closeButton, backButton].forEach { button in
@@ -311,7 +312,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       button!.bezelStyle = .smallSquare
       button!.isBordered = false
       button!.imagePosition = .imageOnly
-      button!.imageScaling = .scaleProportionallyUpOrDown
       button!.refusesFirstResponder = true
       button!.widthAnchor.constraint(equalTo: button!.heightAnchor, multiplier: 1).isActive = true
       closeButtonBackground.contentView!.addSubview(button!)

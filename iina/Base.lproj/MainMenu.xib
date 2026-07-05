@@ -394,7 +394,7 @@ CA
                             <menuItem title="Lock Window Aspect Ratio" id="Saz-zT-RXt">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
-                            <menuItem title="Live Text" secondaryImage="text.viewfinder" catalog="system" id="lq9-av-Um9">
+                            <menuItem title="Live Text" id="lq9-av-Um9">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="xpM-h7-A4R"/>

@@ -559,7 +559,7 @@ class MainWindowController: PlayerWindowController {
 
     self.oscSliderView = TimeLabelOverflowedView()
     [leftLabel, rightLabel].forEach { label in
-      label!.textColor = .textColor
+      label!.textColor = .secondaryLabelColor
       label!.alignment = .center
       label!.font = .messageFont(ofSize: 11)
       label!.widthAnchor.constraint(greaterThanOrEqualToConstant: 46).isActive = true

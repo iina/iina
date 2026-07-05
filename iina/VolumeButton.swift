@@ -69,7 +69,6 @@ class VolumeButton: NSView {
     default: "speaker.wave.3.fill"
     }
     let configuration = NSImage.SymbolConfiguration(pointSize: 13, weight: .regular)
-      .applying(.init(hierarchicalColor: .labelColor))
     return (.sf(symbol, withConfiguration: configuration), symbol)
   }
 }

@@ -18,39 +18,32 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     return NSNib.Name("MiniPlayerWindowController")
   }
 
-  @objc let monospacedFont: NSFont = {
-    let fontSize = NSFont.systemFontSize(for: .mini)
-    return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
-  }()
-
   override var videoView: VideoView {
     return player.mainWindow.videoView
   }
 
-  @IBOutlet weak var volumeButton: NSButton!
-  @IBOutlet var volumePopover: NSPopover!
-  @IBOutlet weak var volumeSliderView: NSView!
-  @IBOutlet weak var backgroundView: NSVisualEffectView!
-  @IBOutlet weak var closeButtonView: NSView!
-  @IBOutlet weak var closeButtonBackgroundViewVE: NSVisualEffectView!
-  @IBOutlet weak var closeButtonBackgroundViewBox: NSBox!
-  @IBOutlet weak var closeButtonVE: NSButton!
-  @IBOutlet weak var backButtonVE: NSButton!
-  @IBOutlet weak var closeButtonBox: NSButton!
-  @IBOutlet weak var backButtonBox: NSButton!
-  @IBOutlet weak var videoWrapperView: NSView!
-  @IBOutlet var videoWrapperViewBottomConstraint: NSLayoutConstraint!
-  @IBOutlet var controlViewTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var playlistWrapperView: NSVisualEffectView!
-  @IBOutlet weak var mediaInfoView: NSView!
-  @IBOutlet weak var controlView: NSView!
-  @IBOutlet weak var titleLabel: ScrollingTextField!
-  @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
-  @IBOutlet weak var artistAlbumLabel: ScrollingTextField!
-  @IBOutlet weak var volumeLabel: NSTextField!
-  @IBOutlet weak var defaultAlbumArt: NSView!
-  @IBOutlet weak var togglePlaylistButton: NSButton!
-  @IBOutlet weak var toggleAlbumArtButton: NSButton!
+  var volumePopover: NSPopover!
+  var volumeSliderView: NSView!
+  var backgroundView: NSVisualEffectView!
+  var closeButtonView: NSView!
+  var closeButtonBackground: NSBox!
+  var closeButton: NSButton!
+  var closeButtonSizeConstraint: NSLayoutConstraint!
+  var closeButtonSpacingConstraint: NSLayoutConstraint!
+  var backButton: NSButton!
+  var videoWrapperView: NSView!
+  var videoWrapperViewBottomConstraint: NSLayoutConstraint!
+  var controlViewTopConstraint: NSLayoutConstraint!
+  var playlistWrapperView: NSVisualEffectView!
+  var mediaInfoView: NSView!
+  var controlView: NSView!
+  var titleLabel: ScrollingTextField!
+  var titleLabelTopConstraint: NSLayoutConstraint!
+  var artistAlbumLabel: ScrollingTextField!
+  var volumeLabel: NSTextField!
+  var defaultAlbumArt: NSView!
+  var togglePlaylistButton: NSButton!
+  var toggleAlbumArtButton: NSButton!
 
   var isPlaylistVisible = false
   var isVideoVisible = true
@@ -73,13 +66,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   // MARK: - Initialization
 
   override func windowDidLoad() {
+    // need to create before since super calls updateVolume()
+    self.volumeLabel = NSTextField(labelWithString: "50")
+    volumeLabel.translatesAutoresizingMaskIntoConstraints = false
+
     super.windowDidLoad()
 
-    guard let window = window else { return }
+    guard let window, let cv = window.contentView else { return }
 
-    window.styleMask = [.fullSizeContentView, .titled, .resizable, .closable, .miniaturizable]
     window.isMovableByWindowBackground = true
     window.titleVisibility = .hidden
+    window.delegate = self
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
       let button = window.standardWindowButton($0)
       button?.isHidden = true
@@ -96,48 +93,250 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       button?.frame.size = .zero
     }
 
-    setToInitialWindowSize(display: false, animate: false)
+    // MARK: - video wrapper view
 
+    self.videoWrapperView = NSView()
+    videoWrapperView.translatesAutoresizingMaskIntoConstraints = false
+    cv.addSubview(videoWrapperView)
+    videoWrapperView.padding(.horizontal)
+    let videoWrapperTopConstraint = videoWrapperView.topAnchor.constraint(equalTo: cv.topAnchor)
+    videoWrapperTopConstraint.priority = .defaultHigh
+    videoWrapperTopConstraint.isActive = true
+
+    self.defaultAlbumArt = NSView()
+    defaultAlbumArt.translatesAutoresizingMaskIntoConstraints = false
+    defaultAlbumArt.isHidden = false
+    defaultAlbumArt.wantsLayer = true
+    defaultAlbumArt.layer?.contents = #imageLiteral(resourceName: "default-album-art")
+    videoWrapperView.addSubview(defaultAlbumArt)
+    defaultAlbumArt.padding(.top, .leading, .trailing)
+    let videoWrapperShrinkConstraint = videoWrapperView.bottomAnchor.constraint(equalTo: defaultAlbumArt.bottomAnchor)
+    videoWrapperShrinkConstraint.priority = NSLayoutConstraint.Priority(250)
+    videoWrapperShrinkConstraint.isActive = true
+    defaultAlbumArt.widthAnchor.constraint(equalTo: defaultAlbumArt.heightAnchor).isActive = true
+
+    // background view
+
+    self.backgroundView = NSVisualEffectView()
+    backgroundView.translatesAutoresizingMaskIntoConstraints = false
+    backgroundView.blendingMode = .behindWindow
+    backgroundView.material = .underWindowBackground
+    backgroundView.state = .active
+    cv.addSubview(backgroundView)
+    backgroundView.size(height: 72)
+      .padding(.horizontal, .vertical(greaterThan: 0))
+    self.videoWrapperViewBottomConstraint = backgroundView.topAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
+    videoWrapperViewBottomConstraint.isActive = true
+    self.controlViewTopConstraint = backgroundView.topAnchor.constraint(equalTo: cv.topAnchor)
     controlViewTopConstraint.isActive = false
+
+    [leftLabel, rightLabel].forEach { label in
+      label!.textColor = .secondaryLabelColor
+      label!.font = .monospacedDigitFont(for: .mini)
+      label!.widthAnchor.constraint(greaterThanOrEqualToConstant: 32).isActive = true
+    }
+
+    backgroundView.addSubview(leftLabel)
+    leftLabel.alignment = .right
+    leftLabel.padding(.leading(6))
+    backgroundView.addSubview(rightLabel)
+    rightLabel.padding(.trailing(6))
+    rightLabel.alignment = .left
+    leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor, multiplier: 1).isActive = true
+
+    backgroundView.addSubview(playSlider)
+    playSlider.padding(.top(50))
+    playSlider.spacing(.leading(6), to: leftLabel)
+    leftLabel.center(.y, with: playSlider)
+    rightLabel.spacing(.leading(6), to: playSlider)
+    rightLabel.center(.y, with: playSlider)
+
+    self.mediaInfoView = NSView()
+    mediaInfoView.translatesAutoresizingMaskIntoConstraints = false
+    backgroundView.addSubview(mediaInfoView)
+    mediaInfoView.padding(.top(4), .horizontal)
+
+    self.titleLabel = ScrollingTextField(labelWithString: "Title")
+    titleLabel.translatesAutoresizingMaskIntoConstraints = false
+    titleLabel.alignment = .center
+    titleLabel.lineBreakMode = .byTruncatingMiddle
+    titleLabel.font = .boldSystemFont(ofSize: 13)
+    mediaInfoView.addSubview(titleLabel)
+    titleLabel.padding(.horizontal(greaterThan: 24))
+      .center(.x)
+    titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: mediaInfoView.topAnchor, constant: 6)
+    titleLabelTopConstraint.isActive = true
+
+    self.artistAlbumLabel = ScrollingTextField(labelWithString: "Artist - Album")
+    artistAlbumLabel.translatesAutoresizingMaskIntoConstraints = false
+    artistAlbumLabel.wantsLayer = true
+    artistAlbumLabel.controlSize = .small
+    artistAlbumLabel.alignment = .center
+    artistAlbumLabel.font = .messageFont(ofSize: 11)
+    artistAlbumLabel.textColor = .secondaryLabelColor
+    artistAlbumLabel.lineBreakMode = .byClipping
+    mediaInfoView.addSubview(artistAlbumLabel)
+    artistAlbumLabel.padding(.horizontal(greaterThan: 24), .bottom)
+      .center(.x).spacing(.top(4), to: titleLabel)
+
+    self.controlView = NSView()
+    controlView.translatesAutoresizingMaskIntoConstraints = false
+    backgroundView.addSubview(controlView)
+    controlView.padding(.leading, .top, .trailing)
+    controlView.padding(.bottom(greaterThan: 24))
+    controlView.size(height: 48)
+    controlView.addSubview(muteButton)
+
+    let prevBtn = NSButton(image: .nextl, target: self, action: #selector(prevBtnAction))
+    let nextBtn = NSButton(image: .nextr, target: self, action: #selector(nextBtnAction))
+
+    self.togglePlaylistButton = NSButton(image: .playlist, target: self, action: #selector(togglePlaylist))
+    self.toggleAlbumArtButton = NSButton(image: .toggleAlbumArt, target: self, action: #selector(toggleVideoView))
+
+    let iconButtons: [NSButton] = [playButton, prevBtn, nextBtn, togglePlaylistButton, toggleAlbumArtButton]
+    iconButtons.forEach { button in
+      button.translatesAutoresizingMaskIntoConstraints = false
+      button.bezelStyle = .shadowlessSquare
+      button.imagePosition = .imageOnly
+      button.isBordered = false
+      button.imageScaling = .scaleProportionallyUpOrDown
+      button.refusesFirstResponder = true
+      controlView.addSubview(button)
+    }
+
+    playButton.size(width: 28, height: 28)
+    nextBtn.size(width: 28, height: 28)
+    prevBtn.size(width: 28, height: 28)
+    togglePlaylistButton.size(width: 14, height: 14)
+    toggleAlbumArtButton.size(width: 14, height: 14)
+
+    muteButton.center(.y, with: playButton)
+    prevBtn.center(.y, with: playButton)
+      .spacing(.leading(16), to: muteButton)
+    playButton.padding(.top(12)).center(.x, offset: 2)
+      .spacing(.leading(24), to: prevBtn)
+    nextBtn.center(.y, with: playButton)
+      .spacing(.leading(20), to: playButton)
+    togglePlaylistButton.center(.y, with: playButton)
+    togglePlaylistButton.spacing(.leading(20), to: nextBtn)
+    toggleAlbumArtButton.center(.y, with: togglePlaylistButton)
+    toggleAlbumArtButton.spacing(.leading(16), to: togglePlaylistButton)
+
+    // playlist wrapper view
+
+    self.playlistWrapperView = NSVisualEffectView()
+    playlistWrapperView.translatesAutoresizingMaskIntoConstraints = false
+    playlistWrapperView.blendingMode = .behindWindow
+    playlistWrapperView.material = .underWindowBackground
+    playlistWrapperView.state = .active
+    cv.addSubview(playlistWrapperView)
+    playlistWrapperView.size(width: 300)
+    playlistWrapperView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200).isActive = true
+    playlistWrapperView.padding(.horizontal).spacing(.top, to: backgroundView)
+    let playlistWrapperBottomConstraint = cv.bottomAnchor.constraint(equalTo: playlistWrapperView.bottomAnchor)
+    playlistWrapperBottomConstraint.priority = .defaultLow
+    playlistWrapperBottomConstraint.isActive = true
+
+
+    let playlistSeparator = NSBox()
+    playlistSeparator.boxType = .separator
+    playlistSeparator.translatesAutoresizingMaskIntoConstraints = false
+    playlistWrapperView.addSubview(playlistSeparator)
+    playlistSeparator.padding(.leading, .top, .trailing)
+
+    // close button
+
+    self.closeButtonView = NSView()
+    closeButtonView.translatesAutoresizingMaskIntoConstraints = false
+    cv.addSubview(closeButtonView)
+    closeButtonView.padding(.top(6), .leading(8))
+
+    self.closeButtonBackground = NSBox()
+    closeButtonBackground.translatesAutoresizingMaskIntoConstraints = false
+    closeButtonBackground.boxType = .custom
+    closeButtonBackground.contentViewMargins = .zero
+    closeButtonBackground.cornerRadius = 10
+    closeButtonBackground.titlePosition = .noTitle
+    closeButtonBackground.borderColor = .clear
+    closeButtonView.addSubview(closeButtonBackground)
+    closeButtonBackground.padding(.all)
+
+    self.closeButton = NSButton()
+    closeButton.image = .close
+    closeButton.action = #selector(self.close)
+    self.backButton = NSButton()
+    backButton.image = .backward
+    backButton.target = self
+    backButton.action = #selector(backBtnAction(_:))
+    backButton.toolTip = NSLocalizedString("mini_player.back", comment: "back")
+    closeButton.toolTip = NSLocalizedString("mini_player.close", comment: "close")
+    [closeButton, backButton].forEach { button in
+      button!.translatesAutoresizingMaskIntoConstraints = false
+      button!.bezelStyle = .smallSquare
+      button!.isBordered = false
+      button!.imagePosition = .imageOnly
+      button!.imageScaling = .scaleProportionallyUpOrDown
+      button!.refusesFirstResponder = true
+      button!.widthAnchor.constraint(equalTo: button!.heightAnchor, multiplier: 1).isActive = true
+      closeButtonBackground.contentView!.addSubview(button!)
+    }
+
+    backButton.widthAnchor.constraint(equalTo: closeButton.widthAnchor, multiplier: 1).isActive = true
+    closeButtonSizeConstraint = closeButton.widthAnchor.constraint(equalToConstant: 12)
+    closeButtonSizeConstraint.isActive = true
+    closeButton.padding(.top(3), .horizontal(3))
+    backButton.padding(.bottom(3), .horizontal(3))
+    closeButtonSpacingConstraint = backButton.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 4)
+    closeButtonSpacingConstraint.isActive = true
+
+    // volume popover
+
+    self.volumeSliderView = NSView(frame: NSRect(x: 0, y: 0, width: 190, height: 30))
+    volumeSliderView.addSubview(volumeSlider)
+    volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
+    volumeSlider.size(width: 100)
+    volumeSlider.padding(.vertical(12), .leading(45), .trailing(45))
+
+    volumeLabel.controlSize = .small
+    volumeLabel.alignment = .center
+    volumeLabel.font = .messageFont(ofSize: 11)
+    volumeSliderView.addSubview(volumeLabel)
+    volumeLabel.center(.y)
+    volumeLabel.spacing(.leading(8), to: volumeSlider)
+    volumeLabel.padding(.trailing(greaterThan: 0))
+
+    let volumePopoverVC = NSViewController()
+    volumePopoverVC.view = volumeSliderView
+    self.volumePopover = NSPopover()
+    volumePopover.behavior = .transient
+    volumePopover.contentViewController = volumePopoverVC
+    volumePopover.delegate = self
+
+    setToInitialWindowSize(display: false, animate: false)
 
     // tracking area
     let trackingView = NSView()
     trackingView.translatesAutoresizingMaskIntoConstraints = false
-    window.contentView?.addSubview(trackingView, positioned: .below, relativeTo: nil)
-    Utility.quickConstraints(["H:|[v]|"], ["v": trackingView])
-    NSLayoutConstraint.activate([
-      NSLayoutConstraint(item: trackingView, attribute: .bottom, relatedBy: .equal, toItem: backgroundView, attribute: .bottom, multiplier: 1, constant: 0),
-      NSLayoutConstraint(item: trackingView, attribute: .top, relatedBy: .equal, toItem: videoWrapperView, attribute: .top, multiplier: 1, constant: 0)
-    ])
+    cv.addSubview(trackingView, positioned: .below, relativeTo: nil)
+    trackingView.padding(.horizontal)
+      .padding(.top, from: videoWrapperView)
+      .padding(.bottom, from: backgroundView)
     trackingView.addTrackingArea(NSTrackingArea(rect: trackingView.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
 
-    // default album art
-    defaultAlbumArt.isHidden = false
-    defaultAlbumArt.wantsLayer = true
-    defaultAlbumArt.layer?.contents = #imageLiteral(resourceName: "default-album-art")
-
-    // close button
-    closeButtonVE.action = #selector(self.close)
-    closeButtonBox.action = #selector(self.close)
-    closeButtonBackgroundViewVE.roundCorners(withRadius: 8)
-
     // hide controls initially
-    closeButtonBackgroundViewBox.isHidden = true
     closeButtonView.alphaValue = 0
     controlView.alphaValue = 0
 
     // tool tips
     togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.localizedDescription()
     toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
-    volumeButton.toolTip = NSLocalizedString("mini_player.volume", comment: "volume")
-    closeButtonVE.toolTip = NSLocalizedString("mini_player.close", comment: "close")
-    backButtonVE.toolTip = NSLocalizedString("mini_player.back", comment: "back")
+    muteButton.toolTip = NSLocalizedString("mini_player.volume", comment: "volume")
 
     if Preference.bool(for: .alwaysFloatOnTop) {
       setWindowFloatingOnTop(true)
     }
-    volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
-    volumePopover.delegate = self
+
+    updateCloseButton()
   }
 
   // MARK: - Mouse / Trackpad events
@@ -267,9 +466,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     guard loaded else { return }
     super.updateVolume()
     volumeLabel.intValue = Int32(player.info.volume)
-    let image = volumeIcon()
-    muteButton.image = image
-    volumeButton.image = image
   }
 
   override func handleVideoSizeChange() {
@@ -284,6 +480,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     var frame = window.frame
     frame.size.height += newHeight - currentHeight - 0.5
     window.setFrame(frame, display: true, animate: false)
+  }
+
+  private func updateCloseButton() {
+    closeButtonBackground.fillColor = .controlBackgroundColor
+      .withAlphaComponent(isVideoVisible ? 0.9 : 0.2)
+    closeButtonSizeConstraint.constant = isVideoVisible ? 13 : 12
+    closeButtonSpacingConstraint.constant = isVideoVisible ? 5 : 4
   }
 
   func updateVideoViewAspectConstraint(withAspect aspect: CGFloat) {
@@ -356,11 +559,11 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   private func showVolumePopover() {
     // Use the superview as the anchor to bypass NSButton's alignment rect adjustments,
     // which would otherwise snap the popover arrow to the SF symbol's visual bounds.
-    guard let superview = volumeButton.superview else {
-      volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+    guard let superview = muteButton.superview else {
+      volumePopover.show(relativeTo: muteButton.bounds, of: muteButton, preferredEdge: .minY)
       return
     }
-    volumePopover.show(relativeTo: volumeButton.frame, of: superview, preferredEdge: .minY)
+    volumePopover.show(relativeTo: muteButton.frame, of: superview, preferredEdge: .minY)
   }
 
   // MARK: - IBActions
@@ -400,8 +603,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     isVideoVisible = !isVideoVisible
     videoWrapperViewBottomConstraint.isActive = isVideoVisible
     controlViewTopConstraint.isActive = !isVideoVisible
-    closeButtonBackgroundViewVE.isHidden = !isVideoVisible
-    closeButtonBackgroundViewBox.isHidden = isVideoVisible
+    updateCloseButton()
     let videoViewHeight = round(videoView.frame.height)
     if isVideoVisible {
       var frame = window.frame

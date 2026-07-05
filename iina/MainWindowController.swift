@@ -2010,7 +2010,7 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: Show / Hide Timer
 
-  private func updateTimer() {
+  func updateTimer() {
     destroyTimer()
     createTimer()
   }

@@ -32,6 +32,7 @@ class LiveTextController {
   var isShown: Bool {
     overlayView != nil
   }
+  private var wasUIHiddenByLiveText: Bool = false
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
@@ -57,9 +58,16 @@ class LiveTextController {
 
   func refreshUI() {
     if isActive {
-      mainWindow.hideUI(force: true)
-    } else {
-      mainWindow.showUI()
+      if !wasUIHiddenByLiveText {
+        mainWindow.hideUI(force: true)
+        wasUIHiddenByLiveText = true
+      }
+    } else if wasUIHiddenByLiveText {
+      wasUIHiddenByLiveText = false
+      if mainWindow.isMouseInWindow {
+        mainWindow.showUI()
+        mainWindow.updateTimer()
+      }
     }
   }
 }
@@ -118,6 +126,8 @@ extension LiveTextController: ImageAnalysisOverlayViewDelegate {
     (overlayView as? ImageAnalysisOverlayView)?.analysis = nil
     overlayView?.removeFromSuperview()
     overlayView = nil
+    isSelected = false
+    isMenuOpen = false
     isHighlighted = false
     liveTextLog("Image analysis invalidated and overlay view removed from video view")
     refreshUI()

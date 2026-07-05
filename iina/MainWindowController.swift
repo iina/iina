@@ -934,7 +934,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     fadeableViews.update()
-    showUI()
+    showUI(startTimer: false)
 
     if isFloating {
       fragControlViewMiddleButtons1Constraint.constant = 24
@@ -1154,7 +1154,6 @@ class MainWindowController: PlayerWindowController {
       // main window
       isMouseInWindow = true
       showUI()
-      updateTimer()
     } else if obj == 1 {
       // slider
       if oscFloatingView.isDragging { return }
@@ -1196,7 +1195,7 @@ class MainWindowController: PlayerWindowController {
 
     refreshSeekTimeAndThumbnail(from: event)
     if isMouseInWindow {
-      showUI()
+      showUI(startTimer: false)
     }
     // check whether mouse is in osc
     if event.inAnyOf([currentControlBar, titleBarView]) {
@@ -1598,7 +1597,6 @@ class MainWindowController: PlayerWindowController {
     // See comments in windowWillExitFullScreen for details.
     guard player.info.state.active else { return }
     showUI()
-    updateTimer()
 
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
@@ -1981,7 +1979,7 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  func showUI() {
+  func showUI(startTimer: Bool = true) {
     if player.disableUI { return }
     guard !liveText.isActive, !interactiveMode.isActive else { return }
     animationState = .willShow
@@ -1991,6 +1989,10 @@ class MainWindowController: PlayerWindowController {
     // The OSC may not have been updated while it was hidden to avoid wasting energy. Make sure it
     // is up to date.
     player.refreshSyncUITimer()
+    if startTimer {
+      self.updateTimer()
+    }
+
     standardWindowButtons.forEach { $0.isEnabled = true }
     NSAnimationContext.runAnimationGroup({ (context) in
       context.duration = AccessibilityPreferences.adjustedDuration(UIAnimationDuration)
@@ -2010,7 +2012,7 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: Show / Hide Timer
 
-  func updateTimer() {
+  private func updateTimer() {
     destroyTimer()
     createTimer()
   }
@@ -2957,7 +2959,7 @@ extension MainWindowController: PIPViewControllerDelegate {
   func enterPIP() {
     guard pipStatus != .inPIP else { return }
     pipStatus = .inPIP
-    showUI()
+    showUI(startTimer: false)
 
     pipVideo = NSViewController()
     pipVideo.view = videoView

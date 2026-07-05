@@ -66,7 +66,6 @@ class LiveTextController {
       wasUIHiddenByLiveText = false
       if mainWindow.isMouseInWindow {
         mainWindow.showUI()
-        mainWindow.updateTimer()
       }
     }
   }

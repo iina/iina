@@ -430,7 +430,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
         if res == .noUpdate {
           PluginListView.pluginHasUpdate[plugin.identifier] = false
-        } else if res == .installed, let newPlugin = newPlugin {
+        } else if res == .installed, let newPlugin {
           self.plugin = newPlugin
           PluginListView.pluginHasUpdate[newPlugin.identifier] = false
         }
@@ -560,7 +560,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
                backing: .buffered,
                defer: false)
 
-    guard let contentView = contentView else {
+    guard let contentView else {
       Logger.log("Content view is nil in plugin details window", level: .error)
       return
     }
@@ -818,7 +818,7 @@ extension PluginDetailsWindow: WKScriptMessageHandler, WKNavigationDelegate {
         value = v
       }
       let result: String
-      if let value = value {
+      if let value {
         if JSONSerialization.isValidJSONObject(value), let json = try? String(data: JSONSerialization.data(withJSONObject: value, options: []), encoding: .utf8) {
           result = json
         } else if value is String {

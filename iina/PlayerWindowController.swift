@@ -71,7 +71,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   ]
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
     
     switch keyPath {
     case PK.enableToneMapping.rawValue,
@@ -181,7 +181,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     // has loaded to be able to debug such issues.
     log("Player window has been loaded")
 
-    guard let window = window else { return }
+    guard let window else { return }
     
     // Insert `menuActionHandler` into the responder chain
     menuActionHandler = MainMenuActionHandler(playerCore: player)
@@ -235,7 +235,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   internal func setMaterial(_ theme: Preference.Theme?) {
-    guard let window = window, let theme = theme else { return }
+    guard let window, let theme else { return }
 
     window.appearance = NSAppearance(iinaTheme: theme)
     window.backgroundColor = window.effectiveAppearance.isDark ? .black : .white
@@ -635,7 +635,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool, updateOnTopStatus: Bool = true) {
-    guard let window = window else { return }
+    guard let window else { return }
     window.level = onTop ? .iinaFloating : .normal
     if (updateOnTopStatus) {
       self.isOntop = onTop

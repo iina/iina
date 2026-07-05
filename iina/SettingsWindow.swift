@@ -243,8 +243,7 @@ class SettingsWindow: NSWindow {
       }
     }
 
-    guard let firstVisibleTitle = firstVisibleTitle,
-          let sectionNameStackView = sectionNameStackView else { return }
+    guard let firstVisibleTitle, let sectionNameStackView else { return }
 
     let titleIndex = sectionNames.firstIndex(of: firstVisibleTitle) ?? 0
 
@@ -307,7 +306,7 @@ extension SettingsWindow {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-      guard let maskRect = maskRect else { return }
+      guard let maskRect else { return }
       NSGraphicsContext.saveGraphicsState()
       let borderPath = NSBezierPath(roundedRect: maskRect, xRadius: 8, yRadius: 8)
       borderPath.lineWidth = 4

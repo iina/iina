@@ -280,7 +280,7 @@ class MainWindowController: PlayerWindowController {
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
     super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 
     switch keyPath {
@@ -654,13 +654,13 @@ class MainWindowController: PlayerWindowController {
 
     // Observe the loop knobs on the progress bar and update mpv when the knobs move.
     addObserver(to: .default, forName: .iinaPlaySliderLoopKnobChanged, object: playSlider.abLoopA) { [weak self] _ in
-      guard let self = self else { return }
+      guard let self else { return }
       let seconds = self.percentToSeconds(self.playSlider.abLoopA.doubleValue)
       self.player.abLoopA = seconds
       self.player.sendOSD(.abLoopUpdate(.aSet, VideoTime(seconds).stringRepresentation))
     }
     addObserver(to: .default, forName: .iinaPlaySliderLoopKnobChanged, object: playSlider.abLoopB) { [weak self] _ in
-      guard let self = self else { return }
+      guard let self else { return }
       let seconds = self.percentToSeconds(self.playSlider.abLoopB.doubleValue)
       self.player.abLoopB = seconds
       self.player.sendOSD(.abLoopUpdate(.bSet, VideoTime(seconds).stringRepresentation))
@@ -1015,7 +1015,7 @@ class MainWindowController: PlayerWindowController {
     if !fsState.isFullscreen {
       guard !oscFloatingView.isDragging else { return }
 
-      if let mousePosRelatedToWindow = mousePosRelatedToWindow {
+      if let mousePosRelatedToWindow {
         if !isDragging {
           /// Require that the user must drag the cursor at least a small distance for it to start a "drag" (`isDragging==true`)
           /// The user's action will only be counted as a click if `isDragging==false` when `mouseUp` is called.
@@ -1208,7 +1208,7 @@ class MainWindowController: PlayerWindowController {
 
   @objc func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
     guard pinchAction != .none else { return }
-    guard !interactiveMode.isActive, let window = window, let screenFrame = NSScreen.main?.visibleFrame else { return }
+    guard !interactiveMode.isActive, let window, let screenFrame = NSScreen.main?.visibleFrame else { return }
 
     switch pinchAction {
     case .none:
@@ -1796,7 +1796,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidResize(_ notification: Notification) {
-    guard loaded, let window = window else { return }
+    guard loaded, let window else { return }
     if !window.inLiveResize {
       liveText.requestAnalysis()
     }
@@ -2106,7 +2106,7 @@ class MainWindowController: PlayerWindowController {
     osdView.isHidden = false
     osdView.layoutSubtreeIfNeeded()
 
-    if let accessoryView = accessoryView {
+    if let accessoryView {
       isShowingPersistentOSD = true
       if context != nil {
         osdContext = context

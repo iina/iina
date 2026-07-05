@@ -347,7 +347,7 @@ extension FilterWindowController: KeyRecordViewDelegate {
 extension FilterWindowController {
 
   @IBAction func addSavedFilterAction(_ sender: Any) {
-    if let currentFilter = currentFilter {
+    if let currentFilter {
       let filter = SavedFilter(name: saveFilterNameTextField.stringValue,
                                filterString: currentFilter.stringFormat,
                                shortcutKey: keyRecordView.currentKey,

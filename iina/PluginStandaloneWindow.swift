@@ -152,7 +152,7 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
   private func _simpleModeSetStyle(_ style: String) {
     Utility.executeOnMainThread {
       webView.evaluateJavaScript("window.iina._simpleModeSetStyle(`\(style)`)") { (_, error) in
-        if let error = error {
+        if let error {
           Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
         }
       }
@@ -162,7 +162,7 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
   private func _simpleModeSetContent(_ content: String) {
     Utility.executeOnMainThread {
       webView.evaluateJavaScript("window.iina._simpleModeSetContent(`\(content)`)") { (_, error) in
-        if let error = error {
+        if let error {
           Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
         }
       }

@@ -113,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   private let observedPrefKeys: [Preference.Key] = [.logLevel, .thumbnailWidth]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
 
     switch keyPath {
     case Preference.Key.logLevel.rawValue:

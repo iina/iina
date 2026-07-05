@@ -63,7 +63,7 @@ class PluginInputManager: NSObject {
     if let previousCallback = listeners[input]![event] {
       JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: owner)
     }
-    if let callback = callback, callback.isObject {
+    if let callback, callback.isObject {
       let managed = JSManagedValue(value: callback)!
       listeners[input]![event] = Listener(callback: managed,
                                           priority: Priority(rawValue: priority))

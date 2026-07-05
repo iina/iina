@@ -82,7 +82,7 @@ class Dialog<T> {
   }
 
   fileprivate func shouldShow() -> Bool {
-    if let suppressionKey = suppressionKey, Preference.bool(for: suppressionKey) {
+    if let suppressionKey, Preference.bool(for: suppressionKey) {
       return false
     }
     return true
@@ -98,7 +98,7 @@ class DialogAlert: Dialog<NSAlert> {
     panel.showsSuppressionButton = suppressionKey != nil
 
     let res = await panel.beginSheetModal(for: window)
-    if let suppressionKey = suppressionKey, panel.suppressionButton?.state == .on {
+    if let suppressionKey, panel.suppressionButton?.state == .on {
       Preference.set(true, for: suppressionKey)
     }
     return res == .alertFirstButtonReturn

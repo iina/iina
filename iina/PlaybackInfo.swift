@@ -222,7 +222,7 @@ class PlaybackInfo {
       id = secondSid
       list = subTracks
     }
-    if let id = id {
+    if let id {
       return list.first { $0.id == id }
     } else {
       return nil

@@ -299,7 +299,7 @@ extension NSMenu {
     menuItem.state = stateOn ? .on : .off
     menuItem.isEnabled = enabled
     
-    if let image = image {
+    if let image {
       menuItem.image = .sf(image)
     }
     
@@ -803,7 +803,7 @@ extension NSScreen {
   /// - parameter label: Label to include in the log message.
   /// - parameter screen: The `NSScreen` object to log.
   static func log(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
-    guard let screen = screen else {
+    guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
@@ -824,7 +824,7 @@ extension NSScreen {
   /// Log EDR aspects of the given `NSScreen` object.
   /// - parameter screen: The `NSScreen` object to log EDR aspects of.
   static func logEDR(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
-    guard let screen = screen else {
+    guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }

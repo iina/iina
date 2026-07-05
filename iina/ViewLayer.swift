@@ -448,7 +448,7 @@ class ViewLayer: CAOpenGLLayer {
     var ctx: CGLContextObj?
     CGLCreateContext(pixelFormat, nil, &ctx)
 
-    guard let ctx = ctx else {
+    guard let ctx else {
       Logger.fatal("Cannot create OpenGL context!")
     }
 

@@ -114,7 +114,7 @@ func *(lhs: VideoTime, rhs: Double) -> VideoTime {
 }
 
 func /(lhs: VideoTime?, rhs: VideoTime?) -> Double? {
-  if let lhs = lhs, let rhs = rhs {
+  if let lhs, let rhs {
     return lhs.second / rhs.second
   } else {
     return nil

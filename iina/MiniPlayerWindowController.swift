@@ -22,8 +22,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     return player.mainWindow.videoView
   }
 
-  var volumePopover: NSPopover!
-  var volumeSliderView: NSView!
   var backgroundView: NSVisualEffectView!
   var closeButtonView: NSView!
   var closeButtonBackground: NSBox!
@@ -41,6 +39,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   var titleLabelTopConstraint: NSLayoutConstraint!
   var artistAlbumLabel: ScrollingTextField!
   var volumeLabel: NSTextField!
+  var volumeControlContainer: NSView!
+  var volumeControlBackground: NSVisualEffectView!
   var defaultAlbumArt: NSView!
   var togglePlaylistButton: NSButton!
   var toggleAlbumArtButton: NSButton!
@@ -50,18 +50,18 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   var videoViewAspectConstraint: NSLayoutConstraint?
 
-  lazy var hideVolumePopover: DispatchWorkItem = {
-    DispatchWorkItem {
-      self.volumePopover.animates = true
-      self.volumePopover.performClose(self)
-    }
-  }()
+  var hideVolumeControlTask: DispatchWorkItem?
 
   var playlistView: PlaylistViewController {
     return player.mainWindow.sidebars.playlistView
   }
 
   override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView]}
+
+  var isShowingVolumeControl = false
+  var volumeControlViews: [NSView?] {
+    [volumeControlBackground, volumeLabel, volumeSlider]
+  }
 
   // MARK: - Initialization
 
@@ -185,7 +185,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     controlView.padding(.leading, .top, .trailing)
     controlView.padding(.bottom(greaterThan: 24))
     controlView.size(height: 48)
-    controlView.addSubview(muteButton)
 
     let prevBtn = NSButton(image: .nextl, target: self, action: #selector(prevBtnAction))
     let nextBtn = NSButton(image: .nextr, target: self, action: #selector(nextBtnAction))
@@ -210,9 +209,47 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     togglePlaylistButton.size(width: 14, height: 14)
     toggleAlbumArtButton.size(width: 14, height: 14)
 
-    muteButton.center(.y, with: playButton)
+    // volume popover
+
+    self.volumeControlContainer = NSView()
+    volumeControlContainer.translatesAutoresizingMaskIntoConstraints = false
+    controlView.addSubview(volumeControlContainer)
+
+    self.volumeControlBackground = NSVisualEffectView()
+    volumeControlBackground.translatesAutoresizingMaskIntoConstraints = false
+    volumeControlBackground.material = .popover
+    volumeControlBackground.blendingMode = .withinWindow
+    volumeControlBackground.state = .active
+    volumeControlBackground.roundCorners(withRadius: 18)
+    volumeControlBackground.wantsLayer = true
+    volumeControlBackground.layer?.cornerRadius = 18
+    volumeControlBackground.layer?.borderWidth = 1
+    volumeControlBackground.layer?.borderColor = NSColor.sidebarContainerBorder.cgColor
+    let shadow = NSShadow()
+    shadow.shadowColor = .black.withAlphaComponent(0.5)
+    shadow.shadowBlurRadius = 2
+    volumeControlBackground.shadow = shadow
+    volumeControlContainer.addSubview(volumeControlBackground)
+    volumeControlBackground.padding(.all)
+
+    volumeControlContainer.addSubview(muteButton)
+    muteButton.padding(.leading(10)).center(.y)
+
+    volumeControlContainer.addSubview(volumeSlider)
+    volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
+    volumeSlider.size(width: 100)
+      .padding(.vertical(12), .leading(45), .trailing(42))
+
+    volumeLabel.controlSize = .small
+    volumeLabel.alignment = .center
+    volumeLabel.font = .messageFont(ofSize: 11)
+    volumeControlContainer.addSubview(volumeLabel)
+    volumeLabel.center(.y).padding(.trailing(greaterThan: 0))
+      .spacing(.leading(8), to: volumeSlider)
+
+    muteButton.centerYAnchor.constraint(equalTo: playButton.centerYAnchor).isActive = true
     prevBtn.center(.y, with: playButton)
-      .spacing(.leading(16), to: muteButton)
+      .spacing(.leading(20), to: muteButton)
     playButton.padding(.top(12)).center(.x, offset: 2)
       .spacing(.leading(24), to: prevBtn)
     nextBtn.center(.y, with: playButton)
@@ -236,7 +273,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     let playlistWrapperBottomConstraint = cv.bottomAnchor.constraint(equalTo: playlistWrapperView.bottomAnchor)
     playlistWrapperBottomConstraint.priority = .defaultLow
     playlistWrapperBottomConstraint.isActive = true
-
 
     let playlistSeparator = NSBox()
     playlistSeparator.boxType = .separator
@@ -289,29 +325,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     closeButtonSpacingConstraint = backButton.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 4)
     closeButtonSpacingConstraint.isActive = true
 
-    // volume popover
-
-    self.volumeSliderView = NSView(frame: NSRect(x: 0, y: 0, width: 190, height: 30))
-    volumeSliderView.addSubview(volumeSlider)
-    volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
-    volumeSlider.size(width: 100)
-    volumeSlider.padding(.vertical(12), .leading(45), .trailing(45))
-
-    volumeLabel.controlSize = .small
-    volumeLabel.alignment = .center
-    volumeLabel.font = .messageFont(ofSize: 11)
-    volumeSliderView.addSubview(volumeLabel)
-    volumeLabel.center(.y)
-    volumeLabel.spacing(.leading(8), to: volumeSlider)
-    volumeLabel.padding(.trailing(greaterThan: 0))
-
-    let volumePopoverVC = NSViewController()
-    volumePopoverVC.view = volumeSliderView
-    self.volumePopover = NSPopover()
-    volumePopover.behavior = .transient
-    volumePopover.contentViewController = volumePopoverVC
-    volumePopover.delegate = self
-
     setToInitialWindowSize(display: false, animate: false)
 
     // tracking area
@@ -321,11 +334,16 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     trackingView.padding(.horizontal)
       .padding(.top, from: videoWrapperView)
       .padding(.bottom, from: backgroundView)
-    trackingView.addTrackingArea(NSTrackingArea(rect: trackingView.bounds, options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited], owner: self, userInfo: nil))
+    trackingView.addTrackingArea(NSTrackingArea(
+      rect: trackingView.bounds,
+      options: [.activeAlways, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
+      owner: self, userInfo: nil
+    ))
 
     // hide controls initially
     closeButtonView.alphaValue = 0
     controlView.alphaValue = 0
+    volumeControlViews.forEach { $0?.isHidden = true }
 
     // tool tips
     togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.localizedDescription()
@@ -349,7 +367,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   override func scrollWheel(with event: NSEvent) {
     if event.inAnyOf([playSlider]) && playSlider.isEnabled {
       seekOverride = true
-    } else if event.inAnyOf([volumeSliderView]) && volumeSlider.isEnabled {
+    } else if event.inAnyOf([volumeControlContainer]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
       guard !event.inAnyOf([backgroundView]) else { return }
@@ -365,8 +383,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     showControl()
   }
 
+  override func mouseMoved(with event: NSEvent) {
+    if isShowingVolumeControl && !event.inAnyOf([volumeControlContainer]) {
+      hideVolumeControl()
+    }
+  }
+
   override func mouseExited(with event: NSEvent) {
-    guard !volumePopover.isShown else { return }
     hideControl()
   }
 
@@ -534,39 +557,64 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   func handleVolumePopover(_ isTrackpadBegan: Bool, _ isTrackpadEnd: Bool, _ isMouse: Bool) {
-    hideVolumePopover.cancel()
-    hideVolumePopover = DispatchWorkItem {
-      self.volumePopover.animates = true
-      self.volumePopover.performClose(self)
+    hideVolumeControlTask?.cancel()
+    hideVolumeControlTask = DispatchWorkItem {
+      self.hideVolumeControl()
     }
     if isTrackpadBegan {
-       // enabling animation here causes user not seeing their volume changes during popover transition
-       volumePopover.animates = false
-       showVolumePopover()
-     } else if isTrackpadEnd {
-       DispatchQueue.main.asyncAfter(deadline: .now(), execute: hideVolumePopover)
-     } else if isMouse {
-       // if it's a mouse, simply show popover then hide after a while when user stops scrolling
-       if !volumePopover.isShown {
-         volumePopover.animates = false
-         showVolumePopover()
-       }
-       let timeout = Preference.double(for: .osdAutoHideTimeout)
-       DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: hideVolumePopover)
-     }
+      showVolumePopover(animated: false)
+    } else if isTrackpadEnd {
+      DispatchQueue.main.asyncAfter(deadline: .now(), execute: hideVolumeControlTask!)
+    } else if isMouse {
+      // if it's a mouse, simply show popover then hide after a while when user stops scrolling
+      showVolumePopover(animated: false)
+      let timeout = Preference.double(for: .osdAutoHideTimeout)
+      DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: hideVolumeControlTask!)
+    }
   }
 
-  private func showVolumePopover() {
-    // Use the superview as the anchor to bypass NSButton's alignment rect adjustments,
-    // which would otherwise snap the popover arrow to the SF symbol's visual bounds.
-    guard let superview = muteButton.superview else {
-      volumePopover.show(relativeTo: muteButton.bounds, of: muteButton, preferredEdge: .minY)
-      return
+  private func hideVolumeControl(animated: Bool = true) {
+    isShowingVolumeControl = false
+    if animated {
+      NSAnimationContext.runAnimationGroup({ context in
+        context.duration = AnimationDurationShowControl
+        volumeControlViews.forEach { $0?.animator().alphaValue = 0 }
+      }) {
+        self.volumeControlViews.forEach { $0?.isHidden = true }
+      }
+    } else {
+      volumeControlViews.forEach { $0?.isHidden = true }
     }
-    volumePopover.show(relativeTo: muteButton.frame, of: superview, preferredEdge: .minY)
+  }
+
+  private func showVolumePopover(animated: Bool = true) {
+    isShowingVolumeControl = true
+    if animated {
+      volumeControlViews.forEach {
+        $0?.alphaValue = 0
+        $0?.isHidden = false
+      }
+      NSAnimationContext.runAnimationGroup({ context in
+        context.duration = AnimationDurationShowControl
+        volumeControlViews.forEach { $0?.animator().alphaValue = 1 }
+      }, completionHandler: {})
+    } else {
+      volumeControlViews.forEach {
+        $0?.alphaValue = 1
+        $0?.isHidden = false
+      }
+    }
   }
 
   // MARK: - IBActions
+
+  override func muteButtonAction(_ sender: NSButton) {
+    if isShowingVolumeControl {
+      super.muteButtonAction(sender)
+    } else {
+      showVolumePopover()
+    }
+  }
 
   func showPlaylistAction(_ tab: SidebarViewController.TabType) {
     if !isPlaylistVisible {
@@ -630,11 +678,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   @IBAction func volumeBtnAction(_ sender: NSButton) {
-    if volumePopover.isShown {
-      volumePopover.performClose(self)
-    } else {
-      showVolumePopover()
-    }
+    showVolumePopover()
   }
 
   override func handleIINACommand(_ cmd: IINACommand) {

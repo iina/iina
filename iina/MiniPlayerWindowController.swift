@@ -41,6 +41,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   var volumeLabel: NSTextField!
   var volumeControlContainer: NSView!
   var volumeControlBackground: NSVisualEffectView!
+  var volumeContainerTrailingConstraint: NSLayoutConstraint!
   var defaultAlbumArt: NSView!
   var togglePlaylistButton: NSButton!
   var toggleAlbumArtButton: NSButton!
@@ -234,17 +235,20 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
     volumeControlContainer.addSubview(muteButton)
     muteButton.padding(.leading(10)).center(.y)
+    self.volumeContainerTrailingConstraint = volumeControlContainer
+      .trailingAnchor.constraint(equalTo: muteButton.trailingAnchor, constant: 10)
+    volumeContainerTrailingConstraint.isActive = true
 
     volumeControlContainer.addSubview(volumeSlider)
     volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
     volumeSlider.size(width: 100)
-      .padding(.vertical(12), .leading(45), .trailing(42))
+      .padding(.vertical(12), .leading(45))
 
     volumeLabel.controlSize = .small
     volumeLabel.alignment = .center
     volumeLabel.font = .messageFont(ofSize: 11)
     volumeControlContainer.addSubview(volumeLabel)
-    volumeLabel.center(.y).padding(.trailing(greaterThan: 0))
+    volumeLabel.center(.y)
       .spacing(.leading(8), to: volumeSlider)
 
     muteButton.centerYAnchor.constraint(equalTo: playButton.centerYAnchor).isActive = true
@@ -581,14 +585,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
         volumeControlViews.forEach { $0?.animator().alphaValue = 0 }
       }) {
         self.volumeControlViews.forEach { $0?.isHidden = true }
+        self.volumeContainerTrailingConstraint.constant = 10
       }
     } else {
       volumeControlViews.forEach { $0?.isHidden = true }
+      volumeContainerTrailingConstraint.constant = 10
     }
   }
 
   private func showVolumePopover(animated: Bool = true) {
     isShowingVolumeControl = true
+    volumeContainerTrailingConstraint.constant = 148
     if animated {
       volumeControlViews.forEach {
         $0?.alphaValue = 0
@@ -696,8 +703,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   private func normalWindowHeight() -> CGFloat {
     return 72 + (isVideoVisible ? videoWrapperView.frame.height : 0)
   }
-
 }
+
 
 fileprivate extension NSRect {
   func rectWithoutPlaylistHeight(providedWindowHeight windowHeight: CGFloat) -> NSRect {

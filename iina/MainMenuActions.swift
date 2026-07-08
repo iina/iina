@@ -33,7 +33,7 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
         var playlist = ""
         self.player.info.$playlist.withLock {
           for item in $0 {
-            playlist.append((item.filename + "\n"))
+            playlist.append((self.playlistEntry(for: item, relativeTo: url) + "\n"))
           }
         }
         do {
@@ -44,6 +44,45 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
         }
       }
     }
+  }
+
+  private func playlistEntry(for item: MPVPlaylistItem, relativeTo playlistURL: URL) -> String {
+    guard let itemURL = localFileURL(fromPlaylistEntry: item.filename) else {
+      return item.filename
+    }
+    return relativePath(to: itemURL, from: playlistURL.deletingLastPathComponent())
+  }
+
+  private func localFileURL(fromPlaylistEntry entry: String) -> URL? {
+    if entry.hasPrefix("/") {
+      return URL(fileURLWithPath: entry).standardizedFileURL
+    }
+    if let url = URL(string: entry), url.isFileURL {
+      return url.standardizedFileURL
+    }
+    return nil
+  }
+
+  private func relativePath(to itemURL: URL, from directoryURL: URL) -> String {
+    let itemComponents = itemURL.standardizedFileURL.pathComponents
+    let directoryComponents = directoryURL.standardizedFileURL.pathComponents
+
+    guard !itemComponents.isEmpty,
+          !directoryComponents.isEmpty,
+          itemComponents.first == directoryComponents.first else {
+      return itemURL.path
+    }
+
+    var commonPrefixLength = 0
+    while commonPrefixLength < itemComponents.count,
+          commonPrefixLength < directoryComponents.count,
+          itemComponents[commonPrefixLength] == directoryComponents[commonPrefixLength] {
+      commonPrefixLength += 1
+    }
+
+    var relativeComponents = Array(repeating: "..", count: directoryComponents.count - commonPrefixLength)
+    relativeComponents.append(contentsOf: itemComponents.dropFirst(commonPrefixLength))
+    return relativeComponents.isEmpty ? "." : relativeComponents.joined(separator: "/")
   }
 
   @objc func menuShowCurrentFileInFinder(_ sender: NSMenuItem) {

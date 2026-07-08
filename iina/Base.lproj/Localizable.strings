@@ -493,6 +493,9 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.install_error.no_default_branch" = "Cannot determine the default branch for %@.";
+"plugin.install_error.invalid_default_branch" = "Cannot use the default branch name returned by GitHub.";
+"plugin.install_error.info_json_not_found" = "Info.json was not found on the default branch \"%@\".";
 "plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
 

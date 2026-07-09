@@ -110,13 +110,13 @@
                 }
               );
 
-          # Upgrade to the version supplied by nixpkgs 26.05.
+          # Upgrade to 2.14.3 as it contains fixes for security vulnerabilities.
           freetype = pkgs.freetype.overrideAttrs (
             finalAttrs: previousAttrs: {
-              version = "2.14.2";
+              version = "2.14.3";
               src = pkgs.fetchurl {
                 url = "mirror://savannah/freetype/freetype-${finalAttrs.version}.tar.xz";
-                sha256 = "sha256-S2Lcq0ySChqGA2mTMiGBQ2LmmeJvVXklFtZx5v9VteE=";
+                sha256 = "sha256-NrxPHMQTM1No7mVsQq/KZcWjmH6HaMwozxG6d154Wl8=";
               };
             }
           );

@@ -11,6 +11,20 @@ import Cocoa
 class MainWindow: NSWindow {
   var forceKeyAndMain = false
 
+  /// The direction the window’s title bar lays text out, either left to right or right to left.
+  ///
+  /// As discussed in the [windowTitlebarLayoutDirection](https://developer.apple.com/documentation/appkit/nswindow/windowtitlebarlayoutdirection)
+  /// documentation the value returned by the `NSWindow` implementation is based on the macOS primary system language. If in
+  /// macOS settings IINA has been configured with a language with a different directionality than the primary system language then
+  /// layout will be inconsistent and can cause objects to overlap. This implementation returns the layout direction of the view
+  /// containing the window close button to make layout consistent. See issue [#6192](https://github.com/iina/iina/issues/6192).
+  override var windowTitlebarLayoutDirection: NSUserInterfaceLayoutDirection {
+    guard let button = standardWindowButton(.closeButton), let view = button.superview else {
+      return super.windowTitlebarLayoutDirection
+    }
+    return view.userInterfaceLayoutDirection
+  }
+
   override func keyDown(with event: NSEvent) {
     if menu?.performKeyEquivalent(with: event) == true {
       return

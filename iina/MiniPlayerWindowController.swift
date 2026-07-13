@@ -12,8 +12,16 @@ fileprivate let DefaultPlaylistHeight: CGFloat = 300
 fileprivate let AutoHidePlaylistThreshold: CGFloat = 200
 fileprivate let AnimationDurationShowControl: TimeInterval = 0.2
 
-class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
+fileprivate extension LayoutValue {
+  static let topPadding = LayoutValue(8, 4)
+  static let bottomPadding = LayoutValue(10, 8)
+  static let controlTopPadding = LayoutValue(4, 0)
+  static let titleSliderSpacing = LayoutValue(8, 6)
+}
+
+
+class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MiniPlayerWindowController")
   }
@@ -124,8 +132,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     backgroundView.material = .underWindowBackground
     backgroundView.state = .active
     cv.addSubview(backgroundView)
-    backgroundView.size(height: 72)
-      .padding(.horizontal, .vertical(greaterThan: 0))
+    backgroundView.padding(.horizontal, .vertical(greaterThan: 0))
     self.videoWrapperViewBottomConstraint = backgroundView.topAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
     videoWrapperViewBottomConstraint.isActive = true
     self.controlViewTopConstraint = backgroundView.topAnchor.constraint(equalTo: cv.topAnchor)
@@ -146,7 +153,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor, multiplier: 1).isActive = true
 
     backgroundView.addSubview(playSlider)
-    playSlider.padding(.top(50))
+    playSlider.padding(.bottom(.bottomPadding))
     playSlider.spacing(.leading(6), to: leftLabel)
     leftLabel.center(.y, with: playSlider)
     rightLabel.spacing(.leading(6), to: playSlider)
@@ -155,7 +162,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     self.mediaInfoView = NSView()
     mediaInfoView.translatesAutoresizingMaskIntoConstraints = false
     backgroundView.addSubview(mediaInfoView)
-    mediaInfoView.padding(.top(4), .horizontal)
+    mediaInfoView.padding(.top(.topPadding), .horizontal)
+      .spacing(.bottom(.titleSliderSpacing), to: playSlider)
 
     self.titleLabel = ScrollingTextField(labelWithString: "Title")
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -163,8 +171,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     titleLabel.lineBreakMode = .byTruncatingMiddle
     titleLabel.font = .boldSystemFont(ofSize: 13)
     mediaInfoView.addSubview(titleLabel)
-    titleLabel.padding(.horizontal(greaterThan: 24))
-      .center(.x)
+    titleLabel.padding(.horizontal(greaterThan: 24)).center(.x)
     titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: mediaInfoView.topAnchor, constant: 6)
     titleLabelTopConstraint.isActive = true
 
@@ -183,9 +190,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     self.controlView = NSView()
     controlView.translatesAutoresizingMaskIntoConstraints = false
     backgroundView.addSubview(controlView)
-    controlView.padding(.leading, .top, .trailing)
-    controlView.padding(.bottom(greaterThan: 24))
-    controlView.size(height: 48)
+    controlView.padding(.horizontal, .top(.controlTopPadding))
+      .size(height: 48)
 
     let prevBtn = NSButton(image: .nextl, target: self, action: #selector(prevBtnAction))
     let nextBtn = NSButton(image: .nextr, target: self, action: #selector(nextBtnAction))

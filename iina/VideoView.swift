@@ -70,6 +70,11 @@ class VideoView: NSView {
 
     // other settings
     autoresizingMask = [.width, .height]
+    // Unlike upstream mpv (video/out/mac/view.swift), IINA intentionally omits setting
+    // `wantsBestResolutionOpenGLSurface` and `wantsExtendedDynamicRangeOpenGLSurface` on NSView.
+    // They were deprecated in macOS 10.14 and are redundant here because VideoView hosts a
+    // custom CAOpenGLLayer (`ViewLayer`), where high-resolution Retina scaling is managed via
+    // `contentsScale` and EDR mode is configured via `wantsExtendedDynamicRangeContent`.
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])

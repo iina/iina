@@ -8,6 +8,34 @@
 
 fileprivate let ui = SettingsUIHelper.sharedUI
 
+private final class MPVOptionFieldEditor: NSTextView {
+  var pasteHandler: ((String) -> Bool)?
+
+  override func paste(_ sender: Any?) {
+    guard let string = NSPasteboard.general.string(forType: .string),
+          pasteHandler?(string) == true else {
+      super.paste(sender)
+      return
+    }
+  }
+}
+
+private final class MPVOptionTextFieldCell: NSTextFieldCell {
+  private let optionFieldEditor: MPVOptionFieldEditor = {
+    let editor = MPVOptionFieldEditor()
+    editor.isFieldEditor = true
+    return editor
+  }()
+
+  var pasteHandler: ((String) -> Bool)? {
+    get { optionFieldEditor.pasteHandler }
+    set { optionFieldEditor.pasteHandler = newValue }
+  }
+
+  override func fieldEditor(for controlView: NSView) -> NSTextView? {
+    return optionFieldEditor
+  }
+}
 
 class SettingsPageAdvanced: SettingsPage {
   override var identifier: String {
@@ -130,11 +158,23 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     let columnKey = NSTableColumn(identifier: .key)
     columnKey.title = "Key"
     columnKey.minWidth = 140
-    (columnKey.dataCell as? NSCell)?.font = monoFont
+    let keyCell = MPVOptionTextFieldCell()
+    keyCell.isEditable = true
+    keyCell.isSelectable = true
+    keyCell.lineBreakMode = .byTruncatingTail
+    keyCell.font = monoFont
+    keyCell.pasteHandler = { [weak self] in self?.pasteOption($0) ?? false }
+    columnKey.dataCell = keyCell
     tableView.addTableColumn(columnKey)
     let columnValue = NSTableColumn(identifier: .value)
     columnValue.title = "Value"
-    (columnValue.dataCell as? NSCell)?.font = monoFont
+    let valueCell = MPVOptionTextFieldCell()
+    valueCell.isEditable = true
+    valueCell.isSelectable = true
+    valueCell.lineBreakMode = .byTruncatingTail
+    valueCell.font = monoFont
+    valueCell.pasteHandler = { [weak self] in self?.pasteOption($0) ?? false }
+    columnValue.dataCell = valueCell
     tableView.addTableColumn(columnValue)
     tableView.columnAutoresizingStyle = .sequentialColumnAutoresizingStyle
     tableView.rowHeight = 18
@@ -162,6 +202,30 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   private func saveToUserDefaults() {
     Preference.set(options, for: .userOptions)
     UserDefaults.standard.synchronize()
+  }
+
+  private static func parsePastedOption(_ string: String) -> [String]? {
+    let parts = string.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
+    guard parts.count == 2 else { return nil }
+
+    let whitespaceAndNewlines = CharacterSet.whitespacesAndNewlines
+    let key = String(parts[0]).trimmingCharacters(in: whitespaceAndNewlines)
+    let value = String(parts[1]).trimmingCharacters(in: whitespaceAndNewlines)
+    guard !key.isEmpty, !value.isEmpty else { return nil }
+    return [key, value]
+  }
+
+  private func pasteOption(_ string: String) -> Bool {
+    guard let option = Self.parsePastedOption(string),
+          options.indices.contains(tableView.editedRow) else { return false }
+
+    let row = tableView.editedRow
+    guard tableView.abortEditing() else { return false }
+    options[row] = option
+    tableView.reloadData(forRowIndexes: IndexSet(integer: row),
+                         columnIndexes: IndexSet(integersIn: 0..<tableView.numberOfColumns))
+    saveToUserDefaults()
+    return true
   }
 
   @objc func addOptionAction(_ sender: AnyObject) {

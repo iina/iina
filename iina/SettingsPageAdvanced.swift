@@ -20,20 +20,17 @@ private final class MPVOptionFieldEditor: NSTextView {
   }
 }
 
-private final class MPVOptionTextFieldCell: NSTextFieldCell {
-  private let optionFieldEditor: MPVOptionFieldEditor = {
+private final class MPVOptionsTableView: NSTableView {
+  let optionFieldEditor: MPVOptionFieldEditor = {
     let editor = MPVOptionFieldEditor()
     editor.isFieldEditor = true
     return editor
   }()
+}
 
-  var pasteHandler: ((String) -> Bool)? {
-    get { optionFieldEditor.pasteHandler }
-    set { optionFieldEditor.pasteHandler = newValue }
-  }
-
+private final class MPVOptionTextFieldCell: NSTextFieldCell {
   override func fieldEditor(for controlView: NSView) -> NSTextView? {
-    return optionFieldEditor
+    return (controlView as? MPVOptionsTableView)?.optionFieldEditor
   }
 }
 
@@ -133,7 +130,7 @@ class SettingsPageAdvanced: SettingsPage {
 fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate, NSTableViewDataSource {
   private static let dragType = NSPasteboard.PasteboardType("com.colliderli.iina.mpv-option-row")
 
-  let tableView: NSTableView = NSTableView()
+  let tableView: MPVOptionsTableView = MPVOptionsTableView()
   let scrollView: NSScrollView = NSScrollView()
   let addBtn: NSButton = NSButton()
   let delBtn: NSButton = NSButton()
@@ -155,6 +152,7 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     tableView.registerForDraggedTypes([MPVOptionsEditor.dragType])
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.optionFieldEditor.pasteHandler = { [weak self] in self?.pasteOption($0) ?? false }
     let columnKey = NSTableColumn(identifier: .key)
     columnKey.title = "Key"
     columnKey.minWidth = 140
@@ -163,7 +161,6 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     keyCell.isSelectable = true
     keyCell.lineBreakMode = .byTruncatingTail
     keyCell.font = monoFont
-    keyCell.pasteHandler = { [weak self] in self?.pasteOption($0) ?? false }
     columnKey.dataCell = keyCell
     tableView.addTableColumn(columnKey)
     let columnValue = NSTableColumn(identifier: .value)
@@ -173,7 +170,6 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     valueCell.isSelectable = true
     valueCell.lineBreakMode = .byTruncatingTail
     valueCell.font = monoFont
-    valueCell.pasteHandler = { [weak self] in self?.pasteOption($0) ?? false }
     columnValue.dataCell = valueCell
     tableView.addTableColumn(columnValue)
     tableView.columnAutoresizingStyle = .sequentialColumnAutoresizingStyle

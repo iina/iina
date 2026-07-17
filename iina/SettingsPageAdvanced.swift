@@ -115,6 +115,7 @@ class SettingsPageAdvanced: SettingsPage {
       SettingsList {
         SettingsItem.General(title: .text_AdditionalMpvOptions)
           .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
+          .hasDescription(content: .text_AdditionalMpvOptions_desc)
           .extraViews(mpvOptionsEditor.delBtn, mpvOptionsEditor.addBtn)
         SettingsItem.Custom()
           .view(mpvOptionsEditor.view)

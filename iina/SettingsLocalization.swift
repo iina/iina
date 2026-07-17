@@ -148,6 +148,7 @@ extension SettingsLocalization.Key {
 
   // Advanced
   static let text_AdditionalMpvOptions = SettingsLocalization.Key("$AdditionalMpvOptions")
+  static let text_AdditionalMpvOptions_desc = SettingsLocalization.Key("$AdditionalMpvOptions.desc")
   static let text_OpenLogDirectory = SettingsLocalization.Key("$OpenLogDirectory")
   static let text_Logging = SettingsLocalization.Key("$Logging")
   static let text_MPVSettings = SettingsLocalization.Key("$MPVSettings")

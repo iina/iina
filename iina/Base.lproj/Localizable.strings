@@ -888,6 +888,7 @@
 "settings.$About" = "About";
 "settings.$Accessibility" = "Accessibility";
 "settings.$AdditionalMpvOptions" = "Additional mpv options";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
 "settings.$Advanced" = "Advanced";
 "settings.$Align" = "Align";
 "settings.$AlwaysWhenPlaying" = "Always when playing a new file";

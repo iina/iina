@@ -36,6 +36,12 @@
     "id": "com.danmaku-cosmos.iina-plugin"
   },
   {
+    "name": "Detached Playlist",
+    "url": "https://github.com/HowDidTheCatGetSoFat/iina-detached-playlist",
+    "desc": "Show the playlist in a separate floating window.",
+    "id": "com.fxd0h.detached-playlist"
+  },
+  {
     "name": "Episode Info",
     "url": "https://github.com/Zain-Imam/iina-episode-info",
     "desc": "TMDB episode/movie info overlay on pause, with built-in subtitle search.",

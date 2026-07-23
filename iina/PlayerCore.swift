@@ -320,6 +320,15 @@ class PlayerCore: NSObject {
 
   static var keyBindings: [String: KeyMapping] = [:]
 
+  /** Looks up the binding for a normalized keystroke. If none is bound, falls back to the binding of its
+   numpad / non-numpad twin (e.g. `KP9` matches a `9` binding and vice versa), so a config that only binds
+   one of the pair responds to both keys (#4898). */
+  static func keyBinding(for normalizedKeyCode: String) -> KeyMapping? {
+    if let kb = keyBindings[normalizedKeyCode] { return kb }
+    guard let alternative = KeyCodeHelper.numpadAlternative(for: normalizedKeyCode) else { return nil }
+    return keyBindings[alternative]
+  }
+
   override init() {
     playerNumber = PlayerCore.playerCoreCounter
     backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask\(playerNumber)", qos: .background)

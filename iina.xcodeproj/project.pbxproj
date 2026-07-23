@@ -189,6 +189,7 @@
 		51E63DFD29CFB04C008AFC20 /* PlaySliderLoopKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E63DFC29CFB04B008AFC20 /* PlaySliderLoopKnob.swift */; };
 		51EDB4722E85EE10007E5018 /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDB4712E85EE10007E5018 /* DisplayController.swift */; };
 		51F7974728C7E00200812D0D /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F7974628C7E00200812D0D /* Lock.swift */; };
+		598ED32EAEA74394801EE2A1 /* KeyCodeHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DFC00C80D6519025EAD503 /* KeyCodeHelperTests.swift */; };
 		6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */; };
 		8400D5C41E17C6D2006785F5 /* AboutWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */; };
 		8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8400D5C81E1AB2F1006785F5 /* MainWindowController.xib */; };
@@ -313,6 +314,7 @@
 		B4E446F725CB54EF0069F06E /* Mustache in Frameworks */ = {isa = PBXBuildFile; productRef = B4E446F625CB54EF0069F06E /* Mustache */; };
 		B4E4470125CE3F930069F06E /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B4E4470025CE3F930069F06E /* Sparkle */; };
 		C789872F1E34EF170005769F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C78987311E34EF170005769F /* InfoPlist.strings */; };
+		C8CBCAF674ADC19293CF9ADA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141A869E7044E55136C319E7 /* Cocoa.framework */; };
 		D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */; };
 		D17B857B2C94C8B5002A8EDE /* movist-v2-default-input.conf in Copy Configs */ = {isa = PBXBuildFile; fileRef = D1F68E742C6ABC22003D1208 /* movist-v2-default-input.conf */; };
 		D1A4D98A2B1495270009AB4E /* LegacyMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A4D9892B1495270009AB4E /* LegacyMigration.swift */; };
@@ -455,6 +457,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E38558862A484A2D0083772D;
 			remoteInfo = "iina-plugin";
+		};
+		92FF90624F41B396441C9765 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84EB1ED51D2F51D3004FA5A1;
+			remoteInfo = iina;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -659,6 +668,7 @@
 		134C1370205FB181002C7BE4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		13B82A33218D4A3B00F515A1 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		13D77DE01F85A2980076990A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		141A869E7044E55136C319E7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		2FE1FC961F98D3D8004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		2FE1FC971F98D3D8004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		2FE1FC9A1F98D3D8004C4D6B /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
@@ -1221,6 +1231,7 @@
 		64F85F5C210FFBC300F8D8C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		64F85F5D211003A900F8D8C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		64F85F5F211003DF00F8D8C0 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
+		66DFC00C80D6519025EAD503 /* KeyCodeHelperTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KeyCodeHelperTests.swift; sourceTree = "<group>"; };
 		67C6C21A2148062400AFDE5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		67C6C21C2148063900AFDE5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
 		67C6C21E2148064400AFDE5C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/PreferenceWindowController.strings; sourceTree = "<group>"; };
@@ -1263,6 +1274,7 @@
 		6DC77D431F1439A700E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6DC77D441F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DC77D461F1439A800E96176 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		6F84D9E55CDDF9F714C48281 /* iinaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iinaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72CAEE6D1E229EAE00B8C894 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PrefGeneralViewController.strings"; sourceTree = "<group>"; };
 		8400D5C21E17C6D2006785F5 /* AboutWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutWindowController.swift; sourceTree = "<group>"; };
 		8400D5C71E1AB2F1006785F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
@@ -1932,6 +1944,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54B5FC91600FBB6A9847087B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8CBCAF674ADC19293CF9ADA /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84EB1ED31D2F51D3004FA5A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2033,6 +2053,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08D081B916B04D8A9B2357C8 /* iinaTests */ = {
+			isa = PBXGroup;
+			children = (
+				66DFC00C80D6519025EAD503 /* KeyCodeHelperTests.swift */,
+			);
+			name = iinaTests;
+			path = iinaTests;
+			sourceTree = "<group>";
+		};
 		49542976216C34950058F680 /* OpenInIINA */ = {
 			isa = PBXGroup;
 			children = (
@@ -2248,6 +2277,7 @@
 				5196819929EC963F00B05D55 /* CoreDisplay.framework */,
 				8403CEA62007CBD300645516 /* MediaPlayer.framework */,
 				496B19911E2968530035AF10 /* PIP.framework */,
+				DD8652A72F36B386E93CB0B7 /* OS X */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2531,6 +2561,7 @@
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
+				08D081B916B04D8A9B2357C8 /* iinaTests */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -2544,6 +2575,7 @@
 				E3DE8DCA1FD8166A0021921C /* iina-cli */,
 				49542973216C34950058F680 /* OpenInIINA.appex */,
 				E38558872A484A2D0083772D /* iina-plugin */,
+				6F84D9E55CDDF9F714C48281 /* iinaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2601,6 +2633,14 @@
 				34ACAC7E2C142CE600F871A0 /* render.h */,
 			);
 			path = mpv;
+			sourceTree = "<group>";
+		};
+		DD8652A72F36B386E93CB0B7 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				141A869E7044E55136C319E7 /* Cocoa.framework */,
+			);
+			name = "OS X";
 			sourceTree = "<group>";
 		};
 		E35306F22147F770008FE492 /* API */ = {
@@ -2759,6 +2799,24 @@
 			productReference = 49542973216C34950058F680 /* OpenInIINA.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		4FB738FAB81A8BB056A8C1D5 /* iinaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A423285636D470AF2CCC17ED /* Build configuration list for PBXNativeTarget "iinaTests" */;
+			buildPhases = (
+				E39E5C8D13E6DECF0355779A /* Sources */,
+				54B5FC91600FBB6A9847087B /* Frameworks */,
+				9CCD37322A71A8362120C9B9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71EA8F1D4085900057DD32F1 /* PBXTargetDependency */,
+			);
+			name = iinaTests;
+			productName = iinaTests;
+			productReference = 6F84D9E55CDDF9F714C48281 /* iinaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		84EB1ED51D2F51D3004FA5A1 /* iina */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84EB1EF91D2F51D3004FA5A1 /* Build configuration list for PBXNativeTarget "iina" */;
@@ -2826,8 +2884,6 @@
 			dependencies = (
 			);
 			name = "iina-cli";
-			packageProductDependencies = (
-			);
 			productName = "iina-cli";
 			productReference = E3DE8DCA1FD8166A0021921C /* iina-cli */;
 			productType = "com.apple.product-type.tool";
@@ -2906,7 +2962,7 @@
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			packageReferences = (
 				B4E446E625CB53920069F06E /* XCRemoteSwiftPackageReference "PromiseKit" */,
-				B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */,
+				B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache.swift" */,
 				B4E446FF25CE3F930069F06E /* XCRemoteSwiftPackageReference "Sparkle" */,
 				8451E6D72604AEFC009A15D7 /* XCRemoteSwiftPackageReference "Just" */,
 			);
@@ -2918,6 +2974,7 @@
 				E3DE8DC91FD8166A0021921C /* iina-cli */,
 				E38558862A484A2D0083772D /* iina-plugin */,
 				49542972216C34950058F680 /* OpenInIINA */,
+				4FB738FAB81A8BB056A8C1D5 /* iinaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2976,6 +3033,13 @@
 				518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CCD37322A71A8362120C9B9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3285,6 +3349,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E39E5C8D13E6DECF0355779A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				598ED32EAEA74394801EE2A1 /* KeyCodeHelperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3DE8DC61FD8166A0021921C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3311,6 +3383,12 @@
 			isa = PBXTargetDependency;
 			target = E38558862A484A2D0083772D /* iina-plugin */;
 			targetProxy = 5180D7782C17DB0D00CC9C1C /* PBXContainerItemProxy */;
+		};
+		71EA8F1D4085900057DD32F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = iina;
+			target = 84EB1ED51D2F51D3004FA5A1 /* iina */;
+			targetProxy = 92FF90624F41B396441C9765 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4449,6 +4527,24 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		28F7041890D272058EF41BF5 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/deps/include",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.iinaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IINA.app/Contents/MacOS/IINA";
+			};
+			name = Beta;
+		};
 		49542987216C34960058F680 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */;
@@ -4559,6 +4655,24 @@
 			};
 			name = Beta;
 		};
+		745D89E241F6CBC5695DD4AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/deps/include",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.iinaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IINA.app/Contents/MacOS/IINA";
+			};
+			name = Debug;
+		};
 		84EB1EF71D2F51D3004FA5A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4964988C2919E47900CD61A5 /* Debug.xcconfig */;
@@ -4623,6 +4737,24 @@
 				SKIP_INSTALL = NO;
 			};
 			name = Release;
+		};
+		ABB7D1E19C5F54A83BC191CF /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/deps/include",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.iinaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IINA.app/Contents/MacOS/IINA";
+			};
+			name = Nightly;
 		};
 		E385588B2A484A2D0083772D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -4879,6 +5011,24 @@
 			};
 			name = Release;
 		};
+		FC1F3FF19552ABB73820F526 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/deps/include",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.iina.iinaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IINA.app/Contents/MacOS/IINA";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4911,6 +5061,17 @@
 				84EB1EFB1D2F51D3004FA5A1 /* Release */,
 				51A0F0F329FA2C65000130CF /* Beta */,
 				51537C6F29FA25D000F9A472 /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A423285636D470AF2CCC17ED /* Build configuration list for PBXNativeTarget "iinaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC1F3FF19552ABB73820F526 /* Release */,
+				745D89E241F6CBC5695DD4AA /* Debug */,
+				28F7041890D272058EF41BF5 /* Beta */,
+				ABB7D1E19C5F54A83BC191CF /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4956,7 +5117,7 @@
 				minimumVersion = 6.22.1;
 			};
 		};
-		B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */ = {
+		B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRMustache.swift";
 			requirement = {
@@ -4987,7 +5148,7 @@
 		};
 		B4E446F625CB54EF0069F06E /* Mustache */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */;
+			package = B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache.swift" */;
 			productName = Mustache;
 		};
 		B4E4470025CE3F930069F06E /* Sparkle */ = {
@@ -4997,7 +5158,7 @@
 		};
 		E38558902A486E060083772D /* Mustache */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache" */;
+			package = B4E446F525CB54EF0069F06E /* XCRemoteSwiftPackageReference "GRMustache.swift" */;
 			productName = Mustache;
 		};
 /* End XCSwiftPackageProductDependency section */

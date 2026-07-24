@@ -118,5 +118,11 @@
     "url": "https://github.com/i3p9/iina-trakt-scrobbler",
     "desc": "Trakt.tv scrobbler plugin for IINA.",
     "id": "io.github.fahim.iinatraktscrobbler"
+  },
+  {
+    "name": "Auto Skip",
+    "url": "https://github.com/pangziqiang/iina-auto-skip",
+    "desc": "自动跳过片头片尾，支持可视化拖拽设定。",
+    "id": "io.iina.auto-skip"
   }
 ]

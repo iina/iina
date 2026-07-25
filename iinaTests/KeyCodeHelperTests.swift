@@ -45,28 +45,6 @@ class KeyCodeHelperTests: XCTestCase {
     XCTAssertEqual(mpvKeyCode(keyCode: 0x4C, characters: "\r", modifiers: [.numericPad]), "KP_ENTER")
   }
 
-  // MARK: - numpadAlternative(for:)
-
-  func testNumpadAlternativeMapsKPKeysToNumberRow() {
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "KP9"), "9")
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "KP_DEC"), ".")
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "KP_ENTER"), "ENTER")
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "Alt+KP9"), "Alt+9")
-  }
-
-  func testNumpadAlternativeMapsNumberRowKeysToKP() {
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "9"), "KP9")
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "."), "KP_DEC")
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "ENTER"), "KP_ENTER")
-    XCTAssertEqual(KeyCodeHelper.numpadAlternative(for: "Ctrl+Alt+3"), "Ctrl+Alt+KP3")
-  }
-
-  func testNumpadAlternativeReturnsNilForKeysWithoutTwin() {
-    XCTAssertNil(KeyCodeHelper.numpadAlternative(for: "a"))
-    XCTAssertNil(KeyCodeHelper.numpadAlternative(for: "SPACE"))
-    XCTAssertNil(KeyCodeHelper.numpadAlternative(for: "Alt+UP"))
-  }
-
   private func mpvKeyCode(keyCode: UInt16, characters: String, modifiers: NSEvent.ModifierFlags) -> String {
     let event = NSEvent.keyEvent(
       with: .keyDown, location: .zero, modifierFlags: modifiers, timestamp: 0,
@@ -105,10 +83,28 @@ class PlayerCoreKeyBindingTests: XCTestCase {
     XCTAssertEqual(PlayerCore.keyBinding(for: "KP9")?.rawAction, "add volume 5")
   }
 
-  func testNumberRowKeyFallsBackToNumpadBinding() {
+  func testNumpadKeyFallbackPreservesModifiers() {
+    PlayerCore.keyBindings = ["Alt+9": KeyMapping(rawKey: "Alt+9", rawAction: "add volume 5")]
+
+    XCTAssertEqual(PlayerCore.keyBinding(for: "Alt+KP9")?.rawAction, "add volume 5")
+  }
+
+  func testNumpadPeriodFallsBackToPeriodBinding() {
+    PlayerCore.keyBindings = [".": KeyMapping(rawKey: ".", rawAction: "frame-step")]
+
+    XCTAssertEqual(PlayerCore.keyBinding(for: "KP_DEC")?.rawAction, "frame-step")
+  }
+
+  func testNumberRowKeyDoesNotFallBackToNumpadBinding() {
     PlayerCore.keyBindings = ["KP9": KeyMapping(rawKey: "KP9", rawAction: "add video-rotate 90")]
 
-    XCTAssertEqual(PlayerCore.keyBinding(for: "9")?.rawAction, "add video-rotate 90")
+    XCTAssertNil(PlayerCore.keyBinding(for: "9"))
+  }
+
+  func testNumpadEnterDoesNotFallBackToEnterBinding() {
+    PlayerCore.keyBindings = ["ENTER": KeyMapping(rawKey: "ENTER", rawAction: "playlist-next")]
+
+    XCTAssertNil(PlayerCore.keyBinding(for: "KP_ENTER"))
   }
 
   func testUnboundKeyReturnsNil() {

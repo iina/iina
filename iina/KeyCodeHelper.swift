@@ -415,28 +415,6 @@ class KeyCodeHelper {
     return normalizeSingleMpvKeystroke(mpvKeystrokes)
   }
 
-  private static let numpadKeyTwins: [String: String] = {
-    var twins = ["KP_DEC": ".", "KP_ENTER": "ENTER"]
-    for digit in 0...9 {
-      twins["KP\(digit)"] = "\(digit)"
-    }
-    for (kpKey, plainKey) in twins {
-      twins[plainKey] = kpKey
-    }
-    return twins
-  }()
-
-  /** Returns the given keystroke with its key swapped for the twin numpad / non-numpad key
-   (e.g. `"Alt+KP9"` -> `"Alt+9"`, `"9"` -> `"KP9"`), or `nil` if the key has no twin.
-   Used to let a binding for either key in the pair match the other when only one is bound (#4898).
-   IMPORTANT: `normalizedKeystroke` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`. */
-  static func numpadAlternative(for normalizedKeystroke: String) -> String? {
-    var keys = normalizedKeystroke.components(separatedBy: "+")
-    guard let key = keys.last, let twin = numpadKeyTwins[key] else { return nil }
-    keys[keys.count - 1] = twin
-    return keys.joined(separator: "+")
-  }
-
   /** Converts an mpv-formatted key string to a (key, modifiers) pair suitable for assignment to a MacOS menu item.
    IMPORTANT: `normalizedMpvKey` must be normalized first! Use `KeyCodeHelper.normalizeMpv()`. */
   static func macOSKeyEquivalent(from normalizedMpvKey: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {

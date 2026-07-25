@@ -87,6 +87,11 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   override func windowDidLoad() {
     super.windowDidLoad()
 
+    // This is a HUD/utility panel, not a document window. The default close animation
+    // doesn't handle the HUD chrome correctly and flashes white; `.utilityWindow` is the
+    // animation Apple documents for exactly this panel style.
+    window?.animationBehavior = .utilityWindow
+
     watchProperties = Preference.array(for: .watchProperties) as! [String]
     watchTableView.delegate = self
     watchTableView.dataSource = self

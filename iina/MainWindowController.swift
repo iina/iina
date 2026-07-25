@@ -1703,7 +1703,8 @@ class MainWindowController: PlayerWindowController {
     window.styleMask.insert(.titled)
     window.hasShadow = true
     (window as! MainWindow).forceKeyAndMain = false
-    window.level = .normal
+    // Restore level based on current on-top preference instead of unconditionally dropping it.
+    super.setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
 
     restoreDockSettings()
     // restore window frame and aspect ratio
@@ -1755,7 +1756,10 @@ class MainWindowController: PlayerWindowController {
     window.styleMask.remove(.titled)
     window.hasShadow = false
     (window as! MainWindow).forceKeyAndMain = true
-    window.level = .floating
+    // Respect the user's on-top preference instead of always floating. Call super directly
+    // (not self) because MainWindowController's override of setWindowFloatingOnTop no-ops
+    // while fsState.isFullscreen is true, which it already is by this point in the transition.
+    super.setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
 
     // cancel aspect ratio
     window.resizeIncrements = NSSize(width: 1, height: 1)

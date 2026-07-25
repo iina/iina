@@ -6,6 +6,12 @@
     "id": "com.yorkyang2333.anime4k"
   },
   {
+    "name": "Auto Skip",
+    "url": "https://github.com/pangziqiang/iina-auto-skip",
+    "desc": "Automatically skip intro and outro sections with visual drag-to-set overlay.",
+    "id": "io.iina.auto-skip"
+  },
+  {
     "name": "Bilingual Audio",
     "url": "https://github.com/glechic/iina-bilingual-audio",
     "desc": "Play two audio tracks with left/right channel separation for bilingual viewing.",
@@ -118,11 +124,5 @@
     "url": "https://github.com/i3p9/iina-trakt-scrobbler",
     "desc": "Trakt.tv scrobbler plugin for IINA.",
     "id": "io.github.fahim.iinatraktscrobbler"
-  },
-  {
-    "name": "Auto Skip",
-    "url": "https://github.com/pangziqiang/iina-auto-skip",
-    "desc": "自动跳过片头片尾，支持可视化拖拽设定。",
-    "id": "io.iina.auto-skip"
   }
 ]

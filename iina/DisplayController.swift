@@ -28,9 +28,6 @@ class DisplayController {
     var result = CGGetOnlineDisplayList(0, nil, &maxDisplays)
     guard checkResult(result, "CGGetOnlineDisplayList") else { return }
 
-    // If there are no new displays there is nothing to do.
-    guard maxDisplays != displays.count else { return }
-
     // Now that we know the number of displays we can allocate the appropriate sized array.
     var displayCount: CGDisplayCount = 0
     var onlineDisplays = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))

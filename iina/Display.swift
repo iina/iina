@@ -21,6 +21,9 @@ struct Display: CustomStringConvertible {
     if isBuiltin {
       attributes.append("builtin")
     }
+    if isVirtual {
+      attributes.append("virtual")
+    }
     if CGDisplayIsMain(displayId) != 0 {
       attributes.append("main")
     }
@@ -75,10 +78,11 @@ struct Display: CustomStringConvertible {
     if let mode = CGDisplayCopyDisplayMode(displayId) {
       description += "\n  Mode: \(mode.shortDescription)"
     }
-    let modes = displayModes.reduce("", { result, displayMode in
-      result + "\n    " + displayMode.shortDescription })
-    description += "\n  Native modes:"
-    description += modes
+    if let modes = displayModes?.reduce("", { result, displayMode in
+      result + "\n    " + displayMode.shortDescription }) {
+      description += "\n  Native modes:"
+      description += modes
+    }
     return description
   }
 
@@ -88,10 +92,15 @@ struct Display: CustomStringConvertible {
   let displayId: CGDirectDisplayID
 
   /// Native modes supported by the display.
-  let displayModes: [CGDisplayMode]
+  /// - Note: When waking up, macOS may return a virtual display that does not report any native modes or the modes may be
+  ///         missing because macOS was still in the process of querying the display for information.
+  let displayModes: [CGDisplayMode]?
 
   /// Whether the display is built-in, such as the internal display in portable systems.
   let isBuiltin: Bool
+
+  /// Whether the display is a virtual device.
+  let isVirtual: Bool
 
   /// The model number of the display's monitor.
   let modelNumber: UInt32
@@ -114,6 +123,18 @@ struct Display: CustomStringConvertible {
   /// - Parameter displayId: The
   ///     [CGDirectDisplayID](https://developer.apple.com/documentation/coregraphics/cgdirectdisplayid)
   ///     that identifies the display to create a `Display` object for.
+  /// - Important: Although the Apple documentation for the
+  ///     [CGDisplayCopyAllDisplayModes](https://developer.apple.com/documentation/coregraphics/cgdisplaycopyalldisplaymodes(_:_:))
+  ///     method indicates it only returns `nil` if called with an invalid display ID, that has proven to not be true. Apparently this
+  ///     method will return `nil` when macOS is in the process of querying the display for information. Unfortunately macOS will
+  ///     post [didChangeScreenParametersNotification](https://developer.apple.com/documentation/appkit/nsapplication/didchangescreenparametersnotification)
+  ///     before it has finished querying the display and populating this information. This creates a race condition where IINA may or
+  ///     may not find the display information populated. See issue [#6215](https://github.com/iina/iina/issues/6215)
+  ///     for details.
+  ///
+  ///     Currently this information is only used for logging display attributes to help with debugging problems, so it is acceptable to
+  ///     not populate `displayModes`.  If in the future this information is needed for a feature, such as matching the refresh rate
+  ///     of the display, changes in this area will be needed.
   init(_ displayId: CGDirectDisplayID) {
     self.displayId = displayId
     isBuiltin = CGDisplayIsBuiltin(displayId) != 0
@@ -123,17 +144,24 @@ struct Display: CustomStringConvertible {
     // Obtain all the available modes on the display and filter out all except the native modes.
     // Native modes are of interest as IINA in the future might add support for matching the refresh
     // rate of the display when in full screen mode.
-    let allDisplayModes = CGDisplayCopyAllDisplayModes(displayId, nil) as! [CGDisplayMode]
-    var usableDisplayModes = allDisplayModes
-    usableDisplayModes.removeAll(where: { !$0.isNative })
-    displayModes = usableDisplayModes
-
+    if let allDisplayModes = CGDisplayCopyAllDisplayModes(displayId, nil) as? [CGDisplayMode] {
+      var usableDisplayModes = allDisplayModes
+      usableDisplayModes.removeAll(where: { !$0.isNative })
+      // When waking up, macOS may return a virtual display that does not report any native modes.
+      displayModes = usableDisplayModes.isEmpty ? nil : usableDisplayModes
+    } else {
+      // As discussed above in the comments for this initializer, this method will return nil when
+      // macOS is in the process of querying the display for information.
+      Logger.log("Failed to obtain display modes for display \(displayId)")
+      displayModes = nil
+    }
     // Additional information has to be obtained from the display's info dictionary.
     guard let info = CoreDisplay_DisplayCreateInfoDictionary(displayId)?.takeRetainedValue() as?
             [String: AnyObject] else {
       // Not expected to occur, but we don't want it to be a fatal error if it does occur.
       Logger.log("Failed to create info dictionary for display \(displayId)", level: .error)
       displayBacklight = nil
+      isVirtual = false
       nonReferencePeakHDRLuminance = nil
       nonReferencePeakSDRLuminance = nil
       productName = nil
@@ -143,9 +171,17 @@ struct Display: CustomStringConvertible {
     }
     // It appears the luminance of non-XDR displays is reported using the key DisplayBacklight.
     displayBacklight = info["DisplayBacklight"] as? Int
-    if let productName = info["DisplayProductName"] as? [String: String] {
-      // As the product name is only used in a log message we use the English name.
-      self.productName = productName["en_US"]
+    if let virtual = info["kCGDisplayIsVirtualDevice"] as? Int {
+      isVirtual = virtual == 1
+    } else {
+      isVirtual = false
+    }
+    // As the product name is only used in a log message we use the English name. When waking up,
+    // macOS may return a virtual display that populates all the names with empty strings, so a
+    // check that the name is not empty is required.
+    if let productNames = info["DisplayProductName"] as? [String: String],
+       let name = productNames["en_US"], !name.isEmpty {
+      productName = name
     } else {
       productName = nil
     }

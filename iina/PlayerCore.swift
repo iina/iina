@@ -2537,16 +2537,24 @@ class PlayerCore: NSObject {
     guard info.state.loaded else { return }
     var dwidth = mpv.getInt(MPVProperty.dwidth)
     var dheight = mpv.getInt(MPVProperty.dheight)
-    if info.rotation == 90 || info.rotation == 270 {
+    // Read the rotation synchronously. The video-rotate change notification updates
+    // info.rotation asynchronously, so it can still hold the previous value here.
+    let rotation = mpv.getInt(MPVOption.Video.videoRotate)
+    info.rotation = rotation
+    if rotation == 90 || rotation == 270 {
       swap(&dwidth, &dheight)
     }
     if dwidth != info.displayWidth! || dheight != info.displayHeight! {
       // filter the last video-reconfig event before quit
       if dwidth == 0 && dheight == 0 && mpv.getFlag(MPVProperty.coreIdle) { return }
+      // If the new size is the transpose of the old one, the video was rotated in 90°
+      // steps. Only update the window's aspect ratio, keeping its size and position,
+      // instead of resizing it as if a new video was opened (#1172).
+      let rotationChangedOnly = dwidth == info.displayHeight! && dheight == info.displayWidth!
       // video size changed
       info.displayWidth = dwidth
       info.displayHeight = dheight
-      notifyWindowVideoSizeChanged()
+      notifyWindowVideoSizeChanged(keepWindowSize: rotationChangedOnly)
     }
   }
 
@@ -2708,8 +2716,12 @@ class PlayerCore: NSObject {
     )
   }
 
-  func notifyWindowVideoSizeChanged() {
-    currentController.handleVideoSizeChange()
+  func notifyWindowVideoSizeChanged(keepWindowSize: Bool = false) {
+    if keepWindowSize && !isInMiniPlayer {
+      mainWindow.handleVideoSizeChange(keepWindowSize: true)
+    } else {
+      currentController.handleVideoSizeChange()
+    }
     if currentController.pendingShow {
       currentController.pendingShow = false
       currentController.showWindow(self)

@@ -34,11 +34,12 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
+  var isIdle = true
   private var displayIdleTimer: Timer?
 
-  private lazy var hdrSubsystem = Logger.makeSubsystem("hdr\(player.playerNumber)")
+  private lazy var hdrSubsystem = Logger.makeSubsystem("hdr\(player.playerNumber)", ["circle.righthalf.filled"])
 
-  lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)")
+  lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)", ["film"])
 
   static let SRGB = CGColorSpaceCreateDeviceRGB()
 
@@ -132,11 +133,7 @@ class VideoView: NSView {
     // AppKit malfunctions from then on. The check for running under Big Sur or later isn't really
     // needed as it would be fine to always call the controller. The check merely makes it clear
     // that this is only needed due to macOS changes starting with Big Sur.
-    if #available(macOS 11, *) {
-      player.mainWindow.mouseUp(with: event)
-    } else {
-      super.mouseUp(with: event)
-    }
+    player.mainWindow.mouseUp(with: event)
   }
 
   // MARK: Drag and drop
@@ -197,7 +194,7 @@ class VideoView: NSView {
 
   override func draggingEnded(_ sender: NSDraggingInfo) {
     if playlistShown {
-      player.mainWindow.hideSideBar()
+      player.mainWindow.sidebars.hideAllSideBars()
     }
     playlistShown = false
     lastMousePosition = nil
@@ -278,6 +275,7 @@ class VideoView: NSView {
 
   /// Starts the display link if it has been stopped in order to save energy.
   func displayActive() {
+    isIdle = false
     displayIdleTimer?.invalidate()
     startDisplayLink()
   }
@@ -297,6 +295,7 @@ class VideoView: NSView {
   /// - Note: In addition to playback the display link must be running for operations such seeking, stepping and entering and leaving
   ///         full screen mode.
   func displayIdle() {
+    isIdle = true
     displayIdleTimer?.invalidate()
     // Because the display link is critical there is an internal setting that can be changed to
     // disable shutting down the display link should any problems with this energy saving feature
@@ -425,7 +424,8 @@ extension VideoView {
     let edrEnabled = requestEdrMode()
     let edrAvailable = edrEnabled != false
     if player.info.hdrAvailable != edrAvailable {
-      player.mainWindow.quickSettingView.setHdrAvailability(to: edrAvailable)
+      player.info.hdrAvailable = edrAvailable
+      player.postNotification(.iinaHDRChanged)
     }
     if edrEnabled != true { setICCProfile() }
   }
@@ -447,21 +447,10 @@ extension VideoView {
     var name: CFString? = nil
     switch primaries {
     case "display-p3":
-      if #available(macOS 10.15.4, *) {
-        name = CGColorSpace.displayP3_PQ
-      } else {
-        name = CGColorSpace.displayP3_PQ_EOTF
-      }
+      name = CGColorSpace.displayP3_PQ
 
     case "bt.2020":
-      // Invert order of checks to avoid Xcode bug which incorrectly shows deprecation warning
-      if #unavailable(macOS 10.15.4) {
-        name = CGColorSpace.itur_2020_PQ_EOTF
-      } else if #unavailable(macOS 11.0) {
-        name = CGColorSpace.itur_2020_PQ
-      } else {
-        name = CGColorSpace.itur_2100_PQ
-      }
+      name = CGColorSpace.itur_2100_PQ
 
     case "bt.709":
       return false // SDR
@@ -513,9 +502,8 @@ extension VideoView {
           targetPeak = 400
         }
       }
-      let algorithm = Preference.ToneMappingAlgorithmOption(rawValue: Preference.integer(for: .toneMappingAlgorithm))?.mpvString
-        ?? Preference.ToneMappingAlgorithmOption.defaultValue.mpvString
-
+      let algorithm = String(describing: Preference.enum(for: .toneMappingAlgorithm) as
+                             Preference.ToneMappingAlgorithmOption)
       logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm)")
       mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
       mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)

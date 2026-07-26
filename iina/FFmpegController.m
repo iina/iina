@@ -311,7 +311,7 @@ return -1;\
                                                  8,  // 8 bit per component
                                                  width * 4,  // 4 bytes(rgba) per pixel
                                                  rgb,
-                                                 kCGImageAlphaPremultipliedLast);
+                                                 (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
   CGImageRef cgImage = CGBitmapContextCreateImage(cgContext);
 
   // Create NSImage
@@ -572,8 +572,9 @@ return -1;\
         // supported as output pixel format" to the console. As a workaround we convert to
         // AV_PIX_FMT_RGBA64LE and then convert the components to floating point.
         pFrameRGB->format = AV_PIX_FMT_RGBA64LE;
-        bitmapInfo = kCGImageByteOrder16Little | kCGImageAlphaPremultipliedLast |
-            kCGBitmapFloatComponents;
+        bitmapInfo = (CGBitmapInfo)kCGImageByteOrder16Little |
+                     (CGBitmapInfo)kCGImageAlphaPremultipliedLast |
+                     kCGBitmapFloatComponents;
     }
 
     // Determine required buffer size and allocate the buffer.
@@ -650,22 +651,10 @@ return -1;\
             cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
             break;
           case AVCOL_TRC_ARIB_STD_B67:
-            if (@available(macOS 11.0, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_HLG);
-            } else if (@available(macOS 10.15.6, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_HLG);
-            } else {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020);
-            }
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_HLG);
             break;
           case AVCOL_TRC_SMPTE2084:
-            if (@available(macOS 11.0, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_PQ);
-            } else if (@available(macOS 10.15.4, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ);
-            } else {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2020_PQ_EOTF);
-            }
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceITUR_2100_PQ);
         }
         break;
       case AVCOL_PRI_SMPTE432:
@@ -677,11 +666,7 @@ return -1;\
             cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_HLG);
             break;
           case AVCOL_TRC_SMPTE2084:
-            if (@available(macOS 10.15.4, *)) {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ);
-            } else {
-              cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ_EOTF);
-            }
+            cgColorSpace = CGColorSpaceCreateWithName(kCGColorSpaceDisplayP3_PQ);
         }
     }
     if (!cgColorSpace) {
@@ -750,6 +735,7 @@ return -1;\
     }
 
     // Search the streams for one that contains front cover artwork.
+    int index = 0;
     AVPacket* packet = NULL;
     for (int i = 0; i < pFormatCtx->nb_streams; i++) {
       AVStream* stream = pFormatCtx->streams[i];
@@ -766,6 +752,7 @@ return -1;\
       // types can be found here: https://id3.org/id3v2.3.0#Attached_picture
 
       // Found front cover artwork.
+      index = i;
       packet = &stream->attached_pic;
       break;
     }
@@ -775,6 +762,7 @@ return -1;\
     }
 
     // Form an image from the stream's data.
+    LOG_DEBUG(@"Creating an image from stream %d using %d bytes", index, packet->size);
     NSData *data = [[NSData alloc] initWithBytes:packet->data length:packet->size];
     NSImage *image = [[NSImage alloc] initWithData:data];
     if (!image) {

@@ -134,7 +134,7 @@ extension MainMenuActionHandler {
 
   @objc func menuJumpTo(_ sender: NSMenuItem) {
     // Make certain the cached video position in the playback info is up to date.
-    player.syncUI(.time)
+    player.syncPositionIfNeeded()
     Utility.quickPromptPanel("jump_to", inputValue: self.player.info.videoPosition?.stringRepresentationWithPrecision(3)) { input in
       if let vt = VideoTime(input) {
         self.player.seek(absoluteSecond: vt.second)
@@ -214,8 +214,9 @@ extension MainMenuActionHandler {
   @objc func menuChangeCrop(_ sender: NSMenuItem) {
     if let cropStr = sender.representedObject as? String {
       if cropStr == "Custom" {
-        player.mainWindow.hideSideBar {
-          self.player.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
+        player.mainWindow.sidebars.hideAllSideBars {
+          self.player.mainWindow.interactiveMode
+            .enter(mode: .crop, selectWholeVideoByDefault: true)
         }
         return
       }
@@ -481,37 +482,6 @@ extension MainMenuActionHandler {
   // MARK: - Plugin
 
   @objc func showPluginsPanel(_ sender: NSMenuItem) {
-    player.mainWindow.showPluginSidebar(tab: nil)
-  }
-
-  @objc func reloadAllPlugins(_ sender: NSMenuItem) {
-    // Remove the developer tool menu item that retains the plugin instance
-    AppDelegate.shared.menuController.pluginMenu.items
-      .compactMap { $0.submenu }.flatMap { $0.items }
-      .forEach { $0.representedObject = nil }
-    AppDelegate.shared.menuController.pluginMenu.removeAllItems()
-
-    for player in PlayerCore.playerCores {
-      player.clearPlugins()
-    }
-
-    JavascriptPlugin.recreateAllPlugins()
-    JavascriptPlugin.loadGlobalInstances()
-
-    for player in PlayerCore.playerCores {
-      for plugin in JavascriptPlugin.plugins {
-        player.reloadPlugin(plugin, forced: true)
-      }
-      // Try to emit the events that are already emitted.
-      // Of course this is not exhaustive, so users shouldn't rely on this function
-      if player.mainWindow.loaded {
-        player.events.emit(.windowLoaded)
-      }
-      player.events.emit(.mpvInitialized)
-      if player.info.state == .playing {
-        player.events.emit(.fileLoaded)
-        player.events.emit(.fileStarted)
-      }
-    }
+    player.mainWindow.sidebars.show(sidebar: .plugins)
   }
 }

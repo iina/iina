@@ -11,6 +11,7 @@ import MediaPlayer
 import Sparkle
 
 let IINA_ENABLE_PLUGIN_SYSTEM = true
+let IINA_ENABLE_NEW_SETTINGS = UserDefaults.standard.bool(forKey: "enableNewSettings")
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
@@ -109,7 +110,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   // MARK: - Logs
-  private let observedPrefKeys: [Preference.Key] = [.logLevel]
+  private let observedPrefKeys: [Preference.Key] = [.logLevel, .thumbnailWidth]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath = keyPath, let change = change else { return }
@@ -119,6 +120,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       if let newValue = change[.newKey] as? Int {
         Logger.Level.preferred = Logger.Level(rawValue: newValue.clamped(to: 0...3))!
       }
+    case Preference.Key.thumbnailWidth.rawValue:
+      ThumbnailCache.clearThumbnailCache()
 
     default:
       return
@@ -232,6 +235,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     logBuildDetails()
     logPlatformDetails()
     logScreenDetails()
+    Preference.logSettings()
 
     Logger.log("App will launch")
 
@@ -428,6 +432,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     NSApplication.shared.servicesProvider = self
 
     AppDelegate.shared.menuController?.updatePluginMenu()
+
+    MemoryUsage.shared.logUsage("after launching finished")
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */
@@ -483,6 +489,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     Logger.log("App should terminate")
     isTerminating = true
+    MemoryUsage.shared.logUsage("before terminating")
 
     // Normally termination happens fast enough that the user does not have time to initiate
     // additional actions, however to be sure shutdown further input from the user.
@@ -761,7 +768,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       return
     }
     let urls = pendingFilesForOpenFile.map { URL(fileURLWithPath: $0) }
-    
+    pendingFilesForOpenFile.removeAll()
+
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
       preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
@@ -769,7 +777,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
 
     // open pending files
-    pendingFilesForOpenFile.removeAll()
     if PlayerCore.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
     }
@@ -905,6 +912,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       for query in queries {
         if query.name.hasPrefix("mpv_") {
           let mpvOptionName = String(query.name.dropFirst(4))
+          guard safeMPVOptions.contains(mpvOptionName) else {
+            Logger.log("mpv option \(mpvOptionName) rejected when parsing URL", level: .warning)
+            continue
+          }
           guard let mpvOptionValue = query.value else { continue }
           Logger.log("Setting \(mpvOptionName) to \(mpvOptionValue)")
           player.mpv.setString(mpvOptionName, mpvOptionValue)
@@ -962,7 +973,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {
-    preferenceWindowController.showWindow(self)
+    if IINA_ENABLE_NEW_SETTINGS {
+      SettingsWindow.default.show()
+    } else {
+      preferenceWindowController.showWindow(self)
+    }
   }
 
   @objc func showPluginPreferences(_ sender: NSMenuItem) {
@@ -1003,6 +1018,74 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   @IBAction func websiteAction(_ sender: AnyObject) {
     NSWorkspace.shared.open(URL(string: AppData.websiteLink)!)
+  }
+
+  @objc func reloadAllPlugins(_ sender: NSMenuItem) {
+    // Remove the developer tool menu item that retains the plugin instance
+    AppDelegate.shared.menuController.pluginMenu.items
+      .compactMap { $0.submenu }.flatMap { $0.items }
+      .forEach { $0.representedObject = nil }
+    AppDelegate.shared.menuController.pluginMenu.removeAllItems()
+
+    for player in PlayerCore.playerCores {
+      player.clearPlugins()
+    }
+
+    JavascriptPlugin.recreateAllPlugins()
+    JavascriptPlugin.loadGlobalInstances()
+
+    for player in PlayerCore.playerCores {
+      for plugin in JavascriptPlugin.plugins {
+        player.reloadPlugin(plugin, forced: true)
+      }
+      // Try to emit the events that are already emitted.
+      // Of course this is not exhaustive, so users shouldn't rely on this function
+      if player.mainWindow.loaded {
+        player.events.emit(.windowLoaded)
+      }
+      player.events.emit(.mpvInitialized)
+      if player.info.state == .playing {
+        player.events.emit(.fileLoaded)
+        player.events.emit(.fileStarted)
+      }
+    }
+  }
+
+  /// Dump contents of all player cores to a txt file. Strictly for debugging. No localization needed.
+  @IBAction func dumpDebugInfo(_ sender: AnyObject) {
+    struct FileStream: TextOutputStream {
+      let handle: FileHandle
+      mutating func write(_ string: String) {
+        handle.write(Data(string.utf8))
+      }
+    }
+
+    let alert = NSAlert()
+    let path = NSString(string: "~/Downloads/iina-debug-dump-\(Date.timeIntervalSinceReferenceDate).txt").expandingTildeInPath
+    let url = URL(fileURLWithPath: path)
+    FileManager.default.createFile(atPath: path, contents: nil)
+    guard let handle = try? FileHandle(forWritingTo: url) else {
+      alert.messageText = "Error"
+      alert.informativeText = "Cannot get file handle at \(path)."
+      alert.alertStyle = .critical
+      alert.runModal()
+      return
+    }
+
+    var stream = FileStream(handle: handle)
+    for player in PlayerCore.playerCores {
+      dump(player, to: &stream)
+      stream.write("\n\n")
+    }
+
+    alert.messageText = "Completed"
+    alert.informativeText = """
+      Dumped debug info to \(path).\n
+      The file contains filenames and URLs in your playlist! \
+      For your privacy, please consider removing them before sharing.
+      """
+    alert.alertStyle = .informational
+    alert.runModal()
   }
 
   private func registerUserDefaultValues() {
@@ -1340,7 +1423,7 @@ class RemoteCommandController {
 
     // For each command, apply a configured keybinding or fallback to default values.
     remoteCommand.playCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PLAY"] {
+      if let action = PlayerCore.keyBindings["PLAYONLY"] {
         PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.resume()
@@ -1348,7 +1431,7 @@ class RemoteCommandController {
       return .success
     }
     remoteCommand.pauseCommand.addTarget { _ in
-      if let action = PlayerCore.keyBindings["PAUSE"] {
+      if let action = PlayerCore.keyBindings["PAUSEONLY"] {
         PlayerCore.lastActive.mainWindow.handleKeyBinding(action)
       } else {
         PlayerCore.lastActive.pause()
@@ -1481,3 +1564,63 @@ extension ProcessInfo.ThermalState: @retroactive CustomStringConvertible {
     }
   }
 }
+
+
+/// A list of mpv options that should be allowed in the URL scheme.
+/// Ensure absolutely no possibility of local file read/write.
+fileprivate let safeMPVOptions = Set([
+  // track selection
+  "aid", "vid", "sid", "secondary-sid",
+  "alang", "slang", "vlang", "edition", "track-auto-selection",
+  "subs-with-matching-audio", "subs-match-os-language", "subs-fallback", "subs-fallback-forced",
+  // playback control
+  "start", "end", "length", "frames", "speed", "pitch", "pause", "sstep", "correct-pts", "container-fps-override",
+  "loop-file", "loop-playlist", "ab-loop-a", "ab-loop-b", "ab-loop-count", "play-direction",
+  "rebase-start-time", "hr-seek", "hr-seek-framedrop",
+  // video
+  "deinterlace", "deinterlace-field-parity", "hwdec", "hwdec-codecs",
+  "video-aspect-override", "video-aspect-method", "video-rotate", "video-crop",
+  "video-zoom", "video-pan-x", "video-pan-y", "video-align-x", "video-align-y",
+  "video-unscaled", "video-scale-x", "video-scale-y", "video-recenter",
+  "video-margin-ratio-left", "video-margin-ratio-right", "video-margin-ratio-top", "video-margin-ratio-bottom",
+  "video-output-levels", "panscan", "framedrop", "video-latency-hacks", "display-fps-override",
+  "vd-lavc-skiploopfilter", "vd-lavc-skipidct", "vd-lavc-skipframe", "vd-lavc-threads", "vd-lavc-framedrop", "vd-lavc-fast", "vd-lavc-film-grain", "vd-lavc-dr",
+  "vd-apply-cropping", "hwdec-extra-frames", "hwdec-image-format", "hwdec-threads", "hwdec-software-fallback", "vd-lavc-check-hw-profile", "swapchain-depth",
+  "brightness", "contrast", "saturation", "gamma", "hue",
+  // audio
+  "volume", "volume-max", "volume-gain", "volume-gain-max", "volume-gain-min", "mute",
+  "audio-delay", "audio-pitch-correction", "audio-channels", "audio-display",
+  "audio-samplerate", "audio-format", "audio-exclusive", "audio-spdif",
+  "gapless-audio", "initial-audio-sync", "replaygain", "replaygain-preamp", "replaygain-clip", "replaygain-fallback",
+  "ad-lavc-ac3drc", "ad-lavc-downmix", "ad-lavc-threads",
+  "audio-stream-silence", "audio-wait-open", "audio-buffer", "audio-normalize-downmix", "audio-set-media-role",
+  // subtitles
+  "sub-delay", "secondary-sub-delay",
+  "sub-scale", "sub-scale-signs", "sub-scale-by-window", "sub-scale-with-window", "sub-ass-scale-with-window",
+  "sub-pos", "secondary-sub-pos", "sub-speed", "sub-visibility", "secondary-sub-visibility",
+  "sub-ass", "sub-ass-justify",
+  "sub-ass-override", "secondary-sub-ass-override", "sub-ass-force-margins", "sub-use-margins",
+  "sub-ass-use-video-data", "sub-vsfilter-bidi-compat", "sub-ass-vsfilter-color-compat",
+  "sub-font", "sub-font-size", "sub-color", "sub-outline-color", "sub-outline-size", "sub-back-color",
+  "sub-shadow-offset", "sub-bold", "sub-italic", "sub-blur",
+  "sub-margin-x", "sub-margin-y", "sub-align-x", "sub-align-y", "sub-justify",
+  "sub-border-style", "sub-spacing", "sub-line-spacing", "sub-hinting", "sub-shaper",
+  "sub-codepage", "sub-fix-timing", "sub-fix-timing-threshold", "sub-fix-timing-keep",
+  "sub-stretch-durations", "sub-gauss", "sub-gray", "sub-forced-events-only", "sub-fps",
+  "sub-filter-sdh", "sub-filter-sdh-harder", "sub-filter-sdh-enclosures",
+  "sub-clear-on-seek", "sub-create-cc-track", "sub-past-video-end", "sub-font-provider", "sub-hdr-peak", "image-subs-hdr-peak",
+  "sub-ass-style-overrides", "stretch-dvd-subs", "stretch-image-subs-to-screen", "image-subs-video-resolution",
+  "embeddedfonts", "sub-ass-video-aspect-override", "sub-ass-prune-delay", "teletext-page",
+  // window
+  "fullscreen", "geometry", "ontop", "keep-open", "keep-open-pause", "image-display-duration", "stop-screensaver",
+  // network
+  "user-agent", "referrer", "network-timeout", "tls-verify", "rtsp-transport", "hls-bitrate",
+  "cache", "cache-secs", "cache-pause", "cache-pause-wait", "cache-pause-initial", "force-seekable",
+  "http-header-fields", "cookies",
+  // demuxer, audio resampler, others
+  "demuxer-readahead-secs", "demuxer-mkv-subtitle-preroll", "demuxer-mkv-subtitle-preroll-secs",
+  "demuxer-lavf-analyzeduration", "demuxer-lavf-probescore", "demuxer-lavf-probesize",
+  "demuxer-max-bytes", "demuxer-max-back-bytes",
+  "audio-resample-filter-size", "audio-resample-phase-shift", "audio-resample-cutoff", "audio-resample-linear", "audio-resample-max-output-size",
+  "video-sync", "interpolation",
+])

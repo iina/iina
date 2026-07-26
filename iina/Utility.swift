@@ -152,7 +152,7 @@ class Utility {
     panel.canChooseFiles = !chooseDir
     panel.canChooseDirectories = chooseDir
     panel.resolvesAliases = true
-    panel.allowedFileTypes = allowedFileTypes
+    panel.allowedContentTypes = allowedFileTypes?.compactMap { UTType(filenameExtension: $0) } ?? []
     panel.allowsMultipleSelection = false
     panel.level = .modalPanel
     if let dir = dir {
@@ -204,7 +204,7 @@ class Utility {
     let panel = NSSavePanel()
     panel.title = title
     panel.canCreateDirectories = true
-    panel.allowedFileTypes = types
+    panel.allowedContentTypes = types?.compactMap { UTType(filenameExtension: $0) } ?? []
     if filename != nil {
       panel.nameFieldStringValue = filename!
     }
@@ -248,9 +248,7 @@ class Utility {
     input.cell?.isScrollable = true
     input.isBezeled = true
     input.bezelStyle = .roundedBezel
-    if #available(macOS 11.0, *) {
-      input.controlSize = .large
-    }
+    input.controlSize = .large
     if let inputValue = inputValue {
       input.stringValue = inputValue
     }
@@ -375,16 +373,21 @@ class Utility {
   /**
    Pop up a font picker panel.
    - parameters:
+     - sheetWindow: The window to attach as a sheet
      - callback: A closure accepting the font name.
    */
-  static func quickFontPickerWindow(selecting initialSelection: String?, callback: @escaping (String) -> Void) {
+  static func quickFontPickerWindow(selecting initialSelection: String?, sheetWindow: NSWindow? = nil, callback: @escaping (String?) -> Void) {
     let fontPicker = AppDelegate.shared.fontPicker
     let _ = fontPicker.window  // load if not loaded
-    fontPicker.finishedPicking = callback
     if let initialSelection {
       fontPicker.select(initialSelection)
     }
-    fontPicker.showWindow(self)
+    fontPicker.finishedPicking = callback
+    if let sheetWindow {
+      sheetWindow.beginSheet(fontPicker.window!)
+    } else {
+      fontPicker.showWindow(self)
+    }
   }
 
   // MARK: - App functions
@@ -511,14 +514,27 @@ class Utility {
     }
   }
 
-  /// See `mp_get_playback_resume_config_filename` in mpv/configfiles.c
-  static func mpvWatchLaterMd5(_ filename: String) -> String {
-    // mp_is_url
-    // if(!Regex.mpvURL.matches(filename)) {
-      // ignore_path_in_watch_later_config
-    // }
-    // handle dvd:// and bd://
-    return filename.md5
+  /// Calculates and returns a MD5 sum for the given URL.
+  ///
+  /// The mpv [Watch Later](https://mpv.io/manual/stable/#watch-later) feature saves options and their values in a
+  /// file whose name is based on the MD5 sum of the media's URL. IINA calculates this MD5 sum in order to find and read the watch
+  /// later file created by `libmpv` to be able to display the saved playback progress. For this to work the MD5 sum calculated by
+  /// IINA _must_ match the sum calculated by mpv or IINA will not be able to find the file created by mpv. The mpv code of interest is
+  /// the function
+  /// [mp_get_playback_resume_config_filename](https://github.com/mpv-player/mpv/blob/f5d4d9b029affa4d5b7eb13b28d91a96e6a92280/player/configfiles.c#L213-L229).
+  /// The code of this method differs slightly due to the way IINA uses URLs.
+  ///
+  /// If the `ignorePath` parameter is `true` that means the user has enabled the mpv
+  /// [ignore-path-in-watch-later-config](https://mpv.io/manual/stable/#options-ignore-path-in-watch-later-config)
+  /// option and the MD5 sum should only use the filename and not the full path.
+  /// - Parameters:
+  ///   - url: URL of the media.
+  ///   - ignorePath: When `true`, only use the URL's filename when calculating the sum.
+  /// - Returns: The appropriate MD5 sum as a hexadecimal string.
+  static func mpvWatchLaterMd5(_ url: URL, _ ignorePath: Bool) -> String {
+    if ignorePath, url.scheme == nil || url.isFileURL { return url.lastPathComponent.md5 }
+    if url.isFileURL { return url.path.md5 }
+    return url.absoluteString.md5
   }
 
   static func playbackProgressFromWatchLater(_ mpvMd5: String) -> VideoTime? {
@@ -557,17 +573,12 @@ class Utility {
   }
 
   static func icon(for url: URL) -> NSImage {
-    if #available(macOS 11.0, *) {
-      if let uttype = UTType.types(tag: url.pathExtension, tagClass: .filenameExtension, conformingTo: nil).first {
-        return NSWorkspace.shared.icon(for: uttype)
-      } else {
-        return NSWorkspace.shared.icon(for: .data)
-      }
+    if let uttype = UTType.types(tag: url.pathExtension, tagClass: .filenameExtension, conformingTo: nil).first {
+      return NSWorkspace.shared.icon(for: uttype)
     } else {
-      return NSWorkspace.shared.icon(forFileType: url.pathExtension)
+      return NSWorkspace.shared.icon(for: .data)
     }
   }
-
 
   // MARK: - Util classes
 

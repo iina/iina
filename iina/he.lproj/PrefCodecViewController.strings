@@ -10,6 +10,12 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "מספר ה-Threads:";
 
+/* Class = "NSMenuItem"; title = "Strong"; ObjectID = "6vc-ad-xaq"; */
+"6vc-ad-xaq.title" = "חזק";
+
+/* Class = "NSTextFieldCell"; title = "Gapless audio:"; ObjectID = "8Fa-ft-1tC"; */
+"8Fa-ft-1tC.title" = "Gapless audio:";
+
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
 "YUr-aJ-xfC.title" = "כפה שימוש בGPU ייעודי";
 
@@ -27,6 +33,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "וידאו:";
+
+/* Class = "NSMenuItem"; title = "Weak"; ObjectID = "nsT-r3-brW"; */
+"nsT-r3-brW.title" = "חלש";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
 "nwg-2K-G2G.title" = "מפענח חומרה:";
@@ -94,6 +103,9 @@
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
 "k7b-6o-lCK.title" = "אין התאמה";
 
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "ti2-JH-nXX"; */
+"ti2-JH-nXX.title" = "מושבת";
+
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
 "w6E-lw-g7g.title" = "Gain רצועה";
 
@@ -101,7 +113,7 @@
 "ZJJ-1o-ZGD.title" = "Gain אלבום";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
-"y61-Ah-c92.title" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
+"y61-Ah-c92.title" = "התאם את עוצמת השמע לפי ערכי ה-ReplayGain השמורים במטא־דאטה של הקובץ.";
 
 /* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
 "9Q0-hw-PdU.title" = "Preamp gain:";
@@ -131,4 +143,4 @@
 "Zco-Ba-Idk.title" = "מנהל התקן של שמע:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation הוא מנהל שמע חדש וניסיוני המציע תמיכה בשמע מרחבי. עם זאת, ייתכן שתיתקלו בבעיות בעת השימוש בו, כגון עיכובי שמע.";

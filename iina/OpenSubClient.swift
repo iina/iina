@@ -421,20 +421,9 @@ class OpenSubClient {
       if let error = formErrorIfHtmlResponse(result) {
         throw error
       }
+      let response: ErrorResponse
       do {
-        let response = try self.decoder.decode(ErrorResponse.self, from: content)
-        guard let statusCode = result.statusCode, statusCode == 406,
-              response.message == "invalid token" else {
-          throw Error.errorResponse(response: response)
-        }
-        // The REST API returns a 406 (Not Acceptable) HTTP status code with an "invalid token"
-        // error message if the server determined the JSON web token representing the user session
-        // has expired. The client keeps track of when the token was acquired and attempts to reduce
-        // the chance of this error occurring, however the client must still be prepared to handle
-        // the case where the server rejects the token.
-        log("User session is no longer valid")
-        abandonUserSession()
-        throw Error.errorResponse(response: response)
+        response = try self.decoder.decode(ErrorResponse.self, from: content)
       } catch {
         guard let text = result.text else {
           throw error
@@ -442,6 +431,18 @@ class OpenSubClient {
         log("Decoding JSON as \(String(describing: ErrorResponse.self)) failed: \(text) error thrown: \(error)", level: .error)
         throw error
       }
+      guard let statusCode = result.statusCode, statusCode == 406,
+            response.message == "invalid token" else {
+        throw Error.errorResponse(response: response)
+      }
+      // The REST API returns a 406 (Not Acceptable) HTTP status code with an "invalid token"
+      // error message if the server determined the JSON web token representing the user session
+      // has expired. The client keeps track of when the token was acquired and attempts to reduce
+      // the chance of this error occurring, however the client must still be prepared to handle
+      // the case where the server rejects the token.
+      log("User session is no longer valid")
+      abandonUserSession()
+      throw Error.errorResponse(response: response)
     }
     guard let content = result.content else {
       throw Error.contentMissing(statusCode: result.statusCode)

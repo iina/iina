@@ -13,8 +13,12 @@
 "general.logout" = "Logout";
 "general.ok" = "Labi";
 "general.cancel" = "Atcelt";
+"general.done" = "Paveikts";
 "general.username" = "Lietotājvārds";
 "general.password" = "Parole";
+"general.na" = "N/A";
+"general.no_result" = "Nav rezultāta";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Value already exists.";
@@ -136,6 +140,9 @@
 "osd.canceled" = "Canceled";
 "osd.cannot_connect" = "Cannot connect";
 "osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Added Filter: %@";
 "osd.filter_removed" = "Removed Filter";
 "osd.file_loop" = "Loop Single File";
@@ -144,8 +151,10 @@
 
 "preference.title" = "Iestatījumi";
 "preference.general" = "General";
-"preference.ui" = "UI";
-"preference.video_audio" = "Video/Audio";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Skaņa";
 "preference.subtitle" = "Subtitrs";
 "preference.network" = "Network";
 "preference.control" = "Control";
@@ -247,6 +256,7 @@
 "alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
 
 "alert.unsupported_audio" = "Unsupported external audio file.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Unsupported external subtitle.";
 "alert.unsupported_url" = "Unsupported URL.";
 "alert.wrong_url_format" = "Wrong URL format.";
@@ -275,10 +285,13 @@
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
 "alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
@@ -313,6 +326,10 @@
 
 "alert.delete_history.title" = "Delete Playback History";
 "alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_all_history.title" = "Notīrīt atskaņošanas vēsturi";
+"alert.delete_all_history.message" = "Are you sure to delete all playback history?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Abort";
@@ -330,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
 "alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
+"alert.cleared" = "Iztīrīta.";
+"alert.restored" = "Restored.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Nothing to open.";
 
@@ -354,6 +375,8 @@
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
 "alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
@@ -381,6 +404,12 @@
 "pl_menu.browser" = "Open in Browser";
 "pl_menu.copy_url" = "Copy URL";
 "pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.playback" = "Atskaņošana";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plugin";
+"pl_menu.playlist" = "Atskaņošanas saraksts";
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
@@ -392,6 +421,10 @@
 "hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
 "hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
 "subencoding.auto" = "Auto detect";
 
 "osc_toolbar.settings" = "Quick Settings";
@@ -402,6 +435,11 @@
 "osc_toolbar.sub_track" = "Choose subtitle track";
 "osc_toolbar.screenshot" = "Take a screenshot";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Peldošs";
+"osc_pos.top" = "Augšā";
+"osc_pos.bottom" = "Apakšā";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -459,3 +497,274 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Pārbaudīt atjauninājumus";
 "plugin.updating" = "Downloading update…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log Viewer";
+"logwindow.time" = "Time";
+"logwindow.subsystem" = "Apakšsistēma";
+"logwindow.message" = "Paziņojums";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Save";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Kopēt";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Atskaņošanas vēsture";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Progress";
+"history_window.col.played_at" = "Played at";
+"history_window.menu.play" = "Atskaņot";
+"history_window.menu.play_new_window" = "Atskaņot jaunā logā";
+"history_window.menu.show_in_finder" = "Rādīt programmā Meklētājs";
+"history_window.menu.delete" = "Dzēst…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Notīrīt atskaņošanas vēsturi";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Datums";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Meklēt";
+"history_window.search.filename" = "Datnes nosaukums";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Nav neseno meklējumu";
+"history_window.search.recents_title" = "Nesenie meklējumi";
+"history_window.search.clear_recents" = "Notīrīt jaunākos";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Skaņa";
+"sidebar.sub" = "Subtitri";
+"sidebar.plugins" = "Plugins";
+"sidebar.playlist" = "Atskaņošanas saraksts";
+"sidebar.chapters" = "Nodaļas";
+
+"sidebar.aspect_ratio" = "Malu attiecība";
+"sidebar.crop" = "Apgriezt";
+"sidebar.rotation" = "Rotācija";
+"sidebar.speed" = "Mainīt ātrumu";
+
+"sidebar.brightness" = "Brightness";
+"sidebar.contrast" = "Contrast";
+"sidebar.saturation" = "Saturation";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Load External Audio Track…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Save the current EQ as a preset…";
+"sidebar.rename_eq" = "Rename the current EQ preset…";
+"sidebar.remove_eq" = "Remove the current EQ preset";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Load Subtitle…";
+"sidebar.search_online" = "Search Online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Font";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Border";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type.";
+
+"sidebar.add_file" = "Pievienot failu…";
+"sidebar.add_url" = "Pievienot URL saiti…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.1" = "Rādīt atvērto failu paneli";
+"settings.actionAfterLaunch.items.2" = "Nedarīt neko";
+"settings.alwaysOpenInNewWindow.label" = "Always open media in new window";
+"settings.autoRepeat.label" = "When a file is opened manually";
+"settings.keepOpenOnFileEnd.label" = "Saglabāt atvērtu logu pēc atskaņošanas beigām";
+"settings.pauseWhenInactive.label" = "Logs kļūst neaktīvs/aktīvs";
+"settings.pauseWhenMinimized.label" = "Minimizēts/neminimizēts";
+"settings.pauseWhenOpen.label" = "Pauze";
+"settings.playlistAutoAdd.desc" = "Lai tas stātos spēkā, ir nepieciešams restartēt IINA.";
+"settings.playlistShowMetadataInMusicMode.label" = "Tikai \"mūzikas režīmā\"";
+"settings.recordRecentFiles.label" = "Ieslēgt izvēlni \"Atvērt jaunākos\"";
+"settings.screenshotCopyToClipboard.label" = "Kopēt starpliktuvē";
+"settings.screenshotSaveToFile.label" = "Saglabāt";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Visu atskaņoto failu izsekošana izvēlnē \"Atvērt jaunākos\"";
+
+// Settings - Video
+"settings.forceDedicatedGPU.desc" = "Video renderēšanai vienmēr izmantot diskrēto videokarti (ja tāda ir). Tā var uzlabot veiktspēju, bet var samazināt akumulatora darbības laiku.";
+"settings.forceDedicatedGPU.label" = "Piespiest izmantot diskrēto videokarti";
+"settings.hardwareDecoder.items.0" = "Izslēgta";
+"settings.hardwareDecoder.items.1" = "Automātiska";
+"settings.hardwareDecoder.items.2" = "Automātiska (Kopēt)";
+"settings.hardwareDecoder.label" = "Aparatūras dekodēšana";
+"settings.toneMappingAlgorithm.items.0" = "Automātiska";
+"settings.videoThreads.desc" = "Noklusēti: 0 (Automātiski)";
+"settings.videoThreads.label" = "Pavedienu skaits";
+
+// Settings - Audio
+"settings.enableInitialVolume.label" = "Sākotnējais skaļums";
+"settings.gaplessAudio.items.0" = "Izslēgta";
+"settings.maxVolume.label" = "Maksimālais skaļums";
+"settings.preferredAudioDevice.label" = "Vēlamā skaņas ierīce";
+
+// Settings - Control
+"settings.doubleClickAction.items.1" = "Toggle fullscreen";
+"settings.doubleClickAction.items.2" = "Pause / Resume";
+"settings.doubleClickAction.items.4" = "Toggle Picture-in-Picture";
+"settings.doubleClickAction.items.5" = "A-B cikls";
+"settings.forceTouchAction.items.1" = "Toggle fullscreen";
+"settings.forceTouchAction.items.2" = "Pause / Resume";
+"settings.horizontalScrollAction.items.1" = "Meklēt";
+"settings.middleClickAction.items.1" = "Toggle fullscreen";
+"settings.middleClickAction.items.2" = "Pause / Resume";
+"settings.middleClickAction.items.4" = "Toggle Picture-in-Picture";
+"settings.middleClickAction.items.5" = "A-B cikls";
+"settings.rightClickAction.items.2" = "Pause / Resume";
+"settings.rightClickAction.items.4" = "Toggle Picture-in-Picture";
+"settings.rightClickAction.items.5" = "A-B cikls";
+"settings.singleClickAction.items.2" = "Pause / Resume";
+"settings.useExactSeek.items.2" = "Automātiska";
+"settings.verticalScrollAction.items.1" = "Meklēt";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "Default: 153600";
+"settings.httpProxy.desc" = "Lai tas stātos spēkā, ir nepieciešams restartēt IINA.";
+"settings.secPrefech.desc" = "Default: 36000";
+"settings.transportRTSPThrough.items.0" = "Automātiska";
+"settings.ytdlEnabled.label" = "Enable youtube-dl";
+"settings.ytdlRawOptions.desc" = "Format: <key>=<value>[,<key>=<value>[,…]]";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "Augšā";
+"settings.subAlignY.items.2" = "Apakšā";
+"settings.subAutoLoadIINA.items.0" = "Izslēgta";
+"settings.subAutoLoadIINA.label" = "Auto load";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "Atskaņošanas laikā vienmēr novietot virspusē pārējiem logiem";
+"settings.arrowBtnAction.items.0" = "Mainīt ātrumu";
+"settings.arrowBtnAction.items.1" = "Atskaņot iepriekšējo / nākamo medijas failu";
+"settings.arrowBtnAction.items.2" = "Patīt uz priekšu/atpakaļ";
+"settings.arrowBtnAction.label" = "Izmantot kreiso/labo pogu ekrāna vadības panelī, lai";
+"settings.controlBarStickToCenter.label" = "Velkot, nofiksējiet to centrā";
+"settings.disableOSDSeekMsg.label" = "Meklēt";
+"settings.disableOSDSpeedMsg.label" = "Mainīt ātrumu";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Rādīt laiku un akumulatora informāciju pilnekrāna režīmā";
+"settings.enableOSD.label" = "Iespējot Informācija ekrānā (OSD)";
+"settings.enableThumbnailPreview.label" = "Iespējot sīkattēla rādīšanu";
+"settings.maxThumbnailPreviewCacheSize.label" = "Maksimālais kešatmiņas izmērs";
+"settings.oscPosition.items.0" = "Peldošs";
+"settings.oscPosition.items.1" = "Augšā";
+"settings.oscPosition.items.2" = "Apakšā";
+"settings.oscPosition.label" = "Ekrāna vadības panelis";
+"settings.osdTextSize.label" = "Teksta izmērs";
+"settings.pauseWhenPip.label" = "Automātiski apturēt atskaņošanu";
+"settings.resizeWindowOption.items.0" = "Pielāgot ekrāna izmēram";
+"settings.resizeWindowOption.items.1" = "Puse no video izmēra - 0.5x";
+"settings.resizeWindowOption.items.2" = "Tiešs video izmērs - 1x";
+"settings.resizeWindowOption.items.3" = "Pusotra video izmēra - 1.5x";
+"settings.resizeWindowOption.items.4" = "Divkāršs video izmērs - 2x";
+"settings.resizeWindowOption.label" = "Loga izmērs";
+"settings.showChapterPos.label" = "Rādīt nodaļu laika atzīmes ekrāna atkaņošanas joslā";
+"settings.showRemainingTime.label" = "Rādīt atlikušo laiku, nevis kopējo ilgumu";
+"settings.themeMaterial.desc" = "Tēma";
+"settings.themeMaterial.items.0" = "Tumšs";
+"settings.themeMaterial.items.2" = "Gaišs";
+"settings.themeMaterial.items.4" = "Saskaņot ar sistēmas izskatu";
+"settings.themeMaterial.label" = "Izskats";
+"settings.togglePipByMinimizingWindow.label" = "Pārslēgties uz \"Attēls-Attēlā\", minimizējot/palielinot logu";
+"settings.usePhysicalResolution.label" = "Izmantot fizisko izšķirtspēju Retina ekrānos";
+"settings.windowBehaviorWhenPip.items.0" = "Darīt neko";
+"settings.windowBehaviorWhenPip.items.1" = "Paslēpt";
+"settings.windowBehaviorWhenPip.items.2" = "Minimizēt";
+"settings.windowBehaviorWhenPip.label" = "Logs";
+
+// Settings - Advanced
+"settings.enableLogging.label" = "Enable logging";
+"settings.logLevel.items.1" = "Atkļūdošana";
+"settings.logLevel.items.3" = "Kļūda";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS subtitles";
+"settings.$About" = "Par";
+"settings.$AlwaysWhenPlaying" = "Vienmēr";
+"settings.$Appearance" = "Izskats";
+"settings.$Audio" = "Skaņas";
+"settings.$AutoLoad" = "Auto load";
+"settings.$Cancel" = "Atcelt";
+"settings.$ClearCache" = "Tīrīt kešatmiņas";
+"settings.$ClearPlaybackHistory" = "Notīrīt atskaņošanas vēsturi…";
+"settings.$ClearSavedPlaybackProgress" = "Notīrīt saglabāto atskaņošanas gaitu…";
+"settings.$ClearThumbnailCache" = "Iztīrīt sīkattēlu kešatmiņu…";
+"settings.$Customize" = "Pielāgot…";
+"settings.$DefaultApplication" = "Noklusētā programma";
+"settings.$DeleteAllPlaybackHistories" = "Zemāk esošā poga izdzēsīs visu atskaņošanas vēsturi un ierakstus izvēlnē “Nesen atvērtie“.";
+"settings.$DeleteAllWatchLater" = "Zemāk esošā poga izdzēsīs visus failus, kas atrodas \"Skatīties vēlāk\" mapē. Šie faili satur pēdējās atskaņošanas pozīcijas un atskaņošanas laikā izmantotos iestatījumus.";
+"settings.$DoNotResize" = "Izslēgts";
+"settings.$GetBrowserExtensionsForIINA" = "Iegūt IINA pārlūkprogrammas paplašinājumus";
+"settings.$Height" = "Augstums";
+"settings.$Help" = "Palīgs";
+"settings.$InitialWindowPosition" = "Loga sākuma pozīcija";
+"settings.$InitialWindowSize" = "Sākotnējais loga izmērs";
+"settings.$InstallLocalPackage" = "Install Package…";
+"settings.$Layout" = "Izkārtojums";
+"settings.$MB" = "MB";
+"settings.$OK" = "Labi";
+"settings.$OnScreenController" = "Ekrāna vadības panelis";
+"settings.$OnScreenDisplay" = "Informācija ekrānā (OSD)";
+"settings.$OpenLinksOrCurrentWebpage" = "Ar vienu klikšķi atvēr saišu vai pašreizējo vietnes saiti saturošo video failu IINA programmā. Vietnei ir jābūt yt-dlp, youtube-dl atbalstīto saišu sarakstā.";
+"settings.$PictureinnPicture" = "Attēls-Attēlā";
+"settings.$Playlist" = "Atskaņošanas saraksts";
+"settings.$PleaseSelectTheMediaTypes" = "Lūdzu, atlasiet kādus faila tipus vēlaties atskaņot IINA programmā pēc noklusējuma.";
+"settings.$PreferredLanguage" = "Vēlamā valoda";
+"settings.$RestoreAllAlertsThat" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts…";
+"settings.$SPDIFOutput" = "S/PDIF izeja";
+"settings.$SetIINAAsTheDefault" = "Iestatīt IINA kā noklusēto programmu…";
+"settings.$ShowInFinder" = "Rādīt programmā Meklētājs";
+"settings.$ShowTheConfigFileIn" = "Show config file in Finder";
+"settings.$TextSubtitles" = "Text subtitles";
+"settings.$ThumbnailPreview" = "Sīkattēla rādīšana";
+"settings.$Toolbar" = "Rīkjosla";
+"settings.$Website" = "Mājaslapa";
+"settings.$WhenEnteringPIP" = "Kad pārslēdzas uz Attēls-Attēlā";
+"settings.$WhenMediaIsOpened" = "Kad medijs ir atvērts";
+"settings.$WhenMediaIsOpenedManually" = "Kad medijas fails tiek atvērts manuāli";
+"settings.$Width" = "Platums";
+"settings.$Window" = "Logu";
+"settings.$X" = " X";
+"settings.$XOffset" = "X nobīde";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Y nobīde";
+"settings.$bottom" = "apakšējās";
+"settings.$dB" = "dB";
+"settings.$left" = "kreisās";
+"settings.$ofScreen" = "% no ekrāna";
+"settings.$point" = "pikseļu";
+"settings.$pt" = "punkti";
+"settings.$right" = "labās";
+"settings.$s" = "sekundēm";
+"settings.$sideOfTheScreen" = "ekrāna malas";
+"settings.$toThe" = "no";
+"settings.$top" = "augšējās";

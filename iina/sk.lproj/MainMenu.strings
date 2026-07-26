@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Zobraziť na Vrchu";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Uložené Audio Filtre";
 
@@ -503,10 +509,13 @@
 "zez-g5-2Pt.title" = "Zapnúť Malé Písmená";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "zpw-Ac-F3M"; */
-"zpw-Ac-F3M.title" = "Spustiť Rozprávanie";
+"zpw-Ac-F3M.title" = "Spustiť rozprávanie";
 
 /* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
 "Y6q-cI-vfM.title" = "Plugin";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
 "Qwb-26-zjX.title" = "Otvoriť URL…";
+
+/* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
+"kOx-hc-aQG.title" = "Release Highlights";

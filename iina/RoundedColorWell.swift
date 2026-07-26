@@ -8,7 +8,7 @@
 
 import Cocoa
 
-/// For 10.12 or below only
+/// For macOS 12 or below only
 class RoundedColorWell: NSColorWell {
 
   var isMouseDown: Bool = false

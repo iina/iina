@@ -1,14 +1,14 @@
 /* Class = "NSButtonCell"; title = "Clear Saved Playback Progress…"; ObjectID = "4nM-C4-9oM"; */
-"4nM-C4-9oM.title" = "保存済みの再生進度を消去…";
+"4nM-C4-9oM.title" = "保存済みの再生進行状況を消去…";
 
 /* Class = "NSButtonCell"; title = "Video"; ObjectID = "8wH-Gi-mRV"; */
 "8wH-Gi-mRV.title" = "ビデオ";
 
 /* Class = "NSTextFieldCell"; title = "The button below will delete all playback histories and entries in \"Open Recent\"."; ObjectID = "9uP-I0-tdX"; */
-"9uP-I0-tdX.title" = "このボタンをクリックすると「最近開いた項目」の再生履歴を全て消去します。";
+"9uP-I0-tdX.title" = "下のボタンは、再生履歴と \"最近開いた項目\" のエントリーをすべて削除します。";
 
 /* Class = "NSTextFieldCell"; title = "The button below will delete all cached thumbnails."; ObjectID = "Bag-TV-Stp"; */
-"Bag-TV-Stp.title" = "このボタンをクリックするとキャッシュ済みサムネイルを全て消去します。";
+"Bag-TV-Stp.title" = "下のボタンは、キャッシュされたサムネールをすべて削除します。";
 
 /* Class = "NSTextFieldCell"; title = "Cleared."; ObjectID = "Efe-8C-4eV"; */
 "Efe-8C-4eV.title" = "消去しました。";
@@ -17,7 +17,7 @@
 "Fb4-dy-CXX.title" = "消去しました。";
 
 /* Class = "NSTextFieldCell"; title = "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl."; ObjectID = "GAo-fx-NG0"; */
-"GAo-fx-NG0.title" = "ワンクリックでリンク先や今開いているWebページをIINAで開くことができます。youtube-dlに対応したウェブサイトでのみ動作します。";
+"GAo-fx-NG0.title" = "リンクや現在のWebページをIINAからワンクリックで開くことができます。Webサイトがyoutube-dlに対応している必要があります。";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "IkF-qG-s4j"; */
 "IkF-qG-s4j.title" = "OK";
@@ -41,7 +41,7 @@
 "f9i-sS-MJN.title" = "Firefox";
 
 /* Class = "NSButtonCell"; title = "Clear Thumbnail Cache…"; ObjectID = "hsG-JB-TT9"; */
-"hsG-JB-TT9.title" = "サムネイルキャッシュを消去…";
+"hsG-JB-TT9.title" = "サムネールキャッシュを消去…";
 
 /* Class = "NSButtonCell"; title = "Audio"; ObjectID = "jFt-2a-nmc"; */
 "jFt-2a-nmc.title" = "オーディオ";
@@ -50,31 +50,31 @@
 "kbP-VI-dmT.title" = "キャンセル";
 
 /* Class = "NSTextFieldCell"; title = "Restore Alerts"; ObjectID = "AAD-Db-Acs"; */
-"AAD-Db-Acs.title" = "アラートを復元";
+"AAD-Db-Acs.title" = "通知を復元";
 
 /* Class = "NSButtonCell"; title = "Restore Suppressed Alerts…"; ObjectID = "XAz-xa-LVo"; */
-"XAz-xa-LVo.title" = "ダイアログの警告をリセット…";
+"XAz-xa-LVo.title" = "非表示にした通知を復元…";
 
 /* Class = "NSTextFieldCell"; title = "Restored."; ObjectID = "Wdh-me-hdC"; */
 "Wdh-me-hdC.title" = "復元しました。";
 
 /* Class = "NSTextFieldCell"; title = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox."; ObjectID = "F5i-KF-2SW"; */
-"F5i-KF-2SW.title" = "下のボタンは、「このメッセージを再表示しない」がチェックされたすべてのアラートを復元します。";
+"F5i-KF-2SW.title" = "下のボタンは、\"今後このメッセージを表示しない\" チェックボックスを使って非表示にしたすべての通知を復元します。";
 
 /* Class = "NSTextFieldCell"; title = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback."; ObjectID = "pPC-q2-9Gh"; */
-"pPC-q2-9Gh.title" = "以下のボタンをクリックすると「あとで見る」フォルダーにある全てのファイルが消去されます。これらのファイルには再生進度や再生中に適用された設定が含まれています。";
+"pPC-q2-9Gh.title" = "下のボタンは、\"あとで再生\" フォルダ内のすべてのファイルを削除します。これらのファイルには、保存された再生進行状況や、再生中に適用した設定がすべて含まれています。";
 
 /* Class = "NSTextFieldCell"; title = "Calculating…"; ObjectID = "tRq-eU-AV3"; */
 "tRq-eU-AV3.title" = "計算中…";
 
 /* Class = "NSTextFieldCell"; title = "Current thumbnail cache:"; ObjectID = "uV3-aF-UB7"; */
-"uV3-aF-UB7.title" = "現在のサムネイルキャッシュ量:";
+"uV3-aF-UB7.title" = "現在のサムネールキャッシュ:";
 
 /* Class = "NSTextFieldCell"; title = "Please select the media types that you want to make IINA as the default Application for."; ObjectID = "uvK-Y1-dZr"; */
-"uvK-Y1-dZr.title" = "IINAをデフォルトの再生アプリケーションに設定したいメディアの種類を選択してください。";
+"uvK-Y1-dZr.title" = "IINAをデフォルトのアプリケーションとして設定するメディアタイプを選択してください。";
 
 /* Class = "NSButtonCell"; title = "Chrome"; ObjectID = "yuw-2i-ICd"; */
 "yuw-2i-ICd.title" = "Chrome";
 
 /* Class = "NSTextFieldCell"; title = "Get Browser Extensions for IINA"; ObjectID = "zCe-1f-tkF"; */
-"zCe-1f-tkF.title" = "IINAのブラウザ拡張機能を使う";
+"zCe-1f-tkF.title" = "IINAのブラウザ拡張機能を取得";

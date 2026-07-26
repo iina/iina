@@ -30,7 +30,7 @@ class DylibFile
     @deps = libs.map { |lib| lib[OTOOL_RX, 1] }.compact
   end
 
-  def ensure_writeable
+  def ensure_writable
     saved_perms = nil
     unless File.writable_real?(path)
       saved_perms = File.stat(path).mode
@@ -42,13 +42,13 @@ class DylibFile
   end
 
   def change_id!
-    ensure_writeable do
+    ensure_writable do
       safe_system "install_name_tool", "-id", "@rpath/#{File.basename(self.id)}", path
     end
   end
 
   def change_install_name!(old_name, new_name)
-    ensure_writeable do
+    ensure_writable do
       safe_system "install_name_tool", "-change", old_name, new_name, path
     end
   end

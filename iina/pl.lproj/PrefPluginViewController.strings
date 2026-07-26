@@ -26,7 +26,7 @@
 "MyY-5s-tIm.title" = "Sprawdź aktualizacje";
 
 /* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
-"Nmf-79-hFX.title" = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list.";
+"Nmf-79-hFX.title" = "Wprowadź pełny adres URL repozytorium GitHub lub ciąg znaków w formacie \"user/repo\". Możesz również wybrać jeden z domyślnej listy wtyczek.";
 
 /* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
 "T21-nd-TLF.label" = "Wsparcie";
@@ -53,7 +53,7 @@
 "fnl-uA-X7r.title" = "Możesz zainstalować nową wtyczkę z GitHub lub lokalnego pakietu .iinaplgz. Wtyczki zainstalowane z GitHub mogą być aktualizowane automatycznie.";
 
 /* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
-"ixN-OS-w87.title" = "Reload";
+"ixN-OS-w87.title" = "Załaduj ponownie";
 
 /* Class = "NSTextFieldCell"; title = "Identifier"; ObjectID = "jlQ-sd-s0K"; */
 "jlQ-sd-s0K.title" = "Identyfikator";
@@ -62,7 +62,7 @@
 "np4-XQ-xdI.title" = "Domyślne wtyczki:";
 
 /* Class = "NSTextFieldCell"; title = "Failed to load the page."; ObjectID = "pkE-3K-CfZ"; */
-"pkE-3K-CfZ.title" = "Failed to load the page.";
+"pkE-3K-CfZ.title" = "Nie udało się załadować strony.";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qje-hT-j7H"; */
 "qje-hT-j7H.title" = "Anuluj";

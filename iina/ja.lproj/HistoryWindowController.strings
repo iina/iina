@@ -23,22 +23,22 @@
 "M7K-6H-OPw.headerCell.title" = "再生日時";
 
 /* Class = "NSTableColumn"; headerCell.title = "Progress"; ObjectID = "MJU-JY-7fx"; */
-"MJU-JY-7fx.headerCell.title" = "再生進度";
+"MJU-JY-7fx.headerCell.title" = "進行状況";
 
 /* Class = "NSMenuItem"; title = "Date"; ObjectID = "QBO-JS-dNV"; */
 "QBO-JS-dNV.title" = "日付";
 
 /* Class = "NSMenuItem"; title = "Folder"; ObjectID = "VH5-en-8FR"; */
-"VH5-en-8FR.title" = "フォルダー";
+"VH5-en-8FR.title" = "フォルダ";
 
 /* Class = "NSMenuItem"; title = "Filename"; ObjectID = "Wkp-Vn-JoJ"; */
 "Wkp-Vn-JoJ.title" = "ファイル名";
 
 /* Class = "NSMenuItem"; title = "Play in New Window"; ObjectID = "mXt-wb-fgT"; */
-"mXt-wb-fgT.title" = "新しいウィンドウで再生";
+"mXt-wb-fgT.title" = "新規ウインドウで再生";
 
 /* Class = "NSMenuItem"; title = "No Recent Searches"; ObjectID = "ndC-eb-4GZ"; */
-"ndC-eb-4GZ.title" = "検索履歴なし";
+"ndC-eb-4GZ.title" = "検索履歴はありません";
 
 /* Class = "NSMenuItem"; title = "Play"; ObjectID = "oMR-4K-aR2"; */
 "oMR-4K-aR2.title" = "再生";
@@ -47,4 +47,4 @@
 "z6c-c4-dgd.title" = "グループ:";
 
 /* Class = "NSMenuItem"; title = "Recent Searches"; ObjectID = "zhe-yr-CTO"; */
-"zhe-yr-CTO.title" = "最近の検索";
+"zhe-yr-CTO.title" = "検索履歴";

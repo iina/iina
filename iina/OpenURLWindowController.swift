@@ -72,6 +72,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
     urlField.stringValue = ""
     usernameField.stringValue = ""
     passwordField.stringValue = ""
+    errorMessageLabel.isHidden = true
     rememberPasswordCheckBox.state = .off
     urlStackView.setVisibilityPriority(.notVisible, for: httpPrefixTextField)
     window?.makeFirstResponder(urlField)

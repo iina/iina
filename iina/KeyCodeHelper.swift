@@ -152,6 +152,7 @@ class KeyCodeHelper {
       "DOWN": NSDownArrowFunctionKey,
       "BS": NSBackspaceCharacter,
       "KP_DEL": NSDeleteCharacter,
+      "TAB": NSTabCharacter,
       "DEL": NSDeleteCharacter,
       "KP_INS": NSInsertFunctionKey,
       "INS": NSInsertFunctionKey,

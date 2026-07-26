@@ -76,14 +76,10 @@ struct InfoDictionary {
     } else {
       major = asFourChars.prefix(2)
     }
-    let minor: String.SubSequence
-    if asFourChars.last == "0" {
-      let index = asFourChars.index(asFourChars.endIndex, offsetBy: -2)
-      minor = asFourChars[index...index]
-    } else {
-      minor = asFourChars.suffix(2)
-    }
-    return "\(major).\(minor)"
+    let minor = asFourChars[asFourChars.index(asFourChars.endIndex, offsetBy: -2)]
+    let patch = asFourChars[asFourChars.index(asFourChars.endIndex, offsetBy: -1)]
+    guard patch != "0" else { return "\(major).\(minor)" }
+    return "\(major).\(minor).\(patch)"
   }
 
   var bundleIdentifier: String { dictionary["CFBundleIdentifier"] as! String }

@@ -1,0 +1,33 @@
+/* 
+  VerbatimStrings.strings
+  iina
+
+  Created by Hechen Li on 2026-07-01.
+  Copyright © 2026 lhc. All rights reserved.
+*/
+
+"settings.screenShotFormat.items.0" = "PNG";
+"settings.screenShotFormat.items.1" = "JPEG (.jpg)";
+"settings.screenShotFormat.items.2" = "JPEG (.jpeg)";
+"settings.screenShotFormat.items.3" = "WebP (.webp)";
+"settings.screenShotFormat.items.4" = "JPEG XL (.jxl)";
+
+"settings.toneMappingAlgorithm.items.0" = "auto";
+"settings.toneMappingAlgorithm.items.1" = "clip";
+"settings.toneMappingAlgorithm.items.2" = "mobius";
+"settings.toneMappingAlgorithm.items.3" = "reinhard";
+"settings.toneMappingAlgorithm.items.4" = "hable";
+"settings.toneMappingAlgorithm.items.5" = "bt.2390";
+"settings.toneMappingAlgorithm.items.6" = "gamma";
+"settings.toneMappingAlgorithm.items.7" = "linear";
+
+"settings.spdifAC3.label" = "AC3";
+"settings.spdifDTS.label" = "DTS";
+"settings.spdifDTSHD.label" = "DTS-HD";
+
+"settings.audioDriverEnableAVFoundation.items.0" = "Core Audio";
+"settings.audioDriverEnableAVFoundation.items.1" = "AVFoundation";
+
+"settings.transportRTSPThrough.items.1" = "TCP";
+"settings.transportRTSPThrough.items.2" = "UDP";
+"settings.transportRTSPThrough.items.3" = "HTTP";

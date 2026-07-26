@@ -5,7 +5,7 @@
 "0T7-Nu-SL7.title" = "Show Playlist Panel";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
-"0m7-3r-twH.title" = "Open URL…";
+"0m7-3r-twH.title" = "Oтвори URL";
 
 /* Class = "NSMenu"; title = "Subtitle"; ObjectID = "16p-PA-x34"; */
 "16p-PA-x34.title" = "Subtitle";
@@ -173,7 +173,7 @@
 "HyV-fh-RgO.title" = "Видео";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "IAo-SY-fd9"; */
-"IAo-SY-fd9.title" = "Open…";
+"IAo-SY-fd9.title" = "Отвори";
 
 /* Class = "NSMenuItem"; title = "Audio Device"; ObjectID = "IXq-yq-uDF"; */
 "IXq-yq-uDF.title" = "Audio Device";
@@ -182,7 +182,7 @@
 "JJq-qH-toq.title" = "Horizontal (Mirror)";
 
 /* Class = "NSMenuItem"; title = "Open…"; ObjectID = "Kby-lQ-HCW"; */
-"Kby-lQ-HCW.title" = "Open…";
+"Kby-lQ-HCW.title" = "Отвори";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
 "Kd2-mp-pUS.title" = "Show All";
@@ -248,7 +248,7 @@
 "Rqg-VS-aIj.title" = "Уебсайт";
 
 /* Class = "NSMenuItem"; title = "Fit to Screen"; ObjectID = "SHd-63-Xoh"; */
-"SHd-63-Xoh.title" = "Fit to Screen";
+"SHd-63-Xoh.title" = "Побиране в екрана";
 
 /* Class = "NSMenuItem"; title = "Reset Subtitle Delay"; ObjectID = "SLr-6g-Mgh"; */
 "SLr-6g-Mgh.title" = "Reset Subtitle Delay";
@@ -278,7 +278,7 @@
 "Vdr-fp-XzO.title" = "Hide Others";
 
 /* Class = "NSMenuItem"; title = "Mute"; ObjectID = "WOL-Us-ByA"; */
-"WOL-Us-ByA.title" = "Mute";
+"WOL-Us-ByA.title" = "Без звук";
 
 /* Class = "NSMenuItem"; title = "Volume + 5%"; ObjectID = "Wbq-vt-hzX"; */
 "Wbq-vt-hzX.title" = "Volume + 5%";
@@ -323,7 +323,7 @@
 "bib-Uj-vzu.title" = "Файл";
 
 /* Class = "NSMenuItem"; title = "Inspector"; ObjectID = "bwz-r0-peR"; */
-"bwz-r0-peR.title" = "Inspector";
+"bwz-r0-peR.title" = "Инспектор";
 
 /* Class = "NSMenuItem"; title = "Log Viewer"; ObjectID = "0tJ-RQ-kuW"; */
 "0tJ-RQ-kuW.title" = "Log Viewer";
@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Float on Top";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Saved Audio Filters";
 
@@ -494,7 +500,7 @@
 "xhY-fF-oio.title" = "Saved Video Filters";
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
-"yHI-7D-OaI.title" = "Deinterlace";
+"yHI-7D-OaI.title" = "Дейнтерлейсинг";
 
 /* Class = "NSMenuItem"; title = "Open in New Window…"; ObjectID = "z9W-ga-j3b"; */
 "z9W-ga-j3b.title" = "Open in New Window…";
@@ -509,4 +515,7 @@
 "Y6q-cI-vfM.title" = "Plugin";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
-"Qwb-26-zjX.title" = "Open URL…";
+"Qwb-26-zjX.title" = "Oтвори URL";
+
+/* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
+"kOx-hc-aQG.title" = "Release Highlights";

@@ -10,6 +10,12 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "Число потоків:";
 
+/* Class = "NSMenuItem"; title = "Strong"; ObjectID = "6vc-ad-xaq"; */
+"6vc-ad-xaq.title" = "Strong";
+
+/* Class = "NSTextFieldCell"; title = "Gapless audio:"; ObjectID = "8Fa-ft-1tC"; */
+"8Fa-ft-1tC.title" = "Gapless audio:";
+
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
 "YUr-aJ-xfC.title" = "Примусово задіяти GPU";
 
@@ -23,10 +29,13 @@
 "g4c-vG-URh.title" = "Початкова гучність:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "Для відображення завжди використовувати графічний процесор (за наявності). Це може покращити продуктивність, але зменшить ресурс акумулятора.";
+"gCv-sJ-uQJ.title" = "Для рендерингу завжди використовувати графічний процесор (за наявності). Це може покращити продуктивність, але зменшить ресурс акумулятора.";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Відео:";
+
+/* Class = "NSMenuItem"; title = "Weak"; ObjectID = "nsT-r3-brW"; */
+"nsT-r3-brW.title" = "Weak";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
 "nwg-2K-G2G.title" = "Апаратний декодер:";
@@ -93,6 +102,9 @@
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
 "k7b-6o-lCK.title" = "Без регулювання";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "ti2-JH-nXX"; */
+"ti2-JH-nXX.title" = "вимкнено";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
 "w6E-lw-g7g.title" = "Посилення доріжки";

@@ -46,10 +46,10 @@
 "lut3d.file" = "Път до файла (можете да завлечете и пуснете файла в полето за въвеждане)";
 "lut3d.interp" = "Режим на интерполация";
 
-"custom_mpv" = "Custom (mpv)";
+"custom_mpv" = "Персонализиран (mpv)";
 "custom_mpv.name" = "Име на филтъра";
 "custom_mpv.string" = "Стойност на филтъра";
 
-"custom_ffmpeg" = "Custom (FFmpeg)";
+"custom_ffmpeg" = "Персонализиран (FFmpeg)";
 "custom_ffmpeg.name" = "Име на филтъра";
 "custom_ffmpeg.string" = "Стойност на филтъра";

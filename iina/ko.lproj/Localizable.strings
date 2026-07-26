@@ -13,8 +13,12 @@
 "general.logout" = "로그아웃";
 "general.ok" = "승인";
 "general.cancel" = "취소";
+"general.done" = "완료";
 "general.username" = "사용자";
 "general.password" = "암호";
+"general.na" = "해당없음";
+"general.no_result" = "결과 없음";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "값을 비워둘 수 없습니다.";
 "input.already_exists" = "값이 이미 존재합니다.";
@@ -136,6 +140,9 @@
 "osd.canceled" = "취소됨";
 "osd.cannot_connect" = "연결할 수 없음";
 "osd.timed_out" = "시간 초과됨";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "필터 추가됨: %@";
 "osd.filter_removed" = "필터 제거됨";
 "osd.file_loop" = "단일 파일 반복 재생";
@@ -144,8 +151,10 @@
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";
-"preference.ui" = "화면";
-"preference.video_audio" = "비디오/오디오";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "비디오";
+"preference.audio" = "오디오";
 "preference.subtitle" = "자막";
 "preference.network" = "네트워크";
 "preference.control" = "제어";
@@ -247,6 +256,7 @@
 "alert.mpv_error" = "%@ (%@)오류가 사용자 지정 옵션 %@을 설정하는 도중 발생했습니다.";
 
 "alert.unsupported_audio" = "지원되지 않는 외부 오디오 파일입니다.";
+"alert.unsupported_video" = "지원되지 않는 외부 동영상 파일입니다.";
 "alert.unsupported_sub" = "지원되지 않는 자막 형식입니다.";
 "alert.unsupported_url" = "지원되지 않는 URL입니다.";
 "alert.wrong_url_format" = "잘못된 URL 형식입니다.";
@@ -275,10 +285,13 @@
 "alert.add_filter.message" = "mpv 플레이어의 vf 또는 af 명령의 형식으로 필터 설정 문자열을 입력하십시오.";
 
 "alert.keybinding_config.error" = "단축키 설정 파일 \"%@\"를 읽어올 때 오류가 발생했습니다! IINA 기본값을 사용하도록 설정됩니다. 사용자가 지정한 단축키 설정 내용을 점검하십시오.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "사용자가 지정한 mpv 추가 옵션을 읽을 수 없습니다.";
 "alert.extra_option.empty" = "항목과 그 설정값을 반드시 지정해야 합니다!";
-"alert.extra_option.error" = "--%@=%@ 설정에서 %d 오류가 발생했습니다. 환경설정 > 고급설정으로 이동하여 사용자가 지정한 추가 설정 사항을 점검하십시오.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "\"%@\"를 설정 디렉토리로 지정하는 도중 오류가 발생했습니다.";
 
 "alert.playlist.error_deleting" = "삭제 오류: %@";
@@ -313,6 +326,10 @@
 
 "alert.delete_history.title" = "최근에 재생한 기록 삭제";
 "alert.delete_history.message" = "선택한 재생 기록을 삭제하시겠습니까?";
+"alert.delete_all_history.title" = "재생 기록 지우기";
+"alert.delete_all_history.message" = "재생 기록을 지우겠습니까？";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "사용자 비디오 필터를 적용합니다. 그러나 현재 사용 중인 하드웨어 디코더가 비디오 필터를 제대로 지원하지 않을 수도 있습니다. 사용자 필터를 사용하지 않도록 설정하거나, 두 배의 메모리를 사용하는 자동(복사) 방식으로 전환하여 사용할 수 있습니다.\n이전에 설정했던 작업(예를 들어 화면 자르기 설정)이 동작하게 하려면 다시 설정해야 하는 경우도 있습니다.";
 "alert.filter_hwdec.abort" = "중단";
@@ -330,6 +347,10 @@
 
 "alert.restore_alerts.title" = "비활성화된 알림 복구하기";
 "alert.restore_alerts.message" = "비활성화된 모든 알림을 다시 활성화 하시겠습니까?";
+
+"alert.cleared" = "지워졌습니다.";
+"alert.restored" = "복구됨";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "열 수 있는 파일이 없습니다.";
 
@@ -354,6 +375,8 @@
 "alert.plugin_update_found.message" = "최신 버전은 %@입니다. %@에서 업데이트 하시겠습니까?";
 "alert.plugin_permission" = "이 플러그인은 다음과 같은 권한을 필요로 합니다. 진행하기 전에 확인해 주세요.";
 "alert.plugin_permission_added" = "이 업데이트는 추가적인 승인이 필요합니다. 진행하기 전에 다시 한번 읽어주세요.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "전체 %@";
 "playlist.total_length_with_selected" = "%@ 선택됨 / 전체 %@";
@@ -381,6 +404,12 @@
 "pl_menu.browser" = "브라우저에서 열기";
 "pl_menu.copy_url" = "URL 복사";
 "pl_menu.copy_url_multi" = "여러 URL 복사";
+"pl_menu.playback" = "재생";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "플러그인";
+"pl_menu.playlist" = "재생목록";
 
 "keymapping.title" = "단축키 지정";
 "keymapping.message" = "단축키로 사용할 키를 누르십시오.";
@@ -392,6 +421,10 @@
 "hwdec.auto" = "하드웨어 디코딩을 사용합니다.\n비디오 필터 대부분을 사용할 수 없게 됩니다.";
 "hwdec.auto-copy" = "하드웨어 디코딩을 사용합니다.\n두 배의 메모리를 사용하지만, 비디오 필터를 적용할 수 있습니다.";
 
+"gaplessAudio.no" = "오디오 파일을 연속 재생하면 파일이 바뀔 때 소리가 나지 않거나 끊길 수 있습니다.";
+"gaplessAudio.weak" = "디코더가 출력하는 오디오 형식이 바뀌면, 오디오 장치가 재시작되므로 끊김 없는 재생을 방해할 수 있습니다.";
+"gaplessAudio.yes" = "처음 재생한 파일의 형식으로 오디오 장치를 실행하고 끊김 없는 재생을 위해 계속 켜진 채로 유지합니다. 이후 파일은 리샘플링될 수 있습니다.";
+
 "subencoding.auto" = "자동 감지";
 
 "osc_toolbar.settings" = "빠른 설정";
@@ -402,6 +435,11 @@
 "osc_toolbar.sub_track" = "자막 선택";
 "osc_toolbar.screenshot" = "스크린샷 찍기";
 "osc_toolbar.plugins" = "플러그인 패널 보기";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "자유 이동";
+"osc_pos.top" = "위쪽";
+"osc_pos.bottom" = "아래쪽";
 
 "mini_player.album_art" = "앨범 아트 켜기/끄기";
 "mini_player.loop" = "반복";
@@ -459,3 +497,459 @@
 "plugin.install_error.cannot_load" = "IINA가 이 플러그인을 로드할 수 없습니다. 플러그인이 잘못된 형식일 수 있습니다.";
 "plugin.check_for_updates" = "업데이트 확인";
 "plugin.updating" = "업데이트 다운로드 중...";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "로그 보기";
+"logwindow.time" = "시간";
+"logwindow.subsystem" = "서브시스템";
+"logwindow.message" = "메시지";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "저장";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "복사하기";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "재생 기록";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "재생 진행 상태";
+"history_window.col.played_at" = "최근 재생 시간";
+"history_window.menu.play" = "재생";
+"history_window.menu.play_new_window" = "새 윈도우에서 재생";
+"history_window.menu.show_in_finder" = "Finder에서 보기";
+"history_window.menu.delete" = "삭제…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "재생 기록 지우기";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "날짜별";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "찾기";
+"history_window.search.filename" = "파일 이름";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "최근 검색한 항목이 없습니다";
+"history_window.search.recents_title" = "최근 검색한 항목";
+"history_window.search.clear_recents" = "최근 목록 지우기";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "비디오";
+"sidebar.audio" = "오디오";
+"sidebar.sub" = "자막";
+"sidebar.plugins" = "플러그인";
+"sidebar.playlist" = "재생목록";
+"sidebar.chapters" = "챕터";
+
+"sidebar.aspect_ratio" = "화면비";
+"sidebar.crop" = "자르기";
+"sidebar.rotation" = "회전";
+"sidebar.speed" = "재생속도";
+
+"sidebar.brightness" = "밝기";
+"sidebar.contrast" = "대비";
+"sidebar.saturation" = "채도";
+"sidebar.gamma" = "감마";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "외부 오디오 트랙 불러오기…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "현재 EQ를 프리셋으로 저장…";
+"sidebar.rename_eq" = "현재 EQ 프리셋 이름 변경…";
+"sidebar.remove_eq" = "현재 EQ 프리셋 삭제";
+"sidebar.manual_eq" = "수동";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "자막 열기…";
+"sidebar.search_online" = "온라인 검색…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "서체";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "외곽선";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "자막 효과를 적용하면 ASS 자막이 잘 표시되지 않을 수도 있으며, 일부 설정은 자막 유형에 따라 사용할 수 없을 수도 있습니다.";
+
+"sidebar.add_file" = "파일 추가…";
+"sidebar.add_url" = "URL 추가…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "시작 윈도우 보기";
+"settings.actionAfterLaunch.items.1" = "파일 열기 패널 보기";
+"settings.actionAfterLaunch.items.2" = "동작 없음";
+"settings.actionAfterLaunch.label" = "처음 실행 시";
+"settings.allowDuplicatePlayers.label" = "동일한 파일을 여러 창에서 열수 있도록 허용";
+"settings.allowScreenSaverForAudio.desc" = "시스템 잠자기 방지.";
+"settings.allowScreenSaverForAudio.label" = "\"음악 모드\"이거나 오디오만 재생 중일 때는 적용되지 않음";
+"settings.alwaysOpenInNewWindow.label" = "항상 새로운 윈도우로 파일 열기";
+"settings.autoRepeat.label" = "파일을 수동으로 열 때";
+"settings.autoSwitchToMusicMode.label" = "음악을 재생할 때 \"음악 모드\"로 자동 전환";
+"settings.blackOutMonitor.label" = "전체 화면일 때 다른 모니터 끄기";
+"settings.defaultRepeatMode.items.0" = "재생목록 반복 재생";
+"settings.defaultRepeatMode.items.1" = "단일 파일 반복 재생";
+"settings.fullScreenWhenOpen.label" = "전체 화면";
+"settings.groupSimultaneousOpensInPlaylist.label" = "여러 파일들을 동시에 열때 재생목록에 미디어 그룹화";
+"settings.keepOpenOnFileEnd.label" = "재생이 끝난 후에도 윈도우를 닫지 않음";
+"settings.pauseWhenGoesToSleep.label" = "잠자기에 들어가면 일시 정지";
+"settings.pauseWhenInactive.label" = "윈도우 비활성화/활성화";
+"settings.pauseWhenLeavingFullScreen.label" = "전체 화면 중단 시 일시 정지";
+"settings.pauseWhenMinimized.label" = "윈도우 최소화/복원";
+"settings.pauseWhenOpen.label" = "일시 정지";
+"settings.pauseresumeWhen" = "다음의 경우 일시 정지/재생";
+"settings.playWhenEnteringFullScreen.label" = "전체 화면 전환시 재생 시작";
+"settings.playlistAutoAdd.desc" = "설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
+"settings.playlistAutoAdd.label" = "같은 폴더에 있는 파일을 자동으로 추가";
+"settings.playlistAutoPlayNext.label" = "다음 항목 자동 재생";
+"settings.playlistShowMetadata.label" = "가능할 경우 아티스트와 트랙 이름 표시";
+"settings.playlistShowMetadataInMusicMode.label" = "\"음악 모드\"에서만";
+"settings.preventScreenSaver.label" = "재생 중에는 화면 보호기 시작을 막기";
+"settings.quitWhenNoOpenedWindow.label" = "모든 윈도우를 닫으면 앱을 종료";
+"settings.receiveBetaUpdate.label" = "베타 업데이트 받기";
+"settings.recordPlaybackHistory.label" = "재생 기록 사용하기";
+"settings.recordRecentFiles.label" = "최근 재생된 항목 기억하기";
+"settings.resumeLastPosition.label" = "최근에 재생했던 위치로 복원";
+"settings.screenShotFormat.label" = "파일 형식";
+"settings.screenShotIncludeSubtitle.label" = "자막 포함";
+"settings.screenshotCopyToClipboard.desc" = "저장 위치";
+"settings.screenshotCopyToClipboard.label" = "클립보드에 복사";
+"settings.screenshotSaveToFile.label" = "디스크에 저장";
+"settings.screenshotShowPreview.label" = "스크린샷 저장 후 미리보기 보여주기";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "선택되지 않은 경우 수동으로 열었던 파일만 '최근 파일 열기' 메뉴에 보입니다.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "재생된 파일을 모두 \"최근 파일 열기\" 메뉴에 저장하기";
+"settings.useLegacyFullScreen.label" = "이전 방식의 전체 화면 전환 사용 (10.6 이전)";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "HDR 영상을 재생할 때 HDR 모드를 기본으로 활성화합니다.";
+"settings.enableToneMapping.label" = "톤 매핑 사용";
+"settings.forceDedicatedGPU.desc" = "가능하면 전용 GPU를 사용하십시오. 성능 뿐만 아니라 배터리 효율도 향상시킬 수 있습니다.";
+"settings.forceDedicatedGPU.label" = "GPU 렌더링 강제 설정";
+"settings.hardwareDecoder.items.0" = "사용하지 않음";
+"settings.hardwareDecoder.items.1" = "자동";
+"settings.hardwareDecoder.items.2" = "자동 (복사)";
+"settings.hardwareDecoder.label" = "하드웨어 디코더";
+"settings.loadIccProfile.desc" = "현재 디스플레이에 ICC 프로파일을 적용하여 비디오의 RGB를 변환하여 스크린에 출력합니다. (SDR 모드에서만 작동합니다)";
+"settings.loadIccProfile.label" = "ICC 프로파일 불러오기";
+"settings.toneMappingAlgorithm.items.0" = "자동";
+"settings.toneMappingAlgorithm.label" = "알고리즘";
+"settings.toneMappingTargetPeak.desc" = "디스플레이의 측정된 최대 밝기입니다. 0으로 설정하면 IINA가 이 값을 감지합니다. 감지에 실패하면 IINA는 최대 밝기를 400으로 설정합니다.";
+"settings.toneMappingTargetPeak.label" = "최대 밝기";
+"settings.videoThreads.desc" = "기본값: 0 (자동)";
+"settings.videoThreads.label" = "스레드 수";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation은 공간 오디오를 지원하는 새롭고 실험적인 오디오 드라이버입니다. 그러나 AVFoundation을 사용할 때 오디오 지연과 같은 몇 가지 문제가 발생할 수 있습니다.";
+"settings.audioDriverEnableAVFoundation.label" = "오디오 드라이버";
+"settings.enableInitialVolume.label" = "초기 음량";
+"settings.gaplessAudio.desc" = "끊김 없는 오디오";
+"settings.gaplessAudio.items.0" = "사용하지 않음";
+"settings.gaplessAudio.items.1" = "약하게";
+"settings.gaplessAudio.items.2" = "강하게";
+"settings.gaplessAudio.label" = "끊김 없는 오디오";
+"settings.maxVolume.label" = "최대 음량";
+"settings.preferredAudioDevice.label" = "기본 오디오 출력";
+"settings.replayGain.desc" = "볼륨 음량을 파일 메타데이터에 저장되어 있는 ReplayGain 값에 따라 조정합니다.";
+"settings.replayGain.items.0" = "조정 없음";
+"settings.replayGain.items.1" = "트랙 음량";
+"settings.replayGain.items.2" = "앨범 음량";
+"settings.replayGain.label" = "음량 조정";
+"settings.replayGainClip.desc" = "이 옵션이 비활성화되어 있는 경우, 음량을 낮춰 클리핑을 방지합니다.";
+"settings.replayGainClip.label" = "볼륨 게인 클리핑 허용";
+"settings.replayGainFallback.desc" = "파일에 ReplayGain 태그가 없는 경우 적용할 게인입니다.";
+"settings.replayGainFallback.label" = "폴백";
+"settings.replayGainPreamp.desc" = "ReplayGain에 적용할 Pre-amplification Gain.";
+"settings.replayGainPreamp.label" = "프리앰프 음량";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "동작 없음";
+"settings.doubleClickAction.items.1" = "전체 화면 전환";
+"settings.doubleClickAction.items.2" = "일시 정지 / 재생";
+"settings.doubleClickAction.items.4" = "화면 속 화면 전환/복귀";
+"settings.doubleClickAction.items.5" = "구간 반복";
+"settings.doubleClickAction.items.6" = "재생 속도 초기화";
+"settings.doubleClickAction.label" = "두 번 클릭하기";
+"settings.forceTouchAction.items.0" = "동작 없음";
+"settings.forceTouchAction.items.1" = "전체 화면 전환 / 복귀";
+"settings.forceTouchAction.items.2" = "일시 정지 / 재생";
+"settings.forceTouchAction.items.3" = "OSC 숨기기";
+"settings.forceTouchAction.label" = "한 손가락으로 세게 클릭하기";
+"settings.horizontalScrollAction.items.0" = "음량 조정";
+"settings.horizontalScrollAction.items.1" = "탐색";
+"settings.horizontalScrollAction.items.2" = "동작 없음";
+"settings.horizontalScrollAction.items.4" = "재생 속도 조정";
+"settings.horizontalScrollAction.label" = "좌우로 쓸어넘기기";
+"settings.middleClickAction.items.0" = "동작 없음";
+"settings.middleClickAction.items.1" = "전체 화면 전환";
+"settings.middleClickAction.items.2" = "일시 정지 / 재생";
+"settings.middleClickAction.items.3" = "OSC 숨기기";
+"settings.middleClickAction.items.4" = "화면 속 화면 전환/복귀";
+"settings.middleClickAction.items.5" = "구간 반복";
+"settings.middleClickAction.items.6" = "재생 속도 초기화";
+"settings.middleClickAction.label" = "가운데에서 클릭하기";
+"settings.pinchAction.items.0" = "윈도우 크기 조정";
+"settings.pinchAction.items.1" = "전체 화면";
+"settings.pinchAction.items.2" = "동작 없음";
+"settings.pinchAction.label" = "펼치거나 오므리기";
+"settings.playbackSpeedScrollAmount.label" = "음량 조정 감도";
+"settings.relativeSeekAmount.label" = "일반 탐색 시 탐색 간격";
+"settings.rightClickAction.desc" = "가운데에서 클릭하기";
+"settings.rightClickAction.items.0" = "동작 없음";
+"settings.rightClickAction.items.2" = "일시 정지 / 재생";
+"settings.rightClickAction.items.3" = "OSC 숨기기";
+"settings.rightClickAction.items.4" = "화면 속 화면 전환/복귀";
+"settings.rightClickAction.items.5" = "구간 반복";
+"settings.rightClickAction.items.6" = "재생 속도 조정";
+"settings.rightClickAction.label" = "오른쪽 버튼 클릭하기";
+"settings.singleClickAction.items.0" = "동작 없음";
+"settings.singleClickAction.items.2" = "일시 정지 / 재생";
+"settings.singleClickAction.items.3" = "OSC 숨기기";
+"settings.singleClickAction.label" = "한 번 클릭하기";
+"settings.useExactSeek.desc" = "정밀 탐색을 선택하면 더 세밀하게 조정할 수 있지만,\n재생이 느려지거나 CPU 사용률이 높아질 수 있습니다.";
+"settings.useExactSeek.items.0" = "키 프레임 탐색";
+"settings.useExactSeek.items.1" = "정밀 탐색";
+"settings.useExactSeek.items.2" = "자동";
+"settings.useExactSeek.label" = "탐색 방식";
+"settings.verticalScrollAction.items.0" = "음량 조정";
+"settings.verticalScrollAction.items.1" = "탐색";
+"settings.verticalScrollAction.items.2" = "동작 없음";
+"settings.verticalScrollAction.items.4" = "재생 속도 조정";
+"settings.verticalScrollAction.label" = "위아래로 쓸어넘기기";
+"settings.videoViewAcceptsFirstMouse.label" = "비활성 창 상태에서도 마우스 클릭 허용";
+"settings.volumeScrollAmount.label" = "음량 조절 감도";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "실제 명령행 보기";
+"settings.useMediaKeys.label" = "시스템 미디어 컨트롤 사용";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "기본값: 153600";
+"settings.cacheBufferSize.label" = "캐시 버퍼 크기 (KB)";
+"settings.enableCache.label" = "캐시 활성화";
+"settings.httpProxy.desc" = "설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
+"settings.httpProxy.label" = "HTTP 프록시";
+"settings.secPrefech.desc" = "기본값: 36000";
+"settings.secPrefech.label" = "미리 읽어오기 (초)";
+"settings.showBufferingThrobber.label" = "캐시 로딩으로 일시정지 시 로딩 아이콘 표시";
+"settings.showSeekingThrobber.label" = "탐색 중 로딩 아이콘 표시";
+"settings.transportRTSPThrough.items.0" = "자동";
+"settings.transportRTSPThrough.label" = "RTSP 스트림 전송";
+"settings.userAgent.label" = "사용자 에이전트";
+"settings.ytdlEnabled.label" = "youtube-dl 사용";
+"settings.ytdlRawOptions.desc" = "형식: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "추가 옵션";
+"settings.ytdlSearchPath.desc" = "IINA는 이 폴더에서 youtube-dl을 찾습니다. 재실행을 해야합니다.";
+"settings.ytdlSearchPath.label" = "사용자 지정 youtube-dl 경로";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "자동으로 인터넷에서 자막 찾기";
+"settings.displayInLetterBox.label" = "전체 화면일 때 자막을 레터박스에 표시";
+"settings.subAlignX.items.0" = "왼쪽";
+"settings.subAlignX.items.1" = "가운데";
+"settings.subAlignX.items.2" = "오른쪽";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "위쪽";
+"settings.subAlignY.items.1" = "가운데";
+"settings.subAlignY.items.2" = "아래쪽";
+"settings.subAutoLoadIINA.items.0" = "사용하지 않음";
+"settings.subAutoLoadIINA.items.1" = "파일 이름을 포함한 자막";
+"settings.subAutoLoadIINA.items.2" = "IINA앱이 자동 선택";
+"settings.subAutoLoadIINA.label" = "자동 자막열기";
+"settings.subAutoLoadPriorityString.desc" = "문자열 목록은 쉼표로 구분하여 입력하십시오.";
+"settings.subAutoLoadPriorityString.label" = "파일 이름이 포함된 자막을 먼저 선택";
+"settings.subAutoLoadSearchPath.desc" = "디렉토리를 콜론(:)으로 구분하십시오. 상대경로와 경로문자열의 끝에 와일드카드(*)를 사용할 수 있습니다.";
+"settings.subAutoLoadSearchPath.label" = "아래의 디렉토리에서도 자막을 찾습니다";
+"settings.subBlur.label" = "흐림 효과";
+"settings.subBold.label" = "굵게";
+"settings.subItalic.label" = "이텔릭체";
+"settings.subLang.desc" = "ISO 639-2의 언어 코드를 쉼표로 구분하여 사용하십시오.\n이 설정은 mpv와 OpenSubtitles 모두에 적용됩니다.";
+"settings.subPos.label" = "상하 위치";
+"settings.subScaleWithWindow.label" = "윈도우 크기에 따라 자막 크기 조정";
+"settings.subSpacing.label" = "글자 간격";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "재생할 때 모든 윈도우 위에 두기";
+"settings.alwaysShowOnTopIcon.label" = "타이틀바에 모든 윈도우 위에 두기 상태 표시";
+"settings.arrowBtnAction.items.0" = "재생 속도";
+"settings.arrowBtnAction.items.1" = "이전 / 다음 파일";
+"settings.arrowBtnAction.items.2" = "빨리 감기 / 되감기";
+"settings.arrowBtnAction.label" = "좌우 키를 사용하여 동작";
+"settings.controlBarStickToCenter.label" = "마우스로 끌때 화면 가운데 맞춤";
+"settings.disableAnimations.desc" = "macOS 동작 줄이기 접근성 설정이 활성화되면 전정 장애가 있는 사용자에게 문제를 일으키는 것으로 알려진 사용자 인터페이스 애니메이션을 줄입니다. 그래도 충분하지 않은 경우 이 설정을 사용하여 사용자 인터페이스 애니메이션을 제거하여 동작을 더 줄일 수 있습니다.";
+"settings.disableAnimations.label" = "애니메이션 비활성화";
+"settings.disableOSDFileStartMsg.label" = "파일 시작";
+"settings.disableOSDPauseResumeMsgs.label" = "일시 정지 / 재생";
+"settings.disableOSDSeekMsg.label" = "탐색";
+"settings.disableOSDSpeedMsg.label" = "재생속도";
+"settings.disablePlaySliderScrolling.label" = "스크롤 휠로 재생 위치가 바뀌지 않게 하기";
+"settings.disableVolumeSliderScrolling.label" = "스크롤 휠로 음량이 바뀌지 않게 하기";
+"settings.displayTimeAndBatteryInFullScreen.label" = "전체 화면에서 시간과 배터리 정보 보여주기";
+"settings.enableOSD.label" = "OSD 사용";
+"settings.enableThumbnailForRemoteFiles.label" = "마운트된 원격 드라이브의 파일 포함";
+"settings.enableThumbnailPreview.label" = "썸네일 미리보기 사용";
+"settings.maxThumbnailPreviewCacheSize.label" = "최대 캐시 크기";
+"settings.oscPosition.items.0" = "자유 이동";
+"settings.oscPosition.items.1" = "상단";
+"settings.oscPosition.items.2" = "하단";
+"settings.oscPosition.label" = "재생 제어기 (OSC)";
+"settings.osdTextSize.label" = "텍스트 크기";
+"settings.pauseWhenPip.label" = "자동으로 일시 정지";
+"settings.resizeWindowOption.items.0" = "화면 크기에 맞춤";
+"settings.resizeWindowOption.items.1" = "비디오 크기의 0.5배";
+"settings.resizeWindowOption.items.2" = "원래 비디오 크기";
+"settings.resizeWindowOption.items.3" = "비디오 크기의 1.5배";
+"settings.resizeWindowOption.items.4" = "비디오 크기의 2배";
+"settings.resizeWindowOption.label" = "윈도우 크기";
+"settings.scaleRemainingTime.label" = "재생 속도 기준으로 남은 시간 표시";
+"settings.showChapterPos.label" = "재생 상태 막대에 챕터 위치 표시";
+"settings.showRemainingTime.label" = "남은 재생 시간 표시";
+"settings.themeMaterial.desc" = "화면 모드";
+"settings.themeMaterial.items.0" = "다크 모드";
+"settings.themeMaterial.items.2" = "라이트 모드";
+"settings.themeMaterial.items.4" = "화면 모드에 맞춤";
+"settings.themeMaterial.label" = "모양새";
+"settings.togglePipByMinimizingWindow.label" = "윈도우 최소화/복원할 때 화면 속 화면으로 전환/복귀";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "비디오 파일에만 적용";
+"settings.usePhysicalResolution.label" = "Retina Display에서 실제 해상도 사용";
+"settings.windowBehaviorWhenPip.items.0" = "동작 없음";
+"settings.windowBehaviorWhenPip.items.1" = "숨기기";
+"settings.windowBehaviorWhenPip.items.2" = "최소화";
+"settings.windowBehaviorWhenPip.label" = "윈도우";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "아래 설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
+"settings.enableAdvancedSettings.label" = "고급 설정 사용";
+"settings.enableLogging.label" = "로그 기록하기";
+"settings.logLevel.items.0" = "세부내용";
+"settings.logLevel.items.1" = "디버그";
+"settings.logLevel.items.2" = "주의";
+"settings.logLevel.items.3" = "오류";
+"settings.logLevel.label" = "로그 레벨";
+"settings.useMpvOsd.label" = "mpv의 OSD 사용";
+"settings.useUserDefinedConfDir.label" = "설정 디렉토리 사용";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS 자막";
+"settings.$About" = "IINA에 관하여";
+"settings.$Accessibility" = "접근성";
+"settings.$AdditionalMpvOptions" = "추가 설정";
+"settings.$Advanced" = "고급설정";
+"settings.$Align" = "정렬";
+"settings.$AlwaysWhenPlaying" = "항상";
+"settings.$Appearance" = "모양새";
+"settings.$AssrtAPIToken" = "Assrt API 토큰";
+"settings.$Audio" = "오디오";
+"settings.$Author" = "작성자";
+"settings.$AutoLoad" = "자동 자막열기";
+"settings.$Background" = "배경색";
+"settings.$Behavior" = "동작";
+"settings.$Border" = "외곽선";
+"settings.$Cache" = "캐시";
+"settings.$Cancel" = "취소";
+"settings.$CheckForUpdates" = "자동 업데이트 확인";
+"settings.$ClearCache" = "캐시 지우기";
+"settings.$ClearPlaybackHistory" = "재생 기록 지우기…";
+"settings.$ClearSavedPlaybackProgress" = "이어 보기 파일 지우기…";
+"settings.$ClearThumbnailCache" = "썸네일 캐시 비우기…";
+"settings.$Color" = "색상";
+"settings.$Customize" = "사용자 설정…";
+"settings.$DefaultApplication" = "기본 응용 프로그램";
+"settings.$DefaultEncoding" = "기본 인코딩";
+"settings.$DeleteAllPlaybackHistories" = "모든 재생 기록과 \"최근 파일 열기\" 메뉴에 기록된 목록을 지웁니다.";
+"settings.$DeleteAllWatchLater" = "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다.";
+"settings.$DoNotResize" = "크기 조정하지 않음";
+"settings.$FailedToLoadThePage" = "페이지를 불러오는 데 실패했습니다.";
+"settings.$Firefox" = "FireFox";
+"settings.$Font" = "서체";
+"settings.$GetBrowserExtensionsForIINA" = "IINA용 브라우저 확장 프로그램 가져오기";
+"settings.$Height" = "세로";
+"settings.$Help" = "도움말";
+"settings.$History" = "재생 기록";
+"settings.$Identifier" = "식별자";
+"settings.$ImportAnExistingConfigFile" = "설정 파일 가져오기";
+"settings.$InitialWindowPosition" = "시작 시 윈도우 위치";
+"settings.$InitialWindowSize" = "시작 시 윈도우 크기";
+"settings.$Install" = "설치";
+"settings.$InstallLocalPackage" = "패키지 설치…";
+"settings.$Layout" = "화면에서의 위치";
+"settings.$Login" = "로그인";
+"settings.$MB" = "MB";
+"settings.$Margin" = "여백";
+"settings.$Mouse" = "마우스";
+"settings.$Network" = "네트워크";
+"settings.$NotLoggedIn" = "로그인되지 않음";
+"settings.$OK" = "승인";
+"settings.$Offset" = "크기";
+"settings.$OnScreenController" = "재생 제어기 (OSC)";
+"settings.$OnScreenDisplay" = "정보 표시 화면 (OSD)";
+"settings.$OnlineSubtitles" = "온라인 자막";
+"settings.$OpenLinksOrCurrentWebpage" = "한 번의 클릭으로 링크 또는 방문중인 웹페이지의 영상을 재생합니다.\nyoutube-dl 프로그램이 지원하는 웹페이지에서만 동작합니다.";
+"settings.$OpenLogDirectory" = "로그 저장 디렉토리 열기";
+"settings.$OtherStyles" = "기타 효과";
+"settings.$OverrideLevel" = "설정 덮어쓰기 강도";
+"settings.$PictureinnPicture" = "화면 속 화면 (PiP)";
+"settings.$Playlist" = "재생목록";
+"settings.$PleaseSelectTheMediaTypes" = "IINA를 기본 응용프로그램으로 사용할 미디어 유형을 선택하십시오.";
+"settings.$Position" = "위치";
+"settings.$PreferredLanguage" = "선호 언어";
+"settings.$RestoreAlerts" = "알림 복구하기";
+"settings.$RestoreAllAlertsThat" = "\"더 이상 이 메세지 보지 않기\" 확인란을 통해 비활성화된 모든 알림을 다시 활성화합니다.";
+"settings.$RestoreSuppressedAlerts" = "비활성화된 알림 복구하기";
+"settings.$SPDIFOutput" = "S/PDIF 출력";
+"settings.$Screenshots" = "스크린샷";
+"settings.$SetIINAAsTheDefault" = "IINA를 기본 응용 프로그램으로 지정…";
+"settings.$Settings" = "설정";
+"settings.$Shadow" = "그림자";
+"settings.$ShowInFinder" = "Finder에서 보기";
+"settings.$ShowTheConfigFileIn" = "Finder에서 설정 파일 보기";
+"settings.$Size" = "크기";
+"settings.$Source" = "소스";
+"settings.$SuppressMessagesFor" = "다음에 대해서 메시지 비활성화";
+"settings.$TextSubtitles" = "텍스트 자막";
+"settings.$ThumbnailPreview" = "섬네일 미리보기";
+"settings.$Toolbar" = "도구 막대";
+"settings.$Trackpad" = "트랙패드";
+"settings.$Uninstall" = "삭제";
+"settings.$Video" = "비디오";
+"settings.$Website" = "웹사이트";
+"settings.$WhenEnteringPIP" = "화면 속 화면으로 전환할 때";
+"settings.$WhenMediaIsOpened" = "파일을 열 때";
+"settings.$WhenMediaIsOpenedManually" = "파일을 수동으로 열 때";
+"settings.$Width" = "가로";
+"settings.$Window" = "윈도우";
+"settings.$X" = " X";
+"settings.$XOffset" = "가로 기준";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "세로 기준";
+"settings.$YouCanInstallANew" = "GitHub 또는 로컬 .iinaplgz 패키지에서 새 플러그인을 설치할 수 있습니다. GitHub에서 설치한 플러그인은 자동으로 업데이트할 수 있습니다.";
+"settings.$bottom" = "아래";
+"settings.$dB" = "dB";
+"settings.$left" = "왼쪽";
+"settings.$nits" = "니트";
+"settings.$ofScreen" = "% (화면크기 대비)";
+"settings.$point" = "포인트";
+"settings.$pt" = "pt";
+"settings.$right" = "오른쪽";
+"settings.$s" = "초";
+"settings.$sideOfTheScreen" = "을 기준으로";
+"settings.$toThe" = "화면";
+"settings.$top" = "위";

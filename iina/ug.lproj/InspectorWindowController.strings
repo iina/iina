@@ -67,6 +67,9 @@
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
 "MME-KZ-jrG.title" = "قوزغاتقۇچ:";
 
+/* Class = "NSTextFieldCell"; title = "Comment:"; ObjectID = "O4m-5f-4hM"; */
+"O4m-5f-4hM.title" = "Comment:";
+
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
 "OCm-zb-deg.title" = "ۋاقىت ئۇزۇنلۇقى:";
 
@@ -96,6 +99,9 @@
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
 "WrI-Sr-O2S.label" = "ھۆججەت";
+
+/* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "ZXF-fr-bWN"; */
+"ZXF-fr-bWN.title" = "ماۋزۇ:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
 "bki-sE-xCA.title" = "كودلىغۇچ:";
@@ -158,16 +164,19 @@
 "vrP-XL-Weg.title" = "ئۈلگە ئېلىش نىسبىتى:";
 
 /* Class = "NSTextFieldCell"; title = "Decoder:"; ObjectID = "xix-0S-ehE"; */
-"xix-0S-ehE.title" = "Decoder:";
+"xix-0S-ehE.title" = "دېكودېر:";
 
 /* Class = "NSTextFieldCell"; title = "Primaries:"; ObjectID = "1kw-LO-KmJ"; */
-"1kw-LO-KmJ.title" = "Primaries:";
+"1kw-LO-KmJ.title" = "ئىلگىرى تاللاش:";
 
 /* Class = "NSTextFieldCell"; title = "Colorspace:"; ObjectID = "mLo-Wc-BoO"; */
-"mLo-Wc-BoO.title" = "Colorspace:";
+"mLo-Wc-BoO.title" = "رەڭ بوشلۇقى:";
+
+/* Class = "NSTextFieldCell"; title = "Pixel Format:"; ObjectID = "UrR-u2-hFz"; */
+"UrR-u2-hFz.title" = "Pixel Format:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
-"zDk-Ie-EPs.headerCell.title" = "Name";
+"zDk-Ie-EPs.headerCell.title" = "ئىسىم";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
-"x6R-q7-efY.headerCell.title" = "Value";
+"x6R-q7-efY.headerCell.title" = "قىممەت";

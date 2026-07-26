@@ -1454,6 +1454,18 @@ class PlayerCore: NSObject {
     }
   }
 
+  func subRemove(id: Int? = nil) -> Bool {
+    let args = id.map { [String($0)] } ?? []
+    var result = true
+    mpv.command(.subRemove, args: args, checkError: false, level: .verbose, returnValueCallback: { code in
+      if code < 0 {
+        result = false
+        self.log("Failed removing subtitle track #\(id ?? 0): error code \(code)", level: .error)
+      }
+    })
+    return result
+  }
+
   func reloadAllSubs() {
     let currentSubName = info.currentTrack(.sub)?.externalFilename
     info.$subTracks.withLock {

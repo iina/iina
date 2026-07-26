@@ -6,11 +6,12 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
+class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
   private let trackType: MPVTrack.TrackType
   private unowned let player: PlayerCore
 
   private var tableView: NSTableView
+  private var contextMenu: NSMenu?
 
   init(_ trackType: MPVTrack.TrackType, player: PlayerCore, observedKeys: [Notification.Name]) {
     self.player = player
@@ -26,6 +27,14 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     tableView.headerView = nil
     tableView.backgroundColor = .clear
     tableView.gridStyleMask = [.solidHorizontalGridLineMask]
+
+    if trackType == .sub || trackType == .secondSub {
+      let menu = NSMenu(title: "Subtitle Actions")
+      menu.delegate = self
+      menu.autoenablesItems = false
+      contextMenu = menu
+      tableView.menu = menu
+    }
 
     translatesAutoresizingMaskIntoConstraints = false
     documentView = tableView
@@ -93,6 +102,55 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     }
     player.setTrack(trackId, forType: trackType)
     tableView.deselectAll(nil)
+  }
+
+  func menuNeedsUpdate(_ menu: NSMenu) {
+    menu.removeAllItems()
+
+    let clickedRow = tableView.clickedRow
+    guard clickedRow > 0,
+          let track = player.info.trackList(trackType)[at: clickedRow - 1],
+          isRemovableDownloadedSubtitle(track) else { return }
+
+    menu.addItem(
+      withTitle: NSLocalizedString(
+        "quicksetting.sub_remove_downloaded",
+        comment: "Remove Downloaded Subtitle"
+      ),
+      action: #selector(removeDownloadedSubtitleFromMenu(_:)),
+      target: self,
+      obj: track
+    )
+  }
+
+  @objc private func removeDownloadedSubtitleFromMenu(_ sender: NSMenuItem) {
+    guard let track = sender.representedObject as? MPVTrack,
+          isRemovableDownloadedSubtitle(track),
+          let filename = track.externalFilename,
+          player.subRemove(id: track.id) else { return }
+
+    do {
+      try FileManager.default.removeItem(at: URL(fileURLWithPath: filename))
+    } catch CocoaError.fileNoSuchFile {
+      // Ignore if the temporary subtitle file was already cleaned up.
+    } catch {
+      player.log(
+        "Failed removing downloaded subtitle file \(filename): \(error.localizedDescription)",
+        level: .warning
+      )
+    }
+
+    player.getTrackInfo()
+    player.getSelectedTracks()
+    player.postNotification(.iinaTracklistChanged)
+  }
+
+  private func isRemovableDownloadedSubtitle(_ track: MPVTrack) -> Bool {
+    guard track.isExternal, let filename = track.externalFilename else { return false }
+
+    let temporaryDirectory = Utility.tempDirURL.standardizedFileURL.pathComponents
+    let subtitleFile = URL(fileURLWithPath: filename).standardizedFileURL.pathComponents
+    return subtitleFile.starts(with: temporaryDirectory)
   }
 
   private func makeCell(identifier: NSUserInterfaceItemIdentifier, columnID: NSUserInterfaceItemIdentifier) -> CellView {

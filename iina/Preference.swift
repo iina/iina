@@ -8,12 +8,11 @@
 
 import Cocoa
 
-protocol InitializingFromKey {
+protocol InitializingFromKey: CustomStringConvertible {
 
   static var defaultValue: Self { get }
 
   init?(key: Preference.Key)
-
 }
 
 struct Preference {
@@ -50,6 +49,10 @@ struct Preference {
 
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = Key("themeMaterial")
+
+    static let useLiquidGlassOSD = Key("useLiquidGlassOSD")
+    static let useLiquidGlassOSC = Key("useLiquidGlassOSC")
+    static let useLiquidGlassSidebar = Key("useLiquidGlassSidebar")
 
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = Key("softVolume")
@@ -100,6 +103,8 @@ struct Preference {
     static let screenshotTemplate = Key("screenShotTemplate")
     static let screenshotShowPreview = Key("screenshotShowPreview")
 
+    static let enableLiveText = Key("enableLiveText")
+
     static let playlistAutoAdd = Key("playlistAutoAdd")
     static let playlistAutoPlayNext = Key("playlistAutoPlayNext")
     static let playlistShowMetadata = Key("playlistShowMetadata")
@@ -143,7 +148,8 @@ struct Preference {
     static let disablePlaySliderScrolling = Key("disablePlaySliderScrolling")
     static let disableVolumeSliderScrolling = Key("disableVolumeSliderScrolling")
 
-    static let playlistWidth = Key("playlistWidth")
+    static let leadingSidebarWidth = Key("leadingSidebarWidth")
+    static let trailingSidebarWidth = Key("trailingSidebarWidth")
     static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")
 
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
@@ -163,6 +169,15 @@ struct Preference {
     static let togglePipByMinimizingWindowForVideoOnly = Key("togglePipByMinimizingWindowForVideoOnly")
 
     static let disableAnimations = Key("disableAnimations")
+
+    static let unlockWindowAspectRatio = Key("unlockWindowAspectRatio")
+    static let compactUI = Key("compactUI")
+    static let edgeToEdgeVideo = Key("edgeToEdgeVideo")
+    static let dockedControlBarAndTitlebar = Key("dockedControlBarAndTitlebar")
+
+    static let sidebarSettingsDisplayAtLeading = Key("sidebarSettingsDisplayAtLeading")
+    static let sidebarPlaylistDisplayAtLeading = Key("sidebarPlaylistDisplayAtLeading")
+    static let sidebarPluginsDisplayAtLeading = Key("sidebarPluginsDisplayAtLeading")
 
     // Codec
 
@@ -363,6 +378,14 @@ struct Preference {
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
+
+    var description: String {
+      switch self {
+      case .welcomeWindow: "welcomeWindow"
+      case .openPanel: "openPanel"
+      case .none: "none"
+      }
+    }
   }
 
   enum ArrowButtonAction: Int, InitializingFromKey, CaseIterable {
@@ -374,6 +397,14 @@ struct Preference {
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .speed: "speed"
+      case .playlist: "playlist"
+      case .seek: "seek"
+      }
     }
   }
 
@@ -393,9 +424,17 @@ struct Preference {
       }
       self.init(rawValue: Preference.integer(for: key))
     }
+
+    var description: String {
+      switch self {
+      case .dark: "dark"
+      case .light: "light"
+      case .system: "system"
+      }
+    }
   }
 
-  enum OSCPosition: Int, InitializingFromKey {
+  enum OSCPosition: Int, InitializingFromKey, CaseIterable {
     case floating = 0
     case top
     case bottom
@@ -404,6 +443,14 @@ struct Preference {
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .floating: "floating"
+      case .top: "top"
+      case .bottom: "bottom"
+      }
     }
   }
 
@@ -416,6 +463,14 @@ struct Preference {
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .relative: "relative"
+      case .exact: "exact"
+      case .auto: "auto"
+      }
     }
   }
 
@@ -433,6 +488,18 @@ struct Preference {
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
+
+    var description: String {
+      switch self {
+      case .none: "none"
+      case .fullscreen: "fullscreen"
+      case .pause: "pause"
+      case .hideOSC: "hideOSC"
+      case .togglePIP: "togglePIP"
+      case .abLoop: "abLoop"
+      case .resetSpeed: "resetSpeed"
+      }
+    }
   }
 
   enum ScrollAction: Int, InitializingFromKey, CaseIterable {
@@ -447,6 +514,15 @@ struct Preference {
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
+
+    var description: String {
+      switch self {
+      case .volume: "volume"
+      case .seek: "seek"
+      case .none: "none"
+      case .playbackSpeed: "playbackSpeed"
+      }
+    }
   }
 
   enum PinchAction: Int, InitializingFromKey, CaseIterable {
@@ -458,6 +534,14 @@ struct Preference {
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .windowSize: "windowSize"
+      case .fullscreen: "fullscreen"
+      case .none: "none"
+      }
     }
   }
 
@@ -479,6 +563,14 @@ struct Preference {
     func shouldLoadSubsMatchedByIINA() -> Bool {
       return self == .iina
     }
+
+    var description: String {
+      switch self {
+      case .disabled: "disabled"
+      case .mpvFuzzy: "mpvFuzzy"
+      case .iina: "iina"
+      }
+    }
   }
 
   enum AutoLoadAction: Int, InitializingFromKey {
@@ -493,14 +585,12 @@ struct Preference {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var string: String {
-      get {
-        switch self {
-        case .no: return "no"
-        case .exact: return "exact"
-        case .fuzzy: return "fuzzy"
-        case .all: return "all"
-        }
+    var description: String {
+      switch self {
+      case .no: "no"
+      case .exact: "exact"
+      case .fuzzy: "fuzzy"
+      case .all: "all"
       }
     }
   }
@@ -523,47 +613,53 @@ struct Preference {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var string: String {
-      get {
-        switch self {
-        case .yes: return "yes"
-        case .force : return "force"
-        case .strip: return "strip"
-        case .scale: return "scale"
-        case .no: return "no"
-        }
+    var description: String {
+      switch self {
+      case .yes: "yes"
+      case .force : "force"
+      case .strip: "strip"
+      case .scale: "scale"
+      case .no: "no"
       }
     }
   }
 
-  enum SubAlign: Int, InitializingFromKey, CaseIterable {
-    case top = 0  // left
+  enum SubAlignX: Int, InitializingFromKey, CaseIterable {
+    case left = 0
     case center
-    case bottom  // right
+    case right
 
-    static var defaultValue = SubAlign.center
+    static var defaultValue = SubAlignX.center
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var stringForX: String {
-      get {
-        switch self {
-        case .top: return "left"
-        case .center: return "center"
-        case .bottom: return "right"
-        }
+    var description: String {
+      switch self {
+      case .left: "left"
+      case .center: "center"
+      case .right: "right"
       }
     }
+  }
 
-    var stringForY: String {
-      get {
-        switch self {
-        case .top: return "top"
-        case .center: return "center"
-        case .bottom: return "bottom"
-        }
+  enum SubAlignY: Int, InitializingFromKey, CaseIterable {
+    case top = 0
+    case center
+    case bottom
+
+    static var defaultValue = SubAlignY.bottom
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .top: "top"
+      case .center: "center"
+      case .bottom: "bottom"
       }
     }
   }
@@ -580,14 +676,12 @@ struct Preference {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var string: String {
-      get {
-        switch self {
-        case .lavf: return "lavf"
-        case .tcp: return "tcp"
-        case .udp: return "udp"
-        case .http: return "http"
-        }
+    var description: String {
+      switch self {
+      case .lavf: "lavf"
+      case .tcp: "tcp"
+      case .udp: "udp"
+      case .http: "http"
       }
     }
   }
@@ -605,15 +699,13 @@ struct Preference {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var string: String {
-      get {
-        switch self {
-        case .png: return "png"
-        case .jpg: return "jpg"
-        case .jpeg: return "jpeg"
-        case .webp: return "webp"
-        case .jxl: return "jxl"
-        }
+    var description: String {
+      switch self {
+      case .png: "png"
+      case .jpg: "jpg"
+      case .jpeg: "jpeg"
+      case .webp: "webp"
+      case .jxl: "jxl"
       }
     }
   }
@@ -629,16 +721,16 @@ struct Preference {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var mpvString: String {
+    var description: String {
       switch self {
-      case .disabled: return "no"
-      case .auto: return "auto"
-      case .autoCopy: return "auto-copy"
+      case .disabled: "no"
+      case .auto: "auto"
+      case .autoCopy: "auto-copy"
       }
     }
 
     var localizedDescription: String {
-      return NSLocalizedString("hwdec." + mpvString, comment: mpvString)
+      NSLocalizedString("hwdec." + description, comment: description)
     }
   }
 
@@ -658,16 +750,16 @@ struct Preference {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var mpvString: String {
+    var description: String {
       switch self {
-      case .auto: return "auto"
-      case .clip: return "clip"
-      case .mobius: return "mobius"
-      case .reinhard: return "reinhard"
-      case .hable: return "hable"
-      case .bt_2390: return "bt.2390"
-      case .gamma: return "gamma"
-      case .linear: return "linear"
+      case .auto: "auto"
+      case .clip: "clip"
+      case .mobius: "mobius"
+      case .reinhard: "reinhard"
+      case .hable: "hable"
+      case .bt_2390: "bt.2390"
+      case .gamma: "gamma"
+      case .linear: "linear"
       }
     }
   }
@@ -681,6 +773,14 @@ struct Preference {
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .always: "always"
+      case .onlyWhenOpen: "onlyWhenOpen"
+      case .never: "never"
+      }
     }
   }
 
@@ -699,13 +799,15 @@ struct Preference {
 
     var ratio: Double {
       switch self {
-      case .fitScreen: return -1
-      case .videoSize05: return 0.5
-      case .videoSize10: return 1
-      case .videoSize15: return 1.5
-      case .videoSize20: return 2
+      case .fitScreen: -1
+      case .videoSize05: 0.5
+      case .videoSize10: 1
+      case .videoSize15: 1.5
+      case .videoSize20: 2
       }
     }
+
+    var description: String { String(ratio) }
   }
 
   enum WindowBehaviorWhenPip: Int, InitializingFromKey, CaseIterable {
@@ -719,9 +821,18 @@ struct Preference {
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
+
+    var description: String {
+      switch self {
+      case .doNothing: "doNothing"
+      case .hide: "hide"
+      case .minimize: "minimize"
+      case .close: "close"
+      }
+    }
   }
 
-  enum ToolBarButton: Int {
+  enum ToolBarButton: Int, CustomStringConvertible {
     case settings = 0
     case playlist
     case pip
@@ -730,26 +841,54 @@ struct Preference {
     case subTrack
     case screenshot
     case plugins
+    case liveText
 
-    func image() -> NSImage {
-      func makeSymbol(_ names: [String], _ fallbackImage: NSImage.Name) -> NSImage {
-        guard #available(macOS 14.0, *) else { return NSImage(named: fallbackImage)! }
-        let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-        return NSImage.findSFSymbol(names, withConfiguration: configuration)
-      }
+    var description: String {
       switch self {
-      case .settings: return makeSymbol(["gearshape"], NSImage.actionTemplateName)
-      case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"], "playlist")
-      case .pip: return makeSymbol(["pip.swap"], "pip")
-      case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"], "fullscreen")
-      case .musicMode: return makeSymbol(["music.microphone", "music.mic"], "toggle-album-art")
-      case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
-      case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
-      case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
+      case .settings: "settings"
+      case .playlist: "playlist"
+      case .pip: "pip"
+      case .fullScreen: "fullScreen"
+      case .musicMode: "musicMode"
+      case .subTrack: "subTrack"
+      case .screenshot: "screenshot"
+      case .plugins: "plugins"
+      case .liveText: "liveText"
       }
     }
 
-    func description() -> String {
+    private func makeSymbol(_ names: [String]) -> NSImage {
+        let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
+        return NSImage.sf(names, withConfiguration: configuration)!
+      }
+
+    func image() -> NSImage {
+      switch self {
+      case .settings: return makeSymbol(["gearshape"])
+      case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"])
+      case .pip: return makeSymbol(["pip.enter"])
+      case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"])
+      case .musicMode: return makeSymbol(["microphone.dynamic.on.stand", "music.microphone", "music.mic"])
+      case .subTrack: return makeSymbol(["captions.bubble.fill"])
+      case .screenshot: return makeSymbol(["camera.shutter.button", "camera.fill"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension", "puzzlepiece"])
+      case .liveText: return makeSymbol(["document.viewfinder", "doc.viewfinder", "doc.text.viewfinder"])
+      }
+    }
+
+    func alternateImage() -> NSImage? {
+      switch self {
+      case .settings: return makeSymbol(["gearshape.fill"])
+      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"])
+      case .pip: return makeSymbol(["pip.exit"])
+      case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension.fill", "puzzlepiece.fill"])
+      case .liveText: return makeSymbol(["viewfinder.circle.fill"])
+      default: return nil
+      }
+    }
+
+    func localizedDescription() -> String {
       let key: String
       switch self {
       case .settings: key = "settings"
@@ -760,6 +899,7 @@ struct Preference {
       case .subTrack: key = "sub_track"
       case .screenshot: key = "screenshot"
       case .plugins: key = "plugins"
+      case .liveText: key = "live_text"
       }
       return NSLocalizedString("osc_toolbar.\(key)", comment: key)
     }
@@ -782,13 +922,11 @@ struct Preference {
       self.init(rawValue: Preference.integer(for: key))
     }
 
-    var mpvString: String {
-      get {
-        switch self {
-        case .no: return "no"
-        case .track : return "track"
-        case .album: return "album"
-        }
+    var description: String {
+      switch self {
+      case .no: "no"
+      case .track : "track"
+      case .album: "album"
       }
     }
   }
@@ -805,29 +943,74 @@ struct Preference {
     }
 
     var localizedDescription: String {
-      return NSLocalizedString("gaplessAudio." + mpvString, comment: mpvString)
+      NSLocalizedString("gaplessAudio." + description, comment: description)
     }
 
-    var mpvString: String {
-      get {
-        switch self {
-        case .disabled: return "no"
-        case .weak : return "weak"
-        case .strong: return "yes"
-        }
+    var description: String {
+      switch self {
+      case .disabled: "no"
+      case .weak : "weak"
+      case .strong: "yes"
       }
     }
   }
 
   enum DefaultRepeatMode: Int, InitializingFromKey, CaseIterable {
-    static var defaultValue = DefaultRepeatMode.playlist
-
     case playlist = 0
     case file
+
+    static var defaultValue = DefaultRepeatMode.playlist
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
     }
+
+    var description: String {
+      switch self {
+      case .playlist: "playlist"
+      case .file : "file"
+      }
+    }
+  }
+
+  // MARK: - Getters
+
+  static var unlockWindowAspectRatio: Bool {
+    Preference.bool(for: .unlockWindowAspectRatio) || !Preference.bool(for: .edgeToEdgeVideo)
+  }
+
+  static var isDocked: Bool {
+    !Preference.bool(for: .edgeToEdgeVideo) && Preference.bool(for: .dockedControlBarAndTitlebar)
+  }
+
+  enum LiquidGlassOption {
+    case osc, osd, sidebar
+  }
+
+  static func liquidGlass(_ component: LiquidGlassOption) -> Bool {
+    guard #available(macOS 26.0, *) else { return false }
+    return switch component {
+    case .osc:
+      Preference.bool(for: .useLiquidGlassOSC)
+    case .osd:
+      Preference.bool(for: .useLiquidGlassOSD)
+    case .sidebar:
+      Preference.bool(for: .useLiquidGlassSidebar)
+    }
+  }
+
+  static var isLiveTextAvailable: Bool = {
+    guard #available(macOS 13, *) else { return false }
+    let defaults = UserDefaults.standard
+    if defaults.object(forKey: "AppleLiveTextEnabled") == nil {
+      return true
+    }
+    return defaults.bool(forKey: "AppleLiveTextEnabled")
+  }()
+
+  static var isLiveTextEnabled: Bool {
+    guard isLiveTextAvailable else { return false }
+    return Preference.bool(for: .enableLiveText)
   }
 
   // MARK: - Defaults
@@ -851,9 +1034,13 @@ struct Preference {
     .oscPosition: OSCPosition.floating.rawValue,
     .disablePlaySliderScrolling: false,
     .disableVolumeSliderScrolling: false,
-    .playlistWidth: 270,
+    .leadingSidebarWidth: 360,
+    .trailingSidebarWidth: 360,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
+    .useLiquidGlassOSD: true,
+    .useLiquidGlassOSC: true,
+    .useLiquidGlassSidebar: true,
     .enableOSD: true,
     .disableOSDFileStartMsg: false,
     .disableOSDPauseResumeMsgs: false,
@@ -900,7 +1087,7 @@ struct Preference {
     .enableThumbnailPreview: true,
     .maxThumbnailPreviewCacheSize: 500,
     .enableThumbnailForRemoteFiles: false,
-    .thumbnailWidth: 240,
+    .thumbnailWidth: 120,
     .autoSwitchToMusicMode: true,
     .musicModeShowPlaylist: false,
     .musicModeShowAlbumArt: true,
@@ -911,6 +1098,14 @@ struct Preference {
     .togglePipByMinimizingWindow: false,
     .togglePipByMinimizingWindowForVideoOnly: false,
     .disableAnimations: false,
+    .unlockWindowAspectRatio: false,
+    .compactUI: false,
+    .edgeToEdgeVideo: true,
+    .dockedControlBarAndTitlebar: false,
+
+    .sidebarSettingsDisplayAtLeading: false,
+    .sidebarPlaylistDisplayAtLeading: false,
+    .sidebarPluginsDisplayAtLeading: false,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,
@@ -919,7 +1114,7 @@ struct Preference {
     .enableHdrSupport: true,
     .enableToneMapping: false,
     .toneMappingTargetPeak: 0,
-    .toneMappingAlgorithm: "auto",
+    .toneMappingAlgorithm: ToneMappingAlgorithmOption.defaultValue.rawValue,
     .audioDriverEnableAVFoundation: false,
     .audioThreads: 0,
     .audioLanguage: "",
@@ -955,8 +1150,8 @@ struct Preference {
     .subBorderColorString: NSColor.black.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subShadowSize: Float(0),
     .subShadowColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
-    .subAlignX: SubAlign.center.rawValue,
-    .subAlignY: SubAlign.bottom.rawValue,
+    .subAlignX: SubAlignX.center.rawValue,
+    .subAlignY: SubAlignY.bottom.rawValue,
     .subMarginX: Float(25),
     .subMarginY: Float(22),
     .subPos: Float(100),
@@ -1021,6 +1216,8 @@ struct Preference {
     .screenshotTemplate: "%F-%n",
     .screenshotShowPreview: true,
 
+    .enableLiveText: false,
+
     .watchProperties: [String](),
     .savedVideoFilters: [SavedFilter](),
     .savedAudioFilters: [SavedFilter](),
@@ -1038,84 +1235,438 @@ struct Preference {
 
   static private let ud = UserDefaults.standard
 
-  static func object(for key: Key) -> Any? {
-    return ud.object(forKey: key.rawValue)
-  }
+  static func object(for key: Key) -> Any? { ud.object(forKey: key.rawValue) }
 
-  static func array(for key: Key) -> [Any]? {
-    return ud.array(forKey: key.rawValue)
-  }
+  static func array(for key: Key) -> [Any]? { ud.array(forKey: key.rawValue) }
 
-  static func url(for key: Key) -> URL? {
-    return ud.url(forKey: key.rawValue)
-  }
+  static func url(for key: Key) -> URL? { ud.url(forKey: key.rawValue) }
 
-  static func dictionary(for key: Key) -> [String : Any]? {
-    return ud.dictionary(forKey: key.rawValue)
-  }
+  static func dictionary(for key: Key) -> [String : Any]? { ud.dictionary(forKey: key.rawValue) }
 
-  static func string(for key: Key) -> String? {
-    return ud.string(forKey: key.rawValue)
-  }
+  static func string(for key: Key) -> String? { ud.string(forKey: key.rawValue) }
 
-  static func stringArray(for key: Key) -> [String]? {
-    return ud.stringArray(forKey: key.rawValue)
-  }
+  static func stringArray(for key: Key) -> [String]? { ud.stringArray(forKey: key.rawValue) }
 
-  static func data(for key: Key) -> Data? {
-    return ud.data(forKey: key.rawValue)
-  }
+  static func data(for key: Key) -> Data? { ud.data(forKey: key.rawValue) }
 
-  static func bool(for key: Key) -> Bool {
-    return ud.bool(forKey: key.rawValue)
-  }
+  static func bool(for key: Key) -> Bool { ud.bool(forKey: key.rawValue) }
 
-  static func integer(for key: Key) -> Int {
-    return ud.integer(forKey: key.rawValue)
-  }
+  static func integer(for key: Key) -> Int { ud.integer(forKey: key.rawValue) }
 
-  static func float(for key: Key) -> Float {
-    return ud.float(forKey: key.rawValue)
-  }
+  static func float(for key: Key) -> Float { ud.float(forKey: key.rawValue) }
 
-  static func double(for key: Key) -> Double {
-    return ud.double(forKey: key.rawValue)
-  }
+  static func double(for key: Key) -> Double { ud.double(forKey: key.rawValue) }
 
-  static func value(for key: Key) -> Any? {
-    return ud.value(forKey: key.rawValue)
-  }
+  static func value(for key: Key) -> Any? { ud.value(forKey: key.rawValue) }
 
-  static func set(_ value: Bool, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
+  static func set(_ value: Bool, for key: Key) { ud.set(value, forKey: key.rawValue) }
 
-  static func set(_ value: Int, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
+  static func set(_ value: Int, for key: Key) { ud.set(value, forKey: key.rawValue) }
 
-  static func set(_ value: String, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
+  static func set(_ value: String, for key: Key) { ud.set(value, forKey: key.rawValue) }
 
-  static func set(_ value: Float, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
+  static func set(_ value: Float, for key: Key) { ud.set(value, forKey: key.rawValue) }
 
-  static func set(_ value: Double, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
+  static func set(_ value: Double, for key: Key) { ud.set(value, forKey: key.rawValue) }
 
-  static func set(_ value: URL, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
+  static func set(_ value: URL, for key: Key) { ud.set(value, forKey: key.rawValue) }
 
-  static func set(_ value: Any?, for key: Key) {
-    ud.set(value, forKey: key.rawValue)
-  }
+  static func set(_ value: Any?, for key: Key) { ud.set(value, forKey: key.rawValue) }
 
   static func `enum`<T: InitializingFromKey>(for key: Key) -> T {
-    return T.init(key: key) ?? T.defaultValue
+    T.init(key: key) ?? T.defaultValue
   }
 
+  // MARK: - Logging
+
+  /// Log the value of settings that have been changed from their default value.
+  ///
+  /// These log messages are intended to be used by developers, not the user, so not all settings that have been changed are logged,
+  /// ones not of interest to developers are not logged:
+  /// - assrtToken Sensitive information
+  /// - controlBarPositionHorizontal Not of interest, frequently changed
+  /// - controlBarPositionVertical Not of interest, frequently changed
+  /// - musicModeShowAlbumArt Not of interest
+  /// - musicModeShowPlaylist Not of interest
+  /// - openSubUsername Sensitive information
+  /// - playlistWidth Not of interest
+  /// - recentDocuments Sensitive information, not of interest, maybe large
+  /// - savedAudioFilters Not of interest, maybe large
+  /// - savedVideoFilters Not of interest, maybe large
+  /// - softVolume Not of interest, frequently changed
+  /// - watchProperties Not of interest, maybe large
+  ///
+  /// Although some values of settings can be determined from log messages emitted by `MPVController` it is easier for
+  /// developers to have a concentrated list logged at startup.
+  /// - Important: To determine if a setting has changed this method converts the current value of the setting as well as the default
+  ///     value for the setting to [AnyHashable](https://developer.apple.com/documentation/swift/anyhashable)
+  ///     and then compares the hash values. This filters out many settings that are still set to their default values. _However_ the
+  ///     hash values can differ even when the setting is set to the default value. For example, if the user directly sets an IINA setting
+  ///     using the [defaults](https://support.apple.com/guide/terminal/edit-property-lists-apda49a1bb2-577e-4721-8f25-ffc0836f6997/mac)
+  ///     command like so:
+  ///     ```bash
+  ///     defaults write com.colliderli.iina enableNowPlayingArtwork true
+  ///     ```
+  ///     Instead of:
+  ///     ```bash
+  ///     defaults write com.colliderli.iina enableNowPlayingArtwork -bool true
+  ///     ```
+  ///     The type of the value will be `NSTaggedPointerString` instead of `__NSCFBoolean` and the hash values will differ
+  ///     even when set to the default value. For this reason there is an additional check once the value has been converted to the
+  ///     appropriate type and can be directly compared to the default value.
+  static func logSettings() {
+    guard Logger.isEmitting(.debug) else { return }
+    // See the list in this method's documentation comment for why these settings are not logged.
+    let doNotLog: [Key] = [.assrtToken, .controlBarPositionHorizontal, .controlBarPositionVertical,
+      .musicModeShowAlbumArt, .musicModeShowPlaylist, .openSubUsername, .leadingSidebarWidth,
+      .trailingSidebarWidth, .recentDocuments, .savedAudioFilters,
+      .savedVideoFilters, .softVolume, .watchProperties]
+    // There isn't an enumeration of the settings, so we use the keys in the dictionary containing
+    // the defaults. Filter the list to remove the keys we do not want to log and then sort the keys
+    // so the log messages are ordered for easier reading.
+    let keys = Preference.defaultPreference.keys.filter( { !doNotLog.contains($0) } )
+      .sorted(by: { $0.rawValue < $1.rawValue })
+    log("Partial list of settings changed from their default values:")
+    for key in keys {
+      guard let defaultValue = Preference.defaultPreference[key] else {
+        // Internal error. Nil is not a valid default value.
+        log("Default for \(key) is nil", level: .error)
+        continue
+      }
+      guard let value = Preference.value(for: key) else {
+        // Internal error. All settings must have defaults.
+        log("Value for \(key) is nil", level: .error)
+        continue
+      }
+      // Only the value of recentDocuments which is of type Array<Any> cannot be cast to
+      // AnyHashable. As that setting is not logged we do not bother to exclude that key.
+      guard let hashableDefault = defaultValue as? AnyHashable else {
+        log("Default for \(key) is of type \(type(of: defaultValue)) and cannot be cast to AnyHashable",
+            level: .error)
+        continue
+      }
+      guard let hashableValue = value as? AnyHashable else {
+        log("Value for \(key) is of type \(type(of: value)) and cannot be cast to AnyHashable",
+            level: .error)
+        continue
+      }
+      // NOTE that if the hash does not match may not mean the setting is not set to the default.
+      // See the discussion in this method's documentation comment. This check is still useful as it
+      // avoids the work to convert the value and its default to their respective type and then into
+      // a string.
+      guard hashableValue.hashValue != hashableDefault.hashValue else { continue }
+      // The values of many settings are not stored in a human friendly representation. The values
+      // must be converted to their respective types and then converted to a string.
+      let defaultAsString: String
+      let valueAsString: String
+      // Other than the first entry the cases in the switch are ordered based on the name of the
+      // type of the value.
+      switch key {
+      case .assrtToken, .openSubUsername:
+        // These keys should have been filtered above, so this code should never be executed. This
+        // code makes sure that if a change to the code causes these keys to be logged the value
+        // will be hidden.
+        defaultAsString = ""
+        valueAsString = "<private>"
+      case .actionAfterLaunch:
+        defaultAsString = String(describing: ActionAfterLaunch.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ActionAfterLaunch)
+      case .arrowButtonAction:
+        defaultAsString = String(describing: ArrowButtonAction.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ArrowButtonAction)
+      case .allowScreenSaverForAudio,
+           .alwaysFloatOnTop,
+           .alwaysOpenInNewWindow,
+           .alwaysShowOnTopIcon,
+           .audioDriverEnableAVFoundation,
+           .autoRepeat,
+           .autoSearchOnlineSub,
+           .autoSwitchToMusicMode,
+           .blackOutMonitor,
+           .controlBarStickToCenter,
+           .disableAnimations,
+           .disableOSDFileStartMsg,
+           .disableOSDPauseResumeMsgs,
+           .disableOSDSeekMsg,
+           .disableOSDSpeedMsg,
+           .disablePlaySliderScrolling,
+           .disableVolumeSliderScrolling,
+           .displayInLetterBox,
+           .displayKeyBindingRawValues,
+           .displayTimeAndBatteryInFullScreen,
+           .enableAdvancedSettings,
+           .enableCache,
+           .enableCmdN,
+           .enableControlBarAutoHide,
+           .enableDisplayIdle,
+           .enableFFmpegImageDecoder,
+           .enableHdrSupport,
+           .enableHdrWorkaround,
+           .enableInitialVolume,
+           .enableLogging,
+           .enableNowPlayingArtwork,
+           .enableOSD,
+           .enableRecentDocumentsWorkaround,
+           .enableThumbnailForRemoteFiles,
+           .enableThumbnailPreview,
+           .enableToneMapping,
+           .enableWrongScreenWorkaround,
+           .followGlobalSeekTypeWhenAdjustSlider,
+           .forceDedicatedGPU,
+           .fullScreenWhenOpen,
+           .ignoreAssStyles,
+           .iinaEnablePluginSystem,
+           .keepOpenOnFileEnd,
+           .loadIccProfile,
+           .musicModeShowAlbumArt,
+           .musicModeShowPlaylist,
+           .pauseWhenGoesToSleep,
+           .pauseWhenInactive,
+           .pauseWhenLeavingFullScreen,
+           .pauseWhenMinimized,
+           .pauseWhenOpen,
+           .pauseWhenPip,
+           .playlistAutoAdd,
+           .playlistAutoPlayNext,
+           .playlistShowMetadata,
+           .playlistShowMetadataInMusicMode,
+           .playWhenEnteringFullScreen,
+           .prefetchPlaylistVideoDuration,
+           .preventScreenSaver,
+           .quitWhenNoOpenedWindow,
+           .receiveBetaUpdate,
+           .recordPlaybackHistory,
+           .recordRecentFiles,
+           .replayGainClip,
+           .resumeLastPosition,
+           .scaleRemainingTime,
+           .screenshotCopyToClipboard,
+           .screenshotIncludeSubtitle,
+           .screenshotSaveToFile,
+           .screenshotShowPreview,
+           .showBufferingThrobber,
+           .showChapterPos,
+           .showRemainingTime,
+           .showSeekingThrobber,
+           .spdifAC3,
+           .spdifDTS,
+           .spdifDTSHD,
+           .subBold,
+           .subItalic,
+           .subScaleWithWindow,
+           .togglePipByMinimizingWindow,
+           .togglePipByMinimizingWindowForVideoOnly,
+           .touchbarShowRemainingTime,
+           .trackAllFilesInRecentOpenMenu,
+           .useAppleRemote,
+           .useLegacyFullScreen,
+           .useMediaKeys,
+           .useMpvOsd,
+           .usePhysicalResolution,
+           .useUserDefinedConfDir,
+           .videoViewAcceptsFirstMouse,
+           .ytdlEnabled:
+        guard let defaultAsBool = defaultValue as? Bool else {
+          // Should not occur. Internal error.
+          log("Default for \(key) is of type \(type(of: value)) and cannot be cast to Bool",
+              level: .error)
+          continue
+        }
+        defaultAsString = String(defaultAsBool)
+        valueAsString = String(Preference.bool(for: key))
+      case .defaultRepeatMode:
+        defaultAsString = String(describing: DefaultRepeatMode.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as DefaultRepeatMode)
+      case .controlBarAutoHideTimeout,
+           .controlBarPositionHorizontal,
+           .controlBarPositionVertical,
+           .osdAutoHideTimeout,
+           .osdTextSize,
+           .subBlur,
+           .subBorderSize,
+           .subMarginX,
+           .subMarginY,
+           .subPos,
+           .subShadowSize,
+           .subSpacing,
+           .subTextSize:
+        guard let defaultAsFloat = defaultValue as? Float else {
+          // Should not occur. Internal error.
+          log("Default for \(key) is of type \(type(of: value)) and cannot be cast to Float",
+              level: .error)
+          continue
+        }
+        defaultAsString = String(defaultAsFloat)
+        valueAsString = String(Preference.float(for: key))
+      case .gaplessAudio:
+        defaultAsString = String(describing: GaplessAudioOption.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as GaplessAudioOption)
+      case .hardwareDecoder:
+        defaultAsString = String(describing: HardwareDecoderOption.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as HardwareDecoderOption)
+      case .subAutoLoadIINA:
+        defaultAsString = String(describing: IINAAutoLoadAction.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as IINAAutoLoadAction)
+      case .logLevel:
+        defaultAsString = String(describing: Logger.Level.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as Logger.Level)
+      case .doubleClickAction,
+           .forceTouchAction,
+           .middleClickAction,
+           .rightClickAction,
+           .singleClickAction:
+        defaultAsString = String(describing: MouseClickAction.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as MouseClickAction)
+      case .oscPosition:
+        defaultAsString = String(describing: OSCPosition.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as OSCPosition)
+      case .pinchAction:
+        defaultAsString = String(describing: PinchAction.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as PinchAction)
+      case .replayGain:
+        defaultAsString = String(describing: ReplayGainOption.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ReplayGainOption)
+      case .resizeWindowOption:
+        defaultAsString = String(describing: ResizeWindowOption.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ResizeWindowOption)
+      case .resizeWindowTiming:
+        defaultAsString = String(describing: ResizeWindowTiming.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ResizeWindowTiming)
+      case .transportRTSPThrough:
+        defaultAsString = String(describing: RTSPTransportation.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as RTSPTransportation)
+      case .screenshotFormat:
+        defaultAsString = String(describing: ScreenshotFormat.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ScreenshotFormat)
+      case .horizontalScrollAction, .verticalScrollAction:
+        defaultAsString = String(describing: ScrollAction.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ScrollAction)
+      case .useExactSeek:
+        defaultAsString = String(describing: SeekOption.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as SeekOption)
+      case.userOptions:
+        defaultAsString = "[]"
+        guard let valueAsArray = value as? [[String]] else {
+          // Should not occur. Internal error.
+          log("Default for \(key) is of type \(type(of: value)) and cannot be cast to [[String]]",
+              level: .error)
+          continue
+        }
+        valueAsString = valueAsArray.reduce("[", { $0 + $1.joined(separator: " = ") }) + "]"
+      case .subAlignX:
+        defaultAsString = String(describing: SubAlignX.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as SubAlignX)
+      case .subAlignY:
+        defaultAsString = String(describing: SubAlignY.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as SubAlignY)
+      case .secondarySubOverrideLevel, .subOverrideLevel:
+        defaultAsString = String(describing: SubOverrideLevel.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as SubOverrideLevel)
+      case .themeMaterial:
+        defaultAsString = String(describing: Theme.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as Theme)
+      case .toneMappingAlgorithm:
+        defaultAsString = String(describing: ToneMappingAlgorithmOption.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as ToneMappingAlgorithmOption)
+      case .controlBarToolbarButtons:
+        // The value is an array of ToolBarButton enum values stored as integers.
+        guard let defaultAsArray = defaultValue as? [Int] else {
+          // Should not occur. Internal error.
+          log("Default for \(key) is of type \(type(of: value)) and cannot be cast to [Int]",
+              level: .error)
+          continue
+        }
+        defaultAsString = "[" + defaultAsArray.compactMap({
+          guard let button = ToolBarButton.init(rawValue: $0) else { return "unknown(\($0))" }
+          return String(describing: button)
+        }).joined(separator: ", ") + "]"
+        guard let valueAsArray = value as? [Int] else {
+          // Should not occur. Internal error.
+          log("Value for \(key) is of type \(type(of: value)) and cannot be cast to [Int]",
+              level: .error)
+          continue
+        }
+        valueAsString = "[" + valueAsArray.compactMap({
+          guard let button = ToolBarButton.init(rawValue: $0) else { return "unknown(\($0))" }
+          return String(describing: button)
+        }).joined(separator: ", ") + "]"
+      case .windowBehaviorWhenPip:
+        defaultAsString = String(describing: WindowBehaviorWhenPip.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as WindowBehaviorWhenPip)
+      default:
+        // The remaining settings have values that are integers or strings and can be directly
+        // converted to strings.
+        defaultAsString = String(describing: defaultValue)
+        valueAsString = String(describing: value)
+      }
+      // Now that the value and the default have both been converted to their human readable form
+      // we can deterministically check if the setting has been changed from its default.
+      guard valueAsString != defaultAsString else { continue }
+      // To make the output easier to read we don't include the default value of boolean settings as
+      // it is obviously the opposite of the current value of the setting. Defaults that are empty
+      // strings or arrays are also not included to reduce clutter.
+      switch defaultAsString {
+      case "", "false", "true", "[]":
+        log("\(key.rawValue) = \(valueAsString)")
+      default:
+        log("\(key.rawValue) = \(valueAsString) (default: \(defaultAsString))")
+      }
+    }
+  }
+
+  private static let subsystem = Logger.makeSubsystem("settings", ["gearshape"])
+
+  /// Log a message using the `settings` logger subsystem.
+  ///
+  /// This is a wrapper function that merely avoids the need to include the `settings` subsystem in calls to the logger.
+  /// - Important: As settings control the logger use of logging by this class _must not_ occur during class initialization.
+  /// - Parameters:
+  ///   - message: A closure that when executed gives the message to log.
+  ///   - level: The log level of the message.
+  private static func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: subsystem)
+  }
+}
+
+
+// - MARK: Observer
+
+extension Preference {
+  class Observer: NSObject {
+    private var observedKeys: [Key: (Key) -> Void] = [:]
+
+    func add(_ key: Key, runNow: Bool = false, block: @escaping (Key) -> Void) {
+      if observedKeys[key] == nil {
+        UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: [.new], context: nil)
+      }
+      if runNow {
+        block(key)
+      }
+      observedKeys[key] = block
+    }
+
+    func addAll(_ keys: Key..., runNow: Bool = false, block: @escaping (Key) -> Void) {
+      addAll(keys, runNow: runNow, block: block)
+    }
+
+    func addAll(_ keys: [Key], runNow: Bool = false, block: @escaping (Key) -> Void) {
+      for key in keys {
+        add(key, runNow: runNow, block: block)
+      }
+    }
+
+    deinit {
+      observedKeys.keys.forEach {
+        UserDefaults.standard.removeObserver(self, forKeyPath: $0.rawValue)
+        print("removed \($0.rawValue)")
+      }
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+      guard let keyPath,
+            let key = Key(rawValue: keyPath),
+            let block = observedKeys[key] else { return }
+      block(key)
+    }
+  }
 }

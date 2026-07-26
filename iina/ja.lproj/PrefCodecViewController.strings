@@ -17,19 +17,19 @@
 "8Fa-ft-1tC.title" = "ギャップレスオーディオ:";
 
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
-"YUr-aJ-xfC.title" = "専用GPUの使用を強制する";
+"YUr-aJ-xfC.title" = "外部GPUの使用を強制";
 
 /* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
-"bxW-np-SGm.title" = "デフォルト: 0 (自動)";
+"bxW-np-SGm.title" = "デフォルト: 0（自動）";
 
 /* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
-"cJP-ep-847.title" = "(100-1000)";
+"cJP-ep-847.title" = "（100-1000）";
 
 /* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
-"g4c-vG-URh.title" = "デフォルトの音量";
+"g4c-vG-URh.title" = "初期音量:";
 
 /* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
-"gCv-sJ-uQJ.title" = "レンダリングに専用GPUを常に使用します(搭載されている場合)。有効化するとパフォーマンスの向上が期待できますが、バッテリー消費が激しくなる可能性があります。";
+"gCv-sJ-uQJ.title" = "レンダリングに外部GPUを常に使用します（搭載されている場合）。パフォーマンスが向上しますが、バッテリー駆動時間が短くなる可能性があります。";
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "ビデオ:";
@@ -41,10 +41,10 @@
 "nwg-2K-G2G.title" = "ハードウェアデコーダ:";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
-"rFu-rL-EJC.title" = "使用しない";
+"rFu-rL-EJC.title" = "無効";
 
 /* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
-"sLR-vV-xn2.title" = "使用するオーディオデバイス:";
+"sLR-vV-xn2.title" = "優先するオーディオデバイス:";
 
 /* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
 "sV5-dL-MUt.title" = "オーディオ:";
@@ -59,40 +59,40 @@
 "up6-6A-4sn.title" = "S/PDIF出力:";
 
 /* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
-"wjt-O6-KbC.title" = "優先言語:";
+"wjt-O6-KbC.title" = "優先する言語:";
 
 /* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
 "3g4-jW-uJd.title" = "ICCプロファイルを読み込む";
 
 /* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
-"M2M-of-gjd.title" = "現在のディスプレイのICCプロファイルをロードし、ビデオRGBをスクリーン出力に変換するために使用します。(SDRモードの場合のみ)";
+"M2M-of-gjd.title" = "現在のディスプレイ用ICCプロファイルを読み込み、ビデオRGBを画面出力に変換するために使用します。（SDRモードに対してだけ）";
 
 /* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
-"R7Z-9c-vPJ.title" = "HDRを有効化";
+"R7Z-9c-vPJ.title" = "HDR対応を有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
-"ZgQ-bc-yEE.title" = "HDRビデオを再生するときは、自動的にHDRモードを有効にする。";
+"ZgQ-bc-yEE.title" = "HDRビデオを再生中は、デフォルトでHDRモードを有効にします。";
 
 /* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
-"a5Y-gU-JTj.title" = "トーンマッピングを有効化";
+"a5Y-gU-JTj.title" = "トーンマッピングを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
 "mNn-cb-IVw.title" = "ディスプレイに画像のトーンマッピングを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
-"xVk-OA-kOf.title" = "ターゲットを選択:";
+"xVk-OA-kOf.title" = "ターゲットピーク値:";
 
 /* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
 "baO-xy-7hD.title" = "ニト";
 
 /* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
-"aTt-aZ-rjK.title" = "測定したディスプレイのピーク明るさを設定してください。設定値が0の場合、IINAがこの値を自動で検出します。検出に失敗した場合、IINAはピーク明るさを400に設定します。";
+"aTt-aZ-rjK.title" = "測定されたディスプレイのピーク輝度。0に設定した場合は、IINAがこの値を検出します。検出できない場合は、ターゲットピーク値を400に設定します。";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
 "qzI-rq-PqO.title" = "アルゴリズム:";
 
 /* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
-"szA-8r-plt.title" = "ディスプレイに画像のトーンマッピングを行うために使用するアルゴリズム";
+"szA-8r-plt.title" = "画像をディスプレイにトーンマッピングするために使用するアルゴリズムです。";
 
 /* Class = "NSTextFieldCell"; title = "ReplayGain:"; ObjectID = "gfq-nW-dDu"; */
 "gfq-nW-dDu.title" = "リプレイゲイン:";
@@ -104,31 +104,31 @@
 "k7b-6o-lCK.title" = "調整なし";
 
 /* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "ti2-JH-nXX"; */
-"ti2-JH-nXX.title" = "使用しない";
+"ti2-JH-nXX.title" = "無効";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "トラックゲイン";
+"w6E-lw-g7g.title" = "トラックのゲイン";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
-"ZJJ-1o-ZGD.title" = "アルバムゲイン";
+"ZJJ-1o-ZGD.title" = "アルバムのゲイン";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
-"y61-Ah-c92.title" = "ボリュームゲインをファイルのメータデータに格納されているリプレイゲインの値に従って調整する。";
+"y61-Ah-c92.title" = "ファイルのメタデータに記録されているリプレイゲインの値に応じて、音量ゲインを調整します。";
 
 /* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
-"9Q0-hw-PdU.title" = "プリアンプゲイン:";
+"9Q0-hw-PdU.title" = "プリアンプのゲイン:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
 "Bew-Pv-igg.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
-"rIW-XP-zGZ.title" = "リプレイゲインに適用する前増幅ゲイン";
+"rIW-XP-zGZ.title" = "リプレイゲインのゲインに適用するプリアンプのゲインです。";
 
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
 "J3e-oT-fy9.title" = "クリップにボリュームゲインを許可";
 
 /* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
-"HQV-tY-NMj.title" = "このオプションがオフのとき、ゲインを下げてクリッピングを防止します。";
+"HQV-tY-NMj.title" = "このオプションが有効でないときは、ゲインを下げてクリッピングを防止します。";
 
 /* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
 "fOz-6g-MhS.title" = "フォールバック:";
@@ -137,10 +137,10 @@
 "ovT-D3-3jS.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
-"m2n-yd-a4n.title" = "ファイルにリプレイゲインタグがない場合に適用するゲイン";
+"m2n-yd-a4n.title" = "ファイルにリプレイゲインタグがない場合に適用するゲインです。";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
 "Zco-Ba-Idk.title" = "オーディオドライバ:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation は、空間オーディオをサポートする新しい実験的なオーディオドライバですが、オーディオの遅延などの問題が発生する可能性があります。";
+"2Md-pv-gSi.title" = "AVFoundationは、空間オーディオに対応した新しい実験的なオーディオドライバです。ただし、AVFoundationを使用中に、オーディオの遅延などの問題が起こる可能性があります。";

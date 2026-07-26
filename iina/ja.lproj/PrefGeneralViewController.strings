@@ -2,7 +2,7 @@
 "1ce-4b-kgG.title" = "ファイル選択パネルを表示";
 
 /* Class = "NSButtonCell"; title = "Keep window open after playback finishes"; ObjectID = "2iM-j7-AzQ"; */
-"2iM-j7-AzQ.title" = "再生終了後もウインドウを開いたままにする";
+"2iM-j7-AzQ.title" = "再生終了後もウインドウを閉じない";
 
 /* Class = "NSButtonCell"; title = "Save to"; ObjectID = "2rJ-mg-OuU"; */
 "2rJ-mg-OuU.title" = "保存先";
@@ -11,16 +11,16 @@
 "3XO-ks-TDg.title" = "PNG";
 
 /* Class = "NSButtonCell"; title = "Copy to clipboard"; ObjectID = "3gs-3w-rg6"; */
-"3gs-3w-rg6.title" = "クリップボードにコピーする";
+"3gs-3w-rg6.title" = "クリップボードにコピー";
 
 /* Class = "NSTextFieldCell"; title = "Options:"; ObjectID = "4Qe-7S-8xK"; */
 "4Qe-7S-8xK.title" = "オプション:";
 
 /* Class = "NSButtonCell"; title = "Enable \"Open Recent\" menu"; ObjectID = "55O-ik-ql6"; */
-"55O-ik-ql6.title" = "「最近使った項目」メニューを有効化";
+"55O-ik-ql6.title" = "\"最近使った項目を開く\" メニューを有効にする";
 
 /* Class = "NSButtonCell"; title = "Minimized/un-minimized"; ObjectID = "5Y9-bX-K0f"; */
-"5Y9-bX-K0f.title" = "最小化/復元時";
+"5Y9-bX-K0f.title" = "最小化/最小化を解除";
 
 /* Class = "NSTextFieldCell"; title = "Playlist:"; ObjectID = "6TV-DG-503"; */
 "6TV-DG-503.title" = "プレイリスト:";
@@ -29,10 +29,10 @@
 "8kU-8g-VgX.title" = "変更を有効にするにはIINAの再起動が必要です。";
 
 /* Class = "NSButtonCell"; title = "Only in \"music mode\""; ObjectID = "AVe-9Z-RgQ"; */
-"AVe-9Z-RgQ.title" = "「ミュージックモード」のみ";
+"AVe-9Z-RgQ.title" = "\"ミュージックモード\" 時のみ";
 
 /* Class = "NSButtonCell"; title = "Track all played files in \"Open Recent\" menu"; ObjectID = "Ci8-j2-QS3"; */
-"Ci8-j2-QS3.title" = "再生したすべてのファイルを「最近使った項目」に表示する";
+"Ci8-j2-QS3.title" = "再生したすべてのファイルを \"最近使った項目を開く\" で追跡";
 
 /* Class = "NSMenuItem"; title = "Daily"; ObjectID = "Ez8-qY-WAZ"; */
 "Ez8-qY-WAZ.title" = "毎日";
@@ -41,55 +41,55 @@
 "FbF-jJ-W5b.title" = "一時停止";
 
 /* Class = "NSTextFieldCell"; title = "When media is opened:"; ObjectID = "GNV-VA-NBW"; */
-"GNV-VA-NBW.title" = "メディアが開かれた時:";
+"GNV-VA-NBW.title" = "メディアが開かれたとき:";
 
 /* Class = "NSMenuItem"; title = "Weekly"; ObjectID = "Imf-6g-2Cd"; */
 "Imf-6g-2Cd.title" = "毎週";
 
 /* Class = "NSButtonCell"; title = "Window becomes inactive/active"; ObjectID = "J8g-aS-W6e"; */
-"J8g-aS-W6e.title" = "ウインドウの非アクティブ/アクティブ時";
+"J8g-aS-W6e.title" = "ウインドウが非アクティブ/アクティブになるとき";
 
 /* Class = "NSMenuItem"; title = "Do nothing"; ObjectID = "JfZ-D8-aF2"; */
 "JfZ-D8-aF2.title" = "何もしない";
 
 /* Class = "NSButtonCell"; title = "Black out other monitors while in full screen"; ObjectID = "KYi-0W-zOr"; */
-"KYi-0W-zOr.title" = "フルスクリーン表示中はほかのディスプレイは表示しない";
+"KYi-0W-zOr.title" = "フルスクリーン時はほかのディスプレイの表示を消す";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "システムのスリープを防止します。";
+"Kdk-iC-e1C.title" = "システムのスリープを防ぎます。";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
-"KfL-r7-Uav.title" = "オーディオファイルの再生時は自動的に「ミュージックモード」に切り替える";
+"KfL-r7-Uav.title" = "オーディオファイルを再生中は自動的に \"ミュージックモード\" に切り替える";
 
 /* Class = "NSButtonCell"; title = "Play next item automatically"; ObjectID = "Lac-Ol-g6E"; */
-"Lac-Ol-g6E.title" = "次の項目を自動再生";
+"Lac-Ol-g6E.title" = "次の項目を自動的に再生";
 
 /* Class = "NSButtonCell"; title = "Allow multiple player windows"; ObjectID = "M0z-bI-88d"; */
-"M0z-bI-88d.title" = "常に新しいウインドウでファイルを開く";
+"M0z-bI-88d.title" = "複数のプレイヤーウインドウを開くことを許可";
 
 /* Class = "NSButtonCell"; title = "Enter fullscreen"; ObjectID = "MlG-hl-goB"; */
 "MlG-hl-goB.title" = "フルスクリーンにする";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpeg)"; ObjectID = "NVh-C5-b9i"; */
-"NVh-C5-b9i.title" = "JPEG (.jpeg)";
+"NVh-C5-b9i.title" = "JPEG（.jpeg）";
 
 /* Class = "NSTextFieldCell"; title = "Destination:"; ObjectID = "PhL-vP-i7L"; */
-"PhL-vP-i7L.title" = "出力先:";
+"PhL-vP-i7L.title" = "保存先:";
 
 /* Class = "NSButtonCell"; title = "Add files in the same folder automatically"; ObjectID = "QJq-fO-hhK"; */
-"QJq-fO-hhK.title" = "自動で同じフォルダにファイルを追加";
+"QJq-fO-hhK.title" = "同じフォルダに自動的にファイルを追加";
 
 /* Class = "NSMenuItem"; title = "Monthly"; ObjectID = "REP-70-XOi"; */
 "REP-70-XOi.title" = "毎月";
 
 /* Class = "NSButtonCell"; title = "Use legacy full screen"; ObjectID = "TvB-UM-FrS"; */
-"TvB-UM-FrS.title" = "従来のフルスクリーン表示を使用";
+"TvB-UM-FrS.title" = "古いフルスクリーン表示を使用";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise only files that opened manually will show up in this menu."; ObjectID = "XFC-Lr-LmP"; */
-"XFC-Lr-LmP.title" = "無効にすると手動で開いたファイルのみがメニューに表示されます";
+"XFC-Lr-LmP.title" = "その他の場合、手動で開いたファイルだけがメニューに表示されます。";
 
 /* Class = "NSButtonCell"; title = "Quit after all windows are closed"; ObjectID = "YLo-6E-tT7"; */
-"YLo-6E-tT7.title" = "ウィンドウを全て閉じた時にアプリを終了する";
+"YLo-6E-tT7.title" = "すべてのウインドウを閉じたらアプリを終了";
 
 /* Class = "NSTextFieldCell"; title = "/path/to/screenshot/folder"; ObjectID = "YeH-hk-7NN"; */
 "YeH-hk-7NN.title" = "/path/to/screenshot/folder";
@@ -104,25 +104,25 @@
 "gqT-CB-Puw.title" = "起動時:";
 
 /* Class = "NSButtonCell"; title = "Check for updates"; ObjectID = "hWC-KJ-FuC"; */
-"hWC-KJ-FuC.title" = "アップデートの確認";
+"hWC-KJ-FuC.title" = "アップデートを確認";
 
 /* Class = "NSButtonCell"; title = "Pause when machine goes to sleep"; ObjectID = "i4A-86-dGC"; */
 "i4A-86-dGC.title" = "スリープ時に一時停止";
 
 /* Class = "NSButtonCell"; title = "Enable playback history"; ObjectID = "iGS-qN-f5q"; */
-"iGS-qN-f5q.title" = "再生履歴を保存";
+"iGS-qN-f5q.title" = "再生履歴の保存を有効にする";
 
 /* Class = "NSButtonCell"; title = "Resume last playback position"; ObjectID = "jOB-D3-WT3"; */
-"jOB-D3-WT3.title" = "最後に再生位置から再開";
+"jOB-D3-WT3.title" = "最後の再生位置から再開";
 
 /* Class = "NSTextFieldCell"; title = "History:"; ObjectID = "jeK-46-2BG"; */
 "jeK-46-2BG.title" = "履歴:";
 
 /* Class = "NSButtonCell"; title = "Show artist and track name for audio files when available"; ObjectID = "kBI-Th-bBV"; */
-"kBI-Th-bBV.title" = "利用可能な場合オーディオファイルのアーティスト名とトラック名を表示";
+"kBI-Th-bBV.title" = "利用可能なときはオーディオファイルのアーティスト名とトラック名を表示";
 
 /* Class = "NSButtonCell"; title = "Play upon entering full screen"; ObjectID = "lOw-pu-Llm"; */
-"lOw-pu-Llm.title" = "フルスクリーン開始時に再生";
+"lOw-pu-Llm.title" = "フルスクリーンにしたとき再生";
 
 /* Class = "NSButtonCell"; title = "Include subtitles"; ObjectID = "lvA-Rc-Sh6"; */
 "lvA-Rc-Sh6.title" = "字幕を含める";
@@ -134,40 +134,40 @@
 "pdx-zt-kf2.title" = "スクリーンショット:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "再生中のスクリーンセーバ起動を停止";
+"r2u-P9-J5p.title" = "再生中はスクリーンセーバを開始しない";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "毎時";
 
 /* Class = "NSMenuItem"; title = "JPEG (.jpg)"; ObjectID = "tmy-ty-8uK"; */
-"tmy-ty-8uK.title" = "JPEG (.jpg)";
+"tmy-ty-8uK.title" = "JPEG（.jpg）";
 
 /* Class = "NSTextFieldCell"; title = "Behavior:"; ObjectID = "uQR-Fx-oEm"; */
 "uQR-Fx-oEm.title" = "動作:";
 
 /* Class = "NSButtonCell"; title = "Show previews after taking screenshots"; ObjectID = "xE7-Uu-19f"; */
-"xE7-Uu-19f.title" = "スクリーンショットの撮影直後にプレビューを表示する";
+"xE7-Uu-19f.title" = "スクリーンショット撮影後にプレビューを表示";
 
 /* Class = "NSTextFieldCell"; title = "Pause/resume when:"; ObjectID = "xr2-rB-O0x"; */
-"xr2-rB-O0x.title" = "次の場合再生を一時停止/再開:";
+"xr2-rB-O0x.title" = "次のとき再生を一時停止/再開:";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "「ミュージックモード」またはオーディオのみの再生中を除く";
+"yla-DT-YTx.title" = "\"ミュージックモード\" またはオーディオのみの再生中を除く";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Welcomeウインドウを表示";
 
 /* Class = "NSButtonCell"; title = "When a file is opened manually:"; ObjectID = "jok-kc-HjX"; */
-"jok-kc-HjX.title" = "ファイルが手動で開かれた時:";
+"jok-kc-HjX.title" = "ファイルを手動で開いたとき:";
 
 /* Class = "NSMenuItem"; title = "Loop playlist"; ObjectID = "5WC-Sp-6mg"; */
-"5WC-Sp-6mg.title" = "プレイリストをループ再生";
+"5WC-Sp-6mg.title" = "プレイリストを繰り返し再生";
 
 /* Class = "NSMenuItem"; title = "Loop single file"; ObjectID = "A1p-L4-jtC"; */
-"A1p-L4-jtC.title" = "1つのファイルをループ";
+"A1p-L4-jtC.title" = "1個のファイルを繰り返し再生";
 
 /* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
-"WZE-pS-9ne.title" = "複数ファイルを同時に開くときにプレイリストのメディアをグループ化";
+"WZE-pS-9ne.title" = "複数ファイルを同時に開くときにプレイリストにメディアをグループ化";
 
 /* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
-"Z7U-cf-ezr.title" = "同じファイルの複数ウインドウ表示を許可";
+"Z7U-cf-ezr.title" = "同じファイルを複数のウインドウに表示することを許可";

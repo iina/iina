@@ -121,6 +121,7 @@ class MPVController: NSObject {
     MPVProperty.trackList: MPV_FORMAT_NONE,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
+    MPVProperty.audioDeviceList: MPV_FORMAT_NONE,
     MPVOption.TrackSelection.vid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.aid: MPV_FORMAT_INT64,
     MPVOption.TrackSelection.sid: MPV_FORMAT_INT64,
@@ -179,7 +180,7 @@ class MPVController: NSObject {
   ///   - playerCore: The player this `MPVController` will be associated with.
   init(playerCore: PlayerCore) {
     self.player = playerCore
-    subsystem = Logger.makeSubsystem("mpv\(player.playerNumber)")
+    subsystem = Logger.makeSubsystem("mpv\(player.playerNumber)", ["building.columns"])
     super.init()
   }
 
@@ -360,15 +361,14 @@ class MPVController: NSObject {
 
     setUserOption(PK.screenshotFormat, type: .other, forName: MPVOption.Screenshot.screenshotFormat,
                   verboseIfDefault: true) { key in
-      let v = Preference.integer(for: key)
-      let format = Preference.ScreenshotFormat(rawValue: v)
+      let format: Preference.ScreenshotFormat = Preference.enum(for: key)
       // Workaround for mpv issue  #15107, HDR screenshots are unimplemented (gpu/gpu-next).
       // If the screenshot format is set to JPEG XL then set the screenshot-sw option to yes. This
       // causes the screenshot to be rendered by software instead of the VO. If a HDR video is being
       // displayed in HDR then the resulting screenshot will be HDR.
       self.chkErr(self.setOptionFlag(MPVOption.Screenshot.screenshotSw, format == .jxl,
                                      verboseIfDefault: true))
-      return format?.string
+      return String(describing: format)
     }
 
     setUserOption(PK.screenshotTemplate, type: .string,
@@ -410,8 +410,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.hardwareDecoder, type: .other, forName: MPVOption.Video.hwdec,
                   verboseIfDefault: true) { key in
-      let value = Preference.integer(for: key)
-      return Preference.HardwareDecoderOption(rawValue: value)?.mpvString ?? "auto"
+      return String(describing: Preference.enum(for: key) as Preference.HardwareDecoderOption)
     }
 
     setUserOption(PK.audioLanguage, type: .string, forName: MPVOption.TrackSelection.alang,
@@ -430,8 +429,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.replayGain, type: .other, forName: MPVOption.Audio.replaygain,
                   verboseIfDefault: true) { key in
-      let value = Preference.integer(for: key)
-      return Preference.ReplayGainOption(rawValue: value)?.mpvString ?? "no"
+      return String(describing: Preference.enum(for: key) as Preference.ReplayGainOption)
     }
     setUserOption(PK.replayGainPreamp, type: .float, forName: MPVOption.Audio.replaygainPreamp,
                   verboseIfDefault: true)
@@ -442,8 +440,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.gaplessAudio, type: .other, forName: MPVOption.Audio.gaplessAudio,
                   verboseIfDefault: true) { key in
-      let value = Preference.integer(for: key)
-      return Preference.GaplessAudioOption(rawValue: value)?.mpvString ?? "weak"
+      return String(describing: Preference.enum(for: key) as Preference.GaplessAudioOption)
     }
 
     // - Sub
@@ -454,7 +451,7 @@ class MPVController: NSObject {
     player.info.subEncoding = Preference.string(for: .defaultEncoding)
 
     let subOverrideHandler: OptionObserverInfo.Transformer = { key in
-      (Preference.enum(for: key) as Preference.SubOverrideLevel).string
+      String(describing: Preference.enum(for: key) as Preference.SubOverrideLevel)
     }
     setUserOption(PK.subOverrideLevel, type: .other, forName: MPVOption.Subtitles.subAssOverride,
                   verboseIfDefault: true, transformer: subOverrideHandler)
@@ -494,14 +491,12 @@ class MPVController: NSObject {
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX,
                   verboseIfDefault: true) { key in
-      let v = Preference.integer(for: key)
-      return Preference.SubAlign(rawValue: v)?.stringForX
+      return String(describing: Preference.enum(for: key) as Preference.SubAlignX)
     }
 
     setUserOption(PK.subAlignY, type: .other, forName: MPVOption.Subtitles.subAlignY,
                   verboseIfDefault: true) { key in
-      let v = Preference.integer(for: key)
-      return Preference.SubAlign(rawValue: v)?.stringForY
+      return String(describing: Preference.enum(for: key) as Preference.SubAlignY)
     }
 
     setUserOption(PK.subMarginX, type: .int, forName: MPVOption.Subtitles.subMarginX,
@@ -542,8 +537,8 @@ class MPVController: NSObject {
 
     setUserOption(PK.transportRTSPThrough, type: .other, forName: MPVOption.Network.rtspTransport,
                   verboseIfDefault: true) { key in
-      let v: Preference.RTSPTransportation = Preference.enum(for: .transportRTSPThrough)
-      return v.string
+      return String(describing: Preference.enum(for: .transportRTSPThrough) as
+                    Preference.RTSPTransportation)
     }
 
     setUserOption(PK.ytdlEnabled, type: .other, forName: MPVOption.ProgramBehavior.ytdl,
@@ -1042,6 +1037,18 @@ class MPVController: NSObject {
     MPVNode.free(node)
   }
 
+  /// Returns the given node map value as an `Int`.
+  ///
+  /// This method is intended to be used when extracting values from a `MPV_FORMAT_NODE_MAP` `mpv_node` that contains
+  /// mixed types.
+  /// - Note: Zero is returned for `nil` values to match the behavior of `getInt`.
+  /// - Parameter value:Value from a mpv node map.
+  /// - Returns: The given value converted to an `Int`.
+  static func nodeValueAsInt(_ value: Any?) -> Int {
+    guard let asInt64 = value as? Int64 else { return 0 }
+    return Int(asInt64)
+  }
+
   // MARK: - Hooks
 
   func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {
@@ -1148,10 +1155,10 @@ class MPVController: NSObject {
           recordedSeekStartTime = CACurrentMediaTime()
         }
         player.syncUI(.time)
-        let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
-        (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+        let current = player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder
+        let total = player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder
         let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
-        player.sendOSD(.seek(osdText, percentage))
+        player.sendOSD(.seek(current, total, percentage))
       }
 
     case MPV_EVENT_PLAYBACK_RESTART:
@@ -1204,7 +1211,7 @@ class MPVController: NSObject {
           DispatchQueue.main.async {
             Utility.showAlert("screenshot.error_taking")
           }
-          return
+          break
         }
         DispatchQueue.main.async { self.player.screenshotCallback() }
       }
@@ -1241,8 +1248,11 @@ class MPVController: NSObject {
 
     switch name {
 
+    case MPVProperty.audioDeviceList:
+      DispatchQueue.main.async { self.player.audioDeviceListChanged() }
+
     case MPVProperty.videoParams:
-      DispatchQueue.main.async { self.player.needReloadQuickSettingsView() }
+      DispatchQueue.main.async { self.player.postNotification(.iinaVideoParamsChanged) }
 
     case MPVProperty.videoParamsRotate:
       guard let rotation = UnsafePointer<Int>(OpaquePointer(property.data))?.pointee else {
@@ -1297,7 +1307,7 @@ class MPVController: NSObject {
         default:
           player.sendOSD(.noLoop)
         }
-        player.syncUI(.loop)
+        player.postNotification(.iinaLoopStatusChanged)
       }
 
     case MPVOption.Video.deinterlace:
@@ -1311,7 +1321,7 @@ class MPVController: NSObject {
           player.info.deinterlace = data
           player.sendOSD(.deinterlace(data))
         }
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaDeinterlaceChanged)
       }
 
     case MPVOption.Video.hwdec:
@@ -1321,7 +1331,7 @@ class MPVController: NSObject {
           player.info.hwdec = data
           player.sendOSD(.hwdec(player.info.hwdecEnabled))
         }
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaHwdecChanged)
       }
 
     case MPVOption.Video.videoRotate:
@@ -1338,8 +1348,8 @@ class MPVController: NSObject {
         break
       }
       DispatchQueue.main.async { [self] in
-        player.syncUI(.volume)
         player.info.isMuted = data
+        player.syncUI(.volume)
         player.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
       }
 
@@ -1362,7 +1372,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.audioDelay = data
         player.sendOSD(.audioDelay(data))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaAudioDelayChanged)
       }
 
     case MPVOption.Subtitles.subVisibility:
@@ -1397,12 +1407,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      let displayValue = data >= 1 ? data : -1/data
-      let truncated = round(displayValue * 100) / 100
-      DispatchQueue.main.async { [self] in
-        player.sendOSD(.subScale(truncated))
-        player.needReloadQuickSettingsView()
-      }
+      DispatchQueue.main.async { self.player.subScaleChanged(data) }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough
@@ -1411,11 +1416,11 @@ class MPVController: NSObject {
         logPropertyValueError(name, property.format)
         break
       }
-      guard name == MPVOption.Subtitles.subPos else {
+      if name == MPVOption.Subtitles.subPos {
+        DispatchQueue.main.async { self.player.subPosChanged(data) }
+      } else {
         DispatchQueue.main.async { self.player.secondarySubPosChanged(data) }
-        break
       }
-      DispatchQueue.main.async { self.player.subPosChanged(data) }
 
     case MPVOption.Equalizer.contrast:
       guard let data = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee else {
@@ -1426,7 +1431,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.contrast = intData
         player.sendOSD(.contrast(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.hue:
@@ -1438,7 +1443,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.hue = intData
         player.sendOSD(.hue(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.brightness:
@@ -1450,7 +1455,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.brightness = intData
         player.sendOSD(.brightness(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.gamma:
@@ -1462,7 +1467,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.gamma = intData
         player.sendOSD(.gamma(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     case MPVOption.Equalizer.saturation:
@@ -1474,7 +1479,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { [self] in
         player.info.saturation = intData
         player.sendOSD(.saturation(intData))
-        player.needReloadQuickSettingsView()
+        player.postNotification(.iinaVideoEqualizerChanged)
       }
 
     // following properties may change before file loaded
@@ -1488,7 +1493,6 @@ class MPVController: NSObject {
     case MPVProperty.vf:
       DispatchQueue.main.async { [self] in
         player.vfChanged()
-        player.needReloadQuickSettingsView()
       }
 
     case MPVProperty.af:
@@ -1548,7 +1552,6 @@ class MPVController: NSObject {
   }
 
   // MARK: - User Options
-
 
   private enum UserOptionType {
     case bool, int, float, string, color, other

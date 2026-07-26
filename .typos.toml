@@ -3,6 +3,7 @@ extend-exclude = [
     ".git/",
     "deps/",
     "iina.xcodeproj/",
+    "iina/Assets.xcassets/Symbols/**/*.svg",
     "**/*.strings",
 ]
 ignore-hidden = false
@@ -21,6 +22,7 @@ extend-ignore-re = [
 [default.extend-words]
 "abitrate" = "abitrate"
 "splitted" = "splitted"
+"writeable" = "writeable"
 
 [default.extend-identifiers]
 "caf" = "caf"

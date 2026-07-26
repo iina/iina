@@ -13,9 +13,12 @@
 "general.logout" = "Odjavi me";
 "general.ok" = "U redu";
 "general.cancel" = "Otkaži";
+"general.done" = "Gotovo";
 "general.username" = "Korisničko Ime";
 "general.password" = "Lozinka";
 "general.na" = "N/A";
+"general.no_result" = "Nema rezultata";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Value already exists.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Otkazano";
 "osd.cannot_connect" = "Cannot connect";
 "osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Dodati filter: %@";
 "osd.filter_removed" = "Uklonjeni filter";
 "osd.file_loop" = "Loop Single File";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Željene postavke";
 "preference.general" = "Opšte postavke";
-"preference.ui" = "Interfejs";
-"preference.video_audio" = "Video/Audio";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Zvuk";
 "preference.subtitle" = "Titl";
 "preference.network" = "Mreža";
 "preference.control" = "Kontrole";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Unеsitе nisku filtera u formatu naredbi vf ili af programa mpv.";
 
 "alert.keybinding_config.error" = "Greška prilikom raščlanjivanja konfiguracione datoteke prečica na tastaturi „%@“! Vraćanje na podrazumevane IINA postavke prečica na tastaturi. Proverite konfiguraciju.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Nije moguće pročitati korisnički definisane dodatne opcije za mpv.";
 "alert.extra_option.empty" = "Ključ ili vrednost ne mogu biti prazni!";
-"alert.extra_option.error" = "Greška pri postavljanju opcije --%@=%@ sa vraćenom vrednošću %d. Proverite postavke dodatnih opcija u u okviru Željenih postavki – Napredne postavke.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Greška pri postavljanju konfiguracionog direktorijuma „%@“.";
 
 "alert.playlist.error_deleting" = "Greška pri brisanju: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Izbriši istoriju reprodukcije";
 "alert.delete_history.message" = "Želite li zaista da izbrišete izabrane stavke?";
+"alert.delete_all_history.title" = "Obriši istoriju reprodukcije";
+"alert.delete_all_history.message" = "Želite li zaista da obrišete celokupnu istoriju reprodukcije?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Upravo ćete primeniti video filter. Međutim, moguće je da vaš trenutni hardverski dekoder ne podržava video filtere u potpunosti. Možete da onemogućite hardversko dekodiranje ili da koristite opciju Pređi na automatski režim (kopiraj), što će zauzeti dvostruko više memorije.\nMožda ćete morati da ponovite prethodnu operaciju (poput postavki isecanja) da biste uspeli.";
 "alert.filter_hwdec.abort" = "Odustani";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Vrati prigušena upozorenja";
 "alert.restore_alerts.message" = "Želite li zaista da vratite prigušena upozorenja?";
+
+"alert.cleared" = "Obrisano.";
+"alert.restored" = "Restored.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Nema ničega za otvaranje.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "Najnovija verzija je %@. Vi imate verziju %@. Da li želite da obavite ažuriranje?";
 "alert.plugin_permission" = "Ova dodatna komponenta iziskuje sledeće dozvole. Pregledajte ih pre nego što nastavite.";
 "alert.plugin_permission_added" = "Ovo ažuriranje iziskuje sledeće dozvole. Pregledajte ih pre nego što nastavite.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "Ukupno %@";
 "playlist.total_length_with_selected" = "%@ od %@ izabranih";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Otvori u pregledaču";
 "pl_menu.copy_url" = "Kopiraj URL adresu";
 "pl_menu.copy_url_multi" = "Kopiraj URL adrese";
+"pl_menu.playback" = "Reprodukcija";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plugin";
+"pl_menu.playlist" = "Plejlista";
 
 "keymapping.title" = "Mapiranje tastera";
 "keymapping.message" = "Pritisnite bilo koji taster da biste snimili.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Odaberi zapis titla";
 "osc_toolbar.screenshot" = "Take a screenshot";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Plutajući";
+"osc_pos.top" = "Vrh";
+"osc_pos.bottom" = "Dno";
 
 "mini_player.album_art" = "Uključi/isključi omot albuma";
 "mini_player.loop" = "Ponovi";
@@ -465,3 +497,397 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Proveri da li postoje ažuriranja";
 "plugin.updating" = "Downloading update…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log Viewer";
+"logwindow.time" = "Time";
+"logwindow.subsystem" = "Subsystem";
+"logwindow.message" = "Message";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Sačuvaj";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Kopiraj";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Istorija reprodukcije";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Tok";
+"history_window.col.played_at" = "Vreme reprodukcije";
+"history_window.menu.play" = "Rеprodukuj";
+"history_window.menu.play_new_window" = "Reprodukuj u novom prozoru";
+"history_window.menu.show_in_finder" = "Prikaži u Finderu";
+"history_window.menu.delete" = "Izbriši…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Obriši istoriju reprodukcije";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Datum";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Pretraži u";
+"history_window.search.filename" = "Naziv datoteke";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Nеma nеdavnih prеtraga";
+"history_window.search.recents_title" = "Nеdavnе prеtragе";
+"history_window.search.clear_recents" = "Obriši nedavne stavke";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Zvuk";
+"sidebar.sub" = "Titlovi";
+"sidebar.plugins" = "Dodatne komponente";
+"sidebar.playlist" = "Plejlista";
+"sidebar.chapters" = "Poglavlja";
+
+"sidebar.aspect_ratio" = "Odnos širina/visina";
+"sidebar.crop" = "Iseci";
+"sidebar.rotation" = "Rotacija";
+"sidebar.speed" = "Brzina";
+
+"sidebar.brightness" = "Svetlina";
+"sidebar.contrast" = "Kontrast";
+"sidebar.saturation" = "Zasićenje";
+"sidebar.gamma" = "Gama";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Učitaj spoljni zvučni zapis…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Save the current EQ as a preset…";
+"sidebar.rename_eq" = "Rename the current EQ preset…";
+"sidebar.remove_eq" = "Remove the current EQ preset";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Učitaj titl…";
+"sidebar.search_online" = "Potraži na mreži…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Font";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Okvir";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Opcije stila titlova mogu narušiti ispravan prikaz ASS titlova, a neke od njih će biti onemogućene u zavisnosti od tipa titla.";
+
+"sidebar.add_file" = "Dodaj datoteku…";
+"sidebar.add_url" = "Dodaj URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "Prikaži pozdravni prozor";
+"settings.actionAfterLaunch.items.1" = "Prikaži tablu Otvori datoteku";
+"settings.actionAfterLaunch.items.2" = "Ne radi ništa";
+"settings.actionAfterLaunch.label" = "Pri pokretanju";
+"settings.alwaysOpenInNewWindow.label" = "Uvek otvori medijsku datoteku u novom prozoru";
+"settings.autoRepeat.label" = "When a file is opened manually";
+"settings.autoSwitchToMusicMode.label" = "Automatski pređi na „muzički režim“ prilikom reprodukcije zvučne datoteke";
+"settings.blackOutMonitor.label" = "Zatamni druge monitore u režimu celog ekrana";
+"settings.fullScreenWhenOpen.label" = "Uđi u režim celog ekrana";
+"settings.keepOpenOnFileEnd.label" = "Neka prozor ostane otvoren nakon završetka reprodukcije";
+"settings.pauseWhenGoesToSleep.label" = "Pauziraj kada računar ode u stanje spavanja";
+"settings.pauseWhenInactive.label" = "Prozor postane aktivan/neaktivan";
+"settings.pauseWhenLeavingFullScreen.label" = "Pauziraj po izlasku iz režima celog ekrana";
+"settings.pauseWhenMinimized.label" = "Prozor pošalje u Dock/vrati iz Docka";
+"settings.pauseWhenOpen.label" = "Pauziraj";
+"settings.pauseresumeWhen" = "Pauziraj/nastavi kada";
+"settings.playWhenEnteringFullScreen.label" = "Reprodukuj po ulasku u režim celog ekrana";
+"settings.playlistAutoAdd.desc" = "IINA se mora ponovo pokrenuti da bi postavka bila prihvaćena.";
+"settings.playlistAutoAdd.label" = "Dodaj datoteke u istu fasciklu automatski";
+"settings.playlistAutoPlayNext.label" = "Reprodukuj sledeću stavku automatski";
+"settings.playlistShowMetadata.label" = "Prikaži ime izvođača i numere za audio datoteke kada su dostupni";
+"settings.playlistShowMetadataInMusicMode.label" = "Samo u „muzičkom režimu“";
+"settings.quitWhenNoOpenedWindow.label" = "Napusti nakon što se svi prozori zatvore";
+"settings.receiveBetaUpdate.label" = "Dobijaj beta-verzije";
+"settings.recordPlaybackHistory.label" = "Omogući istoriju reprodukcije";
+"settings.recordRecentFiles.label" = "Omogući meni „Otvori nedavnu stavku“";
+"settings.resumeLastPosition.label" = "Nastavi od poslednjeg položaja reprodukcije";
+"settings.screenShotIncludeSubtitle.label" = "Prikaži titlove";
+"settings.screenshotCopyToClipboard.desc" = "Odredište";
+"settings.screenshotCopyToClipboard.label" = "Kopiraj u ostavu";
+"settings.screenshotSaveToFile.desc" = "/putanja/do/fascikle/sa snimcima ekrana";
+"settings.screenshotSaveToFile.label" = "Sačuvaj u";
+"settings.screenshotShowPreview.label" = "Prikaži pregled nakon što se napravi snimak ekrana";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "U suprotnom će se u ovom meniju prikazati samo datoteke koje su otvorene ručno.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Prati sve reprodukovane datoteke u meniju „Otvori nedavnu stavku“";
+"settings.useLegacyFullScreen.label" = "Koristi zastareli režim celog ekrana";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "Podrazumevano omogući HDR režim tokom reprodukcije HDR video-zapisa.";
+"settings.forceDedicatedGPU.desc" = "Uvek koristi namensku grafičku karticu za prikaz (ako postoji). Ova opcija može poboljšati performanse, ali i umanjiti trajanje baterije.";
+"settings.forceDedicatedGPU.label" = "Nametni namensku grafičku karticu";
+"settings.hardwareDecoder.items.0" = "Onemogućeno";
+"settings.hardwareDecoder.items.1" = "Automatski";
+"settings.hardwareDecoder.items.2" = "Automatski (kopiraj)";
+"settings.hardwareDecoder.label" = "Hardverski dekoder";
+"settings.loadIccProfile.desc" = "Učitaj ICC profil za trenutni ekran i pomoću njega transformiši video RGB u prikaz ekrana (samo za SDR režim)";
+"settings.loadIccProfile.label" = "Učitaj ICC profil";
+"settings.toneMappingAlgorithm.items.0" = "Automatski";
+"settings.videoThreads.desc" = "Podrazumevano: 0 (auto)";
+"settings.videoThreads.label" = "Broj niti";
+
+// Settings - Audio
+"settings.enableInitialVolume.label" = "Početna jačina zvuka";
+"settings.gaplessAudio.items.0" = "Onemogućeno";
+"settings.maxVolume.label" = "Maksimalna jačina zvuka";
+"settings.preferredAudioDevice.label" = "Željeni audio-uređaj";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "Nema";
+"settings.doubleClickAction.items.1" = "Uključi/isključi rеžim cеlog еkrana";
+"settings.doubleClickAction.items.2" = "Pauziraj/nastavi";
+"settings.doubleClickAction.items.4" = "Uključi/isključi sliku u slici";
+"settings.doubleClickAction.items.5" = "A-B petlja";
+"settings.doubleClickAction.label" = "Dvostruki klik";
+"settings.forceTouchAction.items.0" = "Nema";
+"settings.forceTouchAction.items.1" = "Uključi/isključi rеžim cеlog еkrana";
+"settings.forceTouchAction.items.2" = "Pauziraj/nastavi";
+"settings.forceTouchAction.items.3" = "Sakrij kontrole na ekranu";
+"settings.forceTouchAction.label" = "Force Touch";
+"settings.horizontalScrollAction.items.0" = "Podesi jačinu zvuka";
+"settings.horizontalScrollAction.items.1" = "Pomeri";
+"settings.horizontalScrollAction.items.2" = "Nema";
+"settings.horizontalScrollAction.label" = "Horizontalno pomeranje";
+"settings.middleClickAction.items.0" = "Nema";
+"settings.middleClickAction.items.1" = "Uključi/isključi rеžim cеlog еkrana";
+"settings.middleClickAction.items.2" = "Pauziraj/nastavi";
+"settings.middleClickAction.items.3" = "Sakrij kontrole na ekranu";
+"settings.middleClickAction.items.4" = "Uključi/isključi sliku u slici";
+"settings.middleClickAction.items.5" = "A-B petlja";
+"settings.middleClickAction.label" = "Klik srednjim tasterom miša";
+"settings.pinchAction.items.0" = "Prilagodi veličinu prozora";
+"settings.pinchAction.items.1" = "Ceo ekran";
+"settings.pinchAction.items.2" = "Nema";
+"settings.pinchAction.label" = "Pokret prstima";
+"settings.relativeSeekAmount.label" = "Osetljivost normalnog pomeranja";
+"settings.rightClickAction.desc" = "Klik srednjim tasterom miša";
+"settings.rightClickAction.items.0" = "Nema";
+"settings.rightClickAction.items.2" = "Pauziraj/nastavi";
+"settings.rightClickAction.items.3" = "Sakrij kontrole na ekranu";
+"settings.rightClickAction.items.4" = "Uključi/isključi sliku u slici";
+"settings.rightClickAction.items.5" = "A-B petlja";
+"settings.rightClickAction.label" = "Klik desnim tasterom miša";
+"settings.singleClickAction.items.0" = "Nema";
+"settings.singleClickAction.items.2" = "Pauziraj/nastavi";
+"settings.singleClickAction.items.3" = "Sakrij kontrole na ekranu";
+"settings.singleClickAction.label" = "Jedan klik";
+"settings.useExactSeek.desc" = "Tačno pomeranje je preciznije, ali može dovesti do kašnjenja i većeg zauzeća procesora.";
+"settings.useExactSeek.items.0" = "Pomeri ključni kadar";
+"settings.useExactSeek.items.1" = "Tačno pomeranje";
+"settings.useExactSeek.items.2" = "Automatski";
+"settings.useExactSeek.label" = "Tip pomeranja";
+"settings.verticalScrollAction.items.0" = "Podesi jačinu zvuka";
+"settings.verticalScrollAction.items.1" = "Pomeri";
+"settings.verticalScrollAction.items.2" = "Nema";
+"settings.verticalScrollAction.label" = "Vertikalno pomeranje";
+"settings.videoViewAcceptsFirstMouse.label" = "Prihvata prvi klik mišem kada nije u fokusu";
+"settings.volumeScrollAmount.label" = "Osetljivost zvuka";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Prikaži neobrađene vrednosti";
+"settings.useMediaKeys.label" = "Koristi sistemske kontrole medija";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "Podrazumevano: 153600";
+"settings.cacheBufferSize.label" = "Veličina bafera keširanja (KB)";
+"settings.enableCache.label" = "Omogući keš";
+"settings.httpProxy.desc" = "IINA se mora ponovo pokrenuti da bi postavka bila prihvaćena.";
+"settings.secPrefech.desc" = "Podrazumevano: 36000";
+"settings.secPrefech.label" = "Sekundi do predučitavanja";
+"settings.showSeekingThrobber.label" = "Pokaži ikonicu za učitavanje pri premotavanju";
+"settings.transportRTSPThrough.items.0" = "Automatski";
+"settings.transportRTSPThrough.label" = "Prenesi RTSP strim kroz";
+"settings.userAgent.label" = "Korisnički agent";
+"settings.ytdlEnabled.label" = "Omogući youtube-dl";
+"settings.ytdlRawOptions.desc" = "Format: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "Dodatne opcije";
+"settings.ytdlSearchPath.desc" = "IINA će potražiti youtube-dl u ovoj fascikli. Potrebno je ponovno pokretanje.";
+"settings.ytdlSearchPath.label" = "Prilagođena putanja do programa youtube-dl";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Potraži titlove na mreži automatski";
+"settings.displayInLetterBox.label" = "Prikaži titlove na crnoj traci u režimu celog ekrana";
+"settings.subAlignX.items.0" = "Levo";
+"settings.subAlignX.items.1" = "Centar";
+"settings.subAlignX.items.2" = "Desno";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "Vrh";
+"settings.subAlignY.items.1" = "Centar";
+"settings.subAlignY.items.2" = "Dno";
+"settings.subAutoLoadIINA.items.0" = "Onemogućeno";
+"settings.subAutoLoadIINA.items.1" = "Titlovi sadrže naziv medijske datoteke";
+"settings.subAutoLoadIINA.items.2" = "Inteligentno otkriva IINA";
+"settings.subAutoLoadIINA.label" = "Automatski učitaj";
+"settings.subAutoLoadPriorityString.desc" = "Unesite listu nizova razdvojenih zarezom.";
+"settings.subAutoLoadPriorityString.label" = "Titlovi imaju prioritet kada naziv datoteke sadrži";
+"settings.subAutoLoadSearchPath.desc" = "Direktorijumi su odvojeni dvotačkom (:). Relativne putanje i džokeri (*) na kraju mogu se koristiti.";
+"settings.subAutoLoadSearchPath.label" = "Titlove potraži i u sledećim direktorijumima";
+"settings.subBlur.label" = "Zamućenje";
+"settings.subBold.label" = "Podebljano";
+"settings.subItalic.label" = "Kurziv";
+"settings.subLang.desc" = "Ova opcija će biti sačuvana kao šifra jezika ISO 639-2 i funkcionisaće i za mpv i za opensubtitles.";
+"settings.subPos.label" = "Vertikalni položaj";
+"settings.subScaleWithWindow.label" = "Podesi titlove prema veličini prozora";
+"settings.subSpacing.label" = "Razmaci u fontu";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "Uvek zadrži u prvom planu tokom reprodukcije";
+"settings.arrowBtnAction.items.0" = "Brzina";
+"settings.arrowBtnAction.items.1" = "Prethodna/sledeća datoteka";
+"settings.arrowBtnAction.items.2" = "Premotaj unapred/unazad";
+"settings.arrowBtnAction.label" = "Koristi levo/desno dugme za";
+"settings.controlBarStickToCenter.label" = "Prikači za centar prilikom prevlačenja";
+"settings.disableAnimations.desc" = "Ako uključite Reduce Motion na macOS-u, IINA će smanjiti animacije koje mogu smetati osobama osetljivim na pokrete. Ako ni to nije dovoljno, ovom opcijom možete potpuno ugasiti animacije.";
+"settings.disableOSDPauseResumeMsgs.label" = "Pauziraj/nastavi";
+"settings.disableOSDSeekMsg.label" = "Pomeri";
+"settings.disableOSDSpeedMsg.label" = "Brzina";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Prikaži vreme i informacije o bateriji u režimu celog ekrana";
+"settings.enableOSD.label" = "Omogući ekranski meni";
+"settings.enableThumbnailPreview.label" = "Omogući prikaz sličica";
+"settings.maxThumbnailPreviewCacheSize.label" = "Maksimalna veličina keša";
+"settings.oscPosition.items.0" = "Plutajući";
+"settings.oscPosition.items.1" = "Vrh";
+"settings.oscPosition.items.2" = "Dno";
+"settings.oscPosition.label" = "Ekranski kontroler";
+"settings.osdTextSize.label" = "Veličina teksta";
+"settings.pauseWhenPip.label" = "Automatski pauziraj reprodukciju";
+"settings.resizeWindowOption.items.0" = "uklopi u ekran";
+"settings.resizeWindowOption.items.1" = "Veličina video-zapisa 0,5x";
+"settings.resizeWindowOption.items.2" = "Veličina video-zapisa 1x";
+"settings.resizeWindowOption.items.3" = "Veličina video-zapisa 1,5x";
+"settings.resizeWindowOption.items.4" = "Veličina video-zapisa 1x";
+"settings.resizeWindowOption.label" = "Promeni veličinu prozora na";
+"settings.showChapterPos.label" = "Prikaži položaj poglavlja na traci toka";
+"settings.showRemainingTime.label" = "Prikaži preostalo vreme umesto ukupnog trajanja";
+"settings.themeMaterial.desc" = "Tema";
+"settings.themeMaterial.items.0" = "Tamna";
+"settings.themeMaterial.items.2" = "Svetla";
+"settings.themeMaterial.items.4" = "Koristi izgled sistema";
+"settings.themeMaterial.label" = "Izgled";
+"settings.togglePipByMinimizingWindow.label" = "Uključi/isključi sliku u slici umanjivanjem/vraćanjem prozora";
+"settings.usePhysicalResolution.label" = "Koristi fizičku rezoluciju na Retina ekranima";
+"settings.windowBehaviorWhenPip.items.0" = "Ne radi ništa";
+"settings.windowBehaviorWhenPip.items.1" = "Sakrij";
+"settings.windowBehaviorWhenPip.items.2" = "Umanji";
+"settings.windowBehaviorWhenPip.label" = "Prozor";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "IINA mora biti ponovo pokrenuta da bi ove postavke bile prihvaćene.";
+"settings.enableAdvancedSettings.label" = "Omogući napredne postavke";
+"settings.enableLogging.label" = "Omogući vođenje evidencije";
+"settings.logLevel.items.2" = "Upozorenje";
+"settings.logLevel.items.3" = "Grеška";
+"settings.useMpvOsd.label" = "Koristi prikaz na ekranu programa mpv";
+"settings.useUserDefinedConfDir.label" = "Koristi konfiguracioni direktorijum";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS titlovi";
+"settings.$About" = "O programu";
+"settings.$Accessibility" = "Pristupačnost";
+"settings.$AdditionalMpvOptions" = "Dodatne opcije programa mpv";
+"settings.$Advanced" = "Napredno";
+"settings.$Align" = "Poravnaj";
+"settings.$AlwaysWhenPlaying" = "Uvek";
+"settings.$Appearance" = "Izgled";
+"settings.$AssrtAPIToken" = "Potvrdi token API-ja";
+"settings.$Audio" = "Zvuk";
+"settings.$AutoLoad" = "Automatski učitaj";
+"settings.$Background" = "Pozadina";
+"settings.$Behavior" = "Ponašanjе";
+"settings.$Border" = "Okvir";
+"settings.$Cache" = "Keš";
+"settings.$Cancel" = "Otkaži";
+"settings.$CheckForUpdates" = "Proveri da li postoje ažuriranja";
+"settings.$ClearCache" = "Obriši keš";
+"settings.$ClearPlaybackHistory" = "Obriši istoriju reprodukcije…";
+"settings.$ClearSavedPlaybackProgress" = "Obriši sačuvani tok reprodukcije…";
+"settings.$ClearThumbnailCache" = "Obriši keš za sličice…";
+"settings.$Color" = "Boja";
+"settings.$Customize" = "Prilagodi…";
+"settings.$DefaultApplication" = "Podrazumevana aplikacija";
+"settings.$DefaultEncoding" = "Podrazumеvano kodiranje";
+"settings.$DeleteAllPlaybackHistories" = "Dugme ispod izbrisaće celokupnu istoriju reprodukcije i stavke u meniju „Otvori nedavnu stavku“.";
+"settings.$DeleteAllWatchLater" = "Dugme ispod izbrisaće sve datoteke u fascikli „Gledaj kasnije“. Te datoteke sadrže celokupan sačuvani tok reprodukcije i postavke primenjene tokom reprodukcije.";
+"settings.$DoNotResize" = "Onemogućeno";
+"settings.$GetBrowserExtensionsForIINA" = "Nabavi proširenja pregledača za aplikaciju IINA";
+"settings.$Height" = "Visina";
+"settings.$Help" = "Pomoć";
+"settings.$History" = "Istorija";
+"settings.$ImportAnExistingConfigFile" = "Uvezi postojeću konfiguracionu datoteku";
+"settings.$InitialWindowPosition" = "Početni položaj prozora";
+"settings.$InitialWindowSize" = "Početna veličina prozora";
+"settings.$InstallLocalPackage" = "Install Package…";
+"settings.$Layout" = "Raspored";
+"settings.$Login" = "Prijavi me";
+"settings.$MB" = "MB";
+"settings.$Margin" = "Margina";
+"settings.$Mouse" = "Miš";
+"settings.$Network" = "Mreža";
+"settings.$NotLoggedIn" = "Niste prijavljeni";
+"settings.$OK" = "U redu";
+"settings.$Offset" = "Odstupanje";
+"settings.$OnScreenController" = "Ekranski kontroler";
+"settings.$OnScreenDisplay" = "Ekranski meni";
+"settings.$OnlineSubtitles" = "Titlovi na mreži";
+"settings.$OpenLinksOrCurrentWebpage" = "Otvarajte veze ili trenutnu veb-stranicu u programu IINA jednim klikom. Veb-sajt mora podržavati program youtube-dl.";
+"settings.$OtherStyles" = "Drugi stilovi";
+"settings.$OverrideLevel" = "Nivo zamene";
+"settings.$PictureinnPicture" = "Slika u slici";
+"settings.$Playlist" = "Plejlista";
+"settings.$PleaseSelectTheMediaTypes" = "Izaberite tipove medijski datoteka za koje želite da IINA bude podrazumevana aplikacija.";
+"settings.$Position" = "Položaj";
+"settings.$PreferredLanguage" = "Željeni jezik";
+"settings.$RestoreAllAlertsThat" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts…";
+"settings.$SPDIFOutput" = "S/PDIF izlaz";
+"settings.$Screenshots" = "Snimci ekrana";
+"settings.$SetIINAAsTheDefault" = "Postavi aplikaciju IINA kao podrazumevanu…";
+"settings.$Settings" = "Postavke";
+"settings.$Shadow" = "Senka";
+"settings.$ShowInFinder" = "Prikaži u Finderu";
+"settings.$ShowTheConfigFileIn" = "Prikaži konfiguracionu datoteku u Finderu";
+"settings.$Size" = "Veličina";
+"settings.$TextSubtitles" = "Tekstualni titlovi";
+"settings.$ThumbnailPreview" = "Prikaz sličica";
+"settings.$Toolbar" = "Traka sa alatkama";
+"settings.$Website" = "Veb-sajt";
+"settings.$WhenEnteringPIP" = "Prilikom ulaska u režim slike u slici";
+"settings.$WhenMediaIsOpened" = "Kada se medijska datoteka otvori";
+"settings.$WhenMediaIsOpenedManually" = "Kada se medijska datoteka otvori ručno";
+"settings.$Width" = "Širina";
+"settings.$Window" = "Prozor";
+"settings.$X" = " X";
+"settings.$XOffset" = "Odstupanje po X-osi";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Odstupanje po Y-osi";
+"settings.$bottom" = "dno";
+"settings.$dB" = "dB";
+"settings.$left" = "levo";
+"settings.$ofScreen" = "% ekrana";
+"settings.$point" = "tačka";
+"settings.$pt" = "tač.";
+"settings.$right" = "desno";
+"settings.$s" = "s";
+"settings.$sideOfTheScreen" = "strana ekrana";
+"settings.$toThe" = "na";
+"settings.$top" = "vrh";

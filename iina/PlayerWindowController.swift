@@ -29,7 +29,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   init(playerCore: PlayerCore) {
     self.player = playerCore
-    subsystem = Logger.makeSubsystem("window\(player.playerNumber)")
+    subsystem = Logger.makeSubsystem("window\(player.playerNumber)", ["macwindow"])
     super.init(window: nil)
   }
 
@@ -123,10 +123,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     case PK.doubleClickAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         doubleClickAction = Preference.MouseClickAction(rawValue: newValue)!
-      }
-    case PK.playlistShowMetadata.rawValue, PK.playlistShowMetadataInMusicMode.rawValue:
-      if player.isPlaylistVisible {
-        player.mainWindow.playlistView.playlistTableView.reloadData()
       }
     case PK.autoSwitchToMusicMode.rawValue:
       player.overrideAutoSwitchToMusicMode = false
@@ -242,6 +238,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     guard let window = window, let theme = theme else { return }
 
     window.appearance = NSAppearance(iinaTheme: theme)
+    window.backgroundColor = window.effectiveAppearance.isDark ? .black : .white
   }
 
   // MARK: - Mouse / Trackpad events
@@ -367,8 +364,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func mouseUp(with event: NSEvent) {
-    guard !self.isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
-    
+    guard !event.inAnyOf(mouseActionDisabledViews) else { return }
+
     PluginInputManager.handle(
       input: PluginInputManager.Input.mouse, event: .mouseUp, player: player,
       arguments: mouseEventArgs(event), defaultHandler: { [self] in
@@ -406,8 +403,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func rightMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
-    
+    guard !event.inAnyOf(mouseActionDisabledViews) else { return }
+
     PluginInputManager.handle(
       input: PluginInputManager.Input.rightMouse, event: .mouseUp, player: player,
       arguments: mouseEventArgs(event), defaultHandler: {
@@ -416,7 +413,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func otherMouseUp(with event: NSEvent) {
-    guard !isMouseEvent(event, inAnyOf: mouseActionDisabledViews) else { return }
+    guard !event.inAnyOf(mouseActionDisabledViews) else { return }
     
     PluginInputManager.handle(
       input: PluginInputManager.Input.otherMouse, event: .mouseUp, player: player,
@@ -582,25 +579,24 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
   
   func volumeIcon() -> NSImage? {
-    guard !player.info.isMuted else { return NSImage(named: "mute") }
-    switch Int(player.info.volume) {
-    case 0:
-      return NSImage(named: "volume-0")
-    case 1...33:
-      return NSImage(named: "volume-1")
-    case 34...66:
-      return NSImage(named: "volume-2")
-    case 67...1000:
-      return NSImage(named: "volume")
-    default:
+    guard !player.info.isMuted else { return .sf("speaker.slash.fill") }
+    let volume = Int(player.info.volume)
+    guard volume >= 0 else {
       log("Volume level \(player.info.volume) is invalid", level: .error)
       return nil
     }
+    let symbol = switch Int(player.info.volume) {
+    case 0: "speaker.fill"
+    case 1...33: "speaker.wave.1.fill"
+    case 34...66: "speaker.wave.2.fill"
+    default: "speaker.wave.3.fill"
+    }
+    let configuration = NSImage.SymbolConfiguration(pointSize: 13, weight: .regular)
+    return .sf(symbol, withConfiguration: configuration)
   }
 
   func updateVolume() {
     volumeSlider.doubleValue = player.info.volume
-    muteButton.state = player.info.isMuted ? .on : .off
   }
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
@@ -705,12 +701,6 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     default:
       break
     }
-  }
-
-  internal func isMouseEvent(_ event: NSEvent, inAnyOf views: [NSView?]) -> Bool {
-    return views.filter { $0 != nil }.reduce(false, { (result, view) in
-      return result || view!.isMousePoint(view!.convert(event.locationInWindow, from: nil), in: view!.bounds)
-    })
   }
 
   // MARK: - Utils

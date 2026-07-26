@@ -17,7 +17,7 @@
 "KTN-5r-mMm.ibShadowedLabels[0]" = "IINAについて";
 
 /* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
-"KTN-5r-mMm.ibShadowedLabels[2]" = "環境設定";
+"KTN-5r-mMm.ibShadowedLabels[2]" = "設定";
 
 /* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
 "Ka5-V3-g5E.title" = "ヘルプ";
@@ -26,7 +26,7 @@
 "MyY-5s-tIm.title" = "アップデートを確認";
 
 /* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
-"Nmf-79-hFX.title" = "GitHubリポジトリのURLまたは\"user/repo\"形式の文字列を入力してください。デフォルトのプラグイン一覧から選択することもできます。";
+"Nmf-79-hFX.title" = "GitHubリポジトリのURLまたは \"user/repo\" 形式の文字列を入力してください。デフォルトのプラグイン一覧から選択することもできます。";
 
 /* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
 "T21-nd-TLF.label" = "サポート";
@@ -44,13 +44,13 @@
 "drh-6w-3z1.title" = "Finderで表示";
 
 /* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
-"enP-C1-4vu.title" = "GitHubからインストール...";
+"enP-C1-4vu.title" = "GitHubからインストール…";
 
 /* Class = "NSTabViewItem"; label = "Settings"; ObjectID = "eyS-eb-H4e"; */
-"eyS-eb-H4e.label" = "環境設定";
+"eyS-eb-H4e.label" = "設定";
 
 /* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
-"fnl-uA-X7r.title" = "新しいプラグインをGitHubまたはローカルの.iinaplgzパッケージからインストールできます。GitHubからインストールしたプラグインは自動的にアップデートされます。";
+"fnl-uA-X7r.title" = "GitHubまたはローカルの.iinaplgzパッケージから新しいプラグインをインストールできます。GitHubからインストールしたプラグインは自動的にアップデートされます。";
 
 /* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
 "ixN-OS-w87.title" = "再読み込み";
@@ -71,7 +71,7 @@
 "r3r-Qh-rC9.title" = "ソース";
 
 /* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
-"sdU-FG-dTO.title" = "パッケージをインストール...";
+"sdU-FG-dTO.title" = "パッケージをインストール…";
 
 /* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
 "tfn-0I-n6p.title" = "プラグイン";
@@ -83,4 +83,4 @@
 "ue8-hU-kLm.title" = "アンインストール";
 
 /* Class = "NSTextFieldCell"; title = "Install a new plugin from GitHub"; ObjectID = "zvu-Up-fQJ"; */
-"zvu-Up-fQJ.title" = "GitHub から新しいプラグインをインストール";
+"zvu-Up-fQJ.title" = "GitHubから新しいプラグインをインストール";

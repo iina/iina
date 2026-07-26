@@ -83,11 +83,8 @@ class PlaybackInfo {
 
   var currentURL: URL? {
     didSet {
-      if let url = currentURL {
-        mpvMd5 = Utility.mpvWatchLaterMd5(url.path)
-      } else {
-        mpvMd5 = nil
-      }
+      guard currentURL == nil else { return }
+      mpvMd5 = nil
     }
   }
   var isNetworkResource: Bool = false
@@ -125,8 +122,8 @@ class PlaybackInfo {
     if noVideoTrack && noAudioTrack {
       return .unknown
     }
-    let allVideoTracksAreAlbumCover = !videoTracks.contains { !$0.isAlbumart }
-    return (noVideoTrack || allVideoTracksAreAlbumCover) ? .isAudio : .notAudio
+    let hasRealVideoTrack = videoTracks.contains { !$0.isAlbumart }
+    return (noVideoTrack || !hasRealVideoTrack) ? .isAudio : .notAudio
   }
 
   var justStartedFile: Bool = false
@@ -243,6 +240,10 @@ class PlaybackInfo {
 
   var chapters: [MPVChapter] = []
   var chapter = 0
+
+  func getChapter(forVideoTime time: VideoTime) -> MPVChapter? {
+    return chapters.last(where: { $0.time <= time })
+  }
 
   @Atomic var matchedSubs: [String: [URL]] = [:]
 

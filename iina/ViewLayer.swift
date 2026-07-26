@@ -125,6 +125,9 @@ class ViewLayer: CAOpenGLLayer {
       contentsFormat = .RGBA16Float
     }
     isAsynchronous = false
+    // when resized but mpv hasn't rendered a new frame,
+    // the old content's aspect ratio should be preserved.
+    contentsGravity = .resizeAspectFill
   }
 
   /// Returns an initialized shadow copy of the given layer with custom instance variables copied from `layer`.
@@ -215,6 +218,37 @@ class ViewLayer: CAOpenGLLayer {
         }
       }
       glFlush()
+
+      let handler = snapshotLock.withLock { () -> ((NSImage?) -> Void)? in
+        let handler = pendingSnapshotHandler
+        pendingSnapshotHandler = nil
+        return handler
+      }
+      if let handler {
+        let image = framebufferSnapshot(width: Int(dims[2]), height: Int(dims[3]))
+        handler(image)
+      }
+    }
+  }
+
+  // MARK: - Snapshot
+
+  private let snapshotLock = Lock()
+  private var pendingSnapshotHandler: ((NSImage?) -> Void)?
+
+  /// Capture the next rendered frame as an `NSImage`. Forces a redraw so this works while paused.
+  func captureSnapshot() async -> NSImage? {
+    await withCheckedContinuation { continuation in
+      // Drop any previous in-flight request — only the latest caller wins.
+      let previous = snapshotLock.withLock { () -> ((NSImage?) -> Void)? in
+        let previous = pendingSnapshotHandler
+        pendingSnapshotHandler = { image in
+          continuation.resume(returning: image)
+        }
+        return previous
+      }
+      previous?(nil)
+      update(force: true)
     }
   }
 
@@ -286,6 +320,58 @@ class ViewLayer: CAOpenGLLayer {
     }
   }
 
+  private func framebufferSnapshot(width: Int, height: Int) -> NSImage? {
+    let bytesPerRow = width * 4
+    var pixels = Data(count: height * bytesPerRow)
+
+    // Save and restore the read framebuffer binding so we don't disturb AppKit/mpv state.
+    var prevReadFBO: GLint = 0
+    glGetIntegerv(GLenum(GL_READ_FRAMEBUFFER_BINDING), &prevReadFBO)
+    defer { glBindFramebuffer(GLenum(GL_READ_FRAMEBUFFER), GLuint(prevReadFBO)) }
+
+    // The layer renders into an FBO (captured as `fbo`), not the default framebuffer,
+    // so we must bind that FBO as the read target and use GL_COLOR_ATTACHMENT0 — not GL_BACK.
+    glBindFramebuffer(GLenum(GL_READ_FRAMEBUFFER), GLuint(fbo))
+    glReadBuffer(GLenum(GL_COLOR_ATTACHMENT0))
+    glPixelStorei(GLenum(GL_PACK_ALIGNMENT), 1)
+
+    pixels.withUnsafeMutableBytes { buf in
+      guard let base = buf.baseAddress else { return }
+      glReadPixels(0, 0, GLsizei(width), GLsizei(height),
+                   GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), base)
+
+      // OpenGL origin is bottom-left; CGImage expects top-left. Flip rows in place.
+      var temp = [UInt8](repeating: 0, count: bytesPerRow)
+      temp.withUnsafeMutableBufferPointer { tempBuf in
+        let tmp = UnsafeMutableRawPointer(tempBuf.baseAddress!)
+        for i in 0..<(height / 2) {
+          let top = base.advanced(by: i * bytesPerRow)
+          let bot = base.advanced(by: (height - 1 - i) * bytesPerRow)
+          memcpy(tmp, top, bytesPerRow)
+          memcpy(top, bot, bytesPerRow)
+          memcpy(bot, tmp, bytesPerRow)
+        }
+      }
+    }
+
+    guard let provider = CGDataProvider(data: pixels as CFData) else { return nil }
+    guard let cgImage = CGImage(
+      width: width,
+      height: height,
+      bitsPerComponent: 8,
+      bitsPerPixel: 32,
+      bytesPerRow: bytesPerRow,
+      space: CGColorSpaceCreateDeviceRGB(),
+      bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+      provider: provider,
+      decode: nil,
+      shouldInterpolate: false,
+      intent: .defaultIntent
+    ) else { return nil }
+
+    return NSImage(cgImage: cgImage, size: NSSize(width: width, height: height))
+  }
+
   // MARK: - Core OpenGL Context and Pixel Format
 
   private static func createPixelFormat(_ player: PlayerCore) -> (CGLPixelFormatObj, GLint) {
@@ -310,7 +396,7 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   private static func findPixelFormat(_ player: PlayerCore, software: Bool = false) -> (CGLPixelFormatObj?, GLint, CGLError) {
-    let subsystem = Logger.makeSubsystem("layer\(player.playerNumber)")
+    let subsystem = Logger.makeSubsystem("layer\(player.playerNumber)", ["square.2.layers.3d.bottom.filled"])
     var pix: CGLPixelFormatObj?
     var err: CGLError = CGLError(rawValue: 0)
     var npix: GLint = 0

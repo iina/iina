@@ -134,7 +134,7 @@ class NowPlayingInfoManager {
     // discardArtwork as that method works directly on the nowPlayingInfo dictionary.
     var info = center.nowPlayingInfo ?? [String: Any]()
     if withTitle {
-      if player.currentMediaIsAudio == .isAudio {
+      if player.info.isAudio == .isAudio {
         info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
         let (title, album, artist) = player.getMusicMetadata()
         info[MPMediaItemPropertyTitle] = title
@@ -746,5 +746,5 @@ extension MPNowPlayingPlaybackState: @retroactive CustomStringConvertible {
 }
 
 extension Logger.Sub {
-  static let nowPlaying = Logger.makeSubsystem("now-playing")
+  static let nowPlaying = Logger.makeSubsystem("now-playing", ["play.laptopcomputer"])
 }

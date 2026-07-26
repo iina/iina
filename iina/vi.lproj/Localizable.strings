@@ -13,9 +13,12 @@
 "general.logout" = "Đăng xuất";
 "general.ok" = "OK";
 "general.cancel" = "Hủy";
+"general.done" = "Xong";
 "general.username" = "Tên đăng nhập";
 "general.password" = "Mật khẩu";
 "general.na" = "N/A";
+"general.no_result" = "Không có kết quả";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Giá trị không thể để trống.";
 "input.already_exists" = "Đã có giá trị này.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Đã hủy";
 "osd.cannot_connect" = "Không thể kết nối";
 "osd.timed_out" = "Hết thời hạn";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Bộ lọc đã thêm: %@";
 "osd.filter_removed" = "Bộ lọc đã xoá";
 "osd.file_loop" = "Lặp file đơn";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Cài đặt";
 "preference.general" = "Tổng quan";
-"preference.ui" = "Giao diện";
-"preference.video_audio" = "Hình ảnh/Âm thanh";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Âm thanh";
 "preference.subtitle" = "Phụ đề";
 "preference.network" = "Mạng";
 "preference.control" = "Điều khiển";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
 "alert.extra_option.empty" = "Key or value cannot be empty!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Preference > Advanced.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
 
 "alert.playlist.error_deleting" = "Error deleting: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Delete Playback History";
 "alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_all_history.title" = "Xoá lịch sử xem";
+"alert.delete_all_history.message" = "Are you sure to delete all playback history?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Abort";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
 "alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
+"alert.cleared" = "Cleared.";
+"alert.restored" = "Đã khôi phục.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Nothing to open.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
 "alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in total";
 "playlist.total_length_with_selected" = "%@ of %@ selected";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Open in Browser";
 "pl_menu.copy_url" = "Copy URL";
 "pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.playback" = "Xem lại";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Tiện ích bổ sung";
+"pl_menu.playlist" = "Danh sách phát";
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Choose subtitle track";
 "osc_toolbar.screenshot" = "Take a screenshot";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Nổi";
+"osc_pos.top" = "Trên cùng";
+"osc_pos.bottom" = "Bên dưới";
 
 "mini_player.album_art" = "Toggle album art";
 "mini_player.loop" = "Repeat";
@@ -465,3 +497,319 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Kiểm tra cập nhật";
 "plugin.updating" = "Downloading update…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log Viewer";
+"logwindow.time" = "Time";
+"logwindow.subsystem" = "Subsystem";
+"logwindow.message" = "Message";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Lưu";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Sao chép";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Lịch sử xem lại";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Tiến độ";
+"history_window.col.played_at" = "Phát tại";
+"history_window.menu.play" = "Phát";
+"history_window.menu.play_new_window" = "Phát trong cửa sổ mới";
+"history_window.menu.show_in_finder" = "Xem trong Finder";
+"history_window.menu.delete" = "Xóa…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Xoá lịch sử xem";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Ngày";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Phạm vi tìm kiếm";
+"history_window.search.filename" = "Tên tệp";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Không có tìm kiếm gần đây";
+"history_window.search.recents_title" = "Tìm kiếm gần đây";
+"history_window.search.clear_recents" = "Xóa tìm kiếm";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Âm thanh";
+"sidebar.sub" = "Phụ đề";
+"sidebar.plugins" = "Bổ sung";
+"sidebar.playlist" = "Danh sách phát";
+"sidebar.chapters" = "Chương";
+
+"sidebar.aspect_ratio" = "Tỉ lệ hình ảnh";
+"sidebar.crop" = "Cắt";
+"sidebar.rotation" = "Xoay";
+"sidebar.speed" = "Tốc độ";
+
+"sidebar.brightness" = "Độ sáng";
+"sidebar.contrast" = "Độ tương phản";
+"sidebar.saturation" = "Độ rực màu";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Mở track âm thanh bên ngoài…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Lưu EQ hiện tại thành một preset…";
+"sidebar.rename_eq" = "Đổi tên preset EQ hiện tại…";
+"sidebar.remove_eq" = "Xóa preset EQ hiện tại";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Mở phụ đề…";
+"sidebar.search_online" = "Tìm kiếm trực tuyến…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Phông chữ";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Viền";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Tuỳ chỉnh phụ đề có thể làm hỏng phụ đề dạng ASS, và một số phụ đề sẽ bị tắt.";
+
+"sidebar.add_file" = "Thêm tệp tin…";
+"sidebar.add_url" = "Thêm liên kết URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.2" = "Không làm gì";
+"settings.alwaysOpenInNewWindow.label" = "Luôn mở tệp trong cửa sổ mới";
+"settings.autoRepeat.label" = "When a file is opened manually";
+"settings.fullScreenWhenOpen.label" = "Chuyển sang chế độ toàn màn hình";
+"settings.pauseWhenGoesToSleep.label" = "Tạm dừng khi thiết bị vào trạng thái nghỉ";
+"settings.pauseWhenOpen.label" = "Tạm dừng";
+"settings.playlistAutoAdd.desc" = "Bắt buộc khởi động lại IINA để có hiệu lực.";
+"settings.playlistAutoAdd.label" = "Tự động thêm tệp vào cùng thư mục";
+"settings.quitWhenNoOpenedWindow.label" = "Thoát sau khi mọi cửa sổ khác đã đóng";
+"settings.receiveBetaUpdate.label" = "Nhận các bản cập nhật thử nghiệm";
+"settings.recordPlaybackHistory.label" = "Bật lịch sử phát";
+"settings.screenShotFormat.items.1" = "JPEG (.jpeg)";
+"settings.screenShotFormat.label" = "Định dạng";
+"settings.screenshotCopyToClipboard.desc" = "Điểm đến";
+"settings.screenshotCopyToClipboard.label" = "Sao chép vào bộ nhớ tạm";
+"settings.screenshotSaveToFile.label" = "Lưu vào";
+
+// Settings - Video
+"settings.forceDedicatedGPU.desc" = "Luôn sử dụng GPU (nếu có). Điều này có thể cải thiện hiệu năng hoạt động và làm giảm thời lượng pin.";
+"settings.forceDedicatedGPU.label" = "Sử dụng GPU";
+"settings.hardwareDecoder.items.0" = "Vô hiệu hóa";
+"settings.hardwareDecoder.items.1" = "Tự động";
+"settings.hardwareDecoder.items.2" = "Tự động (Sao chép)";
+"settings.hardwareDecoder.label" = "Bộ giải mã phần cứng";
+"settings.toneMappingAlgorithm.items.0" = "Tự động";
+"settings.videoThreads.desc" = "Mặc định: 0 (Tự động)";
+"settings.videoThreads.label" = "Số nhân";
+
+// Settings - Audio
+"settings.enableInitialVolume.label" = "Âm thanh ban đầu";
+"settings.gaplessAudio.items.0" = "Vô hiệu hóa";
+"settings.maxVolume.label" = "Âm lượng lớn nhất";
+"settings.preferredAudioDevice.label" = "Ưu tiên thiết bị âm thanh";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "Không";
+"settings.doubleClickAction.items.1" = "Toggle fullscreen";
+"settings.doubleClickAction.items.2" = "Tạm dừng/Tiếp tục";
+"settings.doubleClickAction.items.4" = "Hình trong hình";
+"settings.doubleClickAction.items.5" = "Lặp A-B";
+"settings.doubleClickAction.label" = "Nháy chuột hai lần";
+"settings.forceTouchAction.items.0" = "Không";
+"settings.forceTouchAction.items.1" = "Toggle fullscreen";
+"settings.forceTouchAction.items.2" = "Tạm dừng/Tiếp tục";
+"settings.forceTouchAction.items.3" = "Ẩn OSC";
+"settings.horizontalScrollAction.items.1" = "Tìm kiếm";
+"settings.horizontalScrollAction.items.2" = "Không";
+"settings.middleClickAction.items.0" = "Không";
+"settings.middleClickAction.items.1" = "Chuyển đổi toàn màn hình";
+"settings.middleClickAction.items.2" = "Tạm dừng/Tiếp tục";
+"settings.middleClickAction.items.3" = "Ẩn OSC";
+"settings.middleClickAction.items.4" = "Hình trong hình";
+"settings.middleClickAction.items.5" = "Lặp A-B";
+"settings.middleClickAction.label" = "Chuột giữa";
+"settings.pinchAction.items.1" = "Toàn màn hình";
+"settings.pinchAction.items.2" = "Không";
+"settings.rightClickAction.desc" = "Chuột giữa";
+"settings.rightClickAction.items.0" = "Không";
+"settings.rightClickAction.items.2" = "Tạm dừng/Tiếp tục";
+"settings.rightClickAction.items.3" = "Ẩn OSC";
+"settings.rightClickAction.items.4" = "Hình trong hình";
+"settings.rightClickAction.items.5" = "Lặp A-B";
+"settings.rightClickAction.label" = "Nhấp chuột phải";
+"settings.singleClickAction.items.0" = "Không";
+"settings.singleClickAction.items.2" = "Tạm dừng/Tiếp tục";
+"settings.singleClickAction.items.3" = "Ẩn OSC";
+"settings.singleClickAction.label" = "Nháy chuột một lần";
+"settings.useExactSeek.desc" = ".";
+"settings.useExactSeek.items.2" = "Tự động";
+"settings.verticalScrollAction.items.1" = "Tìm kiếm";
+"settings.verticalScrollAction.items.2" = "Không";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Hiện giá trị gốc";
+"settings.useMediaKeys.label" = "Dùng phím điều khiển media của hệ thống";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "Mặc định: 153600";
+"settings.cacheBufferSize.label" = "Kích thước cache buffer (KB)";
+"settings.enableCache.label" = "Bật cache";
+"settings.httpProxy.desc" = "Bắt buộc khởi động lại IINA để có hiệu lực.";
+"settings.secPrefech.desc" = "Mặc định: 36000";
+"settings.secPrefech.label" = "Giây để prefetch";
+"settings.transportRTSPThrough.items.0" = "Tự động";
+"settings.transportRTSPThrough.label" = "Vận chuyển luồng RTSP qua";
+"settings.ytdlEnabled.label" = "Bật youtube-dl";
+"settings.ytdlRawOptions.desc" = "Định dạng: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "Tùy chọn gốc";
+"settings.ytdlSearchPath.desc" = "IINA sẽ tìm youtube-dl trong thư mục này. Cần khởi động lại.";
+"settings.ytdlSearchPath.label" = "Đường dẫn youtube-dl tùy chỉnh";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Tự động tìm kiếm phụ đề trực tuyến";
+"settings.displayInLetterBox.label" = "Hiển thị phụ đề trong hộp thư khi ở chế độ toàn màn hình";
+"settings.subAlignX.items.0" = "Bên trái";
+"settings.subAlignX.items.1" = "Chính giữa";
+"settings.subAlignX.items.2" = "Phải";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "Trên cùng";
+"settings.subAlignY.items.1" = "Chính giữa";
+"settings.subAlignY.items.2" = "Bên dưới";
+"settings.subAutoLoadIINA.items.0" = "Vô hiệu hóa";
+"settings.subAutoLoadIINA.items.1" = "Phụ đề chứa tên tệp phương tiện";
+"settings.subAutoLoadIINA.items.2" = "Tự động phát hiện thông minh bằng IINA";
+"settings.subAutoLoadIINA.label" = "Auto load";
+"settings.subAutoLoadPriorityString.desc" = "Vui lòng nhập danh sách các chuỗi được phân tách bằng dấu phẩy.";
+"settings.subAutoLoadPriorityString.label" = "Phụ đề được ưu tiên khi tên tệp chứa";
+"settings.subAutoLoadSearchPath.desc" = "Các thư mục được phân tách bằng dấu hai chấm (:). Cho phép đường dẫn tương đối và ký tự đại diện (*) ở cuối.";
+"settings.subAutoLoadSearchPath.label" = "Đồng thời tìm kiếm phụ đề trong các thư mục sau";
+"settings.subBlur.label" = "Độ mờ";
+"settings.subBold.label" = "Đậm";
+"settings.subItalic.label" = "Nghiêng";
+"settings.subLang.desc" = "Tùy chọn này sẽ được lưu trữ dưới dạng mã ngôn ngữ ISO 639-2 và sẽ hoạt động cho cả phụ đề mpv và opensub.";
+"settings.subPos.label" = "Vị trí theo chiều dọc";
+"settings.subScaleWithWindow.label" = "Chia tỷ lệ phụ đề theo kích thước cửa sổ";
+"settings.subSpacing.label" = "Khoảng cách chữ cái";
+
+// Settings - UI
+"settings.arrowBtnAction.items.0" = "Tốc độ";
+"settings.disableOSDPauseResumeMsgs.label" = "Tạm dừng/Tiếp tục";
+"settings.disableOSDSeekMsg.label" = "Tìm kiếm";
+"settings.disableOSDSpeedMsg.label" = "Tốc độ";
+"settings.maxThumbnailPreviewCacheSize.label" = "Bộ nhớ cache tối đa";
+"settings.oscPosition.items.0" = "Nổi";
+"settings.oscPosition.items.1" = "Trên cùng";
+"settings.oscPosition.items.2" = "Bên dưới";
+"settings.resizeWindowOption.label" = "Điều chỉnh Cửa sổ";
+"settings.themeMaterial.items.0" = "Tối";
+"settings.windowBehaviorWhenPip.items.0" = "Không làm gì";
+"settings.windowBehaviorWhenPip.items.1" = "Ẩn";
+"settings.windowBehaviorWhenPip.items.2" = "Thu nhỏ";
+"settings.windowBehaviorWhenPip.label" = "Cửa sổ";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "Cài đặt sau sẽ buộc phải khởi động lại IINA để có hiệu lực.";
+"settings.enableAdvancedSettings.label" = "Bật cài đặt nâng cao";
+"settings.enableLogging.label" = "Cho phép ghi nhật ký";
+"settings.logLevel.items.2" = "Cảnh báo";
+"settings.logLevel.items.3" = "Lỗi";
+"settings.useMpvOsd.label" = "Dùng OSD của mpv";
+"settings.useUserDefinedConfDir.label" = "Dùng thư mục cài đặt";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "Phụ đề ASS";
+"settings.$About" = "Thông tin";
+"settings.$AdditionalMpvOptions" = "Tùy chọn mpv bổ sung";
+"settings.$Advanced" = "Nâng cao";
+"settings.$Align" = "Căn lề";
+"settings.$AlwaysWhenPlaying" = "Always";
+"settings.$AssrtAPIToken" = "Mã token API Assrt";
+"settings.$Audio" = "Âm thanh";
+"settings.$Author" = "Tác giả";
+"settings.$AutoLoad" = "Auto load";
+"settings.$Background" = "Nền";
+"settings.$Border" = "Viền";
+"settings.$Cancel" = "Hủy";
+"settings.$CheckForUpdates" = "Kiểm tra cập nhật";
+"settings.$ClearCache" = "Xóa bộ nhớ đệm";
+"settings.$ClearPlaybackHistory" = "Xoá lịch sử xem…";
+"settings.$ClearSavedPlaybackProgress" = "Clear Saved Playback Progress…";
+"settings.$ClearThumbnailCache" = "Clear Thumbnail Cache…";
+"settings.$Color" = "Màu sắc";
+"settings.$Customize" = "Tùy chỉnh…";
+"settings.$DefaultApplication" = "Ứng dụng mặc định";
+"settings.$DefaultEncoding" = "Mã hóa mặc định";
+"settings.$DeleteAllPlaybackHistories" = "The button below will delete all playback histories and entries in \"Open Recent\".";
+"settings.$DoNotResize" = "Vô hiệu hóa";
+"settings.$FailedToLoadThePage" = "Không tải được trang.";
+"settings.$Font" = "Phông chữ";
+"settings.$GetBrowserExtensionsForIINA" = "Tải Tiện ích mở rộng IINA cho Trình duyệt";
+"settings.$Height" = "Chiều cao";
+"settings.$Help" = "Trợ giúp";
+"settings.$History" = "Lịch sử";
+"settings.$Identifier" = "Định danh";
+"settings.$ImportAnExistingConfigFile" = "Nhập một tệp cấu hình có sẵn";
+"settings.$Install" = "Cài đặt";
+"settings.$InstallLocalPackage" = "Cài đặt gói…";
+"settings.$Login" = "Đăng nhập";
+"settings.$MB" = "MB";
+"settings.$Margin" = "Lề";
+"settings.$Mouse" = "Chuột";
+"settings.$Network" = "Mạng";
+"settings.$NotLoggedIn" = "Chưa đăng nhập";
+"settings.$OK" = "OK";
+"settings.$Offset" = "Chênh lệch";
+"settings.$OnlineSubtitles" = "Phụ đề trực tuyến";
+"settings.$OtherStyles" = "Kiểu khác";
+"settings.$OverrideLevel" = "Mức ghi đè";
+"settings.$PictureinnPicture" = "Hình trong hình";
+"settings.$Playlist" = "Danh sách phát";
+"settings.$PleaseSelectTheMediaTypes" = "Lựa chọn định dạng bạn muốn mặc định mở với IINA.";
+"settings.$Position" = "Vị trí";
+"settings.$PreferredLanguage" = "Ngôn ngữ ưu tiên";
+"settings.$RestoreAllAlertsThat" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts…";
+"settings.$SPDIFOutput" = "Cổng ra S/PDIF";
+"settings.$Screenshots" = "Ảnh chụp màn hình";
+"settings.$SetIINAAsTheDefault" = "Thiết lập IINA là ứng dụng mặc định…";
+"settings.$Settings" = "Cài đặt";
+"settings.$Shadow" = "Bóng mờ";
+"settings.$ShowInFinder" = "Xem trong Finder";
+"settings.$ShowTheConfigFileIn" = "Xem tệp cấu hình trong Finder";
+"settings.$Size" = "Kích cỡ";
+"settings.$Source" = "Nguồn";
+"settings.$TextSubtitles" = "Text subtitles";
+"settings.$Uninstall" = "Gỡ bỏ";
+"settings.$Website" = "Trang web";
+"settings.$Width" = "Chiều rộng";
+"settings.$Window" = "Cửa sổ";
+"settings.$X" = " X";
+"settings.$Y" = "Y";
+"settings.$YouCanInstallANew" = "Bạn có thể cài đặt plugin mới từ GitHub hoặc từ gói .iinaplgz trong máy. Các plugin cài từ GitHub có thể được cập nhật tự động.";
+"settings.$bottom" = "bên dưới";
+"settings.$dB" = "dB";
+"settings.$pt" = "pt";
+"settings.$right" = "phải";
+"settings.$s" = "g";
+"settings.$top" = "trên cùng";

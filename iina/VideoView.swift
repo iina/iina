@@ -34,11 +34,12 @@ class VideoView: NSView {
   // cached indicator to prevent unnecessary updates of DisplayLink
   var currentDisplay: UInt32?
 
+  var isIdle = true
   private var displayIdleTimer: Timer?
 
-  private lazy var hdrSubsystem = Logger.makeSubsystem("hdr\(player.playerNumber)")
+  private lazy var hdrSubsystem = Logger.makeSubsystem("hdr\(player.playerNumber)", ["circle.righthalf.filled"])
 
-  lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)")
+  lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)", ["film"])
 
   static let SRGB = CGColorSpaceCreateDeviceRGB()
 
@@ -193,7 +194,7 @@ class VideoView: NSView {
 
   override func draggingEnded(_ sender: NSDraggingInfo) {
     if playlistShown {
-      player.mainWindow.hideSideBar()
+      player.mainWindow.sidebars.hideAllSideBars()
     }
     playlistShown = false
     lastMousePosition = nil
@@ -274,6 +275,7 @@ class VideoView: NSView {
 
   /// Starts the display link if it has been stopped in order to save energy.
   func displayActive() {
+    isIdle = false
     displayIdleTimer?.invalidate()
     startDisplayLink()
   }
@@ -293,6 +295,7 @@ class VideoView: NSView {
   /// - Note: In addition to playback the display link must be running for operations such seeking, stepping and entering and leaving
   ///         full screen mode.
   func displayIdle() {
+    isIdle = true
     displayIdleTimer?.invalidate()
     // Because the display link is critical there is an internal setting that can be changed to
     // disable shutting down the display link should any problems with this energy saving feature
@@ -421,7 +424,8 @@ extension VideoView {
     let edrEnabled = requestEdrMode()
     let edrAvailable = edrEnabled != false
     if player.info.hdrAvailable != edrAvailable {
-      player.mainWindow.quickSettingView.setHdrAvailability(to: edrAvailable)
+      player.info.hdrAvailable = edrAvailable
+      player.postNotification(.iinaHDRChanged)
     }
     if edrEnabled != true { setICCProfile() }
   }
@@ -498,9 +502,8 @@ extension VideoView {
           targetPeak = 400
         }
       }
-      let algorithm = Preference.ToneMappingAlgorithmOption(rawValue: Preference.integer(for: .toneMappingAlgorithm))?.mpvString
-        ?? Preference.ToneMappingAlgorithmOption.defaultValue.mpvString
-
+      let algorithm = String(describing: Preference.enum(for: .toneMappingAlgorithm) as
+                             Preference.ToneMappingAlgorithmOption)
       logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm)")
       mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
       mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)

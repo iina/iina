@@ -19,11 +19,14 @@ extension NSTextField {
 
 }
 
-class SettingsUIHelper {
-  private var l10n: SettingsLocalization.Context
+// not sure from which version, need further tests
+let topConstraintOffset: CGFloat = if #available(macOS 26, *) { -4 } else { 0 }
 
-  init(_ l10n: SettingsLocalization.Context) {
-    self.l10n = l10n
+class SettingsUIHelper: UIHelper {
+  static let sharedUI = SettingsUIHelper(scope: "settings")
+
+  func button(_ key: SettingsLocalization.Key) -> NSButton {
+    button(key.rawValue)
   }
 
   func popupButton(_ items: [(SettingsLocalization.Key, Int)]) -> NSPopUpButton {
@@ -33,53 +36,26 @@ class SettingsUIHelper {
     button.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
     for (key, value) in items {
       let item = NSMenuItem()
-      item.title = l10n.localized(key)
+      item.title = localized(key)
       item.tag = value
       button.menu!.addItem(item)
     }
     return button
   }
 
-  func textInput(value: String = "", width: CGFloat = 64) -> NSTextField {
-    let textField = NSTextField()
-    textField.stringValue = value
-    textField.controlSize = .small
-    textField.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-    textField.size(width: width)
-    return textField
+  func smallLabel(bindTo key: SettingsLocalization.Key) -> NSTextField {
+    label(key.rawValue, isSmall: true, isSecondary: true)
   }
 
-  func label(_ key: SettingsLocalization.Key) -> NSTextField {
-    let textField = NSTextField(labelWithString: l10n.localized(key))
-    textField.controlSize = .small
-    textField.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-    return textField
+  func label(bindTo key: SettingsLocalization.Key, isSmall: Bool = false, isSecondary: Bool = false) -> NSTextField {
+    label(key.rawValue, isSmall: isSmall, isSecondary: isSecondary)
   }
 
-  func hStack(align: NSLayoutConstraint.Attribute = .firstBaseline, _ views: NSView...) -> NSStackView {
-    let stackView = NSStackView(views: views)
-    stackView.orientation = .horizontal
-    stackView.alignment = align
-    return stackView
-  }
-
-  func vStack(_ views: NSView...) -> NSStackView {
-    let stackView = NSStackView(views: views)
-    stackView.orientation = .vertical
-    stackView.alignment = .leading
-    return stackView
-  }
-
-  func space(width: CGFloat = 0, height: CGFloat = 0) -> NSView {
-    let view = NSView()
-    view.size(width: width, height: height)
-    return view
-  }
-
-  func image(_ symbol: String, size: CGFloat = 16) -> NSImageView {
-    let imageView = NSImageView(image: .findSFSymbol([symbol])!)
-    imageView.size(width: size, height: size)
-    return imageView
+  func localized(_ key: SettingsLocalization.Key) -> String {
+    if key.isGeneral {
+      return NSLocalizedString(key.rawValue, comment: key.rawValue)
+    }
+    return localized(key.rawValue)
   }
 
   private class RadioTagTransformer: ValueTransformer {
@@ -104,7 +80,7 @@ class SettingsUIHelper {
 
   func radioGroup(_ prefKey: Preference.Key, size: NSControl.ControlSize = .small, _ items: [(SettingsLocalization.Key, Int)]) -> [NSButton] {
     return items.map { key, value in
-      let button = NSButton(radioButtonWithTitle: l10n.localized(key), target: nil, action: nil)
+      let button = NSButton(radioButtonWithTitle: localized(key), target: nil, action: nil)
       button.translatesAutoresizingMaskIntoConstraints = false
       button.controlSize = size
       button.bind(.value, to: UserDefaults.standard, withKeyPath: prefKey.rawValue, options: [
@@ -120,7 +96,7 @@ class SettingsUIHelper {
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
-      view.spacing(to: views[i - 1], .leading(space))
+      view.spacing(.leading(space), to: views[i - 1])
     }
     if let trailing = trailing {
       views.last!.padding(.trailing(greaterThan: trailing))
@@ -133,7 +109,7 @@ class SettingsUIHelper {
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
-      view.spacing(to: views[i - 1], .top(space))
+      view.spacing(.top(space), to: views[i - 1])
     }
     if let bottom = bottom {
       views.last!.padding(.bottom(bottom))

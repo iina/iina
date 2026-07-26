@@ -1,11 +1,11 @@
 /* Class = "NSMenuItem"; title = "Bottom"; ObjectID = "0Gp-vj-UzY"; */
-"0Gp-vj-UzY.title" = "下に固定";
+"0Gp-vj-UzY.title" = "下";
 
 /* Class = "NSMenuItem"; title = "0.5x video size"; ObjectID = "0eK-kv-btH"; */
 "0eK-kv-btH.title" = "ビデオサイズの0.5倍";
 
 /* Class = "NSButtonCell"; title = "Customize…"; ObjectID = "1nM-AX-Ozm"; */
-"1nM-AX-Ozm.title" = "カスタマイズ...";
+"1nM-AX-Ozm.title" = "カスタマイズ…";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "2YJ-bg-OdR"; */
 "2YJ-bg-OdR.title" = "%（画面の割合）";
@@ -23,16 +23,16 @@
 "7Dv-q2-5TV.title" = "フローティング";
 
 /* Class = "NSTextFieldCell"; title = "Resize window to:"; ObjectID = "7td-lH-8aK"; */
-"7td-lH-8aK.title" = "ウインドウサイズを変更:";
+"7td-lH-8aK.title" = "ウインドウのサイズを変更して:";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "XOh-46-9Jf"; */
-"XOh-46-9Jf.title" = "非表示になるまで:";
+"XOh-46-9Jf.title" = "自動的に非表示になるまで:";
 
 /* Class = "NSMenuItem"; title = "bottom"; ObjectID = "92n-Uq-o4G"; */
 "92n-Uq-o4G.title" = "下";
 
 /* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
-"9IR-Sf-wMq.title" = "macOSのアクセシビリティ設定「視差効果を減らす」が有効な場合、前庭機能障害を持つユーザに問題を引き起こすとされるユーザインターフェイスのアニメーションを軽減します。それでも不十分な場合は、この設定を使用してユーザインターフェイスのアニメーションを無効化して視差効果をさらに減らすことができます。";
+"9IR-Sf-wMq.title" = "macOSのアクセシビリティ設定 \"視差効果を減らす\" が有効なとき、前庭機能障害を持つユーザに問題を引き起こすとされるユーザインターフェイスのアニメーションを軽減します。それでも不十分なときは、この設定を使用してユーザインターフェイスのアニメーションを無効にして、視差効果をさらに減らすことができます。";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "%（画面の割合）";
@@ -44,7 +44,7 @@
 "AmS-Sl-b2h.title" = "ウインドウ:";
 
 /* Class = "NSMenuItem"; title = "Width:"; ObjectID = "B1c-oO-fIs"; */
-"B1c-oO-fIs.title" = "横幅:";
+"B1c-oO-fIs.title" = "幅:";
 
 /* Class = "NSButtonCell"; title = "Show chapter position in progress bar"; ObjectID = "BVV-Z3-LHR"; */
 "BVV-Z3-LHR.title" = "チャプタの位置をプログレスバーに表示";
@@ -86,19 +86,19 @@
 "I8t-ey-016.title" = "pt";
 
 /* Class = "NSTextFieldCell"; title = "Y offset:"; ObjectID = "KCL-Ki-A0p"; */
-"KCL-Ki-A0p.title" = "Y座標:";
+"KCL-Ki-A0p.title" = "Yオフセット:";
 
 /* Class = "NSMenuItem"; title = "Fast Forward / Rewind"; ObjectID = "KJT-iG-2xc"; */
-"KJT-iG-2xc.title" = "早送り / 早戻し";
+"KJT-iG-2xc.title" = "早送り/早戻し";
 
 /* Class = "NSMenuItem"; title = "1x video size"; ObjectID = "MR7-Ac-SAO"; */
 "MR7-Ac-SAO.title" = "ビデオサイズの1倍";
 
 /* Class = "NSButtonCell"; title = "Speed"; ObjectID = "MVv-Mx-GTD"; */
-"MVv-Mx-GTD.title" = "再生速度";
+"MVv-Mx-GTD.title" = "速度";
 
 /* Class = "NSTextFieldCell"; title = "Auto hide after:"; ObjectID = "NUr-hY-gfo"; */
-"NUr-hY-gfo.title" = "非表示になるまで:";
+"NUr-hY-gfo.title" = "自動的に非表示になるまで:";
 
 /* Class = "NSMenuItem"; title = "right"; ObjectID = "NYG-e9-DV0"; */
 "NYG-e9-DV0.title" = "右";
@@ -125,10 +125,10 @@
 "SFX-ct-8MB.title" = "再生中はウインドウを常に最前面に表示";
 
 /* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
-"ih8-5a-PYY.title" = "最前面に表示状態をタイトルバーに常に表示";
+"ih8-5a-PYY.title" = "最前面表示状況を常にタイトルバーに表示";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
-"TWq-Xb-8Ee.title" = "再生速度";
+"TWq-Xb-8Ee.title" = "速度";
 
 /* Class = "NSMenuItem"; title = "Height:"; ObjectID = "Uc9-An-930"; */
 "Uc9-An-930.title" = "高さ:";
@@ -146,13 +146,13 @@
 "X5B-TZ-ISz.title" = "ポイント";
 
 /* Class = "NSButtonCell"; title = "Enable thumbnail preview"; ObjectID = "Xey-3m-f6G"; */
-"Xey-3m-f6G.title" = "サムネイルプレビューを有効化";
+"Xey-3m-f6G.title" = "サムネイルプレビューを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "to the"; ObjectID = "Ydi-yB-FMe"; */
 "Ydi-yB-FMe.title" = "画面の";
 
 /* Class = "NSTextFieldCell"; title = "X offset:"; ObjectID = "Ymw-tr-6rw"; */
-"Ymw-tr-6rw.title" = "X座標:";
+"Ymw-tr-6rw.title" = "Xオフセット:";
 
 /* Class = "NSButtonCell"; title = "Do nothing"; ObjectID = "Zc7-sP-Rdp"; */
 "Zc7-sP-Rdp.title" = "何もしない";
@@ -179,7 +179,7 @@
 "g06-Ja-Ot8.title" = "オンスクリーン\nコントローラ（OSC）:";
 
 /* Class = "NSButtonCell"; title = "Pause / Resume"; ObjectID = "i84-B8-gqD"; */
-"i84-B8-gqD.title" = "一時停止 / 再開";
+"i84-B8-gqD.title" = "一時停止/再開";
 
 /* Class = "NSTextFieldCell"; title = "of the screen"; ObjectID = "iRn-3s-oQH"; */
 "iRn-3s-oQH.title" = "画面端から";
@@ -188,10 +188,10 @@
 "kCe-Ck-dUJ.title" = "マウントされたリモートドライブ上のファイルを含める";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
-"kOT-8q-E57.title" = "フルスクリーン時に現在時刻とバッテリー残量を表示する";
+"kOT-8q-E57.title" = "フルスクリーン中に時刻とバッテリー残量を表示";
 
 /* Class = "NSTextFieldCell"; title = "Thumbnail Preview:"; ObjectID = "kYu-0l-jQQ"; */
-"kYu-0l-jQQ.title" = "サムネイルプレビュー:";
+"kYu-0l-jQQ.title" = "サムネールプレビュー:";
 
 /* Class = "NSTextFieldCell"; title = "Layout:"; ObjectID = "l54-63-V6n"; */
 "l54-63-V6n.title" = "レイアウト:";
@@ -203,13 +203,13 @@
 "mM7-1Q-FyL.title" = "外観:";
 
 /* Class = "NSButtonCell"; title = "Snap to center when dragging"; ObjectID = "mdD-if-Wqw"; */
-"mdD-if-Wqw.title" = "ドラッグ時に中央にスナップ";
+"mdD-if-Wqw.title" = "ドラッグ中は中央にスナップ";
 
 /* Class = "NSButtonCell"; title = "Disable animations"; ObjectID = "mjs-jg-wm1"; */
-"mjs-jg-wm1.title" = "アニメーションを無効化";
+"mjs-jg-wm1.title" = "アニメーションを無効にする";
 
 /* Class = "NSMenuItem"; title = "Previous / Next Media"; ObjectID = "oJ8-74-L3z"; */
-"oJ8-74-L3z.title" = "前 / 次のメディアへ";
+"oJ8-74-L3z.title" = "前/次のメディアへ";
 
 /* Class = "NSMenuItem"; title = "top"; ObjectID = "oYc-L7-qQd"; */
 "oYc-L7-qQd.title" = "上";
@@ -218,7 +218,7 @@
 "qbc-CY-bdK.title" = "画面の";
 
 /* Class = "NSMenuItem"; title = "Match System Appearance"; ObjectID = "qn6-Bp-Mqp"; */
-"qn6-Bp-Mqp.title" = "システム設定に合わせる";
+"qn6-Bp-Mqp.title" = "システムの外観に合わせる";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "s2E-9N-K86"; */
 "s2E-9N-K86.title" = "ポイント";
@@ -227,19 +227,19 @@
 "sJe-bK-eHi.title" = "左";
 
 /* Class = "NSMenuItem"; title = "Top"; ObjectID = "se2-DE-pJk"; */
-"se2-DE-pJk.title" = "上に固定";
+"se2-DE-pJk.title" = "上";
 
 /* Class = "NSTextFieldCell"; title = "Text size:"; ObjectID = "suy-e8-j4i"; */
-"suy-e8-j4i.title" = "テキストサイズ";
+"suy-e8-j4i.title" = "テキストサイズ:";
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
 "vdi-lO-q6e.title" = "画面に合わせる";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
-"vnb-DF-4g5.title" = "スクロールホイールによる再生位置変更を防ぐ";
+"vnb-DF-4g5.title" = "スクロールホイールによる再生位置の変更を防ぐ";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
-"xMh-SP-nkc.title" = "OSDを有効化";
+"xMh-SP-nkc.title" = "OSDを有効にする";
 
 /* Class = "NSTextFieldCell"; title = "Toolbar:"; ObjectID = "xP1-Vh-27X"; */
 "xP1-Vh-27X.title" = "ツールバー:";
@@ -248,7 +248,7 @@
 "xrJ-Um-BrJ.title" = "% (画面の割合)";
 
 /* Class = "NSButtonCell"; title = "Hide"; ObjectID = "xtL-XT-xzb"; */
-"xtL-XT-xzb.title" = "隠す";
+"xtL-XT-xzb.title" = "非表示";
 
 /* Class = "NSButtonCell"; title = "Always"; ObjectID = "yIN-jg-MxS"; */
 "yIN-jg-MxS.title" = "常に";
@@ -257,4 +257,4 @@
 "yLF-vu-1Gl.title" = "テーマ:";
 
 /* Class = "NSButtonCell"; title = "Initial window size:"; ObjectID = "zOq-Em-wUe"; */
-"zOq-Em-wUe.title" = "ウィンドウの初期サイズ:";
+"zOq-Em-wUe.title" = "ウインドウの初期サイズ:";

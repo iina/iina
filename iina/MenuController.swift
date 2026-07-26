@@ -139,6 +139,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var fullScreen: NSMenuItem!
   @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
+  @IBOutlet weak var lockAspectRatio: NSMenuItem!
+  @IBOutlet weak var enableTextLive: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
   @IBOutlet weak var rotationMenu: NSMenu!
@@ -291,6 +293,12 @@ class MenuController: NSObject, NSMenuDelegate {
     fullScreen.action = #selector(MainWindowController.menuToggleFullScreen(_:))
     pictureInPicture.action = #selector(MainWindowController.menuTogglePIP(_:))
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
+    lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
+    if #available(macOS 13, *) {
+      enableTextLive.action = #selector(MainWindowController.menuToggleLiveText(_:))
+    } else {
+      enableTextLive.isHidden = true
+    }
 
     // -- aspect
     var aspectList = AppData.aspects
@@ -488,10 +496,10 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updatePlaybackMenu() {
     let player = PlayerCore.active
-    let playlistPanelVisible = player.isInMiniPlayer ? player.miniPlayer.isPlaylistVisible : player.mainWindow.sideBarStatus == .playlist
-    let isDisplayingPlaylist = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .playlist
+    let playlistPanelVisible = player.isInMiniPlayer ? player.miniPlayer.isPlaylistVisible : player.mainWindow.sidebars.isShowing(.playlist)
+    let isDisplayingPlaylist = playlistPanelVisible && player.mainWindow.sidebars.playlistView.currentTab == .playlist
     playlistPanel?.title = isDisplayingPlaylist ? Constants.String.hidePlaylistPanel : Constants.String.playlistPanel
-    let isDisplayingChapters = playlistPanelVisible && player.mainWindow.playlistView.currentTab == .chapters
+    let isDisplayingChapters = playlistPanelVisible && player.mainWindow.sidebars.playlistView.currentTab == .chapters
     chapterPanel?.title = isDisplayingChapters ? Constants.String.hideChaptersPanel : Constants.String.chaptersPanel
     pause.title = player.info.state == .paused ? Constants.String.resume : Constants.String.pause
     abLoop.state = player.isABLoopActive ? .on : .off
@@ -504,8 +512,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateVideoMenu() {
     let player = PlayerCore.active
-    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
-          player.mainWindow.quickSettingView.currentTab == .video
+    let isDisplayingSettings = player.mainWindow.sidebars.isShowing(.settings) &&
+          player.mainWindow.sidebars.quickSettingView.currentTab == .video
     quickSettingsVideo?.title = isDisplayingSettings ? Constants.String.hideVideoPanel :
         Constants.String.videoPanel
     let isInFullScreen = player.mainWindow.fsState.isFullscreen
@@ -513,6 +521,9 @@ class MenuController: NSObject, NSMenuDelegate {
     let isOntop = player.isInMiniPlayer ? player.miniPlayer.isOntop : player.mainWindow.isOntop
     let isDelogo = player.info.delogoFilter != nil
     alwaysOnTop.state = isOntop ? .on : .off
+    lockAspectRatio.state = Preference.unlockWindowAspectRatio ? .off : .on
+    lockAspectRatio.isEnabled = Preference.bool(for: .edgeToEdgeVideo)
+    enableTextLive.state = Preference.isLiveTextEnabled ? .on : .off
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
@@ -522,8 +533,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateAudioMenu() {
     let player = PlayerCore.active
-    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
-          player.mainWindow.quickSettingView.currentTab == .audio
+    let isDisplayingSettings = player.mainWindow.sidebars.isShowing(.settings) &&
+          player.mainWindow.sidebars.quickSettingView.currentTab == .audio
     quickSettingsAudio?.title = isDisplayingSettings ? Constants.String.hideAudioPanel :
         Constants.String.audioPanel
     let volFmtString: String
@@ -559,8 +570,8 @@ class MenuController: NSObject, NSMenuDelegate {
 
   private func updateSubMenu() {
     let player = PlayerCore.active
-    let isDisplayingSettings = player.mainWindow.sideBarStatus == .settings &&
-          player.mainWindow.quickSettingView.currentTab == .sub
+    let isDisplayingSettings = player.mainWindow.sidebars.isShowing(.settings) &&
+          player.mainWindow.sidebars.quickSettingView.currentTab == .sub
     quickSettingsSub?.title = isDisplayingSettings ? Constants.String.hideSubtitlesPanel :
         Constants.String.subtitlesPanel
     hideSubtitles.title = player.info.isSubVisible ? Constants.String.hideSubtitles :
@@ -600,13 +611,26 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   func updatePluginMenu() {
-    let isDisplayingPluginsPanel = PlayerCore.active.mainWindow.sideBarStatus == .plugins
+    let isDisplayingPluginsPanel = PlayerCore.active.mainWindow.sidebars.isShowing(.plugins)
+    let managePluginsItem = NSMenuItem(
+      title: Constants.String.managePlugins,
+      action: #selector(AppDelegate.showPluginPreferences(_:)),
+      keyEquivalent: "")
+    let showPanelItem = NSMenuItem(
+      title: isDisplayingPluginsPanel ? Constants.String.hidePluginsPanel : Constants.String.showPluginsPanel,
+      action: #selector(MainMenuActionHandler.showPluginsPanel(_:)),
+      keyEquivalent: "")
+    let developerTool = NSMenuItem()
+    let reloadPluginsItem = NSMenuItem(
+      title: NSLocalizedString("menu.reload_plugins", comment: "Reload All Plugins"),
+      action: #selector(AppDelegate.reloadAllPlugins(_:)),
+      keyEquivalent: "")
+
     pluginMenu.removeAllItems()
-    pluginMenu.addItem(withTitle: Constants.String.managePlugins, action: #selector(AppDelegate.showPluginPreferences(_:)), keyEquivalent: "")
-    pluginMenu.addItem(withTitle: isDisplayingPluginsPanel ? Constants.String.hidePluginsPanel : Constants.String.showPluginsPanel, action: #selector(MainMenuActionHandler.showPluginsPanel(_:)), keyEquivalent: "")
+    pluginMenu.addItem(managePluginsItem)
+    pluginMenu.addItem(showPanelItem)
     pluginMenu.addItem(.separator())
 
-    let developerTool = NSMenuItem()
     developerTool.title = NSLocalizedString("menu.developer_tool", comment: "Developer Tool")
     developerTool.submenu = NSMenu()
 
@@ -666,7 +690,8 @@ class MenuController: NSObject, NSMenuDelegate {
     if #available(macOS 12.0, *) {
       pluginMenu.addItem(developerTool)
     }
-    pluginMenu.addItem(withTitle: NSLocalizedString("menu.reload_plugins", comment: "Reload All Plugins"), action: #selector(MainMenuActionHandler.reloadAllPlugins(_:)), keyEquivalent: "")
+    pluginMenu.addItem(reloadPluginsItem)
+
   }
 
   @discardableResult
@@ -862,6 +887,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (smallerSize, true, [IINACommand.smallerWindow.rawValue], false, nil, nil),
       (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
       (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
+      (enableTextLive, true, [IINACommand.liveText.rawValue], false, nil, nil),
       (pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),

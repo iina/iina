@@ -20,7 +20,7 @@ class OSCToolbarButton {
     toolbarButton.isBordered = false
     toolbarButton.tag = buttonType.rawValue
     toolbarButton.refusesFirstResponder = true
-    toolbarButton.toolTip = buttonType.description()
+    toolbarButton.toolTip = buttonType.localizedDescription()
     let buttonHeight = Preference.ToolBarButton.frameSize
     let buttonWidth = reducedWidth ? Preference.ToolBarButton.compactFrameWidth : Preference.ToolBarButton.frameSize
     Utility.quickConstraints(["H:[btn(\(buttonWidth))]", "V:[btn(\(buttonHeight))]"], ["btn": toolbarButton])

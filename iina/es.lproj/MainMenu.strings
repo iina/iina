@@ -1,5 +1,5 @@
 /* Class = "NSMenuItem"; title = "Subtitle Delay + 0.1s"; ObjectID = "0Cz-OE-85L"; */
-"0Cz-OE-85L.title" = "Retraso de subtítulos + 0.1s";
+"0Cz-OE-85L.title" = "Retraso de subtítulos + 0.1 s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
 "0T7-Nu-SL7.title" = "Mostrar panel de lista de reproducción";
@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Flotar sobre todo";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Filtros de audio guardados";
 
@@ -512,4 +518,4 @@
 "Qwb-26-zjX.title" = "Abrir URL…";
 
 /* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
-"kOx-hc-aQG.title" = "Release Highlights";
+"kOx-hc-aQG.title" = "Destacados del lanzamiento";

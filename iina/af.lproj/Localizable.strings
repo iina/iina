@@ -13,9 +13,12 @@
 "general.logout" = "Teken af";
 "general.ok" = "Goed";
 "general.cancel" = "Kanselleer";
+"general.done" = "Gereed";
 "general.username" = "Gebruikersnaam";
 "general.password" = "Wagwoord";
 "general.na" = "N/A";
+"general.no_result" = "Geen resultaat";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Waarde kan nie leeg wees nie.";
 "input.already_exists" = "Waarde bestaan reeds.";
@@ -78,7 +81,7 @@
 "eq.preset.small_speaker" = "Klein luidspreker";
 "eq.preset.spoken_word" = "Gesproke woord";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
+"alert.eq.new_profile.title" = "Nuwe EQ-profiel";
 "alert.eq.new_profile.message" = "Voer ’n profielnaam in.";
 "alert.eq.rename.title" = "Hernoem huidige profiel";
 "alert.eq.rename.message" = "Voer ’n nuwe profielnaam in.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Gekanselleer";
 "osd.cannot_connect" = "Kan nie koppel nie";
 "osd.timed_out" = "Uitgetel";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Filter toegevoeg: %@";
 "osd.filter_removed" = "Filter verwyder";
 "osd.file_loop" = "Herhaal enkele lêer";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Voorkeure";
 "preference.general" = "Algemeen";
-"preference.ui" = "Koppelvlak";
-"preference.video_audio" = "Video/Oudio";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Video";
+"preference.audio" = "Oudio";
 "preference.subtitle" = "Onderskrif";
 "preference.network" = "Netwerk";
 "preference.control" = "Beheer";
@@ -176,7 +184,7 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Pas al die stylinstellins in hierdie afdeling toe.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_not_installed" = "Installeer die Aanlyn Media-inprop vanuit “Inproppe > Installeer vanuit Github” vir gevorderde funksies soos video-aflaai en outomatiese yt-dlp-bywerkings.";
 "preference.ytdl_plugin_installed" = "Die ingeboude youtube-dl-ondersteuning is gedeaktiveer aangesien die Aanlen media-inprop geïnstalleer is.";
 
 "menu.volume" = "Volume: %@";
@@ -248,7 +256,7 @@
 "alert.mpv_error" = "Interne fout: %@ (%@) by die instel van opsie %@.";
 
 "alert.unsupported_audio" = "Onondersteunde eksterne oudiolêer.";
-"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_video" = "Onondersteunde eksterne videolêer.";
 "alert.unsupported_sub" = "Onondersteunde eksterne onderskrif.";
 "alert.unsupported_url" = "Onondersteunde bronadres.";
 "alert.wrong_url_format" = "Verkeerde bronadresformaat.";
@@ -266,7 +274,7 @@
 "alert.config.duplicate.title" = "Duplikaat konfigurasie";
 "alert.config.duplicate.message" = "Voer ’n naam vir die gedupliseerde konfigurasielêer in.";
 "alert.config.file_existing.title" = "Lêer bestaan reeds";
-"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.file_existing.message" = "’n Konfigurasielêer met dieselfde naam bestaan reeds. Kies Goed om die lêer in Finder te toon.";
 "alert.config.cannot_create" = "Kan nie konfigurasielêer skep nie!\n%@";
 "alert.config.cannot_write" = "Kan nie konfigurasielêer skryf nie!";
 "alert.config.rename.title" = "Hernoem sneltoetskonfigurasie";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Voer asb. ’n filterstring in die formaat van mpv se vf- of af-bevel in.";
 
 "alert.keybinding_config.error" = "Fout by die lees van sneltoetskonfigurasielêer “%@”! Die IINA-verstekinstellings word teruggestel. Gaan u konfigurasie na.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Kan nie gebruikergedefinieerde mpv-opsies lees nie.";
 "alert.extra_option.empty" = "Naam en waarde kan nie leeg wees nie!";
-"alert.extra_option.error" = "Fout by die instelle van opsie --%@=%@ met retoerwaarde %d. Gaan u bykomende-opsie-instellings na in Voorkeure > Gevorderd.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Fout tydens instel van konfigurasiegids “%@”.";
 
 "alert.playlist.error_deleting" = "Fout tydens skrap: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Skrap afspeelgeskiedenis";
 "alert.delete_history.message" = "Is u seker u wil die gekose inskrywings skrap?";
+"alert.delete_all_history.title" = "Wis afspeelgeskiedenis";
+"alert.delete_all_history.message" = "Is u seker u wil alle afspeelgeskiedenis wis?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "U is op die punt om ’n videofilter toe te pas. U huidige apparatuurdekodeerder ondersteun dit dalk nie goed nie. U kan apparatuurdekodering óf deaktiveer óf na Outomaties(Kopieer) wissel wat dubbel die geheue sal gebruik.\nU gaan dalk die vorige bewerking (soos die snoei) moet herhaal sodat dit kan werk.";
 "alert.filter_hwdec.abort" = "Staak";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Opgeskrewe waarskuwings herstel";
 "alert.restore_alerts.message" = "Is u seker u wil onderdrukte waarskuwings terugstel?";
+
+"alert.cleared" = "Gewis.";
+"alert.restored" = "Teruggestel.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Niks om te open nie.";
 
@@ -356,10 +375,12 @@
 "alert.plugin_update_found.message" = "Die nuutste weergawe is %@. U het %@. Wil u bywerk?";
 "alert.plugin_permission" = "Die volgende toestemmings is nodig vir hierdie inprop. Hersien dit voordat u voortgaan.";
 "alert.plugin_permission_added" = "Bykomende toestemmings is nodig vir hierdie bywerking. Hersien dit voordat u voortgaan.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in totaal";
 "playlist.total_length_with_selected" = "%@ van %@ geselekteer";
-"playlist.sorting.header" = "Sorting";
+"playlist.sorting.header" = "Sortering";
 "playlist.sorting.filename_ascending" = "Lêernaam opgaande";
 "playlist.sorting.filename_descending" = "Lêernaam afgaande";
 "playlist.sorting.path_ascending" = "Lêerpad opgaande";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Open in blaaier";
 "pl_menu.copy_url" = "Kopieer bronadres";
 "pl_menu.copy_url_multi" = "Kopieer bronadresse";
+"pl_menu.playback" = "Afspeel";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Inprop";
+"pl_menu.playlist" = "Afspeellys";
 
 "keymapping.title" = "Sneltoetse";
 "keymapping.message" = "Druk enige toets om op te neem.";
@@ -394,9 +421,9 @@
 "hwdec.auto" = "Aktiveer apparatuurdekodering. Die meeste videofilters sal egter nie na behore werk nie.";
 "hwdec.auto-copy" = "Aktiveer apparatuurdekodering. Dit sal geheueverbruik verdubbel maar met videofilters werk.";
 
-"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
-"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"gaplessAudio.no" = "Afspeel van opeenvolgende oudiolêers kan lei tot stilte of verstoring wanneer van lêers verander word.";
+"gaplessAudio.weak" = "Indien die oudioformaat van die dekodeerderafvoer verander, word die oudiotoestel gesluit en heropen, wat afspeel versteur.";
+"gaplessAudio.yes" = "Die oudiotoestel word geopen met die parameters wat gekies is vir die eerste afgespeelde lêer en word dan oop gehou vir afspeel sonder onderbrekings. Volgende lêers kan weer gemonster word.";
 
 "subencoding.auto" = "Bespeur outomaties";
 
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Kies onderskrifsnit";
 "osc_toolbar.screenshot" = "Neem ’n skermkiekie";
 "osc_toolbar.plugins" = "Toon inproppaneel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Swewend";
+"osc_pos.top" = "Bo";
+"osc_pos.bottom" = "Onder";
 
 "mini_player.album_art" = "Tokkel albumkuns";
 "mini_player.loop" = "Herhaal";
@@ -443,7 +475,7 @@
 "permissions.network-request.name" = "Netwerkversoek";
 "permissions.network-request.desc" = "Hierdie inprop kan versoeke doen aan of data oplaai na hierdie webwerwe:";
 "permissions.network-request.any_site" = "Enige werf";
-"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.name" = "Toon OSD";
 "permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
 "permissions.show-alert.name" = "Toon waarskuwings";
 "permissions.show-alert.desc" = "Hierdie inprop kan opwipwaarskuwings toon.";
@@ -465,3 +497,429 @@
 "plugin.install_error.cannot_load" = "IINA kan nie hierdie inprop laai nie. Dit is dalk in die verkeerde formaat.";
 "plugin.check_for_updates" = "Soek na bywerkings";
 "plugin.updating" = "Bywerking word afgelaai…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log Viewer";
+"logwindow.time" = "Tyd";
+"logwindow.subsystem" = "Substelsel";
+"logwindow.message" = "Boodskap";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Bewaar";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Kopieer";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Afspeelgeskiedenis";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Vordering";
+"history_window.col.played_at" = "Laas afgespeel";
+"history_window.menu.play" = "Speel";
+"history_window.menu.play_new_window" = "Speel af in nuwe venster";
+"history_window.menu.show_in_finder" = "Toon in Finder";
+"history_window.menu.delete" = "Skrap…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Wis afspeelgeskiedenis";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Datum";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Soek in";
+"history_window.search.filename" = "Lêernaam";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Geen onlangse soektogte";
+"history_window.search.recents_title" = "Onlangse soektogte";
+"history_window.search.clear_recents" = "Wis onlangse";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Oudio";
+"sidebar.sub" = "Onderskrifte";
+"sidebar.plugins" = "Inproppe";
+"sidebar.playlist" = "Afspeellys";
+"sidebar.chapters" = "Hoofstukke";
+
+"sidebar.aspect_ratio" = "Aspekverhouding";
+"sidebar.crop" = "Snoei";
+"sidebar.rotation" = "Rotasie";
+"sidebar.speed" = "Snelheid";
+
+"sidebar.brightness" = "Helderheid";
+"sidebar.contrast" = "Kontras";
+"sidebar.saturation" = "Versadiging";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Laai eksterne oudiosnit…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Bewaar die huidige EQ as ’n voorinstelling…";
+"sidebar.rename_eq" = "Hernoem die huidige EQ-voorinstelling…";
+"sidebar.remove_eq" = "Verwyder die huidige EQ-voorinstelling";
+"sidebar.manual_eq" = "Handmatig";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Laai onderskrif…";
+"sidebar.search_online" = "Soek aanlyn…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Lettertipe";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Rand";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Onderskrifstylopsies kan ASS-verbeelding breek en sommiges kan gedeaktiveer word afhangend van die onderskriftipe.";
+
+"sidebar.add_file" = "Voeg lêer toe…";
+"sidebar.add_url" = "Voeg bronadres toe…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "Toon verwelkomingsvenster";
+"settings.actionAfterLaunch.items.1" = "Toon lêerkieserpaneel";
+"settings.actionAfterLaunch.items.2" = "Doen niks";
+"settings.actionAfterLaunch.label" = "By lansering";
+"settings.allowScreenSaverForAudio.label" = "Nie terwyl in “musiekmodus” of slefs wanneer oudio afgespeel word";
+"settings.alwaysOpenInNewWindow.label" = "Open media altyd in ’n nuwe venster";
+"settings.autoRepeat.label" = "Wanneer ’n lêer handmatig geopen word";
+"settings.autoSwitchToMusicMode.label" = "Skakel outomaties oor na musiekmodus wanneer ’n oudiolêer afgespeel word";
+"settings.blackOutMonitor.label" = "Verdonker ander skerms wanneer in volskerm";
+"settings.defaultRepeatMode.items.0" = "Herhaal afspeellys";
+"settings.defaultRepeatMode.items.1" = "Herhaal enkele lêer";
+"settings.fullScreenWhenOpen.label" = "Gaan in volskerm";
+"settings.keepOpenOnFileEnd.label" = "Hou venster oop nadat klaar afgespeel is";
+"settings.pauseWhenGoesToSleep.label" = "Laat wag wanneer rekenaar gaan slaap";
+"settings.pauseWhenInactive.label" = "Venster word onaktief/aktief";
+"settings.pauseWhenLeavingFullScreen.label" = "Laat wag wanneer volskerm verlaat word";
+"settings.pauseWhenMinimized.label" = "Laat wag solank die videovenster geminimaliseer is";
+"settings.pauseWhenOpen.label" = "Wag";
+"settings.pauseresumeWhen" = "Laat wag/hervat wanneer";
+"settings.playWhenEnteringFullScreen.label" = "Speel af wanneer in volskerm gegaan word";
+"settings.playlistAutoAdd.desc" = "IINA moet herbegin word om dit toe te pas.";
+"settings.playlistAutoAdd.label" = "Voeg lêers outomaties in dieselfde vouer";
+"settings.playlistAutoPlayNext.label" = "Speel volgende item outomaties af";
+"settings.playlistShowMetadata.label" = "Toon kunstenaar- en snitnaam vir oudiolêers wanneer beskikbaar";
+"settings.playlistShowMetadataInMusicMode.label" = "Slegs in “musiekmodus”";
+"settings.preventScreenSaver.label" = "Voorkom dat skermskut geaktiveer word tydens afspeel";
+"settings.quitWhenNoOpenedWindow.label" = "Stop nadat alle vensters gesluit is";
+"settings.receiveBetaUpdate.label" = "Ontvang betabywerkings";
+"settings.recordPlaybackHistory.label" = "Aktiveer afspeelgeskiedenis";
+"settings.recordRecentFiles.label" = "Aktiveer “Open onlangse”-kieslys";
+"settings.resumeLastPosition.label" = "Hervat vorige afspeelposisie";
+"settings.screenShotFormat.label" = "Formaat";
+"settings.screenShotIncludeSubtitle.label" = "Sluit onderskrifte in";
+"settings.screenshotCopyToClipboard.desc" = "Bestemming";
+"settings.screenshotCopyToClipboard.label" = "Kopieer na knipbord";
+"settings.screenshotSaveToFile.desc" = "/pad/na/skarmkiekie/vouer";
+"settings.screenshotSaveToFile.label" = "Bewaar in";
+"settings.screenshotShowPreview.label" = "Toon voorskou nadat skermkiekie geneem is";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "Anders sal slegs handmatig geopende lêers in hierdie kieslys weergegee word.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Toon alle afgespeelde lêers in “Open onlangse”-kieslys";
+"settings.useLegacyFullScreen.label" = "Gebruik ou volskermweergawe";
+
+// Settings - Video
+"settings.enableToneMapping.label" = "Aktiveer toonkartering";
+"settings.forceDedicatedGPU.desc" = "Gebruik altyd die toegewyde grafiese verwerker vir verbeelding (indien dit bestaan). Dit kan verrigting verbeter maar batterylewe verminder.";
+"settings.forceDedicatedGPU.label" = "Dwing toegewyde GVE";
+"settings.hardwareDecoder.items.0" = "Gedeaktiveer";
+"settings.hardwareDecoder.items.1" = "Outomaties";
+"settings.hardwareDecoder.items.2" = "Outomaties (kopieer)";
+"settings.hardwareDecoder.label" = "Apparatuurdekodeerder";
+"settings.loadIccProfile.desc" = "Laai die ICC-profiel vir ide huidige skerm en gebruik dit om video-RGB na skermafvoer om te skakel. (Slegs vir SDR-modus)";
+"settings.loadIccProfile.label" = "Laai ICC-profiel";
+"settings.toneMappingAlgorithm.items.0" = "Outomaties";
+"settings.toneMappingAlgorithm.label" = "Algoritme";
+"settings.toneMappingTargetPeak.desc" = "Gemete hoogste beeldhelderheid. Indien op 0 gestel sal IINA die waarde bespeur. Indien bespeuring misluk, stel IINA die teikenhoogte op 400.";
+"settings.toneMappingTargetPeak.label" = "Teikenpiek";
+"settings.videoThreads.desc" = "Verstek: 0 (outomaties)";
+"settings.videoThreads.label" = "Aantal drade";
+
+// Settings - Audio
+"settings.enableInitialVolume.label" = "Aanvanklike volume";
+"settings.gaplessAudio.items.0" = "Gedeaktiveer";
+"settings.gaplessAudio.items.1" = "Swak";
+"settings.gaplessAudio.items.2" = "Sterk";
+"settings.maxVolume.label" = "Maksimum volume";
+"settings.preferredAudioDevice.label" = "Voorkeuroudiotoestel";
+"settings.replayGain.items.0" = "Geen aanpassing";
+"settings.replayGain.items.1" = "Snitversterking";
+"settings.replayGain.items.2" = "Albumversterking";
+"settings.replayGain.label" = "Versterkingsaanpassing";
+"settings.replayGainFallback.label" = "Terugval";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "Geen";
+"settings.doubleClickAction.items.1" = "Tokkel volskerm";
+"settings.doubleClickAction.items.2" = "Laat wag / hervat";
+"settings.doubleClickAction.items.4" = "Tokkel Beeld-in-beeld";
+"settings.doubleClickAction.items.5" = "A-B-lus";
+"settings.doubleClickAction.label" = "Dubbelklik om";
+"settings.forceTouchAction.items.0" = "Geen";
+"settings.forceTouchAction.items.1" = "Tokkel volskerm";
+"settings.forceTouchAction.items.2" = "Laat wag / hervat";
+"settings.forceTouchAction.items.3" = "Versteek OSB";
+"settings.forceTouchAction.label" = "Dwingklik om";
+"settings.horizontalScrollAction.items.0" = "Pas volume aan";
+"settings.horizontalScrollAction.items.1" = "Vorentoe/terugspoel";
+"settings.horizontalScrollAction.items.2" = "Geen";
+"settings.horizontalScrollAction.label" = "Rol horisontaal na";
+"settings.middleClickAction.items.0" = "Geen";
+"settings.middleClickAction.items.1" = "Tokkel volskerm";
+"settings.middleClickAction.items.2" = "Laat wag / hervat";
+"settings.middleClickAction.items.3" = "Versteek OSB";
+"settings.middleClickAction.items.4" = "Tokkel Beeld-in-beeld";
+"settings.middleClickAction.items.5" = "A-B-lus";
+"settings.middleClickAction.label" = "Middelklik om";
+"settings.pinchAction.items.0" = "Pas venstergrootte aan";
+"settings.pinchAction.items.1" = "Volskerm";
+"settings.pinchAction.items.2" = "Geen";
+"settings.pinchAction.label" = "Knyp om";
+"settings.relativeSeekAmount.label" = "Gevoeligheid vir vorentoe/terugspoel";
+"settings.rightClickAction.desc" = "Middelklik om";
+"settings.rightClickAction.items.0" = "Geen";
+"settings.rightClickAction.items.2" = "Laat wag / hervat";
+"settings.rightClickAction.items.3" = "Versteek OSB";
+"settings.rightClickAction.items.4" = "Tokkel Beeld-in-beeld";
+"settings.rightClickAction.items.5" = "A-B-lus";
+"settings.rightClickAction.label" = "Regsklik om";
+"settings.singleClickAction.items.0" = "Geen";
+"settings.singleClickAction.items.2" = "Laat wag / hervat";
+"settings.singleClickAction.items.3" = "Versteek OSB";
+"settings.singleClickAction.label" = "Enkelklik om";
+"settings.useExactSeek.desc" = "Vorentoe-/terugspoel per beeld kan tot hapering en ’n hoër SVE-werking lei.";
+"settings.useExactSeek.items.0" = "Per sleutelbeeld";
+"settings.useExactSeek.items.1" = "Per beeld";
+"settings.useExactSeek.items.2" = "Outomaties";
+"settings.useExactSeek.label" = "Noukeurigheid vorentoe-/terugspoel";
+"settings.verticalScrollAction.items.0" = "Pas volume aan";
+"settings.verticalScrollAction.items.1" = "Vorentoe/terugspoel";
+"settings.verticalScrollAction.items.2" = "Geen";
+"settings.verticalScrollAction.label" = "Rol vertikaal na";
+"settings.videoViewAcceptsFirstMouse.label" = "Aanvaar eerste muisklik wanneer nie gefokus is nie";
+"settings.volumeScrollAmount.label" = "Gevoeligheid vir volume";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Toon rou waardes";
+"settings.useMediaKeys.label" = "Gebruik stelsel se mediabeheer";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "Verstek: 153600";
+"settings.cacheBufferSize.label" = "Kasgeheue-buffergrootte (KB)";
+"settings.enableCache.label" = "Aktiveer kasgeheue";
+"settings.httpProxy.desc" = "IINA moet herbegin word om dit toe te pas.";
+"settings.httpProxy.label" = "HTTP-proksie";
+"settings.secPrefech.desc" = "Verstek: 36000";
+"settings.secPrefech.label" = "Sekondes vir voorafhaal";
+"settings.transportRTSPThrough.items.0" = "Outomaties";
+"settings.transportRTSPThrough.label" = "Vervoer RTSP-stroom deur";
+"settings.userAgent.label" = "Gebruikeragent";
+"settings.ytdlEnabled.label" = "Aktiveer youtube-dl";
+"settings.ytdlRawOptions.desc" = "Formaat: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "Rou-opsies";
+"settings.ytdlSearchPath.desc" = "IINA soek youtube-dl in hierdie vouer. Moet herbegin word.";
+"settings.ytdlSearchPath.label" = "Pasgemaakte youtube-dl-pad";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Soek outomaties na onderskrifte";
+"settings.displayInLetterBox.label" = "Toon onderskrifte in blokke terwyl in volskerm";
+"settings.subAlignX.items.0" = "Links";
+"settings.subAlignX.items.1" = "Middel";
+"settings.subAlignX.items.2" = "Regs";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "Bo";
+"settings.subAlignY.items.1" = "Middel";
+"settings.subAlignY.items.2" = "Onder";
+"settings.subAutoLoadIINA.items.0" = "Gedeaktiveer";
+"settings.subAutoLoadIINA.items.1" = "Onderskrifte bevat medialêernaam";
+"settings.subAutoLoadIINA.items.2" = "Slimbespeuring deur IINA";
+"settings.subAutoLoadIINA.label" = "Outomatiese laai";
+"settings.subAutoLoadPriorityString.desc" = "Voer asb. ’n kommageskeide lys van stringe in.";
+"settings.subAutoLoadPriorityString.label" = "Onderskrifte geniet voorkeur wanneer lêernaam die volgende bevat";
+"settings.subAutoLoadSearchPath.desc" = "Gidse word deur dubbelpunte(:) geskei. Relatiewe paaie en wildekaarte (*) word aan die einde toegelaat.";
+"settings.subAutoLoadSearchPath.label" = "Soek ook na onderskrifte in die volgende gidse";
+"settings.subBlur.label" = "Vervaging";
+"settings.subBold.label" = "Vet";
+"settings.subItalic.label" = "Skuins";
+"settings.subLang.desc" = "Hierdie opsie sal as ISO 639-2 taalkode bewaar word en sal vir mpv en OpenSubtitles werk.";
+"settings.subPos.label" = "Vertikale posisie";
+"settings.subScaleWithWindow.label" = "Skaal onderskrifte saam met venstergrootte";
+"settings.subSpacing.label" = "Letterafstand";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "Hou venster op voorgrond tydens afspeel";
+"settings.arrowBtnAction.items.0" = "Snelheid";
+"settings.arrowBtnAction.items.1" = "Vorige / volgende media";
+"settings.arrowBtnAction.items.2" = "Spoel vorentoe / agtertoe";
+"settings.arrowBtnAction.label" = "Gebruik linker-/regterknop vir";
+"settings.controlBarStickToCenter.label" = "Spring na die middel tydens sleep";
+"settings.disableAnimations.label" = "Deaktiveer animasies";
+"settings.disableOSDPauseResumeMsgs.label" = "Laat wag / hervat";
+"settings.disableOSDSeekMsg.label" = "Spoel vorentoe of terug";
+"settings.disableOSDSpeedMsg.label" = "Snelheid";
+"settings.disablePlaySliderScrolling.label" = "Voorkom dat rolwiel afspeelposisie verander";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Toon tyd- en battery-inligting wanneer in volskerm";
+"settings.enableOSD.label" = "Aktiveer OSD";
+"settings.enableThumbnailForRemoteFiles.label" = "Sluit lêers op ’n gekoppelde eksterne skyf in";
+"settings.enableThumbnailPreview.label" = "Toon duimnaelvoorskou";
+"settings.maxThumbnailPreviewCacheSize.label" = "Maksimum kasgrootte";
+"settings.oscPosition.items.0" = "Swewend";
+"settings.oscPosition.items.1" = "Bo";
+"settings.oscPosition.items.2" = "Onder";
+"settings.oscPosition.label" = "Op-skerm-beheer";
+"settings.osdTextSize.label" = "Teksgrootte";
+"settings.pauseWhenPip.label" = "Laat afspeel outomaties wag";
+"settings.resizeWindowOption.items.0" = "pas in die skerm";
+"settings.resizeWindowOption.items.1" = "0.5x videogrootte";
+"settings.resizeWindowOption.items.2" = "1x videogrootte";
+"settings.resizeWindowOption.items.3" = "1,5x videogrootte";
+"settings.resizeWindowOption.items.4" = "2x videogrootte";
+"settings.resizeWindowOption.label" = "Pas venstergrootte aan na";
+"settings.showChapterPos.label" = "Toon hoofstukposisie in vorderingsbalk";
+"settings.showRemainingTime.label" = "Toon oorblywende tyd in plaas van totale duur";
+"settings.themeMaterial.desc" = "Tema";
+"settings.themeMaterial.items.0" = "Donker";
+"settings.themeMaterial.items.2" = "Lig";
+"settings.themeMaterial.items.4" = "Outomaties";
+"settings.themeMaterial.label" = "Voorkoms";
+"settings.togglePipByMinimizingWindow.label" = "Gebruik Beeld-in-beeld solank die venster geminimaliseerd is";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "Slegs vir videolêers";
+"settings.usePhysicalResolution.label" = "Gebruik fisiese resolusie op Retina-skerms";
+"settings.windowBehaviorWhenPip.items.0" = "Doen niks";
+"settings.windowBehaviorWhenPip.items.1" = "Versteek";
+"settings.windowBehaviorWhenPip.items.2" = "Minimaliseer";
+"settings.windowBehaviorWhenPip.label" = "Venster";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "IINA moet herbegin word vir die volgende instellings om toegepas te word.";
+"settings.enableAdvancedSettings.label" = "Aktiveer gevorderde instellings";
+"settings.enableLogging.label" = "Aktiveer logboekstawing";
+"settings.logLevel.items.0" = "Wydlopig";
+"settings.logLevel.items.1" = "Ontfout";
+"settings.logLevel.items.2" = "Waarskuwing";
+"settings.logLevel.items.3" = "Fout";
+"settings.logLevel.label" = "Logboekvlak";
+"settings.useMpvOsd.label" = "Gebruik mpv se OSD";
+"settings.useUserDefinedConfDir.label" = "Gebruik konfigurasiegids";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS-onderskrifte";
+"settings.$About" = "Oor";
+"settings.$Accessibility" = "Toeganklikheid";
+"settings.$AdditionalMpvOptions" = "Bykomende mpv-opsies";
+"settings.$Advanced" = "Gevorderd";
+"settings.$Align" = "Belyn";
+"settings.$AlwaysWhenPlaying" = "Altyd";
+"settings.$Appearance" = "Voorkoms";
+"settings.$AssrtAPIToken" = "Assrt API-teken";
+"settings.$Audio" = "Oudio";
+"settings.$Author" = "Outeur";
+"settings.$AutoLoad" = "Outomatiese laai";
+"settings.$Background" = "Agtergrond";
+"settings.$Behavior" = "Gedrag";
+"settings.$Border" = "Rand";
+"settings.$Cache" = "Kasgeheue";
+"settings.$Cancel" = "Kanselleer";
+"settings.$CheckForUpdates" = "Soek na bywerkings";
+"settings.$ClearCache" = "Wis kasgeheue";
+"settings.$ClearPlaybackHistory" = "Wis afspeelgeskiedenis…";
+"settings.$ClearSavedPlaybackProgress" = "Wis bewaarde afspeelposisies…";
+"settings.$ClearThumbnailCache" = "Wis duimnaelkasgeheue…";
+"settings.$Color" = "Kleur";
+"settings.$Customize" = "Pas aan…";
+"settings.$DefaultApplication" = "Verstektoepassing";
+"settings.$DefaultEncoding" = "Verstekenkodering";
+"settings.$DeleteAllPlaybackHistories" = "Die onderstaande knop sal alle afspeelgeskiedenisse en inskrywings in “Open onlangs” skrap.";
+"settings.$DeleteAllWatchLater" = "Die onderstaande knop sal alle lêers in die “kyk later”-vouer skrap. Hierdie lêers bevat alle bewaarde afspeelvordering en instellings wat gedurende afspeel toegepas is.";
+"settings.$DoNotResize" = "Gedeaktiveer";
+"settings.$FailedToLoadThePage" = "Kon nie die bladsy laai nie.";
+"settings.$Font" = "Lettertipe";
+"settings.$GetBrowserExtensionsForIINA" = "Kry blaaieruirbreidings vir IINA";
+"settings.$Height" = "Hoogte";
+"settings.$History" = "Geskiedenis";
+"settings.$Identifier" = "Identifiseerder";
+"settings.$ImportAnExistingConfigFile" = "Voer ’n bestaande konfigurasielêer in";
+"settings.$InitialWindowPosition" = "Aanvanklike vensterposisie";
+"settings.$InitialWindowSize" = "Aanvanklike venstergrootte";
+"settings.$Install" = "Installeer";
+"settings.$InstallLocalPackage" = "Install Package…";
+"settings.$Layout" = "Uitleg";
+"settings.$Login" = "Teken aan";
+"settings.$MB" = "MB";
+"settings.$Margin" = "Kantlyn";
+"settings.$Mouse" = "Muis";
+"settings.$Network" = "Netwerk";
+"settings.$NotLoggedIn" = "Nie aangeteken nie";
+"settings.$OK" = "Goed";
+"settings.$Offset" = "Verplasing";
+"settings.$OnScreenController" = "Op-skerm-beheer";
+"settings.$OnScreenDisplay" = "Op-skerm-aansig";
+"settings.$OnlineSubtitles" = "Aanlyn onderskrifte";
+"settings.$OpenLinksOrCurrentWebpage" = "Open skakels of huidige webwerf in IINA met een klik. Die webwerf moet deur youtube-dl ondersteun word.";
+"settings.$OpenLogDirectory" = "Open logboekgids";
+"settings.$OtherStyles" = "Ander style";
+"settings.$OverrideLevel" = "Oorheersvlak";
+"settings.$PictureinnPicture" = "Beeld-in-\nbeeld";
+"settings.$Playlist" = "Afspeellys";
+"settings.$PleaseSelectTheMediaTypes" = "Kies asb. die mediatipes waarvoor u IINA die verstektoepassing wil maak.";
+"settings.$Position" = "Posisie";
+"settings.$PreferredLanguage" = "Voorkeurtaal";
+"settings.$RestoreAlerts" = "Stel waarskuwings terug";
+"settings.$RestoreAllAlertsThat" = "Die onderstaande knop sal alle waarskuwings wat d.m.v. die “Moenie weer hierdie boodskap toon nie”-dialoog onderdruk is, terugstel.";
+"settings.$RestoreSuppressedAlerts" = "Stel onderdrukte waarskuwings terug…";
+"settings.$SPDIFOutput" = "S/PDIF-afvoer";
+"settings.$Screenshots" = "Skermkiekies";
+"settings.$SetIINAAsTheDefault" = "Stel IINA in as verstektoepassing…";
+"settings.$Settings" = "Instellings";
+"settings.$Shadow" = "Skadu";
+"settings.$ShowInFinder" = "Toon in Finder";
+"settings.$ShowTheConfigFileIn" = "Toon konfigurasielêer in Finder";
+"settings.$Size" = "Grootte";
+"settings.$Source" = "Bron";
+"settings.$SuppressMessagesFor" = "Onderdruk boodskappe vir";
+"settings.$TextSubtitles" = "Teksonderskrifte";
+"settings.$ThumbnailPreview" = "Duimnaelvoorskou";
+"settings.$Toolbar" = "Nutsbalk";
+"settings.$Trackpad" = "Spoorplaat";
+"settings.$Uninstall" = "Deïnstalleer";
+"settings.$Website" = "Webwerf";
+"settings.$WhenEnteringPIP" = "By aktivering van Beeld-in-beeld";
+"settings.$WhenMediaIsOpened" = "Wanneer media geopen word";
+"settings.$WhenMediaIsOpenedManually" = "Wanneer media handmatig geopen word";
+"settings.$Width" = "Breedte";
+"settings.$Window" = "Venster";
+"settings.$X" = " X";
+"settings.$XOffset" = "X-afstand";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Y-afstand";
+"settings.$YouCanInstallANew" = "U kan ’n nuwe inprop installeer vanaf GitHub of ’n lokale .iinaplgz-pakket. Inproppe wat vanaf GitHub geïnstalleer is kan outomaties bygewerk word.";
+"settings.$bottom" = "onderkant";
+"settings.$dB" = "dB";
+"settings.$left" = "linker";
+"settings.$ofScreen" = "% van skerm";
+"settings.$point" = "punt";
+"settings.$pt" = "pt";
+"settings.$right" = "regter";
+"settings.$s" = "s";
+"settings.$sideOfTheScreen" = "kant van die skerm";
+"settings.$toThe" = "van die";
+"settings.$top" = "bokant";

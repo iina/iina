@@ -13,9 +13,12 @@
 "general.logout" = "登出";
 "general.ok" = "確定";
 "general.cancel" = "取消";
+"general.done" = "完成";
 "general.username" = "用戶名";
 "general.password" = "密碼";
-"general.na" = "N/A";
+"general.na" = "不適用";
+"general.no_result" = "沒有結果";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "此項為必填項目。";
 "input.already_exists" = "此內容已經被其他項目使用。";
@@ -137,6 +140,9 @@
 "osd.canceled" = "已取消";
 "osd.cannot_connect" = "無法連接";
 "osd.timed_out" = "已逾時";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "已加入濾鏡：%@";
 "osd.filter_removed" = "已移除濾鏡";
 "osd.file_loop" = "循環播放單一檔案";
@@ -145,8 +151,10 @@
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
-"preference.ui" = "使用者介面";
-"preference.video_audio" = "視訊/音訊";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "視訊";
+"preference.audio" = "音訊";
 "preference.subtitle" = "字幕";
 "preference.network" = "網路";
 "preference.control" = "控制";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "請輸入符合 mpv 的 vf 或 af 格式的濾鏡指令";
 
 "alert.keybinding_config.error" = "剖析快速鍵設定檔「%@」時發生錯誤，即將使用 IINA 預設快速鍵設定檔替代。請檢查您的設定檔。";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "無法讀取使用者定義額外的 mpv 設定";
 "alert.extra_option.empty" = "Key 或 value 不能留空！";
-"alert.extra_option.error" = "無法設定 --%@=%@（返回值：%d）。請於「偏好設定 > 進階」中檢查您的額外選項設定。";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "設定設定檔案夾「%@」時發生錯誤";
 
 "alert.playlist.error_deleting" = "刪除 %@ 時發生錯誤";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "刪除播放記錄";
 "alert.delete_history.message" = "確定要刪除所選的播放記錄嗎？";
+"alert.delete_all_history.title" = "清除播放記錄";
+"alert.delete_all_history.message" = "確定要清除所有播放記錄嗎？";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "您正在新增視訊濾鏡。然而，目前的硬體解碼器無法完整支援視訊濾鏡。您可以停用硬體解碼，或使用支援「拷貝」的解碼器（將會佔用兩倍記憶體）。\n您可能需要重複上一個操作（例如裁切）才能看到效果。";
 "alert.filter_hwdec.abort" = "中止";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "復原已關閉的警告";
 "alert.restore_alerts.message" = "你確定想要復原這些關閉的警告嗎？";
+
+"alert.cleared" = "已清除。";
+"alert.restored" = "已恢復";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "沒有可打開的檔案。";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "最新版本是 %@，你的版本是 %@，要更新嗎？";
 "alert.plugin_permission" = "本外掛程式需要以下權限，請在繼續之前先審核這些權限。";
 "alert.plugin_permission_added" = "此更新需要額外的權限，請在繼續之前先審核這些權限。";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "在瀏覽器中打開";
 "pl_menu.copy_url" = "拷貝 URL";
 "pl_menu.copy_url_multi" = "拷貝多個 URL";
+"pl_menu.playback" = "播放";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "外掛程式";
+"pl_menu.playlist" = "播放列表";
 
 "keymapping.title" = "快速鍵";
 "keymapping.message" = "按下按鍵即可設定";
@@ -409,6 +436,11 @@
 "osc_toolbar.sub_track" = "選擇字幕軌道";
 "osc_toolbar.screenshot" = "螢幕擷取";
 "osc_toolbar.plugins" = "顯示外掛程式面板";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "浮動";
+"osc_pos.top" = "頂端";
+"osc_pos.bottom" = "底部";
 
 "mini_player.album_art" = "顯示封面圖庫";
 "mini_player.loop" = "重覆播放";
@@ -466,3 +498,459 @@
 "plugin.install_error.cannot_load" = "IINA 無法載入此外掛程式，可能使用了錯誤的格式。";
 "plugin.check_for_updates" = "檢查更新";
 "plugin.updating" = "正在下載更新…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "日誌檢視器";
+"logwindow.time" = "時間";
+"logwindow.subsystem" = "子系統";
+"logwindow.message" = "訊息";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "儲存";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "拷貝";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "播放記錄";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "進度";
+"history_window.col.played_at" = "播放時間";
+"history_window.menu.play" = "播放";
+"history_window.menu.play_new_window" = "以新視窗播放";
+"history_window.menu.show_in_finder" = "顯示於 Finder";
+"history_window.menu.delete" = "刪除…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "清除播放記錄";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "日期";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "搜尋";
+"history_window.search.filename" = "檔案名稱";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "沒有最近的搜尋項目";
+"history_window.search.recents_title" = "最近的搜尋項目";
+"history_window.search.clear_recents" = "清除記錄";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "視訊";
+"sidebar.audio" = "音訊";
+"sidebar.sub" = "字幕";
+"sidebar.plugins" = "外掛程式";
+"sidebar.playlist" = "播放列表";
+"sidebar.chapters" = "章節";
+
+"sidebar.aspect_ratio" = "顯示比例";
+"sidebar.crop" = "裁切";
+"sidebar.rotation" = "旋轉";
+"sidebar.speed" = "速度";
+
+"sidebar.brightness" = "亮度";
+"sidebar.contrast" = "對比度";
+"sidebar.saturation" = "飽和度";
+"sidebar.gamma" = "伽瑪";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "載入外部音軌⋯";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "將目前數值設為 EQ 預設值";
+"sidebar.rename_eq" = "更改目前 EQ 預設值";
+"sidebar.remove_eq" = "移除目前 EQ 預設值";
+"sidebar.manual_eq" = "手冊";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "載入字幕⋯";
+"sidebar.search_online" = "線上搜尋⋯";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "字體";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "邊框";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "字幕樣式可能破壞 ASS 渲染。某些字幕格式無法使用下列部分選項。";
+
+"sidebar.add_file" = "加入檔案⋯";
+"sidebar.add_url" = "加入 URL⋯";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "顯示歡迎視窗";
+"settings.actionAfterLaunch.items.1" = "顯示開啟檔案視窗";
+"settings.actionAfterLaunch.items.2" = "不執行任何動作";
+"settings.actionAfterLaunch.label" = "啟動後";
+"settings.allowDuplicatePlayers.label" = "允許在多個視窗開啟相同檔案";
+"settings.allowScreenSaverForAudio.desc" = "防止系統進入睡眠模式";
+"settings.allowScreenSaverForAudio.label" = "在「音樂模式」或僅播放音訊時；讓系統可以照常啟動螢幕保護程式。";
+"settings.alwaysOpenInNewWindow.label" = "總是在新視窗打開檔案";
+"settings.autoRepeat.label" = "使用者主動開啟檔案時";
+"settings.autoSwitchToMusicMode.label" = "播放音訊檔案時自動切換到「音樂模式」";
+"settings.blackOutMonitor.label" = "當全螢幕播放時關熄其餘顯示器";
+"settings.defaultRepeatMode.items.0" = "循環播放所有檔案";
+"settings.defaultRepeatMode.items.1" = "循環播放單一檔案";
+"settings.fullScreenWhenOpen.label" = "進入全螢幕";
+"settings.groupSimultaneousOpensInPlaylist.label" = "開啟多個檔案時群組化播放清單";
+"settings.keepOpenOnFileEnd.label" = "檔案播放完後，不要自動關閉視窗";
+"settings.pauseWhenGoesToSleep.label" = "電腦進入睡眠時暫停";
+"settings.pauseWhenInactive.label" = "視窗非現用狀態/現用狀態時";
+"settings.pauseWhenLeavingFullScreen.label" = "離開全螢幕時暫停";
+"settings.pauseWhenMinimized.label" = "最小化/還原時";
+"settings.pauseWhenOpen.label" = "暫停";
+"settings.pauseresumeWhen" = "自動暫停/繼續播放";
+"settings.playWhenEnteringFullScreen.label" = "進入全螢幕時播放";
+"settings.playlistAutoAdd.desc" = "必須重新啟動 IINA 來讓設定生效";
+"settings.playlistAutoAdd.label" = "自動加入同一檔案夾內的其他檔案";
+"settings.playlistAutoPlayNext.label" = "自動播放下一個項目";
+"settings.playlistShowMetadata.label" = "顯示音訊檔案的曲目和藝術家資訊";
+"settings.playlistShowMetadataInMusicMode.label" = "僅限「音樂模式」";
+"settings.preventScreenSaver.label" = "播放檔案時，防止系統啟動螢幕保護程式。";
+"settings.quitWhenNoOpenedWindow.label" = "所有視窗關閉時結束";
+"settings.receiveBetaUpdate.label" = "接收 beta 版本更新";
+"settings.recordPlaybackHistory.label" = "啟用播放記錄";
+"settings.recordRecentFiles.label" = "啟用「打開最近使用過的檔案」選單";
+"settings.resumeLastPosition.label" = "自動繼續播放上次的播放進度";
+"settings.screenShotFormat.label" = "格式";
+"settings.screenShotIncludeSubtitle.label" = "包括字幕";
+"settings.screenshotCopyToClipboard.desc" = "位置";
+"settings.screenshotCopyToClipboard.label" = "複製到剪貼簿";
+"settings.screenshotSaveToFile.desc" = "螢幕快照路徑";
+"settings.screenshotSaveToFile.label" = "儲存至";
+"settings.screenshotShowPreview.label" = "螢幕截圖後顯示預覽";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "否則只有手動打開的檔案會顯示在此選單中";
+"settings.trackAllFilesInRecentOpenMenu.label" = "將所有播放過的檔案加入「打開最近使用過的檔案」選單";
+"settings.useLegacyFullScreen.label" = "使用 OS X 10.6 前舊版的全螢幕模式";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "自動啟用 HDR";
+"settings.enableToneMapping.label" = "啟用色調對應";
+"settings.forceDedicatedGPU.desc" = "渲染時總是使用獨立 GPU (如果可用)。這將會提高效能，但可能會減少電池壽命。";
+"settings.forceDedicatedGPU.label" = "強制使用獨立 GPU";
+"settings.hardwareDecoder.items.0" = "停用";
+"settings.hardwareDecoder.items.1" = "自動";
+"settings.hardwareDecoder.items.2" = "自動 (複製)";
+"settings.hardwareDecoder.label" = "硬體解碼器";
+"settings.loadIccProfile.desc" = "載入目前顯示的ICC配置檔，並使用它將視頻RGB轉換為屏幕輸出僅(適用於 SDR 模式)";
+"settings.loadIccProfile.label" = "載入 ICC 色彩描述檔";
+"settings.toneMappingAlgorithm.items.0" = "自動";
+"settings.toneMappingAlgorithm.label" = "演算法";
+"settings.toneMappingTargetPeak.desc" = "螢幕的測量最大亮度。如果設為0，IINA將檢測此值。若檢測失敗，IINA將目標峰值設為400。";
+"settings.toneMappingTargetPeak.label" = "目標峰值";
+"settings.videoThreads.desc" = "預設：0 (自動)";
+"settings.videoThreads.label" = "執行緒數";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation是一個新的實驗性音頻驅動程序，提供空間音頻支持。然而，在使用AVFoundation時，您可能會遇到一些問題，例如音頻延遲。";
+"settings.audioDriverEnableAVFoundation.label" = "聲訊驅動";
+"settings.enableInitialVolume.label" = "初始音量";
+"settings.gaplessAudio.desc" = "無縫音訊";
+"settings.gaplessAudio.items.0" = "停用";
+"settings.gaplessAudio.items.1" = "弱";
+"settings.gaplessAudio.items.2" = "強";
+"settings.gaplessAudio.label" = "無縫音訊";
+"settings.maxVolume.label" = "最高音量";
+"settings.preferredAudioDevice.label" = "偏好音訊裝置";
+"settings.replayGain.desc" = "根據儲存在檔案元數據中的 ReplayGain 值調整音量增益。";
+"settings.replayGain.items.0" = "不作調整";
+"settings.replayGain.items.1" = "音軌增益";
+"settings.replayGain.items.2" = "專輯增益";
+"settings.replayGain.label" = "音訊強度調整";
+"settings.replayGainClip.desc" = "如果未啟用此選項，將會通過降低增益來防止削波。";
+"settings.replayGainClip.label" = "允許音量增益削波";
+"settings.replayGainFallback.desc" = "應用於文件沒有「回放增益」標籤的增益。";
+"settings.replayGainFallback.label" = "減退";
+"settings.replayGainPreamp.desc" = "應用於 ReplayGain 增益的前級放大增益。";
+"settings.replayGainPreamp.label" = "前級放大增益";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "無";
+"settings.doubleClickAction.items.1" = "切換全螢幕";
+"settings.doubleClickAction.items.2" = "暫停 / 繼續";
+"settings.doubleClickAction.items.4" = "切換子母畫面";
+"settings.doubleClickAction.items.5" = "A-B 循環";
+"settings.doubleClickAction.items.6" = "重置速度";
+"settings.doubleClickAction.label" = "按兩下滑鼠時";
+"settings.forceTouchAction.items.0" = "無";
+"settings.forceTouchAction.items.1" = "切換全螢幕";
+"settings.forceTouchAction.items.2" = "暫停 / 繼續";
+"settings.forceTouchAction.items.3" = "隱藏播放控制列";
+"settings.forceTouchAction.label" = "用力長按時";
+"settings.horizontalScrollAction.items.0" = "調整音量";
+"settings.horizontalScrollAction.items.1" = "尋找";
+"settings.horizontalScrollAction.items.2" = "無";
+"settings.horizontalScrollAction.items.4" = "調整播放速度";
+"settings.horizontalScrollAction.label" = "水平捲動";
+"settings.middleClickAction.items.0" = "無";
+"settings.middleClickAction.items.1" = "切換全螢幕";
+"settings.middleClickAction.items.2" = "暫停 / 繼續";
+"settings.middleClickAction.items.3" = "隱藏播放控制列";
+"settings.middleClickAction.items.4" = "切換子母畫面";
+"settings.middleClickAction.items.5" = "A-B 循環";
+"settings.middleClickAction.items.6" = "重置速度";
+"settings.middleClickAction.label" = "按下滑鼠中鍵時";
+"settings.pinchAction.items.0" = "調整視窗大小";
+"settings.pinchAction.items.1" = "全螢幕";
+"settings.pinchAction.items.2" = "無";
+"settings.pinchAction.label" = "放大縮小時";
+"settings.playbackSpeedScrollAmount.label" = "速度調整靈敏度";
+"settings.relativeSeekAmount.label" = "尋找捲動靈敏度";
+"settings.rightClickAction.desc" = "按下滑鼠中鍵時";
+"settings.rightClickAction.items.0" = "無";
+"settings.rightClickAction.items.2" = "暫停 / 繼續";
+"settings.rightClickAction.items.3" = "隱藏播放控制列";
+"settings.rightClickAction.items.4" = "切換子母畫面";
+"settings.rightClickAction.items.5" = "A-B 循環";
+"settings.rightClickAction.items.6" = "重置速度";
+"settings.rightClickAction.label" = "按右鍵時";
+"settings.singleClickAction.items.0" = "無";
+"settings.singleClickAction.items.2" = "暫停 / 繼續";
+"settings.singleClickAction.items.3" = "隱藏播放控制列";
+"settings.singleClickAction.label" = "按一下滑鼠時";
+"settings.useExactSeek.desc" = "精確尋找於較大檔案時，將導致卡頓以及較高的 CPU 用量";
+"settings.useExactSeek.items.0" = "關鍵影格尋找";
+"settings.useExactSeek.items.1" = "精確尋找";
+"settings.useExactSeek.items.2" = "自動";
+"settings.useExactSeek.label" = "尋找類型";
+"settings.verticalScrollAction.items.0" = "調整音量";
+"settings.verticalScrollAction.items.1" = "尋找";
+"settings.verticalScrollAction.items.2" = "無";
+"settings.verticalScrollAction.items.4" = "調整播放速度";
+"settings.verticalScrollAction.label" = "垂直捲動";
+"settings.videoViewAcceptsFirstMouse.label" = "當不在主視窗時，接受第一個滑鼠點擊";
+"settings.volumeScrollAmount.label" = "音量調整靈敏度";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "顯示原始值";
+"settings.useMediaKeys.label" = "使用系統媒體控制";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "預設值：153600";
+"settings.cacheBufferSize.label" = "快取緩衝區大小(KB)";
+"settings.enableCache.label" = "啟用快取";
+"settings.httpProxy.desc" = "必須重新啟動 IINA 來讓設定生效";
+"settings.httpProxy.label" = "HTTP 代理";
+"settings.secPrefech.desc" = "預設值：36000";
+"settings.secPrefech.label" = "預先擷取秒數";
+"settings.showBufferingThrobber.label" = "在暫停等候快取時顯示載入圖示";
+"settings.showSeekingThrobber.label" = "在檢索時顯示載入圖示";
+"settings.transportRTSPThrough.items.0" = "自動";
+"settings.transportRTSPThrough.label" = "傳輸 RTSP 串流時使用";
+"settings.userAgent.label" = "使用者代理";
+"settings.ytdlEnabled.label" = "啟用 youtube-dl";
+"settings.ytdlRawOptions.desc" = "格式：<key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "額外參數";
+"settings.ytdlSearchPath.desc" = "IINA 將在此檔案夾內搜尋 youtube-dl，需要重新啟動";
+"settings.ytdlSearchPath.label" = "自定 youtube-dl 路徑";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "自動搜尋線上字幕";
+"settings.displayInLetterBox.label" = "全螢幕時在黑邊顯示字幕";
+"settings.subAlignX.items.0" = "齊左";
+"settings.subAlignX.items.1" = "置中";
+"settings.subAlignX.items.2" = "齊右";
+"settings.subAlignX.label" = "垂直";
+"settings.subAlignY.items.0" = "頂端";
+"settings.subAlignY.items.1" = "置中";
+"settings.subAlignY.items.2" = "底部";
+"settings.subAutoLoadIINA.items.0" = "停用";
+"settings.subAutoLoadIINA.items.1" = "包含媒體檔名的字幕";
+"settings.subAutoLoadIINA.items.2" = "由 IINA 自動偵測";
+"settings.subAutoLoadIINA.label" = "自動載入";
+"settings.subAutoLoadPriorityString.desc" = "請輸入由逗號分隔的字串列表。";
+"settings.subAutoLoadPriorityString.label" = "優先載入檔名包含下列字串的字幕";
+"settings.subAutoLoadSearchPath.desc" = "目錄之間由冒號（:）隔開。允許相對路徑和在結尾處使用萬用字元（*）。";
+"settings.subAutoLoadSearchPath.label" = "也在下列的目錄中搜尋字幕";
+"settings.subBlur.label" = "模糊";
+"settings.subBold.label" = "粗體";
+"settings.subItalic.label" = "斜體";
+"settings.subLang.desc" = "此選項將會以 ISO 639-2 編碼儲存，可使用於 mpv 和 OpenSubtitles 。";
+"settings.subPos.label" = "垂直位置";
+"settings.subScaleWithWindow.label" = "根據視窗大小縮放字幕";
+"settings.subSpacing.label" = "字體間距";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "播放時浮動於上方";
+"settings.alwaysShowOnTopIcon.label" = "在視窗標題中顯示浮動於上方圖示";
+"settings.arrowBtnAction.items.0" = "速度";
+"settings.arrowBtnAction.items.1" = "上一個/下一個媒體";
+"settings.arrowBtnAction.items.2" = "快轉/倒轉";
+"settings.arrowBtnAction.label" = "左/右箭頭按鈕的功能";
+"settings.controlBarStickToCenter.label" = "拖移時吸附到視窗中心";
+"settings.disableAnimations.desc" = "當 macOS 的『減少動態效果』輔助功能設定開啟時，IINA 會減少可能對視覺變化敏感的使用者造成不適的動態效果。如果需要進一步減少動態效果，可以透過此設定來完全消除這些效果。";
+"settings.disableAnimations.label" = "禁用視窗動態效果";
+"settings.disableOSDFileStartMsg.label" = "開始檔案";
+"settings.disableOSDPauseResumeMsgs.label" = "暫停 / 繼續";
+"settings.disableOSDSeekMsg.label" = "跳轉";
+"settings.disableOSDSpeedMsg.label" = "速度";
+"settings.disablePlaySliderScrolling.label" = "防止滾輪更改播放進度";
+"settings.disableVolumeSliderScrolling.label" = "阻止滾輪更改音量";
+"settings.displayTimeAndBatteryInFullScreen.label" = "全螢幕時顯示系統時間及電量資訊";
+"settings.enableOSD.label" = "啟用「狀態改變資訊」";
+"settings.enableThumbnailForRemoteFiles.label" = "包含已掛載網路磁碟機上的檔案";
+"settings.enableThumbnailPreview.label" = "啟用縮覽圖預覽";
+"settings.maxThumbnailPreviewCacheSize.label" = "快取大小上限";
+"settings.oscPosition.items.0" = "浮動";
+"settings.oscPosition.items.1" = "位於頂部";
+"settings.oscPosition.items.2" = "位於底部";
+"settings.oscPosition.label" = "播放控制器";
+"settings.osdTextSize.label" = "字體大小";
+"settings.pauseWhenPip.label" = "自動暫停播放";
+"settings.resizeWindowOption.items.0" = "符合螢幕大小";
+"settings.resizeWindowOption.items.1" = "0.5 倍影片大小";
+"settings.resizeWindowOption.items.2" = "1 倍影片大小";
+"settings.resizeWindowOption.items.3" = "1.5 倍影片大小";
+"settings.resizeWindowOption.items.4" = "2 倍影片大小";
+"settings.resizeWindowOption.label" = "調整視窗大小至";
+"settings.scaleRemainingTime.label" = "根據播放速率顯示剩餘時間";
+"settings.showChapterPos.label" = "在進度列中顯示章節";
+"settings.showRemainingTime.label" = "顯示剩餘時間";
+"settings.themeMaterial.desc" = "主題";
+"settings.themeMaterial.items.0" = "深色";
+"settings.themeMaterial.items.2" = "淺色";
+"settings.themeMaterial.items.4" = "符合系統外觀";
+"settings.themeMaterial.label" = "外觀";
+"settings.togglePipByMinimizingWindow.label" = "最小化/還原視窗時，自動切換「子母畫面」模式";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "僅限影片檔案";
+"settings.usePhysicalResolution.label" = "在 Retina 顯示器上使用原生解析度";
+"settings.windowBehaviorWhenPip.items.0" = "不執行任何動作";
+"settings.windowBehaviorWhenPip.items.1" = "隱藏";
+"settings.windowBehaviorWhenPip.items.2" = "縮到最小";
+"settings.windowBehaviorWhenPip.label" = "視窗";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "您必須重新啟動 IINA 來讓以下所有設定生效。";
+"settings.enableAdvancedSettings.label" = "啟用進階設定";
+"settings.enableLogging.label" = "記錄日誌";
+"settings.logLevel.items.0" = "詳細";
+"settings.logLevel.items.1" = "除錯";
+"settings.logLevel.items.2" = "警告";
+"settings.logLevel.items.3" = "錯誤";
+"settings.logLevel.label" = "Log等級";
+"settings.useMpvOsd.label" = "使用 mpv 的 OSD";
+"settings.useUserDefinedConfDir.label" = "使用設定檔檔案夾";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS 字幕";
+"settings.$About" = "關於";
+"settings.$Accessibility" = "協助工具";
+"settings.$AdditionalMpvOptions" = "其他 mpv 選項";
+"settings.$Advanced" = "進階";
+"settings.$Align" = "對齊";
+"settings.$AlwaysWhenPlaying" = "播放新影片時總是如此";
+"settings.$Appearance" = "外觀";
+"settings.$AssrtAPIToken" = "Assrt（偽射手網）API token";
+"settings.$Audio" = "音訊檔案";
+"settings.$Author" = "開發者";
+"settings.$AutoLoad" = "自動載入";
+"settings.$Background" = "背景";
+"settings.$Behavior" = "行為";
+"settings.$Border" = "邊框";
+"settings.$Cache" = "快取";
+"settings.$Cancel" = "取消";
+"settings.$CheckForUpdates" = "自動檢查更新項目";
+"settings.$ClearCache" = "清除快取";
+"settings.$ClearPlaybackHistory" = "清除播放記錄⋯";
+"settings.$ClearSavedPlaybackProgress" = "清除儲存的播放進度⋯";
+"settings.$ClearThumbnailCache" = "清除縮覽圖快取⋯";
+"settings.$Color" = "顏色";
+"settings.$Customize" = "自定⋯";
+"settings.$DefaultApplication" = "預設應用程式";
+"settings.$DefaultEncoding" = "預設編碼";
+"settings.$DeleteAllPlaybackHistories" = "此按鈕將會清除播放記錄和「打開最近使用過的檔案」中的項目。";
+"settings.$DeleteAllWatchLater" = "此按鈕將會刪除「watch later」檔案夾中的所有檔案。這些檔案包含了儲存的播放進度和播放時所套用的一些設定。";
+"settings.$DoNotResize" = "停用";
+"settings.$FailedToLoadThePage" = "頁面讀取失敗";
+"settings.$Font" = "字體";
+"settings.$GetBrowserExtensionsForIINA" = "取得 IINA 的瀏覽器擴充功能";
+"settings.$Height" = "高";
+"settings.$Help" = "輔助說明";
+"settings.$History" = "播放記錄";
+"settings.$Identifier" = "識別碼";
+"settings.$ImportAnExistingConfigFile" = "輸入現有的設定檔";
+"settings.$InitialWindowPosition" = "初始視窗位置";
+"settings.$InitialWindowSize" = "初始視窗大小";
+"settings.$Install" = "安裝";
+"settings.$InstallLocalPackage" = "安裝外掛…";
+"settings.$Layout" = "佈局";
+"settings.$Login" = "登入";
+"settings.$MB" = "MB";
+"settings.$Margin" = "邊界";
+"settings.$Mouse" = "滑鼠";
+"settings.$Network" = "網路";
+"settings.$NotLoggedIn" = "尚未登入";
+"settings.$OK" = "好";
+"settings.$Offset" = "位移";
+"settings.$OnScreenController" = "播放控制器";
+"settings.$OnScreenDisplay" = "狀態改變資訊";
+"settings.$OnlineSubtitles" = "線上字幕";
+"settings.$OpenLinksOrCurrentWebpage" = "在 IINA 中打開連結或目前的網站。網站需要 youtube-dl 的支援。";
+"settings.$OpenLogDirectory" = "開啟日誌檔案夾";
+"settings.$OtherStyles" = "其他樣式";
+"settings.$OverrideLevel" = "覆蓋等級";
+"settings.$PictureinnPicture" = "子母畫面";
+"settings.$Playlist" = "播放列表";
+"settings.$PleaseSelectTheMediaTypes" = "請選擇您要將 IINA 設為預設應用程式的媒體類型。";
+"settings.$Position" = "位置";
+"settings.$PreferredLanguage" = "偏好的語言";
+"settings.$RestoreAlerts" = "復原警告";
+"settings.$RestoreAllAlertsThat" = "下方的按鈕將復原所有透過「不要再顯示此訊息」核取方塊關閉的警告。";
+"settings.$RestoreSuppressedAlerts" = "復原已關閉的警告⋯⋯";
+"settings.$SPDIFOutput" = "S/PDIF 輸出";
+"settings.$Screenshots" = "螢幕快照";
+"settings.$SetIINAAsTheDefault" = "將 IINA 設為預設應用程式⋯";
+"settings.$Settings" = "設定";
+"settings.$Shadow" = "陰影";
+"settings.$ShowInFinder" = "顯示於 Finder";
+"settings.$ShowTheConfigFileIn" = "在 Finder 中顯示設定檔";
+"settings.$Size" = "字體大小";
+"settings.$Source" = "來源";
+"settings.$SuppressMessagesFor" = "停止消息";
+"settings.$TextSubtitles" = "字幕樣式";
+"settings.$ThumbnailPreview" = "縮覽圖預覽";
+"settings.$Toolbar" = "工具列";
+"settings.$Trackpad" = "觸控式軌跡板";
+"settings.$Uninstall" = "解除安裝";
+"settings.$Video" = "視訊";
+"settings.$Website" = "網站";
+"settings.$WhenEnteringPIP" = "進入「子母畫面」模式時";
+"settings.$WhenMediaIsOpened" = "當打開檔案時";
+"settings.$WhenMediaIsOpenedManually" = "僅在手動打開媒體時";
+"settings.$Width" = "寬";
+"settings.$Window" = "視窗";
+"settings.$X" = "水平";
+"settings.$XOffset" = "X 位移";
+"settings.$Y" = "垂直";
+"settings.$YOffset" = "Y 位移";
+"settings.$YouCanInstallANew" = "您可以從 GitHub 或利用 .iinaplgz 包安裝新外掛程式。從 GitHub 安裝的外掛程式支援自動更新。";
+"settings.$bottom" = "底";
+"settings.$dB" = "分貝";
+"settings.$left" = "左";
+"settings.$nits" = "尼特";
+"settings.$ofScreen" = "% 螢幕大小";
+"settings.$point" = "像素";
+"settings.$pt" = "點（pt）";
+"settings.$right" = "右";
+"settings.$s" = "秒";
+"settings.$sideOfTheScreen" = "側";
+"settings.$toThe" = "距離螢幕";
+"settings.$top" = "頂";

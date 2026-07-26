@@ -265,6 +265,10 @@ class JavascriptPlugin: NSObject {
     // If there is a iinaplgz file inside the latest release, use the plgz file
     
     let response = Just.get("https://api.github.com/repos\(url.path)/releases/latest")
+    guard response.ok else {
+      throw PluginError.cannotDownload(response.reason, response.text ?? "")
+    }
+
     if let json = response.json as? [String: Any],
        let assets = json["assets"] as? [[String: Any]],
        let plgzItem = assets.first(where: { ($0["name"] as? String)?.hasSuffix(".iinaplgz") ?? false }),
@@ -351,7 +355,28 @@ class JavascriptPlugin: NSObject {
     }
 
     self.root = url
-    self.name = name
+
+    // e.g. "localized": { "fr": { "name": ..., "description": ..., "sidebarTab": { "name": ... } } }
+    let l10nDict = jsonDict["localized"] as? [String: [String: Any]] ?? [:]
+    // Also search for "en" (we assume Info.json is in English; won't cause big problem if it's not).
+    let preferredLang = Bundle.preferredLocalizations(from: ["en"] + Array(l10nDict.keys)).first
+    let preferredL10n: [String: Any]? = preferredLang.flatMap { l10nDict[$0] }
+
+    func l10n(_ key: String, fallback: String?) -> String? {
+      if let preferredL10n, let value = preferredL10n[key] as? String {
+        return value
+      }
+      return fallback
+    }
+
+    func l10nNested(_ key: String, _ subKey: String, fallback: String?) -> String? {
+      if let preferredL10n, let value = (preferredL10n[key] as? [String: Any])?[subKey] as? String {
+        return value
+      }
+      return fallback
+    }
+
+    self.name = l10n("name", fallback: name) ?? name
     self.version = version
     self.entryPath = entry
     self.globalEntryPath = jsonDict["globalEntry"] as? String
@@ -359,18 +384,18 @@ class JavascriptPlugin: NSObject {
     self.authorURL = author["url"]
     self.authorEmail = author["email"]
     self.identifier = identifier
-    self.desc = jsonDict["description"] as? String
+    self.desc = l10n("description", fallback: jsonDict["description"] as? String)
     self.preferencesPage = jsonDict["preferencesPage"] as? String
     self.helpPage = jsonDict["helpPage"] as? String
     self.domainList = (jsonDict["allowedDomains"] as? [String]) ?? []
     self.subProviders = jsonDict["subtitleProviders"] as? [[String: String]]
-    
+
     if externalURL != nil {
       self.isExternal = true
     }
 
     if let sidebarTabDef = jsonDict["sidebarTab"] as? [String: String] {
-      self.sidebarTabName = sidebarTabDef["name"]
+      self.sidebarTabName = l10nNested("sidebarTab", "name", fallback: sidebarTabDef["name"])
     } else {
       self.sidebarTabName = nil
     }
@@ -548,6 +573,33 @@ class JavascriptPlugin: NSObject {
     Utility.createDirIfNotExist(url: url)
     return url
   }()
+
+  func localizedPermissions(_ permissions: Set<Permission>? = nil, newLine: String = "\n") -> [(name: String, desc: String, isDangerous: Bool)] {
+    let permissions = permissions ?? self.permissions
+
+    let sorted = permissions.sorted { (a, b) in
+      let da = a.isDangerous, db = b.isDangerous
+      if da == db { return a.rawValue < b.rawValue }
+      return da
+    }
+
+    return sorted.map { permission in
+      func localize(_ key: String) -> String {
+        return NSLocalizedString("permissions.\(permission.rawValue).\(key)", comment: "")
+      }
+      var desc = localize("desc")
+      if case .networkRequest = permission {
+        if domainList.contains("*") {
+          desc += "\(newLine)- \(localize("any_site"))"
+        } else {
+          desc += "\(newLine)- "
+          desc += domainList.joined(separator: "\(newLine)- ")
+        }
+      }
+
+      return (name: localize("name"), desc: desc, isDangerous: permission.isDangerous)
+    }
+  }
 }
 
 

@@ -13,9 +13,12 @@
 "general.logout" = "Tanca la sessió";
 "general.ok" = "D'acord";
 "general.cancel" = "Cancel·la";
+"general.done" = "Fet";
 "general.username" = "Nom d'usuari";
 "general.password" = "Contrasenya";
 "general.na" = "N/A";
+"general.no_result" = "Cap resultat";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "El valor no pot estar buit.";
 "input.already_exists" = "El valor ja existeix.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Cancel·lat";
 "osd.cannot_connect" = "No es pot connectar";
 "osd.timed_out" = "Temps d'espera superat";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Filtre afegit: %@";
 "osd.filter_removed" = "Filtre suprimit";
 "osd.file_loop" = "Loop Single File";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Preferències";
 "preference.general" = "General";
-"preference.ui" = "Interfície";
-"preference.video_audio" = "Vídeo/Àudio";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Vídeo";
+"preference.audio" = "Àudio";
 "preference.subtitle" = "Subtítols";
 "preference.network" = "Xarxa";
 "preference.control" = "Controls";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Si us plau introdueix un filtre de text en format mpv's o format af.";
 
 "alert.keybinding_config.error" = "Error analitzant el fitxer \"%@\" de configuració de les dreceres de teclat! S'ha reestablert la configuració de defecte de IINA. Si us plau, verifica la configuració.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "No es poden llegir les opciones de mpv extra definides per l'usuari.";
 "alert.extra_option.empty" = "La clau o el valor no poden estar buits!";
-"alert.extra_option.error" = "Error establint la opció --%@=%@ amb el valor de retorn %d. Si us plau, verifica les opcions extres a Preferències > Avançat.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Error establint el directori de configuració \"%@\".";
 
 "alert.playlist.error_deleting" = "Error suprimint: %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Suprimeix l'historial de reproducció";
 "alert.delete_history.message" = "Estàs segur que vols suprimir les entrades seleccionades?";
+"alert.delete_all_history.title" = "Suprimeix l'historial de reproducció";
+"alert.delete_all_history.message" = "Estàs segur que vols eliminar tot l'historial de reproducció?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Estàs a punt d'aplicat un filtre de vídeo. Malgrat això, és possible que el teu maquinari no suporti filtres de vídeo correctament. Pots desactivat la decodificació per maquinari o canviar a Automàtic(còpia), el qual consumeix el doble de memòria.\nPot ser que hagis de repetir la operació anterior (com establir l'espapçament) per a que funcioni.";
 "alert.filter_hwdec.abort" = "Interromp";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Restaura alertes silenciades";
 "alert.restore_alerts.message" = "Segur que vols restaurar les alertes silenciades?";
+
+"alert.cleared" = "Fet.";
+"alert.restored" = "Restaurat.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Res per obrir.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "L'última versió és %@. Tu tens %@. Vols actualitzar?";
 "alert.plugin_permission" = "Aquest complement necessita els següents permisos. Si us plau, revisa'ls abans de continuar.";
 "alert.plugin_permission_added" = "Aquesta actualització necessita els següents permisos. Si us plau, revisa'ls abans de continuar.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionats";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Obre al navegador";
 "pl_menu.copy_url" = "Copia l'enllaç";
 "pl_menu.copy_url_multi" = "Copia els enllaços";
+"pl_menu.playback" = "Reproducció";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Complement";
+"pl_menu.playlist" = "Llista de reproducció";
 
 "keymapping.title" = "Assignació de tecles";
 "keymapping.message" = "Prem qualsevol tecla per començar a gravar.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Selecciona la pista dels subtítols";
 "osc_toolbar.screenshot" = "Take a screenshot";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Flotant";
+"osc_pos.top" = "Superior";
+"osc_pos.bottom" = "Inferior";
 
 "mini_player.album_art" = "Mescla la caràtula";
 "mini_player.loop" = "Repeteix";
@@ -465,3 +497,402 @@
 "plugin.install_error.cannot_load" = "IINA no pot carregar aquest complement. Potser té un format incorrecte.";
 "plugin.check_for_updates" = "Comprova si hi ha actualitzacions";
 "plugin.updating" = "S'està baixant l'actualització…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Visor d'informes";
+"logwindow.time" = "Temps";
+"logwindow.subsystem" = "Subsistema";
+"logwindow.message" = "Missatge";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Desa";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Copia";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Historial de reproducció";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Progrés";
+"history_window.col.played_at" = "Reproduït a les";
+"history_window.menu.play" = "Reprodueix";
+"history_window.menu.play_new_window" = "Reprodueix en una nova finestra";
+"history_window.menu.show_in_finder" = "Mostra al Finder";
+"history_window.menu.delete" = "Suprimeix…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Suprimeix l'historial de reproducció";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Data";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Cerca a";
+"history_window.search.filename" = "Nom de fitxer";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "No hi ha cerques recents";
+"history_window.search.recents_title" = "Cerques recents";
+"history_window.search.clear_recents" = "Neteja els més recents";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Vídeo";
+"sidebar.audio" = "Àudio";
+"sidebar.sub" = "Subtítols";
+"sidebar.plugins" = "Extensions";
+"sidebar.playlist" = "Llista de reproducció";
+"sidebar.chapters" = "Capítols";
+
+"sidebar.aspect_ratio" = "Relació d'aspecte";
+"sidebar.crop" = "Escapça";
+"sidebar.rotation" = "Rotació";
+"sidebar.speed" = "Velocitat";
+
+"sidebar.brightness" = "Brillantor";
+"sidebar.contrast" = "Contrast";
+"sidebar.saturation" = "Saturació";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Carrega pistes d'àudio externes…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Salva l'equalització actual";
+"sidebar.rename_eq" = "Reanomena l'equalització actual…";
+"sidebar.remove_eq" = "Remove the current EQ preset";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Carrega subtítol…";
+"sidebar.search_online" = "Cerca en línia…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Tipus de lletra";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Vora";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Les opcions d'estils dels subtítols poden fer que el renderitzat ASS deixi de funcionar, algunes opcions seran inhabilitades depenent del tipus de subtítol.";
+
+"sidebar.add_file" = "Afegeix fitxer…";
+"sidebar.add_url" = "Afegeix enllaç…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "Mostra la finestra de benvinguda";
+"settings.actionAfterLaunch.items.1" = "Obre un fitxer";
+"settings.actionAfterLaunch.items.2" = "No fer res";
+"settings.actionAfterLaunch.label" = "Al executar-se";
+"settings.alwaysOpenInNewWindow.label" = "Sempre obrir en una nova finestra";
+"settings.autoRepeat.label" = "When a file is opened manually";
+"settings.autoSwitchToMusicMode.label" = "Canvia a \"mode música\" automàticament quan es reprodueixi un fitxer d'àudio";
+"settings.blackOutMonitor.label" = "Apagar els altres monitors en pantalla completa";
+"settings.fullScreenWhenOpen.label" = "Pantalla completa";
+"settings.keepOpenOnFileEnd.label" = "Manté la finstra activa una vegada acabada la reproducció";
+"settings.pauseWhenGoesToSleep.label" = "Pausa quan la màquina se'n vagi a dormir";
+"settings.pauseWhenInactive.label" = "La finestra esdevé activa/inactiva";
+"settings.pauseWhenLeavingFullScreen.label" = "Pausa quan surt de la pantalla completa";
+"settings.pauseWhenMinimized.label" = "Minimitza/desminitmitza";
+"settings.pauseWhenOpen.label" = "Pausa";
+"settings.pauseresumeWhen" = "Pausa/reprèn quan";
+"settings.playWhenEnteringFullScreen.label" = "Reprodueix quan canvia a pantalla completa";
+"settings.playlistAutoAdd.desc" = "És necessari reiniciar IINA per tenir efecte";
+"settings.playlistAutoAdd.label" = "Afegeix fitxers en la mateixa carpeta automàticament";
+"settings.playlistAutoPlayNext.label" = "Reprodueix següent element automàticament";
+"settings.playlistShowMetadata.label" = "Mostra el nom de l'artista i la pista per als fitxers d'àudio quan estigui disponible";
+"settings.playlistShowMetadataInMusicMode.label" = "Només en el \"mode música\"";
+"settings.quitWhenNoOpenedWindow.label" = "Surt quan totes les finestres es tanquin";
+"settings.receiveBetaUpdate.label" = "Rebre actualitzacions beta";
+"settings.recordPlaybackHistory.label" = "Activa historial de reproducció";
+"settings.recordRecentFiles.label" = "Habilita el menú \"Obre un fitxer recent\"";
+"settings.resumeLastPosition.label" = "Reprèn la reproducció en la última posició";
+"settings.screenShotIncludeSubtitle.label" = "Inclou subtítols";
+"settings.screenshotCopyToClipboard.desc" = "Destí";
+"settings.screenshotCopyToClipboard.label" = "Copia al porta-retalls";
+"settings.screenshotSaveToFile.desc" = "/camí/a/la/carpeta/captures/de/pantalla";
+"settings.screenshotSaveToFile.label" = "Desa a";
+"settings.screenshotShowPreview.label" = "Mostra previsualitzacions després de fer captures de pantalla";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "D'altra manera només els fitxers oberts manualment es mostraràn en aquest menú.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Registra tots els fitxers reproduits en el menú \"Obre un fitxer recent\"";
+"settings.useLegacyFullScreen.label" = "Utilitza pantalla completa antic";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "Activar mode HDR per defecte al mostrar vídeos HDR.";
+"settings.enableToneMapping.label" = "Activar mapeig de tons";
+"settings.forceDedicatedGPU.desc" = "Utilitza sempre la GPU dedicada per a la renderització (si existeix). Això pot millorar el rendiment, però pot reduir la durada de la bateria.";
+"settings.forceDedicatedGPU.label" = "Força GPU dedicada";
+"settings.hardwareDecoder.items.0" = "Inhabilitat";
+"settings.hardwareDecoder.items.1" = "Automàtic";
+"settings.hardwareDecoder.items.2" = "Automàtic (còpia)";
+"settings.hardwareDecoder.label" = "Decodificador de maquinari";
+"settings.loadIccProfile.desc" = "Carrega el perfil ICC per a la visualització actual i utilitza'l per transformar vídeo RGB a la sortida de pantalla. (només per al mode SDR)";
+"settings.loadIccProfile.label" = "Carrega el perfil ICC";
+"settings.toneMappingAlgorithm.items.0" = "Automàtic";
+"settings.toneMappingAlgorithm.label" = "Algoritme";
+"settings.toneMappingTargetPeak.label" = "Valor màxim a aconseguir";
+"settings.videoThreads.desc" = "Per defecte: 0 (Automàtic)";
+"settings.videoThreads.label" = "Nombre de fils";
+
+// Settings - Audio
+"settings.enableInitialVolume.label" = "Volum inicial";
+"settings.gaplessAudio.items.0" = "Inhabilitat";
+"settings.maxVolume.label" = "Volum màxim";
+"settings.preferredAudioDevice.label" = "Dispositiu d'àudio preferit";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "Cap";
+"settings.doubleClickAction.items.1" = "Commuta pantalla completa";
+"settings.doubleClickAction.items.2" = "Pausa / Reprèn";
+"settings.doubleClickAction.items.4" = "Commuta Picture-in-Picture";
+"settings.doubleClickAction.items.5" = "Bucle A-B";
+"settings.doubleClickAction.label" = "Doble clic a";
+"settings.forceTouchAction.items.0" = "Cap";
+"settings.forceTouchAction.items.1" = "Commuta pantalla completa";
+"settings.forceTouchAction.items.2" = "Pausa / Reprèn";
+"settings.forceTouchAction.items.3" = "Amaga OSC";
+"settings.forceTouchAction.label" = "Force Touch a";
+"settings.horizontalScrollAction.items.0" = "Ajusta volum";
+"settings.horizontalScrollAction.items.1" = "Cerca";
+"settings.horizontalScrollAction.items.2" = "Cap";
+"settings.horizontalScrollAction.label" = "Desplaçament horitzontal a";
+"settings.middleClickAction.items.0" = "Cap";
+"settings.middleClickAction.items.1" = "Commuta pantalla completa";
+"settings.middleClickAction.items.2" = "Pausa / Reprèn";
+"settings.middleClickAction.items.3" = "Amaga OSC";
+"settings.middleClickAction.items.4" = "Commuta Picture-in-Picture";
+"settings.middleClickAction.items.5" = "Bucle A-B";
+"settings.middleClickAction.label" = "Clic del mig a";
+"settings.pinchAction.items.0" = "Ajusta la mida de la finestra";
+"settings.pinchAction.items.1" = "Pantalla completa";
+"settings.pinchAction.items.2" = "Cap";
+"settings.pinchAction.label" = "Pessiga a";
+"settings.relativeSeekAmount.label" = "Sensitivitat per la cerca normal";
+"settings.rightClickAction.desc" = "Clic del mig a";
+"settings.rightClickAction.items.0" = "Cap";
+"settings.rightClickAction.items.2" = "Pausa / Reprèn";
+"settings.rightClickAction.items.3" = "Amaga OSC";
+"settings.rightClickAction.items.4" = "Commuta Picture-in-Picture";
+"settings.rightClickAction.items.5" = "Bucle A-B";
+"settings.rightClickAction.label" = "Doble clic a";
+"settings.singleClickAction.items.0" = "Cap";
+"settings.singleClickAction.items.2" = "Pausa / Reprèn";
+"settings.singleClickAction.items.3" = "Amaga OSC";
+"settings.singleClickAction.label" = "Clic a";
+"settings.useExactSeek.desc" = "La cerca exacte és més precisa però fa un ús intensiu del processador.";
+"settings.useExactSeek.items.0" = "Cerca fotograma";
+"settings.useExactSeek.items.1" = "Cerca exacte";
+"settings.useExactSeek.items.2" = "Automàtic";
+"settings.useExactSeek.label" = "Tipus de cerca";
+"settings.verticalScrollAction.items.0" = "Ajusta volum";
+"settings.verticalScrollAction.items.1" = "Cerca";
+"settings.verticalScrollAction.items.2" = "Cap";
+"settings.verticalScrollAction.label" = "Desplaçament vertical a";
+"settings.videoViewAcceptsFirstMouse.label" = "Accepta el primer clic de ratolí quan la pantalla no té el focus";
+"settings.volumeScrollAmount.label" = "Sensibilitat del volum";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Mostra els valors en cru";
+"settings.useMediaKeys.label" = "Utilitza els controls multimèdia del sistema";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "Per defecte: 153600";
+"settings.cacheBufferSize.label" = "Mida de la memòria cau (KB)";
+"settings.enableCache.label" = "Activa memòria cau";
+"settings.httpProxy.desc" = "És necessari reiniciar IINA per tenir efecte.";
+"settings.httpProxy.label" = "Servidor intermediari HTTP";
+"settings.secPrefech.desc" = "Per defecte: 36000";
+"settings.secPrefech.label" = "Segons a precarregar";
+"settings.transportRTSPThrough.items.0" = "Automàtic";
+"settings.transportRTSPThrough.label" = "Transporta RTSP a través de";
+"settings.userAgent.label" = "Agent d'usuari";
+"settings.ytdlEnabled.label" = "Activa youtube-dl";
+"settings.ytdlRawOptions.desc" = "Format: <clau>=<valor>[,<clau>=<valor>[,...]]";
+"settings.ytdlRawOptions.label" = "Opcions en cru";
+"settings.ytdlSearchPath.desc" = "IINA buscarà youtube-dl en aquesta carpeta. És necessari reiniciar.";
+"settings.ytdlSearchPath.label" = "Camí personalitzat de youtube-dl";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Cerca subtítols en línia automàticament";
+"settings.displayInLetterBox.label" = "Mostra els subtítols en mode cinema en pantalla completa";
+"settings.subAlignX.items.0" = "Esquerra";
+"settings.subAlignX.items.1" = "Centre";
+"settings.subAlignX.items.2" = "Dreta";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "Superior";
+"settings.subAlignY.items.1" = "Centre";
+"settings.subAlignY.items.2" = "Inferior";
+"settings.subAutoLoadIINA.items.0" = "Inhabilitat";
+"settings.subAutoLoadIINA.items.1" = "Subtítols que contenen el nom del fitxer";
+"settings.subAutoLoadIINA.items.2" = "Detecció intel·ligent d'IINA";
+"settings.subAutoLoadIINA.label" = "Càrrega automàtica";
+"settings.subAutoLoadPriorityString.desc" = "Si us play, introdueix una llista de cadenes de text separada per comes.";
+"settings.subAutoLoadPriorityString.label" = "Els subtítols tenen prioritat quan el nom del fitxer conté";
+"settings.subAutoLoadSearchPath.desc" = "Els directoris estan separats per dos punts (:). Els camins relatius i comodins (*) són vàlids al final.";
+"settings.subAutoLoadSearchPath.label" = "També cerca suubtítols en els directoris següents";
+"settings.subBlur.label" = "Difuminat";
+"settings.subBold.label" = "Negreta";
+"settings.subItalic.label" = "Cursiva";
+"settings.subLang.desc" = "Aquesta opció es desarà amb format ISO 639'2 i funcionarà tant per mpv com per opensubtitles.";
+"settings.subPos.label" = "Posició vertical";
+"settings.subScaleWithWindow.label" = "Escala els subtítols a la mida de la finestra";
+"settings.subSpacing.label" = "Espaiat del tipus de lletra";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "Mostra sempre al damunt durant la reproducció";
+"settings.arrowBtnAction.items.0" = "Velocitat";
+"settings.arrowBtnAction.items.1" = "Anterior / Següent fitxer";
+"settings.arrowBtnAction.items.2" = "Avanç ràpid / rebobinar";
+"settings.arrowBtnAction.label" = "Utilitza el botó esquerra/dreta per";
+"settings.controlBarStickToCenter.label" = "Ajusta al centre a l'arrossegar";
+"settings.disableOSDPauseResumeMsgs.label" = "Pausa / Reprèn";
+"settings.disableOSDSeekMsg.label" = "Cerca";
+"settings.disableOSDSpeedMsg.label" = "Velocitat";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Mostra l'hora i la informació de la bateria en pantalla completa";
+"settings.enableOSD.label" = "Activa OSD";
+"settings.enableThumbnailPreview.label" = "Activa previsualització de miniatures";
+"settings.maxThumbnailPreviewCacheSize.label" = "Mida màxima de la emòria cau";
+"settings.oscPosition.items.0" = "Flotant";
+"settings.oscPosition.items.1" = "Superior";
+"settings.oscPosition.items.2" = "Inferior";
+"settings.oscPosition.label" = "Control de pantalla";
+"settings.osdTextSize.label" = "Mida del text";
+"settings.pauseWhenPip.label" = "Atura automàticament la reproducció";
+"settings.resizeWindowOption.items.0" = "ajusta a la pantalla";
+"settings.resizeWindowOption.items.1" = "0.5x mida del vídeo";
+"settings.resizeWindowOption.items.2" = "1x la mida del vídeo";
+"settings.resizeWindowOption.items.3" = "1.5x de la mida del vídeo";
+"settings.resizeWindowOption.items.4" = "2x la mida del vídeo";
+"settings.resizeWindowOption.label" = "Canvia la mida a";
+"settings.showChapterPos.label" = "Mostra la posició del capítol en la barra de progrés";
+"settings.showRemainingTime.label" = "Mostra el temps restant en comptes de la duració total";
+"settings.themeMaterial.desc" = "Tema";
+"settings.themeMaterial.items.0" = "Fosc";
+"settings.themeMaterial.items.2" = "Llum";
+"settings.themeMaterial.items.4" = "Coincidir amb l'aparença del sistema";
+"settings.themeMaterial.label" = "Aparença";
+"settings.togglePipByMinimizingWindow.label" = "Commuta Picture-in-Picture minimitzant/desminitmitzant la finestra";
+"settings.usePhysicalResolution.label" = "Utilitza la resolució en pantalles Retina";
+"settings.windowBehaviorWhenPip.items.0" = "No fer res";
+"settings.windowBehaviorWhenPip.items.1" = "Amaga";
+"settings.windowBehaviorWhenPip.items.2" = "Minimitza";
+"settings.windowBehaviorWhenPip.label" = "Finestra";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "És necessari reiniciar IINA per tal que els següents paràmetres tinguin efecte.";
+"settings.enableAdvancedSettings.label" = "Habilita opcions avançadades";
+"settings.enableLogging.label" = "Activa el registre";
+"settings.logLevel.items.0" = "Detallat";
+"settings.logLevel.items.2" = "Avís";
+"settings.useMpvOsd.label" = "Utilitza l'OSD del mpv's";
+"settings.useUserDefinedConfDir.label" = "Utilitza el directori de configuració";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "Subtítols ASS";
+"settings.$About" = "Quant a";
+"settings.$AdditionalMpvOptions" = "Opcions addicionals de mpv";
+"settings.$Advanced" = "Avançat";
+"settings.$Align" = "Alinea";
+"settings.$AlwaysWhenPlaying" = "Sempre";
+"settings.$Appearance" = "Aparença";
+"settings.$AssrtAPIToken" = "Token API Assrt";
+"settings.$Audio" = "Àudio";
+"settings.$AutoLoad" = "Càrrega automàtica";
+"settings.$Background" = "Fins";
+"settings.$Behavior" = "Comportament";
+"settings.$Border" = "Vora";
+"settings.$Cache" = "Memòria cau";
+"settings.$Cancel" = "Cancel·la";
+"settings.$CheckForUpdates" = "Cerca actualitzacions";
+"settings.$ClearCache" = "Neteja memòria cau";
+"settings.$ClearPlaybackHistory" = "Neteja l'historial de reproducció…";
+"settings.$ClearSavedPlaybackProgress" = "Neteja el progrés de reproducció desat…";
+"settings.$ClearThumbnailCache" = "Neteja memòria cau de les miniatures…";
+"settings.$Customize" = "Personalitza";
+"settings.$DefaultApplication" = "Aplicació per defecte";
+"settings.$DefaultEncoding" = "Codificació per defecte";
+"settings.$DeleteAllPlaybackHistories" = "El següent botó suprimirà tots els historials i entrades a \"Obre un fitxer recent\".";
+"settings.$DeleteAllWatchLater" = "El següent botó suprimirà tots els fitxers a la carpeta \"veure més tard\". Els fitxers contenen tot el progrés de reproducció i les opcions aplicades durant la reproducció.";
+"settings.$DoNotResize" = "Desactivat";
+"settings.$Font" = "Tipus de lletra";
+"settings.$GetBrowserExtensionsForIINA" = "Obtenir les extensions d'IINA per als navegadors";
+"settings.$Height" = "Alçada";
+"settings.$Help" = "Ajuda";
+"settings.$History" = "Historial";
+"settings.$ImportAnExistingConfigFile" = "Importa un fitxer de configuració existent";
+"settings.$InitialWindowPosition" = "Posició inicial de la finestra";
+"settings.$InitialWindowSize" = "Mida inicial de la finestra";
+"settings.$Install" = "Instal·la";
+"settings.$InstallLocalPackage" = "Install Package…";
+"settings.$Layout" = "Disposició";
+"settings.$Login" = "Inicia la sessió";
+"settings.$MB" = "MB";
+"settings.$Margin" = "Marge";
+"settings.$Mouse" = "Ratolí";
+"settings.$Network" = "Xarxa";
+"settings.$NotLoggedIn" = "Sense sessió";
+"settings.$OK" = "D'acord";
+"settings.$Offset" = "Desplaçament";
+"settings.$OnScreenController" = "Control de pantalla";
+"settings.$OnScreenDisplay" = "Quan es mostra la pantalla";
+"settings.$OnlineSubtitles" = "Subtítols en línia";
+"settings.$OpenLinksOrCurrentWebpage" = "Obre enllaços o la pàgina web actual en IINA amb un sol click. La pàgina ha d'estar suportada per youtube-dl.";
+"settings.$OtherStyles" = "Altres estils";
+"settings.$OverrideLevel" = "Nivell d'anul·lació";
+"settings.$PictureinnPicture" = "Picture-in-\nPicture";
+"settings.$Playlist" = "Llista de reproducció";
+"settings.$PleaseSelectTheMediaTypes" = "Si us plau selecciona els tipus de fitxer multimèdia que vols que IINA en sigui l'aplicació per defecte.";
+"settings.$Position" = "Posició";
+"settings.$PreferredLanguage" = "Idioma preferit";
+"settings.$RestoreAlerts" = "Restaurar alertes";
+"settings.$RestoreAllAlertsThat" = "El botó de sota restaurarà totes les alertes que s'han silenciat amb l'opció \"No mostris aquest missatge un altre cop\".";
+"settings.$RestoreSuppressedAlerts" = "Restaura alertes silenciades…";
+"settings.$SPDIFOutput" = "Sortida S/PDIF";
+"settings.$Screenshots" = "Captures de pantalla";
+"settings.$SetIINAAsTheDefault" = "Estableix IINA com aplicació per defecte…";
+"settings.$Settings" = "Paràmetres";
+"settings.$Shadow" = "Ombra";
+"settings.$ShowInFinder" = "Mostra al Finder";
+"settings.$ShowTheConfigFileIn" = "Mostra fitxer de configuració al Finder";
+"settings.$Size" = "Mida";
+"settings.$TextSubtitles" = "Text";
+"settings.$ThumbnailPreview" = "Previsualització de miniatures";
+"settings.$Toolbar" = "Barra d'eines";
+"settings.$Trackpad" = "Ratolí tàctil";
+"settings.$Video" = "Vídeo";
+"settings.$Website" = "Lloc web";
+"settings.$WhenEnteringPIP" = "Quan canvia a Picture-in-Picture";
+"settings.$WhenMediaIsOpened" = "Al obrir un fitxer multimèdia";
+"settings.$WhenMediaIsOpenedManually" = "Quan un fitxer multimèdia és obert manualment";
+"settings.$Width" = "Amplada";
+"settings.$Window" = "Finestra";
+"settings.$X" = " X";
+"settings.$XOffset" = "Desplaçament X";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Desplaçament Y";
+"settings.$bottom" = "inferior";
+"settings.$dB" = "dB";
+"settings.$left" = "esquerra";
+"settings.$ofScreen" = "% de la pantalla";
+"settings.$point" = "punt";
+"settings.$pt" = "pt";
+"settings.$right" = "dreta";
+"settings.$s" = "s";
+"settings.$sideOfTheScreen" = "costat de la pantalla";
+"settings.$toThe" = "a la part";
+"settings.$top" = "superior";

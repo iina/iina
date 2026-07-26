@@ -13,9 +13,12 @@
 "general.logout" = "Kijelentkezés";
 "general.ok" = "OK";
 "general.cancel" = "Mégse";
+"general.done" = "Kész";
 "general.username" = "Felhasználónév";
 "general.password" = "Jelszó";
 "general.na" = "N/A";
+"general.no_result" = "Nincs eredmény";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Az érték nem lehet üres.";
 "input.already_exists" = "Az érték már létezik.";
@@ -137,6 +140,9 @@
 "osd.canceled" = "Megszakítva";
 "osd.cannot_connect" = "Nem tud csatlakozni";
 "osd.timed_out" = "Időtúllépés";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Szűrő hozzáadása: %@";
 "osd.filter_removed" = "Szűrő eltávolítása";
 "osd.file_loop" = "Egyetlen fájl ismétlése";
@@ -145,8 +151,10 @@
 
 "preference.title" = "Beállítások";
 "preference.general" = "Általános";
-"preference.ui" = "Felhasználói felület";
-"preference.video_audio" = "Video/Audio";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Videó";
+"preference.audio" = "Hang";
 "preference.subtitle" = "Felirat";
 "preference.network" = "Hálózat";
 "preference.control" = "Vezérlés";
@@ -277,10 +285,13 @@
 "alert.add_filter.message" = "Adjon meg egy szűrő karakterláncot az mpv vf vagy af parancsának formátumában.";
 
 "alert.keybinding_config.error" = "Hiba a \"%@\" billentyűkombinációs konfigurációs fájl elemzésekor! Visszatérés az IINA alapértelmezett billentyűkombinációjához. Kérjük, ellenőrizze a konfigurációt.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "A felhasználó által meghatározott extra mpv beállítások nem olvashatók.";
 "alert.extra_option.empty" = "A kulcs vagy az érték nem lehet üres!";
-"alert.extra_option.error" = "Hiba a beállítás --%@=%@ %d visszatérési értékkel. Kérjük, ellenőrizze az extra beállításokat a Beállítások > Speciális oldalon.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Hiba a konfigurációs könyvtár beállításánál \"%@\".";
 
 "alert.playlist.error_deleting" = "Hiba törlés közben %@";
@@ -315,6 +326,10 @@
 
 "alert.delete_history.title" = "Lejátszási elõzmények törlése";
 "alert.delete_history.message" = "Biztosan törlöd a kijelölt elemeket?";
+"alert.delete_all_history.title" = "Lejátszási elõzmények törlése";
+"alert.delete_all_history.message" = "Biztosan akarod törölni az összes lejátszási előzményeket?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Egy videószűrő alkalmazására készülsz. Előfordulhat azonban, hogy jelenlegi hardveres dekódered nem támogatja megfelelően a videoszűrőket. Letilthatod a hardveres dekódolást, vagy átválthatsz Auto(Másolás) módra, ami kétszer annyi memóriát fogyaszt.\nElőfordulhat, hogy meg kell ismételned az előző műveletet (például a kivágás beállítását), hogy működjön.";
 "alert.filter_hwdec.abort" = "Megszakítás";
@@ -332,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Az elnyomott figyelmeztetések visszaállítása";
 "alert.restore_alerts.message" = "Biztosan vissza szeretné állítani az elnyomott figyelmeztetéseket?";
+
+"alert.cleared" = "Törölve.";
+"alert.restored" = "Helyreállítva.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Nincs mit megnyitni.";
 
@@ -356,6 +375,8 @@
 "alert.plugin_update_found.message" = "A legújabb verzió a(z) %@. Neked a(z) %@ van telepítve. Szeretne frissíteni?";
 "alert.plugin_permission" = "Ehhez a bővítményhez a következő engedélyekre van szükség. Kérjük, tekintse át őket a folytatás előtt.";
 "alert.plugin_permission_added" = "Ez a frissítés további engedélyeket igényel. Kérjük, tekintse át őket a folytatás előtt.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ összesen";
 "playlist.total_length_with_selected" = "%@/%@ kiválasztva";
@@ -383,6 +404,12 @@
 "pl_menu.browser" = "Megnyitás böngészőben";
 "pl_menu.copy_url" = "Az URL másolása";
 "pl_menu.copy_url_multi" = "Linkek másolása";
+"pl_menu.playback" = "Lejátszás";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Bővítmény";
+"pl_menu.playlist" = "Lejátszási lista";
 
 "keymapping.title" = "Billentyűkiosztás";
 "keymapping.message" = "Nyomj egy gombot a felvételhez.";
@@ -408,6 +435,11 @@
 "osc_toolbar.sub_track" = "Válassz felirat sávot";
 "osc_toolbar.screenshot" = "Képernyőmentés készítése";
 "osc_toolbar.plugins" = "Bővítmény panel megjelenítése";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Lebegő";
+"osc_pos.top" = "Felül";
+"osc_pos.bottom" = "Alul";
 
 "mini_player.album_art" = "Album borító váltás";
 "mini_player.loop" = "Ismétlés";
@@ -465,3 +497,438 @@
 "plugin.install_error.cannot_load" = "Az IINA nem tudja betölteni ezt a bővítményt. Lehet, hogy rossz formátumban van.";
 "plugin.check_for_updates" = "Frissítések keresése";
 "plugin.updating" = "Frissítés letöltése…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Naplómegjelenítő";
+"logwindow.time" = "Időpont";
+"logwindow.subsystem" = "Alrendszer";
+"logwindow.message" = "Üzenet";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Mentés";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Másolás";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Lejátszási előzmények";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Haladás";
+"history_window.col.played_at" = "Lejátszás itt";
+"history_window.menu.play" = "Lejátszás";
+"history_window.menu.play_new_window" = "Lejátszás új ablakban";
+"history_window.menu.show_in_finder" = "Megjelenítés a Finder-ben";
+"history_window.menu.delete" = "Törlés…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Lejátszási elõzmények törlése";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Dátum";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Keresés itt";
+"history_window.search.filename" = "Fájlnév";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Nincsenek keresési előzmények";
+"history_window.search.recents_title" = "Keresési előzmények";
+"history_window.search.clear_recents" = "Előzmények törlése";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Videó";
+"sidebar.audio" = "Hang";
+"sidebar.sub" = "Felirat";
+"sidebar.plugins" = "Pluginok";
+"sidebar.playlist" = "Lejátszási lista";
+"sidebar.chapters" = "Fejezetek";
+
+"sidebar.aspect_ratio" = "Képarány";
+"sidebar.crop" = "Körbevágás";
+"sidebar.rotation" = "Forgatás";
+"sidebar.speed" = "Sebesség";
+
+"sidebar.brightness" = "Fényerő";
+"sidebar.contrast" = "Kontraszt";
+"sidebar.saturation" = "Telítettség";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Külső hangfájl betöltése…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Aktuális EQ beállítás mentése…";
+"sidebar.rename_eq" = "Aktuális EQ beállítás átnevezése…";
+"sidebar.remove_eq" = "Aktuális EQ beállítás eltávolítása";
+"sidebar.manual_eq" = "Útmutató";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Feliratok betöltése…";
+"sidebar.search_online" = "Online keresés…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Betűtípus";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Körvonal";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "A felirattípus beállítások megszakíthatják az ASS renderelést, ezért néhány le lesz tiltva a felirat típusától függően.";
+
+"sidebar.add_file" = "Fájl hozzáadása…";
+"sidebar.add_url" = "URL hozzáadása…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "Üdvözlő ablak megjelenítése";
+"settings.actionAfterLaunch.items.1" = "Megnyitott fájl panel megjelenítése";
+"settings.actionAfterLaunch.items.2" = "Ne csináljon semmit";
+"settings.actionAfterLaunch.label" = "Indításkor";
+"settings.allowScreenSaverForAudio.desc" = "Még mindig megakadályozza a rendszer elalvását.";
+"settings.allowScreenSaverForAudio.label" = "\"Zene mód\"-ban nem lehetséges vagy lejátszás közben";
+"settings.alwaysOpenInNewWindow.label" = "Mindig új ablakban nyissa meg a médiát";
+"settings.autoRepeat.label" = "Ha egy fájlt kézzel nyit meg";
+"settings.autoSwitchToMusicMode.label" = "Automatikus váltás „zenei módra” hangfájl lejátszásakor";
+"settings.blackOutMonitor.label" = "Más monitorok elsötétítése teljes képernyőn";
+"settings.defaultRepeatMode.items.0" = "Lejátszási lista ismétlése";
+"settings.defaultRepeatMode.items.1" = "Egyetlen fájl ismétlése";
+"settings.fullScreenWhenOpen.label" = "Váltás teljes képernyőre";
+"settings.keepOpenOnFileEnd.label" = "A lejátszás befejezése után tartsa nyitva az ablakot";
+"settings.pauseWhenGoesToSleep.label" = "Szünet, a gép alvó állapotakor";
+"settings.pauseWhenInactive.label" = "Az ablak inaktívvá/aktívvá válik";
+"settings.pauseWhenLeavingFullScreen.label" = "Szünet a teljes képernyő elhagyásakor";
+"settings.pauseWhenMinimized.label" = "Minimalizálva/nem minimalizálva";
+"settings.pauseWhenOpen.label" = "Szünet";
+"settings.pauseresumeWhen" = "Szünet/folytatás, amikor";
+"settings.playWhenEnteringFullScreen.label" = "Lejátszás a teljes képernyőbe lépéskor";
+"settings.playlistAutoAdd.desc" = "Az IINA újraindítása szükséges ahhoz, hogy életbe lépjen.";
+"settings.playlistAutoAdd.label" = "Fájlok hozzáadása automatikusan ugyanabba a mappába";
+"settings.playlistAutoPlayNext.label" = "Következő automatikus lejátszása";
+"settings.playlistShowMetadata.label" = "Az előadó és a zeneszám nevének megjelenítése az audiofájlokhoz, ha elérhető";
+"settings.playlistShowMetadataInMusicMode.label" = "Csak \"zene\" módban";
+"settings.preventScreenSaver.label" = "A képernyőkímélő elindulásának megakadályozása lejátszás közben";
+"settings.quitWhenNoOpenedWindow.label" = "Lépjen ki az összes ablak bezárása után";
+"settings.receiveBetaUpdate.label" = "Béta frissítések engedélyezése";
+"settings.recordPlaybackHistory.label" = "Lejátszási előzmények engedélyezése";
+"settings.recordRecentFiles.label" = "Engedélyezze a \"Legutóbbi fájlok\" menüt";
+"settings.resumeLastPosition.label" = "Folytatás az utolsó lejátszási pozícióból";
+"settings.screenShotFormat.items.2" = "JPEG (.jpg)";
+"settings.screenShotFormat.label" = "Formátum";
+"settings.screenShotIncludeSubtitle.label" = "Feliratokkal együtt";
+"settings.screenshotCopyToClipboard.desc" = "Cél";
+"settings.screenshotCopyToClipboard.label" = "Másolás a vágólapra";
+"settings.screenshotSaveToFile.desc" = "/útvonal/a/képernyőfotó/mappa";
+"settings.screenshotSaveToFile.label" = "Mentés ide";
+"settings.screenshotShowPreview.label" = "Elõnézet mutatása képernyõkép készités után";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "Ellenkező esetben csak a kézzel megnyitott fájlok jelennek meg ebben a menüben.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Kövesse nyomon az összes lejátszott fájlt a \"Legutóbbi fájlok\" menüben";
+"settings.useLegacyFullScreen.label" = "Használja a régi teljes képernyőt";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "HDR-videók lejátszásakor alapértelmezés szerint engedélyezi a HDR módot.";
+"settings.enableToneMapping.label" = "Tónustérképezés engedélyezése";
+"settings.forceDedicatedGPU.desc" = "Mindig a dedikált GPU-t használja a rendereléshez (ha van ilyen). Ez javíthatja a teljesítményt, de csökkentheti az akkumulátor élettartamát.";
+"settings.forceDedicatedGPU.label" = "Dedikált GPU kényszerítése";
+"settings.hardwareDecoder.items.0" = "Kikapcsolva";
+"settings.hardwareDecoder.items.1" = "Automatikus";
+"settings.hardwareDecoder.items.2" = "Automatikus (Másolás)";
+"settings.hardwareDecoder.label" = "Hardveres dekóder";
+"settings.loadIccProfile.desc" = "Betölti az aktuális kijelző ICC-profilját, és használja azt a videó RGB átalakításához a képernyő kimenetére. (Csak SDR módban)";
+"settings.loadIccProfile.label" = "ICC-profil betöltése";
+"settings.toneMappingAlgorithm.items.0" = "Automatikus";
+"settings.toneMappingAlgorithm.label" = "Algoritmus";
+"settings.toneMappingTargetPeak.desc" = "A kijelző fényerejének mért csúcsa. Amennyiben 0, az IINA felismeri ezt az értéket. Amennyiben a felismerés sikertelen, az IINA a célértéket 400-ra állítja.";
+"settings.toneMappingTargetPeak.label" = "Célcsúcs";
+"settings.videoThreads.desc" = "Alapértelmezett: 0 (Automatikus)";
+"settings.videoThreads.label" = "Szálak száma";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "Az AVFoundation egy új, kísérleti hangillesztőprogram, amely Spatial Audio támogatást kínál. Az AVFoundation használata során azonban előfordulhatnak problémák, például hangkésések.";
+"settings.audioDriverEnableAVFoundation.label" = "Audioeszköz";
+"settings.enableInitialVolume.label" = "Kezdeti hang";
+"settings.gaplessAudio.items.0" = "Kikapcsolva";
+"settings.maxVolume.label" = "Maximum hang";
+"settings.preferredAudioDevice.label" = "Előnyben részesített audioeszköz";
+"settings.replayGain.desc" = "A hangerősítés beállítása a fájl metaadataiban tárolt ReplayGain értékek szerint.";
+"settings.replayGain.items.0" = "Nincs beállítás";
+"settings.replayGain.items.1" = "Zeneszám erősítés";
+"settings.replayGain.items.2" = "Album erősítés";
+"settings.replayGain.label" = "Erősítés beállítás";
+"settings.replayGainClip.desc" = "Ha ez az opció nincs engedélyezve, akkor az erősítés csökkentésével meg lesz akadályozva a \"clipping\".";
+"settings.replayGainClip.label" = "Hangerő-erősítés \"clipping\" engedélyezése";
+"settings.replayGainFallback.desc" = "Az alkalmazandó erősítés, ha a fájlban nincsenek ReplayGain címkék.";
+"settings.replayGainFallback.label" = "Visszaesés";
+"settings.replayGainPreamp.desc" = "Az előerősítő erősítés, amelyet a ReplayGain erősítésre kell alkalmazni.";
+"settings.replayGainPreamp.label" = "Előerősítő erősítés";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "Egyik sem";
+"settings.doubleClickAction.items.1" = "Váltás teljes képernyőre";
+"settings.doubleClickAction.items.2" = "Szünet/Folytatás";
+"settings.doubleClickAction.items.4" = "Kép a képben";
+"settings.doubleClickAction.items.5" = "A-B ciklus";
+"settings.doubleClickAction.label" = "Dupla kattintás";
+"settings.forceTouchAction.items.0" = "Nincs";
+"settings.forceTouchAction.items.1" = "Váltás teljes képernyőre";
+"settings.forceTouchAction.items.2" = "Szünet/Folytatás";
+"settings.forceTouchAction.items.3" = "OSC elrejtése";
+"settings.forceTouchAction.label" = "Erős kattintással";
+"settings.horizontalScrollAction.items.0" = "Hangerő beállítása";
+"settings.horizontalScrollAction.items.1" = "Ugrás";
+"settings.horizontalScrollAction.items.2" = "Egyik sem";
+"settings.horizontalScrollAction.label" = "Görgessen vízszintesen a következőhöz";
+"settings.middleClickAction.items.0" = "Egyik sem";
+"settings.middleClickAction.items.1" = "Váltás teljes képernyőre";
+"settings.middleClickAction.items.2" = "Szünet/Folytatás";
+"settings.middleClickAction.items.3" = "OSC elrejtése";
+"settings.middleClickAction.items.4" = "Kép a képben";
+"settings.middleClickAction.items.5" = "A-B ciklus";
+"settings.middleClickAction.label" = "Középső egérgombbal való kattintás";
+"settings.pinchAction.items.0" = "Ablak méret állítása";
+"settings.pinchAction.items.1" = "Teljes képernyő";
+"settings.pinchAction.items.2" = "Nincs";
+"settings.pinchAction.label" = "Csípje össze a nagyításhoz";
+"settings.relativeSeekAmount.label" = "Érzékenység normál kereséshez";
+"settings.rightClickAction.desc" = "Középső egérgombbal való kattintás";
+"settings.rightClickAction.items.0" = "Egyik sem";
+"settings.rightClickAction.items.2" = "Szünet/Folytatás";
+"settings.rightClickAction.items.3" = "OSC elrejtése";
+"settings.rightClickAction.items.4" = "Kép a képben";
+"settings.rightClickAction.items.5" = "A-B ciklus";
+"settings.rightClickAction.label" = "Kattintson a jobb gombbal";
+"settings.singleClickAction.items.0" = "Egyik sem";
+"settings.singleClickAction.items.2" = "Szünet/Folytatás";
+"settings.singleClickAction.items.3" = "OSC elrejtése";
+"settings.singleClickAction.label" = "Szimpla kattintás";
+"settings.useExactSeek.desc" = "A pontos keresés pontosabb, de késést és nagyobb CPU-használatot okozhat.";
+"settings.useExactSeek.items.0" = "Ugrás kockánként";
+"settings.useExactSeek.items.1" = "Pontos keresés";
+"settings.useExactSeek.items.2" = "Automatikus";
+"settings.useExactSeek.label" = "Keresés típusa";
+"settings.verticalScrollAction.items.0" = "Hangerő beállítása";
+"settings.verticalScrollAction.items.1" = "Ugrás";
+"settings.verticalScrollAction.items.2" = "Egyik sem";
+"settings.verticalScrollAction.label" = "Görgessen függőlegesen a következőhöz";
+"settings.videoViewAcceptsFirstMouse.label" = "Fogadja el az első egér kattintást amikor nincs fókuszban";
+"settings.volumeScrollAmount.label" = "Hangerő érzékenysége";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Értékek megjelenítése";
+"settings.useMediaKeys.label" = "Rendszer média vezérlők használata";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "Alapértelmezett: 153600";
+"settings.cacheBufferSize.label" = "Gyorsítótár puffer mérete (KB)";
+"settings.enableCache.label" = "Gyorsítótár engedélyezése";
+"settings.httpProxy.desc" = "Az IINA újraindítása szükséges a módositások érvénybe lépéséhez.";
+"settings.httpProxy.label" = "HTTP Proxy";
+"settings.secPrefech.desc" = "Alapértelmezett: 36000";
+"settings.secPrefech.label" = "Másodpercek az előtöltéshez";
+"settings.transportRTSPThrough.items.0" = "Automatikus";
+"settings.transportRTSPThrough.label" = "RTSP adatfolyam átvitele a következőn";
+"settings.userAgent.label" = "Felhasználó ügynök";
+"settings.ytdlEnabled.label" = "Youtube-dl engedélyezése";
+"settings.ytdlRawOptions.desc" = "Formátum: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "Raw beállítások";
+"settings.ytdlSearchPath.desc" = "Az IINA ebben a mappában fogja keresni a youtube-dl-t. Újraindítás szükséges.";
+"settings.ytdlSearchPath.label" = "Egyedi youtube-dl útvonal";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Feliratok automatikus keresése online";
+"settings.displayInLetterBox.label" = "Feliratok megjelenítése a letterbox stílusban teljes képernyőn";
+"settings.subAlignX.items.0" = "Bal";
+"settings.subAlignX.items.1" = "Középen";
+"settings.subAlignX.items.2" = "Jobb";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "Felül";
+"settings.subAlignY.items.1" = "Középen";
+"settings.subAlignY.items.2" = "Alul";
+"settings.subAutoLoadIINA.items.0" = "Kikapcsolva";
+"settings.subAutoLoadIINA.items.1" = "A médiafájl nevét tartalmazó feliratok";
+"settings.subAutoLoadIINA.items.2" = "Intelligens észlelés az IINA által";
+"settings.subAutoLoadIINA.label" = "Automatikus betöltés";
+"settings.subAutoLoadPriorityString.desc" = "Kérjük, add meg a karakterláncok vesszővel elválasztott listáját.";
+"settings.subAutoLoadPriorityString.label" = "A feliratok elsőbbséget élveznek, ha a fájlnév tartalmazza";
+"settings.subAutoLoadSearchPath.desc" = "A könyvtárakat kettősponttal (:) választjuk el. A relatív elérési utak és a helyettesítő karakterek (*) a végén megengedettek.";
+"settings.subAutoLoadSearchPath.label" = "A következő könyvtárakban is kereshet feliratokat";
+"settings.subBlur.label" = "Elmosódás";
+"settings.subBold.label" = "Félkövér";
+"settings.subItalic.label" = "Dőlt";
+"settings.subLang.desc" = "Ez az opció ISO 639-2 nyelvi kódként kerül tárolásra, és mind az mpv, mind az opensubtitles esetében működik.";
+"settings.subPos.label" = "Függőleges elhelyezkedés";
+"settings.subScaleWithWindow.label" = "Feliratok méretezése az ablakmérettel";
+"settings.subSpacing.label" = "Betűtávolság";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "Mindig lebegjen lejátszás közben";
+"settings.alwaysShowOnTopIcon.label" = "Mindig mutasd a lebegő állapotot a címsorban";
+"settings.arrowBtnAction.items.0" = "Sebesség";
+"settings.arrowBtnAction.items.1" = "Előző / Következő Média";
+"settings.arrowBtnAction.items.2" = "Gyors előre / vissza";
+"settings.arrowBtnAction.label" = "Használja a bal/jobb gombot";
+"settings.controlBarStickToCenter.label" = "Középre ugrás húzásnál";
+"settings.disableAnimations.desc" = "Ha a macOS Reduce Motion (Mozgáscsökkentés) hozzáférhetőségi beállítása engedélyezve van, az IINA csökkenti a felhasználói felület animációit, amelyekről ismert, hogy problémákat okoznak az egyensúlyzavarban szenvedők számára. Ha ez nem elegendő, akkor ezzel a beállítással tovább csökkenthető a mozgás a felhasználói felület animációinak megszüntetésével.";
+"settings.disableAnimations.label" = "Animációk letiltása";
+"settings.disableOSDFileStartMsg.label" = "Fájl kezdete";
+"settings.disableOSDPauseResumeMsgs.label" = "Szünet/Folytatás";
+"settings.disableOSDSeekMsg.label" = "Ugrás";
+"settings.disableOSDSpeedMsg.label" = "Sebesség";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Az idő és az akkumulátor információ megjelenítése teljes képernyőn";
+"settings.enableOSD.label" = "OSD engedélyezése";
+"settings.enableThumbnailPreview.label" = "Indexkép előnézetének engedélyezése";
+"settings.maxThumbnailPreviewCacheSize.label" = "A gyorsítótár maximális mérete";
+"settings.oscPosition.items.0" = "Lebegő";
+"settings.oscPosition.items.1" = "Legjobb";
+"settings.oscPosition.items.2" = "Alul";
+"settings.oscPosition.label" = "Kijelzőn lévő kontroller";
+"settings.osdTextSize.label" = "Betűméret";
+"settings.pauseWhenPip.label" = "A lejátszás automatikus szüneteltetése";
+"settings.resizeWindowOption.items.0" = "képernyő kitöltése";
+"settings.resizeWindowOption.items.1" = "0.5x videó méret";
+"settings.resizeWindowOption.items.2" = "1x videó méret";
+"settings.resizeWindowOption.items.3" = "1.5x videó méret";
+"settings.resizeWindowOption.items.4" = "2x videó méret";
+"settings.resizeWindowOption.label" = "Ablak átméretezése erre";
+"settings.showChapterPos.label" = "Fejezet pozíciójának megjelenítése a folyamatjelző sávban";
+"settings.showRemainingTime.label" = "A hátralévő idő megjelenítése a teljes időtartam helyett";
+"settings.themeMaterial.desc" = "Téma";
+"settings.themeMaterial.items.0" = "Sötét";
+"settings.themeMaterial.items.2" = "Világos";
+"settings.themeMaterial.items.4" = "Rendszer téma használata";
+"settings.themeMaterial.label" = "Megjelenés";
+"settings.togglePipByMinimizingWindow.label" = "Kép a képben kapcsolása az ablak minimalizálása/ki-minimalizálásával";
+"settings.usePhysicalResolution.label" = "Használjon fizikai felbontást a Retina kijelzőkön";
+"settings.windowBehaviorWhenPip.items.0" = "Ne csináljon semmit";
+"settings.windowBehaviorWhenPip.items.1" = "Elrejtés";
+"settings.windowBehaviorWhenPip.items.2" = "Kis méret";
+"settings.windowBehaviorWhenPip.label" = "Ablak";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "A következő beállítások érvénybe lépéséhez az IINA újraindítása szükséges.";
+"settings.enableAdvancedSettings.label" = "Haladó beállítások engedélyezése";
+"settings.enableLogging.label" = "Naplózás engedélyezése";
+"settings.logLevel.items.0" = "Részletes";
+"settings.logLevel.items.1" = "Hibakeresés";
+"settings.logLevel.items.2" = "Figyelmeztetés";
+"settings.logLevel.items.3" = "Hiba";
+"settings.logLevel.label" = "Naplózás szintje";
+"settings.useMpvOsd.label" = "Az mpv OSD használata";
+"settings.useUserDefinedConfDir.label" = "Konfigurációs könyvtár használata";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS feliratok";
+"settings.$About" = "Névjegy";
+"settings.$Accessibility" = "Kisegítő lehetőségek";
+"settings.$AdditionalMpvOptions" = "További mpv lehetőségek";
+"settings.$Advanced" = "Haladó";
+"settings.$Align" = "Igazítás";
+"settings.$AlwaysWhenPlaying" = "Mindig";
+"settings.$Appearance" = "Megjelenés";
+"settings.$Audio" = "Hang";
+"settings.$Author" = "Szerző";
+"settings.$AutoLoad" = "Automatikus betöltés";
+"settings.$Background" = "Háttér";
+"settings.$Behavior" = "Viselkedés";
+"settings.$Border" = "Körvonal";
+"settings.$Cache" = "Gyorsítótár";
+"settings.$Cancel" = "Mégse";
+"settings.$CheckForUpdates" = "Frissítések keresése";
+"settings.$ClearCache" = "Gyorsítótár ürítése";
+"settings.$ClearPlaybackHistory" = "Lejátszási előzmények törlése…";
+"settings.$ClearSavedPlaybackProgress" = "Mentett lejátszási folyamat törlése…";
+"settings.$ClearThumbnailCache" = "Indexkép gyorsítótér törlése…";
+"settings.$Color" = "Szín";
+"settings.$Customize" = "Testreszabás…";
+"settings.$DefaultApplication" = "Alapértelmezett alkalmazás";
+"settings.$DefaultEncoding" = "Alapértelmezett karakterkódolás";
+"settings.$DeleteAllPlaybackHistories" = "Az alábbi gomb törölni fogja az lejátszási előzményeket és a bejegyzéseket a \"Mostanában megnyitott\" -ból.";
+"settings.$DeleteAllWatchLater" = "Az alábbi gomb törölni fogja az összes fájl a \"Később megnézem\" mappából. Ezek a fájlok tartalmazzák a lejátszás folyamatát és beállításokat amiket a lejátszás során elvégeztél.";
+"settings.$DoNotResize" = "Kikapcsolva";
+"settings.$FailedToLoadThePage" = "Oldal betöltése sikertelen.";
+"settings.$Font" = "Betűtípus";
+"settings.$GetBrowserExtensionsForIINA" = "Böngésző bővítmény az IINA-hoz";
+"settings.$Height" = "Magasság";
+"settings.$Help" = "Segítség";
+"settings.$History" = "Előzmények";
+"settings.$Identifier" = "Azonosító";
+"settings.$ImportAnExistingConfigFile" = "Létező konfigurációs fájl importálása";
+"settings.$InitialWindowPosition" = "Kezdeti ablakpozíció";
+"settings.$InitialWindowSize" = "Kezdeti ablakméret";
+"settings.$Install" = "Telepítés";
+"settings.$InstallLocalPackage" = "Csomag telepítése…";
+"settings.$Layout" = "Elrendezés";
+"settings.$Login" = "Belépés";
+"settings.$MB" = "MB";
+"settings.$Margin" = "Margó";
+"settings.$Mouse" = "Egér";
+"settings.$Network" = "Hálózat";
+"settings.$NotLoggedIn" = "Nem vagy bejelentkezve";
+"settings.$OK" = "OK";
+"settings.$Offset" = "Eltolás";
+"settings.$OnScreenController" = "Kijelzőn lévő kontroller";
+"settings.$OnScreenDisplay" = "Képernyőre vetített kijelző (Osd)";
+"settings.$OnlineSubtitles" = "Online feliratok";
+"settings.$OpenLinksOrCurrentWebpage" = "Nyissa meg a hivatkozásokat vagy a jelenlegi weboldalt az IINA-ban egyetlen kattintással. A weboldalnak támogatni a kell youtube-dl funkciót.";
+"settings.$OpenLogDirectory" = "Napló könyvtár megnyitása";
+"settings.$OtherStyles" = "Egyéb stílusok";
+"settings.$OverrideLevel" = "Felülírás szintje";
+"settings.$PictureinnPicture" = "Kép a-\nKépben";
+"settings.$Playlist" = "Lejátszási lista";
+"settings.$PleaseSelectTheMediaTypes" = "Kérjük, válassza ki azokat a médiatípusokat, amelyekhez az IINA-t szeretné alapértelmezett alkalmazásként megadni.";
+"settings.$Position" = "Pozíció";
+"settings.$PreferredLanguage" = "Előnyben részesített nyelv";
+"settings.$RestoreAlerts" = "Riasztások visszaállítása";
+"settings.$RestoreAllAlertsThat" = "Az alábbi gomb visszaállítja az összes olyan riasztást, amelyet a \"Ne jelenítse meg újra ezt az üzenetet\" jelölőnégyzet használatával elnyomott.";
+"settings.$RestoreSuppressedAlerts" = "Az elnyomott figyelmeztetések visszaállítása…";
+"settings.$SPDIFOutput" = "S/PDIF kimenet";
+"settings.$Screenshots" = "Képernyőképek";
+"settings.$SetIINAAsTheDefault" = "IINA beállítása alapértelmezett alkalmazásként…";
+"settings.$Settings" = "Beállítások";
+"settings.$Shadow" = "Árnyék";
+"settings.$ShowInFinder" = "Megjelenítés a Finder-ben";
+"settings.$ShowTheConfigFileIn" = "Konfigurációs fájl megjelenítése Finderben";
+"settings.$Size" = "Méret";
+"settings.$Source" = "Forrás";
+"settings.$SuppressMessagesFor" = "Üzenetek eltiltása eddig";
+"settings.$TextSubtitles" = "Szöveges feliratok";
+"settings.$ThumbnailPreview" = "Miniatűr előnézet";
+"settings.$Toolbar" = "Eszköztár";
+"settings.$Uninstall" = "Eltávolítás";
+"settings.$Video" = "Videó";
+"settings.$Website" = "Honlap";
+"settings.$WhenEnteringPIP" = "A Kép a képben funkcióba belépéskor";
+"settings.$WhenMediaIsOpened" = "A média megnyitásakor";
+"settings.$WhenMediaIsOpenedManually" = "Amikor a médiát kézzel nyitják meg";
+"settings.$Width" = "Szélesség";
+"settings.$Window" = "Ablak";
+"settings.$X" = " X";
+"settings.$XOffset" = "X eltolás";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Y eltolás";
+"settings.$YouCanInstallANew" = "Telepíthet egy új plugint a GitHubról vagy egy helyi .iinaplgz csomagból. A GitHubról telepített bővítmények automatikusan frissülnek.";
+"settings.$bottom" = "alul";
+"settings.$dB" = "dB";
+"settings.$left" = "bal";
+"settings.$ofScreen" = "a képernyő %-a";
+"settings.$point" = "pont";
+"settings.$pt" = "pont";
+"settings.$right" = "jobb";
+"settings.$s" = "mp";
+"settings.$sideOfTheScreen" = "képernyő szélén";
+"settings.$toThe" = "hoz";
+"settings.$top" = "legjobb";

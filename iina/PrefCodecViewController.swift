@@ -20,7 +20,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   }
 
   var preferenceTabImage: NSImage {
-    return makeSymbol("play.rectangle.on.rectangle", fallbackImage: "pref_av")
+    return .sf("play.rectangle.on.rectangle", "photo.tv", withConfiguration: symbolConfiguration)!
   }
 
   override var sectionViews: [NSView] {
@@ -58,10 +58,7 @@ class PrefCodecViewController: PreferenceViewController, PreferenceWindowEmbedda
   override func viewWillAppear() {
     super.viewWillAppear()
     
-    if #available(macOS 14.0, *) {
-      audioDriverExperimentalIndicator.image = NSImage.findSFSymbol(["flask.fill"])
-    }
-
+    audioDriverExperimentalIndicator.image = NSImage.sf("flask.fill")
     updateAudioDevicePopUp()
 
     // The list of audio devices changes based on the audio driver setting.

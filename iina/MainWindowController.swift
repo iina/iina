@@ -538,7 +538,6 @@ class MainWindowController: PlayerWindowController {
     setupVideoContainerConstraints()
 
     addVideoViewToWindow()
-    setupVideoViewConstraints()
     player.initVideo()
     videoView.postsFrameChangedNotifications = true
 
@@ -748,6 +747,7 @@ class MainWindowController: PlayerWindowController {
     }
     videoViewContainer.addSubview(videoView)
     videoView.translatesAutoresizingMaskIntoConstraints = false
+    setupVideoViewConstraints()
   }
 
   private func setupVideoViewConstraints() {

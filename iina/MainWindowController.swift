@@ -1751,6 +1751,16 @@ class MainWindowController: PlayerWindowController {
     view.setFrameSize(NSMakeSize(view.frame.width, screen.frame.height - unusable))
   }
 
+  /// `setMaterial` unconditionally sets the window's background to follow the current appearance, which would
+  /// undo the forced black background from `setWindowFrameForLegacyFullScreen` if the user changes the theme
+  /// while still in legacy full screen on a screen with a camera housing. Re-force it black in that case.
+  override func setMaterial(_ theme: Preference.Theme?) {
+    super.setMaterial(theme)
+    guard case .fullscreen(let legacy, _) = fsState, legacy,
+          window?.screen?.cameraHousingHeight != nil else { return }
+    window?.backgroundColor = .black
+  }
+
   private func legacyAnimateToFullscreen() {
     guard let window = self.window else { fatalError("make sure the window exists before animating") }
     // call delegate

@@ -1704,6 +1704,9 @@ class MainWindowController: PlayerWindowController {
     window.hasShadow = true
     (window as! MainWindow).forceKeyAndMain = false
     window.level = .normal
+    // Undo the forced black background applied for a camera housing gap (see
+    // setWindowFrameForLegacyFullScreen) now that the content view fills the window again.
+    window.backgroundColor = window.effectiveAppearance.isDark ? .black : .white
 
     restoreDockSettings()
     // restore window frame and aspect ratio
@@ -1740,7 +1743,10 @@ class MainWindowController: PlayerWindowController {
     window.setFrame(screen.frame, display: true, animate: useAnimation)
     guard let unusable = screen.cameraHousingHeight else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
-    // frame to avoid having part of the window obscured by the camera housing.
+    // frame to avoid having part of the window obscured by the camera housing. The window's
+    // background will show through the resulting gap, so force it black regardless of the current
+    // appearance to keep the area around the camera housing blacked out. See issue #6201.
+    window.backgroundColor = .black
     let view = window.contentView!
     view.setFrameSize(NSMakeSize(view.frame.width, screen.frame.height - unusable))
   }

@@ -57,7 +57,8 @@
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "Hide";
 "quicksetting.reset_speed" = "Reset speed to 1x";
-"quicksetting.sub_remove_downloaded" = "Remove Downloaded Subtitle";
+"quicksetting.sub_remove" = "Remove Subtitle Track";
+"quicksetting.sub_remove_unavailable" = "Embedded subtitles cannot be removed";
 
 // EQ Presets
 "eq.preset.flat" = "Flat";

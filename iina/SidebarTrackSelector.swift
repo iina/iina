@@ -108,49 +108,35 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource, N
     menu.removeAllItems()
 
     let clickedRow = tableView.clickedRow
-    guard clickedRow > 0,
-          let track = player.info.trackList(trackType)[at: clickedRow - 1],
-          isRemovableDownloadedSubtitle(track) else { return }
+    guard clickedRow > 0, let track = player.info.trackList(trackType)[at: clickedRow - 1] else { return }
 
-    menu.addItem(
-      withTitle: NSLocalizedString(
-        "quicksetting.sub_remove_downloaded",
-        comment: "Remove Downloaded Subtitle"
-      ),
-      action: #selector(removeDownloadedSubtitleFromMenu(_:)),
-      target: self,
-      obj: track
-    )
-  }
-
-  @objc private func removeDownloadedSubtitleFromMenu(_ sender: NSMenuItem) {
-    guard let track = sender.representedObject as? MPVTrack,
-          isRemovableDownloadedSubtitle(track),
-          let filename = track.externalFilename,
-          player.subRemove(id: track.id) else { return }
-
-    do {
-      try FileManager.default.removeItem(at: URL(fileURLWithPath: filename))
-    } catch CocoaError.fileNoSuchFile {
-      // Ignore if the temporary subtitle file was already cleaned up.
-    } catch {
-      player.log(
-        "Failed removing downloaded subtitle file \(filename): \(error.localizedDescription)",
-        level: .warning
+    if track.isExternal {
+      menu.addItem(
+        withTitle: NSLocalizedString(
+          "quicksetting.sub_remove",
+          comment: "Remove Subtitle Track"
+        ),
+        action: #selector(removeSubtitleFromMenu(_:)),
+        target: self,
+        obj: track
       )
+    } else {
+      let item = menu.addItem(
+        withTitle: NSLocalizedString(
+          "quicksetting.sub_remove_unavailable",
+          comment: "Embedded subtitles cannot be removed"
+        ),
+        action: nil,
+        target: nil
+      )
+      item.isEnabled = false
     }
-
-    player.getTrackInfo()
-    player.getSelectedTracks()
-    player.postNotification(.iinaTracklistChanged)
   }
 
-  private func isRemovableDownloadedSubtitle(_ track: MPVTrack) -> Bool {
-    guard track.isExternal, let filename = track.externalFilename else { return false }
-
-    let temporaryDirectory = Utility.tempDirURL.standardizedFileURL.pathComponents
-    let subtitleFile = URL(fileURLWithPath: filename).standardizedFileURL.pathComponents
-    return subtitleFile.starts(with: temporaryDirectory)
+  @objc private func removeSubtitleFromMenu(_ sender: NSMenuItem) {
+    guard let track = sender.representedObject as? MPVTrack,
+          track.isExternal,
+          player.subRemove(id: track.id) else { return }
   }
 
   private func makeCell(identifier: NSUserInterfaceItemIdentifier, columnID: NSUserInterfaceItemIdentifier) -> CellView {

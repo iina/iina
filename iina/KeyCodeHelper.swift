@@ -423,6 +423,11 @@ class KeyCodeHelper {
     var modifiers: NSEvent.ModifierFlags = []
     guard !splitted.isEmpty else { return nil }
     key = splitted.last!
+    /// Numpad keys have no `NSMenuItem` representation: a key equivalent degraded to the number-row
+    /// char would also match the number-row key, running the wrong action when both keys are bound
+    /// (#4898). `IINAApplication.sendEvent` delivers numpad keys to the player window instead.
+    /// Returning `nil` also makes the settings UI fall back to the distinguishable mpv name (`KP5`).
+    guard !key.hasPrefix("KP") else { return nil }
     splitted.dropLast().forEach { k in
       switch k {
       case META_KEY: modifiers.insert(.command)

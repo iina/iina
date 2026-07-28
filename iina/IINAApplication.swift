@@ -17,15 +17,24 @@ class IINAApplication: NSApplication {
   /// Numpad key bindings are handled by the player window, so when a numpad key with a binding is
   /// pressed while a player window is key, send it to the window directly.
   override func sendEvent(_ event: NSEvent) {
-    // When the app is inactive there is no key window; programmatically delivered
-    // events (Accessibility, automation) should still reach the player window.
     if event.type == .keyDown,
-       let window = keyWindow ?? mainWindow, window.windowController is PlayerWindowController,
+       let window = IINAApplication.routingWindow(keyWindow: keyWindow, mainWindow: mainWindow),
        IINAApplication.isBoundNumpadKeyEvent(event) {
       window.sendEvent(event)
       return
     }
     super.sendEvent(event)
+  }
+
+  /// The player window a numpad key event should be delivered to, or `nil` to use normal
+  /// dispatch. When the app is inactive there is no key window; programmatically delivered
+  /// events (Accessibility, automation) should still reach the player window. A window with
+  /// an attached sheet is waiting for dialog input, so it must not receive playback commands.
+  static func routingWindow(keyWindow: NSWindow?, mainWindow: NSWindow?) -> NSWindow? {
+    guard let window = keyWindow ?? mainWindow,
+          window.attachedSheet == nil,
+          window.windowController is PlayerWindowController else { return nil }
+    return window
   }
 
   /// Whether the event is a numpad key press that has a key binding (its own, or via the

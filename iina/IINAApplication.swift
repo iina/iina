@@ -26,8 +26,9 @@ class IINAApplication: NSApplication {
     super.sendEvent(event)
   }
 
-  /// The player window a numpad key event should be delivered to, or `nil` to use normal
-  /// dispatch. When the app is inactive there is no key window; programmatically delivered
+  /// Returns the player window a numpad key event should be delivered to, or `nil` to use normal dispatch.
+  ///
+  /// When the app is inactive there is no key window; programmatically delivered
   /// events (Accessibility, automation) should still reach the player window. A window with
   /// an attached sheet is waiting for dialog input, so it must not receive playback commands.
   static func routingWindow(keyWindow: NSWindow?, mainWindow: NSWindow?) -> NSWindow? {
@@ -37,9 +38,11 @@ class IINAApplication: NSApplication {
     return window
   }
 
-  /// Whether the event is a numpad key press that has a key binding (its own, or via the
-  /// number-row fallback in `PlayerCore.keyBinding(for:)`). Arrow keys also carry the
-  /// `.numericPad` flag and are excluded by requiring an mpv `KP*` key name.
+  /// Returns whether the event is a numpad key press that has a key binding.
+  ///
+  /// The binding can be the key's own, or come from the number-row fallback in
+  /// `PlayerCore.keyBinding(for:)`. Arrow keys also carry the `.numericPad` flag
+  /// and are excluded by requiring an mpv `KP*` key name.
   static func isBoundNumpadKeyEvent(_ event: NSEvent) -> Bool {
     guard event.modifierFlags.contains(.numericPad),
           let keyName = KeyCodeHelper.keyMap[event.keyCode]?.0, keyName.hasPrefix("KP") else {

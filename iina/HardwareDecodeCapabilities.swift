@@ -85,9 +85,7 @@ class HardwareDecodeCapabilities {
   ///     lead to UI unresponsiveness". Use a different thread to call this method. Do not call `isHardwareDecodeSupported`
   ///     from the main thread.
   private func isHardwareDecodeSupported(_ codecType: CMVideoCodecType) -> Bool {
-    if #available(macOS 11.0, *) {
-      VTRegisterSupplementalVideoDecoderIfAvailable(codecType)
-    }
+    VTRegisterSupplementalVideoDecoderIfAvailable(codecType)
     return VTIsHardwareDecodeSupported(codecType)
   }
 

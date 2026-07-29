@@ -13,8 +13,12 @@
 "general.logout" = "تسجيل الخروج";
 "general.ok" = "حسناً";
 "general.cancel" = "إلغاء";
+"general.done" = "تم";
 "general.username" = "اسم المستخدم";
 "general.password" = "كلمة المرور";
+"general.na" = "N/A";
+"general.no_result" = "لا توجد نتيجة";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "لا يمكن أن تكون القيمة فارغة.";
 "input.already_exists" = "القيمة موجودة مسبقاً.";
@@ -136,6 +140,9 @@
 "osd.canceled" = "ملغاة";
 "osd.cannot_connect" = "لا يمكن الاتصال";
 "osd.timed_out" = "انتهت المهلة";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "تمت إضافة فلتر: %@";
 "osd.filter_removed" = "إزالة الفلتر";
 "osd.file_loop" = "تكرار ملف واحد";
@@ -144,8 +151,10 @@
 
 "preference.title" = "التفضيلات";
 "preference.general" = "عام";
-"preference.ui" = "واجهة التشغيل";
-"preference.video_audio" = "فيديو/صوت";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "الفيديو";
+"preference.audio" = "الصوت";
 "preference.subtitle" = "الترجمة";
 "preference.network" = "الشبكة";
 "preference.control" = "التحكم";
@@ -247,6 +256,7 @@
 "alert.mpv_error" = "خطأ داخلي %@ (%@) عند خيار الإعداد %@.";
 
 "alert.unsupported_audio" = "ملف صوت خارجي غير مدعوم.";
+"alert.unsupported_video" = "ملف صوت خارجي غير مدعوم.";
 "alert.unsupported_sub" = "ملف ترجمه خارجي غير مدعوم.";
 "alert.unsupported_url" = "رابط غير مدعوم.";
 "alert.wrong_url_format" = "تنسيق عنوان URL خاطئ.";
@@ -275,10 +285,13 @@
 "alert.add_filter.message" = "الرجاء إدخال سلسلة فلتر في شكل أمر mpv أو af.";
 
 "alert.keybinding_config.error" = "حدث خطأ أثناء تحليل ملف تكوين الربط المفاتيح\"%@\"! العودة إلى إعدادات ربط المفتاح الافتراضي لـ IINA. الرجاء التحقق من الإعدادات الخاصة بك.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "لا يمكن قراءة خيارات mpv الإضافية المحددة للمستخدم.";
 "alert.extra_option.empty" = "المفتاح أو القيمة لا يمكن أن تكون فارغة!";
-"alert.extra_option.error" = "خطأ في خيار الإعداد --%@=%@ مع قيمة الإرجاع %d. الرجاء التحقق من إعدادات الخيار الإضافي الخاص بك في التفضيل > متقدم.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "خطأ في إعداد دليل الإعداد\"%@\".";
 
 "alert.playlist.error_deleting" = "خطأ في الحذف: %@";
@@ -313,6 +326,10 @@
 
 "alert.delete_history.title" = "حذف سجل التشغيل";
 "alert.delete_history.message" = "هل أنت متأكد من حذف الإدخالات المحددة؟";
+"alert.delete_all_history.title" = "مسح سجل التشغيل";
+"alert.delete_all_history.message" = "هل أنت متأكد من حذف جميع سجلات التشغيل؟";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "أنت على وشك تطبيق فلتر فيديو. ومع ذلك، فترميز الأجهزة الحالية قد لا يدعم فلاتر الفيديو جيداً. يمكنك تعطيل فك ترميز الأجهزة أو التبديل إلى تلقائي (نسخ)، الذي سيستهلك ضعف الذاكرة.\nقد تحتاج إلى تكرار العملية السابقة (مثل إعداد حجم الفيديو) لجعلها تعمل.";
 "alert.filter_hwdec.abort" = "إيقاف";
@@ -330,6 +347,10 @@
 
 "alert.restore_alerts.title" = "استعادة التنبيهات المقموعة";
 "alert.restore_alerts.message" = "هل أنت متأكد من أنك تريد استعادة التنبيهات المقموعة؟";
+
+"alert.cleared" = "تم.";
+"alert.restored" = "تمت الاستعادة";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "لا شيء لفتحه.";
 
@@ -354,6 +375,8 @@
 "alert.plugin_update_found.message" = "أحدث إصدار هو %@. لديك %@. هل ترغب في التحديث؟";
 "alert.plugin_permission" = "هذه الإضافة تتطلب الأذونات التالية. الرجاء مراجعتها قبل المتابعة.";
 "alert.plugin_permission_added" = "يتطلب هذا التحديث أذونات إضافية. يرجى مراجعتها قبل المتابعة.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ في المجموع";
 "playlist.total_length_with_selected" = "تم تحديد %@ من %@";
@@ -381,6 +404,12 @@
 "pl_menu.browser" = "فتح في المتصفح";
 "pl_menu.copy_url" = "نسخ عنوان URL";
 "pl_menu.copy_url_multi" = "نسخ عناوين URL";
+"pl_menu.playback" = "التشغيل";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "الإضافات";
+"pl_menu.playlist" = "قائمة التشغيل";
 
 "keymapping.title" = "ارتباطات المفاتيح";
 "keymapping.message" = "اضغط على أي زر للتسجيل.";
@@ -392,6 +421,10 @@
 "hwdec.auto" = "تمكين فك ترميز الأجهزة. مع العلم، إن معظم عوامل تصفية الفيديو لن تعمل بشكل صحيح.";
 "hwdec.auto-copy" = "تمكين فك ترميز الأجهزة. سوف يستهلك ضعف الذاكرة ولكنه يعمل مع عوامل تصفية الفيديو.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "إذا تغير تنسيق الصوت وإخراج الترميز، يتم إغلاق الجهاز الصوتي وإعادة فتحه، مما يعطل التشغيل اللاصق.";
+"gaplessAudio.yes" = "يتم فتح الجهاز الصوتي باستخدام المعلمات المختارة للملف الأول الذي يتم تشغيله ثم يتم إبقائه مفتوحاً للتشغيل غير القابل للاشتغال. الملفات التالية قد يعاد تحديدها.";
+
 "subencoding.auto" = "اكتشاف تلقائي";
 
 "osc_toolbar.settings" = "الإعدادات السريعة";
@@ -402,6 +435,11 @@
 "osc_toolbar.sub_track" = "اختيار مسار الترجمة";
 "osc_toolbar.screenshot" = "خذ لقطة شاشة";
 "osc_toolbar.plugins" = "إظهار لوحة الإضافات";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "عائمة";
+"osc_pos.top" = "الأعلى";
+"osc_pos.bottom" = "الأسفل";
 
 "mini_player.album_art" = "تبديل صورة الألبوم";
 "mini_player.loop" = "تكرار";
@@ -459,3 +497,443 @@
 "plugin.install_error.cannot_load" = "لا يمكن لـ IINA تحميل هذه الإضافة. قد يكون في شكل خاطئ.";
 "plugin.check_for_updates" = "التحقق من وجود تحديثات";
 "plugin.updating" = "ينزّل التّحديث...";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "عارض السجل";
+"logwindow.time" = "وقت";
+"logwindow.subsystem" = "نظام فرعي";
+"logwindow.message" = "رسالة";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "حفظ";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "نسخ";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "تاريخ التشغيل";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "التقدم";
+"history_window.col.played_at" = "تم تشغيله في";
+"history_window.menu.play" = "تشغيل";
+"history_window.menu.play_new_window" = "تشغيل في نافذة جديدة";
+"history_window.menu.show_in_finder" = "كشف في Finder";
+"history_window.menu.delete" = "حذف…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "مسح سجل التشغيل";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "التاريخ";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "البحث في";
+"history_window.search.filename" = "اسم الملف";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "لا توجد عمليات بحث حديثة";
+"history_window.search.recents_title" = "عمليات البحث الأخيرة";
+"history_window.search.clear_recents" = "مسح الحديثة";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "الفيديو";
+"sidebar.audio" = "الصوت";
+"sidebar.sub" = "الترجمات";
+"sidebar.plugins" = "الإضافات";
+"sidebar.playlist" = "قائمة التشغيل";
+"sidebar.chapters" = "الفصول";
+
+"sidebar.aspect_ratio" = "نسبة الارتفاع إلى العرض";
+"sidebar.crop" = "اقتصاص";
+"sidebar.rotation" = "التدوير";
+"sidebar.speed" = "السرعة";
+
+"sidebar.brightness" = "السطوع";
+"sidebar.contrast" = "التباين";
+"sidebar.saturation" = "التشبع";
+"sidebar.gamma" = "جاما";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "استخدام ملف صوت خارجي…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "حفظ الإعداد المسبق الحالي للموازن الصوتي (EQ)…";
+"sidebar.rename_eq" = "إعادة تسمية الإعداد المسبق الحالي للموازن الصوتي (EQ)…";
+"sidebar.remove_eq" = "إزالة الإعداد المسبق الحالي للموازن الصوتي (EQ)";
+"sidebar.manual_eq" = "يدوي";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "إضافة ترجمه…";
+"sidebar.search_online" = "البحث عبر الإنترنت…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "الخط";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "الحدود";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "قد تؤدي خيارات نمط الترجمة إلى كسر عرض ASS، وبعضها سيتم تعطيله تبعاً لنوع الترجمة.";
+
+"sidebar.add_file" = "إضافة ملف…";
+"sidebar.add_url" = "إضافة عنوان URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "إظهار نافذة الترحيب";
+"settings.actionAfterLaunch.items.1" = "إظهار لوحة الملفات المفتوحة";
+"settings.actionAfterLaunch.items.2" = "لا تفعل شيئ";
+"settings.actionAfterLaunch.label" = "عند الإطلاق";
+"settings.allowScreenSaverForAudio.desc" = "لا يزال يمنع النظام من النوم.";
+"settings.allowScreenSaverForAudio.label" = "ليس أثناء \"وضع الموسيقى\" أو عند تشغيل الصوت فقط";
+"settings.alwaysOpenInNewWindow.label" = "فتح الوسائط دائما في نافذة جديدة";
+"settings.autoRepeat.label" = "عند فتح ملف يدوياً";
+"settings.autoSwitchToMusicMode.label" = "التبديل إلى \"وضع الموسيقى\" تلقائياً عند تشغيل ملف صوتي";
+"settings.blackOutMonitor.label" = "أطفئ شاشات أخرى أثناء ملئ الشاشة";
+"settings.defaultRepeatMode.items.0" = "تشغيل القائمة بشكل متكرر";
+"settings.defaultRepeatMode.items.1" = "تكرار ملف واحد";
+"settings.fullScreenWhenOpen.label" = "دخول إلى وضع ملء الشاشة";
+"settings.keepOpenOnFileEnd.label" = "إبقاء النافذة مفتوحة بعد انتهاء التشغيل";
+"settings.pauseWhenGoesToSleep.label" = "الإيقاف المؤقت عندما تذهب الآلة إلى السكون";
+"settings.pauseWhenInactive.label" = "النافذة تصبح غير نشطة/نشطة";
+"settings.pauseWhenLeavingFullScreen.label" = "الإيقاف المؤقت عند ترك الشاشة الكاملة";
+"settings.pauseWhenMinimized.label" = "مصغر/غير مصغر";
+"settings.pauseWhenOpen.label" = "توقف";
+"settings.pauseresumeWhen" = "توقف/استئناف عندما";
+"settings.playWhenEnteringFullScreen.label" = "تشغيل عند إدخال ملئ الشاشة";
+"settings.playlistAutoAdd.desc" = "يتطلب إعادة تشغيل IINA لكي يطبق.";
+"settings.playlistAutoAdd.label" = "إضافة ملفات في نفس المجلد تلقائياً";
+"settings.playlistAutoPlayNext.label" = "تشغيل العنصر التالي تلقائياً";
+"settings.playlistShowMetadata.label" = "إظهار الفنان واسم المسار للملفات الصوتية عندما تكون متاحة";
+"settings.playlistShowMetadataInMusicMode.label" = "فقط في \"وضع الموسيقى\"";
+"settings.preventScreenSaver.label" = "منع حامي الشاشة عند بدء التشغيل";
+"settings.quitWhenNoOpenedWindow.label" = "الخروج بعد إغلاق جميع النوافذ";
+"settings.receiveBetaUpdate.label" = "تلقي تحديثات الإصدار التجريبي";
+"settings.recordPlaybackHistory.label" = "تمكين سجل التشغيل";
+"settings.recordRecentFiles.label" = "تمكين قائمة \"فتح الأحدث\"";
+"settings.resumeLastPosition.label" = "استئناف آخر موضع تشغيل";
+"settings.screenShotFormat.label" = "الصيغة";
+"settings.screenShotIncludeSubtitle.label" = "تضمين الترجمات";
+"settings.screenshotCopyToClipboard.desc" = "الوجهة";
+"settings.screenshotCopyToClipboard.label" = "نسخ الى المسودة";
+"settings.screenshotSaveToFile.label" = "حفظ إلى";
+"settings.screenshotShowPreview.label" = "إظهار المعاينات بعد التقاط لقطات الشاشة";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "وإلا ستظهر في هذه القائمة الملفات التي تم فتحها يدويا.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "تتبع جميع الملفات التي تم تشغيلها في قائمة \"فتح مؤخراً\"";
+"settings.useLegacyFullScreen.label" = "استخدام الشاشة الكاملة القديمة";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "تمكين وضع HDR بشكل افتراضي عند تشغيل مقاطع الفيديو HDR.";
+"settings.enableToneMapping.label" = "تفعيل تعيين الفأرة";
+"settings.forceDedicatedGPU.desc" = "استخدم دائماً وحدة معالجة الرسومات المخصصة لتقديم الخدمات (إن وجدت)، وهذا يمكن أن يحسن الأداء ولكنه قد يقلل من عمر البطارية.";
+"settings.forceDedicatedGPU.label" = "فرض وحدة GPU مخصصة";
+"settings.hardwareDecoder.items.0" = "معطل";
+"settings.hardwareDecoder.items.1" = "تلقائي";
+"settings.hardwareDecoder.items.2" = "تلقائي (نسخ)";
+"settings.hardwareDecoder.label" = "فك ترميز";
+"settings.loadIccProfile.desc" = "تحميل الملف الشخصي لغرفة التجارة الدولية للعرض الحالي واستخدامه لتحويل RGB الفيديو لشاشة الإخراج. (فقط لوضع حقوق السحب الخاصة)";
+"settings.loadIccProfile.label" = "تحميل ملف تعريف غرفة التجارة الدولية";
+"settings.toneMappingAlgorithm.items.0" = "تلقائي";
+"settings.toneMappingAlgorithm.label" = "الخوارزمية";
+"settings.toneMappingTargetPeak.desc" = "قياس ذروة سطوع العرض. إذا تم تعيينها إلى 0، فإن IINA  يكشف هذه القيمة. إذا فشل الكشف ، فإن IINA يحدد الذروة المستهدفة إلى 400.";
+"settings.toneMappingTargetPeak.label" = "قمة الهدف";
+"settings.videoThreads.desc" = "الافتراضي: 0 (تلقائي)";
+"settings.videoThreads.label" = "عدد المواضيع";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation هو مشغل صوت تجريبي جديد يوفر دعم الصوت المكاني. ومع ذلك، قد تواجه بعض المشاكل عند استخدام AVFound، مثل تأخير الصوت.";
+"settings.audioDriverEnableAVFoundation.label" = "مشغل الصوت";
+"settings.enableInitialVolume.label" = "الصوت الأولي";
+"settings.gaplessAudio.items.0" = "معطل";
+"settings.gaplessAudio.items.2" = "قوي";
+"settings.maxVolume.label" = "أعلي مستوى الصوت";
+"settings.preferredAudioDevice.label" = "جهاز الصوت المفضل";
+"settings.replayGain.desc" = "ضبط كسب الصوت وفقا لقيم ReplayGain المخزنة في البيانات الوصفية للملفات.";
+"settings.replayGain.items.0" = "دون تعديلات";
+"settings.replayGain.items.1" = "تعقب المكسب";
+"settings.replayGain.items.2" = "كسب الألبوم";
+"settings.replayGain.label" = "تعديل المكتسب";
+"settings.replayGainClip.desc" = "إذا لم يتم تمكين هذا الخيار، سيتم منع النقر عن طريق تقليل المكسب.";
+"settings.replayGainClip.label" = "السماح لكسب الصوت بالفيديو";
+"settings.replayGainFallback.desc" = "احصل على التطبيق إذا لم يكن الملف يحتوي على علامات إعادة التشغيل.";
+"settings.replayGainPreamp.desc" = "مكسب ما قبل التضخيم لتطبيقه على مكسب إعادة التثبيت.";
+"settings.replayGainPreamp.label" = "مكسب الديباجة";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "لا شيء";
+"settings.doubleClickAction.items.1" = "ملئ الشاشة";
+"settings.doubleClickAction.items.2" = "إيقاف / استئناف";
+"settings.doubleClickAction.items.4" = "تبديل إلى الصورة في الصورة";
+"settings.doubleClickAction.items.5" = "حلقة A-B";
+"settings.doubleClickAction.label" = "انقر نقرا مزدوجا إلى";
+"settings.forceTouchAction.items.0" = "لا شيء";
+"settings.forceTouchAction.items.1" = "ملء الشاشة كاملة";
+"settings.forceTouchAction.items.2" = "إيقاف / استئناف";
+"settings.forceTouchAction.items.3" = "إخفاء OSC";
+"settings.forceTouchAction.label" = "الضغط على اللمس إلى";
+"settings.horizontalScrollAction.items.0" = "ضبط مستوى الصوت";
+"settings.horizontalScrollAction.items.1" = "بحث";
+"settings.horizontalScrollAction.items.2" = "لا شيء";
+"settings.horizontalScrollAction.label" = "تمرير أفقياً إلى";
+"settings.middleClickAction.items.0" = "لا شيء";
+"settings.middleClickAction.items.1" = "ملئ الشاشة";
+"settings.middleClickAction.items.2" = "إيقاف / استئناف";
+"settings.middleClickAction.items.3" = "إخفاء OSC";
+"settings.middleClickAction.items.4" = "تبديل إلى الصورة في الصورة";
+"settings.middleClickAction.items.5" = "حلقة A-B";
+"settings.middleClickAction.label" = "النقر الأوسط إلى";
+"settings.pinchAction.items.0" = "ضبط حجم النافذة";
+"settings.pinchAction.items.1" = "ملء الشاشة";
+"settings.pinchAction.items.2" = "لا شيء";
+"settings.pinchAction.label" = "اقرص إلى";
+"settings.relativeSeekAmount.label" = "حساسية البحث الطبيعي";
+"settings.rightClickAction.desc" = "النقر الأوسط إلى";
+"settings.rightClickAction.items.0" = "لا شيء";
+"settings.rightClickAction.items.2" = "إيقاف / استئناف";
+"settings.rightClickAction.items.3" = "إخفاء OSC";
+"settings.rightClickAction.items.4" = "تبديل إلى الصورة في الصورة";
+"settings.rightClickAction.items.5" = "حلقة A-B";
+"settings.rightClickAction.label" = "انقر بالزر الأيمن إلى";
+"settings.singleClickAction.items.0" = "لا شيء";
+"settings.singleClickAction.items.2" = "إيقاف / استئناف";
+"settings.singleClickAction.items.3" = "إخفاء OSC";
+"settings.singleClickAction.label" = "نقرة واحدة إلى";
+"settings.useExactSeek.desc" = "البحث الدقيق هو أكثر دقة ولكن يمكن أن يتسبب في تأخر و ارتفاع استخدام المعالج.";
+"settings.useExactSeek.items.0" = "البحث بالفريم";
+"settings.useExactSeek.items.1" = "البحث الدقيق";
+"settings.useExactSeek.items.2" = "تلقائي";
+"settings.useExactSeek.label" = "نوع البحث";
+"settings.verticalScrollAction.items.0" = "ضبط مستوى الصوت";
+"settings.verticalScrollAction.items.1" = "بحث";
+"settings.verticalScrollAction.items.2" = "لا شيء";
+"settings.verticalScrollAction.label" = "مرر رأسياً إلى";
+"settings.videoViewAcceptsFirstMouse.label" = "يقبل أول نقرة عندما لا يركز";
+"settings.volumeScrollAmount.label" = "ضبط حساسية الصوت";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "عرض القيم الخامه";
+"settings.useMediaKeys.label" = "استخدم تحكم الميديا الخاص بالنظام";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "الافتراضي: 153600";
+"settings.cacheBufferSize.label" = "حجم التخزين المؤقت للذاكرة المؤقتة (KB)";
+"settings.enableCache.label" = "تمكين ذاكرة التخزين المؤقت";
+"settings.httpProxy.desc" = "يتطلب إعادة تشغيل IINA لكي يطبق.";
+"settings.httpProxy.label" = "وكيل HTTP";
+"settings.secPrefech.desc" = "الافتراضي: 36000";
+"settings.secPrefech.label" = "ثواني للتفضيل";
+"settings.showBufferingThrobber.label" = "عرض رمز التحميل عند التوقف مؤقتًا أثناء انتظار التخزين المؤقت";
+"settings.showSeekingThrobber.label" = "إظهار مؤشر التحميل أثناء البحث";
+"settings.transportRTSPThrough.items.0" = "تلقائي";
+"settings.transportRTSPThrough.label" = "نقل تيار RTSP من خلال";
+"settings.userAgent.label" = "عامل المستخدم";
+"settings.ytdlEnabled.label" = "تمكين Youtube-dl";
+"settings.ytdlRawOptions.desc" = "التنسيق: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "خيارات الخام";
+"settings.ytdlSearchPath.desc" = "INA سوف يبحث Youtube-dl في هذا المجلد. إعادة التشغيل مطلوبة.";
+"settings.ytdlSearchPath.label" = "مسار Youtube-dl المخصص";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "البحث عن ترجمات على الإنترنت تلقائياً";
+"settings.displayInLetterBox.label" = "عرض الترجمات في مربعات الأحرف أثناء ملئ الشاشة";
+"settings.subAlignX.items.0" = "يسار";
+"settings.subAlignX.items.1" = "الوسط";
+"settings.subAlignX.items.2" = "يمين";
+"settings.subAlignX.label" = "ص";
+"settings.subAlignY.items.0" = "الأعلى";
+"settings.subAlignY.items.1" = "الوسط";
+"settings.subAlignY.items.2" = "الأسفل";
+"settings.subAutoLoadIINA.items.0" = "معطل";
+"settings.subAutoLoadIINA.items.1" = "الترجمة التي تحتوي على اسم ملف الوسائط";
+"settings.subAutoLoadIINA.items.2" = "كشف ذكي بواسطة IINA";
+"settings.subAutoLoadIINA.label" = "Auto load";
+"settings.subAutoLoadPriorityString.desc" = "الرجاء إدخال قائمة مفصولة بفواصل من السلاسل.";
+"settings.subAutoLoadPriorityString.label" = "الترجمات لها أولوية عند اسم الملف المحتوى";
+"settings.subAutoLoadSearchPath.desc" = "يتم فصل الدلائل بواسطة الكولون (:). يسمح بrelative paths و wildcards (*) في النهاية مسموحة.";
+"settings.subAutoLoadSearchPath.label" = "ابحث أيضا عن الترجمات في الدلائل التالية";
+"settings.subBlur.label" = "طمس";
+"settings.subBold.label" = "عريض";
+"settings.subItalic.label" = "خط مائل";
+"settings.subLang.desc" = "سيتم تخزين هذا الخيار كرمز لغة ISO 639-2 وسوف يعمل لكل من الترجمات mpv و OpenSubtitles.";
+"settings.subPos.label" = "وضع رأسي";
+"settings.subScaleWithWindow.label" = "تحجيم الترجمة بحجم النافذة";
+"settings.subSpacing.label" = "تباعد الخط";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "دائماً تطفو في الأعلى أثناء التشغيل";
+"settings.alwaysShowOnTopIcon.label" = "أظهر دائما حالة الطفو في الأعلى في شريط العنوان";
+"settings.arrowBtnAction.items.0" = "السرعة";
+"settings.arrowBtnAction.items.1" = "الوسائط السابقة / التالية";
+"settings.arrowBtnAction.items.2" = "التقدم السريع / إرجاع";
+"settings.arrowBtnAction.label" = "استخدم زر اليسار/اليمين لـ";
+"settings.controlBarStickToCenter.label" = "التقط إلى المركز عند السحب";
+"settings.disableAnimations.desc" = "عندما يتم تمكين إعداد الوصول لحركة MacOS سوف يقلل IINA الرسوم المتحركة للمستخدمين التي من المعروف أنها تسبب مشاكل لأولئك الذين يعانون من الاضطرابات الدهليزية. إذا كان ذلك غير كاف، يمكن استخدام هذا الإعداد لتقليل الحركة أكثر من خلال إزالة الرسوم المتحركة لواجهة المستخدم.";
+"settings.disableAnimations.label" = "تعطيل الحركات الرسومية";
+"settings.disableOSDFileStartMsg.label" = "بدء تشغيل الملف";
+"settings.disableOSDPauseResumeMsgs.label" = "إيقاف / استئناف";
+"settings.disableOSDSeekMsg.label" = "بحث";
+"settings.disableOSDSpeedMsg.label" = "السرعة";
+"settings.disablePlaySliderScrolling.label" = "منع عجلة التمرير من تغيير موضع التشغيل";
+"settings.disableVolumeSliderScrolling.label" = "منع عجلة التمرير من تغيير مستوى الصوت";
+"settings.displayTimeAndBatteryInFullScreen.label" = "عرض معلومات الوقت و البطارية عند ملئ الشاشة";
+"settings.enableOSD.label" = "تمكين OSD";
+"settings.enableThumbnailForRemoteFiles.label" = "تضمين الملفات الموجودة على جهاز خارجي";
+"settings.enableThumbnailPreview.label" = "تمكين المعاينة المصغرة";
+"settings.maxThumbnailPreviewCacheSize.label" = "الحد الأقصى لحجم ذاكرة التخزين المؤقت";
+"settings.oscPosition.items.0" = "عائمة";
+"settings.oscPosition.items.1" = "الأعلى";
+"settings.oscPosition.items.2" = "الأسفل";
+"settings.oscPosition.label" = "على شاشة التحكم";
+"settings.osdTextSize.label" = "حجم النص";
+"settings.pauseWhenPip.label" = "إيقاف التشغيل تلقائياً";
+"settings.resizeWindowOption.items.0" = "تناسب الشاشة";
+"settings.resizeWindowOption.items.1" = "حجم الفيديو 0.5x";
+"settings.resizeWindowOption.items.2" = "حجم فيديو 1x";
+"settings.resizeWindowOption.items.3" = "حجم الفيديو 1.5x";
+"settings.resizeWindowOption.items.4" = "حجم الفيديو 2x";
+"settings.resizeWindowOption.label" = "تغيير حجم النافذة إلى";
+"settings.scaleRemainingTime.label" = "تحديد الوقت المتبقي بناءً على سرعة التشغيل";
+"settings.showChapterPos.label" = "إظهار موضع الفصل في شريط التقدم";
+"settings.showRemainingTime.label" = "إظهار الوقت المتبقي بدلاً من المدة الإجمالية";
+"settings.themeMaterial.desc" = "السمة";
+"settings.themeMaterial.items.0" = "داكن";
+"settings.themeMaterial.items.2" = "الضوء";
+"settings.themeMaterial.items.4" = "التطابق مع مظهر النظام";
+"settings.themeMaterial.label" = "المظهر";
+"settings.togglePipByMinimizingWindow.label" = "تبديل الصورة في الصورة عن طريق تصغير/إلغاء تصغير النافذة";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "فقط لملفات الفيديو";
+"settings.usePhysicalResolution.label" = "استخدام الدقة المادية على شاشات ريتنا";
+"settings.windowBehaviorWhenPip.items.0" = "لا تفعل شيئ";
+"settings.windowBehaviorWhenPip.items.1" = "إخفاء";
+"settings.windowBehaviorWhenPip.items.2" = "تصغير";
+"settings.windowBehaviorWhenPip.label" = "النافذة";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "سوف تتطلب الإعدادات التالية إعادة تشغيل IINA حتى تصبح سارية المفعول.";
+"settings.enableAdvancedSettings.label" = "تمكين الإعدادات المتقدمة";
+"settings.enableLogging.label" = "تمكين التسجيل إلى الملف";
+"settings.logLevel.items.2" = "تحذير";
+"settings.logLevel.items.3" = "خطأ";
+"settings.useMpvOsd.label" = "استخدام الOSD الخاص بالmpv";
+"settings.useUserDefinedConfDir.label" = "إستخدام مجلد الاعدادات";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS subtitles";
+"settings.$About" = "حول التطبيق";
+"settings.$Accessibility" = "امكانية الوصول";
+"settings.$AdditionalMpvOptions" = "خيارات mpv إضافية";
+"settings.$Advanced" = "متقدم";
+"settings.$Align" = "محاذاة";
+"settings.$AlwaysWhenPlaying" = "دائماً";
+"settings.$Appearance" = "المظهر";
+"settings.$Audio" = "الصوت";
+"settings.$Author" = "الناشر";
+"settings.$AutoLoad" = "Auto load";
+"settings.$Background" = "الخلفية";
+"settings.$Behavior" = "السلوك";
+"settings.$Border" = "الحدود";
+"settings.$Cache" = "تخزين مؤقت";
+"settings.$Cancel" = "إلغاء";
+"settings.$CheckForUpdates" = "التحقق من وجود تحديثات";
+"settings.$Chrome" = "متصفح كروم";
+"settings.$ClearCache" = "مسح ذاكرة التخزين المؤقتة";
+"settings.$ClearPlaybackHistory" = "مسح سجل التشغيل";
+"settings.$ClearSavedPlaybackProgress" = "مسح تقدم التشغيل المحفوظ…";
+"settings.$ClearThumbnailCache" = "مسح ذاكرة التخزين المؤقتة للصور المصغرة";
+"settings.$Color" = "اللون";
+"settings.$Customize" = "تخصيص…";
+"settings.$DefaultApplication" = "التطبيق الافتراضي";
+"settings.$DefaultEncoding" = "الترميز الافتراضي";
+"settings.$DeleteAllPlaybackHistories" = "سيؤدي الزر أدناه إلى حذف جميع سجلات التشغيل والمدخلات في \"فتح الحديث\".";
+"settings.$DeleteAllWatchLater" = "الزر أدناه سيحذف جميع الملفات في مجلد \"مشاهدة لاحقاً\". هذه الملفات تحتوي على جميع إعدادات تقدم التشغيل المحفوظة والإعدادات المطبقة أثناء التشغيل.";
+"settings.$DoNotResize" = "معطل";
+"settings.$FailedToLoadThePage" = "فشل تحميل الصفحة.";
+"settings.$Firefox" = "متصفح Firefox";
+"settings.$Font" = "الخط";
+"settings.$GetBrowserExtensionsForIINA" = "الحصول على ملحقات المتصفح لـ IINA";
+"settings.$Height" = "الإرتفاع";
+"settings.$Help" = "مساعدة";
+"settings.$History" = "التاريخ";
+"settings.$Identifier" = "المعرف";
+"settings.$ImportAnExistingConfigFile" = "استيراد ملف تكوين";
+"settings.$InitialWindowPosition" = "موضع النافذة الأولية";
+"settings.$InitialWindowSize" = "موضع النافذة الأولية";
+"settings.$Install" = "تثبيت";
+"settings.$InstallLocalPackage" = "تثبيت الحُزمة…";
+"settings.$Layout" = "التخطيط";
+"settings.$Login" = "تسجيل الدخول";
+"settings.$MB" = "ميغابايت";
+"settings.$Margin" = "الهامش";
+"settings.$Mouse" = "فأرة";
+"settings.$Network" = "الشبكة";
+"settings.$NotLoggedIn" = "لم يتم تسجيل الدخول";
+"settings.$OK" = "حسناً";
+"settings.$Offset" = "إزاحة";
+"settings.$OnScreenController" = "على شاشة التحكم";
+"settings.$OnScreenDisplay" = "العرض على الشاشة";
+"settings.$OnlineSubtitles" = "الترجمة على الإنترنت";
+"settings.$OpenLinksOrCurrentWebpage" = "فتح الروابط أو صفحة الويب الحالية في IINA بنقرة واحدة. يجب أن يكون الموقع مدعوماً من قبل Youtube-dl.";
+"settings.$OpenLogDirectory" = "فتح سجل الدليل";
+"settings.$OtherStyles" = "أنماط أخرى";
+"settings.$OverrideLevel" = "تجاوز المستوى";
+"settings.$PictureinnPicture" = "وضع صورة في \nصورة";
+"settings.$Playlist" = "قائمة التشغيل";
+"settings.$PleaseSelectTheMediaTypes" = "الرجاء تحديد أنواع الوسائط التي تريد IINA كطلب افتراضي لها.";
+"settings.$Position" = "الموقع";
+"settings.$PreferredLanguage" = "اللغة المفضلة";
+"settings.$RestoreAlerts" = "استعادة التنبيهات";
+"settings.$RestoreAllAlertsThat" = "الزر أدناه سوف يستعيد جميع التنبيهات التي تم إلغاؤها باستخدام مربع الاختيار \"لا تظهر هذه الرسالة مرة أخرى\".";
+"settings.$RestoreSuppressedAlerts" = "استعادة التنبيهات الملغاة…";
+"settings.$SPDIFOutput" = "مخرجات S/PDIF";
+"settings.$Screenshots" = "لقطات الشاشة";
+"settings.$SetIINAAsTheDefault" = "تعيين IINA كتطبيق افتراضي…";
+"settings.$Settings" = "الاعدادات";
+"settings.$Shadow" = "الظل";
+"settings.$ShowInFinder" = "كشف في Finder";
+"settings.$ShowTheConfigFileIn" = "عرض ملف التكوين في Finder";
+"settings.$Size" = "الحجم";
+"settings.$Source" = "المصدر";
+"settings.$SuppressMessagesFor" = "منع الرسائل من أجل";
+"settings.$TextSubtitles" = "Text subtitles";
+"settings.$ThumbnailPreview" = "معاينة الصور المصغرة";
+"settings.$Toolbar" = "شريط الأدوات";
+"settings.$Trackpad" = "لوحة التتبع";
+"settings.$Uninstall" = "إلغاء التثبيت";
+"settings.$Video" = "الفيديو";
+"settings.$Website" = "الموقع";
+"settings.$WhenEnteringPIP" = "عند الدخول إلى وضع صورة في صورة";
+"settings.$WhenMediaIsOpened" = "عند فتح الوسائط";
+"settings.$WhenMediaIsOpenedManually" = "عند فتح ملف يدوياً";
+"settings.$Width" = "العرض";
+"settings.$Window" = "النافذة";
+"settings.$X" = " س";
+"settings.$XOffset" = "ص المقابلة";
+"settings.$Y" = "ص";
+"settings.$YOffset" = "ص المقابلة";
+"settings.$YouCanInstallANew" = "يمكنك تثبيت إضافة جديدة من GitHub أو حُزمة iinaplgz. محلية. يمكن تحديث الإضافات المثبتة من GitHub تلقائياً.";
+"settings.$bottom" = "الأسفل";
+"settings.$dB" = "ديسيبل";
+"settings.$left" = "يسار";
+"settings.$ofScreen" = "% من الشاشة";
+"settings.$point" = "نقطة";
+"settings.$pt" = "pt";
+"settings.$right" = "يمين";
+"settings.$s" = "ث";
+"settings.$sideOfTheScreen" = "جانب الشاشة";
+"settings.$toThe" = "إلى";
+"settings.$top" = "الأعلى";

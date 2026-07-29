@@ -167,7 +167,7 @@
 "Hal-18-Tnf.title" = "Podwójny rozmiar";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.5x"; ObjectID = "HsE-LN-Nd6"; */
-"HsE-LN-Nd6.title" = "Prędkość odtwarzania 0.5x";
+"HsE-LN-Nd6.title" = "Zwolnij do 0,5x";
 
 /* Class = "NSMenu"; title = "Video"; ObjectID = "HyV-fh-RgO"; */
 "HyV-fh-RgO.title" = "Obraz";
@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Przenieś na górę";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Zapisane filtry audio";
 
@@ -491,7 +497,7 @@
 "xDJ-GA-Gjs.title" = "Napisy";
 
 /* Class = "NSMenu"; title = "Saved Video Filters"; ObjectID = "xhY-fF-oio"; */
-"xhY-fF-oio.title" = "Zapisane filtry video";
+"xhY-fF-oio.title" = "Zapisane filtry obrazu";
 
 /* Class = "NSMenuItem"; title = "Deinterlace"; ObjectID = "yHI-7D-OaI"; */
 "yHI-7D-OaI.title" = "Usuwanie przeplotu";
@@ -510,3 +516,6 @@
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
 "Qwb-26-zjX.title" = "Otwórz URL…";
+
+/* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
+"kOx-hc-aQG.title" = "Release Highlights";

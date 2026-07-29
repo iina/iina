@@ -51,7 +51,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   @IBOutlet weak var defaultAlbumArt: NSView!
   @IBOutlet weak var togglePlaylistButton: NSButton!
   @IBOutlet weak var toggleAlbumArtButton: NSButton!
-  
+
   var isPlaylistVisible = false
   var isVideoVisible = true
 
@@ -65,10 +65,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }()
 
   var playlistView: PlaylistViewController {
-    return player.mainWindow.playlistView
+    return player.mainWindow.sidebars.playlistView
   }
 
-  override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView] as [NSView?]}
+  override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView]}
 
   // MARK: - Initialization
 
@@ -83,13 +83,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).forEach {
       let button = window.standardWindowButton($0)
       button?.isHidden = true
-      // Update: since IINA now drops 10.12 support, removed this workaround to enable minimizing mini player
       // > The close button, being obscured by standard buttons, won't respond to clicking when window is inactive.
       // > i.e. clicking close button (or any position located in the standard buttons's frame) will only order the window
       // > to front, but it never becomes key or main window.
       // > Removing the button directly will also work but it causes crash on 10.12-, so for the sake of safety we don't use that way for now.
       // > Not a perfect solution. It should respond to the first click.
-      // button?.frame.size = .zero
+      // Update: Testing switching to calling removeFromSuperview did not work when running under
+      // macOS Sequoia 15.7.2. The button was still present in the title bar. Possibly in response
+      // to past crashes Apple updated the title bar implementation to ignore certain attempts to
+      // alter the title bar. Continuing to set the frame size to zero so mouse events reach our
+      // custom close button.
+      button?.frame.size = .zero
     }
 
     setToInitialWindowSize(display: false, animate: false)
@@ -121,9 +125,9 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     closeButtonBackgroundViewBox.isHidden = true
     closeButtonView.alphaValue = 0
     controlView.alphaValue = 0
-    
+
     // tool tips
-    togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.description()
+    togglePlaylistButton.toolTip = Preference.ToolBarButton.playlist.localizedDescription()
     toggleAlbumArtButton.toolTip = NSLocalizedString("mini_player.album_art", comment: "album_art")
     volumeButton.toolTip = NSLocalizedString("mini_player.volume", comment: "volume")
     closeButtonVE.toolTip = NSLocalizedString("mini_player.close", comment: "close")
@@ -144,12 +148,12 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   override func scrollWheel(with event: NSEvent) {
-    if isMouseEvent(event, inAnyOf: [playSlider]) && playSlider.isEnabled {
+    if event.inAnyOf([playSlider]) && playSlider.isEnabled {
       seekOverride = true
-    } else if isMouseEvent(event, inAnyOf: [volumeSliderView]) && volumeSlider.isEnabled {
+    } else if event.inAnyOf([volumeSliderView]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
-      guard !isMouseEvent(event, inAnyOf: [backgroundView]) else { return }
+      guard !event.inAnyOf([backgroundView]) else { return }
     }
 
     super.scrollWheel(with: event)
@@ -270,8 +274,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   override func handleVideoSizeChange() {
     guard let window = window else { return }
-    let w = player.info.displayWidth, h = player.info.displayHeight
-    let (width, height) = (w == 0 && h == 0) ? (1, 1) :  player.videoSizeForDisplay
+    let (width, height) = videoSizeForDisplayInMusicMode()
     let aspect = CGFloat(width) / CGFloat(height)
     let currentHeight = videoView.frame.height
     let newHeight = videoView.frame.width / aspect
@@ -290,6 +293,28 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     videoViewAspectConstraint = NSLayoutConstraint(item: videoView, attribute: .width, relatedBy: .equal,
                                                    toItem: videoView, attribute: .height, multiplier: aspect, constant: 0)
     videoViewAspectConstraint?.isActive = true
+  }
+
+  func videoSizeForDisplayInMusicMode() -> (Int, Int) {
+    guard player.info.isAudio == .isAudio else {
+      return player.videoSizeForDisplay
+    }
+    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
+    if let albumArtTrack,
+       let width = albumArtTrack.demuxW,
+       let height = albumArtTrack.demuxH,
+       width > 0,
+       height > 0 {
+      return (width, height)
+    }
+    return (1, 1)
+  }
+
+  func refreshArtworkVisibility() {
+    guard loaded else { return }
+    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
+    let hasSubtitles = (player.info.isSubVisible && player.info.sid != 0) || (player.info.isSecondSubVisible && player.info.secondSid != 0)
+    defaultAlbumArt.isHidden = player.info.isAudio != .isAudio || albumArtTrack != nil || hasSubtitles
   }
 
   func setToInitialWindowSize(display: Bool = true, animate: Bool = true) {
@@ -314,23 +339,33 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     if isTrackpadBegan {
        // enabling animation here causes user not seeing their volume changes during popover transition
        volumePopover.animates = false
-       volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+       showVolumePopover()
      } else if isTrackpadEnd {
        DispatchQueue.main.asyncAfter(deadline: .now(), execute: hideVolumePopover)
      } else if isMouse {
        // if it's a mouse, simply show popover then hide after a while when user stops scrolling
        if !volumePopover.isShown {
          volumePopover.animates = false
-         volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+         showVolumePopover()
        }
        let timeout = Preference.double(for: .osdAutoHideTimeout)
        DispatchQueue.main.asyncAfter(deadline: .now() + timeout, execute: hideVolumePopover)
      }
   }
 
+  private func showVolumePopover() {
+    // Use the superview as the anchor to bypass NSButton's alignment rect adjustments,
+    // which would otherwise snap the popover arrow to the SF symbol's visual bounds.
+    guard let superview = volumeButton.superview else {
+      volumePopover.show(relativeTo: volumeButton.bounds, of: volumeButton, preferredEdge: .minY)
+      return
+    }
+    volumePopover.show(relativeTo: volumeButton.frame, of: superview, preferredEdge: .minY)
+  }
+
   // MARK: - IBActions
 
-  func showPlaylistAction(_ tab: PlaylistViewController.TabViewType) {
+  func showPlaylistAction(_ tab: SidebarViewController.TabType) {
     if !isPlaylistVisible {
       playlistView.pleaseSwitchToTab(tab)
       togglePlaylist(self)
@@ -350,7 +385,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     } else {
       // show
       isPlaylistVisible = true
-      playlistView.reloadData(playlist: true, chapters: true)
+//      playlistView.reloadData(playlist: true, chapters: true)
 
       var newFrame = window.frame
       newFrame.origin.y -= DefaultPlaylistHeight
@@ -396,7 +431,17 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     if volumePopover.isShown {
       volumePopover.performClose(self)
     } else {
-      volumePopover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
+      showVolumePopover()
+    }
+  }
+
+  override func handleIINACommand(_ cmd: IINACommand) {
+    super.handleIINACommand(cmd)
+    switch cmd {
+    case .toggleMusicMode:
+      player.switchBackFromMiniPlayer()
+    default:
+      break
     }
   }
 

@@ -26,7 +26,7 @@
 "2id-wn-xsC.title" = "Salta a…";
 
 /* Class = "NSMenuItem"; title = "Show Video Panel"; ObjectID = "2t8-Ot-yoO"; */
-"2t8-Ot-yoO.title" = "Show Video Panel";
+"2t8-Ot-yoO.title" = "Mostra el panell de vídeo";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "3Ax-P3-QQu"; */
 "3Ax-P3-QQu.title" = "Selecciona-ho tot";
@@ -71,7 +71,7 @@
 "8pV-XQ-AvB.title" = "Velocitat:";
 
 /* Class = "NSMenuItem"; title = "Show Subtitles Panel"; ObjectID = "8y7-Cy-lKT"; */
-"8y7-Cy-lKT.title" = "Show Subtitles Panel";
+"8y7-Cy-lKT.title" = "Mostra el panell de subtítols";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
 "91n-xW-L37.title" = "Increment velocitat a 1.1x";
@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Sempre per damunt";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Filtres d'àudio desats";
 
@@ -506,7 +512,10 @@
 "zpw-Ac-F3M.title" = "Comença a parlar";
 
 /* Class = "NSMenuItem"; title = "Plugin"; ObjectID = "Y6q-cI-vfM"; */
-"Y6q-cI-vfM.title" = "Plugin";
+"Y6q-cI-vfM.title" = "Complement";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "Qwb-26-zjX"; */
 "Qwb-26-zjX.title" = "Obre enllaç…";
+
+/* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
+"kOx-hc-aQG.title" = "Release Highlights";

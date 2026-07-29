@@ -8,7 +8,7 @@
 
 import Foundation
 
-fileprivate let subsystem = Logger.makeSubsystem("fgroup")
+fileprivate let subsystem = Logger.makeSubsystem("fgroup", ["rectangle.3.group"])
 
 class FileInfo: Hashable {
   var url: URL

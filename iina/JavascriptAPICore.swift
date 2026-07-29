@@ -236,9 +236,9 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
     case "ontop":
       return window.isOntop
     case "visible":
-      return window.window!.occlusionState == .visible
+      return window.window!.occlusionState.contains(.visible)
     case "sidebar":
-      return window.sideBarStatus == .settings ? window.quickSettingView.currentTab.name : NSNull()
+      return window.sidebars.isShowing(.settings) ? window.sidebars.quickSettingView.currentTab.name : NSNull()
     case "screens":
       let current = window.window!.screen!
       let main = NSScreen.main
@@ -287,15 +287,9 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
       window.setWindowFloatingOnTop(val)
     case "sidebar":
       if let name = value as? String {
-        if let tabType = QuickSettingViewController.TabViewType(name: name) {
-          window.showSettingsSidebar(tab: tabType, force: true, hideIfAlreadyShown: false)
-        } else if let tabType = PlaylistViewController.TabViewType(name: name) {
-          window.showPlaylistSidebar(tab: tabType, force: true, hideIfAlreadyShown: false)
-        } else {
-          log("core.window.sidebar: Unknown sidebar name \"\(name)\"", level: .error)
-        }
+        window.sidebars.show(tab: name, force: true, hideIfAlreadyShown: false)
       } else {
-        window.hideSideBar(animate: true)
+        window.sidebars.hideAllSideBars()
       }
     case "miniaturized":
       guard let val = value as? Bool else { return }
@@ -320,8 +314,11 @@ fileprivate class StatusAPI: JavascriptAPI, CoreSubAPIExportable {
     case "idle":
       return player!.info.state == .idle
     case "position":
+      player!.syncPositionIfNeeded()
       return player!.info.videoPosition?.second ?? NSNull()
     case "duration":
+      // When streaming the duration changes. Syncing the position will also update the duration.
+      player!.syncPositionIfNeeded()
       return player!.info.videoDuration?.second ?? NSNull()
     case "speed":
       return player!.info.playSpeed

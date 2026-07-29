@@ -14,18 +14,6 @@ fileprivate extension NSUserInterfaceItemIdentifier {
   static let openUPnP = NSUserInterfaceItemIdentifier("openUPnP")
 }
 
-fileprivate extension NSColor {
-  static let initialWindowActionButtonBackground = NSColor(named: .initialWindowActionButtonBackground)!
-  static let initialWindowActionButtonBackgroundHover = NSColor(named: .initialWindowActionButtonBackgroundHover)!
-  static let initialWindowActionButtonBackgroundPressed = NSColor(named: .initialWindowActionButtonBackgroundPressed)!
-  static let initialWindowLastFileBackground = NSColor(named: .initialWindowLastFileBackground)!
-  static let initialWindowLastFileBackgroundHover = NSColor(named: .initialWindowLastFileBackgroundHover)!
-  static let initialWindowLastFileBackgroundPressed = NSColor(named: .initialWindowLastFileBackgroundPressed)!
-  static let initialWindowBetaLabel = NSColor(named: .initialWindowBetaLabel)!
-  static let initialWindowNightlyLabel = NSColor(named: .initialWindowNightlyLabel)!
-  static let initialWindowDebugLabel = NSColor(named: .initialWindowDebugLabel)!
-}
-
 fileprivate class GrayHighlightRowView: NSTableRowView {
   override func drawSelection(in dirtyRect: NSRect) {
     if self.selectionHighlightStyle != .none {
@@ -166,14 +154,12 @@ class InitialWindowController: NSWindowController {
   private func setMaterial(_ theme: Preference.Theme?) {
     guard let window = window, let theme = theme else { return }
     window.appearance = NSAppearance(iinaTheme: theme)
-    if #available(macOS 10.16, *) {
-      let gradientLayer = CAGradientLayer()
-      gradientLayer.colors = window.effectiveAppearance.isDark ?
-        [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
-        [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
-      leftOverlayView.wantsLayer = true
-      leftOverlayView.layer = gradientLayer
-    }
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.colors = window.effectiveAppearance.isDark ?
+      [NSColor.black.withAlphaComponent(0.4).cgColor, NSColor.black.withAlphaComponent(0).cgColor] :
+      [NSColor.black.withAlphaComponent(0.1).cgColor, NSColor.black.withAlphaComponent(0).cgColor]
+    leftOverlayView.wantsLayer = true
+    leftOverlayView.layer = gradientLayer
   }
 
   @objc func onTableClicked() {
@@ -214,7 +200,7 @@ class InitialWindowController: NSWindowController {
     recentDocuments = makeRecentDocumentsList()
     recentFilesTableView.reloadData()
 
-    if Logger.enabled && Logger.Level.preferred >= .verbose {
+    if Logger.isEmitting(.verbose) {
       let last = lastPlaybackURL.flatMap { $0.resolvingSymlinksInPath().path } ?? "<none>"
       Logger.log("InitialWindow.reloadData(): LastPlaybackURL: \(last)", level: .verbose)
 

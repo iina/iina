@@ -28,10 +28,10 @@ class PlaySliderCell: NSSliderCell {
   let knobRadius: CGFloat = 1
   let barRadius: CGFloat = 1.5
 
-  private var knobColor = NSColor(named: .mainSliderKnob)!
-  private var knobActiveColor = NSColor(named: .mainSliderKnobActive)!
-  private var barColorLeft = NSColor(named: .mainSliderBarLeft)!
-  private var barColorRight = NSColor(named: .mainSliderBarRight)!
+  private var knobColor = NSColor.mainSliderKnob
+  private var knobActiveColor = NSColor.mainSliderKnobActive
+  private var barColorLeft = NSColor.mainSliderBarLeft
+  private var barColorRight = NSColor.mainSliderBarRight
 
   var drawChapters = Preference.bool(for: .showChapterPos)
 
@@ -95,12 +95,7 @@ class PlaySliderCell: NSSliderCell {
     let pos = barRect.origin.x + CGFloat(percentage) * effectiveBarWidth
     let rect = super.knobRect(flipped: flipped)
 
-    let height: CGFloat
-    if #available(macOS 11, *) {
-      height = (barRect.origin.y - rect.origin.y) * 2 + barRect.height
-    } else {
-      height = rect.height
-    }
+    let height: CGFloat = (barRect.origin.y - rect.origin.y) * 2 + barRect.height
     return NSMakeRect(pos, rect.origin.y, knobWidth, height)
   }
 
@@ -126,12 +121,7 @@ class PlaySliderCell: NSSliderCell {
     }
 
     NSGraphicsContext.saveGraphicsState()
-    let barRect: NSRect
-    if #available(macOS 11, *) {
-      barRect = rect
-    } else {
-      barRect = NSMakeRect(rect.origin.x, rect.origin.y + 1, rect.width, rect.height - 2)
-    }
+    let barRect: NSRect = rect
     let path = NSBezierPath(roundedRect: barRect, xRadius: barRadius, yRadius: barRadius)
 
     // draw chapters

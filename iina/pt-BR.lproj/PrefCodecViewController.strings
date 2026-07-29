@@ -10,6 +10,12 @@
 /* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
 "50C-1R-wlJ.title" = "Número de threads:";
 
+/* Class = "NSMenuItem"; title = "Strong"; ObjectID = "6vc-ad-xaq"; */
+"6vc-ad-xaq.title" = "Forte";
+
+/* Class = "NSTextFieldCell"; title = "Gapless audio:"; ObjectID = "8Fa-ft-1tC"; */
+"8Fa-ft-1tC.title" = "Áudio sem interrupção:";
+
 /* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
 "YUr-aJ-xfC.title" = "Forçar GPU dedicada";
 
@@ -27,6 +33,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
 "m5P-5f-5uo.title" = "Vídeo:";
+
+/* Class = "NSMenuItem"; title = "Weak"; ObjectID = "nsT-r3-brW"; */
+"nsT-r3-brW.title" = "Leve";
 
 /* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
 "nwg-2K-G2G.title" = "Decodificador de Hardware:";
@@ -86,37 +95,40 @@
 "szA-8r-plt.title" = "Algoritmo a ser usado para imagens de mapeamento de tons na tela.";
 
 /* Class = "NSTextFieldCell"; title = "ReplayGain:"; ObjectID = "gfq-nW-dDu"; */
-"gfq-nW-dDu.title" = "ReplayGain:";
+"gfq-nW-dDu.title" = "Normalização de Volume:";
 
 /* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
-"ZRL-b0-k1L.title" = "Gain adjustment:";
+"ZRL-b0-k1L.title" = "Ajuste de ganho:";
 
 /* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
-"k7b-6o-lCK.title" = "No adjustment";
+"k7b-6o-lCK.title" = "Sem ajuste";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "ti2-JH-nXX"; */
+"ti2-JH-nXX.title" = "Desabilitado";
 
 /* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
-"w6E-lw-g7g.title" = "Track gain";
+"w6E-lw-g7g.title" = "Ganho da faixa";
 
 /* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
-"ZJJ-1o-ZGD.title" = "Album gain";
+"ZJJ-1o-ZGD.title" = "Ganho do álbum";
 
 /* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
-"y61-Ah-c92.title" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
+"y61-Ah-c92.title" = "Ajustar o ganho conforme os valores da normalização de volume armazenados nos metadados do arquivo.";
 
 /* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
-"9Q0-hw-PdU.title" = "Preamp gain:";
+"9Q0-hw-PdU.title" = "Ganho do pré-amplificador:";
 
 /* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
 "Bew-Pv-igg.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
-"rIW-XP-zGZ.title" = "Pre-amplification gain to apply to the ReplayGain gain.";
+"rIW-XP-zGZ.title" = "Ganho de pré-amplificação adicionado à normalização de volume.";
 
 /* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
-"J3e-oT-fy9.title" = "Allow the volume gain to clip";
+"J3e-oT-fy9.title" = "Permitir distorção por ganho";
 
 /* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
-"HQV-tY-NMj.title" = "If this option is not enabled, clipping will be prevented by lowering the gain.";
+"HQV-tY-NMj.title" = "Se esta opção não estiver selecionada, será aplicada redução de ganho para prevenir distorções.";
 
 /* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
 "fOz-6g-MhS.title" = "Fallback:";
@@ -125,10 +137,10 @@
 "ovT-D3-3jS.title" = "dB";
 
 /* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
-"m2n-yd-a4n.title" = "Gain to apply if the file has no ReplayGain tags.";
+"m2n-yd-a4n.title" = "Ganho a ser aplicado caso o arquivo não tenha dados de normalização.";
 
 /* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
-"Zco-Ba-Idk.title" = "Audio driver:";
+"Zco-Ba-Idk.title" = "Driver de áudio:";
 
 /* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
-"2Md-pv-gSi.title" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"2Md-pv-gSi.title" = "AVFoundation é um driver de áudio experimental que oferece suporte ao Spatial Audio. No entanto, você pode encontrar alguns problemas — como atrasos de áudio — ao usar o AVFoundation.";

@@ -8,8 +8,8 @@
 
 "cmd.ignore" = "ئېتىبارسىز قاراش";
 "cmd.seek" = "ئاتلاپ كېتىش";
-"cmd.revert-seek" = "Revert seek";
-"cmd.set" = "Set";
+"cmd.revert-seek" = "ياندۇرۇپ ئىزدەش";
+"cmd.set" = "قويۇش";
 "cmd.cycle" = "Cycle";
 "cmd.cycle-values" = "Cycle in";
 "cmd.add" = "Change";
@@ -43,19 +43,19 @@
 "iina.open-url" = "Open URL";
 "iina.video-panel" = "Video panel";
 "iina.audio-panel" = "Audio panel";
-"iina.sub-panel" = "Subtitle panel";
-"iina.playlist-panel" = "Playlist panel";
-"iina.chapter-panel" = "Chapter panel";
-"iina.bigger-window" = "Bigger Window";
-"iina.smaller-window" = "Smaller Window";
-"iina.fit-to-screen" = "Fit to Screen";
-"iina.toggle-flip" = "Toggle flip";
-"iina.toggle-mirror" = "Toggle mirror";
-"iina.save-playlist" = "Save current playlist";
-"iina.show-current-file-in-finder" = "Show current file in Finder";
-"iina.delete-current-file" = "Delete current file";
-"iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
-"iina.find-online-subs" = "Find online subtitles";
+"iina.sub-panel" = "يېزىق تاختىسى";
+"iina.playlist-panel" = "قويۇش تىزىملىك تاختىسى";
+"iina.chapter-panel" = "باب تاختىسى";
+"iina.bigger-window" = "چوڭ كۆزنەك";
+"iina.smaller-window" = "كىچىك كۆزنەك";
+"iina.fit-to-screen" = "ئېكرانغا ماسلىشىش";
+"iina.toggle-flip" = "تەتۈر ئالماشتۇرۇش";
+"iina.toggle-mirror" = "ئوڭ سول ئالماشتۇرۇش";
+"iina.save-playlist" = "نۆۋەتتىكى قويۇلۇش تىزىملىكىنى ساقلاش";
+"iina.show-current-file-in-finder" = "نۆۋەتتىكى ھۆججەتنى Finder دا كۆرسىتىش";
+"iina.delete-current-file" = "نۆۋەتتىكى ھۆججەتنى ئۆچۈرۈش";
+"iina.delete-current-file-hard" = "نۆۋەتتىكى ھۆججەتنى بىۋاسىتە ئۆچۈرۈڭ؛ ئۇنى قايتا ئىشلەش ساندۇقىغا يۆتكەشنىڭ ھاجىتى يوق";
+"iina.find-online-subs" = "توردىكى يېزىقچىنى ئىزدەش";
 "iina.save-downloaded-sub" = "Save downloaded subtitle";
 
 "yes" = "Yes";

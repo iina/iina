@@ -14,7 +14,7 @@
 "3CY-YS-rG6.title" = "Użyj przycisków lewo/prawo jako:";
 
 /* Class = "NSButtonCell"; title = "Base remaining time on playback speed"; ObjectID = "5Nk-Mu-V2I"; */
-"5Nk-Mu-V2I.title" = "Base remaining time on playback speed";
+"5Nk-Mu-V2I.title" = "Oprzyj pozostały czas na szybkości odtwarzania";
 
 /* Class = "NSTextFieldCell"; title = "MB"; ObjectID = "3jK-z5-NDH"; */
 "3jK-z5-NDH.title" = "MB";
@@ -113,7 +113,7 @@
 "Ofm-qE-RgQ.title" = "Początkowa pozycja okna:";
 
 /* Class = "NSTextFieldCell"; title = "Suppress messages for:"; ObjectID = "RE5-Cf-ed9"; */
-"RE5-Cf-ed9.title" = "Suppress messages for:";
+"RE5-Cf-ed9.title" = "Wstrzymaj wiadomości dla:";
 
 /* Class = "NSButtonCell"; title = "Seek"; ObjectID = "RuR-Df-K2G"; */
 "RuR-Df-K2G.title" = "Przewiń";
@@ -125,7 +125,7 @@
 "SFX-ct-8MB.title" = "Zawsze na wierzchu podczas odtwarzania";
 
 /* Class = "NSButtonCell"; title = "Always show float on top status in the title bar"; ObjectID = "ih8-5a-PYY"; */
-"ih8-5a-PYY.title" = "Always show float on top status in the title bar";
+"ih8-5a-PYY.title" = "Zawsze pokazuj panel na górze paska tytułowego";
 
 /* Class = "NSMenuItem"; title = "Speed"; ObjectID = "TWq-Xb-8Ee"; */
 "TWq-Xb-8Ee.title" = "Prędkość";
@@ -134,7 +134,7 @@
 "Uc9-An-930.title" = "Wysokość:";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing volume"; ObjectID = "Ufv-Hk-vL5"; */
-"Ufv-Hk-vL5.title" = "Prevent scroll wheel from changing volume";
+"Ufv-Hk-vL5.title" = "Zapobiegaj zmiany głośności poprzez kółko przewijania";
 
 /* Class = "NSMenuItem"; title = "point"; ObjectID = "UhG-bZ-2zY"; */
 "UhG-bZ-2zY.title" = "pikseli";
@@ -185,7 +185,7 @@
 "iRn-3s-oQH.title" = "ekranu";
 
 /* Class = "NSButtonCell"; title = "Include files on a mounted remote drive"; ObjectID = "kCe-Ck-dUJ"; */
-"kCe-Ck-dUJ.title" = "Include files on a mounted remote drive";
+"kCe-Ck-dUJ.title" = "Załącz pliki na zamontowanym dysku zdalnym";
 
 /* Class = "NSButtonCell"; title = "Display time and battery info when in full screen"; ObjectID = "kOT-8q-E57"; */
 "kOT-8q-E57.title" = "Pokaż godzinę oraz stan baterii podczas otwarzania na pełnym ekranie";
@@ -236,7 +236,7 @@
 "vdi-lO-q6e.title" = "wymiarów ekranu";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
-"vnb-DF-4g5.title" = "Prevent scroll wheel from changing playback position";
+"vnb-DF-4g5.title" = "Zapobiegaj zmianie pozycji odtwarzania poprzez kółko przewijania";
 
 /* Class = "NSButtonCell"; title = "Enable OSD"; ObjectID = "xMh-SP-nkc"; */
 "xMh-SP-nkc.title" = "Włącz OSD";

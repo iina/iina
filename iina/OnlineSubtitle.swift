@@ -235,12 +235,15 @@ class OnlineSubtitle: NSObject {
         osdMessage = .cannotConnect
         log("\(prefix)\(cause.localizedDescription)", level: .error)
       case CommonError.networkError(let cause):
-        osdMessage = .networkError
         let error = cause ?? err
+        osdMessage = osdMessageForDetailedError(error, fallback: .networkError, providerName: provider.name)
         log("\(prefix)\(error.localizedDescription)", level: .error)
       case CommonError.timedOut(let cause):
         osdMessage = .timedOut
         log("\(prefix)\(cause.localizedDescription)", level: .error)
+      case OpenSubClient.Error.errorResponse(let response):
+        osdMessage = osdMessageForOpenSubErrorResponse(response, fallback: .networkError, providerName: provider.name)
+        log("\(prefix)\(response.message)", level: .error)
       case Shooter.Error.cannotReadFile(let cause),
            OpenSub.Error.cannotReadFile(let cause):
         osdMessage = .fileError
@@ -272,8 +275,39 @@ class OnlineSubtitle: NSObject {
         osdMessage = .networkError
         log("\(prefix)\(err.localizedDescription)", level: .error)
       }
-      player.sendOSD(osdMessage)
+      let timeout: Float? = shouldExtendTimeout(for: osdMessage) ? 5 : nil
+      player.sendOSD(osdMessage, forcedTimeout: timeout)
       player.isSearchingOnlineSubtitle = false
+    }
+  }
+
+  private static func osdMessageForOpenSubErrorResponse(_ response: OpenSubClient.ErrorResponse,
+                                                        fallback: OSDMessage,
+                                                        providerName: String) -> OSDMessage {
+    guard providerName == Providers.openSub.name, response.remaining == -1 else { return fallback }
+    let resetTime = response.resetTimeUtc.map {
+      DateFormatter.localizedString(from: $0, dateStyle: .none, timeStyle: .short)
+    }
+    return .onlineSubQuotaExceeded(resetTime)
+  }
+
+  private static func osdMessageForDetailedError(_ error: Swift.Error,
+                                                 fallback: OSDMessage,
+                                                 providerName: String) -> OSDMessage {
+    switch error {
+    case OpenSubClient.Error.errorResponse(let response):
+      return osdMessageForOpenSubErrorResponse(response, fallback: fallback, providerName: providerName)
+    default:
+      return fallback
+    }
+  }
+
+  private static func shouldExtendTimeout(for osdMessage: OSDMessage) -> Bool {
+    switch osdMessage {
+    case .onlineSubQuotaExceeded:
+      return true
+    default:
+      return false
     }
   }
 

@@ -22,6 +22,13 @@ class JavascriptPolyfill {
     }
   }
 
+  func removeAllTimers() {
+    for timer in timers.values {
+      timer.invalidate()
+    }
+    timers.removeAll()
+  }
+
   func removeTimer(identifier: String) {
     let timer = self.timers.removeValue(forKey: identifier)
     timer?.invalidate()
@@ -43,6 +50,7 @@ class JavascriptPolyfill {
   }
 
   @objc func callJSCallback(_ timer: Timer) {
+    guard timer.isValid else { return }
     let callback = (timer.userInfo as! JSValue)
     callback.call(withArguments: nil)
   }

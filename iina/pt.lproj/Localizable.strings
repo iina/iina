@@ -13,8 +13,12 @@
 "general.logout" = "Terminar sessão";
 "general.ok" = "OK";
 "general.cancel" = "Cancelar";
+"general.done" = "Feito";
 "general.username" = "Nome de Utilizador";
 "general.password" = "Senha";
+"general.na" = "N/A";
+"general.no_result" = "Sem Resultados";
+"general.no_title" = "No Title";
 
 "input.value_is_empty" = "Nome não pode ser vazio.";
 "input.already_exists" = "Nome já existe.";
@@ -136,6 +140,9 @@
 "osd.canceled" = "Cancelado";
 "osd.cannot_connect" = "Cannot connect";
 "osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
 "osd.filter_added" = "Filtro Adicionado: %@";
 "osd.filter_removed" = "Filtro Removido";
 "osd.file_loop" = "Loop Single File";
@@ -145,7 +152,9 @@
 "preference.title" = "Definições";
 "preference.general" = "Geral";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Vídeo/Áudio";
+"preference.video_audio" = "Video & Audio";
+"preference.video" = "Vídeo";
+"preference.audio" = "Áudio";
 "preference.subtitle" = "Legenda";
 "preference.network" = "Rede";
 "preference.control" = "Controlo";
@@ -247,6 +256,7 @@
 "alert.mpv_error" = "Erro interno %@ (%@) ao definir a opção %@.";
 
 "alert.unsupported_audio" = "Ficheiro de áudio externo não suportado.";
+"alert.unsupported_video" = "Unsupported external video file.";
 "alert.unsupported_sub" = "Legenda externa não suportada.";
 "alert.unsupported_url" = "URL não suportado.";
 "alert.wrong_url_format" = "Formato do URL errado.";
@@ -275,10 +285,13 @@
 "alert.add_filter.message" = "Por favor, digite uma string de filtro no formato de comando vf ou af de mpv.";
 
 "alert.keybinding_config.error" = "Erro ao analisar o arquivo de configuração de mapeamento de teclas \"%@\"! Volte para a configuração do padrão mapeamento de teclas do IINA. Por favor, verifique sua configuração.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
 
 "alert.extra_option.cannot_read" = "Não é possível ler opções mpv definidas pelo usuário.";
 "alert.extra_option.empty" = "Chave ou valor não pode estar vazio!";
-"alert.extra_option.error" = "Erro ao definir opção --%@=%@ com valor de retorno %d. Por favor, verifique as suas opções extra em Preferência > Avançado.";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
 "alert.extra_option.config_folder" = "Erro na configuração da pasta \"%@\".";
 
 "alert.playlist.error_deleting" = "Erro ao apagar: %@";
@@ -313,6 +326,10 @@
 
 "alert.delete_history.title" = "Apagar Histórico de Reprodução";
 "alert.delete_history.message" = "Tem a certeza que quer apagar as entradas selecionadas?";
+"alert.delete_all_history.title" = "Limpar Histórico de Reprodução";
+"alert.delete_all_history.message" = "Tem a certeza que quer apagar todo o histórico de reprodução?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Está prestes a aplicar um filtro de vídeo. No entanto, o seu descodificador de hardware atual pode não suportar bem filtros de vídeo. Pode desativar a descodificação de hardware ou alternar para Auto(Copiar), que irá consumir o dobro da memória.\nPoderá precisar de repetir a operação anterior (como definir o corte) para que funcione.";
 "alert.filter_hwdec.abort" = "Abortar";
@@ -330,6 +347,10 @@
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
 "alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
+"alert.cleared" = "Limpo.";
+"alert.restored" = "Restored.";
+"alert.custom" = "%@";
 
 "alert.nothing_to_open" = "Nada para abrir.";
 
@@ -354,6 +375,8 @@
 "alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
 "alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
 "alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ no total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";
@@ -381,6 +404,12 @@
 "pl_menu.browser" = "Abrir no Navegador";
 "pl_menu.copy_url" = "Copiar URL";
 "pl_menu.copy_url_multi" = "Copiar URLs";
+"pl_menu.playback" = "Reprodução";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plugin";
+"pl_menu.playlist" = "Lista de Reprodução";
 
 "keymapping.title" = "Mapeamento de teclas";
 "keymapping.message" = "Pressione qualquer tecla para gravar.";
@@ -392,6 +421,10 @@
 "hwdec.auto" = "Activar descodificação por hardware. No entanto, a maioria dos filtros de vídeo não funcionarão corretamente.";
 "hwdec.auto-copy" = "Ativar descodificação por hardware. Consumirá o dobro da memória mas trabalhará com filtros de vídeo.";
 
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
 "subencoding.auto" = "Detectar automaticamente";
 
 "osc_toolbar.settings" = "Definições Rápidas";
@@ -402,6 +435,11 @@
 "osc_toolbar.sub_track" = "Selecionar faixa de legenda";
 "osc_toolbar.screenshot" = "Take a screenshot";
 "osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Flutuar";
+"osc_pos.top" = "Superior";
+"osc_pos.bottom" = "Inferior";
 
 "mini_player.album_art" = "Alternar arte do álbum";
 "mini_player.loop" = "Repetir";
@@ -459,3 +497,422 @@
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
 "plugin.check_for_updates" = "Procurar atualizações";
 "plugin.updating" = "Downloading update…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Consola";
+"logwindow.time" = "Tempo";
+"logwindow.subsystem" = "Subsistema";
+"logwindow.message" = "Mensagem";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Guardar";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Copiar";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Histórico de Reprodução";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Progresso";
+"history_window.col.played_at" = "Reproduzido às";
+"history_window.menu.play" = "Reproduzir";
+"history_window.menu.play_new_window" = "Reproduzir numa Nova Janela";
+"history_window.menu.show_in_finder" = "Mostrar no Finder";
+"history_window.menu.delete" = "Eliminar…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Limpar Histórico de Reprodução";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Data";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Procurar em";
+"history_window.search.filename" = "Nome do ficheiro";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Nenhuma Pesquisa Recente";
+"history_window.search.recents_title" = "Pesquisas Recentes";
+"history_window.search.clear_recents" = "Limpar Recentes";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Vídeo";
+"sidebar.audio" = "Áudio";
+"sidebar.sub" = "Legendas";
+"sidebar.plugins" = "Plugins";
+"sidebar.playlist" = "Lista de Reprodução";
+"sidebar.chapters" = "Capítulos";
+
+"sidebar.aspect_ratio" = "Proporção";
+"sidebar.crop" = "Cortar";
+"sidebar.rotation" = "Rotação";
+"sidebar.speed" = "Velocidade";
+
+"sidebar.brightness" = "Luminosidade";
+"sidebar.contrast" = "Contraste";
+"sidebar.saturation" = "Saturação";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Carregar faixa de áudio externa…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Guardar EQ como preset...";
+"sidebar.rename_eq" = "Alternar nome EQ preset...";
+"sidebar.remove_eq" = "Remover EQ preset";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Carregar legenda…";
+"sidebar.search_online" = "Procurar Online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Tipo de letra";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Contorno";
+"sidebar.background" = "Background";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "As opções de estilo de legendas podem quebrar a renderização ASS e algumas delas serão desativadas dependendo do tipo de legenda.";
+
+"sidebar.add_file" = "Adicionar Ficheiro…";
+"sidebar.add_url" = "Adicionar URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "Mostrar janela de boas-vindas";
+"settings.actionAfterLaunch.items.1" = "Mostrar painel de abrir ficheiro";
+"settings.actionAfterLaunch.items.2" = "Não fazer nada";
+"settings.actionAfterLaunch.label" = "Ao ligar";
+"settings.alwaysOpenInNewWindow.label" = "Abrir sempre os ficheiros numa nova janela";
+"settings.autoRepeat.label" = "When a file is opened manually";
+"settings.autoSwitchToMusicMode.label" = "Alternar para \"modo de música\" automaticamente ao reproduzir um ficheiro de áudio";
+"settings.blackOutMonitor.label" = "Apagar outros ecrãs enquanto em ecrã completo";
+"settings.fullScreenWhenOpen.label" = "Entrar em Ecrã Completo";
+"settings.keepOpenOnFileEnd.label" = "Manter a janela aberta depois de terminar a reprodução";
+"settings.pauseWhenGoesToSleep.label" = "Pausar quando o computador entra em suspensão";
+"settings.pauseWhenInactive.label" = "Janela fica inativa/ativa";
+"settings.pauseWhenLeavingFullScreen.label" = "Pausar quando sair do ecrã completo";
+"settings.pauseWhenMinimized.label" = "Minimizar/Não-minimizar";
+"settings.pauseWhenOpen.label" = "Pausa";
+"settings.pauseresumeWhen" = "Pausar / reproduzir quando";
+"settings.playWhenEnteringFullScreen.label" = "Começar quando entrar em ecrã completo";
+"settings.playlistAutoAdd.desc" = "Requer reinício do IINA para ter efeito.";
+"settings.playlistAutoAdd.label" = "Adicionar ficheiros na mesma pasta automaticamente";
+"settings.playlistAutoPlayNext.label" = "Reproduzir Seguinte Automaticamente";
+"settings.playlistShowMetadata.label" = "Mostrar o nome do artista e da faixa para ficheiros de áudio, quando disponível";
+"settings.playlistShowMetadataInMusicMode.label" = "Apenas no \"modo de música\"";
+"settings.quitWhenNoOpenedWindow.label" = "Sair quando todas as janelas estiverem fechadas";
+"settings.receiveBetaUpdate.label" = "Receber atualizações beta";
+"settings.recordPlaybackHistory.label" = "Ativar histórico de reprodução";
+"settings.recordRecentFiles.label" = "Ativar menu \"Abrir Recente\"";
+"settings.resumeLastPosition.label" = "Retomar a última posição de reprodução";
+"settings.screenShotFormat.items.1" = "JPEG (*.jpg)";
+"settings.screenShotFormat.items.2" = "JPEG (*.jpg)";
+"settings.screenShotFormat.label" = "Formato";
+"settings.screenShotIncludeSubtitle.label" = "Incluir legendas";
+"settings.screenshotCopyToClipboard.desc" = "Destino";
+"settings.screenshotCopyToClipboard.label" = "Copiar para a área de transferência";
+"settings.screenshotSaveToFile.desc" = "/caminho/para/captura de ecrã/pasta";
+"settings.screenshotSaveToFile.label" = "Guardar em";
+"settings.screenshotShowPreview.label" = "Mostrar pré-visualizações depois de fazer capturas de ecrã";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "Caso contrário, apenas ficheiros que abriram manualmente aparecerão neste menu.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Acompanhar todos os ficheiros reproduzidos no menu \"Abrir Recente\"";
+"settings.useLegacyFullScreen.label" = "Usar ecrã completo legacy";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "Ativar o modo HDR por padrão ao reproduzir vídeos HDR.";
+"settings.enableToneMapping.label" = "Ativar tone mapping";
+"settings.forceDedicatedGPU.desc" = "Sempre use a GPU dedicada para a renderização (se existir). Isso pode melhorar o desempenho, mas pode reduzir a duração da bateria.";
+"settings.forceDedicatedGPU.label" = "Forçar GPU dedicada";
+"settings.hardwareDecoder.items.0" = "Desativado";
+"settings.hardwareDecoder.items.1" = "Automático";
+"settings.hardwareDecoder.items.2" = "Automático (Copiar)";
+"settings.hardwareDecoder.label" = "Decodificador de hardware";
+"settings.loadIccProfile.desc" = "Carregar o perfil ICC do ecrã atual e aplica-lo ao vídeo de saída. (Apenas valido em SDR)";
+"settings.loadIccProfile.label" = "Carregar perfil ICC";
+"settings.toneMappingAlgorithm.items.0" = "Automático";
+"settings.toneMappingAlgorithm.label" = "Algoritmo";
+"settings.toneMappingTargetPeak.desc" = "Brilho pico do ecrã. Se deixado a 0 o IINA detetará este valor. Se o IINA não conseguir detetar, o brilho pico será predefinido para 400.";
+"settings.toneMappingTargetPeak.label" = "Pico Alvo";
+"settings.videoThreads.desc" = "Predefinição: 0 (Auto)";
+"settings.videoThreads.label" = "Número de segmentos";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFountation é um novo controlador experimental com suporte a Spacial Audio. Poderá encontrar problemas, como atrasos no áudio.";
+"settings.audioDriverEnableAVFoundation.label" = "Controlador de áudio";
+"settings.enableInitialVolume.label" = "Volume inicial";
+"settings.gaplessAudio.items.0" = "Desativado";
+"settings.maxVolume.label" = "Volume máximo";
+"settings.preferredAudioDevice.label" = "Dispositivo de áudio preferencial";
+"settings.replayGain.desc" = "Ajustar o ganho conforme o reportado nos metadados do ficheiro.";
+"settings.replayGain.items.0" = "Sem ajuste";
+"settings.replayGain.items.1" = "Ganho de faixa";
+"settings.replayGain.items.2" = "Ganho de álbum";
+"settings.replayGain.label" = "Ajuste de ganho";
+"settings.replayGainClip.desc" = "Se esta opção não estiver ativada, será evitada a saturação diminuindo o ganho.";
+"settings.replayGainClip.label" = "Permitir saturação do ganho";
+"settings.replayGainFallback.desc" = "Ganho a aplicar se o ficheiro não tiver metadados de ganho.";
+"settings.replayGainPreamp.label" = "Ganho de pré-amplificação";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "Nenhum";
+"settings.doubleClickAction.items.1" = "Activar ecrã completo";
+"settings.doubleClickAction.items.2" = "Pausa / Retomar";
+"settings.doubleClickAction.items.4" = "Alternar Picture-in-Picture";
+"settings.doubleClickAction.items.5" = "Loop A-B";
+"settings.doubleClickAction.label" = "Duplo clique para";
+"settings.forceTouchAction.items.0" = "Nenhum";
+"settings.forceTouchAction.items.1" = "Alternar ecrã completo";
+"settings.forceTouchAction.items.2" = "Pausa / Retomar";
+"settings.forceTouchAction.items.3" = "Ocultar OSC";
+"settings.forceTouchAction.label" = "Clique com pressão para";
+"settings.horizontalScrollAction.items.0" = "Ajustar volume";
+"settings.horizontalScrollAction.items.1" = "Procurar";
+"settings.horizontalScrollAction.items.2" = "Nenhum";
+"settings.horizontalScrollAction.label" = "Deslocar na horizontal para";
+"settings.middleClickAction.items.0" = "Nenhum";
+"settings.middleClickAction.items.1" = "Alternar ecrã completo";
+"settings.middleClickAction.items.2" = "Pausa / Retomar";
+"settings.middleClickAction.items.3" = "Ocultar OSC";
+"settings.middleClickAction.items.4" = "Activar Picture in Picture";
+"settings.middleClickAction.items.5" = "Loop A-B";
+"settings.middleClickAction.label" = "Clique no meio para";
+"settings.pinchAction.items.0" = "Ajustar tamanho da janela";
+"settings.pinchAction.items.1" = "Ecrã completo";
+"settings.pinchAction.items.2" = "Nenhum";
+"settings.pinchAction.label" = "Pinçar para";
+"settings.relativeSeekAmount.label" = "Sensibilidade para busca normal";
+"settings.rightClickAction.desc" = "Clique no meio para";
+"settings.rightClickAction.items.0" = "Nenhum";
+"settings.rightClickAction.items.2" = "Pausa / Retomar";
+"settings.rightClickAction.items.3" = "Ocultar OSC";
+"settings.rightClickAction.items.4" = "Alternar Picture-in-Picture";
+"settings.rightClickAction.items.5" = "Loop A-B";
+"settings.rightClickAction.label" = "Clique direito para";
+"settings.singleClickAction.items.0" = "Nenhum";
+"settings.singleClickAction.items.2" = "Pausa / Retomar";
+"settings.singleClickAction.items.3" = "Ocultar OSC";
+"settings.singleClickAction.label" = "Clique único para";
+"settings.useExactSeek.desc" = "A busca exata é mais precisa, mas pode causar lag e maior uso de CPU.";
+"settings.useExactSeek.items.0" = "Busca keyframe";
+"settings.useExactSeek.items.1" = "Busca exata";
+"settings.useExactSeek.items.2" = "Automático";
+"settings.useExactSeek.label" = "Tipo de busca";
+"settings.verticalScrollAction.items.0" = "Ajustar volume";
+"settings.verticalScrollAction.items.1" = "Procurar";
+"settings.verticalScrollAction.items.2" = "Nenhum";
+"settings.verticalScrollAction.label" = "Deslocar verticalmente para";
+"settings.videoViewAcceptsFirstMouse.label" = "Aceita o primeiro clique do rato quando não está focado";
+"settings.volumeScrollAmount.label" = "Sensibilidade para volume";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Mostrar valores raw";
+"settings.useMediaKeys.label" = "Usar controle multimédia do sistema";
+
+// Settings - Network
+"settings.cacheBufferSize.desc" = "Predefinição: 153600";
+"settings.cacheBufferSize.label" = "Tamanho do buffer de cache (KB)";
+"settings.enableCache.label" = "Ativar cache";
+"settings.httpProxy.desc" = "Requer reinício do IINA para ter efeito.";
+"settings.httpProxy.label" = "Proxy HTTP";
+"settings.secPrefech.desc" = "Predefinição: 36000";
+"settings.secPrefech.label" = "Segundos para pré-carregar";
+"settings.transportRTSPThrough.items.0" = "Automático";
+"settings.transportRTSPThrough.label" = "Transporte RTSP através de";
+"settings.userAgent.label" = "Agente de utilizador";
+"settings.ytdlEnabled.label" = "Ativar youtube-dl";
+"settings.ytdlRawOptions.desc" = "Formato: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "Opções Raw";
+"settings.ytdlSearchPath.desc" = "IINA irá procurar youtube-dl nesta pasta. Reinicio necessário.";
+"settings.ytdlSearchPath.label" = "Personalizar caminho do youtube-dl";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Procurar legendas online automaticamente";
+"settings.displayInLetterBox.label" = "Mostrar legendas em caixa de texto quando em ecrã completo";
+"settings.subAlignX.items.0" = "Esquerda";
+"settings.subAlignX.items.1" = "Centro";
+"settings.subAlignX.items.2" = "Direita";
+"settings.subAlignX.label" = "Y";
+"settings.subAlignY.items.0" = "Superior";
+"settings.subAlignY.items.1" = "Centro";
+"settings.subAlignY.items.2" = "Inferior";
+"settings.subAutoLoadIINA.items.0" = "Desativado";
+"settings.subAutoLoadIINA.items.1" = "Legendas com o nome do ficheiro";
+"settings.subAutoLoadIINA.items.2" = "Detetado inteligentemente pelo IINA";
+"settings.subAutoLoadIINA.label" = "Carregar automaticamente";
+"settings.subAutoLoadPriorityString.desc" = "Por favor, insira uma lista de strings separada por vírgula.";
+"settings.subAutoLoadPriorityString.label" = "Legendas têm prioridade se o nome do ficheiro conter";
+"settings.subAutoLoadSearchPath.desc" = "Diretórios são separados por dois pontos (:). Caminhos relativos e curingas (*) no final são permitidos.";
+"settings.subAutoLoadSearchPath.label" = "Também procurar legendas nas seguintes localizações";
+"settings.subBlur.label" = "Desfoque";
+"settings.subBold.label" = "Negrito";
+"settings.subItalic.label" = "Itálico";
+"settings.subLang.desc" = "Esta opção será armazenada como código de idioma ISO 639-2 e funcionará para mpv e opensubtitles.";
+"settings.subPos.label" = "Posição vertical";
+"settings.subScaleWithWindow.label" = "Dimensionar legendas de acordo com o tamanho da janela";
+"settings.subSpacing.label" = "Espaçamento do tipo de letra";
+
+// Settings - UI
+"settings.alwaysFloatOnTop.label" = "Flutuar sempre no topo durante a reprodução";
+"settings.arrowBtnAction.items.0" = "Velocidade";
+"settings.arrowBtnAction.items.1" = "Ficheiro anterior / seguinte";
+"settings.arrowBtnAction.items.2" = "Avançar / Retroceder";
+"settings.arrowBtnAction.label" = "Usar botão esquerdo/direito para";
+"settings.controlBarStickToCenter.label" = "Encaixar no centro quando arrastar";
+"settings.disableAnimations.label" = "Desativar animações";
+"settings.disableOSDPauseResumeMsgs.label" = "Pausa / Retomar";
+"settings.disableOSDSeekMsg.label" = "Procurar";
+"settings.disableOSDSpeedMsg.label" = "Velocidade";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Mostrar informação de tempo e bateria quando em ecrã completo";
+"settings.enableOSD.label" = "Ativar OSD";
+"settings.enableThumbnailPreview.label" = "Ativar pré-visualização de thumbnail";
+"settings.maxThumbnailPreviewCacheSize.label" = "Tamanho máximo da cache";
+"settings.oscPosition.items.0" = "Flutuar";
+"settings.oscPosition.items.1" = "Topo";
+"settings.oscPosition.items.2" = "Inferior";
+"settings.oscPosition.label" = "Comandos no Ecrã";
+"settings.osdTextSize.label" = "Tamanho do texto";
+"settings.pauseWhenPip.label" = "Pausar automaticamente a reprodução";
+"settings.resizeWindowOption.items.0" = "ajustar ao ecrã";
+"settings.resizeWindowOption.items.1" = "0,5x tamanho do vídeo";
+"settings.resizeWindowOption.items.2" = "1x tamanho do vídeo";
+"settings.resizeWindowOption.items.3" = "1,5x tamanho do vídeo";
+"settings.resizeWindowOption.items.4" = "2x tamanho do vídeo";
+"settings.resizeWindowOption.label" = "Redimensionar janela para";
+"settings.showChapterPos.label" = "Mostrar posição do capítulo na barra de progresso";
+"settings.showRemainingTime.label" = "Mostrar tempo restante em vez do tempo total";
+"settings.themeMaterial.desc" = "Tema";
+"settings.themeMaterial.items.0" = "Escuro";
+"settings.themeMaterial.items.2" = "Claro";
+"settings.themeMaterial.items.4" = "Corresponder com Aparência do Sistema";
+"settings.themeMaterial.label" = "Aparência";
+"settings.togglePipByMinimizingWindow.label" = "Alternar Picture-in-Picture minimizando/maximizando a janela";
+"settings.usePhysicalResolution.label" = "Usar resolução física na tela Retina";
+"settings.windowBehaviorWhenPip.items.0" = "Não fazer nada";
+"settings.windowBehaviorWhenPip.items.1" = "Ocultar";
+"settings.windowBehaviorWhenPip.items.2" = "Minimizar";
+"settings.windowBehaviorWhenPip.label" = "Janela";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "As configurações seguintes requerem a reinicialização do IINA para surtir efeito.";
+"settings.enableAdvancedSettings.label" = "Ativar filtros avançados";
+"settings.enableLogging.label" = "Ativar registro de logs";
+"settings.logLevel.items.0" = "Detalhado";
+"settings.logLevel.items.2" = "Aviso";
+"settings.logLevel.items.3" = "Erro";
+"settings.useMpvOsd.label" = "Usar OSD do mpv";
+"settings.useUserDefinedConfDir.label" = "Usar pasta de configurações";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "Legendas ASS";
+"settings.$About" = "Acerca de";
+"settings.$AdditionalMpvOptions" = "Opções adicionais de mpv";
+"settings.$Advanced" = "Avançado";
+"settings.$Align" = "Alinhar";
+"settings.$AlwaysWhenPlaying" = "Sempre";
+"settings.$Appearance" = "Aparência";
+"settings.$Audio" = "Áudio";
+"settings.$Author" = "Autor";
+"settings.$AutoLoad" = "Carregar automaticamente";
+"settings.$Background" = "Fundo";
+"settings.$Behavior" = "Comportamento";
+"settings.$Border" = "Contorno";
+"settings.$Cancel" = "Cancelar";
+"settings.$CheckForUpdates" = "Procurar atualizações";
+"settings.$ClearCache" = "Limpar Cache";
+"settings.$ClearPlaybackHistory" = "Limpar Histórico de Reprodução…";
+"settings.$ClearSavedPlaybackProgress" = "Limpar progresso de reprodução guardado…";
+"settings.$ClearThumbnailCache" = "Limpar Cache de Miniaturas…";
+"settings.$Color" = "Cor";
+"settings.$Customize" = "Personalizar…";
+"settings.$DefaultApplication" = "Aplicação Predefinida";
+"settings.$DefaultEncoding" = "Codificação predefinida";
+"settings.$DeleteAllPlaybackHistories" = "O botão abaixo apagará todos os históricos e entradas de reprodução em \"Abrir recente\".";
+"settings.$DeleteAllWatchLater" = "O botão abaixo apagará todos os arquivos na pasta \"Assistir mais tarde\". Estes arquivos contêm todo o progresso de reprodução guardado e configurações aplicadas durante a reprodução.";
+"settings.$DoNotResize" = "Desativado";
+"settings.$FailedToLoadThePage" = "Falha ao carregar a página.";
+"settings.$Font" = "Tipo de letra";
+"settings.$GetBrowserExtensionsForIINA" = "Obter Extensões de Navegador para IINA";
+"settings.$Height" = "Altura";
+"settings.$Help" = "Ajuda";
+"settings.$History" = "Histórico";
+"settings.$Identifier" = "Identificador";
+"settings.$ImportAnExistingConfigFile" = "Importar um ficheiro de configuração existente";
+"settings.$InitialWindowPosition" = "Posição inicial da janela";
+"settings.$InitialWindowSize" = "Tamanho inicial da janela";
+"settings.$Install" = "Instalar";
+"settings.$InstallLocalPackage" = "Install Package…";
+"settings.$Layout" = "Esquema";
+"settings.$Login" = "Iniciar sessão";
+"settings.$MB" = "MB";
+"settings.$Margin" = "Margem";
+"settings.$Mouse" = "Rato";
+"settings.$Network" = "Rede";
+"settings.$NotLoggedIn" = "Sem sessão iniciada";
+"settings.$OK" = "OK";
+"settings.$Offset" = "Desvio";
+"settings.$OnScreenController" = "Comandos no Ecrã";
+"settings.$OnScreenDisplay" = "Informação no Ecrã (OSD)";
+"settings.$OnlineSubtitles" = "Legendas Online";
+"settings.$OpenLinksOrCurrentWebpage" = "Abrir links ou página atual no IINA com um clique. O site deve ser suportado pelo youtube-dl.";
+"settings.$OtherStyles" = "Outros Estilos";
+"settings.$OverrideLevel" = "Substituir nível";
+"settings.$PictureinnPicture" = "Picture in Picture";
+"settings.$Playlist" = "Lista de Reprodução";
+"settings.$PleaseSelectTheMediaTypes" = "Por favor, selecione os tipos de mídia que você deseja definir IINA como o aplicativo padrão.";
+"settings.$Position" = "Posição";
+"settings.$PreferredLanguage" = "Idioma preferencial";
+"settings.$RestoreAllAlertsThat" = "The button below will restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts…";
+"settings.$SPDIFOutput" = "Saída S/PDIF";
+"settings.$Screenshots" = "Capturas de ecrã";
+"settings.$SetIINAAsTheDefault" = "Definir IINA como aplicação predefinida…";
+"settings.$Settings" = "Definições";
+"settings.$Shadow" = "Sombra";
+"settings.$ShowInFinder" = "Mostrar no Finder";
+"settings.$ShowTheConfigFileIn" = "Mostrar ficheiro de configuração no Finder";
+"settings.$Size" = "Tamanho";
+"settings.$Source" = "Fonte";
+"settings.$TextSubtitles" = "Legendas de texto";
+"settings.$ThumbnailPreview" = "Pré-visualização da miniatura";
+"settings.$Toolbar" = "Barra de ferramentas";
+"settings.$Uninstall" = "Desinstalar";
+"settings.$Video" = "Vídeo";
+"settings.$Website" = "Site";
+"settings.$WhenEnteringPIP" = "Ao entrar no Picture-in-Picture";
+"settings.$WhenMediaIsOpened" = "Quando o ficheiro é aberto";
+"settings.$WhenMediaIsOpenedManually" = "Quando a mídia é aberta manualmente";
+"settings.$Width" = "Largura";
+"settings.$Window" = "Janela";
+"settings.$X" = " X";
+"settings.$XOffset" = "Deslocamento X";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Deslocamento Y";
+"settings.$YouCanInstallANew" = "Pode instalar um novo plugin com o GitHub ou com um ficheiro .iinaplgz . Os plugins instalados do GitHub podem ser atualizados automaticamente.";
+"settings.$bottom" = "inferior";
+"settings.$dB" = "dB";
+"settings.$left" = "esquerda";
+"settings.$ofScreen" = "% do ecrã";
+"settings.$point" = "ponto";
+"settings.$pt" = "pt";
+"settings.$right" = "direita";
+"settings.$s" = "s";
+"settings.$sideOfTheScreen" = "lado do ecrã";
+"settings.$toThe" = "para a";
+"settings.$top" = "topo";

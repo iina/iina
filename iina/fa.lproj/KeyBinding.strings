@@ -27,7 +27,7 @@
 "cmd.write-watch-later-config" = "ضبط تاریخچه بازی";
 "cmd.stop" = "توقف";
 "cmd.quit" = "خروج";
-"cmd.quit-watch-later" = "ترک ( ذخیره پیشرفت )";
+"cmd.quit-watch-later" = "خروج (ذخیره وضعیت)";
 "cmd.screenshot" = "عکس گرفتن از صفحه";
 "cmd.screenshot-to-file" = "عکس گرفتن از صفحه پرونده";
 "cmd.loadfile" = "بارگذاری فایل";
@@ -49,8 +49,8 @@
 "iina.bigger-window" = "پنجره بزرگتر";
 "iina.smaller-window" = "پنجره کوچکتر";
 "iina.fit-to-screen" = "متناسب با صفحه";
-"iina.toggle-flip" = "تغییر حالت";
-"iina.toggle-mirror" = "روخوانی از ..";
+"iina.toggle-flip" = "تغییر حالت چرخش";
+"iina.toggle-mirror" = "تغییر حالت آیینه";
 "iina.save-playlist" = "ذخیره فهرست پخش جاری";
 "iina.show-current-file-in-finder" = "نمایش فایل فعلی در فایند";
 "iina.delete-current-file" = "پاک کردن فایل جاری";
@@ -84,7 +84,7 @@
 "opt.window-scale" = "مقیاس پنجره";
 
 "opt.video" = "ویدیو ترک";
-"opt.video-aspect-override" = "Video aspect";
+"opt.video-aspect-override" = "نسبت ابعاد ویدیو";
 "opt.contrast" = "کنتراست";
 "opt.brightness" = "روشنایی";
 "opt.gamma" = "گاما";

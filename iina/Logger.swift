@@ -19,16 +19,17 @@ import Foundation
 /// - Important: The `createDirIfNotExist` method in `Utilities` **must not** be used by the logger. If an error occurs
 ///     that method will attempt to report it using the logger. If the logger is still being initialized this will result in a crash. For that reason
 ///     the logger uses its own similar method.
+@objc
 class Logger: NSObject {
 
   class Log: NSObject {
     @objc dynamic let subsystem: String
-    @objc dynamic let level: Int
+    @objc dynamic let level: Level
     @objc dynamic let message: String
     @objc dynamic let date: String
     let logString: String
 
-    init(subsystem: String, level: Int, message: String, date: String, logString: String) {
+    init(subsystem: String, level: Level, message: String, date: String, logString: String) {
       self.subsystem = subsystem
       self.level = level
       self.message = message
@@ -41,58 +42,90 @@ class Logger: NSObject {
     }
   }
 
-  @Atomic static var logs: [Logger.Log] = []
+  @Atomic static var buffer: [Logger.Log] = []
 
   class Subsystem: RawRepresentable {
     let rawValue: String
+    let image: NSImage?
     var added = false
 
-    static let general = Subsystem(rawValue: "iina")
+    static let general = Subsystem(rawValue: "iina", symbolName: ["star.fill"])
 
-    required init(rawValue: String) {
+    required convenience init(rawValue: String) {
+      self.init(rawValue: rawValue, symbolName: [])
+    }
+
+    init(rawValue: String, symbolName: [String] = []) {
       self.rawValue = rawValue
+      self.image = .sf(symbolName)
     }
   }
 
   @Atomic static var subsystems: [Subsystem] = [.general]
 
-  static func makeSubsystem(_ rawValue: String) -> Subsystem {
+  static func makeSubsystem(_ rawValue: String, _ symbolName: [String] = []) -> Subsystem {
     $subsystems.withLock() { subsystems in
       for (index, subsystem) in subsystems.enumerated() {
         // The first subsystem will always be "iina"
         if index == 0 { continue }
         if rawValue < subsystem.rawValue {
-          let newSubsystem = Subsystem(rawValue: rawValue)
+          let newSubsystem = Subsystem(rawValue: rawValue, symbolName: symbolName)
           subsystems.insert(newSubsystem, at: index)
           return newSubsystem
         } else if rawValue == subsystem.rawValue {
           return subsystem
         }
       }
-      let newSubsystem = Subsystem(rawValue: rawValue)
+      let newSubsystem = Subsystem(rawValue: rawValue, symbolName: symbolName)
       subsystems.append(newSubsystem)
       return newSubsystem
     }
   }
 
-  enum Level: Int, Comparable, CustomStringConvertible {
+  @objc
+  enum Level: Int, Comparable, CustomStringConvertible, CaseIterable, InitializingFromKey {
+
+    static var defaultValue = Level.debug
+
     static func < (lhs: Level, rhs: Level) -> Bool {
       return lhs.rawValue < rhs.rawValue
     }
 
     static var preferred: Level = Level(rawValue: Preference.integer(for: .logLevel).clamped(to: 0...3))!
 
-    case verbose
+    init?(key: Preference.Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    case verbose = 0
     case debug
     case warning
     case error
 
     var description: String {
       switch self {
+      case .verbose: return "verbose"
+      case .debug: return "debug"
+      case .warning: return "warning"
+      case .error: return "error"
+      }
+    }
+
+    var shortForm: String {
+      switch self {
       case .verbose: return "v"
       case .debug: return "d"
       case .warning: return "w"
       case .error: return "e"
+      }
+    }
+
+    var color: NSColor {
+      switch self {
+      case .verbose: return .systemGray
+      case .debug: return .systemGreen
+      case .warning: return .systemYellow
+      case .error: return .systemRed
       }
     }
   }
@@ -190,7 +223,17 @@ class Logger: NSObject {
   private static func formatMessage(_ message: String, _ level: Level, _ subsystem: Subsystem,
                                     _ appendNewlineAtTheEnd: Bool, _ date: Date = Date()) -> String {
     let time = dateFormatter.string(from: date)
-    return "\(time) [\(subsystem.rawValue)][\(level.description)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
+    return "\(time) [\(subsystem.rawValue)][\(level.shortForm)] \(message)\(appendNewlineAtTheEnd ? "\n" : "")"
+  }
+
+  /// Whether the logger is emitting messages at the given level.
+  /// - Parameter level: The log level to check.
+  /// - Returns: `true` if messages at the given level will be emitted; `false` if the logger is suppressing messages at this level.
+  static func isEmitting(_ level: Level) -> Bool {
+    #if !DEBUG
+    guard enabled else { return  false }
+    #endif
+    return Level.preferred <= level
   }
 
   /// Log a message.
@@ -236,16 +279,13 @@ class Logger: NSObject {
 
     let date = Date()
     let string = formatMessage(message, level, subsystem, true, date)
-    let log = Log(subsystem: subsystem.rawValue, level: level.rawValue, message: message, date: dateFormatter.string(from: date), logString: string)
-    $logs.withLock() { logs in
-      if logs.isEmpty {
-        DispatchQueue.main.async {
-          Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { timer in
-            AppDelegate.shared.logWindow.syncLogs()
-          }
-        }
-      }
-      logs.append(log)
+    let log = Log(subsystem: subsystem.rawValue, level: level, message: message, date: dateFormatter.string(from: date), logString: string)
+
+    $buffer.withLock {
+      $0.append(log)
+    }
+    Task { @MainActor in
+      NotificationCenter.default.post(name: .iinaLogAppended, object: nil)
     }
 
     print(string, terminator: "")

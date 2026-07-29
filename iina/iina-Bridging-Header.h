@@ -31,6 +31,7 @@ extern CFDictionaryRef _Nullable CoreDisplay_DisplayCreateInfoDictionary(CGDirec
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol PIPViewControllerDelegate;
+@class PIPMutablePlaybackState;
 
 @interface PIPViewController : NSViewController
 
@@ -42,20 +43,28 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSSize aspectRatio;
 
 - (void)presentViewControllerAsPictureInPicture:(NSViewController *)viewController;
+- (void)updatePlaybackStateUsingBlock:(void (NS_NOESCAPE ^)(PIPMutablePlaybackState *))updateBlock;
 
+@end
+
+@interface PIPPlaybackState : NSObject
+@end
+
+@interface PIPMutablePlaybackState : PIPPlaybackState
+@property (nonatomic) NSTimeInterval contentDuration;
+@property (nonatomic) NSInteger contentType;
+- (void)setPlaybackRate:(double)playbackRate elapsedTime:(NSTimeInterval)elapsedTime timeControlStatus:(NSInteger)timeControlStatus;
 @end
 
 @protocol PIPViewControllerDelegate <NSObject>
 
 @optional
-// it seems the system doesn't call this function since macOS 10.15
-- (BOOL)pipShouldClose:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-// instead this is added in macOS 10.15
-- (void)pipWillClose:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipDidClose:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipActionPlay:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipActionPause:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
-- (void)pipActionStop:(PIPViewController *)pip __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_NA);
+- (void)pipWillClose:(PIPViewController *)pip;
+- (void)pipDidClose:(PIPViewController *)pip;
+- (void)pipActionPlay:(PIPViewController *)pip;
+- (void)pipActionPause:(PIPViewController *)pip;
+- (void)pipActionStop:(PIPViewController *)pip;
+- (void)pipAction:(PIPViewController *)pip skipInterval:(NSTimeInterval)interval;
 @end
 
 NS_ASSUME_NONNULL_END

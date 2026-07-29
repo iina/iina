@@ -134,7 +134,7 @@ class NowPlayingInfoManager {
     // discardArtwork as that method works directly on the nowPlayingInfo dictionary.
     var info = center.nowPlayingInfo ?? [String: Any]()
     if withTitle {
-      if player.currentMediaIsAudio == .isAudio {
+      if player.info.isAudio == .isAudio {
         info[MPNowPlayingInfoPropertyMediaType] = MPNowPlayingInfoMediaType.audio.rawValue
         let (title, album, artist) = player.getMusicMetadata()
         info[MPMediaItemPropertyTitle] = title
@@ -166,6 +166,7 @@ class NowPlayingInfoManager {
       info[MPNowPlayingInfoPropertyChapterNumber] = player.info.chapter
     }
 
+    player.syncPositionIfNeeded()
     let duration = player.info.videoDuration?.second ?? 0
     let time = player.info.videoPosition?.second ?? 0
 
@@ -234,6 +235,17 @@ class NowPlayingInfoManager {
   }
 
   /// Construct an image for the artwork represented by the given video track.
+  ///
+  /// A track may represent artwork embedded in the file being played, or an external artwork file specified using the mpv
+  /// [cover-art-auto](https://mpv.io/manual/stable/#options-cover-art-auto) option or the mpv
+  /// [cover-art-files](https://mpv.io/manual/stable/#options-cover-art-files) option.
+  /// - Important: IINA intentionally does not use
+  ///     [NSImage(contentsOfFile:)](https://developer.apple.com/documentation/appkit/nsimage/init(contentsoffile:))
+  ///     to construct an image from an external artwork file. This constructor starts by reading the entire file into memory. If mpv
+  ///     selects a high resolution file this will require a large amount of memory. Since only a thumbnail is needed IINA uses the
+  ///     Apple recommended method
+  ///     [CGImageSourceCreateThumbnailAtIndex](https://developer.apple.com/documentation/imageio/cgimagesourcecreatethumbnailatindex(_:_:_:)
+  ///     that minimizes memory use.
   /// - Parameters:
   ///   - url: The URL of the media item.
   ///   - track: Video track representing the image.
@@ -255,10 +267,56 @@ class NowPlayingInfoManager {
       log("External artwork track is missing external-filename", url, level: .error)
       return nil
     }
-    guard let image = NSImage(contentsOfFile: filename) else {
+    log("Reading external artwork file: \(filename)")
+    let imageURL = URL(fileURLWithPath: filename)
+    guard let source = CGImageSourceCreateWithURL(imageURL as CFURL, nil) else {
+      log("Failed to create image source for external artwork file: \(filename)", level: .error)
+      return nil
+    }
+    // If possible form a thumbnail that is large enough that it only needs to be cropped to be used
+    // and not resized.
+    let maxSize = {
+      let desiredSize = Int(artworkDesiredSize)
+      guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil)
+              as? [CFString: Any] else {
+        log("Failed to obtain properties of external artwork file: \(filename)", level: .warning)
+        return desiredSize
+      }
+      guard let width = properties[kCGImagePropertyPixelWidth] as? Int,
+            let height = properties[kCGImagePropertyPixelHeight] as? Int else {
+        log("Failed to obtain width and height of external artwork file: \(filename)",
+            level: .warning)
+        return desiredSize
+      }
+      log("External artwork resolution: \(width)x\(height)", level: .verbose)
+      guard width > 0 else {
+        log("External artwork width (\(width)) is invalid", level: .error)
+        return desiredSize
+      }
+      guard height > 0 else {
+        log("External artwork height (\(height)) is invalid", level: .error)
+        return desiredSize
+      }
+      guard width < desiredSize || height < desiredSize else {
+        let widthAsDouble = Double(width)
+        let heightAsDouble = Double(height)
+        let aspect = width >= height ? widthAsDouble / heightAsDouble : heightAsDouble / widthAsDouble
+        return Int(artworkDesiredSize * aspect)
+      }
+      return max(width, height)
+    }()
+    log("Using \(maxSize) for max pixel size when creating image from external artwork file",
+        level: .verbose)
+    let options = [kCGImageSourceCreateThumbnailFromImageAlways: true,
+                   kCGImageSourceCreateThumbnailWithTransform: true,
+                   kCGImageSourceThumbnailMaxPixelSize: maxSize] as CFDictionary
+    guard let thumb = CGImageSourceCreateThumbnailAtIndex(source, 0, options) else {
       log("Unable to create an image for external artwork file: \(filename)", level: .error)
       return nil
     }
+    let image = NSImage(cgImage: thumb, size: .zero)
+    log("Created \(Int(image.size.width))x\(Int(image.size.height)) image from artwork file",
+        level: .verbose)
     return image
   }
 
@@ -437,8 +495,7 @@ class NowPlayingInfoManager {
   /// Search the given video tracks for front cover art.
   ///
   /// Container formats such as Matroska support embedding cover art. An external file can be specified as cover art using the mpv
-  /// option [cover-art-files](https://mpv.io/manual/stable/#options-cover-art-files). If the media being "played" is
-  /// an image file then it will be used as the artwork.
+  /// option [cover-art-files](https://mpv.io/manual/stable/#options-cover-art-files).
   /// - Parameters:
   ///   - player: The `PlayerCore` that is playing the media item.
   ///   - url: The URL of the media item.
@@ -450,18 +507,8 @@ class NowPlayingInfoManager {
     guard !tracks.isEmpty else { return false }
     log("Searching \(tracks.count) tracks for front cover artwork", url, level: .verbose)
     for track in tracks {
-      // Only interested in tracks representing an image.
-      guard track.isImage else { continue }
-      if track.isAlbumart {
-        guard let image = constructImage(url, track) else { continue }
-        foundFrontCoverArtwork(player, url, ticket, image)
-        return true
-      }
-      // The media item is an image.
-      guard let image = NSImage(contentsOf: url) else {
-        log("Unable to create an image from: \(url)", level: .error)
-        continue
-      }
+      // Only interested in tracks representing cover artwork.
+      guard track.isAlbumart, let image = constructImage(url, track) else { continue }
       foundFrontCoverArtwork(player, url, ticket, image)
       return true
     }
@@ -699,5 +746,5 @@ extension MPNowPlayingPlaybackState: @retroactive CustomStringConvertible {
 }
 
 extension Logger.Sub {
-  static let nowPlaying = Logger.makeSubsystem("now-playing")
+  static let nowPlaying = Logger.makeSubsystem("now-playing", ["play.laptopcomputer"])
 }

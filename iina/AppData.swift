@@ -73,6 +73,7 @@ struct AppData {
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360
   static let sizeWhenNoVideo = NSSize(width: widthWhenNoVideo, height: heightWhenNoVideo)
+  static let mainWindowMinSize = NSMakeSize(285, 120)
 }
 
 
@@ -134,15 +135,31 @@ struct Constants {
 
 extension Notification.Name {
   static let iinaMainWindowChanged = Notification.Name("IINAMainWindowChanged")
+  static let iinaMusicModeChanged = Notification.Name("IINAMusicModeChanged")
   static let iinaPlaylistChanged = Notification.Name("IINAPlaylistChanged")
+  static let iinaChapterListChanged = Notification.Name("IINAChapterListChanged")
   static let iinaTracklistChanged = Notification.Name("IINATracklistChanged")
+  static let iinaLoopStatusChanged = Notification.Name("iinaLoopStatusChanged")
+
   static let iinaVIDChanged = Notification.Name("iinaVIDChanged")
   static let iinaAIDChanged = Notification.Name("iinaAIDChanged")
   static let iinaSIDChanged = Notification.Name("iinaSIDChanged")
+  static let iinaSpeedChanged = Notification.Name("IINASpeedChanged")
   static let iinaMediaTitleChanged = Notification.Name("IINAMediaTitleChanged")
   static let iinaFileEnded = Notification.Name("IINAFileEnded")
+  static let iinaVideoParamsChanged = Notification.Name("iinaVideoParamsChanged")
   static let iinaVFChanged = Notification.Name("IINAVfChanged")
+  static let iinaVideoEqualizerChanged = Notification.Name("iinaVideoEqualizerChanged")
+  static let iinaDeinterlaceChanged = Notification.Name("iinaDeinterlaceChanged")
+  static let iinaHwdecChanged = Notification.Name("iinaHwdecChanged")
+  static let iinaHDRChanged = Notification.Name("iinaHDRChanged")
   static let iinaAFChanged = Notification.Name("IINAAfChanged")
+  static let iinaAudioDelayChanged = Notification.Name("iinaAudioDelayChanged")
+  static let iinaSubScaleChanged = Notification.Name("iinaSubScaleChanged")
+  static let iinaSubPositionChanged = Notification.Name("iinaSubPositionChanged")
+  static let iinaSubDelayChanged = Notification.Name("iinaSubDelayChanged")
+  static let iinaSubVisibilityChanged = Notification.Name("iinaSubVisibilityChanged")
+
   static let iinaKeyBindingInputChanged = Notification.Name("IINAKeyBindingInputChanged")
   static let iinaFileLoaded = Notification.Name("IINAFileLoaded")
   static let iinaHistoryUpdated = Notification.Name("IINAHistoryUpdated")
@@ -154,9 +171,11 @@ extension Notification.Name {
   static let iinaPlayerShutdown = Notification.Name("iinaPlayerShutdown")
   static let iinaPlaySliderLoopKnobChanged = Notification.Name("iinaPlaySliderLoopKnobChanged")
   static let iinaLogoutCompleted = Notification.Name("iinaLoggedOutOfSubtitleProvider")
-  static let iinaSecondSubVisibilityChanged = Notification.Name("iinaSecondSubVisibilityChanged")
-  static let iinaSubVisibilityChanged = Notification.Name("iinaSubVisibilityChanged")
   static let iinaHistoryTaskFinished = Notification.Name("iinaHistoryTaskFinished")
+  static let iinaPIPStatusChanged = Notification.Name("iinaPIPStatusChanged")
+  static let iinaFullscreenChanged = Notification.Name("iinaFullscreenChanged")
+  static let iinaSidebarStatusChanged = Notification.Name("iinaSidebarStatusChanged")
+  static let iinaLogAppended = Notification.Name("iinaLogAppended")
 }
 
 enum IINAError: Error {

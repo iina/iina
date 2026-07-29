@@ -196,12 +196,6 @@ class PreferenceWindowController: NSWindowController {
 
     detailViewBottomConstraint = prefDetailContentView.bottomAnchor.constraint(equalTo: prefDetailContentView.superview!.bottomAnchor)
 
-    // NSTableView's "Source List" style is only available with MacOS 11.0+ and includes a built-in 10pt offset for its highlights.
-    // But for older MacOS versions, the style will default to "full width" with no highlight offset, which will touch the Search field.
-    if #unavailable(macOS 11.0) {
-      navTableSearchFieldSpacingConstraint.constant = 10.0
-    }
-
     var viewMap = [
       ["general", "PrefGeneralViewController"],
       ["ui", "PrefUIViewController"],
@@ -302,6 +296,11 @@ class PreferenceWindowController: NSWindowController {
     let isScrollable = vc.preferenceContentIsScrollable
     detailViewBottomConstraint?.isActive = !isScrollable
     prefDetailScrollView.verticalScrollElasticity = .none
+
+    // Reset scroll position to top when switching tabs
+    if let documentView = prefDetailScrollView.documentView {
+      documentView.scroll(NSPoint(x: 0, y: 0))
+    }
 
     // find label
     if let title = title, let label = findLabel(titled: title, in: vc.view) {

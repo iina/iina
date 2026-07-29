@@ -28,5 +28,5 @@ import Foundation
 }
 
 extension Logger.Sub {
-  static let ffmpeg = Logger.makeSubsystem("ffmpeg")
+  static let ffmpeg = Logger.makeSubsystem("ffmpeg", ["cpu"])
 }

@@ -1543,7 +1543,7 @@ extension UPnPBrowserWindowController: NSTableViewDataSource, NSTableViewDelegat
       if let cell = tableView.makeView(withIdentifier: identifier, owner: nil) as? NSTableCellView {
         cell.textField?.stringValue = favorite.containerTitle
         if #available(macOS 14.0, *) {
-          cell.imageView?.image = NSImage.findSFSymbol(["star.fill"], withConfiguration: nil)
+          cell.imageView?.image = NSImage.sf(["star.fill"])
         }
         return cell
       }

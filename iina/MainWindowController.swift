@@ -2917,10 +2917,11 @@ class MainWindowController: PlayerWindowController {
   private func updateTimePreview(_ percentage: Double) {
     guard let duration = player.info.videoDuration else { return }
     let time = duration * percentage
-    let chapterTitle = if let chapter = player.info.getChapter(forVideoTime: time) {
-      chapter.title + "\n"
+    let chapterTitle: String
+    if let chapter = player.info.getChapter(forVideoTime: time) {
+      chapterTitle = chapter.title + "\n"
     } else {
-      ""
+      chapterTitle = ""
     }
     timePreviewView.textField.stringValue = chapterTitle + time.stringRepresentation
 
@@ -2931,9 +2932,11 @@ class MainWindowController: PlayerWindowController {
     } else {
       timeLabelYPos = sliderFrame.origin.y + playSlider.frame.height + 5
     }
-    timePreviewView.frame.origin = CGPoint(
-      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewView.frame.width / 2),
-      y: timeLabelYPos)
+    let previewX = round(
+      sliderFrame.origin.x
+        + sliderFrame.size.width * CGFloat(percentage)
+        - timePreviewView.frame.width / 2)
+    timePreviewView.frame.origin = CGPoint(x: previewX, y: timeLabelYPos)
   }
 
 

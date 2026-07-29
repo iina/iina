@@ -531,17 +531,14 @@
 "upnp.browser.refresh.all_devices" = "Refresh All Devices";
 "upnp.browser.refresh.settings" = "Auto-Refresh Settings...";
 "upnp.browser.settings.title" = "UPnP Browser Settings";
-"upnp.browser.settings.description" = "Configure auto-refresh and browser behavior";
+"upnp.browser.settings.description" = "Configure auto-play, auto-refresh, and browser behavior";
+"upnp.browser.settings.auto_play_next" = "Auto-Play Next";
 "upnp.browser.settings.auto_refresh" = "Enable Auto-Refresh";
 "upnp.browser.settings.refresh_interval" = "Refresh Interval (seconds):";
 "upnp.browser.settings.browser_behavior" = "When Video Closes:";
 "upnp.browser.settings.behavior.close" = "Close Browser";
 "upnp.browser.settings.behavior.keep_open" = "Keep Browser Open";
 "upnp.browser.settings.behavior.reopen" = "Reopen Browser";
-"preference.upnp.browser_behavior" = "UPnP/DLNA Browser:";
-"preference.upnp.browser_behavior.close" = "Close browser when playing";
-"preference.upnp.browser_behavior.keep_open" = "Keep browser open";
-"preference.upnp.browser_behavior.reopen" = "Reopen browser when playback ends";
 // Log window
 "logwindow.all_subsystems" = "All subsystems";
 "logwindow.title" = "Log Viewer";

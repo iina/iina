@@ -1628,7 +1628,7 @@ class PlayerCore: NSObject {
   /// Load UPnP playback context from preferences (if any).
   /// We no longer require the URL to match exactly; if a context exists, we treat the current file as part of that UPnP session.
   func loadUPnPPlaybackContext() -> UPnPBrowserWindowController.UPnPPlaybackContext? {
-    guard let data = Preference.data(for: .upnpPlaybackContext),
+    guard let data = UPnPPreferences.data(forKey: UPnPPreferences.Key.playbackContext),
           let context = try? JSONDecoder().decode(UPnPBrowserWindowController.UPnPPlaybackContext.self, from: data) else {
       return nil
     }
@@ -2264,7 +2264,7 @@ class PlayerCore: NSObject {
     // But don't auto-play if the player is stopping (user closed window) or shutting down.
     // Note: When a video naturally ends, the state might be .idle, but we should still auto-play
     // unless it's explicitly stopping (user action) or shutting down.
-    if Preference.bool(for: .upnpAutoPlayNext),
+    if UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext),
        loadUPnPPlaybackContext() != nil,
        info.state != .stopping,
        info.state != .shuttingDown,
@@ -2272,7 +2272,7 @@ class PlayerCore: NSObject {
       log("Auto-playing next UPnP item from fileEnded (state: \(info.state), dueToStopCommand: \(dueToStopCommand))", level: .debug)
       let browser = AppDelegate.shared.upnpBrowserWindow
       browser.playNextUPnPItem()
-    } else if Preference.bool(for: .upnpAutoPlayNext),
+    } else if UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext),
               loadUPnPPlaybackContext() != nil {
       log("Skipping auto-play - player state is \(info.state)", level: .debug)
     }

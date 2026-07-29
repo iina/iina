@@ -586,7 +586,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ey2-TT-Tl9">
-                    <rect key="frame" x="138" y="31" width="158" height="18"/>
+                    <rect key="frame" x="140" y="32" width="154" height="16"/>
                     <buttonCell key="cell" type="check" title="Only in &quot;music mode&quot;" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="AVe-9Z-RgQ">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>

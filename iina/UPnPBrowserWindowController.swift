@@ -255,7 +255,7 @@ class UPnPBrowserWindowController: NSWindowController {
     durationColumn.sortDescriptorPrototype = NSSortDescriptor(key: "duration", ascending: true)
     durationColumn.width = 120
     durationColumn.minWidth = 80
-    durationColumn.isHidden = Preference.bool(for: .upnpColumnDurationHidden)
+    durationColumn.isHidden = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnDurationHidden)
     contentOutline.addTableColumn(durationColumn)
     
     // Date column
@@ -264,7 +264,7 @@ class UPnPBrowserWindowController: NSWindowController {
     dateColumn.sortDescriptorPrototype = NSSortDescriptor(key: "date", ascending: true)
     dateColumn.width = 120
     dateColumn.minWidth = 80
-    dateColumn.isHidden = Preference.bool(for: .upnpColumnDateHidden)
+    dateColumn.isHidden = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnDateHidden)
     contentOutline.addTableColumn(dateColumn)
     
     // Author column
@@ -272,7 +272,7 @@ class UPnPBrowserWindowController: NSWindowController {
     authorColumn.title = NSLocalizedString("upnp.browser.column.author", comment: "Author")
     authorColumn.width = 150
     authorColumn.minWidth = 100
-    authorColumn.isHidden = Preference.bool(for: .upnpColumnAuthorHidden)
+    authorColumn.isHidden = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnAuthorHidden)
     contentOutline.addTableColumn(authorColumn)
     
     // Description column
@@ -280,7 +280,7 @@ class UPnPBrowserWindowController: NSWindowController {
     descriptionColumn.title = NSLocalizedString("upnp.browser.column.description", comment: "Description")
     descriptionColumn.width = 200
     descriptionColumn.minWidth = 120
-    descriptionColumn.isHidden = Preference.bool(for: .upnpColumnDescriptionHidden)
+    descriptionColumn.isHidden = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnDescriptionHidden)
     contentOutline.addTableColumn(descriptionColumn)
     
     // File Size column
@@ -289,7 +289,7 @@ class UPnPBrowserWindowController: NSWindowController {
     sizeColumn.sortDescriptorPrototype = NSSortDescriptor(key: "size", ascending: true)
     sizeColumn.width = 100
     sizeColumn.minWidth = 80
-    sizeColumn.isHidden = Preference.bool(for: .upnpColumnSizeHidden)
+    sizeColumn.isHidden = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnSizeHidden)
     contentOutline.addTableColumn(sizeColumn)
     
     // Type column (MIME type)
@@ -297,7 +297,7 @@ class UPnPBrowserWindowController: NSWindowController {
     typeColumn.title = NSLocalizedString("upnp.browser.column.type", comment: "Type")
     typeColumn.width = 120
     typeColumn.minWidth = 80
-    typeColumn.isHidden = Preference.bool(for: .upnpColumnTypeHidden)
+    typeColumn.isHidden = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnTypeHidden)
     contentOutline.addTableColumn(typeColumn)
     
     contentOutline.outlineTableColumn = titleColumn
@@ -927,7 +927,7 @@ class UPnPBrowserWindowController: NSWindowController {
     }
     
     // Handle browser behavior
-    let browserBehavior = Preference.integer(for: .upnpBrowserBehavior)
+    let browserBehavior = UPnPPreferences.integer(forKey: UPnPPreferences.Key.browserBehavior)
     if browserBehavior == 0 {
       // Close browser
       window?.close()
@@ -958,12 +958,12 @@ class UPnPBrowserWindowController: NSWindowController {
   private func savePlaybackContext() {
     guard let context = currentPlaybackContext,
           let data = try? JSONEncoder().encode(context) else { return }
-    Preference.set(data, for: .upnpPlaybackContext)
+    UPnPPreferences.set(data, forKey: UPnPPreferences.Key.playbackContext)
   }
   
   /// Load playback context from preferences
   private func loadPlaybackContext() -> UPnPPlaybackContext? {
-    guard let data = Preference.data(for: .upnpPlaybackContext) else {
+    guard let data = UPnPPreferences.data(forKey: UPnPPreferences.Key.playbackContext) else {
       Logger.log("No UPnP playback context data in preferences", subsystem: subsystem)
       return nil
     }
@@ -977,7 +977,7 @@ class UPnPBrowserWindowController: NSWindowController {
   
   /// Handle file ended - auto-play next
   @objc private func handleFileEnded(_ notification: Notification) {
-    Logger.log("handleFileEnded called, autoPlayNext: \(Preference.bool(for: .upnpAutoPlayNext)), isAutoPlayingNext: \(isAutoPlayingNext)", subsystem: subsystem)
+    Logger.log("handleFileEnded called, autoPlayNext: \(UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext)), isAutoPlayingNext: \(isAutoPlayingNext)", subsystem: subsystem)
     
     // Prevent re-entrancy - if we're already auto-playing, ignore this notification
     guard !isAutoPlayingNext else {
@@ -985,7 +985,7 @@ class UPnPBrowserWindowController: NSWindowController {
       return
     }
     
-    guard Preference.bool(for: .upnpAutoPlayNext) else {
+    guard UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext) else {
       Logger.log("Auto-play next is disabled", subsystem: subsystem)
       return
     }
@@ -1000,14 +1000,14 @@ class UPnPBrowserWindowController: NSWindowController {
   private func startAutoPlayMonitor() {
     autoPlayTimer?.invalidate()
     
-    guard Preference.bool(for: .upnpAutoPlayNext) else { return }
+    guard UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext) else { return }
     
     autoPlayTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkAutoPlayNextIfNeeded), userInfo: nil, repeats: true)
   }
   
   /// Periodically check if current UPnP item is at/near end and advance to next.
   @objc private func checkAutoPlayNextIfNeeded() {
-    guard Preference.bool(for: .upnpAutoPlayNext),
+    guard UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext),
           let context = currentPlaybackContext ?? loadPlaybackContext() else {
       return
     }
@@ -1208,7 +1208,7 @@ class UPnPBrowserWindowController: NSWindowController {
   
   private func reopenBrowserIfNeeded() {
     // Handle browser behavior when video closes
-    let behavior = Preference.integer(for: .upnpBrowserBehavior)
+    let behavior = UPnPPreferences.integer(forKey: UPnPPreferences.Key.browserBehavior)
     Logger.log("Browser behavior setting: \(behavior) (0=close, 1=keep open, 2=reopen)", subsystem: subsystem)
     
     if behavior == 1 || behavior == 2 {
@@ -1255,7 +1255,7 @@ class UPnPBrowserWindowController: NSWindowController {
   private func startAutoRefreshIfNeeded() {
     stopAutoRefresh()
     
-    guard Preference.bool(for: .upnpAutoRefreshEnabled) else {
+    guard UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoRefreshEnabled) else {
       Logger.log("Auto-refresh is disabled", subsystem: subsystem)
       return
     }
@@ -1271,7 +1271,7 @@ class UPnPBrowserWindowController: NSWindowController {
       return
     }
     
-    let interval = TimeInterval(Preference.integer(for: .upnpAutoRefreshInterval))
+    let interval = TimeInterval(UPnPPreferences.integer(forKey: UPnPPreferences.Key.autoRefreshInterval))
     guard interval > 0 else {
       Logger.log("Invalid auto-refresh interval: \(interval)", subsystem: subsystem)
       return
@@ -1285,7 +1285,7 @@ class UPnPBrowserWindowController: NSWindowController {
   
   /// Perform auto-refresh of current folder
   @objc private func performAutoRefresh() {
-    guard Preference.bool(for: .upnpAutoRefreshEnabled),
+    guard UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoRefreshEnabled),
           let device = selectedDevice,
           currentContainerID != "",
           !isShowingSearchResults else {
@@ -1341,18 +1341,24 @@ class UPnPBrowserWindowController: NSWindowController {
     }
   }
   
-  /// Show auto-refresh settings dialog
+  /// Show UPnP browser settings dialog (auto-refresh, close behavior, auto-play next).
   @objc private func showAutoRefreshSettings() {
     let alert = NSAlert()
     alert.messageText = NSLocalizedString("upnp.browser.settings.title", comment: "UPnP Browser Settings")
-    alert.informativeText = NSLocalizedString("upnp.browser.settings.description", comment: "Configure auto-refresh and browser behavior")
+    alert.informativeText = NSLocalizedString("upnp.browser.settings.description", comment: "Configure auto-refresh, browser behavior, and auto-play")
     
     // Create a view for settings
-    let view = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 120))
+    let view = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 150))
+    
+    // Auto-play next checkbox
+    let autoPlayCheckbox = NSButton(checkboxWithTitle: NSLocalizedString("upnp.browser.settings.auto_play_next", comment: "Auto-Play Next"), target: nil, action: nil)
+    autoPlayCheckbox.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext) ? .on : .off
+    autoPlayCheckbox.frame = NSRect(x: 20, y: 110, width: 360, height: 20)
+    view.addSubview(autoPlayCheckbox)
     
     // Auto-refresh enabled checkbox
     let autoRefreshCheckbox = NSButton(checkboxWithTitle: NSLocalizedString("upnp.browser.settings.auto_refresh", comment: "Enable Auto-Refresh"), target: nil, action: nil)
-    autoRefreshCheckbox.state = Preference.bool(for: .upnpAutoRefreshEnabled) ? .on : .off
+    autoRefreshCheckbox.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoRefreshEnabled) ? .on : .off
     autoRefreshCheckbox.frame = NSRect(x: 20, y: 80, width: 360, height: 20)
     view.addSubview(autoRefreshCheckbox)
     
@@ -1362,7 +1368,7 @@ class UPnPBrowserWindowController: NSWindowController {
     view.addSubview(intervalLabel)
     
     let intervalField = NSTextField(frame: NSRect(x: 220, y: 48, width: 80, height: 24))
-    intervalField.stringValue = String(Preference.integer(for: .upnpAutoRefreshInterval))
+    intervalField.stringValue = String(UPnPPreferences.integer(forKey: UPnPPreferences.Key.autoRefreshInterval))
     intervalField.isEditable = true
     view.addSubview(intervalField)
     
@@ -1375,7 +1381,7 @@ class UPnPBrowserWindowController: NSWindowController {
     behaviorPopup.addItem(withTitle: NSLocalizedString("upnp.browser.settings.behavior.close", comment: "Close Browser"))
     behaviorPopup.addItem(withTitle: NSLocalizedString("upnp.browser.settings.behavior.keep_open", comment: "Keep Browser Open"))
     behaviorPopup.addItem(withTitle: NSLocalizedString("upnp.browser.settings.behavior.reopen", comment: "Reopen Browser"))
-    behaviorPopup.selectItem(at: Preference.integer(for: .upnpBrowserBehavior))
+    behaviorPopup.selectItem(at: UPnPPreferences.integer(forKey: UPnPPreferences.Key.browserBehavior))
     view.addSubview(behaviorPopup)
     
     alert.accessoryView = view
@@ -1384,11 +1390,12 @@ class UPnPBrowserWindowController: NSWindowController {
     
     if alert.runModal() == .alertFirstButtonReturn {
       // Save settings
-      Preference.set(autoRefreshCheckbox.state == .on, for: .upnpAutoRefreshEnabled)
+      UPnPPreferences.set(autoPlayCheckbox.state == .on, forKey: UPnPPreferences.Key.autoPlayNext)
+      UPnPPreferences.set(autoRefreshCheckbox.state == .on, forKey: UPnPPreferences.Key.autoRefreshEnabled)
       if let interval = Int(intervalField.stringValue), interval > 0 {
-        Preference.set(interval, for: .upnpAutoRefreshInterval)
+        UPnPPreferences.set(interval, forKey: UPnPPreferences.Key.autoRefreshInterval)
       }
-      Preference.set(behaviorPopup.indexOfSelectedItem, for: .upnpBrowserBehavior)
+      UPnPPreferences.set(behaviorPopup.indexOfSelectedItem, forKey: UPnPPreferences.Key.browserBehavior)
       
       // Restart auto-refresh with new settings
       startAutoRefreshIfNeeded()
@@ -1437,8 +1444,8 @@ class UPnPBrowserWindowController: NSWindowController {
   }
 
   private func applySavedSortDescriptor(to outlineView: NSOutlineView) {
-    let sortKey = Preference.string(for: .upnpSortKey) ?? "title"
-    let ascending = Preference.bool(for: .upnpSortAscending)
+    let sortKey = UPnPPreferences.string(forKey: UPnPPreferences.Key.sortKey) ?? "title"
+    let ascending = UPnPPreferences.bool(forKey: UPnPPreferences.Key.sortAscending)
     outlineView.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: ascending)]
   }
 
@@ -1722,8 +1729,8 @@ extension UPnPBrowserWindowController: NSOutlineViewDataSource, NSOutlineViewDel
     
     let key = sortDescriptor.key ?? "title"
     let ascending = sortDescriptor.ascending
-    Preference.set(key, for: .upnpSortKey)
-    Preference.set(ascending, for: .upnpSortAscending)
+    UPnPPreferences.set(key, forKey: UPnPPreferences.Key.sortKey)
+    UPnPPreferences.set(ascending, forKey: UPnPPreferences.Key.sortAscending)
     
     var items: [UPnPItem] = []
     if let cachedItems = contentCache[currentContainerID] {
@@ -1785,32 +1792,32 @@ extension UPnPBrowserWindowController: NSMenuDelegate {
     
     let columnMenu = NSMenu()
     let durationItem = NSMenuItem(title: NSLocalizedString("upnp.browser.column.duration", comment: "Duration"), action: #selector(toggleColumnVisibility(_:)), keyEquivalent: "")
-    durationItem.state = Preference.bool(for: .upnpColumnDurationHidden) ? .off : .on
+    durationItem.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnDurationHidden) ? .off : .on
     durationItem.representedObject = "Duration"
     columnMenu.addItem(durationItem)
     
     let sizeItem = NSMenuItem(title: NSLocalizedString("upnp.browser.column.size", comment: "File Size"), action: #selector(toggleColumnVisibility(_:)), keyEquivalent: "")
-    sizeItem.state = Preference.bool(for: .upnpColumnSizeHidden) ? .off : .on
+    sizeItem.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnSizeHidden) ? .off : .on
     sizeItem.representedObject = "Size"
     columnMenu.addItem(sizeItem)
     
     let dateItem = NSMenuItem(title: NSLocalizedString("upnp.browser.column.date", comment: "Date"), action: #selector(toggleColumnVisibility(_:)), keyEquivalent: "")
-    dateItem.state = Preference.bool(for: .upnpColumnDateHidden) ? .off : .on
+    dateItem.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnDateHidden) ? .off : .on
     dateItem.representedObject = "Date"
     columnMenu.addItem(dateItem)
     
     let authorItem = NSMenuItem(title: NSLocalizedString("upnp.browser.column.author", comment: "Author"), action: #selector(toggleColumnVisibility(_:)), keyEquivalent: "")
-    authorItem.state = Preference.bool(for: .upnpColumnAuthorHidden) ? .off : .on
+    authorItem.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnAuthorHidden) ? .off : .on
     authorItem.representedObject = "Author"
     columnMenu.addItem(authorItem)
     
     let descItem = NSMenuItem(title: NSLocalizedString("upnp.browser.column.description", comment: "Description"), action: #selector(toggleColumnVisibility(_:)), keyEquivalent: "")
-    descItem.state = Preference.bool(for: .upnpColumnDescriptionHidden) ? .off : .on
+    descItem.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnDescriptionHidden) ? .off : .on
     descItem.representedObject = "Description"
     columnMenu.addItem(descItem)
     
     let typeItem = NSMenuItem(title: NSLocalizedString("upnp.browser.column.type", comment: "Type"), action: #selector(toggleColumnVisibility(_:)), keyEquivalent: "")
-    typeItem.state = Preference.bool(for: .upnpColumnTypeHidden) ? .off : .on
+    typeItem.state = UPnPPreferences.bool(forKey: UPnPPreferences.Key.columnTypeHidden) ? .off : .on
     typeItem.representedObject = "Type"
     columnMenu.addItem(typeItem)
     
@@ -1825,34 +1832,34 @@ extension UPnPBrowserWindowController: NSMenuDelegate {
     guard let columnName = sender.representedObject as? String,
           let outlineView = contentOutlineView else { return }
     
-    var key: Preference.Key
+    var key: String
     var identifier: NSUserInterfaceItemIdentifier
     
     switch columnName {
     case "Duration":
-      key = .upnpColumnDurationHidden
+      key = UPnPPreferences.Key.columnDurationHidden
       identifier = NSUserInterfaceItemIdentifier("Duration")
     case "Size":
-      key = .upnpColumnSizeHidden
+      key = UPnPPreferences.Key.columnSizeHidden
       identifier = NSUserInterfaceItemIdentifier("Size")
     case "Date":
-      key = .upnpColumnDateHidden
+      key = UPnPPreferences.Key.columnDateHidden
       identifier = NSUserInterfaceItemIdentifier("Date")
     case "Author":
-      key = .upnpColumnAuthorHidden
+      key = UPnPPreferences.Key.columnAuthorHidden
       identifier = NSUserInterfaceItemIdentifier("Author")
     case "Description":
-      key = .upnpColumnDescriptionHidden
+      key = UPnPPreferences.Key.columnDescriptionHidden
       identifier = NSUserInterfaceItemIdentifier("Description")
     case "Type":
-      key = .upnpColumnTypeHidden
+      key = UPnPPreferences.Key.columnTypeHidden
       identifier = NSUserInterfaceItemIdentifier("Type")
     default:
       return
     }
     
-    let isHidden = Preference.bool(for: key)
-    Preference.set(!isHidden, for: key)
+    let isHidden = UPnPPreferences.bool(forKey: key)
+    UPnPPreferences.set(!isHidden, forKey: key)
     
     if let column = outlineView.tableColumn(withIdentifier: identifier) {
       column.isHidden = !isHidden
@@ -1955,7 +1962,7 @@ extension UPnPBrowserWindowController: NSMenuDelegate {
   }
   
   private func loadFavorites() {
-    if let data = Preference.data(for: .upnpFavorites),
+    if let data = UPnPPreferences.data(forKey: UPnPPreferences.Key.favorites),
        let decoded = try? JSONDecoder().decode([UPnPFavorite].self, from: data) {
       favorites = decoded
       favoritesTableView?.reloadData()
@@ -1964,7 +1971,7 @@ extension UPnPBrowserWindowController: NSMenuDelegate {
   
   private func saveFavorites() {
     if let encoded = try? JSONEncoder().encode(favorites) {
-      Preference.set(encoded, for: .upnpFavorites)
+      UPnPPreferences.set(encoded, forKey: UPnPPreferences.Key.favorites)
       favoritesTableView?.reloadData()
     }
   }

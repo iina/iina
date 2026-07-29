@@ -46,8 +46,9 @@ class UPnPBrowserWindowController: NSWindowController {
   // Track current playback context for auto-play next
   private var currentPlaybackContext: UPnPPlaybackContext?
   
-  /// Flag to prevent re-entrant auto-play calls (cascade prevention)
-  private var isAutoPlayingNext = false
+  /// Flag to prevent re-entrant auto-play calls (cascade prevention).
+  /// Also used by PlayerCore so EOF idle handling does not close the player window mid-transition.
+  private(set) var isAutoPlayingNext = false
   
   private let subsystem = Logger.makeSubsystem("upnp-browser")
   
@@ -116,6 +117,32 @@ class UPnPBrowserWindowController: NSWindowController {
     autoPlayTimer = nil
     isAutoPlayingNext = false
     Logger.log("Stopped auto-play monitoring", subsystem: subsystem)
+  }
+
+  /// Clear in-memory and persisted UPnP session so auto-next cannot resume a stale folder list.
+  private func clearPlaybackContext() {
+    currentPlaybackContext = nil
+    UPnPPreferences.set(Data(), forKey: UPnPPreferences.Key.playbackContext)
+    Logger.log("Cleared UPnP playback context", subsystem: subsystem)
+  }
+
+  /// Always bring the player UI on screen for UPnP playback.
+  /// Network streams can start audio before video-size is known; without this, playback may be audible with no window.
+  private func ensurePlayerWindowVisible(_ player: PlayerCore) {
+    DispatchQueue.main.async {
+      AppDelegate.shared.openURLWindow.close()
+      let controller = player.currentController
+      controller.pendingShow = false
+      if controller.window?.isVisible != true {
+        controller.showWindow(nil)
+      }
+      controller.window?.makeKeyAndOrderFront(nil)
+      if #available(macOS 14, *) {
+        NSApp.activate()
+      } else {
+        NSApp.activate(ignoringOtherApps: true)
+      }
+    }
   }
   
   /// Stop auto-refresh timer
@@ -944,6 +971,7 @@ class UPnPBrowserWindowController: NSWindowController {
     
     // Start monitoring for auto-play-next
     startAutoPlayMonitor()
+    ensurePlayerWindowVisible(player)
     
     // Also set window title after opening as backup
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -1013,6 +1041,9 @@ class UPnPBrowserWindowController: NSWindowController {
     }
     
     let player = PlayerCore.lastActive
+    if player.info.state == .stopping || player.info.state == .shuttingDown || player.info.state == .shutDown {
+      return
+    }
     
     // Check if EOF is reached (more reliable than position calculation)
     let eofReached = player.mpv.getFlag(MPVProperty.eofReached)
@@ -1038,6 +1069,8 @@ class UPnPBrowserWindowController: NSWindowController {
             currentIndex + 1 < context.allItems.count else {
         autoPlayTimer?.invalidate()
         autoPlayTimer = nil
+        Logger.log("Auto-play monitor: no next item; clearing UPnP session", subsystem: subsystem)
+        clearPlaybackContext()
         return
       }
       
@@ -1059,6 +1092,16 @@ class UPnPBrowserWindowController: NSWindowController {
     if player.info.state == .stopping || player.info.state == .shuttingDown || player.info.state == .shutDown {
       Logger.log("Ignoring playNextUPnPItem - player is stopping/shutting down (state: \(player.info.state))", subsystem: subsystem)
       stopAutoPlay()
+      clearPlaybackContext()
+      return
+    }
+
+    // If the user already closed the player and nothing is loading, do not start ghost audio.
+    let windowVisible = (player.mainWindow.window?.isVisible == true) || (player.miniPlayer.window?.isVisible == true)
+    if !windowVisible && player.info.state == .idle && !player.mainWindow.pendingShow && !player.miniPlayer.pendingShow {
+      Logger.log("Ignoring playNextUPnPItem - player window is closed and idle", subsystem: subsystem)
+      stopAutoPlay()
+      clearPlaybackContext()
       return
     }
     
@@ -1077,21 +1120,31 @@ class UPnPBrowserWindowController: NSWindowController {
     // Find next item
     guard let currentIndex = context.allItems.firstIndex(where: { $0.id == context.currentItemID }) else {
       Logger.log("Current item (ID: \(context.currentItemID)) not found in context for next button. Available IDs: \(context.allItems.map { $0.id }.joined(separator: ", "))", subsystem: subsystem)
+      clearPlaybackContext()
+      stopAutoPlay()
       return
     }
     
     guard currentIndex + 1 < context.allItems.count else {
       Logger.log("No next item available (currentIndex: \(currentIndex), total: \(context.allItems.count))", subsystem: subsystem)
+      clearPlaybackContext()
+      stopAutoPlay()
+      reopenBrowserIfNeeded()
       return
     }
     
     let nextItem = context.allItems[currentIndex + 1]
     Logger.log("Next item: '\(nextItem.title)' (ID: \(nextItem.id)) at index \(currentIndex + 1)", subsystem: subsystem)
-    guard let nextURL = URL(string: nextItem.url) else { return }
+    guard let nextURL = URL(string: nextItem.url), !nextItem.url.isEmpty else {
+      Logger.log("Next item has invalid URL; clearing UPnP session", level: .error, subsystem: subsystem)
+      clearPlaybackContext()
+      stopAutoPlay()
+      return
+    }
     
     Logger.log("Playing next UPnP item via button: \(nextItem.title)", subsystem: subsystem)
     
-    // Set flag to prevent re-entrancy
+    // Set flag to prevent re-entrancy / window-close during transition
     isAutoPlayingNext = true
     
     // Update context
@@ -1108,6 +1161,7 @@ class UPnPBrowserWindowController: NSWindowController {
     preparePlayerForUPnPPlayback(player, url: nextURL, title: nextItem.title)
     
     player.openURL(nextURL)
+    ensurePlayerWindowVisible(player)
     
     // Restart monitoring for auto-play-next on the new item
     startAutoPlayMonitor()
@@ -1122,9 +1176,12 @@ class UPnPBrowserWindowController: NSWindowController {
     
     // Reset flag after a delay to allow file to start loading
     // This prevents cascading when openURL triggers fileEnded
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+      guard let self = self else { return }
       self.isAutoPlayingNext = false
       Logger.log("Reset isAutoPlayingNext flag", subsystem: self.subsystem)
+      // Safety net: if audio started but UI never appeared, show it again.
+      self.ensurePlayerWindowVisible(player)
     }
   }
   
@@ -1164,6 +1221,7 @@ class UPnPBrowserWindowController: NSWindowController {
     let player = PlayerCore.lastActive
     preparePlayerForUPnPPlayback(player, url: previousURL, title: previousItem.title)
     player.openURL(previousURL)
+    ensurePlayerWindowVisible(player)
     
     // Restart monitoring for auto-play-next on the new item
     startAutoPlayMonitor()
@@ -1196,6 +1254,7 @@ class UPnPBrowserWindowController: NSWindowController {
         Logger.log("Handling player stopped after deferred check (state: \(state))", subsystem: self.subsystem)
         self.isAutoPlayingNext = false
         self.stopAutoPlay()
+        self.clearPlaybackContext()
         self.reopenBrowserIfNeeded()
       }
       return
@@ -1203,6 +1262,7 @@ class UPnPBrowserWindowController: NSWindowController {
     
     Logger.log("Stopping auto-play monitoring", subsystem: subsystem)
     stopAutoPlay()
+    clearPlaybackContext()
     reopenBrowserIfNeeded()
   }
   
@@ -1227,7 +1287,7 @@ class UPnPBrowserWindowController: NSWindowController {
   @objc private func handleFileLoaded(_ notification: Notification) {
     // Check if we're in a UPnP playback context
     if currentPlaybackContext != nil || loadPlaybackContext() != nil {
-      let player = PlayerCore.lastActive
+      let player = (notification.object as? PlayerCore) ?? PlayerCore.lastActive
       
       // Force speed back to 1.0 AFTER file loads. This is the safety net that catches
       // speed restored from watch-later (which happens during loadfile, after our
@@ -1240,6 +1300,9 @@ class UPnPBrowserWindowController: NSWindowController {
       let resumeEnabled = Preference.bool(for: .resumeLastPosition)
       player.mpv.setFlag(MPVOption.WatchLater.resumePlayback, resumeEnabled)
       Logger.log("Post-load: restored resume-playback to \(resumeEnabled)", subsystem: subsystem)
+
+      // Ensure the player window is visible once media is actually loaded.
+      ensurePlayerWindowVisible(player)
     }
     
     // If we're auto-playing, restart the monitor for the new file

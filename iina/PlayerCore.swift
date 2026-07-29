@@ -2374,8 +2374,15 @@ class PlayerCore: NSObject {
     // close the window if stopped
     if info.state.loaded ||  // stopped by mpv
         (info.state == .stopping && (currentWindow?.isVisible ?? false)) {  // user sent stop command
-      DispatchQueue.main.async {
-        self.currentController.close()
+      // UPnP auto-next briefly reaches idle between items. Closing the player window here
+      // causes the next network stream to play audio with no visible UI.
+      let upnpAdvancing = AppDelegate.shared.upnpBrowserWindow.isAutoPlayingNext
+      if !upnpAdvancing {
+        DispatchQueue.main.async {
+          self.currentController.close()
+        }
+      } else {
+        log("Keeping player window open during UPnP auto-next transition")
       }
     }
     if info.state != .loading {

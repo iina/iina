@@ -482,7 +482,13 @@ class PlayerCore: NSObject {
     info.videoTracks = []
     info.videoWidth = nil
     if isNetwork {
-      AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
+      // UPnP streams are network URLs but should stay in the UPnP browser flow,
+      // not the generic "Open URL" loading window.
+      if loadUPnPPlaybackContext() == nil {
+        AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
+      } else {
+        AppDelegate.shared.openURLWindow.close()
+      }
     }
 
     let _ = mainWindow.window

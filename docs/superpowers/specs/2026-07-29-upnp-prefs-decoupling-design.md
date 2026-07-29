@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-29  
 **Branch:** `feature/upnp-dlna-pr`  
-**Status:** Approved in chat; awaiting final spec review before implementation  
+**Status:** Implemented on `feature/upnp-dlna-pr` (local; PR not updated unless requested)  
 **Related:** IINA PR feedback on [#5877](https://github.com/iina/iina/pull/5877) (@low-batt); upstream SwiftUI settings migration on `develop` / former `new-pref-ui`
 
 ## Problem

@@ -226,6 +226,9 @@ class PlayerCore: NSObject {
 
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
+  /// Coordinates AirPlay video casting (HLS remux -> LAN server -> AVPlayer -> AirPlay).
+  lazy var airPlayCoordinator: AirPlayCoordinator = AirPlayCoordinator(player: self)
+
   var syncUITimer: Timer?
 
   var displayOSD: Bool = true
@@ -890,6 +893,10 @@ class PlayerCore: NSObject {
   // MARK: - MPV commands
 
   func togglePause(_ set: Bool? = nil) {
+    if airPlayCoordinator.isCasting {
+      airPlayCoordinator.setCastPaused(set ?? !airPlayCoordinator.isCastPaused)
+      return
+    }
     info.state == .paused ? resume() : pause()
   }
 
@@ -940,6 +947,11 @@ class PlayerCore: NSObject {
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
     guard info.state != .shutDown else { return }
+    if airPlayCoordinator.isCasting, let pos = airPlayCoordinator.castCurrentSeconds {
+      // Hand the receiver's position back so watch-later saves where the TV actually is.
+      mpv.command(.seek, args: ["\(pos)", "absolute+exact"])
+    }
+    airPlayCoordinator.endIfActive()
     savePlaybackPosition()
 
     // The player may already be stopped in which case the state must not be set to stopping.
@@ -981,6 +993,14 @@ class PlayerCore: NSObject {
   }
 
   func seek(percent: Double, forceExact: Bool = false) {
+    // While casting, seek only the AirPlay receiver — don't touch mpv (it stays paused; no
+    // local seek/playback on the Mac).
+    if airPlayCoordinator.isCasting {
+      if let dur = info.videoDuration?.second, dur > 0 {
+        airPlayCoordinator.castSeek(toAbsolute: percent.clamped(to: 0..<100) / 100 * dur)
+      }
+      return
+    }
     var percent = percent
     // mpv will play next file automatically when seek to EOF.
     // We clamp to a Range to ensure that we don't try to seek to 100%.
@@ -995,6 +1015,11 @@ class PlayerCore: NSObject {
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
+    // While casting, seek only the AirPlay receiver — don't touch mpv.
+    if airPlayCoordinator.isCasting {
+      airPlayCoordinator.castSeek(byRelative: relativeSecond)
+      return
+    }
     switch option {
 
     case .relative:
@@ -1020,6 +1045,11 @@ class PlayerCore: NSObject {
   }
 
   func seek(absoluteSecond: Double) {
+    // While casting, seek only the AirPlay receiver — don't touch mpv.
+    if airPlayCoordinator.isCasting {
+      airPlayCoordinator.castSeek(toAbsolute: absoluteSecond)
+      return
+    }
     mpv.command(.seek, args: ["\(absoluteSecond)", "absolute+exact"])
   }
 
@@ -1295,6 +1325,11 @@ class PlayerCore: NSObject {
     }
     mpv.setInt(name, index)
     getSelectedTracks()
+    // If we're casting via AirPlay, rebuild the stream so the new audio/subtitle track
+    // is reflected on the receiver (otherwise the TV keeps the old track).
+    if (forType == .audio || forType == .sub), airPlayCoordinator.isCasting {
+      airPlayCoordinator.reloadForTrackChange()
+    }
   }
 
   func setSpeed(_ speed: Double) {
@@ -2042,6 +2077,7 @@ class PlayerCore: NSObject {
   ///         the player is no longer active.
   func fileStarted(path: String) {
     guard info.state.active else { return }
+    airPlayCoordinator.endIfActive()  // a new file is loading — tear down any active cast
     log("File started")
 
     Task { @MainActor in
@@ -2743,6 +2779,13 @@ class PlayerCore: NSObject {
   ///     milliseconds. Due to this behavior of the `time-pos` property, this method checks to see of the end of the video has been
   ///     reached and if so, sets `videoPosition` to match `videoDuration`.
   private func syncPosition() {
+    // While casting via AirPlay, the receiver (AVPlayer) is the transport master, so the
+    // OSC must reflect its position rather than the (paused) mpv core.
+    if airPlayCoordinator.isCasting, let castSeconds = airPlayCoordinator.castCurrentSeconds {
+      info.videoPosition?.second = castSeconds
+      info.constrainVideoPosition()
+      return
+    }
     if info.isNetworkResource {
       info.videoDuration?.second = mpv.getDouble(MPVProperty.duration)
     }

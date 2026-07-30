@@ -231,6 +231,9 @@
 		845E70B2210CB59D00D06C42 /* ScrollingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E70B1210CB59D00D06C42 /* ScrollingTextField.swift */; };
 		8460FBA91D6497490081841B /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8460FBA71D6497490081841B /* PlaylistViewController.swift */; };
 		846121BD1F35FCA500ABB39C /* DraggingDetect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846121BC1F35FCA500ABB39C /* DraggingDetect.swift */; };
+		FFFFFF010000000000FF0B02 /* HLSPackager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFFF010000000000FF0B01 /* HLSPackager.swift */; };
+		FFFFFF010000000000FF0B04 /* HLSFileServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFFF010000000000FF0B03 /* HLSFileServer.swift */; };
+		FFFFFF010000000000FF0B06 /* AirPlayCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFFFFF010000000000FF0B05 /* AirPlayCoordinator.swift */; };
 		8461BA681E4237C7008BB852 /* youtube-dl in Copy Executables */ = {isa = PBXBuildFile; fileRef = 8461BA671E4237C2008BB852 /* youtube-dl */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */; };
 		8461C5301D462488006E91FF /* VideoTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8461C52F1D462488006E91FF /* VideoTime.swift */; };
@@ -306,6 +309,7 @@
 		84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */; };
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
 		84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FBCB371EEACDDD0076C77C /* FFmpegController.m */; };
+		FFFFFF010000000000FF0C02 /* HLSRemuxer.m in Sources */ = {isa = PBXBuildFile; fileRef = FFFFFF010000000000FF0C01 /* HLSRemuxer.m */; };
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
 		8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F49C370213EFB7E0076C4F9 /* MiniPlayerWindowController.xib */; };
 		9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E47DABF1E3CFA6D00457420 /* DurationDisplayTextField.swift */; };
@@ -1346,6 +1350,9 @@
 		845E70B1210CB59D00D06C42 /* ScrollingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingTextField.swift; sourceTree = "<group>"; };
 		8460FBA71D6497490081841B /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		846121BC1F35FCA500ABB39C /* DraggingDetect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggingDetect.swift; sourceTree = "<group>"; };
+		FFFFFF010000000000FF0B01 /* HLSPackager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HLSPackager.swift; path = "iina/AirPlay/HLSPackager.swift"; sourceTree = SOURCE_ROOT; };
+		FFFFFF010000000000FF0B03 /* HLSFileServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HLSFileServer.swift; path = "iina/AirPlay/HLSFileServer.swift"; sourceTree = SOURCE_ROOT; };
+		FFFFFF010000000000FF0B05 /* AirPlayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AirPlayCoordinator.swift; path = "iina/AirPlay/AirPlayCoordinator.swift"; sourceTree = SOURCE_ROOT; };
 		8461BA671E4237C2008BB852 /* youtube-dl */ = {isa = PBXFileReference; lastKnownFileType = text; name = "youtube-dl"; path = "deps/executable/youtube-dl"; sourceTree = SOURCE_ROOT; };
 		8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySliderCell.swift; sourceTree = "<group>"; };
 		8461C52F1D462488006E91FF /* VideoTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTime.swift; sourceTree = "<group>"; };
@@ -1580,6 +1587,8 @@
 		84F7258E1D486185000DEF1B /* MPVProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVProperty.swift; sourceTree = "<group>"; };
 		84FBCB361EEACDDD0076C77C /* FFmpegController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFmpegController.h; sourceTree = "<group>"; };
 		84FBCB371EEACDDD0076C77C /* FFmpegController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFmpegController.m; sourceTree = "<group>"; };
+		FFFFFF010000000000FF0C01 /* HLSRemuxer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HLSRemuxer.m; path = "iina/HLSRemuxer.m"; sourceTree = SOURCE_ROOT; };
+		FFFFFF010000000000FF0C03 /* HLSRemuxer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HLSRemuxer.h; path = "iina/HLSRemuxer.h"; sourceTree = SOURCE_ROOT; };
 		84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
 		875FDF9E2157873300F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		875FDFA02157874B00F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
@@ -3053,6 +3062,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFFFFF010000000000FF0B02 /* HLSPackager.swift in Sources */,
+				FFFFFF010000000000FF0B04 /* HLSFileServer.swift in Sources */,
+				FFFFFF010000000000FF0B06 /* AirPlayCoordinator.swift in Sources */,
 				E3EC8C432F94330400FBB51E /* Dialog.swift in Sources */,
 				E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */,
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,
@@ -3209,6 +3221,7 @@
 				E392B8CC2FB2263F005F2C24 /* SettingsSearch.swift in Sources */,
 				E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */,
 				84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */,
+				FFFFFF010000000000FF0C02 /* HLSRemuxer.m in Sources */,
 				84879A981E0FFC7E0004F894 /* PrefUIViewController.swift in Sources */,
 				84C6D3641EB276E9009BF721 /* PlaybackHistory.swift in Sources */,
 				E3CB258F222799B800A62C47 /* MPVHook.swift in Sources */,

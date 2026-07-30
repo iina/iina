@@ -675,7 +675,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playButtonAction(_ sender: NSButton) {
-    player.info.state == .paused ? player.resume() : player.pause()
+    player.togglePause()  // routes to the AirPlay cast while casting, else mpv
   }
 
   @IBAction func muteButtonAction(_ sender: NSButton) {

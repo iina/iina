@@ -684,6 +684,11 @@
 "settings.gaplessAudio.items.2" = "Strong";
 "settings.gaplessAudio.items.2.desc" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
 "settings.gaplessAudio.label" = "Gapless audio";
+"settings.audioChannelRoutingEnabled.desc" = "Route or mix multichannel audio into stereo before it reaches the selected audio device. Disabled while SPDIF passthrough is enabled.";
+"settings.audioChannelRoutingEnabled.label" = "Audio channel routing";
+"settings.audioChannelRoutingMode.items.0" = "Assign channels";
+"settings.audioChannelRoutingMode.items.1" = "Custom downmix";
+"settings.audioChannelRoutingMode.label" = "Mode";
 "settings.maxVolume.desc" = "(100-1000)";
 "settings.maxVolume.label" = "Maximum volume";
 "settings.preferredAudioDevice.label" = "Preferred audio device";
@@ -698,6 +703,10 @@
 "settings.replayGainFallback.label" = "Fallback";
 "settings.replayGainPreamp.desc" = "Pre-amplification gain to apply to the ReplayGain gain.";
 "settings.replayGainPreamp.label" = "Preamp gain";
+"settings.$OutputChannel1" = "Output 1";
+"settings.$OutputChannel2" = "Output 2";
+"settings.$Reset" = "Reset";
+"settings.$SourceChannel" = "Source";
 
 // Settings - Control
 "settings.doubleClickAction.items.0" = "None";

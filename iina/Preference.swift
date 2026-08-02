@@ -212,6 +212,12 @@ struct Preference {
 
     static let gaplessAudio = Key("gaplessAudio")
 
+    static let audioChannelRoutingEnabled = Key("audioChannelRoutingEnabled")
+    static let audioChannelRoutingMode = Key("audioChannelRoutingMode")
+    static let audioChannelRoutingLeftSource = Key("audioChannelRoutingLeftSource")
+    static let audioChannelRoutingRightSource = Key("audioChannelRoutingRightSource")
+    static let audioChannelRoutingMatrix = Key("audioChannelRoutingMatrix")
+
     static let userEQPresets = Key("userEQPresets")
 
     // Subtitle
@@ -953,6 +959,65 @@ struct Preference {
     }
   }
 
+  enum AudioChannelRoutingMode: Int, InitializingFromKey, CaseIterable {
+    case assignment = 0
+    case customDownmix
+
+    static var defaultValue = AudioChannelRoutingMode.assignment
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .assignment: "assignment"
+      case .customDownmix: "custom"
+      }
+    }
+  }
+
+  static let audioChannelRoutingSources: [(id: String, title: String)] = [
+    ("FL", "Front left"),
+    ("FR", "Front right"),
+    ("FC", "Center"),
+    ("LFE", "LFE"),
+    ("BL", "Back left"),
+    ("BR", "Back right"),
+    ("SL", "Side left"),
+    ("SR", "Side right")
+  ]
+
+  static let audioChannelRoutingDefaultMatrix =
+    "FL:1:0,FR:0:1,FC:0:0,LFE:0:0,BL:0:0,BR:0:0,SL:0:0,SR:0:0"
+
+  static func audioChannelRoutingMatrixEntries() -> [(source: String, leftGain: Double, rightGain: Double)] {
+    let fallback = Dictionary(uniqueKeysWithValues: audioChannelRoutingSources.map { ($0.id, (0.0, 0.0)) })
+    let stored = Preference.string(for: .audioChannelRoutingMatrix) ?? audioChannelRoutingDefaultMatrix
+    var parsed = fallback
+
+    for entry in stored.split(separator: ",") {
+      let parts = entry.split(separator: ":", omittingEmptySubsequences: false).map(String.init)
+      guard parts.count == 3,
+            audioChannelRoutingSources.contains(where: { $0.id == parts[0] }),
+            let left = Double(parts[1]),
+            let right = Double(parts[2]) else { continue }
+      parsed[parts[0]] = (left, right)
+    }
+
+    return audioChannelRoutingSources.map { source in
+      let gains = parsed[source.id] ?? (0, 0)
+      return (source.id, gains.0, gains.1)
+    }
+  }
+
+  static func setAudioChannelRoutingMatrixEntries(_ entries: [(source: String, leftGain: Double, rightGain: Double)]) {
+    let value = entries.map { entry in
+      "\(entry.source):\(entry.leftGain.prettyFormat()):\(entry.rightGain.prettyFormat())"
+    }.joined(separator: ",")
+    Preference.set(value, for: .audioChannelRoutingMatrix)
+  }
+
   enum DefaultRepeatMode: Int, InitializingFromKey, CaseIterable {
     case playlist = 0
     case file
@@ -1129,6 +1194,11 @@ struct Preference {
     .replayGainClip: false,
     .replayGainFallback: 0,
     .gaplessAudio: GaplessAudioOption.weak.rawValue,
+    .audioChannelRoutingEnabled: false,
+    .audioChannelRoutingMode: AudioChannelRoutingMode.assignment.rawValue,
+    .audioChannelRoutingLeftSource: "FL",
+    .audioChannelRoutingRightSource: "FR",
+    .audioChannelRoutingMatrix: audioChannelRoutingDefaultMatrix,
 
     .subAutoLoadIINA: IINAAutoLoadAction.iina.rawValue,
     .subAutoLoadPriorityString: "",
@@ -1376,6 +1446,7 @@ struct Preference {
            .alwaysFloatOnTop,
            .alwaysOpenInNewWindow,
            .alwaysShowOnTopIcon,
+           .audioChannelRoutingEnabled,
            .audioDriverEnableAVFoundation,
            .autoRepeat,
            .autoSearchOnlineSub,
@@ -1499,6 +1570,9 @@ struct Preference {
       case .gaplessAudio:
         defaultAsString = String(describing: GaplessAudioOption.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as GaplessAudioOption)
+      case .audioChannelRoutingMode:
+        defaultAsString = String(describing: AudioChannelRoutingMode.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as AudioChannelRoutingMode)
       case .hardwareDecoder:
         defaultAsString = String(describing: HardwareDecoderOption.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as HardwareDecoderOption)

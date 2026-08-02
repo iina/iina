@@ -8,6 +8,51 @@
 
 import Cocoa
 
+fileprivate enum AudioChannelRoutingFilterBuilder {
+  static func makePanGraph() -> String? {
+    let mode = Preference.enum(for: .audioChannelRoutingMode) as Preference.AudioChannelRoutingMode
+    switch mode {
+    case .assignment:
+      guard let leftSource = validatedSource(Preference.string(for: .audioChannelRoutingLeftSource)),
+            let rightSource = validatedSource(Preference.string(for: .audioChannelRoutingRightSource)) else {
+        return nil
+      }
+      return "pan=stereo|c0=\(leftSource)|c1=\(rightSource)"
+
+    case .customDownmix:
+      let entries = Preference.audioChannelRoutingMatrixEntries()
+      return "pan=stereo|c0=\(expression(for: entries.map { ($0.source, $0.leftGain) }))|c1=\(expression(for: entries.map { ($0.source, $0.rightGain) }))"
+    }
+  }
+
+  private static func validatedSource(_ source: String?) -> String? {
+    guard let source,
+          Preference.audioChannelRoutingSources.contains(where: { $0.id == source }) else {
+      return nil
+    }
+    return source
+  }
+
+  private static func expression(for gains: [(source: String, gain: Double)]) -> String {
+    let terms = gains.compactMap { source, gain -> String? in
+      guard abs(gain) > Double.leastNonzeroMagnitude else { return nil }
+      let magnitude = abs(gain)
+      let term = magnitude == 1 ? source : "\(magnitude.prettyFormat())*\(source)"
+      return gain < 0 ? "-\(term)" : term
+    }
+
+    guard !terms.isEmpty else {
+      return "0*\(Preference.audioChannelRoutingSources[0].id)"
+    }
+
+    var result = terms[0]
+    for term in terms.dropFirst() {
+      result += term.hasPrefix("-") ? term : "+\(term)"
+    }
+    return result
+  }
+}
+
 class PlayerCore: NSObject {
 
   /// Minimum value to set a mpv loop point to.
@@ -66,12 +111,15 @@ class PlayerCore: NSObject {
 
   static var playerCores: [PlayerCore] = []
   static private var playerCoreCounter = 0
+  static private let audioChannelRoutingPreferenceObserver = Preference.Observer()
+  static private var isObservingAudioChannelRoutingPreferences = false
 
   static private func findIdlePlayerCore() -> PlayerCore? {
     playerCores.first { $0.info.state == .idle && !$0.backgroundTaskInUse }
   }
 
   static private func createPlayerCore() -> PlayerCore {
+    observeAudioChannelRoutingPreferences()
     let pc = PlayerCore()
     pc.label = "\(playerCoreCounter)"
     playerCores.append(pc)
@@ -79,6 +127,23 @@ class PlayerCore: NSObject {
     pc.loadPlugins()
     playerCoreCounter += 1
     return pc
+  }
+
+  static private func observeAudioChannelRoutingPreferences() {
+    guard !isObservingAudioChannelRoutingPreferences else { return }
+    isObservingAudioChannelRoutingPreferences = true
+    audioChannelRoutingPreferenceObserver.addAll([
+      .audioChannelRoutingEnabled,
+      .audioChannelRoutingMode,
+      .audioChannelRoutingLeftSource,
+      .audioChannelRoutingRightSource,
+      .audioChannelRoutingMatrix,
+      .spdifAC3,
+      .spdifDTS,
+      .spdifDTSHD
+    ]) { _ in
+      PlayerCore.playerCores.forEach { $0.applyAudioChannelRoutingFilter() }
+    }
   }
 
   static func activeOrNewForMenuAction(isAlternative: Bool) -> PlayerCore {
@@ -662,6 +727,7 @@ class PlayerCore: NSObject {
       log("Audio device configured in settings not found, will default to auto:\n  \(audioDevice)")
       setAudioDevice("auto")
     }
+    applyAudioChannelRoutingFilter()
   }
 
   func initVideo() {
@@ -1812,6 +1878,39 @@ class PlayerCore: NSObject {
     return result
   }
 
+  private func removeAudioChannelRoutingFilters() {
+    let filters = mpv.getFilters(MPVProperty.af)
+    for index in filters.indices.reversed() where filters[index].label == Constants.FilterName.audioChannelRouting {
+      let filter = filters[index]
+      removeAudioFilter(filter, index)
+    }
+  }
+
+  func applyAudioChannelRoutingFilter() {
+    guard info.state != .stopping, info.state != .shuttingDown, info.state != .shutDown else {
+      return
+    }
+    removeAudioChannelRoutingFilters()
+
+    guard Preference.bool(for: .audioChannelRoutingEnabled) else { return }
+    guard !Preference.bool(for: .spdifAC3),
+          !Preference.bool(for: .spdifDTS),
+          !Preference.bool(for: .spdifDTSHD) else {
+      log("Audio channel routing is enabled but ignored while SPDIF passthrough is enabled",
+          level: .warning)
+      return
+    }
+    guard let graph = AudioChannelRoutingFilterBuilder.makePanGraph() else {
+      log("Failed to build audio channel routing filter", level: .warning)
+      return
+    }
+
+    let filter = MPVFilter(name: "lavfi",
+                           label: Constants.FilterName.audioChannelRouting,
+                           paramString: "[\(graph)]")
+    addAudioFilter(filter)
+  }
+
   /// Remove an audio filter based on its position in the list of filters.
   ///
   /// Removing a filter based on its position within the filter list is the preferred way to do it as per discussion with the mpv project.
@@ -2393,6 +2492,7 @@ class PlayerCore: NSObject {
     // restart even while paused. See issue #5337.
     syncUI(.time)
     reloadSavedIINAfilters()
+    applyAudioChannelRoutingFilter()
 
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
     // We can't put this in MPV_EVENT_VIDEO_RECONFIG because it can be emitted with the old video's size

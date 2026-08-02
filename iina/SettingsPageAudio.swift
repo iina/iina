@@ -31,6 +31,7 @@ class SettingsPageAudio: SettingsPage {
   override func content() -> [SettingsSection] {
     return sections {
       sectionHardware()
+      sectionChannelRouting()
       sectionVolume()
       sectionOther()
     }
@@ -72,6 +73,19 @@ class SettingsPageAudio: SettingsPage {
             SettingsItem.Switch()
               .bindTo(.spdifDTSHD)
           }
+      }
+    }
+  }
+
+  private func sectionChannelRouting() -> SettingsSection {
+    return section {
+      SettingsList {
+        SettingsItem.Switch()
+          .image(name: "arrow.triangle.branch")
+          .bindTo(.audioChannelRoutingEnabled)
+          .bindExpandableView()
+          .hasDescription()
+          .withExpandingDetailView(AudioChannelRoutingView())
       }
     }
   }
@@ -135,6 +149,205 @@ class SettingsPageAudio: SettingsPage {
           )
       }
     }
+  }
+}
+
+
+fileprivate class AudioChannelRoutingView: NSObject, SettingsContainer, NSTextFieldDelegate {
+  lazy var itemID = SettingsContainerUUID.next()
+
+  let view = NSView()
+  private let modePopUp = NSPopUpButton()
+  private let leftSourcePopUp = NSPopUpButton()
+  private let rightSourcePopUp = NSPopUpButton()
+  private let assignmentStack = NSStackView()
+  private let matrixStack = NSStackView()
+  private var matrixFields: [String: (left: NSTextField, right: NSTextField)] = [:]
+  private var builtView: NSView?
+
+  func makeView() -> NSView {
+    if let builtView {
+      return builtView
+    }
+
+    view.translatesAutoresizingMaskIntoConstraints = false
+
+    let modeRow = row(label: ui.localized(.audioChannelRoutingModeLabel), control: modePopUp)
+    configureModePopUp()
+
+    configureSourcePopUp(leftSourcePopUp, selected: Preference.string(for: .audioChannelRoutingLeftSource))
+    configureSourcePopUp(rightSourcePopUp, selected: Preference.string(for: .audioChannelRoutingRightSource))
+    leftSourcePopUp.action = #selector(sourcePopUpChanged(_:))
+    rightSourcePopUp.action = #selector(sourcePopUpChanged(_:))
+
+    assignmentStack.translatesAutoresizingMaskIntoConstraints = false
+    assignmentStack.orientation = .vertical
+    assignmentStack.spacing = 6
+    assignmentStack.addArrangedSubview(row(label: ui.localized(.text_OutputChannel1), control: leftSourcePopUp))
+    assignmentStack.addArrangedSubview(row(label: ui.localized(.text_OutputChannel2), control: rightSourcePopUp))
+
+    matrixStack.translatesAutoresizingMaskIntoConstraints = false
+    matrixStack.orientation = .vertical
+    matrixStack.spacing = 6
+    buildMatrixRows()
+
+    let contentStack = NSStackView(views: [modeRow, assignmentStack, matrixStack])
+    contentStack.translatesAutoresizingMaskIntoConstraints = false
+    contentStack.orientation = .vertical
+    contentStack.alignment = .leading
+    contentStack.spacing = 10
+    view.addSubview(contentStack)
+    contentStack.padding(.top(topConstraintOffset), .leading(SettingsSubList.indent), .trailing(8), .bottom(8))
+
+    updateModeVisibility()
+    builtView = view
+    view.tag = itemID
+    return view
+  }
+
+  func registerSearchEntry(context: SettingsSearch.Context) {
+    context.add(itemID, ui.localized(.audioChannelRoutingModeLabel), isMain: true)
+    context.add(itemID, ui.localized(.text_OutputChannel1))
+    context.add(itemID, ui.localized(.text_OutputChannel2))
+    context.add(itemID, ui.localized(.text_SourceChannel))
+  }
+
+  private func configureModePopUp() {
+    modePopUp.translatesAutoresizingMaskIntoConstraints = false
+    modePopUp.controlSize = .small
+    modePopUp.target = self
+    modePopUp.action = #selector(modePopUpChanged(_:))
+    modePopUp.removeAllItems()
+    for mode in Preference.AudioChannelRoutingMode.allCases {
+      modePopUp.addItem(withTitle: ui.localized(.init("audioChannelRoutingMode.items.\(mode.rawValue)")))
+      modePopUp.lastItem?.tag = mode.rawValue
+    }
+    modePopUp.selectItem(withTag: Preference.integer(for: .audioChannelRoutingMode))
+  }
+
+  private func configureSourcePopUp(_ popUp: NSPopUpButton, selected: String?) {
+    popUp.translatesAutoresizingMaskIntoConstraints = false
+    popUp.controlSize = .small
+    popUp.target = self
+    popUp.removeAllItems()
+    for source in Preference.audioChannelRoutingSources {
+      popUp.addItem(withTitle: "\(source.title) (\(source.id))")
+      popUp.lastItem?.representedObject = source.id
+    }
+    if let selected,
+       let item = popUp.itemArray.first(where: { $0.representedObject as? String == selected }) {
+      popUp.select(item)
+    }
+  }
+
+  private func buildMatrixRows() {
+    let header = NSStackView()
+    header.translatesAutoresizingMaskIntoConstraints = false
+    header.orientation = .horizontal
+    header.alignment = .centerY
+    header.spacing = 8
+    header.addArrangedSubview(headerLabel(ui.localized(.text_SourceChannel), width: 120))
+    header.addArrangedSubview(headerLabel(ui.localized(.text_OutputChannel1), width: 62))
+    header.addArrangedSubview(headerLabel(ui.localized(.text_OutputChannel2), width: 62))
+    matrixStack.addArrangedSubview(header)
+
+    for entry in Preference.audioChannelRoutingMatrixEntries() {
+      let sourceTitle = Preference.audioChannelRoutingSources.first(where: { $0.id == entry.source })?.title ?? entry.source
+      let leftField = gainField(entry.leftGain, source: entry.source, output: "left")
+      let rightField = gainField(entry.rightGain, source: entry.source, output: "right")
+      matrixFields[entry.source] = (leftField, rightField)
+
+      let row = NSStackView(views: [
+        headerLabel("\(sourceTitle) (\(entry.source))", width: 120),
+        leftField,
+        rightField
+      ])
+      row.translatesAutoresizingMaskIntoConstraints = false
+      row.orientation = .horizontal
+      row.alignment = .centerY
+      row.spacing = 8
+      matrixStack.addArrangedSubview(row)
+    }
+
+    let resetButton = NSButton(title: ui.localized(.text_Reset), target: self, action: #selector(resetMatrix))
+    resetButton.controlSize = .small
+    matrixStack.addArrangedSubview(resetButton)
+  }
+
+  private func row(label title: String, control: NSView) -> NSStackView {
+    let label = headerLabel(title, width: 120)
+    let stack = NSStackView(views: [label, control])
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    stack.orientation = .horizontal
+    stack.alignment = .centerY
+    stack.spacing = 8
+    return stack
+  }
+
+  private func headerLabel(_ title: String, width: CGFloat) -> NSTextField {
+    let label = NSTextField(labelWithString: title)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.controlSize = .small
+    label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+    label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    label.widthAnchor.constraint(equalToConstant: width).isActive = true
+    return label
+  }
+
+  private func gainField(_ value: Double, source: String, output: String) -> NSTextField {
+    let field = NSTextField()
+    field.translatesAutoresizingMaskIntoConstraints = false
+    field.controlSize = .small
+    field.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+    field.alignment = .right
+    field.stringValue = value.prettyFormat()
+    field.identifier = NSUserInterfaceItemIdentifier("\(source).\(output)")
+    field.delegate = self
+    field.widthAnchor.constraint(equalToConstant: 62).isActive = true
+    return field
+  }
+
+  @objc private func modePopUpChanged(_ sender: NSPopUpButton) {
+    Preference.set(sender.selectedTag(), for: .audioChannelRoutingMode)
+    updateModeVisibility()
+  }
+
+  @objc private func sourcePopUpChanged(_ sender: NSPopUpButton) {
+    guard let source = sender.selectedItem?.representedObject as? String else { return }
+    Preference.set(source, for: sender == leftSourcePopUp ? .audioChannelRoutingLeftSource : .audioChannelRoutingRightSource)
+  }
+
+  @objc private func resetMatrix() {
+    Preference.set(Preference.audioChannelRoutingDefaultMatrix, for: .audioChannelRoutingMatrix)
+    refreshMatrixFields()
+  }
+
+  func controlTextDidEndEditing(_ obj: Notification) {
+    saveMatrixFields()
+  }
+
+  private func updateModeVisibility() {
+    let mode = Preference.enum(for: .audioChannelRoutingMode) as Preference.AudioChannelRoutingMode
+    assignmentStack.isHidden = mode != .assignment
+    matrixStack.isHidden = mode != .customDownmix
+  }
+
+  private func refreshMatrixFields() {
+    for entry in Preference.audioChannelRoutingMatrixEntries() {
+      matrixFields[entry.source]?.left.stringValue = entry.leftGain.prettyFormat()
+      matrixFields[entry.source]?.right.stringValue = entry.rightGain.prettyFormat()
+    }
+  }
+
+  private func saveMatrixFields() {
+    let entries = Preference.audioChannelRoutingSources.map { source -> (String, Double, Double) in
+      let fields = matrixFields[source.id]
+      let left = Double(fields?.left.stringValue ?? "") ?? 0
+      let right = Double(fields?.right.stringValue ?? "") ?? 0
+      return (source.id, left, right)
+    }
+    Preference.setAudioChannelRoutingMatrixEntries(entries)
+    refreshMatrixFields()
   }
 }
 

@@ -129,6 +129,7 @@ struct Constants {
     static let flip = "iina_flip"
     static let mirror = "iina_mirror"
     static let audioEq = "iina_aeq"
+    static let audioChannelRouting = "iina_audio_channel_routing"
     static let delogo = "iina_delogo"
   }
 }

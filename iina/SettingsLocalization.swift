@@ -92,6 +92,11 @@ extension SettingsLocalization.Key {
   static let text_Hardware = SettingsLocalization.Key("$Hardware")
   static let text_AudioOther = SettingsLocalization.Key("$Other")
   static let text_Volume = SettingsLocalization.Key("$Volume")
+  static let audioChannelRoutingModeLabel = SettingsLocalization.Key("audioChannelRoutingMode.label")
+  static let text_OutputChannel1 = SettingsLocalization.Key("$OutputChannel1")
+  static let text_OutputChannel2 = SettingsLocalization.Key("$OutputChannel2")
+  static let text_SourceChannel = SettingsLocalization.Key("$SourceChannel")
+  static let text_Reset = SettingsLocalization.Key("$Reset")
 
   // Subtitles
   static let subAutoLoadSearchPath = SettingsLocalization.Key("subAutoLoadSearchPath.label")

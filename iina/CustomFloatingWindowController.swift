@@ -39,7 +39,13 @@ class CustomFloatingWindowController: NSWindowController, NSWindowDelegate {
     window.title = title
     window.contentView = contentView
     window.level = .screenSaver
-    window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .ignoresCycle, .stationary, .transient]
+    var collectionBehavior: NSWindow.CollectionBehavior = [.canJoinAllSpaces, .ignoresCycle, .transient]
+    if #available(macOS 13.0, *) {
+      collectionBehavior.insert(.canJoinAllApplications)
+    } else {
+      collectionBehavior.insert(.fullScreenAuxiliary)
+    }
+    window.collectionBehavior = collectionBehavior
     window.hidesOnDeactivate = false
     window.isReleasedWhenClosed = false
     window.isOpaque = false

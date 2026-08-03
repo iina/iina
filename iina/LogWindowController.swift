@@ -78,11 +78,12 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   private var hasSetup = false
 
   convenience init() {
-    let window = NSWindow(
+    let window = CommonWindow(
         contentRect: NSRect(origin: .zero, size: NSSize(width: 800, height: 500)),
         styleMask: [.titled, .closable, .miniaturizable, .resizable],
         backing: .buffered,
-        defer: false
+        defer: false,
+        usesUnifiedToolbar: true
     )
     window.minSize = NSMakeSize(800, 500)
     window.title = NSLocalizedString("logwindow.title", comment: "Log Viewer")

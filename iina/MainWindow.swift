@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MainWindow: NSWindow {
+class MainWindow: CommonWindow {
   var forceKeyAndMain = false
 
   override func keyDown(with event: NSEvent) {

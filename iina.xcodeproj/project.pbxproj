@@ -128,6 +128,7 @@
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
 		519CCABD2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */; };
 		51AC1CAB2A9FBF3700DF7079 /* OpenSubClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51AC1CAA2A9FBF3700DF7079 /* OpenSubClient.swift */; };
+		51BDDFB3301E97EE00E249CE /* CommonWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BDDFB2301E97EE00E249CE /* CommonWindow.swift */; };
 		51C1BA3A291CA76700C1208A /* InfoDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C1BA39291CA76700C1208A /* InfoDictionary.swift */; };
 		51C889D52C42FF7F007B2584 /* PlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C889D42C42FF7F007B2584 /* PlayerState.swift */; };
 		51CA83E22E35AD6300A44B22 /* MPVAudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CA83E12E35AD6300A44B22 /* MPVAudioDevice.swift */; };
@@ -1049,6 +1050,7 @@
 		519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HardwareDecodeCapabilities.swift; sourceTree = "<group>"; };
 		51A0F0F629FA2C8E000130CF /* Beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Beta.xcconfig; sourceTree = "<group>"; };
 		51AC1CAA2A9FBF3700DF7079 /* OpenSubClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSubClient.swift; sourceTree = "<group>"; };
+		51BDDFB2301E97EE00E249CE /* CommonWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWindow.swift; sourceTree = "<group>"; };
 		51C1BA39291CA76700C1208A /* InfoDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDictionary.swift; sourceTree = "<group>"; };
 		51C3ED782C234BFA004546F9 /* imgutils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imgutils.h; sourceTree = "<group>"; };
 		51C889D42C42FF7F007B2584 /* PlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerState.swift; sourceTree = "<group>"; };
@@ -2112,6 +2114,7 @@
 		84A0BAA31D2FAEA000BC8DA1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				51BDDFB2301E97EE00E249CE /* CommonWindow.swift */,
 				E31E62FA2FD38516005527B2 /* LayoutValue.swift */,
 				84A0BA931D2F9E9600BC8DA1 /* MainMenu.xib */,
 				E38BD4AE20054BD9007635FC /* MainWindow.swift */,
@@ -2955,6 +2958,7 @@
 				34C4D19C2FC58482006B829F /* LiveTextSupport.swift in Sources */,
 				511BF43E2E1305C800E9721E /* MiniPlaySlider.swift in Sources */,
 				E34BC2AC2C27DAE900A94680 /* SettingsHelper.swift in Sources */,
+				51BDDFB3301E97EE00E249CE /* CommonWindow.swift in Sources */,
 				842904E21F0EC01600478376 /* AutoFileMatcher.swift in Sources */,
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,

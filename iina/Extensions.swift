@@ -854,6 +854,18 @@ extension NSScreen {
   }
 }
 
+#if DEBUG
+extension NSUserInterfaceLayoutDirection: @retroactive CustomStringConvertible {
+  public var description: String {
+    switch self {
+    case .leftToRight: return "leftToRight"
+    case .rightToLeft: return "rightToLeft"
+    @unknown default: return String(self.rawValue)
+    }
+  }
+}
+#endif
+
 extension NSWindow {
 
   /// Return the screen to use by default for this window.

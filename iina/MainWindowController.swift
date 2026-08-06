@@ -747,10 +747,6 @@ class MainWindowController: PlayerWindowController {
     }
     videoViewContainer.addSubview(videoView)
     videoView.translatesAutoresizingMaskIntoConstraints = false
-    setupVideoViewConstraints()
-  }
-
-  private func setupVideoViewConstraints() {
     videoViewConstraints = [
       .leading: videoView.leadingAnchor.constraint(equalTo: videoViewContainer.leadingAnchor),
       .trailing: videoViewContainer.trailingAnchor.constraint(equalTo: videoView.trailingAnchor),

@@ -58,7 +58,15 @@ class VideoTime {
     let m_ = m < 10 ? "0\(m)" : "\(m)"
     let s_: String
     if precise {
-      s_ = String(format: "%0\(precision + 3).\(precision)f", fmod(second, 60))
+      let secondsField = String(format: "%0\(precision + 3).\(precision)f", fmod(second, 60))
+      if secondsField.hasPrefix("60") {
+        let carried = rounded + 60
+        let ch = carried / 3600, crem = carried % 3600, cm = crem / 60
+        let ch_ = ch > 0 ? "\(ch):" : ""
+        let cm_ = cm < 10 ? "0\(cm)" : "\(cm)"
+        return ch_ + cm_ + ":" + String(format: "%0\(precision + 3).\(precision)f", 0.0)
+      }
+      s_ = secondsField
     } else {
       let s = remaining % 60
       s_ = s < 10 ? "0\(s)" : "\(s)"

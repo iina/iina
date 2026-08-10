@@ -11,7 +11,8 @@ import Foundation
 class MiniPlayerWindow: NSWindow {
 
   override func keyDown(with event: NSEvent) {
-    if menu?.performKeyEquivalent(with: event) == true {
+    if !IINAApplication.isBoundNumpadKeyEvent(event),
+       menu?.performKeyEquivalent(with: event) == true {
       return
     }
     /// Forward all key events which the window receives to its controller.

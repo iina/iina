@@ -202,7 +202,9 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
   @IBOutlet weak var miniPlayer: NSMenuItem!
-
+  // Help
+  @IBOutlet weak var helpMenu: NSMenu!
+  @IBOutlet weak var useNewSettingsWindow: NSMenuItem!
   @IBOutlet weak var debugDump: NSMenuItem!
 
   /// If `true` then all menu items are disabled.
@@ -430,7 +432,10 @@ class MenuController: NSObject, NSMenuDelegate {
     inspector.action = #selector(MainMenuActionHandler.menuShowInspector(_:))
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
 
-    // Debug
+    // Help
+    
+    helpMenu.delegate = self
+    useNewSettingsWindow.action = #selector(AppDelegate.toggleNewSettings)
 
     debugDump.isAlternate = true
     debugDump.keyEquivalentModifierMask = .option
@@ -693,6 +698,12 @@ class MenuController: NSObject, NSMenuDelegate {
     pluginMenu.addItem(reloadPluginsItem)
 
   }
+  
+  
+  func updateHelpMenu() {
+    useNewSettingsWindow.state = Preference.enableNewSettings ? .on : .off
+  }
+  
 
   @discardableResult
   private func add(menuItemDef item: JavascriptPluginMenuItem,
@@ -842,6 +853,8 @@ class MenuController: NSObject, NSMenuDelegate {
     case pluginMenu:
       PlayerCore.active.events.emit(.menuUpdate)
       updatePluginMenu()
+    case helpMenu:
+      updateHelpMenu()
     default: break
     }
     // check conveniently bound menus

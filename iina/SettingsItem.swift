@@ -677,13 +677,13 @@ struct SettingsItem {
     }
 
     @objc func switchChanged(_ sender: NSSwitch?) {
-      guard let detailView = renderedDetailView else { return }
-
       let enabled = nsSwitch.state == .on
-      if !isExpandableAndClickable {
-        toggleExpandable(enabled)
+      if let detailView = renderedDetailView {
+        if !isExpandableAndClickable {
+          toggleExpandable(enabled)
+        }
+        setSubControls(detailView, enabled: enabled)
       }
-      setSubControls(detailView, enabled: enabled)
 
       if sender != nil {
         // Only call the callback when the user manually clicked the switch.

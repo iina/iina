@@ -74,6 +74,10 @@ class JavascriptAPI: NSObject {
       }
     }
 
+    if !forceLocalPath, let scheme = URL(string: path)?.scheme, scheme != "file" {
+      return (path, false)
+    }
+
     return whenPermitted(to: .accessFileSystem) {
       var absPath = path
       if let player = player, path.hasPrefix("@current/") {
@@ -95,7 +99,7 @@ class JavascriptAPI: NSObject {
         absPath.hasPrefix(pluginInstance.plugin.dataURL.path) ||
         absPath.hasPrefix(pluginInstance.plugin.tmpURL.path)
       )
-    }!
+    } ?? (nil, false)
   }
 
   private func trackPath(_ path: String, type: MPVTrack.TrackType) -> String? {

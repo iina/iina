@@ -239,6 +239,7 @@ struct Preference {
     static let subMarginX = Key("subMarginX")
     static let subMarginY = Key("subMarginY")
     static let subPos = Key("subPos")
+    static let secondarySubPos = Key("secondarySubPos")
     static let subLang = Key("subLang")
     static let legacyOnlineSubSource = Key("onlineSubSource")
     static let onlineSubProvider = Key("onlineSubProvider")
@@ -1164,6 +1165,7 @@ struct Preference {
     .subMarginX: Float(25),
     .subMarginY: Float(22),
     .subPos: Float(100),
+    .secondarySubPos: Float(100),
     .subLang: "",
     .legacyOnlineSubSource: 1, /* openSub */
     .onlineSubProvider: OnlineSubtitle.Providers.openSub.id,

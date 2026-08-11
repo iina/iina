@@ -505,6 +505,7 @@ class MPVController: NSObject {
                   verboseIfDefault: true)
 
     setUserOption(PK.subPos, type: .float, forName: MPVOption.Subtitles.subPos, verboseIfDefault: true)
+    setUserOption(PK.secondarySubPos, type: .float, forName: MPVOption.Subtitles.secondarySubPos, verboseIfDefault: true)
 
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang, level: .verbose)
 
@@ -644,6 +645,12 @@ class MPVController: NSObject {
          !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubDelay) {
         log("Adding \(MPVOption.Subtitles.secondarySubDelay) to \(MPVOption.WatchLater.watchLaterOptions)")
         watchLaterOptions += "," + MPVOption.Subtitles.secondarySubDelay
+        needsUpdate = true
+      }
+      if watchLaterOptions.contains(MPVOption.Subtitles.subPos),
+         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubPos) {
+        log("Adding \(MPVOption.Subtitles.secondarySubPos) to \(MPVOption.WatchLater.watchLaterOptions)")
+        watchLaterOptions += "," + MPVOption.Subtitles.secondarySubPos
         needsUpdate = true
       }
       if needsUpdate {

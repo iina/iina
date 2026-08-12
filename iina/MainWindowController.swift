@@ -9,6 +9,7 @@
 import Cocoa
 import Mustache
 import WebKit
+import AVKit
 
 fileprivate let isMacOS11: Bool = {
   if #unavailable(macOS 12.0) {
@@ -55,6 +56,40 @@ class MainWindowController: PlayerWindowController {
   }
 
   lazy private var _videoView: VideoView = VideoView(frame: window!.contentView!.bounds, player: player)
+
+  /// Overlay shown over the (frozen) video while casting via AirPlay, so the Mac doesn't
+  /// just show a paused frame.
+  lazy var castingOverlayView: NSView = {
+    let v = NSVisualEffectView()
+    v.material = .hudWindow
+    v.blendingMode = .withinWindow
+    v.state = .active
+    v.translatesAutoresizingMaskIntoConstraints = false
+    v.isHidden = true
+    let icon = NSImageView()
+    icon.image = NSImage.sf(["airplayvideo"], withConfiguration: NSImage.SymbolConfiguration(pointSize: 52, weight: .regular))
+    icon.contentTintColor = .white
+    icon.translatesAutoresizingMaskIntoConstraints = false
+    let label = NSTextField(labelWithString: "Playing on AirPlay")
+    label.font = .systemFont(ofSize: 20, weight: .medium)
+    label.textColor = .white
+    label.translatesAutoresizingMaskIntoConstraints = false
+    v.addSubview(icon)
+    v.addSubview(label)
+    NSLayoutConstraint.activate([
+      icon.centerXAnchor.constraint(equalTo: v.centerXAnchor),
+      icon.centerYAnchor.constraint(equalTo: v.centerYAnchor, constant: -18),
+      label.centerXAnchor.constraint(equalTo: v.centerXAnchor),
+      label.topAnchor.constraint(equalTo: icon.bottomAnchor, constant: 12),
+    ])
+    return v
+  }()
+
+  /// Show/hide the AirPlay casting overlay. Called by the AirPlayCoordinator.
+  func setCastingOverlay(_ visible: Bool) {
+    guard loaded else { return }
+    castingOverlayView.isHidden = !visible
+  }
 
   /// Owns the sidebar panels, view controllers, and show/hide/resize logic.
   lazy var sidebars = SidebarController(mainWindow: self)
@@ -350,7 +385,9 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.enableLiveText.rawValue:
       if #available(macOS 13, *), let newValue = change[.newKey] as? Bool {
-        let buttons = fragToolbarView.subviews as! [NSButton]
+        // compactMap (not `as! [NSButton]`) — the toolbar may hold a non-NSButton view
+        // (the AirPlay AVRoutePickerView), which would trap a force cast.
+        let buttons = fragToolbarView.subviews.compactMap { $0 as? NSButton }
         if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
@@ -477,6 +514,15 @@ class MainWindowController: PlayerWindowController {
 
     // init quick setting view now
     let _ = sidebars.quickSettingView
+
+    // AirPlay casting overlay — above the video, below the OSC/chrome.
+    cv.addSubview(castingOverlayView)
+    NSLayoutConstraint.activate([
+      castingOverlayView.leadingAnchor.constraint(equalTo: cv.leadingAnchor),
+      castingOverlayView.trailingAnchor.constraint(equalTo: cv.trailingAnchor),
+      castingOverlayView.topAnchor.constraint(equalTo: cv.topAnchor),
+      castingOverlayView.bottomAnchor.constraint(equalTo: cv.bottomAnchor),
+    ])
 
     // create translucent views
     oscBottomView = OSCBottomView(mainWindow: self)
@@ -814,9 +860,21 @@ class MainWindowController: PlayerWindowController {
     let effectiveButtons = buttons.filter { $0 != .liveText || Preference.isLiveTextEnabled }
     fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
     let liveTextEnabled = Preference.bool(for: .enableLiveText)
+    let realButtonCount = effectiveButtons.filter { $0 != .airplay }.count
     for buttonType in effectiveButtons {
+      if buttonType == .airplay {
+        // AirPlay uses a system AVRoutePickerView rather than a plain toolbar button.
+        let picker = AVRoutePickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.isRoutePickerButtonBordered = false
+        Utility.quickConstraints(["H:[v(\(Preference.ToolBarButton.frameSize))]",
+                                  "V:[v(\(Preference.ToolBarButton.frameSize))]"], ["v": picker])
+        fragToolbarView.addView(picker, in: .trailing)
+        player.airPlayCoordinator.attach(routePicker: picker)
+        continue
+      }
       let button = NSButton()
-      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: effectiveButtons.count > 4)
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: realButtonCount > 4)
       if buttonType == .liveText && liveTextEnabled {
         button.image = Preference.ToolBarButton.liveText.alternateImage()
       }
@@ -828,7 +886,8 @@ class MainWindowController: PlayerWindowController {
   @objc
   private func updateOSCToolbarButtons(_ notification: Notification) {
     func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
-      let buttons = fragToolbarView.subviews as! [NSButton]
+      // subviews may include a non-NSButton (the AirPlay AVRoutePickerView), so filter.
+      let buttons = fragToolbarView.subviews.compactMap { $0 as? NSButton }
       let currentButton = buttons.first(where: { $0.tag == button.rawValue })
       currentButton?.image = isHighlighted ? button.alternateImage() : button.image()
     }
@@ -2858,6 +2917,8 @@ class MainWindowController: PlayerWindowController {
       sidebars.show(sidebar: .plugins)
     case .liveText:
       Preference.set(!Preference.bool(for: .enableLiveText), for: .enableLiveText)
+    case .airplay:
+      break  // handled by the AVRoutePickerView, not a tag-based button action
     }
   }
 

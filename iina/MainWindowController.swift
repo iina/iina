@@ -171,6 +171,13 @@ class MainWindowController: PlayerWindowController {
     case animating(toFullscreen: Bool, legacy: Bool, priorWindowedFrame: NSRect)
     case fullscreen(legacy: Bool, priorWindowedFrame: NSRect)
 
+    var isAnimating: Bool {
+      switch self {
+      case .animating: return true
+      default: return false
+      }
+    }
+
     var isFullscreen: Bool {
       switch self {
       case .fullscreen: return true
@@ -1354,9 +1361,9 @@ class MainWindowController: PlayerWindowController {
 
   func window(_ window: NSWindow, startCustomAnimationToEnterFullScreenOn screen: NSScreen, withDuration duration: TimeInterval) {
     NSAnimationContext.runAnimationGroup({ context in
-      context.duration = duration
-      window.animator().setFrame(screen.frame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
-    }, completionHandler: nil)
+      context.duration = AccessibilityPreferences.adjustedDuration(duration)
+      window.animator().setFrame(screen.frame, display: true)
+    })
   }
 
   func window(_ window: NSWindow, startCustomAnimationToExitFullScreenWithDuration duration: TimeInterval) {
@@ -1366,9 +1373,9 @@ class MainWindowController: PlayerWindowController {
     let priorWindowedFrame = fsState.priorWindowedFrame!
 
     NSAnimationContext.runAnimationGroup({ context in
-      context.duration = duration
-      window.animator().setFrame(priorWindowedFrame, display: true, animate: !Preference.bool(for: PK.disableAnimations))
-    }, completionHandler: nil)
+      context.duration = AccessibilityPreferences.adjustedDuration(duration)
+      window.animator().setFrame(priorWindowedFrame, display: true)
+    })
 
     NSMenu.setMenuBarVisible(true)
   }
@@ -1437,7 +1444,23 @@ class MainWindowController: PlayerWindowController {
 
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
+
     forceDraw("entered full screen mode")
+
+    // The volume slider and the toolbar views in the floating OSC will be detached and not shown
+    // in the floating OSC if the window is too narrow. Once in full screen mode there is enough
+    // space for the full OSC to be shown. Sometimes, but not always, the subview holding the
+    // pause/resume and left/right buttons will not be centered after the OSC expands to full
+    // size. Forcing layout corrects this. See issue #5244.
+    if oscPosition == .floating {
+      fragControlView.needsLayout = true
+    }
+
+    // For legacy full screen resuming drawing is handled by legacyAnimateToFullscreen after
+    // animations have finished.
+    if notification.name != .iinaLegacyFullScreen {
+      videoView.resumeDrawingNewFrames()
+    }
 
     if Preference.bool(for: .blackOutMonitor) {
       blackOutOtherMonitors()
@@ -1602,7 +1625,23 @@ class MainWindowController: PlayerWindowController {
 
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
+
     forceDraw("exited full screen mode")
+
+    // The volume slider and the toolbar views in the floating OSC will be detached and not shown in
+    // the floating OSC if the window is too narrow. Once in full screen mode there is enough space
+    // for the full OSC to be shown. Sometimes, but not always, the subview holding the pause/resume
+    // and left/right buttons will not be centered after the OSC expands to full size. Forcing
+    // layout corrects this. See issue #5244.
+    if oscPosition == .floating {
+      fragControlView.needsLayout = true
+    }
+
+    // For legacy full screen resuming drawing is handled by legacyAnimateToWindowed after
+    // animations have finished.
+    if notification.name != .iinaLegacyFullScreen {
+      videoView.resumeDrawingNewFrames()
+    }
 
     if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.state == .playing {
       player.pause()
@@ -1655,26 +1694,34 @@ class MainWindowController: PlayerWindowController {
     forceDraw("failed to exit full screen mode")
   }
 
+  /// Take the window in or out of full screen mode.
+  ///
+  /// Before entering or exiting full screen mode this method suspends drawing of new video frames from mpv to avoid lagging. See
+  /// the `ViewLayer.suspendDrawingNewFrames` function for details.
   func toggleWindowFullScreen() {
     guard let window = self.window else { fatalError("make sure the window exists before animating") }
 
     switch fsState {
     case .windowed:
       guard !player.isInMiniPlayer else { return }
-      if Preference.bool(for: .useLegacyFullScreen) {
-        log("Will enter legacy full screen mode")
-        self.legacyAnimateToFullscreen()
-      } else {
-        log("Requesting AppKit enter full screen mode")
-        window.toggleFullScreen(self)
+      videoView.suspendDrawingNewFrames { [self] in
+        if Preference.bool(for: .useLegacyFullScreen) {
+          log("Will enter legacy full screen mode")
+          legacyAnimateToFullscreen()
+        } else {
+          log("Requesting AppKit enter full screen mode")
+          appKitToggleWindowFullScreen()
+        }
       }
     case let .fullscreen(legacy, oldFrame):
-      if legacy {
-        log("Will exit legacy full screen mode")
-        self.legacyAnimateToWindowed(framePriorToBeingInFullscreen: oldFrame)
-      } else {
-        log("Requesting AppKit exit full screen mode")
-        window.toggleFullScreen(self)
+      videoView.suspendDrawingNewFrames { [self] in
+        if legacy {
+          log("Will exit legacy full screen mode")
+          legacyAnimateToWindowed(framePriorToBeingInFullscreen: oldFrame)
+        } else {
+          log("Requesting AppKit exit full screen mode")
+          appKitToggleWindowFullScreen()
+        }
       }
     case let .animating(toFullscreen, legacy, _):
       let legacyAppKit = legacy ? "IINA" : "AppKit"
@@ -1686,44 +1733,69 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  /// Take the window in or out of full screen mode.
+  ///
+  /// This function calls
+  /// [NSWindow.toggleFullScreen](https://developer.apple.com/documentation/appkit/nswindow/togglefullscreen(_:))
+  /// to use the AppKit supplied full screen experience.
+  private func appKitToggleWindowFullScreen() {
+    guard let window else { fatalError("make sure the window exists before animating") }
+    guard Preference.bool(for: PK.disableAnimations) else {
+      window.toggleFullScreen(self)
+      return
+    }
+    NSAnimationContext.beginGrouping()
+    defer { NSAnimationContext.endGrouping() }
+    NSAnimationContext.current.duration = 0
+    window.toggleFullScreen(self)
+  }
+
   private func restoreDockSettings() {
     log("Restoring dock settings")
     NSApp.presentationOptions.remove(.autoHideMenuBar)
     NSApp.presentationOptions.remove(.autoHideDock)
   }
 
+  /// Takes the window out of a custom fullscreen mode.
+  /// - Important: This function is _very sensitive_ to changes. See `legacyAnimateToFullscreen`.
   private func legacyAnimateToWindowed(framePriorToBeingInFullscreen: NSRect) {
-    guard let window = self.window else { fatalError("make sure the window exists before animating") }
-
-    // call delegate
-    windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
-    // stylemask
-    window.styleMask.remove(.borderless)
-    window.styleMask.insert(.resizable)
-    window.styleMask.insert(.titled)
-    window.hasShadow = true
-    (window as! MainWindow).forceKeyAndMain = false
-    window.level = .normal
-
-    restoreDockSettings()
-    // restore window frame and aspect ratio
-    let videoSize = player.videoSizeForDisplay
-    let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
-    let useAnimation = {
-      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
-      guard #unavailable(macOS 26) else { return false }
-      return !Preference.bool(for: .disableAnimations)
-    }()
-    if useAnimation {
-      // firstly resize to a big frame with same aspect ratio for better visual experience
-      let aspectFrame = aspectRatio.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
-      window.setFrame(aspectFrame, display: true, animate: false)
+    guard let window = self.window as? MainWindow else {
+      fatalError("make sure the window exists before animating")
     }
-    // then animate to the original frame
-    window.setFrame(framePriorToBeingInFullscreen, display: true, animate: useAnimation)
-    setWindowAspectRatio(aspectRatio)
-    // call delegate
-    windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+    // An animation group is used to wait until animations are finished before resuming drawing of
+    // new frames.
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = AccessibilityPreferences.adjustedDuration(UIAnimationDuration)
+
+      // Certain videos will display a distorted picture while animating using the default layer
+      // contents placement policy scaleAxesIndependently.
+      videoView.layerContentsPlacement = .scaleProportionallyToFill
+
+      // call delegate
+      windowWillExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+
+      // stylemask
+      window.styleMask.remove(.borderless)
+      window.styleMask.insert(.resizable)
+      window.styleMask.insert(.titled)
+      window.hasShadow = true
+      window.forceKeyAndMain = false
+      window.level = .normal
+
+      restoreDockSettings()
+
+      // restore window frame and aspect ratio
+      window.animator().setFrame(framePriorToBeingInFullscreen, display: true)
+      let videoSize = player.videoSizeForDisplay
+      let aspectRatio = NSSize(width: videoSize.0, height: videoSize.1)
+      window.aspectRatio = aspectRatio
+
+      // call delegate
+      windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
+    }, completionHandler: { [self] in
+      videoView.layerContentsPlacement = .scaleAxesIndependently
+      videoView.resumeDrawingNewFrames()
+    })
   }
 
   /// Set the window frame and if needed the content view frame to appropriately use the full screen.
@@ -1731,51 +1803,93 @@ class MainWindowController: PlayerWindowController {
   /// For screens that contain a camera housing the content view will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
     guard let window = self.window else { return }
-    let useAnimation = {
-      // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
-      guard #unavailable(macOS 26) else { return false }
-      return !Preference.bool(for: .disableAnimations)
-    }()
     let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: useAnimation)
+    window.animator().setFrame(screen.frame, display: true)
     guard let unusable = screen.cameraHousingHeight else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
     // frame to avoid having part of the window obscured by the camera housing.
     let view = window.contentView!
-    view.setFrameSize(NSMakeSize(view.frame.width, screen.frame.height - unusable))
+    view.animator().setFrameSize(NSMakeSize(view.frame.width, screen.frame.height - unusable))
   }
 
+  /// Takes the window into a custom fullscreen mode.
+  ///
+  /// If the IINA `Use legacy full screen` setting is enabled this function will be used to enter full screen mode instead of calling
+  /// the AppKit method
+  /// [toggleFullScreen](https://developer.apple.com/documentation/appkit/nswindow/togglefullscreen(_:))
+  /// that uses the system provided full screen experience. Some users do not like that the system provided full screen mode is tied to
+  /// [spaces](https://support.apple.com/guide/mac-help/work-in-multiple-spaces-mh14112/mac). Others
+  /// appreciate that legacy full screen mode provides the ability to fully disable animations when entering and exiting full screen.
+  /// - Important: This function is _very sensitive_ to changes. Any changes in this area of IINA _must be_ extensively tested.
+  ///     There are timing related problems lurking that only show up with some videos on some screens. Sometimes the problems
+  ///     only show up under repeated testing.
+  ///
+  ///     In macOS Big Sur Apple broke legacy full screen mode by changing AppKit to refuse to allow use of the window style mask
+  ///     [fullScreen](https://developer.apple.com/documentation/appkit/nswindow/stylemask-swift.struct/fullscreen)
+  ///     outside of the system provided full screen experience. For this reason IINA must use a combination of other style masks to
+  ///     achieve the same effect. One part of this is removing / inserting the
+  ///     [titled](https://developer.apple.com/documentation/appkit/nswindow/stylemask-swift.struct/titled)
+  ///     style mask. Unfortunately AppKit behavior differs from when the status of a window's title is changed internally by AppKit
+  ///     due to the presence or absence of the `fullScreen` style versus when the `titled` style mask is removed and
+  ///     inserted. Removing or inserting `titled` in the window's
+  ///     [styleMask](https://developer.apple.com/documentation/appkit/nswindow/stylemask-swift.property)
+  ///     causes AppKit to erase and redraw the window. This causes the black background of the views to be drawn before drawing
+  ///     the views. The result is an irritating momentary black flash that disturbs the entering / exiting transition.
+  ///
+  ///     As a result the sequence of operations is critical and designed to minimize the time a black window is displayed before the
+  ///     views are drawn in order to make the erasing of the window imperceptible.
+  ///
+  ///     The mpv player does not suffer from this problem as it does not remove and insert the title and instead merely hides or
+  ///     shows its own custom title view.
   private func legacyAnimateToFullscreen() {
-    guard let window = self.window else { fatalError("make sure the window exists before animating") }
-    // call delegate
-    windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
-    // stylemask
-    window.styleMask.insert(.borderless)
-    window.styleMask.remove(.resizable)
-    window.styleMask.remove(.titled)
-    window.hasShadow = false
-    (window as! MainWindow).forceKeyAndMain = true
-    window.level = .floating
-
-    // cancel aspect ratio
-    window.resizeIncrements = NSSize(width: 1, height: 1)
-    // auto hide menubar and dock
-    NSApp.presentationOptions.insert(.autoHideMenuBar)
-    NSApp.presentationOptions.insert(.autoHideDock)
-    // set window frame and in some cases content view frame
-    setWindowFrameForLegacyFullScreen()
-
-    // The volume slider and the toolbar views in the floating OSC will be detached and not shown in
-    // the floating OSC if the window is too narrow. Once in full screen mode there is enough space
-    // for the full OSC to be shown. Sometimes, but not always, the subview holding the pause/resume
-    // and left/right buttons will not be centered after the OSC expands to full size. Forcing
-    // layout corrects this. See issue #5244.
-    if oscPosition == .floating {
-      fragControlView.needsLayout = true
+    guard let window = self.window as? MainWindow else {
+      fatalError("make sure the window exists before animating")
     }
+    // Using an animation group is important for Macs with a camera housing as it combines setting
+    // the window's frame with resizing the content view to stay within the safe area. This is also
+    // used to wait until animations are finished before resuming drawing of new frames.
+    NSAnimationContext.runAnimationGroup({ context in
+      context.duration = AccessibilityPreferences.adjustedDuration(UIAnimationDuration)
 
-    // call delegate
-    windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+      // Certain videos will display a distorted picture while animating using the default layer
+      // contents placement policy scaleAxesIndependently.
+      videoView.layerContentsPlacement = .scaleProportionallyToFill
+
+      // call delegate
+      windowWillEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+
+      // stylemask
+      window.styleMask.insert(.borderless)
+      window.styleMask.remove(.resizable)
+      window.styleMask.remove(.titled)
+      window.hasShadow = false
+      window.forceKeyAndMain = true
+      window.level = .floating
+      // cancel aspect ratio
+      window.resizeIncrements = NSSize(width: 1, height: 1)
+
+      // auto hide menubar and dock
+      NSApp.presentationOptions.insert(.autoHideMenuBar)
+      NSApp.presentationOptions.insert(.autoHideDock)
+
+      // set window frame and in some cases content view frame
+      setWindowFrameForLegacyFullScreen()
+
+      // The volume slider and the toolbar views in the floating OSC will be detached and not shown
+      // in the floating OSC if the window is too narrow. Once in full screen mode there is enough
+      // space for the full OSC to be shown. Sometimes, but not always, the subview holding the
+      // pause/resume and left/right buttons will not be centered after the OSC expands to full
+      // size. Forcing layout corrects this. See issue #5244.
+      if oscPosition == .floating {
+        fragControlView.needsLayout = true
+      }
+
+      // call delegate
+      windowDidEnterFullScreen(Notification(name: .iinaLegacyFullScreen))
+    }, completionHandler: { [self] in
+      videoView.layerContentsPlacement = .scaleAxesIndependently
+      videoView.resumeDrawingNewFrames()
+    })
   }
 
   // MARK: - Window delegate: Size
@@ -1844,11 +1958,19 @@ class MainWindowController: PlayerWindowController {
     liveText.clearAnalysis()
   }
 
-  // resize framebuffer in videoView after resizing.
+  /// A live resize operation on the window has ended.
+  ///
+  /// When resizing has finished mpv must be updated with the current window's scale.
+  /// - Important: Entering and exiting full screen mode may trigger more than one resizing sequence resulting in multiple calls to
+  ///     `updateWindowParametersForMPV`. That function calls `mpv.setDouble` to set `windowScale`. Instruments
+  ///     shows that causes a main thread micro hang of greater than 300 ms. As video rendering is suspended when entering and
+  ///     exiting full screen mode there is no need to update mpv. That will be done by `windowDidEnterFullScreen` or
+  ///     `windowDidExitFullScreen`.
   func windowDidEndLiveResize(_ notification: Notification) {
     // Must not access mpv while it is asynchronously processing stop and quit commands.
-    // See comments in windowWillExitFullScreen for details.
-    guard player.info.state.active else { return }
+    // See comments in windowWillExitFullScreen for details. This includes setting of inLiveResize
+    // because setting that property forces drawing.
+    guard player.info.state.active, !fsState.isAnimating else { return }
     videoView.videoLayer.inLiveResize = false
     updateWindowParametersForMPV()
     liveText.requestAnalysis()

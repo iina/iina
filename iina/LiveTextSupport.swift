@@ -58,8 +58,8 @@ class LiveTextController: NSObject {
     let isBottom = Preference.enum(for: .oscPosition) as Preference.OSCPosition == .bottom
     let isCompact = Preference.bool(for: .compactUI)
     let padding: CGFloat = isCompact ? 8 : 14
-    let buttomPadding: CGFloat = isBottom ? (isCompact ? 50 : 64) : padding
-    view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: padding, left: padding, bottom: buttomPadding, right: padding)
+    let bottomPadding: CGFloat = isBottom ? (isCompact ? 50 : 64) : padding
+    view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: padding, left: padding, bottom: bottomPadding, right: padding)
   }
 
   func requestAnalysis() {

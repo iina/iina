@@ -84,11 +84,8 @@ class SettingsWindow: NSWindow {
     let sidebarViewController = NSViewController()
     sidebarViewController.view = NSView()
     sidebarViewController.view.wantsLayer = true
-    let sidebarBackground = if #available(macOS 26, *) {
-      NSGlassEffectView()
-    } else {
-      NSVisualEffectView()
-    }
+    let sidebarBackground = NSVisualEffectView()
+    sidebarBackground.material = .sidebar
     sidebarViewController.view.addSubview(sidebarBackground)
     sidebarBackground.translatesAutoresizingMaskIntoConstraints = false
     sidebarBackground.padding(.all)
@@ -886,4 +883,3 @@ fileprivate extension String {
     self.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
   }
 }
-

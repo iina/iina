@@ -300,6 +300,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     self.closeButtonBackground = NSBox()
     closeButtonBackground.translatesAutoresizingMaskIntoConstraints = false
     closeButtonBackground.boxType = .custom
+    closeButtonBackground.isTransparent = false
+    closeButtonBackground.fillColor = NSColor(calibratedWhite: 0.12, alpha: 1)
     closeButtonBackground.contentViewMargins = .zero
     closeButtonBackground.cornerRadius = 10
     closeButtonBackground.titlePosition = .noTitle
@@ -322,6 +324,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       button!.bezelStyle = .smallSquare
       button!.isBordered = false
       button!.imagePosition = .imageOnly
+      button!.contentTintColor = NSColor(calibratedWhite: 0.76, alpha: 0.82)
       button!.refusesFirstResponder = true
       button!.widthAnchor.constraint(equalTo: button!.heightAnchor, multiplier: 1).isActive = true
       closeButtonBackground.contentView!.addSubview(button!)
@@ -516,8 +519,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   private func updateCloseButton() {
-    closeButtonBackground.fillColor = .controlBackgroundColor
-      .withAlphaComponent(isVideoVisible ? 0.9 : 0.2)
+    closeButtonBackground.fillColor = NSColor(calibratedWhite: 0.12, alpha: 1)
     closeButtonSizeConstraint.constant = isVideoVisible ? 13 : 12
     closeButtonSpacingConstraint.constant = isVideoVisible ? 5 : 4
   }

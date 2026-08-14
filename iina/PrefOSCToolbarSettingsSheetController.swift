@@ -150,7 +150,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   }
 
   func draggingSession(_ session: NSDraggingSession, willBeginAt screenPoint: NSPoint) {
-    if let itemBeingDragged = itemBeingDragged {
+    if let itemBeingDragged {
       // remove the dragged view and insert a placeholder at its position.
       let index = views.firstIndex(of: itemBeingDragged)!
       removeView(itemBeingDragged)
@@ -160,7 +160,7 @@ class PrefOSCToolbarCurrentItemsView: NSStackView, NSDraggingSource {
   }
 
   func draggingSession(_ session: NSDraggingSession, movedTo screenPoint: NSPoint) {
-    guard let window = window else { return }
+    guard let window else { return }
     let windowPoint = window.convertFromScreen(NSRect(origin: screenPoint, size: .zero)).origin
     let inView = frame.contains(windowPoint)
     session.animatesToStartingPositionsOnCancelOrFail = inView

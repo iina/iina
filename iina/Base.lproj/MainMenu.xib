@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="25094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25094"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -679,6 +678,10 @@ CA
                                     <action selector="dumpDebugInfo:" target="Voe-Tx-rLC" id="54x-yF-LJc"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="fa5-h1-gwZ"/>
+                            <menuItem title="Use New Settings Window" id="DrD-Zh-yWp">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="ZO8-wH-FBe"/>
                             <menuItem title="Release Highlights" id="kOx-hc-aQG">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -750,6 +753,7 @@ CA
                 <outlet property="fullScreen" destination="6Eq-ni-6hG" id="y11-Q1-drn"/>
                 <outlet property="gotoScreenshotFolder" destination="lj0-Oo-7nB" id="Jlj-kX-fv0"/>
                 <outlet property="halfSize" destination="snW-S8-Cw5" id="PDi-lV-6HL"/>
+                <outlet property="helpMenu" destination="F2S-fz-NVQ" id="4EF-3Y-jRz"/>
                 <outlet property="hideSecondSubtitles" destination="BOm-ia-wOV" id="iKO-xG-GWA"/>
                 <outlet property="hideSubtitles" destination="smo-rw-rg7" id="LQB-s7-8Yy"/>
                 <outlet property="increaseAudioDelay" destination="4ae-MT-2L1" id="nsv-LC-B9o"/>
@@ -820,6 +824,7 @@ CA
                 <outlet property="subFont" destination="rme-fr-5rr" id="fU3-xp-rD9"/>
                 <outlet property="subMenu" destination="EKp-Qx-4Mn" id="BeV-rZ-uYC"/>
                 <outlet property="subTrackMenu" destination="16p-PA-x34" id="yGc-SC-6rd"/>
+                <outlet property="useNewSettingsWindow" destination="DrD-Zh-yWp" id="9gV-gc-R5C"/>
                 <outlet property="videoFilters" destination="PyY-pR-jz7" id="QII-9H-SQV"/>
                 <outlet property="videoMenu" destination="HyV-fh-RgO" id="NtM-fw-Y8Q"/>
                 <outlet property="videoTrack" destination="j8P-Gb-HR7" id="hho-ys-R88"/>

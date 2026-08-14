@@ -299,7 +299,7 @@ extension NSMenu {
     menuItem.state = stateOn ? .on : .off
     menuItem.isEnabled = enabled
     
-    if let image = image {
+    if let image {
       menuItem.image = .sf(image)
     }
     
@@ -441,10 +441,11 @@ extension NSColor {
       var rgb: UInt64 = 0
       scanner.scanHexInt64(&rgb)
 
-      let r = Double((rgb >> 32) & 0xFF) / 255
-      let g = Double((rgb >> 16) & 0xFF) / 255
-      let b = Double((rgb >> 8) & 0xFF) / 255
-      let a = Double(rgb & 0xFF) / 255
+      // mpv hex colors are #RRGGBB (100% opaque) or #AARRGGBB (alpha first).
+      let a = hex.count <= 6 ? 1.0 : Double((rgb >> 24) & 0xFF) / 255.0
+      let r = Double((rgb >> 16) & 0xFF) / 255
+      let g = Double((rgb >> 8) & 0xFF) / 255
+      let b = Double(rgb & 0xFF) / 255
 
       self.init(red: r, green: g, blue: b, alpha: a)
     } else {
@@ -599,7 +600,6 @@ extension URL {
 
 
 extension NSTextField {
-
   func setHTMLValue(_ html: String) {
     let font = self.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
     let color = self.textColor ?? NSColor.labelColor
@@ -610,8 +610,16 @@ extension NSTextField {
       self.attributedStringValue = str
     }
   }
-
 }
+
+
+extension NSFont {
+  static func monospacedDigitFont(for size: NSControl.ControlSize) -> NSFont {
+    let fontSize = NSFont.systemFontSize(for: size)
+    return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
+  }
+}
+
 
 extension NSImage {
   var cgImage: CGImage? {
@@ -803,7 +811,7 @@ extension NSScreen {
   /// - parameter label: Label to include in the log message.
   /// - parameter screen: The `NSScreen` object to log.
   static func log(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
-    guard let screen = screen else {
+    guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
@@ -824,7 +832,7 @@ extension NSScreen {
   /// Log EDR aspects of the given `NSScreen` object.
   /// - parameter screen: The `NSScreen` object to log EDR aspects of.
   static func logEDR(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
-    guard let screen = screen else {
+    guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }

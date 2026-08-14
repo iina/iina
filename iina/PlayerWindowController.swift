@@ -71,7 +71,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   ]
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
     
     switch keyPath {
     case PK.enableToneMapping.rawValue,
@@ -131,12 +131,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
   }
 
-  @IBOutlet weak var volumeSlider: NSSlider!
-  @IBOutlet weak var muteButton: NSButton!
-  @IBOutlet weak var playButton: NSButton!
-  @IBOutlet weak var playSlider: PlaySlider!
-  @IBOutlet weak var rightLabel: DurationDisplayTextField!
-  @IBOutlet weak var leftLabel: DurationDisplayTextField!
+  var volumeSlider: NSSlider!
+  var muteButton: VolumeButton!
+  var playButton: NSButton!
+  var playSlider: PlaySlider!
+  var rightLabel: DurationDisplayTextField!
+  var leftLabel: DurationDisplayTextField!
 
   /** Differentiate between single clicks and double clicks. */
   internal var singleClickTimer: Timer?
@@ -181,7 +181,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     // has loaded to be able to debug such issues.
     log("Player window has been loaded")
 
-    guard let window = window else { return }
+    guard let window else { return }
     
     // Insert `menuActionHandler` into the responder chain
     menuActionHandler = MainMenuActionHandler(playerCore: player)
@@ -196,6 +196,38 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     addObserver(to: .default, forName: .iinaMediaTitleChanged, object: player) { [unowned self] _ in
         self.updateTitle()
+    }
+
+    self.playButton = NSButton(image: .play, target: self, action: #selector(playButtonAction))
+    playButton.alternateImage = .pause
+
+    self.muteButton = VolumeButton(player: player, target: self, action: #selector(muteButtonAction))
+    muteButton.size(width: 24, height: 24)
+
+    self.volumeSlider = VolumeSlider()
+    volumeSlider.translatesAutoresizingMaskIntoConstraints = false
+    volumeSlider.refusesFirstResponder = true
+    volumeSlider.controlSize = .mini
+    volumeSlider.minValue = 0
+    volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
+    volumeSlider.target = self
+    volumeSlider.action = #selector(volumeSliderChanges)
+
+    self.playSlider = PlaySlider()
+    playSlider.translatesAutoresizingMaskIntoConstraints = false
+    playSlider.refusesFirstResponder = true
+    playSlider.minValue = 0
+    playSlider.maxValue = 100
+    playSlider.target = self
+    playSlider.action = #selector(playSliderChanges)
+
+    self.leftLabel = DurationDisplayTextField(labelWithString: "-:--:--")
+    self.rightLabel = DurationDisplayTextField(labelWithString: "-:--:--")
+    [leftLabel, rightLabel].forEach { label in
+      label!.translatesAutoresizingMaskIntoConstraints = false
+      label!.controlSize = .mini
+      label!.setContentHuggingPriority(.init(251), for: .horizontal)
+      label!.wantsLayer = true
     }
 
     leftLabel.mode = .current
@@ -235,7 +267,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   internal func setMaterial(_ theme: Preference.Theme?) {
-    guard let window = window, let theme = theme else { return }
+    guard let window, let theme else { return }
 
     window.appearance = NSAppearance(iinaTheme: theme)
     window.backgroundColor = window.effectiveAppearance.isDark ? .black : .white
@@ -578,25 +610,9 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     fatalError("Must implement in the subclass")
   }
   
-  func volumeIcon() -> NSImage? {
-    guard !player.info.isMuted else { return .sf("speaker.slash.fill") }
-    let volume = Int(player.info.volume)
-    guard volume >= 0 else {
-      log("Volume level \(player.info.volume) is invalid", level: .error)
-      return nil
-    }
-    let symbol = switch Int(player.info.volume) {
-    case 0: "speaker.fill"
-    case 1...33: "speaker.wave.1.fill"
-    case 34...66: "speaker.wave.2.fill"
-    default: "speaker.wave.3.fill"
-    }
-    let configuration = NSImage.SymbolConfiguration(pointSize: 13, weight: .regular)
-    return .sf(symbol, withConfiguration: configuration)
-  }
-
   func updateVolume() {
     volumeSlider.doubleValue = player.info.volume
+    muteButton.update()
   }
   
   func updatePlayTime(withDuration: Bool, andProgressBar: Bool) {
@@ -635,7 +651,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   /** This method will not set `isOntop`! */
   func setWindowFloatingOnTop(_ onTop: Bool, updateOnTopStatus: Bool = true) {
-    guard let window = window else { return }
+    guard let window else { return }
     window.level = onTop ? .iinaFloating : .normal
     if (updateOnTopStatus) {
       self.isOntop = onTop

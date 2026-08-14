@@ -338,6 +338,7 @@ struct Preference {
 
     /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
+    static let enableNewSettings = Key("enableNewSettings")
 
     /// Workaround for issue [#4688](https://github.com/iina/iina/issues/4688)
     /// - Note: This workaround can cause significant slowdown at startup if the list of recent documents contains files on a mounted
@@ -855,21 +856,21 @@ struct Preference {
       }
     }
 
-    private func makeSymbol(_ names: [String]) -> NSImage {
-        let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-        return NSImage.sf(names, withConfiguration: configuration)!
-      }
+    private func makeSymbol(_ names: [String], size: CGFloat = 14) -> NSImage {
+      let configuration = NSImage.SymbolConfiguration(pointSize: size, weight: .medium)
+      return NSImage.sf(names, withConfiguration: configuration)!
+    }
 
     func image() -> NSImage {
       switch self {
       case .settings: return makeSymbol(["gearshape"])
       case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"])
-      case .pip: return makeSymbol(["pip.enter"])
+      case .pip: return makeSymbol(["pip.enter"], size: 13.5)
       case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"])
       case .musicMode: return makeSymbol(["microphone.dynamic.on.stand", "music.microphone", "music.mic"])
       case .subTrack: return makeSymbol(["captions.bubble.fill"])
       case .screenshot: return makeSymbol(["camera.shutter.button", "camera.fill"])
-      case .plugins: return makeSymbol(["puzzlepiece.extension", "puzzlepiece"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension", "puzzlepiece"], size: 13.5)
       case .liveText: return makeSymbol(["document.viewfinder", "doc.viewfinder", "doc.text.viewfinder"])
       }
     }
@@ -878,9 +879,9 @@ struct Preference {
       switch self {
       case .settings: return makeSymbol(["gearshape.fill"])
       case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"])
-      case .pip: return makeSymbol(["pip.exit"])
+      case .pip: return makeSymbol(["pip.exit"], size: 13.5)
       case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"])
-      case .plugins: return makeSymbol(["puzzlepiece.extension.fill", "puzzlepiece.fill"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension.fill", "puzzlepiece.fill"], size: 13.5)
       case .liveText: return makeSymbol(["viewfinder.circle.fill"])
       default: return nil
       }
@@ -1009,6 +1010,16 @@ struct Preference {
   static var isLiveTextEnabled: Bool {
     guard isLiveTextAvailable else { return false }
     return Preference.bool(for: .enableLiveText)
+  }
+  
+  // Expected to be removed later when the new settings window is stable
+  static var enableNewSettings: Bool {
+    set {
+      Preference.set(newValue, for: .enableNewSettings)
+    }
+    get {
+      Preference.bool(for: .enableNewSettings)
+    }
   }
 
   // MARK: - Defaults
@@ -1188,6 +1199,7 @@ struct Preference {
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
     .iinaEnablePluginSystem: false,
+    .enableNewSettings: true,
 
     .keepOpenOnFileEnd: true,
     .quitWhenNoOpenedWindow: false,

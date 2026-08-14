@@ -8,6 +8,16 @@
 
 import Cocoa
 
+fileprivate let isMacOS26: Bool = {
+  if #available(macOS 27.0, *) {
+    return false
+  }
+  if #unavailable(macOS 26.0) {
+    return false
+  }
+  return true
+}()
+
 fileprivate extension NSView {
   var allSubviews: [NSView] {
     var subviews = [NSView]()
@@ -107,7 +117,7 @@ class SettingsWindow: NSWindow {
     sidebarBackground.addSubview(sidebarScrollView)
     sidebarScrollView.padding(.bottom, .horizontal)
 
-    if #available(macOS 26, *) {
+    if isMacOS26 {
       searchBox.padding(.top(40), .horizontal(8))
       sidebarScrollView.spacing(.top(16), to: searchBox)
     } else {
@@ -243,8 +253,7 @@ class SettingsWindow: NSWindow {
       }
     }
 
-    guard let firstVisibleTitle = firstVisibleTitle,
-          let sectionNameStackView = sectionNameStackView else { return }
+    guard let firstVisibleTitle, let sectionNameStackView else { return }
 
     let titleIndex = sectionNames.firstIndex(of: firstVisibleTitle) ?? 0
 
@@ -307,7 +316,7 @@ extension SettingsWindow {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-      guard let maskRect = maskRect else { return }
+      guard let maskRect else { return }
       NSGraphicsContext.saveGraphicsState()
       let borderPath = NSBezierPath(roundedRect: maskRect, xRadius: 8, yRadius: 8)
       borderPath.lineWidth = 4

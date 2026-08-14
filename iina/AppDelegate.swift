@@ -771,7 +771,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
-      preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      if Preference.enableNewSettings {
+        SettingsWindow.default.installPlugin(localPackageURL: pluginPackageURL)
+      } else {
+        preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      }
       return
     }
 

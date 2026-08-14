@@ -1574,6 +1574,7 @@ class MainWindowController: PlayerWindowController {
     setWindowToolbar()
     fadeableViews.update()
     showUI()
+    updateTimer()
 
     if player.info.state == .playing {
       setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
@@ -1725,6 +1726,7 @@ class MainWindowController: PlayerWindowController {
     setWindowToolbar()
     fadeableViews.update()
     showUI()
+    updateTimer()
 
     additionalInfoView.update()
 

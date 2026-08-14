@@ -62,6 +62,7 @@ class SettingsWindow: NSWindow {
   private var currentCompletionResults: [SettingsSearch.Entry] = []
 
   private var pendingHighlightItem: (id: Int, parentId: Int?)?
+  private let observedPrefKeys: [Preference.Key] = [.themeMaterial]
 
   init(_ pages: [SettingsPage]) {
     self.pages = pages
@@ -77,6 +78,7 @@ class SettingsWindow: NSWindow {
                backing: .buffered, defer: false)
 
     self.isReleasedWhenClosed = false
+    updateAppearance()
 
     let splitViewController = NSSplitViewController()
     self.contentViewController = splitViewController
@@ -174,6 +176,26 @@ class SettingsWindow: NSWindow {
     sidebarList.addTableColumn(col)
     sidebarScrollView.documentView = sidebarList
     sidebarList.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+
+    observedPrefKeys.forEach { key in
+      UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    }
+  }
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard keyPath == Preference.Key.themeMaterial.rawValue else { return }
+    updateAppearance()
+  }
+
+  deinit {
+    observedPrefKeys.forEach { key in
+      UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
+    }
+  }
+
+  private func updateAppearance() {
+    let theme = Preference.enum(for: .themeMaterial) as Preference.Theme
+    appearance = NSAppearance(iinaTheme: theme)
   }
 
   func loadPage(at index: Int) {

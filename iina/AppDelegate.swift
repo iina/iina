@@ -980,7 +980,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @objc func showPluginPreferences(_ sender: NSMenuItem) {
-    preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
+    if Preference.enableNewSettings {
+      SettingsWindow.default.show()
+      SettingsWindow.default.navigateTo(page: "plugin")
+    } else {
+      preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
+    }
   }
 
   @IBAction func showVideoFilterWindow(_ sender: AnyObject) {

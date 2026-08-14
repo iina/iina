@@ -86,6 +86,7 @@ class SettingsPageAudio: SettingsPage {
           .bindSwitchTo(.enableInitialVolume)
         SettingsItem.Input()
           .bindTo(.maxVolume)
+          .range(100...1000)
           .hasDescription()
       }
 

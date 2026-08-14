@@ -821,6 +821,7 @@ struct SettingsItem {
     private var customBinding = false
     private var customBindingBlock: ((NSTextField) -> Void)?
     private var isLongText = false
+    private var range: ClosedRange<Double>?
 
     private var cachedStepperValue: Double?
     private var stepper: NSStepper?
@@ -852,13 +853,16 @@ struct SettingsItem {
       return self
     }
 
+    func range(_ range: ClosedRange<Double>) -> Self {
+      self.range = range
+      return self
+    }
+
     @objc func stepperValueChanged(sender: NSStepper) {
       guard let cachedStepperValue else { return }
-      if cachedStepperValue < sender.doubleValue {
-        textField.doubleValue += sender.increment
-      } else {
-        textField.doubleValue -= sender.increment
-      }
+      let increment = cachedStepperValue < sender.doubleValue ? sender.increment : -sender.increment
+      let value = textField.doubleValue + increment
+      textField.doubleValue = range.map { value.clamped(to: $0) } ?? value
       self.cachedStepperValue = sender.doubleValue
     }
 
@@ -869,6 +873,13 @@ struct SettingsItem {
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
+      if let range {
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = false
+        formatter.minimum = NSNumber(value: range.lowerBound)
+        formatter.maximum = NSNumber(value: range.upperBound)
+        textField.formatter = formatter
+      }
       let stack = NSStackView(views: [textField])
       if let stepper {
         stepper.controlSize = controlSize

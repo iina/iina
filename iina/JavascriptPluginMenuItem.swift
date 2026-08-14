@@ -63,7 +63,7 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
 
   convenience init(title: String, action: JSValue?, selected: Bool, enabled: Bool, key: String?, owner: JavascriptAPIMenu) {
     self.init(title: title, selected: selected, enabled: enabled, keyBinding: key)
-    if let action = action {
+    if let action {
       self.action = JSManagedValue(value: action)
       JSContext.current()!.virtualMachine.addManagedReference(self.action, withOwner: owner)
     }
@@ -76,7 +76,7 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
 
   /// Return false to indicate that the call failed.
   func callAction() -> Bool {
-    if let action = action, let value = action.value {
+    if let action, let value = action.value {
       // if the value is null or undefined, the item has an empty action.
       if value.isNull || value.isUndefined { return true }
       return value.call(withArguments: [self]) != nil

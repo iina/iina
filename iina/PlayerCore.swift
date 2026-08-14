@@ -391,7 +391,7 @@ class PlayerCore: NSObject {
   // MARK: - Control
 
   private func open(_ url: URL?, shouldAutoLoad: Bool = false) {
-    guard let url = url else {
+    guard let url else {
       log("empty file path or url", level: .error)
       return
     }
@@ -1240,12 +1240,12 @@ class PlayerCore: NSObject {
   func getLoopMode() -> LoopMode {
     let loopFileStatus = mpv.getString(MPVOption.PlaybackControl.loopFile)
     guard loopFileStatus != "inf" else { return .file }
-    if let loopFileStatus = loopFileStatus, let count = Int(loopFileStatus), count != 0 {
+    if let loopFileStatus, let count = Int(loopFileStatus), count != 0 {
       return .file
     }
     let loopPlaylistStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     guard loopPlaylistStatus != "inf", loopPlaylistStatus != "force" else { return .playlist }
-    guard let loopPlaylistStatus = loopPlaylistStatus, let count = Int(loopPlaylistStatus) else {
+    guard let loopPlaylistStatus, let count = Int(loopPlaylistStatus) else {
       return .off
     }
     return count == 0 ? .off : .playlist
@@ -1299,7 +1299,7 @@ class PlayerCore: NSObject {
   }
 
   func setSpeed(_ speed: Double) {
-    let speed = speed < AppData.mpvMinPlaybackSpeed ? AppData.mpvMinPlaybackSpeed : speed
+    let speed = max(AppData.mpvMinPlaybackSpeed, speed)
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
 
@@ -1412,7 +1412,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     let subFont = mpv.getString(MPVOption.Subtitles.subFont)
     Utility.quickFontPickerWindow(selecting: subFont) { [self] result in
-      if let result = result {
+      if let result {
         setSubFont(result)
       }
     }
@@ -1431,7 +1431,7 @@ class PlayerCore: NSObject {
   func loadExternalSubFile(_ url: URL, delay: Bool = false, suppressError: Bool = false) {
     var track: MPVTrack?
     info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.path }) }
-    if let track = track {
+    if let track {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
     }
@@ -3004,7 +3004,7 @@ class PlayerCore: NSObject {
                              change: [NSKeyValueChangeKey: Any]?,
                              context: UnsafeMutableRawPointer?) {
     // The following guards are sanity checks and should never report an error.
-    guard let keyPath = keyPath else {
+    guard let keyPath else {
       log("Observed key path is missing", level: .error)
       return
     }
@@ -3170,7 +3170,7 @@ extension PlayerCore: FFmpegControllerDelegate {
   func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
     guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
     log("Got new thumbnails, progress \(progress)")
-    if let thumbnails = thumbnails {
+    if let thumbnails {
       info.$thumbnails.withLock { $0.append(contentsOf: thumbnails) }
     }
     info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)

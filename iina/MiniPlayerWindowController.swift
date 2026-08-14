@@ -422,7 +422,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   func windowDidEndLiveResize(_ notification: Notification) {
-    guard player.info.state.active, let window = window else { return }
+    guard player.info.state.active, let window else { return }
     let windowHeight = normalWindowHeight()
     if isPlaylistVisible {
       // hide
@@ -502,7 +502,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   override func handleVideoSizeChange() {
-    guard let window = window else { return }
+    guard let window else { return }
     let (width, height) = videoSizeForDisplayInMusicMode()
     let aspect = CGFloat(width) / CGFloat(height)
     let currentHeight = videoView.frame.height
@@ -554,7 +554,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   func setToInitialWindowSize(display: Bool = true, animate: Bool = true) {
-    guard let window = window else { return }
+    guard let window else { return }
     window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: display, animate: animate)
   }
 
@@ -641,7 +641,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   @IBAction func togglePlaylist(_ sender: Any) {
-    guard let window = window else { return }
+    guard let window else { return }
     if isPlaylistVisible {
       // hide
       isPlaylistVisible = false
@@ -660,7 +660,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   @IBAction func toggleVideoView(_ sender: Any) {
-    guard let window = window else { return }
+    guard let window else { return }
     isVideoVisible = !isVideoVisible
     videoWrapperViewBottomConstraint.isActive = isVideoVisible
     controlViewTopConstraint.isActive = !isVideoVisible

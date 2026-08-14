@@ -230,8 +230,10 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
       loadConfigFile(fallbackDefault)
     }
 
-    guard let configName = configName,
-          let confFilePath = getFilePath(forConfig: configName, showAlert: false) else { fallback(); return }
+    guard let configName, let confFilePath = getFilePath(forConfig: configName, showAlert: false) else {
+      fallback()
+      return
+    }
 
     populateChooser(select: configName)
     currentConfName = configName
@@ -263,7 +265,7 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
                    action: #selector(configSelected), target: self, obj: name)
     }
 
-    if let currentConfName = currentConfName {
+    if let currentConfName {
       chooserPopupButton.selectItem(withTitle: currentConfName)
     }
   }

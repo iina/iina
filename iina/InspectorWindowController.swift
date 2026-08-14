@@ -462,7 +462,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   }
 
   func windowWillResize(_ sender: NSWindow, to newWindowSize: NSSize) -> NSSize {
-    if let window = window, window.inLiveResize {
+    if let window, window.inLiveResize {
       /// Table size will change with window size, so need to find the new table width from `newWindowSize`.
       /// We know that our window's width is composed of 2 things: the table width + all other fixed "non-table" stuff.
       /// We first find the non-table width by subtracting current table size from current window size.
@@ -477,7 +477,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   }
 
   func windowDidResize(_ notification: Notification) {
-    if let window = window, window.inLiveResize {
+    if let window, window.inLiveResize {
       let tableWidth = watchTableView.superview!.frame.width
       resizeTableColumns(forTableWidth: tableWidth)
     }

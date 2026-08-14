@@ -91,7 +91,7 @@ class WebSocketServer {
 
     func receive() {
        connection.receiveMessage { [unowned self] (data, context, isComplete, error) in
-        if let data = data, let context = context {
+        if let data, let context {
           // handle ping frames
           if let metadata = context.protocolMetadata as? [NWProtocolWebSocket.Metadata],
              metadata[0].opcode == .ping {

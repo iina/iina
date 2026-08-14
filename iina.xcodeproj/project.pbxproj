@@ -303,7 +303,6 @@
 		84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84F5D49C1E44E9A50060A838 /* KeyBinding.strings */; };
 		84F5D4A01E44F9DB0060A838 /* KeyBindingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */; };
 		84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */; };
-		84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */; };
 		84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7258E1D486185000DEF1B /* MPVProperty.swift */; };
 		84FBCB381EEACDDD0076C77C /* FFmpegController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FBCB371EEACDDD0076C77C /* FFmpegController.m */; };
 		84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */; };
@@ -401,6 +400,7 @@
 		E3A239B12FCB4D0900CE6ACC /* SidebarPane.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239B02FCB4D0300CE6ACC /* SidebarPane.swift */; };
 		E3A239C12FCB4D2400CE6ACC /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A239C02FCB4D2400CE6ACC /* SidebarController.swift */; };
 		E3AD62772FF4C9BE00D2CAC5 /* VerbatimStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = E3AD62762FF4C9BE00D2CAC5 /* VerbatimStrings.strings */; };
+		E3AD62792FF8C19A00D2CAC5 /* VolumeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AD62782FF8C19600D2CAC5 /* VolumeButton.swift */; };
 		E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3B3DD5920FDB8A600325184 /* PreferenceWindowController.xib */; };
 		E3B93C872FE9F77600803513 /* InteractiveMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B93C862FE9F77000803513 /* InteractiveMode.swift */; };
 		E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA79EC2131443A00529D99 /* OpenURLWindowController.swift */; };
@@ -1576,7 +1576,6 @@
 		84F5D49D1E44E9A90060A838 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		84F5D49F1E44F9DB0060A838 /* KeyBindingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingItem.swift; sourceTree = "<group>"; };
 		84F5D4A11E4796F50060A838 /* KeyBindingTranslator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBindingTranslator.swift; sourceTree = "<group>"; };
-		84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VolumeSliderCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		84F7258E1D486185000DEF1B /* MPVProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVProperty.swift; sourceTree = "<group>"; };
 		84FBCB361EEACDDD0076C77C /* FFmpegController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFmpegController.h; sourceTree = "<group>"; };
 		84FBCB371EEACDDD0076C77C /* FFmpegController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFmpegController.m; sourceTree = "<group>"; };
@@ -1812,6 +1811,7 @@
 		E3A239B02FCB4D0300CE6ACC /* SidebarPane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarPane.swift; sourceTree = "<group>"; };
 		E3A239C02FCB4D2400CE6ACC /* SidebarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
 		E3AD62762FF4C9BE00D2CAC5 /* VerbatimStrings.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = VerbatimStrings.strings; sourceTree = "<group>"; };
+		E3AD62782FF8C19600D2CAC5 /* VolumeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeButton.swift; sourceTree = "<group>"; };
 		E3B3DD5820FDB8A600325184 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PreferenceWindowController.xib; sourceTree = "<group>"; };
 		E3B3DD5B20FDB8A900325184 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/PreferenceWindowController.strings"; sourceTree = "<group>"; };
 		E3B93C862FE9F77000803513 /* InteractiveMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveMode.swift; sourceTree = "<group>"; };
@@ -2467,6 +2467,7 @@
 		84D377681D7413D8007F7396 /* Accessories */ = {
 			isa = PBXGroup;
 			children = (
+				E3AD62782FF8C19600D2CAC5 /* VolumeButton.swift */,
 				E39EA3522E7CFD5600E0BD32 /* FixedProgressBar.swift */,
 				51096C0A2CD88BEC00702C31 /* MPVOptionDefaults.swift */,
 				E3DBD23C218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.swift */,
@@ -2476,7 +2477,6 @@
 				51E63DFA29CFB031008AFC20 /* PlaySlider.swift */,
 				51E63DFC29CFB04B008AFC20 /* PlaySliderLoopKnob.swift */,
 				8461C52D1D45FFF6006E91FF /* PlaySliderCell.swift */,
-				84F725551D4783EE000DEF1B /* VolumeSliderCell.swift */,
 				8487BEC01D744FA800FD17B0 /* FlippedView.swift */,
 				84817C971DBDCE4300CC2279 /* RoundedColorWell.swift */,
 				84AABE921DBFAF1A00D138FD /* FontPickerWindowController.swift */,
@@ -3135,7 +3135,6 @@
 				E3785B072A83039600787CB7 /* JavascriptAPIWebSocket.swift in Sources */,
 				E342832F20B7149800139865 /* Logger.swift in Sources */,
 				516B264D2EDA579700E3CB69 /* MemoryUsage.swift in Sources */,
-				84F725561D4783EE000DEF1B /* VolumeSliderCell.swift in Sources */,
 				845040401E0ACADD0079C194 /* MPVNode.swift in Sources */,
 				84795C3A1E083EE30059A648 /* PrefControlViewController.swift in Sources */,
 				E38BA1C4254110BE000B551D /* JavascriptMessageHub.swift in Sources */,
@@ -3156,6 +3155,7 @@
 				E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */,
 				E38099CA2FC05B2E00D3333E /* SettingsPageUI.swift in Sources */,
 				E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */,
+				E3AD62792FF8C19A00D2CAC5 /* VolumeButton.swift in Sources */,
 				E3A239AC2FC70EC300CE6ACC /* AdditionalInfoView.swift in Sources */,
 				E3C2280B2FDFB7C7009A1A89 /* SidebarAudioPane.swift in Sources */,
 				E31E63012FDB96F0005527B2 /* FadeableViewController.swift in Sources */,

@@ -870,6 +870,7 @@ class PlayerCore: NSObject {
     miniPlayer.videoViewAspectConstraint?.isActive = false
     miniPlayer.videoViewAspectConstraint = nil
     mainWindow.addVideoViewToWindow()
+    mainWindow.oscFloatingView.updatePosition()
 
     // hide mini player
     miniPlayer.window?.orderOut(nil)

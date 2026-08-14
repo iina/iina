@@ -8,6 +8,16 @@
 
 import Cocoa
 
+fileprivate let isMacOS26: Bool = {
+  if #available(macOS 27.0, *) {
+    return false
+  }
+  if #unavailable(macOS 26.0) {
+    return false
+  }
+  return true
+}()
+
 fileprivate extension NSView {
   var allSubviews: [NSView] {
     var subviews = [NSView]()
@@ -107,7 +117,7 @@ class SettingsWindow: NSWindow {
     sidebarBackground.addSubview(sidebarScrollView)
     sidebarScrollView.padding(.bottom, .horizontal)
 
-    if #available(macOS 26, *) {
+    if isMacOS26 {
       searchBox.padding(.top(40), .horizontal(8))
       sidebarScrollView.spacing(.top(16), to: searchBox)
     } else {

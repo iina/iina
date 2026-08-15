@@ -9,6 +9,7 @@
 import Foundation
 
 class DurationDisplayTextField: NSTextField {
+  static let framePrecision: UInt = 4
   enum DisplayMode {
     case current
     case duration // displays the duration of the movie
@@ -20,6 +21,7 @@ class DurationDisplayTextField: NSTextField {
   var duration: VideoTime = .zero
   var current: VideoTime = .zero
   var remaining: VideoTime = .zero
+  var frameRate: Double?
 
   override init(frame frameRect: NSRect) {
     super.init(frame: .zero)
@@ -42,23 +44,24 @@ class DurationDisplayTextField: NSTextField {
   }
 
   func updateText(with duration: VideoTime, given current: VideoTime,
-                  and remaining: VideoTime) {
+                  and remaining: VideoTime, frameRate: Double? = nil) {
     self.duration = duration
     self.current = current
     self.remaining = remaining
+    self.frameRate = frameRate
     updateText()
   }
   
   private func updateText() {
-    let precision = DurationDisplayTextField.precision
+    let precision = displayPrecision
     let stringValue: String
     switch mode {
     case .current:
-      stringValue = current.stringRepresentationWithPrecision(precision)
+      stringValue = current.stringRepresentationWithPrecision(precision, frameRate: frameRate)
     case .duration:
-      stringValue = duration.stringRepresentationWithPrecision(precision)
+      stringValue = duration.stringRepresentationWithPrecision(precision, frameRate: frameRate)
     case .remaining:
-      stringValue = "-\(remaining.stringRepresentationWithPrecision(precision))"
+      stringValue = "-\(remaining.stringRepresentationWithPrecision(precision, frameRate: frameRate))"
     }
     self.stringValue = stringValue
   }
@@ -76,7 +79,7 @@ class DurationDisplayTextField: NSTextField {
   }
 
   override func rightMouseDown(with event: NSEvent) {
-    let precision = DurationDisplayTextField.precision
+    let precision = displayPrecision
     let menu = NSMenu(title: "Time label settings")
     menu.addItem(withTitle: NSLocalizedString("osc.precision", comment: "Precision"))
     ["1s", "100ms", "10ms", "1ms"].enumerated().forEach { (index, key) in
@@ -85,7 +88,20 @@ class DurationDisplayTextField: NSTextField {
                    target: self, tag: index,
                    stateOn: precision == index)
     }
+    if let frameRate, frameRate > 0 {
+      menu.addItem(withTitle: NSLocalizedString("osc.1frame", comment: "1 frame"),
+                   action: #selector(self.setPrecision(_:)),
+                   target: self, tag: Int(Self.framePrecision),
+                   stateOn: precision == Self.framePrecision)
+    }
     NSMenu.popUpContextMenu(menu, with: event, for: self)
+  }
+
+  private var displayPrecision: UInt {
+    if DurationDisplayTextField.precision == Self.framePrecision && (frameRate ?? 0) <= 0 {
+      return 3
+    }
+    return DurationDisplayTextField.precision
   }
 
   override func touchesBegan(with event: NSEvent) {

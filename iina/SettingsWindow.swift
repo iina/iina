@@ -648,6 +648,14 @@ extension SettingsWindow {
       sidebarList.selectRowIndexes(IndexSet(integer: selectIdx), byExtendingSelection: false)
     }
   }
+
+  func installPlugin(localPackageURL url: URL) {
+    show()
+    navigateTo(page: "plugin")
+    if let pluginPage = pages.first(where: { $0.identifier == "plugin" }) as? SettingsPagePlugin {
+      pluginPage.installPlugin(localPackageURL: url)
+    }
+  }
 }
 
 

@@ -161,7 +161,7 @@ class SettingsWindow: NSWindow {
     self.isMovableByWindowBackground = true
     self.titlebarAppearsTransparent = true
     self.toolbarStyle = .unified
-    let toolbar = NSToolbar()
+    let toolbar = NSToolbar(identifier: "SettingsWindowToolbar")
     toolbar.allowsUserCustomization = false
     toolbar.delegate = self
     toolbar.displayMode = .iconOnly

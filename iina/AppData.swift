@@ -69,6 +69,7 @@ struct AppData {
   static let gainAdjustmentHelpLink = "https://mpv.io/manual/stable/#options-replaygain"
   static let gaplessAudioHelpLink = "https://mpv.io/manual/stable/#options-gapless-audio"
   static let audioDriverHellpLink = "https://mpv.io/manual/stable/#audio-output-drivers-coreaudio"
+  static let spdifOutputHelpLink = "https://mpv.io/manual/stable/#options-audio-spdif"
 
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360

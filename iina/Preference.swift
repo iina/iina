@@ -198,6 +198,8 @@ struct Preference {
     static let spdifAC3 = Key("spdifAC3")
     static let spdifDTS = Key("spdifDTS")
     static let spdifDTSHD = Key("spdifDTSHD")
+    static let spdifEAC3 = Key("spdifEAC3")
+    static let spdifTRUEHD = Key("spdifTRUEHD")
 
     static let audioDevice = Key("audioDevice")
     static let audioDeviceDesc = Key("audioDeviceDesc")
@@ -1131,6 +1133,8 @@ struct Preference {
     .spdifAC3: false,
     .spdifDTS: false,
     .spdifDTSHD: false,
+    .spdifEAC3: false,
+    .spdifTRUEHD: false,
     .audioDevice: "auto",
     .audioDeviceDesc: "Autoselect device",
     .enableInitialVolume: false,
@@ -1461,6 +1465,8 @@ struct Preference {
            .spdifAC3,
            .spdifDTS,
            .spdifDTSHD,
+           .spdifEAC3,
+           .spdifTRUEHD,
            .subBold,
            .subItalic,
            .subScaleWithWindow,

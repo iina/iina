@@ -202,7 +202,7 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   }
 
   private static func parsePastedOption(_ string: String) -> [String]? {
-    let parts = string.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
+    let parts = string.split(separator: "=", omittingEmptySubsequences: false)
     guard parts.count == 2 else { return nil }
 
     let whitespaceAndNewlines = CharacterSet.whitespacesAndNewlines

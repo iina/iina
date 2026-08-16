@@ -417,12 +417,25 @@ class MPVController: NSObject {
                   level: .verbose)
     setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax, level: .verbose)
 
-    var spdif: [String] = []
-    if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
-    if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
-    if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
-    chkErr(setOptionString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","),
-                           verboseIfDefault: true))
+    let spdifValue = { (key: Preference.Key) -> String in
+      var spdif: [String] = []
+      if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
+      if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
+      if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
+      if Preference.bool(for: PK.spdifEAC3) { spdif.append("eac3") }
+      if Preference.bool(for: PK.spdifTRUEHD) { spdif.append("truehd") }
+      return spdif.joined(separator: ",")
+    }
+    setUserOption(PK.spdifAC3, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifDTS, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifDTSHD, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifEAC3, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifTRUEHD, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
 
     setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice,
                   verboseIfDefault: true)

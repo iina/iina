@@ -657,7 +657,6 @@ class PlayerCore: NSObject {
     mpv.mpvInit()
     events.emit(.mpvInitialized)
 
-    return
     let audioDevice = Preference.string(for: .audioDevice)!
     if !getAudioDevices().contains(where: { $0.name == audioDevice }) {
       log("Audio device configured in settings not found, will default to auto:\n  \(audioDevice)")
@@ -1903,7 +1902,6 @@ class PlayerCore: NSObject {
   /// [--ao](https://mpv.io/manual/stable/#audio-output-drivers-ao).
   /// - Returns: An array of `MPVAudioDevice` objects  that identify the available audio devices.
   func getAudioDevices() -> [MPVAudioDevice] {
-    return []
     let raw = mpv.getNode(MPVProperty.audioDeviceList)
     guard let list = raw as? [[String: String]] else { return [] }
     let ignore = Preference.bool(for: .audioDriverEnableAVFoundation) ? "coreaudio" : "avfoundation"

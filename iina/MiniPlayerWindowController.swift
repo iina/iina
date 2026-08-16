@@ -32,7 +32,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   var backgroundView: NSVisualEffectView!
   var closeButtonView: NSView!
-  var closeButtonBackground: NSBox!
+  var closeButtonBackground: NSVisualEffectView!
   var closeButton: NSButton!
   var closeButtonSizeConstraint: NSLayoutConstraint!
   var closeButtonSpacingConstraint: NSLayoutConstraint!
@@ -297,13 +297,15 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     cv.addSubview(closeButtonView)
     closeButtonView.padding(.top(6), .leading(8))
 
-    self.closeButtonBackground = NSBox()
+    self.closeButtonBackground = NSVisualEffectView()
     closeButtonBackground.translatesAutoresizingMaskIntoConstraints = false
-    closeButtonBackground.boxType = .custom
-    closeButtonBackground.contentViewMargins = .zero
-    closeButtonBackground.cornerRadius = 10
-    closeButtonBackground.titlePosition = .noTitle
-    closeButtonBackground.borderColor = .clear
+    closeButtonBackground.blendingMode = .withinWindow
+    closeButtonBackground.material = .popover
+    closeButtonBackground.state = .active
+    closeButtonBackground.clipsToBounds = true
+    closeButtonBackground.roundCorners(withRadius: 10)
+    closeButtonBackground.wantsLayer = true
+    closeButtonBackground.layer?.cornerRadius = 10
     closeButtonView.addSubview(closeButtonBackground)
     closeButtonBackground.padding(.all)
 
@@ -324,7 +326,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       button!.imagePosition = .imageOnly
       button!.refusesFirstResponder = true
       button!.widthAnchor.constraint(equalTo: button!.heightAnchor, multiplier: 1).isActive = true
-      closeButtonBackground.contentView!.addSubview(button!)
+      closeButtonBackground.addSubview(button!)
     }
 
     backButton.widthAnchor.constraint(equalTo: closeButton.widthAnchor, multiplier: 1).isActive = true
@@ -516,8 +518,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   private func updateCloseButton() {
-    closeButtonBackground.fillColor = .controlBackgroundColor
-      .withAlphaComponent(isVideoVisible ? 0.9 : 0.2)
     closeButtonSizeConstraint.constant = isVideoVisible ? 13 : 12
     closeButtonSpacingConstraint.constant = isVideoVisible ? 5 : 4
   }

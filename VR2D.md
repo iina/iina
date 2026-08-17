@@ -90,14 +90,28 @@ view, and smeared around the pole at the bottom of the frame, which is where
 mpv puts them.
 
 So mpv is asked not to draw them and `VR2DSubtitleView` draws them instead, over
-the flattened picture, from mpv's own `sub-text` property and the same
-preferences mpv would have used for the font, size, colour and border. They stay
-still while you look around, stay legible, and land where subtitles belong.
-mpv's setting is put back when reprojection is switched off.
+the flattened picture, from mpv's own `sub-text` property. They stay still while
+you look around, stay legible, and land where subtitles belong.
+
+The styling is read back out of mpv, not out of IINA's preferences: font, size,
+scale, bold, italic, colour, border size and colour, background, shadow,
+spacing, alignment, margins and position. mpv holds the effective values — IINA
+has already pushed twenty-odd settings into it, and anything from `mpv.conf`, a
+user script or a runtime change is in there too — so reading them from there is
+both shorter and more correct than maintaining a second copy of that mapping.
+Changing a subtitle setting restyles whatever is on screen straight away.
+
+**Showing and hiding.** mpv's `sub-visibility` is what stops it drawing its own
+subtitles, and it is also how the user shows and hides them, so the two would
+fight: turning subtitles back on would turn the *warped* ones back on. While
+VR2D is drawing them, `PlayerCore.toggleSubVisibility` is routed to the overlay
+instead, so the Subtitle menu, the keyboard shortcut and the OSD all behave
+exactly as before. mpv's own setting is put back when reprojection is switched
+off.
 
 Picture-based subtitles have no text to re-draw, so they are left to mpv and
-stay warped. ASS positioning and styling are not reproduced either — the text
-is taken plain.
+stay warped. ASS positioning and inline styling are not reproduced either — the
+text is taken plain.
 
 ## Projections
 

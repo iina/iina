@@ -73,7 +73,7 @@ class LiveTextController: NSObject {
   }
 
   func clearAnalysis() {
-    guard #available(macOS 13.0, *), isShown else { return }
+    guard #available(macOS 13.0, *), analysisTask != nil || isShown else { return }
     clearAnalysisImpl()
   }
 
@@ -123,10 +123,11 @@ extension LiveTextController: ImageAnalysisOverlayViewDelegate {
         }
         try Task.checkCancellation()
         let analysis = try await ImageAnalyzer().analyze(image, orientation: .up, configuration: .init([.text]))
+        try Task.checkCancellation()
         liveTextLog("Image analysis results acquired")
         await MainActor.run {
-          guard self.isAvailable else {
-            liveTextLog("Image analysis results discarded as live text cannot be displayed")
+          guard self.isAvailable, self.mainWindow.player.info.state == .paused else {
+            liveTextLog("Image analysis results discarded due to change of player state")
             return
           }
           let overlay = self.setupLiveTextOverlay()

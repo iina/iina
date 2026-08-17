@@ -45,7 +45,7 @@ class JavascriptPluginSubtitleItem: NSObject, JavascriptPluginSubtitleItemExport
     if let currentDesc = _desc {
       JSContext.current()!.virtualMachine.removeManagedReference(currentDesc, withOwner: owner)
     }
-    if let value = value {
+    if let value {
       self._desc = JSManagedValue(value: value)
       JSContext.current()!.virtualMachine.addManagedReference(self._desc, withOwner: owner)
     }

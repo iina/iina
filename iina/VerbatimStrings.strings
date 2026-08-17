@@ -24,6 +24,8 @@
 "settings.spdifAC3.label" = "AC3";
 "settings.spdifDTS.label" = "DTS";
 "settings.spdifDTSHD.label" = "DTS-HD";
+"settings.spdifEAC3.label" = "EAC3";
+"settings.spdifTRUEHD.label" = "TRUEHD";
 
 "settings.audioDriverEnableAVFoundation.items.0" = "Core Audio";
 "settings.audioDriverEnableAVFoundation.items.1" = "AVFoundation";

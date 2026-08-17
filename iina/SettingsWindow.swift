@@ -8,6 +8,16 @@
 
 import Cocoa
 
+fileprivate let isMacOS26: Bool = {
+  if #available(macOS 27.0, *) {
+    return false
+  }
+  if #unavailable(macOS 26.0) {
+    return false
+  }
+  return true
+}()
+
 fileprivate extension NSView {
   var allSubviews: [NSView] {
     var subviews = [NSView]()
@@ -74,11 +84,8 @@ class SettingsWindow: NSWindow {
     let sidebarViewController = NSViewController()
     sidebarViewController.view = NSView()
     sidebarViewController.view.wantsLayer = true
-    let sidebarBackground = if #available(macOS 26, *) {
-      NSGlassEffectView()
-    } else {
-      NSVisualEffectView()
-    }
+    let sidebarBackground = NSVisualEffectView()
+    sidebarBackground.material = .sidebar
     sidebarViewController.view.addSubview(sidebarBackground)
     sidebarBackground.translatesAutoresizingMaskIntoConstraints = false
     sidebarBackground.padding(.all)
@@ -107,7 +114,7 @@ class SettingsWindow: NSWindow {
     sidebarBackground.addSubview(sidebarScrollView)
     sidebarScrollView.padding(.bottom, .horizontal)
 
-    if #available(macOS 26, *) {
+    if isMacOS26 {
       searchBox.padding(.top(40), .horizontal(8))
       sidebarScrollView.spacing(.top(16), to: searchBox)
     } else {
@@ -154,7 +161,7 @@ class SettingsWindow: NSWindow {
     self.isMovableByWindowBackground = true
     self.titlebarAppearsTransparent = true
     self.toolbarStyle = .unified
-    let toolbar = NSToolbar()
+    let toolbar = NSToolbar(identifier: "SettingsWindowToolbar")
     toolbar.allowsUserCustomization = false
     toolbar.delegate = self
     toolbar.displayMode = .iconOnly
@@ -243,8 +250,7 @@ class SettingsWindow: NSWindow {
       }
     }
 
-    guard let firstVisibleTitle = firstVisibleTitle,
-          let sectionNameStackView = sectionNameStackView else { return }
+    guard let firstVisibleTitle, let sectionNameStackView else { return }
 
     let titleIndex = sectionNames.firstIndex(of: firstVisibleTitle) ?? 0
 
@@ -307,7 +313,7 @@ extension SettingsWindow {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-      guard let maskRect = maskRect else { return }
+      guard let maskRect else { return }
       NSGraphicsContext.saveGraphicsState()
       let borderPath = NSBezierPath(roundedRect: maskRect, xRadius: 8, yRadius: 8)
       borderPath.lineWidth = 4
@@ -642,6 +648,14 @@ extension SettingsWindow {
       sidebarList.selectRowIndexes(IndexSet(integer: selectIdx), byExtendingSelection: false)
     }
   }
+
+  func installPlugin(localPackageURL url: URL) {
+    show()
+    navigateTo(page: "plugin")
+    if let pluginPage = pages.first(where: { $0.identifier == "plugin" }) as? SettingsPagePlugin {
+      pluginPage.installPlugin(localPackageURL: url)
+    }
+  }
 }
 
 
@@ -877,4 +891,3 @@ fileprivate extension String {
     self.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
   }
 }
-

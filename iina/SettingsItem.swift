@@ -118,7 +118,7 @@ struct SettingsItem {
       setControlSize(label)
       setControlSize(textField)
 
-      if let key = key {
+      if let key {
         label.stringValue = ui.localized(.init("\(key.rawValue).label"))
         textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
       }
@@ -266,9 +266,9 @@ struct SettingsItem {
     }
 
     private func localizedTitle() -> String {
-      if let labelLocalizationKey = labelLocalizationKey {
+      if let labelLocalizationKey {
         return ui.localized(labelLocalizationKey)
-      } else if let key = key {
+      } else if let key {
         let l10nKey = labelLocalizationKey ?? .init("\(key.rawValue).label")
         return ui.localized(l10nKey)
       } else {
@@ -389,7 +389,7 @@ struct SettingsItem {
     }
 
     func getValueViews() -> [NSView] {
-      if let valueView = valueView {
+      if let valueView {
         return [valueView]
       }
       return []
@@ -471,7 +471,7 @@ struct SettingsItem {
     }
 
     func toggleExpandable(_ setValue: Bool? = nil, animated: Bool = true) {
-      if let setValue = setValue {
+      if let setValue {
         isExpanded = setValue
       } else {
         isExpanded.toggle()
@@ -602,9 +602,9 @@ struct SettingsItem {
         popupButton.lastItem?.tag = tag
       }
       popupButton.controlSize = controlSize
-      if let key = key {
+      if let key {
         popupButton.bind(.selectedTag, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(popupButton)
       }
       DispatchQueue.main.async {
@@ -660,9 +660,9 @@ struct SettingsItem {
     }
 
     override func initBinding() {
-      if let key = key {
+      if let key {
         nsSwitch.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(self)
       }
       DispatchQueue.main.async {
@@ -821,6 +821,7 @@ struct SettingsItem {
     private var customBinding = false
     private var customBindingBlock: ((NSTextField) -> Void)?
     private var isLongText = false
+    private var range: ClosedRange<Double>?
 
     private var cachedStepperValue: Double?
     private var stepper: NSStepper?
@@ -852,13 +853,16 @@ struct SettingsItem {
       return self
     }
 
+    func range(_ range: ClosedRange<Double>) -> Self {
+      self.range = range
+      return self
+    }
+
     @objc func stepperValueChanged(sender: NSStepper) {
       guard let cachedStepperValue else { return }
-      if cachedStepperValue < sender.doubleValue {
-        textField.doubleValue += sender.increment
-      } else {
-        textField.doubleValue -= sender.increment
-      }
+      let increment = cachedStepperValue < sender.doubleValue ? sender.increment : -sender.increment
+      let value = textField.doubleValue + increment
+      textField.doubleValue = range.map { value.clamped(to: $0) } ?? value
       self.cachedStepperValue = sender.doubleValue
     }
 
@@ -869,13 +873,20 @@ struct SettingsItem {
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
+      if let range {
+        let formatter = NumberFormatter()
+        formatter.usesGroupingSeparator = false
+        formatter.minimum = NSNumber(value: range.lowerBound)
+        formatter.maximum = NSNumber(value: range.upperBound)
+        textField.formatter = formatter
+      }
       let stack = NSStackView(views: [textField])
       if let stepper {
         stepper.controlSize = controlSize
         stack.addView(stepper, in: .trailing)
         stack.spacing = 2
       }
-      if let trailingLabel = trailingLabel {
+      if let trailingLabel {
         let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
         return [stack, label]
@@ -896,9 +907,9 @@ struct SettingsItem {
     }
 
     override func initBinding() {
-      if let key = key {
+      if let key {
         textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(textField)
       }
     }
@@ -929,7 +940,7 @@ struct SettingsItem {
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
-      if let trailingLabel = trailingLabel {
+      if let trailingLabel {
         let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
         return [textField, label, nsSwitch]
@@ -1235,7 +1246,7 @@ class SettingsAccessory {
     }
 
     private func initBinding() {
-      guard let key = key else { return }
+      guard let key else { return }
       if let transformer = customtransformer {
         selectedValue = transformer.1(Preference.value(for: key))
       } else {
@@ -1260,14 +1271,14 @@ class SettingsAccessory {
     }
 
     deinit {
-      guard let key = key else { return }
+      guard let key else { return }
       ObjcUtils.silenced {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
       }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-      guard let change = change else { return }
+      guard let change else { return }
 
       if let transformer = customtransformer {
         selectedValue = transformer.1(change[.newKey])
@@ -1350,7 +1361,7 @@ class SettingsAccessory {
 
     func makeView() -> NSView {
       audioLangTokenField.awakeFromNib()
-      if let key = key {
+      if let key {
         audioLangTokenField.commaSeparatedValues = Preference.string(for: key) ?? ""
         if hasDesc {
           let descLabel = NSTextField(labelWithString: ui.localized("\(key.rawValue).desc"))
@@ -1364,7 +1375,7 @@ class SettingsAccessory {
     }
 
     @objc func preferredLanguageAction(_ sender: LanguageTokenField) {
-      guard let key = key else { return }
+      guard let key else { return }
       let csv = sender.commaSeparatedValues
       if Preference.string(for: key) != csv {
         Logger.log("Saving \(key.rawValue): \"\(csv)\"", level: .verbose)

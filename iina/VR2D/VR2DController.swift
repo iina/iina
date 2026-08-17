@@ -1,0 +1,354 @@
+//
+//  VR2DController.swift
+//  iina
+//
+//  Per-player state for VR reprojection: what the source is, where the viewer
+//  is looking, and whether the whole thing is switched on.
+//
+//  Everything here is touched from the main thread. The render thread only ever
+//  reads a `Snapshot`, taken under a lock, so panning never has to wait for a
+//  frame and a frame never has to wait for a drag.
+//
+
+import Cocoa
+
+final class VR2DController {
+
+  /// What the render thread needs, copied out under a lock.
+  struct Snapshot {
+    var isActive = false
+    /// Size of the offscreen buffer mpv should render into.
+    var videoWidth = 0
+    var videoHeight = 0
+    var params = VR2DRenderer.Params(source: VR2DSource(), view: VR2DView(), eye: .left)
+  }
+
+  private unowned let player: PlayerCore
+  private let lock = Lock()
+  private var published = Snapshot()
+
+  private lazy var subsystem = Logger.makeSubsystem("vr2d\(player.playerNumber)", ["view.3d"])
+
+  // MARK: - State (main thread only)
+
+  private(set) var isEnabled = false
+  private(set) var detection = VR2DDetection()
+  /// The source as it will be rendered — detection's answer, plus any manual
+  /// override the user has made for this file.
+  private(set) var source = VR2DSource()
+  private(set) var view = VR2DView()
+  private(set) var eye: VR2DEye = .left
+
+  private var videoWidth = 0
+  private var videoHeight = 0
+  /// What `video-timing-offset` was before reprojection took it to zero.
+  private var savedVideoTimingOffset: Double?
+  /// Warn once per file, not once per video-reconfig.
+  private var hasWarnedAboutFilter = false
+
+  init(player: PlayerCore) {
+    self.player = player
+  }
+
+  // MARK: - Reading
+
+  func snapshot() -> Snapshot {
+    return lock.withLock { published }
+  }
+
+  /// Size of the video view in points, which is what the frustum is fitted to.
+  private var surfaceSize: CGSize {
+    guard player.mainWindow.loaded else { return CGSize(width: 16, height: 9) }
+    let size = player.mainWindow.videoView.frame.size
+    guard size.width > 0, size.height > 0 else { return CGSize(width: 16, height: 9) }
+    return size
+  }
+
+  // MARK: - File lifecycle
+
+  /// Run detection for the file that just loaded and turn reprojection on if
+  /// the evidence is strong enough.
+  func fileLoaded() {
+    hasWarnedAboutFilter = false
+    refreshVideoSize()
+
+    let width = player.mpv.getInt(MPVProperty.width)
+    let height = player.mpv.getInt(MPVProperty.height)
+    guard width > 0, height > 0 else { return }
+
+    let preferredEye: Preference.VR2DEyeOption = Preference.enum(for: .vr2dEye)
+    eye = preferredEye == .right ? .right : .left
+
+    let stereoIn = player.mpv.getString(MPVProperty.videoParamsStereoIn)
+    let url = player.info.currentURL?.absoluteString ?? ""
+    detection = VR2DDetect.detect(url: url, width: width, height: height, stereoIn: stereoIn,
+                                  aggressive: Preference.bool(for: .vr2dAggressiveDetection))
+    source = detection.source
+
+    let shouldEnable = Preference.bool(for: .vr2dAutoDetect) && detection.auto
+    Logger.log("Detected \(detection.summary); strong: \(detection.strong), weak: \(detection.weak)" +
+               "; auto-enable \(shouldEnable)", level: .verbose, subsystem: subsystem)
+
+    if shouldEnable {
+      setEnabled(true, announce: true)
+    } else {
+      setEnabled(false, announce: false)
+    }
+
+#if DEBUG
+    VR2DSelfTest.runIfRequested(for: player)
+    VR2DSelfTest.runInputChecksIfRequested(for: player)
+#endif
+  }
+
+#if DEBUG
+  /// Force a complete state, bypassing detection and the clamps, so a render
+  /// can be compared pixel for pixel against a reference. See `VR2DSelfTest`.
+  func applyForSelfTest(source: VR2DSource, view: VR2DView, eye: VR2DEye) {
+    isEnabled = true
+    self.source = source
+    self.view = view
+    self.eye = eye
+    publish()
+  }
+#endif
+
+  /// The decoded video changed shape, so the offscreen buffer has to follow and
+  /// the view may need re-clamping.
+  func videoGeometryChanged() {
+    refreshVideoSize()
+    clampAndPublish()
+    // A CPU reprojection filter changes the frame size, so this is exactly when
+    // one shows up — and it is added after the file loads, which is why the
+    // check cannot only happen when reprojection is switched on.
+    if isEnabled { warnAboutConflictingFilter() }
+  }
+
+  private func refreshVideoSize() {
+    // The offscreen buffer is the size mpv itself would render at, so that mpv
+    // fills it exactly: same aspect means no letterboxing, and native size
+    // means no downscaling before the shader gets to sample.
+    let width = player.info.displayWidth ?? 0
+    let height = player.info.displayHeight ?? 0
+    if width <= 0 || height <= 0 {
+      // On the first file-loaded event IINA has zeroed these and is still
+      // waiting for a video-reconfig; mpv already knows.
+      return refreshVideoSizeFromMpv()
+    }
+    guard width > 0, height > 0 else { return }
+    videoWidth = width
+    videoHeight = height
+  }
+
+  /// mpv knows the size before IINA has recorded it, which is the case on the
+  /// first file-loaded event.
+  private func refreshVideoSizeFromMpv() {
+    let width = player.mpv.getInt(MPVProperty.dwidth)
+    let height = player.mpv.getInt(MPVProperty.dheight)
+    guard width > 0, height > 0 else { return }
+    videoWidth = width
+    videoHeight = height
+  }
+
+  // MARK: - Enabling
+
+  func setEnabled(_ enabled: Bool, announce: Bool = true) {
+    guard enabled != isEnabled else { return }
+    isEnabled = enabled
+    applyVideoTiming()
+    if enabled {
+      resetView()
+    }
+    clampAndPublish()
+    if announce {
+      player.sendOSD(.custom(enabled ? "VR2D on — \(VR2DDetect.summarize(source))" : "VR2D off"))
+    }
+    if enabled { warnAboutConflictingFilter() }
+  }
+
+  /// The VR2D *plugin* does the same job with a CPU filter, and if it is still
+  /// installed and enabled it reprojects the frame before this ever sees it —
+  /// the picture comes out reprojected twice and the panning is as slow as the
+  /// plugin's, which looks exactly like this fork not working.
+  ///
+  /// Detected from the filter chain rather than from a plugin name, so it also
+  /// catches the same mistake made with any other reprojecting filter.
+  private func warnAboutConflictingFilter() {
+    guard !hasWarnedAboutFilter else { return }
+    guard let filters = player.mpv.getString(MPVProperty.vf), !filters.isEmpty else { return }
+    let lowercased = filters.lowercased()
+    guard lowercased.contains("v360") || lowercased.contains("vr2d") else { return }
+
+    hasWarnedAboutFilter = true
+    Logger.log("A video filter is already reprojecting this frame (vf=\(filters)). " +
+               "The VR2D plugin must be turned off for this build to help.",
+               level: .warning, subsystem: subsystem)
+    player.sendOSD(.custom("VR2D — turn off the VR2D plugin; it is reprojecting on the CPU"),
+                   forcedTimeout: 5)
+  }
+
+  func toggle() {
+    setEnabled(!isEnabled)
+  }
+
+  /// Stop mpv rendering ahead of time while looking around is possible.
+  ///
+  /// mpv normally renders a frame early and waits inside its render call until
+  /// the frame is due. That wait occupies the one thread that can talk to
+  /// OpenGL, so a pan cannot be drawn until it finishes — panning ends up
+  /// running at the video's frame rate rather than the display's. Rendering
+  /// with no headroom costs a little scheduling slack and buys immediate
+  /// response; the previous value goes back when reprojection is switched off.
+  private func applyVideoTiming() {
+    if isEnabled {
+      if savedVideoTimingOffset == nil {
+        savedVideoTimingOffset = player.mpv.getDouble(MPVOption.Miscellaneous.videoTimingOffset)
+      }
+      player.mpv.setDouble(MPVOption.Miscellaneous.videoTimingOffset, 0)
+    } else if let saved = savedVideoTimingOffset {
+      player.mpv.setDouble(MPVOption.Miscellaneous.videoTimingOffset, saved)
+      savedVideoTimingOffset = nil
+    }
+  }
+
+  // MARK: - Looking around
+
+  func resetView() {
+    let size = surfaceSize
+    let horizontal = Preference.double(for: .vr2dStartHorizontalFov)
+    view = VR2DView(yaw: 0, pitch: 0,
+                    fov: VR2DGeometry.diagonalFromHorizontal(horizontal, size.width, size.height))
+    clampAndPublish()
+  }
+
+  /// Pan by a drag in points. Dragging right swings the view left, so the
+  /// picture tracks the cursor.
+  func pan(dx: CGFloat, dy: CGFloat) {
+    let size = surfaceSize
+    var sensitivity = Preference.double(for: .vr2dDragSensitivity)
+    if Preference.bool(for: .vr2dInvertDrag) { sensitivity = -sensitivity }
+    view = VR2DGeometry.applyDrag(view, dx: Double(dx), dy: Double(dy),
+                                  width: size.width, height: size.height, sensitivity: sensitivity)
+    clampAndPublish()
+  }
+
+  /// Pan by a fixed number of degrees, for the keyboard.
+  func panBy(yaw: Double, pitch: Double) {
+    view = VR2DGeometry.applyPanStep(view, dxDeg: yaw, dyDeg: pitch)
+    clampAndPublish()
+  }
+
+  func zoom(notches: Double) {
+    view = VR2DGeometry.applyZoom(view, notches: notches)
+    clampAndPublish()
+  }
+
+  // MARK: - Overrides
+
+  /// Step through the projections, announcing each, so a badly named file can
+  /// be sorted out by eye in a few keystrokes. Straight lines in the scene go
+  /// straight when the projection is right and bow when it is wrong.
+  func cycleProjection() {
+    let order: [VR2DProjection] = [.halfEquirect, .equirect, .fisheye, .eac]
+    let next = order[((order.firstIndex(of: source.projection) ?? 0) + 1) % order.count]
+    setProjection(next)
+  }
+
+  func setProjection(_ projection: VR2DProjection?) {
+    guard let projection else {
+      source.projection = detection.source.projection
+      source.inHFov = detection.source.inHFov
+      source.inVFov = detection.source.inVFov
+      announceSource()
+      clampAndPublish()
+      return
+    }
+    source.projection = projection
+    // Fisheye keeps whatever lens angle detection found; the others have a
+    // coverage that follows from the projection itself.
+    switch projection {
+    case .halfEquirect:
+      source.inHFov = 180
+      source.inVFov = 180
+    case .equirect, .eac:
+      source.inHFov = 360
+      source.inVFov = 180
+    case .fisheye:
+      let detected = detection.source
+      let fov = detected.projection == .fisheye ? detected.inHFov : 180
+      source.inHFov = fov
+      source.inVFov = fov
+    }
+    announceSource()
+    clampAndPublish()
+  }
+
+  /// Fisheye lenses come in a handful of angles and the name does not always
+  /// say which, so this steps through the common ones.
+  func cycleFisheyeFov() {
+    guard source.projection == .fisheye else { return }
+    let angles: [Double] = [180, 190, 200, 220]
+    let next = angles[((angles.firstIndex(of: source.inHFov) ?? angles.count - 1) + 1) % angles.count]
+    source.inHFov = next
+    source.inVFov = next
+    announceSource()
+    clampAndPublish()
+  }
+
+  func cycleLayout() {
+    let order: [(VR2DLayout, Bool)] = [(.mono, false), (.sbs, false), (.sbs, true), (.tb, false), (.tb, true)]
+    let current = order.firstIndex { $0.0 == source.layout && $0.1 == source.swapEyes } ?? 0
+    let next = order[(current + 1) % order.count]
+    setLayout(next.0, swapEyes: next.1)
+  }
+
+  func setLayout(_ layout: VR2DLayout?, swapEyes: Bool = false) {
+    if let layout {
+      source.layout = layout
+      source.swapEyes = swapEyes
+    } else {
+      source.layout = detection.source.layout
+      source.swapEyes = detection.source.swapEyes
+    }
+    announceSource()
+    clampAndPublish()
+  }
+
+  func setEye(_ eye: VR2DEye) {
+    self.eye = eye
+    Preference.set((eye == .right ? Preference.VR2DEyeOption.right : .left).rawValue, for: .vr2dEye)
+    publish()
+    player.sendOSD(.custom("VR2D — \(eye == .left ? "left" : "right") eye"))
+  }
+
+  func swapEye() {
+    setEye(eye == .left ? .right : .left)
+  }
+
+  private func announceSource() {
+    player.sendOSD(.custom("VR2D — \(VR2DDetect.summarize(source))"))
+  }
+
+  // MARK: - Publishing
+
+  private func clampAndPublish() {
+    let size = surfaceSize
+    view = VR2DGeometry.clampView(view, source, size.width, size.height)
+    publish()
+  }
+
+  /// Copy the state the render thread needs and ask for a redraw.
+  ///
+  /// The redraw is forced because the view can change while playback is paused,
+  /// and mpv has no new frame to offer in that case — the whole point of doing
+  /// this in the renderer is that the held frame can be re-projected.
+  private func publish() {
+    let snapshot = Snapshot(isActive: isEnabled && videoWidth > 0 && videoHeight > 0,
+                            videoWidth: videoWidth,
+                            videoHeight: videoHeight,
+                            params: VR2DRenderer.Params(source: source, view: view, eye: eye))
+    lock.withLock { published = snapshot }
+    guard player.mainWindow.loaded else { return }
+    player.mainWindow.videoView.videoLayer.update(force: true)
+  }
+}

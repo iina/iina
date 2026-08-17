@@ -64,6 +64,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   lazy var historyWindow: HistoryWindowController = HistoryWindowController()
   lazy var guideWindow: GuideWindowController = GuideWindowController()
   lazy var logWindow: LogWindowController = LogWindowController()
+  lazy var upnpBrowserWindow: UPnPBrowserWindowController = UPnPBrowserWindowController()
 
   lazy var vfWindow: FilterWindowController = {
     let w = FilterWindowController(filterType: MPVProperty.vf, autosaveName: Constants.WindowAutosaveName.videoFilters)
@@ -1012,6 +1013,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     logWindow.showWindow(self)
   }
 
+  @IBAction func showUPnPBrowser(_ sender: AnyObject) {
+    Logger.log("Menu - Open UPnP/DLNA Browser", subsystem: Logger.Subsystem.general)
+    // Access window to trigger loading - windowDidLoad will be called automatically
+    _ = upnpBrowserWindow.window
+    if #available(macOS 14, *) {
+      NSApp.activate()
+    } else {
+      NSApp.activate(ignoringOtherApps: true)
+    }
+    upnpBrowserWindow.showWindow(self)
+  }
+
   @IBAction func showHighlights(_ sender: AnyObject) {
     guideWindow.show(pages: [.highlights])
   }
@@ -1102,6 +1115,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   private func registerUserDefaultValues() {
     UserDefaults.standard.register(defaults: [String: Any](uniqueKeysWithValues: Preference.defaultPreference.map { ($0.0.rawValue, $0.1) }))
+    UPnPPreferences.registerDefaults()
   }
 
   // MARK: - FFmpeg version parsing

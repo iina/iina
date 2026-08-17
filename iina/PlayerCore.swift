@@ -546,7 +546,13 @@ class PlayerCore: NSObject {
     info.videoTracks = []
     info.videoWidth = nil
     if isNetwork {
-      AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
+      // UPnP streams are network URLs but should stay in the UPnP browser flow,
+      // not the generic "Open URL" loading window.
+      if loadUPnPPlaybackContext() == nil {
+        AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
+      } else {
+        AppDelegate.shared.openURLWindow.close()
+      }
     }
 
     let _ = mainWindow.window
@@ -1596,6 +1602,18 @@ class PlayerCore: NSObject {
   ///     resumes playback.
   /// - Parameter nextMedia: When `true` play the next entry in the playlist; otherwise play the previous entry.
   func navigateInPlaylist(nextMedia: Bool) {
+    // Check if we're playing a UPnP item and handle navigation differently
+    if loadUPnPPlaybackContext() != nil {
+      // We're playing a UPnP item - handle navigation via UPnP browser
+      let browser = AppDelegate.shared.upnpBrowserWindow
+      if nextMedia {
+        browser.playNextUPnPItem()
+      } else {
+        browser.playPreviousUPnPItem()
+      }
+      return
+    }
+
     guard !mainWindow.interactiveMode.isActive else { return }
 
     if nextMedia == false && (info.playlist.first?.isPlaying) ?? false {
@@ -1608,6 +1626,16 @@ class PlayerCore: NSObject {
       }
       mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
     }
+  }
+  
+  /// Load UPnP playback context from preferences (if any).
+  /// We no longer require the URL to match exactly; if a context exists, we treat the current file as part of that UPnP session.
+  func loadUPnPPlaybackContext() -> UPnPBrowserWindowController.UPnPPlaybackContext? {
+    guard let data = UPnPPreferences.data(forKey: UPnPPreferences.Key.playbackContext),
+          let context = try? JSONDecoder().decode(UPnPBrowserWindowController.UPnPPlaybackContext.self, from: data) else {
+      return nil
+    }
+    return context
   }
 
   @discardableResult
@@ -2230,6 +2258,27 @@ class PlayerCore: NSObject {
     } else {
       info.shouldAutoLoadFiles = false
     }
+    // Post notification for file ended (natural or via internal stop command).
+    // Some UPnP servers / mpv report natural EOF as a stop, so we do not rely on `dueToStopCommand` here.
+    log("Posting .iinaFileEnded notification (dueToStopCommand=\(dueToStopCommand))", level: .debug)
+    postNotification(.iinaFileEnded)
+
+    // If we're in a UPnP session and auto-play-next is enabled, always try to advance.
+    // But don't auto-play if the player is stopping (user closed window) or shutting down.
+    // Note: When a video naturally ends, the state might be .idle, but we should still auto-play
+    // unless it's explicitly stopping (user action) or shutting down.
+    if UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext),
+       loadUPnPPlaybackContext() != nil,
+       info.state != .stopping,
+       info.state != .shuttingDown,
+       info.state != .shutDown {
+      log("Auto-playing next UPnP item from fileEnded (state: \(info.state), dueToStopCommand: \(dueToStopCommand))", level: .debug)
+      let browser = AppDelegate.shared.upnpBrowserWindow
+      browser.playNextUPnPItem()
+    } else if UPnPPreferences.bool(forKey: UPnPPreferences.Key.autoPlayNext),
+              loadUPnPPlaybackContext() != nil {
+      log("Skipping auto-play - player state is \(info.state)", level: .debug)
+    }
     MemoryUsage.shared.logUsage("after file ended")
   }
 
@@ -2328,8 +2377,15 @@ class PlayerCore: NSObject {
     // close the window if stopped
     if info.state.loaded ||  // stopped by mpv
         (info.state == .stopping && (currentWindow?.isVisible ?? false)) {  // user sent stop command
-      DispatchQueue.main.async {
-        self.currentController.close()
+      // UPnP auto-next briefly reaches idle between items. Closing the player window here
+      // causes the next network stream to play audio with no visible UI.
+      let upnpAdvancing = AppDelegate.shared.upnpBrowserWindow.isAutoPlayingNext
+      if !upnpAdvancing {
+        DispatchQueue.main.async {
+          self.currentController.close()
+        }
+      } else {
+        log("Keeping player window open during UPnP auto-next transition")
       }
     }
     if info.state != .loading {

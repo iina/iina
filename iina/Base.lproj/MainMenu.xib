@@ -102,6 +102,13 @@
                                     <action selector="openURL:" target="Voe-Tx-rLC" id="7MD-t2-mMA"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Open UPnP/DLNA Browser…" id="upnp-browser-menu">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showUPnPBrowser:" target="Voe-Tx-rLC" id="upnp-browser-action"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="upnp-separator"/>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">

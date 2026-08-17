@@ -118,6 +118,25 @@
                                             <constraint firstItem="6nX-pp-BEb" firstAttribute="leading" secondItem="hmC-XZ-bFe" secondAttribute="leading" constant="12" id="nxY-AK-CRT"/>
                                         </constraints>
                                     </customView>
+                                    <customView identifier="openUPnP" translatesAutoresizingMaskIntoConstraints="NO" id="upnp-btn-001" customClass="InitialWindowViewActionButton" customModule="IINA" customModuleProvider="target">
+                                        <rect key="frame" x="204" y="283" width="392" height="28"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="upnp-text-001">
+                                                <rect key="frame" x="10" y="6" width="120" height="16"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Open UPnP/DLNA Browser…" id="upnp-text-cell-001">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="upnp-text-001" firstAttribute="centerY" secondItem="upnp-btn-001" secondAttribute="centerY" id="upnp-const-001"/>
+                                            <constraint firstAttribute="height" constant="28" id="upnp-const-002"/>
+                                            <constraint firstItem="upnp-text-001" firstAttribute="leading" secondItem="upnp-btn-001" secondAttribute="leading" constant="12" id="upnp-const-003"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="upnp-text-001" secondAttribute="trailing" constant="8" id="upnp-const-004"/>
+                                        </constraints>
+                                    </customView>
                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igO-NN-NsX">
                                         <rect key="frame" x="204" y="24" width="392" height="245"/>
                                         <clipView key="contentView" drawsBackground="NO" id="fmt-32-Icz">
@@ -293,7 +312,11 @@
                                     <constraint firstItem="nrn-G9-P2A" firstAttribute="leading" secondItem="qTo-HU-gie" secondAttribute="leading" constant="24" id="5PR-Tb-8T7"/>
                                     <constraint firstAttribute="trailing" secondItem="ZGi-N7-Zv2" secondAttribute="trailing" constant="44" id="9ed-4L-5h2"/>
                                     <constraint firstAttribute="trailing" secondItem="hmC-XZ-bFe" secondAttribute="trailing" constant="44" id="B9z-QH-RTT"/>
-                                    <constraint firstItem="hmC-XZ-bFe" firstAttribute="leading" secondItem="ZGi-N7-Zv2" secondAttribute="leading" id="Hpy-gh-hYn"/>
+                                    <constraint firstAttribute="trailing" secondItem="upnp-btn-001" secondAttribute="trailing" constant="44" id="upnp-trail-001"/>
+                                    <constraint firstItem="upnp-btn-001" firstAttribute="leading" secondItem="ZGi-N7-Zv2" secondAttribute="leading" id="upnp-lead-001"/>
+                                    <constraint firstItem="upnp-btn-001" firstAttribute="top" secondItem="ZGi-N7-Zv2" secondAttribute="bottom" id="upnp-top-001"/>
+                                    <constraint firstItem="hmC-XZ-bFe" firstAttribute="leading" secondItem="upnp-btn-001" secondAttribute="leading" id="Hpy-gh-hYn"/>
+                                    <constraint firstItem="hmC-XZ-bFe" firstAttribute="top" secondItem="upnp-btn-001" secondAttribute="bottom" id="k4E-iS-gKl-new"/>
                                     <constraint firstItem="XbN-3R-9zz" firstAttribute="top" secondItem="hmC-XZ-bFe" secondAttribute="bottom" constant="6" id="Joj-4o-xDx"/>
                                     <constraint firstAttribute="trailing" secondItem="XbN-3R-9zz" secondAttribute="trailing" constant="44" id="KnP-wf-zIN"/>
                                     <constraint firstItem="7SF-fn-3LF" firstAttribute="centerX" secondItem="0eM-hv-Q2Z" secondAttribute="centerX" id="MbE-hX-CPC"/>
@@ -302,7 +325,6 @@
                                     <constraint firstItem="XbN-3R-9zz" firstAttribute="leading" secondItem="hmC-XZ-bFe" secondAttribute="leading" id="aik-OZ-H4h"/>
                                     <constraint firstItem="ZGi-N7-Zv2" firstAttribute="top" secondItem="qTo-HU-gie" secondAttribute="top" constant="32" id="eTE-Jt-iHF"/>
                                     <constraint firstItem="igO-NN-NsX" firstAttribute="top" secondItem="hmC-XZ-bFe" secondAttribute="bottom" constant="42" id="fUG-aR-h0p"/>
-                                    <constraint firstItem="hmC-XZ-bFe" firstAttribute="top" secondItem="ZGi-N7-Zv2" secondAttribute="bottom" id="k4E-iS-gKl"/>
                                     <constraint firstItem="igO-NN-NsX" firstAttribute="leading" secondItem="hmC-XZ-bFe" secondAttribute="leading" id="lBk-KQ-3rb"/>
                                     <constraint firstItem="7SF-fn-3LF" firstAttribute="top" secondItem="0eM-hv-Q2Z" secondAttribute="bottom" constant="15" id="le2-KN-An9"/>
                                     <constraint firstItem="8hV-gP-tZA" firstAttribute="centerX" secondItem="nrn-G9-P2A" secondAttribute="centerX" id="nan-tF-2fo"/>

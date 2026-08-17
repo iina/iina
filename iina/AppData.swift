@@ -147,6 +147,7 @@ extension Notification.Name {
   static let iinaSIDChanged = Notification.Name("iinaSIDChanged")
   static let iinaSpeedChanged = Notification.Name("IINASpeedChanged")
   static let iinaMediaTitleChanged = Notification.Name("IINAMediaTitleChanged")
+  static let iinaFileEnded = Notification.Name("IINAFileEnded")
   static let iinaVideoParamsChanged = Notification.Name("iinaVideoParamsChanged")
   static let iinaVFChanged = Notification.Name("IINAVfChanged")
   static let iinaVideoEqualizerChanged = Notification.Name("iinaVideoEqualizerChanged")

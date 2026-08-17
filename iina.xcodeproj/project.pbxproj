@@ -432,6 +432,12 @@
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 		E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */; };
 		E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */; };
+		B6801BB5A8DE4D1A95C652E0 /* UPnPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5839C9E62C8C476D8D536752 /* UPnPDevice.swift */; };
+		925BC48F037143858DE1AF97 /* UPnPItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999BDC1CE4A045A78E984926 /* UPnPItem.swift */; };
+		C0FBEB7CF68044BEBA6DC5A6 /* UPnPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA716205FEA49168104929B /* UPnPManager.swift */; };
+		9769AB6525DD442F9799AE44 /* UPnPBrowserWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9B5975F98F4EDAA3B996B5 /* UPnPBrowserWindowController.swift */; };
+		F32D1468D2FC40F5ABC6EFAF /* UPnPPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696BC9180B4144AA8F6C3EC6 /* UPnPPreferences.swift */; };
+		ABF6B82C334945FDBB97BFFE /* UPnPBrowserWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C57E94DB6A0B4195B83A5675 /* UPnPBrowserWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -878,6 +884,7 @@
 		348F71952DE2A814006C587D /* MPVCommandWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVCommandWrappers.swift; sourceTree = "<group>"; };
 		3494B3F42C00254500F57FC2 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3494B3F52C00254800F57FC2 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		193D529B918643F6A085783B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = iina/Base.lproj/UPnPBrowserWindowController.xib; sourceTree = "<group>"; };
 		34ACAB2D2C142A0300F871A0 /* libintl.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libintl.8.dylib; path = deps/lib/libintl.8.dylib; sourceTree = "<group>"; };
 		34ACAB2E2C142A0300F871A0 /* libgraphite2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgraphite2.3.dylib; path = deps/lib/libgraphite2.3.dylib; sourceTree = "<group>"; };
 		34ACAB2F2C142A0300F871A0 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = deps/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
@@ -1562,6 +1569,11 @@
 		84EA52E22404E83C00F7617A /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		84EB1ED61D2F51D3004FA5A1 /* IINA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IINA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5839C9E62C8C476D8D536752 /* UPnPDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPDevice.swift; sourceTree = "<group>"; };
+		999BDC1CE4A045A78E984926 /* UPnPItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPItem.swift; sourceTree = "<group>"; };
+		CEA716205FEA49168104929B /* UPnPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPManager.swift; sourceTree = "<group>"; };
+		0E9B5975F98F4EDAA3B996B5 /* UPnPBrowserWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPBrowserWindowController.swift; sourceTree = "<group>"; };
+		696BC9180B4144AA8F6C3EC6 /* UPnPPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPPreferences.swift; sourceTree = "<group>"; };
 		84EB1EDB1D2F51D3004FA5A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84EB1EE01D2F51D3004FA5A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84EB1F041D2F5C5B004FA5A1 /* AppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
@@ -2354,6 +2366,11 @@
 			isa = PBXGroup;
 			children = (
 				84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */,
+				5839C9E62C8C476D8D536752 /* UPnPDevice.swift */,
+				999BDC1CE4A045A78E984926 /* UPnPItem.swift */,
+				CEA716205FEA49168104929B /* UPnPManager.swift */,
+				0E9B5975F98F4EDAA3B996B5 /* UPnPBrowserWindowController.swift */,
+				696BC9180B4144AA8F6C3EC6 /* UPnPPreferences.swift */,
 				84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */,
 				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
 				348F71952DE2A814006C587D /* MPVCommandWrappers.swift */,
@@ -2973,6 +2990,7 @@
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
 				E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */,
 				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
+				ABF6B82C334945FDBB97BFFE /* UPnPBrowserWindowController.xib in Resources */,
 				518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
@@ -3163,6 +3181,11 @@
 				E3BBBBBB0000000000000004 /* SettingsPageAudio.swift in Sources */,
 				84AABE981DBFB62F00D138FD /* FixedFontManager.m in Sources */,
 				84EB1EDA1D2F51D3004FA5A1 /* AppDelegate.swift in Sources */,
+				B6801BB5A8DE4D1A95C652E0 /* UPnPDevice.swift in Sources */,
+				925BC48F037143858DE1AF97 /* UPnPItem.swift in Sources */,
+				C0FBEB7CF68044BEBA6DC5A6 /* UPnPManager.swift in Sources */,
+				9769AB6525DD442F9799AE44 /* UPnPBrowserWindowController.swift in Sources */,
+				F32D1468D2FC40F5ABC6EFAF /* UPnPPreferences.swift in Sources */,
 				84CFC92623F8DDE000381E5B /* PlayerWindowController.swift in Sources */,
 				E353070521496CE4008FE492 /* PrefPluginViewController.swift in Sources */,
 				840820111ECF6C1800361416 /* FileGroup.swift in Sources */,
@@ -3352,6 +3375,14 @@
 				34ACAD7D2C16917100F871A0 /* hr */,
 			);
 			name = SubChooseViewController.xib;
+			sourceTree = "<group>";
+		};
+		C57E94DB6A0B4195B83A5675 /* UPnPBrowserWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				193D529B918643F6A085783B /* Base */,
+			);
+			name = UPnPBrowserWindowController.xib;
 			sourceTree = "<group>";
 		};
 		34F8B6F52C6C7B0100AE4B16 /* PrefPluginViewController.xib */ = {

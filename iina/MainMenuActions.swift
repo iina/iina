@@ -183,10 +183,24 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuNextMedia(_ sender: NSMenuItem) {
+    // Check if we're playing a UPnP item first
+    if let upnpContext = player.loadUPnPPlaybackContext() {
+      // We're playing a UPnP item - handle navigation via UPnP browser
+      let browser = AppDelegate.shared.upnpBrowserWindow
+      browser.playNextUPnPItem()
+      return
+    }
     player.navigateInPlaylist(nextMedia: true)
   }
 
   @objc func menuPreviousMedia(_ sender: NSMenuItem) {
+    // Check if we're playing a UPnP item first
+    if let upnpContext = player.loadUPnPPlaybackContext() {
+      // We're playing a UPnP item - handle navigation via UPnP browser
+      let browser = AppDelegate.shared.upnpBrowserWindow
+      browser.playPreviousUPnPItem()
+      return
+    }
     player.navigateInPlaylist(nextMedia: false)
   }
 

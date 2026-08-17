@@ -152,9 +152,6 @@ end
 
 command_list = doc.css '#list-of-input-commands > .section > .docutils > dt > tt'
 
-print command_list
-
-
 File.open(File.join(__dir__, 'MPVCommand.swift'), 'w') do |file|
   file.write "import Foundation\n\n"
   file.write "/// Named constants for mpv [commands](https://mpv.io/manual/stable/#list-of-input-commands).\n"

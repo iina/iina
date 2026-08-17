@@ -150,7 +150,10 @@ end
 
 # command
 
-command_list = doc.css '#list-of-input-commands > .docutils > dt > tt, #input-commands-that-are-possibly-subject-to-change > .docutils > dt > tt'
+command_list = doc.css '#list-of-input-commands > .section > .docutils > dt > tt'
+
+print command_list
+
 
 File.open(File.join(__dir__, 'MPVCommand.swift'), 'w') do |file|
   file.write "import Foundation\n\n"

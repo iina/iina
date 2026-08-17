@@ -1948,11 +1948,11 @@ class PlayerCore: NSObject {
   }
 
   func setSubTextBorderColor(_ colorString: String) {
-    mpv.setString("options/" + MPVOption.Subtitles.subBorderColor, colorString)
+    mpv.setString("options/" + MPVOption.Subtitles.subOutlineColor, colorString)
   }
 
   func setSubTextBorderSize(_ size: Double) {
-    mpv.setDouble("options/" + MPVOption.Subtitles.subBorderSize, size)
+    mpv.setDouble("options/" + MPVOption.Subtitles.subOutlineSize, size)
   }
 
   func setSubTextBgColor(_ colorString: String) {

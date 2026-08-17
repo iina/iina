@@ -492,14 +492,14 @@ class MPVController: NSObject {
     setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing,
                   verboseIfDefault: true)
 
-    setUserOption(PK.subBorderSize, type: .float, forName: MPVOption.Subtitles.subBorderSize,
+    setUserOption(PK.subBorderSize, type: .float, forName: MPVOption.Subtitles.subOutlineSize,
                   verboseIfDefault: true)
-    setUserOption(PK.subBorderColorString, type: .color, forName: MPVOption.Subtitles.subBorderColor,
+    setUserOption(PK.subBorderColorString, type: .color, forName: MPVOption.Subtitles.subOutlineColor,
                   verboseIfDefault: true)
 
     setUserOption(PK.subShadowSize, type: .float, forName: MPVOption.Subtitles.subShadowOffset,
                   verboseIfDefault: true)
-    setUserOption(PK.subShadowColorString, type: .color, forName: MPVOption.Subtitles.subShadowColor,
+    setUserOption(PK.subShadowColorString, type: .color, forName: MPVOption.Subtitles.subBackColor,
                   verboseIfDefault: true)
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX,

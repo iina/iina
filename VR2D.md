@@ -136,13 +136,14 @@ turns on by itself and says what it found.
 | Look around (keyboard) | <kbd>⇧</kbd><kbd>⌥</kbd> + arrow keys |
 | Zoom (keyboard) | <kbd>⌥</kbd><kbd>=</kbd> / <kbd>⌥</kbd><kbd>-</kbd> |
 | Recentre | <kbd>⌥</kbd><kbd>0</kbd> |
-| Try the next projection | <kbd>⌥</kbd><kbd>P</kbd> |
 | Try the next stereo layout | <kbd>⌥</kbd><kbd>L</kbd> |
 | Swap eye | <kbd>⌥</kbd><kbd>E</kbd> |
-| Turn on/off | <kbd>⌥</kbd><kbd>⇧</kbd><kbd>V</kbd> |
 
-Everything is also under **Video → VR Video**, so a shortcut is always visible
-next to the command it runs. Settings are in **Settings → Video**.
+Everything is under **Video → VR Video**, next to Aspect Ratio, Crop and
+Rotation, and it works the way they do: a list of values with a tick on the
+current one, the first of which is **Off**. There is no separate on/off command
+— choosing Off is the off switch, exactly as Crop's None is, and choosing a
+projection turns reprojection on with it. Settings are in **Settings → Video**.
 
 Clicking and double-clicking still do what they normally do: a drag that moves
 the view is not counted as a click, and a click that does not move is passed

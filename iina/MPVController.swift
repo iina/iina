@@ -417,12 +417,25 @@ class MPVController: NSObject {
                   level: .verbose)
     setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax, level: .verbose)
 
-    var spdif: [String] = []
-    if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
-    if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
-    if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
-    chkErr(setOptionString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","),
-                           verboseIfDefault: true))
+    let spdifValue = { (key: Preference.Key) -> String in
+      var spdif: [String] = []
+      if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
+      if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
+      if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
+      if Preference.bool(for: PK.spdifEAC3) { spdif.append("eac3") }
+      if Preference.bool(for: PK.spdifTRUEHD) { spdif.append("truehd") }
+      return spdif.joined(separator: ",")
+    }
+    setUserOption(PK.spdifAC3, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifDTS, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifDTSHD, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifEAC3, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifTRUEHD, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
 
     setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice,
                   verboseIfDefault: true)
@@ -673,7 +686,7 @@ class MPVController: NSObject {
   /// - Note: Advanced control must be enabled for the screenshot command to work when the window flag is used. See issue
   ///         [#4822](https://github.com/iina/iina/issues/4822) for details.
   func mpvInitRendering() {
-    guard let mpv = mpv else {
+    guard let mpv else {
       fatalError("mpvInitRendering() should be called after mpv handle being initialized!")
     }
     let apiType = UnsafeMutableRawPointer(mutating: (MPV_RENDER_API_TYPE_OPENGL as NSString).utf8String)
@@ -717,7 +730,7 @@ class MPVController: NSObject {
   }
 
   func mpvUninitRendering() {
-    guard let mpvRenderContext = mpvRenderContext else { return }
+    guard let mpvRenderContext else { return }
     mpv_render_context_set_update_callback(mpvRenderContext, nil, nil)
     mpv_render_context_free(mpvRenderContext)
     self.mpvRenderContext = nil
@@ -726,12 +739,12 @@ class MPVController: NSObject {
   }
 
   func mpvReportSwap() {
-    guard let mpvRenderContext = mpvRenderContext else { return }
+    guard let mpvRenderContext else { return }
     mpv_render_context_report_swap(mpvRenderContext)
   }
 
   func shouldRenderUpdateFrame() -> Bool {
-    guard let mpvRenderContext = mpvRenderContext else { return false }
+    guard let mpvRenderContext else { return false }
     let flags: UInt64 = mpv_render_context_update(mpvRenderContext)
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }
@@ -1617,7 +1630,7 @@ class MPVController: NSObject {
   private func setOptionalOptionColor(_ name: String, _ value: String?,
                                        level: Logger.Level = .debug,
                                        verboseIfDefault: Bool = false) -> Int32 {
-    guard let value = value else { return 0 }
+    guard let value else { return 0 }
     let levelToUse: Logger.Level = {
       // The default value for options of type color is currently returned by mpv in the alternative
       // string format that specifies component values in hex. Must convert to the form that uses
@@ -1633,7 +1646,7 @@ class MPVController: NSObject {
 
   private func setOptionalOptionString(_ name: String, _ value: String?, level: Logger.Level = .debug,
                                        verboseIfDefault: Bool = false) -> Int32 {
-    guard let value = value else { return 0 }
+    guard let value else { return 0 }
     return setOptionString(name, value, level: level, verboseIfDefault: verboseIfDefault)
   }
 
@@ -1714,7 +1727,7 @@ class MPVController: NSObject {
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard !(change?[NSKeyValueChangeKey.oldKey] is NSNull) else { return }
 
-    guard let keyPath = keyPath else { return }
+    guard let keyPath else { return }
     guard let infos = optionObservers[keyPath] else { return }
 
     for info in infos {

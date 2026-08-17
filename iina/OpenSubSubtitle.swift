@@ -226,7 +226,7 @@ class OpenSub {
           }
         }
       }
-      guard let finalUser = finalUser, let finalPw = finalPw else {
+      guard let finalUser, let finalPw else {
         log("An Open Subtitles account has not been configured")
         return .value
       }
@@ -317,7 +317,7 @@ class OpenSub {
     func searchForSubtitles(_ url: URL, _ hash: String?, _ mediaTitle: String) -> Promise<[Subtitle]> {
       // When streaming prefer the movie's title.
       let searchString = url.isFileURL ? url.deletingPathExtension().lastPathComponent : mediaTitle
-      if let hash = hash {
+      if let hash {
         log("Searching for subtitles of movies with hash \(hash) and matching '\(searchString)'")
       } else {
         log("Searching for subtitles of movies matching '\(searchString)'")

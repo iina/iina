@@ -288,7 +288,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-    if let item = item {
+    if let item {
       return historyData[item as! String]!.count
     } else {
       return historyData.count
@@ -296,7 +296,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-    if let item = item {
+    if let item {
       return historyData[item as! String]![index]
     } else {
       return historyDataKeys[index]

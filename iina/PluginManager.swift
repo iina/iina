@@ -153,9 +153,9 @@ class PluginManager {
   @MainActor
   func install(gitHubString string: String? = nil, localPackageURL url: URL? = nil, handler: ((Result) -> Void)? = nil) async {
     do {
-      let plugin = if let string = string {
+      let plugin = if let string {
         try JavascriptPlugin.create(fromGitURL: string)
-      } else if let url = url {
+      } else if let url {
         try JavascriptPlugin.create(fromPackageURL: url)
       } else {
         fatalError("PluginManager.install: a source must be provided.")

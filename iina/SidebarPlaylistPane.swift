@@ -185,7 +185,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   // MARK: - Total length
 
   private func showTotalLength() {
-    guard let playlistTotalLength = playlistTotalLength, playlistTotalLengthIsReady else { return }
+    guard let playlistTotalLength, playlistTotalLengthIsReady else { return }
     totalLengthLabel.isHidden = false
     if tableView.numberOfSelectedRows > 0 {
       let info = player.info
@@ -499,7 +499,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuPlayNext(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     let current = player.mpv.getInt(MPVProperty.playlistPos)
     var ob = 0  // index offset before current playing item
     var mc = 1  // moved item count, +1 because move to next item of current played one
@@ -528,12 +528,12 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     player.playlistRemove(selectedRows)
   }
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     Logger.log("User chose to delete files from playlist at indexes: \(selectedRows.map{$0})", subsystem: player.subsystem)
 
     var successes = IndexSet()
@@ -559,7 +559,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuShowInFinder(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     var urls: [URL] = []
     player.info.$playlist.withLock { playlist in
       for index in selectedRows {
@@ -573,7 +573,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuAddSubtitle(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows, let index = selectedRows.first else { return }
+    guard let selectedRows, let index = selectedRows.first else { return }
     let filename = player.info.$playlist.withLock { $0[index].filename }
     let fileURL = URL(fileURLWithPath: filename).deletingLastPathComponent()
     Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL, canChooseDir: true) { subURLs in
@@ -586,7 +586,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuWrongSubtitle(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     for index in selectedRows {
       let filename = player.info.$playlist.withLock { $0[index].filename }
       player.info.$matchedSubs.withLock { $0[filename]?.removeAll() }
@@ -595,7 +595,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextOpenInBrowser(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     selectedRows.forEach { i in
       let info = player.info.playlist[i]
       if info.isNetworkResource, let url = URL(string: info.filename) {
@@ -605,7 +605,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextCopyURL(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     let urls = selectedRows.compactMap { i -> String? in
       let info = player.info.playlist[i]
       return info.isNetworkResource ? info.filename : nil
@@ -803,7 +803,7 @@ class PlaylistTrackCellView: NSTableCellView {
   }
 
   private func setPrefix(_ prefix: String?) {
-    if let prefix = prefix {
+    if let prefix {
       stackView.setVisibilityPriority(.mustHold, for: prefixBtn)
       prefixBtn.text = prefix
     } else {
@@ -812,7 +812,7 @@ class PlaylistTrackCellView: NSTableCellView {
   }
 
   private func setAdditionalInfo(_ string: String?) {
-    if let string = string {
+    if let string {
       stackView.setVisibilityPriority(.mustHold, for: infoLabel)
       infoLabel.stringValue = string
       infoLabel.toolTip = string

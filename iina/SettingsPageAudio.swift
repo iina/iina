@@ -64,6 +64,8 @@ class SettingsPageAudio: SettingsPage {
           .withDetailView(audioOutputDeviceView)
         SettingsItem.General(title: .text_SPDIFOutput)
           .image(name: "audio.jack.stereo")
+          .hasDescription(content: .text_SPDIFOutputWarning)  // For why warning, see issue #6251.
+          .withHelpLink(AppData.spdifOutputHelpLink)
           .withExpandingDetailView {
             SettingsItem.Switch()
               .bindTo(.spdifAC3)
@@ -71,6 +73,10 @@ class SettingsPageAudio: SettingsPage {
               .bindTo(.spdifDTS)
             SettingsItem.Switch()
               .bindTo(.spdifDTSHD)
+            SettingsItem.Switch()
+              .bindTo(.spdifEAC3)
+            SettingsItem.Switch()
+              .bindTo(.spdifTRUEHD)
           }
       }
     }
@@ -86,6 +92,7 @@ class SettingsPageAudio: SettingsPage {
           .bindSwitchTo(.enableInitialVolume)
         SettingsItem.Input()
           .bindTo(.maxVolume)
+          .range(100...1000)
           .hasDescription()
       }
 

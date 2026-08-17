@@ -20,7 +20,7 @@ struct InfoDictionary {
   var buildConfiguration: String? { dictionary["\(buildKeyPrefix).configuration"] as? String }
   var buildCommit: String? { dictionary["\(buildKeyPrefix).commit"] as? String }
   var shortCommitSHA: String? {
-    guard let buildCommit = buildCommit else { return nil }
+    guard let buildCommit else { return nil }
     return String(buildCommit.prefix(7))
   }
 
@@ -49,7 +49,7 @@ struct InfoDictionary {
   ///
   /// This corresponds to the Xcode build configuration.
   var buildType: BuildType {
-    guard let buildConfiguration = buildConfiguration else { return .nightly }
+    guard let buildConfiguration else { return .nightly }
     return BuildType(rawValue: buildConfiguration) ?? .nightly
   }
 

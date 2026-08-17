@@ -981,6 +981,7 @@
 "settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
 "settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts";
 "settings.$SPDIFOutput" = "S/PDIF output";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Screenshots";
 "settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";

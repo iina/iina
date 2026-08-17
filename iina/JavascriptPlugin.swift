@@ -95,7 +95,7 @@ class JavascriptPlugin: NSObject {
   var preferencesPageURL: URL?
   var helpPageURL: URL?
   var githubURLString: String? {
-    guard let githubRepo = githubRepo else { return nil }
+    guard let githubRepo else { return nil }
     return "https://github.com/\(githubRepo)"
   }
 
@@ -478,7 +478,7 @@ class JavascriptPlugin: NSObject {
     }
     self.entryURL = entryURL
     
-    if let globalEntryPath = globalEntryPath {
+    if let globalEntryPath {
       guard let globalEntryURL = resolvePath(globalEntryPath, root: root) else {
         Logger.log("The entry file \(globalEntryPath) doesn't exist", level: .error)
         return nil
@@ -505,7 +505,7 @@ class JavascriptPlugin: NSObject {
   }
 
   func registerSubProviders() {
-    guard let subProviders = subProviders else { return }
+    guard let subProviders else { return }
     for provider in subProviders {
       guard let spID = provider["id"], let spName = provider["name"] else {
         Logger.log("A subtitle provider declaration should have an id and a name.", level: .error)
@@ -535,7 +535,7 @@ class JavascriptPlugin: NSObject {
       try fileManager.moveItem(at: self.root, to: dest)
       self.root = dest
       self.entryURL = resolvePath(entryPath, root: root)!
-      if let globalEntryPath = globalEntryPath {
+      if let globalEntryPath {
         self.globalEntryURL = resolvePath(globalEntryPath, root: root)!
       }
       self.preferencesPageURL = resolvePath(preferencesPage, root: root)
@@ -548,7 +548,7 @@ class JavascriptPlugin: NSObject {
   @discardableResult
   func remove() -> Int? {
     let pos = JavascriptPlugin.plugins.firstIndex(of: self)
-    if let pos = pos {
+    if let pos {
       JavascriptPlugin.plugins.remove(at: pos)
     }
     try? FileManager.default.removeItem(at: root)
@@ -661,7 +661,7 @@ class JavascriptPlugin: NSObject {
 
 
 fileprivate func resolvePath(_ path: String?, root: URL, allowNetwork: Bool = false) -> URL? {
-  guard let path = path else { return nil }
+  guard let path else { return nil }
   if path.hasPrefix("http://") || path.hasPrefix("https://") {
     if allowNetwork { return URL(string: path) }
     else { return nil }

@@ -202,12 +202,11 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   }
 
   private static func parsePastedOption(_ string: String) -> [String]? {
-    let parts = string.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
-    guard parts.count == 2 else { return nil }
+    guard let separator = string.firstIndex(of: "=") else { return nil }
 
     let whitespaceAndNewlines = CharacterSet.whitespacesAndNewlines
-    let key = String(parts[0]).trimmingCharacters(in: whitespaceAndNewlines)
-    let value = String(parts[1]).trimmingCharacters(in: whitespaceAndNewlines)
+    let key = String(string[..<separator]).trimmingCharacters(in: whitespaceAndNewlines)
+    let value = String(string[string.index(after: separator)...]).trimmingCharacters(in: whitespaceAndNewlines)
     guard !key.isEmpty, !value.isEmpty else { return nil }
     return [key, value]
   }

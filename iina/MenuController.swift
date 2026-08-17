@@ -283,7 +283,7 @@ class MenuController: NSObject, NSMenuDelegate {
     // Video menu
 
     videoMenu.delegate = self
-    vr2dMenu = VR2DMenuController(videoMenu: videoMenu)
+    vr2dMenu = VR2DMenuController(videoMenu: videoMenu, after: rotationMenu)
 
     quickSettingsVideo.action = #selector(MainWindowController.menuShowVideoQuickSettings(_:))
     videoTrackMenu.delegate = self

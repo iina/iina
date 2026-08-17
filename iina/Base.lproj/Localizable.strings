@@ -1027,7 +1027,7 @@
 "settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
 
 /* VR2D */
-"vr2d.flatten" = "Flatten VR Video";
+"vr2d.off" = "Off";
 "vr2d.menu" = "VR Video";
 "vr2d.projection" = "Projection";
 "vr2d.layout" = "Stereo Layout";
@@ -1040,8 +1040,6 @@
 "vr2d.projection.e" = "360° Equirectangular";
 "vr2d.projection.fisheye" = "Fisheye";
 "vr2d.projection.eac" = "Equi-Angular Cubemap";
-"vr2d.lens_angle" = "Lens Angle";
-"vr2d.lens_angle.value" = "Lens Angle — %d°";
 "vr2d.layout.mono" = "Monoscopic";
 "vr2d.layout.sbs" = "Side by Side";
 "vr2d.layout.sbs_swapped" = "Side by Side, Right Eye First";

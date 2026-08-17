@@ -2,89 +2,105 @@
 //  VR2DMenu.swift
 //  iina
 //
-//  The VR2D section of the Video menu, built in code rather than in the xib so
+//  The VR2D entry in the Video menu, built in code rather than in the xib so
 //  that syncing this fork with upstream never turns into a nib merge.
 //
-//  The menu is also where the keyboard shortcuts live. AppKit matches a menu's
-//  key equivalents before the key event reaches the window, so there is no need
-//  to touch IINA's own key handling — and the shortcut is always visible next
-//  to the command it runs, which is the part a hidden binding gets wrong.
+//  It sits with Aspect Ratio, Crop and Rotation and works the way they do: a
+//  list of values with a tick on the current one, the first of which turns the
+//  whole thing off. So there is no separate on/off command — choosing "Off" is
+//  the off switch, exactly as Crop's "None" is.
+//
+//  The submenus carry the keyboard shortcuts. AppKit matches a menu's key
+//  equivalents before the key event reaches the window, so IINA's own key
+//  handling is untouched and the shortcut is always visible next to the command
+//  it runs.
 //
 
 import Cocoa
 
 class VR2DMenuController: NSObject, NSMenuDelegate {
 
-  private let toggleItem = NSMenuItem()
-  private let submenuItem = NSMenuItem()
+  static let offTag = -2
+  static let autoTag = -1
+
+  private let rootItem = NSMenuItem()
+  private var offItem = NSMenuItem()
+  private var fisheyeItem = NSMenuItem()
 
   private var projectionItems: [(item: NSMenuItem, projection: VR2DProjection?)] = []
+  private var fisheyeFovItems: [(item: NSMenuItem, fov: Double)] = []
   private var layoutItems: [(item: NSMenuItem, layout: VR2DLayout?, swapEyes: Bool)] = []
   private var eyeItems: [(item: NSMenuItem, eye: VR2DEye)] = []
-  private var fisheyeFovItem = NSMenuItem()
 
-  /// Add the VR2D commands to the end of IINA's Video menu.
-  init(videoMenu: NSMenu) {
+  /// Add the VR2D entry to the Video menu, next to the other commands that
+  /// change how the frame is mapped onto the screen.
+  init(videoMenu: NSMenu, after rotationMenu: NSMenu?) {
     super.init()
 
-    toggleItem.title = NSLocalizedString("vr2d.flatten", comment: "Flatten VR Video")
-    toggleItem.action = #selector(MainWindowController.menuToggleVR2D(_:))
-    toggleItem.keyEquivalent = "v"
-    toggleItem.keyEquivalentModifierMask = [.option, .shift]
+    rootItem.title = NSLocalizedString("vr2d.menu", comment: "VR Video")
+    let menu = NSMenu()
+    menu.delegate = self
+    rootItem.submenu = menu
 
-    submenuItem.title = NSLocalizedString("vr2d.menu", comment: "VR Video")
-    let submenu = NSMenu()
-    submenu.delegate = self
-    submenuItem.submenu = submenu
+    // Off first, then the projections — the same shape as Crop's "None"
+    // followed by its sizes.
+    offItem = NSMenuItem(title: NSLocalizedString("vr2d.off", comment: "Off"),
+                         action: #selector(MainWindowController.menuVR2DSetProjection(_:)),
+                         keyEquivalent: "")
+    offItem.tag = VR2DMenuController.offTag
+    menu.addItem(offItem)
+    menu.addItem(projectionItem(NSLocalizedString("vr2d.auto_plain", comment: "Auto"), nil))
+    menu.addItem(.separator())
+    menu.addItem(projectionItem(NSLocalizedString("vr2d.projection.he", comment: "180 Equirectangular"),
+                                .halfEquirect))
+    menu.addItem(projectionItem(NSLocalizedString("vr2d.projection.e", comment: "360 Equirectangular"),
+                                .equirect))
+    menu.addItem(fisheyeMenu())
+    menu.addItem(projectionItem(NSLocalizedString("vr2d.projection.eac", comment: "Equi-Angular Cubemap"),
+                                .eac))
+    menu.addItem(.separator())
+    menu.addItem(layoutMenu())
+    menu.addItem(eyeMenu())
+    menu.addItem(lookAroundMenu())
 
-    submenu.addItem(projectionMenu())
-    submenu.addItem(layoutMenu())
-    submenu.addItem(eyeMenu())
-    submenu.addItem(.separator())
-    submenu.addItem(lookAroundMenu())
-
-    videoMenu.addItem(.separator())
-    videoMenu.addItem(toggleItem)
-    videoMenu.addItem(submenuItem)
+    // Straight after Rotation: it is the same kind of thing, whereas flip and
+    // mirror are their own little group.
+    let index = rotationMenu.map { videoMenu.indexOfItem(withSubmenu: $0) } ?? -1
+    if index >= 0 {
+      videoMenu.insertItem(rootItem, at: index + 1)
+    } else {
+      videoMenu.addItem(rootItem)
+    }
   }
 
   // MARK: - Construction
 
-  private func projectionMenu() -> NSMenuItem {
-    let root = NSMenuItem()
-    root.title = NSLocalizedString("vr2d.projection", comment: "Projection")
+  /// One row of the projection list. A `nil` projection means "auto", i.e. use
+  /// whatever detection worked out.
+  private func projectionItem(_ title: String, _ projection: VR2DProjection?) -> NSMenuItem {
+    let item = NSMenuItem(title: title,
+                          action: #selector(MainWindowController.menuVR2DSetProjection(_:)),
+                          keyEquivalent: "")
+    item.tag = projection?.rawValue ?? VR2DMenuController.autoTag
+    projectionItems.append((item, projection))
+    return item
+  }
+
+  /// Fisheye is a projection like the others, but the lens angle only means
+  /// anything here, so it gets a submenu rather than another row further down.
+  private func fisheyeMenu() -> NSMenuItem {
+    fisheyeItem.title = NSLocalizedString("vr2d.projection.fisheye", comment: "Fisheye")
     let menu = NSMenu()
-
-    let next = NSMenuItem(title: NSLocalizedString("vr2d.next", comment: "Try the Next One"),
-                          action: #selector(MainWindowController.menuVR2DCycleProjection(_:)),
-                          keyEquivalent: "p")
-    next.keyEquivalentModifierMask = [.option]
-    menu.addItem(next)
-    menu.addItem(.separator())
-
-    let choices: [(String, VR2DProjection?)] = [
-      (NSLocalizedString("vr2d.auto_plain", comment: "Auto"), nil),
-      (NSLocalizedString("vr2d.projection.he", comment: "180 Equirectangular"), .halfEquirect),
-      (NSLocalizedString("vr2d.projection.e", comment: "360 Equirectangular"), .equirect),
-      (NSLocalizedString("vr2d.projection.fisheye", comment: "Fisheye"), .fisheye),
-      (NSLocalizedString("vr2d.projection.eac", comment: "Equi-Angular Cubemap"), .eac),
-    ]
-    for (title, projection) in choices {
-      let item = NSMenuItem(title: title,
-                            action: #selector(MainWindowController.menuVR2DSetProjection(_:)),
+    for fov in [180.0, 190.0, 200.0, 220.0] {
+      let item = NSMenuItem(title: "\(Int(fov))\(Constants.String.degree)",
+                            action: #selector(MainWindowController.menuVR2DSetFisheyeFov(_:)),
                             keyEquivalent: "")
-      item.tag = projection?.rawValue ?? -1
+      item.tag = Int(fov)
       menu.addItem(item)
-      projectionItems.append((item, projection))
+      fisheyeFovItems.append((item, fov))
     }
-
-    menu.addItem(.separator())
-    fisheyeFovItem.title = NSLocalizedString("vr2d.lens_angle", comment: "Lens Angle")
-    fisheyeFovItem.action = #selector(MainWindowController.menuVR2DCycleFisheyeFov(_:))
-    menu.addItem(fisheyeFovItem)
-
-    root.submenu = menu
-    return root
+    fisheyeItem.submenu = menu
+    return fisheyeItem
   }
 
   private func layoutMenu() -> NSMenuItem {
@@ -133,7 +149,9 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
     menu.addItem(.separator())
 
     for (index, eye) in [VR2DEye.left, .right].enumerated() {
-      let item = NSMenuItem(title: eye == .left ? NSLocalizedString("vr2d.eye.left", comment: "Left") : NSLocalizedString("vr2d.eye.right", comment: "Right"),
+      let item = NSMenuItem(title: eye == .left
+                              ? NSLocalizedString("vr2d.eye.left", comment: "Left")
+                              : NSLocalizedString("vr2d.eye.right", comment: "Right"),
                             action: #selector(MainWindowController.menuVR2DSetEye(_:)),
                             keyEquivalent: "")
       item.tag = index
@@ -152,10 +170,14 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
     // Tags carry the direction so one action serves all four keys.
     let directions: [(String, String, Int)] = [
-      (NSLocalizedString("vr2d.look_up", comment: "Look Up"), String(UnicodeScalar(NSUpArrowFunctionKey)!), 0),
-      (NSLocalizedString("vr2d.look_down", comment: "Look Down"), String(UnicodeScalar(NSDownArrowFunctionKey)!), 1),
-      (NSLocalizedString("vr2d.look_left", comment: "Look Left"), String(UnicodeScalar(NSLeftArrowFunctionKey)!), 2),
-      (NSLocalizedString("vr2d.look_right", comment: "Look Right"), String(UnicodeScalar(NSRightArrowFunctionKey)!), 3),
+      (NSLocalizedString("vr2d.look_up", comment: "Look Up"),
+       String(UnicodeScalar(NSUpArrowFunctionKey)!), 0),
+      (NSLocalizedString("vr2d.look_down", comment: "Look Down"),
+       String(UnicodeScalar(NSDownArrowFunctionKey)!), 1),
+      (NSLocalizedString("vr2d.look_left", comment: "Look Left"),
+       String(UnicodeScalar(NSLeftArrowFunctionKey)!), 2),
+      (NSLocalizedString("vr2d.look_right", comment: "Look Right"),
+       String(UnicodeScalar(NSRightArrowFunctionKey)!), 3),
     ]
     for (title, key, tag) in directions {
       let item = NSMenuItem(title: title,
@@ -196,33 +218,35 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
   // MARK: - State
 
-  /// Called before the Video menu is shown, so the ticks and the `Auto`
-  /// descriptions always say what VR2D currently believes.
+  /// Called before the menu is shown, so the ticks always say what VR2D
+  /// currently believes.
   func refresh() {
     let vr2d = PlayerCore.active.vr2d
-    toggleItem.state = vr2d.isEnabled ? .on : .off
-
     let detected = vr2d.detection
+    let isAuto = vr2d.isEnabled && vr2d.source == detected.source
+
+    offItem.state = vr2d.isEnabled ? .off : .on
+
     for (item, projection) in projectionItems {
-      item.state = projection == vr2d.source.projection ? .on : .off
-      if projection == nil {
-        item.title = String(format: NSLocalizedString("vr2d.auto", comment: "Auto (%@)"), VR2DDetect.summarize(detected.source))
-        // "Auto" is ticked only when nothing has been overridden.
-        item.state = vr2d.source == detected.source ? .on : .off
+      guard let projection else {
+        item.title = String(format: NSLocalizedString("vr2d.auto", comment: "Auto (%@)"),
+                            VR2DDetect.summarize(detected.source))
+        item.state = isAuto ? .on : .off
+        continue
       }
-    }
-    // Ticking a specific projection as well as Auto would be misleading.
-    if projectionItems.first?.item.state == .on {
-      for (item, projection) in projectionItems where projection != nil { item.state = .off }
+      item.state = vr2d.isEnabled && !isAuto && vr2d.source.projection == projection ? .on : .off
     }
 
-    fisheyeFovItem.title = vr2d.source.projection == .fisheye
-      ? String(format: NSLocalizedString("vr2d.lens_angle.value", comment: "Lens Angle - %d"), Int(vr2d.source.inHFov))
-      : NSLocalizedString("vr2d.lens_angle", comment: "Lens Angle")
+    fisheyeItem.state = vr2d.isEnabled && !isAuto && vr2d.source.projection == .fisheye ? .on : .off
+    for (item, fov) in fisheyeFovItems {
+      item.state = fisheyeItem.state == .on && vr2d.source.inHFov == fov ? .on : .off
+    }
 
     for (item, layout, swapEyes) in layoutItems {
       guard let layout else {
-        item.title = "Auto (\(description(of: detected.source.layout, swapEyes: detected.source.swapEyes)))"
+        item.title = String(format: NSLocalizedString("vr2d.auto", comment: "Auto (%@)"),
+                            description(of: detected.source.layout,
+                                        swapEyes: detected.source.swapEyes))
         item.state = vr2d.source.layout == detected.source.layout
           && vr2d.source.swapEyes == detected.source.swapEyes ? .on : .off
         continue
@@ -237,9 +261,16 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
   private func description(of layout: VR2DLayout, swapEyes: Bool) -> String {
     switch layout {
-    case .mono: return "monoscopic"
-    case .sbs: return swapEyes ? "side by side, right eye first" : "side by side"
-    case .tb: return swapEyes ? "over under, bottom eye first" : "over under"
+    case .mono:
+      return NSLocalizedString("vr2d.layout.mono", comment: "Monoscopic")
+    case .sbs:
+      return swapEyes
+        ? NSLocalizedString("vr2d.layout.sbs_swapped", comment: "Side by Side, Right Eye First")
+        : NSLocalizedString("vr2d.layout.sbs", comment: "Side by Side")
+    case .tb:
+      return swapEyes
+        ? NSLocalizedString("vr2d.layout.tb_swapped", comment: "Over Under, Bottom Eye First")
+        : NSLocalizedString("vr2d.layout.tb", comment: "Over Under")
     }
   }
 
@@ -252,20 +283,20 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
 extension MainWindowController {
 
-  @objc func menuToggleVR2D(_ sender: NSMenuItem) {
-    player.vr2d.toggle()
+  @objc func menuVR2DSetProjection(_ sender: NSMenuItem) {
+    switch sender.tag {
+    case VR2DMenuController.offTag: player.vr2d.setEnabled(false)
+    case VR2DMenuController.autoTag: player.vr2d.selectProjection(nil)
+    default: player.vr2d.selectProjection(VR2DProjection(rawValue: sender.tag))
+    }
+  }
+
+  @objc func menuVR2DSetFisheyeFov(_ sender: NSMenuItem) {
+    player.vr2d.selectFisheye(fov: Double(sender.tag))
   }
 
   @objc func menuVR2DCycleProjection(_ sender: NSMenuItem) {
     player.vr2d.cycleProjection()
-  }
-
-  @objc func menuVR2DSetProjection(_ sender: NSMenuItem) {
-    player.vr2d.setProjection(VR2DProjection(rawValue: sender.tag))
-  }
-
-  @objc func menuVR2DCycleFisheyeFov(_ sender: NSMenuItem) {
-    player.vr2d.cycleFisheyeFov()
   }
 
   @objc func menuVR2DCycleLayout(_ sender: NSMenuItem) {

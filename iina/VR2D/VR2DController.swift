@@ -318,6 +318,24 @@ final class VR2DController {
     setProjection(next)
   }
 
+  /// Pick a projection from the menu. Choosing one turns reprojection on, the
+  /// way choosing a crop turns cropping on; `nil` means whatever detection
+  /// worked out.
+  func selectProjection(_ projection: VR2DProjection?) {
+    if !isEnabled { setEnabled(true, announce: false) }
+    setProjection(projection)
+  }
+
+  /// Fisheye at a particular lens angle.
+  func selectFisheye(fov: Double) {
+    if !isEnabled { setEnabled(true, announce: false) }
+    source.projection = .fisheye
+    source.inHFov = fov
+    source.inVFov = fov
+    announceSource()
+    clampAndPublish()
+  }
+
   func setProjection(_ projection: VR2DProjection?) {
     guard let projection else {
       source.projection = detection.source.projection

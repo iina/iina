@@ -309,15 +309,6 @@ final class VR2DController {
 
   // MARK: - Overrides
 
-  /// Step through the projections, announcing each, so a badly named file can
-  /// be sorted out by eye in a few keystrokes. Straight lines in the scene go
-  /// straight when the projection is right and bow when it is wrong.
-  func cycleProjection() {
-    let order: [VR2DProjection] = [.halfEquirect, .equirect, .fisheye, .eac]
-    let next = order[((order.firstIndex(of: source.projection) ?? 0) + 1) % order.count]
-    setProjection(next)
-  }
-
   /// Pick a projection from the menu. Choosing one turns reprojection on, the
   /// way choosing a crop turns cropping on; `nil` means whatever detection
   /// worked out.
@@ -361,18 +352,6 @@ final class VR2DController {
       source.inHFov = fov
       source.inVFov = fov
     }
-    announceSource()
-    clampAndPublish()
-  }
-
-  /// Fisheye lenses come in a handful of angles and the name does not always
-  /// say which, so this steps through the common ones.
-  func cycleFisheyeFov() {
-    guard source.projection == .fisheye else { return }
-    let angles: [Double] = [180, 190, 200, 220]
-    let next = angles[((angles.firstIndex(of: source.inHFov) ?? angles.count - 1) + 1) % angles.count]
-    source.inHFov = next
-    source.inVFov = next
     announceSource()
     clampAndPublish()
   }

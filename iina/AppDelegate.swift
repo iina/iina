@@ -253,8 +253,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     LegacyMigration.shared.migrateLegacyPreferences()
 
     // guide window
-    if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
-      guideWindow.show(pages: [.highlights])
+    switch InfoDictionary.shared.buildType {
+    case .release, .beta:
+      if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
+        guideWindow.show(pages: [.highlights])
+      }
+    default:
+      break
     }
 
     // Hide Window > "Enter Full Screen" menu item, because this is already present in the Video menu

@@ -12,13 +12,7 @@ fileprivate let ui = SettingsUIHelper.sharedUI
 class SettingsPageAdvanced: SettingsPage {
   private var pageView: NSView?
   private var advancedSettingsView: NSView?
-  private var advancedSettingsObserver: NSObjectProtocol?
-
-  deinit {
-    if let advancedSettingsObserver {
-      NotificationCenter.default.removeObserver(advancedSettingsObserver)
-    }
-  }
+  private let prefObserver = Preference.Observer()
 
   override var identifier: String {
     "advanced"
@@ -46,16 +40,9 @@ class SettingsPageAdvanced: SettingsPage {
       self.pageView = pageView
     }
 
-    if advancedSettingsObserver == nil {
-      advancedSettingsObserver = NotificationCenter.default.addObserver(
-        forName: UserDefaults.didChangeNotification,
-        object: UserDefaults.standard,
-        queue: .main
-      ) { [weak self] _ in
-        self?.setAdvancedControlsEnabled(Preference.bool(for: .enableAdvancedSettings))
-      }
+    prefObserver.add(.enableAdvancedSettings, runNow: true) { [weak self] _ in
+      self?.setAdvancedControlsEnabled(Preference.bool(for: .enableAdvancedSettings))
     }
-    setAdvancedControlsEnabled(Preference.bool(for: .enableAdvancedSettings))
   }
 
   private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.userDefinedConfDir)

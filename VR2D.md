@@ -152,10 +152,10 @@ straight through.
 ### When the name tells you nothing
 
 Plenty of files are named in a way that says nothing about how they were shot.
-<kbd>⌥</kbd><kbd>P</kbd> steps through the projections one keystroke at a time,
-announcing each. The tell is that straight lines in the scene — door frames,
-ceiling beams, table edges — go straight when the projection is right and bow
-when it is wrong.
+**Video → VR Video** lists the projections, so you can work down them while the
+file plays. The tell is that straight lines in the scene — door frames, ceiling
+beams, table edges — go straight when the projection is right and bow when it is
+wrong.
 
 ## Detection
 

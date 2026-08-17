@@ -295,10 +295,6 @@ extension MainWindowController {
     player.vr2d.selectFisheye(fov: Double(sender.tag))
   }
 
-  @objc func menuVR2DCycleProjection(_ sender: NSMenuItem) {
-    player.vr2d.cycleProjection()
-  }
-
   @objc func menuVR2DCycleLayout(_ sender: NSMenuItem) {
     player.vr2d.cycleLayout()
   }

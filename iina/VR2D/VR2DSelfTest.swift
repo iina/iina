@@ -215,6 +215,20 @@ enum VR2DSelfTest {
       report["settingsSections"] = settings.builtSections.count
       report["settingsRendered"] = !settingsView.subviews.isEmpty
 
+      // Changing a subtitle setting has to restyle whatever is on screen right
+      // away, rather than waiting for the next subtitle line or a track change.
+      let subtitles = player.mainWindow.vr2dSubtitleView
+      subtitles.player = player
+      subtitles.text = "Restyling check"
+      let sizeBefore = subtitles.renderedFontSize
+      let previousSize = player.vr2dSubtitleStyle().fontSize
+      Preference.set(Float(previousSize > 60 ? 20 : 96), for: .subTextSize)
+      try? await Task.sleep(nanoseconds: 500_000_000)
+      report["subtitleSizeBefore"] = sizeBefore
+      report["subtitleSizeAfter"] = subtitles.renderedFontSize
+      Preference.set(Float(previousSize), for: .subTextSize)
+      subtitles.text = ""
+
       let url = URL(fileURLWithPath: inputDirectory).appendingPathComponent("report.json")
       if let data = try? JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted]) {
         try? data.write(to: url)

@@ -78,6 +78,12 @@ check("the pass does not make redrawing while paused less reliable", on >= off,
 check("the settings page builds", report["settingsRendered"] is True,
       f"{report['settingsSections']} sections")
 
+# A subtitle setting changing must restyle what is on screen straight away.
+size_before, size_after = report["subtitleSizeBefore"], report["subtitleSizeAfter"]
+check("changing a subtitle setting restyles immediately",
+      size_before > 0 and abs(size_after - size_before) > 1,
+      f"{size_before:.1f}pt -> {size_after:.1f}pt")
+
 # The two captures were taken while paused, so any difference between them can
 # only have come from the reprojection pass re-running over the held frame.
 size = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=width,height",

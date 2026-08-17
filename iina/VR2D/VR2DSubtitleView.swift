@@ -98,6 +98,17 @@ class VR2DSubtitleView: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  /// Point size the text was last drawn at. Used by the self-test to check that
+  /// a settings change restyles what is already on screen.
+  var renderedFontSize: Double {
+    guard label.attributedStringValue.length > 0,
+          let font = label.attributedStringValue.attribute(.font, at: 0,
+                                                           effectiveRange: nil) as? NSFont else {
+      return 0
+    }
+    return Double(font.pointSize)
+  }
+
   /// Clicks belong to the video underneath — panning must not stop because the
   /// pointer happened to be over a subtitle.
   override func hitTest(_ point: NSPoint) -> NSView? { nil }

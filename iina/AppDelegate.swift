@@ -11,7 +11,6 @@ import MediaPlayer
 import Sparkle
 
 let IINA_ENABLE_PLUGIN_SYSTEM = true
-let IINA_ENABLE_NEW_SETTINGS = UserDefaults.standard.bool(forKey: "enableNewSettings")
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
@@ -113,7 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   private let observedPrefKeys: [Preference.Key] = [.logLevel, .thumbnailWidth]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
 
     switch keyPath {
     case Preference.Key.logLevel.rawValue:
@@ -772,7 +771,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
-      preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      if Preference.enableNewSettings {
+        SettingsWindow.default.installPlugin(localPackageURL: pluginPackageURL)
+      } else {
+        preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      }
       return
     }
 
@@ -973,7 +976,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {
-    if IINA_ENABLE_NEW_SETTINGS {
+    if Preference.enableNewSettings {
       SettingsWindow.default.show()
     } else {
       preferenceWindowController.showWindow(self)
@@ -981,7 +984,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @objc func showPluginPreferences(_ sender: NSMenuItem) {
-    preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
+    if Preference.enableNewSettings {
+      SettingsWindow.default.show()
+      SettingsWindow.default.navigateTo(page: "plugin")
+    } else {
+      preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
+    }
   }
 
   @IBAction func showVideoFilterWindow(_ sender: AnyObject) {
@@ -1049,6 +1057,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         player.events.emit(.fileStarted)
       }
     }
+  }
+  
+  @objc func toggleNewSettings(_ sender: AnyObject) {
+    Preference.enableNewSettings = !Preference.enableNewSettings
   }
 
   /// Dump contents of all player cores to a txt file. Strictly for debugging. No localization needed.

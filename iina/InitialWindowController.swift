@@ -64,7 +64,7 @@ class InitialWindowController: NSWindowController {
   private var currentlyHoveredRow: GrayHighlightRowView?
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
 
     switch keyPath {
 
@@ -151,7 +151,7 @@ class InitialWindowController: NSWindowController {
   }
 
   private func setMaterial(_ theme: Preference.Theme?) {
-    guard let window = window, let theme = theme else { return }
+    guard let window, let theme else { return }
     window.appearance = NSAppearance(iinaTheme: theme)
     let gradientLayer = CAGradientLayer()
     gradientLayer.colors = window.effectiveAppearance.isDark ?

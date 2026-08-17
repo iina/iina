@@ -154,7 +154,7 @@ class VideoView: NSView {
   }
 
   private func destroyTimer() {
-    if let draggingTimer = draggingTimer {
+    if let draggingTimer {
       draggingTimer.invalidate()
     }
     draggingTimer = nil
@@ -165,7 +165,7 @@ class VideoView: NSView {
     guard !player.isInMiniPlayer && !playlistShown && hasPlayableFiles else { return super.draggingUpdated(sender) }
 
     func inTriggerArea(_ point: NSPoint?) -> Bool {
-      guard let point = point, let frame = player.mainWindow.window?.frame else { return false }
+      guard let point, let frame = player.mainWindow.window?.frame else { return false }
       return point.x > (frame.maxX - frame.width * 0.2)
     }
 
@@ -212,7 +212,7 @@ class VideoView: NSView {
   /// by `Logger.fatal`.
   /// - Returns: A [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k).
   private func obtainDisplayLink() -> CVDisplayLink {
-    if let link = link { return link }
+    if let link { return link }
     let result = CVDisplayLinkCreateWithActiveCGDisplays(&link)
     checkResult(result, "CVDisplayLinkCreateWithActiveCGDisplays")
     guard let link = link else {
@@ -232,14 +232,14 @@ class VideoView: NSView {
   }
 
   @objc func stopDisplayLink() {
-    guard let link = link, CVDisplayLinkIsRunning(link) else { return }
+    guard let link, CVDisplayLinkIsRunning(link) else { return }
     checkResult(CVDisplayLinkStop(link), "CVDisplayLinkStop")
     log("Display link stopped", level: .verbose)
   }
 
   // This should only be called if the window has changed displays
   func updateDisplayLink() {
-    guard let window = window, let link = link, let screen = window.screen else { return }
+    guard let window, let link, let screen = window.screen else { return }
     let displayId = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
 
     // Do nothing if on the same display

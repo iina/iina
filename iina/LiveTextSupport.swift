@@ -17,7 +17,7 @@ fileprivate func liveTextLog(_ str: @autoclosure () -> String, level: Logger.Lev
 
 @preconcurrency
 @MainActor
-class LiveTextController {
+class LiveTextController: NSObject {
   private weak var mainWindow: MainWindowController!
 
   var overlayView: NSView?
@@ -36,13 +36,30 @@ class LiveTextController {
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
+    super.init()
+
+    UserDefaults.standard.addObserver(self, forKeyPath: PK.compactUI.rawValue, context: nil)
+  }
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath else { return }
+
+    switch keyPath {
+    case PK.compactUI.rawValue:
+      updateOverlayInsets()
+    default:
+      return
+    }
   }
 
   func updateOverlayInsets() {
     guard #available(macOS 13.0, *) else { return }
     guard let view = overlayView as? ImageAnalysisOverlayView else { return }
     let isBottom = Preference.enum(for: .oscPosition) as Preference.OSCPosition == .bottom
-    view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: 8, left: 8, bottom: isBottom ? 48 : 8, right: 8)
+    let isCompact = Preference.bool(for: .compactUI)
+    let padding: CGFloat = isCompact ? 8 : 14
+    let bottomPadding: CGFloat = isBottom ? (isCompact ? 50 : 64) : padding
+    view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: padding, left: padding, bottom: bottomPadding, right: padding)
   }
 
   func requestAnalysis() {

@@ -187,7 +187,7 @@ class OpenURLWindowController: NSWindowController, NSTextFieldDelegate, NSContro
       return
     }
     let (url, hasScheme) = getURL()
-    if let url = url, let host = url.host {
+    if let url, let host = url.host {
       errorMessageLabel.isHidden = true
       urlField.textColor = .labelColor
       openButton.isEnabled = true

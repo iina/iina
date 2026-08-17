@@ -87,6 +87,7 @@ extension SettingsLocalization.Key {
   static let gaplessAudioLabel = SettingsLocalization.Key("gaplessAudio.label")
   static let preferredAudioDeviceLabel = SettingsLocalization.Key("preferredAudioDevice.label")
   static let text_SPDIFOutput = SettingsLocalization.Key("$SPDIFOutput")
+  static let text_SPDIFOutputWarning = SettingsLocalization.Key("$SPDIFOutputWarning")
   static let text_PreferredLanguage = SettingsLocalization.Key("$PreferredLanguage")
   static let text_dB = SettingsLocalization.Key("$dB")
   static let text_Hardware = SettingsLocalization.Key("$Hardware")

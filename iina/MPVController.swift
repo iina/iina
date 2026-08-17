@@ -119,6 +119,7 @@ class MPVController: NSObject {
 
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackList: MPV_FORMAT_NONE,
+    MPVProperty.subText: MPV_FORMAT_STRING,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
     MPVProperty.audioDeviceList: MPV_FORMAT_NONE,
@@ -1263,6 +1264,14 @@ class MPVController: NSObject {
 
     case MPVProperty.audioDeviceList:
       DispatchQueue.main.async { self.player.audioDeviceListChanged() }
+
+    case MPVProperty.subText:
+      // Drawn by VR2D over the flattened picture when reprojection is on, since
+      // mpv's own drawing would be warped along with the video.
+      let text = (property.format == MPV_FORMAT_STRING)
+        ? String(cString: UnsafePointer<UnsafePointer<CChar>>(OpaquePointer(property.data)!).pointee)
+        : ""
+      DispatchQueue.main.async { self.player.vr2d.subtitleTextChanged(text) }
 
     case MPVProperty.videoParams:
       DispatchQueue.main.async { self.player.postNotification(.iinaVideoParamsChanged) }

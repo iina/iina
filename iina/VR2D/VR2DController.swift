@@ -43,6 +43,9 @@ final class VR2DController {
   private var videoHeight = 0
   /// What `video-timing-offset` was before reprojection took it to zero.
   private var savedVideoTimingOffset: Double?
+  /// What `sub-visibility` was before reprojection took subtitle drawing over.
+  private var savedSubVisibility: Bool?
+  private var subtitleText = ""
   /// Warn once per file, not once per video-reconfig.
   private var hasWarnedAboutFilter = false
 
@@ -156,6 +159,7 @@ final class VR2DController {
     guard enabled != isEnabled else { return }
     isEnabled = enabled
     applyVideoTiming()
+    applySubtitleHandling()
     if enabled {
       resetView()
     }
@@ -189,6 +193,52 @@ final class VR2DController {
 
   func toggle() {
     setEnabled(!isEnabled)
+  }
+
+  // MARK: - Subtitles
+
+  /// Take subtitle drawing away from mpv while reprojection is on.
+  ///
+  /// mpv composites subtitles into the same framebuffer as the video and the
+  /// render API cannot separate them, so they would be warped onto the sphere
+  /// with the picture. `VR2DSubtitleView` draws them flat over the top instead.
+  ///
+  /// Picture-based subtitles have no text to re-draw, so mpv keeps them and
+  /// they stay warped — a fair trade against showing nothing at all.
+  private func applySubtitleHandling() {
+    guard player.mainWindow.loaded else { return }
+    if isEnabled {
+      if savedSubVisibility == nil {
+        savedSubVisibility = player.mpv.getFlag(MPVOption.Subtitles.subVisibility)
+      }
+      if hasTextSubtitles {
+        player.mpv.setFlag(MPVOption.Subtitles.subVisibility, false)
+      }
+      player.mainWindow.vr2dSubtitleView.text = subtitleText
+    } else {
+      if let saved = savedSubVisibility {
+        player.mpv.setFlag(MPVOption.Subtitles.subVisibility, saved)
+        savedSubVisibility = nil
+      }
+      player.mainWindow.vr2dSubtitleView.text = ""
+    }
+  }
+
+  /// `sub-text` is empty for picture-based subtitles, which is how they are
+  /// told apart without inspecting the track list.
+  private var hasTextSubtitles: Bool {
+    return !(player.mpv.getString(MPVProperty.subText) ?? "").isEmpty || subtitleText.isEmpty
+  }
+
+  func subtitleTextChanged(_ text: String) {
+    subtitleText = text
+    guard player.mainWindow.loaded else { return }
+    // A track that suddenly starts producing text is a text track; take over.
+    if isEnabled, !text.isEmpty,
+       player.mpv.getFlag(MPVOption.Subtitles.subVisibility) {
+      player.mpv.setFlag(MPVOption.Subtitles.subVisibility, false)
+    }
+    player.mainWindow.vr2dSubtitleView.text = isEnabled ? text : ""
   }
 
   /// Stop mpv rendering ahead of time while looking around is possible.

@@ -213,6 +213,7 @@
 		FE72D00000000000000000CC /* VR2DController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72D0000000000000000068 /* VR2DController.swift */; };
 		FE72D00000000000000000CD /* VR2DSelfTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72D0000000000000000069 /* VR2DSelfTest.swift */; };
 		FE72D00000000000000000CE /* VR2DMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72D000000000000000006A /* VR2DMenu.swift */; };
+		FE72D00000000000000000CF /* VR2DSubtitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72D000000000000000006B /* VR2DSubtitleView.swift */; };
 		8407D1401E3A684C0043895D /* ViewLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D13F1E3A684C0043895D /* ViewLayer.swift */; };
 		840820111ECF6C1800361416 /* FileGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840820101ECF6C1800361416 /* FileGroup.swift */; };
 		840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */; };
@@ -1307,6 +1308,7 @@
 		FE72D0000000000000000068 /* VR2DController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VR2DController.swift; sourceTree = "<group>"; };
 		FE72D0000000000000000069 /* VR2DSelfTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VR2DSelfTest.swift; sourceTree = "<group>"; };
 		FE72D000000000000000006A /* VR2DMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VR2DMenu.swift; sourceTree = "<group>"; };
+		FE72D000000000000000006B /* VR2DSubtitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VR2DSubtitleView.swift; sourceTree = "<group>"; };
 		8407D13F1E3A684C0043895D /* ViewLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLayer.swift; sourceTree = "<group>"; };
 		840820101ECF6C1800361416 /* FileGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileGroup.swift; sourceTree = "<group>"; };
 		840AF5811E732C8F00F4AF92 /* JustXMLRPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JustXMLRPC.swift; sourceTree = "<group>"; };
@@ -2523,6 +2525,7 @@
 				FE72D0000000000000000068 /* VR2DController.swift */,
 				FE72D0000000000000000069 /* VR2DSelfTest.swift */,
 				FE72D000000000000000006A /* VR2DMenu.swift */,
+				FE72D000000000000000006B /* VR2DSubtitleView.swift */,
 			);
 			path = VR2D;
 			sourceTree = "<group>";
@@ -3254,6 +3257,7 @@
 				FE72D00000000000000000CC /* VR2DController.swift in Sources */,
 				FE72D00000000000000000CD /* VR2DSelfTest.swift in Sources */,
 				FE72D00000000000000000CE /* VR2DMenu.swift in Sources */,
+				FE72D00000000000000000CF /* VR2DSubtitleView.swift in Sources */,
 				E3B93C872FE9F77600803513 /* InteractiveMode.swift in Sources */,
 				E3D94E822FD0649A00B08618 /* UIHelper.swift in Sources */,
 				E3A239B12FCB4D0900CE6ACC /* SidebarPane.swift in Sources */,

@@ -3036,6 +3036,7 @@ extension MainWindowController: PIPViewControllerDelegate {
   func enterPIP() {
     guard pipStatus != .inPIP else { return }
     pipStatus = .inPIP
+    liveText.clearAnalysis()
     showUI()
 
     pipVideo = NSViewController()
@@ -3101,6 +3102,7 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     isWindowMiniaturizedDueToPip = false
     isWindowHidden = false
+    liveText.requestAnalysis()
     player.events.emit(.pipChanged, data: false)
     NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": false])
   }

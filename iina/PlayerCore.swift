@@ -803,6 +803,7 @@ class PlayerCore: NSObject {
     miniPlayer.playlistWrapperView.addSubview(playlistView.view)
     playlistView.view.padding(.all)
     // move video view
+    mainWindow.liveText.clearAnalysis()
     videoView.removeFromSuperview()
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
@@ -884,6 +885,7 @@ class PlayerCore: NSObject {
     }
 
     mainWindow.forceDraw("exited music mode")
+    mainWindow.liveText.requestAnalysis()
     postNotification(.iinaMusicModeChanged)
     events.emit(.musicModeChanged, data: false)
   }

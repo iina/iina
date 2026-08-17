@@ -32,6 +32,11 @@ class LiveTextController: NSObject {
   var isShown: Bool {
     overlayView != nil
   }
+  var isAvailable: Bool {
+    mainWindow.pipStatus == .notInPIP
+      && !mainWindow.interactiveMode.isActive
+      && !mainWindow.player.isInMiniPlayer
+  }
   private var wasUIHiddenByLiveText: Bool = false
 
   init(mainWindow: MainWindowController) {
@@ -63,13 +68,12 @@ class LiveTextController: NSObject {
   }
 
   func requestAnalysis() {
-    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled,
-          !mainWindow.interactiveMode.isActive else { return }
+    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled, isAvailable else { return }
     requestAnalysisImpl()
   }
 
   func clearAnalysis() {
-    guard #available(macOS 13.0, *), isShown else { return }
+    guard #available(macOS 13.0, *), analysisTask != nil || isShown else { return }
     clearAnalysisImpl()
   }
 
@@ -119,8 +123,13 @@ extension LiveTextController: ImageAnalysisOverlayViewDelegate {
         }
         try Task.checkCancellation()
         let analysis = try await ImageAnalyzer().analyze(image, orientation: .up, configuration: .init([.text]))
+        try Task.checkCancellation()
         liveTextLog("Image analysis results acquired")
         await MainActor.run {
+          guard self.isAvailable, self.mainWindow.player.info.state == .paused else {
+            liveTextLog("Image analysis results discarded due to change of player state")
+            return
+          }
           let overlay = self.setupLiveTextOverlay()
           overlay.analysis = analysis
           overlay.frame = videoViewContainer.bounds

@@ -45,6 +45,9 @@ final class VR2DController {
   private var savedVideoTimingOffset: Double?
   /// What `sub-visibility` was before reprojection took subtitle drawing over.
   private var savedSubVisibility: Bool?
+  /// Whether the user wants subtitles shown, once mpv's own flag is no longer
+  /// able to carry that meaning.
+  private var subtitlesVisible = true
   private var subtitleText = ""
   /// Warn once per file, not once per video-reconfig.
   private var hasWarnedAboutFilter = false
@@ -197,48 +200,60 @@ final class VR2DController {
 
   // MARK: - Subtitles
 
+  /// `true` while subtitles are being drawn over the flattened picture instead
+  /// of composited into it by mpv.
+  private(set) var isDrawingSubtitles = false
+
   /// Take subtitle drawing away from mpv while reprojection is on.
   ///
   /// mpv composites subtitles into the same framebuffer as the video and the
   /// render API cannot separate them, so they would be warped onto the sphere
-  /// with the picture. `VR2DSubtitleView` draws them flat over the top instead.
+  /// with the picture. `VR2DSubtitleView` draws them flat over the top instead,
+  /// and mpv's `sub-visibility` is held off so it stops drawing its own.
+  ///
+  /// Because that flag is also how the user shows and hides subtitles,
+  /// `PlayerCore.toggleSubVisibility` is routed here while this is in effect —
+  /// otherwise turning subtitles back on would turn the warped ones back on.
   ///
   /// Picture-based subtitles have no text to re-draw, so mpv keeps them and
-  /// they stay warped — a fair trade against showing nothing at all.
+  /// they stay warped: better warped than absent.
   private func applySubtitleHandling() {
     guard player.mainWindow.loaded else { return }
-    if isEnabled {
-      if savedSubVisibility == nil {
-        savedSubVisibility = player.mpv.getFlag(MPVOption.Subtitles.subVisibility)
-      }
-      if hasTextSubtitles {
-        player.mpv.setFlag(MPVOption.Subtitles.subVisibility, false)
-      }
-      player.mainWindow.vr2dSubtitleView.text = subtitleText
-    } else {
+    let shouldDraw = isEnabled && !subtitleText.isEmpty
+
+    if shouldDraw, !isDrawingSubtitles {
+      savedSubVisibility = player.mpv.getFlag(MPVOption.Subtitles.subVisibility)
+      subtitlesVisible = savedSubVisibility ?? true
+      isDrawingSubtitles = true
+      player.mpv.setFlag(MPVOption.Subtitles.subVisibility, false)
+    } else if !shouldDraw, isDrawingSubtitles {
+      isDrawingSubtitles = false
       if let saved = savedSubVisibility {
         player.mpv.setFlag(MPVOption.Subtitles.subVisibility, saved)
         savedSubVisibility = nil
       }
-      player.mainWindow.vr2dSubtitleView.text = ""
     }
+
+    let view = player.mainWindow.vr2dSubtitleView
+    view.player = player
+    view.text = (isDrawingSubtitles && subtitlesVisible) ? subtitleText : ""
   }
 
-  /// `sub-text` is empty for picture-based subtitles, which is how they are
-  /// told apart without inspecting the track list.
-  private var hasTextSubtitles: Bool {
-    return !(player.mpv.getString(MPVProperty.subText) ?? "").isEmpty || subtitleText.isEmpty
+  /// Show or hide the flattened subtitles, standing in for mpv's own flag.
+  func setSubtitlesVisible(_ visible: Bool) {
+    subtitlesVisible = visible
+    applySubtitleHandling()
+  }
+
+  /// A subtitle setting changed, so whatever is on screen has to be restyled.
+  func subtitleStyleChanged() {
+    guard player.mainWindow.loaded else { return }
+    player.mainWindow.vr2dSubtitleView.render()
   }
 
   func subtitleTextChanged(_ text: String) {
     subtitleText = text
-    guard player.mainWindow.loaded else { return }
-    // A track that suddenly starts producing text is a text track; take over.
-    if isEnabled, !text.isEmpty,
-       player.mpv.getFlag(MPVOption.Subtitles.subVisibility) {
-      player.mpv.setFlag(MPVOption.Subtitles.subVisibility, false)
-    }
-    player.mainWindow.vr2dSubtitleView.text = isEnabled ? text : ""
+    applySubtitleHandling()
   }
 
   /// Stop mpv rendering ahead of time while looking around is possible.

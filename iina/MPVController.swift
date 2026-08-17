@@ -1773,6 +1773,13 @@ class MPVController: NSObject {
         }
       }
     }
+
+    // VR2D draws subtitles itself while reprojection is on, reading its styling
+    // back out of mpv. The value has just been pushed there, so anything on
+    // screen needs redrawing to pick it up.
+    if keyPath.hasPrefix("sub") {
+      DispatchQueue.main.async { self.player.vr2d.subtitleStyleChanged() }
+    }
   }
 
   // MARK: - Utils

@@ -1423,6 +1423,16 @@ class PlayerCore: NSObject {
 
   func toggleSubVisibility(_ set: Bool? = nil) {
     let newState = set ?? !info.isSubVisible
+    // While VR2D is drawing subtitles itself, mpv's own visibility flag is held
+    // off so it stops compositing them into the frame. Handing this straight to
+    // mpv would fight that, and would turn the warped subtitles back on. Show
+    // and hide the flattened ones instead.
+    if vr2d.isDrawingSubtitles {
+      info.isSubVisible = newState
+      vr2d.setSubtitlesVisible(newState)
+      sendOSD(newState ? .subVisible : .subHidden)
+      return
+    }
     mpv.setFlag(MPVOption.Subtitles.subVisibility, newState)
   }
 
@@ -2498,6 +2508,9 @@ class PlayerCore: NSObject {
   }
 
   func subVisibilityChanged(_ visible: Bool) {
+    // VR2D holds this flag off while it draws subtitles itself; that is not the
+    // user hiding them, so it must not be reported as such.
+    guard !vr2d.isDrawingSubtitles else { return }
     guard info.isSubVisible != visible else { return }
     info.isSubVisible = visible
     sendOSD(visible ? .subVisible : .subHidden)

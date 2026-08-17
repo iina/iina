@@ -212,6 +212,9 @@ class PlayerCore: NSObject {
 
   var mpv: MPVController!
 
+  /// VR reprojection: what the source is and where the viewer is looking.
+  lazy var vr2d = VR2DController(player: self)
+
   var receivedEndFileWhileLoading: Bool = false
 
   var plugins: [JavascriptPluginInstance] = []
@@ -2210,6 +2213,8 @@ class PlayerCore: NSObject {
         AppDelegate.shared.noteNewRecentDocumentURL(url)
       }
     }
+    vr2d.fileLoaded()
+
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
 
@@ -2547,6 +2552,7 @@ class PlayerCore: NSObject {
       // video size changed
       info.displayWidth = dwidth
       info.displayHeight = dheight
+      vr2d.videoGeometryChanged()
       notifyWindowVideoSizeChanged()
     }
   }

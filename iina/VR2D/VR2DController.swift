@@ -78,16 +78,15 @@ final class VR2DController {
     hasWarnedAboutFilter = false
     refreshVideoSize()
 
-    let width = player.mpv.getInt(MPVProperty.width)
-    let height = player.mpv.getInt(MPVProperty.height)
-    guard width > 0, height > 0 else { return }
+    let info = player.vr2dSourceInfo()
+    guard info.width > 0, info.height > 0 else { return }
 
     let preferredEye: Preference.VR2DEyeOption = Preference.enum(for: .vr2dEye)
     eye = preferredEye == .right ? .right : .left
 
-    let stereoIn = player.mpv.getString(MPVProperty.videoParamsStereoIn)
     let url = player.info.currentURL?.absoluteString ?? ""
-    detection = VR2DDetect.detect(url: url, width: width, height: height, stereoIn: stereoIn,
+    detection = VR2DDetect.detect(url: url, width: info.width, height: info.height,
+                                  stereoIn: info.stereoIn,
                                   aggressive: Preference.bool(for: .vr2dAggressiveDetection))
     source = detection.source
 
@@ -149,11 +148,10 @@ final class VR2DController {
   /// mpv knows the size before IINA has recorded it, which is the case on the
   /// first file-loaded event.
   private func refreshVideoSizeFromMpv() {
-    let width = player.mpv.getInt(MPVProperty.dwidth)
-    let height = player.mpv.getInt(MPVProperty.dheight)
-    guard width > 0, height > 0 else { return }
-    videoWidth = width
-    videoHeight = height
+    let size = player.vr2dDisplaySize()
+    guard size.width > 0, size.height > 0 else { return }
+    videoWidth = size.width
+    videoHeight = size.height
   }
 
   // MARK: - Enabling
@@ -168,7 +166,10 @@ final class VR2DController {
     }
     clampAndPublish()
     if announce {
-      player.sendOSD(.custom(enabled ? "VR2D on — \(VR2DDetect.summarize(source))" : "VR2D off"))
+      player.sendOSD(.custom(enabled
+        ? String(format: NSLocalizedString("osd.vr2d_on", comment: "VR2D on - %@"),
+                 VR2DDetect.summarize(source))
+        : NSLocalizedString("osd.vr2d_off", comment: "VR2D off")))
     }
     if enabled { warnAboutConflictingFilter() }
   }
@@ -182,7 +183,7 @@ final class VR2DController {
   /// catches the same mistake made with any other reprojecting filter.
   private func warnAboutConflictingFilter() {
     guard !hasWarnedAboutFilter else { return }
-    guard let filters = player.mpv.getString(MPVProperty.vf), !filters.isEmpty else { return }
+    guard let filters = player.vr2dVideoFilters(), !filters.isEmpty else { return }
     let lowercased = filters.lowercased()
     guard lowercased.contains("v360") || lowercased.contains("vr2d") else { return }
 
@@ -190,7 +191,8 @@ final class VR2DController {
     Logger.log("A video filter is already reprojecting this frame (vf=\(filters)). " +
                "The VR2D plugin must be turned off for this build to help.",
                level: .warning, subsystem: subsystem)
-    player.sendOSD(.custom("VR2D — turn off the VR2D plugin; it is reprojecting on the CPU"),
+    player.sendOSD(.custom(NSLocalizedString("osd.vr2d_filter_conflict",
+                                            comment: "A filter is already reprojecting")),
                    forcedTimeout: 5)
   }
 
@@ -222,14 +224,13 @@ final class VR2DController {
     let shouldDraw = isEnabled && !subtitleText.isEmpty
 
     if shouldDraw, !isDrawingSubtitles {
-      savedSubVisibility = player.mpv.getFlag(MPVOption.Subtitles.subVisibility)
+      savedSubVisibility = player.vr2dSetSubtitleRendering(false)
       subtitlesVisible = savedSubVisibility ?? true
       isDrawingSubtitles = true
-      player.mpv.setFlag(MPVOption.Subtitles.subVisibility, false)
     } else if !shouldDraw, isDrawingSubtitles {
       isDrawingSubtitles = false
       if let saved = savedSubVisibility {
-        player.mpv.setFlag(MPVOption.Subtitles.subVisibility, saved)
+        player.vr2dSetSubtitleRendering(saved)
         savedSubVisibility = nil
       }
     }
@@ -266,12 +267,10 @@ final class VR2DController {
   /// response; the previous value goes back when reprojection is switched off.
   private func applyVideoTiming() {
     if isEnabled {
-      if savedVideoTimingOffset == nil {
-        savedVideoTimingOffset = player.mpv.getDouble(MPVOption.Miscellaneous.videoTimingOffset)
-      }
-      player.mpv.setDouble(MPVOption.Miscellaneous.videoTimingOffset, 0)
+      let previous = player.vr2dSetVideoTimingOffset(0)
+      if savedVideoTimingOffset == nil { savedVideoTimingOffset = previous }
     } else if let saved = savedVideoTimingOffset {
-      player.mpv.setDouble(MPVOption.Miscellaneous.videoTimingOffset, saved)
+      player.vr2dSetVideoTimingOffset(saved)
       savedVideoTimingOffset = nil
     }
   }
@@ -383,7 +382,10 @@ final class VR2DController {
     self.eye = eye
     Preference.set((eye == .right ? Preference.VR2DEyeOption.right : .left).rawValue, for: .vr2dEye)
     publish()
-    player.sendOSD(.custom("VR2D — \(eye == .left ? "left" : "right") eye"))
+    player.sendOSD(.custom(String(format: NSLocalizedString("osd.vr2d_eye", comment: "VR2D - %@ eye"),
+                                 eye == .left
+                                   ? NSLocalizedString("vr2d.eye.left", comment: "Left")
+                                   : NSLocalizedString("vr2d.eye.right", comment: "Right"))))
   }
 
   func swapEye() {
@@ -391,7 +393,8 @@ final class VR2DController {
   }
 
   private func announceSource() {
-    player.sendOSD(.custom("VR2D — \(VR2DDetect.summarize(source))"))
+    player.sendOSD(.custom(String(format: NSLocalizedString("osd.vr2d_source", comment: "VR2D - %@"),
+                                 VR2DDetect.summarize(source))))
   }
 
   // MARK: - Publishing

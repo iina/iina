@@ -14,18 +14,39 @@
 //  ordinary view over the flattened picture, where they sit still, stay
 //  legible, and land where subtitles are supposed to land.
 //
-//  The styling is read back out of mpv rather than out of IINA's preferences.
-//  mpv holds the effective values: IINA has already pushed twenty-odd settings
-//  into it, and anything from `mpv.conf`, a user script or a runtime change is
-//  in there too. Reading the preferences instead would mean maintaining a
-//  second copy of that mapping, and it would silently miss everything set by
-//  any other route.
+//  The styling comes from mpv, via `PlayerCore.vr2dSubtitleStyle()`. mpv holds
+//  the effective values — IINA has already pushed its settings there, and so has
+//  `mpv.conf` — so reading them back beats keeping a second copy of that
+//  mapping, and it catches settings that never went through the preferences.
 //
 //  This only works for subtitles that have text. Picture-based ones (PGS,
 //  VobSub) have none to read, and are left to mpv.
 //
 
 import Cocoa
+
+/// How mpv would have drawn a subtitle. Gathered by `PlayerCore`, because only
+/// `VideoView` and `MPVController` may read mpv directly.
+struct VR2DSubtitleStyle {
+  var fontName: String
+  var fontSize: Double
+  var scale: Double
+  var scaleByWindow: Bool
+  var bold: Bool
+  var italic: Bool
+  var color: NSColor?
+  var borderColor: NSColor?
+  var borderSize: Double
+  var backColor: NSColor?
+  var shadowColor: NSColor?
+  var shadowOffset: Double
+  var blur: Double
+  var spacing: Double
+  var alignX: String
+  var marginX: Double
+  var marginY: Double
+  var position: Double
+}
 
 class VR2DSubtitleView: NSView {
 
@@ -90,111 +111,86 @@ class VR2DSubtitleView: NSView {
   /// Re-read the settings and redraw. Called when the text changes, when the
   /// view resizes, and when a subtitle setting changes.
   func render() {
-    guard !text.isEmpty, let mpv = player?.mpv else { return }
+    guard !text.isEmpty, let style = player?.vr2dSubtitleStyle() else { return }
 
-    // mpv sizes subtitles against a 720-line window and then scales by the
-    // window height unless told not to, which is what `sub-scale-by-window`
-    // controls. `sub-scale` multiplies on top of both.
-    let scaleByWindow = mpv.getFlag(MPVOption.Subtitles.subScaleByWindow)
-    let heightScale = scaleByWindow ? max(bounds.height, 1) / 720 : 1
-    let scale = CGFloat(mpv.getDouble(MPVOption.Subtitles.subScale))
-    let pointSize = max(6, CGFloat(mpv.getDouble(MPVOption.Subtitles.subFontSize))
-                           * heightScale * (scale > 0 ? scale : 1))
+    // mpv sizes subtitles against a 720-line window and scales by the window
+    // height unless told not to. `sub-scale` multiplies on top of both.
+    let heightScale = style.scaleByWindow ? max(bounds.height, 1) / 720 : 1
+    let pointSize = max(6, CGFloat(style.fontSize) * heightScale
+                           * CGFloat(style.scale > 0 ? style.scale : 1))
 
-    var font = NSFont(name: mpv.getString(MPVOption.Subtitles.subFont) ?? "sans-serif",
-                      size: pointSize) ?? NSFont.systemFont(ofSize: pointSize)
+    var font = NSFont(name: style.fontName, size: pointSize)
+      ?? NSFont.systemFont(ofSize: pointSize)
     var traits: NSFontTraitMask = []
-    if mpv.getFlag(MPVOption.Subtitles.subBold) { traits.insert(.boldFontMask) }
-    if mpv.getFlag(MPVOption.Subtitles.subItalic) { traits.insert(.italicFontMask) }
-    if !traits.isEmpty {
-      font = NSFontManager.shared.convert(font, toHaveTrait: traits)
-    }
-
-    let colour = color(mpv, MPVOption.Subtitles.subColor) ?? .white
-    let borderColour = color(mpv, MPVOption.Subtitles.subBorderColor) ?? .black
-    let backColour = color(mpv, MPVOption.Subtitles.subBackColor)
-    let shadowColour = color(mpv, MPVOption.Subtitles.subShadowColor)
+    if style.bold { traits.insert(.boldFontMask) }
+    if style.italic { traits.insert(.italicFontMask) }
+    if !traits.isEmpty { font = NSFontManager.shared.convert(font, toHaveTrait: traits) }
 
     var attributes: [NSAttributedString.Key: Any] = [
       .font: font,
-      .foregroundColor: colour,
-      .paragraphStyle: applyAlignment(mpv),
+      .foregroundColor: style.color ?? .white,
+      .paragraphStyle: applyAlignment(style),
     ]
 
     // `.strokeWidth` is a percentage of the font size, not a width in points,
     // and negative strokes *and* fills, which is how an outline is drawn.
-    let borderSize = CGFloat(mpv.getDouble(MPVOption.Subtitles.subBorderSize)) * heightScale
+    let borderSize = CGFloat(style.borderSize) * heightScale
     if borderSize > 0 {
-      attributes[.strokeColor] = borderColour
+      attributes[.strokeColor] = style.borderColor ?? .black
       attributes[.strokeWidth] = -min(12, borderSize / pointSize * 100)
     }
-
-    let spacing = CGFloat(mpv.getDouble(MPVOption.Subtitles.subSpacing))
-    if spacing != 0 { attributes[.kern] = spacing * heightScale }
-
-    if let backColour, backColour.alphaComponent > 0 {
-      attributes[.backgroundColor] = backColour
+    if style.spacing != 0 { attributes[.kern] = CGFloat(style.spacing) * heightScale }
+    if let back = style.backColor, back.alphaComponent > 0 {
+      attributes[.backgroundColor] = back
     }
 
-    let shadowOffset = CGFloat(mpv.getDouble(MPVOption.Subtitles.subShadowOffset)) * heightScale
-    if shadowOffset > 0, let shadowColour, shadowColour.alphaComponent > 0 {
+    let shadowOffset = CGFloat(style.shadowOffset) * heightScale
+    if shadowOffset > 0, let shadowColor = style.shadowColor, shadowColor.alphaComponent > 0 {
       let shadow = NSShadow()
-      shadow.shadowColor = shadowColour
+      shadow.shadowColor = shadowColor
       shadow.shadowOffset = NSSize(width: shadowOffset, height: -shadowOffset)
-      // mpv blurs the whole glyph rather than only the shadow, but this is the
-      // closest AppKit gets without drawing the text twice.
-      shadow.shadowBlurRadius = CGFloat(mpv.getDouble(MPVOption.Subtitles.subBlur)) * heightScale
+      shadow.shadowBlurRadius = CGFloat(style.blur) * heightScale
       attributes[.shadow] = shadow
     }
 
     label.attributedStringValue = NSAttributedString(string: text, attributes: attributes)
-    applyPlacement(mpv, heightScale: heightScale)
+    applyPlacement(style, heightScale: heightScale)
   }
 
-  /// Horizontal alignment, from `sub-align-x`. Moves the label as well as
-  /// setting the paragraph style, because a label that hugs its own text is
-  /// centred whatever its paragraph alignment says.
-  private func applyAlignment(_ mpv: MPVController) -> NSParagraphStyle {
-    let style = NSMutableParagraphStyle()
+  /// Horizontal alignment. Moves the label as well as setting the paragraph
+  /// style, because a label that hugs its own text is centred whatever its
+  /// paragraph alignment says.
+  private func applyAlignment(_ style: VR2DSubtitleStyle) -> NSParagraphStyle {
+    let paragraph = NSMutableParagraphStyle()
     alignLeftConstraint.isActive = false
     alignCentreConstraint.isActive = false
     alignRightConstraint.isActive = false
 
-    switch mpv.getString(MPVOption.Subtitles.subAlignX) {
+    switch style.alignX {
     case "left":
-      style.alignment = .left
+      paragraph.alignment = .left
       alignLeftConstraint.isActive = true
     case "right":
-      style.alignment = .right
+      paragraph.alignment = .right
       alignRightConstraint.isActive = true
     default:
-      style.alignment = .center
+      paragraph.alignment = .center
       alignCentreConstraint.isActive = true
     }
-    return style
+    return paragraph
   }
 
-  /// Where the text sits, from `sub-pos`, `sub-align-y` and the margins.
-  ///
-  /// `sub-pos` is a percentage down the frame — 100 is the bottom, which is the
-  /// default — so it is turned into an inset from whichever edge the text is
-  /// anchored to.
-  private func applyPlacement(_ mpv: MPVController, heightScale: CGFloat) {
-    let marginX = CGFloat(mpv.getDouble(MPVOption.Subtitles.subMarginX)) * heightScale
-    let marginY = CGFloat(mpv.getDouble(MPVOption.Subtitles.subMarginY)) * heightScale
+  /// Where the text sits. `sub-pos` is a percentage down the frame — 100 is the
+  /// bottom, the default — so it becomes an inset from the bottom edge.
+  private func applyPlacement(_ style: VR2DSubtitleStyle, heightScale: CGFloat) {
+    let marginX = CGFloat(style.marginX) * heightScale
     leadingConstraint.constant = marginX
     trailingConstraint.constant = marginX
     alignLeftConstraint.constant = marginX
     alignRightConstraint.constant = marginX
 
-    let position = CGFloat(mpv.getDouble(MPVOption.Subtitles.subPos))
-    // Below 100 the text moves up the frame by that percentage of the height.
-    let fromBottom = bounds.height * max(0, 100 - position) / 100
-    bottomConstraint.constant = -(marginY + fromBottom)
+    let fromBottom = bounds.height * max(0, 100 - CGFloat(style.position)) / 100
+    bottomConstraint.constant = -(CGFloat(style.marginY) * heightScale + fromBottom)
   }
 
-  private func color(_ mpv: MPVController, _ name: String) -> NSColor? {
-    guard let string = mpv.getString(name) else { return nil }
-    return NSColor(mpvColorString: string)
-  }
 }

@@ -27,12 +27,12 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
   init(videoMenu: NSMenu) {
     super.init()
 
-    toggleItem.title = "Flatten VR Video"
+    toggleItem.title = NSLocalizedString("vr2d.flatten", comment: "Flatten VR Video")
     toggleItem.action = #selector(MainWindowController.menuToggleVR2D(_:))
     toggleItem.keyEquivalent = "v"
     toggleItem.keyEquivalentModifierMask = [.option, .shift]
 
-    submenuItem.title = "VR Video"
+    submenuItem.title = NSLocalizedString("vr2d.menu", comment: "VR Video")
     let submenu = NSMenu()
     submenu.delegate = self
     submenuItem.submenu = submenu
@@ -52,10 +52,10 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
   private func projectionMenu() -> NSMenuItem {
     let root = NSMenuItem()
-    root.title = "Projection"
+    root.title = NSLocalizedString("vr2d.projection", comment: "Projection")
     let menu = NSMenu()
 
-    let next = NSMenuItem(title: "Try the Next One",
+    let next = NSMenuItem(title: NSLocalizedString("vr2d.next", comment: "Try the Next One"),
                           action: #selector(MainWindowController.menuVR2DCycleProjection(_:)),
                           keyEquivalent: "p")
     next.keyEquivalentModifierMask = [.option]
@@ -63,11 +63,11 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
     menu.addItem(.separator())
 
     let choices: [(String, VR2DProjection?)] = [
-      ("Auto", nil),
-      ("180° Equirectangular", .halfEquirect),
-      ("360° Equirectangular", .equirect),
-      ("Fisheye", .fisheye),
-      ("Equi-Angular Cubemap", .eac),
+      (NSLocalizedString("vr2d.auto_plain", comment: "Auto"), nil),
+      (NSLocalizedString("vr2d.projection.he", comment: "180 Equirectangular"), .halfEquirect),
+      (NSLocalizedString("vr2d.projection.e", comment: "360 Equirectangular"), .equirect),
+      (NSLocalizedString("vr2d.projection.fisheye", comment: "Fisheye"), .fisheye),
+      (NSLocalizedString("vr2d.projection.eac", comment: "Equi-Angular Cubemap"), .eac),
     ]
     for (title, projection) in choices {
       let item = NSMenuItem(title: title,
@@ -79,7 +79,7 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
     }
 
     menu.addItem(.separator())
-    fisheyeFovItem.title = "Lens Angle"
+    fisheyeFovItem.title = NSLocalizedString("vr2d.lens_angle", comment: "Lens Angle")
     fisheyeFovItem.action = #selector(MainWindowController.menuVR2DCycleFisheyeFov(_:))
     menu.addItem(fisheyeFovItem)
 
@@ -89,10 +89,10 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
   private func layoutMenu() -> NSMenuItem {
     let root = NSMenuItem()
-    root.title = "Stereo Layout"
+    root.title = NSLocalizedString("vr2d.layout", comment: "Stereo Layout")
     let menu = NSMenu()
 
-    let next = NSMenuItem(title: "Try the Next One",
+    let next = NSMenuItem(title: NSLocalizedString("vr2d.next", comment: "Try the Next One"),
                           action: #selector(MainWindowController.menuVR2DCycleLayout(_:)),
                           keyEquivalent: "l")
     next.keyEquivalentModifierMask = [.option]
@@ -100,12 +100,12 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
     menu.addItem(.separator())
 
     let choices: [(String, VR2DLayout?, Bool)] = [
-      ("Auto", nil, false),
-      ("Monoscopic", .mono, false),
-      ("Side by Side", .sbs, false),
-      ("Side by Side, Right Eye First", .sbs, true),
-      ("Over Under", .tb, false),
-      ("Over Under, Bottom Eye First", .tb, true),
+      (NSLocalizedString("vr2d.auto_plain", comment: "Auto"), nil, false),
+      (NSLocalizedString("vr2d.layout.mono", comment: "Monoscopic"), .mono, false),
+      (NSLocalizedString("vr2d.layout.sbs", comment: "Side by Side"), .sbs, false),
+      (NSLocalizedString("vr2d.layout.sbs_swapped", comment: "Side by Side, Right Eye First"), .sbs, true),
+      (NSLocalizedString("vr2d.layout.tb", comment: "Over Under"), .tb, false),
+      (NSLocalizedString("vr2d.layout.tb_swapped", comment: "Over Under, Bottom Eye First"), .tb, true),
     ]
     for (index, choice) in choices.enumerated() {
       let item = NSMenuItem(title: choice.0,
@@ -122,10 +122,10 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
   private func eyeMenu() -> NSMenuItem {
     let root = NSMenuItem()
-    root.title = "Eye"
+    root.title = NSLocalizedString("vr2d.eye", comment: "Eye")
     let menu = NSMenu()
 
-    let swap = NSMenuItem(title: "Swap",
+    let swap = NSMenuItem(title: NSLocalizedString("vr2d.eye.swap", comment: "Swap"),
                           action: #selector(MainWindowController.menuVR2DSwapEye(_:)),
                           keyEquivalent: "e")
     swap.keyEquivalentModifierMask = [.option]
@@ -133,7 +133,7 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
     menu.addItem(.separator())
 
     for (index, eye) in [VR2DEye.left, .right].enumerated() {
-      let item = NSMenuItem(title: eye == .left ? "Left" : "Right",
+      let item = NSMenuItem(title: eye == .left ? NSLocalizedString("vr2d.eye.left", comment: "Left") : NSLocalizedString("vr2d.eye.right", comment: "Right"),
                             action: #selector(MainWindowController.menuVR2DSetEye(_:)),
                             keyEquivalent: "")
       item.tag = index
@@ -147,15 +147,15 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
   private func lookAroundMenu() -> NSMenuItem {
     let root = NSMenuItem()
-    root.title = "Look Around"
+    root.title = NSLocalizedString("vr2d.look_around", comment: "Look Around")
     let menu = NSMenu()
 
     // Tags carry the direction so one action serves all four keys.
     let directions: [(String, String, Int)] = [
-      ("Look Up", String(UnicodeScalar(NSUpArrowFunctionKey)!), 0),
-      ("Look Down", String(UnicodeScalar(NSDownArrowFunctionKey)!), 1),
-      ("Look Left", String(UnicodeScalar(NSLeftArrowFunctionKey)!), 2),
-      ("Look Right", String(UnicodeScalar(NSRightArrowFunctionKey)!), 3),
+      (NSLocalizedString("vr2d.look_up", comment: "Look Up"), String(UnicodeScalar(NSUpArrowFunctionKey)!), 0),
+      (NSLocalizedString("vr2d.look_down", comment: "Look Down"), String(UnicodeScalar(NSDownArrowFunctionKey)!), 1),
+      (NSLocalizedString("vr2d.look_left", comment: "Look Left"), String(UnicodeScalar(NSLeftArrowFunctionKey)!), 2),
+      (NSLocalizedString("vr2d.look_right", comment: "Look Right"), String(UnicodeScalar(NSRightArrowFunctionKey)!), 3),
     ]
     for (title, key, tag) in directions {
       let item = NSMenuItem(title: title,
@@ -168,14 +168,14 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
     menu.addItem(.separator())
 
-    let zoomIn = NSMenuItem(title: "Zoom In",
+    let zoomIn = NSMenuItem(title: NSLocalizedString("vr2d.zoom_in", comment: "Zoom In"),
                             action: #selector(MainWindowController.menuVR2DZoom(_:)),
                             keyEquivalent: "=")
     zoomIn.keyEquivalentModifierMask = [.option]
     zoomIn.tag = -1
     menu.addItem(zoomIn)
 
-    let zoomOut = NSMenuItem(title: "Zoom Out",
+    let zoomOut = NSMenuItem(title: NSLocalizedString("vr2d.zoom_out", comment: "Zoom Out"),
                              action: #selector(MainWindowController.menuVR2DZoom(_:)),
                              keyEquivalent: "-")
     zoomOut.keyEquivalentModifierMask = [.option]
@@ -184,7 +184,7 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
 
     menu.addItem(.separator())
 
-    let recentre = NSMenuItem(title: "Recentre",
+    let recentre = NSMenuItem(title: NSLocalizedString("vr2d.recentre", comment: "Recentre"),
                               action: #selector(MainWindowController.menuVR2DRecentre(_:)),
                               keyEquivalent: "0")
     recentre.keyEquivalentModifierMask = [.option]
@@ -206,7 +206,7 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
     for (item, projection) in projectionItems {
       item.state = projection == vr2d.source.projection ? .on : .off
       if projection == nil {
-        item.title = "Auto (\(VR2DDetect.summarize(detected.source)))"
+        item.title = String(format: NSLocalizedString("vr2d.auto", comment: "Auto (%@)"), VR2DDetect.summarize(detected.source))
         // "Auto" is ticked only when nothing has been overridden.
         item.state = vr2d.source == detected.source ? .on : .off
       }
@@ -217,7 +217,8 @@ class VR2DMenuController: NSObject, NSMenuDelegate {
     }
 
     fisheyeFovItem.title = vr2d.source.projection == .fisheye
-      ? "Lens Angle — \(Int(vr2d.source.inHFov))°" : "Lens Angle"
+      ? String(format: NSLocalizedString("vr2d.lens_angle.value", comment: "Lens Angle - %d"), Int(vr2d.source.inHFov))
+      : NSLocalizedString("vr2d.lens_angle", comment: "Lens Angle")
 
     for (item, layout, swapEyes) in layoutItems {
       guard let layout else {

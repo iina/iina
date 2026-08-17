@@ -74,7 +74,8 @@ enum VR2DSelfTest {
           Logger.log("VR2D self-test: no snapshot for \(testCase.name)", level: .error)
           continue
         }
-        write(image, to: URL(fileURLWithPath: directory).appendingPathComponent("\(testCase.name).png"))
+        write(compositingOverlays(over: image, of: player),
+              to: URL(fileURLWithPath: directory).appendingPathComponent("\(testCase.name).png"))
       }
 
       Logger.log("VR2D self-test: rendered \(cases.count) cases into \(directory)")
@@ -279,6 +280,37 @@ enum VR2DSelfTest {
     let cg = CGEvent(scrollWheelEvent2Source: nil, units: .line, wheelCount: 1,
                      wheel1: Int32(deltaY), wheel2: 0, wheel3: 0)!
     return NSEvent(cgEvent: cg)!
+  }
+
+  /// Put the AppKit views that sit over the video back on top of a framebuffer
+  /// capture.
+  ///
+  /// `captureSnapshot` reads the OpenGL framebuffer, which by definition holds
+  /// only what the GPU drew — the reprojected video. Subtitles are an ordinary
+  /// view above the layer, composited by the window server, so they are absent
+  /// from that capture however correct they are on screen. This performs the
+  /// same composition so the file matches what the display shows.
+  private static func compositingOverlays(over image: NSImage, of player: PlayerCore) -> NSImage {
+    let subtitles = player.mainWindow.vr2dSubtitleView
+    guard !subtitles.isHidden, subtitles.bounds.width > 1,
+          let video = image.cgImage(forProposedRect: nil, context: nil, hints: nil),
+          let rep = subtitles.bitmapImageRepForCachingDisplay(in: subtitles.bounds) else {
+      return image
+    }
+    subtitles.cacheDisplay(in: subtitles.bounds, to: rep)
+    guard let overlay = rep.cgImage,
+          let context = CGContext(data: nil, width: video.width, height: video.height,
+                                  bitsPerComponent: 8, bytesPerRow: 0,
+                                  space: CGColorSpaceCreateDeviceRGB(),
+                                  bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
+      return image
+    }
+
+    let full = CGRect(x: 0, y: 0, width: video.width, height: video.height)
+    context.draw(video, in: full)
+    context.draw(overlay, in: full)
+    guard let composed = context.makeImage() else { return image }
+    return NSImage(cgImage: composed, size: NSSize(width: video.width, height: video.height))
   }
 
   private static func write(_ image: NSImage, to url: URL) {

@@ -81,6 +81,24 @@ for hardware decode interop on macOS, so the GL context is not optional.
 adds. All the maths lives in one fragment function, so a Metal port later is
 close to mechanical.
 
+## Subtitles
+
+mpv composites subtitles into the same framebuffer as the video, and the render
+API offers no way to separate them, so with reprojection on they were warped
+onto the sphere with the picture — magnified past reading at the centre of the
+view, and smeared around the pole at the bottom of the frame, which is where
+mpv puts them.
+
+So mpv is asked not to draw them and `VR2DSubtitleView` draws them instead, over
+the flattened picture, from mpv's own `sub-text` property and the same
+preferences mpv would have used for the font, size, colour and border. They stay
+still while you look around, stay legible, and land where subtitles belong.
+mpv's setting is put back when reprojection is switched off.
+
+Picture-based subtitles have no text to re-draw, so they are left to mpv and
+stay warped. ASS positioning and styling are not reproduced either — the text
+is taken plain.
+
 ## Projections
 
 | | |
@@ -167,9 +185,9 @@ coordinate-encoded sphere was decoded to read the layout off directly.
 
 ## Limitations
 
-- **Subtitles and mpv's OSD are reprojected along with the video.** The render
-  API composites them into the target framebuffer and offers no way to separate
-  them, so a subtitle would be warped onto the sphere. Rare for VR files.
+- **Picture-based subtitles (PGS, VobSub) are reprojected along with the
+  video**, because there is no text in them to re-draw. Text subtitles are
+  handled: see below.
 - **The window keeps the source's aspect ratio.** A 180° side-by-side file is
   2:1, so the flat view is rendered into a 2:1 window.
 - **The equi-angular cubemap is about one pixel out** per 512-pixel face against

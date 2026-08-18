@@ -124,5 +124,11 @@
     "url": "https://github.com/i3p9/iina-trakt-scrobbler",
     "desc": "Trakt.tv scrobbler plugin for IINA.",
     "id": "io.github.fahim.iinatraktscrobbler"
+  },
+  {
+    "name": "VR2D",
+    "url": "https://github.com/fetzu/iina-plugin-vr2d",
+    "desc": "Watch 3D VR videos (180°/360°, side-by-side or over-under, equirectangular or fisheye) as a flat 2D image you can pan and zoom. Detects VR sources automatically from file names and container metadata.",
+    "id": "io.github.fetzu.vr2d"
   }
 ]

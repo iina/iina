@@ -695,6 +695,7 @@ struct Preference {
     case jpeg
     case webp
     case jxl
+    case avif
 
     static var defaultValue = ScreenshotFormat.png
 
@@ -709,6 +710,7 @@ struct Preference {
       case .jpeg: "jpeg"
       case .webp: "webp"
       case .jxl: "jxl"
+      case .avif: "avif"
       }
     }
   }

@@ -354,6 +354,16 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
     showTotalLength()
   }
 
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    let identifier = NSUserInterfaceItemIdentifier("PlaylistRowView")
+    if let rowView = tableView.makeView(withIdentifier: identifier, owner: self) as? PlaylistRowView {
+      return rowView
+    }
+    let rowView = PlaylistRowView()
+    rowView.identifier = identifier
+    return rowView
+  }
+
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let identifier = tableColumn?.identifier else { return nil }
 
@@ -772,7 +782,6 @@ class PlaylistTrackCellView: NSTableCellView {
   private var trackNameLabel: NSTextField!
   private var infoLabel: NSTextField!
   private var durationLabel: NSTextField!
-  private var playbackProgressView: PlaylistPlaybackProgressView!
 
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
@@ -795,11 +804,6 @@ class PlaylistTrackCellView: NSTableCellView {
 
     addSubview(stackView)
     stackView.padding(.horizontal(2), .vertical)
-
-    self.playbackProgressView = PlaylistPlaybackProgressView()
-    playbackProgressView.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(playbackProgressView)
-    playbackProgressView.padding(.horizontal, .bottom).size(height: 4)
   }
 
   required init?(coder: NSCoder) {
@@ -833,8 +837,6 @@ class PlaylistTrackCellView: NSTableCellView {
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    playbackProgressView.percentage = 0
-    playbackProgressView.needsDisplay = true
     setPrefix(nil)
     setAdditionalInfo(nil)
   }
@@ -883,9 +885,10 @@ class PlaylistTrackCellView: NSTableCellView {
           // if FFmpeg got the duration successfully
           DispatchQueue.main.async {
             self.durationLabel.stringValue = VideoTime(duration).stringRepresentation
-            if let progress = cached.progress {
-              self.playbackProgressView.percentage = progress / duration
-              self.playbackProgressView.needsDisplay = true
+            if let progress = cached.progress,
+               let rowView = self.superview as? PlaylistRowView {
+              rowView.percentage = progress / duration
+              rowView.needsDisplay = true
             }
           }
           pane.refreshTotalLength()
@@ -906,6 +909,28 @@ class PlaylistTrackCellView: NSTableCellView {
         }
       }
     }
+  }
+}
+
+
+class PlaylistRowView: NSTableRowView {
+  var percentage: Double = 0
+  private static let barHeight: CGFloat = 3
+
+  override func draw(_ dirtyRect: NSRect) {
+    super.draw(dirtyRect)
+    let width = bounds.width * CGFloat(percentage)
+    guard width > 0 else { return }
+    let rect = NSRect(x: 0, y: bounds.height - Self.barHeight, width: width, height: Self.barHeight)
+    let fillColor = NSColor.controlAccentColor.blended(withFraction: 0.2, of: .white) ?? .controlAccentColor
+    fillColor.setFill()
+    NSBezierPath(rect: rect).fill()
+  }
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    percentage = 0
+    needsDisplay = true
   }
 }
 

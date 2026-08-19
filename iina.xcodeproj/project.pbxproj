@@ -273,7 +273,6 @@
 		E31E62FD2FD8F4C9005527B2 /* OSCBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */; };
 		E31E62FF2FD90288005527B2 /* OSCFloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */; };
 		E31E63012FDB96F0005527B2 /* FadeableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E63002FDB96E9005527B2 /* FadeableViewController.swift */; };
-		E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */; };
 		E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */; };
 		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
 		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
@@ -1601,7 +1600,6 @@
 		E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCBottomView.swift; sourceTree = "<group>"; };
 		E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCFloatingView.swift; sourceTree = "<group>"; };
 		E31E63002FDB96E9005527B2 /* FadeableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeableViewController.swift; sourceTree = "<group>"; };
-		E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistPlaybackProgressView.swift; sourceTree = "<group>"; };
 		E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitleItem.swift; sourceTree = "<group>"; };
 		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
 		E32712B324F2B8CA00359DAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ScreenshootOSDView.xib; sourceTree = "<group>"; };
@@ -2326,7 +2324,6 @@
 				84C6445F1E92BA2700B1410B /* TimeLabelOverflowedView.swift */,
 				841B14271E941DFF00744AB8 /* TimeLabelOverflowedStackView.swift */,
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
-				E322A4F720A8442E00C67D32 /* PlaylistPlaybackProgressView.swift */,
 				845E70B1210CB59D00D06C42 /* ScrollingTextField.swift */,
 				E38372912443634500F57718 /* LanguageTokenField.swift */,
 				E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */,
@@ -2935,7 +2932,6 @@
 				E3C2280D2FDFBE30009A1A89 /* SidebarSliderView.swift in Sources */,
 				840D47A01DFEFC49000D9A64 /* KeyRecordView.swift in Sources */,
 				84791C8B1D405E9D0069E28A /* PlaybackInfo.swift in Sources */,
-				E322A4F820A8442E00C67D32 /* PlaylistPlaybackProgressView.swift in Sources */,
 				84D123B41ECAA405004E0D53 /* TouchBarSupport.swift in Sources */,
 				E36E8D7C24F6052F00B8C097 /* GuideWindowController.swift in Sources */,
 				84817C981DBDCE4300CC2279 /* RoundedColorWell.swift in Sources */,

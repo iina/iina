@@ -182,7 +182,7 @@ class InitialWindowController: NSWindowController {
       lastFileContainerView.normalBackground = NSColor.initialWindowLastFileBackground
       lastFileContainerView.hoverBackground = NSColor.initialWindowLastFileBackgroundHover
       lastFileContainerView.pressedBackground = NSColor.initialWindowLastFileBackgroundPressed
-      lastFileIcon.image = #imageLiteral(resourceName: "history")
+      lastFileIcon.image = .sf("clock.arrow.trianglehead.counterclockwise.rotate.90", "clock")
       lastFileNameLabel.stringValue = lastFile.lastPathComponent
       let lastPosition = Preference.double(for: .iinaLastPlayedFilePosition)
       lastPositionLabel.stringValue = VideoTime(lastPosition).stringRepresentation

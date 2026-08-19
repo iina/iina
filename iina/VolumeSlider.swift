@@ -22,6 +22,14 @@ class VolumeSlider: NSSlider {
   
   // MARK: - Mouse / Trackpad events
 
+  /// Keep AppKit's slider tracking path active on macOS versions affected by IINA issue #5768.
+  ///
+  /// Without this explicit override, AppKit may skip mouse tracking for NSSlider subclasses,
+  /// allowing a movable window background to handle the drag instead.
+  override func mouseDown(with event: NSEvent) {
+    super.mouseDown(with: event)
+  }
+
   /// The user is scrolling while the cursor is within the slider.
   ///
   /// With certain kinds of input devices, such as a mouse with a scroll wheel that spins freely, it is easy to accidentally move the cursor

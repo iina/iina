@@ -10,6 +10,10 @@ fileprivate let ui = SettingsUIHelper.sharedUI
 
 
 class SettingsPageAdvanced: SettingsPage {
+  private var pageView: NSView?
+  private var advancedSettingsView: NSView?
+  private let prefObserver = Preference.Observer()
+
   override var identifier: String {
     "advanced"
   }
@@ -26,6 +30,21 @@ class SettingsPageAdvanced: SettingsPage {
     "SettingsAdvancedLocalizable"
   }
 
+  override func pageLoaded() {
+    if let renderedView = advancedSettingsSwitch.renderedView {
+      advancedSettingsView = renderedView
+      var pageView: NSView = renderedView
+      while let superview = pageView.superview, !(superview is NSClipView) {
+        pageView = superview
+      }
+      self.pageView = pageView
+    }
+
+    prefObserver.add(.enableAdvancedSettings, runNow: true) { [weak self] _ in
+      self?.setAdvancedControlsEnabled(Preference.bool(for: .enableAdvancedSettings))
+    }
+  }
+
   private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.userDefinedConfDir)
   private lazy var mpvOptionsEditor: MPVOptionsEditor = MPVOptionsEditor()
   private lazy var openLogFolderBtn: NSButton = {
@@ -34,6 +53,20 @@ class SettingsPageAdvanced: SettingsPage {
     btn.target = self
     btn.action = #selector(openLogFolder)
     return btn
+  }()
+
+  private lazy var advancedSettingsSwitch: SettingsItem.Switch = {
+    let item = SettingsItem.Switch()
+      .bindTo(.enableAdvancedSettings)
+      .image(name: ["flask"])
+      .hasDescription()
+      .withHelpLink(AppData.wikiLink.appending("/MPV-Options-and-Properties"))
+    item.stateChangeCallback = { [weak self] _ in
+      DispatchQueue.main.async {
+        self?.setAdvancedControlsEnabled(Preference.bool(for: .enableAdvancedSettings))
+      }
+    }
+    return item
   }()
 
   override func content() -> [SettingsSection] {
@@ -47,13 +80,22 @@ class SettingsPageAdvanced: SettingsPage {
   private func sectionEnableAdvanced() -> SettingsSection {
     return section {
       SettingsList() {
-        SettingsItem.Switch()
-          .bindTo(.enableAdvancedSettings)
-          .image(name: ["flask"])
-          .hasDescription()
-          .withHelpLink(AppData.wikiLink.appending("/MPV-Options-and-Properties"))
+        advancedSettingsSwitch
       }
     }
+  }
+
+  private func setAdvancedControlsEnabled(_ enabled: Bool) {
+    guard let pageView else { return }
+    setControlsEnabled(in: pageView, enabled: enabled, skipping: advancedSettingsView)
+  }
+
+  private func setControlsEnabled(in view: NSView, enabled: Bool, skipping skippedView: NSView?) {
+    guard view !== skippedView else { return }
+    if let control = view as? NSControl {
+      control.isEnabled = enabled
+    }
+    view.subviews.forEach { setControlsEnabled(in: $0, enabled: enabled, skipping: skippedView) }
   }
 
   private func sectionLogging() -> SettingsSection {

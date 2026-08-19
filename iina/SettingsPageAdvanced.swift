@@ -8,6 +8,31 @@
 
 fileprivate let ui = SettingsUIHelper.sharedUI
 
+private final class MPVOptionFieldEditor: NSTextView {
+  var pasteHandler: ((String) -> Bool)?
+
+  override func paste(_ sender: Any?) {
+    guard let string = NSPasteboard.general.string(forType: .string),
+          pasteHandler?(string) == true else {
+      super.paste(sender)
+      return
+    }
+  }
+}
+
+private final class MPVOptionsTableView: NSTableView {
+  let optionFieldEditor: MPVOptionFieldEditor = {
+    let editor = MPVOptionFieldEditor()
+    editor.isFieldEditor = true
+    return editor
+  }()
+}
+
+private final class MPVOptionTextFieldCell: NSTextFieldCell {
+  override func fieldEditor(for controlView: NSView) -> NSTextView? {
+    return (controlView as? MPVOptionsTableView)?.optionFieldEditor
+  }
+}
 
 class SettingsPageAdvanced: SettingsPage {
   private var pageView: NSView?
@@ -132,6 +157,7 @@ class SettingsPageAdvanced: SettingsPage {
       SettingsList {
         SettingsItem.General(title: .text_AdditionalMpvOptions)
           .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
+          .hasDescription(content: .text_AdditionalMpvOptions_desc)
           .extraViews(mpvOptionsEditor.delBtn, mpvOptionsEditor.addBtn)
         SettingsItem.Custom()
           .view(mpvOptionsEditor.view)
@@ -147,7 +173,7 @@ class SettingsPageAdvanced: SettingsPage {
 fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate, NSTableViewDataSource {
   private static let dragType = NSPasteboard.PasteboardType("com.colliderli.iina.mpv-option-row")
 
-  let tableView: NSTableView = NSTableView()
+  let tableView: MPVOptionsTableView = MPVOptionsTableView()
   let scrollView: NSScrollView = NSScrollView()
   let addBtn: NSButton = NSButton()
   let delBtn: NSButton = NSButton()
@@ -169,14 +195,25 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     tableView.registerForDraggedTypes([MPVOptionsEditor.dragType])
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.optionFieldEditor.pasteHandler = { [weak self] in self?.pasteOption($0) ?? false }
     let columnKey = NSTableColumn(identifier: .key)
     columnKey.title = "Key"
     columnKey.minWidth = 140
-    (columnKey.dataCell as? NSCell)?.font = monoFont
+    let keyCell = MPVOptionTextFieldCell()
+    keyCell.isEditable = true
+    keyCell.isSelectable = true
+    keyCell.lineBreakMode = .byTruncatingTail
+    keyCell.font = monoFont
+    columnKey.dataCell = keyCell
     tableView.addTableColumn(columnKey)
     let columnValue = NSTableColumn(identifier: .value)
     columnValue.title = "Value"
-    (columnValue.dataCell as? NSCell)?.font = monoFont
+    let valueCell = MPVOptionTextFieldCell()
+    valueCell.isEditable = true
+    valueCell.isSelectable = true
+    valueCell.lineBreakMode = .byTruncatingTail
+    valueCell.font = monoFont
+    columnValue.dataCell = valueCell
     tableView.addTableColumn(columnValue)
     tableView.columnAutoresizingStyle = .sequentialColumnAutoresizingStyle
     tableView.rowHeight = 18
@@ -204,6 +241,29 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   private func saveToUserDefaults() {
     Preference.set(options, for: .userOptions)
     UserDefaults.standard.synchronize()
+  }
+
+  private static func parsePastedOption(_ string: String) -> [String]? {
+    guard let separator = string.firstIndex(of: "=") else { return nil }
+
+    let whitespaceAndNewlines = CharacterSet.whitespacesAndNewlines
+    let key = String(string[..<separator]).trimmingCharacters(in: whitespaceAndNewlines)
+    let value = String(string[string.index(after: separator)...]).trimmingCharacters(in: whitespaceAndNewlines)
+    guard !key.isEmpty, !value.isEmpty else { return nil }
+    return [key, value]
+  }
+
+  private func pasteOption(_ string: String) -> Bool {
+    guard let option = Self.parsePastedOption(string),
+          options.indices.contains(tableView.editedRow) else { return false }
+
+    let row = tableView.editedRow
+    guard tableView.abortEditing() else { return false }
+    options[row] = option
+    tableView.reloadData(forRowIndexes: IndexSet(integer: row),
+                         columnIndexes: IndexSet(integersIn: 0..<tableView.numberOfColumns))
+    saveToUserDefaults()
+    return true
   }
 
   @objc func addOptionAction(_ sender: AnyObject) {

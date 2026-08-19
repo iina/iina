@@ -2553,7 +2553,7 @@ class MainWindowController: PlayerWindowController {
     if let videoWidth = player.info.videoWidth {
       let windowScale = Double((frame ?? window.frame).width) / Double(videoWidth)
       player.info.cachedWindowScale = windowScale
-      player.mpv.setDouble(MPVProperty.windowScale, windowScale, level: .verbose)
+      player.mpv.setDouble(MPVOption.Window.windowScale, windowScale, level: .verbose)
     }
   }
 

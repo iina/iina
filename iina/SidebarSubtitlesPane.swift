@@ -522,7 +522,7 @@ fileprivate class SubStyleView: NSView {
     let fontSize = player.mpv.getInt(MPVOption.Subtitles.subFontSize)
     fontSizePicker.selectItem(withTitle: fontSize.description)
 
-    let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subBorderSize)
+    let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subOutlineSize)
     borderSizePicker.selectItem(at: -1)
     borderSizePicker.itemArray.forEach { item in
       if borderWidth == Double(item.title) {
@@ -532,7 +532,7 @@ fileprivate class SubStyleView: NSView {
 
     for (op, colorWell) in [
       (MPVOption.Subtitles.subColor, textColorWell),
-      (MPVOption.Subtitles.subBorderColor, borderColorWell),
+      (MPVOption.Subtitles.subOutlineColor, borderColorWell),
       (MPVOption.Subtitles.subBackColor, backgroundColorWell),
     ] {
       if let colorString = player.mpv.getString(op), let color = NSColor(mpvColorString: colorString) {

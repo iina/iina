@@ -170,9 +170,25 @@ void av_image_copy_plane_uc_from(uint8_t       *dst, ptrdiff_t dst_linesize,
  * @param width         width of the image in pixels
  * @param height        height of the image in pixels
  */
-void av_image_copy(uint8_t *dst_data[4], int dst_linesizes[4],
-                   const uint8_t *src_data[4], const int src_linesizes[4],
+void av_image_copy(uint8_t * const dst_data[4], const int dst_linesizes[4],
+                   const uint8_t * const src_data[4], const int src_linesizes[4],
                    enum AVPixelFormat pix_fmt, int width, int height);
+
+/**
+ * Wrapper around av_image_copy() to workaround the limitation
+ * that the conversion from uint8_t * const * to const uint8_t * const *
+ * is not performed automatically in C.
+ * @see av_image_copy()
+ */
+static inline
+void av_image_copy2(uint8_t * const dst_data[4], const int dst_linesizes[4],
+                    uint8_t * const src_data[4], const int src_linesizes[4],
+                    enum AVPixelFormat pix_fmt, int width, int height)
+{
+    av_image_copy(dst_data, dst_linesizes,
+                  (const uint8_t * const *)src_data, src_linesizes,
+                  pix_fmt, width, height);
+}
 
 /**
  * Copy image data located in uncacheable (e.g. GPU mapped) memory. Where
@@ -188,8 +204,8 @@ void av_image_copy(uint8_t *dst_data[4], int dst_linesizes[4],
  * @note On x86, the linesizes currently need to be aligned to the cacheline
  *       size (i.e. 64) to get improved performance.
  */
-void av_image_copy_uc_from(uint8_t *dst_data[4],       const ptrdiff_t dst_linesizes[4],
-                           const uint8_t *src_data[4], const ptrdiff_t src_linesizes[4],
+void av_image_copy_uc_from(uint8_t * const dst_data[4],       const ptrdiff_t dst_linesizes[4],
+                           const uint8_t * const src_data[4], const ptrdiff_t src_linesizes[4],
                            enum AVPixelFormat pix_fmt, int width, int height);
 
 /**
@@ -319,9 +335,39 @@ int av_image_check_sar(unsigned int w, unsigned int h, AVRational sar);
  * @param height        the height of the image in pixels
  * @return 0 if the image data was cleared, a negative AVERROR code otherwise
  */
-int av_image_fill_black(uint8_t *dst_data[4], const ptrdiff_t dst_linesize[4],
+int av_image_fill_black(uint8_t * const dst_data[4], const ptrdiff_t dst_linesize[4],
                         enum AVPixelFormat pix_fmt, enum AVColorRange range,
                         int width, int height);
+
+/**
+ * Overwrite the image data with a color. This is suitable for filling a
+ * sub-rectangle of an image, meaning the padding between the right most pixel
+ * and the left most pixel on the next line will not be overwritten. For some
+ * formats, the image size might be rounded up due to inherent alignment.
+ *
+ * If the pixel format has alpha, it is also replaced. Color component values
+ * are interpreted as native integers (or intfloats) regardless of actual pixel
+ * format endianness.
+ *
+ * This can return an error if the pixel format is not supported. Normally, all
+ * non-hwaccel pixel formats should be supported.
+ *
+ * Passing NULL for dst_data is allowed. Then the function returns whether the
+ * operation would have succeeded. (It can return an error if the pix_fmt is
+ * not supported.)
+ *
+ * @param dst_data      data pointers to destination image
+ * @param dst_linesize  linesizes for the destination image
+ * @param pix_fmt       the pixel format of the image
+ * @param color         the color components to be used for the fill
+ * @param width         the width of the image in pixels
+ * @param height        the height of the image in pixels
+ * @param flags         currently unused
+ * @return 0 if the image data was filled, a negative AVERROR code otherwise
+ */
+int av_image_fill_color(uint8_t * const dst_data[4], const ptrdiff_t dst_linesize[4],
+                        enum AVPixelFormat pix_fmt, const uint32_t color[4],
+                        int width, int height, int flags);
 
 /**
  * @}

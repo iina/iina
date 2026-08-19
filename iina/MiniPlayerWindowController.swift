@@ -196,8 +196,9 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     let prevBtn = NSButton(image: .nextl, target: self, action: #selector(prevBtnAction))
     let nextBtn = NSButton(image: .nextr, target: self, action: #selector(nextBtnAction))
 
-    self.togglePlaylistButton = NSButton(image: .playlist, target: self, action: #selector(togglePlaylist))
-    self.toggleAlbumArtButton = NSButton(image: .toggleAlbumArt, target: self, action: #selector(toggleVideoView))
+    self.togglePlaylistButton = NSButton(image: .sf("list.bullet.rectangle")!, target: self, action: #selector(togglePlaylist))
+    self.toggleAlbumArtButton = NSButton(image: .sf("photo")!, target: self, action: #selector(toggleVideoView))
+    syncButtonStatus()
 
     let iconButtons: [NSButton] = [playButton, prevBtn, nextBtn, togglePlaylistButton, toggleAlbumArtButton]
     iconButtons.forEach { button in
@@ -213,8 +214,8 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     playButton.size(width: 28, height: 28)
     nextBtn.size(width: 28, height: 28)
     prevBtn.size(width: 28, height: 28)
-    togglePlaylistButton.size(width: 14, height: 14)
-    toggleAlbumArtButton.size(width: 14, height: 14)
+    togglePlaylistButton.size(width: 18, height: 18)
+    toggleAlbumArtButton.size(width: 18, height: 18)
 
     // volume popover
 
@@ -558,6 +559,13 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     window.setFrame(window.frame.rectWithoutPlaylistHeight(providedWindowHeight: normalWindowHeight()), display: display, animate: animate)
   }
 
+  func syncButtonStatus() {
+    let playlistImage = isPlaylistVisible ? "list.bullet.rectangle.fill" : "list.bullet.rectangle"
+    togglePlaylistButton.image = .sf(playlistImage)
+    let albumArtImage = isVideoVisible ? "photo.fill" : "photo"
+    toggleAlbumArtButton.image = .sf(albumArtImage)
+  }
+
   // MARK: - NSPopoverDelegate
 
   func popoverWillClose(_ notification: Notification) {
@@ -643,25 +651,22 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   @IBAction func togglePlaylist(_ sender: Any) {
     guard let window else { return }
     if isPlaylistVisible {
-      // hide
       isPlaylistVisible = false
       setToInitialWindowSize()
     } else {
-      // show
       isPlaylistVisible = true
-//      playlistView.reloadData(playlist: true, chapters: true)
-
       var newFrame = window.frame
       newFrame.origin.y -= DefaultPlaylistHeight
       newFrame.size.height += DefaultPlaylistHeight
       window.setFrame(newFrame, display: true, animate: true)
     }
     Preference.set(isPlaylistVisible, for: .musicModeShowPlaylist)
+    syncButtonStatus()
   }
 
   @IBAction func toggleVideoView(_ sender: Any) {
     guard let window else { return }
-    isVideoVisible = !isVideoVisible
+    isVideoVisible.toggle()
     videoWrapperViewBottomConstraint.isActive = isVideoVisible
     controlViewTopConstraint.isActive = !isVideoVisible
     updateCloseButton()
@@ -676,6 +681,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       window.setFrame(frame, display: true, animate: false)
     }
     Preference.set(isVideoVisible, for: .musicModeShowAlbumArt)
+    syncButtonStatus()
   }
 
   @IBAction func backBtnAction(_ sender: NSButton) {

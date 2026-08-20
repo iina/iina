@@ -120,6 +120,12 @@
     "id": "com.pparanoiidd.skipintro"
   },
   {
+    "name": "SubLingo",
+    "url": "https://github.com/janwee-sha/SubLingo",
+    "desc": "Translates the selected local embedded text subtitle or external SRT/ASS subtitle and renders translated subtitles itself in IINA.",
+    "id": "io.sublingo.iina"
+  },
+  {
     "name": "Trakt Scrobbler",
     "url": "https://github.com/i3p9/iina-trakt-scrobbler",
     "desc": "Trakt.tv scrobbler plugin for IINA.",

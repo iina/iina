@@ -1,0 +1,42 @@
+{
+  "originHash" : "d47d2b54d2074afccd9ca72634b96746ca680420a7d0af58b7115304c3df68e4",
+  "pins" : [
+    {
+      "identity" : "grmustache.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/groue/GRMustache.swift",
+      "state" : {
+        "revision" : "6e9dcfb807959e19f2915be1928aeccf01babba5",
+        "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "just",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dduan/Just",
+      "state" : {
+        "revision" : "1824bf84cf52d11d69ae20cfb89f0ce5bffa5650",
+        "version" : "0.8.0"
+      }
+    },
+    {
+      "identity" : "promisekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mxcl/PromiseKit",
+      "state" : {
+        "revision" : "8a98e31a47854d3180882c8068cc4d9381bf382d",
+        "version" : "6.22.1"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle/",
+      "state" : {
+        "revision" : "ac2def288cbff5cfc7df3ffef6abdf45b72bcb0a",
+        "version" : "2.9.6"
+      }
+    }
+  ],
+  "version" : 3
+}

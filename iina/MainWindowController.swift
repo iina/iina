@@ -35,6 +35,11 @@ fileprivate let minimumInitialDragDistance: CGFloat = 3.0
 fileprivate let layoutSides: [NSLayoutConstraint.Attribute] = [.top, .bottom, .leading, .trailing]
 
 class MainWindowController: PlayerWindowController {
+  private enum DockedOSCLayout {
+    static let volumeSliderWidth: CGFloat = 70
+    static let playSliderInset: CGFloat = 6
+    static let transportSpacing: CGFloat = 16
+  }
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MainWindowController")
@@ -509,7 +514,7 @@ class MainWindowController: PlayerWindowController {
     self.oscVolumeView = NSView()
     oscVolumeView.translatesAutoresizingMaskIntoConstraints = false
 
-    oscVolumeSliderWidthConstraint = volumeSlider.widthAnchor.constraint(equalToConstant: 70)
+    oscVolumeSliderWidthConstraint = volumeSlider.widthAnchor.constraint(equalToConstant: DockedOSCLayout.volumeSliderWidth)
     oscVolumeSliderWidthConstraint.isActive = true
 
     oscVolumeView.addSubview(muteButton)
@@ -585,8 +590,10 @@ class MainWindowController: PlayerWindowController {
       .center(.y, with: playSlider)
     rightLabel.padding(.trailing(2)).spacing(.leading(2), to: playSlider)
       .center(.y, with: playSlider)
-    oscPlaySliderTopConstraint = playSlider.topAnchor.constraint(equalTo: oscSliderView.topAnchor, constant: 4)
-    oscPlaySliderBottomConstraint = oscSliderView.bottomAnchor.constraint(equalTo: playSlider.bottomAnchor, constant: 4)
+    oscPlaySliderTopConstraint = playSlider.topAnchor.constraint(equalTo: oscSliderView.topAnchor,
+                                                                 constant: DockedOSCLayout.playSliderInset)
+    oscPlaySliderBottomConstraint = oscSliderView.bottomAnchor.constraint(equalTo: playSlider.bottomAnchor,
+                                                                          constant: DockedOSCLayout.playSliderInset)
     NSLayoutConstraint.activate([oscPlaySliderTopConstraint, oscPlaySliderBottomConstraint])
 
     // osd
@@ -1026,7 +1033,7 @@ class MainWindowController: PlayerWindowController {
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     }
 
-    oscPlayControlMiddleView.spacing = isFloating ? 10 : 16
+    oscPlayControlMiddleView.spacing = isFloating ? 10 : DockedOSCLayout.transportSpacing
     oscToolbarView.spacing = 0
 
     configureQuickTimeOSC(isFloating)
@@ -1042,9 +1049,9 @@ class MainWindowController: PlayerWindowController {
     (rightArrowButton as? OSCButton)?.setQuickTimeStyle(enabled, role: .transport)
     playSlider.setQuickTimeStyle(enabled)
     (volumeSlider as? VolumeSlider)?.setQuickTimeStyle(enabled)
-    oscVolumeSliderWidthConstraint?.constant = enabled ? 80 : 70
-    oscPlaySliderTopConstraint?.constant = enabled ? 4 : 6
-    oscPlaySliderBottomConstraint?.constant = enabled ? 4 : 6
+    oscVolumeSliderWidthConstraint?.constant = enabled ? 80 : DockedOSCLayout.volumeSliderWidth
+    oscPlaySliderTopConstraint?.constant = enabled ? 4 : DockedOSCLayout.playSliderInset
+    oscPlaySliderBottomConstraint?.constant = enabled ? 4 : DockedOSCLayout.playSliderInset
 
     let labelColor = enabled ? NSColor.white.withAlphaComponent(0.68) : NSColor.secondaryLabelColor
     leftLabel.textColor = labelColor
@@ -1118,7 +1125,14 @@ class MainWindowController: PlayerWindowController {
       log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose)
     }
     workaroundCursorDefect()
-    // do nothing if it's related to floating OSC
+    if oscPosition == .floating,
+       !oscFloatingView.isHiddenOrHasHiddenAncestor,
+       event.inAnyOf([oscFloatingView]),
+       oscFloatingView.routeMouseDown(event) {
+      mousePosRelatedToWindow = nil
+      return
+    }
+    // do nothing if it's related to floating OSC dragging
     guard !oscFloatingView.isDragging else { return }
     mousePosRelatedToWindow = event.locationInWindow
     let consumedBySidebar = sidebars.handleMouseDown(event, at: event.locationInWindow)

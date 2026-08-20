@@ -521,10 +521,10 @@ class MainWindowController: PlayerWindowController {
     oscPlayControlView.alignment = .centerY
     oscPlayControlView.spacing = 0
 
-    self.leftArrowButton = NSButton(image: .speedl, target: self, action: #selector(leftButtonAction))
+    self.leftArrowButton = OSCButton(image: .speedl, target: self, action: #selector(leftButtonAction))
     leftArrowButton.maxAcceleratorLevel = 5
 
-    self.rightArrowButton = NSButton(image: .speed, target: self, action: #selector(rightButtonAction))
+    self.rightArrowButton = OSCButton(image: .speed, target: self, action: #selector(rightButtonAction))
     rightArrowButton.maxAcceleratorLevel = 5
 
     [playButton, leftArrowButton, rightArrowButton].forEach { button in
@@ -891,7 +891,7 @@ class MainWindowController: PlayerWindowController {
     oscToolbarView.views.forEach { oscToolbarView.removeView($0) }
     let liveTextEnabled = Preference.bool(for: .enableLiveText)
     for buttonType in effectiveButtons {
-      let button = NSButton()
+      let button = OSCButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: false)
       if buttonType == .liveText && liveTextEnabled {
         button.image = Preference.ToolBarButton.liveText.alternateImage()
@@ -1019,8 +1019,27 @@ class MainWindowController: PlayerWindowController {
 
     oscPlayControlMiddleView.spacing = isFloating ? 24: 16
 
+    configureQuickTimeOSC(isFloating)
+
     fadeableViews.update()
     showUI()
+  }
+
+  private func configureQuickTimeOSC(_ enabled: Bool) {
+    playSlider.setQuickTimeStyle(enabled)
+    (volumeSlider as? VolumeSlider)?.setQuickTimeStyle(enabled)
+
+    if enabled {
+      playButton.image = quickTimePlayButtonImage(paused: player.info.state != .playing)
+    } else {
+      playButton.image = NSImage(named: player.info.state == .playing ? "pause" : "play")
+    }
+    updateArrowButtons()
+  }
+
+  private func quickTimePlayButtonImage(paused: Bool) -> NSImage? {
+    .sf(paused ? "play.fill" : "pause.fill",
+        withConfiguration: .init(pointSize: 24, weight: .medium))
   }
 
   // MARK: - Mouse / Trackpad events
@@ -2719,6 +2738,9 @@ class MainWindowController: PlayerWindowController {
 
   override func updatePlayButtonState(paused: Bool) {
     super.updatePlayButtonState(paused: paused)
+    if oscPosition == .floating {
+      playButton.image = quickTimePlayButtonImage(paused: paused)
+    }
     if paused {
       speedValueIndex = AppData.availableSpeedValues.count / 2
     }
@@ -2733,7 +2755,16 @@ class MainWindowController: PlayerWindowController {
   /// [multiLevelAccelerator](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/multilevelaccelerator)
   /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
   func updateArrowButtons() {
-    if arrowBtnFunction == .playlist {
+    if oscPosition == .floating {
+      let config = NSImage.SymbolConfiguration(pointSize: 23, weight: .semibold)
+      if arrowBtnFunction == .playlist {
+        leftArrowButton.image = .sf("backward.end.fill", withConfiguration: config)
+        rightArrowButton.image = .sf("forward.end.fill", withConfiguration: config)
+      } else {
+        leftArrowButton.image = .sf("backward.fill", withConfiguration: config)
+        rightArrowButton.image = .sf("forward.fill", withConfiguration: config)
+      }
+    } else if arrowBtnFunction == .playlist {
       leftArrowButton.image = #imageLiteral(resourceName: "nextl")
       rightArrowButton.image = #imageLiteral(resourceName: "nextr")
     } else {

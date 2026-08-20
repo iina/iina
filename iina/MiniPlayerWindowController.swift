@@ -248,6 +248,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
     volumeControlContainer.addSubview(volumeSlider)
     volumeSlider.maxValue = Double(Preference.integer(for: .maxVolume))
+    (volumeSlider as? VolumeSlider)?.setQuickTimeStyle(true)
     volumeSlider.size(width: 100)
       .padding(.vertical(12), .leading(45))
 

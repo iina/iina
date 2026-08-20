@@ -11,6 +11,63 @@ fileprivate extension LayoutValue {
   static let oscPaddingBottom = LayoutValue(8, 5)
 }
 
+/// Button used by the floating OSC so AppKit keeps the native tracking path active.
+class OSCButton: NSButton {
+  override func mouseDown(with event: NSEvent) {
+    super.mouseDown(with: event)
+  }
+}
+
+private final class OSCFloatingContentView: NSView {
+  private weak var mainWindow: MainWindowController?
+  weak var dragSurface: NSView?
+
+  init(mainWindow: MainWindowController) {
+    self.mainWindow = mainWindow
+    super.init(frame: .zero)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  override func hitTest(_ point: NSPoint) -> NSView? {
+    guard bounds.contains(point), let mainWindow else { return nil }
+
+    var controls: [NSView] = mainWindow.oscToolbarView?.subviews ?? []
+    controls.append(contentsOf: [mainWindow.volumeSlider, mainWindow.muteButton,
+                                 mainWindow.leftArrowButton, mainWindow.playButton,
+                                 mainWindow.rightArrowButton, mainWindow.playSlider].compactMap { $0 })
+    for control in controls.reversed()
+      where control.isDescendant(of: self) && !control.isHiddenOrHasHiddenAncestor {
+      let localPoint = control.convert(point, from: self)
+      if control.bounds.contains(localPoint) {
+        return control.hitTest(localPoint) ?? control
+      }
+    }
+
+    return dragSurface
+  }
+}
+
+private final class OSCFloatingDragSurface: NSView {
+  weak var owner: OSCFloatingView?
+
+  override var mouseDownCanMoveWindow: Bool { false }
+
+  override func mouseDown(with event: NSEvent) {
+    owner?.mouseDown(with: event)
+  }
+
+  override func mouseDragged(with event: NSEvent) {
+    owner?.mouseDragged(with: event)
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    owner?.mouseUp(with: event)
+  }
+}
+
 
 class OSCFloatingView: TranslucentView {
   private let width: CGFloat = 460
@@ -32,11 +89,18 @@ class OSCFloatingView: TranslucentView {
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
 
-    let container = NSView()
+    let container = OSCFloatingContentView(mainWindow: mainWindow)
     container.translatesAutoresizingMaskIntoConstraints = false
 
     let cornerRadius: CGFloat = if #available(macOS 26.0, *) { 12 } else { 6 }
     super.init(liquidGlassCornerRadius: cornerRadius, vevCornerRadius: cornerRadius, padding: (0, 0))
+
+    let dragSurface = OSCFloatingDragSurface()
+    dragSurface.translatesAutoresizingMaskIntoConstraints = false
+    dragSurface.owner = self
+    container.addSubview(dragSurface, positioned: .below, relativeTo: nil)
+    dragSurface.padding(.all)
+    container.dragSurface = dragSurface
 
     self.oscTopView = NSStackView()
     oscTopView.translatesAutoresizingMaskIntoConstraints = false

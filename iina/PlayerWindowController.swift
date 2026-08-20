@@ -198,7 +198,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         self.updateTitle()
     }
 
-    self.playButton = NSButton(image: .play, target: self, action: #selector(playButtonAction))
+    self.playButton = OSCButton(image: .play, target: self, action: #selector(playButtonAction))
     playButton.alternateImage = .pause
 
     self.muteButton = VolumeButton(player: player, target: self, action: #selector(muteButtonAction))

@@ -1390,7 +1390,8 @@ struct Preference {
       case .arrowButtonAction:
         defaultAsString = String(describing: ArrowButtonAction.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as ArrowButtonAction)
-      case .allowScreenSaverForAudio,
+      case .allowDuplicatePlayers,
+           .allowScreenSaverForAudio,
            .alwaysFloatOnTop,
            .alwaysOpenInNewWindow,
            .alwaysShowOnTopIcon,
@@ -1399,6 +1400,7 @@ struct Preference {
            .autoSearchOnlineSub,
            .autoSwitchToMusicMode,
            .blackOutMonitor,
+           .compactUI,
            .controlBarStickToCenter,
            .disableAnimations,
            .disableOSDFileStartMsg,

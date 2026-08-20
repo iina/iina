@@ -93,7 +93,8 @@ class OSCFloatingView: TranslucentView {
     container.translatesAutoresizingMaskIntoConstraints = false
 
     let cornerRadius: CGFloat = if #available(macOS 26.0, *) { 12 } else { 6 }
-    super.init(liquidGlassCornerRadius: cornerRadius, vevCornerRadius: cornerRadius, padding: (0, 0))
+    super.init(liquidGlassCornerRadius: cornerRadius, vevCornerRadius: cornerRadius,
+               liquidGlassInteractive: true, padding: (0, 0))
 
     let dragSurface = OSCFloatingDragSurface()
     dragSurface.translatesAutoresizingMaskIntoConstraints = false

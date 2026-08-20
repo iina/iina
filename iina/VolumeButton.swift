@@ -15,6 +15,8 @@ class VolumeButton: NSView {
   var action: Selector?
 
   private var previousIcon: String?
+  private var isPressed = false
+  private var eventMonitor: Any?
 
   init(player: PlayerCore, target: Any? = nil, action: Selector? = nil) {
     self.target = target
@@ -36,9 +38,52 @@ class VolumeButton: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  deinit {
+    if let eventMonitor {
+      NSEvent.removeMonitor(eventMonitor)
+    }
+  }
+
   override func mouseDown(with event: NSEvent) {
-    guard let target, let action else { return }
-    NSApp.sendAction(action, to: target, from: self)
+    guard eventMonitor == nil else { return }
+    setPressed(true)
+    eventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.leftMouseDragged, .leftMouseUp]) {
+      [weak self] event in
+      guard let self, event.window === window else { return event }
+
+      let location = convert(event.locationInWindow, from: nil)
+      switch event.type {
+      case .leftMouseDragged:
+        setPressed(bounds.contains(location))
+      case .leftMouseUp:
+        let shouldTrigger = bounds.contains(location)
+        if let eventMonitor {
+          NSEvent.removeMonitor(eventMonitor)
+          self.eventMonitor = nil
+        }
+        setPressed(false)
+        if shouldTrigger, let target, let action {
+          NSApp.sendAction(action, to: target, from: self)
+        }
+      default:
+        break
+      }
+      return nil
+    }
+  }
+
+  private func setPressed(_ pressed: Bool) {
+    guard isPressed != pressed else { return }
+    isPressed = pressed
+    guard !Preference.bool(for: .disableAnimations) else {
+      imageView.alphaValue = pressed ? 0.55 : 1
+      return
+    }
+    NSAnimationContext.runAnimationGroup { context in
+      context.duration = pressed ? 0.06 : 0.14
+      context.timingFunction = CAMediaTimingFunction(name: pressed ? .easeInEaseOut : .easeOut)
+      imageView.animator().alphaValue = pressed ? 0.55 : 1
+    }
   }
 
   func update() {

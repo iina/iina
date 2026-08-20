@@ -301,7 +301,7 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
-        (playSlider.cell as! PlaySliderCell).drawChapters = newValue
+        playSlider.drawChapters = newValue
       }
     case PK.verticalScrollAction.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -1019,7 +1019,7 @@ class MainWindowController: PlayerWindowController {
 
     oscPlayControlMiddleView.spacing = isFloating ? 24: 16
 
-    configureQuickTimeOSC(isFloating)
+    configureQuickTimeOSC(true)
 
     fadeableViews.update()
     showUI()

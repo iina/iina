@@ -58,11 +58,7 @@ final class PlaySlider: NSSlider {
   private(set) var usesSystemAppearance = false
   private var originalTrackFillColor: NSColor?
   private var legacyCell: PlaySliderCell!
-  private lazy var systemCell: NSSliderCell = {
-    let cell = NSSliderCell()
-    cell.refusesFirstResponder = false
-    return cell
-  }()
+  private var systemCell: NSSliderCell!
 
   /// Knob representing the A loop point for the mpv A-B loop feature.
   var abLoopA: PlaySliderLoopKnob { abLoopAKnob }
@@ -99,15 +95,22 @@ final class PlaySlider: NSSlider {
 
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
-    cell = PlaySliderCell()
-    legacyCell = cell as? PlaySliderCell
+    systemCell = cell as! NSSliderCell
+    legacyCell = PlaySliderCell()
+    legacyCell.refusesFirstResponder = true
+    legacyCell.minValue = 0
+    legacyCell.maxValue = 100
     originalTrackFillColor = trackFillColor
     commonInit()
   }
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-    legacyCell = cell as? PlaySliderCell
+    systemCell = cell as! NSSliderCell
+    legacyCell = PlaySliderCell()
+    legacyCell.refusesFirstResponder = true
+    legacyCell.minValue = 0
+    legacyCell.maxValue = 100
     originalTrackFillColor = trackFillColor
     commonInit()
   }
@@ -126,9 +129,11 @@ final class PlaySlider: NSSlider {
 
   func setQuickTimeStyle(_ enabled: Bool) {
     let useSystemAppearance = if #available(macOS 26.0, *) { enabled } else { false }
-    guard usesSystemAppearance != useSystemAppearance else { return }
-
-    replaceCellPreservingConfiguration(with: useSystemAppearance ? systemCell : legacyCell)
+    let desiredCell = useSystemAppearance ? systemCell! : legacyCell!
+    guard usesSystemAppearance != useSystemAppearance || cell !== desiredCell else { return }
+    if cell !== desiredCell {
+      replaceCellPreservingConfiguration(with: desiredCell)
+    }
     usesSystemAppearance = useSystemAppearance
     controlSize = .small
     trackFillColor = useSystemAppearance ? .white : originalTrackFillColor
@@ -138,37 +143,6 @@ final class PlaySlider: NSSlider {
     abLoopA.updateGeometry()
     abLoopB.updateGeometry()
     needsDisplay = true
-  }
-
-  // MARK: - Drawing
-
-  /// Draw the slider.
-  ///
-  /// The [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) method is being overridden
-  /// for two reasons.
-  ///
-  /// With the onscreen controller hidden and a movie playing spindumps showed time being spent drawing the slider even though it
-  /// was not visible. Apparently `NSSlider.draw` is not calling
-  /// [hiddenOrHasHiddenAncestor](https://developer.apple.com/documentation/appkit/nsview/1483473-hiddenorhashiddenancestor)
-  /// to see if drawing can be avoided.  This was noticed under macOS Monterey.  Unknown if Apple addressed this in later macOS
-  /// releases.
-  ///
-  /// The loop knobs are added as subviews to the slider. That should have resulted in the `PlaySliderLoopKnob.draw` method
-  /// being called when the slider was being drawn. Prior to macOS Sonoma that did not occur. The assumption is that the
-  /// [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) `draw` method was not calling
-  /// `super.draw` and that has now been corrected. As a workaround on earlier versions of macOS the loop knob `draw` method
-  /// is called directly.
-  override func draw(_ dirtyRect: NSRect) {
-    guard !isHiddenOrHasHiddenAncestor else { return }
-    super.draw(dirtyRect)
-    if usesSystemAppearance {
-      drawSystemAppearanceIndicators()
-    }
-    abLoopA.needsDisplay = true
-    abLoopB.needsDisplay = true
-    guard #unavailable(macOS 14) else { return }
-    abLoopA.draw(dirtyRect)
-    abLoopB.draw(dirtyRect)
   }
 
   override func viewDidUnhide() {
@@ -191,18 +165,7 @@ final class PlaySlider: NSSlider {
   /// - Important: _DO NOT REMOVE_ this function thinking it is not needed. Read issue #5768.
   /// - Parameter event: An object encapsulating information about the mouse-down event.
   override func mouseDown(with event: NSEvent) {
-    guard usesSystemAppearance else {
-      super.mouseDown(with: event)
-      return
-    }
-    let player = playerCore
-    let shouldResume = player.info.state != .paused
-    player.pause()
-    player.mainWindow.thumbnailPeekView.isHidden = true
     super.mouseDown(with: event)
-    if shouldResume {
-      player.resume()
-    }
   }
 
   /// The user is scrolling while the cursor is within the slider.
@@ -217,46 +180,4 @@ final class PlaySlider: NSSlider {
     super.scrollWheel(with: event)
   }
 
-  private var playerCore: PlayerCore {
-    (window!.windowController as! PlayerWindowController).player
-  }
-
-  private func drawSystemAppearanceIndicators() {
-    let rect = sliderCell.barRect(flipped: isFlipped)
-    let knobRect = sliderCell.knobRect(flipped: isFlipped)
-    let info = playerCore.info
-
-    NSGraphicsContext.saveGraphicsState()
-    defer { NSGraphicsContext.restoreGraphicsState() }
-    let clip = NSBezierPath(rect: rect)
-    clip.append(NSBezierPath(rect: knobRect.insetBy(dx: -1, dy: -1)).reversed)
-    clip.addClip()
-
-    if info.isNetworkResource,
-       info.cacheTime != 0,
-       let duration = info.videoDuration,
-       duration.second > 0 {
-      let playedX = knobRect.midX
-      let cachedRatio = CGFloat(Double(info.cacheTime) / Double(duration.second)).clamped(to: 0...1)
-      let cachedX = rect.minX + rect.width * cachedRatio
-      if cachedX > playedX {
-        let cacheRect = NSRect(x: playedX, y: rect.midY - 1,
-                               width: cachedX - playedX, height: 2)
-        NSColor.controlAccentColor.withAlphaComponent(0.35).setFill()
-        NSBezierPath(roundedRect: cacheRect, xRadius: 1, yRadius: 1).fill()
-      }
-    }
-
-    guard drawChapters,
-          let totalSeconds = info.videoDuration?.second,
-          totalSeconds > 0,
-          info.chapters.count > 1 else { return }
-    NSColor.separatorColor.withAlphaComponent(0.75).setFill()
-    for chapter in info.chapters.dropFirst() {
-      let ratio = CGFloat(chapter.time.second / totalSeconds).clamped(to: 0...1)
-      let x = round(rect.minX + rect.width * ratio)
-      NSBezierPath(rect: NSRect(x: x - 0.5, y: rect.minY,
-                                width: 1, height: rect.height)).fill()
-    }
-  }
 }

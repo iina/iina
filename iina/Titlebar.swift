@@ -302,13 +302,12 @@ class Titlebar: NSView {
     // before hit-testing.
     let point = titlebarContainer.convert(event.locationInWindow, from: nil)
 
-    guard docIcon.frame.contains(point) || titleTextField.frame.contains(point) else {
-      super.rightMouseDown(with: event)
-      return
+    if docIcon.frame.contains(point) || titleTextField.frame.contains(point) {
+      showPathMenu()
     }
-
-    showPathMenu()
   }
+
+  override func rightMouseUp(with event: NSEvent) {}
 
   private func showPathMenu() {
     guard let filename = mainWindow.window?.representedFilename else { return }

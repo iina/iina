@@ -11,6 +11,7 @@ class VolumeButton: NSButton {
   weak var player: PlayerCore!
 
   private var previousIcon: String?
+  private var usesQuickTimeStyle = false
 
   init(player: PlayerCore, target: AnyObject? = nil, action: Selector? = nil) {
     self.player = player
@@ -37,10 +38,18 @@ class VolumeButton: NSButton {
     previousIcon = res.name
   }
 
+  func setQuickTimeStyle(_ enabled: Bool) {
+    usesQuickTimeStyle = enabled
+    previousIcon = nil
+    update()
+  }
+
   private func volumeIcon() -> (image: NSImage?, name: String) {
+    let pointSize: CGFloat = usesQuickTimeStyle ? 17 : 13
+    let configuration = NSImage.SymbolConfiguration(pointSize: pointSize, weight: .regular)
     guard let player, !player.info.isMuted else {
       let name = "speaker.slash.fill"
-      return (.sf(name), name)
+      return (.sf(name, withConfiguration: configuration), name)
     }
     let volume = Int(player.info.volume)
     guard volume >= 0 else {
@@ -52,7 +61,6 @@ class VolumeButton: NSButton {
     case 34...66: "speaker.wave.2.fill"
     default: "speaker.wave.3.fill"
     }
-    let configuration = NSImage.SymbolConfiguration(pointSize: 13, weight: .regular)
     return (.sf(symbol, withConfiguration: configuration), symbol)
   }
 }

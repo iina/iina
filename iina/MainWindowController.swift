@@ -92,6 +92,9 @@ class MainWindowController: PlayerWindowController {
   var oscVolumeView: NSView!
   var oscToolbarView: NSStackView!
   var oscSliderView: NSView!
+  private var oscVolumeSliderWidthConstraint: NSLayoutConstraint!
+  private var oscPlaySliderTopConstraint: NSLayoutConstraint!
+  private var oscPlaySliderBottomConstraint: NSLayoutConstraint!
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
@@ -506,13 +509,14 @@ class MainWindowController: PlayerWindowController {
     self.oscVolumeView = NSView()
     oscVolumeView.translatesAutoresizingMaskIntoConstraints = false
 
-    volumeSlider.size(width: 70)
+    oscVolumeSliderWidthConstraint = volumeSlider.widthAnchor.constraint(equalToConstant: 70)
+    oscVolumeSliderWidthConstraint.isActive = true
 
     oscVolumeView.addSubview(muteButton)
     oscVolumeView.addSubview(volumeSlider)
     muteButton.size(width: 24, height: 24)
       .padding(.vertical, .leading(4)).spacing(.trailing(4), to: volumeSlider)
-    volumeSlider.size(width: 70).center(.y)
+    volumeSlider.center(.y)
       .padding(.trailing(6))
 
     self.oscPlayControlView = NSStackView()
@@ -557,7 +561,7 @@ class MainWindowController: PlayerWindowController {
     oscPlayControlMiddleView.translatesAutoresizingMaskIntoConstraints = false
     oscPlayControlMiddleView.orientation = .horizontal
     oscPlayControlMiddleView.alignment = .centerY
-    oscPlayControlMiddleView.spacing = 24
+    oscPlayControlMiddleView.spacing = 10
 
     self.oscToolbarView = NSStackView()
     oscToolbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -581,7 +585,9 @@ class MainWindowController: PlayerWindowController {
       .center(.y, with: playSlider)
     rightLabel.padding(.trailing(2)).spacing(.leading(2), to: playSlider)
       .center(.y, with: playSlider)
-    playSlider.padding(.vertical(6))
+    oscPlaySliderTopConstraint = playSlider.topAnchor.constraint(equalTo: oscSliderView.topAnchor, constant: 4)
+    oscPlaySliderBottomConstraint = oscSliderView.bottomAnchor.constraint(equalTo: playSlider.bottomAnchor, constant: 4)
+    NSLayoutConstraint.activate([oscPlaySliderTopConstraint, oscPlaySliderBottomConstraint])
 
     // osd
 
@@ -971,8 +977,11 @@ class MainWindowController: PlayerWindowController {
     switch oscPosition {
     case .floating:
       currentControlBar = oscFloatingView
-      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelLeftContainer)
-      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelRightContainer)
+      // QuickTime's floating controller only shows the three transport buttons. The speed labels
+      // belong to the docked layouts and must not consume width needed by the volume and toolbar
+      // groups.
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelLeftContainer)
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelRightContainer)
       oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
       oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
       oscFloatingView.oscTopView.addView(oscPlayControlView, in: .center)
@@ -980,8 +989,8 @@ class MainWindowController: PlayerWindowController {
       // Setting the visibility priority to detach only will cause freeze when resizing the window
       // (and triggering the detach) in macOS 11.
       if !isMacOS11 {
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.mustHold, for: oscVolumeView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.mustHold, for: oscToolbarView)
         oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       }
       oscFloatingView.oscBottomView.addSubview(oscSliderView)
@@ -1017,17 +1026,31 @@ class MainWindowController: PlayerWindowController {
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     }
 
-    oscPlayControlMiddleView.spacing = isFloating ? 24: 16
+    oscPlayControlMiddleView.spacing = isFloating ? 10 : 16
+    oscToolbarView.spacing = 0
 
-    configureQuickTimeOSC(true)
+    configureQuickTimeOSC(isFloating)
 
     fadeableViews.update()
     showUI()
   }
 
   private func configureQuickTimeOSC(_ enabled: Bool) {
+    muteButton.setQuickTimeStyle(enabled)
+    (leftArrowButton as? OSCButton)?.setQuickTimeStyle(enabled, role: .transport)
+    (playButton as? OSCButton)?.setQuickTimeStyle(enabled, role: .primary)
+    (rightArrowButton as? OSCButton)?.setQuickTimeStyle(enabled, role: .transport)
     playSlider.setQuickTimeStyle(enabled)
     (volumeSlider as? VolumeSlider)?.setQuickTimeStyle(enabled)
+    oscVolumeSliderWidthConstraint?.constant = enabled ? 80 : 70
+    oscPlaySliderTopConstraint?.constant = enabled ? 4 : 6
+    oscPlaySliderBottomConstraint?.constant = enabled ? 4 : 6
+
+    let labelColor = enabled ? NSColor.white.withAlphaComponent(0.68) : NSColor.secondaryLabelColor
+    leftLabel.textColor = labelColor
+    rightLabel.textColor = labelColor
+    oscSpeedLabelLeft.textColor = labelColor
+    oscSpeedLabelRight.textColor = labelColor
 
     if enabled {
       playButton.image = quickTimePlayButtonImage(paused: player.info.state != .playing)

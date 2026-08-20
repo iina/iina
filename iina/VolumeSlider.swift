@@ -24,7 +24,7 @@ class VolumeSlider: NSSlider {
     controlSize = enabled ? .small : .mini
     trackFillColor = enabled ? .white : nil
     if #available(macOS 26.0, *) {
-      tintProminence = enabled ? .none : .automatic
+      tintProminence = enabled ? .primary : .automatic
     }
     needsDisplay = true
   }

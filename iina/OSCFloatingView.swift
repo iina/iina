@@ -156,18 +156,6 @@ private final class OSCFloatingContentView: NSView {
     return dragSurface
   }
 
-  @discardableResult
-  func routeMouseDown(_ event: NSEvent) -> Bool {
-    let point = convert(event.locationInWindow, from: nil)
-    guard bounds.contains(point), let targetView = hitTest(point) else { return false }
-    if targetView === self {
-      mouseDown(with: event)
-    } else {
-      targetView.mouseDown(with: event)
-    }
-    return true
-  }
-
   override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
     true
   }

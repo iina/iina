@@ -905,7 +905,7 @@ class MainWindowController: PlayerWindowController {
     oscToolbarView.views.forEach { oscToolbarView.removeView($0) }
     let liveTextEnabled = Preference.bool(for: .enableLiveText)
     for buttonType in effectiveButtons {
-      let button = OSCButton()
+      let button = NSButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: false)
       if buttonType == .liveText && liveTextEnabled {
         button.image = Preference.ToolBarButton.liveText.alternateImage()

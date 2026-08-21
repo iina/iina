@@ -13,7 +13,6 @@ class TranslucentView: NSView {
   }
 
   private var liquidGlassCornerRadius: CGFloat
-  private var liquidGlassInteractive: Bool
   private var vevCornerRadius: CGFloat
   private var padding: (CGFloat, CGFloat)
   var content: NSView?
@@ -21,10 +20,8 @@ class TranslucentView: NSView {
   var style: Style
   private var appliedStyle: Style?
 
-  init(liquidGlassCornerRadius: CGFloat = 16, vevCornerRadius: CGFloat = 8,
-       liquidGlassInteractive: Bool = false, padding: (CGFloat, CGFloat)) {
+  init(liquidGlassCornerRadius: CGFloat = 16, vevCornerRadius: CGFloat = 8, padding: (CGFloat, CGFloat)) {
     self.liquidGlassCornerRadius = liquidGlassCornerRadius
-    self.liquidGlassInteractive = liquidGlassInteractive
     self.vevCornerRadius = vevCornerRadius
     self.padding = padding
     self.style = if #available(macOS 26, *) {
@@ -75,9 +72,6 @@ class TranslucentView: NSView {
       if #available(macOS 26.0, *) {
         let view = NSGlassEffectView()
         view.cornerRadius = liquidGlassCornerRadius
-        if #available(macOS 27.0, *), liquidGlassInteractive {
-          view.effectIsInteractive = true
-        }
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentView = wrapper
         container = view

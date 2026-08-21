@@ -218,8 +218,7 @@ class OSCFloatingView: TranslucentView {
     let container = OSCFloatingContentView(mainWindow: mainWindow)
     container.translatesAutoresizingMaskIntoConstraints = false
 
-    super.init(liquidGlassCornerRadius: 24, vevCornerRadius: 20,
-               liquidGlassInteractive: true, padding: (0, 0))
+    super.init(liquidGlassCornerRadius: 24, vevCornerRadius: 20, padding: (0, 0))
 
     let dragSurface = OSCFloatingDragSurface()
     dragSurface.translatesAutoresizingMaskIntoConstraints = false

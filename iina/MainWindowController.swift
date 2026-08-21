@@ -586,6 +586,7 @@ class MainWindowController: PlayerWindowController {
     oscSliderView.addSubview(leftLabel)
     oscSliderView.addSubview(rightLabel)
     oscSliderView.addSubview(playSlider)
+    leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor).isActive = true
     leftLabel.padding(.leading(2)).spacing(.trailing(2), to: playSlider)
       .center(.y, with: playSlider)
     rightLabel.padding(.trailing(2)).spacing(.leading(2), to: playSlider)

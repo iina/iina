@@ -167,6 +167,7 @@ final class PlaySlider: NSSlider {
   override func mouseDown(with event: NSEvent) {
     let player = playerCore
     let shouldResume = player.info.state != .paused
+    player.mainWindow.liveText.clearAnalysis()
     player.pause()
     player.mainWindow.thumbnailPeekView.isHidden = true
     super.mouseDown(with: event)

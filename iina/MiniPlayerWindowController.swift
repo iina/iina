@@ -153,6 +153,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor, multiplier: 1).isActive = true
 
     backgroundView.addSubview(playSlider)
+    playSlider.setQuickTimeStyle(true)
     playSlider.padding(.bottom(.bottomPadding))
     playSlider.spacing(.leading(6), to: leftLabel)
     leftLabel.center(.y, with: playSlider)
@@ -193,8 +194,11 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     controlView.padding(.horizontal, .top(.controlTopPadding))
       .size(height: 48)
 
-    let prevBtn = NSButton(image: .nextl, target: self, action: #selector(prevBtnAction))
-    let nextBtn = NSButton(image: .nextr, target: self, action: #selector(nextBtnAction))
+    let symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+    let prevBtn = OSCButton(image: .sf("backward.end.fill", withConfiguration: symbolConfiguration)!,
+                            target: self, action: #selector(prevBtnAction))
+    let nextBtn = OSCButton(image: .sf("forward.end.fill", withConfiguration: symbolConfiguration)!,
+                            target: self, action: #selector(nextBtnAction))
 
     self.togglePlaylistButton = NSButton(image: .sf("list.bullet.rectangle")!, target: self, action: #selector(togglePlaylist))
     self.toggleAlbumArtButton = NSButton(image: .sf("photo")!, target: self, action: #selector(toggleVideoView))
@@ -208,8 +212,14 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       button.isBordered = false
       button.imageScaling = .scaleProportionallyUpOrDown
       button.refusesFirstResponder = true
+      if button !== togglePlaylistButton && button !== toggleAlbumArtButton {
+        button.setButtonType(.momentaryPushIn)
+      }
       controlView.addSubview(button)
     }
+
+    playButton.image = .sf("play.fill", withConfiguration: symbolConfiguration)
+    playButton.alternateImage = .sf("pause.fill", withConfiguration: symbolConfiguration)
 
     playButton.size(width: 28, height: 28)
     nextBtn.size(width: 28, height: 28)

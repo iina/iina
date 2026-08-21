@@ -1033,7 +1033,7 @@ class MainWindowController: PlayerWindowController {
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     }
 
-    oscPlayControlMiddleView.spacing = isFloating ? 10 : DockedOSCLayout.transportSpacing
+    oscPlayControlMiddleView.spacing = isFloating ? 4 : DockedOSCLayout.transportSpacing
     oscToolbarView.spacing = 0
 
     configureQuickTimeOSC(isFloating)
@@ -1069,7 +1069,7 @@ class MainWindowController: PlayerWindowController {
 
   private func quickTimePlayButtonImage(paused: Bool) -> NSImage? {
     .sf(paused ? "play.fill" : "pause.fill",
-        withConfiguration: .init(pointSize: 24, weight: .medium))
+        withConfiguration: .init(pointSize: 32, weight: .medium))
   }
 
   // MARK: - Mouse / Trackpad events
@@ -2793,7 +2793,7 @@ class MainWindowController: PlayerWindowController {
   /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
   func updateArrowButtons() {
     if oscPosition == .floating {
-      let config = NSImage.SymbolConfiguration(pointSize: 23, weight: .semibold)
+      let config = NSImage.SymbolConfiguration(pointSize: 27, weight: .semibold)
       if arrowBtnFunction == .playlist {
         leftArrowButton.image = .sf("backward.end.fill", withConfiguration: config)
         rightArrowButton.image = .sf("forward.end.fill", withConfiguration: config)

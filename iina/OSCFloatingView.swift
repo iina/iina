@@ -21,8 +21,8 @@ class OSCButton: NSButton {
     var floatingSize: CGFloat {
       switch self {
       case .standard: 24
-      case .transport: 28
-      case .primary: 36
+      case .transport: 32
+      case .primary: 48
       }
     }
   }
@@ -61,7 +61,7 @@ class OSCButton: NSButton {
       imageScaling = .scaleProportionallyDown
       bezelStyle = .shadowlessSquare
       isBordered = false
-      contentTintColor = .white
+      contentTintColor = .white.withAlphaComponent(0.84)
     } else {
       imagePosition = originalImagePosition!
       imageScaling = originalImageScaling!

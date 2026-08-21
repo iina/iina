@@ -33,7 +33,6 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     wantsLayer = true
     layer?.cornerRadius = 8
     size(height: 98)
-    verticalScrollElasticity = .automatic
 
     player.observe(.iinaTracklistChanged) { [weak self] _ in
       self?.tableView.reloadData()
@@ -45,9 +44,13 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     }
   }
 
-  private var isTrackingCurrentGesture = false
-  private var isTouchActive = false
-  private var lastTouchEndedTimestamp: TimeInterval = 0
+  private enum ScrollGestureState {
+    case idle
+    case trackingTouch
+    case trackingMomentumCandidate(touchEndedTimestamp: TimeInterval)
+  }
+
+  private var scrollGestureState = ScrollGestureState.idle
 
   override func scrollWheel(with event: NSEvent) {
     // If the content is small enough to fit in the view, it doesn't need to scroll.
@@ -62,25 +65,31 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     // are not trapped when this view scrolls under the cursor mid-gesture.
     if event.hasPreciseScrollingDeltas && (event.phase != [] || event.momentumPhase != []) {
       if event.phase == .mayBegin || event.phase == .began {
-        isTrackingCurrentGesture = true
-        isTouchActive = true
+        scrollGestureState = .trackingTouch
       } else if event.phase == .changed {
-        if !isTouchActive {
-          isTrackingCurrentGesture = false
+        if case .trackingTouch = scrollGestureState {
+          // Continue handling the gesture that began over this view.
+        } else {
+          scrollGestureState = .idle
         }
       } else if event.phase == .ended || event.phase == .cancelled {
-        isTouchActive = false
-        lastTouchEndedTimestamp = event.timestamp
+        if case .idle = scrollGestureState {
+          // Keep forwarding gestures that began outside this view.
+        } else {
+          scrollGestureState = .trackingMomentumCandidate(touchEndedTimestamp: event.timestamp)
+        }
       } else if event.momentumPhase == .began {
-        if !isTrackingCurrentGesture || (event.timestamp - lastTouchEndedTimestamp) >= 0.1 {
-          isTrackingCurrentGesture = false
+        if case let .trackingMomentumCandidate(touchEndedTimestamp) = scrollGestureState,
+           event.timestamp - touchEndedTimestamp < 0.1 {
+          // Treat promptly following momentum as part of the tracked gesture.
+        } else {
+          scrollGestureState = .idle
         }
       } else if event.momentumPhase == .ended || event.momentumPhase == .cancelled {
-        isTrackingCurrentGesture = false
-        isTouchActive = false
+        scrollGestureState = .idle
       }
 
-      if !isTrackingCurrentGesture {
+      if case .idle = scrollGestureState {
         nextResponder?.scrollWheel(with: event)
         return
       }

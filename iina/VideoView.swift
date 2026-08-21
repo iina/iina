@@ -533,8 +533,8 @@ extension VideoView {
         targetPeak = 400
       }
     }
-    let algorithm = String(describing: Preference.enum(for: .toneMappingAlgorithm) as
-                           Preference.ToneMappingAlgorithmOption)
+    let algorithm = Preference.string(for: .toneMappingAlgorithm,
+                                      ofType: Preference.ToneMappingAlgorithmOption.self)
     logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm)")
     mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
     mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)

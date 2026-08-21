@@ -37,7 +37,8 @@ private final class OSCFloatingContentView: NSView {
     var controls: [NSView] = mainWindow.oscToolbarView?.subviews ?? []
     controls.append(contentsOf: [mainWindow.volumeSlider, mainWindow.muteButton,
                                  mainWindow.leftArrowButton, mainWindow.playButton,
-                                 mainWindow.rightArrowButton, mainWindow.playSlider].compactMap { $0 })
+                                 mainWindow.rightArrowButton, mainWindow.leftLabel,
+                                 mainWindow.rightLabel, mainWindow.playSlider].compactMap { $0 })
     for control in controls.reversed()
       where control.isDescendant(of: self) && !control.isHiddenOrHasHiddenAncestor {
       let localPoint = control.convert(point, from: self)

@@ -95,7 +95,7 @@ final class PlaySlider: NSSlider {
 
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
-    systemCell = cell as! NSSliderCell
+    systemCell = cell as? NSSliderCell
     legacyCell = PlaySliderCell()
     legacyCell.refusesFirstResponder = true
     legacyCell.minValue = 0
@@ -106,7 +106,7 @@ final class PlaySlider: NSSlider {
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-    systemCell = cell as! NSSliderCell
+    systemCell = cell as? NSSliderCell
     legacyCell = PlaySliderCell()
     legacyCell.refusesFirstResponder = true
     legacyCell.minValue = 0
@@ -165,7 +165,14 @@ final class PlaySlider: NSSlider {
   /// - Important: _DO NOT REMOVE_ this function thinking it is not needed. Read issue #5768.
   /// - Parameter event: An object encapsulating information about the mouse-down event.
   override func mouseDown(with event: NSEvent) {
+    let player = playerCore
+    let shouldResume = player.info.state != .paused
+    player.pause()
+    player.mainWindow.thumbnailPeekView.isHidden = true
     super.mouseDown(with: event)
+    if shouldResume {
+      player.resume()
+    }
   }
 
   /// The user is scrolling while the cursor is within the slider.
@@ -178,6 +185,10 @@ final class PlaySlider: NSSlider {
   override func scrollWheel(with event: NSEvent) {
     guard !Preference.bool(for: .disablePlaySliderScrolling) else { return }
     super.scrollWheel(with: event)
+  }
+
+  private var playerCore: PlayerCore {
+    (window!.windowController as! PlayerWindowController).player
   }
 
 }

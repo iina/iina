@@ -533,9 +533,13 @@ class MPVController: NSObject {
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache,
                   verboseIfDefault: true) { key in
-      return Preference.bool(for: key) ? nil : "no"
+      return Preference.bool(for: key) ? "yes" : "no"
     }
 
+    setUserOption(PK.cachePauseInitial, type: .bool, forName: MPVOption.Cache.cachePauseInitial,
+                  verboseIfDefault: true)
+    setUserOption(PK.cachePauseWait, type: .float, forName: MPVOption.Cache.cachePauseWait,
+                  verboseIfDefault: true)
     setUserOption(PK.defaultCacheSize, type: .other, forName: MPVOption.Demuxer.demuxerMaxBytes,
                   verboseIfDefault: true) { key in
       return "\(Preference.integer(for: key))KiB"

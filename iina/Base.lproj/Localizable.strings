@@ -762,14 +762,18 @@
 "settings.useMediaKeys.label" = "Use system media control";
 
 // Settings - Network
-"settings.cacheBufferSize.desc" = "Default: 153600";
-"settings.cacheBufferSize.label" = "Cache buffer size (KB)";
-"settings.enableCache.label" = "Enable cache";
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.label" = "Buffer before starting playback";
+"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.enableCache.label" = "Prefetch and buffer network data";
 "settings.httpProxy.desc" = "Requires restarting IINA to take effect.";
 "settings.httpProxy.label" = "HTTP proxy";
-"settings.secPrefech.desc" = "Default: 36000";
+"settings.secPrefech.desc" = "Default: 36,000";
 "settings.secPrefech.label" = "Seconds to prefetch";
-"settings.showBufferingThrobber.label" = "Show throbber when paused waiting for the cache";
+"settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "Show throbber when seeking";
 "settings.transportRTSPThrough.items.0" = "Auto";
 "settings.transportRTSPThrough.label" = "Transport RTSP stream through";

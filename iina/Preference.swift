@@ -256,7 +256,8 @@ struct Preference {
 
     static let enableCache = Key("enableCache")
     static let defaultCacheSize = Key("defaultCacheSize")
-    static let cacheBufferSize = Key("cacheBufferSize")
+    static let cachePauseInitial = Key("cachePauseInitial")
+    static let cachePauseWait = Key("cachePauseWait")
     static let secPrefech = Key("secPrefech")
     static let showBufferingThrobber = Key("showBufferingThrobber")
     static let showSeekingThrobber = Key("showSeekingThrobber")
@@ -1183,7 +1184,8 @@ struct Preference {
 
     .enableCache: true,
     .defaultCacheSize: 153600,
-    .cacheBufferSize: 153600,
+    .cachePauseInitial: false,
+    .cachePauseWait: Float(1),
     .secPrefech: 36000,
     .showBufferingThrobber: true,
     .showSeekingThrobber: true,
@@ -1400,6 +1402,7 @@ struct Preference {
            .autoSearchOnlineSub,
            .autoSwitchToMusicMode,
            .blackOutMonitor,
+           .cachePauseInitial,
            .compactUI,
            .controlBarStickToCenter,
            .disableAnimations,
@@ -1497,7 +1500,8 @@ struct Preference {
       case .defaultRepeatMode:
         defaultAsString = String(describing: DefaultRepeatMode.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as DefaultRepeatMode)
-      case .controlBarAutoHideTimeout,
+      case .cachePauseWait,
+           .controlBarAutoHideTimeout,
            .controlBarPositionHorizontal,
            .controlBarPositionVertical,
            .osdAutoHideTimeout,

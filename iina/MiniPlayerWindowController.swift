@@ -383,7 +383,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     } else if event.inAnyOf([volumeControlContainer]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
-      guard !event.inAnyOf([backgroundView]) else { return }
+      guard !event.inAnyOf([backgroundView, playlistWrapperView]) else { return }
     }
 
     super.scrollWheel(with: event)

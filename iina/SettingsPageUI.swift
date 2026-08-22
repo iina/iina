@@ -136,9 +136,11 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.PopupButton()
           .image(name: "forward.fill")
           .bindTo(.arrowButtonAction, ofType: Preference.ArrowButtonAction.self)
-        SettingsItem.Input()
+        SettingsItem.SwitchWithInput()
           .image(name: "timer")
-          .bindTo(.controlBarAutoHideTimeout)
+          .labelKey(.controlBarAutoHideTimeout)
+          .bindInputTo(.controlBarAutoHideTimeout)
+          .bindSwitchTo(.enableControlBarAutoHide)
           .trailingLabel(.text_s)
       }
 

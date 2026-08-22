@@ -821,7 +821,7 @@ struct Preference {
     case hide
     case minimize
 
-    static var defaultValue = WindowBehaviorWhenPip.doNothing
+    static var defaultValue = WindowBehaviorWhenPip.hide
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
@@ -1107,7 +1107,7 @@ struct Preference {
     .musicModeShowAlbumArt: true,
     .displayTimeAndBatteryInFullScreen: false,
 
-    .windowBehaviorWhenPip: WindowBehaviorWhenPip.doNothing.rawValue,
+    .windowBehaviorWhenPip: WindowBehaviorWhenPip.hide.rawValue,
     .pauseWhenPip: false,
     .togglePipByMinimizingWindow: false,
     .togglePipByMinimizingWindowForVideoOnly: false,

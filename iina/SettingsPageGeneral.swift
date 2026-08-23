@@ -178,7 +178,7 @@ class SettingsPageGeneral: SettingsPage {
           .bindTo(.screenshotSaveToFile)
           .extraViews(fileChooseView.textField, fileChooseView.chooseButton)
         SettingsItem.PopupButton()
-          .bindTo(.screenshotFormat, ofType: Preference.ScreenshotFormat.self)
+          .bindToSorted(.screenshotFormat, ofType: Preference.ScreenshotFormat.self)
         SettingsItem.Switch()
           .image(name: "list.clipboard")
           .bindTo(.screenshotCopyToClipboard)
@@ -215,5 +215,11 @@ fileprivate extension Preference {
       case .monthly: "monthly"
       }
     }
+  }
+}
+
+extension Preference.ScreenshotFormat: Comparable {
+  static func <(lhs: Preference.ScreenshotFormat, rhs: Preference.ScreenshotFormat) -> Bool {
+    String(describing: lhs) < String(describing: rhs)
   }
 }

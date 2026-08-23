@@ -577,6 +577,16 @@ struct SettingsItem {
       return self
     }
 
+    func bindToSorted<T>(_ key: Preference.Key, ofType t: T.Type) -> Self
+    where T: RawRepresentable & CaseIterable & InitializingFromKey & Comparable, T.RawValue == Int
+    {
+      self.key = key
+      for c in t.allCases.sorted() {
+        valueTypes.append((c.rawValue, String(describing: c)))
+      }
+      return self
+    }
+
     func bindToCustom<T>(type t: T.Type, block: @escaping (NSPopUpButton) -> Void) -> Self
     where T: RawRepresentable & CaseIterable & InitializingFromKey, T.RawValue == Int
     {

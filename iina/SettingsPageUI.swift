@@ -141,6 +141,7 @@ class SettingsPageUI: SettingsPage {
           .labelKey(.controlBarAutoHideTimeout)
           .bindInputTo(.controlBarAutoHideTimeout)
           .bindSwitchTo(.enableControlBarAutoHide)
+          .range(0...Double(Int.max), allowsFloats: true)
           .trailingLabel(.text_s)
       }
 
@@ -190,10 +191,12 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.Input(title: .controlBarAutoHideTimeoutLabel)
           .image(name: "timer")
           .bindTo(.osdAutoHideTimeout)
+          .range(0...Double(Int.max), allowsFloats: true)
           .trailingLabel(.text_s)
         SettingsItem.Input()
           .image(name: "textformat.size")
           .bindTo(.osdTextSize)
+          .range(1...500)
           .trailingLabel(.text_pt)
         SettingsItem.Switch()
           .image(name: "info.bubble")
@@ -211,11 +214,13 @@ class SettingsPageUI: SettingsPage {
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.maxThumbnailPreviewCacheSize)
+              .range(0...Double(Int.max))
               .trailingLabel(.text_MB)
             SettingsItem.Switch()
               .bindTo(.enableThumbnailForRemoteFiles)
             SettingsItem.Input()
               .bindTo(.thumbnailWidth)
+              .range(1...2000)
               .trailingLabel(.text_pt)
               .hasDescription()
           }

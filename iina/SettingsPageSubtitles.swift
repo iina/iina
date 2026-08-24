@@ -103,8 +103,10 @@ class SettingsPageSubtitles: SettingsPage {
           .withExpandingDetailView {
             SettingsItem.Input()
               .bindTo(.subBlur)
+              .range(0...20, allowsFloats: true)
             SettingsItem.Input()
               .bindTo(.subSpacing)
+              .range(-10...10, allowsFloats: true)
           }
       }
     }
@@ -122,6 +124,7 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.Input()
           .image(name: "arrow.up.and.down")
           .bindTo(.subPos)
+          .range(0...150)
           .trailingLabel(.text_Percent)
       }
 
@@ -293,7 +296,7 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
     fontButton.bind(.title, to: UserDefaults.standard, withKeyPath: Preference.Key.subTextFont.rawValue)
     fontButton.size(height: 25)
 
-    let sizeInput = ui.input(bindTo: .subTextSize)
+    let sizeInput = ui.input(bindTo: .subTextSize, range: 1...9000, allowsFloats: true)
 
     let boldButton = SButton(image: .sf("bold"))
     boldButton.translatesAutoresizingMaskIntoConstraints = false
@@ -346,7 +349,7 @@ fileprivate class SubtitlesBorderView: SettingsAccessory.Base {
     super.init()
 
     let widthLabel = ui.smallLabel(bindTo: .text_Size)
-    let widthInput = ui.input(bindTo: .subBorderSize)
+    let widthInput = ui.input(bindTo: .subBorderSize, range: 0...Double.infinity, allowsFloats: true)
 
     let colorLabel = ui.smallLabel(bindTo: .text_Color)
     let colorWell = ui.colorWell(bindTo: .subBorderColorString)
@@ -382,10 +385,10 @@ fileprivate class SubtitlesMarginView: SettingsAccessory.Base {
     super.init()
 
     let xLabel = ui.smallLabel(bindTo: .text_X)
-    let xInput = ui.input(bindTo: .subMarginX)
+    let xInput = ui.input(bindTo: .subMarginX, range: 0...Double(Int.max))
 
     let yLabel = ui.smallLabel(bindTo: .text_Y)
-    let yInput = ui.input(bindTo: .subMarginY)
+    let yInput = ui.input(bindTo: .subMarginY, range: 0...Double(Int.max))
 
     let stackView = ui.hStack(xLabel, xInput, yLabel, yInput)
 

@@ -539,7 +539,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
       }
 
       self.editButton = createActionButton(
-        symbol: "gearshape.fill", action: #selector(editor.editKeyMappingAction))
+        symbol: "pencil", action: #selector(editor.editKeyMappingAction))
       self.removeButton = createActionButton(
         symbol: "trash.fill", action: #selector(editor.removeKeyMappingAction))
       self.lockHelpButton = createActionButton(

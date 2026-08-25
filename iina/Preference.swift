@@ -1118,8 +1118,8 @@ struct Preference {
     .dockedControlBarAndTitlebar: false,
 
     .sidebarSettingsDisplayAtLeading: false,
-    .sidebarPlaylistDisplayAtLeading: false,
-    .sidebarPluginsDisplayAtLeading: false,
+    .sidebarPlaylistDisplayAtLeading: true,
+    .sidebarPluginsDisplayAtLeading: true,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,

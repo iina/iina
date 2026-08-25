@@ -41,6 +41,7 @@ class SettingsPageVideo: SettingsPage {
         SettingsItem.Input()
           .image(name: "number")
           .bindTo(.videoThreads)
+          .range(0...Double(Int.max))
           .hasDescription()
         SettingsItem.General(title: .hardwareDecoderLabel)
           .image(name: "cpu")
@@ -90,6 +91,7 @@ class SettingsPageVideo: SettingsPage {
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.toneMappingTargetPeak)
+              .range(0...10000)  // mpv option is "auto" or 10...10000, todo align with mpv.
               .trailingLabel(.text_nits)
               .hasDescription()
               .withHelpLink(AppData.targetPeakHelpLink)

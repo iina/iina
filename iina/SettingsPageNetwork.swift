@@ -44,7 +44,7 @@ class SettingsPageNetwork: SettingsPage {
               .withHelpLink(AppData.cachePauseInitialHelpLink)
             SettingsItem.Input()
               .bindTo(.cachePauseWait)
-              .range(0...3.4028234663853e+38)
+              .range(0...3.4028234663853e+38, allowsFloats: true)
               .hasDescription()
               .withHelpLink(AppData.cachePauseWaitHelpLink)
             SettingsItem.Input()

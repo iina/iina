@@ -42,6 +42,7 @@ class SettingsPageAudio: SettingsPage {
         SettingsItem.Input(title: .videoThreadsLabel)
           .image(name: "number")
           .bindTo(.audioThreads)
+          .range(0...16)
           .hasDescription(content: .videoThreadsDesc)
         SettingsItem.General(title: .audioDriverEnableAVFoundationLabel)
           .image(name: "waveform")
@@ -90,6 +91,7 @@ class SettingsPageAudio: SettingsPage {
           .labelKey(.enableInitialVolume)
           .bindInputTo(.initialVolume)
           .bindSwitchTo(.enableInitialVolume)
+          .range(0...1000) // mpv option is a float, but IINA uses integers for volume.
         SettingsItem.Input()
           .bindTo(.maxVolume)
           .range(100...1000)
@@ -106,6 +108,7 @@ class SettingsPageAudio: SettingsPage {
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.replayGainPreamp)
+              .range(-150...150)
               .trailingLabel(.text_dB)
               .hasDescription()
             SettingsItem.Switch()
@@ -115,6 +118,7 @@ class SettingsPageAudio: SettingsPage {
         SettingsItem.Input()
           .image(name: "square.dotted")
           .bindTo(.replayGainFallback)
+          .range(-200...60)
           .trailingLabel(.text_dB)
           .hasDescription()
       }

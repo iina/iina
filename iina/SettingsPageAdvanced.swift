@@ -54,6 +54,8 @@ class SettingsPageAdvanced: SettingsPage {
   override var localizationTable: String {
     "SettingsAdvancedLocalizable"
   }
+  
+  override var showSubSections: Bool { false }
 
   override func pageLoaded() {
     if let renderedView = advancedSettingsSwitch.renderedView {

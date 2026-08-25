@@ -32,6 +32,8 @@ class SettingsPagePlugin: SettingsPage {
   override var sectionSpacing: CGFloat {
     8
   }
+  
+  override var showSubSections: Bool { false }
 
   fileprivate lazy var installView: PluginInstallView = .init(page: self)
   fileprivate lazy var listView: PluginListView = .init(page: self)

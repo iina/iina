@@ -146,6 +146,7 @@ class SettingsPage {
   var image: NSImage { NSImage() }
   var helpInfo: String? { nil }
   var sectionSpacing: CGFloat { 16 }
+  var showSubSections: Bool { true }
 
   let symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)
 

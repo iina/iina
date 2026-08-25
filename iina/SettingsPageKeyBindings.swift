@@ -25,6 +25,8 @@ class SettingsPageKeyBindings: SettingsPage {
   override var localizationTable: String {
     "SettingsKeyBindingLocalizable"
   }
+  
+  override var showSubSections: Bool { false }
 
   private lazy var configEditor: ConfigEditor = ConfigEditor()
 

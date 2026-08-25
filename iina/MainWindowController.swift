@@ -124,9 +124,7 @@ class MainWindowController: PlayerWindowController {
   var isWindowHidden: Bool = false
   var isWindowMiniaturizedDueToPip = false
 
-  // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
-  var isMouseInSlider: Bool = false
   /** flag to ignore abrupt momentum scrolls */
   private var isMomentumScrollingAllowed = false
 
@@ -1236,11 +1234,6 @@ class MainWindowController: PlayerWindowController {
     } else if obj == 1 {
       // slider
       if oscFloatingView.isDragging { return }
-      isMouseInSlider = true
-      if !oscFloatingView.isDragging {
-        timePreviewView.isHidden = false
-        thumbnailPeekView.isHidden = !player.info.thumbnailsReady
-      }
       refreshSeekTimeAndThumbnail(from: event)
     }
   }
@@ -1262,10 +1255,7 @@ class MainWindowController: PlayerWindowController {
       isMomentumScrollingAllowed = false
     } else if obj == 1 {
       // slider
-      isMouseInSlider = false
-      timePreviewView.isHidden = true
       refreshSeekTimeAndThumbnail(from: event)
-      thumbnailPeekView.isHidden = true
     }
   }
 
@@ -1416,6 +1406,9 @@ class MainWindowController: PlayerWindowController {
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
     UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
+    // Reset default visibilities
+    thumbnailPeekView.isHidden = true
+    timePreviewView.isHidden = true
 
     player.events.emit(.windowWillClose)
   }
@@ -1485,7 +1478,6 @@ class MainWindowController: PlayerWindowController {
 
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
-    isMouseInSlider = false
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
@@ -1610,7 +1602,6 @@ class MainWindowController: PlayerWindowController {
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
     additionalInfoView.isHidden = true
-    isMouseInSlider = false
 
     fsState.startAnimatingToWindow()
     fadeableViews.update()
@@ -2244,11 +2235,11 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: Interactive mode
 
-
+  /// This will either show & position, or hide, as appropriate, `thumbnailPeekView` and/or `timePreviewView`.
   private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
     let isCoveredByOSD = !osdView.isHidden && event.inAnyOf([osdView])
     let isCoveredBySidebar = sidebars.isEventCoveringVisibleSidebar(event)
-    if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
+    if !playSlider.isHidden && event.inAnyOf([playSlider]), !isCoveredByOSD, !isCoveredBySidebar {
       updateTimePreviewAndThumbnail(event.locationInWindow)
     } else {
       thumbnailPeekView.isHidden = true
@@ -2990,6 +2981,8 @@ class MainWindowController: PlayerWindowController {
       }
       thumbnailPeekView.frame.size = NSSize(width: width, height: height)
       thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
+    } else {
+      thumbnailPeekView.isHidden = true
     }
   }
 

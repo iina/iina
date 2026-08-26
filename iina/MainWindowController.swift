@@ -718,11 +718,9 @@ class MainWindowController: PlayerWindowController {
       // notification if changes require processing this notification.
       let screensChanged: Bool = {
         guard screens.count == cachedScreens.count else { return true }
-        for i in 0..<screens.count {
-          if screens[i].frame != cachedScreens[i].frame { return true }
-          if screens[i].displayId != cachedScreens[i].displayId { return true }
+        return zip(screens, cachedScreens).contains {
+          $0.frame != $1.frame || $0.displayId != $1.displayId
         }
-        return false
       }()
       guard screensChanged else { return }
       // Update the cached screens

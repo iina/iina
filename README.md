@@ -153,7 +153,7 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **[PolyScript](https://github.com/SammoMichael/polyplugin-release)** (`SammoMichael/polyplugin-release`) - Dual subtitles, hover dictionary, and AI-assisted translation for language learning.
 - **[recorder](https://github.com/5thDimensionalVader/recorder-iina)** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 - **[Skip Intro](https://github.com/pparanoiidd/iina-skip-intro)** (`pparanoiidd/iina-skip-intro`) - Detect and skip intros, recaps and credits.
-- **[SubLingo](https://github.com/janwee-sha/SubLingo)** (`janwee-sha/SubLingo`) - Translate selected local embedded text subtitles and external SRT/ASS subtitles into real-time bilingual subtitles.
+- **[SubTandem](https://github.com/janwee-sha/SubTandem)** (`janwee-sh/SubTandem`) - Translate selected local embedded text subtitles and external SRT/ASS subtitles into real-time bilingual subtitles.
 - **[Trakt Scrobbler](https://github.com/i3p9/iina-trakt-scrobbler)** (`i3p9/iina-trakt-scrobbler`) - Trakt.tv scrobbler plugin for IINA.
 - **[VR2D](https://github.com/fetzu/iina-plugin-vr2d)** (`fetzu/iina-plugin-vr2d`) - Watch 3D VR videos (180°/360°, side-by-side or over-under) flat, with pan, zoom and automatic detection.
 

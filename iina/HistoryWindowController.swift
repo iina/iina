@@ -576,7 +576,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
 extension HistoryWindowController: NSToolbarDelegate {
   private static let clear = NSToolbarItem.Identifier("Clear")
-  private static let groupBy = NSToolbarItem.Identifier("GrouopBy")
+  private static let groupBy = NSToolbarItem.Identifier("GroupBy")
   private static let expandCollapse = NSToolbarItem.Identifier("ExpandCollapse")
   private static let searchField = NSToolbarItem.Identifier("SearchField")
   private static let toolbarItems = [groupBy, expandCollapse, .space, clear, .space, searchField]

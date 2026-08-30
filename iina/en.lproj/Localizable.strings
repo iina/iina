@@ -666,7 +666,7 @@
 "settings.loadIccProfile.desc" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
 "settings.loadIccProfile.label" = "Load ICC profile";
 "settings.toneMappingAlgorithm.label" = "Algorithm";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Target peak";
 "settings.videoThreads.desc" = "Default: 0 (Auto)";
 "settings.videoThreads.label" = "Number of threads";

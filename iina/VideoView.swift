@@ -505,38 +505,47 @@ extension VideoView {
   /// - [target-peak](https://mpv.io/manual/stable/#options-target-peak)
   /// - [tone-mapping](https://mpv.io/manual/stable/#options-tone-mapping)
   ///
-  /// If the IINA `Target peak` setting is set to `0` then this method will attempt to determine peak brightness of the display.
+  /// Otherwise these options will be set to their default values.
   private func setToneMappingForHDR() {
-    guard let mpv = player.mpv, Preference.bool(for: .enableToneMapping) else { return }
-    var targetPeak = Preference.integer(for: .toneMappingTargetPeak)
-    // If the target peak is set to zero then IINA attempts to determine peak brightness of the
-    // display.
-    if targetPeak == 0 {
+    guard let mpv = player.mpv else { return }
+    guard Preference.bool(for: .enableToneMapping) else {
+      // Reset options to their defaults.
+      mpv.setStringToDefault(MPVOption.GPURendererOptions.targetPeak)
+      mpv.setStringToDefault(MPVOption.GPURendererOptions.toneMapping)
+      return
+    }
+    var targetPeak = "auto"
+    if Preference.bool(for: .enableToneMappingTargetPeakOverride) {
+      targetPeak = String(Preference.integer(for: .toneMappingTargetPeakOverride))
+    } else {
+      // In auto mode mpv will use the target display's peak brightness, if available. Otherwise
+      // mpv will apply an appropriate value based on the transfer characteristics of the display.
+      // However, mpv is currently missing code for querying the display under macOS. So IINA
+      // attempts to determine peak brightness of the display itself and only uses mpv auto mode
+      // if unable to obtain the display's brightness.
       if let displayInfo = CoreDisplay_DisplayCreateInfoDictionary(currentDisplay!)?.takeRetainedValue()
-                as? [String: AnyObject] {
+          as? [String: AnyObject] {
         logHDR("Successfully obtained information about the display")
         // Apple Silicon Macs use the key NonReferencePeakHDRLuminance.
         if let hdrLuminance = displayInfo["NonReferencePeakHDRLuminance"] as? Int {
           logHDR("Found NonReferencePeakHDRLuminance: \(hdrLuminance)")
-          targetPeak = hdrLuminance
+          targetPeak = String(hdrLuminance)
         } else if let hdrLuminance = displayInfo["DisplayBacklight"] as? Int {
           // Intel Macs use the key DisplayBacklight.
           logHDR("Found DisplayBacklight: \(hdrLuminance)")
-          targetPeak = hdrLuminance
+          targetPeak = String(hdrLuminance)
         } else {
-          logHDR("Didn't find NonReferencePeakHDRLuminance or DisplayBacklight, assuming HDR400")
-          logHDR("Display info dictionary: \(displayInfo)")
-          targetPeak = 400
+          logHDR("Didn't find NonReferencePeakHDRLuminance or DisplayBacklight, using mpv auto mode")
+          logHDR("Display info dictionary:" + displayInfo.toStringForLog(), level: .verbose)
         }
       } else {
-        logHDR("Unable to obtain display information, assuming HDR400", level: .warning)
-        targetPeak = 400
+        logHDR("Unable to obtain display information, using mpv auto mode", level: .warning)
       }
     }
-    let algorithm = Preference.string(for: .toneMappingAlgorithm,
-                                      ofType: Preference.ToneMappingAlgorithmOption.self)
+    let algorithm = String(describing: Preference.enum(for: .toneMappingAlgorithm) as
+                           Preference.ToneMappingAlgorithmOption)
     logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm)")
-    mpv.setInt(MPVOption.GPURendererOptions.targetPeak, targetPeak)
+    mpv.setString(MPVOption.GPURendererOptions.targetPeak, targetPeak)
     mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)
   }
 
@@ -545,8 +554,16 @@ extension VideoView {
   /// If tone mapping is enabled then this method will set the following mpv options back to their default value (`auto`):
   /// - [target-peak](https://mpv.io/manual/stable/#options-target-peak)
   /// - [tone-mapping](https://mpv.io/manual/stable/#options-tone-mapping)
+  ///
+  /// Otherwise these options will be set to their default values.
   private func setToneMappingForSDR() {
-    guard let mpv = player.mpv, Preference.bool(for: .enableToneMapping) else { return }
+    guard let mpv = player.mpv else { return }
+    guard Preference.bool(for: .enableToneMapping) else {
+      // Reset options to their defaults.
+      mpv.setStringToDefault(MPVOption.GPURendererOptions.targetPeak)
+      mpv.setStringToDefault(MPVOption.GPURendererOptions.toneMapping)
+      return
+    }
     logHDR("Will enable tone mapping: target-peak=auto algorithm=auto")
     mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
     mpv.setString(MPVOption.GPURendererOptions.toneMapping, "auto")
@@ -554,7 +571,7 @@ extension VideoView {
 
   // MARK: - Utils
 
-  func logHDR(_ message: String, level: Logger.Level = .debug) {
+  func logHDR(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: hdrSubsystem)
   }
 

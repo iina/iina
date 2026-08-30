@@ -10,6 +10,19 @@ import Cocoa
 import CryptoKit
 import MediaPlayer
 
+extension Array {
+
+  /// Form a string containing the contents of this array suitable for use in a log message.
+  /// - Parameter indent: Number of spaces to indent each line.
+  /// - Returns: Contents of this array formatted for inclusion in a log message.
+  func toStringForLog(indent: Int = 2) -> String {
+    guard !isEmpty else { return "" }
+    let prefix = "\n" + String(repeating: " ", count: indent)
+    let sorted = sorted(by: { "\($0)" < "\($1)" })
+    return prefix + sorted.compactMap({ "\($0)" }).joined(separator: prefix)
+  }
+}
+
 extension CGPoint {
   /**
    Uses the Pythagorean theorem to calculate the distance between two points.
@@ -29,6 +42,32 @@ extension CGPoint {
    */
   func distance(to: CGPoint) -> CGFloat {
     return sqrt(pow(self.x - to.x, 2) + pow(self.y - to.y, 2))
+  }
+}
+
+extension Dictionary where Key: StringProtocol {
+
+  /// Form a string containing the contents of this dictionary suitable for use in a log message.
+  /// - Parameter indent: Number of spaces to indent each line.
+  /// - Returns: Contents of this dictionary formatted for inclusion in a log message.
+  func toStringForLog(indent: Int = 2) -> String {
+    guard !isEmpty else { return "" }
+    var message = ""
+    let prefix = "\n" + String(repeating: " ", count: indent)
+    let sorted = self.sorted( by: { $0.0 < $1.0 })
+    for (key, value) in sorted {
+      message += prefix + key + ": "
+      if let dict = value as? [String: Any] {
+        message += dict.toStringForLog(indent: indent + 2)
+        continue
+      }
+      if let array = value as? [Any] {
+        message += array.toStringForLog(indent: indent + 2)
+        continue
+      }
+      message += "\(value)"
+    }
+    return message
   }
 }
 

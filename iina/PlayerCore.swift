@@ -809,7 +809,6 @@ class PlayerCore: NSObject {
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
 
-    miniPlayer.refreshArtworkVisibility()
     let (width, height) = miniPlayer.videoSizeForDisplayInMusicMode()
     let aspect = CGFloat(width) / CGFloat(height)
     miniPlayer.updateVideoViewAspectConstraint(withAspect: aspect)
@@ -821,6 +820,9 @@ class PlayerCore: NSObject {
     }
 
     isInMiniPlayer = true
+
+    // Let mpv render the default album art when the media has no cover art.
+    addDefaultAlbumArtTrackIfNeeded()
 
     // restore layout
     if needRestoreLayout {
@@ -878,6 +880,9 @@ class PlayerCore: NSObject {
     miniPlayer.window?.orderOut(nil)
     isInMiniPlayer = false
 
+    // Keep main window playback unaffected by the default album art.
+    removeDefaultAlbumArtTrack()
+
     mainWindow.pendingShow = true
     if showMainWindow {
       currentController.setupUI()
@@ -889,6 +894,81 @@ class PlayerCore: NSObject {
     mainWindow.liveText.requestAnalysis()
     postNotification(.iinaMusicModeChanged)
     events.emit(.musicModeChanged, data: false)
+  }
+
+  // MARK: - Default album art (music mode)
+
+  /// URL of a file containing IINA's default album art image.
+  ///
+  /// The image is stored in the asset catalog, which mpv cannot access, so the PNG data is written
+  /// to the app support directory on first access.
+  private lazy var defaultAlbumArtURL: URL? = {
+    let url = Utility.appSupportDirUrl.appendingPathComponent("default-album-art.png", isDirectory: false)
+    if FileManager.default.fileExists(atPath: url.path) { return url }
+    guard let image = NSImage(named: "default-album-art"),
+          let tiffData = image.tiffRepresentation,
+          let imageRep = NSBitmapImageRep(data: tiffData),
+          let pngData = imageRep.representation(using: .png, properties: [:]) else {
+      log("Cannot get PNG data of the default album art", level: .error)
+      return nil
+    }
+    do {
+      try pngData.write(to: url)
+    } catch {
+      log("Cannot write the default album art to \(url.path): \(error)", level: .error)
+      return nil
+    }
+    return url
+  }()
+
+  /// Whether the given track is the default album art track added by IINA.
+  private func isDefaultAlbumArtTrack(_ track: MPVTrack) -> Bool {
+    track.isAlbumart && track.externalFilename == defaultAlbumArtURL?.path
+  }
+
+  /// Whether the `video-add` command for the default album art has been issued for the current file.
+  ///
+  /// This prevents issuing duplicate commands before mpv has reported the new track list back to IINA.
+  private var didAddDefaultAlbumArtTrack = false
+
+  /// Load IINA's default album art as an external cover art track in mpv when needed.
+  ///
+  /// This is called when entering music mode and when the track list changes. The track is only
+  /// added when playing audio and no cover art track (embedded or external) exists, so mpv will
+  /// render the default album art in the video view just like embedded cover art.
+  func addDefaultAlbumArtTrackIfNeeded() {
+    guard isInMiniPlayer, info.state.active, info.isAudio == .isAudio,
+          !didAddDefaultAlbumArtTrack,
+          !info.videoTracks.contains(where: { $0.isAlbumart }),
+          let url = defaultAlbumArtURL else { return }
+    log("Adding default album art track", level: .verbose)
+    // The "select" flag is important: "auto" would add the track without selecting it, so mpv
+    // would never display it.
+    mpv.command(.videoAdd, args: [url.path, "select", NSLocalizedString("track.default_album_art", comment: "Default Album Art"), "", "yes"], checkError: false) { [unowned self] code in
+      if code < 0 {
+        self.log("Failed to add the default album art track (error \(code))", level: .error)
+      }
+    }
+    didAddDefaultAlbumArtTrack = true
+  }
+
+  /// Reset `didAddDefaultAlbumArtTrack` if the default album art track is no longer present, e.g.
+  /// because a new file has been loaded and external tracks do not carry over.
+  func resetDefaultAlbumArtTrackIfNeeded() {
+    if didAddDefaultAlbumArtTrack, !info.videoTracks.contains(where: isDefaultAlbumArtTrack) {
+      didAddDefaultAlbumArtTrack = false
+    }
+  }
+
+  /// Remove the default album art track, if present. Called when leaving music mode.
+  private func removeDefaultAlbumArtTrack() {
+    guard info.state.active, let track = info.videoTracks.first(where: isDefaultAlbumArtTrack) else {
+      didAddDefaultAlbumArtTrack = false
+      return
+    }
+    log("Removing default album art track", level: .verbose)
+    mpv.command(.videoRemove, args: [track.id.description], checkError: false)
+    didAddDefaultAlbumArtTrack = false
   }
 
   // MARK: - MPV commands
@@ -2212,7 +2292,7 @@ class PlayerCore: NSObject {
     }
 
     if self.isInMiniPlayer {
-      miniPlayer.refreshArtworkVisibility()
+      addDefaultAlbumArtTrackIfNeeded()
       miniPlayer.handleVideoSizeChange()
     }
 
@@ -2458,9 +2538,6 @@ class PlayerCore: NSObject {
     info.secondSid = Int(mpv.getInt(MPVOption.Subtitles.secondarySid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.secondSub) ?? .noneSubTrack))
-    if isInMiniPlayer {
-      miniPlayer.refreshArtworkVisibility()
-    }
   }
 
   func secondSubVisibilityChanged(_ visible: Bool) {
@@ -2468,9 +2545,6 @@ class PlayerCore: NSObject {
     info.isSecondSubVisible = visible
     sendOSD(visible ? .secondSubVisible : .secondSubHidden)
     postNotification(.iinaSubVisibilityChanged)
-    if isInMiniPlayer {
-      miniPlayer.refreshArtworkVisibility()
-    }
   }
 
   func sidChanged() {
@@ -2478,9 +2552,6 @@ class PlayerCore: NSObject {
     info.sid = Int(mpv.getInt(MPVOption.TrackSelection.sid))
     postNotification(.iinaSIDChanged)
     sendOSD(.track(info.currentTrack(.sub) ?? .noneSubTrack))
-    if isInMiniPlayer {
-      miniPlayer.refreshArtworkVisibility()
-    }
     Task { @MainActor in
       mainWindow.liveText.clearAnalysis()
       mainWindow.liveText.requestAnalysis()
@@ -2520,9 +2591,6 @@ class PlayerCore: NSObject {
     info.isSubVisible = visible
     sendOSD(visible ? .subVisible : .subHidden)
     postNotification(.iinaSubVisibilityChanged)
-    if isInMiniPlayer {
-      miniPlayer.refreshArtworkVisibility()
-    }
   }
 
   func trackListChanged() {
@@ -2534,6 +2602,7 @@ class PlayerCore: NSObject {
     getTrackInfo()
     getSelectedTracks()
     let audioStatus = info.isAudio
+    let wasInMiniPlayer = isInMiniPlayer
 
     // if need to switch to music mode
     if Preference.bool(for: .autoSwitchToMusicMode) {
@@ -2549,7 +2618,13 @@ class PlayerCore: NSObject {
     }
 
     if isInMiniPlayer {
-      miniPlayer.refreshArtworkVisibility()
+      if wasInMiniPlayer {
+        // Only reevaluate when the mini player was already active. When just switched,
+        // `switchToMiniPlayer` has already handled the default album art and the track info
+        // here would be stale.
+        resetDefaultAlbumArtTrackIfNeeded()
+        addDefaultAlbumArtTrackIfNeeded()
+      }
       miniPlayer.handleVideoSizeChange()
     }
 
@@ -2585,7 +2660,7 @@ class PlayerCore: NSObject {
     postNotification(.iinaVIDChanged)
     sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
     if isInMiniPlayer {
-      miniPlayer.refreshArtworkVisibility()
+      addDefaultAlbumArtTrackIfNeeded()
       miniPlayer.handleVideoSizeChange()
     }
 
@@ -2855,25 +2930,27 @@ class PlayerCore: NSObject {
 
   func sendOSD(_ osd: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil, external: Bool = false) {
     // querying `mainWindow.isWindowLoaded` will initialize mainWindow unexpectedly
-    guard !isInMiniPlayer, mainWindow.loaded, info.state.active,
+    guard mainWindow.loaded, info.state.active,
           Preference.bool(for: .enableOSD) || osd.alwaysEnabled, !osd.isDisabled else { return }
     if info.disableOSDForFileLoading && !external {
       guard case .fileStart = osd else {
         return
       }
     }
+    let target: PlayerWindowController = isInMiniPlayer ? miniPlayer : mainWindow
     DispatchQueue.main.async {
-      self.mainWindow.displayOSD(osd,
-                                 autoHide: autoHide,
-                                 forcedTimeout: forcedTimeout,
-                                 accessoryView: accessoryView,
-                                 context: context)
+      target.displayOSD(osd,
+                        autoHide: autoHide,
+                        forcedTimeout: forcedTimeout,
+                        accessoryView: accessoryView,
+                        context: context)
     }
   }
 
   func hideOSD() {
     DispatchQueue.main.async {
-      self.mainWindow.hideOSD()
+      let target: PlayerWindowController = self.isInMiniPlayer ? self.miniPlayer : self.mainWindow
+      target.hideOSD()
     }
   }
 

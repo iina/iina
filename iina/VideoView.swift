@@ -336,7 +336,7 @@ class VideoView: NSView {
       player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
       player.mpv.setString(MPVOption.GPURendererOptions.toneMapping, "auto")
-      player.mpv.setString(MPVOption.GPURendererOptions.toneMappingParam, "default")
+      player.mpv.setDouble(MPVOption.GPURendererOptions.toneMappingParam, Double.nan)
       player.mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, false)
     }
   }

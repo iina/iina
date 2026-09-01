@@ -64,8 +64,8 @@ class MainWindowController: PlayerWindowController {
 
   /** For blacking out other screens. */
   var screens: [NSScreen] = []
-  var cachedScreenCount = 0
   var blackWindows: [NSWindow] = []
+  var cachedScreens: [NSScreen] = []
 
   lazy var rotation: Int = {
     return player.mpv.getInt(MPVProperty.videoParamsRotate)
@@ -671,7 +671,7 @@ class MainWindowController: PlayerWindowController {
     fadeableViews.update()
 
     // other initialization
-    cachedScreenCount = NSScreen.screens.count
+    cachedScreens = NSScreen.screens
     [pipOverlayView].forEach {
       $0?.state = .active
     }
@@ -707,21 +707,40 @@ class MainWindowController: PlayerWindowController {
 
     addObserver(to: .default, forName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
-      let screenCount = NSScreen.screens.count
-      let countChanged = cachedScreenCount != screenCount
-      if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && countChanged {
+      let screens = NSScreen.screens
+
+      // Activating extended dynamic range will cause notifications to be posted at a high rate
+      // because the screen's maximumExtendedDynamicRangeColorComponentValue property keeps changing
+      // as the display's brightness ramps up. This can continue to change if the display is
+      // configured to automatically adjust brightness if ambient lighting is changing. Instruments
+      // identified processing these notifications as a performance problem when they occur at a
+      // high rate. Compare the current list of screens to the cached list and only process this
+      // notification if changes require processing this notification.
+      let screensChanged: Bool = {
+        guard screens.count == cachedScreens.count else { return true }
+        return zip(screens, cachedScreens).contains {
+          $0.frame != $1.frame || $0.displayId != $1.displayId
+        }
+      }()
+      guard screensChanged else { return }
+      // Update the cached screens
+      cachedScreens = screens
+
+      log("Screen parameters have changed")
+      DisplayController.shared.addNewDisplays()
+      NSScreen.logAll(subsystem: subsystem)
+      NSScreen.log("Window is on screen", window.screen, details: false, subsystem: subsystem)
+
+      if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) {
         removeBlackWindow()
         blackOutOtherMonitors()
       }
-      // Update the cached value
-      cachedScreenCount = screenCount
       videoView.updateDisplayLink()
-      DisplayController.shared.addNewDisplays()
       // In normal full screen mode AppKit will automatically adjust the window frame if the window
       // is moved to a new screen such as when the window is on an external display and that display
       // is disconnected. In legacy full screen mode IINA is responsible for adjusting the window's
       // frame.
-      guard countChanged, fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
+      guard fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
       setWindowFrameForLegacyFullScreen()
     }
 
@@ -766,12 +785,8 @@ class MainWindowController: PlayerWindowController {
     window.title = "Window"
 
     // As there have been issues in this area, log details about the screen selection process.
-    NSScreen.log("window.screen", window.screen)
-    NSScreen.screens.enumerated().forEach { screen in
-      if screen.element != window.screen {
-        NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
-      }
-    }
+    NSScreen.logAll(subsystem: subsystem)
+    NSScreen.log("Window is on screen", window.screen, details: false, subsystem: subsystem)
 
     // If a video is not actively playing then the initial drawing of the view needs to be forced.
     // The forceDraw method will check to see if drawing is actually needed.
@@ -2370,12 +2385,13 @@ class MainWindowController: PlayerWindowController {
   private func determineScreenToUse(_ window: NSWindow) -> NSScreen {
     // If the window is currently showing on a screen, use this screen
     if window.isOnActiveSpace, let currentScreen = window.screen {
-      NSScreen.log("Window is currently showing screen", currentScreen)
+      NSScreen.log("Window is currently showing on screen", currentScreen, subsystem: subsystem)
       return currentScreen
     }
     guard let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String else {
       let selected = window.selectDefaultScreen()
-      NSScreen.log("MainWindowLastPosition not found, using default screen", selected)
+      NSScreen.log("MainWindowLastPosition not found, using default screen", selected,
+                   subsystem: subsystem)
       return selected
     }
     let rect = NSRectFromString(rectString)
@@ -2384,11 +2400,11 @@ class MainWindowController: PlayerWindowController {
       // connected or the arrangement of the screens has changed.
       let selected = window.selectDefaultScreen()
       NSScreen.log("MainWindowLastPosition \(rect.origin) is not within any screens, using default screen",
-                   selected)
+                   selected, subsystem: subsystem)
       return selected
     }
     // Found a screen containing the previous window origin. Use that screen for the window.
-    NSScreen.log("MainWindowLastPosition \(rect.origin) matched", lastScreen)
+    NSScreen.log("MainWindowLastPosition \(rect.origin) matched", lastScreen, subsystem: subsystem)
     return lastScreen
   }
 

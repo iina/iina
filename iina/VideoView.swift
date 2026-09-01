@@ -32,7 +32,7 @@ class VideoView: NSView {
   var hasPlayableFiles: Bool = false
 
   // cached indicator to prevent unnecessary updates of DisplayLink
-  var currentDisplay: UInt32?
+  var currentDisplay: CGDirectDisplayID?
 
   var isIdle = true
   private var displayIdleTimer: Timer?
@@ -239,8 +239,8 @@ class VideoView: NSView {
 
   // This should only be called if the window has changed displays
   func updateDisplayLink() {
-    guard let window, let link, let screen = window.screen else { return }
-    let displayId = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as! UInt32
+    guard let window, let link, let screen = window.screen,
+          let displayId = screen.displayId else { return }
 
     // Do nothing if on the same display
     if (currentDisplay == displayId) { return }

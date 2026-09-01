@@ -804,24 +804,38 @@ extension NSScreen {
     }
   }
 
+  /// [CGDirectDisplayID](https://developer.apple.com/documentation/CoreGraphics/CGDirectDisplayID) of the
+  /// display associated with the screen.
+  var displayId: CGDirectDisplayID? {
+    let screenNumberKey = NSDeviceDescriptionKey(rawValue: "NSScreenNumber")
+    return deviceDescription[screenNumberKey] as? CGDirectDisplayID
+  }
+
   /// Log the given `NSScreen` object.
-  ///
+  /// 
   /// Due to issues with multiple monitors and how the screen to use for a window is selected detailed logging has been added in this
   /// area in case additional problems are encountered in the future.
-  /// - parameter label: Label to include in the log message.
-  /// - parameter screen: The `NSScreen` object to log.
-  static func log(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
+  /// - Parameter label: Label to include in the log message.
+  /// - Parameter screen: The `NSScreen` object to log.
+  /// - Parameter details: Whether to include details about the screen (default `true`).
+  /// - Parameter subsystem: The subsystem emitting this message.
+  static func log(_ label: String, _ screen: NSScreen?, details: Bool = true,
+                  subsystem: Logger.Subsystem = .general) {
     guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
+    guard Logger.isEmitting(.debug) else { return }
     var message = "\(label), \(screen.localizedName)"
     if screen == NSScreen.main {
       message += " (main screen)"
     }
-    let screenNumberKey = NSDeviceDescriptionKey(rawValue: "NSScreenNumber")
-    if let displayId = screen.deviceDescription[screenNumberKey] as? CGDirectDisplayID {
+    if let displayId = screen.displayId {
       message += ", on display \(displayId)"
+    }
+    guard details else {
+      Logger.log(message, subsystem: subsystem)
+      return
     }
     message += ":"
     message += "\n  Frame: \(screen.frame), visible \(screen.visibleFrame)"
@@ -829,13 +843,23 @@ extension NSScreen {
     Logger.log(message, subsystem: subsystem)
   }
 
+  /// Log all screens.
+  /// - Parameter subsystem: The subsystem emitting this message.
+  static func logAll(subsystem: Logger.Subsystem = .general) {
+    guard Logger.isEmitting(.debug) else { return }
+    NSScreen.screens.enumerated().forEach { screen in
+      NSScreen.log("NSScreen.screens[\(screen.offset)]", screen.element, subsystem: subsystem)
+    }
+  }
+
   /// Log EDR aspects of the given `NSScreen` object.
-  /// - parameter screen: The `NSScreen` object to log EDR aspects of.
+  /// - Parameter screen: The `NSScreen` object to log EDR aspects of.
   static func logEDR(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
     guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
+    guard Logger.isEmitting(.debug) else { return }
     var message = "\(label), \(screen.localizedName):"
     message += "\n  \(formEDRMessage(screen))"
     Logger.log(message, subsystem: subsystem)

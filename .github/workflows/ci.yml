@@ -18,7 +18,7 @@ jobs:
             deployment_target: ""
     runs-on:  macos-26
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install dependencies
         run: ./other/download_libs.sh $DOWNLOAD_LIBS_ARGS
@@ -35,7 +35,8 @@ jobs:
         run: hdiutil create -volname "IINA Nightly" -srcfolder Build/Products/Nightly/IINA.app -ov -format UDZO IINA.dmg
 
       - name: Save artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: IINA
           path: IINA.dmg
+          archive: false

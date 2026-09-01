@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="25094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="25095" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25094"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25095"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -741,7 +742,6 @@ CA
                 <outlet property="deleteCurrentFile" destination="npH-8B-XA4" id="23t-fO-TbK"/>
                 <outlet property="delogo" destination="ArE-2s-JIV" id="zzg-gr-TsG"/>
                 <outlet property="doubleSize" destination="Hal-18-Tnf" id="vnl-Rb-Y3o"/>
-                <outlet property="enableTextLive" destination="lq9-av-Um9" id="dUS-7o-mpZ"/>
                 <outlet property="encodingMenu" destination="Pf6-5i-B1E" id="Gat-gG-pkT"/>
                 <outlet property="fileLoop" destination="D1y-kv-85s" id="xSv-oo-UJa"/>
                 <outlet property="fileMenu" destination="bib-Uj-vzu" id="Faa-yo-0DL"/>
@@ -766,7 +766,7 @@ CA
                 <outlet property="inspector" destination="bwz-r0-peR" id="dES-1R-XAY"/>
                 <outlet property="jumpTo" destination="2id-wn-xsC" id="wyH-9I-JHJ"/>
                 <outlet property="jumpToBegin" destination="2Ya-3g-1hy" id="atq-PX-lIt"/>
-                <outlet property="liveText" destination="lq9-av-Um9" id="gPZ-GM-Jox"/>
+                <outlet property="liveText" destination="lq9-av-Um9" id="p6s-Wn-lBw"/>
                 <outlet property="loadExternalAudio" destination="3xl-iD-85w" id="e85-xo-lzs"/>
                 <outlet property="loadExternalSub" destination="k6x-hf-ATi" id="lVp-BV-A2C"/>
                 <outlet property="lockAspectRatio" destination="Saz-zT-RXt" id="wW5-HK-O3t"/>

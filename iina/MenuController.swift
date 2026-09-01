@@ -140,7 +140,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var lockAspectRatio: NSMenuItem!
-  @IBOutlet weak var enableTextLive: NSMenuItem!
+  @IBOutlet weak var liveText: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
   @IBOutlet weak var rotationMenu: NSMenu!
@@ -297,9 +297,9 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
     lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
     if #available(macOS 13, *) {
-      enableTextLive.action = #selector(MainWindowController.menuToggleLiveText(_:))
+      liveText.action = #selector(MainWindowController.menuToggleLiveText(_:))
     } else {
-      enableTextLive.isHidden = true
+      liveText.isHidden = true
     }
 
     // -- aspect
@@ -528,7 +528,7 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.state = isOntop ? .on : .off
     lockAspectRatio.state = Preference.unlockWindowAspectRatio ? .off : .on
     lockAspectRatio.isEnabled = Preference.bool(for: .edgeToEdgeVideo)
-    enableTextLive.state = Preference.isLiveTextEnabled ? .on : .off
+    liveText.state = Preference.isLiveTextEnabled ? .on : .off
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
@@ -900,7 +900,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (smallerSize, true, [IINACommand.smallerWindow.rawValue], false, nil, nil),
       (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
       (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
-      (enableTextLive, true, [IINACommand.liveText.rawValue], false, nil, nil),
+      (liveText, true, [IINACommand.liveText.rawValue], false, nil, nil),
       (pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),

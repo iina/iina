@@ -68,11 +68,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var historyDataKeys: [String] = []
 
   init() {
-    let window = NSWindow(
+    let window = CommonWindow(
       contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
       styleMask: [.titled, .closable, .resizable, .miniaturizable],
       backing: .buffered,
-      defer: false
+      defer: false,
+      usesUnifiedToolbar: true
     )
     window.title = NSLocalizedString("history_window.title", comment: "Playback History")
     window.setFrameAutosaveName("PlaybackHistoryWindow")

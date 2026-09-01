@@ -29,7 +29,7 @@ fileprivate extension NSView {
   }
 }
 
-class SettingsWindow: NSWindow {
+class SettingsWindow: CommonWindow {
   static let `default`: SettingsWindow = SettingsWindow([
     SettingsPageGeneral(),
     SettingsPageUI(),
@@ -100,8 +100,6 @@ class SettingsWindow: NSWindow {
     super.init(contentRect: NSRect(x: 0, y: 0, width: 600, height: 480),
                styleMask: [.closable, .miniaturizable, .resizable, .titled, .fullSizeContentView],
                backing: .buffered, defer: false)
-
-    self.isReleasedWhenClosed = false
 
     let splitViewController = NSSplitViewController()
     self.contentViewController = splitViewController

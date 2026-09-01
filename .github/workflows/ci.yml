@@ -31,8 +31,11 @@ jobs:
         env:
           DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
 
+      - name: Create DMG
+        run: hdiutil create -volname "IINA Nightly" -srcfolder Build/Products/Nightly/IINA.app -ov -format UDZO IINA.dmg
+
       - name: Save artifacts
         uses: actions/upload-artifact@v6
         with:
           name: IINA
-          path: Build/Products/Nightly/IINA.app
+          path: IINA.dmg

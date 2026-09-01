@@ -1295,6 +1295,11 @@ struct Preference {
     T.init(key: key) ?? T.defaultValue
   }
 
+  static func string<T: InitializingFromKey>(for key: Key, ofType t: T.Type) -> String {
+    let value: T = Preference.enum(for: key)
+    return String(describing: value)
+  }
+
   // MARK: - Logging
 
   /// Log the value of settings that have been changed from their default value.

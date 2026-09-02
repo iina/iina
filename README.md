@@ -61,59 +61,26 @@ IINA uses mpv for media playback. To build IINA, you can either fetch copies of 
 
 ### Building mpv manually
 
-1. Build your own copy of mpv. If you're using a package manager to manage dependencies, the steps below outline the process.
+1. Build your own copy of mpv. You can use our [official build scripts](https://github.com/iina/deps-buildscripts) to build mpv and all other dependencies.
 
-	#### With Homebrew
+2. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. Copy them from `other/` to `iina/`, replacing the current files. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
 
-	Use our tap as it passes in the correct flags to mpv's configure script:
-
-	```console
-	brew tap iina/homebrew-mpv-iina
-	brew install --HEAD mpv-iina
-	```
-
-	#### With MacPorts
-
-	Pass in these flags when installing:
-
-	```console
-	port install mpv +uchardet -bundle -rubberband configure.args="--enable-libmpv-shared --enable-lua --enable-libarchive --enable-libbluray --disable-swift --disable-rubberband"
-	```
-
-2. Copy the corresponding mpv and FFmpeg header files into `deps/include/`, replacing the current ones. You can find them on GitHub [(e.g. mpv)](https://github.com/mpv-player/mpv/tree/master/libmpv), but it's recommended to copy them from the Homebrew or MacPorts installation. Always make sure the header files have the same version of the dylibs.
-
-3. Run `other/parse_doc.rb`. This script will fetch the latest mpv documentation and generate `MPVOption.swift`, `MPVCommand.swift` and `MPVProperty.swift`. Copy them from `other/` to `iina/`, replacing the current files. This is only needed when updating libmpv. Note that if the API changes, the player source code may also need to be changed.
-
-4. Run `other/change_lib_dependencies.rb`. This script will deploy the dependent libraries into `deps/lib`. If you're using a package manager to manage dependencies, invoke it like so:
-
-	#### With Homebrew
-
-	```console
-	other/change_lib_dependencies.rb "$(brew --prefix)" "$(brew --prefix mpv-iina)/lib/libmpv.dylib"
-	```
-
-	#### With MacPorts
-
-	```console
-	port contents mpv | grep '\.dylib$' | xargs other/change_lib_dependencies.rb /opt/local
-	```
-
-5. Link the *yt-dlp* dependency to deps/executable
+3. Link the *yt-dlp* dependency to deps/executable
 
    ```console
    mkdir -p deps/executable
    ln -s $(which yt-dlp) deps/executable/youtube-dl
    ```
 
-6. Open `iina.xcodeproj` in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
+4. Open `iina.xcodeproj` in the [latest public version of Xcode](https://apps.apple.com/app/xcode/id497799835). *IINA may not build if you use any other version.*
 
-7. Remove all references to `.dylib` files from the Frameworks group in the sidebar and add all the `.dylib` files in `deps/lib` to that group by clicking  "Add Files to iina..." in the context menu.
+5. Remove all references to `.dylib` files from the Frameworks group in the sidebar and add all the `.dylib` files in `deps/lib` to that group by clicking  "Add Files to iina..." in the context menu.
 
-8. Add all the imported `.dylib` files into the "Copy Dylibs" phase under "Build Phases" tab of the iina target.
+6. Add all the imported `.dylib` files into the "Copy Dylibs" phase under "Build Phases" tab of the iina target.
 
-9. Make sure the necessary `.dylib` files are present in the "Link Binary With Libraries" phase under "Build Phases". Xcode should have already added all dylibs under this section.
+7. Make sure the necessary `.dylib` files are present in the "Link Binary With Libraries" phase under "Build Phases". Xcode should have already added all dylibs under this section.
 
-10. Build the project.
+8. Build the project.
 
 ## Contributing
 

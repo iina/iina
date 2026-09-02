@@ -227,7 +227,6 @@ struct Preference {
     static let subTextFont = Key("subTextFont")
     static let subTextSize = Key("subTextSize")
     static let subTextColorString = Key("subTextColorString")
-    static let subBgColorString = Key("subBgColorString")
     static let subBold = Key("subBold")
     static let subItalic = Key("subItalic")
     static let subBlur = Key("subBlur")
@@ -236,6 +235,7 @@ struct Preference {
     static let subBorderColorString = Key("subBorderColorString")
     static let subShadowSize = Key("subShadowSize")
     static let subShadowColorString = Key("subShadowColorString")
+    static let subBorderStyle = Key("subBorderStyle")
     static let subAlignX = Key("subAlignX")
     static let subAlignY = Key("subAlignY")
     static let subMarginX = Key("subMarginX")
@@ -624,6 +624,26 @@ struct Preference {
       case .strip: "strip"
       case .scale: "scale"
       case .no: "no"
+      }
+    }
+  }
+
+  enum SubBorderStyle: Int, InitializingFromKey, CaseIterable {
+    case outlineAndShadow = 1
+    case opaqueBox = 3
+    case backgroundBox = 4
+
+    static var defaultValue = SubBorderStyle.outlineAndShadow
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .outlineAndShadow: "outline-and-shadow"
+      case .opaqueBox: "opaque-box"
+      case .backgroundBox: "background-box"
       }
     }
   }
@@ -1157,7 +1177,6 @@ struct Preference {
     .subTextFont: Constants.String.mpvDefaultFont,
     .subTextSize: Float(55),
     .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,
-    .subBgColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBold: false,
     .subItalic: false,
     .subBlur: Float(0),
@@ -1166,6 +1185,7 @@ struct Preference {
     .subBorderColorString: NSColor.black.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subShadowSize: Float(0),
     .subShadowColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
+    .subBorderStyle: SubBorderStyle.outlineAndShadow.rawValue,
     .subAlignX: SubAlignX.center.rawValue,
     .subAlignY: SubAlignY.bottom.rawValue,
     .subMarginX: Float(25),
@@ -1593,6 +1613,9 @@ struct Preference {
       case .subAlignY:
         defaultAsString = String(describing: SubAlignY.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as SubAlignY)
+      case .subBorderStyle:
+        defaultAsString = String(describing: SubBorderStyle.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as SubBorderStyle)
       case .secondarySubOverrideLevel, .subOverrideLevel:
         defaultAsString = String(describing: SubOverrideLevel.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as SubOverrideLevel)

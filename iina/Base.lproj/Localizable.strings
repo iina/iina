@@ -804,6 +804,10 @@
 "settings.subAutoLoadSearchPath.label" = "Also search subtitles in following directories";
 "settings.subBlur.label" = "Blur";
 "settings.subBold.desc" = "sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
 "settings.subBold.label" = "Bold";
 "settings.subItalic.label" = "Italic";
 "settings.subLang.desc" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";

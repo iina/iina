@@ -15,7 +15,6 @@ class LegacyMigration {
   /// - Important: Do not reference legacy keys outside this file.
   fileprivate static let legacyColorPrefKeyMap: [Preference.Key: Preference.Key] = [
     Preference.Key.subTextColorString: Preference.Key("subTextColor"),
-    Preference.Key.subBgColorString: Preference.Key("subBgColor"),
     Preference.Key.subBorderColorString: Preference.Key("subBorderColor"),
     Preference.Key.subShadowColorString: Preference.Key("subShadowColor"),
   ]

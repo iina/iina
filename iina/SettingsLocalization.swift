@@ -116,7 +116,6 @@ extension SettingsLocalization.Key {
   static let text_DefaultEncoding = SettingsLocalization.Key("$DefaultEncoding")
   static let text_NotLoggedIn = SettingsLocalization.Key("$NotLoggedIn")
   static let text_Offset = SettingsLocalization.Key("$Offset")
-  static let text_Background = SettingsLocalization.Key("$Background")
   static let text_OtherStyles = SettingsLocalization.Key("$OtherStyles")
   static let text_OverrideLevel = SettingsLocalization.Key("$OverrideLevel")
   static let text_Align = SettingsLocalization.Key("$Align")

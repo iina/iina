@@ -442,17 +442,21 @@ fileprivate class SubStyleView: NSView {
     )
     scaleStack.size(height: 30)
 
+    let fontStackLabel = ui.label("sidebar.font", font: .boldSystemFont(ofSize: 12))
+    fontStackLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+    let fontStack = ui.hStack(
+      spacing: 8,
+      ui.image("textformat", size: 16, config: .sidebarIconConfig),
+      fontStackLabel,
+      ui.flexibleSpace(),
+      fontChooser,
+      fontSizePicker,
+    )
+
     let stack = ui.vStack(
       spacing: .sidebarItemSpacing,
       scaleStack,
-      ui.hStack(
-        spacing: 8,
-        ui.image("textformat", size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.font", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-        fontChooser,
-        fontSizePicker,
-      ),
+      fontStack,
       ui.hStack(
         spacing: 8,
         ui.image("paintpalette.fill", size: 16, config: .sidebarIconConfig),

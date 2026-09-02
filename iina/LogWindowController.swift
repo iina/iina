@@ -44,6 +44,9 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
       guard let button = toolbarItem(withID: .followButton) else { return }
       let symbolName = following ? "arrow.up.left.circle.fill" : "arrow.up.left.circle"
       button.image = .sf(symbolName)
+      if #available(macOS 26, *) {
+        button.style = following ? .prominent : .plain
+      }
     }
   }
   private var filteredLogLevel = Logger.Level.preferred {
@@ -54,6 +57,15 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   private var filteredSubsystems = Set<String>() {
     didSet {
       updatePredicate()
+      if #available(macOS 26, *) {
+        let item = toolbarItem(withID: .subsystemButton)!
+        let filteredCount = filteredSubsystems.count
+        if filteredCount != 0 {
+          item.badge = .count(filteredCount)
+        } else {
+          item.badge = nil
+        }
+      }
     }
   }
   private let searchField = NSSearchField()

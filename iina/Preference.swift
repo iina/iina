@@ -187,7 +187,10 @@ struct Preference {
     static let loadIccProfile = Key("loadIccProfile")
     static let enableHdrSupport = Key("enableHdrSupport")
     static let enableToneMapping = Key("enableToneMapping")
+    /// Legacy setting, now only used when migrating to replacement settings.
     static let toneMappingTargetPeak = Key("toneMappingTargetPeak")
+    static let enableToneMappingTargetPeakOverride = Key("enableToneMappingTargetPeakOverride")
+    static let toneMappingTargetPeakOverride = Key("toneMappingTargetPeakOverride")
     static let toneMappingAlgorithm = Key("toneMappingAlgorithm")
 
     static let audioDriverEnableAVFoundation = Key("audioDriverEnableAVFoundation")
@@ -1148,6 +1151,8 @@ struct Preference {
     .enableHdrSupport: true,
     .enableToneMapping: false,
     .toneMappingTargetPeak: 0,
+    .enableToneMappingTargetPeakOverride: false,
+    .toneMappingTargetPeakOverride: 400,
     .toneMappingAlgorithm: ToneMappingAlgorithmOption.defaultValue.rawValue,
     .audioDriverEnableAVFoundation: false,
     .audioThreads: 0,
@@ -1436,6 +1441,7 @@ struct Preference {
            .disableOSDSeekMsg,
            .disableOSDSpeedMsg,
            .disablePlaySliderScrolling,
+           .enableToneMappingTargetPeakOverride,
            .disableVolumeSliderScrolling,
            .displayInLetterBox,
            .displayKeyBindingRawValues,

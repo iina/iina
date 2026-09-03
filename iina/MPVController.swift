@@ -877,6 +877,16 @@ class MPVController: NSObject {
     return mpv_set_property_string(mpv, name, value)
   }
 
+  @discardableResult
+  func setStringToDefault(_ name: String, level: Logger.Level = .debug) -> Int32 {
+    guard let value = MPVOptionDefaults.shared.getString(name) else {
+      log("Failed to obtain default for option: \(name)", level: .error)
+      return MPV_ERROR_OPTION_NOT_FOUND.rawValue
+    }
+    log("Set property to default: \(name)=\(value)", level: level)
+    return mpv_set_property_string(mpv, name, value)
+  }
+
   func getEnum<T: MPVOptionValue>(_ name: String) -> T {
     guard let value = getString(name) else {
       return T.defaultValue

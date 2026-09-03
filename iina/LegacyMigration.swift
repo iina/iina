@@ -77,4 +77,46 @@ class LegacyMigration {
     }
   }
 
+  /// Migrate the legacy tone mapping target peak setting.
+  ///
+  /// Previous versions of IINA used a single `toneMappingTargetPeak` setting that treated `0` as an indicator that IINA should
+  /// detect the value to use for the mpv [target-peak](https://mpv.io/manual/stable/#options-target-peak) option.
+  /// This mpv option can be set to the keyword `auto` (default) or an integer in the range 10 to 10,000 representing the peak
+  /// brightness of the display in nits. To avoid the awkwardness of having a special value to represent `auto`, as of IINA 1.5.0 this
+  /// setting has been replaced by two separate settings:
+  /// - `enableToneMappingTargetPeakOverride`
+  ///
+  ///   When `true` this setting indicates the user wants to override the automatic determination of the `target-peak` value and
+  ///   manually specify the number of nits to use.
+  /// - `toneMappingTargetPeakOverride`
+  ///
+  ///   This setting provides the `target-peak` value to use when automatic mode has been disabled.
+  ///
+  /// If this function finds `enableToneMappingTargetPeakOverride` has not been set it will set the value of the new settings
+  /// appropriately based on the value of the legacy `toneMappingTargetPeak` setting.
+  func migrateToneMappingTargetPeak() {
+    let appID = InfoDictionary.shared.bundleIdentifier
+    guard let persistedPrefKeys = UserDefaults.standard.persistentDomain(forName: appID)?.keys else {
+      // Internal error, should not occur.
+      Logger.log("""
+        Aborting legacy tone mapping target peak setting migration: failed to find settings domain \
+        for \"\(appID)\"!
+        """, level: .error)
+      return
+    }
+    guard !persistedPrefKeys.contains(Preference.Key.enableToneMappingTargetPeakOverride.rawValue)
+    else { return }
+    Logger.log("Migrating tone mapping target peak setting")
+    let targetPeak = Preference.integer(for: .toneMappingTargetPeak)
+    if targetPeak == 0 {
+      Preference.set(false, for: .enableToneMappingTargetPeakOverride)
+      Logger.log("Set enableToneMappingTargetPeakOverride to false")
+    } else {
+      Preference.set(true, for: .enableToneMappingTargetPeakOverride)
+      Logger.log("Set enableToneMappingTargetPeakOverride to true")
+      Preference.set(targetPeak, for: .toneMappingTargetPeakOverride)
+      Logger.log("Set toneMappingTargetPeakOverride to \(targetPeak)")
+    }
+    Logger.log("Migrated tone mapping target peak setting")
+  }
 }

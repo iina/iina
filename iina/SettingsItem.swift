@@ -956,7 +956,7 @@ struct SettingsItem {
       nsSwitch.controlSize = .mini
       nsSwitch.action = #selector(switchChanged)
       nsSwitch.target = self
-      textField = NSTextField()
+      textField = TextFieldWithSwitch(nsSwitch)
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.controlSize = controlSize
       textField.bezelStyle = .roundedBezel
@@ -1413,5 +1413,39 @@ class SettingsAccessory {
         Preference.set(csv, for: key)
       }
     }
+  }
+}
+
+/// A [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) controlled by a
+/// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch).
+class TextFieldWithSwitch: NSTextField {
+
+  /// A Boolean value that indicates whether the receiver reacts to mouse events.
+  ///
+  /// This text field may be part of a subordinate setting. Disabling a primary setting must disable subordinate settings. However
+  /// enabling a primary setting can only enable this text field if the switch that controls it is also enabled.
+  override var isEnabled: Bool {
+    get { super.isEnabled }
+    set {
+      guard newValue else {
+        super.isEnabled = false
+        return
+      }
+      guard nsSwitch.state == .on else { return }
+      super.isEnabled = true
+    }
+  }
+
+  /// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch) that controls whether this
+  /// [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) can be enabled.
+  private let nsSwitch: NSSwitch
+
+  init(_ nsSwitch: NSSwitch) {
+    self.nsSwitch = nsSwitch
+    super.init(frame: NSRect.zero)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }

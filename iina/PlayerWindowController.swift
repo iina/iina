@@ -50,9 +50,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   internal var observedPrefKeys: [Preference.Key] = [
     .enableToneMapping,
+    .enableToneMappingTargetPeakOverride,
     .toneMappingTargetPeak,
     .loadIccProfile,
     .toneMappingAlgorithm,
+    .toneMappingTargetPeakOverride,
     .themeMaterial,
     .showRemainingTime,
     .alwaysFloatOnTop,
@@ -75,9 +77,11 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     switch keyPath {
     case PK.enableToneMapping.rawValue,
+      PK.enableToneMappingTargetPeakOverride.rawValue,
       PK.toneMappingTargetPeak.rawValue,
       PK.loadIccProfile.rawValue,
-      PK.toneMappingAlgorithm.rawValue:
+      PK.toneMappingAlgorithm.rawValue,
+      PK.toneMappingTargetPeakOverride.rawValue:
       videoView.refreshEdrMode()
     case PK.themeMaterial.rawValue:
       if let newValue = change[.newKey] as? Int {

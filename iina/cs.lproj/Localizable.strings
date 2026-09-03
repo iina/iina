@@ -18,7 +18,8 @@
 "general.password" = "Heslo";
 "general.na" = "Není k dispozici";
 "general.no_result" = "Žádný výsledek";
-"general.no_title" = "No Title";
+"general.no_title" = "Žádný název";
+"general.auto" = "Automaticky";
 
 "input.value_is_empty" = "Název nemůže být prázdný.";
 "input.already_exists" = "Název již existuje.";
@@ -121,7 +122,7 @@
 "osd.chapter" = "Kapitola: %@";
 "osd.subtitle_scale" = "Velikost titulků: %@×";
 "osd.add_to_playlist" = "Souborů přidáno do playlistu: %i";
-"osd.clear_playlist" = "Playlist smazán";
+"osd.clear_playlist" = "Playlist vymazán";
 "osd.video_eq.contrast" = "Kontrast: %i";
 "osd.video_eq.gamma" = "Gama: %i";
 "osd.video_eq.hue" = "Odstín: %i";
@@ -140,9 +141,9 @@
 "osd.canceled" = "Zrušeno";
 "osd.cannot_connect" = "Nelze se spojit";
 "osd.timed_out" = "Časový limit vypršel";
-"osd.sub_quota_exceeded" = "Subtitle download limit reached";
-"osd.sub_quota_exceeded.detail" = "Try again after %@";
-"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.sub_quota_exceeded" = "Dosažen limit stahování titulků";
+"osd.sub_quota_exceeded.detail" = "Zkuste to znovu po %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Zkusit znovu později";
 "osd.filter_added" = "Přidán filtr: %@";
 "osd.filter_removed" = "Filtr odebrán";
 "osd.file_loop" = "Opakovat jeden soubor";
@@ -151,10 +152,8 @@
 
 "preference.title" = "Nastavení";
 "preference.general" = "Obecné";
-"preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.video" = "Video";
-"preference.audio" = "Zvuk";
+"preference.ui" = "Rozhraní";
+"preference.video_audio" = "Video a zvuk";
 "preference.subtitle" = "Titulky";
 "preference.network" = "Síť";
 "preference.control" = "Ovládání";
@@ -172,19 +171,19 @@
 
 "preference.enable_adv_settings" = "Povolit pokročilá nastavení";
 
-"preference.sub_override_level.no" = "Žádné";
-"preference.sub_override_level.force" = "Vynucené";
+"preference.sub_override_level.no" = "Žádná";
+"preference.sub_override_level.force" = "Vynucená";
 "preference.sub_override_level.scale" = "S měřítkem";
 "preference.sub_override_level.strip" = "Úplná";
 "preference.sub_override_level.yes" = "Základní";
 
 "preference.sub_override_level.descriptive_text.no" = "Vykreslí titulky dle specifikací ve skriptech titulků, bez přepsání.";
 "preference.sub_override_level.descriptive_text.force" = "Použít všechny styly titulků.";
-"preference.sub_override_level.descriptive_text.scale" = "Použije nastavení měřítka navíc k nastavení stylu v této nabídce.";
-"preference.sub_override_level.descriptive_text.strip" = "Zásadně odebere veškeré ASS značky a styly z titulků.";
-"preference.sub_override_level.descriptive_text.yes" = "Použije všechna nastavení stylu v této nabídce.";
+"preference.sub_override_level.descriptive_text.scale" = "V této části použít kromě nastavení stylu také nastavení měřítka.";
+"preference.sub_override_level.descriptive_text.strip" = "Radikálně odebrat z titulků všechny ASS značky a styly.";
+"preference.sub_override_level.descriptive_text.yes" = "Použít všechna nastavení stylu v této části.";
 
-"preference.ytdl_plugin_not_installed" = "Pro pokročilé funkce jako jsou stahování videa a automatické aktualizace yt-dlp nainstalujte plug-in Online Media pomocí výběru „Instalovat z GitHub“ v Nastavení > Plug-iny.";
+"preference.ytdl_plugin_not_installed" = "Pro pokročilé funkce jako jsou stahování videa a automatické aktualizace yt-dlp nainstalujte Online Media plug-in pomocí výběru „Instalovat z GitHubu“ v Nastavení > Plug-iny.";
 "preference.ytdl_plugin_installed" = "Vestavěná podpora youtube-dl je zakázána, protože je nainstalován Online media plug-in.";
 
 "menu.volume" = "Hlasitost: %@";
@@ -253,7 +252,7 @@
 "alert.title_info" = "Informace";
 
 "alert.fatal_error" = "Závažná chyba: %@ \nAplikace se teď ukončí.";
-"alert.mpv_error" = "Vnitřní chyba %@ (%@) při nastavení možnosti %@.";
+"alert.mpv_error" = "Vnitřní chyba %@ (%@) při nastavení volby %@.";
 
 "alert.unsupported_audio" = "Nepodporovaný externí zvukový soubor.";
 "alert.unsupported_video" = "Nepodporovaný externí videosoubor.";
@@ -285,13 +284,12 @@
 "alert.add_filter.message" = "Zadejte řetězec filtru ve formátu mpv příkazu vf nebo af.";
 
 "alert.keybinding_config.error" = "Chyba analýzy konfiguračního souboru klávesových zkratek „%@“! Vraťte se k výchozímu IINA nastavení klávesových zkratek. Zkontrolujte prosím vaši konfiguraci.";
-"alert.delete_keybindingset.title" = "Delete Key Binding Set";
-"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
-
+"alert.delete_keybindingset.title" = "Smazat sadu klávesových zkratek";
+"alert.delete_keybindingset.message" = "Opravdu chcete smazat tuto sadu klávesových zkratek?";
 
 "alert.extra_option.cannot_read" = "Nelze načíst uživatelsky vymezené další možnosti mpv.";
 "alert.extra_option.empty" = "Název nebo hodnota nemohou být prázdné!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.error" = "Při nastavování volby --%@=%@ se vyskytla chyba číslo %d. Zkontrolujte nastavení vašich dalších voleb v Nastavení > Pokročilé.";
 "alert.extra_option.config_folder" = "Chyba při nastavování konfiguračního adresáře „%@“.";
 
 "alert.playlist.error_deleting" = "%@ nelze smazat";
@@ -325,11 +323,11 @@
 "alert.add_url.message" = "Zadejte URL:";
 
 "alert.delete_history.title" = "Smazat historii přehrávání";
-"alert.delete_history.message" = "Opravdu chcete smazat zvolené záznamy?";
+"alert.delete_history.message" = "Opravdu chcete smazat vybrané záznamy?";
 "alert.delete_all_history.title" = "Smazat historii přehrávání";
 "alert.delete_all_history.message" = "Opravdu chcete smazat celou historii přehrávání?";
-"alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.title" = "Odstranit soubor";
+"alert.delete_file.message" = "Opravdu chcete přesunout do koše vybrané soubory?";
 
 "alert.filter_hwdec.message" = "Chystáte se použít video filtr, avšak váš současný hardware nemusí optimálně video filtry podporovat. Můžete buď vypnout hardwarové dekódování, nebo přepnout na automatické nastavení, které spotřebuje dvojnásobek paměti.\nMůže být nutné zopakovat předchozí krok (například, nastavení ořezu).";
 "alert.filter_hwdec.abort" = "Přerušit";
@@ -375,8 +373,8 @@
 "alert.plugin_update_found.message" = "Nejnovější dostupná verze k dispozici je %@. Nainstalována je %@. Přejete si nyní stáhnout aktualizaci?";
 "alert.plugin_permission" = "Tento plug-in vyžaduje následující oprávnění. Před pokračováním proveďte jejich kontrolu.";
 "alert.plugin_permission_added" = "Tato aktualizace vyžaduje další oprávnění. Před pokračováním proveďte jejich kontrolu.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+"alert.install_plugin_macos_11.title" = "Instalovat plug-in z GitHubu";
+"alert.install_plugin_macos_11.message" = "Použijte formát uživatel/repozitář nebo zadejte úplnou adresu URL GitHubu. Obchod s plug-iny není v systému macOS 11 k dispozici. Pro co nejlepší zážitek se doporučuje novější systém.";
 
 "playlist.total_length" = "%@ celkem";
 "playlist.total_length_with_selected" = "Vybráno %@ z %@";
@@ -397,7 +395,7 @@
 "pl_menu.show_in_finder" = "Zobrazit v aplikaci Finder";
 "pl_menu.add_file" = "Přidat soubor…";
 "pl_menu.add_url" = "Přidat URL…";
-"pl_menu.clear_playlist" = "Smazat playlist";
+"pl_menu.clear_playlist" = "Vymazat playlist";
 "pl_menu.matched_sub" = "Vyhovujících titulků: %d";
 "pl_menu.add_sub" = "Přidat titulky…";
 "pl_menu.wrong_sub" = "Nesprávné titulky!";
@@ -405,9 +403,9 @@
 "pl_menu.copy_url" = "Kopírovat URL";
 "pl_menu.copy_url_multi" = "Kopírovat URL";
 "pl_menu.playback" = "Přehrávání";
-"pl_menu.subtitles" = "Subtitles (%d loaded)";
-"pl_menu.network_resources" = "Network Resources";
-"pl_menu.file_operations" = "File Operations";
+"pl_menu.subtitles" = "Titulky (%d načteno)";
+"pl_menu.network_resources" = "Síťové prostředky";
+"pl_menu.file_operations" = "Operace se soubory";
 "pl_menu.plugin" = "Plug-in";
 "pl_menu.playlist" = "Playlist";
 
@@ -423,7 +421,7 @@
 
 "gaplessAudio.no" = "Přehrávání po sobě jdoucích zvukových souborů může vést k tichu nebo přerušení v okamžiku změny souboru.";
 "gaplessAudio.weak" = "Pokud se změní formát zvuku na výstupu dekodéru, zvukové zařízení se ukončí a znovu spustí, což naruší hladké přechody při přehrávání.";
-"gaplessAudio.yes" = "Zvukové zařízení se spustí podle parametrů zvolených pro první přehrávaný soubor a zůstane spuštěné pro hladké přechody. Následující soubory mohou být převzorkovány.";
+"gaplessAudio.yes" = "Zvukové zařízení se spustí podle parametrů vybraných pro první přehrávaný soubor a zůstane spuštěné pro hladké přechody. Následující soubory mohou být převzorkovány.";
 
 "subencoding.auto" = "Automaticky";
 
@@ -435,11 +433,11 @@
 "osc_toolbar.sub_track" = "Vybrat stopu titulků";
 "osc_toolbar.screenshot" = "Zachytit snímek obrazovky";
 "osc_toolbar.plugins" = "Zobrazit panel plug-inů";
-"osc_toolbar.live_text" = "Toggle Live Text";
+"osc_toolbar.live_text" = "Živý text";
 
 "osc_pos.floating" = "Plovoucí";
-"osc_pos.top" = "Nahoru";
-"osc_pos.bottom" = "Dolů";
+"osc_pos.top" = "Nahoře";
+"osc_pos.bottom" = "Dole";
 
 "mini_player.album_art" = "Přepnout zobrazení grafiky alba";
 "mini_player.loop" = "Opakovat";
@@ -499,97 +497,108 @@
 "plugin.updating" = "Stahuje se aktualizace…";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "Všechny subsystémy";
 "logwindow.title" = "Prohlížeč protokolů";
 "logwindow.time" = "Čas";
 "logwindow.subsystem" = "Subsystém";
 "logwindow.message" = "Zpráva";
-"logwindow.now" = "Now";
-"logwindow.now.desc" = "Follow latest logs";
-"logwindow.log_level" = "Log level";
+"logwindow.now" = "Nyní";
+"logwindow.now.desc" = "Sledovat poslední protokoly";
+"logwindow.log_level" = "Úroveň protokolu";
 "logwindow.save" = "Uložit";
-"logwindow.save_filtered" = "Save filtered logs…";
-"logwindow.filter" = "Filter";
-"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.save_filtered" = "Uložit vyfiltrované protokoly…";
+"logwindow.filter" = "Filtrovat";
+"logwindow.clear_subsystem_selections" = "Smazat vybrané";
 "logwindow.copy" = "Kopírovat";
-"logwindow.logs" = "logs";
+"logwindow.logs" = "protokolů";
 
 // History window
 "history_window.title" = "Historie přehrávání";
-"history_window.col.filename" = "Media";
+"history_window.col.filename" = "Soubor";
 "history_window.col.progress" = "Pozice";
 "history_window.col.played_at" = "Přehráno";
 "history_window.menu.play" = "Přehrát";
 "history_window.menu.play_new_window" = "Přehrát v novém okně";
 "history_window.menu.show_in_finder" = "Zobrazit v aplikaci Finder";
 "history_window.menu.delete" = "Smazat…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "Přesunout do koše…";
 "history_window.toolbar.clear" = "Smazat historii přehrávání";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "Seskupit podle";
+"history_window.toolbar.group_by.menu" = "Seskupit podle";
 "history_window.toolbar.group_by.date" = "Data";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
-"history_window.toolbar.group_by.location" = "Folder and Website";
-"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
-"history_window.toolbar.expand_all" = "Expand All";
-"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.toolbar.group_by.date_tooltip" = "Seřadit podle data";
+"history_window.toolbar.group_by.location" = "Složka a webová stránka";
+"history_window.toolbar.group_by.location_tooltip" = "Seřadit podle složky a webové stránky";
+"history_window.toolbar.expand_collapse" = "Rozbalit/sbalit";
+"history_window.toolbar.expand_all" = "Rozbalit vše";
+"history_window.toolbar.collapse_all" = "Sbalit vše";
 "history_window.search.search_in" = "Prohledat:";
 "history_window.search.filename" = "Názvy souborů";
-"history_window.search.full_path" = "Full Path";
+"history_window.search.full_path" = "Úplnou cestu souborů";
 "history_window.search.no_recents" = "Žádná poslední hledání";
 "history_window.search.recents_title" = "Poslední hledání";
 "history_window.search.clear_recents" = "Vyprázdnit nabídku";
 
 // Sidebar
 
-"sidebar.layout" = "Layout";
+"sidebar.layout" = "Uspořádání";
 "sidebar.video" = "Video";
 "sidebar.audio" = "Zvuk";
 "sidebar.sub" = "Titulky";
 "sidebar.plugins" = "Plug-iny";
 "sidebar.playlist" = "Playlist";
-"sidebar.chapters" = "Kapitola";
+"sidebar.chapters" = "Kapitoly";
+
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "Boční panel";
+"sidebar.sidebar_position" = "Umístění bočního panelu";
+"sidebar.compact_interface" = "Kompaktní rozhraní";
+"sidebar.edge_to_edge_video" = "Velikost videa podle okna";
+"sidebar.lock_window_aspect" = "Uzamknout poměr stran okna";
+"sidebar.docked" = "Nepřekrývat ovladačem a záhlavím";
+"sidebar.fit_window_to_video" = "Přizpůsobit okno videu";
+"sidebar.settings" = "Nastavení";
+"sidebar.playlist_and_chapters" = "Playlist a kapitoly";
 
 "sidebar.aspect_ratio" = "Poměr stran";
 "sidebar.crop" = "Oříznout";
 "sidebar.rotation" = "Otočit";
-"sidebar.speed" = "rychlost";
+"sidebar.speed" = "Rychlost";
 
-"sidebar.brightness" = "jas";
-"sidebar.contrast" = "kontrast";
-"sidebar.saturation" = "sytost";
-"sidebar.gamma" = "gama korekci";
-"sidebar.hue" = "Hue";
+"sidebar.brightness" = "Jas";
+"sidebar.contrast" = "Kontrast";
+"sidebar.saturation" = "Sytost";
+"sidebar.gamma" = "Gama korekce";
+"sidebar.hue" = "Odstín";
 
 "sidebar.load_external_audio" = "Načíst externí zvukovou stopu…";
-"sidebar.delay" = "Delay";
+"sidebar.delay" = "Zpoždění";
 
-"sidebar.eq" = "Equalizer";
-"sidebar.save_eq" = "Uložit aktuální nastavení ekvalizéru…";
-"sidebar.rename_eq" = "Přejmenovat aktuální nastavení ekvalizéru…";
-"sidebar.remove_eq" = "Odstranit aktuální nastavení ekvalizéru";
+"sidebar.eq" = "Ekvalizér";
+"sidebar.save_eq" = "Uložit aktuální předvolbu ekvalizéru…";
+"sidebar.rename_eq" = "Přejmenovat aktuální předvolbu ekvalizéru…";
+"sidebar.remove_eq" = "Odebrat aktuální předvolbu ekvalizéru";
 "sidebar.manual_eq" = "Manuální";
 
-"sidebar.primary" = "Primary";
-"sidebar.secondary" = "Secondary";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.primary" = "Primární";
+"sidebar.secondary" = "Druhé";
+"sidebar.external_subtitles" = "Externí titulky";
 "sidebar.load_subtitle" = "Načíst titulky…";
 "sidebar.search_online" = "Vyhledat online…";
-"sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.position" = "Umístění";
+"sidebar.scale" = "Velikost";
 "sidebar.font" = "Písmo";
-"sidebar.color" = "Color";
+"sidebar.color" = "Barva";
 "sidebar.text" = "Text";
 "sidebar.border" = "Okraj";
-"sidebar.background" = "Background";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Volby stylu titulků mohou porušit vykreslování ASS, některé z nich budou zakázány v závislosti na typu titulků.";
+"sidebar.shadow" = "Stín";
+"sidebar.sub_settings_not_available" = "Některá nastavení nejsou k dispozici pro tento typ titulků.";
+"sidebar.sub_style_warning" = "Volby stylů pro ASS titulky mohou porušit vykreslování.";
 
 "sidebar.add_file" = "Přidat soubor…";
 "sidebar.add_url" = "Přidat URL…";
 
-"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+"sidebar.plugins_placeholder" = "Plug-iny mohou zobrazit vlastní obsah v bočním panelu. Vyberte plug-in pro zobrazení jeho bočního panelu nebo nainstalujte nový plug-in v Nastavení.";
 
 // Settings
 
@@ -602,7 +611,7 @@
 "settings.allowScreenSaverForAudio.desc" = "Automatické uspání počítače zakázáno.";
 "settings.allowScreenSaverForAudio.label" = "Povolit v „Hudebním režimu“ nebo při přehrávání zvukového souboru";
 "settings.alwaysOpenInNewWindow.label" = "Vždy otevřít soubor v novém okně";
-"settings.autoRepeat.label" = "Když je soubor otevřen ručně";
+"settings.autoRepeat.label" = "Opakovat, když je soubor otevřen ručně";
 "settings.autoSwitchToMusicMode.label" = "Při přehrávání zvukového souboru automaticky přepnout na „Hudební režim“";
 "settings.blackOutMonitor.label" = "Ztmavit ostatní monitory během režimu celé obrazovky";
 "settings.defaultRepeatMode.items.0" = "Opakovat playlist";
@@ -637,35 +646,45 @@
 "settings.screenshotShowPreview.label" = "Zobrazit náhled při zachycení snímku obrazovky";
 "settings.trackAllFilesInRecentOpenMenu.desc" = "Jinak se v této nabídce zobrazí pouze ručně otevřené soubory.";
 "settings.trackAllFilesInRecentOpenMenu.label" = "Zaznamenat všechny přehrané soubory v nabídce „Otevřít poslední položku“";
-"settings.useLegacyFullScreen.label" = "Použit starší režim celé obrazovky";
+"settings.useLegacyFullScreen.label" = "Použít starší režim celé obrazovky";
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "Při přehrávání HDR videí povolit jako výchozí režim HDR.";
+"settings.enableHdrSupport.label" = "Povolit HDR režim";
+"settings.enableLiveText.desc" = "Zobrazovat překryvnou vrstvu Živého textu na pozastavených snímcích videa pro rozpoznávání textu. Vyžaduje macOS 13 nebo novější.";
+"settings.enableLiveText.label" = "Živý text";
 "settings.enableToneMapping.label" = "Povolit mapování tonality";
 "settings.forceDedicatedGPU.desc" = "Vždy použít samostatný grafický procesor pro vykreslování (pokud existuje). Toto umožňuje zvýšit výkon, ale může zkrátit výdrž baterie.";
 "settings.forceDedicatedGPU.label" = "Vynutit používání samostatného grafického procesoru";
 "settings.hardwareDecoder.items.0" = "Zakázáno";
+"settings.hardwareDecoder.items.0.desc" = "Hardwarové dekódování zakázáno.";
 "settings.hardwareDecoder.items.1" = "Automaticky";
+"settings.hardwareDecoder.items.1.desc" = "Hardwarové dekódování povoleno. Většina video filtrů však nebude pracovat správně.";
 "settings.hardwareDecoder.items.2" = "Automaticky (Kopie)";
+"settings.hardwareDecoder.items.2.desc" = "Hardwarové dekódování povoleno. Spotřebuje dvojnásobek paměti, bude však kompatibilní s video filtry.";
 "settings.hardwareDecoder.label" = "Hardwarové dekódování";
 "settings.loadIccProfile.desc" = "Načíst ICC profil pro aktuální displej a použít jej k transformaci RGB videa na výstup obrazovky. (Pouze pro režim SDR)";
 "settings.loadIccProfile.label" = "Načíst ICC profil";
-"settings.toneMappingAlgorithm.items.0" = "Automaticky";
 "settings.toneMappingAlgorithm.label" = "Algoritmus";
-"settings.toneMappingTargetPeak.desc" = "Změřený maximální jas displeje. Pokud je nastaven na 0, IINA tuto hodnotu detekuje. V případě selhání detekce nastaví IINA cílové maximum na 400.";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Cílové maximum";
 "settings.videoThreads.desc" = "Výchozí: 0 (Automaticky)";
 "settings.videoThreads.label" = "Počet vláken";
 
 // Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "Výchozí ovladač zvuku.";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation je nový, experimentální ovladač zvuku nabízející podporu prostorového zvuku. Můžete se však setkat s některými problémy při používání AVFoundation, jako jsou zpoždění zvuku.";
 "settings.audioDriverEnableAVFoundation.label" = "Ovladač zvuku";
 "settings.enableInitialVolume.label" = "Počáteční hlasitost";
 "settings.gaplessAudio.desc" = "Hladké přechody zvuku";
 "settings.gaplessAudio.items.0" = "Zakázáno";
+"settings.gaplessAudio.items.0.desc" = "Přehrávání po sobě jdoucích zvukových souborů může vést k tichu nebo přerušení v okamžiku změny souboru.";
 "settings.gaplessAudio.items.1" = "Slabé";
+"settings.gaplessAudio.items.1.desc" = "Pokud se změní formát zvuku na výstupu dekodéru, zvukové zařízení se ukončí a znovu spustí, což naruší hladké přechody při přehrávání.";
 "settings.gaplessAudio.items.2" = "Silné";
+"settings.gaplessAudio.items.2.desc" = "Zvukové zařízení se spustí podle parametrů vybraných pro první přehrávaný soubor a zůstane spuštěné pro hladké přechody. Následující soubory mohou být převzorkovány.";
 "settings.gaplessAudio.label" = "Hladké přechody zvuku";
+"settings.maxVolume.desc" = "(100-1000)";
 "settings.maxVolume.label" = "Maximální hlasitost";
 "settings.preferredAudioDevice.label" = "Preferované zvukové zařízení";
 "settings.replayGain.desc" = "Upravit množství zesílení podle ReplayGain hodnot uložených v metadatech souboru.";
@@ -734,6 +753,7 @@
 "settings.verticalScrollAction.items.2" = "-";
 "settings.verticalScrollAction.items.4" = "Upravit rychlost přehrávání";
 "settings.verticalScrollAction.label" = "Svislý posuv";
+"settings.videoViewAcceptsFirstMouse.desc" = "Myš";
 "settings.videoViewAcceptsFirstMouse.label" = "Přijmout první kliknutí myší, pokud není aplikace aktivní";
 "settings.volumeScrollAmount.label" = "Citlivost změny hlasitosti";
 
@@ -742,31 +762,35 @@
 "settings.useMediaKeys.label" = "Používat systémové multimediální klávesy";
 
 // Settings - Network
-"settings.cacheBufferSize.desc" = "Výchozí: 153600";
-"settings.cacheBufferSize.label" = "Velikost vyrovnávací paměti (KB)";
-"settings.enableCache.label" = "Povolit ukládání obsahu do mezipaměti";
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.label" = "Buffer before starting playback";
+"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.enableCache.label" = "Prefetch and buffer network data";
 "settings.httpProxy.desc" = "Vyžaduje restartování IINA.";
-"settings.secPrefech.desc" = "Výchozí: 36000";
+"settings.httpProxy.label" = "HTTP proxy";
+"settings.secPrefech.desc" = "Default: 36,000";
 "settings.secPrefech.label" = "Načtených sekund předem";
-"settings.showBufferingThrobber.label" = "Zobrazit ikonu načítání u pozastavení při čekání na mezipaměť";
+"settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "Zobrazit ikonu načítání při vyhledávání";
 "settings.transportRTSPThrough.items.0" = "Automaticky";
 "settings.transportRTSPThrough.label" = "Přenést RTSP stream pomocí";
 "settings.userAgent.label" = "Uživatelský klient";
-"settings.ytdlEnabled.label" = "Povolit youtube-dl";
-"settings.ytdlRawOptions.desc" = "Formát: <název>=<hodnota>[,<název>=<hodnota>[,…]]";
+"settings.ytdlEnabled.label" = "Povolit mpv youtube-dl skript";
+"settings.ytdlRawOptions.desc" = "Formát <název>=<hodnota>[,<název>=<hodnota>[,…]]";
 "settings.ytdlRawOptions.label" = "Pokročilé možnosti";
 "settings.ytdlSearchPath.desc" = "IINA prohledá youtube-dl v této složce. Vyžaduje restartování IINA.";
 "settings.ytdlSearchPath.label" = "Vlastní cesta youtube-dl";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "Pokud je povoleno, IINA automaticky vyhledá online titulky pouze pro videa bez načtených titulků a delší než 20 minut.";
 "settings.autoSearchOnlineSub.label" = "Vyhledat online titulky automaticky";
 "settings.displayInLetterBox.label" = "Zobrazit titulky v rámečcích během režimu celé obrazovky";
 "settings.subAlignX.items.0" = "Vlevo";
 "settings.subAlignX.items.1" = "Na střed";
 "settings.subAlignX.items.2" = "Vpravo";
-"settings.subAlignX.label" = "Y";
 "settings.subAlignY.items.0" = "Nahoru";
 "settings.subAlignY.items.1" = "Na střed";
 "settings.subAlignY.items.2" = "Dolů";
@@ -779,22 +803,39 @@
 "settings.subAutoLoadSearchPath.desc" = "Složky oddělte dvojtečkou (:). Relativní cesty a zástupné znaky (*) na konci jsou povolené.";
 "settings.subAutoLoadSearchPath.label" = "Hledat titulky také v následujících složkách";
 "settings.subBlur.label" = "Rozostření";
+"settings.subBold.desc" = "Sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
 "settings.subBold.label" = "Tučné";
 "settings.subItalic.label" = "Kurzíva";
 "settings.subLang.desc" = "Tato volba bude uložena jako ISO 639-2 kód a bude kompatibilní s mpv a opensubtitles.";
+"settings.subOverrideLevel.items.0" = "Základní";
+"settings.subOverrideLevel.items.0.desc" = "Použít všechna nastavení stylu v této části.";
+"settings.subOverrideLevel.items.1" = "Vynucená";
+"settings.subOverrideLevel.items.1.desc" = "Použít všechny styly titulků.";
+"settings.subOverrideLevel.items.2" = "Úplná";
+"settings.subOverrideLevel.items.2.desc" = "Radikálně odebrat z titulků všechny ASS značky a styly.";
+"settings.subOverrideLevel.items.3" = "S měřítkem";
+"settings.subOverrideLevel.items.3.desc" = "V této části použít kromě nastavení stylu také nastavení měřítka.";
+"settings.subOverrideLevel.items.4" = "Žádná";
+"settings.subOverrideLevel.items.4.desc" = "Vykreslí titulky dle specifikací ve skriptech titulků, bez přepsání.";
 "settings.subPos.label" = "Svislé umístění";
 "settings.subScaleWithWindow.label" = "Přizpůsobit velikost titulků velikosti okna";
 "settings.subSpacing.label" = "Rozestupy znaků písma";
 
 // Settings - UI
+"settings.more_ui_settings" = "Další nastavení uživatelského rozhraní jsou k dispozici v bočním panelu Uspořádání.";
 "settings.alwaysFloatOnTop.label" = "Během přehrávání vždy plovoucí v popředí";
 "settings.alwaysShowOnTopIcon.label" = "V záhlaví okna vždy zobrazit stav plovoucí v popředí";
 "settings.arrowBtnAction.items.0" = "Rychlost";
 "settings.arrowBtnAction.items.1" = "Předchozí/další soubor";
 "settings.arrowBtnAction.items.2" = "Vpřed/vzad";
 "settings.arrowBtnAction.label" = "Použít levé/pravé tlačítko pro";
+"settings.controlBarAutoHideTimeout.label" = "Automaticky skrýt po";
 "settings.controlBarStickToCenter.label" = "Přichytit ke středu při táhnutí";
-"settings.disableAnimations.desc" = "Pokud je v macOS ve volbách zpřístupnění zapnuta funkce omezení pohybu, IINA omezí pohyblivé prvky uživatelského rozhraní, o nichž je známo, že způsobují problémy osobám s vestibulárními poruchami. Pokud by to nebylo dostatečné, lze toto nastavení použít k dalšímu omezení pohybu odstraněním animací uživatelského rozhraní.";
+"settings.disableAnimations.desc" = "Pokud je v macOS ve volbách zpřístupnění zapnuta funkce omezení pohybu, IINA omezí pohyblivé prvky uživatelského rozhraní, o nichž je známo, že způsobují problémy osobám s vestibulárními poruchami. Pokud by to nebylo dostatečné, lze toto nastavení použít k dalšímu omezení pohybu eliminováním animací uživatelského rozhraní.";
 "settings.disableAnimations.label" = "Zakázat animace";
 "settings.disableOSDFileStartMsg.label" = "Otevření souboru";
 "settings.disableOSDPauseResumeMsgs.label" = "Pozastavení/pokračování";
@@ -813,7 +854,7 @@
 "settings.oscPosition.label" = "Ovladač na obrazovce";
 "settings.osdTextSize.label" = "Velikost textu";
 "settings.pauseWhenPip.label" = "Аutomaticky pozastavit přehrávání";
-"settings.resizeWindowOption.items.0" = "přizpůsobit obrazovce";
+"settings.resizeWindowOption.items.0" = "Přizpůsobit obrazovce";
 "settings.resizeWindowOption.items.1" = "0,5× velikost videa";
 "settings.resizeWindowOption.items.2" = "1× velikost videa";
 "settings.resizeWindowOption.items.3" = "1,5× velikost videa";
@@ -827,6 +868,8 @@
 "settings.themeMaterial.items.2" = "Světlé";
 "settings.themeMaterial.items.4" = "Přizpůsobit systémovému vzhledu";
 "settings.themeMaterial.label" = "Vzhled";
+"settings.thumbnailWidth.desc" = "Úprava šířky vymaže načtené náhledy a vygeneruje všechny náhledy ve vybrané velikosti.";
+"settings.thumbnailWidth.label" = "Šířka náhledu";
 "settings.togglePipByMinimizingWindow.label" = "Přepnout obraz v obrazu minimalizováním/maximalizováním okna";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "Pouze pro videosoubory";
 "settings.usePhysicalResolution.label" = "Použít skutečné rozlišení Retina displeje";
@@ -839,6 +882,7 @@
 "settings.enableAdvancedSettings.desc" = "Následující nastavení vyžadují restartování IINA.";
 "settings.enableAdvancedSettings.label" = "Povolit pokročilá nastavení";
 "settings.enableLogging.label" = "Povolit protokolování do souboru";
+"settings.logLevel.desc" = "Prohlížet protokoly výběrem nabídky Okno > Prohlížeč protokolů.";
 "settings.logLevel.items.0" = "Podrobnosti";
 "settings.logLevel.items.1" = "Ladění";
 "settings.logLevel.items.2" = "Varování";
@@ -852,95 +896,136 @@
 "settings.$About" = "O plug-inu";
 "settings.$Accessibility" = "Zpřístupnění";
 "settings.$AdditionalMpvOptions" = "Další možnosti mpv";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
 "settings.$Advanced" = "Pokročilé";
 "settings.$Align" = "Zarovnat";
-"settings.$AlwaysWhenPlaying" = "Vždy";
+"settings.$AlwaysWhenPlaying" = "Vždy při přehrávání nového souboru";
 "settings.$Appearance" = "Vzhled";
-"settings.$Audio" = "Zvuk";
+"settings.$AssrtAPIToken" = "Assrt API token";
 "settings.$Author" = "Autor";
 "settings.$AutoLoad" = "Automatické načítání";
 "settings.$Background" = "Pozadí";
 "settings.$Behavior" = "Chování";
 "settings.$Border" = "Okraj";
+"settings.$BrowserExtensions" = "Rozšíření prohlížeče";
 "settings.$Cache" = "Mezipaměť";
 "settings.$Cancel" = "Zrušit";
 "settings.$CheckForUpdates" = "Vyhledávat aktualizace";
-"settings.$ClearCache" = "Smazat obsah v mezipaměti";
-"settings.$ClearPlaybackHistory" = "Smazat historii přehrávání…";
-"settings.$ClearSavedPlaybackProgress" = "Smazat uložené pozice přehrávání…";
-"settings.$ClearThumbnailCache" = "Smazat načtené náhledy…";
+"settings.$CheckForUpdates.items.3600" = "Každou hodinu";
+"settings.$CheckForUpdates.items.86400" = "Denně";
+"settings.$CheckForUpdates.items.604800" = "Týdně";
+"settings.$CheckForUpdates.items.2629800" = "Měsíčně";
+"settings.$Chrome" = "Chrome";
+"settings.$ClearCache" = "Vymazat obsah mezipaměti";
+"settings.$ClearPlaybackHistory" = "Smazat historii přehrávání";
+"settings.$ClearSavedPlaybackProgress" = "Smazat uložené pozice přehrávání";
+"settings.$ClearThumbnailCache" = "Smazat načtené náhledy";
 "settings.$Color" = "Barva";
+"settings.$ColorHDR" = "Barva a HDR";
+"settings.$CommunityPlugins" = "Komunitní plug-iny";
+"settings.$CreateAnEmptySet" = "Vytvořit prázdnou sadu…";
 "settings.$Customize" = "Přizpůsobit…";
+"settings.$Decoding" = "Dekódování";
 "settings.$DefaultApplication" = "Výchozí aplikace";
 "settings.$DefaultEncoding" = "Výchozí kódování";
-"settings.$DeleteAllPlaybackHistories" = "Tlačítko níže smaže celou historii přehrávání a položky v nabídce „Otevřít poslední položku“.";
+"settings.$DeleteAllPlaybackHistories" = "Smaže celou historii přehrávání a položky v nabídce „Otevřít poslední položku“.";
 "settings.$DeleteAllWatchLater" = "Tlačítko níže odstraní všechny soubory ve složce „Přehrát později“. Tyto soubory obsahují poslední pozice přehrávání a nastavení použitá při přehrávání.";
-"settings.$DoNotResize" = "Zakázáno";
+"settings.$DoNotResize" = "Neměnit velikost";
+"settings.$DuplicateCurrentSet" = "Duplikovat aktuální sadu…";
 "settings.$FailedToLoadThePage" = "Nepodařilo se načíst stránku.";
+"settings.$Firefox" = "Firefox";
 "settings.$Font" = "Písmo";
-"settings.$GetBrowserExtensionsForIINA" = "Získat rozšíření IINA pro internetový prohlížeč";
+"settings.$GetBrowserExtensionsForIINA" = "Získat rozšíření IINA pro prohlížeč";
+"settings.$GetPlugins" = "Získat plug-iny…";
+"settings.$Hardware" = "Hardware";
 "settings.$Height" = "Výška";
 "settings.$Help" = "Nápověda";
 "settings.$History" = "Historie";
 "settings.$Identifier" = "Identifikátor";
 "settings.$ImportAnExistingConfigFile" = "Importovat existující konfigurační soubor";
-"settings.$InitialWindowPosition" = "Počáteční pozice okna";
+"settings.$InitialWindowPosition" = "Počáteční umístění okna";
 "settings.$InitialWindowSize" = "Počáteční velikost okna";
+"settings.$InputGithubURL" = "Zadat URL GitHubu";
 "settings.$Install" = "Instalovat";
-"settings.$InstallLocalPackage" = "Instalovat balíček…";
-"settings.$Layout" = "Umístění";
+"settings.$InstallLocalPackage" = "Instalovat místní balíček…";
+"settings.$Installed" = "Nainstalován";
+"settings.$Installing" = "Instaluji";
+"settings.$KeyBindingSet" = "Sada klávesových zkratek";
+"settings.$Layout" = "Uspořádání";
+"settings.$LegacyOpenSubAlert" = "⚠️ Původní podpora OpenSubtitles je považována za zastaralou. Použijte místo ní plug-in OpenSubtitles. Pokud se potřebujete přihlásit, přístupte k ní v původním okně Nastavení.";
+"settings.$LiveText" = "Živý text";
+"settings.$Logging" = "Protokolování";
 "settings.$Login" = "Přihlášení";
 "settings.$MB" = "MB";
+"settings.$MPVSettings" = "Nastavení mpv";
 "settings.$Margin" = "Okraje";
 "settings.$Mouse" = "Myš";
 "settings.$Network" = "Síť";
+"settings.$NewKeyBindingSet" = "Nová sada klávesových zkratek";
+"settings.$NoSelection" = "Žádný výběr";
 "settings.$NotLoggedIn" = "Nepřihlášen";
 "settings.$OK" = "OK";
+"settings.$OfficialPlugins" = "Oficiální plug-iny";
 "settings.$Offset" = "Posun";
 "settings.$OnScreenController" = "Ovladač na obrazovce";
-"settings.$OnScreenDisplay" = "Zobrazení na obrazovce";
+"settings.$OnScreenDisplay" = "Zprávy na obrazovce";
 "settings.$OnlineSubtitles" = "Online titulky";
 "settings.$OpenLinksOrCurrentWebpage" = "Otevřete odkazy v aplikaci IINA jedním kliknutím. Webová stránka musí být podporována youtube-dl.";
 "settings.$OpenLogDirectory" = "Otevřít adresář protokolů";
+"settings.$OpenLogWindow" = "Otevřít prohlížeč protokolů";
+"settings.$OrSelectFrom" = "Nebo vyberte z dostupných plug-inů";
+"settings.$Other" = "Jiné";
 "settings.$OtherStyles" = "Další styly";
 "settings.$OverrideLevel" = "Úroveň přepsání";
+"settings.$Percent" = " %";
 "settings.$PictureinnPicture" = "Obraz v obrazu";
+"settings.$Playlist" = "Playlist";
 "settings.$PleaseSelectTheMediaTypes" = "Vyberte druhy souborů, pro které chcete nastavit IINA jako výchozí aplikaci.";
 "settings.$Position" = "Umístění";
 "settings.$PreferredLanguage" = "Preferovaný jazyk";
 "settings.$RestoreAlerts" = "Obnovit upozornění";
-"settings.$RestoreAllAlertsThat" = "Tlačítko níže obnoví všechna upozornění, která byla potlačena zaškrtnutím políčka „Tuto zprávu již příště nezobrazovat“.";
-"settings.$RestoreSuppressedAlerts" = "Obnovit potlačená upozornění…";
+"settings.$RestoreAllAlertsThat" = "Obnovit všechna upozornění, která byla potlačena zaškrtnutím políčka „Tuto zprávu již příště nezobrazovat“.";
+"settings.$RestoreSuppressedAlerts" = "Obnovit potlačená upozornění";
 "settings.$SPDIFOutput" = "S/PDIF výstup";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Snímky obrazovky";
-"settings.$SetIINAAsTheDefault" = "Nastavit IINA jako výchozí aplikaci…";
+"settings.$SetIINAAsTheDefault" = "Nastavit IINA jako výchozí aplikaci";
 "settings.$Settings" = "Nastavení";
 "settings.$Shadow" = "Stín";
 "settings.$ShowInFinder" = "Zobrazit v aplikaci Finder";
 "settings.$ShowTheConfigFileIn" = "Zobrazit konfigurační soubor v aplikaci Finder";
 "settings.$Size" = "Velikost";
 "settings.$Source" = "Zdroj";
-"settings.$SuppressMessagesFor" = "Potlačit zprávy u";
+"settings.$SubtitleSource" = "Zdroj titulků";
+"settings.$SubtitleSource.desc" = "Toto je výchozí zdroj pro vyhledávání titulků. Při přehrávání můžete ručně vybrat vyhledání titulků z jiných zdrojů v nabídce.";
+"settings.$SubtitleSourcePluginDesc" = "Tento zdroj je poskytován plug-inem. Konfiguraci lze provést v nastavení daného plug-inu.";
+"settings.$SuppressMessagesFor" = "Potlačit zprávy u:";
 "settings.$TextSubtitles" = "Textové titulky";
+"settings.$ThisPluginIsNot" = "Tento plug-in není dostupný na GitHubu. Stáhněte jej přímo z webových stránek.";
 "settings.$ThumbnailPreview" = "Náhled";
 "settings.$Toolbar" = "Panel nástrojů";
+"settings.$Trackpad" = "Trackpad";
 "settings.$Uninstall" = "Odinstalovat";
+"settings.$Volume" = "hlasitost";
 "settings.$Website" = "Webová stránka";
 "settings.$WhenEnteringPIP" = "Při spuštění obrazu v obraze";
 "settings.$WhenMediaIsOpened" = "Po otevření souboru";
 "settings.$WhenMediaIsOpenedManually" = "Když je soubor otevřený ručně";
 "settings.$Width" = "Šířka";
 "settings.$Window" = "Okno";
-"settings.$X" = " X";
+"settings.$X" = "X";
 "settings.$XOffset" = "X posun";
 "settings.$Y" = "Y";
 "settings.$YOffset" = "Y posun";
-"settings.$YouCanInstallANew" = "Nový plug-in můžete nainstalovat z GitHub nebo místního .iinaplgz balíčku. Plug-iny nainstalované z GitHub lze aktualizovat automaticky.";
+"settings.$YTDL" = "Online videa (yt-dlp)";
+"settings.$YouCanInstallANew" = "Nový plug-in můžete nainstalovat z GitHubu nebo místního .iinaplgz balíčku. Plug-iny nainstalované z GitHubu lze aktualizovat automaticky.";
 "settings.$bottom" = "dolnímu";
 "settings.$dB" = "dB";
 "settings.$left" = "levému";
 "settings.$nits" = "nitů";
 "settings.$ofScreen" = "% obrazovky";
+"settings.$onlineMediaPluginAdvice" = "Plug-in Online Media je doporučen";
 "settings.$point" = "bodů";
 "settings.$pt" = "b";
 "settings.$right" = "pravému";
@@ -948,3 +1033,4 @@
 "settings.$sideOfTheScreen" = "kraji obrazovky";
 "settings.$toThe" = "k";
 "settings.$top" = "hornímu";
+"settings.$ytdlWarning" = "Online Media plug-in má další funkce, jako je přepínání kvality a stahování videa. IINA použije plug-in, pokud je nainstalován a povolen. Nastavení níže se použijí pouze v případě, že plug-in není k dispozici.";

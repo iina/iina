@@ -462,19 +462,18 @@ fileprivate class SubStyleView: NSView {
       ),
       ui.hStack(
         spacing: 8,
-        ui.image("inset.filled.rectangle", "rectangle.inset.filled", "rectangle.inset.fill",
-                 size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.background", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-        createColorWell(\.backgroundColorWell, tag: 2),
-      ),
-      ui.hStack(
-        spacing: 8,
-        ui.image("paintpalette.fill", size: 16, config: .sidebarIconConfig),
+        ui.image("inset.filled.circle.dashed", "circle.dashed.inset.filled", "circle.dashed.inset.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.border", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         borderSizePicker,
         createColorWell(\.borderColorWell, tag: 3),
+      ),
+      ui.hStack(
+        spacing: 8,
+        ui.image("shadow", size: 16, config: .sidebarIconConfig),
+        ui.label("sidebar.shadow", font: .boldSystemFont(ofSize: 12)),
+        ui.flexibleSpace(),
+        createColorWell(\.backgroundColorWell, tag: 2),
       )
     )
 

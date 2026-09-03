@@ -92,7 +92,7 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.PopupButton()
           .image(name: ["character.textbox.badge.sparkles", "square.dashed.inset.filled", "square.dashed"])
           .bindTo(.subBorderStyle, ofType: Preference.SubBorderStyle.self)
-          .withHelpLink(AppData.wikiLink.appending("/#options-sub-border-style"))
+          .withHelpLink(AppData.mpvManualLink.appending("/#options-sub-border-style"))
         SettingsItem.General(title: .text_Border)
           .image(name: ["inset.filled.circle.dashed", "circle.dashed.inset.filled", "circle.dashed.inset.fill"])
           .withValueView(subtitlesBorderView.view)

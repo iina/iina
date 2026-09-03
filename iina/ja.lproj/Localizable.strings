@@ -18,7 +18,8 @@
 "general.password" = "パスワード";
 "general.na" = "N/A";
 "general.no_result" = "結果なし";
-"general.no_title" = "No Title";
+"general.no_title" = "タイトルなし";
+"general.auto" = "自動";
 
 "input.value_is_empty" = "値は空欄にできません。";
 "input.already_exists" = "値はすでに存在します。";
@@ -30,7 +31,7 @@
 
 // Initial Window
 "initial.announcement" = "IINAバージョン%@を使用しています";
-"initial.beta.desc" = "リリースバージョンにロールバックする場合は、設定 > 一般 の \"ベータアップデートを受信\" のチェックを外し、<a href=\"https://iina.io\">公式Webサイト</a> から安定版リリースをインストールしてください。";
+"initial.beta.desc" = "リリースバージョンにロールバックする場合は、設定 > 一般 の \"ベータ版のアップデート通知を受け取る\" のチェックを外し、<a href=\"https://iina.io\">公式Webサイト</a> から安定版リリースをインストールしてください。";
 "initial.nightly.desc" = "Nightlyを常用することは推奨されません。Nightlyビルドは、現在自動アップデートに対応していません。新しいビルドは<a href=\"https://nightly.iina.io\">Nightly Webサイト</a>から手動でダウンロードしてください。";
 "initial.debug.desc" = "デバッグビルドは通常パフォーマンスが最適化されていないので、常用することは推奨されません。デバッグビルドは自動アップデートに対応していません。";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> で報告してください。";
@@ -55,7 +56,7 @@
 "quicksetting.deinterlace" = "インターレース解除";
 "quicksetting.hdr" = "HDR";
 "quicksetting.hide" = "非表示";
-"quicksetting.reset_speed" = "速度を1倍にリセット";
+"quicksetting.reset_speed" = "速度を1×にリセット";
 
 // EQ Presets
 "eq.preset.flat" = "フラット";
@@ -90,7 +91,7 @@
 "osd.pause" = "一時停止";
 "osd.resume" = "再開";
 "osd.volume" = "音量: %@";
-"osd.speed" = "速度: %@倍";
+"osd.speed" = "速度: %@×";
 "osd.aspect" = "アスペクト比: %@";
 "osd.crop" = "切り取り: %@";
 "osd.rotate" = "回転: %i°";
@@ -119,7 +120,7 @@
 "osd.abloop.clear" = "A-Bリピート: 消去";
 "osd.stop" = "停止";
 "osd.chapter" = "チャプタ: %@";
-"osd.subtitle_scale" = "字幕サイズ: %@倍";
+"osd.subtitle_scale" = "字幕サイズ: %@×";
 "osd.add_to_playlist" = "%i個のファイルをプレイリストに追加しました";
 "osd.clear_playlist" = "プレイリストを消去しました";
 "osd.video_eq.contrast" = "コントラスト: %i";
@@ -140,9 +141,9 @@
 "osd.canceled" = "キャンセルされました";
 "osd.cannot_connect" = "接続できません";
 "osd.timed_out" = "タイムアウト";
-"osd.sub_quota_exceeded" = "Subtitle download limit reached";
-"osd.sub_quota_exceeded.detail" = "Try again after %@";
-"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.sub_quota_exceeded" = "字幕のダウンロード制限に達しました";
+"osd.sub_quota_exceeded.detail" = "%@後にやり直してください";
+"osd.sub_quota_exceeded.detail_unknown" = "あとでやり直してください";
 "osd.filter_added" = "追加済みのフィルタ: %@";
 "osd.filter_removed" = "削除済みのフィルタ";
 "osd.file_loop" = "1個のファイルを繰り返し再生";
@@ -151,14 +152,12 @@
 
 "preference.title" = "設定";
 "preference.general" = "一般";
-"preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.video" = "ビデオ";
-"preference.audio" = "オーディオ";
+"preference.ui" = "インターフェイス";
+"preference.video_audio" = "ビデオとオーディオ";
 "preference.subtitle" = "字幕";
 "preference.network" = "ネットワーク";
 "preference.control" = "コントロール";
-"preference.keybindings" = "キーの割り当て";
+"preference.keybindings" = "キーバインド";
 "preference.advanced" = "詳細";
 "preference.plugins" = "プラグイン";
 "preference.utilities" = "ユーティリティ";
@@ -167,8 +166,8 @@
 "preference.logged_in_as" = "%@としてログインしています";
 "preference.system_media_control" = "システムのメディアコントロールを使用";
 
-"preference.key_binding_hint_1" = "現在の構成ファイル内のキーの割り当てを編集するには、まず \"複製…\" ボタンをクリックしてコピーを作成してください。";
-"preference.key_binding_hint_2" = "右側の行をダブルクリックして、対応するキーの割り当てを編集します。";
+"preference.key_binding_hint_1" = "現在の構成ファイル内のキーバインドを編集するには、まず \"複製…\" ボタンをクリックしてコピーを作成してください。";
+"preference.key_binding_hint_2" = "右側の行をダブルクリックして、対応するキーバインドを編集します。";
 
 "preference.enable_adv_settings" = "詳細設定を有効にする";
 
@@ -188,7 +187,7 @@
 "preference.ytdl_plugin_installed" = "Online Mediaプラグインがインストールされているため、内蔵のyoutube-dlの利用は無効になっています。";
 
 "menu.volume" = "音量: %@";
-"menu.volume_muted" = "ボリューム: %@（ミュート中）";
+"menu.volume_muted" = "音量: %@（ミュート中）";
 "menu.audio_delay" = "オーディオディレイ: %@秒
 ";
 "menu.sub_delay" = "字幕ディレイ: %@秒";
@@ -204,7 +203,7 @@
 "menu.exit_mini_player" = "ミュージックモードを解除";
 "menu.pause" = "一時停止";
 "menu.resume" = "再開";
-"menu.speed" = "速度: %@倍";
+"menu.speed" = "速度: %@×";
 "menu.chapters" = "チャプタパネルを表示";
 "menu.hide_chapters" = "チャプタパネルを非表示";
 "menu.playlist" = "プレイリストパネルを表示";
@@ -218,8 +217,8 @@
 
 "menu.seek_forward" = "%@秒進む";
 "menu.seek_backward" = "%@秒戻る";
-"menu.speed_up" = "速度を%@倍に上げる";
-"menu.speed_down" = "速度を%@倍に下げる";
+"menu.speed_up" = "速度を%@×に上げる";
+"menu.speed_down" = "速度を%@×に下げる";
 "menu.volume_up" = "音量 + %@%%";
 "menu.volume_down" = "音量 - %@%%";
 "menu.audio_delay_up" = "オーディオディレイ + %@秒";
@@ -259,7 +258,7 @@
 "alert.unsupported_audio" = "対応していない外部オーディオファイルです。";
 "alert.unsupported_video" = "対応していない外部ビデオファイルです。";
 "alert.unsupported_sub" = "対応していない外部字幕です。";
-"alert.unsupported_url" = "対応していないURLです。";
+"alert.unsupported_url" = "未対応のURLです。";
 "alert.wrong_url_format" = "URLの形式が違います。";
 
 "alert.error_open" = "ファイルまたはストリームを開けません!";
@@ -275,24 +274,23 @@
 "alert.config.duplicate.title" = "構成を複製";
 "alert.config.duplicate.message" = "複製した構成ファイルの名前を入力してください。";
 "alert.config.file_existing.title" = "ファイルがすでに存在します";
-"alert.config.file_existing.message" = "同じファイル名の構成ファイルがすでに存在します。OKを押すとFinderでファイルを表示します。";
+"alert.config.file_existing.message" = "同じファイル名の構成ファイルがすでに存在します。OKを押すとFinderにファイルを表示します。";
 "alert.config.cannot_create" = "構成ファイルを作成できません!\n%@";
 "alert.config.cannot_write" = "構成ファイルに書き込めません!";
 "alert.config.rename.title" = "入力構成を名称変更";
 "alert.config.rename.message" = "構成の新しい名前を入力してください。";
 
-"alert.filter.incorrect" = "フィルタを設定中にエラーが起こりました。パラメータフォーマットを確認してください。";
+"alert.filter.incorrect" = "フィルタを設定中にエラーが起きました。パラメータフォーマットを確認してください。";
 "alert.add_filter.title" = "新規フィルタ";
 "alert.add_filter.message" = "mpvのvfまたはafコマンドのフォーマットでフィルタ文字列を入力してください。";
 
-"alert.keybinding_config.error" = "キーバインド構成ファイル \"%@\" の解析中にエラーが起きました! IINAのデフォルトキーバインド設定にフォールバックします。構成を確認してください。";
-"alert.delete_keybindingset.title" = "Delete Key Binding Set";
-"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
-
+"alert.keybinding_config.error" = "キーバインドの構成ファイル \"%@\" の解析中にエラーが起きました! デフォルトのキーバインド設定にフォールバックします。構成を確認してください。";
+"alert.delete_keybindingset.title" = "キーバインドの設定を削除";
+"alert.delete_keybindingset.message" = "このキーバインドの設定を削除してもよろしいですか?";
 
 "alert.extra_option.cannot_read" = "ユーザ設定の追加mpvオプションを読み込めません。";
 "alert.extra_option.empty" = "キーまたは値を空欄にはできません!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.error" = " オプション設定エラー --%@=%@の戻り値が%dです。設定 > 詳細設定 で追加のオプション設定を確認してください。";
 "alert.extra_option.config_folder" = "構成ディレクトリ \"%@\" の設定エラーです。";
 
 "alert.playlist.error_deleting" = "削除時にエラー: %@";
@@ -329,10 +327,10 @@
 "alert.delete_history.message" = "選択したエントリーを削除してもよろしいですか?";
 "alert.delete_all_history.title" = "再生履歴を消去";
 "alert.delete_all_history.message" = "すべての再生履歴を削除してもよろしいですか?";
-"alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.title" = "ファイルを削除";
+"alert.delete_file.message" = "選択したファイルをゴミ箱に入れてもよろしいですか?";
 
-"alert.filter_hwdec.message" = "ビデオフィルタを適用しようとしています。使用しているハードウェアデコーダはビデオフィルタに十分対応していない可能性があります。ハードウェアデコーディングをオフにするか、\"自動（コピー）\" に切り替える（メモリ使用量が2倍になります）ことができます。\n正常に動作させるには前の操作（切り取り領域の設定など）をやり直す必要がある場合があります。";
+"alert.filter_hwdec.message" = "ビデオフィルタを適用しようとしています。使用しているハードウェアデコーダはビデオフィルタに十分対応していない可能性があります。ハードウェアデコーディングをオフにするか、\"自動（コピー）\" に切り替えることができます（メモリ使用量は2倍に増えます）。\n正常に動作させるには前の操作（切り取り領域の設定など）をやり直す必要がある場合があります。";
 "alert.filter_hwdec.abort" = "中止";
 "alert.filter_hwdec.turn_off" = "ハードウェアデコーディングをオフにする";
 "alert.filter_hwdec.use_copy" = "自動（コピー）に切り替え";
@@ -359,7 +357,7 @@
 
 "alert.duplicate_config" = "デフォルト構成を直接編集することはできません。編集前に構成を複製してください。";
 
-"alert.assrt_register" = "API割り当て量に制限があるため、独自のAPIトークンを使用することを強くおすすめします。デフォルトのトークンはデモ用であり、ネットワークエラーが発生する可能性があります。";
+"alert.assrt_register" = "API割り当て量に制限があるため、自分のAPIトークンを使用することを強くおすすめします。デフォルトのトークンはデモ用であり、ネットワークエラーが発生する可能性があります。";
 "alert.assrt_register.register" = "今すぐ登録";
 "alert.assrt_register.try" = "試してみる";
 "alert.assrt_token_prompt.title" = "APIトークンを入力";
@@ -370,14 +368,14 @@
 "alert.plugin_uninstall.message" = "プラグインはストレージから削除されます。";
 "alert.plugin_reinstall.title" = "プラグイン%@はすでに存在します";
 "alert.plugin_reinstall.message" = "プラグインを再インストールしますか?";
-"alert.duplicated_plugin_id" = "重複するプラグイン識別子が検知されました。複数のプラグインで同じ識別子 \"%@\" が使われています。これにより正常に動作しない場合があります。 設定 > プラグインで該当するプラグインを見つけ、各プラグインの作者に報告してください。 プラグインがローカルにインストールされている場合は、プラグインのInfo.jsonファイル内の識別子を手動で変更することもできます。";
+"alert.duplicated_plugin_id" = "重複するプラグイン識別子が検知されました。複数のプラグインで同じ識別子 \"%@\" が使われています。これにより正常に動作しない場合があります。 設定 > プラグイン で該当するプラグインを見つけ、各プラグインの作者に報告してください。 プラグインがローカルにインストールされている場合は、プラグインのInfo.jsonファイル内の識別子を手動で変更することもできます。";
 "alert.plugin_no_update" = "アップデートはありません。";
 "alert.plugin_update_found.title" = "%@のアップデートがあります";
 "alert.plugin_update_found.message" = "最新バージョンは%@です。 現在使用中のバージョンは%@です。アップデートしますか?";
 "alert.plugin_permission" = "このプラグインには次のアクセス権が必要です。続行する前に確認してください。";
 "alert.plugin_permission_added" = "このアップデートには追加のアクセス権が必要です。続行する前に確認してください。";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+"alert.install_plugin_macos_11.title" = "GitHubから新しいプラグインをインストール";
+"alert.install_plugin_macos_11.message" = "ユーザ/リポジトリのフォーマットを使用するか、完全なGitHub URLを入力してください。プラグインストアは macOS 11では利用できません。 最高の体験を得るには、新しいシステムをお勧めします。";
 
 "playlist.total_length" = "合計%@件";
 "playlist.total_length_with_selected" = "%@件（%@件中）を選択";
@@ -406,9 +404,9 @@
 "pl_menu.copy_url" = "URLをコピー";
 "pl_menu.copy_url_multi" = "URLをコピー";
 "pl_menu.playback" = "再生";
-"pl_menu.subtitles" = "Subtitles (%d loaded)";
-"pl_menu.network_resources" = "Network Resources";
-"pl_menu.file_operations" = "File Operations";
+"pl_menu.subtitles" = "字幕（%d読み込み済み）";
+"pl_menu.network_resources" = "ネットワークリソース";
+"pl_menu.file_operations" = "ファイル操作";
 "pl_menu.plugin" = "プラグイン";
 "pl_menu.playlist" = "プレイリスト";
 
@@ -436,7 +434,7 @@
 "osc_toolbar.sub_track" = "字幕トラックを選択";
 "osc_toolbar.screenshot" = "スクリーンショットを撮る";
 "osc_toolbar.plugins" = "プラグインパネルを表示";
-"osc_toolbar.live_text" = "Toggle Live Text";
+"osc_toolbar.live_text" = "テキスト認識表示を切り替え";
 
 "osc_pos.floating" = "フローティング";
 "osc_pos.top" = "上";
@@ -477,7 +475,7 @@
 "permissions.network-request.desc" = "このプラグインは、次のWebサイトにリクエストを送信したり、データをアップロードしたりすることができます:";
 "permissions.network-request.any_site" = "任意のサイト";
 "permissions.show-osd.name" = "OSDを表示";
-"permissions.show-osd.desc" = "このプラグインはメッセージをOSD（オンスクリーン表示）表示できます。";
+"permissions.show-osd.desc" = "このプラグインはメッセージをOSD（オンスクリーン表示）で表示できます。";
 "permissions.show-alert.name" = "通知を表示";
 "permissions.show-alert.desc" = "このプラグインはポップアップ通知を表示できます。";
 "permissions.video-overlay.name" = "ビデオにオーバーレイを追加";
@@ -493,64 +491,75 @@
 "alert.invalid_url" = "URLが無効です。";
 "plugin.install_error.invalid_url" = "URLが無効です。";
 "plugin.install_error.file_not_found" = "パッケージファイルが見つかりません。";
-"plugin.install_error.cannot_download" = "プラグインのダウンロードに失敗しました。\n\n出力:%@\n";
-"plugin.install_error.cannot_unpackage" = "プラグインパッケージの展開に失敗しました。\n\n出力:%@\n";
+"plugin.install_error.cannot_download" = "プラグインをダウンロードできませんでした。\n\n出力:%@\n";
+"plugin.install_error.cannot_unpackage" = "プラグインパッケージを展開できませんでした。\n\n出力:%@\n";
 "plugin.install_error.cannot_load" = "IINAはこのプラグインを読み込めません。フォーマットが正しくない可能性があります。";
 "plugin.check_for_updates" = "アップデートを確認";
 "plugin.updating" = "アップデートをダウンロード中…";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "すべてのサブシステム";
 "logwindow.title" = "ログビューア";
 "logwindow.time" = "日時";
 "logwindow.subsystem" = "サブシステム";
 "logwindow.message" = "メッセージ";
-"logwindow.now" = "Now";
-"logwindow.now.desc" = "Follow latest logs";
-"logwindow.log_level" = "Log level";
+"logwindow.now" = "今";
+"logwindow.now.desc" = "最新のログをフォロー";
+"logwindow.log_level" = "ログ記録レベル";
 "logwindow.save" = "保存";
-"logwindow.save_filtered" = "Save filtered logs…";
-"logwindow.filter" = "Filter";
-"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.save_filtered" = "フィルタ済みログを保存…";
+"logwindow.filter" = "フィルタ";
+"logwindow.clear_subsystem_selections" = "選択を解除";
 "logwindow.copy" = "コピー";
-"logwindow.logs" = "logs";
+"logwindow.logs" = "ログ";
 
 // History window
 "history_window.title" = "再生履歴";
-"history_window.col.filename" = "Media";
+"history_window.col.filename" = "メディア";
 "history_window.col.progress" = "進行状況";
 "history_window.col.played_at" = "再生日時";
 "history_window.menu.play" = "再生";
 "history_window.menu.play_new_window" = "新規ウインドウで再生";
-"history_window.menu.show_in_finder" = "Finderで表示";
+"history_window.menu.show_in_finder" = "Finderに表示";
 "history_window.menu.delete" = "削除…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "ゴミ箱に入れる…";
 "history_window.toolbar.clear" = "再生履歴を消去";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "グループ化";
+"history_window.toolbar.group_by.menu" = "グループ化";
 "history_window.toolbar.group_by.date" = "日付";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
-"history_window.toolbar.group_by.location" = "Folder and Website";
-"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
-"history_window.toolbar.expand_all" = "Expand All";
-"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.toolbar.group_by.date_tooltip" = "日付で並べ替え";
+"history_window.toolbar.group_by.location" = "フォルダとWebサイト";
+"history_window.toolbar.group_by.location_tooltip" = "フォルダとWebサイトで並べ替え";
+"history_window.toolbar.expand_collapse" = "展開/折りたたむ";
+"history_window.toolbar.expand_all" = "すべてを展開";
+"history_window.toolbar.collapse_all" = "すべてを折りたたむ";
 "history_window.search.search_in" = "検索";
 "history_window.search.filename" = "ファイル名";
-"history_window.search.full_path" = "Full Path";
+"history_window.search.full_path" = "完全パス";
 "history_window.search.no_recents" = "検索履歴はありません";
 "history_window.search.recents_title" = "検索履歴";
 "history_window.search.clear_recents" = "履歴を消去";
 
 // Sidebar
 
-"sidebar.layout" = "Layout";
+"sidebar.layout" = "レイアウト";
 "sidebar.video" = "ビデオ";
 "sidebar.audio" = "オーディオ";
 "sidebar.sub" = "字幕";
 "sidebar.plugins" = "プラグイン";
 "sidebar.playlist" = "プレイリスト";
 "sidebar.chapters" = "チャプタ";
+
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "サイドバー";
+"sidebar.sidebar_position" = "サイドバーの位置";
+"sidebar.compact_interface" = "コンパクトインターフェイス";
+"sidebar.edge_to_edge_video" = "UIをオーバーレイ表示";
+"sidebar.lock_window_aspect" = "ウインドウのアスペクト比を固定";
+"sidebar.docked" = "コントロールバーとタイトルバーを固定";
+"sidebar.fit_window_to_video" = "ウインドウをビデオに合わせる";
+"sidebar.settings" = "設定";
+"sidebar.playlist_and_chapters" = "プレイリストとチャプタ";
 
 "sidebar.aspect_ratio" = "アスペクト比";
 "sidebar.crop" = "切り取り";
@@ -561,36 +570,36 @@
 "sidebar.contrast" = "コントラスト";
 "sidebar.saturation" = "彩度";
 "sidebar.gamma" = "ガンマ";
-"sidebar.hue" = "Hue";
+"sidebar.hue" = "色相";
 
 "sidebar.load_external_audio" = "外部のオーディオトラックを読み込む…";
-"sidebar.delay" = "Delay";
+"sidebar.delay" = "ディレイ";
 
-"sidebar.eq" = "Equalizer";
+"sidebar.eq" = "イコライザ";
 "sidebar.save_eq" = "現在のEQをプリセットとして保存…";
 "sidebar.rename_eq" = "現在のEQプリセットを名称変更…";
 "sidebar.remove_eq" = "現在のEQプリセットを削除";
 "sidebar.manual_eq" = "手動";
 
-"sidebar.primary" = "Primary";
-"sidebar.secondary" = "Secondary";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.primary" = "主";
+"sidebar.secondary" = "副";
+"sidebar.external_subtitles" = "外部字幕";
 "sidebar.load_subtitle" = "字幕を読み込む…";
 "sidebar.search_online" = "オンラインで検索…";
-"sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.position" = "位置";
+"sidebar.scale" = "サイズ";
 "sidebar.font" = "フォント";
-"sidebar.color" = "Color";
-"sidebar.text" = "Text";
+"sidebar.color" = "カラー";
+"sidebar.text" = "テキスト";
 "sidebar.border" = "枠線";
-"sidebar.background" = "Background";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "字幕スタイルのオプションによっては、ASSレンダリングに不具合が生じることがあり、字幕のタイプによっては一部が無効になることがあります。";
+"sidebar.shadow" = "シャドウ";
+"sidebar.sub_settings_not_available" = "このタイプの字幕には、一部の設定がありません。";
+"sidebar.sub_style_warning" = "ASS字幕のスタイルオプションを設定すると、レンダリングが壊れる可能性があります。";
 
 "sidebar.add_file" = "ファイルを追加…";
 "sidebar.add_url" = "URLを追加…";
 
-"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+"sidebar.plugins_placeholder" = "プライグインでサイドバーのカスタムコンテンツを表示できます。プラグインを選択するか、新しいプラグインを\"設定\"でインストールしてください。";
 
 // Settings
 
@@ -603,7 +612,7 @@
 "settings.allowScreenSaverForAudio.desc" = "システムのスリープを防ぎます。";
 "settings.allowScreenSaverForAudio.label" = "\"ミュージックモード\" またはオーディオのみの再生中を除く";
 "settings.alwaysOpenInNewWindow.label" = "複数のプレイヤーウインドウを開くことを許可";
-"settings.autoRepeat.label" = "ファイルを手動で開いたとき";
+"settings.autoRepeat.label" = "ファイルを手動で開いたときに繰り返し再生";
 "settings.autoSwitchToMusicMode.label" = "オーディオファイルを再生中は自動的に \"ミュージックモード\" に切り替える";
 "settings.blackOutMonitor.label" = "フルスクリーン時はほかのディスプレイの表示を消す";
 "settings.defaultRepeatMode.items.0" = "プレイリストを繰り返し再生";
@@ -629,12 +638,11 @@
 "settings.recordPlaybackHistory.label" = "再生履歴の保存を有効にする";
 "settings.recordRecentFiles.label" = "\"最近使った項目を開く\" メニューを有効にする";
 "settings.resumeLastPosition.label" = "最後の再生位置から再開";
-"settings.screenShotFormat.items.1" = "JPEG（.jpg）";
-"settings.screenShotFormat.items.2" = "JPEG（.jpeg）";
 "settings.screenShotFormat.label" = "フォーマット";
 "settings.screenShotIncludeSubtitle.label" = "字幕を含める";
 "settings.screenshotCopyToClipboard.desc" = "保存先";
 "settings.screenshotCopyToClipboard.label" = "クリップボードにコピー";
+"settings.screenshotSaveToFile.desc" = "/path/to/screenshot/folder";
 "settings.screenshotSaveToFile.label" = "保存先";
 "settings.screenshotShowPreview.label" = "スクリーンショット撮影後にプレビューを表示";
 "settings.trackAllFilesInRecentOpenMenu.desc" = "その他の場合、手動で開いたファイルだけがメニューに表示されます。";
@@ -643,30 +651,39 @@
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "HDRビデオを再生中は、デフォルトでHDRモードを有効にします。";
+"settings.enableHdrSupport.label" = "HDRモードを有効にする";
+"settings.enableLiveText.desc" = "テキスト認識のために、一時停止中のビデオフレームにテキスト認識表示をオーバレイ表示します。macOS 13以降が必要です。";
+"settings.enableLiveText.label" = "テキスト認識表示";
 "settings.enableToneMapping.label" = "トーンマッピングを有効にする";
 "settings.forceDedicatedGPU.desc" = "レンダリングに外部GPUを常に使用します（搭載されている場合）。パフォーマンスが向上しますが、バッテリー駆動時間が短くなる可能性があります。";
 "settings.forceDedicatedGPU.label" = "外部GPUの使用を強制";
 "settings.hardwareDecoder.items.0" = "無効";
+"settings.hardwareDecoder.items.0.desc" = "ハードウェアデコーディングを無効にします。";
 "settings.hardwareDecoder.items.1" = "自動";
+"settings.hardwareDecoder.items.1.desc" = "ハードウェアデコーディングを有効にします。ほとんどのビデオフィルタは正しく動作しません。";
 "settings.hardwareDecoder.items.2" = "自動（コピー）";
+"settings.hardwareDecoder.items.2.desc" = "ハードウェアデコーディングを有効にします。2倍のメモリを消費しますが、ビデオフィルタを使用することができます。";
 "settings.hardwareDecoder.label" = "ハードウェアデコーダ";
 "settings.loadIccProfile.desc" = "現在のディスプレイ用ICCプロファイルを読み込み、ビデオRGBを画面出力に変換するために使用します。（SDRモードに対してだけ）";
 "settings.loadIccProfile.label" = "ICCプロファイルを読み込む";
-"settings.toneMappingAlgorithm.items.0" = "自動";
 "settings.toneMappingAlgorithm.label" = "アルゴリズム";
-"settings.toneMappingTargetPeak.desc" = "測定されたディスプレイのピーク輝度。0に設定した場合は、IINAがこの値を検出します。検出できない場合は、ターゲットピーク値を400に設定します。";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "ターゲットピーク値";
 "settings.videoThreads.desc" = "デフォルト: 0 （自動）";
 "settings.videoThreads.label" = "スレッド数";
 
 // Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "デフォルトのオーディオドライバです。";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundationは、空間オーディオに対応した新しい実験的なオーディオドライバです。ただし、AVFoundationを使用中に、オーディオの遅延などの問題が起こる可能性があります。";
 "settings.audioDriverEnableAVFoundation.label" = "オーディオドライバ";
 "settings.enableInitialVolume.label" = "初期音量";
 "settings.gaplessAudio.desc" = "ギャップレスオーディオ";
 "settings.gaplessAudio.items.0" = "無効";
+"settings.gaplessAudio.items.0.desc" = "連続したオーディオファイルを再生する場合は、ファイル変更時に無音または中断が生じることがあります。";
 "settings.gaplessAudio.items.1" = "弱め";
+"settings.gaplessAudio.items.1.desc" = "デコーダ出力のオーディオフォーマットを変更した場合、オーディオデバイスが閉じられたあと再度開かれるため、ギャップレス再生が中断されます。";
 "settings.gaplessAudio.items.2" = "強め";
+"settings.gaplessAudio.items.2.desc" = "オーディオデバイスは、最初に再生するファイルで選択されたパラメータを使用して開かれたあと、ギャップレス再生のため開かれたままになります。次のファイルが再サンプリングされる場合があります。";
 "settings.gaplessAudio.label" = "ギャップレスオーディオ";
 "settings.maxVolume.desc" = "（100-1000）";
 "settings.maxVolume.label" = "最大音量";
@@ -677,7 +694,7 @@
 "settings.replayGain.items.2" = "アルバムのゲイン";
 "settings.replayGain.label" = "ゲイン調整";
 "settings.replayGainClip.desc" = "このオプションが有効でないときは、ゲインを下げてクリッピングを防止します。";
-"settings.replayGainClip.label" = "クリップにボリュームゲインを許可";
+"settings.replayGainClip.label" = "クリップに音量ゲインを許可";
 "settings.replayGainFallback.desc" = "ファイルにリプレイゲインタグがない場合に適用するゲインです。";
 "settings.replayGainFallback.label" = "フォールバック";
 "settings.replayGainPreamp.desc" = "リプレイゲインのゲインに適用するプリアンプのゲインです。";
@@ -737,6 +754,7 @@
 "settings.verticalScrollAction.items.2" = "なし";
 "settings.verticalScrollAction.items.4" = "再生速度を調整";
 "settings.verticalScrollAction.label" = "縦スクロールして";
+"settings.videoViewAcceptsFirstMouse.desc" = "マウス";
 "settings.videoViewAcceptsFirstMouse.label" = "ウインドウがアクティブでないときは最初のマウスクリックを受け入れる";
 "settings.volumeScrollAmount.label" = "音量調整の感度";
 
@@ -745,32 +763,35 @@
 "settings.useMediaKeys.label" = "システムのメディアコントロールを使用";
 
 // Settings - Network
-"settings.cacheBufferSize.desc" = "デフォルト: 153600";
-"settings.cacheBufferSize.label" = "キャッシュバッファのサイズ（KB）";
-"settings.enableCache.label" = "キャッシュを有効にする";
+"settings.cachePauseWait.desc" = "バッファリングモードに入った場合、再生開始までにバッファリングするキャッシュの秒数。すぐにバッファリングモードに戻ってしまう場合には、設定値を大きくしてください。\n\nデフォルト: 1";
+"settings.cachePauseWait.label" = "再生再開前にバッファリングする秒数";
+"settings.cachePauseInitial.desc" = "再生を開始する前にバッファリングモードに入ります。これにより、ネットワークデータのプリフェッチやバッファリングに時間を要しますが、再生をスムーズに開始することができます。";
+"settings.cachePauseInitial.label" = "再生を開始する前のバッファ";
+"settings.defaultCacheSize.desc" = "デフォルト: 153,600";
+"settings.defaultCacheSize.label" = "キャッシュバッファのサイズ（KiB）";
+"settings.enableCache.label" = "ネットワークデータのプリフェッチとバッファリング";
 "settings.httpProxy.desc" = "有効にするにはIINAを再起動する必要があります。";
 "settings.httpProxy.label" = "HTTPプロキシ";
-"settings.secPrefech.desc" = "デフォルト: 36000";
+"settings.secPrefech.desc" = "デフォルト: 36,000";
 "settings.secPrefech.label" = "プリフェッチ秒数";
-"settings.showBufferingThrobber.label" = "キャッシュ待ちの一時停止中にアニメーションを表示";
+"settings.showBufferingThrobber.label" = "バッファ中にアニメーションを表示";
 "settings.showSeekingThrobber.label" = "シーク中にアニメーションを表示";
 "settings.transportRTSPThrough.items.0" = "自動";
 "settings.transportRTSPThrough.label" = "RTSPストリーム転送（経由）";
 "settings.userAgent.label" = "ユーザエージェント";
-"settings.ytdlEnabled.label" = "youtube-dlを有効にする";
-"settings.ytdlRawOptions.desc" = "フォーマット: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlEnabled.label" = "mpvのyoutube-dlスクリプトを有効にする";
+"settings.ytdlRawOptions.desc" = "フォーマット<key>=<value>[,<key>=<value>[,…]]";
 "settings.ytdlRawOptions.label" = "rawオプション";
 "settings.ytdlSearchPath.desc" = "youtube-dlをこのフォルダ内で検索します。再起動が必要です。";
 "settings.ytdlSearchPath.label" = "youtube-dlのカスタムパス";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "有効にすると、字幕が読み込まれていない再生時間が20分以上の動画については、自動的にオンライン字幕を検索します。";
 "settings.autoSearchOnlineSub.label" = "オンライン字幕を自動的に検索";
 "settings.displayInLetterBox.label" = "フルスクリーン時はレターボックス内に字幕を表示";
 "settings.subAlignX.items.0" = "左揃え";
 "settings.subAlignX.items.1" = "中央揃え";
 "settings.subAlignX.items.2" = "右揃え";
-"settings.subAlignX.label" = "Y";
 "settings.subAlignY.items.0" = "上";
 "settings.subAlignY.items.1" = "中央揃え";
 "settings.subAlignY.items.2" = "下";
@@ -783,20 +804,37 @@
 "settings.subAutoLoadSearchPath.desc" = "ディレクトリはコロン（:）で区切ります。相対パスや末尾のワイルドカード（*）が使用できます。";
 "settings.subAutoLoadSearchPath.label" = "次のディレクトリの字幕も検索";
 "settings.subBlur.label" = "ブラー";
+"settings.subBold.desc" = "サンセリフ";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
 "settings.subBold.label" = "ボールド";
 "settings.subItalic.label" = "イタリック";
 "settings.subLang.desc" = "このオプションはISO 639-2言語コードで保存され、mpvとopensubtitlesの両方で使用できます。";
+"settings.subOverrideLevel.items.0" = "はい";
+"settings.subOverrideLevel.items.0.desc" = "このセクションのすべてのスタイル設定を適用します。";
+"settings.subOverrideLevel.items.1" = "強制的";
+"settings.subOverrideLevel.items.1.desc" = "すべての字幕スタイルを適用します。";
+"settings.subOverrideLevel.items.2" = "ストリップ";
+"settings.subOverrideLevel.items.2.desc" = "すべてのASSタグとスタイルを字幕から完全に取り除きます。";
+"settings.subOverrideLevel.items.3" = "サイズ";
+"settings.subOverrideLevel.items.3.desc" = "このセクションのスタイル設定に加えて、サイズ設定を適用します。";
+"settings.subOverrideLevel.items.4" = "いいえ";
+"settings.subOverrideLevel.items.4.desc" = "オーバーライドせずに、字幕スクリプトの指定どおりに字幕をレンダリングします。";
 "settings.subPos.label" = "縦位置";
 "settings.subScaleWithWindow.label" = "ウインドウサイズに合わせて字幕サイズを調整";
 "settings.subSpacing.label" = "文字間隔";
 
 // Settings - UI
+"settings.more_ui_settings" = "レイアウトサイドバーでユーザインターフェイスを設定することができます。";
 "settings.alwaysFloatOnTop.label" = "再生中はウインドウを常に最前面に表示";
 "settings.alwaysShowOnTopIcon.label" = "最前面表示状況を常にタイトルバーに表示";
 "settings.arrowBtnAction.items.0" = "速度";
 "settings.arrowBtnAction.items.1" = "前/次のメディアへ";
 "settings.arrowBtnAction.items.2" = "早送り/早戻し";
 "settings.arrowBtnAction.label" = "左/右ボタンの役割";
+"settings.controlBarAutoHideTimeout.label" = "自動的に非表示になるまで";
 "settings.controlBarStickToCenter.label" = "ドラッグ中は中央にスナップ";
 "settings.disableAnimations.desc" = "macOSのアクセシビリティ設定 \"視差効果を減らす\" が有効なとき、前庭機能障害を持つユーザに問題を引き起こすとされるユーザインターフェイスのアニメーションを軽減します。それでも不十分なときは、この設定を使用してユーザインターフェイスのアニメーションを無効にして、視差効果をさらに減らすことができます。";
 "settings.disableAnimations.label" = "アニメーションを無効にする";
@@ -809,19 +847,19 @@
 "settings.displayTimeAndBatteryInFullScreen.label" = "フルスクリーン中に時刻とバッテリー残量を表示";
 "settings.enableOSD.label" = "OSDを有効にする";
 "settings.enableThumbnailForRemoteFiles.label" = "マウントされたリモートドライブ上のファイルを含める";
-"settings.enableThumbnailPreview.label" = "サムネイルプレビューを有効にする";
+"settings.enableThumbnailPreview.label" = "サムネールプレビューを有効にする";
 "settings.maxThumbnailPreviewCacheSize.label" = "最大キャッシュサイズ";
 "settings.oscPosition.items.0" = "フローティング";
 "settings.oscPosition.items.1" = "上";
 "settings.oscPosition.items.2" = "下";
-"settings.oscPosition.label" = "オンスクリーン\nコントローラ（OSC）";
+"settings.oscPosition.label" = "オンスクリーンコントローラ";
 "settings.osdTextSize.label" = "テキストサイズ";
 "settings.pauseWhenPip.label" = "自動的に再生を一時停止";
 "settings.resizeWindowOption.items.0" = "画面に合わせる";
-"settings.resizeWindowOption.items.1" = "ビデオサイズの0.5倍";
-"settings.resizeWindowOption.items.2" = "ビデオサイズの1倍";
-"settings.resizeWindowOption.items.3" = "ビデオサイズの1.5倍";
-"settings.resizeWindowOption.items.4" = "ビデオサイズの2倍";
+"settings.resizeWindowOption.items.1" = "0.5×ビデオサイズ";
+"settings.resizeWindowOption.items.2" = "1×ビデオサイズ";
+"settings.resizeWindowOption.items.3" = "1.5×ビデオサイズ";
+"settings.resizeWindowOption.items.4" = "2×ビデオサイズ";
 "settings.resizeWindowOption.label" = "ウインドウのサイズを変更して";
 "settings.scaleRemainingTime.label" = "再生速度に基づく残り時間";
 "settings.showChapterPos.label" = "チャプタの位置をプログレスバーに表示";
@@ -831,6 +869,8 @@
 "settings.themeMaterial.items.2" = "ライト";
 "settings.themeMaterial.items.4" = "システムの外観に合わせる";
 "settings.themeMaterial.label" = "外観";
+"settings.thumbnailWidth.desc" = "幅を変更すると、現在のサムネールキャッシュがクリアされ、選択したサイズのすべてのサムネールを再生成します。";
+"settings.thumbnailWidth.label" = "サムネール幅";
 "settings.togglePipByMinimizingWindow.label" = "ウインドウの最小化/復元に合わせてピクチャインピクチャを切り替える";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "ビデオファイルに対してだけ";
 "settings.usePhysicalResolution.label" = "Retinaディスプレイでは物理解像度を使用";
@@ -843,6 +883,7 @@
 "settings.enableAdvancedSettings.desc" = "以下の設定を有効にするには、IINAを再起動する必要があります。";
 "settings.enableAdvancedSettings.label" = "詳細設定を有効にする";
 "settings.enableLogging.label" = "ファイルへのログ記録を有効にする";
+"settings.logLevel.desc" = "メニューから ウインドウ > ログビューア を選択してログを表示します。";
 "settings.logLevel.items.0" = "詳細";
 "settings.logLevel.items.1" = "デバッグ";
 "settings.logLevel.items.2" = "警告";
@@ -856,103 +897,143 @@
 "settings.$About" = "IINAについて";
 "settings.$Accessibility" = "アクセシビリティ";
 "settings.$AdditionalMpvOptions" = "mpvの追加オプション";
+"settings.$AdditionalMpvOptions.desc" = "key=valueフォーマットのオプションをペーストすると、両方のフィールドに自動的に入力されます。";
 "settings.$Advanced" = "高度な設定";
 "settings.$Align" = "整列";
-"settings.$AlwaysWhenPlaying" = "常に";
+"settings.$AlwaysWhenPlaying" = "新規ファイルを再生するときは常に";
 "settings.$Appearance" = "外観";
 "settings.$AssrtAPIToken" = "Assrt APIトークン";
-"settings.$Audio" = "オーディオ";
 "settings.$Author" = "作成者";
 "settings.$AutoLoad" = "自動読み込み";
 "settings.$Background" = "背景";
 "settings.$Behavior" = "動作";
 "settings.$Border" = "枠線";
+"settings.$BrowserExtensions" = "ブラウザ拡張機能";
 "settings.$Cache" = "キャッシュ";
 "settings.$Cancel" = "キャンセル";
 "settings.$CheckForUpdates" = "アップデートの確認";
+"settings.$CheckForUpdates.items.3600" = "毎時";
+"settings.$CheckForUpdates.items.86400" = "毎日";
+"settings.$CheckForUpdates.items.604800" = "毎週";
+"settings.$CheckForUpdates.items.2629800" = "毎月";
+"settings.$Chrome" = "Chrome";
 "settings.$ClearCache" = "キャッシュを消去";
-"settings.$ClearPlaybackHistory" = "再生履歴を消去…";
-"settings.$ClearSavedPlaybackProgress" = "保存済みの再生進度を消去…";
-"settings.$ClearThumbnailCache" = "サムネイルキャッシュを消去…";
+"settings.$ClearPlaybackHistory" = "再生履歴を消去";
+"settings.$ClearSavedPlaybackProgress" = "保存済み再生進行状況を消去";
+"settings.$ClearThumbnailCache" = "サムネールキャッシュを消去";
 "settings.$Color" = "色";
-"settings.$Customize" = "カスタマイズ...";
+"settings.$ColorHDR" = "カラーとHDR";
+"settings.$CommunityPlugins" = "コミュニティプラグイン";
+"settings.$CreateAnEmptySet" = "空の設定を作成…";
+"settings.$Customize" = "カスタマイズ…";
+"settings.$Decoding" = "デコーディング";
 "settings.$DefaultApplication" = "デフォルトのアプリケーション";
 "settings.$DefaultEncoding" = "デフォルトのエンコーディング";
-"settings.$DeleteAllPlaybackHistories" = "このボタンをクリックすると「最近開いた項目」の再生履歴を全て消去します。";
-"settings.$DeleteAllWatchLater" = "以下のボタンをクリックすると「あとで見る」フォルダーにある全てのファイルが消去されます。これらのファイルには再生進度や再生中に適用された設定が含まれています。";
-"settings.$DoNotResize" = "無効";
-"settings.$FailedToLoadThePage" = "ページの読み込みに失敗しました。";
+"settings.$DeleteAllPlaybackHistories" = "再生履歴と\"最近開いた項目\"のエントリーをすべて削除します。";
+"settings.$DeleteAllWatchLater" = "下のボタンをクリックすると\"あとで再生\" フォルダ内のすべてのファイルを削除します。これらのファイルには、保存された再生進行状況や、再生中に適用した設定がすべて含まれています。";
+"settings.$DoNotResize" = "サイズを変更しない";
+"settings.$DuplicateCurrentSet" = "現在の設定を複製…";
+"settings.$FailedToLoadThePage" = "ページを読み込みできませんでした。";
+"settings.$Firefox" = "Firefox";
 "settings.$Font" = "フォント";
 "settings.$GetBrowserExtensionsForIINA" = "IINAのブラウザ拡張機能を使う";
+"settings.$GetPlugins" = "プラグインを取得…";
+"settings.$Hardware" = "ハードウェア";
 "settings.$Height" = "高さ";
 "settings.$Help" = "ヘルプ";
 "settings.$History" = "履歴";
 "settings.$Identifier" = "識別子";
 "settings.$ImportAnExistingConfigFile" = "既存の設定ファイルをインポート";
 "settings.$InitialWindowPosition" = "ウインドウの初期位置";
-"settings.$InitialWindowSize" = "ウィンドウの初期サイズ";
+"settings.$InitialWindowSize" = "ウインドウの初期サイズ";
+"settings.$InputGithubURL" = "GitHub URLを入力";
 "settings.$Install" = "インストール";
-"settings.$InstallLocalPackage" = "パッケージをインストール...";
+"settings.$InstallLocalPackage" = "ローカルパッケージをインストール…";
+"settings.$Installed" = "インストール済み";
+"settings.$Installing" = "インストール中";
+"settings.$KeyBindingSet" = "キーバインドの設定";
 "settings.$Layout" = "レイアウト";
+"settings.$LegacyOpenSubAlert" = "⚠️ 古いOpenSubtitlesへの対応は推奨されません。代わりにOpenSubtitlesプラグインを使用してください。ログインが必要な場合は、以前の設定ウインドウからアクセスしてください。";
+"settings.$LiveText" = "テキスト認識表示";
+"settings.$Logging" = "ログ記録";
 "settings.$Login" = "ログイン";
 "settings.$MB" = "MB";
+"settings.$MPVSettings" = "mpv設定";
 "settings.$Margin" = "マージン";
 "settings.$Mouse" = "マウス";
 "settings.$Network" = "ネットワーク";
+"settings.$NewKeyBindingSet" = "新規キーバインドの設定";
+"settings.$NoSelection" = "選択なし";
 "settings.$NotLoggedIn" = "ログインしていません";
 "settings.$OK" = "OK";
+"settings.$OfficialPlugins" = "公式プラグイン";
 "settings.$Offset" = "オフセット";
-"settings.$OnScreenController" = "オンスクリーンコントローラ（OSC）";
+"settings.$OnScreenController" = "オンスクリーンコントローラ";
 "settings.$OnScreenDisplay" = "オンスクリーンディスプレイ（OSD）";
 "settings.$OnlineSubtitles" = "オンライン字幕";
-"settings.$OpenLinksOrCurrentWebpage" = "ワンクリックでリンク先や今開いているWebページをIINAで開くことができます。youtube-dlに対応したウェブサイトでのみ動作します。";
-"settings.$OpenLogDirectory" = "ログディレクトリーを開く";
+"settings.$OpenLinksOrCurrentWebpage" = "ワンクリックで、リンク先や今開いているWebページをIINAで開くことができます。youtube-dlに対応したWebサイトでのみ動作します。";
+"settings.$OpenLogDirectory" = "ログディレクトリを開く";
+"settings.$OpenLogWindow" = "ログビューアを開く";
+"settings.$OrSelectFrom" = "または利用可能なプラグインから選択";
+"settings.$Other" = "その他";
 "settings.$OtherStyles" = "その他のスタイル";
-"settings.$OverrideLevel" = "無視の度合い";
+"settings.$OverrideLevel" = "オーバーライドレベル";
+"settings.$Percent" = "%";
 "settings.$PictureinnPicture" = "ピクチャインピクチャ";
 "settings.$Playlist" = "プレイリスト";
 "settings.$PleaseSelectTheMediaTypes" = "IINAをデフォルトの再生アプリケーションに設定したいメディアの種類を選択してください。";
 "settings.$Position" = "配置";
 "settings.$PreferredLanguage" = "優先言語";
-"settings.$RestoreAlerts" = "アラートを復元";
-"settings.$RestoreAllAlertsThat" = "下のボタンは、「このメッセージを再表示しない」がチェックされたすべてのアラートを復元します。";
-"settings.$RestoreSuppressedAlerts" = "ダイアログの警告をリセット…";
+"settings.$RestoreAlerts" = "通知を復元";
+"settings.$RestoreAllAlertsThat" = "\"今後このメッセージを表示しない\" チェックボックスを使って非表示にしたすべての通知を復元します。";
+"settings.$RestoreSuppressedAlerts" = "非表示にした警告を復元";
 "settings.$SPDIFOutput" = "S/PDIF出力";
+"settings.$SPDIFOutputWarning" = "圧縮オーディオをパススルーするコーデックのリストです。
+
+警告: この設定を使用する理由はあまりありません。HDMIは非圧縮マルチチャンネルPCMに対応しており、またロスレスDTS-HDもFFmpegのDCAデコーダでデコードすることができます。出力デバイスがS/PDIFに未対応の場合、この設定を有効にしていると、再生が始まらない可能性があります。";
+"settings.$Safari" = "Safari";
 "settings.$Screenshots" = "スクリーンショット";
-"settings.$SetIINAAsTheDefault" = "IINAをデフォルトのアプリケーションに設定…";
+"settings.$SetIINAAsTheDefault" = "IINAをデフォルトのアプリケーションに設定";
 "settings.$Settings" = "設定";
-"settings.$Shadow" = "影";
-"settings.$ShowInFinder" = "Finderで表示";
-"settings.$ShowTheConfigFileIn" = "設定ファイルをFinderで表示";
+"settings.$Shadow" = "シャドウ";
+"settings.$ShowInFinder" = "Finderに表示";
+"settings.$ShowTheConfigFileIn" = "設定ファイルをFinderに表示";
 "settings.$Size" = "サイズ";
 "settings.$Source" = "ソース";
-"settings.$SuppressMessagesFor" = "次のメッセージを抑制";
+"settings.$SubtitleSource" = "字幕のソース";
+"settings.$SubtitleSource.desc" = "これは字幕を検索するためのデフォルトのソースです。再生中は、ほかのソースから字幕を手動で検索するよう、メニューから設定することができます。";
+"settings.$SubtitleSourcePluginDesc" = "このソースはプラグインを使用しています。プラグインの設定ページで構成してください。";
+"settings.$SuppressMessagesFor" = "次のメッセージを表示しない:";
 "settings.$TextSubtitles" = "字幕テキスト";
-"settings.$ThumbnailPreview" = "サムネイルプレビュー";
+"settings.$ThisPluginIsNot" = "このプラグインはGitHubでホストされていません。Webサイトからダウンロードしてください。";
+"settings.$ThumbnailPreview" = "サムネールプレビュー";
 "settings.$Toolbar" = "ツールバー";
 "settings.$Trackpad" = "トラックパッド";
 "settings.$Uninstall" = "アンインストール";
-"settings.$Video" = "ビデオ";
+"settings.$Volume" = "音量";
 "settings.$Website" = "Webサイト";
 "settings.$WhenEnteringPIP" = "ピクチャインピクチャに入ったとき";
-"settings.$WhenMediaIsOpened" = "メディアが開かれた時";
+"settings.$WhenMediaIsOpened" = "メディアが開かれたとき";
 "settings.$WhenMediaIsOpenedManually" = "メディアが手動で開かれたとき";
-"settings.$Width" = "横幅";
+"settings.$Width" = "幅";
 "settings.$Window" = "ウインドウ";
 "settings.$X" = " X";
-"settings.$XOffset" = "X座標";
+"settings.$XOffset" = "Xオフセット";
 "settings.$Y" = "Y";
-"settings.$YOffset" = "Y座標";
+"settings.$YOffset" = "Yオフセット";
+"settings.$YTDL" = "オンラインビデオ（yt-dlp）";
 "settings.$YouCanInstallANew" = "新しいプラグインをGitHubまたはローカルの.iinaplgzパッケージからインストールできます。GitHubからインストールしたプラグインは自動的にアップデートされます。";
 "settings.$bottom" = "下";
 "settings.$dB" = "dB";
 "settings.$left" = "左";
 "settings.$nits" = "ニト";
 "settings.$ofScreen" = "%（画面の割合）";
+"settings.$onlineMediaPluginAdvice" = "Online Mediaプラグインをお勧めします";
 "settings.$point" = "ポイント";
 "settings.$pt" = "pt";
 "settings.$right" = "右";
 "settings.$s" = "秒";
-"settings.$sideOfTheScreen" = "画面の端から";
+"settings.$sideOfTheScreen" = "端から";
 "settings.$toThe" = "画面の";
 "settings.$top" = "上";
+"settings.$ytdlWarning" = "Online Mediaプラグインには、画質の切り替えやビデオのダウンロードなどの追加機能があります。 インストールされて有効になっている場合は、プラグインを使用します。以下の設定は、プラグインが利用できない場合にのみ使用します。";

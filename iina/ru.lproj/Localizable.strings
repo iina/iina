@@ -18,7 +18,8 @@
 "general.password" = "Пароль";
 "general.na" = "Н/д";
 "general.no_result" = "Нет результатов";
-"general.no_title" = "No Title";
+"general.no_title" = "Без названия";
+"general.auto" = "Автоматически";
 
 "input.value_is_empty" = "Значение не может быть пустым.";
 "input.already_exists" = "Значение уже существует.";
@@ -140,9 +141,9 @@
 "osd.canceled" = "Отменено";
 "osd.cannot_connect" = "Не удалось установить соединение";
 "osd.timed_out" = "Время вышло";
-"osd.sub_quota_exceeded" = "Subtitle download limit reached";
-"osd.sub_quota_exceeded.detail" = "Try again after %@";
-"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.sub_quota_exceeded" = "Достигнут предел загрузки субтитров";
+"osd.sub_quota_exceeded.detail" = "Попробуйте через %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Попробуйте позже";
 "osd.filter_added" = "Добавлен фильтр: %@";
 "osd.filter_removed" = "Фильтр удален";
 "osd.file_loop" = "Повтор одного файла";
@@ -151,10 +152,8 @@
 
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
-"preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.video" = "Видео";
-"preference.audio" = "Аудио";
+"preference.ui" = "Интерфейс";
+"preference.video_audio" = "Видео и аудио";
 "preference.subtitle" = "Субтитры";
 "preference.network" = "Сеть";
 "preference.control" = "Управление";
@@ -285,13 +284,12 @@
 "alert.add_filter.message" = "Введите строку фильтра в формате команд «vf» или «af» из mpv.";
 
 "alert.keybinding_config.error" = "Ошибка разбора файла конфигурации клавиш «%@»! Сброс до стандартной конфигурации клавиш IINA. Проверьте свою конфигурацию.";
-"alert.delete_keybindingset.title" = "Delete Key Binding Set";
-"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
-
+"alert.delete_keybindingset.title" = "Удалить конфигурацию";
+"alert.delete_keybindingset.message" = "Вы уверены, что хотите удалить эту конфигурацию?";
 
 "alert.extra_option.cannot_read" = "Не удается прочесть пользовательские параметры mpv.";
 "alert.extra_option.empty" = "Ключ или значение не могут быть пустыми!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.error" = "Ошибка установки параметра --%@=%@ со значением %d. Проверьте установленные параметры в «Настройки > Дополнительно».";
 "alert.extra_option.config_folder" = "Ошибка при установке папки конфигурации «%@».";
 
 "alert.playlist.error_deleting" = "Ошибка удаления: %@";
@@ -328,8 +326,8 @@
 "alert.delete_history.message" = "Вы уверены, что хотите удалить выбранное?";
 "alert.delete_all_history.title" = "Очистить историю воспроизведения";
 "alert.delete_all_history.message" = "Вы действительно хотите удалить всю историю воспроизведения?";
-"alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.title" = "Удалить файл";
+"alert.delete_file.message" = "Вы уверены, что хотите удалить выбранное?";
 
 "alert.filter_hwdec.message" = "Вы собираетесь применить видеофильтр, но текущий режим аппаратного декодирования плохо поддерживает видеофильтры. Вы можете либо отключить аппаратное декодирование, что повысит нагрузку на ЦП, либо переключиться на режим «Автоматически (с копированием в память)», который будет потреблять вдвое больше памяти.\nВозможно, вам придется повторить предыдущую операцию (например, настройку обрезки), чтобы она сработала.";
 "alert.filter_hwdec.abort" = "Отмена";
@@ -375,8 +373,8 @@
 "alert.plugin_update_found.message" = "Последняя версия %@. У вас %@. Хотите обновить?";
 "alert.plugin_permission" = "Этот плагин запрашивает следующие разрешения. Проверьте их, перед тем как продолжить.";
 "alert.plugin_permission_added" = "Это обновление требует дополнительные разрешения. Проверьте их, перед тем как продолжить.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+"alert.install_plugin_macos_11.title" = "Установить плагин с GitHub";
+"alert.install_plugin_macos_11.message" = "Используйте формат «пользователь/репозиторий» или введите полный адрес GitHub-репозитория. Магазин плагинов недоступен для macOS 11 (Big Sur). Для наилучшего результата рекомендуется использование свежей версии ОС.";
 
 "playlist.total_length" = "%@ в общей сложности";
 "playlist.total_length_with_selected" = "%@ из %@ выбрано";
@@ -405,9 +403,9 @@
 "pl_menu.copy_url" = "Копировать адрес";
 "pl_menu.copy_url_multi" = "Копировать адреса";
 "pl_menu.playback" = "Воспроизведение";
-"pl_menu.subtitles" = "Subtitles (%d loaded)";
-"pl_menu.network_resources" = "Network Resources";
-"pl_menu.file_operations" = "File Operations";
+"pl_menu.subtitles" = "Субтитры (%d загружено)";
+"pl_menu.network_resources" = "Сетевые ресурсы";
+"pl_menu.file_operations" = "Операции с файлами";
 "pl_menu.plugin" = "Плагин";
 "pl_menu.playlist" = "Плейлист";
 
@@ -435,7 +433,7 @@
 "osc_toolbar.sub_track" = "Субтитры";
 "osc_toolbar.screenshot" = "Снимок экрана";
 "osc_toolbar.plugins" = "Показать панель плагинов";
-"osc_toolbar.live_text" = "Toggle Live Text";
+"osc_toolbar.live_text" = "Включить Сканер текста";
 
 "osc_pos.floating" = "Свободное";
 "osc_pos.top" = "Сверху";
@@ -499,57 +497,68 @@
 "plugin.updating" = "Загружаю обновление…";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "Все подсистемы";
 "logwindow.title" = "Журнал сообщений";
 "logwindow.time" = "Время";
 "logwindow.subsystem" = "Подсистема";
 "logwindow.message" = "Сообщение";
-"logwindow.now" = "Now";
-"logwindow.now.desc" = "Follow latest logs";
-"logwindow.log_level" = "Log level";
+"logwindow.now" = "Сейчас";
+"logwindow.now.desc" = "Следить за последними журналами";
+"logwindow.log_level" = "Уровень журнала";
 "logwindow.save" = "Сохранить";
-"logwindow.save_filtered" = "Save filtered logs…";
-"logwindow.filter" = "Filter";
-"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.save_filtered" = "Сохранить отфильтрованные журналы…";
+"logwindow.filter" = "Фильтр";
+"logwindow.clear_subsystem_selections" = "Очистить выбор";
 "logwindow.copy" = "Скопировать";
-"logwindow.logs" = "logs";
+"logwindow.logs" = "журналы";
 
 // History window
 "history_window.title" = "История воспроизведения";
-"history_window.col.filename" = "Media";
+"history_window.col.filename" = "Мультимедиа";
 "history_window.col.progress" = "Прогресс";
 "history_window.col.played_at" = "Воспроизведено";
 "history_window.menu.play" = "Воспроизвести";
 "history_window.menu.play_new_window" = "Воспроизвести в новом окне";
 "history_window.menu.show_in_finder" = "Показать в Finder";
 "history_window.menu.delete" = "Удалить…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "Переместить в Корзину…";
 "history_window.toolbar.clear" = "Очистить историю воспроизведения";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "Группировать";
+"history_window.toolbar.group_by.menu" = "Группировать";
 "history_window.toolbar.group_by.date" = "По дате";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
-"history_window.toolbar.group_by.location" = "Folder and Website";
-"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
-"history_window.toolbar.expand_all" = "Expand All";
-"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.toolbar.group_by.date_tooltip" = "Сортировать по дате";
+"history_window.toolbar.group_by.location" = "Папка и веб-сайт";
+"history_window.toolbar.group_by.location_tooltip" = "Сортировать по папке и веб-сайту";
+"history_window.toolbar.expand_collapse" = "Развернуть / свернуть";
+"history_window.toolbar.expand_all" = "Развернуть все";
+"history_window.toolbar.collapse_all" = "Свернуть все";
 "history_window.search.search_in" = "Поиск в";
 "history_window.search.filename" = "Имени файла";
-"history_window.search.full_path" = "Full Path";
+"history_window.search.full_path" = "Полный путь";
 "history_window.search.no_recents" = "Нет недавних поисковых запросов";
 "history_window.search.recents_title" = "Недавние поисковые запросы";
 "history_window.search.clear_recents" = "Очистить недавние";
 
 // Sidebar
 
-"sidebar.layout" = "Layout";
+"sidebar.layout" = "Макет";
 "sidebar.video" = "Видео";
 "sidebar.audio" = "Аудио";
 "sidebar.sub" = "Субтитры";
 "sidebar.plugins" = "Плагины";
 "sidebar.playlist" = "Плейлист";
 "sidebar.chapters" = "Глава";
+
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "Боковая панель";
+"sidebar.sidebar_position" = "Расположение боковой панели";
+"sidebar.compact_interface" = "Компактный интерфейс";
+"sidebar.edge_to_edge_video" = "Видео во все окно";
+"sidebar.lock_window_aspect" = "Заблокировать соотношение сторон окна";
+"sidebar.docked" = "Панели сверху и снизу видео";
+"sidebar.fit_window_to_video" = "Подогнать окно под видео";
+"sidebar.settings" = "Настройки";
+"sidebar.playlist_and_chapters" = "Плейлист и главы";
 
 "sidebar.aspect_ratio" = "Соотношение сторон";
 "sidebar.crop" = "Кадрирование";
@@ -560,36 +569,36 @@
 "sidebar.contrast" = "контраст";
 "sidebar.saturation" = "насыщенность";
 "sidebar.gamma" = "гамму";
-"sidebar.hue" = "Hue";
+"sidebar.hue" = "Оттенок";
 
 "sidebar.load_external_audio" = "Подключить аудиодорожку…";
-"sidebar.delay" = "Delay";
+"sidebar.delay" = "Задержка";
 
-"sidebar.eq" = "Equalizer";
+"sidebar.eq" = "Эквалайзер";
 "sidebar.save_eq" = "Сохранить настройку эквалайзера…";
 "sidebar.rename_eq" = "Переименовать настройку эквалайзера…";
 "sidebar.remove_eq" = "Удалить настройку эквалайзера";
 "sidebar.manual_eq" = "Ручной режим";
 
-"sidebar.primary" = "Primary";
-"sidebar.secondary" = "Secondary";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.primary" = "Основные";
+"sidebar.secondary" = "Вторые";
+"sidebar.external_subtitles" = "Внешние субтитры";
 "sidebar.load_subtitle" = "Подключить субтитры…";
 "sidebar.search_online" = "Найти онлайн…";
-"sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.position" = "Позиция";
+"sidebar.scale" = "Масштаб";
 "sidebar.font" = "Шрифт";
-"sidebar.color" = "Color";
-"sidebar.text" = "Text";
+"sidebar.color" = "Цвет";
+"sidebar.text" = "Текст";
 "sidebar.border" = "Рамка";
-"sidebar.background" = "Background";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Опции стилизации могут повредить отображение ASS, и часть из них не работает с некоторыми субтитрами.";
+"sidebar.shadow" = "Тень";
+"sidebar.sub_settings_not_available" = "Некоторые настройки недоступны для этого типа субтитров.";
+"sidebar.sub_style_warning" = "Переопределение стилей в ASS-субтитрах может привести к их искажению.";
 
 "sidebar.add_file" = "Добавить файл…";
 "sidebar.add_url" = "Добавить адрес…";
 
-"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+"sidebar.plugins_placeholder" = "При использовании плагинов может отображаться дополнительное содержимое в боковой панели. Выберите плагин для просмотра его опций в боковой панели или установите новый плагин в настройках приложения.";
 
 // Settings
 
@@ -602,7 +611,7 @@
 "settings.allowScreenSaverForAudio.desc" = "При этом компьютер все равно не перейдет в режим сна.";
 "settings.allowScreenSaverForAudio.label" = "Кроме «музыкального режима» или воспроизведения только аудио";
 "settings.alwaysOpenInNewWindow.label" = "Всегда открывать файлы в новом окне";
-"settings.autoRepeat.label" = "Включать при открытии файла вручную";
+"settings.autoRepeat.label" = "Повтор при открытии файла вручную";
 "settings.autoSwitchToMusicMode.label" = "Автоматически переходить в «музыкальный режим» при воспроизведении аудио";
 "settings.blackOutMonitor.label" = "Выключать остальные дисплеи в полноэкранном режиме";
 "settings.defaultRepeatMode.items.0" = "Повтор всего плейлиста";
@@ -641,30 +650,39 @@
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "Включить HDR-режим по умолчанию для HDR-видео.";
+"settings.enableHdrSupport.label" = "Включить режим HDR";
+"settings.enableLiveText.desc" = "Показать инструмент распознавания текста поверх стоп-кадра. Требуется macOS 13 или новее.";
+"settings.enableLiveText.label" = "Сканер текста";
 "settings.enableToneMapping.label" = "Включить преобразование Tone Mapping";
 "settings.forceDedicatedGPU.desc" = "Всегда использовать выделенный GPU для рендеринга (при наличии). Это может улучшить производительность, но может снизить срок службы аккумулятора.";
 "settings.forceDedicatedGPU.label" = "Принудительно использовать GPU";
 "settings.hardwareDecoder.items.0" = "Выключено";
+"settings.hardwareDecoder.items.0.desc" = "Выключить аппаратное декодирование. В данном варианте будет использоваться программное декодирование, что увеличивает нагрузку на ЦП.";
 "settings.hardwareDecoder.items.1" = "Автоматически";
+"settings.hardwareDecoder.items.1.desc" = "Аппаратное декодирование будет использоваться, если это возможно для текущего видеокодека. Если это невозможно, то будет использоваться программное декодирование.";
 "settings.hardwareDecoder.items.2" = "Автоматически (с копированием в память)";
+"settings.hardwareDecoder.items.2.desc" = "Аппаратное декодирование будет использоваться, если это возможно для текущего видеокодека. Если это невозможно, то будет использоваться программное декодирование. В данном варианте применяются только те режимы, которые копируют декодированное видео обратно в оперативную память, что увеличивает ее потребление.";
 "settings.hardwareDecoder.label" = "Аппаратное декодирование";
 "settings.loadIccProfile.desc" = "Загружать ICC-профиль текущего дисплея и использовать его для преобразования RGB-видео (только для SDR-видео)";
 "settings.loadIccProfile.label" = "Загружать цветовой профиль дисплея";
-"settings.toneMappingAlgorithm.items.0" = "Автоматически";
 "settings.toneMappingAlgorithm.label" = "Алгоритм";
-"settings.toneMappingTargetPeak.desc" = "Измеренная пиковая яркость дисплея. Если установлено 0, IINA автоматически определяет это значение. Если автоопределение не удалось, IINA устанавливает пиковую яркость в 400.";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Пиковая яркость";
 "settings.videoThreads.desc" = "По умолчанию: 0 (автоматически)";
 "settings.videoThreads.label" = "Количество потоков";
 
 // Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "Драйвер аудио по умолчанию.";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation — это новый экспериментальный аудиодрайвер с поддержкой пространственного аудио (Spatial Audio). Однако при использовании AVFoundation возможны некоторые проблемы, такие как задержка звука.";
 "settings.audioDriverEnableAVFoundation.label" = "Драйвер аудио";
 "settings.enableInitialVolume.label" = "Громкость при запуске";
 "settings.gaplessAudio.desc" = "Воспроизведение без пауз";
 "settings.gaplessAudio.items.0" = "Выключено";
+"settings.gaplessAudio.items.0.desc" = "При переходе от одного аудиофайла к другому может возникнуть тишина или прерывание.";
 "settings.gaplessAudio.items.1" = "Пассивное";
+"settings.gaplessAudio.items.1.desc" = "Аудиоустройство перезапускается при смене формата аудиофайлов. Если файлы закодированы с одинаковыми настройками, то воспроизведение без пауз должно быть без проблем. Если файлы закодированы по-разному, то возможны прерывания.";
 "settings.gaplessAudio.items.2" = "Активное";
+"settings.gaplessAudio.items.2.desc" = "Аудиоустройство запускается с параметрами, подобранными для первого проигрываемого файла. Они остаются такими же для дальнейшего воспроизведения без пауз. К последующим файлам может применяться ресемплирование, что может сказаться на качестве звука.";
 "settings.gaplessAudio.label" = "Воспроизведение без пауз";
 "settings.maxVolume.desc" = "(100–1000)";
 "settings.maxVolume.label" = "Максимальная громкость";
@@ -735,6 +753,7 @@
 "settings.verticalScrollAction.items.2" = "Ничего";
 "settings.verticalScrollAction.items.4" = "Настроить скорость воспроизведения";
 "settings.verticalScrollAction.label" = "Вертикальная прокрутка";
+"settings.videoViewAcceptsFirstMouse.desc" = "Мышь";
 "settings.videoViewAcceptsFirstMouse.label" = "Считать первое нажатие действием, если окно вне фокуса";
 "settings.volumeScrollAmount.label" = "Чувствительность громкости";
 
@@ -743,32 +762,35 @@
 "settings.useMediaKeys.label" = "Использовать системное управление медиа";
 
 // Settings - Network
-"settings.cacheBufferSize.desc" = "По умолчанию: 153600";
-"settings.cacheBufferSize.label" = "Размер буфера кэша (КБ)";
-"settings.enableCache.label" = "Включить кэширование";
+"settings.cachePauseWait.desc" = "Количество секунд, которое должно быть накоплено в буфере перед возобновлением воспроизведения после начала буферизации. Увеличьте это значение, если воспроизведение вскоре снова прерывается для буферизации.\n\nПо умолчанию: 1";
+"settings.cachePauseWait.label" = "Количество секунд буферизации перед возобновлением воспроизведения";
+"settings.cachePauseInitial.desc" = "Включать режим буферизации перед началом воспроизведения. Это обеспечивает более плавное воспроизведение, но требует некоторого времени на предварительную загрузку и буферизацию данных из сети.";
+"settings.cachePauseInitial.label" = "Буферизовать перед началом воспроизведения";
+"settings.defaultCacheSize.desc" = "По умолчанию: 153,600";
+"settings.defaultCacheSize.label" = "Размер буфера кэша (KiB)";
+"settings.enableCache.label" = "Предварительно загружать и буферизовать данные из сети";
 "settings.httpProxy.desc" = "Эта настройка вступит в силу после перезапуска IINA.";
 "settings.httpProxy.label" = "HTTP-прокси";
-"settings.secPrefech.desc" = "По умолчанию: 36000";
+"settings.secPrefech.desc" = "По умолчанию: 36,000";
 "settings.secPrefech.label" = "Длина предзагружаемых данных, с";
-"settings.showBufferingThrobber.label" = "Показывать индикатор загрузки при паузе для кэширования";
+"settings.showBufferingThrobber.label" = "Показывать индикатор при буферизации";
 "settings.showSeekingThrobber.label" = "Показывать индикатор загрузки при перемотке";
 "settings.transportRTSPThrough.items.0" = "Автоматически";
 "settings.transportRTSPThrough.label" = "Передавать RTSP-поток через";
 "settings.userAgent.label" = "Агент пользователя";
-"settings.ytdlEnabled.label" = "Включить youtube-dl";
-"settings.ytdlRawOptions.desc" = "Формат: <ключ>=<значение>[,<ключ>=<значение>[,…]]";
+"settings.ytdlEnabled.label" = "Включить скрипт youtube-dl для mpv";
+"settings.ytdlRawOptions.desc" = "Формат: <key>=<value>[,<key>=<value>[,…]]";
 "settings.ytdlRawOptions.label" = "Опции";
 "settings.ytdlSearchPath.desc" = "IINA будет искать youtube-dl в этой папке. Требуется перезапуск.";
 "settings.ytdlSearchPath.label" = "Свой путь к youtube-dl";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "Если включено, IINA будет автоматически искать субтитры в интернете только для видео без загруженных субтитров и продолжительностью более 20 минут.";
 "settings.autoSearchOnlineSub.label" = "Автоматически искать субтитры в интернете";
 "settings.displayInLetterBox.label" = "Показывать субтитры под видео в полноэкранном режиме";
 "settings.subAlignX.items.0" = "Слева";
 "settings.subAlignX.items.1" = "По центру";
 "settings.subAlignX.items.2" = "Справа";
-"settings.subAlignX.label" = "По вертикали";
 "settings.subAlignY.items.0" = "Сверху";
 "settings.subAlignY.items.1" = "По центру";
 "settings.subAlignY.items.2" = "Снизу";
@@ -781,20 +803,37 @@
 "settings.subAutoLoadSearchPath.desc" = "Папки отделяются двоеточием (:). Разрешены относительные пути и знак подстановки (*) в конце.";
 "settings.subAutoLoadSearchPath.label" = "Также искать субтитры в следующих папках";
 "settings.subBlur.label" = "Размытие";
+"settings.subBold.desc" = "sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
 "settings.subBold.label" = "Жирный";
 "settings.subItalic.label" = "Курсивный";
 "settings.subLang.desc" = " Коды по ISO 639-2 (например, rus, eng). Применяются как для плеера, так и для OpenSubtitles.";
+"settings.subOverrideLevel.items.0" = "yes";
+"settings.subOverrideLevel.items.0.desc" = "Переопределять оформление стилями, заданными ниже.";
+"settings.subOverrideLevel.items.1" = "force";
+"settings.subOverrideLevel.items.1.desc" = "Переопределять оформление стилями, заданными ниже, и принудительно применять другие настройки для субтитров.";
+"settings.subOverrideLevel.items.2" = "strip";
+"settings.subOverrideLevel.items.2.desc" = "Игнорировать все стили и теги в субтитрах ASS.";
+"settings.subOverrideLevel.items.3" = "scale";
+"settings.subOverrideLevel.items.3.desc" = "Переопределять оформление стилями, заданными ниже, и применять масштабирование шрифта.";
+"settings.subOverrideLevel.items.4" = "no";
+"settings.subOverrideLevel.items.4.desc" = "Показывать субтитры ASS без переопределения пользователем.";
 "settings.subPos.label" = "Положение по вертикали";
 "settings.subScaleWithWindow.label" = "Масштабировать субтитры в соответствии с размером окна";
 "settings.subSpacing.label" = "Межзнаковый интервал";
 
 // Settings - UI
+"settings.more_ui_settings" = "Дополнительные настройки интерфейса доступны в боковой панели «Макет».";
 "settings.alwaysFloatOnTop.label" = "Поверх всех окон при воспроизведении";
 "settings.alwaysShowOnTopIcon.label" = "Всегда показывать статус «Поверх всех окон» в заголовке окна";
 "settings.arrowBtnAction.items.0" = "Изменить скорость";
 "settings.arrowBtnAction.items.1" = "Предыдущий / следующий файл";
 "settings.arrowBtnAction.items.2" = "Перемотка назад / вперед";
 "settings.arrowBtnAction.label" = "Действие кнопок «Назад» и «Вперед»";
+"settings.controlBarAutoHideTimeout.label" = "Скрывать через";
 "settings.controlBarStickToCenter.label" = "Привязывать к центру при перетаскивании";
 "settings.disableAnimations.desc" = "Если в macOS включены настройки универсального доступа для уменьшения движения, то IINA снизит количество анимаций интерфейса, которые могут вызывать проблемы у людей с нарушениями вестибулярного аппарата. Если этого недостаточно, установите флажок «Отключить анимации», чтобы дополнительно сократить анимации интерфейса.";
 "settings.disableAnimations.label" = "Отключить анимации";
@@ -829,6 +868,8 @@
 "settings.themeMaterial.items.2" = "Светлое";
 "settings.themeMaterial.items.4" = "Как в системе";
 "settings.themeMaterial.label" = "Внешний вид";
+"settings.thumbnailWidth.desc" = "Изменение ширины очищает кэш эскизов и пересоздает все эскизы в указанном размере.";
+"settings.thumbnailWidth.label" = "Ширина миниатюр";
 "settings.togglePipByMinimizingWindow.label" = "Переходить в режим «Картинка в картинке» при сворачивании / разворачивании окна";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "Только для видеофайлов";
 "settings.usePhysicalResolution.label" = "Использовать физическое разрешение на экранах Retina";
@@ -841,6 +882,7 @@
 "settings.enableAdvancedSettings.desc" = "Эти настройки вступят в силу после перезапуска IINA.";
 "settings.enableAdvancedSettings.label" = "Включить расширенные настройки";
 "settings.enableLogging.label" = "Включить запись журнала в виде файла";
+"settings.logLevel.desc" = "Для просмотра журналов используйте меню Окно > Журнал сообщений.";
 "settings.logLevel.items.0" = "Подробно";
 "settings.logLevel.items.1" = "Отладка";
 "settings.logLevel.items.2" = "Предупреждение";
@@ -854,34 +896,48 @@
 "settings.$About" = "О плагине";
 "settings.$Accessibility" = "Доступность";
 "settings.$AdditionalMpvOptions" = "Дополнительные опции mpv";
+"settings.$AdditionalMpvOptions.desc" = "Вставьте параметр в формате key=value, чтобы автоматически заполнить оба поля.";
 "settings.$Advanced" = "Дополнительно";
 "settings.$Align" = "Выравнивание";
-"settings.$AlwaysWhenPlaying" = "Всегда";
+"settings.$AlwaysWhenPlaying" = "Всегда при воспроизведении нового файла";
 "settings.$Appearance" = "Внешний вид";
 "settings.$AssrtAPIToken" = "API-токен Assrt";
-"settings.$Audio" = "Аудио";
 "settings.$Author" = "Автор";
 "settings.$AutoLoad" = "Автозагрузка";
 "settings.$Background" = "Фон";
 "settings.$Behavior" = "Поведение";
 "settings.$Border" = "Рамка";
+"settings.$BrowserExtensions" = "Расширения браузера";
 "settings.$Cache" = "Кэш";
 "settings.$Cancel" = "Отмена";
 "settings.$CheckForUpdates" = "Проверять наличие обновлений";
+"settings.$CheckForUpdates.items.3600" = "Каждый час";
+"settings.$CheckForUpdates.items.86400" = "Каждый день";
+"settings.$CheckForUpdates.items.604800" = "Каждую неделю";
+"settings.$CheckForUpdates.items.2629800" = "Каждый месяц";
+"settings.$Chrome" = "Chrome";
 "settings.$ClearCache" = "Очистка кэша";
-"settings.$ClearPlaybackHistory" = "Очистить историю воспроизведения…";
-"settings.$ClearSavedPlaybackProgress" = "Очистить сохраненный прогресс воспроизведения…";
-"settings.$ClearThumbnailCache" = "Очистить кэш эскизов…";
+"settings.$ClearPlaybackHistory" = "Очистить историю воспроизведения";
+"settings.$ClearSavedPlaybackProgress" = "Очистить сохраненный прогресс воспроизведения";
+"settings.$ClearThumbnailCache" = "Очистить кэш миниатюр";
 "settings.$Color" = "Цвет";
+"settings.$ColorHDR" = "Цвет и HDR";
+"settings.$CommunityPlugins" = "Плагины сообщества";
+"settings.$CreateAnEmptySet" = "Создать пустой набор…";
 "settings.$Customize" = "Настроить…";
+"settings.$Decoding" = "Декодирование";
 "settings.$DefaultApplication" = "Приложение по умолчанию";
 "settings.$DefaultEncoding" = "Кодировка по умолчанию";
-"settings.$DeleteAllPlaybackHistories" = "Кнопка ниже удаляет всю историю воспроизведения и историю недавних файлов.";
+"settings.$DeleteAllPlaybackHistories" = "Удалить всю историю воспроизведения и историю недавних файлов.";
 "settings.$DeleteAllWatchLater" = "Кнопка ниже удаляет данные, которые содержат последние позиции воспроизведения и настройки, установленные во время проигрывания.";
-"settings.$DoNotResize" = "Отключено";
+"settings.$DoNotResize" = "Не изменять размер";
+"settings.$DuplicateCurrentSet" = "Дублировать текущий набор…";
 "settings.$FailedToLoadThePage" = "Не удалось загрузить страницу.";
+"settings.$Firefox" = "Firefox";
 "settings.$Font" = "Шрифт";
 "settings.$GetBrowserExtensionsForIINA" = "Установить расширения браузера для IINA";
+"settings.$GetPlugins" = "Скачать плагины…";
+"settings.$Hardware" = "Аппаратное обеспечение";
 "settings.$Height" = "Высота";
 "settings.$Help" = "Справка";
 "settings.$History" = "История";
@@ -889,48 +945,69 @@
 "settings.$ImportAnExistingConfigFile" = "Импортировать существующий файл конфигурации";
 "settings.$InitialWindowPosition" = "Позиция при открытии";
 "settings.$InitialWindowSize" = "Размер при открытии";
+"settings.$InputGithubURL" = "Введите GitHub-адрес";
 "settings.$Install" = "Установить";
-"settings.$InstallLocalPackage" = "Установить пакет…";
-"settings.$Layout" = "Расположение";
+"settings.$InstallLocalPackage" = "Установить локальный пакет…";
+"settings.$Installed" = "Установлено";
+"settings.$Installing" = "Установка";
+"settings.$KeyBindingSet" = "Конфигурация";
+"settings.$Layout" = "Макет";
+"settings.$LegacyOpenSubAlert" = "⚠️ Поддержка предыдущей настройки OpenSubtitles устарела. Пожалуйста, используйте вместо этого плагин OpenSubtitles. Если требуется вход в систему, пожалуйста, зайдите в устаревшее окно настроек.";
+"settings.$LiveText" = "Сканер текста";
+"settings.$Logging" = "Журналирование";
 "settings.$Login" = "Авторизоваться";
 "settings.$MB" = "МБ";
+"settings.$MPVSettings" = "Настройки mpv";
 "settings.$Margin" = "Отступ";
 "settings.$Mouse" = "Мышь";
 "settings.$Network" = "Сеть";
+"settings.$NewKeyBindingSet" = "Новая конфигурация";
+"settings.$NoSelection" = "Ничего не выбрано";
 "settings.$NotLoggedIn" = "Не авторизированы";
-"settings.$OK" = "OK";
+"settings.$OK" = "ОК";
+"settings.$OfficialPlugins" = "Официальные плагины";
 "settings.$Offset" = "Смещение";
 "settings.$OnScreenController" = "Экранное меню";
 "settings.$OnScreenDisplay" = "Экранные сообщения";
 "settings.$OnlineSubtitles" = "Cубтитры онлайн";
 "settings.$OpenLinksOrCurrentWebpage" = "Открытие ссылок или текущей веб-страницы в IINA в одно нажатие. Веб-сайт должен поддерживаться youtube-dl.";
 "settings.$OpenLogDirectory" = "Открыть папку журналов";
+"settings.$OpenLogWindow" = "Открыть просмотр журнала";
+"settings.$OrSelectFrom" = "Или выберите из доступных плагинов";
+"settings.$Other" = "Прочее";
 "settings.$OtherStyles" = "Другие стили";
 "settings.$OverrideLevel" = "Уровень переопределения";
+"settings.$Percent" = "%";
 "settings.$PictureinnPicture" = "Картинка в\nкартинке";
 "settings.$Playlist" = "Плейлист";
 "settings.$PleaseSelectTheMediaTypes" = "Типы файлов, для которых IINA будет приложением по умолчанию.";
 "settings.$Position" = "Расположение";
 "settings.$PreferredLanguage" = "Предпочитаемый язык (ISO 639-2)";
 "settings.$RestoreAlerts" = "Восстановление уведомлений";
-"settings.$RestoreAllAlertsThat" = "Кнопка ниже возвращает показ всех уведомлений, которые были скрыты кнопкой «Больше не показывать».";
-"settings.$RestoreSuppressedAlerts" = "Восстановить скрытые уведомления…";
+"settings.$RestoreAllAlertsThat" = "Вернуть показ всех уведомлений, которые были скрыты флажком «Больше не показывать».";
+"settings.$RestoreSuppressedAlerts" = "Восстановить скрытые оповещения";
 "settings.$SPDIFOutput" = "Выход S/PDIF";
+"settings.$SPDIFOutputWarning" = "Список кодеков, для которых должна использоваться сквозная передача аудио в сжатом виде.\n\nВнимание! Нет надобности использовать данную настройку без особой на то причины. HDMI поддерживает несжатое многоканальное PCM-аудио, а преобразование без потерь для DTS-HD поддерживается с помощью декодера DCA, используемого в FFmpeg. Если данная настройка включена и выходное устройство не поддерживает S/PDIF, то воспроизведение может не начаться.";
+"settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Снимки экрана";
-"settings.$SetIINAAsTheDefault" = "Установить IINA в качестве приложения по умолчанию…";
+"settings.$SetIINAAsTheDefault" = "Установить IINA в качестве приложения по умолчанию";
 "settings.$Settings" = "Настройки";
 "settings.$Shadow" = "Тень";
 "settings.$ShowInFinder" = "Показать в Finder";
 "settings.$ShowTheConfigFileIn" = "Показать файл конфигурации в Finder";
 "settings.$Size" = "Размер";
 "settings.$Source" = "Источник";
+"settings.$SubtitleSource" = "Источник субтитров";
+"settings.$SubtitleSource.desc" = "Это источник по умолчанию для поиска субтитров. Во время воспроизведения можно вручную выбрать в меню поиск субтитров из других источников.";
+"settings.$SubtitleSourcePluginDesc" = "Этот источник предоставлен плагином. Пожалуйста, перейдите на страницу настроек плагина для конфигурирования.";
 "settings.$SuppressMessagesFor" = "Не показывать для событий";
 "settings.$TextSubtitles" = "Текст субтитров";
+"settings.$ThisPluginIsNot" = "Этот плагин не размещен на GitHub. Пожалуйста, перейдите на сайт для загрузки.";
 "settings.$ThumbnailPreview" = "Миниатюры";
 "settings.$Toolbar" = "Панель инструментов";
 "settings.$Trackpad" = "Трекпад";
 "settings.$Uninstall" = "Удалить";
-"settings.$Video" = "Видео";
+"settings.$Volume" = "громкость";
 "settings.$Website" = "Сайт";
 "settings.$WhenEnteringPIP" = "При переходе в режим «Картинка в картинке»";
 "settings.$WhenMediaIsOpened" = "При открытии файла";
@@ -941,12 +1018,14 @@
 "settings.$XOffset" = "По горизонтали";
 "settings.$Y" = "По вертикали";
 "settings.$YOffset" = "По вертикали";
+"settings.$YTDL" = "Онлайн-видео (yt-dlp)";
 "settings.$YouCanInstallANew" = "Вы можете установить новый плагин с GitHub или локальный пакет .iinaplgz. Плагины, установленные с GitHub, могут обновляться автоматически.";
 "settings.$bottom" = "нижней";
 "settings.$dB" = "дБ";
 "settings.$left" = "левой";
 "settings.$nits" = "нит";
 "settings.$ofScreen" = "% экрана";
+"settings.$onlineMediaPluginAdvice" = "Рекомендуется плагин Online Media";
 "settings.$point" = "пикс";
 "settings.$pt" = "пт";
 "settings.$right" = "правой";
@@ -954,3 +1033,4 @@
 "settings.$sideOfTheScreen" = "границы экрана";
 "settings.$toThe" = "от";
 "settings.$top" = "верхней";
+"settings.$ytdlWarning" = "У плагина Online Media есть дополнительные функции, такие как смена качества и загрузка видео. IINA сможет использовать плагин, если он установлен и включен. Настройки ниже работают только в том случае, если плагин недоступен.";

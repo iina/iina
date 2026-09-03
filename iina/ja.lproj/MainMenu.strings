@@ -74,7 +74,7 @@
 "8y7-Cy-lKT.title" = "字幕パネルを表示";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 1.1x"; ObjectID = "91n-xW-L37"; */
-"91n-xW-L37.title" = "速度を1.1倍";
+"91n-xW-L37.title" = "速度を1.1×";
 
 /* Class = "NSMenuItem"; title = "Audio Delay - 0.1s"; ObjectID = "9ee-7i-xs7"; */
 "9ee-7i-xs7.title" = "オーディオディレイ - 0.1秒";
@@ -89,7 +89,7 @@
 "AoP-K6-Kb5.title" = "スクリーンショットを撮る";
 
 /* Class = "NSMenuItem"; title = "Delogo"; ObjectID = "ArE-2s-JIV"; */
-"ArE-2s-JIV.title" = "ウォーターマークを除去";
+"ArE-2s-JIV.title" = "ロゴを除去";
 
 /* Class = "NSMenuItem"; title = "Saved Video Filters"; ObjectID = "BDr-G9-IRx"; */
 "BDr-G9-IRx.title" = "保存済みのビデオフィルタ";
@@ -116,7 +116,7 @@
 "3xl-iD-85w.title" = "外部オーディオを読み込む…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
-"DUP-nm-BJt.title" = "速度を0.9倍";
+"DUP-nm-BJt.title" = "速度を0.9×";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "閉じる";
@@ -167,7 +167,7 @@
 "Hal-18-Tnf.title" = "2倍のサイズ";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.5x"; ObjectID = "HsE-LN-Nd6"; */
-"HsE-LN-Nd6.title" = "速度を0.5倍";
+"HsE-LN-Nd6.title" = "速度を0.5×";
 
 /* Class = "NSMenu"; title = "Video"; ObjectID = "HyV-fh-RgO"; */
 "HyV-fh-RgO.title" = "ビデオ";
@@ -197,7 +197,7 @@
 "Lc4-4W-thE.title" = "オーディオディレイ - 0.5秒";
 
 /* Class = "NSMenuItem"; title = "Speed Up to 2x"; ObjectID = "Lqa-OG-EEg"; */
-"Lqa-OG-EEg.title" = "速度を2倍";
+"Lqa-OG-EEg.title" = "速度を2×";
 
 /* Class = "NSMenuItem"; title = "Subtitle Delay - 0.5s"; ObjectID = "LsU-Qz-dax"; */
 "LsU-Qz-dax.title" = "字幕ディレイ - 0.5秒";
@@ -230,10 +230,10 @@
 "P1a-ot-P31.title" = "字幕のサイズをリセット";
 
 /* Class = "NSMenuItem"; title = "Encoding"; ObjectID = "Pci-OQ-Vni"; */
-"Pci-OQ-Vni.title" = "エンコード";
+"Pci-OQ-Vni.title" = "エンコーディング";
 
 /* Class = "NSMenu"; title = "Encoding"; ObjectID = "Pf6-5i-B1E"; */
-"Pf6-5i-B1E.title" = "エンコード";
+"Pf6-5i-B1E.title" = "エンコーディング";
 
 /* Class = "NSMenuItem"; title = "Video Filters…"; ObjectID = "PyY-pR-jz7"; */
 "PyY-pR-jz7.title" = "ビデオフィルタ…";
@@ -335,7 +335,7 @@
 "c6Y-0e-vgf.title" = "音量 + 1%";
 
 /* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
-"che-dy-QUU.title" = "現在のファイルをFinderで表示";
+"che-dy-QUU.title" = "現在のファイルをFinderに表示";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "アスペクト比";
@@ -479,10 +479,10 @@
 "wex-rX-PcY.title" = "最前面に固定";
 
 /* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
-"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+"Saz-zT-RXt.title" = "ウインドウのアスペクト比を固定";
 
 /* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
-"lq9-av-Um9.title" = "Live Text";
+"lq9-av-Um9.title" = "テキスト認識表示";
 
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "保存済みのオーディオフィルタ";

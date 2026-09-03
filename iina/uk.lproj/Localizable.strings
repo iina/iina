@@ -19,6 +19,7 @@
 "general.na" = "Немає даних";
 "general.no_result" = "Нічого не знайдено";
 "general.no_title" = "No Title";
+"general.auto" = "Автоматично";
 
 "input.value_is_empty" = "Значення не може бути порожнім.";
 "input.already_exists" = "Значення вже існує.";
@@ -142,7 +143,7 @@
 "osd.timed_out" = "Час вийшов";
 "osd.sub_quota_exceeded" = "Subtitle download limit reached";
 "osd.sub_quota_exceeded.detail" = "Try again after %@";
-"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.sub_quota_exceeded.detail_unknown" = "Спробуйте пізніше";
 "osd.filter_added" = "Доданий фільтр: %@";
 "osd.filter_removed" = "Видалений фільтр";
 "osd.file_loop" = "Повтор одного файлу";
@@ -151,10 +152,8 @@
 
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";
-"preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.video" = "Відео";
-"preference.audio" = "Аудіо";
+"preference.ui" = "Інтерфейс";
+"preference.video_audio" = "Відео та аудіо";
 "preference.subtitle" = "Субтитри";
 "preference.network" = "Мережа";
 "preference.control" = "Керування";
@@ -288,7 +287,6 @@
 "alert.delete_keybindingset.title" = "Delete Key Binding Set";
 "alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
 
-
 "alert.extra_option.cannot_read" = "Не можу прочитати додаткові властивості mpv, що визначені користувачем.";
 "alert.extra_option.empty" = "Ключ або значення не може бути порожнім!";
 "alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
@@ -328,7 +326,7 @@
 "alert.delete_history.message" = "Впевнені, що хочете видалити вибрані елементи?";
 "alert.delete_all_history.title" = "Почистити історію перегляду";
 "alert.delete_all_history.message" = "Упевнені, що хочете видалити всю історію відтворення?";
-"alert.delete_file.title" = "Delete File";
+"alert.delete_file.title" = "Видалити файл";
 "alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Ви зараз застосуєте відеофільтр. Хоча ваш апаратний декодер, можливо, нормально не підтримує відеофільтри. Ви можете вимкнути апаратне декодування або перемкнутися в режим Авто (Копія), що використовує вдвічі більше пам'яті.\n\nВам треба буде повторити попередню операцію (наприклад, встановлення обрізування), щоб воно запрацювало.";
@@ -375,7 +373,7 @@
 "alert.plugin_update_found.message" = "Найновіша версія %@. Ваша версія %@. Хотіли би ви оновити?";
 "alert.plugin_permission" = "Цей плагін потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
 "alert.plugin_permission_added" = "Це оновлення потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.title" = "Встановити плагін з GitHub";
 "alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ загалом";
@@ -499,44 +497,44 @@
 "plugin.updating" = "Завантаження оновлення…";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "Усі підсистеми";
 "logwindow.title" = "Переглядач журналу";
 "logwindow.time" = "Час";
 "logwindow.subsystem" = "Підсистема";
 "logwindow.message" = "Повідомлення";
-"logwindow.now" = "Now";
+"logwindow.now" = "Зараз";
 "logwindow.now.desc" = "Follow latest logs";
 "logwindow.log_level" = "Log level";
 "logwindow.save" = "Зберегти";
 "logwindow.save_filtered" = "Save filtered logs…";
-"logwindow.filter" = "Filter";
-"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.filter" = "Фільтр";
+"logwindow.clear_subsystem_selections" = "Зняти виділення";
 "logwindow.copy" = "Копіювати";
-"logwindow.logs" = "logs";
+"logwindow.logs" = "журнали";
 
 // History window
 "history_window.title" = "Історія перегляду";
-"history_window.col.filename" = "Media";
+"history_window.col.filename" = "Медіа";
 "history_window.col.progress" = "Прогрес";
 "history_window.col.played_at" = "Час перегляду";
 "history_window.menu.play" = "Відтворити";
 "history_window.menu.play_new_window" = "Відтворити в новому вікні";
 "history_window.menu.show_in_finder" = "Показати у Finder";
 "history_window.menu.delete" = "Видалити…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "Перемістити до кошику...";
 "history_window.toolbar.clear" = "Почистити історію перегляду";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "Групувати за";
+"history_window.toolbar.group_by.menu" = "Групувати за";
 "history_window.toolbar.group_by.date" = "Дата";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
-"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.date_tooltip" = "Сортувати за датою";
+"history_window.toolbar.group_by.location" = "Папка та сайт";
 "history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
-"history_window.toolbar.expand_all" = "Expand All";
-"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.toolbar.expand_collapse" = "Розгорнути/згорнути";
+"history_window.toolbar.expand_all" = "Розгорнути всі";
+"history_window.toolbar.collapse_all" = "Згорнути всі";
 "history_window.search.search_in" = "Шукати в";
 "history_window.search.filename" = "Ім'я файлу";
-"history_window.search.full_path" = "Full Path";
+"history_window.search.full_path" = "Повний шлях";
 "history_window.search.no_recents" = "Немає останніх запитів";
 "history_window.search.recents_title" = "Останні запити";
 "history_window.search.clear_recents" = "Видалити останні";
@@ -551,6 +549,17 @@
 "sidebar.playlist" = "Плейлист";
 "sidebar.chapters" = "Розділи";
 
+"sidebar.liquid_glass" = "Рідке скло";
+"sidebar.sidebar" = "Бічна панель";
+"sidebar.sidebar_position" = "Розташування бокової панелі";
+"sidebar.compact_interface" = "Компактний інтерфейс";
+"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
+"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
+"sidebar.docked" = "Docked Control Bar and Titlebar";
+"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.settings" = "Параметри";
+"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+
 "sidebar.aspect_ratio" = "Пропорції";
 "sidebar.crop" = "Обрізати";
 "sidebar.rotation" = "Обертання";
@@ -563,9 +572,9 @@
 "sidebar.hue" = "Hue";
 
 "sidebar.load_external_audio" = "Завантажити зовнішню аудіодоріжку…";
-"sidebar.delay" = "Delay";
+"sidebar.delay" = "Затримка";
 
-"sidebar.eq" = "Equalizer";
+"sidebar.eq" = "Еквалайзер";
 "sidebar.save_eq" = "Зберегти поточний EQ як шаблон…";
 "sidebar.rename_eq" = "Перейменувати поточний шаблон EQ…";
 "sidebar.remove_eq" = "Видалити поточний шаблон EQ";
@@ -582,9 +591,9 @@
 "sidebar.color" = "Color";
 "sidebar.text" = "Text";
 "sidebar.border" = "Контур";
-"sidebar.background" = "Background";
+"sidebar.shadow" = "Тінь";
 "sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Параметри стилю субтитрів можуть порушити ASS-відображення, та, в залежності від типу субтитрів, деякі параметри можуть бути вимкнені.";
+"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
 
 "sidebar.add_file" = "Додати файл…";
 "sidebar.add_url" = "Додати URL…";
@@ -602,7 +611,7 @@
 "settings.allowScreenSaverForAudio.desc" = "Запобігає системі переходити в режим сну.";
 "settings.allowScreenSaverForAudio.label" = "Не під час \"музичного режиму\" або лише відтворення аудіо";
 "settings.alwaysOpenInNewWindow.label" = "Завжди відкривати файл в новому вікні";
-"settings.autoRepeat.label" = "Коли файл відкрито вручну";
+"settings.autoRepeat.label" = "Loop when a file is opened manually";
 "settings.autoSwitchToMusicMode.label" = "Автоматично переходити до \"музичного режиму\" при відтворюванні аудіофайлу";
 "settings.blackOutMonitor.label" = "Затемнити інші вікна, коли у повноекранному режимі";
 "settings.defaultRepeatMode.items.0" = "Зациклити список награвання";
@@ -641,27 +650,40 @@
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "Увімкнути режим HDR за замовчуванням при відтворенні HDR відео.";
+"settings.enableHdrSupport.label" = "Enable HDR mode";
+"settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
+"settings.enableLiveText.label" = "Live Text";
 "settings.enableToneMapping.label" = "Увімкнути тональне відображення";
 "settings.forceDedicatedGPU.desc" = "Для рендерингу завжди використовувати графічний процесор (за наявності). Це може покращити продуктивність, але зменшить ресурс акумулятора.";
 "settings.forceDedicatedGPU.label" = "Примусово задіяти GPU";
 "settings.hardwareDecoder.items.0" = "вимкнено";
+"settings.hardwareDecoder.items.0.desc" = "Вимкнути апаратне декодування.";
 "settings.hardwareDecoder.items.1" = "Автоматично";
+"settings.hardwareDecoder.items.1.desc" = "Увімкнути апаратне декодування. Хоча більшість відеофільтрів правильно не працюватимуть.";
 "settings.hardwareDecoder.items.2" = "Автоматично (копіювання)";
+"settings.hardwareDecoder.items.2.desc" = "Увімкнути апаратне декодування. Це потребує вдвічі більше пам'яті, але працює з відеофільтрами.";
 "settings.hardwareDecoder.label" = "Апаратний декодер";
 "settings.loadIccProfile.desc" = "Завантажити профіль ICC для поточного дисплея і використовувати його для перетворення відео RGB на екран. (Тільки для режиму SDR)";
 "settings.loadIccProfile.label" = "Завантажити профіль ICC";
-"settings.toneMappingAlgorithm.items.0" = "Автоматично";
 "settings.toneMappingAlgorithm.label" = "Алгоритм";
-"settings.toneMappingTargetPeak.desc" = "Вимірювана пікова яскравість дисплея. Якщо встановлено 0, IINA автоматично визначає це значення. Якщо автовизначення не вдалося, IINA встановлює пікову яскравість 400.";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Пікова яскравість";
 "settings.videoThreads.desc" = "За замовчуванням: 0 (автоматично)";
 "settings.videoThreads.label" = "Число потоків";
 
 // Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "The default audio driver.";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation - це новий, експериментальний аудіодрайвер з підтримкою просторових звуків. Однак ви можете зіткнутися з деякими проблемами при використанні AVFoundation, таких як затримки звуку.";
 "settings.audioDriverEnableAVFoundation.label" = "Аудіо драйвер";
 "settings.enableInitialVolume.label" = "Початкова гучність";
+"settings.gaplessAudio.desc" = "Gapless audio";
 "settings.gaplessAudio.items.0" = "вимкнено";
+"settings.gaplessAudio.items.0.desc" = "Відтворення послідовних аудіофайлів може призвести до тиші або переривання в момент зміни файлу.";
+"settings.gaplessAudio.items.1" = "Weak";
+"settings.gaplessAudio.items.1.desc" = "Якщо формат аудіо на виході декодера змінюється, аудіопристрій закривається та відкривається повторно, що порушує безшовне відтворення.";
+"settings.gaplessAudio.items.2" = "Strong";
+"settings.gaplessAudio.items.2.desc" = "Аудіопристрій відкривається з параметрами, вибраними для першого відтворюваного файлу, і залишається відкритим для безшовного відтворення. Наступні файли можуть бути ресемпльовані.";
+"settings.gaplessAudio.label" = "Gapless audio";
 "settings.maxVolume.desc" = "(100—1000)";
 "settings.maxVolume.label" = "Максимальна гучність";
 "settings.preferredAudioDevice.label" = "Основний аудіопристрій";
@@ -683,6 +705,7 @@
 "settings.doubleClickAction.items.2" = "Пауза/Відновити";
 "settings.doubleClickAction.items.4" = "Режим «Картинка в картинці»";
 "settings.doubleClickAction.items.5" = "Цикл A—B";
+"settings.doubleClickAction.items.6" = "Reset speed";
 "settings.doubleClickAction.label" = "Подвійне клацання для";
 "settings.forceTouchAction.items.0" = "—";
 "settings.forceTouchAction.items.1" = "Повноекранний режим";
@@ -692,6 +715,7 @@
 "settings.horizontalScrollAction.items.0" = "Регулювання гучності";
 "settings.horizontalScrollAction.items.1" = "Перемотування";
 "settings.horizontalScrollAction.items.2" = "—";
+"settings.horizontalScrollAction.items.4" = "Adjust playback speed";
 "settings.horizontalScrollAction.label" = "Горизонтальне прокручування для";
 "settings.middleClickAction.items.0" = "—";
 "settings.middleClickAction.items.1" = "Повноекранний режим";
@@ -699,11 +723,13 @@
 "settings.middleClickAction.items.3" = "Приховання панелі керування";
 "settings.middleClickAction.items.4" = "Режим «Картинка в картинці»";
 "settings.middleClickAction.items.5" = "Цикл A—B";
+"settings.middleClickAction.items.6" = "Reset speed";
 "settings.middleClickAction.label" = "Середня кнопка миші для";
 "settings.pinchAction.items.0" = "Налаштувати розмір вікна";
 "settings.pinchAction.items.1" = "Повноекранний";
 "settings.pinchAction.items.2" = "—";
 "settings.pinchAction.label" = "Зведення для";
+"settings.playbackSpeedScrollAmount.label" = "Sensitivity for speed";
 "settings.relativeSeekAmount.label" = "Чутливість для нормального пошуку";
 "settings.rightClickAction.desc" = "Середня кнопка миші для";
 "settings.rightClickAction.items.0" = "—";
@@ -711,6 +737,7 @@
 "settings.rightClickAction.items.3" = "Приховання панелі керування";
 "settings.rightClickAction.items.4" = "Режим «Картинка в картинці»";
 "settings.rightClickAction.items.5" = "Цикл A—B";
+"settings.rightClickAction.items.6" = "Reset speed";
 "settings.rightClickAction.label" = "Права кнопка миші для";
 "settings.singleClickAction.items.0" = "—";
 "settings.singleClickAction.items.2" = "Пауза/Відновити";
@@ -724,7 +751,9 @@
 "settings.verticalScrollAction.items.0" = "Регулювання гучності";
 "settings.verticalScrollAction.items.1" = "Перемотування";
 "settings.verticalScrollAction.items.2" = "—";
+"settings.verticalScrollAction.items.4" = "Adjust playback speed";
 "settings.verticalScrollAction.label" = "Вертикальне прокручування для";
+"settings.videoViewAcceptsFirstMouse.desc" = "Миша";
 "settings.videoViewAcceptsFirstMouse.label" = "Приймає перше клацання миші, коли не в фокусі";
 "settings.volumeScrollAmount.label" = "Чутливість для гучності";
 
@@ -733,20 +762,24 @@
 "settings.useMediaKeys.label" = "Задіяти системне керування медіафайлами";
 
 // Settings - Network
-"settings.cacheBufferSize.desc" = "За замовчуванням: 153600";
-"settings.cacheBufferSize.label" = "Розмір буфера кешу (КБ)";
-"settings.enableCache.label" = "Увімкнути кеш";
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.label" = "Buffer before starting playback";
+"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.enableCache.label" = "Prefetch and buffer network data";
 "settings.httpProxy.desc" = "Для набуття чинності потребує перезавантаження IINA.";
 "settings.httpProxy.label" = "HTTP-проксі";
-"settings.secPrefech.desc" = "За замовчуванням: 36000";
+"settings.secPrefech.desc" = "Default: 36,000";
 "settings.secPrefech.label" = "Попередня вибірка у секундах";
-"settings.showBufferingThrobber.label" = "Показувати індикатор завантаження, коли відтворення призупинено в очікуванні кешу";
+"settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "Показувати індикатор завантаження під час перемотування";
 "settings.transportRTSPThrough.items.0" = "Авто";
 "settings.transportRTSPThrough.label" = "Транспортувати RTSP-потік через";
 "settings.userAgent.label" = "Агент користувача";
-"settings.ytdlEnabled.label" = "Увімкнути youtube-dl";
-"settings.ytdlRawOptions.desc" = "Формат: <елемент>=<значення>[,<елемент>=<значення>[,…]]";
+"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
+"settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
 "settings.ytdlRawOptions.label" = "Параметри Raw";
 "settings.ytdlSearchPath.desc" = "IINA пошукає youtube-dl у цій директорії. Потрібне перезавантаження.";
 "settings.ytdlSearchPath.label" = "Інший шлях до youtube-dl";
@@ -758,7 +791,6 @@
 "settings.subAlignX.items.0" = "зліва";
 "settings.subAlignX.items.1" = "по центру";
 "settings.subAlignX.items.2" = "Справа";
-"settings.subAlignX.label" = "Y";
 "settings.subAlignY.items.0" = "Вгорі";
 "settings.subAlignY.items.1" = "По центру";
 "settings.subAlignY.items.2" = "Внизу";
@@ -771,20 +803,37 @@
 "settings.subAutoLoadSearchPath.desc" = "Папки відокремлюються двокрапками (:). Відносні шляхи та зірочки (*) в кінці допускаються.";
 "settings.subAutoLoadSearchPath.label" = "Також шукати субтитри у цих папках";
 "settings.subBlur.label" = "Розмиття";
+"settings.subBold.desc" = "sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
 "settings.subBold.label" = "Жирний";
 "settings.subItalic.label" = "Курсив";
 "settings.subLang.desc" = "Цей параметр буде збережено як мовний код ISO 639-2 та буде працювати для mpv і opensubtitles.";
+"settings.subOverrideLevel.items.0" = "так";
+"settings.subOverrideLevel.items.0.desc" = "Застосувати всі параметри стилів у цьому розділі.";
+"settings.subOverrideLevel.items.1" = "сила";
+"settings.subOverrideLevel.items.1.desc" = "Застосувати всі стилі субтитрів.";
+"settings.subOverrideLevel.items.2" = "видалити";
+"settings.subOverrideLevel.items.2.desc" = "Радикально вилучати всі теги ASS та стилі з субтитрів.";
+"settings.subOverrideLevel.items.3" = "масштаб";
+"settings.subOverrideLevel.items.3.desc" = "Застосувати налаштування масштабування на додаток до стилів в цьому розділі.";
+"settings.subOverrideLevel.items.4" = "ні";
+"settings.subOverrideLevel.items.4.desc" = "Відображати субтитри, як зазначені в сценарії субтитрів, без змін.";
 "settings.subPos.label" = "Вертикальна позиція";
 "settings.subScaleWithWindow.label" = "Масштабувати субтитри відносно розміру вікна";
 "settings.subSpacing.label" = "Інтервал шрифту";
 
 // Settings - UI
+"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
 "settings.alwaysFloatOnTop.label" = "Завджи зверху під час перегляду";
 "settings.alwaysShowOnTopIcon.label" = "Завжди показувати статус «Поверх усіх вікон» у заголовку вікна";
 "settings.arrowBtnAction.items.0" = "перемикання швидкості";
 "settings.arrowBtnAction.items.1" = "переходу до попереднього / наступного файлу";
 "settings.arrowBtnAction.items.2" = "перемотування назад / уперед";
 "settings.arrowBtnAction.label" = "Задіяти кнопки ліворуч / праворуч для";
+"settings.controlBarAutoHideTimeout.label" = "Автоматично приховати через";
 "settings.controlBarStickToCenter.label" = "Фіксувати в центрі при переміщуванні";
 "settings.disableAnimations.desc" = "Коли параметр \"Зменшити рух\" увімкнено в macOS у налаштуваннях доступності, IINA зменшить анімацію інтерфейсу користувача, яка, як відомо, спричиняє проблеми тих, хто має вестибулярні порушення. Якщо цього не вистачить, це налаштування може використовуватися для зменшення руху більше, усунувши анімації інтерфейсу користувача.";
 "settings.disableAnimations.label" = "Вимкнути анімації";
@@ -819,6 +868,8 @@
 "settings.themeMaterial.items.2" = "світла";
 "settings.themeMaterial.items.4" = "як системна";
 "settings.themeMaterial.label" = "Оформлення";
+"settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
+"settings.thumbnailWidth.label" = "Thumbnail width";
 "settings.togglePipByMinimizingWindow.label" = "Перемкнути «Картинка в картинці» згортанням / розгортанням вікна";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "Лише для відеофайлів";
 "settings.usePhysicalResolution.label" = "Враховувати фізичну роздільність на дисплеях Retina";
@@ -831,6 +882,7 @@
 "settings.enableAdvancedSettings.desc" = "Для набуття чинності наступні параметри потребують перезапуску IINA.";
 "settings.enableAdvancedSettings.label" = "Увімкнути розширені параметри";
 "settings.enableLogging.label" = "Увімкнути журналювання";
+"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
 "settings.logLevel.items.0" = "Детальний";
 "settings.logLevel.items.1" = "Налагодження";
 "settings.logLevel.items.2" = "Застереження";
@@ -844,34 +896,48 @@
 "settings.$About" = "Про застосунок";
 "settings.$Accessibility" = "Доступність";
 "settings.$AdditionalMpvOptions" = "Додаткові параметри mpv";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
 "settings.$Advanced" = "Додатково";
 "settings.$Align" = "Вирівнювання";
-"settings.$AlwaysWhenPlaying" = "Завжди";
+"settings.$AlwaysWhenPlaying" = "Always when playing a new file";
 "settings.$Appearance" = "Оформлення";
 "settings.$AssrtAPIToken" = "API-маркер Assrt";
-"settings.$Audio" = "Аудіо";
 "settings.$Author" = "Автор";
 "settings.$AutoLoad" = "Автоматичне завантаження";
 "settings.$Background" = "Фон";
 "settings.$Behavior" = "Поведінка";
 "settings.$Border" = "Контур";
+"settings.$BrowserExtensions" = "Розширення браузера";
 "settings.$Cache" = "Кеш";
 "settings.$Cancel" = "Скасувати";
 "settings.$CheckForUpdates" = "Перевіряти наявність оновлень";
+"settings.$CheckForUpdates.items.3600" = "Щогодини";
+"settings.$CheckForUpdates.items.86400" = "Щодня";
+"settings.$CheckForUpdates.items.604800" = "Щотижня";
+"settings.$CheckForUpdates.items.2629800" = "Щомісяця";
+"settings.$Chrome" = "Chrome";
 "settings.$ClearCache" = "Очистити кеш";
-"settings.$ClearPlaybackHistory" = "Очистити історію перегляду…";
-"settings.$ClearSavedPlaybackProgress" = "Очистити збережений прогрес перегляду…";
-"settings.$ClearThumbnailCache" = "Очистити кеш мініатюр…";
+"settings.$ClearPlaybackHistory" = "Почистити історію перегляду";
+"settings.$ClearSavedPlaybackProgress" = "Очистити збережений прогрес перегляду";
+"settings.$ClearThumbnailCache" = "Почистити кеш мініатюр";
 "settings.$Color" = "Колір";
+"settings.$ColorHDR" = "Колір і HDR";
+"settings.$CommunityPlugins" = "Community Plugins";
+"settings.$CreateAnEmptySet" = "Create an empty set…";
 "settings.$Customize" = "Настроїти…";
+"settings.$Decoding" = "Decoding";
 "settings.$DefaultApplication" = "Стандартна програма";
 "settings.$DefaultEncoding" = "Стандартне кодування";
-"settings.$DeleteAllPlaybackHistories" = "Кнопка нижче видалить усю історію перегляду та елементи меню «Відкрити останні».";
+"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
 "settings.$DeleteAllWatchLater" = "Кнопка нижче видалить усі файли з папки відкладеного перегляду. Ці файли містять увесь прогрес перегляду та налаштування, застосовані під час перегляду.";
-"settings.$DoNotResize" = "Ніколи";
+"settings.$DoNotResize" = "Do not resize";
+"settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Не вдалося завантажити сторінку.";
+"settings.$Firefox" = "Firefox";
 "settings.$Font" = "Шрифт";
 "settings.$GetBrowserExtensionsForIINA" = "Отримати розширення браузерів для IINA";
+"settings.$GetPlugins" = "Get Plugins…";
+"settings.$Hardware" = "Hardware";
 "settings.$Height" = "Висота";
 "settings.$Help" = "Допомога";
 "settings.$History" = "Історія";
@@ -879,48 +945,69 @@
 "settings.$ImportAnExistingConfigFile" = "Імпортувати наявний файл конфігурації";
 "settings.$InitialWindowPosition" = "Початкове положення вікна";
 "settings.$InitialWindowSize" = "Початковий розмір вікна";
+"settings.$InputGithubURL" = "Input a Github URL";
 "settings.$Install" = "Встановити";
-"settings.$InstallLocalPackage" = "Встановити пакет…";
+"settings.$InstallLocalPackage" = "Install Local Package…";
+"settings.$Installed" = "Встановлено";
+"settings.$Installing" = "Installing";
+"settings.$KeyBindingSet" = "Key binding set";
 "settings.$Layout" = "Розташування";
+"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
+"settings.$LiveText" = "Live Text";
+"settings.$Logging" = "Logging";
 "settings.$Login" = "Увійти";
 "settings.$MB" = "МБ";
+"settings.$MPVSettings" = "mpv Settings";
 "settings.$Margin" = "Поле";
 "settings.$Mouse" = "Миша";
 "settings.$Network" = "Мережа";
+"settings.$NewKeyBindingSet" = "New key binding set";
+"settings.$NoSelection" = "No Selection";
 "settings.$NotLoggedIn" = "Не увійшли до";
 "settings.$OK" = "ОК";
+"settings.$OfficialPlugins" = "Official Plugins";
 "settings.$Offset" = "Зсув";
 "settings.$OnScreenController" = "Панель керування";
 "settings.$OnScreenDisplay" = "Інформація на екрані";
 "settings.$OnlineSubtitles" = "Онлайнові субтитри";
 "settings.$OpenLinksOrCurrentWebpage" = "Відкрийте в IINA посилання або поточну веб-сторінку в одне клацання. Веб-сайт повинен бути сумісним з youtube-dl.";
 "settings.$OpenLogDirectory" = "Відкрити теку журналів";
+"settings.$OpenLogWindow" = "Open the log viewer";
+"settings.$OrSelectFrom" = "Or select from available plugins";
+"settings.$Other" = "Other";
 "settings.$OtherStyles" = "Інші параметри оформлення";
 "settings.$OverrideLevel" = "Рівень перезапису";
+"settings.$Percent" = "%";
 "settings.$PictureinnPicture" = "Картинка в картинці";
 "settings.$Playlist" = "Плейлист";
 "settings.$PleaseSelectTheMediaTypes" = "Будь ласка, оберіть типи медіафайлів, для яких ви хочете призначити IINA стандартною програмою.";
 "settings.$Position" = "Позиція";
 "settings.$PreferredLanguage" = "Бажана мова";
 "settings.$RestoreAlerts" = "Відновити оповіщення";
-"settings.$RestoreAllAlertsThat" = "Кнопка нижче відновить всі оповіщення, що були приховані за допомогою прапорця \"Не показувати це повідомлення знову\".";
-"settings.$RestoreSuppressedAlerts" = "Відновити приховані оповіщення…";
+"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Відновити приховані оповіщення";
 "settings.$SPDIFOutput" = "Вихід S/PDIF";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Знятки";
-"settings.$SetIINAAsTheDefault" = "Встановити IINA як застосунок за замовчуванням…";
+"settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
 "settings.$Settings" = "Параметри";
 "settings.$Shadow" = "Тінь";
 "settings.$ShowInFinder" = "Показати у Finder";
 "settings.$ShowTheConfigFileIn" = "Показати файл конфігурації у Finder";
 "settings.$Size" = "Розмір";
 "settings.$Source" = "Джерело";
+"settings.$SubtitleSource" = "Subtitle source";
+"settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
+"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
 "settings.$SuppressMessagesFor" = "Відключити повідомлення для";
 "settings.$TextSubtitles" = "Текстові субтитри";
+"settings.$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
 "settings.$ThumbnailPreview" = "Мініатюри";
 "settings.$Toolbar" = "Панель інструментів";
 "settings.$Trackpad" = "Сенсорна панель";
 "settings.$Uninstall" = "Видалити";
-"settings.$Video" = "Відео";
+"settings.$Volume" = "гучність";
 "settings.$Website" = "Веб-сайт";
 "settings.$WhenEnteringPIP" = "При переході у режим «Картинка в картинці»";
 "settings.$WhenMediaIsOpened" = "Коли файл відкрито";
@@ -931,12 +1018,14 @@
 "settings.$XOffset" = "Зсув за віссю X";
 "settings.$Y" = "Y";
 "settings.$YOffset" = "Зсув за віссю Y";
+"settings.$YTDL" = "Online Videos (yt-dlp)";
 "settings.$YouCanInstallANew" = "Ви можете встановити новий плагін з GitHub або локальний .iinaplgz пакет. Плагіни встановлені з GitHub, можна оновлювати автоматично.";
 "settings.$bottom" = "нижнього";
 "settings.$dB" = "дБ";
 "settings.$left" = "лівого";
 "settings.$nits" = "нит";
 "settings.$ofScreen" = "% екрану";
+"settings.$onlineMediaPluginAdvice" = "The Online Media plugin is recommended";
 "settings.$point" = "точок";
 "settings.$pt" = "пт";
 "settings.$right" = "правого";
@@ -944,3 +1033,4 @@
 "settings.$sideOfTheScreen" = "краю екрану";
 "settings.$toThe" = "до";
 "settings.$top" = "верхнього";
+"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";

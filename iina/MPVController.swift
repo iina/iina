@@ -479,8 +479,6 @@ class MPVController: NSObject {
 
     setUserOption(PK.subTextColorString, type: .color, forName: MPVOption.Subtitles.subColor,
                   verboseIfDefault: true)
-    setUserOption(PK.subBgColorString, type: .color, forName: MPVOption.Subtitles.subBackColor,
-                  verboseIfDefault: true)
 
     setUserOption(PK.subBold, type: .bool, forName: MPVOption.Subtitles.subBold,
                   verboseIfDefault: true)
@@ -501,6 +499,11 @@ class MPVController: NSObject {
                   verboseIfDefault: true)
     setUserOption(PK.subShadowColorString, type: .color, forName: MPVOption.Subtitles.subBackColor,
                   verboseIfDefault: true)
+
+    setUserOption(PK.subBorderStyle, type: .other, forName: MPVOption.Subtitles.subBorderStyle,
+                  verboseIfDefault: true) { key in
+      String(describing: Preference.enum(for: key) as Preference.SubBorderStyle)
+    }
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX,
                   verboseIfDefault: true) { key in

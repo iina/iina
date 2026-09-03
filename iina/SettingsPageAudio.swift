@@ -46,7 +46,7 @@ class SettingsPageAudio: SettingsPage {
           .hasDescription(content: .videoThreadsDesc)
         SettingsItem.General(title: .audioDriverEnableAVFoundationLabel)
           .image(name: "waveform")
-          .withHelpLink(AppData.audioDriverHellpLink)
+          .withHelpLink(AppData.mpvManualLink.appending("/#audio-output-drivers-coreaudio"))
           .withDetailView(
             SettingsAccessory.Selection()
               .bindTo(.audioDriverEnableAVFoundation, ofType: AudioDriver.self)
@@ -66,7 +66,7 @@ class SettingsPageAudio: SettingsPage {
         SettingsItem.General(title: .text_SPDIFOutput)
           .image(name: "audio.jack.stereo")
           .hasDescription(content: .text_SPDIFOutputWarning)  // For why warning, see issue #6251.
-          .withHelpLink(AppData.spdifOutputHelpLink)
+          .withHelpLink(AppData.mpvManualLink.appending("/#options-audio-spdif"))
           .withExpandingDetailView {
             SettingsItem.Switch()
               .bindTo(.spdifAC3)
@@ -104,7 +104,7 @@ class SettingsPageAudio: SettingsPage {
           .bindTo(.replayGain, ofType: Preference.ReplayGainOption.self)
           .disableSubListOnTag(0)
           .hasDescription()
-          .withHelpLink(AppData.gainAdjustmentHelpLink)
+          .withHelpLink(AppData.mpvManualLink.appending("/#options-replaygain"))
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.replayGainPreamp)
@@ -130,7 +130,7 @@ class SettingsPageAudio: SettingsPage {
       SettingsList(title: .text_AudioOther) {
         SettingsItem.General(title: .gaplessAudioLabel)
           .image(name: "custom.waveform.2.arrow.trianglehead.2.clockwise.rotate.90")
-          .withHelpLink(AppData.gaplessAudioHelpLink)
+          .withHelpLink(AppData.mpvManualLink.appending("/#options-gapless-audio"))
           .withDetailView(
             SettingsAccessory.Selection()
               .bindTo(.gaplessAudio, ofType: Preference.GaplessAudioOption.self)

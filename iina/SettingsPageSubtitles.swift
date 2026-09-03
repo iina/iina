@@ -89,17 +89,18 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.General(title: .text_Color)
           .image(name: "paintpalette")
           .withValueView(subtitlesColorView.view)
+        SettingsItem.PopupButton()
+          .image(name: ["character.textbox.badge.sparkles", "square.dashed.inset.filled", "square.dashed"])
+          .bindTo(.subBorderStyle, ofType: Preference.SubBorderStyle.self)
+          .withHelpLink(AppData.mpvManualLink.appending("/#options-sub-border-style"))
         SettingsItem.General(title: .text_Border)
-          .image(name: "rectangle.dashed")
+          .image(name: ["inset.filled.circle.dashed", "circle.dashed.inset.filled", "circle.dashed.inset.fill"])
           .withValueView(subtitlesBorderView.view)
-      }
-
-      SettingsList {
         SettingsItem.General(title: .text_Shadow)
-          .image(name: ["lightspectrum.horizontal", "lightbulb"])
+          .image(name: ["shadow"])
           .withValueView(subtitlesShadowView.view)
         SettingsItem.General(title: .text_OtherStyles)
-          .image(name: ["star.leadinghalf.filled", "star.leadinghalf.fill"])
+          .image(name: ["textformat.characters.arrow.left.and.right", "star.leadinghalf.filled", "star.leadinghalf.fill"])
           .withExpandingDetailView {
             SettingsItem.Input()
               .bindTo(.subBlur)
@@ -329,17 +330,9 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
 fileprivate class SubtitlesColorView: SettingsAccessory.Base {
   override init() {
     super.init()
-
-    let colorLabel = ui.smallLabel(bindTo: .text_Color)
     let colorWell = ui.colorWell(bindTo: .subTextColorString)
-
-    let backgroundLabel = ui.smallLabel(bindTo: .text_Background)
-    let backgroundWell = ui.colorWell(bindTo: .subBgColorString)
-
-    let stackView = ui.hStack(colorLabel, colorWell, backgroundLabel, backgroundWell)
-
-    view.addSubview(stackView)
-    stackView.padding(.top(8), .bottom(8), .leading, .trailing)
+    view.addSubview(colorWell)
+    colorWell.padding(.top(8), .bottom(8), .leading, .trailing)
   }
 }
 

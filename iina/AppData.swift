@@ -63,17 +63,8 @@ struct AppData {
   static let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
   static let firefoxExtensionLink = "https://addons.mozilla.org/addon/open-in-iina-x"
   static let toneMappingHelpLink = "https://en.wikipedia.org/wiki/Tone_mapping"
-  static let targetPeakHelpLink = "https://mpv.io/manual/stable/#options-target-peak"
-  static let algorithmHelpLink = "https://mpv.io/manual/stable/#options-tone-mapping"
   static let disableAnimationsHelpLink = "https://developer.apple.com/design/human-interface-guidelines/accessibility#Motion"
-  static let cachePauseInitialHelpLink = "https://mpv.io/manual/stable/#options-cache-pause-initial"
-  static let cachePauseWaitHelpLink = "https://mpv.io/manual/stable/#options-cache-pause-wait"
-  static let cacheSecondsHelpLink = "https://mpv.io/manual/stable/#options-cache-secs"
-  static let demuxerMaxBytesHelpLink = "https://mpv.io/manual/stable/#options-demuxer-max-bytes"
-  static let gainAdjustmentHelpLink = "https://mpv.io/manual/stable/#options-replaygain"
-  static let gaplessAudioHelpLink = "https://mpv.io/manual/stable/#options-gapless-audio"
-  static let audioDriverHellpLink = "https://mpv.io/manual/stable/#audio-output-drivers-coreaudio"
-  static let spdifOutputHelpLink = "https://mpv.io/manual/stable/#options-audio-spdif"
+  static let mpvManualLink = "https://mpv.io/manual/stable"
 
   static let widthWhenNoVideo = 640
   static let heightWhenNoVideo = 360

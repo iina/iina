@@ -1058,6 +1058,15 @@ class MainWindowController: PlayerWindowController {
     if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)
     }
+
+    if !keyBinding.isIINACommand {
+      switch keyBinding.action.first! {
+      case MPVCommand.showProgress.rawValue:
+        player.sendOSD(.showTime(player.info.progress))
+      default: ()
+      }
+    }
+
     return success
   }
 
@@ -2708,7 +2717,7 @@ class MainWindowController: PlayerWindowController {
     if osdAnimationState == .shown, let osdLastMessage = self.osdLastMessage {
       let message: OSDMessage
       switch osdLastMessage {
-      case .pause, .resume:
+      case .pause, .resume, .showTime(_):
         message = osdLastMessage
       case .seek(_, _, _):
         let current = player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder

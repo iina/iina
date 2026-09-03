@@ -101,6 +101,11 @@ class PlaybackInfo {
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
 
+  var progress: Double {
+    guard let progress = videoPosition / videoDuration else { return 0 }
+    return progress
+  }
+
   /// Remaining playback time.
   ///
   /// This will or will not reflect the speed at which playback is occurring depending upon whether the `scaleRemainingTime`

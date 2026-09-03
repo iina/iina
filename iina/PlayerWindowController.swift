@@ -315,7 +315,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
       case MPVCommand.screenshot.rawValue:
         return player.screenshot(fromKeyBinding: keyBinding)
-        
+
       default:
         returnValue = player.mpv.command(rawString: keyBinding.rawAction)
       }

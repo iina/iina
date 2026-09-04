@@ -119,6 +119,26 @@ class MPVController: NSObject {
 
   let observeProperties: [String: mpv_format] = [
     MPVProperty.trackList: MPV_FORMAT_NONE,
+    MPVProperty.subText: MPV_FORMAT_STRING,
+    // VR2D draws subtitles itself while reprojection is on and takes their
+    // styling from mpv, so it has to know when any of it changes — whichever
+    // route the change came by.
+    MPVOption.Subtitles.subFont: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subFontSize: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subColor: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subBorderColor: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subBorderSize: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subBackColor: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subShadowColor: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subShadowOffset: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subBold: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subItalic: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subBlur: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subSpacing: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subScaleByWindow: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subAlignX: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subMarginX: MPV_FORMAT_NONE,
+    MPVOption.Subtitles.subMarginY: MPV_FORMAT_NONE,
     MPVProperty.vf: MPV_FORMAT_NONE,
     MPVProperty.af: MPV_FORMAT_NONE,
     MPVProperty.audioDeviceList: MPV_FORMAT_NONE,
@@ -1281,6 +1301,25 @@ class MPVController: NSObject {
     case MPVProperty.audioDeviceList:
       DispatchQueue.main.async { self.player.audioDeviceListChanged() }
 
+    case MPVProperty.subText:
+      // Drawn by VR2D over the flattened picture when reprojection is on, since
+      // mpv's own drawing would be warped along with the video.
+      let text = (property.format == MPV_FORMAT_STRING)
+        ? String(cString: UnsafePointer<UnsafePointer<CChar>>(OpaquePointer(property.data)!).pointee)
+        : ""
+      DispatchQueue.main.async { self.player.vr2d.subtitleTextChanged(text) }
+
+    case MPVOption.Subtitles.subFont, MPVOption.Subtitles.subFontSize,
+         MPVOption.Subtitles.subColor, MPVOption.Subtitles.subBorderColor,
+         MPVOption.Subtitles.subBorderSize, MPVOption.Subtitles.subBackColor,
+         MPVOption.Subtitles.subShadowColor, MPVOption.Subtitles.subShadowOffset,
+         MPVOption.Subtitles.subBold, MPVOption.Subtitles.subItalic,
+         MPVOption.Subtitles.subBlur, MPVOption.Subtitles.subSpacing,
+         MPVOption.Subtitles.subScaleByWindow,
+         MPVOption.Subtitles.subAlignX, MPVOption.Subtitles.subMarginX,
+         MPVOption.Subtitles.subMarginY:
+      DispatchQueue.main.async { self.player.vr2d.subtitleStyleChanged() }
+
     case MPVProperty.videoParams:
       DispatchQueue.main.async { self.player.postNotification(.iinaVideoParamsChanged) }
 
@@ -1437,7 +1476,10 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      DispatchQueue.main.async { self.player.subScaleChanged(data) }
+      DispatchQueue.main.async {
+        self.player.subScaleChanged(data)
+        self.player.vr2d.subtitleStyleChanged()
+      }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough
@@ -1447,7 +1489,10 @@ class MPVController: NSObject {
         break
       }
       if name == MPVOption.Subtitles.subPos {
-        DispatchQueue.main.async { self.player.subPosChanged(data) }
+        DispatchQueue.main.async {
+        self.player.subPosChanged(data)
+        self.player.vr2d.subtitleStyleChanged()
+      }
       } else {
         DispatchQueue.main.async { self.player.secondarySubPosChanged(data) }
       }

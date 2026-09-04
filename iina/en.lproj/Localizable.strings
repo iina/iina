@@ -1034,3 +1034,56 @@
 "settings.$toThe" = "to the";
 "settings.$top" = "top";
 "settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
+
+/* VR2D */
+"vr2d.off" = "Off";
+"vr2d.menu" = "VR Video";
+"vr2d.projection" = "Projection";
+"vr2d.layout" = "Stereo Layout";
+"vr2d.eye" = "Eye";
+"vr2d.look_around" = "Look Around";
+"vr2d.next" = "Try the Next One";
+"vr2d.auto_plain" = "Auto";
+"vr2d.auto" = "Auto (%@)";
+"vr2d.projection.he" = "180° Equirectangular";
+"vr2d.projection.e" = "360° Equirectangular";
+"vr2d.projection.fisheye" = "Fisheye";
+"vr2d.projection.eac" = "Equi-Angular Cubemap";
+"vr2d.layout.mono" = "Monoscopic";
+"vr2d.layout.sbs" = "Side by Side";
+"vr2d.layout.sbs_swapped" = "Side by Side, Right Eye First";
+"vr2d.layout.tb" = "Over Under";
+"vr2d.layout.tb_swapped" = "Over Under, Bottom Eye First";
+"vr2d.eye.left" = "Left";
+"vr2d.eye.right" = "Right";
+"vr2d.eye.swap" = "Swap";
+"vr2d.look_up" = "Look Up";
+"vr2d.look_down" = "Look Down";
+"vr2d.look_left" = "Look Left";
+"vr2d.look_right" = "Look Right";
+"vr2d.zoom_in" = "Zoom In";
+"vr2d.zoom_out" = "Zoom Out";
+"vr2d.recentre" = "Recentre";
+"osd.vr2d_on" = "VR2D on — %@";
+"osd.vr2d_off" = "VR2D off";
+"osd.vr2d_source" = "VR2D — %@";
+"osd.vr2d_eye" = "VR2D — %@ eye";
+"osd.vr2d_filter_conflict" = "VR2D — turn off the VR2D plugin; it is reprojecting on the CPU";
+
+/* VR2D */
+"settings.$LookingAround" = "Looking Around";
+"settings.$VRVideo" = "VR Video";
+"settings.$degrees" = "°";
+"settings.vr2dAggressiveDetection.desc" = "Accept a bare \"180\" or \"360\", or a headset name, as evidence — but only when the shape of the frame agrees. Off by default, because plenty of ordinary files contain them.";
+"settings.vr2dAggressiveDetection.label" = "Also act on weak hints";
+"settings.vr2dAutoDetect.desc" = "Turn reprojection on by itself when a file's name or its container says it is VR. Ordinary videos are left alone.";
+"settings.vr2dAutoDetect.label" = "Flatten VR video automatically";
+"settings.vr2dDragSensitivity.desc" = "1 tracks the cursor exactly: the point you grabbed stays under the pointer.";
+"settings.vr2dDragSensitivity.label" = "Drag sensitivity";
+"settings.vr2dEye.items.0" = "Left";
+"settings.vr2dEye.items.1" = "Right";
+"settings.vr2dEye.label" = "Eye";
+"settings.vr2dInvertDrag.label" = "Invert drag direction";
+"settings.vr2dKeyboardStep.label" = "Keyboard step";
+"settings.vr2dStartHorizontalFov.desc" = "Measured across the picture, which is how the width of a shot actually reads on screen.";
+"settings.vr2dStartHorizontalFov.label" = "Starting field of view";

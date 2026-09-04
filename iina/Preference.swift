@@ -324,6 +324,23 @@ struct Preference {
 
     static let displayKeyBindingRawValues = Key("displayKeyBindingRawValues")
 
+    // MARK: VR2D
+
+    /** Turn reprojection on by itself when a file is recognised as VR. */
+    static let vr2dAutoDetect = Key("vr2dAutoDetect")
+    /** Also act on weak hints, such as a bare "180" or the word "VR". */
+    static let vr2dAggressiveDetection = Key("vr2dAggressiveDetection")
+    /** Starting field of view, measured horizontally, in degrees. */
+    static let vr2dStartHorizontalFov = Key("vr2dStartHorizontalFov")
+    /** Multiplier on drag panning; 1 tracks the cursor exactly. */
+    static let vr2dDragSensitivity = Key("vr2dDragSensitivity")
+    /** Invert the drag direction. */
+    static let vr2dInvertDrag = Key("vr2dInvertDrag")
+    /** Degrees moved per keyboard pan step. */
+    static let vr2dKeyboardStep = Key("vr2dKeyboardStep")
+    /** Which eye of a stereo pair to show. */
+    static let vr2dEye = Key("vr2dEye")
+
     /** unused */
     // static let resizeFrameBuffer = Key("resizeFrameBuffer")
 
@@ -374,6 +391,25 @@ struct Preference {
   }
 
   // MARK: - Enums
+
+  /// Which eye of a stereo pair VR2D shows.
+  enum VR2DEyeOption: Int, InitializingFromKey, CaseIterable {
+    case left = 0
+    case right
+
+    static var defaultValue = VR2DEyeOption.left
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .left: "left"
+      case .right: "right"
+      }
+    }
+  }
 
   enum ActionAfterLaunch: Int, InitializingFromKey, CaseIterable {
     case welcomeWindow = 0
@@ -1053,6 +1089,13 @@ struct Preference {
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
+    .vr2dAutoDetect: true,
+    .vr2dAggressiveDetection: false,
+    .vr2dStartHorizontalFov: 105.0,
+    .vr2dDragSensitivity: 1.0,
+    .vr2dInvertDrag: false,
+    .vr2dKeyboardStep: 5.0,
+    .vr2dEye: VR2DEyeOption.left.rawValue,
     .receiveBetaUpdate: false,
     .actionAfterLaunch: ActionAfterLaunch.welcomeWindow.rawValue,
     .alwaysOpenInNewWindow: true,

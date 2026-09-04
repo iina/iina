@@ -830,12 +830,28 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  /// Subtitles for a reprojected video, drawn over the flattened picture rather
+  /// than warped into it. See `VR2DSubtitleView`.
+  lazy var vr2dSubtitleView = VR2DSubtitleView()
+
   func addVideoViewToWindow() {
     if videoView.superview != nil {
       videoView.removeFromSuperview()
     }
     videoViewContainer.addSubview(videoView)
     videoView.translatesAutoresizingMaskIntoConstraints = false
+
+    // Sits on the video, below everything IINA puts on top of it.
+    if vr2dSubtitleView.superview == nil {
+      videoViewContainer.addSubview(vr2dSubtitleView, positioned: .above, relativeTo: videoView)
+      NSLayoutConstraint.activate([
+        vr2dSubtitleView.leadingAnchor.constraint(equalTo: videoView.leadingAnchor),
+        vr2dSubtitleView.trailingAnchor.constraint(equalTo: videoView.trailingAnchor),
+        vr2dSubtitleView.topAnchor.constraint(equalTo: videoView.topAnchor),
+        vr2dSubtitleView.bottomAnchor.constraint(equalTo: videoView.bottomAnchor,
+                                                 constant: -12),
+      ])
+    }
 
     for constraint in videoViewConstraints.values {
       constraint.isActive = false

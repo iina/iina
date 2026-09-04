@@ -212,6 +212,9 @@ class PlayerCore: NSObject {
 
   var mpv: MPVController!
 
+  /// VR reprojection: what the source is and where the viewer is looking.
+  lazy var vr2d = VR2DController(player: self)
+
   var receivedEndFileWhileLoading: Bool = false
 
   var plugins: [JavascriptPluginInstance] = []
@@ -1433,8 +1436,90 @@ class PlayerCore: NSObject {
     }
   }
 
+  // MARK: - VR2D
+  //
+  // VR2D needs a handful of things from mpv. They go through here because only
+  // `VideoView` and `MPVController` may talk to mpv directly.
+
+  /// How the source is packed, as far as mpv can tell: the frame size and the
+  /// container's stereoscopic flag.
+  func vr2dSourceInfo() -> (width: Int, height: Int, stereoIn: String?) {
+    return (mpv.getInt(MPVProperty.width), mpv.getInt(MPVProperty.height),
+            mpv.getString(MPVProperty.videoParamsStereoIn))
+  }
+
+  /// The size mpv renders the video at, which is the size of the buffer the
+  /// reprojection samples from.
+  func vr2dDisplaySize() -> (width: Int, height: Int) {
+    return (mpv.getInt(MPVProperty.dwidth), mpv.getInt(MPVProperty.dheight))
+  }
+
+  /// The current video filter chain, for spotting one that is already
+  /// reprojecting the frame on the CPU.
+  func vr2dVideoFilters() -> String? {
+    return mpv.getString(MPVProperty.vf)
+  }
+
+  /// Stop mpv rendering ahead of time and waiting for each frame's display
+  /// time, which otherwise holds up a redraw that only wants to move the
+  /// camera. Returns the previous value so it can be put back.
+  @discardableResult
+  func vr2dSetVideoTimingOffset(_ offset: Double?) -> Double {
+    let previous = mpv.getDouble(MPVOption.Miscellaneous.videoTimingOffset)
+    if let offset { mpv.setDouble(MPVOption.Miscellaneous.videoTimingOffset, offset) }
+    return previous
+  }
+
+  /// Stop mpv compositing subtitles into the frame, so VR2D can draw them over
+  /// the flattened picture instead. Returns the previous value.
+  @discardableResult
+  func vr2dSetSubtitleRendering(_ enabled: Bool?) -> Bool {
+    let previous = mpv.getFlag(MPVOption.Subtitles.subVisibility)
+    if let enabled { mpv.setFlag(MPVOption.Subtitles.subVisibility, enabled) }
+    return previous
+  }
+
+  /// Everything needed to draw a subtitle the way mpv would have drawn it.
+  ///
+  /// Read from mpv rather than from the preferences because mpv holds the
+  /// effective values: IINA pushes its settings there, and so does `mpv.conf`.
+  func vr2dSubtitleStyle() -> VR2DSubtitleStyle {
+    func colour(_ name: String) -> NSColor? {
+      mpv.getString(name).flatMap(NSColor.init(mpvColorString:))
+    }
+    return VR2DSubtitleStyle(
+      fontName: mpv.getString(MPVOption.Subtitles.subFont) ?? "sans-serif",
+      fontSize: mpv.getDouble(MPVOption.Subtitles.subFontSize),
+      scale: mpv.getDouble(MPVOption.Subtitles.subScale),
+      scaleByWindow: mpv.getFlag(MPVOption.Subtitles.subScaleByWindow),
+      bold: mpv.getFlag(MPVOption.Subtitles.subBold),
+      italic: mpv.getFlag(MPVOption.Subtitles.subItalic),
+      color: colour(MPVOption.Subtitles.subColor),
+      borderColor: colour(MPVOption.Subtitles.subBorderColor),
+      borderSize: mpv.getDouble(MPVOption.Subtitles.subBorderSize),
+      backColor: colour(MPVOption.Subtitles.subBackColor),
+      shadowColor: colour(MPVOption.Subtitles.subShadowColor),
+      shadowOffset: mpv.getDouble(MPVOption.Subtitles.subShadowOffset),
+      blur: mpv.getDouble(MPVOption.Subtitles.subBlur),
+      spacing: mpv.getDouble(MPVOption.Subtitles.subSpacing),
+      alignX: mpv.getString(MPVOption.Subtitles.subAlignX) ?? "center",
+      marginX: mpv.getDouble(MPVOption.Subtitles.subMarginX),
+      marginY: mpv.getDouble(MPVOption.Subtitles.subMarginY),
+      position: mpv.getDouble(MPVOption.Subtitles.subPos))
+  }
+
   func toggleSubVisibility(_ set: Bool? = nil) {
     let newState = set ?? !info.isSubVisible
+    // While VR2D is drawing subtitles itself, mpv's own visibility flag is held
+    // off so it stops compositing them into the frame. Handing this straight to
+    // mpv would fight that, and would turn the warped subtitles back on. Show
+    // and hide the flattened ones instead.
+    if vr2d.isDrawingSubtitles {
+      info.isSubVisible = newState
+      vr2d.setSubtitlesVisible(newState)
+      sendOSD(newState ? .subVisible : .subHidden)
+      return
+    }
     mpv.setFlag(MPVOption.Subtitles.subVisibility, newState)
   }
 
@@ -2233,6 +2318,8 @@ class PlayerCore: NSObject {
         AppDelegate.shared.noteNewRecentDocumentURL(url)
       }
     }
+    vr2d.fileLoaded()
+
     postNotification(.iinaFileLoaded)
     events.emit(.fileLoaded, data: info.currentURL?.absoluteString ?? "")
 
@@ -2516,6 +2603,9 @@ class PlayerCore: NSObject {
   }
 
   func subVisibilityChanged(_ visible: Bool) {
+    // VR2D holds this flag off while it draws subtitles itself; that is not the
+    // user hiding them, so it must not be reported as such.
+    guard !vr2d.isDrawingSubtitles else { return }
     guard info.isSubVisible != visible else { return }
     info.isSubVisible = visible
     sendOSD(visible ? .subVisible : .subHidden)
@@ -2570,6 +2660,7 @@ class PlayerCore: NSObject {
       // video size changed
       info.displayWidth = dwidth
       info.displayHeight = dheight
+      vr2d.videoGeometryChanged()
       notifyWindowVideoSizeChanged()
     }
   }

@@ -168,6 +168,7 @@ class SettingsWindow: CommonWindow {
 
     // Add the sidebar and content view controllers to the split view
     let sidebarSplitItem = NSSplitViewItem(sidebarWithViewController: sidebarViewController)
+    sidebarSplitItem.maximumThickness = 200
     sidebarSplitItem.minimumThickness = 200
     sidebarSplitItem.canCollapse = false
     splitViewController.addSplitViewItem(sidebarSplitItem)

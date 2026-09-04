@@ -369,7 +369,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     PluginInputManager.handle(
       input: normalizedKeyCode, event: .keyDown, player: player,
       arguments: keyEventArgs(event), handler: {
-      if let kb = PlayerCore.keyBindings[normalizedKeyCode] {
+      if let kb = PlayerCore.keyBinding(for: normalizedKeyCode) {
         self.handleKeyBinding(kb)
         return true
       }

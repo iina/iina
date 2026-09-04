@@ -12,7 +12,8 @@ class MainWindow: CommonWindow {
   var forceKeyAndMain = false
 
   override func keyDown(with event: NSEvent) {
-    if menu?.performKeyEquivalent(with: event) == true {
+    if !IINAApplication.isBoundNumpadKeyEvent(event),
+       menu?.performKeyEquivalent(with: event) == true {
       return
     }
     /// Forward all key events which the window receives to its controller.

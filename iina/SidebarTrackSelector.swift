@@ -6,11 +6,12 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
+class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate {
   private let trackType: MPVTrack.TrackType
   private unowned let player: PlayerCore
 
   private var tableView: NSTableView
+  private var contextMenu: NSMenu?
 
   init(_ trackType: MPVTrack.TrackType, player: PlayerCore, observedKeys: [Notification.Name]) {
     self.player = player
@@ -26,6 +27,14 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     tableView.headerView = nil
     tableView.backgroundColor = .clear
     tableView.gridStyleMask = [.solidHorizontalGridLineMask]
+
+    if trackType == .sub || trackType == .secondSub {
+      let menu = NSMenu(title: "Subtitle Actions")
+      menu.delegate = self
+      menu.autoenablesItems = false
+      contextMenu = menu
+      tableView.menu = menu
+    }
 
     translatesAutoresizingMaskIntoConstraints = false
     documentView = tableView
@@ -93,6 +102,41 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     }
     player.setTrack(trackId, forType: trackType)
     tableView.deselectAll(nil)
+  }
+
+  func menuNeedsUpdate(_ menu: NSMenu) {
+    menu.removeAllItems()
+
+    let clickedRow = tableView.clickedRow
+    guard clickedRow > 0, let track = player.info.trackList(trackType)[at: clickedRow - 1] else { return }
+
+    if track.isExternal {
+      menu.addItem(
+        withTitle: NSLocalizedString(
+          "quicksetting.sub_remove",
+          comment: "Remove Subtitle Track"
+        ),
+        action: #selector(removeSubtitleFromMenu(_:)),
+        target: self,
+        obj: track
+      )
+    } else {
+      let item = menu.addItem(
+        withTitle: NSLocalizedString(
+          "quicksetting.sub_remove_unavailable",
+          comment: "Embedded subtitles cannot be removed"
+        ),
+        action: nil,
+        target: nil
+      )
+      item.isEnabled = false
+    }
+  }
+
+  @objc private func removeSubtitleFromMenu(_ sender: NSMenuItem) {
+    guard let track = sender.representedObject as? MPVTrack,
+          track.isExternal,
+          player.subRemove(id: track.id) else { return }
   }
 
   private func makeCell(identifier: NSUserInterfaceItemIdentifier, columnID: NSUserInterfaceItemIdentifier) -> CellView {

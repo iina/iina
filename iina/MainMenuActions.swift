@@ -404,6 +404,8 @@ extension MainMenuActionHandler {
     // return if last search is not finished
     guard let url = player.info.currentURL, !player.isSearchingOnlineSubtitle else { return }
 
+    let providerID = sender.representedObject as? String ?? Preference.string(for: .onlineSubProvider)
+    let removeDownloadedFilesWhenUnloaded = !(providerID?.hasPrefix("plugin:") ?? false)
     player.isSearchingOnlineSubtitle = true
     OnlineSubtitle.search(forFile: url, player: player, providerID: sender.representedObject as? String) { urls in
       if urls.isEmpty {
@@ -411,7 +413,7 @@ extension MainMenuActionHandler {
       } else {
         for url in urls {
           Logger.log("Saved subtitle to \(url.path)")
-          self.player.loadExternalSubFile(url)
+          self.player.loadExternalSubFile(url, removeWhenUnloaded: removeDownloadedFilesWhenUnloaded)
         }
         self.player.sendOSD(.downloadedSub(
           urls.map({ $0.lastPathComponent }).joined(separator: "\n")

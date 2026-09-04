@@ -135,6 +135,7 @@ class PlayerCore: NSObject {
   // MARK: - Fields
 
   private var observers: [NSObjectProtocol] = []
+  @Atomic private var temporarySubtitleFiles = Set<URL>()
 
   lazy var subsystem = Logger.makeSubsystem("player\(label!)", ["play.circle"])
 
@@ -1443,7 +1444,16 @@ class PlayerCore: NSObject {
     mpv.setFlag(MPVOption.Subtitles.secondarySubVisibility, newState)
   }
 
-  func loadExternalSubFile(_ url: URL, delay: Bool = false, suppressError: Bool = false) {
+  func loadExternalSubFile(_ url: URL, delay: Bool = false, suppressError: Bool = false,
+                           removeWhenUnloaded: Bool = false) {
+    let standardizedURL = url.standardizedFileURL
+    if removeWhenUnloaded {
+      $temporarySubtitleFiles.withLock {
+        $0.insert(standardizedURL)
+        return ()
+      }
+    }
+
     var track: MPVTrack?
     info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.path }) }
     if let track {
@@ -1453,6 +1463,12 @@ class PlayerCore: NSObject {
 
     mpv.command(.subAdd, args: [url.path], checkError: false, level: .verbose) { code in
       if code < 0 {
+        if removeWhenUnloaded {
+          self.$temporarySubtitleFiles.withLock {
+            $0.remove(standardizedURL)
+            return ()
+          }
+        }
         self.log("Unsupported sub: \(url.path)", level: .error)
         // only show alert when the subtitle is added manually
         guard !suppressError else { return }
@@ -1468,6 +1484,40 @@ class PlayerCore: NSObject {
         }
       }
     }
+  }
+
+  func subRemove(id: Int? = nil) -> Bool {
+    let args = id.map { [String($0)] } ?? []
+    var result = true
+    mpv.command(.subRemove, args: args, checkError: false, level: .verbose, returnValueCallback: { code in
+      if code < 0 {
+        result = false
+        self.log("Failed removing subtitle track #\(id ?? 0): error code \(code)", level: .error)
+      }
+    })
+    return result
+  }
+
+  private func cleanupTemporarySubtitleFiles() {
+    let loadedURLs = info.$subTracks.withLock { tracks in
+      Set(tracks.compactMap { $0.externalFilename }.map {
+        URL(fileURLWithPath: $0).standardizedFileURL
+      })
+    }
+    let trackedURLs = $temporarySubtitleFiles.withLock { Set($0) }
+    let unloadedURLs = trackedURLs.subtracting(loadedURLs)
+
+    for url in unloadedURLs {
+      do {
+        try FileManager.default.removeItem(at: url)
+        log("Removed temporary subtitle file \(url.path)", level: .verbose)
+      } catch CocoaError.fileNoSuchFile {
+        // Ignore if the temporary subtitle file was already cleaned up.
+      } catch {
+        log("Failed removing temporary subtitle file \(url.path): \(error.localizedDescription)", level: .warning)
+      }
+    }
+    $temporarySubtitleFiles.withLock { $0.subtract(unloadedURLs) }
   }
 
   func reloadAllSubs() {
@@ -2532,6 +2582,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     log("Track list changed")
     getTrackInfo()
+    cleanupTemporarySubtitleFiles()
     getSelectedTracks()
     let audioStatus = info.isAudio
 

@@ -20,7 +20,6 @@ fileprivate let isMacOS11: Bool = {
 fileprivate let InteractiveModeBottomViewHeight: CGFloat = 60
 
 fileprivate let UIAnimationDuration = 0.25
-fileprivate let OSDAnimationDuration = 0.5
 fileprivate let CropAnimationDuration = 0.2
 
 fileprivate extension NSStackView.VisibilityPriority {
@@ -60,7 +59,6 @@ class MainWindowController: PlayerWindowController {
 
   /** For auto hiding UI after a timeout. */
   var hideControlTimer: Timer?
-  var hideOSDTimer: Timer?
 
   /** For blacking out other screens. */
   var screens: [NSScreen] = []
@@ -93,7 +91,6 @@ class MainWindowController: PlayerWindowController {
   var oscToolbarView: NSStackView!
   var oscSliderView: NSView!
 
-  var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
   var bufferIndicatorView: BufferIndicatorView!
   var timePreviewView: TimePreviewView!
@@ -164,8 +161,7 @@ class MainWindowController: PlayerWindowController {
   var isCurrentPressInSecondStage = false
 
   /** Whether current osd needs user interaction to be dismissed */
-  var isShowingPersistentOSD = false
-  var osdContext: Any?
+  // `isShowingPersistentOSD` and `osdContext` are inherited from `PlayerWindowController`.
 
   /** Activated during interactive mode to prevent video view from being compressed */
   var aspectRatioConstraintForInteractiveMode: NSLayoutConstraint?
@@ -244,12 +240,7 @@ class MainWindowController: PlayerWindowController {
   // Animation state
 
   /// Animation state of he hide/show part
-  enum UIAnimationState {
-    case shown, hidden, willShow, willHide
-  }
-
   var animationState: UIAnimationState = .shown
-  var osdAnimationState: UIAnimationState = .hidden
 
   private var osdLastMessage: OSDMessage? = nil
 
@@ -478,7 +469,7 @@ class MainWindowController: PlayerWindowController {
     cv.addSubview(oscBottomView)
     oscFloatingView = OSCFloatingView(mainWindow: self)
     cv.addSubview(oscFloatingView)
-    osdView = OSDView(mainWindow: self)
+    osdView = OSDView()
     cv.addSubview(osdView)
     additionalInfoView = AdditionalInfoView(mainWindow: self)
     cv.addSubview(additionalInfoView)
@@ -2170,92 +2161,7 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: OSD
 
-  /// Show a message in the on screen display.
-  /// - Parameters:
-  ///   - message: The `OSDMessage` to display.
-  ///   - autoHide: If `true` (the default) the message will be hidden after a timeout.
-  ///   - forcedTimeout: Timeout after which the message will be hidden (overrides user configured timeout).
-  ///   - accessoryView: Custom view to display (if not supplied normal OSD views are used).
-  ///   - context: Additional information associated with the message.
-  /// - Attention: Do not call `displayOSD` directly, call `PlayerCore.sendOSD` instead.
-  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
-  ///     timeline indicators should not flip in a right-to-left language. Thus OSD messages referencing a position within the video
-  ///     must always use a left to right layout.
-  func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
-    guard player.displayOSD || message.alwaysEnabled, !isShowingPersistentOSD else { return }
-
-    if hideOSDTimer != nil {
-      hideOSDTimer!.invalidate()
-      hideOSDTimer = nil
-    }
-    if osdAnimationState != .shown {
-      osdAnimationState = .shown  /// set this before calling `refreshSyncUITimer()`
-      player.refreshSyncUITimer()
-    } else {
-      osdAnimationState = .shown
-    }
-
-    osdView.updateViews(fromMessage: message, player: player)
-
-    osdView.alphaValue = 1
-    osdView.isHidden = false
-    osdView.layoutSubtreeIfNeeded()
-
-    if let accessoryView {
-      isShowingPersistentOSD = true
-      if context != nil {
-        osdContext = context
-      }
-
-      let heightConstraint = NSLayoutConstraint(item: accessoryView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
-      heightConstraint.priority = .defaultLow
-      heightConstraint.isActive = true
-
-      osdView.addAccessoryView(accessoryView)
-
-      // enlarge window if too small
-      let winFrame = window!.frame
-      var newFrame = winFrame
-      if (winFrame.height < 300) {
-        newFrame = winFrame.centeredResize(to: winFrame.size.satisfyMinSizeWithSameAspectRatio(NSSize(width: 500, height: 300)))
-      }
-
-      accessoryView.wantsLayer = true
-      accessoryView.layer?.opacity = 0
-
-      NSAnimationContext.runAnimationGroup({ context in
-        context.duration = AccessibilityPreferences.adjustedDuration(0.3)
-        context.allowsImplicitAnimation = true
-        window!.setFrame(newFrame, display: true)
-        osdView.layoutSubtreeIfNeeded()
-      }, completionHandler: {
-        accessoryView.layer?.opacity = 1
-      })
-    }
-
-    if autoHide {
-      let timeout = forcedTimeout ?? Preference.float(for: .osdAutoHideTimeout)
-      hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
-    }
-  }
-
-  @objc
-  func hideOSD() {
-    NSAnimationContext.runAnimationGroup({ (context) in
-      self.osdAnimationState = .willHide
-      context.duration = OSDAnimationDuration
-      osdView.animator().alphaValue = 0
-    }) {
-      if self.osdAnimationState == .willHide {
-        self.osdAnimationState = .hidden
-        self.osdView.isHidden = true
-        self.osdView.removeAccessoryView()
-      }
-    }
-    isShowingPersistentOSD = false
-    osdContext = nil
-    player.refreshSyncUITimer()
-  }
+  // `displayOSD` and `hideOSD` are inherited from `PlayerWindowController`.
 
   // MARK: - UI: Interactive mode
 

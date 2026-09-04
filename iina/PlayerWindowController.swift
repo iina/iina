@@ -8,12 +8,27 @@
 
 import Cocoa
 
+fileprivate let OSDAnimationDuration = 0.5
+
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
-  
+
   var videoView: VideoView {
     fatalError("Subclass must implement")
+  }
+
+  // MARK: - OSD
+
+  var osdView: OSDView!
+  var hideOSDTimer: Timer?
+  var osdAnimationState: UIAnimationState = .hidden
+  var isShowingPersistentOSD = false
+  var osdContext: Any?
+
+  /// Animation state of the hide/show part.
+  enum UIAnimationState {
+    case shown, hidden, willShow, willHide
   }
 
   var menuActionHandler: MainMenuActionHandler!
@@ -682,6 +697,96 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
     log("Forcing drawing, \(reason)")
     videoView.videoLayer.update(force: true)
+  }
+
+  // MARK: - OSD
+
+  /// Show a message in the on screen display.
+  /// - Parameters:
+  ///   - message: The `OSDMessage` to display.
+  ///   - autoHide: If `true` (the default) the message will be hidden after a timeout.
+  ///   - forcedTimeout: Timeout after which the message will be hidden (overrides user configured timeout).
+  ///   - accessoryView: Custom view to display (if not supplied normal OSD views are used).
+  ///   - context: Additional information associated with the message.
+  /// - Attention: Do not call `displayOSD` directly, call `PlayerCore.sendOSD` instead.
+  /// - Important: As per Apple's [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/SupportingRight-To-LeftLanguages/SupportingRight-To-LeftLanguages.html)
+  ///     timeline indicators should not flip in a right-to-left language. Thus OSD messages referencing a position within the video
+  ///     must always use a left to right layout.
+  func displayOSD(_ message: OSDMessage, autoHide: Bool = true, forcedTimeout: Float? = nil, accessoryView: NSView? = nil, context: Any? = nil) {
+    guard player.displayOSD || message.alwaysEnabled, !isShowingPersistentOSD else { return }
+
+    if hideOSDTimer != nil {
+      hideOSDTimer!.invalidate()
+      hideOSDTimer = nil
+    }
+    if osdAnimationState != .shown {
+      osdAnimationState = .shown  /// set this before calling `refreshSyncUITimer()`
+      player.refreshSyncUITimer()
+    } else {
+      osdAnimationState = .shown
+    }
+
+    osdView.updateViews(fromMessage: message, player: player)
+
+    osdView.alphaValue = 1
+    osdView.isHidden = false
+    osdView.layoutSubtreeIfNeeded()
+
+    if let accessoryView {
+      isShowingPersistentOSD = true
+      if context != nil {
+        osdContext = context
+      }
+
+      let heightConstraint = NSLayoutConstraint(item: accessoryView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
+      heightConstraint.priority = .defaultLow
+      heightConstraint.isActive = true
+
+      osdView.addAccessoryView(accessoryView)
+
+      // enlarge window if too small
+      let winFrame = window!.frame
+      var newFrame = winFrame
+      if (winFrame.height < 300) {
+        newFrame = winFrame.centeredResize(to: winFrame.size.satisfyMinSizeWithSameAspectRatio(NSSize(width: 500, height: 300)))
+      }
+
+      accessoryView.wantsLayer = true
+      accessoryView.layer?.opacity = 0
+
+      NSAnimationContext.runAnimationGroup({ context in
+        context.duration = AccessibilityPreferences.adjustedDuration(0.3)
+        context.allowsImplicitAnimation = true
+        window!.setFrame(newFrame, display: true)
+        osdView.layoutSubtreeIfNeeded()
+      }, completionHandler: {
+        accessoryView.layer?.opacity = 1
+      })
+    }
+
+    if autoHide {
+      let timeout = forcedTimeout ?? Preference.float(for: .osdAutoHideTimeout)
+      hideOSDTimer = Timer.scheduledTimer(timeInterval: TimeInterval(timeout), target: self, selector: #selector(self.hideOSD), userInfo: nil, repeats: false)
+    }
+  }
+
+  @objc
+  func hideOSD() {
+    guard let osdView else { return }
+    NSAnimationContext.runAnimationGroup({ (context) in
+      self.osdAnimationState = .willHide
+      context.duration = OSDAnimationDuration
+      osdView.animator().alphaValue = 0
+    }) {
+      if self.osdAnimationState == .willHide {
+        self.osdAnimationState = .hidden
+        osdView.isHidden = true
+        osdView.removeAccessoryView()
+      }
+    }
+    isShowingPersistentOSD = false
+    osdContext = nil
+    player.refreshSyncUITimer()
   }
 
   // MARK: - IBActions

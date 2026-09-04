@@ -257,36 +257,56 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
       parent.indicatorDirection = hasLeading ? .leading : hasTrailing ? .trailing : .hidden
     }
 
-    /// Translate vertical scrolling events to horizontal for mouse control
+    private var isVerticalGesture = false
+    private var isTrackingCurrentGesture = false
+    private var isTouchActive = false
+    private var lastTouchEndedTimestamp: TimeInterval = 0
+
     override func scrollWheel(with event: NSEvent) {
-      if event.scrollingDeltaX != 0 {
-        super.scrollWheel(with: event)
+      // If the horizontal options are few enough to fully fit without scrolling,
+      // strictly forward ALL scroll events to the parent (the sidebar).
+      if let documentView = documentView, documentView.bounds.width <= contentView.bounds.width {
+        nextResponder?.scrollWheel(with: event)
         return
       }
-
-      guard let cg = event.cgEvent?.copy() else {
-        super.scrollWheel(with: event)
-        return
+      
+      // For trackpad gestures, lock the scroll axis at the beginning of the swipe,
+      // and ensure gestures that started outside this view (e.g. over the parent sidebar)
+      // are not trapped when this view scrolls under the cursor mid-gesture.
+      if event.hasPreciseScrollingDeltas && (event.phase != [] || event.momentumPhase != []) {
+        if event.phase == .began || event.phase == .mayBegin {
+          isTrackingCurrentGesture = true
+          isTouchActive = true
+          if event.scrollingDeltaX != 0 || event.scrollingDeltaY != 0 {
+            isVerticalGesture = abs(event.scrollingDeltaY) > abs(event.scrollingDeltaX)
+          } else {
+            // If deltas are zero (e.g. at .mayBegin), default to vertical because 
+            // the main sidebar vertical scrolling is the primary user interaction.
+            isVerticalGesture = true
+          }
+        } else if event.phase == .changed {
+          if !isTouchActive {
+            isTrackingCurrentGesture = false
+          }
+        } else if event.phase == .ended || event.phase == .cancelled {
+          isTouchActive = false
+          lastTouchEndedTimestamp = event.timestamp
+        } else if event.momentumPhase == .began {
+          if !isTrackingCurrentGesture || (event.timestamp - lastTouchEndedTimestamp) >= 0.1 {
+            isTrackingCurrentGesture = false
+          }
+        } else if event.momentumPhase == .ended || event.momentumPhase == .cancelled {
+          isTrackingCurrentGesture = false
+          isTouchActive = false
+        }
+        
+        if !isTrackingCurrentGesture || isVerticalGesture {
+          nextResponder?.scrollWheel(with: event)
+          return
+        }
       }
 
-      let lineV = cg.getDoubleValueField(.scrollWheelEventDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventDeltaAxis2, value: lineV)
-
-      let pxV = cg.getDoubleValueField(.scrollWheelEventPointDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis2, value: pxV)
-
-      let fpV = cg.getDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis2, value: fpV)
-
-      guard let swapped = NSEvent(cgEvent: cg) else {
-        super.scrollWheel(with: event)
-        return
-      }
-
-      super.scrollWheel(with: swapped)
+      super.scrollWheel(with: event)
     }
   }
 }

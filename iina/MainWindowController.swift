@@ -35,6 +35,11 @@ fileprivate let minimumInitialDragDistance: CGFloat = 3.0
 fileprivate let layoutSides: [NSLayoutConstraint.Attribute] = [.top, .bottom, .leading, .trailing]
 
 class MainWindowController: PlayerWindowController {
+  private enum DockedOSCLayout {
+    static let volumeSliderWidth: CGFloat = 70
+    static let playSliderInset: CGFloat = 6
+    static let transportSpacing: CGFloat = 16
+  }
 
   override var windowNibName: NSNib.Name {
     return NSNib.Name("MainWindowController")
@@ -92,6 +97,9 @@ class MainWindowController: PlayerWindowController {
   var oscVolumeView: NSView!
   var oscToolbarView: NSStackView!
   var oscSliderView: NSView!
+  private var oscVolumeSliderWidthConstraint: NSLayoutConstraint!
+  private var oscPlaySliderTopConstraint: NSLayoutConstraint!
+  private var oscPlaySliderBottomConstraint: NSLayoutConstraint!
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
@@ -299,7 +307,7 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.showChapterPos.rawValue:
       if let newValue = change[.newKey] as? Bool {
-        (playSlider.cell as! PlaySliderCell).drawChapters = newValue
+        playSlider.drawChapters = newValue
       }
     case PK.verticalScrollAction.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -504,13 +512,14 @@ class MainWindowController: PlayerWindowController {
     self.oscVolumeView = NSView()
     oscVolumeView.translatesAutoresizingMaskIntoConstraints = false
 
-    volumeSlider.size(width: 70)
+    oscVolumeSliderWidthConstraint = volumeSlider.widthAnchor.constraint(equalToConstant: DockedOSCLayout.volumeSliderWidth)
+    oscVolumeSliderWidthConstraint.isActive = true
 
     oscVolumeView.addSubview(muteButton)
     oscVolumeView.addSubview(volumeSlider)
     muteButton.size(width: 24, height: 24)
       .padding(.vertical, .leading(4)).spacing(.trailing(4), to: volumeSlider)
-    volumeSlider.size(width: 70).center(.y)
+    volumeSlider.center(.y)
       .padding(.trailing(6))
 
     self.oscPlayControlView = NSStackView()
@@ -519,10 +528,10 @@ class MainWindowController: PlayerWindowController {
     oscPlayControlView.alignment = .centerY
     oscPlayControlView.spacing = 0
 
-    self.leftArrowButton = NSButton(image: .speedl, target: self, action: #selector(leftButtonAction))
+    self.leftArrowButton = OSCButton(image: .speedl, target: self, action: #selector(leftButtonAction))
     leftArrowButton.maxAcceleratorLevel = 5
 
-    self.rightArrowButton = NSButton(image: .speed, target: self, action: #selector(rightButtonAction))
+    self.rightArrowButton = OSCButton(image: .speed, target: self, action: #selector(rightButtonAction))
     rightArrowButton.maxAcceleratorLevel = 5
 
     [playButton, leftArrowButton, rightArrowButton].forEach { button in
@@ -555,7 +564,7 @@ class MainWindowController: PlayerWindowController {
     oscPlayControlMiddleView.translatesAutoresizingMaskIntoConstraints = false
     oscPlayControlMiddleView.orientation = .horizontal
     oscPlayControlMiddleView.alignment = .centerY
-    oscPlayControlMiddleView.spacing = 24
+    oscPlayControlMiddleView.spacing = 10
 
     self.oscToolbarView = NSStackView()
     oscToolbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -575,11 +584,16 @@ class MainWindowController: PlayerWindowController {
     oscSliderView.addSubview(leftLabel)
     oscSliderView.addSubview(rightLabel)
     oscSliderView.addSubview(playSlider)
+    leftLabel.widthAnchor.constraint(equalTo: rightLabel.widthAnchor).isActive = true
     leftLabel.padding(.leading(2)).spacing(.trailing(2), to: playSlider)
       .center(.y, with: playSlider)
     rightLabel.padding(.trailing(2)).spacing(.leading(2), to: playSlider)
       .center(.y, with: playSlider)
-    playSlider.padding(.vertical(6))
+    oscPlaySliderTopConstraint = playSlider.topAnchor.constraint(equalTo: oscSliderView.topAnchor,
+                                                                 constant: DockedOSCLayout.playSliderInset)
+    oscPlaySliderBottomConstraint = oscSliderView.bottomAnchor.constraint(equalTo: playSlider.bottomAnchor,
+                                                                          constant: DockedOSCLayout.playSliderInset)
+    NSLayoutConstraint.activate([oscPlaySliderTopConstraint, oscPlaySliderBottomConstraint])
 
     // osd
 
@@ -984,8 +998,11 @@ class MainWindowController: PlayerWindowController {
     switch oscPosition {
     case .floating:
       currentControlBar = oscFloatingView
-      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelLeftContainer)
-      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelRightContainer)
+      // QuickTime's floating controller only shows the three transport buttons. The speed labels
+      // belong to the docked layouts and must not consume width needed by the volume and toolbar
+      // groups.
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelLeftContainer)
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelRightContainer)
       oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
       oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
       oscFloatingView.oscTopView.addView(oscPlayControlView, in: .center)
@@ -993,8 +1010,8 @@ class MainWindowController: PlayerWindowController {
       // Setting the visibility priority to detach only will cause freeze when resizing the window
       // (and triggering the detach) in macOS 11.
       if !isMacOS11 {
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.mustHold, for: oscVolumeView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.mustHold, for: oscToolbarView)
         oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       }
       oscFloatingView.oscBottomView.addSubview(oscSliderView)
@@ -1030,10 +1047,43 @@ class MainWindowController: PlayerWindowController {
       oscBottomMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     }
 
-    oscPlayControlMiddleView.spacing = isFloating ? 24: 16
+    oscPlayControlMiddleView.spacing = isFloating ? 4 : DockedOSCLayout.transportSpacing
+    oscToolbarView.spacing = 0
+
+    configureQuickTimeOSC(isFloating)
 
     fadeableViews.update()
     showUI()
+  }
+
+  private func configureQuickTimeOSC(_ enabled: Bool) {
+    muteButton.setQuickTimeStyle(enabled)
+    (leftArrowButton as? OSCButton)?.setQuickTimeStyle(enabled, role: .transport)
+    (playButton as? OSCButton)?.setQuickTimeStyle(enabled, role: .primary)
+    (rightArrowButton as? OSCButton)?.setQuickTimeStyle(enabled, role: .transport)
+    playSlider.setQuickTimeStyle(enabled)
+    (volumeSlider as? VolumeSlider)?.setQuickTimeStyle(enabled)
+    oscVolumeSliderWidthConstraint?.constant = enabled ? 80 : DockedOSCLayout.volumeSliderWidth
+    oscPlaySliderTopConstraint?.constant = enabled ? 4 : DockedOSCLayout.playSliderInset
+    oscPlaySliderBottomConstraint?.constant = enabled ? 4 : DockedOSCLayout.playSliderInset
+
+    let labelColor = enabled ? NSColor.white.withAlphaComponent(0.68) : NSColor.secondaryLabelColor
+    leftLabel.textColor = labelColor
+    rightLabel.textColor = labelColor
+    oscSpeedLabelLeft.textColor = labelColor
+    oscSpeedLabelRight.textColor = labelColor
+
+    if enabled {
+      playButton.image = quickTimePlayButtonImage(paused: player.info.state != .playing)
+    } else {
+      playButton.image = NSImage(named: player.info.state == .playing ? "pause" : "play")
+    }
+    updateArrowButtons()
+  }
+
+  private func quickTimePlayButtonImage(paused: Bool) -> NSImage? {
+    .sf(paused ? "play.fill" : "pause.fill",
+        withConfiguration: .init(pointSize: 32, weight: .medium))
   }
 
   // MARK: - Mouse / Trackpad events
@@ -1098,7 +1148,14 @@ class MainWindowController: PlayerWindowController {
       log("MainWindow mouseDown @ \(event.locationInWindow)", level: .verbose)
     }
     workaroundCursorDefect()
-    // do nothing if it's related to floating OSC
+    if oscPosition == .floating,
+       !oscFloatingView.isHiddenOrHasHiddenAncestor,
+       event.inAnyOf([oscFloatingView]),
+       oscFloatingView.routeMouseDown(event) {
+      mousePosRelatedToWindow = nil
+      return
+    }
+    // do nothing if it's related to floating OSC dragging
     guard !oscFloatingView.isDragging else { return }
     mousePosRelatedToWindow = event.locationInWindow
     let consumedBySidebar = sidebars.handleMouseDown(event, at: event.locationInWindow)
@@ -2735,6 +2792,9 @@ class MainWindowController: PlayerWindowController {
 
   override func updatePlayButtonState(paused: Bool) {
     super.updatePlayButtonState(paused: paused)
+    if oscPosition == .floating {
+      playButton.image = quickTimePlayButtonImage(paused: paused)
+    }
     if paused {
       speedValueIndex = AppData.availableSpeedValues.count / 2
     }
@@ -2749,7 +2809,16 @@ class MainWindowController: PlayerWindowController {
   /// [multiLevelAccelerator](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/multilevelaccelerator)
   /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
   func updateArrowButtons() {
-    if arrowBtnFunction == .playlist {
+    if oscPosition == .floating {
+      let config = NSImage.SymbolConfiguration(pointSize: 27, weight: .semibold)
+      if arrowBtnFunction == .playlist {
+        leftArrowButton.image = .sf("backward.end.fill", withConfiguration: config)
+        rightArrowButton.image = .sf("forward.end.fill", withConfiguration: config)
+      } else {
+        leftArrowButton.image = .sf("backward.fill", withConfiguration: config)
+        rightArrowButton.image = .sf("forward.fill", withConfiguration: config)
+      }
+    } else if arrowBtnFunction == .playlist {
       leftArrowButton.image = #imageLiteral(resourceName: "nextl")
       rightArrowButton.image = #imageLiteral(resourceName: "nextr")
     } else {

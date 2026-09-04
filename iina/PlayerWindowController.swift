@@ -708,6 +708,21 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }
 
+  private func toggleControlBarAutoHide() {
+    let isHiding = !Preference.bool(for: .enableControlBarAutoHide) // toggle the current setting
+    Preference.set(isHiding, for: .enableControlBarAutoHide)
+
+    player.sendOSD(.controlBarAutoHide(isHiding))
+
+    if isHiding {
+      // For auto-hiding to work, need to update the timer.
+      player.mainWindow.updateTimer()
+    } else {
+      // The user wants the UI to be always visible, need to show it explicitly.
+      player.mainWindow.showUI()
+    }
+  }
+
   internal func handleIINACommand(_ cmd: IINACommand) {
     switch cmd {
     case .openFile:
@@ -718,6 +733,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       menuActionHandler.menuDeleteCurrentFile(.dummy)
     case .deleteCurrentFileHard:
       menuActionHandler.menuDeleteCurrentFileHard(.dummy)
+    case .toggleControlBarAutoHide:
+      toggleControlBarAutoHide()
     default:
       break
     }

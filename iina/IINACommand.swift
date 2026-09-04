@@ -38,4 +38,6 @@ enum IINACommand: String {
   case findOnlineSubs = "find-online-subs"
   case saveDownloadedSub = "save-downloaded-sub"
 
+  case toggleControlBarAutoHide = "toggle-control-bar-auto-hide"
+
 }

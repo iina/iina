@@ -874,7 +874,13 @@ struct SettingsItem {
       guard let cachedStepperValue else { return }
       let increment = cachedStepperValue < sender.doubleValue ? sender.increment : -sender.increment
       let value = textField.doubleValue + increment
-      textField.doubleValue = range.map { value.clamped(to: $0) } ?? value
+      let newValue = range.map { value.clamped(to: $0) } ?? value
+      textField.doubleValue = newValue
+      if let info = textField.infoForBinding(.value),
+         let observedObject = info[.observedObject] as? NSObject,
+         let keyPath = info[.observedKeyPath] as? String {
+        observedObject.setValue(newValue, forKeyPath: keyPath)
+      }
       self.cachedStepperValue = sender.doubleValue
     }
 
@@ -922,7 +928,7 @@ struct SettingsItem {
 
     override func initBinding() {
       if let key {
-        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
+        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue, options: [.continuouslyUpdatesValue: true])
       } else if customBinding, let customBindingBlock {
         customBindingBlock(textField)
       }

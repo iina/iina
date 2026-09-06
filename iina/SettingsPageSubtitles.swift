@@ -302,13 +302,13 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
     let boldButton = SButton(image: .sf("bold"))
     boldButton.translatesAutoresizingMaskIntoConstraints = false
     boldButton.setButtonType(.toggle)
-    boldButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subBold.rawValue)
+    boldButton.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.subBold.rawValue)
     boldButton.size(width: 32, height: 25)
 
     let italicButton = SButton(image: .sf("italic"))
     italicButton.translatesAutoresizingMaskIntoConstraints = false
     italicButton.setButtonType(.toggle)
-    italicButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subItalic.rawValue)
+    italicButton.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.subItalic.rawValue)
     italicButton.size(width: 32, height: 25)
 
     let stackView = ui.hStack(fontButton, sizeInput, boldButton, italicButton)

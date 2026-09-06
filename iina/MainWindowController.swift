@@ -568,7 +568,7 @@ class MainWindowController: PlayerWindowController {
     [leftLabel, rightLabel].forEach { label in
       label!.textColor = .secondaryLabelColor
       label!.alignment = .center
-      label!.font = .messageFont(ofSize: 11)
+      label!.font = .monospacedDigitSystemFont(ofSize: 11, weight: .regular)
       label!.widthAnchor.constraint(greaterThanOrEqualToConstant: 46).isActive = true
     }
     oscSliderView.translatesAutoresizingMaskIntoConstraints = false

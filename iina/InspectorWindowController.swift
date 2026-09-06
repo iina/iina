@@ -111,8 +111,9 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate {
 }
 
 extension InspectorWindowController: NSToolbarDelegate {
-  private static let tabs = NSToolbarItem.Identifier("Clear")
-  private static let toolbarItems = [tabs]
+  private static let frequency = NSToolbarItem.Identifier("Frequency")
+  private static let tabs = NSToolbarItem.Identifier("Tabs")
+  private static let toolbarItems = [frequency, tabs]
 
   func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
     Self.toolbarItems
@@ -123,13 +124,24 @@ extension InspectorWindowController: NSToolbarDelegate {
   }
 
   func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-    let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-    let labelKeys = ["General", "Tracks", "File", "Status"]
-    let labels = labelKeys.map { NSLocalizedString($0, comment: $0) }
-    let segmentedControl = NSSegmentedControl(labels: labels, trackingMode: .selectOne, target: self, action: #selector(toolbarSegmentChanged(_:)))
-    segmentedControl.selectedSegment = 0
-    item.view = segmentedControl
-    return item
+    switch itemIdentifier {
+    case Self.frequency:
+      let item = NSToolbarItem(itemIdentifier: itemIdentifier)
+      let popup = NSPopUpButton()
+      item.view = popup
+      return item
+    case Self.tabs:
+      let item = NSToolbarItem(itemIdentifier: itemIdentifier)
+      let labelKeys = ["General", "Tracks", "File", "Status"]
+      let labels = labelKeys.map { NSLocalizedString($0, comment: $0) }
+      let segmentedControl = NSSegmentedControl(labels: labels, trackingMode: .selectOne, target: self, action: #selector(toolbarSegmentChanged(_:)))
+      segmentedControl.selectedSegment = 0
+      item.view = segmentedControl
+      return item
+    default:
+      return nil
+    }
+
   }
 }
 

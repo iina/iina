@@ -91,18 +91,18 @@ class SettingsPageNetwork: SettingsPage {
           .hasDescription(content: .text_ytdlWarning)
       }
       SettingsList {
-        SettingsItem.Switch()
-          .bindTo(.ytdlEnabled)
-          .image(name: "square.and.arrow.down")
-          .withHelpLink(AppData.ytdlHelpLink)
-          .withDetailView {
-            SettingsItem.LongInput()
-              .bindTo(.ytdlSearchPath)
-              .hasDescription()
-            SettingsItem.LongInput()
-              .bindTo(.ytdlRawOptions)
-              .hasDescription()
-          }
+          SettingsItem.Switch()
+            .bindTo(.ytdlEnabled)
+            .image(name: "square.and.arrow.down")
+            .withHelpLink(AppData.ytdlHelpLink)
+            .withDetailView {
+              SettingsItem.LongInput()
+                .bindTo(.ytdlSearchPath)
+                .hasDescription()
+              SettingsItem.LongInput()
+                .bindTo(.ytdlRawOptions)
+                .hasDescription()
+            }
       }
     }
   }

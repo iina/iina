@@ -63,7 +63,7 @@ struct AppData {
   static let chromeExtensionLink = "https://chrome.google.com/webstore/detail/open-in-iina/pdnojahnhpgmdhjdhgphgdcecehkbhfo"
   static let firefoxExtensionLink = "https://addons.mozilla.org/addon/open-in-iina-x"
   static let toneMappingHelpLink = "https://en.wikipedia.org/wiki/Tone_mapping"
-  static let disableAnimationsHelpLink = "https://developer.apple.com/design/human-interface-guidelines/accessibility#Motion"
+  static let disableAnimationsHelpLink = "https://developer.apple.com/design/human-interface-guidelines/accessibility#Cognitive"
   static let mpvManualLink = "https://mpv.io/manual/stable"
 
   static let widthWhenNoVideo = 640

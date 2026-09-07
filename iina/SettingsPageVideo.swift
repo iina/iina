@@ -49,9 +49,11 @@ class SettingsPageVideo: SettingsPage {
             SettingsAccessory.Selection()
               .bindTo(.hardwareDecoder, ofType: Preference.HardwareDecoderOption.self)
           )
+#if !arch(arm64)
         SettingsItem.Switch()
           .bindTo(.forceDedicatedGPU)
           .hasDescription()
+#endif
       }
     }
   }

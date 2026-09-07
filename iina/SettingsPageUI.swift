@@ -61,7 +61,7 @@ class SettingsPageUI: SettingsPage {
           .bindTo(.themeMaterial, ofType: Preference.Theme.self)
         if #available(macOS 26.0, *) { 
           SettingsItem.General(title: .general("sidebar.liquid_glass"))
-            .image(name: "liquid.glass")
+            .image(name: ["capsule.on.rectangle.liquid.glass", "liquid.glass"])
             .withExpandingDetailView {
               SettingsItem.Switch(title: .text_OnScreenDisplay)
                 .bindTo(.useLiquidGlassOSD)

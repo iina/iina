@@ -643,33 +643,8 @@ class MPVController: NSObject {
     chkErr(mpv_initialize(mpv))
 
     // The option watch-later-options is not available until after the mpv instance is initialized.
-    // Workaround for mpv issue #14417, watch-later-options missing secondary subtitle delay and sid.
-    // Allow the user to override this workaround by setting this mpv option in advanced settings.
-    if !userOptionsContains(MPVOption.WatchLater.watchLaterOptions),
-       var watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
-
-      // In mpv 0.38.0 the default value for the watch-later-options property contains the options
-      // sid and sub-delay, but not the corresponding options for the secondary subtitle. This
-      // inconsistency is likely to confuse users, so insure the secondary options are also saved in
-      // watch later files. Issue #14417 has been fixed, so this workaround will not be needed after
-      // the next mpv upgrade.
-      var needsUpdate = false
-      if watchLaterOptions.contains(MPVOption.TrackSelection.sid),
-         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySid) {
-        log("Adding \(MPVOption.Subtitles.secondarySid) to \(MPVOption.WatchLater.watchLaterOptions)")
-        watchLaterOptions += "," + MPVOption.Subtitles.secondarySid
-        needsUpdate = true
-      }
-      if watchLaterOptions.contains(MPVOption.Subtitles.subDelay),
-         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubDelay) {
-        log("Adding \(MPVOption.Subtitles.secondarySubDelay) to \(MPVOption.WatchLater.watchLaterOptions)")
-        watchLaterOptions += "," + MPVOption.Subtitles.secondarySubDelay
-        needsUpdate = true
-      }
-      if needsUpdate {
-        chkErr(setOptionString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions, level: .verbose))
-      }
-    }
+    // Useful to log the value of this option as users often ask about what the Watch Later feature
+    // remembers.
     if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
       let sorted = watchLaterOptions.components(separatedBy: ",").sorted().joined(separator: ",")
       log("Options mpv is configured to save in watch later files: \(sorted)")

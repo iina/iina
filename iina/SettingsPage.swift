@@ -162,6 +162,8 @@ class SettingsPage {
     content()
   }()
 
+  var labeledViews: [String: NSView] = [:]
+
   func pageLoaded() {}
 
   final func getView() -> NSView {
@@ -178,8 +180,8 @@ class SettingsPage {
     return []
   }
 
-  final func section(@SettingsSectionBuilder _ containers: () -> [SettingsContainer]) -> SettingsSection {
-    SettingsSection(spacing: sectionSpacing, containers())
+  final func section(label: String? = nil, @SettingsSectionBuilder _ containers: () -> [SettingsContainer]) -> SettingsSection {
+    SettingsSection(label: label, spacing: sectionSpacing, containers())
   }
 
   final func sections(@SettingsViewsBuilder _ sections: () -> [SettingsSection]) -> [SettingsSection] {
@@ -188,7 +190,11 @@ class SettingsPage {
 
   private func makeContentView() -> NSView {
     let views = builtSections.map {
-      $0.makeView()
+      let view = $0.makeView()
+      if let label = $0.label {
+        labeledViews[label] = view
+      }
+      return view
     }
     let stackView = NSStackView(views: views)
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -205,6 +211,15 @@ class SettingsPage {
     let context = SettingsSearch.Context(page: identifier, section: nil, parent: nil)
     builtSections.forEach { $0.registerSearchEntry(context: context) }
   }
+
+  func setControlsEnabled(in view: NSView, enabled: Bool, skipping skippedView: NSView?) {
+    guard view !== skippedView else { return }
+    if let control = view as? NSControl {
+      control.isEnabled = enabled
+    }
+    view.subviews.forEach { setControlsEnabled(in: $0, enabled: enabled, skipping: skippedView) }
+  }
+
 }
 
 
@@ -213,11 +228,13 @@ class SettingsSection: SettingsContainer {
   let spacing: CGFloat
   var titleKey: SettingsLocalization.Key?
   let children: [SettingsContainer]
+  let label: String?
 
-  init(titleKey: SettingsLocalization.Key? = nil, spacing: CGFloat, _ children: [SettingsContainer]) {
+  init(titleKey: SettingsLocalization.Key? = nil, label: String? = nil, spacing: CGFloat, _ children: [SettingsContainer]) {
     self.spacing = spacing
     self.titleKey = titleKey
     self.children = children
+    self.label = label
 
     if self.titleKey == nil,
        let firstList = children.first as? SettingsList,

@@ -7,6 +7,8 @@
 //
 
 class SettingsPageNetwork: SettingsPage {
+  private let prefObserver = Preference.Observer()
+
   override var identifier: String {
     "network"
   }
@@ -21,6 +23,15 @@ class SettingsPageNetwork: SettingsPage {
 
   override var localizationTable: String {
     "SettingsNetworkLocalizable"
+  }
+
+  override func pageLoaded() {
+    // refresh ytdl section
+    guard let view = labeledViews["ytdl"] else { return }
+
+    if JavascriptPlugin.hasYTDL {
+      setControlsEnabled(in: view, enabled: false, skipping: nil)
+    }
   }
 
   override func content() -> [SettingsSection] {
@@ -84,25 +95,25 @@ class SettingsPageNetwork: SettingsPage {
   }
 
   private func sectionYTDL() -> SettingsSection {
-    return section {
+    return section(label: "ytdl") {
       SettingsList(title: .text_YTDL) {
         SettingsItem.General(title: .text_onlineMediaPluginAdvice)
           .image(name: "puzzlepiece.extension")
           .hasDescription(content: .text_ytdlWarning)
       }
       SettingsList {
-          SettingsItem.Switch()
-            .bindTo(.ytdlEnabled)
-            .image(name: "square.and.arrow.down")
-            .withHelpLink(AppData.ytdlHelpLink)
-            .withDetailView {
-              SettingsItem.LongInput()
-                .bindTo(.ytdlSearchPath)
-                .hasDescription()
-              SettingsItem.LongInput()
-                .bindTo(.ytdlRawOptions)
-                .hasDescription()
-            }
+        SettingsItem.Switch()
+          .bindTo(.ytdlEnabled)
+          .image(name: "square.and.arrow.down")
+          .withHelpLink(AppData.ytdlHelpLink)
+          .withDetailView {
+            SettingsItem.LongInput()
+              .bindTo(.ytdlSearchPath)
+              .hasDescription()
+            SettingsItem.LongInput()
+              .bindTo(.ytdlRawOptions)
+              .hasDescription()
+          }
       }
     }
   }

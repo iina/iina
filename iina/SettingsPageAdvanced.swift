@@ -117,14 +117,6 @@ class SettingsPageAdvanced: SettingsPage {
     setControlsEnabled(in: pageView, enabled: enabled, skipping: advancedSettingsView)
   }
 
-  private func setControlsEnabled(in view: NSView, enabled: Bool, skipping skippedView: NSView?) {
-    guard view !== skippedView else { return }
-    if let control = view as? NSControl {
-      control.isEnabled = enabled
-    }
-    view.subviews.forEach { setControlsEnabled(in: $0, enabled: enabled, skipping: skippedView) }
-  }
-
   private func sectionLogging() -> SettingsSection {
     return section {
       SettingsList(title: .text_Logging) {

@@ -560,12 +560,14 @@ class PlayerCore: NSObject {
       mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
     }
 
+#if USE_ICC_PROFILE_AUTO // See VideoView.setICCProfile.
     // If this mpv core is being reused icc-profile-auto may have been left set to true. This option
     // MUST be reset to false to avoid a crash that occurs if the mpv OSD is being used. Another way
     // to fix this would be to add this option to the mpv reset-on-next-file option. However the
     // user might override IINA and set that option themselves and not include icc-profile-auto.
     // Better to directly reset icc-profile-auto. See issue #5727 for details.
     mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
+#endif
 
     // Delay force-window until an actual file load to avoid Xcode-launched app startup hanging
     // while mpv tries to create a VO before IINA has entered its normal media-open path.

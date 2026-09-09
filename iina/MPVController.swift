@@ -49,15 +49,13 @@ struct MPVHookValue {
   var id: String?
   var isJavascript: Bool
   var block: Block?
-  var jsBlock: JSManagedValue!
-  var context: JSContext!
-
-  init(withIdentifier id: String, jsContext context: JSContext, jsBlock block: JSValue, owner: JavascriptAPIMpv) {
+  init(withIdentifier id: String, jsContext context: JSContext, jsBlock callback: JSValue, owner: JavascriptAPIMpv) {
     self.id = id
     self.isJavascript = true
-    self.jsBlock = JSManagedValue(value: block)
-    self.context = context
-    context.virtualMachine.addManagedReference(self.jsBlock, withOwner: owner)
+    // MPV_EVENT_HOOK arrives on the mpv queue. Only the opaque token crosses
+    // that boundary; JavaScript and continuation ownership live on main.
+    let token = owner.pluginInstance.makeCallback([callback], once: false)
+    self.block = { next in token.callHook(withNextBlock: next) }
   }
 
   init(withBlock block: @escaping Block) {
@@ -66,19 +64,7 @@ struct MPVHookValue {
   }
 
   func call(withNextBlock next: @escaping () -> Void) {
-    if isJavascript {
-      let block: @convention(block) () -> Void = { next() }
-      guard let callback = jsBlock.value else {
-        next()
-        return
-      }
-      callback.call(withArguments: [JSValue(object: block, in: context)!])
-      if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
-        next()
-      }
-    } else {
-      block!(next)
-    }
+    block!(next)
   }
 }
 

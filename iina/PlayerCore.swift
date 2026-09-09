@@ -355,12 +355,13 @@ class PlayerCore: NSObject {
   }
 
   func clearPlugins() {
+    plugins.forEach { $0.tearDown() }
     pluginMap.removeAll()
     plugins.removeAll()
   }
 
   func loadPlugins() {
-    pluginMap.removeAll()
+    clearPlugins()
     plugins = JavascriptPlugin.plugins.compactMap { plugin in
       guard plugin.enabled else { return nil }
       let instance = JavascriptPluginInstance(player: self, plugin: plugin)
@@ -375,8 +376,10 @@ class PlayerCore: NSObject {
       if plugin.enabled {
         // no need to reload, unless forced
         guard forced else { return }
+        pluginMap[id]?.tearDown()
         pluginMap[id] = JavascriptPluginInstance(player: self, plugin: plugin)
       } else {
+        pluginMap[id]?.tearDown()
         pluginMap.removeValue(forKey: id)
       }
     } else {
@@ -701,9 +704,12 @@ class PlayerCore: NSObject {
   ///     sent mpv could crash. The `stop` method takes care of instructing the background task to stop and will wait for it to stop
   ///     before sending a `stop` command to mpv. _However_ mpv will stop on its own if the end of the video is reached. When
   ///     that happens while IINA is quitting then this method may be called with the background task still running. If the background
-  ///     task is still running this method only changes the player state. When the background task ends it will notice that shutting
+  ///     task is still running this method stops plugins and changes the player state. When the background task ends it will notice that shutting
   ///     down was in progress and will call this method again to continue the process of shutting down..
   func shutdown() {
+    // Plugins must stop using player APIs before mpv starts quitting, including
+    // while shutdown is waiting for the background task to finish.
+    clearPlugins()
     info.state = .shuttingDown
     guard !backgroundTaskInUse else { return }
     log("Shutting down")
@@ -730,6 +736,9 @@ class PlayerCore: NSObject {
   ///     windows of vulnerability that can not be fully closed. IINA has no choice but to support a mpv initiated shutdown as best it
   ///     can.
   func mpvHasShutdown() {
+    // An externally initiated mpv quit bypasses shutdown(). Suppress further
+    // plugin callbacks as soon as its notification reaches the main thread.
+    clearPlugins()
     let isMPVInitiated = info.state != .shuttingDown
     let suffix = isMPVInitiated ? " (initiated by mpv)" : ""
     log("Player has shutdown\(suffix)")

@@ -526,6 +526,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       window.close()
     }
 
+    // Let window-will-close listeners finish first, then deactivate all plugin
+    // instances before returning to the run loop to wait for player shutdown.
+    // Ordinary window closure keeps its player and plugins available for reuse.
+    PlayerCore.playerCores.forEach { $0.clearPlugins() }
+    JavascriptPlugin.plugins.forEach { $0.globalInstance?.tearDown() }
+
     // Check if there are any players that are not shutdown. If all players are already shutdown
     // then application termination can proceed immediately. This will happen if there is only one
     // player and shutdown was initiated by sending a quit command directly to mpv through it's IPC

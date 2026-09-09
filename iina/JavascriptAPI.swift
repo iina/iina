@@ -40,14 +40,20 @@ class JavascriptAPI: NSObject {
   }
 
   func permitted(to permission: JavascriptPlugin.Permission) -> Bool {
-    return pluginInstance.plugin.permissions.contains(permission)
+    guard let instance = pluginInstance, instance.isActive else { return false }
+    return instance.plugin.permissions.contains(permission)
   }
 
   func extraSetup() { }
   func cleanUp(_ instance: JavascriptPluginInstance) { }
 
-  func createPromise(_ block: @escaping @convention(block) (JSValue, JSValue) -> Void) -> JSValue {
-    return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)!])
+  func createPromise(_ block: @escaping (JavascriptPluginCallback) -> Void) -> JSValue {
+    dispatchPrecondition(condition: .onQueue(.main))
+    let executor: @convention(block) (JSValue, JSValue) -> Void = { [weak pluginInstance] resolve, reject in
+      guard let instance = pluginInstance, instance.isActive else { return }
+      block(instance.makeCallback([resolve, reject]))
+    }
+    return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: executor, in: context)!])
   }
 
   /// Expand the magic strings such as `@tmp` and `@data` in the path.

@@ -35,24 +35,27 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
   func show() {
     guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
-    DispatchQueue.main.async {
-      self.pluginInstance.overlayView.isHidden = false
+    DispatchQueue.main.async { [weak self] in
+      guard let self, let instance = self.pluginInstance, instance.isActive else { return }
+      instance.overlayView.isHidden = false
     }
   }
 
   func hide() {
     guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
-    DispatchQueue.main.async {
-      self.pluginInstance.overlayView.isHidden = true
+    DispatchQueue.main.async { [weak self] in
+      guard let self, let instance = self.pluginInstance, instance.isActive else { return }
+      instance.overlayView.isHidden = true
     }
   }
 
   func setOpacity(_ opacity: Float) {
     guard pluginInstance != nil else { return }
     guard pluginInstance.overlayViewLoaded && permitted(to: .displayVideoOverlay) else { return }
-    DispatchQueue.main.async {
-      self.pluginInstance.overlayView.alphaValue = CGFloat(opacity)
+    DispatchQueue.main.async { [weak self] in
+      guard let self, let instance = self.pluginInstance, instance.isActive else { return }
+      instance.overlayView.alphaValue = CGFloat(opacity)
     }
   }
 
@@ -68,9 +71,10 @@ class JavascriptAPIOverlay: JavascriptAPI, JavascriptAPIOverlayExportable, WKScr
     let rootURL = pluginInstance.plugin.root
     let url = rootURL.appendingPathComponent(path)
     
-    DispatchQueue.main.async {
-      self.pluginInstance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
-      self.pluginInstance.overlayViewLoaded = true
+    DispatchQueue.main.async { [weak self] in
+      guard let self, let instance = self.pluginInstance, instance.isActive else { return }
+      instance.overlayView.loadFileURL(url, allowingReadAccessTo: rootURL)
+      instance.overlayViewLoaded = true
       self.inSimpleMode = false
     }
     messageHub.clearListeners()

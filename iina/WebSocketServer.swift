@@ -10,7 +10,7 @@ import Foundation
 import Network
 
 
-protocol WebSocketServerDelegate {
+protocol WebSocketServerDelegate: AnyObject {
   func stateUpdated(_ state: NWListener.State)
   func newConnection(_ conn: NWConnection, connID: String)
   func connection(_ conn: String, stateUpdated state: NWConnection.State)
@@ -20,11 +20,12 @@ protocol WebSocketServerDelegate {
 
 class WebSocketServer {
   let label: String
-  var delegate: WebSocketServerDelegate?
+  weak var delegate: WebSocketServerDelegate?
 
   var listener: NWListener
   var connections: [String: NWConnection] = [:]
   var timer: Timer?
+  private var stopped = false
 
   lazy var serverQueue = DispatchQueue(label: "IINAWebSocketServer.\(self.label)")
   let subsystem: Logger.Subsystem
@@ -55,17 +56,32 @@ class WebSocketServer {
   }
 
   func start() {
-    listener.newConnectionHandler = handleNewConnection(_:)
-    listener.stateUpdateHandler = handleStateUpdate(_:)
+    listener.newConnectionHandler = { [weak self] connection in
+      guard let self else { connection.cancel(); return }
+      self.handleNewConnection(connection)
+    }
+    listener.stateUpdateHandler = { [weak self] state in self?.handleStateUpdate(state) }
     // No error will be thrown here. If the port is in use, the server will fail immediately
     listener.start(queue: serverQueue)
   }
 
   func stop() {
-    listener.cancel()
+    serverQueue.async { [self] in
+      stopped = true
+      delegate = nil
+      listener.newConnectionHandler = nil
+      listener.stateUpdateHandler = nil
+      listener.cancel()
+      connections.values.forEach {
+        $0.stateUpdateHandler = nil
+        $0.cancel()
+      }
+      connections.removeAll()
+    }
   }
 
   private func handleNewConnection(_ connection: NWConnection) {
+    guard !stopped else { connection.cancel(); return }
     // Create a UUID to identify each connection
     let connID = UUID().uuidString
     Logger.log("New connection: \(connID)", level: .debug, subsystem: subsystem)
@@ -73,7 +89,8 @@ class WebSocketServer {
     connections[connID] = connection
     delegate?.newConnection(connection, connID: connID)
 
-    connection.stateUpdateHandler = { [unowned self] state in
+    connection.stateUpdateHandler = { [weak self, weak connection] state in
+      guard let self, let connection else { return }
       Logger.log("Connection \(state) (\(connID))", subsystem: subsystem)
       self.delegate?.connection(connID, stateUpdated: state)
       switch state {
@@ -89,29 +106,24 @@ class WebSocketServer {
 
     connection.start(queue: serverQueue)
 
-    func receive() {
-       connection.receiveMessage { [unowned self] (data, context, isComplete, error) in
-        if let data, let context {
-          // handle ping frames
-          if let metadata = context.protocolMetadata as? [NWProtocolWebSocket.Metadata],
-             metadata[0].opcode == .ping {
-            Logger.log("Ping (\(connID))", subsystem: subsystem)
-            let pongContext = NWConnection.ContentContext(
-              identifier: "pong",
-              metadata: [NWProtocolWebSocket.Metadata(opcode: .pong)]
-            )
-            connection.send(content: data, contentContext: pongContext, completion: .idempotent)
-          } else {
-            // normal data
-            Logger.log("Data (\(connID))", subsystem: subsystem)
-            self.delegate?.connection(connID, receivedData: data, context: context)
-          }
-          receive()
+    receive(connection, connID: connID)
+  }
+
+  private func receive(_ connection: NWConnection, connID: String) {
+    connection.receiveMessage { [weak self, weak connection] data, context, _, error in
+      guard let self, let connection, self.connections[connID] != nil else { return }
+      if let data, let context {
+        if let metadata = context.protocolMetadata as? [NWProtocolWebSocket.Metadata],
+           metadata.first?.opcode == .ping {
+          let pong = NWConnection.ContentContext(identifier: "pong",
+            metadata: [NWProtocolWebSocket.Metadata(opcode: .pong)])
+          connection.send(content: data, contentContext: pong, completion: .idempotent)
+        } else {
+          self.delegate?.connection(connID, receivedData: data, context: context)
         }
       }
+      if error == nil { self.receive(connection, connID: connID) }
     }
-
-    receive()
   }
 
   private func handleStateUpdate(_ state: NWListener.State) {
@@ -119,13 +131,16 @@ class WebSocketServer {
     delegate?.stateUpdated(state)
   }
 
-  func send(data: Data, to connection: NWConnection, callback: ((NWError?) -> Void)?) throws {
-    // do we need a separate send(text:to:) method to send text frames?
-    let metadata = NWProtocolWebSocket.Metadata(opcode: .binary)
-    let context = NWConnection.ContentContext(identifier: "message", metadata: [metadata])
-    connection.send(content: data, contentContext: context, isComplete: true, completion: .contentProcessed({ error in
-      callback?(error)
-    }))
+  func send(data: Data, to identifier: String, callback: @escaping (NWError?, Bool) -> Void) {
+    serverQueue.async { [self] in
+      guard !stopped, let connection = connections[identifier] else {
+        callback(nil, false)
+        return
+      }
+      let metadata = NWProtocolWebSocket.Metadata(opcode: .binary)
+      let context = NWConnection.ContentContext(identifier: "message", metadata: [metadata])
+      connection.send(content: data, contentContext: context, isComplete: true,
+                      completion: .contentProcessed { callback($0, true) })
+    }
   }
 }
-

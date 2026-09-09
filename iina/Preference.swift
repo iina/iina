@@ -192,6 +192,8 @@ struct Preference {
     static let enableToneMappingTargetPeakOverride = Key("enableToneMappingTargetPeakOverride")
     static let toneMappingTargetPeakOverride = Key("toneMappingTargetPeakOverride")
     static let toneMappingAlgorithm = Key("toneMappingAlgorithm")
+    static let enableToneMappingParamOverride = Key("enableToneMappingParamOverride")
+    static let toneMappingParamOverride = Key("toneMappingParamOverride")
 
     static let audioDriverEnableAVFoundation = Key("audioDriverEnableAVFoundation")
     static let audioThreads = Key("audioThreads")
@@ -1154,6 +1156,8 @@ struct Preference {
     .enableToneMappingTargetPeakOverride: false,
     .toneMappingTargetPeakOverride: 400,
     .toneMappingAlgorithm: ToneMappingAlgorithmOption.defaultValue.rawValue,
+    .enableToneMappingParamOverride: false,
+    .toneMappingParamOverride: Float(1), // Most common default for tone mapping algorithms.
     .audioDriverEnableAVFoundation: false,
     .audioThreads: 0,
     .audioLanguage: "",
@@ -1441,6 +1445,7 @@ struct Preference {
            .disableOSDSeekMsg,
            .disableOSDSpeedMsg,
            .disablePlaySliderScrolling,
+           .enableToneMappingParamOverride,
            .enableToneMappingTargetPeakOverride,
            .disableVolumeSliderScrolling,
            .displayInLetterBox,
@@ -1549,7 +1554,8 @@ struct Preference {
            .subPos,
            .subShadowSize,
            .subSpacing,
-           .subTextSize:
+           .subTextSize,
+           .toneMappingParamOverride:
         guard let defaultAsFloat = defaultValue as? Float else {
           // Should not occur. Internal error.
           log("Default for \(key) is of type \(type(of: value)) and cannot be cast to Float",

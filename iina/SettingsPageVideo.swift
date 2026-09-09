@@ -101,7 +101,17 @@ class SettingsPageVideo: SettingsPage {
               .withHelpLink(AppData.mpvManualLink.appending("/#options-target-peak"))
             SettingsItem.PopupButton()
               .bindTo(.toneMappingAlgorithm, ofType: Preference.ToneMappingAlgorithmOption.self)
+              .hasDescription()
               .withHelpLink(AppData.mpvManualLink.appending("/#options-tone-mapping"))
+              .withDetailView {
+                SettingsItem.SwitchWithInput()
+                  .labelKey(.toneMappingParamOverride)
+                  .bindInputTo(.toneMappingParamOverride)
+                  .bindSwitchTo(.enableToneMappingParamOverride)
+                  .range(-Double.infinity...Double.infinity, allowsFloats: true)
+                  .hasDescription()
+                  .withHelpLink(AppData.mpvManualLink.appending("/#options-tone-mapping-param"))
+              }
           }
       }
     }

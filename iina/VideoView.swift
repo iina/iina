@@ -512,6 +512,7 @@ extension VideoView {
       // Reset options to their defaults.
       mpv.setStringToDefault(MPVOption.GPURendererOptions.targetPeak)
       mpv.setStringToDefault(MPVOption.GPURendererOptions.toneMapping)
+      mpv.setStringToDefault(MPVOption.GPURendererOptions.toneMappingParam)
       return
     }
     var targetPeak = "auto"
@@ -544,9 +545,14 @@ extension VideoView {
     }
     let algorithm = String(describing: Preference.enum(for: .toneMappingAlgorithm) as
                            Preference.ToneMappingAlgorithmOption)
-    logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm)")
+    let param = {
+      guard Preference.bool(for: .enableToneMappingParamOverride) else { return "default" }
+      return String(Preference.double(for: .toneMappingParamOverride))
+    }()
+    logHDR("Will enable tone mapping: target-peak=\(targetPeak) algorithm=\(algorithm) param=\(param)")
     mpv.setString(MPVOption.GPURendererOptions.targetPeak, targetPeak)
     mpv.setString(MPVOption.GPURendererOptions.toneMapping, algorithm)
+    mpv.setString(MPVOption.GPURendererOptions.toneMappingParam, param)
   }
 
   /// Set the mpv tone mapping options appropriately for a SDR video.
@@ -562,11 +568,13 @@ extension VideoView {
       // Reset options to their defaults.
       mpv.setStringToDefault(MPVOption.GPURendererOptions.targetPeak)
       mpv.setStringToDefault(MPVOption.GPURendererOptions.toneMapping)
+      mpv.setStringToDefault(MPVOption.GPURendererOptions.toneMappingParam)
       return
     }
-    logHDR("Will enable tone mapping: target-peak=auto algorithm=auto")
+    logHDR("Will enable tone mapping: target-peak=auto algorithm=auto param=default")
     mpv.setString(MPVOption.GPURendererOptions.targetPeak, "auto")
     mpv.setString(MPVOption.GPURendererOptions.toneMapping, "auto")
+    mpv.setString(MPVOption.GPURendererOptions.toneMappingParam, "default")
   }
 
   // MARK: - Utils

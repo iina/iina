@@ -318,6 +318,7 @@
 		E38099C42FC05B2E00D3333E /* SettingsPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099B92FC05B2E00D3333E /* SettingsPageControl.swift */; };
 		E38099C52FC05B2E00D3333E /* SettingsPageGeneral.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BA2FC05B2E00D3333E /* SettingsPageGeneral.swift */; };
 		E38099C62FC05B2E00D3333E /* SettingsPageKeyBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */; };
+		D27748F34C084C1EAA427F67 /* KeyMappingActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E887D3272B1F4C07983A1E17 /* KeyMappingActionButtons.swift */; };
 		E38099C72FC05B2E00D3333E /* SettingsPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */; };
 		E38099C82FC05B2E00D3333E /* SettingsPagePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */; };
 		E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */; };
@@ -1674,6 +1675,7 @@
 		E38099B92FC05B2E00D3333E /* SettingsPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageControl.swift; sourceTree = "<group>"; };
 		E38099BA2FC05B2E00D3333E /* SettingsPageGeneral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageGeneral.swift; sourceTree = "<group>"; };
 		E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageKeyBindings.swift; sourceTree = "<group>"; };
+		E887D3272B1F4C07983A1E17 /* KeyMappingActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyMappingActionButtons.swift; sourceTree = "<group>"; };
 		E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageNetwork.swift; sourceTree = "<group>"; };
 		E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPagePlugin.swift; sourceTree = "<group>"; };
 		E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageSubtitles.swift; sourceTree = "<group>"; };
@@ -2493,6 +2495,7 @@
 				E38099B92FC05B2E00D3333E /* SettingsPageControl.swift */,
 				E38099BA2FC05B2E00D3333E /* SettingsPageGeneral.swift */,
 				E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */,
+				E887D3272B1F4C07983A1E17 /* KeyMappingActionButtons.swift */,
 				E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */,
 				E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */,
 				E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */,
@@ -2990,6 +2993,7 @@
 				E38099C42FC05B2E00D3333E /* SettingsPageControl.swift in Sources */,
 				E38099C52FC05B2E00D3333E /* SettingsPageGeneral.swift in Sources */,
 				E38099C62FC05B2E00D3333E /* SettingsPageKeyBindings.swift in Sources */,
+				D27748F34C084C1EAA427F67 /* KeyMappingActionButtons.swift in Sources */,
 				E38099C72FC05B2E00D3333E /* SettingsPageNetwork.swift in Sources */,
 				E38099C82FC05B2E00D3333E /* SettingsPagePlugin.swift in Sources */,
 				E31E62FF2FD90288005527B2 /* OSCFloatingView.swift in Sources */,

@@ -66,6 +66,7 @@ class SettingsPageKeyBindings: SettingsPage {
 
 private extension NSUserInterfaceItemIdentifier {
   static let columnID = NSUserInterfaceItemIdentifier("MainColumn")
+  static let rowViewID = NSUserInterfaceItemIdentifier("KeyMappingRowView")
 }
 
 
@@ -496,11 +497,18 @@ extension ConfigEditor: NSTableViewDelegate, NSMenuDelegate {
     let cell = (tableView.makeView(withIdentifier: .columnID, owner: self) as? KeyMappingCell) ?? KeyMappingCell()
 
     cell.setup(keyMapping: km, self)
+    // Cell reuse may keep isSelected true without firing RowView.isSelected didSet.
+    cell.selectionChanged(tableView.selectedRowIndexes.contains(row))
     return cell
   }
 
   func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-    return RowView()
+    if let rowView = tableView.makeView(withIdentifier: .rowViewID, owner: self) as? RowView {
+      return rowView
+    }
+    let rowView = RowView()
+    rowView.identifier = .rowViewID
+    return rowView
   }
 
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
@@ -593,13 +601,12 @@ fileprivate class KeyMappingCell: NSTableCellView {
   }
 
   func selectionChanged(_ selected: Bool) {
-    if editor.isCurrentConfigEditable() {
-      editButton.isHidden = !selected
-      removeButton.isHidden = !selected
-      lockHelpButton.isHidden = true
-    } else {
-      lockHelpButton.isHidden = !selected
-    }
+    let editable = editor.isCurrentConfigEditable()
+    let showEdit = KeyMappingActionButtons.shouldShowEditButtons(isSelected: selected, isEditable: editable)
+    let showLock = KeyMappingActionButtons.shouldShowLockButton(isSelected: selected, isEditable: editable)
+    editButton.isHidden = !showEdit
+    removeButton.isHidden = !showEdit
+    lockHelpButton.isHidden = !showLock
   }
 }
 

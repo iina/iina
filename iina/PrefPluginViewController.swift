@@ -541,13 +541,23 @@ extension PrefPluginViewController: NSTableViewDelegate, NSTableViewDataSource {
 extension PrefPluginViewController: WKNavigationDelegate {
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     if webView == pluginPreferencesWebView {
+      let requestURL = navigationAction.request.url
+      let prefPrefix = currentPlugin?.preferencesPageURL?.absoluteString
       guard
-        let url = navigationAction.request.url,
-        url.absoluteString.starts(with: currentPlugin?.preferencesPageURL?.absoluteString ?? "000") || url.absoluteString == "about:blank"
+        let url = requestURL,
+        url.absoluteString.starts(with: prefPrefix ?? "000") || url.absoluteString == "about:blank"
       else {
-        Logger.log("Loading page from \(navigationAction.request.url?.absoluteString ?? "?") is not allowed", level: .error)
-          decisionHandler(.cancel)
-          return
+        if PluginWebViewNavigation.shouldOpenExternally(
+          currentTabIsHelp: false,
+          requestURL: requestURL,
+          allowedPrefPrefix: prefPrefix
+        ), let url = requestURL {
+          NSWorkspace.shared.open(url)
+        } else {
+          Logger.log("Loading page from \(requestURL?.absoluteString ?? "?") is not allowed", level: .error)
+        }
+        decisionHandler(.cancel)
+        return
       }
     }
     decisionHandler(.allow)

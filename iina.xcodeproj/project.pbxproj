@@ -320,6 +320,7 @@
 		E38099C62FC05B2E00D3333E /* SettingsPageKeyBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */; };
 		E38099C72FC05B2E00D3333E /* SettingsPageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */; };
 		E38099C82FC05B2E00D3333E /* SettingsPagePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */; };
+		4DE7B14211F54FBD8F991D58 /* PluginWebViewNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FFB3FFB376461293B0038E /* PluginWebViewNavigation.swift */; };
 		E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */; };
 		E38099CA2FC05B2E00D3333E /* SettingsPageUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */; };
 		E38099CB2FC05B2E00D3333E /* SettingsPageUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */; };
@@ -1676,6 +1677,7 @@
 		E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageKeyBindings.swift; sourceTree = "<group>"; };
 		E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageNetwork.swift; sourceTree = "<group>"; };
 		E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPagePlugin.swift; sourceTree = "<group>"; };
+		D4FFB3FFB376461293B0038E /* PluginWebViewNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginWebViewNavigation.swift; sourceTree = "<group>"; };
 		E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageSubtitles.swift; sourceTree = "<group>"; };
 		E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUI.swift; sourceTree = "<group>"; };
 		E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageUtilities.swift; sourceTree = "<group>"; };
@@ -2495,6 +2497,7 @@
 				E38099BB2FC05B2E00D3333E /* SettingsPageKeyBindings.swift */,
 				E38099BC2FC05B2E00D3333E /* SettingsPageNetwork.swift */,
 				E38099BD2FC05B2E00D3333E /* SettingsPagePlugin.swift */,
+				D4FFB3FFB376461293B0038E /* PluginWebViewNavigation.swift */,
 				E38099BE2FC05B2E00D3333E /* SettingsPageSubtitles.swift */,
 				E38099BF2FC05B2E00D3333E /* SettingsPageUI.swift */,
 				E38099C02FC05B2E00D3333E /* SettingsPageUtilities.swift */,
@@ -2992,6 +2995,7 @@
 				E38099C62FC05B2E00D3333E /* SettingsPageKeyBindings.swift in Sources */,
 				E38099C72FC05B2E00D3333E /* SettingsPageNetwork.swift in Sources */,
 				E38099C82FC05B2E00D3333E /* SettingsPagePlugin.swift in Sources */,
+				4DE7B14211F54FBD8F991D58 /* PluginWebViewNavigation.swift in Sources */,
 				E31E62FF2FD90288005527B2 /* OSCFloatingView.swift in Sources */,
 				E3C228092FDF5EFF009A1A89 /* SidebarTrackSelector.swift in Sources */,
 				E38099C92FC05B2E00D3333E /* SettingsPageSubtitles.swift in Sources */,

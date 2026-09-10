@@ -3030,9 +3030,10 @@ class MainWindowController: PlayerWindowController {
     } else {
       timeLabelYPos = sliderFrame.origin.y + playSlider.frame.height + 5
     }
-    timePreviewView.frame.origin = CGPoint(
-      x: round(sliderFrame.origin.x + sliderFrame.size.width * percentage - timePreviewView.frame.width / 2),
-      y: timeLabelYPos)
+    // Split assignment so Swift can type-check under current Xcode (local 26.2).
+    let previewWidth = timePreviewView.frame.width
+    let previewX = round(sliderFrame.origin.x + sliderFrame.size.width * percentage - previewWidth / 2)
+    timePreviewView.setFrameOrigin(NSPoint(x: previewX, y: timeLabelYPos))
   }
 
 

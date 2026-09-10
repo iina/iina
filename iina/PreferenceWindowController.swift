@@ -179,7 +179,8 @@ class PreferenceWindowController: NSWindowController {
 
     window?.titlebarAppearsTransparent = true
     window?.titleVisibility = .hidden
-    window?.isMovableByWindowBackground = true
+    // Only the title bar should move the window (#6323).
+    window?.isMovableByWindowBackground = false
 
     tableView.delegate = self
     tableView.dataSource = self

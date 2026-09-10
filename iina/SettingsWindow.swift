@@ -185,7 +185,8 @@ class SettingsWindow: CommonWindow {
 
     self.title = "Settings"
     self.isOpaque = false
-    self.isMovableByWindowBackground = true
+    // Settings should only move from the title bar; dragging the content area is unexpected (#6323).
+    self.isMovableByWindowBackground = false
     self.titlebarAppearsTransparent = true
     self.toolbarStyle = .unified
     let toolbar = NSToolbar(identifier: "SettingsWindowToolbar")

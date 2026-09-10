@@ -208,14 +208,10 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
   @objc func okBtnAction(_ sender: Any) {
     guard let window = contextWindow else { return }
     guard
-      let utiImportedTypes = Bundle.main.infoDictionary?["UTImportedTypeDeclarations"] as? [[String: Any]],
-      let cfBundleID = Bundle.main.bundleIdentifier as CFString?
+      let utiImportedTypes = Bundle.main.infoDictionary?["UTImportedTypeDeclarations"] as? [[String: Any]]
       else { return }
 
     Logger.log("Setting this app as default")
-
-    var successCount = 0
-    var failedCount = 0
 
     let utiChecked = [
       "public.movie": videoCheckBox.state == .on,
@@ -223,45 +219,17 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
       "public.text": playListCheckBox.state == .on
     ]
 
-    var utiTargetSet: Set<String> = []
-    for utiImportedType in utiImportedTypes {
-      guard
-        let identifier = utiImportedType["UTTypeIdentifier"] as? String,
-        let conformsTo = utiImportedType["UTTypeConformsTo"] as? [String],
-        let tagSpec = utiImportedType["UTTypeTagSpecification"] as? [String: Any],
-        let exts = tagSpec["public.filename-extension"] as? [String]
-      else {
-        return
-      }
+    guard let utiTargetSet = DefaultApplicationSetter.targetIdentifiers(
+      utiImportedTypes: utiImportedTypes,
+      checkedCategories: utiChecked
+    ) else { return }
 
-      // make sure that `conformsTo` contains a checked UTI type
-      guard utiChecked.map({ (uti, checked) in checked && conformsTo.contains(uti) }).contains(true) else {
-        continue
-      }
-
-      Logger.log("UTImportedType: \(identifier.quoted) ➤ \(exts)", level: .verbose)
-      for ext in exts {
-        let uttypesForExt = UTType.types(tag: ext, tagClass: .filenameExtension, conformingTo: nil)
-        for uttype in uttypesForExt {
-          utiTargetSet.insert(uttype.identifier)
-        }
-      }
+    DefaultApplicationSetter.setAsDefault(identifiers: utiTargetSet) { [weak self] successCount, failedCount in
+      guard let self else { return }
+      Utility.showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational,
+                        sheetWindow: window)
+      window.endSheet(self)
     }
-
-    for identifier in utiTargetSet {
-      Logger.log("Setting default for UTI: \(identifier.quoted)", level: .verbose)
-      let status = LSSetDefaultRoleHandlerForContentType(identifier as CFString, .all, cfBundleID)
-      if status == kOSReturnSuccess {
-        successCount += 1
-      } else {
-        Logger.log("Failed for \(identifier.quoted): return value \(status)", level: .error)
-        failedCount += 1
-      }
-    }
-
-    Utility.showAlert("set_default.success", arguments: [successCount, failedCount], style: .informational,
-                      sheetWindow: window)
-    window.endSheet(self)
   }
 
   @objc func cancelBtnAction(_ sender: Any) {

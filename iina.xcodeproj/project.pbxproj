@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7FA364E0D900440FDDFB3848 /* DefaultApplicationSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6261B6B7303FCE1E585D69 /* DefaultApplicationSetter.swift */; };
+		A67EFAA8AC5541F4CAC9739E /* DefaultAppUTITargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E0D3C71DB1354DBBC4E0FB /* DefaultAppUTITargets.swift */; };
 		1326717E20852D0D000FA7E2 /* SubChooseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1326718020852D0D000FA7E2 /* SubChooseViewController.xib */; };
 		3412DB8E2C2FC64C00BBC142 /* Equalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412DB8D2C2FC64800BBC142 /* Equalizations.swift */; };
 		3415BC8A2FC82FD9003B3FBD /* TimePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */; };
@@ -531,6 +533,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EA6261B6B7303FCE1E585D69 /* DefaultApplicationSetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultApplicationSetter.swift; sourceTree = "<group>"; };
+		A2E0D3C71DB1354DBBC4E0FB /* DefaultAppUTITargets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppUTITargets.swift; sourceTree = "<group>"; };
 		0507C25E2B5617650043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		0507C25F2B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MainWindowController.strings; sourceTree = "<group>"; };
 		0507C2622B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InspectorWindowController.strings; sourceTree = "<group>"; };
@@ -2158,6 +2162,8 @@
 				51854CD92A1C489300C40B78 /* FFmpegLogger.swift */,
 				E3EC8C422F9432FD00FBB51E /* Dialog.swift */,
 				84EB1F061D2F5E76004FA5A1 /* Utility.swift */,
+				EA6261B6B7303FCE1E585D69 /* DefaultApplicationSetter.swift */,
+				A2E0D3C71DB1354DBBC4E0FB /* DefaultAppUTITargets.swift */,
 				8461C52F1D462488006E91FF /* VideoTime.swift */,
 				8434BAA61D5DF2DA003BECF2 /* Extensions.swift */,
 				84C8D5901D796F9700D98A0E /* Aspect.swift */,
@@ -2930,6 +2936,8 @@
 				E3EC8C412F92E6BA00FBB51E /* PluginManager.swift in Sources */,
 				E3C12F6B201F281F00297964 /* FirstRunManager.swift in Sources */,
 				84EB1F071D2F5E76004FA5A1 /* Utility.swift in Sources */,
+				7FA364E0D900440FDDFB3848 /* DefaultApplicationSetter.swift in Sources */,
+				A67EFAA8AC5541F4CAC9739E /* DefaultAppUTITargets.swift in Sources */,
 				E34BC28D2C27733200A94680 /* SettingsPage.swift in Sources */,
 				E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */,
 				E3C2280D2FDFBE30009A1A89 /* SidebarSliderView.swift in Sources */,

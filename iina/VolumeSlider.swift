@@ -30,7 +30,15 @@ class VolumeSlider: NSSlider {
   /// position within the slider.
   /// - Parameter event: Event indicating the scroll wheel position changed.
   override func scrollWheel(with event: NSEvent) {
-    guard !Preference.bool(for: .disableVolumeSliderScrolling) else { return }
+    let verticalNone = (Preference.enum(for: .verticalScrollAction) as Preference.ScrollAction) == .none
+    let horizontalNone = (Preference.enum(for: .horizontalScrollAction) as Preference.ScrollAction) == .none
+    guard SliderScrollPolicy.shouldAllowScroll(
+      disableSliderScrolling: Preference.bool(for: .disableVolumeSliderScrolling),
+      verticalActionNone: verticalNone,
+      horizontalActionNone: horizontalNone,
+      deltaX: event.scrollingDeltaX,
+      deltaY: event.scrollingDeltaY
+    ) else { return }
     super.scrollWheel(with: event)
   }
 }

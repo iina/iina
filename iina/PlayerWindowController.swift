@@ -50,10 +50,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   internal var observedPrefKeys: [Preference.Key] = [
     .enableToneMapping,
+    .enableToneMappingParamOverride,
     .enableToneMappingTargetPeakOverride,
     .toneMappingTargetPeak,
     .loadIccProfile,
     .toneMappingAlgorithm,
+    .toneMappingParamOverride,
     .toneMappingTargetPeakOverride,
     .themeMaterial,
     .showRemainingTime,
@@ -77,10 +79,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     switch keyPath {
     case PK.enableToneMapping.rawValue,
+      PK.enableToneMappingParamOverride.rawValue,
       PK.enableToneMappingTargetPeakOverride.rawValue,
       PK.toneMappingTargetPeak.rawValue,
       PK.loadIccProfile.rawValue,
       PK.toneMappingAlgorithm.rawValue,
+      PK.toneMappingParamOverride.rawValue,
       PK.toneMappingTargetPeakOverride.rawValue:
       videoView.refreshEdrMode()
     case PK.themeMaterial.rawValue:

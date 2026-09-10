@@ -1821,23 +1821,25 @@ class MainWindowController: PlayerWindowController {
     windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
 
-  /// Set the window frame and if needed the content view frame to appropriately use the full screen.
+  /// Set the window frame and if needed view frames to appropriately use the full screen.
   ///
-  /// For screens that contain a camera housing the content view will be adjusted to not use that area of the screen.
+  /// For screens that contain a camera housing views will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
-    guard let window = self.window else { return }
+    guard let window, let screen = window.screen ?? NSScreen.main else { return }
+    let frame = screen.frame
     let useAnimation = {
       // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
       guard #unavailable(macOS 26) else { return false }
       return !Preference.bool(for: .disableAnimations)
     }()
-    let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: useAnimation)
-    guard let unusable = screen.cameraHousingHeight else { return }
+    window.setFrame(frame, display: true, animate: useAnimation)
+    guard let unusable = screen.cameraHousingHeight, let cv = window.contentView else { return }
     // This screen contains an embedded camera. Shorten the height of the window's content view's
-    // frame to avoid having part of the window obscured by the camera housing.
-    let view = window.contentView!
-    view.setFrameSize(NSMakeSize(view.frame.width, screen.frame.height - unusable))
+    // frame and the video view container's frame to avoid having part of the window obscured by
+    // the camera housing.
+    let size = NSMakeSize(cv.frame.width, frame.height - unusable)
+    cv.setFrameSize(size)
+    videoViewContainer.setFrameSize(size)
   }
 
   private func legacyAnimateToFullscreen() {
@@ -2565,7 +2567,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
-    guard let window = self.window else { return }
+    guard let window else { return }
     if let videoWidth = player.info.videoWidth {
       let windowScale = Double((frame ?? window.frame).width) / Double(videoWidth)
       player.info.cachedWindowScale = windowScale

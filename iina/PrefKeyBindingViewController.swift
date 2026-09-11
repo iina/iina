@@ -41,11 +41,13 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
   let fallbackDefault = "IINA Default"
 
   static var defaultConfigs: [String: String] = {
-    var configs: [String: String] = [:]
-    for (key, value) in defaultConfigMap {
-      configs[key] = Bundle.main.path(forResource: value, ofType: "conf", inDirectory: "config")!
-    }
-    return configs
+    KeyBindingDefaultConfigs.resolve(
+      configMap: defaultConfigMap,
+      pathForResource: { Bundle.main.path(forResource: $0, ofType: "conf", inDirectory: "config") },
+      onMissing: { name, resource in
+        Logger.log("Missing bundled keybinding config \"\(name)\" (\(resource).conf in config/)", level: .error)
+      }
+    )
   }()
 
   static var userConfigs: [String: String] {
@@ -285,7 +287,12 @@ class PrefKeyBindingViewController: PreferenceViewController, PreferenceWindowEm
       DispatchQueue.main.async {
         Utility.showAlert("keybinding_config.error", arguments: [configName ?? "Unknown"], sheetWindow: self.view.window)
       }
-      loadConfigFile(fallbackDefault)
+      // Avoid infinite recursion if the bundled fallback default is also missing.
+      if configName != fallbackDefault, KC.defaultConfigs[fallbackDefault] != nil {
+        loadConfigFile(fallbackDefault)
+      } else {
+        Logger.log("Unable to load keybinding config \(configName ?? "Unknown"); bundled fallback unavailable", level: .error)
+      }
     }
 
     guard let configName = configName,

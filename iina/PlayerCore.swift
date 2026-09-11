@@ -585,14 +585,32 @@ class PlayerCore: NSObject {
   static func loadKeyBindings() {
     Logger.log("Loading key bindings")
     let userConfigs = PrefKeyBindingViewController.userConfigs
-    let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
+    let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    if iinaDefaultConfPath == nil {
+      Logger.log("Missing bundled keybinding config \"IINA Default\"", level: .error)
+    }
     var inputConfPath = iinaDefaultConfPath
     if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
       }
     }
-    setKeyBindings(KeyMapping.parseInputConf(at: inputConfPath) ?? KeyMapping.parseInputConf(at: iinaDefaultConfPath)!)
+    guard let path = inputConfPath else {
+      Logger.log("Unable to resolve a key binding config path; using empty bindings", level: .error)
+      setKeyBindings([])
+      return
+    }
+    if let mappings = KeyMapping.parseInputConf(at: path) {
+      setKeyBindings(mappings)
+      return
+    }
+    if let fallback = iinaDefaultConfPath, fallback != path,
+       let mappings = KeyMapping.parseInputConf(at: fallback) {
+      setKeyBindings(mappings)
+      return
+    }
+    Logger.log("Unable to parse key binding config at \(path); using empty bindings", level: .error)
+    setKeyBindings([])
   }
 
   static func setKeyBindings(_ keyMappings: [KeyMapping]) {

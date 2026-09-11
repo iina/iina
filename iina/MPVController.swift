@@ -614,11 +614,17 @@ class MPVController: NSObject {
 
     // Load keybindings. This is still required for mpv to handle media keys or apple remote.
     let userConfigs = PrefKeyBindingViewController.userConfigs
-    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    var inputConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    if inputConfPath == nil {
+      log("Missing bundled keybinding config \"IINA Default\"", level: .error)
+    }
     if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
       }
+    }
+    if inputConfPath == nil {
+      log("Unable to resolve a key binding config path for mpv input-conf", level: .error)
     }
     chkErr(setOptionalOptionString(MPVOption.Input.inputConf, inputConfPath, level: .verbose))
 

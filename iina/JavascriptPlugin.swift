@@ -244,9 +244,54 @@ class JavascriptPlugin: NSObject {
     return url
   }
 
+  static private func githubRepo(from url: URL) -> String {
+    url.path.split(separator: "/").prefix(2).joined(separator: "/")
+  }
+
+  static private func githubAPIURL(forRepo ghRepo: String) -> String {
+    "https://api.github.com/repos/\(ghRepo)"
+  }
+
+  static private func githubDefaultBranch(from response: HTTPResult, repo: String) throws -> String {
+    guard response.ok else {
+      throw PluginError.cannotDownload(response.reason, response.text ?? "")
+    }
+    guard let json = response.json as? [String: Any],
+          let defaultBranch = json["default_branch"] as? String,
+          !defaultBranch.isEmpty else {
+      let message = String(format: NSLocalizedString("plugin.install_error.no_default_branch", comment: ""),
+                           repo)
+      throw PluginError.cannotDownload(response.description, message)
+    }
+    return defaultBranch
+  }
+
+  static private func githubDefaultBranch(forRepo ghRepo: String) throws -> String {
+    try githubDefaultBranch(from: Just.get(githubAPIURL(forRepo: ghRepo)), repo: ghRepo)
+  }
+
+  static private func percentEncodedGitBranch(_ branch: String) throws -> String {
+    var allowedCharacters = CharacterSet.urlPathAllowed
+    allowedCharacters.remove(charactersIn: "/'")
+    guard let encodedBranch = branch.addingPercentEncoding(withAllowedCharacters: allowedCharacters) else {
+      throw PluginError.cannotDownload("", NSLocalizedString("plugin.install_error.invalid_default_branch", comment: ""))
+    }
+    return encodedBranch
+  }
+
+  static private func githubArchiveURL(forRepo ghRepo: String) throws -> String {
+    let defaultBranch = try githubDefaultBranch(forRepo: ghRepo)
+    return "https://github.com/\(ghRepo)/archive/\(try percentEncodedGitBranch(defaultBranch)).zip"
+  }
+
+  static private func githubInfoURL(forRepo ghRepo: String, branch: String) throws -> String {
+    "https://raw.githubusercontent.com/\(ghRepo)/\(try percentEncodedGitBranch(branch))/Info.json"
+  }
+
   @discardableResult
   static func create(fromGitURL urlString: String) throws -> JavascriptPlugin {
     let url = try standardizeGithubURL(urlString)
+    let ghRepo = githubRepo(from: url)
 
     Logger.log("Installing plugin from GitHub URL: \(url)", level: .debug)
 
@@ -254,7 +299,6 @@ class JavascriptPlugin: NSObject {
     let tempFolder = ".temp.\(UUID().uuidString)"
     let tempZipFile = "\(tempFolder).zip"
     let tempDecompressDir = "\(tempFolder)-1"
-    let githubMasterURL = url.appendingPathComponent("archive/main.zip").absoluteString
 
     defer {
       [tempZipFile, tempDecompressDir].forEach { item in
@@ -287,12 +331,14 @@ class JavascriptPlugin: NSObject {
     
     // Otherwise, install from source
 
+    let archiveURL = try githubArchiveURL(forRepo: ghRepo)
+
     func removeTempPluginFolder() {
       try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(tempFolder))
     }
 
     let cmd = [
-      "curl -fsSL '\(githubMasterURL)' > '\(tempZipFile)'",
+      "curl -fsSL '\(archiveURL)' > '\(tempZipFile)'",
       "mkdir '\(tempFolder)' '\(tempDecompressDir)'",
       "unzip '\(tempZipFile)' -d '\(tempDecompressDir)'",
       "mv '\(tempDecompressDir)'/*/* '\(tempFolder)'/"
@@ -515,18 +561,29 @@ class JavascriptPlugin: NSObject {
         continuation.resume(returning: nil)
         return
       }
-      Just.get("https://raw.githubusercontent.com/\(ghRepo)/master/Info.json", asyncCompletionHandler:  { result in
-        if result.ok,
-           let json = result.json as? [String: Any],
-           let newGHVersion = json["ghVersion"] as? Int,
-           let newVersion = json["version"] as? String {
-          if newGHVersion > ghVersion {
-            continuation.resume(returning: newVersion)
-          } else {
-            continuation.resume(returning: nil)
-          }
-        } else {
-          continuation.resume(throwing: PluginError.cannotDownload(result.description, result.text ?? ""))
+      Just.get(JavascriptPlugin.githubAPIURL(forRepo: ghRepo), asyncCompletionHandler: { branchResult in
+        do {
+          let defaultBranch = try JavascriptPlugin.githubDefaultBranch(from: branchResult, repo: ghRepo)
+          let infoURL = try JavascriptPlugin.githubInfoURL(forRepo: ghRepo, branch: defaultBranch)
+          Just.get(infoURL, asyncCompletionHandler: { result in
+            if result.ok,
+               let json = result.json as? [String: Any],
+               let newGHVersion = json["ghVersion"] as? Int,
+               let newVersion = json["version"] as? String {
+              if newGHVersion > ghVersion {
+                continuation.resume(returning: newVersion)
+              } else {
+                continuation.resume(returning: nil)
+              }
+            } else {
+              let message = result.statusCode == 404 ?
+                String(format: NSLocalizedString("plugin.install_error.info_json_not_found", comment: ""), defaultBranch) :
+                result.text ?? ""
+              continuation.resume(throwing: PluginError.cannotDownload(result.description, message))
+            }
+          })
+        } catch let error {
+          continuation.resume(throwing: error)
         }
       })
     }

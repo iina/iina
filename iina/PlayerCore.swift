@@ -82,7 +82,7 @@ class PlayerCore: NSObject {
   }
 
   static func activeOrNewForMenuAction(isAlternative: Bool) -> PlayerCore {
-    let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
+    let useNew = Preference.bool(for: .alwaysOpenInNewWindow) == isAlternative
     return useNew ? newPlayerCore : active
   }
 

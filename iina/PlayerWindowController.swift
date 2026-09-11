@@ -531,9 +531,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     var deltaX = isPrecise ? Double(event.scrollingDeltaX) : event.scrollingDeltaX.unifiedDouble
     var deltaY = isPrecise ? Double(event.scrollingDeltaY) : event.scrollingDeltaY.unifiedDouble * 2
 
-    if isNatural {
-      deltaY = -deltaY
-    } else {
+    // Keep system natural-scrolling for vertical (volume/seek); only flip X when not natural.
+    if !isNatural {
       deltaX = -deltaX
     }
 

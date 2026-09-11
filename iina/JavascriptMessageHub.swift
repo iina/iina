@@ -19,7 +19,8 @@ class JavascriptMessageHub {
   }
 
   func postMessage(to webView: WKWebView, name: String, data: JSValue) {
-    DispatchQueue.main.async {
+    DispatchQueue.main.async { [weak self] in
+      guard let instance = self?.reference?.pluginInstance, instance.isActive else { return }
       var arg: String?
 
       if data.isNumber {
@@ -37,6 +38,7 @@ class JavascriptMessageHub {
         }
       }
 
+      guard instance.isActive else { return }
       if let arg {
         webView.evaluateJavaScript("window.iina._emit(`\(name)`, \(arg))")
       } else {
@@ -46,10 +48,15 @@ class JavascriptMessageHub {
   }
 
   func clearListeners() {
+    if let reference, let context = reference.context {
+      listeners.values.forEach { context.virtualMachine.removeManagedReference($0, withOwner: reference) }
+    }
     listeners.removeAll()
   }
 
   func addListener(forEvent name: String, callback: JSValue) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    guard let instance = reference?.pluginInstance, instance.isActive else { return }
     if let previousCallback = listeners[name] {
       JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: reference)
     }
@@ -59,7 +66,8 @@ class JavascriptMessageHub {
   }
 
   func callListener(forEvent name: String, withDataString dataString: String?) {
-    guard let callback = listeners[name] else { return }
+    guard let instance = reference?.pluginInstance, instance.isActive,
+          let callback = listeners[name], callback.value != nil else { return }
 
     let context = callback.value.context
     var jsValue: JSValue?
@@ -82,18 +90,21 @@ class JavascriptMessageHub {
       }
     }
 
-    if let jsValue {
-      callback.value.call(withArguments: [jsValue])
-    } else {
-      callback.value.call(withArguments: [])
+    instance.withActiveContext {
+      if let jsValue {
+        callback.value.call(withArguments: [jsValue])
+      } else {
+        callback.value.call(withArguments: [])
+      }
     }
   }
 
   func callListener(forEvent name: String, withDataObject dataObject: Any?, userInfo: Any? = nil) {
-    guard let callback = listeners[name] else { return }
+    guard let instance = reference?.pluginInstance, instance.isActive,
+          let callback = listeners[name], callback.value != nil else { return }
     let data = JSValue(object: dataObject, in: callback.value.context) ?? NSNull()
     let userInfo = userInfo ?? NSNull()
-    callback.value.call(withArguments: [data, userInfo])
+    instance.withActiveContext { callback.value.call(withArguments: [data, userInfo]) }
   }
 
   func receiveMessageFromUserContentController(_ message: WKScriptMessage) {

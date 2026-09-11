@@ -39,10 +39,12 @@ class JustXMLRPC {
     return formatter
   }()
 
+  private let session: URLSession?
   var location: String
 
-  init(_ loc: String) {
+  init(_ loc: String, session: URLSession? = nil) {
     self.location = loc
+    self.session = session
   }
 
   /**
@@ -61,7 +63,7 @@ class JustXMLRPC {
     methodCall.addChild(params)
     let reqXML = XMLDocument(rootElement: methodCall)
     // Request
-    Just.post(location, requestBody: reqXML.xmlData, asyncCompletionHandler: { response in
+    let handleResponse: (HTTPResult) -> Void = { response in
       if response.ok, let content = response.content, let responseDoc = try? XMLDocument(data: content) {
         let rootElement = responseDoc.rootElement()
         if let _ = rootElement?.child("fault") {
@@ -78,7 +80,21 @@ class JustXMLRPC {
         callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0,
                                     reason: response.reason, underlyingError: response.error)))
       }
-    })
+    }
+    if let session {
+      let builder = HTTP(session: session)
+      guard let request = builder.synthesizeRequest(.post, url: location, params: [:],
+        data: [:], json: nil, headers: .init(dictionary: [:]), files: [:], auth: nil,
+        timeout: nil, urlQuery: nil, requestBody: reqXML.xmlData) else {
+        callback(.failure)
+        return
+      }
+      session.dataTask(with: request) { data, response, error in
+        handleResponse(HTTPResult(data: data, response: response, error: error, task: nil))
+      }.resume()
+    } else {
+      Just.post(location, requestBody: reqXML.xmlData, asyncCompletionHandler: handleResponse)
+    }
   }
 
   private static func toValueElement(_ value: Any) -> XMLElement {

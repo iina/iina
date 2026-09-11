@@ -67,6 +67,8 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func addHook(_ name: String, _ priority: Int, _ callback: JSValue) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    guard let instance = pluginInstance, instance.isActive else { return }
     let hook = MPVHookValue(withIdentifier: identifier, jsContext: context, jsBlock: callback, owner: self)
     player!.mpv.addHook(MPVHook(name), priority: Int32(priority), hook: hook)
   }

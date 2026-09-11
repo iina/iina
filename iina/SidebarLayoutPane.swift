@@ -159,8 +159,8 @@ class SidebarLayoutPane: SidebarScrollView {
       videoSettingsStack.setVisibilityPriority(.notVisible, for: lockWindowAspectStack)
       videoSettingsStack.setVisibilityPriority(.mustHold, for: dockedUIStack)
     }
-    // remove black bar button
-    if Preference.unlockWindowAspectRatio {
+    // remove black bar button (not applicable in full screen)
+    if Preference.unlockWindowAspectRatio && !player.mainWindow.fsState.isFullscreen {
       videoSettingsStack.setVisibilityPriority(.mustHold, for: removeBlackBarBtn)
     } else {
       videoSettingsStack.setVisibilityPriority(.notVisible, for: removeBlackBarBtn)

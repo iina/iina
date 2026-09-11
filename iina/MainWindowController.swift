@@ -886,6 +886,7 @@ class MainWindowController: PlayerWindowController {
 
   @objc func removeVideoViewBlackBars() {
     guard let window, Preference.unlockWindowAspectRatio else { return }
+    guard !fsState.isFullscreen else { return }
 
     let currentSize = videoViewContainer.frame.size
     let videoSize = player.videoSizeForDisplay
@@ -1537,6 +1538,7 @@ class MainWindowController: PlayerWindowController {
       blackOutOtherMonitors()
     }
     fadeableViews.update()
+    titleBarView.updateRemoveBlackBarButton()
 
     if player.info.state == .paused {
       if Preference.bool(for: .playWhenEnteringFullScreen) {
@@ -1674,6 +1676,7 @@ class MainWindowController: PlayerWindowController {
     fsState.finishAnimating()
     setWindowToolbar()
     fadeableViews.update()
+    titleBarView.updateRemoveBlackBarButton()
 
     if Preference.bool(for: .blackOutMonitor) {
       removeBlackWindow()

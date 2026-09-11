@@ -38,12 +38,12 @@ var userArgs = Array(processInfo.arguments.dropFirst())
 if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
   print(
     """
-    Usage: iina-cli [arguments] [files] [-- mpv_option [...]]
+Usage: iina-cli [arguments] [files] [-- mpv_option [...]]
 
-    Arguments:
-    --mpv-*:
-            All mpv options are supported here, except those starting with "--no-".
-            Example: --mpv-volume=20 --mpv-resume-playback=no
+    You can pass both IINA arguments and mpv options. Use --mpv-* prefix for mpv options
+    before the separator, or use -- to pass raw mpv options directly.
+
+    IINA Arguments:
     --separate-windows | -w:
             Open all files in separate windows.
     --stdin, --no-stdin:
@@ -62,9 +62,21 @@ if userArgs.contains(where: { $0 == "--help" || $0 == "-h" }) {
     --help | -h:
             Print this message.
 
-    mpv Option:
-    Raw mpv options without --mpv- prefix. All mpv options are supported here.
-    Example: --volume=20 --no-resume-playback
+    mpv Arguments:
+    --mpv-*:
+            Pass options to mpv by prefixing them with "--mpv-".
+            Note: The "--mpv-no-" prefix is not supported. To negate an option,
+            use --mpv-OPTION=no (e.g., --mpv-resume-playback=no).
+    After "--":
+            Pass raw mpv options directly. All mpv options are supported,
+            including those with "--no-" prefix.
+
+    Examples (both styles are equivalent):
+            --mpv-start=00:15               -- --start=00:15
+            --mpv-volume=50                 -- --volume=50
+            --mpv-speed=1.5                 -- --speed=1.5
+            --mpv-loop=inf                  -- --loop=inf
+            --mpv-resume-playback=no        -- --no-resume-playback
     """)
   exit(0)
 }

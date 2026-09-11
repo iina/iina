@@ -412,6 +412,16 @@ class Utility {
     }
   }
 
+  /// Move `url` to Trash, or permanently delete it when the volume has no Trash (e.g. some network shares).
+  static func trashOrRemoveItem(at url: URL) throws {
+    do {
+      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+    } catch let error as NSError
+      where error.domain == NSCocoaErrorDomain && error.code == NSFeatureUnsupportedError {
+      try FileManager.default.removeItem(at: url)
+    }
+  }
+
   static private let allTypes: [MPVTrack.TrackType] = [.video, .audio, .sub]
 
   static func mediaType(forExtension ext: String) -> MPVTrack.TrackType? {

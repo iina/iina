@@ -557,7 +557,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
       let url = URL(fileURLWithPath: playlistItem.filename)
       do {
         Logger.log("Trashing row \(index): \(url.standardizedFileURL)", subsystem: player.subsystem)
-        try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+        try Utility.trashOrRemoveItem(at: url)
         successes.insert(index)
       } catch let error {
         Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])

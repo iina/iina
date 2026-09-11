@@ -1226,9 +1226,9 @@ class MainWindowController: PlayerWindowController {
         phase=None **momentumPhase=Began/Changed**
      */
     isMomentumScrollingAllowed = event.phase.contains(.ended) || isMouseInWindow // previous
-    if event.inAnyOf([oscSliderView]) && playSlider.isEnabled {
+    if event.inAnyOf([playSlider]) && playSlider.isEnabled {
       seekOverride = true
-    } else if event.inAnyOf([oscVolumeView]) && volumeSlider.isEnabled {
+    } else if event.inAnyOf([volumeSlider]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
       guard !event.inAnyOf([currentControlBar]) else { return }

@@ -412,13 +412,18 @@ class Utility {
     }
   }
 
-  /// Move `url` to Trash, or permanently delete it when the volume has no Trash (e.g. some network shares).
-  static func trashOrRemoveItem(at url: URL) throws {
+  /// Move `url` to Trash. If the volume has no Trash, ask before permanently deleting.
+  /// - Returns: `false` if the user canceled permanent delete; otherwise `true` after the file is gone.
+  @discardableResult
+  static func trashOrRemoveItem(at url: URL) throws -> Bool {
     do {
       try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+      return true
     } catch let error as NSError
       where error.domain == NSCocoaErrorDomain && error.code == NSFeatureUnsupportedError {
+      guard quickAskPanel("permanent_delete_no_trash") else { return false }
       try FileManager.default.removeItem(at: url)
+      return true
     }
   }
 

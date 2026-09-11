@@ -320,6 +320,19 @@ class PlayerCore: NSObject {
 
   static var keyBindings: [String: KeyMapping] = [:]
 
+  /// Returns the key binding for a normalized keystroke.
+  ///
+  /// If a numpad key (`KP0`-`KP9`, `KP_DEC`) is not bound, falls back to the binding of its
+  /// number-row twin (`9`, `.`), so existing configs that only bind the plain keys keep
+  /// responding to the numpad (#4898).
+  static func keyBinding(for normalizedKeyCode: String) -> KeyMapping? {
+    if let kb = keyBindings[normalizedKeyCode] { return kb }
+    let numberRowTwin = normalizedKeyCode
+      .replacingOccurrences(of: "KP(\\d)", with: "$1", options: .regularExpression)
+      .replacingOccurrences(of: "KP_DEC", with: ".")
+    return keyBindings[numberRowTwin]
+  }
+
   override init() {
     playerNumber = PlayerCore.playerCoreCounter
     backgroundQueue = DispatchQueue(label: "IINAPlayerCoreTask\(playerNumber)", qos: .background)

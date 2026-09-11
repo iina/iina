@@ -8,12 +8,181 @@
 
 fileprivate extension LayoutValue {
   static let oscPaddingTop = LayoutValue(14, 10)
-  static let oscPaddingBottom = LayoutValue(8, 5)
+  static let oscPaddingBottom = LayoutValue(16, 10)
+}
+
+/// Button used by the floating OSC so AppKit keeps the native tracking path active.
+class OSCButton: NSButton {
+  enum Role {
+    case standard
+    case transport
+    case primary
+
+    var floatingSize: CGFloat {
+      switch self {
+      case .standard: 24
+      case .transport: 32
+      case .primary: 48
+      }
+    }
+  }
+
+  private var originalImageScaling: NSImageScaling?
+  private var originalImagePosition: NSControl.ImagePosition?
+  private var originalBezelStyle: NSButton.BezelStyle?
+  private var originalIsBordered: Bool?
+  private var originalContentTintColor: NSColor?
+  private var originalConstraintSizes: [ObjectIdentifier: CGFloat] = [:]
+  private var usesQuickTimeStyle = false
+  private var isPressed = false
+  @objc dynamic private var visualScale: CGFloat = 1 {
+    didSet { needsDisplay = true }
+  }
+
+  override class func defaultAnimation(forKey key: NSAnimatablePropertyKey) -> Any? {
+    if key == "visualScale" {
+      return CABasicAnimation()
+    }
+    return super.defaultAnimation(forKey: key)
+  }
+
+  func setQuickTimeStyle(_ enabled: Bool, role: Role = .standard) {
+    if originalImageScaling == nil {
+      originalImageScaling = imageScaling
+      originalImagePosition = imagePosition
+      originalBezelStyle = bezelStyle
+      originalIsBordered = isBordered
+      originalContentTintColor = contentTintColor
+    }
+
+    usesQuickTimeStyle = enabled
+    if enabled {
+      imagePosition = .imageOnly
+      imageScaling = .scaleProportionallyDown
+      bezelStyle = .shadowlessSquare
+      isBordered = false
+      contentTintColor = .white.withAlphaComponent(0.84)
+    } else {
+      imagePosition = originalImagePosition!
+      imageScaling = originalImageScaling!
+      bezelStyle = originalBezelStyle!
+      isBordered = originalIsBordered!
+      contentTintColor = originalContentTintColor
+      setPressed(false)
+    }
+
+    for constraint in constraints where (constraint.firstItem as? NSButton) === self {
+      guard constraint.secondItem == nil,
+            constraint.firstAttribute == .width || constraint.firstAttribute == .height else { continue }
+      let key = ObjectIdentifier(constraint)
+      if originalConstraintSizes[key] == nil {
+        originalConstraintSizes[key] = constraint.constant
+      }
+      constraint.constant = enabled ? role.floatingSize : originalConstraintSizes[key]!
+    }
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    if usesQuickTimeStyle {
+      setPressed(true)
+      super.mouseDown(with: event)
+      setPressed(false)
+      return
+    }
+    super.mouseDown(with: event)
+  }
+
+  override func draw(_ dirtyRect: NSRect) {
+    guard usesQuickTimeStyle, visualScale != 1 else {
+      super.draw(dirtyRect)
+      return
+    }
+    NSGraphicsContext.saveGraphicsState()
+    let transform = NSAffineTransform()
+    transform.translateX(by: bounds.midX, yBy: bounds.midY)
+    transform.scale(by: visualScale)
+    transform.translateX(by: -bounds.midX, yBy: -bounds.midY)
+    transform.concat()
+    super.draw(dirtyRect)
+    NSGraphicsContext.restoreGraphicsState()
+  }
+
+  private func setPressed(_ pressed: Bool) {
+    guard isPressed != pressed else { return }
+    isPressed = pressed
+    highlight(pressed)
+    let scale: CGFloat = pressed ? 0.94 : 1
+    guard !Preference.bool(for: .disableAnimations) else {
+      visualScale = scale
+      return
+    }
+    NSAnimationContext.runAnimationGroup { context in
+      context.duration = pressed ? 0.1 : 0.15
+      context.timingFunction = CAMediaTimingFunction(name: pressed ? .easeInEaseOut : .easeOut)
+      animator().visualScale = scale
+    }
+  }
+}
+
+private final class OSCFloatingContentView: NSView {
+  private weak var mainWindow: MainWindowController?
+  weak var dragSurface: NSView?
+
+  init(mainWindow: MainWindowController) {
+    self.mainWindow = mainWindow
+    super.init(frame: .zero)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  override func hitTest(_ point: NSPoint) -> NSView? {
+    guard bounds.contains(point), let mainWindow else { return nil }
+
+    var controls: [NSView] = mainWindow.oscToolbarView?.subviews ?? []
+    controls.append(contentsOf: [mainWindow.volumeSlider, mainWindow.muteButton,
+                                 mainWindow.leftArrowButton, mainWindow.playButton,
+                                 mainWindow.rightArrowButton, mainWindow.leftLabel,
+                                 mainWindow.rightLabel, mainWindow.playSlider].compactMap { $0 })
+    for control in controls.reversed()
+      where control.isDescendant(of: self) && !control.isHiddenOrHasHiddenAncestor {
+      let localPoint = control.convert(point, from: self)
+      if control.bounds.contains(localPoint) {
+        return control.hitTest(localPoint) ?? control
+      }
+    }
+
+    return dragSurface
+  }
+
+  override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
+    true
+  }
+}
+
+private final class OSCFloatingDragSurface: NSView {
+  weak var owner: OSCFloatingView?
+
+  override var mouseDownCanMoveWindow: Bool { false }
+
+  override func mouseDown(with event: NSEvent) {
+    owner?.mouseDown(with: event)
+  }
+
+  override func mouseDragged(with event: NSEvent) {
+    owner?.mouseDragged(with: event)
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    owner?.mouseUp(with: event)
+  }
 }
 
 
 class OSCFloatingView: TranslucentView {
-  private let width: CGFloat = 460
+  static let preferredWidth: CGFloat = 460
+  private let width = preferredWidth
   weak var mainWindow: MainWindowController!
   private let prefObserver = Preference.Observer()
 
@@ -29,14 +198,34 @@ class OSCFloatingView: TranslucentView {
 
   private var isAlignFeedbackSent = false
 
+  @discardableResult
+  func routeMouseDown(_ event: NSEvent) -> Bool {
+    let point = convert(event.locationInWindow, from: nil)
+    guard bounds.contains(point), let content else { return false }
+    let contentPoint = content.convert(point, from: self)
+    guard let targetView = content.hitTest(contentPoint) else { return false }
+    if targetView === content {
+      mouseDown(with: event)
+    } else {
+      targetView.mouseDown(with: event)
+    }
+    return true
+  }
+
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
 
-    let container = NSView()
+    let container = OSCFloatingContentView(mainWindow: mainWindow)
     container.translatesAutoresizingMaskIntoConstraints = false
 
-    let cornerRadius: CGFloat = if #available(macOS 26.0, *) { 12 } else { 6 }
-    super.init(liquidGlassCornerRadius: cornerRadius, vevCornerRadius: cornerRadius, padding: (0, 0))
+    super.init(liquidGlassCornerRadius: 24, vevCornerRadius: 20, padding: (0, 0))
+
+    let dragSurface = OSCFloatingDragSurface()
+    dragSurface.translatesAutoresizingMaskIntoConstraints = false
+    dragSurface.owner = self
+    container.addSubview(dragSurface, positioned: .below, relativeTo: nil)
+    dragSurface.padding(.all)
+    container.dragSurface = dragSurface
 
     self.oscTopView = NSStackView()
     oscTopView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,6 +254,14 @@ class OSCFloatingView: TranslucentView {
       .addObserver(forName: .iinaSidebarStatusChanged, object: nil, queue: .main) { [weak self] _ in
       self?.initPosition()
     }
+  }
+
+  override func setStyle(_ newStyle: TranslucentView.Style, force: Bool = false) {
+    super.setStyle(newStyle, force: force)
+    guard case .visualEffect = newStyle,
+          let visualEffectView = container as? NSVisualEffectView else { return }
+    visualEffectView.material = .hudWindow
+    visualEffectView.appearance = NSAppearance(named: .darkAqua)
   }
 
   func setupConstraints() {

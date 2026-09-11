@@ -68,7 +68,10 @@ class LiveTextController: NSObject {
   }
 
   func requestAnalysis() {
-    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled, isAvailable else { return }
+    // Seeking temporarily pauses playback. Do not recreate the overlay while the progress
+    // slider is handling that interaction, otherwise it can compete with the OSC for events.
+    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled, isAvailable,
+          !mainWindow.isMouseInSlider else { return }
     requestAnalysisImpl()
   }
 

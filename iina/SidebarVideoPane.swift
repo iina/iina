@@ -301,7 +301,7 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     super.init(frame: .zero)
 
     self.segmentControl = NSSegmentedControl(
-      labels: AppData.aspectsInPanel,
+      labels: [ui.localized("quicksetting.item_default")] + AppData.aspectsInPanel.dropFirst(1),
       trackingMode: .selectOne,
       target: self, action: #selector(aspectRatioAction)
     )
@@ -363,7 +363,7 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
     super.init(frame: .zero)
 
     self.segmentControl = NSSegmentedControl(
-      labels: AppData.cropsInPanel + [NSLocalizedString("menu.crop_custom", comment: "")],
+      labels: [ui.localized("quicksetting.item_none")] + AppData.cropsInPanel.dropFirst(1) + [ui.localized("menu.crop_custom")],
       trackingMode: .selectOne,
       target: self, action: #selector(cropAction)
     )
@@ -532,7 +532,7 @@ fileprivate class SpeedView: SidebarSliderView {
       slider.neutralValue = 8
     }
     input.formatter = speedFormatter
-    resetButton.toolTip = NSLocalizedString("quicksetting.reset_speed", comment: "Reset speed to 1x")
+    resetButton.toolTip = ui.localized("quicksetting.reset_speed")
   }
 
   /// Return the slider value that represents the given playback speed.

@@ -257,7 +257,7 @@ class Titlebar: NSView {
   }
 
   func updateRemoveBlackBarButton() {
-    let shouldShow = Preference.unlockWindowAspectRatio
+    let shouldShow = Preference.unlockWindowAspectRatio && !mainWindow.fsState.isFullscreen
     removeBlackBarButton.isHidden = !shouldShow
   }
 

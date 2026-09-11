@@ -308,18 +308,76 @@ class VideoView: NSView {
     RunLoop.current.add(displayIdleTimer!, forMode: .default)
   }
 
+#if !USE_ICC_PROFILE_AUTO
+  private func findProfilePath() -> String? {
+    guard let displayId = currentDisplay,
+          let uuid = CGDisplayCreateUUIDFromDisplayID(displayId)?.takeRetainedValue() else {
+      return nil
+    }
+    typealias ProfileData = (uuid: CFUUID, profileUrl: URL?)
+    var argResult: ProfileData = (uuid, nil)
+    withUnsafeMutablePointer(to: &argResult) { data in
+      ColorSyncIterateDeviceProfiles({ (dict: CFDictionary?, ptr: UnsafeMutableRawPointer?) -> Bool in
+        if let info = dict as? [String: Any], let current = info["DeviceProfileIsCurrent"] as? Int {
+          let deviceID = info["DeviceID"] as! CFUUID
+          let ptr = ptr!.bindMemory(to: ProfileData.self, capacity: 1)
+          let uuid = ptr.pointee.uuid
+          if current == 1, deviceID == uuid {
+            let profileURL = info["DeviceProfileURL"] as! URL
+            ptr.pointee.profileUrl = profileURL
+            return false
+          }
+        }
+        return true
+      }, data)
+    }
+    guard let iccProfilePath = argResult.profileUrl?.path,
+          FileManager.default.fileExists(atPath: iccProfilePath) else {
+      return nil
+    }
+    return iccProfilePath
+  }
+#endif
+
+  /// Set the ICC profile and adjust the view layer.
+  /// - Important: IINA should be using the mpv
+  ///     [icc-profile-auto](https://mpv.io/manual/stable/#options-icc-profile-auto) option because that allows
+  ///     users to make use of the mpv [icc-profile](https://mpv.io/manual/stable/#options-icc-profile) option
+  ///     in their `mpv.conf` file since setting that option overrides `icc-profile-auto`. But `icc-profile-auto` is not
+  ///     working as reported in mpv issue [#17385](https://github.com/mpv-player/mpv/issues/17385). Until that
+  ///     problem is fixed, IINA must go back to using `icc-profile`. The code to support `icc-profile-auto` can be
+  ///     enabled by setting `USE_ICC_PROFILE_AUTO` in Xcode settings to test a proposed fix to `libmpv`.
   private func setICCProfile() {
     let screenColorSpace = player.mainWindow.window?.screen?.colorSpace
     if !Preference.bool(for: .loadIccProfile) {
       logHDR("Not using ICC profile due to user preference")
+#if USE_ICC_PROFILE_AUTO
       player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
-    } else if let screenColorSpace {
-      let name = screenColorSpace.localizedName ?? "unnamed"
-      logHDR("Using the ICC profile of the color space \(name)")
-      // Set MPV_RENDER_PARAM_ICC_PROFILE before enabling icc-profile-auto to true as mpv requires
-      // that parameter be set in the render context when icc-profile-auto is in use.
-      videoLayer.setRenderICCProfile(screenColorSpace)
-      player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
+#else
+      player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
+#endif
+    } else {
+#if USE_ICC_PROFILE_AUTO
+      if let screenColorSpace {
+        let name = screenColorSpace.localizedName ?? "unnamed"
+        logHDR("Using the ICC profile of the color space \(name)")
+        // Set MPV_RENDER_PARAM_ICC_PROFILE before enabling icc-profile-auto to true as mpv requires
+        // that parameter be set in the render context when icc-profile-auto is in use.
+        videoLayer.setRenderICCProfile(screenColorSpace)
+        player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
+      } else {
+        logHDR("Failed find ICC profile to load", level: .error)
+        player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
+      }
+#else
+      if let iccProfilePath = findProfilePath() {
+        logHDR("Loading ICC profile: \(iccProfilePath)")
+        player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
+      } else {
+        logHDR("Failed to find ICC profile to load", level: .error)
+        player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
+      }
+#endif
     }
 
     let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB
@@ -491,7 +549,11 @@ extension VideoView {
 
     videoLayer.wantsExtendedDynamicRangeContent = true
     videoLayer.colorspace = CGColorSpace(name: name)
+#if USE_ICC_PROFILE_AUTO // See setICCProfile.
     mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
+#else
+    mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
+#endif
     mpv.setString(MPVOption.GPURendererOptions.targetPrim, primaries)
     // PQ videos will be display as it was, HLG videos will be converted to PQ
     mpv.setString(MPVOption.GPURendererOptions.targetTrc, "pq")

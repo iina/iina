@@ -421,7 +421,14 @@ class Utility {
       return true
     } catch let error as NSError
       where error.domain == NSCocoaErrorDomain && error.code == NSFeatureUnsupportedError {
-      guard quickAskPanel("permanent_delete_no_trash") else { return false }
+      let panel = NSAlert()
+      panel.messageText = NSLocalizedString("alert.permanent_delete_no_trash.title", comment: "Trash Unavailable")
+      panel.informativeText = NSLocalizedString("alert.permanent_delete_no_trash.message", comment: "This volume does not have a Trash…")
+      panel.alertStyle = .warning
+      // Label the destructive action on the button — users often skip the message text.
+      panel.addButton(withTitle: NSLocalizedString("alert.permanent_delete_no_trash.button", comment: "Delete Permanently"))
+      panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+      guard panel.runModal() == .alertFirstButtonReturn else { return false }
       try FileManager.default.removeItem(at: url)
       return true
     }

@@ -331,6 +331,7 @@
 
 "alert.permanent_delete_no_trash.title" = "Trash Unavailable";
 "alert.permanent_delete_no_trash.message" = "This volume does not have a Trash. Permanently delete the file? This cannot be undone.";
+"alert.permanent_delete_no_trash.button" = "Delete Permanently";
 
 "alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Abort";

@@ -186,7 +186,6 @@ class SettingsWindow: CommonWindow {
 
     self.title = "Settings"
     self.isOpaque = false
-    self.isMovableByWindowBackground = true
     self.titlebarAppearsTransparent = true
     self.toolbarStyle = .unified
     let toolbar = NSToolbar(identifier: "SettingsWindowToolbar")

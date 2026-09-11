@@ -113,6 +113,17 @@ class JavascriptPlugin: NSObject {
   static private func loadPlugins() -> [JavascriptPlugin] {
     guard IINA_ENABLE_PLUGIN_SYSTEM else { return [] }
 
+#if DEBUG
+    // A VR2D self-test run measures the reprojection shader against a
+    // reference, and a plugin that reprojects with a CPU filter would hand the
+    // shader an already reprojected frame — which looks exactly like a shader
+    // bug. Leave them all out rather than guess which ones are harmless.
+    guard !VR2DSelfTest.isRunning else {
+      Logger.log("Not loading plugins: a VR2D self-test is running")
+      return []
+    }
+#endif
+
     guard let contents = try?
       FileManager.default.contentsOfDirectory(at: Utility.pluginsURL,
                                               includingPropertiesForKeys: [.isDirectoryKey],

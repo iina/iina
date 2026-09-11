@@ -49,7 +49,9 @@ class VideoView: NSView {
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
-    return true
+    // While looking around a VR video a drag has to pan the view rather than
+    // pick the window up and move it.
+    return player?.vr2d.isEnabled != true
   }
 
   override var isOpaque: Bool {
@@ -94,6 +96,7 @@ class VideoView: NSView {
       isUninited = true
 
       stopDisplayLink()
+      videoLayer.uninitVR2D()
       player.mpv.mpvUninitRendering()
     }
   }
@@ -128,12 +131,82 @@ class VideoView: NSView {
   /// the view which then calls the window controller's method.
   override func mouseUp(with event: NSEvent) {
     lastEventId = event.eventNumber
+    // A drag that panned the view is not a click, so it must not also pause
+    // playback or toggle full screen on the way out.
+    if vr2dEndDrag() { return }
     // Only check for Big Sur or greater, not if the preference use legacy full screen is enabled as
     // that can be changed while running and once the window title has been removed and added back
     // AppKit malfunctions from then on. The check for running under Big Sur or later isn't really
     // needed as it would be fine to always call the controller. The check merely makes it clear
     // that this is only needed due to macOS changes starting with Big Sur.
     player.mainWindow.mouseUp(with: event)
+  }
+
+  // MARK: - Looking around
+
+  /// Where the cursor was when the current pan step started.
+  private var vr2dDragAnchor: NSPoint?
+  /// `true` once the cursor has moved far enough to count as a pan.
+  private var vr2dDidPan = false
+
+  /// The cursor has to travel this far before a click becomes a pan, so that a
+  /// slight roll of a finger on the trackpad still counts as a click.
+  private static let vr2dMinimumDrag: CGFloat = 2
+
+  override func mouseDown(with event: NSEvent) {
+    guard player.vr2d.isEnabled else {
+      super.mouseDown(with: event)
+      return
+    }
+    vr2dDragAnchor = event.locationInWindow
+    vr2dDidPan = false
+    super.mouseDown(with: event)
+  }
+
+  override func mouseDragged(with event: NSEvent) {
+    guard player.vr2d.isEnabled, let anchor = vr2dDragAnchor else {
+      super.mouseDragged(with: event)
+      return
+    }
+    let point = event.locationInWindow
+    let dx = point.x - anchor.x
+    let dy = point.y - anchor.y
+    guard vr2dDidPan || dx.magnitude + dy.magnitude > VideoView.vr2dMinimumDrag else { return }
+    vr2dDidPan = true
+    vr2dDragAnchor = point
+    // The window's y axis points up and the view maths expects a downward drag
+    // to be positive, because dragging down tips the view up.
+    player.vr2d.pan(dx: dx, dy: -dy)
+  }
+
+  /// Finish a pan. Returns `true` when the gesture was a pan and so should not
+  /// be treated as a click as well.
+  private func vr2dEndDrag() -> Bool {
+    let panned = vr2dDidPan
+    vr2dDragAnchor = nil
+    vr2dDidPan = false
+    return panned
+  }
+
+  override func scrollWheel(with event: NSEvent) {
+    guard player.vr2d.isEnabled else {
+      super.scrollWheel(with: event)
+      return
+    }
+    // A trackpad reports many small deltas where a wheel reports few large
+    // ones, so scale the precise ones down to roughly one notch per gesture.
+    let delta = event.hasPreciseScrollingDeltas ? event.scrollingDeltaY / 20 : event.scrollingDeltaY
+    guard delta != 0 else { return }
+    player.vr2d.zoom(notches: -Double(delta))
+  }
+
+  override func magnify(with event: NSEvent) {
+    guard player.vr2d.isEnabled else {
+      super.magnify(with: event)
+      return
+    }
+    guard event.magnification != 0 else { return }
+    player.vr2d.zoom(notches: -Double(event.magnification) * 10)
   }
 
   // MARK: Drag and drop

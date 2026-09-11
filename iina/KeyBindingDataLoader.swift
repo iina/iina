@@ -54,6 +54,9 @@ class KeyBindingDataLoader {
     KBI("playlist-panel", type: .iinaCmd),
     KBI("chapter-panel", type: .iinaCmd),
     KBI.separator(),
+    KBI("toggle-control-bar-auto-hide", type: .iinaCmd),
+    KBI.separator(),
+
     KBI("open-file", type: .iinaCmd),
     KBI("open-url", type: .iinaCmd),
     KBI("save-playlist", type: .iinaCmd),

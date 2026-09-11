@@ -149,6 +149,8 @@
 "osd.file_loop" = "Loop Single File";
 "osd.playlist_loop" = "Loop Playlist";
 "osd.no_loop" = "Disable Looping";
+"osd.control_bar_auto_hide_enabled" = "Auto-hiding On Screen Controller";
+"osd.control_bar_auto_hide_disabled" = "On Screen Controller always visible";
 
 "preference.title" = "Settings";
 "preference.general" = "General";

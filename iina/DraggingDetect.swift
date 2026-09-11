@@ -178,7 +178,9 @@ extension PlayerCore {
      - sender: The `NSDraggingInfo` object received in `performDragOperation(_:)`.
    - Returns: The result for `performDragOperation(_:)`.
    */
-  func openFromPasteboard(_ sender: NSDraggingInfo) -> Bool {
+  /// - Parameter useGlobalOpenRouting: When `true`, open via static `PlayerCore.openURLs`
+  ///   (welcome window). Default keeps per-player playlist routing.
+  func openFromPasteboard(_ sender: NSDraggingInfo, useGlobalOpenRouting: Bool = false) -> Bool {
     // get info
     let pb = sender.draggingPasteboard
     guard let types = pb.types else { return false }
@@ -200,7 +202,7 @@ extension PlayerCore {
 
       let urls = paths.map{ URL(fileURLWithPath: $0) }
       // try open files
-      guard let loadedFileCount = openURLs(urls) else { return true }
+      guard let loadedFileCount = useGlobalOpenRouting ? PlayerCore.openURLs(urls) : openURLs(urls) else { return true }
       if loadedFileCount == 0 {
         // if no playable files, try add subtitle files
         var loadedSubtitle = false

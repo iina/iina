@@ -495,7 +495,7 @@ extension ConfigEditor: NSTableViewDelegate, NSMenuDelegate {
     guard let km = (mappingController.arrangedObjects as? [KeyMapping])?[at: row] else { return nil }
     let cell = (tableView.makeView(withIdentifier: .columnID, owner: self) as? KeyMappingCell) ?? KeyMappingCell()
 
-    cell.setup(keyMapping: km, self)
+    cell.setup(keyMapping: km, isSelected: row == tableView.selectedRow, self)
     return cell
   }
 
@@ -517,7 +517,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
   var lockHelpButton: ButtonWithObject!
   weak var editor: ConfigEditor!
 
-  func setup(keyMapping km: KeyMapping, _ editor: ConfigEditor) {
+  func setup(keyMapping km: KeyMapping, isSelected: Bool, _ editor: ConfigEditor) {
     self.editor = editor
 
     if keyLabel == nil || actionLabel == nil {
@@ -574,9 +574,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
       stackView.padding(.vertical, .horizontal(4))
     }
 
-    editButton.isHidden = true
-    removeButton.isHidden = true
-    lockHelpButton.isHidden = true
+    selectionChanged(isSelected)
 
     if Preference.bool(for: .displayKeyBindingRawValues) {
       keyLabel.font = .monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)

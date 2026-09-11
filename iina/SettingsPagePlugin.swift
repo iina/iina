@@ -766,13 +766,24 @@ extension PluginDetailsWindow: WKScriptMessageHandler, WKNavigationDelegate {
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     // don't allow remote pages in settings or about tab
     if currentTab != .help {
-      guard let url = navigationAction.request.url,
-            url.absoluteString.starts(with: plugin.preferencesPageURL?.absoluteString ?? "000") || url.absoluteString == "about:blank"
-      else {
-        Logger.log("Loading page from \(navigationAction.request.url?.absoluteString ?? "?") is not allowed", level: .error)
+      guard let url = navigationAction.request.url else {
+        return
+      }
+      // open local pages
+      if url.absoluteString.starts(with: plugin.preferencesPageURL?.absoluteString ?? "000") || url.absoluteString == "about:blank" {
+        decisionHandler(.allow)
+        return
+      }
+      // open external page
+      if let scheme = url.scheme?.lowercased(), scheme == "https" {
+        NSWorkspace.shared.open(url)
         decisionHandler(.cancel)
         return
       }
+      // deny by default
+      Logger.log("Loading page from \(url.absoluteString) is not allowed", level: .error)
+      decisionHandler(.cancel)
+      return
     }
     decisionHandler(.allow)
   }

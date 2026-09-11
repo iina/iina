@@ -212,6 +212,9 @@ class PlayerCore: NSObject {
 
   var mpv: MPVController!
 
+  /// File-local mpv options from `iina://` `mpv_*` query items (applied via `loadfile`).
+  var pendingFileLocalOptions: [String: String] = [:]
+
   var receivedEndFileWhileLoading: Bool = false
 
   var plugins: [JavascriptPluginInstance] = []
@@ -574,7 +577,17 @@ class PlayerCore: NSObject {
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading
-    mpv.command(.loadfile, args: [path], level: .verbose)
+    let fileLocalOptions = pendingFileLocalOptions
+    pendingFileLocalOptions.removeAll()
+    if fileLocalOptions.isEmpty {
+      mpv.command(.loadfile, args: [path], level: .verbose)
+    } else {
+      let optionsArg = fileLocalOptions
+        .sorted { $0.key < $1.key }
+        .map { "\($0.key)=\($0.value)" }
+        .joined(separator: ",")
+      mpv.command(.loadfile, args: [path, "replace", "0", optionsArg], level: .verbose)
+    }
 
     if Preference.bool(for: .autoRepeat) {
        let loopMode = Preference.DefaultRepeatMode(rawValue: Preference.integer(for: .defaultRepeatMode))

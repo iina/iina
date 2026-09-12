@@ -571,7 +571,7 @@ class PlayerCore: NSObject {
     // If autoSwitchToMusicMode is enabled and opening an audio file, pre-switch to miniPlayer
     // so loading screen and playback are hosted directly in miniPlayer without window jumping.
     let isAudioFile = Utility.mediaType(forExtension: url.pathExtension) == .audio
-    if Preference.bool(for: .autoSwitchToMusicMode), !overrideAutoSwitchToMusicMode, isAudioFile, !isInMiniPlayer {
+    if Preference.bool(for: .autoSwitchToMusicMode), !overrideAutoSwitchToMusicMode, isAudioFile, !isInMiniPlayer, !mainWindow.fsState.isFullscreen {
       log("Pre-switching to mini player for audio file: \(url.pathExtension)")
       switchToMiniPlayer(automatically: true, showMiniPlayer: false)
     }

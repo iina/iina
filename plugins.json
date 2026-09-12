@@ -1,5 +1,11 @@
 [
   {
+    "name": "AirPlay",
+    "url": "https://github.com/ozykhan/iina-airplay",
+    "desc": "Cast the current file to an Apple TV over AirPlay; IINA stays the remote.",
+    "id": "dev.faruk.iina-airplay"
+  },
+  {
     "name": "Anime4K",
     "url": "https://github.com/yorkyang2333/iina-anime4k",
     "desc": "Apply Anime4K shaders for real-time anime upscaling.",

@@ -11,6 +11,7 @@
 		3412DB8E2C2FC64C00BBC142 /* Equalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412DB8D2C2FC64800BBC142 /* Equalizations.swift */; };
 		3415BC8A2FC82FD9003B3FBD /* TimePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */; };
 		3465CC8F2FC72181008DBFB6 /* BufferIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */; };
+		A100CC8F2FC72181008DBFB6 /* MediaLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100CC8E2FC7217C008DBFB6 /* MediaLoadingView.swift */; };
 		348F71962DE2A819006C587D /* MPVCommandWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F71952DE2A814006C587D /* MPVCommandWrappers.swift */; };
 		34AAF7CE302EAF6500E9835C /* libjxl.0.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AAF7B6302EAF6500E9835C /* libjxl.0.11.dylib */; };
 		34AAF7CF302EAF6500E9835C /* libunibreak.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AAF7C7302EAF6500E9835C /* libunibreak.7.dylib */; };
@@ -603,6 +604,7 @@
 		3412DB8D2C2FC64800BBC142 /* Equalizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equalizations.swift; sourceTree = "<group>"; };
 		3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePreviewView.swift; sourceTree = "<group>"; };
 		3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferIndicatorView.swift; sourceTree = "<group>"; };
+		A100CC8E2FC7217C008DBFB6 /* MediaLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLoadingView.swift; sourceTree = "<group>"; };
 		348B000028DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
 		348B000128DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
 		348B000428DC688E0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/FontPickerWindowController.strings"; sourceTree = "<group>"; };
@@ -2524,6 +2526,7 @@
 				E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */,
 				E3A239A92FC6D88C00CE6ACC /* OSDView.swift */,
 				3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */,
+				A100CC8E2FC7217C008DBFB6 /* MediaLoadingView.swift */,
 				E3A239A72FC6D44D00CE6ACC /* TranslucentView.swift */,
 				E3B93C862FE9F77000803513 /* InteractiveMode.swift */,
 				34C4D19B2FC58482006B829F /* LiveTextSupport.swift */,
@@ -3093,6 +3096,7 @@
 				D17504A82918F13E005C3DD0 /* OSCToolbarButton.swift in Sources */,
 				84F7258F1D486185000DEF1B /* MPVProperty.swift in Sources */,
 				3465CC8F2FC72181008DBFB6 /* BufferIndicatorView.swift in Sources */,
+				A100CC8F2FC72181008DBFB6 /* MediaLoadingView.swift in Sources */,
 				E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */,
 				E3C228072FDF4E0C009A1A89 /* SidebarVideoPane.swift in Sources */,
 				84A0BA971D2FA1CE00BC8DA1 /* PlayerCore.swift in Sources */,

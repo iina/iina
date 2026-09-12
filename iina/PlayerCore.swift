@@ -227,6 +227,22 @@ class PlayerCore: NSObject {
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
   var syncUITimer: Timer?
+  private var loadingTimer: Timer?
+
+  func scheduleLoadingTimer(for url: URL?) {
+    cancelLoadingTimer()
+    loadingTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false) { [weak self] _ in
+      guard let self else { return }
+      if self.info.state == .loading || self.info.state == .starting {
+        self.currentController.showLoadingScreen(for: url)
+      }
+    }
+  }
+
+  func cancelLoadingTimer() {
+    loadingTimer?.invalidate()
+    loadingTimer = nil
+  }
 
   var displayOSD: Bool = true
 
@@ -546,9 +562,7 @@ class PlayerCore: NSObject {
     info.videoPosition = nil
     info.videoTracks = []
     info.videoWidth = nil
-    if isNetwork {
-      AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
-    }
+    scheduleLoadingTimer(for: url)
 
     let _ = mainWindow.window
     mainWindow.pendingShow = true
@@ -943,6 +957,8 @@ class PlayerCore: NSObject {
   ///     and call this method again to continue the process of stopping. It is important to stop the background task as if it is still
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
+    cancelLoadingTimer()
+    currentController.hideLoadingScreen()
     guard info.state != .shutDown else { return }
     savePlaybackPosition()
 
@@ -2084,6 +2100,10 @@ class PlayerCore: NSObject {
     }
     info.isNetworkResource = !info.currentURL!.isFileURL
 
+    if loadingTimer == nil {
+      scheduleLoadingTimer(for: info.currentURL)
+    }
+
     // set "date last opened" attribute
     if let url = info.currentURL, url.isFileURL {
       let time = Date().timeIntervalSince1970
@@ -2333,6 +2353,8 @@ class PlayerCore: NSObject {
   }
 
   func idleActiveChanged() {
+    cancelLoadingTimer()
+    currentController.hideLoadingScreen()
     if receivedEndFileWhileLoading && info.state == .starting {
       DispatchQueue.main.async { [unowned self] in
         currentController.close()
@@ -2733,6 +2755,8 @@ class PlayerCore: NSObject {
   }
 
   func notifyWindowVideoSizeChanged() {
+    cancelLoadingTimer()
+    currentController.hideLoadingScreen()
     currentController.handleVideoSizeChange()
     if currentController.pendingShow {
       currentController.pendingShow = false

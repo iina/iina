@@ -40,8 +40,8 @@ class MediaLoadingView: NSView {
     translatesAutoresizingMaskIntoConstraints = false
     isHidden = true
 
-    // Background is dark to match video canvas
-    layer?.backgroundColor = NSColor.black.cgColor
+    // Dark gray background matching QuickTime Player (#222222)
+    layer?.backgroundColor = NSColor(srgbRed: 34.0 / 255.0, green: 34.0 / 255.0, blue: 34.0 / 255.0, alpha: 1.0).cgColor
 
     progressIndicator.style = .spinning
     progressIndicator.isDisplayedWhenStopped = false
@@ -54,13 +54,13 @@ class MediaLoadingView: NSView {
     switch style {
     case .regular:
       progressIndicator.controlSize = .regular
-      loadingLabel.font = .systemFont(ofSize: 14, weight: .medium)
-      loadingLabel.textColor = .secondaryLabelColor
-      stackView.spacing = 12
+      loadingLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+      loadingLabel.textColor = NSColor(white: 0.92, alpha: 1.0)
+      stackView.spacing = 10
     case .compact:
       progressIndicator.controlSize = .small
-      loadingLabel.font = .systemFont(ofSize: 11, weight: .regular)
-      loadingLabel.textColor = .secondaryLabelColor
+      loadingLabel.font = .systemFont(ofSize: 12, weight: .medium)
+      loadingLabel.textColor = NSColor(white: 0.92, alpha: 1.0)
       stackView.spacing = 6
     }
 

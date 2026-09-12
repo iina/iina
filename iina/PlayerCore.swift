@@ -228,10 +228,11 @@ class PlayerCore: NSObject {
 
   var syncUITimer: Timer?
   private var loadingTimer: Timer?
+  private static let loadingScreenThreshold: TimeInterval = 1.0
 
   func scheduleLoadingTimer(for url: URL?) {
     cancelLoadingTimer()
-    loadingTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: false) { [weak self] _ in
+    loadingTimer = Timer.scheduledTimer(withTimeInterval: Self.loadingScreenThreshold, repeats: false) { [weak self] _ in
       guard let self else { return }
       if self.info.state == .loading || self.info.state == .starting {
         self.currentController.showLoadingScreen(for: url)

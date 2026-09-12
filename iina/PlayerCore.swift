@@ -563,12 +563,20 @@ class PlayerCore: NSObject {
     info.videoPosition = nil
     info.videoTracks = []
     info.videoWidth = nil
-    scheduleLoadingTimer(for: url)
-
     let _ = mainWindow.window
     mainWindow.pendingShow = true
     miniPlayer.pendingShow = true
     initialWindow.close()
+
+    // If autoSwitchToMusicMode is enabled and opening an audio file, pre-switch to miniPlayer
+    // so loading screen and playback are hosted directly in miniPlayer without window jumping.
+    let isAudioFile = Utility.mediaType(forExtension: url.pathExtension) == .audio
+    if Preference.bool(for: .autoSwitchToMusicMode), !overrideAutoSwitchToMusicMode, isAudioFile, !isInMiniPlayer {
+      log("Pre-switching to mini player for audio file: \(url.pathExtension)")
+      switchToMiniPlayer(automatically: true, showMiniPlayer: false)
+    }
+
+    scheduleLoadingTimer(for: url)
 
     if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
       log("Pausing playback before running load command")

@@ -96,6 +96,7 @@ class MainWindowController: PlayerWindowController {
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
   var bufferIndicatorView: BufferIndicatorView!
+  var mediaLoadingView: MediaLoadingView!
   var timePreviewView: TimePreviewView!
   var titlebarOnTopButton: NSButton!
   var thumbnailPeekView: ThumbnailPeekView!
@@ -484,6 +485,14 @@ class MainWindowController: PlayerWindowController {
     cv.addSubview(additionalInfoView)
     bufferIndicatorView = BufferIndicatorView(mainWindow: self)
     cv.addSubview(bufferIndicatorView)
+    mediaLoadingView = MediaLoadingView(style: .regular)
+    cv.addSubview(mediaLoadingView)
+    NSLayoutConstraint.activate([
+      mediaLoadingView.leadingAnchor.constraint(equalTo: cv.leadingAnchor),
+      mediaLoadingView.trailingAnchor.constraint(equalTo: cv.trailingAnchor),
+      mediaLoadingView.topAnchor.constraint(equalTo: cv.topAnchor),
+      mediaLoadingView.bottomAnchor.constraint(equalTo: cv.bottomAnchor)
+    ])
     titleBarView = Titlebar(mainWindow: self)
     cv.addSubview(titleBarView)
     sidebars.installSubviews(in: cv)
@@ -1433,6 +1442,7 @@ class MainWindowController: PlayerWindowController {
     // Reset default visibilities
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
+    mediaLoadingView?.hide()
 
     player.events.emit(.windowWillClose)
   }
@@ -2168,6 +2178,43 @@ class MainWindowController: PlayerWindowController {
         fsState == .windowed ? .auto : .alwaysShown
       }
     }
+  }
+
+  override func showLoadingScreen(for url: URL?) {
+    guard let window else { return }
+
+    updateTitle()
+
+    titleBarView?.isHidden = false
+    titleBarView?.alphaValue = 1.0
+
+    oscBottomView?.isHidden = true
+    oscFloatingView?.isHidden = true
+
+    mediaLoadingView?.show()
+
+    if !window.isVisible {
+      let screen = determineScreenToUse(window)
+      let screenRect = screen.visibleFrame
+      var initialFrame: NSRect
+
+      if let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String,
+         let _ = NSScreen.screens.first(where: { NSPointInRect(NSRectFromString(rectString).origin, $0.frame) }) {
+        initialFrame = NSRectFromString(rectString)
+      } else {
+        initialFrame = AppData.sizeWhenNoVideo.centeredRect(in: screenRect)
+      }
+      initialFrame = initialFrame.constrain(in: screenRect)
+      window.setFrame(initialFrame, display: false)
+
+      showWindow(self)
+    } else {
+      window.makeKeyAndOrderFront(self)
+    }
+  }
+
+  override func hideLoadingScreen() {
+    mediaLoadingView?.hide()
   }
 
   // MARK: - UI: OSD

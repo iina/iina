@@ -16,7 +16,6 @@ fileprivate let saperatorPadding: ALConstraint = .top(15)
 fileprivate let gridColumnSpacing: CGFloat = 15
 
 fileprivate let watchTableBackgroundColor = NSColor(red: 2.0/3, green: 2.0/3, blue: 2.0/3, alpha: 0.1)
-fileprivate let watchTableColumnHeaderColor = NSColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
 
 fileprivate let subsystem = Logger.makeSubsystem("inspector", ["tablecells"])
 
@@ -481,7 +480,7 @@ class TracksVC: NSViewController, InspectorTabUpdating {
 }
 
 class FileVC: NSViewController, InspectorTabUpdating {
-  let filePath = CommonField(style: .value)
+  let filePath = NSPathControl()
 
   let fileTitle = CommonField(style: .value)
   let fileComment = CommonField(style: .value)
@@ -495,12 +494,15 @@ class FileVC: NSViewController, InspectorTabUpdating {
     let view = NSView()
     self.view = view
 
+    filePath.translatesAutoresizingMaskIntoConstraints = false
     let filePathLabel = CommonField(NSLocalizedString("inspector.file_path", comment: "File Path"), style: .prompt)
     view.addSubview(filePathLabel)
     filePathLabel.padding(leadingPadding, topPadding)
     view.addSubview(filePath)
-    filePath.leadingAnchor.constraint(equalTo: filePathLabel.leadingAnchor).isActive = true
     filePath.spacing(.top(4), to: filePathLabel)
+    filePath.padding(.leading(15), .trailing(15))
+    filePath.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+    filePath.controlSize = .mini
 
     let separator = NSBox()
     separator.boxType = .separator
@@ -536,7 +538,6 @@ class FileVC: NSViewController, InspectorTabUpdating {
       let commentKey = MPVProperty.metadata + "/by-key/comment"
 
       let strProperties: [String: NSTextField] = [
-        MPVProperty.path: filePath,
         MPVProperty.fileFormat: fileFormat,
         MPVProperty.chapters: fileChapters,
         MPVProperty.editions: fileEditions,
@@ -562,6 +563,10 @@ class FileVC: NSViewController, InspectorTabUpdating {
           v.stringValue = value ?? ""
           v.allowsEditingTextAttributes = false
         }
+      }
+
+      if let path = controller.getString(MPVProperty.path) {
+        filePath.url = URL(fileURLWithPath: path)
       }
 
       let duration = controller.getDouble(MPVProperty.duration)
@@ -636,7 +641,7 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
 
     watchTableView.addTableColumn(keyColumn)
     watchTableView.addTableColumn(valueColumn)
-    watchTableView.style = .plain
+    watchTableView.style = .fullWidth
     watchTableView.columnAutoresizingStyle = .lastColumnOnlyAutoresizingStyle
     watchTableView.focusRingType = .none
     watchTableView.allowsColumnReordering = false
@@ -646,7 +651,7 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
 
     let headerFont = NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize)
     for column in watchTableView.tableColumns {
-      let headerCell = WatchTableColumnHeaderCell()
+      let headerCell = NSTableHeaderCell()
       // Use the localized title we just set on the column
       let title = column.headerCell.title
       // Use small bold system font
@@ -659,7 +664,7 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
     let scrollView = NSScrollView()
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.documentView = watchTableView
-    scrollView.hasVerticalScroller = true
+    scrollView.hasVerticalScroller = false
     scrollView.hasHorizontalScroller = false
     scrollView.drawsBackground = false
 
@@ -845,16 +850,5 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
       /// calling `reloadData(forRowIndexes:)` will get the same result but much more efficiently
       watchTableView.reloadData(forRowIndexes: IndexSet(0..<watchTableView.numberOfRows), columnIndexes: IndexSet(0..<watchTableView.numberOfColumns))
     }
-  }
-}
-
-class WatchTableColumnHeaderCell: NSTableHeaderCell {
-  override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
-    // Override background color
-    drawsBackground = false
-    watchTableColumnHeaderColor.set()
-    cellFrame.fill(using: .sourceOver)
-
-    super.draw(withFrame: cellFrame, in: controlView)
   }
 }

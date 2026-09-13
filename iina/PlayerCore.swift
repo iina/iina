@@ -2535,6 +2535,12 @@ class PlayerCore: NSObject {
     getSelectedTracks()
     let audioStatus = info.isAudio
 
+    // Now Playing is first updated when the file starts, before the track list is known, so the
+    // media is treated as video and the artist and album are omitted. Update it again now.
+    if self == PlayerCore.lastActive {
+      NowPlayingInfoManager.shared.updateInfo(withTitle: true)
+    }
+
     // if need to switch to music mode
     if Preference.bool(for: .autoSwitchToMusicMode) {
       if overrideAutoSwitchToMusicMode {

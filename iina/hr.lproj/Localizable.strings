@@ -763,17 +763,17 @@
 
 // Settings - Network
 "settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
-"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseWait.label" = "Broj sekundi za spremanje u međuspremnik prije ponovnog pokretanja";
 "settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
-"settings.cachePauseInitial.label" = "Buffer before starting playback";
-"settings.defaultCacheSize.desc" = "Default: 153,600";
-"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
-"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.cachePauseInitial.label" = "Spremi u međuspremnik prije pokretanja reprodukcije";
+"settings.defaultCacheSize.desc" = "Standardno: 153.600";
+"settings.defaultCacheSize.label" = "Veličina predmemorije (KiB)";
+"settings.enableCache.label" = "Prethodno učitaj i spremi mrežne podatke u međuspremnik";
 "settings.httpProxy.desc" = "Za primjenu se IINA mora ponovo pokrenuti.";
 "settings.httpProxy.label" = "HTTP proxy";
-"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.desc" = "Standardno: 36.000";
 "settings.secPrefech.label" = "Broj sekundi predučitavanja";
-"settings.showBufferingThrobber.label" = "Show throbber when buffering";
+"settings.showBufferingThrobber.label" = "Prikaži animiranu ikonu tijekom spremanja u međuspremnik";
 "settings.showSeekingThrobber.label" = "Prikaži animiranu ikonu izvršavanja radnje tijekom navigiranja";
 "settings.transportRTSPThrough.items.0" = "Automatski";
 "settings.transportRTSPThrough.label" = "Prenesi RTSP prijenos kroz";
@@ -804,10 +804,10 @@
 "settings.subAutoLoadSearchPath.label" = "Traži titlove i u sljedećim direktorijima";
 "settings.subBlur.label" = "Zamagljenje";
 "settings.subBold.desc" = "sans-serif";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
-"settings.subBorderStyle.items.3" = "Opaque Box";
-"settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.items.1" = "Kontura i sjena";
+"settings.subBorderStyle.items.3" = "Neprozirna kutija";
+"settings.subBorderStyle.items.4" = "Kutija s pozadinom";
+"settings.subBorderStyle.label" = "Stil ruba";
 "settings.subBold.label" = "Podebljano";
 "settings.subItalic.label" = "Kurziv";
 "settings.subLang.desc" = "Ova opcija će biti spremljena kao ISO 639-2 koda jezika i će raditi za mpv i opensubtitles.";
@@ -896,7 +896,7 @@
 "settings.$About" = "O programu";
 "settings.$Accessibility" = "Pristupačnost";
 "settings.$AdditionalMpvOptions" = "Dodatne mpv opcije";
-"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$AdditionalMpvOptions.desc" = "Zalijepi opciju u formatu ključ=vrijednost (key=value) kako bi se oba polja automatski popunila.";
 "settings.$Advanced" = "Napredno";
 "settings.$Align" = "Poravnaj";
 "settings.$AlwaysWhenPlaying" = "Uvijek kada se reproducira nova datoteka";

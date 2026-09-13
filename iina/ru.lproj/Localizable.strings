@@ -666,7 +666,7 @@
 "settings.loadIccProfile.desc" = "Загружать ICC-профиль текущего дисплея и использовать его для преобразования RGB-видео (только для SDR-видео)";
 "settings.loadIccProfile.label" = "Загружать цветовой профиль дисплея";
 "settings.toneMappingAlgorithm.label" = "Алгоритм";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingTargetPeak.desc" = "Измеренная пиковая яркость дисплея. По умолчанию IINA автоматически определяет нужное значение. Если автоопределение не удалось, яркость будет установлена на подходящее значение, основанное на характеристиках передачи дисплея. Включите этот параметр, если хотите вручную задать яркость дисплея.";
 "settings.toneMappingTargetPeak.label" = "Пиковая яркость";
 "settings.videoThreads.desc" = "По умолчанию: 0 (автоматически)";
 "settings.videoThreads.label" = "Количество потоков";
@@ -804,10 +804,10 @@
 "settings.subAutoLoadSearchPath.label" = "Также искать субтитры в следующих папках";
 "settings.subBlur.label" = "Размытие";
 "settings.subBold.desc" = "sans-serif";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
-"settings.subBorderStyle.items.3" = "Opaque Box";
-"settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.items.1" = "Контур и тень";
+"settings.subBorderStyle.items.3" = "Фон для каждой строки";
+"settings.subBorderStyle.items.4" = "Фон для всего текста";
+"settings.subBorderStyle.label" = "Выделение текста";
 "settings.subBold.label" = "Жирный";
 "settings.subItalic.label" = "Курсивный";
 "settings.subLang.desc" = " Коды по ISO 639-2 (например, rus, eng). Применяются как для плеера, так и для OpenSubtitles.";
@@ -906,7 +906,7 @@
 "settings.$AutoLoad" = "Автозагрузка";
 "settings.$Background" = "Фон";
 "settings.$Behavior" = "Поведение";
-"settings.$Border" = "Рамка";
+"settings.$Border" = "Контур";
 "settings.$BrowserExtensions" = "Расширения браузера";
 "settings.$Cache" = "Кэш";
 "settings.$Cancel" = "Отмена";
@@ -951,7 +951,7 @@
 "settings.$Installed" = "Установлено";
 "settings.$Installing" = "Установка";
 "settings.$KeyBindingSet" = "Конфигурация";
-"settings.$Layout" = "Макет";
+"settings.$Layout" = "Расположение";
 "settings.$LegacyOpenSubAlert" = "⚠️ Поддержка предыдущей настройки OpenSubtitles устарела. Пожалуйста, используйте вместо этого плагин OpenSubtitles. Если требуется вход в систему, пожалуйста, зайдите в устаревшее окно настроек.";
 "settings.$LiveText" = "Сканер текста";
 "settings.$Logging" = "Журналирование";
@@ -1007,7 +1007,7 @@
 "settings.$Toolbar" = "Панель инструментов";
 "settings.$Trackpad" = "Трекпад";
 "settings.$Uninstall" = "Удалить";
-"settings.$Volume" = "громкость";
+"settings.$Volume" = "Громкость";
 "settings.$Website" = "Сайт";
 "settings.$WhenEnteringPIP" = "При переходе в режим «Картинка в картинке»";
 "settings.$WhenMediaIsOpened" = "При открытии файла";

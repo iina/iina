@@ -100,6 +100,7 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **[User Scripts](https://github.com/iina/plugin-userscript)** (`iina/plugin-userscript`) - Run custom JavaScript snippets.
 
 ### Community Plugins
+- **[AirPlay](https://github.com/ozykhan/iina-airplay)** (`ozykhan/iina-airplay`) - Cast the current file to an Apple TV over AirPlay; IINA stays the remote.
 - **[Anime4K](https://github.com/yorkyang2333/iina-anime4k)** (`yorkyang2333/iina-anime4k`) - Apply Anime4K shaders for real-time anime upscaling.
 - **[Auto Skip](https://github.com/pangziqiang/iina-auto-skip)** (`pangziqiang/iina-auto-skip`) - Automatically skip intro and outro sections with visual drag-to-set overlay.
 - **[Bilingual Audio](https://github.com/glechic/iina-bilingual-audio)** (`glechic/iina-bilingual-audio`) - Play two audio tracks with left/right channel separation for bilingual viewing.

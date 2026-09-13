@@ -227,7 +227,7 @@
 "menu.sub_delay_down" = "字幕ディレイ - %@秒";
 
 "menu.crop_custom" = "カスタム…";
-"menu.find_online_sub" = "%@ からオンライン字幕を検索";
+"menu.find_online_sub" = "%@からオンライン字幕を検索";
 
 "menu.manage_plugins" = "プラグインを管理…";
 "menu.developer_tool" = "デベロッパツール";
@@ -341,8 +341,8 @@
 "alert.clear_history.title" = "再生履歴を消去";
 "alert.clear_history.message" = "すべての再生履歴を削除してもよろしいですか?";
 
-"alert.clear_watch_later.title" = "保存済み再生進行状況を消去";
-"alert.clear_watch_later.message" = "すべての保存済み再生進行状況（\"あとで見る\"データ）を消去してもよろしいですか?";
+"alert.clear_watch_later.title" = "保存済みの再生進行状況を消去";
+"alert.clear_watch_later.message" = "すべての保存済みの再生進行状況（\"あとで見る\"データ）を消去してもよろしいですか?";
 
 "alert.restore_alerts.title" = "非表示にした警告を復元";
 "alert.restore_alerts.message" = "すべての非表示にした警告を復元してもよろしいですか?";
@@ -422,7 +422,7 @@
 
 "gaplessAudio.no" = "連続したオーディオファイルを再生する場合は、ファイル変更時に無音または中断が生じることがあります。";
 "gaplessAudio.weak" = "デコーダ出力のオーディオフォーマットを変更した場合、オーディオデバイスが閉じられたあと再度開かれるため、ギャップレス再生が中断されます。";
-"gaplessAudio.yes" = "オーディオデバイスは、最初に再生するファイルで選択されたパラメータを使用して開かれたあと、ギャップレス再生のため開かれたままになります。次のファイルが再サンプリングされる場合があります。";
+"gaplessAudio.yes" = "オーディオデバイスは、最初に再生するファイルで選択したパラメータを使用して開かれたあと、ギャップレス再生のため開かれたままになります。後続のファイルについては再サンプリングされる場合があります。";
 
 "subencoding.auto" = "自動検出";
 
@@ -434,7 +434,7 @@
 "osc_toolbar.sub_track" = "字幕トラックを選択";
 "osc_toolbar.screenshot" = "スクリーンショットを撮る";
 "osc_toolbar.plugins" = "プラグインパネルを表示";
-"osc_toolbar.live_text" = "テキスト認識表示を切り替え";
+"osc_toolbar.live_text" = "テキスト認識表示を切り替える";
 
 "osc_pos.floating" = "フローティング";
 "osc_pos.top" = "上";
@@ -623,7 +623,7 @@
 "settings.pauseWhenGoesToSleep.label" = "スリープ時に一時停止";
 "settings.pauseWhenInactive.label" = "ウインドウが非アクティブ/アクティブになるとき";
 "settings.pauseWhenLeavingFullScreen.label" = "フルスクリーン解除時に一時停止";
-"settings.pauseWhenMinimized.label" = "最小化/最小化を解除";
+"settings.pauseWhenMinimized.label" = "最小化/復元";
 "settings.pauseWhenOpen.label" = "一時停止";
 "settings.pauseresumeWhen" = "次のとき再生を一時停止/再開";
 "settings.playWhenEnteringFullScreen.label" = "フルスクリーンにしたとき再生";
@@ -652,7 +652,7 @@
 // Settings - Video
 "settings.enableHdrSupport.desc" = "HDRビデオを再生中は、デフォルトでHDRモードを有効にします。";
 "settings.enableHdrSupport.label" = "HDRモードを有効にする";
-"settings.enableLiveText.desc" = "テキスト認識のために、一時停止中のビデオフレームにテキスト認識表示をオーバレイ表示します。macOS 13以降が必要です。";
+"settings.enableLiveText.desc" = "認識されたテキストを、一時停止中のビデオフレームにオーバレイ表示します。macOS 13以降が必要です。";
 "settings.enableLiveText.label" = "テキスト認識表示";
 "settings.enableToneMapping.label" = "トーンマッピングを有効にする";
 "settings.forceDedicatedGPU.desc" = "レンダリングに外部GPUを常に使用します（搭載されている場合）。パフォーマンスが向上しますが、バッテリー駆動時間が短くなる可能性があります。";
@@ -667,7 +667,7 @@
 "settings.loadIccProfile.desc" = "現在のディスプレイ用ICCプロファイルを読み込み、ビデオRGBを画面出力に変換するために使用します。（SDRモードに対してだけ）";
 "settings.loadIccProfile.label" = "ICCプロファイルを読み込む";
 "settings.toneMappingAlgorithm.label" = "アルゴリズム";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingTargetPeak.desc" = "ディスプレイの測定済み最大輝度。IINAはデフォルトでこの値を検出します。検出できない場合には、ディスプレイの伝達特性に基づき、目標とする最大輝度を適切な値に設定します。ディスプレイ輝度を手動で指定するには、この設定を有効にしてください。";
 "settings.toneMappingTargetPeak.label" = "ターゲットピーク値";
 "settings.videoThreads.desc" = "デフォルト: 0 （自動）";
 "settings.videoThreads.label" = "スレッド数";
@@ -683,7 +683,7 @@
 "settings.gaplessAudio.items.1" = "弱め";
 "settings.gaplessAudio.items.1.desc" = "デコーダ出力のオーディオフォーマットを変更した場合、オーディオデバイスが閉じられたあと再度開かれるため、ギャップレス再生が中断されます。";
 "settings.gaplessAudio.items.2" = "強め";
-"settings.gaplessAudio.items.2.desc" = "オーディオデバイスは、最初に再生するファイルで選択されたパラメータを使用して開かれたあと、ギャップレス再生のため開かれたままになります。次のファイルが再サンプリングされる場合があります。";
+"settings.gaplessAudio.items.2.desc" = "オーディオデバイスは、最初に再生するファイルで選択したパラメータを使用して開かれたあと、ギャップレス再生のため開かれたままになります。後続のファイルについては再サンプリングされる場合があります。";
 "settings.gaplessAudio.label" = "ギャップレスオーディオ";
 "settings.maxVolume.desc" = "（100-1000）";
 "settings.maxVolume.label" = "最大音量";
@@ -704,7 +704,7 @@
 "settings.doubleClickAction.items.0" = "なし";
 "settings.doubleClickAction.items.1" = "フルスクリーンにする/解除";
 "settings.doubleClickAction.items.2" = "一時停止/再開";
-"settings.doubleClickAction.items.4" = "ピクチャインピクチャを切り替え";
+"settings.doubleClickAction.items.4" = "ピクチャインピクチャにする/解除";
 "settings.doubleClickAction.items.5" = "A-Bリピート";
 "settings.doubleClickAction.items.6" = "速度をリセット";
 "settings.doubleClickAction.label" = "ダブルクリックして";
@@ -722,7 +722,7 @@
 "settings.middleClickAction.items.1" = "フルスクリーンにする/解除";
 "settings.middleClickAction.items.2" = "一時停止/再開";
 "settings.middleClickAction.items.3" = "OSCを非表示";
-"settings.middleClickAction.items.4" = "ピクチャインピクチャを切り替え";
+"settings.middleClickAction.items.4" = "ピクチャインピクチャにする/解除";
 "settings.middleClickAction.items.5" = "A-Bリピート";
 "settings.middleClickAction.items.6" = "速度をリセット";
 "settings.middleClickAction.label" = "ミドルクリックして";
@@ -736,7 +736,7 @@
 "settings.rightClickAction.items.0" = "なし";
 "settings.rightClickAction.items.2" = "一時停止/再開";
 "settings.rightClickAction.items.3" = "OSCを非表示";
-"settings.rightClickAction.items.4" = "ピクチャインピクチャを切り替え";
+"settings.rightClickAction.items.4" = "ピクチャインピクチャにする/解除";
 "settings.rightClickAction.items.5" = "A-Bリピート";
 "settings.rightClickAction.items.6" = "速度をリセット";
 "settings.rightClickAction.label" = "右クリックして";
@@ -805,10 +805,10 @@
 "settings.subAutoLoadSearchPath.label" = "次のディレクトリの字幕も検索";
 "settings.subBlur.label" = "ブラー";
 "settings.subBold.desc" = "サンセリフ";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
-"settings.subBorderStyle.items.3" = "Opaque Box";
-"settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.items.1" = "アウトラインとシャドウ";
+"settings.subBorderStyle.items.3" = "不透明ボックス";
+"settings.subBorderStyle.items.4" = "背景ボックス";
+"settings.subBorderStyle.label" = "枠のスタイル";
 "settings.subBold.label" = "ボールド";
 "settings.subItalic.label" = "イタリック";
 "settings.subLang.desc" = "このオプションはISO 639-2言語コードで保存され、mpvとopensubtitlesの両方で使用できます。";
@@ -829,7 +829,7 @@
 // Settings - UI
 "settings.more_ui_settings" = "レイアウトサイドバーでユーザインターフェイスを設定することができます。";
 "settings.alwaysFloatOnTop.label" = "再生中はウインドウを常に最前面に表示";
-"settings.alwaysShowOnTopIcon.label" = "最前面表示状況を常にタイトルバーに表示";
+"settings.alwaysShowOnTopIcon.label" = "最前面表示の状況を常にタイトルバーに表示";
 "settings.arrowBtnAction.items.0" = "速度";
 "settings.arrowBtnAction.items.1" = "前/次のメディアへ";
 "settings.arrowBtnAction.items.2" = "早送り/早戻し";
@@ -860,7 +860,7 @@
 "settings.resizeWindowOption.items.2" = "1×ビデオサイズ";
 "settings.resizeWindowOption.items.3" = "1.5×ビデオサイズ";
 "settings.resizeWindowOption.items.4" = "2×ビデオサイズ";
-"settings.resizeWindowOption.label" = "ウインドウのサイズを変更して";
+"settings.resizeWindowOption.label" = "ウインドウのサイズを変更";
 "settings.scaleRemainingTime.label" = "再生速度に基づく残り時間";
 "settings.showChapterPos.label" = "チャプタの位置をプログレスバーに表示";
 "settings.showRemainingTime.label" = "合計継続時間の代わりに残り時間を表示";
@@ -919,7 +919,7 @@
 "settings.$Chrome" = "Chrome";
 "settings.$ClearCache" = "キャッシュを消去";
 "settings.$ClearPlaybackHistory" = "再生履歴を消去";
-"settings.$ClearSavedPlaybackProgress" = "保存済み再生進行状況を消去";
+"settings.$ClearSavedPlaybackProgress" = "保存済みの再生進行状況を消去";
 "settings.$ClearThumbnailCache" = "サムネールキャッシュを消去";
 "settings.$Color" = "色";
 "settings.$ColorHDR" = "カラーとHDR";
@@ -930,7 +930,7 @@
 "settings.$DefaultApplication" = "デフォルトのアプリケーション";
 "settings.$DefaultEncoding" = "デフォルトのエンコーディング";
 "settings.$DeleteAllPlaybackHistories" = "再生履歴と\"最近開いた項目\"のエントリーをすべて削除します。";
-"settings.$DeleteAllWatchLater" = "下のボタンをクリックすると\"あとで再生\" フォルダ内のすべてのファイルを削除します。これらのファイルには、保存された再生進行状況や、再生中に適用した設定がすべて含まれています。";
+"settings.$DeleteAllWatchLater" = "下のボタンをクリックすると\"あとで再生\" フォルダ内のすべてのファイルを削除します。これらのファイルには、保存済みの再生進行状況や、再生中に適用した設定がすべて含まれています。";
 "settings.$DoNotResize" = "サイズを変更しない";
 "settings.$DuplicateCurrentSet" = "現在の設定を複製…";
 "settings.$FailedToLoadThePage" = "ページを読み込みできませんでした。";
@@ -1012,7 +1012,7 @@
 "settings.$Uninstall" = "アンインストール";
 "settings.$Volume" = "音量";
 "settings.$Website" = "Webサイト";
-"settings.$WhenEnteringPIP" = "ピクチャインピクチャに入ったとき";
+"settings.$WhenEnteringPIP" = "ピクチャインピクチャにしたとき";
 "settings.$WhenMediaIsOpened" = "メディアが開かれたとき";
 "settings.$WhenMediaIsOpenedManually" = "メディアが手動で開かれたとき";
 "settings.$Width" = "幅";

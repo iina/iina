@@ -54,6 +54,8 @@ class InitialWindowController: NSWindowController {
   @IBOutlet weak var mainView: NSView!
   @IBOutlet weak var betaIndicatorView: BetaIndicatorView!
   @IBOutlet weak var betaTextField: NSTextField!
+  @IBOutlet weak var buildBranchButton: NSButton!
+  @IBOutlet weak var buildDateLabel: NSTextField!
   @IBOutlet weak var lastFileContainerView: InitialWindowViewActionButton!
   @IBOutlet weak var lastFileIcon: NSImageView!
   @IBOutlet weak var lastFileNameLabel: NSTextField!
@@ -114,22 +116,47 @@ class InitialWindowController: NSWindowController {
     mainView.wantsLayer = true
 
     let infoDict = InfoDictionary.shared
-    let (version, build) = infoDict.version
+    let (version, _) = infoDict.version
 
     betaTextField.stringValue = infoDict.buildType.description
 
+    versionLabel.stringValue = version
     switch infoDict.buildType {
+    case .beta, .debug, .nightly:
+      betaIndicatorView.isHidden = false
     case .release:
-      versionLabel.stringValue = version
-    case .beta:
-      versionLabel.stringValue = "\(version) (build \(build))"
-      betaIndicatorView.isHidden = false
+      break
+    }
+
+    // Use a localized date for the build date.
+    let toString = DateFormatter()
+    toString.dateStyle = .medium
+    toString.timeStyle = .medium
+
+    switch InfoDictionary.shared.buildType {
     case .nightly:
-      versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
-      betaIndicatorView.isHidden = false
+      if let buildDate = InfoDictionary.shared.buildDate,
+         let buildSHA = InfoDictionary.shared.shortCommitSHA {
+        buildDateLabel.stringValue = toString.string(from: buildDate)
+        buildDateLabel.isHidden = false
+        buildBranchButton.title = buildBranchButton.userInterfaceLayoutDirection == .leftToRight ?
+          "NIGHTLY " + buildSHA : buildSHA + " NIGHTLY"
+        buildBranchButton.action = #selector(self.openCommitLink)
+        buildBranchButton.isHidden = false
+      }
     case .debug:
-      versionLabel.stringValue = "\(version)+g\(InfoDictionary.shared.shortCommitSHA ?? "")"
-      betaIndicatorView.isHidden = false
+      if let buildDate = InfoDictionary.shared.buildDate,
+         let buildBranch = InfoDictionary.shared.buildBranch,
+         let buildSHA = InfoDictionary.shared.shortCommitSHA {
+        buildDateLabel.stringValue = toString.string(from: buildDate)
+        buildDateLabel.isHidden = false
+        buildBranchButton.title = buildBranchButton.userInterfaceLayoutDirection == .leftToRight ?
+          buildBranch + " " + buildSHA : buildSHA + " " + buildBranch
+        buildBranchButton.action = #selector(self.openCommitLink)
+        buildBranchButton.isHidden = false
+      }
+    default:
+      break
     }
 
     loadLastPlaybackInfo()
@@ -163,6 +190,11 @@ class InitialWindowController: NSWindowController {
 
   @objc func onTableClicked() {
     openRecentItemFromTable(recentFilesTableView.clickedRow)
+  }
+
+  @objc func openCommitLink() {
+    guard let commitSHA = InfoDictionary.shared.buildCommit else { return }
+    NSWorkspace.shared.open(.init(string: "https://github.com/iina/iina/commit/\(commitSHA)")!)
   }
 
   private func openRecentItemFromTable(_ rowIndex: Int) {

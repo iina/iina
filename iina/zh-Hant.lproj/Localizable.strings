@@ -673,7 +673,7 @@
 "settings.videoThreads.label" = "執行緒數";
 
 // Settings - Audio
-"settings.audioDriverEnableAVFoundation.items.0.desc" = "The default audio driver.";
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "預設的聲音驅動程式。";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation是一個新的實驗性音頻驅動程序，提供空間音頻支持。然而，在使用AVFoundation時，您可能會遇到一些問題，例如音頻延遲。";
 "settings.audioDriverEnableAVFoundation.label" = "聲訊驅動";
 "settings.enableInitialVolume.label" = "初始音量";
@@ -768,26 +768,26 @@
 "settings.cachePauseWait.label" = "Seconds to buffer before restarting";
 "settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
 "settings.cachePauseInitial.label" = "Buffer before starting playback";
-"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.desc" = "預設：153,600";
 "settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
 "settings.enableCache.label" = "Prefetch and buffer network data";
 "settings.httpProxy.desc" = "必須重新啟動 IINA 來讓設定生效";
 "settings.httpProxy.label" = "HTTP 代理";
-"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.desc" = "預設：36,000";
 "settings.secPrefech.label" = "預先擷取秒數";
 "settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "在檢索時顯示載入圖示";
 "settings.transportRTSPThrough.items.0" = "自動";
 "settings.transportRTSPThrough.label" = "傳輸 RTSP 串流時使用";
 "settings.userAgent.label" = "使用者代理";
-"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
+"settings.ytdlEnabled.label" = "啟用 mpv 的 youtube-dl 腳本";
 "settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
 "settings.ytdlRawOptions.label" = "額外參數";
 "settings.ytdlSearchPath.desc" = "IINA 將在此檔案夾內搜尋 youtube-dl，需要重新啟動";
 "settings.ytdlSearchPath.label" = "自定 youtube-dl 路徑";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "此功能會讓 IINA 自動幫尚無載入字幕且片長超過 20 分鐘的影片在網路上搜尋字幕。";
 "settings.autoSearchOnlineSub.label" = "自動搜尋線上字幕";
 "settings.displayInLetterBox.label" = "全螢幕時在黑邊顯示字幕";
 "settings.subAlignX.items.0" = "齊左";
@@ -805,11 +805,11 @@
 "settings.subAutoLoadSearchPath.desc" = "目錄之間由冒號（:）隔開。允許相對路徑和在結尾處使用萬用字元（*）。";
 "settings.subAutoLoadSearchPath.label" = "也在下列的目錄中搜尋字幕";
 "settings.subBlur.label" = "模糊";
-"settings.subBold.desc" = "sans-serif";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBold.desc" = "無襯線字型";
+"settings.subBorderStyle.items.1" = "輪廓與陰影";
 "settings.subBorderStyle.items.3" = "Opaque Box";
 "settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.label" = "邊框樣式";
 "settings.subBold.label" = "粗體";
 "settings.subItalic.label" = "斜體";
 "settings.subLang.desc" = "此選項將會以 ISO 639-2 編碼儲存，可使用於 mpv 和 OpenSubtitles 。";
@@ -871,7 +871,7 @@
 "settings.themeMaterial.items.4" = "符合系統外觀";
 "settings.themeMaterial.label" = "外觀";
 "settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
-"settings.thumbnailWidth.label" = "Thumbnail width";
+"settings.thumbnailWidth.label" = "縮圖寬度";
 "settings.togglePipByMinimizingWindow.label" = "最小化/還原視窗時，自動切換「子母畫面」模式";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "僅限影片檔案";
 "settings.usePhysicalResolution.label" = "在 Retina 顯示器上使用原生解析度";
@@ -909,7 +909,7 @@
 "settings.$Background" = "背景";
 "settings.$Behavior" = "行為";
 "settings.$Border" = "邊框";
-"settings.$BrowserExtensions" = "Browser Extensions";
+"settings.$BrowserExtensions" = "瀏覽器擴充功能";
 "settings.$Cache" = "快取";
 "settings.$Cancel" = "取消";
 "settings.$CheckForUpdates" = "自動檢查更新項目";
@@ -923,16 +923,16 @@
 "settings.$ClearSavedPlaybackProgress" = "清除儲存的播放進度";
 "settings.$ClearThumbnailCache" = "清除縮覽圖快取";
 "settings.$Color" = "顏色";
-"settings.$ColorHDR" = "Color and HDR";
-"settings.$CommunityPlugins" = "Community Plugins";
+"settings.$ColorHDR" = "色彩和 HDR";
+"settings.$CommunityPlugins" = "社群插件";
 "settings.$CreateAnEmptySet" = "Create an empty set…";
 "settings.$Customize" = "自定⋯";
-"settings.$Decoding" = "Decoding";
+"settings.$Decoding" = "解碼";
 "settings.$DefaultApplication" = "預設應用程式";
 "settings.$DefaultEncoding" = "預設編碼";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
 "settings.$DeleteAllWatchLater" = "此按鈕將會刪除「watch later」檔案夾中的所有檔案。這些檔案包含了儲存的播放進度和播放時所套用的一些設定。";
-"settings.$DoNotResize" = "Do not resize";
+"settings.$DoNotResize" = "不調整大小";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "頁面讀取失敗";
 "settings.$Firefox" = "Firefox";
@@ -951,7 +951,7 @@
 "settings.$Install" = "安裝";
 "settings.$InstallLocalPackage" = "Install Local Package…";
 "settings.$Installed" = "已安裝";
-"settings.$Installing" = "Installing";
+"settings.$Installing" = "正在安裝";
 "settings.$KeyBindingSet" = "Key binding set";
 "settings.$Layout" = "佈局";
 "settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";

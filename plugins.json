@@ -30,6 +30,12 @@
     "id": "com.wyattowalsh.iina-plugin-bookmarks"
   },
   {
+    "name": "CineMode",
+    "url": "https://github.com/D0CA/iina-cinemode",
+    "desc": "Fullscreen pause overlay and skip intro; optional Stremio next-episode shortcut.",
+    "id": "com.doca.iina-cinemode"
+  },
+  {
     "name": "Clickable Subtitles",
     "url": "https://github.com/kerim/iina-clickable-subtitles",
     "desc": "Click subtitles to define words (macOS Look Up).",

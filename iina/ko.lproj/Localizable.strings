@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "현재 디스플레이에 ICC 프로파일을 적용하여 비디오의 RGB를 변환하여 스크린에 출력합니다. (SDR 모드에서만 작동합니다)";
 "settings.loadIccProfile.label" = "ICC 프로파일 불러오기";
 "settings.toneMappingAlgorithm.label" = "알고리즘";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "최대 밝기";
 "settings.videoThreads.desc" = "기본값: 0 (자동)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "기본 응용 프로그램";
 "settings.$DefaultEncoding" = "기본 인코딩";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "\"watch later\" 폴더에 있는 모든 이어보기 파일을 지웁니다.\n이 파일에는 재생중에 적용된 모든 설정과 재생위치가 기록되어 있습니다.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "페이지를 불러오는 데 실패했습니다.";

@@ -667,6 +667,9 @@
 "settings.loadIccProfile.desc" = "載入目前顯示的ICC配置檔，並使用它將視頻RGB轉換為屏幕輸出僅(適用於 SDR 模式)";
 "settings.loadIccProfile.label" = "載入 ICC 色彩描述檔";
 "settings.toneMappingAlgorithm.label" = "演算法";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "目標峰值";
 "settings.videoThreads.desc" = "預設：0 (自動)";
@@ -931,7 +934,7 @@
 "settings.$DefaultApplication" = "預設應用程式";
 "settings.$DefaultEncoding" = "預設編碼";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "此按鈕將會刪除「watch later」檔案夾中的所有檔案。這些檔案包含了儲存的播放進度和播放時所套用的一些設定。";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "不調整大小";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "頁面讀取失敗";

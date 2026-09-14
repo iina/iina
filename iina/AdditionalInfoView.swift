@@ -25,8 +25,9 @@ class AdditionalInfoView: TranslucentView {
     self.title = NSTextField(labelWithString: "")
     title.translatesAutoresizingMaskIntoConstraints = false
     title.font = .systemFont(ofSize: 18)
+    // priority must be in (250, 500) so it grows but can be compressed by window width
     title.setContentCompressionResistancePriority(
-      NSLayoutConstraint.Priority(rawValue: 200),
+      NSLayoutConstraint.Priority(rawValue: 300),
       for: .horizontal
     )
 

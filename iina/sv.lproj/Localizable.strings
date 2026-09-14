@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Ladda den aktuella skärmens ICC-profil och använd den för att omvandla video-RGB till skärm-output. (Gäller endast för SDR-läge)";
 "settings.loadIccProfile.label" = "Ladda ICC-profil";
 "settings.toneMappingAlgorithm.label" = "Algoritm";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Target peak";
 "settings.videoThreads.desc" = "Förval: 0 (auto)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Förvalt program";
 "settings.$DefaultEncoding" = "Förvald textkodning";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Knappen nedan raderar alla filer i \"titta senare\"-mappen. Dessa filer innehåller alla sparade uppspelningspositioner och inställningar som angetts under uppspelning.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Ändra inte storlek";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Det gick inte att läsa in sidan.";

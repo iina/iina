@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Загружать ICC-профиль текущего дисплея и использовать его для преобразования RGB-видео (только для SDR-видео)";
 "settings.loadIccProfile.label" = "Загружать цветовой профиль дисплея";
 "settings.toneMappingAlgorithm.label" = "Алгоритм";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Измеренная пиковая яркость дисплея. По умолчанию IINA автоматически определяет нужное значение. Если автоопределение не удалось, яркость будет установлена на подходящее значение, основанное на характеристиках передачи дисплея. Включите этот параметр, если хотите вручную задать яркость дисплея.";
 "settings.toneMappingTargetPeak.label" = "Пиковая яркость";
 "settings.videoThreads.desc" = "По умолчанию: 0 (автоматически)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Приложение по умолчанию";
 "settings.$DefaultEncoding" = "Кодировка по умолчанию";
 "settings.$DeleteAllPlaybackHistories" = "Удалить всю историю воспроизведения и историю недавних файлов.";
-"settings.$DeleteAllWatchLater" = "Кнопка ниже удаляет данные, которые содержат последние позиции воспроизведения и настройки, установленные во время проигрывания.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Не изменять размер";
 "settings.$DuplicateCurrentSet" = "Дублировать текущий набор…";
 "settings.$FailedToLoadThePage" = "Не удалось загрузить страницу.";

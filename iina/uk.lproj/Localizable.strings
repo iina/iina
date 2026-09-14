@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Завантажити профіль ICC для поточного дисплея і використовувати його для перетворення відео RGB на екран. (Тільки для режиму SDR)";
 "settings.loadIccProfile.label" = "Завантажити профіль ICC";
 "settings.toneMappingAlgorithm.label" = "Алгоритм";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Пікова яскравість";
 "settings.videoThreads.desc" = "За замовчуванням: 0 (автоматично)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Стандартна програма";
 "settings.$DefaultEncoding" = "Стандартне кодування";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Кнопка нижче видалить усі файли з папки відкладеного перегляду. Ці файли містять увесь прогрес перегляду та налаштування, застосовані під час перегляду.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Не вдалося завантажити сторінку.";

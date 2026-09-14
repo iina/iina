@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Laad het ICC-profiel voor huidige weergave en gebruik het om video RGB om te zetten naar schermuitvoer. (Alleen voor SDR-modus)";
 "settings.loadIccProfile.label" = "ICC-profiel laden";
 "settings.toneMappingAlgorithm.label" = "Algoritme";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Doel piek";
 "settings.videoThreads.desc" = "Standaard: 0 (automatisch)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Standaardprogramma";
 "settings.$DefaultEncoding" = "Standaard tekstcodering";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Wis bestanden in de \"bekijk later\" map. Deze bestanden bevatten de opgeslagen afspeelposities.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Fout bij het laden van de pagina.";

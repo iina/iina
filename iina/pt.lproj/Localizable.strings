@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Carregar o perfil ICC do ecrã atual e aplica-lo ao vídeo de saída. (Apenas valido em SDR)";
 "settings.loadIccProfile.label" = "Carregar perfil ICC";
 "settings.toneMappingAlgorithm.label" = "Algoritmo";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Pico Alvo";
 "settings.videoThreads.desc" = "Predefinição: 0 (Auto)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Aplicação Predefinida";
 "settings.$DefaultEncoding" = "Codificação predefinida";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "O botão abaixo apagará todos os arquivos na pasta \"Assistir mais tarde\". Estes arquivos contêm todo o progresso de reprodução guardado e configurações aplicadas durante a reprodução.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Falha ao carregar a página.";

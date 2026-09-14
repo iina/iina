@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Încarcă profilul ICC pentru display-ul curent și folosește-l pentru a transforma video RGB în output pe ecran. (Numai pentru modul SDR)";
 "settings.loadIccProfile.label" = "Încarcă profilul ICC";
 "settings.toneMappingAlgorithm.label" = "Algoritm";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Valoare maximă";
 "settings.videoThreads.desc" = "Implicit: 0 (Auto)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Aplicație Implicită";
 "settings.$DefaultEncoding" = "Codare implicită";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Butonul de mai jos va șterge toate fișierele din „Vizionează mai târziu”. Aceste fișiere conțin progresul de redare salvat și setările aplicate în timpul redării.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Încărcarea paginii a eșuat.";

@@ -667,6 +667,9 @@
 "settings.loadIccProfile.desc" = "現在のディスプレイ用ICCプロファイルを読み込み、ビデオRGBを画面出力に変換するために使用します。（SDRモードに対してだけ）";
 "settings.loadIccProfile.label" = "ICCプロファイルを読み込む";
 "settings.toneMappingAlgorithm.label" = "アルゴリズム";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "ディスプレイの測定済み最大輝度。IINAはデフォルトでこの値を検出します。検出できない場合には、ディスプレイの伝達特性に基づき、目標とする最大輝度を適切な値に設定します。ディスプレイ輝度を手動で指定するには、この設定を有効にしてください。";
 "settings.toneMappingTargetPeak.label" = "ターゲットピーク値";
 "settings.videoThreads.desc" = "デフォルト: 0 （自動）";
@@ -930,7 +933,7 @@
 "settings.$DefaultApplication" = "デフォルトのアプリケーション";
 "settings.$DefaultEncoding" = "デフォルトのエンコーディング";
 "settings.$DeleteAllPlaybackHistories" = "再生履歴と\"最近開いた項目\"のエントリーをすべて削除します。";
-"settings.$DeleteAllWatchLater" = "下のボタンをクリックすると\"あとで再生\" フォルダ内のすべてのファイルを削除します。これらのファイルには、保存済みの再生進行状況や、再生中に適用した設定がすべて含まれています。";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "サイズを変更しない";
 "settings.$DuplicateCurrentSet" = "現在の設定を複製…";
 "settings.$FailedToLoadThePage" = "ページを読み込みできませんでした。";

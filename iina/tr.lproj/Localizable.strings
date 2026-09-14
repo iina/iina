@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Videoyu RGB’den ekran çıktısına çevirebilmek için kullanılan ekrana gerekli olan ICC profilini yükle ve kullan (yalnızca SDR kipi)";
 "settings.loadIccProfile.label" = "ICC profili yükle";
 "settings.toneMappingAlgorithm.label" = "Algoritma";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Hedef zirve";
 "settings.videoThreads.desc" = "Saptanmış: 0 (Otomatik)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Saptanmış Uygulama";
 "settings.$DefaultEncoding" = "Saptanmış kodlama";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Aşağıdaki düğme, “daha sonra izle” klasöründeki tüm dosyaları silecektir. Bu dosyalar kaydedilmiş tüm oynatma ilerlemelerini ve oynatma sırasında uygulanan ayarları içerir.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Sayfa yüklenemedi.";

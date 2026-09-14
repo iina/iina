@@ -921,7 +921,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       for query in queries {
         if query.name.hasPrefix("mpv_") {
           let mpvOptionName = String(query.name.dropFirst(4))
-          guard safeMPVOptions.contains(mpvOptionName) else {
+          guard AppData.safeMPVOptions.contains(mpvOptionName) else {
             Logger.log("mpv option \(mpvOptionName) rejected when parsing URL", level: .warning)
             continue
           }
@@ -1582,63 +1582,3 @@ extension ProcessInfo.ThermalState: @retroactive CustomStringConvertible {
     }
   }
 }
-
-
-/// A list of mpv options that should be allowed in the URL scheme.
-/// Ensure absolutely no possibility of local file read/write.
-fileprivate let safeMPVOptions = Set([
-  // track selection
-  "aid", "vid", "sid", "secondary-sid",
-  "alang", "slang", "vlang", "edition", "track-auto-selection",
-  "subs-with-matching-audio", "subs-match-os-language", "subs-fallback", "subs-fallback-forced",
-  // playback control
-  "start", "end", "length", "frames", "speed", "pitch", "pause", "sstep", "correct-pts", "container-fps-override",
-  "loop-file", "loop-playlist", "ab-loop-a", "ab-loop-b", "ab-loop-count", "play-direction",
-  "rebase-start-time", "hr-seek", "hr-seek-framedrop",
-  // video
-  "deinterlace", "deinterlace-field-parity", "hwdec", "hwdec-codecs",
-  "video-aspect-override", "video-aspect-method", "video-rotate", "video-crop",
-  "video-zoom", "video-pan-x", "video-pan-y", "video-align-x", "video-align-y",
-  "video-unscaled", "video-scale-x", "video-scale-y", "video-recenter",
-  "video-margin-ratio-left", "video-margin-ratio-right", "video-margin-ratio-top", "video-margin-ratio-bottom",
-  "video-output-levels", "panscan", "framedrop", "video-latency-hacks", "display-fps-override",
-  "vd-lavc-skiploopfilter", "vd-lavc-skipidct", "vd-lavc-skipframe", "vd-lavc-threads", "vd-lavc-framedrop", "vd-lavc-fast", "vd-lavc-film-grain", "vd-lavc-dr",
-  "vd-apply-cropping", "hwdec-extra-frames", "hwdec-image-format", "hwdec-threads", "hwdec-software-fallback", "vd-lavc-check-hw-profile", "swapchain-depth",
-  "brightness", "contrast", "saturation", "gamma", "hue",
-  // audio
-  "volume", "volume-max", "volume-gain", "volume-gain-max", "volume-gain-min", "mute",
-  "audio-delay", "audio-pitch-correction", "audio-channels", "audio-display",
-  "audio-samplerate", "audio-format", "audio-exclusive", "audio-spdif",
-  "gapless-audio", "initial-audio-sync", "replaygain", "replaygain-preamp", "replaygain-clip", "replaygain-fallback",
-  "ad-lavc-ac3drc", "ad-lavc-downmix", "ad-lavc-threads",
-  "audio-stream-silence", "audio-wait-open", "audio-buffer", "audio-normalize-downmix", "audio-set-media-role",
-  // subtitles
-  "sub-delay", "secondary-sub-delay",
-  "sub-scale", "sub-scale-signs", "sub-scale-by-window", "sub-scale-with-window", "sub-ass-scale-with-window",
-  "sub-pos", "secondary-sub-pos", "sub-speed", "sub-visibility", "secondary-sub-visibility",
-  "sub-ass", "sub-ass-justify",
-  "sub-ass-override", "secondary-sub-ass-override", "sub-ass-force-margins", "sub-use-margins",
-  "sub-ass-use-video-data", "sub-vsfilter-bidi-compat", "sub-ass-vsfilter-color-compat",
-  "sub-font", "sub-font-size", "sub-color", "sub-outline-color", "sub-outline-size", "sub-back-color",
-  "sub-shadow-offset", "sub-bold", "sub-italic", "sub-blur",
-  "sub-margin-x", "sub-margin-y", "sub-align-x", "sub-align-y", "sub-justify",
-  "sub-border-style", "sub-spacing", "sub-line-spacing", "sub-hinting", "sub-shaper",
-  "sub-codepage", "sub-fix-timing", "sub-fix-timing-threshold", "sub-fix-timing-keep",
-  "sub-stretch-durations", "sub-gauss", "sub-gray", "sub-forced-events-only", "sub-fps",
-  "sub-filter-sdh", "sub-filter-sdh-harder", "sub-filter-sdh-enclosures",
-  "sub-clear-on-seek", "sub-create-cc-track", "sub-past-video-end", "sub-font-provider", "sub-hdr-peak", "image-subs-hdr-peak",
-  "sub-ass-style-overrides", "stretch-dvd-subs", "stretch-image-subs-to-screen", "image-subs-video-resolution",
-  "embeddedfonts", "sub-ass-video-aspect-override", "sub-ass-prune-delay", "teletext-page",
-  // window
-  "fullscreen", "geometry", "ontop", "keep-open", "keep-open-pause", "image-display-duration", "stop-screensaver",
-  // network
-  "user-agent", "referrer", "network-timeout", "tls-verify", "rtsp-transport", "hls-bitrate",
-  "cache", "cache-secs", "cache-pause", "cache-pause-wait", "cache-pause-initial", "force-seekable",
-  "http-header-fields", "cookies",
-  // demuxer, audio resampler, others
-  "demuxer-readahead-secs", "demuxer-mkv-subtitle-preroll", "demuxer-mkv-subtitle-preroll-secs",
-  "demuxer-lavf-analyzeduration", "demuxer-lavf-probescore", "demuxer-lavf-probesize",
-  "demuxer-max-bytes", "demuxer-max-back-bytes",
-  "audio-resample-filter-size", "audio-resample-phase-shift", "audio-resample-cutoff", "audio-resample-linear", "audio-resample-max-output-size",
-  "video-sync", "interpolation",
-])

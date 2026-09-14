@@ -235,11 +235,49 @@ fi
 
 if ! create-dmg $QUITE --volname IINA --volicon "$VOL_ICON_PATH" --background "$DMG_BACKGROUND_PATH" \
     --window-pos 200 120 --window-size $WIDTH $HEIGHT --icon-size 128 \
-    --icon "IINA.app" 140 230 --app-drop-link 400 230 \
+    --icon "IINA.app" 140 230 --app-drop-link 400 230 --no-internet-enable \
     "$DISK_IMAGE_PATH" "$APP_PATH"; then
   echo -e "${RED}Failed to create disk image.${NC}" >&2
   exit 1
 fi
 
 echo -e "${GREEN}Generated disk image: ${DISK_IMAGE_PATH}${NC}"
+
+echo -e "${YELLOW}Setting a Finder icon on the disk image…${NC}"
+
+if ! swift - "$VOL_ICON_PATH" "$DISK_IMAGE_PATH" <<'EOF'
+import AppKit
+
+guard CommandLine.arguments.count >= 2 else {
+  fputs("Must pass path to icon as first argument\n", stderr)
+  exit(1)
+}
+let icon = CommandLine.arguments[1]
+guard FileManager.default.fileExists(atPath: icon) else {
+  fputs("File to use as Finder icon does not exist: \(icon)\n", stderr)
+  exit(1)
+}
+guard CommandLine.arguments.count >= 3 else {
+  fputs("Must pass path to disk image as second argument\n", stderr)
+  exit(1)
+}
+let dmg = CommandLine.arguments[2]
+guard FileManager.default.fileExists(atPath: icon) else {
+  fputs("Disk image to apply Finder icon to does not exist: \(dmg)\n", stderr)
+  exit(1)
+}
+guard let image = NSImage(contentsOfFile: icon) else {
+  fputs("Failed to create a NSImage from: \(icon)\n", stderr)
+  exit(1)
+}
+guard NSWorkspace.shared.setIcon(image, forFile: dmg) else {
+  fputs("Failed to set icon on: \(dmg)\n", stderr)
+  exit(1)
+}
+EOF
+then
+  echo -e "${RED}Failed to set a Finder icon the disk image.${NC}" >&2
+  exit 1
+fi
+echo -e "${GREEN}Successfully set a Finder icon on the DMG file.${NC}"
 echo -e "${GREEN}Successfully generated DMG file.${NC}"

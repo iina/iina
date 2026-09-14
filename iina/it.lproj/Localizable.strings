@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Carica il profilo ICC per il display corrente e usalo per trasformare il video RGB in uscita a schermo. (Solo per la modalità SDR)";
 "settings.loadIccProfile.label" = "Carica il profilo";
 "settings.toneMappingAlgorithm.label" = "Algoritmo";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Picco";
 "settings.videoThreads.desc" = "Predefinito: 0 (Automatico)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Applicazione predefinita";
 "settings.$DefaultEncoding" = "Codifica predefinita";
 "settings.$DeleteAllPlaybackHistories" = "Elimina tutte le cronologie di riproduzione e le voci in 'Apri recente'.";
-"settings.$DeleteAllWatchLater" = "Il pulsante sottostante eliminerà tutti i file nella cartella \"guarda dopo\". Questi file contengono tutti gli avanzamenti di riproduzione salvati e le impostazioni applicate durante la riproduzione.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Non ridimensionare";
 "settings.$DuplicateCurrentSet" = "Duplica il set corrente…";
 "settings.$FailedToLoadThePage" = "Caricamento della pagina fallito.";

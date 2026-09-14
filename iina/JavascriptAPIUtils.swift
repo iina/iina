@@ -36,6 +36,15 @@ fileprivate extension Process {
 }
 
 class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
+  // Registry is main-owned; each child serializes its IO and cancellation.
+  private var processes: [UUID: JavascriptPluginProcess] = [:]
+
+  override func cleanUp(_ instance: JavascriptPluginInstance) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    processes.values.forEach { $0.cancel() }
+    processes.removeAll()
+  }
+
   func keychainWrite(_ service: String, _ name: String, _ password: String) -> Any {
     if service.isEmpty {
       return false
@@ -102,7 +111,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       return nil
     }
 
-    return createPromise { [unowned self] resolve, reject in
+    return createPromise { [unowned self] reply in
       var path = ""
       var args = args
       if !file.contains("/") {
@@ -138,7 +147,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         }
         // make sure the file exists
         guard FileManager.default.fileExists(atPath: path) else {
-          reject.call(withArguments: [-1, "Cannot find the binary \(file)"])
+          reply.reject([-1, "Cannot find the binary \(file)"])
           return
         }
       }
@@ -150,7 +159,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         do {
           try FileManager.default.setAttributes([.posixPermissions: NSNumber(integerLiteral: 0o755)], ofItemAtPath: path)
         } catch {
-          reject.call(withArguments: [-2, "The binary is not executable, and execute permission cannot be added"])
+          reply.reject([-2, "The binary is not executable, and execute permission cannot be added"])
           return
         }
       }
@@ -166,47 +175,25 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       process.standardOutput = stdout
       process.standardError = stderr
 
-      var stdoutContent = ""
-      var stderrContent = ""
-      var stdoutHook: JSValue?
-      var stderrHook: JSValue?
-      if let hookVal = stdoutHook_, hookVal.isObject {
-        stdoutHook = hookVal
+      let hooks = [stdoutHook_, stderrHook_].map { value -> JavascriptPluginCallback? in
+        guard let value, value.isObject else { return nil }
+        return pluginInstance.makeCallback([value], once: false)
       }
-      if let hookVal = stderrHook_, hookVal.isObject {
-        stderrHook = hookVal
-      }
-
-      stdout.fileHandleForReading.readabilityHandler = { file in
-        guard let output = String(data: file.availableData, encoding: .utf8) else { return }
-        stdoutContent += output
-        stdoutHook?.call(withArguments: [output])
-      }
-      stderr.fileHandleForReading.readabilityHandler = { file in
-        guard let output = String(data: file.availableData, encoding: .utf8) else { return }
-        stderrContent += output
-        stderrHook?.call(withArguments: [output])
-      }
-      Logger.log("Executing \(path) \(args.joined(separator: " "))", subsystem: pluginInstance.subsystem)
-      do {
-        try process.run()
-      } catch {
-        reject.call(withArguments: ["Execution failed reporting: \(error.localizedDescription)"])
-        return
-      }
-
-      self.pluginInstance.queue.async {
-        process.waitUntilExit()
-        stderr.fileHandleForReading.readabilityHandler = nil
-        stdout.fileHandleForReading.readabilityHandler = nil
-        DispatchQueue.main.async {
-          resolve.call(withArguments: [[
-            "status": process.terminationStatus,
-            "stdout": stdoutContent,
-            "stderr": stderrContent
-          ] as [String: Any]])
+      let id = UUID()
+      let operation = JavascriptPluginProcess(process: process, pipes: [stdout, stderr], hooks: hooks) { [weak self] result in
+        dispatchPrecondition(condition: .onQueue(.main))
+        self?.processes.removeValue(forKey: id)
+        hooks.forEach { $0?.cancel() }
+        switch result {
+        case .success(let output): reply.resolve([output])
+        case .failure(let error): reply.reject(["Execution failed reporting: \(error.localizedDescription)"])
         }
       }
+      guard let instance = pluginInstance, instance.isActive else { return }
+      processes[id] = operation
+      Logger.log("Executing \(path) \(args.joined(separator: " "))", subsystem: pluginInstance.subsystem)
+      operation.start()
+
     }
   }
 
@@ -237,9 +224,9 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
   func chooseFile(_ title: String, _ options: [String: Any]) -> Any {
     let chooseDir = options["chooseDir"] as? Bool ?? false
     let allowedFileTypes = options["allowedFileTypes"] as? [String]
-    return createPromise { resolve, reject in
+    return createPromise { reply in
       Utility.quickOpenPanel(title: title, chooseDir: chooseDir, allowedFileTypes: allowedFileTypes) { result in
-        resolve.call(withArguments: [result.path])
+        reply.resolve([result.path])
       }
     }
   }
@@ -271,5 +258,116 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
 
   func preferredLocalizations() -> Any {
     return Bundle.main.preferredLocalizations
+  }
+}
+
+/// Owns the direct child and its pipe readers independently of JavaScript delivery.
+/// All IO state is confined to `queue`; completion runs on the main queue.
+private final class JavascriptPluginProcess {
+  private let process: Process
+  private let pipes: [Pipe]
+  private let hooks: [JavascriptPluginCallback?]
+  private let completion: (Result<[String: Any], Error>) -> Void
+  private let queue = DispatchQueue(label: "com.colliderli.iina.plugin.exec")
+  private var sources: [DispatchSourceRead] = []
+  private var output = [Data(), Data()]
+  private var closed = [false, false]
+  private var exited = false
+  private var cancelled = false
+  private var completed = false
+
+  init(process: Process, pipes: [Pipe], hooks: [JavascriptPluginCallback?],
+       completion: @escaping (Result<[String: Any], Error>) -> Void) {
+    self.process = process
+    self.pipes = pipes
+    self.hooks = hooks
+    self.completion = completion
+  }
+
+  func start() {
+    queue.async { [self] in startOnQueue() }
+  }
+
+  private func startOnQueue() {
+    // Install readers before launch, but resume them only after Process has inherited
+    // the pipes. A failed launch closes both ends without waiting for an exit event.
+    for (index, pipe) in pipes.enumerated() {
+      let handle = pipe.fileHandleForReading
+      let fd = handle.fileDescriptor
+      _ = fcntl(fd, F_SETFL, fcntl(fd, F_GETFL) | O_NONBLOCK)
+      let source = DispatchSource.makeReadSource(fileDescriptor: fd, queue: queue)
+      source.setEventHandler { [self] in drain(index) }
+      source.setCancelHandler { handle.closeFile() }
+      sources.append(source)
+    }
+    process.terminationHandler = { [self] _ in
+      queue.async { [self] in
+        exited = true
+        // Drain data already in the pipes before reporting completion. Descendants
+        // do not own this exec call; do not wait for them to close inherited writers.
+        for index in pipes.indices { drain(index); close(index) }
+        finishIfReady()
+      }
+    }
+    do {
+      try process.run()
+      sources.forEach { $0.resume() }
+    } catch {
+      completed = true
+      process.terminationHandler = nil
+      sources.forEach { $0.setEventHandler(handler: nil); $0.resume(); $0.cancel() }
+      pipes.forEach { $0.fileHandleForWriting.closeFile() }
+      DispatchQueue.main.async { [completion] in completion(.failure(error)) }
+    }
+  }
+
+  func cancel() {
+    queue.async { [self] in
+      guard !completed, !cancelled else { return }
+      cancelled = true
+      // Detach readers even if the child refuses termination. Never wait on the UI.
+      for index in pipes.indices { close(index) }
+      if process.isRunning { process.terminate() }
+      queue.asyncAfter(deadline: .now() + 1) { [self] in
+        if process.isRunning { kill(process.processIdentifier, SIGKILL) }
+      }
+      finishIfReady()
+    }
+  }
+
+  private func drain(_ index: Int) {
+    guard !closed[index] else { return }
+    var bytes = [UInt8](repeating: 0, count: 8192)
+    while true {
+      let count = read(pipes[index].fileHandleForReading.fileDescriptor, &bytes, bytes.count)
+      if count > 0 {
+        output[index].append(contentsOf: bytes.prefix(count))
+        if !cancelled, let text = String(bytes: bytes.prefix(count), encoding: .utf8) {
+          hooks[index]?.call(withArguments: [text])
+        }
+      } else if count < 0 && errno == EINTR {
+        continue
+      } else {
+        if count == 0 || (errno != EAGAIN && errno != EWOULDBLOCK) { close(index) }
+        break
+      }
+    }
+  }
+
+  private func close(_ index: Int) {
+    guard !closed[index] else { return }
+    closed[index] = true
+    sources[index].setEventHandler(handler: nil)
+    sources[index].cancel()
+  }
+
+  private func finishIfReady() {
+    guard exited, closed.allSatisfy({ $0 }), !completed else { return }
+    completed = true
+    process.terminationHandler = nil
+    let result: [String: Any] = ["status": process.terminationStatus,
+                                 "stdout": String(decoding: output[0], as: UTF8.self),
+                                 "stderr": String(decoding: output[1], as: UTF8.self)]
+    DispatchQueue.main.async { [completion] in completion(.success(result)) }
   }
 }

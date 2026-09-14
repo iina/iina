@@ -667,6 +667,9 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.loadIccProfile.desc" = "Načítať ICC profil pre aktuálny displej a použiť ho na transformáciu RGB videa na výstup obrazovky. (Len pre režim SDR)";
 "settings.loadIccProfile.label" = "Načítať ICC profil";
 "settings.toneMappingAlgorithm.label" = "Algoritmus";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Cieľová špička";
 "settings.videoThreads.desc" = "Predvolené: 0 (Automaticky)";
@@ -930,7 +933,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.$DefaultApplication" = "Predvolená Aplikácia";
 "settings.$DefaultEncoding" = "Predvolené kódovanie";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Tlačítko popod vymaže všetky súbory v \"pozrieť neskôr\" zložke. Tieto súbory obsahujú posledné pozície prehrávaní a nastavenia aplikované počas prehrávaní.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Stránku sa nepodarilo načítať.";

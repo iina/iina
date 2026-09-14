@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "טען את פרופיל ה-ICC עבור התצוגה הנוכחית והשתמש בו כדי להפוך וידאו RGB לפלט מסך. (עבור מצב SDR בלבד)";
 "settings.loadIccProfile.label" = "טען פרופיל ICC";
 "settings.toneMappingAlgorithm.label" = "אלגוריתם";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "בהירות מרבית";
 "settings.videoThreads.desc" = "ברירת מחדל: 0 (אוטומטי)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "יישום ברירת המחדל";
 "settings.$DefaultEncoding" = "קידוד ברירת מחדל";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "הכפתור למטה ימחק את כל הקבצים בתיקיית \"לצפיה אחר כך\". קבצים אלה מכילים את מיקום ההאזנה בקובץ ואת ההגדרות שהוחלו במהלך ההפעלה.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "טעינת הדף נכשלה.";

@@ -57,6 +57,9 @@ class Titlebar: NSView {
   private var oscContainer: NSView!
   private var oscLeadingConstraint: NSLayoutConstraint!
 
+  // Only set on macOS 15 and below
+  private var titleCenterConstraint: NSLayoutConstraint?
+
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
 
@@ -179,6 +182,8 @@ class Titlebar: NSView {
         let centerConstraint = titleTextField.centerXAnchor.constraint(equalTo: titlebarContainer.centerXAnchor)
         centerConstraint.priority = .defaultLow
         centerConstraint.isActive = true
+        titleCenterConstraint = centerConstraint
+        titleTextField.setContentCompressionResistancePriority(.init(300), for: .horizontal)
       }
       titleLeadingConstraint.priority = .defaultHigh
       titleLeadingConstraint.isActive = true
@@ -279,10 +284,12 @@ class Titlebar: NSView {
       titleLeadingConstraint.animator().constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.animator().constant = constant + 6
       backgroundLeadingConstraint.animator().constant = constant
+      titleCenterConstraint?.animator().constant = constant / 2
     } else {
       titleLeadingConstraint.constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.constant = constant + 6
       backgroundLeadingConstraint.constant = constant
+      titleCenterConstraint?.constant = constant / 2
     }
   }
 

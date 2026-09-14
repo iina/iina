@@ -898,6 +898,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         player = PlayerCore.activeOrNewForMenuAction(isAlternative: false)
       }
 
+      var fileLocalOptions: [String: String] = [:]
+      for query in queries {
+        if query.name.hasPrefix("mpv_") {
+          let mpvOptionName = String(query.name.dropFirst(4))
+          guard safeMPVOptions.contains(mpvOptionName) else {
+            Logger.log("mpv option \(mpvOptionName) rejected when parsing URL", level: .warning)
+            continue
+          }
+          guard let mpvOptionValue = query.value else { continue }
+          Logger.log("Using file-local mpv option \(mpvOptionName)=\(mpvOptionValue)")
+          fileLocalOptions[mpvOptionName] = mpvOptionValue
+        }
+      }
+
       // enqueue
       let playlistEmpty = PlayerCore.lastActive.info.$playlist.withLock { $0.isEmpty }
       if let enqueueValue = queryDict["enqueue"], enqueueValue == "1", !playlistEmpty {
@@ -905,6 +919,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         PlayerCore.lastActive.postNotification(.iinaPlaylistChanged)
         PlayerCore.lastActive.sendOSD(.addToPlaylist(1))
       } else {
+        player.pendingFileLocalOptions = fileLocalOptions
         player.openURLString(urlValue)
       }
 
@@ -915,20 +930,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       } else if let pipValue = queryDict["pip"], pipValue == "1" {
         // pip
         player.mainWindow.enterPIP()
-      }
-
-      // mpv options
-      for query in queries {
-        if query.name.hasPrefix("mpv_") {
-          let mpvOptionName = String(query.name.dropFirst(4))
-          guard safeMPVOptions.contains(mpvOptionName) else {
-            Logger.log("mpv option \(mpvOptionName) rejected when parsing URL", level: .warning)
-            continue
-          }
-          guard let mpvOptionValue = query.value else { continue }
-          Logger.log("Setting \(mpvOptionName) to \(mpvOptionValue)")
-          player.mpv.setString(mpvOptionName, mpvOptionValue)
-        }
       }
 
       Logger.log("Finished URL scheme handling")

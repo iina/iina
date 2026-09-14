@@ -666,6 +666,9 @@
 "settings.loadIccProfile.desc" = "Učitaj ICC profil za trenutačni prikaz i koristi ga za transformaciju RGB videa rezultata. (Samo za SDR modus)";
 "settings.loadIccProfile.label" = "Učitaj ICC profil";
 "settings.toneMappingAlgorithm.label" = "Algoritam";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
 "settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Ciljani najviši ton";
 "settings.videoThreads.desc" = "Standardno: 0 (Automatski)";
@@ -929,7 +932,7 @@
 "settings.$DefaultApplication" = "Standardna aplikacija";
 "settings.$DefaultEncoding" = "Standardno kodiranje";
 "settings.$DeleteAllPlaybackHistories" = "Izbriši svu povijest reprodukcija i unose u „Otvori nedavne”.";
-"settings.$DeleteAllWatchLater" = "Donji gumb će izbrisati sve datoteke u mapi u „gledaj kasnije”. Te datoteke sadrže sve spremljene podatke o napretku reprodukcije te postavke koje se primijenjuju tijekom reprodukcije.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Ne mijenjaj veličinu";
 "settings.$DuplicateCurrentSet" = "Dupliciraj trenutačni skup …";
 "settings.$FailedToLoadThePage" = "Neuspjelo učitavanje stranice.";

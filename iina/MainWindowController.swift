@@ -72,6 +72,7 @@ class MainWindowController: PlayerWindowController {
   }()
 
 
+  var cameraHousingBackgroundHeightConstraint: NSLayoutConstraint! // for legacy FS only
   var videoViewContainer: NSView!
   var titleBarView: Titlebar!
   var titleBarHeightConstraint: NSLayoutConstraint!
@@ -609,12 +610,26 @@ class MainWindowController: PlayerWindowController {
 
     // video view
 
-    cv.addSubview(videoViewContainer, positioned: .below, relativeTo: nil)
+    // cameraHousingBackground: keeps the housing area black in light theme.
+    // vertically, it only has height in legacy fullscreen; horizontally, it shouldn't cover sidebars.
+    let cameraHousingBackground = NSView()
+    cameraHousingBackground.translatesAutoresizingMaskIntoConstraints = false
+    cameraHousingBackground.wantsLayer = true
+    cameraHousingBackground.layer?.backgroundColor = NSColor.black.cgColor
+    cv.addSubview(cameraHousingBackground, positioned: .below, relativeTo: nil)
+    cameraHousingBackground.padding(.top)
+    cameraHousingBackgroundHeightConstraint = cameraHousingBackground
+      .heightAnchor.constraint(equalToConstant: 0)
+
+    cv.addSubview(videoViewContainer, positioned: .above, relativeTo: cameraHousingBackground)
     setupVideoContainerConstraints()
 
     addVideoViewToWindow()
     player.initVideo()
     videoView.postsFrameChangedNotifications = true
+
+    cameraHousingBackground.leadingAnchor.constraint(equalTo: videoViewContainer.leadingAnchor).isActive = true
+    cameraHousingBackground.trailingAnchor.constraint(equalTo: videoViewContainer.trailingAnchor).isActive = true
 
     // osc views
 
@@ -1817,6 +1832,7 @@ class MainWindowController: PlayerWindowController {
     // then animate to the original frame
     window.setFrame(framePriorToBeingInFullscreen, display: true, animate: useAnimation)
     setWindowAspectRatio(aspectRatio)
+    cameraHousingBackgroundHeightConstraint.constant = 0
     // call delegate
     windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
@@ -1837,9 +1853,8 @@ class MainWindowController: PlayerWindowController {
     // This screen contains an embedded camera. Shorten the height of the window's content view's
     // frame and the video view container's frame to avoid having part of the window obscured by
     // the camera housing.
-    let size = NSMakeSize(cv.frame.width, frame.height - unusable)
-    cv.setFrameSize(size)
-    videoViewContainer.setFrameSize(size)
+    videoViewContainer.setFrameSize(NSMakeSize(cv.frame.width, frame.height - unusable))
+    cameraHousingBackgroundHeightConstraint.constant = unusable
   }
 
   private func legacyAnimateToFullscreen() {

@@ -43,6 +43,37 @@ class JavascriptAPI: NSObject {
     return pluginInstance.plugin.permissions.contains(permission)
   }
 
+  /// Checks whether the plugin is permitted to open the URL and returns the normalized URL string.
+  func shouldOpenURL(_ urlString: String) -> String? {
+    log("Attempting to open URL: \(urlString)")
+    let url = URL(string: urlString)
+    let scheme = url?.scheme?.lowercased()
+
+    switch scheme {
+    case "data", "memory":
+      // security-wise, these are equivalent to reading/writing in the sandboxed directories
+      return urlString
+
+    case "http", "https", "smb":
+      // for simple network requests, require network permission
+      return whenPermitted(to: .networkRequest) {
+        guard pluginInstance.canAccess(url: url!) else {
+          throwError(withMessage: "URL \(urlString) is not allowed.")
+          return nil
+        }
+        return urlString
+      }
+
+    case nil, "file":
+      // no protocol -> treat as file path
+      return parsePath(urlString, forceLocalPath: false).path
+
+    default:
+      // for any other protocols, require file system permission
+      return whenPermitted(to: .accessFileSystem) { urlString }
+    }
+  }
+
   func extraSetup() { }
   func cleanUp(_ instance: JavascriptPluginInstance) { }
 
@@ -95,7 +126,7 @@ class JavascriptAPI: NSObject {
         absPath.hasPrefix(pluginInstance.plugin.dataURL.path) ||
         absPath.hasPrefix(pluginInstance.plugin.tmpURL.path)
       )
-    }!
+    } ?? (nil, false)
   }
 
   private func trackPath(_ path: String, type: MPVTrack.TrackType) -> String? {

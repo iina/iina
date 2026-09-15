@@ -1401,9 +1401,9 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalVideoFile(_ url: URL) {
-    mpv.command(.videoAdd, args: [url.path], checkError: false) { code in
+    mpv.command(.videoAdd, args: [url.mpvStr], checkError: false) { code in
       if code < 0 {
-        self.log("Unsupported video: \(url.path)", level: .error)
+        self.log("Unsupported video: \(url.mpvStr)", level: .error)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_video")
         }
@@ -1412,9 +1412,9 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalAudioFile(_ url: URL) {
-    mpv.command(.audioAdd, args: [url.path], checkError: false) { code in
+    mpv.command(.audioAdd, args: [url.mpvStr], checkError: false) { code in
       if code < 0 {
-        self.log("Unsupported audio: \(url.path)", level: .error)
+        self.log("Unsupported audio: \(url.mpvStr)", level: .error)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_audio")
         }
@@ -1445,15 +1445,15 @@ class PlayerCore: NSObject {
 
   func loadExternalSubFile(_ url: URL, delay: Bool = false, suppressError: Bool = false) {
     var track: MPVTrack?
-    info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.path }) }
+    info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.mpvStr }) }
     if let track {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
     }
 
-    mpv.command(.subAdd, args: [url.path], checkError: false, level: .verbose) { code in
+    mpv.command(.subAdd, args: [url.mpvStr], checkError: false, level: .verbose) { code in
       if code < 0 {
-        self.log("Unsupported sub: \(url.path)", level: .error)
+        self.log("Unsupported sub: \(url.mpvStr)", level: .error)
         // only show alert when the subtitle is added manually
         guard !suppressError else { return }
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.

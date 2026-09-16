@@ -47,6 +47,11 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func set(_ property: String, _ value: JSValue) {
+    guard permitted(to: .accessFileSystem) || AppData.safeMPVOptions.contains(property) else {
+      throwError(withMessage: "mpv.set: \(property) needs the file system permission.")
+      return
+    }
+
     if value.isNumber {
       player!.mpv.setDouble(property, value.toDouble())
     } else if value.isString {
@@ -63,6 +68,10 @@ class JavascriptAPIMpv: JavascriptAPI, JavascriptAPIMpvExportable {
   }
 
   @objc func command(_ commandName: String, _ args: [String]) {
+    guard permitted(to: .accessFileSystem) || AppData.safeMPVCommands.contains(commandName) else {
+      throwError(withMessage: "mpv.command: \(commandName) needs the file system permission.")
+      return
+    }
     player!.mpv.command(MPVCommand(commandName), args: args, checkError: false)
   }
 

@@ -67,6 +67,9 @@ class MainWindowController: PlayerWindowController {
   var blackWindows: [NSWindow] = []
   var cachedScreens: [NSScreen] = []
 
+  /** For hiding camera housing only in legacy full screen. */
+  var cameraHousingWindow: NSWindow?
+
   lazy var rotation: Int = {
     return player.mpv.getInt(MPVProperty.videoParamsRotate)
   }()
@@ -1817,6 +1820,8 @@ class MainWindowController: PlayerWindowController {
     // then animate to the original frame
     window.setFrame(framePriorToBeingInFullscreen, display: true, animate: useAnimation)
     setWindowAspectRatio(aspectRatio)
+    cameraHousingWindow?.orderOut(self)
+    cameraHousingWindow = nil
     // call delegate
     windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
@@ -1825,21 +1830,39 @@ class MainWindowController: PlayerWindowController {
   ///
   /// For screens that contain a camera housing views will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
-    guard let window, let screen = window.screen ?? NSScreen.main else { return }
-    let frame = screen.frame
+    guard let window,
+          let screen = window.screen ?? NSScreen.main,
+          let unusable = screen.cameraHousingHeight else { return }
+
+    let frame = NSRect(
+      x: screen.frame.minX,
+      y: screen.frame.minY,
+      width: screen.frame.width,
+      height: screen.frame.height - unusable,
+    )
+
     let useAnimation = {
       // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
       guard #unavailable(macOS 26) else { return false }
       return !Preference.bool(for: .disableAnimations)
     }()
+
     window.setFrame(frame, display: true, animate: useAnimation)
-    guard let unusable = screen.cameraHousingHeight, let cv = window.contentView else { return }
-    // This screen contains an embedded camera. Shorten the height of the window's content view's
-    // frame and the video view container's frame to avoid having part of the window obscured by
-    // the camera housing.
-    let size = NSMakeSize(cv.frame.width, frame.height - unusable)
-    cv.setFrameSize(size)
-    videoViewContainer.setFrameSize(size)
+
+    // Force black background in camera housing
+    let housingWindow = NSWindow(contentRect: .zero, styleMask: [], backing: .buffered, defer: false, screen: screen)
+    housingWindow.backgroundColor = .black
+    // the level must be exactly .mainMenu, otherwise the main menu will not show
+    housingWindow.level = .mainMenu
+    let cameraRect = NSRect(
+      x: screen.frame.minX,
+      y: screen.frame.maxY - unusable,
+      width: screen.frame.width,
+      height: unusable
+    )
+    housingWindow.setFrame(cameraRect, display: false)
+    housingWindow.orderFront(self)
+    self.cameraHousingWindow = housingWindow
   }
 
   private func legacyAnimateToFullscreen() {

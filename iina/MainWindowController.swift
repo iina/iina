@@ -58,16 +58,16 @@ class MainWindowController: PlayerWindowController {
     return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
   }()
 
-  /** For auto hiding UI after a timeout. */
+  /// For auto hiding UI after a timeout.
   var hideControlTimer: Timer?
   var hideOSDTimer: Timer?
 
-  /** For blacking out other screens. */
+  /// For blacking out other screens.
   var screens: [NSScreen] = []
   var blackWindows: [NSWindow] = []
   var cachedScreens: [NSScreen] = []
 
-  /** For hiding camera housing only in legacy full screen. */
+  /// For hiding camera housing only in legacy full screen.
   var cameraHousingWindow: NSWindow?
 
   lazy var rotation: Int = {
@@ -1831,9 +1831,9 @@ class MainWindowController: PlayerWindowController {
   /// For screens that contain a camera housing views will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
     guard let window,
-          let screen = window.screen ?? NSScreen.main,
-          let unusable = screen.cameraHousingHeight else { return }
+          let screen = window.screen ?? NSScreen.main else {return }
 
+    let unusable = screen.cameraHousingHeight ?? 0
     let frame = NSRect(
       x: screen.frame.minX,
       y: screen.frame.minY,
@@ -1849,20 +1849,23 @@ class MainWindowController: PlayerWindowController {
 
     window.setFrame(frame, display: true, animate: useAnimation)
 
-    // Force black background in camera housing
-    let housingWindow = NSWindow(contentRect: .zero, styleMask: [], backing: .buffered, defer: false, screen: screen)
-    housingWindow.backgroundColor = .black
-    // the level must be exactly .mainMenu, otherwise the main menu will not show
-    housingWindow.level = .mainMenu
-    let cameraRect = NSRect(
-      x: screen.frame.minX,
-      y: screen.frame.maxY - unusable,
-      width: screen.frame.width,
-      height: unusable
-    )
-    housingWindow.setFrame(cameraRect, display: false)
-    housingWindow.orderFront(self)
-    self.cameraHousingWindow = housingWindow
+    if unusable > 0 {
+      // Force black background in camera housing. Cannot extend the window frame
+      // to cover the area because window background is white in light theme.
+      let housingWindow = NSWindow(contentRect: .zero, styleMask: [], backing: .buffered, defer: false, screen: screen)
+      housingWindow.backgroundColor = .black
+      // the level must be exactly .mainMenu, otherwise the main menu will not show
+      housingWindow.level = .mainMenu
+      let cameraRect = NSRect(
+        x: screen.frame.minX,
+        y: screen.frame.maxY - unusable,
+        width: screen.frame.width,
+        height: unusable
+      )
+      housingWindow.setFrame(cameraRect, display: false)
+      housingWindow.orderFront(self)
+      self.cameraHousingWindow = housingWindow
+    }
   }
 
   private func legacyAnimateToFullscreen() {

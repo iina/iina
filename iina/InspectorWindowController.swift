@@ -18,6 +18,7 @@ fileprivate let gridColumnSpacing: CGFloat = 15
 fileprivate let watchTableBackgroundColor = NSColor(red: 2.0/3, green: 2.0/3, blue: 2.0/3, alpha: 0.1)
 
 fileprivate let subsystem = Logger.makeSubsystem("inspector", ["tablecells"])
+fileprivate let ui = UIHelper(scope: "inspector")
 
 fileprivate func formLink(_ value: String) -> NSAttributedString? {
   guard let url = URL(string: value), let scheme = url.scheme,
@@ -47,7 +48,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate {
       backing: .buffered,
       defer: false
     )
-    window.title = NSLocalizedString("inspector.window_title", comment: "Inspector")
+    window.title = ui.localized("window_title")
     window.contentMinSize = NSSize(width: 450, height: 480)
     // Same autosave name the old xib-based window used, so this also restores a position saved by that version.
     window.setFrameAutosaveName("IINAInspectorPanel")
@@ -198,6 +199,27 @@ class CommonField: NSTextField {
   }
 }
 
+class TrackPropertyField: CommonField {
+  var isTrue = false {
+    didSet {
+      setColor(by: isTrue)
+      if isTrue {
+        drawsBackground = true
+        wantsLayer = true
+        backgroundColor = NSColor.darkGray
+        layer?.cornerRadius = 3
+      } else {
+        drawsBackground = false
+        wantsLayer = false
+      }
+    }
+  }
+
+  convenience init(_ text: String = "") {
+    self.init(text, style: .value)
+  }
+}
+
 class GeneralVC: NSViewController, InspectorTabUpdating {
   let videoFormat = CommonField(style: .value)
   let videoCodec = CommonField(style: .value)
@@ -221,23 +243,23 @@ class GeneralVC: NSViewController, InspectorTabUpdating {
     let view = NSView()
     self.view = view
 
-    let videoSectionHeader = CommonField(NSLocalizedString("inspector.video_section", comment: "VIDEO"), style: .header)
+    let videoSectionHeader = CommonField(ui.localized("video_section"), style: .header)
     view.addSubview(videoSectionHeader)
     videoSectionHeader.padding(topPadding, leadingPadding)
 
     let videoGridView = NSGridView()
     videoGridView.translatesAutoresizingMaskIntoConstraints = false
     videoGridView.columnSpacing = gridColumnSpacing
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_format", comment: "Format"), style: .prompt), videoFormat])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_codec", comment: "Codec"), style: .prompt), videoCodec])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_hw_decoder", comment: "Hw Decoder"), style: .prompt), videoDecoder])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_primaries", comment: "Primaries"), style: .prompt), videoPrimaries])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_colorspace", comment: "Colorspace"), style: .prompt), videoColorspace])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_pixel_format", comment: "Pixel Format"), style: .prompt), videoPixelFormat])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_driver", comment: "Driver"), style: .prompt), videoDriver])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_size", comment: "Size"), style: .prompt), videoSize])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_bitrate", comment: "Bit Rate"), style: .prompt), videoBitRate])
-    videoGridView.addRow(with: [CommonField(NSLocalizedString("inspector.video_fps", comment: "FPS"), style: .prompt), videoFPS])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_format"), style: .prompt), videoFormat])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_codec"), style: .prompt), videoCodec])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_hw_decoder"), style: .prompt), videoDecoder])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_primaries"), style: .prompt), videoPrimaries])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_colorspace"), style: .prompt), videoColorspace])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_pixel_format"), style: .prompt), videoPixelFormat])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_driver"), style: .prompt), videoDriver])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_size"), style: .prompt), videoSize])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_bitrate"), style: .prompt), videoBitRate])
+    videoGridView.addRow(with: [CommonField(ui.localized("video_fps"), style: .prompt), videoFPS])
 
     view.addSubview(videoGridView)
     videoGridView.spacing(.top(12), to: videoSectionHeader)
@@ -251,7 +273,7 @@ class GeneralVC: NSViewController, InspectorTabUpdating {
     separator.leadingAnchor.constraint(equalTo: videoSectionHeader.leadingAnchor).isActive = true
     separator.padding(trailingPadding)
 
-    let audioSectionHeader = CommonField(NSLocalizedString("inspector.audio_section", comment: "AUDIO"), style: .header)
+    let audioSectionHeader = CommonField(ui.localized("audio_section"), style: .header)
     view.addSubview(audioSectionHeader)
     audioSectionHeader.spacing(saperatorPadding, to: separator)
     audioSectionHeader.leadingAnchor.constraint(equalTo: videoSectionHeader.leadingAnchor).isActive = true
@@ -259,12 +281,12 @@ class GeneralVC: NSViewController, InspectorTabUpdating {
     let audioGridView = NSGridView()
     audioGridView.translatesAutoresizingMaskIntoConstraints = false
     audioGridView.columnSpacing = gridColumnSpacing
-    audioGridView.addRow(with: [CommonField(NSLocalizedString("inspector.audio_format", comment: "Format"), style: .prompt), audioFormat])
-    audioGridView.addRow(with: [CommonField(NSLocalizedString("inspector.audio_codec", comment: "Codec"), style: .prompt), audioCodec])
-    audioGridView.addRow(with: [CommonField(NSLocalizedString("inspector.audio_driver", comment: "Driver"), style: .prompt), audioDriver])
-    audioGridView.addRow(with: [CommonField(NSLocalizedString("inspector.audio_channels", comment: "Channels"), style: .prompt), audioChannels])
-    audioGridView.addRow(with: [CommonField(NSLocalizedString("inspector.audio_bitrate", comment: "Bit Rate"), style: .prompt), audioBitRate])
-    audioGridView.addRow(with: [CommonField(NSLocalizedString("inspector.audio_sample_rate", comment: "Sample Rate"), style: .prompt), audioSampleRate])
+    audioGridView.addRow(with: [CommonField(ui.localized("audio_format"), style: .prompt), audioFormat])
+    audioGridView.addRow(with: [CommonField(ui.localized("audio_codec"), style: .prompt), audioCodec])
+    audioGridView.addRow(with: [CommonField(ui.localized("audio_driver"), style: .prompt), audioDriver])
+    audioGridView.addRow(with: [CommonField(ui.localized("audio_channels"), style: .prompt), audioChannels])
+    audioGridView.addRow(with: [CommonField(ui.localized("audio_bitrate"), style: .prompt), audioBitRate])
+    audioGridView.addRow(with: [CommonField(ui.localized("audio_sample_rate"), style: .prompt), audioSampleRate])
 
     view.addSubview(audioGridView)
     audioGridView.spacing(.top(12), to: audioSectionHeader)
@@ -374,6 +396,17 @@ class TracksVC: NSViewController, InspectorTabUpdating {
   let trackChannels = CommonField(style: .value)
   let trackSampleRate = CommonField(style: .value)
 
+  let trackPropertyDefault = TrackPropertyField(ui.localized("track_default"))
+  let trackPropertyForced = TrackPropertyField(ui.localized("track_forced"))
+  let trackPropertySelected = TrackPropertyField(ui.localized("track_selected"))
+  let trackPropertyExternal = TrackPropertyField(ui.localized("track_external"))
+  lazy var propertyLabels: [TrackPropertyField] = { [
+      trackPropertyDefault,
+      trackPropertyForced,
+      trackPropertySelected,
+      trackPropertyExternal
+  ] }()
+
   override func loadView() {
     let view = NSView()
     self.view = view
@@ -381,7 +414,7 @@ class TracksVC: NSViewController, InspectorTabUpdating {
     trackPopup.translatesAutoresizingMaskIntoConstraints = false
     trackPopup.target = self
     trackPopup.action = #selector(trackSwitched(_:))
-    let trackLabel = CommonField(NSLocalizedString("inspector.track_label", comment: "Track"), style: .prompt)
+    let trackLabel = CommonField(ui.localized("track_label"), style: .prompt)
     view.addSubview(trackLabel)
     view.addSubview(trackPopup)
     trackLabel.padding(leadingPadding)
@@ -400,18 +433,20 @@ class TracksVC: NSViewController, InspectorTabUpdating {
     let gridView = NSGridView()
     gridView.translatesAutoresizingMaskIntoConstraints = false
     gridView.columnSpacing = gridColumnSpacing
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_id", comment: "ID"), style: .prompt), trackId])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_properties", comment: "Properties"), style: .prompt)])
-    // todo: add properties view
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_source_id", comment: "Source ID"), style: .prompt), trackSourceId])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_title", comment: "Title"), style: .prompt), trackTitle])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_language", comment: "Language"), style: .prompt), trackLanguage])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_file_path", comment: "File Path"), style: .prompt), trackFilePath])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_codec", comment: "Codec"), style: .prompt), trackCodec])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_decoder", comment: "Decoder"), style: .prompt), trackDecoder])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_fps", comment: "FPS"), style: .prompt), trackFPS])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_channels", comment: "Channels"), style: .prompt), trackChannels])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.track_sample_rate", comment: "Sample Rate"), style: .prompt), trackSampleRate])
+    gridView.addRow(with: [CommonField(ui.localized("track_id"), style: .prompt), trackId])
+
+    let properties = NSStackView(views: propertyLabels)
+    gridView.addRow(with: [CommonField(ui.localized("track_properties"), style: .prompt), properties])
+
+    gridView.addRow(with: [CommonField(ui.localized("track_source_id"), style: .prompt), trackSourceId])
+    gridView.addRow(with: [CommonField(ui.localized("track_title"), style: .prompt), trackTitle])
+    gridView.addRow(with: [CommonField(ui.localized("track_language"), style: .prompt), trackLanguage])
+    gridView.addRow(with: [CommonField(ui.localized("track_file_path"), style: .prompt), trackFilePath])
+    gridView.addRow(with: [CommonField(ui.localized("track_codec"), style: .prompt), trackCodec])
+    gridView.addRow(with: [CommonField(ui.localized("track_decoder"), style: .prompt), trackDecoder])
+    gridView.addRow(with: [CommonField(ui.localized("track_fps"), style: .prompt), trackFPS])
+    gridView.addRow(with: [CommonField(ui.localized("track_channels"), style: .prompt), trackChannels])
+    gridView.addRow(with: [CommonField(ui.localized("track_sample_rate"), style: .prompt), trackSampleRate])
 
     view.addSubview(gridView)
     gridView.spacing(saperatorPadding, to: separator)
@@ -476,6 +511,11 @@ class TracksVC: NSViewController, InspectorTabUpdating {
     for (str, field) in strProperties {
       field.stringValue = str ?? ""
     }
+
+    trackPropertyDefault.isTrue = track.isDefault
+    trackPropertyForced.isTrue = track.isForced
+    trackPropertySelected.isTrue = track.isSelected
+    trackPropertyExternal.isTrue = track.isExternal
   }
 }
 
@@ -495,7 +535,7 @@ class FileVC: NSViewController, InspectorTabUpdating {
     self.view = view
 
     filePath.translatesAutoresizingMaskIntoConstraints = false
-    let filePathLabel = CommonField(NSLocalizedString("inspector.file_path", comment: "File Path"), style: .prompt)
+    let filePathLabel = CommonField(ui.localized("file_path"), style: .prompt)
     view.addSubview(filePathLabel)
     filePathLabel.padding(leadingPadding, topPadding)
     view.addSubview(filePath)
@@ -515,13 +555,13 @@ class FileVC: NSViewController, InspectorTabUpdating {
     let gridView = NSGridView()
     gridView.translatesAutoresizingMaskIntoConstraints = false
     gridView.columnSpacing = gridColumnSpacing
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.file_title", comment: "Title"), style: .prompt), fileTitle])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.file_comment", comment: "Comment"), style: .prompt), fileComment])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.file_size", comment: "Size"), style: .prompt), fileSize])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.file_format", comment: "Format"), style: .prompt), fileFormat])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.file_duration", comment: "Duration"), style: .prompt), fileDuration])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.file_chapters", comment: "Chapters"), style: .prompt), fileChapters])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.file_editions", comment: "Editions"), style: .prompt), fileEditions])
+    gridView.addRow(with: [CommonField(ui.localized("file_title"), style: .prompt), fileTitle])
+    gridView.addRow(with: [CommonField(ui.localized("file_comment"), style: .prompt), fileComment])
+    gridView.addRow(with: [CommonField(ui.localized("file_size"), style: .prompt), fileSize])
+    gridView.addRow(with: [CommonField(ui.localized("file_format"), style: .prompt), fileFormat])
+    gridView.addRow(with: [CommonField(ui.localized("file_duration"), style: .prompt), fileDuration])
+    gridView.addRow(with: [CommonField(ui.localized("file_chapters"), style: .prompt), fileChapters])
+    gridView.addRow(with: [CommonField(ui.localized("file_editions"), style: .prompt), fileEditions])
 
     view.addSubview(gridView)
     gridView.spacing(saperatorPadding, to: separator)
@@ -599,13 +639,13 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
     let gridView = NSGridView()
     gridView.translatesAutoresizingMaskIntoConstraints = false
     gridView.columnSpacing = gridColumnSpacing
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.status_avsync_diff", comment: "A/V Sync Diff"), style: .prompt), avSyncDiff])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.status_total_avsync", comment: "Total A/V Sync"), style: .prompt), totalAVSync])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.status_dropped_frames", comment: "Dropped Frames"), style: .prompt), droppedFrames])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.status_mistimed_frames", comment: "Mistimed Frames"), style: .prompt), mistimedFrames])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.status_display_fps", comment: "Display FPS"), style: .prompt), displayFPS])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.status_estimated_output_fps", comment: "Estimated Output FPS"), style: .prompt), estimatedOutputFPS])
-    gridView.addRow(with: [CommonField(NSLocalizedString("inspector.status_estimated_display_fps", comment: "Estimated Disp FPS"), style: .prompt), estimatedDisplayFPS])
+    gridView.addRow(with: [CommonField(ui.localized("status_avsync_diff"), style: .prompt), avSyncDiff])
+    gridView.addRow(with: [CommonField(ui.localized("status_total_avsync"), style: .prompt), totalAVSync])
+    gridView.addRow(with: [CommonField(ui.localized("status_dropped_frames"), style: .prompt), droppedFrames])
+    gridView.addRow(with: [CommonField(ui.localized("status_mistimed_frames"), style: .prompt), mistimedFrames])
+    gridView.addRow(with: [CommonField(ui.localized("status_display_fps"), style: .prompt), displayFPS])
+    gridView.addRow(with: [CommonField(ui.localized("status_estimated_output_fps"), style: .prompt), estimatedOutputFPS])
+    gridView.addRow(with: [CommonField(ui.localized("status_estimated_display_fps"), style: .prompt), estimatedDisplayFPS])
 
     view.addSubview(gridView)
     gridView.padding(topPadding, leadingPadding)
@@ -618,7 +658,7 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
     separator.leadingAnchor.constraint(equalTo: gridView.leadingAnchor).isActive = true
     separator.padding(trailingPadding)
 
-    let watchLabel = CommonField(NSLocalizedString("inspector.status_watch", comment: "Watch"), style: .prompt)
+    let watchLabel = CommonField(ui.localized("status_watch"), style: .prompt)
     view.addSubview(watchLabel)
     watchLabel.spacing(saperatorPadding, to: separator)
     watchLabel.leadingAnchor.constraint(equalTo: gridView.leadingAnchor).isActive = true
@@ -628,13 +668,13 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
     watchProperties = Preference.array(for: .watchProperties) as! [String]
 
     let keyColumn = NSTableColumn(identifier: .key)
-    keyColumn.title = NSLocalizedString("inspector.watch_column_name", comment: "Name")
+    keyColumn.title = ui.localized("watch_column_name")
     keyColumn.minWidth = 120
     keyColumn.width = 180
     keyColumn.maxWidth = 1000
 
     let valueColumn = NSTableColumn(identifier: .value)
-    valueColumn.title = NSLocalizedString("inspector.watch_column_value", comment: "Value")
+    valueColumn.title = ui.localized("watch_column_value")
     valueColumn.minWidth = 120
     valueColumn.width = 228
     valueColumn.maxWidth = 10000
@@ -765,7 +805,7 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
           textField.isSelectable = true
           textField.textColor = .labelColor
         } else {
-          let errorString = NSLocalizedString("inspector.error", comment: "Error")
+          let errorString = ui.localized("error")
 
           let italicDescriptor: NSFontDescriptor = textField.font!.fontDescriptor.withSymbolicTraits(NSFontDescriptor.SymbolicTraits.italic)
           let errorFont = NSFont(descriptor: italicDescriptor, size: textField.font!.pointSize)

@@ -514,7 +514,7 @@ class JavascriptPlugin: NSObject {
         continuation.resume(returning: nil)
         return
       }
-      Just.get("https://raw.githubusercontent.com/\(ghRepo)/master/Info.json", asyncCompletionHandler:  { result in
+      Just.get("https://raw.githubusercontent.com/\(ghRepo)/main/Info.json", asyncCompletionHandler:  { result in
         if result.ok,
            let json = result.json as? [String: Any],
            let newGHVersion = json["ghVersion"] as? Int,

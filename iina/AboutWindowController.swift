@@ -29,11 +29,6 @@ class AboutWindowController: NSWindowController {
 
   @IBOutlet weak var windowBackgroundBox: NSBox!
   @IBOutlet weak var iconImageView: NSImageView!
-  @IBOutlet weak var iinaLabel: NSTextField! {
-    didSet {
-      iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: .light)
-    }
-  }
   @IBOutlet weak var versionLabel: NSTextField!
   @IBOutlet weak var mpvVersionLabel: NSTextField!
   @IBOutlet weak var ffmpegVersionLabel: NSTextField!

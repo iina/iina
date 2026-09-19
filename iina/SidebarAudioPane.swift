@@ -162,7 +162,10 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
   private unowned let player: PlayerCore
 
   private var eqPopUpButton: NSPopUpButton!
+  private var resetButton: NSButton!
   private var lastUsedProfileName: String = ""
+  /// Last preset or user EQ chosen from the popup; used by reset (defaults to Flat).
+  private var lastSelectedEQProfileName: String?
 
   private lazy var audioEQSliders: [NSSlider] = {
     (0...9).map {
@@ -192,11 +195,20 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
 
     translatesAutoresizingMaskIntoConstraints = false
 
+    self.resetButton = NSButton(
+      image: .sf("arrow.counterclockwise.circle.fill")!,
+      target: self, action: #selector(resetEQButtonAction)
+    )
+    resetButton.bezelStyle = .smallSquare
+    resetButton.isBordered = false
+    resetButton.toolTip = NSLocalizedString("sidebar.reset_eq", comment: "Reset equalizer to last preset")
+
     let labelStack = ui.hStack(
       spacing: 8,
       ui.image("slider.vertical.3", size: 16, config: .sidebarIconConfig),
       ui.label("sidebar.eq", font: .boldSystemFont(ofSize: 12)),
       ui.flexibleSpace(),
+      resetButton,
     )
 
     self.eqPopUpButton = NSPopUpButton(frame: .zero)
@@ -224,6 +236,7 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     }
     eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
     lastUsedProfileName = eqPopUpButton.selectedItem!.title
+    updateResetButtonVisibility()
 
     eqPopUpButton.menu!.delegate = self
     eqPopUpButton.target = self
@@ -278,6 +291,19 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     player.setAudioEq(fromGains: profile.gains)
   }
 
+  private func updateResetButtonVisibility() {
+    resetButton.isHidden = eqPopUpButton.selectedTag() != eqCustomMenuItemTag
+  }
+
+  private func rememberSelectedEQProfile(_ name: String) {
+    lastSelectedEQProfileName = name
+    lastUsedProfileName = name
+  }
+
+  private func flatEQProfile() -> PresetEQProfile {
+    EQProfile.presets.first!
+  }
+
   private func update() {
     if let filter = player.info.audioEqFilter {
       guard let eqString = Regex("\\[(.+?)\\]").captures(in: filter.stringFormat)[at: 1] else { return }
@@ -321,6 +347,30 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
   @objc func audioEqSliderAction(_ sender: NSSlider) {
     player.setAudioEq(fromGains: audioEQSliders.map { $0.doubleValue })
     eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
+    updateResetButtonVisibility()
+  }
+
+  @objc func resetEQButtonAction(_ sender: AnyObject) {
+    let flat = flatEQProfile()
+    let targetName = lastSelectedEQProfileName.flatMap { $0.isEmpty ? nil : $0 } ?? flat.name
+
+    let profile: EQProfile
+    if let preset = EQProfile.presets.first(where: { $0.name == targetName }) {
+      profile = preset
+      eqPopUpButton.select(findItem(preset.name, eqPresetProfileMenuItemTag))
+      rememberSelectedEQProfile(preset.name)
+    } else if let userProfile = EQProfile.userEQs[targetName] {
+      profile = userProfile
+      eqPopUpButton.select(findItem(targetName, eqUserDefinedProfileMenuItemTag))
+      rememberSelectedEQProfile(targetName)
+    } else {
+      profile = flat
+      eqPopUpButton.select(findItem(flat.name, eqPresetProfileMenuItemTag))
+      rememberSelectedEQProfile(flat.name)
+    }
+
+    applyEQ(profile)
+    updateResetButtonVisibility()
   }
 
   @objc func eqPopUpButtonAction(_ sender: NSPopUpButton) {
@@ -334,7 +384,7 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
         EQProfile.userEQs[inputString] = newProfile
         menuNeedsUpdate(eqPopUpButton.menu!)
         eqPopUpButton.select(findItem(inputString))
-        lastUsedProfileName = inputString
+        rememberSelectedEQProfile(inputString)
       } else {
         eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
       }
@@ -342,6 +392,9 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
       if let inputString = promptAudioEQProfileName(isNewProfile: false) {
         let profile = EQProfile.userEQs.removeValue(forKey: lastUsedProfileName)
         EQProfile.userEQs[inputString] = profile
+        if lastSelectedEQProfileName == lastUsedProfileName {
+          lastSelectedEQProfileName = inputString
+        }
         menuNeedsUpdate(eqPopUpButton.menu!)
         eqPopUpButton.select(findItem(inputString))
         lastUsedProfileName = inputString
@@ -349,6 +402,9 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
         eqPopUpButton.select(findItem(lastUsedProfileName))
       }
     case eqDeleteMenuItemTag:
+      if lastSelectedEQProfileName == lastUsedProfileName {
+        lastSelectedEQProfileName = nil
+      }
       EQProfile.userEQs.removeValue(forKey: lastUsedProfileName)
       menuNeedsUpdate(eqPopUpButton.menu!)
       eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
@@ -356,13 +412,14 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
       lastUsedProfileName = sender.selectedItem!.title
     case eqPresetProfileMenuItemTag:
       guard let preset = EQProfile.presets.first(where: { $0.localizationKey == representedObject }) else { break }
-      lastUsedProfileName = preset.name
+      rememberSelectedEQProfile(preset.name)
       applyEQ(preset)
     default: // user defined EQ Profiles
       guard let pair = EQProfile.userEQs.first(where: { $0.0 == name }) else { break }
-      lastUsedProfileName = pair.0
+      rememberSelectedEQProfile(pair.0)
       applyEQ(pair.1)
     }
+    updateResetButtonVisibility()
   }
 
   func menuNeedsUpdate(_ menu: NSMenu) {
@@ -387,5 +444,6 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     eqPopUpButton.select(findItem(selectedName, selectedTag))
     eqPopUpButton.itemArray.forEach { $0.state = .off }
     eqPopUpButton.selectedItem?.state = .on
+    updateResetButtonVisibility()
   }
 }

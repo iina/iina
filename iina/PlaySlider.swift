@@ -8,15 +8,57 @@
 
 import Cocoa
 
+extension NSSlider {
+  func replaceCellPreservingConfiguration(with replacement: NSSliderCell) {
+    let currentValue = doubleValue
+    let currentMinValue = minValue
+    let currentMaxValue = maxValue
+    let currentAltIncrementValue = altIncrementValue
+    let currentSliderType = sliderType
+    let currentNumberOfTickMarks = numberOfTickMarks
+    let currentTickMarkPosition = tickMarkPosition
+    let currentAllowsTickMarkValuesOnly = allowsTickMarkValuesOnly
+    let currentIsContinuous = isContinuous
+    let currentIsEnabled = isEnabled
+    let currentTarget = target
+    let currentAction = action
+    let currentTag = tag
+    let currentNeutralValue: Double? = if #available(macOS 26.0, *) { neutralValue } else { nil }
+
+    cell = replacement
+    minValue = currentMinValue
+    maxValue = currentMaxValue
+    doubleValue = currentValue
+    altIncrementValue = currentAltIncrementValue
+    sliderType = currentSliderType
+    numberOfTickMarks = currentNumberOfTickMarks
+    tickMarkPosition = currentTickMarkPosition
+    allowsTickMarkValuesOnly = currentAllowsTickMarkValuesOnly
+    isContinuous = currentIsContinuous
+    isEnabled = currentIsEnabled
+    target = currentTarget
+    action = currentAction
+    tag = currentTag
+    if #available(macOS 26.0, *), let currentNeutralValue {
+      neutralValue = currentNeutralValue
+    }
+  }
+}
+
 /// A custom [slider](https://developer.apple.com/design/human-interface-guidelines/macos/selectors/sliders/)
 /// for the onscreen controller.
 ///
 /// This slider adds two thumbs (referred to as knobs in code) to the progress bar slider to show the A and B loop points of the
 /// [mpv](https://mpv.io/manual/stable/) A-B loop feature and allow the loop points to be adjusted. When the feature is
 /// disabled the additional thumbs are hidden.
-/// - Requires: The custom slider cell provided by `PlaySliderCell` **must** be used with this class.
+/// - Note: Floating OSCs use a standard `NSSliderCell`; other layouts retain `PlaySliderCell`.
 /// - Note: Unlike `NSSlider` the `draw` method of this class will do nothing if the view is hidden.
 final class PlaySlider: NSSlider {
+
+  private(set) var usesSystemAppearance = false
+  private var originalTrackFillColor: NSColor?
+  private var legacyCell: PlaySliderCell!
+  private var systemCell: NSSliderCell!
 
   /// Knob representing the A loop point for the mpv A-B loop feature.
   var abLoopA: PlaySliderLoopKnob { abLoopAKnob }
@@ -24,8 +66,18 @@ final class PlaySlider: NSSlider {
   /// Knob representing the B loop point for the mpv A-B loop feature.
   var abLoopB: PlaySliderLoopKnob { abLoopBKnob }
 
-  /// The slider's cell correctly typed for convenience.
-  var customCell: PlaySliderCell { cell as! PlaySliderCell }
+  var sliderCell: NSSliderCell { cell as! NSSliderCell }
+  var sliderKnobWidth: CGFloat { (cell as? PlaySliderCell)?.knobWidth ?? sliderCell.knobThickness }
+  var sliderKnobHeight: CGFloat { (cell as? PlaySliderCell)?.knobHeight ?? sliderCell.knobThickness }
+  var sliderKnobRadius: CGFloat { (cell as? PlaySliderCell)?.knobRadius ?? sliderCell.knobThickness / 2 }
+
+  var drawChapters: Bool {
+    get { legacyCell.drawChapters }
+    set {
+      legacyCell.drawChapters = newValue
+      needsDisplay = true
+    }
+  }
 
   /// Range of values the slider is configured to return.
   var range: ClosedRange<Double> { minValue...maxValue }
@@ -43,12 +95,23 @@ final class PlaySlider: NSSlider {
 
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
-    cell = PlaySliderCell()
+    systemCell = cell as? NSSliderCell
+    legacyCell = PlaySliderCell()
+    legacyCell.refusesFirstResponder = true
+    legacyCell.minValue = 0
+    legacyCell.maxValue = 100
+    originalTrackFillColor = trackFillColor
     commonInit()
   }
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+    systemCell = cell as? NSSliderCell
+    legacyCell = PlaySliderCell()
+    legacyCell.refusesFirstResponder = true
+    legacyCell.minValue = 0
+    legacyCell.maxValue = 100
+    originalTrackFillColor = trackFillColor
     commonInit()
   }
 
@@ -64,32 +127,22 @@ final class PlaySlider: NSSlider {
     abLoopBKnob = PlaySliderLoopKnob(slider: self, toolTip: "A-B loop B")
   }
 
-  // MARK: - Drawing
-
-  /// Draw the slider.
-  ///
-  /// The [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) method is being overridden
-  /// for two reasons.
-  ///
-  /// With the onscreen controller hidden and a movie playing spindumps showed time being spent drawing the slider even though it
-  /// was not visible. Apparently `NSSlider.draw` is not calling
-  /// [hiddenOrHasHiddenAncestor](https://developer.apple.com/documentation/appkit/nsview/1483473-hiddenorhashiddenancestor)
-  /// to see if drawing can be avoided.  This was noticed under macOS Monterey.  Unknown if Apple addressed this in later macOS
-  /// releases.
-  ///
-  /// The loop knobs are added as subviews to the slider. That should have resulted in the `PlaySliderLoopKnob.draw` method
-  /// being called when the slider was being drawn. Prior to macOS Sonoma that did not occur. The assumption is that the
-  /// [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) `draw` method was not calling
-  /// `super.draw` and that has now been corrected. As a workaround on earlier versions of macOS the loop knob `draw` method
-  /// is called directly.
-  override func draw(_ dirtyRect: NSRect) {
-    guard !isHiddenOrHasHiddenAncestor else { return }
-    super.draw(dirtyRect)
-    abLoopA.needsDisplay = true
-    abLoopB.needsDisplay = true
-    guard #unavailable(macOS 14) else { return }
-    abLoopA.draw(dirtyRect)
-    abLoopB.draw(dirtyRect)
+  func setQuickTimeStyle(_ enabled: Bool) {
+    let useSystemAppearance = if #available(macOS 26.0, *) { enabled } else { false }
+    let desiredCell = useSystemAppearance ? systemCell! : legacyCell!
+    guard usesSystemAppearance != useSystemAppearance || cell !== desiredCell else { return }
+    if cell !== desiredCell {
+      replaceCellPreservingConfiguration(with: desiredCell)
+    }
+    usesSystemAppearance = useSystemAppearance
+    controlSize = .small
+    trackFillColor = useSystemAppearance ? .white : originalTrackFillColor
+    if #available(macOS 26.0, *) {
+      tintProminence = useSystemAppearance ? .primary : .automatic
+    }
+    abLoopA.updateGeometry()
+    abLoopB.updateGeometry()
+    needsDisplay = true
   }
 
   override func viewDidUnhide() {
@@ -112,7 +165,15 @@ final class PlaySlider: NSSlider {
   /// - Important: _DO NOT REMOVE_ this function thinking it is not needed. Read issue #5768.
   /// - Parameter event: An object encapsulating information about the mouse-down event.
   override func mouseDown(with event: NSEvent) {
+    let player = playerCore
+    let shouldResume = player.info.state != .paused
+    player.mainWindow.liveText.clearAnalysis()
+    player.pause()
+    player.mainWindow.thumbnailPeekView.isHidden = true
     super.mouseDown(with: event)
+    if shouldResume {
+      player.resume()
+    }
   }
 
   /// The user is scrolling while the cursor is within the slider.
@@ -126,4 +187,9 @@ final class PlaySlider: NSSlider {
     guard !Preference.bool(for: .disablePlaySliderScrolling) else { return }
     super.scrollWheel(with: event)
   }
+
+  private var playerCore: PlayerCore {
+    (window!.windowController as! PlayerWindowController).player
+  }
+
 }

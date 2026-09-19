@@ -43,6 +43,60 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
       }
     }
   }
+
+  private enum ScrollGestureState {
+    case idle
+    case trackingTouch
+    case trackingMomentumCandidate(touchEndedTimestamp: TimeInterval)
+  }
+
+  private var scrollGestureState = ScrollGestureState.idle
+
+  override func scrollWheel(with event: NSEvent) {
+    // If the content is small enough to fit in the view, it doesn't need to scroll.
+    // In this case, strictly forward ALL scroll events to the parent (the sidebar)
+    // so it doesn't trap the cursor and cause "focus stealing".
+    if let documentView = documentView, documentView.bounds.height <= contentView.bounds.height {
+      nextResponder?.scrollWheel(with: event)
+      return
+    }
+
+    // Ensure gestures that started outside this view (e.g. over the parent sidebar)
+    // are not trapped when this view scrolls under the cursor mid-gesture.
+    if event.hasPreciseScrollingDeltas && (event.phase != [] || event.momentumPhase != []) {
+      if event.phase == .mayBegin || event.phase == .began {
+        scrollGestureState = .trackingTouch
+      } else if event.phase == .changed {
+        if case .trackingTouch = scrollGestureState {
+          // Continue handling the gesture that began over this view.
+        } else {
+          scrollGestureState = .idle
+        }
+      } else if event.phase == .ended || event.phase == .cancelled {
+        if case .idle = scrollGestureState {
+          // Keep forwarding gestures that began outside this view.
+        } else {
+          scrollGestureState = .trackingMomentumCandidate(touchEndedTimestamp: event.timestamp)
+        }
+      } else if event.momentumPhase == .began {
+        if case let .trackingMomentumCandidate(touchEndedTimestamp) = scrollGestureState,
+           event.timestamp - touchEndedTimestamp < 0.1 {
+          // Treat promptly following momentum as part of the tracked gesture.
+        } else {
+          scrollGestureState = .idle
+        }
+      } else if event.momentumPhase == .ended || event.momentumPhase == .cancelled {
+        scrollGestureState = .idle
+      }
+
+      if case .idle = scrollGestureState {
+        nextResponder?.scrollWheel(with: event)
+        return
+      }
+    }
+
+    super.scrollWheel(with: event)
+  }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

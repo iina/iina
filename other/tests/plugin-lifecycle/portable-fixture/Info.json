@@ -1,0 +1,20 @@
+{
+  "name": "Plugin Lifecycle Test",
+  "identifier": "org.iina.lifecycle-test",
+  "version": "1.0.0",
+  "author": {
+    "name": "IINA contributors"
+  },
+  "entry": "main.js",
+  "globalEntry": "main.js",
+  "permissions": [
+    "file-system",
+    "network-request"
+  ],
+  "allowedDomains": [
+    "127.0.0.1"
+  ],
+  "preferenceDefaults": {
+    "probe": "alive"
+  }
+}

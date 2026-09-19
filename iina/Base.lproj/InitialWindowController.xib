@@ -232,7 +232,7 @@
                                             <font key="font" metaFont="system" size="12"/>
                                         </buttonCell>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="g84-KT-lpX"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="175" id="g84-KT-lpX"/>
                                         </constraints>
                                     </button>
                                     <customView hidden="YES" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7SF-fn-3LF" customClass="BetaIndicatorView" customModule="IINA" customModuleProvider="target">

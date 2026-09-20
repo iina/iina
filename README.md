@@ -125,6 +125,7 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **[Skip Intro](https://github.com/pparanoiidd/iina-skip-intro)** (`pparanoiidd/iina-skip-intro`) - Detect and skip intros, recaps and credits.
 - **[SubTandem](https://github.com/janwee-sha/SubTandem)** (`janwee-sha/SubTandem`) - Translate selected local embedded text subtitles and external SRT/ASS subtitles into real-time bilingual subtitles.
 - **[Trakt Scrobbler](https://github.com/i3p9/iina-trakt-scrobbler)** (`i3p9/iina-trakt-scrobbler`) - Trakt.tv scrobbler plugin for IINA.
+- **[Thumbnails](https://github.com/aminozuur/iina-thumbnails)** (`aminozuur/iina-thumbnails`) - An IINA plugin that shows clickable thumbnails for each video.
 - **[VR2D](https://github.com/fetzu/iina-plugin-vr2d)** (`fetzu/iina-plugin-vr2d`) - Watch 3D VR videos (180°/360°, side-by-side or over-under) flat, with pan, zoom and automatic detection.
 
 

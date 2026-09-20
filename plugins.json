@@ -72,6 +72,12 @@
     "id": "com.qkong.iina-plugin-file-viewer"
   },
   {
+    "name": "Hold to Speed",
+    "url": "https://github.com/Tommy12356F/iina-hold-to-speed",
+    "desc": "Hold Space to play at 2× speed, just like YouTube.",
+    "id": "com.vedant.hold-to-speed"
+  },
+  {
     "name": "Jellyfin",
     "url": "https://github.com/mhajder/iina-jellyfin",
     "desc": "Browse and play media from Jellyfin servers.",
@@ -82,12 +88,6 @@
     "url": "https://github.com/bbeny123/iina-jump-to-frame",
     "desc": "Navigate video by specific frame number.",
     "id": "io.iina.jump-to-frame"
-  },
-  {
-    "name": "Hold to Speed",
-    "url": "https://github.com/Tommy12356F/iina-hold-to-speed",
-    "desc": "Hold Space to play at 2× speed, just like YouTube.",
-    "id": "com.vedant.hold-to-speed"
   },
   {
     "name": "ListenBrainz Scrobbler",
@@ -142,6 +142,12 @@
     "url": "https://github.com/janwee-sha/SubTandem",
     "desc": "Translates the selected local embedded text subtitle or external SRT/ASS subtitle and renders translated subtitles itself in IINA.",
     "id": "io.subtandem.iina"
+  },
+  {
+    "name": "Thumbnails",
+    "url": "https://github.com/aminozuur/iina-thumbnails",
+    "desc": "An IINA plugin that shows clickable thumbnails for each video.",
+    "id": "com.amin.thumbnail"
   },
   {
     "name": "Trakt Scrobbler",

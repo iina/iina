@@ -206,6 +206,7 @@
 		8488D6E71E11ABE900D5B952 /* PrefNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488D6E51E11ABE900D5B952 /* PrefNetworkViewController.swift */; };
 		8492C2861E771FB200CE5825 /* ISO639.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8492C2851E771FB200CE5825 /* ISO639.strings */; };
 		8492C2881E7721A600CE5825 /* ISO639Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8492C2871E7721A600CE5825 /* ISO639Helper.swift */; };
+		51D5C1A12E5B00A100C0FFEE /* SubtitleFilename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D5C1A02E5B00A100C0FFEE /* SubtitleFilename.swift */; };
 		849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849581EF1F02728700D3B359 /* InitialWindowController.swift */; };
 		849581F31F03D55A00D3B359 /* InitialWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849581F51F03D55A00D3B359 /* InitialWindowController.xib */; };
 		84A09A0E1F2DF596000FF343 /* MiniPlayerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A09A0C1F2DF596000FF343 /* MiniPlayerWindowController.swift */; };
@@ -1299,6 +1300,7 @@
 		848F50902085A99500E998FD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SubChooseViewController.strings"; sourceTree = "<group>"; };
 		8492C2851E771FB200CE5825 /* ISO639.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ISO639.strings; sourceTree = "<group>"; };
 		8492C2871E7721A600CE5825 /* ISO639Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO639Helper.swift; sourceTree = "<group>"; };
+		51D5C1A02E5B00A100C0FFEE /* SubtitleFilename.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleFilename.swift; sourceTree = "<group>"; };
 		849581EF1F02728700D3B359 /* InitialWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialWindowController.swift; sourceTree = "<group>"; };
 		849581F41F03D55A00D3B359 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InitialWindowController.xib; sourceTree = "<group>"; };
 		849581F71F03D55C00D3B359 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
@@ -2173,6 +2175,7 @@
 				84E295C11E2CFA18006388F7 /* ObjcUtils.h */,
 				8492C2851E771FB200CE5825 /* ISO639.strings */,
 				8492C2871E7721A600CE5825 /* ISO639Helper.swift */,
+				51D5C1A02E5B00A100C0FFEE /* SubtitleFilename.swift */,
 				840820101ECF6C1800361416 /* FileGroup.swift */,
 				84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */,
 				844C59E61F7C143D008D1B00 /* CacheManager.swift */,
@@ -2943,6 +2946,7 @@
 				8461C5301D462488006E91FF /* VideoTime.swift in Sources */,
 				E3839C5724FFF201007D0AB4 /* PluginStandaloneWindow.swift in Sources */,
 				8492C2881E7721A600CE5825 /* ISO639Helper.swift in Sources */,
+				51D5C1A12E5B00A100C0FFEE /* SubtitleFilename.swift in Sources */,
 				84F5D4991E44E8AC0060A838 /* KeyBindingDataLoader.swift in Sources */,
 				84EC12831F4F939000137C1E /* FilterPresets.swift in Sources */,
 				E318D9112FE5E26C0025DBC5 /* SidebarChaptersPane.swift in Sources */,

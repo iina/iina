@@ -1453,7 +1453,12 @@ class PlayerCore: NSObject {
       return
     }
 
-    mpv.command(.subAdd, args: [url.mpvStr], checkError: false, level: .verbose) { code in
+    // IINA does its own subtitle matching, so mpv never gets to read the name of the file it is
+    // being handed. Tell it what the name says, the way it would have read it itself.
+    let filename = SubtitleFilename(url.lastPathComponent)
+    let args = [url.mpvStr, filename.mpvSubAddFlags, "", filename.language ?? ""]
+
+    mpv.command(.subAdd, args: args, checkError: false, level: .verbose) { code in
       if code < 0 {
         self.log("Unsupported sub: \(url.mpvStr)", level: .error)
         // only show alert when the subtitle is added manually

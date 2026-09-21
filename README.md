@@ -112,9 +112,9 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **[Detached Playlist](https://github.com/HowDidTheCatGetSoFat/iina-detached-playlist)** (`HowDidTheCatGetSoFat/iina-detached-playlist`) - Show the playlist in a separate floating window.
 - **[Episode Info](https://github.com/Zain-Imam/iina-episode-info)** (`Zain-Imam/iina-episode-info`) - TMDB episode/movie info overlay on pause, with built-in subtitle search.
 - **[File Viewer](https://github.com/qktechies/iina-plugin-file-viewer)** (`qktechies/iina-plugin-file-viewer`) - bookmark folders, browse directory contents, and play video files directly within IINA.
+- **[Hold to Speed](https://github.com/Tommy12356F/iina-hold-to-speed)** (`Tommy12356F/iina-hold-to-speed`) - Hold Space to play at 2× speed, just like YouTube.
 - **[Jellyfin](https://github.com/mhajder/iina-jellyfin)** (`mhajder/iina-jellyfin`) - Browse and play media from Jellyfin servers.
 - **[Jump to Frame](https://github.com/bbeny123/iina-jump-to-frame)** (`bbeny123/iina-jump-to-frame`) - Navigate video by specific frame number.
-- **[Hold to Speed](https://github.com/Tommy12356F/iina-hold-to-speed)** (`Tommy12356F/iina-hold-to-speed`) - Hold Space to play at 2× speed, just like YouTube.
 - **[ListenBrainz Scrobbler](https://git.notfire.cc/notfire/iina-listenbrainz)** - Scrobble your music to ListenBrainz.
 - **[Multiple Clips](https://github.com/karthisnk/multi-cutter-iina)** (`karthisnk/multi-cutter-iina`) - multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.
 - **[PiP Toggle for IINA](https://github.com/nastarandarjani/iina-pip-toggle)** (`nastarandarjani/iina-pip-toggle`) - Simple plugin to toggle Picture-in-Picture (PiP) to fullscreen.
@@ -124,8 +124,8 @@ IINA is always looking for contributions, whether it's through bug reports, code
 - **[recorder](https://github.com/5thDimensionalVader/recorder-iina)** (`5thDimensionalVader/recorder-iina`) - to clip a video using ffmpeg.
 - **[Skip Intro](https://github.com/pparanoiidd/iina-skip-intro)** (`pparanoiidd/iina-skip-intro`) - Detect and skip intros, recaps and credits.
 - **[SubTandem](https://github.com/janwee-sha/SubTandem)** (`janwee-sha/SubTandem`) - Translate selected local embedded text subtitles and external SRT/ASS subtitles into real-time bilingual subtitles.
-- **[Trakt Scrobbler](https://github.com/i3p9/iina-trakt-scrobbler)** (`i3p9/iina-trakt-scrobbler`) - Trakt.tv scrobbler plugin for IINA.
 - **[Thumbnails](https://github.com/aminozuur/iina-thumbnails)** (`aminozuur/iina-thumbnails`) - An IINA plugin that shows clickable thumbnails for each video.
+- **[Trakt Scrobbler](https://github.com/i3p9/iina-trakt-scrobbler)** (`i3p9/iina-trakt-scrobbler`) - Trakt.tv scrobbler plugin for IINA.
 - **[VR2D](https://github.com/fetzu/iina-plugin-vr2d)** (`fetzu/iina-plugin-vr2d`) - Watch 3D VR videos (180°/360°, side-by-side or over-under) flat, with pan, zoom and automatic detection.
 
 

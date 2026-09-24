@@ -30,6 +30,10 @@ class FadeableViewController {
     items.append(Item(view: view, criteria: criteria))
   }
 
+  func remove(_ view: NSView) {
+    items.removeAll { $0.view == view }
+  }
+
   func update() {
     items.forEach {
       $0.state = $0.criteria()

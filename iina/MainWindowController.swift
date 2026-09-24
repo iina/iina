@@ -143,6 +143,8 @@ class MainWindowController: PlayerWindowController {
   /** Views that will show/hide when cursor moving in/out the window. */
   let fadeableViews = FadeableViewController()
 
+  private var fadeableWindowButtons: [NSButton] = []
+
   // Left and right arrow buttons
 
   /** The maximum pressure recorded when clicking on the arrow buttons. */
@@ -382,6 +384,19 @@ class MainWindowController: PlayerWindowController {
     get {
       return ([.closeButton, .miniaturizeButton, .zoomButton, .documentIconButton] as [NSWindow.ButtonType]).compactMap {
         window?.standardWindowButton($0)
+      }
+    }
+  }
+
+  private func registerWindowButtonsAsFadeable() {
+    fadeableWindowButtons.forEach { fadeableViews.remove($0) }
+    fadeableWindowButtons = standardWindowButtons
+    fadeableWindowButtons.forEach {
+      fadeableViews.add($0) { [unowned self] in
+        if sidebars.leadingSidebar.status != .hidden {
+          return .alwaysShown
+        }
+        return fsState == .windowed && !Preference.isDocked ? .auto : .alwaysShown
       }
     }
   }
@@ -634,14 +649,7 @@ class MainWindowController: PlayerWindowController {
 
     // fade-able views
 
-    standardWindowButtons.forEach {
-      fadeableViews.add($0) { [unowned self] in
-        if sidebars.leadingSidebar.status != .hidden {
-          return .alwaysShown
-        }
-        return fsState == .windowed && !Preference.isDocked ? .auto : .alwaysShown
-      }
-    }
+    registerWindowButtonsAsFadeable()
 
     fadeableViews.add(titleBarView) { [unowned self] in
       if fsState == .windowed {
@@ -1799,6 +1807,7 @@ class MainWindowController: PlayerWindowController {
     window.styleMask.remove(.borderless)
     window.styleMask.insert(.resizable)
     window.styleMask.insert(.titled)
+    registerWindowButtonsAsFadeable()
     window.hasShadow = true
     (window as! MainWindow).forceKeyAndMain = false
     window.level = .normal

@@ -11,6 +11,7 @@
 		3412DB8E2C2FC64C00BBC142 /* Equalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412DB8D2C2FC64800BBC142 /* Equalizations.swift */; };
 		3415BC8A2FC82FD9003B3FBD /* TimePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */; };
 		3465CC8F2FC72181008DBFB6 /* BufferIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */; };
+		348F33CA30650FDA0091E0C1 /* iina_nightly.icon in Resources */ = {isa = PBXBuildFile; fileRef = 348F33C930650FDA0091E0C1 /* iina_nightly.icon */; };
 		348F71962DE2A819006C587D /* MPVCommandWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F71952DE2A814006C587D /* MPVCommandWrappers.swift */; };
 		34AAF7CE302EAF6500E9835C /* libjxl.0.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AAF7B6302EAF6500E9835C /* libjxl.0.11.dylib */; };
 		34AAF7CF302EAF6500E9835C /* libunibreak.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AAF7C7302EAF6500E9835C /* libunibreak.7.dylib */; };
@@ -798,6 +799,7 @@
 		348BFFFC28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/AboutWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFD28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFF28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
+		348F33C930650FDA0091E0C1 /* iina_nightly.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = iina_nightly.icon; sourceTree = "<group>"; };
 		348F71952DE2A814006C587D /* MPVCommandWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVCommandWrappers.swift; sourceTree = "<group>"; };
 		3494B3F42C00254500F57FC2 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3494B3F52C00254800F57FC2 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -2103,6 +2105,7 @@
 			children = (
 				E34C13F13064ECCB00096D56 /* iina.icon */,
 				E34C13F33064F7B400096D56 /* iina_beta.icon */,
+				348F33C930650FDA0091E0C1 /* iina_nightly.icon */,
 				E393669923BDD1850070D626 /* IINA.entitlements */,
 				6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */,
 				C78987311E34EF170005769F /* InfoPlist.strings */,
@@ -2800,6 +2803,7 @@
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
 				8492C2861E771FB200CE5825 /* ISO639.strings in Resources */,
 				8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */,
+				348F33CA30650FDA0091E0C1 /* iina_nightly.icon in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				E3AD62772FF4C9BE00D2CAC5 /* VerbatimStrings.strings in Resources */,

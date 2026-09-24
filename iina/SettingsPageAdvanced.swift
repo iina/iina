@@ -248,7 +248,10 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   }
 
   private func pasteOption(_ string: String) -> Bool {
-    guard let option = Self.parsePastedOption(string),
+    // Values may contain `=` themselves, so only split when pasting into the key column
+    guard tableView.editedColumn >= 0,
+          tableView.tableColumns[tableView.editedColumn].identifier == .key,
+          let option = Self.parsePastedOption(string),
           options.indices.contains(tableView.editedRow) else { return false }
 
     let row = tableView.editedRow

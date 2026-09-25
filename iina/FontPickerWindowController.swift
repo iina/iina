@@ -44,6 +44,11 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   private var enableSelectionChangeListener = true
 
+  private lazy var previewHeightConstraint = previewField.constraints.first {
+    $0.firstAttribute == .height && $0.secondItem == nil
+  }
+  private lazy var defaultPreviewHeight = previewHeightConstraint?.constant ?? 40
+
   override var windowNibName: NSNib.Name {
     get {
       return NSNib.Name("FontPickerWindowController")
@@ -202,6 +207,8 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     }
     let font = chosenFont ?? NSFont.systemFont(ofSize: 24)
     previewField.font = font
+    // Some fonts (e.g. Zapfino, Noto Nastaliq Urdu) are much taller than the default preview height
+    previewHeightConstraint?.constant = max(defaultPreviewHeight, previewField.intrinsicContentSize.height)
   }
 
   private func withAllTableViews (_ block: (NSTableView) -> Void) {

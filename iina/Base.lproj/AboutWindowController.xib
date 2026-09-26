@@ -19,7 +19,6 @@
                 <outlet property="detailTextView" destination="qhB-2z-pCF" id="fQr-u5-rXZ"/>
                 <outlet property="ffmpegVersionLabel" destination="sBN-RJ-RAS" id="fGK-dC-7H3"/>
                 <outlet property="iconImageView" destination="4mA-gM-aUl" id="NPA-GO-34B"/>
-                <outlet property="iinaLabel" destination="1qX-fa-Cpb" id="QCx-gY-Nyv"/>
                 <outlet property="licenseButton" destination="tKq-yl-nhe" id="mmq-jl-FZq"/>
                 <outlet property="mpvVersionLabel" destination="nXJ-o9-ufd" id="o50-IN-SqE"/>
                 <outlet property="tabView" destination="mWI-to-B88" id="kgE-x2-Z11"/>
@@ -122,7 +121,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="0Da-44-dnw"/>
+                                                <constraint firstAttribute="trailing" secondItem="4og-gN-tB4" secondAttribute="trailing" constant="20" symbolic="YES" id="6sP-GZ-uqd"/>
                                                 <constraint firstItem="4og-gN-tB4" firstAttribute="centerX" secondItem="10Q-XR-xzb" secondAttribute="centerX" id="8nR-Wl-uLI"/>
+                                                <constraint firstItem="4og-gN-tB4" firstAttribute="leading" secondItem="10Q-XR-xzb" secondAttribute="leading" constant="20" symbolic="YES" id="F9z-p0-jwJ"/>
                                                 <constraint firstItem="4og-gN-tB4" firstAttribute="top" secondItem="O3G-Ax-VRU" secondAttribute="bottom" constant="4" id="gXh-LM-sTf"/>
                                                 <constraint firstAttribute="width" constant="180" id="h5w-AR-qVQ"/>
                                             </constraints>

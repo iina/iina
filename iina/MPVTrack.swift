@@ -77,6 +77,7 @@ class MPVTrack: NSObject {
   var lang: String?
   var isDefault: Bool
   var isForced: Bool
+  var isHearingImpaired = false
   var isImage: Bool
   var isSelected: Bool
   var isExternal: Bool
@@ -130,6 +131,12 @@ class MPVTrack: NSObject {
     if isDefault {
       components.append(NSLocalizedString("quicksetting.item_default", comment: "Default"))
     }
+    if isForced {
+      components.append(NSLocalizedString("quicksetting.item_forced", comment: "Forced"))
+    }
+    if isHearingImpaired {
+      components.append(NSLocalizedString("quicksetting.item_hearing_impaired", comment: "SDH"))
+    }
     var info = components.joined(separator: ", ")
     if !info.isEmpty {
       info = "(\(info))"
@@ -182,6 +189,7 @@ class MPVTrack: NSObject {
     codec = dict["codec"] as? String
     externalFilename = dict["external-filename"] as? String
     isAlbumart = dict["albumart"] as? Bool ?? false
+    isHearingImpaired = dict["hearing-impaired"] as? Bool ?? false
     decoderDesc = dict["decoder-desc"] as? String
     demuxW = MPVController.nodeValueAsInt(dict["demux-w"])
     demuxH = MPVController.nodeValueAsInt(dict["demux-h"])

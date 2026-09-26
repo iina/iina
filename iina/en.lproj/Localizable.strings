@@ -51,6 +51,8 @@
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "Default";
+"quicksetting.item_forced" = "Forced";
+"quicksetting.item_hearing_impaired" = "SDH";
 "quicksetting.item_none" = "None";
 "quicksetting.hwdec" = "Hardware Decoding";
 "quicksetting.deinterlace" = "Deinterlace";

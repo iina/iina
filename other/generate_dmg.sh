@@ -197,9 +197,12 @@ fi
 
 # Form a path to the correct app icon for use as the volume's icon.
 if [ "${CONFIGURATION}" = "Release" ]; then
-  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/AppIcon.icns"
+  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/iina.icns"
+elif [ "${CONFIGURATION}" = "Beta" ]; then
+  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/iina_beta.icns"
 else
-  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/AppIcon${CONFIGURATION}.icns"
+  # Debug also uses the Nightly icon.
+  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/iina_nightly.icns"
 fi
 if [ ! -e "$VOL_ICON_PATH" ]; then
   echo -e "${RED}Icon for volume does not exist: ${VOL_ICON_PATH}${NC}" >&2

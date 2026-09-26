@@ -11,6 +11,7 @@
 		3412DB8E2C2FC64C00BBC142 /* Equalizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412DB8D2C2FC64800BBC142 /* Equalizations.swift */; };
 		3415BC8A2FC82FD9003B3FBD /* TimePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */; };
 		3465CC8F2FC72181008DBFB6 /* BufferIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3465CC8E2FC7217C008DBFB6 /* BufferIndicatorView.swift */; };
+		348F33CA30650FDA0091E0C1 /* iina_nightly.icon in Resources */ = {isa = PBXBuildFile; fileRef = 348F33C930650FDA0091E0C1 /* iina_nightly.icon */; };
 		348F71962DE2A819006C587D /* MPVCommandWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F71952DE2A814006C587D /* MPVCommandWrappers.swift */; };
 		34AAF7CE302EAF6500E9835C /* libjxl.0.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AAF7B6302EAF6500E9835C /* libjxl.0.11.dylib */; };
 		34AAF7CF302EAF6500E9835C /* libunibreak.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AAF7C7302EAF6500E9835C /* libunibreak.7.dylib */; };
@@ -295,6 +296,8 @@
 		E34BC28F2C27A68100A94680 /* SettingsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC28E2C27A68100A94680 /* SettingsItem.swift */; };
 		E34BC2A82C27C01800A94680 /* SettingsLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */; };
 		E34BC2AC2C27DAE900A94680 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */; };
+		E34C13F23064ECCB00096D56 /* iina.icon in Resources */ = {isa = PBXBuildFile; fileRef = E34C13F13064ECCB00096D56 /* iina.icon */; };
+		E34C13F43064F7B400096D56 /* iina_beta.icon in Resources */ = {isa = PBXBuildFile; fileRef = E34C13F33064F7B400096D56 /* iina_beta.icon */; };
 		E34E909A24F821280073BF04 /* GuideWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34E909C24F821280073BF04 /* GuideWindowController.xib */; };
 		E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34EAA82251A36CE00057F27 /* JavascriptAPIFile.swift */; };
 		E3513AF820EF79C500F8C347 /* PreferenceWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3513AF620EF79C500F8C347 /* PreferenceWindowController.swift */; };
@@ -796,6 +799,7 @@
 		348BFFFC28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/AboutWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFD28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/OpenURLWindowController.strings"; sourceTree = "<group>"; };
 		348BFFFF28DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/InitialWindowController.strings"; sourceTree = "<group>"; };
+		348F33C930650FDA0091E0C1 /* iina_nightly.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = iina_nightly.icon; sourceTree = "<group>"; };
 		348F71952DE2A814006C587D /* MPVCommandWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVCommandWrappers.swift; sourceTree = "<group>"; };
 		3494B3F42C00254500F57FC2 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3494B3F52C00254800F57FC2 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1629,6 +1633,8 @@
 		E34BC28E2C27A68100A94680 /* SettingsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItem.swift; sourceTree = "<group>"; };
 		E34BC2A72C27C01800A94680 /* SettingsLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLocalization.swift; sourceTree = "<group>"; };
 		E34BC2AB2C27DAE900A94680 /* SettingsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
+		E34C13F13064ECCB00096D56 /* iina.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = iina.icon; sourceTree = "<group>"; };
+		E34C13F33064F7B400096D56 /* iina_beta.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = iina_beta.icon; sourceTree = "<group>"; };
 		E34E909B24F821280073BF04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GuideWindowController.xib; sourceTree = "<group>"; };
 		E34E909E24F821300073BF04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		E34E90C824F821B00073BF04 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
@@ -2097,6 +2103,9 @@
 		84A0BAA21D2FAE8200BC8DA1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				E34C13F13064ECCB00096D56 /* iina.icon */,
+				E34C13F33064F7B400096D56 /* iina_beta.icon */,
+				348F33C930650FDA0091E0C1 /* iina_nightly.icon */,
 				E393669923BDD1850070D626 /* IINA.entitlements */,
 				6100FF2A1EDF9806002CF0FB /* dsa_pub.pem */,
 				C78987311E34EF170005769F /* InfoPlist.strings */,
@@ -2794,6 +2803,7 @@
 				8400D5E41E1AB333006785F5 /* PrefControlViewController.xib in Resources */,
 				8492C2861E771FB200CE5825 /* ISO639.strings in Resources */,
 				8F49C36E213EFB7E0076C4F9 /* MiniPlayerWindowController.xib in Resources */,
+				348F33CA30650FDA0091E0C1 /* iina_nightly.icon in Resources */,
 				84A0BA951D2F9E9600BC8DA1 /* MainMenu.xib in Resources */,
 				8400D5D81E1AB31B006785F5 /* AboutWindowController.xib in Resources */,
 				E3AD62772FF4C9BE00D2CAC5 /* VerbatimStrings.strings in Resources */,
@@ -2805,11 +2815,13 @@
 				84F5D49A1E44E9A50060A838 /* KeyBinding.strings in Resources */,
 				E34A0E012053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib in Resources */,
 				E34E909A24F821280073BF04 /* GuideWindowController.xib in Resources */,
+				E34C13F43064F7B400096D56 /* iina_beta.icon in Resources */,
 				34F294C02C0B68B300F14962 /* Contribution.rtf in Resources */,
 				8400D5D21E1AB312006785F5 /* InspectorWindowController.xib in Resources */,
 				8400D5ED1E1AB33F006785F5 /* PrefAdvancedViewController.xib in Resources */,
 				6100FF2B1EDF9806002CF0FB /* dsa_pub.pem in Resources */,
 				849581F31F03D55A00D3B359 /* InitialWindowController.xib in Resources */,
+				E34C13F23064ECCB00096D56 /* iina.icon in Resources */,
 				845AC09C1E1AE6C10080B614 /* Localizable.strings in Resources */,
 				8400D5F61E1AB34D006785F5 /* PrefNetworkViewController.xib in Resources */,
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
@@ -4314,6 +4326,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
@@ -4361,6 +4374,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
@@ -4408,6 +4422,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
@@ -4420,6 +4435,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 67CQ77V27R;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};

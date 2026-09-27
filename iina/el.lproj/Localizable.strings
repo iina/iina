@@ -16,9 +16,9 @@
 "general.done" = "Τέλος";
 "general.username" = "Όνομα Χρήστη";
 "general.password" = "Κωδικός";
-"general.na" = "N/A";
-"general.no_result" = "No Result";
-"general.no_title" = "No Title";
+"general.na" = "Μ/Δ";
+"general.no_result" = "Κανένα Αποτέλεσμα";
+"general.no_title" = "Χωρίς Τίτλο";
 "general.auto" = "Auto";
 
 "input.value_is_empty" = "Η τιμή δε μπορεί να είναι κενή.";
@@ -42,7 +42,7 @@
 // MainWindowController.swift
 "main.buffering_indicator" = "Προφόρτωση… %d%%";
 "main.opening_stream" = "Άνοιγμα Ροής…";
-"main.seeking_indicator" = "Seeking…";
+"main.seeking_indicator" = "Αναζήτηση…";
 "osc.precision" = "Ακρίβεια";
 "osc.1s" = "1 δευτερόλεπτο";
 "osc.100ms" = "100 χιλιοστά του δευτερολέπτου";
@@ -79,8 +79,8 @@
 "eq.preset.reduce_bass" = "Μείωση Μπάσου";
 "eq.preset.reduce_treble" = "Μείωση Τρέμουλου";
 "eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.small_speaker" = "Μικρό Ηχείο";
+"eq.preset.spoken_word" = "Ομιλούμενος λόγος";
 
 "alert.eq.new_profile.title" = "New EQ Profile";
 "alert.eq.new_profile.message" = "Please enter a profile name.";
@@ -175,13 +175,13 @@
 "preference.sub_override_level.force" = "force";
 "preference.sub_override_level.scale" = "scale";
 "preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
+"preference.sub_override_level.yes" = "ναι";
 
 "preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.force" = "Εφαρμογή όλων των στυλ υποτίτλων.";
 "preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+"preference.sub_override_level.descriptive_text.yes" = "Εφαρμογή όλων των ρυθμίσεων στυλ σε αυτήν την ενότητα.";
 
 "preference.ytdl_plugin_not_installed" = "Εγκατάσταση του Online Media plugin από \"Plugins > Εγκατάσταση από το GitHub\" για να απολαύσεις προηγμένες λειτουργίες όπως λήψη βίντεο και αυτόματες ενημερώσεις yt-dlp.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
@@ -190,7 +190,7 @@
 "menu.volume_muted" = "Volume: %@ (Muted)";
 "menu.audio_delay" = "Καθυστέρηση Ήχου: %@s";
 "menu.sub_delay" = "Καθυστέρηση Υποτίτλων: %@s";
-"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_hide" = "Απόκρυψη Υποτίτλων";
 "menu.sub_show" = "Show Subtitles";
 "menu.sub_second_hide" = "Hide Secondary Subtitles";
 "menu.sub_second_show" = "Show Secondary Subtitles";
@@ -198,8 +198,8 @@
 "menu.exit_fullscreen" = "Έξοδος από Πλήρη Οθόνη";
 "menu.pip" = "Μετάβαση σε Εικόνα-σε-Εικόνα";
 "menu.exit_pip" = "Έξοδος από Εικόνα-σε-Εικόνα";
-"menu.mini_player" = "Enter Music Mode";
-"menu.exit_mini_player" = "Exit Music Mode";
+"menu.mini_player" = "Είσοδος Σε Λειτουργία Μουσικής";
+"menu.exit_mini_player" = "Έξοδος Από Τη Λειτουργία Μουσικής";
 "menu.pause" = "Παύση";
 "menu.resume" = "Συνέχιση";
 "menu.speed" = "Ταχύτητα: %@x";
@@ -207,8 +207,8 @@
 "menu.hide_chapters" = "Απόκρυψη Πίνακα Κεφαλαίων";
 "menu.playlist" = "Εμφάνιση Πίνακα Λίστας Αναπαραγωγής";
 "menu.hide_playlist" = "Απόκρυψη Πίνακα Λίστας Αναπαραγωγής";
-"menu.video" = "Show Video Panel";
-"menu.hide_video" = "Hide Video Panel";
+"menu.video" = "Εμφάνιση Πίνακα Βίντεο";
+"menu.hide_video" = "Απόκρυψη Πίνακα Βίντεο";
 "menu.audio" = "Show Audio Panel";
 "menu.hide_audio" = "Απόκρυψη Πίνακα Ήχου";
 "menu.subtitles" = "Show Subtitles Panel";
@@ -327,7 +327,7 @@
 "alert.delete_all_history.title" = "Εκκαθάριση Ιστορικού Αναπαραγωγής";
 "alert.delete_all_history.message" = "Θέλετε σίγουρα να διαγράψετε όλο το ιστορικό αναπαραγωγής;";
 "alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.message" = "Είστε σίγουροι ότι θέλετε να διαγράψετε τις επιλεγμένες καταχωρήσεις;";
 
 "alert.filter_hwdec.message" = "Πρόκειται να εμφαρμόσετε ένα φίλτρο βίντεο. Ωστόσο, ο τρέχων αποκωδικοποιητής υλικού σας ενδέχεται να μην υποστηρίζει σωστά τα φίλτρα βίντεο. Μπορείτε είτε να απενεργοποιήσετε την αποκωδικοποίηση υλικού, ή να μεταβείτε σε λειτουργία Αυτόματο(Αντιγραφή), κάτι που καταναλώνει διπλάσιο χώρο μνήμης.\nΜπορεί να χρειαστεί να επαναλάβετε προηγούμενες βήματα (όπως ρύθμισης της περικοπής) για να το κάνετε να λειτουργήσει.";
 "alert.filter_hwdec.abort" = "Απόρριψη";
@@ -557,7 +557,7 @@
 "sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
 "sidebar.docked" = "Docked Control Bar and Titlebar";
 "sidebar.fit_window_to_video" = "Fit Window to Video";
-"sidebar.settings" = "Settings";
+"sidebar.settings" = "Ρυθμίσεις";
 "sidebar.playlist_and_chapters" = "Playlist and Chapters";
 
 "sidebar.aspect_ratio" = "Αναλογία Διαστάσεων";
@@ -814,10 +814,10 @@
 "settings.subBold.label" = "Bold";
 "settings.subItalic.label" = "Italic";
 "settings.subLang.desc" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
-"settings.subOverrideLevel.items.0" = "yes";
-"settings.subOverrideLevel.items.0.desc" = "Apply all the style settings in this section.";
+"settings.subOverrideLevel.items.0" = "ναι";
+"settings.subOverrideLevel.items.0.desc" = "Εφαρμογή όλων των ρυθμίσεων στυλ σε αυτήν την ενότητα.";
 "settings.subOverrideLevel.items.1" = "force";
-"settings.subOverrideLevel.items.1.desc" = "Apply all subtitle styles.";
+"settings.subOverrideLevel.items.1.desc" = "Εφαρμογή όλων των στυλ υποτίτλων.";
 "settings.subOverrideLevel.items.2" = "strip";
 "settings.subOverrideLevel.items.2.desc" = "Radically strip all ASS tags and styles from the subtitle.";
 "settings.subOverrideLevel.items.3" = "scale";
@@ -882,23 +882,23 @@
 "settings.windowBehaviorWhenPip.label" = "Παράθυρο";
 
 // Settings - Advanced
-"settings.enableAdvancedSettings.desc" = "The following settings will require restarting IINA to take effect.";
+"settings.enableAdvancedSettings.desc" = "Οι ακόλουθες ρυθμίσεις θα απαιτήσουν την επανεκκίνηση του IINA για να εφαρμοστούν.";
 "settings.enableAdvancedSettings.label" = "Ενεργοποίηση Προηγμένων Ρυθμίσεων";
 "settings.enableLogging.label" = "Enable logging";
 "settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
-"settings.logLevel.items.0" = "Verbose";
-"settings.logLevel.items.1" = "Debug";
+"settings.logLevel.items.0" = "Λεπτομερής";
+"settings.logLevel.items.1" = "Αποσφαλμάτωση";
 "settings.logLevel.items.2" = "Προειδοποίηση";
 "settings.logLevel.items.3" = "Σφάλμα";
 "settings.logLevel.label" = "Log level";
-"settings.useMpvOsd.label" = "Use mpv's OSD";
+"settings.useMpvOsd.label" = "Χρήση OSD του mpv";
 "settings.useUserDefinedConfDir.label" = "Use config directory";
 
 // Settings - Inline labels
 "settings.$ASSSubtitles" = "ASS subtitles";
 "settings.$About" = "Σχετικά";
 "settings.$Accessibility" = "Προσβασιμότητα";
-"settings.$AdditionalMpvOptions" = "Additional mpv options";
+"settings.$AdditionalMpvOptions" = "Πρόσθετες επιλογές mpv";
 "settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
 "settings.$Advanced" = "Προηγμένα";
 "settings.$Align" = "Align";
@@ -974,7 +974,7 @@
 "settings.$OnScreenDisplay" = "Εμφάνιση στην Οθόνη";
 "settings.$OnlineSubtitles" = "Online Subtitles";
 "settings.$OpenLinksOrCurrentWebpage" = "Άνοιγμα συνδέσμων ή τρέχουσα ιστοσελίδα σε IINA με ένα κλικ. Η ιστοσελίδα πρέπει να υποστηρίζεται από youtube-dl.";
-"settings.$OpenLogDirectory" = "Open Log Directory";
+"settings.$OpenLogDirectory" = "Άνοιγμα Καταλόγου Καταγραφής";
 "settings.$OpenLogWindow" = "Open the log viewer";
 "settings.$OrSelectFrom" = "Or select from available plugins";
 "settings.$Other" = "Other";
@@ -994,7 +994,7 @@
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Screenshots";
 "settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
-"settings.$Settings" = "Settings";
+"settings.$Settings" = "Ρυθμίσεις";
 "settings.$Shadow" = "Shadow";
 "settings.$ShowInFinder" = "Εμφάνιση στον Finder";
 "settings.$ShowTheConfigFileIn" = "Show config file in Finder";

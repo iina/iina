@@ -26,6 +26,16 @@ jobs:
           DOWNLOAD_LIBS_ARGS: ${{ github.event_name == 'pull_request' && '--skip-plugins' || '' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Verify VVC playback
+        run: |
+          vvc_sample="$RUNNER_TEMP/iina-vvc-sample.mp4"
+          curl --fail --location --silent --show-error "$VVC_SAMPLE_URL" --output "$vvc_sample"
+          printf '%s  %s\n' "$VVC_SAMPLE_SHA256" "$vvc_sample" | shasum -a 256 -c -
+          ./other/tests/test_vvc_playback.sh "$vvc_sample"
+        env:
+          VVC_SAMPLE_URL: https://user-images.githubusercontent.com/89560393/227756032-9a697a60-5b26-409c-824d-e2f815df8437.mp4
+          VVC_SAMPLE_SHA256: 80085b3482ddd1e7a405997a39d904eb26b5ab05dfe8b77f0333db7c15d71a5b
+
       - name: Build
         run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=NO -scheme iina -derivedDataPath . -configuration Nightly ${{ matrix.deployment_target }}
         env:

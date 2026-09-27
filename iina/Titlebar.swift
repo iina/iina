@@ -269,14 +269,19 @@ class Titlebar: NSView {
   func updateTitle() {
     guard let titleTextField,
           let docIcon,
-          let sysTitle = mainWindow.titleTextField else { return }
+          let window = mainWindow.window else { return }
 
-    titleTextField.stringValue = sysTitle.stringValue
-    if let fileName = mainWindow.window?.representedFilename {
-      docIcon.image = NSWorkspace.shared.icon(forFile: fileName)
+    let info = mainWindow.player.info
+    titleTextField.stringValue = if info.isNetworkResource {
+      mainWindow.player.getMediaTitle()
+    } else if let url = info.currentURL {
+      FileManager.default.displayName(atPath: url.path)
     } else {
-      docIcon.image = nil
+      ""
     }
+
+    let filename = window.representedFilename
+    docIcon.image = filename.isEmpty ? nil : NSWorkspace.shared.icon(forFile: filename)
   }
 
   func setLeadingConstraint(_ constant: CGFloat, animated: Bool = true) {

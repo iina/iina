@@ -17,6 +17,7 @@
 ## Features
 
 * Based on [mpv](https://github.com/mpv-player/mpv), which provides the best decoding capacity on macOS
+* [VVC / H.266 software playback](docs/vvc-h266.md) through FFmpeg
 * Designed with modern versions of macOS (11.0+) in mind
 * All the features you need for video and music: subtitles, playlists, chapters…and much, much more!
 * Force Touch, picture-in-picture and advanced Touch Bar support

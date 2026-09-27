@@ -19,6 +19,8 @@
 # See: https://github.com/create-dmg/create-dmg
 
 PROJECT_NAME='iina'
+SCHEME='iina'
+OUTPUT_DIR=''
 
 # Colors for output
 RED='\033[0;31m'
@@ -32,35 +34,40 @@ printUsageHelp() {
   echo -e "${BLUE}Usage:${NC}"
   echo -e "    ${GREEN}$0 -h:${NC}        Displays this help message"
   echo -e "    ${GREEN}$0 -v:${NC}        Show details during disk image creation"
+  echo -e "    ${GREEN}$0 -s [scheme]${NC}   Build with the specified Xcode scheme"
+  echo -e "    ${GREEN}$0 -o [output_dir]${NC}  Write the generated DMG to the specified directory"
   echo
 }
 
-args=`getopt hv $*`
-if [ $? -ne 0 ]; then
-  printUsageHelp
-  echo -e "${RED}Failed parsing options.${NC}" >&2
-  exit 1
-fi
-set -- $args
-
 VERBOSE=1
-while true; do
-  case "$1" in
-  -h)
+while getopts ":hvs:o:" opt; do
+  case "$opt" in
+  h)
     printUsageHelp
     exit 0
     ;;
-  -v)
+  v)
     VERBOSE=0
-    shift
     ;;
-  --)
-    shift
-    break
+  s)
+    SCHEME="$OPTARG"
     ;;
-  *) break ;;
+  o)
+    OUTPUT_DIR="$OPTARG"
+    ;;
+  :)
+    echo -e "${RED}Missing argument for -$OPTARG.${NC}" >&2
+    printUsageHelp
+    exit 1
+    ;;
+  \?)
+    echo -e "${RED}Unknown option: -$OPTARG${NC}" >&2
+    printUsageHelp
+    exit 1
+    ;;
   esac
 done
+shift $((OPTIND - 1))
 
 echo -e "${BLUE}Starting disk image generation…${NC}"
 
@@ -99,16 +106,16 @@ if [ -z "$WIDTH" ]; then
   echo -e "${RED}Failed to obtain width of background image.${NC}" >&2
   exit 1
 fi
-if ! [[ "$WIDTH" =~ ^[0-9]+$ ]] ; then
+if ! [[ "$WIDTH" =~ ^[0-9]+$ ]]; then
   echo -e "${RED}Width is not an integer: ${WIDTH}${NC}" >&2
   exit 1
 fi
 HEIGHT=$(sips -g pixelHeight "$DMG_BACKGROUND_PATH" | tail -n1 | cut -d" " -f4)
 if [ -z "$HEIGHT" ]; then
   echo -e "${RED}Failed to obtain height of background image.${NC}" >&2
-  exit 1  
+  exit 1
 fi
-if ! [[ "$HEIGHT" =~ ^[0-9]+$ ]] ; then
+if ! [[ "$HEIGHT" =~ ^[0-9]+$ ]]; then
   echo -e "${RED}Height is not an integer: ${HEIGHT}${NC}" >&2
   exit 1
 fi
@@ -120,7 +127,7 @@ echo -e "${YELLOW}Obtaining Xcode build settings…${NC}"
 
 SETTINGS=$(xcodebuild \
   -workspace ${ROOT_PATH}/iina.xcodeproj/project.xcworkspace \
-  -scheme iina -destination 'generic/platform=macOS,name=Any Mac' \
+  -scheme "$SCHEME" -destination 'generic/platform=macOS,name=Any Mac' \
   -showBuildSettings)
 
 echo -e "${GREEN}Obtained Xcode build settings${NC}"
@@ -177,7 +184,7 @@ echo -e "${GREEN}Confirmed Safari extension is installable.${NC}"
 
 # Find the Xcode build configuration. The app icon differs based on the configuration.
 CONFIGURATION=$(echo "$SETTINGS" | sed -rn 's/.*CONFIGURATION = (.*)/\1/p')
-if [ -z  "$CONFIGURATION" ]; then
+if [ -z "$CONFIGURATION" ]; then
   echo -e "${RED}Unable to find build configuration in Xcode build settings.${NC}" >&2
   exit 1
 fi
@@ -197,9 +204,12 @@ fi
 
 # Form a path to the correct app icon for use as the volume's icon.
 if [ "${CONFIGURATION}" = "Release" ]; then
-  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/AppIcon.icns"
+  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/iina.icns"
+elif [ "${CONFIGURATION}" = "Beta" ]; then
+  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/iina_beta.icns"
 else
-  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/AppIcon${CONFIGURATION}.icns"
+  # Debug also uses the Nightly icon.
+  VOL_ICON_PATH="$TARGET_BUILD_DIR/IINA.app/Contents/Resources/iina_nightly.icns"
 fi
 if [ ! -e "$VOL_ICON_PATH" ]; then
   echo -e "${RED}Icon for volume does not exist: ${VOL_ICON_PATH}${NC}" >&2
@@ -209,11 +219,16 @@ echo -e "${GREEN}Found icon file to use for volume: ${VOL_ICON_PATH}${NC}"
 
 # Find the IINA version so it can be used in the DMG filename.
 MARKETING_VERSION=$(echo "$SETTINGS" | sed -rn 's/.*MARKETING_VERSION = (.*)/\1/p')
-if [ -z  "$MARKETING_VERSION" ]; then
+if [ -z "$MARKETING_VERSION" ]; then
   echo -e "${RED}Unable to find IINA version in Xcode build settings.${NC}" >&2
   exit 1
 fi
-DISK_IMAGE_PATH="$TARGET_BUILD_DIR/IINA.v"$MARKETING_VERSION".dmg"
+if [ -z "$OUTPUT_DIR" ]; then
+  OUTPUT_DIR="$TARGET_BUILD_DIR"
+else
+  mkdir -p "$OUTPUT_DIR"
+fi
+DISK_IMAGE_PATH="$OUTPUT_DIR/IINA.v"$MARKETING_VERSION".dmg"
 
 # If the disk image file already exists it must be removed or create-dmg will fail.
 if [ -e "$DISK_IMAGE_PATH" ]; then
@@ -235,11 +250,49 @@ fi
 
 if ! create-dmg $QUITE --volname IINA --volicon "$VOL_ICON_PATH" --background "$DMG_BACKGROUND_PATH" \
     --window-pos 200 120 --window-size $WIDTH $HEIGHT --icon-size 128 \
-    --icon "IINA.app" 140 230 --app-drop-link 400 230 \
+    --icon "IINA.app" 140 230 --app-drop-link 400 230 --no-internet-enable \
     "$DISK_IMAGE_PATH" "$APP_PATH"; then
   echo -e "${RED}Failed to create disk image.${NC}" >&2
   exit 1
 fi
 
 echo -e "${GREEN}Generated disk image: ${DISK_IMAGE_PATH}${NC}"
+
+echo -e "${YELLOW}Setting a Finder icon on the disk image…${NC}"
+
+if ! swift - "$VOL_ICON_PATH" "$DISK_IMAGE_PATH" <<'EOF'
+import AppKit
+
+guard CommandLine.arguments.count >= 2 else {
+  fputs("Must pass path to icon as first argument\n", stderr)
+  exit(1)
+}
+let icon = CommandLine.arguments[1]
+guard FileManager.default.fileExists(atPath: icon) else {
+  fputs("File to use as Finder icon does not exist: \(icon)\n", stderr)
+  exit(1)
+}
+guard CommandLine.arguments.count >= 3 else {
+  fputs("Must pass path to disk image as second argument\n", stderr)
+  exit(1)
+}
+let dmg = CommandLine.arguments[2]
+guard FileManager.default.fileExists(atPath: icon) else {
+  fputs("Disk image to apply Finder icon to does not exist: \(dmg)\n", stderr)
+  exit(1)
+}
+guard let image = NSImage(contentsOfFile: icon) else {
+  fputs("Failed to create a NSImage from: \(icon)\n", stderr)
+  exit(1)
+}
+guard NSWorkspace.shared.setIcon(image, forFile: dmg) else {
+  fputs("Failed to set icon on: \(dmg)\n", stderr)
+  exit(1)
+}
+EOF
+then
+  echo -e "${RED}Failed to set a Finder icon the disk image.${NC}" >&2
+  exit 1
+fi
+echo -e "${GREEN}Successfully set a Finder icon on the DMG file.${NC}"
 echo -e "${GREEN}Successfully generated DMG file.${NC}"

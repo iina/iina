@@ -1,6 +1,5 @@
 {
   "features" : [
-    "refractivity"
   ],
   "fill-specializations" : [
     {
@@ -84,11 +83,6 @@
         }
       ],
       "lighting" : "individual",
-      "refractivity" : {
-        "depth" : 0.2569921875,
-        "enabled" : true,
-        "strength" : 0.5440234375
-      },
       "shadow" : {
         "kind" : "layer-color",
         "opacity" : 0.5

@@ -172,7 +172,7 @@
 "preference.enable_adv_settings" = "詳細設定を有効にする";
 
 "preference.sub_override_level.no" = "いいえ";
-"preference.sub_override_level.force" = "強制的";
+"preference.sub_override_level.force" = "強制";
 "preference.sub_override_level.scale" = "サイズ";
 "preference.sub_override_level.strip" = "ストリップ";
 "preference.sub_override_level.yes" = "はい";
@@ -342,7 +342,7 @@
 "alert.clear_history.message" = "すべての再生履歴を削除してもよろしいですか?";
 
 "alert.clear_watch_later.title" = "保存済みの再生進行状況を消去";
-"alert.clear_watch_later.message" = "すべての保存済みの再生進行状況（\"あとで見る\"データ）を消去してもよろしいですか?";
+"alert.clear_watch_later.message" = "すべての保存済みの再生進行状況（\"あとで再生\"データ）を削除してもよろしいですか?";
 
 "alert.restore_alerts.title" = "非表示にした警告を復元";
 "alert.restore_alerts.message" = "すべての非表示にした警告を復元してもよろしいですか?";
@@ -612,13 +612,13 @@
 "settings.allowScreenSaverForAudio.desc" = "システムのスリープを防ぎます。";
 "settings.allowScreenSaverForAudio.label" = "\"ミュージックモード\" またはオーディオのみの再生中を除く";
 "settings.alwaysOpenInNewWindow.label" = "複数のプレイヤーウインドウを開くことを許可";
-"settings.autoRepeat.label" = "ファイルを手動で開いたときに繰り返し再生";
+"settings.autoRepeat.label" = "手動で開いたファイルの繰り返し再生";
 "settings.autoSwitchToMusicMode.label" = "オーディオファイルを再生中は自動的に \"ミュージックモード\" に切り替える";
-"settings.blackOutMonitor.label" = "フルスクリーン時はほかのディスプレイの表示を消す";
+"settings.blackOutMonitor.label" = "フルスクリーン時にはほかのディスプレイの表示を消す";
 "settings.defaultRepeatMode.items.0" = "プレイリストを繰り返し再生";
 "settings.defaultRepeatMode.items.1" = "1個のファイルを繰り返し再生";
 "settings.fullScreenWhenOpen.label" = "フルスクリーンにする";
-"settings.groupSimultaneousOpensInPlaylist.label" = "複数ファイルを同時に開くときにプレイリストにメディアをグループ化";
+"settings.groupSimultaneousOpensInPlaylist.label" = "複数ファイルを同時に開くときにプレイリストのメディアをグループ化";
 "settings.keepOpenOnFileEnd.label" = "再生終了後もウインドウを閉じない";
 "settings.pauseWhenGoesToSleep.label" = "スリープ時に一時停止";
 "settings.pauseWhenInactive.label" = "ウインドウが非アクティブ/アクティブになるとき";
@@ -647,12 +647,12 @@
 "settings.screenshotShowPreview.label" = "スクリーンショット撮影後にプレビューを表示";
 "settings.trackAllFilesInRecentOpenMenu.desc" = "その他の場合、手動で開いたファイルだけがメニューに表示されます。";
 "settings.trackAllFilesInRecentOpenMenu.label" = "再生したすべてのファイルを \"最近使った項目を開く\" で追跡";
-"settings.useLegacyFullScreen.label" = "古いフルスクリーン表示を使用";
+"settings.useLegacyFullScreen.label" = "従来のフルスクリーン表示を使用";
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "HDRビデオを再生中は、デフォルトでHDRモードを有効にします。";
 "settings.enableHdrSupport.label" = "HDRモードを有効にする";
-"settings.enableLiveText.desc" = "認識されたテキストを、一時停止中のビデオフレームにオーバレイ表示します。macOS 13以降が必要です。";
+"settings.enableLiveText.desc" = "認識されたテキストを、一時停止中のビデオフレームにオーバーレイ表示します。macOS 13以降が必要です。";
 "settings.enableLiveText.label" = "テキスト認識表示";
 "settings.enableToneMapping.label" = "トーンマッピングを有効にする";
 "settings.forceDedicatedGPU.desc" = "レンダリングに外部GPUを常に使用します（搭載されている場合）。パフォーマンスが向上しますが、バッテリー駆動時間が短くなる可能性があります。";
@@ -667,9 +667,9 @@
 "settings.loadIccProfile.desc" = "現在のディスプレイ用ICCプロファイルを読み込み、ビデオRGBを画面出力に変換するために使用します。（SDRモードに対してだけ）";
 "settings.loadIccProfile.label" = "ICCプロファイルを読み込む";
 "settings.toneMappingAlgorithm.label" = "アルゴリズム";
-"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
-"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
-"settings.toneMappingParamOverride.label" = "Tuning parameter";
+"settings.toneMappingAlgorithm.desc" = "対象のディスプレイでトーンマッピングを使用するためのアルゴリズムです。";
+"settings.toneMappingParamOverride.desc" = "トーンマッピングアルゴリズムを調整するためのパラメータです。デフォルトでは、特定のデフォルト値に設定されています。この設定を有効にすると、これをオーバーライドできます。";
+"settings.toneMappingParamOverride.label" = "調整パラメータ";
 "settings.toneMappingTargetPeak.desc" = "ディスプレイの測定済み最大輝度。IINAはデフォルトでこの値を検出します。検出できない場合には、ディスプレイの伝達特性に基づき、目標とする最大輝度を適切な値に設定します。ディスプレイ輝度を手動で指定するには、この設定を有効にしてください。";
 "settings.toneMappingTargetPeak.label" = "ターゲットピーク値";
 "settings.videoThreads.desc" = "デフォルト: 0 （自動）";
@@ -683,9 +683,9 @@
 "settings.gaplessAudio.desc" = "ギャップレスオーディオ";
 "settings.gaplessAudio.items.0" = "無効";
 "settings.gaplessAudio.items.0.desc" = "連続したオーディオファイルを再生する場合は、ファイル変更時に無音または中断が生じることがあります。";
-"settings.gaplessAudio.items.1" = "弱め";
+"settings.gaplessAudio.items.1" = "弱い";
 "settings.gaplessAudio.items.1.desc" = "デコーダ出力のオーディオフォーマットを変更した場合、オーディオデバイスが閉じられたあと再度開かれるため、ギャップレス再生が中断されます。";
-"settings.gaplessAudio.items.2" = "強め";
+"settings.gaplessAudio.items.2" = "強い";
 "settings.gaplessAudio.items.2.desc" = "オーディオデバイスは、最初に再生するファイルで選択したパラメータを使用して開かれたあと、ギャップレス再生のため開かれたままになります。後続のファイルについては再サンプリングされる場合があります。";
 "settings.gaplessAudio.label" = "ギャップレスオーディオ";
 "settings.maxVolume.desc" = "（100-1000）";
@@ -791,7 +791,7 @@
 // Settings - Subtitles
 "settings.autoSearchOnlineSub.desc" = "有効にすると、字幕が読み込まれていない再生時間が20分以上の動画については、自動的にオンライン字幕を検索します。";
 "settings.autoSearchOnlineSub.label" = "オンライン字幕を自動的に検索";
-"settings.displayInLetterBox.label" = "フルスクリーン時はレターボックス内に字幕を表示";
+"settings.displayInLetterBox.label" = "フルスクリーン時にはレターボックス内に字幕を表示";
 "settings.subAlignX.items.0" = "左揃え";
 "settings.subAlignX.items.1" = "中央揃え";
 "settings.subAlignX.items.2" = "右揃え";
@@ -817,9 +817,9 @@
 "settings.subLang.desc" = "このオプションはISO 639-2言語コードで保存され、mpvとopensubtitlesの両方で使用できます。";
 "settings.subOverrideLevel.items.0" = "はい";
 "settings.subOverrideLevel.items.0.desc" = "このセクションのすべてのスタイル設定を適用します。";
-"settings.subOverrideLevel.items.1" = "強制的";
+"settings.subOverrideLevel.items.1" = "強制";
 "settings.subOverrideLevel.items.1.desc" = "すべての字幕スタイルを適用します。";
-"settings.subOverrideLevel.items.2" = "ストリップ";
+"settings.subOverrideLevel.items.2" = "取り除く";
 "settings.subOverrideLevel.items.2.desc" = "すべてのASSタグとスタイルを字幕から完全に取り除きます。";
 "settings.subOverrideLevel.items.3" = "サイズ";
 "settings.subOverrideLevel.items.3.desc" = "このセクションのスタイル設定に加えて、サイズ設定を適用します。";
@@ -933,7 +933,7 @@
 "settings.$DefaultApplication" = "デフォルトのアプリケーション";
 "settings.$DefaultEncoding" = "デフォルトのエンコーディング";
 "settings.$DeleteAllPlaybackHistories" = "再生履歴と\"最近開いた項目\"のエントリーをすべて削除します。";
-"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DeleteAllWatchLater" = "\"あとで再生\"フォルダ内のすべてのファイルを削除します。これらのファイルには、保存済みの再生進行状況や、再生中に適用した設定がすべて含まれています。";
 "settings.$DoNotResize" = "サイズを変更しない";
 "settings.$DuplicateCurrentSet" = "現在の設定を複製…";
 "settings.$FailedToLoadThePage" = "ページを読み込みできませんでした。";
@@ -956,7 +956,7 @@
 "settings.$Installing" = "インストール中";
 "settings.$KeyBindingSet" = "キーバインドの設定";
 "settings.$Layout" = "レイアウト";
-"settings.$LegacyOpenSubAlert" = "⚠️ 古いOpenSubtitlesへの対応は推奨されません。代わりにOpenSubtitlesプラグインを使用してください。ログインが必要な場合は、以前の設定ウインドウからアクセスしてください。";
+"settings.$LegacyOpenSubAlert" = "⚠️ 従来のOpenSubtitlesへの対応は推奨されません。代わりにOpenSubtitlesプラグインを使用してください。ログインが必要な場合は、以前の設定ウインドウからアクセスしてください。";
 "settings.$LiveText" = "テキスト認識表示";
 "settings.$Logging" = "ログ記録";
 "settings.$Login" = "ログイン";

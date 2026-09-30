@@ -90,6 +90,12 @@
     "id": "io.iina.jump-to-frame"
   },
   {
+    "name": "Keystone",
+    "url": "https://github.com/lenadweb/iina-plugin-keystone",
+    "desc": "Vertical and horizontal keystone correction for projectors, adjusted live from the sidebar or the keyboard.",
+    "id": "io.github.lenadweb.keystone"
+  },
+  {
     "name": "ListenBrainz Scrobbler",
     "url": "https://git.notfire.cc/notfire/iina-listenbrainz",
     "desc": "Scrobble your music to ListenBrainz.",

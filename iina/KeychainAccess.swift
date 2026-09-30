@@ -39,8 +39,8 @@ class KeychainAccess {
 
       // if password exists, try to update the password
       var query: [String: Any] = [kSecAttrService as String: serviceName.rawValue]
-      if let server = server { query[kSecAttrServer as String] = server }
-      if let port = port { query[kSecAttrPort as String] = port }
+      if let server { query[kSecAttrServer as String] = server }
+      if let port { query[kSecAttrPort as String] = port }
       query[kSecClass as String] = server == nil && port == nil ? kSecClassGenericPassword : kSecClassInternetPassword
 
       // create attributes for updating
@@ -57,8 +57,8 @@ class KeychainAccess {
                                   kSecAttrLabel as String: serviceName.rawValue,
                                   kSecAttrAccount as String: username,
                                   kSecValueData as String: password]
-      if let server = server { query[kSecAttrServer as String] = server }
-      if let port = port { query[kSecAttrPort as String] = port }
+      if let server { query[kSecAttrServer as String] = server }
+      if let port { query[kSecAttrPort as String] = port }
       query[kSecClass as String] = server == nil && port == nil ? kSecClassGenericPassword : kSecClassInternetPassword
 
       status = SecItemAdd(query as CFDictionary, nil)
@@ -77,9 +77,9 @@ class KeychainAccess {
                                 kSecMatchLimit as String: kSecMatchLimitOne,
                                 kSecReturnAttributes as String: true,
                                 kSecReturnData as String: true]
-    if let username = username { query[kSecAttrAccount as String] = username }
-    if let server = server { query[kSecAttrServer as String] = server }
-    if let port = port { query[kSecAttrPort as String] = port }
+    if let username { query[kSecAttrAccount as String] = username }
+    if let server { query[kSecAttrServer as String] = server }
+    if let port { query[kSecAttrPort as String] = port }
 
     query[kSecClass as String] = server == nil && port == nil ? kSecClassGenericPassword : kSecClassInternetPassword
 

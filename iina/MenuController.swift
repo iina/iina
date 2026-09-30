@@ -140,7 +140,7 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var pictureInPicture: NSMenuItem!
   @IBOutlet weak var alwaysOnTop: NSMenuItem!
   @IBOutlet weak var lockAspectRatio: NSMenuItem!
-  @IBOutlet weak var enableTextLive: NSMenuItem!
+  @IBOutlet weak var liveText: NSMenuItem!
   @IBOutlet weak var aspectMenu: NSMenu!
   @IBOutlet weak var cropMenu: NSMenu!
   @IBOutlet weak var rotationMenu: NSMenu!
@@ -202,7 +202,9 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var customTouchBar: NSMenuItem!
   @IBOutlet weak var inspector: NSMenuItem!
   @IBOutlet weak var miniPlayer: NSMenuItem!
-
+  // Help
+  @IBOutlet weak var helpMenu: NSMenu!
+  @IBOutlet weak var useNewSettingsWindow: NSMenuItem!
   @IBOutlet weak var debugDump: NSMenuItem!
 
   /// If `true` then all menu items are disabled.
@@ -295,9 +297,9 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.action = #selector(MainWindowController.menuAlwaysOnTop(_:))
     lockAspectRatio.action = #selector(MainWindowController.menuLockAspectRatio(_:))
     if #available(macOS 13, *) {
-      enableTextLive.action = #selector(MainWindowController.menuToggleLiveText(_:))
+      liveText.action = #selector(MainWindowController.menuToggleLiveText(_:))
     } else {
-      enableTextLive.isHidden = true
+      liveText.isHidden = true
     }
 
     // -- aspect
@@ -430,7 +432,10 @@ class MenuController: NSObject, NSMenuDelegate {
     inspector.action = #selector(MainMenuActionHandler.menuShowInspector(_:))
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
 
-    // Debug
+    // Help
+    
+    helpMenu.delegate = self
+    useNewSettingsWindow.action = #selector(AppDelegate.toggleNewSettings)
 
     debugDump.isAlternate = true
     debugDump.keyEquivalentModifierMask = .option
@@ -523,7 +528,7 @@ class MenuController: NSObject, NSMenuDelegate {
     alwaysOnTop.state = isOntop ? .on : .off
     lockAspectRatio.state = Preference.unlockWindowAspectRatio ? .off : .on
     lockAspectRatio.isEnabled = Preference.bool(for: .edgeToEdgeVideo)
-    enableTextLive.state = Preference.isLiveTextEnabled ? .on : .off
+    liveText.state = Preference.isLiveTextEnabled ? .on : .off
     deinterlace.state = player.info.deinterlace ? .on : .off
     fullScreen.title = isInFullScreen ? Constants.String.exitFullScreen : Constants.String.fullScreen
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
@@ -693,6 +698,12 @@ class MenuController: NSObject, NSMenuDelegate {
     pluginMenu.addItem(reloadPluginsItem)
 
   }
+  
+  
+  func updateHelpMenu() {
+    useNewSettingsWindow.state = Preference.enableNewSettings ? .on : .off
+  }
+  
 
   @discardableResult
   private func add(menuItemDef item: JavascriptPluginMenuItem,
@@ -750,7 +761,7 @@ class MenuController: NSObject, NSMenuDelegate {
                     objectMap: [String: Any?]?,
                     action: Selector?, checkStateBlock block: @escaping (NSMenuItem) -> Bool) {
     // if use title
-    if let titles = titles {
+    if let titles {
       // options and objects must be same
       guard objects == nil || titles.count == objects?.count else {
         Logger.log("different object count when binding menu", level: .error)
@@ -768,7 +779,7 @@ class MenuController: NSObject, NSMenuDelegate {
       }
     }
     // if use map
-    if let objectMap = objectMap {
+    if let objectMap {
       for (title, obj) in objectMap {
         let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: "")
         menuItem.representedObject = obj
@@ -842,6 +853,8 @@ class MenuController: NSObject, NSMenuDelegate {
     case pluginMenu:
       PlayerCore.active.events.emit(.menuUpdate)
       updatePluginMenu()
+    case helpMenu:
+      updateHelpMenu()
     default: break
     }
     // check conveniently bound menus
@@ -887,7 +900,7 @@ class MenuController: NSObject, NSMenuDelegate {
       (smallerSize, true, [IINACommand.smallerWindow.rawValue], false, nil, nil),
       (fitToScreen, true, [IINACommand.fitToScreen.rawValue], false, nil, nil),
       (miniPlayer, true, [IINACommand.toggleMusicMode.rawValue], false, nil, nil),
-      (enableTextLive, true, [IINACommand.liveText.rawValue], false, nil, nil),
+      (liveText, true, [IINACommand.liveText.rawValue], false, nil, nil),
       (pictureInPicture, true, [IINACommand.togglePIP.rawValue], false, nil, nil),
       (cycleVideoTracks, false, ["cycle", "video"], false, nil, nil),
       (cycleAudioTracks, false, ["cycle", "audio"], false, nil, nil),
@@ -988,9 +1001,9 @@ class MenuController: NSObject, NSMenuDelegate {
     menuItem.keyEquivalent = kEqv
     menuItem.keyEquivalentModifierMask = kMdf
 
-    if let value = value, let l10nKey = l10nKey {
+    if let value, let l10nKey {
       menuItem.title = String(format: NSLocalizedString("menu." + l10nKey, comment: ""), abs(value).groupedStringUpTo6Decimals)
-      if let extraData = extraData {
+      if let extraData {
         menuItem.representedObject = (value, extraData)
       } else {
         menuItem.representedObject = value

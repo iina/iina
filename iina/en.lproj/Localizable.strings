@@ -634,7 +634,7 @@
 "sidebar.color" = "Color";
 "sidebar.text" = "Text";
 "sidebar.border" = "Border";
-"sidebar.background" = "Background";
+"sidebar.shadow" = "Shadow";
 "sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
 "sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
 
@@ -709,7 +709,10 @@
 "settings.loadIccProfile.desc" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
 "settings.loadIccProfile.label" = "Load ICC profile";
 "settings.toneMappingAlgorithm.label" = "Algorithm";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400.";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
 "settings.toneMappingTargetPeak.label" = "Target peak";
 "settings.videoThreads.desc" = "Default: 0 (Auto)";
 "settings.videoThreads.label" = "Number of threads";
@@ -805,14 +808,18 @@
 "settings.useMediaKeys.label" = "Use system media control";
 
 // Settings - Network
-"settings.cacheBufferSize.desc" = "Default: 153600";
-"settings.cacheBufferSize.label" = "Cache buffer size (KB)";
-"settings.enableCache.label" = "Enable cache";
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.label" = "Buffer before starting playback";
+"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.enableCache.label" = "Prefetch and buffer network data";
 "settings.httpProxy.desc" = "Requires restarting IINA to take effect.";
 "settings.httpProxy.label" = "HTTP proxy";
-"settings.secPrefech.desc" = "Default: 36000";
+"settings.secPrefech.desc" = "Default: 36,000";
 "settings.secPrefech.label" = "Seconds to prefetch";
-"settings.showBufferingThrobber.label" = "Show throbber when paused waiting for the cache";
+"settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "Show throbber when seeking";
 "settings.transportRTSPThrough.items.0" = "Auto";
 "settings.transportRTSPThrough.label" = "Transport RTSP stream through";
@@ -843,6 +850,10 @@
 "settings.subAutoLoadSearchPath.label" = "Also search subtitles in following directories";
 "settings.subBlur.label" = "Blur";
 "settings.subBold.desc" = "sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
 "settings.subBold.label" = "Bold";
 "settings.subItalic.label" = "Italic";
 "settings.subLang.desc" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
@@ -931,6 +942,7 @@
 "settings.$About" = "About";
 "settings.$Accessibility" = "Accessibility";
 "settings.$AdditionalMpvOptions" = "Additional mpv options";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
 "settings.$Advanced" = "Advanced";
 "settings.$Align" = "Align";
 "settings.$AlwaysWhenPlaying" = "Always when playing a new file";
@@ -963,7 +975,7 @@
 "settings.$DefaultApplication" = "Default Application";
 "settings.$DefaultEncoding" = "Default encoding";
 "settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "The button below will delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Failed to load the page.";
@@ -1021,6 +1033,7 @@
 "settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
 "settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts";
 "settings.$SPDIFOutput" = "S/PDIF output";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Screenshots";
 "settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";

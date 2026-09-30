@@ -16,18 +16,20 @@ class SettingsPageUtilities: SettingsPage {
   override var identifier: String {
     "utilities"
   }
-
+  
   override var title: String {
     return NSLocalizedString("preference.utilities", comment: "Utilities")
   }
-
+  
   override var image: NSImage {
     return .sf("wrench.and.screwdriver", withConfiguration: symbolConfiguration)!
   }
-
+  
   override var localizationTable: String {
     "SettingsUtilsLocalizable"
   }
+  
+  override var showSubSections: Bool { false }
 
   private lazy var setAsDefaultSheet = SetAsDefaultSheetWindow()
   private lazy var browserExtensionView = BrowserExtensionView()

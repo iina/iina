@@ -37,6 +37,17 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
   }
 
   func createPlayerInstance(_ options: [String: Any]) -> Any {
+    let url: String?
+    if let urlString = options["url"] as? String {
+      guard let allowedURL = shouldOpenURL(urlString) else {
+        log("Player not created, URL needs permission: \(urlString)", level: .error)
+        return false
+      }
+      url = allowedURL
+    } else {
+      url = nil
+    }
+
     instanceCounter += 1
     // create the `PlayerCore` manually since it's managed directly by the plugin
     let pc = PlayerCore()
@@ -68,7 +79,7 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
     childAPIs[instanceCounter] = childAPI
 
     // open file
-    if let url = options["url"] as? String, let url = parsePath(url, forceLocalPath: false).path  {
+    if let url {
       pc.openURLString(url)
     }
 

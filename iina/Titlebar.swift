@@ -57,6 +57,9 @@ class Titlebar: NSView {
   private var oscContainer: NSView!
   private var oscLeadingConstraint: NSLayoutConstraint!
 
+  // Only set on macOS 15 and below
+  private var titleCenterConstraint: NSLayoutConstraint?
+
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
 
@@ -179,6 +182,8 @@ class Titlebar: NSView {
         let centerConstraint = titleTextField.centerXAnchor.constraint(equalTo: titlebarContainer.centerXAnchor)
         centerConstraint.priority = .defaultLow
         centerConstraint.isActive = true
+        titleCenterConstraint = centerConstraint
+        titleTextField.setContentCompressionResistancePriority(.init(300), for: .horizontal)
       }
       titleLeadingConstraint.priority = .defaultHigh
       titleLeadingConstraint.isActive = true
@@ -264,14 +269,19 @@ class Titlebar: NSView {
   func updateTitle() {
     guard let titleTextField,
           let docIcon,
-          let sysTitle = mainWindow.titleTextField else { return }
+          let window = mainWindow.window else { return }
 
-    titleTextField.stringValue = sysTitle.stringValue
-    if let fileName = mainWindow.window?.representedFilename {
-      docIcon.image = NSWorkspace.shared.icon(forFile: fileName)
+    let info = mainWindow.player.info
+    titleTextField.stringValue = if info.isNetworkResource {
+      mainWindow.player.getMediaTitle()
+    } else if let url = info.currentURL {
+      FileManager.default.displayName(atPath: url.path)
     } else {
-      docIcon.image = nil
+      ""
     }
+
+    let filename = window.representedFilename
+    docIcon.image = filename.isEmpty ? nil : NSWorkspace.shared.icon(forFile: filename)
   }
 
   func setLeadingConstraint(_ constant: CGFloat, animated: Bool = true) {
@@ -279,10 +289,12 @@ class Titlebar: NSView {
       titleLeadingConstraint.animator().constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.animator().constant = constant + 6
       backgroundLeadingConstraint.animator().constant = constant
+      titleCenterConstraint?.animator().constant = constant / 2
     } else {
       titleLeadingConstraint.constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.constant = constant + 6
       backgroundLeadingConstraint.constant = constant
+      titleCenterConstraint?.constant = constant / 2
     }
   }
 
@@ -302,13 +314,12 @@ class Titlebar: NSView {
     // before hit-testing.
     let point = titlebarContainer.convert(event.locationInWindow, from: nil)
 
-    guard docIcon.frame.contains(point) || titleTextField.frame.contains(point) else {
-      super.rightMouseDown(with: event)
-      return
+    if docIcon.frame.contains(point) || titleTextField.frame.contains(point) {
+      showPathMenu()
     }
-
-    showPathMenu()
   }
+
+  override func rightMouseUp(with event: NSEvent) {}
 
   private func showPathMenu() {
     guard let filename = mainWindow.window?.representedFilename else { return }

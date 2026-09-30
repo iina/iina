@@ -8,6 +8,16 @@
 
 import Cocoa
 
+fileprivate let isMacOS26: Bool = {
+  if #available(macOS 27.0, *) {
+    return false
+  }
+  if #unavailable(macOS 26.0) {
+    return false
+  }
+  return true
+}()
+
 fileprivate extension NSView {
   var allSubviews: [NSView] {
     var subviews = [NSView]()
@@ -19,7 +29,7 @@ fileprivate extension NSView {
   }
 }
 
-class SettingsWindow: NSWindow {
+class SettingsWindow: CommonWindow {
   static let `default`: SettingsWindow = SettingsWindow([
     SettingsPageGeneral(),
     SettingsPageUI(),
@@ -47,6 +57,31 @@ class SettingsWindow: NSWindow {
 
   private var currentPageIndex: Int?
 
+  private enum SidebarRow {
+    case page(Int)
+    case indicator
+    
+    var isIndicator: Bool {
+      if case .indicator = self { return true } else { return false }
+    }
+    
+    var page: Int? {
+      if case .page(let i) = self { return i } else { return nil }
+    }
+  }
+  private var sidebarRows: [SidebarRow] = []
+
+  private func makeSidebarRows() -> [SidebarRow] {
+    var rows: [SidebarRow] = []
+    for i in pages.indices {
+      rows.append(.page(i))
+      if i == currentPageIndex, pages[i].showSubSections {
+        rows.append(.indicator)
+      }
+    }
+    return rows
+  }
+
   private let searchBox: NSSearchField
   private lazy var completionPopover: NSPopover = createSearchPopover()
   private var currentCompletionResults: [SettingsSearch.Entry] = []
@@ -66,19 +101,14 @@ class SettingsWindow: NSWindow {
                styleMask: [.closable, .miniaturizable, .resizable, .titled, .fullSizeContentView],
                backing: .buffered, defer: false)
 
-    self.isReleasedWhenClosed = false
-
     let splitViewController = NSSplitViewController()
     self.contentViewController = splitViewController
 
     let sidebarViewController = NSViewController()
     sidebarViewController.view = NSView()
     sidebarViewController.view.wantsLayer = true
-    let sidebarBackground = if #available(macOS 26, *) {
-      NSGlassEffectView()
-    } else {
-      NSVisualEffectView()
-    }
+    let sidebarBackground = NSVisualEffectView()
+    sidebarBackground.material = .sidebar
     sidebarViewController.view.addSubview(sidebarBackground)
     sidebarBackground.translatesAutoresizingMaskIntoConstraints = false
     sidebarBackground.padding(.all)
@@ -96,9 +126,9 @@ class SettingsWindow: NSWindow {
     sidebarScrollView.borderType = .noBorder
     sidebarScrollView.drawsBackground = false
 
-    sidebarList.translatesAutoresizingMaskIntoConstraints = false
+    sidebarList.translatesAutoresizingMaskIntoConstraints = true
+    sidebarList.autoresizingMask = [.width]
     sidebarList.style = .sourceList
-    sidebarList.autoresizingMask = [.width, .height]
     sidebarList.headerView = nil
     sidebarList.dataSource = self
     sidebarList.delegate = self
@@ -107,7 +137,7 @@ class SettingsWindow: NSWindow {
     sidebarBackground.addSubview(sidebarScrollView)
     sidebarScrollView.padding(.bottom, .horizontal)
 
-    if #available(macOS 26, *) {
+    if isMacOS26 {
       searchBox.padding(.top(40), .horizontal(8))
       sidebarScrollView.spacing(.top(16), to: searchBox)
     } else {
@@ -138,6 +168,7 @@ class SettingsWindow: NSWindow {
 
     // Add the sidebar and content view controllers to the split view
     let sidebarSplitItem = NSSplitViewItem(sidebarWithViewController: sidebarViewController)
+    sidebarSplitItem.maximumThickness = 200
     sidebarSplitItem.minimumThickness = 200
     sidebarSplitItem.canCollapse = false
     splitViewController.addSplitViewItem(sidebarSplitItem)
@@ -151,10 +182,9 @@ class SettingsWindow: NSWindow {
 
     self.title = "Settings"
     self.isOpaque = false
-    self.isMovableByWindowBackground = true
     self.titlebarAppearsTransparent = true
     self.toolbarStyle = .unified
-    let toolbar = NSToolbar()
+    let toolbar = NSToolbar(identifier: "SettingsWindowToolbar")
     toolbar.allowsUserCustomization = false
     toolbar.delegate = self
     toolbar.displayMode = .iconOnly
@@ -164,6 +194,8 @@ class SettingsWindow: NSWindow {
     SettingsSearch.makeTries()
 
     loadPage(at: 0)
+    currentPageIndex = 0
+    sidebarRows = makeSidebarRows()
     sidebarList.addTableColumn(col)
     sidebarScrollView.documentView = sidebarList
     sidebarList.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
@@ -178,7 +210,8 @@ class SettingsWindow: NSWindow {
     content.autoresizingMask = [.width, .height]
     contentScrollView.documentView = content
     content.padding(.horizontal, from: contentScrollView.contentView)
-    contentScrollView.documentView!.topAnchor.constraint(equalTo: contentView!.topAnchor).isActive = true
+    contentScrollView.contentView.scroll(to: NSPoint(x: 0, y: -contentScrollView.contentInsets.top))
+    contentScrollView.reflectScrolledClipView(contentScrollView.contentView)
 
     sectionNames = content.allSubviews.compactMap {
       ($0 as? SettingsSection.View)?.sectionTitle
@@ -243,8 +276,7 @@ class SettingsWindow: NSWindow {
       }
     }
 
-    guard let firstVisibleTitle = firstVisibleTitle,
-          let sectionNameStackView = sectionNameStackView else { return }
+    guard let firstVisibleTitle, let sectionNameStackView else { return }
 
     let titleIndex = sectionNames.firstIndex(of: firstVisibleTitle) ?? 0
 
@@ -307,7 +339,7 @@ extension SettingsWindow {
     }
 
     override func draw(_ dirtyRect: NSRect) {
-      guard let maskRect = maskRect else { return }
+      guard let maskRect else { return }
       NSGraphicsContext.saveGraphicsState()
       let borderPath = NSBezierPath(roundedRect: maskRect, xRadius: 8, yRadius: 8)
       borderPath.lineWidth = 4
@@ -635,11 +667,20 @@ extension SettingsWindow {
   }
 
   func navigateTo(page: String) {
-    guard let idx = pages.firstIndex(where: { $0.identifier == page }) else { return }
+    guard let idx = pages.firstIndex(where: { $0.identifier == page }),
+          let targetRow = sidebarRows.firstIndex(where: { $0.page == idx })
+    else { return }
 
-    if idx != sidebarList.selectedRow {
-      let selectIdx = idx < sidebarList.selectedRow ? idx : idx + 1
-      sidebarList.selectRowIndexes(IndexSet(integer: selectIdx), byExtendingSelection: false)
+    if targetRow != sidebarList.selectedRow {
+      sidebarList.selectRowIndexes(IndexSet(integer: targetRow), byExtendingSelection: false)
+    }
+  }
+
+  func installPlugin(localPackageURL url: URL) {
+    show()
+    navigateTo(page: "plugin")
+    if let pluginPage = pages.first(where: { $0.identifier == "plugin" }) as? SettingsPagePlugin {
+      pluginPage.installPlugin(localPackageURL: url)
     }
   }
 }
@@ -647,7 +688,7 @@ extension SettingsWindow {
 
 extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return pages.count + 1
+    return sidebarRows.count
   }
 
   @objc
@@ -691,9 +732,9 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     let cell = NSTableCellView()
-    let selectedRow = tableView.selectedRow < 0 ? 0 : tableView.selectedRow
+    guard let rowKind = sidebarRows[at: row] else { return cell }
 
-    if row == selectedRow + 1 {
+    if rowKind.isIndicator {
       let sectionStackView = NSStackView()
       sectionStackView.translatesAutoresizingMaskIntoConstraints = false
       sectionStackView.orientation = .horizontal
@@ -734,14 +775,15 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
       return cell
     }
 
-    let row = row > selectedRow ? row - 1 : row
+    guard let pageIndex = rowKind.page else { return cell }
+    let page = pages[pageIndex]
 
-    let textField = NSTextField(labelWithString: pages[row].title)
-    textField.stringValue = pages[row].title
+    let textField = NSTextField(labelWithString: page.title)
+    textField.stringValue = page.title
     textField.font = .systemFont(ofSize: NSFont.systemFontSize, weight: .bold)
     textField.translatesAutoresizingMaskIntoConstraints = false
 
-    let imageView = NSImageView(image: pages[row].image)
+    let imageView = NSImageView(image: page.image)
     imageView.translatesAutoresizingMaskIntoConstraints = false
     imageView.size(width: 24, height: 24)
     if #unavailable(macOS 14) {
@@ -774,30 +816,45 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
   }
 
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-    let selectedRow = tableView.selectedRow < 0 ? 0 : tableView.selectedRow
-    return if selectedRow + 1 == row {
-      CGFloat(12 + sectionNames.count * 22)
-    } else {
-      CGFloat(36)
+    guard let rowKind = sidebarRows[at: row] else { return 0 }
+    if rowKind.isIndicator {
+      return CGFloat(12 + sectionNames.count * 22)
     }
+    return CGFloat(36)
   }
 
   func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-    guard let currentPageIndex else { return false }
-    return row != currentPageIndex + 1
+    guard let rowKind = sidebarRows[at: row] else { return false }
+    return !rowKind.isIndicator
   }
 
   func tableViewSelectionDidChange(_ notification: Notification) {
     let tableView = notification.object as! NSTableView
+    // `sidebarRows` still reflects the pre-change layout here, so it's used to resolve which
+    // page the newly selected row corresponds to before it's recomputed below.
+    guard let newIndex = sidebarRows[at: tableView.selectedRow]?.page else { return }
 
-    if let prevRow = currentPageIndex {
-      loadPage(at: tableView.selectedRow > prevRow ? tableView.selectedRow - 1 : tableView.selectedRow)
-      let options: NSTableView.AnimationOptions = Preference.bool(for: PK.disableAnimations) ?
-        [] : [.effectFade, .slideDown]
-      tableView.removeRows(at: IndexSet(integer: prevRow + 1), withAnimation: options)
-      tableView.insertRows(at: IndexSet(integer: tableView.selectedRow + 1), withAnimation: options)
+    let oldRows = sidebarRows
+    loadPage(at: newIndex)
+    currentPageIndex = newIndex
+    sidebarRows = makeSidebarRows()
+
+    let oldIndicatorRow = oldRows.firstIndex(where: { $0.isIndicator })
+    let newIndicatorRow = sidebarRows.firstIndex(where: { $0.isIndicator })
+    // Nothing moved (e.g. re-resolving the initial selection, or switching between two pages that
+    // both keep/omit the indicator at the same row) -- don't touch the table, that would drop selection.
+    guard oldIndicatorRow != newIndicatorRow else { return }
+
+    let options: NSTableView.AnimationOptions = Preference.bool(for: PK.disableAnimations) ?
+      [] : [.effectFade, .slideDown]
+    tableView.beginUpdates()
+    if let oldIndicatorRow {
+      tableView.removeRows(at: IndexSet(integer: oldIndicatorRow), withAnimation: options)
     }
-    currentPageIndex = tableView.selectedRow
+    if let newIndicatorRow {
+      tableView.insertRows(at: IndexSet(integer: newIndicatorRow), withAnimation: options)
+    }
+    tableView.endUpdates()
   }
 }
 
@@ -877,4 +934,3 @@ fileprivate extension String {
     self.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
   }
 }
-

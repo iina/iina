@@ -8,6 +8,7 @@
 
 fileprivate extension LayoutValue {
   static let oscPadding = LayoutValue(12, 8)
+  static let oscPaddingLeading = LayoutValue(16, 12)
 }
 
 
@@ -37,7 +38,7 @@ class OSCBottomView: NSView {
     self.oscView = TimeLabelOverflowedStackView()
     oscView.translatesAutoresizingMaskIntoConstraints = false
     container.addSubview(oscView)
-    oscView.padding(.all(.oscPadding))
+    oscView.padding(.vertical(.oscPadding), .trailing(.oscPadding), .leading(.oscPaddingLeading))
     translucentView.setContent(container)
 
     addSubview(translucentView)

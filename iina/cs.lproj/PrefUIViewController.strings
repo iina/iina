@@ -32,7 +32,7 @@
 "92n-Uq-o4G.title" = "dolnímu";
 
 /* Class = "NSTextFieldCell"; title = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations."; ObjectID = "9IR-Sf-wMq"; */
-"9IR-Sf-wMq.title" = "Pokud je v macOS ve volbách zpřístupnění zapnuta funkce omezení pohybu, IINA omezí pohyblivé prvky uživatelského rozhraní, o nichž je známo, že způsobují problémy osobám s vestibulárními poruchami. Pokud by to nebylo dostatečné, lze toto nastavení použít k dalšímu omezení pohybu odstraněním animací uživatelského rozhraní.";
+"9IR-Sf-wMq.title" = "Pokud je v macOS ve volbách zpřístupnění zapnuta funkce omezení pohybu, IINA omezí pohyblivé prvky uživatelského rozhraní, o nichž je známo, že způsobují problémy osobám s vestibulárními poruchami. Pokud by to nebylo dostatečné, lze toto nastavení použít k dalšímu omezení pohybu eliminováním animací uživatelského rozhraní.";
 
 /* Class = "NSMenuItem"; title = "% of screen"; ObjectID = "AE4-BD-wZi"; */
 "AE4-BD-wZi.title" = "% obrazovky";
@@ -62,7 +62,7 @@
 "EUd-RD-g0T.title" = "Při spuštění obrazu v obraze:";
 
 /* Class = "NSTextFieldCell"; title = "On Screen Display:"; ObjectID = "F2e-CS-KXl"; */
-"F2e-CS-KXl.title" = "Zobrazení na obrazovce:";
+"F2e-CS-KXl.title" = "Zprávy na obrazovce:";
 
 /* Class = "NSTextFieldCell"; title = "Picture-in-\nPicture:"; ObjectID = "G8w-J7-1q1"; */
 "G8w-J7-1q1.title" = "Obraz v obrazu:";
@@ -110,7 +110,7 @@
 "ObY-7B-NTO.title" = "s";
 
 /* Class = "NSButtonCell"; title = "Initial window position:"; ObjectID = "Ofm-qE-RgQ"; */
-"Ofm-qE-RgQ.title" = "Počáteční pozice okna:";
+"Ofm-qE-RgQ.title" = "Počáteční umístění okna:";
 
 /* Class = "NSTextFieldCell"; title = "Suppress messages for:"; ObjectID = "RE5-Cf-ed9"; */
 "RE5-Cf-ed9.title" = "Potlačit zprávy u:";
@@ -194,7 +194,7 @@
 "kYu-0l-jQQ.title" = "Náhled:";
 
 /* Class = "NSTextFieldCell"; title = "Layout:"; ObjectID = "l54-63-V6n"; */
-"l54-63-V6n.title" = "Umístění:";
+"l54-63-V6n.title" = "Uspořádání:";
 
 /* Class = "NSMenuItem"; title = "Light"; ObjectID = "lZc-Dl-3cQ"; */
 "lZc-Dl-3cQ.title" = "Světlé";
@@ -233,7 +233,7 @@
 "suy-e8-j4i.title" = "Velikost textu:";
 
 /* Class = "NSMenuItem"; title = "fit the screen"; ObjectID = "vdi-lO-q6e"; */
-"vdi-lO-q6e.title" = "přizpůsobit obrazovce";
+"vdi-lO-q6e.title" = "Přizpůsobit obrazovce";
 
 /* Class = "NSButtonCell"; title = "Prevent scroll wheel from changing playback position"; ObjectID = "vnb-DF-4g5"; */
 "vnb-DF-4g5.title" = "Zabránit tomu, aby posouvání na myši měnilo pozici přehrávání";

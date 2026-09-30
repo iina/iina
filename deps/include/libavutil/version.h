@@ -35,7 +35,7 @@
  * Useful to check and match library version in order to maintain
  * backward compatibility.
  *
- * The FFmpeg libraries follow a versioning sheme very similar to
+ * The FFmpeg libraries follow a versioning scheme very similar to
  * Semantic Versioning (http://semver.org/)
  * The difference is that the component called PATCH is called MICRO in FFmpeg
  * and its value is reset to 100 instead of 0 to keep it above or equal to 100.
@@ -72,15 +72,15 @@
 /**
  * @defgroup lavu_ver Version and Build diagnostics
  *
- * Macros and function useful to check at compiletime and at runtime
+ * Macros and function useful to check at compile time and at runtime
  * which version of libavutil is in use.
  *
  * @{
  */
 
-#define LIBAVUTIL_VERSION_MAJOR  59
-#define LIBAVUTIL_VERSION_MINOR   8
-#define LIBAVUTIL_VERSION_MICRO 100
+#define LIBAVUTIL_VERSION_MAJOR  61
+#define LIBAVUTIL_VERSION_MINOR   1
+#define LIBAVUTIL_VERSION_MICRO 101
 
 #define LIBAVUTIL_VERSION_INT   AV_VERSION_INT(LIBAVUTIL_VERSION_MAJOR, \
                                                LIBAVUTIL_VERSION_MINOR, \
@@ -105,13 +105,10 @@
  * @{
  */
 
-#define FF_API_HDR_VIVID_THREE_SPLINE   (LIBAVUTIL_VERSION_MAJOR < 60)
-#define FF_API_FRAME_PKT                (LIBAVUTIL_VERSION_MAJOR < 60)
-#define FF_API_INTERLACED_FRAME         (LIBAVUTIL_VERSION_MAJOR < 60)
-#define FF_API_FRAME_KEY                (LIBAVUTIL_VERSION_MAJOR < 60)
-#define FF_API_PALETTE_HAS_CHANGED      (LIBAVUTIL_VERSION_MAJOR < 60)
-#define FF_API_VULKAN_CONTIGUOUS_MEMORY (LIBAVUTIL_VERSION_MAJOR < 60)
-#define FF_API_H274_FILM_GRAIN_VCS      (LIBAVUTIL_VERSION_MAJOR < 60)
+#define FF_API_CPU_FLAG_FORCE           (LIBAVUTIL_VERSION_MAJOR < 62)
+#define FF_API_DOVI_L11_INVALID_PROPS   (LIBAVUTIL_VERSION_MAJOR < 62)
+#define FF_API_ASSERT_FPU               (LIBAVUTIL_VERSION_MAJOR < 62)
+#define FF_API_VULKAN_SYNC_QUEUES       (LIBAVUTIL_VERSION_MAJOR < 62)
 
 /**
  * @}

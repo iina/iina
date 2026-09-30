@@ -44,6 +44,9 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
       guard let button = toolbarItem(withID: .followButton) else { return }
       let symbolName = following ? "arrow.up.left.circle.fill" : "arrow.up.left.circle"
       button.image = .sf(symbolName)
+      if #available(macOS 26, *) {
+        button.style = following ? .prominent : .plain
+      }
     }
   }
   private var filteredLogLevel = Logger.Level.preferred {
@@ -54,6 +57,15 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   private var filteredSubsystems = Set<String>() {
     didSet {
       updatePredicate()
+      if #available(macOS 26, *) {
+        let item = toolbarItem(withID: .subsystemButton)!
+        let filteredCount = filteredSubsystems.count
+        if filteredCount != 0 {
+          item.badge = .count(filteredCount)
+        } else {
+          item.badge = nil
+        }
+      }
     }
   }
   private let searchField = NSSearchField()
@@ -78,11 +90,12 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
   private var hasSetup = false
 
   convenience init() {
-    let window = NSWindow(
+    let window = CommonWindow(
         contentRect: NSRect(origin: .zero, size: NSSize(width: 800, height: 500)),
         styleMask: [.titled, .closable, .miniaturizable, .resizable],
         backing: .buffered,
-        defer: false
+        defer: false,
+        usesUnifiedToolbar: true
     )
     window.minSize = NSMakeSize(800, 500)
     window.title = NSLocalizedString("logwindow.title", comment: "Log Viewer")

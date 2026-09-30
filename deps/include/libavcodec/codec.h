@@ -27,11 +27,8 @@
 #include "libavutil/hwcontext.h"
 #include "libavutil/log.h"
 #include "libavutil/pixfmt.h"
-#include "libavutil/rational.h"
-#include "libavutil/samplefmt.h"
 
 #include "libavcodec/codec_id.h"
-#include "libavcodec/version_major.h"
 
 /**
  * @addtogroup lavc_core
@@ -79,21 +76,6 @@
  * This can be used to prevent truncation of the last audio samples.
  */
 #define AV_CODEC_CAP_SMALL_LAST_FRAME    (1 <<  6)
-
-#if FF_API_SUBFRAMES
-/**
- * Codec can output multiple frames per AVPacket
- * Normally demuxers return one frame at a time, demuxers which do not do
- * are connected to a parser to split what they return into proper frames.
- * This flag is reserved to the very rare category of codecs which have a
- * bitstream that cannot be split into frames without timeconsuming
- * operations like full decoding. Demuxers carrying such bitstreams thus
- * may return multiple frames in a packet. This has many disadvantages like
- * prohibiting stream copy in many cases thus it should only be considered
- * as a last resort.
- */
-#define AV_CODEC_CAP_SUBFRAMES           (1 <<  8)
-#endif
 
 /**
  * Codec is experimental and is thus avoided in favor of non experimental
@@ -205,10 +187,7 @@ typedef struct AVCodec {
      */
     int capabilities;
     uint8_t max_lowres;                     ///< maximum value for lowres supported by the decoder
-    const AVRational *supported_framerates; ///< array of supported framerates, or NULL if any, array is terminated by {0,0}
-    const enum AVPixelFormat *pix_fmts;     ///< array of supported pixel formats, or NULL if unknown, array is terminated by -1
-    const int *supported_samplerates;       ///< array of supported audio samplerates, or NULL if unknown, array is terminated by 0
-    const enum AVSampleFormat *sample_fmts; ///< array of supported sample formats, or NULL if unknown, array is terminated by -1
+
     const AVClass *priv_class;              ///< AVClass for the private context
     const AVProfile *profiles;              ///< array of recognized profiles, or NULL if unknown, array is terminated by {AV_PROFILE_UNKNOWN}
 
@@ -223,11 +202,6 @@ typedef struct AVCodec {
      * (usually AVCodec.name will be of the form "<codec_name>_<wrapper_name>").
      */
     const char *wrapper_name;
-
-    /**
-     * Array of supported channel layouts, terminated with a zeroed layout.
-     */
-    const AVChannelLayout *ch_layouts;
 } AVCodec;
 
 /**

@@ -7,6 +7,8 @@
 //
 
 class SettingsPageNetwork: SettingsPage {
+  private let prefObserver = Preference.Observer()
+
   override var identifier: String {
     "network"
   }
@@ -23,6 +25,15 @@ class SettingsPageNetwork: SettingsPage {
     "SettingsNetworkLocalizable"
   }
 
+  override func pageLoaded() {
+    // refresh ytdl section
+    guard let view = labeledViews["ytdl"] else { return }
+
+    if JavascriptPlugin.hasYTDL {
+      setControlsEnabled(in: view, enabled: false, skipping: nil)
+    }
+  }
+
   override func content() -> [SettingsSection] {
     return sections {
       sectionCache()
@@ -37,12 +48,27 @@ class SettingsPageNetwork: SettingsPage {
         SettingsItem.Switch()
           .image(name: ["inset.filled.topthird.middlethird.bottomthird.rectangle", ""])
           .bindTo(.enableCache)
-        SettingsItem.Input()
-          .bindTo(.secPrefech)
-          .hasDescription()
-        SettingsItem.Input()
-          .bindTo(.cacheBufferSize)
-          .hasDescription()
+          .withDetailView {
+            SettingsItem.Switch()
+              .bindTo(.cachePauseInitial)
+              .hasDescription()
+              .withHelpLink(AppData.mpvManualLink.appending("/#options-cache-pause-initial"))
+            SettingsItem.Input()
+              .bindTo(.cachePauseWait)
+              .range(0...3.4028234663853e+38, allowsFloats: true)
+              .hasDescription()
+              .withHelpLink(AppData.mpvManualLink.appending("/#options-cache-pause-wait"))
+            SettingsItem.Input()
+              .bindTo(.secPrefech)
+              .range(0...Double(Int.max))  // Option is a double, but IINA treats it as Int.
+              .hasDescription()
+              .withHelpLink(AppData.mpvManualLink.appending("/#options-cache-secs"))
+            SettingsItem.Input()
+              .bindTo(.defaultCacheSize)
+              .range(0...4.5035996273705078125e+15)  // Option is in bytes, but IINA uses kibibytes.
+              .hasDescription()
+              .withHelpLink(AppData.mpvManualLink.appending("/#options-demuxer-max-bytes"))
+          }
         SettingsItem.Switch()
           .image(name: "custom.progress.indicator.rectangle")
           .bindTo(.showBufferingThrobber)
@@ -69,7 +95,7 @@ class SettingsPageNetwork: SettingsPage {
   }
 
   private func sectionYTDL() -> SettingsSection {
-    return section {
+    return section(label: "ytdl") {
       SettingsList(title: .text_YTDL) {
         SettingsItem.General(title: .text_onlineMediaPluginAdvice)
           .image(name: "puzzlepiece.extension")

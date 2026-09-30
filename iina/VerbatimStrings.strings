@@ -6,11 +6,12 @@
   Copyright © 2026 lhc. All rights reserved.
 */
 
-"settings.screenShotFormat.items.0" = "PNG";
+"settings.screenShotFormat.items.0" = "PNG (.png)";
 "settings.screenShotFormat.items.1" = "JPEG (.jpg)";
 "settings.screenShotFormat.items.2" = "JPEG (.jpeg)";
 "settings.screenShotFormat.items.3" = "WebP (.webp)";
 "settings.screenShotFormat.items.4" = "JPEG XL (.jxl)";
+"settings.screenShotFormat.items.5" = "AVIF (.avif)";
 
 "settings.toneMappingAlgorithm.items.0" = "auto";
 "settings.toneMappingAlgorithm.items.1" = "clip";
@@ -24,6 +25,8 @@
 "settings.spdifAC3.label" = "AC3";
 "settings.spdifDTS.label" = "DTS";
 "settings.spdifDTSHD.label" = "DTS-HD";
+"settings.spdifEAC3.label" = "EAC3";
+"settings.spdifTRUEHD.label" = "TRUEHD";
 
 "settings.audioDriverEnableAVFoundation.items.0" = "Core Audio";
 "settings.audioDriverEnableAVFoundation.items.1" = "AVFoundation";

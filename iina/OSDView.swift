@@ -70,15 +70,28 @@ class OSDView: TranslucentView {
     let smallTextSize = (textSize * 0.9).clamped(to: 11...25)
     let secondaryTextSize = (textSize * 0.5).clamped(to: 11...25)
 
+    // data for mustache rendering
+    let duration = player.info.videoDuration
+    let position = player.info.videoPosition
+    let osdData: [String: String] = [
+      "duration": duration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+      "preciseDuration": duration?.stringRepresentationWithPrecision(3) ?? Constants.String.videoTimePlaceholder,
+      "position": position?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+      "precisePosition": position?.stringRepresentationWithPrecision(3) ?? Constants.String.videoTimePlaceholder,
+      "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
+      "chapterCount": player.info.chapters.count.description
+    ]
+
     label.font = NSFont.monospacedDigitSystemFont(ofSize: textSize, weight: .regular)
     secondaryLabel.font = NSFont.monospacedDigitSystemFont(ofSize: secondaryTextSize, weight: .regular)
 
     let (osdString, osdType) = message.titleAndType()
-    if let attrString = message.attributedTitle(osdString, fontSize: textSize, smallFontSize: smallTextSize) {
+    let renderedLabel = try! (try! Template(string: osdString)).render(osdData)
+    if let attrString = message.attributedTitle(renderedLabel, fontSize: textSize, smallFontSize: smallTextSize) {
       label.attributedStringValue = attrString
     } else {
       label.attributedStringValue = NSAttributedString(string: "")
-      label.stringValue = osdString
+      label.stringValue = renderedLabel
     }
 
     if let image = message.image(),
@@ -114,13 +127,6 @@ class OSDView: TranslucentView {
       secondaryLabel.baseWritingDirection = .leftToRight
       fallthrough
     case .withText(let text):
-      // data for mustache rendering
-      let osdData: [String: String] = [
-        "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "position": player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
-        "chapterCount": player.info.chapters.count.description
-      ]
       stackView.setVisibilityPriority(.mustHold, for: secondaryLabel)
       secondaryLabel.stringValue = try! (try! Template(string: text)).render(osdData)
     }

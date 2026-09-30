@@ -127,7 +127,7 @@ class LanguageTokenField: NSTokenField {
   }
 
   func controlTextDidChange(_ obj: Notification) {
-    guard let layoutManager = layoutManager else { return }
+    guard let layoutManager else { return }
     let attachmentChar = Character(UnicodeScalar(NSTextAttachment.character)!)
     let finished = layoutManager.attributedString().string.split(separator: attachmentChar).count == 0
     if finished {
@@ -199,7 +199,7 @@ class LanguageTokenField: NSTokenField {
       Logger.log("LTF No changes to lang set", level: .verbose)
     } else {
       self.savedSet = langSetNew
-      if let target = target, let action = action {
+      if let target, let action {
         target.performSelector(onMainThread: action, with: self, waitUntilDone: false)
       }
 

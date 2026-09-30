@@ -32,10 +32,13 @@ class SettingsPagePlugin: SettingsPage {
   override var sectionSpacing: CGFloat {
     8
   }
+  
+  override var showSubSections: Bool { false }
 
   fileprivate lazy var installView: PluginInstallView = .init(page: self)
   fileprivate lazy var listView: PluginListView = .init(page: self)
   fileprivate lazy var updateView: PluginUpdateView = .init(page: self)
+  fileprivate lazy var pluginManager = PluginManager(window: SettingsWindow.default)
 
   override func content() -> [SettingsSection] {
     return sections {
@@ -62,12 +65,18 @@ class SettingsPagePlugin: SettingsPage {
       }
     }
   }
+
+  func installPlugin(localPackageURL url: URL) {
+    Task { @MainActor in
+      await pluginManager.install(localPackageURL: url)
+      self.listView.tableView.reloadData()
+    }
+  }
 }
 
 
 fileprivate class PluginInstallView: SettingsAccessory.Base {
   unowned let page: SettingsPagePlugin
-  private lazy var pluginManager: PluginManager = PluginManager(window: self.view.window!)
 
   init(page: SettingsPagePlugin) {
     self.page = page
@@ -95,10 +104,7 @@ fileprivate class PluginInstallView: SettingsAccessory.Base {
   @IBAction func installPluginFromLocalPackage(_ sender: Any) {
     Utility.quickOpenPanel(title: "Install from local package",
                            chooseDir: false, sheetWindow: view.window, allowedFileTypes: ["iinaplgz"]) { url in
-      Task {
-        await self.pluginManager.install(localPackageURL: url)
-        self.page.listView.tableView.reloadData()
-      }
+      self.page.installPlugin(localPackageURL: url)
     }
   }
 
@@ -113,7 +119,7 @@ fileprivate class PluginInstallView: SettingsAccessory.Base {
       Utility.quickPromptPanel("install_plugin_macos_11", sheetWindow: view.window!) { url in
         if url.isEmpty { return }
         Task { @MainActor in
-          await self.pluginManager.install(gitHubString: url)
+          await self.page.pluginManager.install(gitHubString: url)
         }
       }
     }
@@ -430,7 +436,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
 
         if res == .noUpdate {
           PluginListView.pluginHasUpdate[plugin.identifier] = false
-        } else if res == .installed, let newPlugin = newPlugin {
+        } else if res == .installed, let newPlugin {
           self.plugin = newPlugin
           PluginListView.pluginHasUpdate[newPlugin.identifier] = false
         }
@@ -560,7 +566,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
                backing: .buffered,
                defer: false)
 
-    guard let contentView = contentView else {
+    guard let contentView else {
       Logger.log("Content view is nil in plugin details window", level: .error)
       return
     }
@@ -760,13 +766,24 @@ extension PluginDetailsWindow: WKScriptMessageHandler, WKNavigationDelegate {
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
     // don't allow remote pages in settings or about tab
     if currentTab != .help {
-      guard let url = navigationAction.request.url,
-            url.absoluteString.starts(with: plugin.preferencesPageURL?.absoluteString ?? "000") || url.absoluteString == "about:blank"
-      else {
-        Logger.log("Loading page from \(navigationAction.request.url?.absoluteString ?? "?") is not allowed", level: .error)
+      guard let url = navigationAction.request.url else {
+        return
+      }
+      // open local pages
+      if url.absoluteString.starts(with: plugin.preferencesPageURL?.absoluteString ?? "000") || url.absoluteString == "about:blank" {
+        decisionHandler(.allow)
+        return
+      }
+      // open external page
+      if let scheme = url.scheme?.lowercased(), scheme == "https" {
+        NSWorkspace.shared.open(url)
         decisionHandler(.cancel)
         return
       }
+      // deny by default
+      Logger.log("Loading page from \(url.absoluteString) is not allowed", level: .error)
+      decisionHandler(.cancel)
+      return
     }
     decisionHandler(.allow)
   }
@@ -818,7 +835,7 @@ extension PluginDetailsWindow: WKScriptMessageHandler, WKNavigationDelegate {
         value = v
       }
       let result: String
-      if let value = value {
+      if let value {
         if JSONSerialization.isValidJSONObject(value), let json = try? String(data: JSONSerialization.data(withJSONObject: value, options: []), encoding: .utf8) {
           result = json
         } else if value is String {

@@ -25,6 +25,8 @@ class SettingsPageKeyBindings: SettingsPage {
   override var localizationTable: String {
     "SettingsKeyBindingLocalizable"
   }
+  
+  override var showSubSections: Bool { false }
 
   private lazy var configEditor: ConfigEditor = ConfigEditor()
 
@@ -230,8 +232,10 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
       loadConfigFile(fallbackDefault)
     }
 
-    guard let configName = configName,
-          let confFilePath = getFilePath(forConfig: configName, showAlert: false) else { fallback(); return }
+    guard let configName, let confFilePath = getFilePath(forConfig: configName, showAlert: false) else {
+      fallback()
+      return
+    }
 
     populateChooser(select: configName)
     currentConfName = configName
@@ -263,7 +267,7 @@ fileprivate class ConfigEditor: SettingsAccessory.Base {
                    action: #selector(configSelected), target: self, obj: name)
     }
 
-    if let currentConfName = currentConfName {
+    if let currentConfName {
       chooserPopupButton.selectItem(withTitle: currentConfName)
     }
   }
@@ -491,7 +495,7 @@ extension ConfigEditor: NSTableViewDelegate, NSMenuDelegate {
     guard let km = (mappingController.arrangedObjects as? [KeyMapping])?[at: row] else { return nil }
     let cell = (tableView.makeView(withIdentifier: .columnID, owner: self) as? KeyMappingCell) ?? KeyMappingCell()
 
-    cell.setup(keyMapping: km, self)
+    cell.setup(keyMapping: km, isSelected: row == tableView.selectedRow, self)
     return cell
   }
 
@@ -513,7 +517,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
   var lockHelpButton: ButtonWithObject!
   weak var editor: ConfigEditor!
 
-  func setup(keyMapping km: KeyMapping, _ editor: ConfigEditor) {
+  func setup(keyMapping km: KeyMapping, isSelected: Bool, _ editor: ConfigEditor) {
     self.editor = editor
 
     if keyLabel == nil || actionLabel == nil {
@@ -537,7 +541,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
       }
 
       self.editButton = createActionButton(
-        symbol: "gearshape.fill", action: #selector(editor.editKeyMappingAction))
+        symbol: "pencil", action: #selector(editor.editKeyMappingAction))
       self.removeButton = createActionButton(
         symbol: "trash.fill", action: #selector(editor.removeKeyMappingAction))
       self.lockHelpButton = createActionButton(
@@ -570,9 +574,7 @@ fileprivate class KeyMappingCell: NSTableCellView {
       stackView.padding(.vertical, .horizontal(4))
     }
 
-    editButton.isHidden = true
-    removeButton.isHidden = true
-    lockHelpButton.isHidden = true
+    selectionChanged(isSelected)
 
     if Preference.bool(for: .displayKeyBindingRawValues) {
       keyLabel.font = .monospacedSystemFont(ofSize: NSFont.systemFontSize, weight: .regular)

@@ -301,7 +301,7 @@ class Logger: NSObject {
     // Lock to prevent the log file from being closed by another thread while writing to it.
     lock.withLock() {
       // The logger may be called after it has been closed.
-      guard let logFileHandle = logFileHandle else { return }
+      guard let logFileHandle else { return }
       do {
         // The deprecated write method is used instead of the replacement method that throws swift
         // exceptions because testing the new method with macOS 12.5.1 showed that method failed to

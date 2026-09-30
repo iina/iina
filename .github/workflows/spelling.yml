@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: crate-ci/typos@master
+      - uses: crate-ci/typos@main

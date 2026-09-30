@@ -87,6 +87,7 @@ extension SettingsLocalization.Key {
   static let gaplessAudioLabel = SettingsLocalization.Key("gaplessAudio.label")
   static let preferredAudioDeviceLabel = SettingsLocalization.Key("preferredAudioDevice.label")
   static let text_SPDIFOutput = SettingsLocalization.Key("$SPDIFOutput")
+  static let text_SPDIFOutputWarning = SettingsLocalization.Key("$SPDIFOutputWarning")
   static let text_PreferredLanguage = SettingsLocalization.Key("$PreferredLanguage")
   static let text_dB = SettingsLocalization.Key("$dB")
   static let text_Hardware = SettingsLocalization.Key("$Hardware")
@@ -115,7 +116,6 @@ extension SettingsLocalization.Key {
   static let text_DefaultEncoding = SettingsLocalization.Key("$DefaultEncoding")
   static let text_NotLoggedIn = SettingsLocalization.Key("$NotLoggedIn")
   static let text_Offset = SettingsLocalization.Key("$Offset")
-  static let text_Background = SettingsLocalization.Key("$Background")
   static let text_OtherStyles = SettingsLocalization.Key("$OtherStyles")
   static let text_OverrideLevel = SettingsLocalization.Key("$OverrideLevel")
   static let text_Align = SettingsLocalization.Key("$Align")
@@ -147,6 +147,7 @@ extension SettingsLocalization.Key {
 
   // Advanced
   static let text_AdditionalMpvOptions = SettingsLocalization.Key("$AdditionalMpvOptions")
+  static let text_AdditionalMpvOptions_desc = SettingsLocalization.Key("$AdditionalMpvOptions.desc")
   static let text_OpenLogDirectory = SettingsLocalization.Key("$OpenLogDirectory")
   static let text_Logging = SettingsLocalization.Key("$Logging")
   static let text_MPVSettings = SettingsLocalization.Key("$MPVSettings")

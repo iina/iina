@@ -61,7 +61,7 @@ class SettingsPageUI: SettingsPage {
           .bindTo(.themeMaterial, ofType: Preference.Theme.self)
         if #available(macOS 26.0, *) { 
           SettingsItem.General(title: .general("sidebar.liquid_glass"))
-            .image(name: "liquid.glass")
+            .image(name: ["capsule.on.rectangle.liquid.glass", "liquid.glass"])
             .withExpandingDetailView {
               SettingsItem.Switch(title: .text_OnScreenDisplay)
                 .bindTo(.useLiquidGlassOSD)
@@ -136,9 +136,12 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.PopupButton()
           .image(name: "forward.fill")
           .bindTo(.arrowButtonAction, ofType: Preference.ArrowButtonAction.self)
-        SettingsItem.Input()
+        SettingsItem.SwitchWithInput()
           .image(name: "timer")
-          .bindTo(.controlBarAutoHideTimeout)
+          .labelKey(.controlBarAutoHideTimeout)
+          .bindInputTo(.controlBarAutoHideTimeout)
+          .bindSwitchTo(.enableControlBarAutoHide)
+          .range(0...Double(Int.max), allowsFloats: true)
           .trailingLabel(.text_s)
       }
 
@@ -188,10 +191,12 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.Input(title: .controlBarAutoHideTimeoutLabel)
           .image(name: "timer")
           .bindTo(.osdAutoHideTimeout)
+          .range(0...Double(Int.max), allowsFloats: true)
           .trailingLabel(.text_s)
         SettingsItem.Input()
           .image(name: "textformat.size")
           .bindTo(.osdTextSize)
+          .range(1...500)
           .trailingLabel(.text_pt)
         SettingsItem.Switch()
           .image(name: "info.bubble")
@@ -209,11 +214,13 @@ class SettingsPageUI: SettingsPage {
           .withDetailView {
             SettingsItem.Input()
               .bindTo(.maxThumbnailPreviewCacheSize)
+              .range(0...Double(Int.max))
               .trailingLabel(.text_MB)
             SettingsItem.Switch()
               .bindTo(.enableThumbnailForRemoteFiles)
             SettingsItem.Input()
               .bindTo(.thumbnailWidth)
+              .range(1...2000)
               .trailingLabel(.text_pt)
               .hasDescription()
           }

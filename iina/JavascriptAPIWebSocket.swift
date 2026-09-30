@@ -48,7 +48,7 @@ class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketCon
   }
 
   func startServer() {
-    guard let server = server else {
+    guard let server else {
       throwError(withMessage: "ws.startServer: server not created")
       return
     }
@@ -108,7 +108,7 @@ class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketCon
       }
       do {
         try server.send(data: data, to: connEntry, callback: { error in
-          if let error = error {
+          if let error {
             reject.call(withArguments: [error.toDict()])
           } else {
             resolve.call(withArguments: ["success"])

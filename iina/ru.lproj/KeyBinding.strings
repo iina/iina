@@ -92,12 +92,12 @@
 "opt.deinterlace" = "деинтерлейсинг";
 
 "opt.audio" = "аудиодорожку";
-"opt.volume" = "громкость";
+"opt.volume" = "Громкость";
 "opt.mute" = "режим «Без звука»";
-"opt.audio-delay" = "задержку аудио";
+"opt.audio-delay" = "Задержка аудио";
 
 "opt.sub" = "субтитры";
-"opt.sub-delay" = "задержку субтитров";
+"opt.sub-delay" = "Задержка субтитров";
 "opt.sub-pos" = "позицию субтитров";
 "opt.sub-scale" = "масштаб субтитров";
 "opt.sub-visibility" = "видимость субтитров";
@@ -107,7 +107,7 @@
 "opt.fullscreen" = "полноэкранный режим";
 "opt.ontop" = "режим «Поверх всех окон»";
 
-"opt.chapter" = "главу";
+"opt.chapter" = "Глава";
 
 "read.set" = "Установить {{property}} на {{value}}";
 "read.add" = "{{property}} {{value}}";

@@ -95,7 +95,7 @@ class JavascriptPlugin: NSObject {
   var preferencesPageURL: URL?
   var helpPageURL: URL?
   var githubURLString: String? {
-    guard let githubRepo = githubRepo else { return nil }
+    guard let githubRepo else { return nil }
     return "https://github.com/\(githubRepo)"
   }
 
@@ -265,11 +265,9 @@ class JavascriptPlugin: NSObject {
     // If there is a iinaplgz file inside the latest release, use the plgz file
     
     let response = Just.get("https://api.github.com/repos\(url.path)/releases/latest")
-    guard response.ok else {
-      throw PluginError.cannotDownload(response.reason, response.text ?? "")
-    }
 
-    if let json = response.json as? [String: Any],
+    if response.ok,
+       let json = response.json as? [String: Any],
        let assets = json["assets"] as? [[String: Any]],
        let plgzItem = assets.first(where: { ($0["name"] as? String)?.hasSuffix(".iinaplgz") ?? false }),
        let dlURL = plgzItem["browser_download_url"] as? String
@@ -281,11 +279,12 @@ class JavascriptPlugin: NSObject {
         try downloadResponse.content?.write(to: destURL)
         return try create(fromPackageURL: destURL)
       } catch {
-        Logger.log("Cannot find an iinaplgz file in the latest release, installing from source.", level: .debug)
+        Logger.log("Cannot find an iinaplgz file in the latest release", level: .debug)
       }
     }
     
     // Otherwise, install from source
+    Logger.log("Installing from source", level: .debug)
 
     func removeTempPluginFolder() {
       try? FileManager.default.removeItem(at: pluginsRoot.appendingPathComponent(tempFolder))
@@ -432,7 +431,7 @@ class JavascriptPlugin: NSObject {
     }
     self.entryURL = entryURL
     
-    if let globalEntryPath = globalEntryPath {
+    if let globalEntryPath {
       guard let globalEntryURL = resolvePath(globalEntryPath, root: root) else {
         Logger.log("The entry file \(globalEntryPath) doesn't exist", level: .error)
         return nil
@@ -459,7 +458,7 @@ class JavascriptPlugin: NSObject {
   }
 
   func registerSubProviders() {
-    guard let subProviders = subProviders else { return }
+    guard let subProviders else { return }
     for provider in subProviders {
       guard let spID = provider["id"], let spName = provider["name"] else {
         Logger.log("A subtitle provider declaration should have an id and a name.", level: .error)
@@ -489,7 +488,7 @@ class JavascriptPlugin: NSObject {
       try fileManager.moveItem(at: self.root, to: dest)
       self.root = dest
       self.entryURL = resolvePath(entryPath, root: root)!
-      if let globalEntryPath = globalEntryPath {
+      if let globalEntryPath {
         self.globalEntryURL = resolvePath(globalEntryPath, root: root)!
       }
       self.preferencesPageURL = resolvePath(preferencesPage, root: root)
@@ -502,7 +501,7 @@ class JavascriptPlugin: NSObject {
   @discardableResult
   func remove() -> Int? {
     let pos = JavascriptPlugin.plugins.firstIndex(of: self)
-    if let pos = pos {
+    if let pos {
       JavascriptPlugin.plugins.remove(at: pos)
     }
     try? FileManager.default.removeItem(at: root)
@@ -515,7 +514,7 @@ class JavascriptPlugin: NSObject {
         continuation.resume(returning: nil)
         return
       }
-      Just.get("https://raw.githubusercontent.com/\(ghRepo)/master/Info.json", asyncCompletionHandler:  { result in
+      Just.get("https://raw.githubusercontent.com/\(ghRepo)/main/Info.json", asyncCompletionHandler:  { result in
         if result.ok,
            let json = result.json as? [String: Any],
            let newGHVersion = json["ghVersion"] as? Int,
@@ -604,7 +603,7 @@ class JavascriptPlugin: NSObject {
 
 
 fileprivate func resolvePath(_ path: String?, root: URL, allowNetwork: Bool = false) -> URL? {
-  guard let path = path else { return nil }
+  guard let path else { return nil }
   if path.hasPrefix("http://") || path.hasPrefix("https://") {
     if allowNetwork { return URL(string: path) }
     else { return nil }

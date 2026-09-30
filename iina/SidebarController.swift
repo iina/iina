@@ -409,7 +409,7 @@ class SidebarController: NSObject {
       return  // don't interrupt in-flight animation on the target side
     }
 
-    let switchTab = { if let tab = tab { viewController.pleaseSwitchToTab(tab) } }
+    let switchTab = { if let tab { viewController.pleaseSwitchToTab(tab) } }
 
     // If this type is already visible (possibly on the other side after a config change), treat
     // a same-tab request as toggle-off and a different-tab request as a tab switch in place.

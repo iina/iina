@@ -872,7 +872,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     
     if parsed.scheme != "iina" {
       // try to open the URL directly
-      PlayerCore.activeOrNewForMenuAction(isAlternative: false).openURLString(url)
+      PlayerCore.activeOrNew.openURLString(url)
       return
     }
     
@@ -895,7 +895,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       if let newWindowValue = queryDict["new_window"], newWindowValue == "1" {
         player = PlayerCore.newPlayerCore
       } else {
-        player = PlayerCore.activeOrNewForMenuAction(isAlternative: false)
+        player = PlayerCore.activeOrNew
       }
 
       // enqueue
@@ -951,7 +951,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
           noteNewRecentDocumentURL(url)
         }
       }
-      if PlayerCore.openURLs(panel.urls) == 0 {
+      let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
+      if PlayerCore.openURLs(panel.urls, invertOpenInNewWindow: isAlternative) == 0 {
         Utility.showAlert("nothing_to_open")
       }
     }

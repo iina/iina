@@ -792,23 +792,16 @@ class MenuController: NSObject, NSMenuDelegate {
   }
 
   private func updateOpenMenuItems() {
-    if PlayerCore.nonIdle.count == 0 {
-      open.title = stringForOpen
+    if Preference.bool(for: .alwaysOpenInNewWindow) {
+      open.title = stringForOpenAlternative
       openAlternative.title = stringForOpen
-      openURL.title = stringForOpenURL
+      openURL.title = stringForOpenURLAlternative
       openURLAlternative.title = stringForOpenURL
     } else {
-      if Preference.bool(for: .alwaysOpenInNewWindow) {
-        open.title = stringForOpenAlternative
-        openAlternative.title = stringForOpen
-        openURL.title = stringForOpenURLAlternative
-        openURLAlternative.title = stringForOpenURL
-      } else {
-        open.title = stringForOpen
-        openAlternative.title = stringForOpenAlternative
-        openURL.title = stringForOpenURL
-        openURLAlternative.title = stringForOpenURLAlternative
-      }
+      open.title = stringForOpen
+      openAlternative.title = stringForOpenAlternative
+      openURL.title = stringForOpenURL
+      openURLAlternative.title = stringForOpenURLAlternative
     }
   }
 

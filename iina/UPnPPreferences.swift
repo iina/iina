@@ -30,6 +30,8 @@ enum UPnPPreferences {
     static let autoRefreshInterval = "upnpAutoRefreshInterval"
     static let sortKey = "upnpSortKey"
     static let sortAscending = "upnpSortAscending"
+    /// Description URLs for DLNA servers that are not found by local SSDP, such as a library reached over Tailscale.
+    static let remoteServers = "upnpRemoteServers"
   }
 
   private static let ud = UserDefaults.standard
@@ -92,5 +94,13 @@ enum UPnPPreferences {
 
   static func set(_ value: Any?, forKey key: String) {
     ud.set(value, forKey: key)
+  }
+
+  static func remoteServerURLs() -> [String] {
+    ud.stringArray(forKey: Key.remoteServers) ?? []
+  }
+
+  static func setRemoteServerURLs(_ urls: [String]) {
+    ud.set(urls, forKey: Key.remoteServers)
   }
 }

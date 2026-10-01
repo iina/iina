@@ -138,6 +138,7 @@ enum UPnPError: LocalizedError {
   case invalidResponse
   case networkError(Error)
   case xmlParseError
+  case remoteConnectFailed(String)
   
   var errorDescription: String? {
     switch self {
@@ -155,6 +156,8 @@ enum UPnPError: LocalizedError {
       return "Network error: \(error.localizedDescription)"
     case .xmlParseError:
       return "Failed to parse XML response"
+    case .remoteConnectFailed(let reason):
+      return reason
     }
   }
 }

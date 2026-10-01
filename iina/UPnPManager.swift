@@ -343,9 +343,10 @@ class UPnPManager {
     let manufacturer = delegate.manufacturer?.nonEmpty
     let modelName = delegate.modelName?.nonEmpty
     let deviceType = delegate.deviceType?.nonEmpty ?? baseDevice.deviceType
+    let deviceID = delegate.udn?.replacingOccurrences(of: "uuid:", with: "") ?? baseDevice.id
     
     return UPnPDevice(
-      id: baseDevice.id,
+      id: deviceID,
       friendlyName: friendlyName,
       deviceType: deviceType,
       manufacturer: manufacturer,
@@ -372,6 +373,65 @@ class UPnPManager {
     let device = devices[id]
     devicesLock.unlock()
     return device
+  }
+  
+  /// Load a media server from its device-description URL.
+  /// Local SSDP cannot reach servers on another network, including Tailscale, so the caller supplies `rootDesc.xml` directly.
+  func connectRemoteServer(descriptionURL: URL) async throws -> UPnPDevice {
+    var request = URLRequest(url: descriptionURL)
+    request.httpMethod = "GET"
+    request.setValue("IINA/1.0", forHTTPHeaderField: "User-Agent")
+    request.timeoutInterval = 12
+    
+    let data: Data
+    let response: URLResponse
+    do {
+      (data, response) = try await URLSession.shared.data(for: request)
+    } catch {
+      throw UPnPError.remoteConnectFailed(error.localizedDescription)
+    }
+    
+    guard let httpResponse = response as? HTTPURLResponse,
+          (200...299).contains(httpResponse.statusCode) else {
+      let code = (response as? HTTPURLResponse)?.statusCode ?? 0
+      throw UPnPError.remoteConnectFailed("The server returned HTTP \(code).")
+    }
+    
+    guard let xmlString = String(data: data, encoding: .utf8) else {
+      throw UPnPError.invalidResponse
+    }
+    
+    let baseDevice = UPnPDevice(
+      id: descriptionURL.absoluteString,
+      friendlyName: descriptionURL.host ?? "Remote Server",
+      deviceType: "urn:schemas-upnp-org:device:MediaServer:1",
+      manufacturer: nil,
+      modelName: nil,
+      location: descriptionURL,
+      services: [],
+      discoveredAt: Date()
+    )
+    
+    guard let device = parseDeviceDescription(xml: xmlString, baseDevice: baseDevice) else {
+      throw UPnPError.xmlParseError
+    }
+    guard device.supportsContentDirectory else {
+      throw UPnPError.serviceNotFound
+    }
+    
+    await MainActor.run {
+      self.upsertDevice(device)
+      self.onDeviceDiscovered?(device)
+      Logger.log("Connected remote UPnP server: \(device.friendlyName) at \(descriptionURL.absoluteString)", subsystem: self.subsystem)
+    }
+    return device
+  }
+  
+  /// Remove one device from the in-memory list.
+  func removeDevice(id: String) {
+    devicesLock.lock()
+    devices.removeValue(forKey: id)
+    devicesLock.unlock()
   }
   
   /// Clear all discovered devices
@@ -655,6 +715,7 @@ private final class DeviceDescriptionXMLParserDelegate: NSObject, XMLParserDeleg
   var manufacturer: String?
   var modelName: String?
   var deviceType: String?
+  var udn: String?
   var services: [UPnPDevice.UPnPService] = []
   
   init(baseURL: URL) {
@@ -693,6 +754,8 @@ private final class DeviceDescriptionXMLParserDelegate: NSObject, XMLParserDeleg
       modelName = value ?? modelName
     case "deviceType":
       deviceType = value ?? deviceType
+    case "UDN":
+      if udn == nil { udn = value }
     case "serviceType":
       if inService { serviceType = value }
     case "serviceId":

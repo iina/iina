@@ -539,6 +539,14 @@
 "upnp.browser.settings.behavior.close" = "Close Browser";
 "upnp.browser.settings.behavior.keep_open" = "Keep Browser Open";
 "upnp.browser.settings.behavior.reopen" = "Reopen Browser";
+"upnp.welcome.open" = "DLNA…";
+"upnp.browser.add_server" = "Add Server…";
+"upnp.browser.add_server.title" = "Add Remote DLNA Server";
+"upnp.browser.add_server.message" = "Enter the server description URL. A remote library, including one reached over Tailscale, looks like http://100.95.80.81:8200/rootDesc.xml.";
+"upnp.browser.add_server.connect" = "Connect";
+"upnp.browser.menu.remove_server" = "Remove Remote Server";
+"upnp.browser.status.connecting" = "Connecting to remote server…";
+"upnp.browser.status.invalid_server_url" = "Enter an HTTP description URL, for example http://100.95.80.81:8200/rootDesc.xml.";
 // Log window
 "logwindow.all_subsystems" = "All subsystems";
 "logwindow.title" = "Log Viewer";

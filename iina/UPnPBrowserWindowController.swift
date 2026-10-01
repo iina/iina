@@ -190,8 +190,22 @@ class UPnPBrowserWindowController: NSWindowController {
     // Device list section (top)
     let deviceHeaderLabel = NSTextField(labelWithString: NSLocalizedString("upnp.browser.device_list", comment: "UPnP/DLNA Device List"))
     deviceHeaderLabel.font = NSFont.boldSystemFont(ofSize: 13)
+    deviceHeaderLabel.lineBreakMode = .byTruncatingTail
     deviceHeaderLabel.translatesAutoresizingMaskIntoConstraints = false
+    deviceHeaderLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     leftPanel.addSubview(deviceHeaderLabel)
+
+    let addServerTitle = NSLocalizedString("upnp.browser.add_server", comment: "Add Server…")
+    let addServerButton = NSButton(title: addServerTitle, target: self, action: #selector(addRemoteServer(_:)))
+    addServerButton.bezelStyle = .roundRect
+    addServerButton.controlSize = .small
+    addServerButton.image = NSImage(systemSymbolName: "plus", accessibilityDescription: addServerTitle)
+    addServerButton.imagePosition = .imageOnly
+    addServerButton.toolTip = addServerTitle
+    addServerButton.translatesAutoresizingMaskIntoConstraints = false
+    addServerButton.setContentHuggingPriority(.required, for: .horizontal)
+    addServerButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+    leftPanel.addSubview(addServerButton)
     
     let deviceScrollView = NSScrollView()
     deviceScrollView.hasVerticalScroller = true
@@ -205,6 +219,13 @@ class UPnPBrowserWindowController: NSWindowController {
     deviceColumn.title = NSLocalizedString("upnp.browser.device_list", comment: "UPnP/DLNA Device List")
     deviceColumn.width = 280
     deviceTable.addTableColumn(deviceColumn)
+    let deviceMenu = NSMenu()
+    let removeServerItem = NSMenuItem(title: NSLocalizedString("upnp.browser.menu.remove_server", comment: "Remove Remote Server"),
+                                      action: #selector(removeRemoteServer(_:)),
+                                      keyEquivalent: "")
+    removeServerItem.target = self
+    deviceMenu.addItem(removeServerItem)
+    deviceTable.menu = deviceMenu
     
     deviceScrollView.documentView = deviceTable
     deviceScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -238,7 +259,9 @@ class UPnPBrowserWindowController: NSWindowController {
       // Device header
       deviceHeaderLabel.topAnchor.constraint(equalTo: leftPanel.topAnchor, constant: 8),
       deviceHeaderLabel.leadingAnchor.constraint(equalTo: leftPanel.leadingAnchor, constant: 8),
-      deviceHeaderLabel.trailingAnchor.constraint(equalTo: leftPanel.trailingAnchor, constant: -8),
+      deviceHeaderLabel.trailingAnchor.constraint(lessThanOrEqualTo: addServerButton.leadingAnchor, constant: -8),
+      addServerButton.centerYAnchor.constraint(equalTo: deviceHeaderLabel.centerYAnchor),
+      addServerButton.trailingAnchor.constraint(equalTo: leftPanel.trailingAnchor, constant: -8),
       
       // Device scroll view
       deviceScrollView.topAnchor.constraint(equalTo: deviceHeaderLabel.bottomAnchor, constant: 4),
@@ -342,12 +365,15 @@ class UPnPBrowserWindowController: NSWindowController {
     
     let statusLabel = NSTextField(labelWithString: NSLocalizedString("upnp.browser.status.discovering", comment: "Discovering devices…"))
     statusLabel.translatesAutoresizingMaskIntoConstraints = false
+    statusLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+    statusLabel.setContentHuggingPriority(.required, for: .horizontal)
     bottomPanel.addSubview(statusLabel)
     
     let pathLabel = NSTextField(labelWithString: "")
     pathLabel.translatesAutoresizingMaskIntoConstraints = false
     pathLabel.textColor = .secondaryLabelColor
     pathLabel.lineBreakMode = .byTruncatingMiddle
+    pathLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     bottomPanel.addSubview(pathLabel)
     
     let backButton = NSButton(title: NSLocalizedString("upnp.browser.back", comment: "Back"), target: self, action: #selector(goBack))
@@ -373,6 +399,7 @@ class UPnPBrowserWindowController: NSWindowController {
     let refreshMenu = NSMenu()
     refreshMenu.addItem(NSMenuItem(title: NSLocalizedString("upnp.browser.refresh.current_folder", comment: "Refresh Current Folder"), action: #selector(refreshCurrentFolder), keyEquivalent: ""))
     refreshMenu.addItem(NSMenuItem(title: NSLocalizedString("upnp.browser.refresh.all_devices", comment: "Refresh All Devices"), action: #selector(refreshDevices), keyEquivalent: ""))
+    refreshMenu.addItem(NSMenuItem(title: NSLocalizedString("upnp.browser.add_server", comment: "Add Server…"), action: #selector(addRemoteServer(_:)), keyEquivalent: ""))
     refreshMenu.addItem(NSMenuItem.separator())
     refreshMenu.addItem(NSMenuItem(title: NSLocalizedString("upnp.browser.refresh.settings", comment: "Auto-Refresh Settings..."), action: #selector(showAutoRefreshSettings), keyEquivalent: ""))
     refreshButton.menu = refreshMenu
@@ -401,8 +428,8 @@ class UPnPBrowserWindowController: NSWindowController {
     
     // Layout constraints
     NSLayoutConstraint.activate([
-      // Container
-      containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      // Container. Stay under the title bar even if the window uses a full-size content view.
+      containerView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
       containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
       containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
@@ -465,7 +492,8 @@ class UPnPBrowserWindowController: NSWindowController {
     guard let window = window else { return }
     
     window.title = NSLocalizedString("upnp.browser.title", comment: "UPnP/DLNA Browser")
-    window.styleMask.insert(.fullSizeContentView)
+    window.styleMask.remove(.fullSizeContentView)
+    window.titlebarAppearsTransparent = false
     
     // Setup device table view
     if let tableView = deviceTableView {
@@ -532,6 +560,7 @@ class UPnPBrowserWindowController: NSWindowController {
     }
     
     UPnPManager.shared.startDiscovery()
+    reconnectRemoteServers()
     
     // Re-enable refresh after discovery completes
     DispatchQueue.main.asyncAfter(deadline: .now() + 15) { [weak self] in
@@ -595,6 +624,107 @@ class UPnPBrowserWindowController: NSWindowController {
     browseDevice(device)
   }
   
+  @objc private func addRemoteServer(_ sender: Any?) {
+    let alert = NSAlert()
+    alert.messageText = NSLocalizedString("upnp.browser.add_server.title", comment: "Add Remote DLNA Server")
+    alert.informativeText = NSLocalizedString("upnp.browser.add_server.message", comment: "Description URL help")
+    alert.addButton(withTitle: NSLocalizedString("upnp.browser.add_server.connect", comment: "Connect"))
+    alert.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
+
+    let field = NSTextField(frame: NSRect(x: 0, y: 0, width: 420, height: 24))
+    field.placeholderString = "http://100.95.80.81:8200/rootDesc.xml"
+    field.stringValue = UPnPPreferences.remoteServerURLs().last ?? ""
+    alert.accessoryView = field
+    alert.window.initialFirstResponder = field
+
+    guard let window = window else { return }
+    alert.beginSheetModal(for: window) { [weak self] response in
+      guard response == .alertFirstButtonReturn else { return }
+      self?.connectRemoteServer(fromUserInput: field.stringValue)
+    }
+  }
+
+  private func connectRemoteServer(fromUserInput raw: String) {
+    guard let url = normalizedDescriptionURL(from: raw) else {
+      statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.invalid_server_url", comment: "Invalid description URL")
+      return
+    }
+    statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.connecting", comment: "Connecting to remote server…")
+    Task {
+      do {
+        let device = try await UPnPManager.shared.connectRemoteServer(descriptionURL: url)
+        await MainActor.run {
+          var saved = UPnPPreferences.remoteServerURLs()
+          let canonical = url.absoluteString
+          if !saved.contains(canonical) {
+            saved.append(canonical)
+            UPnPPreferences.setRemoteServerURLs(saved)
+          }
+          self.selectedDevice = device
+          self.browseDevice(device)
+        }
+      } catch {
+        await MainActor.run {
+          self.statusLabel?.stringValue = NSLocalizedString("upnp.browser.status.error", comment: "Error: ") + error.localizedDescription
+          Logger.log("Failed to connect remote UPnP server: \(error)", level: .error, subsystem: self.subsystem)
+        }
+      }
+    }
+  }
+
+  private func reconnectRemoteServers() {
+    for urlString in UPnPPreferences.remoteServerURLs() {
+      guard let url = URL(string: urlString) else { continue }
+      Task {
+        do {
+          _ = try await UPnPManager.shared.connectRemoteServer(descriptionURL: url)
+        } catch {
+          await MainActor.run {
+            Logger.log("Saved remote UPnP server unavailable: \(urlString) (\(error))", level: .warning, subsystem: self.subsystem)
+          }
+        }
+      }
+    }
+  }
+
+  private func normalizedDescriptionURL(from raw: String) -> URL? {
+    var text = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !text.isEmpty else { return nil }
+    if !text.contains("://") {
+      text = "http://" + text
+    }
+    guard var components = URLComponents(string: text),
+          let scheme = components.scheme?.lowercased(),
+          scheme == "http" || scheme == "https",
+          components.host != nil else {
+      return nil
+    }
+    if components.path.isEmpty || components.path == "/" {
+      components.path = "/rootDesc.xml"
+    }
+    return components.url
+  }
+
+  @objc private func removeRemoteServer(_ sender: Any?) {
+    guard let tableView = deviceTableView else { return }
+    let row = tableView.clickedRow
+    guard devices.indices.contains(row) else { return }
+    let device = devices[row]
+    let location = device.location.absoluteString
+    let saved = UPnPPreferences.remoteServerURLs()
+    guard saved.contains(location) else { return }
+
+    UPnPPreferences.setRemoteServerURLs(saved.filter { $0 != location })
+    UPnPManager.shared.removeDevice(id: device.id)
+    deviceRemoved(deviceID: device.id)
+  }
+
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    guard menuItem.action == #selector(removeRemoteServer(_:)) else { return true }
+    guard let row = deviceTableView?.clickedRow, devices.indices.contains(row) else { return false }
+    return UPnPPreferences.remoteServerURLs().contains(devices[row].location.absoluteString)
+  }
+
   private func deviceDiscovered(_ device: UPnPDevice) {
     if !devices.contains(where: { $0.id == device.id }) {
       devices.append(device)

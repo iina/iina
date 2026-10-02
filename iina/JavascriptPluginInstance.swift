@@ -14,6 +14,13 @@ class JavascriptPluginInstance {
   private var polyfill: JavascriptPolyfill!
 
   lazy var js: JSContext = createJSContext()
+  // Main-thread confinement includes JavaScriptCore, API resource registries,
+  // pending callbacks and active hooks. Background IO may only enqueue delivery.
+  private(set) var isActive = true
+  fileprivate var pendingCallbacks: [UUID: JavascriptPluginCallback] = [:]
+
+  fileprivate var activeHookContinuations: [UUID: JavascriptPluginHookContinuation] = [:]
+
   var logHandler: ((String, Logger.Level) -> Void)?
 
   weak var player: PlayerCore!
@@ -55,6 +62,7 @@ class JavascriptPluginInstance {
   private var currentFileStack: [URL] = []
 
   init(player: PlayerCore?, plugin: JavascriptPlugin) {
+    dispatchPrecondition(condition: .onQueue(.main))
     self.plugin = plugin
 
     if let player {
@@ -73,8 +81,43 @@ class JavascriptPluginInstance {
     if let plugin = self.plugin {
       Logger.log("Unload \(plugin.name)", level: .debug, subsystem: subsystem)
     }
+    tearDown()
+  }
+
+  /// Called before removing or replacing an instance, even if another owner retains it.
+  func tearDown() {
+    dispatchPrecondition(condition: .onQueue(.main))
+    guard isActive else { return }
+    isActive = false
     polyfill.removeAllTimers()
+    pendingCallbacks.values.forEach { $0.invalidate() }
+    pendingCallbacks.removeAll()
+    // Cancel delivery first, then release mpv even when the hook was awaiting IO
+    // that cleanup will cancel. Remove ownership before calling native code.
+    let continuations = Array(activeHookContinuations.values)
+    activeHookContinuations.removeAll()
+    continuations.forEach { $0.finish() }
     apis.values.forEach { $0.cleanUp(self) }
+  }
+
+  func makeCallback(_ values: [JSValue], once: Bool = true) -> JavascriptPluginCallback {
+    dispatchPrecondition(condition: .onQueue(.main))
+    let callback = JavascriptPluginCallback(instance: self, values: values, once: once)
+    if isActive {
+      pendingCallbacks[callback.id] = callback
+    } else {
+      callback.invalidate()
+    }
+    return callback
+  }
+
+  /// A callback may enter a modal AppKit loop in which the user disables/reloads
+  /// plugins. Keep both weak API owners alive until that in-flight call returns.
+  @discardableResult
+  func withActiveContext<T>(_ body: () -> T) -> T? {
+    dispatchPrecondition(condition: .onQueue(.main))
+    guard isActive, let plugin else { return nil }
+    return withExtendedLifetime((self, plugin), body)
   }
 
   func canAccess(url: URL) -> Bool {
@@ -96,6 +139,7 @@ class JavascriptPluginInstance {
   }
 
   @objc func menuItemAction(_ sender: NSMenuItem) {
+    guard isActive else { return }
     guard let item = sender.representedObject as? JavascriptPluginMenuItem else { return }
     if !item.callAction() {
       Logger.log("Action of the menu item \"\(item.title)\" is not a function", level: .error, subsystem: subsystem)
@@ -103,6 +147,7 @@ class JavascriptPluginInstance {
   }
 
   @objc func playlistMenuItemAction(_ sender: NSMenuItem) {
+    guard isActive else { return }
     guard let item = sender.representedObject as? JavascriptPluginMenuItem else { return }
     if !item.callAction() {
       Logger.log("Action of the menu item \"\(item.title)\" is not a function", level: .error, subsystem: subsystem)
@@ -111,6 +156,8 @@ class JavascriptPluginInstance {
 
   @discardableResult
   func evaluateFile(_ url: URL, asModule: Bool = false) -> JSValue! {
+    dispatchPrecondition(condition: .onQueue(.main))
+    guard isActive else { return nil }
     currentFileStack.append(url)
     guard let content = try? String(contentsOf: url) else {
       Logger.log("Cannot read script \(url.path)", level: .error, subsystem: subsystem)
@@ -140,7 +187,8 @@ class JavascriptPluginInstance {
   private func createJSContext() -> JSContext {
     let ctx = JSContext()!
     ctx.name = "\(isGlobal ? "Global" : "Main") — \(plugin.name)"
-    ctx.exceptionHandler = { [unowned self] context, exception in
+    ctx.exceptionHandler = { [weak self] context, exception in
+      guard let self, self.isActive else { return }
       let message = exception?.toString() ?? "Unknown exception"
       let stack = exception?.objectForKeyedSubscript("stack")?.toString() ?? "???"
       Logger.log(
@@ -189,5 +237,86 @@ class JavascriptPluginInstance {
     polyfill.register(inContext: ctx)
 
     return ctx
+  }
+}
+
+/// Teardown clears the JavaScript values even if native IO still retains this token.
+/// Its JavaScript values and the instance registry are accessed on the main thread.
+final class JavascriptPluginCallback {
+  fileprivate let id = UUID()
+  private weak var instance: JavascriptPluginInstance?
+  private var values: [JSValue]?
+  private let once: Bool
+
+  fileprivate init(instance: JavascriptPluginInstance, values: [JSValue], once: Bool) {
+    self.instance = instance
+    self.values = values
+    self.once = once
+  }
+
+  fileprivate func invalidate() {
+    dispatchPrecondition(condition: .onQueue(.main))
+    values = nil
+  }
+
+  func cancel() {
+    if !Thread.isMainThread {
+      DispatchQueue.main.async { [self] in cancel() }
+      return
+    }
+    instance?.pendingCallbacks.removeValue(forKey: id)
+    invalidate()
+  }
+
+  func callHook(withNextBlock next: @escaping () -> Void) {
+    DispatchQueue.main.async { [self] in
+      guard let instance, instance.isActive, let callback = values?.first else {
+        next()
+        return
+      }
+      let continuation = JavascriptPluginHookContinuation(next: next)
+      instance.activeHookContinuations[continuation.id] = continuation
+      let advance: @convention(block) () -> Void = { [weak instance] in
+        instance?.activeHookContinuations.removeValue(forKey: continuation.id)
+        continuation.finish()
+      }
+      instance.withActiveContext {
+        // Reading constructor can itself reenter JS and trigger teardown.
+        let isAsync = callback.forProperty("constructor")?.forProperty("name")?.toString() == "AsyncFunction"
+        guard instance.isActive else { return }
+        callback.call(withArguments: [JSValue(object: advance, in: callback.context)!])
+        if !isAsync { advance() }
+      }
+    }
+  }
+
+  func resolve(_ arguments: [Any]) { call(withArguments: arguments) }
+  func reject(_ arguments: [Any]) { call(withArguments: arguments, index: 1) }
+
+  func call(withArguments arguments: [Any], index: Int = 0) {
+    DispatchQueue.main.async { [self] in
+      guard let instance, instance.isActive, let values else { return }
+      // Take the values before removing the registry entry. Completion and teardown
+      // can both release their ownership without invalidating the current call.
+      if once { cancel() }
+      instance.withActiveContext {
+        values[index].call(withArguments: arguments)
+      }
+    }
+  }
+}
+
+/// Native continuation only; never owns JavaScript. All access is on main.
+fileprivate final class JavascriptPluginHookContinuation {
+  let id = UUID()
+  private var next: (() -> Void)?
+
+  init(next: @escaping () -> Void) { self.next = next }
+
+  func finish() {
+    dispatchPrecondition(condition: .onQueue(.main))
+    let action = next
+    next = nil
+    action?()
   }
 }

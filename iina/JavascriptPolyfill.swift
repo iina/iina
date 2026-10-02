@@ -11,6 +11,9 @@ import JavaScriptCore
 class JavascriptPolyfill {
   weak var plugin: JavascriptPluginInstance!
   var timers = [String: Timer]()
+  private var pendingTimers = Set<String>()
+  private let timerLock = NSLock()
+  private var stopped = false
 
   init(pluginInstance: JavascriptPluginInstance) {
     self.plugin = pluginInstance
@@ -23,6 +26,10 @@ class JavascriptPolyfill {
   }
 
   func removeAllTimers() {
+    timerLock.lock()
+    defer { timerLock.unlock() }
+    stopped = true
+    pendingTimers.removeAll()
     for timer in timers.values {
       timer.invalidate()
     }
@@ -30,6 +37,9 @@ class JavascriptPolyfill {
   }
 
   func removeTimer(identifier: String) {
+    timerLock.lock()
+    defer { timerLock.unlock() }
+    pendingTimers.remove(identifier)
     let timer = self.timers.removeValue(forKey: identifier)
     timer?.invalidate()
   }
@@ -38,42 +48,55 @@ class JavascriptPolyfill {
     let timeInterval  = ms/1000.0
     let uuid = NSUUID().uuidString
 
-    DispatchQueue.main.async(execute: {
-      let timer = Timer.scheduledTimer(timeInterval: timeInterval,
-                                       target: self,
-                                       selector: #selector(self.callJSCallback),
-                                       userInfo: callback,
-                                       repeats: repeats)
-      self.timers[uuid] = timer
-    })
+    timerLock.lock()
+    guard !stopped else {
+      timerLock.unlock()
+      return uuid
+    }
+    pendingTimers.insert(uuid)
+    timerLock.unlock()
+    DispatchQueue.main.async { [weak self] in
+      guard let self, let plugin = self.plugin, plugin.isActive else { return }
+      self.timerLock.lock()
+      defer { self.timerLock.unlock() }
+      guard self.pendingTimers.remove(uuid) != nil else { return }
+      withExtendedLifetime(plugin) {
+        let timer = Timer.scheduledTimer(timeInterval: timeInterval,
+                                        target: self,
+                                        selector: #selector(self.callJSCallback),
+                                        userInfo: callback,
+                                        repeats: repeats)
+        self.timers[uuid] = timer
+      }
+    }
     return uuid
   }
 
   @objc func callJSCallback(_ timer: Timer) {
-    guard timer.isValid else { return }
+    guard timer.isValid, let plugin, plugin.isActive else { return }
     let callback = (timer.userInfo as! JSValue)
-    callback.call(withArguments: nil)
+    plugin.withActiveContext { callback.call(withArguments: nil) }
   }
 
   func register(inContext context: JSContext) {
-    let setInterval: @convention(block) (JSValue, Double) -> String = { [unowned self] (callback, ms) in
-      return self.createTimer(callback: callback, ms: ms, repeats: true)
+    let setInterval: @convention(block) (JSValue, Double) -> String = { [weak self] (callback, ms) in
+      return self?.createTimer(callback: callback, ms: ms, repeats: true) ?? ""
     }
 
-    let setTimeout: @convention(block) (JSValue, Double) -> String = { [unowned self] (callback, ms) in
-      return self.createTimer(callback: callback, ms: ms, repeats: false)
+    let setTimeout: @convention(block) (JSValue, Double) -> String = { [weak self] (callback, ms) in
+      return self?.createTimer(callback: callback, ms: ms, repeats: false) ?? ""
     }
 
-    let clearInterval: @convention(block) (String) -> () = { [unowned self] identifier in
-      self.removeTimer(identifier: identifier)
+    let clearInterval: @convention(block) (String) -> () = { [weak self] identifier in
+      self?.removeTimer(identifier: identifier)
     }
 
-    let clearTimeout: @convention(block) (String) -> () = { [unowned self] identifier in
-      self.removeTimer(identifier: identifier)
+    let clearTimeout: @convention(block) (String) -> () = { [weak self] identifier in
+      self?.removeTimer(identifier: identifier)
     }
 
-    let require: @convention(block) (String) -> Any? = { [unowned self] path in
-      let instance = self.plugin!
+    let require: @convention(block) (String) -> Any? = { [weak self] path in
+      guard let instance = self?.plugin, instance.isActive else { return nil }
       let currentPath = instance.currentFile!.deletingLastPathComponent()
       let requiredURL = currentPath.appendingPathComponent(path).standardized
       guard requiredURL.absoluteString.hasPrefix(instance.plugin.root.absoluteString) else {

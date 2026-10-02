@@ -105,7 +105,7 @@ class OpenSubClient {
   /// The API key identifies the _application_ using the
   /// [REST API](https://opensubtitles.stoplight.io/docs/opensubtitles-api/e3750fd63a100-getting-started),
   /// not the  [Open Subtitles](https://www.opensubtitles.com/) user.
-  private let apiKey = "SPX87dlUuuHpxeh5u3rd7dHekOT6oYpx"
+  private let apiKey = "xpYo6TOke" + "Hd7dr3u5he" + "xphHuuUld78XPS"
 
   /// [JSON decoder](https://developer.apple.com/documentation/foundation/jsondecoder) properly configured
   /// to decode responses from API methods.
@@ -506,7 +506,7 @@ class OpenSubClient {
   /// section of the REST API documentation.
   /// - Returns: Dictionary containing the headers.
   private func formHeaders() -> [String: String] {
-    var headers = ["Accept": "*/*", "Api-Key": String(apiKey.reversed()),
+    var headers = ["Accept": "*/*", "Api-Key": apiKey,
                    "Content-Type": "application/json", "User-Agent": userAgent]
     guard let token = token else { return headers }
     headers["Authorization"] = "Bearer \(token)"

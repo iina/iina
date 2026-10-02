@@ -185,14 +185,6 @@ class PreferenceWindowController: NSWindowController {
     tableView.dataSource = self
     completionTableView.delegate = self
     completionTableView.dataSource = self
-    
-    // It seems that on Tahoe RC, the sytstem will force to draw titlebar background if there's a scrollview
-    // that overlaps with the titlebar area. We just add an ugly workaround for now and wait for the new settings window.
-    if #available(macOS 26, *) {
-      scrollViewTopConstraint.constant = 32
-      searchFieldTopConstraint.constant = 40
-      searchFieldBottomConstraint.constant = 8
-    }
 
     detailViewBottomConstraint = prefDetailContentView.bottomAnchor.constraint(equalTo: prefDetailContentView.superview!.bottomAnchor)
 
@@ -225,6 +217,10 @@ class PreferenceWindowController: NSWindowController {
       self.makeTries(labelDict)
       self.isIndexing = false
     }
+#if compiler(>=6.2) // only when using Xcode 26+
+    // replace with split view when all subviews are properly loaded
+    setupForLiquidGlass()
+#endif
   }
 
   override func mouseDown(with event: NSEvent) {
@@ -485,6 +481,70 @@ extension PreferenceWindowController: NSTableViewDelegate, NSTableViewDataSource
   }
 
 }
+
+#if compiler(>=6.2)
+extension PreferenceWindowController {
+  func setupForLiquidGlass() {
+    if #available(macOS 26.0, *) {
+      window?.styleMask = [.titled, .miniaturizable, .closable, .resizable, .fullSizeContentView]
+      window?.titlebarAppearsTransparent = false
+      window?.collectionBehavior = .fullScreenAuxiliary
+      let toolbar = NSToolbar(identifier: "preference.window.toolbar") // dummy toolbar to make sidebar merge with titlebar
+      toolbar.displayMode = .iconOnly
+      toolbar.allowsDisplayModeCustomization = false
+      toolbar.allowsUserCustomization = false
+      window?.toolbar = toolbar
+
+      // Setup split controller
+
+      let detailView = NSView()
+      for v in [maskView!, prefDetailScrollView!] {
+        detailView.addSubview(v)
+        v.constraints.forEach(v.removeConstraint(_:))
+      }
+      NSLayoutConstraint.activate([
+        prefDetailScrollView.topAnchor.constraint(equalTo: detailView.topAnchor),
+        prefDetailScrollView.leadingAnchor.constraint(equalTo: detailView.safeAreaLayoutGuide.leadingAnchor),
+        prefDetailScrollView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor),
+        prefDetailScrollView.bottomAnchor.constraint(equalTo: detailView.bottomAnchor),
+
+        maskView.topAnchor.constraint(equalTo: detailView.topAnchor),
+        maskView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor), // stretch all the way under sidebar
+        maskView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor),
+        maskView.bottomAnchor.constraint(equalTo: detailView.bottomAnchor),
+      ])
+      prefDetailScrollView.contentView.automaticallyAdjustsContentInsets = true
+      let splitController = NSSplitViewController()
+      splitController.splitViewItems = [
+        NSSplitViewItem(sidebarWithViewController: SimpleViewController(wrapped: tableView.enclosingScrollView!)),
+        NSSplitViewItem(viewController: SimpleViewController(wrapped: detailView)),
+      ]
+      splitController.splitViewItems.forEach {
+        // allow mask to stretch under side bar
+        $0.automaticallyAdjustsSafeAreaInsets = true
+      }
+      tableView.enclosingScrollView?.contentView.automaticallyAdjustsContentInsets = true
+      NSLayoutConstraint.activate([
+        tableView.enclosingScrollView!.widthAnchor.constraint(equalToConstant: 200),
+      ])
+      splitController.splitViewItems[0].canCollapse = false
+      window?.contentViewController = splitController
+
+      // Setup search field in the side bar
+
+      let searchField = NSSearchField()
+      searchField.controlSize = .large
+      searchField.target = self
+      searchField.action = #selector(searchFieldAction(_:))
+      self.searchField = searchField
+      let accessory = SimpleSplitAccessoryViewController(wrapped: searchField)
+      accessory.view.additionalSafeAreaInsets = .init(top: 9, left: 9, bottom: 9, right: 9)
+
+      splitController.splitViewItems[0].addTopAlignedAccessoryViewController(accessory)
+    }
+  }
+}
+#endif // compiler(>=6.2)
 
 class PrefSearchResultMaskView: NSView {
 

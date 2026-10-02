@@ -538,12 +538,8 @@ struct SettingsItem {
     override func getValueViews() -> [NSView] {
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
-      if #available(macOS 12, *) {
-        popupButton.bezelStyle = .flexiblePush
-      }
+      popupButton.bezelStyle = .flexiblePush
       if #available(macOS 26, *) {
-        popupButton.showsBorderOnlyWhileMouseInside = false
-      } else if #unavailable(macOS 12) {
         popupButton.showsBorderOnlyWhileMouseInside = false
       } else {
         popupButton.showsBorderOnlyWhileMouseInside = true
@@ -732,12 +728,8 @@ struct SettingsItem {
       nsSwitch.target = self
       popupButton = NSPopUpButton()
       popupButton.translatesAutoresizingMaskIntoConstraints = false
-      if #available(macOS 12, *) {
-        popupButton.bezelStyle = .flexiblePush
-      }
+      popupButton.bezelStyle = .flexiblePush
       if #available(macOS 26, *) {
-        popupButton.showsBorderOnlyWhileMouseInside = false
-      } else if #unavailable(macOS 12) {
         popupButton.showsBorderOnlyWhileMouseInside = false
       } else {
         popupButton.showsBorderOnlyWhileMouseInside = true

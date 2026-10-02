@@ -10,13 +10,6 @@ import Cocoa
 import Mustache
 import WebKit
 
-fileprivate let isMacOS11: Bool = {
-  if #unavailable(macOS 12.0) {
-      return true
-  }
-  return false
-}()
-
 fileprivate let InteractiveModeBottomViewHeight: CGFloat = 60
 
 fileprivate let UIAnimationDuration = 0.25
@@ -1000,14 +993,9 @@ class MainWindowController: PlayerWindowController {
       oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
       oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
       oscFloatingView.oscTopView.addView(oscPlayControlView, in: .center)
-
-      // Setting the visibility priority to detach only will cause freeze when resizing the window
-      // (and triggering the detach) in macOS 11.
-      if !isMacOS11 {
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
-        oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      }
+      oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
+      oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
+      oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscFloatingView.oscBottomView.addSubview(oscSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": oscSliderView])
       Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": oscPlayControlView])
@@ -1842,7 +1830,7 @@ class MainWindowController: PlayerWindowController {
     guard let window,
           let screen = window.screen ?? NSScreen.main else {return }
 
-    let unusable = screen.cameraHousingHeight ?? 0
+    let unusable = screen.safeAreaInsets.top
     let frame = NSRect(
       x: screen.frame.minX,
       y: screen.frame.minY,
@@ -1936,36 +1924,6 @@ class MainWindowController: PlayerWindowController {
     // update control bar position
     if oscPosition == .floating {
       oscFloatingView.updatePosition()
-    }
-
-    // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
-    if isMacOS11 && oscPosition == .floating {
-      guard let maxWidth = [oscVolumeView, oscToolbarView].compactMap({ $0?.frame.width }).max() else {
-        return
-      }
-
-      // window - 10 - controlBarFloating
-      // controlBarFloating - 12 - oscFloatingTopView
-      let margin: CGFloat = (10 + 12) * 2
-      let hide = (window.frame.width
-                    - oscPlayControlView.frame.width
-                    - maxWidth*2
-                    - margin) < 0
-
-      let views = oscFloatingView.oscTopView.views
-      if hide {
-        if views.contains(oscVolumeView)
-            && views.contains(oscToolbarView) {
-          oscFloatingView.oscTopView.removeView(oscVolumeView)
-          oscFloatingView.oscTopView.removeView(oscToolbarView)
-        }
-      } else {
-        if !views.contains(oscVolumeView)
-            && !views.contains(oscToolbarView) {
-          oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
-          oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
-        }
-      }
     }
 
     player.events.emit(.windowResized, data: window.frame)

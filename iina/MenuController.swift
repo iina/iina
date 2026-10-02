@@ -671,15 +671,13 @@ class MenuController: NSObject, NSMenuDelegate {
         }
       }
 
-      if #available(macOS 12.0, *) {
-        let devToolItem = NSMenuItem()
-        devToolItem.title = instance.plugin.name
+      let devToolItem = NSMenuItem()
+      devToolItem.title = instance.plugin.name
+      developerTool.submenu?.addItem(
+        menuItem(forPluginInstance: instance, tag: JavasctiptDevTool.JSMenuItemInstance))
+      if let globalInst = instance.plugin.globalInstance {
         developerTool.submenu?.addItem(
-          menuItem(forPluginInstance: instance, tag: JavasctiptDevTool.JSMenuItemInstance))
-        if let globalInst = instance.plugin.globalInstance {
-          developerTool.submenu?.addItem(
-            menuItem(forPluginInstance: globalInst, tag: JavasctiptDevTool.JSMenuItemInstance))
-        }
+          menuItem(forPluginInstance: globalInst, tag: JavasctiptDevTool.JSMenuItemInstance))
       }
     }
 
@@ -692,9 +690,7 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     pluginMenu.addItem(.separator())
-    if #available(macOS 12.0, *) {
-      pluginMenu.addItem(developerTool)
-    }
+    pluginMenu.addItem(developerTool)
     pluginMenu.addItem(reloadPluginsItem)
 
   }

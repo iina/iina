@@ -175,7 +175,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     if thermalState != .nominal {
       Logger.log("Thermal state: \(thermalState)")
     }
-    if #available(macOS 12, *), ProcessInfo.processInfo.isLowPowerModeEnabled {
+    if ProcessInfo.processInfo.isLowPowerModeEnabled {
       Logger.log("Low Power Mode is active")
     }
   }
@@ -802,7 +802,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// This is about conformance to [NSSecureCoding](https://developer.apple.com/documentation/foundation/nssecurecoding)
   /// which protects against object substitution attacks. If an application does not implement this method then a warning will be emitted
   /// reporting secure coding is not enabled for restorable state.
-  @available(macOS 12.0, *)
   @MainActor func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
 
   // MARK: - Accept dropped string and URL

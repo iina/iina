@@ -418,6 +418,7 @@ class TracksVC: NSViewController, InspectorTabUpdating {
     view.addSubview(trackLabel)
     view.addSubview(trackPopup)
     trackLabel.padding(leadingPadding)
+    trackPopup.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     trackPopup.padding(topPadding, trailingPadding)
     trackPopup.spacing(.leading(12), to: trackLabel)
     trackPopup.firstBaselineAnchor.constraint(equalTo: trackLabel.firstBaselineAnchor).isActive = true

@@ -2568,7 +2568,7 @@ class MainWindowController: PlayerWindowController {
       log("Constrained window frame to be in screen: \(rect)")
     }
 
-    if player.info.justOpenedFile && !Preference.bool(for: .edgeToEdgeVideo) {
+    if player.info.justOpenedFile && !Preference.bool(for: .edgeToEdgeVideo) && Preference.bool(for: .dockedControlBarAndTitlebar) {
       rect.size.height += titleBarView.frame.height
     }
 

@@ -617,6 +617,12 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   func updateTitle() {
     fatalError("Must implement in the subclass")
   }
+
+  @objc
+  func showLoadingScreen(for url: URL?) {}
+
+  @objc
+  func hideLoadingScreen() {}
   
   func updateVolume() {
     volumeSlider.doubleValue = player.info.volume

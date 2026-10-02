@@ -26,6 +26,13 @@ class KeyCodeHelper {
 
   fileprivate static let modifierSymbols: [(NSEvent.ModifierFlags, String)] = [(.control, "⌃"), (.option, "⌥"), (.shift, "⇧"), (.command, "⌘")]
 
+  private static let readableNumpadKeyNames: [String: String] = [
+    "KP_DEC": "Keypad Decimal",
+    "KP_ENTER": "Keypad Enter",
+    "KP_DEL": "Keypad Delete",
+    "KP_INS": "Keypad Insert",
+  ]
+
   static let keyMap: [UInt16 : (String, String?)] = [
     0x00: ("a", "A"),
     0x01: ("s", "S"),
@@ -274,7 +281,11 @@ class KeyCodeHelper {
     let keyCode = event.keyCode
     var modifiers = event.modifierFlags
 
-    if let char = event.charactersIgnoringModifiers, isPrintable(char) {
+    if modifiers.contains(.numericPad), let keyName = KeyCodeHelper.keyMap[keyCode], keyName.0.hasPrefix("KP") {
+      /// Numpad keys have dedicated mpv key names (`KP0`-`KP9`, `KP_DEC`) and would otherwise be
+      /// indistinguishable from the number row, because their chars are printable (#4898).
+      keyChar = keyName.0
+    } else if let char = event.charactersIgnoringModifiers, isPrintable(char) {
       // Is a classic ASCII printable char.
       keyChar = char
       /// The char in `charactersIgnoringModifiers` will be either uppercase or lowercase,
@@ -416,23 +427,41 @@ class KeyCodeHelper {
   static func macOSKeyEquivalent(from normalizedMpvKey: String, usePrintableKeyName: Bool = false) -> (key: String, modifiers: NSEvent.ModifierFlags)? {
     let splitted = normalizedMpvKey.components(separatedBy: "+")
     var key: String
-    var modifiers: NSEvent.ModifierFlags = []
     guard !splitted.isEmpty else { return nil }
     key = splitted.last!
-    splitted.dropLast().forEach { k in
-      switch k {
-      case META_KEY: modifiers.insert(.command)
-      case CTRL_KEY: modifiers.insert(.control)
-      case ALT_KEY: modifiers.insert(.option)
-      case SHIFT_KEY: modifiers.insert(.shift)
-      default: break
-      }
-    }
+    /// Numpad keys have no `NSMenuItem` representation: a key equivalent degraded to the number-row
+    /// char would also match the number-row key, running the wrong action when both keys are bound
+    /// (#4898). `IINAApplication.sendEvent` delivers numpad keys to the player window instead.
+    /// Returning `nil` also makes the settings UI fall back to the distinguishable mpv name (`KP5`).
+    guard !key.hasPrefix("KP") else { return nil }
+    let modifiers = modifierFlags(from: splitted.dropLast())
     if let realKey = (usePrintableKeyName ? mpvSymbolToPrettyMacKey : mpvSymbolToKeyChar)[key] {
       key = realKey
     }
     guard key.count == 1 else { return nil }
     return (key, modifiers)
+  }
+
+  /// Returns a human-readable label for a normalized mpv keypad key.
+  static func readableNumpadKey(from normalizedMpvKey: String) -> String? {
+    let components = normalizedMpvKey.components(separatedBy: "+")
+    guard let mpvKey = components.last,
+          let readableKey = readableNumpadKeyName(for: mpvKey) else { return nil }
+    let modifiers = modifierFlags(from: components.dropLast())
+    let modifierPrefix = modifierSymbols.map { modifiers.contains($0.0) ? $0.1 : "" }.joined()
+    return modifierPrefix + readableKey
+  }
+
+  /// Returns the normalized keypad twin for a number-row digit or decimal key.
+  static func numpadTwin(forNumberRowKey normalizedMpvKey: String) -> String? {
+    let digitTwin = normalizedMpvKey.replacingOccurrences(
+      of: "(^|\\+)(\\d)$", with: "$1KP$2", options: .regularExpression)
+    if digitTwin != normalizedMpvKey {
+      return digitTwin
+    }
+    let decimalTwin = normalizedMpvKey.replacingOccurrences(
+      of: "(^|\\+)\\.$", with: "$1KP_DEC", options: .regularExpression)
+    return decimalTwin == normalizedMpvKey ? nil : decimalTwin
   }
 
   // Formats a MacOS (key, modifiers) pair into a MacOS-formatted display string.
@@ -446,6 +475,25 @@ class KeyCodeHelper {
     return modifierSymbols.map { modifiers.contains($0.0) ? $0.1 : "" }
       .joined()
       .appending(key)
+  }
+
+  private static func readableNumpadKeyName(for mpvKey: String) -> String? {
+    if mpvKey.count == 3, mpvKey.hasPrefix("KP"), let digit = mpvKey.last, digit.isNumber {
+      return "Keypad \(digit)"
+    }
+    return readableNumpadKeyNames[mpvKey]
+  }
+
+  private static func modifierFlags(from modifierNames: ArraySlice<String>) -> NSEvent.ModifierFlags {
+    modifierNames.reduce(into: []) { modifiers, name in
+      switch name {
+      case META_KEY: modifiers.insert(.command)
+      case CTRL_KEY: modifiers.insert(.control)
+      case ALT_KEY: modifiers.insert(.option)
+      case SHIFT_KEY: modifiers.insert(.shift)
+      default: break
+      }
+    }
   }
 }
 

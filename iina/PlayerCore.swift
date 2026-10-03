@@ -2206,8 +2206,7 @@ class PlayerCore: NSObject {
     checkUnsyncedWindowOptions()
     // call `trackListChanged` to load tracks and check whether need to switch to music mode
     trackListChanged()
-    // Generate thumbnails after the selected video track is known so the public
-    // thumbnail identity cannot be bound to the previous file's track.
+    // Bind thumbnails to the loaded file's selected video track.
     if mainWindow.isVideoLoaded {
       generateThumbnails()
     }
@@ -2910,8 +2909,7 @@ class PlayerCore: NSObject {
     )
   }
 
-  /// Keep the existing file cache format while separating thumbnail sets by the
-  /// video track selected for this playback session.
+  /// Separate cache entries by file metadata and selected video track.
   private func timelineThumbnailCacheName(for identity: TimelineThumbnailMediaIdentity) -> String? {
     guard let baseName = info.mpvMd5 else { return nil }
     let trackKey = identity.videoTrack.map {
@@ -3030,7 +3028,7 @@ class PlayerCore: NSObject {
           self.info.thumbnailsProgress = 1
           self.refreshTouchBarSlider()
           self.timelineThumbnailBroker.publishReady(thumbnails, for: session)
-          // Keep the existing event useful and make cache-hit and fresh paths equivalent.
+          // Match the fresh-generation ready event.
           self.events.emit(.thumbnailsReady)
           DispatchQueue.main.async { NowPlayingInfoManager.shared.updateInfo() }
         }

@@ -44,8 +44,7 @@ class ThumbnailCache {
       return false
     }
 
-    // modified date (stored with sub-second precision so a same-size edit
-    // within one second cannot reuse an older cache)
+    // Sub-second mtime detects same-size edits within one second.
     guard let fileModifiedDate = fileAttr[.modificationDate] as? Date else {
       log("Cannot get video file modification date", level: .error)
       return false
@@ -166,8 +165,7 @@ class ThumbnailCache {
     log("Finished writing thumbnail cache.")
   }
 
-  /// Read thumbnail cache to file.
-  /// This method is expected to be called when the file exists.
+  /// Read a validated cache entry, or discard corrupt data.
   static func read(forName name: String) -> [FFThumbnail]? {
     log("Reading thumbnail cache...")
 
@@ -180,9 +178,7 @@ class ThumbnailCache {
 
     var result: [FFThumbnail] = []
 
-    // Validate and consume metadata before reading image blocks. Older cache
-    // versions are intentionally discarded because they only stored integer
-    // modification timestamps.
+    // Reject old cache versions lacking sub-second timestamps.
     guard file.read(type: CacheVersion.self) == version,
           file.read(type: FileSize.self) != nil,
           file.read(type: FileTimestamp.self) != nil else {

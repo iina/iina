@@ -60,8 +60,7 @@ func identity(_ id: String = "session-1") -> TimelineThumbnailMediaIdentity {
                                  fileID: 1, videoTrack: nil)
 }
 
-// A synchronous subscription flushes the broker's serial work queue and reads
-// the actual production snapshot, including background JPEG encoding.
+// Subscribe synchronously to flush encoding and capture the current snapshot.
 func snapshot(_ broker: TimelineThumbnailBroker) throws -> TimelineThumbnailUpdate {
   var update: TimelineThumbnailUpdate?
   let token = broker.subscribe { update = $0 }

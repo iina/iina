@@ -2,9 +2,7 @@
 //  TimelineThumbnailBroker.swift
 //  iina
 //
-//  Provides the player-scoped, read-only timeline thumbnail stream used by
-//  JavaScript plugins. The broker owns no FFmpeg controls; PlayerCore feeds it
-//  already decoded IINA thumbnails after validating the media session.
+//  Streams session-validated IINA thumbnails to JavaScript plugins.
 //
 
 import Cocoa

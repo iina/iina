@@ -145,8 +145,7 @@ return -1;\
   ret = avformat_find_stream_info(pFormatCtx, NULL);
   CHECK_SUCCESS(ret, @"Cannot get stream info")
 
-  // Select the requested FFmpeg stream when mpv provided its ff-index. Keep
-  // the historical first-video fallback for formats without that mapping.
+  // Use mpv's ff-index, or the first video stream when unavailable.
   int videoStream = -1;
   for (i = 0; i < pFormatCtx->nb_streams; i++)
     if (pFormatCtx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO &&

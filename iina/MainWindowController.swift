@@ -3016,7 +3016,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     let mouseXPos = playSlider.convert(posInWindow, from: nil).x
-    let percentage = max(0, Double((mouseXPos - 3) / (playSlider.bounds.width - 6)))
+    let percentage = min(1, max(0, Double((mouseXPos - 3) / (playSlider.bounds.width - 6))))
 
     timePreviewView.isHidden = false
     let previewTime = duration * percentage

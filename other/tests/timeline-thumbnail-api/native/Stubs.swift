@@ -18,6 +18,31 @@ final class MPVTrack {
   var demuxFps: Double?
 }
 
+final class PlayerCore: NSObject {
+  let timelineThumbnailBroker = TimelineThumbnailBroker()
+  func validateTimelineThumbnailSession() { }
+}
+
+final class JavascriptPluginInstance: NSObject {
+  weak var player: PlayerCore?
+}
+
+class JavascriptAPI: NSObject {
+  weak var context: JSContext!
+  weak var player: PlayerCore?
+
+  init(context: JSContext, pluginInstance: JavascriptPluginInstance) {
+    self.context = context
+    self.player = pluginInstance.player
+  }
+
+  func throwError(withMessage message: String) {
+    context.exception = JSValue(newErrorFromMessage: message, in: context)
+  }
+
+  func cleanUp(_ instance: JavascriptPluginInstance) { }
+}
+
 func createUInt8Array(fromData data: Data, in suppliedContext: JSContext? = nil) -> JSValue? {
   fatalError("The native broker tests do not exercise JavaScript transfer")
 }

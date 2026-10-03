@@ -20,19 +20,22 @@ private final class JavascriptTimelineThumbnailSubscription {
   private let virtualMachine: JSVirtualMachine
   private let pendingLock = NSLock()
   private var pending: TimelineThumbnailUpdate?
+  private var pendingInvalidation: TimelineThumbnailUpdate?
   private var deliveryScheduled = false
   private var active = true
+  private var callbackRetained = true
 
   init(id: String, callback: JSValue, owner: JavascriptAPIThumbnails, virtualMachine: JSVirtualMachine) {
     self.id = id
     self.owner = owner
     self.callback = JSManagedValue(value: callback)
     self.virtualMachine = virtualMachine
-    self.virtualMachine.addManagedReference(self.callback, withOwner: self)
+    // The exported API is reachable from JavaScript; the native subscription is not.
+    self.virtualMachine.addManagedReference(self.callback, withOwner: owner)
   }
 
   deinit {
-    virtualMachine.removeManagedReference(callback, withOwner: self)
+    cancel()
   }
 
   func enqueue(_ update: TimelineThumbnailUpdate) {
@@ -41,40 +44,68 @@ private final class JavascriptTimelineThumbnailSubscription {
       pendingLock.unlock()
       return
     }
-    pending = update
+    if update.state == .invalidated {
+      pendingInvalidation = pendingInvalidation ?? update
+      pending = nil
+    } else {
+      pending = update
+    }
     let shouldSchedule = !deliveryScheduled
     deliveryScheduled = true
     pendingLock.unlock()
 
     guard shouldSchedule else { return }
-    DispatchQueue.main.async { [weak self] in
-      self?.deliverPending()
-    }
+    scheduleDelivery()
   }
 
   func cancel() {
     pendingLock.lock()
     active = false
     pending = nil
+    pendingInvalidation = nil
     deliveryScheduled = false
+    let shouldReleaseCallback = callbackRetained
+    callbackRetained = false
     pendingLock.unlock()
+    if shouldReleaseCallback, let owner {
+      virtualMachine.removeManagedReference(callback, withOwner: owner)
+    }
+  }
+
+  private func scheduleDelivery() {
+    DispatchQueue.main.async { [weak self] in
+      self?.deliverPending()
+    }
   }
 
   private func deliverPending() {
     pendingLock.lock()
     guard active else {
       pending = nil
+      pendingInvalidation = nil
       deliveryScheduled = false
       pendingLock.unlock()
       return
     }
-    let update = pending
-    pending = nil
+    let update: TimelineThumbnailUpdate?
+    if let invalidation = pendingInvalidation {
+      update = invalidation
+      pendingInvalidation = nil
+    } else {
+      update = pending
+      pending = nil
+    }
     deliveryScheduled = false
     pendingLock.unlock()
 
     guard let update, let owner, owner.isActive else { return }
     owner.deliver(update, to: self)
+
+    pendingLock.lock()
+    let shouldSchedule = active && !deliveryScheduled && (pendingInvalidation != nil || pending != nil)
+    if shouldSchedule { deliveryScheduled = true }
+    pendingLock.unlock()
+    if shouldSchedule { scheduleDelivery() }
   }
 
   func callbackValue() -> JSValue? {

@@ -1,4 +1,5 @@
 import Cocoa
+import JavaScriptCore
 
 struct TestFailure: Error, CustomStringConvertible {
   let description: String
@@ -196,6 +197,105 @@ func testInvalidationDropsQueuedResults() throws {
   try expect(ready.thumbnails.count == 1, "Current session did not encode")
 }
 
+final class BridgeFixture {
+  let context = JSContext()!
+  let player = PlayerCore()
+  let instance = JavascriptPluginInstance()
+  let api: JavascriptAPIThumbnails
+
+  init(_ callback: String = "function(update) { events.push({state: update.state, session: update.media && update.media.sessionId}); }") {
+    instance.player = player
+    api = JavascriptAPIThumbnails(context: context, pluginInstance: instance)
+    context.setObject(api, forKeyedSubscript: "thumbnails" as NSString)
+    autoreleasepool {
+      _ = context.evaluateScript("var events = []; var subscription = thumbnails.subscribe(\(callback));")
+    }
+  }
+
+  deinit { api.cleanUp(instance) }
+
+  func drain() {
+    autoreleasepool {
+      RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.05))
+    }
+  }
+
+  func states() -> [String] {
+    context.evaluateScript("events.map(function(event) { return event.state; })")?.toArray() as? [String] ?? []
+  }
+}
+
+func testCallbackSurvivesJavaScriptGC() throws {
+  let fixture = BridgeFixture()
+  fixture.drain()
+  for _ in 0..<3 {
+    autoreleasepool {
+      _ = fixture.context.evaluateScript("(function() { var garbage = []; for (var i = 0; i < 1024; i++) garbage.push(new Array(4096).fill(i)); })();")
+    }
+  }
+  JSGarbageCollect(fixture.context.jsGlobalContextRef)
+  let session = fixture.player.timelineThumbnailBroker.beginSession(identity(), cacheName: nil)
+  fixture.drain()
+  fixture.player.timelineThumbnailBroker.publishReady([], for: session)
+  _ = try snapshot(fixture.player.timelineThumbnailBroker)
+  fixture.drain()
+  try expect(fixture.states().suffix(2) == ["generating", "ready"],
+             "Callback was collected while the subscription remained active")
+}
+
+func testInvalidationPrecedesReplacementSession() throws {
+  let fixture = BridgeFixture()
+  fixture.drain()
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity("old"), cacheName: nil)
+  fixture.drain()
+  fixture.context.evaluateScript("events = [];")
+  fixture.player.timelineThumbnailBroker.invalidate(reason: "video-track-changed")
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity("new"), cacheName: nil)
+  fixture.drain()
+  try expect(fixture.states() == ["invalidated", "generating"], "Invalidation was coalesced away")
+  let sessions = fixture.context.evaluateScript("events.map(function(event) { return event.session; })")?.toArray() as? [String]
+  try expect(sessions == ["old", "new"], "Invalidation/replacement media identity changed")
+}
+
+func testUnsubscribeDuringInvalidationStopsReplacement() throws {
+  let fixture = BridgeFixture("function(update) { events.push({state: update.state}); if (update.state === 'invalidated') thumbnails.unsubscribe(subscription); }")
+  fixture.drain()
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity("old"), cacheName: nil)
+  fixture.drain()
+  fixture.context.evaluateScript("events = [];")
+  fixture.player.timelineThumbnailBroker.invalidate(reason: "file-changed")
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity("new"), cacheName: nil)
+  fixture.drain()
+  try expect(fixture.states() == ["invalidated"], "Replacement callback ran after unsubscribe")
+}
+
+func testRapidReplacementKeepsOldInvalidationAndLatestSession() throws {
+  let fixture = BridgeFixture()
+  fixture.drain()
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity("old"), cacheName: nil)
+  fixture.drain()
+  fixture.context.evaluateScript("events = [];")
+  fixture.player.timelineThumbnailBroker.invalidate(reason: "video-track-changed")
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity("intermediate"), cacheName: nil)
+  fixture.player.timelineThumbnailBroker.invalidate(reason: "video-track-changed")
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity("latest"), cacheName: nil)
+  fixture.drain()
+  try expect(fixture.states() == ["invalidated", "generating"], "Rapid replacements emitted extra or missing callbacks")
+  let sessions = fixture.context.evaluateScript("events.map(function(event) { return event.session; })")?.toArray() as? [String]
+  try expect(sessions == ["old", "latest"], "An intermediate session crossed the invalidation barrier")
+}
+
+func testCleanupStopsQueuedJavaScriptDelivery() throws {
+  let fixture = BridgeFixture()
+  fixture.drain()
+  fixture.context.evaluateScript("events = [];")
+  _ = fixture.player.timelineThumbnailBroker.beginSession(identity(), cacheName: nil)
+  fixture.api.cleanUp(fixture.instance)
+  JSGarbageCollect(fixture.context.jsGlobalContextRef)
+  fixture.drain()
+  try expect(fixture.states().isEmpty, "Queued callback survived plugin cleanup")
+}
+
 let tests: [(String, () throws -> Void)] = [
   ("fresh CGImage partial/ready", testFreshCGImagePartialAndReady),
   ("cache-decoded ready", testCacheDecodedImageReady),
@@ -203,7 +303,12 @@ let tests: [(String, () throws -> Void)] = [
   ("cumulative count bound", testCumulativeCountBound),
   ("per-image JPEG byte bound", testPerImageByteBound),
   ("cumulative JPEG byte bound", testCumulativeByteBound),
-  ("session invalidation", testInvalidationDropsQueuedResults)
+  ("session invalidation", testInvalidationDropsQueuedResults),
+  ("callback survives JavaScript GC", testCallbackSurvivesJavaScriptGC),
+  ("invalidation delivery barrier", testInvalidationPrecedesReplacementSession),
+  ("unsubscribe during invalidation", testUnsubscribeDuringInvalidationStopsReplacement),
+  ("rapid replacement barrier", testRapidReplacementKeepsOldInvalidationAndLatestSession),
+  ("queued callback cleanup", testCleanupStopsQueuedJavaScriptDelivery)
 ]
 var failures = 0
 for (name, test) in tests {

@@ -10,8 +10,12 @@ finish with `ready`. Each thumbnail exposes `timestamp()`, `width()`,
 
 `media` contains the opaque session ID, file URL and metadata, and selected
 video-track identity. IINA drops stale results when any of those identities
-changes. Delivery is main-thread coalesced and images are JPEG-encoded before
-crossing the bridge; IINA bounds an update to 128 items, 256 KiB per item, and
+changes. Delivery is main-thread coalesced: intermediate `generating` and
+`partial` snapshots may be skipped. Invalidation is delivered before a
+replacement session's snapshot; rapid changes may skip unobserved sessions.
+A session that completes without invalidation reaches `ready` while its
+subscription remains active. Images are JPEG-encoded before crossing the
+bridge; IINA bounds an update to 128 items, 256 KiB per item, and
 8 MiB total. The API is read-only and never exposes cache paths or FFmpeg
 controls. Subscriptions are removed automatically when a plugin instance is
 unloaded.
@@ -39,4 +43,8 @@ type stubs. It runs actual AppKit JPEG encoding on the broker queue for fresh
 `NSImage(cgImage:)` frames and cache-decoded images, checks partial/ready pixels
 and timestamps, image dimensions, actual per-image/cumulative JPEG byte limits,
 count limits, and session invalidation.
-It does not exercise FFmpeg generation or the JavaScript/WebView bridge.
+It also compiles the production JavaScript bridge and checks callback survival
+under JavaScriptCore garbage collection, ordered invalidation before a replacement
+session, rapid replacements, unsubscribe during a callback, and plugin cleanup.
+It does not exercise FFmpeg generation, the player's media identity capture,
+or WebView transfer.

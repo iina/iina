@@ -222,8 +222,12 @@ class PlayerCore: NSObject {
   var plugins: [JavascriptPluginInstance] = []
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
   var events = EventController()
+  let timelineThumbnailBroker = TimelineThumbnailBroker()
+  @Atomic private var thumbnailSession: TimelineThumbnailBroker.Session? = nil
+  private var ffmpegControllerWasInitialized = false
 
   lazy var ffmpegController: FFmpegController = {
+    ffmpegControllerWasInitialized = true
     let controller = FFmpegController()
     controller.delegate = self
     return controller
@@ -536,6 +540,7 @@ class PlayerCore: NSObject {
   ///   - isNetwork: Whether the media must be streamed over the network.
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
     log("Opening \(path) in main window")
+    invalidateTimelineThumbnailSession(reason: "file-changed")
     info.currentURL = url
     info.mpvMd5 = Utility.mpvWatchLaterMd5(url, ignorePathInWatchLaterConfig)
     info.isNetworkResource = isNetwork
@@ -740,6 +745,7 @@ class PlayerCore: NSObject {
     let isMPVInitiated = info.state != .shuttingDown
     let suffix = isMPVInitiated ? " (initiated by mpv)" : ""
     log("Player has shutdown\(suffix)")
+    invalidateTimelineThumbnailSession(reason: "playback-session-changed")
     info.state = .shutDown
     if isMPVInitiated {
       // The user must have used mpv's IPC interface to send a quit command directly to mpv. Must
@@ -2074,6 +2080,7 @@ class PlayerCore: NSObject {
   func fileStarted(path: String) {
     guard info.state.active else { return }
     log("File started")
+    invalidateTimelineThumbnailSession(reason: "playback-session-changed")
 
     Task { @MainActor in
       mainWindow.liveText.clearAnalysis()
@@ -2197,12 +2204,13 @@ class PlayerCore: NSObject {
     info.videoRemaining = VideoTime(remaining)
     triedUsingExactSeekForCurrentFile = false
     checkUnsyncedWindowOptions()
-    // generate thumbnails if window has loaded video
+    // call `trackListChanged` to load tracks and check whether need to switch to music mode
+    trackListChanged()
+    // Generate thumbnails after the selected video track is known so the public
+    // thumbnail identity cannot be bound to the previous file's track.
     if mainWindow.isVideoLoaded {
       generateThumbnails()
     }
-    // call `trackListChanged` to load tracks and check whether need to switch to music mode
-    trackListChanged()
     getPlaylist()
     getChapters()
     syncAbLoop()
@@ -2362,6 +2370,7 @@ class PlayerCore: NSObject {
     }
     if info.state != .loading {
       log("Playback has stopped")
+      invalidateTimelineThumbnailSession(reason: "playback-session-changed")
       info.state = .idle
       postNotification(.iinaPlayerStopped)
       if let pendingUrl {
@@ -2540,6 +2549,7 @@ class PlayerCore: NSObject {
     log("Track list changed")
     getTrackInfo()
     getSelectedTracks()
+    refreshTimelineThumbnailSessionForTrackChange()
     let audioStatus = info.isAudio
 
     // Now Playing is first updated when the file starts, before the track list is known, so the
@@ -2595,6 +2605,7 @@ class PlayerCore: NSObject {
   func vidChanged() {
     guard info.state.active else { return }
     info.vid = Int(mpv.getInt(MPVOption.TrackSelection.vid))
+    refreshTimelineThumbnailSessionForTrackChange()
     postNotification(.iinaVIDChanged)
     sendOSD(.track(info.currentTrack(.video) ?? .noneVideoTrack))
     if isInMiniPlayer {
@@ -2890,8 +2901,85 @@ class PlayerCore: NSObject {
     }
   }
 
+  private func currentTimelineThumbnailIdentity(sessionID: String) -> TimelineThumbnailMediaIdentity? {
+    guard let url = info.currentURL else { return nil }
+    return TimelineThumbnailMediaIdentity.make(
+      url: url,
+      track: info.currentTrack(.video),
+      sessionID: sessionID
+    )
+  }
+
+  /// Keep the existing file cache format while separating thumbnail sets by the
+  /// video track selected for this playback session.
+  private func timelineThumbnailCacheName(for identity: TimelineThumbnailMediaIdentity) -> String? {
+    guard let baseName = info.mpvMd5 else { return nil }
+    let trackKey = identity.videoTrack.map {
+      [
+        "id=\($0.id.map { String($0) } ?? "nil")",
+        "source=\($0.sourceID.map { String($0) } ?? "nil")",
+        "codec=\($0.codec ?? "nil")",
+        "external=\($0.externalFilename ?? "nil")",
+        "ff=\($0.ffIndex.map { String($0) } ?? "nil")",
+        "width=\($0.width.map { String($0) } ?? "nil")",
+        "height=\($0.height.map { String($0) } ?? "nil")",
+        "fps=\($0.frameRate.map { String($0) } ?? "nil")"
+      ].joined(separator: "|")
+    } ?? "none"
+    let fileID = identity.fileID.map { String($0) } ?? "none"
+    let cacheIdentity = "\(identity.url)|\(fileID)|\(identity.fileSize)|\(identity.modificationDate)|\(trackKey)"
+    return "\(baseName)-timeline-\(cacheIdentity.md5)"
+  }
+
+  func validateTimelineThumbnailSession() {
+    guard let session = thumbnailSession else { return }
+    guard let current = currentTimelineThumbnailIdentity(sessionID: session.identity.sessionID),
+          current.key == session.identity.key else {
+      invalidateTimelineThumbnailSession(reason: "media-changed")
+      return
+    }
+  }
+
+  private func invalidateTimelineThumbnailSession(reason: String) {
+    thumbnailSession = nil
+    if ffmpegControllerWasInitialized {
+      ffmpegController.cancelThumbnailGeneration()
+    }
+    timelineThumbnailBroker.invalidate(reason: reason)
+  }
+
+  private func refreshTimelineThumbnailSessionForTrackChange() {
+    guard let session = thumbnailSession else { return }
+    guard let current = currentTimelineThumbnailIdentity(sessionID: session.identity.sessionID),
+          current.key == session.identity.key else {
+      invalidateTimelineThumbnailSession(reason: "video-track-changed")
+      if info.state.loaded && mainWindow.isVideoLoaded {
+        generateThumbnails()
+      }
+      return
+    }
+  }
+
+  private func thumbnailSessionMatchesFile(_ session: TimelineThumbnailBroker.Session, filename: String) -> Bool {
+    let url = URL(fileURLWithPath: filename)
+    guard url.absoluteString == session.identity.url,
+          let attributes = try? FileManager.default.attributesOfItem(atPath: filename),
+          let fileSize = attributes[.size] as? NSNumber,
+          let modified = attributes[.modificationDate] as? Date else {
+      return false
+    }
+    if let sessionFileID = session.identity.fileID,
+       let currentFileID = (attributes[.systemFileNumber] as? NSNumber)?.uint64Value,
+       sessionFileID != currentFileID {
+      return false
+    }
+    return fileSize.int64Value == session.identity.fileSize &&
+      modified.timeIntervalSince1970 == session.identity.modificationDate
+  }
+
   func generateThumbnails() {
     log("Getting thumbnails")
+    invalidateTimelineThumbnailSession(reason: "new-generation")
     info.thumbnailsReady = false
     info.$thumbnails.withLock { $0.removeAll(keepingCapacity: true) }
     info.thumbnailsProgress = 0
@@ -2908,29 +2996,53 @@ class PlayerCore: NSObject {
         return
       }
     }
-    if Preference.bool(for: .enableThumbnailPreview) {
-      if let cacheName = info.mpvMd5, ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
-        log("Found thumbnail cache")
-        thumbnailQueue.async {
-          if let thumbnails = ThumbnailCache.read(forName: cacheName) {
-            self.info.thumbnails = thumbnails
-            self.info.thumbnailsReady = true
-            self.info.thumbnailsProgress = 1
-            self.refreshTouchBarSlider()
-            // OSC thumbnails may be used in Now Playing. Notify the manager thumbnails are now
-            // available.
-            DispatchQueue.main.async { NowPlayingInfoManager.shared.updateInfo() }
-          } else {
-            self.log("Cannot read thumbnail from cache", level: .error)
+    guard Preference.bool(for: .enableThumbnailPreview),
+          let identity = currentTimelineThumbnailIdentity(sessionID: UUID().uuidString) else {
+      log("...stopped because thumbnail preview is disabled or media identity is unavailable", level: .warning)
+      return
+    }
+
+    let cacheName = timelineThumbnailCacheName(for: identity)
+    let session = timelineThumbnailBroker.beginSession(identity, cacheName: cacheName)
+    thumbnailSession = session
+
+    if let cacheName = session.cacheName,
+       ThumbnailCache.fileIsCached(forName: cacheName, forVideo: info.currentURL) {
+      log("Found thumbnail cache")
+      thumbnailQueue.async { [weak self] in
+        guard let self else { return }
+        let thumbnails = ThumbnailCache.read(forName: cacheName)
+        DispatchQueue.main.async { [weak self] in
+          guard let self else { return }
+          guard self.thumbnailSession == session else { return }
+          guard self.thumbnailSessionMatchesFile(session, filename: url.path),
+                let current = self.currentTimelineThumbnailIdentity(sessionID: session.identity.sessionID),
+                current.key == session.identity.key else {
+            self.invalidateTimelineThumbnailSession(reason: "stale-cache-result")
+            return
           }
+          guard let thumbnails else {
+            self.timelineThumbnailBroker.publishFailure("cache-read-failed", for: session)
+            return
+          }
+          self.info.thumbnails = thumbnails
+          self.info.thumbnailsReady = true
+          self.info.thumbnailsProgress = 1
+          self.refreshTouchBarSlider()
+          self.timelineThumbnailBroker.publishReady(thumbnails, for: session)
+          // Keep the existing event useful and make cache-hit and fresh paths equivalent.
+          self.events.emit(.thumbnailsReady)
+          DispatchQueue.main.async { NowPlayingInfoManager.shared.updateInfo() }
         }
-      } else {
-        log("Request new thumbnails")
-        ffmpegController.generateThumbnail(
-          forFile: url.path,
-          thumbWidth:Int32(Preference.integer(for: .thumbnailWidth)) * 2
-        )
       }
+    } else {
+      log("Request new thumbnails")
+      ffmpegController.generateThumbnail(
+        forFile: url.path,
+        thumbWidth: Int32(Preference.integer(for: .thumbnailWidth)) * 2,
+        videoStreamIndex: session.identity.videoTrack?.ffIndex.map { NSNumber(value: $0) },
+        requestID: session.token
+      )
     }
   }
 
@@ -3203,32 +3315,65 @@ class PlayerCore: NSObject {
 
 extension PlayerCore: FFmpegControllerDelegate {
 
-  func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
-    log("Got new thumbnails, progress \(progress)")
-    if let thumbnails {
-      info.$thumbnails.withLock { $0.append(contentsOf: thumbnails) }
+  func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int, requestID: String) {
+    guard let session = thumbnailSession else { return }
+    guard session.token == requestID else { return }
+    DispatchQueue.main.async { [weak self] in
+      guard let self, self.thumbnailSession == session else { return }
+      guard self.thumbnailSessionMatchesFile(session, filename: filename),
+            let current = self.currentTimelineThumbnailIdentity(sessionID: session.identity.sessionID),
+            current.key == session.identity.key else {
+        if self.thumbnailSession == session {
+          self.invalidateTimelineThumbnailSession(reason: "stale-generation-result")
+        }
+        return
+      }
+      self.log("Got new thumbnails, progress \(progress)")
+      if let thumbnails {
+        self.info.$thumbnails.withLock { $0.append(contentsOf: thumbnails) }
+      }
+      let normalizedProgress = min(max(Double(progress) / Double(max(self.ffmpegController.thumbnailCount, 1)), 0), 1)
+      self.info.thumbnailsProgress = normalizedProgress
+      self.refreshTouchBarSlider()
+      self.timelineThumbnailBroker.publishPartial(thumbnails ?? [], progress: normalizedProgress, for: session)
     }
-    info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)
-    refreshTouchBarSlider()
   }
 
-  func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool) {
-    guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
-    log("Got all thumbnails, succeeded=\(succeeded)")
-    if succeeded {
-      info.thumbnails = thumbnails
-      info.thumbnailsReady = true
-      info.thumbnailsProgress = 1
-      refreshTouchBarSlider()
+  func didGenerate(_ thumbnails: [FFThumbnail], forFile filename: String, succeeded: Bool, requestID: String) {
+    guard let session = thumbnailSession else { return }
+    guard session.token == requestID else { return }
+    DispatchQueue.main.async { [weak self] in
+      guard let self, self.thumbnailSession == session else { return }
+      guard self.thumbnailSessionMatchesFile(session, filename: filename),
+            let current = self.currentTimelineThumbnailIdentity(sessionID: session.identity.sessionID),
+            current.key == session.identity.key else {
+        if self.thumbnailSession == session {
+          self.invalidateTimelineThumbnailSession(reason: "stale-generation-result")
+        }
+        return
+      }
+      self.log("Got all thumbnails, succeeded=\(succeeded)")
+      guard succeeded else {
+        self.timelineThumbnailBroker.publishFailure("generation-failed", for: session)
+        return
+      }
+      self.info.thumbnails = thumbnails
+      self.info.thumbnailsReady = true
+      self.info.thumbnailsProgress = 1
+      self.refreshTouchBarSlider()
+      self.timelineThumbnailBroker.publishReady(thumbnails, for: session)
       // OSC thumbnails may be used in Now Playing. Notify the manager thumbnails are now available.
-      DispatchQueue.main.async { NowPlayingInfoManager.shared.updateInfo() }
-      if let cacheName = info.mpvMd5 {
-        backgroundQueue.async {
-          ThumbnailCache.write(self.info.thumbnails, forName: cacheName, forVideo: self.info.currentURL)
+      NowPlayingInfoManager.shared.updateInfo()
+      self.events.emit(.thumbnailsReady)
+      if let cacheName = session.cacheName {
+        let fileURL = URL(fileURLWithPath: filename)
+        self.backgroundQueue.async { [weak self] in
+          guard let self,
+                self.thumbnailSession == session,
+                self.thumbnailSessionMatchesFile(session, filename: filename) else { return }
+          ThumbnailCache.write(thumbnails, forName: cacheName, forVideo: fileURL)
         }
       }
-      events.emit(.thumbnailsReady)
     }
   }
 }

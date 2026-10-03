@@ -22,12 +22,12 @@
 /**
  A notification being sent
  */
-- (void)didUpdateThumbnails:(nullable NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename withProgress:(NSInteger)progress;
+- (void)didUpdateThumbnails:(nullable NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename withProgress:(NSInteger)progress requestID:(nonnull NSString *)requestID;
 
 /**
  Did generated thumbnails for the video.
  */
-- (void)didGenerateThumbnails:(nonnull NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename succeeded:(BOOL)succeeded;
+- (void)didGenerateThumbnails:(nonnull NSArray<FFThumbnail *> *)thumbnails forFile:(nonnull NSString *)filename succeeded:(BOOL)succeeded requestID:(nonnull NSString *)requestID;
 
 @end
 
@@ -54,7 +54,11 @@
 + (nullable NSImage *)createNSImageWithContentsOfURL:(nonnull NSURL *)url;
 
 - (void)generateThumbnailForFile:(nonnull NSString *)file
-                      thumbWidth:(int)thumbWidth;
+                      thumbWidth:(int)thumbWidth
+                videoStreamIndex:(nullable NSNumber *)videoStreamIndex
+                       requestID:(nonnull NSString *)requestID;
+
+- (void)cancelThumbnailGeneration;
 
 /// Read artwork from the file with the given URL.
 ///

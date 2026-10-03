@@ -1434,6 +1434,8 @@ class MainWindowController: PlayerWindowController {
     // stop playing
     if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
       restoreDockSettings()
+      cameraHousingWindow?.orderOut(self)
+      cameraHousingWindow = nil
     }
     player.stop()
     // stop tracking mouse event

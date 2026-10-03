@@ -18,7 +18,7 @@ private final class JavascriptTimelineThumbnailSubscription {
   weak var owner: JavascriptAPIThumbnails?
   private let callback: JSManagedValue
   private let virtualMachine: JSVirtualMachine
-  private let pendingLock = NSLock()
+  private let pendingLock = Lock()
   private var pending: TimelineThumbnailUpdate?
   private var pendingInvalidation: TimelineThumbnailUpdate?
   private var deliveryScheduled = false
@@ -39,34 +39,33 @@ private final class JavascriptTimelineThumbnailSubscription {
   }
 
   func enqueue(_ update: TimelineThumbnailUpdate) {
-    pendingLock.lock()
-    guard active else {
-      pendingLock.unlock()
-      return
+    let shouldSchedule = pendingLock.withLock {
+      guard active else { return false }
+      if update.state == .invalidated {
+        pendingInvalidation = pendingInvalidation ?? update
+        pending = nil
+      } else {
+        pending = update
+      }
+      let shouldSchedule = !deliveryScheduled
+      deliveryScheduled = true
+      return shouldSchedule
     }
-    if update.state == .invalidated {
-      pendingInvalidation = pendingInvalidation ?? update
-      pending = nil
-    } else {
-      pending = update
-    }
-    let shouldSchedule = !deliveryScheduled
-    deliveryScheduled = true
-    pendingLock.unlock()
 
     guard shouldSchedule else { return }
     scheduleDelivery()
   }
 
   func cancel() {
-    pendingLock.lock()
-    active = false
-    pending = nil
-    pendingInvalidation = nil
-    deliveryScheduled = false
-    let shouldReleaseCallback = callbackRetained
-    callbackRetained = false
-    pendingLock.unlock()
+    let shouldReleaseCallback = pendingLock.withLock {
+      active = false
+      pending = nil
+      pendingInvalidation = nil
+      deliveryScheduled = false
+      let shouldReleaseCallback = callbackRetained
+      callbackRetained = false
+      return shouldReleaseCallback
+    }
     if shouldReleaseCallback, let owner {
       virtualMachine.removeManagedReference(callback, withOwner: owner)
     }
@@ -79,39 +78,38 @@ private final class JavascriptTimelineThumbnailSubscription {
   }
 
   private func deliverPending() {
-    pendingLock.lock()
-    guard active else {
-      pending = nil
-      pendingInvalidation = nil
+    let update: TimelineThumbnailUpdate? = pendingLock.withLock {
+      guard active else {
+        pending = nil
+        pendingInvalidation = nil
+        deliveryScheduled = false
+        return nil
+      }
+      let update: TimelineThumbnailUpdate?
+      if let invalidation = pendingInvalidation {
+        update = invalidation
+        pendingInvalidation = nil
+      } else {
+        update = pending
+        pending = nil
+      }
       deliveryScheduled = false
-      pendingLock.unlock()
-      return
+      return update
     }
-    let update: TimelineThumbnailUpdate?
-    if let invalidation = pendingInvalidation {
-      update = invalidation
-      pendingInvalidation = nil
-    } else {
-      update = pending
-      pending = nil
-    }
-    deliveryScheduled = false
-    pendingLock.unlock()
 
     guard let update, let owner, owner.isActive else { return }
     owner.deliver(update, to: self)
 
-    pendingLock.lock()
-    let shouldSchedule = active && !deliveryScheduled && (pendingInvalidation != nil || pending != nil)
-    if shouldSchedule { deliveryScheduled = true }
-    pendingLock.unlock()
+    let shouldSchedule = pendingLock.withLock {
+      let shouldSchedule = active && !deliveryScheduled && (pendingInvalidation != nil || pending != nil)
+      if shouldSchedule { deliveryScheduled = true }
+      return shouldSchedule
+    }
     if shouldSchedule { scheduleDelivery() }
   }
 
   func callbackValue() -> JSValue? {
-    pendingLock.lock()
-    let isActive = active
-    pendingLock.unlock()
+    let isActive = pendingLock.withLock { active }
     return isActive ? callback.value : nil
   }
 }

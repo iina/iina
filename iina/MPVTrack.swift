@@ -73,6 +73,8 @@ class MPVTrack: NSObject {
   var id: Int
   var type: TrackType
   var srcId: Int?
+  /// FFmpeg stream index when mpv exposes the source mapping.
+  var ffIndex: Int?
   var title: String?
   var lang: String?
   var isDefault: Bool
@@ -176,7 +178,8 @@ class MPVTrack: NSObject {
     let id = MPVController.nodeValueAsInt(idAsNodeValue)
     self.init(id: id, type: type, isDefault: isDefault, isForced: isForced, isImage: isImage,
               isSelected: isSelected, isExternal: isExternal)
-    srcId = MPVController.nodeValueAsInt(dict["src-id"])
+    srcId = (dict["src-id"] as? Int64).map { Int($0) }
+    ffIndex = (dict["ff-index"] as? Int64).map { Int($0) }
     title = dict["title"] as? String
     lang = dict["lang"] as? String
     codec = dict["codec"] as? String

@@ -13,12 +13,13 @@ fileprivate let subsystem = Logger.makeSubsystem("thumbcache", ["photo.stack"])
 class ThumbnailCache {
   private typealias CacheVersion = UInt8
   private typealias FileSize = UInt64
-  private typealias FileTimestamp = Int64
+  private typealias FileTimestamp = Double
 
-  private static let version: CacheVersion = 2
+  private static let version: CacheVersion = 3
+  private static let maxThumbnailCount = TimelineThumbnailBroker.maxThumbnailCount
+  private static let maxBytesPerThumbnail = TimelineThumbnailBroker.maxBytesPerThumbnail
+  private static let maxBytesPerCache = TimelineThumbnailBroker.maxBytesPerUpdate
   
-  private static let sizeofMetadata = MemoryLayout<CacheVersion>.size + MemoryLayout<FileSize>.size + MemoryLayout<FileTimestamp>.size
-
   private static let imageProperties: [NSBitmapImageRep.PropertyKey: Any] = [
     .compressionFactor: 0.75
   ]
@@ -43,7 +44,7 @@ class ThumbnailCache {
       return false
     }
 
-    // modified date
+    // Sub-second mtime detects same-size edits within one second.
     guard let fileModifiedDate = fileAttr[.modificationDate] as? Date else {
       log("Cannot get video file modification date", level: .error)
       return false
@@ -58,17 +59,21 @@ class ThumbnailCache {
       }
 
       let cacheVersion = file.read(type: CacheVersion.self)
-      if cacheVersion != version { return false }
+      if cacheVersion != version {
+        file.closeFile()
+        return false
+      }
 
-      return file.read(type: FileSize.self) == fileSize &&
+      let matches = file.read(type: FileSize.self) == fileSize &&
         file.read(type: FileTimestamp.self) == fileTimestamp
+      file.closeFile()
+      return matches
     }
 
     return false
   }
 
-  /// Write thumbnail cache to file.
-  /// This method is expected to be called when the file doesn't exist.
+  /// Write thumbnail cache to file, replacing an existing entry atomically.
   static func write(_ thumbnails: [FFThumbnail], forName name: String, forVideo videoPath: URL?) {
     log("Writing thumbnail cache...")
 
@@ -78,20 +83,6 @@ class ThumbnailCache {
     } else if CacheManager.shared.getCacheSize() > maxCacheSize {
       CacheManager.shared.clearOldCache()
     }
-
-    let pathURL = urlFor(name)
-    guard FileManager.default.createFile(atPath: pathURL.path, contents: nil, attributes: nil) else {
-      log("Cannot create file.", level: .error)
-      return
-    }
-    guard let file = try? FileHandle(forWritingTo: pathURL) else {
-      log("Cannot write to file.", level: .error)
-      return
-    }
-
-    // version
-    let versionData = Data(bytesOf: version)
-    file.write(versionData)
 
     guard let fileAttr = try? FileManager.default.attributesOfItem(atPath: videoPath!.path) else {
       log("Cannot get video file attributes", level: .error)
@@ -103,20 +94,38 @@ class ThumbnailCache {
       log("Cannot get video file size", level: .error)
       return
     }
-    let fileSizeData = Data(bytesOf: fileSize)
-    file.write(fileSizeData)
-
     // modified date
     guard let fileModifiedDate = fileAttr[.modificationDate] as? Date else {
       log("Cannot get video file modification date", level: .error)
       return
     }
     let fileTimestamp = FileTimestamp(fileModifiedDate.timeIntervalSince1970)
+
+    let pathURL = urlFor(name)
+    let temporaryURL = pathURL.deletingLastPathComponent()
+      .appendingPathComponent(".\(pathURL.lastPathComponent).\(UUID().uuidString).tmp")
+    guard FileManager.default.createFile(atPath: temporaryURL.path, contents: nil, attributes: nil),
+          let file = try? FileHandle(forWritingTo: temporaryURL) else {
+      log("Cannot create cache file.", level: .error)
+      try? FileManager.default.removeItem(at: temporaryURL)
+      return
+    }
+    defer {
+      file.closeFile()
+      try? FileManager.default.removeItem(at: temporaryURL)
+    }
+
+    // version and metadata
+    file.write(Data(bytesOf: version))
     let fileModificationDateData = Data(bytesOf: fileTimestamp)
+    file.write(Data(bytesOf: fileSize))
     file.write(fileModificationDateData)
 
     // data blocks
+    var imageCount = 0
+    var totalBytes = 0
     for tb in thumbnails {
+      guard imageCount < maxThumbnailCount else { break }
       let timestampData = Data(bytesOf: tb.realTime)
       guard let tiffData = tb.image?.tiffRepresentation else {
         log("Cannot generate tiff data.", level: .error)
@@ -126,19 +135,37 @@ class ThumbnailCache {
         log("Cannot generate jpeg data.", level: .error)
         return
       }
+      guard jpegData.count <= maxBytesPerThumbnail,
+            totalBytes + jpegData.count <= maxBytesPerCache else {
+        log("Skipping oversized thumbnail cache entry.", level: .warning)
+        continue
+      }
       let blockLength = Int64(timestampData.count + jpegData.count)
       let blockLengthData = Data(bytesOf: blockLength)
       file.write(blockLengthData)
       file.write(timestampData)
       file.write(jpegData)
+      imageCount += 1
+      totalBytes += jpegData.count
+    }
+
+    file.closeFile()
+    do {
+      if FileManager.default.fileExists(atPath: pathURL.path) {
+        _ = try FileManager.default.replaceItemAt(pathURL, withItemAt: temporaryURL, backupItemName: nil, options: [])
+      } else {
+        try FileManager.default.moveItem(at: temporaryURL, to: pathURL)
+      }
+    } catch {
+      log("Cannot install thumbnail cache: \(error)", level: .error)
+      return
     }
 
     CacheManager.shared.needsRefresh = true
     log("Finished writing thumbnail cache.")
   }
 
-  /// Read thumbnail cache to file.
-  /// This method is expected to be called when the file exists.
+  /// Read a validated cache entry, or discard corrupt data.
   static func read(forName name: String) -> [FFThumbnail]? {
     log("Reading thumbnail cache...")
 
@@ -151,17 +178,30 @@ class ThumbnailCache {
 
     var result: [FFThumbnail] = []
 
-    // get file length
+    // Reject old cache versions lacking sub-second timestamps.
+    guard file.read(type: CacheVersion.self) == version,
+          file.read(type: FileSize.self) != nil,
+          file.read(type: FileTimestamp.self) != nil else {
+      file.closeFile()
+      deleteCacheFile(at: pathURL)
+      return nil
+    }
+
+    // get file length while preserving the first data-block offset.
+    let dataStart = file.offsetInFile
     file.seekToEndOfFile()
     let eof = file.offsetInFile
-
-    // skip metadata
-    file.seek(toFileOffset: UInt64(sizeofMetadata))
+    file.seek(toFileOffset: dataStart)
 
     // data blocks
-    while file.offsetInFile != eof {
+    var totalBytes = 0
+    while file.offsetInFile < eof {
       // length and timestamp
       guard let blockLength = file.read(type: Int64.self),
+            blockLength >= Int64(MemoryLayout<Double>.size),
+            blockLength <= Int64(MemoryLayout<Double>.size + maxBytesPerThumbnail),
+            file.offsetInFile + UInt64(blockLength) <= eof,
+            result.count < maxThumbnailCount,
             let timestamp = file.read(type: Double.self) else {
         log("Cannot read image header. Cache file will be deleted.", level: .warning)
         file.closeFile()
@@ -169,7 +209,20 @@ class ThumbnailCache {
         return nil
       }
       // jpeg
-      let jpegData = file.readData(ofLength: Int(blockLength) - MemoryLayout.size(ofValue: timestamp))
+      let jpegLength = Int(blockLength) - MemoryLayout.size(ofValue: timestamp)
+      guard totalBytes + jpegLength <= maxBytesPerCache else {
+        log("Cache file exceeds thumbnail byte limit.", level: .warning)
+        file.closeFile()
+        deleteCacheFile(at: pathURL)
+        return nil
+      }
+      let jpegData = file.readData(ofLength: jpegLength)
+      guard jpegData.count == jpegLength else {
+        log("Cannot read complete image data. Cache file will be deleted.", level: .warning)
+        file.closeFile()
+        deleteCacheFile(at: pathURL)
+        return nil
+      }
       guard let image = NSImage(data: jpegData) else {
         log("Cannot read image. Cache file will be deleted.", level: .warning)
         file.closeFile()
@@ -181,6 +234,14 @@ class ThumbnailCache {
       tb.realTime = timestamp
       tb.image = image
       result.append(tb)
+      totalBytes += jpegLength
+    }
+
+    guard file.offsetInFile == eof else {
+      log("Cache file has trailing data. Cache file will be deleted.", level: .warning)
+      file.closeFile()
+      deleteCacheFile(at: pathURL)
+      return nil
     }
 
     file.closeFile()

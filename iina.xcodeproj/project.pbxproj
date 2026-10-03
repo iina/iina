@@ -306,6 +306,8 @@
 		E35306F42147F78D008FE492 /* JavascriptAPICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F32147F78D008FE492 /* JavascriptAPICore.swift */; };
 		E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */; };
 		E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */; };
+		F0A1B2C52F01000100000001 /* JavascriptAPIThumbnails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A1B2C62F01000100000001 /* JavascriptAPIThumbnails.swift */; };
+		F0A1B2C32F01000100000001 /* TimelineThumbnailBroker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A1B2C42F01000100000001 /* TimelineThumbnailBroker.swift */; };
 		E35306FC214813B7008FE492 /* JavascriptPluginInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */; };
 		E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */; };
 		E3530702214935DE008FE492 /* JavascriptAPIConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */; };
@@ -1478,6 +1480,7 @@
 		84FBCB361EEACDDD0076C77C /* FFmpegController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFmpegController.h; sourceTree = "<group>"; };
 		84FBCB371EEACDDD0076C77C /* FFmpegController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFmpegController.m; sourceTree = "<group>"; };
 		84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCache.swift; sourceTree = "<group>"; };
+		F0A1B2C42F01000100000001 /* TimelineThumbnailBroker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineThumbnailBroker.swift; sourceTree = "<group>"; };
 		875FDF9E2157873300F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefUtilsViewController.strings; sourceTree = "<group>"; };
 		875FDFA02157874B00F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		875FDFA22157876200F7F7FD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
@@ -1663,6 +1666,7 @@
 		E35306F32147F78D008FE492 /* JavascriptAPICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPICore.swift; sourceTree = "<group>"; };
 		E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMpv.swift; sourceTree = "<group>"; };
 		E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIEvent.swift; sourceTree = "<group>"; };
+		F0A1B2C62F01000100000001 /* JavascriptAPIThumbnails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIThumbnails.swift; sourceTree = "<group>"; };
 		E35306FB214813B7008FE492 /* JavascriptPluginInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginInstance.swift; sourceTree = "<group>"; };
 		E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIHttp.swift; sourceTree = "<group>"; };
 		E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIConsole.swift; sourceTree = "<group>"; };
@@ -2183,6 +2187,7 @@
 				8492C2871E7721A600CE5825 /* ISO639Helper.swift */,
 				840820101ECF6C1800361416 /* FileGroup.swift */,
 				84FBF23D1EF06A90003EA491 /* ThumbnailCache.swift */,
+				F0A1B2C42F01000100000001 /* TimelineThumbnailBroker.swift */,
 				844C59E61F7C143D008D1B00 /* CacheManager.swift */,
 				E3FC31451FE1501E00B9B86F /* PowerSource.swift */,
 				E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */,
@@ -2460,6 +2465,7 @@
 				E35306F32147F78D008FE492 /* JavascriptAPICore.swift */,
 				E35306F52147F7AF008FE492 /* JavascriptAPIMpv.swift */,
 				E35306F9214808AB008FE492 /* JavascriptAPIEvent.swift */,
+				F0A1B2C62F01000100000001 /* JavascriptAPIThumbnails.swift */,
 				E35306FF214908DC008FE492 /* JavascriptAPIHttp.swift */,
 				E3530701214935DE008FE492 /* JavascriptAPIConsole.swift */,
 				E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */,
@@ -2908,6 +2914,7 @@
 			files = (
 				E3EC8C432F94330400FBB51E /* Dialog.swift in Sources */,
 				E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */,
+				F0A1B2C52F01000100000001 /* JavascriptAPIThumbnails.swift in Sources */,
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,
 				8461C52E1D45FFF6006E91FF /* PlaySliderCell.swift in Sources */,
 				84F5D4A21E4796F50060A838 /* KeyBindingTranslator.swift in Sources */,
@@ -3114,6 +3121,7 @@
 				847C62CA1DC13CDA00E1EF16 /* PrefGeneralViewController.swift in Sources */,
 				E3530700214908DD008FE492 /* JavascriptAPIHttp.swift in Sources */,
 				84FBF23E1EF06A90003EA491 /* ThumbnailCache.swift in Sources */,
+				F0A1B2C32F01000100000001 /* TimelineThumbnailBroker.swift in Sources */,
 				51DE55C92A6646710050AD06 /* Sysctl.swift in Sources */,
 				E3513AFB20F120F600F8C347 /* PreferenceViewController.swift in Sources */,
 				51AC1CAB2A9FBF3700DF7079 /* OpenSubClient.swift in Sources */,

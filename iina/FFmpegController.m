@@ -55,8 +55,12 @@ return -1;\
   double _timestamp;
 }
 
-- (int)getPeeksForFile:(NSString *)file thumbnailsWidth:(int)thumbnailsWidth;
-- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile:(NSString *)file;
+- (int)getPeeksForFile:(NSString *)file
+       thumbnailsWidth:(int)thumbnailsWidth
+     videoStreamIndex:(NSNumber *)videoStreamIndex
+             requestID:(NSString *)requestID
+            operation:(NSOperation *)operation;
+- (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(double)second forFile:(NSString *)file requestID:(NSString *)requestID;
 
 @end
 
@@ -79,10 +83,17 @@ return -1;\
 
 // MARK: - Generating Thumbnails
 
-- (void)generateThumbnailForFile:(NSString *)file
-                      thumbWidth:(int)thumbWidth
+- (void)cancelThumbnailGeneration
 {
   [_queue cancelAllOperations];
+}
+
+- (void)generateThumbnailForFile:(NSString *)file
+                      thumbWidth:(int)thumbWidth
+                videoStreamIndex:(NSNumber *)videoStreamIndex
+                       requestID:(NSString *)requestID
+{
+  [self cancelThumbnailGeneration];
   NSBlockOperation *op = [[NSBlockOperation alloc] init];
   __weak NSBlockOperation *weakOp = op;
   [op addExecutionBlock:^(){
@@ -90,11 +101,19 @@ return -1;\
       return;
     }
     self->_timestamp = CACurrentMediaTime();
-    int success = [self getPeeksForFile:file thumbnailsWidth:thumbWidth];
+    int success = [self getPeeksForFile:file
+                        thumbnailsWidth:thumbWidth
+                      videoStreamIndex:videoStreamIndex
+                             requestID:requestID
+                            operation:weakOp];
+    if ([weakOp isCancelled]) {
+      return;
+    }
     if (self.delegate) {
       [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
                                    forFile: file
-                                 succeeded:(success < 0 ? NO : YES)];
+                                 succeeded:(success < 0 ? NO : YES)
+                                  requestID:requestID];
     }
   }];
   [_queue addOperation:op];
@@ -102,6 +121,9 @@ return -1;\
 
 - (int)getPeeksForFile:(NSString *)file
        thumbnailsWidth:(int)thumbnailsWidth
+     videoStreamIndex:(NSNumber *)videoStreamIndex
+             requestID:(NSString *)requestID
+            operation:(NSOperation *)operation
 {
   int i, ret;
 
@@ -123,10 +145,11 @@ return -1;\
   ret = avformat_find_stream_info(pFormatCtx, NULL);
   CHECK_SUCCESS(ret, @"Cannot get stream info")
 
-  // Find the first video stream
+  // Use mpv's ff-index, or the first video stream when unavailable.
   int videoStream = -1;
   for (i = 0; i < pFormatCtx->nb_streams; i++)
-    if (pFormatCtx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
+    if (pFormatCtx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO &&
+        (videoStreamIndex == nil || i == videoStreamIndex.intValue)) {
       videoStream = i;
       break;
     }
@@ -208,6 +231,10 @@ return -1;\
 
   // For each preview point
   for (i = 0; i <= self.thumbnailCount; i++) {
+    if (operation.isCancelled) {
+      ret = -1;
+      break;
+    }
     int64_t seek_pos = interval * i + pVideoStream->start_time;
 
     avcodec_flush_buffers(pCodecCtx);
@@ -221,6 +248,11 @@ return -1;\
 
     // Read and decode frame
     while(av_read_frame(pFormatCtx, &packet) >= 0) {
+      if (operation.isCancelled) {
+        ret = -1;
+        av_packet_unref(&packet);
+        break;
+      }
       @try {
         // Make sure it's video stream
         if (packet.stream_index == videoStream) {
@@ -243,7 +275,7 @@ return -1;\
             double currentTime = CACurrentMediaTime();
             if (currentTime - _timestamp > 1) {
               if (self.delegate) {
-                [self.delegate didUpdateThumbnails:NULL forFile: file withProgress: i];
+                [self.delegate didUpdateThumbnails:NULL forFile: file withProgress: i requestID:requestID];
                 _timestamp = currentTime;
               }
             }
@@ -268,7 +300,8 @@ return -1;\
                        height:pFrameRGB->height
                         index:i
                      realTime:(pFrame->best_effort_timestamp * timebaseDouble)
-                      forFile:file];
+                      forFile:file
+                     requestID:requestID];
           break;
         }
       } @finally {
@@ -292,7 +325,7 @@ return -1;\
   avformat_close_input(&pFormatCtx);
 
   // LOG_DEBUG(@"Thumbnails generated.");
-  return 0;
+  return operation.isCancelled ? -1 : 0;
 }
 
 
@@ -300,8 +333,9 @@ return -1;\
                      :(int)width height
                      :(int)height index
                      :(int)index realTime
-                     :(int)second forFile
-                     :(NSString *)file
+                     :(double)second forFile
+                     :(NSString *)file requestID
+                     :(NSString *)requestID
 {
   // Create CGImage
   CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
@@ -335,7 +369,8 @@ return -1;\
       if (self.delegate) {
         [self.delegate didUpdateThumbnails:[NSArray arrayWithArray:_thumbnailPartialResult]
                                    forFile: file
-                              withProgress: index];
+                              withProgress: index
+                                requestID:requestID];
       }
       [_thumbnailPartialResult removeAllObjects];
       _timestamp = currentTime;

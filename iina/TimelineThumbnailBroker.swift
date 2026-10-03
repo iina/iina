@@ -259,12 +259,16 @@ final class TimelineThumbnailBroker {
     for thumbnail in thumbnails {
       guard result.count + encodedThumbnails.count < Self.maxThumbnailCount,
             let image = thumbnail.image,
-            let bitmap = image.representations.compactMap({ $0 as? NSBitmapImageRep }).first,
-            bitmap.pixelsWide > 0,
-            bitmap.pixelsHigh > 0,
-            bitmap.pixelsWide <= 4096,
-            bitmap.pixelsHigh <= 4096,
-            let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: 0.75]),
+            let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil),
+            cgImage.width > 0,
+            cgImage.height > 0,
+            cgImage.width <= 4096,
+            cgImage.height <= 4096 else {
+        continue
+      }
+      // FFmpeg's CGImage-backed NSImages may not contain an NSBitmapImageRep.
+      let bitmap = NSBitmapImageRep(cgImage: cgImage)
+      guard let data = bitmap.representation(using: .jpeg, properties: [.compressionFactor: 0.75]),
             data.count > 0,
             data.count <= Self.maxBytesPerThumbnail,
             totalBytes + data.count <= Self.maxBytesPerUpdate else {

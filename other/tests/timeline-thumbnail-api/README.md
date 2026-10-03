@@ -27,3 +27,16 @@ coverage. Run them with:
 ```sh
 python3 -m unittest discover -s other/tests/timeline-thumbnail-api -p 'test_*.py'
 ```
+
+On macOS, also run the production broker's native regression tests:
+
+```sh
+bash other/tests/timeline-thumbnail-api/run_native_tests.sh
+```
+
+The Swift harness compiles `TimelineThumbnailBroker.swift` with minimal player
+type stubs. It runs actual AppKit JPEG encoding on the broker queue for fresh
+`NSImage(cgImage:)` frames and cache-decoded images, checks partial/ready pixels
+and timestamps, image dimensions, actual per-image/cumulative JPEG byte limits,
+count limits, and session invalidation.
+It does not exercise FFmpeg generation or the JavaScript/WebView bridge.

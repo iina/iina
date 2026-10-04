@@ -14,9 +14,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - xcode: "26.5"
+          - xcode: "27"
             deployment_target: ""
-    runs-on:  macos-26
+    runs-on:  xcode-27
     steps:
       - uses: actions/checkout@v7
 

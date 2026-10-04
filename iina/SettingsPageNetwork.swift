@@ -8,6 +8,8 @@
 
 class SettingsPageNetwork: SettingsPage {
   private let prefObserver = Preference.Observer()
+  private var ytdlAdvice: SettingsItem.General?
+  private var ytdlSwitch: SettingsItem.Switch?
 
   override var identifier: String {
     "network"
@@ -26,12 +28,10 @@ class SettingsPageNetwork: SettingsPage {
   }
 
   override func pageLoaded() {
-    // refresh ytdl section
-    guard let view = labeledViews["ytdl"] else { return }
-
-    if JavascriptPlugin.hasYTDL {
-      setControlsEnabled(in: view, enabled: false, skipping: nil)
-    }
+    guard JavascriptPlugin.hasYTDL, let view = labeledViews["ytdl"] else { return }
+    setControlsEnabled(in: view, enabled: false, skipping: nil)
+    ytdlSwitch?.label?.textColor = .disabledControlTextColor
+    ytdlAdvice?.desc?.stringValue = NSLocalizedString("preference.ytdl_plugin_installed", comment: "")
   }
 
   override func content() -> [SettingsSection] {
@@ -95,25 +95,30 @@ class SettingsPageNetwork: SettingsPage {
   }
 
   private func sectionYTDL() -> SettingsSection {
+    let advice = SettingsItem.General(title: .text_onlineMediaPluginAdvice)
+      .image(name: "puzzlepiece.extension")
+      .hasDescription(content: .text_ytdlWarning)
+    let ytdlSwitch = SettingsItem.Switch()
+      .bindTo(.ytdlEnabled)
+      .image(name: "square.and.arrow.down")
+      .withHelpLink(AppData.ytdlHelpLink)
+      .withDetailView {
+        SettingsItem.LongInput()
+          .bindTo(.ytdlSearchPath)
+          .hasDescription()
+        SettingsItem.LongInput()
+          .bindTo(.ytdlRawOptions)
+          .hasDescription()
+      }
+    ytdlAdvice = advice
+    self.ytdlSwitch = ytdlSwitch
+
     return section(label: "ytdl") {
       SettingsList(title: .text_YTDL) {
-        SettingsItem.General(title: .text_onlineMediaPluginAdvice)
-          .image(name: "puzzlepiece.extension")
-          .hasDescription(content: .text_ytdlWarning)
+        advice
       }
       SettingsList {
-        SettingsItem.Switch()
-          .bindTo(.ytdlEnabled)
-          .image(name: "square.and.arrow.down")
-          .withHelpLink(AppData.ytdlHelpLink)
-          .withDetailView {
-            SettingsItem.LongInput()
-              .bindTo(.ytdlSearchPath)
-              .hasDescription()
-            SettingsItem.LongInput()
-              .bindTo(.ytdlRawOptions)
-              .hasDescription()
-          }
+        ytdlSwitch
       }
     }
   }

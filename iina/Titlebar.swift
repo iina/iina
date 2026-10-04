@@ -345,9 +345,11 @@ class Titlebar: NSView {
       item.title = FileManager.default.displayName(atPath: pathURL.path)
       item.image = NSWorkspace.shared.icon(forFile: pathURL.path)
       item.image?.size = NSSize(width: 16, height: 16)
+#if AVAILABLE_270000
       if #available(macOS 27.0, *) {
         item.preferredImageVisibility = .visible
       }
+#endif
       item.representedObject = pathURL
       item.target = self
       item.action = #selector(revealInFinder(_:))

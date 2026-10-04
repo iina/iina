@@ -136,9 +136,11 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
         let item = NSMenuItem(title: level.description, action: #selector(logLevelChanged), keyEquivalent: "")
         item.tag = level.rawValue
         item.image = indicatorIcon(withColor: level.color)
+#if AVAILABLE_270000
         if #available(macOS 27.0, *) {
           item.preferredImageVisibility = .visible
         }
+#endif
         logLevelMenu.addItem(item)
       }
       subsystemMenu.delegate = self
@@ -302,9 +304,11 @@ class LogWindowController: NSWindowController, NSMenuDelegate, NSToolbarDelegate
         subsystem.added = true
         let item = NSMenuItem.init(title: subsystem.rawValue, action: #selector(subsystemChanged), keyEquivalent: "")
         item.image = subsystem.image
+#if AVAILABLE_270000
         if #available(macOS 27.0, *) {
           item.preferredImageVisibility = .visible
         }
+#endif
         // 3 = dummy + clear selection item + separator
         menu.insertItem(item, at: index + 3)
       }

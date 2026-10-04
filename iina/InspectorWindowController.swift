@@ -50,7 +50,6 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate {
     )
     window.title = ui.localized("window_title")
     window.contentMinSize = NSSize(width: 450, height: 480)
-    // Same autosave name the old xib-based window used, so this also restores a position saved by that version.
     window.setFrameAutosaveName("IINAInspectorPanel")
 
     super.init(window: window)
@@ -64,6 +63,20 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate {
     window.toolbarStyle = .unifiedCompact
 
     window.contentViewController = InspectorTabController()
+
+    let info = PlayerCore.lastActive.info
+    Logger.log("""
+      Video tracks:
+      \(info.videoTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose, subsystem: subsystem)
+    Logger.log("""
+      Audio tracks:
+      \(info.audioTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose, subsystem: subsystem)
+    Logger.log("""
+      Subtitle tracks:
+      \(info.subTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose, subsystem: subsystem)
   }
 
   @objc private func toolbarSegmentChanged(_ sender: NSSegmentedControl) {
@@ -77,6 +90,8 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate {
   }
 
   override func showWindow(_ sender: Any?) {
+    Logger.log("Showing Inspector window", level: .verbose, subsystem: subsystem)
+
     selectedTabVC?.updateInfo(dynamic: false)
 
     removeTimerAndListeners()
@@ -86,9 +101,14 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate {
     observers.append(NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main, using: fileLoaded))
 
     super.showWindow(sender)
+
+    // Log additional information for developers when the inspector window is shown.
+    MemoryUsage.shared.logUsage("after showing inspector window")
   }
 
   func windowWillClose(_ notification: Notification) {
+    Logger.log("Closing Inspector window", level: .verbose, subsystem: subsystem)
+    // Remove timer & listeners to conserve resources
     removeTimerAndListeners()
   }
 
@@ -824,8 +844,8 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
   }
 
   func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-    /// The background color for a `NSTableRowView` will default to the parent's background color, which results in an
-    /// unwanted additive effect for translucent backgrounds. Just make each row transparent.
+    // The background color for a `NSTableRowView` will default to the parent's background color, which results in an
+    // unwanted additive effect for translucent backgrounds. Just make each row transparent.
     rowView.backgroundColor = .clear
   }
 
@@ -887,8 +907,8 @@ class StatusVC: NSViewController, NSTableViewDelegate, NSTableViewDataSource, In
         v.stringValue = value ?? ""
       }
 
-      /// Do not call `reloadData()` (no arg version) because it will clear the selection. Also, because we know the number of rows will not change,
-      /// calling `reloadData(forRowIndexes:)` will get the same result but much more efficiently
+      // Do not call `reloadData()` (no arg version) because it will clear the selection. Also, because we know the number of rows will not change,
+      // calling `reloadData(forRowIndexes:)` will get the same result but much more efficiently
       watchTableView.reloadData(forRowIndexes: IndexSet(0..<watchTableView.numberOfRows), columnIndexes: IndexSet(0..<watchTableView.numberOfColumns))
     }
   }

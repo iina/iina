@@ -288,7 +288,7 @@ fileprivate class SubDelayView: SidebarSliderView {
   }
 
   override func resetButtonAction() {
-    player.setAudioDelay(0)
+    player.setSubDelay(0, forPrimary: isPrimary)
   }
 }
 
@@ -315,6 +315,8 @@ fileprivate class SubPositionDelayView: NSView {
     primarySwitch.selectedSegment = 0
     primarySwitch.setContentHuggingPriority(.init(100), for: .horizontal)
     primarySwitch.segmentDistribution = .fillEqually
+    primarySwitch.target = self
+    primarySwitch.action = #selector(switchAction)
 
     self.positionSlider = NSSlider()
     positionSlider.minValue = 0
@@ -364,6 +366,7 @@ fileprivate class SubPositionDelayView: NSView {
 
   @objc private func switchAction(_ sender: AnyObject) {
     isPrimary = primarySwitch.selectedSegment == 0
+    delayView.isPrimary = isPrimary
     update()
   }
 

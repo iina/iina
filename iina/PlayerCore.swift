@@ -236,6 +236,10 @@ class PlayerCore: NSObject {
   var displayOSD: Bool = true
 
   var isInMiniPlayer = false
+
+  private var subtitlePositions: [Bool: Double] = [:]
+  private var renderedSubtitlePositions: [Bool: Double] = [:]
+  private var subtitlePositionLimit = 150.0
   /// Set this to `true` if user changes "music mode" status manually. This disables `autoSwitchToMusicMode`
   /// functionality for the duration of this player even if the preference is `true`. But if they manually change the
   /// "music mode" status again, change this to `false` so that the preference is honored again.
@@ -951,6 +955,7 @@ class PlayerCore: NSObject {
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
     guard info.state != .shutDown else { return }
+    setSubtitleClearance(0)
     savePlaybackPosition()
 
     // The player may already be stopped in which case the state must not be set to stopping.
@@ -1960,8 +1965,51 @@ class PlayerCore: NSObject {
   }
 
   func setSubPos(_ pos: Int, forPrimary: Bool = true) {
+    guard info.state.active else { return }
+    subtitlePositions[forPrimary] = Double(pos)
+    applySubtitlePosition(forPrimary: forPrimary, useCurrentPosition: false)
+    sendOSD(forPrimary ? .subPos(Double(pos)) : .secondSubPos(Double(pos)))
+    postNotification(.iinaSubPositionChanged)
+  }
+
+  func subtitlePosition(forPrimary: Bool = true) -> Double {
     let option = forPrimary ? MPVOption.Subtitles.subPos : MPVOption.Subtitles.secondarySubPos
-    mpv.setInt(option, pos, level: .verbose)
+    return subtitlePositions[forPrimary] ?? mpv.getDouble(option)
+  }
+
+  /// Reserve the bottom of the subtitle canvas without changing the user's position.
+  func setSubtitleClearance(_ percent: Double) {
+    guard info.state.active else { return }
+    subtitlePositionLimit = percent > 0 ? max(0, 100 - percent) : 150
+    applySubtitlePosition(forPrimary: true)
+    applySubtitlePosition(forPrimary: false)
+  }
+
+  private func applySubtitlePosition(forPrimary: Bool, useCurrentPosition: Bool = true) {
+    let option = forPrimary ? MPVOption.Subtitles.subPos : MPVOption.Subtitles.secondarySubPos
+    let current = mpv.getDouble(option)
+    if subtitlePositions[forPrimary] == nil ||
+        (useCurrentPosition && renderedSubtitlePositions[forPrimary] != current) {
+      subtitlePositions[forPrimary] = current
+    }
+    // mpv stores these options as floats even though its property API accepts doubles.
+    let position = Double(Float(min(subtitlePositions[forPrimary]!, subtitlePositionLimit)))
+    renderedSubtitlePositions[forPrimary] = position
+    if current != position {
+      mpv.setDouble(option, position, level: .verbose)
+    }
+  }
+
+  private func subtitlePositionChanged(_ position: Double, forPrimary: Bool) {
+    guard info.state.active else { return }
+    let option = forPrimary ? MPVOption.Subtitles.subPos : MPVOption.Subtitles.secondarySubPos
+    // Property notifications are queued on the main thread and may have been superseded.
+    guard position == mpv.getDouble(option),
+          position != renderedSubtitlePositions[forPrimary] else { return }
+    subtitlePositions[forPrimary] = position
+    sendOSD(forPrimary ? .subPos(position) : .secondSubPos(position))
+    postNotification(.iinaSubPositionChanged)
+    applySubtitlePosition(forPrimary: forPrimary)
   }
 
   func setSubTextColor(_ colorString: String) {
@@ -2003,7 +2051,12 @@ class PlayerCore: NSObject {
     // The player must be active to be able to save the watch later configuration.
     if info.state.active {
       log("Write watch later config")
+      let limit = subtitlePositionLimit
+      setSubtitleClearance(0)
       mpv.command(.writeWatchLaterConfig, level: .verbose)
+      subtitlePositionLimit = limit
+      applySubtitlePosition(forPrimary: true)
+      applySubtitlePosition(forPrimary: false)
     }
     if let url = info.currentURL {
       Preference.set(url, for: .iinaLastPlayedFilePath)
@@ -2456,8 +2509,7 @@ class PlayerCore: NSObject {
   }
 
   func secondarySubPosChanged(_ position: Double) {
-    sendOSD(.secondSubPos(position))
-    postNotification(.iinaSubPositionChanged)
+    subtitlePositionChanged(position, forPrimary: false)
   }
 
   func secondarySidChanged() {
@@ -2518,8 +2570,7 @@ class PlayerCore: NSObject {
   }
 
   func subPosChanged(_ position: Double) {
-    sendOSD(.subPos(position))
-    postNotification(.iinaSubPositionChanged)
+    subtitlePositionChanged(position, forPrimary: true)
   }
 
   func subVisibilityChanged(_ visible: Bool) {

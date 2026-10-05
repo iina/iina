@@ -120,7 +120,9 @@ class MainWindowController: PlayerWindowController {
 
   lazy var liveText = LiveTextController(mainWindow: self)
   lazy var interactiveMode = InteractiveModeController(mainWindow: self)
-  var pipStatus = PIPStatus.notInPIP
+  var pipStatus = PIPStatus.notInPIP {
+    didSet { updateSubtitleClearance() }
+  }
   var isVideoLoaded: Bool = false
 
   var shouldApplyInitialWindowSize = true
@@ -253,7 +255,9 @@ class MainWindowController: PlayerWindowController {
     case shown, hidden, willShow, willHide
   }
 
-  var animationState: UIAnimationState = .shown
+  var animationState: UIAnimationState = .shown {
+    didSet { updateSubtitleClearance() }
+  }
   var osdAnimationState: UIAnimationState = .hidden
 
   private var osdLastMessage: OSDMessage? = nil
@@ -707,12 +711,26 @@ class MainWindowController: PlayerWindowController {
     // add notification observers
 
     addObserver(to: .default, forName: NSView.frameDidChangeNotification, object: videoView) { [unowned self] _ in
+      updateSubtitleClearance()
       if case .animating(_, _, _) = fsState {
         forceDraw("window resized during animated enter or exit full screen")
       } else if !videoView.videoLayer.inLiveResize {
         forceDraw("window resized")
       } else if Preference.unlockWindowAspectRatio && videoView.isIdle {
         forceDraw("window resized with aspect ratio unlocked and paused")
+      }
+    }
+
+    addObserver(to: .default, forName: .iinaFileLoaded, object: player) { [unowned self] _ in
+      updateSubtitleClearance()
+    }
+    addObserver(to: .default, forName: .iinaMusicModeChanged, object: player) { [unowned self] _ in
+      updateSubtitleClearance()
+    }
+    for bar in [oscBottomView as NSView, oscFloatingView as NSView] {
+      bar.postsFrameChangedNotifications = true
+      addObserver(to: .default, forName: NSView.frameDidChangeNotification, object: bar) { [unowned self] _ in
+        updateSubtitleClearance()
       }
     }
 
@@ -2122,6 +2140,7 @@ class MainWindowController: PlayerWindowController {
     fadeableViews.forEach { (v) in
       v.isHidden = false
     }
+    updateSubtitleClearance()
     // The OSC may not have been updated while it was hidden to avoid wasting energy. Make sure it
     // is up to date.
     player.refreshSyncUITimer()
@@ -2143,6 +2162,21 @@ class MainWindowController: PlayerWindowController {
   }
 
   // MARK: - UI: Show / Hide Timer
+
+  func updateSubtitleClearance() {
+    guard loaded, player.info.state.active else { return }
+    guard let controlBar = currentControlBar, !player.isInMiniPlayer,
+          pipStatus == .notInPIP, !player.disableUI, !interactiveMode.isActive,
+          animationState != .hidden, !controlBar.isHidden,
+          videoView.bounds.height > 0, videoView.superview != nil else {
+      player.setSubtitleClearance(0)
+      return
+    }
+    let bar = videoView.convert(controlBar.bounds, from: controlBar)
+    let overlap = videoView.bounds.intersection(bar)
+    let clearance = overlap.isEmpty ? 0 : overlap.maxY - videoView.bounds.minY + 8
+    player.setSubtitleClearance(Double(clearance / videoView.bounds.height * 100))
+  }
 
   func updateTimer() {
     destroyTimer()

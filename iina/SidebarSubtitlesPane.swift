@@ -360,8 +360,7 @@ fileprivate class SubPositionDelayView: NSView {
   }
 
   private func updatePosition() {
-    let posOption = isPrimary ? MPVOption.Subtitles.subPos : MPVOption.Subtitles.secondarySubPos
-    positionSlider.intValue = Int32(player.mpv.getInt(posOption))
+    positionSlider.intValue = Int32(player.subtitlePosition(forPrimary: isPrimary))
   }
 
   @objc private func switchAction(_ sender: AnyObject) {

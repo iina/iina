@@ -162,6 +162,7 @@ class JavascriptPluginInstance {
 
     if !isGlobal {
       apis["core"] = JavascriptAPICore(context: ctx, pluginInstance: self)
+      apis["thumbnails"] = JavascriptAPIThumbnails(context: ctx, pluginInstance: self)
       apis["mpv"] = JavascriptAPIMpv(context: ctx, pluginInstance: self)
       apis["event"] = JavascriptAPIEvent(context: ctx, pluginInstance: self)
       apis["overlay"] = JavascriptAPIOverlay(context: ctx, pluginInstance: self)

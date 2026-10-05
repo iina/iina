@@ -32,9 +32,13 @@ mkdir -p "$work/input" "$work/home"
 # output is block buffered, so a run that dies loses its last 28KB. To read a
 # whole run, repeat the command by hand under `script -q /dev/null`, which gives
 # the app a pty and line buffering.
+# `-loadIccProfile NO` because the check that the held frame really was
+# reprojected reads the direction back out of the picture's own colour, and a
+# colour transform on the way to the screen would shift that reading.
 HOME="$work/home" IINA_VR2D_INPUTTEST="$work/input" \
   timeout 150 "$app/Contents/MacOS/IINA" \
     -singleClickAction 2 -doubleClickAction 0 \
+    -loadIccProfile NO \
     "$work/pattern_he_sbs.mkv" >"$work/input/iina.log" 2>&1 || true
 
 report="$work/input/report.json"

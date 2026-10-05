@@ -97,9 +97,15 @@ for pattern in $patterns; do
   # Plugins have to be off: a JS plugin that reprojects with the `v360` filter —
   # such as the one this fork replaces — would hand the shader an already
   # reprojected frame, and the resulting mess looks exactly like a shader bug.
+  # The display's ICC profile has to be off. The pattern encodes each pixel's
+  # own longitude and latitude in its colour, so a colour transform on the way
+  # to the screen rewrites the very numbers being measured: with the profile on,
+  # a render that samples exactly the right direction still reports several
+  # degrees out, because one step of red is 1.41 deg of longitude.
   HOME="$work/home" IINA_VR2D_SELFTEST="$work/run" \
     timeout 180 "$app/Contents/MacOS/IINA" \
       -vr2dAutoDetect NO \
+      -loadIccProfile NO \
       "$work/pattern_$pattern.mkv" >"$work/run/iina.log" 2>&1 || true
 
   if grep -q "Loaded JS plugin" "$work/run/iina.log"; then

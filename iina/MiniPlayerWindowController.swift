@@ -50,7 +50,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   var volumeControlContainer: NSView!
   var volumeControlBackground: NSVisualEffectView!
   var volumeContainerTrailingConstraint: NSLayoutConstraint!
-  var defaultAlbumArt: NSView!
   var togglePlaylistButton: NSButton!
   var toggleAlbumArtButton: NSButton!
 
@@ -111,18 +110,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     let videoWrapperTopConstraint = videoWrapperView.topAnchor.constraint(equalTo: cv.topAnchor)
     videoWrapperTopConstraint.priority = .defaultHigh
     videoWrapperTopConstraint.isActive = true
-
-    self.defaultAlbumArt = NSView()
-    defaultAlbumArt.translatesAutoresizingMaskIntoConstraints = false
-    defaultAlbumArt.isHidden = false
-    defaultAlbumArt.wantsLayer = true
-    defaultAlbumArt.layer?.contents = #imageLiteral(resourceName: "default-album-art")
-    videoWrapperView.addSubview(defaultAlbumArt)
-    defaultAlbumArt.padding(.top, .leading, .trailing)
-    let videoWrapperShrinkConstraint = videoWrapperView.bottomAnchor.constraint(equalTo: defaultAlbumArt.bottomAnchor)
-    videoWrapperShrinkConstraint.priority = NSLayoutConstraint.Priority(250)
-    videoWrapperShrinkConstraint.isActive = true
-    defaultAlbumArt.widthAnchor.constraint(equalTo: defaultAlbumArt.heightAnchor).isActive = true
 
     // background view
 
@@ -338,6 +325,14 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     closeButtonSpacingConstraint = backButton.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 4)
     closeButtonSpacingConstraint.isActive = true
 
+    // on screen display
+
+    self.osdView = OSDView()
+    cv.addSubview(osdView)
+    osdView.padding(.top(8), .leading(greaterThan: 8), .trailing(greaterThan: 8), .bottom(greaterThan: 8))
+    osdView.setStyle(Preference.liquidGlass(.osd) ? .liquidGlass : .visualEffect)
+    osdView.isHidden = true
+
     setToInitialWindowSize(display: false, animate: false)
 
     // tracking area
@@ -536,7 +531,10 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     guard player.info.isAudio == .isAudio else {
       return player.videoSizeForDisplay
     }
-    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
+    // Prefer the currently selected album art track, which is the one mpv is actually displaying.
+    // The default album art added by IINA also appears as an album art track.
+    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart && $0.isSelected })
+      ?? player.info.videoTracks.first(where: { $0.isAlbumart })
     if let albumArtTrack,
        let width = albumArtTrack.demuxW,
        let height = albumArtTrack.demuxH,
@@ -545,13 +543,6 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
       return (width, height)
     }
     return (1, 1)
-  }
-
-  func refreshArtworkVisibility() {
-    guard loaded else { return }
-    let albumArtTrack = player.info.videoTracks.first(where: { $0.isAlbumart })
-    let hasSubtitles = (player.info.isSubVisible && player.info.sid != 0) || (player.info.isSecondSubVisible && player.info.secondSid != 0)
-    defaultAlbumArt.isHidden = player.info.isAudio != .isAudio || albumArtTrack != nil || hasSubtitles
   }
 
   func setToInitialWindowSize(display: Bool = true, animate: Bool = true) {

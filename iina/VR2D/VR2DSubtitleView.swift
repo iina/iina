@@ -38,7 +38,9 @@ struct VR2DSubtitleStyle {
   var borderColor: NSColor?
   var borderSize: Double
   var backColor: NSColor?
-  var shadowColor: NSColor?
+  /// mpv's `sub-border-style`, which decides whether `backColor` is a drop
+  /// shadow or a box behind the text.
+  var borderStyle: String
   var shadowOffset: Double
   var blur: Double
   var spacing: Double
@@ -151,17 +153,23 @@ class VR2DSubtitleView: NSView {
       attributes[.strokeWidth] = -min(12, borderSize / pointSize * 100)
     }
     if style.spacing != 0 { attributes[.kern] = CGFloat(style.spacing) * heightScale }
-    if let back = style.backColor, back.alphaComponent > 0 {
-      attributes[.backgroundColor] = back
-    }
 
-    let shadowOffset = CGFloat(style.shadowOffset) * heightScale
-    if shadowOffset > 0, let shadowColor = style.shadowColor, shadowColor.alphaComponent > 0 {
-      let shadow = NSShadow()
-      shadow.shadowColor = shadowColor
-      shadow.shadowOffset = NSSize(width: shadowOffset, height: -shadowOffset)
-      shadow.shadowBlurRadius = CGFloat(style.blur) * heightScale
-      attributes[.shadow] = shadow
+    // mpv has one colour, `sub-back-color`, for two jobs: a box behind the text
+    // in the box border styles, and the drop shadow in the default one.
+    let drawsBox = style.borderStyle == "opaque-box" || style.borderStyle == "background-box"
+    if let back = style.backColor, back.alphaComponent > 0 {
+      if drawsBox {
+        attributes[.backgroundColor] = back
+      } else {
+        let shadowOffset = CGFloat(style.shadowOffset) * heightScale
+        if shadowOffset > 0 {
+          let shadow = NSShadow()
+          shadow.shadowColor = back
+          shadow.shadowOffset = NSSize(width: shadowOffset, height: -shadowOffset)
+          shadow.shadowBlurRadius = CGFloat(style.blur) * heightScale
+          attributes[.shadow] = shadow
+        }
+      }
     }
 
     label.attributedStringValue = NSAttributedString(string: text, attributes: attributes)

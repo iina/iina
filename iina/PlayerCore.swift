@@ -1472,8 +1472,8 @@ class PlayerCore: NSObject {
   /// camera. Returns the previous value so it can be put back.
   @discardableResult
   func vr2dSetVideoTimingOffset(_ offset: Double?) -> Double {
-    let previous = mpv.getDouble(MPVOption.Miscellaneous.videoTimingOffset)
-    if let offset { mpv.setDouble(MPVOption.Miscellaneous.videoTimingOffset, offset) }
+    let previous = mpv.getDouble(MPVOption.VideoSync.videoTimingOffset)
+    if let offset { mpv.setDouble(MPVOption.VideoSync.videoTimingOffset, offset) }
     return previous
   }
 
@@ -1502,10 +1502,10 @@ class PlayerCore: NSObject {
       bold: mpv.getFlag(MPVOption.Subtitles.subBold),
       italic: mpv.getFlag(MPVOption.Subtitles.subItalic),
       color: colour(MPVOption.Subtitles.subColor),
-      borderColor: colour(MPVOption.Subtitles.subBorderColor),
-      borderSize: mpv.getDouble(MPVOption.Subtitles.subBorderSize),
+      borderColor: colour(MPVOption.Subtitles.subOutlineColor),
+      borderSize: mpv.getDouble(MPVOption.Subtitles.subOutlineSize),
       backColor: colour(MPVOption.Subtitles.subBackColor),
-      shadowColor: colour(MPVOption.Subtitles.subShadowColor),
+      borderStyle: mpv.getString(MPVOption.Subtitles.subBorderStyle) ?? "outline-and-shadow",
       shadowOffset: mpv.getDouble(MPVOption.Subtitles.subShadowOffset),
       blur: mpv.getDouble(MPVOption.Subtitles.subBlur),
       spacing: mpv.getDouble(MPVOption.Subtitles.subSpacing),

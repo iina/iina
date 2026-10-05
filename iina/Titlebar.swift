@@ -340,7 +340,7 @@ class Titlebar: NSView {
       current = parent
     }
 
-    for pathURL in components {
+    for (index, pathURL) in components.enumerated() {
       let item = NSMenuItem()
       item.title = FileManager.default.displayName(atPath: pathURL.path)
       item.image = NSWorkspace.shared.icon(forFile: pathURL.path)
@@ -348,9 +348,12 @@ class Titlebar: NSView {
       if #available(macOS 27.0, *) {
         item.preferredImageVisibility = .visible
       }
-      item.representedObject = pathURL
-      item.target = self
-      item.action = #selector(revealInFinder(_:))
+      // Choosing a folder reveals the next path component in it; the document itself does nothing.
+      if index > 0 {
+        item.representedObject = components[index - 1]
+        item.target = self
+        item.action = #selector(revealInFinder(_:))
+      }
       menu.addItem(item)
     }
 
@@ -359,7 +362,7 @@ class Titlebar: NSView {
 
   @objc private func revealInFinder(_ sender: NSMenuItem) {
     guard let url = sender.representedObject as? URL else { return }
-    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: url.path)
+    NSWorkspace.shared.activateFileViewerSelecting([url])
   }
 
   private func updateShadow() {

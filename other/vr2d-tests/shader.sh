@@ -113,7 +113,7 @@ for pattern in $patterns; do
     exit 1
   fi
 
-  echo "$cases" | awk -F'|' -v p="$pattern" '$2 == p' | while IFS='|' read -r name pat input proj inh inv layout swap eye yaw pitch fov; do
+  echo "$cases" | awk -F'|' -v p="$pattern" '$2 == p' | while IFS='|' read -r name pat input proj in_hfov in_vfov layout swap eye yaw pitch fov; do
     rendered="$work/run/$name.png"
     if [ ! -f "$rendered" ]; then
       printf '%-22s NOT RENDERED\n' "$name"
@@ -143,7 +143,7 @@ for pattern in $patterns; do
 
     infov_opts=""
     if [ "$input" = "he" ] || [ "$input" = "fisheye" ]; then
-      infov_opts="ih_fov=$inh:iv_fov=$inv:"
+      infov_opts="ih_fov=$in_hfov:iv_fov=$in_vfov:"
     fi
 
     reference="$work/run/${name}_reference.png"

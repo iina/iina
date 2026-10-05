@@ -9,12 +9,16 @@ CPU filter, which costs about 0.064 s of CPU per megapixel of output on every
 parameter change and forces hardware decoding into copy-back. Inside the app
 none of that applies — mpv has already put the decoded frame in a texture.
 
-Measured on a 4096x2048 30 fps clip, 14 seconds of playback:
+Measured on a Release build, 14 seconds of a 4096x2048 30 fps clip, taking the
+first run of each arm as warm-up and discarding it:
 
 | | CPU time | Memory |
 |---|---|---|
-| Reprojection off | 18.03 s | 596 MB |
-| Reprojection on | 18.18 s | 594 MB |
+| Reprojection off | 1.4–1.5 s | 330 MB |
+| Reprojection on | 2.1–2.2 s | 331 MB |
+
+So the pass costs about 0.7 s of CPU over 14 seconds, a few percent of one core,
+and no memory worth reporting.
 
 ### Two things that made panning feel slow, and are not obvious
 
@@ -194,6 +198,12 @@ files mean — and the two are compared as an angle on the sphere. 28 cases acro
 five projections, both stereo layouts and both eyes agree with `v360` to within
 one step of the encoding, with a median difference of 0.000° in 26 of them.
 
+Both harnesses turn the display's ICC profile off for the run. The pattern's own
+colour *is* the measurement, so a colour transform on the way to the screen
+rewrites the numbers being read back: with the profile left on, a render that
+samples exactly the right direction still reports about 5.7° out, because one
+step of red is 1.41° of longitude.
+
 That comparison is also how the equi-angular cubemap was written: rather than
 guessing the face order and rotations, a `v360`-produced cubemap of a
 coordinate-encoded sphere was decoded to read the layout off directly.
@@ -215,7 +225,7 @@ coordinate-encoded sphere was decoded to read the layout off directly.
 ## Still open
 
 - **Measuring how smooth panning actually is, from outside, is unreliable.**
-  `other/vr2d-tests/profile` reports draws per second, but macOS throttles
+  Counting draws per second from outside the app does not work: macOS throttles
   presentation for a window that is not frontmost, and a run launched from a
   script usually is not. The same clip and build measured 130 draws/s in one run
   and 10 in another purely because of that, so only the figures taken from

@@ -33,9 +33,9 @@ final class PlaySliderLoopKnob: NSView {
 
   // MARK:- Private Properties
 
-  private var cell: PlaySliderCell!
-
-  private let knobHeight: CGFloat
+  private var knobHeight: CGFloat {
+    round(slider.sliderKnobHeight * PlaySliderLoopKnob.knobHeightAdjustment)
+  }
   
   /// Percentage of the height of the primary knob to use for the loop knobs when drawing.
   ///
@@ -55,9 +55,9 @@ final class PlaySliderLoopKnob: NSView {
   /// though the value has remained constant.
   private var x: CGFloat {
     get {
-      let bar = cell.barRect(flipped: isFlipped)
+      let bar = slider.sliderCell.barRect(flipped: isFlipped)
       // The usable width of the bar is reduced by the width of the knob.
-      let effectiveWidth = bar.width - cell.knobWidth
+      let effectiveWidth = bar.width - slider.sliderKnobWidth
       let percentage = CGFloat(doubleValue / slider.span)
       let calculatedX = constrainX(bar.origin.x + percentage * effectiveWidth)
       setFrameOrigin(NSPoint(x: calculatedX, y: frame.origin.y))
@@ -66,9 +66,9 @@ final class PlaySliderLoopKnob: NSView {
     set {
       let constrainedX = constrainX(newValue)
       // Calculate the value selected by the new location.
-      let bar = cell.barRect(flipped: isFlipped)
+      let bar = slider.sliderCell.barRect(flipped: isFlipped)
       // The usable width of the bar is reduced by the width of the knob.
-      let effectiveWidth = bar.width - cell.knobWidth
+      let effectiveWidth = bar.width - slider.sliderKnobWidth
       let percentage = Double((constrainedX - bar.origin.x) / effectiveWidth)
       doubleValue = percentage * slider.span
     }
@@ -83,9 +83,6 @@ final class PlaySliderLoopKnob: NSView {
   ///   - toolTip: The help tag to display for this thumb.
   init(slider: PlaySlider, toolTip: String) {
     self.slider = slider
-    self.cell = slider.customCell
-    // We want loop knobs to be shorter than the primary knob.
-    knobHeight = round(cell.knobHeight * PlaySliderLoopKnob.knobHeightAdjustment)
     // The frame is calculated and set once the superclass is initialized.
     super.init(frame: NSZeroRect)
     self.toolTip = toolTip
@@ -93,9 +90,14 @@ final class PlaySliderLoopKnob: NSView {
     isHidden = true
     // Set the size of the frame to match the size of the slider's knob. The frame origin will be
     // adjusted when the knob is unhidden.
-    let rect = cell.knobRect(flipped: isFlipped)
+    let rect = slider.sliderCell.knobRect(flipped: isFlipped)
     setFrameSize(NSSize(width: rect.width, height: rect.height))
     slider.addSubview(self)
+  }
+
+  func updateGeometry() {
+    setFrameSize(slider.sliderCell.knobRect(flipped: isFlipped).size)
+    needsDisplay = true
   }
 
   required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -104,9 +106,9 @@ final class PlaySliderLoopKnob: NSView {
   /// - Parameter x: The proposed x coordinate.
   /// - Returns: The given x coordinate constrained to keep the knob within the bar.
   private func constrainX(_ x: CGFloat) -> CGFloat {
-    let bar = cell.barRect(flipped: isFlipped)
+    let bar = slider.sliderCell.barRect(flipped: isFlipped)
     // The coordinate must be short of the end of the bar to keep the knob within the bar.
-    let maxX = bar.maxX - cell.knobWidth
+    let maxX = bar.maxX - slider.sliderKnobWidth
     return x.clamped(to: bar.minX...maxX)
   }
 
@@ -129,18 +131,19 @@ final class PlaySliderLoopKnob: NSView {
     let adjustedY = rect.origin.y + (rect.height - knobHeight) / 2
     let drawing: NSRect
     if #available(macOS 14, *) {
-      drawing = NSMakeRect(0, adjustedY, cell.knobWidth, knobHeight)
+      drawing = NSMakeRect(0, adjustedY, slider.sliderKnobWidth, knobHeight)
     } else {
       // Round the X position for cleaner drawing
-      drawing = NSMakeRect(round(rect.origin.x), adjustedY, cell.knobWidth, knobHeight)
+      drawing = NSMakeRect(round(rect.origin.x), adjustedY, slider.sliderKnobWidth, knobHeight)
     }
-    let path = NSBezierPath(roundedRect: drawing, xRadius: cell.knobRadius, yRadius: cell.knobRadius)
+    let path = NSBezierPath(roundedRect: drawing, xRadius: slider.sliderKnobRadius,
+                            yRadius: slider.sliderKnobRadius)
     knobColor().setFill()
     path.fill()
   }
 
   private func knobRect() -> NSRect {
-    let rect = cell.knobRect(flipped: isFlipped)
+    let rect = slider.sliderCell.knobRect(flipped: isFlipped)
     return NSMakeRect(x, rect.origin.y, rect.width, rect.height)
   }
 
@@ -177,7 +180,7 @@ final class PlaySliderLoopKnob: NSView {
   override func mouseDown(with event: NSEvent) {
     let clickLocation = slider.convert(event.locationInWindow, from: nil)
     // If this click lands on the play knob then pass the event up the responder chain.
-    if isMousePoint(clickLocation, in: slider.customCell.knobRect(flipped: slider.isFlipped)) {
+    if isMousePoint(clickLocation, in: slider.sliderCell.knobRect(flipped: slider.isFlipped)) {
       super.mouseDown(with: event)
       return
     }

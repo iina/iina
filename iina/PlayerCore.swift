@@ -714,7 +714,7 @@ class PlayerCore: NSObject {
     info.state = .shuttingDown
     guard !backgroundTaskInUse else { return }
     log("Shutting down")
-    savePlayerState()
+    refreshSyncUITimer()
     mpv.mpvQuit()
   }
 
@@ -951,7 +951,9 @@ class PlayerCore: NSObject {
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
     guard info.state != .shutDown else { return }
-    savePlaybackPosition()
+    if !(AppDelegate.shared.isTerminating && info.state == .idle) {
+      savePlaybackPosition()
+    }
 
     // The player may already be stopped in which case the state must not be set to stopping.
     if info.state != .idle {

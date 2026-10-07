@@ -46,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   private var commandLineStatus = CommandLineStatus()
 
-  private var isTerminating = false
+  private(set) var isTerminating = false
 
   /// Longest time to wait for asynchronous shutdown tasks to finish before giving up on waiting and proceeding with termination.
   ///

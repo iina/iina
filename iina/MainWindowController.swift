@@ -2572,6 +2572,9 @@ class MainWindowController: PlayerWindowController {
 
     if player.info.justOpenedFile && !Preference.bool(for: .edgeToEdgeVideo) && Preference.bool(for: .dockedControlBarAndTitlebar) {
       rect.size.height += titleBarView.frame.height
+      if oscPosition == .bottom {
+        rect.size.height += oscBottomView.frame.height
+      }
     }
 
     if Preference.unlockWindowAspectRatio && !player.info.justOpenedFile {

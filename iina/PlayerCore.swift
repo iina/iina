@@ -1995,6 +1995,7 @@ class PlayerCore: NSObject {
 
   func setSubFont(_ font: String) {
     mpv.setString(MPVOption.Subtitles.subFont, font)
+    postNotification(.iinaSubFontChanged)
   }
 
   func savePlaybackPosition() {

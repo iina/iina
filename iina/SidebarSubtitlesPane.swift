@@ -487,10 +487,13 @@ fileprivate class SubStyleView: NSView {
     addSubview(stack)
     stack.padding(.all)
 
-    updateScale()
+    update()
     updateTextStyle()
     player.observe(.iinaSubScaleChanged) { [unowned self] _ in
-      updateScale()
+      update()
+    }
+    player.observe(.iinaSubFontChanged) { [unowned self] _ in
+      update()
     }
   }
 
@@ -514,7 +517,7 @@ fileprivate class SubStyleView: NSView {
     return colorWell
   }
 
-  private func updateScale() {
+  private func update() {
     let subFont = player.mpv.getString(MPVOption.Subtitles.subFont) ??
       NSLocalizedString("sidebar.font", comment: "");
     fontChooser.title = subFont

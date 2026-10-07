@@ -318,6 +318,7 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     )
     size(height: 24)
 
+    update()
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -372,6 +373,7 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
     scrollView.documentView = segmentControl
     size(height: 24)
 
+    update()
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -437,6 +439,7 @@ fileprivate class RotationView: NSView {
     addSubview(segmentControl)
     segmentControl.padding(.all)
 
+    update()
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -681,6 +684,7 @@ fileprivate class EqualizerView: NSView {
     addSubview(stack)
     stack.padding(.horizontal(1), .vertical(2))
 
+    update()
     player.observe(.iinaVideoEqualizerChanged) { [unowned self] _ in
       update()
     }

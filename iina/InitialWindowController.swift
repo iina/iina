@@ -43,6 +43,7 @@ class InitialWindowController: NSWindowController {
 
   private let observedPrefKeys: [Preference.Key] = [.themeMaterial]
   private var currentlyHoveredRow: GrayHighlightRowView?
+  private var notificationObservers: [NSObjectProtocol] = []
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard let keyPath, let change else { return }
@@ -71,6 +72,12 @@ class InitialWindowController: NSWindowController {
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  deinit {
+    notificationObservers.forEach {
+      NotificationCenter.default.removeObserver($0)
+    }
   }
 
   override func showWindow(_ sender: Any?) {
@@ -233,6 +240,11 @@ class InitialWindowController: NSWindowController {
     setMaterial(Preference.enum(for: .themeMaterial))
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
+    }
+    notificationObservers = [Notification.Name.iinaHistoryUpdated, .iinaRecentDocumentsUpdated].map { name in
+      NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
+        self?.reloadData()
+      }
     }
     reloadData()
   }

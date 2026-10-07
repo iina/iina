@@ -1166,6 +1166,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   func clearRecentDocuments(_ sender: Any?) {
     NSDocumentController.shared.clearRecentDocuments(sender)
     saveRecentDocuments()
+    NotificationCenter.default.post(name: .iinaRecentDocumentsUpdated, object: nil)
   }
 
   /// Adds or replaces an Open Recent menu item corresponding to the data located by the URL.
@@ -1177,6 +1178,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   func noteNewRecentDocumentURL(_ url: URL) {
     NSDocumentController.shared.noteNewRecentDocumentURL(url)
     saveRecentDocuments()
+    NotificationCenter.default.post(name: .iinaRecentDocumentsUpdated, object: nil)
   }
 
   /// Restore the list of recently opened files.

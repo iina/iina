@@ -127,9 +127,8 @@ class SettingsPageUtilities: SettingsPage {
     guard let window = (sender as? NSView)?.window else { return }
     Utility.quickAskPanel("clear_history", sheetWindow: window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
-      try? FileManager.default.removeItem(atPath: Utility.playbackHistoryURL.path)
+      HistoryController.shared.removeAll()
       AppDelegate.shared.clearRecentDocuments(self)
-      Preference.set(nil, for: .iinaLastPlayedFilePath)
       Utility.showAlert("cleared", style: .informational, sheetWindow: window)
     }
   }

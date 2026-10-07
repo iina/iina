@@ -60,7 +60,7 @@ class SettingsPageUtilities: SettingsPage {
             .hasDescription(content: .text_DeleteAllWatchLater)
           SettingsItem.General(title: .text_ClearPlaybackHistory)
             .image(name: ["document.badge.clock", "doc.badge.clock", "doc"])
-            .extraViews(thumbCacheSizeLabel, actionButton(action: #selector(clearCacheBtnAction), symbolName: ["trash"]))
+            .extraViews(actionButton(action: #selector(clearHistoryBtnAction), symbolName: ["trash"]))
             .hasDescription(content: .text_DeleteAllPlaybackHistories)
           SettingsItem.General(title: .text_ClearThumbnailCache)
             .image(name: "photo")

@@ -118,6 +118,26 @@ class SidebarVideoPane: SidebarScrollView {
     updateHDR()
     player.observe(.iinaHDRChanged) { _ in updateHDR() }
 
+    let deinterlaceSwitch = NSSwitch()
+    if #available(macOS 26, *) {
+      deinterlaceSwitch.controlSize = .small
+    }
+    deinterlaceSwitch.target = self
+    deinterlaceSwitch.action = #selector(deinterlaceAction(_:))
+    let updateDeinterlace = { [unowned self, weak deinterlaceSwitch] in
+      deinterlaceSwitch?.state = player.info.deinterlace ? .on : .off
+    }
+    updateDeinterlace()
+    player.observe(.iinaDeinterlaceChanged) { _ in updateDeinterlace() }
+
+    let deinterlaceRow = ui.hStack(
+      spacing: 8,
+      ui.image("circle.lefthalf.filled.righthalf.striped.horizontal", "line.3.horizontal", size: 16, config: .sidebarIconConfig),
+      ui.label("quicksetting.deinterlace"),
+      ui.flexibleSpace(),
+      deinterlaceSwitch
+    )
+
     let stack = ui.vStack(
       align: .leading,
       spacing: .sidebarItemSpacing,
@@ -129,6 +149,7 @@ class SidebarVideoPane: SidebarScrollView {
         ui.flexibleSpace(),
         HwdecSwitch(player: player),
       ),
+      deinterlaceRow,
       hdrRow
     )
 
@@ -140,6 +161,10 @@ class SidebarVideoPane: SidebarScrollView {
   @objc private func hdrAction(_ sender: NSSwitch) {
     self.player.info.hdrEnabled = sender.state == .on
     self.player.refreshEdrMode()
+  }
+
+  @objc private func deinterlaceAction(_ sender: NSSwitch) {
+    self.player.toggleDeinterlace(sender.state == .on)
   }
 }
 

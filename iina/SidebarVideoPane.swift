@@ -93,6 +93,31 @@ class SidebarVideoPane: SidebarScrollView {
     container.setContentHuggingPriority(.init(100), for: .horizontal)
     container.translatesAutoresizingMaskIntoConstraints = false
 
+    let hdrSwitch = NSSwitch()
+    if #available(macOS 26, *) {
+      hdrSwitch.controlSize = .small
+    }
+    hdrSwitch.target = self
+    hdrSwitch.action = #selector(hdrAction(_:))
+
+    let hdrRow = ui.hStack(
+      spacing: 8,
+      ui.image("sun.max", size: 16, config: .sidebarIconConfig),
+      ui.label("quicksetting.hdr"),
+      ui.flexibleSpace(),
+      hdrSwitch
+    )
+
+    let updateHDR = { [unowned self, weak hdrRow, weak hdrSwitch] in
+      let available = self.player.info.hdrAvailable
+      hdrRow?.isHidden = !available
+      if available {
+        hdrSwitch?.state = self.player.info.hdrEnabled ? .on : .off
+      }
+    }
+    updateHDR()
+    player.observe(.iinaHDRChanged) { _ in updateHDR() }
+
     let stack = ui.vStack(
       align: .leading,
       spacing: .sidebarItemSpacing,
@@ -104,18 +129,17 @@ class SidebarVideoPane: SidebarScrollView {
         ui.flexibleSpace(),
         HwdecSwitch(player: player),
       ),
-      ui.hStack(
-        spacing: 8,
-        ui.image("sun.max", size: 16, config: .sidebarIconConfig),
-        ui.label("quicksetting.hdr"),
-        ui.flexibleSpace(),
-        HDRSwitch(player: player)
-      )
+      hdrRow
     )
 
     container.addSubview(stack)
     stack.padding(.all)
     return container
+  }
+
+  @objc private func hdrAction(_ sender: NSSwitch) {
+    self.player.info.hdrEnabled = sender.state == .on
+    self.player.refreshEdrMode()
   }
 }
 
@@ -195,7 +219,7 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
       contentView.postsBoundsChangedNotifications = true
       NotificationCenter.default.addObserver(
         self,
-        selector: #selector(contentDidScroll),
+        selector: #selector(updateMask),
         name: NSView.boundsDidChangeNotification,
         object: contentView
       )
@@ -209,11 +233,12 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
       NotificationCenter.default.removeObserver(self)
     }
 
-    @objc private func contentDidScroll(_ note: Notification) {
+    override func layout() {
+      super.layout()
       updateMask()
     }
 
-    private func updateMask() {
+    @objc private func updateMask(_ notification: Notification? = nil) {
       guard let documentView else { return }
 
       let visibleWidth = contentView.bounds.width
@@ -276,7 +301,7 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     super.init(frame: .zero)
 
     self.segmentControl = NSSegmentedControl(
-      labels: AppData.aspectsInPanel,
+      labels: [ui.localized("quicksetting.item_default")] + AppData.aspectsInPanel.dropFirst(1),
       trackingMode: .selectOne,
       target: self, action: #selector(aspectRatioAction)
     )
@@ -338,7 +363,7 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
     super.init(frame: .zero)
 
     self.segmentControl = NSSegmentedControl(
-      labels: AppData.cropsInPanel + [NSLocalizedString("menu.crop_custom", comment: "")],
+      labels: [ui.localized("quicksetting.item_none")] + AppData.cropsInPanel.dropFirst(1) + [ui.localized("menu.crop_custom")],
       trackingMode: .selectOne,
       target: self, action: #selector(cropAction)
     )
@@ -370,9 +395,14 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
   @objc private func cropAction(_ sender: AnyObject) {
     if segmentControl.selectedSegment == segmentControl.segmentCount - 1 {
       guard let mainWindow = player.mainWindow else { return }
-      // User clicked on "Custom...": show custom crop UI
-      mainWindow.sidebars.hideAllSideBars {
-        mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
+      // User clicked on "Custom...": show interactive mode
+      // run asynchronically to wait for potential videoview resize
+      Task { @MainActor in
+        mainWindow.player.removeCropFilter()
+        mainWindow.forceDraw("reset crop filter")
+        mainWindow.sidebars.hideAllSideBars {
+          mainWindow.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+        }
       }
     } else {
       let cropStr = AppData.cropsInPanel[segmentControl.selectedSegment]
@@ -462,39 +492,7 @@ fileprivate class HwdecSwitch: NSSwitch {
   }
 }
 
-fileprivate class HDRSwitch: NSSwitch {
-  private unowned let player: PlayerCore
 
-  init(player: PlayerCore) {
-    self.player = player
-    super.init(frame: .zero)
-
-    if #available(macOS 26, *) {
-      controlSize = .small
-    }
-    target = self
-    action = #selector(hdrAction)
-    update()
-
-    player.observe(.iinaHDRChanged) { [unowned self] _ in
-      update()
-    }
-  }
-
-  private func update() {
-    isEnabled = player.info.hdrAvailable
-    state = (player.info.hdrAvailable && player.info.hdrEnabled) ? .on : .off
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  @objc private func hdrAction(_ sender: AnyObject) {
-    self.player.info.hdrEnabled = sender.state == .on
-    self.player.refreshEdrMode()
-  }
-}
 
 
 fileprivate let speedFormatter: NumberFormatter = {
@@ -534,7 +532,7 @@ fileprivate class SpeedView: SidebarSliderView {
       slider.neutralValue = 8
     }
     input.formatter = speedFormatter
-    resetButton.toolTip = NSLocalizedString("quicksetting.reset_speed", comment: "Reset speed to 1x")
+    resetButton.toolTip = ui.localized("quicksetting.reset_speed")
   }
 
   /// Return the slider value that represents the given playback speed.
@@ -645,7 +643,7 @@ fileprivate class EqualizerView: NSView {
     var firstLabel: NSTextField?
 
     for c in configs {
-      let label = ui.label("sidebar.\(c.labelKey)", isSmall: true)
+      let label = ui.label("sidebar.\(c.labelKey)", isSmall: true, canCompress: false)
 
       let slider = NSSlider()
       slider.tag = c.tag

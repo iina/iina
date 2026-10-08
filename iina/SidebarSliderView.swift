@@ -14,12 +14,13 @@ class SidebarSliderView: NSView {
 
   var notificationKey: Notification.Name { .init("") }
   var slider: NSSlider!
+  var tickMarkTextFieldsConstraints: [NSLayoutConstraint] = []
   var input: NSTextField!
   var indicator: NSTextField!
   var indicatorConstraint: NSLayoutConstraint!
   var resetButton: NSButton!
 
-  var sliderWidth: CGFloat { 240 }
+  var inputWidth: CGFloat { 50 }
   var titleImage: NSImage? { nil }
   var titleKey: String { "" }
   var tickMarkLabels: [String] { [] }
@@ -63,21 +64,24 @@ class SidebarSliderView: NSView {
       resetButton,
     )
 
-    let numSpaces = CGFloat(tickMarkLabels.count - 1)
-
     let tickMarkView = NSView()
     tickMarkView.translatesAutoresizingMaskIntoConstraints = false
+
     for (i, label) in tickMarkLabels.enumerated() {
       let label = NSTextField(labelWithString: label)
       label.translatesAutoresizingMaskIntoConstraints = false
       label.font = .systemFont(ofSize: 10)
       tickMarkView.addSubview(label)
-      let xPos = xOffset(CGFloat(i) / numSpaces)
-      let constraint = label.centerXAnchor
-        .constraint(equalTo: tickMarkView.leadingAnchor, constant: xPos)
-      constraint.priority = .defaultHigh
-      constraint.isActive = true
-      label.padding(.vertical, .horizontal(greaterThan: 0))
+      label.padding(.vertical)
+      if i == 0 {
+        label.leadingAnchor.constraint(equalTo: tickMarkView.leadingAnchor).isActive = true
+      } else if i == tickMarkLabels.count - 1 {
+        label.trailingAnchor.constraint(equalTo: tickMarkView.trailingAnchor).isActive = true
+      } else {
+        let constraint = label.centerXAnchor.constraint(equalTo: tickMarkView.leadingAnchor, constant: 0)
+        constraint.isActive = true
+        tickMarkTextFieldsConstraints.append(constraint)
+      }
     }
 
     setup()
@@ -98,11 +102,12 @@ class SidebarSliderView: NSView {
     labelStack.padding(.horizontal, .top)
     slider.padding(.leading, .bottom(16))
       .spacing(.top(18), to: labelStack)
-      .size(width: sliderWidth)
     input.padding(.trailing).spacing(.leading(8), to: slider)
       .center(.y, with: slider)
+      .size(width: inputWidth)
     tickMarkView.padding(.leading, .bottom)
-      .size(width: sliderWidth)
+
+    tickMarkView.widthAnchor.constraint(equalTo: slider.widthAnchor, multiplier: 1).isActive = true
 
     player.observe(notificationKey) { [unowned self] _ in
       update_()
@@ -113,9 +118,22 @@ class SidebarSliderView: NSView {
     update_()
   }
 
+  override func layout() {
+    super.layout()
+
+    let numSpaces = CGFloat(tickMarkLabels.count - 1)
+    for (i, constraint) in tickMarkTextFieldsConstraints.enumerated() {
+      let xPos = xOffset(CGFloat(i + 1) / numSpaces)
+      if constraint.constant != xPos {
+        constraint.constant = xPos
+      }
+    }
+    updateIndicator()
+  }
+
   func xOffset(_ p: CGFloat) -> CGFloat {
     let knobWidth = slider.knobThickness
-    return knobWidth / 2 + p * (sliderWidth - knobWidth)
+    return knobWidth / 2 + p * (slider.frame.size.width - knobWidth)
   }
 
   func updateIndicator() {
@@ -124,8 +142,10 @@ class SidebarSliderView: NSView {
     indicator.stringValue = indicatorLabel()
 
     let p = CGFloat((slider.doubleValue - slider.minValue) / (slider.maxValue - slider.minValue))
-    indicatorConstraint.constant = xOffset(p)
-    layout()
+    let xPos = xOffset(p)
+    if indicatorConstraint.constant != xPos {
+      indicatorConstraint.constant = xPos
+    }
   }
 
   private func update_() {

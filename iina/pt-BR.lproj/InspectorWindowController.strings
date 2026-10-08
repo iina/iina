@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "Forced"; ObjectID = "0vG-Pg-DIl"; */
-"0vG-Pg-DIl.title" = "Forçar";
+"0vG-Pg-DIl.title" = "Forçado";
 
 /* Class = "NSTextFieldCell"; title = "FPS:"; ObjectID = "1dz-Vt-0MO"; */
 "1dz-Vt-0MO.title" = "FPS:";
@@ -67,6 +67,9 @@
 /* Class = "NSTextFieldCell"; title = "Driver:"; ObjectID = "MME-KZ-jrG"; */
 "MME-KZ-jrG.title" = "Driver:";
 
+/* Class = "NSTextFieldCell"; title = "Comment:"; ObjectID = "O4m-5f-4hM"; */
+"O4m-5f-4hM.title" = "Comment:";
+
 /* Class = "NSTextFieldCell"; title = "Duration:"; ObjectID = "OCm-zb-deg"; */
 "OCm-zb-deg.title" = "Duração:";
 
@@ -96,6 +99,9 @@
 
 /* Class = "NSTabViewItem"; label = "File"; ObjectID = "WrI-Sr-O2S"; */
 "WrI-Sr-O2S.label" = "Arquivo";
+
+/* Class = "NSTextFieldCell"; title = "Title:"; ObjectID = "ZXF-fr-bWN"; */
+"ZXF-fr-bWN.title" = "Título:";
 
 /* Class = "NSTextFieldCell"; title = "Codec:"; ObjectID = "bki-sE-xCA"; */
 "bki-sE-xCA.title" = "Codec:";
@@ -167,7 +173,7 @@
 "mLo-Wc-BoO.title" = "Sistema de cor:";
 
 /* Class = "NSTextFieldCell"; title = "Pixel Format:"; ObjectID = "UrR-u2-hFz"; */
-"UrR-u2-hFz.title" = "Pixel Format:";
+"UrR-u2-hFz.title" = "Formato de Pixel:";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
 "zDk-Ie-EPs.headerCell.title" = "Nome";

@@ -101,6 +101,11 @@ class PlaybackInfo {
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
 
+  var progress: Double {
+    guard let progress = videoPosition / videoDuration else { return 0 }
+    return progress
+  }
+
   /// Remaining playback time.
   ///
   /// This will or will not reflect the speed at which playback is occurring depending upon whether the `scaleRemainingTime`
@@ -222,7 +227,7 @@ class PlaybackInfo {
       id = secondSid
       list = subTracks
     }
-    if let id = id {
+    if let id {
       return list.first { $0.id == id }
     } else {
       return nil
@@ -235,6 +240,8 @@ class PlaybackInfo {
   ///     To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock. The cache
   ///     properties are private to force all access to be through class methods that properly coordinate thread access.
   @Atomic var playlist: [MPVPlaylistItem] = []
+
+  var isShuffled = false
   private var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
   private var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
 

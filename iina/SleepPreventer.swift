@@ -58,7 +58,7 @@ class SleepPreventer: NSObject {
   }
 
   static private func allowSleep() {
-    guard let activityToken = activityToken else { return }
+    guard let activityToken else { return }
     ProcessInfo.processInfo.endActivity(activityToken)
     SleepPreventer.activityToken = nil
     

@@ -78,12 +78,13 @@ from typing import Callable, Optional
 # --- Constants ---
 
 LC_RPATH: str = '@executable_path/../Frameworks'
-APP_FRAMEWORKS_RELPATH = "Contents/Frameworks"
-APP_EXECUTABLES_RELPATH = "Contents/MacOS"
+
+# Only used for --merge-architectures
+DEPS_LIB_RELPATH = "deps/lib"
+DEPS_EXECUTABLE_RELPATH = "deps/executable"
 
 # Set of lib IDs to exclude.
 IDS_TO_IGNORE: set[str] = {
-  'libswift_Concurrency', # This needs to be included for pre-MacOS 12 builds
   'libffi-trampoline',    # Skip 'libffi-trampoline' (apparently a typo of 'libffi-trampolines'?)
 }
 
@@ -93,8 +94,10 @@ IDS_TO_IGNORE: set[str] = {
 # This is a dict of {base_id -> (compatibility_version, lib_path)}
 USR_LIB_ITEMS: dict[str, tuple[str, str]] = {
   'libbz2': ('2', '/usr/lib/libbz2.dylib'),
+  'libc++': ('1', '/usr/lib/libc++.dylib'),
+  'libc++abi': ('1', '/usr/lib/libc++abi.dylib'),
   'libcharset': ('1', '/usr/lib/libcharset.1.dylib'),
-  'libexpat': ('13', '/usr/lib/libexpat.1.dylib'),
+  'libexpat': ('14', '/usr/lib/libexpat.1.dylib'),
   'libffi': ('9', '/usr/lib/libffi.dylib'),
   'libiconv': ('7', '/usr/lib/libiconv.2.dylib'),
   'liblzma': ('14', '/usr/lib/liblzma.5.dylib'),
@@ -108,11 +111,11 @@ def make_arg_parser() -> argparse.ArgumentParser:
   parser = argparse.ArgumentParser(description="Tool for manipulating & organizing IINA's libs & their dependencies for use in the app bundle. This script is mostly intended to be used as part of the IINA build process, and is not intended for manual use, though it can be called manually for debugging purposes. For those who just want to build the libs, start with {project_dir}/other/build_deps.py.")
 
   parser.add_argument('lib_dir', type=str,
-      help=f"Path to the 'lib' or '$app_bundle/{APP_FRAMEWORKS_RELPATH}' directory"
+      help=f"Path to the 'lib' directory"
   )
 
   parser.add_argument('executable_dir', type=str,
-      help=f"Path to the 'executable' or '$app_bundle/{APP_EXECUTABLES_RELPATH}' directory"
+      help=f"Path to the 'executable' directory"
   )
 
   group = parser.add_argument_group()
@@ -401,8 +404,8 @@ class LibMetaDB:
       shutil.copy2(tmpfile, dst_path)
 
     # Merge lib dirs
-    libs0 = os.path.join(archroot0, APP_FRAMEWORKS_RELPATH)
-    libs1 = os.path.join(archroot1, APP_FRAMEWORKS_RELPATH)
+    libs0 = os.path.join(archroot0, DEPS_LIB_RELPATH)
+    libs1 = os.path.join(archroot1, DEPS_LIB_RELPATH)
 
     def merge_lib(lib_basename, _):
       path0 = os.path.join(libs0, lib_basename)
@@ -414,8 +417,8 @@ class LibMetaDB:
 
     # Merge executable dirs
 
-    exe0 = os.path.join(archroot0, APP_EXECUTABLES_RELPATH)
-    exe1 = os.path.join(archroot1, APP_EXECUTABLES_RELPATH)
+    exe0 = os.path.join(archroot0, DEPS_EXECUTABLE_RELPATH)
+    exe1 = os.path.join(archroot1, DEPS_EXECUTABLE_RELPATH)
 
     def merge_exe(exe_basename, _):
       path0 = os.path.join(exe0, exe_basename)
@@ -595,6 +598,26 @@ class CanonicalNameDB:
       shutil.move(lib_path, os.path.join(lib_dir, lib_basename))
 
     for_all_libs_in_lib_dir(lib_staging_dir_path, normalize_lib)
+
+    def print_arch_for_lib(lib_basename, lib_path):
+      stdoutput = subprocess.run(['lipo', '-info', lib_path], capture_output=True, text=True).stdout
+      arch = "unknown"
+      if stdoutput.startswith('Non-fat'):
+        if 'x86_64' in stdoutput:
+          arch = "x86_64"
+        elif 'arm64' in stdoutput:
+          arch = "arm64"
+        else:
+          print(f'⚠️ Failed to parse lipo -info for non-fat file, skipping: {lib_path}')
+      elif ('Architectures in the fat file' in stdoutput) and ('arm64' in stdoutput) and ('x86_64' in stdoutput):
+        # If only one arch available, leave it alone
+        arch = "universal"
+      else:
+        print(f'⚠️ Failed to parse lipo -info for file, skipping: {lib_path}')
+
+      print(f'Architecture for {os.path.abspath(lib_path)}: {arch}')
+
+    # for_all_libs_in_lib_dir(lib_dir, print_arch_for_lib)
 
     # Remove libStaging now that all libs have been transferred.
     shutil.rmtree(lib_staging_dir_path)

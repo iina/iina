@@ -2,7 +2,7 @@
 "0Cz-OE-85L.title" = "Atraso da legenda + 0.1s";
 
 /* Class = "NSMenuItem"; title = "Show Playlist Panel"; ObjectID = "0T7-Nu-SL7"; */
-"0T7-Nu-SL7.title" = "Mostrar painel de playlist";
+"0T7-Nu-SL7.title" = "Mostrar Painel de Lista de Reprodução";
 
 /* Class = "NSMenuItem"; title = "Open URL…"; ObjectID = "0m7-3r-twH"; */
 "0m7-3r-twH.title" = "Abrir URL…";
@@ -113,7 +113,7 @@
 "DRb-Y8-xir.title" = "Trilha de Audio";
 
 /* Class = "NSMenuItem"; title = "Load External Audio…"; ObjectID = "3xl-iD-85w"; */
-"3xl-iD-85w.title" = "Load External Audio…";
+"3xl-iD-85w.title" = "Carregar Áudio Externo…";
 
 /* Class = "NSMenuItem"; title = "Speed Down to 0.9x"; ObjectID = "DUP-nm-BJt"; */
 "DUP-nm-BJt.title" = "Reduzir em 0.9x";
@@ -152,7 +152,7 @@
 "GR6-4V-lRT.title" = "Prox Midia";
 
 /* Class = "NSMenuItem"; title = "Playlist"; ObjectID = "Gi5-1S-RQB"; */
-"Gi5-1S-RQB.title" = "Playlist";
+"Gi5-1S-RQB.title" = "Lista de Reprodução";
 
 /* Class = "NSMenuItem"; title = "Crop"; ObjectID = "Gqg-wU-RRo"; */
 "Gqg-wU-RRo.title" = "Corte";
@@ -209,7 +209,7 @@
 "5dT-kq-WV9.title" = "Encontrar Legendas on-line em";
 
 /* Class = "NSMenuItem"; title = "Save Current Playlist…"; ObjectID = "Mjr-lL-oEt"; */
-"Mjr-lL-oEt.title" = "Salvar Playlist atual…";
+"Mjr-lL-oEt.title" = "Salvar Lista de Reprodução Atual…";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "NMo-om-nkz"; */
 "NMo-om-nkz.title" = "Serviços";
@@ -269,7 +269,7 @@
 "UOE-MJ-8ku.title" = "Pausa";
 
 /* Class = "NSMenu"; title = "Secondary Subtitle"; ObjectID = "UwY-P2-Xdb"; */
-"UwY-P2-Xdb.title" = "Secondary Subtitle";
+"UwY-P2-Xdb.title" = "Legenda Secundária";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "VDZ-ro-z5z"; */
 "VDZ-ro-z5z.title" = "Refazer";
@@ -302,13 +302,13 @@
 "ZnF-yX-7jP.title" = "Customizar Touch Bar…";
 
 /* Class = "NSMenuItem"; title = "Playlist Loop"; ObjectID = "aSc-P6-fiZ"; */
-"aSc-P6-fiZ.title" = "Loop da Playlist";
+"aSc-P6-fiZ.title" = "Repetição da Lista de Reprodução";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "aUF-d1-5bR"; */
 "aUF-d1-5bR.title" = "Janela";
 
 /* Class = "NSMenu"; title = "Playlist"; ObjectID = "aXa-aM-Jaq"; */
-"aXa-aM-Jaq.title" = "Playlist";
+"aXa-aM-Jaq.title" = "Lista de Reprodução";
 
 /* Class = "NSMenuItem"; title = "Rotation"; ObjectID = "ar5-3T-O9h"; */
 "ar5-3T-O9h.title" = "Rotação";
@@ -335,7 +335,7 @@
 "c6Y-0e-vgf.title" = "Volume + 1%";
 
 /* Class = "NSMenuItem"; title = "Show Current File in Finder"; ObjectID = "che-dy-QUU"; */
-"che-dy-QUU.title" = "Show Current File in Finder";
+"che-dy-QUU.title" = "Mostrar Arquivo Atual no Finder";
 
 /* Class = "NSMenuItem"; title = "Aspect Ratio"; ObjectID = "d15-8v-dXA"; */
 "d15-8v-dXA.title" = "Proporção";
@@ -350,7 +350,7 @@
 "dMs-cI-mzQ.title" = "Arquivo";
 
 /* Class = "NSMenuItem"; title = "Stop and Clear Playlists"; ObjectID = "deS-xK-iBb"; */
-"deS-xK-iBb.title" = "Para e limpar Playlists";
+"deS-xK-iBb.title" = "Parar e Limpar Listas de Reprodução";
 
 /* Class = "NSMenu"; title = "Crop"; ObjectID = "eo2-Tt-SLx"; */
 "eo2-Tt-SLx.title" = "Corte";
@@ -401,7 +401,7 @@
 "m7w-hc-Y2F.title" = "Tudo em Maiúsculas";
 
 /* Class = "NSMenuItem"; title = "Secondary Subtitle"; ObjectID = "mGw-jm-5x2"; */
-"mGw-jm-5x2.title" = "Secondary Subtitle";
+"mGw-jm-5x2.title" = "Legenda Secundária";
 
 /* Class = "NSMenuItem"; title = "Enter Picture in Picture"; ObjectID = "mND-N8-z6o"; */
 "mND-N8-z6o.title" = "Entrar em Picture in Picture";
@@ -478,6 +478,12 @@
 /* Class = "NSMenuItem"; title = "Float on Top"; ObjectID = "wex-rX-PcY"; */
 "wex-rX-PcY.title" = "Flutuar na frente";
 
+/* Class = "NSMenuItem"; title = "Lock Window Aspect Ratio"; ObjectID = "Saz-zT-RXt"; */
+"Saz-zT-RXt.title" = "Lock Window Aspect Ratio";
+
+/* Class = "NSMenuItem"; title = "Live Text"; ObjectID = "lq9-av-Um9"; */
+"lq9-av-Um9.title" = "Live Text";
+
 /* Class = "NSMenuItem"; title = "Saved Audio Filters"; ObjectID = "wgZ-DO-nn3"; */
 "wgZ-DO-nn3.title" = "Filtros de Audio Salvos";
 
@@ -512,4 +518,4 @@
 "Qwb-26-zjX.title" = "Abrir URL…";
 
 /* Class = "NSMenuItem"; title = "Release Highlights"; ObjectID = "kOx-hc-aQG"; */
-"kOx-hc-aQG.title" = "Release Highlights";
+"kOx-hc-aQG.title" = "Destaques de Lançamento";

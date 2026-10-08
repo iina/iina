@@ -40,11 +40,6 @@ class MainWindowController: PlayerWindowController {
     return NSNib.Name("MainWindowController")
   }
 
-  @objc let monospacedFont: NSFont = {
-    let fontSize = NSFont.systemFontSize(for: .small)
-    return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
-  }()
-
   /** For Force Touch. */
   let minimumPressDuration: TimeInterval = 0.5
 
@@ -59,31 +54,47 @@ class MainWindowController: PlayerWindowController {
   /// Owns the sidebar panels, view controllers, and show/hide/resize logic.
   lazy var sidebars = SidebarController(mainWindow: self)
 
-  /** The control view for interactive mode. */
-  var cropSettingsView: CropBoxViewController?
-
   private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
     return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
   }()
 
-  /** For auto hiding UI after a timeout. */
+  /// For auto hiding UI after a timeout.
   var hideControlTimer: Timer?
   var hideOSDTimer: Timer?
 
-  /** For blacking out other screens. */
+  /// For blacking out other screens.
   var screens: [NSScreen] = []
-  var cachedScreenCount = 0
   var blackWindows: [NSWindow] = []
+  var cachedScreens: [NSScreen] = []
+
+  /// For hiding camera housing only in legacy full screen.
+  var cameraHousingWindow: NSWindow?
 
   lazy var rotation: Int = {
     return player.mpv.getInt(MPVProperty.videoParamsRotate)
   }()
 
 
+  var videoViewContainer: NSView!
   var titleBarView: Titlebar!
   var titleBarHeightConstraint: NSLayoutConstraint!
   var oscBottomView: OSCBottomView!
   var oscFloatingView: OSCFloatingView!
+
+  var currentControlBar: NSView?
+
+  var oscPlayControlView: NSStackView!
+  var oscPlayControlMiddleView: NSStackView!
+  var leftArrowButton: NSButton!
+  var rightArrowButton: NSButton!
+  var oscSpeedLabelLeftContainer: NSView!
+  var oscSpeedLabelRightContainer: NSView!
+  var oscSpeedLabelLeft: NSTextField!
+  var oscSpeedLabelRight: NSTextField!
+
+  var oscVolumeView: NSView!
+  var oscToolbarView: NSStackView!
+  var oscSliderView: NSView!
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
@@ -108,17 +119,15 @@ class MainWindowController: PlayerWindowController {
   var isDragging: Bool = false
 
   lazy var liveText = LiveTextController(mainWindow: self)
+  lazy var interactiveMode = InteractiveModeController(mainWindow: self)
   var pipStatus = PIPStatus.notInPIP
-  var isInInteractiveMode: Bool = false
   var isVideoLoaded: Bool = false
 
   var shouldApplyInitialWindowSize = true
   var isWindowHidden: Bool = false
   var isWindowMiniaturizedDueToPip = false
 
-  // might use another obj to handle slider?
   var isMouseInWindow: Bool = false
-  var isMouseInSlider: Bool = false
   /** flag to ignore abrupt momentum scrolls */
   private var isMomentumScrollingAllowed = false
 
@@ -133,6 +142,8 @@ class MainWindowController: PlayerWindowController {
 
   /** Views that will show/hide when cursor moving in/out the window. */
   let fadeableViews = FadeableViewController()
+
+  private var fadeableWindowButtons: [NSButton] = []
 
   // Left and right arrow buttons
 
@@ -253,25 +264,7 @@ class MainWindowController: PlayerWindowController {
     case intermediate
   }
 
-  enum InteractiveMode {
-    case crop
-    case freeSelecting
-
-    func viewController() -> CropBoxViewController {
-      var vc: CropBoxViewController
-      switch self {
-      case .crop:
-        vc = CropSettingsViewController()
-      case .freeSelecting:
-        vc = FreeSelectingViewController()
-      }
-      return vc
-    }
-  }
-
   // MARK: - Observed user defaults
-
-  private var oscIsInitialized = false
 
   // Cached user default values
   private lazy var oscPosition: Preference.OSCPosition = Preference.enum(for: .oscPosition)
@@ -300,7 +293,7 @@ class MainWindowController: PlayerWindowController {
   ]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
     super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
 
     switch keyPath {
@@ -353,10 +346,10 @@ class MainWindowController: PlayerWindowController {
     case PK.alwaysShowOnTopIcon.rawValue:
       titleBarView.updateOnTopIcon()
     case PK.dockedControlBarAndTitlebar.rawValue:
-      setupVideoViewConstraints()
+      setupVideoContainerConstraints()
       fadeableViews.update()
     case PK.edgeToEdgeVideo.rawValue:
-      setupVideoViewConstraints()
+      setupVideoContainerConstraints()
       fallthrough
     case PK.unlockWindowAspectRatio.rawValue:
       fadeableViews.update()
@@ -370,7 +363,7 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.enableLiveText.rawValue:
       if #available(macOS 13, *), let newValue = change[.newKey] as? Bool {
-        let buttons = fragToolbarView.subviews as! [NSButton]
+        let buttons = oscToolbarView.subviews as! [NSButton]
         if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
           btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
         }
@@ -395,6 +388,19 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
+  private func registerWindowButtonsAsFadeable() {
+    fadeableWindowButtons.forEach { fadeableViews.remove($0) }
+    fadeableWindowButtons = standardWindowButtons
+    fadeableWindowButtons.forEach {
+      fadeableViews.add($0) { [unowned self] in
+        if sidebars.leadingSidebar.status != .hidden {
+          return .alwaysShown
+        }
+        return fsState == .windowed && !Preference.isDocked ? .auto : .alwaysShown
+      }
+    }
+  }
+
   /** Get the `NSTextField` of widow's title. */
   var titleTextField: NSTextField? {
     get {
@@ -402,32 +408,10 @@ class MainWindowController: PlayerWindowController {
     }
   }
 
-  /** Current OSC view. */
-  var currentControlBar: NSView?
-
-  @IBOutlet weak var bottomBarBottomConstraint: NSLayoutConstraint!
-  @IBOutlet weak var fragControlViewMiddleButtons1Constraint: NSLayoutConstraint!
-  @IBOutlet weak var fragControlViewMiddleButtons2Constraint: NSLayoutConstraint!
-
-  @IBOutlet weak var leftArrowButton: NSButton!
-  @IBOutlet weak var rightArrowButton: NSButton!
-  @IBOutlet weak var bottomView: NSView!
-
-  @IBOutlet var fragControlView: NSStackView!
-  @IBOutlet var fragToolbarView: NSStackView!
-  @IBOutlet var fragVolumeView: NSView!
-  @IBOutlet var fragSliderView: NSView!
-  @IBOutlet var fragControlViewMiddleView: NSView!
-  @IBOutlet var fragControlViewLeftView: NSView!
-  @IBOutlet var fragControlViewRightView: NSView!
-
-  @IBOutlet weak var leftArrowLabel: NSTextField!
-  @IBOutlet weak var rightArrowLabel: NSTextField!
-
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
   lazy var pluginOverlayViewContainer: NSView! = {
-    guard let window = window, let cv = window.contentView else { return nil }
+    guard let window, let cv = window.contentView else { return nil }
     let view = NSView(frame: .zero)
     view.translatesAutoresizingMaskIntoConstraints = false
     cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
@@ -435,7 +419,8 @@ class MainWindowController: PlayerWindowController {
     return view
   }()
 
-  var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
+  private var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
+  private var videoContainerConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
 
   override var mouseActionDisabledViews: [NSView?] {
     sidebars.mouseActionDisabledViews + [currentControlBar, titleBarView]
@@ -473,15 +458,9 @@ class MainWindowController: PlayerWindowController {
 
     // size
     window.minSize = AppData.mainWindowMinSize
-    if let wf = windowFrameFromGeometry() {
-      window.setFrame(wf, display: false)
-    }
-
     window.aspectRatio = AppData.sizeWhenNoVideo
     setWindowToolbar()
     cv.autoresizesSubviews = false
-
-    // gesture recognizer
     cv.addGestureRecognizer(magnificationGestureRecognizer)
 
     // Work around a bug in macOS Ventura where HDR content becomes dimmed when playing in full
@@ -497,8 +476,20 @@ class MainWindowController: PlayerWindowController {
       cv.addSubview(view)
     }
 
-    // init quick setting view now
-    let _ = sidebars.quickSettingView
+    videoViewContainer = NSView()
+    videoViewContainer.translatesAutoresizingMaskIntoConstraints = false
+
+    DispatchQueue.main.async { [weak self] in
+      if #available(macOS 14, *) {
+        self?.sidebars.quickSettingView.loadViewIfNeeded()
+        self?.sidebars.playlistView.loadViewIfNeeded()
+        self?.sidebars.pluginView.loadViewIfNeeded()
+      } else {
+        _ = self?.sidebars.quickSettingView.view
+        _ = self?.sidebars.playlistView.view
+        _ = self?.sidebars.pluginView.view
+      }
+    }
 
     // create translucent views
     oscBottomView = OSCBottomView(mainWindow: self)
@@ -522,11 +513,91 @@ class MainWindowController: PlayerWindowController {
     cv.addSubview(timePreviewView)
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
-    timePreviewView.textField.font = monospacedFont
+    timePreviewView.textField.font = .monospacedDigitFont(for: .small)
 
-    // osc bottom
+    // osc
 
     oscBottomView.padding(.horizontal)
+
+    self.oscVolumeView = NSView()
+    oscVolumeView.translatesAutoresizingMaskIntoConstraints = false
+
+    volumeSlider.size(width: 70)
+
+    oscVolumeView.addSubview(muteButton)
+    oscVolumeView.addSubview(volumeSlider)
+    muteButton.size(width: 24, height: 24)
+      .padding(.vertical, .leading(4)).spacing(.trailing(4), to: volumeSlider)
+    volumeSlider.size(width: 70).center(.y)
+      .padding(.trailing(6))
+
+    self.oscPlayControlView = NSStackView()
+    oscPlayControlView.translatesAutoresizingMaskIntoConstraints = false
+    oscPlayControlView.orientation = .horizontal
+    oscPlayControlView.alignment = .centerY
+    oscPlayControlView.spacing = 0
+
+    self.leftArrowButton = NSButton(image: .speedl, target: self, action: #selector(leftButtonAction))
+    leftArrowButton.maxAcceleratorLevel = 5
+
+    self.rightArrowButton = NSButton(image: .speed, target: self, action: #selector(rightButtonAction))
+    rightArrowButton.maxAcceleratorLevel = 5
+
+    [playButton, leftArrowButton, rightArrowButton].forEach { button in
+      button!.translatesAutoresizingMaskIntoConstraints = false
+      button!.bezelStyle = .smallSquare
+      button!.isBordered = false
+      button!.size(width: 24, height: 24)
+    }
+
+    self.oscSpeedLabelLeftContainer = NSView()
+    self.oscSpeedLabelRightContainer = NSView()
+    [oscSpeedLabelLeftContainer, oscSpeedLabelRightContainer].forEach { view in
+      view!.translatesAutoresizingMaskIntoConstraints = false
+      view!.size(width: 30)  // label: 26 + padding: 8
+    }
+
+    self.oscSpeedLabelLeft = NSTextField(labelWithString: "")
+    self.oscSpeedLabelRight = NSTextField(labelWithString: "")
+    [oscSpeedLabelLeft, oscSpeedLabelRight].forEach { label in
+      label!.translatesAutoresizingMaskIntoConstraints = false
+      label!.font = .systemFont(ofSize: 10)
+      label!.textColor = .secondaryLabelColor
+    }
+    oscSpeedLabelLeftContainer.addSubview(oscSpeedLabelLeft)
+    oscSpeedLabelLeft.padding(.vertical, .trailing(8))
+    oscSpeedLabelRightContainer.addSubview(oscSpeedLabelRight)
+    oscSpeedLabelRight.padding(.vertical, .leading(8))
+
+    self.oscPlayControlMiddleView = NSStackView(views: [leftArrowButton, playButton, rightArrowButton])
+    oscPlayControlMiddleView.translatesAutoresizingMaskIntoConstraints = false
+    oscPlayControlMiddleView.orientation = .horizontal
+    oscPlayControlMiddleView.alignment = .centerY
+    oscPlayControlMiddleView.spacing = 24
+
+    self.oscToolbarView = NSStackView()
+    oscToolbarView.translatesAutoresizingMaskIntoConstraints = false
+    oscToolbarView.orientation = .horizontal
+    oscToolbarView.alignment = .centerY
+    oscToolbarView.spacing = 0
+    oscToolbarView.size(height: 24)
+
+    self.oscSliderView = TimeLabelOverflowedView()
+    [leftLabel, rightLabel].forEach { label in
+      label!.textColor = .secondaryLabelColor
+      label!.alignment = .center
+      label!.font = .monospacedDigitSystemFont(ofSize: 11, weight: .regular)
+      label!.widthAnchor.constraint(greaterThanOrEqualToConstant: 46).isActive = true
+    }
+    oscSliderView.translatesAutoresizingMaskIntoConstraints = false
+    oscSliderView.addSubview(leftLabel)
+    oscSliderView.addSubview(rightLabel)
+    oscSliderView.addSubview(playSlider)
+    leftLabel.padding(.leading(2)).spacing(.trailing(2), to: playSlider)
+      .center(.y, with: playSlider)
+    rightLabel.padding(.trailing(2)).spacing(.leading(2), to: playSlider)
+      .center(.y, with: playSlider)
+    playSlider.padding(.vertical(6))
 
     // osd
 
@@ -556,6 +627,9 @@ class MainWindowController: PlayerWindowController {
 
     // video view
 
+    cv.addSubview(videoViewContainer, positioned: .below, relativeTo: nil)
+    setupVideoContainerConstraints()
+
     addVideoViewToWindow()
     player.initVideo()
     videoView.postsFrameChangedNotifications = true
@@ -563,23 +637,19 @@ class MainWindowController: PlayerWindowController {
     // osc views
 
     oscFloatingView.setupConstraints()
-    fragControlView.addView(fragControlViewLeftView, in: .center)
-    fragControlView.addView(fragControlViewMiddleView, in: .center)
-    fragControlView.addView(fragControlViewRightView, in: .center)
+    oscPlayControlView.addView(oscSpeedLabelLeftContainer, in: .center)
+    oscPlayControlView.addView(oscPlayControlMiddleView, in: .center)
+    oscPlayControlView.addView(oscSpeedLabelRightContainer, in: .center)
     // Video controllers and timeline indicators should not flip in a right-to-left language.
-    fragControlView.userInterfaceLayoutDirection = .leftToRight
-    setupOnScreenController(withPosition: oscPosition)
+    oscPlayControlView.userInterfaceLayoutDirection = .leftToRight
+    setupOnScreenController(withPosition: oscPosition, forced: true)
     let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
     updateArrowButtons()
     setupOSCToolbarButtons(buttons)
 
     // fade-able views
 
-    standardWindowButtons.forEach {
-      fadeableViews.add($0) { [unowned self] in
-        fsState == .windowed && !Preference.isDocked ? .auto : .alwaysShown
-      }
-    }
+    registerWindowButtonsAsFadeable()
 
     fadeableViews.add(titleBarView) { [unowned self] in
       if fsState == .windowed {
@@ -612,18 +682,21 @@ class MainWindowController: PlayerWindowController {
     fadeableViews.update()
 
     // other initialization
-    cachedScreenCount = NSScreen.screens.count
+    cachedScreens = NSScreen.screens
     [pipOverlayView].forEach {
       $0?.state = .active
     }
     // hide other views
     osdView.isHidden = true
-    leftArrowLabel.isHidden = true
-    rightArrowLabel.isHidden = true
-    bottomView.isHidden = true
+    oscSpeedLabelLeft.isHidden = true
+    oscSpeedLabelRight.isHidden = true
     pipOverlayView.isHidden = true
 
     if player.disableUI { hideUI() }
+
+    if let wf = windowFrameFromGeometry() {
+      window.setFrame(wf, display: false)
+    }
 
     // add user default observers
     observedPrefKeys.append(contentsOf: localObservedPrefKeys)
@@ -645,33 +718,52 @@ class MainWindowController: PlayerWindowController {
 
     addObserver(to: .default, forName: NSApplication.didChangeScreenParametersNotification) { [unowned self] _ in
       // This observer handles a situation that the user connected a new screen or removed a screen
-      let screenCount = NSScreen.screens.count
-      let countChanged = cachedScreenCount != screenCount
-      if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) && countChanged {
+      let screens = NSScreen.screens
+
+      // Activating extended dynamic range will cause notifications to be posted at a high rate
+      // because the screen's maximumExtendedDynamicRangeColorComponentValue property keeps changing
+      // as the display's brightness ramps up. This can continue to change if the display is
+      // configured to automatically adjust brightness if ambient lighting is changing. Instruments
+      // identified processing these notifications as a performance problem when they occur at a
+      // high rate. Compare the current list of screens to the cached list and only process this
+      // notification if changes require processing this notification.
+      let screensChanged: Bool = {
+        guard screens.count == cachedScreens.count else { return true }
+        return zip(screens, cachedScreens).contains {
+          $0.frame != $1.frame || $0.displayId != $1.displayId
+        }
+      }()
+      guard screensChanged else { return }
+      // Update the cached screens
+      cachedScreens = screens
+
+      log("Screen parameters have changed")
+      DisplayController.shared.addNewDisplays()
+      NSScreen.logAll(subsystem: subsystem)
+      NSScreen.log("Window is on screen", window.screen, details: false, subsystem: subsystem)
+
+      if fsState.isFullscreen && Preference.bool(for: .blackOutMonitor) {
         removeBlackWindow()
         blackOutOtherMonitors()
       }
-      // Update the cached value
-      cachedScreenCount = screenCount
       videoView.updateDisplayLink()
-      DisplayController.shared.addNewDisplays()
       // In normal full screen mode AppKit will automatically adjust the window frame if the window
       // is moved to a new screen such as when the window is on an external display and that display
       // is disconnected. In legacy full screen mode IINA is responsible for adjusting the window's
       // frame.
-      guard countChanged, fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
+      guard fsState.isFullscreen, Preference.bool(for: .useLegacyFullScreen) else { return }
       setWindowFrameForLegacyFullScreen()
     }
 
     // Observe the loop knobs on the progress bar and update mpv when the knobs move.
     addObserver(to: .default, forName: .iinaPlaySliderLoopKnobChanged, object: playSlider.abLoopA) { [weak self] _ in
-      guard let self = self else { return }
+      guard let self else { return }
       let seconds = self.percentToSeconds(self.playSlider.abLoopA.doubleValue)
       self.player.abLoopA = seconds
       self.player.sendOSD(.abLoopUpdate(.aSet, VideoTime(seconds).stringRepresentation))
     }
     addObserver(to: .default, forName: .iinaPlaySliderLoopKnobChanged, object: playSlider.abLoopB) { [weak self] _ in
-      guard let self = self else { return }
+      guard let self else { return }
       let seconds = self.percentToSeconds(self.playSlider.abLoopB.doubleValue)
       self.player.abLoopB = seconds
       self.player.sendOSD(.abLoopUpdate(.bSet, VideoTime(seconds).stringRepresentation))
@@ -704,12 +796,8 @@ class MainWindowController: PlayerWindowController {
     window.title = "Window"
 
     // As there have been issues in this area, log details about the screen selection process.
-    NSScreen.log("window.screen", window.screen)
-    NSScreen.screens.enumerated().forEach { screen in
-      if screen.element != window.screen {
-        NSScreen.log("NSScreen.screens[\(screen.offset)]" , screen.element)
-      }
-    }
+    NSScreen.logAll(subsystem: subsystem)
+    NSScreen.log("Window is on screen", window.screen, details: false, subsystem: subsystem)
 
     // If a video is not actively playing then the initial drawing of the view needs to be forced.
     // The forceDraw method will check to see if drawing is actually needed.
@@ -754,40 +842,63 @@ class MainWindowController: PlayerWindowController {
   }
 
   func addVideoViewToWindow() {
-    guard let cv = window?.contentView else { return }
     if videoView.superview != nil {
       videoView.removeFromSuperview()
     }
-    cv.addSubview(videoView, positioned: .below, relativeTo: nil)
+    videoViewContainer.addSubview(videoView)
     videoView.translatesAutoresizingMaskIntoConstraints = false
-    setupVideoViewConstraints()
+
+    for constraint in videoViewConstraints.values {
+      constraint.isActive = false
+    }
+    videoViewConstraints = [
+      .leading: videoView.leadingAnchor.constraint(equalTo: videoViewContainer.leadingAnchor),
+      .trailing: videoViewContainer.trailingAnchor.constraint(equalTo: videoView.trailingAnchor),
+      .top: videoView.topAnchor.constraint(equalTo: videoViewContainer.topAnchor),
+      .bottom: videoViewContainer.bottomAnchor.constraint(equalTo: videoView.bottomAnchor)
+    ]
+    layoutSides.forEach { videoViewConstraints[$0]?.isActive = true }
   }
 
-  private func setupVideoViewConstraints() {
+  func updateVideoViewConstraints(_ constraints: [NSLayoutConstraint.Attribute: CGFloat]) {
+    for (attr, value) in constraints {
+      videoViewConstraints[attr]?.constant = value
+    }
+  }
+
+  private func setupVideoContainerConstraints() {
     guard let cv = window?.contentView else { return }
 
-    layoutSides.forEach { videoViewConstraints[$0].flatMap(cv.removeConstraint) }
+    layoutSides.forEach { videoContainerConstraints[$0].flatMap(cv.removeConstraint) }
     if Preference.bool(for: .edgeToEdgeVideo) {
       layoutSides.forEach { attr in
-        videoViewConstraints[attr] = NSLayoutConstraint(item: videoView, attribute: attr, relatedBy: .equal,
+        videoContainerConstraints[attr] = NSLayoutConstraint(item: videoViewContainer!, attribute: attr, relatedBy: .equal,
                                                         toItem: cv, attribute: attr, multiplier: 1, constant: 0)
       }
     } else {
       let docked = Preference.bool(for: .dockedControlBarAndTitlebar)
-      videoViewConstraints[.top] = videoView.topAnchor
+      videoContainerConstraints[.top] = videoViewContainer.topAnchor
         .constraint(equalTo: docked ? titleBarView.bottomAnchor : cv.topAnchor)
-      videoViewConstraints[.bottom] = videoView.bottomAnchor
+      videoContainerConstraints[.bottom] = videoViewContainer.bottomAnchor
         .constraint(equalTo: docked ? oscBottomView.topAnchor : cv.bottomAnchor)
-      videoViewConstraints[.leading] = videoView.leadingAnchor.constraint(equalTo: sidebars.leadingSidebar.view.trailingAnchor)
-      videoViewConstraints[.trailing] = videoView.trailingAnchor.constraint(equalTo: sidebars.trailingSidebar.view.leadingAnchor)
+      videoContainerConstraints[.leading] = videoViewContainer.leadingAnchor
+        .constraint(equalTo: sidebars.leadingSidebar.view.trailingAnchor)
+      videoContainerConstraints[.trailing] = videoViewContainer.trailingAnchor
+        .constraint(equalTo: sidebars.trailingSidebar.view.leadingAnchor)
     }
-    layoutSides.forEach { videoViewConstraints[$0]?.isActive = true }
+    layoutSides.forEach { videoContainerConstraints[$0]?.isActive = true }
+  }
+
+  private func updateVideoContainerConstraints(_ constraints: [NSLayoutConstraint.Attribute: CGFloat]) {
+    for (attr, value) in constraints {
+      videoContainerConstraints[attr]?.constant = value
+    }
   }
 
   @objc func removeVideoViewBlackBars() {
-    guard let window, Preference.unlockWindowAspectRatio else { return }
+    guard let window, Preference.unlockWindowAspectRatio, !fsState.isFullscreen else { return }
 
-    let currentSize = videoView.frame.size
+    let currentSize = videoViewContainer.frame.size
     let videoSize = player.videoSizeForDisplay
     let newSize = currentSize.crop(withAspect: CGFloat(videoSize.0) / CGFloat(videoSize.1))
     let dw = newSize.width - currentSize.width
@@ -801,23 +912,31 @@ class MainWindowController: PlayerWindowController {
 
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
     let effectiveButtons = buttons.filter { $0 != .liveText || Preference.isLiveTextEnabled }
-    fragToolbarView.views.forEach { fragToolbarView.removeView($0) }
+    oscToolbarView.views.forEach { oscToolbarView.removeView($0) }
     let liveTextEnabled = Preference.bool(for: .enableLiveText)
     for buttonType in effectiveButtons {
       let button = NSButton()
-      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: effectiveButtons.count > 4)
+      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: false)
       if buttonType == .liveText && liveTextEnabled {
         button.image = Preference.ToolBarButton.liveText.alternateImage()
       }
       button.action = #selector(self.toolBarButtonAction(_:))
-      fragToolbarView.addView(button, in: .trailing)
+      oscToolbarView.addView(button, in: .trailing)
     }
+
+//    let menuButton = NSButton()
+//    menuButton.bezelStyle = .regularSquare
+//    menuButton.image = .sf("chevron.forward.2")
+//    menuButton.isBordered = false
+//    menuButton.refusesFirstResponder = true
+//    menuButton.size(width: Preference.ToolBarButton.frameSize, height: Preference.ToolBarButton.frameSize)
+//    oscToolbarView.addView(menuButton, in: .trailing)
   }
 
   @objc
   private func updateOSCToolbarButtons(_ notification: Notification) {
     func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
-      let buttons = fragToolbarView.subviews as! [NSButton]
+      let buttons = oscToolbarView.subviews as! [NSButton]
       let currentButton = buttons.first(where: { $0.tag == button.rawValue })
       currentButton?.image = isHighlighted ? button.alternateImage() : button.image()
     }
@@ -833,14 +952,14 @@ class MainWindowController: PlayerWindowController {
       highlight(.settings, sidebars.isShowing(.settings))
       highlight(.plugins, sidebars.isShowing(.plugins))
       highlight(.playlist, sidebars.isShowing(.playlist))
+      fadeableViews.update()
     default:
       break
     }
   }
 
-  private func setupOnScreenController(withPosition newPosition: Preference.OSCPosition) {
-    guard !oscIsInitialized || oscPosition != newPosition else { return }
-    oscIsInitialized = true
+  private func setupOnScreenController(withPosition newPosition: Preference.OSCPosition, forced: Bool = false) {
+    guard forced || oscPosition != newPosition else { return }
 
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
@@ -857,7 +976,7 @@ class MainWindowController: PlayerWindowController {
         stackView!.removeView($0)
       }
     }
-    [fragSliderView, fragControlView, fragToolbarView, fragVolumeView].forEach {
+    [oscSliderView, oscPlayControlView, oscToolbarView, oscVolumeView].forEach {
         $0!.removeFromSuperview()
     }
 
@@ -876,62 +995,56 @@ class MainWindowController: PlayerWindowController {
     switch oscPosition {
     case .floating:
       currentControlBar = oscFloatingView
-      fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewLeftView)
-      fragControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragControlViewRightView)
-      oscFloatingView.oscTopView.addView(fragVolumeView, in: .leading)
-      oscFloatingView.oscTopView.addView(fragToolbarView, in: .trailing)
-      oscFloatingView.oscTopView.addView(fragControlView, in: .center)
+      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelLeftContainer)
+      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelRightContainer)
+      oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
+      oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
+      oscFloatingView.oscTopView.addView(oscPlayControlView, in: .center)
 
       // Setting the visibility priority to detach only will cause freeze when resizing the window
       // (and triggering the detach) in macOS 11.
       if !isMacOS11 {
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragVolumeView)
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: fragToolbarView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
+        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
         oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       }
-      oscFloatingView.oscBottomView.addSubview(fragSliderView)
-      Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": fragSliderView])
-      Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": fragControlView])
+      oscFloatingView.oscBottomView.addSubview(oscSliderView)
+      Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": oscSliderView])
+      Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": oscPlayControlView])
       oscFloatingView.initPosition()
     case .top:
       let oscTopMainView = titleBarView.oscView!
       currentControlBar = nil
-      fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
-      fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
-      oscTopMainView.addView(fragVolumeView, in: .trailing)
-      oscTopMainView.addView(fragToolbarView, in: .trailing)
-      oscTopMainView.addView(fragControlView, in: .leading)
-      oscTopMainView.addView(fragSliderView, in: .leading)
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelLeftContainer)
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelRightContainer)
+      oscTopMainView.addView(oscVolumeView, in: .trailing)
+      oscTopMainView.addView(oscToolbarView, in: .trailing)
+      oscTopMainView.addView(oscPlayControlView, in: .leading)
+      oscTopMainView.addView(oscSliderView, in: .leading)
       oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscTopMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
-      oscTopMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
-      oscTopMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
+      oscTopMainView.setVisibilityPriority(.mustHold, for: oscSliderView)
+      oscTopMainView.setVisibilityPriority(.detachEarly, for: oscVolumeView)
+      oscTopMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     case .bottom:
       oscBottomView.isHidden = false
       let oscBottomMainView = oscBottomView.oscView!
       currentControlBar = oscBottomView
-      fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewLeftView)
-      fragControlView.setVisibilityPriority(.notVisible, for: fragControlViewRightView)
-      oscBottomMainView.addView(fragVolumeView, in: .trailing)
-      oscBottomMainView.addView(fragToolbarView, in: .trailing)
-      oscBottomMainView.addView(fragControlView, in: .leading)
-      oscBottomMainView.addView(fragSliderView, in: .leading)
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelLeftContainer)
+      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelRightContainer)
+      oscBottomMainView.addView(oscVolumeView, in: .trailing)
+      oscBottomMainView.addView(oscToolbarView, in: .trailing)
+      oscBottomMainView.addView(oscPlayControlView, in: .leading)
+      oscBottomMainView.addView(oscSliderView, in: .leading)
       oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscBottomMainView.setVisibilityPriority(.mustHold, for: fragSliderView)
-      oscBottomMainView.setVisibilityPriority(.detachEarly, for: fragVolumeView)
-      oscBottomMainView.setVisibilityPriority(.detachEarlier, for: fragToolbarView)
+      oscBottomMainView.setVisibilityPriority(.mustHold, for: oscSliderView)
+      oscBottomMainView.setVisibilityPriority(.detachEarly, for: oscVolumeView)
+      oscBottomMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
     }
+
+    oscPlayControlMiddleView.spacing = isFloating ? 24: 16
 
     fadeableViews.update()
     showUI()
-
-    if isFloating {
-      fragControlViewMiddleButtons1Constraint.constant = 24
-      fragControlViewMiddleButtons2Constraint.constant = 24
-    } else {
-      fragControlViewMiddleButtons1Constraint.constant = 16
-      fragControlViewMiddleButtons2Constraint.constant = 16
-    }
   }
 
   // MARK: - Mouse / Trackpad events
@@ -956,6 +1069,15 @@ class MainWindowController: PlayerWindowController {
     if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)
     }
+
+    if !keyBinding.isIINACommand {
+      switch keyBinding.action.first! {
+      case MPVCommand.showProgress.rawValue:
+        player.sendOSD(.showTime(player.info.progress))
+      default: ()
+      }
+    }
+
     return success
   }
 
@@ -1004,7 +1126,7 @@ class MainWindowController: PlayerWindowController {
     if !fsState.isFullscreen {
       guard !oscFloatingView.isDragging else { return }
 
-      if let mousePosRelatedToWindow = mousePosRelatedToWindow {
+      if let mousePosRelatedToWindow {
         if !isDragging {
           /// Require that the user must drag the cursor at least a small distance for it to start a "drag" (`isDragging==true`)
           /// The user's action will only be counted as a click if `isDragging==false` when `mouseUp` is called.
@@ -1095,7 +1217,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   override func scrollWheel(with event: NSEvent) {
-    guard !isInInteractiveMode else { return }
+    guard !interactiveMode.isActive else { return }
     if !isMomentumScrollingAllowed && !event.momentumPhase.isEmpty {
       // ignore delta caused by abrupt momentum phases
       return
@@ -1115,9 +1237,9 @@ class MainWindowController: PlayerWindowController {
         phase=None **momentumPhase=Began/Changed**
      */
     isMomentumScrollingAllowed = event.phase.contains(.ended) || isMouseInWindow // previous
-    if event.inAnyOf([fragSliderView]) && playSlider.isEnabled {
+    if event.inAnyOf([playSlider]) && playSlider.isEnabled {
       seekOverride = true
-    } else if event.inAnyOf([fragVolumeView]) && volumeSlider.isEnabled {
+    } else if event.inAnyOf([volumeSlider]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
       guard !event.inAnyOf([currentControlBar]) else { return }
@@ -1133,7 +1255,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   override func mouseEntered(with event: NSEvent) {
-    guard !isInInteractiveMode else { return }
+    guard !interactiveMode.isActive else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
       log("No data for tracking area", level: .warning)
       return
@@ -1147,17 +1269,12 @@ class MainWindowController: PlayerWindowController {
     } else if obj == 1 {
       // slider
       if oscFloatingView.isDragging { return }
-      isMouseInSlider = true
-      if !oscFloatingView.isDragging {
-        timePreviewView.isHidden = false
-        thumbnailPeekView.isHidden = !player.info.thumbnailsReady
-      }
       refreshSeekTimeAndThumbnail(from: event)
     }
   }
 
   override func mouseExited(with event: NSEvent) {
-    guard !isInInteractiveMode else { return }
+    guard !interactiveMode.isActive else { return }
     guard let obj = event.trackingArea?.userInfo?["obj"] as? Int else {
       log("No data for tracking area", level: .warning)
       return
@@ -1173,15 +1290,12 @@ class MainWindowController: PlayerWindowController {
       isMomentumScrollingAllowed = false
     } else if obj == 1 {
       // slider
-      isMouseInSlider = false
-      timePreviewView.isHidden = true
       refreshSeekTimeAndThumbnail(from: event)
-      thumbnailPeekView.isHidden = true
     }
   }
 
   override func mouseMoved(with event: NSEvent) {
-    guard !isInInteractiveMode else { return }
+    guard !interactiveMode.isActive else { return }
 
     refreshSeekTimeAndThumbnail(from: event)
     if isMouseInWindow {
@@ -1197,7 +1311,7 @@ class MainWindowController: PlayerWindowController {
 
   @objc func handleMagnifyGesture(recognizer: NSMagnificationGestureRecognizer) {
     guard pinchAction != .none else { return }
-    guard !isInInteractiveMode, let window = window, let screenFrame = NSScreen.main?.visibleFrame else { return }
+    guard !interactiveMode.isActive, let window, let screenFrame = NSScreen.main?.visibleFrame else { return }
 
     switch pinchAction {
     case .none:
@@ -1320,6 +1434,8 @@ class MainWindowController: PlayerWindowController {
     // stop playing
     if case .fullscreen(legacy: true, priorWindowedFrame: _) = fsState {
       restoreDockSettings()
+      cameraHousingWindow?.orderOut(self)
+      cameraHousingWindow = nil
     }
     player.stop()
     // stop tracking mouse event
@@ -1327,6 +1443,9 @@ class MainWindowController: PlayerWindowController {
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
     UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
+    // Reset default visibilities
+    thumbnailPeekView.isHidden = true
+    timePreviewView.isHidden = true
 
     player.events.emit(.windowWillClose)
   }
@@ -1379,9 +1498,7 @@ class MainWindowController: PlayerWindowController {
     // When playback is paused the display link is stopped in order to avoid wasting energy on
     // needless processing. It must be running while transitioning to full screen mode.
     videoView.displayActive()
-    if isInInteractiveMode {
-      exitInteractiveMode(immediately: true)
-    }
+    interactiveMode.exit()
 
     liveText.clearAnalysis()
 
@@ -1398,7 +1515,6 @@ class MainWindowController: PlayerWindowController {
 
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
-    isMouseInSlider = false
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
@@ -1487,6 +1603,7 @@ class MainWindowController: PlayerWindowController {
     setWindowToolbar()
     fadeableViews.update()
     showUI()
+    updateTimer()
 
     if player.info.state == .playing {
       setWindowFloatingOnTop(isOntop, updateOnTopStatus: false)
@@ -1513,9 +1630,7 @@ class MainWindowController: PlayerWindowController {
     // When playback is paused the display link is stopped in order to avoid wasting energy on
     // needless processing. It must be running while transitioning from full screen mode.
     videoView.displayActive()
-    if isInInteractiveMode {
-      exitInteractiveMode(immediately: true)
-    }
+    interactiveMode.exit()
 
     liveText.clearAnalysis()
 
@@ -1524,7 +1639,6 @@ class MainWindowController: PlayerWindowController {
     thumbnailPeekView.isHidden = true
     timePreviewView.isHidden = true
     additionalInfoView.isHidden = true
-    isMouseInSlider = false
 
     fsState.startAnimatingToWindow()
     fadeableViews.update()
@@ -1640,6 +1754,7 @@ class MainWindowController: PlayerWindowController {
     setWindowToolbar()
     fadeableViews.update()
     showUI()
+    updateTimer()
 
     additionalInfoView.update()
 
@@ -1694,6 +1809,7 @@ class MainWindowController: PlayerWindowController {
     window.styleMask.remove(.borderless)
     window.styleMask.insert(.resizable)
     window.styleMask.insert(.titled)
+    registerWindowButtonsAsFadeable()
     window.hasShadow = true
     (window as! MainWindow).forceKeyAndMain = false
     window.level = .normal
@@ -1715,27 +1831,52 @@ class MainWindowController: PlayerWindowController {
     // then animate to the original frame
     window.setFrame(framePriorToBeingInFullscreen, display: true, animate: useAnimation)
     setWindowAspectRatio(aspectRatio)
+    cameraHousingWindow?.orderOut(self)
+    cameraHousingWindow = nil
     // call delegate
     windowDidExitFullScreen(Notification(name: .iinaLegacyFullScreen))
   }
 
-  /// Set the window frame and if needed the content view frame to appropriately use the full screen.
+  /// Set the window frame and if needed view frames to appropriately use the full screen.
   ///
-  /// For screens that contain a camera housing the content view will be adjusted to not use that area of the screen.
+  /// For screens that contain a camera housing views will be adjusted to not use that area of the screen.
   private func setWindowFrameForLegacyFullScreen() {
-    guard let window = self.window else { return }
+    guard let window,
+          let screen = window.screen ?? NSScreen.main else {return }
+
+    let unusable = screen.cameraHousingHeight ?? 0
+    let frame = NSRect(
+      x: screen.frame.minX,
+      y: screen.frame.minY,
+      width: screen.frame.width,
+      height: screen.frame.height - unusable,
+    )
+
     let useAnimation = {
       // Animation causes lagging under the macOS Tahoe beta, so don't allow it for now.
       guard #unavailable(macOS 26) else { return false }
       return !Preference.bool(for: .disableAnimations)
     }()
-    let screen = window.screen ?? NSScreen.main!
-    window.setFrame(screen.frame, display: true, animate: useAnimation)
-    guard let unusable = screen.cameraHousingHeight else { return }
-    // This screen contains an embedded camera. Shorten the height of the window's content view's
-    // frame to avoid having part of the window obscured by the camera housing.
-    let view = window.contentView!
-    view.setFrameSize(NSMakeSize(view.frame.width, screen.frame.height - unusable))
+
+    window.setFrame(frame, display: true, animate: useAnimation)
+
+    if unusable > 0 {
+      // Force black background in camera housing. Cannot extend the window frame
+      // to cover the area because window background is white in light theme.
+      let housingWindow = NSWindow(contentRect: .zero, styleMask: [], backing: .buffered, defer: false, screen: screen)
+      housingWindow.backgroundColor = .black
+      // the level must be exactly .mainMenu, otherwise the main menu will not show
+      housingWindow.level = .mainMenu
+      let cameraRect = NSRect(
+        x: screen.frame.minX,
+        y: screen.frame.maxY - unusable,
+        width: screen.frame.width,
+        height: unusable
+      )
+      housingWindow.setFrame(cameraRect, display: false)
+      housingWindow.orderFront(self)
+      self.cameraHousingWindow = housingWindow
+    }
   }
 
   private func legacyAnimateToFullscreen() {
@@ -1764,7 +1905,7 @@ class MainWindowController: PlayerWindowController {
     // and left/right buttons will not be centered after the OSC expands to full size. Forcing
     // layout corrects this. See issue #5244.
     if oscPosition == .floating {
-      fragControlView.needsLayout = true
+      oscPlayControlView.needsLayout = true
     }
 
     // call delegate
@@ -1774,9 +1915,9 @@ class MainWindowController: PlayerWindowController {
   // MARK: - Window delegate: Size
 
   func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
-    guard let window = window else { return frameSize }
+    guard loaded, let window else { return frameSize }
     // disable resizing in interactive mode, little benefit but complicates the layout logic
-    if isInInteractiveMode {
+    if interactiveMode.isActive {
       return window.frame.size
     }
     if !window.inLiveResize {
@@ -1789,7 +1930,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidResize(_ notification: Notification) {
-    guard let window = window else { return }
+    guard loaded, let window else { return }
     if !window.inLiveResize {
       liveText.requestAnalysis()
     }
@@ -1801,7 +1942,7 @@ class MainWindowController: PlayerWindowController {
 
     // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
     if isMacOS11 && oscPosition == .floating {
-      guard let maxWidth = [fragVolumeView, fragToolbarView].compactMap({ $0?.frame.width }).max() else {
+      guard let maxWidth = [oscVolumeView, oscToolbarView].compactMap({ $0?.frame.width }).max() else {
         return
       }
 
@@ -1809,22 +1950,22 @@ class MainWindowController: PlayerWindowController {
       // controlBarFloating - 12 - oscFloatingTopView
       let margin: CGFloat = (10 + 12) * 2
       let hide = (window.frame.width
-                    - fragControlView.frame.width
+                    - oscPlayControlView.frame.width
                     - maxWidth*2
                     - margin) < 0
 
       let views = oscFloatingView.oscTopView.views
       if hide {
-        if views.contains(fragVolumeView)
-            && views.contains(fragToolbarView) {
-          oscFloatingView.oscTopView.removeView(fragVolumeView)
-          oscFloatingView.oscTopView.removeView(fragToolbarView)
+        if views.contains(oscVolumeView)
+            && views.contains(oscToolbarView) {
+          oscFloatingView.oscTopView.removeView(oscVolumeView)
+          oscFloatingView.oscTopView.removeView(oscToolbarView)
         }
       } else {
-        if !views.contains(fragVolumeView)
-            && !views.contains(fragToolbarView) {
-          oscFloatingView.oscTopView.addView(fragVolumeView, in: .leading)
-          oscFloatingView.oscTopView.addView(fragToolbarView, in: .trailing)
+        if !views.contains(oscVolumeView)
+            && !views.contains(oscToolbarView) {
+          oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
+          oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
         }
       }
     }
@@ -1862,7 +2003,7 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - Window delegate: Activeness status
   func windowDidMove(_ notification: Notification) {
-    guard let window = window else { return }
+    guard loaded, let window else { return }
     player.events.emit(.windowMoved, data: window.frame)
   }
 
@@ -1976,7 +2117,7 @@ class MainWindowController: PlayerWindowController {
 
   func showUI() {
     if player.disableUI { return }
-    guard !liveText.isActive else { return }
+    guard !liveText.isActive, !interactiveMode.isActive else { return }
     animationState = .willShow
     fadeableViews.forEach { (v) in
       v.isHidden = false
@@ -2003,7 +2144,7 @@ class MainWindowController: PlayerWindowController {
 
   // MARK: - UI: Show / Hide Timer
 
-  private func updateTimer() {
+  func updateTimer() {
     destroyTimer()
     createTimer()
   }
@@ -2099,7 +2240,7 @@ class MainWindowController: PlayerWindowController {
     osdView.isHidden = false
     osdView.layoutSubtreeIfNeeded()
 
-    if let accessoryView = accessoryView {
+    if let accessoryView {
       isShowingPersistentOSD = true
       if context != nil {
         osdContext = context
@@ -2155,155 +2296,13 @@ class MainWindowController: PlayerWindowController {
     player.refreshSyncUITimer()
   }
 
-  private func setConstraintsForVideoView(_ constraints: [NSLayoutConstraint.Attribute: CGFloat]) {
-    for (attr, value) in constraints {
-      videoViewConstraints[attr]?.constant = value
-    }
-  }
-
   // MARK: - UI: Interactive mode
 
-  func enterInteractiveMode(_ mode: InteractiveMode, selectWholeVideoByDefault: Bool = false) {
-    // prerequisites
-    guard !isInInteractiveMode, let window = window else { return }
-
-    let (ow, oh) = player.originalVideoSize
-    guard ow != 0 && oh != 0 else {
-      Utility.showAlert("no_video_track")
-      return
-    }
-
-    window.backgroundColor = .windowBackgroundColor
-    standardWindowButtons.forEach { $0.isEnabled = false }
-
-    isPausedPriorToInteractiveMode = player.info.state == .paused
-    player.pause()
-    isInInteractiveMode = true
-    hideUI(force: true)
-
-    if fsState.isFullscreen {
-      let aspect: NSSize
-      if window.aspectRatio == .zero {
-        let dsize = player.videoSizeForDisplay
-        aspect = NSSize(width: dsize.0, height: dsize.1)
-      } else {
-        aspect = window.aspectRatio
-      }
-      let frame = aspect.shrink(toSize: window.frame.size).centeredRect(in: window.frame)
-      setConstraintsForVideoView([
-        .left: frame.minX,
-        .right: window.frame.width - frame.maxX,  // `frame.x` should also work
-        .bottom: -frame.minY,
-        .top: window.frame.height - frame.maxY  // `frame.y` should also work
-      ])
-      videoView.needsLayout = true
-      videoView.layoutSubtreeIfNeeded()
-      // force rerender a frame
-      forceDraw("interactive cropping")
-    }
-
-    let controlView = mode.viewController()
-    controlView.mainWindow = self
-    bottomView.isHidden = false
-    bottomView.addSubview(controlView.view)
-    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": controlView.view])
-
-    let origVideoSize = NSSize(width: ow, height: oh)
-    // the max region that the video view can occupy
-    let newVideoViewBounds = NSRect(x: 20, y: 20 + 60, width: window.frame.width - 40, height: window.frame.height - 104)
-    let newVideoViewSize = origVideoSize.shrink(toSize: newVideoViewBounds.size)
-    let newVideoViewFrame = newVideoViewBounds.centeredResize(to: newVideoViewSize)
-
-    let newConstants: [NSLayoutConstraint.Attribute: CGFloat] = [
-      .left: newVideoViewFrame.minX,
-      .right: newVideoViewFrame.maxX - window.frame.width,
-      .bottom: -newVideoViewFrame.minY,
-      .top: window.frame.height - newVideoViewFrame.maxY
-    ]
-
-    let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero
-
-    // add crop setting view
-    videoView.addSubview(controlView.cropBoxView)
-    controlView.cropBoxView.isHidden = true
-    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": controlView.cropBoxView])
-    controlView.cropBoxView.selectedRect = selectedRect
-    controlView.cropBoxView.actualSize = origVideoSize
-    controlView.cropBoxView.updateCursorRects()
-
-    self.cropSettingsView = controlView
-
-    // show crop settings view
-    NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = AccessibilityPreferences.adjustedDuration(CropAnimationDuration)
-      context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      bottomBarBottomConstraint.animator().constant = 0
-      layoutSides.forEach { attr in
-        videoViewConstraints[attr]!.animator().constant = newConstants[attr]!
-      }
-    }) {
-      self.videoView.layer?.shadowColor = .black
-      self.videoView.layer?.shadowOpacity = 1
-      self.videoView.layer?.shadowOffset = .zero
-      self.videoView.layer?.shadowRadius = 3
-      self.cropSettingsView?.cropBoxView.resized()
-      self.cropSettingsView?.cropBoxView.isHidden = false
-      self.forceDraw("interactive cropping")
-    }
-  }
-
-  func exitInteractiveMode(immediately: Bool = false, then: @escaping () -> Void = {}) {
-    window?.backgroundColor = .black
-    standardWindowButtons.forEach { $0.isEnabled = true }
-
-    if let constraint = aspectRatioConstraintForInteractiveMode {
-      constraint.isActive = false
-      aspectRatioConstraintForInteractiveMode = nil
-    }
-
-    if !isPausedPriorToInteractiveMode {
-      player.resume()
-    }
-    isInInteractiveMode = false
-    cropSettingsView?.cropBoxView.isHidden = true
-
-    // if exit without animation
-    if immediately {
-      bottomBarBottomConstraint.constant = -InteractiveModeBottomViewHeight
-      layoutSides.forEach { attr in
-        videoViewConstraints[attr]!.constant = 0
-      }
-      self.cropSettingsView?.cropBoxView.removeFromSuperview()
-      self.sidebars.leadingSidebar.status = .hidden
-      self.sidebars.trailingSidebar.status = .hidden
-      self.bottomView.subviews.removeAll()
-      self.bottomView.isHidden = true
-      return
-    }
-
-    // if with animation
-    NSAnimationContext.runAnimationGroup({ (context) in
-      context.duration = AccessibilityPreferences.adjustedDuration(CropAnimationDuration)
-      context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      bottomBarBottomConstraint.animator().constant = -InteractiveModeBottomViewHeight
-      layoutSides.forEach { attr in
-        videoViewConstraints[attr]!.animator().constant = 0
-      }
-    }) {
-      self.cropSettingsView?.cropBoxView.removeFromSuperview()
-      self.sidebars.leadingSidebar.status = .hidden
-      self.sidebars.trailingSidebar.status = .hidden
-      self.bottomView.subviews.removeAll()
-      self.bottomView.isHidden = true
-      self.showUI()
-      then()
-    }
-  }
-
+  /// This will either show & position, or hide, as appropriate, `thumbnailPeekView` and/or `timePreviewView`.
   private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
     let isCoveredByOSD = !osdView.isHidden && event.inAnyOf([osdView])
     let isCoveredBySidebar = sidebars.isEventCoveringVisibleSidebar(event)
-    if isMouseInSlider, !isCoveredByOSD, !isCoveredBySidebar {
+    if !playSlider.isHidden && event.inAnyOf([playSlider]), !isCoveredByOSD, !isCoveredBySidebar {
       updateTimePreviewAndThumbnail(event.locationInWindow)
     } else {
       thumbnailPeekView.isHidden = true
@@ -2434,12 +2433,13 @@ class MainWindowController: PlayerWindowController {
   private func determineScreenToUse(_ window: NSWindow) -> NSScreen {
     // If the window is currently showing on a screen, use this screen
     if window.isOnActiveSpace, let currentScreen = window.screen {
-      NSScreen.log("Window is currently showing screen", currentScreen)
+      NSScreen.log("Window is currently showing on screen", currentScreen, subsystem: subsystem)
       return currentScreen
     }
     guard let rectString = UserDefaults.standard.value(forKey: "MainWindowLastPosition") as? String else {
       let selected = window.selectDefaultScreen()
-      NSScreen.log("MainWindowLastPosition not found, using default screen", selected)
+      NSScreen.log("MainWindowLastPosition not found, using default screen", selected,
+                   subsystem: subsystem)
       return selected
     }
     let rect = NSRectFromString(rectString)
@@ -2448,11 +2448,11 @@ class MainWindowController: PlayerWindowController {
       // connected or the arrangement of the screens has changed.
       let selected = window.selectDefaultScreen()
       NSScreen.log("MainWindowLastPosition \(rect.origin) is not within any screens, using default screen",
-                   selected)
+                   selected, subsystem: subsystem)
       return selected
     }
     // Found a screen containing the previous window origin. Use that screen for the window.
-    NSScreen.log("MainWindowLastPosition \(rect.origin) matched", lastScreen)
+    NSScreen.log("MainWindowLastPosition \(rect.origin) matched", lastScreen, subsystem: subsystem)
     return lastScreen
   }
 
@@ -2462,7 +2462,7 @@ class MainWindowController: PlayerWindowController {
 
   /** Set window size when info available, or video size changed. */
   func handleVideoSizeChange(keepWindowSize: Bool) {
-    guard let window = window else { return }
+    guard loaded, let window else { return }
 
     // When starting to play the file try and find the screen the window was previously on.
     let screen = player.info.justStartedFile ? determineScreenToUse(window) : window.selectDefaultScreen()
@@ -2570,6 +2570,10 @@ class MainWindowController: PlayerWindowController {
       log("Constrained window frame to be in screen: \(rect)")
     }
 
+    if player.info.justOpenedFile && !Preference.bool(for: .edgeToEdgeVideo) && Preference.bool(for: .dockedControlBarAndTitlebar) {
+      rect.size.height += titleBarView.frame.height
+    }
+
     if Preference.unlockWindowAspectRatio && !player.info.justOpenedFile {
       // do nothing when window aspect ratio is unlocked
       // however, if this is the first time opening the window, still apply the sizing logic
@@ -2600,16 +2604,16 @@ class MainWindowController: PlayerWindowController {
   }
 
   func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
-    guard let window = self.window else { return }
+    guard let window else { return }
     if let videoWidth = player.info.videoWidth {
       let windowScale = Double((frame ?? window.frame).width) / Double(videoWidth)
       player.info.cachedWindowScale = windowScale
-      player.mpv.setDouble(MPVProperty.windowScale, windowScale, level: .verbose)
+      player.mpv.setDouble(MPVOption.Window.windowScale, windowScale, level: .verbose)
     }
   }
 
   func setWindowScale(_ scale: Double) {
-    guard let window = window, fsState == .windowed else { return }
+    guard loaded, let window, fsState == .windowed else { return }
     let screenFrame = (window.screen ?? NSScreen.main!).visibleFrame
     let (videoWidth, videoHeight) = player.videoSizeForDisplay
     let newFrame: NSRect
@@ -2752,13 +2756,13 @@ class MainWindowController: PlayerWindowController {
     if osdAnimationState == .shown, let osdLastMessage = self.osdLastMessage {
       let message: OSDMessage
       switch osdLastMessage {
-      case .pause, .resume:
+      case .pause, .resume, .showTime(_):
         message = osdLastMessage
-      case .seek(_, _):
-        let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
-        (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+      case .seek(_, _, _):
+        let current = player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder
+        let total = player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder
         let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
-        message = .seek(osdText, percentage)
+        message = .seek(current, total, percentage)
       default:
         return
       }
@@ -2803,8 +2807,6 @@ class MainWindowController: PlayerWindowController {
   override func updateVolume() {
     guard loaded else { return }
     super.updateVolume()
-    guard !player.info.isMuted else { return }
-    muteButton.image = volumeIcon()
   }
 
   // MARK: - IBActions
@@ -2936,19 +2938,19 @@ class MainWindowController: PlayerWindowController {
 
   func updateSpeedLabel(speed: Double) {
     if (speed == 1) {
-      leftArrowLabel.isHidden = true
-      rightArrowLabel.isHidden = true
+      oscSpeedLabelLeft.isHidden = true
+      oscSpeedLabelRight.isHidden = true
     } else if speed < 1 {
-      leftArrowLabel.isHidden = false
-      rightArrowLabel.isHidden = true
-      leftArrowLabel.stringValue = String(format: "%.2fx", speed)
+      oscSpeedLabelLeft.isHidden = false
+      oscSpeedLabelRight.isHidden = true
+      oscSpeedLabelLeft.stringValue = String(format: "%.2fx", speed)
     } else if speed > 1 {
-      leftArrowLabel.isHidden = true
-      rightArrowLabel.isHidden = false
+      oscSpeedLabelLeft.isHidden = true
+      oscSpeedLabelRight.isHidden = false
       let fmt = NumberFormatter()
       fmt.numberStyle = .decimal
       fmt.maximumSignificantDigits = 3
-      rightArrowLabel.stringValue = fmt.string(for: speed)! + "x"
+      oscSpeedLabelRight.stringValue = fmt.string(for: speed)! + "x"
     }
   }
 
@@ -3016,7 +3018,7 @@ class MainWindowController: PlayerWindowController {
     }
 
     let mouseXPos = playSlider.convert(posInWindow, from: nil).x
-    let percentage = max(0, Double((mouseXPos - 3) / (playSlider.bounds.width - 6)))
+    let percentage = Double((mouseXPos - 3) / (playSlider.bounds.width - 6)).clamped(to: (0...1))
 
     timePreviewView.isHidden = false
     let previewTime = duration * percentage
@@ -3043,6 +3045,8 @@ class MainWindowController: PlayerWindowController {
       }
       thumbnailPeekView.frame.size = NSSize(width: width, height: height)
       thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
+    } else {
+      thumbnailPeekView.isHidden = true
     }
   }
 
@@ -3089,6 +3093,7 @@ extension MainWindowController: PIPViewControllerDelegate {
   func enterPIP() {
     guard pipStatus != .inPIP else { return }
     pipStatus = .inPIP
+    liveText.clearAnalysis()
     showUI()
 
     pipVideo = NSViewController()
@@ -3120,9 +3125,6 @@ extension MainWindowController: PIPViewControllerDelegate {
       }
     }
 
-    oscFloatingView.setupConstraints()
-    oscFloatingView.updatePosition()
-
     player.events.emit(.pipChanged, data: true)
     NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": true])
   }
@@ -3135,9 +3137,6 @@ extension MainWindowController: PIPViewControllerDelegate {
     // unwrapped optionals are handled in Swift means that the wrong method
     // is chosen in this case. See https://bugs.swift.org/browse/SR-8956.
     pip.dismiss(pipVideo!)
-
-    oscFloatingView.setupConstraints()
-    oscFloatingView.updatePosition()
   }
 
   func doneExitingPIP() {
@@ -3148,6 +3147,7 @@ extension MainWindowController: PIPViewControllerDelegate {
     pipStatus = .notInPIP
 
     addVideoViewToWindow()
+    oscFloatingView.updatePosition()
 
     // Similarly, we need to run a redraw here as well. We check to make sure we are paused, because
     // this causes a janky animation in either case but as it's not necessary while the video is
@@ -3159,13 +3159,14 @@ extension MainWindowController: PIPViewControllerDelegate {
 
     isWindowMiniaturizedDueToPip = false
     isWindowHidden = false
+    liveText.requestAnalysis()
     player.events.emit(.pipChanged, data: false)
     NotificationCenter.default.post(name: .iinaPIPStatusChanged, object: self, userInfo: ["enable": false])
   }
 
   func prepareForPIPClosure(_ pip: PIPViewController) {
     guard pipStatus == .inPIP else { return }
-    guard let window = window else { return }
+    guard let window else { return }
     // This is called right before we're about to close the PIP
     pipStatus = .intermediate
 

@@ -34,7 +34,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
   }
   private var chosenFace: String {
     let typefaceIndex = faceTableView.selectedRow
-    if typefaceIndex >= 0, let face = chosenFontMembers[faceTableView.selectedRow][0] as? String {
+    if typefaceIndex >= 0, let face = chosenFontMembers[at: faceTableView.selectedRow]?[0] as? String {
       return face
     }
     return ""
@@ -135,8 +135,10 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     if tableView == familyTableView {
       return isSearching ? filteredFontNames[row].localizedName : fontNames[row].localizedName
     } else if tableView == faceTableView {
-      let face = chosenFontMembers[row]
-      return face[1]
+      if let face = chosenFontMembers[at: row] {
+        return face[1]
+      }
+      return nil
     } else {
       return 0
     }

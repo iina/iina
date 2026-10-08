@@ -75,8 +75,9 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     switch columnID {
     case .trackName:
       cell.textField?.textColor = row == 0 ? .secondaryLabelColor : .labelColor
-      cell.textField?.stringValue = track?.infoString ?? Constants.String.trackNone
+      cell.textField?.stringValue = track?.readableString(includingLanguage: false) ?? Constants.String.trackNone
       cell.selectedIndicator.isHidden = !isChosen
+      cell.setLanguage(track?.readableLanguage)
     default:
       break
     }
@@ -101,34 +102,77 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
   }
 
   private class CellView: NSTableCellView {
-    var selectedIndicator: NSView
+    var selectedIndicator: ColoredView
+    var languageTag: ColoredView
+    var languageLabel: NSTextField
 
     override init(frame frameRect: NSRect) {
-      self.selectedIndicator = NSView()
+      self.selectedIndicator = ColoredView(color: .controlAccentColor, cornerRadius: 2)
       selectedIndicator.translatesAutoresizingMaskIntoConstraints = false
+
+      self.languageTag = ColoredView(color: .controlColor, cornerRadius: 3)
+      languageTag.translatesAutoresizingMaskIntoConstraints = false
+
+      self.languageLabel = NSTextField(labelWithString: "")
+      languageLabel.translatesAutoresizingMaskIntoConstraints = false
+
       super.init(frame: frameRect)
 
       let textField = NSTextField(labelWithString: "")
       textField.isSelectable = false
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.lineBreakMode = .byTruncatingMiddle
+      textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
       addSubview(textField)
-      textField.padding(.leading(12), .trailing).center(.y)
+      textField.padding(.leading(12)).center(.y)
       self.textField = textField
 
-      selectedIndicator.wantsLayer = true
-      if let layer = selectedIndicator.layer {
-        layer.backgroundColor = NSColor.controlAccentColor.cgColor
-        layer.cornerRadius = 2
-      }
       addSubview(selectedIndicator)
       selectedIndicator.padding(.leading, .vertical(5))
         .size(width: 4)
+
+      languageLabel.font = .systemFont(ofSize: 11)
+
+      languageTag.addSubview(languageLabel)
+      languageLabel.padding(.vertical(1), .horizontal(2))
+
+      addSubview(languageTag)
+      languageTag.padding(.trailing)
+        .spacing(.leading(greaterThan: 4), to: textField)
+        .center(.y)
     }
-    
+
+    func setLanguage(_ language: String?) {
+      if let language, !language.isEmpty {
+        languageTag.isHidden = false
+        languageLabel.stringValue = language
+      } else {
+        languageTag.isHidden = true
+      }
+    }
+
     required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
     }
   }
 }
 
+class ColoredView: NSView {
+  let color: NSColor
+  let cornerRadius: CGFloat
+
+  init(color: NSColor, cornerRadius: CGFloat = 0) {
+    self.color = color
+    self.cornerRadius = cornerRadius
+    super.init(frame: .zero)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  override func draw(_ dirtyRect: NSRect) {
+    color.setFill()
+    NSBezierPath(roundedRect: bounds, xRadius: cornerRadius, yRadius: cornerRadius).fill()
+  }
+}

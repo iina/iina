@@ -11,7 +11,6 @@ import MediaPlayer
 import Sparkle
 
 let IINA_ENABLE_PLUGIN_SYSTEM = true
-let IINA_ENABLE_NEW_SETTINGS = UserDefaults.standard.bool(forKey: "enableNewSettings")
 
 /** Max time interval for repeated `application(_:openFile:)` calls. */
 fileprivate let OpenFileRepeatTime = TimeInterval(0.2)
@@ -113,7 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   private let observedPrefKeys: [Preference.Key] = [.logLevel, .thumbnailWidth]
 
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-    guard let keyPath = keyPath, let change = change else { return }
+    guard let keyPath, let change else { return }
 
     switch keyPath {
     case Preference.Key.logLevel.rawValue:
@@ -253,12 +252,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 
-    // Check for legacy pref entries and migrate them to their modern equivalents
+    // Check for legacy pref entries and migrate them to their modern equivalents.
     LegacyMigration.shared.migrateLegacyPreferences()
+    LegacyMigration.shared.migrateToneMappingTargetPeak()
 
     // guide window
-    if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
-      guideWindow.show(pages: [.highlights])
+    switch InfoDictionary.shared.buildType {
+    case .release, .beta:
+      if FirstRunManager.isFirstRun(for: .init("firstLaunchAfter\(version)")) {
+        guideWindow.show(pages: [.highlights])
+      }
+    default:
+      break
     }
 
     // Hide Window > "Enter Full Screen" menu item, because this is already present in the Video menu
@@ -796,7 +801,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
-      preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      if Preference.enableNewSettings {
+        SettingsWindow.default.installPlugin(localPackageURL: pluginPackageURL)
+      } else {
+        preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
+      }
       return
     }
 
@@ -887,7 +896,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     
     if parsed.scheme != "iina" {
       // try to open the URL directly
-      PlayerCore.activeOrNewForMenuAction(isAlternative: false).openURLString(url)
+      PlayerCore.activeOrNew.openURLString(url)
       return
     }
     
@@ -910,7 +919,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       if let newWindowValue = queryDict["new_window"], newWindowValue == "1" {
         player = PlayerCore.newPlayerCore
       } else {
-        player = PlayerCore.activeOrNewForMenuAction(isAlternative: false)
+        player = PlayerCore.activeOrNew
       }
 
       // enqueue
@@ -936,7 +945,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       for query in queries {
         if query.name.hasPrefix("mpv_") {
           let mpvOptionName = String(query.name.dropFirst(4))
-          guard !mpvOptionName.contains("input-command") else {
+          guard AppData.safeMPVOptions.contains(mpvOptionName) else {
             Logger.log("mpv option \(mpvOptionName) rejected when parsing URL", level: .warning)
             continue
           }
@@ -966,7 +975,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
           noteNewRecentDocumentURL(url)
         }
       }
-      if PlayerCore.openURLs(panel.urls) == 0 {
+      let isAlternative = (sender as? NSMenuItem)?.tag == AlternativeMenuItemTag
+      if PlayerCore.openURLs(panel.urls, invertOpenInNewWindow: isAlternative) == 0 {
         Utility.showAlert("nothing_to_open")
       }
     }
@@ -997,7 +1007,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {
-    if IINA_ENABLE_NEW_SETTINGS {
+    if Preference.enableNewSettings {
       SettingsWindow.default.show()
     } else {
       preferenceWindowController.showWindow(self)
@@ -1005,7 +1015,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @objc func showPluginPreferences(_ sender: NSMenuItem) {
-    preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
+    if Preference.enableNewSettings {
+      SettingsWindow.default.show()
+      SettingsWindow.default.navigateTo(page: "plugin")
+    } else {
+      preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
+    }
   }
 
   @IBAction func showVideoFilterWindow(_ sender: AnyObject) {
@@ -1073,6 +1088,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         player.events.emit(.fileStarted)
       }
     }
+  }
+  
+  @objc func toggleNewSettings(_ sender: AnyObject) {
+    Preference.enableNewSettings = !Preference.enableNewSettings
   }
 
   /// Dump contents of all player cores to a txt file. Strictly for debugging. No localization needed.

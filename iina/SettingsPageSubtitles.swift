@@ -6,7 +6,8 @@
 //  Copyright © 2025 lhc. All rights reserved.
 //
 
-import Foundation
+fileprivate let ui = SettingsUIHelper.sharedUI
+
 
 class SettingsPageSubtitles: SettingsPage {
   override var identifier: String {
@@ -14,7 +15,7 @@ class SettingsPageSubtitles: SettingsPage {
   }
   
   override var title: String {
-    return NSLocalizedString("preference.subtitle", comment: "Subtitles")
+    return NSLocalizedString("sidebar.sub", comment: "Subtitles")
   }
 
   override var image: NSImage {
@@ -25,15 +26,15 @@ class SettingsPageSubtitles: SettingsPage {
     "SettingsSubtitesLocalizable"
   }
 
-  private lazy var subtitlesASSView: SubtitlesASSView = .init(l10n: localizationContext)
-  private lazy var subtitlesFontView: SubtitlesFontView = .init(l10n: localizationContext)
-  private lazy var subtitlesColorView: SubtitlesColorView = .init(l10n: localizationContext)
-  private lazy var subtitlesBorderView: SubtitlesBorderView = .init(l10n: localizationContext)
-  private lazy var subtitlesShadowView: SubtitlesShadowView = .init(l10n: localizationContext)
-  private lazy var subtitlesMarginView: SubtitlesMarginView = .init(l10n: localizationContext)
-  private lazy var subtitlesAlignView: SubtitlesAlignView = .init(l10n: localizationContext)
-  private lazy var subtitlesEncodingView: SubtitlesEncodingView = .init(l10n: localizationContext)
-  private lazy var subtitleSourceView: SubtitleSourceView = .init(l10n: localizationContext)
+  private lazy var subtitlesASSView: SubtitlesASSView = SubtitlesASSView()
+  private lazy var subtitlesFontView: SubtitlesFontView = SubtitlesFontView()
+  private lazy var subtitlesColorView: SubtitlesColorView = SubtitlesColorView()
+  private lazy var subtitlesBorderView: SubtitlesBorderView = SubtitlesBorderView()
+  private lazy var subtitlesShadowView: SubtitlesShadowView = SubtitlesShadowView()
+  private lazy var subtitlesMarginView: SubtitlesMarginView = SubtitlesMarginView()
+  private lazy var subtitlesAlignView: SubtitlesAlignView = SubtitlesAlignView()
+  private lazy var subtitlesEncodingView: SubtitlesEncodingView = SubtitlesEncodingView()
+  private lazy var subtitleSourceView: SubtitleSourceView = SubtitleSourceView()
 
   override func content() -> [SettingsSection] {
     return sections {
@@ -88,22 +89,25 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.General(title: .text_Color)
           .image(name: "paintpalette")
           .withValueView(subtitlesColorView.view)
+        SettingsItem.PopupButton()
+          .image(name: ["character.textbox.badge.sparkles", "square.dashed.inset.filled", "square.dashed"])
+          .bindTo(.subBorderStyle, ofType: Preference.SubBorderStyle.self)
+          .withHelpLink(AppData.mpvManualLink.appending("/#options-sub-border-style"))
         SettingsItem.General(title: .text_Border)
-          .image(name: "rectangle.dashed")
+          .image(name: ["inset.filled.circle.dashed", "circle.dashed.inset.filled", "circle.dashed.inset.fill"])
           .withValueView(subtitlesBorderView.view)
-      }
-
-      SettingsList {
         SettingsItem.General(title: .text_Shadow)
-          .image(name: ["lightspectrum.horizontal", "lightbulb"])
+          .image(name: ["shadow"])
           .withValueView(subtitlesShadowView.view)
         SettingsItem.General(title: .text_OtherStyles)
-          .image(name: ["star.leadinghalf.filled", "star.leadinghalf.fill"])
+          .image(name: ["textformat.characters.arrow.left.and.right", "star.leadinghalf.filled", "star.leadinghalf.fill"])
           .withExpandingDetailView {
             SettingsItem.Input()
               .bindTo(.subBlur)
+              .range(0...20, allowsFloats: true)
             SettingsItem.Input()
               .bindTo(.subSpacing)
+              .range(-10...10, allowsFloats: true)
           }
       }
     }
@@ -121,6 +125,7 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.Input()
           .image(name: "arrow.up.and.down")
           .bindTo(.subPos)
+          .range(0...150)
           .trailingLabel(.text_Percent)
       }
 
@@ -226,7 +231,7 @@ fileprivate class SubtitlesASSView: SettingsAccessory.Base {
   private let primarySelection: SettingsAccessory.Selection
   private let secondarySelection: SettingsAccessory.Selection
 
-  override init(l10n: SettingsLocalization.Context) {
+  override init() {
     self.segmentControl = NSSegmentedControl(
       labels: ["Primary", "Secondary"],
       trackingMode: .selectOne, target: nil, action: nil)
@@ -240,7 +245,7 @@ fileprivate class SubtitlesASSView: SettingsAccessory.Base {
     self.stackView = NSStackView()
     stackView.translatesAutoresizingMaskIntoConstraints = false
 
-    super.init(l10n: l10n)
+    super.init()
 
     segmentControl.translatesAutoresizingMaskIntoConstraints = false
     segmentControl.target = self
@@ -255,14 +260,14 @@ fileprivate class SubtitlesASSView: SettingsAccessory.Base {
     primarySelection.registerSearchEntry(context: context)
   }
 
-  override func makeView(context: SettingsLocalization.Context) -> NSView {
-    stackView.addArrangedSubview(primarySelection.makeView(context: context))
-    stackView.addArrangedSubview(secondarySelection.makeView(context: context))
+  override func makeView() -> NSView {
+    stackView.addArrangedSubview(primarySelection.makeView())
+    stackView.addArrangedSubview(secondarySelection.makeView())
     stackView.orientation = .vertical
     stackView.alignment = .width
     stackView.setVisibilityPriority(.notVisible, for: secondarySelection.builtView!)
 
-    return super.makeView(context: context)
+    return super.makeView()
   }
 
   @objc func subOverrideLevelSegmentedControlAction(_ sender: NSSegmentedControl) {
@@ -278,8 +283,8 @@ fileprivate class SubtitlesASSView: SettingsAccessory.Base {
 
 
 fileprivate class SubtitlesFontView: SettingsAccessory.Base {
-  override init(l10n: SettingsLocalization.Context) {
-    super.init(l10n: l10n)
+  override init() {
+    super.init()
 
     let fontButton = SButton(image: nil)
     fontButton.translatesAutoresizingMaskIntoConstraints = false
@@ -292,18 +297,18 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
     fontButton.bind(.title, to: UserDefaults.standard, withKeyPath: Preference.Key.subTextFont.rawValue)
     fontButton.size(height: 25)
 
-    let sizeInput = ui.input(bindTo: .subTextSize)
+    let sizeInput = ui.input(bindTo: .subTextSize, range: 1...9000, allowsFloats: true)
 
     let boldButton = SButton(image: .sf("bold"))
     boldButton.translatesAutoresizingMaskIntoConstraints = false
     boldButton.setButtonType(.toggle)
-    boldButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subBold.rawValue)
+    boldButton.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.subBold.rawValue)
     boldButton.size(width: 32, height: 25)
 
     let italicButton = SButton(image: .sf("italic"))
     italicButton.translatesAutoresizingMaskIntoConstraints = false
     italicButton.setButtonType(.toggle)
-    italicButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subItalic.rawValue)
+    italicButton.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.subItalic.rawValue)
     italicButton.size(width: 32, height: 25)
 
     let stackView = ui.hStack(fontButton, sizeInput, boldButton, italicButton)
@@ -323,29 +328,21 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
 
 
 fileprivate class SubtitlesColorView: SettingsAccessory.Base {
-  override init(l10n: SettingsLocalization.Context) {
-    super.init(l10n: l10n)
-
-    let colorLabel = ui.smallLabel(bindTo: .text_Color)
+  override init() {
+    super.init()
     let colorWell = ui.colorWell(bindTo: .subTextColorString)
-
-    let backgroundLabel = ui.smallLabel(bindTo: .text_Background)
-    let backgroundWell = ui.colorWell(bindTo: .subBgColorString)
-
-    let stackView = ui.hStack(colorLabel, colorWell, backgroundLabel, backgroundWell)
-
-    view.addSubview(stackView)
-    stackView.padding(.top(8), .bottom(8), .leading, .trailing)
+    view.addSubview(colorWell)
+    colorWell.padding(.top(8), .bottom(8), .leading, .trailing)
   }
 }
 
 
 fileprivate class SubtitlesBorderView: SettingsAccessory.Base {
-  override init(l10n: SettingsLocalization.Context) {
-    super.init(l10n: l10n)
+  override init() {
+    super.init()
 
     let widthLabel = ui.smallLabel(bindTo: .text_Size)
-    let widthInput = ui.input(bindTo: .subBorderSize)
+    let widthInput = ui.input(bindTo: .subBorderSize, range: 0...Double.infinity, allowsFloats: true)
 
     let colorLabel = ui.smallLabel(bindTo: .text_Color)
     let colorWell = ui.colorWell(bindTo: .subBorderColorString)
@@ -359,8 +356,8 @@ fileprivate class SubtitlesBorderView: SettingsAccessory.Base {
 
 
 fileprivate class SubtitlesShadowView: SettingsAccessory.Base {
-  override init(l10n: SettingsLocalization.Context) {
-    super.init(l10n: l10n)
+  override init() {
+    super.init()
 
     let sizeLabel = ui.smallLabel(bindTo: .text_Offset)
     let sizeInput = ui.input(bindTo: .subShadowSize)
@@ -377,14 +374,14 @@ fileprivate class SubtitlesShadowView: SettingsAccessory.Base {
 
 
 fileprivate class SubtitlesMarginView: SettingsAccessory.Base {
-  override init(l10n: SettingsLocalization.Context) {
-    super.init(l10n: l10n)
+  override init() {
+    super.init()
 
     let xLabel = ui.smallLabel(bindTo: .text_X)
-    let xInput = ui.input(bindTo: .subMarginX)
+    let xInput = ui.input(bindTo: .subMarginX, range: 0...Double(Int.max))
 
     let yLabel = ui.smallLabel(bindTo: .text_Y)
-    let yInput = ui.input(bindTo: .subMarginY)
+    let yInput = ui.input(bindTo: .subMarginY, range: 0...Double(Int.max))
 
     let stackView = ui.hStack(xLabel, xInput, yLabel, yInput)
 
@@ -395,8 +392,8 @@ fileprivate class SubtitlesMarginView: SettingsAccessory.Base {
 
 
 fileprivate class SubtitlesAlignView: SettingsAccessory.Base {
-  override init(l10n: SettingsLocalization.Context) {
-    super.init(l10n: l10n)
+  override init() {
+    super.init()
 
     let xLabel = ui.smallLabel(bindTo: .text_X)
     let xPopUp = makePopUp(.subAlignX)
@@ -417,7 +414,7 @@ fileprivate class SubtitlesAlignView: SettingsAccessory.Base {
     popupButton.bezelStyle = .toolbar
 
     for tag in allValues {
-      let title = l10n.localized(.init("\(key.rawValue).items.\(tag)"))
+      let title = ui.localized(.init("\(key.rawValue).items.\(tag)"))
       popupButton.addItem(withTitle: title)
       popupButton.lastItem?.tag = tag
     }
@@ -430,9 +427,9 @@ fileprivate class SubtitlesAlignView: SettingsAccessory.Base {
 fileprivate class SubtitlesEncodingView: SettingsAccessory.Base {
   let popupButton: NSPopUpButton
 
-  override init(l10n: SettingsLocalization.Context) {
+  override init() {
     self.popupButton = NSPopUpButton()
-    super.init(l10n: l10n)
+    super.init()
 
     popupButton.translatesAutoresizingMaskIntoConstraints = false
     popupButton.bezelStyle = .toolbar
@@ -467,7 +464,7 @@ fileprivate class SubtitleSourceView: SettingsAccessory.Base {
   let subSourcePopUpButton: NSPopUpButton
   let loginIndicator: NSProgressIndicator
 
-  override init(l10n: SettingsLocalization.Context) {
+  override init() {
     self.subSourcePopUpButton = NSPopUpButton()
     subSourcePopUpButton.translatesAutoresizingMaskIntoConstraints = false
     subSourcePopUpButton.bind(.selectedObject, to: UserDefaults.standard, withKeyPath: Preference.Key.onlineSubProvider.rawValue)
@@ -476,7 +473,7 @@ fileprivate class SubtitleSourceView: SettingsAccessory.Base {
     loginIndicator.translatesAutoresizingMaskIntoConstraints = false
     loginIndicator.style = .spinning
     loginIndicator.isHidden = true
-    super.init(l10n: l10n)
+    super.init()
 
     let descLabel = ui.smallLabel(bindTo: .text_SubtitleSource_desc).makeMultiLine()
 

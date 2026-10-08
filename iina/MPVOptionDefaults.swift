@@ -53,8 +53,12 @@ class MPVOptionDefaults {
       return
     }
     logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadAutoProfiles, "no"))
-    logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadOsdConsole, "no"))
+    logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadCommands, "no"))
+    logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadConsole, "no"))
+    logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadContextMenu, "no"))
+    logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadPositioning, "no"))
     logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadScripts, "no"))
+    logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadSelect, "no"))
     logError(mpv_set_option_string(mpv, MPVOption.ProgramBehavior.loadStatsOverlay, "no"))
     logError(mpv_initialize(mpv))
   }

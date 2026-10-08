@@ -122,9 +122,9 @@ struct ALConstraint {
   private static func getConstraint(_ direction: Direction, _ val: ConstantType?, _ lessVal: ConstantType?, _ greatVal: ConstantType?) -> ALConstraint {
     let rel: NSLayoutConstraint.Relation
     let constant: ConstantType
-    if let val = val { (rel, constant) = (.equal, val) }
-    else if let lessVal = lessVal { (rel, constant) = (.lessThanOrEqual, lessVal) }
-    else if let greatVal = greatVal { (rel, constant) = (.greaterThanOrEqual, greatVal) }
+    if let val { (rel, constant) = (.equal, val) }
+    else if let lessVal { (rel, constant) = (.lessThanOrEqual, lessVal) }
+    else if let greatVal { (rel, constant) = (.greaterThanOrEqual, greatVal) }
     else { fatalError("A constraint must have a value") }
     return .init(direction: direction, relation: rel, constant: constant)
   }
@@ -182,10 +182,10 @@ extension NSView {
 
   @discardableResult
   func size(width: CGFloat? = nil, height: CGFloat? = nil) -> Self {
-    if let width = width {
+    if let width {
       self.widthAnchor.constraint(equalToConstant: width).isActive = true
     }
-    if let height = height {
+    if let height {
       self.heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     return self
@@ -193,12 +193,12 @@ extension NSView {
 
   @discardableResult
   func size(width: LayoutValue? = nil, height: LayoutValue? = nil) -> Self {
-    if let width = width {
+    if let width {
       let constraint = self.widthAnchor.constraint(equalToConstant: 0)
       width.use { [weak constraint] in constraint?.constant = $0 }
       constraint.isActive = true
     }
-    if let height = height {
+    if let height {
       let constraint = self.heightAnchor.constraint(equalToConstant: 0)
       height.use { [weak constraint] in constraint?.constant = $0 }
       constraint.isActive = true
@@ -227,16 +227,16 @@ extension NSView {
   @discardableResult
   func flexibleSpacingTo(view: NSView, _ superview: NSView? = nil, top: CGFloat? = nil, bottom: CGFloat? = nil, leading: CGFloat? = nil, trailing: CGFloat? = nil) -> Self {
     let sv = superview ?? view.superview!
-    if let top = top {
+    if let top {
       sv.addConstraint(self.topAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor, constant: top))
     }
-    if let bottom = bottom {
+    if let bottom {
       sv.addConstraint(self.bottomAnchor.constraint(lessThanOrEqualTo: view.topAnchor, constant: -bottom))
     }
-    if let leading = leading {
+    if let leading {
       sv.addConstraint(self.leadingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: leading))
     }
-    if let trailing = trailing {
+    if let trailing {
       sv.addConstraint(self.trailingAnchor.constraint(lessThanOrEqualTo: view.leadingAnchor, constant: -trailing))
     }
     return self

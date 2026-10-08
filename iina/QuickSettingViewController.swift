@@ -26,7 +26,7 @@ class QuickSettingViewController: SidebarViewController {
   override var leadingPrefKey: Preference.Key {
     .sidebarSettingsDisplayAtLeading
   }
-  
+
   override var allTabs: [TabType] {
     [.layout, .video, .audio, .sub]
   }

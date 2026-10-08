@@ -32,6 +32,7 @@ fileprivate extension Process {
   func keychainWrite(_ service: String, _ name: String, _ password: String) -> Any
   func keychainRead(_ service: String, _ name: String) -> Any
   func open(_ url: String) -> Bool
+  func preferredLocalizations() -> Any
 }
 
 class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
@@ -159,7 +160,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       process.environment = ["LC_ALL": "en_US.UTF-8"]
       process.launchPath = path
       process.arguments = args
-      if let cwd = cwd, cwd.isString, let cwdPath = parsePath(cwd.toString()).path {
+      if let cwd, cwd.isString, let cwdPath = parsePath(cwd.toString()).path {
         process.currentDirectoryPath = cwdPath
       }
       process.standardOutput = stdout
@@ -253,7 +254,7 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
     }
     // might be a file path
     let (path, isLocal) = parsePath(url)
-    guard let path = path else {
+    guard let path else {
       log("utils.open: path cannot be found", level: .error)
       return false
     }
@@ -266,5 +267,9 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
       NSWorkspace.shared.open(fileURL)
       return true
     } ?? false
+  }
+
+  func preferredLocalizations() -> Any {
+    return Bundle.main.preferredLocalizations
   }
 }

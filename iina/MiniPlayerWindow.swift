@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MiniPlayerWindow: NSWindow {
+class MiniPlayerWindow: CommonWindow {
 
   override func keyDown(with event: NSEvent) {
     if menu?.performKeyEquivalent(with: event) == true {

@@ -8,10 +8,12 @@
 
 import Cocoa
 
+fileprivate let ui = SettingsUIHelper.sharedUI
+
 
 protocol SettingsContainer {
   var itemID: Int { get }
-  func makeView(context: SettingsLocalization.Context) -> NSView
+  func makeView() -> NSView
   func getChildren() -> [any SettingsContainer]
   func registerSearchEntry(context: SettingsSearch.Context)
 }
@@ -83,8 +85,20 @@ struct SettingsViewsBuilder {
 
 @resultBuilder
 struct SettingsItemsBuilder {
-  static func buildBlock(_ components: SettingsItem.Base...) -> [SettingsItem.Base] {
-    return components
+  static func buildBlock(_ components: [SettingsItem.Base]...) -> [SettingsItem.Base] {
+    return components.flatMap { $0 }
+  }
+
+  static func buildExpression(_ expression: SettingsItem.Base) -> [SettingsItem.Base] {
+    [expression]
+  }
+
+  static func buildOptional(_ component: [SettingsItem.Base]?) -> [SettingsItem.Base] {
+    return component ?? []
+  }
+
+  static func buildLimitedAvailability(_ component: [SettingsItem.Base]) -> [SettingsItem.Base] {
+    component
   }
 }
 
@@ -130,7 +144,9 @@ class SettingsPage {
   var title: String { "" }
   var localizationTable: String { "" }
   var image: NSImage { NSImage() }
+  var helpInfo: String? { nil }
   var sectionSpacing: CGFloat { 16 }
+  var showSubSections: Bool { true }
 
   let symbolConfiguration = NSImage.SymbolConfiguration(pointSize: 18, weight: .bold)
 
@@ -142,13 +158,11 @@ class SettingsPage {
     }
   }()
 
-  lazy var localizationContext: SettingsLocalization.Context = {
-    SettingsLocalization.Context(tableName: localizationTable)
-  }()
-
   lazy var builtSections: [SettingsSection] = {
     content()
   }()
+
+  var labeledViews: [String: NSView] = [:]
 
   func pageLoaded() {}
 
@@ -166,8 +180,8 @@ class SettingsPage {
     return []
   }
 
-  final func section(@SettingsSectionBuilder _ containers: () -> [SettingsContainer]) -> SettingsSection {
-    SettingsSection(spacing: sectionSpacing, containers())
+  final func section(label: String? = nil, @SettingsSectionBuilder _ containers: () -> [SettingsContainer]) -> SettingsSection {
+    SettingsSection(label: label, spacing: sectionSpacing, containers())
   }
 
   final func sections(@SettingsViewsBuilder _ sections: () -> [SettingsSection]) -> [SettingsSection] {
@@ -176,7 +190,11 @@ class SettingsPage {
 
   private func makeContentView() -> NSView {
     let views = builtSections.map {
-      $0.makeView(context: localizationContext)
+      let view = $0.makeView()
+      if let label = $0.label {
+        labeledViews[label] = view
+      }
+      return view
     }
     let stackView = NSStackView(views: views)
     stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -190,9 +208,18 @@ class SettingsPage {
   }
 
   func registerSearchEntries() {
-    let context = SettingsSearch.Context(l10n: localizationContext, page: identifier, section: nil, parent: nil)
+    let context = SettingsSearch.Context(page: identifier, section: nil, parent: nil)
     builtSections.forEach { $0.registerSearchEntry(context: context) }
   }
+
+  func setControlsEnabled(in view: NSView, enabled: Bool, skipping skippedView: NSView?) {
+    guard view !== skippedView else { return }
+    if let control = view as? NSControl {
+      control.isEnabled = enabled
+    }
+    view.subviews.forEach { setControlsEnabled(in: $0, enabled: enabled, skipping: skippedView) }
+  }
+
 }
 
 
@@ -201,11 +228,13 @@ class SettingsSection: SettingsContainer {
   let spacing: CGFloat
   var titleKey: SettingsLocalization.Key?
   let children: [SettingsContainer]
+  let label: String?
 
-  init(titleKey: SettingsLocalization.Key? = nil, spacing: CGFloat, _ children: [SettingsContainer]) {
+  init(titleKey: SettingsLocalization.Key? = nil, label: String? = nil, spacing: CGFloat, _ children: [SettingsContainer]) {
     self.spacing = spacing
     self.titleKey = titleKey
     self.children = children
+    self.label = label
 
     if self.titleKey == nil,
        let firstList = children.first as? SettingsList,
@@ -220,9 +249,9 @@ class SettingsSection: SettingsContainer {
     children
   }
 
-  func makeView(context: SettingsLocalization.Context) -> NSView {
+  func makeView() -> NSView {
     let view = View()
-    let childViews = children.map { $0.makeView(context: context) }
+    let childViews = children.map { $0.makeView() }
     let stackView = NSStackView(views: childViews)
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.orientation = .vertical
@@ -234,7 +263,7 @@ class SettingsSection: SettingsContainer {
     view.addSubview(stackView)
 
     if let titleKey {
-      let title = context.localized(titleKey)
+      let title = ui.localized(titleKey)
       view.sectionTitle = title
       let titleField = NSTextField(labelWithString: title)
       titleField.font = NSFont.systemFont(ofSize: 14, weight: .bold)
@@ -252,7 +281,7 @@ class SettingsSection: SettingsContainer {
   }
 
   func registerSearchEntry(context: SettingsSearch.Context) {
-    let context = context.with(section: titleKey.map { context.l10n.localized($0) })
+    let context = context.with(section: titleKey.map { ui.localized($0) })
     return children.forEach { $0.registerSearchEntry(context: context) }
   }
 
@@ -284,8 +313,8 @@ class SettingsList: SettingsContainer {
     items
   }
 
-  func makeView(context: SettingsLocalization.Context) -> NSView {
-    let listView = makeListView(context: context)
+  func makeView() -> NSView {
+    let listView = makeListView()
     let container = ContainerView(listView: listView)
     container.addSubview(listView)
 
@@ -294,7 +323,7 @@ class SettingsList: SettingsContainer {
       return container
     }
 
-    let title = context.localized(titleKey)
+    let title = ui.localized(titleKey)
     let titleField = NSTextField(labelWithString: SettingsList.SMALL_TITLE ? title.localizedUppercase : title)
     titleField.font = SettingsList.SMALL_TITLE ?
       NSFont.systemFont(ofSize: NSFont.smallSystemFontSize, weight: .bold) :
@@ -313,13 +342,13 @@ class SettingsList: SettingsContainer {
     items.forEach { $0.registerSearchEntry(context: context) }
   }
 
-  func makeListView(context: SettingsLocalization.Context) -> View {
+  func makeListView() -> View {
     let listView = View()
-    addItems(to: listView, context: context)
+    addItems(to: listView)
     return listView
   }
 
-  func addItems(to listView: View, context: SettingsLocalization.Context) {
+  func addItems(to listView: View) {
     items.forEach {
       $0.isFirstItem = false
       $0.isLastItem = false
@@ -328,7 +357,7 @@ class SettingsList: SettingsContainer {
     items.last?.isLastItem = true
 
     let itemViews = items.map { item -> NSView in
-      item.makeView(context: context)
+      item.makeView()
     }
     itemViews.forEach {
       listView.contentView!.addSubview($0)
@@ -404,11 +433,11 @@ class SettingsSubList: SettingsList {
   static let indent: CGFloat = 28
   override var horizontalPadding: CGFloat { 0 }
 
-  override func makeListView(context: SettingsLocalization.Context) -> View {
+  override func makeListView() -> View {
     items.forEach { $0.controlSize = .small }
 
     let listView = View()
-    addItems(to: listView, context: context)
+    addItems(to: listView)
 
     let separator = NSBox()
     separator.translatesAutoresizingMaskIntoConstraints = false

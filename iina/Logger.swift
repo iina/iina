@@ -42,6 +42,8 @@ class Logger: NSObject {
     }
   }
 
+  @Atomic static var buffer: [Logger.Log] = []
+
   class Subsystem: RawRepresentable {
     let rawValue: String
     let image: NSImage?
@@ -278,8 +280,12 @@ class Logger: NSObject {
     let date = Date()
     let string = formatMessage(message, level, subsystem, true, date)
     let log = Log(subsystem: subsystem.rawValue, level: level, message: message, date: dateFormatter.string(from: date), logString: string)
+
+    $buffer.withLock {
+      $0.append(log)
+    }
     Task { @MainActor in
-      AppDelegate.shared.logWindow.append(log)
+      NotificationCenter.default.post(name: .iinaLogAppended, object: nil)
     }
 
     print(string, terminator: "")
@@ -295,7 +301,7 @@ class Logger: NSObject {
     // Lock to prevent the log file from being closed by another thread while writing to it.
     lock.withLock() {
       // The logger may be called after it has been closed.
-      guard let logFileHandle = logFileHandle else { return }
+      guard let logFileHandle else { return }
       do {
         // The deprecated write method is used instead of the replacement method that throws swift
         // exceptions because testing the new method with macOS 12.5.1 showed that method failed to

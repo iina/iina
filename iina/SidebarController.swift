@@ -8,9 +8,6 @@
 
 import Cocoa
 
-fileprivate let SettingsWidth: CGFloat = 360
-fileprivate let PlaylistMinWidth: CGFloat = 240
-fileprivate let PlaylistMaxWidth: CGFloat = 800
 fileprivate let SideBarAnimationDuration = 0.24
 
 
@@ -24,31 +21,11 @@ class SidebarController: NSObject {
   }
 
   /// What's currently embedded in a sidebar panel.
-  enum ViewType: CaseIterable {
+  enum ViewType {
     case hidden
     case settings
     case playlist
     case plugins
-
-    var prefKey: Preference.Key? {
-      switch self {
-      case .settings: .sidebarSettingsDisplayAtLeading
-      case .playlist: .sidebarPlaylistDisplayAtLeading
-      case .plugins: .sidebarPluginsDisplayAtLeading
-      case .hidden: nil
-      }
-    }
-
-    var width: CGFloat {
-      switch self {
-      case .settings, .plugins:
-        return SettingsWidth
-      case .playlist:
-        return CGFloat(Preference.integer(for: .playlistWidth)).clamped(to: PlaylistMinWidth...PlaylistMaxWidth)
-      case .hidden:
-        return 0
-      }
-    }
   }
 
   /// Holds the view, layout constraints, and animation state for one side's sidebar.
@@ -87,11 +64,11 @@ class SidebarController: NSObject {
     super.init()
 
     // observe sidebar positions
-    prefObserver.addAll(ViewType.allCases.compactMap { $0.prefKey }) { [unowned self] key in
-      guard let viewType = ViewType.allCases.first(where: { $0.prefKey == key }) else { return }
-      if (isShowing(viewType)) {
+    prefObserver.addAll(viewControllers.map { $0.leadingPrefKey }) { [unowned self] key in
+      guard let vc = viewControllers.first(where: { $0.leadingPrefKey == key }) else { return }
+      if isShowing(vc.sidebarType) {
         hideAllSideBars(animate: false) {
-          self.show(sidebar: viewType)
+          self.show(sidebar: vc.sidebarType)
         }
       }
     }
@@ -113,7 +90,7 @@ class SidebarController: NSObject {
   )
   var sideBars: [Panel] { [leadingSidebar, trailingSidebar] }
 
-  /// Set while the user is dragging the playlist resize handle. Drives cursor change.
+  /// Set while the user is dragging a sidebar's resize handle. Drives cursor change.
   var resizingSidebarSide: Side? {
     didSet {
       if resizingSidebarSide != nil {
@@ -137,8 +114,13 @@ class SidebarController: NSObject {
     switch viewType {
     case .settings: quickSettingView
     case .playlist: playlistView
-    default: nil
+    case .plugins: pluginView
+    case .hidden: nil
     }
+  }
+
+  private var viewControllers: [SidebarViewController] {
+    [quickSettingView, playlistView, pluginView]
   }
 
   // MARK: - Layout setup (called from windowDidLoad)
@@ -195,16 +177,8 @@ class SidebarController: NSObject {
   }
 
   private func side(for type: ViewType) -> Side {
-    switch type {
-    case .playlist:
-      return Preference.bool(for: .sidebarPlaylistDisplayAtLeading) ? .leading : .trailing
-    case .settings:
-      return Preference.bool(for: .sidebarSettingsDisplayAtLeading) ? .leading : .trailing
-    case .plugins:
-      return Preference.bool(for: .sidebarPluginsDisplayAtLeading) ? .leading : .trailing
-    default:
-      return .trailing
-    }
+    guard let vc = viewController(for: type) else { return .trailing }
+    return vc.isLeading ? .leading : .trailing
   }
 
   // MARK: - Mouse routing
@@ -212,7 +186,7 @@ class SidebarController: NSObject {
   /// Returns true if the event was consumed by sidebar logic (caller should NOT call `super`).
   func handleMouseDown(_ event: NSEvent, at location: NSPoint) -> Bool {
     if let panel = sideBars.first(where: {
-      $0.status == .playlist && NSPointInRect(location, playlistDraggingRect(for: $0.side))
+      $0.status != .hidden && NSPointInRect(location, resizeHandleRect(for: $0.side))
     }) {
       resizingSidebarSide = panel.side
       return true
@@ -225,11 +199,12 @@ class SidebarController: NSObject {
   /// Returns true if the event was consumed (an in-progress sidebar resize).
   func handleMouseDragged(_ event: NSEvent) -> Bool {
     guard let side = resizingSidebarSide else { return false }
+    let panel = sideBar(for: side)
+    guard let range = viewController(for: panel.status)?.widthRange else { return false }
     let x = event.locationInWindow.x
     let newWidth = (visuallyOnLeft(side) ? x : mainWindow.window!.frame.width - x) - 2
-    let maxWidth = min(sidebarMaxWidth, PlaylistMaxWidth)
-    let clamped = newWidth.clamped(to: PlaylistMinWidth...maxWidth)
-    let panel = sideBar(for: side)
+    let maxWidth = max(range.lowerBound, min(sidebarMaxWidth, range.upperBound))
+    let clamped = newWidth.clamped(to: range.lowerBound...maxWidth)
     panel.widthConstraint.constant = clamped
     // Keep the title text container flush against the (resizing) sidebar's inner edge — this also
     // triggers Titlebar.layout(), which refreshes the fade mask off the new sidebar frame.
@@ -246,7 +221,9 @@ class SidebarController: NSObject {
   func handleMouseUp(_ event: NSEvent) -> Bool {
     if let side = resizingSidebarSide {
       resizingSidebarSide = nil
-      Preference.set(Int(sideBar(for: side).widthConstraint.constant), for: .playlistWidth)
+      let panel = sideBar(for: side)
+      let key: Preference.Key = side == .leading ? .leadingSidebarWidth : .trailingSidebarWidth
+      Preference.set(Int(panel.widthConstraint.constant), for: key)
       return true
     }
     let isSingleClick = event.clickCount <= 1 && mainWindow.videoView.lastEventId == event.eventNumber
@@ -265,15 +242,15 @@ class SidebarController: NSObject {
   }
 
   /// 4pt strip on the sidebar's inner edge (toward the video center) used as the resize handle.
-  func playlistDraggingRect(for side: Side) -> NSRect {
+  func resizeHandleRect(for side: Side) -> NSRect {
     let sf = sideBar(for: side).view.frame
     let originX = visuallyOnLeft(side) ? sf.maxX : sf.minX - 4
     return NSRect(x: originX, y: sf.minY, width: 4, height: sf.height)
   }
 
   private var sidebarMaxWidth: CGFloat {
-    guard let window = mainWindow.window else { return PlaylistMaxWidth }
-    return max(window.frame.width * 0.8, PlaylistMinWidth)
+    guard let window = mainWindow.window else { return .greatestFiniteMagnitude }
+    return window.frame.width * 0.8
   }
 
   // MARK: - Show
@@ -300,6 +277,14 @@ class SidebarController: NSObject {
     }
   }
 
+  private func replaceSideBar(with viewController: SidebarViewController, type: ViewType, in panel: Panel) {
+    panel.status = type
+    panel.view.setContent(viewController.view)
+    viewController.view.padding(.all)
+    viewController.downShift = 0
+    NotificationCenter.default.post(name: .iinaSidebarStatusChanged, object: nil)
+  }
+
   /// Show the given sidebar on its configured side.
   ///
   /// Normally the sidebar is revealed by sliding it into view. However if the macOS [System Settings](https://support.apple.com/guide/mac-help/change-system-settings-mh15217/mac)
@@ -308,9 +293,9 @@ class SidebarController: NSObject {
   /// `Disable animations` setting then the duration of the animation will be set to zero making the
   /// sidebar appear instantly.
   private func showSideBar(viewController: SidebarViewController, type: ViewType) {
-    guard !mainWindow.isInInteractiveMode else { return }
+    guard !mainWindow.interactiveMode.isActive else { return }
     let panel = sideBar(for: side(for: type))
-    let width = type.width.clamped(to: 0...sidebarMaxWidth)
+    let width = viewController.width.clamped(to: 0...sidebarMaxWidth)
     let margin = panel.visibleEdgeMargin
 
     panel.animationState = .willShow
@@ -335,11 +320,12 @@ class SidebarController: NSObject {
         panel.view.animator().isHidden = false
       } else {
         panel.edgeConstraint.animator().constant = margin
-        setTitlebarConstraint(
-          for: panel.side,
-          titlebarConstantWhenShown(width: width, margin: margin, side: panel.side)
-        )
       }
+      setTitlebarConstraint(
+        for: panel.side,
+        titlebarConstantWhenShown(width: width, margin: margin, side: panel.side),
+        animated: !useFadeForSidebar
+      )
     }) {
       panel.animationState = .shown
       self.mainWindow.window?.resetCursorRects()
@@ -369,8 +355,8 @@ class SidebarController: NSObject {
         panel.view.animator().alphaValue = 0
       } else {
         panel.edgeConstraint.animator().constant = -currWidth
-        setTitlebarConstraint(for: panel.side, 0)
       }
+      setTitlebarConstraint(for: panel.side, 0, animated: !useFadeForSidebar)
     }) {
       // A new show may have started during the hide animation; only finalize if we still mean to hide.
       guard panel.animationState == .willHide else { return }
@@ -424,7 +410,7 @@ class SidebarController: NSObject {
       return  // don't interrupt in-flight animation on the target side
     }
 
-    let switchTab = { if let tab = tab { viewController.pleaseSwitchToTab(tab) } }
+    let switchTab = { if let tab { viewController.pleaseSwitchToTab(tab) } }
 
     // If this type is already visible (possibly on the other side after a config change), treat
     // a same-tab request as toggle-off and a different-tab request as a tab switch in place.
@@ -441,10 +427,7 @@ class SidebarController: NSObject {
     if targetPanel.status == .hidden {
       showSideBar(viewController: viewController, type: type)
     } else {
-      // Target side currently shows a different type — replace it.
-      hideSideBar(side: targetSide, animate: false) {
-        self.showSideBar(viewController: viewController, type: type)
-      }
+      replaceSideBar(with: viewController, type: type, in: targetPanel)
     }
   }
 

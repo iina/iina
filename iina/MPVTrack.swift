@@ -90,51 +90,58 @@ class MPVTrack: NSObject {
   var demuxFps: Double?
 
 
-  var readableTitle: String { "\(idString) \(infoString)" }
+  var readableTitle: String { "\(idString) \(readableString())" }
 
   var idString: String { "#\(id)" }
 
-  var infoString: String {
-    get {
-      // title
-      let title = title ?? ""
-      // lang
-      let language: String
-      if let lang, lang != "und", let rawLang = ISO639Helper.dictionary[lang] {
-        language = "[\(rawLang)]"
-      } else {
-        language = ""
-      }
-      // info
-      var components: [String] = []
-      if let codec {
-        components.append(codec)
-      }
-      switch type {
-      case .video:
-        if let demuxW, let demuxH {
-          components.append("\(demuxW)\u{d7}\(demuxH)")
-        }
-        if let demuxFps {
-          components.append("\(demuxFps.prettyFormat())fps")
-        }
-      case .audio:
-        if let demuxChannelCount {
-          components.append("\(demuxChannelCount)ch")
-        }
-        if let demuxSamplerate {
-          components.append("\((Double(demuxSamplerate)/1000).prettyFormat())kHz")
-        }
-      default:
-        break
-      }
-      let info = components.joined(separator: ", ")
-      // default
-      let isDefault = isDefault ? "(" + NSLocalizedString("quicksetting.item_default", comment: "Default") + ")" : ""
-      // final string
-      return [language, title, info, isDefault].filter { !$0.isEmpty }.joined(separator: " ")
+  func readableString(includingLanguage: Bool = true) -> String {
+    // title
+    let title = title ?? NSLocalizedString("general.no_title", comment: "No Title")
+    // lang
+    let language: String
+    if includingLanguage, let lang, lang != "und", let readableLanguage {
+      language = "[\(readableLanguage)]"
+    } else {
+      language = ""
     }
+    // info
+    var components: [String] = []
+    if let codec {
+      components.append(codec)
+    }
+    switch type {
+    case .video:
+      if let demuxW, let demuxH {
+        components.append("\(demuxW)\u{d7}\(demuxH)")
+      }
+      if let demuxFps {
+        components.append("\(demuxFps.prettyFormat())fps")
+      }
+    case .audio:
+      if let demuxChannelCount {
+        components.append("\(demuxChannelCount)ch")
+      }
+      if let demuxSamplerate {
+        components.append("\((Double(demuxSamplerate)/1000).prettyFormat())kHz")
+      }
+    default:
+      break
+    }
+    if isDefault {
+      components.append(NSLocalizedString("quicksetting.item_default", comment: "Default"))
+    }
+    var info = components.joined(separator: ", ")
+    if !info.isEmpty {
+      info = "(\(info))"
+    }
+    // final string
+    return [language, title, info].filter { !$0.isEmpty }.joined(separator: " ")
+  }
 
+  var readableLanguage: String? {
+    lang.flatMap {
+      Locale.current.localizedString(forIdentifier: $0)
+    }
   }
 
   var isAlbumart: Bool = false

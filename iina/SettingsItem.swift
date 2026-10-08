@@ -8,10 +8,12 @@
 
 import Cocoa
 
+fileprivate let ui = SettingsUIHelper.sharedUI
+
+
 struct SettingsItem {
   class Base: NSObject, SettingsContainer {
     lazy var itemID = SettingsContainerUUID.next()
-    var l10n: SettingsLocalization.Context!
 
     var isFirstItem = false
     var isLastItem = false
@@ -32,8 +34,7 @@ struct SettingsItem {
       }
     }
 
-    func makeView(context: SettingsLocalization.Context) -> NSView {
-      self.l10n = context
+    func makeView() -> NSView {
       let view = NSView()
       view.translatesAutoresizingMaskIntoConstraints = false
       return view
@@ -56,8 +57,7 @@ struct SettingsItem {
       return self
     }
 
-    override func makeView(context: SettingsLocalization.Context) -> NSView {
-      self.l10n = context
+    override func makeView() -> NSView {
       let view = View(tag: itemID)
       view.translatesAutoresizingMaskIntoConstraints = false
       customView.translatesAutoresizingMaskIntoConstraints = false
@@ -104,8 +104,7 @@ struct SettingsItem {
       return self
     }
 
-    override func makeView(context: SettingsLocalization.Context) -> NSView {
-      self.l10n = context
+    override func makeView() -> NSView {
       let view = View(tag: itemID)
       view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -119,8 +118,8 @@ struct SettingsItem {
       setControlSize(label)
       setControlSize(textField)
 
-      if let key = key {
-        label.stringValue = l10n.localized(.init("\(key.rawValue).label"))
+      if let key {
+        label.stringValue = ui.localized(.init("\(key.rawValue).label"))
         textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
       }
 
@@ -145,7 +144,7 @@ struct SettingsItem {
 
       if hasDesc {
         let descKey =  descKey ?? .init("\(key!.rawValue).desc")
-        let descLabel = NSTextField(labelWithString: l10n.localized(descKey))
+        let descLabel = NSTextField(labelWithString: ui.localized(descKey))
         descLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         descLabel.textColor = .secondaryLabelColor
         stackView.addArrangedSubview(descLabel)
@@ -162,12 +161,11 @@ struct SettingsItem {
     }
 
     override func registerSearchEntry(context: SettingsSearch.Context) {
-      let l10n = context.l10n
       context.add(itemID,
-                  (key?.rawValue).map { l10n.localized(.init($0 + ".label")) },
+                  (key?.rawValue).map { ui.localized(.init($0 + ".label")) },
                   isMain: true)
       context.add(itemID,
-                  (descKey?.rawValue).map { l10n.localized(.init($0 + ".desc")) },
+                  (descKey?.rawValue).map { ui.localized(.init($0 + ".desc")) },
                   isMain: true)
     }
 
@@ -258,8 +256,7 @@ struct SettingsItem {
       return []
     }
 
-    override func makeView(context: SettingsLocalization.Context) -> NSView {
-      self.l10n = context
+    override func makeView() -> NSView {
       let view = View(owner: self, tag: itemID)
       view.translatesAutoresizingMaskIntoConstraints = false
       self.renderedView = view
@@ -268,23 +265,21 @@ struct SettingsItem {
       return view
     }
 
-    private func localizedTitle(_ context: SettingsLocalization.Context? = nil) -> String {
-      let l10n = context ?? l10n!
-      if let labelLocalizationKey = labelLocalizationKey {
-        return l10n.localized(labelLocalizationKey)
-      } else if let key = key {
+    private func localizedTitle() -> String {
+      if let labelLocalizationKey {
+        return ui.localized(labelLocalizationKey)
+      } else if let key {
         let l10nKey = labelLocalizationKey ?? .init("\(key.rawValue).label")
-        return l10n.localized(l10nKey)
+        return ui.localized(l10nKey)
       } else {
         return "# Localization Missing"
       }
     }
 
     override func registerSearchEntry(context: SettingsSearch.Context) {
-      let l10n = context.l10n
-      context.add(itemID, localizedTitle(l10n), isMain: true)
+      context.add(itemID, localizedTitle(), isMain: true)
       if hasDesc {
-        context.add(itemID, l10n.localized(descKey ?? .init("\(key!.rawValue).desc")))
+        context.add(itemID, ui.localized(descKey ?? .init("\(key!.rawValue).desc")))
       }
       if let detailContainer {
         let newContext = context.with(parent: itemID)
@@ -333,7 +328,7 @@ struct SettingsItem {
       backgroundView.addSubview(labelStackView)
 
       if hasDesc {
-        let descText = l10n.localized(descKey ?? .init("\(key!.rawValue).desc"))
+        let descText = ui.localized(descKey ?? .init("\(key!.rawValue).desc"))
         desc = NSTextField(labelWithString: descText)
         desc.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
         desc.textColor = .secondaryLabelColor
@@ -394,7 +389,7 @@ struct SettingsItem {
     }
 
     func getValueViews() -> [NSView] {
-      if let valueView = valueView {
+      if let valueView {
         return [valueView]
       }
       return []
@@ -436,7 +431,7 @@ struct SettingsItem {
 
     private func prepareExpandableView() {
       guard let detailContainer else { return }
-      let detailView = detailContainer.makeView(context: l10n)
+      let detailView = detailContainer.makeView()
       renderedDetailView = detailView
       detailView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -476,7 +471,7 @@ struct SettingsItem {
     }
 
     func toggleExpandable(_ setValue: Bool? = nil, animated: Bool = true) {
-      if let setValue = setValue {
+      if let setValue {
         isExpanded = setValue
       } else {
         isExpanded.toggle()
@@ -560,10 +555,9 @@ struct SettingsItem {
 
     override func registerSearchEntry(context: SettingsSearch.Context) {
       super.registerSearchEntry(context: context)
-      let l10n = context.l10n
       guard let l10nKey = key?.rawValue ?? labelLocalizationKey?.rawValue else { return }
       for (tag, _) in valueTypes {
-        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
+        let title = ui.localized("\(l10nKey).items.\(tag)")
         context.add(itemID, title)
       }
     }
@@ -578,6 +572,16 @@ struct SettingsItem {
     {
       self.key = key
       for c in t.allCases {
+        valueTypes.append((c.rawValue, String(describing: c)))
+      }
+      return self
+    }
+
+    func bindToSorted<T>(_ key: Preference.Key, ofType t: T.Type) -> Self
+    where T: RawRepresentable & CaseIterable & InitializingFromKey & Comparable, T.RawValue == Int
+    {
+      self.key = key
+      for c in t.allCases.sorted() {
         valueTypes.append((c.rawValue, String(describing: c)))
       }
       return self
@@ -603,14 +607,14 @@ struct SettingsItem {
       guard let l10nKey = key?.rawValue ?? labelLocalizationKey?.rawValue else { return }
       for (tag, _) in valueTypes {
         guard availableTags?.contains(tag) != false else { continue }
-        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
+        let title = ui.localized(.init("\(l10nKey).items.\(tag)"))
         popupButton.addItem(withTitle: title)
         popupButton.lastItem?.tag = tag
       }
       popupButton.controlSize = controlSize
-      if let key = key {
+      if let key {
         popupButton.bind(.selectedTag, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(popupButton)
       }
       DispatchQueue.main.async {
@@ -666,9 +670,9 @@ struct SettingsItem {
     }
 
     override func initBinding() {
-      if let key = key {
+      if let key {
         nsSwitch.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(self)
       }
       DispatchQueue.main.async {
@@ -683,13 +687,13 @@ struct SettingsItem {
     }
 
     @objc func switchChanged(_ sender: NSSwitch?) {
-      guard let detailView = renderedDetailView else { return }
-
       let enabled = nsSwitch.state == .on
-      if !isExpandableAndClickable {
-        toggleExpandable(enabled)
+      if let detailView = renderedDetailView {
+        if !isExpandableAndClickable {
+          toggleExpandable(enabled)
+        }
+        setSubControls(detailView, enabled: enabled)
       }
-      setSubControls(detailView, enabled: enabled)
 
       if sender != nil {
         // Only call the callback when the user manually clicked the switch.
@@ -788,7 +792,7 @@ struct SettingsItem {
       // popup
       guard let l10nKey = keyPopup?.rawValue ?? labelLocalizationKey?.rawValue else { return }
       for (tag, _) in valueTypes {
-        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
+        let title = ui.localized("\(l10nKey).items.\(tag)")
         popupButton.addItem(withTitle: title)
         popupButton.lastItem?.tag = tag
       }
@@ -827,6 +831,8 @@ struct SettingsItem {
     private var customBinding = false
     private var customBindingBlock: ((NSTextField) -> Void)?
     private var isLongText = false
+    private var range: ClosedRange<Double>?
+    private var allowsFloats = false
 
     private var cachedStepperValue: Double?
     private var stepper: NSStepper?
@@ -858,12 +864,22 @@ struct SettingsItem {
       return self
     }
 
+    func range(_ range: ClosedRange<Double>, allowsFloats: Bool = false) -> Self {
+      self.range = range
+      self.allowsFloats = allowsFloats
+      return self
+    }
+
     @objc func stepperValueChanged(sender: NSStepper) {
       guard let cachedStepperValue else { return }
-      if cachedStepperValue < sender.doubleValue {
-        textField.doubleValue += sender.increment
-      } else {
-        textField.doubleValue -= sender.increment
+      let increment = cachedStepperValue < sender.doubleValue ? sender.increment : -sender.increment
+      let value = textField.doubleValue + increment
+      let newValue = range.map { value.clamped(to: $0) } ?? value
+      textField.doubleValue = newValue
+      if let info = textField.infoForBinding(.value),
+         let observedObject = info[.observedObject] as? NSObject,
+         let keyPath = info[.observedKeyPath] as? String {
+        observedObject.setValue(newValue, forKeyPath: keyPath)
       }
       self.cachedStepperValue = sender.doubleValue
     }
@@ -875,14 +891,23 @@ struct SettingsItem {
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
+      if let range {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = allowsFloats
+        formatter.usesGroupingSeparator = false
+        formatter.minimum = NSNumber(value: range.lowerBound)
+        formatter.maximum = NSNumber(value: range.upperBound)
+        formatter.numberStyle = .decimal
+        textField.formatter = formatter
+      }
       let stack = NSStackView(views: [textField])
       if let stepper {
         stepper.controlSize = controlSize
         stack.addView(stepper, in: .trailing)
         stack.spacing = 2
       }
-      if let trailingLabel = trailingLabel {
-        let label = NSTextField(labelWithString: l10n.localized(trailingLabel))
+      if let trailingLabel {
+        let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
         return [stack, label]
       } else {
@@ -902,9 +927,9 @@ struct SettingsItem {
     }
 
     override func initBinding() {
-      if let key = key {
-        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      if let key {
+        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue, options: [.continuouslyUpdatesValue: true])
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(textField)
       }
     }
@@ -918,25 +943,42 @@ struct SettingsItem {
     private var valueTypes: [(Int, String)] = []
     private var textField: NSTextField!
     private var trailingLabel: SettingsLocalization.Key?
+    private var range: ClosedRange<Double>?
+    private var allowsFloats = false
 
     private var customBindingInput = false
     private var customBindingBlockInput: ((NSTextField) -> Void)?
     private var customBindingSwitch = false
     private var customBindingBlockSwitch: ((NSSwitch) -> Void)?
 
+    func range(_ range: ClosedRange<Double>, allowsFloats: Bool = false) -> Self {
+      self.range = range
+      self.allowsFloats = allowsFloats
+      return self
+    }
+
     override func getValueViews() -> [NSView] {
       nsSwitch = NSSwitch()
       nsSwitch.controlSize = .mini
       nsSwitch.action = #selector(switchChanged)
       nsSwitch.target = self
-      textField = NSTextField()
+      textField = TextFieldWithSwitch(nsSwitch)
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.controlSize = controlSize
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
-      if let trailingLabel = trailingLabel {
-        let label = NSTextField(labelWithString: l10n.localized(trailingLabel))
+      if let range {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = allowsFloats
+        formatter.usesGroupingSeparator = false
+        formatter.minimum = NSNumber(value: range.lowerBound)
+        formatter.maximum = NSNumber(value: range.upperBound)
+        formatter.numberStyle = .decimal
+        textField.formatter = formatter
+      }
+      if let trailingLabel {
+        let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
         return [textField, label, nsSwitch]
       } else {
@@ -1085,23 +1127,21 @@ fileprivate class NonClickableButton: NSButton {
 
 class SettingsAccessory {
   /// A Base class for customized controls.
-  class Base: NSObject, WithSettingsLocalizationContext, SettingsContainer {
+  class Base: NSObject, SettingsContainer {
     lazy var itemID = SettingsContainerUUID.next()
-    var l10n: SettingsLocalization.Context!
     let view: NSView
-    lazy var ui: SettingsUIHelper = SettingsUIHelper(l10n)
 
-    init(l10n: SettingsLocalization.Context) {
-      self.l10n = l10n
+    override init() {
       self.view = NSView()
       self.view.translatesAutoresizingMaskIntoConstraints = false
+      super.init()
     }
 
     func registerSearchEntry(context: SettingsSearch.Context) {
       return
     }
 
-    func makeView(context: SettingsLocalization.Context) -> NSView {
+    func makeView() -> NSView {
       return view
     }
   }
@@ -1158,18 +1198,17 @@ class SettingsAccessory {
       fatalError("init(coder:) has not been implemented")
     }
 
-    func makeView(context: SettingsLocalization.Context) -> NSView {
+    func makeView() -> NSView {
       if let builtView {
         return builtView
       }
 
-      let l10n = context
       guard let l10nKey = localizationKey?.rawValue ?? key?.rawValue else {
         fatalError("No localization key provided")
       }
       for (tag, _) in valueTypes {
-        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
-        let desc = l10n.localized(.init("\(l10nKey).items.\(tag).desc"))
+        let title = ui.localized("\(l10nKey).items.\(tag)")
+        let desc = ui.localized("\(l10nKey).items.\(tag).desc")
         let box = ClickableBox()
         box.translatesAutoresizingMaskIntoConstraints = false
         box.boxType = .custom
@@ -1211,11 +1250,10 @@ class SettingsAccessory {
     }
 
     func registerSearchEntry(context: SettingsSearch.Context) {
-      let l10n = context.l10n
       guard let l10nKey = localizationKey?.rawValue ?? key?.rawValue else { return }
       for (tag, _) in valueTypes {
-        let title = l10n.localized(.init("\(l10nKey).items.\(tag)"))
-        let desc = l10n.localized(.init("\(l10nKey).items.\(tag).desc"))
+        let title = ui.localized("\(l10nKey).items.\(tag)")
+        let desc = ui.localized("\(l10nKey).items.\(tag).desc")
         context.add(itemID, title)
         context.add(itemID, desc)
       }
@@ -1245,7 +1283,7 @@ class SettingsAccessory {
     }
 
     private func initBinding() {
-      guard let key = key else { return }
+      guard let key else { return }
       if let transformer = customtransformer {
         selectedValue = transformer.1(Preference.value(for: key))
       } else {
@@ -1270,14 +1308,14 @@ class SettingsAccessory {
     }
 
     deinit {
-      guard let key = key else { return }
+      guard let key else { return }
       ObjcUtils.silenced {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
       }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-      guard let change = change else { return }
+      guard let change else { return }
 
       if let transformer = customtransformer {
         selectedValue = transformer.1(change[.newKey])
@@ -1358,13 +1396,12 @@ class SettingsAccessory {
       return self
     }
 
-    func makeView(context: SettingsLocalization.Context) -> NSView {
-      let l10n = context
+    func makeView() -> NSView {
       audioLangTokenField.awakeFromNib()
-      if let key = key {
+      if let key {
         audioLangTokenField.commaSeparatedValues = Preference.string(for: key) ?? ""
         if hasDesc {
-          let descLabel = NSTextField(labelWithString: l10n.localized(.init("\(key.rawValue).desc")))
+          let descLabel = NSTextField(labelWithString: ui.localized("\(key.rawValue).desc"))
           descLabel.makeMultiLine()
           descLabel.font = NSFont.systemFont(ofSize: NSFont.smallSystemFontSize)
           descLabel.textColor = .secondaryLabelColor
@@ -1375,12 +1412,46 @@ class SettingsAccessory {
     }
 
     @objc func preferredLanguageAction(_ sender: LanguageTokenField) {
-      guard let key = key else { return }
+      guard let key else { return }
       let csv = sender.commaSeparatedValues
       if Preference.string(for: key) != csv {
         Logger.log("Saving \(key.rawValue): \"\(csv)\"", level: .verbose)
         Preference.set(csv, for: key)
       }
     }
+  }
+}
+
+/// A [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) controlled by a
+/// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch).
+class TextFieldWithSwitch: NSTextField {
+
+  /// A Boolean value that indicates whether the receiver reacts to mouse events.
+  ///
+  /// This text field may be part of a subordinate setting. Disabling a primary setting must disable subordinate settings. However
+  /// enabling a primary setting can only enable this text field if the switch that controls it is also enabled.
+  override var isEnabled: Bool {
+    get { super.isEnabled }
+    set {
+      guard newValue else {
+        super.isEnabled = false
+        return
+      }
+      guard nsSwitch.state == .on else { return }
+      super.isEnabled = true
+    }
+  }
+
+  /// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch) that controls whether this
+  /// [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) can be enabled.
+  private let nsSwitch: NSSwitch
+
+  init(_ nsSwitch: NSSwitch) {
+    self.nsSwitch = nsSwitch
+    super.init(frame: NSRect.zero)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }

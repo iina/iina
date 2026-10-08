@@ -127,17 +127,16 @@ struct SettingsSearch {
   }
 
   struct Context {
-    let l10n: SettingsLocalization.Context
     let page: String
     let section: String?
     let parent: Int?
 
     func with(section: String?) -> Self {
-      .init(l10n: l10n, page: page, section: section, parent: parent)
+      .init(page: page, section: section, parent: parent)
     }
 
     func with(parent: Int?) -> Self {
-      .init(l10n: l10n, page: page, section: section, parent: parent)
+      .init(page: page, section: section, parent: parent)
     }
 
     func add(_ tag: Int, _ entry: String?, isMain: Bool = false) {

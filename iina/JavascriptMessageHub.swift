@@ -37,7 +37,7 @@ class JavascriptMessageHub {
         }
       }
 
-      if let arg = arg {
+      if let arg {
         webView.evaluateJavaScript("window.iina._emit(`\(name)`, \(arg))")
       } else {
         webView.evaluateJavaScript("window.iina._emit(`\(name)`)")
@@ -64,7 +64,7 @@ class JavascriptMessageHub {
     let context = callback.value.context
     var jsValue: JSValue?
 
-    if let dataString = dataString, let data = dataString.data(using: .utf8) {
+    if let dataString, let data = dataString.data(using: .utf8) {
       if dataString.hasPrefix("\"") && dataString.hasSuffix("\"") {
         // is a string
         jsValue = JSValue(object: String(dataString.dropFirst().dropLast()), in: context)
@@ -82,7 +82,7 @@ class JavascriptMessageHub {
       }
     }
 
-    if let jsValue = jsValue {
+    if let jsValue {
       callback.value.call(withArguments: [jsValue])
     } else {
       callback.value.call(withArguments: [])

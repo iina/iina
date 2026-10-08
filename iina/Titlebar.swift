@@ -23,7 +23,7 @@ class Titlebar: NSView {
   /// Default inset for the title container from the leading edge — clears the traffic lights.
   static let docIconLeadingPadding: CGFloat = 86
 
-  private let accessoryIconConfig = NSImage.SymbolConfiguration(pointSize: 11, weight: .regular)
+  private let accessoryIconConfig = NSImage.SymbolConfiguration(pointSize: 12, weight: .regular)
 
   let useSystemTitle = false
 
@@ -57,6 +57,9 @@ class Titlebar: NSView {
   private var oscContainer: NSView!
   private var oscLeadingConstraint: NSLayoutConstraint!
 
+  // Only set on macOS 15 and below
+  private var titleCenterConstraint: NSLayoutConstraint?
+
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
 
@@ -75,7 +78,7 @@ class Titlebar: NSView {
     )
 
     self.removeBlackBarButton = NSButton(
-      image: .removeBlackbars,
+      image: .sf("remove.blackbars", withConfiguration: accessoryIconConfig)!,
       target: mainWindow,
       action: #selector(MainWindowController.removeVideoViewBlackBars)
     )
@@ -164,7 +167,7 @@ class Titlebar: NSView {
       titleTextField.translatesAutoresizingMaskIntoConstraints = false
       titleTextField.font = .titleBarFont(ofSize: 13)
       titleTextField.lineBreakMode = .byTruncatingMiddle
-      titleTextField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+      titleTextField.setContentCompressionResistancePriority(.init(200), for: .horizontal)
       titleTextField.setContentHuggingPriority(.defaultHigh, for: .horizontal)
       titlebarContainer.addSubview(titleTextField)
       titleTextField.spacing(.leading(2), to: docIcon).center(.y)
@@ -179,6 +182,8 @@ class Titlebar: NSView {
         let centerConstraint = titleTextField.centerXAnchor.constraint(equalTo: titlebarContainer.centerXAnchor)
         centerConstraint.priority = .defaultLow
         centerConstraint.isActive = true
+        titleCenterConstraint = centerConstraint
+        titleTextField.setContentCompressionResistancePriority(.init(300), for: .horizontal)
       }
       titleLeadingConstraint.priority = .defaultHigh
       titleLeadingConstraint.isActive = true
@@ -264,14 +269,19 @@ class Titlebar: NSView {
   func updateTitle() {
     guard let titleTextField,
           let docIcon,
-          let sysTitle = mainWindow.titleTextField else { return }
+          let window = mainWindow.window else { return }
 
-    titleTextField.stringValue = sysTitle.stringValue
-    if let fileName = mainWindow.window?.representedFilename {
-      docIcon.image = NSWorkspace.shared.icon(forFile: fileName)
+    let info = mainWindow.player.info
+    titleTextField.stringValue = if info.isNetworkResource {
+      mainWindow.player.getMediaTitle()
+    } else if let url = info.currentURL {
+      FileManager.default.displayName(atPath: url.path)
     } else {
-      docIcon.image = nil
+      ""
     }
+
+    let filename = window.representedFilename
+    docIcon.image = filename.isEmpty ? nil : NSWorkspace.shared.icon(forFile: filename)
   }
 
   func setLeadingConstraint(_ constant: CGFloat, animated: Bool = true) {
@@ -279,10 +289,12 @@ class Titlebar: NSView {
       titleLeadingConstraint.animator().constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.animator().constant = constant + 6
       backgroundLeadingConstraint.animator().constant = constant
+      titleCenterConstraint?.animator().constant = constant / 2
     } else {
       titleLeadingConstraint.constant = constant == 0 ? 0 : constant + 8
       oscLeadingConstraint.constant = constant + 6
       backgroundLeadingConstraint.constant = constant
+      titleCenterConstraint?.constant = constant / 2
     }
   }
 
@@ -302,13 +314,12 @@ class Titlebar: NSView {
     // before hit-testing.
     let point = titlebarContainer.convert(event.locationInWindow, from: nil)
 
-    guard docIcon.frame.contains(point) || titleTextField.frame.contains(point) else {
-      super.rightMouseDown(with: event)
-      return
+    if docIcon.frame.contains(point) || titleTextField.frame.contains(point) {
+      showPathMenu()
     }
-
-    showPathMenu()
   }
+
+  override func rightMouseUp(with event: NSEvent) {}
 
   private func showPathMenu() {
     guard let filename = mainWindow.window?.representedFilename else { return }
@@ -329,14 +340,20 @@ class Titlebar: NSView {
       current = parent
     }
 
-    for pathURL in components {
+    for (index, pathURL) in components.enumerated() {
       let item = NSMenuItem()
       item.title = FileManager.default.displayName(atPath: pathURL.path)
       item.image = NSWorkspace.shared.icon(forFile: pathURL.path)
       item.image?.size = NSSize(width: 16, height: 16)
-      item.representedObject = pathURL
-      item.target = self
-      item.action = #selector(revealInFinder(_:))
+      if #available(macOS 27.0, *) {
+        item.preferredImageVisibility = .visible
+      }
+      // Choosing a folder reveals the next path component in it; the document itself does nothing.
+      if index > 0 {
+        item.representedObject = components[index - 1]
+        item.target = self
+        item.action = #selector(revealInFinder(_:))
+      }
       menu.addItem(item)
     }
 
@@ -345,7 +362,7 @@ class Titlebar: NSView {
 
   @objc private func revealInFinder(_ sender: NSMenuItem) {
     guard let url = sender.representedObject as? URL else { return }
-    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: url.path)
+    NSWorkspace.shared.activateFileViewerSelecting([url])
   }
 
   private func updateShadow() {

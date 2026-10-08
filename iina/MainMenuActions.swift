@@ -215,7 +215,8 @@ extension MainMenuActionHandler {
     if let cropStr = sender.representedObject as? String {
       if cropStr == "Custom" {
         player.mainWindow.sidebars.hideAllSideBars {
-          self.player.mainWindow.enterInteractiveMode(.crop, selectWholeVideoByDefault: true)
+          self.player.mainWindow.interactiveMode
+            .enter(mode: .crop, selectWholeVideoByDefault: true)
         }
         return
       }

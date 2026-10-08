@@ -163,9 +163,9 @@ class MPVNode {
       deallocString(node.u.string)
 
     case MPV_FORMAT_NODE_ARRAY:
-      let list = node.u.list!.pointee
+      let listPtr = node.u.list!
+      let list = listPtr.pointee
       let num = Int(list.num)
-      if num == 0 { return }
       let ptr = list.values!
       var iptr = ptr
       for _ in 0 ..< num {
@@ -174,11 +174,13 @@ class MPVNode {
       }
       ptr.deinitialize(count: num)
       ptr.deallocate()
+      listPtr.deinitialize(count: 1)
+      listPtr.deallocate()
 
     case MPV_FORMAT_NODE_MAP:
-      let map = node.u.list!.pointee
+      let listPtr = node.u.list!
+      let map = listPtr.pointee
       let num = Int(map.num)
-      if num == 0 { return }
       let kptr = map.keys!
       let vptr = map.values!
       var ikptr = kptr
@@ -186,13 +188,15 @@ class MPVNode {
       for _ in 0 ..< num {
         if let strptr = ikptr.pointee { deallocString(strptr) }
         self.free(ivptr.pointee)
-        ikptr = kptr.successor()
-        ivptr = vptr.successor()
+        ikptr = ikptr.successor()
+        ivptr = ivptr.successor()
       }
       kptr.deinitialize(count: num)
       kptr.deallocate()
       vptr.deinitialize(count: num)
       vptr.deallocate()
+      listPtr.deinitialize(count: 1)
+      listPtr.deallocate()
 
     default:
       break

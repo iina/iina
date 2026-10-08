@@ -9,25 +9,30 @@
 import UniformTypeIdentifiers
 import SafariServices.SFSafariApplication
 
+fileprivate let ui = SettingsUIHelper.sharedUI
+
+
 class SettingsPageUtilities: SettingsPage {
   override var identifier: String {
     "utilities"
   }
-
+  
   override var title: String {
     return NSLocalizedString("preference.utilities", comment: "Utilities")
   }
-
+  
   override var image: NSImage {
     return .sf("wrench.and.screwdriver", withConfiguration: symbolConfiguration)!
   }
-
+  
   override var localizationTable: String {
     "SettingsUtilsLocalizable"
   }
+  
+  override var showSubSections: Bool { false }
 
-  private lazy var setAsDefaultSheet = SetAsDefaultSheetWindow(l10n: localizationContext)
-  private lazy var browserExtensionView = BrowserExtensionView(l10n: localizationContext)
+  private lazy var setAsDefaultSheet = SetAsDefaultSheetWindow()
+  private lazy var browserExtensionView = BrowserExtensionView()
   private lazy var thumbCacheSizeLabel: NSTextField = makeLabel()
 
   override func content() -> [SettingsSection] {
@@ -157,17 +162,17 @@ fileprivate class SetAsDefaultSheetWindow: NSWindow {
   private let audioCheckBox: NSButton
   private let playListCheckBox: NSButton
 
-  init(l10n: SettingsLocalization.Context) {
+  init() {
     let style: NSWindow.StyleMask = [.titled, .resizable, .fullSizeContentView]
 
-    self.okButton = NSButton(title: l10n.localized(.text_OK), target: nil, action: nil)
+    self.okButton = NSButton(title: ui.localized(.text_OK), target: nil, action: nil)
     okButton.translatesAutoresizingMaskIntoConstraints = false
-    self.cancelButton = NSButton(title: l10n.localized(.text_Cancel), target: nil, action: nil)
+    self.cancelButton = NSButton(title: ui.localized(.text_Cancel), target: nil, action: nil)
     cancelButton.translatesAutoresizingMaskIntoConstraints = false
-    self.label = NSTextField(labelWithString: l10n.localized(.text_PleaseSelectTheMediaTypes))
-    self.videoCheckBox = NSButton(title: l10n.localized(.text_Video), target: nil, action: nil)
-    self.audioCheckBox = NSButton(title: l10n.localized(.text_Audio), target: nil, action: nil)
-    self.playListCheckBox = NSButton(title: l10n.localized(.text_Playlist), target: nil, action: nil)
+    self.label = NSTextField(labelWithString: ui.localized(.text_PleaseSelectTheMediaTypes))
+    self.videoCheckBox = NSButton(title: ui.localized(.general("sidebar.video")), target: nil, action: nil)
+    self.audioCheckBox = NSButton(title: ui.localized(.general("sidebar.audio")), target: nil, action: nil)
+    self.playListCheckBox = NSButton(title: ui.localized(.text_Playlist), target: nil, action: nil)
     [videoCheckBox, audioCheckBox, playListCheckBox].forEach {
       $0.setButtonType(.switch)
       $0.state = .on
@@ -275,8 +280,8 @@ fileprivate class BrowserExtensionView: SettingsAccessory.Base {
     return button
   }
 
-  override init(l10n: SettingsLocalization.Context) {
-    super.init(l10n: l10n)
+  override init() {
+    super.init()
 
     let chromeBtn = linkButton(.text_Chrome, #selector(extChromeBtnAction))
     let firefoxBtn = linkButton(.text_Firefox, #selector(extFirefoxBtnAction))

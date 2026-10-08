@@ -65,7 +65,7 @@ jobs:
               "",
               "Thanks for helping improve IINA! 🎉",
               "",
-              "[nightly]: https://nightly.iina.io",
+              "[nightly]: https://iina.io/nightly",
               "[nightly-faq]: https://github.com/iina/iina/wiki/FAQ#what-is-an-iina-nightly-build",
               "[build]: https://github.com/iina/iina/wiki/FAQ",
             ].join("\n");

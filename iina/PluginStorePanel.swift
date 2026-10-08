@@ -9,6 +9,8 @@
 import SwiftUI
 import Combine
 
+fileprivate let ui  = SettingsUIHelper.sharedUI
+
 
 fileprivate let defaultPlugins = [
   [
@@ -44,12 +46,9 @@ fileprivate class RefreshIndicator: ObservableObject {
 
 @available(macOS 12.0, *)
 class PluginStorePanel: NSWindow {
-  let l10n: SettingsLocalization.Context
   lazy var pluginManager = PluginManager(window: self)
 
-  init(l10n: SettingsLocalization.Context) {
-    self.l10n = l10n
-
+  init() {
     let style: NSWindow.StyleMask = [.titled, .resizable, .fullSizeContentView]
     let rect = NSRect(x: 0, y: 0, width: 600, height: 500)
     super.init(contentRect: rect, styleMask: style, backing: .buffered, defer: false)
@@ -57,7 +56,7 @@ class PluginStorePanel: NSWindow {
     self.contentView = NSView()
 
     let indicator = RefreshIndicator()
-    let pluginStoreView = PluginStoreView(l10n: l10n, panel: self)
+    let pluginStoreView = PluginStoreView(panel: self)
       .environmentObject(indicator)
     let hostingView = NSHostingView(rootView: pluginStoreView)
     hostingView.translatesAutoresizingMaskIntoConstraints = false
@@ -115,7 +114,6 @@ let officialPlugins = defaultPlugins.map { Plugin($0) }
 
 @available(macOS 12.0, *)
 struct PluginStoreView: View {
-  let l10n: SettingsLocalization.Context
   let panel: PluginStorePanel
 
   @EnvironmentObject private var indicator: RefreshIndicator
@@ -149,7 +147,7 @@ struct PluginStoreView: View {
   var body: some View {
     VStack(alignment: .leading) {
       HStack() {
-        Text(l10n.localized(.text_InputGithubURL))
+        Text(ui.localized(.text_InputGithubURL))
         TextField("owner/repo", text: $inputURL)
           .textFieldStyle(.roundedBorder)
           .onSubmit {
@@ -160,7 +158,7 @@ struct PluginStoreView: View {
             if isInstalling {
               ProgressView().controlSize(.small).padding(.trailing, 4)
             }
-            Text(l10n.localized(isInstalling ? .text_Installing : .text_Install))
+            Text(ui.localized(isInstalling ? .text_Installing : .text_Install))
           }
         }.disabled(isInstalling)
         .buttonStyle(.borderedProminent)
@@ -170,10 +168,10 @@ struct PluginStoreView: View {
 
       Divider().padding(.top, 8).padding(.bottom, 8)
 
-      Text(l10n.localized(.text_OrSelectFrom))
+      Text(ui.localized(.text_OrSelectFrom))
 
       let list = List(selection: $selection) {
-        Section(l10n.localized(.text_OfficialPlugins)) {
+        Section(ui.localized(.text_OfficialPlugins)) {
           ForEach(officialPlugins, id: \.self) { plugin in
             HStack {
               Image(systemName: plugin.icon)
@@ -182,7 +180,7 @@ struct PluginStoreView: View {
           }
         }
 
-        Section(l10n.localized(.text_CommunityPlugins)) {
+        Section(ui.localized(.text_CommunityPlugins)) {
           if let errorMessage {
             Text("Error: \(errorMessage)")
               .lineLimit(5)
@@ -214,7 +212,7 @@ struct PluginStoreView: View {
         }.frame(width: 240)
         GroupBox {
           ScrollView {
-            PluginDetailView(l10n: l10n, plugin: selection, panel: panel)
+            PluginDetailView(plugin: selection, panel: panel)
               .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
               .padding(8)
           }
@@ -240,7 +238,6 @@ struct PluginStoreView: View {
 
 @available(macOS 12.0, *)
 struct PluginDetailView: View {
-  let l10n: SettingsLocalization.Context
   let plugin: Plugin?
   let panel: PluginStorePanel
 
@@ -276,7 +273,7 @@ struct PluginDetailView: View {
               } else {
                 Image(systemName: plugin.icon).padding(.trailing, 4)
               }
-              Text(l10n.localized(plugin.installed ? .text_Installed :
+              Text(ui.localized(plugin.installed ? .text_Installed :
                                     isInstalling ? .text_Installing : .text_Install))
             }
           }.buttonStyle(.borderedProminent)
@@ -285,7 +282,7 @@ struct PluginDetailView: View {
           Divider().padding(.top, 8).padding(.bottom, 12)
           RepoDetailView(owner: owner, repo: repo)
         } else {
-          Text(l10n.localized(.text_ThisPluginIsNot))
+          Text(ui.localized(.text_ThisPluginIsNot))
             .font(.system(size: 11))
             .padding(.top, 8)
           Link(destination: plugin.url) {
@@ -296,7 +293,7 @@ struct PluginDetailView: View {
         }
       }
     } else {
-      Text(l10n.localized(.text_NoSelection))
+      Text(ui.localized(.text_NoSelection))
         .bold().foregroundColor(.secondary)
     }
   }

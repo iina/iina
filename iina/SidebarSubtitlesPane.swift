@@ -177,7 +177,7 @@ fileprivate class LoadSubtitleView: NSView {
     loadSubSegment.trackingMode = .momentary
     loadSubSegment.target = self
     loadSubSegment.action = #selector(loadExternalSubAction)
-    loadSubSegment.setImage(.triangleDown, forSegment: 1)
+    loadSubSegment.setImage(.sf("chevron.down"), forSegment: 1)
 
     let searchOnlineButton = ui.button(
       "sidebar.search_online", target: self, action: #selector(searchOnlineAction)
@@ -288,7 +288,7 @@ fileprivate class SubDelayView: SidebarSliderView {
   }
 
   override func resetButtonAction() {
-    player.setAudioDelay(0)
+    player.setSubDelay(0, forPrimary: isPrimary)
   }
 }
 
@@ -314,6 +314,9 @@ fileprivate class SubPositionDelayView: NSView {
     primarySwitch.setLabel(NSLocalizedString("sidebar.secondary", comment: ""), forSegment: 1)
     primarySwitch.selectedSegment = 0
     primarySwitch.setContentHuggingPriority(.init(100), for: .horizontal)
+    primarySwitch.segmentDistribution = .fillEqually
+    primarySwitch.target = self
+    primarySwitch.action = #selector(switchAction)
 
     self.positionSlider = NSSlider()
     positionSlider.minValue = 0
@@ -363,6 +366,7 @@ fileprivate class SubPositionDelayView: NSView {
 
   @objc private func switchAction(_ sender: AnyObject) {
     isPrimary = primarySwitch.selectedSegment == 0
+    delayView.isPrimary = isPrimary
     update()
   }
 
@@ -441,17 +445,21 @@ fileprivate class SubStyleView: NSView {
     )
     scaleStack.size(height: 30)
 
+    let fontStackLabel = ui.label("sidebar.font", font: .boldSystemFont(ofSize: 12))
+    fontStackLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
+    let fontStack = ui.hStack(
+      spacing: 8,
+      ui.image("textformat", size: 16, config: .sidebarIconConfig),
+      fontStackLabel,
+      ui.flexibleSpace(),
+      fontChooser,
+      fontSizePicker,
+    )
+
     let stack = ui.vStack(
       spacing: .sidebarItemSpacing,
       scaleStack,
-      ui.hStack(
-        spacing: 8,
-        ui.image("textformat", size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.font", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-        fontChooser,
-        fontSizePicker,
-      ),
+      fontStack,
       ui.hStack(
         spacing: 8,
         ui.image("paintpalette.fill", size: 16, config: .sidebarIconConfig),
@@ -461,19 +469,18 @@ fileprivate class SubStyleView: NSView {
       ),
       ui.hStack(
         spacing: 8,
-        ui.image("inset.filled.rectangle", "rectangle.inset.filled", "rectangle.inset.fill",
-                 size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.background", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-        createColorWell(\.backgroundColorWell, tag: 2),
-      ),
-      ui.hStack(
-        spacing: 8,
-        ui.image("paintpalette.fill", size: 16, config: .sidebarIconConfig),
+        ui.image("inset.filled.circle.dashed", "circle.dashed.inset.filled", "circle.dashed.inset.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.border", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         borderSizePicker,
         createColorWell(\.borderColorWell, tag: 3),
+      ),
+      ui.hStack(
+        spacing: 8,
+        ui.image("shadow", size: 16, config: .sidebarIconConfig),
+        ui.label("sidebar.shadow", font: .boldSystemFont(ofSize: 12)),
+        ui.flexibleSpace(),
+        createColorWell(\.backgroundColorWell, tag: 2),
       )
     )
 
@@ -521,7 +528,7 @@ fileprivate class SubStyleView: NSView {
     let fontSize = player.mpv.getInt(MPVOption.Subtitles.subFontSize)
     fontSizePicker.selectItem(withTitle: fontSize.description)
 
-    let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subBorderSize)
+    let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subOutlineSize)
     borderSizePicker.selectItem(at: -1)
     borderSizePicker.itemArray.forEach { item in
       if borderWidth == Double(item.title) {
@@ -531,7 +538,7 @@ fileprivate class SubStyleView: NSView {
 
     for (op, colorWell) in [
       (MPVOption.Subtitles.subColor, textColorWell),
-      (MPVOption.Subtitles.subBorderColor, borderColorWell),
+      (MPVOption.Subtitles.subOutlineColor, borderColorWell),
       (MPVOption.Subtitles.subBackColor, backgroundColorWell),
     ] {
       if let colorString = player.mpv.getString(op), let color = NSColor(mpvColorString: colorString) {

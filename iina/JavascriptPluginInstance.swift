@@ -57,7 +57,7 @@ class JavascriptPluginInstance {
   init(player: PlayerCore?, plugin: JavascriptPlugin) {
     self.plugin = plugin
 
-    if let player = player {
+    if let player {
       // normal plugin instance
       self.player = player
       isGlobal = false

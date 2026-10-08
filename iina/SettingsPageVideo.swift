@@ -14,7 +14,7 @@ class SettingsPageVideo: SettingsPage {
   }
 
   override var title: String {
-    return NSLocalizedString("preference.video", comment: "Video")
+    return NSLocalizedString("sidebar.video", comment: "Video")
   }
 
   override var image: NSImage {
@@ -41,6 +41,7 @@ class SettingsPageVideo: SettingsPage {
         SettingsItem.Input()
           .image(name: "number")
           .bindTo(.videoThreads)
+          .range(0...Double(Int.max))
           .hasDescription()
         SettingsItem.General(title: .hardwareDecoderLabel)
           .image(name: "cpu")
@@ -48,9 +49,11 @@ class SettingsPageVideo: SettingsPage {
             SettingsAccessory.Selection()
               .bindTo(.hardwareDecoder, ofType: Preference.HardwareDecoderOption.self)
           )
+#if !arch(arm64)
         SettingsItem.Switch()
           .bindTo(.forceDedicatedGPU)
           .hasDescription()
+#endif
       }
     }
   }
@@ -88,14 +91,27 @@ class SettingsPageVideo: SettingsPage {
           .bindTo(.enableToneMapping)
           .withHelpLink(AppData.toneMappingHelpLink)
           .withDetailView {
-            SettingsItem.Input()
-              .bindTo(.toneMappingTargetPeak)
+            SettingsItem.SwitchWithInput()
+              .labelKey(.toneMappingTargetPeak)
+              .bindInputTo(.toneMappingTargetPeakOverride)
+              .bindSwitchTo(.enableToneMappingTargetPeakOverride)
+              .range(10...10000)  // mpv option is "auto" or 10...10000.
               .trailingLabel(.text_nits)
               .hasDescription()
-              .withHelpLink(AppData.targetPeakHelpLink)
+              .withHelpLink(AppData.mpvManualLink.appending("/#options-target-peak"))
             SettingsItem.PopupButton()
               .bindTo(.toneMappingAlgorithm, ofType: Preference.ToneMappingAlgorithmOption.self)
-              .withHelpLink(AppData.algorithmHelpLink)
+              .hasDescription()
+              .withHelpLink(AppData.mpvManualLink.appending("/#options-tone-mapping"))
+              .withDetailView {
+                SettingsItem.SwitchWithInput()
+                  .labelKey(.toneMappingParamOverride)
+                  .bindInputTo(.toneMappingParamOverride)
+                  .bindSwitchTo(.enableToneMappingParamOverride)
+                  .range(-Double.infinity...Double.infinity, allowsFloats: true)
+                  .hasDescription()
+                  .withHelpLink(AppData.mpvManualLink.appending("/#options-tone-mapping-param"))
+              }
           }
       }
     }

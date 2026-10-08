@@ -6,6 +6,9 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
+fileprivate let ui = SettingsUIHelper.sharedUI
+
+
 class SettingsPageControl: SettingsPage {
   override var identifier: String {
     "control"
@@ -23,9 +26,9 @@ class SettingsPageControl: SettingsPage {
     "SettingsControlLocalizable"
   }
 
-  private lazy var sensSeek: SliderView = .init(l10n: localizationContext, key: .relativeSeekAmount)
-  private lazy var sensVolume: SliderView = .init(l10n: localizationContext, key: .volumeScrollAmount)
-  private lazy var sensSpeed: SliderView = .init(l10n: localizationContext, key: .playbackSpeedScrollAmount)
+  private lazy var sensSeek: SliderView = .init(key: .relativeSeekAmount)
+  private lazy var sensVolume: SliderView = .init(key: .volumeScrollAmount)
+  private lazy var sensSpeed: SliderView = .init(key: .playbackSpeedScrollAmount)
 
   override func content() -> [SettingsSection] {
     return sections {
@@ -90,10 +93,10 @@ class SettingsPageControl: SettingsPage {
 }
 
 fileprivate class SliderView: SettingsAccessory.Base {
-  init(l10n: SettingsLocalization.Context, key: Preference.Key) {
-    super.init(l10n: l10n)
+  init(key: Preference.Key) {
+    super.init()
 
-    let label = NSTextField(labelWithString: l10n.localized(.init("\(key.rawValue).label")))
+    let label = NSTextField(labelWithString: ui.localized("\(key.rawValue).label"))
     label.translatesAutoresizingMaskIntoConstraints = false
     let slider = NSSlider()
     slider.translatesAutoresizingMaskIntoConstraints = false

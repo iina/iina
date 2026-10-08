@@ -40,14 +40,14 @@ class SubChooseViewController: NSViewController {
   }
 
   @IBAction func downloadBtnAction(_ sender: Any) {
-    guard let userDoneAction = userDoneAction else { return }
+    guard let userDoneAction else { return }
     userDoneAction(tableView.selectedRowIndexes.map { subtitles[$0] })
     PlayerCore.active.hideOSD()
     context = nil
   }
 
   @IBAction func cancelBtnAction(_ sender: Any) {
-    guard let userCanceledAction = userCanceledAction else { return }
+    guard let userCanceledAction else { return }
     userCanceledAction()
     PlayerCore.active.hideOSD()
     context = nil

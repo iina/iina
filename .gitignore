@@ -38,7 +38,9 @@ DerivedData/
 result
 
 ## Xcode generated
-*/project.xcworkspace/xcshareddata/
+*/project.xcworkspace/xcshareddata/*
+!*/project.xcworkspace/xcshareddata/swiftpm/
+!*/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 ## Various settings
 *.pbxuser

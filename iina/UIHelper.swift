@@ -10,6 +10,14 @@
 class UIHelper {
   static let shared = UIHelper()
 
+  var table: String?
+  var scope: String?
+
+  init(table: String? = nil, scope: String? = nil) {
+    self.table = table
+    self.scope = scope
+  }
+
   func button(_ key: String, target: NSObject? = nil, action: Selector? = nil) -> NSButton {
     let btn = NSButton(title: localized(key), target: nil, action: nil)
     btn.translatesAutoresizingMaskIntoConstraints = false
@@ -18,13 +26,23 @@ class UIHelper {
     return btn
   }
 
-  func input(bindTo key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true) -> NSTextField {
+  func input(bindTo key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true,
+             range: ClosedRange<Double>? = nil, allowsFloats: Bool = false) -> NSTextField {
     let input = fixedAlignmentRect ? TextFieldWithFixedAlignmentRect() : NSTextField()
     input.translatesAutoresizingMaskIntoConstraints = false
     input.bezelStyle = .roundedBezel
     input.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
     if isFixedSize {
       input.size(width: 48, height: 25)
+    }
+    if let range {
+      let formatter = NumberFormatter()
+      formatter.allowsFloats = allowsFloats
+      formatter.usesGroupingSeparator = false
+      formatter.minimum = NSNumber(value: range.lowerBound)
+      formatter.maximum = NSNumber(value: range.upperBound)
+      formatter.numberStyle = .decimal
+      input.formatter = formatter
     }
     return input
   }
@@ -38,7 +56,7 @@ class UIHelper {
     return textField
   }
 
-  func label(_ key: String, wrapping: Bool = false, font: NSFont? = nil, isSmall: Bool = false, isSecondary: Bool = false) -> NSTextField {
+  func label(_ key: String, wrapping: Bool = false, font: NSFont? = nil, isSmall: Bool = false, isSecondary: Bool = false, canCompress: Bool = true) -> NSTextField {
     let textField = if wrapping {
       NSTextField(wrappingLabelWithString: localized(key))
     } else {
@@ -54,6 +72,11 @@ class UIHelper {
     }
     if let font {
       textField.font = font
+    }
+    if canCompress {
+      textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+      textField.allowsDefaultTighteningForTruncation = true
+      textField.lineBreakMode = .byTruncatingTail
     }
     return textField
   }
@@ -170,7 +193,15 @@ class UIHelper {
   }
 
   func localized(_ key: String) -> String {
-    NSLocalizedString(key, comment: key)
+    let key = if let scope { "\(scope).\(key)" } else { key }
+    let val = NSLocalizedString(key, tableName: table, comment: key)
+    if val == key {
+      let verbatimVal = NSLocalizedString(key, tableName: "VerbatimStrings", comment: key)
+      if verbatimVal != key {
+        return verbatimVal
+      }
+    }
+    return val
   }
 
   class TextFieldWithFixedAlignmentRect: NSTextField {

@@ -11,7 +11,7 @@ fileprivate let ui = UIHelper.shared
 
 extension SidebarViewController.TabType {
   static let pluginPlaceholder = SidebarViewController.TabType(
-    0, NSLocalizedString("sidebar.plugins", comment: ""), .plugin)
+    0, NSLocalizedString("sidebar.plugins", comment: ""), .puzzlepieceExtensionFill)
 }
 
 class PluginViewController: SidebarViewController {
@@ -26,7 +26,7 @@ class PluginViewController: SidebarViewController {
 
   override var allTabs: [TabType] {
     [.pluginPlaceholder] + allTabs_.enumerated().map { (i, tuple) in
-      TabType(i + 1, tuple.id, .plugin)
+      TabType(i + 1, tuple.id, .puzzlepieceExtensionFill)
     }
   }
   override var defaultTab: TabType { .pluginPlaceholder }
@@ -39,7 +39,7 @@ class PluginViewController: SidebarViewController {
 
   private func getPluginIcon(isSmall: Bool) -> NSImage {
     let config = isSmall ? compactIconConfig : iconConfig
-    return NSImage.sf("puzzlepiece.extension.fill", withConfiguration: config) ?? .plugin
+    return NSImage.sf("puzzlepiece.extension.fill", withConfiguration: config) ?? .puzzlepieceExtensionFill
   }
 
   override func setupTabs() {
@@ -57,7 +57,7 @@ class PluginViewController: SidebarViewController {
     placeholderView.translatesAutoresizingMaskIntoConstraints = false
     let message = SidebarScrollView.Container(
       ui.label("sidebar.plugins_placeholder",
-               wrapping: true, isSmall: true, isSecondary: true)
+               wrapping: true, isSmall: true, isSecondary: true, canCompress: false)
     ) {
       $0.padding(.all(.sidebarContainerPadding))
     }
@@ -123,7 +123,7 @@ class PluginViewController: SidebarViewController {
       tabButtonsSegmentControl.controlSize = .large
     }
     tabButtonsSegmentControl.setImage(getPluginIcon(isSmall: isCompact), forSegment: 0)
-    tabButtonsSegmentControl.setImage(.triangleDown, forSegment: 1)
+    tabButtonsSegmentControl.setImage(.sf("chevron.down"), forSegment: 1)
 
     closeSidebarBtnSizeConstraint.constant =  isCompact ? 28 : 36
   }
@@ -155,8 +155,12 @@ class PluginViewController: SidebarViewController {
     guard isViewLoaded else { return }
     if currentTab.name == identifier {
       pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
+      switchToTab(.pluginPlaceholder)
     }
-    updatePluginTabs()
+    if let item = pluginMenu.items
+      .first(where: { $0.representedObject as? String == identifier }) {
+      pluginMenu.removeItem(item)
+    }
   }
 
   override func tabBtnSegmentControlAction(_ sender: NSSegmentedControl) {

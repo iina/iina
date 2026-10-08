@@ -17,7 +17,7 @@ fileprivate func liveTextLog(_ str: @autoclosure () -> String, level: Logger.Lev
 
 @preconcurrency
 @MainActor
-class LiveTextController {
+class LiveTextController: NSObject {
   private weak var mainWindow: MainWindowController!
 
   var overlayView: NSView?
@@ -29,33 +29,66 @@ class LiveTextController {
   var isActive: Bool {
     isSelected || isMenuOpen || isHighlighted
   }
+  var isShown: Bool {
+    overlayView != nil
+  }
+  var isAvailable: Bool {
+    mainWindow.pipStatus == .notInPIP
+      && !mainWindow.interactiveMode.isActive
+      && !mainWindow.player.isInMiniPlayer
+  }
+  private var wasUIHiddenByLiveText: Bool = false
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
+    super.init()
+
+    UserDefaults.standard.addObserver(self, forKeyPath: PK.compactUI.rawValue, context: nil)
+  }
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    guard let keyPath else { return }
+
+    switch keyPath {
+    case PK.compactUI.rawValue:
+      updateOverlayInsets()
+    default:
+      return
+    }
   }
 
   func updateOverlayInsets() {
     guard #available(macOS 13.0, *) else { return }
     guard let view = overlayView as? ImageAnalysisOverlayView else { return }
     let isBottom = Preference.enum(for: .oscPosition) as Preference.OSCPosition == .bottom
-    view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: 8, left: 8, bottom: isBottom ? 48 : 8, right: 8)
+    let isCompact = Preference.bool(for: .compactUI)
+    let padding: CGFloat = isCompact ? 8 : 14
+    let bottomPadding: CGFloat = isBottom ? (isCompact ? 50 : 64) : padding
+    view.supplementaryInterfaceContentInsets = NSEdgeInsets(top: padding, left: padding, bottom: bottomPadding, right: padding)
   }
 
   func requestAnalysis() {
-    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled else { return }
+    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled, isAvailable else { return }
     requestAnalysisImpl()
   }
 
   func clearAnalysis() {
-    guard #available(macOS 13.0, *), Preference.isLiveTextEnabled else { return }
+    guard #available(macOS 13.0, *), analysisTask != nil || isShown else { return }
     clearAnalysisImpl()
   }
 
   func refreshUI() {
     if isActive {
-      mainWindow.hideUI(force: true)
-    } else {
-      mainWindow.showUI()
+      if !wasUIHiddenByLiveText {
+        mainWindow.hideUI(force: true)
+        wasUIHiddenByLiveText = true
+      }
+    } else if wasUIHiddenByLiveText {
+      wasUIHiddenByLiveText = false
+      if mainWindow.isMouseInWindow {
+        mainWindow.showUI()
+        mainWindow.updateTimer()
+      }
     }
   }
 }
@@ -80,6 +113,7 @@ extension LiveTextController: ImageAnalysisOverlayViewDelegate {
     analysisTask?.cancel()
 
     let videoView = mainWindow.videoView
+    let videoViewContainer = mainWindow.videoViewContainer!
     analysisTask = Task { [weak self] in
       guard let self else { return }
       do {
@@ -89,12 +123,17 @@ extension LiveTextController: ImageAnalysisOverlayViewDelegate {
         }
         try Task.checkCancellation()
         let analysis = try await ImageAnalyzer().analyze(image, orientation: .up, configuration: .init([.text]))
+        try Task.checkCancellation()
         liveTextLog("Image analysis results acquired")
         await MainActor.run {
+          guard self.isAvailable, self.mainWindow.player.info.state == .paused else {
+            liveTextLog("Image analysis results discarded due to change of player state")
+            return
+          }
           let overlay = self.setupLiveTextOverlay()
           overlay.analysis = analysis
-          overlay.frame = videoView.bounds
-          videoView.addSubview(overlay)
+          overlay.frame = videoViewContainer.bounds
+          videoViewContainer.addSubview(overlay)
           overlay.padding(.all(0))
           liveTextLog("Image analysis overlay view inserted to video view")
           self.refreshUI()
@@ -113,6 +152,8 @@ extension LiveTextController: ImageAnalysisOverlayViewDelegate {
     (overlayView as? ImageAnalysisOverlayView)?.analysis = nil
     overlayView?.removeFromSuperview()
     overlayView = nil
+    isSelected = false
+    isMenuOpen = false
     isHighlighted = false
     liveTextLog("Image analysis invalidated and overlay view removed from video view")
     refreshUI()

@@ -148,7 +148,8 @@ struct Preference {
     static let disablePlaySliderScrolling = Key("disablePlaySliderScrolling")
     static let disableVolumeSliderScrolling = Key("disableVolumeSliderScrolling")
 
-    static let playlistWidth = Key("playlistWidth")
+    static let leadingSidebarWidth = Key("leadingSidebarWidth")
+    static let trailingSidebarWidth = Key("trailingSidebarWidth")
     static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")
 
     static let enableThumbnailPreview = Key("enableThumbnailPreview")
@@ -186,8 +187,13 @@ struct Preference {
     static let loadIccProfile = Key("loadIccProfile")
     static let enableHdrSupport = Key("enableHdrSupport")
     static let enableToneMapping = Key("enableToneMapping")
+    /// Legacy setting, now only used when migrating to replacement settings.
     static let toneMappingTargetPeak = Key("toneMappingTargetPeak")
+    static let enableToneMappingTargetPeakOverride = Key("enableToneMappingTargetPeakOverride")
+    static let toneMappingTargetPeakOverride = Key("toneMappingTargetPeakOverride")
     static let toneMappingAlgorithm = Key("toneMappingAlgorithm")
+    static let enableToneMappingParamOverride = Key("enableToneMappingParamOverride")
+    static let toneMappingParamOverride = Key("toneMappingParamOverride")
 
     static let audioDriverEnableAVFoundation = Key("audioDriverEnableAVFoundation")
     static let audioThreads = Key("audioThreads")
@@ -197,6 +203,8 @@ struct Preference {
     static let spdifAC3 = Key("spdifAC3")
     static let spdifDTS = Key("spdifDTS")
     static let spdifDTSHD = Key("spdifDTSHD")
+    static let spdifEAC3 = Key("spdifEAC3")
+    static let spdifTRUEHD = Key("spdifTRUEHD")
 
     static let audioDevice = Key("audioDevice")
     static let audioDeviceDesc = Key("audioDeviceDesc")
@@ -224,7 +232,6 @@ struct Preference {
     static let subTextFont = Key("subTextFont")
     static let subTextSize = Key("subTextSize")
     static let subTextColorString = Key("subTextColorString")
-    static let subBgColorString = Key("subBgColorString")
     static let subBold = Key("subBold")
     static let subItalic = Key("subItalic")
     static let subBlur = Key("subBlur")
@@ -233,6 +240,7 @@ struct Preference {
     static let subBorderColorString = Key("subBorderColorString")
     static let subShadowSize = Key("subShadowSize")
     static let subShadowColorString = Key("subShadowColorString")
+    static let subBorderStyle = Key("subBorderStyle")
     static let subAlignX = Key("subAlignX")
     static let subAlignY = Key("subAlignY")
     static let subMarginX = Key("subMarginX")
@@ -253,7 +261,8 @@ struct Preference {
 
     static let enableCache = Key("enableCache")
     static let defaultCacheSize = Key("defaultCacheSize")
-    static let cacheBufferSize = Key("cacheBufferSize")
+    static let cachePauseInitial = Key("cachePauseInitial")
+    static let cachePauseWait = Key("cachePauseWait")
     static let secPrefech = Key("secPrefech")
     static let showBufferingThrobber = Key("showBufferingThrobber")
     static let showSeekingThrobber = Key("showSeekingThrobber")
@@ -337,6 +346,7 @@ struct Preference {
 
     /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
+    static let enableNewSettings = Key("enableNewSettings")
 
     /// Workaround for issue [#4688](https://github.com/iina/iina/issues/4688)
     /// - Note: This workaround can cause significant slowdown at startup if the list of recent documents contains files on a mounted
@@ -623,6 +633,26 @@ struct Preference {
     }
   }
 
+  enum SubBorderStyle: Int, InitializingFromKey, CaseIterable {
+    case outlineAndShadow = 1
+    case opaqueBox = 3
+    case backgroundBox = 4
+
+    static var defaultValue = SubBorderStyle.outlineAndShadow
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .outlineAndShadow: "outline-and-shadow"
+      case .opaqueBox: "opaque-box"
+      case .backgroundBox: "background-box"
+      }
+    }
+  }
+
   enum SubAlignX: Int, InitializingFromKey, CaseIterable {
     case left = 0
     case center
@@ -691,6 +721,7 @@ struct Preference {
     case jpeg
     case webp
     case jxl
+    case avif
 
     static var defaultValue = ScreenshotFormat.png
 
@@ -705,6 +736,7 @@ struct Preference {
       case .jpeg: "jpeg"
       case .webp: "webp"
       case .jxl: "jxl"
+      case .avif: "avif"
       }
     }
   }
@@ -814,7 +846,7 @@ struct Preference {
     case hide
     case minimize
 
-    static var defaultValue = WindowBehaviorWhenPip.doNothing
+    static var defaultValue = WindowBehaviorWhenPip.hide
 
     init?(key: Key) {
       self.init(rawValue: Preference.integer(for: key))
@@ -854,34 +886,33 @@ struct Preference {
       }
     }
 
-    private func makeSymbol(_ names: [String], _ fallbackImage: NSImage.Name) -> NSImage {
-        guard #available(macOS 14.0, *) else { return NSImage(named: fallbackImage)! }
-        let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-        return NSImage.sf(names, withConfiguration: configuration)!
-      }
+    private func makeSymbol(_ names: [String], size: CGFloat = 14) -> NSImage {
+      let configuration = NSImage.SymbolConfiguration(pointSize: size, weight: .medium)
+      return NSImage.sf(names, withConfiguration: configuration)!
+    }
 
     func image() -> NSImage {
       switch self {
-      case .settings: return makeSymbol(["gearshape"], NSImage.actionTemplateName)
-      case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"], "playlist")
-      case .pip: return makeSymbol(["pip.enter"], "pip")
-      case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"], "fullscreen")
-      case .musicMode: return makeSymbol(["music.microphone"], "toggle-album-art")
-      case .subTrack: return makeSymbol(["captions.bubble.fill"], "sub-track")
-      case .screenshot: return makeSymbol(["camera.shutter.button"], "screenshot")
-      case .plugins: return makeSymbol(["puzzlepiece.extension"], "plugin")
-      case .liveText: return makeSymbol(["document.viewfinder"], "custom.character.cursor.ibeam.rectangle.fill")
+      case .settings: return makeSymbol(["gearshape"])
+      case .playlist: return makeSymbol(["list.bullet.rectangle", "list.bullet"])
+      case .pip: return makeSymbol(["pip.enter"], size: 13.5)
+      case .fullScreen: return makeSymbol(["arrow.up.backward.and.arrow.down.forward.rectangle", "arrow.up.left.and.arrow.down.right"])
+      case .musicMode: return makeSymbol(["microphone.dynamic.on.stand", "music.microphone", "music.mic"])
+      case .subTrack: return makeSymbol(["captions.bubble.fill"])
+      case .screenshot: return makeSymbol(["camera.shutter.button", "camera.fill"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension", "puzzlepiece"], size: 13.5)
+      case .liveText: return makeSymbol(["document.viewfinder", "doc.viewfinder", "doc.text.viewfinder"])
       }
     }
 
     func alternateImage() -> NSImage? {
       switch self {
-      case .settings: return makeSymbol(["gearshape.fill"], NSImage.actionTemplateName)
-      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"], "playlist")
-      case .pip: return makeSymbol(["pip.exit"], "pip")
-      case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"], "fullscreen")
-      case .plugins: return makeSymbol(["puzzlepiece.extension.fill"], "plugin")
-      case .liveText: return makeSymbol(["viewfinder.circle.fill"], "custom.character.cursor.ibeam.rectangle.fill")
+      case .settings: return makeSymbol(["gearshape.fill"])
+      case .playlist: return makeSymbol(["list.bullet.rectangle.fill", "list.bullet"])
+      case .pip: return makeSymbol(["pip.exit"], size: 13.5)
+      case .fullScreen: return makeSymbol(["arrow.down.forward.and.arrow.up.backward.rectangle", "arrow.down.right.and.arrow.up.left"])
+      case .plugins: return makeSymbol(["puzzlepiece.extension.fill", "puzzlepiece.fill"], size: 13.5)
+      case .liveText: return makeSymbol(["viewfinder.circle.fill"])
       default: return nil
       }
     }
@@ -1010,6 +1041,16 @@ struct Preference {
     guard isLiveTextAvailable else { return false }
     return Preference.bool(for: .enableLiveText)
   }
+  
+  // Expected to be removed later when the new settings window is stable
+  static var enableNewSettings: Bool {
+    set {
+      Preference.set(newValue, for: .enableNewSettings)
+    }
+    get {
+      Preference.bool(for: .enableNewSettings)
+    }
+  }
 
   // MARK: - Defaults
 
@@ -1032,7 +1073,8 @@ struct Preference {
     .oscPosition: OSCPosition.floating.rawValue,
     .disablePlaySliderScrolling: false,
     .disableVolumeSliderScrolling: false,
-    .playlistWidth: 270,
+    .leadingSidebarWidth: 360,
+    .trailingSidebarWidth: 360,
     .prefetchPlaylistVideoDuration: true,
     .themeMaterial: Theme.dark.rawValue,
     .useLiquidGlassOSD: true,
@@ -1090,7 +1132,7 @@ struct Preference {
     .musicModeShowAlbumArt: true,
     .displayTimeAndBatteryInFullScreen: false,
 
-    .windowBehaviorWhenPip: WindowBehaviorWhenPip.doNothing.rawValue,
+    .windowBehaviorWhenPip: WindowBehaviorWhenPip.hide.rawValue,
     .pauseWhenPip: false,
     .togglePipByMinimizingWindow: false,
     .togglePipByMinimizingWindowForVideoOnly: false,
@@ -1101,17 +1143,21 @@ struct Preference {
     .dockedControlBarAndTitlebar: false,
 
     .sidebarSettingsDisplayAtLeading: false,
-    .sidebarPlaylistDisplayAtLeading: false,
-    .sidebarPluginsDisplayAtLeading: false,
+    .sidebarPlaylistDisplayAtLeading: true,
+    .sidebarPluginsDisplayAtLeading: true,
 
     .videoThreads: 0,
     .hardwareDecoder: HardwareDecoderOption.auto.rawValue,
     .forceDedicatedGPU: false,
     .loadIccProfile: true,
     .enableHdrSupport: true,
-    .enableToneMapping: false,
+    .enableToneMapping: true,
     .toneMappingTargetPeak: 0,
+    .enableToneMappingTargetPeakOverride: false,
+    .toneMappingTargetPeakOverride: 400,
     .toneMappingAlgorithm: ToneMappingAlgorithmOption.defaultValue.rawValue,
+    .enableToneMappingParamOverride: false,
+    .toneMappingParamOverride: Float(1), // Most common default for tone mapping algorithms.
     .audioDriverEnableAVFoundation: false,
     .audioThreads: 0,
     .audioLanguage: "",
@@ -1119,6 +1165,8 @@ struct Preference {
     .spdifAC3: false,
     .spdifDTS: false,
     .spdifDTSHD: false,
+    .spdifEAC3: false,
+    .spdifTRUEHD: false,
     .audioDevice: "auto",
     .audioDeviceDesc: "Autoselect device",
     .enableInitialVolume: false,
@@ -1138,7 +1186,6 @@ struct Preference {
     .subTextFont: Constants.String.mpvDefaultFont,
     .subTextSize: Float(55),
     .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,
-    .subBgColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBold: false,
     .subItalic: false,
     .subBlur: Float(0),
@@ -1147,6 +1194,7 @@ struct Preference {
     .subBorderColorString: NSColor.black.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subShadowSize: Float(0),
     .subShadowColorString: NSColor.clear.usingColorSpace(.deviceRGB)!.mpvColorString,
+    .subBorderStyle: SubBorderStyle.outlineAndShadow.rawValue,
     .subAlignX: SubAlignX.center.rawValue,
     .subAlignY: SubAlignY.bottom.rawValue,
     .subMarginX: Float(25),
@@ -1165,7 +1213,8 @@ struct Preference {
 
     .enableCache: true,
     .defaultCacheSize: 153600,
-    .cacheBufferSize: 153600,
+    .cachePauseInitial: false,
+    .cachePauseWait: Float(1),
     .secPrefech: 36000,
     .showBufferingThrobber: true,
     .showSeekingThrobber: true,
@@ -1187,6 +1236,7 @@ struct Preference {
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
     .iinaEnablePluginSystem: false,
+    .enableNewSettings: true,
 
     .keepOpenOnFileEnd: true,
     .quitWhenNoOpenedWindow: false,
@@ -1274,6 +1324,11 @@ struct Preference {
     T.init(key: key) ?? T.defaultValue
   }
 
+  static func string<T: InitializingFromKey>(for key: Key, ofType t: T.Type) -> String {
+    let value: T = Preference.enum(for: key)
+    return String(describing: value)
+  }
+
   // MARK: - Logging
 
   /// Log the value of settings that have been changed from their default value.
@@ -1315,8 +1370,9 @@ struct Preference {
     guard Logger.isEmitting(.debug) else { return }
     // See the list in this method's documentation comment for why these settings are not logged.
     let doNotLog: [Key] = [.assrtToken, .controlBarPositionHorizontal, .controlBarPositionVertical,
-      .musicModeShowAlbumArt, .musicModeShowPlaylist, .openSubUsername, .playlistWidth,
-      .recentDocuments, .savedAudioFilters, .savedVideoFilters, .softVolume, .watchProperties]
+      .musicModeShowAlbumArt, .musicModeShowPlaylist, .openSubUsername, .leadingSidebarWidth,
+      .trailingSidebarWidth, .recentDocuments, .savedAudioFilters,
+      .savedVideoFilters, .softVolume, .watchProperties]
     // There isn't an enumeration of the settings, so we use the keys in the dictionary containing
     // the defaults. Filter the list to remove the keys we do not want to log and then sort the keys
     // so the log messages are ordered for easier reading.
@@ -1370,7 +1426,8 @@ struct Preference {
       case .arrowButtonAction:
         defaultAsString = String(describing: ArrowButtonAction.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as ArrowButtonAction)
-      case .allowScreenSaverForAudio,
+      case .allowDuplicatePlayers,
+           .allowScreenSaverForAudio,
            .alwaysFloatOnTop,
            .alwaysOpenInNewWindow,
            .alwaysShowOnTopIcon,
@@ -1379,6 +1436,8 @@ struct Preference {
            .autoSearchOnlineSub,
            .autoSwitchToMusicMode,
            .blackOutMonitor,
+           .cachePauseInitial,
+           .compactUI,
            .controlBarStickToCenter,
            .disableAnimations,
            .disableOSDFileStartMsg,
@@ -1386,10 +1445,13 @@ struct Preference {
            .disableOSDSeekMsg,
            .disableOSDSpeedMsg,
            .disablePlaySliderScrolling,
+           .enableToneMappingParamOverride,
+           .enableToneMappingTargetPeakOverride,
            .disableVolumeSliderScrolling,
            .displayInLetterBox,
            .displayKeyBindingRawValues,
            .displayTimeAndBatteryInFullScreen,
+           .edgeToEdgeVideo,
            .enableAdvancedSettings,
            .enableCache,
            .enableCmdN,
@@ -1399,6 +1461,7 @@ struct Preference {
            .enableHdrSupport,
            .enableHdrWorkaround,
            .enableInitialVolume,
+           .enableLiveText,
            .enableLogging,
            .enableNowPlayingArtwork,
            .enableOSD,
@@ -1447,6 +1510,8 @@ struct Preference {
            .spdifAC3,
            .spdifDTS,
            .spdifDTSHD,
+           .spdifEAC3,
+           .spdifTRUEHD,
            .subBold,
            .subItalic,
            .subScaleWithWindow,
@@ -1456,6 +1521,9 @@ struct Preference {
            .trackAllFilesInRecentOpenMenu,
            .useAppleRemote,
            .useLegacyFullScreen,
+           .useLiquidGlassOSC,
+           .useLiquidGlassOSD,
+           .useLiquidGlassSidebar,
            .useMediaKeys,
            .useMpvOsd,
            .usePhysicalResolution,
@@ -1473,7 +1541,8 @@ struct Preference {
       case .defaultRepeatMode:
         defaultAsString = String(describing: DefaultRepeatMode.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as DefaultRepeatMode)
-      case .controlBarAutoHideTimeout,
+      case .cachePauseWait,
+           .controlBarAutoHideTimeout,
            .controlBarPositionHorizontal,
            .controlBarPositionVertical,
            .osdAutoHideTimeout,
@@ -1485,7 +1554,8 @@ struct Preference {
            .subPos,
            .subShadowSize,
            .subSpacing,
-           .subTextSize:
+           .subTextSize,
+           .toneMappingParamOverride:
         guard let defaultAsFloat = defaultValue as? Float else {
           // Should not occur. Internal error.
           log("Default for \(key) is of type \(type(of: value)) and cannot be cast to Float",
@@ -1555,6 +1625,9 @@ struct Preference {
       case .subAlignY:
         defaultAsString = String(describing: SubAlignY.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as SubAlignY)
+      case .subBorderStyle:
+        defaultAsString = String(describing: SubBorderStyle.defaultValue)
+        valueAsString = String(describing: Preference.enum(for: key) as SubBorderStyle)
       case .secondarySubOverrideLevel, .subOverrideLevel:
         defaultAsString = String(describing: SubOverrideLevel.defaultValue)
         valueAsString = String(describing: Preference.enum(for: key) as SubOverrideLevel)

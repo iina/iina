@@ -75,7 +75,7 @@ class MPVFilter: NSObject {
     get {
       var str = ""
       // label
-      if let label = label { str += "@\(label):" }
+      if let label { str += "@\(label):" }
       // name
       str += name
       // params
@@ -113,7 +113,7 @@ class MPVFilter: NSObject {
     self.type = FilterType(rawValue: name)
     self.name = name
     self.label = label
-    if let params = params, let type = type, let format = MPVFilter.formats[type]?.components(separatedBy: ":") {
+    if let params, let type, let format = MPVFilter.formats[type]?.components(separatedBy: ":") {
       var translated: [String: String] = [:]
       for (key, value) in params {
         if let number = Int(key.dropFirst()) {
@@ -208,7 +208,7 @@ class MPVFilter: NSObject {
   /// - Parameter rawParamString: String to be parsed.
   /// - Returns: A `Dictionary` containing the filter parameters or `nil` if the parameters were not parsed.
   private static func parseRawParamString(_ name: String, _ rawParamString: String?) -> [String: String]? {
-    guard let rawParamString = rawParamString, !doNotParse.contains(name) else { return nil }
+    guard let rawParamString, !doNotParse.contains(name) else { return nil }
     let pairs = rawParamString.split(separator: ":")
     // If there is only one parameter then parameter order is not an issue.
     guard pairs.count > 1 else { return nil }

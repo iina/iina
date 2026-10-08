@@ -23,12 +23,7 @@ extension NSTextField {
 let topConstraintOffset: CGFloat = if #available(macOS 26, *) { -4 } else { 0 }
 
 class SettingsUIHelper: UIHelper {
-  private var l10n: SettingsLocalization.Context
-
-  init(_ l10n: SettingsLocalization.Context) {
-    self.l10n = l10n
-    super.init()
-  }
+  static let sharedUI = SettingsUIHelper(scope: "settings")
 
   func button(_ key: SettingsLocalization.Key) -> NSButton {
     button(key.rawValue)
@@ -41,7 +36,7 @@ class SettingsUIHelper: UIHelper {
     button.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
     for (key, value) in items {
       let item = NSMenuItem()
-      item.title = l10n.localized(key)
+      item.title = localized(key)
       item.tag = value
       button.menu!.addItem(item)
     }
@@ -56,8 +51,11 @@ class SettingsUIHelper: UIHelper {
     label(key.rawValue, isSmall: isSmall, isSecondary: isSecondary)
   }
 
-  override func localized(_ key: String) -> String {
-    l10n.localized(.init(key))
+  func localized(_ key: SettingsLocalization.Key) -> String {
+    if key.isGeneral {
+      return NSLocalizedString(key.rawValue, comment: key.rawValue)
+    }
+    return localized(key.rawValue)
   }
 
   private class RadioTagTransformer: ValueTransformer {
@@ -82,7 +80,7 @@ class SettingsUIHelper: UIHelper {
 
   func radioGroup(_ prefKey: Preference.Key, size: NSControl.ControlSize = .small, _ items: [(SettingsLocalization.Key, Int)]) -> [NSButton] {
     return items.map { key, value in
-      let button = NSButton(radioButtonWithTitle: l10n.localized(key), target: nil, action: nil)
+      let button = NSButton(radioButtonWithTitle: localized(key), target: nil, action: nil)
       button.translatesAutoresizingMaskIntoConstraints = false
       button.controlSize = size
       button.bind(.value, to: UserDefaults.standard, withKeyPath: prefKey.rawValue, options: [
@@ -93,27 +91,27 @@ class SettingsUIHelper: UIHelper {
   }
 
   static func hEquallySpaced(_ views: [NSView], _ space: CGFloat = 8, leading: CGFloat? = nil, trailing: CGFloat? = nil) {
-    if let leading = leading {
+    if let leading {
       views.first!.padding(.leading(leading))
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
       view.spacing(.leading(space), to: views[i - 1])
     }
-    if let trailing = trailing {
+    if let trailing {
       views.last!.padding(.trailing(greaterThan: trailing))
     }
   }
 
   static func vEquallySpaced(_ views: [NSView], _ space: CGFloat = 8, top: CGFloat? = nil, bottom: CGFloat? = nil) {
-    if let top = top {
+    if let top {
       views.first!.padding(.top(top))
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
       view.spacing(.top(space), to: views[i - 1])
     }
-    if let bottom = bottom {
+    if let bottom {
       views.last!.padding(.bottom(bottom))
     }
   }

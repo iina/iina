@@ -417,12 +417,25 @@ class MPVController: NSObject {
                   level: .verbose)
     setUserOption(PK.maxVolume, type: .int, forName: MPVOption.Audio.volumeMax, level: .verbose)
 
-    var spdif: [String] = []
-    if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
-    if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
-    if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
-    chkErr(setOptionString(MPVOption.Audio.audioSpdif, spdif.joined(separator: ","),
-                           verboseIfDefault: true))
+    let spdifValue = { (key: Preference.Key) -> String in
+      var spdif: [String] = []
+      if Preference.bool(for: PK.spdifAC3) { spdif.append("ac3") }
+      if Preference.bool(for: PK.spdifDTS){ spdif.append("dts") }
+      if Preference.bool(for: PK.spdifDTSHD) { spdif.append("dts-hd") }
+      if Preference.bool(for: PK.spdifEAC3) { spdif.append("eac3") }
+      if Preference.bool(for: PK.spdifTRUEHD) { spdif.append("truehd") }
+      return spdif.joined(separator: ",")
+    }
+    setUserOption(PK.spdifAC3, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifDTS, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifDTSHD, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifEAC3, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
+    setUserOption(PK.spdifTRUEHD, type: .other, forName: MPVOption.Audio.audioSpdif,
+                  verboseIfDefault: true, transformer: spdifValue)
 
     setUserOption(PK.audioDevice, type: .string, forName: MPVOption.Audio.audioDevice,
                   verboseIfDefault: true)
@@ -442,6 +455,19 @@ class MPVController: NSObject {
                   verboseIfDefault: true) { key in
       return String(describing: Preference.enum(for: key) as Preference.GaplessAudioOption)
     }
+
+    // IINA builds FFmpeg with support for the SVT-AV1 encoder. This encoder is preferred over
+    // libaom for its better performance. Must set the mpv screenshot-avif-encoder option as it
+    // defaults to "libaom-av1".
+    chkErr(setOptionString(MPVOption.Screenshot.screenshotAvifEncoder, "libsvtav1",
+                           level: .verbose))
+
+    // The mpv screenshot-avif-opts option default value uses keys recognized by the libaom encoder.
+    // As IINA is using the SVT-AV1 encoder the default value is inappropriate. Since the encoder is
+    // only being used for screenshots, enable still-picture coding optimizations for improved
+    // coding efficiency and reduced memory usage.
+    chkErr(setOptionString(MPVOption.Screenshot.screenshotAvifOpts, "svtav1-params=avif=1",
+                           level: .verbose))
 
     // - Sub
 
@@ -466,8 +492,6 @@ class MPVController: NSObject {
 
     setUserOption(PK.subTextColorString, type: .color, forName: MPVOption.Subtitles.subColor,
                   verboseIfDefault: true)
-    setUserOption(PK.subBgColorString, type: .color, forName: MPVOption.Subtitles.subBackColor,
-                  verboseIfDefault: true)
 
     setUserOption(PK.subBold, type: .bool, forName: MPVOption.Subtitles.subBold,
                   verboseIfDefault: true)
@@ -479,15 +503,20 @@ class MPVController: NSObject {
     setUserOption(PK.subSpacing, type: .float, forName: MPVOption.Subtitles.subSpacing,
                   verboseIfDefault: true)
 
-    setUserOption(PK.subBorderSize, type: .float, forName: MPVOption.Subtitles.subBorderSize,
+    setUserOption(PK.subBorderSize, type: .float, forName: MPVOption.Subtitles.subOutlineSize,
                   verboseIfDefault: true)
-    setUserOption(PK.subBorderColorString, type: .color, forName: MPVOption.Subtitles.subBorderColor,
+    setUserOption(PK.subBorderColorString, type: .color, forName: MPVOption.Subtitles.subOutlineColor,
                   verboseIfDefault: true)
 
     setUserOption(PK.subShadowSize, type: .float, forName: MPVOption.Subtitles.subShadowOffset,
                   verboseIfDefault: true)
-    setUserOption(PK.subShadowColorString, type: .color, forName: MPVOption.Subtitles.subShadowColor,
+    setUserOption(PK.subShadowColorString, type: .color, forName: MPVOption.Subtitles.subBackColor,
                   verboseIfDefault: true)
+
+    setUserOption(PK.subBorderStyle, type: .other, forName: MPVOption.Subtitles.subBorderStyle,
+                  verboseIfDefault: true) { key in
+      String(describing: Preference.enum(for: key) as Preference.SubBorderStyle)
+    }
 
     setUserOption(PK.subAlignX, type: .other, forName: MPVOption.Subtitles.subAlignX,
                   verboseIfDefault: true) { key in
@@ -520,9 +549,13 @@ class MPVController: NSObject {
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache,
                   verboseIfDefault: true) { key in
-      return Preference.bool(for: key) ? nil : "no"
+      return Preference.bool(for: key) ? "yes" : "no"
     }
 
+    setUserOption(PK.cachePauseInitial, type: .bool, forName: MPVOption.Cache.cachePauseInitial,
+                  verboseIfDefault: true)
+    setUserOption(PK.cachePauseWait, type: .float, forName: MPVOption.Cache.cachePauseWait,
+                  verboseIfDefault: true)
     setUserOption(PK.defaultCacheSize, type: .other, forName: MPVOption.Demuxer.demuxerMaxBytes,
                   verboseIfDefault: true) { key in
       return "\(Preference.integer(for: key))KiB"
@@ -623,33 +656,8 @@ class MPVController: NSObject {
     chkErr(mpv_initialize(mpv))
 
     // The option watch-later-options is not available until after the mpv instance is initialized.
-    // Workaround for mpv issue #14417, watch-later-options missing secondary subtitle delay and sid.
-    // Allow the user to override this workaround by setting this mpv option in advanced settings.
-    if !userOptionsContains(MPVOption.WatchLater.watchLaterOptions),
-       var watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
-
-      // In mpv 0.38.0 the default value for the watch-later-options property contains the options
-      // sid and sub-delay, but not the corresponding options for the secondary subtitle. This
-      // inconsistency is likely to confuse users, so insure the secondary options are also saved in
-      // watch later files. Issue #14417 has been fixed, so this workaround will not be needed after
-      // the next mpv upgrade.
-      var needsUpdate = false
-      if watchLaterOptions.contains(MPVOption.TrackSelection.sid),
-         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySid) {
-        log("Adding \(MPVOption.Subtitles.secondarySid) to \(MPVOption.WatchLater.watchLaterOptions)")
-        watchLaterOptions += "," + MPVOption.Subtitles.secondarySid
-        needsUpdate = true
-      }
-      if watchLaterOptions.contains(MPVOption.Subtitles.subDelay),
-         !watchLaterOptions.contains(MPVOption.Subtitles.secondarySubDelay) {
-        log("Adding \(MPVOption.Subtitles.secondarySubDelay) to \(MPVOption.WatchLater.watchLaterOptions)")
-        watchLaterOptions += "," + MPVOption.Subtitles.secondarySubDelay
-        needsUpdate = true
-      }
-      if needsUpdate {
-        chkErr(setOptionString(MPVOption.WatchLater.watchLaterOptions, watchLaterOptions, level: .verbose))
-      }
-    }
+    // Useful to log the value of this option as users often ask about what the Watch Later feature
+    // remembers.
     if let watchLaterOptions = getString(MPVOption.WatchLater.watchLaterOptions) {
       let sorted = watchLaterOptions.components(separatedBy: ",").sorted().joined(separator: ",")
       log("Options mpv is configured to save in watch later files: \(sorted)")
@@ -673,7 +681,7 @@ class MPVController: NSObject {
   /// - Note: Advanced control must be enabled for the screenshot command to work when the window flag is used. See issue
   ///         [#4822](https://github.com/iina/iina/issues/4822) for details.
   func mpvInitRendering() {
-    guard let mpv = mpv else {
+    guard let mpv else {
       fatalError("mpvInitRendering() should be called after mpv handle being initialized!")
     }
     let apiType = UnsafeMutableRawPointer(mutating: (MPV_RENDER_API_TYPE_OPENGL as NSString).utf8String)
@@ -717,7 +725,7 @@ class MPVController: NSObject {
   }
 
   func mpvUninitRendering() {
-    guard let mpvRenderContext = mpvRenderContext else { return }
+    guard let mpvRenderContext else { return }
     mpv_render_context_set_update_callback(mpvRenderContext, nil, nil)
     mpv_render_context_free(mpvRenderContext)
     self.mpvRenderContext = nil
@@ -726,12 +734,12 @@ class MPVController: NSObject {
   }
 
   func mpvReportSwap() {
-    guard let mpvRenderContext = mpvRenderContext else { return }
+    guard let mpvRenderContext else { return }
     mpv_render_context_report_swap(mpvRenderContext)
   }
 
   func shouldRenderUpdateFrame() -> Bool {
-    guard let mpvRenderContext = mpvRenderContext else { return false }
+    guard let mpvRenderContext else { return false }
     let flags: UInt64 = mpv_render_context_update(mpvRenderContext)
     return flags & UInt64(MPV_RENDER_UPDATE_FRAME.rawValue) > 0
   }
@@ -854,6 +862,16 @@ class MPVController: NSObject {
   @discardableResult
   func setString(_ name: String, _ value: String, level: Logger.Level = .debug) -> Int32 {
     log("Set property: \(name)=\(value)", level: level)
+    return mpv_set_property_string(mpv, name, value)
+  }
+
+  @discardableResult
+  func setStringToDefault(_ name: String, level: Logger.Level = .debug) -> Int32 {
+    guard let value = MPVOptionDefaults.shared.getString(name) else {
+      log("Failed to obtain default for option: \(name)", level: .error)
+      return MPV_ERROR_OPTION_NOT_FOUND.rawValue
+    }
+    log("Set property to default: \(name)=\(value)", level: level)
     return mpv_set_property_string(mpv, name, value)
   }
 
@@ -1155,10 +1173,10 @@ class MPVController: NSObject {
           recordedSeekStartTime = CACurrentMediaTime()
         }
         player.syncUI(.time)
-        let osdText = (player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder) + " / " +
-        (player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder)
+        let current = player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder
+        let total = player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder
         let percentage = (player.info.videoPosition / player.info.videoDuration) ?? 1
-        player.sendOSD(.seek(osdText, percentage))
+        player.sendOSD(.seek(current, total, percentage))
       }
 
     case MPV_EVENT_PLAYBACK_RESTART:
@@ -1348,8 +1366,8 @@ class MPVController: NSObject {
         break
       }
       DispatchQueue.main.async { [self] in
-        player.syncUI(.volume)
         player.info.isMuted = data
+        player.syncUI(.volume)
         player.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
       }
 
@@ -1617,7 +1635,7 @@ class MPVController: NSObject {
   private func setOptionalOptionColor(_ name: String, _ value: String?,
                                        level: Logger.Level = .debug,
                                        verboseIfDefault: Bool = false) -> Int32 {
-    guard let value = value else { return 0 }
+    guard let value else { return 0 }
     let levelToUse: Logger.Level = {
       // The default value for options of type color is currently returned by mpv in the alternative
       // string format that specifies component values in hex. Must convert to the form that uses
@@ -1633,7 +1651,7 @@ class MPVController: NSObject {
 
   private func setOptionalOptionString(_ name: String, _ value: String?, level: Logger.Level = .debug,
                                        verboseIfDefault: Bool = false) -> Int32 {
-    guard let value = value else { return 0 }
+    guard let value else { return 0 }
     return setOptionString(name, value, level: level, verboseIfDefault: verboseIfDefault)
   }
 
@@ -1714,7 +1732,7 @@ class MPVController: NSObject {
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
     guard !(change?[NSKeyValueChangeKey.oldKey] is NSNull) else { return }
 
-    guard let keyPath = keyPath else { return }
+    guard let keyPath else { return }
     guard let infos = optionObservers[keyPath] else { return }
 
     for info in infos {

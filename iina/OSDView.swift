@@ -10,6 +10,8 @@ import Mustache
 
 class OSDView: TranslucentView {
   var stackView: NSStackView
+  var iconView: NSImageView
+  var titleStack: NSStackView
   var label: NSTextField
   var secondaryLabel: NSTextField
   var progressBar: FixedProgressBar
@@ -27,10 +29,17 @@ class OSDView: TranslucentView {
     stackView.alignment = .leading
     stackView.spacing = 0
 
+    self.iconView = NSImageView()
+
     self.label = NSTextField(labelWithString: "")
     label.lineBreakMode = .byTruncatingMiddle
     label.translatesAutoresizingMaskIntoConstraints = false
     label.setContentCompressionResistancePriority(.init(499), for: .horizontal)
+
+    self.titleStack = NSStackView(views: [iconView, label])
+    titleStack.orientation = .horizontal
+    titleStack.spacing = 6
+    titleStack.alignment = .centerY
 
     self.secondaryLabel = NSTextField(labelWithString: "")
     secondaryLabel.lineBreakMode = .byTruncatingMiddle
@@ -45,7 +54,7 @@ class OSDView: TranslucentView {
 
     super.init(liquidGlassCornerRadius: 16, vevCornerRadius: 10, padding: (16, 8))
 
-    stackView.addArrangedSubview(label)
+    stackView.addArrangedSubview(titleStack)
     stackView.addArrangedSubview(secondaryLabel)
     stackView.addArrangedSubview(progressBar)
     setContent(stackView)
@@ -56,14 +65,42 @@ class OSDView: TranslucentView {
   }
 
   func updateViews(fromMessage message: OSDMessage, player: PlayerCore) {
-    let textSize = Preference.float(for: .osdTextSize)
-    label.font = NSFont.monospacedDigitSystemFont(
-      ofSize: CGFloat(textSize), weight: .regular)
-    secondaryLabel.font = NSFont.monospacedDigitSystemFont(
-      ofSize: CGFloat(textSize * 0.5).clamped(to: 11...25), weight: .regular)
+    let textSize = CGFloat(Preference.float(for: .osdTextSize))
+    let iconSize = textSize * 0.8
+    let smallTextSize = (textSize * 0.9).clamped(to: 11...25)
+    let secondaryTextSize = (textSize * 0.5).clamped(to: 11...25)
 
-    let (osdString, osdType) = message.message()
-    label.stringValue = osdString
+    // data for mustache rendering
+    let duration = player.info.videoDuration
+    let position = player.info.videoPosition
+    let osdData: [String: String] = [
+      "duration": duration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+      "preciseDuration": duration?.stringRepresentationWithPrecision(3) ?? Constants.String.videoTimePlaceholder,
+      "position": position?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
+      "precisePosition": position?.stringRepresentationWithPrecision(3) ?? Constants.String.videoTimePlaceholder,
+      "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
+      "chapterCount": player.info.chapters.count.description
+    ]
+
+    label.font = NSFont.monospacedDigitSystemFont(ofSize: textSize, weight: .regular)
+    secondaryLabel.font = NSFont.monospacedDigitSystemFont(ofSize: secondaryTextSize, weight: .regular)
+
+    let (osdString, osdType) = message.titleAndType()
+    let renderedLabel = try! (try! Template(string: osdString)).render(osdData)
+    if let attrString = message.attributedTitle(renderedLabel, fontSize: textSize, smallFontSize: smallTextSize) {
+      label.attributedStringValue = attrString
+    } else {
+      label.attributedStringValue = NSAttributedString(string: "")
+      label.stringValue = renderedLabel
+    }
+
+    if let image = message.image(),
+       let imageWithConfig = image.withSymbolConfiguration(.init(pointSize: iconSize, weight: .regular)) {
+      iconView.image = imageWithConfig
+      titleStack.setVisibilityPriority(.mustHold, for: iconView)
+    } else {
+      titleStack.setVisibilityPriority(.notVisible, for: iconView)
+    }
 
     // Most OSD messages are displayed based on the configured language direction.
     progressBar.userInterfaceLayoutDirection = stackView.userInterfaceLayoutDirection
@@ -90,13 +127,6 @@ class OSDView: TranslucentView {
       secondaryLabel.baseWritingDirection = .leftToRight
       fallthrough
     case .withText(let text):
-      // data for mustache rendering
-      let osdData: [String: String] = [
-        "duration": player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "position": player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
-        "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
-        "chapterCount": player.info.chapters.count.description
-      ]
       stackView.setVisibilityPriority(.mustHold, for: secondaryLabel)
       secondaryLabel.stringValue = try! (try! Template(string: text)).render(osdData)
     }

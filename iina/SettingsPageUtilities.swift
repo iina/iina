@@ -60,7 +60,7 @@ class SettingsPageUtilities: SettingsPage {
             .hasDescription(content: .text_DeleteAllWatchLater)
           SettingsItem.General(title: .text_ClearPlaybackHistory)
             .image(name: ["document.badge.clock", "doc.badge.clock", "doc"])
-            .extraViews(thumbCacheSizeLabel, actionButton(action: #selector(clearCacheBtnAction), symbolName: ["trash"]))
+            .extraViews(actionButton(action: #selector(clearHistoryBtnAction), symbolName: ["trash"]))
             .hasDescription(content: .text_DeleteAllPlaybackHistories)
           SettingsItem.General(title: .text_ClearThumbnailCache)
             .image(name: "photo")
@@ -127,9 +127,8 @@ class SettingsPageUtilities: SettingsPage {
     guard let window = (sender as? NSView)?.window else { return }
     Utility.quickAskPanel("clear_history", sheetWindow: window) { respond in
       guard respond == .alertFirstButtonReturn else { return }
-      try? FileManager.default.removeItem(atPath: Utility.playbackHistoryURL.path)
+      HistoryController.shared.removeAll()
       AppDelegate.shared.clearRecentDocuments(self)
-      Preference.set(nil, for: .iinaLastPlayedFilePath)
       Utility.showAlert("cleared", style: .informational, sheetWindow: window)
     }
   }

@@ -159,6 +159,7 @@ extension Notification.Name {
   static let iinaKeyBindingInputChanged = Notification.Name("IINAKeyBindingInputChanged")
   static let iinaFileLoaded = Notification.Name("IINAFileLoaded")
   static let iinaHistoryUpdated = Notification.Name("IINAHistoryUpdated")
+  static let iinaRecentDocumentsUpdated = Notification.Name("IINARecentDocumentsUpdated")
   static let iinaLegacyFullScreen = Notification.Name("IINALegacyFullScreen")
   static let iinaGlobalKeyBindingsChanged = Notification.Name("iinaGlobalKeyBindingsChanged")
   static let iinaKeyBindingChanged = Notification.Name("iinaKeyBindingChanged")

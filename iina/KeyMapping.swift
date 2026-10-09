@@ -19,17 +19,31 @@ class KeyMapping: NSObject {
       if Preference.bool(for: .displayKeyBindingRawValues) {
         return rawKey
       } else {
-        if let (keyChar, modifiers) = KeyCodeHelper.macOSKeyEquivalent(from: normalizedMpvKey, usePrintableKeyName: true) {
-          return KeyCodeHelper.readableString(fromKey: keyChar, modifiers: modifiers)
-        } else {
-          return normalizedMpvKey
-        }
+        return readableKeyForDisplay
       }
     }
     set {
       rawKey = newValue
       NotificationCenter.default.post(Notification(name: .iinaKeyBindingChanged))
     }
+  }
+
+  /// Returns the readable label using the binding set currently applied by the Preferences editor.
+  private var readableKeyForDisplay: String {
+    if let readableNumpadKey = KeyCodeHelper.readableNumpadKey(from: normalizedMpvKey) {
+      return readableNumpadKey
+    }
+    guard let (keyChar, modifiers) = KeyCodeHelper.macOSKeyEquivalent(
+      from: normalizedMpvKey, usePrintableKeyName: true) else {
+      return normalizedMpvKey
+    }
+    let readableKey = KeyCodeHelper.readableString(fromKey: keyChar, modifiers: modifiers)
+    guard let numpadTwin = KeyCodeHelper.numpadTwin(forNumberRowKey: normalizedMpvKey),
+          PlayerCore.keyBindings[numpadTwin] == nil,
+          let readableNumpadTwin = KeyCodeHelper.readableNumpadKey(from: numpadTwin) else {
+      return readableKey
+    }
+    return "\(readableKey) or \(readableNumpadTwin)"
   }
 
   // TODO: this is UI logic. Move it out of here.

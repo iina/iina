@@ -45,6 +45,10 @@ class JavascriptPluginMenuItem: NSObject, JavascriptPluginMenuItemExportable {
   var keyBinding: String? {
     didSet {
       guard let item = nsMenuItem else { return }
+      // Always reset: the new binding may have no menu representation (e.g. numpad keys)
+      // or be nil, and the previous key equivalent must not survive either way
+      item.keyEquivalent = ""
+      item.keyEquivalentModifierMask = []
       if let key = keyBinding, let (kEqv, kMdf) = KeyCodeHelper.macOSKeyEquivalent(from: key) {
         item.keyEquivalent = kEqv
         item.keyEquivalentModifierMask = kMdf

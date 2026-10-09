@@ -9,8 +9,6 @@
 
 "general.on" = "चालू";
 "general.off" = "बंद";
-"general.login" = "लॉग इन";
-"general.logout" = "लोग आउट";
 "general.ok" = "ठीक";
 "general.cancel" = "रद्द";
 "general.done" = "ठीक है";
@@ -153,8 +151,6 @@
 "preference.title" = "पसंद";
 "preference.general" = "सामान्य";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "उपशीर्षक";
 "preference.network" = "नेटवर्क";
 "preference.control" = "नियंत्रण";
 "preference.keybindings" = "कुंजी बाइंडिंग";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "उपयोगिताएँ";
 "preference.scripts" = "स्क्रिप्ट";
-"preference.not_logged_in" = "लोग इन नहीं है";
-"preference.logged_in_as" = "%@ के रूप में लॉग इन किया";
-"preference.system_media_control" = "सिस्टम मीडिया नियंत्रण का उपयोग करें";
-
-"preference.key_binding_hint_1" = "वर्तमान कॉन्फ़िगरेशन फ़ाइल में मुख्य बाइंडिंग को संपादित करने के लिए, प्रतिलिपि बनाने के लिए सबसे पहले \"डुप्लीकेट…\" बटन पर क्लिक करें।";
-"preference.key_binding_hint_2" = "संबंधित कुंजी बंधन को संपादित करने के लिए दाईं ओर एक पंक्ति पर डबल क्लिक करें।";
-
-"preference.enable_adv_settings" = "उन्नत सेटिंग्स सक्षम करें";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "स्ट्रिप";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "ध्वनि: %@";
 "menu.volume_muted" = "Volume: %@ (Muted)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "अद्यतन के लिए जाँच";
 "plugin.updating" = "Downloading update…";
 
 // Log window

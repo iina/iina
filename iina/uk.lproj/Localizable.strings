@@ -9,8 +9,6 @@
 
 "general.on" = "Увімкнути";
 "general.off" = "Вимкнути";
-"general.login" = "Увійти";
-"general.logout" = "Вийти";
 "general.ok" = "ОК";
 "general.cancel" = "Скасувати";
 "general.done" = "Готово";
@@ -153,8 +151,6 @@
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";
 "preference.ui" = "Інтерфейс";
-"preference.video_audio" = "Відео та аудіо";
-"preference.subtitle" = "Субтитри";
 "preference.network" = "Мережа";
 "preference.control" = "Керування";
 "preference.keybindings" = "Призначення клавіш";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Плаґіни";
 "preference.utilities" = "Службові команди";
 "preference.scripts" = "Сценарії";
-"preference.not_logged_in" = "Не зайдено";
-"preference.logged_in_as" = "Зайдено як %@";
-"preference.system_media_control" = "Задіяти системне керування медіафайлами";
-
-"preference.key_binding_hint_1" = "Для призначення клавіатурних скорочень у поточному файлі налаштувань спочатку натисніть на кнопку «Дублювати…», щоб створити копію.";
-"preference.key_binding_hint_2" = "Для редагування призначеного клавіатурного скорочення подвійно клацніть на рядку з правого боку.";
-
-"preference.enable_adv_settings" = "Увімкнути розширені налаштування";
-
-"preference.sub_override_level.no" = "ні";
-"preference.sub_override_level.force" = "сила";
-"preference.sub_override_level.scale" = "масштаб";
-"preference.sub_override_level.strip" = "видалити";
-"preference.sub_override_level.yes" = "так";
-
-"preference.sub_override_level.descriptive_text.no" = "Відображати субтитри, як зазначені в сценарії субтитрів, без змін.";
-"preference.sub_override_level.descriptive_text.force" = "Застосувати всі стилі субтитрів.";
-"preference.sub_override_level.descriptive_text.scale" = "Застосувати налаштування масштабування на додаток до стилів в цьому розділі.";
-"preference.sub_override_level.descriptive_text.strip" = "Радикально вилучати всі теги ASS та стилі з субтитрів.";
-"preference.sub_override_level.descriptive_text.yes" = "Застосувати всі параметри стилів у цьому розділі.";
-
-"preference.ytdl_plugin_not_installed" = "Установіть плагін для онлайн-медіа в розділі «Плагіни > Установлення з GitHub» та отримайте функції завантаження відео та автоматичного оновлення yt-dlp.";
-"preference.ytdl_plugin_installed" = "Вбудована підтримка youtube-dl вимкнена, оскільки ви маєте встановленим плагін для онлайн-медіа.";
 
 "menu.volume" = "Гучність: %@";
 "menu.volume_muted" = "Гучність: %@ (Без звуку)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Цей плагін може читати або записувати файли на вашому диску, включаючи конфіденційну інформацію. Також він може викликати інші програми чи програми, які можуть зашкодити комп'ютеру - обов'язково перевіряйте джерело.";
 
 "plugin.install" = "Встановити";
-"plugin.installed" = "Встановлено";
-"plugin.not_installed" = "Не встановлено";
 "plugin.local" = "Встановлено локально";
 "alert.plugin.install_error" = "Сталася помилка під час установки: %@";
 "alert.invalid_url" = "Невірна URL-адреса.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Не вдалося завантажити плагін.\n\nРезультат:%@\n";
 "plugin.install_error.cannot_unpackage" = "Не вдалося розпакувати плагін.\n\nРезультат:%@\n";
 "plugin.install_error.cannot_load" = "IINA не може завантажити цей плагін. Можливо, формат плагіну невірний.";
-"plugin.check_for_updates" = "Перевірити наявність оновлень";
 "plugin.updating" = "Завантаження оновлення…";
 
 // Log window

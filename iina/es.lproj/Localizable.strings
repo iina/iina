@@ -9,8 +9,6 @@
 
 "general.on" = "Activado";
 "general.off" = "Apagado";
-"general.login" = "Iniciar sesión";
-"general.logout" = "Cerrar sesión";
 "general.ok" = "Aceptar";
 "general.cancel" = "Cancelar";
 "general.done" = "Hecho";
@@ -153,8 +151,6 @@
 "preference.title" = "Preferencias";
 "preference.general" = "General";
 "preference.ui" = "Interfaz";
-"preference.video_audio" = "Vídeo y audio";
-"preference.subtitle" = "Subtítulos";
 "preference.network" = "Red";
 "preference.control" = "Controles";
 "preference.keybindings" = "Atajos de teclado";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "Utilidades";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Sin iniciar sesión";
-"preference.logged_in_as" = "Conectado como %@";
-"preference.system_media_control" = "Utilizar los controles multimedia del sistema";
-
-"preference.key_binding_hint_1" = "Para editar los atajos en el archivo de configuración actual, haga primero clic en el botón \"Duplicar…\" para crear una copia.";
-"preference.key_binding_hint_2" = "Haga doble clic en una fila del lado derecho para editar el atajo correspondiente.";
-
-"preference.enable_adv_settings" = "Habilitar configuración avanzada";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "fuerza";
-"preference.sub_override_level.scale" = "escala";
-"preference.sub_override_level.strip" = "tira";
-"preference.sub_override_level.yes" = "sí";
-
-"preference.sub_override_level.descriptive_text.no" = "Procesar subtítulos como se especifica en los scripts, sin sobreescribir.";
-"preference.sub_override_level.descriptive_text.force" = "Aplicar todos los estilos de subtítulos.";
-"preference.sub_override_level.descriptive_text.scale" = "Aplica el ajuste de escala además de los ajustes de estilo en esta sección.";
-"preference.sub_override_level.descriptive_text.strip" = "Remueve radicalmente todas las etiquetas y estilos ASS del subtítulo.";
-"preference.sub_override_level.descriptive_text.yes" = "Aplicar todos los ajustes de estilo en esta sección.";
-
-"preference.ytdl_plugin_not_installed" = "Instale el plugin multimedia en línea de \"Plugins > Instalar desde GitHub\" para disfrutar de características avanzadas tales como descargas de vídeo y actualizaciones automáticas yt-dlp.";
-"preference.ytdl_plugin_installed" = "El soporte de youtube-dl integrado está deshabilitado, ya que tienes el plugin de medios online instalado.";
 
 "menu.volume" = "Volumen: %@";
 "menu.volume_muted" = "Volumen: %@ (Silenciado)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que pueden dañar su sistema, asegúrese de verificar la fuente.";
 
 "plugin.install" = "Instalar";
-"plugin.installed" = "Instalado";
-"plugin.not_installed" = "No instalado";
 "plugin.local" = "Instalado localmente";
 "alert.plugin.install_error" = "Ha ocurrido un error durante la instalación: %@";
 "alert.invalid_url" = "La URL no es válida.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Error al descargar el plugin.\n\nSalida:%@\n";
 "plugin.install_error.cannot_unpackage" = "Error al desempaquetar el plugin.\n\nSalida:%@\n";
 "plugin.install_error.cannot_load" = "IINA no puede cargar este plugin. Puede estar en el formato incorrecto.";
-"plugin.check_for_updates" = "Buscar actualizaciones";
 "plugin.updating" = "Descargando actualización…";
 
 // Log window

@@ -22,6 +22,10 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
     return NSNib.Name("PrefOSCToolbarSettingsSheetController")
   }
 
+  static var oscToolbarButtons: [Preference.ToolBarButton] {
+    return (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
+  }
+
   var currentButtonTypes: [Preference.ToolBarButton] = []
   private var itemViewControllers: [PrefOSCToolbarDraggingItemViewController] = []
 
@@ -32,7 +36,7 @@ class PrefOSCToolbarSettingsSheetController: NSWindowController, PrefOSCToolbarC
     super.windowDidLoad()
     currentItemsView.registerForDraggedTypes([.iinaOSCAvailableToolbarButtonType, .iinaOSCCurrentToolbarButtonType])
     currentItemsView.currentItemsViewDelegate = self
-    currentItemsView.initItems(fromItems: PrefUIViewController.oscToolbarButtons)
+    currentItemsView.initItems(fromItems: PrefOSCToolbarSettingsSheetController.oscToolbarButtons)
 
     var allButtonTypes: [Preference.ToolBarButton] = [.settings, .playlist, .pip, .fullScreen, .musicMode, .subTrack, .screenshot, .plugins]
     if #available(macOS 13, *) {

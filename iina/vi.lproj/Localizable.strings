@@ -9,8 +9,6 @@
 
 "general.on" = "Bật";
 "general.off" = "Tắt";
-"general.login" = "Đăng nhập";
-"general.logout" = "Đăng xuất";
 "general.ok" = "OK";
 "general.cancel" = "Hủy";
 "general.done" = "Xong";
@@ -153,8 +151,6 @@
 "preference.title" = "Cài đặt";
 "preference.general" = "Tổng quan";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Phụ đề";
 "preference.network" = "Mạng";
 "preference.control" = "Điều khiển";
 "preference.keybindings" = "Các tổ hợp phím";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Bổ sung";
 "preference.utilities" = "Tiện ích";
 "preference.scripts" = "Tập lệnh";
-"preference.not_logged_in" = "Chưa đăng nhập";
-"preference.logged_in_as" = "Đăng nhập với vai trò %@";
-"preference.system_media_control" = "Dùng phím điều khiển media của hệ thống";
-
-"preference.key_binding_hint_1" = "Để chỉnh sửa các ràng buộc phím trong tệp cấu hình hiện tại, trước tiên hãy nhấp vào nút \"Sao chép...\" để tạo bản sao.";
-"preference.key_binding_hint_2" = "Nhấp đúp chuột vào một hàng ở bên phải để chỉnh sửa ràng buộc phím tương ứng.";
-
-"preference.enable_adv_settings" = "Bật cài đặt nâng cao";
-
-"preference.sub_override_level.no" = "không";
-"preference.sub_override_level.force" = "bắt buộc";
-"preference.sub_override_level.scale" = "thu phóng";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Hiển thị phụ đề theo đúng kịch bản phụ đề, không ghi đè.";
-"preference.sub_override_level.descriptive_text.force" = "Áp dụng tất cả kiểu phụ đề";
-"preference.sub_override_level.descriptive_text.scale" = "Áp dụng thiết lập tỷ lệ cùng với các thiết lập kiểu đã chọn trong phần này.";
-"preference.sub_override_level.descriptive_text.strip" = "Loại bỏ hoàn toàn tất cả thẻ và kiểu ASS khỏi phụ đề.";
-"preference.sub_override_level.descriptive_text.yes" = "Áp dụng tất cả thiết lập kiểu trong phần này.";
-
-"preference.ytdl_plugin_not_installed" = "Cài đặt plugin Online Media từ ‘Plugins > Install from GitHub’ để sử dụng các tính năng nâng cao như tải video và tự động cập nhật yt-dlp.";
-"preference.ytdl_plugin_installed" = "Hỗ trợ youtube-dl tích hợp sẵn đã bị vô hiệu hóa vì bạn đã cài đặt plugin Online Media.";
 
 "menu.volume" = "Âm lượng: %@";
 "menu.volume_muted" = "Âm lượng: %@ (Đã tắt tiếng)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Kiểm tra cập nhật";
 "plugin.updating" = "Downloading update…";
 
 // Log window

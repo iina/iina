@@ -9,8 +9,6 @@
 
 "general.on" = "Ein";
 "general.off" = "Aus";
-"general.login" = "Anmelden";
-"general.logout" = "Abmelden";
 "general.ok" = "OK";
 "general.cancel" = "Abbrechen";
 "general.done" = "Bestätigen";
@@ -153,8 +151,6 @@
 "preference.title" = "Einstellungen";
 "preference.general" = "Allgemein";
 "preference.ui" = "Oberfläche";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Untertitel";
 "preference.network" = "Netzwerk";
 "preference.control" = "Steuerung";
 "preference.keybindings" = "Kurzbefehle";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Erweiterungen";
 "preference.utilities" = "Werkzeuge";
 "preference.scripts" = "Skripte";
-"preference.not_logged_in" = "Nicht angemeldet";
-"preference.logged_in_as" = "Angemeldet als „%@“";
-"preference.system_media_control" = "Nutze Medienkontrolltasten des Systems";
-
-"preference.key_binding_hint_1" = "Um Kurzbefehle der ausgewählten Konfiguration zu bearbeiten, klicke vorher auf „Duplizieren …“, um eine Kopie zu erstellen.";
-"preference.key_binding_hint_2" = "Klicke doppelt auf eine Reihe, um den entsprechenden Kurzbefehl zu bearbeiten.";
-
-"preference.enable_adv_settings" = "Erweiterte Einstellungen";
-
-"preference.sub_override_level.no" = "Nein";
-"preference.sub_override_level.force" = "Erzwingen";
-"preference.sub_override_level.scale" = "skalieren";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "ja";
-
-"preference.sub_override_level.descriptive_text.no" = "Untertitel anzeigen, wie von den Untertitelskripten angegeben, ohne Überschreibungen.";
-"preference.sub_override_level.descriptive_text.force" = "Alle Untertitelstile anwenden.";
-"preference.sub_override_level.descriptive_text.scale" = "Die Skalierungseinstellung zusätzlich zu den Stileinstellungen in diesem Abschnitt anwenden.";
-"preference.sub_override_level.descriptive_text.strip" = "Alle ASS-Tags und Stile aus dem Untertitel komplett entfernen.";
-"preference.sub_override_level.descriptive_text.yes" = "Alle Stil-Einstellungen in diesem Abschnitt anwenden.";
-
-"preference.ytdl_plugin_not_installed" = "Installieren Sie das Online-Medien-Plugin über „Plugins > Von GitHub installieren“, um erweiterte Funktionen wie Video-Downloads und automatische yt-dlp-Updates zu nutzen.";
-"preference.ytdl_plugin_installed" = "Die integrierte youtube-dl-Unterstützung ist deaktiviert, da das Online-Medien-Plugin installiert ist.";
 
 "menu.volume" = "Lautstärke: %@";
 "menu.volume_muted" = "Lautstärke: %@ (Stumm)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Diese Erweiterung kann Dateien, einschließlich sensibler Informationen lesen oder schreiben. Es kann auch andere Programme oder Anwendungen aufrufen, die deinem Computer schaden können. Überprüfe daher unbedingt die Quelle.";
 
 "plugin.install" = "Installieren";
-"plugin.installed" = "Installiert";
-"plugin.not_installed" = "Nicht installiert";
 "plugin.local" = "Lokal installiert";
 "alert.plugin.install_error" = "Während der Installation ist ein Fehler aufgetreten: „%@“";
 "alert.invalid_url" = "Die Adresse ist ungültig.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Die Erweiterung konnte nicht heruntergeladen werden.\n\nAusgabe: %@\n";
 "plugin.install_error.cannot_unpackage" = "Die Erweiterung konnte nicht entpackt werden.\n\nAusgabe: %@\n";
 "plugin.install_error.cannot_load" = "IINA kann diese Erweiterung nicht laden. Es könnte im falschen Format sein.";
-"plugin.check_for_updates" = "Nach Updates suchen";
 "plugin.updating" = "Update herunterladen …";
 
 // Log window

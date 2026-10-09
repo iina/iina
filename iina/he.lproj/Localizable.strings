@@ -9,8 +9,6 @@
 
 "general.on" = "מופעל";
 "general.off" = "כבוי";
-"general.login" = "התחברות";
-"general.logout" = "התנתקות";
 "general.ok" = "אישור";
 "general.cancel" = "ביטול";
 "general.done" = "סיום";
@@ -153,8 +151,6 @@
 "preference.title" = "העדפות";
 "preference.general" = "כללי";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "כתוביות";
 "preference.network" = "רשת";
 "preference.control" = "שליטה";
 "preference.keybindings" = "קיצורי מקשים";
@@ -162,29 +158,6 @@
 "preference.plugins" = "תוספים";
 "preference.utilities" = "עזרים";
 "preference.scripts" = "סקריפטים";
-"preference.not_logged_in" = "לא מחובר";
-"preference.logged_in_as" = "מחובר בתור %@";
-"preference.system_media_control" = "השתמש בבקרת המדיה של המערכת";
-
-"preference.key_binding_hint_1" = "כדי לערוך קיצור מקשים בקובץ התצורה הנוכחי, לחץ תחילה על כפתור \"שכפול…\" כדי ליצור עותק.";
-"preference.key_binding_hint_2" = "לחץ פעמיים בצד ימין של שורה כדי לערוך את קיצור המקשים.";
-
-"preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
-
-"preference.sub_override_level.no" = "לא";
-"preference.sub_override_level.force" = "כפויה";
-"preference.sub_override_level.scale" = "קנה מידה";
-"preference.sub_override_level.strip" = "הסרת הכל";
-"preference.sub_override_level.yes" = "מאופשרת";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "החל את כל סגנונות הכתוביות.";
-"preference.sub_override_level.descriptive_text.scale" = "החל את הגדרת קנה המידה בנוסף להגדרות העיצוב בסעיף זה.";
-"preference.sub_override_level.descriptive_text.strip" = "הסר לחלוטין את כל תגי ה-ASS והעיצובים מהכתוביות.";
-"preference.sub_override_level.descriptive_text.yes" = "החל את כל הגדרות העיצוב בסעיף זה.";
-
-"preference.ytdl_plugin_not_installed" = "התקן את תוסף מדיה מקוונת מתוך \"תוספים > התקן מ-GitHub\" כדי ליהנות מיכולות מתקדמות כמו הורדת וידאו ועדכוני yt-dlp אוטומטיים.";
-"preference.ytdl_plugin_installed" = "התמיכה המובנית ב-youtube-dl מושבתת מאחר שהתקנת את תוסף המדיה המקוונת.";
 
 "menu.volume" = "עוצמת שמע: %@";
 "menu.volume_muted" = "עוצמת שמע: %@ (מושתק)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "תוסף זה יכול לקרוא או לכתוב קבצים בדיסק שלך, שעשויים לכלול מידע רגיש. הוא יכול גם להפעיל תוכניות או יישומים אחרים שיכולים להזיק למחשב שלך, אז הקפד לאמת את המקור.";
 
 "plugin.install" = "התקנה";
-"plugin.installed" = "מותקן";
-"plugin.not_installed" = "לא מותקן";
 "plugin.local" = "מותקן מקומית";
 "alert.plugin.install_error" = "אירעה שגיאה במהלך ההתקנה: %@";
 "alert.invalid_url" = "הכתובת לא תקינה.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "שגיאה בהורדת התוסף.\n\nפלט: %@\n";
 "plugin.install_error.cannot_unpackage" = "שגיאה בחילוץ התוסף.\n\nפלט: %@\n";
 "plugin.install_error.cannot_load" = "IINA לא יכול לטעון את התוסף הזה. ייתכן שהוא בפורמט שגוי.";
-"plugin.check_for_updates" = "חפש עדכונים";
 "plugin.updating" = "מוריד את העדכון…";
 
 // Log window

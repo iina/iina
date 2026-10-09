@@ -421,7 +421,7 @@ class Utility {
   static func getFilePath(Configs userConfigs: [String: Any]!, forConfig conf: String, showAlert: Bool = true) -> String? {
 
     // if is default config
-    if let dv = PrefKeyBindingViewController.defaultConfigs[conf] {
+    if let dv = SettingsPageKeyBindings.defaultConfigs[conf] {
       return dv
     } else if let uv = userConfigs[conf] as? String {
       return uv

@@ -9,8 +9,6 @@
 
 "general.on" = "تشغيل";
 "general.off" = "إيقاف";
-"general.login" = "تسجيل الدخول";
-"general.logout" = "تسجيل الخروج";
 "general.ok" = "حسناً";
 "general.cancel" = "إلغاء";
 "general.done" = "تم";
@@ -153,8 +151,6 @@
 "preference.title" = "التفضيلات";
 "preference.general" = "عام";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "الترجمة";
 "preference.network" = "الشبكة";
 "preference.control" = "التحكم";
 "preference.keybindings" = "ربط المفتاح";
@@ -162,29 +158,6 @@
 "preference.plugins" = "الإضافات";
 "preference.utilities" = "المرافق";
 "preference.scripts" = "البرامج النصية";
-"preference.not_logged_in" = "لم يتم تسجيل الدخول";
-"preference.logged_in_as" = "تم تسجيل الدخول كـ %@";
-"preference.system_media_control" = "استخدم تحكم الميديا الخاص بالنظام";
-
-"preference.key_binding_hint_1" = "لتحرير ارتباطات المفاتيح في ملف التكوين الحالي، انقر فوق زر \"تكرار…\" أولاً لإنشاء نسخة.";
-"preference.key_binding_hint_2" = "انقر نقرا مزدوجا على صف على الجانب الأيمن لتحرير ربط المفتاح المقابل.";
-
-"preference.enable_adv_settings" = "تمكين الإعدادات المتقدمة";
-
-"preference.sub_override_level.no" = "لا";
-"preference.sub_override_level.force" = "إجبار";
-"preference.sub_override_level.scale" = "مقياس";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "نعم";
-
-"preference.sub_override_level.descriptive_text.no" = "تقديم ترجمات كما هو محدد في نصوص الترجمة البرمجية، بدون تجاوزات.";
-"preference.sub_override_level.descriptive_text.force" = "تطبيق جميع أنماط الترجمة.";
-"preference.sub_override_level.descriptive_text.scale" = "تطبيق إعداد المقياس بالإضافة إلى إعدادات النمط في هذا القسم.";
-"preference.sub_override_level.descriptive_text.strip" = "قم بتجريد جميع العلامات والأنماط من الترجمة بشكل جذري.";
-"preference.sub_override_level.descriptive_text.yes" = "تطبيق جميع إعدادات النمط في هذا القسم.";
-
-"preference.ytdl_plugin_not_installed" = "قم بتثبيت ملحق الوسائط عبر الإنترنت من \"الإضافات > تثبيت من GitHub\" للاستمتاع بميزات متقدمة مثل تحميل الفيديو وتحديثات yt-dlp تلقائية.";
-"preference.ytdl_plugin_installed" = "تم تعطيل دعم youtube-dl المدمج نظرًا لتثبيت إضافة الوسائط عبر الإنترنت.";
 
 "menu.volume" = "الصوت: %@";
 "menu.volume_muted" = "الحجم: %@ (مكتمل)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "يمكن لهذه الإضافة قراءة أو كتابة الملفات على القرص الخاص بك، بما في ذلك المعلومات الحساسة. يمكنها أيضًا الاتصال بالبرامج أو التطبيقات الأخرى التي يمكن أن تضر بجهاز الكمبيوتر الخاص بك. لذا تأكد من التحقق من المصدر.";
 
 "plugin.install" = "تثبيت";
-"plugin.installed" = "مثبت";
-"plugin.not_installed" = "غير مثبتة";
 "plugin.local" = "مثبتة محليا";
 "alert.plugin.install_error" = "حدث خطأ أثناء التثبيت: %@";
 "alert.invalid_url" = "عنوان URL غير صالح.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "فشل تنزيل الإضافة.\n\nالصادر:%@\n";
 "plugin.install_error.cannot_unpackage" = "فشل في إلغاء حزمة الإضافة.\n\nالناتج:%@\n";
 "plugin.install_error.cannot_load" = "لا يمكن لـ IINA تحميل هذه الإضافة. قد يكون في شكل خاطئ.";
-"plugin.check_for_updates" = "التحقق من وجود تحديثات";
 "plugin.updating" = "ينزّل التّحديث...";
 
 // Log window

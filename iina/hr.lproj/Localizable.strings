@@ -9,8 +9,6 @@
 
 "general.on" = "Uključeno";
 "general.off" = "Isključeno";
-"general.login" = "Prijava";
-"general.logout" = "Odjava";
 "general.ok" = "U redu";
 "general.cancel" = "Odustani";
 "general.done" = "Gotovo";
@@ -153,8 +151,6 @@
 "preference.title" = "Postavke";
 "preference.general" = "Opće";
 "preference.ui" = "Sučelje";
-"preference.video_audio" = "Video i audio";
-"preference.subtitle" = "Titl";
 "preference.network" = "Mreža";
 "preference.control" = "Upravljanje";
 "preference.keybindings" = "Tipkovni prečaci";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Dodaci";
 "preference.utilities" = "Uslužni programi";
 "preference.scripts" = "Skripta";
-"preference.not_logged_in" = "Nisi prijavljen/prijavljena";
-"preference.logged_in_as" = "Prijavljen/Prijavljena si kao %@";
-"preference.system_media_control" = "Koristi sustavsko upravljanje medijima";
-
-"preference.key_binding_hint_1" = "Za uređivanje tipkovnih prečaca u trenutčnoj datoteci  konfiguracije, najprije klikni gumb „Dupliciraj …” za stvaranje kopije.";
-"preference.key_binding_hint_2" = "Za uređivanje odgovarajućeg tipkovnog prečaca klikni dvaput na desnoj strani retka.";
-
-"preference.enable_adv_settings" = "Aktiviraj napredne postavke";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "prisili";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "da";
-
-"preference.sub_override_level.descriptive_text.no" = "Prikaži titlove kako je određeno skriptama za titlove, bez nadjačavanja.";
-"preference.sub_override_level.descriptive_text.force" = "Primijeni sve stilove titlova.";
-"preference.sub_override_level.descriptive_text.scale" = "Uz postavke stila u ovom odjeljku primijeni i postavku skaliranja.";
-"preference.sub_override_level.descriptive_text.strip" = "Radikalno ukloni sve ASS oznake i stilove iz titlova.";
-"preference.sub_override_level.descriptive_text.yes" = "Primijeni sve postavke stila u ovom odjeljku.";
-
-"preference.ytdl_plugin_not_installed" = "Instaliraj dodatak Online Media u „Dodaci > Instaliraj s GitHuba” i uživaj u naprednim funkcijama kao što su preuzimanje videa i automatska aktualiziranja za yt-dlp.";
-"preference.ytdl_plugin_installed" = "Ugrađena podrška za youtube-dl je isključena budući da si instalirao/la Online Media dodatak.";
 
 "menu.volume" = "Glasnoća: %@";
 "menu.volume_muted" = "Glasnoća: %@ (Isključen zvuk)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Ovaj dodatak omogućuje čitanje ili pisanje datoteke na tvoj disk, uključujući osjetljive podatke. Također može pozvati druge programe ili aplikacije koje mogu oštetiti tvoje računalo. Stoga svakako provjeri izvor.";
 
 "plugin.install" = "Instaliraj";
-"plugin.installed" = "Instalirano";
-"plugin.not_installed" = "Nije Instalirano";
 "plugin.local" = "Instalirano lokalno";
 "alert.plugin.install_error" = "Došlo je do greške tijekom instalacije: %@";
 "alert.invalid_url" = "URL je neispravan.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Neuspjelo preuzimanje dodatka.\n\nRezultat:%@\n";
 "plugin.install_error.cannot_unpackage" = "Neuspjelo raspakiranje dodatka.\n\nRezultat:%@\n";
 "plugin.install_error.cannot_load" = "IINA ne može učitati ovaj dodatak. Možda je u pogrešnom formatu.";
-"plugin.check_for_updates" = "Traži nove verzije ";
 "plugin.updating" = "Preuzimanje nove verzije …";
 
 // Log window

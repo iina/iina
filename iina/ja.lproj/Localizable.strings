@@ -9,8 +9,6 @@
 
 "general.on" = "オン";
 "general.off" = "オフ";
-"general.login" = "ログイン";
-"general.logout" = "ログアウト";
 "general.ok" = "OK";
 "general.cancel" = "キャンセル";
 "general.done" = "完了";
@@ -153,8 +151,6 @@
 "preference.title" = "設定";
 "preference.general" = "一般";
 "preference.ui" = "インターフェイス";
-"preference.video_audio" = "ビデオとオーディオ";
-"preference.subtitle" = "字幕";
 "preference.network" = "ネットワーク";
 "preference.control" = "コントロール";
 "preference.keybindings" = "キーバインド";
@@ -162,29 +158,6 @@
 "preference.plugins" = "プラグイン";
 "preference.utilities" = "ユーティリティ";
 "preference.scripts" = "スクリプト";
-"preference.not_logged_in" = "ログインしていません";
-"preference.logged_in_as" = "%@としてログインしています";
-"preference.system_media_control" = "システムのメディアコントロールを使用";
-
-"preference.key_binding_hint_1" = "現在の構成ファイル内のキーバインドを編集するには、まず \"複製…\" ボタンをクリックしてコピーを作成してください。";
-"preference.key_binding_hint_2" = "右側の行をダブルクリックして、対応するキーバインドを編集します。";
-
-"preference.enable_adv_settings" = "詳細設定を有効にする";
-
-"preference.sub_override_level.no" = "いいえ";
-"preference.sub_override_level.force" = "強制";
-"preference.sub_override_level.scale" = "サイズ";
-"preference.sub_override_level.strip" = "ストリップ";
-"preference.sub_override_level.yes" = "はい";
-
-"preference.sub_override_level.descriptive_text.no" = "オーバーライドせずに、字幕スクリプトの指定どおりに字幕をレンダリングします。";
-"preference.sub_override_level.descriptive_text.force" = "すべての字幕スタイルを適用します。";
-"preference.sub_override_level.descriptive_text.scale" = "このセクションのスタイル設定に加えて、サイズ設定を適用します。";
-"preference.sub_override_level.descriptive_text.strip" = "すべてのASSタグとスタイルを字幕から完全に取り除きます。";
-"preference.sub_override_level.descriptive_text.yes" = "このセクションのすべてのスタイル設定を適用します。";
-
-"preference.ytdl_plugin_not_installed" = "\"プラグイン > GitHubからインストール\" からOnline Mediaプラグインをインストールすることで、ビデオのダウンロードや、yt-dlpの自動アップデートなどの詳細機能が利用できるようになります。";
-"preference.ytdl_plugin_installed" = "Online Mediaプラグインがインストールされているため、内蔵のyoutube-dlの利用は無効になっています。";
 
 "menu.volume" = "音量: %@";
 "menu.volume_muted" = "音量: %@（ミュート中）";
@@ -484,8 +457,6 @@
 "permissions.file-system.desc" = "このプラグインは、ストレージ上のファイルを読み書きできますが、その中には機密情報が含まれている可能性があります。コンピュータに損害を与える可能性がある、ほかのプログラムやアプリケーションを実行することもできます。必ずソースを確認してください。";
 
 "plugin.install" = "インストール";
-"plugin.installed" = "インストール済み";
-"plugin.not_installed" = "インストールされていません";
 "plugin.local" = "ローカルにインストール済み";
 "alert.plugin.install_error" = "インストール中にエラーが起きました: %@";
 "alert.invalid_url" = "URLが無効です。";
@@ -494,7 +465,6 @@
 "plugin.install_error.cannot_download" = "プラグインをダウンロードできませんでした。\n\n出力:%@\n";
 "plugin.install_error.cannot_unpackage" = "プラグインパッケージを展開できませんでした。\n\n出力:%@\n";
 "plugin.install_error.cannot_load" = "IINAはこのプラグインを読み込めません。フォーマットが正しくない可能性があります。";
-"plugin.check_for_updates" = "アップデートを確認";
 "plugin.updating" = "アップデートをダウンロード中…";
 
 // Log window

@@ -9,8 +9,6 @@
 
 "general.on" = "روشن";
 "general.off" = "خاموش";
-"general.login" = "ورود";
-"general.logout" = "خروج";
 "general.ok" = "باشه";
 "general.cancel" = "لغو";
 "general.done" = "انجام شد";
@@ -153,8 +151,6 @@
 "preference.title" = "تنظیمات";
 "preference.general" = "عمومی";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "زیرنویس";
 "preference.network" = "شبکه";
 "preference.control" = "مدیریت";
 "preference.keybindings" = "ترکیب‌های کلیدها";
@@ -162,29 +158,6 @@
 "preference.plugins" = "افزونه‌ها";
 "preference.utilities" = "ابزارها";
 "preference.scripts" = "اسکریپت‌ها";
-"preference.not_logged_in" = "وارد نشده اید";
-"preference.logged_in_as" = "ورود به عنوان %@";
-"preference.system_media_control" = "از کنترل‌های چندرسانه‌ای سیستم استفاده شود";
-
-"preference.key_binding_hint_1" = "برای ویرایش کلیدهای دوگانه در نمایه‌ی فعلی، دکمه‌ی «تکثیر...» را بزنید تا اول یک کپی بسازید.";
-"preference.key_binding_hint_2" = "";
-
-"preference.enable_adv_settings" = "فعال‌سازی تنظیمات پیشرفته";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "بله";
-
-"preference.sub_override_level.descriptive_text.no" = "نمایش زیرنویس مطابق با ساختار تعریف‌شده‌ی خودِ زیرنویس، بدون اعمال تغییر.";
-"preference.sub_override_level.descriptive_text.force" = "اعمال همه‌ی سبک‌های زیرنویس.";
-"preference.sub_override_level.descriptive_text.scale" = "اعمال تنظیمات‌مقیاس، علاوه بر تنظیمات سَبک در این بخش.";
-"preference.sub_override_level.descriptive_text.strip" = "حذف بنیادی تمام تگ‌های ASS و سَبک‌ها، از زیرنویس.";
-"preference.sub_override_level.descriptive_text.yes" = "اعمال همه‌ی تنظیمات سَبک در این بخش.";
-
-"preference.ytdl_plugin_not_installed" = "";
-"preference.ytdl_plugin_installed" = "چون افزونه‌ی Online media را نصب کرده‌اید، پشتیبانی از youtube-dl داخلی غیرفعال است.";
 
 "menu.volume" = "بلندی صدا: %@";
 "menu.volume_muted" = "صدا: %@ (بی صدا)";
@@ -485,8 +458,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "نصب";
-"plugin.installed" = "نصب شده";
-"plugin.not_installed" = "نصب نشده";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -495,7 +466,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
 
 // Log window

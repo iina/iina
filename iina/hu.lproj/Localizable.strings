@@ -9,8 +9,6 @@
 
 "general.on" = "Be";
 "general.off" = "Ki";
-"general.login" = "Bejelentkezés";
-"general.logout" = "Kijelentkezés";
 "general.ok" = "OK";
 "general.cancel" = "Mégse";
 "general.done" = "Kész";
@@ -153,8 +151,6 @@
 "preference.title" = "Beállítások";
 "preference.general" = "Általános";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Felirat";
 "preference.network" = "Hálózat";
 "preference.control" = "Vezérlés";
 "preference.keybindings" = "Gyorsgombok";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Pluginok";
 "preference.utilities" = "Eszközök";
 "preference.scripts" = "Szkriptek";
-"preference.not_logged_in" = "Nem vagy bejelentkezve";
-"preference.logged_in_as" = "Bejelentkezve, mint %@";
-"preference.system_media_control" = "Rendszer média vezérlők használata";
-
-"preference.key_binding_hint_1" = "A billentyűkiosztás módosításához a jelenlegi fájlban, először nyomja meg a \"Duplikáció...\" gombot egy másolat létrehozásához.";
-"preference.key_binding_hint_2" = "Kattintson duplán egy sorra a jobb oldalon a megfelelő billentyű kiosztás szerkesztéséhez.";
-
-"preference.enable_adv_settings" = "Haladó beállítások engedélyezése";
-
-"preference.sub_override_level.no" = "nem";
-"preference.sub_override_level.force" = "kényszerített";
-"preference.sub_override_level.scale" = "méretezés";
-"preference.sub_override_level.strip" = "csík";
-"preference.sub_override_level.yes" = "igen";
-
-"preference.sub_override_level.descriptive_text.no" = "A feliratokat a feliratozási szkriptek által megadott módon, felülírások nélkül adja vissza.";
-"preference.sub_override_level.descriptive_text.force" = "Minden feliratstílus alkalmazása.";
-"preference.sub_override_level.descriptive_text.scale" = "Az ebben a szakaszban található stílusbeállítások mellett alkalmazza a méretezés beállítását is.";
-"preference.sub_override_level.descriptive_text.strip" = "Alaposan távolítson el minden ASS taget és stílust a feliratból.";
-"preference.sub_override_level.descriptive_text.yes" = "Alkalmazza az összes stílusbeállítást ebben a szakaszban.";
-
-"preference.ytdl_plugin_not_installed" = "Telepítse az Online Media bővítményt a \"Bővítmények > Telepítés a GitHub-ról\" menüpont segítségével, hogy élvezhesse a fejlett képességeket, mint a videó letöltése és az automatikus yt-dlp frissítések.";
-"preference.ytdl_plugin_installed" = "A beépített youtube-dl támogatás nincs engedélyezve, mert az Online Media bővítmény telepítve van.";
 
 "menu.volume" = "Hangerő: %@";
 "menu.volume_muted" = "Hangerő: %@ (Némítva)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Ez a bővítmény képes olvasni vagy írni a lemezen lévő fájlokat, beleértve az érzékeny információkat is. Más programokat vagy alkalmazásokat is meghívhat, amelyek kárt tehetnek a számítógépében. Ezért mindenképpen ellenőrizze a forrást.";
 
 "plugin.install" = "Telepítés";
-"plugin.installed" = "Telepítve";
-"plugin.not_installed" = "Nincs telepítve";
 "plugin.local" = "Helyben telepítve";
 "alert.plugin.install_error" = "Hiba lépett fel a telepítés során: %@";
 "alert.invalid_url" = "Érvénytelen link.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Nem sikerült letölteni a plugint.\n\nKimenet:%@\n";
 "plugin.install_error.cannot_unpackage" = "Nem sikerült kicsomagolni a plugint.\n\nKimenet:%@\n";
 "plugin.install_error.cannot_load" = "Az IINA nem tudja betölteni ezt a bővítményt. Lehet, hogy rossz formátumban van.";
-"plugin.check_for_updates" = "Frissítések keresése";
 "plugin.updating" = "Frissítés letöltése…";
 
 // Log window

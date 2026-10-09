@@ -9,8 +9,6 @@
 
 "general.on" = "Aan";
 "general.off" = "Uit";
-"general.login" = "Log in";
-"general.logout" = "Log uit";
 "general.ok" = "Oke";
 "general.cancel" = "Annuleer";
 "general.done" = "Gereed";
@@ -153,8 +151,6 @@
 "preference.title" = "Voorkeuren";
 "preference.general" = "Algemeen";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Ondertiteling";
 "preference.network" = "Netwerk";
 "preference.control" = "Bediening";
 "preference.keybindings" = "Sneltoetsen";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "Hulpmiddelen";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Niet ingelogd";
-"preference.logged_in_as" = "Ingelogd als %@";
-"preference.system_media_control" = "Gebruik mediabediening van het systeem";
-
-"preference.key_binding_hint_1" = "Kies \"Dupliceer…\" om een bewerkbare kopie te maken van de geselecteerde sneltoetsenconfiguratie.";
-"preference.key_binding_hint_2" = "Dubbelklik op een rij om de bijbehorende sneltoets te bewerken.";
-
-"preference.enable_adv_settings" = "Geavanceerde instellingen inschakelen";
-
-"preference.sub_override_level.no" = "nee";
-"preference.sub_override_level.force" = "forceer";
-"preference.sub_override_level.scale" = "schaal";
-"preference.sub_override_level.strip" = "volledig";
-"preference.sub_override_level.yes" = "ja";
-
-"preference.sub_override_level.descriptive_text.no" = "Ondertiteling weergeven zoals gespecificeerd door de ondertitelingsscripts, zonder overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Alle ondertitelstijlen toepassen.";
-"preference.sub_override_level.descriptive_text.scale" = "Schaalinstelling toepassen naast de stijlinstellingen in deze sectie.";
-"preference.sub_override_level.descriptive_text.strip" = "Agressief alle ASS-tags en stijlen van de ondertiteling verwijderen";
-"preference.sub_override_level.descriptive_text.yes" = "Alle stijlinstellingen in deze sectie toepassen.";
-
-"preference.ytdl_plugin_not_installed" = "Installeer de Online Media plug-in van \"Plug-ins > Installeren vanaf GitHub\" om gebruik te maken van geavanceerde functies zoals video downloaden en automatisch yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "De ingebouwde ondersteuning voor youtube-dl is uitgeschakeld omdat de Online Media plug-in is geïnstalleerd.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ gedempt)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Deze plug-in kan bestanden op uw harde schijf lezen of schrijven die gevoelige informatie kunnen bevatten. Het kan ook andere programma's of toepassingen uitvoeren die schadelijk kunnen zijn voor uw computer. Controleer dus de bron.";
 
 "plugin.install" = "Installeren";
-"plugin.installed" = "Geïnstalleerd";
-"plugin.not_installed" = "Niet geïnstalleerd";
 "plugin.local" = "Lokaal geïnstalleerd";
 "alert.plugin.install_error" = "Fout opgetreden tijdens de installatie: %@";
 "alert.invalid_url" = "De URL is ongeldig.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Fout bij het downloaden van de plug-in.\n\nUitvoer:%@\n";
 "plugin.install_error.cannot_unpackage" = "Fout bij het uitpakken van de plug-in.\n\nuitvoer:%@\n";
 "plugin.install_error.cannot_load" = "IINA kan deze plug-in niet laden. Deze kan in het verkeerde formaat geleverd zijn.";
-"plugin.check_for_updates" = "Zoek naar updates";
 "plugin.updating" = "Update downloaden…";
 
 // Log window

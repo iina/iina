@@ -9,8 +9,6 @@
 
 "general.on" = "Вкл";
 "general.off" = "Выкл";
-"general.login" = "Войти";
-"general.logout" = "Выйти";
 "general.ok" = "ОК";
 "general.cancel" = "Отмена";
 "general.done" = "Готово";
@@ -153,8 +151,6 @@
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
 "preference.ui" = "Интерфейс";
-"preference.video_audio" = "Видео и аудио";
-"preference.subtitle" = "Субтитры";
 "preference.network" = "Сеть";
 "preference.control" = "Управление";
 "preference.keybindings" = "Клавиши";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Плагины";
 "preference.utilities" = "Утилиты";
 "preference.scripts" = "Скрипты";
-"preference.not_logged_in" = "Вход не выполнен";
-"preference.logged_in_as" = "Выполнен вход как %@";
-"preference.system_media_control" = "Использовать системное управление медиа";
-
-"preference.key_binding_hint_1" = "Чтобы изменить привязки клавиш в текущем файле конфигурации, сначала нажмите кнопку «Дублировать…», чтобы создать копию.";
-"preference.key_binding_hint_2" = "Дважды щелкните строку справа, чтобы отредактировать соответствующую привязку клавиш.";
-
-"preference.enable_adv_settings" = "Включить расширенные настройки";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Показывать субтитры ASS без переопределения пользователем.";
-"preference.sub_override_level.descriptive_text.force" = "Переопределять оформление стилями, заданными ниже, и принудительно применять другие настройки для субтитров.";
-"preference.sub_override_level.descriptive_text.scale" = "Переопределять оформление стилями, заданными ниже, и применять масштабирование шрифта.";
-"preference.sub_override_level.descriptive_text.strip" = "Игнорировать все стили и теги в субтитрах ASS.";
-"preference.sub_override_level.descriptive_text.yes" = "Переопределять оформление стилями, заданными ниже.";
-
-"preference.ytdl_plugin_not_installed" = "Установите плагин Online Media из меню «Плагины > Установить с GitHub», чтобы получить дополнительные возможности, такие как загрузка видео и автоматическое обновление yt-dlp.";
-"preference.ytdl_plugin_installed" = "Встроенная поддержка youtube-dl отключена, так как у вас установлен плагин Online Media.";
 
 "menu.volume" = "Громкость: %@";
 "menu.volume_muted" = "Громкость: %@ (без звука)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Этот плагин может получать доступ ко всем файлам на диске, включая конфиденциальную информацию. Он также может запускать другие программы, которые в теории могут навредить компьютеру. Пожалуйста, проверьте исходный код плагина.";
 
 "plugin.install" = "Установить";
-"plugin.installed" = "Установлено";
-"plugin.not_installed" = "Не установлено";
 "plugin.local" = "Установлено локально";
 "alert.plugin.install_error" = "Произошла ошибка при установке: %@";
 "alert.invalid_url" = "Недопустимый адрес.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Не удалось загрузить плагин.\n\nВывод установщика:%@\n";
 "plugin.install_error.cannot_unpackage" = "Не удалось распаковать плагин.\n\nВывод установщика:%@\n";
 "plugin.install_error.cannot_load" = "IINA не может загрузить этот плагин. Возможно, у него неверный формат.";
-"plugin.check_for_updates" = "Проверить обновления";
 "plugin.updating" = "Загружаю обновление…";
 
 // Log window

@@ -9,8 +9,6 @@
 
 "general.on" = "Nyala";
 "general.off" = "Mati";
-"general.login" = "Masuk";
-"general.logout" = "Keluar";
 "general.ok" = "OK";
 "general.cancel" = "Batal";
 "general.done" = "Selesai";
@@ -153,8 +151,6 @@
 "preference.title" = "Preferensi";
 "preference.general" = "Umum";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Terjemahan";
 "preference.network" = "Jaringan";
 "preference.control" = "Kontrol";
 "preference.keybindings" = "Pemetaan Tombol";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Plugin";
 "preference.utilities" = "Alat";
 "preference.scripts" = "Skrip";
-"preference.not_logged_in" = "Belum masuk";
-"preference.logged_in_as" = "Masuk sebagai %@";
-"preference.system_media_control" = "Gunakan sistem kontrol media";
-
-"preference.key_binding_hint_1" = "Untuk mengubah pemetaan tombol dari konfigurasi saat ini, klik tombol \"Duplikat…\" terlebih dahulu untuk membuat salinan.";
-"preference.key_binding_hint_2" = "Klik dua kali baris di sisi kanan untuk mengedit pemetaan tombol yang sesuai.";
-
-"preference.enable_adv_settings" = "Aktifkan pengaturan lanjutan";
-
-"preference.sub_override_level.no" = "tidak";
-"preference.sub_override_level.force" = "paksa";
-"preference.sub_override_level.scale" = "skala";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "ya";
-
-"preference.sub_override_level.descriptive_text.no" = "Tampilkan takarir sesuai skrip takarir, tanpa penimpaan.";
-"preference.sub_override_level.descriptive_text.force" = "Terapkan semua gaya tampilan takarir.";
-"preference.sub_override_level.descriptive_text.scale" = "Terapkan pengaturan skala serta pengaturan gaya di bagian ini.";
-"preference.sub_override_level.descriptive_text.strip" = "Hapus paksa tag dan gaya tampilan ASS dari takarir.";
-"preference.sub_override_level.descriptive_text.yes" = "Terapkan semua pengaturan gaya di bagian ini.";
-
-"preference.ytdl_plugin_not_installed" = "Pasang plugin Media Online dari \"Plugin > Instal dari GitHub\" untuk menikmati fitur-fitur canggih seperti mengunduh video dan pembaruan yt-dlp otomatis.";
-"preference.ytdl_plugin_installed" = "Dukungan youtube-dl bawaan dinonaktifkan karena plugin media Online terpasang.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Dimatikan)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Plugin ini dapat melakukan baca-tulis file pada disk Anda, termasuk informasi sensitif. Plugin ini juga dapat mengaktifkan program atau aplikasi lain yang dapat membahayakan komputer Anda. Mohon pastikan kembali keamanan sumbernya.";
 
 "plugin.install" = "Pasang";
-"plugin.installed" = "Terpasang";
-"plugin.not_installed" = "Tidak Terpasang";
 "plugin.local" = "Terpasang secara lokal";
 "alert.plugin.install_error" = "Terjadi kesalahan saat proses instalasi: %@";
 "alert.invalid_url" = "URL tidak valid.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Gagal mengunduh plugin.\n\nHasil:%@\n";
 "plugin.install_error.cannot_unpackage" = "Gagal membongkar plugin.\n\nHasil:%@\n";
 "plugin.install_error.cannot_load" = "IINA tidak dapat memproses plugin ini. Kemungkinan terdapat kesalahan format.";
-"plugin.check_for_updates" = "Periksa Pembaruan";
 "plugin.updating" = "Mengunduh pembaruan…";
 
 // Log window

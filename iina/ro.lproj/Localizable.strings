@@ -9,8 +9,6 @@
 
 "general.on" = "Pornit";
 "general.off" = "Oprit";
-"general.login" = "Logare";
-"general.logout" = "Ieșire";
 "general.ok" = "OK";
 "general.cancel" = "Anulează";
 "general.done" = "Gata";
@@ -153,8 +151,6 @@
 "preference.title" = "Preferințe";
 "preference.general" = "General";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Subtitrare";
 "preference.network" = "Rețea";
 "preference.control" = "Control";
 "preference.keybindings" = "Atribuiri de taste";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Extensii";
 "preference.utilities" = "Utilități";
 "preference.scripts" = "Scripturi";
-"preference.not_logged_in" = "Nu te-ai logat";
-"preference.logged_in_as" = "Logat ca %@";
-"preference.system_media_control" = "Utilizează controlul media al sistemului";
-
-"preference.key_binding_hint_1" = "Pentru a edita o atribuire de taste in configurația curentă, click pe butonul „Duplicare…” pentru a crea o copie.";
-"preference.key_binding_hint_2" = "Dublu click pe un rând din dreapta pentru a edita tasta atribuită.";
-
-"preference.enable_adv_settings" = "Activează setările avansate";
-
-"preference.sub_override_level.no" = "nu";
-"preference.sub_override_level.force" = "putere";
-"preference.sub_override_level.scale" = "mărime";
-"preference.sub_override_level.strip" = "de tot";
-"preference.sub_override_level.yes" = "da";
-
-"preference.sub_override_level.descriptive_text.no" = "Redă subtitrările precum sunt specificate de script-ul pentru subtitrări, fără a lua în seamă alte preferințe.";
-"preference.sub_override_level.descriptive_text.force" = "Aplică toate stilurile pentru subtitrări.";
-"preference.sub_override_level.descriptive_text.scale" = "Aplică setarea de mărime împreună cu setarea de stil din această secțiune.";
-"preference.sub_override_level.descriptive_text.strip" = "Elimină complet toate tag-urile și stilurile ASS din subtitrare.";
-"preference.sub_override_level.descriptive_text.yes" = "Aplică toate setările de stil din această secțiune.";
-
-"preference.ytdl_plugin_not_installed" = "Instalați extensia Online Media din \"Extensii > Instalați de pe GitHub\" pentru a vă bucura de caracteristici avansate precum descărcare video și actualizări automate yt-dlp.";
-"preference.ytdl_plugin_installed" = "Suportul youtube-dl încorporat este dezactivat deoarece aveți extensia Online Media instalată.";
 
 "menu.volume" = "Volum: %@";
 "menu.volume_muted" = "Volum: %@ (Mut)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Această extensie poate citi sau scrie fișiere pe discul dvs., inclusiv informații sensibile. De asemenea, poate apela alte programe sau aplicații care vă pot afecta calculatorul. Deci asigurați-vă că ați verificat sursa.";
 
 "plugin.install" = "Instalare";
-"plugin.installed" = "Instalat";
-"plugin.not_installed" = "Nu este instalat";
 "plugin.local" = "Instalat local";
 "alert.plugin.install_error" = "A apărut o eroare în timpul instalării: %@";
 "alert.invalid_url" = "URL-ul nu este valid.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Descărcarea extensiei a eșuat.\n\nMotiv:%@\n";
 "plugin.install_error.cannot_unpackage" = "Dezarhivarea extensiei a eșuat.\n\nMotiv:%@\n";
 "plugin.install_error.cannot_load" = "IINA nu poate încărca aceasta extensie. Ar putea fi într-un format greşit.";
-"plugin.check_for_updates" = "Verifică dacă există actualizări";
 "plugin.updating" = "Se descarcă actualizarea…";
 
 // Log window

@@ -9,8 +9,6 @@
 
 "general.on" = "켜기";
 "general.off" = "끄기";
-"general.login" = "로그인";
-"general.logout" = "로그아웃";
 "general.ok" = "승인";
 "general.cancel" = "취소";
 "general.done" = "완료";
@@ -153,8 +151,6 @@
 "preference.title" = "환경설정";
 "preference.general" = "일반";
 "preference.ui" = "인터페이스";
-"preference.video_audio" = "비디오/오디오";
-"preference.subtitle" = "자막";
 "preference.network" = "네트워크";
 "preference.control" = "제어";
 "preference.keybindings" = "단축키";
@@ -162,29 +158,6 @@
 "preference.plugins" = "플러그인";
 "preference.utilities" = "유틸리티";
 "preference.scripts" = "스크립트";
-"preference.not_logged_in" = "로그인되지 않음";
-"preference.logged_in_as" = "%@(으)로 로그인됨";
-"preference.system_media_control" = "시스템 미디어 컨트롤 사용";
-
-"preference.key_binding_hint_1" = "현재 설정 파일의 단축키 설정을 편집하려면, 먼저 \"복제…\" 버튼을 눌러 복사본을 만든 후 변경하십시오.";
-"preference.key_binding_hint_2" = "해당 단축키를 편집하려면 오른쪽 단축키 내용을 더블클릭 하십시오.";
-
-"preference.enable_adv_settings" = "고급 설정 사용";
-
-"preference.sub_override_level.no" = "아니요";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "크기";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "자막 스크립트가 명시한 대로 자막 표시, 덮어쓰지 않음.";
-"preference.sub_override_level.descriptive_text.force" = "전체 자막 스타일 적용.";
-"preference.sub_override_level.descriptive_text.scale" = "이 섹션의 스타일 설정 및 크기 설정 적용.";
-"preference.sub_override_level.descriptive_text.strip" = "자막의 모든 ASS 태그와 스타일 완전히 제거.";
-"preference.sub_override_level.descriptive_text.yes" = "이 섹션의 모든 스타일 설정 적용.";
-
-"preference.ytdl_plugin_not_installed" = "\"플러그인 > GitHub에서 설치\"에서 온라인 미디어 플러그인을 설치하면 비디오 다운로드 및 자동 Yt-Dlp 업데이트와 같은 고급 기능을 사용할 수 있습니다.";
-"preference.ytdl_plugin_installed" = "온라인 미디어 플러그인이 설치되어 있어 내장된 youtube-dl 지원이 비활성화되어 있습니다.";
 
 "menu.volume" = "음량: %@";
 "menu.volume_muted" = "음량: %@ (음소거 됨)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "이 플러그인은 민감한 정보를 포함하여 디스크의 파일을 읽거나 쓸 수 있습니다. 또한 컴퓨터에 해를 끼칠 수 있는 다른 프로그램이나 애플리케이션을 호출할 수도 있습니다. 따라서 출처를 반드시 확인하세요.";
 
 "plugin.install" = "설치";
-"plugin.installed" = "설치됨";
-"plugin.not_installed" = "설치되지 않음";
 "plugin.local" = "로컬에 설치되었습니다";
 "alert.plugin.install_error" = "설치 중 오류발생: %@";
 "alert.invalid_url" = "URL이 유효하지 않습니다.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "플러그인 다운로드에 실패했습니다.\n\n출력: %@\n";
 "plugin.install_error.cannot_unpackage" = "플러그인 설치에 실패했습니다.\n\n출력: %@\n";
 "plugin.install_error.cannot_load" = "IINA가 이 플러그인을 로드할 수 없습니다. 플러그인이 잘못된 형식일 수 있습니다.";
-"plugin.check_for_updates" = "업데이트 확인";
 "plugin.updating" = "업데이트 다운로드 중...";
 
 // Log window

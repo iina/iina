@@ -9,8 +9,6 @@
 
 "general.on" = "Aan";
 "general.off" = "Af";
-"general.login" = "Teken aan";
-"general.logout" = "Teken af";
 "general.ok" = "Goed";
 "general.cancel" = "Kanselleer";
 "general.done" = "Gereed";
@@ -153,8 +151,6 @@
 "preference.title" = "Voorkeure";
 "preference.general" = "Algemeen";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Onderskrif";
 "preference.network" = "Netwerk";
 "preference.control" = "Beheer";
 "preference.keybindings" = "Sneltoetse";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Inproppe";
 "preference.utilities" = "Nutsmiddels";
 "preference.scripts" = "Skripte";
-"preference.not_logged_in" = "Nie aangeteken nie";
-"preference.logged_in_as" = "Aangeteken as %@";
-"preference.system_media_control" = "Gebruik stelsel se mediabeheer";
-
-"preference.key_binding_hint_1" = "Kies “Dupliceer…” om ’n bewerkbare kopie te maak van die gekose sneltoetskonfigurasie.";
-"preference.key_binding_hint_2" = "Dubbelklik op ’n ry om die bybehorende sneltoets te bewerk.";
-
-"preference.enable_adv_settings" = "Aktiveer gevorderde instellings";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "volledig";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Verbeeld onderskrifte soos gespesifiseer deur die onderskrifskrip, sonder oorskrywing.";
-"preference.sub_override_level.descriptive_text.force" = "Pas alle onderskrifstyle toe.";
-"preference.sub_override_level.descriptive_text.scale" = "Pas die skaalinstellings toe saam met die stelinstellings in hierdie instellings.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Pas al die stylinstellins in hierdie afdeling toe.";
-
-"preference.ytdl_plugin_not_installed" = "Installeer die Aanlyn Media-inprop vanuit “Inproppe > Installeer vanuit Github” vir gevorderde funksies soos video-aflaai en outomatiese yt-dlp-bywerkings.";
-"preference.ytdl_plugin_installed" = "Die ingeboude youtube-dl-ondersteuning is gedeaktiveer aangesien die Aanlen media-inprop geïnstalleer is.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (gedemp)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Hierdie inprop kan lêers insluitend sensitiewe inligting op u skyf lees of skryf. Dit kan ook ander programmatuur of toepassings oproep wat u rekenaar kan skaad. Maak seker dat u die bron verifieer.";
 
 "plugin.install" = "Installeer";
-"plugin.installed" = "Geïnstalleer";
-"plugin.not_installed" = "Nie geïnstalleer";
 "plugin.local" = "Lokaal geïnstalleer";
 "alert.plugin.install_error" = "Fout het voorgekom tydens die installasie: %@";
 "alert.invalid_url" = "Die URL is ongeldig.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Kon nie die inprop aflaai nie.\n\nAfvoer:%@\n";
 "plugin.install_error.cannot_unpackage" = "Kon nie die inprop uitpak nie.\n\nAfvoer:%@\n";
 "plugin.install_error.cannot_load" = "IINA kan nie hierdie inprop laai nie. Dit is dalk in die verkeerde formaat.";
-"plugin.check_for_updates" = "Soek na bywerkings";
 "plugin.updating" = "Bywerking word afgelaai…";
 
 // Log window

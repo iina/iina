@@ -9,8 +9,6 @@
 
 "general.on" = "Activé";
 "general.off" = "Désactivé";
-"general.login" = "Connexion";
-"general.logout" = "Déconnexion";
 "general.ok" = "OK";
 "general.cancel" = "Annuler";
 "general.done" = "OK";
@@ -153,8 +151,6 @@
 "preference.title" = "Préférences";
 "preference.general" = "Général";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Vidéo & audio";
-"preference.subtitle" = "Sous-titres";
 "preference.network" = "Réseau";
 "preference.control" = "Contrôles";
 "preference.keybindings" = "Raccourcis clavier";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Modules externes";
 "preference.utilities" = "Utilitaires";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Déconnecté";
-"preference.logged_in_as" = "Connecté en tant que %@";
-"preference.system_media_control" = "Utiliser les touches média système";
-
-"preference.key_binding_hint_1" = "Pour modifier les raccourcis clavier de cette configuration, cliquez sur le bouton \"Dupliquer… \" pour en créer une copie.";
-"preference.key_binding_hint_2" = "Double-cliquez sur une ligne pour modifier le raccourci clavier correspondant.";
-
-"preference.enable_adv_settings" = "Activer les paramètres avancés";
-
-"preference.sub_override_level.no" = "non";
-"preference.sub_override_level.force" = "forcer";
-"preference.sub_override_level.scale" = "échelle";
-"preference.sub_override_level.strip" = "retirer";
-"preference.sub_override_level.yes" = "oui";
-
-"preference.sub_override_level.descriptive_text.no" = "Afficher les sous-titres comme spécifié par les scripts de sous-titres, sans remplacement.";
-"preference.sub_override_level.descriptive_text.force" = "Appliquer tous les styles de sous-titres.";
-"preference.sub_override_level.descriptive_text.scale" = "Appliquer le réglage de l'échelle en plus des paramètres de style dans cette section.";
-"preference.sub_override_level.descriptive_text.strip" = "Supprimez radicalement toutes les balises et tous les styles ASS du sous-titre.";
-"preference.sub_override_level.descriptive_text.yes" = "Appliquer tous les paramètres de style dans cette section.";
-
-"preference.ytdl_plugin_not_installed" = "Installez le plugin Media en ligne à partir de \"Plugins > Installer à partir de GitHub\" pour profiter des fonctionnalités avancées telles que le téléchargement vidéo et les mises à jour automatiques de yt-dlp.";
-"preference.ytdl_plugin_installed" = "La prise en charge intégrée de youtube-dl est désactivée puisque vous avez installé le plugin Online media.";
 
 "menu.volume" = "Volume : %@";
 "menu.volume_muted" = "Volume : %@ (coupé)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Ce module externe peut lire ou écrire des fichiers sur votre disque, y compris des informations sensibles. Il peut également exécuter d'autres programmes ou applications susceptibles de nuire à votre ordinateur. Veillez donc à en vérifier la source.";
 
 "plugin.install" = "Installer";
-"plugin.installed" = "Installée";
-"plugin.not_installed" = "Non installée";
 "plugin.local" = "Installée localement";
 "alert.plugin.install_error" = "Une erreur est survenue lors de l'installation : %@";
 "alert.invalid_url" = "L'URL n'est pas valide.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Impossible de télécharger le module externe.\n\nRésultat : %@\n";
 "plugin.install_error.cannot_unpackage" = "Impossible de décompresser le module externe.\n\nRésultat : %@\n";
 "plugin.install_error.cannot_load" = "IINA ne parvient pas à charger ce module externe. Il est peut-être dans un mauvais format.";
-"plugin.check_for_updates" = "Rechercher des mises à jour";
 "plugin.updating" = "Téléchargement de la mise à jour…";
 
 // Log window

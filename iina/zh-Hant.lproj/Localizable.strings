@@ -9,8 +9,6 @@
 
 "general.on" = "開啟";
 "general.off" = "關閉";
-"general.login" = "登入";
-"general.logout" = "登出";
 "general.ok" = "確定";
 "general.cancel" = "取消";
 "general.done" = "完成";
@@ -153,8 +151,6 @@
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
 "preference.ui" = "介面";
-"preference.video_audio" = "視訊與音訊";
-"preference.subtitle" = "字幕";
 "preference.network" = "網路";
 "preference.control" = "控制";
 "preference.keybindings" = "快速鍵";
@@ -162,29 +158,6 @@
 "preference.plugins" = "外掛程式";
 "preference.utilities" = "實用工具";
 "preference.scripts" = "工序指令";
-"preference.not_logged_in" = "尚未登入";
-"preference.logged_in_as" = "以 %@ 登入";
-"preference.system_media_control" = "使用系統媒體控制";
-
-"preference.key_binding_hint_1" = "若要編輯此設定檔，請點選「複製⋯」功能鈕以建立新的複本。";
-"preference.key_binding_hint_2" = "在右邊的任意一行按兩下來編輯相應的快速鍵。";
-
-"preference.enable_adv_settings" = "啟用進階設定";
-
-"preference.sub_override_level.no" = "否";
-"preference.sub_override_level.force" = "強制執行";
-"preference.sub_override_level.scale" = "縮放";
-"preference.sub_override_level.strip" = "過濾";
-"preference.sub_override_level.yes" = "是";
-
-"preference.sub_override_level.descriptive_text.no" = "使用字幕檔的指定樣式，不做任何調整或修改。";
-"preference.sub_override_level.descriptive_text.force" = "強制覆蓋所有樣式設定，讓外觀以使用者設定的字幕樣式顯示。";
-"preference.sub_override_level.descriptive_text.scale" = "啟用樣式覆蓋之外，讓字幕依據播放視窗大小做自動縮放。";
-"preference.sub_override_level.descriptive_text.strip" = "忽略字幕檔的指定樣式，讓外觀以使用者設定的字幕樣式顯示。";
-"preference.sub_override_level.descriptive_text.yes" = "啟用樣式覆蓋，讓外觀以使用者設定的字幕樣式顯示。";
-
-"preference.ytdl_plugin_not_installed" = "從「設定」中切換至外掛程式分頁，點擊「Install from GitHub」安裝線上媒體插件；即可啟用影片下載及 yt-dlp 自動更新等進階功能。";
-"preference.ytdl_plugin_installed" = "由於已經安裝了「線上媒體外掛」，因此將內建的 youtube-dl 做禁用。";
 
 "menu.volume" = "音量：%@";
 "menu.volume_muted" = "音量：%@ (靜音)";
@@ -484,8 +457,6 @@
 "permissions.file-system.desc" = "此外掛可以讀取或寫入你的磁碟上的檔案，包含敏感資訊。它也可以呼叫其他可能破壞電腦的程式或軟體。請確定你有驗證此外掛的來源。";
 
 "plugin.install" = "安裝";
-"plugin.installed" = "已安裝";
-"plugin.not_installed" = "尚未安裝";
 "plugin.local" = "已安裝於本機";
 "alert.plugin.install_error" = "安裝時發生錯誤：%@";
 "alert.invalid_url" = "無效的 URL。";
@@ -494,7 +465,6 @@
 "plugin.install_error.cannot_download" = "無法下載外掛程式。\n\n詳細內容:%@\n";
 "plugin.install_error.cannot_unpackage" = "無法打開外掛程式。\n\n詳細內容：%@\n";
 "plugin.install_error.cannot_load" = "IINA 無法載入此外掛程式，可能使用了錯誤的格式。";
-"plugin.check_for_updates" = "檢查更新";
 "plugin.updating" = "正在下載更新…";
 
 // Log window

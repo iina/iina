@@ -9,8 +9,6 @@
 
 "general.on" = "Açık";
 "general.off" = "Kapalı";
-"general.login" = "Oturum Aç";
-"general.logout" = "Oturumu Kapat";
 "general.ok" = "Tamam";
 "general.cancel" = "Vazgeç";
 "general.done" = "Bitti";
@@ -153,8 +151,6 @@
 "preference.title" = "Tercihler";
 "preference.general" = "Genel";
 "preference.ui" = "Arayüz";
-"preference.video_audio" = "Görüntü ve Ses";
-"preference.subtitle" = "Altyazı";
 "preference.network" = "Ağ";
 "preference.control" = "Denetimler";
 "preference.keybindings" = "Tuş Bağıntıları";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Eklentiler";
 "preference.utilities" = "İzlenceler";
 "preference.scripts" = "Betikler";
-"preference.not_logged_in" = "Oturum açılmadı";
-"preference.logged_in_as" = "%@ olarak oturum açıldı";
-"preference.system_media_control" = "Sistem ortam denetim tuşlarını kullan";
-
-"preference.key_binding_hint_1" = "Geçerli yapılandırma dosyasındaki kestirmeleri düzenlemek için önce “Çoğalt…” düğmesine tıklayarak bir kopya oluşturun.";
-"preference.key_binding_hint_2" = "İlgili kestirmeyi düzenlemek için sağ taraftaki bir satıra çift tıklayın.";
-
-"preference.enable_adv_settings" = "Gelişmiş ayarları etkinleştir";
-
-"preference.sub_override_level.no" = "hayır";
-"preference.sub_override_level.force" = "zorla";
-"preference.sub_override_level.scale" = "ölçekle";
-"preference.sub_override_level.strip" = "sıyır";
-"preference.sub_override_level.yes" = "evet";
-
-"preference.sub_override_level.descriptive_text.no" = "Altyazıları, altyazı betiğinde belirtildiği gibi gösterin, zorlama olmadan.";
-"preference.sub_override_level.descriptive_text.force" = "Tüm altyazı stillerini uygulayın.";
-"preference.sub_override_level.descriptive_text.scale" = "Bu bölümdeki stil ayarlarına ek olarak ölçek ayarını uygulayın.";
-"preference.sub_override_level.descriptive_text.strip" = "Altyazıdan tüm ASS etiketlerini tümüyle çıkarın.";
-"preference.sub_override_level.descriptive_text.yes" = "Bu bölümdeki tüm stil ayarlarını uygulayın.";
-
-"preference.ytdl_plugin_not_installed" = "“Eklentiler” → “GitHub’dan Yükle” yolunu izleyerek Online Media eklentisini kurun ve video indirme ve kendiliğinden yt-dlp güncellemelerini indirme gibi gelişmiş özelliklerin keyfini çıkarın.";
-"preference.ytdl_plugin_installed" = "Online Media eklentisi yüklü olduğundan yerleşik youtube-dl desteği devre dışı bırakıldı.";
 
 "menu.volume" = "Ses Düzeyi: %@";
 "menu.volume_muted" = "Ses Düzeyi: %@ (Sessiz)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Bu eklenti, hassas bilgilere sahip dosyalar da içerilmek üzere sabit diskteki dosyaları okuyabilir ve yazabilir. Ayrıca bu eklenti bilgisayarınıza zarar verebilecek diğer uygulamalar tarafından çağrılabilir. Lütfen eklentinin kaynağından emin olun.";
 
 "plugin.install" = "Yükle";
-"plugin.installed" = "Yüklendi";
-"plugin.not_installed" = "Yüklenmedi";
 "plugin.local" = "Yerel olarak yüklendi";
 "alert.plugin.install_error" = "Yükleme sırasında hata oluştu: %@";
 "alert.invalid_url" = "URL geçerli değil.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Eklenti indirilemedi.\n\nHata çıktısı:%@\n";
 "plugin.install_error.cannot_unpackage" = "Eklenti paketi açılamadı.\n\nHata çıktısı:%@\n";
 "plugin.install_error.cannot_load" = "IINA eklentiyi yükleyemedi. Eklenti yanlış biçimde olabilir.";
-"plugin.check_for_updates" = "Güncellemeleri Denetle";
 "plugin.updating" = "Güncelleme indiriliyor…";
 
 // Log window

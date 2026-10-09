@@ -9,8 +9,6 @@
 
 "general.on" = "开";
 "general.off" = "关";
-"general.login" = "登录";
-"general.logout" = "登出";
 "general.ok" = "确定";
 "general.cancel" = "取消";
 "general.done" = "完成";
@@ -153,8 +151,6 @@
 "preference.title" = "偏好设置";
 "preference.general" = "通用";
 "preference.ui" = "用户界面";
-"preference.video_audio" = "视频和音频";
-"preference.subtitle" = "字幕";
 "preference.network" = "网络";
 "preference.control" = "控制";
 "preference.keybindings" = "快捷键";
@@ -162,29 +158,6 @@
 "preference.plugins" = "插件";
 "preference.utilities" = "实用工具";
 "preference.scripts" = "脚本";
-"preference.not_logged_in" = "未登录";
-"preference.logged_in_as" = "已登录为 %@";
-"preference.system_media_control" = "使用系统媒体控制";
-
-"preference.key_binding_hint_1" = "若要在此配置文件中编辑键位设置，先点击「复制…」按钮以创建一个副本。";
-"preference.key_binding_hint_2" = "双击右边的任意一行以编辑对应键位设置。";
-
-"preference.enable_adv_settings" = "启用高级设置";
-
-"preference.sub_override_level.no" = "不";
-"preference.sub_override_level.force" = "强制";
-"preference.sub_override_level.scale" = "缩放";
-"preference.sub_override_level.strip" = "条形";
-"preference.sub_override_level.yes" = "是";
-
-"preference.sub_override_level.descriptive_text.no" = "按照字幕脚本的指定渲染字幕，不覆盖。";
-"preference.sub_override_level.descriptive_text.force" = "应用所有字幕样式。";
-"preference.sub_override_level.descriptive_text.scale" = "在除本节中的样式设置外应用音阶设置";
-"preference.sub_override_level.descriptive_text.strip" = "从字幕中彻底去掉所有的ASS标签和样式。";
-"preference.sub_override_level.descriptive_text.yes" = "应用本节中的所有样式设置。";
-
-"preference.ytdl_plugin_not_installed" = "从 \"Plugins > 安装 GitHub\" 中安装在线媒体插件以享受高级功能，例如视频下载和自动yt-dlp 更新。";
-"preference.ytdl_plugin_installed" = "由于安装了在线媒体插件，内置的 youtube-dl 支持已被禁用。";
 
 "menu.volume" = "音量: %@";
 "menu.volume_muted" = "音量：%@（静音）";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "此插件可以在磁盘上读取或写入文件，其中可能包括敏感信息。 它也可以执行其他可能伤害您的计算机的程序或应用程序。所以肯定要验证源。";
 
 "plugin.install" = "安装";
-"plugin.installed" = "已安装";
-"plugin.not_installed" = "未安装";
 "plugin.local" = "已安装本地文件";
 "alert.plugin.install_error" = "安装过程中发生错误: %@";
 "alert.invalid_url" = "URL 无效";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "下载插件失败。\n\n输出: %@\n";
 "plugin.install_error.cannot_unpackage" = "解包插件失败。\n\n输出: %@\n";
 "plugin.install_error.cannot_load" = "IINA无法加载此插件，可能是格式错误。";
-"plugin.check_for_updates" = "检查更新";
 "plugin.updating" = "下载更新中……";
 
 // Log window

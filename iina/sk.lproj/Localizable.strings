@@ -9,8 +9,6 @@
 
 "general.on" = "Zapnuté";
 "general.off" = "Vypnuté";
-"general.login" = "Prihlásenie";
-"general.logout" = "Odhlásenie";
 "general.ok" = "OK";
 "general.cancel" = "Zrušiť";
 "general.done" = "Hotovo";
@@ -154,8 +152,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Titulok";
 "preference.network" = "Sieť";
 "preference.control" = "Ovládanie";
 "preference.keybindings" = "Klávesové skratky";
@@ -163,29 +159,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "preference.plugins" = "Pluginy";
 "preference.utilities" = "Pomocné programy";
 "preference.scripts" = "Skripty";
-"preference.not_logged_in" = "Neprihlásený";
-"preference.logged_in_as" = "Prihlásený ako %@";
-"preference.system_media_control" = "Používať systémové multimediálne klávesy";
-
-"preference.key_binding_hint_1" = "Na upravenie priradených kláves v aktuálnom konfiguračnom súbore najprv vytvorte kópiu kliknutím na \"Duplikovať…\".";
-"preference.key_binding_hint_2" = "Dvakrát kliknite na riadok na pravej strane, aby ste upravili priradené klávesy.";
-
-"preference.enable_adv_settings" = "Povoliť pokročilé nastavenia";
-
-"preference.sub_override_level.no" = "nie";
-"preference.sub_override_level.force" = "sila";
-"preference.sub_override_level.scale" = "veľkosť";
-"preference.sub_override_level.strip" = "Základný";
-"preference.sub_override_level.yes" = "áno";
-
-"preference.sub_override_level.descriptive_text.no" = "Vykresli titulky podľa špecifikácie skriptov titulkov bez prepísania.";
-"preference.sub_override_level.descriptive_text.force" = "Použiť všetky štýly titulkov.";
-"preference.sub_override_level.descriptive_text.scale" = "Okrem nastavení štýlu v tejto časti použite aj nastavenie mierky.";
-"preference.sub_override_level.descriptive_text.strip" = "Radikálne odstráňte všetky značky a štýly ASS z nadpisu.";
-"preference.sub_override_level.descriptive_text.yes" = "Použite všetky nastavenia štýlu v tejto časti.";
-
-"preference.ytdl_plugin_not_installed" = "Nainštalujte si plugin Online Media z ponuky „Pluginy > Nainštalovať z GitHub“ a využívajte pokročilé funkcie, ako je napríklad sťahovanie videí a automatické aktualizácie yt-dlp.";
-"preference.ytdl_plugin_installed" = "Vstavaná podpora youtube-dl je vypnutá, pretože máte nainštalovaný doplnok Online médiá.";
 
 "menu.volume" = "Hlasitosť: %@";
 "menu.volume_muted" = "Hlasitosť: %@ (stíšene)";
@@ -484,8 +457,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "permissions.file-system.desc" = "Tento plug-in môže čítať alebo zapisovať súbory na disk, vrátane citlivých informácií. Môže tiež využívať iné programy alebo aplikácie, ktoré môžu poškodiť váš počítač. Uistite sa teda, že ste overili jeho zdroj.";
 
 "plugin.install" = "Inštalovať";
-"plugin.installed" = "Nainštalované";
-"plugin.not_installed" = "Nenainštalované";
 "plugin.local" = "Nainštalované lokálne";
 "alert.plugin.install_error" = "Pri inštalácii sa vyskytla chyba: %@";
 "alert.invalid_url" = "URL je neplatná.";
@@ -494,7 +465,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "plugin.install_error.cannot_download" = "Sťahovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_unpackage" = "Rozbaľovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_load" = "IINA nemôže načítať tento plugin. Môže byť v chybnom formáte.";
-"plugin.check_for_updates" = "Skontrolovať aktualizácie";
 "plugin.updating" = "Sťahovanie aktualizácie…";
 
 // Log window

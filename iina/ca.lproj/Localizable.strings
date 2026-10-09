@@ -9,8 +9,6 @@
 
 "general.on" = "Activat";
 "general.off" = "Desactivat";
-"general.login" = "Inicia la sessió";
-"general.logout" = "Tanca la sessió";
 "general.ok" = "D'acord";
 "general.cancel" = "Cancel·la";
 "general.done" = "Fet";
@@ -154,8 +152,6 @@
 "preference.title" = "Preferències";
 "preference.general" = "General";
 "preference.ui" = "Interfície";
-"preference.video_audio" = "Vídeo i Àudio";
-"preference.subtitle" = "Subtítols";
 "preference.network" = "Xarxa";
 "preference.control" = "Controls";
 "preference.keybindings" = "Dreceres de teclar";
@@ -163,30 +159,6 @@
 "preference.plugins" = "Extensions";
 "preference.utilities" = "Utilitats";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Sense sessió";
-"preference.logged_in_as" = "Amb sessió com a %@";
-"preference.system_media_control" = "Utilitza els controls multimèdia del sistema";
-
-"preference.key_binding_hint_1" = "Per editar les dreces de teclat en el fitxer actual, prem el botó \"Duplica…\" per crear una còpia.";
-"preference.key_binding_hint_2" = "Doble clic a la dreta de la fila per editar la drecera de teclat corresponent.";
-
-"preference.enable_adv_settings" = "Habilita les opcions avançades";
-
-"preference.sub_override_level.no" = "No";
-"preference.sub_override_level.force" = "Força";
-"preference.sub_override_level.scale" = "Escala";
-"preference.sub_override_level.strip" = "tira";
-"preference.sub_override_level.yes" = "Sí";
-
-"preference.sub_override_level.descriptive_text.no" = "Renderitza els subtítols tal com s’especifica als fitxers dels subtítols, sense aplicar modificacions.
-";
-"preference.sub_override_level.descriptive_text.force" = "Aplica tots els estils de subtítol.";
-"preference.sub_override_level.descriptive_text.scale" = "Aplica la configuració d'escala a més de l'estil de configuració en aquesta secció.";
-"preference.sub_override_level.descriptive_text.strip" = "Estripa totes les etiquetes ASS i estils del subtítol.";
-"preference.sub_override_level.descriptive_text.yes" = "Aplica tots els estils de configuració en aquesta secció.";
-
-"preference.ytdl_plugin_not_installed" = "Instal·la el complement \"Online Media\" des del menú \"Complements > instal·la des de GitHub\". Podràs gaudir de funcions com la descàrrega de vídeos i les actualitzacions del complement \"yt-dlp\".";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volum: %@";
 "menu.volume_muted" = "Volum: %@ (Silenciat)";
@@ -485,8 +457,6 @@
 "permissions.file-system.desc" = "Aquest complement pot llegir o escriure fitxers al teu disc, això pot incloure informació sensible. També pot executar altres programes o aplicacions que poden malmetre el teu ordinador. Comprova el seu origen.";
 
 "plugin.install" = "Instal·la";
-"plugin.installed" = "Instal·lat";
-"plugin.not_installed" = "No instal·lat";
 "plugin.local" = "Instal·lat localment";
 "alert.plugin.install_error" = "Hi ha hagut un error durant la instal·lació: %@";
 "alert.invalid_url" = "L'adreça URL no és vàlida.";
@@ -495,7 +465,6 @@
 "plugin.install_error.cannot_download" = "No s'ha pogut descarregar el complement.\n\nSortida:%@\n";
 "plugin.install_error.cannot_unpackage" = "No s'ha pogut descomprimir el complement.\n\nSortida: %@\n";
 "plugin.install_error.cannot_load" = "IINA no pot carregar aquest complement. Potser té un format incorrecte.";
-"plugin.check_for_updates" = "Comprova si hi ha actualitzacions";
 "plugin.updating" = "S'està baixant l'actualització…";
 
 // Log window

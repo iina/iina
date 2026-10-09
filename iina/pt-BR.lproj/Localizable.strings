@@ -9,8 +9,6 @@
 
 "general.on" = "Ligar";
 "general.off" = "Desligar";
-"general.login" = "Login";
-"general.logout" = "Encerrar sessão";
 "general.ok" = "OK";
 "general.cancel" = "Cancelar";
 "general.done" = "Pronto";
@@ -153,8 +151,6 @@
 "preference.title" = "Preferencias";
 "preference.general" = "Geral";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Legendas";
 "preference.network" = "Rede";
 "preference.control" = "Controles";
 "preference.keybindings" = "Combinações de teclas";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "Utilitários";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Não está logado";
-"preference.logged_in_as" = "Logado como %@";
-"preference.system_media_control" = "Usar controles de mídia padrão do sistema";
-
-"preference.key_binding_hint_1" = "Para editar as combinações de teclas no arquivo de configuração atual, clique primeiro no botão \"Duplicar…\" para criar uma cópia.";
-"preference.key_binding_hint_2" = "Clique duas vezes em uma linha no lado direito para editar as combinações de teclas.";
-
-"preference.enable_adv_settings" = "Habilitar configurações avançadas";
-
-"preference.sub_override_level.no" = "não";
-"preference.sub_override_level.force" = "forçar";
-"preference.sub_override_level.scale" = "escala";
-"preference.sub_override_level.strip" = "cortar";
-"preference.sub_override_level.yes" = "sim";
-
-"preference.sub_override_level.descriptive_text.no" = "Renderizar legendas como especificado pelos scripts da legenda, sem substituições.";
-"preference.sub_override_level.descriptive_text.force" = "Aplicar estilos em todas as legendas.";
-"preference.sub_override_level.descriptive_text.scale" = "Aplicar a configuração de escala, além das configurações de estilo nesta seção.";
-"preference.sub_override_level.descriptive_text.strip" = "Remova radicalmente todas as tags e estilos ASS da legenda.";
-"preference.sub_override_level.descriptive_text.yes" = "Aplicar todas as configurações de estilo nesta seção.";
-
-"preference.ytdl_plugin_not_installed" = "Instale o plugin de Mídia On-line a partir de \"Plugins > Instalar a partir do GitHub\" para desfrutar de recursos avançados como o vídeo e o download automático de atualizações yt-dlp.";
-"preference.ytdl_plugin_installed" = "O suporte integrado ao youtube-dl está desativado porque você tem o plugin de mídia Online instalado.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Mudo)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Esse plugin pode ler ou escrever arquivos em seu disco, incluindo informações sensíveis. Ele também pode chamar outros programas ou aplicativos que podem danificar seu computador. Portanto, certifique-se de verificar a origem.";
 
 "plugin.install" = "Instalar";
-"plugin.installed" = "Instalado";
-"plugin.not_installed" = "Não instalado";
 "plugin.local" = "Localmente instalado";
 "alert.plugin.install_error" = "Ocorreu um erro durante a instalação: %@";
 "alert.invalid_url" = "A URL é inválida.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Falha ao baixar o plugin.\n\nSaída:%@\n";
 "plugin.install_error.cannot_unpackage" = "Falha ao desempacotar o plugin.\n\nSaída:%@\n";
 "plugin.install_error.cannot_load" = "IINA não pode carregar este plugin. Ele pode estar no formato errado.";
-"plugin.check_for_updates" = "Buscar por atualizações";
 "plugin.updating" = "Baixando a atualização…";
 
 // Log window

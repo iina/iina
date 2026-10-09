@@ -9,8 +9,6 @@
 
 "general.on" = "On";
 "general.off" = "Off";
-"general.login" = "เข้าสู่ระบบ";
-"general.logout" = "ออกจากระบบ";
 "general.ok" = "ตกลง";
 "general.cancel" = "ยกเลิก";
 "general.done" = "เสร็จสิ้น";
@@ -153,8 +151,6 @@
 "preference.title" = "Preferences";
 "preference.general" = "ทั่วไป";
 "preference.ui" = "หน้าจอผู้ใช้";
-"preference.video_audio" = "วิดีโอ & เสียง";
-"preference.subtitle" = "ซับไตเติล";
 "preference.network" = "เครือข่าย";
 "preference.control" = "การควบคุม";
 "preference.keybindings" = "กำหนดปุ่มคีย์บอร์ด";
@@ -162,29 +158,6 @@
 "preference.plugins" = "ปลั๊กอิน";
 "preference.utilities" = "เครื่องมือ";
 "preference.scripts" = "สคริปต์";
-"preference.not_logged_in" = "ไม่ได้เข้าสู่ระบบ";
-"preference.logged_in_as" = "เข้าสู่ระบบในชื่อ %@";
-"preference.system_media_control" = "ใช้การควบคุมสื่อตามเครื่อง";
-
-"preference.key_binding_hint_1" = "เพื่อแก้ไขปุ่มคีย์บอร์ดในไฟล์ปรับแต่งปัจจุบัน ให้กดปุ่ม \"ทำซ้ำ...\" ก่อนเพื่อสร้างอีกไฟล์";
-"preference.key_binding_hint_2" = "กดสองครั้งที่แถวทางด้านขวาเพื่อแก้ไขปุ่มคีย์บอร์ดนั้น ๆ";
-
-"preference.enable_adv_settings" = "เปิดการตั้งค่าขั้นสูง";
-
-"preference.sub_override_level.no" = "ไม่";
-"preference.sub_override_level.force" = "บังคับ";
-"preference.sub_override_level.scale" = "สเกล";
-"preference.sub_override_level.strip" = "สตริป";
-"preference.sub_override_level.yes" = "ใช่";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Muted)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
 
 // Log window

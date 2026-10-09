@@ -9,8 +9,6 @@
 
 "general.on" = "On";
 "general.off" = "Off";
-"general.login" = "Accedi";
-"general.logout" = "Disconnetti";
 "general.ok" = "OK";
 "general.cancel" = "Annulla";
 "general.done" = "OK";
@@ -153,8 +151,6 @@
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
 "preference.ui" = "Interfaccia";
-"preference.video_audio" = "Video e Audio";
-"preference.subtitle" = "Sottotitoli";
 "preference.network" = "Network";
 "preference.control" = "Controlli";
 "preference.keybindings" = "Scorciatoie";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Componenti aggiuntivi";
 "preference.utilities" = "Utilità";
 "preference.scripts" = "Script";
-"preference.not_logged_in" = "Login non effettuato";
-"preference.logged_in_as" = "Collegato come %@";
-"preference.system_media_control" = "Utilizza il controllo multimediale di sistema";
-
-"preference.key_binding_hint_1" = "Per modificare le scorciatoie di tastiera nel file di configurazione corrente, fai prima click su \"Duplica…\" per crearne una copia.";
-"preference.key_binding_hint_2" = "Fai doppio click nella riga sulla destra per modificare la scorciatoia di tastiera corrispondente.";
-
-"preference.enable_adv_settings" = "Abilita impostazioni avanzate";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "striscia";
-"preference.sub_override_level.yes" = "sì";
-
-"preference.sub_override_level.descriptive_text.no" = "Renderizza i sottotitoli come specificato dagli script, senza override.";
-"preference.sub_override_level.descriptive_text.force" = "Applica tutti gli stili dei sottotitoli.";
-"preference.sub_override_level.descriptive_text.scale" = "Imposta il fattore di scala dei sottotitoli (override).";
-"preference.sub_override_level.descriptive_text.strip" = "Rimuove tutti gli stili e i tag ASS dai sottotitoli.";
-"preference.sub_override_level.descriptive_text.yes" = "Regola le impostazioni degli stili.";
-
-"preference.ytdl_plugin_not_installed" = "Installa il plug-in Media Online da 'Plug-in → Installa' da GitHub per godere di funzionalità avanzate come il download di video e aggiornamenti automatici di yt-dlp.";
-"preference.ytdl_plugin_installed" = "Il supporto youtube-dl integrato è disabilitato perché è installato il plugin 'Media online'.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Spento)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Questo plugin può leggere o scrivere file sul disco, comprese le informazioni sensibili. Può anche utilizzare altri programmi o applicazioni che possono danneggiare il computer. Assicurati di verificare la sua provenienza prima di procedere.";
 
 "plugin.install" = "Installa";
-"plugin.installed" = "Installato";
-"plugin.not_installed" = "Non installato";
 "plugin.local" = "Installato localmente";
 "alert.plugin.install_error" = "Si è verificato un errore durante l'installazione: %@";
 "alert.invalid_url" = "L'URL non è valido.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Impossibile scaricare il plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Scompattamento del plugin non riuscito.\n\nOutput: %@\n";
 "plugin.install_error.cannot_load" = "IINA non può caricare questo plugin. Potrebbe essere nel formato sbagliato.";
-"plugin.check_for_updates" = "Controlla aggiornamenti";
 "plugin.updating" = "Sto scaricando l'aggiornamento…";
 
 // Log window

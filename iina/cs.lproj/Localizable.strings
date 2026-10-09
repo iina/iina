@@ -9,8 +9,6 @@
 
 "general.on" = "Zapnuto";
 "general.off" = "Vypnuto";
-"general.login" = "Přihlásit se";
-"general.logout" = "Odhlásit se";
 "general.ok" = "OK";
 "general.cancel" = "Zrušit";
 "general.done" = "Hotovo";
@@ -153,8 +151,6 @@
 "preference.title" = "Nastavení";
 "preference.general" = "Obecné";
 "preference.ui" = "Rozhraní";
-"preference.video_audio" = "Video a zvuk";
-"preference.subtitle" = "Titulky";
 "preference.network" = "Síť";
 "preference.control" = "Ovládání";
 "preference.keybindings" = "Klávesové zkratky";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Plug-iny";
 "preference.utilities" = "Utility";
 "preference.scripts" = "Skripty";
-"preference.not_logged_in" = "Nepřihlášen";
-"preference.logged_in_as" = "Přihlášen jako %@";
-"preference.system_media_control" = "Používat systémové multimediální klávesy";
-
-"preference.key_binding_hint_1" = "Pro úpravy konfiguračního souboru klávesových zkratek, vytvořte jejich kopii kliknutím na „Duplikovat…“.";
-"preference.key_binding_hint_2" = "Pro změnu klávesové zkratky, klikněte dvakrát na odpovídající řádek po pravé straně.";
-
-"preference.enable_adv_settings" = "Povolit pokročilá nastavení";
-
-"preference.sub_override_level.no" = "Žádná";
-"preference.sub_override_level.force" = "Vynucená";
-"preference.sub_override_level.scale" = "S měřítkem";
-"preference.sub_override_level.strip" = "Úplná";
-"preference.sub_override_level.yes" = "Základní";
-
-"preference.sub_override_level.descriptive_text.no" = "Vykreslí titulky dle specifikací ve skriptech titulků, bez přepsání.";
-"preference.sub_override_level.descriptive_text.force" = "Použít všechny styly titulků.";
-"preference.sub_override_level.descriptive_text.scale" = "V této části použít kromě nastavení stylu také nastavení měřítka.";
-"preference.sub_override_level.descriptive_text.strip" = "Radikálně odebrat z titulků všechny ASS značky a styly.";
-"preference.sub_override_level.descriptive_text.yes" = "Použít všechna nastavení stylu v této části.";
-
-"preference.ytdl_plugin_not_installed" = "Pro pokročilé funkce jako jsou stahování videa a automatické aktualizace yt-dlp nainstalujte Online Media plug-in pomocí výběru „Instalovat z GitHubu“ v Nastavení > Plug-iny.";
-"preference.ytdl_plugin_installed" = "Vestavěná podpora youtube-dl je zakázána, protože je nainstalován Online media plug-in.";
 
 "menu.volume" = "Hlasitost: %@";
 "menu.volume_muted" = "Hlasitost: %@ (Ztlumeno)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Tento plug-in může číst nebo zapisovat soubory na disk, které mohou obsahovat citlivé informace. Může také spouštět jiné programy nebo aplikace, které mohou poškodit váš počítač. Ujistěte se, že jste ověřili jeho zdroj.";
 
 "plugin.install" = "Instalovat";
-"plugin.installed" = "Nainstalován";
-"plugin.not_installed" = "Není nainstalován";
 "plugin.local" = "Nainstalován místně";
 "alert.plugin.install_error" = "Při instalaci došlo k chybě: %@";
 "alert.invalid_url" = "URL adresa je neplatná.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Stahování plug-inu selhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_unpackage" = "Rozbalování plug-inu selhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_load" = "IINA nemůže načíst tento plug-in. Může být v chybném formátu.";
-"plugin.check_for_updates" = "Vyhledávat aktualizace";
 "plugin.updating" = "Stahuje se aktualizace…";
 
 // Log window

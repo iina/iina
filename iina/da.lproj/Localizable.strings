@@ -9,8 +9,6 @@
 
 "general.on" = "Til";
 "general.off" = "Fra";
-"general.login" = "Log ind";
-"general.logout" = "Log ud";
 "general.ok" = "OK";
 "general.cancel" = "Annuller";
 "general.done" = "Udført";
@@ -153,8 +151,6 @@
 "preference.title" = "Indstillinger";
 "preference.general" = "Generelt";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Undertekster";
 "preference.network" = "Netværk";
 "preference.control" = "Kontrol";
 "preference.keybindings" = "Tastaturgenveje";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Udvidelser";
 "preference.utilities" = "Værktøjer";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Ikke logget ind";
-"preference.logged_in_as" = "Logget ind som %@";
-"preference.system_media_control" = "Brug system medie kontrol";
-
-"preference.key_binding_hint_1" = "For at redigere tastaturgenveje i det aktuelle konfigurationsarkiv, klik først på knappen \"Dupliker…\" for at oprette en kopi.";
-"preference.key_binding_hint_2" = "Dobbeltklik på en række i højre side for at redigere den tilsvarende tastaturgenvej.";
-
-"preference.enable_adv_settings" = "Aktiver avancerede indstillinger";
-
-"preference.sub_override_level.no" = "nej";
-"preference.sub_override_level.force" = "gennemtving";
-"preference.sub_override_level.scale" = "skaler";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "ja";
-
-"preference.sub_override_level.descriptive_text.no" = "Gengiv undertekster som angivet af undertekst-scripts, uden tilsidesættelser.";
-"preference.sub_override_level.descriptive_text.force" = "Anvendes alle undertekst-stile.";
-"preference.sub_override_level.descriptive_text.scale" = "Anvend størrelsesindstillingen sammen med stilindstillingerne i denne sektion.";
-"preference.sub_override_level.descriptive_text.strip" = "Fjern radikalt alle ASS-mærker og -stile fra underteksten.";
-"preference.sub_override_level.descriptive_text.yes" = "Anvend alle stilindstillingerne i denne sektion.";
-
-"preference.ytdl_plugin_not_installed" = "Installer Online Media-tilføjelsen fra \"Tilføjelser > Installer fra GitHub\" for at få fornøjelsen af nye avancerede funktioner såsom at hente videoer og automatiske youtube-dl-opdateringer.";
-"preference.ytdl_plugin_installed" = "Den indbyggede youtube-dl-understøttelse er slået fra, siden du har Online Media-tilføjelsen installeret.";
 
 "menu.volume" = "Lydstyrke: %@";
 "menu.volume_muted" = "Lydstyrke: %@ (lydløs)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "Denne tilføjelse må læse og skrive filer på dit drev, hvilket kan inkludere følsom information. Den kan også køre andre programmer eller applikationer der kan skade din computer. Sørg for at verificere kilden.";
 
 "plugin.install" = "Installer";
-"plugin.installed" = "Installeret";
-"plugin.not_installed" = "Ikke Installeret";
 "plugin.local" = "Installeret lokalt";
 "alert.plugin.install_error" = "Der skete en fejl under installationen: %@";
 "alert.invalid_url" = "URL'en er ugyldig.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Det lykkedes ikke at hente tilføjelsen.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Det lykkedes ikke at pakke tilføjelsen ud.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA kan ikke indlæse denne tilføjelse. Den er måske i det forkerte format.";
-"plugin.check_for_updates" = "Tjek for opdateringer";
 "plugin.updating" = "Downloader opdatering…";
 
 // Log window

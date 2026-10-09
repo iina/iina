@@ -9,8 +9,6 @@
 
 "general.on" = "Ενεργό";
 "general.off" = "Ανενεργό";
-"general.login" = "Σύνδεση";
-"general.logout" = "Αποσύνδεση";
 "general.ok" = "ΟΚ";
 "general.cancel" = "Άκυρο";
 "general.done" = "Τέλος";
@@ -153,8 +151,6 @@
 "preference.title" = "Προτιμήσεις";
 "preference.general" = "Γενικά";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Υπότιτλοι";
 "preference.network" = "Δίκτυο";
 "preference.control" = "Έλεγχος";
 "preference.keybindings" = "Συντομεύσεις Πληκτρολογίου";
@@ -162,29 +158,6 @@
 "preference.plugins" = "Πρόσθετα";
 "preference.utilities" = "Βοηθήματα";
 "preference.scripts" = "Δέσμες Ενεργειών";
-"preference.not_logged_in" = "Χωρίς Σύνδεση";
-"preference.logged_in_as" = "Σύνδεση ως: %@";
-"preference.system_media_control" = "Χρήση κουμπιών ελέγχου συστήματος";
-
-"preference.key_binding_hint_1" = "Για να επεξεργαστείτε συντομεύσεις πλήκτρων στο τρέχον Αρχείο Ρυθμίσεων, κάντε πρώτα κλικ στο \"Αντίγραφο…\" για να δημιουργήσετε ένα αντίγραφό του.";
-"preference.key_binding_hint_2" = "Κάντε διπλό κλικ σε μια σειρά στην δεξιά μεριά για να επεξεργαστείτε το αντίστοιχο πλήκτρο συντόμευσης.";
-
-"preference.enable_adv_settings" = "Ενεργοποίηση Προηγμένων Ρυθμίσεων";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "ναι";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Εφαρμογή όλων των στυλ υποτίτλων.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Εφαρμογή όλων των ρυθμίσεων στυλ σε αυτήν την ενότητα.";
-
-"preference.ytdl_plugin_not_installed" = "Εγκατάσταση του Online Media plugin από \"Plugins > Εγκατάσταση από το GitHub\" για να απολαύσεις προηγμένες λειτουργίες όπως λήψη βίντεο και αυτόματες ενημερώσεις yt-dlp.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Ένταση: %@";
 "menu.volume_muted" = "Volume: %@ (Muted)";
@@ -483,8 +456,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -493,7 +464,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
 
 // Log window

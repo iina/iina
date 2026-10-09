@@ -252,8 +252,21 @@ class KeyCodeHelper {
   private static var uppercaseMpvKeySet: Set<String> = Set(lowerToUpperKeyMap.values)
 
   static func isPrintable(_ char: String) -> Bool {
-    let utf8View = char.utf8
-    return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
+    return char.unicodeScalars.allSatisfy({
+      switch $0.properties.generalCategory {
+      case .closePunctuation, .connectorPunctuation, .currencySymbol, .dashPunctuation,
+          .decimalNumber, .enclosingMark, .finalPunctuation, .initialPunctuation, .letterNumber,
+          .lowercaseLetter, .mathSymbol, .modifierLetter, .modifierSymbol, .nonspacingMark,
+          .openPunctuation, .otherLetter, .otherNumber, .otherPunctuation, .otherSymbol,
+          .spacingMark, .surrogate, .titlecaseLetter, .uppercaseLetter:
+        return true
+      case .control, .format, .lineSeparator, .paragraphSeparator, .privateUse, .spaceSeparator,
+          .unassigned:
+        return false
+      @unknown default:
+        return false
+      }
+    })
   }
 
   static func escapeReservedMpvKeys(_ keystrokesString: String) -> String {
@@ -275,7 +288,6 @@ class KeyCodeHelper {
     var modifiers = event.modifierFlags
 
     if let char = event.charactersIgnoringModifiers, isPrintable(char) {
-      // Is a classic ASCII printable char.
       keyChar = char
       /// The char in `charactersIgnoringModifiers` will be either uppercase or lowercase,
       /// so remove the redundant modifier flag so we don't print an extra "SHIFT+"

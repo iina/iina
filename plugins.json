@@ -126,6 +126,12 @@
     "id": "com.icsarisakal.iina-searchbox"
   },
   {
+    "name": "Plex Sync",
+    "url": "https://github.com/kevllarco/iina-plex-sync",
+    "desc": "Sync local IINA playback progress and watched status to Plex.",
+    "id": "io.github.iina-plex-sync"
+  },
+  {
     "name": "PolyScript",
     "url": "https://github.com/SammoMichael/polyplugin-release",
     "desc": "Dual subtitles, hover dictionary, and AI-assisted translation for language learning.",

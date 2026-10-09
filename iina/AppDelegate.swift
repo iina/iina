@@ -75,26 +75,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return w
   }()
 
-  lazy var preferenceWindowController: PreferenceWindowController = {
-    var list: [NSViewController & PreferenceWindowEmbeddable] = [
-      PrefGeneralViewController(),
-      PrefUIViewController(),
-      PrefCodecViewController(),
-      PrefSubViewController(),
-      PrefNetworkViewController(),
-      PrefControlViewController(),
-      PrefKeyBindingViewController(),
-      PrefAdvancedViewController(),
-      // PrefPluginViewController(),
-      PrefUtilsViewController(),
-    ]
-
-    if IINA_ENABLE_PLUGIN_SYSTEM {
-      list.insert(PrefPluginViewController(), at: 8)
-    }
-    return PreferenceWindowController(viewControllers: list)
-  }()
-
   /// Whether the shutdown sequence timed out.
   private var timedOut = false
 
@@ -777,11 +757,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
-      if Preference.enableNewSettings {
-        SettingsWindow.default.installPlugin(localPackageURL: pluginPackageURL)
-      } else {
-        preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
-      }
+      SettingsWindow.default.installPlugin(localPackageURL: pluginPackageURL)
       return
     }
 
@@ -983,20 +959,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {
-    if Preference.enableNewSettings {
-      SettingsWindow.default.show()
-    } else {
-      preferenceWindowController.showWindow(self)
-    }
+    SettingsWindow.default.show()
   }
 
   @objc func showPluginPreferences(_ sender: NSMenuItem) {
-    if Preference.enableNewSettings {
-      SettingsWindow.default.show()
-      SettingsWindow.default.navigateTo(page: "plugin")
-    } else {
-      preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
-    }
+    SettingsWindow.default.show()
+    SettingsWindow.default.navigateTo(page: "plugin")
   }
 
   @IBAction func showVideoFilterWindow(_ sender: AnyObject) {
@@ -1066,10 +1034,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
   }
   
-  @objc func toggleNewSettings(_ sender: AnyObject) {
-    Preference.enableNewSettings = !Preference.enableNewSettings
-  }
-
   /// Dump contents of all player cores to a txt file. Strictly for debugging. No localization needed.
   @IBAction func dumpDebugInfo(_ sender: AnyObject) {
     struct FileStream: TextOutputStream {

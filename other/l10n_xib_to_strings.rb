@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # Usage:
-# other/l10n_xib_to_strings.rb iina/Base.lproj/PrefGeneralViewController.xib
+# other/l10n_xib_to_strings.rb iina/Base.lproj/KeyRecordViewController.xib
 
 require 'nokogiri'
 

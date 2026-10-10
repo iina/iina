@@ -1,0 +1,76 @@
+name: IINAPad
+options:
+  bundleIdPrefix: dev.local
+  deploymentTarget:
+    iOS: "17.0"
+packages:
+  MPVKit:
+    url: https://github.com/mpvkit/MPVKit.git
+    exactVersion: 1.0.0
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "2"
+    SUPPORTS_MACCATALYST: NO
+    SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+targets:
+  IINAPad:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+        excludes: [iina.icon]
+      - path: Sources/iina.icon
+        type: file
+        buildPhase: resources
+    dependencies:
+      - package: MPVKit
+        product: MPVKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.local.iinapad
+        TARGETED_DEVICE_FAMILY: "2"
+        INFOPLIST_FILE: Info.plist
+        GENERATE_INFOPLIST_FILE: YES
+        MARKETING_VERSION: 0.8.0
+        CURRENT_PROJECT_VERSION: 8
+        CODE_SIGN_STYLE: Automatic
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: iina
+  IINAPadTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+        excludes: [Fixtures]
+      - path: Tests/Fixtures
+        buildPhase: resources
+    dependencies:
+      - target: IINAPad
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.local.iinapad.tests
+        GENERATE_INFOPLIST_FILE: YES
+  IINAPadUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: IINAPad
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.local.iinapad.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: IINAPad
+schemes:
+  IINAPad:
+    build:
+      targets:
+        IINAPad: all
+    run:
+      config: Debug
+      enableGPUValidationMode: 0
+    test:
+      config: Debug
+      targets: [IINAPadTests, IINAPadUITests]

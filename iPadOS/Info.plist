@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleDisplayName</key><string>IINA</string>
+  <key>CFBundleURLTypes</key>
+  <array><dict><key>CFBundleURLName</key><string>dev.local.iinapad</string><key>CFBundleURLSchemes</key><array><string>iinapad</string></array></dict></array>
+  <key>CFBundleDocumentTypes</key>
+  <array><dict><key>CFBundleTypeName</key><string>Media</string><key>CFBundleTypeRole</key><string>Viewer</string><key>LSHandlerRank</key><string>Alternate</string><key>LSItemContentTypes</key><array><string>public.movie</string><string>public.audio</string><string>public.data</string></array></dict></array>
+  <key>LSSupportsOpeningDocumentsInPlace</key><true/>
+  <key>UIFileSharingEnabled</key><true/>
+  <key>UIBackgroundModes</key><array><string>audio</string></array>
+  <key>UILaunchScreen</key><dict/>
+  <key>UISupportedInterfaceOrientations</key>
+  <array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationPortraitUpsideDown</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>
+  <key>UISupportedInterfaceOrientations~ipad</key>
+  <array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationPortraitUpsideDown</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>
+  <key>NSLocalNetworkUsageDescription</key><string>Play media from URLs on your local network.</string>
+  <key>NSPhotoLibraryAddUsageDescription</key><string>Save a video frame you choose to your photo library.</string>
+  <key>NSAppTransportSecurity</key><dict><key>NSAllowsArbitraryLoadsForMedia</key><true/></dict>
+</dict>
+</plist>

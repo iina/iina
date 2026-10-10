@@ -116,3 +116,12 @@ browser/Firefox_Open_In_IINA/*
 deps/executable/youtube-dl
 deps/plugins
 
+
+# Local contribution notes and credentials (not part of the iPadOS proposal).
+/.local/
+/.agents/
+/.codex/
+/AGENTS.md
+/.env
+/.env.*
+/*.private.*

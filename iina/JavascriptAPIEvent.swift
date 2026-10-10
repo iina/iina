@@ -24,6 +24,8 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
   private var addedListeners: [(String, EventController.Name)] = []
 
   @objc func on(_ event: String, _ callback: JSValue) -> String? {
+    dispatchPrecondition(condition: .onQueue(.main))
+    guard let instance = pluginInstance, instance.isActive else { return nil }
     let splitted = event.split(separator: ".")
     let isEventListener = splitted.count == 2
     let isPropertyChangedListener = splitted.count == 3 && splitted[2] == "changed"
@@ -38,7 +40,7 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
       player!.mpv.observe(property: eventName)
     }
     let name = EventController.Name(event)
-    let id = player!.events.addListener(JavascriptAPIEventCallback(callback), for: name)
+    let id = player!.events.addListener(JavascriptAPIEventCallback(callback, instance: pluginInstance), for: name)
     addedListeners.append((id, name))
     return id
   }
@@ -59,18 +61,23 @@ class JavascriptAPIEvent: JavascriptAPI, JavascriptAPIEventExportable {
 
 class JavascriptAPIEventCallback: EventCallable {
   private var callback: JSValue?
+  private weak var instance: JavascriptPluginInstance?
 
-  init(_ callback: JSValue) {
+  init(_ callback: JSValue, instance: JavascriptPluginInstance) {
     self.callback = callback
+    self.instance = instance
   }
 
   func call(withArguments args: [Any]) {
-    callback?.call(withArguments: args.map { arg in
-      if let rect = arg as? CGRect {
-        return JSValue(rect: rect, in: callback!.context)!
-      } else {
-        return arg
-      }
-    })
+    guard let instance, instance.isActive else { return }
+    instance.withActiveContext {
+      callback?.call(withArguments: args.map { arg in
+        if let rect = arg as? CGRect {
+          return JSValue(rect: rect, in: callback!.context)!
+        } else {
+          return arg
+        }
+      })
+    }
   }
 }

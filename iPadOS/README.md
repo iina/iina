@@ -53,12 +53,14 @@ Dedicated AirPlay routing, persistent playback history/resume, direct network-sh
 
 ## Publication verification — 2026-10-10
 
-The relocated project built successfully with the pinned dependencies. The maintained simulator suite passed **17 of 18 tests**. `PlaybackTests.testSpeedChangesWhilePlayingAndSystemResume` failed because native MP4 playback sometimes reported an unpaused state without advancing after rapid rate changes. Focused reruns reproduced failures on the installed iOS 26.2 and 26.5 simulators. This remains an open issue; the contribution is not described as fully passing or release-ready. Physical behavior was not retested for this publication.
+The project built successfully with the pinned dependencies. The original publication passed 17 of 18 simulator unit/integration tests and exposed an intermittent native-rate-change freeze. Follow-up work coalesces rapid speed requests so that only the final choice reconfigures AVPlayer on the next main-queue turn. The hold-release test now waits for the actual native rate to acknowledge the change. Automatic resume seeks also preserve playback intent through transient pause notifications, fixing an A–B-loop race exposed during validation.
 
-The playback logic and test bodies were unchanged by the move; only source license headers and About attribution changed. The staged source/artwork/test-assets review found no sensitive-content issues. Local verification logs, screenshots, signing material, account state, and internal notes are excluded from the contribution.
+The final unit/integration run passed **18 of 18 tests** on the iOS 26.5 simulator with Xcode 27. The rapid-rate regression also passed **10 consecutive repetitions**. The source used for testing was verified against the working files by checksum. The maintained UI suite also passed **3 of 3 tests**, covering the bottom speed menu, playback tools/saved playlists, and touch gestures. Physical behavior has not been retested for these follow-up changes; broader compatibility and release validation remain necessary.
+
+The source/artwork/test-assets review found no sensitive-content issues. Local verification logs, screenshots, signing material, account state, and internal notes are excluded from the contribution.
 
 ## Contribution status
 
-The `ipados` branch is an upstream contribution candidate. It is not an upstream pull request. IINA requires a linked Design Proposal for UI changes, GPLv3 contributions, thorough testing, and disclosure of AI assistance. Any proposal or PR must explain the separate iPad target, maintenance responsibilities, architecture differences, and current limits.
+The `ipados` branch is an experimental upstream contribution candidate, pending architecture and adoption review. See [Design Proposal #6480](https://github.com/iina/iina/issues/6480). IINA requires a linked Design Proposal for UI changes, GPLv3 contributions, thorough testing, and disclosure of AI assistance. Any proposal or PR must explain the separate iPad target, maintenance responsibilities, architecture differences, and current limits.
 
 The upstream name and artwork have not been granted a separate public product-branding license. This source contribution and its attribution do not establish permission for an official-branded independent release. The IINA team controls whether to adopt the target or authorize a branded release.

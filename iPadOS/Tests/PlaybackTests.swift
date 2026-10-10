@@ -149,10 +149,17 @@ final class PlaybackTests: XCTestCase {
                 XCTAssertEqual(player.speed, rate)
                 XCTAssertFalse(player.paused)
                 let start = player.position, wall = Date()
+                let native = surface.nativeLayer.player
+                let nativeStart = native?.currentTime().seconds
                 try await Task.sleep(for: .milliseconds(800))
                 let measured = (player.position - start) / Date().timeIntervalSince(wall)
+                let nativeState = "native \(nativeStart ?? -1)→\(native?.currentTime().seconds ?? -1), " +
+                    "rate \(native?.rate ?? -1), status \(native?.timeControlStatus.rawValue ?? -1), " +
+                    "waiting \(native?.reasonForWaitingToPlay?.rawValue ?? "none")"
                 XCTAssertEqual(measured, rate, accuracy: max(0.25, rate * 0.35),
-                               "\(ext) failed to change rate during playback: \(start)→\(player.position), paused \(player.paused), buffering \(player.buffering), scene \(scene.activationState.rawValue)")
+                               "\(ext) failed to change rate during playback: \(start)→\(player.position), " +
+                               "paused \(player.paused), buffering \(player.buffering), " +
+                               "scene \(scene.activationState.rawValue), \(nativeState)")
             }
             if ext == "mp4" {
                 XCTAssertEqual(player.backend, .native)
@@ -240,7 +247,8 @@ final class PlaybackTests: XCTestCase {
             add(attachment)
             surface.onSpeedHold?(false)
             try await waitUntil("Release did not restore 0.75×") {
-                !player.touchSpeedBoostActive && player.speed == 0.75
+                !player.touchSpeedBoostActive && player.speed == 0.75 &&
+                    (player.backend != .native || surface.nativeLayer.player?.rate == 0.75)
             }
             if player.backend == .native {
                 XCTAssertEqual(try XCTUnwrap(surface.nativeLayer.player).rate, 0.75, accuracy: 0.01)

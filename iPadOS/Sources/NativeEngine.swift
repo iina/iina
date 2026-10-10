@@ -27,10 +27,12 @@ final class NativeEngine: @preconcurrency PlaybackEngine {
     private var codec = ""
     private var desiredPaused = false
     private var speed = 1.0
+    private var speedUpdateQueued = false
     private var start = 0.0
     private var ready = false
     private var stopped = false
     private var seekGeneration = 0
+    private var resumingAfterSeek = false
     private var loopRange: ClosedRange<Double>?
     private var lastDiagnostics = Date.distantPast
     private var captureGenerator: AVAssetImageGenerator?
@@ -56,7 +58,7 @@ final class NativeEngine: @preconcurrency PlaybackEngine {
                 // AVKit's PiP controls operate on AVPlayer directly.
                 if status == .paused {
                     let atLoopEnd = self.loopRange.map { self.player.currentTime().seconds >= $0.upperBound - 0.001 } ?? false
-                    if !atLoopEnd { self.desiredPaused = true }
+                    if !atLoopEnd, !self.resumingAfterSeek { self.desiredPaused = true }
                 }
                 if status == .playing {
                     self.desiredPaused = false
@@ -251,7 +253,15 @@ final class NativeEngine: @preconcurrency PlaybackEngine {
         case "speed":
             guard let number = Double(value) else { return }
             speed = number
-            if ready { applyPlaybackState() }
+            if ready, !speedUpdateQueued {
+                // Apply the final choice once when several controls update in one turn.
+                speedUpdateQueued = true
+                DispatchQueue.main.async { [weak self] in
+                    guard let self, !self.stopped else { return }
+                    self.speedUpdateQueued = false
+                    self.applyPlaybackState()
+                }
+            }
         case "volume":
             guard let number = Double(value) else { return }
             player.volume = Float(max(0, min(number, 100)) / 100)
@@ -284,6 +294,7 @@ final class NativeEngine: @preconcurrency PlaybackEngine {
         if !ready { start = seconds; return }
         seekGeneration += 1
         let generation = seekGeneration
+        resumingAfterSeek = resumeAfter
         player.seek(to: CMTime(seconds: max(0, seconds), preferredTimescale: 600),
                     toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] finished in
             DispatchQueue.main.async {
@@ -292,6 +303,7 @@ final class NativeEngine: @preconcurrency PlaybackEngine {
                     self.deliver(.seekFinished(self.player.currentTime().seconds))
                     if resumeAfter { self.applyPlaybackState() }
                 } else { self.deliver(.failure("AVPlayer could not seek to the requested position.")) }
+                self.resumingAfterSeek = false
             }
         }
     }

@@ -13,7 +13,7 @@
 </p>
 
 ---
-> **Experimental iPadOS contribution:** This fork's `ipados` branch adds a separate [iPad application](iPadOS/README.md) for upstream consideration. It is not an official IINA iPadOS release. The additions were made on 2026-10-10 under GPLv3 with AI assistance; see [notices](iPadOS/THIRD_PARTY_NOTICES.md). Upstream's macOS project and history are retained.
+> **Experimental iPadOS contribution:** This fork's `ipados` branch adds a separate [iPad application](iPadOS/README.md) for upstream consideration. It is not an official IINA iPadOS release. The additions were made on 2026-10-10 under GPLv3 with AI assistance; see [notices](iPadOS/THIRD_PARTY_NOTICES.md). Upstream's macOS project and history are retained. See [app screenshots](iPadOS/README.md#screenshots) and the [beginner installation guide](iPadOS/INSTALL.md).
 
 [![Crowdin](https://badges.crowdin.net/iina/localized.svg)](https://crowdin.com/project/iina)
 ## Features

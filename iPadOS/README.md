@@ -6,6 +6,22 @@ The iPadOS implementation was added on **2026-10-10** and is licensed under **GP
 
 The current application version is **0.8.0, build 8**. This contribution contains application sources, build definitions, licensed artwork, and synthetic test assets. Compiled applications and downloaded playback-library bundles are not included.
 
+## Install on your iPad
+
+New to Xcode? Start with the **[step-by-step installation guide](INSTALL.md)**. It walks through downloading the correct branch, connecting your iPad, selecting your own signing account, pressing Run, and renewing a free test build. No coding, Terminal, or XcodeGen is required.
+
+You need a Mac, Xcode 26 or newer with support for your iPad's OS, and an iPad running iPadOS 17 or newer. This is a personal development installation; no App Store, TestFlight, or IPA release is provided here. Free Personal Team signing expires after seven days; the guide explains how to reinstall.
+
+## Screenshots
+
+Actual simulator snapshots using synthetic test media. Click an image to open the full-size capture; [capture notes](Screenshots/README.md) explain the test media and simulator differences.
+
+| Video settings | Playback speed | Touch controls and layout |
+| --- | --- | --- |
+| [<img src="Screenshots/video-settings.png" alt="Video sidebar with codec, aspect ratio, crop, rotation, and speed controls" width="260">](Screenshots/video-settings.png) | [<img src="Screenshots/playback-speed.png" alt="Playing synthetic video with the bottom playback speed picker open" width="260">](Screenshots/playback-speed.png) | [<img src="Screenshots/controls-layout.png" alt="Layout sidebar with touch gestures and docked controls settings" width="260">](Screenshots/controls-layout.png) |
+| **Music mini-player** | **Saved playlists** | **Frame capture** |
+| [<img src="Screenshots/music-mini-player.png" alt="Music mini-player showing synthetic test audio" width="260">](Screenshots/music-mini-player.png) | [<img src="Screenshots/saved-playlists.png" alt="Saved playlist library containing a UI test playlist" width="260">](Screenshots/saved-playlists.png) | [<img src="Screenshots/frame-capture.png" alt="Captured synthetic video frame with Save or Share controls" width="260">](Screenshots/frame-capture.png) |
+
 ## Build
 
 1. Open `IINAPad.xcodeproj` with Xcode 26 or newer; the Icon Composer assets require that toolchain. Xcode 27 is used for the current local checks.
@@ -57,7 +73,7 @@ The project built successfully with the pinned dependencies. The original public
 
 The final unit/integration run passed **18 of 18 tests** on the iOS 26.5 simulator with Xcode 27. The rapid-rate regression also passed **10 consecutive repetitions**. The source used for testing was verified against the working files by checksum. The maintained UI suite also passed **3 of 3 tests**, covering the bottom speed menu, playback tools/saved playlists, and touch gestures. Physical behavior has not been retested for these follow-up changes; broader compatibility and release validation remain necessary.
 
-The source/artwork/test-assets review found no sensitive-content issues. Local verification logs, screenshots, signing material, account state, and internal notes are excluded from the contribution.
+The source/artwork/test-assets review found no sensitive-content issues. Private verification logs, original working screenshots, signing material, account state, and internal notes remain excluded. The reviewed synthetic-media screenshots in `Screenshots` are included as public documentation.
 
 ## Contribution status
 

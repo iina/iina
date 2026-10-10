@@ -53,13 +53,13 @@
 "I2E-6Z-Gnn.title" = "驅動：";
 
 /* Class = "NSTextFieldCell"; title = "Estimated Disp FPS"; ObjectID = "JN9-3E-OJp"; */
-"JN9-3E-OJp.title" = "預估螢幕 FPS：";
+"JN9-3E-OJp.title" = "預估螢幕 FPS";
 
 /* Class = "NSTextFieldCell"; title = "File Path:"; ObjectID = "Jxp-Wf-BhU"; */
 "Jxp-Wf-BhU.title" = "檔案路徑：";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "KqD-NM-WiK"; */
-"KqD-NM-WiK.title" = "大小：";
+"KqD-NM-WiK.title" = "大細：";
 
 /* Class = "NSTextFieldCell"; title = "Channels:"; ObjectID = "Luq-rQ-aO4"; */
 "Luq-rQ-aO4.title" = "聲道：";
@@ -113,7 +113,7 @@
 "dtn-wS-j6U.title" = "屬性：";
 
 /* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "f2P-qb-wRx"; */
-"f2P-qb-wRx.title" = "大小：";
+"f2P-qb-wRx.title" = "大細：";
 
 /* Class = "NSTabViewItem"; label = "General"; ObjectID = "f7a-XG-NCc"; */
 "f7a-XG-NCc.label" = "一般";
@@ -125,7 +125,7 @@
 "g8p-Ec-awO.title" = "預估輸出 FPS：";
 
 /* Class = "NSTextFieldCell"; title = "VIDEO"; ObjectID = "gDG-Eq-1Bc"; */
-"gDG-Eq-1Bc.title" = "視訊";
+"gDG-Eq-1Bc.title" = "影片";
 
 /* Class = "NSTextFieldCell"; title = "A/V Sync Diff:"; ObjectID = "iVK-Ck-Lyq"; */
 "iVK-Ck-Lyq.title" = "影音同步校正：";
@@ -176,7 +176,7 @@
 "UrR-u2-hFz.title" = "像素格式：";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "zDk-Ie-EPs"; */
-"zDk-Ie-EPs.headerCell.title" = "选项";
+"zDk-Ie-EPs.headerCell.title" = "選項";
 
 /* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "x6R-q7-efY"; */
 "x6R-q7-efY.headerCell.title" = "值";

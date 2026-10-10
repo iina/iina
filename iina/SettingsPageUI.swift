@@ -313,17 +313,23 @@ fileprivate class GeometryBindings: NSObject {
   @objc func updateGeometry(_ sender: AnyObject) {
     var geometry = ""
     if windowSizeSwitch.nsSwitch.state == .on {
+      let isPercent = windowSizeUnit.selectedTag() == UnitPercentTag
+      windowSizeValue.stringValue = GeometryDef.normalizedValue(windowSizeValue.stringValue, isPercent: isPercent)
       geometry += windowSizeSide.selectedTag() == SizeWidthTag ? "" : "x"
       geometry += windowSizeValue.stringValue
-      geometry += windowSizeUnit.selectedTag() == UnitPointTag ? "" : "%"
+      geometry += isPercent ? "%" : ""
     }
     if windowPosSwitch.nsSwitch.state == .on {
+      let xIsPercent = windowPosXUnit.selectedTag() == UnitPercentTag
+      let yIsPercent = windowPosYUnit.selectedTag() == UnitPercentTag
+      windowPosXOffset.stringValue = GeometryDef.normalizedValue(windowPosXOffset.stringValue, isPercent: xIsPercent)
+      windowPosYOffset.stringValue = GeometryDef.normalizedValue(windowPosYOffset.stringValue, isPercent: yIsPercent)
       geometry += windowPosXAnchor.selectedTag() == SideLeftTag ? "+" : "-"
       geometry += windowPosXOffset.stringValue
-      geometry += windowPosXUnit.selectedTag() == UnitPointTag ? "" : "%"
+      geometry += xIsPercent ? "%" : ""
       geometry += windowPosYAnchor.selectedTag() == SideBottomTag ? "+" : "-"
       geometry += windowPosYOffset.stringValue
-      geometry += windowPosYUnit.selectedTag() == UnitPointTag ? "" : "%"
+      geometry += yIsPercent ? "%" : ""
     }
     Preference.set(geometry, for: .initialWindowSizePosition)
   }

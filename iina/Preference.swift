@@ -76,6 +76,8 @@ struct Preference {
 
     /** Resume from last position */
     static let resumeLastPosition = Key("resumeLastPosition")
+    /** Save position before manually changing the playing item in a playlist (bool) */
+    static let savePositionOnPlaylistNavigation = Key("savePositionOnPlaylistNavigation")
 
     static let preventScreenSaver = Key("preventScreenSaver")
     static let allowScreenSaverForAudio = Key("allowScreenSaverForAudio")
@@ -1069,6 +1071,7 @@ struct Preference {
     .useLegacyFullScreen: false,
     .showChapterPos: false,
     .resumeLastPosition: true,
+    .savePositionOnPlaylistNavigation: false,
     .preventScreenSaver: true,
     .allowScreenSaverForAudio: false,
     .useMediaKeys: true,
@@ -1462,6 +1465,7 @@ struct Preference {
            .recordRecentFiles,
            .replayGainClip,
            .resumeLastPosition,
+           .savePositionOnPlaylistNavigation,
            .scaleRemainingTime,
            .screenshotCopyToClipboard,
            .screenshotIncludeSubtitle,

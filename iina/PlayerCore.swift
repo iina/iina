@@ -1593,9 +1593,11 @@ class PlayerCore: NSObject {
   /// - Parameter pos: Position of the entry in the playlist to be played.
   func playFileInPlaylist(_ pos: Int) {
     mainWindow.videoView.displayActive()
-    // mpv only saves the watch-later file on quit or a loadfile replacement. Switching
-    // playlist entries bypasses both paths, so save the current entry before replacing it.
-    savePlaybackPosition()
+    // Keep mpv's normal playlist behavior unless the user explicitly opts in.
+    // Re-selecting the current entry reloads it; that is not playlist navigation.
+    if info.playlist.indices.contains(pos) && !info.playlist[pos].isPlaying {
+      savePlaybackPositionBeforePlaylistNavigation()
+    }
     if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
       log("Pausing playback before playing entry at index \(pos) in the playlist")
       mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
@@ -1625,8 +1627,7 @@ class PlayerCore: NSObject {
       seek(absoluteSecond: 0)
     } else {
       mainWindow.videoView.displayActive()
-      // playlist-next and playlist-prev do not cause mpv to save the watch-later file.
-      savePlaybackPosition()
+      savePlaybackPositionBeforePlaylistNavigation()
       if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
         log("Pausing playback before playing \(nextMedia ? "next" : "previous") entry in playlist")
         mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
@@ -1993,6 +1994,15 @@ class PlayerCore: NSObject {
 
   func setSubFont(_ font: String) {
     mpv.setString(MPVOption.Subtitles.subFont, font)
+  }
+
+  /// Opt-in saving when manually switching playlist items. Do not write an empty
+  /// watch-later record if the current file has not reported a playback position.
+  private func savePlaybackPositionBeforePlaylistNavigation() {
+    guard Preference.bool(for: .savePositionOnPlaylistNavigation),
+          info.state.active,
+          info.videoPosition != nil else { return }
+    savePlaybackPosition()
   }
 
   func savePlaybackPosition() {

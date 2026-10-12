@@ -12,7 +12,6 @@
     { self, nixpkgs }:
     let
       appName = "IINA";
-      developerDir = "/Applications/Xcode.app/Contents/Developer";
 
       systemNames = [
         "aarch64-darwin"
@@ -32,17 +31,17 @@
           resign = pkgs.writeShellApplication {
             name = "iina-resign";
             runtimeInputs = [
-              pkgs.findutils
               pkgs.coreutils
             ];
             text = ''
               set -euo pipefail
               app="$1"
 
-              find "$app" -type d -exec chmod u+rwx {} \;
-              find "$app" -type f -exec chmod u+rw  {} \;
-              find "$app/Contents/MacOS" -type f -perm -111 -exec chmod u+rw {} \;
+              find "$app" -type d -print0 | xargs -0 chmod u+rwx
+              find "$app" -type f -print0 | xargs -0 chmod u+rw
+              find "$app/Contents/MacOS" -type f -perm -111 -print0 | xargs -0 chmod u+rw
 
+              /usr/bin/codesign --remove-signature "$app"
               /usr/bin/codesign --force --deep --sign - "$app"
             '';
           };
@@ -57,8 +56,9 @@
 
           # Pull system's xcode in
           xcode = pkgs.runCommand "system-xcode" { } ''
+            export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer";
             mkdir -p "$out/bin"
-            ln -sf "${developerDir}/usr/bin/xcodebuild" "$out/bin/xcodebuild"
+            ln -sf "$DEVELOPER_DIR/usr/bin/xcodebuild" "$out/bin/xcodebuild"
           '';
 
           # FFmpeg 8 must be built with a newer version of nasm than provided by nixpkgs 25.05.
@@ -509,7 +509,6 @@
                   pkgs.zstd # Needed by libarchive
 
                   # Indirect libs
-                  pkgs.libcxx # C standard library
                   pkgs.libdovi # Dolby Vision, needed by libplacebo
                 ]
             ) # END pkgs.lib.flatten
@@ -519,8 +518,6 @@
           spmDeps = pkgs.stdenv.mkDerivation {
             pname = "iina-spm-deps";
             version = "${self.shortRev or self.dirtyShortRev}";
-            dontFixup = true;
-            nativeBuildInputs = [ xcode ];
 
             # Only include SwiftPM-related files as input
             src = pkgs.lib.cleanSourceWith {
@@ -535,15 +532,18 @@
                 || pkgs.lib.hasPrefix "iina.xcodeproj" relPath;
             };
 
-            buildPhase = ''
-              export HOME=$PWD/.home
-              export CFFIXED_USER_HOME="$HOME"
-              export __XPC_CFFIXED_USER_HOME="$HOME"
-              export TMPDIR="$PWD/.tmp"; mkdir -p "$TMPDIR"
-              export DEVELOPER_DIR="${developerDir}"
+            dontFixup = true;
 
+            nativeBuildInputs = [ xcode ];
+
+            buildPhase = ''
+              export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer";
               APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
-              export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin"
+              export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin:$PATH"
+              export HOME=$PWD/.home  # Override home directory to isolate Xcode build from the host system
+              export CFFIXED_USER_HOME="$HOME". # Another home variable to override
+              export __XPC_CFFIXED_USER_HOME="$HOME" # Another home variable to override, for tests
+              export TMPDIR="$PWD/.tmp"; mkdir -p "$TMPDIR"  # Overrides Derived Data directory
 
               export TOOLCHAINS=XcodeDefault
               export SDKROOT=macosx
@@ -557,27 +557,22 @@
                 ARCH="x86_64"
               fi
 
-              mkdir -p .spm .spm-cache build
+              mkdir -p $out/.spm $out/.spm-cache $out/build
 
               xcodebuild \
                 -workspace iina.xcodeproj/project.xcworkspace \
                 -scheme iina \
                 -destination "$XCODE_BUILD_DESTINATION" \
                 -resolvePackageDependencies \
-                -derivedDataPath "$PWD/build" \
-                -clonedSourcePackagesDirPath "$PWD/.spm" \
-                -packageCachePath "$PWD/.spm-cache" \
+                -derivedDataPath "$out/build" \
+                -clonedSourcePackagesDirPath "$out/.spm" \
+                -packageCachePath "$out/.spm-cache" \
                 -disablePackageRepositoryCache \
                 -IDEPackageSupportDisableManifestSandbox=YES \
                 -IDEPackageSupportDisablePluginExecutionSandbox=YES \
                 ARCHS=$ARCH ONLY_ACTIVE_ARCH=YES
             '';
 
-            # Copy everything — keep full structure (SPM state, caches, workspace, etc.)
-            installPhase = ''
-              mkdir -p $out
-              cp -R . $out/
-            '';
           }; # END spmDeps
 
           packages = {
@@ -592,8 +587,6 @@
               nativeBuildInputs = [
                 libTool
                 pkgs.coreutils
-                pkgs.findutils
-                pkgs.rsync
                 spmDeps
               ];
 
@@ -606,7 +599,8 @@
                 mkdir -p deps/executable
 
                 echo "[${systemName}] 📦 Copying SPM deps"
-                rsync -a "${spmDeps}/" ./
+                cp -Rv "${spmDeps}"/* .
+                cp -Rv "${spmDeps}"/.* .
                 chmod -R u+rwx,g+rx,o+rx .
 
                 echo "[${systemName}] 📦 Canonicalizing libs"
@@ -615,7 +609,9 @@
 
               installPhase = ''
                 mkdir -p $out
-                cp -R . "$out/"
+                # Note: Do not use -L. Need to preserve relative symlinks for later xcodebuild to resolve correctly.
+                cp -Rv . "$out"
+                cp -Rv .* "$out"
               '';
 
             }; # END iina
@@ -630,46 +626,38 @@
 
               nativeBuildInputs = [
                 libTool
-                pkgs.rsync
                 pkgs.coreutils
-                pkgs.findutils
                 pkgs.gnused
                 xcode
               ];
 
               buildPhase = ''
-                echo "📦 Copying header files"
+                echo "📦 Copying header files to deps/include"
                 mkdir -p deps
                 # Make sure to name this directory properly when copying
-                cp -vRL "${depsInclude}" deps/include
-
-                export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer";
-                APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
-                # For nixos-26.05+: need to explicitly use the GNU findutils version of find, as the system find (from macOS) does not support -print0
-                # and will fail with "find: -print0: unknown primary or operator" in fixup phase
-                export PATH="${pkgs.findutils}/bin:$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin:$PATH"
+                cp -Rv "${depsInclude}" deps/include
 
                 echo "📦 Combining universal libs"
                 # Merge each lib in archroot1 with its counterpart in archroot0, creating universal binaries in archroot0
-                archroot0=.
-                archroot1="${builtins.elemAt self.singleArchDeps 1}/"
+                archroot0=$PWD
+                archroot1="${builtins.elemAt self.singleArchDeps 1}"
 
-                ${pkgs.rsync}/bin/rsync -a "${builtins.elemAt self.singleArchDeps 0}/" "$archroot0/"
-                chmod -R u+w "$archroot0"
                 echo "📦 Copying libs"
+                cp -RLv "${builtins.elemAt self.singleArchDeps 0}/"* "$archroot0/"
+                cp -Rv "${builtins.elemAt self.singleArchDeps 0}/.spm"* "$archroot0"
+                chmod -R u+w "$archroot0"
 
                 ${libTool}/bin/iina-lib-tool --canonicalize --merge-architectures "./deps/lib" "./deps/executable" \
                   --archroot0 "$archroot0" --archroot1 "$archroot1"
 
+                chmod -R u+rwx,g+rx,o+rx . ./.*
+
                 # Rewrite SwiftPM workspace-state.json to fix absolute paths
                 if [ -f .spm/workspace-state.json ]; then
-                  old_prefix=$(grep -Eo "/nix/var/nix/builds/nix-[^/]+/source" .spm/workspace-state.json | head -n1)
-                  echo "Patching workspace-state.json: replacing $old_prefix → $PWD"
-                  sed -i -E "s|$old_prefix|$PWD|g" .spm/workspace-state.json
+                  old_prefix=$(grep -Eo '/nix/.*/\.spm/' .spm/workspace-state.json | head -n1)
+                  echo "Patching workspace-state.json: replacing $old_prefix → $PWD/.spm/"
+                  ${pkgs.gnused}/bin/sed -i -E "s|$old_prefix|$PWD/.spm/|g" .spm/workspace-state.json
                 fi
-
-                echo "🔧 Setting up build environment for ${appName}"
-                chmod -R u+rwx,g+rx,o+rx .
 
                 git_rev="${self.rev or self.dirtyRev}"
                 # Nix flakes cannot currently access branch info. Doing so may violate the stated goal of maximum
@@ -677,12 +665,18 @@
                 # Just use a placeholder for now:
                 git_branch="<nix-build>"
                 echo "Git branch: $git_branch, revision: $git_rev"
-                export HOME=$PWD/.home
-                export CFFIXED_USER_HOME="$HOME"
-                export __XPC_CFFIXED_USER_HOME="$HOME"
-                export TMPDIR="$PWD/.tmp"; mkdir -p "$TMPDIR"
+
+                echo "🔧 Setting up build environment for ${appName}"
+
                 export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer";
+                APPLE_BIN="$DEVELOPER_DIR/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+                export PATH="$APPLE_BIN:$DEVELOPER_DIR/usr/bin:/usr/bin:/bin:$PATH"
+                export HOME=$PWD/.home  # Override home directory to isolate Xcode build from the host system
+                export CFFIXED_USER_HOME="$HOME". # Another home variable to override
+                export __XPC_CFFIXED_USER_HOME="$HOME" # Another home variable to override, for tests
+                export TMPDIR="$PWD/.tmp"; mkdir -p "$TMPDIR"  # Overrides Derived Data directory
                 export XCODE_BUILD_DESTINATION='platform=macOS'
+                PLUGINS_DIR="$DEVELOPER_DIR/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins"
 
                 unset CC CXX LD AR RANLIB NM STRIP OBJCOPY \
                   CFLAGS CXXFLAGS LDFLAGS SDKROOT CPATH C_INCLUDE_PATH CPLUS_INCLUDE_PATH LIBRARY_PATH \
@@ -737,7 +731,7 @@
 
                 echo "📦 Copying includes to output dir"
                 mkdir -p "$out"
-                cp -RL deps/include $out/include
+                cp -RLv deps/include $out/include
 
                 app_real=$(realpath "$app" 2>/dev/null || echo "$app")
                 echo "✅✅ Done! Universal ${appName}.app is ready at $app_real"

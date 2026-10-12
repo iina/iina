@@ -7,6 +7,45 @@
 
 import Foundation
 
+/// The playlist the files in the folder of the opened file are added to.
+protocol FolderPlaylist: AnyObject {
+  /// Throws `PlayerCore.TicketExpiredError.ticketExpired` once the playlist of the opened file has been abandoned.
+  func checkFolderTicket() throws
+  /// Add the file with the given path to the end of the playlist.
+  func append(_ path: String)
+  /// Insert the file with the given path into the playlist at the given index.
+  func insert(_ path: String, at index: Int)
+}
+
+/// Adding the playable files in the folder of the opened file to its playlist.
+enum FolderPlaylistAssembly {
+
+  /// Add the files with the given paths, in folder order, around the opened file.
+  ///
+  /// The files after the opened file are appended first, in order, so that the next entry is available as soon as possible. Then the
+  /// files before it are inserted ahead of it, each at its index in the folder. If the opened file is not among the files then all of
+  /// them are inserted. The ticket is checked before each file is added, and adding stops once the playlist has been abandoned.
+  static func add(_ paths: [String], openedPath: String?, to playlist: FolderPlaylist) throws {
+    let openedIndex = index(of: openedPath, in: paths)
+    if let openedIndex {
+      for path in paths[(openedIndex + 1)...] {
+        try playlist.checkFolderTicket()
+        playlist.append(path)
+      }
+    }
+    for (index, path) in paths[..<(openedIndex ?? paths.count)].enumerated() {
+      try playlist.checkFolderTicket()
+      playlist.insert(path, at: index)
+    }
+  }
+
+  /// The index among the paths of the file with the given path.
+  static func index(of path: String?, in paths: [String]) -> Int? {
+    guard let path else { return nil }
+    return paths.firstIndex(of: path)
+  }
+}
+
 /// Identifies the playlist of the opened file, into which the files in its folder are added.
 ///
 /// The ticket changes when the playlist is abandoned: when another file is opened with a load command and when the background task

@@ -70,8 +70,7 @@ class VideoView: NSView {
 
     // other settings
     autoresizingMask = [.width, .height]
-    wantsBestResolutionOpenGLSurface = true
-    wantsExtendedDynamicRangeOpenGLSurface = true
+    ObjcUtils.enableHighResolutionOpenGLSurface(for: self)
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])

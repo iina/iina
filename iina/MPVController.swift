@@ -129,6 +129,8 @@ class MPVController: NSObject {
     MPVOption.PlaybackControl.pause: MPV_FORMAT_FLAG,
     MPVOption.PlaybackControl.loopPlaylist: MPV_FORMAT_STRING,
     MPVOption.PlaybackControl.loopFile: MPV_FORMAT_STRING,
+    MPVOption.PlaybackControl.abLoopA: MPV_FORMAT_NONE,
+    MPVOption.PlaybackControl.abLoopB: MPV_FORMAT_NONE,
     MPVProperty.chapter: MPV_FORMAT_INT64,
     MPVOption.Video.deinterlace: MPV_FORMAT_FLAG,
     MPVOption.Video.hwdec: MPV_FORMAT_STRING,
@@ -1314,6 +1316,10 @@ class MPVController: NSObject {
         }
         player.postNotification(.iinaLoopStatusChanged)
       }
+
+    case MPVOption.PlaybackControl.abLoopA, MPVOption.PlaybackControl.abLoopB:
+      // Loop points could also be changed by plugins, input.conf bindings or mpv scripts.
+      DispatchQueue.main.async { self.player.syncAbLoop() }
 
     case MPVOption.Video.deinterlace:
       guard let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {

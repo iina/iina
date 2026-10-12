@@ -388,6 +388,20 @@
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 		E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */; };
 		E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */; };
+		7B572196C16B370CB01C042A /* PlaylistSteppingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A00F41372DDA424B456658 /* PlaylistSteppingTests.swift */; };
+		134845012397DA909F0A5418 /* EntryStartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26BF0C80B1E7EC0B7A82CF4 /* EntryStartTests.swift */; };
+		220C122FACF43E1A09332019 /* FolderPlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08A01696744ECD3273813ED /* FolderPlaylistTests.swift */; };
+		FA5525CAE517A7D2E74559DB /* ScrollSeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DF974A51C6FB99F86B03E8 /* ScrollSeekTests.swift */; };
+		E0B9C48A93C02FB38CDC263C /* CacheConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8625D8EFF20AB8A414B23754 /* CacheConfigurationTests.swift */; };
+		AE8C4AE3C7E2F1334A8DFE80 /* ThumbnailScanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689D9439ADD0FBF59EC0F231 /* ThumbnailScanTests.swift */; };
+		D50F14407F1600A9831037D9 /* TestVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273A1E980DE5C107E3212354 /* TestVideo.swift */; };
+		EC38D0C556EB1051F0FCB6A7 /* MPVReplyCallbacksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A71EF03B29B543076A45EA6 /* MPVReplyCallbacksTests.swift */; };
+		1B81B6F0290E4E9296C06422 /* FullLengthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAEFB8801A84FA26FA666E0 /* FullLengthTests.swift */; };
+		7622E1D74A8C6A99C3746ADF /* MPVAsyncRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264E8283B2D02B8DF7938053 /* MPVAsyncRequestTests.swift */; };
+		473CDBC1C7A20A6DFFBEA659 /* fragmented.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CFF6AF318D494574FD7545CB /* fragmented.mp4 */; };
+		7E7B88D1E0E4FEBEBE54E665 /* PlayerSteppingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED8F81B0F77F794591078A2 /* PlayerSteppingTests.swift */; };
+		4D625CF2EB0B256DE2DF5698 /* ObjcUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF328A617E62AF451A44F8C4 /* ObjcUtilsTests.swift */; };
+		F6A14A829DCC3BEC15B7851D /* PlayerPlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CDD385009587A603F073FA /* PlayerPlaybackTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -411,6 +425,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E38558862A484A2D0083772D;
 			remoteInfo = "iina-plugin";
+		};
+		F0CAD4CC72A897157145D0F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84EB1ECE1D2F51D3004FA5A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84EB1ED51D2F51D3004FA5A1;
+			remoteInfo = iina;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1830,6 +1851,22 @@
 		FB011A0421F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB011A0621F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		FB011A0721F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		F35E7CBA86EDD97115E7965D /* iinaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iinaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EBCC65ADCB066A020F3F69B /* iinaTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = iinaTests.xcconfig; sourceTree = "<group>"; };
+		09A00F41372DDA424B456658 /* PlaylistSteppingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistSteppingTests.swift; sourceTree = "<group>"; };
+		C26BF0C80B1E7EC0B7A82CF4 /* EntryStartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryStartTests.swift; sourceTree = "<group>"; };
+		E08A01696744ECD3273813ED /* FolderPlaylistTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPlaylistTests.swift; sourceTree = "<group>"; };
+		B2DF974A51C6FB99F86B03E8 /* ScrollSeekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSeekTests.swift; sourceTree = "<group>"; };
+		8625D8EFF20AB8A414B23754 /* CacheConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheConfigurationTests.swift; sourceTree = "<group>"; };
+		689D9439ADD0FBF59EC0F231 /* ThumbnailScanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailScanTests.swift; sourceTree = "<group>"; };
+		273A1E980DE5C107E3212354 /* TestVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVideo.swift; sourceTree = "<group>"; };
+		7A71EF03B29B543076A45EA6 /* MPVReplyCallbacksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVReplyCallbacksTests.swift; sourceTree = "<group>"; };
+		0BAEFB8801A84FA26FA666E0 /* FullLengthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLengthTests.swift; sourceTree = "<group>"; };
+		264E8283B2D02B8DF7938053 /* MPVAsyncRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVAsyncRequestTests.swift; sourceTree = "<group>"; };
+		CFF6AF318D494574FD7545CB /* fragmented.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = fragmented.mp4; sourceTree = "<group>"; };
+		9ED8F81B0F77F794591078A2 /* PlayerSteppingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSteppingTests.swift; sourceTree = "<group>"; };
+		EF328A617E62AF451A44F8C4 /* ObjcUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjcUtilsTests.swift; sourceTree = "<group>"; };
+		90CDD385009587A603F073FA /* PlayerPlaybackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerPlaybackTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1914,6 +1951,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6D0E9B70B4DCB1D8CFB41F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1937,6 +1981,7 @@
 				4964988B2919E47900CD61A5 /* iina-cli.xcconfig */,
 				515B5E592A579782001FCD49 /* iina-plugin.xcconfig */,
 				496498882919E47900CD61A5 /* iina.xcconfig */,
+				4EBCC65ADCB066A020F3F69B /* iinaTests.xcconfig */,
 				4964988E2919E47900CD61A5 /* OpenInIINA.xcconfig */,
 				4964988A2919E47900CD61A5 /* Shared.xcconfig */,
 				4964988C2919E47900CD61A5 /* Debug.xcconfig */,
@@ -2393,6 +2438,7 @@
 				E3DE8DCB1FD8166A0021921C /* iina-cli */,
 				E38558882A484A2D0083772D /* iina-plugin */,
 				49542976216C34950058F680 /* OpenInIINA */,
+				4C4A3089432F3A7215EFE349 /* iinaTests */,
 				84EB1ED71D2F51D3004FA5A1 /* Products */,
 				8461BA641E42344D008BB852 /* Executables */,
 				848290731D95978100C3C76C /* Frameworks */,
@@ -2409,6 +2455,7 @@
 				E3DE8DCA1FD8166A0021921C /* iina-cli */,
 				49542973216C34950058F680 /* OpenInIINA.appex */,
 				E38558872A484A2D0083772D /* iina-plugin */,
+				F35E7CBA86EDD97115E7965D /* iinaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2604,6 +2651,27 @@
 			path = "iina-cli";
 			sourceTree = "<group>";
 		};
+		4C4A3089432F3A7215EFE349 /* iinaTests */ = {
+			isa = PBXGroup;
+			children = (
+				8625D8EFF20AB8A414B23754 /* CacheConfigurationTests.swift */,
+				C26BF0C80B1E7EC0B7A82CF4 /* EntryStartTests.swift */,
+				E08A01696744ECD3273813ED /* FolderPlaylistTests.swift */,
+				0BAEFB8801A84FA26FA666E0 /* FullLengthTests.swift */,
+				264E8283B2D02B8DF7938053 /* MPVAsyncRequestTests.swift */,
+				CFF6AF318D494574FD7545CB /* fragmented.mp4 */,
+				9ED8F81B0F77F794591078A2 /* PlayerSteppingTests.swift */,
+				EF328A617E62AF451A44F8C4 /* ObjcUtilsTests.swift */,
+				90CDD385009587A603F073FA /* PlayerPlaybackTests.swift */,
+				7A71EF03B29B543076A45EA6 /* MPVReplyCallbacksTests.swift */,
+				09A00F41372DDA424B456658 /* PlaylistSteppingTests.swift */,
+				B2DF974A51C6FB99F86B03E8 /* ScrollSeekTests.swift */,
+				273A1E980DE5C107E3212354 /* TestVideo.swift */,
+				689D9439ADD0FBF59EC0F231 /* ThumbnailScanTests.swift */,
+			);
+			path = iinaTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2697,6 +2765,24 @@
 			productReference = E3DE8DCA1FD8166A0021921C /* iina-cli */;
 			productType = "com.apple.product-type.tool";
 		};
+		3D766FC5D6B06608405EDB68 /* iinaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14DD51DD1BC63DD735D0ADE4 /* Build configuration list for PBXNativeTarget "iinaTests" */;
+			buildPhases = (
+				985AC696636517368A251664 /* Sources */,
+				D6D0E9B70B4DCB1D8CFB41F7 /* Frameworks */,
+				E7ACCA64912D45400AD6AEC4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0D50C666D4E218911553A395 /* PBXTargetDependency */,
+			);
+			name = iinaTests;
+			productName = iinaTests;
+			productReference = F35E7CBA86EDD97115E7965D /* iinaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2727,6 +2813,10 @@
 						DevelopmentTeam = 67CQ77V27R;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Manual;
+					};
+					3D766FC5D6B06608405EDB68 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 84EB1ED51D2F51D3004FA5A1;
 					};
 				};
 			};
@@ -2783,6 +2873,7 @@
 				E3DE8DC91FD8166A0021921C /* iina-cli */,
 				E38558862A484A2D0083772D /* iina-plugin */,
 				49542972216C34950058F680 /* OpenInIINA */,
+				3D766FC5D6B06608405EDB68 /* iinaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2844,6 +2935,14 @@
 				518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7ACCA64912D45400AD6AEC4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				473CDBC1C7A20A6DFFBEA659 /* fragmented.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3167,6 +3266,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		985AC696636517368A251664 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E0B9C48A93C02FB38CDC263C /* CacheConfigurationTests.swift in Sources */,
+				134845012397DA909F0A5418 /* EntryStartTests.swift in Sources */,
+				220C122FACF43E1A09332019 /* FolderPlaylistTests.swift in Sources */,
+				1B81B6F0290E4E9296C06422 /* FullLengthTests.swift in Sources */,
+				7622E1D74A8C6A99C3746ADF /* MPVAsyncRequestTests.swift in Sources */,
+				7E7B88D1E0E4FEBEBE54E665 /* PlayerSteppingTests.swift in Sources */,
+				4D625CF2EB0B256DE2DF5698 /* ObjcUtilsTests.swift in Sources */,
+				F6A14A829DCC3BEC15B7851D /* PlayerPlaybackTests.swift in Sources */,
+				EC38D0C556EB1051F0FCB6A7 /* MPVReplyCallbacksTests.swift in Sources */,
+				7B572196C16B370CB01C042A /* PlaylistSteppingTests.swift in Sources */,
+				FA5525CAE517A7D2E74559DB /* ScrollSeekTests.swift in Sources */,
+				D50F14407F1600A9831037D9 /* TestVideo.swift in Sources */,
+				AE8C4AE3C7E2F1334A8DFE80 /* ThumbnailScanTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3184,6 +3303,11 @@
 			isa = PBXTargetDependency;
 			target = E38558862A484A2D0083772D /* iina-plugin */;
 			targetProxy = 5180D7782C17DB0D00CC9C1C /* PBXContainerItemProxy */;
+		};
+		0D50C666D4E218911553A395 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84EB1ED51D2F51D3004FA5A1 /* iina */;
+			targetProxy = F0CAD4CC72A897157145D0F6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4747,6 +4871,34 @@
 			};
 			name = Release;
 		};
+		42FD0E8A22E27DA6ADECE772 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EBCC65ADCB066A020F3F69B /* iinaTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		D6ACB8181071387A2C203553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EBCC65ADCB066A020F3F69B /* iinaTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		CA16696966871C09C7D55337 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EBCC65ADCB066A020F3F69B /* iinaTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Beta;
+		};
+		4AC247179208CC72246955E5 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EBCC65ADCB066A020F3F69B /* iinaTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Nightly;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4801,6 +4953,17 @@
 				E3DE8DCF1FD8166A0021921C /* Release */,
 				51A0F0F429FA2C65000130CF /* Beta */,
 				51537C7029FA25D000F9A472 /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14DD51DD1BC63DD735D0ADE4 /* Build configuration list for PBXNativeTarget "iinaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42FD0E8A22E27DA6ADECE772 /* Debug */,
+				D6ACB8181071387A2C203553 /* Release */,
+				CA16696966871C09C7D55337 /* Beta */,
+				4AC247179208CC72246955E5 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

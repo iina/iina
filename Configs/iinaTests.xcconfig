@@ -1,0 +1,14 @@
+//
+//  iinaTests.xcconfig
+//  iina
+//
+//  The unit tests run inside IINA.app, so that they can test the app's own code.
+//
+
+BUNDLE_LOADER = $(TEST_HOST)
+GENERATE_INFOPLIST_FILE = YES
+HEADER_SEARCH_PATHS = $(inherited) $(SRCROOT)/deps/include
+MACOSX_DEPLOYMENT_TARGET = 14.0
+PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.$(TARGET_NAME)
+PRODUCT_NAME = $(TARGET_NAME)
+TEST_HOST = $(BUILT_PRODUCTS_DIR)/IINA.app/Contents/MacOS/IINA

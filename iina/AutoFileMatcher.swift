@@ -123,33 +123,9 @@ class AutoFileMatcher {
   }
 
   private func addFilesToPlaylist() throws {
-    var addedCurrentVideo = false
-    var needQuit = false
-
     log("Adding files to playlist")
-    // add videos
-    for video in filesGroupedByMediaType[.video]! + filesGroupedByMediaType[.audio]! {
-      // add to playlist
-      if video.url.path == player.info.currentURL?.path {
-        addedCurrentVideo = true
-      } else if addedCurrentVideo {
-        try checkTicket()
-        player.appendToPlaylist(video.path, silent: true)
-      } else {
-        let count = player.mpv.getInt(MPVProperty.playlistCount)
-        let current = player.mpv.getInt(MPVProperty.playlistPos)
-        try checkTicket()
-        player.appendToPlaylist(video.path, silent: true)
-        player.mpv.command(.playlistMove, args: ["\(count)", "\(current)"], checkError: false,
-                           level: .verbose) { err in
-          if err == MPV_ERROR_COMMAND.rawValue { needQuit = true }
-          if err != 0 {
-            self.log("Error \(err) when adding files to playlist", level: .error)
-          }
-        }
-      }
-      if needQuit { break }
-    }
+    let files = filesGroupedByMediaType[.video]! + filesGroupedByMediaType[.audio]!
+    try FolderPlaylistAssembly.add(files.map { $0.path }, openedPath: player.info.currentURL?.path, to: self)
   }
 
   private func matchVideoAndSubSeries() throws -> [String: String] {
@@ -391,5 +367,20 @@ class AutoFileMatcher {
       log(err.localizedDescription, level: .error)
       return
     }
+  }
+}
+
+extension AutoFileMatcher: FolderPlaylist {
+
+  func checkFolderTicket() throws {
+    try checkTicket()
+  }
+
+  func append(_ path: String) {
+    player.appendToPlaylist(path, silent: true)
+  }
+
+  func insert(_ path: String, at index: Int) {
+    player.mpv.playlistInsert(path, index: index)
   }
 }

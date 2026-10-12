@@ -100,6 +100,9 @@ class PlaybackInfo {
 
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
+  /// The full length of the file being played when it was opened from its index and `mpv` reports a
+  /// shorter duration for it, see `FullLength`.
+  var fullLength: Double?
 
   var progress: Double {
     guard let progress = videoPosition / videoDuration else { return 0 }

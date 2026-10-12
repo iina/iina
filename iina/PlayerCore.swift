@@ -1003,8 +1003,9 @@ class PlayerCore: NSObject {
       percent = percent.clamped(to: 0..<100)
     }
     let useExact = forceExact ? true : Preference.bool(for: .useExactSeek)
-    let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
-    mpv.command(.seek, args: ["\(percent)", seekMode], checkError: false, level: .verbose)
+    // The seek is sent without waiting for mpv, so that the slider moving it never holds up the main thread.
+    let args = FullLength.seekArguments(percent: percent, fullLength: info.fullLength, exact: useExact)
+    mpv.asyncCommand(.seek, args: args, checkError: false, replyUserdata: 0, level: .verbose)
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
@@ -2177,6 +2178,7 @@ class PlayerCore: NSObject {
     info.displayWidth = 0
     info.displayHeight = 0
     info.videoDuration = VideoTime(duration)
+    info.fullLength = nil
     if let filename = mpv.getString(MPVProperty.path) {
       info.setCachedVideoDuration(filename, duration)
     }
@@ -2746,7 +2748,47 @@ class PlayerCore: NSObject {
         mainWindow.toggleWindowFullScreen()
       }
       EntryStart.startThumbnails(self)
+      findFullLength()
     }
+  }
+
+  /// Work out the full length of the file being played when `mpv` opened it from its index, and show it
+  /// in place of the shorter duration `mpv` reports, see `FullLength`.
+  ///
+  /// This starts once the play state of the file has been decided and runs off the main thread, so neither the
+  /// start of playback nor a step away waits for it. A result for a file that is no longer current is dropped.
+  private func findFullLength() {
+    guard let url = info.currentURL, url.isFileURL else { return }
+    let path = url.path
+    let shown = info.videoDuration?.second
+    DispatchQueue.global(qos: .utility).async { [self] in
+      let length = FFmpegController.fullLength(ofFragmentedFile: path)
+      guard let duration = FullLength.duration(shown: shown, fullLength: length) else { return }
+      // On main because PlaybackInfo is confined to the main thread, see MPVController.queue, and the time
+      // display is AppKit.
+      DispatchQueue.main.async { [self] in showFullLength(duration, shown: shown, ofFileAt: path) }
+    }
+  }
+
+  /// Show the full length worked out for the file at the given path, unless another file has become current or playback
+  /// has stopped since.
+  ///
+  /// Nothing here waits for `mpv`: the remaining time comes from the position the display already holds.
+  /// - Important: This must be called on the main thread, to which `PlaybackInfo` is confined, see `MPVController.queue`.
+  func showFullLength(_ duration: Double, shown: Double?, ofFileAt path: String) {
+    guard info.state.active, info.currentURL?.path == path else { return }
+    log("Full length of the file is \(duration)s, mpv reports \(shown ?? 0)s")
+    info.fullLength = duration
+    info.videoDuration = VideoTime(duration)
+    info.setCachedVideoDuration(path, duration)
+    if let position = info.videoPosition?.second {
+      // mpv's remaining time is based on the shorter duration it reports, see FullLength.
+      info.videoRemaining?.second = FullLength.remaining(
+        fullLength: duration, position: position,
+        speed: Preference.bool(for: .scaleRemainingTime) ? info.playSpeed : nil)
+    }
+    guard mainWindow.loaded else { return }
+    currentController.updatePlayTime(withDuration: true, andProgressBar: true)
   }
 
   /// Synchronize the video position cached in the `info.videoPosition` property.
@@ -2810,9 +2852,16 @@ class PlayerCore: NSObject {
     case .time:
       let isNetworkStream = info.isNetworkResource
       syncPosition()
-      info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
-      mpv.getDouble(MPVProperty.playtimeRemainingFull) :
-      mpv.getDouble(MPVProperty.timeRemainingFull)
+      if let fullLength = info.fullLength, let position = info.videoPosition?.second {
+        // mpv's remaining time is based on the shorter duration it reports, see FullLength.
+        info.videoRemaining?.second = FullLength.remaining(
+          fullLength: fullLength, position: position,
+          speed: Preference.bool(for: .scaleRemainingTime) ? info.playSpeed : nil)
+      } else {
+        info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
+        mpv.getDouble(MPVProperty.playtimeRemainingFull) :
+        mpv.getDouble(MPVProperty.timeRemainingFull)
+      }
       if isNetworkStream {
         // Update cache info
         info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)

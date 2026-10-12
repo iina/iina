@@ -227,7 +227,8 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
         // other properties
 
-        let duration = controller.getDouble(MPVProperty.duration)
+        // mpv reports a shorter duration for a file opened from its index, see FullLength.
+        let duration = info.fullLength ?? controller.getDouble(MPVProperty.duration)
         self.durationField.stringValue = VideoTime(duration).stringRepresentation
 
         let vwidth = controller.getInt(MPVProperty.width)

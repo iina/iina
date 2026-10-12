@@ -98,4 +98,13 @@ typedef NS_ENUM(NSInteger, FFThumbnailScanCheckpoint) {
 
 + (nullable NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
 
+/// The full length in seconds of a fragmented MP4 file that ends in an `mfra` index.
+///
+/// The file is opened from its index, and of its media only the first and last fragments are read. The index lists the file's random
+/// access points, so reading it is the part of the work that grows with the length of the file.
+/// - Parameter file: Path of the file.
+/// - Returns: The time from the start of the earliest stream to the end of the last packet, or a negative value when the file does not
+///            end in an `mfra` index or cannot be read.
++ (double)fullLengthOfFragmentedFile:(nonnull NSString *)file NS_SWIFT_NAME(fullLength(ofFragmentedFile:));
+
 @end

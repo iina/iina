@@ -23,8 +23,9 @@ enum FolderPlaylistAssembly {
   /// Add the files with the given paths, in folder order, around the opened file.
   ///
   /// The files after the opened file are appended first, in order, so that the next entry is available as soon as possible. Then the
-  /// files before it are inserted ahead of it, each at its index in the folder. If the opened file is not among the files then all of
-  /// them are inserted. The ticket is checked before each file is added, and adding stops once the playlist has been abandoned.
+  /// files before it are inserted ahead of it, each at its index in the folder. The opened file is found as described for
+  /// `index(of:in:)`. If the opened file is not among the files then all of them are inserted. The ticket is checked before each file
+  /// is added, and adding stops once the playlist has been abandoned.
   static func add(_ paths: [String], openedPath: String?, to playlist: FolderPlaylist) throws {
     let openedIndex = index(of: openedPath, in: paths)
     if let openedIndex {
@@ -40,9 +41,15 @@ enum FolderPlaylistAssembly {
   }
 
   /// The index among the paths of the file with the given path.
+  ///
+  /// A path equal to the given one is taken first. Failing that, the paths are compared with their symbolic links resolved, so that a
+  /// file opened through a path that goes through a symbolic link, such as `/var` or `/tmp`, is found among the files of its folder
+  /// listed under `/private/var` or `/private/tmp`, and the other way round.
   static func index(of path: String?, in paths: [String]) -> Int? {
     guard let path else { return nil }
-    return paths.firstIndex(of: path)
+    if let index = paths.firstIndex(of: path) { return index }
+    let resolved = URL(fileURLWithPath: path).resolvingSymlinksInPath().path
+    return paths.firstIndex { URL(fileURLWithPath: $0).resolvingSymlinksInPath().path == resolved }
   }
 }
 

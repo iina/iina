@@ -32,6 +32,25 @@
 @end
 
 
+/// A point in a thumbnail scan at which the scan stops once thumbnail generation has been cancelled.
+typedef NS_ENUM(NSInteger, FFThumbnailScanCheckpoint) {
+  /// Before the scan starts.
+  FFThumbnailScanCheckpointStart,
+  /// When opening the file has failed, as it does when a blocking operation on the file is interrupted.
+  FFThumbnailScanCheckpointOpen,
+  /// After the streams of the file have been read.
+  FFThumbnailScanCheckpointStreamInfo,
+  /// Before seeking to a preview point.
+  FFThumbnailScanCheckpointSeek,
+  /// After seeking to a preview point.
+  FFThumbnailScanCheckpointSeekEnd,
+  /// Before decoding a frame.
+  FFThumbnailScanCheckpointDecode,
+  /// After the scan, before the delegate is notified that thumbnails were generated.
+  FFThumbnailScanCheckpointFinish,
+};
+
+
 @interface FFmpegController: NSObject
 
 @property(nonatomic, weak) id<FFmpegControllerDelegate> _Nullable delegate;
@@ -55,6 +74,19 @@
 
 - (void)generateThumbnailForFile:(nonnull NSString *)file
                       thumbWidth:(int)thumbWidth;
+
+/// Stop generating thumbnails.
+///
+/// Thumbnail generation in progress stops before decoding another frame and does not notify the delegate that thumbnails were
+/// generated.
+- (void)cancelThumbnailGeneration;
+
+/// Whether the thumbnail scan performed by the given operation stops at the given checkpoint.
+///
+/// The scan stops once thumbnail generation has been cancelled. Every check the scan makes for cancellation is made through this
+/// method.
+- (BOOL)isScanCancelled:(nonnull NSOperation *)operation
+           atCheckpoint:(FFThumbnailScanCheckpoint)checkpoint NS_SWIFT_NAME(isScanCancelled(_:at:));
 
 /// Read artwork from the file with the given URL.
 ///

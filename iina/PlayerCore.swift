@@ -223,11 +223,11 @@ class PlayerCore: NSObject {
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
   var events = EventController()
 
-  lazy var ffmpegController: FFmpegController = {
-    let controller = FFmpegController()
-    controller.delegate = self
-    return controller
-  }()
+  /// The controller that generates thumbnails.
+  ///
+  /// Thumbnail generation is cancelled from the thread of the queue for reading `mpv` events as well as from the main thread,
+  /// so the controller is created with the player and not on first use.
+  let ffmpegController = FFmpegController()
 
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
@@ -331,6 +331,7 @@ class PlayerCore: NSObject {
     playlistQueue = DispatchQueue(label: "IINAPlaylistTask\(playerNumber)", qos: .utility)
     thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask\(playerNumber)", qos: .utility)
     super.init()
+    ffmpegController.delegate = self
     self.mpv = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)

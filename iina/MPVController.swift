@@ -544,7 +544,7 @@ class MPVController: NSObject {
 
     setUserOption(PK.enableCache, type: .other, forName: MPVOption.Cache.cache,
                   verboseIfDefault: true) { key in
-      return Preference.bool(for: key) ? "yes" : "no"
+      return CacheConfiguration.cache(enabled: Preference.bool(for: key))
     }
 
     setUserOption(PK.cachePauseInitial, type: .bool, forName: MPVOption.Cache.cachePauseInitial,
@@ -553,7 +553,7 @@ class MPVController: NSObject {
                   verboseIfDefault: true)
     setUserOption(PK.defaultCacheSize, type: .other, forName: MPVOption.Demuxer.demuxerMaxBytes,
                   verboseIfDefault: true) { key in
-      return "\(Preference.integer(for: key))KiB"
+      return CacheConfiguration.demuxerMaxBytes(kibibytes: Preference.integer(for: key))
     }
     setUserOption(PK.secPrefech, type: .int, forName: MPVOption.Cache.cacheSecs, verboseIfDefault: true)
 

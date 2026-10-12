@@ -217,6 +217,7 @@
 		B5C6BD3B3ABC360BB64A461E /* FullLength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B951C1DE70AAF49523833BA /* FullLength.swift */; };
 		37FB936EDB2FBFDEA26E9068 /* PlaylistStepping.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD8858B7677F8C8331C9949 /* PlaylistStepping.swift */; };
 		84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */; };
+		BE42C328EF5E911ED0CA9904 /* CacheConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818713AE5D1AE33BADCE15CC /* CacheConfiguration.swift */; };
 		84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */; };
 		84A0BAA11D2FAE7600BC8DA1 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */; };
 		84A886E41E24F37D008755BB /* ShooterSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A886E31E24F37D008755BB /* ShooterSubtitle.swift */; };
@@ -1318,6 +1319,7 @@
 		3B951C1DE70AAF49523833BA /* FullLength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLength.swift; sourceTree = "<group>"; };
 		FCD8858B7677F8C8331C9949 /* PlaylistStepping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistStepping.swift; sourceTree = "<group>"; };
 		84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPVController.swift; sourceTree = "<group>"; };
+		818713AE5D1AE33BADCE15CC /* CacheConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheConfiguration.swift; sourceTree = "<group>"; };
 		84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		84A0BAA01D2FAE7600BC8DA1 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		84A0F6021EBB4A7C001FCF44 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InspectorWindowController.strings"; sourceTree = "<group>"; };
@@ -2218,6 +2220,7 @@
 				3B951C1DE70AAF49523833BA /* FullLength.swift */,
 				FCD8858B7677F8C8331C9949 /* PlaylistStepping.swift */,
 				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
+				818713AE5D1AE33BADCE15CC /* CacheConfiguration.swift */,
 				348F71952DE2A814006C587D /* MPVCommandWrappers.swift */,
 				84C6D3611EAF8D63009BF721 /* HistoryController.swift */,
 				84FBCB361EEACDDD0076C77C /* FFmpegController.h */,
@@ -3139,6 +3142,7 @@
 				84E5221323FF3D080006FDA1 /* JavascriptAPIPlaylist.swift in Sources */,
 				E3A239AA2FC6D88F00CE6ACC /* OSDView.swift in Sources */,
 				84A0BA991D2FAAA700BC8DA1 /* MPVController.swift in Sources */,
+				BE42C328EF5E911ED0CA9904 /* CacheConfiguration.swift in Sources */,
 				847557161F406D360006B0FF /* MiniPlayerWindowMenuActions.swift in Sources */,
 				842F55A51EA17E7E0081D475 /* IINACommand.swift in Sources */,
 				840D47981DFEEE6A000D9A64 /* KeyMapping.swift in Sources */,

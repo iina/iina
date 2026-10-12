@@ -67,7 +67,12 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
 
   override var mouseActionDisabledViews: [NSView?] {[backgroundView, playlistWrapperView]}
 
-  var isShowingVolumeControl = false
+  var isShowingVolumeControl = false {
+    didSet {
+      // Prevent title-bar dragging from intercepting the volume slider when album art is hidden.
+      window?.isMovable = !isShowingVolumeControl
+    }
+  }
   var volumeControlViews: [NSView?] {
     [volumeControlBackground, volumeLabel, volumeSlider]
   }
@@ -409,6 +414,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   // MARK: - Window delegate: Open / Close
 
   func windowWillClose(_ notification: Notification) {
+    hideVolumeControl(animated: false)
     if player.info.state != .shuttingDown && player.info.state != .shutDown {
       // not needed if called when terminating the whole app
       player.overrideAutoSwitchToMusicMode = false
@@ -453,6 +459,11 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     artistAlbumLabel.scroll()
   }
 
+  override func windowDidResignMain(_ notification: Notification) {
+    super.windowDidResignMain(notification)
+    hideVolumeControl(animated: false)
+  }
+
   // MARK: - UI: Show / Hide
 
   private func showControl() {
@@ -465,6 +476,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   private func hideControl() {
+    hideVolumeControl(animated: false)
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AnimationDurationShowControl
       closeButtonView.animator().alphaValue = 0
@@ -592,12 +604,14 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   }
 
   private func hideVolumeControl(animated: Bool = true) {
+    hideVolumeControlTask?.cancel()
     isShowingVolumeControl = false
     if animated {
       NSAnimationContext.runAnimationGroup({ context in
         context.duration = AnimationDurationShowControl
         volumeControlViews.forEach { $0?.animator().alphaValue = 0 }
       }) {
+        guard !self.isShowingVolumeControl else { return }
         self.volumeControlViews.forEach { $0?.isHidden = true }
         self.volumeContainerTrailingConstraint.constant = 10
       }

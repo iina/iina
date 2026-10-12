@@ -87,6 +87,7 @@ struct MPVHookValue {
 class MPVController: NSObject {
   struct UserData {
     static let screenshot: UInt64 = 1000000
+    static let scrollSeek: UInt64 = 1000001
   }
 
   // The mpv_handle
@@ -113,6 +114,10 @@ class MPVController: NSObject {
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
+
+  /// Whether the seek `mpv` is performing was issued by a scroll.
+  /// - Important: This must only be accessed by the thread of the queue for reading `mpv` events.
+  private var scrollSeekAttribution = ScrollSeekAttribution()
 
   /// The callbacks waiting for `mpv` to reply to asynchronous requests made with a reply.
   private let replyCallbacks = MPVReplyCallbacks()
@@ -1188,6 +1193,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { self.player.onVideoReconfig() }
 
     case MPV_EVENT_START_FILE:
+      player.info.$fileStartCount.withLock { $0 += 1 }
       guard let path = getString(MPVProperty.path) else { break }
       DispatchQueue.main.async { [self] in
         player.info.state = .starting
@@ -1201,6 +1207,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { self.player.fileLoaded() }
 
     case MPV_EVENT_SEEK:
+      scrollSeekAttribution.seekStarted()
       DispatchQueue.main.async { [self] in
         player.info.isSeeking = true
         // When playback is paused the display link may be shutdown in order to not waste energy.
@@ -1218,8 +1225,10 @@ class MPVController: NSObject {
       }
 
     case MPV_EVENT_PLAYBACK_RESTART:
+      scrollSeekAttribution.playbackRestarted(at: CACurrentMediaTime())
       DispatchQueue.main.async { [self] in
         player.info.isSeeking = false
+        player.info.scrollSeekLoading.playbackRestarted(at: ProcessInfo.processInfo.systemUptime)
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // The display link will be restarted while seeking. If playback is paused shut it down
         // again.
@@ -1246,13 +1255,12 @@ class MPVController: NSObject {
       // loaded. As handling this does not require accessing IINA state not protected by locks and
       // only available to the main thread along with the requirement to pause playback ASAP we will
       // not leave this to the PlayerCore function and handle this now before calling fileEnded.
-      if !dueToStopCommand, Preference.bool(for: .pauseWhenOpen) {
-        setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
-        // Normally a log message is emitted before calling mpv, but in this case, due to the race
-        // condition, playback must be paused as soon as possible, so logging is done afterward.
-        log("Pausing playback because \"pause when media is opened\" is enabled")
+      let endedByScrollSeek = FileEnd.fileEnded(self, dueToStopCommand: dueToStopCommand,
+                                                attribution: &scrollSeekAttribution, at: CACurrentMediaTime())
+      DispatchQueue.main.async { [self] in
+        player.info.scrollSeekLoading.fileEnded(byScrollSeek: endedByScrollSeek)
+        player.fileEnded(dueToStopCommand)
       }
-      DispatchQueue.main.async { self.player.fileEnded(dueToStopCommand) }
 
     case MPV_EVENT_COMMAND_REPLY:
       let reply = event.pointee.reply_userdata
@@ -1272,6 +1280,8 @@ class MPVController: NSObject {
         DispatchQueue.main.async { self.player.screenshotCallback() }
       } else if let callback = replyCallbacks.take(reply) {
         callback(event.pointee.error, event.pointee.data)
+      } else {
+        scrollSeekAttribution.commandReplied(userdata: reply, error: event.pointee.error)
       }
 
     case MPV_EVENT_GET_PROPERTY_REPLY:
@@ -1826,7 +1836,7 @@ class MPVController: NSObject {
     }
   }
 
-  private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
+  func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
   }
 
@@ -1923,6 +1933,19 @@ final class MPVReplyCallbacks {
   /// Remove and return the callback of the request made with the given user data, or `nil` if there is none.
   func take(_ userdata: UInt64) -> Callback? {
     return $callbacks.withLock { $0.removeValue(forKey: userdata) }
+  }
+}
+
+extension MPVController: FileEndPlayer {
+
+  var pausesWhenOpened: Bool { Preference.bool(for: .pauseWhenOpen) }
+
+  func pauseMpv() {
+    setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+  }
+
+  func cancelThumbnailGeneration() {
+    player.ffmpegController.cancelThumbnailGeneration()
   }
 }
 

@@ -147,6 +147,15 @@ class PlaybackInfo {
   /// compares this count when `mpv` replies with its value when the step was asked for.
   var userPauseCount = 0
 
+  /// The number of files mpv has started.
+  ///
+  /// This is incremented in the mpv event queue when `MPV_EVENT_START_FILE` is received, so the main thread can tell that
+  /// playback has moved to another file before that event has been dispatched to it.
+  @Atomic var fileStartCount = 0
+
+  /// Whether the current file is loading because a seek issued by a scroll ran past the end of the previous file.
+  var scrollSeekLoading = ScrollSeekLoading()
+
   var isMatchingSubtitles = false
   var disableOSDForFileLoading: Bool = false
 

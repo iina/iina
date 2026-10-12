@@ -2120,7 +2120,7 @@ class PlayerCore: NSObject {
     let currentTicket = backgroundQueueTicket
     let currentPlaylistTicket = folderPlaylistTicket.value
     backgroundTaskInUse = true
-    backgroundQueue.async { [self] in
+    backgroundQueue.async(qos: .userInitiated, flags: .enforceQoS) { [self] in
       do {
         // add files in same folder
         if shouldAutoLoadFiles {

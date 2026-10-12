@@ -557,6 +557,12 @@ class MPVController: NSObject {
     }
     setUserOption(PK.secPrefech, type: .int, forName: MPVOption.Cache.cacheSecs, verboseIfDefault: true)
 
+    // Open a fragmented MP4 that ends in an index from that index instead of reading the header of
+    // every fragment, so that opening it does not take longer the longer the file is. The duration
+    // mpv reports for such a file then covers only the fragments it has read, see FullLength.
+    // User defined options are set later and so can replace this one.
+    chkErr(setOptionString(MPVOption.Demuxer.demuxerLavfO, FullLength.demuxerOption, level: .verbose))
+
     setUserOption(PK.userAgent, type: .other, forName: MPVOption.Network.userAgent,
                   verboseIfDefault: true) { key in
       let ua = Preference.string(for: key)!

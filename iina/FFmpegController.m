@@ -388,6 +388,62 @@ static int interruptCallback(void *opaque)
   }
 }
 
+// MARK: - Full Length
+
++ (double)fullLengthOfFragmentedFile:(nonnull NSString *)file
+{
+  // Only a file whose last box is an mfro box ends in an mfra index.
+  NSFileHandle *handle = [NSFileHandle fileHandleForReadingAtPath:file];
+  if (!handle) return -1;
+  unsigned long long size = [handle seekToEndOfFile];
+  NSData *tail = nil;
+  if (size >= 16) {
+    [handle seekToFileOffset:size - 16];
+    tail = [handle readDataOfLength:16];
+  }
+  [handle closeFile];
+  if (tail.length != 16 || memcmp((const char *)tail.bytes + 4, "mfro", 4) != 0) return -1;
+
+  AVFormatContext *formatCtx = NULL;
+  AVDictionary *options = NULL;
+  av_dict_set(&options, "use_mfra_for", "pts", 0);
+  int ret = avformat_open_input(&formatCtx, file.fileSystemRepresentation, NULL, &options);
+  av_dict_free(&options);
+  if (ret < 0) return -1;
+
+  AVPacket *packet = av_packet_alloc();
+  double start = INFINITY;
+  double end = -INFINITY;
+  // The first fragment holds the first packet of every stream, so the earliest of its timestamps is
+  // where the file starts.
+  for (int i = 0; i < 256 && av_read_frame(formatCtx, packet) >= 0; i++) {
+    int64_t ts = packet->pts != AV_NOPTS_VALUE ? packet->pts : packet->dts;
+    if (ts != AV_NOPTS_VALUE) {
+      start = fmin(start, ts * av_q2d(formatCtx->streams[packet->stream_index]->time_base));
+    }
+    av_packet_unref(packet);
+  }
+  // Opened from its index the file can be read from its last fragment, whose last packet ends where
+  // the file ends. Reading stops after a bounded number of packets in case the seek did not reach the
+  // last fragment.
+  ret = avformat_seek_file(formatCtx, -1, INT64_MIN, INT64_MAX / 2, INT64_MAX, 0);
+  if (ret >= 0) {
+    int count = 0;
+    while (av_read_frame(formatCtx, packet) >= 0 && ++count <= 20000) {
+      int64_t ts = packet->pts != AV_NOPTS_VALUE ? packet->pts : packet->dts;
+      if (ts != AV_NOPTS_VALUE) {
+        end = fmax(end, (ts + packet->duration) * av_q2d(formatCtx->streams[packet->stream_index]->time_base));
+      }
+      av_packet_unref(packet);
+    }
+    if (count > 20000) end = -INFINITY;
+  }
+  av_packet_free(&packet);
+  avformat_close_input(&formatCtx);
+  if (!isfinite(start) || !isfinite(end) || end <= start) return -1;
+  return end - start;
+}
+
 // MARK: - Probing Video
 
 + (NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file

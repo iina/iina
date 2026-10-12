@@ -33,15 +33,19 @@ class AutoFileMatcher {
     Logger.log(message, level: level, subsystem: subsystem)
   }
 
+  /// - Parameter ticket: The value of `PlayerCore.folderPlaylistTicket` when the file whose folder is matched was opened.
   init(player: PlayerCore, ticket: Int) {
     self.player = player
     self.ticket = ticket
     subsystem = Logger.makeSubsystem("fmatcher\(player.playerNumber)", ["square.stack.3d.up"])
   }
 
-  /// checkTicket
+  /// Stop matching once the playlist of the opened file has been abandoned.
+  ///
+  /// The folder is matched once, for the file that was opened, and its files and subtitles serve every entry in the playlist.
+  /// Matching therefore continues when playback moves to another entry.
   private func checkTicket() throws {
-    try player.checkTicket(ticket)
+    try player.folderPlaylistTicket.check(ticket)
   }
 
   private var mediaFiles: [FileInfo] {

@@ -58,6 +58,8 @@ class VideoView: NSView {
 
   // MARK: - Init
 
+  @diagnose(DeprecatedDeclaration, as: ignored,
+            reason: "Intentionally using deprecated OpenGL properties to match up with mpv.")
   init(frame: CGRect, player: PlayerCore) {
     self.player = player
     super.init(frame: frame)
@@ -70,7 +72,8 @@ class VideoView: NSView {
 
     // other settings
     autoresizingMask = [.width, .height]
-    ObjcUtils.enableHighResolutionOpenGLSurface(for: self)
+    wantsBestResolutionOpenGLSurface = true
+    wantsExtendedDynamicRangeOpenGLSurface = true
 
     // dragging init
     registerForDraggedTypes([.nsFilenames, .nsURL, .string])

@@ -6,7 +6,6 @@
 //  Copyright © 2017 lhc. All rights reserved.
 //
 
-#import <AppKit/AppKit.h>
 #import <Foundation/Foundation.h>
 #import "iina-Bridging-Header.h"
 #import "ObjcUtils.h"
@@ -87,21 +86,5 @@ static inline int min(int a, int b, int c) {
   free(_dist);
   return result;
 }
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
-+ (id)unarchiveLegacyObjectWithData:(NSData *)data
-{
-  return [NSUnarchiver unarchiveObjectWithData:data];
-}
-
-+ (void)enableHighResolutionOpenGLSurfaceForView:(NSView *)view
-{
-  view.wantsBestResolutionOpenGLSurface = YES;
-  view.wantsExtendedDynamicRangeOpenGLSurface = YES;
-}
-
-#pragma clang diagnostic pop
 
 @end

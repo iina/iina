@@ -41,6 +41,8 @@ class LegacyMigration {
    And since older versions of IINA will only use the old pref entry, users who mix old and new versions of IINA may experience different values
    for these keys.
    */
+  @diagnose(DeprecatedDeclaration, as: ignored,
+            reason: "Must use NSUnarchiver.unarchiveObject to read data in the deprecated format.")
   func migrateLegacyPreferences() {
     Logger.log("Looking for legacy color prefs to migrate")
 
@@ -60,7 +62,7 @@ class LegacyMigration {
 
       // Deserialize & convert legacy pref value to modern string format:
       guard let legacyData = Preference.data(for: legacyKey) else { continue }
-      guard let color = ObjcUtils.unarchiveLegacyObject(with: legacyData) as? NSColor,
+      guard let color = NSUnarchiver.unarchiveObject(with: legacyData) as? NSColor,
             let mpvColorString = color.usingColorSpace(.deviceRGB)?.mpvColorString else {
         Logger.log("Failed to convert color value from legacy pref \(legacyKey.rawValue)", level: .error)
         continue

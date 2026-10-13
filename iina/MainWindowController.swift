@@ -2089,6 +2089,10 @@ class MainWindowController: PlayerWindowController {
 
     animationState = .willHide
     player.refreshSyncUITimer()
+    // The thumbnail peek and time preview are not fadeable views. Hide them along with the OSC
+    // so they don't remain visible after the control bar fades out.
+    thumbnailPeekView.isHidden = true
+    timePreviewView.isHidden = true
     fadeableViews.forEach { (v) in
       v.isHidden = false
     }
@@ -3047,7 +3051,11 @@ class MainWindowController: PlayerWindowController {
         min(sliderFrameInWindow.minY, timePreviewView.frame.minY) - height - 5
       }
       thumbnailPeekView.frame.size = NSSize(width: width, height: height)
-      thumbnailPeekView.frame.origin = NSPoint(x: round(posInWindow.x - thumbnailPeekView.frame.width / 2), y: yPos)
+      // Center the thumbnail on the mouse, but keep it fully inside the window so it does not
+      // extend beyond the edge of the OSC when the mouse is near the left or right side.
+      let xPos = round(posInWindow.x - thumbnailPeekView.frame.width / 2)
+      let maxXPos = max(0, window!.contentView!.bounds.width - thumbnailPeekView.frame.width)
+      thumbnailPeekView.frame.origin = NSPoint(x: min(max(xPos, 0), maxXPos), y: yPos)
     } else {
       thumbnailPeekView.isHidden = true
     }

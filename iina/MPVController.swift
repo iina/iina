@@ -671,19 +671,28 @@ class MPVController: NSObject {
     guard let mpv else {
       fatalError("mpvInitRendering() should be called after mpv handle being initialized!")
     }
-    let apiType = UnsafeMutableRawPointer(mutating: (MPV_RENDER_API_TYPE_OPENGL as NSString).utf8String)
-    var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
-                                                  get_proc_address_ctx: nil)
-    withUnsafeMutablePointer(to: &openGLInitParams) { openGLInitParams in
-      var advanced: CInt = 1
-      withUnsafeMutablePointer(to: &advanced) { advanced in
-        var params = [
-          mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: apiType),
-          mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: openGLInitParams),
-          mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: advanced),
-          mpv_render_param()
-        ]
-        chkErr(mpv_render_context_create(&mpvRenderContext, mpv, &params))
+    MPV_RENDER_API_TYPE_OPENGL_NEXT.withCString { apiType in
+      var openGLInitParams = mpv_opengl_init_params(get_proc_address: mpvGetOpenGLFunc,
+                                                    get_proc_address_ctx: nil)
+      withUnsafeMutablePointer(to: &openGLInitParams) { openGLInitParams in
+        var advanced: CInt = 1
+        withUnsafeMutablePointer(to: &advanced) { advanced in
+          var params = [
+            mpv_render_param(type: MPV_RENDER_PARAM_API_TYPE, data: UnsafeMutableRawPointer(mutating: apiType)),
+            mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_INIT_PARAMS, data: openGLInitParams),
+            mpv_render_param(type: MPV_RENDER_PARAM_ADVANCED_CONTROL, data: advanced),
+            mpv_render_param()
+          ]
+          var status = mpv_render_context_create(&mpvRenderContext, mpv, &params)
+          if status == MPV_ERROR_NOT_IMPLEMENTED.rawValue {
+            log("gpu-next render API unavailable; using legacy OpenGL", level: .warning)
+            MPV_RENDER_API_TYPE_OPENGL.withCString { legacyAPI in
+              params[0].data = UnsafeMutableRawPointer(mutating: legacyAPI)
+              status = mpv_render_context_create(&mpvRenderContext, mpv, &params)
+            }
+          }
+          chkErr(status)
+        }
       }
       openGLContext = CGLGetCurrentContext()
       mpv_render_context_set_update_callback(mpvRenderContext!, mpvUpdateCallback, mutableRawPointerOf(obj: player.mainWindow.videoView.videoLayer))

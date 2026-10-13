@@ -49,7 +49,8 @@ extern "C" {
  * Supported backends
  * ------------------
  *
- * OpenGL: via MPV_RENDER_API_TYPE_OPENGL, see render_gl.h header.
+ * OpenGL: via MPV_RENDER_API_TYPE_OPENGL or MPV_RENDER_API_TYPE_OPENGL_NEXT,
+ * see render_gl.h header.
  * Software: via MPV_RENDER_API_TYPE_SW, see section "Software renderer"
  *
  * Threading
@@ -188,6 +189,10 @@ typedef enum mpv_render_param_type {
      *      It is expected that an OpenGL context is valid and "current" when
      *      calling mpv_render_* functions (unless specified otherwise). It
      *      must be the same context for the same mpv_render_context.
+     *   MPV_RENDER_API_TYPE_OPENGL_NEXT:
+     *      OpenGL rendering using the gpu-next renderer (libplacebo).
+     *      Uses the same initialization and target parameters as
+     *      MPV_RENDER_API_TYPE_OPENGL, including its context requirements.
      */
     MPV_RENDER_PARAM_API_TYPE = 1,
     /**
@@ -466,6 +471,8 @@ typedef struct mpv_render_param {
  */
 // See render_gl.h
 #define MPV_RENDER_API_TYPE_OPENGL "opengl"
+// See render_gl.h
+#define MPV_RENDER_API_TYPE_OPENGL_NEXT "opengl-next"
 // See section "Software renderer"
 #define MPV_RENDER_API_TYPE_SW "sw"
 

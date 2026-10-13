@@ -74,6 +74,9 @@ extern "C" {
  *
  * Use mpv_render_context_create() with MPV_RENDER_PARAM_API_TYPE set to
  * MPV_RENDER_API_TYPE_OPENGL, and MPV_RENDER_PARAM_OPENGL_INIT_PARAMS provided.
+ * Select MPV_RENDER_API_TYPE_OPENGL_NEXT instead to use the gpu-next renderer
+ * with libplacebo. Both renderers use the same parameters and context rules.
+ * The gpu-next renderer requires libplacebo built with OpenGL support.
  *
  * Call mpv_render_context_render() with MPV_RENDER_PARAM_OPENGL_FBO to render
  * the video frame to an FBO.

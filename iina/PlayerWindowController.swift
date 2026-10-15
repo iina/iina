@@ -223,10 +223,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
     self.playSlider = PlaySlider()
     playSlider.translatesAutoresizingMaskIntoConstraints = false
-    // The timeline represents playback position, which always runs from the start of the file on
-    // the left to the end on the right. Keep the slider left-to-right so it does not flip in a
-    // right-to-left language: otherwise AppKit maps a click to the mirrored position while the cell
-    // still draws the progress left-to-right, so clicks seek to the opposite end (issue #6504).
+    // Keep the timeline left-to-right so RTL layouts don't seek to the mirrored position (#6504).
     playSlider.userInterfaceLayoutDirection = .leftToRight
     playSlider.refusesFirstResponder = true
     playSlider.minValue = 0

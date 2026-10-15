@@ -1,5 +1,5 @@
 <p align="center">
-<img height="256" src="https://github.com/iina/iina/raw/master/iina/Assets.xcassets/AppIcon.appiconset/icon_512x512.png">
+<img height="256" src="https://iina.io/img/icon.png">
 </p>
 
 <h1 align="center">IINA</h1>

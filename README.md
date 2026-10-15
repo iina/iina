@@ -120,4 +120,4 @@ Community plugins can be browsed and installed directly from the plugin store in
 >
 > `id` must match the `identifier` in your plugin's `Info.json`. Once merged, your plugin will show up in the in-app plugin store.
 >
-> Looking to build one? Check out the plugins in the store to learn how they work.
+> Looking to build one? Check out the [plugin documentation](https://docs.iina.io/) to learn how they work.

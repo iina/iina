@@ -107,6 +107,7 @@ class JavascriptPlugin: NSObject {
   let defaultPreferences: [String: Any]
 
   static func recreateAllPlugins() {
+    plugins.forEach { $0.globalInstance?.tearDown() }
     plugins = loadPlugins()
   }
 
@@ -170,8 +171,10 @@ class JavascriptPlugin: NSObject {
       if enabled {
         // no need to reload, unless forced
         guard forced else { return }
+        globalInstance?.tearDown()
         globalInstance = .init(player: nil, plugin: self)
       } else {
+        globalInstance?.tearDown()
         globalInstance = nil
       }
     }

@@ -26,6 +26,12 @@ struct SettingsLocalization {
 
 
 extension SettingsLocalization.Key {
+  // VR video
+  static let text_VRVideo = SettingsLocalization.Key("$VRVideo")
+  static let text_LookingAround = SettingsLocalization.Key("$LookingAround")
+  static let text_degrees = SettingsLocalization.Key("$degrees")
+  static let vr2dEyeLabel = SettingsLocalization.Key("vr2dEye.label")
+
   // General
   static let text_Playlist = SettingsLocalization.Key("$Playlist")
   static let text_WhenMediaIsOpened = SettingsLocalization.Key("$WhenMediaIsOpened")

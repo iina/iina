@@ -206,23 +206,23 @@ class VideoView: NSView {
   ///
   /// If a display link has already been created then that link will be returned, otherwise a display link will be created and returned.
   ///
-  /// - Note: Issue [#4520](https://github.com/iina/iina/issues/4520) reports a case where it appears the call to
-  ///[CVDisplayLinkCreateWithActiveCGDisplays](https://developer.apple.com/documentation/corevideo/1456863-cvdisplaylinkcreatewithactivecgd) is failing. In case that failure is
-  ///encountered again this method is careful to log any failure and include the [result code](https://developer.apple.com/documentation/corevideo/1572713-result_codes) in the alert displayed
-  /// by `Logger.fatal`.
-  /// - Returns: A [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k).
-  private func obtainDisplayLink() -> CVDisplayLink {
+  /// - Returns: A [CVDisplayLink](https://developer.apple.com/documentation/corevideo/cvdisplaylink-k0k), or nil if no active display is available (e.g. during dark wake or display sleep).
+  private func obtainDisplayLink() -> CVDisplayLink? {
     if let link { return link }
     let result = CVDisplayLinkCreateWithActiveCGDisplays(&link)
     checkResult(result, "CVDisplayLinkCreateWithActiveCGDisplays")
     guard let link = link else {
-      Logger.fatal("Cannot create display link: \(codeToString(result)) (\(result))")
+      log("Cannot create display link: \(codeToString(result)) (\(result)); active display may be asleep", level: .warning)
+      return nil
     }
     return link
   }
 
   func startDisplayLink() {
-    let link = obtainDisplayLink()
+    guard let link = obtainDisplayLink() else {
+      log("Display link not started: no active display available", level: .verbose)
+      return
+    }
     guard !CVDisplayLinkIsRunning(link) else { return }
     updateDisplayLink()
     checkResult(CVDisplayLinkSetOutputCallback(link, displayLinkCallback, mutableRawPointerOf(obj: self)),
@@ -239,6 +239,13 @@ class VideoView: NSView {
 
   // This should only be called if the window has changed displays
   func updateDisplayLink() {
+    if link == nil {
+      if !isIdle {
+        startDisplayLink()
+      }
+      return
+    }
+
     guard let window, let link, let screen = window.screen,
           let displayId = screen.displayId else { return }
 

@@ -11,6 +11,7 @@ import JavaScriptCore
 class JavascriptPolyfill {
   weak var plugin: JavascriptPluginInstance!
   var timers = [String: Timer]()
+  private var isUnloaded = false
 
   init(pluginInstance: JavascriptPluginInstance) {
     self.plugin = pluginInstance
@@ -23,6 +24,7 @@ class JavascriptPolyfill {
   }
 
   func removeAllTimers() {
+    isUnloaded = true
     for timer in timers.values {
       timer.invalidate()
     }
@@ -39,6 +41,7 @@ class JavascriptPolyfill {
     let uuid = NSUUID().uuidString
 
     DispatchQueue.main.async(execute: {
+      guard !self.isUnloaded else { return }
       let timer = Timer.scheduledTimer(timeInterval: timeInterval,
                                        target: self,
                                        selector: #selector(self.callJSCallback),

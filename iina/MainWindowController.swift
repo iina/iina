@@ -2170,31 +2170,19 @@ class MainWindowController: PlayerWindowController {
     if player.info.isNetworkResource {
       window?.representedURL = nil
       window?.title = player.getMediaTitle()
+    } else if let url = player.info.currentURL {
+      window?.representedURL = url
+      // Directly setting window.representedURL and window.title avoids several AppKit issues with
+      // setTitleWithRepresentedFilename:
+      // 1. Issue #3543: setTitleWithRepresentedFilename crashes with unrecognized selector
+      //    [NSNextStepFrame _displayName] when .titled is removed from styleMask under legacy full screen (FB9789129).
+      // 2. Issues #6381, #6511: setTitleWithRepresentedFilename fails to update the system titlebar's
+      //    title text field while window.titleVisibility == .hidden, causing the title to remain stale
+      //    when entering full screen or querying the window title.
+      window?.title = FileManager.default.displayName(atPath: url.path)
     } else {
-      window?.representedURL = player.info.currentURL
-      // Workaround for issue #3543, IINA crashes reporting:
-      // NSInvalidArgumentException [NSNextStepFrame _displayName]: unrecognized selector
-      // When running on an M1 under Big Sur and using legacy full screen.
-      //
-      // Changes in Big Sur broke the legacy full screen feature. The MainWindowController method
-      // legacyAnimateToFullscreen had to be changed to get this feature working again. Under
-      // Big Sur that method now calls "window.styleMask.remove(.titled)". Removing titled from the
-      // style mask causes the AppKit method NSWindow.setTitleWithRepresentedFilename to trigger the
-      // exception listed above. This appears to be a defect in the Cocoa framework. The window's
-      // title can still be set directly without triggering the exception. The problem seems to be
-      // isolated to the setTitleWithRepresentedFilename method, possibly only when running on an
-      // Apple Silicon based Mac. Based on the Apple documentation setTitleWithRepresentedFilename
-      // appears to be a convenience method. As a workaround for the issue directly set the window
-      // title.
-      //
-      // This problem has been reported to Apple as:
-      // "setTitleWithRepresentedFilename throws NSInvalidArgumentException: NSNextStepFrame _displayName"
-      // Feedback number FB9789129
-      if Preference.bool(for: .useLegacyFullScreen) {
-        window?.title = player.info.currentURL?.lastPathComponent ?? ""
-      } else {
-        window?.setTitleWithRepresentedFilename(player.info.currentURL?.path ?? "")
-      }
+      window?.representedURL = nil
+      window?.title = ""
     }
     titleBarView?.updateTitle()
 

@@ -87,13 +87,24 @@ class InteractiveModeController: NSObject {
     mainWindow.hideUI(force: true)
     mainWindow.liveText.clearAnalysis()
 
-    // horizontal padding 20, top padding 20
+    // Measure control bar before sizing video so controls are not clipped.
+    mainWindow.videoViewContainer.addSubview(controlBar)
+    controlBar.translatesAutoresizingMaskIntoConstraints = false
+    controlBar.layoutSubtreeIfNeeded()
+    let controlBarHeight = max(controlBar.fittingSize.height, controlBar.frame.height)
+    let bottomMargin = InteractiveModeLayout.defaultBottomMargin
+    let topPadding = InteractiveModeLayout.defaultTopPadding
+    let reservedBottom = InteractiveModeLayout.reservedBottomHeight(controlBarHeight: controlBarHeight, bottomMargin: bottomMargin)
+
     let aspect = NSSize(width: player.videoSizeForDisplay.0, height: player.videoSizeForDisplay.1)
     let containerSize = mainWindow.videoViewContainer.frame.size
-    let maxSize = NSSize(width: containerSize.width - 40, height: containerSize.height - 108)
+    let maxSize = InteractiveModeLayout.maxVideoSize(
+      container: containerSize,
+      topPadding: topPadding,
+      reservedBottom: reservedBottom
+    )
     let newSize = aspect.shrink(toSize: maxSize)
     let horizontalPadding = (containerSize.width - newSize.width) / 2
-    let topPadding = CGFloat(20)
     let bottomPadding = containerSize.height - topPadding - newSize.height
 
     mainWindow.updateVideoViewConstraints([
@@ -109,8 +120,7 @@ class InteractiveModeController: NSObject {
     mainWindow.videoView.layoutSubtreeIfNeeded()
     mainWindow.forceDraw("interactive cropping")
 
-    mainWindow.videoViewContainer.addSubview(controlBar)
-    controlBar.padding(.bottom(20)).center(.x)
+    controlBar.padding(.bottom(bottomMargin)).center(.x)
 
     let origVideoSize = NSSize(width: ow, height: oh)
     let selectedRect: NSRect = selectWholeVideoByDefault ? NSRect(origin: .zero, size: origVideoSize) : .zero

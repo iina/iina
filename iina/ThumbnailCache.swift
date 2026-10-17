@@ -155,13 +155,24 @@ class ThumbnailCache {
     file.seekToEndOfFile()
     let eof = file.offsetInFile
 
+    guard eof >= UInt64(sizeofMetadata) else {
+      log("Cannot read metadata. Cache file will be deleted.", level: .warning)
+      file.closeFile()
+      deleteCacheFile(at: pathURL)
+      return nil
+    }
+
     // skip metadata
     file.seek(toFileOffset: UInt64(sizeofMetadata))
 
     // data blocks
-    while file.offsetInFile != eof {
+    while file.offsetInFile < eof {
       // length and timestamp
-      guard let blockLength = file.read(type: Int64.self),
+      guard eof - file.offsetInFile >= UInt64(MemoryLayout<Int64>.size),
+            let blockLength = file.read(type: Int64.self),
+            blockLength > MemoryLayout<Double>.size,
+            let blockSize = Int(exactly: blockLength),
+            UInt64(blockLength) <= eof - file.offsetInFile,
             let timestamp = file.read(type: Double.self) else {
         log("Cannot read image header. Cache file will be deleted.", level: .warning)
         file.closeFile()
@@ -169,8 +180,9 @@ class ThumbnailCache {
         return nil
       }
       // jpeg
-      let jpegData = file.readData(ofLength: Int(blockLength) - MemoryLayout.size(ofValue: timestamp))
-      guard let image = NSImage(data: jpegData) else {
+      let jpegLength = blockSize - MemoryLayout<Double>.size
+      let jpegData = file.readData(ofLength: jpegLength)
+      guard jpegData.count == jpegLength, let image = NSImage(data: jpegData) else {
         log("Cannot read image. Cache file will be deleted.", level: .warning)
         file.closeFile()
         deleteCacheFile(at: pathURL)

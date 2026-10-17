@@ -483,6 +483,7 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
+"plugin.drop_to_install" = "Drop to install";
 "plugin.installed" = "Installed";
 "plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
@@ -1022,7 +1023,7 @@
 "settings.$Y" = "Y";
 "settings.$YOffset" = "Y offset";
 "settings.$YTDL" = "Online Videos (yt-dlp)";
-"settings.$YouCanInstallANew" = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically.";
+"settings.$YouCanInstallANew" = "You can install a new plugin from GitHub or a local .iinaplgz package. Drag and drop packages onto this page or click Install Local Package. Plugins installed from GitHub can be updated automatically.";
 "settings.$bottom" = "bottom";
 "settings.$dB" = "dB";
 "settings.$left" = "left";

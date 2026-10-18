@@ -6,6 +6,12 @@
     "id": "dev.faruk.iina-airplay"
   },
   {
+    "name": "AniList Sync",
+    "url": "https://github.com/gridness/anilist-sync",
+    "desc": "Sync watched local anime episodes to AniList after playback reaches 85%.",
+    "id": "crown.gridness.iina.anilist-sync"
+  },
+  {
     "name": "Anime4K",
     "url": "https://github.com/yorkyang2333/iina-anime4k",
     "desc": "Apply Anime4K shaders for real-time anime upscaling.",

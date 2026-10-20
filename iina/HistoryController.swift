@@ -135,6 +135,8 @@ class HistoryController: NSObject {
       log("Removing all playback history entries")
       history = []
     }
+    Preference.set(nil, for: .iinaLastPlayedFilePath)
+    Preference.set(nil, for: .iinaLastPlayedFilePosition)
     save()
   }
 

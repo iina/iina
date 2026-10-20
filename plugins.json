@@ -6,6 +6,12 @@
     "id": "dev.faruk.iina-airplay"
   },
   {
+    "name": "AniList Sync",
+    "url": "https://github.com/gridness/anilist-sync",
+    "desc": "Sync watched local anime episodes to AniList after playback reaches 85%.",
+    "id": "crown.gridness.iina.anilist-sync"
+  },
+  {
     "name": "Anime4K",
     "url": "https://github.com/yorkyang2333/iina-anime4k",
     "desc": "Apply Anime4K shaders for real-time anime upscaling.",
@@ -172,5 +178,11 @@
     "url": "https://github.com/fetzu/iina-plugin-vr2d",
     "desc": "Watch 3D VR videos (180°/360°, side-by-side or over-under, equirectangular or fisheye) as a flat 2D image you can pan and zoom. Detects VR sources automatically from file names and container metadata.",
     "id": "io.github.fetzu.vr2d"
+  },
+  {
+    "name": "WebDAV",
+    "url": "https://github.com/qydxyx/iina-webdav",
+    "desc": "Connect to a WebDAV server, browse media, and add files or folders to the current playlist.",
+    "id": "com.qydxyx.iina-webdav"
   }
 ]

@@ -251,9 +251,42 @@ class KeyCodeHelper {
   /** Also includes symbols (e.g., `uppercaseMpvKeySet["4"] == "$"`)  */
   private static var uppercaseMpvKeySet: Set<String> = Set(lowerToUpperKeyMap.values)
 
-  static func isPrintable(_ char: String) -> Bool {
+  /// Returns `true` if the given character is allowed in a mpv input configuration file.
+  /// - Parameter char: Character to use in a mpv input configuration file.
+  /// - Returns: `True` if allowed, `false` otherwise.
+  /// - Important: The [Key Names](https://mpv.io/manual/stable/#key-names)] section of the mpv manual
+  ///     specifies the following requirement:
+  ///
+  ///     Currently there is the hardcoded assumption that every text key can be represented as a single Unicode code point
+  ///     (in NFKC form).
+  ///
+  ///     Thus this function will not allow characters made up of multiple code points.
+  static func isAllowedInConfFile(_ char: String) -> Bool {
     let utf8View = char.utf8
-    return utf8View.count == 1 && utf8View.first! > 32 && utf8View.first! < 127
+    let scalars = char.unicodeScalars
+    guard scalars.count == 1 else {
+      Logger.log("Character has \(scalars.count) code points")
+      return false
+    }
+    return scalars.allSatisfy({
+      switch $0.properties.generalCategory {
+      case .closePunctuation, .connectorPunctuation, .currencySymbol, .dashPunctuation,
+          .decimalNumber, .enclosingMark, .finalPunctuation, .initialPunctuation, .letterNumber,
+          .lowercaseLetter, .mathSymbol, .modifierLetter, .modifierSymbol, .nonspacingMark,
+          .openPunctuation, .otherLetter, .otherNumber, .otherPunctuation, .otherSymbol,
+          .spacingMark, .titlecaseLetter, .uppercaseLetter:
+        return true
+      case .surrogate:
+        // Internal error, should never occur.
+        Logger.log("Found surrogate in value returned by unicodeScalars", level: .error)
+        return false
+      case .control, .format, .lineSeparator, .paragraphSeparator, .privateUse, .spaceSeparator,
+          .unassigned:
+        return false
+      @unknown default:
+        return false
+      }
+    })
   }
 
   static func escapeReservedMpvKeys(_ keystrokesString: String) -> String {
@@ -273,9 +306,10 @@ class KeyCodeHelper {
     var keyChar: String
     let keyCode = event.keyCode
     var modifiers = event.modifierFlags
-
-    if let char = event.charactersIgnoringModifiers, isPrintable(char) {
-      // Is a classic ASCII printable char.
+    // Check if the NFKC form of the character without modifies is allowed in mpv input
+    // configuration files.
+    if let char = event.charactersIgnoringModifiers?.precomposedStringWithCanonicalMapping,
+       isAllowedInConfFile(char) {
       keyChar = char
       /// The char in `charactersIgnoringModifiers` will be either uppercase or lowercase,
       /// so remove the redundant modifier flag so we don't print an extra "SHIFT+"

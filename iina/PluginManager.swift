@@ -65,8 +65,9 @@ class PluginManager {
         return (.cancelled, nil)
       }
 
-      // alert the user if plugin has new permissions
-      var permissionCleared = newPlugin.permissions.subtracting(plugin.permissions).isEmpty
+      // Alert the user if the update adds permissions or changes the allowed domains.
+      var permissionCleared = newPlugin.permissions.subtracting(plugin.permissions).isEmpty &&
+        newPlugin.domainList == plugin.domainList
       if (!permissionCleared) {
         permissionCleared = await showPermissionsSheet(forPlugin: newPlugin, previousPlugin: plugin)
       }

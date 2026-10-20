@@ -108,6 +108,12 @@
     "id": "cc.notfire.iina-listenbrainz"
   },
   {
+    "name": "Metadata",
+    "url": "https://github.com/thepushkarp/iina-metadata",
+    "desc": "Identify movies and TV episodes via TMDB/TVmaze and save their metadata and artwork into MKV/MP4 files and Kodi/Infuse-style sidecars.",
+    "id": "io.github.thepushkarp.iina-metadata"
+  },
+  {
     "name": "Multiple Clips",
     "url": "https://github.com/karthisnk/multi-cutter-iina",
     "desc": "multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.",

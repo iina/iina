@@ -259,6 +259,14 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
+    addObserver(to: NSWorkspace.shared.notificationCenter, forName: NSWorkspace.screensDidWakeNotification) { [weak self] _ in
+      self?.videoView.updateDisplayLink()
+    }
+
+    addObserver(to: NSWorkspace.shared.notificationCenter, forName: NSWorkspace.didWakeNotification) { [weak self] _ in
+      self?.videoView.updateDisplayLink()
+    }
+
     addObserver(to: .default, forName: NSScreen.colorSpaceDidChangeNotification, object: nil) { [unowned self] noti in
       player.refreshEdrMode()
     }

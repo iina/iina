@@ -188,6 +188,9 @@ class SettingsPageGeneral: SettingsPage {
         SettingsItem.Switch()
           .image(name: "custom.photo.badge.eye")
           .bindTo(.screenshotShowPreview)
+        SettingsItem.Switch()
+          .image(name: "speaker.wave.2")
+          .bindTo(.screenshotPlaySound)
       }
     }
   }

@@ -644,6 +644,7 @@
 "settings.screenshotSaveToFile.desc" = "/path/to/screenshot/folder";
 "settings.screenshotSaveToFile.label" = "Save to";
 "settings.screenshotShowPreview.label" = "Show previews after taking screenshots";
+"settings.screenshotPlaySound.label" = "Play screenshot sound";
 "settings.trackAllFilesInRecentOpenMenu.desc" = "Otherwise only files that opened manually will show up in this menu.";
 "settings.trackAllFilesInRecentOpenMenu.label" = "Track all played files in \"Open Recent\" menu";
 "settings.useLegacyFullScreen.label" = "Use legacy full screen";

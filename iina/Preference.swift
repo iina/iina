@@ -102,6 +102,7 @@ struct Preference {
     static let screenshotFormat = Key("screenShotFormat")
     static let screenshotTemplate = Key("screenShotTemplate")
     static let screenshotShowPreview = Key("screenshotShowPreview")
+    static let screenshotPlaySound = Key("screenshotPlaySound")
 
     static let enableLiveText = Key("enableLiveText")
 
@@ -1262,6 +1263,7 @@ struct Preference {
     .screenshotFormat: ScreenshotFormat.png.rawValue,
     .screenshotTemplate: "%F-%n",
     .screenshotShowPreview: true,
+    .screenshotPlaySound: true,
 
     .enableLiveText: false,
 
@@ -1504,6 +1506,7 @@ struct Preference {
            .screenshotIncludeSubtitle,
            .screenshotSaveToFile,
            .screenshotShowPreview,
+           .screenshotPlaySound,
            .showBufferingThrobber,
            .showChapterPos,
            .showRemainingTime,

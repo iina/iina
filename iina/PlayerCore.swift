@@ -7,6 +7,22 @@
 //
 
 import Cocoa
+import AudioToolbox
+
+private enum ScreenshotSound {
+  private static let soundID: SystemSoundID? = {
+    let url = URL(fileURLWithPath: "/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Screen Capture.aif")
+    var soundID: SystemSoundID = 0
+    guard AudioServicesCreateSystemSoundID(url as CFURL, &soundID) == kAudioServicesNoError else { return nil }
+    return soundID
+  }()
+
+  static func play() {
+    guard Preference.bool(for: .screenshotPlaySound), let soundID else { return }
+    // System Sound Services respects macOS sound-effects settings, independently of mpv volume.
+    AudioServicesPlaySystemSoundWithCompletion(soundID, nil)
+  }
+}
 
 class PlayerCore: NSObject {
 
@@ -1153,6 +1169,7 @@ class PlayerCore: NSObject {
 
     guard let imageFolder = mpv.getString(MPVOption.Screenshot.screenshotDir) else { return }
     guard let lastScreenshotURL = Utility.getLatestScreenshot(from: imageFolder) else { return }
+    if saveToFile { ScreenshotSound.play() }
     guard let image = createImage(lastScreenshotURL) else {
       self.sendOSD(.screenshot)
       if !saveToFile {
@@ -1162,7 +1179,8 @@ class PlayerCore: NSObject {
     }
     if saveToClipboard {
       NSPasteboard.general.clearContents()
-      NSPasteboard.general.writeObjects([image])
+      let copiedToClipboard = NSPasteboard.general.writeObjects([image])
+      if copiedToClipboard && !saveToFile { ScreenshotSound.play() }
     }
     guard Preference.bool(for: .screenshotShowPreview) else {
       self.sendOSD(.screenshot)

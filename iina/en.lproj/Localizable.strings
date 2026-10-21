@@ -637,6 +637,8 @@
 "settings.recordPlaybackHistory.label" = "Enable playback history";
 "settings.recordRecentFiles.label" = "Enable \"Open Recent\" menu";
 "settings.resumeLastPosition.label" = "Resume last playback position";
+"settings.savePositionOnPlaylistNavigation.label" = "Save playback position when switching playlist items";
+"settings.savePositionOnPlaylistNavigation.desc" = "May change which item is resumed when reopening a playlist.";
 "settings.screenShotFormat.label" = "Format";
 "settings.screenShotIncludeSubtitle.label" = "Include subtitles";
 "settings.screenshotCopyToClipboard.desc" = "Destination";

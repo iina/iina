@@ -835,11 +835,11 @@
             <point key="canvasLocation" x="-2190" y="928"/>
         </customView>
         <customView id="Kmu-J1-cbE" userLabel="Prefs &gt; General &gt; History">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="112"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="136"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField identifier="SectionTitleHistory" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pfH-CF-O2T">
-                    <rect key="frame" x="-2" y="88" width="57" height="16"/>
+                    <rect key="frame" x="-2" y="112" width="57" height="16"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="History:" id="jeK-46-2BG">
                         <font key="font" metaFont="systemBold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -847,7 +847,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="AUU-c3-fW5">
-                    <rect key="frame" x="120" y="88" width="166" height="16"/>
+                    <rect key="frame" x="120" y="112" width="166" height="16"/>
                     <buttonCell key="cell" type="check" title="Enable playback history" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iGS-qN-f5q">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -860,7 +860,7 @@
                     </connections>
                 </button>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="4zm-YX-iM8">
-                    <rect key="frame" x="120" y="64" width="195" height="16"/>
+                    <rect key="frame" x="120" y="88" width="195" height="16"/>
                     <buttonCell key="cell" type="check" title="Enable &quot;Open Recent&quot; menu" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="55O-ik-ql6">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -871,7 +871,7 @@
                     </connections>
                 </button>
                 <textField autoresizesSubviews="NO" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="da1-EI-Ny1">
-                    <rect key="frame" x="156" y="8" width="326" height="28"/>
+                    <rect key="frame" x="156" y="32" width="326" height="28"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Otherwise only files that opened manually will show up in this menu." id="XFC-Lr-LmP">
                         <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -879,7 +879,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="gxK-Zo-PtQ">
-                    <rect key="frame" x="140" y="40" width="291" height="16"/>
+                    <rect key="frame" x="140" y="64" width="291" height="16"/>
                     <buttonCell key="cell" type="check" title="Track all played files in &quot;Open Recent&quot; menu" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ci8-j2-QS3">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -887,6 +887,17 @@
                     <connections>
                         <binding destination="IBP-Mz-Maa" name="enabled" keyPath="values.recordRecentFiles" id="8lt-kw-rkQ"/>
                         <binding destination="IBP-Mz-Maa" name="value" keyPath="values.trackAllFilesInRecentOpenMenu" id="xGd-30-R0K"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="PNv-q1-2L4">
+                    <rect key="frame" x="120" y="8" width="352" height="16"/>
+                    <buttonCell key="cell" type="check" title="Save playback position when switching playlist items" bezelStyle="regularSquare" imagePosition="left" state="off" inset="2" id="SPN-q1-2L4">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <binding destination="IBP-Mz-Maa" name="enabled" keyPath="values.resumeLastPosition" id="SPN-EN-2L4"/>
+                        <binding destination="IBP-Mz-Maa" name="value" keyPath="values.savePositionOnPlaylistNavigation" id="SPN-VL-2L4"/>
                     </connections>
                 </button>
             </subviews>
@@ -897,7 +908,10 @@
                 <constraint firstItem="da1-EI-Ny1" firstAttribute="leading" secondItem="gxK-Zo-PtQ" secondAttribute="leading" constant="18" id="Vgd-16-VLR"/>
                 <constraint firstItem="4zm-YX-iM8" firstAttribute="leading" secondItem="AUU-c3-fW5" secondAttribute="leading" id="Vm5-Wp-mWy"/>
                 <constraint firstItem="da1-EI-Ny1" firstAttribute="top" secondItem="gxK-Zo-PtQ" secondAttribute="bottom" constant="4" id="X9d-Gp-Gd2"/>
-                <constraint firstAttribute="bottom" secondItem="da1-EI-Ny1" secondAttribute="bottom" constant="8" id="Y9S-to-Uaw"/>
+                <constraint firstAttribute="bottom" secondItem="PNv-q1-2L4" secondAttribute="bottom" constant="8" id="Y9S-to-Uaw"/>
+                <constraint firstItem="PNv-q1-2L4" firstAttribute="top" secondItem="da1-EI-Ny1" secondAttribute="bottom" constant="8" id="SPN-TP-2L4"/>
+                <constraint firstItem="PNv-q1-2L4" firstAttribute="leading" secondItem="AUU-c3-fW5" secondAttribute="leading" id="SPN-LD-2L4"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PNv-q1-2L4" secondAttribute="trailing" id="SPN-TR-2L4"/>
                 <constraint firstItem="gxK-Zo-PtQ" firstAttribute="leading" secondItem="4zm-YX-iM8" secondAttribute="leading" constant="20" id="YHa-jX-bEO"/>
                 <constraint firstItem="pfH-CF-O2T" firstAttribute="top" secondItem="AUU-c3-fW5" secondAttribute="top" id="YsQ-gV-evT"/>
                 <constraint firstItem="AUU-c3-fW5" firstAttribute="leading" secondItem="Kmu-J1-cbE" secondAttribute="leading" constant="120" id="ZbG-0Z-dQm"/>

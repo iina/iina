@@ -383,6 +383,11 @@
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 		E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */; };
 		E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */; };
+		6BA8D65B2A6C1531A1965D9F /* SharePlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5F00B83DC88D2B76E17D9 /* SharePlayState.swift */; };
+		722C2529758491CF0A4F3938 /* SharePlayPlayback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C5D74A98967D78DC99D5A /* SharePlayPlayback.swift */; };
+		2654A6AB1BC63685CDC9BCFF /* SharePlayCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E037AB5106A9093153A2CCD3 /* SharePlayCoordinator.swift */; };
+		4BF1363068AB3EB77452372E /* SharePlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719BB578C709C84E5E4998ED /* SharePlayManager.swift */; };
+		75C8C6E8301866A3552AE272 /* PlayerCore+SharePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFACA1151A98B8E2316A43A /* PlayerCore+SharePlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1820,6 +1825,11 @@
 		FB011A0421F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB011A0621F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		FB011A0721F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		A4A5F00B83DC88D2B76E17D9 /* SharePlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharePlayState.swift"; sourceTree = "<group>"; };
+		363C5D74A98967D78DC99D5A /* SharePlayPlayback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharePlayPlayback.swift"; sourceTree = "<group>"; };
+		E037AB5106A9093153A2CCD3 /* SharePlayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharePlayCoordinator.swift"; sourceTree = "<group>"; };
+		719BB578C709C84E5E4998ED /* SharePlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharePlayManager.swift"; sourceTree = "<group>"; };
+		5FFACA1151A98B8E2316A43A /* PlayerCore+SharePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerCore+SharePlay.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2206,6 +2216,11 @@
 			children = (
 				84EB1ED91D2F51D3004FA5A1 /* AppDelegate.swift */,
 				84A0BA961D2FA1CE00BC8DA1 /* PlayerCore.swift */,
+				A4A5F00B83DC88D2B76E17D9 /* SharePlayState.swift */,
+				363C5D74A98967D78DC99D5A /* SharePlayPlayback.swift */,
+				E037AB5106A9093153A2CCD3 /* SharePlayCoordinator.swift */,
+				719BB578C709C84E5E4998ED /* SharePlayManager.swift */,
+				5FFACA1151A98B8E2316A43A /* PlayerCore+SharePlay.swift */,
 				84A0BA981D2FAAA700BC8DA1 /* MPVController.swift */,
 				348F71952DE2A814006C587D /* MPVCommandWrappers.swift */,
 				84C6D3611EAF8D63009BF721 /* HistoryController.swift */,
@@ -2906,6 +2921,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BA8D65B2A6C1531A1965D9F /* SharePlayState.swift in Sources */,
+				722C2529758491CF0A4F3938 /* SharePlayPlayback.swift in Sources */,
+				2654A6AB1BC63685CDC9BCFF /* SharePlayCoordinator.swift in Sources */,
+				4BF1363068AB3EB77452372E /* SharePlayManager.swift in Sources */,
+				75C8C6E8301866A3552AE272 /* PlayerCore+SharePlay.swift in Sources */,
 				E3EC8C432F94330400FBB51E /* Dialog.swift in Sources */,
 				E35306FA214808AB008FE492 /* JavascriptAPIEvent.swift in Sources */,
 				849581F11F02728700D3B359 /* InitialWindowController.swift in Sources */,

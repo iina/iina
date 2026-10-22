@@ -1229,6 +1229,10 @@ typedef struct AVStreamGroup {
 
 struct AVCodecParserContext *av_stream_get_parser(const AVStream *s);
 
+// Chromium: We use the internal field first_dts vvv
+int64_t    av_stream_get_first_dts(const AVStream *st);
+// Chromium: We use the internal field first_dts ^^^
+
 #define AV_PROGRAM_RUNNING 1
 
 /**

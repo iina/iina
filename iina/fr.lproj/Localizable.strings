@@ -153,7 +153,7 @@
 "preference.title" = "Préférences";
 "preference.general" = "Général";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Vidéo & audio";
+"preference.video_audio" = "Vidéo et audio";
 "preference.subtitle" = "Sous-titres";
 "preference.network" = "Réseau";
 "preference.control" = "Contrôles";
@@ -666,10 +666,10 @@
 "settings.loadIccProfile.desc" = "Charger le profil ICC pour l'affichage actuel et l'utiliser pour transformer le RVB vidéo en sortie d'écran. (Uniquement pour le mode SDR)";
 "settings.loadIccProfile.label" = "Charger un profil ICC";
 "settings.toneMappingAlgorithm.label" = "Algorithme";
-"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
-"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
-"settings.toneMappingParamOverride.label" = "Tuning parameter";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingAlgorithm.desc" = "Algorithme à utiliser pour la correspondance tonale des images sur l'écran.";
+"settings.toneMappingParamOverride.desc" = "Paramètre pour régler l'algorithme de correspondance des tonalités. Par défaut, il est défini à une valeur par défaut spécifique à l'algorithme. Activez ce paramètre pour remplacer cette valeur par défaut.";
+"settings.toneMappingParamOverride.label" = "Paramètre de réglage";
+"settings.toneMappingTargetPeak.desc" = "Luminosité maximale mesurée de l'écran. Par défaut IINA détecte cette valeur. Si la détection échoue, le pic cible sera défini à une valeur appropriée en fonction des caractéristiques de transfert de l'écran. Activez ce paramètre pour spécifier manuellement la luminosité de l'écran.";
 "settings.toneMappingTargetPeak.label" = "Pic cible";
 "settings.videoThreads.desc" = "Défaut : 0 (auto)";
 "settings.videoThreads.label" = "Nombre de processus";
@@ -765,18 +765,18 @@
 "settings.useMediaKeys.label" = "Utiliser les touches média système";
 
 // Settings - Network
-"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
-"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
-"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
-"settings.cachePauseInitial.label" = "Buffer before starting playback";
-"settings.defaultCacheSize.desc" = "Default: 153,600";
-"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
-"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.cachePauseWait.desc" = "Nombre de secondes à charger en mémoire tampon avant de recommencer la lecture si la mise en mémoire tampon est active. Augmentez ce paramètre si la lecture s'interrompt régulièrement.\n\npar défaut : 1";
+"settings.cachePauseWait.label" = "Nombre de secondes à charger en mémoire tampon avant de redémarrer";
+"settings.cachePauseInitial.desc" = "Mise en mémoire tampon avant de commencer la lecture. Cela peut être utilisé pour s'assurer que la lecture démarre en douceur, en échange de l'attente d'un certain temps pour précharger et tamponner les données du réseau.";
+"settings.cachePauseInitial.label" = "Tampon avant de commencer la lecture";
+"settings.defaultCacheSize.desc" = "Défaut : 153,600";
+"settings.defaultCacheSize.label" = "Taille du tampon de cache (KiB)";
+"settings.enableCache.label" = "Préchargement et tampon des données réseau";
 "settings.httpProxy.desc" = "Requiert un redémarrage de IINA.";
 "settings.httpProxy.label" = "Proxy HTTP";
-"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.desc" = "Défaut : 36,000";
 "settings.secPrefech.label" = "Secondes à pré-charger";
-"settings.showBufferingThrobber.label" = "Show throbber when buffering";
+"settings.showBufferingThrobber.label" = "Afficher le voleur lors de la mise en mémoire tampon";
 "settings.showSeekingThrobber.label" = "Afficher l'indicateur de chargement pendant la recherche";
 "settings.transportRTSPThrough.items.0" = "Automatique";
 "settings.transportRTSPThrough.label" = "Transporter les flux RTSP via";
@@ -807,10 +807,10 @@
 "settings.subAutoLoadSearchPath.label" = "Rechercher aussi des sous-titres dans le dossier suivant";
 "settings.subBlur.label" = "Flou";
 "settings.subBold.desc" = "sans sérif";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
-"settings.subBorderStyle.items.3" = "Opaque Box";
-"settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.items.1" = "Contour et ombre";
+"settings.subBorderStyle.items.3" = "Boîte opaque";
+"settings.subBorderStyle.items.4" = "Boîte d'arrière-plan ";
+"settings.subBorderStyle.label" = "Style de bordure";
 "settings.subBold.label" = "Gras";
 "settings.subItalic.label" = "Italique";
 "settings.subLang.desc" = "Cette option doit être un code de langue ISO 639-2 (utilisé par mpv et OpenSubtitles)";
@@ -899,7 +899,7 @@
 "settings.$About" = "À propos";
 "settings.$Accessibility" = "Accessibilité";
 "settings.$AdditionalMpvOptions" = "Options mpv additionnelles";
-"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$AdditionalMpvOptions.desc" = "Coller une option dans le format clé=valeur pour remplir les deux champs automatiquement.";
 "settings.$Advanced" = "Avancé";
 "settings.$Align" = "Aligner";
 "settings.$AlwaysWhenPlaying" = "Toujours lors de la lecture d'un nouveau fichier";
@@ -932,7 +932,7 @@
 "settings.$DefaultApplication" = "Application par défaut";
 "settings.$DefaultEncoding" = "Encodage par défaut";
 "settings.$DeleteAllPlaybackHistories" = "Supprimer tous les historiques de lecture et les entrées dans « Ouvrir l'élément récent ».";
-"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DeleteAllWatchLater" = "Le bouton ci-dessous supprimera tous les fichiers du dossier \"à regarder plus tard\". Ces fichiers contiennent les progressions de lecture et les paramètres appliqués durant la lecture.";
 "settings.$DoNotResize" = "Ne pas redimensionner";
 "settings.$DuplicateCurrentSet" = "Dupliquer l’ensemble actuel…";
 "settings.$FailedToLoadThePage" = "Échec du chargement de la page.";
@@ -990,7 +990,7 @@
 "settings.$RestoreAllAlertsThat" = "Restaurer toutes les alertes qui ont été supprimées en utilisant la case à cocher « Ne plus afficher ce message ».";
 "settings.$RestoreSuppressedAlerts" = "Rétablir les alertes masquées";
 "settings.$SPDIFOutput" = "Sortie S/PDIF";
-"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$SPDIFOutputWarning" = "Liste des codecs pour lesquels le passage audio compressé doit être utilisé.\n\nAttention : Il n'y a pas beaucoup de raisons d'utiliser ce paramètre. HDMI supporte le PCM multicanal non compressé, et le décodage DTS-HD sans perte est pris en charge via le décodeur DCA de FFmpeg. La lecture peut ne pas démarrer si le périphérique de sortie ne supporte pas S/PDIF et que ce paramètre est activé.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Captures d'écran";
 "settings.$SetIINAAsTheDefault" = "Définir IINA comme application par défaut";

@@ -374,7 +374,7 @@
 "alert.plugin_permission" = "此插件需要以下权限，请在继续之前检查。";
 "alert.plugin_permission_added" = "此次更新需要额外给予以下权限，请在继续之前检视。";
 "alert.install_plugin_macos_11.title" = "从GitHub安装插件";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+"alert.install_plugin_macos_11.message" = "请使用 user/repo 格式，或输入完整的 GitHub 网址。macOS 11 不支持插件商店。建议使用更新版本的系统以获得最佳体验。";
 
 "playlist.total_length" = "总计 %@";
 "playlist.total_length_with_selected" = "选中 %@ / %@";
@@ -403,9 +403,9 @@
 "pl_menu.copy_url" = "复制链接";
 "pl_menu.copy_url_multi" = "复制链接";
 "pl_menu.playback" = "回放";
-"pl_menu.subtitles" = "Subtitles (%d loaded)";
-"pl_menu.network_resources" = "Network Resources";
-"pl_menu.file_operations" = "File Operations";
+"pl_menu.subtitles" = "字幕（已加载 %d）";
+"pl_menu.network_resources" = "网络资源";
+"pl_menu.file_operations" = "文件操作";
 "pl_menu.plugin" = "插件";
 "pl_menu.playlist" = "播放列表";
 
@@ -497,18 +497,18 @@
 "plugin.updating" = "下载更新中……";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "所有子系统";
 "logwindow.title" = "日志查看器";
 "logwindow.time" = "时间";
 "logwindow.subsystem" = "子系统";
 "logwindow.message" = "消息";
-"logwindow.now" = "Now";
-"logwindow.now.desc" = "Follow latest logs";
-"logwindow.log_level" = "Log level";
+"logwindow.now" = "现在";
+"logwindow.now.desc" = "关注最新日志";
+"logwindow.log_level" = "日志级别";
 "logwindow.save" = "保存";
 "logwindow.save_filtered" = "保存已过滤的日志…";
 "logwindow.filter" = "过滤";
-"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.clear_subsystem_selections" = "清除选项";
 "logwindow.copy" = "拷贝";
 "logwindow.logs" = "日志";
 
@@ -521,15 +521,15 @@
 "history_window.menu.play_new_window" = "在新建窗口中播放";
 "history_window.menu.show_in_finder" = "在访达中显示";
 "history_window.menu.delete" = "删除…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "移动到回收站…";
 "history_window.toolbar.clear" = "清除播放历史";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "分组按";
+"history_window.toolbar.group_by.menu" = "分组按";
 "history_window.toolbar.group_by.date" = "日期";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
-"history_window.toolbar.group_by.location" = "Folder and Website";
-"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.group_by.date_tooltip" = "按日期排序";
+"history_window.toolbar.group_by.location" = "文件夹和网站";
+"history_window.toolbar.group_by.location_tooltip" = "按文件夹和网站排序";
+"history_window.toolbar.expand_collapse" = "展开/折叠";
 "history_window.toolbar.expand_all" = "展开全部";
 "history_window.toolbar.collapse_all" = "收起全部";
 "history_window.search.search_in" = "在…中搜索";
@@ -592,13 +592,13 @@
 "sidebar.text" = "文本";
 "sidebar.border" = "边框";
 "sidebar.shadow" = "阴影";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+"sidebar.sub_settings_not_available" = "某些设置不适用于这种字幕类型。";
+"sidebar.sub_style_warning" = "设置 ASS 字幕的样式选项可能会导致渲染错误。";
 
 "sidebar.add_file" = "添加文件…";
 "sidebar.add_url" = "添加 URL…";
 
-"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+"sidebar.plugins_placeholder" = "插件可以显示自定义的侧边栏内容。选择一个插件以查看其侧边栏，或在“设置”中安装新插件。";
 
 // Settings
 
@@ -611,7 +611,7 @@
 "settings.allowScreenSaverForAudio.desc" = "仍然阻止系统睡眠。";
 "settings.allowScreenSaverForAudio.label" = "在“音乐模式”或仅播放音频时不可用。";
 "settings.alwaysOpenInNewWindow.label" = "总是在新窗口打开文件";
-"settings.autoRepeat.label" = "Loop when a file is opened manually";
+"settings.autoRepeat.label" = "手动打开文件时进行循环";
 "settings.autoSwitchToMusicMode.label" = "播放音频文件时自动切换到“音乐模式”";
 "settings.blackOutMonitor.label" = "全屏播放时使其他屏幕黑屏";
 "settings.defaultRepeatMode.items.0" = "列表循环播放";
@@ -651,7 +651,7 @@
 // Settings - Video
 "settings.enableHdrSupport.desc" = "播放 HDR 视频时默认启用 HDR 模式。";
 "settings.enableHdrSupport.label" = "启用HDR模式";
-"settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
+"settings.enableLiveText.desc" = "在暂停的视频帧上显示“实时文本”叠加层，以便进行文本识别。需要 macOS 13 或更高版本。";
 "settings.enableLiveText.label" = "实况文本";
 "settings.enableToneMapping.label" = "启用色调映射";
 "settings.forceDedicatedGPU.desc" = "总是使用独立显卡（如果存在）。这可以提高渲染性能，但是可能增加耗电量。";
@@ -666,10 +666,10 @@
 "settings.loadIccProfile.desc" = "加载当前显示器的 ICC 配置文件并用于将视频 RGB 转换至屏幕输出。（仅适用于 SDR 模式）";
 "settings.loadIccProfile.label" = "加载 ICC 配置文件";
 "settings.toneMappingAlgorithm.label" = "算法";
-"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
-"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
-"settings.toneMappingParamOverride.label" = "Tuning parameter";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingAlgorithm.desc" = "用于将图像的色调映射到目标显示器上的算法。";
+"settings.toneMappingParamOverride.desc" = "用于调整色调映射算法的参数。默认情况下，该参数设置为特定算法的默认值。启用此设置可覆盖该默认值。";
+"settings.toneMappingParamOverride.label" = "调整参数";
+"settings.toneMappingTargetPeak.desc" = "显示器的测量峰值亮度。默认情况下，IINA 会自动检测此值。如果检测失败，目标峰值将根据显示器的传输特性设置为一个合适的值。启用此设置可手动指定显示器的亮度。";
 "settings.toneMappingTargetPeak.label" = "目标峰值";
 "settings.videoThreads.desc" = "默认：0（自动）";
 "settings.videoThreads.label" = "线程数";
@@ -765,18 +765,18 @@
 "settings.useMediaKeys.label" = "使用系统媒体控制";
 
 // Settings - Network
-"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
-"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
-"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
-"settings.cachePauseInitial.label" = "Buffer before starting playback";
-"settings.defaultCacheSize.desc" = "Default: 153,600";
-"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
-"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.cachePauseWait.desc" = "如果进入缓冲模式，缓存应在开始再次播放前缓冲的秒数。如果播放很快再次进入缓冲模式，请增加此设置。\n\n默认值：1";
+"settings.cachePauseWait.label" = "重启前缓冲的秒数";
+"settings.cachePauseInitial.desc" = "在开始播放前进入缓冲模式。这样可以确保播放流畅开始，但需要花费一些时间来预取和缓冲网络数据。";
+"settings.cachePauseInitial.label" = "开始播放前的缓冲";
+"settings.defaultCacheSize.desc" = "默认值：153,600";
+"settings.defaultCacheSize.label" = "缓存缓冲大小（KiB）";
+"settings.enableCache.label" = "预取和缓冲网络数据";
 "settings.httpProxy.desc" = "重启 IINA 后生效。";
 "settings.httpProxy.label" = "HTTP 代理";
-"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.desc" = "默认值：36,000";
 "settings.secPrefech.label" = "预读取秒数";
-"settings.showBufferingThrobber.label" = "Show throbber when buffering";
+"settings.showBufferingThrobber.label" = "缓冲时显示加载图标";
 "settings.showSeekingThrobber.label" = "在检索时显示加载图标";
 "settings.transportRTSPThrough.items.0" = "自动";
 "settings.transportRTSPThrough.label" = "传输 RTSP 流时使用";
@@ -807,10 +807,10 @@
 "settings.subAutoLoadSearchPath.label" = "在以下目录中也查找字幕";
 "settings.subBlur.label" = "模糊";
 "settings.subBold.desc" = "sans-serif";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
-"settings.subBorderStyle.items.3" = "Opaque Box";
-"settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.items.1" = "轮廓和阴影";
+"settings.subBorderStyle.items.3" = "不透明框";
+"settings.subBorderStyle.items.4" = "背景框";
+"settings.subBorderStyle.label" = "边框风格";
 "settings.subBold.label" = "粗体";
 "settings.subItalic.label" = "斜体";
 "settings.subLang.desc" = "此选项将会以 ISO 639-2 格式保存，并适用于 mpv 和 OpenSubtitles 。";
@@ -829,7 +829,7 @@
 "settings.subSpacing.label" = "字间距";
 
 // Settings - UI
-"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
+"settings.more_ui_settings" = "在“布局”侧边栏中还有更多用户界面设置可供使用。";
 "settings.alwaysFloatOnTop.label" = "播放时保持置顶";
 "settings.alwaysShowOnTopIcon.label" = "总是在标题栏显示置顶状态";
 "settings.arrowBtnAction.items.0" = "速度";
@@ -871,7 +871,7 @@
 "settings.themeMaterial.items.2" = "亮色";
 "settings.themeMaterial.items.4" = "匹配系统外观";
 "settings.themeMaterial.label" = "外观";
-"settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
+"settings.thumbnailWidth.desc" = "修改宽度会清除当前的缩略图缓存，并按所选尺寸重新生成所有缩略图。";
 "settings.thumbnailWidth.label" = "缩略图宽度";
 "settings.togglePipByMinimizingWindow.label" = "最小化/还原窗口时，自动切换“画中画”模式";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "仅用于视频文件";
@@ -885,7 +885,7 @@
 "settings.enableAdvancedSettings.desc" = "以下所有设置需要重启 IINA 才会生效。";
 "settings.enableAdvancedSettings.label" = "启用高级设置";
 "settings.enableLogging.label" = "记录日志";
-"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
+"settings.logLevel.desc" = "通过从菜单中选择“窗口 - 日志查看器”来查看日志。";
 "settings.logLevel.items.0" = "详细";
 "settings.logLevel.items.1" = "调试";
 "settings.logLevel.items.2" = "警告";
@@ -899,7 +899,7 @@
 "settings.$About" = "关于";
 "settings.$Accessibility" = "辅助功能";
 "settings.$AdditionalMpvOptions" = "额外 mpv 选项";
-"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$AdditionalMpvOptions.desc" = "粘贴一个采用 key=value 格式的选项，即可自动填写这两个字段。";
 "settings.$Advanced" = "高级";
 "settings.$Align" = "对齐";
 "settings.$AlwaysWhenPlaying" = "播放新视频时总是如此";
@@ -931,10 +931,10 @@
 "settings.$Decoding" = "解码";
 "settings.$DefaultApplication" = "默认应用程序";
 "settings.$DefaultEncoding" = "默认编码";
-"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DeleteAllPlaybackHistories" = "删除所有播放历史记录和“最近打开”中的条目。";
+"settings.$DeleteAllWatchLater" = "删除“稍后观看”文件夹中的所有文件。这些文件包含所有已保存的播放进度以及播放过程中应用的设置。";
 "settings.$DoNotResize" = "不调整大小";
-"settings.$DuplicateCurrentSet" = "Duplicate current set…";
+"settings.$DuplicateCurrentSet" = "复制当前设置…";
 "settings.$FailedToLoadThePage" = "无法加载此页面";
 "settings.$Firefox" = "Firefox";
 "settings.$Font" = "字体";
@@ -955,7 +955,7 @@
 "settings.$Installing" = "正在安装";
 "settings.$KeyBindingSet" = "快捷键配置";
 "settings.$Layout" = "样式";
-"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
+"settings.$LegacyOpenSubAlert" = "⚠️ 旧版 OpenSubtitles 支持已废弃。请改用 OpenSubtitles 插件。如需登录，请通过旧版“设置”窗口进行操作。";
 "settings.$LiveText" = "实况文本";
 "settings.$Logging" = "日志";
 "settings.$Login" = "登录";
@@ -976,7 +976,7 @@
 "settings.$OpenLinksOrCurrentWebpage" = "一键在 IINA 中打开网页中的链接或当前页面。网站需要 youtube-dl 的支持。";
 "settings.$OpenLogDirectory" = "打开日志目录";
 "settings.$OpenLogWindow" = "打开日志查看器";
-"settings.$OrSelectFrom" = "Or select from available plugins";
+"settings.$OrSelectFrom" = "或从可用插件中进行选择";
 "settings.$Other" = "其他";
 "settings.$OtherStyles" = "Box";
 "settings.$OverrideLevel" = "样式覆盖等级";
@@ -990,7 +990,7 @@
 "settings.$RestoreAllAlertsThat" = "还原所有选中“不再显示此消息”的警告。";
 "settings.$RestoreSuppressedAlerts" = "还原已忽略的警告";
 "settings.$SPDIFOutput" = "S/PDIF 输出";
-"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$SPDIFOutputWarning" = "应使用压缩音频直通功能的编解码器列表。\n\n警告：使用此设置的理由并不充分。HDMI 支持未压缩的多声道 PCM，且可通过 FFmpeg 的 DCA 解码器实现无损 DTS-HD 解码。如果输出设备不支持 S/PDIF 且此设置已启用，则可能无法开始播放。";
 "settings.$Safari" = "Safari浏览器";
 "settings.$Screenshots" = "截图";
 "settings.$SetIINAAsTheDefault" = "将 IINA 设为默认应用";
@@ -1001,8 +1001,8 @@
 "settings.$Size" = "字号";
 "settings.$Source" = "资源";
 "settings.$SubtitleSource" = "字幕来源";
-"settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
-"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
+"settings.$SubtitleSource.desc" = "这是搜索字幕的默认来源。播放时，您可以从菜单中手动选择从其他来源搜索字幕。";
+"settings.$SubtitleSourcePluginDesc" = "此数据源由一个插件提供。请前往该插件的设置页面进行配置。";
 "settings.$SuppressMessagesFor" = "不显示以下OSD消息";
 "settings.$TextSubtitles" = "文本字幕";
 "settings.$ThisPluginIsNot" = "此插件未托管在GitHub上，请前往作者网站下载。";
@@ -1028,7 +1028,7 @@
 "settings.$left" = "左";
 "settings.$nits" = "尼特";
 "settings.$ofScreen" = "% 屏幕大小";
-"settings.$onlineMediaPluginAdvice" = "The Online Media plugin is recommended";
+"settings.$onlineMediaPluginAdvice" = "建议使用“在线媒体”插件";
 "settings.$point" = "像素";
 "settings.$pt" = "点";
 "settings.$right" = "右";
@@ -1036,4 +1036,4 @@
 "settings.$sideOfTheScreen" = "侧";
 "settings.$toThe" = "距离屏幕";
 "settings.$top" = "顶";
-"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
+"settings.$ytdlWarning" = "“在线媒体”插件还具备切换画质和下载视频等附加功能。如果该插件已安装并启用，IINA 将使用该插件。以下设置仅在该插件不可用时才生效。";

@@ -1037,3 +1037,32 @@
 "settings.$toThe" = "to the";
 "settings.$top" = "top";
 "settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
+
+/* SharePlay */
+"shareplay.menu" = "SharePlay…";
+"shareplay.video" = "Video";
+"shareplay.start" = "Start SharePlay";
+"shareplay.use_current" = "Use Current Video";
+"shareplay.choose" = "Choose Local Video…";
+"shareplay.rejoin" = "Rejoin Playback";
+"shareplay.leave" = "Leave";
+"shareplay.end" = "End for Everyone";
+"shareplay.join" = "Join";
+"shareplay.cancel" = "Cancel";
+"shareplay.introduction" = "Watch together over FaceTime. Open a seekable video, then start SharePlay. Everyone needs their own copy or independently accessible video URL. Only the video title, duration, and playback state are shared.";
+"shareplay.connected" = "Connected · %d participant(s). Playback controls affect everyone. Subtitles and volume remain yours.";
+"shareplay.select_media" = "Join “%@” by opening your copy in IINA, then choose Use Current Video, or choose a local video here. The video must be the same edition and length.";
+"shareplay.suspended" = "Your playback is suspended. Resolve the interruption, then choose Rejoin Playback to catch up with the group.";
+"shareplay.open_video" = "Open a finite, seekable video and wait for it to load before using SharePlay.";
+"shareplay.facetime_required" = "Start or join a FaceTime call, then try Start SharePlay again. Group Activities must be enabled for this signed application.";
+"shareplay.activation_failed" = "SharePlay could not start. Check FaceTime and the application’s Group Activities signing capability.";
+"shareplay.invalid_media" = "The shared video information is invalid.";
+"shareplay.confirm_title" = "Is this the same video?";
+"shareplay.confirm_media" = "Confirm that your current video is the same edition of “%@”. Matching duration does not guarantee that the scenes line up. The video itself is not transferred.";
+"shareplay.duration_mismatch" = "This video’s duration does not match the shared video. Select the same edition, within one second of its duration.";
+"shareplay.choose_message" = "Select your own copy of the shared video. It will open in a new IINA window.";
+"shareplay.unsupported" = "This operation is unavailable during SharePlay. Leave the session to change videos, use loops or frame stepping, or run compound transport commands.";
+"shareplay.automation" = "Playback was suspended because a script or an unexpected player change could affect synchronization. Choose Rejoin Playback to catch up.";
+"shareplay.not_ready" = "The player could not complete a coordinated operation. Check media access and buffering, then choose Rejoin Playback.";
+"shareplay.media_changed" = "The shared video changed or closed. Choose Leave and start a new session for another video.";
+"shareplay.ended" = "The SharePlay session ended. Playback is paused.";

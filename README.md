@@ -40,6 +40,8 @@ You can get IINA through several sources. For the latest stable and beta release
 
 ## Building
 
+This branch contains an experimental native SharePlay implementation. See [the design, usage, signing, and test guide](SHAREPLAY.md). Real two-Mac FaceTime verification is required before treating it as release-ready.
+
 IINA uses mpv for media playback. To build IINA, you can either fetch copies of these libraries we have already built (using the instructions below) or build them yourself by skipping to [these instructions](#building-mpv-manually).
 
 ### Using the pre-compiled libraries

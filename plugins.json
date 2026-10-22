@@ -180,6 +180,12 @@
     "id": "io.github.fahim.iinatraktscrobbler"
   },
   {
+    "name": "Verba Connect",
+    "url": "https://github.com/s4ysolutions/iina-verba",
+    "desc": "Select a word in the subtitles and press A to add it to your Verba vocabulary.",
+    "id": "solutions.s4y.verba"
+  },
+  {
     "name": "VR2D",
     "url": "https://github.com/fetzu/iina-plugin-vr2d",
     "desc": "Watch 3D VR videos (180°/360°, side-by-side or over-under, equirectangular or fisheye) as a flat 2D image you can pan and zoom. Detects VR sources automatically from file names and container metadata.",

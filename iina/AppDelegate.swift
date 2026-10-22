@@ -750,14 +750,32 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   /**
+   When opening multiple files from Finder or dragging multiple files to App icon,
+   Cocoa calls this method with the array of filenames.
+   */
+  func application(_ sender: NSApplication, openFiles filenames: [String]) {
+    Logger.log("application:openFiles called with \(filenames.count) files")
+    openFileCalled = true
+    openFileTimer?.invalidate()
+    pendingFilesForOpenFile.append(contentsOf: filenames)
+    let timer = Timer(timeInterval: OpenFileRepeatTime, target: self, selector: #selector(handleOpenFile), userInfo: nil, repeats: false)
+    RunLoop.main.add(timer, forMode: .common)
+    openFileTimer = timer
+    sender.reply(toOpenOrPrint: .success)
+  }
+
+  /**
    When dragging multiple files to App icon, cocoa will simply call this method repeatedly.
    Therefore we must cache all possible calls and handle them together.
    */
   func application(_ sender: NSApplication, openFile filename: String) -> Bool {
+    Logger.log("application:openFile called with \(filename)")
     openFileCalled = true
     openFileTimer?.invalidate()
     pendingFilesForOpenFile.append(filename)
-    openFileTimer = Timer.scheduledTimer(timeInterval: OpenFileRepeatTime, target: self, selector: #selector(handleOpenFile), userInfo: nil, repeats: false)
+    let timer = Timer(timeInterval: OpenFileRepeatTime, target: self, selector: #selector(handleOpenFile), userInfo: nil, repeats: false)
+    RunLoop.main.add(timer, forMode: .common)
+    openFileTimer = timer
     return true
   }
 
@@ -786,6 +804,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
 
     // open pending files
+    Logger.log("Opening \(urls.count) pending files from Finder/openFile")
     if PlayerCore.openURLs(urls) == 0 {
       Utility.showAlert("nothing_to_open")
     }

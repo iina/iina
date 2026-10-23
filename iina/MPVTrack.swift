@@ -84,6 +84,7 @@ class MPVTrack: NSObject {
   var codec: String?
   var demuxW: Int?
   var demuxH: Int?
+  var demuxPixelAspect: Double?
   var demuxChannelCount: Int?
   var demuxChannels: String?
   var demuxSamplerate: Int?
@@ -189,6 +190,7 @@ class MPVTrack: NSObject {
     decoderDesc = dict["decoder-desc"] as? String
     demuxW = MPVController.nodeValueAsInt(dict["demux-w"])
     demuxH = MPVController.nodeValueAsInt(dict["demux-h"])
+    demuxPixelAspect = dict["demux-par"] as? Double
     demuxFps = dict["demux-fps"] as? Double
     demuxChannelCount = MPVController.nodeValueAsInt(dict["demux-channel-count"])
     demuxChannels = dict["demux-channels"] as? String

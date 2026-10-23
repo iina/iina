@@ -9,8 +9,7 @@
 fileprivate let ui = SettingsUIHelper.sharedUI
 
 class SettingsPageUI: SettingsPage {
-  private lazy var windowInitialSizeView: WindowInitialSizeView = WindowInitialSizeView(geometryBindings: geometryBindings)
-  private lazy var windowInitialPositionView: WindowInitialPositionView = WindowInitialPositionView(geometryBindings: geometryBindings)
+  private lazy var windowGeometryConfigurationItem = WindowGeometryConfigurationItem(geometryBindings: geometryBindings)
   private lazy var resizeWindowView: ResizeWindowView = ResizeWindowView()
   private lazy var oscLayoutView: OSCLayoutView = OSCLayoutView()
   private lazy var oscToolbarView: OSCToolbarView = OSCToolbarView()
@@ -83,19 +82,12 @@ class SettingsPageUI: SettingsPage {
     return section {
       SettingsList(title: .text_Window) {
         SettingsItem.Switch(title: .text_InitialWindowSize)
-          .image(name: "custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle")
-          .withExpandingDetailView(windowInitialSizeView)
-          .bindToCustom {
-            self.geometryBindings.initControl(\.windowSizeSwitch, $0)
-          }
-          .bindExpandableView()
+          .image(name: "arrow.up.left.and.arrow.down.right")
+          .bindToCustom { [weak self] in self?.geometryBindings.bindSizeSwitch($0) }
         SettingsItem.Switch(title: .text_InitialWindowPosition)
           .image(name: "arrow.up.and.down.and.arrow.left.and.right")
-          .withExpandingDetailView(windowInitialPositionView)
-          .bindToCustom {
-            self.geometryBindings.initControl(\.windowPosSwitch, $0)
-          }
-          .bindExpandableView()
+          .bindToCustom { [weak self] in self?.geometryBindings.bindPositionSwitch($0) }
+        windowGeometryConfigurationItem
       }
 
       SettingsList {
@@ -267,209 +259,113 @@ class SettingsPageUI: SettingsPage {
 }
 
 
-fileprivate let SizeWidthTag = 0
-fileprivate let SizeHeightTag = 1
-fileprivate let UnitPointTag = 0
-fileprivate let UnitPercentTag = 1
-fileprivate let SideLeftTag = 0
-fileprivate let SideRightTag = 1
-fileprivate let SideTopTag = 0
-fileprivate let SideBottomTag = 1
-
-
 fileprivate class GeometryBindings: NSObject {
-  private let key = Preference.Key.initialWindowSizePosition
   private let prefObserver = Preference.Observer()
-
-  var windowSizeSwitch: SettingsItem.Switch!
-  var windowSizeSide: NSPopUpButton!
-  var windowSizeValue: NSTextField!
-  var windowSizeUnit: NSPopUpButton!
-
-  var windowPosSwitch: SettingsItem.Switch!
-  var windowPosXAnchor: NSPopUpButton!
-  var windowPosXOffset: NSTextField!
-  var windowPosXUnit: NSPopUpButton!
-  var windowPosYAnchor: NSPopUpButton!
-  var windowPosYOffset: NSTextField!
-  var windowPosYUnit: NSPopUpButton!
+  private var geometry = GeometryBindings.loadGeometry()
+  private var windowSizeSwitch: SettingsItem.Switch?
+  private var windowPositionSwitch: SettingsItem.Switch?
 
   override init() {
     super.init()
-    prefObserver.add(key) { [unowned self] _ in
-      updateControls()
+    prefObserver.add(.initialWindowSizePosition) { [weak self] _ in
+      self?.updateControls()
     }
   }
 
-  func initControl<T>(_ keyPath: ReferenceWritableKeyPath<GeometryBindings, T?>, _ value: T) {
-    self[keyPath: keyPath] = value
-    if let value = value as? SettingsItem.Switch {
-      value.stateChangeCallback = { [weak self] _ in
-        self?.updateGeometry(value)
-      }
-    } else if let value = value as? NSControl {
-      value.target = self
-      value.action = #selector(updateGeometry(_:))
+  func bindSizeSwitch(_ control: SettingsItem.Switch) {
+    windowSizeSwitch = control
+    control.stateChangeCallback = { [weak self, weak control] _ in
+      guard let self, let control else { return }
+      self.geometry.sizeEnabled = control.nsSwitch.state == .on
+      self.persistGeometry()
     }
   }
 
-  @objc func updateGeometry(_ sender: AnyObject) {
-    var geometry = ""
-    if windowSizeSwitch.nsSwitch.state == .on {
-      geometry += windowSizeSide.selectedTag() == SizeWidthTag ? "" : "x"
-      geometry += windowSizeValue.stringValue
-      geometry += windowSizeUnit.selectedTag() == UnitPointTag ? "" : "%"
+  func bindPositionSwitch(_ control: SettingsItem.Switch) {
+    windowPositionSwitch = control
+    control.stateChangeCallback = { [weak self, weak control] _ in
+      guard let self, let control else { return }
+      self.geometry.positionEnabled = control.nsSwitch.state == .on
+      self.persistGeometry()
     }
-    if windowPosSwitch.nsSwitch.state == .on {
-      geometry += windowPosXAnchor.selectedTag() == SideLeftTag ? "+" : "-"
-      geometry += windowPosXOffset.stringValue
-      geometry += windowPosXUnit.selectedTag() == UnitPointTag ? "" : "%"
-      geometry += windowPosYAnchor.selectedTag() == SideBottomTag ? "+" : "-"
-      geometry += windowPosYOffset.stringValue
-      geometry += windowPosYUnit.selectedTag() == UnitPointTag ? "" : "%"
-    }
-    Preference.set(geometry, for: .initialWindowSizePosition)
+  }
+
+  func configurationDraft() -> InitialWindowGeometry {
+    updateControls()
+    return geometry
+  }
+
+  func save(_ draft: InitialWindowGeometry) {
+    geometry = draft
+    persistGeometry()
+    updateControls()
+  }
+
+  private static func loadGeometry() -> InitialWindowGeometry {
+    let raw = Preference.string(for: .initialWindowSizePosition) ?? ""
+    let active = InitialWindowGeometry(raw)
+    var stored = InitialWindowGeometry(Preference.string(for: .initialWindowGeometryConfiguration) ?? "")
+    stored.sizeEnabled = active.sizeEnabled
+    stored.positionEnabled = active.positionEnabled
+    return stored.geometryString == raw ? stored : active
+  }
+
+  private func persistGeometry() {
+    var configured = geometry
+    configured.sizeEnabled = true
+    configured.positionEnabled = true
+    Preference.set(configured.geometryString, for: .initialWindowGeometryConfiguration)
+    Preference.set(geometry.geometryString, for: .initialWindowSizePosition)
   }
 
   func updateControls() {
-    let geometryString = Preference.string(for: .initialWindowSizePosition) ?? ""
-    if let geometry = GeometryDef.parse(geometryString) {
-      // size
-      if let h = geometry.h {
-        windowSizeSwitch.setIsOn(true)
-        windowSizeSide.selectItem(withTag: SizeHeightTag)
-        let isPercent = h.hasSuffix("%")
-        windowSizeUnit.selectItem(withTag: isPercent ? UnitPercentTag : UnitPointTag)
-        windowSizeValue.stringValue = isPercent ? String(h.dropLast()) : h
-      } else if let w = geometry.w {
-        windowSizeSwitch.setIsOn(true)
-        windowSizeSide.selectItem(withTag: SizeWidthTag)
-        let isPercent = w.hasSuffix("%")
-        windowSizeUnit.selectItem(withTag: isPercent ? UnitPercentTag : UnitPointTag)
-        windowSizeValue.stringValue = isPercent ? String(w.dropLast()) : w
-      } else {
-        windowSizeSwitch.setIsOn(false)
-      }
-      // position
-      if let x = geometry.x, let xSign = geometry.xSign, let y = geometry.y, let ySign = geometry.ySign {
-        windowPosSwitch.setIsOn(true)
-        let xIsPercent = x.hasSuffix("%")
-        windowPosXAnchor.selectItem(withTag: xSign == "+" ? SideLeftTag : SideRightTag)
-        windowPosXOffset.stringValue = xIsPercent ? String(x.dropLast()) : x
-        windowPosXUnit.selectItem(withTag: xIsPercent ? UnitPercentTag : UnitPointTag)
-        let yIsPercent = y.hasSuffix("%")
-        windowPosYAnchor.selectItem(withTag: ySign == "+" ? SideBottomTag : SideTopTag)
-        windowPosYOffset.stringValue = yIsPercent ? String(y.dropLast()) : y
-        windowPosYUnit.selectItem(withTag: yIsPercent ? UnitPercentTag : UnitPointTag)
-      } else {
-        windowPosSwitch.setIsOn(false)
-      }
-    } else {
-      windowSizeSwitch.setIsOn(false)
-      windowPosSwitch.setIsOn(false)
+    let raw = Preference.string(for: .initialWindowSizePosition) ?? ""
+    if raw != geometry.geometryString { geometry = Self.loadGeometry() }
+    windowSizeSwitch?.setIsOn(geometry.sizeEnabled)
+    windowPositionSwitch?.setIsOn(geometry.positionEnabled)
+  }
+}
+
+
+fileprivate class WindowGeometryConfigurationItem: SettingsItem.General {
+  private let sheetController = WindowGeometrySettingsSheetController()
+  private let configureButton = ui.button("windowGeometry.configureShort")
+  private let geometryBindings: GeometryBindings
+
+  init(geometryBindings: GeometryBindings) {
+    self.geometryBindings = geometryBindings
+    super.init(title: .init("windowGeometry.configure"))
+    _ = image(name: "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left")
+    configureButton.target = self
+    configureButton.action = #selector(configureGeometry)
+  }
+
+  override func getValueViews() -> [NSView] { [configureButton] }
+  @objc private func configureGeometry() {
+    guard let window = configureButton.window else { return }
+    sheetController.present(on: window, geometry: geometryBindings.configurationDraft(),
+      mediaAspect: WindowGeometryConfigurationItem.currentMediaAspect) { [weak self] draft in
+      self?.geometryBindings.save(draft)
     }
   }
-}
 
-
-fileprivate class WindowInitialSizeView: SettingsContainer {
-  lazy var itemID = SettingsContainerUUID.next()
-  let container: NSView
-  let view: NSStackView
-
-  lazy var popupButtonDim: NSPopUpButton = ui.popupButton([
-    (.text_Width, 0), (.text_Height, 1)
-  ])
-
-  lazy var popupButtonUnit: NSPopUpButton = ui.popupButton([
-    (.text_point, 0), (.text_ofScreen, 1)
-  ])
-
-  lazy var textField: NSTextField = ui.textInput(value: "1280", width: 64)
-
-  init(geometryBindings: GeometryBindings) {
-    self.container = NSView()
-    self.view = NSStackView()
-    self.view.translatesAutoresizingMaskIntoConstraints = false
-    self.view.orientation = .horizontal
-    self.view.alignment = .firstBaseline
-
-    view.addArrangedSubview(popupButtonDim)
-    view.addArrangedSubview(textField)
-    view.addArrangedSubview(popupButtonUnit)
-
-    geometryBindings.initControl(\.windowSizeSide, popupButtonDim)
-    geometryBindings.initControl(\.windowSizeValue, textField)
-    geometryBindings.initControl(\.windowSizeUnit, popupButtonUnit)
-
-    container.addSubview(view)
-    view.padding(.bottom(8), .top(0), .leading(SettingsSubList.indent), .trailing(0))
+  static var visiblePlayers: [PlayerCore] {
+    let players = PlayerCore.playerCores.filter { $0.mainWindow.isWindowLoaded && $0.mainWindow.window?.isVisible == true }
+    guard !players.isEmpty else { return [] }
+    let active = PlayerCore.lastActive
+    return players.sorted { $0 === active && $1 !== active }
   }
 
-  func makeView() -> NSView {
-    return container
-  }
-}
-
-
-fileprivate class WindowInitialPositionView: SettingsContainer {
-  lazy var itemID = SettingsContainerUUID.next()
-  let container: NSView
-  let view: NSStackView
-
-  lazy var popupButtonXPos: NSPopUpButton = ui.popupButton([
-    (.text_top, 0), (.text_bottom, 1)
-  ])
-
-  lazy var popupButtonYPos: NSPopUpButton = ui.popupButton([
-    (.text_left, 0), (.text_right, 1)
-  ])
-
-  lazy var popupButtonXUnit: NSPopUpButton = ui.popupButton([
-    (.text_point, 0), (.text_ofScreen, 1)
-  ])
-
-  lazy var popupButtonYUnit: NSPopUpButton = ui.popupButton([
-    (.text_point, 0), (.text_ofScreen, 1)
-  ])
-
-  lazy var textFieldX: NSTextField = ui.textInput(value: "20", width: 64)
-
-  lazy var textFieldY: NSTextField = ui.textInput(value: "20", width: 64)
-
-  init(geometryBindings: GeometryBindings) {
-    self.container = NSView()
-    self.view = NSStackView()
-    self.view.translatesAutoresizingMaskIntoConstraints = false
-    self.view.orientation = .vertical
-    self.view.alignment = .leading
-
-    view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.image("arrow.left.to.line"), ui.smallLabel(bindTo: .text_XOffset), textFieldX, popupButtonXUnit)
-    )
-    view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.smallLabel(bindTo: .text_toThe), popupButtonXPos, ui.smallLabel(bindTo: .text_sideOfTheScreen))
-    )
-    view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.image("arrow.up.to.line"), ui.smallLabel(bindTo: .text_YOffset), textFieldY, popupButtonYUnit)
-    )
-    view.addArrangedSubview(
-      ui.hStack(align: .firstBaseline, ui.space(width: 16), ui.smallLabel(bindTo: .text_toThe), popupButtonYPos, ui.smallLabel(bindTo: .text_sideOfTheScreen))
-    )
-
-    container.addSubview(view)
-    view.padding(.bottom(8), .top(0), .leading(SettingsSubList.indent), .trailing(0))
-
-    geometryBindings.initControl(\.windowPosXAnchor, popupButtonXPos)
-    geometryBindings.initControl(\.windowPosXUnit, popupButtonXUnit)
-    geometryBindings.initControl(\.windowPosXOffset, textFieldX)
-    geometryBindings.initControl(\.windowPosYAnchor, popupButtonYPos)
-    geometryBindings.initControl(\.windowPosYUnit, popupButtonYUnit)
-    geometryBindings.initControl(\.windowPosYOffset, textFieldY)
+  static var currentMediaAspect: CGFloat {
+    guard let player = visiblePlayers.first,
+          let width = player.info.displayWidth, let height = player.info.displayHeight, width > 0, height > 0 else { return 16 / 9 }
+    let display = player.videoSizeForDisplay
+    return CGFloat(display.0) / CGFloat(max(1, display.1))
   }
 
-  func makeView() -> NSView {
-    return container
+  override func registerSearchEntry(context: SettingsSearch.Context) {
+    super.registerSearchEntry(context: context)
+    context.add(itemID, ui.localized("windowGeometry.configure"))
   }
 }
 
@@ -563,7 +459,7 @@ fileprivate class OSCLayoutView: NSObject, SettingsContainer {
 
   @objc private func configurePosition() {
     guard let window = view.window else { return }
-    let players = OSCPositionConfiguration.visiblePlayers
+    let players = WindowGeometryConfigurationItem.visiblePlayers
     OSCPositionConfiguration.present(on: window, players: players, using: positionSheetController)
   }
 
@@ -699,10 +595,6 @@ fileprivate class OSCArrowSettingsList: SettingsList {
 
 
 enum OSCPositionConfiguration {
-  static var visiblePlayers: [PlayerCore] {
-    PlayerCore.playerCores.filter { $0.mainWindow.isWindowLoaded && $0.mainWindow.window?.isVisible == true }
-  }
-
   static func present(on parent: NSWindow, players: [PlayerCore], using controller: OSCPositionSettingsSheetController) {
     let contexts = players.compactMap { player -> PositionPreviewContext? in
       guard let playerWindow = player.mainWindow.window, let content = playerWindow.contentView else { return nil }

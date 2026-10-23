@@ -33,10 +33,27 @@ class MPVFilter: NSObject {
 
   // MARK: - Static filters
 
-  static func crop(w: Int?, h: Int?, x: Int?, y: Int?) -> MPVFilter {
-    let f = MPVFilter(name: "crop", label: nil,
-                      params: ["w": w?.description ?? "", "h": h?.description ?? "", "x": x?.description ?? "", "y": y?.description ?? ""])
-    return f
+  static func crop(w: Int?, h: Int?, x: Int?, y: Int?, exact: Bool = false) -> MPVFilter {
+    var params = ["w": w?.description ?? "", "h": h?.description ?? "", "x": x?.description ?? "", "y": y?.description ?? ""]
+    if exact { params["exact"] = "1" }
+    return MPVFilter(name: "crop", label: nil, params: params)
+  }
+
+  // Odd exact crops can split NV12/P010 chroma pairs. Planar 4:4:4 preserves pixel boundaries.
+  private static let exactCropPrefix = "format=pix_fmts=" + [
+    "yuv444p", "yuv444p9le", "yuv444p10le", "yuv444p12le", "yuv444p14le", "yuv444p16le",
+    "yuva444p", "yuva444p9le", "yuva444p10le", "yuva444p12le", "yuva444p16le",
+    "gbrp", "gbrp9le", "gbrp10le", "gbrp12le", "gbrp14le", "gbrp16le", "gbrpf32le",
+    "gbrap", "gbrap10le", "gbrap12le", "gbrap16le", "gbrapf32le"
+  ].joined(separator: "|") + ",crop="
+
+  private static func exactCropParameters(_ graph: String) -> [String: String]? {
+    guard graph.hasPrefix(exactCropPrefix) else { return nil }
+    let values = graph.dropFirst(exactCropPrefix.count).components(separatedBy: ":")
+    guard values.count == 5, values[4] == "exact=1",
+          values.prefix(4).allSatisfy({ $0.isEmpty || Int($0) != nil }) else { return nil }
+    return Dictionary(uniqueKeysWithValues: zip(["w", "h", "x", "y", "exact"],
+                                               Array(values.prefix(4)) + ["1"]))
   }
 
   // FIXME: use lavfi vflip
@@ -76,6 +93,11 @@ class MPVFilter: NSObject {
       var str = ""
       // label
       if let label { str += "@\(label):" }
+      if type == .crop, let params, params["exact"] == "1",
+         ["w", "h", "x", "y"].contains(where: { params[$0].flatMap(Int.init).map { $0 % 2 != 0 } ?? true }) {
+        let dimensions = ["w", "h", "x", "y"].map { params[$0] ?? "" }.joined(separator: ":")
+        return str + "lavfi=[" + Self.exactCropPrefix + dimensions + ":exact=1]"
+      }
       // name
       str += name
       // params
@@ -88,6 +110,9 @@ class MPVFilter: NSObject {
         if type != nil, let format = MPVFilter.formats[type!] {
           str += "="
           str += format.components(separatedBy: ":").map { params![$0] ?? "" }.joined(separator: ":")
+          if type == .crop, let exact = params?["exact"] {
+            str += ":exact=\(exact.mpvQuotedFilterValue)"
+          }
           // else print param names
         } else {
           str += "="
@@ -113,6 +138,12 @@ class MPVFilter: NSObject {
     self.type = FilterType(rawValue: name)
     self.name = name
     self.label = label
+    if name == "lavfi", let graph = params?["graph"], let crop = Self.exactCropParameters(graph) {
+      self.type = .crop
+      self.name = "crop"
+      self.params = crop
+      return
+    }
     if let params, let type, let format = MPVFilter.formats[type]?.components(separatedBy: ":") {
       var translated: [String: String] = [:]
       for (key, value) in params {
@@ -142,6 +173,13 @@ class MPVFilter: NSObject {
     }
     self.rawParamString = splitted[at: 1]
     self.params = MPVFilter.parseRawParamString(name, rawParamString)
+    if name == "lavfi", let rawParamString, rawParamString.hasPrefix("["), rawParamString.hasSuffix("]"),
+       let crop = Self.exactCropParameters(String(rawParamString.dropFirst().dropLast())) {
+      self.type = .crop
+      self.name = "crop"
+      self.params = crop
+      self.rawParamString = nil
+    }
   }
 
   init(name: String, label: String?, paramString: String) {

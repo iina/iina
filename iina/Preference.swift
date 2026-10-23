@@ -57,6 +57,9 @@ struct Preference {
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = Key("softVolume")
 
+    /** Saved display-aspect ratios ([Double]). */
+    static let customCropAspectPresets = Key("customCropAspectPresets")
+
     /** Pause st first (pause) (bool) */
     static let pauseWhenOpen = Key("pauseWhenOpen")
 
@@ -139,14 +142,13 @@ struct Preference {
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
     static let initialWindowSizePosition = Key("initialWindowSizePosition")
+    static let initialWindowGeometryConfiguration = Key("initialWindowGeometryConfiguration")
     static let resizeWindowTiming = Key("resizeWindowTiming")
     static let resizeWindowOption = Key("resizeWindowOption")
 
     static let oscPosition = Key("oscPosition")
     static let disablePlaySliderScrolling = Key("disablePlaySliderScrolling")
     static let disableVolumeSliderScrolling = Key("disableVolumeSliderScrolling")
-
-    static let lastSelectedPlugin = Key("lastSelectedPlugin")
 
     static let leadingSidebarWidth = Key("leadingSidebarWidth")
     static let trailingSidebarWidth = Key("trailingSidebarWidth")
@@ -178,6 +180,7 @@ struct Preference {
     static let sidebarSettingsDisplayAtLeading = Key("sidebarSettingsDisplayAtLeading")
     static let sidebarPlaylistDisplayAtLeading = Key("sidebarPlaylistDisplayAtLeading")
     static let sidebarPluginsDisplayAtLeading = Key("sidebarPluginsDisplayAtLeading")
+    static let lastSelectedPlugin = Key("lastSelectedPlugin")
 
     // Codec
 
@@ -1114,6 +1117,7 @@ struct Preference {
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),
     .softVolume: 100,
+    .customCropAspectPresets: [Double](),
     .arrowButtonAction: ArrowButtonAction.speed.rawValue,
     .oscArrowSeekSeconds: 10,
     .pauseWhenOpen: false,
@@ -1144,6 +1148,7 @@ struct Preference {
 
     .usePhysicalResolution: true,
     .initialWindowSizePosition: "",
+    .initialWindowGeometryConfiguration: "",
     .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
     .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
     .showRemainingTime: false,

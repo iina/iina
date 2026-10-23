@@ -89,6 +89,41 @@ class ViewLayer: CAOpenGLLayer {
   /// When `true` drawing will proceed even if mpv indicates nothing needs to be done.
   @Atomic private var forceDraw = false
 
+  // Preserve the native PiP transaction while it updates the hosted surface.
+  @Atomic var isHostedInPIP = false
+
+  @Atomic var isAnimatingWindowResize = false {
+    didSet {
+      if isAnimatingWindowResize && !isInCropTransition { isAsynchronous = true }
+      update(force: true)
+    }
+  }
+
+  @Atomic private var fullscreenTransition = (generation: 0, active: false, finishing: false)
+  @Atomic private var fullscreenDisplayQueued = false
+
+  private var isInFullscreenTransition: Bool { fullscreenTransition.active }
+
+  @Atomic private var isDrawingGeometryHandoff = false
+  @Atomic var isInCropTransition = false {
+    didSet {
+      // CA's automatic GL timer locks the context before canDraw can reject a
+      // preparation frame. Keep crop drawing on mpvGLQueue so that timer cannot
+      // starve main while the native renderer waits for video presentation time.
+      if isInCropTransition { isAsynchronous = false }
+      else if inLiveResize || isAnimatingWindowResize || isInFullscreenTransition { isAsynchronous = true }
+    }
+  }
+  @Atomic private var isPreparingCropFrame = false
+  @Atomic private var skippedEmptyCropFrame = false
+
+  @Atomic private var lastRenderedPixelSize: CGSize? = nil
+
+  private var pixelSize: CGSize {
+    CGSize(width: (bounds.width * contentsScale).rounded(),
+           height: (bounds.height * contentsScale).rounded())
+  }
+
   /// Indicates whether the view is being rendered as part of a live resizing operation.
   ///
   /// This flag is used to manage setting of the
@@ -100,7 +135,7 @@ class ViewLayer: CAOpenGLLayer {
   /// likelihood of seeing a very short momentary black screen when exiting full screen mode.
   @Atomic var inLiveResize: Bool = false {
     didSet {
-      if inLiveResize {
+      if inLiveResize && !isInCropTransition {
         isAsynchronous = true
       }
       update(force: true)
@@ -128,6 +163,7 @@ class ViewLayer: CAOpenGLLayer {
     // when resized but mpv hasn't rendered a new frame,
     // the old content's aspect ratio should be preserved.
     contentsGravity = .resizeAspectFill
+    needsDisplayOnBoundsChange = true
   }
 
   /// Returns an initialized shadow copy of the given layer with custom instance variables copied from `layer`.
@@ -143,11 +179,27 @@ class ViewLayer: CAOpenGLLayer {
     cglPixelFormat = previousLayer.cglPixelFormat
     cglContext = previousLayer.cglContext
     displayLock = previousLayer.displayLock
+    bufferDepth = previousLayer.bufferDepth
     super.init(layer: layer)
     autoresizingMask = previousLayer.autoresizingMask
     backgroundColor = previousLayer.backgroundColor
     wantsExtendedDynamicRangeContent = previousLayer.wantsExtendedDynamicRangeContent
     contentsFormat = previousLayer.contentsFormat
+    // Ownership belongs to the shared surface, including its shadow copies.
+    _isHostedInPIP = previousLayer._isHostedInPIP
+    _isAnimatingWindowResize = previousLayer._isAnimatingWindowResize
+    _fullscreenTransition = previousLayer._fullscreenTransition
+    _fullscreenDisplayQueued = previousLayer._fullscreenDisplayQueued
+    _lastRenderedPixelSize = previousLayer._lastRenderedPixelSize
+    _isDrawingGeometryHandoff = previousLayer._isDrawingGeometryHandoff
+    _isInCropTransition = previousLayer._isInCropTransition
+    _isPreparingCropFrame = previousLayer._isPreparingCropFrame
+    _skippedEmptyCropFrame = previousLayer._skippedEmptyCropFrame
+    cropFrameState = previousLayer.cropFrameState
+    _forceDraw = previousLayer._forceDraw
+    _needsFlip = previousLayer._needsFlip
+    snapshotState = previousLayer.snapshotState
+    needsDisplayOnBoundsChange = true
     inLiveResize = previousLayer.inLiveResize
     isAsynchronous = previousLayer.isAsynchronous
     Logger.log("Created view layer shadow copy")
@@ -163,13 +215,43 @@ class ViewLayer: CAOpenGLLayer {
                         forLayerTime t: CFTimeInterval, displayTime ts: UnsafePointer<CVTimeStamp>?) -> Bool {
     // When in live resize, skip all drawing calls on the main thread.
     // Setting isAsynchronous = true is enough to prevent jittering.
-    guard !(inLiveResize && Thread.isMainThread) else { return false }
+    guard !((inLiveResize || isAnimatingWindowResize || isInFullscreenTransition) && Thread.isMainThread && !isDrawingGeometryHandoff) else { return false }
     return videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return false }
-      if !inLiveResize {
+      if !inLiveResize && !isAnimatingWindowResize && !isInFullscreenTransition {
         isAsynchronous = false
       }
-      return forceDraw || videoView.player.mpv.shouldRenderUpdateFrame()
+      let size = pixelSize
+      guard size.width > 0, size.height > 0 else { return false }
+      if isPreparingCropFrame { return false }
+      if isInCropTransition || isHostedInPIP {
+        guard let context = videoView.player.mpv.mpvRenderContext else { return false }
+        // Reconfiguration forgets mpv's current frame before a replacement is
+        // queued. A forced render then draws its empty dummy frame. Keep the
+        // native backing surface until an actual video/redraw frame is present.
+        _ = mpv_render_context_update(context)
+        var info = mpv_render_frame_info()
+        withUnsafeMutablePointer(to: &info) { pointer in
+          _ = mpv_render_context_get_info(context, mpv_render_param(type: MPV_RENDER_PARAM_NEXT_FRAME_INFO, data: pointer))
+        }
+        let ready = info.flags & UInt64(MPV_RENDER_FRAME_INFO_PRESENT.rawValue) != 0
+        if !ready && isInCropTransition {
+          skippedEmptyCropFrame = true
+          return false
+        }
+        // A new timed frame can arrive after display()'s preflight, including
+        // while a synchronous geometry handoff owns the drawable. Recheck once
+        // CA has acquired the current GL context, before render can wait while
+        // holding the compositor's transaction. Keep atomic handoffs synchronous.
+        if ready, !isDrawingGeometryHandoff,
+           deferCropDisplay(until: info.target_time, now: mpv_get_time_ns(videoView.player.mpv.mpv)) {
+          skippedEmptyCropFrame = true
+          return false
+        }
+        if isInCropTransition { return true }
+      }
+      // Core Animation can resize a paused surface without an mpv update; render in display(), never layout.
+      return forceDraw || lastRenderedPixelSize != size || videoView.player.mpv.shouldRenderUpdateFrame()
     }
   }
 
@@ -209,6 +291,7 @@ class ViewLayer: CAOpenGLLayer {
                 mpv_render_param()
               ]
               mpv_render_context_render(context, &params)
+              lastRenderedPixelSize = CGSize(width: Int(dims[2]), height: Int(dims[3]))
               ignoreGLError()
             }
           }
@@ -218,39 +301,118 @@ class ViewLayer: CAOpenGLLayer {
         }
       }
       glFlush()
+      let frameHandlers = takeCropFrameHandlers()
+      if !frameHandlers.isEmpty { DispatchQueue.main.async { frameHandlers.forEach { $0(true) } } }
 
-      let handler = snapshotLock.withLock { () -> ((NSImage?) -> Void)? in
-        let handler = pendingSnapshotHandler
-        pendingSnapshotHandler = nil
-        return handler
-      }
-      if let handler {
+      let handlers = takeSnapshotHandlers()
+      if !handlers.isEmpty {
         let image = framebufferSnapshot(width: Int(dims[2]), height: Int(dims[3]))
-        handler(image)
+        handlers.forEach { $0(image) }
       }
     }
+  }
+
+  private final class CropFrameState {
+    let lock = Lock()
+    var handlers: [(Bool) -> Void] = []
+    var preparationHandlers: [(Bool) -> Void] = []
+    var displayDeadline: Int64?
+    var displayGeneration = 0
+    var closed = false
+  }
+  private var cropFrameState = CropFrameState()
+
+  private func takeCropFrameHandlers() -> [(Bool) -> Void] {
+    cropFrameState.lock.withLock {
+      let handlers = cropFrameState.handlers
+      cropFrameState.handlers.removeAll()
+      return handlers
+    }
+  }
+
+  func afterNextCropFrame(_ completion: @escaping (Bool) -> Void) {
+    let queued = cropFrameState.lock.withLock {
+      guard !cropFrameState.closed else { return false }
+      cropFrameState.handlers.append(completion)
+      return true
+    }
+    if queued { update(force: true) } else { completion(false) }
+  }
+
+  private func takePreparedCropFrameHandlers() -> [(Bool) -> Void] {
+    cropFrameState.lock.withLock {
+      let handlers = cropFrameState.preparationHandlers
+      cropFrameState.preparationHandlers.removeAll()
+      return handlers
+    }
+  }
+
+  func afterNextPreparedCropFrame(_ completion: @escaping (Bool) -> Void) {
+    let queued = cropFrameState.lock.withLock {
+      guard !cropFrameState.closed else { return false }
+      cropFrameState.preparationHandlers.append(completion)
+      return true
+    }
+    if queued { update(force: true) } else { completion(false) }
+  }
+
+  func cancelCropFrameRequests(close: Bool = false) {
+    cropFrameState.lock.withLock {
+      if close { cropFrameState.closed = true }
+      cropFrameState.displayDeadline = nil
+      cropFrameState.displayGeneration += 1
+    }
+    let handlers = takeCropFrameHandlers() + takePreparedCropFrameHandlers()
+    if !handlers.isEmpty { DispatchQueue.main.async { handlers.forEach { $0(false) } } }
   }
 
   // MARK: - Snapshot
 
-  private let snapshotLock = Lock()
-  private var pendingSnapshotHandler: ((NSImage?) -> Void)?
+  private final class SnapshotState {
+    let lock = Lock()
+    var handlers: [(NSImage?) -> Void] = []
+    var closed = false
+  }
+  private var snapshotState = SnapshotState()
+
+  private func takeSnapshotHandlers() -> [(NSImage?) -> Void] {
+    snapshotState.lock.withLock {
+      let handlers = snapshotState.handlers
+      snapshotState.handlers.removeAll()
+      return handlers
+    }
+  }
+
+  func cancelSnapshots() {
+    cancelCropFrameRequests(close: true)
+    let handlers = snapshotState.lock.withLock {
+      snapshotState.closed = true
+      let handlers = snapshotState.handlers
+      snapshotState.handlers.removeAll()
+      return handlers
+    }
+    handlers.forEach { $0(nil) }
+  }
 
   /// Capture the next rendered frame as an `NSImage`. Forces a redraw so this works while paused.
   func captureSnapshot() async -> NSImage? {
     await withCheckedContinuation { continuation in
-      // Drop any previous in-flight request — only the latest caller wins.
-      let previous = snapshotLock.withLock { () -> ((NSImage?) -> Void)? in
-        let previous = pendingSnapshotHandler
-        pendingSnapshotHandler = { image in
+      // Concurrent Live Text requests share one native readback.
+      let shouldDraw: Bool? = snapshotState.lock.withLock {
+        guard !snapshotState.closed else { return nil }
+        let needsDraw = snapshotState.handlers.isEmpty
+        snapshotState.handlers.append { image in
           continuation.resume(returning: image)
         }
-        return previous
+        return needsDraw
       }
-      previous?(nil)
-      update(force: true)
+      if shouldDraw == true { update(force: true) }
+      else if shouldDraw == nil { continuation.resume(returning: nil) }
     }
   }
+
+  // CAOpenGLLayer can stop drawing an occluded window; the exit frame must remain available.
+
 
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj { cglPixelFormat }
 
@@ -264,13 +426,26 @@ class ViewLayer: CAOpenGLLayer {
   ///     main thread". See issue [#5038](https://github.com/iina/iina/issues/5038).
   override func display() {
 
+    // Wait for mpv's presentation deadline before opening a CA transaction or
+    // locking the drawable. Waiting inside render() holds those resources and
+    // makes compositor/window movement advance at the video's frame rate.
+    if !Thread.isMainThread && deferCropDisplayUntilFrameTime() { return }
+
+    if Thread.isMainThread, !isHostedInPIP, !isDrawingGeometryHandoff,
+       inLiveResize || isAnimatingWindowResize || isInFullscreenTransition {
+      scheduleFullscreenDisplay()
+      return
+    }
+
     // May need to block other threads to allow the main thread to lock displayLock.
     mainThreadPriorityLock.beforeLocking()
     displayLock.lock()
     defer { displayLock.unlock() }
     mainThreadPriorityLock.afterLocked()
+    defer { completeFullscreenTransitionIfReady() }
 
     let isUpdate = needsFlip
+    skippedEmptyCropFrame = false
 
     if Thread.isMainThread {
       super.display()
@@ -281,11 +456,15 @@ class ViewLayer: CAOpenGLLayer {
       CATransaction.commit()
     }
 
-    // The call to commit will not render the explicit transaction if it is nested in an implicit
-    // transaction. This can happen when drawing is being forced after a change to the view such as
-    // resizing. Must call flush to ensure any implicit transaction is flushed.
-    CATransaction.flush()
+    // Never flush native PiP's main-thread transaction: bounds and surface must publish together.
+    if !isDrawingGeometryHandoff && (!Thread.isMainThread || !isHostedInPIP) {
+      CATransaction.flush()
+    }
 
+    // canDraw can decline an empty crop frame or one whose presentation time
+    // is still in the future. Leave it queued for the next draw; skip-rendering
+    // here would consume it without publishing or completing presentation waiters.
+    if skippedEmptyCropFrame { return }
     guard isUpdate && needsFlip else { return }
 
     // Must lock the OpenGL context before calling mpv render methods. The OpenGL context must
@@ -295,11 +474,23 @@ class ViewLayer: CAOpenGLLayer {
     videoView.$isUninited.withReadLock() { isUninited in
       guard !isUninited else { return }
 
+      if isInCropTransition && !isPreparingCropFrame { cancelCropFrameRequests() }
       // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
       // This can happen when IINA is playing in another space, as might occur when just playing
       // audio. See issue #5025.
-      if let renderContext = videoView.player.mpv.mpvRenderContext,
-         videoView.player.mpv.shouldRenderUpdateFrame() {
+      if let renderContext = videoView.player.mpv.mpvRenderContext {
+        let preparing = isPreparingCropFrame
+        let hasFrame: Bool
+        if preparing {
+          _ = mpv_render_context_update(renderContext)
+          var info = mpv_render_frame_info()
+          withUnsafeMutablePointer(to: &info) { pointer in
+            _ = mpv_render_context_get_info(renderContext,
+              mpv_render_param(type: MPV_RENDER_PARAM_NEXT_FRAME_INFO, data: pointer))
+          }
+          hasFrame = info.flags & UInt64(MPV_RENDER_FRAME_INFO_PRESENT.rawValue) != 0
+        } else { hasFrame = videoView.player.mpv.shouldRenderUpdateFrame() }
+        guard hasFrame else { return }
         var skip: CInt = 1
         withUnsafeMutablePointer(to: &skip) { skip in
           var params: [mpv_render_param] = [
@@ -307,6 +498,12 @@ class ViewLayer: CAOpenGLLayer {
             mpv_render_param()
           ]
           mpv_render_context_render(renderContext, &params)
+        }
+        if preparing {
+          // The normal renderer now owns a real current frame from the prepared
+          // graph. Main can change the viewport and redraw that frame atomically.
+          let handlers = takePreparedCropFrameHandlers()
+          if !handlers.isEmpty { DispatchQueue.main.async { handlers.forEach { $0(true) } } }
         }
       }
     }
@@ -320,7 +517,201 @@ class ViewLayer: CAOpenGLLayer {
     }
   }
 
-  private func framebufferSnapshot(width: Int, height: Int) -> NSImage? {
+  private func deferCropDisplayUntilFrameTime() -> Bool {
+    guard isInCropTransition || isHostedInPIP else { return false }
+    let mpv = videoView.player.mpv!
+    mpv.lockAndSetOpenGLContext()
+    defer { mpv.unlockOpenGLContext() }
+    return videoView.$isUninited.withReadLock { isUninited in
+      guard !isUninited, let context = mpv.mpvRenderContext else { return false }
+      _ = mpv_render_context_update(context)
+      var frame = mpv_render_frame_info()
+      withUnsafeMutablePointer(to: &frame) { pointer in
+        _ = mpv_render_context_get_info(context,
+          mpv_render_param(type: MPV_RENDER_PARAM_NEXT_FRAME_INFO, data: pointer))
+      }
+      guard frame.flags & UInt64(MPV_RENDER_FRAME_INFO_PRESENT.rawValue) != 0 else { return false }
+      // Bundled mpv 0.41 returns the native nanosecond pts here despite the
+      // header's older microsecond description. Its ns clock is render-safe.
+      // Keep the original A/V timing; move only the wait outside the drawable.
+      return deferCropDisplay(until: frame.target_time, now: mpv_get_time_ns(mpv.mpv))
+    }
+  }
+
+  private func deferCropDisplay(until target: Int64, now: Int64) -> Bool {
+    guard target > now else { return false }
+    let generation: Int? = cropFrameState.lock.withLock {
+      guard !cropFrameState.closed, cropFrameState.displayDeadline != target else { return nil }
+      cropFrameState.displayDeadline = target
+      cropFrameState.displayGeneration += 1
+      return cropFrameState.displayGeneration
+    }
+    if let generation {
+      mpvGLQueue.asyncAfter(deadline: .now() + Double(target - now) / 1_000_000_000) { [weak self] in
+        guard let self else { return }
+        let current = self.cropFrameState.lock.withLock {
+          guard !self.cropFrameState.closed, self.cropFrameState.displayGeneration == generation else { return false }
+          self.cropFrameState.displayDeadline = nil
+          return true
+        }
+        if current { self.update(force: false) }
+      }
+    }
+    return true
+  }
+
+  func beginFullscreenTransition() {
+    dispatchPrecondition(condition: .onQueue(.main))
+    $fullscreenTransition.withLock { state in
+      state.generation += 1
+      state.active = true
+      state.finishing = false
+    }
+    contentsGravity = .resizeAspectFill
+    isAsynchronous = true
+    update(force: true)
+  }
+
+  func endFullscreenTransition(cancelled: Bool = false) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    $fullscreenTransition.withLock { state in
+      state.finishing = !cancelled
+      if cancelled {
+        state.generation += 1
+        state.active = false
+      }
+    }
+    contentsGravity = cancelled ? .resizeAspectFill : .resizeAspect
+  }
+
+  private func scheduleFullscreenDisplay() {
+    let scheduled = $fullscreenDisplayQueued.withLock { queued in
+      guard !queued else { return false }
+      queued = true
+      return true
+    }
+    guard scheduled else { return }
+    mpvGLQueue.async { [self] in
+      fullscreenDisplayQueued = false
+      forceDraw = true
+      needsFlip = true
+      display()
+    }
+  }
+
+  private func completeFullscreenTransitionIfReady() {
+    let state = fullscreenTransition
+    guard state.active, state.finishing, lastRenderedPixelSize == pixelSize else { return }
+    DispatchQueue.main.async { [weak videoView] in
+      guard let owner = videoView?.videoLayer,
+            owner.lastRenderedPixelSize == owner.pixelSize else { return }
+      owner.$fullscreenTransition.withLock { current in
+        guard current.generation == state.generation, current.active, current.finishing else { return }
+        current.active = false
+        current.finishing = false
+      }
+    }
+  }
+
+  /// A new native host can allocate a fresh surface even at the same pixel size.
+  func invalidatePIPDisplay() {
+    dispatchPrecondition(condition: .onQueue(.main))
+    lastRenderedPixelSize = nil
+    setNeedsDisplay()
+  }
+
+  /// Only PiP host/geometry handoffs render on main; regular playback stays on mpvGLQueue.
+  func displayForPIPHandoff() {
+    dispatchPrecondition(condition: .onQueue(.main))
+    mainThreadPriorityLock.beforeLocking()
+    displayLock.lock()
+    defer { displayLock.unlock() }
+    mainThreadPriorityLock.afterLocked()
+    isDrawingGeometryHandoff = true
+    let wasAsynchronous = isAsynchronous
+    isAsynchronous = false
+    defer {
+      isDrawingGeometryHandoff = false
+      isAsynchronous = wasAsynchronous
+    }
+    // Hold display()'s lock so a queued playback update cannot consume the forced draw first.
+    forceDraw = true
+    needsFlip = true
+    display()
+  }
+
+  /// Keep the normal native backing while mpv drains an old filter graph. Ready
+  /// frames are consumed without presentation until source size and VO geometry
+  /// agree; playback and audio keep advancing. No additional video surface exists.
+  func setCropFramePreparation(_ preparing: Bool) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    mainThreadPriorityLock.beforeLocking()
+    displayLock.lock()
+    mainThreadPriorityLock.afterLocked()
+    isPreparingCropFrame = preparing
+    displayLock.unlock()
+    update(force: true)
+  }
+
+  /// Window layout and its native projection are one presentation update. AppKit
+  /// may request a resized drawable inside setFrame; defer that draw until all VO
+  /// options describe the same viewport.
+  func withCropFrameUpdate(_ body: () -> Void) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    mainThreadPriorityLock.beforeLocking()
+    displayLock.lock()
+    mainThreadPriorityLock.afterLocked()
+    let preparing = isPreparingCropFrame
+    isPreparingCropFrame = true
+    body()
+    isPreparingCropFrame = preparing
+    displayLock.unlock()
+    if !preparing { update(force: true) }
+  }
+
+  /// Publish the final native viewport in the same transaction as editor layout.
+  /// Regular playback continues on mpvGLQueue; only this geometry boundary draws
+  /// synchronously, so restoring native layout cannot expose an old-sized FBO.
+  func displayForCropHandoff(allowCachedFrame: Bool = false) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    mainThreadPriorityLock.beforeLocking()
+    displayLock.lock()
+    defer { displayLock.unlock() }
+    mainThreadPriorityLock.afterLocked()
+    isDrawingGeometryHandoff = true
+    let wasCropping = isInCropTransition
+    if allowCachedFrame { isInCropTransition = false }
+    // Changing crop ownership can enable CA's resize timer. This one draw must
+    // remain synchronous with its geometry, including when a cached current
+    // frame is used after mpv's prepared-frame notification.
+    isAsynchronous = false
+    defer { isDrawingGeometryHandoff = false; isInCropTransition = wasCropping }
+    forceDraw = true
+    needsFlip = true
+    display()
+  }
+
+  /// Keep a newly cropped texture from reaching the compositor under the old
+  /// source transform. A nested commit alone leaves AppKit's implicit root
+  /// transaction pending; no background draw may publish until it is flushed.
+  func withCropFrameHandoff(_ updateLayout: () -> Void) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    mainThreadPriorityLock.beforeLocking()
+    displayLock.lock()
+    defer { displayLock.unlock() }
+    mainThreadPriorityLock.afterLocked()
+    isPreparingCropFrame = true
+    isAsynchronous = false
+    CATransaction.begin()
+    CATransaction.setDisableActions(true)
+    updateLayout()
+    isPreparingCropFrame = false
+    displayForCropHandoff(allowCachedFrame: true)
+    CATransaction.commit()
+    CATransaction.flush()
+  }
+
+  private func framebufferSnapshot(width: Int, height: Int, framebuffer: GLuint? = nil) -> NSImage? {
     let bytesPerRow = width * 4
     var pixels = Data(count: height * bytesPerRow)
 
@@ -331,7 +722,7 @@ class ViewLayer: CAOpenGLLayer {
 
     // The layer renders into an FBO (captured as `fbo`), not the default framebuffer,
     // so we must bind that FBO as the read target and use GL_COLOR_ATTACHMENT0 — not GL_BACK.
-    glBindFramebuffer(GLenum(GL_READ_FRAMEBUFFER), GLuint(fbo))
+    glBindFramebuffer(GLenum(GL_READ_FRAMEBUFFER), framebuffer ?? GLuint(fbo))
     glReadBuffer(GLenum(GL_COLOR_ATTACHMENT0))
     glPixelStorei(GLenum(GL_PACK_ALIGNMENT), 1)
 

@@ -151,6 +151,7 @@ extension Notification.Name {
   static let iinaHDRChanged = Notification.Name("iinaHDRChanged")
   static let iinaAFChanged = Notification.Name("IINAAfChanged")
   static let iinaAudioDelayChanged = Notification.Name("iinaAudioDelayChanged")
+  static let iinaSubtitleStyleChanged = Notification.Name("iinaSubtitleStyleChanged")
   static let iinaSubScaleChanged = Notification.Name("iinaSubScaleChanged")
   static let iinaSubFontChanged = Notification.Name("iinaSubFontChanged")
   static let iinaSubPositionChanged = Notification.Name("iinaSubPositionChanged")

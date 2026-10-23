@@ -58,13 +58,14 @@ extension MainWindowController {
     // bigger size
     case 10, 11:
       let newWidth = window.frame.width + scaleStep * (size == 10 ? -1 : 1)
-      let newHeight = newWidth / (window.aspectRatio.width / window.aspectRatio.height)
-      newFrame = window.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(AppData.mainWindowMinSize))
+      let aspect = Preference.unlockWindowAspectRatio ? window.frame.size : window.aspectRatio
+      let newHeight = newWidth / aspect.aspect
+      newFrame = window.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(minimumWindowSize))
     default:
       return
     }
 
-    window.setFrame(newFrame, display: true, animate: true)
+    setUserWindowFrame(windowFrameConstrainedToScreen(newFrame, screenFrame: screenFrame))
   }
 
   @objc func menuAlwaysOnTop(_ sender: AnyObject) {

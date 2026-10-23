@@ -49,7 +49,7 @@ class VideoView: NSView {
   // MARK: - Attributes
 
   override var mouseDownCanMoveWindow: Bool {
-    return true
+    return !player.mainWindow.interactiveMode.isActive
   }
 
   override var isOpaque: Bool {
@@ -81,6 +81,22 @@ class VideoView: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  func prepareForPIPDisplay(render: Bool = true) {
+    dispatchPrecondition(condition: .onQueue(.main))
+    guard player.info.state.active, let window else { return }
+    updateDisplayLink()
+    layoutSubtreeIfNeeded()
+    if videoLayer.contentsScale != window.backingScaleFactor {
+      videoLayer.contentsScale = window.backingScaleFactor
+    }
+    if render {
+      videoLayer.displayForPIPHandoff()
+    } else {
+      // The native PiP resize transaction owns publication of the new surface.
+      videoLayer.invalidatePIPDisplay()
+    }
+  }
+
   /// Uninitialize this view.
   ///
   /// This method will stop drawing and free the mpv render context. This is done before sending a quit command to mpv.
@@ -94,6 +110,7 @@ class VideoView: NSView {
       isUninited = true
 
       stopDisplayLink()
+      videoLayer.cancelSnapshots()
       player.mpv.mpvUninitRendering()
     }
   }

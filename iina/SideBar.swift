@@ -68,6 +68,7 @@ class SidebarViewController: NSViewController {
 
   let iconConfig = NSImage.SymbolConfiguration(pointSize: 14, weight: .bold)
   let compactIconConfig = NSImage.SymbolConfiguration(pointSize: 13, weight: .bold)
+  private let sectionScroll = SidebarSectionScrollNavigation()
 
   var downShift: CGFloat {
     get { topConstraint.constant }
@@ -96,8 +97,6 @@ class SidebarViewController: NSViewController {
   var isLeading: Bool { Preference.bool(for: leadingPrefKey) }
   var isCompact: Bool { Preference.bool(for: .compactUI) }
 
-  var tabPanes: [NSView] = []
-
   var pendingSwitchRequest: TabType?
   lazy var currentTab: TabType = defaultTab
 
@@ -124,12 +123,18 @@ class SidebarViewController: NSViewController {
   }
 
   override func loadView() {
-    self.view = NSView()
+    self.view = SidebarSectionView()
     view.translatesAutoresizingMaskIntoConstraints = false
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    if useTabView {
+      (view as? SidebarSectionView)?.horizontalScroll = { [weak self] event in
+        self?.handleSectionScroll(event) ?? false
+      }
+    }
 
     self.tabButtonsStackView = NSStackView()
     tabButtonsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -153,11 +158,20 @@ class SidebarViewController: NSViewController {
 
       tabViewController.tabView.padding(.all)
       tabViewController.tabView.wantsLayer = true
+
+      let bottomBorder = UIHelper.shared.separator()
+      view.addSubview(bottomBorder)
+      bottomBorder.padding(.horizontal).spacing(.bottom, to: tabViewController.view)
     }
 
-    self.tabButtonsSegmentControl = NSSegmentedControl()
+    self.tabButtonsSegmentControl = makeTabSegmentControl()
     tabButtonsSegmentControl.target = self
     tabButtonsSegmentControl.action = #selector(tabBtnSegmentControlAction_(_:))
+    if useTabView {
+      (tabButtonsSegmentControl as? SidebarTabSelectorControl)?.horizontalScroll = { [weak self] event in
+        self?.handleSectionScroll(event) ?? false
+      }
+    }
 
     // close button
     self.closeSidebarBtn = NSButton(
@@ -204,27 +218,20 @@ class SidebarViewController: NSViewController {
       // tabViewController can be nil
       tabViewController?.selectedTabViewItemIndex = defaultTab.tag
     }
+    // Activate cross-view constraints only after the observer inserts the selector into the header.
+    if useTabView {
+      tabButtonsSegmentControl.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor,
+        constant: -76).isActive = true
+    }
+  }
+
+  func makeTabSegmentControl() -> NSSegmentedControl {
+    SidebarTabSelectorControl(titles: allTabs.map { NSLocalizedString("sidebar.\($0.name)", comment: $0.name) })
   }
 
   func setupTabs() {
     guard useTabView else {
       fatalError("must override setupTabs if useTabView is false")
-    }
-
-    func makeTabButton(_ title: String, image: NSImage?, tag: Int) -> NSButton {
-      let item = TabButton(title: title,
-                           target: self, action: #selector(tabBtnAction))
-      item.bezelStyle = .smallSquare
-      item.isBordered = false
-      if let image {
-        image.size = .init(width: 26, height: 18)
-        item.image = image
-        item.imageScaling = .scaleProportionallyUpOrDown
-        item.imagePosition = .imageAbove
-      }
-      item.font = .systemFont(ofSize: 11, weight: .regular)
-      item.tag = tag
-      return item
     }
 
     tabButtonsSegmentControl.segmentCount = allTabs.count
@@ -234,7 +241,7 @@ class SidebarViewController: NSViewController {
       tabButtonsSegmentControl.setTag(tab.tag, forSegment: tab.tag)
       // tab view
       let view = getTabView(for: tab)
-      view.horizontalScroll = self.switchTabByScrolling(_:)
+      view.horizontalScroll = { [weak self] event in self?.handleSectionScroll(event) ?? false }
       let vc = NSViewController()
       vc.view = view
       let viewItem = NSTabViewItem(viewController: vc)
@@ -277,35 +284,48 @@ class SidebarViewController: NSViewController {
   }
 
   private func switchTabByScrolling(_ isForward: Bool) {
-    let tags = allTabs.map(\.tag)
-    guard let max = tags.max(), let min = tags.min() else { return }
-    if isForward {
-      if currentTab.tag < max {
-        switchToTab(withTag: currentTab.tag + 1)
+    let tabs = allTabs
+    guard let current = tabs.firstIndex(of: currentTab) else { return }
+    let next = current + (isForward ? 1 : -1)
+    if tabs.indices.contains(next) { switchToTab(tabs[next]) }
+  }
+
+  private func handleSectionScroll(_ event: NSEvent) -> Bool {
+    // Aspect/crop strips keep their own horizontal scrolling, including at an edge.
+    if let parent = view.superview {
+      var hit = view.hitTest(parent.convert(event.locationInWindow, from: nil))
+      while let child = hit, child !== view {
+        if let scroll = child as? NSScrollView, !(scroll is SidebarSectionScrollView),
+           let document = scroll.documentView, document.frame.width > scroll.contentView.bounds.width + 1 {
+          return abs(event.scrollingDeltaX) > abs(event.scrollingDeltaY)
+        }
+        hit = child.superview
       }
-    } else {
-      if currentTab.tag > min {
-        switchToTab(withTag: currentTab.tag - 1)
-      }
+    }
+    switch sectionScroll.handle(event) {
+    case .passThrough: return false
+    case .consumed: return true
+    case .navigate(let forward):
+      switchTabByScrolling(forward)
+      return true
     }
   }
 
   func updateTabActiveStatus() {
+    let selector = tabButtonsSegmentControl as? SidebarTabSelectorControl
+    selector?.showsSelectedTitle = true
     let currentTag = currentTab.tag
     for tab in allTabs {
-      // don't show label if isLeading
-      let isSelected = tab.tag == currentTag && !isLeading
+      let isSelected = tab.tag == currentTag
       let label = NSLocalizedString("sidebar.\(tab.name)", comment: tab.name)
       tabButtonsSegmentControl.setLabel(isSelected ? label : "", forSegment: tab.tag)
     }
     tabButtonsSegmentControl.selectedSegment = currentTag
+    selector?.updateSelection()
   }
 
   func updateTabButtonSize() {
-    // on macOS 26, window corner radius will be larger with a regular toolbar.
-    // should use the normal (non-compact) height if the sidebar is on the leading side.
-    let largeLeadingHeight = if #available(macOS 26.0, *) { isLeading } else { false }
-    let height: CGFloat = (isCompact && !largeLeadingHeight) ? 48 : 52
+    let height: CGFloat = isCompact ? 48 : 52
     tabButtonsHeightConstraint.constant = height
 
     if #available(macOS 26.0, *), !isCompact {
@@ -330,7 +350,7 @@ class SidebarViewController: NSViewController {
     }
     if isLeading {
       closeSidebarBtn.image = .sf("chevron.backward")
-      tabButtonsLeadingConstraint.constant = 96
+      tabButtonsLeadingConstraint.constant = 10
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing
       tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
@@ -349,10 +369,6 @@ class SidebarViewController: NSViewController {
 
   @objc func dismissSidebar(_ sender: AnyObject) {
     mainWindow.sidebars.hide(sidebarType)
-  }
-
-  @objc private func tabBtnAction(_ sender: NSButton) {
-    switchToTab(withTag: sender.tag)
   }
 
   func tabBtnSegmentControlAction(_ sender: NSSegmentedControl) {
@@ -382,39 +398,191 @@ extension SidebarViewController {
     }
   }
 
-  class TabButton: NSButton {
-    class Cell: NSButtonCell {
-      override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
-        if state == .on {
-          let frame = NSInsetRect(cellFrame, 0, -4)
-          let rect = NSBezierPath(roundedRect: frame, xRadius: 16, yRadius: 16)
+}
 
-          if let gradient = NSGradient(starting: .gray.withAlphaComponent(0.1), ending: .gray.withAlphaComponent(0.2)) {
-            gradient.draw(in: rect, angle: 90)
-          }
 
-          NSColor.sidebarTabBtnBorder.setStroke()
-          rect.lineWidth = 1
-          rect.stroke()
+private final class SidebarSelectorOverlay: NSView {
+  override func hitTest(_ point: NSPoint) -> NSView? { nil }
+}
+
+@available(macOS 26.0, *)
+private final class SidebarSelectorGlass: NSGlassEffectView {
+  override func hitTest(_ point: NSPoint) -> NSView? { nil }
+}
+
+class SidebarTabSelectorControl: NSSegmentedControl {
+  var horizontalScroll: ((NSEvent) -> Bool)?
+
+  override func scrollWheel(with event: NSEvent) {
+    if horizontalScroll?(event) == true { return }
+    super.scrollWheel(with: event)
+  }
+
+  var showsSelectedTitle = true {
+    didSet {
+      guard oldValue != showsSelectedTitle else { return }
+      invalidateIntrinsicContentSize()
+      displayedBounds = .null
+      needsLayout = true
+    }
+  }
+  private let titles: [String]
+  private let foreground = SidebarSelectorOverlay()
+  private let selection = SidebarSelectorOverlay()
+  private let backgroundView: NSView
+  private var icons: [NSImageView] = []
+  private var labels: [NSTextField] = []
+  private var segmentFrames: [NSRect] = []
+  private var displayedSelection = -1
+  private var displayedBounds = NSRect.zero
+
+  private var capsuleHeight: CGFloat {
+    if #available(macOS 26.0, *), controlSize == .extraLarge { return 36 }
+    return 30
+  }
+  private var itemWidth: CGFloat { capsuleHeight - 2 }
+  private let titleFont = NSFont.systemFont(ofSize: 13, weight: .medium)
+  private var titleWidth: CGFloat {
+    guard showsSelectedTitle else { return 0 }
+    return ceil(labels.map { $0.cell?.cellSize.width ?? 0 }.max() ?? 0) + 7
+  }
+
+  init(titles: [String]) {
+    self.titles = titles
+    if #available(macOS 26.0, *) {
+      let glass = SidebarSelectorGlass()
+      if #available(macOS 27.0, *) { glass.effectIsInteractive = false }
+      backgroundView = glass
+    } else {
+      let effect = NSVisualEffectView()
+      effect.material = .headerView
+      effect.blendingMode = .withinWindow
+      effect.state = .active
+      backgroundView = effect
+    }
+    super.init(frame: .zero)
+    wantsLayer = true
+    setContentCompressionResistancePriority(.init(1), for: .horizontal)
+    backgroundView.wantsLayer = true
+    backgroundView.setAccessibilityElement(false)
+    addSubview(backgroundView)
+    foreground.wantsLayer = true
+    foreground.setAccessibilityElement(false)
+    addSubview(foreground)
+    selection.wantsLayer = true
+    selection.layer?.backgroundColor = NSColor.white.withAlphaComponent(0.16).cgColor
+    selection.setAccessibilityElement(false)
+    foreground.addSubview(selection)
+    for title in titles {
+      let icon = NSImageView()
+      icon.imageScaling = .scaleProportionallyDown
+      icon.contentTintColor = .labelColor
+      icon.setAccessibilityElement(false)
+      foreground.addSubview(icon)
+      icons.append(icon)
+      let label = NSTextField(labelWithString: title)
+      label.font = titleFont
+      label.lineBreakMode = .byTruncatingTail
+      label.setAccessibilityElement(false)
+      label.wantsLayer = true
+      label.alphaValue = 0
+      foreground.addSubview(label)
+      labels.append(label)
+    }
+  }
+
+  required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+  override var intrinsicContentSize: NSSize {
+    NSSize(width: CGFloat(titles.count) * itemWidth + titleWidth + 8, height: capsuleHeight)
+  }
+
+  override var controlSize: NSControl.ControlSize {
+    didSet {
+      guard !icons.isEmpty else { return }
+      invalidateIntrinsicContentSize()
+      needsLayout = true
+    }
+  }
+
+  override func setImage(_ image: NSImage?, forSegment segment: Int) {
+    super.setImage(image, forSegment: segment)
+    guard icons.indices.contains(segment) else { return }
+    icons[segment].image = image
+  }
+
+  override func draw(_ dirtyRect: NSRect) {}
+
+  override func layout() {
+    super.layout()
+    updateSelection(animated: false)
+  }
+
+  func updateSelection(animated: Bool = true) {
+    guard !titles.isEmpty, icons.indices.contains(selectedSegment) else { return }
+    let changed = displayedSelection != selectedSegment
+    let canAnimate = animated && changed && displayedSelection >= 0 && window != nil &&
+      !isHiddenOrHasHiddenAncestor
+    let duration = canAnimate ? SidebarTabMotion.duration : 0
+    // An unchanged layout pass must not cancel an in-flight selection movement.
+    guard changed || displayedBounds != bounds || segmentFrames.isEmpty else { return }
+    displayedSelection = selectedSegment
+    displayedBounds = bounds
+    let height = min(bounds.height, capsuleHeight)
+    let outer = NSRect(x: 0, y: bounds.midY - height / 2, width: bounds.width, height: height)
+    backgroundView.frame = outer
+    backgroundView.layer?.cornerRadius = height / 2
+    if #available(macOS 26.0, *), let glass = backgroundView as? NSGlassEffectView {
+      glass.cornerRadius = height / 2
+    }
+    foreground.frame = outer
+    let baseWidth = min(itemWidth, max(0, (bounds.width - 8) / CGFloat(titles.count)))
+    let availableTitleWidth = max(0, bounds.width - 8 - CGFloat(titles.count) * baseWidth)
+    let selectedTitleWidth = showsSelectedTitle ? min(availableTitleWidth,
+      ceil(labels[selectedSegment].cell?.cellSize.width ?? 0) + 7) : 0
+    let inactiveWidth = baseWidth + (showsSelectedTitle && titles.count > 1 ?
+      (availableTitleWidth - selectedTitleWidth) / CGFloat(titles.count - 1) : 0)
+    let rtl = userInterfaceLayoutDirection == .rightToLeft
+    var x: CGFloat = 4
+    segmentFrames = titles.indices.map { index in
+      let width = index == selectedSegment ? baseWidth + selectedTitleWidth : inactiveWidth
+      let frame = NSRect(x: rtl ? bounds.width - x - width : x, y: 4, width: width, height: max(0, height - 8))
+      x += width
+      setWidth(width, forSegment: index)
+      setToolTip(titles[index], forSegment: index)
+      return frame
+    }
+    NSAnimationContext.runAnimationGroup { context in
+      context.duration = duration
+      context.timingFunction = SidebarTabMotion.timingFunction
+      selection.layer?.cornerRadius = max(0, height - 8) / 2
+      if duration > 0 { selection.animator().frame = segmentFrames[selectedSegment] }
+      else { selection.frame = segmentFrames[selectedSegment] }
+      for index in titles.indices {
+        let frame = segmentFrames[index]
+        let active = index == selectedSegment && showsSelectedTitle
+        let iconX = active ? (rtl ? frame.maxX - baseWidth : frame.minX) : frame.midX - baseWidth / 2
+        let iconFrame = NSRect(x: iconX + (baseWidth - 18) / 2, y: height / 2 - 9, width: 18, height: 18)
+        let labelFrame = NSRect(x: rtl ? frame.minX + 4 : frame.minX + baseWidth,
+                               y: height / 2 - 8, width: max(0, frame.width - baseWidth - 5), height: 17)
+        if duration > 0 {
+          icons[index].animator().frame = iconFrame
+          labels[index].animator().frame = labelFrame
+        } else {
+          icons[index].frame = iconFrame
+          labels[index].frame = labelFrame
         }
-
-        super.draw(withFrame: cellFrame, in: controlView)
-      }
-
-      override func drawInterior(withFrame cellFrame: NSRect, in controlView: NSView) {
-        (controlView as? NSButton)?.contentTintColor = state == .on ?
-          .sidebarTabTintActive : .sidebarTabTint
-        super.drawInterior(withFrame: cellFrame, in: controlView)
+        labels[index].animator().alphaValue = active ? 1 : 0
       }
     }
+  }
 
-    override init(frame frameRect: NSRect) {
-      super.init(frame: frameRect)
-      self.cell = Cell()
-    }
-
-    required init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
+  override func mouseDown(with event: NSEvent) {
+    guard isEnabled else { return }
+    let point = convert(event.locationInWindow, from: nil)
+    let local = foreground.convert(point, from: self)
+    guard let index = segmentFrames.firstIndex(where: { $0.contains(local) }) else { return }
+    selectedSegment = index
+    sendAction(action, to: target)
   }
 }

@@ -1062,3 +1062,12 @@
 "settings.oscDoubleClickAction.items.1" = "Keep OSC hidden";
 "settings.oscDoubleClickAction.items.2" = "Reset OSC position";
 "settings.oscDoubleClickAction.items.3" = "Bring OSC to front";
+
+/* Sidebar interaction. */
+"sidebar.no_audio" = "No audio";
+"sidebar.no_video" = "No video";
+"sidebar.no_subtitles" = "No subtitles";
+"sidebar.add_audio_track" = "Add audio track…";
+"sidebar.add_video_track" = "Add video track…";
+"sidebar.style" = "Style";
+"sidebar.adjustments" = "Adjustments";

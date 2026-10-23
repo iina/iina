@@ -139,9 +139,6 @@ fileprivate class AudioDelayView: SidebarSliderView {
     }
     let value = input.doubleValue
     player.setAudioDelay(value)
-    if let window = input.window {
-      window.makeFirstResponder(window.contentView)
-    }
   }
 
   override func resetButtonAction() {

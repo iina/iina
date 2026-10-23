@@ -46,6 +46,7 @@ class SettingsPageUI: SettingsPage {
       sectionAppearance()
       sectionWindow()
       sectionOSC()
+      sectionSidebar()
       sectionOSD()
       sectionThumbnail()
       sectionPIP()
@@ -150,6 +151,22 @@ class SettingsPageUI: SettingsPage {
           .bindTo(.disablePlaySliderScrolling)
         SettingsItem.Switch()
           .bindTo(.disableVolumeSliderScrolling)
+      }
+    }
+  }
+
+  private func sectionSidebar() -> SettingsSection {
+    return section {
+      SettingsList(title: .general("sidebar.sidebar_position")) {
+        SettingsItem.General(title: .general("sidebar.settings"))
+          .image(name: "gearshape.fill")
+          .withValueView(SidebarPosSwitch(.sidebarSettingsDisplayAtLeading))
+        SettingsItem.General(title: .general("sidebar.playlist_and_chapters"))
+          .image(name: "list.bullet.rectangle.fill")
+          .withValueView(SidebarPosSwitch(.sidebarPlaylistDisplayAtLeading))
+        SettingsItem.General(title: .general("sidebar.plugins"))
+          .image(name: "puzzlepiece.extension.fill")
+          .withValueView(SidebarPosSwitch(.sidebarPluginsDisplayAtLeading))
       }
     }
   }

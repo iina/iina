@@ -6,8 +6,95 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
+import Cocoa
+
 fileprivate let ui = UIHelper.shared
 
+/// Native parameter field shared by the player sidebars.
+final class SidebarInputField: NSTextField {
+  var emptyValue = "0"
+  private var inputFocusMonitor: Any?
+  private var isSendingAction = false
+
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+    configure()
+  }
+
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+    configure()
+  }
+
+  private func configure() {
+    translatesAutoresizingMaskIntoConstraints = false
+    usesSingleLineMode = true
+    bezelStyle = .roundedBezel
+    focusRingType = .exterior
+    cell?.sendsActionOnEndEditing = true
+  }
+
+  override func becomeFirstResponder() -> Bool {
+    let accepted = super.becomeFirstResponder()
+    if accepted {
+      // AppKit places the caret after acquiring the shared field editor.
+      DispatchQueue.main.async { [weak self] in self?.currentEditor()?.selectAll(nil) }
+    }
+    return accepted
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    super.mouseDown(with: event)
+    currentEditor()?.selectAll(nil)
+  }
+
+  private func normalizeEmpty(_ editor: NSText?) {
+    let text = editor?.string ?? stringValue
+    guard text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+    stringValue = emptyValue
+    editor?.string = emptyValue
+  }
+
+  override func textShouldEndEditing(_ textObject: NSText) -> Bool {
+    normalizeEmpty(textObject)
+    return super.textShouldEndEditing(textObject)
+  }
+
+  override func sendAction(_ action: Selector?, to target: Any?) -> Bool {
+    guard !isSendingAction else { return false }
+    isSendingAction = true
+    defer { isSendingAction = false }
+    normalizeEmpty(currentEditor())
+    return super.sendAction(action, to: target)
+  }
+
+  override func viewDidMoveToWindow() {
+    super.viewDidMoveToWindow()
+    if let inputFocusMonitor { NSEvent.removeMonitor(inputFocusMonitor) }
+    inputFocusMonitor = nil
+    guard window != nil else { return }
+    // Video and sidebar background clicks do not normally transfer focus.
+    inputFocusMonitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseDown) { [weak self] event in
+      guard let self else { return event }
+      return self.routeInputFocus(for: event)
+    }
+  }
+
+  private func routeInputFocus(for event: NSEvent) -> NSEvent? {
+    guard let window, event.window === window, let editor = currentEditor() else { return event }
+    if bounds.contains(convert(event.locationInWindow, from: nil)) {
+      // Further clicks hit AppKit's field editor, bypassing this control's mouseDown.
+      editor.selectAll(nil)
+      return nil
+    }
+    window.makeFirstResponder(nil)
+    return event
+  }
+
+  deinit {
+    if let inputFocusMonitor { NSEvent.removeMonitor(inputFocusMonitor) }
+  }
+}
 
 class SidebarSliderView: NSView {
   unowned let player: PlayerCore
@@ -15,7 +102,7 @@ class SidebarSliderView: NSView {
   var notificationKey: Notification.Name { .init("") }
   var slider: NSSlider!
   var tickMarkTextFieldsConstraints: [NSLayoutConstraint] = []
-  var input: NSTextField!
+  var input: SidebarInputField!
   var indicator: NSTextField!
   var indicatorConstraint: NSLayoutConstraint!
   var resetButton: NSButton!
@@ -43,7 +130,7 @@ class SidebarSliderView: NSView {
     indicator.font = .systemFont(ofSize: 10)
     indicator.setContentCompressionResistancePriority(.required, for: .horizontal)
 
-    self.input = NSTextField()
+    self.input = SidebarInputField()
     input.translatesAutoresizingMaskIntoConstraints = false
     input.usesSingleLineMode = true
     input.target = self

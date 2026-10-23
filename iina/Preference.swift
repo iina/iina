@@ -146,6 +146,8 @@ struct Preference {
     static let disablePlaySliderScrolling = Key("disablePlaySliderScrolling")
     static let disableVolumeSliderScrolling = Key("disableVolumeSliderScrolling")
 
+    static let lastSelectedPlugin = Key("lastSelectedPlugin")
+
     static let leadingSidebarWidth = Key("leadingSidebarWidth")
     static let trailingSidebarWidth = Key("trailingSidebarWidth")
     static let prefetchPlaylistVideoDuration = Key("prefetchPlaylistVideoDuration")

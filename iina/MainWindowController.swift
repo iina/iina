@@ -1527,6 +1527,7 @@ class MainWindowController: PlayerWindowController {
   /// - Parameter sender: The control sending the message; can be `nil`.
   override func showWindow(_ sender: Any?) {
     guard let window else { return }
+    sidebars.pluginView.beginWindowSession()
     oscFloatingView?.beginWindowSession()
     log("Showing window at \(window.frame)")
     let origin = window.frame.origin
@@ -1590,6 +1591,7 @@ class MainWindowController: PlayerWindowController {
     cancelWindowDrag()
     isSeekingWithSlider = false
     interactiveMode.exit()
+    sidebars.pluginView.endWindowSession()
     oscFloatingView?.endWindowSession()
     // Close PIP
     if pipStatus == .inPIP {
@@ -3326,16 +3328,12 @@ class MainWindowController: PlayerWindowController {
       }
     case .nextPlugin, .previousPlugin:
       sidebars.show(sidebar: .plugins, hideIfAlreadyShown: false)
-      let controller = sidebars.pluginView
-      let tabs = Array(controller.allTabs.dropFirst())
-      guard !tabs.isEmpty else { return false }
-      let current = tabs.firstIndex(of: controller.currentTab) ?? (cmd == .nextPlugin ? -1 : 0)
-      let delta = cmd == .nextPlugin ? 1 : -1
-      controller.switchToTab(tabs[(current + delta + tabs.count) % tabs.count])
+      sidebars.pluginView.switchPlugin(cmd == .nextPlugin ? 1 : -1)
     case .openPlugin:
       let identifier = arguments[0]
       guard player.plugins.contains(where: { $0.plugin.identifier == identifier && $0.plugin.sidebarTabName != nil }) else { return false }
       sidebars.show(sidebar: .plugins, tab: identifier, hideIfAlreadyShown: false)
+      sidebars.pluginView.selectPlugin(withIdentifier: identifier)
     case .showOSC:
       showUI()
       updateTimer()

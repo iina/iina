@@ -387,6 +387,7 @@
 		62BCE669C0774290B9FA75B8 /* FloatingOSCScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B04542AC9A34A80A37FAF38 /* FloatingOSCScale.swift */; };
 		EF1642DC2E5140D8A0DA7DEC /* PositionPreviewDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000F1FD609C4A51A6FFD35A /* PositionPreviewDrawing.swift */; };
 		C8DB46CC2C9D4E3F936C053E /* OSCPositionSettingsSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A131C56A51F046EAB150DFFF /* OSCPositionSettingsSheetController.swift */; };
+		492E52631932EE256D58548C /* ScrollSelectionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E8F275BD4AB2856AE32950 /* ScrollSelectionControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1828,6 +1829,7 @@
 		7B04542AC9A34A80A37FAF38 /* FloatingOSCScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingOSCScale.swift; sourceTree = "<group>"; };
 		F000F1FD609C4A51A6FFD35A /* PositionPreviewDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionPreviewDrawing.swift; sourceTree = "<group>"; };
 		A131C56A51F046EAB150DFFF /* OSCPositionSettingsSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCPositionSettingsSheetController.swift; sourceTree = "<group>"; };
+		F7E8F275BD4AB2856AE32950 /* ScrollSelectionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSelectionControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2533,6 +2535,7 @@
 			children = (
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
 				A131C56A51F046EAB150DFFF /* OSCPositionSettingsSheetController.swift */,
+				F7E8F275BD4AB2856AE32950 /* ScrollSelectionControl.swift */,
 				F000F1FD609C4A51A6FFD35A /* PositionPreviewDrawing.swift */,
 				7B04542AC9A34A80A37FAF38 /* FloatingOSCScale.swift */,
 				F21A9630DD044391BC0A4232 /* FloatingOSCPositionPreferences.swift */,
@@ -2986,6 +2989,7 @@
 				8466BE181D5CDD0300039D03 /* QuickSettingViewController.swift in Sources */,
 				84A0BA9E1D2FAD4000BC8DA1 /* MainWindowController.swift in Sources */,
 				C8DB46CC2C9D4E3F936C053E /* OSCPositionSettingsSheetController.swift in Sources */,
+				492E52631932EE256D58548C /* ScrollSelectionControl.swift in Sources */,
 				EF1642DC2E5140D8A0DA7DEC /* PositionPreviewDrawing.swift in Sources */,
 				62BCE669C0774290B9FA75B8 /* FloatingOSCScale.swift in Sources */,
 				F21A9630DD044391BC0A4231 /* FloatingOSCPositionPreferences.swift in Sources */,

@@ -14,14 +14,20 @@ def extract(text, marker):
         depth+=(text[end]=='{')-(text[end]=='}');end+=1
     return text[start:end]
 source = (tests/'Support.swift').read_text()
+source += '\n'+extract((repo/'iina/UIHelper.swift').read_text(),'enum CircularActionButtonStyle {')
 
 source += '\n' + (repo/'iina/ConstraintsSugar.swift').read_text()
 sidebar_pane = Path(os.environ.get('SIDEBAR_PANE_SOURCE', str(repo/'iina/SidebarPane.swift'))).read_text()
 # Settings headers are outside this suite's scrolling/transition boundary.
 for marker in ['final class TrackSettingsGroupView:', 'final class TrackProcessingSection:']:
-    if marker in sidebar_pane: sidebar_pane = sidebar_pane.replace(extract(sidebar_pane,marker),'')
+    sidebar_pane = sidebar_pane.replace(extract(sidebar_pane,marker),'')
 source += '\n' + sidebar_pane
 
+source += '\n' + (repo/'iina/TrackSelectionState.swift').read_text()
+source += '\n' + (repo/'iina/ResizeCursor.swift').read_text()
+source += '\n' + (repo/'iina/SidebarTrackSelector.swift').read_text()
+video = (repo/'iina/SidebarVideoPane.swift').read_text()
+source += '\n' + video[video.index('fileprivate class HorizontalScrollViewWithIndicator:'):video.index('fileprivate class AspectRatioView:')]
 sidebar = Path(os.environ.get('SIDEBAR_HEADER_SOURCE', str(repo/'iina/SideBar.swift'))).read_text()
 source += '\n' + sidebar[sidebar.index('class SidebarViewController:'):]
 source += '\n' + (tests/'main.swift').read_text()

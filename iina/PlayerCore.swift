@@ -2226,6 +2226,7 @@ class PlayerCore: NSObject {
 
   /// Shows the Font Chooser window to select a new font for the player
   func chooseSubFont(forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     guard info.state.active else { return }
     let subFont = mpv.getString(SubtitleStyle.option(MPVOption.Subtitles.subFont, forPrimary: forPrimary))
     Utility.quickFontPickerWindow(selecting: subFont) { [self] result in
@@ -2873,6 +2874,7 @@ class PlayerCore: NSObject {
 
   /** Scale is a double value in [-100, -1] + [1, 100] */
   func setSubScale(_ scale: Double, forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     mpv.setDouble(SubtitleStyle.option(MPVOption.Subtitles.subScale, forPrimary: forPrimary),
                   abs(scale), level: .verbose)
   }
@@ -2883,6 +2885,7 @@ class PlayerCore: NSObject {
   }
 
   func resetSubtitleStyle(forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     // Reset to saved startup style; factory defaults would change previously untouched subtitles.
     setSubScale(1, forPrimary: forPrimary)
     setSubFont(Preference.string(for: .subTextFont)!, forPrimary: forPrimary)
@@ -2894,10 +2897,12 @@ class PlayerCore: NSObject {
   }
 
   func setSubTextColor(_ colorString: String, forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     mpv.setString("options/" + SubtitleStyle.option(MPVOption.Subtitles.subColor, forPrimary: forPrimary), colorString)
   }
 
   func setSubTextSize(_ size: Double, forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     mpv.setDouble("options/" + SubtitleStyle.option(MPVOption.Subtitles.subFontSize, forPrimary: forPrimary), size)
   }
 
@@ -2906,14 +2911,17 @@ class PlayerCore: NSObject {
   }
 
   func setSubTextBorderColor(_ colorString: String, forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     mpv.setString("options/" + SubtitleStyle.option(MPVOption.Subtitles.subOutlineColor, forPrimary: forPrimary), colorString)
   }
 
   func setSubTextBorderSize(_ size: Double, forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     mpv.setDouble("options/" + SubtitleStyle.option(MPVOption.Subtitles.subOutlineSize, forPrimary: forPrimary), size)
   }
 
   func setSubTextBgColor(_ colorString: String, forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     mpv.setString("options/" + SubtitleStyle.option(MPVOption.Subtitles.subBackColor, forPrimary: forPrimary), colorString)
   }
 
@@ -2923,6 +2931,7 @@ class PlayerCore: NSObject {
   }
 
   func setSubFont(_ font: String, forPrimary: Bool = true) {
+    guard forPrimary || mpv.supportsIndependentSecondarySubtitleStyle else { return }
     mpv.setString(SubtitleStyle.option(MPVOption.Subtitles.subFont, forPrimary: forPrimary), font)
     postNotification(.iinaSubFontChanged)
   }

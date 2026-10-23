@@ -96,6 +96,7 @@ final class SidebarInputField: NSTextField {
   }
 }
 
+
 class SidebarSliderView: NSView {
   unowned let player: PlayerCore
 
@@ -105,11 +106,12 @@ class SidebarSliderView: NSView {
   var input: SidebarInputField!
   var indicator: NSTextField!
   var indicatorConstraint: NSLayoutConstraint!
-  var resetButton: NSButton!
 
   var inputWidth: CGFloat { 50 }
   var titleImage: NSImage? { nil }
   var titleKey: String { "" }
+  var showsTitle: Bool { true }
+  var titleAccessory: NSView? { nil }
   var tickMarkLabels: [String] { [] }
 
   init(player: PlayerCore) {
@@ -131,24 +133,18 @@ class SidebarSliderView: NSView {
     indicator.setContentCompressionResistancePriority(.required, for: .horizontal)
 
     self.input = SidebarInputField()
-    input.translatesAutoresizingMaskIntoConstraints = false
-    input.usesSingleLineMode = true
     input.target = self
     input.action = #selector(customEditFinishedAction_)
 
-    self.resetButton = NSButton(
-      image: .sf("arrow.counterclockwise.circle.fill")!,
-      target: self, action: #selector(resetButtonAction_)
-    )
-    resetButton.bezelStyle = .smallSquare
-    resetButton.isBordered = false
-
-    let labelStack = ui.hStack(
-      spacing: 8,
-      ui.image(titleImage, size: 16, scaleUp: false),
+    var titleViews = [
+      ui.image(titleImage, size: 16, scaleUp: false) as NSView,
       ui.label(titleKey, font: .boldSystemFont(ofSize: 12)),
       ui.flexibleSpace(),
-      resetButton,
+    ]
+    if let titleAccessory { titleViews.append(titleAccessory) }
+    let labelStack = ui.hStack(
+      spacing: 8,
+      titleViews
     )
 
     let tickMarkView = NSView()
@@ -173,7 +169,7 @@ class SidebarSliderView: NSView {
 
     setup()
 
-    addSubview(labelStack)
+    if showsTitle { addSubview(labelStack) }
     addSubview(slider)
     addSubview(indicator)
     addSubview(input)
@@ -186,12 +182,16 @@ class SidebarSliderView: NSView {
     indicatorConstraint.priority = .init(800)
     indicatorConstraint.isActive = true
 
-    labelStack.padding(.horizontal, .top)
     slider.padding(.leading, .bottom(16))
-      .spacing(.top(18), to: labelStack)
-    input.padding(.trailing).spacing(.leading(8), to: slider)
-      .center(.y, with: slider)
-      .size(width: inputWidth)
+    if showsTitle {
+      labelStack.padding(.horizontal, .top)
+      slider.spacing(.top(18), to: labelStack)
+      input.padding(.trailing)
+    } else {
+      slider.padding(.top(18))
+      input.padding(.trailing)
+    }
+    input.spacing(.leading(8), to: slider).center(.y, with: slider).size(width: inputWidth, height: 24)
     tickMarkView.padding(.leading, .bottom)
 
     tickMarkView.widthAnchor.constraint(equalTo: slider.widthAnchor, multiplier: 1).isActive = true
@@ -241,15 +241,11 @@ class SidebarSliderView: NSView {
   }
 
   @objc private func sliderAction_(_ sender: NSSlider) {
-    sliderAction()
+    player.performSidebarChange { sliderAction() }
   }
 
   @objc private func customEditFinishedAction_(_ sender: NSTextField) {
-    customEditFinishedAction()
-  }
-
-  @objc private func resetButtonAction_(_ sender: AnyObject) {
-    resetButtonAction()
+    player.performSidebarChange { customEditFinishedAction() }
   }
 
   func setup() {}

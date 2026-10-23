@@ -1,0 +1,454 @@
+--- a/DOCS/man/input.rst
++++ b/DOCS/man/input.rst
+@@ -1592,6 +1592,29 @@
+     ``<target>`` is a filter or filter instance name and defaults to ``all``.
+     Note that the target is an additional specifier for filters that
+     support them, such as complex ``lavfi`` filter chains.
++
++``lavfi-complex-command <target> <command> <argument> [<refresh-audio>]``
++    Set a runtime option on a named filter instance in ``--lavfi-complex``.
++    The target must be an exact libavfilter instance name, for example
++    ``amix@audio_mix``. Unlike ``af-command``, this addresses the shared complex
++    graph and preserves the last successful value of each target/option across
++    seeks and input format changes. It does not replace the graph or seek.
++
++    Only runtime options are accepted. A value sent before input formats are
++    available is validated as an option and applied after graph configuration,
++    before any output frames. The retained values belong to the graph and are
++    discarded when it is replaced. An unknown target/option reports failure.
++
++    With ``refresh-audio=yes`` (default: no), replay decoded complex-graph
++    audio through fresh filter buffers at the end of the queued output. This
++    avoids waiting for old mixed samples in lookahead filters, without seeking
++    decoders or restarting playing audio/video. Replacement output is trimmed
++    at that boundary. While paused, the audio output buffers can be cleared.
++    Video inputs retain their latest frame; duplicate video output is skipped.
++
++    History is bounded to 12 seconds, 16 MiB per input, 64 MiB of audio overall
++    and 4096 frames per input. If timestamps/history do not cover the boundary,
++    the setter still applies normally without replay. Seek clears history.
+ 
+ ``af-command <label> <command> <argument> [<target>]``
+     Same as ``vf-command``, but for audio filters.
+--- a/filters/filter.h
++++ b/filters/filter.h
+@@ -381,6 +381,7 @@
+     const char *target;
+     const char *cmd;
+     const char *arg;
++    bool persistent; // Reapply the last setter for each target/command on reset.
+ 
+     // For MP_FILTER_COMMAND_GET_META
+     void *res; // must point to struct mp_tags*, will be set to new instance
+--- a/filters/f_lavfi.c
++++ b/filters/f_lavfi.c
+@@ -55,11 +55,17 @@
+ #include "filter_internal.h"
+ #include "user_filters.h"
+ 
++struct lavfi_command {
++    char *target, *cmd, *arg;
++};
++
+ struct lavfi {
+     struct mp_log *log;
+     struct mp_filter *f;
+ 
+     char *graph_string;
++    struct lavfi_command *commands;
++    int num_commands;
+     char **graph_opts;
+     bool force_bidir;
+     enum mp_frame_type force_type;
+@@ -129,7 +135,67 @@
+ 
+     // Used to check input format changes.
+     struct mp_frame in_fmt;
++
++    // Bounded decoded-input history for an audio-only refresh of a complex graph.
++    struct mp_frame *history;
++    int num_history;
++    size_t history_bytes;
++    int replay_pos;
++    bool replaying, pending_replay, input_eof;
++    struct mp_frame live_pending, last_video;
++    double last_video_pts, replay_video_pts;
+ };
++
++static void clear_history(struct lavfi_pad *pad)
++{
++    for (int n = 0; n < pad->num_history; n++)
++        mp_frame_unref(&pad->history[n]);
++    pad->num_history = 0;
++    pad->history_bytes = 0;
++    pad->replaying = pad->pending_replay = pad->input_eof = false;
++    mp_frame_unref(&pad->live_pending);
++    mp_frame_unref(&pad->last_video);
++    pad->last_video_pts = MP_NOPTS_VALUE;
++    pad->replay_video_pts = MP_NOPTS_VALUE;
++}
++
++static void remember_input(struct lavfi *c, struct lavfi_pad *pad)
++{
++    if (c->force_type || pad->pending_replay)
++        return;
++    struct mp_frame frame = pad->pending;
++    pad->input_eof = frame.type == MP_FRAME_EOF;
++    if (frame.type == MP_FRAME_VIDEO) {
++        mp_frame_unref(&pad->last_video);
++        pad->last_video = mp_frame_ref(frame);
++    } else if (frame.type == MP_FRAME_AUDIO) {
++        struct mp_aframe *af = frame.data;
++        double pts = mp_aframe_get_pts(af);
++        double end = mp_aframe_end_pts(af);
++        if (pts == MP_NOPTS_VALUE)
++            return;
++        if (pad->num_history) {
++            struct mp_aframe *last = pad->history[pad->num_history - 1].data;
++            if (!mp_aframe_config_equals(af, last) ||
++                pts < mp_aframe_get_pts(last))
++                clear_history(pad);
++        }
++        struct mp_frame ref = mp_frame_ref(frame);
++        MP_HANDLE_OOM(ref.data);
++        MP_TARRAY_APPEND(pad, pad->history, pad->num_history, ref);
++        pad->history_bytes += mp_aframe_approx_byte_size(af);
++        size_t limit = MPMIN(16 * 1024 * 1024,
++                            64 * 1024 * 1024 / c->num_in_pads);
++        while (pad->num_history > 1 &&
++               (mp_aframe_end_pts(pad->history[0].data) < end - 12.0 ||
++                pad->history_bytes > limit || pad->num_history > 4096))
++        {
++            pad->history_bytes -= mp_aframe_approx_byte_size(pad->history[0].data);
++            mp_frame_unref(&pad->history[0]);
++            MP_TARRAY_REMOVE_AT(pad->history, pad->num_history, 0);
++        }
++    }
++}
+ 
+ // Free the libavfilter graph (not c), reset all state.
+ // Does not free pending data intentionally.
+@@ -229,6 +295,8 @@
+         p->type = type;
+         p->pin_index = -1;
+         p->metadata = talloc_zero(p, struct mp_tags);
++        p->last_video_pts = MP_NOPTS_VALUE;
++        p->replay_video_pts = MP_NOPTS_VALUE;
+         if (p->dir == MP_PIN_IN)
+             MP_TARRAY_APPEND(c, c->in_pads, c->num_in_pads, p);
+         if (p->dir == MP_PIN_OUT)
+@@ -362,7 +430,28 @@
+     if (pad->pending.type || c->draining_recover)
+         return;
+ 
+-    pad->pending = mp_pin_out_read(pad->pin);
++    pad->pending_replay = false;
++    if (pad->replaying && pad->replay_pos < pad->num_history) {
++        pad->pending = mp_frame_ref(pad->history[pad->replay_pos++]);
++        MP_HANDLE_OOM(pad->pending.data);
++        pad->pending_replay = true;
++    } else if (pad->replaying && pad->type == MP_FRAME_VIDEO &&
++               pad->last_video.type) {
++        pad->pending = mp_frame_ref(pad->last_video);
++        pad->pending_replay = true;
++        pad->replaying = false;
++    } else {
++        bool replay_eof = pad->replaying && pad->input_eof;
++        pad->replaying = false;
++        if (pad->live_pending.type) {
++            pad->pending = pad->live_pending;
++            pad->live_pending = MP_NO_FRAME;
++        } else if (replay_eof) {
++            pad->pending = MP_EOF_FRAME;
++        } else {
++            pad->pending = mp_pin_out_read(pad->pin);
++        }
++    }
+ 
+     if (pad->pending.type && pad->pending.type != MP_FRAME_EOF &&
+         pad->pending.type != pad->type)
+@@ -580,6 +669,18 @@
+             return;
+         }
+ 
++        for (int n = 0; n < c->num_commands; n++) {
++            struct lavfi_command *cmd = &c->commands[n];
++            if (avfilter_graph_send_command(c->graph, cmd->target, cmd->cmd,
++                                           cmd->arg, NULL, 0, 0) < 0) {
++                MP_ERR(c, "Could not restore filter command %s/%s\n",
++                       cmd->target, cmd->cmd);
++                free_graph(c);
++                c->failed = true;
++                return;
++            }
++        }
++
+         // The timebase is available after configuring.
+         for (int n = 0; n < c->num_out_pads; n++) {
+             struct lavfi_pad *pad = c->out_pads[n];
+@@ -642,6 +743,7 @@
+             c->in_samples += frame->nb_samples;
+         }
+ 
++        remember_input(c, pad);
+         mp_frame_unref(&pad->pending);
+ 
+         if (!frame && !eof) {
+@@ -730,6 +832,15 @@
+                 struct mp_image *vframe = frame.data;
+                 vframe->nominal_fps =
+                     av_q2d(av_buffersink_get_frame_rate(pad->buffer));
++                if (pad->replay_video_pts != MP_NOPTS_VALUE &&
++                    vframe->pts <= pad->replay_video_pts) {
++                    mp_frame_unref(&frame);
++                    av_frame_unref(c->tmp_frame);
++                    progress = true;
++                    continue;
++                }
++                pad->replay_video_pts = MP_NOPTS_VALUE;
++                pad->last_video_pts = vframe->pts;
+             }
+             av_frame_unref(c->tmp_frame);
+             if (frame.type) {
+@@ -795,10 +906,62 @@
+ 
+     free_graph(c);
+ 
++    for (int n = 0; n < c->num_all_pads; n++)
++        clear_history(c->all_pads[n]);
+     for (int n = 0; n < c->num_in_pads; n++)
+         mp_frame_unref(&c->in_pads[n]->pending);
+ }
+ 
++bool mp_lavfi_replay_audio(struct mp_filter *f, double pts)
++{
++    struct lavfi *c = f->priv;
++    if (c->force_type || !c->initialized || pts == MP_NOPTS_VALUE)
++        return false;
++    bool audio = false;
++    for (int n = 0; n < c->num_in_pads; n++) {
++        struct lavfi_pad *pad = c->in_pads[n];
++        if (pad->type != MP_FRAME_AUDIO)
++            continue;
++        audio = true;
++        if (!pad->num_history ||
++            mp_aframe_get_pts(pad->history[0].data) > pts + 0.001 ||
++            (!pad->input_eof &&
++             mp_aframe_end_pts(pad->history[pad->num_history - 1].data) < pts))
++            return false;
++    }
++    if (!audio)
++        return false;
++    for (int n = 0; n < c->num_in_pads; n++) {
++        struct lavfi_pad *pad = c->in_pads[n];
++        if (pad->pending_replay) {
++            mp_frame_unref(&pad->pending);
++        } else if (pad->pending.type) {
++            mp_assert(!pad->live_pending.type);
++            pad->live_pending = pad->pending;
++            pad->pending = MP_NO_FRAME;
++        }
++        pad->pending_replay = false;
++        pad->replaying = true;
++        pad->replay_pos = 0;
++        if (pad->type == MP_FRAME_AUDIO) {
++            while (pad->replay_pos + 1 < pad->num_history &&
++                   mp_aframe_end_pts(pad->history[pad->replay_pos].data) <= pts)
++                pad->replay_pos++;
++            // Warm up converters/limiters before trimming processed output.
++            if (pad->replay_pos > 0)
++                pad->replay_pos--;
++            if (pad->input_eof &&
++                mp_aframe_end_pts(pad->history[pad->num_history - 1].data) <= pts)
++                pad->replay_pos = pad->num_history;
++        }
++    }
++    for (int n = 0; n < c->num_out_pads; n++)
++        c->out_pads[n]->replay_video_pts = c->out_pads[n]->last_video_pts;
++    free_graph(c);
++    mp_filter_wakeup(f);
++    return true;
++}
++
+ static void lavfi_destroy(struct mp_filter *f)
+ {
+     struct lavfi *c = f->priv;
+@@ -811,14 +974,58 @@
+ {
+     struct lavfi *c = f->priv;
+ 
+-    if (!c->initialized)
++    if (cmd->persistent && !c->graph)
++        precreate_graph(c, false);
++    if (!c->graph || (!c->initialized && !cmd->persistent))
+         return false;
+ 
+     switch (cmd->type) {
+     case MP_FILTER_COMMAND_TEXT: {
+-        return avfilter_graph_send_command(c->graph, cmd->target,
+-                                           cmd->cmd, cmd->arg,
+-                                           &(char){0}, 0, 0) >= 0;
++        if (cmd->persistent) {
++            AVFilterContext *target = NULL;
++            for (int n = 0; n < c->graph->nb_filters; n++) {
++                if (!strcmp(c->graph->filters[n]->name, cmd->target)) {
++                    target = c->graph->filters[n];
++                    break;
++                }
++            }
++            if (!target || !target->priv || !av_opt_find(target->priv, cmd->cmd, NULL,
++                                        AV_OPT_FLAG_RUNTIME_PARAM, 0))
++                return false;
++            if (!c->initialized) {
++                // Validate without running callbacks that require configured inputs.
++                uint8_t *previous = NULL;
++                if (av_opt_get(target->priv, cmd->cmd, 0, &previous) < 0)
++                    return false;
++                int result = av_opt_set(target->priv, cmd->cmd, cmd->arg, 0);
++                av_opt_set(target->priv, cmd->cmd, (char *)previous, 0);
++                av_free(previous);
++                if (result < 0)
++                    return false;
++            }
++        }
++        if (c->initialized &&
++            avfilter_graph_send_command(c->graph, cmd->target, cmd->cmd,
++                                        cmd->arg, NULL, 0, 0) < 0)
++            return false;
++        if (cmd->persistent) {
++            int n;
++            for (n = 0; n < c->num_commands; n++) {
++                if (!strcmp(c->commands[n].target, cmd->target) &&
++                    !strcmp(c->commands[n].cmd, cmd->cmd))
++                    break;
++            }
++            if (n == c->num_commands) {
++                struct lavfi_command entry = {
++                    .target = talloc_strdup(c, cmd->target),
++                    .cmd = talloc_strdup(c, cmd->cmd),
++                };
++                MP_TARRAY_APPEND(c, c->commands, c->num_commands, entry);
++            }
++            talloc_free(c->commands[n].arg);
++            c->commands[n].arg = talloc_strdup(c, cmd->arg);
++        }
++        return true;
+     }
+     case MP_FILTER_COMMAND_GET_META: {
+         // We can worry later about what it should do to multi output filters.
+--- a/filters/f_lavfi.h
++++ b/filters/f_lavfi.h
+@@ -21,6 +21,10 @@
+                                        char *hwdec_interop,
+                                        char **graph_opts, const char *graph);
+ 
++// Replay cached complex-graph audio inputs at pts without seeking decoders.
++// Returns false without changing the graph if its history does not cover pts.
++bool mp_lavfi_replay_audio(struct mp_filter *f, double pts);
++
+ // Unlike mp_lavfi_create_graph(), this creates a single filter, using explicit
+ // options, and without involving the libavfilter graph parser. Instead of
+ // a graph, it takes a filter name, and a key-value list of filter options
+--- a/player/command.c
++++ b/player/command.c
+@@ -40,6 +40,7 @@
+ #include "common/msg_control.h"
+ #include "common/stats.h"
+ #include "filters/f_decoder_wrapper.h"
++#include "filters/f_lavfi.h"
+ #include "command.h"
+ #include "osdep/als.h"
+ #include "osdep/threads.h"
+@@ -6735,6 +6736,37 @@
+         .arg = cmd->args[2].v.s,
+     };
+     cmd->success = mp_output_chain_command(chain, cmd->args[0].v.s, &filter_cmd);
++}
++
++static void cmd_lavfi_complex_command(void *p)
++{
++    struct mp_cmd_ctx *cmd = p;
++    struct MPContext *mpctx = cmd->mpctx;
++    struct mp_filter_command filter_cmd = {
++        .type = MP_FILTER_COMMAND_TEXT,
++        .target = cmd->args[0].v.s,
++        .cmd = cmd->args[1].v.s,
++        .arg = cmd->args[2].v.s,
++        .persistent = true,
++    };
++    cmd->success = mpctx->lavfi && mp_filter_command(mpctx->lavfi, &filter_cmd);
++    bool keep_audio = mpctx->audio_status == STATUS_PLAYING &&
++                      !get_internal_paused(mpctx);
++    double pts = keep_audio ? written_audio_pts(mpctx) : playing_audio_pts(mpctx);
++    if (cmd->success && cmd->args[3].v.b && mpctx->ao_chain &&
++        mp_lavfi_replay_audio(mpctx->lavfi, pts))
++    {
++        struct ao_chain *ao_c = mpctx->ao_chain;
++        mp_filter_reset(ao_c->filter->f);
++        if (keep_audio) {
++            ao_c->refresh_pts = pts;
++        } else {
++            clear_audio_output_buffers(mpctx);
++            mp_filter_reset(ao_c->ao_filter);
++            reset_audio_state(mpctx);
++        }
++        mp_wakeup_core(mpctx);
++    }
+ }
+ 
+ static void cmd_script_binding(void *p)
+@@ -7520,6 +7552,15 @@
+                           {"value", OPT_STRING(v.s)}, },
+         .priv = &(const int){STREAM_VIDEO} },
+ 
++    { "lavfi-complex-command", cmd_lavfi_complex_command,
++        {
++            {"target", OPT_STRING(v.s)},
++            {"command", OPT_STRING(v.s)},
++            {"argument", OPT_STRING(v.s)},
++            {"refresh-audio", OPT_BOOL(v.b), OPTDEF_INT(0)},
++        },
++    },
++
+     { "af-command", cmd_filter_command,
+         {
+             {"label", OPT_STRING(v.s)},
+--- a/player/audio.c
++++ b/player/audio.c
+@@ -222,6 +222,7 @@
+     ao_c->out_eof = false;
+     ao_c->start_pts_known = false;
+     ao_c->start_pts = MP_NOPTS_VALUE;
++    ao_c->refresh_pts = MP_NOPTS_VALUE;
+     ao_c->untimed_throttle = false;
+     ao_c->underrun = false;
+     ao_c->delaying_audio_start = false;
+@@ -701,6 +702,18 @@
+                 return;
+             }
+         }
++        if (ao_c->refresh_pts != MP_NOPTS_VALUE &&
++            mp_aframe_get_pts(af) != MP_NOPTS_VALUE) {
++            double skip = (ao_c->refresh_pts - mp_aframe_get_pts(af)) *
++                          mp_aframe_get_effective_rate(af);
++            if (skip > 0) {
++                // Keep the join on the sample grid instead of truncating it.
++                mp_aframe_skip_samples(af, llrint(MPMIN(skip,
++                                                 mp_aframe_get_size(af))));
++            }
++            if (mp_aframe_get_size(af))
++                ao_c->refresh_pts = MP_NOPTS_VALUE;
++        }
+         double startpts = mpctx->audio_status == STATUS_SYNCING ?
+                                             ao_c->start_pts : MP_NOPTS_VALUE;
+         mp_aframe_clip_timestamps(af, startpts, endpts);
+--- a/player/core.h
++++ b/player/core.h
+@@ -196,6 +196,7 @@
+ 
+     double start_pts;
+     bool start_pts_known;
++    double refresh_pts; // Clip replacement audio to the end of the device queue.
+ 
+     bool delaying_audio_start;
+ 

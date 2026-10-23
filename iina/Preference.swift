@@ -1216,7 +1216,7 @@ struct Preference {
     .subOverrideLevel: SubOverrideLevel.scale.rawValue,
     .secondarySubOverrideLevel: SubOverrideLevel.scale.rawValue,
     .subTextFont: Constants.String.mpvDefaultFont,
-    .subTextSize: Float(55),
+    .subTextSize: Float(50),
     .subTextColorString: NSColor.white.usingColorSpace(.deviceRGB)!.mpvColorString,
     .subBold: false,
     .subItalic: false,

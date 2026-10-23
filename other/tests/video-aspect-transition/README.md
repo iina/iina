@@ -3,7 +3,7 @@
 Run from the repository root after generating the multitrack fixture:
 
 ```sh
-DYLD_LIBRARY_PATH="$PWD/deps/lib" python3 other/tests/video-aspect-transition/render-probe.py deps/lib/libmpv.2.dylib '/Users/lyzmin41/Downloads/IINA Multitrack Test 2026-10-15.mkv' build/video-aspect-transition/render
+DYLD_LIBRARY_PATH="$PWD/deps/lib" python3 other/tests/video-aspect-transition/render-probe.py deps/lib/libmpv.2.dylib '/path/to/multitrack-fixture.mkv' build/video-aspect-transition/render
 ```
 
 Uses the bundled libmpv software render API with null audio and a paused portrait

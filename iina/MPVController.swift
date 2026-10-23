@@ -85,6 +85,8 @@ struct MPVHookValue {
 // Global functions
 
 class MPVController: NSObject {
+  private(set) var supportsIndependentSecondarySubtitleStyle = false
+
   struct UserData {
     static let screenshot: UInt64 = 0x5343_0000_0000_0000
     static let screenshotSequenceMask: UInt64 = 0x0000_FFFF_FFFF_FFFF
@@ -533,7 +535,8 @@ class MPVController: NSObject {
                   verboseIfDefault: true)
 
     // Opt-in renderer extension; stock clients retain inherited secondary styles.
-    if setOptionFlag("secondary-sub-style-override", true) >= 0 {
+    supportsIndependentSecondarySubtitleStyle = setOptionFlag("secondary-sub-style-override", true) >= 0
+    if supportsIndependentSecondarySubtitleStyle {
       setUserOption(PK.subTextFont, type: .string, forName: "secondary-" + MPVOption.Subtitles.subFont,
                     verboseIfDefault: true)
       setUserOption(PK.subTextSize, type: .float, forName: "secondary-" + MPVOption.Subtitles.subFontSize,

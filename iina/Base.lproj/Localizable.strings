@@ -1122,3 +1122,6 @@
 "track_settings.selected_track" = "the selected track";
 "track_settings.reset_selected_hint" = "Reset %@ for %@ only.";
 "track_settings.reset_tracks_hint" = "Reset %@ for all tracks and %@.";
+
+/* Engine capability in subtitle settings. */
+"sidebar.secondary_style_engine_required" = "Independent Secondary subtitle styles require an mpv build with the secondary-style extension. This engine inherits the Primary style. Delay and position remain available.";

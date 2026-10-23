@@ -21,32 +21,25 @@ class SidebarAudioPane: SidebarScrollView {
 
     let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
 
-    stack.addArrangedSubview(Container(TrackSelector(
-      .audio,
-      player: player,
-      observedKeys: [.iinaAIDChanged]
-    )) {
-      $0.padding(.horizontal, .vertical)
-    })
-
-    let loadExternalAudioBtn = ui.button(
-      "sidebar.load_external_audio",
+    let tracks = TrackSelector(.audio, player: player, observedKeys: [.iinaAIDChanged])
+    let loadExternalAudioBtn = TrackAddButton(
+      title: ui.localized("sidebar.add_audio_track"),
       target: self, action: #selector(loadExternalAudioAction)
     )
-    loadExternalAudioBtn.setContentHuggingPriority(.init(100), for: .horizontal)
-    stack.addArrangedSubview(Container(
-      loadExternalAudioBtn
-    ) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
+    let trackGroup = ui.vStack(spacing: 6, wantsToGrow: true, loadExternalAudioBtn, tracks)
+    stack.addArrangedSubview(trackGroup)
+    trackGroup.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    loadExternalAudioBtn.widthAnchor.constraint(equalTo: trackGroup.widthAnchor).isActive = true
+    tracks.widthAnchor.constraint(equalTo: trackGroup.widthAnchor).isActive = true
 
-    stack.addArrangedSubview(Container(AudioDelayView(player: player)) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
-
-    stack.addArrangedSubview(Container(EqualizerView(player: player)) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
+    let delay = AudioDelayView(player: player)
+    let processing = TrackProcessingSection(player: player, group: .audioDelay, cards: [
+      TrackSettingsGroupView(player: player, group: .audioDelay, content: delay, titleImage: delay.titleImage),
+      TrackSettingsGroupView(player: player, group: .audioEQ, content: EqualizerView(player: player),
+                             titleImage: .sf("slider.vertical.3", withConfiguration: .sidebarIconConfig))
+    ])
+    stack.addArrangedSubview(processing)
+    processing.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
 
     documentView!.addSubview(stack)
     stack.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
@@ -55,7 +48,7 @@ class SidebarAudioPane: SidebarScrollView {
   @objc private func loadExternalAudioAction(_ sender: NSButton) {
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
     Utility.quickOpenPanel(
-      title: "Load external audio file",
+      title: ui.localized("sidebar.add_audio_track"),
       chooseDir: false,
       dir: currentDir,
       sheetWindow: player.currentWindow,
@@ -72,6 +65,7 @@ class SidebarAudioPane: SidebarScrollView {
 
 
 fileprivate class AudioDelayView: SidebarSliderView {
+  override var showsTitle: Bool { false }
   override var titleImage: NSImage? {
     .sf("clock.arrow.trianglehead.counterclockwise.rotate.90", "clock.arrow.circlepath",
         withConfiguration: .sidebarIconConfig)
@@ -85,6 +79,7 @@ fileprivate class AudioDelayView: SidebarSliderView {
   }
 
   override func setup() {
+    player.observe(.iinaTrackSettingsChanged) { [weak self] _ in self?.update() }
     slider.minValue = -5
     slider.maxValue = 5
     slider.numberOfTickMarks = 21
@@ -103,15 +98,14 @@ fileprivate class AudioDelayView: SidebarSliderView {
   }
 
   override func update() {
-    let audioDelay = player.mpv.getDouble(MPVOption.Audio.audioDelay)
+    let audioDelay = player.scopedAudioDelay()
     slider.doubleValue = audioDelay
     input.doubleValue = audioDelay
-    resetButton.isHidden = slider.doubleValue == 0
     updateIndicator()
   }
 
   override func sliderAction() {
-    let eventType = NSApp.currentEvent!.type
+    let eventType = NSApp.currentEvent?.type
     let sliderValue: Double
     switch eventType {
     case .leftMouseDown, .leftMouseDragged, .leftMouseUp:
@@ -126,10 +120,8 @@ fileprivate class AudioDelayView: SidebarSliderView {
     }
     input.doubleValue = sliderValue
     updateIndicator()
-    if let event = NSApp.currentEvent {
-      if event.type == .leftMouseUp {
-        player.setAudioDelay(sliderValue)
-      }
+    if eventType != .leftMouseDown && eventType != .leftMouseDragged {
+      player.setScopedAudioDelay(sliderValue)
     }
   }
 
@@ -138,11 +130,11 @@ fileprivate class AudioDelayView: SidebarSliderView {
       input.stringValue = "0"
     }
     let value = input.doubleValue
-    player.setAudioDelay(value)
+    player.setScopedAudioDelay(value)
   }
 
   override func resetButtonAction() {
-    player.setAudioDelay(0)
+    player.performSidebarChange { player.setScopedAudioDelay(0) }
   }
 }
 
@@ -188,13 +180,6 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     super.init(frame: .zero)
 
     translatesAutoresizingMaskIntoConstraints = false
-
-    let labelStack = ui.hStack(
-      spacing: 8,
-      ui.image("slider.vertical.3", size: 16, config: .sidebarIconConfig),
-      ui.label("sidebar.eq", font: .boldSystemFont(ofSize: 12)),
-      ui.flexibleSpace(),
-    )
 
     self.eqPopUpButton = NSPopUpButton(frame: .zero)
     eqPopUpButton.translatesAutoresizingMaskIntoConstraints = false
@@ -246,7 +231,7 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     let container = ui.vStack(
       spacing: .sidebarItemSpacing,
       wantsToGrow: true,
-      labelStack, eqPopUpButton, ui.space(), eqStack, freqLabelContainer
+      eqPopUpButton, ui.space(), eqStack, freqLabelContainer
     )
 
     zip(eqFrequencyLabels, audioEQSliders).forEach { label, slider in
@@ -260,6 +245,10 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     container.padding(.all)
 
     update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in
+      update()
+    }
+
     player.observe(.iinaAFChanged) { [unowned self] _ in
       update()
     }
@@ -273,22 +262,24 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     zip(audioEQSliders, profile.gains).forEach { (slider, gain) in
       slider.doubleValue = gain
     }
-    player.setAudioEq(fromGains: profile.gains)
+    player.performSidebarChange { player.setScopedAudioEQ(profile.gains) }
   }
 
   private func update() {
-    if let filter = player.info.audioEqFilter {
-      guard let eqString = Regex("\\[(.+?)\\]").captures(in: filter.stringFormat)[at: 1] else { return }
-      let filters = eqString.split(separator: ",")
-      zip(filters, audioEQSliders).forEach { (filter, slider) in
-        if let gain = filter.split(separator: "=").last {
-          slider.doubleValue = Double(gain) ?? 0
-        } else {
-          slider.doubleValue = 0
-        }
-      }
-    } else {
-      audioEQSliders.forEach { $0.doubleValue = 0 }
+    let gains = player.scopedAudioEQ()
+    zip(audioEQSliders, gains).forEach { $0.doubleValue = $1 }
+    guard let selected = eqPopUpButton.selectedItem else { return }
+    let profile: EQProfile?
+    switch selected.tag {
+    case eqPresetProfileMenuItemTag:
+      profile = EQProfile.presets.first { $0.localizationKey == selected.representedObject as? String }
+    case eqUserDefinedProfileMenuItemTag:
+      profile = EQProfile.userEQs[selected.title]
+    default:
+      return
+    }
+    if profile?.gains != gains {
+      eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
     }
   }
 
@@ -317,7 +308,7 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
   }
 
   @objc func audioEqSliderAction(_ sender: NSSlider) {
-    player.setAudioEq(fromGains: audioEQSliders.map { $0.doubleValue })
+    player.performSidebarChange { player.setScopedAudioEQ(audioEQSliders.map { $0.doubleValue }) }
     eqPopUpButton.selectItem(withTag: eqCustomMenuItemTag)
   }
 

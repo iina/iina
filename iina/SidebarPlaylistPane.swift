@@ -279,12 +279,14 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   }
 
   @objc func clearPlaylistBtnAction(_ sender: AnyObject) {
-    player.clearPlaylist()
-    player.sendOSD(.clearPlaylist)
+    player.performSidebarChange {
+      player.clearPlaylist()
+      player.sendOSD(.clearPlaylist)
+    }
   }
 
   @objc func loopBtnAction(_ sender: NSButton) {
-    player.nextLoopMode()
+    player.performSidebarChange { player.nextLoopMode() }
   }
 
   @objc func shuffleBtnAction(_ sender: AnyObject) {

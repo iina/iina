@@ -234,3 +234,71 @@ class SidebarScrollView: SidebarSectionScrollView {
   }
   
 }
+
+final class TrackSettingsGroupView: NSView {
+  let menuAnchor: NSView?
+  convenience init(player: PlayerCore, group: TrackSettingsGroup, content: NSView, titleImage: NSImage? = nil) {
+    self.init(titleKey: group.titleKey, content: content, titleImage: titleImage,
+              action: TrackSettingsGroupReset(player: player, group: group))
+  }
+
+  init(titleKey: String, content: NSView, titleImage: NSImage? = nil, action: NSView? = nil) {
+    menuAnchor = action
+    super.init(frame: .zero)
+    translatesAutoresizingMaskIntoConstraints = false
+    let ui = UIHelper.shared
+    let heading = NSView()
+    heading.translatesAutoresizingMaskIntoConstraints = false
+    var items: [NSView] = []
+    if let titleImage { items.append(ui.image(titleImage, size: 16, scaleUp: false)) }
+    items += [ui.label(titleKey, font: .systemFont(ofSize: 14, weight: .semibold)), ui.flexibleSpace()]
+    if let action { items.append(action) }
+    let row = ui.hStack(items)
+    row.heightAnchor.constraint(equalToConstant: 24).isActive = true
+    heading.addSubview(row)
+    row.padding(.leading(.sidebarContainerPadding), .trailing(6), .vertical)
+    let card = SidebarScrollView.Container(content) { $0.padding(.all(.sidebarContainerPadding)) }
+    let stack = ui.vStack(spacing: 6, wantsToGrow: true, heading, card)
+    addSubview(stack)
+    stack.padding(.all)
+    heading.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    card.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+  }
+  required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}
+
+final class TrackProcessingSection: FlippedView {
+  convenience init(player: PlayerCore, group: TrackSettingsGroup, cards: [NSView]) {
+    self.init(target: TrackSettingsPopUp(player: player, group: group), cards: cards)
+  }
+
+  init(target: SettingsTargetPopUp, cards: [NSView]) {
+    super.init(frame: .zero)
+    translatesAutoresizingMaskIntoConstraints = false
+    clipsToBounds = true
+    let ui = UIHelper.shared
+    let header = NSView()
+    header.translatesAutoresizingMaskIntoConstraints = false
+    header.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    let stack = ui.vStack(spacing: .sidebarStackViewSpacing, wantsToGrow: true, [header] + cards)
+    stack.setCustomSpacing(6, after: header)
+    addSubview(stack)
+    stack.padding(.all)
+    for view in [header] + cards { view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true }
+
+    let heading = ui.label("track_settings.configure", font: .systemFont(ofSize: 12, weight: .medium))
+    heading.textColor = .secondaryLabelColor
+    heading.setContentHuggingPriority(.required, for: .horizontal)
+    heading.setContentCompressionResistancePriority(.required, for: .horizontal)
+    header.addSubview(heading)
+    heading.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 12).isActive = true
+    heading.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
+
+    header.addSubview(target)
+    target.leadingAnchor.constraint(equalTo: heading.trailingAnchor, constant: 4).isActive = true
+    target.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
+    target.trailingAnchor.constraint(lessThanOrEqualTo: header.trailingAnchor).isActive = true
+  }
+
+  required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+}

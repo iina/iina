@@ -48,6 +48,12 @@
     "id": "io.github.niyaro.iina-clickable-subtitles"
   },
   {
+    "name": "ContentPlay",
+    "url": "https://github.com/Arnav12S/iina-contentplay",
+    "desc": "Search movies/series, resolve instant Real-Debrid streams via Stremio, then play a whole season as a playlist.",
+    "id": "com.arnav.contentplay"
+  },
+  {
     "name": "Danmaku",
     "url": "https://github.com/xjbeta/iina-plugin-danmaku",
     "desc": "Overlay comments/danmaku on video.",

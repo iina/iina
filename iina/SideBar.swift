@@ -69,9 +69,16 @@ class SidebarViewController: NSViewController {
   let iconConfig = NSImage.SymbolConfiguration(pointSize: 14, weight: .bold)
   let compactIconConfig = NSImage.SymbolConfiguration(pointSize: 13, weight: .bold)
 
-  var downShift: CGFloat = 0 {
-    didSet {
-      topConstraint.constant = downShift
+  var downShift: CGFloat {
+    get { topConstraint.constant }
+    set { setTopInset(newValue, animated: false) }
+  }
+
+  func setTopInset(_ height: CGFloat, animated: Bool) {
+    if animated {
+      topConstraint.animator().constant = height
+    } else {
+      topConstraint.constant = height
     }
   }
 

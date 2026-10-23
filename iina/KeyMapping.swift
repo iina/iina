@@ -57,6 +57,10 @@ class KeyMapping: NSObject {
 
   var isIINACommand: Bool
 
+  var usesDefaultEscape: Bool {
+    isIINACommand ? action == [IINACommand.escape.rawValue] : action == ["set", "fullscreen", "no"]
+  }
+
   var rawKey: String {
     didSet {
       self.normalizedMpvKey = KeyCodeHelper.normalizeMpv(rawKey)

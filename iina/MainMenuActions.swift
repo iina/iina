@@ -55,8 +55,8 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
     guard let url = player.info.currentURL, !player.info.isNetworkResource else { return }
     do {
       let index = player.mpv.getInt(MPVProperty.playlistPos)
+      guard try Utility.trashOrRemoveItem(at: url) else { return }
       player.playlistRemove(index)
-      try FileManager.default.trashItem(at: url, resultingItemURL: nil)
     } catch let error {
       Utility.showAlert("playlist.error_deleting", arguments: [error.localizedDescription])
     }

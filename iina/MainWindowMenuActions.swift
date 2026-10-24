@@ -58,13 +58,14 @@ extension MainWindowController {
     // bigger size
     case 10, 11:
       let newWidth = window.frame.width + scaleStep * (size == 10 ? -1 : 1)
-      let newHeight = newWidth / (window.aspectRatio.width / window.aspectRatio.height)
-      newFrame = window.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(AppData.mainWindowMinSize))
+      let aspect = Preference.unlockWindowAspectRatio ? window.frame.size : window.aspectRatio
+      let newHeight = newWidth / aspect.aspect
+      newFrame = window.frame.centeredResize(to: NSSize(width: newWidth, height: newHeight).satisfyMinSizeWithSameAspectRatio(minimumWindowSize))
     default:
       return
     }
 
-    window.setFrame(newFrame, display: true, animate: true)
+    setUserWindowFrame(windowFrameConstrainedToScreen(newFrame, screenFrame: screenFrame))
   }
 
   @objc func menuAlwaysOnTop(_ sender: AnyObject) {
@@ -96,15 +97,35 @@ extension MainWindowController {
   }
 
   @objc func menuSetDelogo(_ sender: NSMenuItem) {
+    guard player.info.state.loaded, !interactiveMode.isActive, !isCropTransitionInProgress else { return }
     if sender.state == .on {
       if let filter = player.info.delogoFilter {
         let _ = player.removeVideoFilter(filter)
         player.info.delogoFilter = nil
       }
     } else {
+      guard interactiveMode.canEnter else { return }
       self.sidebars.hideAllSideBars {
         self.interactiveMode.enter(mode: .delogo)
       }
+    }
+  }
+}
+
+extension MainWindowController: NSMenuItemValidation {
+  func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    switch menuItem.action {
+    case #selector(menuSwitchToMiniPlayer(_:)):
+      return !player.isInMiniPlayer && player.info.state.active && loaded &&
+        !interactiveMode.isActive && !isCropTransitionInProgress && pipStatus == .notInPIP &&
+        !isFullscreenTransitionInProgress && videoView.superview === videoViewContainer
+    case #selector(menuSetDelogo(_:)):
+      if player.info.delogoFilter != nil {
+        return player.info.state.loaded && !interactiveMode.isActive && !isCropTransitionInProgress
+      }
+      return interactiveMode.canEnter
+    default:
+      return true
     }
   }
 }

@@ -11,6 +11,10 @@ import Foundation
 struct GeometryDef {
   var x: String?, y: String?, w: String?, h: String?, xSign: String?, ySign: String?
 
+  var hasExplicitSize: Bool {
+    w != nil && h != nil && w != "0" && h != "0"
+  }
+
   static func parse(_ geometryString: String) -> GeometryDef? {
     // guard option value
     guard !geometryString.isEmpty else { return nil }

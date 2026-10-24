@@ -116,3 +116,27 @@
 "read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
 "read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
 "read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";
+
+/* Interface actions */
+"iina.escape" = "Dismiss current interface layer";
+"iina.close-sidebars" = "Close all sidebars";
+"iina.show-panel" = "Show panel";
+"iina.hide-panel" = "Hide panel";
+"iina.toggle-panel" = "Toggle panel";
+"iina.next-plugin" = "Next plugin";
+"iina.previous-plugin" = "Previous plugin";
+"iina.open-plugin" = "Open plugin";
+"iina.show-osc" = "Show OSC";
+"iina.hide-osc" = "Hide OSC";
+"iina.toggle-osc" = "Toggle OSC";
+"iina.reset-osc-position" = "Reset OSC position";
+"iina.configure-osc-position" = "Configure OSC position";
+"iina.open-custom-crop" = "Open Custom Crop";
+"panel.settings" = "Settings";
+"panel.layout" = "Layout";
+"panel.video" = "Video";
+"panel.audio" = "Audio";
+"panel.sub" = "Subtitles";
+"panel.playlist" = "Playlist";
+"panel.chapters" = "Chapters";
+"panel.plugins" = "Plugins";

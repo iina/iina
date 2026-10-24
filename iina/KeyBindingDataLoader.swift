@@ -181,6 +181,32 @@ class KeyBindingDataLoader {
       criterions.append(item.toCriterion(l10nKey: "cmd"))
     }
 
+    criterions.append(KBI.separator().toCriterion())
+    let panels = IINACommand.Panel.allCases.map { panel -> KBI in
+      let item = KBI(panel.rawValue)
+      item.displayName = KeyBindingTranslator.l10nDic["panel." + panel.rawValue]
+      return item
+    }
+    for command in [IINACommand.escape, .closeSidebars, .showPanel, .hidePanel, .togglePanel,
+                    .nextPlugin, .previousPlugin, .openPlugin, .showOSC, .hideOSC,
+                    .toggleOSC, .resetOSCPosition, .configureOSCPosition, .openCustomCrop] {
+      let children: [KBI]
+      switch command {
+      case .showPanel, .hidePanel, .togglePanel:
+        children = panels
+      case .openPlugin:
+        children = JavascriptPlugin.plugins.filter { $0.enabled && $0.sidebarTabName != nil }.map { plugin in
+          let item = KBI(plugin.identifier)
+          item.displayName = plugin.name
+          return item
+        }
+        if children.isEmpty { continue }
+      default:
+        children = []
+      }
+      criterions.append(KBI(command.rawValue, type: .iinaCmd, children: children).toCriterion())
+    }
+
     return criterions
   }
 

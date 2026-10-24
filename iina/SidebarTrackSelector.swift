@@ -6,7 +6,7 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
-class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
+class TrackSelector: SidebarSectionScrollView, NSTableViewDelegate, NSTableViewDataSource {
   private let trackType: MPVTrack.TrackType
   private unowned let player: PlayerCore
 

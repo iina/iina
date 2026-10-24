@@ -43,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSSize aspectRatio;
 
 - (void)presentViewControllerAsPictureInPicture:(NSViewController *)viewController;
+- (void)presentViewControllerAsPictureInPicture:(NSViewController *)viewController
+                            completionHandler:(void (^)(void))completionHandler
+    NS_SWIFT_NAME(presentAsPicture(inPicture:completionHandler:));
 - (void)updatePlaybackStateUsingBlock:(void (NS_NOESCAPE ^)(PIPMutablePlaybackState *))updateBlock;
 
 @end

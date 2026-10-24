@@ -411,7 +411,7 @@ fileprivate class ThemeSwitch: NSSegmentedControl {
 }
 
 
-fileprivate class SidebarPosSwitch: NSSegmentedControl {
+class SidebarPosSwitch: NSSegmentedControl {
   private let key: Preference.Key
   let prefObserver = Preference.Observer()
 
@@ -422,8 +422,17 @@ fileprivate class SidebarPosSwitch: NSSegmentedControl {
     segmentCount = 2
     setTag(0, forSegment: 0)
     setTag(1, forSegment: 1)
-    setImage(.sf("sidebar.leading"), forSegment: 0)
-    setImage(.sf("sidebar.trailing"), forSegment: 1)
+    setAccessibilityLabel(ui.localized("sidebar.sidebar_position"))
+    let isRTL = userInterfaceLayoutDirection == .rightToLeft
+    let sideLabels = [ui.localized("settings.$left"), ui.localized("settings.$right")]
+    for (segment, symbol) in ["sidebar.leading", "sidebar.trailing"].enumerated() {
+      let label = sideLabels[isRTL ? 1 - segment : segment]
+      // Copy cached symbols before assigning control-specific accessibility text.
+      let image = NSImage.sf(symbol)?.copy() as? NSImage
+      image?.accessibilityDescription = label
+      setImage(image, forSegment: segment)
+      setToolTip(label, forSegment: segment)
+    }
 
     prefObserver.add(key, runNow: true) { [unowned self] _ in
       selectSegment(withTag: Preference.bool(for: key) ? 0 : 1)

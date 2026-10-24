@@ -504,6 +504,7 @@ struct ScopedTrackCropPreview {
 
 extension PlayerCore {
   func openScopedCustomCrop() {
+    guard mainWindow.interactiveMode.canEnter else { return }
     mainWindow.prepareVideoTransformWindowReference()
     let id = scopedTrackSettings.target(.videoGeometry)
     guard id != 0 else { mainWindow.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true); return }

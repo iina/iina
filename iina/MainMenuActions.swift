@@ -270,6 +270,7 @@ extension MainMenuActionHandler {
 
   private func menuToggleFilterString(_ string: String, forType type: String) {
     let isVideo = type == MPVProperty.vf
+    guard !isVideo || (!player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress) else { return }
     if let filter = MPVFilter(rawString: string) {
       // Removing a filter based on its position within the filter list is the preferred way to do
       // it as per discussion with the mpv project. Search the list of filters and find the index
@@ -305,11 +306,15 @@ extension MainMenuActionHandler {
 
 extension MainMenuActionHandler {
   @objc func menuLoadExternalAudio(_ sender: NSMenuItem) {
+    guard player.info.state.loaded else { return }
+    let generation = player.info.trackSelectionGeneration
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
     Utility.quickOpenPanel(title: "Load external audio file", chooseDir: false, dir: currentDir,
                            sheetWindow: player.currentWindow,
-                           allowedFileTypes: Utility.playableFileExt) { url in
-      self.player.loadExternalAudioFile(url)
+                           allowedFileTypes: Utility.playableFileExt) { [weak player] url in
+      guard let player, player.info.state.loaded,
+            player.info.trackSelectionGeneration == generation else { return }
+      player.loadExternalAudioFile(url)
     }
   }
 
@@ -351,13 +356,17 @@ extension MainMenuActionHandler {
 
 extension MainMenuActionHandler {
   @objc func menuLoadExternalSub(_ sender: NSMenuItem) {
+    guard player.info.state.loaded else { return }
+    let generation = player.info.trackSelectionGeneration
     let currentDir = player.info.currentURL?.deletingLastPathComponent()
     // In addition to subtitle files allow the user to choose video files as mpv will look for and
     // load embedded subtitle streams in the video file.
     Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
                            sheetWindow: player.currentWindow,
-                           allowedFileTypes: Utility.containsSubExt) { url in
-      self.player.loadExternalSubFile(url, delay: true)
+                           allowedFileTypes: Utility.containsSubExt) { [weak player] url in
+      guard let player, player.info.state.loaded,
+            player.info.trackSelectionGeneration == generation else { return }
+      player.loadExternalSubFile(url, delay: true)
     }
   }
 
@@ -482,6 +491,18 @@ extension MainMenuActionHandler {
     switch menuItem.action {
     case #selector(menuDeleteCurrentFile(_:)), #selector(menuShowCurrentFileInFinder(_:)):
       return player.info.currentURL != nil && !player.info.isNetworkResource
+    case #selector(menuChangeCrop(_:)):
+      if menuItem.representedObject as? String == "Custom" { return player.mainWindow.interactiveMode.canEnter }
+      return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
+    case #selector(menuChangeAspect(_:)), #selector(menuChangeRotation(_:)), #selector(menuToggleFlip(_:)),
+         #selector(menuToggleMirror(_:)), #selector(menuToggleVideoFilterString(_:)):
+      return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
+    case #selector(menuCycleTrack(_:)) where menuItem.tag == 0:
+      return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
+    case #selector(menuChangeTrack(_:)):
+      let type = (menuItem.representedObject as? (MPVTrack, MPVTrack.TrackType))?.1 ??
+        (menuItem.representedObject as? MPVTrack)?.type
+      return type != .video || (!player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress)
     default:
       break
     }

@@ -66,6 +66,7 @@ enum MPVOption {
 }
 struct MPVCommand {
   static let audioAdd = MPVCommand("audio-add")
+  static let videoAdd = MPVCommand("video-add")
   static let audioRemove = MPVCommand("audio-remove"), videoRemove = MPVCommand("video-remove")
   let rawValue: String; init(_ value: String) { rawValue = value } }
 enum MPVProperty { static let vf = "vf" }
@@ -87,6 +88,7 @@ class Info {
   var trackSelectionGeneration = 0
   var cropFilter: MPVFilter?
   var unsureCrop = "None"
+  var brightness = 0, contrast = 0, saturation = 0, gamma = 0, hue = 0
   var audioTracks = [MPVTrack(1), MPVTrack(2), MPVTrack(3), MPVTrack(4)]
   var videoTracks = [MPVTrack(1, .video), MPVTrack(2, .video), MPVTrack(3, .video)]
   var subTracks = [MPVTrack(1, .sub), MPVTrack(2, .sub)]
@@ -102,19 +104,31 @@ class Info {
 // PRODUCTION_ORDERED_TRACKS
 }
 class VideoFixture { var active = 0, idle = 0; func displayActive() { active += 1 }; func displayIdle() { idle += 1 } }
-class EditorFixture { var discards = 0; var isActive = false; func exit(discardingCrop: Bool) { if discardingCrop { discards += 1 }; isActive = false } }
+class EditorFixture {
+  var discards = 0
+  var isActive = false
+  var ownerAvailable = true
+  var canEnter: Bool { ownerAvailable && !isActive }
+  enum Mode { case crop }
+  func enter(mode: Mode, selectWholeVideoByDefault: Bool) { if canEnter { isActive = true } }
+  func exit(discardingCrop: Bool) { if discardingCrop { discards += 1 }; isActive = false }
+}
 class MainFixture {
+  enum PIPStatus { case notInPIP, inPIP }
+  var pipStatus = PIPStatus.notInPIP
   let interactiveMode = EditorFixture()
   let videoView = VideoFixture()
   var loaded = true
   var aspectTransitions = 0, finishedTransitions = 0
-  func prepareVideoTransformWindowReference() {}
+  var preparedWindowReferences = 0
+  func prepareVideoTransformWindowReference() { preparedWindowReferences += 1 }
   func beginVideoAspectTransition() -> Bool { aspectTransitions += 1; return true }
   func finishVideoAspectTransition(restore: Bool = true) { finishedTransitions += 1 }
   var window: NSWindow?
   let muteButton = NSButton(), volumeSlider = NSSlider()
 }
 class MPVFixture {
+  var videoAdditions = 0
   var addition: (() -> Void)?
   var additionFails = false
   var removal: ((String, Int) -> Void)?
@@ -142,6 +156,9 @@ class MPVFixture {
   }
   func command(_ command: MPVCommand, args: [String?], checkError: Bool,
                returnValueCallback: ((Int32) -> Void)? = nil) {
+    if command.rawValue == "video-add" {
+      videoAdditions += 1; returnValueCallback?(0); return
+    }
     if command.rawValue == "audio-add" {
       precondition(args.count == 2 && args[1] == "auto")
       if additionFails { returnValueCallback?(-12); return }
@@ -234,6 +251,7 @@ class PlayerCore {
     var id: Int
     var activeVideo: [Int] = [1]
     var order: [Int] = [1,2,3]
+    var geometry = CropVideoGeometry(sourceSize: .zero, displaySize: .zero, rotation: 0)
     var originalTrack = VideoTrackProcessing()
     var masterVF = ""
     var masterAspect = "-1"
@@ -269,6 +287,9 @@ class PlayerCore {
   }
   func prepareMixer() { prepareAudioMixer() }
 }
+
+struct CropVideoGeometry { let sourceSize: NSSize; let displaySize: NSSize; let rotation: Int }
+typealias ScopedTrackCropPreview = PlayerCore.CropPreview
 
 class MiniFixture { func refreshArtworkVisibility() {}
  func handleVideoSizeChange() {} }

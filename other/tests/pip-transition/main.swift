@@ -184,4 +184,70 @@ for modern in [false, true] {
  c.onCancelCropTransition = nil
  c.exitPIP(); c.pipDidClose(c.pip)
 }
+for modern in [false, true] {
+ PiP.modern = modern
+ for blocked in ["loading", "stopped", "shutdown", "no-video", "music", "unloaded-window",
+                 "fullscreen-animation", "foreign-host", "detached-video", "missing-window"] {
+  let c = MainWindowController()
+  let originalWindow = c.window!
+  var foreignHost: NSWindow?
+  switch blocked {
+  case "loading": c.player.info.state = .loading
+  case "stopped": c.player.info.state = .stopped
+  case "shutdown": c.player.info.state = .shutDown
+  case "no-video": c.player.info.videoTrackIDs = []
+  case "music": c.player.isInMiniPlayer = true
+  case "unloaded-window": c.loaded = false
+  case "fullscreen-animation": c.isFullscreenTransitionInProgress = true
+  case "foreign-host":
+   let host = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 320, height: 180),
+                       styleMask: .borderless, backing: .buffered, defer: false)
+   host.isReleasedWhenClosed = false; foreignHost = host
+   c.videoView.removeFromSuperview(); host.contentView!.addSubview(c.videoView)
+  case "detached-video": c.videoView.removeFromSuperview()
+  default: c.window = nil
+  }
+  let originalHost = c.videoView.superview
+  c.interactiveMode.isActive = true
+  for _ in 0..<3 { c.enterPIP() }
+  check(c.pipStatus == .notInPIP && c.pip.presented == 0 && c.pipVideo == nil &&
+        c.operationFeedbackRequests.isEmpty && !c.videoView.videoLayer.isHostedInPIP &&
+        c.videoView.superview === originalHost && c.interactiveMode.exitCalls == 0,
+        "\(blocked) rejects \(modern ? "modern" : "legacy") PiP before editor, feedback or host mutations")
+  withExtendedLifetime((originalWindow, foreignHost)) {}
+ }
+}
+PiP.modern = true
+for invalidation in ["loading", "stopped", "shutdown", "no-video", "music", "fullscreen-animation", "new-file", "foreign-host"] {
+ let c = MainWindowController()
+ let source = c.window as! Window
+ c.enterPIP()
+ let prepared = c.pip.completion!
+ var foreignHost: NSWindow?
+ switch invalidation {
+ case "loading": c.player.info.state = .loading
+ case "stopped": c.player.info.state = .stopped
+ case "shutdown": c.player.info.state = .shutDown
+ case "no-video": c.player.info.videoTrackIDs = []
+ case "music": c.player.isInMiniPlayer = true
+ case "fullscreen-animation": c.isFullscreenTransitionInProgress = true
+ case "new-file": c.player.info.trackSelectionGeneration += 1
+ default:
+  let host = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 320, height: 180),
+                      styleMask: .borderless, backing: .buffered, defer: false)
+  host.isReleasedWhenClosed = false; foreignHost = host
+  c.videoView.removeFromSuperview(); host.contentView!.addSubview(c.videoView)
+ }
+ let hostBeforeCallback = c.videoView.superview
+ prepared()
+ check(c.pipStatus == .intermediate && c.pip.dismissed == 1 && !c.videoView.videoLayer.isHostedInPIP &&
+       c.operationFeedbackRequests.isEmpty && source.testVisible && c.videoView.superview === hostBeforeCallback,
+       "\(invalidation) during native preparation cancels before moving or hiding the live video")
+ prepared()
+ check(c.pip.dismissed == 1, "repeated invalidated preparation does not repeat dismissal")
+ c.pipDidClose(c.pip)
+ check(c.pipStatus == .notInPIP && c.videoView.superview === c.videoViewContainer,
+       "invalidated native preparation can finish ordinary ownership cleanup")
+ withExtendedLifetime(foreignHost) {}
+}
 print("Native PiP production-method checks passed: \(count)")

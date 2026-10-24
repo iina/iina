@@ -67,7 +67,8 @@ final class EditorFixture {
   var isEntering = false
   func finishEntryTransition(outputIsReady: Bool = false) {}
   func beginNativeExitPresentation() {}
-  func cancelEntryTransition() {}
+  func cancelEntryTransition() { isEntering = false }
+  func exit() { isActive = false; isEntering = false }
   var restorations = 0
   func restoreExitPresentation() { if isActive { restorations += 1 } }
 }
@@ -122,10 +123,14 @@ final class MainWindowController {
   var videoViewConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
   var cropExitOverlay: CropTransitionOverlay?
   private var pendingPlayerCropChange: (() -> Void)?
-  var isCropTransitionInProgress: Bool { cropExitOverlay != nil }
+  var isCropTransitionInProgress: Bool { cropExitOverlay != nil || interactiveMode.isEntering }
   var isPlayerCropTransitionInProgress: Bool { cropExitOverlay?.isPlayerTransition == true }
   var loaded = true
-  enum WindowState { case windowed, fullscreen }
+  enum WindowState {
+    case windowed, fullscreen, animating
+    mutating func startAnimatingToFullScreen(legacy: Bool, priorWindowedFrame: NSRect) { self = .animating }
+    mutating func startAnimatingToWindow() { self = .animating }
+  }
   enum PIPStatus { case notInPIP, inPIP }
   var fsState = WindowState.windowed, pipStatus = PIPStatus.notInPIP
   var isApplyingVideoTransformWindowFrame = false
@@ -141,6 +146,9 @@ final class MainWindowController {
     videoViewContainer.addSubview(videoView)
   }
   func hideOSD() {}
+  func log(_ text: String) {}
+  var onFullscreenBegin: (() -> Void)?
+  func beginFullscreenVideoTransition() { onFullscreenBegin?() }
   func durationForTesting(_ value: TimeInterval) -> TimeInterval { cropTransitionDuration(value) }
   func handleVideoSizeChange(keepWindowSize: Bool) { cropExitOverlay?.targetWindowFrame = target }
   func finishVideoAspectTransition() {}
@@ -149,6 +157,7 @@ final class MainWindowController {
   func updateWindowParametersForMPV(withFrame: NSRect? = nil) {}
   // PRODUCTION_TRANSITION
 }
+extension Notification.Name { static let iinaLegacyFullScreen = Notification.Name("fixture.legacy-fullscreen") }
 typealias Lock = NSLock
 @propertyWrapper final class Atomic<Value> {
   var wrappedValue: Value
@@ -837,5 +846,34 @@ preparedShadow.cancelCropFrameRequests(close: true)
 pump { preparedReplies.count == 2 }
 preparedModel.afterNextPreparedCropFrame { preparedReplies.append($0) }
 check(preparedReplies.suffix(2).allSatisfy { !$0 }, "shutdown cancels prepared-frame waiters and closes both layer aliases")
+
+for entering in [true, false] {
+  let boundary = MainWindowController()
+  boundary.interactiveMode.isActive = false
+  boundary.player.mpv.outputSize = NSSize(width: 100, height: 60)
+  boundary.videoView.videoLayer.withholdFrames = true
+  var cropCommits = 0
+  boundary.prepareCropExit(selection: NSRect(x: 10, y: 0, width: 50, height: 60),
+    sourceSize: NSSize(width: 100, height: 60), initialFrame: boundary.videoViewContainer.bounds,
+    initialClip: boundary.videoViewContainer.bounds, initialSelection: .zero,
+    controlsImage: nil, controlsFrame: .zero) { cropCommits += 1; return true }
+  check(boundary.cropExitOverlay != nil && boundary.videoView.videoLayer.isInCropTransition,
+        "a real Custom Crop handoff owns the native surface before fullscreen \(entering ? "entry" : "exit")")
+  boundary.onFullscreenBegin = {
+    check(boundary.cropExitOverlay == nil && !boundary.videoView.videoLayer.isInCropTransition &&
+          !boundary.videoView.videoLayer.isAnimatingWindowResize && cropCommits == 1,
+          "fullscreen layout receives a settled Custom Crop surface and one committed crop")
+  }
+  if entering {
+    boundary.windowWillEnterFullScreen(Notification(name: NSWindow.willEnterFullScreenNotification))
+  } else {
+    boundary.fsState = .fullscreen
+    boundary.windowWillExitFullScreen(Notification(name: NSWindow.willExitFullScreenNotification))
+  }
+  let fullscreenFrame = boundary.window!.frame
+  RunLoop.main.run(until: Date().addingTimeInterval(0.02))
+  check(boundary.window!.frame == fullscreenFrame && boundary.cropExitOverlay == nil && cropCommits == 1,
+        "a stale Custom Crop frame cannot resume window sizing after the fullscreen boundary")
+}
 
 print("Completed \(checks) native live crop and OCR ownership checks.")

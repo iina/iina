@@ -22,7 +22,8 @@ methods = '\n'.join(extract(player, m) for m in [
     '  private func saveVideoGeometryForCurrentMedia(', '  private func prepareVideoGeometryForNewFile(',
     '  private func restoreVideoGeometryForCurrentMedia(', '  private func applyVideoGeometry(',
     '  private func syncVideoGeometryInfo(', '  private func restoreVideoTrackGeometryForCurrentMedia(',
-    '  func reloadSavedIINAfilters(', '  func windowScaleChanged(', '  func setCrop(fromString'])
+    '  func reloadSavedIINAfilters(', '  func windowScaleChanged(', '  func setCrop(fromString',
+    '  func setFlip(', '  func setMirror('])
 geometry = extract((repo/'iina/InteractiveMode.swift').read_text(), 'struct CropVideoGeometry {')
 ext = (repo/'iina/Extensions.swift').read_text()
 helpers = '\n'.join(extract(ext,m) for m in ['  var aspect:', '  func centeredRect(in rect:', '  func crop(withAspect aspectRect:'])

@@ -1662,6 +1662,13 @@ class MainWindowController: PlayerWindowController {
   /// - Parameter notification: A notification named
   ///     [didExitFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/didexitfullscreennotification).
   func windowDidExitFullScreen(_ notification: Notification) {
+    // Mission Control can deliver this notification more than once for the same transition.
+    // The first notification has already finished the transition and restored the window.
+    guard fsState != .windowed else {
+      log("Ignoring duplicate notification that the window exited full screen mode", level: .warning)
+      return
+    }
+
     log("Exited full screen mode")
 
     if fsState.isFullscreen {

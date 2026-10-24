@@ -890,7 +890,8 @@ Preference.resizeOption = .normal
 Preference.physical = false
 Preference.unlockWindowAspectRatio = false
 controller.fsState = .windowed
-// Fresh/reused windows retain startup geometry in every timing mode.
+// Fresh/reused windows retain startup geometry in every timing mode. Restart
+// restoration overrides it once, even while loading flags remain set.
 for timing in [Preference.ResizeWindowTiming.always, .onlyWhenOpen, .never] {
   Preference.resizeTiming = timing
   controller.beginWindowSession(at: policyStart)
@@ -906,6 +907,9 @@ for timing in [Preference.ResizeWindowTiming.always, .onlyWhenOpen, .never] {
         "all timing modes retain explicit initial geometry on a reused core")
   controller.handleVideoSizeChange(keepWindowSize: false)
   check(window.frame == startupFrame, "duplicate load notifications cannot override explicit initial geometry")
+  controller.applyRestartWindowFrame(policyStart)
+  controller.handleVideoSizeChange(keepWindowSize: false)
+  check(window.frame == policyStart, "restart geometry overrides every file resize timing during the same load")
   controller.player.geometry = nil
 }
 // A layout-only refresh does not consume the subsequent new-file resize. A

@@ -1,4 +1,7 @@
 import Cocoa
+typealias AccentSegmentedControl = NSSegmentedControl
+typealias AccentSlider = NSSlider
+
 struct LayoutValue {
   let value: CGFloat
   init(_ value: CGFloat) { self.value = value }

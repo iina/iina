@@ -2,7 +2,7 @@
 set -eu
 test_dir="$(cd "$(dirname "$0")" && pwd)"
 repo_dir="$(cd "$test_dir/../../.." && pwd)"
-output_dir="$repo_dir/build/settings-localization-tests"
+output_dir="${1:-$repo_dir/build/settings-localization-tests}"
 mkdir -p "$output_dir/module-cache"
 python3 - "$repo_dir" "$output_dir" <<'PY'
 from pathlib import Path

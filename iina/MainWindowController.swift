@@ -2817,6 +2817,7 @@ class MainWindowController: PlayerWindowController {
   func applyRestartWindowFrame(_ frame: NSRect) {
     guard let window, frame.width > 0, frame.height > 0 else { return }
     shouldApplyInitialWindowSize = false
+    windowSizingFileGeneration = player.info.trackSelectionGeneration
     window.setFrame(frame, display: false, animate: false)
     let size = player.videoSizeForDisplay
     establishVideoTransformWindowReference(windowSize: frame.size,

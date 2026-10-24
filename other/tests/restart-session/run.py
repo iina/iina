@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import plistlib
@@ -8,7 +9,11 @@ import tempfile
 import uuid
 
 ROOT = Path(__file__).resolve().parents[3]
-CACHE = (ROOT / 'build/sidebar-osd-tests/module-cache').resolve()
+parser = argparse.ArgumentParser()
+parser.add_argument('--module-cache', type=Path, default=ROOT / 'build/sidebar-osd-tests/module-cache')
+parser.add_argument('--output', type=Path, default=ROOT / 'build/restart-session-2026-10-24')
+args = parser.parse_args()
+CACHE = args.module_cache.resolve()
 if not CACHE.is_dir():
     raise SystemExit(f'Reuse an existing compiler cache: {CACHE}')
 
@@ -68,6 +73,17 @@ session = (ROOT / 'iina/AppRestartSession.swift').read_text()
 capture = session.split('static func capture(', 1)[1].split('static func restore(', 1)[0]
 check('let players = PlayerCore.playerCores.filter' in capture and 'window.isVisible' not in capture,
       'capture includes initialized loaded cores even when minimized, hidden or absent from orderedWindows')
+check('player.playbackStateForRestart()' in capture and 'player.restorePlaybackStateAfterRestart(state)' in session,
+      'current processing state has an explicit capture and restore independent of watch-later')
+
+def extract(text, marker):
+    start = text.index(marker)
+    end = text.index('{', start) + 1
+    depth = 1
+    while depth:
+        depth += (text[end] == '{') - (text[end] == '}')
+        end += 1
+    return text[start:end]
 
 with tempfile.TemporaryDirectory(prefix='iina-restart-session-') as temporary:
     bundle = Path(temporary) / 'RestartSessionChecks.app'
@@ -82,8 +98,15 @@ with tempfile.TemporaryDirectory(prefix='iina-restart-session-') as temporary:
         'LSUIElement': True,
         'NSPrincipalClass': 'NSApplication',
     }))
+    support = Path(temporary) / 'TestDoubles.swift'
+    support.write_text(Path(__file__).with_name('TestDoubles.swift').read_text().replace(
+        '// PRODUCTION_RESTART_BRIDGES', '\n'.join(extract(player, marker) for marker in [
+            '  private func restartTracks()', '  func playbackStateForRestart()',
+            '  func restorePlaybackStateAfterRestart('])))
     files = [ROOT / 'iina/AppRestartSession.swift', ROOT / 'iina/AppRestart.swift',
-             Path(__file__).with_name('TestDoubles.swift'), Path(__file__).with_name('main.swift')]
+             *[ROOT / f'iina/{name}.swift' for name in ['TrackProcessingState', 'TrackAudioProcessing',
+                                                       'TrackVideoProcessing', 'TrackSelectionState']],
+             support, Path(__file__).with_name('main.swift')]
     subprocess.run(['xcrun', 'swiftc', '-target', 'arm64-apple-macos12',
                     '-module-cache-path', str(CACHE), *map(str, files), '-o', str(executable)], check=True)
     completed = subprocess.run([str(executable)], capture_output=True, text=True, timeout=30)
@@ -95,9 +118,10 @@ with tempfile.TemporaryDirectory(prefix='iina-restart-session-') as temporary:
         'runtime': completed.stdout.strip(),
         'sourcePlacementChecks': source_checks,
         'deploymentTarget': 'arm64-apple-macos12',
-        'productionSources': {str(file.relative_to(ROOT)): hashlib.sha256(file.read_bytes()).hexdigest() for file in files[:2]},
-        'boundaries': 'Actual unmodified coordinator and model; controlled engine/window doubles. No app activation or real media. Full-player QA separate.',
+        'productionSources': {str(file.relative_to(ROOT)): hashlib.sha256(file.read_bytes()).hexdigest() for file in files[:-2]},
+        'playerBridgeSourceSHA256': hashlib.sha256(player.encode()).hexdigest(),
+        'boundaries': 'Actual coordinator, models and export/import bridges; controlled engine/graph/window doubles. No app activation or real media. Full-player QA separate.',
     }
-    output = ROOT / 'build/restart-session-2026-10-24/model-lifecycle-checks.json'
+    output = args.output / 'model-lifecycle-checks.json'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + '\n')

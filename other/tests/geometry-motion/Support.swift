@@ -15,6 +15,8 @@ enum AccessibilityPreferences {
   static var motionReductionEnabled=false
   static func adjustedDuration(_ value:TimeInterval)->TimeInterval { value }
 }
+// Restart bookkeeping is outside the geometry animation boundary.
+enum AppRestartSession { static func seekStarted(_ player: GeometrySeekFixture) {} }
 enum ClockTrace {
   static var policies:[(TimeInterval,CropTransitionOverlay.AnimationCurve,Bool)]=[]
   static var advances:[(Double)->Void]=[]

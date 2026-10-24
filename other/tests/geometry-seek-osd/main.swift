@@ -45,6 +45,8 @@ final class FeedbackOrigins {
   var resets = 0
   func reset() { resets += 1 }
 }
+// Restart bookkeeping is outside seek-feedback classification.
+enum AppRestartSession { static func seekStarted(_ player: Player) {} }
 final class Player {
   enum State { case paused, playing, stopped; var active: Bool { self != .stopped }; var loaded: Bool { active } }
   final class Info {

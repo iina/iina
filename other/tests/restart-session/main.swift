@@ -63,6 +63,69 @@ expect(AppRestartSession.recoveredFrame(frame.rect, on: []) == frame.rect, "no d
 let original = AppRestartSession.Snapshot(windows: [saved()])
 let encoded = try PropertyListEncoder().encode(original)
 expect(AppRestartSession.Snapshot.decode(encoded) == original, "lossless snapshot round trip")
+expect(AppRestartSession.Snapshot.decode(encoded)?.windows.first?.playbackState == nil,
+       "legacy window payload without processing state remains readable")
+let editedOutput = PlayerCore()
+editedOutput.restartOptionDefaults = ["hwdec": "auto", "brightness": "0", "contrast": "0"]
+editedOutput.restartVideoFilterDefault = "startup-vf"
+editedOutput.restartAudioFilterDefault = "startup-af"
+editedOutput.mpv.strings = ["hwdec": "no", "brightness": "23", "contrast": "0", "vf": "edited-vf", "af": "edited-af"]
+let editedOutputState = editedOutput.playbackStateForRestart()!
+expect(editedOutputState.options == ["hwdec": "no", "brightness": "23"],
+       "unchanged startup settings are omitted from the runtime handoff")
+let newlyConfigured = PlayerCore()
+newlyConfigured.restartOptionDefaults = ["hwdec": "videotoolbox", "brightness": "0", "contrast": "12"]
+newlyConfigured.restartVideoFilterDefault = "newly-requested-vf"
+newlyConfigured.restartAudioFilterDefault = "startup-af"
+newlyConfigured.mpv.strings = ["hwdec": "videotoolbox", "brightness": "0", "contrast": "12", "vf": "newly-requested-vf", "af": "startup-af"]
+newlyConfigured.restorePlaybackStateAfterRestart(editedOutputState)
+expect(newlyConfigured.mpv.strings["hwdec"] == "videotoolbox" && newlyConfigured.mpv.strings["contrast"] == "12",
+       "new initialization settings win over older decoder edits and unchanged startup controls")
+expect(newlyConfigured.mpv.strings["brightness"] == "23" && newlyConfigured.mpv.strings["af"] == "edited-af",
+       "deliberate per-window edits survive when the initialization baseline is unchanged")
+expect(newlyConfigured.mpv.strings["vf"] == "newly-requested-vf",
+       "changed startup filters take precedence over the old per-window filter chain")
+let outputCropEditor = PlayerCore()
+outputCropEditor.mpv.strings["vf"] = ""
+outputCropEditor.mainWindow.isCropTransitionInProgress = true
+outputCropEditor.mainWindow.interactiveMode.onExit = { discarding in
+  outputCropEditor.mainWindow.transitionEvents.append("exit")
+  if !discarding {
+    outputCropEditor.mpv.strings["vf"] = "@iina_crop:crop=300:160:2:4"
+    outputCropEditor.cropDescription = "Custom"
+  }
+}
+expect(outputCropEditor.playbackStateForRestart()?.videoFilters == "@iina_crop:crop=300:160:2:4",
+       "Restart capture exits the output crop editor by restoring its previously committed crop")
+expect(outputCropEditor.mainWindow.transitionEvents == ["interrupt", "cancel", "exit"],
+       "crop/geometry transitions settle before the editor restores its committed output")
+let oldSelectionPolicy = PlayerCore()
+oldSelectionPolicy.info.audioTracks = [MPVTrack(1, .audio, sourceID: 1), MPVTrack(2, .audio, sourceID: 2)]
+oldSelectionPolicy.info.videoTracks = [MPVTrack(1, .video, sourceID: 1), MPVTrack(2, .video, sourceID: 2)]
+oldSelectionPolicy.info.subTracks = [MPVTrack(1, .sub, sourceID: 1), MPVTrack(2, .sub, sourceID: 2)]
+oldSelectionPolicy.mpv.integers = ["aid": 1, "vid": 1, "sid": 1, "secondary-sid": 0]
+oldSelectionPolicy.restartSelectionDefaults = ["aid": "1", "vid": "1", "sid": "1", "alang": "en", "slang": "en"]
+let oldSelectionState = oldSelectionPolicy.playbackStateForRestart()!
+let newSelectionPolicy = PlayerCore()
+newSelectionPolicy.info.audioTracks = oldSelectionPolicy.info.audioTracks
+newSelectionPolicy.info.videoTracks = oldSelectionPolicy.info.videoTracks
+newSelectionPolicy.info.subTracks = oldSelectionPolicy.info.subTracks
+newSelectionPolicy.restartSelectionDefaults = ["aid": "2", "vid": "2", "sid": "2", "alang": "en", "slang": "en"]
+newSelectionPolicy.mpv.integers = ["aid": 2, "vid": 2, "sid": 2, "secondary-sid": 0]
+newSelectionPolicy.getSelectedTracks()
+newSelectionPolicy.restorePlaybackStateAfterRestart(oldSelectionState)
+expect(newSelectionPolicy.restoredMembership.last?.0 == [2] && newSelectionPolicy.restoredMembership.last?.1 == [2],
+       "new aid/vid startup choices remain selected when no per-window track edit was made")
+expect(newSelectionPolicy.info.sid == 2 && newSelectionPolicy.info.secondSid == 0,
+       "new primary subtitle startup choice is not overwritten by the old role")
+newSelectionPolicy.restartSelectionDefaults = oldSelectionPolicy.restartSelectionDefaults
+newSelectionPolicy.restartSelectionDefaults["alang"] = "ja"
+newSelectionPolicy.restartSelectionDefaults["slang"] = "ja"
+newSelectionPolicy.mpv.integers["aid"] = 2; newSelectionPolicy.mpv.integers["sid"] = 2
+newSelectionPolicy.getSelectedTracks()
+newSelectionPolicy.restorePlaybackStateAfterRestart(oldSelectionState)
+expect(newSelectionPolicy.restoredMembership.last?.0 == [2] && newSelectionPolicy.info.sid == 2,
+       "changed audio/subtitle language policy keeps the new engine's selected sources")
 var unknown = original; unknown.version = 2
 let unknownData = try PropertyListEncoder().encode(unknown)
 expect(AppRestartSession.Snapshot.decode(unknownData) == nil, "future version rejected")
@@ -253,6 +316,43 @@ captured.info.currentURL = URL(string: saved().mediaURL)
 captured.info.state = .paused
 captured.mpv.volume = 12.25; captured.mpv.muted = true; captured.mpv.speed = 0.5
 captured.mpv.time = 42.125; captured.mpv.playlist = saved().playlist; captured.mpv.currentIndex = 1
+let externalDirectory = FileManager.default.temporaryDirectory.appendingPathComponent("iina-restart-tracks-\(UUID())")
+try FileManager.default.createDirectory(at: externalDirectory, withIntermediateDirectories: true)
+defer { try? FileManager.default.removeItem(at: externalDirectory) }
+let externalAudio = externalDirectory.appendingPathComponent("audio.mka")
+let externalVideo = externalDirectory.appendingPathComponent("video.mkv")
+let externalSubtitle = externalDirectory.appendingPathComponent("sub.srt")
+let externalLUT = externalDirectory.appendingPathComponent("look.cube")
+for url in [externalAudio, externalVideo, externalSubtitle, externalLUT] { try Data().write(to: url) }
+captured.info.audioTracks = [MPVTrack(1, .audio, sourceID: 1), MPVTrack(4, .audio, sourceID: 0, file: externalAudio.path)]
+captured.info.videoTracks = [MPVTrack(2, .video, sourceID: 2), MPVTrack(8, .video, sourceID: 0, file: externalVideo.path)]
+captured.info.subTracks = [MPVTrack(1, .sub, sourceID: 3), MPVTrack(9, .sub, sourceID: 0, file: externalSubtitle.path)]
+captured.info.audioTrackOrder = [4, 1]; captured.info.videoTrackOrder = [8, 2]
+captured.info.mixedAudioTrackIDs = [1, 4]; captured.info.layeredVideoTrackIDs = [8, 2]
+captured.mpv.integers = ["aid": 1, "vid": 2, "sid": 1, "secondary-sid": 9]
+captured.scopedTrackSettings.audio[4] = AudioTrackProcessing(delay: -0.125, gains: [12, -12, 3, 0, 0, 0, 0, 0, 0, 0])
+var videoProfile = VideoTrackProcessing()
+videoProfile.rotation = 90; videoProfile.aspect = "4:3"
+videoProfile.crop = TrackVideoCrop(x: 2, y: 4, width: 300, height: 160)
+videoProfile.cropDescription = "Custom"; videoProfile.lutPath = externalLUT.path; videoProfile.brightness = 17
+captured.scopedTrackSettings.video[8] = videoProfile
+captured.scopedTrackSettings.setTarget(4, for: .audioEQ)
+captured.scopedTrackSettings.setTarget(8, for: .videoColor)
+captured.mpv.strings = ["video-aspect-override": "4:3", "video-rotate": "90", "video-zoom": "1.25",
+  "brightness": "23", "audio-delay": "0.2", "secondary-sub-delay": "-0.3", "sub-visibility": "no",
+  "sub-font-size": "41", "secondary-sub-font-size": "28", "ab-loop-a": "12.5", "ab-loop-b": "30",
+  "vf": "@iina_crop:crop=300:160:2:4,@lyina_lut:lavfi=[lut3d=file=look.cube]", "af": "@iina_aeq:lavfi=[equalizer=f=100:g=3]"]
+captured.aspectDescription = "4:3"; captured.cropDescription = "Custom"
+let committedVF = captured.mpv.strings["vf"]!
+captured.mpv.strings["vf"] = ""
+captured.info.layeredVideoTrackIDs = [8]
+captured.mainWindow.interactiveMode.onExit = { discarding in
+  if !discarding {
+    captured.mpv.strings["vf"] = committedVF
+    captured.info.layeredVideoTrackIDs = [8, 2]
+  }
+}
+expect(!captured.mpv.getFlag("save-position-on-quit"), "processing regression explicitly disables watch-later saving")
 captured.mainWindow.window?.testVisible = false
 captured.mainWindow.window?.testMinimized = true
 captured.mainWindow.window?.setFrame(frame.rect, display: false)
@@ -302,6 +402,69 @@ expect(minimizedSnapshot.volume == 12.25 && minimizedSnapshot.muted && minimized
        "capture stores actual per-window playback scalars")
 expect(minimizedSnapshot.frame == frame, "minimized rectangle preserved")
 expect(minimizedSnapshot.playlistIndex == 1 && minimizedSnapshot.playlist == saved().playlist, "capture retains playlist/current index")
+let capturedPlayback = minimizedSnapshot.playbackState!
+expect(capturedPlayback.processing == captured.scopedTrackSettings,
+       "actual capture bridge stores scoped audio/video profiles and editing targets without watch-later")
+expect(capturedPlayback.activeAudio == [1, 4] && capturedPlayback.activeVideo == [8, 2],
+       "capture preserves mixed audio membership and ordered video layers")
+expect(capturedPlayback.videoFilters == committedVF,
+       "a source crop preview restores master output and the original layered selection before capture")
+expect(capturedPlayback.videoFilters == captured.mpv.strings["vf"] && capturedPlayback.audioFilters == captured.mpv.strings["af"],
+       "capture includes output crop/LUT and master audio filters")
+let playbackRoundTrip = AppRestartSession.Snapshot.decode(try PropertyListEncoder().encode(quitSnapshot))!
+expect(playbackRoundTrip == quitSnapshot, "complete processing payload survives actual property-list handoff")
+var invalidPlayback = capturedPlayback; invalidPlayback.version = 99
+var invalidPlaybackWindow = minimizedSnapshot; invalidPlaybackWindow.playbackState = invalidPlayback
+expect(invalidPlaybackWindow.sanitized?.playbackState == nil && invalidPlaybackWindow.sanitized != nil,
+       "unknown optional processing payload cannot discard an otherwise valid player window")
+invalidPlayback = capturedPlayback; invalidPlayback.processing.audio[4]?.delay = .nan
+expect(invalidPlayback.sanitized == nil, "nonfinite scoped processing rejected before engine restoration")
+let reusedExternalID = AppRestartSession.Track(id: 4, type: "audio", sourceID: 99,
+  externalFilename: externalVideo.path, isExternal: true, index: 0)
+expect(capturedPlayback.trackMapping(type: "audio", available: [reusedExternalID]).isEmpty,
+       "external identity never falls back to a reused numeric ID from another file")
+var noSourceID = capturedPlayback
+noSourceID.tracks = [AppRestartSession.Track(id: 8, type: "video", sourceID: nil,
+  externalFilename: nil, isExternal: false, index: 0)]
+let reordered = [AppRestartSession.Track(id: 2, type: "video", sourceID: nil, externalFilename: nil, isExternal: false, index: 0),
+                 AppRestartSession.Track(id: 8, type: "video", sourceID: nil, externalFilename: nil, isExternal: false, index: 1)]
+expect(noSourceID.trackMapping(type: "video", available: reordered)[8] == 8,
+       "a stable embedded track ID takes priority over its former list index")
+PlayerCore.onOpen = { player in
+  player.info.audioTracks = [MPVTrack(11, .audio, sourceID: 1), MPVTrack(44, .audio, sourceID: 0, file: externalAudio.absoluteString)]
+  player.info.videoTracks = [MPVTrack(22, .video, sourceID: 2)]
+  player.info.subTracks = [MPVTrack(31, .sub, sourceID: 3)]
+  player.mpv.onTrackAdd = { command, file in
+    if command == "video-add" { player.info.videoTracks.append(MPVTrack(88, .video, sourceID: 0, file: file)) }
+    if command == "sub-add" { player.info.subTracks.append(MPVTrack(99, .sub, sourceID: 0, file: file)) }
+  }
+}
+let processingPlayer = begin([minimizedSnapshot])[0]
+load(processingPlayer)
+expect(!processingPlayer.mpv.savePositionOnQuit, "new process fixture has no watch-later fallback")
+expect(processingPlayer.mpv.trackAdds.map(\.0) == ["video-add", "sub-add"],
+       "external paths reopen only missing track types and reuse already loaded canonical file URLs")
+expect(processingPlayer.restoredMembership.last?.0 == [11, 44] && processingPlayer.restoredMembership.last?.1 == [88, 22],
+       "actual restore bridge remaps mixed/layered membership after external IDs change")
+expect(processingPlayer.scopedTrackSettings.audio[44] == capturedPlayback.processing.audio[4] &&
+       processingPlayer.scopedTrackSettings.video[88] == videoProfile,
+       "source delay/EQ/crop/rotation/color/LUT survive changed track IDs")
+expect(processingPlayer.scopedTrackSettings.audioTarget == 44 && processingPlayer.scopedTrackSettings.videoTarget == 88,
+       "editing targets follow stable source identities")
+expect(processingPlayer.info.audioTrackOrder == [44, 11] && processingPlayer.info.videoTrackOrder == [88, 22],
+       "source orders restore independently from playback membership")
+expect(processingPlayer.info.sid == 31 && processingPlayer.info.secondSid == 99,
+       "primary and secondary subtitle roles follow remapped embedded and external sources")
+expect(processingPlayer.mpv.strings["vf"] == capturedPlayback.videoFilters &&
+       processingPlayer.mpv.strings["af"] == capturedPlayback.audioFilters,
+       "actual restore bridge writes output filters independently of watch-later")
+expect(capturedPlayback.options.allSatisfy { processingPlayer.mpv.strings[$0.key] == $0.value },
+       "geometry, colors, delays, subtitle styles and loop controls restore before completion")
+expect(processingPlayer.mpv.paused && processingPlayer.restoredProcessing.count == 1,
+       "processing restoration happens once while the media remains paused")
+restartSeek(processingPlayer)
+expect(!AppRestartSession.isRestoring(processingPlayer), "processing handoff retains the existing seek/window completion barrier")
+PlayerCore.onOpen = nil
 expect(quitSnapshot.windows.contains { $0.mediaURL == saved("hidden").mediaURL }, "hidden loaded ordinary window retained")
 captured.mpv.time = 123
 AppRestart.captureSessionIfRequested(defaults: defaults)

@@ -2,7 +2,7 @@
 set -eu
 test_dir="$(cd "$(dirname "$0")" && pwd)"
 repo_dir="$(cd "$test_dir/../../.." && pwd)"
-output_dir="$repo_dir/build/plugin-selector-tests"
+output_dir="${PLUGIN_SELECTOR_OUTPUT_DIR:-$repo_dir/build/plugin-selector-tests}"
 mkdir -p "$output_dir/module-cache"
 cat "$test_dir/Support.swift" "$repo_dir/iina/ConstraintsSugar.swift" "$repo_dir/iina/ScrollSelectionControl.swift" "$repo_dir/iina/PluginViewController.swift" "$test_dir/main.swift" > "$output_dir/main.swift"
 xcrun swiftc -module-cache-path "$output_dir/module-cache" "$output_dir/main.swift" -o "$output_dir/plugin-selector-tests"

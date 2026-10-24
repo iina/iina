@@ -27,6 +27,10 @@ geometry = extract((repo/'iina/InteractiveMode.swift').read_text(), 'struct Crop
 ext = (repo/'iina/Extensions.swift').read_text()
 helpers = '\n'.join(extract(ext,m) for m in ['  var aspect:', '  func centeredRect(in rect:', '  func crop(withAspect aspectRect:'])
 support = (repo/'other/tests/video-geometry-session/Support.swift').read_text().replace('// PRODUCTION_METHODS', methods)
+restart = (repo/'iina/AppRestartSession.swift').read_text()
+option_start = restart.index('    static let ', restart.index('  struct PlaybackState:'))
+option_names = restart[option_start:restart.index('    var version =', option_start)]
+support = support.replace('// PRODUCTION_RESTART_OPTION_NAMES', option_names)
 source = '\n'.join([
     (repo/'iina/Regex.swift').read_text(), (repo/'iina/Aspect.swift').read_text(),
     (repo/'iina/MPVFilter.swift').read_text(), (repo/'iina/TrackSelectionState.swift').read_text(),

@@ -14,7 +14,7 @@ enum TrackSettingsGroup: String, CaseIterable {
 }
 
 /// One editing context per media type, independent of playback membership.
-struct TrackProcessingState {
+struct TrackProcessingState: Codable, Equatable {
   private(set) var audioTarget = 0
   private(set) var videoTarget = 0
   var audio: [Int: AudioTrackProcessing] = [:]

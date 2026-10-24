@@ -6,7 +6,7 @@
 import Foundation
 
 /// Per-source processing precedes mixing; mpv's audio-delay and af stay master controls.
-struct AudioTrackProcessing: Equatable {
+struct AudioTrackProcessing: Codable, Equatable {
   var delay: Double = 0
   var gains: [Double] = Array(repeating: 0, count: 10)
 

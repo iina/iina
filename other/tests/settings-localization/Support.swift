@@ -1,4 +1,6 @@
 import Cocoa
+typealias AccentSwitch = NSSwitch
+
 
 // Only unrelated UIHelper dependencies are fixtures. Localization uses a real
 // main bundle with the repository's production resources and no defaults writes.

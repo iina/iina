@@ -20,6 +20,11 @@ enum MPVOption {
   enum Window { static let windowScale = "window-scale" }
 }
 enum MPVProperty { static let vf = "vf", af = "af" }
+enum AppRestartSession {
+  enum PlaybackState {
+    // PRODUCTION_RESTART_OPTION_NAMES
+  }
+}
 enum AppData {
   static let cropsInPanel = ["None", "4:3", "16:9", "16:10", "21:9", "5:4"]
   static let aspects = ["4:3", "5:4", "16:9", "16:10", "1:1", "3:2", "2.21:1", "2.35:1", "2.39:1"]
@@ -78,6 +83,10 @@ class PlayerFixture {
   var mainWindow: WindowFixture! = WindowFixture()
   var scopedTrackSettings = TrackProcessingState()
   var defaultVideoGeometry: MediaVideoGeometryState?
+  var restartOptionDefaults: [String: String]?
+  var restartSelectionDefaults: [String: String] = [:]
+  var restartVideoFilterDefault: String?
+  var restartAudioFilterDefault: String?
   var videoGeometrySession: [URL: MediaVideoGeometryState] = [:]
   var videoGeometryMediaURL: URL?
   var videoGeometryIsLoaded = false

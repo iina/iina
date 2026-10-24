@@ -1,4 +1,6 @@
 import Cocoa
+typealias AccentSlider = NSSlider
+
 struct LayoutValue {
   let value: CGFloat
   func get() -> CGFloat { value }

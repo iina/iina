@@ -2,7 +2,7 @@
 set -eu
 test_dir="$(cd "$(dirname "$0")" && pwd)"
 repo_dir="$(cd "$test_dir/../../.." && pwd)"
-output_dir="$repo_dir/build/floating-osc-scale-tests"
+output_dir="${FLOATING_OSC_OUTPUT_DIR:-$repo_dir/build/floating-osc-scale-tests}"
 mkdir -p "$output_dir/module-cache"
 # Compile the same clamping extension used by the production placement helper.
 python3 - "$repo_dir" "$output_dir" <<'PYCLAMP'

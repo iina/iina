@@ -43,3 +43,11 @@ Track/output coverage starts without a transform-setter flag, switches video
 between None and 720p/4K/portrait tracks, checks direct MPV video output changes,
 and audits audio None/1/2 selection and native volume control visibility. Ordinary
 new-file initialization and explicit scale actions remain covered separately.
+
+Resize timing coverage exercises all three existing settings, every startup scale,
+manual/playlist loads, physical/logical resolution, locked/unlocked windows and
+fullscreen return geometry. `Do not resize` retains the established reference
+across files; the other modes establish a new reference when their file trigger
+matches. Duplicate loading notifications, Crop/Reset while loading, layout-only
+refreshes, preference changes, reused cores and explicit restart restoration
+cannot reapply a consumed file-size choice or revive an old reference.

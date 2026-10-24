@@ -1,4 +1,5 @@
 import Cocoa
+typealias AccentSegmentedControl = NSSegmentedControl
 struct AccessibilityPreferences {
   static var motionReductionEnabled = false
   static var disableAnimations = false

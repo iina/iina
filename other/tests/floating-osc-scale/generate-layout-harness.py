@@ -66,9 +66,6 @@ panel=panel.replace('// QUICK_CONSTRAINTS',section((repo/'iina/Utility.swift').r
 panel=panel.replace('// PANEL_SETUP',section(osc,'    self.oscTopView = NSStackView()','    prefObserver.add(.useLiquidGlassOSC'))
 panel += '\nenum AppData {\n' + '\n'.join(line for line in (repo/'iina/AppData.swift').read_text().splitlines() if 'static let floatingOSCWindowMinSize =' in line) + '\n}\n'
 panel += '\nextension NSSize {\n' + extract((repo/'iina/Extensions.swift').read_text(), '  var aspect: CGFloat {') + '\n' + extract((repo/'iina/Extensions.swift').read_text(), '  func grow(toSize size:') + '\n}\n'
+panel += '\n' + extract((repo/'iina/MainWindow.swift').read_text(), 'struct WindowResizeSession {') + '\n'
 files=['iina/TranslucentView.swift','iina/ConstraintsSugar.swift','iina/TimeLabelOverflowedStackView.swift','iina/TimeLabelOverflowedView.swift']
 (output/'main.swift').write_text(base[:base.index('struct Preference')]+(tests/'LayoutSupport.swift').read_text()+panel+'\n'+ '\n'.join((repo/f).read_text() for f in files)+'\n'+base[base.index('struct Preference'):])
-
-# Proportional resize sessions belong to the geometry part, not this extraction.
-text=(output/'main.swift').read_text().replace('  var windowResizeSession: WindowResizeSession?\n', '')
-(output/'main.swift').write_text(text)

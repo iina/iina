@@ -10,6 +10,116 @@ import Cocoa
 enum AppRestartSession {
   static let preferenceKey = "playerSessionAfterSettingsRestart"
 
+  struct Track: Codable, Equatable {
+    var id: Int
+    var type: String
+    var sourceID: Int?
+    var externalFilename: String?
+    var isExternal: Bool
+    var index: Int
+
+    static func canonicalFilename(_ filename: String) -> String {
+      if let url = URL(string: filename), url.scheme != nil {
+        return url.isFileURL ? url.standardizedFileURL.path : url.absoluteString
+      }
+      return URL(fileURLWithPath: filename).standardizedFileURL.path
+    }
+  }
+
+  /// Only the immediate restart owns this payload; no watch-later settings or
+  /// raw lavfi-complex graph are needed to reconstruct the player's controls.
+  struct PlaybackState: Codable, Equatable {
+    static let selectionOptionNames = [
+      "audio": ["aid", "alang", "audio-file-auto", "audio-file-paths"],
+      "video": ["vid", "vlang", "cover-art-auto", "audio-display"],
+      "sub": ["sid", "secondary-sid", "slang", "sub-auto", "sub-file-paths", "subs-match-os-language",
+              "subs-with-matching-audio", "subs-fallback", "subs-forced-fallback", "sub-forced-only"]
+    ]
+    static let optionNames = MediaVideoGeometryState.optionNames + [
+      "brightness", "contrast", "saturation", "gamma", "hue", "deinterlace", "hwdec",
+      "audio-delay", "sub-delay", "sub-pos", "sub-visibility", "sub-scale", "sub-font",
+      "sub-font-size", "sub-color", "sub-outline-size", "sub-outline-color", "sub-back-color",
+      "secondary-sub-delay", "secondary-sub-pos", "secondary-sub-visibility",
+      "secondary-sub-scale", "secondary-sub-font", "secondary-sub-font-size",
+      "secondary-sub-color", "secondary-sub-outline-size", "secondary-sub-outline-color", "secondary-sub-back-color",
+      "ab-loop-a", "ab-loop-b", "ab-loop-count", "loop-file", "loop-playlist"
+    ]
+    var version = 1
+    var options: [String: String] = [:]
+    var optionDefaults: [String: String] = [:]
+    var selectionDefaults: [String: String] = [:]
+    var videoFilters: String?
+    var audioFilters: String?
+    var videoFilterDefault: String?
+    var audioFilterDefault: String?
+    var aspectDescription = "Default"
+    var cropDescription = "None"
+    var tracks: [Track] = []
+    var processing = TrackProcessingState()
+    var activeAudio: [Int] = []
+    var activeVideo: [Int] = []
+    var audioOrder: [Int] = []
+    var videoOrder: [Int] = []
+    var primarySubtitle = 0
+    var secondarySubtitle = 0
+
+    var sanitized: PlaybackState? {
+      func valid(_ string: String) -> Bool { !string.contains("\0") && string.utf8.count <= 262_144 }
+      let audioIDs = Set(tracks.filter { $0.type == "audio" }.map(\.id))
+      let videoIDs = Set(tracks.filter { $0.type == "video" }.map(\.id))
+      let subtitleIDs = Set(tracks.filter { $0.type == "sub" }.map(\.id)).union([0])
+      guard version == 1, tracks.count <= 4_096,
+            tracks.allSatisfy({ $0.id > 0 && (0..<4_096).contains($0.index) &&
+              ["audio", "video", "sub"].contains($0.type) &&
+              ($0.externalFilename.map(valid) ?? !$0.isExternal) }),
+            Set(tracks.map { "\($0.type):\($0.id)" }).count == tracks.count,
+            [options, optionDefaults].allSatisfy({ $0.keys.allSatisfy({ Self.optionNames.contains($0) }) && $0.values.allSatisfy(valid) }),
+            selectionDefaults.keys.allSatisfy({ key in Self.selectionOptionNames.values.contains(where: { $0.contains(key) }) }),
+            selectionDefaults.values.allSatisfy(valid),
+            [aspectDescription, cropDescription].allSatisfy(valid),
+            [videoFilters, audioFilters, videoFilterDefault, audioFilterDefault].compactMap({ $0 }).allSatisfy(valid),
+            [activeAudio, audioOrder].allSatisfy({ Set($0).count == $0.count && Set($0).isSubset(of: audioIDs) }),
+            [activeVideo, videoOrder].allSatisfy({ Set($0).count == $0.count && Set($0).isSubset(of: videoIDs) }),
+            subtitleIDs.contains(primarySubtitle), subtitleIDs.contains(secondarySubtitle),
+            primarySubtitle == 0 || primarySubtitle != secondarySubtitle,
+            Set(processing.audio.keys).isSubset(of: audioIDs), Set(processing.video.keys).isSubset(of: videoIDs),
+            audioIDs.union([0]).contains(processing.audioTarget), videoIDs.union([0]).contains(processing.videoTarget),
+            processing.audio.values.allSatisfy({ $0.delay.isFinite && abs($0.delay) <= 5 &&
+              $0.gains.count == 10 && $0.gains.allSatisfy({ $0.isFinite && abs($0) <= 12 }) }),
+            processing.video.values.allSatisfy({ value in
+              [0, 90, 180, 270].contains(value.rotation) &&
+                [value.brightness, value.contrast, value.saturation, value.gamma, value.hue].allSatisfy({ (-100...100).contains($0) }) &&
+                valid(value.aspect) && valid(value.cropDescription) && (value.lutPath.map(valid) ?? true) &&
+                (value.crop.map { $0.x >= 0 && $0.y >= 0 && $0.width > 0 && $0.height > 0 } ?? true)
+            }) else { return nil }
+      return self
+    }
+
+    /// External IDs depend on load order. Match their file and stream identity;
+    /// embedded tracks retain their demux source ID, with index as a fallback.
+    func trackMapping(type: String, available: [Track]) -> [Int: Int] {
+      var remaining = available.filter { $0.type == type }
+      var result: [Int: Int] = [:]
+      for saved in tracks where saved.type == type {
+        var match = remaining.firstIndex { candidate in
+          guard saved.isExternal == candidate.isExternal else { return false }
+          if saved.isExternal {
+            guard let filename = saved.externalFilename, let current = candidate.externalFilename,
+                  Track.canonicalFilename(filename) == Track.canonicalFilename(current) else { return false }
+            return saved.sourceID == nil || candidate.sourceID == nil || saved.sourceID == candidate.sourceID
+          }
+          if let sourceID = saved.sourceID { return candidate.sourceID == sourceID }
+          return candidate.id == saved.id
+        }
+        if match == nil, !saved.isExternal, saved.sourceID == nil {
+          match = remaining.firstIndex { !$0.isExternal && $0.index == saved.index }
+        }
+        if let match { result[saved.id] = remaining.remove(at: match).id }
+      }
+      return result
+    }
+  }
+
   struct Frame: Codable, Equatable {
     var x: Double
     var y: Double
@@ -44,6 +154,7 @@ enum AppRestartSession {
     var volume: Double = 50
     var muted: Bool = false
     var speed: Double = 1
+    var playbackState: PlaybackState?
 
     var sanitized: Window? {
       guard let url = URL(string: mediaURL), let scheme = url.scheme,
@@ -54,6 +165,7 @@ enum AppRestartSession {
             speed.isFinite, (0.01...100).contains(speed),
             frame.isValid, mainFrame.isValid, playlist.count <= 10_000 else { return nil }
       var result = self
+      result.playbackState = playbackState?.sanitized
       // Keep the current item/index together, including duplicate playlist paths.
       // A malformed playlist must not prevent reopening an otherwise valid window.
       if playlist.isEmpty || !playlist.indices.contains(playlistIndex) ||
@@ -182,6 +294,7 @@ extension AppRestartSession {
     let windows = players.compactMap { player -> Window? in
       guard let url = player.info.currentURL, let window = player.currentWindow,
             let mainWindow = player.mainWindow.window else { return nil }
+      let playbackState = player.playbackStateForRestart()
       player.getPlaylist()
       let playlist = player.info.playlist
       let index = playlist.firstIndex(where: \.isCurrent) ?? playlist.firstIndex(where: \.isPlaying) ?? 0
@@ -197,7 +310,8 @@ extension AppRestartSession {
                     pictureInPicture: player.mainWindow.pipStatus == .inPIP,
                     volume: player.mpv.getDouble(MPVOption.Audio.volume),
                     muted: player.mpv.getFlag(MPVOption.Audio.mute),
-                    speed: player.mpv.getDouble(MPVOption.PlaybackControl.speed)).sanitized
+                    speed: player.mpv.getDouble(MPVOption.PlaybackControl.speed),
+                    playbackState: playbackState).sanitized
     }
     guard let data = try? PropertyListEncoder().encode(Snapshot(windows: windows)),
           data.count <= 16 * 1_024 * 1_024 else {
@@ -246,6 +360,7 @@ extension AppRestartSession {
     item.generation = player.info.trackSelectionGeneration
     player.mpv.setFlag(MPVOption.PlaybackControl.pause, true)
     player.mpv.setFlag(MPVOption.Window.fullscreen, false)
+    if let state = item.saved.playbackState { player.restorePlaybackStateAfterRestart(state) }
     restorePlaybackScalars(item, player: player)
     player.info.state = .paused
     let duration = player.info.videoDuration?.second

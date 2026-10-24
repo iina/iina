@@ -59,3 +59,15 @@ unavailable/nonrestartable media retain their existing constraints.
 
 Later saves preferences without a special future-session handoff. Session
 restoration here belongs only to an immediate Settings-requested Restart.
+
+## Audit follow-up
+
+The restart suite additionally compiles the production playback-state export/import
+bridges and processing models. It verifies current output geometry/filters,
+source profiles and editing targets, audio mixes, video layers, external-source
+identity remapping, subtitle roles, and normal crop-editor cleanup with
+`save-position-on-quit` disabled. The follow-up suite passed 168 checks and 23
+production lifecycle placement checks. New initialization options/filters and
+track-selection/language policies win when their first-load baseline changes.
+Legacy windows without the optional playback payload remain readable. Native window, engine, and graph boundaries remain
+fixtures; full-player restart acceptance is a separate check.

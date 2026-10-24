@@ -29,17 +29,40 @@ enum MPVOption {
   enum PlaybackControl { static let pause = "pause"; static let speed = "speed" }
   enum Audio { static let volume = "volume"; static let mute = "mute" }
   enum Window { static let fullscreen = "fullscreen" }
+  enum TrackSelection { static let aid = "aid", vid = "vid", sid = "sid" }
+  enum Subtitles { static let secondarySid = "secondary-sid" }
 }
 enum MPVProperty {
   static let timePos = "time-pos"
   static let seekable = "seekable"
   static let seeking = "seeking"
+  static let vf = "vf", af = "af"
 }
-enum MPVCommand { case playlistClear, seek }
+struct MPVCommand: Equatable {
+  let rawValue: String
+  init(_ rawValue: String) { self.rawValue = rawValue }
+  static let playlistClear = MPVCommand("playlist-clear"), seek = MPVCommand("seek")
+}
 extension Notification.Name {
   static let iinaPlayerStopped = Notification.Name("test.player-stopped")
   static let iinaPlayerShutdown = Notification.Name("test.player-shutdown")
   static let iinaPlaylistChanged = Notification.Name("test.playlist-changed")
+  static let iinaTracklistChanged = Notification.Name("test.track-list")
+  static let iinaAIDChanged = Notification.Name("test.audio")
+  static let iinaVIDChanged = Notification.Name("test.video")
+  static let iinaSIDChanged = Notification.Name("test.subtitles")
+}
+final class MPVTrack {
+  enum TrackType: String { case audio, video, sub, secondSub }
+  var id: Int
+  let type: TrackType
+  var srcId: Int?
+  var externalFilename: String?
+  var isExternal = false
+  init(_ id: Int, _ type: TrackType, sourceID: Int? = nil, file: String? = nil) {
+    self.id = id; self.type = type; srcId = sourceID
+    externalFilename = file; isExternal = file != nil
+  }
 }
 enum TestPlayerState {
   case loading, loaded, playing, paused, stopping, idle, shuttingDown, shutDown
@@ -61,6 +84,23 @@ final class TestInfo {
   var currentURL: URL?
   var playlist: [TestPlaylistItem] = []
   var videoDuration: TestTime? = TestTime(second: 300)
+  var audioTracks: [MPVTrack] = []
+  var videoTracks: [MPVTrack] = []
+  var subTracks: [MPVTrack] = []
+  var audioTrackOrder: [Int] = []
+  var videoTrackOrder: [Int] = []
+  var mixedAudioTrackIDs: Set<Int> = []
+  var layeredVideoTrackIDs: [Int] = []
+  var aid: Int?, vid: Int?, sid: Int?, secondSid: Int?
+  func trackList(_ type: MPVTrack.TrackType) -> [MPVTrack] {
+    switch type { case .audio: return audioTracks; case .video: return videoTracks; default: return subTracks }
+  }
+  func activeTrackIDs(_ type: MPVTrack.TrackType) -> Set<Int> {
+    if type == .audio, !mixedAudioTrackIDs.isEmpty { return mixedAudioTrackIDs }
+    if type == .video, !layeredVideoTrackIDs.isEmpty { return Set(layeredVideoTrackIDs) }
+    let id = type == .audio ? aid : vid
+    return id.map { $0 > 0 ? [$0] : [] } ?? []
+  }
 }
 final class TestVideoView {
   var activeCount = 0
@@ -78,6 +118,17 @@ final class TestMainWindow {
   var pipStatus = PIPStatus.notInPIP
   let videoView = TestVideoView()
   var appliedFrames: [NSRect] = []
+  final class InteractiveMode {
+    var onExit: ((Bool) -> Void)?
+    func exit(discardingCrop: Bool = false) { onExit?(discardingCrop) }
+  }
+  let interactiveMode = InteractiveMode()
+  var videoAspectTransitionOriginalPanscan: Double?
+  func finishVideoAspectTransition() {}
+  var isCropTransitionInProgress = false
+  var transitionEvents: [String] = []
+  func interruptPlayerCropTransition() { transitionEvents.append("interrupt") }
+  func cancelCropExitTransition() { transitionEvents.append("cancel"); isCropTransitionInProgress = false }
   func applyRestartWindowFrame(_ frame: NSRect) {
     appliedFrames.append(frame)
     window?.setFrame(frame, display: false)
@@ -101,6 +152,17 @@ final class TestMPV {
   var playlist: [String] = []
   var currentIndex = 0
   var seekRequests: [(Double, String)] = []
+  var strings: [String: String] = [:]
+  var integers: [String: Int] = [:]
+  var onTrackAdd: ((String, String) -> Void)?
+  var trackAdds: [(String, String)] = []
+  var savePositionOnQuit = false
+  func getString(_ name: String) -> String? { strings[name] }
+  @discardableResult func setString(_ name: String, _ value: String) -> Int32 {
+    strings[name] = value; writes.append("\(name)=\(value)"); return 0
+  }
+  func setInt(_ name: String, _ value: Int) { integers[name] = value; writes.append("\(name)=\(value)") }
+  func getInt(_ name: String) -> Int { integers[name] ?? 0 }
   func getDouble(_ name: String) -> Double {
     reads += 1
     switch name { case MPVOption.Audio.volume: return volume; case MPVOption.PlaybackControl.speed: return speed; default: return time }
@@ -112,6 +174,7 @@ final class TestMPV {
     case MPVProperty.seeking: return seeking
     case MPVOption.Window.fullscreen: return fullscreen
     case MPVOption.Audio.mute: return muted
+    case "save-position-on-quit": return savePositionOnQuit
     default: return paused
     }
   }
@@ -132,6 +195,9 @@ final class TestMPV {
       currentIndex = 0
     } else if command == .seek {
       seekRequests.append((Double(args[0]!)!, args[1]!))
+    } else if command.rawValue.hasSuffix("-add"), let filename = args.first ?? nil {
+      trackAdds.append((command.rawValue, filename))
+      onTrackAdd?(command.rawValue, filename)
     }
     returnValueCallback?(command == .seek ? seekError : 0)
   }
@@ -151,7 +217,7 @@ final class PlayerCore: NSObject {
   }
   var isManagedByPlugin = false
   let info = TestInfo()
-  let mainWindow = TestMainWindow()
+  var mainWindow: TestMainWindow! = TestMainWindow()
   let miniPlayer = TestMiniPlayer()
   let mpv = TestMPV()
   var isInMiniPlayer = false
@@ -160,6 +226,39 @@ final class PlayerCore: NSObject {
   var openedURL: URL?
   var openResult: Int? = 1
   var logs: [String] = []
+  var scopedTrackSettings = TrackProcessingState()
+  var restartOptionDefaults: [String: String]?
+  var restartSelectionDefaults: [String: String] = [:]
+  var restartVideoFilterDefault: String?
+  var restartAudioFilterDefault: String?
+  var restoredProcessing: [TrackProcessingState] = []
+  var restoredMembership: [(Set<Int>, [Int])] = []
+  var aspectDescription = "Default", cropDescription = "None"
+  func getTrackInfo() {}
+  func getSelectedTracks() {
+    info.aid = mpv.getInt("aid"); info.vid = mpv.getInt("vid")
+    info.sid = mpv.getInt("sid"); info.secondSid = mpv.getInt("secondary-sid")
+  }
+  private func reconcileTrackGraph() {}
+  private func readVideoGeometry() -> MediaVideoGeometryState {
+    var result = MediaVideoGeometryState()
+    result.aspectDescription = aspectDescription; result.cropDescription = cropDescription
+    let active = info.activeTrackIDs(.video)
+    result.activeVideo = info.videoTrackOrder.filter { active.contains($0) }
+    result.activeVideo.append(contentsOf: active.sorted().filter { !result.activeVideo.contains($0) })
+    return result
+  }
+  private func syncVideoGeometryInfo(aspect: String, crop: String) {
+    aspectDescription = aspect; cropDescription = crop
+  }
+  private func applyTrackSelection(audio: Set<Int>, video: [Int], changedType: MPVTrack.TrackType,
+                                   soloID: Int, forceRebuild: Bool) -> Bool {
+    restoredProcessing.append(scopedTrackSettings)
+    restoredMembership.append((audio, video))
+    info.mixedAudioTrackIDs = audio; info.layeredVideoTrackIDs = video
+    return true
+  }
+  // PRODUCTION_RESTART_BRIDGES
   var currentWindow: NSWindow? { isInMiniPlayer ? miniPlayer.window : mainWindow.window }
   func openURLs(_ urls: [URL], shouldAutoLoad: Bool) -> Int? {
     autoLoadArgument = shouldAutoLoad

@@ -1,6 +1,6 @@
 import Foundation
 
-struct TrackVideoCrop: Equatable {
+struct TrackVideoCrop: Codable, Equatable {
   var x: Int
   var y: Int
   var width: Int
@@ -8,7 +8,7 @@ struct TrackVideoCrop: Equatable {
 }
 
 /// Per-source processing. Master controls remain native mpv output controls.
-struct VideoTrackProcessing: Equatable {
+struct VideoTrackProcessing: Codable, Equatable {
   var aspect: String = "Default"
   var crop: TrackVideoCrop? = nil
   var cropDescription: String = "None"

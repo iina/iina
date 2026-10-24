@@ -1593,6 +1593,10 @@ class PlayerCore: NSObject {
   var scopedTrackSettings = TrackProcessingState()
   var scopedCropPreview: ScopedTrackCropPreview?
   private var defaultVideoGeometry: MediaVideoGeometryState?
+  private var restartOptionDefaults: [String: String]?
+  private var restartSelectionDefaults: [String: String] = [:]
+  private var restartVideoFilterDefault: String?
+  private var restartAudioFilterDefault: String?
   private var videoGeometrySession: [URL: MediaVideoGeometryState] = [:]
   // info.currentURL can already name the replacement while the old file unloads.
   private var videoGeometryMediaURL: URL?
@@ -1619,6 +1623,133 @@ class PlayerCore: NSObject {
       self?.videoGeometrySession = sessions
       self?.defaultVideoGeometry = defaults
     }
+  }
+
+  private func restartTracks() -> [AppRestartSession.Track] {
+    [MPVTrack.TrackType.audio, .video, .sub].flatMap { type in
+      info.trackList(type).enumerated().map { index, track in
+        AppRestartSession.Track(id: track.id, type: type.rawValue, sourceID: track.srcId,
+                                externalFilename: track.externalFilename,
+                                isExternal: track.isExternal, index: index)
+      }
+    }
+  }
+
+  func playbackStateForRestart() -> AppRestartSession.PlaybackState? {
+    mainWindow?.interruptPlayerCropTransition()
+    if mainWindow?.isCropTransitionInProgress == true { mainWindow?.cancelCropExitTransition() }
+    mainWindow?.interactiveMode.exit()
+    let originalPanscan = mainWindow?.videoAspectTransitionOriginalPanscan
+    mainWindow?.finishVideoAspectTransition()
+    reconcileTrackGraph()
+    getTrackInfo()
+    getSelectedTracks()
+    let geometry = readVideoGeometry()
+    var state = AppRestartSession.PlaybackState()
+    state.tracks = restartTracks()
+    state.selectionDefaults = restartSelectionDefaults
+    for name in AppRestartSession.PlaybackState.optionNames {
+      let value = name == "panscan" ? originalPanscan.map { String($0) } ?? mpv.getString(name) : mpv.getString(name)
+      if value != restartOptionDefaults?[name] {
+        state.options[name] = value
+        state.optionDefaults[name] = restartOptionDefaults?[name]
+      }
+    }
+    let vf = mpv.getString(MPVProperty.vf) ?? "", af = mpv.getString(MPVProperty.af) ?? ""
+    if vf != restartVideoFilterDefault { state.videoFilters = vf; state.videoFilterDefault = restartVideoFilterDefault }
+    if af != restartAudioFilterDefault { state.audioFilters = af; state.audioFilterDefault = restartAudioFilterDefault }
+    state.aspectDescription = geometry.aspectDescription
+    state.cropDescription = geometry.cropDescription
+    state.processing = scopedTrackSettings
+    state.activeAudio = info.activeTrackIDs(.audio).sorted()
+    state.activeVideo = geometry.activeVideo
+    state.audioOrder = info.audioTrackOrder
+    state.videoOrder = info.videoTrackOrder
+    state.primarySubtitle = max(0, info.sid ?? 0)
+    state.secondarySubtitle = max(0, info.secondSid ?? 0)
+    return state.sanitized
+  }
+
+  func restorePlaybackStateAfterRestart(_ saved: AppRestartSession.PlaybackState) {
+    guard let saved = saved.sanitized else { return }
+    func restoresSelection(_ type: String) -> Bool {
+      (AppRestartSession.PlaybackState.selectionOptionNames[type] ?? []).allSatisfy {
+        saved.selectionDefaults[$0] == restartSelectionDefaults[$0]
+      }
+    }
+    let initialAudio = info.activeTrackIDs(.audio)
+    let initialVideo = info.activeTrackIDs(.video)
+    let initialPrimarySubtitle = info.sid ?? 0
+    let initialSecondarySubtitle = info.secondSid ?? 0
+    var available = restartTracks()
+    for track in saved.tracks where track.isExternal {
+      guard let filename = track.externalFilename,
+            !available.contains(where: { $0.type == track.type && $0.isExternal &&
+              $0.externalFilename.map(AppRestartSession.Track.canonicalFilename) ==
+                AppRestartSession.Track.canonicalFilename(filename) }) else { continue }
+      if let url = URL(string: filename), url.isFileURL {
+        guard FileManager.default.fileExists(atPath: url.path) else { continue }
+      } else if !filename.contains("://"), !FileManager.default.fileExists(atPath: filename) { continue }
+      mpv.command(MPVCommand("\(track.type)-add"), args: [filename, "cached"], checkError: false) { code in
+        if code < 0 { self.log("Restart session: unavailable external \(track.type) track \(filename)") }
+      }
+      getTrackInfo()
+      available = restartTracks()
+    }
+    let audioMap = saved.trackMapping(type: "audio", available: available)
+    let videoMap = saved.trackMapping(type: "video", available: available)
+    let subMap = saved.trackMapping(type: "sub", available: available)
+    var processing = TrackProcessingState()
+    for (id, value) in saved.processing.audio {
+      if let currentID = audioMap[id] { processing.audio[currentID] = value }
+    }
+    for (id, var value) in saved.processing.video {
+      if let path = value.lutPath, !FileManager.default.fileExists(atPath: path) { value.lutPath = nil }
+      if let currentID = videoMap[id] { processing.video[currentID] = value }
+    }
+    processing.setTarget(audioMap[saved.processing.audioTarget] ?? 0, for: .audioDelay)
+    processing.setTarget(videoMap[saved.processing.videoTarget] ?? 0, for: .videoGeometry)
+    let previousProcessing = scopedTrackSettings
+    scopedTrackSettings = processing
+    info.audioTrackOrder = saved.audioOrder.compactMap { audioMap[$0] }
+    info.videoTrackOrder = saved.videoOrder.compactMap { videoMap[$0] }
+    info.audioTrackOrder.append(contentsOf: info.audioTracks.map(\.id).filter { !info.audioTrackOrder.contains($0) })
+    info.videoTrackOrder.append(contentsOf: info.videoTracks.map(\.id).filter { !info.videoTrackOrder.contains($0) })
+    var audio = restoresSelection("audio") ? Set(saved.activeAudio.compactMap { audioMap[$0] }) : initialAudio
+    var video = restoresSelection("video") ? saved.activeVideo.compactMap { videoMap[$0] } : initialVideo.sorted()
+    if !saved.activeAudio.isEmpty && audio.isEmpty { audio = info.activeTrackIDs(.audio) }
+    if !saved.activeVideo.isEmpty && video.isEmpty { video = info.activeTrackIDs(.video).sorted() }
+    // Seed both native selections: a neutral handoff does not need a shared graph.
+    mpv.setInt(MPVOption.TrackSelection.aid, audio.sorted().first ?? 0)
+    mpv.setInt(MPVOption.TrackSelection.vid, video.first ?? 0)
+    getSelectedTracks()
+    if !applyTrackSelection(audio: audio, video: video, changedType: .video,
+                            soloID: video.first ?? 0, forceRebuild: true) {
+      scopedTrackSettings = previousProcessing
+      log("Restart session: source processing could not be restored")
+    }
+    mpv.setInt(MPVOption.TrackSelection.sid, 0)
+    mpv.setInt(MPVOption.Subtitles.secondarySid, 0)
+    mpv.setInt(MPVOption.TrackSelection.sid, restoresSelection("sub") ? subMap[saved.primarySubtitle] ?? 0 : initialPrimarySubtitle)
+    mpv.setInt(MPVOption.Subtitles.secondarySid, restoresSelection("sub") ? subMap[saved.secondarySubtitle] ?? 0 : initialSecondarySubtitle)
+    for name in AppRestartSession.PlaybackState.optionNames {
+      // Newly requested startup settings win over an older per-window edit.
+      guard saved.optionDefaults[name] == restartOptionDefaults?[name] else { continue }
+      if let value = saved.options[name], mpv.setString(name, value) < 0 {
+        log("Restart session: could not restore output option \(name)")
+      }
+    }
+    if let filters = saved.videoFilters, saved.videoFilterDefault == restartVideoFilterDefault,
+       mpv.setString(MPVProperty.vf, filters) < 0 { log("Restart session: could not restore video filters") }
+    if let filters = saved.audioFilters, saved.audioFilterDefault == restartAudioFilterDefault,
+       mpv.setString(MPVProperty.af, filters) < 0 { log("Restart session: could not restore audio filters") }
+    syncVideoGeometryInfo(aspect: saved.aspectDescription, crop: saved.cropDescription)
+    getSelectedTracks()
+    postNotification(.iinaTracklistChanged)
+    postNotification(.iinaTrackSettingsChanged)
+    postNotification(.iinaAIDChanged)
+    postNotification(.iinaVIDChanged)
+    postNotification(.iinaSIDChanged)
   }
 
   private func readVideoGeometry() -> MediaVideoGeometryState {
@@ -1664,7 +1795,16 @@ class PlayerCore: NSObject {
     videoGeometryMediaURL = info.currentURL.map { $0.isFileURL ? $0.standardizedFileURL : $0 }
     videoGeometryIsLoaded = false
     // CLI/plugin options can follow mpv_initialize; capture them at the first load barrier, before file edits.
-    if defaultVideoGeometry == nil { defaultVideoGeometry = readVideoGeometry() }
+    if defaultVideoGeometry == nil {
+      defaultVideoGeometry = readVideoGeometry()
+      restartOptionDefaults = [:]
+      for name in AppRestartSession.PlaybackState.optionNames { restartOptionDefaults?[name] = mpv.getString(name) }
+      for name in AppRestartSession.PlaybackState.selectionOptionNames.values.flatMap({ $0 }) {
+        restartSelectionDefaults[name] = mpv.getString(name)
+      }
+      restartVideoFilterDefault = mpv.getString(MPVProperty.vf) ?? ""
+      restartAudioFilterDefault = mpv.getString(MPVProperty.af) ?? ""
+    }
     // File-local defaults prevent geometry leaking between media; watch-later/config loading follows.
     if let defaultVideoGeometry { applyVideoGeometry(defaultVideoGeometry) }
   }

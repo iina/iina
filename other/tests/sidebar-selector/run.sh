@@ -2,7 +2,7 @@
 set -eu
 test_dir="$(cd "$(dirname "$0")" && pwd)"
 repo_dir="$(cd "$test_dir/../../.." && pwd)"
-out="$repo_dir/build/sidebar-selector-tests"
+out="${SIDEBAR_SELECTOR_OUTPUT_DIR:-$repo_dir/build/sidebar-selector-tests}"
 mkdir -p "$out"
 python3 - "$repo_dir" "$test_dir" "$out" <<'PY'
 from pathlib import Path
@@ -15,6 +15,7 @@ status = s[s.index('  func updateTabActiveStatus() {'):s.index('  func updateTab
 s = s[s.index('private final class SidebarSelectorOverlay:'):]
 (out/'main.swift').write_text('''import Cocoa
 import QuartzCore
+typealias AccentSegmentedControl = NSSegmentedControl
 struct AccessibilityPreferences {
   static var motionReductionEnabled = false
   static func adjustedDuration(_ duration: TimeInterval) -> TimeInterval { duration }

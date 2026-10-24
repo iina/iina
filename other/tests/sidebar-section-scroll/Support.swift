@@ -1,4 +1,7 @@
 import Cocoa
+typealias AccentSegmentedControl = NSSegmentedControl
+typealias AccentButton = NSButton
+enum AppAccentColor { static var color: NSColor { .controlAccentColor } }
 
 struct LayoutValue {
   let value: CGFloat

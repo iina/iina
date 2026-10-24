@@ -1,9 +1,11 @@
 # Explicit settings-restart session handoff
 
 Run `python3 other/tests/restart-session/run.py` on macOS. The script compiles the
-actual `AppRestart.swift` and `AppRestartSession.swift` unchanged for
-`arm64-apple-macos12`, reuses `build/sidebar-osd-tests/module-cache`, and runs the
-coordinator against controlled engine/window boundaries. Native windows remain
+actual `AppRestart.swift`, `AppRestartSession.swift`, and processing models unchanged for
+`arm64-apple-macos12`, plus the current production export/import bridges extracted
+from `PlayerCore.swift`. It reuses `build/sidebar-osd-tests/module-cache` by default
+and runs against controlled engine/graph/window boundaries. Use `--module-cache`
+and `--output` to select existing cache and evidence locations. Native windows remain
 hidden and the test application uses a prohibited activation policy. Its unique
 bundle/suite preferences are removed; it does not open media, load plugins,
 activate the personal player, or write global preferences.
@@ -30,10 +32,22 @@ The checks cover:
   legacy/pending handoffs while retaining only the saved accent choice.
 - Source-placement checks for the real AppDelegate, PlayerCore, and window
   integration, including frame-before-show and launch preference suppression.
+- Current output geometry/colors/filters, scoped source delay/EQ/crop/rotation/
+  color/LUT profiles, editing targets, mixed audio membership, ordered video
+  layers, and both subtitle roles, with watch-later saving explicitly disabled.
+  External files are matched by canonical filename and demux stream identity,
+  independently of their IDs after reopening. Missing optional playback payloads
+  preserve compatibility with the original version-1 handoff.
+- Previously committed output crop and the original layered selection are read
+  after normal crop-editor cleanup, without saving temporary preview state.
+  Unchanged launch defaults are omitted; newly requested initialization options
+  and filters take precedence over earlier per-window edits. Changed audio,
+  video, or subtitle selection/language policy retains the new engine's selected
+  sources for that media type.
 
-`TestDoubles.swift` provides only the mpv/player and native-window boundary
-behavior needed to drive production orchestration. It does **not** establish
-real mpv accuracy, real window display ordering, or full-app compilation. The
+`TestDoubles.swift` provides the mpv/graph/player and native-window boundary
+behavior needed to drive production orchestration and export/import. It does **not** establish
+real graph rebuilding, mpv accuracy, real window display ordering, or full-app compilation. The
 separate `fixture.iinaplugin/` is owned by the parent QA workflow for real
 isolated-profile multiwindow/playlist/head/frame acceptance. The focused result
 is recorded in `build/restart-session-2026-10-24/model-lifecycle-checks.json`.
@@ -58,9 +72,20 @@ descriptors are skipped. Missing local files and actual mpv stop/shutdown errors
 release the completion barrier for other windows. Settings is shown immediately
 and re-fronted after the surviving media windows finish.
 
-Ordinary window/music rectangle, paused/playing state, volume, mute, and speed
-are restored. On the
-same available displays, the frame stays exact; a frame on a removed display is
+The current media's output geometry and filters, scoped processing, source
+membership/order, subtitle roles, ordinary window/music rectangle,
+paused/playing state, volume, mute, and speed are restored. Source compositions
+are rebuilt through the player's normal graph APIs; a raw `lavfi-complex` graph
+is never serialized. Missing external files and scoped LUT files are skipped.
+The initial option/filter baseline is captured at the existing first-load
+barrier. A per-window edit is reapplied only when that baseline is unchanged on
+the new launch, so Restart can still apply new Advanced initialization settings.
+The same comparison protects changed track-selection and language policies;
+remapped profiles are retained independently of the selected sources.
+Other playlist entries' dormant per-media processing caches are outside this
+current-media handoff.
+
+On the same available displays, the frame stays exact; a frame on a removed display is
 recovered to a reachable display. Fullscreen/PiP reentry is best effort: Spaces
 and the native PiP bubble position are managed by macOS, without a public exact
 restore API. Their underlying normal-window rectangle is retained. A requested

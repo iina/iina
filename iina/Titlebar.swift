@@ -468,11 +468,6 @@ class Titlebar: NSView {
     return false
   }
 
-  private func isTitlePathEvent(_ event: NSEvent) -> Bool {
-    let point = titlebarContainer.convert(event.locationInWindow, from: nil)
-    return docIcon.frame.contains(point) || titleTextField.frame.contains(point)
-  }
-
   private func isBackgroundEvent(_ event: NSEvent) -> Bool {
     guard isRevealed, !isHidden, !mainWindow.interactiveMode.isActive,
           let parent = superview,

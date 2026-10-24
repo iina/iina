@@ -44,7 +44,10 @@ class MainWindowController: PlayerWindowController {
   var seekOverride = false
   var volumeOverride = false
   var hideRequests = 0
-  func hideUIFromOSC() { hideRequests += 1 }
+  var isUIHiddenByOSCClick = false
+  func destroyTimer() {}
+  func hideUI(force: Bool) { hideRequests += 1 }
+// PRODUCTION_HIDE_UI_FROM_OSC
   var secondaryRequests = 0
   override func rightMouseUp(with event: NSEvent) { if !sidebars.isEventTargetingVisibleSidebar(event) { secondaryRequests += 1 } }
   var restoreRequests = 0
@@ -94,6 +97,9 @@ class SidebarController {
   let leadingSidebar = Panel(.leading)
   let trailingSidebar = Panel(.trailing)
   var sideBars: [Panel] { [leadingSidebar, trailingSidebar] }
+  var isAnyVisibleOrTransitioning: Bool {
+    sideBars.contains { $0.status != .hidden || $0.animationState == .willHide }
+  }
   var useFadeForSidebar = false
   init(mainWindow: MainWindowController) { self.mainWindow = mainWindow }
   func sideBar(for side: Side) -> Panel { side == .leading ? leadingSidebar : trailingSidebar }
@@ -117,6 +123,15 @@ class OSCFloatingView: ClickView {
   weak var mainWindow: MainWindowController!
   private var backgroundClickTimer: Timer?
   var windowSessionEnded = false, isDragging = false
+  // Keep the production drag lifetime while exercising native window dispatch.
+  override func mouseDown(with event: NSEvent) {
+    isDragging = true
+    super.mouseDown(with: event)
+  }
+  override func mouseUp(with event: NSEvent) {
+    isDragging = false
+    super.mouseUp(with: event)
+  }
   func resetPosition() {}
 // PRODUCTION_OSC_BACKGROUND_CLICK
 // PRODUCTION_OSC_SECONDARY_CLICK
@@ -284,7 +299,7 @@ let beforeOSC = content.subviews
 let hides = controller.hideRequests
 click(oscPoint)
 check(controller.hideRequests == hides + 1 && content.subviews == beforeOSC,
-      "primary OSC background click hides rather than promotes")
+      "primary OSC click with no double action waits for mouseUp to finish dragging before hiding")
 rightClick(oscPoint)
 check(index(osc) > index(right), "secondary OSC background click raises it over the covering sidebar")
 click(rightPoint)
@@ -353,7 +368,7 @@ let titleButton = NSButton(frame: NSRect(x: 360, y: 2, width: 40, height: 26))
 header.addSubview(titleButton)
 check(!header.handleBackgroundMouseEvent(mouse(.leftMouseDown, NSPoint(x: 380, y: 285))),
       "titlebar control retains primary clicks")
-header.handleBackgroundMouseEvent(mouse(.leftMouseUp, NSPoint(x: 380, y: 285)))
+_ = header.handleBackgroundMouseEvent(mouse(.leftMouseUp, NSPoint(x: 380, y: 285)))
 wait(NSEvent.doubleClickInterval + 0.05)
 check(controller.hideRequests == 1, "titlebar control cannot hide UI")
 titleButton.removeFromSuperview()

@@ -5,8 +5,10 @@ import os
 
 root = Path(__file__).resolve().parents[3]
 tests = Path(__file__).resolve().parent
-out = root / "build/pip-transition-tests"
+out = Path(os.environ.get("PIP_TRANSITION_OUTPUT_DIR", root / "build/pip-transition-tests"))
 out.mkdir(parents=True, exist_ok=True)
+module_cache = out / "module-cache"
+module_cache.mkdir(exist_ok=True)
 
 
 def extract(source, marker):
@@ -51,5 +53,5 @@ for name, source in [("lifecycle", lifecycle), ("geometry", render), ("transacti
     generated = out / f"{name}.swift"
     binary = out / name
     generated.write_text(source)
-    subprocess.run(["xcrun", "swiftc", str(generated), "-o", str(binary)], check=True)
+    subprocess.run(["xcrun", "swiftc", "-module-cache-path", str(module_cache), str(generated), "-o", str(binary)], check=True)
     subprocess.run([str(binary)], check=True)

@@ -16,5 +16,10 @@ called with a null handle. It checks neutral results with no native calls at nil
 idle initialization with a retained handle, and filter removal with empty,
 negative, stale, failed-read/write and malformed data plus a valid removal.
 
+The hook fixture compiles `MPVHookValue` and its event branch with actual
+JavaScriptCore. It checks synchronous, retained and asynchronous JavaScript
+continuations, duplicate and parallel native calls, reentrancy, controller
+release, late calls after handle removal, and unloaded-plugin hooks.
+
 Actual mpv teardown, live plugin timers and native window ordering remain separate
 integration checks.

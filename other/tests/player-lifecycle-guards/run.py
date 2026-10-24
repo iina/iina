@@ -75,6 +75,24 @@ result = subprocess.run([str(native_executable)], capture_output=True, text=True
 print(result.stdout + result.stderr, end='')
 if result.returncode:
     raise SystemExit(result.returncode)
+hook_support = (TESTS / 'HookSupport.swift').read_text()
+hook_support = hook_support.replace('// PRODUCTION_HOOK_VALUE', extract(native, 'struct MPVHookValue {'))
+event_start = native.index('    case MPV_EVENT_HOOK:') + len('    case MPV_EVENT_HOOK:')
+event_end = native.index('    case MPV_EVENT_PROPERTY_CHANGE:', event_start)
+hook_support = hook_support.replace('// PRODUCTION_HOOK_EVENT', native[event_start:event_end])
+hook_source = args.output / 'HookSupport.swift'
+hook_source.write_text(hook_support)
+hook_main = args.output / 'main.swift'
+hook_main.write_text((TESTS / 'hook-main.swift').read_text())
+hook_executable = args.output / 'hook-checks'
+subprocess.run(['xcrun', 'swiftc', '-module-cache-path', str(cache), '-I', str(ROOT / 'deps/include'),
+                '-import-objc-header', str(TESTS / 'NativeBridge.h'), str(hook_source), str(hook_main),
+                str(native_object), '-o', str(hook_executable)], check=True)
+result = subprocess.run([str(hook_executable)], capture_output=True, text=True, timeout=15)
+(args.output / 'hook-checks.txt').write_text(result.stdout + result.stderr)
+print(result.stdout + result.stderr, end='')
+if result.returncode:
+    raise SystemExit(result.returncode)
 (args.output / 'receipt.json').write_text(json.dumps({
     'status': 'passed', 'sources': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
       for name in ['iina/PlayerCore.swift', 'iina/PlaybackInfo.swift', 'iina/PlayerState.swift', 'iina/MPVController.swift', 'iina/MPVNode.swift']},

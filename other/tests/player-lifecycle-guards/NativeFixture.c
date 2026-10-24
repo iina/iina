@@ -77,3 +77,12 @@ int mpv_hook_add(mpv_handle *value, uint64_t id, const char *name, int priority)
 }
 void mpv_free(void *data) { free(data); }
 void mpv_free_node_contents(mpv_node *node) { (void)node; }
+int mpv_hook_continue(mpv_handle *value, uint64_t id) { (void)id; record(value); return 0; }
+mpv_event *nativeTestCreateHook(uint64_t userdata, uint64_t id) {
+  mpv_event *event = calloc(1, sizeof(*event));
+  mpv_event_hook *hook = calloc(1, sizeof(*hook));
+  *hook = (mpv_event_hook){ .name = "on_load", .id = id };
+  *event = (mpv_event){ .event_id = MPV_EVENT_HOOK, .reply_userdata = userdata, .data = hook };
+  return event;
+}
+void nativeTestDestroyHook(mpv_event *event) { free(event->data); free(event); }

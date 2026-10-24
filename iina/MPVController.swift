@@ -42,7 +42,6 @@ fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "debug": .debug,
                                                        "trace": .verbose]
 
-// FIXME: should be moved to a separated file
 struct MPVHookValue {
   typealias Block = (@escaping () -> Void) -> Void
 
@@ -66,18 +65,27 @@ struct MPVHookValue {
   }
 
   func call(withNextBlock next: @escaping () -> Void) {
+    let lock = NSLock()
+    var continued = false
+    let continueOnce = {
+      lock.lock()
+      let shouldContinue = !continued
+      continued = true
+      lock.unlock()
+      if shouldContinue { next() }
+    }
     if isJavascript {
-      let block: @convention(block) () -> Void = { next() }
+      let block: @convention(block) () -> Void = { continueOnce() }
       guard let callback = jsBlock.value else {
-        next()
+        continueOnce()
         return
       }
       callback.call(withArguments: [JSValue(object: block, in: context)!])
       if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
-        next()
+        continueOnce()
       }
     } else {
-      block!(next)
+      block!(continueOnce)
     }
   }
 }
@@ -1228,16 +1236,18 @@ class MPVController: NSObject {
       let userData = event.pointee.reply_userdata
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
+      let continueHook = { [weak self] in
+        guard let mpv = self?.mpv else { return }
+        mpv_hook_continue(mpv, hookID)
+      }
       guard let hook = $hooks.withLock({ $0[userData] }) else {
         // Hook not found, probably because it's from an unloaded plugin.
         // Still need to call hook_continue otherwise it will stuck.
         log("Hook \(hookID) not found", level: .warning)
-        mpv_hook_continue(self.mpv, hookID)
+        continueHook()
         break
       }
-      hook.call {
-        mpv_hook_continue(self.mpv, hookID)
-      }
+      hook.call(withNextBlock: continueHook)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)

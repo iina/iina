@@ -19,6 +19,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
 
   private var pendingKey: String?
   private var pendingAction: String?
+  private var keyBindingInputObserver: NSObjectProtocol?
 
   @objc dynamic var ready = false
 
@@ -70,11 +71,15 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
       pendingAction = nil
     }
 
-    NotificationCenter.default.addObserver(forName: .iinaKeyBindingInputChanged, object: nil, queue: .main) { [unowned self] _ in
-      self.updateCommandField()
+    keyBindingInputObserver = NotificationCenter.default.addObserver(forName: .iinaKeyBindingInputChanged, object: nil, queue: .main) { [weak self] _ in
+      self?.updateCommandField()
     }
     restoreInterfaceCriteria()
     ready = !keyCode.isEmpty && !action.isEmpty
+  }
+
+  deinit {
+    if let keyBindingInputObserver { NotificationCenter.default.removeObserver(keyBindingInputObserver) }
   }
 
   func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {

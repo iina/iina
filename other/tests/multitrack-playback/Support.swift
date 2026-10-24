@@ -1,6 +1,8 @@
 import Cocoa
 import Darwin
 setbuf(stdout, nil)
+typealias AccentSegmentedControl = NSSegmentedControl
+enum AppAccentColor { static let color = NSColor.controlAccentColor }
 let app = NSApplication.shared
 app.setActivationPolicy(.prohibited)
 var checks = 0
@@ -153,6 +155,7 @@ class MPVFixture {
     }
     precondition(command.rawValue == "lavfi-complex-command" && args.count == 4)
     writes += 1
+    guard supportsPersistentMixer && supportsAudioRefresh else { returnValueCallback?(-12); return }
     if commandFailures > 0 { commandFailures -= 1; returnValueCallback?(-12); return }
     if args[1] == "gain" { equalizerGains[args[0]!] = args[2]! }
     else { precondition(args[0] == AudioTrackMixGraph.target && args[1] == "weights"); weights.append(args[2]!) }

@@ -1735,17 +1735,21 @@ class PlayerCore: NSObject {
       tracks.allSatisfy({ $0.demuxChannels == first.demuxChannels }))
   }
 
+  private func supportsTrackAudioCommands() -> Bool {
+    guard let commands = mpv.getNode("command-list") as? [[String: Any]] else { return false }
+    return commands.contains {
+      $0["name"] as? String == "lavfi-complex-command" &&
+        ($0["args"] as? [[String: Any]])?.contains { $0["name"] as? String == "refresh-audio" } == true
+    }
+  }
+
   private func prepareAudioMixer() {
     guard info.currentURL?.isFileURL == true, info.audioTracks.count > 1,
           audioMixerInputsAreCompatible(Set(info.audioTracks.map(\.id))),
           ownedTrackGraph == nil,
           (mpv.getString(MPVOption.Miscellaneous.lavfiComplex) ?? "").isEmpty,
           (mpv.getString("audio-spdif") ?? "").isEmpty,
-          let commands = mpv.getNode("command-list") as? [[String: Any]],
-          commands.contains(where: {
-            $0["name"] as? String == "lavfi-complex-command" &&
-              ($0["args"] as? [[String: Any]])?.contains(where: { $0["name"] as? String == "refresh-audio" }) == true
-          }) else { return }
+          supportsTrackAudioCommands() else { return }
     let selected = info.activeTrackIDs(.audio)
     persistentAudioInputs = Set(info.audioTracks.map(\.id))
     if !applyTrackSelection(audio: selected, video: info.layeredVideoTrackIDs,
@@ -1947,7 +1951,7 @@ class PlayerCore: NSObject {
   @discardableResult
   func refreshTrackAudioEQ(id: Int, previous: [Double], gains: [Double], audioRollback: [Int: AudioTrackProcessing]) -> Bool {
     let current = mpv.getString(MPVOption.Miscellaneous.lavfiComplex) ?? ""
-    guard current == ownedTrackGraph,
+    guard supportsTrackAudioCommands(), current == ownedTrackGraph,
           current.contains(ProcessedAudioGraph.equalizerTarget(trackID: id, band: 0)) else {
       return refreshTrackProcessing(.audio, audioRollback: audioRollback)
     }
@@ -1959,6 +1963,7 @@ class PlayerCore: NSObject {
     let current = mpv.getString(MPVOption.Miscellaneous.lavfiComplex) ?? ""
     guard ownedTrackGraph != nil else { return true }
     guard current == ownedTrackGraph else { return settings.isEmpty }
+    guard supportsTrackAudioCommands() else { return true }
     let changes = settings.sorted(by: { $0.key < $1.key }).compactMap { id, value -> (Int, [Double], [Double])? in
       guard current.contains(ProcessedAudioGraph.equalizerTarget(trackID: id, band: 0)) else { return nil }
       let zero = Array(repeating: 0.0, count: 10)

@@ -8,6 +8,10 @@ are combined with a controlled native-controller boundary. Checks cover Hide,
 Minimize, Do Nothing, fullscreen, playing/paused state, modern preparation and
 legacy entry, duplicate/stale preparation, cancellation, concealed return,
 video attachment before reveal, and transaction ownership release.
+Active Crop/Delogo ownership must be released in the source container before
+either PiP API can draw or reparent its live video.
+
+Set `PIP_TRANSITION_OUTPUT_DIR` to write generated harnesses outside `build/`.
 
 Geometry checks execute the current layer invalidation and `canDraw` methods
 for paused shrink/enlargement, same-size host replacement, Retina changes,

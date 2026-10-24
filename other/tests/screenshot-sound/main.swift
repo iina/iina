@@ -106,6 +106,27 @@ check(!noVideo.screenshot() && noVideo.mainWindow.begun.isEmpty, "missing video 
 let stopped = CallbackFixture(); stopped.info.state = .shuttingDown
 check(!stopped.screenshot() && screenshotTestSubmissions(stopped.mpv.mpv) == 0,
       "teardown cannot submit screenshot work to mpv")
+let states: [PlayerState] = [.loading, .starting, .loaded, .playing, .paused, .stopping, .idle, .shuttingDown, .shutDown]
+for state in states {
+  let player = CallbackFixture(); player.info.state = state
+  let soundsBefore = playedSounds.count, writesBefore = TestPasteboard.shared.writes.count
+  check(player.screenshot() == state.loaded, "screenshot readiness matches actual \(state) state")
+  check(screenshotTestSubmissions(player.mpv.mpv) == (state.loaded ? 1 : 0), "\(state) submits only a ready video")
+  if state.loaded {
+    player.cancelScreenshotRequests()
+    check(player.mainWindow.active.isEmpty, "cancelling accepted \(state) request releases feedback")
+  } else {
+    for mapping in [KeyMapping(action: ["screenshot", "each-frame"], rawAction: "screenshot each-frame"),
+                    KeyMapping(action: ["screenshot", "unexpected"], rawAction: "screenshot unexpected"),
+                    KeyMapping(action: ["seek", "5"], rawAction: "seek 5")] {
+      check(!player.screenshot(fromKeyBinding: mapping), "\(state) cannot bypass readiness with \(mapping.rawAction)")
+    }
+    check(player.mpv.rawCommands.isEmpty && player.mainWindow.begun.isEmpty,
+          "\(state) rejects unsupported bindings before raw-command routing or feedback")
+  }
+  check(playedSounds.count == soundsBefore && TestPasteboard.shared.writes.count == writesBefore && player.osdCount == 0,
+        "entry/cancel in \(state) publishes no stale sound, clipboard or OSD")
+}
 
 let immediateFailure = CallbackFixture()
 screenshotTestSetStatus(immediateFailure.mpv.mpv, -12)

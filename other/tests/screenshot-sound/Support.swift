@@ -39,10 +39,6 @@ struct MPVCommand {
   static let screenshot = MPVCommand(rawValue: "screenshot")
 }
 struct KeyMapping { let action: [String]; let rawAction: String }
-enum PlayerState {
-  case loaded, stopping, idle, shuttingDown, shutDown
-  var loaded: Bool { self == .loaded }
-}
 enum TrackType { case video }
 final class InfoFixture {
   var state = PlayerState.loaded

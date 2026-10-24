@@ -3,13 +3,20 @@ set -eu
 test_dir="$(cd "$(dirname "$0")" && pwd)"
 repo_dir="$(cd "$test_dir/../../.." && pwd)"
 out="${SCREENSHOT_SOUND_OUTPUT_DIR:-$repo_dir/build/screenshot-sound-tests}"
-mkdir -p "$out/module-cache"
+cache="${SCREENSHOT_MODULE_CACHE:-$out/module-cache}"
+mkdir -p "$out" "$cache"
 python3 - "$repo_dir" "$test_dir" "$out" <<'PY'
 from pathlib import Path
 import os, re, sys
 repo, tests, out = map(Path, sys.argv[1:])
 def extract(text, marker):
     start = text.index(marker)
+    if not marker.startswith(' '):
+        first_end = text.index('\n', start)
+        first_line = text[start:first_end]
+        if first_line.count('{') == first_line.count('}'):
+            return first_line
+        return text[start:text.index('\n}', start) + 2]
     end = text.index('{', start) + 1
     depth = 1
     while depth:
@@ -50,5 +57,5 @@ source = support.replace('// PRODUCTION_SCREENSHOT', callback) + '\n' + helper +
 (out/'main.swift').write_text(source)
 PY
 xcrun clang -Wall -Wextra -Werror -I "$repo_dir/deps/include" -c "$test_dir/EventFixture.c" -o "$out/events.o"
-xcrun swiftc -I "$repo_dir/deps/include" -import-objc-header "$test_dir/Bridge.h" -module-cache-path "$out/module-cache" "$out/main.swift" "$out/events.o" -o "$out/tests"
+xcrun swiftc -I "$repo_dir/deps/include" -import-objc-header "$test_dir/Bridge.h" -module-cache-path "$cache" "$repo_dir/iina/PlayerState.swift" "$out/main.swift" "$out/events.o" -o "$out/tests"
 "$out/tests"

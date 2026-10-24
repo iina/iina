@@ -163,7 +163,7 @@ class KeyMapping: NSObject {
       var comment: String? = nil
       if let sharpIndex = line.firstIndex(of: "#") {
         comment = String(line[line.index(after: sharpIndex)...])
-        line = String(line[...line.index(before: sharpIndex)])
+        line = String(line[..<sharpIndex])
       }
       // split
       let splitted = line.split(maxSplits: 1, whereSeparator: { $0 == " " || $0 == "\t"})
@@ -173,6 +173,7 @@ class KeyMapping: NSObject {
       }
       let key = String(splitted[0]).trimmingCharacters(in: .whitespaces)
       let action = String(splitted[1]).trimmingCharacters(in: .whitespaces)
+      guard !key.isEmpty, !action.isEmpty else { continue }
 
       mapping.append(KeyMapping(rawKey: key, rawAction: action, isIINACommand: isIINACommand, comment: comment))
     }

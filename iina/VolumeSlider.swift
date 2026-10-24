@@ -47,12 +47,8 @@ fileprivate class VolumeSliderCell: NSSliderCell {
   /// - Leave a small gap that marks the position representing 100% volume, when the `Maximum volume` setting has been used to
   ///     allow the volume to be set beyond 100%
   ///
-  /// As merely moving the cursor displays the on screen controller it is desirable that this UI element not be intrusive. For this reason
-  /// the OSC intentionally differs in its appearance from other user interface elements. To make the OSC have a subtle appearance a
-  /// greyscale color scheme is used. In particular it is important to override the use of
-  /// [controlAccentColor](https://developer.apple.com/documentation/appkit/nscolor/controlaccentcolor)
-  /// by [NSSlider](https://developer.apple.com/documentation/appkit/nsslider) as that color is intended to stand
-  /// out and attract attention.
+  /// The OSC uses its original neutral fill by default. With system accents enabled,
+  /// its active fill follows the same dynamic accent as the other player controls.
   /// - Parameters:
   ///   - rect: The bounds of the slider’s bar, not of its interior rectangle.
   ///   - flipped: A Boolean value that indicates whether the cell’s control view—that is, the `NSSlider` or `NSMatrix`
@@ -88,7 +84,7 @@ fileprivate class VolumeSliderCell: NSSliderCell {
       clipLeft.append(gapClip)
     }
     clipLeft.addClip()
-    NSColor.volumeSliderBarLeft.setFill()
+    AppAccentColor.playbackFill(fallback: .volumeSliderBarLeft).setFill()
     path.fill()
     NSGraphicsContext.restoreGraphicsState()
 

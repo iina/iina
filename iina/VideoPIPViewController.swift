@@ -11,6 +11,9 @@ import Cocoa
 class VideoPIPViewController: PIPViewController, NSWindowDelegate {
 
   private var currentScreen: NSScreen?
+  private weak var lastVideoWindow: NSWindow?
+  private var lastVideoSize: NSSize?
+  private var lastVideoScale: CGFloat?
 
   /// Force a draw, if needed.
   ///
@@ -21,22 +24,28 @@ class VideoPIPViewController: PIPViewController, NSWindowDelegate {
     controller.forceDraw(reason)
   }
 
-  /// Force a draw after entering PiP.
-  ///
-  /// If playback is paused then after entering PiP mode the PiP window will sometimes be white. Force a draw to ensure this does not
-  /// happen and a frame is displayed. See PR #3973 for details.
-  ///
-  /// Any changes in this area must be tested on multiple macOS versions. Under 10.15, `presentAsPictureInPicture` behaves
-  /// asynchronously.
+  /// Flushing from layout can publish a new surface before the PiP host receives matching bounds.
+  /// Keep rendering in the native transaction; PiP flight does not resize this view.
+  /// On macOS 10.15, `presentAsPictureInPicture` behaves asynchronously.
   override func viewDidLayout() {
     super.viewDidLayout()
-    forceDraw("entered PiP")
     guard let window = view.window else {
       // Internal error, should not occur.
       Logger.log("VideoPIPViewController.viewDidLayout window is nil", level: .error)
       return
     }
     window.delegate = self
+    // The remote host is prepared with an empty container. Its early layout
+    // must not invalidate the video that is still playing in the source window.
+    guard let controller = delegate as? MainWindowController,
+          controller.videoView.window === window else { return }
+    guard lastVideoWindow !== window || lastVideoSize != view.bounds.size ||
+            lastVideoScale != window.backingScaleFactor else { return }
+    // Record first: displaying can flush pending layout and re-enter this method.
+    lastVideoWindow = window
+    lastVideoSize = view.bounds.size
+    lastVideoScale = window.backingScaleFactor
+    controller.videoView.prepareForPIPDisplay(render: false)
   }
 
   /// Force a draw after exiting PiP.

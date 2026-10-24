@@ -45,6 +45,7 @@ class SettingsPageControl: SettingsPage {
           .image(name: "rectangle.fill")
         SettingsItem.PopupButton()
           .bindTo(.forceTouchAction, ofType: Preference.MouseClickAction.self)
+          .hasDescription(forTag: 3, content: .init("mouseHideOSC.desc"))
           .availableTags([0, 1, 2, 3])
       }
     }
@@ -53,21 +54,36 @@ class SettingsPageControl: SettingsPage {
   private func sectionMouse() -> SettingsSection {
     return section {
       SettingsList(title: .text_Mouse) {
+        SettingsItem.Switch()
+          .bindTo(.videoViewAcceptsFirstMouse)
+          .image(name: ["macwindow.and.pointer.arrow", "macwindow.and.cursorarrow"])
         SettingsItem.PopupButton()
           .bindTo(.singleClickAction, ofType: Preference.MouseClickAction.self)
+          .hasDescription(forTag: 3, content: .init("mouseHideOSC.desc"))
           .availableTags([0, 2, 3])
           .image(name: ["pointer.arrow.click", "cursorarrow.click"])
         SettingsItem.PopupButton()
           .bindTo(.doubleClickAction, ofType: Preference.MouseClickAction.self)
+          .hasDescription(forTag: 3, content: .init("mouseHideOSC.desc"))
           .availableTags([0, 1, 2, 4, 5, 6])
         SettingsItem.PopupButton()
           .bindTo(.rightClickAction, ofType: Preference.MouseClickAction.self)
+          .hasDescription(forTag: 3, content: .init("mouseHideOSC.desc"))
           .availableTags([0, 2, 3, 4, 5, 6])
         SettingsItem.PopupButton()
           .bindTo(.middleClickAction, ofType: Preference.MouseClickAction.self)
-        SettingsItem.Switch()
-          .bindTo(.videoViewAcceptsFirstMouse)
-          .image(name: ["macwindow.and.pointer.arrow", "macwindow.and.cursorarrow"])
+          .hasDescription(forTag: 3, content: .init("mouseHideOSC.desc"))
+      }
+      SettingsList {
+        SettingsItem.PopupButton()
+          .bindTo(.oscLeftClickAction, ofType: Preference.OSCClickAction.self)
+          .hasDescription(forTag: 1, content: .init("keepOSCHidden.desc"))
+        SettingsItem.PopupButton()
+          .bindTo(.oscRightClickAction, ofType: Preference.OSCClickAction.self)
+          .hasDescription(forTag: 1, content: .init("keepOSCHidden.desc"))
+        SettingsItem.PopupButton()
+          .bindTo(.oscDoubleClickAction, ofType: Preference.OSCClickAction.self)
+          .hasDescription(forTag: 1, content: .init("keepOSCHidden.desc"))
       }
       SettingsList {
         SettingsItem.PopupButton()
@@ -98,7 +114,7 @@ fileprivate class SliderView: SettingsAccessory.Base {
 
     let label = NSTextField(labelWithString: ui.localized("\(key.rawValue).label"))
     label.translatesAutoresizingMaskIntoConstraints = false
-    let slider = NSSlider()
+    let slider = AccentSlider()
     slider.translatesAutoresizingMaskIntoConstraints = false
 
     slider.allowsTickMarkValuesOnly = true

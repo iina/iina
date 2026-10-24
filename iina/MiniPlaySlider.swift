@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MiniPlaySlider: NSSlider {
+class MiniPlaySlider: AccentSlider {
 
   // MARK: - Mouse / Trackpad events
 

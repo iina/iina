@@ -28,7 +28,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   let prefObserver = Preference.Observer()
   weak var player: PlayerCore!
 
-  private var scrollView: NSScrollView!
+  private var scrollView: SidebarSectionScrollView!
   var tableView: NSTableView!
   private var addBtn: NSButton!
   private var removeBtn: NSButton!
@@ -39,7 +39,9 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   private var totalLengthLabel: NSTextField!
   private var addFileMenu: NSMenu!
 
-  var horizontalScroll: ((Bool) -> Void)?
+  var horizontalScroll: ((NSEvent) -> Bool)? {
+    didSet { scrollView?.horizontalScroll = horizontalScroll }
+  }
 
   @Atomic private var playlistTotalLengthIsReady = false
   @Atomic private var playlistTotalLength: Double? = nil
@@ -83,7 +85,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
 
     hideTotalLength()
 
-    self.scrollView = NSScrollView()
+    self.scrollView = SidebarSectionScrollView()
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.hasHorizontalScroller = false
     scrollView.autohidesScrollers = true
@@ -178,12 +180,12 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     guard player.info.state.active else { return }
     let loopMode = player.getLoopMode()
     loopBtn.image = loopMode == .file ? .sf("repeat.1") : .sf("repeat")
-    loopBtn.contentTintColor = loopMode == .off ? nil : .controlAccentColor
+    loopBtn.contentTintColor = loopMode == .off ? nil : AppAccentColor.color
   }
 
   func updateShuffleBtnStatus() {
     guard player.info.state.active else { return }
-    shuffleBtn.contentTintColor = player.info.isShuffled ? .controlAccentColor : nil
+    shuffleBtn.contentTintColor = player.info.isShuffled ? AppAccentColor.color : nil
   }
 
   // MARK: - Total length
@@ -277,12 +279,14 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   }
 
   @objc func clearPlaylistBtnAction(_ sender: AnyObject) {
-    player.clearPlaylist()
-    player.sendOSD(.clearPlaylist)
+    player.performSidebarChange {
+      player.clearPlaylist()
+      player.sendOSD(.clearPlaylist)
+    }
   }
 
   @objc func loopBtnAction(_ sender: NSButton) {
-    player.nextLoopMode()
+    player.performSidebarChange { player.nextLoopMode() }
   }
 
   @objc func shuffleBtnAction(_ sender: AnyObject) {
@@ -913,7 +917,9 @@ class PlaylistTrackCellView: NSTableCellView {
 }
 
 
-class PlaylistRowView: NSTableRowView {
+class PlaylistRowView: AccentTableRowView {
+  override var accentSelectionInset: NSSize { .zero }
+  override var accentSelectionRadius: CGFloat { 0 }
   var percentage: Double = 0
   private static let barHeight: CGFloat = 3
 
@@ -922,7 +928,7 @@ class PlaylistRowView: NSTableRowView {
     let width = bounds.width * CGFloat(percentage)
     guard width > 0 else { return }
     let rect = NSRect(x: 0, y: bounds.height - Self.barHeight, width: width, height: Self.barHeight)
-    let fillColor = NSColor.controlAccentColor.blended(withFraction: 0.2, of: .white) ?? .controlAccentColor
+    let fillColor = AppAccentColor.color.blended(withFraction: 0.2, of: .white) ?? AppAccentColor.color
     fillColor.setFill()
     NSBezierPath(rect: rect).fill()
   }

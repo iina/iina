@@ -1,0 +1,14 @@
+{
+  "name": "Restart Session QA",
+  "identifier": "org.iina.tests.restart-session-fixture",
+  "version": "1.0.0",
+  "description": "Isolated restart-session acceptance diagnostics. Never enable in a personal profile.",
+  "author": {
+    "name": "IINA"
+  },
+  "entry": "main.js",
+  "permissions": [
+    "file-system"
+  ],
+  "preferenceDefaults": {}
+}

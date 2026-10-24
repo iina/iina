@@ -24,7 +24,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
   private var observers: [NSObjectProtocol] = []
 
   @IBOutlet weak var tabView: NSTabView!
-  @IBOutlet weak var tabButtonGroup: NSSegmentedControl!
+  @IBOutlet weak var tabButtonGroup: AccentSegmentedControl!
   @IBOutlet weak var trackPopup: NSPopUpButton!
 
   @IBOutlet weak var pathField: NSTextField!
@@ -519,7 +519,7 @@ class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableVi
 
   // MARK: - IBActions
 
-  @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
+  @IBAction func tabSwitched(_ sender: AccentSegmentedControl) {
     tabView.selectTabViewItem(at: sender.selectedSegment)
   }
 

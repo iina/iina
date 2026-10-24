@@ -46,7 +46,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
 
   @IBOutlet weak var tabView: NSTabView!
   @IBOutlet weak var tableView: NSTableView!
-  @IBOutlet weak var segmentControl: NSSegmentedControl!
+  @IBOutlet weak var segmentControl: AccentSegmentedControl!
   @IBOutlet weak var pluginInfoContentView: NSView!
   @IBOutlet weak var pluginNameLabel: NSTextField!
   @IBOutlet weak var pluginVersionLabel: NSTextField!
@@ -217,7 +217,7 @@ class PrefPluginViewController: PreferenceViewController, PreferenceWindowEmbedd
     pluginHelpWebView.addConstraint(pluginHelpWebViewHeight)
   }
 
-  @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
+  @IBAction func tabSwitched(_ sender: AccentSegmentedControl) {
     tabView.selectTabViewItem(at: sender.selectedSegment)
     guard let currentPlugin = currentPlugin else { return }
     if sender.selectedTag() == 2 {

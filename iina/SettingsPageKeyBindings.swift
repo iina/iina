@@ -42,6 +42,7 @@ class SettingsPageKeyBindings: SettingsPage {
       SettingsList {
         SettingsItem.Switch()
           .bindTo(.useMediaKeys)
+          .requiresRestart()
           .image(name: ["playpause.circle", "playpause"])
           .withHelpLink(AppData.wikiLink.appending("/Manage-Key-Bindings"))
       }

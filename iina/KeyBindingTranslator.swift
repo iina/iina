@@ -38,7 +38,15 @@ class KeyBindingTranslator {
 
     // If is IINA command
     if isIINACommand {
-      return l10nDic["iina." + cmd] ?? cmd
+      let title = l10nDic["iina." + cmd] ?? cmd
+      guard let argument = commands.dropFirst().first else { return title }
+      let detail: String
+      if cmd == IINACommand.openPlugin.rawValue {
+        detail = JavascriptPlugin.plugins.first { $0.identifier == argument }?.name ?? argument
+      } else {
+        detail = l10nDic["panel." + argument] ?? argument
+      }
+      return "\(title): \(detail)"
     }
 
     // If translated

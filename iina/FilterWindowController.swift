@@ -45,6 +45,16 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
 
   private var currentFilter: MPVFilter?
   private var currentSavedFilter: SavedFilter?
+  private weak var newFilterPlayer: PlayerCore?
+  private var newFilterGeneration: Int?
+
+  private var editablePlayer: PlayerCore? {
+    let player = PlayerCore.lastActive
+    guard player.info.state.loaded, player.mpv.mpv != nil else { return nil }
+    if filterType == MPVProperty.vf,
+       player.mainWindow.interactiveMode.isActive || player.mainWindow.isCropTransitionInProgress { return nil }
+    return player
+  }
 
   init(filterType: String, autosaveName: String) {
     self.filterType = filterType
@@ -120,7 +130,8 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func setFilters() {
-    PlayerCore.lastActive.mpv.setFilters(filterType, filters: filters)
+    guard let player = editablePlayer else { return }
+    player.mpv.setFilters(filterType, filters: filters)
   }
 
   deinit {
@@ -128,13 +139,14 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   }
 
   func addFilter(_ filter: MPVFilter) -> Bool {
+    guard let player = editablePlayer else { return false }
     if filterType == MPVProperty.vf {
-      guard PlayerCore.lastActive.addVideoFilter(filter) else {
+      guard player.addVideoFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
         return false
       }
     } else {
-      guard PlayerCore.lastActive.addAudioFilter(filter) else {
+      guard player.addAudioFilter(filter) else {
         Utility.showAlert("filter.incorrect", sheetWindow: window)
         return false
       }
@@ -142,6 +154,20 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
     filters.append(filter)
     reloadTable()
     return true
+  }
+
+  func addFilterFromSheet(_ filter: MPVFilter, name: String) -> Bool {
+    defer { cancelNewFilter() }
+    guard let player = newFilterPlayer, player === editablePlayer,
+          player.info.trackSelectionGeneration == newFilterGeneration else { return false }
+    guard addFilter(filter) else { return false }
+    player.sendOSD(.addFilter(name))
+    return true
+  }
+
+  func cancelNewFilter() {
+    newFilterPlayer = nil
+    newFilterGeneration = nil
   }
 
   func saveFilter(_ filter: MPVFilter) {
@@ -174,15 +200,18 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   // MARK: - IBAction
 
   @IBAction func addFilterAction(_ sender: Any) {
+    guard let player = editablePlayer else { return }
+    newFilterPlayer = player
+    newFilterGeneration = player.info.trackSelectionGeneration
     saveFilterNameTextField.stringValue = ""
     keyRecordViewLabel.stringValue = ""
     window!.beginSheet(newFilterSheet)
   }
 
   @IBAction func removeFilterAction(_ sender: Any) {
-    let pc = PlayerCore.lastActive
+    guard let pc = editablePlayer else { return }
     let selectedRow = currentFiltersTableView.selectedRow
-    if selectedRow >= 0 {
+    if filters.indices.contains(selectedRow) {
       let success: Bool
       if filterType == MPVProperty.vf {
         success = pc.removeVideoFilter(filters[selectedRow], selectedRow)
@@ -209,8 +238,9 @@ class FilterWindowController: NSWindowController, NSWindowDelegate {
   /// - Parameter sender: A checkbox in lower portion of filter window
   @IBAction func toggleSavedFilterAction(_ sender: NSButton) {
     let row = savedFiltersTableView.row(for: sender)
+    guard savedFilters.indices.contains(row) else { return }
     let savedFilter = savedFilters[row]
-    let pc = PlayerCore.lastActive
+    guard let pc = editablePlayer else { reloadTable(); return }
 
     // choose appropriate add/remove functions for .af/.vf
     var addFilterFunction: (String) -> Bool
@@ -312,6 +342,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
     guard let value = object as? String, tableColumn?.identifier == .value else { return }
 
     if tableView == currentFiltersTableView {
+      guard editablePlayer != nil, filters.indices.contains(row) else { tableView.reloadData(); return }
       if let newFilter = MPVFilter(rawString: value) {
         filters[row] = newFilter
         setFilters()
@@ -330,7 +361,7 @@ extension FilterWindowController: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   private func updateButtonStatus() {
-    removeButton.isEnabled = currentFiltersTableView.selectedRow >= 0
+    removeButton.isEnabled = editablePlayer != nil && filters.indices.contains(currentFiltersTableView.selectedRow)
   }
 
 }
@@ -495,7 +526,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       return label
     case .int:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
+      let slider = AccentSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.minInt!)
@@ -509,7 +540,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       return slider
     case .float:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
+      let slider = AccentSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.min!)
@@ -544,12 +575,11 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       }
     }
     // create filter
-    if filterWindow.addFilter(preset.transformer(instance)) {
-      PlayerCore.lastActive.sendOSD(.addFilter(preset.localizedName))
-    }
+    _ = filterWindow.addFilterFromSheet(preset.transformer(instance), name: preset.localizedName)
   }
 
   @IBAction func sheetCancelBtnAction(_ sender: Any) {
+    filterWindow.cancelNewFilter()
     filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: .cancel)
   }
 

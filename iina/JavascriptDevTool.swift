@@ -359,7 +359,7 @@ fileprivate struct ConsoleView: View {
         Button(action: { executePrompt() }) {
           Image(systemName: "play.circle")
             .renderingMode(.template)
-            .foregroundColor(.accentColor)
+            .foregroundColor(Color(nsColor: AppAccentColor.color))
         }
         .help("Run code")
         .buttonStyle(PlainButtonStyle())

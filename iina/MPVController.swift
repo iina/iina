@@ -42,7 +42,6 @@ fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "debug": .debug,
                                                        "trace": .verbose]
 
-// FIXME: should be moved to a separated file
 struct MPVHookValue {
   typealias Block = (@escaping () -> Void) -> Void
 
@@ -66,18 +65,27 @@ struct MPVHookValue {
   }
 
   func call(withNextBlock next: @escaping () -> Void) {
+    let lock = NSLock()
+    var continued = false
+    let continueOnce = {
+      lock.lock()
+      let shouldContinue = !continued
+      continued = true
+      lock.unlock()
+      if shouldContinue { next() }
+    }
     if isJavascript {
-      let block: @convention(block) () -> Void = { next() }
+      let block: @convention(block) () -> Void = { continueOnce() }
       guard let callback = jsBlock.value else {
-        next()
+        continueOnce()
         return
       }
       callback.call(withArguments: [JSValue(object: block, in: context)!])
       if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
-        next()
+        continueOnce()
       }
     } else {
-      block!(next)
+      block!(continueOnce)
     }
   }
 }
@@ -85,8 +93,15 @@ struct MPVHookValue {
 // Global functions
 
 class MPVController: NSObject {
+  private(set) var supportsIndependentSecondarySubtitleStyle = false
+
   struct UserData {
-    static let screenshot: UInt64 = 1000000
+    static let screenshot: UInt64 = 0x5343_0000_0000_0000
+    static let screenshotSequenceMask: UInt64 = 0x0000_FFFF_FFFF_FFFF
+
+    static func isScreenshot(_ value: UInt64) -> Bool {
+      value & ~screenshotSequenceMask == screenshot
+    }
   }
 
   // The mpv_handle
@@ -156,9 +171,16 @@ class MPVController: NSObject {
     MPVProperty.videoParamsRotate: MPV_FORMAT_INT64,
     MPVProperty.videoParamsPrimaries: MPV_FORMAT_STRING,
     MPVProperty.videoParamsGamma: MPV_FORMAT_STRING,
+    "video-out-params/w": MPV_FORMAT_INT64,
+    MPVProperty.videoOutParams: MPV_FORMAT_NODE,
+    "video-out-params/h": MPV_FORMAT_INT64,
     MPVProperty.idleActive: MPV_FORMAT_FLAG,
     MPVProperty.currentAo: MPV_FORMAT_STRING
-  ]
+  ].merging(Dictionary(uniqueKeysWithValues:
+    SubtitleStyle.options.flatMap { option in
+      [option, SubtitleStyle.option(option, forPrimary: false)]
+    }.filter { $0 != MPVOption.Subtitles.subScale }.map { ($0, MPV_FORMAT_NONE) }
+  )) { current, _ in current }
 
   /// Map from mpv codec name to core media video codec types.
   ///
@@ -520,6 +542,58 @@ class MPVController: NSObject {
     setUserOption(PK.subMarginY, type: .int, forName: MPVOption.Subtitles.subMarginY,
                   verboseIfDefault: true)
 
+    // Opt-in renderer extension; stock clients retain inherited secondary styles.
+    supportsIndependentSecondarySubtitleStyle = setOptionFlag("secondary-sub-style-override", true) >= 0
+    if supportsIndependentSecondarySubtitleStyle {
+      setUserOption(PK.subTextFont, type: .string, forName: "secondary-" + MPVOption.Subtitles.subFont,
+                    verboseIfDefault: true)
+      setUserOption(PK.subTextSize, type: .float, forName: "secondary-" + MPVOption.Subtitles.subFontSize,
+                    verboseIfDefault: true)
+
+      setUserOption(PK.subTextColorString, type: .color, forName: "secondary-" + MPVOption.Subtitles.subColor,
+                    verboseIfDefault: true)
+
+      setUserOption(PK.subBold, type: .bool, forName: "secondary-" + MPVOption.Subtitles.subBold,
+                    verboseIfDefault: true)
+      setUserOption(PK.subItalic, type: .bool, forName: "secondary-" + MPVOption.Subtitles.subItalic,
+                    verboseIfDefault: true)
+
+      setUserOption(PK.subBlur, type: .float, forName: "secondary-" + MPVOption.Subtitles.subBlur,
+                    verboseIfDefault: true)
+      setUserOption(PK.subSpacing, type: .float, forName: "secondary-" + MPVOption.Subtitles.subSpacing,
+                    verboseIfDefault: true)
+
+      setUserOption(PK.subBorderSize, type: .float, forName: "secondary-" + MPVOption.Subtitles.subOutlineSize,
+                    verboseIfDefault: true)
+      setUserOption(PK.subBorderColorString, type: .color, forName: "secondary-" + MPVOption.Subtitles.subOutlineColor,
+                    verboseIfDefault: true)
+
+      setUserOption(PK.subShadowSize, type: .float, forName: "secondary-" + MPVOption.Subtitles.subShadowOffset,
+                    verboseIfDefault: true)
+      setUserOption(PK.subShadowColorString, type: .color, forName: "secondary-" + MPVOption.Subtitles.subBackColor,
+                    verboseIfDefault: true)
+
+      setUserOption(PK.subBorderStyle, type: .other, forName: "secondary-" + MPVOption.Subtitles.subBorderStyle,
+                    verboseIfDefault: true) { key in
+        String(describing: Preference.enum(for: key) as Preference.SubBorderStyle)
+      }
+
+      setUserOption(PK.subAlignX, type: .other, forName: "secondary-" + MPVOption.Subtitles.subAlignX,
+                    verboseIfDefault: true) { key in
+        return String(describing: Preference.enum(for: key) as Preference.SubAlignX)
+      }
+
+      setUserOption(PK.subAlignY, type: .other, forName: "secondary-" + MPVOption.Subtitles.subAlignY,
+                    verboseIfDefault: true) { key in
+        return String(describing: Preference.enum(for: key) as Preference.SubAlignY)
+      }
+
+      setUserOption(PK.subMarginX, type: .int, forName: "secondary-" + MPVOption.Subtitles.subMarginX,
+                    verboseIfDefault: true)
+      setUserOption(PK.subMarginY, type: .int, forName: "secondary-" + MPVOption.Subtitles.subMarginY,
+                    verboseIfDefault: true)
+    }
+
     setUserOption(PK.subPos, type: .float, forName: MPVOption.Subtitles.subPos, verboseIfDefault: true)
 
     setUserOption(PK.subLang, type: .string, forName: MPVOption.TrackSelection.slang, level: .verbose)
@@ -778,10 +852,48 @@ class MPVController: NSObject {
     return strArgs
   }
 
+  private func recordOSDFeedback(_ property: String, value: OSDFeedbackValue?) -> UUID? {
+    let key = OSDFeedbackOrigins.propertyKey(property)
+    // Only typed observations can acknowledge a concrete value. Filter graphs and
+    // notification-only style options must not accumulate pending slider writes.
+    let format = observeProperties[key]
+    let typed = format == MPV_FORMAT_FLAG || format == MPV_FORMAT_INT64 ||
+      format == MPV_FORMAT_DOUBLE || format == MPV_FORMAT_STRING
+    return player.osdFeedbackOrigins.record(key, value: typed ? value : nil, origin: player.currentOSDFeedbackOrigin)
+  }
+
+  private final class SeekOSDTicket { var token: UUID? }
+
+  private func prepareCommandOSD(_ commands: [[String]]) -> (() -> Void)? {
+    var cancellations: [() -> Void] = []
+    for command in commands {
+      if let (property, value) = OSDCommandRouting.propertyMutation(command),
+         let token = recordOSDFeedback(property, value: value) {
+        cancellations.append { [weak player = self.player] in player?.osdFeedbackOrigins.cancel(property, token: token) }
+      }
+    }
+    if commands.contains(where: OSDCommandRouting.explicitlySeeks) {
+      if Thread.isMainThread {
+        let token = player.userInitiatedSeek()
+        cancellations.append { [weak player = self.player] in player?.cancelUserInitiatedSeek(token) }
+      } else {
+        // Bookkeeping stays on main, ordered before any resulting event callbacks.
+        let ticket = SeekOSDTicket()
+        DispatchQueue.main.async { [weak player = self.player] in ticket.token = player?.userInitiatedSeek() }
+        cancellations.append { [weak player = self.player] in
+          DispatchQueue.main.async { if let token = ticket.token { player?.cancelUserInitiatedSeek(token) } }
+        }
+      }
+    }
+    guard !cancellations.isEmpty else { return nil }
+    return { cancellations.forEach { $0() } }
+  }
+
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true,
                level: Logger.Level = .debug, returnValueCallback: ((Int32) -> Void)? = nil) {
     guard mpv != nil else { return }
+    let cancelFeedback = prepareCommandOSD([[command.rawValue] + args.compactMap { $0 }])
     log("Run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))", level: level)
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
     defer {
@@ -792,6 +904,7 @@ class MPVController: NSObject {
       }
     }
     let returnValue = mpv_command(self.mpv, &cargs)
+    if returnValue < 0 { cancelFeedback?() }
     if checkError {
       chkErr(returnValue)
     } else if let cb = returnValueCallback {
@@ -800,13 +913,20 @@ class MPVController: NSObject {
   }
 
   func command(rawString: String, level: Logger.Level = .debug) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
+    let cancelFeedback = prepareCommandOSD(OSDCommandRouting.commands(in: rawString))
     log("Run command: \(rawString)", level: level)
-    return mpv_command_string(mpv, rawString)
+    let result = mpv_command_string(mpv, rawString)
+    if result < 0 { cancelFeedback?() }
+    return result
   }
 
+  @discardableResult
   func asyncCommand(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true,
-                    replyUserdata: UInt64, level: Logger.Level = .debug) {
-    guard mpv != nil else { return }
+                    replyUserdata: UInt64, level: Logger.Level = .debug) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
+    let mutation = OSDCommandRouting.propertyMutation([command.rawValue] + args.compactMap { $0 })
+    let token = mutation.flatMap { recordOSDFeedback($0.0, value: $0.1) }
     log("Asynchronously run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))",
         level: level)
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
@@ -818,48 +938,62 @@ class MPVController: NSObject {
       }
     }
     let returnValue = mpv_command_async(self.mpv, replyUserdata, &cargs)
+    if returnValue < 0, let mutation { player.osdFeedbackOrigins.cancel(mutation.0, token: token) }
     if checkError {
       chkErr(returnValue)
     }
+    return returnValue
   }
 
   func observe(property: String, format: mpv_format = MPV_FORMAT_DOUBLE) {
+    guard mpv != nil else { return }
     mpv_observe_property(mpv, 0, property, format)
   }
 
   // Set property
   func setFlag(_ name: String, _ flag: Bool, level: Logger.Level = .debug) {
+    guard mpv != nil else { return }
     log("Set property: \(name)=\(flag)", level: level)
     var data: Int32 = flag ? 1 : 0
-    mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
+    let token = recordOSDFeedback(name, value: .number(flag ? 1 : 0))
+    if mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data) < 0 { player.osdFeedbackOrigins.cancel(name, token: token) }
   }
 
   func setInt(_ name: String, _ value: Int, level: Logger.Level = .debug) {
+    guard mpv != nil else { return }
     log("Set property: \(name)=\(value)", level: level)
     var data = Int64(value)
-    mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
+    let token = recordOSDFeedback(name, value: .number(Double(value)))
+    if mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data) < 0 { player.osdFeedbackOrigins.cancel(name, token: token) }
   }
 
   func setDouble(_ name: String, _ value: Double, level: Logger.Level = .debug) {
+    guard mpv != nil else { return }
     log("Set property: \(name)=\(value)", level: level)
     var data = value
-    mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
+    let token = recordOSDFeedback(name, value: .number(value))
+    if mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data) < 0 { player.osdFeedbackOrigins.cancel(name, token: token) }
   }
 
   @discardableResult
   func setString(_ name: String, _ value: String, level: Logger.Level = .debug) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     log("Set property: \(name)=\(value)", level: level)
-    return mpv_set_property_string(mpv, name, value)
+    let token = recordOSDFeedback(name, value: OSDFeedbackValue(value))
+    let result = mpv_set_property_string(mpv, name, value)
+    if result < 0 { player.osdFeedbackOrigins.cancel(name, token: token) }
+    return result
   }
 
   @discardableResult
   func setStringToDefault(_ name: String, level: Logger.Level = .debug) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     guard let value = MPVOptionDefaults.shared.getString(name) else {
       log("Failed to obtain default for option: \(name)", level: .error)
       return MPV_ERROR_OPTION_NOT_FOUND.rawValue
     }
     log("Set property to default: \(name)=\(value)", level: level)
-    return mpv_set_property_string(mpv, name, value)
+    return setString(name, value, level: level)
   }
 
   func getEnum<T: MPVOptionValue>(_ name: String) -> T {
@@ -870,24 +1004,28 @@ class MPVController: NSObject {
   }
 
   func getInt(_ name: String) -> Int {
+    guard mpv != nil else { return 0 }
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)
     return Int(data)
   }
 
   func getDouble(_ name: String) -> Double {
+    guard mpv != nil else { return 0 }
     var data = Double()
     mpv_get_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
     return data
   }
 
   func getFlag(_ name: String) -> Bool {
+    guard mpv != nil else { return false }
     var data = Int32()
     mpv_get_property(mpv, name, MPV_FORMAT_FLAG, &data)
     return data > 0
   }
 
   func getString(_ name: String) -> String? {
+    guard mpv != nil else { return nil }
     let cstr = mpv_get_property_string(mpv, name)
     let str: String? = cstr == nil ? nil : String(cString: cstr!)
     mpv_free(cstr)
@@ -896,62 +1034,41 @@ class MPVController: NSObject {
 
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
+    guard mpv != nil else { return [] }
     Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
 
     var result: [MPVFilter] = []
     var node = mpv_node()
-    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
-    guard let filters = (try? MPVNode.parse(node)!) as? [[String: Any?]] else { return result }
+    guard mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node) >= 0 else { return result }
+    defer { mpv_free_node_contents(&node) }
+    guard node.format == MPV_FORMAT_NODE_ARRAY, node.u.list != nil else { return result }
+    guard let filters = (try? MPVNode.parse(node)) as? [[String: Any?]] else { return result }
     filters.forEach { f in
-      let filter = MPVFilter(name: f["name"] as! String,
+      guard let name = f["name"] as? String else { return }
+      let filter = MPVFilter(name: name,
                              label: f["label"] as? String,
                              params: f["params"] as? [String: String])
       result.append(filter)
     }
-    mpv_free_node_contents(&node)
     return result
   }
 
-  /// Remove the audio or video filter at the given index in the list of filters.
-  ///
-  /// Previously IINA removed filters using the mpv `af remove` and `vf remove` commands described in the
-  /// [Input Commands that are Possibly Subject to Change](https://mpv.io/manual/stable/#input-commands-that-are-possibly-subject-to-change)
-  /// section of the mpv manual. The behavior of the remove command is described in the [video-filters](https://mpv.io/manual/stable/#video-filters)
-  /// section of the manual under the entry for `--vf-remove-filter`.
-  ///
-  /// When searching for the filter to be deleted the remove command takes into consideration the order of filter parameters. The
-  /// expectation is that the application using the mpv client will provide the filter to the remove command in the same way it was
-  /// added. However IINA doe not always know how a filter was added. Filters can be added to mpv outside of IINA therefore it is not
-  /// possible for IINA to know how filters were added. IINA obtains the filter list from mpv using `mpv_get_property`. The
-  /// `mpv_node` tree returned for a filter list stores the filter parameters in a `MPV_FORMAT_NODE_MAP`. The key value pairs in a
-  /// `MPV_FORMAT_NODE_MAP` are in **random** order. As a result sometimes the order of filter parameters in the filter string
-  /// representation given by IINA to the mpv remove command would not match the order of parameters given when the filter was
-  /// added to mpv and the remove command would fail to remove the filter. This was reported in
-  /// [IINA issue #3620 Audio filters with same name cannot be removed](https://github.com/iina/iina/issues/3620).
-  ///
-  /// The issue of `mpv_get_property` returning filter parameters in random order even though the remove command is sensitive to
-  /// filter parameter order was raised with the mpv project in
-  /// [mpv issue #9841 mpv_get_property returns filter params in unordered map breaking remove](https://github.com/mpv-player/mpv/issues/9841)
-  /// The response from the mpv project confirmed that the parameters in a `MPV_FORMAT_NODE_MAP` **must** be considered to
-  /// be in random order even if they appear to be ordered. The recommended methods for removing filters is to use labels, which
-  /// IINA does for filters it creates or removing based on position in the filter list. This method supports removal based on the
-  /// position within the list of filters.
-  ///
-  /// The recommended implementation is to get the entire list of filters using `mpv_get_property`, remove the filter from the
-  /// `mpv_node` tree returned by that method and then set the list of filters using `mpv_set_property`. This is the approach
-  /// used by this method.
-  /// - Parameter name: The kind of filter identified by the mpv property name, `MPVProperty.af` or `MPVProperty.vf`.
-  /// - Parameter index: Index of the filter to be removed.
-  /// - Returns: `true` if the filter was successfully removed, `false` if the filter was not removed.
+  /// Remove a filter by index by rebuilding its node list. mpv's filter matching is sensitive to
+  /// parameter order, while observed node maps are unordered (IINA #3620, mpv #9841).
+  /// https://github.com/iina/iina/issues/3620
+  /// https://github.com/mpv-player/mpv/issues/9841
+  /// Returns whether mpv accepted the updated filter list.
   func removeFilter(_ name: String, _ index: Int) -> Bool {
+    guard mpv != nil else { return false }
     Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "removeFilter() does not support \(name)!")
+    guard index >= 0 else { return false }
 
     // Get the current list of filters from mpv as a mpv_node tree.
     var oldNode = mpv_node()
     defer { mpv_free_node_contents(&oldNode) }
-    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &oldNode)
-
-    let oldList = oldNode.u.list!.pointee
+    guard mpv_get_property(mpv, name, MPV_FORMAT_NODE, &oldNode) >= 0,
+          oldNode.format == MPV_FORMAT_NODE_ARRAY, let oldListPointer = oldNode.u.list else { return false }
+    let oldList = oldListPointer.pointee
 
     // If the user uses mpv's JSON-based IPC protocol to make changes to mpv's filters behind IINA's
     // back then there is a very small window of vulnerability where the list of filters displayed
@@ -1005,8 +1122,7 @@ class MPVController: NSObject {
 
     // Set the list of filters using the new node that leaves out the filter to be removed.
     log("Set property: \(name)=<a mpv node>")
-    mpv_set_property(mpv, name, MPV_FORMAT_NODE, &newNode)
-    return true
+    return mpv_set_property(mpv, name, MPV_FORMAT_NODE, &newNode) >= 0
   }
 
   /** Set filter. only "af" or "vf" is supported for name */
@@ -1025,6 +1141,7 @@ class MPVController: NSObject {
   }
 
   func getNode(_ name: String) -> Any? {
+    guard mpv != nil else { return nil }
     var node = mpv_node()
     mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
     let parsed = try? MPVNode.parse(node)
@@ -1033,6 +1150,7 @@ class MPVController: NSObject {
   }
 
   func setNode(_ name: String, _ value: Any) {
+    guard mpv != nil else { return }
     guard var node = try? MPVNode.create(value) else {
       log("setNode: cannot encode value for \(name)", level: .error)
       return
@@ -1057,6 +1175,7 @@ class MPVController: NSObject {
   // MARK: - Hooks
 
   func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {
+    guard mpv != nil else { return }
     $hooks.withLock {
       mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
       $0[hookCounter] = hook
@@ -1071,6 +1190,13 @@ class MPVController: NSObject {
   }
 
   // MARK: - Events
+
+  /// Enqueue a main-thread boundary after all events already produced by a
+  /// native operation have been dispatched. This never waits on the main queue.
+  func afterPendingEvents(_ completion: @escaping () -> Void) {
+    readEvents()
+    queue.async { DispatchQueue.main.async(execute: completion) }
+  }
 
   // Read event and handle it async
   private func readEvents() {
@@ -1113,16 +1239,18 @@ class MPVController: NSObject {
       let userData = event.pointee.reply_userdata
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
+      let continueHook = { [weak self] in
+        guard let mpv = self?.mpv else { return }
+        mpv_hook_continue(mpv, hookID)
+      }
       guard let hook = $hooks.withLock({ $0[userData] }) else {
         // Hook not found, probably because it's from an unloaded plugin.
         // Still need to call hook_continue otherwise it will stuck.
         log("Hook \(hookID) not found", level: .warning)
-        mpv_hook_continue(self.mpv, hookID)
+        continueHook()
         break
       }
-      hook.call {
-        mpv_hook_continue(self.mpv, hookID)
-      }
+      hook.call(withNextBlock: continueHook)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -1151,6 +1279,7 @@ class MPVController: NSObject {
 
     case MPV_EVENT_SEEK:
       DispatchQueue.main.async { [self] in
+        player.seekOSDDidStart()
         player.info.isSeeking = true
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // It must be running when seeking to avoid slowdowns caused by mpv waiting for IINA to call
@@ -1159,6 +1288,7 @@ class MPVController: NSObject {
         if needRecordSeekTime {
           recordedSeekStartTime = CACurrentMediaTime()
         }
+        guard player.shouldShowSeekOSD else { return }
         player.syncUI(.time)
         let current = player.info.videoPosition?.stringRepresentation ?? Constants.String.videoTimePlaceholder
         let total = player.info.videoDuration?.stringRepresentation ?? Constants.String.videoTimePlaceholder
@@ -1168,6 +1298,7 @@ class MPVController: NSObject {
 
     case MPV_EVENT_PLAYBACK_RESTART:
       DispatchQueue.main.async { [self] in
+        player.seekOSDDidRestart()
         player.info.isSeeking = false
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // The display link will be restarted while seeking. If playback is paused shut it down
@@ -1205,20 +1336,23 @@ class MPVController: NSObject {
 
     case MPV_EVENT_COMMAND_REPLY:
       let reply = event.pointee.reply_userdata
-      if reply == MPVController.UserData.screenshot {
+      if MPVController.UserData.isScreenshot(reply) {
         let code = event.pointee.error
-        guard code >= 0 else {
-          let error = String(cString: mpv_error_string(code))
-          log("Cannot take a screenshot, mpv API error: \(error), Return value: \(code)", level: .error)
-          // Unfortunately the mpv API does not provide any details on the failure. The error
-          // code returned maps to "error running command", so all the alert can report is
-          // that we cannot take a screenshot.
-          DispatchQueue.main.async {
-            Utility.showAlert("screenshot.error_taking")
+        var fileURL: URL?
+        if code >= 0, let data = event.pointee.data {
+          // Event data belongs to mpv and expires at the next wait_event call.
+          // Copy its exact filename before dispatching to main; directory order
+          // cannot correlate simultaneous screenshots or separate player windows.
+          let result = data.load(as: mpv_event_command.self).result
+          if let values = (try? MPVNode.parse(result)) as? [String: Any?],
+             let filename = values["filename"] as? String {
+            fileURL = URL(fileURLWithPath: filename)
           }
-          break
         }
-        DispatchQueue.main.async { self.player.screenshotCallback() }
+        let outputURL = fileURL
+        DispatchQueue.main.async { [weak player = self.player] in
+          player?.screenshotCallback(requestID: reply, error: code, fileURL: outputURL)
+        }
       }
 
     case MPV_EVENT_QUEUE_OVERFLOW:
@@ -1232,6 +1366,7 @@ class MPVController: NSObject {
       // events fast enough. As IINA has been ignoring this event we don't know if this has been
       // occurring. For now log this as an error. May want to switch to an alert in the future.
       log("Critical failure, mpv events lost, queue overflowed", level: .error)
+      DispatchQueue.main.async { [weak player = self.player] in player?.cancelScreenshotRequests() }
 
     default: break
       // let eventName = String(cString: mpv_event_name(eventId))
@@ -1249,60 +1384,90 @@ class MPVController: NSObject {
 
   // MARK: - Property listeners
 
+  private func osdValue(_ property: mpv_event_property) -> OSDFeedbackValue? {
+    guard let data = property.data else { return nil }
+    switch property.format {
+    case MPV_FORMAT_FLAG: return .number(data.load(as: Int32.self) != 0 ? 1 : 0)
+    case MPV_FORMAT_INT64: return .number(Double(data.load(as: Int64.self)))
+    case MPV_FORMAT_DOUBLE: return .number(data.load(as: Double.self))
+    case MPV_FORMAT_STRING:
+      guard let string = data.load(as: UnsafePointer<CChar>?.self) else { return nil }
+      return OSDFeedbackValue(String(cString: string))
+    default: return nil
+    }
+  }
+
+
   private func handlePropertyChange(_ name: String, _ property: mpv_event_property) {
+
+    let origin = player.osdFeedbackOrigins.origin(for: name, value: osdValue(property))
+    let onMain: (@escaping () -> Void) -> Void = { [weak self] action in
+      DispatchQueue.main.async { [weak self] in
+        guard let self else { return }
+        self.player.withOSDFeedbackOrigin(origin, action)
+      }
+    }
 
     switch name {
 
     case MPVProperty.audioDeviceList:
-      DispatchQueue.main.async { self.player.audioDeviceListChanged() }
+      onMain { self.player.audioDeviceListChanged() }
 
     case MPVProperty.videoParams:
-      DispatchQueue.main.async { self.player.postNotification(.iinaVideoParamsChanged) }
+      onMain { self.player.videoParamsChanged() }
+
+    case MPVProperty.videoOutParams:
+      onMain { self.player.videoOutputSizeChanged() }
+
+    case "video-out-params/w", "video-out-params/h":
+      guard property.format == MPV_FORMAT_INT64,
+            let size = UnsafePointer<Int64>(OpaquePointer(property.data))?.pointee, size > 0 else { break }
+      onMain { self.player.videoOutputSizeChanged() }
 
     case MPVProperty.videoParamsRotate:
       guard let rotation = UnsafePointer<Int>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVProperty.videoParamsRotate, property.format)
         break
       }
-      DispatchQueue.main.async { self.player.mainWindow.rotation = rotation }
+      onMain { self.player.mainWindow.rotation = rotation }
 
     case MPVProperty.videoParamsPrimaries:
       fallthrough;
 
     case MPVProperty.videoParamsGamma:
-      DispatchQueue.main.async { self.player.refreshEdrMode() }
+      onMain { self.player.refreshEdrMode() }
 
     case MPVOption.TrackSelection.vid:
-      DispatchQueue.main.async { self.player.vidChanged() }
+      onMain { self.player.vidChanged() }
 
     case MPVOption.TrackSelection.aid:
-      DispatchQueue.main.async { self.player.aidChanged() }
+      onMain { self.player.aidChanged() }
 
     case MPVOption.TrackSelection.sid:
-      DispatchQueue.main.async { self.player.sidChanged() }
+      onMain { self.player.sidChanged() }
 
     case MPVOption.Subtitles.secondarySid:
-      DispatchQueue.main.async { self.player.secondarySidChanged() }
+      onMain { self.player.secondarySidChanged() }
 
     case MPVOption.PlaybackControl.pause:
       guard let paused = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.PlaybackControl.pause, property.format)
         break
       }
-      DispatchQueue.main.async { self.player.pauseChanged(paused) }
+      onMain { self.player.pauseChanged(paused) }
 
     case MPVProperty.chapter:
-      DispatchQueue.main.async { self.player.chapterChanged() }
+      onMain { self.player.chapterChanged() }
 
     case MPVOption.PlaybackControl.speed:
       guard let speed = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.PlaybackControl.speed, property.format)
         break
       }
-      DispatchQueue.main.async { self.player.speedChanged(speed) }
+      onMain { self.player.speedChanged(speed) }
 
     case MPVOption.PlaybackControl.loopPlaylist, MPVOption.PlaybackControl.loopFile:
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         let loopMode = player.getLoopMode()
         switch loopMode {
         case .file:
@@ -1320,7 +1485,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Video.deinterlace, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         // this property will fire a change event at file start
         if player.info.deinterlace != data {
           player.info.deinterlace = data
@@ -1331,7 +1496,7 @@ class MPVController: NSObject {
 
     case MPVOption.Video.hwdec:
       let data = String(cString: property.data.assumingMemoryBound(to: UnsafePointer<UInt8>.self).pointee)
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         if player.info.hwdec != data {
           player.info.hwdec = data
           player.sendOSD(.hwdec(player.info.hwdecEnabled))
@@ -1345,14 +1510,17 @@ class MPVController: NSObject {
         break
       }
       let intData = Int(data)
-      DispatchQueue.main.async { self.player.info.rotation = intData }
+      onMain { [self] in
+        player.info.rotation = intData
+        player.postNotification(.iinaVideoParamsChanged)
+      }
 
     case MPVOption.Audio.mute:
       guard let data = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.Audio.mute, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.isMuted = data
         player.syncUI(.volume)
         player.sendOSD(data ? OSDMessage.mute : OSDMessage.unMute)
@@ -1363,7 +1531,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Audio.volume, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.volume = data
         player.syncUI(.volume)
         player.sendOSD(.volume(data))
@@ -1374,7 +1542,7 @@ class MPVController: NSObject {
         logPropertyValueError(MPVOption.Audio.audioDelay, property.format)
         break
       }
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.audioDelay = data
         player.sendOSD(.audioDelay(data))
         player.postNotification(.iinaAudioDelayChanged)
@@ -1382,14 +1550,14 @@ class MPVController: NSObject {
 
     case MPVOption.Subtitles.subVisibility:
       if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        DispatchQueue.main.async {
+        onMain {
           self.player.subVisibilityChanged(visible)
         }
       }
 
     case MPVOption.Subtitles.secondarySubVisibility:
       if let visible = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee {
-        DispatchQueue.main.async {
+        onMain {
           self.player.secondSubVisibilityChanged(visible)
         }
       }
@@ -1402,17 +1570,22 @@ class MPVController: NSObject {
         break
       }
       guard name == MPVOption.Subtitles.subDelay else {
-        DispatchQueue.main.async { self.player.secondarySubDelayChanged(data) }
+        onMain { self.player.secondarySubDelayChanged(data) }
         break
       }
-      DispatchQueue.main.async { self.player.subDelayChanged(data) }
+      onMain { self.player.subDelayChanged(data) }
+
+    case let option where option != MPVOption.Subtitles.subScale &&
+        (SubtitleStyle.options.contains(option) ||
+         SubtitleStyle.options.contains(where: { "secondary-" + $0 == option })):
+      onMain { self.player.postNotification(.iinaSubtitleStyleChanged) }
 
     case MPVOption.Subtitles.subScale:
       guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      DispatchQueue.main.async { self.player.subScaleChanged(data) }
+      onMain { self.player.subScaleChanged(data) }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough
@@ -1422,9 +1595,9 @@ class MPVController: NSObject {
         break
       }
       if name == MPVOption.Subtitles.subPos {
-        DispatchQueue.main.async { self.player.subPosChanged(data) }
+        onMain { self.player.subPosChanged(data) }
       } else {
-        DispatchQueue.main.async { self.player.secondarySubPosChanged(data) }
+        onMain { self.player.secondarySubPosChanged(data) }
       }
 
     case MPVOption.Equalizer.contrast:
@@ -1433,7 +1606,7 @@ class MPVController: NSObject {
         break
       }
       let intData = Int(data)
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.contrast = intData
         player.sendOSD(.contrast(intData))
         player.postNotification(.iinaVideoEqualizerChanged)
@@ -1445,7 +1618,7 @@ class MPVController: NSObject {
         break
       }
       let intData = Int(data)
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.hue = intData
         player.sendOSD(.hue(intData))
         player.postNotification(.iinaVideoEqualizerChanged)
@@ -1457,7 +1630,7 @@ class MPVController: NSObject {
         break
       }
       let intData = Int(data)
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.brightness = intData
         player.sendOSD(.brightness(intData))
         player.postNotification(.iinaVideoEqualizerChanged)
@@ -1469,7 +1642,7 @@ class MPVController: NSObject {
         break
       }
       let intData = Int(data)
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.gamma = intData
         player.sendOSD(.gamma(intData))
         player.postNotification(.iinaVideoEqualizerChanged)
@@ -1481,7 +1654,7 @@ class MPVController: NSObject {
         break
       }
       let intData = Int(data)
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.info.saturation = intData
         player.sendOSD(.saturation(intData))
         player.postNotification(.iinaVideoEqualizerChanged)
@@ -1490,30 +1663,30 @@ class MPVController: NSObject {
     // following properties may change before file loaded
 
     case MPVProperty.playlistCount:
-      DispatchQueue.main.async { self.player.postNotification(.iinaPlaylistChanged) }
+      onMain { self.player.postNotification(.iinaPlaylistChanged) }
 
     case MPVProperty.trackList:
-      DispatchQueue.main.async { self.player.trackListChanged() }
+      onMain { self.player.trackListChanged() }
 
     case MPVProperty.vf:
-      DispatchQueue.main.async { [self] in
+      onMain { [self] in
         player.vfChanged()
       }
 
     case MPVProperty.af:
-      DispatchQueue.main.async { self.player.afChanged() }
+      onMain { self.player.afChanged() }
 
     case MPVOption.Window.fullscreen:
-      DispatchQueue.main.async { self.player.fullscreenChanged() }
+      onMain { self.player.fullscreenChanged() }
 
     case MPVOption.Window.ontop:
-      DispatchQueue.main.async { self.player.ontopChanged() }
+      onMain { self.player.ontopChanged() }
 
     case MPVOption.Window.windowScale:
-      DispatchQueue.main.async { self.player.windowScaleChanged() }
+      onMain { self.player.windowScaleChanged() }
 
     case MPVProperty.mediaTitle:
-      DispatchQueue.main.async { self.player.mediaTitleChanged() }
+      onMain { self.player.mediaTitleChanged() }
 
     case MPVProperty.idleActive:
       guard let idleActive = UnsafePointer<Bool>(OpaquePointer(property.data))?.pointee else {
@@ -1521,10 +1694,10 @@ class MPVController: NSObject {
         break
       }
       guard idleActive else { break }
-      DispatchQueue.main.async { self.player.idleActiveChanged() }
+      onMain { self.player.idleActiveChanged() }
 
     case MPVProperty.currentAo:
-      DispatchQueue.main.async { self.player.currentAoChanged() }
+      onMain { self.player.currentAoChanged() }
 
     default:
       // Utility.log("MPV property changed (unhandled): \(name)")
@@ -1534,7 +1707,7 @@ class MPVController: NSObject {
     // This code is running in the com.colliderli.iina.controller dispatch queue. We must not run
     // plugins from a task in this queue. Accessing EventController data from a thread in this queue
     // results in data races that can cause a crash. See issue 3986.
-    DispatchQueue.main.async { [self] in
+    onMain { [self] in
       let eventName = EventController.Name("mpv.\(name).changed")
       if player.events.hasListener(for: eventName) {
         // FIXME: better convert to JSValue before passing to call()
@@ -1589,6 +1762,7 @@ class MPVController: NSObject {
 
   private func setOptionFloat(_ name: String, _ value: Float, level: Logger.Level = .debug,
                               verboseIfDefault: Bool = false) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     let levelToUse: Logger.Level = {
       guard verboseIfDefault, let defaultValue = MPVOptionDefaults.shared.getDouble(name),
             abs(Double(value).distance(to: defaultValue)) <= Double.leastNonzeroMagnitude else {
@@ -1603,6 +1777,7 @@ class MPVController: NSObject {
 
   private func setOptionInt(_ name: String, _ value: Int, level: Logger.Level = .debug,
                             verboseIfDefault: Bool = false) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     let levelToUse: Logger.Level = verboseIfDefault &&
       MPVOptionDefaults.shared.getInt(name) == value ? .verbose  : level
     log("Set option: \(name)=\(value)", level: levelToUse)
@@ -1613,6 +1788,7 @@ class MPVController: NSObject {
   @discardableResult
   private func setOptionString(_ name: String, _ value: String, level: Logger.Level = .debug,
                                verboseIfDefault: Bool = false) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     let levelToUse: Logger.Level = verboseIfDefault &&
       MPVOptionDefaults.shared.getString(name) == value ? .verbose  : level
     log("Set option: \(name)=\(value)", level: levelToUse)

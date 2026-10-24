@@ -10,6 +10,118 @@ import Cocoa
 
 fileprivate let ui = SettingsUIHelper.sharedUI
 
+/// Observe only a rendered row's committed values, never defaults globally.
+final class SettingsRestartChangeObserver: NSObject {
+  private let defaults: UserDefaults
+  private let keys: [Preference.Key]
+  private let condition: ((Preference.Key) -> Bool)?
+  private weak var view: NSView?
+  private var values: [String: NSObject] = [:]
+  private var scheduled = false
+  private var editingObservers: [NSObjectProtocol] = []
+  private weak var editingWindow: SettingsWindow?
+  private weak var committedEditingWindow: SettingsWindow?
+  private var committedWithReturn = false
+
+  init(keys: [Preference.Key], view: NSView, defaults: UserDefaults = .standard,
+       when condition: ((Preference.Key) -> Bool)? = nil) {
+    self.keys = Array(Set(keys))
+    self.view = view
+    self.defaults = defaults
+    self.condition = condition
+    super.init()
+    values = snapshot()
+    self.keys.forEach { defaults.addObserver(self, forKeyPath: $0.rawValue, options: .new, context: nil) }
+    let center = NotificationCenter.default
+    editingObservers.append(center.addObserver(
+      forName: NSControl.textDidBeginEditingNotification, object: nil, queue: .main
+    ) { [weak self] note in
+      guard let self, let control = note.object as? NSControl, control.isEnabled,
+            let view = self.view, control.isDescendant(of: view),
+            !view.isHiddenOrHasHiddenAncestor,
+            let window = view.window as? SettingsWindow, window.isVisible else { return }
+      self.editingWindow = window
+    })
+    editingObservers.append(center.addObserver(
+      forName: NSControl.textDidEndEditingNotification, object: nil, queue: .main
+    ) { [weak self] note in
+      guard let self, let control = note.object as? NSView,
+            let view = self.view, control.isDescendant(of: view) else { return }
+      if let window = self.editingWindow {
+        self.committedEditingWindow = window
+        self.editingWindow = nil
+      }
+      if (note.userInfo?["NSTextMovement"] as? Int) == NSTextMovement.return.rawValue {
+        // AppKit can keep/restart the same editor after Return. Its presence
+        // must not hide this explicit commit; Tab still waits for row exit.
+        self.committedWithReturn = true
+        if self.committedEditingWindow == nil {
+          self.committedEditingWindow = view.window as? SettingsWindow
+        }
+      }
+      self.scheduleEvaluation()
+    })
+  }
+
+  deinit {
+    keys.forEach { defaults.removeObserver(self, forKeyPath: $0.rawValue) }
+    editingObservers.forEach { NotificationCenter.default.removeObserver($0) }
+  }
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?,
+                            change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+    guard Thread.isMainThread else {
+      DispatchQueue.main.async { [weak self] in
+        guard let self, let keyPath else { return }
+        self.values[keyPath] = self.defaults.object(forKey: keyPath) as? NSObject ?? NSNull()
+      }
+      return
+    }
+    scheduleEvaluation()
+  }
+
+  private func snapshot() -> [String: NSObject] {
+    Dictionary(uniqueKeysWithValues: keys.map { ($0.rawValue, defaults.object(forKey: $0.rawValue) as? NSObject ?? NSNull()) })
+  }
+
+  private func scheduleEvaluation() {
+    guard !scheduled else { return }
+    scheduled = true
+    DispatchQueue.main.async { [weak self] in
+      guard let self else { return }
+      self.scheduled = false
+      self.evaluate()
+    }
+  }
+
+  private func evaluate() {
+    let next = snapshot()
+    guard let view else { values = next; return }
+    // A continuous binding may save each keystroke. Wait for explicit Return or
+    // for the editor to leave this row, then compare the final saved value.
+    func hasEditor(_ view: NSView) -> Bool {
+      (view as? NSTextField)?.currentEditor() != nil || view.subviews.contains(where: hasEditor)
+    }
+    guard committedWithReturn || (!hasEditor(view) && editingWindow == nil) else { return }
+    committedWithReturn = false
+    let committedWindow = committedEditingWindow
+    committedEditingWindow = nil
+    guard let window = view.window as? SettingsWindow ?? committedWindow, window.isVisible,
+          committedWindow === window || !view.isHiddenOrHasHiddenAncestor else { values = next; return }
+    let changed = keys.filter { !(values[$0.rawValue] ?? NSNull()).isEqual(next[$0.rawValue]) }
+    values = next
+    func hasEnabledControl(_ view: NSView) -> Bool {
+      guard !view.isHiddenOrHasHiddenAncestor else { return false }
+      if let field = view as? NSTextField { return field.isEditable && field.isEnabled }
+      if let control = view as? NSControl, !(control is NSImageView), control.isEnabled { return true }
+      return view.subviews.contains(where: hasEnabledControl)
+    }
+    guard committedWindow === window || hasEnabledControl(view),
+          changed.contains(where: { condition?($0) ?? true }) else { return }
+    AppRestart.confirmSettingsChange(in: window)
+  }
+}
+
 
 struct SettingsItem {
   class Base: NSObject, SettingsContainer {
@@ -19,6 +131,24 @@ struct SettingsItem {
     var isLastItem = false
 
     var controlSize: NSControl.ControlSize = .regular
+    private var restartRequired = false
+    private var restartAdditionalKeys: [Preference.Key] = []
+    private var restartCondition: ((Preference.Key) -> Bool)?
+    private var restartObserver: SettingsRestartChangeObserver?
+
+    func requiresRestart(additionalKeys: [Preference.Key] = [],
+                         when condition: ((Preference.Key) -> Bool)? = nil) -> Self {
+      restartRequired = true
+      restartAdditionalKeys = additionalKeys
+      restartCondition = condition
+      return self
+    }
+
+    func observeRestartChanges(for key: Preference.Key?, in view: NSView) {
+      guard restartRequired else { return }
+      restartObserver = SettingsRestartChangeObserver(keys: key.map { [$0] + restartAdditionalKeys } ?? restartAdditionalKeys,
+                                                     view: view, when: restartCondition)
+    }
 
     func setControlSize(_ label: NSTextField) {
       label.controlSize = controlSize
@@ -157,6 +287,7 @@ struct SettingsItem {
       textField.padding(.leading(30), .trailing)
 
       stackView.padding(.leading(6), .trailing(8), .vertical(8))
+      observeRestartChanges(for: key, in: view)
       return view
     }
 
@@ -262,6 +393,7 @@ struct SettingsItem {
       self.renderedView = view
       populateViews(on: view)
       initBinding()
+      observeRestartChanges(for: key, in: view)
       return view
     }
 
@@ -529,6 +661,7 @@ struct SettingsItem {
 
   class PopupButton: General {
     private var popupButton: NSPopUpButton!
+    private var descriptionTag: Int?
     private var valueTypes: [(Int, String)] = []
     private var customBinding = false
     private var customBindingBlock: ((NSPopUpButton) -> Void)?
@@ -598,6 +731,13 @@ struct SettingsItem {
       return self
     }
 
+    func hasDescription(forTag tag: Int, content: SettingsLocalization.Key) -> Self {
+      hasDesc = true
+      descKey = content
+      descriptionTag = tag
+      return self
+    }
+
     func disableSubListOnTag(_ tag: Int) -> Self {
       self.tagForDisabled = tag
       return self
@@ -623,6 +763,7 @@ struct SettingsItem {
     }
 
     @objc func popupChanged(_ sender: NSPopUpButton) {
+      if let descriptionTag { desc.isHidden = sender.selectedTag() != descriptionTag }
       guard let detailView = renderedDetailView, let tag = tagForDisabled else { return }
 
       let enabled = sender.selectedTag() != tag
@@ -640,13 +781,13 @@ struct SettingsItem {
   }
 
   class Switch: General {
-    var nsSwitch: NSSwitch!
+    var nsSwitch: AccentSwitch!
     private var customBinding = false
     private var customBindingBlock: ((Switch) -> Void)?
     var stateChangeCallback: ((Switch) -> Void)?
 
     override func getValueViews() -> [NSView] {
-      nsSwitch = NSSwitch()
+      nsSwitch = AccentSwitch()
       nsSwitch.controlSize = .mini
       nsSwitch.action = #selector(switchChanged)
       nsSwitch.target = self
@@ -686,7 +827,7 @@ struct SettingsItem {
       switchChanged(nil)
     }
 
-    @objc func switchChanged(_ sender: NSSwitch?) {
+    @objc func switchChanged(_ sender: AccentSwitch?) {
       let enabled = nsSwitch.state == .on
       if let detailView = renderedDetailView {
         if !isExpandableAndClickable {
@@ -716,17 +857,17 @@ struct SettingsItem {
     var keySwitch: Preference.Key?
     var keyPopup: Preference.Key?
 
-    private var nsSwitch: NSSwitch!
+    private var nsSwitch: AccentSwitch!
     private var popupButton: NSPopUpButton!
     private var valueTypes: [(Int, String)] = []
 
     private var customBindingPopup = false
     private var customBindingBlockPopup: ((NSPopUpButton) -> Void)?
     private var customBindingSwitch = false
-    private var customBindingBlockSwitch: ((NSSwitch) -> Void)?
+    private var customBindingBlockSwitch: ((AccentSwitch) -> Void)?
 
     override func getValueViews() -> [NSView] {
-      nsSwitch = NSSwitch()
+      nsSwitch = AccentSwitch()
       nsSwitch.controlSize = .mini
       nsSwitch.action = #selector(switchChanged)
       nsSwitch.target = self
@@ -776,7 +917,7 @@ struct SettingsItem {
       return self
     }
 
-    func bindSwitchToCustom(block: @escaping (NSSwitch) -> Void) -> Self {
+    func bindSwitchToCustom(block: @escaping (AccentSwitch) -> Void) -> Self {
       self.customBindingSwitch = true
       self.customBindingBlockSwitch = block
       return self
@@ -807,7 +948,7 @@ struct SettingsItem {
       }
     }
 
-    @objc func switchChanged(_ sender: NSSwitch) {
+    @objc func switchChanged(_ sender: AccentSwitch) {
       let enableSubControls = sender.state == .on
       setSubControls(popupButton, enabled: enableSubControls)
       if let detailView = renderedDetailView {
@@ -939,17 +1080,55 @@ struct SettingsItem {
     var keySwitch: Preference.Key?
     var keyInput: Preference.Key?
 
-    private var nsSwitch: NSSwitch!
+    private var nsSwitch: AccentSwitch!
     private var valueTypes: [(Int, String)] = []
     private var textField: NSTextField!
     private var trailingLabel: SettingsLocalization.Key?
     private var range: ClosedRange<Double>?
     private var allowsFloats = false
+    private var step: Double?
+    private var stepper: NSStepper?
+    private var cachedStepperValue: Double = 0
 
     private var customBindingInput = false
     private var customBindingBlockInput: ((NSTextField) -> Void)?
     private var customBindingSwitch = false
-    private var customBindingBlockSwitch: ((NSSwitch) -> Void)?
+    private var customBindingBlockSwitch: ((AccentSwitch) -> Void)?
+
+    func step(_ increment: Double) -> Self {
+      precondition(increment > 0)
+      step = increment
+      return self
+    }
+
+    @objc private func stepperValueChanged(_ sender: NSStepper) {
+      let increment = cachedStepperValue < sender.doubleValue ? sender.increment : -sender.increment
+      let value = textField.doubleValue + increment
+      let newValue = range.map { value.clamped(to: $0) } ?? value
+      textField.doubleValue = newValue
+      if let info = textField.infoForBinding(.value),
+         let observedObject = info[.observedObject] as? NSObject,
+         let keyPath = info[.observedKeyPath] as? String {
+        observedObject.setValue(newValue, forKeyPath: keyPath)
+      }
+      cachedStepperValue = sender.doubleValue
+    }
+
+    private class StepperWithSwitch: NSStepper {
+      private let nsSwitch: AccentSwitch
+
+      override var isEnabled: Bool {
+        get { super.isEnabled }
+        set { super.isEnabled = newValue && nsSwitch.state == .on }
+      }
+
+      init(_ nsSwitch: AccentSwitch) {
+        self.nsSwitch = nsSwitch
+        super.init(frame: .zero)
+      }
+
+      required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    }
 
     func range(_ range: ClosedRange<Double>, allowsFloats: Bool = false) -> Self {
       self.range = range
@@ -958,7 +1137,7 @@ struct SettingsItem {
     }
 
     override func getValueViews() -> [NSView] {
-      nsSwitch = NSSwitch()
+      nsSwitch = AccentSwitch()
       nsSwitch.controlSize = .mini
       nsSwitch.action = #selector(switchChanged)
       nsSwitch.target = self
@@ -977,12 +1156,28 @@ struct SettingsItem {
         formatter.numberStyle = .decimal
         textField.formatter = formatter
       }
+      var inputView: NSView = textField
+      if let step {
+        let stepper = StepperWithSwitch(nsSwitch)
+        stepper.increment = step
+        stepper.minValue = -1e10
+        stepper.maxValue = 1e10
+        stepper.valueWraps = false
+        stepper.controlSize = controlSize
+        stepper.target = self
+        stepper.action = #selector(stepperValueChanged(_:))
+        cachedStepperValue = stepper.doubleValue
+        self.stepper = stepper
+        let stack = NSStackView(views: [textField, stepper])
+        stack.spacing = 2
+        inputView = stack
+      }
       if let trailingLabel {
         let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
-        return [textField, label, nsSwitch]
+        return [inputView, label, nsSwitch]
       } else {
-        return [textField, nsSwitch]
+        return [inputView, nsSwitch]
       }
     }
 
@@ -1030,9 +1225,10 @@ struct SettingsItem {
       }
     }
 
-    @objc func switchChanged(_ sender: NSSwitch) {
+    @objc func switchChanged(_ sender: AccentSwitch) {
       let enableSubControls = sender.state == .on
       setSubControls(textField, enabled: enableSubControls)
+      if let stepper { setSubControls(stepper, enabled: enableSubControls) }
       if let detailView = renderedDetailView {
         setSubControls(detailView, enabled: enableSubControls)
       }
@@ -1301,9 +1497,9 @@ class SettingsAccessory {
           $0.borderWidth = 1
           $0.fillColor = .gray.withAlphaComponent(0.1)
         }
-        selectedItem.animator().borderColor = .controlAccentColor
+        selectedItem.animator().borderColor = AppAccentColor.color
         selectedItem.animator().borderWidth = 2
-        selectedItem.animator().fillColor = .controlAccentColor.withAlphaComponent(0.1)
+        selectedItem.animator().fillColor = AppAccentColor.color.withAlphaComponent(0.1)
       }
     }
 
@@ -1331,9 +1527,18 @@ class SettingsAccessory {
   class FileChooserView {
     var textField: NSTextField
     var chooseButton: NSButton
+    private let key: Preference.Key
 
     init(_ key: Preference.Key) {
+      self.key = key
       textField = NSTextField(labelWithString: "")
+      textField.usesSingleLineMode = true
+      textField.maximumNumberOfLines = 1
+      textField.lineBreakMode = .byTruncatingMiddle
+      // Let a long path yield before the row title, and bound its fitting width.
+      textField.setContentCompressionResistancePriority(.init(249), for: .horizontal)
+      textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
+      textField.widthAnchor.constraint(lessThanOrEqualToConstant: 200).isActive = true
       textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
       chooseButton = NSButton(
         title: "",
@@ -1346,7 +1551,7 @@ class SettingsAccessory {
 
     @objc func chooseFolder(_ sender: AnyObject) {
       Utility.quickOpenPanel(title: "Choose a path", chooseDir: true, sheetWindow: chooseButton.window) { url in
-        Preference.set(url.path, for: .screenshotFolder)
+        Preference.set(url.path, for: self.key)
         UserDefaults.standard.synchronize()
       }
     }
@@ -1423,7 +1628,7 @@ class SettingsAccessory {
 }
 
 /// A [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) controlled by a
-/// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch).
+/// [AccentSwitch](https://developer.apple.com/documentation/appkit/nsswitch).
 class TextFieldWithSwitch: NSTextField {
 
   /// A Boolean value that indicates whether the receiver reacts to mouse events.
@@ -1442,11 +1647,11 @@ class TextFieldWithSwitch: NSTextField {
     }
   }
 
-  /// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch) that controls whether this
+  /// [AccentSwitch](https://developer.apple.com/documentation/appkit/nsswitch) that controls whether this
   /// [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) can be enabled.
-  private let nsSwitch: NSSwitch
+  private let nsSwitch: AccentSwitch
 
-  init(_ nsSwitch: NSSwitch) {
+  init(_ nsSwitch: AccentSwitch) {
     self.nsSwitch = nsSwitch
     super.init(frame: NSRect.zero)
   }

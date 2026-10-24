@@ -86,6 +86,7 @@ class SettingsPageNetwork: SettingsPage {
           .image(name: ["person.crop.circle"])
         SettingsItem.LongInput()
           .bindTo(.httpProxy)
+          .requiresRestart()
           .image(name: ["rectangle.connected.to.line.below"])
           .hasDescription()
         SettingsItem.PopupButton()
@@ -109,6 +110,7 @@ class SettingsPageNetwork: SettingsPage {
           .withDetailView {
             SettingsItem.LongInput()
               .bindTo(.ytdlSearchPath)
+              .requiresRestart()
               .hasDescription()
             SettingsItem.LongInput()
               .bindTo(.ytdlRawOptions)

@@ -156,6 +156,7 @@ class JavascriptPluginInstance {
       "utils": JavascriptAPIUtils(context: ctx, pluginInstance: self),
       "file": JavascriptAPIFile(context: ctx, pluginInstance: self),
       "preferences": JavascriptAPIPreferences(context: ctx, pluginInstance: self),
+      "appearance": JavascriptAPIAppearance(context: ctx, pluginInstance: self),
       "console": JavascriptAPIConsole(context: ctx, pluginInstance: self),
       "http": JavascriptAPIHttp(context: ctx, pluginInstance: self)
     ]

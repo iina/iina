@@ -18,6 +18,251 @@
 
 import Foundation
 
+/// Capture provenance at mutation/observation time, before asynchronous UI delivery.
+enum OSDFeedbackOrigin { case command, sidebar }
+
+enum OSDFeedbackValue: Equatable {
+  case number(Double)
+  case text(String)
+
+  init(_ text: String) {
+    if let number = Double(text), number.isFinite { self = .number(number) }
+    else if text == "yes" { self = .number(1) }
+    else if text == "no" { self = .number(0) }
+    else { self = .text(text) }
+  }
+
+  func matches(_ other: Self) -> Bool {
+    switch (self, other) {
+    case (.number(let lhs), .number(let rhs)):
+      return lhs.isFinite && rhs.isFinite && abs(lhs - rhs) <= 0.000001 * max(1, abs(lhs), abs(rhs))
+    default: return self == other
+    }
+  }
+}
+
+/// Only matching acknowledgements inherit a sidebar control's quiet feedback.
+/// A later ordinary command supersedes that property, never unrelated controls.
+final class OSDFeedbackOrigins {
+  private struct Intent { let token: UUID; let value: OSDFeedbackValue }
+  private let lock = NSLock()
+  private var properties: [String: [Intent]] = [:]
+
+  static func propertyKey(_ property: String) -> String {
+    for prefix in ["options/", "file-local-options/"] where property.hasPrefix(prefix) {
+      return String(property.dropFirst(prefix.count))
+    }
+    return property
+  }
+
+  @discardableResult
+  func record(_ property: String, value: OSDFeedbackValue?, origin: OSDFeedbackOrigin) -> UUID? {
+    let key = Self.propertyKey(property)
+    lock.lock(); defer { lock.unlock() }
+    guard origin == .sidebar, let value else { properties.removeValue(forKey: key); return nil }
+    let token = UUID()
+    properties[key, default: []].append(Intent(token: token, value: value))
+    return token
+  }
+
+  func origin(for property: String, value: OSDFeedbackValue?) -> OSDFeedbackOrigin {
+    lock.lock(); defer { lock.unlock() }
+    let key = Self.propertyKey(property)
+    guard let value, let intents = properties[key] else { return .command }
+    guard let index = intents.firstIndex(where: { $0.value.matches(value) }) else {
+      properties.removeValue(forKey: key)
+      return .command
+    }
+    // Property events may arrive after several slider writes, or coalesce to the latest.
+    // Keep the acknowledgement for duplicate events and any still-pending UI values.
+    properties[key] = Array(intents[index...])
+    return .sidebar
+  }
+
+  func cancel(_ property: String, token: UUID?) {
+    guard let token else { return }
+    lock.lock(); defer { lock.unlock() }
+    let key = Self.propertyKey(property)
+    guard var intents = properties[key] else { return }
+    intents.removeAll { $0.token == token }
+    if intents.isEmpty { properties.removeValue(forKey: key) }
+    else { properties[key] = intents }
+  }
+
+  func reset() {
+    lock.lock(); defer { lock.unlock() }
+    properties.removeAll()
+  }
+}
+
+/// Inspect command structure; execution always receives the original text.
+enum OSDCommandRouting {
+  private static let prefixes: Set<String> = ["no-osd", "osd-auto", "osd-bar", "osd-msg", "osd-msg-bar",
+    "raw", "expand-properties", "repeatable", "nonrepeatable", "nonscalable", "async", "sync"]
+
+  private static func normalized(_ words: [String]) -> [String] {
+    var words = Array(words.drop(while: { prefixes.contains($0) }))
+    if !words.isEmpty { words[0] = words[0].replacingOccurrences(of: "_", with: "-") }
+    return words
+  }
+
+  static func commands(in text: String) -> [[String]] {
+    // Match input/cmd.c token boundaries. Newlines are whitespace; a comment
+    // ends the flat command string. Backslashes escape only inside double quotes.
+    let input = Array(text.utf8)
+    var index = 0, commands: [[String]] = [], words: [String] = []
+    func isWhitespace(_ byte: UInt8) -> Bool { byte == 32 || (9...13).contains(byte) }
+    func skipWhitespace() {
+      while index < input.count, isWhitespace(input[index]) { index += 1 }
+    }
+    func flushCommand() {
+      let command = normalized(words)
+      if !command.isEmpty { commands.append(command) }
+      words = []
+    }
+    func readHex(_ length: Int) -> UInt32? {
+      guard index + length <= input.count else { return nil }
+      let digits = input[index..<(index + length)]
+      guard digits.allSatisfy({ (48...57).contains($0) || (65...70).contains($0) || (97...102).contains($0) }),
+            let value = UInt32(String(decoding: digits, as: UTF8.self), radix: 16) else { return nil }
+      index += length
+      return value
+    }
+    func readWord() -> String? {
+      var value: [UInt8] = []
+      let quote = input[index]
+      if quote == 34 {
+        index += 1
+        let escapes: [UInt8: UInt8] = [34: 34, 92: 92, 47: 47, 98: 8, 102: 12,
+                                     110: 10, 114: 13, 116: 9, 101: 27, 39: 39]
+        while index < input.count {
+          let byte = input[index]; index += 1
+          if byte == 34 { return String(decoding: value, as: UTF8.self) }
+          guard byte == 92 else { value.append(byte); continue }
+          guard index < input.count else { return nil }
+          let escape = input[index]; index += 1
+          if let replacement = escapes[escape] { value.append(replacement) }
+          else if escape == 120, let byte = readHex(2) { value.append(UInt8(byte)) }
+          else if escape == 117, var scalar = readHex(4) {
+            if (0xD800...0xDBFF).contains(scalar) {
+              guard index + 2 <= input.count, input[index] == 92, input[index + 1] == 117 else { return nil }
+              index += 2
+              guard let low = readHex(4), (0xDC00...0xDFFF).contains(low) else { return nil }
+              scalar = 0x10000 + ((scalar - 0xD800) << 10) + low - 0xDC00
+            }
+            guard let decoded = UnicodeScalar(scalar) else { return nil }
+            value.append(contentsOf: String(decoded).utf8)
+          } else { return nil }
+        }
+        return nil
+      }
+      if quote == 39 || quote == 96 {
+        index += 1
+        let delimiter: UInt8
+        if quote == 96 {
+          guard index < input.count else { return nil }
+          delimiter = input[index]; index += 1
+        } else { delimiter = quote }
+        while index < input.count {
+          if input[index] == delimiter,
+             quote == 39 || (index + 1 < input.count && input[index + 1] == 96) {
+            index += quote == 39 ? 1 : 2
+            return String(decoding: value, as: UTF8.self)
+          }
+          value.append(input[index]); index += 1
+        }
+        return nil
+      }
+      let start = index
+      while index < input.count, !isWhitespace(input[index]), input[index] != 35, input[index] != 59 { index += 1 }
+      return String(decoding: input[start..<index], as: UTF8.self)
+    }
+    while index < input.count {
+      skipWhitespace()
+      guard index < input.count, input[index] != 35 else { break }
+      if input[index] == 59 {
+        guard !words.isEmpty else { return commands }
+        flushCommand(); index += 1; skipWhitespace()
+        // mpv ignores an empty trailing command and the remaining text after it.
+        if index == input.count || input[index] == 35 || input[index] == 59 { break }
+      } else {
+        // A malformed quote invalidates the whole native command list.
+        guard let word = readWord() else { return [] }
+        words.append(word)
+      }
+    }
+    flushCommand()
+    return commands
+  }
+
+  static func explicitlySeeks(_ words: [String]) -> Bool {
+    let words = normalized(words)
+    guard let command = words.first else { return false }
+    switch command {
+    case "seek", "frame-back-step", "sub-seek": return true
+    case "revert-seek":
+      let flags = words.dropFirst().first?.split(separator: "+") ?? []
+      return !flags.contains("mark") && !flags.contains("mark-permanent")
+    case "frame-step":
+      let frames = words.count > 1 ? Int(words[1]) : 1
+      guard let frames, frames != 0 else { return false }
+      return frames < 0 || (words.count > 2 && words[2] == "seek")
+    default:
+      guard let (property, _) = propertyMutation(words) else { return false }
+      return ["time-pos", "playback-time", "percent-pos", "chapter"].contains(property)
+    }
+  }
+
+  static func propertyMutation(_ words: [String]) -> (String, OSDFeedbackValue?)? {
+    let words = normalized(words)
+    guard words.count >= 2 else { return nil }
+    switch words[0] {
+    case "set", "set-property":
+      return (words[1], words.count >= 3 ? OSDFeedbackValue(words[2]) : nil)
+    case "cycle-values":
+      let propertyIndex = words[1] == "!reverse" ? 2 : 1
+      return words.count > propertyIndex ? (words[propertyIndex], nil) : nil
+    case "add", "multiply", "cycle", "change-list":
+      return (words[1], nil)
+    default: return nil
+    }
+  }
+
+  static func changesVideoGeometry(property: String) -> Bool {
+    let property = OSDFeedbackOrigins.propertyKey(property)
+    let name = property.split(separator: "/").first.map(String.init) ?? property
+    return ["vid", "video", "edition", "vf", "lavfi-complex", "video-aspect", "video-aspect-override",
+      "video-aspect-method", "video-rotate", "video-crop", "panscan", "video-zoom", "video-pan-x",
+      "video-pan-y", "video-scale-x", "video-scale-y", "video-align-x", "video-align-y", "video-unscaled",
+      "video-recenter", "video-margin-ratio-left", "video-margin-ratio-right", "video-margin-ratio-top",
+      "video-margin-ratio-bottom", "playlist-pos", "playlist-pos-1", "playlist-current-pos"].contains(name) ||
+      property.contains("$")
+  }
+
+  /// A Crop/Delogo editor owns the source geometry until its transition finishes.
+  /// Appending media and unrelated playback controls leave that ownership intact.
+  static func changesVideoGeometry(_ words: [String], playlistIndex: Int) -> Bool {
+    let words = normalized(words)
+    guard let command = words.first else { return false }
+    if let (property, _) = propertyMutation(words) { return changesVideoGeometry(property: property) }
+    switch command {
+    case "del":
+      return words.count > 1 && changesVideoGeometry(property: words[1])
+    case "vf", "vf-command", "video-add", "video-remove", "video-reload", "playlist-next", "playlist-prev",
+         "playlist-next-playlist", "playlist-prev-playlist", "playlist-play-index", "apply-profile", "load-config-file":
+      return true
+    case "loadfile", "loadlist":
+      let mode = words.count > 2 ? words[2] : "replace"
+      return !["append", "append-play", "insert-next", "insert-next-play", "insert-at", "insert-at-play"].contains(mode)
+    case "playlist-remove":
+      guard words.count > 1, let index = Int(words[1]) else { return true }
+      return index == playlistIndex
+    default:
+      return false
+    }
+  }
+}
+
 
 fileprivate func toPercent(_ value: Double, _ bound: Double) -> Double {
   return (value + bound).clamped(to: 0...(bound * 2)) / (bound * 2)
@@ -97,7 +342,7 @@ enum OSDMessage {
   case abLoopUpdate(PlaybackInfo.LoopStatus, String)
   case stop
   case chapter(String)
-  case track(MPVTrack)
+  case track(MPVTrack, position: Int? = nil)
   case addToPlaylist(Int)
   case clearPlaylist
 
@@ -129,6 +374,18 @@ enum OSDMessage {
 
   case custom(String)
   case customWithDetail(String, String)
+
+  var isSettingFeedback: Bool {
+    switch self {
+    case .volume, .speed, .aspect, .crop, .rotate, .deinterlace, .hwdec,
+         .audioDelay, .subDelay, .subScale, .subHidden, .subVisible,
+         .secondSubDelay, .secondSubHidden, .secondSubPos, .secondSubVisible, .subPos,
+         .mute, .unMute, .track, .contrast, .hue, .saturation, .brightness, .gamma,
+         .fileLoop, .playlistLoop, .noLoop, .clearPlaylist, .addFilter, .removeFilter:
+      return true
+    default: return false
+    }
+  }
 
   /// `True` if this OSD message has been suppressed by the user, otherwise `false`.
   ///
@@ -349,7 +606,7 @@ enum OSDMessage {
         .withLeftToRightText("({{currChapter}}/{{chapterCount}}) {{position}} / {{duration}}")
       )
 
-    case .track(let track):
+    case .track(let track, let position):
       let keySuffix: String
       switch track.type {
       case .video: keySuffix = "video"
@@ -363,7 +620,8 @@ enum OSDMessage {
       }
       let trackTypeStr = String(format: NSLocalizedString("track." + keySuffix,
         comment: "Kind of track (Audio, Video, Subtitle)"))
-      return (trackTypeStr + ": " + track.readableTitle, .normal)
+      let title = position.map { "#\($0) \(track.readableString())" } ?? track.readableTitle
+      return (trackTypeStr + ": " + title, .normal)
 
     case .subScale(let value):
       let text = String(format: NSLocalizedString("osd.subtitle_scale", comment: "Subtitle Scale: %@x"), value.groupedStringUpTo6Decimals)

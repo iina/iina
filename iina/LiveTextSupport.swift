@@ -35,6 +35,7 @@ class LiveTextController: NSObject {
   var isAvailable: Bool {
     mainWindow.pipStatus == .notInPIP
       && !mainWindow.interactiveMode.isActive
+      && !mainWindow.isCropTransitionInProgress
       && !mainWindow.player.isInMiniPlayer
   }
   private var wasUIHiddenByLiveText: Bool = false

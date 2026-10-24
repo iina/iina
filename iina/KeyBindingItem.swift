@@ -20,6 +20,7 @@ class KeyBindingItem {
   var type: ItemType
 
   var l10nKey: String?
+  var displayName: String?
 
   var children: [KeyBindingItem]
 
@@ -77,7 +78,7 @@ class KeyBindingItem {
     case .label, .placeholder, .iinaCmd:
       let k = type == .iinaCmd ? "iina" : (l10nKey ?? self.l10nKey)
       let l10nPath = k == nil ? name : "\(k!).\(name)"
-      if let l10nString = KeyBindingTranslator.l10nDic[l10nPath] {
+      if let l10nString = displayName ?? KeyBindingTranslator.l10nDic[l10nPath] {
         criterion = TextCriterion(name: name, localizedName: l10nString)
       } else {
         criterion = TextCriterion(name: name, localizedName: name)

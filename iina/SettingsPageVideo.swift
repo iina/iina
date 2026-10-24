@@ -52,6 +52,7 @@ class SettingsPageVideo: SettingsPage {
 #if !arch(arm64)
         SettingsItem.Switch()
           .bindTo(.forceDedicatedGPU)
+          .requiresRestart()
           .hasDescription()
 #endif
       }

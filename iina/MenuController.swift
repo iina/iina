@@ -489,13 +489,13 @@ class MenuController: NSObject, NSMenuDelegate {
     menu.removeAllItems()
     let noTrackMenuItem = NSMenuItem(title: Constants.String.trackNone, action: #selector(MainMenuActionHandler.menuChangeTrack(_:)), keyEquivalent: "")
     noTrackMenuItem.representedObject = MPVTrack.emptyTrack(for: type)
-    if info.trackId(type) == 0 {  // no track
+    if info.activeTrackIDs(type).isEmpty {
       noTrackMenuItem.state = .on
     }
     menu.addItem(noTrackMenuItem)
     for track in info.trackList(type) {
       menu.addItem(withTitle: track.readableTitle, action: #selector(MainMenuActionHandler.menuChangeTrack(_:)),
-                             tag: nil, obj: (track, type), stateOn: track.id == info.trackId(type))
+                             tag: nil, obj: (track, type), stateOn: info.activeTrackIDs(type).contains(track.id))
     }
   }
 

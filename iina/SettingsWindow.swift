@@ -56,6 +56,9 @@ class SettingsWindow: CommonWindow {
   private var sectionIndicatorTopConstraint: NSLayoutConstraint?
 
   private var currentPageIndex: Int?
+  private static let navigationLocationKey = "settingsWindowNavigationLocation"
+  private var restoredNavigationLocation = false
+  private var restoringNavigationLocation = false
 
   private enum SidebarRow {
     case page(Int)
@@ -240,11 +243,46 @@ class SettingsWindow: CommonWindow {
   func show() {
     self.setFrameAutosaveName("IINAPreferenceWindowV2")
     self.makeKeyAndOrderFront(nil)
+    guard !restoredNavigationLocation else { return }
+    restoringNavigationLocation = true
+    if let location = UserDefaults.standard.dictionary(forKey: Self.navigationLocationKey),
+       let page = location["page"] as? String,
+       pages.contains(where: { $0.identifier == page }) {
+      navigateTo(page: page)
+      contentView?.layoutSubtreeIfNeeded()
+      if let offset = location["offset"] as? Double, offset.isFinite {
+        let clip = contentScrollView.contentView
+        let minimumY = -contentScrollView.contentInsets.top
+        let maximumY = max(minimumY, (contentScrollView.documentView?.bounds.maxY ?? 0) -
+          clip.bounds.height + contentScrollView.contentInsets.bottom)
+        let y = min(maximumY, max(minimumY, CGFloat(offset) - contentScrollView.contentInsets.top))
+        clip.scroll(to: NSPoint(x: 0, y: y))
+        contentScrollView.reflectScrolledClipView(clip)
+      }
+    }
+    restoredNavigationLocation = true
+    restoringNavigationLocation = false
+    saveNavigationLocation()
+  }
+
+  func saveNavigationLocation() {
+    guard restoredNavigationLocation, !restoringNavigationLocation,
+          let index = currentPageIndex, pages.indices.contains(index) else { return }
+    let offset = contentScrollView.contentView.bounds.origin.y + contentScrollView.contentInsets.top
+    UserDefaults.standard.set(["page": pages[index].identifier, "offset": Double(offset)],
+                              forKey: Self.navigationLocationKey)
+  }
+
+  override func close() {
+    saveNavigationLocation()
+    super.close()
   }
 
   @objc func scrolled(_ notification: Notification) {
+    guard notification.object as? NSView === contentScrollView.contentView else { return }
     titlebarAppearsTransparent = contentScrollView.contentView.bounds.origin.y <= -52
     updateSectionIndicator()
+    saveNavigationLocation()
   }
 
   private func updateSectionIndicator() {
@@ -347,7 +385,7 @@ extension SettingsWindow {
       borderPath.stroke()
       let rectPath = NSBezierPath(roundedRect: maskRect, xRadius: 8, yRadius: 8)
       rectPath.lineWidth = 3
-      NSColor.controlAccentColor.setStroke()
+      AppAccentColor.color.setStroke()
       rectPath.stroke()
       NSGraphicsContext.restoreGraphicsState()
     }
@@ -792,7 +830,7 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
     if #available(macOS 26, *) {
       imageView.contentTintColor = .textColor
     } else {
-      imageView.contentTintColor = .controlAccentColor
+      imageView.contentTintColor = AppAccentColor.color
     }
 
     let labelStackView = NSStackView(views: [imageView, textField])
@@ -810,7 +848,7 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
   }
 
   func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-    let rowView = NSTableRowView()
+    let rowView = AccentTableRowView()
     rowView.isEmphasized = false
     return rowView
   }
@@ -838,6 +876,7 @@ extension SettingsWindow: NSTableViewDataSource, NSTableViewDelegate {
     loadPage(at: newIndex)
     currentPageIndex = newIndex
     sidebarRows = makeSidebarRows()
+    saveNavigationLocation()
 
     let oldIndicatorRow = oldRows.firstIndex(where: { $0.isIndicator })
     let newIndicatorRow = sidebarRows.firstIndex(where: { $0.isIndicator })

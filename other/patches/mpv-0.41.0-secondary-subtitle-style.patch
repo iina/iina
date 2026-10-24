@@ -1,0 +1,206 @@
+--- a/options/options.h
++++ b/options/options.h
+@@ -110,6 +110,9 @@
+     bool ass_scale_with_window;
+     struct osd_style_opts *sub_style;
+     float sub_scale;
++    struct osd_style_opts *secondary_sub_style;
++    float secondary_sub_scale;
++    bool secondary_sub_style_override;
+     bool sub_scale_signs;
+     float sub_gauss;
+     bool sub_gray;
+--- a/options/options.c
++++ b/options/options.c
+@@ -311,6 +311,9 @@
+         {"sub-gray", OPT_BOOL(sub_gray)},
+         {"sub-ass", OPT_BOOL(ass_enabled), .flags = UPDATE_SUB_HARD},
+         {"sub-scale", OPT_FLOAT(sub_scale), M_RANGE(0, 100)},
++        {"secondary-sub-scale", OPT_FLOAT(secondary_sub_scale), M_RANGE(0, 100)},
++        {"secondary-sub-style-override", OPT_BOOL(secondary_sub_style_override),
++            .flags = UPDATE_SUB_HARD},
+         {"sub-scale-signs", OPT_BOOL(sub_scale_signs)},
+         {"sub-line-spacing", OPT_FLOAT(sub_line_spacing), M_RANGE(-1000, 1000)},
+         {"sub-ass-line-spacing", OPT_REPLACED("sub-line-spacing")},
+@@ -340,6 +343,7 @@
+         {"sub-scale-with-window", OPT_BOOL(sub_scale_with_window)},
+         {"sub-ass-scale-with-window", OPT_BOOL(ass_scale_with_window)},
+         {"sub", OPT_SUBSTRUCT(sub_style, sub_style_conf)},
++        {"secondary-sub", OPT_SUBSTRUCT(secondary_sub_style, secondary_sub_style_conf)},
+         {"sub-clear-on-seek", OPT_BOOL(sub_clear_on_seek)},
+         {"teletext-page", OPT_INT(teletext_page), M_RANGE(-1, 999), .flags = UPDATE_SUB_FILT},
+         {"sub-past-video-end", OPT_BOOL(sub_past_video_end)},
+@@ -361,6 +365,7 @@
+         .ass_prune_delay = -1.0,
+         .teletext_page = 0,
+         .sub_scale = 1,
++        .secondary_sub_scale = 1,
+         .ass_vsfilter_color_compat = 1,
+         .ass_use_video_data = 2,
+         .ass_video_aspect = 0,
+--- a/sub/sd.h
++++ b/sub/sd.h
+@@ -2,6 +2,7 @@
+ #define MPLAYER_SD_H
+ 
+ #include "dec_sub.h"
++#include "options/options.h"
+ #include "demux/packet.h"
+ #include "misc/bstr.h"
+ 
+@@ -35,6 +36,19 @@
+     bool preload_ok;
+ };
+ 
++// Preserve stock inheritance unless the client explicitly separates role styles.
++static inline struct osd_style_opts *sd_style(struct sd *sd)
++{
++    return sd->order == 1 && sd->opts->secondary_sub_style_override
++        ? sd->opts->secondary_sub_style : sd->opts->sub_style;
++}
++
++static inline float sd_scale(struct sd *sd)
++{
++    return sd->order == 1 && sd->opts->secondary_sub_style_override
++        ? sd->opts->secondary_sub_scale : sd->opts->sub_scale;
++}
++
+ struct sd_functions {
+     const char *name;
+     bool accept_packets_in_advance;
+--- a/sub/sd_ass.c
++++ b/sub/sd_ass.c
+@@ -133,7 +133,7 @@
+         track->default_style = sid;
+         ASS_Style *style = track->styles + sid;
+         style->Name = strdup("Default");
+-        mp_ass_set_style(style, track->PlayResY, opts->sub_style);
++        mp_ass_set_style(style, track->PlayResY, sd_style(sd));
+     }
+ 
+     if (shared_opts->ass_style_override[sd->order])
+@@ -240,7 +240,7 @@
+     } else {
+         ctx->ass_renderer = ass_renderer_init(ctx->ass_library);
+ 
+-        mp_ass_configure_fonts(ctx->ass_renderer, sd->opts->sub_style,
++        mp_ass_configure_fonts(ctx->ass_renderer, sd_style(sd),
+                                sd->global, sd->log);
+     }
+ }
+@@ -251,7 +251,7 @@
+     struct mp_subtitle_opts *opts = sd->opts;
+     struct mp_subtitle_shared_opts *shared_opts = sd->shared_opts;
+ 
+-    ctx->ass_library = mp_ass_init(sd->global, sd->opts->sub_style, sd->log);
++    ctx->ass_library = mp_ass_init(sd->global, sd_style(sd), sd->log);
+     ass_set_extract_fonts(ctx->ass_library, opts->use_embedded_fonts);
+ 
+     add_subtitle_fonts(sd);
+@@ -555,7 +555,7 @@
+         set_hinting = opts->sub_hinting;
+     }
+     if (total_override || shared_opts->ass_style_override[sd->order] == ASS_STYLE_OVERRIDE_SCALE) {
+-        set_font_scale = opts->sub_scale;
++        set_font_scale = sd_scale(sd);
+     }
+     if (set_scale_with_window) {
+         set_font_scale *= dim->h / MPMAX(get_libass_scale_height(dim, set_use_margins), 1);
+@@ -591,12 +591,12 @@
+ #endif
+     ass_set_selective_style_override_enabled(priv, set_force_flags);
+     ASS_Style style = {0};
+-    mp_ass_set_style(&style, MP_ASS_FONT_PLAYRESY, opts->sub_style);
++    mp_ass_set_style(&style, MP_ASS_FONT_PLAYRESY, sd_style(sd));
+     ass_set_selective_style_override(priv, &style);
+     free(style.FontName);
+     if (converted && track->default_style < track->n_styles) {
+         mp_ass_set_style(track->styles + track->default_style,
+-                         track->PlayResY, opts->sub_style);
++                         track->PlayResY, sd_style(sd));
+     }
+     ass_set_font_scale(priv, set_font_scale);
+     ass_set_hinting(priv, set_hinting);
+--- a/sub/sd_lavc.c
++++ b/sub/sd_lavc.c
+@@ -526,11 +526,11 @@
+ 
+     osd_rescale_bitmaps(res, w, h, d, video_par);
+ 
+-    if (opts->sub_scale != 1.0 && shared_opts->ass_style_override[sd->order]) {
++    if (sd_scale(sd) != 1.0 && shared_opts->ass_style_override[sd->order]) {
+         for (int n = 0; n < res->num_parts; n++) {
+             struct sub_bitmap *sub = &res->parts[n];
+ 
+-            float shit = (opts->sub_scale - 1.0f) / 2;
++            float shit = (sd_scale(sd) - 1.0f) / 2;
+ 
+             // Fortunately VO isn't supposed to give a FUCKING FUCK about
+             // whether the sub might e.g. go outside of the screen.
+--- a/sub/osd.h
++++ b/sub/osd.h
+@@ -171,6 +171,7 @@
+ 
+ extern const struct m_sub_options osd_style_conf;
+ extern const struct m_sub_options sub_style_conf;
++extern const struct m_sub_options secondary_sub_style_conf;
+ extern const struct m_sub_options osd_bar_style_conf;
+ 
+ struct osd_state;
+--- a/sub/osd.c
++++ b/sub/osd.c
+@@ -116,6 +116,27 @@
+     .change_flags = UPDATE_OSD,
+ };
+ 
++// A distinct option group is required for independent cached values.
++const struct m_sub_options secondary_sub_style_conf = {
++    .opts = style_opts,
++    .size = sizeof(struct osd_style_opts),
++    .defaults = &(const struct osd_style_opts){
++        .font = "sans-serif",
++        .font_size = 38,
++        .color = {255, 255, 255, 255},
++        .outline_color = {0, 0, 0, 255},
++        .back_color = {0, 0, 0, 175},
++        .border_style = 1,
++        .outline_size = 1.65,
++        .shadow_offset = 0,
++        .margin_x = 19,
++        .margin_y = 34,
++        .align_x = 0,
++        .align_y = 1,
++    },
++    .change_flags = UPDATE_OSD,
++};
++
+ #undef OPT_BASE_STRUCT
+ #define OPT_BASE_STRUCT struct osd_bar_style_opts
+ static const m_option_t bar_style_opts[] = {
+--- a/DOCS/man/options.rst
++++ b/DOCS/man/options.rst
+@@ -2499,7 +2499,24 @@
+         subtitle at the top of the screen, it will overlap with the secondary
+         subtitle. To prevent this, you could use ``--sub-ass=no`` to disable
+         styling in the main subtitle stream.
++
++``--secondary-sub-style-override=<yes|no>`` (LYINA extension)
++    Enable independent secondary subtitle style options (default: no).
++    Without this opt-in, secondary subtitles retain the normal primary style
++    inheritance. The display role, not the selected source track ID, owns style.
+ 
++``--secondary-sub-scale=<0-100>`` (LYINA extension)
++    Scale the secondary subtitle role independently (default: 1). Used only
++    when ``secondary-sub-style-override`` is enabled, including bitmap scaling.
++
++``--secondary-sub-<style-option>`` (LYINA extension)
++    Independent counterparts of the ``sub-`` style options: font, font-size,
++    color, outline-size, outline-color, back-color, shadow-offset, border-style,
++    bold, italic, blur, spacing, margins, alignment, justify, font-provider and
++    fonts-dir. Defaults match the primary style defaults. Existing per-role
++    ASS override policy still controls which embedded ASS styles are replaced.
++    These options do not change subtitle source selection, delay or position.
++
+ ``--sub-scale=<0-100>``
+     Factor for the text subtitle font size (default: 1).
+ 

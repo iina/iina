@@ -48,7 +48,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
   @IBOutlet var subShadowColorWell: NSColorWell!
 
   @IBOutlet weak var subOverrideLevelSlider: NSSlider!
-  @IBOutlet weak var subOverrideLevelSegmentedControl: NSSegmentedControl!
+  @IBOutlet weak var subOverrideLevelSegmentedControl: AccentSegmentedControl!
   @IBOutlet weak var subOverrideLevelText: NSTextField!
   @IBOutlet weak var subOverrideLevelDescriptiveText: NSTextField!
 
@@ -179,7 +179,7 @@ class PrefSubViewController: PreferenceViewController, PreferenceWindowEmbeddabl
     }
   }
 
-  @IBAction func subOverrideLevelSegmentedControlAction(_ sender: NSSegmentedControl) {
+  @IBAction func subOverrideLevelSegmentedControlAction(_ sender: AccentSegmentedControl) {
     let keyPath = sender.selectedSegment == 0 ? PK.subOverrideLevel.rawValue : PK.secondarySubOverrideLevel.rawValue
     subOverrideLevelSlider.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelValueTransformer()])
     subOverrideLevelText.bind(.value, to: UserDefaults.standard, withKeyPath: keyPath, options: [.valueTransformer: ASSOverrideLevelTextTransformer()])

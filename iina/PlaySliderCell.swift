@@ -25,12 +25,12 @@ class PlaySliderCell: NSSliderCell {
 
   let knobWidth: CGFloat = 3
   let knobHeight: CGFloat = 15
-  let knobRadius: CGFloat = 1
+  let knobRadius: CGFloat = 1.5
   let barRadius: CGFloat = 1.5
 
   private var knobColor = NSColor.mainSliderKnob
   private var knobActiveColor = NSColor.mainSliderKnobActive
-  private var barColorLeft = NSColor.mainSliderBarLeft
+  private var barColorLeft: NSColor { AppAccentColor.playbackFill(fallback: .mainSliderBarLeft) }
   private var barColorRight = NSColor.mainSliderBarRight
 
   var drawChapters = Preference.bool(for: .showChapterPos)
@@ -177,7 +177,11 @@ class PlaySliderCell: NSSliderCell {
     let result = super.startTracking(at: startPoint, in: controlView)
     if result {
       playerCore.pause()
+      playerCore.mainWindow.isSeekingWithSlider = true
+      playerCore.mainWindow.cancelSeekPreviewHover()
       playerCore.mainWindow.thumbnailPeekView.isHidden = true
+      playerCore.mainWindow.chapterPreviewView.isHidden = true
+      playerCore.mainWindow.timePreviewView.isHidden = false
     }
     return result
   }
@@ -187,5 +191,7 @@ class PlaySliderCell: NSSliderCell {
       playerCore.resume()
     }
     super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
+    playerCore.mainWindow.isSeekingWithSlider = false
+    playerCore.mainWindow.hideSeekPreview()
   }
 }

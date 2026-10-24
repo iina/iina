@@ -115,6 +115,7 @@ class MainWindowController: PlayerWindowController {
   private var videoTransformWindowSize: NSSize?
   private var videoTransformWindowDisplaySize: NSSize?
   private var videoTransformWindowGeneration: Int?
+  private var windowSizingFileGeneration: Int?
   private var videoAspectTransition: (panscan: Double, mediaGeneration: Int)?
   enum VideoGeometryChange: Hashable { case aspect, rotation }
   private final class GeometryMotion {
@@ -2808,6 +2809,7 @@ class MainWindowController: PlayerWindowController {
     videoTransformWindowSize = nil
     videoTransformWindowDisplaySize = nil
     videoTransformWindowGeneration = nil
+    windowSizingFileGeneration = nil
   }
 
   private func establishVideoTransformWindowReference(windowSize: NSSize, displaySize: NSSize,
@@ -3543,11 +3545,18 @@ class MainWindowController: PlayerWindowController {
 
     var rect: NSRect
     let isInitialWindowSizing = shouldApplyInitialWindowSize
+    // Consume file-size preferences once; output transforms retain the established scale.
+    let isNewFileSizing = player.info.justStartedFile && !keepWindowSize && !isCropTransitionInProgress
+      && windowSizingFileGeneration != player.info.trackSelectionGeneration
+    let resizeTiming = Preference.enum(for: .resizeWindowTiming) as Preference.ResizeWindowTiming
+    let shouldResizeForNewFile = isNewFileSizing
+      && (resizeTiming == .always || (resizeTiming == .onlyWhenOpen && player.info.justOpenedFile))
+      && (!Preference.unlockWindowAspectRatio || player.info.justOpenedFile)
+    let usesSourceSize = isInitialWindowSizing || shouldResizeForNewFile
 
     let frame = fsState.priorWindowedFrame ?? window.frame
 
-    // Only fresh windows use source-pixel sizing; media/output changes retain the user's established scale.
-    if !isInitialWindowSizing {
+    if !usesSourceSize {
       if Preference.unlockWindowAspectRatio || width <= 0 || height <= 0 {
         rect = frame
         videoTransformWindowReferenceSize = nil
@@ -3615,6 +3624,9 @@ class MainWindowController: PlayerWindowController {
     }
 
     shouldApplyInitialWindowSize = false
+    if isInitialWindowSizing || isNewFileSizing {
+      windowSizingFileGeneration = player.info.trackSelectionGeneration
+    }
 
     let hasExplicitSize = cachedGeometry?.hasExplicitSize == true
     if !isInitialWindowSizing || hasExplicitSize {
@@ -3639,12 +3651,12 @@ class MainWindowController: PlayerWindowController {
       rect = windowFrameConstrainedToScreen(rect, screenFrame: screenRect)
     }
 
-    if isInitialWindowSizing && !Preference.unlockWindowAspectRatio {
+    if usesSourceSize && !Preference.unlockWindowAspectRatio {
       establishVideoTransformWindowReference(windowSize: rect.size, displaySize: originalVideoSize, initial: true)
     }
     setWindowAspectRatio(rect.size)
 
-    if Preference.unlockWindowAspectRatio && !isInitialWindowSizing {
+    if Preference.unlockWindowAspectRatio && !usesSourceSize {
       // do nothing when window aspect ratio is unlocked
       // however, if this is the first time opening the window, still apply the sizing logic
       updateMinimumWindowSize()
@@ -4327,8 +4339,11 @@ extension MainWindowController {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
-    interruptPlayerCropTransition()
     guard pipStatus == .notInPIP else { return }
+    interruptPlayerCropTransition()
+    if isCropTransitionInProgress { cancelCropExitTransition() }
+    // The editor owns the layer projection and temporary uncropped source.
+    interactiveMode.exit()
     pipStatus = .inPIP
     liveText.clearAnalysis()
     let feedback = beginOperationFeedback()

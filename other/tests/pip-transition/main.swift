@@ -1,4 +1,5 @@
 let app = NSApplication.shared
+app.setActivationPolicy(.prohibited)
 var count=0
 func check(_ value: @autoclosure () -> Bool, _ name: String) {
  precondition(value(),name);count += 1
@@ -133,4 +134,54 @@ check(overlap.operationFeedbackToken == overlapClock,"transfer preserves pending
 overlap.exitPIP(); overlap.pipDidClose(overlap.pip)
 check(overlap.operationFeedbackView?.superview === overlap.videoViewContainer,"pending feedback follows return")
 overlap.endOperationFeedback(captureInPlayer)
+// The editor owns the native layer's projection and an uncommitted source.
+// PiP must release that ownership before its first handoff, on both APIs.
+for modern in [false, true] {
+ for editor in ["crop", "delogo"] {
+  PiP.modern = modern
+  let c = MainWindowController()
+  c.videoView.wantsLayer = true
+  let mask = CALayer()
+  c.videoView.layer!.mask = mask
+  c.videoView.layer!.transform = CATransform3DMakeScale(0.7, 0.7, 1)
+  c.standardWindowButtons[0].isEnabled = false
+  c.interactiveMode.isActive = true
+  c.interactiveMode.onExit = {
+   check(c.videoView.superview === c.videoViewContainer, "\(editor) exits in its original container")
+   c.videoView.layer!.mask = nil
+   c.videoView.layer!.transform = CATransform3DIdentity
+   c.standardWindowButtons[0].isEnabled = true
+  }
+  c.videoView.beforeHandoff = {
+   check(!c.interactiveMode.isActive, "\(editor) releases ownership before PiP draws")
+   check(c.videoView.layer!.mask == nil && CATransform3DIsIdentity(c.videoView.layer!.transform), "PiP receives the restored player projection")
+   check(c.standardWindowButtons[0].isEnabled, "editor controls are restored before PiP")
+  }
+  c.enterPIP()
+  c.pip.completion?()
+  check(c.interactiveMode.exitCalls == 1, "PiP exits \(editor) exactly once")
+  c.enterPIP()
+  check(c.interactiveMode.exitCalls == 1, "duplicate PiP entry cannot exit the editor again")
+  c.videoView.beforeHandoff = nil
+  c.interactiveMode.onExit = nil
+  c.exitPIP(); c.pipDidClose(c.pip)
+ }
+}
+for modern in [false, true] {
+ PiP.modern = modern
+ let c = MainWindowController()
+ c.isCropTransitionInProgress = true
+ var commits = 0
+ c.onCancelCropTransition = {
+  check(c.videoView.superview === c.videoViewContainer, "pending crop commits before reparenting")
+  commits += 1
+ }
+ c.videoView.beforeHandoff = {
+  check(!c.isCropTransitionInProgress && commits == 1, "PiP releases a Custom Crop exit transition before drawing")
+ }
+ c.enterPIP(); c.pip.completion?()
+ c.videoView.beforeHandoff = nil
+ c.onCancelCropTransition = nil
+ c.exitPIP(); c.pipDidClose(c.pip)
+}
 print("Native PiP production-method checks passed: \(count)")

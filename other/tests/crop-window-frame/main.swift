@@ -7,14 +7,21 @@ setbuf(stdout, nil)
 enum Preference {
   enum Key { case resizeWindowTiming, resizeWindowOption, usePhysicalResolution, disableAnimations, edgeToEdgeVideo, dockedControlBarAndTitlebar }
   enum ResizeWindowTiming { case always, onlyWhenOpen, never }
-  enum ResizeWindowOption { case fitScreen, normal; var ratio: Double { 1 } }
+  enum ResizeWindowOption {
+    case fitScreen, half, normal, oneAndHalf, double
+    var ratio: Double {
+      switch self { case .fitScreen: -1; case .half: 0.5; case .normal: 1; case .oneAndHalf: 1.5; case .double: 2 }
+    }
+  }
   enum OSCPosition { case floating, top, bottom }
   static var unlockWindowAspectRatio = false
   static var physical = false
   static var animationsDisabled = true
+  static var resizeTiming = ResizeWindowTiming.never
+  static var resizeOption = ResizeWindowOption.normal
   static func bool(for key: Key) -> Bool { key == .usePhysicalResolution ? physical : (key == .disableAnimations && animationsDisabled) || key == .edgeToEdgeVideo }
   static func `enum`<T>(for key: Key) -> T {
-    (key == .resizeWindowTiming ? ResizeWindowTiming.always as Any : ResizeWindowOption.normal as Any) as! T
+    (key == .resizeWindowTiming ? resizeTiming as Any : resizeOption as Any) as! T
   }
 }
 struct FullscreenState: Equatable {
@@ -170,6 +177,7 @@ class CropWindowFixture {
   private var videoTransformWindowSize: NSSize?
   private var videoTransformWindowDisplaySize: NSSize?
   private var videoTransformWindowGeneration: Int?
+  private var windowSizingFileGeneration: Int?
   private var videoAspectTransition: (panscan: Double, mediaGeneration: Int)?
   enum PIPStatus { case notInPIP, inPIP }
   var pipStatus = PIPStatus.notInPIP
@@ -185,6 +193,7 @@ class CropWindowFixture {
   func log(_ text: String) {}
   func notifyLiveResize() { rememberVideoTransformWindowResize() }
   func beginWindowSession(at frame: NSRect) {
+    windowSizingFileGeneration = nil
     videoTransformWindowReferenceSize = nil
     videoTransformWindowSize = nil
     videoTransformWindowDisplaySize = nil
@@ -532,14 +541,15 @@ controller.player.videoSizeForDisplay = (960,540)
 controller.handleVideoSizeChange(keepWindowSize: false)
 check(window.frame.size == NSSize(width:960,height:540),
       "a fresh window keeps explicit startup sizing")
-// All subsequent loads share the established window scale, including manual open
-// and repeated first-frame notifications before playback-restart clears flags.
+// Do not resize retains the established scale for manual and playlist loads,
+// including repeated first-frame notifications before playback-restart clears flags.
 for unlocked in [false, true] {
   Preference.unlockWindowAspectRatio = unlocked
   for manuallyOpened in [false, true] {
     window.aspectRatio = .zero
     controller.beginWindowSession(at: original)
     for source in [(3840,2160), (1080,1920), (3840,924), (3840,2160)] {
+      controller.player.info.trackSelectionGeneration += 1
       controller.player.info.justStartedFile = true
       controller.player.info.justOpenedFile = manuallyOpened
       controller.player.videoSizeForDisplay = source
@@ -807,5 +817,122 @@ check(controller.cropReadySignals == signals,
 controller.player.videoOutputSizeChanged()
 check(controller.cropReadySignals == signals + 1,
       "changed filtered output can finish a playing crop without a playback-restart event")
+// Loading policy is independent of output transforms. Exercise the actual native
+// handler with all UI timing/scale choices and repeated loading notifications.
+controller.cropExitOverlay = nil
+controller.geometryMotion = nil
+controller.player.disableWindowAnimation = true
+Preference.animationsDisabled = true
+controller.player.sourceDisplaySize = nil
+controller.cachedGeometry = nil
+controller.player.geometry = nil
+controller.shouldApplyInitialWindowSize = false
+let policySource = NSSize(width: 960, height: 540)
+let policyStart = NSRect(x: screen.midX - 320, y: screen.midY - 180, width: 640, height: 360)
+for timing in [Preference.ResizeWindowTiming.always, .onlyWhenOpen, .never] {
+  Preference.resizeTiming = timing
+  for manuallyOpened in [false, true] {
+    for option in [Preference.ResizeWindowOption.half, .normal, .oneAndHalf, .double, .fitScreen] {
+      Preference.resizeOption = option
+      for physical in [false, true] {
+        Preference.physical = physical
+        for unlocked in [false, true] {
+          Preference.unlockWindowAspectRatio = unlocked
+          for fullscreen in [false, true] {
+            controller.fsState = .windowed
+            controller.beginWindowSession(at: policyStart)
+            controller.player.info.trackSelectionGeneration += 1
+            controller.player.info.justStartedFile = true
+            controller.player.info.justOpenedFile = manuallyOpened
+            controller.player.videoSizeForDisplay = (960, 540)
+            if fullscreen {
+              controller.fsState = FullscreenState(isFullscreen: true, priorWindowedFrame: policyStart)
+              window.setFrame(screen, display: false)
+            }
+            let visibleBefore = window.frame
+            let shouldResize = (timing == .always || (timing == .onlyWhenOpen && manuallyOpened))
+              && (!unlocked || manuallyOpened)
+            var expectedSize = policyStart.size
+            if shouldResize {
+              let logical = physical ? window.convertFromBacking(NSRect(origin: .zero, size: policySource)).size : policySource
+              expectedSize = option == .fitScreen ? logical.shrink(toSize: screen.size) : logical.multiply(CGFloat(option.ratio))
+              expectedSize = expectedSize.satisfyMaxSizeWithSameAspectRatio(screen.size)
+                .satisfyMinSizeWithSameAspectRatio(controller.minimumWindowSize)
+            }
+            controller.handleVideoSizeChange(keepWindowSize: false)
+            let sizedFrame = fullscreen ? controller.fsState.priorWindowedFrame! : window.frame
+            check(near(sizedFrame.width, expectedSize.width) && near(sizedFrame.height, expectedSize.height),
+                  "timing=\(timing), manual=\(manuallyOpened), scale=\(option), physical=\(physical), unlocked=\(unlocked), fullscreen=\(fullscreen) obey the file resize policy")
+            if fullscreen { check(window.frame == visibleBefore, "file resize updates fullscreen return geometry without leaving fullscreen") }
+            // Loading flags remain true until playback-restart. A duplicate and
+            // a subsequent crop must use the newly established reference.
+            controller.handleVideoSizeChange(keepWindowSize: false)
+            let repeated = fullscreen ? controller.fsState.priorWindowedFrame! : window.frame
+            check(repeated == sizedFrame, "duplicate first-frame notifications keep the selected file size")
+            controller.player.videoSizeForDisplay = (960, 270)
+            controller.handleVideoSizeChange(keepWindowSize: false)
+            let cropped = fullscreen ? controller.fsState.priorWindowedFrame! : window.frame
+            check(cropped.width <= sizedFrame.width + 1 && cropped.height <= sizedFrame.height + 1,
+                  "crop during loading retains the selected window scale in every timing mode")
+            controller.player.videoSizeForDisplay = (960, 540)
+            controller.handleVideoSizeChange(keepWindowSize: false)
+            let restored = fullscreen ? controller.fsState.priorWindowedFrame! : window.frame
+            check(near(restored.width, sizedFrame.width) && near(restored.height, sizedFrame.height),
+                  "Reset returns to the selected file size without reviving an earlier reference")
+          }
+        }
+      }
+    }
+  }
+}
+Preference.resizeTiming = .never
+Preference.resizeOption = .normal
+Preference.physical = false
+Preference.unlockWindowAspectRatio = false
+controller.fsState = .windowed
+// Fresh/reused windows retain startup geometry in every timing mode.
+for timing in [Preference.ResizeWindowTiming.always, .onlyWhenOpen, .never] {
+  Preference.resizeTiming = timing
+  controller.beginWindowSession(at: policyStart)
+  controller.resetWindowSizingForNewSession()
+  controller.player.info.trackSelectionGeneration += 1
+  controller.player.info.justStartedFile = true
+  controller.player.info.justOpenedFile = true
+  controller.player.videoSizeForDisplay = (960, 540)
+  controller.player.geometry = GeometryDef.parse("800x450+80+100")
+  controller.handleVideoSizeChange(keepWindowSize: false)
+  let startupFrame = window.frame
+  check(near(startupFrame.width, 800) && near(startupFrame.height, 450),
+        "all timing modes retain explicit initial geometry on a reused core")
+  controller.handleVideoSizeChange(keepWindowSize: false)
+  check(window.frame == startupFrame, "duplicate load notifications cannot override explicit initial geometry")
+  controller.player.geometry = nil
+}
+// A layout-only refresh does not consume the subsequent new-file resize. A
+// preference changed during playback takes effect at the next file, not now.
+controller.cachedGeometry = nil
+Preference.resizeTiming = .always
+controller.beginWindowSession(at: policyStart)
+controller.player.info.trackSelectionGeneration += 1
+controller.handleVideoSizeChange(keepWindowSize: true)
+check(window.frame == policyStart, "keepWindowSize layout refresh does not apply the file size preference")
+controller.handleVideoSizeChange(keepWindowSize: false)
+check(near(window.frame.width, 960), "the next output notification still applies the pending new-file policy")
+controller.player.info.justStartedFile = false
+controller.player.info.justOpenedFile = false
+controller.setUserWindowFrame(policyStart)
+controller.handleVideoSizeChange(keepWindowSize: false)
+check(window.frame == policyStart, "Always does not reapply source size during ordinary playback")
+controller.player.info.trackSelectionGeneration += 1
+controller.player.info.justStartedFile = true
+Preference.resizeTiming = .never
+controller.handleVideoSizeChange(keepWindowSize: false)
+check(window.frame == policyStart, "switching to Do not resize preserves the user frame on the next playlist item")
+Preference.resizeTiming = .always
+controller.handleVideoSizeChange(keepWindowSize: false)
+check(window.frame == policyStart, "changing the timing after a file was sized waits for a new file")
+controller.player.info.trackSelectionGeneration += 1
+controller.handleVideoSizeChange(keepWindowSize: false)
+check(near(window.frame.width, 960), "the next playlist item applies the newly selected Always mode")
 window.close()
 print("Completed \(checks) native crop/rotation/aspect/track window checks.")

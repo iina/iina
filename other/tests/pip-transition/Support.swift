@@ -77,7 +77,17 @@ class Player {
   func pause() {}; func refreshSyncUITimer() {}
 }
 class LiveText { var isActive = false; func clearAnalysis() {}; func requestAnalysis() {} }
-class InteractiveMode { var isActive = false }
+class InteractiveMode {
+  var isActive = false
+  var exitCalls = 0
+  var onExit: (() -> Void)?
+  func exit() {
+    guard isActive else { return }
+    isActive = false
+    exitCalls += 1
+    onExit?()
+  }
+}
 class OSC: NSView { func updatePosition() {} }
 class Titlebar: NSView {
   var revealCalls: [(Bool, Bool)] = []
@@ -90,6 +100,11 @@ extension Notification.Name { static let iinaPIPStatusChanged = Notification.Nam
 class MainWindowController: NSObject {
   func interruptPlayerCropTransition() {}
   var isCropTransitionInProgress = false
+  var onCancelCropTransition: (() -> Void)?
+  func cancelCropExitTransition() {
+    isCropTransitionInProgress = false
+    onCancelCropTransition?()
+  }
   enum PIPStatus { case notInPIP, inPIP, intermediate }
   var pipStatus = PIPStatus.notInPIP
   var pipReturnWindowAlpha: CGFloat?

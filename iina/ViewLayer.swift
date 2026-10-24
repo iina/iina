@@ -411,9 +411,6 @@ class ViewLayer: CAOpenGLLayer {
     }
   }
 
-  // CAOpenGLLayer can stop drawing an occluded window; the exit frame must remain available.
-
-
   override func copyCGLPixelFormat(forDisplayMask mask: UInt32) -> CGLPixelFormatObj { cglPixelFormat }
 
   override func copyCGLContext(forPixelFormat pf: CGLPixelFormatObj) -> CGLContextObj { cglContext }
@@ -711,7 +708,7 @@ class ViewLayer: CAOpenGLLayer {
     CATransaction.flush()
   }
 
-  private func framebufferSnapshot(width: Int, height: Int, framebuffer: GLuint? = nil) -> NSImage? {
+  private func framebufferSnapshot(width: Int, height: Int) -> NSImage? {
     let bytesPerRow = width * 4
     var pixels = Data(count: height * bytesPerRow)
 
@@ -722,7 +719,7 @@ class ViewLayer: CAOpenGLLayer {
 
     // The layer renders into an FBO (captured as `fbo`), not the default framebuffer,
     // so we must bind that FBO as the read target and use GL_COLOR_ATTACHMENT0 — not GL_BACK.
-    glBindFramebuffer(GLenum(GL_READ_FRAMEBUFFER), framebuffer ?? GLuint(fbo))
+    glBindFramebuffer(GLenum(GL_READ_FRAMEBUFFER), GLuint(fbo))
     glReadBuffer(GLenum(GL_COLOR_ATTACHMENT0))
     glPixelStorei(GLenum(GL_PACK_ALIGNMENT), 1)
 

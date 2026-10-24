@@ -45,7 +45,7 @@ class PluginInputManager: NSObject {
     let priority: Priority
     
     func call(withArgs args: [Any]) -> JSValue? {
-      return callback?.value.call(withArguments: args)
+      return callback?.value?.call(withArguments: args)
     }
   }
   
@@ -57,22 +57,20 @@ class PluginInputManager: NSObject {
   }
   
   func addListener(forInput input: String, event: Event, callback: JSValue?, priority: Int, owner: Any) {
-    if listeners[input] == nil {
-      listeners[input] = [:]
+    if let previousCallback = listeners[input]?.removeValue(forKey: event)?.callback {
+      previousCallback.value?.context.virtualMachine.removeManagedReference(previousCallback, withOwner: owner)
     }
-    if let previousCallback = listeners[input]![event] {
-      JSContext.current()!.virtualMachine.removeManagedReference(previousCallback, withOwner: owner)
+    if listeners[input]?.isEmpty == true {
+      listeners.removeValue(forKey: input)
     }
-    if let callback, callback.isObject {
-      let managed = JSManagedValue(value: callback)!
-      listeners[input]![event] = Listener(callback: managed,
-                                          priority: Priority(rawValue: priority))
-      JSContext.current()!.virtualMachine.addManagedReference(managed, withOwner: owner)
-    }
+    guard let callback, callback.isObject, let managed = JSManagedValue(value: callback) else { return }
+    listeners[input, default: [:]][event] = Listener(callback: managed,
+                                                    priority: Priority(rawValue: priority))
+    callback.context.virtualMachine.addManagedReference(managed, withOwner: owner)
   }
   
   func callListener(forInput input: String, event: Event, withArgs args: [Any]) {
-    listeners[input]?[event]?.callback?.value.call(withArguments: args)
+    _ = listeners[input]?[event]?.call(withArgs: args)
   }
   
   /// Handle an input event including calling user-installed listeners.

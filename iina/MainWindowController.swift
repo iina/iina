@@ -129,7 +129,9 @@ class MainWindowController: PlayerWindowController {
 
   lazy var liveText = LiveTextController(mainWindow: self)
   lazy var interactiveMode = InteractiveModeController(mainWindow: self)
-  var pipStatus = PIPStatus.notInPIP
+  var pipStatus = PIPStatus.notInPIP {
+    didSet { updateOSCToolbarButtonStates() }
+  }
   var isVideoLoaded: Bool = false
 
   var shouldApplyInitialWindowSize = true
@@ -246,6 +248,7 @@ class MainWindowController: PlayerWindowController {
 
   var fsState: FullScreenState = .windowed {
     didSet {
+      updateOSCToolbarButtonStates()
       // Must not access mpv while it is asynchronously processing stop and quit commands.
       guard player.info.state.active else { return }
       switch fsState {
@@ -373,10 +376,7 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.enableLiveText.rawValue:
       if #available(macOS 13, *), let newValue = change[.newKey] as? Bool {
-        let buttons = oscToolbarView.subviews as! [NSButton]
-        if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
-          btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
-        }
+        updateOSCToolbarButtonStates()
         if newValue {
           liveText.requestAnalysis()
         } else {
@@ -808,10 +808,9 @@ class MainWindowController: PlayerWindowController {
     // Observers for toolbar buttons
     let notifications: [Notification.Name] = [.iinaPIPStatusChanged, .iinaFullscreenChanged, .iinaSidebarStatusChanged]
     notifications.forEach {
-      NotificationCenter.default
-        .addObserver(forName: $0, object: nil, queue: .main) { [weak self] n in
-          self?.updateOSCToolbarButtons(n)
-        }
+      addObserver(to: .default, forName: $0) { [weak self] n in
+        self?.updateOSCToolbarButtons(n)
+      }
     }
 
     player.events.emit(.windowLoaded)
@@ -962,13 +961,9 @@ class MainWindowController: PlayerWindowController {
   private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
     let effectiveButtons = buttons.filter { $0 != .liveText || Preference.isLiveTextEnabled }
     oscToolbarView.views.forEach { oscToolbarView.removeView($0) }
-    let liveTextEnabled = Preference.bool(for: .enableLiveText)
     for buttonType in effectiveButtons {
-      let button = NSButton()
+      let button = OSCToolbarButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: false)
-      if buttonType == .liveText && liveTextEnabled {
-        button.image = Preference.ToolBarButton.liveText.alternateImage()
-      }
       button.action = #selector(self.toolBarButtonAction(_:))
       oscToolbarView.addView(button, in: .trailing)
     }
@@ -979,6 +974,7 @@ class MainWindowController: PlayerWindowController {
       }.map { (constraint: $0, original: $0.constant) }
     }
     applyFloatingOSCControlScale()
+    updateOSCToolbarButtonStates()
 
 //    let menuButton = NSButton()
 //    menuButton.bezelStyle = .regularSquare
@@ -991,26 +987,27 @@ class MainWindowController: PlayerWindowController {
 
   @objc
   private func updateOSCToolbarButtons(_ notification: Notification) {
-    func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
-      let buttons = oscToolbarView.subviews as! [NSButton]
-      let currentButton = buttons.first(where: { $0.tag == button.rawValue })
-      currentButton?.image = isHighlighted ? button.alternateImage() : button.image()
-    }
-
-    let enable = (notification.userInfo?["enable"] as? Bool ?? false)
-    switch notification.name {
-    case .iinaPIPStatusChanged:
-      highlight(.pip, enable)
-    case .iinaFullscreenChanged:
-      highlight(.fullScreen, enable)
-    case .iinaSidebarStatusChanged:
-      // no userInfo is provided in this notification
-      highlight(.settings, sidebars.isShowing(.settings))
-      highlight(.plugins, sidebars.isShowing(.plugins))
-      highlight(.playlist, sidebars.isShowing(.playlist))
+    updateOSCToolbarButtonStates()
+    if notification.name == .iinaSidebarStatusChanged {
       fadeableViews.update()
-    default:
-      break
+    }
+  }
+
+  func updateOSCToolbarButtonStates() {
+    guard let oscToolbarView else { return }
+    for case let button as OSCToolbarButton in oscToolbarView.views {
+      guard let type = Preference.ToolBarButton(rawValue: button.tag) else { continue }
+      let active: Bool
+      switch type {
+      case .settings: active = sidebars.isShowing(.settings)
+      case .playlist: active = sidebars.isShowing(.playlist)
+      case .plugins: active = sidebars.isShowing(.plugins)
+      case .pip: active = pipStatus != .notInPIP
+      case .fullScreen: active = fsState.isFullscreen
+      case .liveText: active = Preference.bool(for: .enableLiveText)
+      default: active = false
+      }
+      button.setActive(active)
     }
   }
 

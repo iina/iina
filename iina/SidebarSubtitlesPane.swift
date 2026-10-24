@@ -282,9 +282,6 @@ fileprivate class SubDelayView: SidebarSliderView {
     let value = input.doubleValue
     player.setSubDelay(value, forPrimary: isPrimary)
     slider.doubleValue = value
-    if let window = input.window {
-      window.makeFirstResponder(window.contentView)
-    }
   }
 
   override func resetButtonAction() {

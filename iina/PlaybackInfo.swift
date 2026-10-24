@@ -177,6 +177,13 @@ class PlaybackInfo {
   var cacheTime: Int = 0
   var bufferingState: Int = 0
 
+  // Mixer ownership does not imply multiple active contributors.
+  var mixedAudioTrackIDs: Set<Int> = []
+  var layeredVideoTrackIDs: [Int] = []
+  var videoTrackOrder: [Int] = []
+  var audioTrackOrder: [Int] = []
+  var trackSelectionGeneration = 0
+
   var audioTracks: [MPVTrack] = []
   var videoTracks: [MPVTrack] = []
   @Atomic var subTracks: [MPVTrack] = []
@@ -202,6 +209,18 @@ class PlaybackInfo {
     }
   }
 
+  func activeTrackIDs(_ type: MPVTrack.TrackType) -> Set<Int> {
+    if type == .audio, !mixedAudioTrackIDs.isEmpty { return mixedAudioTrackIDs }
+    if type == .video, !layeredVideoTrackIDs.isEmpty { return Set(layeredVideoTrackIDs) }
+    guard let id = trackId(type), id > 0 else { return [] }
+    return [id]
+  }
+
+  func orderedTrackList(_ type: MPVTrack.TrackType) -> [MPVTrack] {
+    // Display order follows the file, independently of composition order.
+    trackList(type)
+  }
+
   func trackId(_ type: MPVTrack.TrackType) -> Int? {
     switch type {
     case .video: return vid
@@ -215,7 +234,7 @@ class PlaybackInfo {
     let id: Int?, list: [MPVTrack]
     switch type {
     case .video:
-      id = vid
+      id = layeredVideoTrackIDs.first ?? vid
       list = videoTracks
     case .audio:
       id = aid

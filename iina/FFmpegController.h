@@ -64,6 +64,9 @@
 /// - Returns: An initialized NSImage object containing the artwork or null if no artwork was found.
 + (nullable NSImage *)readArtworkFromURL:(nonnull NSURL *)url;
 
+/// Header-only probe for local Matroska files. No decoding or stream scan.
++ (BOOL)hasMultipleVideoTracksInMatroskaFile:(nonnull NSString *)file;
+
 + (nullable NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file;
 
 @end

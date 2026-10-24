@@ -1,0 +1,5 @@
+Run `python3 other/tests/filter-window-ownership/run.py --module-cache /absolute/shared/cache --output /temporary/output`.
+
+The suite extracts the production filter mutation methods, the real deferred Add/Cancel callbacks, video-track menu validation, Music/Delogo target validation and the editor's shared entry eligibility. Native AppKit menus call those validators with explicit targets, covering automatic menu enabling. Hidden native tables/windows use controlled sheet presentation and an engine boundary that records filter mutations; no player app, media, sound output or personal profile is opened.
+
+Checks cover each mutation route during editing, transitions, loading/stopping/idle/shutdown, missing native handles, stale table rows, deferred player/file changes and cancellation. Positive checks retain ordinary video operations and audio mutations during video editing. Internal PlayerCore filter methods remain available to the editor. This suite does not render filter output or load the production nib.

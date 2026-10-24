@@ -288,9 +288,15 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   @discardableResult
   func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
+    guard !keyBinding.rawAction.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+          let command = keyBinding.action.first else { return false }
     if keyBinding.isIINACommand {
       // - IINA command
-      if let iinaCommand = IINACommand(rawValue: keyBinding.rawAction) {
+      if let name = keyBinding.action.first, let iinaCommand = IINACommand(rawValue: name),
+         iinaCommand.acceptsArguments(Array(keyBinding.action.dropFirst())) {
+        if iinaCommand.isInterfaceCommand {
+          return handleInterfaceCommand(iinaCommand, arguments: Array(keyBinding.action.dropFirst()))
+        }
         handleIINACommand(iinaCommand)
         return true
       } else {
@@ -299,9 +305,16 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     } else {
       // - mpv command
+      if player.mainWindow.interactiveMode.isActive || player.mainWindow.isCropTransitionInProgress {
+        let commands = OSDCommandRouting.commands(in: keyBinding.rawAction)
+        let playlistIndex = player.mpv.getInt(MPVProperty.playlistPos)
+        guard !commands.contains(where: { OSDCommandRouting.changesVideoGeometry($0, playlistIndex: playlistIndex) }) else {
+          return false
+        }
+      }
       let returnValue: Int32
       // execute the command
-      switch keyBinding.action.first! {
+      switch command {
 
       case MPVCommand.abLoop.rawValue:
         abLoop()
@@ -727,6 +740,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     default:
       break
     }
+  }
+
+  func handleInterfaceCommand(_ cmd: IINACommand, arguments: [String]) -> Bool {
+    return false
   }
 
   // MARK: - Utils

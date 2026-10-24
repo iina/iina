@@ -78,7 +78,7 @@ class OSDView: TranslucentView {
       "preciseDuration": duration?.stringRepresentationWithPrecision(3) ?? Constants.String.videoTimePlaceholder,
       "position": position?.stringRepresentation ?? Constants.String.videoTimePlaceholder,
       "precisePosition": position?.stringRepresentationWithPrecision(3) ?? Constants.String.videoTimePlaceholder,
-      "currChapter": (player.mpv.getInt(MPVProperty.chapter) + 1).description,
+      "currChapter": (player.info.chapter + 1).description,
       "chapterCount": player.info.chapters.count.description
     ]
 

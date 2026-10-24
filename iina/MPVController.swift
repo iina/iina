@@ -42,7 +42,6 @@ fileprivate let logLevelMap: [String: Logger.Level] = ["fatal": .error,
                                                        "debug": .debug,
                                                        "trace": .verbose]
 
-// FIXME: should be moved to a separated file
 struct MPVHookValue {
   typealias Block = (@escaping () -> Void) -> Void
 
@@ -66,18 +65,27 @@ struct MPVHookValue {
   }
 
   func call(withNextBlock next: @escaping () -> Void) {
+    let lock = NSLock()
+    var continued = false
+    let continueOnce = {
+      lock.lock()
+      let shouldContinue = !continued
+      continued = true
+      lock.unlock()
+      if shouldContinue { next() }
+    }
     if isJavascript {
-      let block: @convention(block) () -> Void = { next() }
+      let block: @convention(block) () -> Void = { continueOnce() }
       guard let callback = jsBlock.value else {
-        next()
+        continueOnce()
         return
       }
       callback.call(withArguments: [JSValue(object: block, in: context)!])
       if callback.forProperty("constructor")?.forProperty("name")?.toString() != "AsyncFunction" {
-        next()
+        continueOnce()
       }
     } else {
-      block!(next)
+      block!(continueOnce)
     }
   }
 }
@@ -935,11 +943,13 @@ class MPVController: NSObject {
   }
 
   func observe(property: String, format: mpv_format = MPV_FORMAT_DOUBLE) {
+    guard mpv != nil else { return }
     mpv_observe_property(mpv, 0, property, format)
   }
 
   // Set property
   func setFlag(_ name: String, _ flag: Bool, level: Logger.Level = .debug) {
+    guard mpv != nil else { return }
     log("Set property: \(name)=\(flag)", level: level)
     var data: Int32 = flag ? 1 : 0
     let token = recordOSDFeedback(name, value: .number(flag ? 1 : 0))
@@ -947,6 +957,7 @@ class MPVController: NSObject {
   }
 
   func setInt(_ name: String, _ value: Int, level: Logger.Level = .debug) {
+    guard mpv != nil else { return }
     log("Set property: \(name)=\(value)", level: level)
     var data = Int64(value)
     let token = recordOSDFeedback(name, value: .number(Double(value)))
@@ -954,6 +965,7 @@ class MPVController: NSObject {
   }
 
   func setDouble(_ name: String, _ value: Double, level: Logger.Level = .debug) {
+    guard mpv != nil else { return }
     log("Set property: \(name)=\(value)", level: level)
     var data = value
     let token = recordOSDFeedback(name, value: .number(value))
@@ -962,6 +974,7 @@ class MPVController: NSObject {
 
   @discardableResult
   func setString(_ name: String, _ value: String, level: Logger.Level = .debug) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     log("Set property: \(name)=\(value)", level: level)
     let token = recordOSDFeedback(name, value: OSDFeedbackValue(value))
     let result = mpv_set_property_string(mpv, name, value)
@@ -971,6 +984,7 @@ class MPVController: NSObject {
 
   @discardableResult
   func setStringToDefault(_ name: String, level: Logger.Level = .debug) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     guard let value = MPVOptionDefaults.shared.getString(name) else {
       log("Failed to obtain default for option: \(name)", level: .error)
       return MPV_ERROR_OPTION_NOT_FOUND.rawValue
@@ -987,24 +1001,28 @@ class MPVController: NSObject {
   }
 
   func getInt(_ name: String) -> Int {
+    guard mpv != nil else { return 0 }
     var data = Int64()
     mpv_get_property(mpv, name, MPV_FORMAT_INT64, &data)
     return Int(data)
   }
 
   func getDouble(_ name: String) -> Double {
+    guard mpv != nil else { return 0 }
     var data = Double()
     mpv_get_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
     return data
   }
 
   func getFlag(_ name: String) -> Bool {
+    guard mpv != nil else { return false }
     var data = Int32()
     mpv_get_property(mpv, name, MPV_FORMAT_FLAG, &data)
     return data > 0
   }
 
   func getString(_ name: String) -> String? {
+    guard mpv != nil else { return nil }
     let cstr = mpv_get_property_string(mpv, name)
     let str: String? = cstr == nil ? nil : String(cString: cstr!)
     mpv_free(cstr)
@@ -1013,62 +1031,41 @@ class MPVController: NSObject {
 
   /** Get filter. only "af" or "vf" is supported for name */
   func getFilters(_ name: String) -> [MPVFilter] {
+    guard mpv != nil else { return [] }
     Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "getFilters() do not support \(name)!")
 
     var result: [MPVFilter] = []
     var node = mpv_node()
-    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
-    guard let filters = (try? MPVNode.parse(node)!) as? [[String: Any?]] else { return result }
+    guard mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node) >= 0 else { return result }
+    defer { mpv_free_node_contents(&node) }
+    guard node.format == MPV_FORMAT_NODE_ARRAY, node.u.list != nil else { return result }
+    guard let filters = (try? MPVNode.parse(node)) as? [[String: Any?]] else { return result }
     filters.forEach { f in
-      let filter = MPVFilter(name: f["name"] as! String,
+      guard let name = f["name"] as? String else { return }
+      let filter = MPVFilter(name: name,
                              label: f["label"] as? String,
                              params: f["params"] as? [String: String])
       result.append(filter)
     }
-    mpv_free_node_contents(&node)
     return result
   }
 
-  /// Remove the audio or video filter at the given index in the list of filters.
-  ///
-  /// Previously IINA removed filters using the mpv `af remove` and `vf remove` commands described in the
-  /// [Input Commands that are Possibly Subject to Change](https://mpv.io/manual/stable/#input-commands-that-are-possibly-subject-to-change)
-  /// section of the mpv manual. The behavior of the remove command is described in the [video-filters](https://mpv.io/manual/stable/#video-filters)
-  /// section of the manual under the entry for `--vf-remove-filter`.
-  ///
-  /// When searching for the filter to be deleted the remove command takes into consideration the order of filter parameters. The
-  /// expectation is that the application using the mpv client will provide the filter to the remove command in the same way it was
-  /// added. However IINA doe not always know how a filter was added. Filters can be added to mpv outside of IINA therefore it is not
-  /// possible for IINA to know how filters were added. IINA obtains the filter list from mpv using `mpv_get_property`. The
-  /// `mpv_node` tree returned for a filter list stores the filter parameters in a `MPV_FORMAT_NODE_MAP`. The key value pairs in a
-  /// `MPV_FORMAT_NODE_MAP` are in **random** order. As a result sometimes the order of filter parameters in the filter string
-  /// representation given by IINA to the mpv remove command would not match the order of parameters given when the filter was
-  /// added to mpv and the remove command would fail to remove the filter. This was reported in
-  /// [IINA issue #3620 Audio filters with same name cannot be removed](https://github.com/iina/iina/issues/3620).
-  ///
-  /// The issue of `mpv_get_property` returning filter parameters in random order even though the remove command is sensitive to
-  /// filter parameter order was raised with the mpv project in
-  /// [mpv issue #9841 mpv_get_property returns filter params in unordered map breaking remove](https://github.com/mpv-player/mpv/issues/9841)
-  /// The response from the mpv project confirmed that the parameters in a `MPV_FORMAT_NODE_MAP` **must** be considered to
-  /// be in random order even if they appear to be ordered. The recommended methods for removing filters is to use labels, which
-  /// IINA does for filters it creates or removing based on position in the filter list. This method supports removal based on the
-  /// position within the list of filters.
-  ///
-  /// The recommended implementation is to get the entire list of filters using `mpv_get_property`, remove the filter from the
-  /// `mpv_node` tree returned by that method and then set the list of filters using `mpv_set_property`. This is the approach
-  /// used by this method.
-  /// - Parameter name: The kind of filter identified by the mpv property name, `MPVProperty.af` or `MPVProperty.vf`.
-  /// - Parameter index: Index of the filter to be removed.
-  /// - Returns: `true` if the filter was successfully removed, `false` if the filter was not removed.
+  /// Remove a filter by index by rebuilding its node list. mpv's filter matching is sensitive to
+  /// parameter order, while observed node maps are unordered (IINA #3620, mpv #9841).
+  /// https://github.com/iina/iina/issues/3620
+  /// https://github.com/mpv-player/mpv/issues/9841
+  /// Returns whether mpv accepted the updated filter list.
   func removeFilter(_ name: String, _ index: Int) -> Bool {
+    guard mpv != nil else { return false }
     Logger.ensure(name == MPVProperty.vf || name == MPVProperty.af, "removeFilter() does not support \(name)!")
+    guard index >= 0 else { return false }
 
     // Get the current list of filters from mpv as a mpv_node tree.
     var oldNode = mpv_node()
     defer { mpv_free_node_contents(&oldNode) }
-    mpv_get_property(mpv, name, MPV_FORMAT_NODE, &oldNode)
-
-    let oldList = oldNode.u.list!.pointee
+    guard mpv_get_property(mpv, name, MPV_FORMAT_NODE, &oldNode) >= 0,
+          oldNode.format == MPV_FORMAT_NODE_ARRAY, let oldListPointer = oldNode.u.list else { return false }
+    let oldList = oldListPointer.pointee
 
     // If the user uses mpv's JSON-based IPC protocol to make changes to mpv's filters behind IINA's
     // back then there is a very small window of vulnerability where the list of filters displayed
@@ -1122,8 +1119,7 @@ class MPVController: NSObject {
 
     // Set the list of filters using the new node that leaves out the filter to be removed.
     log("Set property: \(name)=<a mpv node>")
-    mpv_set_property(mpv, name, MPV_FORMAT_NODE, &newNode)
-    return true
+    return mpv_set_property(mpv, name, MPV_FORMAT_NODE, &newNode) >= 0
   }
 
   /** Set filter. only "af" or "vf" is supported for name */
@@ -1142,6 +1138,7 @@ class MPVController: NSObject {
   }
 
   func getNode(_ name: String) -> Any? {
+    guard mpv != nil else { return nil }
     var node = mpv_node()
     mpv_get_property(mpv, name, MPV_FORMAT_NODE, &node)
     let parsed = try? MPVNode.parse(node)
@@ -1150,6 +1147,7 @@ class MPVController: NSObject {
   }
 
   func setNode(_ name: String, _ value: Any) {
+    guard mpv != nil else { return }
     guard var node = try? MPVNode.create(value) else {
       log("setNode: cannot encode value for \(name)", level: .error)
       return
@@ -1174,6 +1172,7 @@ class MPVController: NSObject {
   // MARK: - Hooks
 
   func addHook(_ name: MPVHook, priority: Int32 = 0, hook: MPVHookValue) {
+    guard mpv != nil else { return }
     $hooks.withLock {
       mpv_hook_add(mpv, hookCounter, name.rawValue, priority)
       $0[hookCounter] = hook
@@ -1237,16 +1236,18 @@ class MPVController: NSObject {
       let userData = event.pointee.reply_userdata
       let hookEvent = event.pointee.data.bindMemory(to: mpv_event_hook.self, capacity: 1).pointee
       let hookID = hookEvent.id
+      let continueHook = { [weak self] in
+        guard let mpv = self?.mpv else { return }
+        mpv_hook_continue(mpv, hookID)
+      }
       guard let hook = $hooks.withLock({ $0[userData] }) else {
         // Hook not found, probably because it's from an unloaded plugin.
         // Still need to call hook_continue otherwise it will stuck.
         log("Hook \(hookID) not found", level: .warning)
-        mpv_hook_continue(self.mpv, hookID)
+        continueHook()
         break
       }
-      hook.call {
-        mpv_hook_continue(self.mpv, hookID)
-      }
+      hook.call(withNextBlock: continueHook)
 
     case MPV_EVENT_PROPERTY_CHANGE:
       let dataOpaquePtr = OpaquePointer(event.pointee.data)
@@ -1758,6 +1759,7 @@ class MPVController: NSObject {
 
   private func setOptionFloat(_ name: String, _ value: Float, level: Logger.Level = .debug,
                               verboseIfDefault: Bool = false) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     let levelToUse: Logger.Level = {
       guard verboseIfDefault, let defaultValue = MPVOptionDefaults.shared.getDouble(name),
             abs(Double(value).distance(to: defaultValue)) <= Double.leastNonzeroMagnitude else {
@@ -1772,6 +1774,7 @@ class MPVController: NSObject {
 
   private func setOptionInt(_ name: String, _ value: Int, level: Logger.Level = .debug,
                             verboseIfDefault: Bool = false) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     let levelToUse: Logger.Level = verboseIfDefault &&
       MPVOptionDefaults.shared.getInt(name) == value ? .verbose  : level
     log("Set option: \(name)=\(value)", level: levelToUse)
@@ -1782,6 +1785,7 @@ class MPVController: NSObject {
   @discardableResult
   private func setOptionString(_ name: String, _ value: String, level: Logger.Level = .debug,
                                verboseIfDefault: Bool = false) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     let levelToUse: Logger.Level = verboseIfDefault &&
       MPVOptionDefaults.shared.getString(name) == value ? .verbose  : level
     log("Set option: \(name)=\(value)", level: levelToUse)

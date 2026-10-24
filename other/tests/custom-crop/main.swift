@@ -1885,6 +1885,51 @@ keyboardEditor.interactiveMode.popoverDidClose(Notification(name: NSPopover.didC
 check(keyboardEditor.interactiveMode.handleEditorEvent(menuReturn) === menuReturn && keyboardEditor.interactiveMode.isActive,
       "a stale popover close cannot release another menu's keyboard routing or trigger Save")
 keyboardZoom.menuTrackingChanged?(false)
+let nativeMenuEditor = MainWindowController()
+nativeMenuEditor.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+let nativeMenuBox = box(in: nativeMenuEditor)
+nativeMenuBox.setSelectedRect(to: NSRect(x: 100, y: 60, width: 300, height: 200))
+let nativeSelection = nativeMenuBox.selectedRect
+let parentNativeMenu = NSMenu(title: "Video")
+let nestedNativeMenu = NSMenu(title: "Crop")
+let unrelatedNativeMenu = NSMenu(title: "Unrelated")
+let nativeEscape = editorKey(53, in: nativeMenuEditor, time: 12.3)
+let nativeReturn = editorKey(36, in: nativeMenuEditor, time: 12.4)
+let menuNotifications = NotificationCenter.default
+menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: parentNativeMenu)
+menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: parentNativeMenu)
+check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) === nativeEscape &&
+      nativeMenuEditor.interactiveMode.handleEditorEvent(nativeReturn) === nativeReturn &&
+      nativeMenuEditor.interactiveMode.isActive && nativeMenuBox.selectedRect == nativeSelection,
+      "native menus receive Escape/Return before Crop Reset, Cancel or Save")
+nativeMenuEditor.isCropTransitionInProgress = true
+check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) === nativeEscape &&
+      nativeMenuEditor.isCropTransitionInProgress,
+      "native menu Escape cannot cancel an editor transition behind the menu")
+nativeMenuEditor.isCropTransitionInProgress = false
+menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: nestedNativeMenu)
+menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: parentNativeMenu)
+menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: unrelatedNativeMenu)
+check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) === nativeEscape &&
+      nativeMenuBox.selectedRect == nativeSelection,
+      "closing a parent or unrelated native menu cannot release another tracking menu")
+menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: nestedNativeMenu)
+check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) == nil &&
+      nativeMenuEditor.interactiveMode.isActive &&
+      nativeMenuBox.selectedRect == NSRect(origin: .zero, size: nativeMenuBox.videoSize),
+      "one end per native menu releases duplicate begin notifications and restores Crop Reset")
+_ = nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape)
+check(!nativeMenuEditor.interactiveMode.isActive, "Crop Cancel resumes after native menu tracking ends")
+nativeMenuEditor.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: parentNativeMenu)
+nativeMenuEditor.interactiveMode.exit()
+menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: nestedNativeMenu)
+nativeMenuEditor.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+_ = nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape)
+check(!nativeMenuEditor.interactiveMode.isActive,
+      "editor exit clears native tracking and removes observers before a later session")
+menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: parentNativeMenu)
+menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: nestedNativeMenu)
 let keyboardWidth = input("Width in pixels", in: keyboardEditor)
 keyboardWidth.selectText(nil)
 check(keyboardWidth.currentEditor() != nil, "dimension test uses the native field editor")
@@ -2129,4 +2174,45 @@ for failure in ["generation", "stopped"] {
         "\(failure) cannot complete stale native entry motion")
   editor.interactiveMode.exit(discardingCrop: true)
 }
+// Menu/plugin entry must obey the same ownership rules as the shortcut route.
+for blockedMode in ["loading", "stopped", "unloaded-window", "music", "pip-preparing", "pip-return",
+                    "fullscreen-animation", "crop-transition", "foreign-host", "detached-video"] {
+  let blocked = MainWindowController()
+  var foreignHost: NSWindow?
+  switch blockedMode {
+  case "loading": blocked.player.info.state = .loading
+  case "stopped": blocked.player.info.state = .stopped
+  case "unloaded-window": blocked.loaded = false
+  case "music": blocked.player.isInMiniPlayer = true
+  case "pip-preparing": blocked.pipStatus = .inPIP
+  case "pip-return": blocked.pipStatus = .intermediate
+  case "fullscreen-animation": blocked.isFullscreenTransitionInProgress = true
+  case "crop-transition": blocked.isCropTransitionInProgress = true
+  case "foreign-host":
+    let host = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 320, height: 180),
+                        styleMask: .borderless, backing: .buffered, defer: false)
+    host.isReleasedWhenClosed = false
+    foreignHost = host
+    blocked.videoView.removeFromSuperview()
+    host.contentView!.addSubview(blocked.videoView)
+  default: blocked.videoView.removeFromSuperview()
+  }
+  for mode in [InteractiveModeController.Mode.crop, .delogo] {
+    check(!blocked.interactiveMode.canEnter, "\(blockedMode) rejects editor ownership")
+    blocked.interactiveMode.enter(mode: mode, selectWholeVideoByDefault: true)
+    check(!blocked.interactiveMode.isActive && blocked.preparedWindowReferences == 0 &&
+          blocked.player.removedCropCount == 0 && blocked.player.pausedCount == 0,
+          "\(blockedMode) rejects \(mode) before layout, filtering or pause side effects")
+  }
+  withExtendedLifetime(foreignHost) {}
+}
+let releasedOwner = MainWindowController()
+check(releasedOwner.interactiveMode.canEnter, "an ordinary loaded window accepts editor ownership")
+releasedOwner.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+let entryReferences = releasedOwner.preparedWindowReferences
+releasedOwner.interactiveMode.enter(mode: .delogo)
+check(releasedOwner.interactiveMode.currentMode == .crop && releasedOwner.preparedWindowReferences == entryReferences,
+      "reentrant menu entry cannot replace the active editor or repeat setup")
+releasedOwner.interactiveMode.exit()
+check(releasedOwner.interactiveMode.canEnter, "editor release permits a later deliberate entry")
 print("Completed \(checks) custom crop checks using production controller, selection view, and scrolling selector.")

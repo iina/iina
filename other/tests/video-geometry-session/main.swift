@@ -200,6 +200,32 @@ configuredCrop.mpv.videoFilters = [crop]
 configuredCrop.start(a)
 check(configuredCrop.info.cropFilter != nil && configuredCrop.info.unsureCrop != "None",
       "a configured crop is never presented as None at the first load")
+let blockedOutput = PlayerFixture()
+blockedOutput.setFlip(true); blockedOutput.setMirror(true)
+let committedFilters = blockedOutput.mpv.videoFilters.map(\.stringFormat)
+blockedOutput.mainWindow.interactiveMode.isActive = true
+let geometryReadsBeforeRejection = blockedOutput.geometryReads
+for _ in 0..<3 {
+  blockedOutput.setCrop(fromString: "4:3")
+  blockedOutput.setCrop(fromString: "None")
+  blockedOutput.setFlip(false); blockedOutput.setMirror(false)
+}
+check(blockedOutput.info.cropFilter == nil && blockedOutput.geometryReads == geometryReadsBeforeRejection &&
+      blockedOutput.mpv.videoFilters.map(\.stringFormat) == committedFilters,
+      "menu presets and flip/mirror shortcuts cannot alter active Crop output or source coordinates")
+blockedOutput.mainWindow.interactiveMode.isActive = false
+blockedOutput.setCrop(fromString: "4:3")
+blockedOutput.setFlip(false); blockedOutput.setMirror(false)
+check(blockedOutput.info.cropFilter != nil && blockedOutput.mpv.videoFilters.isEmpty,
+      "preset Crop and flip/mirror changes remain available after editor release")
+let stoppedOutput = PlayerFixture()
+stoppedOutput.info.state.active = false
+for _ in 0..<3 {
+  stoppedOutput.setCrop(fromString: "4:3"); stoppedOutput.setCrop(fromString: "None")
+  stoppedOutput.setFlip(true); stoppedOutput.setMirror(true)
+}
+check(stoppedOutput.info.cropFilter == nil && stoppedOutput.mpv.videoFilters.isEmpty && stoppedOutput.geometryReads == 0,
+      "unavailable playback rejects output filters and Crop presets before reading the native geometry")
 print("Completed \(checks) production video geometry session checks.")
 
 extension PlayerFixture { func restoreForTesting() { restoreVideoTrackGeometryForCurrentMedia() } }

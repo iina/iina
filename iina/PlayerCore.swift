@@ -234,6 +234,8 @@ class PlayerCore: NSObject {
   }
 
   private var backgroundTaskInUse = false
+  private var hasSentMPVQuit = false
+  private var shutdownRequestedAfterStop = false
 
   var initialWindow: InitialWindowController!
 
@@ -905,10 +907,18 @@ class PlayerCore: NSObject {
   ///     task is still running this method only changes the player state. When the background task ends it will notice that shutting
   ///     down was in progress and will call this method again to continue the process of shutting down..
   func shutdown() {
+    guard info.state != .shutDown, !hasSentMPVQuit else { return }
+    if info.state == .stopping {
+      shutdownRequestedAfterStop = true
+      pendingUrl = nil
+      return
+    }
+    shutdownRequestedAfterStop = false
     cancelVideoGeometryOSDRefresh()
     cancelScreenshotRequests()
     info.state = .shuttingDown
     guard !backgroundTaskInUse else { return }
+    hasSentMPVQuit = true
     log("Shutting down")
     savePlayerState()
     mpv.mpvQuit()
@@ -972,6 +982,10 @@ class PlayerCore: NSObject {
   /// 2) On user initiated button actions
   ///
   func switchToMiniPlayer(automatically: Bool = false, showMiniPlayer: Bool = true) {
+    guard !isInMiniPlayer, info.state.active, mainWindow.loaded,
+          !mainWindow.interactiveMode.isActive, !mainWindow.isCropTransitionInProgress,
+          mainWindow.pipStatus == .notInPIP, !mainWindow.isFullscreenTransitionInProgress,
+          mainWindow.videoView.superview === mainWindow.videoViewContainer else { return }
     log("Switch to mini player, automatically=\(automatically)")
     if !automatically {
       // Toggle manual override
@@ -1065,6 +1079,7 @@ class PlayerCore: NSObject {
   /// 3) When closing the mini player
   ///
   func switchBackFromMiniPlayer(automatically: Bool = false, showMainWindow: Bool = true) {
+    guard isInMiniPlayer else { return }
     log("Switch to normal window from mini player, automatically=\(automatically)")
     if !automatically {
       overrideAutoSwitchToMusicMode = !overrideAutoSwitchToMusicMode
@@ -1121,6 +1136,7 @@ class PlayerCore: NSObject {
   /// - Important: Although primary responsibility for ensuring the display link is running when playback is in progress belongs to
   ///     the `pauseChanged` method, this method calls `displayActive` to provide more time for the display link to start up.
   func resume() {
+    guard info.state.active else { return }
     log("Resuming playback")
     mainWindow.videoView.displayActive()
     // Restart playback when reached EOF
@@ -1148,10 +1164,10 @@ class PlayerCore: NSObject {
   ///     and call this method again to continue the process of stopping. It is important to stop the background task as if it is still
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
+    guard info.state != .shuttingDown, info.state != .shutDown else { return }
     cancelVideoGeometryOSDRefresh()
     cancelScreenshotRequests()
     pausedCropRefresh = nil
-    guard info.state != .shutDown else { return }
     savePlaybackPosition()
 
     // The player may already be stopped in which case the state must not be set to stopping.
@@ -1188,11 +1204,13 @@ class PlayerCore: NSObject {
   }
 
   func toggleMute(_ set: Bool? = nil) {
+    guard info.state.active else { return }
     let newState = set ?? !mpv.getFlag(MPVOption.Audio.mute)
     mpv.setFlag(MPVOption.Audio.mute, newState)
   }
 
   func seek(percent: Double, forceExact: Bool = false) {
+    guard info.state.active else { return }
     userInitiatedSeek()
     var percent = percent
     // mpv will play next file automatically when seek to EOF.
@@ -1208,6 +1226,7 @@ class PlayerCore: NSObject {
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
+    guard info.state.active else { return }
     userInitiatedSeek()
     switch option {
 
@@ -1234,6 +1253,7 @@ class PlayerCore: NSObject {
   }
 
   func seek(absoluteSecond: Double) {
+    guard info.state.active else { return }
     userInitiatedSeek()
     mpv.command(.seek, args: ["\(absoluteSecond)", "absolute+exact"])
   }
@@ -1582,6 +1602,7 @@ class PlayerCore: NSObject {
   }
 
   func setVolume(_ volume: Double, constrain: Bool = true) {
+    guard info.state.active else { return }
     let maxVolume = Preference.integer(for: .maxVolume)
     let constrainedVolume = volume.clamped(to: 0...Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
@@ -1802,6 +1823,7 @@ class PlayerCore: NSObject {
 
   @discardableResult
   func setAudioTracks(_ ids: Set<Int>) -> Bool {
+    guard info.state.active else { return false }
     reconcileTrackGraph()
     guard ids.isSubset(of: Set(info.audioTracks.map(\.id))) else { return false }
     return applyTrackSelection(audio: ids, video: info.layeredVideoTrackIDs,
@@ -1810,6 +1832,7 @@ class PlayerCore: NSObject {
 
   @discardableResult
   func setVideoTracks(_ ids: Set<Int>, order: [Int]? = nil) -> Bool {
+    guard info.state.active, mainWindow?.interactiveMode.isActive != true else { return false }
     reconcileTrackGraph()
     let available = info.videoTracks.map(\.id)
     guard ids.isSubset(of: Set(available)) else { return false }
@@ -2049,6 +2072,7 @@ class PlayerCore: NSObject {
   }
 
   func setTrack(_ index: Int, forType: MPVTrack.TrackType) {
+    guard info.state.active else { return }
     switch forType {
     case .audio:
       setAudioTracks(index > 0 ? [index] : [])
@@ -2066,11 +2090,13 @@ class PlayerCore: NSObject {
   }
 
   func setSpeed(_ speed: Double) {
+    guard info.state.active else { return }
     let speed = max(AppData.mpvMinPlaybackSpeed, speed)
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
 
   func setVideoAspect(_ aspect: String) {
+    guard info.state.active, mainWindow?.interactiveMode.isActive != true else { return }
     let retry: () -> Void = preservingOSDFeedbackOrigin { [weak self] in self?.setVideoAspect(aspect) }
     if mainWindow?.enqueueVideoGeometryChange(.aspect, request: retry) == true { return }
     mainWindow?.prepareVideoTransformWindowReference()
@@ -2090,6 +2116,7 @@ class PlayerCore: NSObject {
   }
 
   func setVideoRotate(_ degree: Int) {
+    guard info.state.active, mainWindow?.interactiveMode.isActive != true else { return }
     guard AppData.rotations.contains(degree) else { return }
     let retry: () -> Void = preservingOSDFeedbackOrigin { [weak self] in self?.setVideoRotate(degree) }
     if mainWindow?.enqueueVideoGeometryChange(.rotation, request: retry) == true { return }
@@ -2103,6 +2130,7 @@ class PlayerCore: NSObject {
   }
 
   func setFlip(_ enable: Bool) {
+    guard info.state.active, mainWindow?.interactiveMode.isActive != true else { return }
     if enable {
       if info.flipFilter == nil {
         let vf = MPVFilter.flip()
@@ -2120,6 +2148,7 @@ class PlayerCore: NSObject {
   }
 
   func setMirror(_ enable: Bool) {
+    guard info.state.active, mainWindow?.interactiveMode.isActive != true else { return }
     if enable {
       if info.mirrorFilter == nil {
         let vf = MPVFilter.mirror()
@@ -2168,6 +2197,7 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalVideoFile(_ url: URL) {
+    guard info.state.active, mainWindow?.interactiveMode.isActive != true else { return }
     mpv.command(.videoAdd, args: [url.mpvStr], checkError: false) { code in
       if code < 0 {
         self.log("Unsupported video: \(url.mpvStr)", level: .error)
@@ -2279,6 +2309,7 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalSubFile(_ url: URL, delay: Bool = false, suppressError: Bool = false) {
+    guard info.state.active else { return }
     var track: MPVTrack?
     info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.mpvStr }) }
     if let track {
@@ -2325,10 +2356,12 @@ class PlayerCore: NSObject {
   }
 
   func setAudioDelay(_ delay: Double) {
+    guard info.state.active else { return }
     mpv.setDouble(MPVOption.Audio.audioDelay, delay)
   }
 
   func setSubDelay(_ delay: Double, forPrimary: Bool = true) {
+    guard info.state.active else { return }
     let option = forPrimary ? MPVOption.Subtitles.subDelay : MPVOption.Subtitles.secondarySubDelay
     mpv.setDouble(option, delay)
   }
@@ -2467,6 +2500,7 @@ class PlayerCore: NSObject {
 
   @discardableResult
   func playChapter(_ pos: Int) -> MPVChapter? {
+    guard info.state.active else { return nil }
     log("Seeking to chapter \(pos)", level: .verbose)
     let chapters = info.chapters
     guard pos >= 0, pos < chapters.count else {
@@ -2482,6 +2516,7 @@ class PlayerCore: NSObject {
   }
 
   func setCrop(fromString str: String) {
+    guard info.state.active, mainWindow?.interactiveMode.isActive != true else { return }
     mainWindow?.prepareVideoTransformWindowReference()
     if let aspect = Aspect(string: str) {
       // Match Custom Crop's rotated output coordinates; file metadata may describe another video track.
@@ -3335,6 +3370,7 @@ class PlayerCore: NSObject {
   }
 
   func idleActiveChanged() {
+    guard info.state != .shuttingDown, info.state != .shutDown else { return }
     if receivedEndFileWhileLoading && info.state == .starting {
       DispatchQueue.main.async { [unowned self] in
         currentController.close()
@@ -3359,6 +3395,13 @@ class PlayerCore: NSObject {
       log("Playback has stopped")
       info.state = .idle
       postNotification(.iinaPlayerStopped)
+      if shutdownRequestedAfterStop {
+        shutdownRequestedAfterStop = false
+        pendingUrl = nil
+        shutdown()
+        return
+      }
+      guard info.state == .idle else { pendingUrl = nil; return }
       if let pendingUrl {
         self.pendingUrl = nil
         log("Processing pending open")
@@ -4041,6 +4084,7 @@ class PlayerCore: NSObject {
   }
 
   func getChapters() {
+    guard info.state.active else { return }
     log("Reloading chapter list", level: .verbose)
     var chapters: [MPVChapter] = []
     let chapterCount = mpv.getInt(MPVProperty.chapterListCount)

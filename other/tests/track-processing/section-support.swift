@@ -10,7 +10,8 @@ struct LayoutValue {
 }
 final class PlayerCore {}
 enum TrackSettingsGroup { case audioDelay, videoGeometry }
-final class TrackSettingsPopUp: NSView {
+class SettingsTargetPopUp: NSView {}
+final class TrackSettingsPopUp: SettingsTargetPopUp {
   init(player: PlayerCore, group: TrackSettingsGroup) {
     super.init(frame: .zero)
     translatesAutoresizingMaskIntoConstraints = false

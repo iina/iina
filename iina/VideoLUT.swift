@@ -22,11 +22,11 @@ struct VideoLUTLibrary {
 
   let directory: URL
 
-  func entries(includeRemoved: Bool = false) throws -> [Entry] {
+  func entries() throws -> [Entry] {
     guard FileManager.default.fileExists(atPath: directory.path) else { return [] }
     let removed = try removedNames()
     return try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles])
-      .filter { (includeRemoved || !removed.contains($0.lastPathComponent)) && $0.pathExtension.lowercased() == "cube" && (try? $0.resourceValues(forKeys: [.isRegularFileKey]).isRegularFile) == true }
+      .filter { !removed.contains($0.lastPathComponent) && $0.pathExtension.lowercased() == "cube" && (try? $0.resourceValues(forKeys: [.isRegularFileKey]).isRegularFile) == true }
       .map { Entry(url: $0) }
       .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
   }
@@ -77,18 +77,6 @@ struct VideoLUTLibrary {
     try FileManager.default.trashItem(at: entry.url, resultingItemURL: &trashedURL)
     Self.notifyChanged()
     return trashedURL as URL?
-  }
-
-  func isRemoved(_ entry: Entry) throws -> Bool {
-    try removedNames().contains(entry.url.lastPathComponent)
-  }
-
-  func restore(_ entry: Entry) throws {
-    guard try entries(includeRemoved: true).contains(where: { $0.url.standardizedFileURL == entry.url.standardizedFileURL }) else {
-      throw CocoaError(.fileNoSuchFile)
-    }
-    try restoreToList(entry.url)
-    Self.notifyChanged()
   }
 
   static func notifyChanged() {

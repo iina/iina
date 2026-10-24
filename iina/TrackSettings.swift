@@ -135,7 +135,7 @@ final class SubtitleRoleSelector: NSSegmentedControl {
   }
 }
 
-/// The bundled engine keeps secondary subtitle styles independent when enabled.
+/// Option names for primary styles and the optional independent secondary styles.
 enum SubtitleStyle {
   static let options = ["sub-scale", "sub-font", "sub-font-size", "sub-color",
                         "sub-outline-size", "sub-outline-color", "sub-back-color"]

@@ -106,6 +106,7 @@ resetRuntime.scopedTrackSettings.reset(.audioEQ)
 _ = resetRuntime.refreshTrackProcessing(.audio)
 check(resetRuntime.mpv.equalizerGains[ProcessedAudioGraph.equalizerTarget(trackID: 1, band: 2)] == "0.0" && resetRuntime.mpv.strings["lavfi-complex"] == neutralGraph, "Reset all clears audible runtime EQ even when canonical graph text is unchanged")
 let soloRollback = PlayerCore()
+soloRollback.mpv.supportsPersistentMixer = true
 var soloProfile = AudioTrackProcessing(); soloProfile.gains[0] = 1
 soloRollback.scopedTrackSettings.audio[1] = soloProfile
 _ = soloRollback.refreshTrackProcessing(.audio)
@@ -391,3 +392,31 @@ pointerReset.updateTrackingAreas()
 check(resetPixels() == quietReset, "Reset clears after geometry changes without needing a mouse-exit event")
 resetPointerWindow.close()
 print("Reset hover checks complete: \(checks) total checks.")
+
+// Stock engines and older command extensions must rebuild, including Reset.
+for hasLegacyCommand in [false, true] {
+  let stockEQ = PlayerCore()
+  stockEQ.mpv.supportsPersistentMixer = hasLegacyCommand
+  stockEQ.mpv.supportsAudioRefresh = false
+  var profile = AudioTrackProcessing(delay: 0.25)
+  profile.gains[2] = 2
+  stockEQ.scopedTrackSettings.audio[1] = profile
+  check(stockEQ.refreshTrackProcessing(.audio), "stock EQ starts through a replacement graph")
+  let writesBefore = stockEQ.mpv.graphWrites
+  let previous = profile
+  profile.gains[2] = 8
+  stockEQ.scopedTrackSettings.audio[1] = profile
+  check(stockEQ.refreshTrackAudioEQ(id: 1, previous: previous.gains, gains: profile.gains,
+                                   audioRollback: [1: previous]),
+        "repeated source EQ falls back when refresh-audio is unavailable (legacy command: \(hasLegacyCommand))")
+  check(stockEQ.mpv.graphWrites == writesBefore + 1 &&
+        stockEQ.mpv.strings["lavfi-complex"]?.contains("g=8.000000000") == true,
+        "stock fallback applies the new gain to the replacement graph")
+  stockEQ.scopedTrackSettings.setTarget(1, for: .audioEQ)
+  stockEQ.resetTrackSettings(.audioEQ)
+  check(stockEQ.scopedTrackSettings.audio[1]?.gains.allSatisfy { $0 == 0 } == true &&
+        stockEQ.scopedTrackSettings.audio[1]?.delay == 0.25 &&
+        stockEQ.mpv.strings["lavfi-complex"]?.contains("g=8.000000000") == false,
+        "stock source EQ Reset clears gains while preserving delay")
+  check(stockEQ.info.activeTrackIDs(.audio) == [1], "stock EQ edits and Reset preserve playback membership")
+}

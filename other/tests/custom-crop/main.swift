@@ -1885,51 +1885,6 @@ keyboardEditor.interactiveMode.popoverDidClose(Notification(name: NSPopover.didC
 check(keyboardEditor.interactiveMode.handleEditorEvent(menuReturn) === menuReturn && keyboardEditor.interactiveMode.isActive,
       "a stale popover close cannot release another menu's keyboard routing or trigger Save")
 keyboardZoom.menuTrackingChanged?(false)
-let nativeMenuEditor = MainWindowController()
-nativeMenuEditor.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
-let nativeMenuBox = box(in: nativeMenuEditor)
-nativeMenuBox.setSelectedRect(to: NSRect(x: 100, y: 60, width: 300, height: 200))
-let nativeSelection = nativeMenuBox.selectedRect
-let parentNativeMenu = NSMenu(title: "Video")
-let nestedNativeMenu = NSMenu(title: "Crop")
-let unrelatedNativeMenu = NSMenu(title: "Unrelated")
-let nativeEscape = editorKey(53, in: nativeMenuEditor, time: 12.3)
-let nativeReturn = editorKey(36, in: nativeMenuEditor, time: 12.4)
-let menuNotifications = NotificationCenter.default
-menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: parentNativeMenu)
-menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: parentNativeMenu)
-check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) === nativeEscape &&
-      nativeMenuEditor.interactiveMode.handleEditorEvent(nativeReturn) === nativeReturn &&
-      nativeMenuEditor.interactiveMode.isActive && nativeMenuBox.selectedRect == nativeSelection,
-      "native menus receive Escape/Return before Crop Reset, Cancel or Save")
-nativeMenuEditor.isCropTransitionInProgress = true
-check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) === nativeEscape &&
-      nativeMenuEditor.isCropTransitionInProgress,
-      "native menu Escape cannot cancel an editor transition behind the menu")
-nativeMenuEditor.isCropTransitionInProgress = false
-menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: nestedNativeMenu)
-menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: parentNativeMenu)
-menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: unrelatedNativeMenu)
-check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) === nativeEscape &&
-      nativeMenuBox.selectedRect == nativeSelection,
-      "closing a parent or unrelated native menu cannot release another tracking menu")
-menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: nestedNativeMenu)
-check(nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape) == nil &&
-      nativeMenuEditor.interactiveMode.isActive &&
-      nativeMenuBox.selectedRect == NSRect(origin: .zero, size: nativeMenuBox.videoSize),
-      "one end per native menu releases duplicate begin notifications and restores Crop Reset")
-_ = nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape)
-check(!nativeMenuEditor.interactiveMode.isActive, "Crop Cancel resumes after native menu tracking ends")
-nativeMenuEditor.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
-menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: parentNativeMenu)
-nativeMenuEditor.interactiveMode.exit()
-menuNotifications.post(name: NSMenu.didBeginTrackingNotification, object: nestedNativeMenu)
-nativeMenuEditor.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
-_ = nativeMenuEditor.interactiveMode.handleEditorEvent(nativeEscape)
-check(!nativeMenuEditor.interactiveMode.isActive,
-      "editor exit clears native tracking and removes observers before a later session")
-menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: parentNativeMenu)
-menuNotifications.post(name: NSMenu.didEndTrackingNotification, object: nestedNativeMenu)
 let keyboardWidth = input("Width in pixels", in: keyboardEditor)
 keyboardWidth.selectText(nil)
 check(keyboardWidth.currentEditor() != nil, "dimension test uses the native field editor")

@@ -17,10 +17,14 @@ class MainWindow: CommonWindow {
     }
     if event.type == .leftMouseDown { controller.cancelWindowDrag() }
     defer {
-      if event.type == .leftMouseUp { controller.cancelWindowDrag() }
+      if event.type == .leftMouseUp {
+        // OSC mouseUp must finish its drag before a background click can hide it.
+        _ = controller.sidebars.handlePanelMouseEvent(event)
+        controller.cancelWindowDrag()
+      }
     }
     if event.type == .keyDown, controller.handleDefaultEscape(with: event) { return }
-    if controller.sidebars.handlePanelMouseEvent(event) { return }
+    if event.type != .leftMouseUp, controller.sidebars.handlePanelMouseEvent(event) { return }
     if controller.titleBarView?.handleBackgroundMouseEvent(event) == true { return }
     super.sendEvent(event)
   }

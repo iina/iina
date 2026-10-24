@@ -942,12 +942,6 @@ class MainWindowController: PlayerWindowController {
     layoutSides.forEach { videoContainerConstraints[$0]?.isActive = true }
   }
 
-  private func updateVideoContainerConstraints(_ constraints: [NSLayoutConstraint.Attribute: CGFloat]) {
-    for (attr, value) in constraints {
-      videoContainerConstraints[attr]?.constant = value
-    }
-  }
-
   @objc func removeVideoViewBlackBars() {
     guard let window, Preference.unlockWindowAspectRatio, !fsState.isFullscreen else { return }
 

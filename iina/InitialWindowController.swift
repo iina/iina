@@ -150,9 +150,14 @@ class InitialWindowController: NSWindowController {
                                    action: #selector(AppDelegate.openFile(_:)))
     let openURLButton = ui.button("FKG-Tz-TCV.title", target: AppDelegate.shared,
                                   action: #selector(AppDelegate.openURL(_:)))
+    let openUPnPButton = NSButton(title: NSLocalizedString("upnp.welcome.open", comment: "DLNA…"),
+                                  target: AppDelegate.shared,
+                                  action: #selector(AppDelegate.showUPnPBrowser(_:)))
+    openUPnPButton.translatesAutoresizingMaskIntoConstraints = false
     openFileButton.controlSize = .large
     openURLButton.controlSize = .large
-    let actions = ui.hStack(spacing: 12, openFileButton, openURLButton)
+    openUPnPButton.controlSize = .large
+    let actions = ui.hStack(spacing: 12, openFileButton, openURLButton, openUPnPButton)
     mainView.addSubview(actions)
     actions.padding(.top(64), .trailing(paddingH))
 

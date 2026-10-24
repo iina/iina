@@ -179,11 +179,15 @@ fileprivate class LoadSubtitleView: NSView {
 
   @objc func loadExternalSubAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == 0 {
+      guard player.info.state.loaded else { return }
+      let generation = player.info.trackSelectionGeneration
       let currentDir = player.info.currentURL?.deletingLastPathComponent()
       Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
                              sheetWindow: player.currentWindow,
-                             allowedFileTypes: Utility.containsSubExt) { url in
-        self.player.loadExternalSubFile(url, delay: true)
+                             allowedFileTypes: Utility.containsSubExt) { [weak player] url in
+        guard let player, player.info.state.loaded,
+              player.info.trackSelectionGeneration == generation else { return }
+        player.loadExternalSubFile(url, delay: true)
       }
     } else if sender.selectedSegment == 1 {
       player.mainWindow.showSubChooseMenu(forView: sender)

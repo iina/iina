@@ -62,14 +62,18 @@ class SidebarVideoPane: SidebarScrollView {
   }
 
   @objc private func loadExternalVideoAction(_ sender: NSButton) {
+    guard player.info.state.loaded else { return }
+    let generation = player.info.trackSelectionGeneration
     Utility.quickOpenPanel(
       title: ui.localized("sidebar.add_video_track"),
       chooseDir: false,
       dir: player.info.currentURL?.deletingLastPathComponent(),
       sheetWindow: player.currentWindow,
       allowedFileTypes: Utility.supportedFileExt[.video]
-    ) { url in
-      self.player.loadExternalVideoFile(url)
+    ) { [weak player] url in
+      guard let player, player.info.state.loaded,
+            player.info.trackSelectionGeneration == generation else { return }
+      player.loadExternalVideoFile(url)
     }
   }
 

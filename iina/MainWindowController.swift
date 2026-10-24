@@ -470,7 +470,7 @@ class MainWindowController: PlayerWindowController {
 
   lazy var pluginOverlayViewContainer: NSView! = {
     guard let window, let cv = window.contentView else { return nil }
-    let view = NSView(frame: .zero)
+    let view = PluginOverlayViewContainer(frame: .zero)
     view.translatesAutoresizingMaskIntoConstraints = false
     cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
@@ -995,12 +995,6 @@ class MainWindowController: PlayerWindowController {
       NSLayoutConstraint.activate(videoContainerPhysicalConstraints)
     }
     layoutSides.forEach { videoContainerConstraints[$0]?.isActive = true }
-  }
-
-  private func updateVideoContainerConstraints(_ constraints: [NSLayoutConstraint.Attribute: CGFloat]) {
-    for (attr, value) in constraints {
-      videoContainerConstraints[attr]?.constant = value
-    }
   }
 
   @objc func removeVideoViewBlackBars() {

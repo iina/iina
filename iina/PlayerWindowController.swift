@@ -288,6 +288,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   @discardableResult
   func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
+    guard !keyBinding.rawAction.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+          let command = keyBinding.action.first else { return false }
     if keyBinding.isIINACommand {
       // - IINA command
       if let name = keyBinding.action.first, let iinaCommand = IINACommand(rawValue: name),
@@ -303,9 +305,16 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     } else {
       // - mpv command
+      if player.mainWindow.interactiveMode.isActive || player.mainWindow.isCropTransitionInProgress {
+        let commands = OSDCommandRouting.commands(in: keyBinding.rawAction)
+        let playlistIndex = player.mpv.getInt(MPVProperty.playlistPos)
+        guard !commands.contains(where: { OSDCommandRouting.changesVideoGeometry($0, playlistIndex: playlistIndex) }) else {
+          return false
+        }
+      }
       let returnValue: Int32
       // execute the command
-      switch keyBinding.action.first! {
+      switch command {
 
       case MPVCommand.abLoop.rawValue:
         abLoop()

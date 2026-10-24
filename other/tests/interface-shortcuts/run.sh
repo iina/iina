@@ -22,6 +22,8 @@ support=support.replace('// PRODUCTION_WINDOW_EVENT',extract('MainWindow.swift',
 support=support.replace('// PRODUCTION_ARROW_KEYS',extract('MainWindow.swift','  override func performKeyEquivalent(')+'\n'+extract('MainWindow.swift','  private func shouldFavorArrowKeyNavigation('))
 files=['IINACommand.swift','StreamReader.swift','KeyCodeHelper.swift','KeyMapping.swift','KeyBindingCriterion.swift','KeyBindingItem.swift','KeyBindingDataLoader.swift','KeyBindingTranslator.swift','KeyRecordViewController.swift']
 production='\n'.join((repo/'iina'/f).read_text().replace('import Mustache','') for f in files)
+production+='\n'+'\n'.join(extract('OSDMessage.swift', marker) for marker in [
+    'enum OSDFeedbackOrigin {', 'enum OSDFeedbackValue:', 'final class OSDFeedbackOrigins {', 'enum OSDCommandRouting {'])
 (out/'main.swift').write_text(support+'\n'+production+'\n'+(tests/'main.swift').read_text())
 PY
 xcrun swiftc -module-cache-path "$output_dir/module-cache" "$output_dir/main.swift" -o "$output_dir/tests"

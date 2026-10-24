@@ -48,7 +48,7 @@ class MPVFixture {
   }
 }
 class InfoFixture {
-  struct State { var loaded = true }
+  struct State { var loaded = true; var active = true }
   var state = State()
   var currentURL: URL?
   var justStartedFile = false, justOpenedFile = false
@@ -61,7 +61,7 @@ class InfoFixture {
   var activeVideo: Set<Int> = [1]
   func activeTrackIDs(_ type: MPVTrack.TrackType) -> Set<Int> { activeVideo }
 }
-class InteractiveFixture { var onExit: (() -> Void)?; func exit() { onExit?(); onExit = nil } }
+class InteractiveFixture { var isActive = false; var onExit: (() -> Void)?; func exit() { onExit?(); onExit = nil } }
 class WindowFixture {
   func prepareVideoTransformWindowReference() {}
   var loaded = true
@@ -95,6 +95,10 @@ class PlayerFixture {
   }
   func interactiveVideoGeometry(uncropped: Bool) -> CropVideoGeometry { geometryReads += 1; return geometry }
   @discardableResult func setCrop(fromFilter filter: MPVFilter) -> Bool { info.cropFilter = filter; return true }
+  func addVideoFilter(_ filter: MPVFilter) -> Bool { mpv.videoFilters.append(filter); return true }
+  func removeVideoFilter(_ filter: MPVFilter) -> Bool {
+    mpv.videoFilters.removeAll { $0.isEqual(filter) }; return true
+  }
   func removeCropFilter() { info.cropFilter = nil; info.unsureCrop = "None" }
   private func applyCropChange(_ filter: MPVFilter?, description: String, outputSize: NSSize?) {
     if let filter { if setCrop(fromFilter: filter) { info.unsureCrop = description } }

@@ -1,0 +1,55 @@
+import Foundation
+
+var checks = 0
+func check(_ condition: @autoclosure () -> Bool, _ message: String) {
+  precondition(condition(), message); checks += 1
+}
+let controller = MPVController()
+nativeTestReset()
+controller.observe(property: "test")
+controller.setFlag("test", true); controller.setInt("test", 1); controller.setDouble("test", 1)
+check(controller.setString("test", "x") == MPV_ERROR_UNINITIALIZED.rawValue, "nil string setter returns native uninitialized error")
+check(controller.setStringToDefault("test") == MPV_ERROR_UNINITIALIZED.rawValue, "nil default setter returns native uninitialized error")
+check(controller.getInt("test") == 0 && controller.getDouble("test") == 0 && !controller.getFlag("test"), "nil scalar reads return neutral values")
+check(controller.getString("test") == nil && controller.getNode("test") == nil, "nil string/node reads return nil")
+check(controller.getFilters("vf").isEmpty && !controller.removeFilter("vf", 0), "nil filter operations return empty/false")
+controller.setNode("test", ["x": 1])
+controller.addHook(MPVHook(rawValue: "on_load"), hook: MPVHookValue())
+check(controller.optionWrites() == Array(repeating: MPV_ERROR_UNINITIALIZED.rawValue, count: 4), "nil initialization options return uninitialized error")
+check(nativeTestCalls() == 0 && controller.player.osdFeedbackOrigins.records == 0 && controller.hooks.isEmpty,
+      "nil boundary makes no C calls, feedback entries or hook registrations")
+
+controller.mpv = nativeTestHandle()
+check(controller.player.state == .idle, "initialization fixture is idle")
+controller.observe(property: "test")
+controller.setFlag("test", true); controller.setInt("test", 1); controller.setDouble("test", 1)
+check(controller.setString("test", "x") == 0 && controller.setStringToDefault("test") == 0, "idle native string writes remain available")
+check(controller.getInt("test") == 7 && controller.getDouble("test") == 1.5 && controller.getFlag("test"), "idle native scalar reads remain available")
+check(controller.getString("test") == "fixture" && controller.getNode("test") as? Double == 1.5, "idle native string/node reads remain available")
+controller.setNode("test", ["x": 1])
+controller.addHook(MPVHook(rawValue: "on_load"), hook: MPVHookValue())
+check(controller.optionWrites() == [0, 0, 0, 0] && controller.hooks.count == 1, "idle startup options/hooks remain available")
+check(nativeTestCalls() > 0, "idle retained handle reaches actual C fixture")
+
+nativeTestReset()
+check(controller.getFilters("vf").isEmpty && !controller.removeFilter("vf", 0), "empty observed filter list rejects removal")
+nativeTestSetFilterShape(1)
+let callsBeforeNegative = nativeTestCalls()
+check(!controller.removeFilter("vf", -1) && nativeTestCalls() == callsBeforeNegative, "negative index rejected before C access")
+check(!controller.removeFilter("vf", 2) && nativeTestWrites() == 0, "stale index rejected before write")
+check(controller.getFilters("vf").map(\.name) == ["crop", "crop"], "valid observed filter nodes parse unchanged")
+check(controller.removeFilter("vf", 1) && nativeTestWrittenFilterCount() == 1, "valid indexed removal writes exactly one remaining filter")
+nativeTestSetWriteError(MPV_ERROR_PROPERTY_ERROR.rawValue)
+check(!controller.removeFilter("vf", 0), "failed native write reports failed removal")
+nativeTestSetReadError(MPV_ERROR_PROPERTY_ERROR.rawValue)
+let writesBeforeReadError = nativeTestWrites()
+check(!controller.removeFilter("vf", 0) && controller.getFilters("vf").isEmpty && nativeTestWrites() == writesBeforeReadError,
+      "failed native read cannot dereference or rewrite a node list")
+nativeTestSetReadError(0)
+nativeTestSetFilterShape(2)
+check(!controller.removeFilter("vf", 0) && controller.getFilters("vf").isEmpty, "non-array filter node rejected")
+nativeTestSetFilterShape(3)
+check(!controller.removeFilter("vf", 0) && controller.getFilters("vf").isEmpty, "missing observed node list rejected")
+nativeTestSetFilterShape(4)
+check(controller.getFilters("vf").isEmpty, "malformed filter name cannot force-cast and crash")
+print("\(checks) native wrapper checks passed with actual extracted methods and C null-handle traps")

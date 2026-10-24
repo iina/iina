@@ -24,6 +24,9 @@ methods += '\n' + (extract(controller, '  func prepareCropChange(') if '  func p
                     else '  func prepareCropChange(_ apply: @escaping () -> Void) -> Bool { false }')
 methods += '\n' + (extract(controller, '  func interruptPlayerCropTransition(') if '  func interruptPlayerCropTransition(' in controller
                     else '  func interruptPlayerCropTransition(settleWindowFrame: Bool = true) {}')
+for marker in ['  func windowWillEnterFullScreen(', '  func windowWillExitFullScreen(']:
+    boundary = extract(controller, marker)
+    methods += '\n' + boundary[:boundary.index('    // When playback')] + '  }'
 interactive = (repo/'iina/InteractiveMode.swift').read_text()
 overlay = '\n'.join(extract(interactive, marker) for marker in [
     'final class DelayedPreparationFeedback {', 'final class PreparationFeedbackView:',

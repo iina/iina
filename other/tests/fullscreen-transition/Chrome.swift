@@ -18,10 +18,14 @@ enum ScreenState {
 }
 enum Level { case warning, error }
 class LiveText { func requestAnalysis() {} }
+class Editor { var isActive = true; func exit() { isActive = false } }
 class Controller {
   var window: NSWindow?
   var fsState = ScreenState.windowed
   let liveText = LiveText()
+  let interactiveMode = Editor()
+  var isCropTransitionInProgress = false
+  func cancelCropExitTransition() { isCropTransitionInProgress = false }
   var began: (() -> Void)?
   var interruptedCrop = false
   func interruptPlayerCropTransition() { interruptedCrop = true }
@@ -44,6 +48,7 @@ let fixture = Controller(); fixture.window = window
 let original = window.frame
 fixture.began = {
   check(fixture.interruptedCrop, "crop motion ownership ends before fullscreen video layout starts")
+  check(!fixture.interactiveMode.isActive, "the editor releases its projection before fullscreen video layout starts")
   guard case .animating(let entering, _, let prior) = fixture.fsState else {
     check(false, "fullscreen state is set before video layout"); return
   }
@@ -52,8 +57,10 @@ fixture.began = {
 }
 fixture.windowWillEnterFullScreen(Notification(name: NSWindow.willEnterFullScreenNotification, object: window))
 fixture.fsState.finishAnimating()
+fixture.interactiveMode.isActive = true
 window.titlebarAppearsTransparent = false
 fixture.began = {
+  check(!fixture.interactiveMode.isActive, "the editor releases its projection before fullscreen video layout exits")
   guard case .animating(let entering, _, _) = fixture.fsState else {
     check(false, "exit state is set before video layout"); return
   }

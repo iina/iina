@@ -21,7 +21,7 @@ def extract(source, marker):
     return source[start:end]
 
 
-main = (root / "iina/MainWindowController.swift").read_text()
+main = Path(os.environ.get("PIP_TRANSITION_MAIN_SOURCE", root / "iina/MainWindowController.swift")).read_text()
 start = main.index("  func enterPIP() {")
 end = main.index("  func pipActionPlay(", start)
 methods = main[start:end] + extract(main, "  func showUI() {")

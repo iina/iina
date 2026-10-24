@@ -562,5 +562,26 @@ do {
   while c.motionExists && Date()<deadline {RunLoop.current.run(until:Date().addingTimeInterval(0.002))}
   check(!c.motionExists && CACurrentMediaTime()-start>=0.35,"real shared clock finishes from its timer without a visible window")
 }
+reset()
+do {
+  let c = MainWindowController(); defer { c.cancelVideoGeometryTransition() }
+  c.interactiveMode.isActive = true
+  for _ in 0..<3 { c.player.setVideoRotate(90); c.player.setVideoAspect("4:3") }
+  check(c.player.mpv.writes.isEmpty && !c.motionExists && c.referencePrepares == 0,
+        "repeated menu/API geometry setters cannot mutate an active editor's output")
+  c.interactiveMode.isActive = false
+  c.player.setVideoRotate(90)
+  complete(c)
+  check(c.player.mpv.getInt("video-rotate") == 90 && !c.motionExists,
+        "ordinary rotation remains available after editor ownership is released")
+}
+reset()
+do {
+  let c = MainWindowController(); defer { c.cancelVideoGeometryTransition() }
+  c.player.info.state = .stopped
+  for _ in 0..<3 { c.player.setVideoRotate(90); c.player.setVideoAspect("4:3") }
+  check(c.player.mpv.writes.isEmpty && !c.motionExists && c.referencePrepares == 0,
+        "unavailable playback rejects output geometry without touching the engine or window reference")
+}
 print("Completed \(checks) extracted-production geometry motion checks; failures=\(failures.count)")
 if !failures.isEmpty {exit(1)}

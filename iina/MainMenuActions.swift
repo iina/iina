@@ -270,6 +270,7 @@ extension MainMenuActionHandler {
 
   private func menuToggleFilterString(_ string: String, forType type: String) {
     let isVideo = type == MPVProperty.vf
+    guard !isVideo || (!player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress) else { return }
     if let filter = MPVFilter(rawString: string) {
       // Removing a filter based on its position within the filter list is the preferred way to do
       // it as per discussion with the mpv project. Search the list of filters and find the index
@@ -482,6 +483,18 @@ extension MainMenuActionHandler {
     switch menuItem.action {
     case #selector(menuDeleteCurrentFile(_:)), #selector(menuShowCurrentFileInFinder(_:)):
       return player.info.currentURL != nil && !player.info.isNetworkResource
+    case #selector(menuChangeCrop(_:)):
+      if menuItem.representedObject as? String == "Custom" { return player.mainWindow.interactiveMode.canEnter }
+      return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
+    case #selector(menuChangeAspect(_:)), #selector(menuChangeRotation(_:)), #selector(menuToggleFlip(_:)),
+         #selector(menuToggleMirror(_:)), #selector(menuToggleVideoFilterString(_:)):
+      return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
+    case #selector(menuCycleTrack(_:)) where menuItem.tag == 0:
+      return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
+    case #selector(menuChangeTrack(_:)):
+      let type = (menuItem.representedObject as? (MPVTrack, MPVTrack.TrackType))?.1 ??
+        (menuItem.representedObject as? MPVTrack)?.type
+      return type != .video || (!player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress)
     default:
       break
     }

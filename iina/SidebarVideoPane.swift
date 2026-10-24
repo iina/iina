@@ -22,29 +22,36 @@ class SidebarVideoPane: SidebarScrollView {
 
     let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
 
-    stack.addArrangedSubview(Container(TrackSelector(
+    let tracks = TrackSelector(
       .video,
       player: player,
       observedKeys: [.iinaVIDChanged]
-    )) {
-      $0.padding(.horizontal, .vertical)
-    })
+    )
+    let addTrack = TrackAddButton(title: ui.localized("sidebar.add_video_track"),
+                                  target: self, action: #selector(loadExternalVideoAction(_:)))
+    let trackGroup = ui.vStack(spacing: 6, wantsToGrow: true, addTrack, tracks)
+    stack.addArrangedSubview(trackGroup)
+    trackGroup.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    addTrack.widthAnchor.constraint(equalTo: trackGroup.widthAnchor).isActive = true
+    tracks.widthAnchor.constraint(equalTo: trackGroup.widthAnchor).isActive = true
 
-    stack.addArrangedSubview(Container(createSettingsView()) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
+    let processing = TrackProcessingSection(player: player, group: .videoGeometry, cards: [
+      TrackSettingsGroupView(player: player, group: .videoGeometry, content: createSettingsView()),
+      TrackSettingsGroupView(player: player, group: .videoColor, content: EqualizerView(player: player))
+    ])
+    stack.addArrangedSubview(processing)
+    processing.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
 
-    stack.addArrangedSubview(Container(SpeedView(player: player)) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
-
-    stack.addArrangedSubview(Container(createSwitchesView()) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
-
-    stack.addArrangedSubview(Container(EqualizerView(player: player)) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
+    let speed = SpeedView(player: player)
+    let speedReset = SidebarResetButton(target: speed, action: #selector(SpeedView.resetSpeed))
+    speedReset.toolTip = ui.localized("quicksetting.reset_speed")
+    let speedGroup = TrackSettingsGroupView(titleKey: "sidebar.speed", content: speed,
+                                            titleImage: speed.titleImage, action: speedReset)
+    let switches = createSwitchesView()
+    for view in [speedGroup, switches] {
+      stack.addArrangedSubview(view)
+      view.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    }
 
     documentView!.addSubview(stack)
     stack.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
@@ -52,6 +59,22 @@ class SidebarVideoPane: SidebarScrollView {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  @objc private func loadExternalVideoAction(_ sender: NSButton) {
+    guard player.info.state.loaded else { return }
+    let generation = player.info.trackSelectionGeneration
+    Utility.quickOpenPanel(
+      title: ui.localized("sidebar.add_video_track"),
+      chooseDir: false,
+      dir: player.info.currentURL?.deletingLastPathComponent(),
+      sheetWindow: player.currentWindow,
+      allowedFileTypes: Utility.supportedFileExt[.video]
+    ) { [weak player] url in
+      guard let player, player.info.state.loaded,
+            player.info.trackSelectionGeneration == generation else { return }
+      player.loadExternalVideoFile(url)
+    }
   }
 
   private func createSettingsView() -> NSView {
@@ -89,10 +112,6 @@ class SidebarVideoPane: SidebarScrollView {
   }
 
   private func createSwitchesView() -> NSView {
-    let container = NSView()
-    container.setContentHuggingPriority(.init(100), for: .horizontal)
-    container.translatesAutoresizingMaskIntoConstraints = false
-
     let hdrSwitch = NSSwitch()
     if #available(macOS 26, *) {
       hdrSwitch.controlSize = .small
@@ -103,14 +122,15 @@ class SidebarVideoPane: SidebarScrollView {
     let hdrRow = ui.hStack(
       spacing: 8,
       ui.image("sun.max", size: 16, config: .sidebarIconConfig),
-      ui.label("quicksetting.hdr"),
+      ui.label("quicksetting.hdr", font: .boldSystemFont(ofSize: 12)),
       ui.flexibleSpace(),
       hdrSwitch
     )
 
-    let updateHDR = { [unowned self, weak hdrRow, weak hdrSwitch] in
+    let hdr = Container(hdrRow) { $0.padding(.all(.sidebarContainerPadding)) }
+    let updateHDR = { [unowned self, weak hdr, weak hdrSwitch] in
       let available = self.player.info.hdrAvailable
-      hdrRow?.isHidden = !available
+      hdr?.isHidden = !available
       if available {
         hdrSwitch?.state = self.player.info.hdrEnabled ? .on : .off
       }
@@ -118,28 +138,26 @@ class SidebarVideoPane: SidebarScrollView {
     updateHDR()
     player.observe(.iinaHDRChanged) { _ in updateHDR() }
 
-    let stack = ui.vStack(
-      align: .leading,
-      spacing: .sidebarItemSpacing,
-      wantsToGrow: true,
-      ui.hStack(
+    let hardwareRow = ui.hStack(
         spacing: 8,
         ui.image("cpu", size: 16, config: .sidebarIconConfig),
-        ui.label("quicksetting.hwdec"),
+        ui.label("quicksetting.hwdec", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
         HwdecSwitch(player: player),
-      ),
-      hdrRow
     )
-
-    container.addSubview(stack)
-    stack.padding(.all)
-    return container
+    let hardware = Container(hardwareRow) { $0.padding(.all(.sidebarContainerPadding)) }
+    let stack = ui.vStack(spacing: .sidebarItemSpacing, wantsToGrow: true, hardware, hdr)
+    for card in [hardware, hdr] {
+      card.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    }
+    return stack
   }
 
   @objc private func hdrAction(_ sender: NSSwitch) {
-    self.player.info.hdrEnabled = sender.state == .on
-    self.player.refreshEdrMode()
+    player.performSidebarChange {
+      player.info.hdrEnabled = sender.state == .on
+      player.refreshEdrMode()
+    }
   }
 }
 
@@ -149,9 +167,11 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
   }
 
   let scrollView = ScrollView()
+  private let focusRingPadding: CGFloat = 4
   private var indicator: NSButton!
   private var indicatorDirection: IndicatorDirection = .trailing {
     didSet {
+      guard indicatorDirection != oldValue else { return }
       switch indicatorDirection {
       case .hidden:
         indicator.isHidden = true
@@ -169,6 +189,8 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
     super.init(frame: frameRect)
 
     translatesAutoresizingMaskIntoConstraints = false
+    // Native focus rings extend beyond control frames; keep viewport padding outside row geometry.
+    clipsToBounds = false
 
     scrollView.parent = self
     addSubview(scrollView)
@@ -183,11 +205,19 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
     indicator.isBordered = false
     addSubview(indicator)
     indicator.size(width: 8).padding(.trailing).center(.y)
-    scrollView.padding(.vertical, .leading).spacing(.trailing(4), to: indicator)
+    scrollView.padding(.vertical(-focusRingPadding), .leading)
+      .spacing(.trailing(4), to: indicator)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  func setDocumentContent(_ content: NSStackView) {
+    // Both rows need identical focus-ring insets at either scroll limit.
+    content.edgeInsets = NSEdgeInsets(top: focusRingPadding, left: 0,
+                                     bottom: focusRingPadding, right: focusRingPadding)
+    scrollView.documentView = content
   }
 
   @objc private func indicatorAction(_ sender: NSButton) {
@@ -206,6 +236,7 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
 
   class ScrollView: NSScrollView {
     var parent: HorizontalScrollViewWithIndicator!
+    private var forwardsVerticalScroll = false
 
     override init(frame frameRect: NSRect) {
       super.init(frame: frameRect)
@@ -257,36 +288,22 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
       parent.indicatorDirection = hasLeading ? .leading : hasTrailing ? .trailing : .hidden
     }
 
-    /// Translate vertical scrolling events to horizontal for mouse control
     override func scrollWheel(with event: NSEvent) {
-      if event.scrollingDeltaX != 0 {
-        super.scrollWheel(with: event)
-        return
+      if event.phase.contains(.began) { forwardsVerticalScroll = false }
+      if event.scrollingDeltaX != 0 || event.scrollingDeltaY != 0 {
+        forwardsVerticalScroll = abs(event.scrollingDeltaY) > abs(event.scrollingDeltaX)
       }
-
-      guard let cg = event.cgEvent?.copy() else {
-        super.scrollWheel(with: event)
-        return
+      if forwardsVerticalScroll {
+        var ancestor = superview
+        while let view = ancestor {
+          if let scroll = view as? NSScrollView {
+            scroll.scrollWheel(with: event)
+            return
+          }
+          ancestor = view.superview
+        }
       }
-
-      let lineV = cg.getDoubleValueField(.scrollWheelEventDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventDeltaAxis2, value: lineV)
-
-      let pxV = cg.getDoubleValueField(.scrollWheelEventPointDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis2, value: pxV)
-
-      let fpV = cg.getDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis2, value: fpV)
-
-      guard let swapped = NSEvent(cgEvent: cg) else {
-        super.scrollWheel(with: event)
-        return
-      }
-
-      super.scrollWheel(with: swapped)
+      super.scrollWheel(with: event)
     }
   }
 }
@@ -307,18 +324,20 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     )
     segmentControl.selectedSegment = 0
 
-    self.input = NSTextField()
-    input.usesSingleLineMode = true
+    let input = SidebarInputField()
+    input.emptyValue = ""
+    self.input = input
     input.size(width: 40, height: 24)
     input.target = self
     input.action = #selector(aspectRatioAction)
 
-    scrollView.documentView = ui.hStack(
+    setDocumentContent(ui.hStack(
       spacing: 8, segmentControl, input
-    )
+    ))
     size(height: 24)
 
     update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in update() }
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -330,8 +349,10 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
 
   private func update() {
     guard player.info.state.active else { return }
+    segmentControl.isEnabled = !player.mainWindow.interactiveMode.isActive
+    input.isEnabled = segmentControl.isEnabled
 
-    if let index = AppData.aspectsInPanel.firstIndex(of: player.info.unsureAspect) {
+    if let index = AppData.aspectsInPanel.firstIndex(of: player.scopedVideoSettings().aspect) {
       segmentControl.selectedSegment = index
     } else {
       segmentControl.selectedSegment = -1
@@ -340,16 +361,19 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
 
   @objc private func aspectRatioAction(_ sender: AnyObject) {
     if let textField = sender as? NSTextField {
-      let value = textField.stringValue
-      if value != "" {
-        segmentControl.setSelected(false, forSegment: segmentControl.selectedSegment)
-        player.setVideoAspect(value)
-        player.sendOSD(.aspect(value))
+      let value = textField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+      let aspect = value.isEmpty ? AppData.aspectsInPanel[0] : value
+      segmentControl.selectedSegment = value.isEmpty ? 0 : -1
+      player.performSidebarChange {
+        player.setScopedVideoAspect(aspect)
+        player.sendOSD(.aspect(aspect))
       }
     } else if let segment = sender as? NSSegmentedControl {
       let aspect = AppData.aspectsInPanel[segment.selectedSegment]
-      player.setVideoAspect(aspect)
-      player.sendOSD(.aspect(aspect))
+      player.performSidebarChange {
+        player.setScopedVideoAspect(aspect)
+        player.sendOSD(.aspect(aspect))
+      }
     }
   }
 }
@@ -370,13 +394,15 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
     )
     segmentControl.selectedSegment = 0
 
-    scrollView.documentView = segmentControl
+    setDocumentContent(ui.hStack(spacing: 0, segmentControl))
     size(height: 24)
 
     update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in update() }
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
+    update()
   }
 
   required init?(coder: NSCoder) {
@@ -385,8 +411,9 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
 
   private func update() {
     guard player.info.state.active else { return }
+    segmentControl.isEnabled = !player.mainWindow.interactiveMode.isActive
 
-    if let index = AppData.cropsInPanel.firstIndex(of: player.info.unsureCrop) {
+    if let index = AppData.cropsInPanel.firstIndex(of: player.scopedVideoSettings().cropDescription) {
       segmentControl.selectedSegment = index
     } else {
       // Select last segment ("Custom...")
@@ -400,16 +427,16 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
       // User clicked on "Custom...": show interactive mode
       // run asynchronically to wait for potential videoview resize
       Task { @MainActor in
-        mainWindow.player.removeCropFilter()
-        mainWindow.forceDraw("reset crop filter")
         mainWindow.sidebars.hideAllSideBars {
-          mainWindow.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+          self.player.openScopedCustomCrop()
         }
       }
     } else {
       let cropStr = AppData.cropsInPanel[segmentControl.selectedSegment]
-      player.setCrop(fromString: cropStr)
-      player.sendOSD(.crop(cropStr))
+      player.performSidebarChange {
+        player.setScopedCrop(cropStr)
+        player.sendOSD(.crop(cropStr))
+      }
     }
   }
 }
@@ -440,6 +467,7 @@ fileprivate class RotationView: NSView {
     segmentControl.padding(.all)
 
     update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in update() }
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -452,13 +480,16 @@ fileprivate class RotationView: NSView {
   private func update() {
     guard player.info.state.active else { return }
 
-    segmentControl.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
+    segmentControl.isEnabled = !player.mainWindow.interactiveMode.isActive
+    segmentControl.selectSegment(withTag: AppData.rotations.firstIndex(of: player.scopedVideoSettings().rotation) ?? -1)
   }
 
   @objc private func rotationAction(_ sender: AnyObject) {
     let value = AppData.rotations[segmentControl.selectedSegment]
-    player.setVideoRotate(value)
-    player.sendOSD(.rotate(value))
+    player.performSidebarChange {
+      player.setScopedVideoRotate(value)
+      player.sendOSD(.rotate(value))
+    }
   }
 }
 
@@ -491,7 +522,7 @@ fileprivate class HwdecSwitch: NSSwitch {
   }
 
   @objc private func hwdecAction(_ sender: AnyObject) {
-    player.toggleHardwareDecoding(state == .on)
+    player.performSidebarChange { player.toggleHardwareDecoding(state == .on) }
   }
 }
 
@@ -513,6 +544,7 @@ fileprivate let speedFormatter: NumberFormatter = {
 
 
 fileprivate class SpeedView: SidebarSliderView {
+  override var showsTitle: Bool { false }
   override var titleImage: NSImage? {
     .sf("chevron.forward.dotted.chevron.forward", "forward.fill",
         withConfiguration: .sidebarIconConfig)
@@ -535,7 +567,7 @@ fileprivate class SpeedView: SidebarSliderView {
       slider.neutralValue = 8
     }
     input.formatter = speedFormatter
-    resetButton.toolTip = ui.localized("quicksetting.reset_speed")
+    input.emptyValue = "1"
   }
 
   /// Return the slider value that represents the given playback speed.
@@ -561,10 +593,8 @@ fileprivate class SpeedView: SidebarSliderView {
 
   private func updateSpeed(to inputSpeed: Double) {
     let newSpeed = constrainSpeed(inputSpeed)
-    print("newSpeed: \(newSpeed)")
     slider.doubleValue = convertSpeedToSliderValue(newSpeed)
     input.doubleValue = newSpeed
-    resetButton.isHidden = newSpeed == 1.0
     if player.info.playSpeed != newSpeed {
       player.setSpeed(newSpeed)
     }
@@ -602,16 +632,299 @@ fileprivate class SpeedView: SidebarSliderView {
     /// Unfortunately, the text field has not applied validation/formatting to the number at this point.
     /// We will do that manually via `constrainSpeed`.
     updateSpeed(to: input.doubleValue)
-    if let window = input.window {
-      window.makeFirstResponder(window.contentView)
-    }
   }
 
   override func resetButtonAction() {
     player.setSpeed(1.0)
   }
+
+  @objc func resetSpeed() { player.performSidebarChange { resetButtonAction() } }
 }
 
+
+final class VideoLUTPopUp: NSPopUpButton, NSMenuDelegate {
+  static let importQueue = DispatchQueue(label: "IINAVideoLUTImport", qos: .userInitiated)
+  private unowned let player: PlayerCore
+  private let library: VideoLUTLibrary
+  private var libraryObserver: NSObjectProtocol?
+  private var presentingLUTMenu = false
+  private var choiceRevision = 0
+  private var libraryEntries: [VideoLUTLibrary.Entry] = []
+  private var libraryNeedsRefresh = true
+  private var displayedPaths: [String]?
+
+  init(player: PlayerCore) {
+    self.player = player
+    library = VideoLUTLibrary(directory: Utility.appSupportDirUrl.appendingPathComponent("LUTs", isDirectory: true))
+    super.init(frame: .zero, pullsDown: false)
+    translatesAutoresizingMaskIntoConstraints = false
+    controlSize = .small
+    font = .systemFont(ofSize: NSFont.smallSystemFontSize)
+    setContentCompressionResistancePriority(.init(100), for: .horizontal)
+    widthAnchor.constraint(lessThanOrEqualToConstant: 145).isActive = true
+    (cell as? NSPopUpButtonCell)?.lineBreakMode = .byTruncatingMiddle
+    target = self
+    action = #selector(selectionChanged)
+    menu?.delegate = self
+    setAccessibilityLabel("LUT")
+    libraryObserver = NotificationCenter.default.addObserver(forName: .iinaLUTLibraryChanged, object: nil, queue: .main) { [weak self] _ in self?.rebuild(refreshLibrary: true) }
+    player.observe(.iinaTrackSettingsChanged) { [weak self] _ in self?.rebuild() }
+    player.observe(.iinaVFChanged) { [weak self] _ in self?.rebuild() }
+    rebuild()
+  }
+
+  required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+  deinit { if let libraryObserver { NotificationCenter.default.removeObserver(libraryObserver) } }
+
+  func menuNeedsUpdate(_ menu: NSMenu) { if !presentingLUTMenu { rebuild(refreshLibrary: true) } }
+
+  override func mouseDown(with event: NSEvent) { presentLUTMenu() }
+  override func performClick(_ sender: Any?) { presentLUTMenu() }
+  override func accessibilityPerformPress() -> Bool { presentLUTMenu(); return true }
+  override func keyDown(with event: NSEvent) {
+    if [" ", "\r", "\u{03}", "\u{f700}", "\u{f701}"].contains(event.charactersIgnoringModifiers ?? "") {
+      presentLUTMenu()
+    } else { super.keyDown(with: event) }
+  }
+
+  private func presentLUTMenu() {
+    guard isEnabled, !presentingLUTMenu, !player.mainWindow.interactiveMode.isActive else { return }
+    rebuild(refreshLibrary: true)
+    presentingLUTMenu = true
+    defer { presentingLUTMenu = false; rebuild(refreshLibrary: true) }
+    guard let menu, let neutral = itemArray.first(where: { $0.tag == 0 && !$0.isSeparatorItem }) else { return }
+    let rect = cell?.titleRect(forBounds: bounds) ?? bounds
+    var ancestor = superview
+    while let view = ancestor, !(view is TrackSettingsGroupView) { ancestor = view.superview }
+    let anchor = (ancestor as? TrackSettingsGroupView)?.menuAnchor ?? self
+    menu.font = NSFont.menuFont(ofSize: NSFont.systemFontSize)
+    let right = convert(anchor.bounds, from: anchor).maxX
+    let x = userInterfaceLayoutDirection == .rightToLeft ? right : right - menu.size.width
+    menu.popUp(positioning: neutral, at: NSPoint(x: x, y: rect.minY), in: self)
+  }
+
+  @objc private func menuItemChosen(_ sender: NSMenuItem) {
+    select(sender)
+    selectionChanged()
+  }
+
+  private func rebuild(refreshLibrary: Bool = false) {
+    if refreshLibrary { libraryNeedsRefresh = true }
+    guard !presentingLUTMenu else { return }
+    if libraryNeedsRefresh {
+      libraryEntries = (try? library.entries()) ?? []
+      libraryNeedsRefresh = false
+    }
+    let entries = libraryEntries
+    let path = selectedLUTPath(entries: entries)
+    let managedPaths = entries.map { $0.url.path }
+    let missingPath = path.flatMap { managedPaths.contains($0) ? nil : $0 }
+    let paths = managedPaths + (missingPath.map { [$0] } ?? [])
+    // Slider updates must not rescan/rebuild the menu; Finder changes are discovered when it opens.
+    if displayedPaths != paths {
+      displayedPaths = paths
+      removeAllItems()
+      addItem(withTitle: NSLocalizedString("lut.remove", comment: "Delete LUT"))
+      lastItem?.tag = -2
+      addItem(withTitle: NSLocalizedString("lut.import", comment: "Import LUT"))
+      lastItem?.tag = -1
+      menu?.addItem(.separator())
+      lastItem?.tag = -1000
+      addItem(withTitle: NSLocalizedString("lut.none", comment: "No LUT"))
+      lastItem?.tag = 0
+      if !paths.isEmpty { menu?.addItem(.separator()); lastItem?.tag = -1000 }
+      for entryPath in paths {
+        addItem(withTitle: URL(fileURLWithPath: entryPath).deletingPathExtension().lastPathComponent)
+        lastItem?.representedObject = entryPath
+        lastItem?.tag = 1
+      }
+      for item in itemArray where !item.isSeparatorItem {
+        item.target = self
+        item.action = #selector(menuItemChosen(_:))
+      }
+      menu?.autoenablesItems = false
+    }
+    let removalItem = itemArray.first { $0.tag == -2 }
+    removalItem?.representedObject = path
+    removalItem?.isEnabled = managedPaths.contains { $0 == path }
+    let selection = itemArray.first(where: { ($0.representedObject as? String) == path && $0.tag >= 0 && !$0.isSeparatorItem })
+    if selectedItem !== selection { select(selection) }
+    for item in itemArray {
+      let state: NSControl.StateValue = item === selectedItem ? .on : .off
+      if item.state != state { item.state = state }
+    }
+    isEnabled = !player.mainWindow.interactiveMode.isActive
+    toolTip = titleOfSelectedItem
+  }
+
+  private func selectedLUTPath(entries: [VideoLUTLibrary.Entry]) -> String? {
+    guard let value = currentLUTValue() else { return nil }
+    if player.scopedTrackSettings.target(.videoColor) > 0 { return value }
+    return entries.first(where: { $0.graph == value })?.url.path
+  }
+
+  private func currentLUTValue() -> String? {
+    guard player.info.state.active else { return nil }
+    let id = player.scopedTrackSettings.target(.videoColor)
+    if id > 0 { return player.scopedTrackSettings.video[id]?.lutPath }
+    return player.mpv.getFilters(MPVProperty.vf)
+      .first(where: { $0.label == VideoLUTLibrary.filterLabel })?.params?["graph"]
+  }
+
+  @objc private func selectionChanged() {
+    choiceRevision += 1
+    let command = selectedTag()
+    let path = selectedItem?.representedObject as? String
+    if command == -1 {
+      rebuild()
+      // Present the sheet after native menu tracking has finished.
+      DispatchQueue.main.async { [weak self] in self?.importLUT() }
+    } else if command == -2 {
+      rebuild()
+      DispatchQueue.main.async { [weak self] in self?.removeLUT(path) }
+    } else {
+      apply(path)
+      rebuild()
+    }
+  }
+
+  private func removeLUT(_ path: String?) {
+    guard let path, let entry = (try? library.entries())?.first(where: { $0.url.path == path }) else { return }
+    Utility.quickAskPanel("lut_remove", titleArgs: [entry.name], sheetWindow: window) { [weak self] response in
+      guard let self, response == .alertFirstButtonReturn else { return }
+      VideoLUTLibraryActions.remove(entry, library: self.library, window: self.window)
+      self.rebuild()
+    }
+  }
+
+  private func importLUT() {
+    let media = player.info.currentURL
+    let generation = player.info.trackSelectionGeneration
+    let target = player.scopedTrackSettings.target(.videoColor)
+    let revision = choiceRevision
+    let previousValue = currentLUTValue()
+    Utility.quickOpenPanel(title: NSLocalizedString("lut.import", comment: "Import LUT"), chooseDir: false,
+                          sheetWindow: window, allowedFileTypes: ["cube"]) { [weak self] url in
+      guard let self, let mainWindow = self.player.mainWindow, self.player.info.currentURL == media,
+            self.player.info.trackSelectionGeneration == generation else { return }
+      let feedback = mainWindow.beginOperationFeedback()
+      Self.importQueue.async { [weak self] in
+        let prepared = autoreleasepool { Result { try VideoLUTLibrary.prepareImport(url) } }
+        DispatchQueue.main.async { [weak self] in
+          mainWindow.endOperationFeedback(feedback)
+          guard let self else { return }
+          let sameMedia = {
+            self.player.info.currentURL == media
+              && self.player.info.trackSelectionGeneration == generation && self.player.info.state.loaded
+          }
+          do {
+            // Commit library/player changes on main so removal in another window cannot race this import.
+            let entry = try self.library.importPreparedFile(prepared.get())
+            if sameMedia(), self.choiceRevision == revision,
+               self.player.scopedTrackSettings.target(.videoColor) == target,
+               self.currentLUTValue() == previousValue {
+              self.apply(entry.url.path)
+            }
+          } catch {
+            if sameMedia(), self.choiceRevision == revision {
+              Utility.showAlert("lut_import_failed", arguments: [error.localizedDescription], sheetWindow: self.window)
+            }
+          }
+          self.rebuild()
+        }
+      }
+    }
+  }
+
+  private func apply(_ path: String?) {
+    guard !player.mainWindow.interactiveMode.isActive else { return }
+    if let path, !FileManager.default.isReadableFile(atPath: path) {
+      Utility.showAlert("lut_apply_failed", sheetWindow: window)
+      return
+    }
+    if player.scopedTrackSettings.target(.videoColor) > 0 {
+      player.performSidebarChange {
+        _ = player.updateScopedVideo(.videoColor) { $0.lutPath = path }
+      }
+      return
+    }
+    let existing = player.mpv.getFilters(MPVProperty.vf).first(where: { $0.label == VideoLUTLibrary.filterLabel })
+    let success: Bool
+    if let path {
+      let graph = ProcessedVideoGraph.lutFilter(path: path)
+      if existing?.params?["graph"] == graph { return }
+      let previous = player.mpv.getString(MPVProperty.vf) ?? ""
+      // mpv measures fixed-length quoting in UTF-8 bytes, including filenames.
+      let filter = MPVFilter(name: "lavfi", label: VideoLUTLibrary.filterLabel,
+                            paramString: "graph=%\(graph.utf8.count)%\(graph)")
+      success = player.performSidebarChange {
+        let applied = player.addVideoFilter(filter)
+        if !applied { player.mpv.setString(MPVProperty.vf, previous) }
+        return applied
+      }
+    } else {
+      success = existing == nil || player.performSidebarChange {
+        player.removeVideoFilter("@" + VideoLUTLibrary.filterLabel)
+      }
+    }
+    if !success { Utility.showAlert("lut_apply_failed", sheetWindow: window) }
+  }
+}
+
+enum VideoLUTLibraryActions {
+  @discardableResult static func remove(_ entry: VideoLUTLibrary.Entry, library: VideoLUTLibrary, window: NSWindow?) -> Bool {
+    // Detach transactionally across players; engine or Trash failures must restore every captured user.
+    let users = PlayerCore.playerCores.filter { core in
+      core.mpv != nil && core.info.state.rawValue < PlayerState.shuttingDown.rawValue && (core.scopedTrackSettings.video.values.contains { $0.lutPath == entry.url.path }
+        || core.scopedCropPreview?.originalTrack.lutPath == entry.url.path
+        || core.scopedCropPreview?.masterVF.contains(VideoLUTLibrary.filterLabel) == true
+        || core.mpv.getFilters(MPVProperty.vf).contains {
+          $0.label == VideoLUTLibrary.filterLabel && $0.params?["graph"] == entry.graph
+        })
+    }
+    guard !users.contains(where: { $0.mainWindow.interactiveMode.isActive }) else {
+      Utility.showAlert("lut_remove_crop", sheetWindow: window)
+      return false
+    }
+    let snapshots = users.map { (core: $0, settings: $0.scopedTrackSettings, filters: $0.mpv.getString(MPVProperty.vf) ?? "") }
+    var restoreSessions: [() -> Void] = []
+    do {
+      for snapshot in snapshots {
+        let core = snapshot.core
+        var changed = false
+        for id in Array(core.scopedTrackSettings.video.keys) where core.scopedTrackSettings.video[id]?.lutPath == entry.url.path {
+          core.scopedTrackSettings.video[id]?.lutPath = nil
+          changed = true
+        }
+        if changed && core.info.state.loaded && !core.performSidebarChange({ core.refreshTrackProcessing(.video) }) {
+          throw CocoaError(.userCancelled)
+        }
+        if core.mpv.getFilters(MPVProperty.vf).contains(where: {
+          $0.label == VideoLUTLibrary.filterLabel && $0.params?["graph"] == entry.graph
+        }), !core.performSidebarChange({ core.removeVideoFilter("@" + VideoLUTLibrary.filterLabel) }) {
+          throw CocoaError(.userCancelled)
+        }
+      }
+      restoreSessions = PlayerCore.playerCores.map { $0.detachSavedVideoLUT(atPath: entry.url.path) }
+      try library.remove(entry)
+    } catch {
+      restoreSessions.forEach { $0() }
+      for snapshot in snapshots {
+        snapshot.core.scopedTrackSettings = snapshot.settings
+        snapshot.core.performSidebarChange {
+          if snapshot.core.info.state.loaded { _ = snapshot.core.refreshTrackProcessing(.video) }
+          snapshot.core.mpv.setString(MPVProperty.vf, snapshot.filters)
+        }
+      }
+      Utility.showAlert("lut_remove_failed", sheetWindow: window)
+      return false
+    }
+    // The library is shared, including by idle windows and menus on other targets.
+    for core in PlayerCore.playerCores { core.postNotification(.iinaTrackSettingsChanged) }
+    return true
+  }
+}
 
 fileprivate class EqualizerView: NSView {
   private unowned let player: PlayerCore
@@ -621,18 +934,20 @@ fileprivate class EqualizerView: NSView {
   private var saturationSlider: NSSlider!
   private var gammaSlider: NSSlider!
   private var hueSlider: NSSlider!
+  private var valueInputs: [Int: NSTextField] = [:]
 
   let configs: [(
     labelKey: String,
+    symbolName: String,
     keyPath: ReferenceWritableKeyPath<EqualizerView, NSSlider?>,
     type: PlayerCore.VideoEqualizerType,
     tag: Int
   )] = [
-    ("brightness", \.brightnessSlider, .brightness, 1),
-    ("contrast", \.contrastSlider, .contrast, 2),
-    ("saturation", \.saturationSlider, .saturation, 3),
-    ("gamma", \.gammaSlider, .gamma, 4),
-    ("hue", \.hueSlider, .hue, 5),
+    ("brightness", "sun.max", \.brightnessSlider, .brightness, 1),
+    ("contrast", "circle.lefthalf.filled", \.contrastSlider, .contrast, 2),
+    ("saturation", "drop.fill", \.saturationSlider, .saturation, 3),
+    ("gamma", "chart.xyaxis.line", \.gammaSlider, .gamma, 4),
+    ("hue", "paintpalette", \.hueSlider, .hue, 5),
   ]
 
   init(player: PlayerCore) {
@@ -642,11 +957,14 @@ fileprivate class EqualizerView: NSView {
     translatesAutoresizingMaskIntoConstraints = false
 
     let stack = ui.vStack(spacing: .sidebarItemSpacing)
-
+    let lutLabel = ui.label("LUT", font: .boldSystemFont(ofSize: 12), canCompress: false)
+    stack.addArrangedSubview(ui.hStack(spacing: 8,
+      ui.image("camera.filters", size: 16, config: .sidebarIconConfig),
+      lutLabel, ui.flexibleSpace(), VideoLUTPopUp(player: player)))
     var firstLabel: NSTextField?
 
     for c in configs {
-      let label = ui.label("sidebar.\(c.labelKey)", isSmall: true, canCompress: false)
+      let label = ui.label("sidebar.\(c.labelKey)", font: .boldSystemFont(ofSize: 12), canCompress: false)
 
       let slider = NSSlider()
       slider.tag = c.tag
@@ -661,17 +979,26 @@ fileprivate class EqualizerView: NSView {
       }
       self[keyPath: c.keyPath] = slider
 
-      let resetButton = NSButton(
-        image: .sf("arrow.counterclockwise.circle.fill")!,
-        target: self, action: #selector(resetAction)
-      )
-      resetButton.bezelStyle = .smallSquare
-      resetButton.isBordered = false
-      resetButton.tag = c.tag
+      let input = SidebarInputField()
+      input.alignment = .right
+      input.tag = c.tag
+      input.target = self
+      input.action = #selector(valueInputAction)
+      input.cell?.sendsActionOnEndEditing = true
+      let formatter = NumberFormatter()
+      formatter.numberStyle = .decimal
+      formatter.allowsFloats = false
+      formatter.usesGroupingSeparator = false
+      input.formatter = formatter
+      input.setAccessibilityLabel(label.stringValue)
+      slider.setAccessibilityLabel(label.stringValue)
+      valueInputs[c.tag] = input
+
+      input.size(width: 50, height: 24)
 
       stack.addArrangedSubview(ui.hStack(
         spacing: 8,
-        label, slider, resetButton
+        ui.image(c.symbolName, size: 16, config: .sidebarIconConfig), label, slider, input
       ))
 
       if let firstLabel {
@@ -681,35 +1008,57 @@ fileprivate class EqualizerView: NSView {
       }
     }
 
+    for row in stack.arrangedSubviews {
+      row.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    }
     addSubview(stack)
     stack.padding(.horizontal(1), .vertical(2))
 
     update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in update() }
     player.observe(.iinaVideoEqualizerChanged) { [unowned self] _ in
       update()
     }
+    update()
   }
 
   private func update() {
-    brightnessSlider.intValue = Int32(player.info.brightness)
-    contrastSlider.intValue = Int32(player.info.contrast)
-    saturationSlider.intValue = Int32(player.info.saturation)
-    gammaSlider.intValue = Int32(player.info.gamma)
-    hueSlider.intValue = Int32(player.info.hue)
+    let settings = player.scopedVideoSettings(.videoColor)
+    let values = [settings.brightness, settings.contrast, settings.saturation, settings.gamma, settings.hue]
+    let enabled = !player.mainWindow.interactiveMode.isActive
+    for (config, value) in zip(configs, values) {
+      self[keyPath: config.keyPath]?.isEnabled = enabled
+      self[keyPath: config.keyPath]?.integerValue = value
+      if let input = valueInputs[config.tag] {
+        input.isEnabled = enabled
+        input.integerValue = value
+        // A group Reset or target change also replaces an unfinished edit.
+        input.currentEditor()?.string = input.stringValue
+      }
+    }
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-  @objc private func resetAction(_ sender: NSButton) {
+  @objc private func sliderAction(_ sender: NSSlider) {
+    valueInputs[sender.tag]?.integerValue = sender.integerValue
+    if player.scopedTrackSettings.target(.videoColor) > 0, NSApp.currentEvent?.type == .leftMouseDragged { return }
     let config = configs.first(where: { $0.tag == sender.tag })!
-    player.setVideoEqualizer(forOption: config.type, value: 0)
-    self[keyPath: config.keyPath]?.intValue = 0
+    player.performSidebarChange { player.setScopedVideoEqualizer(config.type, value: Int(sender.intValue)) }
   }
 
-  @objc private func sliderAction(_ sender: NSSlider) {
-    let config = configs.first(where: { $0.tag == sender.tag })!
-    player.setVideoEqualizer(forOption: config.type, value: Int(sender.intValue))
+  @objc private func valueInputAction(_ sender: NSTextField) {
+    guard !player.mainWindow.interactiveMode.isActive,
+          let config = configs.first(where: { $0.tag == sender.tag }),
+          let entered = Int(sender.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)) else {
+      update()
+      return
+    }
+    let value = min(100, max(-100, entered))
+    sender.integerValue = value
+    self[keyPath: config.keyPath]?.integerValue = value
+    player.performSidebarChange { player.setScopedVideoEqualizer(config.type, value: value) }
   }
 }

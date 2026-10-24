@@ -21,7 +21,8 @@ class SidebarSubtitlesPane: SidebarScrollView {
 
     let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
 
-    stack.addArrangedSubview(ui.vStack(
+    let primaryTracks = TrackSelector(.sub, player: player, observedKeys: [.iinaSIDChanged])
+    let primary = ui.vStack(
       spacing: .sidebarItemSpacing,
       wantsToGrow: true,
       ui.hStack(
@@ -29,18 +30,15 @@ class SidebarSubtitlesPane: SidebarScrollView {
         ui.image("1.square.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.primary", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
-        VisibilitySwitch(player: player, isPrimary: true),
       ),
-      Container(TrackSelector(
-        .sub,
-        player: player,
-        observedKeys: [.iinaSIDChanged]
-      )) {
-        $0.padding(.all)
-      }
-    ))
+      primaryTracks
+    )
+    stack.addArrangedSubview(primary)
+    primary.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    primaryTracks.widthAnchor.constraint(equalTo: primary.widthAnchor).isActive = true
 
-    stack.addArrangedSubview(ui.vStack(
+    let secondaryTracks = TrackSelector(.secondSub, player: player, observedKeys: [.iinaSIDChanged])
+    let secondary = ui.vStack(
       spacing: .sidebarItemSpacing,
       wantsToGrow: true,
       ui.hStack(
@@ -48,29 +46,43 @@ class SidebarSubtitlesPane: SidebarScrollView {
         ui.image("2.square.fill", size: 16, config: .sidebarIconConfig),
         ui.label("sidebar.secondary", font: .boldSystemFont(ofSize: 12)),
         ui.flexibleSpace(),
-        VisibilitySwitch(player: player, isPrimary: false),
       ),
-      Container(TrackSelector(
-        .secondSub,
-        player: player,
-        observedKeys: [.iinaSIDChanged]
-      )) {
-        $0.padding(.all)
-      }
-    ))
+      secondaryTracks
+    )
+    stack.addArrangedSubview(secondary)
+    secondary.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    secondaryTracks.widthAnchor.constraint(equalTo: secondary.widthAnchor).isActive = true
 
-    stack.addArrangedSubview(Container(LoadSubtitleView(player: player)) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
-
-    stack.addArrangedSubview(Container(SubPositionDelayView(player: player)) {
-      $0.padding(.all(.sidebarContainerPadding))
-    })
-
-    let textStyleView = Container(SubStyleView(player: player)) {
+    let loadSubtitle = Container(LoadSubtitleView(player: player)) {
       $0.padding(.all(.sidebarContainerPadding))
     }
+    stack.addArrangedSubview(loadSubtitle)
+
+    let roleSelector = SubtitleRoleSelector()
+    stack.addArrangedSubview(roleSelector)
+    roleSelector.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+    LayoutValue(28, 24).use { [weak stack, weak loadSubtitle] spacing in
+      guard let stack, let loadSubtitle else { return }
+      stack.setCustomSpacing(spacing, after: loadSubtitle)
+    }
+    stack.setCustomSpacing(6, after: roleSelector)
+
+    let processing = SubPositionDelayView(player: player)
+    stack.addArrangedSubview(processing)
+    processing.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
+
+    let style = SubStyleView(player: player)
+    let styleReset = SidebarResetButton(target: style, action: #selector(SubStyleView.resetStyle))
+    styleReset.resetContextMenu = { [weak style] in
+      guard let style else { return NSMenu() }
+      let role = NSLocalizedString(style.isPrimary ? "sidebar.primary" : "sidebar.secondary", comment: "Subtitle role")
+      let title = String(format: NSLocalizedString("track_settings.reset_output", comment: "Reset selected role"), role)
+      return SidebarResetButton.makeContextMenu(currentTitle: title, target: style,
+        currentAction: #selector(SubStyleView.resetStyle))
+    }
+    let textStyleView = TrackSettingsGroupView(titleKey: "sidebar.style", content: style, action: styleReset)
     stack.addArrangedSubview(textStyleView)
+    textStyleView.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
 
     let imageWarning = Container(ui.label(
       "sidebar.sub_settings_not_available", wrapping: true, isSmall: true, isSecondary: true)) {
@@ -92,68 +104,41 @@ class SidebarSubtitlesPane: SidebarScrollView {
       }
     stack.addArrangedSubview(assWarning)
 
+    let engineWarning = Container(ui.label(
+      "sidebar.secondary_style_engine_required", wrapping: true, isSmall: true, isSecondary: true)) {
+        $0.padding(.all(.sidebarContainerPadding))
+      }
+    stack.addArrangedSubview(engineWarning)
+
     documentView!.addSubview(stack)
     stack.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
 
-    let block = { (_: Notification) in
-      let tracks = ([.sub, .secondSub] as [MPVTrack.TrackType]).compactMap {
-        player.info.currentTrack($0)
-      }
-      let hasText = tracks.isEmpty || tracks.map { !$0.isImageSub }.reduce(false) { $0 || $1 }
-      let isASS = tracks.map { $0.isAssSub }.reduce(false) { $0 || $1 }
+    let block = { [weak player, weak roleSelector, weak stack,
+                   weak textStyleView, weak imageWarning, weak assWarning, weak engineWarning] (_: Notification) in
+      guard let player, let roleSelector, let stack,
+            let textStyleView, let imageWarning, let assWarning, let engineWarning else { return }
+      let track = player.info.currentTrack(roleSelector.isPrimary ? .sub : .secondSub)
+      let hasText = track?.isImageSub != true
+      let isASS = track?.isAssSub == true
 
-      stack.setVisibilityPriority(hasText ? .mustHold : .notVisible, for: textStyleView)
+      let supportsStyle = roleSelector.isPrimary || player.mpv.supportsIndependentSecondarySubtitleStyle
+      stack.setVisibilityPriority(hasText && supportsStyle ? .mustHold : .notVisible, for: textStyleView)
+      stack.setVisibilityPriority(hasText && !supportsStyle ? .mustHold : .notVisible, for: engineWarning)
       stack.setVisibilityPriority(hasText ? .notVisible : .mustHold, for: imageWarning)
       stack.setVisibilityPriority(isASS ? .mustHold : .notVisible, for: assWarning)
     }
 
+    roleSelector.onChange = { primary in
+      processing.setPrimary(primary)
+      style.setPrimary(primary)
+      block(.init(name: .init("")))
+    }
     block(.init(name: .init("")))
     player.observe(.iinaSIDChanged, block: block)
     player.observe(.iinaTracklistChanged, block: block)
   }
 
   @MainActor required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
-
-
-fileprivate class VisibilitySwitch: NSSwitch {
-  private unowned let player: PlayerCore
-  private let isPrimary: Bool
-
-  init(player: PlayerCore, isPrimary: Bool) {
-    self.player = player
-    self.isPrimary = isPrimary
-    super.init(frame: .zero)
-
-    if #available(macOS 26, *) {
-      controlSize = .mini
-    }
-    target = self
-    action = #selector(switchAction)
-    update()
-
-    player.observe(.iinaSubVisibilityChanged) { [unowned self] _ in
-      update()
-    }
-  }
-
-  private func update() {
-    let isVisible = isPrimary ?
-      player.info.isSubVisible : player.info.isSecondSubVisible
-    state = isVisible ? .on : .off
-  }
-
-  @objc private func switchAction(_ sender: AnyObject) {
-    if isPrimary {
-      player.toggleSubVisibility()
-    } else {
-      player.toggleSecondSubVisibility()
-    }
-  }
-
-  required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 }
@@ -194,11 +179,15 @@ fileprivate class LoadSubtitleView: NSView {
 
   @objc func loadExternalSubAction(_ sender: NSSegmentedControl) {
     if sender.selectedSegment == 0 {
+      guard player.info.state.loaded else { return }
+      let generation = player.info.trackSelectionGeneration
       let currentDir = player.info.currentURL?.deletingLastPathComponent()
       Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
                              sheetWindow: player.currentWindow,
-                             allowedFileTypes: Utility.containsSubExt) { url in
-        self.player.loadExternalSubFile(url, delay: true)
+                             allowedFileTypes: Utility.containsSubExt) { [weak player] url in
+        guard let player, player.info.state.loaded,
+              player.info.trackSelectionGeneration == generation else { return }
+        player.loadExternalSubFile(url, delay: true)
       }
     } else if sender.selectedSegment == 1 {
       player.mainWindow.showSubChooseMenu(forView: sender)
@@ -253,25 +242,22 @@ fileprivate class SubDelayView: SidebarSliderView {
     let subDelay = player.mpv.getDouble(delayOption)
     slider.doubleValue = subDelay
     input.doubleValue = subDelay
-    resetButton.isHidden = slider.doubleValue == 0
     updateIndicator()
   }
 
   override func sliderAction() {
-    let eventType = NSApp.currentEvent!.type
+    let eventType = NSApp.currentEvent?.type
     if eventType == .leftMouseDown {
       slider.allowsTickMarkValuesOnly = true
     }
-    if eventType == .leftMouseUp {
+    if eventType != .leftMouseDown && eventType != .leftMouseDragged {
       slider.allowsTickMarkValuesOnly = false
     }
     let sliderValue = slider.doubleValue
     input.doubleValue = sliderValue
     updateIndicator()
-    if let event = NSApp.currentEvent {
-      if event.type == .leftMouseUp {
-        player.setSubDelay(sliderValue, forPrimary: isPrimary)
-      }
+    if eventType != .leftMouseDown && eventType != .leftMouseDragged {
+      player.setSubDelay(sliderValue, forPrimary: isPrimary)
     }
   }
 
@@ -282,13 +268,10 @@ fileprivate class SubDelayView: SidebarSliderView {
     let value = input.doubleValue
     player.setSubDelay(value, forPrimary: isPrimary)
     slider.doubleValue = value
-    if let window = input.window {
-      window.makeFirstResponder(window.contentView)
-    }
   }
 
   override func resetButtonAction() {
-    player.setSubDelay(0, forPrimary: isPrimary)
+    player.performSidebarChange { player.setSubDelay(0, forPrimary: isPrimary) }
   }
 }
 
@@ -297,7 +280,6 @@ fileprivate class SubPositionDelayView: NSView {
   private unowned let player: PlayerCore
   var isPrimary: Bool = true
 
-  private var primarySwitch: NSSegmentedControl!
   private var positionSlider: NSSlider!
   private var delayView: SubDelayView!
 
@@ -306,17 +288,6 @@ fileprivate class SubPositionDelayView: NSView {
     super.init(frame: .zero)
 
     translatesAutoresizingMaskIntoConstraints = false
-
-    self.primarySwitch = NSSegmentedControl()
-    primarySwitch.controlSize = .small
-    primarySwitch.segmentCount = 2
-    primarySwitch.setLabel(NSLocalizedString("sidebar.primary", comment: ""), forSegment: 0)
-    primarySwitch.setLabel(NSLocalizedString("sidebar.secondary", comment: ""), forSegment: 1)
-    primarySwitch.selectedSegment = 0
-    primarySwitch.setContentHuggingPriority(.init(100), for: .horizontal)
-    primarySwitch.segmentDistribution = .fillEqually
-    primarySwitch.target = self
-    primarySwitch.action = #selector(switchAction)
 
     self.positionSlider = NSSlider()
     positionSlider.minValue = 0
@@ -331,27 +302,46 @@ fileprivate class SubPositionDelayView: NSView {
 
     self.delayView = SubDelayView(player: player)
 
-    let stack = ui.vStack(
-      spacing: .sidebarItemSpacing,
-      wantsToGrow: true,
-      primarySwitch,
-      ui.space(),
-      delayView,
-      ui.hStack(
-        spacing: 8,
-        ui.image("arrow.up.and.down", size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.position", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-      ),
-      positionSlider,
+    let positionContent = NSView()
+    positionContent.translatesAutoresizingMaskIntoConstraints = false
+    positionContent.heightAnchor.constraint(equalToConstant: 24).isActive = true
+    positionSlider.translatesAutoresizingMaskIntoConstraints = false
+    positionContent.addSubview(positionSlider)
+    positionSlider.padding(.horizontal).center(.y, with: positionContent)
+
+    let positionHeading = ui.hStack(
+      spacing: 8,
+      ui.image("arrow.up.and.down", size: 16, config: .sidebarIconConfig),
+      ui.label("sidebar.position", font: .boldSystemFont(ofSize: 12)),
+      ui.flexibleSpace()
     )
-    addSubview(stack)
-    stack.padding(.all)
+    let adjustments = ui.vStack(spacing: .sidebarItemSpacing, wantsToGrow: true,
+                                delayView, positionHeading, positionContent)
+    for view in [delayView!, positionHeading, positionContent] {
+      view.widthAnchor.constraint(equalTo: adjustments.widthAnchor).isActive = true
+    }
+    let reset = SidebarResetButton(target: self, action: #selector(resetAdjustments))
+    reset.resetContextMenu = { [weak self] in
+      guard let self else { return NSMenu() }
+      let role = NSLocalizedString(isPrimary ? "sidebar.primary" : "sidebar.secondary", comment: "Subtitle role")
+      let title = String(format: NSLocalizedString("track_settings.reset_output", comment: "Reset selected role"), role)
+      return SidebarResetButton.makeContextMenu(currentTitle: title, target: self,
+        currentAction: #selector(resetAdjustments))
+    }
+    let section = TrackSettingsGroupView(titleKey: "sidebar.adjustments", content: adjustments, action: reset)
+    addSubview(section)
+    section.padding(.all)
 
     update()
     player.observe(.iinaSubPositionChanged) { [unowned self] _ in
       updatePosition()
     }
+  }
+
+  func setPrimary(_ primary: Bool) {
+    isPrimary = primary
+    delayView.isPrimary = primary
+    update()
   }
 
   private func update() {
@@ -364,14 +354,16 @@ fileprivate class SubPositionDelayView: NSView {
     positionSlider.intValue = Int32(player.mpv.getInt(posOption))
   }
 
-  @objc private func switchAction(_ sender: AnyObject) {
-    isPrimary = primarySwitch.selectedSegment == 0
-    delayView.isPrimary = isPrimary
+  @objc private func resetAdjustments() {
+    player.performSidebarChange {
+      delayView.resetButtonAction()
+      player.setSubPos(isPrimary ? 100 : 0, forPrimary: isPrimary)
+    }
     update()
   }
 
   @objc private func positionAction(_ sender: AnyObject) {
-    player.setSubPos(Int(positionSlider.intValue), forPrimary: isPrimary)
+    player.performSidebarChange { player.setSubPos(Int(positionSlider.intValue), forPrimary: isPrimary) }
   }
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
@@ -381,6 +373,7 @@ fileprivate class SubPositionDelayView: NSView {
 
 fileprivate class SubStyleView: NSView {
   private unowned let player: PlayerCore
+  private(set) var isPrimary = true
 
   private var scaleSlider: NSSlider!
   private var fontChooser: NSButton!
@@ -405,13 +398,6 @@ fileprivate class SubStyleView: NSView {
     if #available(macOS 26.0, *) {
       scaleSlider.neutralValue = 0
     }
-
-    let scaleResetButton = NSButton(
-      image: .sf("arrow.counterclockwise.circle.fill")!,
-      target: self, action: #selector(scaleResetButtonAction)
-    )
-    scaleResetButton.bezelStyle = .smallSquare
-    scaleResetButton.isBordered = false
 
     self.fontChooser = NSButton()
     fontChooser.bezelStyle = .push
@@ -441,7 +427,6 @@ fileprivate class SubStyleView: NSView {
       ui.image("plus.magnifyingglass", size: 16, config: .sidebarIconConfig),
       ui.label("sidebar.scale", font: .boldSystemFont(ofSize: 12)),
       scaleSlider,
-      scaleResetButton,
     )
     scaleStack.size(height: 30)
 
@@ -487,13 +472,13 @@ fileprivate class SubStyleView: NSView {
     addSubview(stack)
     stack.padding(.all)
 
-    update()
+    updateScale()
     updateTextStyle()
-    player.observe(.iinaSubScaleChanged) { [unowned self] _ in
-      update()
-    }
-    player.observe(.iinaSubFontChanged) { [unowned self] _ in
-      update()
+    player.observe(.iinaSubScaleChanged) { [unowned self] _ in updateScale() }
+    player.observe(.iinaSubFontChanged) { [unowned self] _ in updateScale() }
+    player.observe(.iinaSubtitleStyleChanged) { [unowned self] _ in
+      updateScale()
+      updateTextStyle()
     }
   }
 
@@ -517,42 +502,48 @@ fileprivate class SubStyleView: NSView {
     return colorWell
   }
 
-  private func update() {
-    let subFont = player.mpv.getString(MPVOption.Subtitles.subFont) ??
+  func setPrimary(_ primary: Bool) {
+    for well in [textColorWell, borderColorWell, backgroundColorWell] { well?.deactivate() }
+    isPrimary = primary
+    updateScale()
+    updateTextStyle()
+  }
+
+  private func option(_ name: String) -> String {
+    SubtitleStyle.option(name, forPrimary: isPrimary)
+  }
+
+  private func updateScale() {
+    guard isPrimary || player.mpv.supportsIndependentSecondarySubtitleStyle else { return }
+    let subFont = player.mpv.getString(option(MPVOption.Subtitles.subFont)) ??
       NSLocalizedString("sidebar.font", comment: "");
     fontChooser.title = subFont
 
-    let currSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale).clamped(to: 0.1...10)
+    let currSubScale = player.mpv.getDouble(option(MPVOption.Subtitles.subScale)).clamped(to: 0.1...10)
     let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
     scaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
   }
 
   private func updateTextStyle() {
-    let fontSize = player.mpv.getInt(MPVOption.Subtitles.subFontSize)
-    fontSizePicker.selectItem(withTitle: fontSize.description)
-
-    let borderWidth = player.mpv.getDouble(MPVOption.Subtitles.subOutlineSize)
-    borderSizePicker.selectItem(at: -1)
-    borderSizePicker.itemArray.forEach { item in
-      if borderWidth == Double(item.title) {
-        borderSizePicker.select(item)
-      }
-    }
+    guard isPrimary || player.mpv.supportsIndependentSecondarySubtitleStyle else { return }
+    selectSubtitleStyleValue(player.mpv.getDouble(option(MPVOption.Subtitles.subFontSize)), in: fontSizePicker)
+    selectSubtitleStyleValue(player.mpv.getDouble(option(MPVOption.Subtitles.subOutlineSize)), in: borderSizePicker)
 
     for (op, colorWell) in [
       (MPVOption.Subtitles.subColor, textColorWell),
       (MPVOption.Subtitles.subOutlineColor, borderColorWell),
       (MPVOption.Subtitles.subBackColor, backgroundColorWell),
     ] {
-      if let colorString = player.mpv.getString(op), let color = NSColor(mpvColorString: colorString) {
+      if let colorString = player.mpv.getString(option(op)), let color = NSColor(mpvColorString: colorString) {
         colorWell?.color = color
       }
     }
   }
 
-  @objc private func scaleResetButtonAction(_ sender: AnyObject) {
-    player.setSubScale(1)
-    scaleSlider.doubleValue = 0
+  @objc func resetStyle() {
+    player.performSidebarChange { player.resetSubtitleStyle(forPrimary: isPrimary) }
+    updateScale()
+    updateTextStyle()
   }
 
   @objc private func scaleAction(_ sender: AnyObject) {
@@ -566,34 +557,53 @@ fileprivate class SubStyleView: NSView {
       mappedValue = round((value - 1) * 20) / 20
       realValue = 1 / mappedValue
     }
-    player.setSubScale(realValue)
+    player.performSidebarChange { player.setSubScale(realValue, forPrimary: isPrimary) }
   }
 
   @objc func chooseSubFontAction(_ sender: AnyObject) {
-    player.chooseSubFont()
+    player.performSidebarChange { player.chooseSubFont(forPrimary: isPrimary) }
   }
 
   @objc func chooseSubFontSizeAction(_ sender: AnyObject) {
     guard let title = fontSizePicker.selectedItem?.title, let value = Double(title) else { return }
-    player.setSubTextSize(value)
+    player.performSidebarChange { player.setSubTextSize(value, forPrimary: isPrimary) }
   }
 
   @objc func chooseSubBorderSizeAction(_ sender: AnyObject) {
     guard let title = borderSizePicker.selectedItem?.title, let value = Double(title) else { return }
-    player.setSubTextBorderSize(value)
+    player.performSidebarChange { player.setSubTextBorderSize(value, forPrimary: isPrimary) }
   }
 
   @objc func colorAction(_ sender: NSColorWell) {
     let color = sender.color.mpvColorString
-    switch sender.tag {
-    case 1: player.setSubTextColor(color)
-    case 2: player.setSubTextBgColor(color)
-    case 3: player.setSubTextBorderColor(color)
-    default: break
+    player.performSidebarChange {
+      switch sender.tag {
+      case 1: player.setSubTextColor(color, forPrimary: isPrimary)
+      case 2: player.setSubTextBgColor(color, forPrimary: isPrimary)
+      case 3: player.setSubTextBorderColor(color, forPrimary: isPrimary)
+      default: break
+      }
     }
   }
 
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+/// Add saved values absent from the preset menu rather than showing a different value.
+fileprivate func selectSubtitleStyleValue(_ value: Double, in picker: NSPopUpButton) {
+  guard value.isFinite else { return }
+  for item in picker.itemArray where item.tag == -1 {
+    picker.menu?.removeItem(item)
+  }
+  if let item = picker.itemArray.first(where: { Double($0.title) == value }) {
+    picker.select(item)
+  } else {
+    let title = NSNumber(value: value).stringValue
+    let index = picker.itemArray.firstIndex { (Double($0.title) ?? .infinity) > value } ?? picker.numberOfItems
+    picker.insertItem(withTitle: title, at: index)
+    picker.item(at: index)?.tag = -1
+    picker.selectItem(at: index)
   }
 }

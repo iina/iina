@@ -9,6 +9,13 @@
 import Cocoa
 @preconcurrency import WebKit
 
+class PluginOverlayViewContainer: NSView {
+  override func hitTest(_ point: NSPoint) -> NSView? {
+    let hit = super.hitTest(point)
+    return hit === self ? nil : hit
+  }
+}
+
 class PluginOverlayView: WKWebView, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
 

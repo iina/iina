@@ -210,16 +210,50 @@ fileprivate extension NSUserInterfaceItemIdentifier {
   static let url = NSUserInterfaceItemIdentifier("URLCell")
 }
 
-fileprivate extension NSPasteboard.PasteboardType {
-  static let iinaPluginID = NSPasteboard.PasteboardType(rawValue: "com.colliderli.iina.pluginID")
-}
-
-
 fileprivate class PluginListView: SettingsAccessory.Base {
   // TODO: this is a workaround.
   // SettingsItem.Custom should also adopt the "build first, render later" design.
   class TableView: NSTableView {
     weak var listView: PluginListView!
+
+    override func mouseDown(with event: NSEvent) {
+      let row = row(at: convert(event.locationInWindow, from: nil))
+      guard let plugin = JavascriptPlugin.plugins[at: row], let window else { return }
+      let originalOrder = JavascriptPlugin.plugins.map(\.identifier)
+      var dragging = false
+      var closeHandTimer: Timer?
+      defer {
+        closeHandTimer?.invalidate()
+        if dragging { NSCursor.pop() }
+        if JavascriptPlugin.plugins.map(\.identifier) != originalOrder {
+          JavascriptPlugin.savePluginOrder()
+        }
+      }
+
+      while let next = window.nextEvent(matching: [.leftMouseDragged, .leftMouseUp]) {
+        if next.type == .leftMouseUp { return }
+        let deltaY = next.locationInWindow.y - event.locationInWindow.y
+        guard abs(deltaY) > 3 || dragging else { continue }
+        if !dragging {
+          dragging = true
+          NSCursor.openHand.push()
+          let timer = Timer(timeInterval: 0.07, repeats: false) { _ in
+            NSCursor.closedHand.set()
+          }
+          closeHandTimer = timer
+          RunLoop.main.add(timer, forMode: .common)
+          RunLoop.main.add(timer, forMode: .eventTracking)
+        }
+        _ = autoscroll(with: next)
+        let point = convert(next.locationInWindow, from: nil)
+        var boundary = numberOfRows
+        for target in 0..<numberOfRows where point.y < rect(ofRow: target).midY {
+          boundary = target
+          break
+        }
+        listView.move(plugin.identifier, to: boundary)
+      }
+    }
 
     override func viewDidMoveToWindow() {
       super.viewDidMoveToWindow()
@@ -247,7 +281,6 @@ fileprivate class PluginListView: SettingsAccessory.Base {
     tableView.addTableColumn(column)
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.registerForDraggedTypes([.iinaPluginID])
     tableView.gridStyleMask = .solidHorizontalGridLineMask
     tableView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -257,6 +290,20 @@ fileprivate class PluginListView: SettingsAccessory.Base {
 
   func reload() {
     tableView.reloadData()
+  }
+
+  func move(_ identifier: String, to boundary: Int) {
+    guard let source = JavascriptPlugin.plugins.firstIndex(where: { $0.identifier == identifier }) else { return }
+    let destination = min(JavascriptPlugin.plugins.count - 1, max(0, source < boundary ? boundary - 1 : boundary))
+    guard source != destination else { return }
+    let plugin = JavascriptPlugin.plugins.remove(at: source)
+    JavascriptPlugin.plugins.insert(plugin, at: destination)
+    NSAnimationContext.runAnimationGroup { context in
+      context.duration = NSWorkspace.shared.accessibilityDisplayShouldReduceMotion ? 0 : 0.12
+      tableView.beginUpdates()
+      tableView.moveRow(at: source, to: destination)
+      tableView.endUpdates()
+    }
   }
 
   func checkForAllPluginUpdates() {
@@ -480,33 +527,6 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
     return view
   }
 
-  func tableView(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) -> Bool {
-    guard rowIndexes.count == 1, let item = JavascriptPlugin.plugins[at: rowIndexes[rowIndexes.startIndex]] else { return false }
-    pboard.setString(item.identifier, forType: .iinaPluginID)
-    return true
-  }
-
-  func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-    tableView.setDropRow(row, dropOperation: .above)
-    guard info.draggingSource as? NSTableView == tableView else { return [] }
-    return .move
-  }
-
-  func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-    guard
-      let id = info.draggingPasteboard.string(forType: .iinaPluginID),
-      let originalRow = JavascriptPlugin.plugins.firstIndex(where: { $0.identifier == id })
-      else { return false }
-
-    let p = JavascriptPlugin.plugins.remove(at: originalRow)
-    JavascriptPlugin.plugins.insert(p, at: originalRow < row ? row - 1 : row)
-    JavascriptPlugin.savePluginOrder()
-
-    tableView.beginUpdates()
-    tableView.moveRow(at: originalRow, to: row)
-    tableView.endUpdates()
-    return true
-  }
 }
 
 extension PluginListView {

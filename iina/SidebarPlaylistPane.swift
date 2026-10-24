@@ -28,7 +28,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   let prefObserver = Preference.Observer()
   weak var player: PlayerCore!
 
-  private var scrollView: NSScrollView!
+  private var scrollView: SidebarSectionScrollView!
   var tableView: NSTableView!
   private var addBtn: NSButton!
   private var removeBtn: NSButton!
@@ -39,7 +39,9 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   private var totalLengthLabel: NSTextField!
   private var addFileMenu: NSMenu!
 
-  var horizontalScroll: ((Bool) -> Void)?
+  var horizontalScroll: ((NSEvent) -> Bool)? {
+    didSet { scrollView?.horizontalScroll = horizontalScroll }
+  }
 
   @Atomic private var playlistTotalLengthIsReady = false
   @Atomic private var playlistTotalLength: Double? = nil
@@ -83,7 +85,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
 
     hideTotalLength()
 
-    self.scrollView = NSScrollView()
+    self.scrollView = SidebarSectionScrollView()
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.hasHorizontalScroller = false
     scrollView.autohidesScrollers = true
@@ -277,12 +279,14 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   }
 
   @objc func clearPlaylistBtnAction(_ sender: AnyObject) {
-    player.clearPlaylist()
-    player.sendOSD(.clearPlaylist)
+    player.performSidebarChange {
+      player.clearPlaylist()
+      player.sendOSD(.clearPlaylist)
+    }
   }
 
   @objc func loopBtnAction(_ sender: NSButton) {
-    player.nextLoopMode()
+    player.performSidebarChange { player.nextLoopMode() }
   }
 
   @objc func shuffleBtnAction(_ sender: AnyObject) {

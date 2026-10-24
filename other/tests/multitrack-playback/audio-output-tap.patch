@@ -1,0 +1,32 @@
+--- a/audio/out/ao.c
++++ b/audio/out/ao.c
+@@ -31,6 +31,7 @@
+ #include "options/options.h"
+ #include "options/m_config_frontend.h"
+ #include "osdep/endian.h"
++#include "osdep/timer.h"
+ #include "common/msg.h"
+ #include "common/common.h"
+ #include "common/global.h"
+@@ -656,6 +657,21 @@
+ {
+     bool planar = af_fmt_is_planar(ao->format);
+     int planes = planar ? ao->channels.num : 1;
++    static FILE *capture;
++    const char *path = getenv("LYINA_TEST_AUDIO_CAPTURE");
++    if (path && num_samples > 0) {
++        if (!capture)
++            capture = fopen(path, "wb");
++        if (capture) {
++            uint64_t header[] = {mp_time_ns(), num_samples, ao->samplerate,
++                ao->channels.num, planes, ao->sstride, af_fmt_to_bytes(ao->format),
++                ao->format};
++            fwrite(header, sizeof(header), 1, capture);
++            for (int n = 0; n < planes; n++)
++                fwrite(data[n], num_samples * ao->sstride, 1, capture);
++            fflush(capture);
++        }
++    }
+     int plane_samples = num_samples * (planar ? 1: ao->channels.num);
+     for (int n = 0; n < planes; n++)
+         process_plane(ao, data[n], plane_samples);

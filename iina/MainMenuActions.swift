@@ -491,6 +491,10 @@ extension MainMenuActionHandler {
       return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
     case #selector(menuCycleTrack(_:)) where menuItem.tag == 0:
       return !player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress
+    case #selector(menuChangeTrack(_:)):
+      let type = (menuItem.representedObject as? (MPVTrack, MPVTrack.TrackType))?.1 ??
+        (menuItem.representedObject as? MPVTrack)?.type
+      return type != .video || (!player.mainWindow.interactiveMode.isActive && !player.mainWindow.isCropTransitionInProgress)
     default:
       break
     }

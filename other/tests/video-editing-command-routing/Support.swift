@@ -11,6 +11,11 @@ struct KeyMapping {
   var isIINACommand = false
   var action: [String] { rawAction.components(separatedBy: .whitespaces).filter { !$0.isEmpty } }
 }
+struct MPVTrack {
+  enum TrackType { case video, audio, sub, secondSub }
+  let id: Int
+  let type: TrackType
+}
 extension MPVProperty { static let playlistPos = "playlist-pos", vf = "vf", af = "af" }
 
 final class EngineBoundary {
@@ -126,6 +131,7 @@ final class MainMenuActionHandler: NSObject {
   @objc func menuToggleMirror(_ sender: NSMenuItem) {}
   @objc func menuToggleVideoFilterString(_ sender: NSMenuItem) {}
   @objc func menuCycleTrack(_ sender: NSMenuItem) {}
+  @objc func menuChangeTrack(_ sender: NSMenuItem) {}
   @objc func audioAction(_ sender: NSMenuItem) {}
   func toggleFilter(_ type: String) { menuToggleFilterString("crop=900:500:0:0", forType: type) }
   // PRODUCTION_MENU

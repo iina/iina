@@ -32,11 +32,12 @@ support = support.replace('// PRODUCTION_OSC_SECONDARY_CLICK', '\n'.join(extract
 controller_source = source/'MainWindowController.swift'
 scroll = extract(controller_source.read_text(), '  override func scrollWheel(') if controller_source.exists() else ''
 support = support.replace('// PRODUCTION_SCROLL_ROUTING', scroll)
+support = support.replace('// PRODUCTION_HIDE_UI_FROM_OSC', extract(controller_source.read_text(), '  func hideUIFromOSC('))
 support = support.replace('// PRODUCTION_WINDOW_DISPATCH', window)
 support = support.replace('// PRODUCTION_SIDEBAR_STACKING', sidebar)
 title = (source/'Titlebar.swift').read_text()
 support = support.replace('// PRODUCTION_TITLEBAR_BACKGROUND', '\n'.join(extract(title, marker) for marker in [
-    '  private func cancelBackgroundPress(', '  func handleBackgroundMouseEvent(', '  private func isBackgroundEvent(', '  private func isTitlePathEvent(']))
+    '  private func cancelBackgroundPress(', '  func handleBackgroundMouseEvent(', '  private func isBackgroundEvent(']))
 web = (source/'PluginSidebarView.swift').read_text()
 script = web.split('  static let backgroundClickScript = #\"\"\"', 1)[1].split('\"\"\"#', 1)[0]
 support = support.replace('// PRODUCTION_WEB_BACKGROUND_SCRIPT', 'let backgroundScript = #\"\"\"' + script + '\"\"\"#')

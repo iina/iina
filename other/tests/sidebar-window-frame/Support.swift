@@ -66,6 +66,7 @@ protocol HeaderInsets {
   func setTrailingConstraint(_ value: CGFloat, animated: Bool)
 }
 class MainWindowController: NSObject {
+  func updateOSCToolbarButtonStates() {}
   var floatingOSCScale: CGFloat = 1
   var isCropTransitionInProgress = false
   enum UIAnimationState { case hidden, shown, willShow, willHide }
@@ -141,7 +142,7 @@ class MainWindowController: NSObject {
   var oscBottomView: ChromeFixture!
   lazy var oscFloatingView = OSCFloatingView(mainWindow: self)
   var minimumWindowSize = FloatingOSCMetrics.minimumWindowSize
-  func updateFloatingOSCScale(scale: CGFloat) {}
+  func updateFloatingOSCScale(scale: CGFloat) { floatingOSCScale = scale }
   lazy var sidebars = SidebarController(mainWindow: self)
   func setWindowToolbar() {}
   var videoContainerPhysicalConstraints: [NSLayoutConstraint] = []

@@ -422,6 +422,7 @@ class SidebarController: NSObject {
 
   private func replaceSideBar(with viewController: SidebarViewController, type: ViewType, in panel: Panel) {
     panel.status = type
+    mainWindow.updateOSCToolbarButtonStates()
     bringPanelToFront(panel.view)
     panel.view.setContent(viewController.view)
     viewController.view.padding(.all)
@@ -459,6 +460,7 @@ class SidebarController: NSObject {
       panel.view.isHidden = false
     }
     panel.status = type
+    mainWindow.updateOSCToolbarButtonStates()
     panel.view.setContent(viewController.view)
     viewController.view.padding(.all)
     viewController.setTopInset(headerInset, animated: false)
@@ -500,6 +502,7 @@ class SidebarController: NSObject {
     let fading = useFadeForSidebar
     panel.status = .hidden
     let generation = panel.beginTransition(.willHide)
+    mainWindow.updateOSCToolbarButtonStates()
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0

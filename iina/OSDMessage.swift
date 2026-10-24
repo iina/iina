@@ -95,7 +95,7 @@ final class OSDFeedbackOrigins {
   }
 }
 
-/// Parse only command provenance; execution always receives the original text.
+/// Inspect command structure; execution always receives the original text.
 enum OSDCommandRouting {
   private static let prefixes: Set<String> = ["no-osd", "osd-auto", "osd-bar", "osd-msg", "osd-msg-bar",
     "raw", "expand-properties", "repeatable", "nonrepeatable", "nonscalable", "async", "sync"]
@@ -225,6 +225,40 @@ enum OSDCommandRouting {
     case "add", "multiply", "cycle", "change-list":
       return (words[1], nil)
     default: return nil
+    }
+  }
+
+  static func changesVideoGeometry(property: String) -> Bool {
+    let property = OSDFeedbackOrigins.propertyKey(property)
+    let name = property.split(separator: "/").first.map(String.init) ?? property
+    return ["vid", "video", "edition", "vf", "lavfi-complex", "video-aspect", "video-aspect-override",
+      "video-aspect-method", "video-rotate", "video-crop", "panscan", "video-zoom", "video-pan-x",
+      "video-pan-y", "video-scale-x", "video-scale-y", "video-align-x", "video-align-y", "video-unscaled",
+      "video-recenter", "video-margin-ratio-left", "video-margin-ratio-right", "video-margin-ratio-top",
+      "video-margin-ratio-bottom", "playlist-pos", "playlist-pos-1", "playlist-current-pos"].contains(name) ||
+      property.contains("$")
+  }
+
+  /// A Crop/Delogo editor owns the source geometry until its transition finishes.
+  /// Appending media and unrelated playback controls leave that ownership intact.
+  static func changesVideoGeometry(_ words: [String], playlistIndex: Int) -> Bool {
+    let words = normalized(words)
+    guard let command = words.first else { return false }
+    if let (property, _) = propertyMutation(words) { return changesVideoGeometry(property: property) }
+    switch command {
+    case "del":
+      return words.count > 1 && changesVideoGeometry(property: words[1])
+    case "vf", "vf-command", "video-add", "video-remove", "video-reload", "playlist-next", "playlist-prev",
+         "playlist-next-playlist", "playlist-prev-playlist", "playlist-play-index", "apply-profile", "load-config-file":
+      return true
+    case "loadfile", "loadlist":
+      let mode = words.count > 2 ? words[2] : "replace"
+      return !["append", "append-play", "insert-next", "insert-next-play", "insert-at", "insert-at-play"].contains(mode)
+    case "playlist-remove":
+      guard words.count > 1, let index = Int(words[1]) else { return true }
+      return index == playlistIndex
+    default:
+      return false
     }
   }
 }

@@ -1256,12 +1256,13 @@ class MainWindowController: PlayerWindowController {
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
     let success = super.handleKeyBinding(keyBinding)
-    if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
+    guard success, let command = keyBinding.action.first else { return success }
+    if command == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)
     }
 
     if !keyBinding.isIINACommand {
-      switch keyBinding.action.first! {
+      switch command {
       case MPVCommand.showProgress.rawValue:
         player.sendOSD(.showTime(player.info.progress))
       default: ()
@@ -1773,13 +1774,14 @@ class MainWindowController: PlayerWindowController {
   func windowWillEnterFullScreen(_ notification: Notification) {
     log("Entering full screen mode")
     interruptPlayerCropTransition()
+    if isCropTransitionInProgress { cancelCropExitTransition() }
+    interactiveMode.exit()
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
     if notification.name != .iinaLegacyFullScreen { beginFullscreenVideoTransition() }
     // When playback is paused the display link is stopped in order to avoid wasting energy on
     // needless processing. It must be running while transitioning to full screen mode.
     videoView.displayActive()
-    interactiveMode.exit()
 
     liveText.clearAnalysis()
 
@@ -1911,6 +1913,9 @@ class MainWindowController: PlayerWindowController {
   ///     [willExitFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/willexitfullscreennotification).
   func windowWillExitFullScreen(_ notification: Notification) {
     log("Exiting full screen mode")
+    interruptPlayerCropTransition()
+    if isCropTransitionInProgress { cancelCropExitTransition() }
+    interactiveMode.exit()
     fsState.startAnimatingToWindow()
     // AppKit reuses the fullscreen titlebar surface while shrinking the window.
     window?.titlebarAppearsTransparent = true
@@ -1918,7 +1923,6 @@ class MainWindowController: PlayerWindowController {
     // When playback is paused the display link is stopped in order to avoid wasting energy on
     // needless processing. It must be running while transitioning from full screen mode.
     videoView.displayActive()
-    interactiveMode.exit()
 
     liveText.clearAnalysis()
 
@@ -4339,12 +4343,16 @@ extension MainWindowController {
 extension MainWindowController: PIPViewControllerDelegate {
 
   func enterPIP() {
-    guard pipStatus == .notInPIP else { return }
+    guard pipStatus == .notInPIP, loaded, let videoWindow = window,
+          player.info.state.loaded, !player.info.activeTrackIDs(.video).isEmpty,
+          !player.isInMiniPlayer, !isFullscreenTransitionInProgress,
+          videoView.window === videoWindow, videoView.superview === videoViewContainer else { return }
     interruptPlayerCropTransition()
     if isCropTransitionInProgress { cancelCropExitTransition() }
     // The editor owns the layer projection and temporary uncropped source.
     interactiveMode.exit()
     pipStatus = .inPIP
+    let mediaGeneration = player.info.trackSelectionGeneration
     liveText.clearAnalysis()
     let feedback = beginOperationFeedback()
     pipPreparationFeedback = feedback
@@ -4382,9 +4390,18 @@ extension MainWindowController: PIPViewControllerDelegate {
     var prepared = false
     let finishPreparation: () -> Void = { [weak self, weak presentation, weak sourceWindow] in
       let update = {
-        guard let self, let presentation, let sourceWindow,
+        guard let self, let presentation,
               self.pipStatus == .inPIP, self.pipVideo === presentation,
               !prepared else { return }
+        guard let sourceWindow else { self.exitPIP(); return }
+        if supportsPreparation {
+          guard self.player.info.state.loaded,
+                self.player.info.trackSelectionGeneration == mediaGeneration,
+                !self.player.info.activeTrackIDs(.video).isEmpty,
+                !self.player.isInMiniPlayer, !self.isFullscreenTransitionInProgress,
+                self.videoView.window === sourceWindow,
+                self.videoView.superview === self.videoViewContainer else { self.exitPIP(); return }
+        }
         prepared = true
         // This callback precedes the native launch-rectangle read; it does not mean remote video is visible.
         if let sourceRect, let host = presentation.view.window, host !== sourceWindow {

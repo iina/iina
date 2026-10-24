@@ -2129,4 +2129,45 @@ for failure in ["generation", "stopped"] {
         "\(failure) cannot complete stale native entry motion")
   editor.interactiveMode.exit(discardingCrop: true)
 }
+// Menu/plugin entry must obey the same ownership rules as the shortcut route.
+for blockedMode in ["loading", "stopped", "unloaded-window", "music", "pip-preparing", "pip-return",
+                    "fullscreen-animation", "crop-transition", "foreign-host", "detached-video"] {
+  let blocked = MainWindowController()
+  var foreignHost: NSWindow?
+  switch blockedMode {
+  case "loading": blocked.player.info.state = .loading
+  case "stopped": blocked.player.info.state = .stopped
+  case "unloaded-window": blocked.loaded = false
+  case "music": blocked.player.isInMiniPlayer = true
+  case "pip-preparing": blocked.pipStatus = .inPIP
+  case "pip-return": blocked.pipStatus = .intermediate
+  case "fullscreen-animation": blocked.isFullscreenTransitionInProgress = true
+  case "crop-transition": blocked.isCropTransitionInProgress = true
+  case "foreign-host":
+    let host = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 320, height: 180),
+                        styleMask: .borderless, backing: .buffered, defer: false)
+    host.isReleasedWhenClosed = false
+    foreignHost = host
+    blocked.videoView.removeFromSuperview()
+    host.contentView!.addSubview(blocked.videoView)
+  default: blocked.videoView.removeFromSuperview()
+  }
+  for mode in [InteractiveModeController.Mode.crop, .delogo] {
+    check(!blocked.interactiveMode.canEnter, "\(blockedMode) rejects editor ownership")
+    blocked.interactiveMode.enter(mode: mode, selectWholeVideoByDefault: true)
+    check(!blocked.interactiveMode.isActive && blocked.preparedWindowReferences == 0 &&
+          blocked.player.removedCropCount == 0 && blocked.player.pausedCount == 0,
+          "\(blockedMode) rejects \(mode) before layout, filtering or pause side effects")
+  }
+  withExtendedLifetime(foreignHost) {}
+}
+let releasedOwner = MainWindowController()
+check(releasedOwner.interactiveMode.canEnter, "an ordinary loaded window accepts editor ownership")
+releasedOwner.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+let entryReferences = releasedOwner.preparedWindowReferences
+releasedOwner.interactiveMode.enter(mode: .delogo)
+check(releasedOwner.interactiveMode.currentMode == .crop && releasedOwner.preparedWindowReferences == entryReferences,
+      "reentrant menu entry cannot replace the active editor or repeat setup")
+releasedOwner.interactiveMode.exit()
+check(releasedOwner.interactiveMode.canEnter, "editor release permits a later deliberate entry")
 print("Completed \(checks) custom crop checks using production controller, selection view, and scrolling selector.")

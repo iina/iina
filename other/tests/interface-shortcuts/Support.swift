@@ -40,7 +40,12 @@ struct MPVCommand: RawRepresentable {
   static let quit = Self(rawValue: "quit")
   static let screenshot = Self(rawValue: "screenshot")
 }
-class MPVFixture { var commands: [String] = []; func command(rawString: String) -> Int32 { commands.append(rawString); return 0 } }
+enum MPVProperty { static let playlistPos = "playlist-pos" }
+class MPVFixture {
+  var commands: [String] = []
+  func getInt(_ property: String) -> Int { 0 }
+  func command(rawString: String) -> Int32 { commands.append(rawString); return 0 }
+}
 class PlayerCore {
   var userSeeks = 0
   func userInitiatedSeek() { userSeeks += 1 }

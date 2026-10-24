@@ -930,8 +930,16 @@ class InteractiveModeController: NSObject, NSTextFieldDelegate, NSPopoverDelegat
     if let editorEventMonitor { NSEvent.removeMonitor(editorEventMonitor) }
   }
 
+  var canEnter: Bool {
+    guard let mainWindow, mainWindow.loaded, let window = mainWindow.window else { return false }
+    return !isActive && !mainWindow.isCropTransitionInProgress &&
+      mainWindow.player.info.state.loaded && !mainWindow.player.isInMiniPlayer &&
+      mainWindow.pipStatus == .notInPIP && !mainWindow.isFullscreenTransitionInProgress &&
+      mainWindow.videoView.window === window && mainWindow.videoView.superview === mainWindow.videoViewContainer
+  }
+
   func enter(mode: Mode, selectWholeVideoByDefault: Bool = false) {
-    guard !isActive, !mainWindow.isCropTransitionInProgress, mainWindow.window != nil else { return }
+    guard canEnter else { return }
     mainWindow.prepareVideoTransformWindowReference()
     reloadAspectPresets()
     let player = mainWindow.player

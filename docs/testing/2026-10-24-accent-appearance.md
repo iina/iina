@@ -71,3 +71,8 @@ production lifecycle placement checks. New initialization options/filters and
 track-selection/language policies win when their first-load baseline changes.
 Legacy windows without the optional playback payload remain readable. Native window, engine, and graph boundaries remain
 fixtures; full-player restart acceptance is a separate check.
+
+The later [combined player audit](2026-10-24-player-audit.md) records actual
+isolated-app Restart acceptance, including processing restoration from an active
+Crop editor and Later followed by ordinary Quit/relaunch. Its platform and
+rendering limits still apply.

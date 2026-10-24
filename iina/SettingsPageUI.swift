@@ -132,23 +132,9 @@ class SettingsPageUI: SettingsPage {
           .withDetailView(oscToolbarView)
       }
 
-      SettingsList() {
-        SettingsItem.PopupButton()
-          .image(name: "forward.fill")
-          .bindTo(.arrowButtonAction, ofType: Preference.ArrowButtonAction.self)
-        SettingsItem.SwitchWithInput()
-          .image(name: "timer")
-          .labelKey(.controlBarAutoHideTimeout)
-          .bindInputTo(.controlBarAutoHideTimeout)
-          .bindSwitchTo(.enableControlBarAutoHide)
-          .range(0...Double(Int.max), allowsFloats: true)
-          .trailingLabel(.text_s)
-      }
+      OSCArrowSettingsList()
 
       SettingsList {
-        SettingsItem.Switch()
-          .image(name: "arrow.right.and.line.vertical.and.arrow.left")
-          .bindTo(.controlBarStickToCenter)
         SettingsItem.Switch()
           .image(name: "ruler")
           .bindTo(.showChapterPos)
@@ -495,13 +481,16 @@ fileprivate class ResizeWindowView: SettingsContainer {
 }
 
 
-fileprivate class OSCLayoutView: SettingsContainer {
+fileprivate class OSCLayoutView: NSObject, SettingsContainer {
   lazy var itemID = SettingsContainerUUID.next()
 
   let view: NSView
   let imageViews: [NSImageView]
+  private let configureButton = ui.button("oscDefaultPosition.configure")
+  private let positionSheetController = OSCPositionSettingsSheetController()
+  private let prefObserver = Preference.Observer()
 
-  init() {
+  override init() {
     self.view = NSView()
     let container = NSView()
     container.translatesAutoresizingMaskIntoConstraints = false
@@ -511,6 +500,7 @@ fileprivate class OSCLayoutView: SettingsContainer {
       NSImageView(image: .sf("osc_top_figure")!),
       NSImageView(image: .sf("osc_bottom_figure")!),
     ]
+    super.init()
 
     imageViews.forEach { iv in
       iv.wantsLayer = true
@@ -530,16 +520,42 @@ fileprivate class OSCLayoutView: SettingsContainer {
 
     for (i, btn) in buttons.enumerated() {
       container.addSubview(btn)
-      btn.spacing(.top(8), to: imageViews[i]).padding(.bottom(12))
+      btn.spacing(.top(8), to: imageViews[i])
         .center(.x, with: imageViews[i])
+    }
+
+    container.addSubview(configureButton)
+    configureButton.spacing(.top(12), to: buttons[0])
+      .padding(.leading(SettingsSubList.indent + 8))
+    configureButton.target = self
+    configureButton.action = #selector(configurePosition)
+    configureButton.toolTip = ui.localized("oscDefaultPosition.desc")
+    let floatingBottom = container.bottomAnchor.constraint(equalTo: configureButton.bottomAnchor, constant: 12)
+    let dockedBottom = container.bottomAnchor.constraint(equalTo: buttons[0].bottomAnchor, constant: 12)
+    prefObserver.add(.oscPosition, runNow: true) { [weak self] _ in
+      let isFloating = Preference.integer(for: .oscPosition) == Preference.OSCPosition.floating.rawValue
+      self?.configureButton.isHidden = !isFloating
+      floatingBottom.isActive = false
+      dockedBottom.isActive = false
+      (isFloating ? floatingBottom : dockedBottom).isActive = true
     }
 
     view.addSubview(container)
     container.padding(.vertical).center(.x)
   }
 
+  @objc private func configurePosition() {
+    guard let window = view.window else { return }
+    let players = OSCPositionConfiguration.visiblePlayers
+    OSCPositionConfiguration.present(on: window, players: players, using: positionSheetController)
+  }
+
   func makeView() -> NSView {
     return view
+  }
+
+  func registerSearchEntry(context: SettingsSearch.Context) {
+    context.add(itemID, ui.localized("oscDefaultPosition.configure"))
   }
 }
 
@@ -616,4 +632,80 @@ private class OSCToolbarView: SettingsContainer {
     updateOSCToolbarButtons()
     return view
   }
+}
+
+
+fileprivate class OSCArrowSettingsList: SettingsList {
+  private let prefObserver = Preference.Observer()
+  private weak var renderedList: SettingsList.View?
+  private let seekInput = SettingsItem.Input(step: 1)
+    .bindTo(.oscArrowSeekSeconds)
+    .range(1...Double(Int.max))
+    .trailingLabel(.text_s)
+  private let autoHideInput = SettingsItem.SwitchWithInput()
+    .image(name: "timer")
+    .labelKey(.controlBarAutoHideTimeout)
+    .bindInputTo(.controlBarAutoHideTimeout)
+    .bindSwitchTo(.enableControlBarAutoHide)
+    .range(0...Double(Int.max), allowsFloats: true)
+    .step(1)
+    .trailingLabel(.text_s)
+  private var showsSeekInput = false
+
+  init() {
+    super.init(title: nil, [])
+    items = [
+      SettingsItem.PopupButton()
+        .image(name: "forward.fill")
+        .bindTo(.arrowButtonAction, ofType: Preference.ArrowButtonAction.self),
+      seekInput,
+      autoHideInput
+    ]
+    prefObserver.add(.arrowButtonAction) { [weak self] _ in
+      guard let self, let list = self.renderedList else { return }
+      let show = Preference.integer(for: .arrowButtonAction) == Preference.ArrowButtonAction.seek.rawValue
+      guard show != self.showsSeekInput else { return }
+      list.contentView?.subviews.forEach { $0.removeFromSuperview() }
+      self.addItems(to: list)
+    }
+  }
+
+  override func addItems(to listView: SettingsList.View) {
+    renderedList = listView
+    showsSeekInput = Preference.integer(for: .arrowButtonAction) == Preference.ArrowButtonAction.seek.rawValue
+    let allItems = items
+    if !showsSeekInput { items = items.filter { $0 !== seekInput } }
+    super.addItems(to: listView)
+    items = allItems
+  }
+}
+
+
+enum OSCPositionConfiguration {
+  static var visiblePlayers: [PlayerCore] {
+    PlayerCore.playerCores.filter { $0.mainWindow.isWindowLoaded && $0.mainWindow.window?.isVisible == true }
+  }
+
+  static func present(on parent: NSWindow, players: [PlayerCore], using controller: OSCPositionSettingsSheetController) {
+    let contexts = players.compactMap { player -> PositionPreviewContext? in
+      guard let playerWindow = player.mainWindow.window, let content = playerWindow.contentView else { return nil }
+      let title = player === players.first ? ui.localized("previewContext.window") : playerWindow.title
+      let minimum = playerWindow.contentRect(forFrameRect: NSRect(origin: .zero, size: AppData.floatingOSCWindowMinSize)).size
+      return PositionPreviewContext(title: title, size: content.bounds.size, minimumSize: minimum)
+    }
+    var appearance = FloatingOSCPreviewAppearance()
+    appearance.compact = Preference.bool(for: .compactUI)
+    // The preview keeps a full titlebar even while the live header is hidden or animating.
+    let normalTitlebarHeight: CGFloat = if #available(macOS 26, *) { 32 } else { 28 }
+    appearance.titlebarHeight = normalTitlebarHeight + (appearance.compact ? 0 : 8)
+    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
+    appearance.toolbarImages = buttons.map { $0.image() }
+    if let player = players.first {
+      appearance.sliderHeight = player.mainWindow.playSlider.frame.height
+      appearance.transportImages = [player.mainWindow.leftArrowButton.image, player.mainWindow.playButton.image,
+                                    player.mainWindow.rightArrowButton.image].compactMap { $0 }
+    }
+    controller.present(on: parent, contexts: contexts, appearance: appearance)
+  }
+
 }

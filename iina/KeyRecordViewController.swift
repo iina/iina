@@ -42,6 +42,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     set {
       if let f = actionTextField {
         f.stringValue = newValue
+        restoreInterfaceCriteria()
       } else {
         pendingAction = newValue
       }
@@ -72,6 +73,8 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     NotificationCenter.default.addObserver(forName: .iinaKeyBindingInputChanged, object: nil, queue: .main) { [unowned self] _ in
       self.updateCommandField()
     }
+    restoreInterfaceCriteria()
+    ready = !keyCode.isEmpty && !action.isEmpty
   }
 
   func keyRecordView(_ view: KeyRecordView, recordedKeyDownWith event: NSEvent) {
@@ -127,6 +130,20 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     guard let criterions = ruleEditor.criteria(forRow: 0) as? [Criterion] else { return }
     actionTextField.stringValue = KeyBindingTranslator.string(fromCriteria: criterions)
     NotificationCenter.default.post(.init(name: NSControl.textDidChangeNotification, object: actionTextField))
+  }
+
+  private func restoreInterfaceCriteria() {
+    let parts = action.split(whereSeparator: \.isWhitespace).map(String.init)
+    guard parts.count >= 2, parts[0] == "@iina",
+          let command = IINACommand(rawValue: parts[1]), command.isInterfaceCommand,
+          command.acceptsArguments(Array(parts.dropFirst(2))),
+          let root = criterions.compactMap({ $0 as? TextCriterion }).first(where: { $0.name == command.rawValue }) else { return }
+    var selection: [Criterion] = [root]
+    if let argument = parts.dropFirst(2).first {
+      guard let child = root.children.first(where: { $0.mpvCommandValue == argument }) else { return }
+      selection.append(child)
+    }
+    ruleEditor.setCriteria(selection, andDisplayValues: selection.map { $0.displayValue() }, forRowAt: 0)
   }
 
   func controlTextDidChange(_ obj: Notification) {

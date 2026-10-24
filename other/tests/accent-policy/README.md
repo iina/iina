@@ -1,0 +1,9 @@
+# Accent source policy regression checks
+
+Run `python3 other/tests/accent-policy/run.py` on the Apple Silicon macOS host. The driver compiles the actual `iina/AppAccentColor.swift` for `arm64-apple-macos12`, using the existing shared compiler cache. It refuses to create a new cache. Use `--module-cache PATH` to choose another existing cache and `--output PATH` to change the evidence path.
+
+Each test launches a non-activating temporary app bundle with a unique test bundle identifier. It seeds only that test domain and process-volatile appearance arguments, calls production configuration before creating AppKit's application or color caches, then removes the test domain on exit. The driver removes the temporary executable and bundle after the run. No personal preference domain or global preferences are written.
+
+Coverage includes migration before default registration, valid new-source precedence, malformed-source sanitization, canonical opaque custom RGB, invalid custom fallback, restoration of the process-only blue override, native accent versus raw text highlight under Multicolor, pending-choice isolation, dynamic OS highlight updates, fixed custom color, version-1 snapshot shape/identifiers, and contrast under four AppKit appearances. Default blue intentionally preserves the legacy white foreground and records its approximately 4.02:1 contrast as an explicit compatibility exception. Other sources require at least 4.5:1.
+
+Default evidence: `build/accent-color-api-2026-10-24/policy-checks.json`. The receipt includes the production policy hash, target/runtime, individual checks, resolved colors, and plugin snapshots. These are policy checks, not live control-rendering or application restart acceptance tests. Simulated process-local highlight changes do not verify actual system-change notifications.

@@ -20,7 +20,7 @@ class FixedProgressBar: NSView {
   override func draw(_ dirtyRect: NSRect) {
     NSGraphicsContext.saveGraphicsState()
 
-    NSColor.controlAccentColor.setFill()
+    AppAccentColor.color.setFill()
 
     let boundRect = NSMakeRect(0, paddingY, bounds.width, bounds.height - 2 * paddingY)
     let progressRect = NSMakeRect(0, paddingY, bounds.width * doubleValue, bounds.height - 2 * paddingY)

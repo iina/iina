@@ -541,7 +541,7 @@ class TrackSelector: SidebarSectionScrollView, NSTableViewDelegate, NSTableViewD
     var languageLabel: NSTextField
 
     override init(frame frameRect: NSRect) {
-      self.selectedIndicator = ColoredView(color: .controlAccentColor, cornerRadius: 2)
+      self.selectedIndicator = ColoredView(color: AppAccentColor.color, cornerRadius: 2)
       selectedIndicator.translatesAutoresizingMaskIntoConstraints = false
 
       self.languageTag = ColoredView(color: .controlColor, cornerRadius: 3)
@@ -729,7 +729,7 @@ private final class TrackOffButton: NSButton {
   override func draw(_ dirtyRect: NSRect) {
     let selected = state == .on
     if selected {
-      NSColor.controlAccentColor.setFill()
+      AppAccentColor.color.setFill()
       NSBezierPath(roundedRect: NSRect(x: 8, y: 5, width: 4, height: bounds.height - 10),
                    xRadius: 1.5, yRadius: 1.5).fill()
     }

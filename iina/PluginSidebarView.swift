@@ -12,6 +12,7 @@ import Cocoa
 class PluginSidebarView: WKWebView, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
   private var backgroundClickHandler: BackgroundClickHandler?
+  private var appearanceBridge: PluginAppearanceBridge?
 
   private final class BackgroundClickHandler: NSObject, WKScriptMessageHandler {
     weak var webView: PluginSidebarView?
@@ -66,6 +67,7 @@ class PluginSidebarView: WKWebView, WKNavigationDelegate {
   """#
 
   deinit {
+    appearanceBridge?.invalidate()
     configuration.userContentController.removeScriptMessageHandler(forName: "iina")
     configuration.userContentController.removeScriptMessageHandler(forName: "iinaPanelBackground", contentWorld: .defaultClient)
   }
@@ -83,6 +85,7 @@ class PluginSidebarView: WKWebView, WKNavigationDelegate {
       webView.isInspectable = true
     }
     webView.pluginInstance = pluginInstance
+    webView.appearanceBridge = PluginAppearanceBridge(webView: webView)
     let handler = BackgroundClickHandler()
     handler.webView = webView
     webView.backgroundClickHandler = handler
@@ -97,6 +100,7 @@ class PluginSidebarView: WKWebView, WKNavigationDelegate {
   }
 
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    appearanceBridge?.prepareForNavigation()
     if let url = navigationAction.request.url, pluginInstance.canAccess(url: url) {
       decisionHandler(.cancel)
     } else {
@@ -105,6 +109,7 @@ class PluginSidebarView: WKWebView, WKNavigationDelegate {
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
+    appearanceBridge?.didFinishNavigation()
     if let wc = window?.windowController as? PlayerWindowController {
       wc.player.events.emit(.pluginOverlayLoaded)
     }

@@ -20,8 +20,14 @@ fileprivate let NormalMenuItemTag = 0
 fileprivate let AlternativeMenuItemTag = 1
 
 
-@NSApplicationMain
+@main
 class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
+
+  static func main() {
+    if AppRestart.runHelperIfRequested() { return }
+    AppAccentColor.configure()
+    _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+  }
 
   /// The `AppDelegate` singleton object.
   static var shared: AppDelegate { NSApp.delegate as! AppDelegate }
@@ -47,6 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   private var commandLineStatus = CommandLineStatus()
 
   private var isTerminating = false
+  private var accentControlObservers: [NSObjectProtocol] = []
 
   /// Longest time to wait for asynchronous shutdown tasks to finish before giving up on waiting and proceeding with termination.
   ///
@@ -201,6 +208,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   func applicationWillFinishLaunching(_ notification: Notification) {
     // Must setup preferences before logging so log level is set correctly.
     registerUserDefaultValues()
+    // Seed plugin appearance reads before any background JavaScript context exists.
+    PluginAppearance.startObserving()
+    let center = NotificationCenter.default
+    accentControlObservers.append(center.addObserver(forName: NSWindow.didBecomeKeyNotification,
+                                                     object: nil, queue: .main) { notification in
+      if let view = (notification.object as? NSWindow)?.contentView {
+        AccentControls.apply(to: view)
+      }
+    })
+    accentControlObservers.append(center.addObserver(forName: NSColor.systemColorsDidChangeNotification,
+                                                     object: nil, queue: .main) { _ in
+      for window in NSApp.windows {
+        if let view = window.contentView { AccentControls.apply(to: view) }
+      }
+    })
 
     observedPrefKeys.forEach { key in
       UserDefaults.standard.addObserver(self, forKeyPath: key.rawValue, options: .new, context: nil)
@@ -351,6 +373,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   deinit {
+    accentControlObservers.forEach { NotificationCenter.default.removeObserver($0) }
     ObjcUtils.silenced {
       for key in self.observedPrefKeys {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
@@ -360,6 +383,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     Logger.log("App launched")
+    let restoreSettings = AppRestart.consumeSettingsRestoreRequest()
+    let restartSession = AppRestartSession.consume()
 
     if !isReady {
       getReady()
@@ -385,10 +410,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       parsePendingURL(url)
     }
 
-    if !commandLineStatus.isCommandLine {
+    if !commandLineStatus.isCommandLine && !restoreSettings {
       // check whether showing the welcome window after 0.1s
       Timer.scheduledTimer(timeInterval: TimeInterval(0.1), target: self, selector: #selector(self.checkForShowingInitialWindow), userInfo: nil, repeats: false)
-    } else {
+    } else if commandLineStatus.isCommandLine {
       var lastPlayerCore: PlayerCore? = nil
       let getNewPlayerCore = { [self] () -> PlayerCore in
         let pc = PlayerCore.newPlayerCore
@@ -439,6 +464,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     AppDelegate.shared.menuController?.updatePluginMenu()
 
     MemoryUsage.shared.logUsage("after launching finished")
+    if restoreSettings {
+      SettingsWindow.default.show()
+      AppRestartSession.restore(restartSession, settings: SettingsWindow.default)
+    }
   }
 
   /** Show welcome window if `application(_:openFile:)` wasn't called, i.e. launched normally. */
@@ -493,6 +522,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     Logger.log("App should terminate")
+    AppRestart.captureSessionIfRequested()
     isTerminating = true
     MemoryUsage.shared.logUsage("before terminating")
 

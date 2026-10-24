@@ -8,7 +8,7 @@ import Cocoa
 struct FloatingOSCPreviewAppearance {
   var compact = false
   var sliderHeight: CGFloat = {
-    let slider = NSSlider()
+    let slider = AccentSlider()
     slider.controlSize = .small
     return slider.intrinsicContentSize.height
   }()

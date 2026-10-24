@@ -30,7 +30,7 @@ class PlaySliderCell: NSSliderCell {
 
   private var knobColor = NSColor.mainSliderKnob
   private var knobActiveColor = NSColor.mainSliderKnobActive
-  private var barColorLeft = NSColor.mainSliderBarLeft
+  private var barColorLeft: NSColor { AppAccentColor.playbackFill(fallback: .mainSliderBarLeft) }
   private var barColorRight = NSColor.mainSliderBarRight
 
   var drawChapters = Preference.bool(for: .showChapterPos)

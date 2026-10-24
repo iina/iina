@@ -495,7 +495,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       return label
     case .int:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
+      let slider = AccentSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.minInt!)
@@ -509,7 +509,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       return slider
     case .float:
       // Slider
-      let slider = NSSlider(frame: NSRect(x: 0, y: 0,
+      let slider = AccentSlider(frame: NSRect(x: 0, y: 0,
                                           width: scrollContentView.frame.width - 8,
                                           height: 19))
       slider.minValue = Double(param.min!)

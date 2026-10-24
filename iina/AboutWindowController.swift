@@ -200,9 +200,9 @@ class AboutWindowButton: NSButton {
 
   func updateState() {
     if let cell = self.cell as? NSButtonCell {
-      cell.backgroundColor = state == .on ? .controlAccentColor : .clear
+      cell.backgroundColor = state == .on ? AppAccentColor.color : .clear
     }
     attributedTitle = NSAttributedString(string: title,
-                                         attributes: [.foregroundColor: state == .on ? NSColor.white : NSColor.labelColor])
+                                         attributes: [.foregroundColor: state == .on ? AppAccentColor.textColor : NSColor.labelColor])
   }
 }

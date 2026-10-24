@@ -66,6 +66,12 @@ class PlayerCore: NSObject {
     return findIdlePlayerCore() ?? createPlayerCore()
   }
 
+  /// An explicit restart must not reuse a core owned by a global plugin.
+  static var playerCoreForRestart: PlayerCore {
+    return playerCores.first { !$0.isManagedByPlugin && $0.info.state == .idle && !$0.backgroundTaskInUse }
+      ?? createPlayerCore()
+  }
+
   static var activeOrNew: PlayerCore {
     if playerCores.isEmpty {
       return first
@@ -316,6 +322,7 @@ class PlayerCore: NSObject {
   }
 
   func seekOSDDidStart() {
+    AppRestartSession.seekStarted(self)
     startedSeekOSDIntent = userSeekOSDIntent?.generation == info.trackSelectionGeneration
       ? userSeekOSDIntent?.token : nil
   }
@@ -3024,6 +3031,7 @@ class PlayerCore: NSObject {
 
     MemoryUsage.shared.logUsage("after file started")
     info.trackSelectionGeneration += 1
+    AppRestartSession.fileStarted(self)
     info.justStartedFile = true
     info.disableOSDForFileLoading = true
 
@@ -3150,6 +3158,7 @@ class PlayerCore: NSObject {
     restoreVideoTrackGeometryForCurrentMedia()
     prepareAudioMixer()
     videoGeometryIsLoaded = true
+    AppRestartSession.fileLoaded(self)
     getPlaylist()
     getChapters()
     syncAbLoop()
@@ -3206,6 +3215,7 @@ class PlayerCore: NSObject {
     Task { @MainActor in
       mainWindow.liveText.requestAnalysis()
     }
+    AppRestartSession.fileSetupFinished(self)
   }
 
   func fileEnded(_ dueToStopCommand: Bool) {
@@ -3303,7 +3313,7 @@ class PlayerCore: NSObject {
   }
 
   func fullscreenChanged() {
-    guard mainWindow.loaded, info.state.active else { return }
+    guard mainWindow.loaded, info.state.active, !AppRestartSession.isRestoring(self) else { return }
     let fs = mpv.getFlag(MPVOption.Window.fullscreen)
     if fs != mainWindow.fsState.isFullscreen {
       mainWindow.toggleWindowFullScreen()
@@ -3398,6 +3408,7 @@ class PlayerCore: NSObject {
     // Important to synchronize the time as mpv may slightly alter the playback position during a
     // restart even while paused. See issue #5337.
     syncUI(.time)
+    AppRestartSession.playbackRestarted(self)
     reloadSavedIINAfilters()
 
     // The new video's size is guaranteed to be available. Reset the flags used for window resizing.
@@ -3532,7 +3543,7 @@ class PlayerCore: NSObject {
     }
 
     // if need to switch to music mode
-    if Preference.bool(for: .autoSwitchToMusicMode) {
+    if Preference.bool(for: .autoSwitchToMusicMode) && !AppRestartSession.isRestoring(self) {
       if overrideAutoSwitchToMusicMode {
         log("Skipping music mode auto-switch because overrideAutoSwitchToMusicMode is true", level: .verbose)
       } else if audioStatus == .isAudio && !isInMiniPlayer && !mainWindow.fsState.isFullscreen {
@@ -3656,7 +3667,7 @@ class PlayerCore: NSObject {
     guard mainWindow.loaded else { return }
 
     let fs = mpv.getFlag(MPVOption.Window.fullscreen)
-    if fs != mainWindow.fsState.isFullscreen {
+    if !AppRestartSession.isRestoring(self), fs != mainWindow.fsState.isFullscreen {
       DispatchQueue.main.async {
         self.mainWindow.toggleWindowFullScreen()
       }
@@ -3752,12 +3763,13 @@ class PlayerCore: NSObject {
 
   func notifyWindowVideoSizeChanged() {
     currentController.handleVideoSizeChange()
+    AppRestartSession.applyWindowFrame(self)
     if currentController.pendingShow {
       currentController.pendingShow = false
       currentController.showWindow(self)
       AppDelegate.shared.openURLWindow.close()
     }
-    if info.state == .loaded {
+    if info.state == .loaded && !AppRestartSession.isRestoring(self) {
       // If the media was loaded manually then playback was paused to avoid audio starting to play
       // before video is ready to be displayed. Now that the video is ready playback can be resumed
       // unless the IINA "Pause" setting is enabled under "When media is opened".
@@ -3773,6 +3785,7 @@ class PlayerCore: NSObject {
         mainWindow.toggleWindowFullScreen()
       }
     }
+    AppRestartSession.windowReady(self)
   }
 
   /// Synchronize the video position cached in the `info.videoPosition` property.

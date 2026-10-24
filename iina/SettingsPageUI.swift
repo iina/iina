@@ -15,6 +15,15 @@ class SettingsPageUI: SettingsPage {
   private lazy var oscToolbarView: OSCToolbarView = OSCToolbarView()
 
   private lazy var geometryBindings = GeometryBindings()
+  private lazy var accentColorItem: AccentColorSettingsItem = {
+    let item = AccentColorSettingsItem()
+      .image(name: "paintpalette")
+    item.didCommitChange = { [weak item] in
+      guard let window = item?.window as? SettingsWindow else { return }
+      AppRestart.confirmSettingsChange(in: window)
+    }
+    return item
+  }()
 
   override var identifier: String {
     "ui"
@@ -59,6 +68,7 @@ class SettingsPageUI: SettingsPage {
         SettingsItem.PopupButton()
           .image(name: "moonphase.first.quarter")
           .bindTo(.themeMaterial, ofType: Preference.Theme.self)
+        accentColorItem
         if #available(macOS 26.0, *) { 
           SettingsItem.General(title: .general("sidebar.liquid_glass"))
             .image(name: ["capsule.on.rectangle.liquid.glass", "liquid.glass"])

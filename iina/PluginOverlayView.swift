@@ -11,6 +11,7 @@ import Cocoa
 
 class PluginOverlayView: WKWebView, WKNavigationDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
+  private var appearanceBridge: PluginAppearanceBridge?
 
   var isEnteringSimpleMode = false
   private var pendingStyle: String?
@@ -45,6 +46,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
   }
 
   deinit {
+    appearanceBridge?.invalidate()
     configuration.userContentController.removeScriptMessageHandler(forName: "iina")
   }
 
@@ -70,6 +72,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
         webView.isInspectable = true
       }
       webView.pluginInstance = pluginInstance
+      webView.appearanceBridge = PluginAppearanceBridge(webView: webView)
       webView.navigationDelegate = webView
       webView.translatesAutoresizingMaskIntoConstraints = false
       webView.setValue(false, forKey: "drawsBackground")
@@ -79,6 +82,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
   }
 
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    appearanceBridge?.prepareForNavigation()
     if let url = navigationAction.request.url, pluginInstance.canAccess(url: url) {
       decisionHandler(.cancel)
     } else {
@@ -105,6 +109,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
+    appearanceBridge?.didFinishNavigation()
     if let wc = window?.windowController as? PlayerWindowController {
       wc.player.events.emit(.pluginOverlayLoaded)
     }

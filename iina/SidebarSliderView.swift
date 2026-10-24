@@ -120,7 +120,7 @@ class SidebarSliderView: NSView {
 
     translatesAutoresizingMaskIntoConstraints = false
 
-    self.slider = NSSlider()
+    self.slider = AccentSlider()
     slider.translatesAutoresizingMaskIntoConstraints = false
     slider.controlSize = .small
     slider.tickMarkPosition = .below

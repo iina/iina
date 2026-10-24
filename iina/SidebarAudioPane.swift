@@ -155,7 +155,7 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
 
   private lazy var audioEQSliders: [NSSlider] = {
     (0...9).map {
-      let slider = NSSlider()
+      let slider = AccentSlider()
       slider.controlSize = .mini
       slider.isVertical = true
       slider.minValue = -12

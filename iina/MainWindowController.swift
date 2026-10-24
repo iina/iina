@@ -2816,6 +2816,20 @@ class MainWindowController: PlayerWindowController {
     videoTransformWindowGeneration = nil
   }
 
+  /// The explicit restart handoff overrides initial-size preferences once and
+  /// establishes the same geometry reference as the restored visible window.
+  func applyRestartWindowFrame(_ frame: NSRect) {
+    guard let window, frame.width > 0, frame.height > 0 else { return }
+    shouldApplyInitialWindowSize = false
+    window.setFrame(frame, display: false, animate: false)
+    let size = player.videoSizeForDisplay
+    establishVideoTransformWindowReference(windowSize: frame.size,
+                                          displaySize: NSSize(width: size.0, height: size.1), initial: true)
+    videoTransformWindowDisplaySize = NSSize(width: size.0, height: size.1)
+    setWindowAspectRatio(frame.size)
+    updateWindowParametersForMPV(withFrame: frame)
+  }
+
   private func establishVideoTransformWindowReference(windowSize: NSSize, displaySize: NSSize,
                                                        initial: Bool = false) {
     let generation = player.info.trackSelectionGeneration

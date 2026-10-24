@@ -49,6 +49,9 @@ struct Preference {
 
     /** Material for OSC and title bar (Theme(int)) */
     static let themeMaterial = Key("themeMaterial")
+    static let useSystemAccentColor = Key("useSystemAccentColor")
+    static let accentColorSource = Key("accentColorSource")
+    static let customAccentColor = Key("customAccentColor")
 
     static let useLiquidGlassOSD = Key("useLiquidGlassOSD")
     static let useLiquidGlassOSC = Key("useLiquidGlassOSC")
@@ -431,7 +434,7 @@ struct Preference {
     // case mediumLight // 3
     case system = 4
 
-    static var defaultValue = Theme.dark
+    static var defaultValue = Theme.system
 
     init?(key: Key) {
       let value = Preference.integer(for: key)
@@ -1105,7 +1108,10 @@ struct Preference {
     .leadingSidebarWidth: 360,
     .trailingSidebarWidth: 360,
     .prefetchPlaylistVideoDuration: true,
-    .themeMaterial: Theme.dark.rawValue,
+    .themeMaterial: Theme.system.rawValue,
+    .useSystemAccentColor: true,
+    .accentColorSource: 2,
+    .customAccentColor: "#007AFF",
     .useLiquidGlassOSD: true,
     .useLiquidGlassOSC: true,
     .useLiquidGlassSidebar: true,

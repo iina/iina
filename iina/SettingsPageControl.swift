@@ -114,7 +114,7 @@ fileprivate class SliderView: SettingsAccessory.Base {
 
     let label = NSTextField(labelWithString: ui.localized("\(key.rawValue).label"))
     label.translatesAutoresizingMaskIntoConstraints = false
-    let slider = NSSlider()
+    let slider = AccentSlider()
     slider.translatesAutoresizingMaskIntoConstraints = false
 
     slider.allowsTickMarkValuesOnly = true

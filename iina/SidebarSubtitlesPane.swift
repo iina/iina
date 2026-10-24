@@ -153,7 +153,7 @@ fileprivate class LoadSubtitleView: NSView {
 
     translatesAutoresizingMaskIntoConstraints = false
 
-    let loadSubSegment = NSSegmentedControl(
+    let loadSubSegment = AccentSegmentedControl(
       labels: [NSLocalizedString("sidebar.load_subtitle", comment: ""), ""],
       trackingMode: .momentary,
       target: self,
@@ -177,7 +177,7 @@ fileprivate class LoadSubtitleView: NSView {
     stack.padding(.all)
   }
 
-  @objc func loadExternalSubAction(_ sender: NSSegmentedControl) {
+  @objc func loadExternalSubAction(_ sender: AccentSegmentedControl) {
     if sender.selectedSegment == 0 {
       let currentDir = player.info.currentURL?.deletingLastPathComponent()
       Utility.quickOpenPanel(title: "Load external subtitle", chooseDir: false, dir: currentDir,
@@ -285,7 +285,7 @@ fileprivate class SubPositionDelayView: NSView {
 
     translatesAutoresizingMaskIntoConstraints = false
 
-    self.positionSlider = NSSlider()
+    self.positionSlider = AccentSlider()
     positionSlider.minValue = 0
     positionSlider.maxValue = 100
     positionSlider.controlSize = .small
@@ -385,7 +385,7 @@ fileprivate class SubStyleView: NSView {
 
     translatesAutoresizingMaskIntoConstraints = false
 
-    self.scaleSlider = NSSlider()
+    self.scaleSlider = AccentSlider()
     scaleSlider.minValue = -5
     scaleSlider.maxValue = 5
     scaleSlider.controlSize = .small

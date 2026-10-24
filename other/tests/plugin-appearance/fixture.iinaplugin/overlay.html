@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+body { margin: 20px; font: 15px -apple-system, sans-serif; }
+#card { display: inline-block; background: #222e; color: white; padding: 16px; border-radius: 10px; }
+button { background: var(--iina-accent-color, #007AFF); color: var(--iina-accent-text-color, white); padding: 9px 14px; border: 0; border-radius: 6px; }
+code { display: block; margin: 10px 0; }
+</style></head><body><section id="card"><b>Overlay appearance</b><code id="tokens"></code><button data-clickable="true" id="button">Accent action</button></section>
+<script>
+const appearance = window.iina?.appearance;
+function render(theme) { document.getElementById('tokens').textContent = `${theme.source} · ${theme.accentColor}`; }
+if (appearance) { render(appearance.getTheme()); appearance.onChange(render); }
+else render({ source: 'stock fallback', accentColor: '#007AFF' });
+document.getElementById('button').onclick = () => { document.getElementById('button').textContent = 'Clicked'; };
+</script></body></html>

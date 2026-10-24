@@ -281,8 +281,8 @@ class UIHelper {
     return textField
   }
 
-  func toggleButton(bindTo key: Preference.Key, size: NSControl.ControlSize = .regular, inverted: Bool = false) -> NSSwitch {
-    let btn = NSSwitch()
+  func toggleButton(bindTo key: Preference.Key, size: NSControl.ControlSize = .regular, inverted: Bool = false) -> AccentSwitch {
+    let btn = AccentSwitch()
     btn.controlSize = size
     let opt: [NSBindingOption : Any] = inverted ? [
       .valueTransformerName: NSValueTransformerName(rawValue: "NSNegateBoolean")

@@ -85,6 +85,11 @@ class SettingsPageAdvanced: SettingsPage {
   private lazy var advancedSettingsSwitch: SettingsItem.Switch = {
     let item = SettingsItem.Switch()
       .bindTo(.enableAdvancedSettings)
+      .requiresRestart { _ in
+        Preference.bool(for: .enableLogging) || Preference.bool(for: .useMpvOsd) ||
+          Preference.bool(for: .useUserDefinedConfDir) ||
+          !(Preference.value(for: .userOptions) as? [[String]] ?? []).isEmpty
+      }
       .image(name: ["flask"])
       .hasDescription()
       .withHelpLink(AppData.wikiLink.appending("/MPV-Options-and-Properties"))
@@ -125,6 +130,7 @@ class SettingsPageAdvanced: SettingsPage {
           .image(name: "cylinder.split.1x2")
         SettingsItem.Switch()
           .bindTo(.enableLogging)
+          .requiresRestart { _ in Preference.bool(for: .enableAdvancedSettings) }
           .extraViews(openLogFolderBtn)
       }
       SettingsList {
@@ -140,12 +146,17 @@ class SettingsPageAdvanced: SettingsPage {
       SettingsList(title: .text_MPVSettings) {
         SettingsItem.Switch()
           .bindTo(.useMpvOsd)
+          .requiresRestart { _ in Preference.bool(for: .enableAdvancedSettings) }
           .image(name: "ellipsis.bubble")
       }
       SettingsList {
         SettingsItem.Switch()
           .image(name: ["folder.badge.gearshape", "folder.badge.gear"])
           .bindTo(.useUserDefinedConfDir)
+          .requiresRestart(additionalKeys: [.userDefinedConfDir]) { key in
+            Preference.bool(for: .enableAdvancedSettings) &&
+              (key != .userDefinedConfDir || Preference.bool(for: .useUserDefinedConfDir))
+          }
           .extraViews(fileChooseView.textField, fileChooseView.chooseButton)
       }
       SettingsList {
@@ -173,6 +184,10 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   let delBtn: NSButton = NSButton()
 
   var options: [[String]] = []
+  private var draftRows: Set<Int> = []
+  private var restartBaseline: [[String]]?
+  private weak var restartRequestWindow: SettingsWindow?
+  private var restartCheckScheduled = false
 
   override init() {
     addBtn.bezelStyle = .push
@@ -233,8 +248,40 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   }
 
   private func saveToUserDefaults() {
-    Preference.set(options, for: .userOptions)
-    UserDefaults.standard.synchronize()
+    let committed = options.enumerated().filter { !draftRows.contains($0.offset) }.map(\.element)
+    let previous = Preference.value(for: .userOptions) as? [[String]] ?? []
+    if committed != previous {
+      if restartBaseline == nil {
+        restartBaseline = previous
+        if tableView.isEnabled, !view.isHiddenOrHasHiddenAncestor,
+           let window = view.window as? SettingsWindow, window.isVisible {
+          restartRequestWindow = window
+        }
+      }
+      Preference.set(committed, for: .userOptions)
+      UserDefaults.standard.synchronize()
+    }
+    scheduleRestartCheck()
+  }
+
+  private func scheduleRestartCheck() {
+    guard restartBaseline != nil, !restartCheckScheduled else { return }
+    restartCheckScheduled = true
+    DispatchQueue.main.async { [weak self] in
+      guard let self else { return }
+      self.restartCheckScheduled = false
+      // Tab commits the key before starting its value editor. Let the entire
+      // table editing transaction finish before requesting a sheet.
+      guard self.tableView.editedRow < 0, self.tableView.currentEditor() == nil else { return }
+      let previous = self.restartBaseline
+      self.restartBaseline = nil
+      let window = self.restartRequestWindow
+      self.restartRequestWindow = nil
+      let committed = Preference.value(for: .userOptions) as? [[String]] ?? []
+      guard previous != committed, Preference.bool(for: .enableAdvancedSettings),
+            let window, window.isVisible else { return }
+      AppRestart.confirmSettingsChange(in: window)
+    }
   }
 
   private static func parsePastedOption(_ string: String) -> [String]? {
@@ -257,6 +304,7 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     let row = tableView.editedRow
     guard tableView.abortEditing() else { return false }
     options[row] = option
+    draftRows.remove(row)
     tableView.reloadData(forRowIndexes: IndexSet(integer: row),
                          columnIndexes: IndexSet(integersIn: 0..<tableView.numberOfColumns))
     saveToUserDefaults()
@@ -265,14 +313,17 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
 
   @objc func addOptionAction(_ sender: AnyObject) {
     options.append(["name", "value"])
+    draftRows.insert(options.count - 1)
     tableView.reloadData()
     tableView.selectRowIndexes(IndexSet(integer: options.count - 1), byExtendingSelection: false)
-    saveToUserDefaults()
+    // The placeholder is a draft, not an mpv option or a restart-worthy save.
   }
 
   @objc func removeOptionAction(_ sender: AnyObject) {
     if tableView.selectedRow >= 0 {
-      options.remove(at: tableView.selectedRow)
+      let removed = tableView.selectedRow
+      options.remove(at: removed)
+      draftRows = Set(draftRows.compactMap { $0 == removed ? nil : ($0 > removed ? $0 - 1 : $0) })
       tableView.reloadData()
       saveToUserDefaults()
     }
@@ -303,12 +354,13 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
       Utility.showAlert("extra_option.empty", sheetWindow: view.window)
       return
     }
-    guard options.count > row else { return }
+    guard options.indices.contains(row) else { return }
     if identifier == .key {
       options[row][0] = value
     } else if identifier == .value {
       options[row][1] = value
     }
+    if options[row] != ["name", "value"] { draftRows.remove(row) }
     saveToUserDefaults()
   }
 
@@ -337,6 +389,10 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     let option = options.remove(at: srcRow)
     let destRow = srcRow < row ? row - 1 : row
     options.insert(option, at: destRow)
+    var draftFlags = (0..<options.count).map { draftRows.contains($0) }
+    let wasDraft = draftFlags.remove(at: srcRow)
+    draftFlags.insert(wasDraft, at: destRow)
+    draftRows = Set(draftFlags.indices.filter { draftFlags[$0] })
     tableView.beginUpdates()
     tableView.moveRow(at: srcRow, to: destRow)
     tableView.endUpdates()

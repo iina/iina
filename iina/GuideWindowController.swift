@@ -96,7 +96,7 @@ class GuideWindowButtonCell: NSButtonCell {
   override func awakeFromNib() {
     self.attributedTitle = NSAttributedString(
       string: title,
-      attributes: [NSAttributedString.Key.foregroundColor: NSColor.white]
+      attributes: [NSAttributedString.Key.foregroundColor: AppAccentColor.textColor]
     )
   }
 
@@ -114,9 +114,9 @@ class GuideWindowButtonCell: NSButtonCell {
     shadow.set()
 
     if isHighlighted {
-      NSColor.systemBlue.highlight(withLevel: 0.1)?.setFill()
+      AppAccentColor.color.highlight(withLevel: 0.1)?.setFill()
     } else {
-      NSColor.systemBlue.setFill()
+      AppAccentColor.color.setFill()
     }
     rectPath.fill()
     NSGraphicsContext.restoreGraphicsState()

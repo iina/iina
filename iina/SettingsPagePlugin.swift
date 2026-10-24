@@ -340,7 +340,7 @@ fileprivate class PluginListView: SettingsAccessory.Base {
 extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
   private class ItemView: NSTableCellView {
     var nameLabel: NSTextField!
-    var enabledSwitch: NSSwitch!
+    var enabledSwitch: AccentSwitch!
     var versionLabel: NSTextField!
     var updateBtn: NSButton!
     var devLabel: NSTextField!
@@ -364,7 +364,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
         nameLabel = NSTextField(labelWithString: plugin.name)
         nameLabel.font = NSFont.systemFont(ofSize: NSFont.systemFontSize, weight: .bold)
 
-        enabledSwitch = NSSwitch()
+        enabledSwitch = AccentSwitch()
         enabledSwitch.state = plugin.enabled ? .on : .off
         enabledSwitch.controlSize = .mini
         enabledSwitch.target = self
@@ -450,7 +450,7 @@ extension PluginListView: NSTableViewDelegate, NSTableViewDataSource {
       }
     }
 
-    @objc func enabledSwitchAction(_ sender: NSSwitch) {
+    @objc func enabledSwitchAction(_ sender: AccentSwitch) {
       plugin.enabled = sender.state == .on
     }
 
@@ -552,7 +552,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
   private unowned let plugin: JavascriptPlugin
   private let okButton: NSButton
   private var webView: WKWebView!
-  private let segControl: NSSegmentedControl
+  private let segControl: AccentSegmentedControl
   private let loadingIndicator: NSProgressIndicator
   private let loadingFailedView: NSTextField
   private var currentTab: Tab = .about
@@ -575,7 +575,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     self.loadingIndicator = NSProgressIndicator()
     loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
 
-    self.segControl = NSSegmentedControl()
+    self.segControl = AccentSegmentedControl()
     segControl.translatesAutoresizingMaskIntoConstraints = false
 
     self.loadingFailedView = NSTextField(labelWithString: ui.localized(.text_FailedToLoadThePage))
@@ -660,7 +660,7 @@ fileprivate class PluginDetailsWindow: NSWindow {
     changeTab(segControl)
   }
 
-  @objc private func changeTab(_ sender: NSSegmentedControl) {
+  @objc private func changeTab(_ sender: AccentSegmentedControl) {
     guard sender.selectedSegment != currentTab.rawValue else { return }
     // save settings to disk on tab change; it's fast so no need to check current tab
     plugin.syncPreferences()

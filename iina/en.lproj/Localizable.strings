@@ -869,8 +869,8 @@
 "settings.themeMaterial.desc" = "Theme";
 "settings.themeMaterial.items.0" = "Dark";
 "settings.themeMaterial.items.2" = "Light";
-"settings.themeMaterial.items.4" = "Match System Appearance";
-"settings.themeMaterial.label" = "Appearance";
+"settings.themeMaterial.items.4" = "System";
+"settings.themeMaterial.label" = "Theme";
 "settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
 "settings.thumbnailWidth.label" = "Thumbnail width";
 "settings.togglePipByMinimizingWindow.label" = "Toggle Picture-in-Picture by minimizing/un-minimizing the window";
@@ -1148,3 +1148,30 @@
 
 /* Engine capability in subtitle settings. */
 "sidebar.secondary_style_engine_required" = "Independent Secondary subtitle styles require an mpv build with the secondary-style extension. This engine inherits the Primary style. Delay and position remain available.";
+
+/* Player accent color and settings restart confirmation. */
+"settings.useSystemAccentColor.label" = "Use System Accent Color";
+"settings.accentColorSource.label" = "Accent Color";
+"settings.accentColorSource.items.0" = "Default";
+"settings.accentColorSource.items.1" = "System Accent";
+"settings.accentColorSource.items.2" = "System Highlight";
+"settings.accentColorSource.items.3" = "Custom…";
+"settings.accentColorSource.help.0" = "Use the standard blue accent.";
+"settings.accentColorSource.help.1" = "Follow Color in macOS Appearance settings.";
+"settings.accentColorSource.help.2" = "Follow Text highlight color in macOS Appearance settings.";
+"settings.accentColorSource.help.3" = "Use a custom player color, also available to compatible plugins.";
+"settings.accentColorSource.custom.edit" = "Edit Custom Color…";
+"settings.accentColorSource.custom.help" = "Edit the custom player color (%@), also used by compatible plugins.";
+"settings.accentColorSource.custom.color" = "Color";
+"settings.accentColorSource.custom.title" = "Custom Accent Color";
+"settings.accentColorSource.custom.message" = "Choose a color, then click Apply Color.";
+"settings.accentColorSource.custom.apply" = "Apply Color";
+"settings.accentColorSource.custom.cancel" = "Cancel";
+"alert.system_accent_restart.title" = "Restart Required";
+"alert.system_accent_restart.message" = "Changes to the accent color take effect after restarting the app.";
+"alert.system_accent_restart.restart" = "Restart";
+"alert.system_accent_restart.later" = "Later";
+"alert.settings_restart.title" = "Restart Required";
+"alert.settings_restart.message" = "Restart the app to apply this change to all player windows.";
+"alert.settings_restart.restart" = "Restart";
+"alert.settings_restart.later" = "Later";

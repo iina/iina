@@ -105,7 +105,7 @@ final class TrackSettingsPopUp: SettingsTargetPopUp, NSMenuDelegate {
 }
 
 /// Subtitle settings target the two display roles, independently of source IDs.
-final class SubtitleRoleSelector: NSSegmentedControl {
+final class SubtitleRoleSelector: AccentSegmentedControl {
   var onChange: ((Bool) -> Void)?
   var isPrimary: Bool { selectedSegment == 0 }
 

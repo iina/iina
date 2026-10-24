@@ -180,12 +180,12 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     guard player.info.state.active else { return }
     let loopMode = player.getLoopMode()
     loopBtn.image = loopMode == .file ? .sf("repeat.1") : .sf("repeat")
-    loopBtn.contentTintColor = loopMode == .off ? nil : .controlAccentColor
+    loopBtn.contentTintColor = loopMode == .off ? nil : AppAccentColor.color
   }
 
   func updateShuffleBtnStatus() {
     guard player.info.state.active else { return }
-    shuffleBtn.contentTintColor = player.info.isShuffled ? .controlAccentColor : nil
+    shuffleBtn.contentTintColor = player.info.isShuffled ? AppAccentColor.color : nil
   }
 
   // MARK: - Total length
@@ -917,7 +917,9 @@ class PlaylistTrackCellView: NSTableCellView {
 }
 
 
-class PlaylistRowView: NSTableRowView {
+class PlaylistRowView: AccentTableRowView {
+  override var accentSelectionInset: NSSize { .zero }
+  override var accentSelectionRadius: CGFloat { 0 }
   var percentage: Double = 0
   private static let barHeight: CGFloat = 3
 
@@ -926,7 +928,7 @@ class PlaylistRowView: NSTableRowView {
     let width = bounds.width * CGFloat(percentage)
     guard width > 0 else { return }
     let rect = NSRect(x: 0, y: bounds.height - Self.barHeight, width: width, height: Self.barHeight)
-    let fillColor = NSColor.controlAccentColor.blended(withFraction: 0.2, of: .white) ?? .controlAccentColor
+    let fillColor = AppAccentColor.color.blended(withFraction: 0.2, of: .white) ?? AppAccentColor.color
     fillColor.setFill()
     NSBezierPath(rect: rect).fill()
   }

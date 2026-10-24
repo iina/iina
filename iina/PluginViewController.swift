@@ -203,7 +203,7 @@ class PluginViewController: SidebarViewController {
     switchToTab(currentTab)
   }
 
-  override func tabBtnSegmentControlAction(_ sender: NSSegmentedControl) {
+  override func tabBtnSegmentControlAction(_ sender: AccentSegmentedControl) {
     (sender as? ScrollSelectionControl)?.finishRoll()
     preparePluginMenu(pluginMenu)
     pluginMenu.minimumWidth = tabButtonsSegmentControl.frame.width

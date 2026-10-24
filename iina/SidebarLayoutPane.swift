@@ -22,7 +22,7 @@ class SidebarLayoutPane: SidebarScrollView {
 
   private var videoSettingsStack: NSStackView!
   private var themeSettingStack: NSStackView!
-  private var lockAspectSwitch: NSSwitch!
+  private var lockAspectSwitch: AccentSwitch!
   private var lockWindowAspectStack: NSStackView!
   private var dockedUIStack: NSStackView!
   private var oscLayoutSelector: OSCLayoutSelector!
@@ -326,9 +326,9 @@ fileprivate class OSCLayoutSelector: NSBox {
     
     var isActive: Bool = false {
       didSet {
-        animator().borderColor = isActive ? .controlAccentColor : .sidebarContainerBorder
+        animator().borderColor = isActive ? AppAccentColor.color : .sidebarContainerBorder
         animator().borderWidth = isActive ? 2 : 1
-        animator().fillColor = isActive ? .controlAccentColor.withAlphaComponent(0.1) :
+        animator().fillColor = isActive ? AppAccentColor.color.withAlphaComponent(0.1) :
           .gray.withAlphaComponent(0.1)
       }
     }
@@ -379,7 +379,7 @@ fileprivate class OSCLayoutSelector: NSBox {
 }
 
 
-fileprivate class ThemeSwitch: NSSegmentedControl {
+fileprivate class ThemeSwitch: AccentSegmentedControl {
   private let key: Preference.Key
   let prefObserver = Preference.Observer()
 
@@ -411,7 +411,7 @@ fileprivate class ThemeSwitch: NSSegmentedControl {
 }
 
 
-class SidebarPosSwitch: NSSegmentedControl {
+class SidebarPosSwitch: AccentSegmentedControl {
   private let key: Preference.Key
   let prefObserver = Preference.Observer()
 

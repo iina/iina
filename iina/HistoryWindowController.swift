@@ -62,7 +62,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var searchOption: SearchOption = .fullPath
 
   private var searchToolbarItem: NSSearchToolbarItem?
-  private var expandCollapseControl: NSSegmentedControl?
+  private var expandCollapseControl: AccentSegmentedControl?
 
   private var historyData: [String: [PlaybackHistory]] = [:]
   private var historyDataKeys: [String] = []
@@ -286,6 +286,10 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
   func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
     return item is String
+  }
+
+  func outlineView(_ outlineView: NSOutlineView, rowViewForItem item: Any) -> NSTableRowView? {
+    AccentTableRowView()
   }
 
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
@@ -602,7 +606,7 @@ extension HistoryWindowController: NSToolbarDelegate {
     case Self.groupBy:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
       item.label = NSLocalizedString("history_window.toolbar.group_by", comment: "Group By")
-      let segmentedControl = NSSegmentedControl(images: [.sf("calendar.badge.clock")!, .sf("folder")!], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
+      let segmentedControl = AccentSegmentedControl(images: [.sf("calendar.badge.clock")!, .sf("folder")!], trackingMode: .selectOne, target: self, action: #selector(groupByChangedAction(_:)))
       segmentedControl.setTag(SortOption.lastPlayed.rawValue, forSegment: 0)
       segmentedControl.setTag(SortOption.fileLocation.rawValue, forSegment: 1)
       segmentedControl.setToolTip(NSLocalizedString("history_window.toolbar.group_by.date_tooltip", comment: "Sort by Date"), forSegment: 0)
@@ -622,7 +626,7 @@ extension HistoryWindowController: NSToolbarDelegate {
     case Self.expandCollapse:
       let item = NSToolbarItem(itemIdentifier: itemIdentifier)
       item.label = NSLocalizedString("history_window.toolbar.expand_collapse", comment: "Expand/Collapse")
-      let segmentedControl = NSSegmentedControl(
+      let segmentedControl = AccentSegmentedControl(
         images: [.sf("chevron.down.circle")!, .sf("chevron.up.circle")!],
         trackingMode: .momentary,
         target: self,
@@ -782,7 +786,7 @@ class HistoryProgressCellView: NSTableCellView {
     indicator.maxValue = 1.0
     indicator.levelIndicatorStyle = .continuousCapacity
     indicator.controlSize = .mini
-    indicator.fillColor = .controlAccentColor
+    indicator.fillColor = AppAccentColor.color
     indicator.warningValue = 2
     indicator.criticalValue = 2
     let textField = NSTextField(labelWithString: "")

@@ -65,7 +65,7 @@ private final class ScrollSelectionGlass: NSGlassEffectView {
   override func hitTest(_ point: NSPoint) -> NSView? { nil }
 }
 
-class ScrollSelectionControl: NSSegmentedControl {
+class ScrollSelectionControl: AccentSegmentedControl {
   var switchSelection: ((Int) -> Void)?
   var animatesDigits = false
   /// When set, grow immediately and debounce shrinking by this interval.
@@ -288,7 +288,7 @@ class ScrollSelectionControl: NSSegmentedControl {
   }
 
   private func measureTitle(_ title: String) -> (size: NSSize, insets: NSEdgeInsets) {
-    let measure = NSSegmentedControl()
+    let measure = AccentSegmentedControl()
     measure.segmentCount = 1
     measure.trackingMode = .momentary
     measure.controlSize = controlSize

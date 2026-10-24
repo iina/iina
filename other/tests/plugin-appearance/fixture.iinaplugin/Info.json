@@ -1,0 +1,12 @@
+{
+  "name": "Accent API Fixture",
+  "identifier": "org.iina.tests.accent-api-fixture",
+  "version": "1.0.0",
+  "description": "Read-only IINA appearance API acceptance fixture.",
+  "author": { "name": "IINA" },
+  "entry": "main.js",
+  "globalEntry": "global.js",
+  "sidebarTab": { "name": "Accent API" },
+  "permissions": ["video-overlay"],
+  "preferenceDefaults": {}
+}

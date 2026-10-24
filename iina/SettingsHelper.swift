@@ -80,7 +80,7 @@ class SettingsUIHelper: UIHelper {
 
   func radioGroup(_ prefKey: Preference.Key, size: NSControl.ControlSize = .small, _ items: [(SettingsLocalization.Key, Int)]) -> [NSButton] {
     return items.map { key, value in
-      let button = NSButton(radioButtonWithTitle: localized(key), target: nil, action: nil)
+      let button = AccentButton(radioButtonWithTitle: localized(key), target: nil, action: nil)
       button.translatesAutoresizingMaskIntoConstraints = false
       button.controlSize = size
       button.bind(.value, to: UserDefaults.standard, withKeyPath: prefKey.rawValue, options: [

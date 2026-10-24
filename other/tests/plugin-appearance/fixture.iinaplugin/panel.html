@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accent API Fixture</title>
+<script>
+window.fixtureFirstTheme = window.iina?.appearance?.getTheme?.() || null;
+window.fixtureFirstCSS = getComputedStyle(document.documentElement).getPropertyValue('--iina-accent-color').trim();
+</script>
+<style>
+:root { color-scheme: light dark; }
+body { margin: 0; padding: 18px; font: 14px -apple-system, BlinkMacSystemFont, sans-serif; color: #222; }
+@media (prefers-color-scheme: dark) { body { color: #eee; } }
+h1 { font-size: 20px; margin: 0 0 10px; }
+p { line-height: 1.45; }
+.card { padding: 12px; margin: 12px 0; border: 1px solid #8885; border-radius: 9px; }
+.line { display: flex; justify-content: space-between; gap: 10px; margin: 7px 0; }
+code { font: 12px ui-monospace, SFMono-Regular, monospace; overflow-wrap: anywhere; }
+.swatch { width: 100%; height: 24px; border-radius: 5px; background: var(--iina-accent-color, #007AFF); }
+button { border: 0; border-radius: 6px; padding: 9px 12px; margin: 3px; font: inherit; cursor: pointer; }
+.accent { background: var(--iina-accent-color, #007AFF); color: var(--iina-accent-text-color, #fff); }
+.author { background: #AB47BC; color: #fff; }
+.secondary { background: #8882; color: inherit; }
+.small { font-size: 12px; opacity: .75; }
+</style></head><body>
+<h1>Accent API Fixture</h1>
+<p id="support">Checking read-only appearance API…</p>
+<div class="swatch"></div>
+<div class="card">
+  <div class="line"><span>Source</span><code id="source"></code></div>
+  <div class="line"><span>Accent</span><code id="accent"></code></div>
+  <div class="line"><span>Text</span><code id="text"></code></div>
+  <div class="line"><span>Version</span><code id="version"></code></div>
+  <div class="line"><span>Changes</span><code id="changes">0</code></div>
+  <div class="line"><span>First script</span><code id="first"></code></div>
+  <div class="line"><span>First CSS</span><code id="first-css"></code></div>
+  <div class="line"><span>Message bridge</span><code id="message"></code></div>
+</div>
+<button class="accent" id="action">Accent action</button>
+<button class="author" id="authored">Author purple</button>
+<button class="secondary" id="read">Get theme</button>
+<button class="secondary" id="reload">Reload page</button>
+<p id="clicks" class="small">Clicks: 0</p>
+<p class="small">Changing a pending source in Settings must leave these tokens unchanged until Restart. System colors update live when their current launch source follows macOS.</p>
+<script>
+(() => {
+  const fallback = { version: 1, source: 'defaultBlue', accentColor: '#007AFF', accentTextColor: '#FFFFFF' };
+  const appearance = window.iina?.appearance;
+  const supported = appearance && typeof appearance.getTheme === 'function';
+  let changes = 0, clicks = 0;
+  function render(theme) {
+    document.getElementById('source').textContent = theme.source;
+    document.getElementById('accent').textContent = theme.accentColor;
+    document.getElementById('text').textContent = theme.accentTextColor;
+    document.getElementById('version').textContent = theme.version;
+  }
+  document.getElementById('support').textContent = supported ? 'IINA appearance v1 is available.' : 'Stock IINA fallback: standard blue.';
+  document.getElementById('first').textContent = fixtureFirstTheme?.accentColor || '(no API)';
+  document.getElementById('first-css').textContent = fixtureFirstCSS || '(fallback)';
+  document.getElementById('message').textContent = typeof window.iina?.postMessage;
+  render(supported ? appearance.getTheme() : fallback);
+  if (supported) appearance.onChange(theme => {
+    render(theme);
+    document.getElementById('changes').textContent = ++changes;
+  });
+  document.getElementById('read').onclick = () => render(supported ? appearance.getTheme() : fallback);
+  document.getElementById('reload').onclick = () => location.reload();
+  for (const id of ['action', 'authored']) document.getElementById(id).onclick = () => {
+    document.getElementById('clicks').textContent = `Clicks: ${++clicks}`;
+  };
+})();
+</script></body></html>

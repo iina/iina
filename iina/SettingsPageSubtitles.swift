@@ -212,8 +212,13 @@ fileprivate class SButton: NSButton {
     return size
   }
 
+  override func viewDidChangeEffectiveAppearance() {
+    super.viewDidChangeEffectiveAppearance()
+    updateAppearance()
+  }
+
   private func updateAppearance() {
-    self.image = self.state == .on ? onImage?.tinted(.controlAccentColor) : onImage
+    self.image = self.state == .on ? onImage?.tinted(AppAccentColor.color) : onImage
   }
 
   override var state: NSControl.StateValue {
@@ -225,14 +230,14 @@ fileprivate class SButton: NSButton {
 
 
 fileprivate class SubtitlesASSView: SettingsAccessory.Base {
-  let segmentControl: NSSegmentedControl
+  let segmentControl: AccentSegmentedControl
 
   private let stackView: NSStackView
   private let primarySelection: SettingsAccessory.Selection
   private let secondarySelection: SettingsAccessory.Selection
 
   override init() {
-    self.segmentControl = NSSegmentedControl(
+    self.segmentControl = AccentSegmentedControl(
       labels: ["Primary", "Secondary"],
       trackingMode: .selectOne, target: nil, action: nil)
 
@@ -270,7 +275,7 @@ fileprivate class SubtitlesASSView: SettingsAccessory.Base {
     return super.makeView()
   }
 
-  @objc func subOverrideLevelSegmentedControlAction(_ sender: NSSegmentedControl) {
+  @objc func subOverrideLevelSegmentedControlAction(_ sender: AccentSegmentedControl) {
     if sender.selectedSegment == 0 {
       stackView.setVisibilityPriority(.mustHold, for: primarySelection.builtView!)
       stackView.setVisibilityPriority(.notVisible, for: secondarySelection.builtView!)

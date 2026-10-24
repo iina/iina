@@ -371,11 +371,11 @@ class SidebarViewController: NSViewController {
     mainWindow.sidebars.hide(sidebarType)
   }
 
-  func tabBtnSegmentControlAction(_ sender: NSSegmentedControl) {
+  func tabBtnSegmentControlAction(_ sender: AccentSegmentedControl) {
     switchToTab(withTag: sender.selectedTag())
   }
 
-  @objc private func tabBtnSegmentControlAction_(_ sender: NSSegmentedControl) {
+  @objc private func tabBtnSegmentControlAction_(_ sender: AccentSegmentedControl) {
     tabBtnSegmentControlAction(sender)
   }
 }
@@ -410,7 +410,7 @@ private final class SidebarSelectorGlass: NSGlassEffectView {
   override func hitTest(_ point: NSPoint) -> NSView? { nil }
 }
 
-class SidebarTabSelectorControl: NSSegmentedControl {
+class SidebarTabSelectorControl: AccentSegmentedControl {
   var horizontalScroll: ((NSEvent) -> Bool)?
 
   override func scrollWheel(with event: NSEvent) {

@@ -12,6 +12,7 @@ import Cocoa
 class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
   weak private var pluginInstance: JavascriptPluginInstance!
   var webView: WKWebView!
+  private var appearanceBridge: PluginAppearanceBridge?
 
   var isEnteringSimpleMode = false
   private var pendingStyle: String?
@@ -31,6 +32,7 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
   }
 
   deinit {
+    appearanceBridge?.invalidate()
     webView.configuration.userContentController.removeScriptMessageHandler(forName: "iina")
   }
 
@@ -46,6 +48,7 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
       config.userContentController.add(pluginInstance.apis!["standaloneWindow"] as! WKScriptMessageHandler, name: "iina")
 
       webView = WKWebView(frame: .zero, configuration: config)
+      appearanceBridge = PluginAppearanceBridge(webView: webView)
       if #available(macOS 13.3, *) {
         webView.isInspectable = true
       }
@@ -75,6 +78,7 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
   }
 
   func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    appearanceBridge?.prepareForNavigation()
     if let url = navigationAction.request.url, pluginInstance.canAccess(url: url) {
       decisionHandler(.cancel)
     } else {
@@ -83,6 +87,7 @@ class PluginStandaloneWindow: NSWindow, WKNavigationDelegate, WKUIDelegate {
   }
 
   func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    appearanceBridge?.didFinishNavigation()
     guard isEnteringSimpleMode else { return }
     isEnteringSimpleMode = false
     

@@ -813,6 +813,8 @@ class InteractiveModeController: NSObject, NSTextFieldDelegate, NSPopoverDelegat
   private var exitPreviewTransform: CropPreviewTransform?
   private let previewMask = CALayer()
   private var editorEventMonitor: Any?
+  private var nativeMenuObservers: [NSObjectProtocol] = []
+  private var trackingNativeMenus = Set<ObjectIdentifier>()
   private var isTrackingEditorMenu = false
   private var aspectPopover: NSPopover?
   private var entryOverlay: CropTransitionOverlay?
@@ -927,7 +929,7 @@ class InteractiveModeController: NSObject, NSTextFieldDelegate, NSPopoverDelegat
   }
 
   deinit {
-    if let editorEventMonitor { NSEvent.removeMonitor(editorEventMonitor) }
+    removeEditorEventMonitor()
   }
 
   var canEnter: Bool {
@@ -1084,10 +1086,7 @@ class InteractiveModeController: NSObject, NSTextFieldDelegate, NSPopoverDelegat
       mainWindow?.videoView.videoLayer.isAnimatingWindowResize = overlay.wasAnimatingWindowResize
       mainWindow?.videoView.videoLayer.isInCropTransition = false
     }
-    if !isActive, let editorEventMonitor {
-      NSEvent.removeMonitor(editorEventMonitor)
-      self.editorEventMonitor = nil
-    }
+    if !isActive { removeEditorEventMonitor() }
   }
 
   private func beginEditing(mode: Mode, cropFilter: MPVFilter?, cropDescription: String,
@@ -1166,15 +1165,35 @@ class InteractiveModeController: NSObject, NSTextFieldDelegate, NSPopoverDelegat
 
   private func installEditorEventMonitor() {
     guard editorEventMonitor == nil else { return }
+    for name in [NSMenu.didBeginTrackingNotification, NSMenu.didEndTrackingNotification] {
+      nativeMenuObservers.append(NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) { [weak self] notification in
+        guard let self, let menu = notification.object as? NSMenu else { return }
+        let identity = ObjectIdentifier(menu)
+        if notification.name == NSMenu.didBeginTrackingNotification {
+          trackingNativeMenus.insert(identity)
+        } else {
+          trackingNativeMenus.remove(identity)
+        }
+      })
+    }
     editorEventMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .flagsChanged]) { [weak self] event in
       guard let self else { return event }
       return handleEditorEvent(event)
     }
   }
 
+  private func removeEditorEventMonitor() {
+    if let editorEventMonitor { NSEvent.removeMonitor(editorEventMonitor) }
+    editorEventMonitor = nil
+    nativeMenuObservers.forEach { NotificationCenter.default.removeObserver($0) }
+    nativeMenuObservers.removeAll()
+    trackingNativeMenus.removeAll()
+  }
+
   func handleEditorEvent(_ event: NSEvent) -> NSEvent? {
     let parentModifierEvent = event.type == .flagsChanged && event.window == nil && mainWindow.window?.isKeyWindow == true
     guard event.window === mainWindow.window || parentModifierEvent else { return event }
+    guard trackingNativeMenus.isEmpty else { return event }
     let cancelsTransition = event.type == .keyDown && event.keyCode == 53 && !event.isARepeat &&
       event.modifierFlags.intersection([.command, .control, .option, .shift]).isEmpty
     if mainWindow.isCropTransitionInProgress, cancelsTransition {
@@ -1326,8 +1345,7 @@ class InteractiveModeController: NSObject, NSTextFieldDelegate, NSPopoverDelegat
     let player = mainWindow.player
     let wasCropping = currentMode == .crop
     let shouldResume = currentMode == .delogo && !isPausedPriorToInteractiveMode
-    if let editorEventMonitor { NSEvent.removeMonitor(editorEventMonitor) }
-    editorEventMonitor = nil
+    removeEditorEventMonitor()
     window.makeFirstResponder(nil)
     isActive = false
     currentMode = nil

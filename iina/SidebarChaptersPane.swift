@@ -13,16 +13,18 @@ class SidebarChaptersPane: NSView, SidebarPane {
   let prefObserver = Preference.Observer()
   weak var player: PlayerCore!
 
-  private var scrollView: NSScrollView!
+  private var scrollView: SidebarSectionScrollView!
   private var tableView: NSTableView!
 
-  var horizontalScroll: ((Bool) -> Void)?
+  var horizontalScroll: ((NSEvent) -> Bool)? {
+    didSet { scrollView?.horizontalScroll = horizontalScroll }
+  }
 
   init(player: PlayerCore) {
     self.player = player
     super.init(frame: .zero)
 
-    self.scrollView = NSScrollView()
+    self.scrollView = SidebarSectionScrollView()
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.hasHorizontalScroller = false
     scrollView.autohidesScrollers = true

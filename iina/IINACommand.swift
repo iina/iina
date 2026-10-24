@@ -10,6 +10,45 @@ import Foundation
 
 enum IINACommand: String {
 
+  case escape
+  case closeSidebars = "close-sidebars"
+  case showPanel = "show-panel"
+  case hidePanel = "hide-panel"
+  case togglePanel = "toggle-panel"
+  case nextPlugin = "next-plugin"
+  case previousPlugin = "previous-plugin"
+  case openPlugin = "open-plugin"
+  case showOSC = "show-osc"
+  case hideOSC = "hide-osc"
+  case toggleOSC = "toggle-osc"
+  case resetOSCPosition = "reset-osc-position"
+  case configureOSCPosition = "configure-osc-position"
+  case openCustomCrop = "open-custom-crop"
+
+  enum Panel: String, CaseIterable {
+    case settings, layout, video, audio, sub, playlist, chapters, plugins
+  }
+
+  var isInterfaceCommand: Bool {
+    switch self {
+    case .escape, .closeSidebars, .showPanel, .hidePanel, .togglePanel,
+         .nextPlugin, .previousPlugin, .openPlugin, .showOSC, .hideOSC,
+         .toggleOSC, .resetOSCPosition, .configureOSCPosition, .openCustomCrop: return true
+    default: return false
+    }
+  }
+
+  func acceptsArguments(_ arguments: [String]) -> Bool {
+    switch self {
+    case .showPanel, .hidePanel, .togglePanel:
+      return arguments.count == 1 && Panel(rawValue: arguments[0]) != nil
+    case .openPlugin:
+      return arguments.count == 1 && !arguments[0].isEmpty
+    default:
+      return arguments.isEmpty
+    }
+  }
+
   case togglePIP = "toggle-pip"
   case openFile = "open-file"
   case openURL = "open-url"

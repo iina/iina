@@ -23,13 +23,18 @@ class PluginViewController: SidebarViewController {
   }
 
   private lazy var allTabs_: [(id: String, name: String)] = getAllTabs()
+  private var initialPluginIdentifier = Preference.string(for: .lastSelectedPlugin)
+  private var windowSessionActive = false
 
   override var allTabs: [TabType] {
     [.pluginPlaceholder] + allTabs_.enumerated().map { (i, tuple) in
       TabType(i + 1, tuple.id, .puzzlepieceExtensionFill)
     }
   }
-  override var defaultTab: TabType { .pluginPlaceholder }
+  private var firstAvailableTab: TabType { allTabs.first { $0.tag != 0 } ?? .pluginPlaceholder }
+  override var defaultTab: TabType {
+    allTabs.first { $0.tag != 0 && $0.name == initialPluginIdentifier } ?? firstAvailableTab
+  }
   override var useTabView: Bool { false }
 
   private var pluginContentContainerView: NSView!
@@ -37,9 +42,39 @@ class PluginViewController: SidebarViewController {
 
   private var pluginMenu = NSMenu()
 
+  func beginWindowSession() {
+    guard !windowSessionActive else { return }
+    windowSessionActive = true
+    // Snapshot at window opening, even if the sidebar is loaded much later.
+    initialPluginIdentifier = Preference.string(for: .lastSelectedPlugin)
+    allTabs_ = getAllTabs()
+    currentTab = defaultTab
+    if isViewLoaded { updatePluginTabs() }
+  }
+
+  func endWindowSession() {
+    windowSessionActive = false
+  }
+
+  func selectPlugin(withIdentifier identifier: String) {
+    _ = view
+    guard let tab = allTabs.first(where: { $0.tag != 0 && $0.name == identifier }) else { return }
+    switchToTab(tab)
+    // Existing windows retain currentTab; only deliberate selection updates the shared preference.
+    Preference.set(identifier, for: .lastSelectedPlugin)
+  }
+
   private func getPluginIcon(isSmall: Bool) -> NSImage {
     let config = isSmall ? compactIconConfig : iconConfig
     return NSImage.sf("puzzlepiece.extension.fill", withConfiguration: config) ?? .puzzlepieceExtensionFill
+  }
+
+  override func makeTabSegmentControl() -> NSSegmentedControl {
+    let selector = ScrollSelectionControl()
+    selector.switchSelection = { [weak self] direction in
+      self?.switchPlugin(direction)
+    }
+    return selector
   }
 
   override func setupTabs() {
@@ -68,7 +103,7 @@ class PluginViewController: SidebarViewController {
     view.addSubview(bottomBorder)
     bottomBorder.padding(.horizontal).spacing(.bottom, to: pluginContentContainerView)
 
-    tabButtonsSegmentControl.segmentCount = 2
+    tabButtonsSegmentControl.segmentCount = 1
     tabButtonsSegmentControl.trackingMode = .momentary
 
     updatePluginTabs()
@@ -99,14 +134,12 @@ class PluginViewController: SidebarViewController {
         obj: tab.id
       )
     }
+    // Preserve selection by identifier when plugins are reordered or removed.
+    switchToTab(currentTab)
   }
 
   override func updateTabActiveStatus() {
-    let name = if currentTab.tag == 0 {
-      TabType.pluginPlaceholder.name
-    } else {
-      allTabs_[currentTab.tag - 1].name
-    }
+    let name = allTabs_.first { $0.id == currentTab.name }?.name ?? TabType.pluginPlaceholder.name
     tabButtonsSegmentControl.setLabel(name, forSegment: 0)
   }
 
@@ -123,15 +156,25 @@ class PluginViewController: SidebarViewController {
       tabButtonsSegmentControl.controlSize = .large
     }
     tabButtonsSegmentControl.setImage(getPluginIcon(isSmall: isCompact), forSegment: 0)
-    tabButtonsSegmentControl.setImage(.sf("chevron.down"), forSegment: 1)
 
     closeSidebarBtnSizeConstraint.constant =  isCompact ? 28 : 36
+  }
+
+  override func updateTabButtonLayout() {
+    super.updateTabButtonLayout()
+    guard let selector = tabButtonsSegmentControl as? ScrollSelectionControl else { return }
+    tabButtonsStackView.removeArrangedSubview(selector)
+    selector.removeFromSuperview()
+    let host = PluginSelectorHostView(selector, isLeading: isLeading)
+    tabButtonsStackView.insertArrangedSubview(host, at: isLeading ? 0 : 1)
+    tabButtonsStackView.distribution = .fill
+    tabButtonsStackView.spacing = 10
   }
 
   override func switchToTab(_ tab: SidebarViewController.TabType) {
     guard isViewLoaded else { return }
 
-    currentTab = tab
+    currentTab = allTabs.first { $0.tag != 0 && $0.name == tab.name } ?? firstAvailableTab
     installView()
     updateTabActiveStatus()
   }
@@ -153,36 +196,58 @@ class PluginViewController: SidebarViewController {
 
   func removePluginTab(withIdentifier identifier: String) {
     guard isViewLoaded else { return }
-    if currentTab.name == identifier {
-      pluginContentContainerView.subviews.forEach { $0.removeFromSuperview() }
-      switchToTab(.pluginPlaceholder)
-    }
-    if let item = pluginMenu.items
-      .first(where: { $0.representedObject as? String == identifier }) {
+    allTabs_.removeAll { $0.id == identifier }
+    if let item = pluginMenu.items.first(where: { $0.representedObject as? String == identifier }) {
       pluginMenu.removeItem(item)
     }
+    switchToTab(currentTab)
   }
 
   override func tabBtnSegmentControlAction(_ sender: NSSegmentedControl) {
+    (sender as? ScrollSelectionControl)?.finishRoll()
+    preparePluginMenu(pluginMenu)
     pluginMenu.minimumWidth = tabButtonsSegmentControl.frame.width
     let currentItem = pluginMenu.items.first(where: {
       currentTab.name == $0.representedObject as? String
     })
-    if sender.selectedSegment == 1 {
+    mainWindow.trackPluginMenu {
       pluginMenu.popUp(positioning: currentItem, at: .zero, in: sender)
     }
   }
 
+  func switchPlugin(_ direction: Int) {
+    _ = view
+    let tabs = allTabs.filter { $0.tag != 0 }
+    guard let index = PluginScrollNavigation.destination(
+      ids: tabs.map(\.name), currentID: currentTab.name, direction: direction
+    ) else { return }
+    guard let selector = tabButtonsSegmentControl as? ScrollSelectionControl else { return }
+    let previousTitle = selector.label(forSegment: 0) ?? TabType.pluginPlaceholder.name
+    selectPlugin(withIdentifier: tabs[index].name)
+    selector.roll(through: [previousTitle, selector.label(forSegment: 0) ?? ""], direction: direction)
+  }
+
   @objc private func menuItemAction(_ sender: NSMenuItem) {
-    guard let id = sender.representedObject as? String,
-          let tab = allTabs.first(where: { $0.name == id }) else { return }
-    switchToTab(tab)
+    guard let id = sender.representedObject as? String else { return }
+    selectPlugin(withIdentifier: id)
   }
 }
 
 
 extension PluginViewController: NSMenuDelegate {
   func menuWillOpen(_ menu: NSMenu) {
+    preparePluginMenu(menu)
+  }
+
+  private func preparePluginMenu(_ menu: NSMenu) {
+    let items = menu.items
+    if let current = items.firstIndex(where: { $0.representedObject as? String == currentTab.name }),
+       current > 0 {
+      menu.removeAllItems()
+      for item in items[current...] + items[..<current] {
+        menu.addItem(item)
+      }
+    }
     for item in menu.items {
       if currentTab.name == item.representedObject as? String {
         item.state = .on
@@ -190,5 +255,41 @@ extension PluginViewController: NSMenuDelegate {
         item.state = .off
       }
     }
+  }
+}
+
+
+struct PluginScrollNavigation {
+  static func destination(ids: [String], currentID: String, direction: Int) -> Int? {
+    guard !ids.isEmpty, direction != 0 else { return nil }
+    guard let current = ids.firstIndex(of: currentID) else { return 0 }
+    guard ids.count > 1 else { return nil }
+    return (current + (direction > 0 ? 1 : -1) + ids.count) % ids.count
+  }
+}
+
+private final class PluginSelectorHostView: NSView {
+  private let selector: ScrollSelectionControl
+
+  init(_ selector: ScrollSelectionControl, isLeading: Bool) {
+    self.selector = selector
+    super.init(frame: .zero)
+    translatesAutoresizingMaskIntoConstraints = false
+    addSubview(selector)
+    selector.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      isLeading ? selector.leadingAnchor.constraint(equalTo: leadingAnchor)
+        : selector.trailingAnchor.constraint(equalTo: trailingAnchor),
+      selector.centerYAnchor.constraint(equalTo: centerYAnchor),
+      isLeading ? selector.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor)
+        : selector.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor)
+    ])
+  }
+
+  required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+  override func layout() {
+    if bounds.width > 0 { selector.maximumWidth = bounds.width }
+    super.layout()
   }
 }

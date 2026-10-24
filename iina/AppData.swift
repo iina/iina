@@ -70,6 +70,7 @@ struct AppData {
   static let heightWhenNoVideo = 360
   static let sizeWhenNoVideo = NSSize(width: widthWhenNoVideo, height: heightWhenNoVideo)
   static let mainWindowMinSize = NSMakeSize(285, 120)
+  static let floatingOSCWindowMinSize = FloatingOSCMetrics.minimumWindowSize
 }
 
 

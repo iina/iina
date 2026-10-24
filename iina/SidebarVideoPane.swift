@@ -307,7 +307,8 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     )
     segmentControl.selectedSegment = 0
 
-    self.input = NSTextField()
+    self.input = SidebarInputField()
+    (input as? SidebarInputField)?.emptyValue = ""
     input.usesSingleLineMode = true
     input.size(width: 40, height: 24)
     input.target = self
@@ -340,12 +341,11 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
 
   @objc private func aspectRatioAction(_ sender: AnyObject) {
     if let textField = sender as? NSTextField {
-      let value = textField.stringValue
-      if value != "" {
-        segmentControl.setSelected(false, forSegment: segmentControl.selectedSegment)
-        player.setVideoAspect(value)
-        player.sendOSD(.aspect(value))
-      }
+      let value = textField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+      let aspect = value.isEmpty ? AppData.aspectsInPanel[0] : value
+      segmentControl.selectedSegment = value.isEmpty ? 0 : -1
+      player.setVideoAspect(aspect)
+      player.sendOSD(.aspect(aspect))
     } else if let segment = sender as? NSSegmentedControl {
       let aspect = AppData.aspectsInPanel[segment.selectedSegment]
       player.setVideoAspect(aspect)
@@ -528,6 +528,7 @@ fileprivate class SpeedView: SidebarSliderView {
   }
 
   override func setup() {
+    input.emptyValue = "1"
     slider.minValue = 0
     slider.maxValue = 24
     slider.numberOfTickMarks = 25
@@ -602,9 +603,6 @@ fileprivate class SpeedView: SidebarSliderView {
     /// Unfortunately, the text field has not applied validation/formatting to the number at this point.
     /// We will do that manually via `constrainSpeed`.
     updateSpeed(to: input.doubleValue)
-    if let window = input.window {
-      window.makeFirstResponder(window.contentView)
-    }
   }
 
   override func resetButtonAction() {

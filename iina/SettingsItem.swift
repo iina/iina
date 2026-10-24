@@ -529,6 +529,7 @@ struct SettingsItem {
 
   class PopupButton: General {
     private var popupButton: NSPopUpButton!
+    private var descriptionTag: Int?
     private var valueTypes: [(Int, String)] = []
     private var customBinding = false
     private var customBindingBlock: ((NSPopUpButton) -> Void)?
@@ -598,6 +599,13 @@ struct SettingsItem {
       return self
     }
 
+    func hasDescription(forTag tag: Int, content: SettingsLocalization.Key) -> Self {
+      hasDesc = true
+      descKey = content
+      descriptionTag = tag
+      return self
+    }
+
     func disableSubListOnTag(_ tag: Int) -> Self {
       self.tagForDisabled = tag
       return self
@@ -623,6 +631,7 @@ struct SettingsItem {
     }
 
     @objc func popupChanged(_ sender: NSPopUpButton) {
+      if let descriptionTag { desc.isHidden = sender.selectedTag() != descriptionTag }
       guard let detailView = renderedDetailView, let tag = tagForDisabled else { return }
 
       let enabled = sender.selectedTag() != tag
@@ -945,11 +954,49 @@ struct SettingsItem {
     private var trailingLabel: SettingsLocalization.Key?
     private var range: ClosedRange<Double>?
     private var allowsFloats = false
+    private var step: Double?
+    private var stepper: NSStepper?
+    private var cachedStepperValue: Double = 0
 
     private var customBindingInput = false
     private var customBindingBlockInput: ((NSTextField) -> Void)?
     private var customBindingSwitch = false
     private var customBindingBlockSwitch: ((NSSwitch) -> Void)?
+
+    func step(_ increment: Double) -> Self {
+      precondition(increment > 0)
+      step = increment
+      return self
+    }
+
+    @objc private func stepperValueChanged(_ sender: NSStepper) {
+      let increment = cachedStepperValue < sender.doubleValue ? sender.increment : -sender.increment
+      let value = textField.doubleValue + increment
+      let newValue = range.map { value.clamped(to: $0) } ?? value
+      textField.doubleValue = newValue
+      if let info = textField.infoForBinding(.value),
+         let observedObject = info[.observedObject] as? NSObject,
+         let keyPath = info[.observedKeyPath] as? String {
+        observedObject.setValue(newValue, forKeyPath: keyPath)
+      }
+      cachedStepperValue = sender.doubleValue
+    }
+
+    private class StepperWithSwitch: NSStepper {
+      private let nsSwitch: NSSwitch
+
+      override var isEnabled: Bool {
+        get { super.isEnabled }
+        set { super.isEnabled = newValue && nsSwitch.state == .on }
+      }
+
+      init(_ nsSwitch: NSSwitch) {
+        self.nsSwitch = nsSwitch
+        super.init(frame: .zero)
+      }
+
+      required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    }
 
     func range(_ range: ClosedRange<Double>, allowsFloats: Bool = false) -> Self {
       self.range = range
@@ -977,12 +1024,28 @@ struct SettingsItem {
         formatter.numberStyle = .decimal
         textField.formatter = formatter
       }
+      var inputView: NSView = textField
+      if let step {
+        let stepper = StepperWithSwitch(nsSwitch)
+        stepper.increment = step
+        stepper.minValue = -1e10
+        stepper.maxValue = 1e10
+        stepper.valueWraps = false
+        stepper.controlSize = controlSize
+        stepper.target = self
+        stepper.action = #selector(stepperValueChanged(_:))
+        cachedStepperValue = stepper.doubleValue
+        self.stepper = stepper
+        let stack = NSStackView(views: [textField, stepper])
+        stack.spacing = 2
+        inputView = stack
+      }
       if let trailingLabel {
         let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
-        return [textField, label, nsSwitch]
+        return [inputView, label, nsSwitch]
       } else {
-        return [textField, nsSwitch]
+        return [inputView, nsSwitch]
       }
     }
 
@@ -1033,6 +1096,7 @@ struct SettingsItem {
     @objc func switchChanged(_ sender: NSSwitch) {
       let enableSubControls = sender.state == .on
       setSubControls(textField, enabled: enableSubControls)
+      if let stepper { setSubControls(stepper, enabled: enableSubControls) }
       if let detailView = renderedDetailView {
         setSubControls(detailView, enabled: enableSubControls)
       }

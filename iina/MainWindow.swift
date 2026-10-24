@@ -10,6 +10,24 @@ import Cocoa
 
 class MainWindow: CommonWindow {
   var forceKeyAndMain = false
+  override func sendEvent(_ event: NSEvent) {
+    guard let controller = windowController as? MainWindowController, controller.isWindowLoaded else {
+      super.sendEvent(event)
+      return
+    }
+    if event.type == .leftMouseDown { controller.cancelWindowDrag() }
+    defer {
+      if event.type == .leftMouseUp {
+        // OSC mouseUp must finish its drag before a background click can hide it.
+        _ = controller.sidebars.handlePanelMouseEvent(event)
+        controller.cancelWindowDrag()
+      }
+    }
+    if event.type == .keyDown, controller.handleDefaultEscape(with: event) { return }
+    if event.type != .leftMouseUp, controller.sidebars.handlePanelMouseEvent(event) { return }
+    if controller.titleBarView?.handleBackgroundMouseEvent(event) == true { return }
+    super.sendEvent(event)
+  }
 
   override func keyDown(with event: NSEvent) {
     if menu?.performKeyEquivalent(with: event) == true {

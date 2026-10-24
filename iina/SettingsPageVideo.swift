@@ -32,6 +32,50 @@ class SettingsPageVideo: SettingsPage {
         sectionLiveText()
       }
       sectionColor()
+      sectionVR()
+    }
+  }
+
+  private func sectionVR() -> SettingsSection {
+    return section {
+      SettingsList(title: .text_VRVideo) {
+        SettingsItem.Switch()
+          .image(name: ["view.3d", "cube"])
+          .bindTo(.vr2dAutoDetect)
+          .hasDescription()
+        SettingsItem.Switch()
+          .image(name: "questionmark.circle")
+          .bindTo(.vr2dAggressiveDetection)
+          .hasDescription()
+      }
+
+      SettingsList {
+        SettingsItem.General(title: .vr2dEyeLabel)
+          .image(name: "eye")
+          .withDetailView(
+            SettingsAccessory.Selection()
+              .bindTo(.vr2dEye, ofType: Preference.VR2DEyeOption.self)
+          )
+      }
+
+      SettingsList(title: .text_LookingAround) {
+        SettingsItem.Input()
+          .image(name: "field.of.view.wide")
+          .bindTo(.vr2dStartHorizontalFov)
+          .trailingLabel(.text_degrees)
+          .hasDescription()
+        SettingsItem.Input()
+          .image(name: "hand.draw")
+          .bindTo(.vr2dDragSensitivity)
+          .hasDescription()
+        SettingsItem.Switch()
+          .image(name: "arrow.left.arrow.right")
+          .bindTo(.vr2dInvertDrag)
+        SettingsItem.Input()
+          .image(name: "keyboard")
+          .bindTo(.vr2dKeyboardStep)
+          .trailingLabel(.text_degrees)
+      }
     }
   }
 

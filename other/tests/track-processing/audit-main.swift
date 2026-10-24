@@ -161,4 +161,78 @@ if CommandLine.arguments.count > 1 {
     .appendingPathComponent("external-audio-graphs.json")
   try! JSONSerialization.data(withJSONObject: externalImportGraphs, options: [.prettyPrinted, .sortedKeys]).write(to: output)
 }
+for target in [0, 1] {
+  let blockedOpen = PlayerCore()
+  blockedOpen.scopedTrackSettings.setTarget(target, for: .videoGeometry)
+  blockedOpen.mainWindow.interactiveMode.ownerAvailable = false
+  blockedOpen.mpv.strings["vf"] = "@output:unrelated"
+  blockedOpen.mpv.strings["video-aspect-override"] = "4:3"
+  let engineBeforeOpen = blockedOpen.mpv.strings
+  let selectionBeforeOpen = blockedOpen.mpv.integers
+  for _ in 0..<3 { blockedOpen.openScopedCustomCrop() }
+  check(blockedOpen.scopedCropPreview == nil && !blockedOpen.mainWindow.interactiveMode.isActive &&
+        blockedOpen.mainWindow.preparedWindowReferences == 0 && blockedOpen.mpv.strings == engineBeforeOpen &&
+        blockedOpen.mpv.integers == selectionBeforeOpen && blockedOpen.mpv.graphWrites == 0,
+        "rejected Output/source Crop entry cannot prepare layout or alter filters, graph or selection")
+}
+let allowedSourceOpen = PlayerCore()
+allowedSourceOpen.scopedTrackSettings.setTarget(1, for: .videoGeometry)
+allowedSourceOpen.openScopedCustomCrop()
+check(allowedSourceOpen.mainWindow.interactiveMode.isActive && allowedSourceOpen.scopedCropPreview?.id == 1,
+      "ordinary source Crop still prepares the preview and enters the editor")
+check(allowedSourceOpen.finishScopedCustomCrop(), "ordinary source Crop can restore its preview")
+
+let ownedCrop = PlayerCore()
+_ = ownedCrop.setVideoTracks([2, 3], order: [3, 2, 1])
+var ownedPreview = PlayerCore.CropPreview(id: 1)
+ownedPreview.activeVideo = [3, 2]; ownedPreview.order = [3, 2, 1]
+ownedCrop.scopedCropPreview = ownedPreview
+ownedCrop.mainWindow.interactiveMode.isActive = true
+check(ownedCrop.refreshTrackProcessing(.video), "internal source Crop refresh remains available while editing")
+let ownedOrder = ownedCrop.info.videoTrackOrder
+let ownedGraph = ownedCrop.mpv.getString("lavfi-complex")
+let ownedNativeSelections = ownedCrop.mpv.integers
+let ownedGraphWrites = ownedCrop.mpv.graphWrites
+for _ in 0..<3 {
+  check(!ownedCrop.setVideoTracks([2], order: [2, 1, 3]) && !ownedCrop.setVideoTracks([]),
+        "public video selection rejects replacement and None during source Crop")
+  ownedCrop.cycleVideoTrack()
+  ownedCrop.setTrack(2, forType: .video)
+  ownedCrop.loadExternalVideoFile(URL(fileURLWithPath: "/editor-video.mkv"))
+}
+check(ownedCrop.info.videoTrackOrder == ownedOrder && ownedCrop.mpv.getString("lavfi-complex") == ownedGraph &&
+      ownedCrop.mpv.integers == ownedNativeSelections && ownedCrop.mpv.graphWrites == ownedGraphWrites &&
+      ownedCrop.info.activeTrackIDs(.video) == [1] && ownedCrop.mpv.videoAdditions == 0,
+      "reentrant Cycle/plugin selection cannot mutate Crop graph, source order or native membership")
+check(ownedCrop.finishScopedCustomCrop() && ownedCrop.info.activeTrackIDs(.video) == [2, 3],
+      "internal Crop exit restores the saved composition despite public selection rejection")
+ownedCrop.mainWindow.interactiveMode.isActive = false
+check(ownedCrop.setVideoTracks([2]) && ownedCrop.info.activeTrackIDs(.video) == [2],
+      "normal public video selection resumes after Crop ownership ends")
+ownedCrop.loadExternalVideoFile(URL(fileURLWithPath: "/ordinary-video.mkv"))
+check(ownedCrop.mpv.videoAdditions == 1, "external video loading resumes after Crop ownership ends")
+ownedCrop.info.state.active = false
+ownedCrop.loadExternalVideoFile(URL(fileURLWithPath: "/stopped-video.mkv"))
+check(ownedCrop.mpv.videoAdditions == 1, "stopped playback cannot attach an external video")
+let unavailableSelection = PlayerCore()
+_ = unavailableSelection.setAudioTracks([2, 3])
+_ = unavailableSelection.setVideoTracks([2, 3], order: [3, 2, 1])
+unavailableSelection.mpv.strings["lavfi-complex"] = "[vid1]null[vo]"
+unavailableSelection.info.state.active = false
+let unavailableAudio = unavailableSelection.info.mixedAudioTrackIDs
+let unavailableVideo = unavailableSelection.info.layeredVideoTrackIDs
+let unavailableOrder = unavailableSelection.info.videoTrackOrder
+let unavailableNative = unavailableSelection.mpv.integers
+let unavailableWrites = unavailableSelection.mpv.graphWrites
+for _ in 0..<3 {
+  check(!unavailableSelection.setAudioTracks([1]) &&
+        !unavailableSelection.setVideoTracks([1], order: [1, 2, 3]),
+        "unavailable playback rejects direct source selectors")
+}
+check(unavailableSelection.info.mixedAudioTrackIDs == unavailableAudio &&
+      unavailableSelection.info.layeredVideoTrackIDs == unavailableVideo &&
+      unavailableSelection.info.videoTrackOrder == unavailableOrder &&
+      unavailableSelection.mpv.integers == unavailableNative &&
+      unavailableSelection.mpv.graphWrites == unavailableWrites,
+      "unavailable selectors cannot reconcile a foreign graph or mutate cached composition bookkeeping")
 print("Audit correction regressions complete: \(checks) total checks.")

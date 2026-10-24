@@ -242,7 +242,7 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
     case "sidebar":
       return window.sidebars.isShowing(.settings) ? window.sidebars.quickSettingView.currentTab.name : NSNull()
     case "screens":
-      let current = window.window!.screen!
+      let current = window.window?.screen
       let main = NSScreen.main
       let screens = NSScreen.screens.map { screen -> [String: Any] in
         let frame = [
@@ -268,7 +268,7 @@ fileprivate class WindowAPI: JavascriptAPI, CoreSubAPIExportable {
     case "frame":
       guard let val = value as? [String: Double],
         let x = val["x"], let y = val["y"], let w = val["width"], let h = val["height"],
-        w > 0, h > 0
+        w > 0, h > 0, [x, y, w, h].allSatisfy(\.isFinite)
       else {
         log("core.window.frame: Invalid frame", level: .error)
         return
@@ -394,9 +394,6 @@ fileprivate class AudioAPI: TrackAPI, CoreSubAPIExportable {
     }
   }
 
-//  func loadTrack(_ track: Any) {
-//    _loadTrack(track)
-//  }
 }
 
 

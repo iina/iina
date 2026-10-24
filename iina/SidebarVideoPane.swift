@@ -589,7 +589,6 @@ fileprivate class SpeedView: SidebarSliderView {
 
   private func updateSpeed(to inputSpeed: Double) {
     let newSpeed = constrainSpeed(inputSpeed)
-    print("newSpeed: \(newSpeed)")
     slider.doubleValue = convertSpeedToSliderValue(newSpeed)
     input.doubleValue = newSpeed
     if player.info.playSpeed != newSpeed {

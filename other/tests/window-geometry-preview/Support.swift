@@ -1,4 +1,5 @@
 import Cocoa
+typealias AccentSwitch = NSButton
 
 struct LayoutValue {
   let value: CGFloat

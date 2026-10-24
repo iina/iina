@@ -1,4 +1,5 @@
 import Cocoa
+typealias AccentSegmentedControl = NSSegmentedControl
 
 final class ResetFilter {let label:String;init(_ label:String){self.label=label}}
 typealias PlayerCore=PlayerFixture

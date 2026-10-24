@@ -1,4 +1,5 @@
 import Cocoa
+typealias AccentSegmentedControl = NSSegmentedControl
 
 // Compile the production AspectRatioView with only unrelated player/layout stubs.
 struct TestUI {

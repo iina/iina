@@ -1,4 +1,9 @@
 import Cocoa
+typealias AccentSegmentedControl = NSSegmentedControl
+enum AppAccentColor {
+  static var color: NSColor { .controlAccentColor }
+  static var textColor: NSColor { .selectedControlTextColor }
+}
 extension Notification.Name { static let iinaTrackSettingsChanged = Self("scopedSettings") }
 
 struct Preference {

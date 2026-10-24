@@ -1,4 +1,5 @@
 import Cocoa
+typealias AccentSegmentedControl = NSSegmentedControl
 
 struct TestUI {
   func localized(_ key: String) -> String { key }

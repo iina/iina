@@ -14,7 +14,7 @@ let views = item.getValueViews()
 let stack = views[0] as! NSStackView
 let field = stack.arrangedSubviews[0] as! NSTextField
 let stepper = stack.arrangedSubviews[1] as! NSStepper
-let toggle = views[2] as! NSSwitch
+let toggle = views[2] as! AccentSwitch
 item.initBinding()
 item.switchChanged(toggle)
 check(!field.isEnabled && !stepper.isEnabled, "off disables both input and stepper")

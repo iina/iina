@@ -1,5 +1,9 @@
 import AppKit
 import QuartzCore
+enum AppRestartSession {
+  static func seekStarted(_ player: Player) {}
+  static func playbackRestarted(_ player: Player) {}
+}
 
 final class MPVFilter { var label: String? }
 enum Constants { enum FilterName { static let crop = "crop" }; enum String { static let videoTimePlaceholder = "--:--" } }

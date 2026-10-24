@@ -1,4 +1,5 @@
 import Cocoa
+typealias AccentSwitch = NSButton
 struct SettingsLocalization { enum Key { case seconds } }
 struct Preference { enum Key: String { case testInput, testSwitch } }
 struct TestUI { func localized(_ key: SettingsLocalization.Key) -> String { "s" } }

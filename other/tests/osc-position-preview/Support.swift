@@ -1,4 +1,6 @@
 import Cocoa
+typealias AccentSwitch = NSButton
+typealias AccentSlider = NSSlider
 
 // Compile the production sheet, UI helper and constraint helper together.
 // Only unrelated application services/preferences and image tinting are stubbed.

@@ -12,6 +12,7 @@ import Cocoa
 class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
 
   unowned var player: PlayerCore
+  private var isOpeningCustomCrop = false
 
   init(playerCore: PlayerCore) {
     self.player = playerCore
@@ -211,13 +212,21 @@ extension MainMenuActionHandler {
     }
   }
 
+  func openCustomCrop() {
+    let isDismissingSidebar = player.mainWindow.sidebars.sideBars.contains { $0.animationState == .willHide }
+    guard !(isOpeningCustomCrop && isDismissingSidebar), !player.mainWindow.interactiveMode.isActive else { return }
+    isOpeningCustomCrop = true
+    player.mainWindow.sidebars.hideAllSideBars { [weak self] in
+      guard let self else { return }
+      isOpeningCustomCrop = false
+      player.openScopedCustomCrop()
+    }
+  }
+
   @objc func menuChangeCrop(_ sender: NSMenuItem) {
     if let cropStr = sender.representedObject as? String {
       if cropStr == "Custom" {
-        player.mainWindow.sidebars.hideAllSideBars {
-          self.player.mainWindow.interactiveMode
-            .enter(mode: .crop, selectWholeVideoByDefault: true)
-        }
+        openCustomCrop()
         return
       }
       player.setCrop(fromString: cropStr)
@@ -462,8 +471,8 @@ extension MainMenuActionHandler {
 
   @objc func menuCycleTrack(_ sender: NSMenuItem) {
     switch sender.tag {
-    case 0: player.mpv.command(.cycle, args: ["video"])
-    case 1: player.mpv.command(.cycle, args: ["audio"])
+    case 0: player.cycleVideoTrack()
+    case 1: player.cycleAudioTrack()
     case 2: player.mpv.command(.cycle, args: ["sub"])
     default: break
     }

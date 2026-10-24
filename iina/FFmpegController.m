@@ -77,6 +77,7 @@ return -1;\
   return self;
 }
 
+
 // MARK: - Generating Thumbnails
 
 - (void)generateThumbnailForFile:(NSString *)file
@@ -344,6 +345,25 @@ return -1;\
 }
 
 // MARK: - Probing Video
+
++ (BOOL)hasMultipleVideoTracksInMatroskaFile:(NSString *)file
+{
+  AVFormatContext *context = NULL;
+  if (avformat_open_input(&context, file.fileSystemRepresentation, NULL, NULL) < 0)
+    return NO;
+  int videos = 0;
+  if (context->iformat && strstr(context->iformat->name, "matroska")) {
+    for (unsigned int i = 0; i < context->nb_streams; i++) {
+      AVStream *stream = context->streams[i];
+      if (stream->codecpar->codec_type == AVMEDIA_TYPE_VIDEO &&
+          !(stream->disposition & AV_DISPOSITION_ATTACHED_PIC))
+        videos++;
+    }
+  }
+  avformat_close_input(&context);
+  return videos > 1;
+}
+
 
 + (NSDictionary *)probeVideoInfoForFile:(nonnull NSString *)file
 {

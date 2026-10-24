@@ -41,14 +41,12 @@ class Aspect: NSObject {
   }
 
   init?(string: String) {
-    if Regex.aspect.matches(string) {
-      let wh = string.components(separatedBy: ":")
-      if let cropW = Float(wh[0]), let cropH = Float(wh[1]) {
-        self.size = NSMakeSize(CGFloat(cropW), CGFloat(cropH))
-      }
-    } else {
-      return nil
-    }
+    guard Regex.aspect.matches(string) else { return nil }
+    let wh = string.components(separatedBy: ":")
+    guard wh.count == 2, let cropW = Double(wh[0]), let cropH = Double(wh[1]),
+          cropW.isFinite, cropH.isFinite, cropW > 0, cropH > 0,
+          (cropW / cropH).isFinite, cropW / cropH > 0 else { return nil }
+    self.size = NSSize(width: cropW, height: cropH)
   }
 
 }

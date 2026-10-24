@@ -57,6 +57,9 @@ struct Preference {
     /** Soft volume (int, 0 - 100)*/
     static let softVolume = Key("softVolume")
 
+    /** Saved display-aspect ratios ([Double]). */
+    static let customCropAspectPresets = Key("customCropAspectPresets")
+
     /** Pause st first (pause) (bool) */
     static let pauseWhenOpen = Key("pauseWhenOpen")
 
@@ -113,14 +116,12 @@ struct Preference {
 
     // UI
 
-    /** Horizontal position of control bar. (float, 0 - 1) */
-    static let controlBarPositionHorizontal = Key("controlBarPositionHorizontal")
-
-    /** Horizontal position of control bar. In percentage from bottom. (float, 0 - 1) */
-    static let controlBarPositionVertical = Key("controlBarPositionVertical")
-
-    /** Whether control bar stick to center when dragging. (bool) */
-    static let controlBarStickToCenter = Key("controlBarStickToCenter")
+    /** Canonical versioned per-axis unit, anchor and value dictionaries. */
+    static let controlBarDefaultPlacement = Key("controlBarDefaultPlacement")
+    static let controlBarDefaultPositionIsCustomized = Key("controlBarDefaultPositionIsCustomized")
+    /** Legacy percentages (0...100) of the OSC's available travel. */
+    static let controlBarDefaultPositionHorizontal = Key("controlBarDefaultPositionHorizontalTravel")
+    static let controlBarDefaultPositionVertical = Key("controlBarDefaultPositionVerticalTravel")
 
     /** Timeout for auto hiding control bar (float) */
     static let controlBarAutoHideTimeout = Key("controlBarAutoHideTimeout")
@@ -142,6 +143,7 @@ struct Preference {
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
     static let initialWindowSizePosition = Key("initialWindowSizePosition")
+    static let initialWindowGeometryConfiguration = Key("initialWindowGeometryConfiguration")
     static let resizeWindowTiming = Key("resizeWindowTiming")
     static let resizeWindowOption = Key("resizeWindowOption")
 
@@ -179,6 +181,7 @@ struct Preference {
     static let sidebarSettingsDisplayAtLeading = Key("sidebarSettingsDisplayAtLeading")
     static let sidebarPlaylistDisplayAtLeading = Key("sidebarPlaylistDisplayAtLeading")
     static let sidebarPluginsDisplayAtLeading = Key("sidebarPluginsDisplayAtLeading")
+    static let lastSelectedPlugin = Key("lastSelectedPlugin")
 
     // Codec
 
@@ -283,6 +286,7 @@ struct Preference {
     static let relativeSeekAmount = Key("relativeSeekAmount")
 
     static let arrowButtonAction = Key("arrowBtnAction")
+    static let oscArrowSeekSeconds = Key("oscArrowSeekSeconds")
     /** (1~4) */
     static let volumeScrollAmount = Key("volumeScrollAmount")
     static let playbackSpeedScrollAmount = Key("playbackSpeedScrollAmount")
@@ -290,6 +294,9 @@ struct Preference {
     static let horizontalScrollAction = Key("horizontalScrollAction")
 
     static let videoViewAcceptsFirstMouse = Key("videoViewAcceptsFirstMouse")
+    static let oscLeftClickAction = Key("oscLeftClickAction")
+    static let oscRightClickAction = Key("oscRightClickAction")
+    static let oscDoubleClickAction = Key("oscDoubleClickAction")
     static let singleClickAction = Key("singleClickAction")
     static let doubleClickAction = Key("doubleClickAction")
     static let rightClickAction = Key("rightClickAction")
@@ -508,6 +515,28 @@ struct Preference {
       case .togglePIP: "togglePIP"
       case .abLoop: "abLoop"
       case .resetSpeed: "resetSpeed"
+      }
+    }
+  }
+
+  enum OSCClickAction: Int, InitializingFromKey, CaseIterable {
+    case none = 0
+    case hideOSC
+    case resetPosition
+    case bringToFront
+
+    static var defaultValue = OSCClickAction.none
+
+    init?(key: Key) {
+      self.init(rawValue: Preference.integer(for: key))
+    }
+
+    var description: String {
+      switch self {
+      case .none: "none"
+      case .hideOSC: "hideOSC"
+      case .resetPosition: "resetPosition"
+      case .bringToFront: "bringToFront"
       }
     }
   }
@@ -1065,9 +1094,9 @@ struct Preference {
     .recordPlaybackHistory: true,
     .recordRecentFiles: true,
     .trackAllFilesInRecentOpenMenu: true,
-    .controlBarPositionHorizontal: Float(0.5),
-    .controlBarPositionVertical: Float(0.1),
-    .controlBarStickToCenter: true,
+    .controlBarDefaultPositionHorizontal: Float(50),
+    .controlBarDefaultPositionVertical: Float(100),
+    .controlBarDefaultPositionIsCustomized: false,
     .controlBarAutoHideTimeout: Float(2.5),
     .enableControlBarAutoHide: true,
     .controlBarToolbarButtons: [ToolBarButton.plugins.rawValue, ToolBarButton.pip.rawValue, ToolBarButton.playlist.rawValue, ToolBarButton.settings.rawValue],
@@ -1089,7 +1118,9 @@ struct Preference {
     .osdAutoHideTimeout: Float(1),
     .osdTextSize: Float(20),
     .softVolume: 100,
+    .customCropAspectPresets: [Double](),
     .arrowButtonAction: ArrowButtonAction.speed.rawValue,
+    .oscArrowSeekSeconds: 10,
     .pauseWhenOpen: false,
     .fullScreenWhenOpen: false,
     .useLegacyFullScreen: false,
@@ -1118,6 +1149,7 @@ struct Preference {
 
     .usePhysicalResolution: true,
     .initialWindowSizePosition: "",
+    .initialWindowGeometryConfiguration: "",
     .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
     .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
     .showRemainingTime: false,
@@ -1249,6 +1281,9 @@ struct Preference {
     .verticalScrollAction: ScrollAction.volume.rawValue,
     .horizontalScrollAction: ScrollAction.seek.rawValue,
     .videoViewAcceptsFirstMouse: false,
+    .oscLeftClickAction: OSCClickAction.hideOSC.rawValue,
+    .oscRightClickAction: OSCClickAction.bringToFront.rawValue,
+    .oscDoubleClickAction: OSCClickAction.resetPosition.rawValue,
     .singleClickAction: MouseClickAction.hideOSC.rawValue,
     .doubleClickAction: MouseClickAction.fullscreen.rawValue,
     .rightClickAction: MouseClickAction.pause.rawValue,
@@ -1283,6 +1318,17 @@ struct Preference {
 
 
   static private let ud = UserDefaults.standard
+
+  /// Registered defaults do not count as an explicitly saved legacy position.
+  static var isFloatingOSCDefaultPositionCustomized: Bool {
+    guard let domain = Bundle.main.bundleIdentifier,
+          let saved = ud.persistentDomain(forName: domain) else { return false }
+    if saved[Key.controlBarDefaultPositionIsCustomized.rawValue] != nil {
+      return bool(for: .controlBarDefaultPositionIsCustomized)
+    }
+    return saved[Key.controlBarDefaultPositionHorizontal.rawValue] != nil ||
+      saved[Key.controlBarDefaultPositionVertical.rawValue] != nil
+  }
 
   static func object(for key: Key) -> Any? { ud.object(forKey: key.rawValue) }
 
@@ -1338,8 +1384,6 @@ struct Preference {
   /// These log messages are intended to be used by developers, not the user, so not all settings that have been changed are logged,
   /// ones not of interest to developers are not logged:
   /// - assrtToken Sensitive information
-  /// - controlBarPositionHorizontal Not of interest, frequently changed
-  /// - controlBarPositionVertical Not of interest, frequently changed
   /// - musicModeShowAlbumArt Not of interest
   /// - musicModeShowPlaylist Not of interest
   /// - openSubUsername Sensitive information
@@ -1371,7 +1415,7 @@ struct Preference {
   static func logSettings() {
     guard Logger.isEmitting(.debug) else { return }
     // See the list in this method's documentation comment for why these settings are not logged.
-    let doNotLog: [Key] = [.assrtToken, .controlBarPositionHorizontal, .controlBarPositionVertical,
+    let doNotLog: [Key] = [.assrtToken,
       .musicModeShowAlbumArt, .musicModeShowPlaylist, .openSubUsername, .leadingSidebarWidth,
       .trailingSidebarWidth, .recentDocuments, .savedAudioFilters,
       .savedVideoFilters, .softVolume, .watchProperties]
@@ -1440,7 +1484,7 @@ struct Preference {
            .blackOutMonitor,
            .cachePauseInitial,
            .compactUI,
-           .controlBarStickToCenter,
+           .controlBarDefaultPositionIsCustomized,
            .disableAnimations,
            .disableOSDFileStartMsg,
            .disableOSDPauseResumeMsgs,
@@ -1547,8 +1591,8 @@ struct Preference {
         valueAsString = String(describing: Preference.enum(for: key) as DefaultRepeatMode)
       case .cachePauseWait,
            .controlBarAutoHideTimeout,
-           .controlBarPositionHorizontal,
-           .controlBarPositionVertical,
+           .controlBarDefaultPositionHorizontal,
+           .controlBarDefaultPositionVertical,
            .osdAutoHideTimeout,
            .osdTextSize,
            .subBlur,

@@ -57,8 +57,21 @@ class Titlebar: NSView {
   private var oscContainer: NSView!
   private var oscLeadingConstraint: NSLayoutConstraint!
 
-  // Only set on macOS 15 and below
-  private var titleCenterConstraint: NSLayoutConstraint?
+  private var headerHeightConstraint: NSLayoutConstraint!
+  private var hasOSC = false
+  private var inFullScreen = false
+  private(set) var isRevealed = true
+  private var backgroundPressOrigin: NSPoint?
+  private var backgroundPressDidDrag = false
+  private var backgroundClickTimer: Timer?
+
+  private struct WindowButton {
+    let button: NSButton
+    weak var host: NSView?
+    let frame: NSRect
+  }
+  private var windowButtons: [WindowButton] = []
+  var tracksWindowButtons: Bool { !windowButtons.isEmpty }
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
@@ -98,6 +111,8 @@ class Titlebar: NSView {
     backgroundLeadingConstraint.isActive = true
     backgroundTrailingConstraint = trailingAnchor.constraint(equalTo: background.trailingAnchor)
     backgroundTrailingConstraint.isActive = true
+    background.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor).isActive = true
+    background.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor).isActive = true
 
     titleBarBottomBorder.boxType = .separator
     addSubview(titleBarBottomBorder)
@@ -137,6 +152,9 @@ class Titlebar: NSView {
       container.orientation = .vertical
       container.alignment = .centerX
       container.spacing = 0
+      // Flexible title text must not raise the native window minimum.
+      container.setContentCompressionResistancePriority(.init(1), for: .horizontal)
+      container.setContentHuggingPriority(.init(1), for: .horizontal)
       container.padding(.bottom, .leading)
       topConstraint = container.topAnchor.constraint(equalTo: topAnchor)
       topConstraint.isActive = true
@@ -144,6 +162,8 @@ class Titlebar: NSView {
       self.trailingConstraint = trailingAnchor
         .constraint(equalTo: container.trailingAnchor)
       trailingConstraint.isActive = true
+      container.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor).isActive = true
+      container.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor).isActive = true
 
       // title bar
 
@@ -154,6 +174,7 @@ class Titlebar: NSView {
       titleHeightConstraint = titlebarContainer.heightAnchor.constraint(equalToConstant: 0)
       LayoutValue.titlebarHeight.use { [weak self] value in
         self?.titleHeightConstraint.constant = value
+        self?.updateHeaderGeometry()
       }
       titleHeightConstraint.isActive = true
 
@@ -167,7 +188,7 @@ class Titlebar: NSView {
       titleTextField.translatesAutoresizingMaskIntoConstraints = false
       titleTextField.font = .titleBarFont(ofSize: 13)
       titleTextField.lineBreakMode = .byTruncatingMiddle
-      titleTextField.setContentCompressionResistancePriority(.init(200), for: .horizontal)
+      titleTextField.setContentCompressionResistancePriority(.init(1), for: .horizontal)
       titleTextField.setContentHuggingPriority(.defaultHigh, for: .horizontal)
       titlebarContainer.addSubview(titleTextField)
       titleTextField.spacing(.leading(2), to: docIcon).center(.y)
@@ -182,8 +203,7 @@ class Titlebar: NSView {
         let centerConstraint = titleTextField.centerXAnchor.constraint(equalTo: titlebarContainer.centerXAnchor)
         centerConstraint.priority = .defaultLow
         centerConstraint.isActive = true
-        titleCenterConstraint = centerConstraint
-        titleTextField.setContentCompressionResistancePriority(.init(300), for: .horizontal)
+        titleTextField.setContentCompressionResistancePriority(.init(1), for: .horizontal)
       }
       titleLeadingConstraint.priority = .defaultHigh
       titleLeadingConstraint.isActive = true
@@ -199,7 +219,7 @@ class Titlebar: NSView {
 
       // osc
 
-      self.oscContainer = TitlebarInnerView(titlebar: self)
+      self.oscContainer = NSView()
       oscContainer.translatesAutoresizingMaskIntoConstraints = false
       container.addArrangedSubview(oscContainer)
       self.oscView = TimeLabelOverflowedStackView()
@@ -210,8 +230,14 @@ class Titlebar: NSView {
       oscLeadingConstraint = oscView.leadingAnchor
         .constraint(equalTo: oscContainer.leadingAnchor, constant: 6)
       oscLeadingConstraint.isActive = true
+      // Physical bounds let the docked stack detach groups before overflowing.
+      oscView.leftAnchor.constraint(greaterThanOrEqualTo: oscContainer.leftAnchor).isActive = true
+      oscView.rightAnchor.constraint(lessThanOrEqualTo: oscContainer.rightAnchor).isActive = true
     }
 
+    headerHeightConstraint = heightAnchor.constraint(equalToConstant: LayoutValue.titlebarHeight.get())
+    headerHeightConstraint.isActive = true
+    LayoutValue.oscBottomMargin.use { [weak self] _ in self?.updateHeaderGeometry() }
     updateShadow()
   }
   
@@ -219,38 +245,130 @@ class Titlebar: NSView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  private func updateVerticalConstraint(isDisplaying: Bool) {
-    guard let superview else { return }
-    if let verticalConstraint {
-      superview.removeConstraint(verticalConstraint)
-    }
-    if isDisplaying {
+  private func updateHeaderGeometry() {
+    guard headerHeightConstraint != nil else { return }
+    let titleHeight = inFullScreen && hasOSC ? 0 : LayoutValue.titlebarHeight.get()
+    headerHeightConstraint.constant = titleHeight + (hasOSC ? 24 + LayoutValue.oscBottomMargin.get() : 0)
+      + (inFullScreen ? 8 : 0)
+    if let superview, verticalConstraint == nil {
       verticalConstraint = topAnchor.constraint(equalTo: superview.topAnchor)
-    } else {
-      verticalConstraint = bottomAnchor.constraint(equalTo: superview.topAnchor)
+      verticalConstraint.isActive = true
     }
-    verticalConstraint.isActive = true
+    verticalConstraint?.constant = isRevealed ? 0 : -headerHeightConstraint.constant
+    positionWindowButtons(animated: false)
+    mainWindow.sidebars.updateHeaderInset(isRevealed ? headerHeightConstraint.constant : 0, animated: false)
+  }
+
+  func setRevealed(_ revealed: Bool, animated: Bool) {
+    if !revealed { cancelBackgroundPress() }
+    let changed = revealed != isRevealed
+    isRevealed = revealed
+    if revealed { isHidden = false }
+    let reduceMotion = AccessibilityPreferences.motionReductionEnabled
+    let offset: CGFloat = revealed || reduceMotion ? 0 : -headerHeightConstraint.constant
+    if animated && changed {
+      if reduceMotion {
+        verticalConstraint?.constant = 0
+        animator().alphaValue = revealed ? 1 : 0
+      } else {
+        alphaValue = 1
+        verticalConstraint?.animator().constant = offset
+      }
+    } else if !animated {
+      verticalConstraint?.constant = offset
+      alphaValue = 1
+      isHidden = !revealed
+    }
+    if changed || !animated {
+      if !animated { windowButtons.forEach { $0.button.layer?.removeAnimation(forKey: "headerSlide") } }
+      positionWindowButtons(animated: animated)
+      mainWindow.sidebars.updateHeaderInset(revealed ? headerHeightConstraint.constant : 0,
+                                           animated: animated && !reduceMotion)
+    }
   }
 
   func update(hasOSC: Bool, inFullScreen: Bool) {
-    // when in full screen, the OSC should have a top padding
+    self.hasOSC = hasOSC
+    self.inFullScreen = inFullScreen
+    if inFullScreen { restoreWindowButtons() }
     topConstraint.constant = inFullScreen ? 8 : 0
-    // show/hide title or OSC
-    container.setVisibilityPriority(.mustHold, for: titlebarContainer)
-    if hasOSC {
-      container.setVisibilityPriority(.mustHold, for: oscContainer)
-      if inFullScreen {
-        container.setVisibilityPriority(.notVisible, for: titlebarContainer)
+    container.setVisibilityPriority(inFullScreen && hasOSC ? .notVisible : .mustHold, for: titlebarContainer)
+    container.setVisibilityPriority(hasOSC ? .mustHold : .notVisible, for: oscContainer)
+    window?.titleVisibility = inFullScreen ? .visible : .hidden
+    updateHeaderGeometry()
+    if inFullScreen && !hasOSC { setRevealed(false, animated: false) }
+  }
+
+  // Native buttons retain their AppKit hosts and actions.
+  func trackWindowButtons() {
+    guard !inFullScreen, let window else { return }
+    let buttons = [NSWindow.ButtonType.closeButton, .miniaturizeButton, .zoomButton]
+      .compactMap { window.standardWindowButton($0) }
+    if windowButtons.map({ $0.button }) != buttons {
+      restoreWindowButtons()
+      windowButtons = buttons.map { WindowButton(button: $0, host: $0.superview, frame: $0.frame) }
+    }
+    positionWindowButtons(animated: false)
+  }
+
+  private func positionWindowButtons(animated: Bool) {
+    for item in windowButtons {
+      guard let host = item.host, item.button.superview === host else { continue }
+      if item.button.frame.origin != item.frame.origin { item.button.setFrameOrigin(item.frame.origin) }
+      if !item.button.wantsLayer { item.button.wantsLayer = true }
+      guard let layer = item.button.layer else { continue }
+      let reduceMotion = AccessibilityPreferences.motionReductionEnabled
+      let offset: CGFloat = isRevealed || reduceMotion ? 0 : headerHeightConstraint.constant
+      let transform = CATransform3DMakeTranslation(0, host.isFlipped ? -offset : offset, 0)
+      // A window resize usually leaves these transforms unchanged. Avoid
+      // publishing three extra transactions (and reading presentation copies)
+      // on every crop tick; a real header slide still starts where it is shown.
+      let previous = animated && !reduceMotion ? layer.presentation()?.transform ?? layer.transform : layer.transform
+      if !CATransform3DEqualToTransform(layer.transform, transform) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        layer.transform = transform
+        CATransaction.commit()
       }
-    } else {
-      container.setVisibilityPriority(.notVisible, for: oscContainer)
+      if animated && !reduceMotion {
+        let slide = CABasicAnimation(keyPath: "transform")
+        slide.fromValue = NSValue(caTransform3D: previous)
+        slide.toValue = NSValue(caTransform3D: transform)
+        slide.duration = NSAnimationContext.current.duration
+        slide.timingFunction = NSAnimationContext.current.timingFunction
+        layer.add(slide, forKey: "headerSlide")
+        item.button.alphaValue = 1
+      } else if animated && reduceMotion {
+        layer.removeAnimation(forKey: "headerSlide")
+        item.button.animator().alphaValue = isRevealed ? 1 : 1e-100
+      } else {
+        let opacity: CGFloat = isRevealed ? 1 : 1e-100
+        if item.button.alphaValue != opacity { item.button.alphaValue = opacity }
+      }
     }
-    // show systsem titlebar when in fullscreen
-    if !useSystemTitle {
-      window?.titleVisibility = inFullScreen ? .visible : .hidden
+  }
+
+  func finishShowing() {
+    guard isRevealed else { return }
+    positionWindowButtons(animated: false)
+  }
+
+  // Keep native widgets registered with AppKit while hidden.
+  func finishHiding() {
+    windowButtons.forEach { $0.button.alphaValue = 1e-100 }
+  }
+
+  func restoreWindowButtons() {
+    for item in windowButtons {
+      item.button.layer?.removeAnimation(forKey: "headerSlide")
+      CATransaction.begin()
+      CATransaction.setDisableActions(true)
+      item.button.layer?.transform = CATransform3DIdentity
+      CATransaction.commit()
+      if item.button.superview === item.host { item.button.frame = item.frame }
+      item.button.alphaValue = 1
     }
-    // update vertical constraint
-    updateVerticalConstraint(isDisplaying: !inFullScreen || hasOSC)
+    windowButtons.removeAll()
   }
 
   func updateOnTopIcon() {
@@ -284,30 +402,6 @@ class Titlebar: NSView {
     docIcon.image = filename.isEmpty ? nil : NSWorkspace.shared.icon(forFile: filename)
   }
 
-  func setLeadingConstraint(_ constant: CGFloat, animated: Bool = true) {
-    if animated {
-      titleLeadingConstraint.animator().constant = constant == 0 ? 0 : constant + 8
-      oscLeadingConstraint.animator().constant = constant + 6
-      backgroundLeadingConstraint.animator().constant = constant
-      titleCenterConstraint?.animator().constant = constant / 2
-    } else {
-      titleLeadingConstraint.constant = constant == 0 ? 0 : constant + 8
-      oscLeadingConstraint.constant = constant + 6
-      backgroundLeadingConstraint.constant = constant
-      titleCenterConstraint?.constant = constant / 2
-    }
-  }
-
-  func setTrailingConstraint(_ constant: CGFloat, animated: Bool = true) {
-    if animated {
-      trailingConstraint.animator().constant = constant
-      backgroundTrailingConstraint.animator().constant = constant
-    } else {
-      trailingConstraint.constant = constant
-      backgroundTrailingConstraint.constant = constant
-    }
-  }
-
   override func rightMouseDown(with event: NSEvent) {
     // docIcon/titleTextField are children of titlebarContainer, so their frames are in the
     // container's coordinate space — not the titlebar's. Convert the click into the container
@@ -328,6 +422,59 @@ class Titlebar: NSView {
   }
 
   override func rightMouseUp(with event: NSEvent) {}
+
+  private func cancelBackgroundPress() {
+    backgroundPressOrigin = nil
+    backgroundPressDidDrag = false
+  }
+
+  /// Observe without consuming AppKit's drag or double-click events.
+  @discardableResult
+  func handleBackgroundMouseEvent(_ event: NSEvent) -> Bool {
+    switch event.type {
+    case .leftMouseDown:
+      backgroundClickTimer?.invalidate()
+      backgroundClickTimer = nil
+      cancelBackgroundPress()
+      guard event.clickCount == 1, !event.modifierFlags.contains(.control),
+            isBackgroundEvent(event) else { return false }
+      backgroundPressOrigin = event.locationInWindow
+    case .leftMouseDragged:
+      guard let origin = backgroundPressOrigin else { return false }
+      if hypot(event.locationInWindow.x - origin.x, event.locationInWindow.y - origin.y) > 3 {
+        backgroundPressDidDrag = true
+      }
+    case .leftMouseUp:
+      guard let origin = backgroundPressOrigin else { return false }
+      defer { cancelBackgroundPress() }
+      guard event.clickCount == 1, !backgroundPressDidDrag,
+            hypot(event.locationInWindow.x - origin.x, event.locationInWindow.y - origin.y) <= 3,
+            isBackgroundEvent(event), window?.isVisible == true else { return false }
+      backgroundClickTimer = Timer.scheduledTimer(withTimeInterval: NSEvent.doubleClickInterval,
+                                                  repeats: false) { [weak self] _ in
+        guard let self else { return }
+        backgroundClickTimer = nil
+        guard window?.isVisible == true, isRevealed, !isHidden,
+              !mainWindow.interactiveMode.isActive else { return }
+        mainWindow.hideUIFromOSC()
+      }
+    case .rightMouseDown, .otherMouseDown, .scrollWheel, .keyDown:
+      backgroundClickTimer?.invalidate()
+      backgroundClickTimer = nil
+      cancelBackgroundPress()
+    default:
+      break
+    }
+    return false
+  }
+
+  private func isBackgroundEvent(_ event: NSEvent) -> Bool {
+    guard isRevealed, !isHidden, !mainWindow.interactiveMode.isActive,
+          let parent = superview,
+          let hit = parent.hitTest(parent.superview?.convert(event.locationInWindow, from: nil) ?? event.locationInWindow),
+          hit.isDescendant(of: self) else { return false }
+    return SidebarController.isBackgroundHit(hit, in: self, at: event.locationInWindow)
+  }
 
   private func showPathMenu() {
     guard let filename = mainWindow.window?.representedFilename else { return }
@@ -383,36 +530,5 @@ class Titlebar: NSView {
     } else {
       titleTextField.shadow = nil
     }
-  }
-
-  /// Inner edge (toward the video center) of the sidebar on the given side, in titlebar coords.
-  /// Returns `0` for a hidden left sidebar and `w` for a hidden right sidebar so the lead/trail
-  /// fade bands collapse to the bar edges.
-  private func sidebarInnerEdge(for side: SidebarController.Side, in w: CGFloat) -> CGFloat {
-    let panel = mainWindow.sidebars.sideBar(for: side)
-    guard !panel.view.isHidden else {
-      return side == .leading ? 0 : w
-    }
-    return side == .leading ? max(0, panel.view.frame.maxX) : min(w, panel.view.frame.minX)
-  }
-}
-
-
-/// Calls titlebar's updateLayer() to make sure the mask is redrawn during the animation.
-fileprivate class TitlebarInnerView: NSView {
-  weak var titlebar: Titlebar!
-
-  init(titlebar: Titlebar) {
-    self.titlebar = titlebar
-    super.init(frame: .zero)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  override func layout() {
-    super.layout()
-    titlebar.needsDisplay = true
   }
 }

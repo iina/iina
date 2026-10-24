@@ -149,9 +149,11 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
   }
 
   let scrollView = ScrollView()
+  private let focusRingPadding: CGFloat = 4
   private var indicator: NSButton!
   private var indicatorDirection: IndicatorDirection = .trailing {
     didSet {
+      guard indicatorDirection != oldValue else { return }
       switch indicatorDirection {
       case .hidden:
         indicator.isHidden = true
@@ -169,6 +171,8 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
     super.init(frame: frameRect)
 
     translatesAutoresizingMaskIntoConstraints = false
+    // Native focus rings extend beyond control frames; keep viewport padding outside row geometry.
+    clipsToBounds = false
 
     scrollView.parent = self
     addSubview(scrollView)
@@ -183,11 +187,19 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
     indicator.isBordered = false
     addSubview(indicator)
     indicator.size(width: 8).padding(.trailing).center(.y)
-    scrollView.padding(.vertical, .leading).spacing(.trailing(4), to: indicator)
+    scrollView.padding(.vertical(-focusRingPadding), .leading)
+      .spacing(.trailing(4), to: indicator)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+
+  func setDocumentContent(_ content: NSStackView) {
+    // Both rows need identical focus-ring insets at either scroll limit.
+    content.edgeInsets = NSEdgeInsets(top: focusRingPadding, left: 0,
+                                     bottom: focusRingPadding, right: focusRingPadding)
+    scrollView.documentView = content
   }
 
   @objc private func indicatorAction(_ sender: NSButton) {
@@ -206,6 +218,7 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
 
   class ScrollView: NSScrollView {
     var parent: HorizontalScrollViewWithIndicator!
+    private var forwardsVerticalScroll = false
 
     override init(frame frameRect: NSRect) {
       super.init(frame: frameRect)
@@ -257,36 +270,22 @@ fileprivate class HorizontalScrollViewWithIndicator: NSView {
       parent.indicatorDirection = hasLeading ? .leading : hasTrailing ? .trailing : .hidden
     }
 
-    /// Translate vertical scrolling events to horizontal for mouse control
     override func scrollWheel(with event: NSEvent) {
-      if event.scrollingDeltaX != 0 {
-        super.scrollWheel(with: event)
-        return
+      if event.phase.contains(.began) { forwardsVerticalScroll = false }
+      if event.scrollingDeltaX != 0 || event.scrollingDeltaY != 0 {
+        forwardsVerticalScroll = abs(event.scrollingDeltaY) > abs(event.scrollingDeltaX)
       }
-
-      guard let cg = event.cgEvent?.copy() else {
-        super.scrollWheel(with: event)
-        return
+      if forwardsVerticalScroll {
+        var ancestor = superview
+        while let view = ancestor {
+          if let scroll = view as? NSScrollView {
+            scroll.scrollWheel(with: event)
+            return
+          }
+          ancestor = view.superview
+        }
       }
-
-      let lineV = cg.getDoubleValueField(.scrollWheelEventDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventDeltaAxis2, value: lineV)
-
-      let pxV = cg.getDoubleValueField(.scrollWheelEventPointDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventPointDeltaAxis2, value: pxV)
-
-      let fpV = cg.getDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1)
-      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis1, value: 0)
-      cg.setDoubleValueField(.scrollWheelEventFixedPtDeltaAxis2, value: fpV)
-
-      guard let swapped = NSEvent(cgEvent: cg) else {
-        super.scrollWheel(with: event)
-        return
-      }
-
-      super.scrollWheel(with: swapped)
+      super.scrollWheel(with: event)
     }
   }
 }
@@ -307,18 +306,19 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     )
     segmentControl.selectedSegment = 0
 
-    self.input = NSTextField()
-    input.usesSingleLineMode = true
+    let input = SidebarInputField()
+    input.emptyValue = ""
+    self.input = input
     input.size(width: 40, height: 24)
     input.target = self
     input.action = #selector(aspectRatioAction)
 
-    scrollView.documentView = ui.hStack(
+    setDocumentContent(ui.hStack(
       spacing: 8, segmentControl, input
-    )
+    ))
     size(height: 24)
 
-    update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in update() }
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -330,8 +330,10 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
 
   private func update() {
     guard player.info.state.active else { return }
+    segmentControl.isEnabled = !player.mainWindow.interactiveMode.isActive
+    input.isEnabled = segmentControl.isEnabled
 
-    if let index = AppData.aspectsInPanel.firstIndex(of: player.info.unsureAspect) {
+    if let index = AppData.aspectsInPanel.firstIndex(of: player.scopedVideoSettings().aspect) {
       segmentControl.selectedSegment = index
     } else {
       segmentControl.selectedSegment = -1
@@ -340,16 +342,19 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
 
   @objc private func aspectRatioAction(_ sender: AnyObject) {
     if let textField = sender as? NSTextField {
-      let value = textField.stringValue
-      if value != "" {
-        segmentControl.setSelected(false, forSegment: segmentControl.selectedSegment)
-        player.setVideoAspect(value)
-        player.sendOSD(.aspect(value))
+      let value = textField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+      let aspect = value.isEmpty ? AppData.aspectsInPanel[0] : value
+      segmentControl.selectedSegment = value.isEmpty ? 0 : -1
+      player.performSidebarChange {
+        player.setScopedVideoAspect(aspect)
+        player.sendOSD(.aspect(aspect))
       }
     } else if let segment = sender as? NSSegmentedControl {
       let aspect = AppData.aspectsInPanel[segment.selectedSegment]
-      player.setVideoAspect(aspect)
-      player.sendOSD(.aspect(aspect))
+      player.performSidebarChange {
+        player.setScopedVideoAspect(aspect)
+        player.sendOSD(.aspect(aspect))
+      }
     }
   }
 }
@@ -370,13 +375,14 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
     )
     segmentControl.selectedSegment = 0
 
-    scrollView.documentView = segmentControl
+    setDocumentContent(ui.hStack(spacing: 0, segmentControl))
     size(height: 24)
 
-    update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in update() }
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
+    update()
   }
 
   required init?(coder: NSCoder) {
@@ -385,8 +391,9 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
 
   private func update() {
     guard player.info.state.active else { return }
+    segmentControl.isEnabled = !player.mainWindow.interactiveMode.isActive
 
-    if let index = AppData.cropsInPanel.firstIndex(of: player.info.unsureCrop) {
+    if let index = AppData.cropsInPanel.firstIndex(of: player.scopedVideoSettings().cropDescription) {
       segmentControl.selectedSegment = index
     } else {
       // Select last segment ("Custom...")
@@ -400,16 +407,16 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
       // User clicked on "Custom...": show interactive mode
       // run asynchronically to wait for potential videoview resize
       Task { @MainActor in
-        mainWindow.player.removeCropFilter()
-        mainWindow.forceDraw("reset crop filter")
         mainWindow.sidebars.hideAllSideBars {
-          mainWindow.interactiveMode.enter(mode: .crop, selectWholeVideoByDefault: true)
+          self.player.openScopedCustomCrop()
         }
       }
     } else {
       let cropStr = AppData.cropsInPanel[segmentControl.selectedSegment]
-      player.setCrop(fromString: cropStr)
-      player.sendOSD(.crop(cropStr))
+      player.performSidebarChange {
+        player.setScopedCrop(cropStr)
+        player.sendOSD(.crop(cropStr))
+      }
     }
   }
 }
@@ -439,7 +446,7 @@ fileprivate class RotationView: NSView {
     addSubview(segmentControl)
     segmentControl.padding(.all)
 
-    update()
+    player.observe(.iinaTrackSettingsChanged) { [unowned self] _ in update() }
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -452,13 +459,16 @@ fileprivate class RotationView: NSView {
   private func update() {
     guard player.info.state.active else { return }
 
-    segmentControl.selectSegment(withTag: AppData.rotations.firstIndex(of: player.info.rotation) ?? -1)
+    segmentControl.isEnabled = !player.mainWindow.interactiveMode.isActive
+    segmentControl.selectSegment(withTag: AppData.rotations.firstIndex(of: player.scopedVideoSettings().rotation) ?? -1)
   }
 
   @objc private func rotationAction(_ sender: AnyObject) {
     let value = AppData.rotations[segmentControl.selectedSegment]
-    player.setVideoRotate(value)
-    player.sendOSD(.rotate(value))
+    player.performSidebarChange {
+      player.setScopedVideoRotate(value)
+      player.sendOSD(.rotate(value))
+    }
   }
 }
 
@@ -528,6 +538,7 @@ fileprivate class SpeedView: SidebarSliderView {
   }
 
   override func setup() {
+    input.emptyValue = "1"
     slider.minValue = 0
     slider.maxValue = 24
     slider.numberOfTickMarks = 25
@@ -602,9 +613,6 @@ fileprivate class SpeedView: SidebarSliderView {
     /// Unfortunately, the text field has not applied validation/formatting to the number at this point.
     /// We will do that manually via `constrainSpeed`.
     updateSpeed(to: input.doubleValue)
-    if let window = input.window {
-      window.makeFirstResponder(window.contentView)
-    }
   }
 
   override func resetButtonAction() {

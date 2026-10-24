@@ -8,7 +8,7 @@
 
 import Cocoa
 
-fileprivate let SideBarAnimationDuration = 0.24
+fileprivate let SideBarAnimationDuration = 0.30
 
 
 /// Owns the two side panels (left/right), the view controllers that can be embedded in them, and
@@ -38,6 +38,7 @@ class SidebarController: NSObject {
     var widthConstraint: NSLayoutConstraint!
     var edgeConstraint: NSLayoutConstraint!
     var status: ViewType = .hidden
+    private var transitionGeneration = 0
     var animationState: MainWindowController.UIAnimationState = .hidden {
       didSet {
         if animationState == .hidden || animationState == .shown {
@@ -54,9 +55,19 @@ class SidebarController: NSObject {
     var visibleEdgeMargin: CGFloat {
       0
     }
+
+    func beginTransition(_ state: MainWindowController.UIAnimationState) -> Int {
+      transitionGeneration += 1
+      animationState = state
+      return transitionGeneration
+    }
+
+    func isCurrentTransition(_ generation: Int) -> Bool {
+      transitionGeneration == generation
+    }
   }
 
-  unowned let mainWindow: MainWindowController
+  weak var mainWindow: MainWindowController!
   let prefObserver = Preference.Observer()
 
   init(mainWindow: MainWindowController) {
@@ -123,11 +134,22 @@ class SidebarController: NSObject {
     [quickSettingView, playlistView, pluginView]
   }
 
+  private var headerInset: CGFloat = 0
+
+  func updateHeaderInset(_ height: CGFloat, animated: Bool) {
+    headerInset = height
+    for controller in viewControllers where controller.isViewLoaded &&
+      sideBars.contains(where: { controller.view.isDescendant(of: $0.view) }) {
+      controller.setTopInset(height, animated: animated)
+    }
+    mainWindow.window?.invalidateCursorRects(for: mainWindow.videoView)
+  }
+
   // MARK: - Layout setup (called from windowDidLoad)
 
   func installSubviews(in contentView: NSView) {
-    contentView.addSubview(trailingSidebar.view)
-    contentView.addSubview(leadingSidebar.view)
+    contentView.addSubview(trailingSidebar.view, positioned: .below, relativeTo: mainWindow.titleBarView)
+    contentView.addSubview(leadingSidebar.view, positioned: .below, relativeTo: mainWindow.titleBarView)
     for panel in sideBars {
       panel.view.padding(.bottom(panel.visibleEdgeMargin), .top(panel.visibleEdgeMargin))
       panel.widthConstraint = panel.view.widthAnchor.constraint(equalToConstant: 60)
@@ -165,6 +187,10 @@ class SidebarController: NSObject {
     sideBars.contains { $0.status != .hidden }
   }
 
+  var isAnyVisibleOrTransitioning: Bool {
+    isAnyVisible || sideBars.contains { $0.animationState == .willHide }
+  }
+
   /// Views that should swallow mouse events instead of letting them reach the video area.
   var mouseActionDisabledViews: [NSView?] {
     [trailingSidebar.view, leadingSidebar.view]
@@ -182,6 +208,132 @@ class SidebarController: NSObject {
   }
 
   // MARK: - Mouse routing
+
+  private struct BackgroundPress {
+    weak var panel: NSView?
+    let origin: NSPoint
+    var didDrag = false
+  }
+  private var backgroundPress: BackgroundPress?
+
+  /// Promoting a sidebar must not consume the control's original click.
+  @discardableResult
+  func handlePanelMouseEvent(_ event: NSEvent) -> Bool {
+    let floatingOSC: OSCFloatingView? = mainWindow.oscFloatingView
+    switch event.type {
+    case .leftMouseDown, .rightMouseDown:
+      floatingOSC?.cancelPendingBackgroundClick()
+      backgroundPress = nil
+      if event.type == .leftMouseDown, !mainWindow.interactiveMode.isActive,
+         let hit = hitView(for: event),
+         let panel = sideBars.first(where: {
+           $0.status != .hidden && !$0.view.isHidden && hit.isDescendant(of: $0.view)
+         }) {
+        bringPanelToFront(panel.view)
+        return false
+      }
+      guard event.type == .leftMouseDown, event.clickCount == 1,
+            !event.modifierFlags.contains(.control),
+            let panel = backgroundPanel(for: event), panel is OSCFloatingView else { return false }
+      backgroundPress = BackgroundPress(panel: panel, origin: event.locationInWindow)
+    case .leftMouseDragged:
+      if let press = backgroundPress,
+         hypot(event.locationInWindow.x - press.origin.x, event.locationInWindow.y - press.origin.y) > 3 {
+        backgroundPress?.didDrag = true
+      }
+    case .leftMouseUp:
+      defer { backgroundPress = nil }
+      guard let press = backgroundPress, let osc = press.panel as? OSCFloatingView,
+            !press.didDrag, event.clickCount == 1,
+            hypot(event.locationInWindow.x - press.origin.x, event.locationInWindow.y - press.origin.y) <= 3,
+            backgroundPanel(for: event) === osc else { return false }
+      osc.performSingleBackgroundClick()
+    case .rightMouseDragged, .rightMouseUp:
+      backgroundPress = nil
+    case .otherMouseDown, .scrollWheel:
+      floatingOSC?.cancelPendingBackgroundClick()
+      backgroundPress = nil
+    default:
+      break
+    }
+    return false
+  }
+
+  private func backgroundPanel(for event: NSEvent) -> NSView? {
+    guard !mainWindow.interactiveMode.isActive, let hit = hitView(for: event) else { return nil }
+    if sideBars.contains(where: { !$0.view.isHidden && resizeHandleRect(for: $0.side).contains(event.locationInWindow) }) {
+      return nil
+    }
+    if let panel = sideBars.first(where: {
+      $0.status != .hidden && !$0.view.isHidden && hit.isDescendant(of: $0.view)
+    }) {
+      return Self.isBackgroundHit(hit, in: panel.view, at: event.locationInWindow) ? panel.view : nil
+    }
+    let floatingOSC: OSCFloatingView? = mainWindow.oscFloatingView
+    if let osc = floatingOSC, mainWindow.oscPosition == .floating,
+       !osc.isReturningToDefault, hit.isDescendant(of: osc),
+       Self.isBackgroundHit(hit, in: osc, at: event.locationInWindow) {
+      return osc
+    }
+    return nil
+  }
+
+  static func isBackgroundHit(_ hit: NSView, in panel: NSView, at point: NSPoint) -> Bool {
+    var current: NSView? = hit
+    while let view = current {
+      // DOM background is reported by PluginSidebarView after a real web click.
+      if view is PluginSidebarView || view is VolumeButton || view is NSTextView ||
+         view is NSScroller || view is NSCollectionView { return false }
+      if let table = view as? NSTableView {
+        if table.row(at: table.convert(point, from: nil)) >= 0 { return false }
+      } else if let label = view as? NSTextField, !label.isEditable && !label.isSelectable {
+        // Static captions belong to the background, unlike editable fields.
+      } else if view is NSControl {
+        return false
+      }
+      // AppKit attaches recognizers to scroll views, tables and static labels.
+      // Those native recognizers do not make their empty background interactive.
+      if !(view is NSScrollView), !(view is NSTextField), !(view is NSTableView),
+         view.gestureRecognizers.contains(where: { $0 is NSClickGestureRecognizer || $0 is NSPressGestureRecognizer }) {
+        return false
+      }
+      if view === panel { return true }
+      current = view.superview
+    }
+    return false
+  }
+
+  func activatePluginBackground(_ webView: PluginSidebarView, at point: NSPoint, button: Int) {
+    guard !mainWindow.interactiveMode.isActive,
+          let contentView = mainWindow.window?.contentView, let parent = contentView.superview,
+          let hit = contentView.hitTest(parent.convert(point, from: nil)), hit.isDescendant(of: webView),
+          sideBars.contains(where: { $0.status == .plugins && !$0.view.isHidden && webView.isDescendant(of: $0.view) }) else { return }
+    if button == 0, let panel = sideBars.first(where: { webView.isDescendant(of: $0.view) }) {
+      bringPanelToFront(panel.view)
+    }
+  }
+
+  private func hitView(for event: NSEvent) -> NSView? {
+    guard let contentView = mainWindow.window?.contentView,
+          let parent = contentView.superview else { return nil }
+    return contentView.hitTest(parent.convert(event.locationInWindow, from: nil))
+  }
+
+  func isEventTargetingVisibleSidebar(_ event: NSEvent) -> Bool {
+    guard let hit = hitView(for: event) else { return false }
+    return sideBars.contains { !$0.view.isHidden && hit.isDescendant(of: $0.view) }
+  }
+
+  func bringPanelToFront(_ view: NSView) {
+    guard let contentView = view.superview else { return }
+    let osc: NSView = mainWindow.oscFloatingView
+    let panels: [NSView] = sideBars.map(\.view) + [osc]
+    guard panels.contains(view),
+          let front = contentView.subviews.last(where: { panels.contains($0) }),
+          front !== view else { return }
+    // Reorder only the requested panel, below titlebar and unrelated overlays.
+    contentView.addSubview(view, positioned: .above, relativeTo: front)
+  }
 
   /// Returns true if the event was consumed by sidebar logic (caller should NOT call `super`).
   func handleMouseDown(_ event: NSEvent, at location: NSPoint) -> Bool {
@@ -203,14 +355,13 @@ class SidebarController: NSObject {
     guard let range = viewController(for: panel.status)?.widthRange else { return false }
     let x = event.locationInWindow.x
     let newWidth = (visuallyOnLeft(side) ? x : mainWindow.window!.frame.width - x) - 2
-    let maxWidth = max(range.lowerBound, min(sidebarMaxWidth, range.upperBound))
-    let clamped = newWidth.clamped(to: range.lowerBound...maxWidth)
+    let maxWidth = max(0, min(sidebarMaxWidth, range.upperBound))
+    let minWidth = min(range.lowerBound, maxWidth)
+    let clamped = newWidth.clamped(to: minWidth...maxWidth)
     panel.widthConstraint.constant = clamped
-    // Keep the title text container flush against the (resizing) sidebar's inner edge — this also
-    // triggers Titlebar.layout(), which refreshes the fade mask off the new sidebar frame.
-    setTitlebarConstraint(
+    setBottomOSCConstraint(
       for: side,
-      titlebarConstantWhenShown(width: clamped, margin: panel.visibleEdgeMargin, side: side),
+      clamped + panel.visibleEdgeMargin,
       animated: false
     )
     return true
@@ -245,12 +396,12 @@ class SidebarController: NSObject {
   func resizeHandleRect(for side: Side) -> NSRect {
     let sf = sideBar(for: side).view.frame
     let originX = visuallyOnLeft(side) ? sf.maxX : sf.minX - 4
-    return NSRect(x: originX, y: sf.minY, width: 4, height: sf.height)
+    return NSRect(x: originX, y: sf.minY, width: 4, height: max(0, sf.height - headerInset))
   }
 
   private var sidebarMaxWidth: CGFloat {
-    guard let window = mainWindow.window else { return .greatestFiniteMagnitude }
-    return window.frame.width * 0.8
+    guard let contentView = mainWindow.window?.contentView else { return .greatestFiniteMagnitude }
+    return contentView.bounds.width * 0.8
   }
 
   // MARK: - Show
@@ -261,28 +412,22 @@ class SidebarController: NSObject {
     AccessibilityPreferences.motionReductionEnabled && !Preference.bool(for: PK.disableAnimations)
   }
 
-  /// Constant for the titlebar edge constraint when this side's sidebar is fully shown — sits the
-  /// title text container flush against the sidebar's inner edge.
-  private func titlebarConstantWhenShown(width: CGFloat, margin: CGFloat, side: Side) -> CGFloat {
-    width + margin
-  }
-
-  private func setTitlebarConstraint(for side: Side, _ constant: CGFloat, animated: Bool = true) {
+  private func setBottomOSCConstraint(for side: Side, _ constant: CGFloat, animated: Bool = true) {
     if side == .leading {
-      mainWindow.titleBarView.setLeadingConstraint(constant, animated: animated)
       mainWindow.oscBottomView.setLeadingConstraint(constant, animated: animated)
     } else {
-      mainWindow.titleBarView.setTrailingConstraint(constant, animated: animated)
       mainWindow.oscBottomView.setTrailingConstraint(constant, animated: animated)
     }
   }
 
   private func replaceSideBar(with viewController: SidebarViewController, type: ViewType, in panel: Panel) {
     panel.status = type
+    bringPanelToFront(panel.view)
     panel.view.setContent(viewController.view)
     viewController.view.padding(.all)
-    viewController.downShift = 0
+    viewController.setTopInset(headerInset, animated: false)
     NotificationCenter.default.post(name: .iinaSidebarStatusChanged, object: nil)
+    mainWindow.window?.contentView?.layoutSubtreeIfNeeded()
   }
 
   /// Show the given sidebar on its configured side.
@@ -297,39 +442,47 @@ class SidebarController: NSObject {
     let panel = sideBar(for: side(for: type))
     let width = viewController.width.clamped(to: 0...sidebarMaxWidth)
     let margin = panel.visibleEdgeMargin
+    let fading = useFadeForSidebar
 
-    panel.animationState = .willShow
+    let generation = panel.beginTransition(.willShow)
+    bringPanelToFront(panel.view)
     panel.widthConstraint.constant = width
-    // Position the sidebar before animation: fade-in starts at the visible position with
-    // `isHidden=true`; slide-in starts off-screen with `isHidden=false`.
-    if useFadeForSidebar {
+    // Interrupted fades retain opacity; hidden panels start transparent.
+    if fading {
       panel.edgeConstraint.constant = 0
+      if panel.view.isHidden { panel.view.alphaValue = 0 }
+      panel.view.isHidden = false
     } else {
-      panel.edgeConstraint.constant = -width
+      // An interrupted hide resumes from its visible boundary.
+      if panel.view.isHidden { panel.edgeConstraint.constant = -width }
+      panel.view.alphaValue = 1
       panel.view.isHidden = false
     }
     panel.status = type
     panel.view.setContent(viewController.view)
     viewController.view.padding(.all)
-    viewController.downShift = 0
+    viewController.setTopInset(headerInset, animated: false)
+    mainWindow.showUI()
+    mainWindow.updateTimer()
+
+    mainWindow.window?.contentView?.layoutSubtreeIfNeeded()
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration)
-      context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      if useFadeForSidebar {
-        panel.view.animator().isHidden = false
+      context.timingFunction = CAMediaTimingFunction(name: .easeOut)
+      setBottomOSCConstraint(
+        for: panel.side,
+        width + margin
+      )
+      if fading {
+        panel.view.animator().alphaValue = 1
       } else {
         panel.edgeConstraint.animator().constant = margin
       }
-      setTitlebarConstraint(
-        for: panel.side,
-        titlebarConstantWhenShown(width: width, margin: margin, side: panel.side),
-        animated: !useFadeForSidebar
-      )
     }) {
+      guard let mainWindow = self.mainWindow, panel.isCurrentTransition(generation) else { return }
       panel.animationState = .shown
-      self.mainWindow.window?.resetCursorRects()
-      self.mainWindow.setWindowToolbar()
+      mainWindow.window?.resetCursorRects()
     }
   }
 
@@ -344,33 +497,35 @@ class SidebarController: NSObject {
       return
     }
     let currWidth = panel.widthConstraint.constant
+    let fading = useFadeForSidebar
     panel.status = .hidden
-    panel.animationState = .willHide
-    mainWindow.setWindowToolbar()
+    let generation = panel.beginTransition(.willHide)
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
-      if useFadeForSidebar {
+      setBottomOSCConstraint(for: panel.side, 0)
+      if fading {
         panel.view.animator().alphaValue = 0
       } else {
         panel.edgeConstraint.animator().constant = -currWidth
       }
-      setTitlebarConstraint(for: panel.side, 0, animated: !useFadeForSidebar)
     }) {
       // A new show may have started during the hide animation; only finalize if we still mean to hide.
-      guard panel.animationState == .willHide else { return }
+      guard let mainWindow = self.mainWindow, panel.isCurrentTransition(generation) else { return }
       panel.view.subviews.removeAll()
       panel.view.isHidden = true
       // When fading, the view stays in its visible position during the animation. Push it
       // off-screen now so AdditionalInfoView (anchored against the right sidebar) can align with
       // the window edge in full-screen.
-      if self.useFadeForSidebar {
+      if fading {
         panel.edgeConstraint.constant = -currWidth
         panel.view.alphaValue = 1
       }
       panel.animationState = .hidden
-      self.mainWindow.window?.resetCursorRects()
+      mainWindow.resumeUIAutoRevealIfSidebarsClosed()
+      mainWindow.updateTimer()
+      mainWindow.window?.resetCursorRects()
       after()
     }
   }

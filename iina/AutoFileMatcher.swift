@@ -48,6 +48,15 @@ class AutoFileMatcher {
     filesGroupedByMediaType[.video]! + filesGroupedByMediaType[.audio]!
   }
 
+  private var mediaFilesForSubtitleMatching: [FileInfo] {
+    mediaFiles.sorted {
+      if $0.filename.count == $1.filename.count {
+        return $0.filename.localizedStandardCompare($1.filename) == .orderedAscending
+      }
+      return $0.filename.count > $1.filename.count
+    }
+  }
+
   private func getAllMediaFiles() throws {
     // get all files in current directory
     guard let files = try? fm.contentsOfDirectory(at: currentFolder, includingPropertiesForKeys: nil, options: searchOptions) else { return }
@@ -203,7 +212,8 @@ class AutoFileMatcher {
     let subAutoLoadOption: Preference.IINAAutoLoadAction = Preference.enum(for: .subAutoLoadIINA)
     guard subAutoLoadOption != .disabled else { return }
 
-    for video in mediaFiles {
+    // Match more specific filenames first so a prefix cannot claim their subtitles.
+    for video in mediaFilesForSubtitleMatching {
       var matchedSubs = Set<FileInfo>()
       log("Matching for \(video.filename)")
 

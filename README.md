@@ -1,4 +1,5 @@
 <p align="center">
+[![Featured on AppWK](https://appwk.cn/badges/featured-dark.svg)](https://appwk.cn/apps/iina)
 <img height="256" src="https://iina.io/img/icon.png">
 </p>
 

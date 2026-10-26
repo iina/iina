@@ -386,7 +386,7 @@ class MPVController: NSObject {
                   verboseIfDefault: true)
 
     setUserOption(.initialWindowSizePosition, type: .string, forName: MPVOption.Window.geometry,
-                  level: .verbose)
+                  level: .verbose, resetInvalidValue: "")
 
     // - Codec
 
@@ -1659,6 +1659,7 @@ class MPVController: NSObject {
   private func setUserOption(_ key: Preference.Key, type: UserOptionType, forName name: String,
                              sync: Bool = true, level: Logger.Level = .debug,
                              verboseIfDefault: Bool = false,
+                             resetInvalidValue: String? = nil,
                              transformer: OptionObserverInfo.Transformer? = nil) {
     var code: Int32 = 0
 
@@ -1700,6 +1701,12 @@ class MPVController: NSObject {
       } else {
         code = 0
       }
+    }
+
+    if code < 0, let resetInvalidValue {
+      log("Invalid \(name) setting \(Preference.string(for: key) ?? ""); restoring default", level: .warning)
+      Preference.set(resetInvalidValue, for: key)
+      code = setOptionString(name, resetInvalidValue, level: level)
     }
 
     if code < 0 {

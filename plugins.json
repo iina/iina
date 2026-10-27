@@ -84,6 +84,12 @@
     "id": "com.qkong.iina-plugin-file-viewer"
   },
   {
+    "name": "HDR Screenshot",
+    "url": "https://github.com/bbeny123/iina-hdr-screenshot",
+    "desc": "FFmpeg-powered HDR to SDR screenshot capture.",
+    "id": "io.iina.hdr-screenshot"
+  },
+  {
     "name": "Hold to Speed",
     "url": "https://github.com/Tommy12356F/iina-hold-to-speed",
     "desc": "Hold Space to play at 2× speed, just like YouTube.",
@@ -160,6 +166,12 @@
     "url": "https://github.com/5thDimensionalVader/recorder-iina",
     "desc": "to clip a video using ffmpeg.",
     "id": "com.recorder.iina-plugin"
+  },
+  {
+    "name": "Save Subtitles",
+    "url": "https://github.com/bbeny123/iina-save-subs",
+    "desc": "Export and perfectly sync subtitles directly from IINA with precise timing and clean SRT output.",
+    "id": "io.iina.save-subtitles"
   },
   {
     "name": "Skip Intro",

@@ -72,6 +72,12 @@
     "id": "com.fxd0h.detached-playlist"
   },
   {
+    "name": "Emby Browser",
+    "url": "https://github.com/fjkfwz/iina-emby",
+    "desc": "Browse and play media from Emby servers with subtitle and playback progress sync.",
+    "id": "com.ghotriw.iina-emby"
+  },
+  {
     "name": "Episode Info",
     "url": "https://github.com/Zain-Imam/iina-episode-info",
     "desc": "TMDB episode/movie info overlay on pause, with built-in subtitle search.",

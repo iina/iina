@@ -220,5 +220,11 @@
     "url": "https://github.com/qydxyx/iina-webdav",
     "desc": "Connect to a WebDAV server, browse media, and add files or folders to the current playlist.",
     "id": "com.qydxyx.iina-webdav"
+  },
+  {
+    "name": "Whisper AutoSub (Local)",
+    "url": "https://github.com/Mo-Shakib/iina-whisper-autosub-local",
+    "desc": "Generate and load English subtitles offline using whisper.cpp and FFmpeg.",
+    "id": "io.bento.iina-whisper-autosub"
   }
 ]

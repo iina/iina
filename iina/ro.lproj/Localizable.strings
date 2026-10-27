@@ -1,0 +1,1039 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "Pornit";
+"general.off" = "Oprit";
+"general.login" = "Logare";
+"general.logout" = "Ieșire";
+"general.ok" = "OK";
+"general.cancel" = "Anulează";
+"general.done" = "Gata";
+"general.username" = "Nume de utilizator";
+"general.password" = "Parolă";
+"general.na" = "N/A";
+"general.no_result" = "Fără Rezultat";
+"general.no_title" = "No Title";
+"general.auto" = "Automat";
+
+"input.value_is_empty" = "Valoarea nu poate fi goală.";
+"input.already_exists" = "Valoarea deja există.";
+
+// Guide Window
+"guide.highlights" = "Evidențiator";
+"guide.basic_settings" = "Setări de bază";
+"guide.faq" = "Întrebări adresate frecvent";
+
+// Initial Window
+"initial.announcement" = "Folosești o versiune %@ de IINA";
+"initial.beta.desc" = "Dacă vreți să reveniți la o versiune non-beta, debifați \"primește actualizări beta\" din Setări > General, și instalați o actualizare stabilă de pe <a href=\"https://iina.io\">site-ul nostru oficial</a>.";
+"initial.nightly.desc" = "Versiunea Nightly nu este recomandată pentru utilizare zilnică. In momentul de față, versiunile Nightly nu suportă actualizare automată. Vă rugăm să descărcați manual versiunile mai noi de pe <a href=\"https://nightly.iina.io\">site-ul nostru Nightly</a>.";
+"initial.debug.desc" = "Versiunile de debug de obicei nu sunt optimizate pentru performanță, ca urmare nu sunt recomandate în utilizarea de zi cu zi. Versiunile de debug nu suportă actualizări automate.";
+"initial.bug_report" = "Raportați pe <a href=\"https://github.com/iina/iina/issues\">pagina de probleme de pe GitHub</a>.";
+
+// Inspector Window
+"inspector.error" = "Eroare";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Buffering...%d%%";
+"main.opening_stream" = "Se deschide streamul…";
+"main.seeking_indicator" = "Se caută…";
+"osc.precision" = "Precizie";
+"osc.1s" = "O secundă";
+"osc.100ms" = "100 milisecunde";
+"osc.10ms" = "10 milisecunde";
+"osc.1ms" = "o milisecundă";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "Implicit";
+"quicksetting.item_none" = "Fără";
+"quicksetting.hwdec" = "Decodare hardware";
+"quicksetting.deinterlace" = "Deîntrețesere";
+"quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "Se ascunde";
+"quicksetting.reset_speed" = "Resetați viteza la 1x";
+
+// EQ Presets
+"eq.preset.flat" = "Plat";
+"eq.preset.acoustic" = "Acustic";
+"eq.preset.classical" = "Clasic";
+"eq.preset.dance" = "Dance";
+"eq.preset.deep" = "Deep";
+"eq.preset.electronic" = "Electronic";
+"eq.preset.hip_hop" = "Hip Hop";
+"eq.preset.increase_bass" = "Mult bass";
+"eq.preset.increase_treble" = "Mult treble";
+"eq.preset.increase_vocal" = "Evidențiază vocea";
+"eq.preset.jazz" = "Jazz";
+"eq.preset.latin" = "Latino";
+"eq.preset.loundness" = "Zgomot";
+"eq.preset.lounge" = "Camera de așteptare";
+"eq.preset.piano" = "Pian";
+"eq.preset.pop" = "Pop";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "Bass redus";
+"eq.preset.reduce_treble" = "Treble redus";
+"eq.preset.rock" = "Rock";
+"eq.preset.small_speaker" = "Difuzor mic";
+"eq.preset.spoken_word" = "Spoken Word";
+
+"alert.eq.new_profile.title" = "Profil EQ nou";
+"alert.eq.new_profile.message" = "Introduceți un nume pentru profil.";
+"alert.eq.rename.title" = "Redenumiți profilul curent";
+"alert.eq.rename.message" = "Introduceți un nume nou pentru profil.";
+
+// OSDMessage.swift
+"osd.pause" = "Pauză";
+"osd.resume" = "Reia";
+"osd.volume" = "Volum: %@";
+"osd.speed" = "Viteză: %@x";
+"osd.aspect" = "Raport de aspect: %@";
+"osd.crop" = "Decupare: %@";
+"osd.rotate" = "Rotește: %i°";
+"osd.deinterlace" = "Deîntrețesere: %@";
+"osd.hwdec" = "Decodare hardware: %@";
+"osd.audio_delay.nodelay" = "Întârziere audio: Fără întârziere";
+"osd.audio_delay.later" = "Întârziere audio: %@s mai târziu";
+"osd.audio_delay.earlier" = "Întârziere audio: %@s mai devreme";
+"osd.sub_delay.nodelay" = "Întârziere subtitrare: Fără întârziere";
+"osd.sub_delay.later" = "Întârziere subtitrare: %@s mai târziu";
+"osd.sub_delay.earlier" = "Întârziere subtitrare: %@s mai devreme";
+"osd.subtitle_pos" = "Poziție subtitrare: %@";
+"osd.sub_hidden" = "Subtitrări ascunse";
+"osd.sub_visible" = "Subtitrări vizibile";
+"osd.sub_second_delay.nodelay" = "Decalaj subtitrări secundare: fără decalaj";
+"osd.sub_second_delay.later" = "Decalaj subtitrări secundare: %@s după";
+"osd.sub_second_delay.earlier" = "Decalaj subtitrări secundare: %@s înainte";
+"osd.sub_second_hidden" = "Subtitrări secundare ascunse";
+"osd.sub_second_pos" = "Poziție subtitrări secundare: %@";
+"osd.sub_second_visible" = "Subtitrări secundare vizibile";
+"osd.mute" = "Mut";
+"osd.unmute" = "Activează sunetul";
+"osd.screenshot" = "Captură de ecran realizată";
+"osd.abloop.a" = "Buclă-AB: A";
+"osd.abloop.b" = "Buclă-AB: B";
+"osd.abloop.clear" = "AB-Loop: Șters";
+"osd.stop" = "Oprire";
+"osd.chapter" = "Capitol: %@";
+"osd.subtitle_scale" = "Scală subtitrare: %@x";
+"osd.add_to_playlist" = "Fișierul %i a fost adăugat la lista de redare";
+"osd.clear_playlist" = "Listă de redare ștearsă";
+"osd.video_eq.contrast" = "Contrast: %i";
+"osd.video_eq.gamma" = "Gamma: %i";
+"osd.video_eq.hue" = "Nuanță: %i";
+"osd.video_eq.saturation" = "Saturație: %i";
+"osd.video_eq.brightness" = "Luminozitate: %i";
+"osd.find_online_sub" = "Găsește subtitrări online…";
+"osd.find_online_sub.source" = "de la";
+"osd.sub_not_found" = "Nu s-au găsit subtitrări";
+"osd.sub_found" = "%d subtitrări găsite.";
+"osd.sub_downloading" = "Se descarcă %d subtitrări";
+"osd.sub_downloaded" = "Subitrare descărcată";
+"osd.sub_saved" = "Subtitrare salvată";
+"osd.network_error" = "Eroare de rețea";
+"osd.file_error" = "Eroare la citirea fișierului";
+"osd.cannot_login" = "Nu se poate loga";
+"osd.canceled" = "Anulat";
+"osd.cannot_connect" = "Nu se poate conecta";
+"osd.timed_out" = "Timp expirat";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.filter_added" = "Filtru adăugat: %@";
+"osd.filter_removed" = "Filtru șters";
+"osd.file_loop" = "Repetă un singur fișier";
+"osd.playlist_loop" = "Repetă playlist-ul";
+"osd.no_loop" = "Dezactivează repetiția";
+
+"preference.title" = "Preferințe";
+"preference.general" = "General";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.subtitle" = "Subtitrare";
+"preference.network" = "Rețea";
+"preference.control" = "Control";
+"preference.keybindings" = "Atribuiri de taste";
+"preference.advanced" = "Avansat";
+"preference.plugins" = "Extensii";
+"preference.utilities" = "Utilități";
+"preference.scripts" = "Scripturi";
+"preference.not_logged_in" = "Nu te-ai logat";
+"preference.logged_in_as" = "Logat ca %@";
+"preference.system_media_control" = "Utilizează controlul media al sistemului";
+
+"preference.key_binding_hint_1" = "Pentru a edita o atribuire de taste in configurația curentă, click pe butonul „Duplicare…” pentru a crea o copie.";
+"preference.key_binding_hint_2" = "Dublu click pe un rând din dreapta pentru a edita tasta atribuită.";
+
+"preference.enable_adv_settings" = "Activează setările avansate";
+
+"preference.sub_override_level.no" = "nu";
+"preference.sub_override_level.force" = "putere";
+"preference.sub_override_level.scale" = "mărime";
+"preference.sub_override_level.strip" = "de tot";
+"preference.sub_override_level.yes" = "da";
+
+"preference.sub_override_level.descriptive_text.no" = "Redă subtitrările precum sunt specificate de script-ul pentru subtitrări, fără a lua în seamă alte preferințe.";
+"preference.sub_override_level.descriptive_text.force" = "Aplică toate stilurile pentru subtitrări.";
+"preference.sub_override_level.descriptive_text.scale" = "Aplică setarea de mărime împreună cu setarea de stil din această secțiune.";
+"preference.sub_override_level.descriptive_text.strip" = "Elimină complet toate tag-urile și stilurile ASS din subtitrare.";
+"preference.sub_override_level.descriptive_text.yes" = "Aplică toate setările de stil din această secțiune.";
+
+"preference.ytdl_plugin_not_installed" = "Instalați extensia Online Media din \"Extensii > Instalați de pe GitHub\" pentru a vă bucura de caracteristici avansate precum descărcare video și actualizări automate yt-dlp.";
+"preference.ytdl_plugin_installed" = "Suportul youtube-dl încorporat este dezactivat deoarece aveți extensia Online Media instalată.";
+
+"menu.volume" = "Volum: %@";
+"menu.volume_muted" = "Volum: %@ (Mut)";
+"menu.audio_delay" = "Întârziere audio: %@s";
+"menu.sub_delay" = "Întârziere subtitrare: %@s";
+"menu.sub_hide" = "Ascunde subtitrările";
+"menu.sub_show" = "Arată subtitrările";
+"menu.sub_second_hide" = "Ascunde subtitrările secundare";
+"menu.sub_second_show" = "Arată subtitrările secundare";
+"menu.fullscreen" = "Afișează pe ecran complet";
+"menu.exit_fullscreen" = "Ieși din ecran complet";
+"menu.pip" = "Afișează în Picture-in-Picture";
+"menu.exit_pip" = "Ieși din Picture-in-Picture";
+"menu.mini_player" = "Intră în modul Muzică";
+"menu.exit_mini_player" = "Ieșiți din modul Muzică";
+"menu.pause" = "Pauză";
+"menu.resume" = "Reia";
+"menu.speed" = "Viteză: %@x";
+"menu.chapters" = "Afilșează panoul Capitole";
+"menu.hide_chapters" = "Ascunde panoul Capitole";
+"menu.playlist" = "Arată panoul Listă de redare";
+"menu.hide_playlist" = "Ascunde panoul Listă de Redare";
+"menu.video" = "Arată panoul Video";
+"menu.hide_video" = "Ascunde panoul Video";
+"menu.audio" = "Arată panoul Audio";
+"menu.hide_audio" = "Ascunde panoul Audio";
+"menu.subtitles" = "Arată panoul Subtitrări";
+"menu.hide_subtitles" = "Ascunde panoul Subtitrări";
+
+"menu.seek_forward" = "Sari înainte %@s";
+"menu.seek_backward" = "Sari înapoi %@s";
+"menu.speed_up" = "Accelerați de %@ ori";
+"menu.speed_down" = "Încetiniți de %@ ori";
+"menu.volume_up" = "Volum +%@%%";
+"menu.volume_down" = "Volum -%@%%";
+"menu.audio_delay_up" = "Întârziere audio +%@s";
+"menu.audio_delay_down" = "Întârziere audio -%@s";
+"menu.sub_delay_up" = "Întârziere subitrare +%@s";
+"menu.sub_delay_down" = "Întârziere subitrare -%@s";
+
+"menu.crop_custom" = "Personalizat…";
+"menu.find_online_sub" = "Găsește subtitrări online din %@";
+
+"menu.manage_plugins" = "Gestionați extensiile…";
+"menu.developer_tool" = "Unealtă pentru dezvoltatori";
+"menu.more_plugin" = "Mai mult…";
+"menu.conflicting_shortcuts" = "Comenzi rapide contradictorii…";
+"menu.reload_plugins" = "Reîncarcă toate extensiile";
+"menu.show_plugins_panel" = "Afișează panoul de extensii";
+"menu.hide_plugins_panel" = "Ascunde panoul de extensii";
+
+"track.audio" = "Audio";
+"track.none" = "<None>";
+"track.sub" = "Subtitrare";
+"track.video" = "Video";
+
+"subtrack.no_loaded" = "Nu s-a încărcat nicio subtitrare";
+"subtrack.no_external" = "Nu s-au găsit subtitrări externe";
+
+// Alerts
+"alert.beta_channel.title" = "Primește versiuni beta";
+
+"alert.title_error" = "Eroare";
+"alert.title_warning" = "Avertizare";
+"alert.title_info" = "Informație";
+
+"alert.fatal_error" = "Eroare critică: %@ \nAplicația se va închide.";
+"alert.mpv_error" = "Eroare internă %@ (%@) la setarea opțiunii %@.";
+
+"alert.unsupported_audio" = "Fișier audio extern neacceptat.";
+"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_sub" = "Subtitrare externă neacceptată. ";
+"alert.unsupported_url" = "URL neacceptat.";
+"alert.wrong_url_format" = "Format URL greșit.";
+
+"alert.error_open" = "Fișierul sau stream-ul nu poate fi deschis!";
+"alert.error_finding_file" = "Fișierul %@ nu poate fi găsit!";
+"alert.error_loading_script" = "Scriptul %@ nu poate fi încărcat!";
+"alert.error_saving_file" = "A apărut o eroare la salvarea %@: %@";
+"alert.error_deleting_file" = "Fișierul nu poate fi șters.";
+
+"alert.target_peak.bad_value" = "Valoarea \"%@\" este invalidă.\nVă rugăm să furnizați o valoare între 10 și 10000, sau 0.";
+
+"alert.config.new.title" = "Configurație nouă de intrare";
+"alert.config.new.message" = "Te rog introdu un nume pentru noua configurație.";
+"alert.config.duplicate.title" = "Duplică configurația";
+"alert.config.duplicate.message" = "Te rog introdu numele pentru fișierul de configurare duplicat.";
+"alert.config.file_existing.title" = "Fișierul există deja";
+"alert.config.file_existing.message" = "O configurare cu un fișier identic denumit există deja. Alegeți OK pentru a arăta fișierul în Finder.";
+"alert.config.cannot_create" = "Nu se poate crea fișierul de configurare!\n%@";
+"alert.config.cannot_write" = "Nu se poate scrie în fișierul de configurare!";
+"alert.config.rename.title" = "Redenumiți configurarea de intrare";
+"alert.config.rename.message" = "Introduceți un nou nume pentru configurare.";
+
+"alert.filter.incorrect" = "A apărut o eroare la setarea filtrelor. Verificați formatul parametrului.";
+"alert.add_filter.title" = "Filtru nou";
+"alert.add_filter.message" = "Te rog introdu un șir care să fie o comandă în formatul mpv vf sau af.";
+
+"alert.keybinding_config.error" = "Eroare la scrierea atriubuirii de tasre în fișierul\"%@\"! Se revine la setarea implicită IINA. Te rog verifică fișierul de configurare.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
+"alert.extra_option.cannot_read" = "Opțiunile mpv extra definite de către utilizator nu pot fi citite. ";
+"alert.extra_option.empty" = "Cheia sau valoarea nu pot fi goale!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.config_folder" = "Eroare la setarea directorului de configurare \"%@\".";
+
+"alert.playlist.error_deleting" = "Eroare la ștergere: %@";
+
+"alert.screenshot.error_taking" = "Nu se poate face o captură de ecran!";
+
+"alert.sub.no_selected" = "Inițial, selectează o subtitrare descărcată.";
+"alert.sub_lang_not_set" = "Te rog să specifici limba subtitrării preferată înainte de a utiliza OpenSubtitles. Engleză(eng) va fi utilizată de această dată.";
+"alert.sub.cannot_save_passwd" = "Nu se poate salva parola în Portchei: %@";
+"alert.sub.cannot_login" = "Nu se poate efectua login. Te rog verifică numele de utilizator, parola și starea rețelei.\n\n%@";
+"alert.sub.save_downloaded.title" = "Salvează subtitrările descărcate";
+
+"alert.set_default.title" = "Setează IINA ca aplicație implicită";
+"alert.set_default.message" = "IINA va fi aplicația implictă pentru toate fișierele pe care le suportă.";
+"alert.set_default.success" = "Terminat(e) %d cu succes și %d eșuat(e).";
+
+"alert.add_watch.title" = "Adăugați o proprietate de ceas";
+"alert.add_watch.message" = "Te rog introdu un nume valid pentru proprietatea mpv";
+
+"alert.jump_to.title" = "Sari la";
+"alert.jump_to.message" = "Te rog introdu timpul la care vrei să sari. Exemplu: 20:35";
+
+"alert.opensub.login.title" = "Logare OpenSubtitles";
+"alert.opensub.login.message" = "Te rog introdu numele de utilizator și parola";
+
+"alert.open_url.title" = "Deschide URL";
+"alert.open_url.message" = "Te rog introdu un URL:";
+"alert.choose_media_file.title" = "Alege un fișier media";
+
+"alert.add_url.title" = "Adaugă URL";
+"alert.add_url.message" = "Te rog introdu un URL:";
+
+"alert.delete_history.title" = "Șterge istoricul de redare";
+"alert.delete_history.message" = "Ești sigur că vrei să ștergi intrările selectate?";
+"alert.delete_all_history.title" = "Șterge istoricul de redare";
+"alert.delete_all_history.message" = "Sigur dorești să ștergi istoricul de redare?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
+
+"alert.filter_hwdec.message" = "Ești pe cale să aplici un filtru video. Cu toate acestea, decodorul hardware curent poate să nu suporte filtre video. Poți dezactiva decodarea hardware sau să schimbi la Auto(Copy), ceea ce va consuma de două ori mai multă memorie.\nPosibil să trebuiască să repeți ultima operațiune (ex: setarea decupării) pentru a funcționa.";
+"alert.filter_hwdec.abort" = "Abandonează";
+"alert.filter_hwdec.turn_off" = "Dezactivează decodarea hardware";
+"alert.filter_hwdec.use_copy" = "Schimbă la Auto(Copy)";
+
+"alert.clear_cache.title" = "Șterge cache-ul miniaturilor";
+"alert.clear_cache.message" = "Sigur dorești să ștergi cache-ul miniaturilor?";
+
+"alert.clear_history.title" = "Șterge istoricul de redare";
+"alert.clear_history.message" = "Sigur dorești să ștergi istoricul de redare?";
+
+"alert.clear_watch_later.title" = "Șterge progresul de redare salvat";
+"alert.clear_watch_later.message" = "Sigur dorești să ștergi istoricul de redare salvat (incluzând „urmărește mai târziu”)?";
+
+"alert.restore_alerts.title" = "Restaurează alertele reprimate";
+"alert.restore_alerts.message" = "Sunteţi sigur că doriţi să restauraţi alertele reprimate?";
+
+"alert.cleared" = "Eliminat.";
+"alert.restored" = "Restaurat.";
+"alert.custom" = "%@";
+
+"alert.nothing_to_open" = "Nimic de redat.";
+
+"alert.no_video_track" = "Nu există o pistă video.";
+
+"alert.duplicate_config" = "Nu poți modifica direct configurațiile implicite. Te rog duplică-le înainte de a modifica.";
+
+"alert.assrt_register" = "Datorită limitărilor de API, este recomandat să folosești propriul API token. Token-ul implicit este doar pentru utilizări demo și poți întâmpina erori de rețea.";
+"alert.assrt_register.register" = "Înregistrează-te";
+"alert.assrt_register.try" = "Încearcă";
+"alert.assrt_token_prompt.title" = "Introdu token-ul API";
+"alert.assrt_token_prompt.message" = "Înregistrează-te în pagina deschiă. Obține token-ul din pagina ta home și introdu-l mai jos:";
+"alert.assrt_token_invalid" = "Token-ul API Assrt pare să fie invalid.";
+
+"alert.plugin_uninstall.title" = "Sunteți sigur ca doriți sa dezinstalați %@?";
+"alert.plugin_uninstall.message" = "Extensia va fi ștearsă de pe discul dvs.";
+"alert.plugin_reinstall.title" = "Extensia %@ există deja";
+"alert.plugin_reinstall.message" = "Doriți să reinstalați extensia?";
+"alert.duplicated_plugin_id" = "S-au detectat duplicate ale identificatoarelor de extensii. Două sau mai multe extensii au același identificator \"%@\". Acest lucru poate cauza comportamente anormale. Le puteți găsi în Preferințe - Extensii și le puteți raporta autorilor lor. Dacă o extensie este instalată local, puteți schimba manual identificatorul ei în fișierul Info.json al acesteia.";
+"alert.plugin_no_update" = "Nu s-a găsit nicio actualizare.";
+"alert.plugin_update_found.title" = "Actualizare găsită pentru %@";
+"alert.plugin_update_found.message" = "Ultima versiune este %@. Aveți %@. Doriți să actualizați?";
+"alert.plugin_permission" = "Această extensie necesită următoarele permisiuni. Vă rugăm să le revizuiți înainte de a continua.";
+"alert.plugin_permission_added" = "Această actualizare necesită permisiuni suplimentare. Vă rugăm să le revizuiți înainte de a continua.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+
+"playlist.total_length" = "%@ în total";
+"playlist.total_length_with_selected" = "%@ din %@ selectat";
+"playlist.sorting.header" = "Sortare";
+"playlist.sorting.filename_ascending" = "Nume fișier ascendent";
+"playlist.sorting.filename_descending" = "Nume fișier descendent";
+"playlist.sorting.path_ascending" = "Calea fișierului ascendent";
+"playlist.sorting.path_descending" = "Calea fișierului descendent";
+"pl_menu.title_multi" = "%d elemente";
+"pl_menu.play_next" = "Redă în continuare";
+"pl_menu.play_in_new_window" = "Redă în Fereastră Nouă";
+"pl_menu.remove" = "Elimină";
+"pl_menu.remove_multi" = "Elimină elementele selectate";
+"pl_menu.delete" = "Mută la Coș";
+"pl_menu.delete_multi" = "Mută fișierele selectate la Coș";
+"pl_menu.delete_after_play" = "Mută la Coș după redare";
+"pl_menu.delete_after_play_multi" = "Mută elementele selectare la Coș după ce au fost redate";
+"pl_menu.show_in_finder" = "Arată în Finder";
+"pl_menu.add_file" = "Adaugă Fișier…";
+"pl_menu.add_url" = "Adaugă URL…";
+"pl_menu.clear_playlist" = "Șterge lista de redare";
+"pl_menu.matched_sub" = "%d subtitrări potrivite";
+"pl_menu.add_sub" = "Adaugă subtitrare…";
+"pl_menu.wrong_sub" = "Subtitrare greșită!";
+"pl_menu.browser" = "Deschide în Browser";
+"pl_menu.copy_url" = "Copiază URL";
+"pl_menu.copy_url_multi" = "Copiază URL-uri";
+"pl_menu.playback" = "Redare";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Extensie";
+"pl_menu.playlist" = "Listă de redare";
+
+"keymapping.title" = "Atribuire de taste";
+"keymapping.message" = "Apasă o tasta pentru a înregistra.";
+
+"filter.video_filters" = "Filtre video";
+"filter.audio_filters" = "Filtre audio";
+
+"hwdec.no" = "Dezactivează decodarea hardware.";
+"hwdec.auto" = "Activează decodarea hardware. Cu toate acestea, multe filtre video nu vor funcționa corect.";
+"hwdec.auto-copy" = "Activează decodarea hardware. Va consuma dublul de memorie, dar va funcționa cu filtrele video.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
+"subencoding.auto" = "Detectează automat";
+
+"osc_toolbar.settings" = "Setări rapide";
+"osc_toolbar.playlist" = "Listă de redare și capitole";
+"osc_toolbar.pip" = "Activează Picture-in-Picture";
+"osc_toolbar.full_screen" = "Activează ecran complet";
+"osc_toolbar.music_mode" = "Intră în modul Muzică";
+"osc_toolbar.sub_track" = "Alege pista de subtitrare";
+"osc_toolbar.screenshot" = "Faceți o captură de ecran";
+"osc_toolbar.plugins" = "Afișează panoul de extensii";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Deasupra";
+"osc_pos.top" = "Sus";
+"osc_pos.bottom" = "Jos";
+
+"mini_player.album_art" = "Comută coperta albumului";
+"mini_player.loop" = "Repetare";
+"mini_player.shuffle" = "Amestecă";
+"mini_player.remove" = "Elimină din lista de redare";
+"mini_player.add" = "Adaugă la lista de redare";
+"mini_player.delete" = "Șterge tot din lista de redare";
+"mini_player.volume" = "Volum";
+"mini_player.close" = "Închide modul muzică";
+"mini_player.back" = "Înapoi la modul video";
+"mini_player.sort" = "Sortează playlist-ul";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sec înainte";
+"touchbar.ahead_30" = "30sec înainte";
+"touchbar.back_15" = "15sec înapoi";
+"touchbar.back_30" = "30sec înapoi";
+"touchbar.next_video" = "Video următor";
+"touchbar.prev_video" = "Video precedent";
+"touchbar.increase_volume" = "Volum +";
+"touchbar.decrease_volume" = "Volum -";
+"touchbar.rewind" = "Înapoi";
+"touchbar.fast_forward" = "Repede înainte";
+"touchbar.play_pause" = "Redă/Pauză";
+"touchbar.seek" = "Căutare";
+"touchbar.time" = "Timp curent";
+"touchbar.remainingTimeOrTotalDuration" = "Timp Rămas / Total Durată";
+"touchbar.toggle_pip" = "Activează Picture-in-Picture";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Solicitare rețea";
+"permissions.network-request.desc" = "Această extensie poate cere sau încărca date pe aceste site-uri:";
+"permissions.network-request.any_site" = "Orice site";
+"permissions.show-osd.name" = "Arată OSD";
+"permissions.show-osd.desc" = "Această extensie poate afișa mesajele OSD (On Screen Display).";
+"permissions.show-alert.name" = "Arată alerte";
+"permissions.show-alert.desc" = "Această extensie poate afișa alerte pop-up.";
+"permissions.video-overlay.name" = "Adaugă overlay peste video";
+"permissions.video-overlay.desc" = "Această extensie poate reda conținut suplimentar în partea de sus a videoclipului.";
+"permissions.file-system.name" = "Accesează fișiere de sistem";
+"permissions.file-system.desc" = "Această extensie poate citi sau scrie fișiere pe discul dvs., inclusiv informații sensibile. De asemenea, poate apela alte programe sau aplicații care vă pot afecta calculatorul. Deci asigurați-vă că ați verificat sursa.";
+
+"plugin.install" = "Instalare";
+"plugin.installed" = "Instalat";
+"plugin.not_installed" = "Nu este instalat";
+"plugin.local" = "Instalat local";
+"alert.plugin.install_error" = "A apărut o eroare în timpul instalării: %@";
+"alert.invalid_url" = "URL-ul nu este valid.";
+"plugin.install_error.invalid_url" = "URL-ul nu este valid.";
+"plugin.install_error.file_not_found" = "Fișierul package nu poate fi găsit.";
+"plugin.install_error.cannot_download" = "Descărcarea extensiei a eșuat.\n\nMotiv:%@\n";
+"plugin.install_error.cannot_unpackage" = "Dezarhivarea extensiei a eșuat.\n\nMotiv:%@\n";
+"plugin.install_error.cannot_load" = "IINA nu poate încărca aceasta extensie. Ar putea fi într-un format greşit.";
+"plugin.check_for_updates" = "Verifică dacă există actualizări";
+"plugin.updating" = "Se descarcă actualizarea…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Vizualizare jurnal";
+"logwindow.time" = "Timp";
+"logwindow.subsystem" = "Subsistem";
+"logwindow.message" = "Mesaj";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Salvează";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Copiază";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "Istoric de redare";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "Progres";
+"history_window.col.played_at" = "Redat la";
+"history_window.menu.play" = "Redă";
+"history_window.menu.play_new_window" = "Redă în Fereastră Nouă";
+"history_window.menu.show_in_finder" = "Arată în Finder";
+"history_window.menu.delete" = "Șterge…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Șterge istoricul de redare";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "Dată";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "Caută în";
+"history_window.search.filename" = "Fișier";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "Fără Căutări Recente";
+"history_window.search.recents_title" = "Căutări Recente";
+"history_window.search.clear_recents" = "Șterge Recente";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "Audio";
+"sidebar.sub" = "Subtitrări";
+"sidebar.plugins" = "Extensii";
+"sidebar.playlist" = "Listă de redare";
+"sidebar.chapters" = "Capitole";
+
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "Sidebar";
+"sidebar.sidebar_position" = "Sidebar Position";
+"sidebar.compact_interface" = "Compact Interface";
+"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
+"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
+"sidebar.docked" = "Docked Control Bar and Titlebar";
+"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.settings" = "Setări";
+"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+
+"sidebar.aspect_ratio" = "Raport de aspect";
+"sidebar.crop" = "Decupează";
+"sidebar.rotation" = "Rotație";
+"sidebar.speed" = "Viteză";
+
+"sidebar.brightness" = "Luminozitate";
+"sidebar.contrast" = "Contrast";
+"sidebar.saturation" = "Saturație";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Încarcă Pistă Audio Externă…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Salvează EQ-ul curent ca șablon…";
+"sidebar.rename_eq" = "Redenumește șablonul EQ curent…";
+"sidebar.remove_eq" = "Șterge șablonul EQ curent";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Încarcă Subtitrare…";
+"sidebar.search_online" = "Caută Online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Font";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Bordură";
+"sidebar.shadow" = "Umbră";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+
+"sidebar.add_file" = "Adaugă Fișier…";
+"sidebar.add_url" = "Adaugă URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "Arată fereastra de bun venit";
+"settings.actionAfterLaunch.items.1" = "Afișează panoul Deschide fișier";
+"settings.actionAfterLaunch.items.2" = "Nu face nimic";
+"settings.actionAfterLaunch.label" = "La deschidere";
+"settings.allowDuplicatePlayers.label" = "Allow opening the same file in multiple windows";
+"settings.allowScreenSaverForAudio.desc" = "Încă împiedică sistemul să intre în repaus.";
+"settings.allowScreenSaverForAudio.label" = "În \"music mode\" se va reda numai sunetul";
+"settings.alwaysOpenInNewWindow.label" = "Deschide următorul element media în fereastră nouă";
+"settings.autoRepeat.label" = "Loop when a file is opened manually";
+"settings.autoSwitchToMusicMode.label" = "Schimbă la „Modul muzică” automat atunci când rulează un fișier audio";
+"settings.blackOutMonitor.label" = "Înnegrește celelalte ecrane cât timp este în ecran complet";
+"settings.defaultRepeatMode.items.0" = "Repetă playlist";
+"settings.defaultRepeatMode.items.1" = "Repetă fișier";
+"settings.fullScreenWhenOpen.label" = "Intră în ecran complet";
+"settings.groupSimultaneousOpensInPlaylist.label" = "Group media in playlist when opening multiple files at once";
+"settings.keepOpenOnFileEnd.label" = "Păstrează fereastra deschisă după ce se termină redarea";
+"settings.pauseWhenGoesToSleep.label" = "Pune pauză când Mac-ul adoarme";
+"settings.pauseWhenInactive.label" = "Fereastra devine inactivă/activă";
+"settings.pauseWhenLeavingFullScreen.label" = "Pune pauză când se iese din ecran complet";
+"settings.pauseWhenMinimized.label" = "Minimizat/ne-minimizat";
+"settings.pauseWhenOpen.label" = "Pauză";
+"settings.pauseresumeWhen" = "Pauză/redare când";
+"settings.playWhenEnteringFullScreen.label" = "Redă când intră în ecran complet";
+"settings.playlistAutoAdd.desc" = "Necesită repornirea IINA pentru a avea efect.";
+"settings.playlistAutoAdd.label" = "Adaugă fișierele din același dosar în mod automat";
+"settings.playlistAutoPlayNext.label" = "Redă următorul element în mod automat";
+"settings.playlistShowMetadata.label" = "Arată numele artistului și al piesei pentru fișierele audio atunci când sunt disponibile";
+"settings.playlistShowMetadataInMusicMode.label" = "Numai în modul \"muzică\"";
+"settings.preventScreenSaver.label" = "Împiedică pornirea screen saver-ului în timpul redării";
+"settings.quitWhenNoOpenedWindow.label" = "Termină după ce toate feresetrele sunt închise";
+"settings.receiveBetaUpdate.label" = "Primește versiuni beta";
+"settings.recordPlaybackHistory.label" = "Activează istoricul de redare";
+"settings.recordRecentFiles.label" = "Activează meniul „Deschise recent”";
+"settings.resumeLastPosition.label" = "Reia ultima poziție de redare";
+"settings.screenShotFormat.label" = "Format";
+"settings.screenShotIncludeSubtitle.label" = "Include subtitrările";
+"settings.screenshotCopyToClipboard.desc" = "Destinație";
+"settings.screenshotCopyToClipboard.label" = "Copiază în clipboard";
+"settings.screenshotSaveToFile.desc" = "/cale/spre/dosarul/de/captură";
+"settings.screenshotSaveToFile.label" = "Salvează în";
+"settings.screenshotShowPreview.label" = "Arată previzualizări după captura de ecran";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "Altfel, doar fișierele deschise manual vor apărea în acest meniu.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Reține toate fișierele în meniul „Deschise recent”";
+"settings.useLegacyFullScreen.label" = "Folosește ecran complet în mod legacy";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "Activează modul HDR în mod implicit la redarea videoclipurilor HDR.";
+"settings.enableHdrSupport.label" = "Enable HDR mode";
+"settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
+"settings.enableLiveText.label" = "Live Text";
+"settings.enableToneMapping.label" = "Activează stabilirea tonurilor";
+"settings.forceDedicatedGPU.desc" = "Utilizaţi întotdeauna GPU special pentru randare (dacă există). Acest lucru poate îmbunătăţi performanţa, dar poate reduce durata de viaţă a bateriei.";
+"settings.forceDedicatedGPU.label" = "Forțează GPU dedicat";
+"settings.hardwareDecoder.items.0" = "Dezactivat";
+"settings.hardwareDecoder.items.0.desc" = "Dezactivează decodarea hardware.";
+"settings.hardwareDecoder.items.1" = "Automat";
+"settings.hardwareDecoder.items.1.desc" = "Activează decodarea hardware. Cu toate acestea, multe filtre video nu vor funcționa corect.";
+"settings.hardwareDecoder.items.2" = "Auto (Copiere)";
+"settings.hardwareDecoder.items.2.desc" = "Activează decodarea hardware. Va consuma dublul de memorie, dar va funcționa cu filtrele video.";
+"settings.hardwareDecoder.label" = "Decodor hardware";
+"settings.loadIccProfile.desc" = "Încarcă profilul ICC pentru display-ul curent și folosește-l pentru a transforma video RGB în output pe ecran. (Numai pentru modul SDR)";
+"settings.loadIccProfile.label" = "Încarcă profilul ICC";
+"settings.toneMappingAlgorithm.label" = "Algoritm";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingTargetPeak.label" = "Valoare maximă";
+"settings.videoThreads.desc" = "Implicit: 0 (Auto)";
+"settings.videoThreads.label" = "Numărul firelor";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "The default audio driver.";
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation este un driver audio nou și experimental care oferă suport Spatial Audio. Este posibil să întâmpinați probleme la utilizarea acestuia, precum decalaje audio.";
+"settings.audioDriverEnableAVFoundation.label" = "Driver audio";
+"settings.enableInitialVolume.label" = "Volum inițial";
+"settings.gaplessAudio.desc" = "Gapless audio";
+"settings.gaplessAudio.items.0" = "Dezactivat";
+"settings.gaplessAudio.items.0.desc" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"settings.gaplessAudio.items.1" = "Weak";
+"settings.gaplessAudio.items.1.desc" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"settings.gaplessAudio.items.2" = "Strong";
+"settings.gaplessAudio.items.2.desc" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"settings.gaplessAudio.label" = "Gapless audio";
+"settings.maxVolume.desc" = "(100-1000)";
+"settings.maxVolume.label" = "Volum maxim";
+"settings.preferredAudioDevice.label" = "Dispozitiv audio preferat";
+"settings.replayGain.desc" = "Reglează volumul conform valorilor ReplayGain din metadatele fișierului.";
+"settings.replayGain.items.0" = "Niciun reglaj";
+"settings.replayGain.items.1" = "Amplitudine pistă";
+"settings.replayGain.items.2" = "Amplitudine album";
+"settings.replayGain.label" = "Reglare amplitudine";
+"settings.replayGainClip.desc" = "Dacă această opțiune nu este activă, clipping-ul va fi prevenit prin micșorarea amplificării.";
+"settings.replayGainClip.label" = "Permite clipping volumului";
+"settings.replayGainFallback.desc" = "Amplificare aplicată dacă fișierul nu are tag-uri ReplayGain.";
+"settings.replayGainFallback.label" = "Fallback";
+"settings.replayGainPreamp.desc" = "Preamplificare aplicată amplificării ReplayGain.";
+"settings.replayGainPreamp.label" = "Amplitudine în preamplificator";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "Fără";
+"settings.doubleClickAction.items.1" = "Activează ecran complet";
+"settings.doubleClickAction.items.2" = "Pauză/Redare";
+"settings.doubleClickAction.items.4" = "Activează Picture-in-Picture";
+"settings.doubleClickAction.items.5" = "Buclă A-B";
+"settings.doubleClickAction.items.6" = "Reset speed";
+"settings.doubleClickAction.label" = "Dublu click";
+"settings.forceTouchAction.items.0" = "Fără";
+"settings.forceTouchAction.items.1" = "Activează ecran complet";
+"settings.forceTouchAction.items.2" = "Pauză/Redare";
+"settings.forceTouchAction.items.3" = "Ascunde OSC";
+"settings.forceTouchAction.label" = "Force Touch";
+"settings.horizontalScrollAction.items.0" = "Ajustează volum";
+"settings.horizontalScrollAction.items.1" = "Căutare";
+"settings.horizontalScrollAction.items.2" = "Fără";
+"settings.horizontalScrollAction.items.4" = "Adjust playback speed";
+"settings.horizontalScrollAction.label" = "Derulare orizontală";
+"settings.middleClickAction.items.0" = "Fără";
+"settings.middleClickAction.items.1" = "Activează ecran complet";
+"settings.middleClickAction.items.2" = "Pauză/Redare";
+"settings.middleClickAction.items.3" = "Ascunde OSC";
+"settings.middleClickAction.items.4" = "Activează Picture-in-Picture";
+"settings.middleClickAction.items.5" = "Buclă A-B";
+"settings.middleClickAction.items.6" = "Reset speed";
+"settings.middleClickAction.label" = "Click mijlociu";
+"settings.pinchAction.items.0" = "Ajustează dimensiunea ferestrei";
+"settings.pinchAction.items.1" = "Ecran complet";
+"settings.pinchAction.items.2" = "Fără";
+"settings.pinchAction.label" = "Ciupire";
+"settings.playbackSpeedScrollAmount.label" = "Sensitivity for speed";
+"settings.relativeSeekAmount.label" = "Sensibilitate pentru căutare normală";
+"settings.rightClickAction.desc" = "Click mijlociu";
+"settings.rightClickAction.items.0" = "Fără";
+"settings.rightClickAction.items.2" = "Pauză/Redare";
+"settings.rightClickAction.items.3" = "Ascunde OSC";
+"settings.rightClickAction.items.4" = "Activează Picture-in-Picture";
+"settings.rightClickAction.items.5" = "Buclă A-B";
+"settings.rightClickAction.items.6" = "Reset speed";
+"settings.rightClickAction.label" = "Click dreapta";
+"settings.singleClickAction.items.0" = "Fără";
+"settings.singleClickAction.items.2" = "Pauză/Redare";
+"settings.singleClickAction.items.3" = "Ascunde OSC";
+"settings.singleClickAction.label" = "Click";
+"settings.useExactSeek.desc" = "Căutarea exactă este mai precisă, dar poate cauza lag și utilizare ridicată a procesorului.";
+"settings.useExactSeek.items.0" = "Căutare cadre cheie";
+"settings.useExactSeek.items.1" = "Căutare exactă";
+"settings.useExactSeek.items.2" = "Automat";
+"settings.useExactSeek.label" = "Tipul căutării";
+"settings.verticalScrollAction.items.0" = "Ajustează volum";
+"settings.verticalScrollAction.items.1" = "Căutare";
+"settings.verticalScrollAction.items.2" = "Fără";
+"settings.verticalScrollAction.items.4" = "Adjust playback speed";
+"settings.verticalScrollAction.label" = "Derulare verticală";
+"settings.videoViewAcceptsFirstMouse.desc" = "Mouse";
+"settings.videoViewAcceptsFirstMouse.label" = "Acceptă primul clic al mouse-ului când nu este focalizat";
+"settings.volumeScrollAmount.label" = "Sensibilitate pentru volum";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Afișează valori raw";
+"settings.useMediaKeys.label" = "Utilizează controlul media al sistemului";
+
+// Settings - Network
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.label" = "Buffer before starting playback";
+"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.httpProxy.desc" = "Necesită repornirea IINA pentru a avea efect.";
+"settings.httpProxy.label" = "Proxy HTTP";
+"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.label" = "Secunde pentru preîncărcare";
+"settings.showBufferingThrobber.label" = "Show throbber when buffering";
+"settings.showSeekingThrobber.label" = "Afișează animația de încărcare în timpul căutării";
+"settings.transportRTSPThrough.items.0" = "Automat";
+"settings.transportRTSPThrough.label" = "Transportă stream RTSP prin";
+"settings.userAgent.label" = "Agent utilizator";
+"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
+"settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "Opțiuni raw";
+"settings.ytdlSearchPath.desc" = "IINA va căuta youtube-dl în acest dosar. Este necesar restart.";
+"settings.ytdlSearchPath.label" = "Cale implicită youtube-dl";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Caută subtitrări online automat";
+"settings.displayInLetterBox.label" = "Afișează subitrările în casete în modul ecran complet";
+"settings.subAlignX.items.0" = "Stânga";
+"settings.subAlignX.items.1" = "Centru";
+"settings.subAlignX.items.2" = "Dreapta";
+"settings.subAlignY.items.0" = "Sus";
+"settings.subAlignY.items.1" = "Centru";
+"settings.subAlignY.items.2" = "Jos";
+"settings.subAutoLoadIINA.items.0" = "Dezactivat";
+"settings.subAutoLoadIINA.items.1" = "Subtitrări care conțin numele fișierului";
+"settings.subAutoLoadIINA.items.2" = "Detectate inteligent de IINA";
+"settings.subAutoLoadIINA.label" = "Auto încărcare";
+"settings.subAutoLoadPriorityString.desc" = "Te rog introdu o listă cu elemente separate de virgulă.";
+"settings.subAutoLoadPriorityString.label" = "Subtitrările au prioritate atunci când numele fișierului conține";
+"settings.subAutoLoadSearchPath.desc" = "Dosarele sunt deparate de două puncte (:). Căile relative și cele incomplete (*) la final sunt permise.";
+"settings.subAutoLoadSearchPath.label" = "De asemenea, caută subtitrări în următoarele dosare";
+"settings.subBlur.label" = "Blur";
+"settings.subBold.desc" = "sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
+"settings.subBold.label" = "Aldin";
+"settings.subItalic.label" = "Cursiv";
+"settings.subLang.desc" = "Această opțiune va fi stocată ca ISO 639-2 și va funcționa atât pentru mpv, cât și pentru opensubtitles.";
+"settings.subOverrideLevel.items.0" = "da";
+"settings.subOverrideLevel.items.0.desc" = "Aplică toate setările de stil din această secțiune.";
+"settings.subOverrideLevel.items.1" = "putere";
+"settings.subOverrideLevel.items.1.desc" = "Aplică toate stilurile pentru subtitrări.";
+"settings.subOverrideLevel.items.2" = "de tot";
+"settings.subOverrideLevel.items.2.desc" = "Elimină complet toate tag-urile și stilurile ASS din subtitrare.";
+"settings.subOverrideLevel.items.3" = "mărime";
+"settings.subOverrideLevel.items.3.desc" = "Aplică setarea de mărime împreună cu setarea de stil din această secțiune.";
+"settings.subOverrideLevel.items.4" = "nu";
+"settings.subOverrideLevel.items.4.desc" = "Redă subtitrările precum sunt specificate de script-ul pentru subtitrări, fără a lua în seamă alte preferințe.";
+"settings.subPos.label" = "Poziție verticală";
+"settings.subScaleWithWindow.label" = "Scalează subtirările cu dimensiunea ferestrei";
+"settings.subSpacing.label" = "Spațiere font";
+
+// Settings - UI
+"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
+"settings.alwaysFloatOnTop.label" = "Întotdeauna deasupra în timpul redării";
+"settings.alwaysShowOnTopIcon.label" = "Afișează întotdeauna deasupra statusul în bara de titlu";
+"settings.arrowBtnAction.items.0" = "Viteză";
+"settings.arrowBtnAction.items.1" = "Precedentul / Următorul element media";
+"settings.arrowBtnAction.items.2" = "Repede Înainte / Înapoi";
+"settings.arrowBtnAction.label" = "Utilizează butoanele stânga/dreapta pentru";
+"settings.controlBarAutoHideTimeout.label" = "Auto hide after";
+"settings.controlBarStickToCenter.label" = "Snap pe centru în timpul mutării";
+"settings.disableAnimations.desc" = "Când setarea de accesibilitate \"macOS Reduce Motion\" este activată, IINA va reduce animațiile din interfața utilizatorului care sunt cunoscute a cauza probleme pentru cei cu tulburări vestibulare. În cazul în care acest lucru nu este suficient, această setare poate fi folosită pentru a reduce și mai mult mișcarea prin eliminarea animațiilor din interfața utilizatorului.";
+"settings.disableAnimations.label" = "Oprește animațiile";
+"settings.disableOSDFileStartMsg.label" = "Început fișier";
+"settings.disableOSDPauseResumeMsgs.label" = "Pauză/Redare";
+"settings.disableOSDSeekMsg.label" = "Căutare";
+"settings.disableOSDSpeedMsg.label" = "Viteză";
+"settings.disablePlaySliderScrolling.label" = "Împiedică rotița de derulare să modifice poziția de redare";
+"settings.disableVolumeSliderScrolling.label" = "Împiedică rotița de derulare să modifice volumul";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Afișează timpul și informațiile despre baterie în ecran complet";
+"settings.enableOSD.label" = "Activează OSD";
+"settings.enableThumbnailForRemoteFiles.label" = "Include fișierele de pe o unitate de stocare montată la distanță";
+"settings.enableThumbnailPreview.label" = "Activează previzualizarea miniaturilor";
+"settings.maxThumbnailPreviewCacheSize.label" = "Dimensiune maximă cache";
+"settings.oscPosition.items.0" = "Deasupra";
+"settings.oscPosition.items.1" = "Sus";
+"settings.oscPosition.items.2" = "Jos";
+"settings.oscPosition.label" = "Controale pe ecran";
+"settings.osdTextSize.label" = "Dimensiune text";
+"settings.pauseWhenPip.label" = "Pune pauză redării în mod automat";
+"settings.resizeWindowOption.items.0" = "Potrivește la ecran";
+"settings.resizeWindowOption.items.1" = "0,5x din video";
+"settings.resizeWindowOption.items.2" = "1x din video";
+"settings.resizeWindowOption.items.3" = "1,5x din video";
+"settings.resizeWindowOption.items.4" = "2x din video";
+"settings.resizeWindowOption.label" = "Redimensionează fereastra la";
+"settings.scaleRemainingTime.label" = "Bazează timpul rămas pe viteza de redare";
+"settings.showChapterPos.label" = "Arată poziția capitolului în bara de progres";
+"settings.showRemainingTime.label" = "Arată timpul rămas în locul duratei totale";
+"settings.themeMaterial.desc" = "Temă";
+"settings.themeMaterial.items.0" = "Întunecat";
+"settings.themeMaterial.items.2" = "Luminos";
+"settings.themeMaterial.items.4" = "Potrivire Aspect sistem";
+"settings.themeMaterial.label" = "Aspect";
+"settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
+"settings.thumbnailWidth.label" = "Thumbnail width";
+"settings.togglePipByMinimizingWindow.label" = "Activează Picture-in-Picture la minimizarea/re-afișarea ferestrei";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "Numai pentru fișiere video";
+"settings.usePhysicalResolution.label" = "Utilizează dimensiunea fizică pe ecranele Retina";
+"settings.windowBehaviorWhenPip.items.0" = "Nu face nimic";
+"settings.windowBehaviorWhenPip.items.1" = "Se ascunde";
+"settings.windowBehaviorWhenPip.items.2" = "Se minimizează";
+"settings.windowBehaviorWhenPip.label" = "Fereastra";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "Setările următoare au nevoie de restartul IINA pentru a avea efect.";
+"settings.enableAdvancedSettings.label" = "Activează setările avansate";
+"settings.enableLogging.label" = "Activează înregistrarea";
+"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
+"settings.logLevel.items.0" = "Verbose";
+"settings.logLevel.items.1" = "Depanare";
+"settings.logLevel.items.2" = "Avertizare";
+"settings.logLevel.items.3" = "Eroare";
+"settings.logLevel.label" = "Nivel jurnal";
+"settings.useMpvOsd.label" = "Utilizează OSD mpv";
+"settings.useUserDefinedConfDir.label" = "Utilizează dosarul pentru configurări";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "Subtitrări ASS";
+"settings.$About" = "Despre";
+"settings.$Accessibility" = "Accesibilitate";
+"settings.$AdditionalMpvOptions" = "Opțiuni mpv adiționale";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$Advanced" = "Avansat";
+"settings.$Align" = "Aliniere";
+"settings.$AlwaysWhenPlaying" = "Always when playing a new file";
+"settings.$Appearance" = "Aspect";
+"settings.$AssrtAPIToken" = "Assrt API token";
+"settings.$Author" = "Autor";
+"settings.$AutoLoad" = "Auto încărcare";
+"settings.$Background" = "Fundal";
+"settings.$Behavior" = "Comportament";
+"settings.$Border" = "Bordură";
+"settings.$BrowserExtensions" = "Browser Extensions";
+"settings.$Cache" = "Cache";
+"settings.$Cancel" = "Anulează";
+"settings.$CheckForUpdates" = "Verifică dacă există versiuni noi";
+"settings.$CheckForUpdates.items.3600" = "O dată pe oră";
+"settings.$CheckForUpdates.items.86400" = "Zilnic";
+"settings.$CheckForUpdates.items.604800" = "Zilnic";
+"settings.$CheckForUpdates.items.2629800" = "Lunar";
+"settings.$Chrome" = "Chrome";
+"settings.$ClearCache" = "Șterge Cache";
+"settings.$ClearPlaybackHistory" = "Șterge istoricul de redare";
+"settings.$ClearSavedPlaybackProgress" = "Șterge progresul de redare salvat";
+"settings.$ClearThumbnailCache" = "Șterge cache-ul miniaturilor";
+"settings.$Color" = "Culoare";
+"settings.$ColorHDR" = "Color and HDR";
+"settings.$CommunityPlugins" = "Community Plugins";
+"settings.$CreateAnEmptySet" = "Create an empty set…";
+"settings.$Customize" = "Personalizează…";
+"settings.$Decoding" = "Decoding";
+"settings.$DefaultApplication" = "Aplicație Implicită";
+"settings.$DefaultEncoding" = "Codare implicită";
+"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DoNotResize" = "Do not resize";
+"settings.$DuplicateCurrentSet" = "Duplicate current set…";
+"settings.$FailedToLoadThePage" = "Încărcarea paginii a eșuat.";
+"settings.$Firefox" = "Firefox";
+"settings.$Font" = "Font";
+"settings.$GetBrowserExtensionsForIINA" = "Obține Extensiile de Browser pentru IINA";
+"settings.$GetPlugins" = "Get Plugins…";
+"settings.$Hardware" = "Hardware";
+"settings.$Height" = "Înălțime";
+"settings.$Help" = "Ajutor";
+"settings.$History" = "Istoric";
+"settings.$Identifier" = "Identificator";
+"settings.$ImportAnExistingConfigFile" = "Importă un fișier de configurație existent";
+"settings.$InitialWindowPosition" = "Poziția inițială a ferestrei";
+"settings.$InitialWindowSize" = "Dimensiunea inițială a ferestrei";
+"settings.$InputGithubURL" = "Input a Github URL";
+"settings.$Install" = "Instalare";
+"settings.$InstallLocalPackage" = "Install Local Package…";
+"settings.$Installed" = "Instalat";
+"settings.$Installing" = "Installing";
+"settings.$KeyBindingSet" = "Key binding set";
+"settings.$Layout" = "Aspect";
+"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
+"settings.$LiveText" = "Live Text";
+"settings.$Logging" = "Logging";
+"settings.$Login" = "Logare";
+"settings.$MB" = "MB";
+"settings.$MPVSettings" = "mpv Settings";
+"settings.$Margin" = "Marjă";
+"settings.$Mouse" = "Mouse";
+"settings.$Network" = "Rețea";
+"settings.$NewKeyBindingSet" = "New key binding set";
+"settings.$NoSelection" = "No Selection";
+"settings.$NotLoggedIn" = "Nu te-ai logat";
+"settings.$OK" = "OK";
+"settings.$OfficialPlugins" = "Official Plugins";
+"settings.$Offset" = "Compensare";
+"settings.$OnScreenController" = "Controale pe ecran";
+"settings.$OnScreenDisplay" = "On Screen Display";
+"settings.$OnlineSubtitles" = "Subtitrări Online";
+"settings.$OpenLinksOrCurrentWebpage" = "Deschide linkuri sau pagina curentă în IINA cu un singur click. Site-ul trebuie să fie acceptat de către Youtube-dl.";
+"settings.$OpenLogDirectory" = "Deschide dosarul cu jurnale";
+"settings.$OpenLogWindow" = "Open the log viewer";
+"settings.$OrSelectFrom" = "Or select from available plugins";
+"settings.$Other" = "Other";
+"settings.$OtherStyles" = "Alte Stiluri";
+"settings.$OverrideLevel" = "Nivel Suprascriere";
+"settings.$Percent" = "%";
+"settings.$PictureinnPicture" = "Picture-in-Picture";
+"settings.$Playlist" = "Listă de redare";
+"settings.$PleaseSelectTheMediaTypes" = "Te rog selectează tipurile de media pentru care vrei ca IINA să fie aplicația implicită.";
+"settings.$Position" = "Poziție";
+"settings.$PreferredLanguage" = "Limbă preferată";
+"settings.$RestoreAlerts" = "Restaurează alertele";
+"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Restaurează alertele reprimate";
+"settings.$SPDIFOutput" = "Ieșire S/PDIF";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$Safari" = "Safari";
+"settings.$Screenshots" = "Capturi de ecran";
+"settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
+"settings.$Settings" = "Setări";
+"settings.$Shadow" = "Umbră";
+"settings.$ShowInFinder" = "Arată în Finder";
+"settings.$ShowTheConfigFileIn" = "Afișează fișierul de configurație în Finder";
+"settings.$Size" = "Dimensiune";
+"settings.$Source" = "Sursa";
+"settings.$SubtitleSource" = "Subtitle source";
+"settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
+"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
+"settings.$SuppressMessagesFor" = "Oprește mesajele pentru";
+"settings.$TextSubtitles" = "Textul subtitrărilor";
+"settings.$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
+"settings.$ThumbnailPreview" = "Previzualizare Miniaturi";
+"settings.$Toolbar" = "Bară";
+"settings.$Trackpad" = "Trackpad";
+"settings.$Uninstall" = "Dezinstalați";
+"settings.$Volume" = "Volum";
+"settings.$Website" = "Site web";
+"settings.$WhenEnteringPIP" = "La activarea Pictrure-in-Picture";
+"settings.$WhenMediaIsOpened" = "Când se deschide un element media";
+"settings.$WhenMediaIsOpenedManually" = "Când media este deschis manual";
+"settings.$Width" = "Lățime";
+"settings.$Window" = "Fereastră";
+"settings.$X" = " X";
+"settings.$XOffset" = "Compensare X";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Compensare Y";
+"settings.$YTDL" = "Online Videos (yt-dlp)";
+"settings.$YouCanInstallANew" = "Puteți instala o nouă extensie din GitHub sau un pachet local .iinaplgz. Extensiile instalate din GitHub pot fi actualizate automat.";
+"settings.$bottom" = "josul";
+"settings.$dB" = "dB";
+"settings.$left" = "stânga";
+"settings.$nits" = "nits (luminozitate)";
+"settings.$ofScreen" = "% din ecran";
+"settings.$onlineMediaPluginAdvice" = "The Online Media plugin is recommended";
+"settings.$point" = "punct";
+"settings.$pt" = "pt";
+"settings.$right" = "dreapta";
+"settings.$s" = "s";
+"settings.$sideOfTheScreen" = "ecranului";
+"settings.$toThe" = "spre";
+"settings.$top" = "susul";
+"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";

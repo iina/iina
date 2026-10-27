@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Beskær";
+"crop.w" = "Bredde (standard: video bredde)";
+"crop.h" = "Højde (standard: video højde)";
+"crop.x" = "Oprindelig X (standard: center)";
+"crop.y" = "Oprindelig Y (Standard: center)";
+
+"expand" = "Udvid";
+"expand.w" = "Bredde (standard: video bredde)";
+"expand.h" = "Højde (standard: video højde)";
+"expand.x" = "Oprindelig X (standard: center)";
+"expand.y" = "Oprindelig Y (standard: center)";
+"expand.aspect" = "Udvid til at passe til format (f.eks. 4/3)";
+"expand.round" = "Rund op for at gøre delelig med denne værdi";
+
+"sharpen" = "Skarphed";
+"sharpen.msize" = "Matrix størrelse";
+"sharpen.amount" = "Mængde";
+
+"blur" = "Slør";
+"blur.msize" = "Matrix størrelse";
+"blur.amount" = "Mængde";
+
+"delogo" = "Fjern vandmærke";
+"delogo.w" = "Bredde";
+"delogo.h" = "Højde";
+"delogo.x" = "Oprindelig X";
+"delogo.y" = "Oprindelig Y";
+
+"negative" = "Negativt";
+
+"vflip" = "Vend";
+"hflip" = "Spejl";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Arkiv sti (du kan også trække og slippe arkivet i indtastningsfeltet)";
+"lut3d.interp" = "Interpolations tilstand";
+
+"custom_mpv" = "Brugerdefineret (mpv)";
+"custom_mpv.name" = "Filternavn";
+"custom_mpv.string" = "Filterværdi";
+
+"custom_ffmpeg" = "Brugerdefineret (FFmpeg)";
+"custom_ffmpeg.name" = "Filternavn";
+"custom_ffmpeg.string" = "Filterværdi";

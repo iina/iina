@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Abaikan";
+"cmd.seek" = "Geser";
+"cmd.revert-seek" = "Geser terbalik";
+"cmd.set" = "Set";
+"cmd.cycle" = "Pergantian";
+"cmd.cycle-values" = "Pergantian pada";
+"cmd.add" = "Ganti";
+"cmd.multiply" = "Perbanyak";
+"cmd.frame-step" = "Frame Selanjutnya";
+"cmd.frame-back-step" = "Frame Sebelumnya";
+"cmd.ab-loop" = "Perulangan A-B";
+"cmd.sub-seek" = "Geser pada terjemahan";
+"cmd.playlist-next" = "Media berikutnya";
+"cmd.playlist-prev" = "Media sebelumnya";
+"cmd.playlist-move" = "Pindahkan item Playlist";
+"cmd.playlist-clear" = "Bersihkan Playlist";
+"cmd.playlist-remove" = "Hapus playlist";
+"cmd.playlist-shuffle" = "Acak";
+"cmd.write-watch-later-config" = "Tinggalkan riwayat pemutaran";
+"cmd.stop" = "Berhenti";
+"cmd.quit" = "Keluar";
+"cmd.quit-watch-later" = "Keluar (simpan progres)";
+"cmd.screenshot" = "Tangkapan layar";
+"cmd.screenshot-to-file" = "Simpan tangkapan layar sebagai file";
+"cmd.loadfile" = "Muat file";
+"cmd.loadlist" = "Muat Playlist";
+"cmd.run" = "Jalankan";
+
+"iina.flip" = "Balikkan";
+"iina.mirror" = "Cerminkan";
+
+"iina.toggle-pip" = "Aktif/nonaktifkan Picture-in-Picture";
+"iina.toggle-music-mode" = "Aktif/nonaktifkan Mode Musik";
+"iina.open-file" = "Buka file";
+"iina.open-url" = "Buka URL";
+"iina.video-panel" = "Panel video";
+"iina.audio-panel" = "Panel audio";
+"iina.sub-panel" = "Panel terjemahan";
+"iina.playlist-panel" = "Panel Playlist";
+"iina.chapter-panel" = "Panel Chapter";
+"iina.bigger-window" = "Window Lebih Besar";
+"iina.smaller-window" = "Window Lebih Kecil";
+"iina.fit-to-screen" = "Paskan dengan Layar";
+"iina.toggle-flip" = "Aktif/nonaktifkan Mode Terbalik";
+"iina.toggle-mirror" = "Aktif/nonaktifkan Mode Cermin";
+"iina.save-playlist" = "Simpan Playlist ini";
+"iina.show-current-file-in-finder" = "Tampilkan file yang dirujuk di Finder";
+"iina.delete-current-file" = "Hapus file Ini";
+"iina.delete-current-file-hard" = "Hapus file ini langsung tanpa memindahkan ke Trash";
+"iina.find-online-subs" = "Cari terjemahan online";
+"iina.save-downloaded-sub" = "Simpan terjemahan terunduh";
+
+"yes" = "Ya";
+"no" = "Tidak";
+"to" = "ke";
+"by" = "oleh";
+"in" = "dalam";
+"add" = "tambahkan";
+"minus" = "kurangi";
+"forward" = "maju";
+"backward" = "mundur";
+"seek-to" = "ke";
+
+"relative" = "dtk";
+"absolute" = "dtk";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "dtk (pas)";
+"relative-percent+exact" = "% (pas)";
+"absolute+keyframe" = "dtk (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
+
+"opt.pause" = "Jeda";
+"opt.speed" = "Kecepatan";
+
+"opt.window-scale" = "Skala window";
+
+"opt.video" = "Trek video";
+"opt.video-aspect-override" = "Aspek video";
+"opt.contrast" = "Kontras";
+"opt.brightness" = "Kecerahan";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturasi";
+"opt.deinterlace" = "Deinterlace";
+
+"opt.audio" = "Trek audio";
+"opt.volume" = "Volume";
+"opt.mute" = "Bisukan";
+"opt.audio-delay" = "Penundaan Audio";
+
+"opt.sub" = "Trek terjemahan";
+"opt.sub-delay" = "Penundaan Terjemahan";
+"opt.sub-pos" = "Posisi terjemahan";
+"opt.sub-scale" = "Ukuran terjemahan";
+"opt.sub-visibility" = "Visibilitas terjemahan";
+"opt.secondary-sub-visibility" = "Visibilitas terjemahan sekunder";
+"opt.sub-ass-style-override" = "Paksakan ASS style";
+
+"opt.fullscreen" = "Layar Penuh";
+"opt.ontop" = "Apungkan di atas";
+
+"opt.chapter" = "Chapter";
+
+"read.set" = "Set {{property}} ke {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Kalikan {{property}} dengan {{factor}}x";
+"read.cycle" = "Pergantian {{property}}{{#dir_down}} ke bawah{{/dir_down}}";
+"read.cycle-values" = "Pergantian {{property}} dalam ({{{values}}})";
+"read.seek" = "Geser {{#fwd}}maju{{/fwd}}{{#bwd}}mundur{{/bwd}}{{#abs}}sampai{{/abs}} {{value}}{{#sec}}dtk{{/sec}}{{#per}}%{{/per}} {{#exact}}(pas){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Geser ke {{#skip_1}}berikutnya{{/skip_1}}{{#skip_-1}}sebelumnya{{/skip_-1}} terjemahan";

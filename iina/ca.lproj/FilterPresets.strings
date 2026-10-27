@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Escapça";
+"crop.w" = "Amplada (per defecte: amplada del vídeo)";
+"crop.h" = "Alçada (per defecte: alçada del vídeo)";
+"crop.x" = "Orígen X (per defecte: centre)";
+"crop.y" = "Orígen Y (per defecte: centre)";
+
+"expand" = "Amplia";
+"expand.w" = "Amplada (per defecte: amplada del vídeo";
+"expand.h" = "Alçada (per defecte: alçada del vídeo)";
+"expand.x" = "Orígen X (per defecte: centre)";
+"expand.y" = "Orígen Y (per defecte: centre)";
+"expand.aspect" = "Amplia per ajustar la relació d'aspecte (ex.: 4/3)";
+"expand.round" = "Arrodonir per fer divisible per aquest valor";
+
+"sharpen" = "Augmenta la nitidesa";
+"sharpen.msize" = "Mida de la matriu";
+"sharpen.amount" = "Quantitat";
+
+"blur" = "Difumina";
+"blur.msize" = "Mida de la matriu";
+"blur.amount" = "Quantitat";
+
+"delogo" = "Delogo";
+"delogo.w" = "Amplada";
+"delogo.h" = "Alçada";
+"delogo.x" = "Orígen X";
+"delogo.y" = "Orígen Y";
+
+"negative" = "Negatiu";
+
+"vflip" = "Inverteix";
+"hflip" = "Reflecteix";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Fitxer";
+"lut3d.interp" = "Mode d'interpolació";
+
+"custom_mpv" = "Personalitzat (mpv)";
+"custom_mpv.name" = "Nom del filtre";
+"custom_mpv.string" = "Valor del filtre";
+
+"custom_ffmpeg" = "Personalitzat (FFmpeg)";
+"custom_ffmpeg.name" = "Nom del filtre";
+"custom_ffmpeg.string" = "Valor del filtre";

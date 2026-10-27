@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Zuschneiden";
+"crop.w" = "Breite (Standard: Videobreite)";
+"crop.h" = "Höhe (Standard: Videohöhe)";
+"crop.x" = "Ursprungspunkt X-Achse (Standard: Mitte)";
+"crop.y" = "Ursprungspunkt Y-Achse (Standard: Mitte)";
+
+"expand" = "Ausdehnen";
+"expand.w" = "Breite (Standard: Videobreite)";
+"expand.h" = "Höhe (Standard: Videohöhe)";
+"expand.x" = "Ursprungspunkt X-Achse (Standard: Mitte)";
+"expand.y" = "Ursprungspunkt Y-Achse (Standard: Mitte)";
+"expand.aspect" = "Auf Seitenverhältnis ausdehnen (z. B. 4/3)";
+"expand.round" = "Aufrunden bis durch diesen Wert teilbar";
+
+"sharpen" = "Schärfen";
+"sharpen.msize" = "Matrizengröße";
+"sharpen.amount" = "Stärke";
+
+"blur" = "Weichzeichnen";
+"blur.msize" = "Matrizengröße";
+"blur.amount" = "Stärke";
+
+"delogo" = "Logo entfernen";
+"delogo.w" = "Breite";
+"delogo.h" = "Höhe";
+"delogo.x" = "Ursprungspunkt X-Achse";
+"delogo.y" = "Ursprungspunkt Y-Achse";
+
+"negative" = "Negativ";
+
+"vflip" = "Vert. spiegeln";
+"hflip" = "Horiz. spiegeln";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Datei";
+"lut3d.interp" = "Interpolationsmodus";
+
+"custom_mpv" = "Benutzerdef. (mpv)";
+"custom_mpv.name" = "Filtername";
+"custom_mpv.string" = "Wert";
+
+"custom_ffmpeg" = "Benutzerdef. (FFmpeg)";
+"custom_ffmpeg.name" = "Filtername";
+"custom_ffmpeg.string" = "Wert";

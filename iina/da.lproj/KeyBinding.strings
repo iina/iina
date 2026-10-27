@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorer";
+"cmd.seek" = "Spol";
+"cmd.revert-seek" = "Spol tilbage";
+"cmd.set" = "Indstil";
+"cmd.cycle" = "Cyklus";
+"cmd.cycle-values" = "Cyklus ind";
+"cmd.add" = "Ændre";
+"cmd.multiply" = "Gange";
+"cmd.frame-step" = "Næste billede";
+"cmd.frame-back-step" = "Forrige billede";
+"cmd.ab-loop" = "A-B løkke";
+"cmd.sub-seek" = "Undertekst spol";
+"cmd.playlist-next" = "Næste medie";
+"cmd.playlist-prev" = "Forrige medie";
+"cmd.playlist-move" = "Flyt element i spillelisten";
+"cmd.playlist-clear" = "Ryd spilleliste";
+"cmd.playlist-remove" = "Fjern valgte";
+"cmd.playlist-shuffle" = "Bland";
+"cmd.write-watch-later-config" = "Optag afspilningshistorik";
+"cmd.stop" = "Stop";
+"cmd.quit" = "Afslut";
+"cmd.quit-watch-later" = "Afslut (gem position)";
+"cmd.screenshot" = "Skærmbillede";
+"cmd.screenshot-to-file" = "Skærmbillede til fil";
+"cmd.loadfile" = "Åbn fil";
+"cmd.loadlist" = "Åbn spilleliste";
+"cmd.run" = "Kør";
+
+"iina.flip" = "Vend";
+"iina.mirror" = "Spejlvend";
+
+"iina.toggle-pip" = "Skift billede-i-billede";
+"iina.toggle-music-mode" = "Skift musiktilstand";
+"iina.open-file" = "Åbn fil";
+"iina.open-url" = "Åbn URL";
+"iina.video-panel" = "Videopanel";
+"iina.audio-panel" = "Lydpanel";
+"iina.sub-panel" = "Undertekstpanel";
+"iina.playlist-panel" = "Spilleliste-panel";
+"iina.chapter-panel" = "Kapitel-panel";
+"iina.bigger-window" = "Større vindue";
+"iina.smaller-window" = "Mindre vindue";
+"iina.fit-to-screen" = "Tilpas til skærm";
+"iina.toggle-flip" = "Toggle vend";
+"iina.toggle-mirror" = "Toggle spejlvend";
+"iina.save-playlist" = "Gem nuværende spilleliste";
+"iina.show-current-file-in-finder" = "Vis nuværende arkiv i Finder";
+"iina.delete-current-file" = "Slet nuværende arkiv";
+"iina.delete-current-file-hard" = "Slet nuværende arkiv direkte uden at flytte det til papirkurv";
+"iina.find-online-subs" = "Find undertekster online";
+"iina.save-downloaded-sub" = "Gem downloadede undertekster";
+
+"yes" = "Ja";
+"no" = "Nej";
+"to" = "til";
+"by" = "af";
+"in" = "i";
+"add" = "forøg";
+"minus" = "formindsk";
+"forward" = "fremad";
+"backward" = "tilbage";
+"seek-to" = "til";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (præcis)";
+"relative-percent+exact" = "% (præcis)";
+"absolute+keyframe" = "s (billede)";
+"absolute-percent+keyframe" = "s (billede)";
+
+"opt.pause" = "Pause";
+"opt.speed" = "Hastighed";
+
+"opt.window-scale" = "Vindue skalering";
+
+"opt.video" = "Video";
+"opt.video-aspect-override" = "Video format";
+"opt.contrast" = "Kontrast";
+"opt.brightness" = "Lysstyrke";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Mætning";
+"opt.deinterlace" = "Deinterlace";
+
+"opt.audio" = "Lyd";
+"opt.volume" = "Volumen";
+"opt.mute" = "Lydløs";
+"opt.audio-delay" = "Lyd forsinkelse";
+
+"opt.sub" = "Undertekst Spor";
+"opt.sub-delay" = "Undertekst forsinkelse";
+"opt.sub-pos" = "Undetekst position";
+"opt.sub-scale" = "Undetekst skala";
+"opt.sub-visibility" = "Undertekst synlighed";
+"opt.secondary-sub-visibility" = "Sekundære underteksters synlighed";
+"opt.sub-ass-style-override" = "ASS stil overskriv";
+
+"opt.fullscreen" = "Fuld skærm";
+"opt.ontop" = "Flydende øverst";
+
+"opt.chapter" = "Kapitel";
+
+"read.set" = "Sæt {{property}} til {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Gang {{property}} med {{factor}}x";
+"read.cycle" = "Skift {{property}}{{#dir_down}} nedad{{/dir_down}}";
+"read.cycle-values" = "Skift {{property}} i ({{{values}}})";
+"read.seek" = "Spol {{#fwd}}fremad{{/fwd}}{{#bwd}}tilbage{{/bwd}}{{#abs}}til{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(nøjagtiv){{/exact}}{{#kf}}(billede){{/kf}}";
+"read.sub-seek" = "Spol til {{#skip_1}}næste{{/skip_1}}{{#skip_-1}}tidligere{{/skip_-1}} undertekst";

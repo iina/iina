@@ -1,0 +1,29 @@
+/* Class = "NSButtonCell"; title = "Use system media control"; ObjectID = "2WY-CR-baD"; */
+"2WY-CR-baD.title" = "Задіяти системне керування медіафайлами";
+
+/* Class = "NSButtonCell"; title = "Display raw values"; ObjectID = "3RK-1k-otl"; */
+"3RK-1k-otl.title" = "Показати необроблені значення";
+
+/* Class = "NSTableColumn"; headerCell.title = "Action"; ObjectID = "4Bn-MF-dfY"; */
+"4Bn-MF-dfY.headerCell.title" = "Дія";
+
+/* Class = "NSButtonCell"; title = "Import an existing config file"; ObjectID = "6cO-C0-33g"; */
+"6cO-C0-33g.title" = "Імпортувати наявний файл конфігурації";
+
+/* Class = "NSTableColumn"; headerCell.title = "Key"; ObjectID = "JwC-60-7Hp"; */
+"JwC-60-7Hp.headerCell.title" = "Клавіша";
+
+/* Class = "NSTextFieldCell"; title = "Configuration:"; ObjectID = "au5-6f-s55"; */
+"au5-6f-s55.title" = "Конфігурація:";
+
+/* Class = "NSButtonCell"; title = "Show the config file in Finder"; ObjectID = "gDo-JL-a9k"; */
+"gDo-JL-a9k.title" = "Показати файл конфігурації у Finder";
+
+/* Class = "NSButtonCell"; title = "Duplicate…"; ObjectID = "gpZ-Rh-DMn"; */
+"gpZ-Rh-DMn.title" = "Дублювати…";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Show the raw mpv key code and command."; ObjectID = "l2M-TH-eCt"; */
+"l2M-TH-eCt.ibShadowedToolTip" = "Показати необроблені код клавіші та команду mpv.";
+
+/* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "veZ-Si-Hv5"; */
+"veZ-Si-Hv5.title" = "Параметри";

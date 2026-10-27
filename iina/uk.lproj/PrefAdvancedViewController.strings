@@ -1,0 +1,50 @@
+/* Class = "NSTextFieldCell"; title = "Additional mpv options"; ObjectID = "6F6-Y7-8oR"; */
+"6F6-Y7-8oR.title" = "Додаткові параметри mpv";
+
+/* Class = "NSButtonCell"; title = "Enable advanced settings"; ObjectID = "7ml-VU-xWv"; */
+"7ml-VU-xWv.title" = "Увімкнути розширені параметри";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
+"E3I-Q7-9t1.headerCell.title" = "Назва";
+
+/* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
+"HMa-Vz-EUk.title" = "Для набуття чинності наступні параметри потребують перезапуску IINA.";
+
+/* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
+"JDA-g3-RNX.title" = "Відкрити теку журналів";
+
+/* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
+"LCd-uY-Yze.title" = "Увімкнути журналювання";
+
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Обрати…";
+
+/* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
+"Qmc-Tb-d7d.title" = "Параметри";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
+"SX9-fy-bss.headerCell.title" = "Значення";
+
+/* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
+"ehL-8Y-G8h.title" = "Задіяти теку конфігурації:";
+
+/* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
+"phK-g9-Vbg.title" = "Показувати інформацію на екрані від mpv";
+
+/* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
+"nFf-vh-bNd.title" = "Рівень журналу:";
+
+/* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
+"Owx-92-Ogg.title" = "Відобразити журнал перегляду";
+
+/* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
+"S9M-yY-q0w.title" = "Детальний";
+
+/* Class = "NSMenuItem"; title = "Debug"; ObjectID = "hGq-ek-VHd"; */
+"hGq-ek-VHd.title" = "Налагодження";
+
+/* Class = "NSMenuItem"; title = "Warning"; ObjectID = "exP-JC-h7t"; */
+"exP-JC-h7t.title" = "Застереження";
+
+/* Class = "NSMenuItem"; title = "Error"; ObjectID = "sl8-Df-vbX"; */
+"sl8-Df-vbX.title" = "Помилка";

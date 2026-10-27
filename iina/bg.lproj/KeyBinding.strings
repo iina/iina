@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Игнориране";
+"cmd.seek" = "Превъртане";
+"cmd.revert-seek" = "Отмяна на превъртането";
+"cmd.set" = "Задаване";
+"cmd.cycle" = "Превключване";
+"cmd.cycle-values" = "Превключване напред";
+"cmd.add" = "Промяна";
+"cmd.multiply" = "Умножаване";
+"cmd.frame-step" = "Следващ кадър";
+"cmd.frame-back-step" = "Предишен кадър";
+"cmd.ab-loop" = "А-В повторение";
+"cmd.sub-seek" = "Търсене на субтитри";
+"cmd.playlist-next" = "Следваща медия";
+"cmd.playlist-prev" = "Предишна медия";
+"cmd.playlist-move" = "Преместване на елемент от плейлиста";
+"cmd.playlist-clear" = "Изчисти плейлиста";
+"cmd.playlist-remove" = "Премахни текущия";
+"cmd.playlist-shuffle" = "Разбъркване";
+"cmd.write-watch-later-config" = "Запис на историята";
+"cmd.stop" = "Спри";
+"cmd.quit" = "Изход";
+"cmd.quit-watch-later" = "Изход (запомни прогреса)";
+"cmd.screenshot" = "Екранна снимка";
+"cmd.screenshot-to-file" = "Екранна снимка във файл";
+"cmd.loadfile" = "Зареждане на файл";
+"cmd.loadlist" = "Зареждане на  плейлиста";
+"cmd.run" = "Изпълни";
+
+"iina.flip" = "Преобръщане";
+"iina.mirror" = "Огледално";
+
+"iina.toggle-pip" = "Превключване картина в картината";
+"iina.toggle-music-mode" = "Превключи към музикален режим";
+"iina.open-file" = "Отвори файл";
+"iina.open-url" = "Отвори URL";
+"iina.video-panel" = "Видео панел";
+"iina.audio-panel" = "Аудио панел";
+"iina.sub-panel" = "Панел на субтитрите";
+"iina.playlist-panel" = "Панел на плейлиста";
+"iina.chapter-panel" = "Панел „Глави“";
+"iina.bigger-window" = "По-голям прозорец";
+"iina.smaller-window" = "По-малък прозорец";
+"iina.fit-to-screen" = "Побиране в екрана";
+"iina.toggle-flip" = "Огледално обръщане";
+"iina.toggle-mirror" = "Огледално изображение";
+"iina.save-playlist" = "Запази текущия плейлист";
+"iina.show-current-file-in-finder" = "Покажи във Finder";
+"iina.delete-current-file" = "Изтрий текущия файл във Finder";
+"iina.delete-current-file-hard" = "Изтрий окончателно текущия файл";
+"iina.find-online-subs" = "Намери субтитри онлайн";
+"iina.save-downloaded-sub" = "Запази изтеглените субтитри";
+
+"yes" = "Да";
+"no" = "Не";
+"to" = "до";
+"by" = "от";
+"in" = "в";
+"add" = "Увеличи";
+"minus" = "Намали";
+"forward" = "напред";
+"backward" = "Назад";
+"seek-to" = "до";
+
+"relative" = "сек";
+"absolute" = "сек";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "Сек (точно)";
+"relative-percent+exact" = "% (точно)";
+"absolute+keyframe" = "сек. (ключов кадър)";
+"absolute-percent+keyframe" = "%  (ключов кадър)";
+
+"opt.pause" = "Пауза";
+"opt.speed" = "Скорост";
+
+"opt.window-scale" = "Мащаб на прозореца";
+
+"opt.video" = "Видео поток";
+"opt.video-aspect-override" = "Пропорции на видеото";
+"opt.contrast" = "Контраст";
+"opt.brightness" = "Яркост";
+"opt.gamma" = "Гама";
+"opt.saturation" = "Наситеност";
+"opt.deinterlace" = "Дейнтерлейсинг";
+
+"opt.audio" = "Аудио поток";
+"opt.volume" = "Сила на звука";
+"opt.mute" = "Без звук";
+"opt.audio-delay" = "Закъснение на аудиото";
+
+"opt.sub" = "Писта за субтитри";
+"opt.sub-delay" = "Закъснение на субтитрите";
+"opt.sub-pos" = "Позиция на субтитрите";
+"opt.sub-scale" = "Панел на субтитрите";
+"opt.sub-visibility" = "Видимост на субтитрите";
+"opt.secondary-sub-visibility" = "Видимост на вторичните субтитри";
+"opt.sub-ass-style-override" = "Игнориране на ASS стиловете";
+
+"opt.fullscreen" = "Цял екран";
+"opt.ontop" = "Винаги отгоре";
+
+"opt.chapter" = "Глава";
+
+"read.set" = "Задаване на {{property}} на {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Увеличаване на {{property}} {{factor}} пъти";
+"read.cycle" = "Превключване на {{property}}{{#dir_down}} (надолу){{/dir_down}}";
+"read.cycle-values" = "Превключване на {{property}} между ({{{values}}})";
+"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

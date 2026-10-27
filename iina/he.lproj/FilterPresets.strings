@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "חתוך";
+"crop.w" = "רוחב (ברירת מחדל: רוחב הוידאו)";
+"crop.h" = "גובה (ברירת מחדל: גובה הוידאו)";
+"crop.x" = "מקור X (ברירת מחדל: מרכז)";
+"crop.y" = "מקור Y (ברירת מחדל: מרכז)";
+
+"expand" = "הרחב";
+"expand.w" = "רוחב (ברירת מחדל: רוחב הוידאו)";
+"expand.h" = "גובה (ברירת מחדל: גובה הוידאו)";
+"expand.x" = "מקור X (ברירת מחדל: מרכז)";
+"expand.y" = "מקור Y (ברירת מחדל: מרכז)";
+"expand.aspect" = "מתרחב כדי להתאים להיבט (לדוגמה: 4/3)";
+"expand.round" = "מעוגל כלפי מעלה כדי להפוך לניתן לחלוקה בערך זה";
+
+"sharpen" = "חידוד";
+"sharpen.msize" = "גודל המטריצה";
+"sharpen.amount" = "רמה";
+
+"blur" = "טשטוש";
+"blur.msize" = "גודל המטריצה";
+"blur.amount" = "רמה";
+
+"delogo" = "הסרת סימן מים";
+"delogo.w" = "רוחב";
+"delogo.h" = "גובה";
+"delogo.x" = "מקור בציר X";
+"delogo.y" = "מקור בציר Y";
+
+"negative" = "שלילי";
+
+"vflip" = "היפוך";
+"hflip" = "מראה";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "נתיב קובץ (ניתן לגרור את הקובץ לתיבת הקלט)";
+"lut3d.interp" = "מצב אינטרפולציה";
+
+"custom_mpv" = "מותאם אישית (mpv)";
+"custom_mpv.name" = "שם מסנן";
+"custom_mpv.string" = "ערך מסנן";
+
+"custom_ffmpeg" = "מותאם אישית (FFmpeg)";
+"custom_ffmpeg.name" = "שם מסנן";
+"custom_ffmpeg.string" = "ערך מסנן";

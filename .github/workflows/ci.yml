@@ -1,0 +1,42 @@
+name: CI
+
+permissions:
+  contents: read
+
+on:
+  push:
+      branches: [develop]
+  pull_request:
+      branches: [develop]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - xcode: "27"
+            deployment_target: ""
+    runs-on:  xcode-27
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install dependencies
+        run: ./other/download_libs.sh $DOWNLOAD_LIBS_ARGS
+        env:
+          DOWNLOAD_LIBS_ARGS: ${{ github.event_name == 'pull_request' && '--skip-plugins' || '' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: xcodebuild -project iina.xcodeproj ONLY_ACTIVE_ARCH=NO -scheme iina -derivedDataPath . -configuration Nightly ${{ matrix.deployment_target }}
+        env:
+          DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+
+      - name: Create DMG
+        run: hdiutil create -volname "IINA Nightly" -srcfolder Build/Products/Nightly/IINA.app -ov -format UDZO IINA.dmg
+
+      - name: Save artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: IINA
+          path: IINA.dmg
+          archive: false

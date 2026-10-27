@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Options</title>
+    <script src="common.js" type="module"></script>
+    <style>
+        body {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .container {
+            width: 90%;
+            max-width: 880px;
+            margin: 1rem auto;
+            background: #f4f4f4;
+            border-radius: 6px;
+            box-shadow: 0 0 16px rgba(0,0,0,.2);
+        }
+        .title {
+            padding: 1rem;
+            margin: 0;
+        }
+        .option {
+            padding: 1rem;
+        }
+        .option:not(:last-child) {
+            border-top: 1px solid #e4e4e4;
+            border-bottom: 1px solid #e4e4e4;
+        }
+        .option .option-title {
+            font-weight: bold;
+        }
+        .option .option-details {
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">When clicking on the extension icon:</h2>
+        <div class="option">
+            <label class="option-title"><input type="radio" name="iconAction" value="clickOnly"> Open current page in IINA</label>
+            <div class="option-details">
+                <div class="item">
+                    <label><input type="radio" name="iconActionOption" value="direct"> Open directly</label>
+                </div>
+                <div class="item">
+                    <label><input type="radio" name="iconActionOption" value="fullScreen"> Enter full screen</label>
+                </div>
+                <div class="item">
+                    <label><input type="radio" name="iconActionOption" value="pip"> Enter Picture-in-Picture</label>
+                </div>
+            </div>
+        </div>
+        <div class="option">
+            <label class="option-title"><input type="radio" name="iconAction" value="menu"> Show a menu to select action</label>
+        </div>
+    </div>
+    <script src="options.js" type="module"></script>
+</body>
+</html>

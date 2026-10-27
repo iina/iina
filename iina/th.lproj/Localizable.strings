@@ -1,0 +1,1039 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "On";
+"general.off" = "Off";
+"general.login" = "เข้าสู่ระบบ";
+"general.logout" = "ออกจากระบบ";
+"general.ok" = "ตกลง";
+"general.cancel" = "ยกเลิก";
+"general.done" = "เสร็จสิ้น";
+"general.username" = "ชื่อผู้ใช้";
+"general.password" = "รหัสผ่าน";
+"general.na" = "N/A";
+"general.no_result" = "ไม่มีผลลัพธ์";
+"general.no_title" = "ไม่มีชื่อ";
+"general.auto" = "อัตโนมัติ";
+
+"input.value_is_empty" = "ต้องระบุค่า";
+"input.already_exists" = "มีค่านี้อยู่แล้ว";
+
+// Guide Window
+"guide.highlights" = "ไฮไลท์";
+"guide.basic_settings" = "การตั้งค่าพื้นฐาน";
+"guide.faq" = "คำถามที่พบบ่อย";
+
+// Initial Window
+"initial.announcement" = "คุณกำลังใช้งาน IINA เวอร์ชัน %@";
+"initial.beta.desc" = "หากคุณต้องการย้อนกลับไปใช้เวอร์ชันก่อนหน้า กดปุ่ม \"รับการอัพเดตเวอร์ชันเบต้า\" ออก ในการตั้งค่า > ทั่วไป และติดตั้งเวอร์ชันเสถียรจาก<a href=\"https://iina.io\">เว็บไซต์</a>อย่างเป็นทางการของเรา";
+"initial.nightly.desc" = "ไม่แนะนำให้ใช้เวอร์ชัน Nightly เป็นเวอร์ชันหลัก ขณะนี้เวอร์ชัน Nightly ไม่สนับสนุนการอัพเดตอัตโนมัติ กรุณาดาวน์โหลดเวอร์ชันใหม่จาก<a href=\"https://nightly.iina.io\">เว็บไซต์</a>ของเรา";
+"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
+"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+
+// Inspector Window
+"inspector.error" = "Error";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "Buffering… %d%%";
+"main.opening_stream" = "Opening stream…";
+"main.seeking_indicator" = "กำลังหา...";
+"osc.precision" = "ความแม่นยำ";
+"osc.1s" = "1 วินาที";
+"osc.100ms" = "100 มิลลิวินาที";
+"osc.10ms" = "10 มิลลิวินาที";
+"osc.1ms" = "1 มิลลิวินาที";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "ค่าเริ่มต้น";
+"quicksetting.item_none" = "ไม่มี";
+"quicksetting.hwdec" = "การถอดรหัสด้วยฮาร์ดแวร์";
+"quicksetting.deinterlace" = "การรวมเส้น";
+"quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "ซ่อน";
+"quicksetting.reset_speed" = "รีเซ็ตความเร็วเป็น 1x";
+
+// EQ Presets
+"eq.preset.flat" = "ราบเรียบ";
+"eq.preset.acoustic" = "อะคูสติก";
+"eq.preset.classical" = "คลาสสิก";
+"eq.preset.dance" = "แดนซ์";
+"eq.preset.deep" = "นุ่มลึก";
+"eq.preset.electronic" = "อิเล็กทรอนิกส์";
+"eq.preset.hip_hop" = "ฮิปฮอป";
+"eq.preset.increase_bass" = "เพิ่มเสียงเบส";
+"eq.preset.increase_treble" = "เพิ่มเสียงแหลม";
+"eq.preset.increase_vocal" = "เพิ่มเสียงคนร้อง";
+"eq.preset.jazz" = "แจ๊ส";
+"eq.preset.latin" = "ละติน";
+"eq.preset.loundness" = "ความดัง";
+"eq.preset.lounge" = "เลาจน์";
+"eq.preset.piano" = "Piano";
+"eq.preset.pop" = "Pop";
+"eq.preset.rnb" = "R&B";
+"eq.preset.reduce_bass" = "Reduce Bass";
+"eq.preset.reduce_treble" = "Reduce Treble";
+"eq.preset.rock" = "Rock";
+"eq.preset.small_speaker" = "Small Speaker";
+"eq.preset.spoken_word" = "Spoken Word";
+
+"alert.eq.new_profile.title" = "New EQ Profile";
+"alert.eq.new_profile.message" = "Please enter a profile name.";
+"alert.eq.rename.title" = "Rename Current Profile";
+"alert.eq.rename.message" = "Please enter a new profile name.";
+
+// OSDMessage.swift
+"osd.pause" = "Pause";
+"osd.resume" = "ดำเนินการต่อ";
+"osd.volume" = "Volume: %@";
+"osd.speed" = "Speed: %@x";
+"osd.aspect" = "Aspect Ratio: %@";
+"osd.crop" = "Crop: %@";
+"osd.rotate" = "Rotate: %i°";
+"osd.deinterlace" = "Deinterlace: %@";
+"osd.hwdec" = "Hardware Decoding: %@";
+"osd.audio_delay.nodelay" = "Audio Delay: No Delay";
+"osd.audio_delay.later" = "Audio Delay: %@s Later";
+"osd.audio_delay.earlier" = "Audio Delay: %@s Earlier";
+"osd.sub_delay.nodelay" = "Subtitle Delay: No Delay";
+"osd.sub_delay.later" = "Subtitle Delay: %@s Later";
+"osd.sub_delay.earlier" = "Subtitle Delay: %@s Earlier";
+"osd.subtitle_pos" = "Subtitle Position: %@";
+"osd.sub_hidden" = "Subtitles Hidden";
+"osd.sub_visible" = "Subtitles Visible";
+"osd.sub_second_delay.nodelay" = "Secondary Subtitle Delay: No Delay";
+"osd.sub_second_delay.later" = "Secondary Subtitle Delay: %@s Later";
+"osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
+"osd.sub_second_hidden" = "Secondary Subtitles Hidden";
+"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
+"osd.sub_second_visible" = "Secondary Subtitles Visible";
+"osd.mute" = "Mute";
+"osd.unmute" = "Unmute";
+"osd.screenshot" = "จับภาพหน้าจอแล้ว";
+"osd.abloop.a" = "AB-Loop: A";
+"osd.abloop.b" = "AB-Loop: B";
+"osd.abloop.clear" = "AB-Loop: Cleared";
+"osd.stop" = "หยุด";
+"osd.chapter" = "Chapter: %@";
+"osd.subtitle_scale" = "Subtitle Scale: %@x";
+"osd.add_to_playlist" = "เพิ่ม %i ไฟล์ลงในเพลย์ลิสต์";
+"osd.clear_playlist" = "ล้างเพลย์ลิสต์";
+"osd.video_eq.contrast" = "ความต่างสี: %i";
+"osd.video_eq.gamma" = "แกมมา: %i";
+"osd.video_eq.hue" = "เฉดสี: %i";
+"osd.video_eq.saturation" = "ความอิ่มตัวของสี: %i";
+"osd.video_eq.brightness" = "ความสว่าง: %i";
+"osd.find_online_sub" = "กำลังค้นหาซับไตเติลออนไลน์...";
+"osd.find_online_sub.source" = "จาก";
+"osd.sub_not_found" = "ไม่พบซับไตเติล";
+"osd.sub_found" = "พบ %d ซับไตเติล";
+"osd.sub_downloading" = "กำลังโหลด %d ซับไตเติล";
+"osd.sub_downloaded" = "ดาวน์โหลดซับไตเติลแล้ว";
+"osd.sub_saved" = "บันทึกซับไตเติลแล้ว";
+"osd.network_error" = "มีปัญหาด้านเครือข่าย";
+"osd.file_error" = "มีปัญหาในการอ่านไฟล์";
+"osd.cannot_login" = "ไม่สามารถเข้าสู่ระบบได้";
+"osd.canceled" = "ยกเลิกแล้ว";
+"osd.cannot_connect" = "ไม่สามารถเชื่อมต่อได้";
+"osd.timed_out" = "หมดเวลา";
+"osd.sub_quota_exceeded" = "จำนวนซับไตเติลที่ดาวน์โหลดถึงกำหนดแล้ว";
+"osd.sub_quota_exceeded.detail" = "ลองอีกครั้งหลังจาก %@";
+"osd.sub_quota_exceeded.detail_unknown" = "ลองอีกครั้งภายหลัง";
+"osd.filter_added" = "เพิ่มฟิลเตอร์: %@ แล้ว";
+"osd.filter_removed" = "ลบฟิลเตอร์ออกแล้ว";
+"osd.file_loop" = "เล่นไฟล์เดียวซ้ำ";
+"osd.playlist_loop" = "เล่นเพลย์ลิสต์ซ้ำ";
+"osd.no_loop" = "ยกเลิกการเล่นซ้ำ";
+
+"preference.title" = "Preferences";
+"preference.general" = "ทั่วไป";
+"preference.ui" = "หน้าจอผู้ใช้";
+"preference.video_audio" = "วิดีโอ & เสียง";
+"preference.subtitle" = "ซับไตเติล";
+"preference.network" = "เครือข่าย";
+"preference.control" = "การควบคุม";
+"preference.keybindings" = "กำหนดปุ่มคีย์บอร์ด";
+"preference.advanced" = "ขั้นสูง";
+"preference.plugins" = "ปลั๊กอิน";
+"preference.utilities" = "เครื่องมือ";
+"preference.scripts" = "สคริปต์";
+"preference.not_logged_in" = "ไม่ได้เข้าสู่ระบบ";
+"preference.logged_in_as" = "เข้าสู่ระบบในชื่อ %@";
+"preference.system_media_control" = "ใช้การควบคุมสื่อตามเครื่อง";
+
+"preference.key_binding_hint_1" = "เพื่อแก้ไขปุ่มคีย์บอร์ดในไฟล์ปรับแต่งปัจจุบัน ให้กดปุ่ม \"ทำซ้ำ...\" ก่อนเพื่อสร้างอีกไฟล์";
+"preference.key_binding_hint_2" = "กดสองครั้งที่แถวทางด้านขวาเพื่อแก้ไขปุ่มคีย์บอร์ดนั้น ๆ";
+
+"preference.enable_adv_settings" = "เปิดการตั้งค่าขั้นสูง";
+
+"preference.sub_override_level.no" = "ไม่";
+"preference.sub_override_level.force" = "บังคับ";
+"preference.sub_override_level.scale" = "สเกล";
+"preference.sub_override_level.strip" = "สตริป";
+"preference.sub_override_level.yes" = "ใช่";
+
+"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
+"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
+"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
+"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
+
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
+
+"menu.volume" = "Volume: %@";
+"menu.volume_muted" = "Volume: %@ (Muted)";
+"menu.audio_delay" = "Audio Delay: %@s";
+"menu.sub_delay" = "Subtitle Delay: %@s";
+"menu.sub_hide" = "Hide Subtitles";
+"menu.sub_show" = "Show Subtitles";
+"menu.sub_second_hide" = "Hide Secondary Subtitles";
+"menu.sub_second_show" = "Show Secondary Subtitles";
+"menu.fullscreen" = "Enter Full Screen";
+"menu.exit_fullscreen" = "Exit Full Screen";
+"menu.pip" = "Enter Picture-in-Picture";
+"menu.exit_pip" = "Exit Picture-in-Picture";
+"menu.mini_player" = "Enter Music Mode";
+"menu.exit_mini_player" = "Exit Music Mode";
+"menu.pause" = "Pause";
+"menu.resume" = "ดำเนินการต่อ";
+"menu.speed" = "Speed: %@x";
+"menu.chapters" = "Show Chapters Panel";
+"menu.hide_chapters" = "Hide Chapters Panel";
+"menu.playlist" = "Show Playlist Panel";
+"menu.hide_playlist" = "Hide Playlist Panel";
+"menu.video" = "Show Video Panel";
+"menu.hide_video" = "Hide Video Panel";
+"menu.audio" = "Show Audio Panel";
+"menu.hide_audio" = "Hide Audio Panel";
+"menu.subtitles" = "Show Subtitles Panel";
+"menu.hide_subtitles" = "Hide Subtitles Panel";
+
+"menu.seek_forward" = "Step Forward %@s";
+"menu.seek_backward" = "Step Backward %@s";
+"menu.speed_up" = "Speed Up by %@x";
+"menu.speed_down" = "Speed Down by %@x";
+"menu.volume_up" = "Volume + %@%%";
+"menu.volume_down" = "Volume - %@%%";
+"menu.audio_delay_up" = "Audio Delay + %@s";
+"menu.audio_delay_down" = "Audio Delay - %@s";
+"menu.sub_delay_up" = "Subtitle Delay + %@s";
+"menu.sub_delay_down" = "Subtitle Delay - %@s";
+
+"menu.crop_custom" = "Custom…";
+"menu.find_online_sub" = "Find Online Subtitles from %@";
+
+"menu.manage_plugins" = "Manage Plugins…";
+"menu.developer_tool" = "Developer Tool";
+"menu.more_plugin" = "More…";
+"menu.conflicting_shortcuts" = "Conflicting key shortcuts…";
+"menu.reload_plugins" = "Reload All Plugins";
+"menu.show_plugins_panel" = "แสดงแผงปลั๊กอิน";
+"menu.hide_plugins_panel" = "ซ่อนแผงปลั๊กอิน";
+
+"track.audio" = "เสียง";
+"track.none" = "<None>";
+"track.sub" = "ซับไตเติล";
+"track.video" = "Video";
+
+"subtrack.no_loaded" = "No Subtitles Loaded";
+"subtrack.no_external" = "No External Subtitles Found";
+
+// Alerts
+"alert.beta_channel.title" = "Receive Updates for Beta Versions";
+
+"alert.title_error" = "Error";
+"alert.title_warning" = "Warning";
+"alert.title_info" = "Information";
+
+"alert.fatal_error" = "Fatal error: %@ \nThe application will exit now.";
+"alert.mpv_error" = "Internal error %@ (%@) when setting option %@.";
+
+"alert.unsupported_audio" = "Unsupported external audio file.";
+"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_sub" = "Unsupported external subtitle.";
+"alert.unsupported_url" = "Unsupported URL.";
+"alert.wrong_url_format" = "Wrong URL format.";
+
+"alert.error_open" = "Cannot open file or stream!";
+"alert.error_finding_file" = "Cannot find %@ file!";
+"alert.error_loading_script" = "Cannot load script %@!";
+"alert.error_saving_file" = "Error occurred when saving %@: %@";
+"alert.error_deleting_file" = "Cannot delete the file.";
+
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+
+"alert.config.new.title" = "New Input Configuration";
+"alert.config.new.message" = "Please enter a name for the new configuration.";
+"alert.config.duplicate.title" = "Duplicate Configuration";
+"alert.config.duplicate.message" = "Please enter name for the duplicated configuration file.";
+"alert.config.file_existing.title" = "File Already Exists";
+"alert.config.file_existing.message" = "A config file with the same filename already exists. Choose OK to show the file in Finder.";
+"alert.config.cannot_create" = "Cannot create config file!\n%@";
+"alert.config.cannot_write" = "Cannot write to config file!";
+"alert.config.rename.title" = "Rename Input Configuration";
+"alert.config.rename.message" = "Please enter the new name for the configuration.";
+
+"alert.filter.incorrect" = "Error occurred when setting filters. Please check your parameter format.";
+"alert.add_filter.title" = "New Filter";
+"alert.add_filter.message" = "Please enter a filter string in format of mpv's vf or af command.";
+
+"alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
+"alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
+"alert.extra_option.empty" = "Key or value cannot be empty!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.config_folder" = "Error setting config directory \"%@\".";
+
+"alert.playlist.error_deleting" = "Error deleting: %@";
+
+"alert.screenshot.error_taking" = "Cannot take a screenshot!";
+
+"alert.sub.no_selected" = "Please select a downloaded subtitle first.";
+"alert.sub_lang_not_set" = "Please set preferred subtitle languages in preferences before using OpenSubtitles. English(eng) will be used this time.";
+"alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
+"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
+
+"alert.set_default.title" = "Setting IINA as Default App";
+"alert.set_default.message" = "IINA will be set as the default app for all file types it supports.";
+"alert.set_default.success" = "Finished with %d success and %d failed.";
+
+"alert.add_watch.title" = "Add Watch Property";
+"alert.add_watch.message" = "Please enter a valid mpv property name.";
+
+"alert.jump_to.title" = "Jump to";
+"alert.jump_to.message" = "Please enter the time you want to jump to. Example: 20:35";
+
+"alert.opensub.login.title" = "OpenSubtitles Login";
+"alert.opensub.login.message" = "Please enter your username and password";
+
+"alert.open_url.title" = "Open URL";
+"alert.open_url.message" = "Please enter the URL:";
+"alert.choose_media_file.title" = "Choose Media Files";
+
+"alert.add_url.title" = "Add URL";
+"alert.add_url.message" = "Please enter the URL:";
+
+"alert.delete_history.title" = "Delete Playback History";
+"alert.delete_history.message" = "Are you sure to delete selected entries?";
+"alert.delete_all_history.title" = "Clear Playback History";
+"alert.delete_all_history.message" = "Are you sure to delete all playback history?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
+
+"alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
+"alert.filter_hwdec.abort" = "Abort";
+"alert.filter_hwdec.turn_off" = "Turn off hardware decoding";
+"alert.filter_hwdec.use_copy" = "Switch to Auto(Copy)";
+
+"alert.clear_cache.title" = "Clear Thumbnail Cache";
+"alert.clear_cache.message" = "Are you sure to clear all thumbnail Cache?";
+
+"alert.clear_history.title" = "Clear Playback History";
+"alert.clear_history.message" = "Are you sure to delete all playback history?";
+
+"alert.clear_watch_later.title" = "Clear Saved Playback Progress";
+"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+
+"alert.restore_alerts.title" = "Restore Suppressed Alerts";
+"alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
+
+"alert.cleared" = "Cleared.";
+"alert.restored" = "Restored.";
+"alert.custom" = "%@";
+
+"alert.nothing_to_open" = "Nothing to open.";
+
+"alert.no_video_track" = "There is no video track.";
+
+"alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
+
+"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register.register" = "Register Now";
+"alert.assrt_register.try" = "Try First";
+"alert.assrt_token_prompt.title" = "Enter your API token";
+"alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
+"alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
+
+"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
+"alert.plugin_reinstall.title" = "Plugin %@ already exists";
+"alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
+"alert.duplicated_plugin_id" = "Duplicated plugin identifiers detected. Two or more plugins have the same identifier \"%@\". This may cause abnormal behaviors. Please find them in Preferences - Plugins and report to their authors. If a plugin is installed locally, you can also manually change its identifier in the plugin's Info.json file.";
+"alert.plugin_no_update" = "No update found.";
+"alert.plugin_update_found.title" = "Update found for %@";
+"alert.plugin_update_found.message" = "The latest version is %@. You have %@. Would you like to update?";
+"alert.plugin_permission" = "This plugin requires the following permissions. Please review them before proceeding.";
+"alert.plugin_permission_added" = "This update requires additional permissions. Please review them before proceeding.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+
+"playlist.total_length" = "%@ in total";
+"playlist.total_length_with_selected" = "%@ of %@ selected";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "Filename Ascending";
+"playlist.sorting.filename_descending" = "Filename Descending";
+"playlist.sorting.path_ascending" = "File Path Ascending";
+"playlist.sorting.path_descending" = "File Path Descending";
+"pl_menu.title_multi" = "%d Items";
+"pl_menu.play_next" = "Play Next";
+"pl_menu.play_in_new_window" = "Play in New Window";
+"pl_menu.remove" = "Remove";
+"pl_menu.remove_multi" = "Remove Selected";
+"pl_menu.delete" = "Move to Trash";
+"pl_menu.delete_multi" = "Move Selected Files to Trash";
+"pl_menu.delete_after_play" = "Move to Trash After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.show_in_finder" = "แสดงในตัวค้นหา";
+"pl_menu.add_file" = "Add File…";
+"pl_menu.add_url" = "Add URL…";
+"pl_menu.clear_playlist" = "Clear Playlist";
+"pl_menu.matched_sub" = "Matched %d Subtitle(s)";
+"pl_menu.add_sub" = "Add Subtitle…";
+"pl_menu.wrong_sub" = "Wrong Subtitle!";
+"pl_menu.browser" = "Open in Browser";
+"pl_menu.copy_url" = "Copy URL";
+"pl_menu.copy_url_multi" = "Copy URLs";
+"pl_menu.playback" = "Playback";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "Plugin";
+"pl_menu.playlist" = "Playlist";
+
+"keymapping.title" = "Key Mapping";
+"keymapping.message" = "Press any key to record.";
+
+"filter.video_filters" = "Video Filters";
+"filter.audio_filters" = "Audio Filters";
+
+"hwdec.no" = "Disable hardware decoding.";
+"hwdec.auto" = "Enable hardware decoding. However, most of the video filters won't work properly.";
+"hwdec.auto-copy" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
+"subencoding.auto" = "Auto detect";
+
+"osc_toolbar.settings" = "Quick Settings";
+"osc_toolbar.playlist" = "Playlist and chapters";
+"osc_toolbar.pip" = "Toggle Picture-in-Picture";
+"osc_toolbar.full_screen" = "Toggle full screen";
+"osc_toolbar.music_mode" = "Enter music mode";
+"osc_toolbar.sub_track" = "Choose subtitle track";
+"osc_toolbar.screenshot" = "Take a screenshot";
+"osc_toolbar.plugins" = "Show plugins panel";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "Floating";
+"osc_pos.top" = "Top";
+"osc_pos.bottom" = "Bottom";
+
+"mini_player.album_art" = "Toggle album art";
+"mini_player.loop" = "Repeat";
+"mini_player.shuffle" = "สุ่ม";
+"mini_player.remove" = "Remove from playlist";
+"mini_player.add" = "Add to playlist";
+"mini_player.delete" = "Delete all tracks from playlist";
+"mini_player.volume" = "Volume";
+"mini_player.close" = "Close music mode";
+"mini_player.back" = "Return to video mode";
+"mini_player.sort" = "Sort the playlist";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15sec Ahead";
+"touchbar.ahead_30" = "30sec Ahead";
+"touchbar.back_15" = "15sec Back";
+"touchbar.back_30" = "30sec Back";
+"touchbar.next_video" = "Next Video";
+"touchbar.prev_video" = "Previous Video";
+"touchbar.increase_volume" = "Volume +";
+"touchbar.decrease_volume" = "Volume -";
+"touchbar.rewind" = "Rewind";
+"touchbar.fast_forward" = "Fast Forward";
+"touchbar.play_pause" = "Play / Pause";
+"touchbar.seek" = "มองหา";
+"touchbar.time" = "Time Position";
+"touchbar.remainingTimeOrTotalDuration" = "Remaining Time / Total Duration";
+"touchbar.toggle_pip" = "Toggle Picture-in-Picture";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "Network Request";
+"permissions.network-request.desc" = "This plugin can make requsts from or upload data to these websites:";
+"permissions.network-request.any_site" = "Any site";
+"permissions.show-osd.name" = "Show OSD";
+"permissions.show-osd.desc" = "This plugin can show OSD (On Screen Display) messages.";
+"permissions.show-alert.name" = "Show Alerts";
+"permissions.show-alert.desc" = "This plugin can show pop-up alerts.";
+"permissions.video-overlay.name" = "Add overlays on videos";
+"permissions.video-overlay.desc" = "This plugin can render additional content on the top of the video.";
+"permissions.file-system.name" = "Access the file system";
+"permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
+
+"plugin.install" = "Install";
+"plugin.installed" = "Installed";
+"plugin.not_installed" = "Not Installed";
+"plugin.local" = "Installed locally";
+"alert.plugin.install_error" = "Error occurred during the installation: %@";
+"alert.invalid_url" = "The URL is invalid.";
+"plugin.install_error.invalid_url" = "The URL is invalid.";
+"plugin.install_error.file_not_found" = "Cannot find the package file.";
+"plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
+"plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
+"plugin.check_for_updates" = "Check for Updates";
+"plugin.updating" = "Downloading update…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "Log Viewer";
+"logwindow.time" = "Time";
+"logwindow.subsystem" = "Subsystem";
+"logwindow.message" = "Message";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "Save";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "Copy";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "ประวัติการเล่น";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "ความคืบหน้า";
+"history_window.col.played_at" = "Played at";
+"history_window.menu.play" = "เล่น";
+"history_window.menu.play_new_window" = "Play in New Window";
+"history_window.menu.show_in_finder" = "แสดงในตัวค้นหา";
+"history_window.menu.delete" = "ลบ…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "Clear Playback History";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "วันที่";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "ค้นหาใน";
+"history_window.search.filename" = "ชื่อไฟล์";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "No Recent Searches";
+"history_window.search.recents_title" = "การค้นหาล่าสุด";
+"history_window.search.clear_recents" = "ล้างข้อมูลล่าสุด";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "Video";
+"sidebar.audio" = "เสียง";
+"sidebar.sub" = "Subtitles";
+"sidebar.plugins" = "ปลั๊กอิน";
+"sidebar.playlist" = "Playlist";
+"sidebar.chapters" = "Chapters";
+
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "Sidebar";
+"sidebar.sidebar_position" = "Sidebar Position";
+"sidebar.compact_interface" = "Compact Interface";
+"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
+"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
+"sidebar.docked" = "Docked Control Bar and Titlebar";
+"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.settings" = "Settings";
+"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+
+"sidebar.aspect_ratio" = "Aspect Ratio";
+"sidebar.crop" = "ตัด";
+"sidebar.rotation" = "Rotation";
+"sidebar.speed" = "Speed";
+
+"sidebar.brightness" = "Brightness";
+"sidebar.contrast" = "Contrast";
+"sidebar.saturation" = "Saturation";
+"sidebar.gamma" = "Gamma";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "Load External Audio Track…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "Save the current EQ as a preset…";
+"sidebar.rename_eq" = "Rename the current EQ preset…";
+"sidebar.remove_eq" = "Remove the current EQ preset";
+"sidebar.manual_eq" = "Manual";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "Load Subtitle…";
+"sidebar.search_online" = "Search Online…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "Font";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "Border";
+"sidebar.shadow" = "Shadow";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+
+"sidebar.add_file" = "Add File…";
+"sidebar.add_url" = "Add URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "Show welcome window";
+"settings.actionAfterLaunch.items.1" = "Show open file panel";
+"settings.actionAfterLaunch.items.2" = "Do nothing";
+"settings.actionAfterLaunch.label" = "At launch";
+"settings.allowDuplicatePlayers.label" = "Allow opening the same file in multiple windows";
+"settings.allowScreenSaverForAudio.desc" = "Still prevents system from sleeping.";
+"settings.allowScreenSaverForAudio.label" = "Not while in \"music mode\" or only playing audio";
+"settings.alwaysOpenInNewWindow.label" = "Always open media in new window";
+"settings.autoRepeat.label" = "Loop when a file is opened manually";
+"settings.autoSwitchToMusicMode.label" = "Switch to \"music mode\" automatically when playing an audio file";
+"settings.blackOutMonitor.label" = "Black out other monitors while in full screen";
+"settings.defaultRepeatMode.items.0" = "Loop playlist";
+"settings.defaultRepeatMode.items.1" = "Loop single file";
+"settings.fullScreenWhenOpen.label" = "Enter fullscreen";
+"settings.groupSimultaneousOpensInPlaylist.label" = "Group media in playlist when opening multiple files at once";
+"settings.keepOpenOnFileEnd.label" = "Keep window open after playback finishes";
+"settings.pauseWhenGoesToSleep.label" = "Pause when machine goes to sleep";
+"settings.pauseWhenInactive.label" = "Window becomes inactive/active";
+"settings.pauseWhenLeavingFullScreen.label" = "Pause upon leaving full screen";
+"settings.pauseWhenMinimized.label" = "Minimized/un-minimized";
+"settings.pauseWhenOpen.label" = "Pause";
+"settings.pauseresumeWhen" = "Pause/resume when";
+"settings.playWhenEnteringFullScreen.label" = "Play upon entering full screen";
+"settings.playlistAutoAdd.desc" = "Requires restarting IINA to take effect.";
+"settings.playlistAutoAdd.label" = "Add files in the same folder automatically";
+"settings.playlistAutoPlayNext.label" = "Play next item automatically";
+"settings.playlistShowMetadata.label" = "Show artist and track name for audio files when available";
+"settings.playlistShowMetadataInMusicMode.label" = "Only in \"music mode\"";
+"settings.preventScreenSaver.label" = "Prevent screen saver from starting while playing";
+"settings.quitWhenNoOpenedWindow.label" = "Quit after all windows are closed";
+"settings.receiveBetaUpdate.label" = "Receive beta updates";
+"settings.recordPlaybackHistory.label" = "Enable playback history";
+"settings.recordRecentFiles.label" = "Enable \"Open Recent\" menu";
+"settings.resumeLastPosition.label" = "Resume last playback position";
+"settings.screenShotFormat.label" = "Format";
+"settings.screenShotIncludeSubtitle.label" = "Include subtitles";
+"settings.screenshotCopyToClipboard.desc" = "Destination";
+"settings.screenshotCopyToClipboard.label" = "Copy to clipboard";
+"settings.screenshotSaveToFile.desc" = "/path/to/screenshot/folder";
+"settings.screenshotSaveToFile.label" = "Save to";
+"settings.screenshotShowPreview.label" = "Show previews after taking screenshots";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "Otherwise only files that opened manually will show up in this menu.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "Track all played files in \"Open Recent\" menu";
+"settings.useLegacyFullScreen.label" = "Use legacy full screen";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "Enable HDR mode by default when playing HDR videos.";
+"settings.enableHdrSupport.label" = "Enable HDR mode";
+"settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
+"settings.enableLiveText.label" = "Live Text";
+"settings.enableToneMapping.label" = "Enable tone mapping";
+"settings.forceDedicatedGPU.desc" = "Always use the dedicated GPU for rendering (if it exists). This can improve performance but may reduce battery life.";
+"settings.forceDedicatedGPU.label" = "Force dedicated GPU";
+"settings.hardwareDecoder.items.0" = "Disabled";
+"settings.hardwareDecoder.items.0.desc" = "Disable hardware decoding.";
+"settings.hardwareDecoder.items.1" = "Auto";
+"settings.hardwareDecoder.items.1.desc" = "Enable hardware decoding. However, most of the video filters won't work properly.";
+"settings.hardwareDecoder.items.2" = "อัตโนมัติ (คัดลอก)";
+"settings.hardwareDecoder.items.2.desc" = "Enable hardware decoding. It will consume double the memory but work with video filters.";
+"settings.hardwareDecoder.label" = "Hardware decoder";
+"settings.loadIccProfile.desc" = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)";
+"settings.loadIccProfile.label" = "Load ICC profile";
+"settings.toneMappingAlgorithm.label" = "Algorithm";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingTargetPeak.label" = "Target peak";
+"settings.videoThreads.desc" = "Default: 0 (Auto)";
+"settings.videoThreads.label" = "Number of threads";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "The default audio driver.";
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays.";
+"settings.audioDriverEnableAVFoundation.label" = "Audio driver";
+"settings.enableInitialVolume.label" = "Initial volume";
+"settings.gaplessAudio.desc" = "Gapless audio";
+"settings.gaplessAudio.items.0" = "Disabled";
+"settings.gaplessAudio.items.0.desc" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"settings.gaplessAudio.items.1" = "Weak";
+"settings.gaplessAudio.items.1.desc" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"settings.gaplessAudio.items.2" = "Strong";
+"settings.gaplessAudio.items.2.desc" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"settings.gaplessAudio.label" = "Gapless audio";
+"settings.maxVolume.desc" = "(100-1000)";
+"settings.maxVolume.label" = "Maximum volume";
+"settings.preferredAudioDevice.label" = "Preferred audio device";
+"settings.replayGain.desc" = "Adjust volume gain according to ReplayGain values stored in the file metadata.";
+"settings.replayGain.items.0" = "No adjustment";
+"settings.replayGain.items.1" = "Track gain";
+"settings.replayGain.items.2" = "Album gain";
+"settings.replayGain.label" = "Gain adjustment";
+"settings.replayGainClip.desc" = "If this option is not enabled, clipping will be prevented by lowering the gain.";
+"settings.replayGainClip.label" = "Allow the volume gain to clip";
+"settings.replayGainFallback.desc" = "Gain to apply if the file has no ReplayGain tags.";
+"settings.replayGainFallback.label" = "Fallback";
+"settings.replayGainPreamp.desc" = "Pre-amplification gain to apply to the ReplayGain gain.";
+"settings.replayGainPreamp.label" = "Preamp gain";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "ไม่มี";
+"settings.doubleClickAction.items.1" = "Toggle fullscreen";
+"settings.doubleClickAction.items.2" = "Pause / Resume";
+"settings.doubleClickAction.items.4" = "Toggle Picture-in-Picture";
+"settings.doubleClickAction.items.5" = "A-B loop";
+"settings.doubleClickAction.items.6" = "Reset speed";
+"settings.doubleClickAction.label" = "Double click to";
+"settings.forceTouchAction.items.0" = "ไม่มี";
+"settings.forceTouchAction.items.1" = "Toggle fullscreen";
+"settings.forceTouchAction.items.2" = "Pause / Resume";
+"settings.forceTouchAction.items.3" = "Hide OSC";
+"settings.forceTouchAction.label" = "Force Touch to";
+"settings.horizontalScrollAction.items.0" = "Adjust volume";
+"settings.horizontalScrollAction.items.1" = "มองหา";
+"settings.horizontalScrollAction.items.2" = "ไม่มี";
+"settings.horizontalScrollAction.items.4" = "Adjust playback speed";
+"settings.horizontalScrollAction.label" = "Scroll horizontally to";
+"settings.middleClickAction.items.0" = "ไม่มี";
+"settings.middleClickAction.items.1" = "Toggle fullscreen";
+"settings.middleClickAction.items.2" = "Pause / Resume";
+"settings.middleClickAction.items.3" = "Hide OSC";
+"settings.middleClickAction.items.4" = "Toggle Picture-in-Picture";
+"settings.middleClickAction.items.5" = "A-B loop";
+"settings.middleClickAction.items.6" = "Reset speed";
+"settings.middleClickAction.label" = "Middle click to";
+"settings.pinchAction.items.0" = "Adjust window size";
+"settings.pinchAction.items.1" = "Fullscreen";
+"settings.pinchAction.items.2" = "ไม่มี";
+"settings.pinchAction.label" = "Pinch to";
+"settings.playbackSpeedScrollAmount.label" = "Sensitivity for speed";
+"settings.relativeSeekAmount.label" = "Sensitivity for normal seek";
+"settings.rightClickAction.desc" = "Middle click to";
+"settings.rightClickAction.items.0" = "ไม่มี";
+"settings.rightClickAction.items.2" = "Pause / Resume";
+"settings.rightClickAction.items.3" = "Hide OSC";
+"settings.rightClickAction.items.4" = "Toggle Picture-in-Picture";
+"settings.rightClickAction.items.5" = "A-B loop";
+"settings.rightClickAction.items.6" = "Reset speed";
+"settings.rightClickAction.label" = "Right click to";
+"settings.singleClickAction.items.0" = "ไม่มี";
+"settings.singleClickAction.items.2" = "Pause / Resume";
+"settings.singleClickAction.items.3" = "Hide OSC";
+"settings.singleClickAction.label" = "Single click to";
+"settings.useExactSeek.desc" = "Exact seek is more precise but can cause lag and higher CPU usage.";
+"settings.useExactSeek.items.0" = "Keyframe seek";
+"settings.useExactSeek.items.1" = "Exact seek";
+"settings.useExactSeek.items.2" = "Auto";
+"settings.useExactSeek.label" = "Seek type";
+"settings.verticalScrollAction.items.0" = "Adjust volume";
+"settings.verticalScrollAction.items.1" = "มองหา";
+"settings.verticalScrollAction.items.2" = "ไม่มี";
+"settings.verticalScrollAction.items.4" = "Adjust playback speed";
+"settings.verticalScrollAction.label" = "Scroll vertically to";
+"settings.videoViewAcceptsFirstMouse.desc" = "Mouse";
+"settings.videoViewAcceptsFirstMouse.label" = "Accepts first mouse click when not focused";
+"settings.volumeScrollAmount.label" = "Sensitivity for volume";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "Display raw values";
+"settings.useMediaKeys.label" = "ใช้การควบคุมสื่อตามเครื่อง";
+
+// Settings - Network
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.label" = "Buffer before starting playback";
+"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.httpProxy.desc" = "Requires restarting IINA to take effect.";
+"settings.httpProxy.label" = "HTTP proxy";
+"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.label" = "Seconds to prefetch";
+"settings.showBufferingThrobber.label" = "Show throbber when buffering";
+"settings.showSeekingThrobber.label" = "Show throbber when seeking";
+"settings.transportRTSPThrough.items.0" = "Auto";
+"settings.transportRTSPThrough.label" = "Transport RTSP stream through";
+"settings.userAgent.label" = "User agent";
+"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
+"settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "Raw options";
+"settings.ytdlSearchPath.desc" = "IINA will search youtube-dl in this folder. Restart needed.";
+"settings.ytdlSearchPath.label" = "Custom youtube-dl path";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "Search online subtitles automatically";
+"settings.displayInLetterBox.label" = "Display subtitles in letterboxes while in full screen";
+"settings.subAlignX.items.0" = "Left";
+"settings.subAlignX.items.1" = "Center";
+"settings.subAlignX.items.2" = "Right";
+"settings.subAlignY.items.0" = "Top";
+"settings.subAlignY.items.1" = "Center";
+"settings.subAlignY.items.2" = "Bottom";
+"settings.subAutoLoadIINA.items.0" = "Disabled";
+"settings.subAutoLoadIINA.items.1" = "Subtitles containing media filename";
+"settings.subAutoLoadIINA.items.2" = "Detect intelligently by IINA";
+"settings.subAutoLoadIINA.label" = "Auto load";
+"settings.subAutoLoadPriorityString.desc" = "Please enter a comma-separated list of strings.";
+"settings.subAutoLoadPriorityString.label" = "Subtitles have priority when filename containing";
+"settings.subAutoLoadSearchPath.desc" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
+"settings.subAutoLoadSearchPath.label" = "Also search subtitles in following directories";
+"settings.subBlur.label" = "เบลอ";
+"settings.subBold.desc" = "sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
+"settings.subBold.label" = "Bold";
+"settings.subItalic.label" = "Italic";
+"settings.subLang.desc" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
+"settings.subOverrideLevel.items.0" = "ใช่";
+"settings.subOverrideLevel.items.0.desc" = "Apply all the style settings in this section.";
+"settings.subOverrideLevel.items.1" = "บังคับ";
+"settings.subOverrideLevel.items.1.desc" = "Apply all subtitle styles.";
+"settings.subOverrideLevel.items.2" = "สตริป";
+"settings.subOverrideLevel.items.2.desc" = "Radically strip all ASS tags and styles from the subtitle.";
+"settings.subOverrideLevel.items.3" = "สเกล";
+"settings.subOverrideLevel.items.3.desc" = "Apply the scale setting in addition to the style settings in this section.";
+"settings.subOverrideLevel.items.4" = "ไม่";
+"settings.subOverrideLevel.items.4.desc" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"settings.subPos.label" = "Vertical position";
+"settings.subScaleWithWindow.label" = "Scale subtitles with window size";
+"settings.subSpacing.label" = "Font spacing";
+
+// Settings - UI
+"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
+"settings.alwaysFloatOnTop.label" = "Always float on top while playing";
+"settings.alwaysShowOnTopIcon.label" = "Always show float on top status in the title bar";
+"settings.arrowBtnAction.items.0" = "Speed";
+"settings.arrowBtnAction.items.1" = "Previous / Next Media";
+"settings.arrowBtnAction.items.2" = "Fast Forward / Rewind";
+"settings.arrowBtnAction.label" = "Use left/right button for";
+"settings.controlBarAutoHideTimeout.label" = "Auto hide after";
+"settings.controlBarStickToCenter.label" = "Snap to center when dragging";
+"settings.disableAnimations.desc" = "When the macOS Reduce Motion accessibility setting is enabled IINA will reduce user interface animations that are known to cause problems for those with vestibular disorders. Should that be insufficient, this setting can be used to reduce motion further by eliminating user interface animations.";
+"settings.disableAnimations.label" = "Disable animations";
+"settings.disableOSDFileStartMsg.label" = "File start";
+"settings.disableOSDPauseResumeMsgs.label" = "Pause / Resume";
+"settings.disableOSDSeekMsg.label" = "มองหา";
+"settings.disableOSDSpeedMsg.label" = "Speed";
+"settings.disablePlaySliderScrolling.label" = "Prevent scroll wheel from changing playback position";
+"settings.disableVolumeSliderScrolling.label" = "Prevent scroll wheel from changing volume";
+"settings.displayTimeAndBatteryInFullScreen.label" = "Display time and battery info when in full screen";
+"settings.enableOSD.label" = "Enable OSD";
+"settings.enableThumbnailForRemoteFiles.label" = "Include files on a mounted remote drive";
+"settings.enableThumbnailPreview.label" = "Enable thumbnail preview";
+"settings.maxThumbnailPreviewCacheSize.label" = "Maximum cache size";
+"settings.oscPosition.items.0" = "Floating";
+"settings.oscPosition.items.1" = "Top";
+"settings.oscPosition.items.2" = "Bottom";
+"settings.oscPosition.label" = "On Screen Controller";
+"settings.osdTextSize.label" = "Text size";
+"settings.pauseWhenPip.label" = "Automatically pause playback";
+"settings.resizeWindowOption.items.0" = "fit the screen";
+"settings.resizeWindowOption.items.1" = "0.5x video size";
+"settings.resizeWindowOption.items.2" = "1x video size";
+"settings.resizeWindowOption.items.3" = "1.5x video size";
+"settings.resizeWindowOption.items.4" = "2x video size";
+"settings.resizeWindowOption.label" = "Resize window to";
+"settings.scaleRemainingTime.label" = "Base remaining time on playback speed";
+"settings.showChapterPos.label" = "Show chapter position in progress bar";
+"settings.showRemainingTime.label" = "Show remaining time instead of total duration";
+"settings.themeMaterial.desc" = "Theme";
+"settings.themeMaterial.items.0" = "Dark";
+"settings.themeMaterial.items.2" = "Light";
+"settings.themeMaterial.items.4" = "Match System Appearance";
+"settings.themeMaterial.label" = "Appearance";
+"settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
+"settings.thumbnailWidth.label" = "Thumbnail width";
+"settings.togglePipByMinimizingWindow.label" = "Toggle Picture-in-Picture by minimizing/un-minimizing the window";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "Only for video files";
+"settings.usePhysicalResolution.label" = "Use physical resolution on Retina displays";
+"settings.windowBehaviorWhenPip.items.0" = "Do nothing";
+"settings.windowBehaviorWhenPip.items.1" = "ซ่อน";
+"settings.windowBehaviorWhenPip.items.2" = "Minimize";
+"settings.windowBehaviorWhenPip.label" = "Window";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "The following settings will require restarting IINA to take effect.";
+"settings.enableAdvancedSettings.label" = "เปิดการตั้งค่าขั้นสูง";
+"settings.enableLogging.label" = "Enable logging";
+"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
+"settings.logLevel.items.0" = "Verbose";
+"settings.logLevel.items.1" = "Debug";
+"settings.logLevel.items.2" = "Warning";
+"settings.logLevel.items.3" = "Error";
+"settings.logLevel.label" = "Log level";
+"settings.useMpvOsd.label" = "Use mpv's OSD";
+"settings.useUserDefinedConfDir.label" = "Use config directory";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "ASS subtitles";
+"settings.$About" = "เกี่ยวกับเรา";
+"settings.$Accessibility" = "Accessibility";
+"settings.$AdditionalMpvOptions" = "Additional mpv options";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$Advanced" = "ขั้นสูง";
+"settings.$Align" = "Align";
+"settings.$AlwaysWhenPlaying" = "Always when playing a new file";
+"settings.$Appearance" = "Appearance";
+"settings.$AssrtAPIToken" = "Assrt API token";
+"settings.$Author" = "Author";
+"settings.$AutoLoad" = "Auto load";
+"settings.$Background" = "Background";
+"settings.$Behavior" = "Behavior";
+"settings.$Border" = "Border";
+"settings.$BrowserExtensions" = "Browser Extensions";
+"settings.$Cache" = "Cache";
+"settings.$Cancel" = "ยกเลิก";
+"settings.$CheckForUpdates" = "Check for updates";
+"settings.$CheckForUpdates.items.3600" = "Hourly";
+"settings.$CheckForUpdates.items.86400" = "Daily";
+"settings.$CheckForUpdates.items.604800" = "Weekly";
+"settings.$CheckForUpdates.items.2629800" = "Monthly";
+"settings.$Chrome" = "Chrome";
+"settings.$ClearCache" = "Clear Cache";
+"settings.$ClearPlaybackHistory" = "Clear Playback History";
+"settings.$ClearSavedPlaybackProgress" = "Clear Saved Playback Progress";
+"settings.$ClearThumbnailCache" = "Clear Thumbnail Cache";
+"settings.$Color" = "Color";
+"settings.$ColorHDR" = "Color and HDR";
+"settings.$CommunityPlugins" = "Community Plugins";
+"settings.$CreateAnEmptySet" = "Create an empty set…";
+"settings.$Customize" = "Customize…";
+"settings.$Decoding" = "Decoding";
+"settings.$DefaultApplication" = "Default Application";
+"settings.$DefaultEncoding" = "Default encoding";
+"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DoNotResize" = "Do not resize";
+"settings.$DuplicateCurrentSet" = "Duplicate current set…";
+"settings.$FailedToLoadThePage" = "Failed to load the page.";
+"settings.$Firefox" = "Firefox";
+"settings.$Font" = "Font";
+"settings.$GetBrowserExtensionsForIINA" = "Get Browser Extensions for IINA";
+"settings.$GetPlugins" = "Get Plugins…";
+"settings.$Hardware" = "Hardware";
+"settings.$Height" = "สูง";
+"settings.$Help" = "Help";
+"settings.$History" = "History";
+"settings.$Identifier" = "Identifier";
+"settings.$ImportAnExistingConfigFile" = "Import an existing config file";
+"settings.$InitialWindowPosition" = "Initial window position";
+"settings.$InitialWindowSize" = "Initial window size";
+"settings.$InputGithubURL" = "Input a Github URL";
+"settings.$Install" = "Install";
+"settings.$InstallLocalPackage" = "Install Local Package…";
+"settings.$Installed" = "Installed";
+"settings.$Installing" = "Installing";
+"settings.$KeyBindingSet" = "Key binding set";
+"settings.$Layout" = "Layout";
+"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
+"settings.$LiveText" = "Live Text";
+"settings.$Logging" = "Logging";
+"settings.$Login" = "เข้าสู่ระบบ";
+"settings.$MB" = "MB";
+"settings.$MPVSettings" = "mpv Settings";
+"settings.$Margin" = "Margin";
+"settings.$Mouse" = "Mouse";
+"settings.$Network" = "เครือข่าย";
+"settings.$NewKeyBindingSet" = "New key binding set";
+"settings.$NoSelection" = "No Selection";
+"settings.$NotLoggedIn" = "ไม่ได้เข้าสู่ระบบ";
+"settings.$OK" = "ตกลง";
+"settings.$OfficialPlugins" = "Official Plugins";
+"settings.$Offset" = "Offset";
+"settings.$OnScreenController" = "On Screen Controller";
+"settings.$OnScreenDisplay" = "On Screen Display";
+"settings.$OnlineSubtitles" = "Online Subtitles";
+"settings.$OpenLinksOrCurrentWebpage" = "Open links or current webpage in IINA with one click. The website must be supported by youtube-dl.";
+"settings.$OpenLogDirectory" = "Open Log Directory";
+"settings.$OpenLogWindow" = "Open the log viewer";
+"settings.$OrSelectFrom" = "Or select from available plugins";
+"settings.$Other" = "Other";
+"settings.$OtherStyles" = "Other Styles";
+"settings.$OverrideLevel" = "Override level";
+"settings.$Percent" = "%";
+"settings.$PictureinnPicture" = "Picture-in-Picture";
+"settings.$Playlist" = "Playlist";
+"settings.$PleaseSelectTheMediaTypes" = "Please select the media types that you want to make IINA as the default Application for.";
+"settings.$Position" = "Position";
+"settings.$PreferredLanguage" = "Preferred language";
+"settings.$RestoreAlerts" = "Restore Alerts";
+"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts";
+"settings.$SPDIFOutput" = "S/PDIF output";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$Safari" = "Safari";
+"settings.$Screenshots" = "Screenshots";
+"settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
+"settings.$Settings" = "Settings";
+"settings.$Shadow" = "Shadow";
+"settings.$ShowInFinder" = "แสดงในตัวค้นหา";
+"settings.$ShowTheConfigFileIn" = "Show config file in Finder";
+"settings.$Size" = "Size";
+"settings.$Source" = "Source";
+"settings.$SubtitleSource" = "Subtitle source";
+"settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
+"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
+"settings.$SuppressMessagesFor" = "Suppress messages for";
+"settings.$TextSubtitles" = "Text subtitles";
+"settings.$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
+"settings.$ThumbnailPreview" = "Thumbnail Preview";
+"settings.$Toolbar" = "Toolbar";
+"settings.$Trackpad" = "Trackpad";
+"settings.$Uninstall" = "Uninstall";
+"settings.$Volume" = "Volume";
+"settings.$Website" = "เว็บไซต์";
+"settings.$WhenEnteringPIP" = "When entering Picture-in-Picture";
+"settings.$WhenMediaIsOpened" = "When media is opened";
+"settings.$WhenMediaIsOpenedManually" = "When media is opened manually";
+"settings.$Width" = "กว้าง";
+"settings.$Window" = "Window";
+"settings.$X" = " X";
+"settings.$XOffset" = "X offset";
+"settings.$Y" = "Y";
+"settings.$YOffset" = "Y offset";
+"settings.$YTDL" = "Online Videos (yt-dlp)";
+"settings.$YouCanInstallANew" = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically.";
+"settings.$bottom" = "bottom";
+"settings.$dB" = "dB";
+"settings.$left" = "left";
+"settings.$nits" = "nits";
+"settings.$ofScreen" = "% of screen";
+"settings.$onlineMediaPluginAdvice" = "The Online Media plugin is recommended";
+"settings.$point" = "point";
+"settings.$pt" = "pt";
+"settings.$right" = "right";
+"settings.$s" = "s";
+"settings.$sideOfTheScreen" = "side of the screen";
+"settings.$toThe" = "to the";
+"settings.$top" = "top";
+"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";

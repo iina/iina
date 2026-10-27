@@ -1,0 +1,25 @@
+//
+//  iina.xcconfig
+//  iina
+//
+//  Created by Saagar Jha on 11/5/22.
+//  Copyright © 2022 lhc. All rights reserved.
+//
+
+CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES
+CODE_SIGN_ENTITLEMENTS = $(TARGET_NAME)/$(PRODUCT_NAME).entitlements
+COMBINE_HIDPI_IMAGES = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(SYSTEM_LIBRARY_DIR)/PrivateFrameworks
+GENERATE_INFOPLIST_FILE = YES
+HEADER_SEARCH_PATHS = $(inherited) $(SRCROOT)/deps/include
+INFOPLIST_FILE = $(TARGET_NAME)/Info.plist
+INFOPLIST_OTHER_PREPROCESSOR_FLAGS = -traditional
+INFOPLIST_PREFIX_HEADER = $(DERIVED_FILE_DIR)/Info.h
+INFOPLIST_PREPROCESS = YES
+INFOPLIST_KEY_NSPrincipalClass = NSApplication
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks
+LIBRARY_SEARCH_PATHS = $(inherited) $(SRCROOT)/deps/lib
+PRODUCT_BUNDLE_IDENTIFIER = com.colliderli.$(TARGET_NAME)
+PRODUCT_NAME = IINA
+SWIFT_EMIT_LOC_STRINGS = YES
+SWIFT_OBJC_BRIDGING_HEADER = $(TARGET_NAME)/$(TARGET_NAME)-Bridging-Header.h

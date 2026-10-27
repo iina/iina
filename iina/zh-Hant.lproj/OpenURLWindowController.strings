@@ -1,0 +1,29 @@
+/* Class = "NSButtonCell"; title = "Open"; ObjectID = "8sC-lH-DOd"; */
+"8sC-lH-DOd.title" = "打開";
+
+/* Class = "NSTextFieldCell"; title = "Username"; ObjectID = "Q1z-9O-n4X"; */
+"Q1z-9O-n4X.title" = "使用者名稱";
+
+/* Class = "NSTextFieldCell"; placeholderString = "Please enter the URL here……"; ObjectID = "XV7-VP-Ua2"; */
+"XV7-VP-Ua2.placeholderString" = "請在此輸入 URL⋯⋯";
+
+/* Class = "NSTextFieldCell"; title = "URL is invalid."; ObjectID = "gaI-DT-l2c"; */
+"gaI-DT-l2c.title" = "網址無法使用";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "iNG-ee-EW6"; */
+"iNG-ee-EW6.title" = "取消";
+
+/* Class = "NSButtonCell"; title = "Remember username and password for this host in keychain"; ObjectID = "m0D-hR-3pr"; */
+"m0D-hR-3pr.title" = "在我的鑰匙圈中記錄這組連到遠端主機的使用者名稱和密碼";
+
+/* Class = "NSTextFieldCell"; title = "Password"; ObjectID = "uM6-Bp-Wdk"; */
+"uM6-Bp-Wdk.title" = "密碼";
+
+/* Class = "NSTextFieldCell"; title = "HTTP Authentication"; ObjectID = "wxH-ic-Uug"; */
+"wxH-ic-Uug.title" = "HTTP 認證";
+
+/* Class = "NSTextFieldCell"; title = "Loading Media……"; ObjectID = "3T9-gp-4UE"; */
+"3T9-gp-4UE.title" = "媒體項目讀取中……";
+
+/* Class = "NSButtonCell"; title = "Open"; ObjectID = "zbf-uh-uGz"; */
+"zbf-uh-uGz.title" = "停止讀取";

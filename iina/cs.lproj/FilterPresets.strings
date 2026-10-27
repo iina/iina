@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Ořez";
+"crop.w" = "Šířka (výchozí: šířka videa)";
+"crop.h" = "Výška (výchozí: výška videa)";
+"crop.x" = "Začátek X (výchozí: střed)";
+"crop.y" = "Začátek Y (výchozí: střed)";
+
+"expand" = "Zvětšit";
+"expand.w" = "Šířka (výchozí: šířka videa)";
+"expand.h" = "Výška (výchozí: výška videa)";
+"expand.x" = "Začátek X (výchozí: střed)";
+"expand.y" = "Začátek Y (výchozí: střed)";
+"expand.aspect" = "Zvětšit k poměru stran (např.: 4/3)";
+"expand.round" = "Zaokrouhlit, aby byla hodnota dělitelná";
+
+"sharpen" = "Zaostřit";
+"sharpen.msize" = "Velikost matice";
+"sharpen.amount" = "Hodnota";
+
+"blur" = "Rozostřit";
+"blur.msize" = "Velikost matice";
+"blur.amount" = "Hodnota";
+
+"delogo" = "Odebrat logo";
+"delogo.w" = "Šířka";
+"delogo.h" = "Výška";
+"delogo.x" = "Začátek X";
+"delogo.y" = "Začátek Y";
+
+"negative" = "Negativ";
+
+"vflip" = "Převrátit";
+"hflip" = "Zrcadlit";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Cesta k souboru (můžete také přetáhnout soubor do vstupního pole)";
+"lut3d.interp" = "Režim interpolace";
+
+"custom_mpv" = "Vlastní (mpv)";
+"custom_mpv.name" = "Název filtru";
+"custom_mpv.string" = "Hodnota filtru";
+
+"custom_ffmpeg" = "Vlastní (FFmpeg)";
+"custom_ffmpeg.name" = "Název filtru";
+"custom_ffmpeg.string" = "Hodnota filtru";

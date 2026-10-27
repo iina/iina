@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorovať";
+"cmd.seek" = "Posunúť";
+"cmd.revert-seek" = "Vrátiť posunutie";
+"cmd.set" = "Nastaviť";
+"cmd.cycle" = "Opakovať";
+"cmd.cycle-values" = "Opakovať v";
+"cmd.add" = "Zmeniť";
+"cmd.multiply" = "Znásobiť";
+"cmd.frame-step" = "Ďalšia snímka";
+"cmd.frame-back-step" = "Predchádzajúca snímka";
+"cmd.ab-loop" = "A-B slučka";
+"cmd.sub-seek" = "Posúvanie titulkov";
+"cmd.playlist-next" = "Ďalší súbor";
+"cmd.playlist-prev" = "Predchádzajúci súbor";
+"cmd.playlist-move" = "Presunúť položku v playliste";
+"cmd.playlist-clear" = "Vymazať playlist";
+"cmd.playlist-remove" = "Odstrániť aktuálne";
+"cmd.playlist-shuffle" = "Náhodne";
+"cmd.write-watch-later-config" = "Zaznamenať históriu prehrávania";
+"cmd.stop" = "Zastaviť";
+"cmd.quit" = "Ukončiť";
+"cmd.quit-watch-later" = "Ukončiť (uložiť priebeh)";
+"cmd.screenshot" = "Snímka obrazovky";
+"cmd.screenshot-to-file" = "Snímka obrazovky do súboru";
+"cmd.loadfile" = "Otvoriť súbor";
+"cmd.loadlist" = "Otvoriť playlist";
+"cmd.run" = "Spustiť";
+
+"iina.flip" = "Preklopiť";
+"iina.mirror" = "Zrkadliť";
+
+"iina.toggle-pip" = "Zapnúť Picture-in-Picture";
+"iina.toggle-music-mode" = "Zapnúť hudobný režim";
+"iina.open-file" = "Otvoriť súbor";
+"iina.open-url" = "Otvoriť URL";
+"iina.video-panel" = "Panel videa";
+"iina.audio-panel" = "Panel zvuku";
+"iina.sub-panel" = "Panel titulkov";
+"iina.playlist-panel" = "Panel playlistu";
+"iina.chapter-panel" = "Panel kapitol";
+"iina.bigger-window" = "Väčšie okno";
+"iina.smaller-window" = "Menšie okno";
+"iina.fit-to-screen" = "Prispôsobiť obrazovke";
+"iina.toggle-flip" = "Zapnúť preklopenie";
+"iina.toggle-mirror" = "Zapnúť zrkadlenie";
+"iina.save-playlist" = "Uložiť aktuálny playlist";
+"iina.show-current-file-in-finder" = "Zobraziť aktuálny súbor v aplikácii Finder";
+"iina.delete-current-file" = "Vymazať aktuálny súbor";
+"iina.delete-current-file-hard" = "Vymazať aktuálny súbor bez presunutia do koša";
+"iina.find-online-subs" = "Nájsť titulky na internete";
+"iina.save-downloaded-sub" = "Uložiť stiahnuté titulky";
+
+"yes" = "Áno";
+"no" = "Nie";
+"to" = "na";
+"by" = "o";
+"in" = "v";
+"add" = "zvýšiť";
+"minus" = "znížiť";
+"forward" = "dopredu";
+"backward" = "dozadu";
+"seek-to" = "na";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (presne)";
+"relative-percent+exact" = "% (presne)";
+"absolute+keyframe" = "s (snímka)";
+"absolute-percent+keyframe" = "% (snímka)";
+
+"opt.pause" = "Pozastaviť";
+"opt.speed" = "Rýchlosť";
+
+"opt.window-scale" = "Veľkosť okna";
+
+"opt.video" = "Obrazová stopa";
+"opt.video-aspect-override" = "Pomer strán videa";
+"opt.contrast" = "Kontrast";
+"opt.brightness" = "Jas";
+"opt.gamma" = "Gama";
+"opt.saturation" = "Saturácia";
+"opt.deinterlace" = "Deinterlace";
+
+"opt.audio" = "Zvuková stopa";
+"opt.volume" = "Hlasitosť";
+"opt.mute" = "Stíšiť";
+"opt.audio-delay" = "Posunutie zvuku";
+
+"opt.sub" = "Titulková stopa";
+"opt.sub-delay" = "Posunutie titulkov";
+"opt.sub-pos" = "Umiestnenie titulkov";
+"opt.sub-scale" = "Veľkosť titulkov";
+"opt.sub-visibility" = "Viditeľnosť titulkov";
+"opt.secondary-sub-visibility" = "Viditeľnosť sekundárnych titulkov";
+"opt.sub-ass-style-override" = "Nahradenie spôsobu ASS";
+
+"opt.fullscreen" = "Režim celej obrazovky";
+"opt.ontop" = "Zobraziť na vrchu";
+
+"opt.chapter" = "Kapitola";
+
+"read.set" = "Nastaviť {{property}} na {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Znásobiť {{property}} {{factor}}x";
+"read.cycle" = "Opakovať {{property}}{{#dir_down}} zostupne{{/dir_down}}";
+"read.cycle-values" = "Opakovať {{property}} v ({{{values}}})";
+"read.seek" = "Posunúť {{#fwd}}dopredu{{/fwd}}{{#bwd}}dozadu{{/bwd}}{{#abs}}na{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(presne){{/exact}}{{#kf}}(snímok){{/kf}}";
+"read.sub-seek" = "Posunúť na {{#skip_1}}ďalšie{{/skip_1}}{{#skip_-1}}predchádzajúce{{/skip_-1}} titulky";

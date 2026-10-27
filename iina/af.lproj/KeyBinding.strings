@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignoreer";
+"cmd.seek" = "Spoel vorentoe of terug";
+"cmd.revert-seek" = "Herstel vorentoe- of terugspoel";
+"cmd.set" = "Stel in";
+"cmd.cycle" = "Herhaal";
+"cmd.cycle-values" = "Herhaal in";
+"cmd.add" = "Verander";
+"cmd.multiply" = "Vermenigvuldig";
+"cmd.frame-step" = "Volgende beeld";
+"cmd.frame-back-step" = "Vorige beeld";
+"cmd.ab-loop" = "A-B-lus";
+"cmd.sub-seek" = "Zoek onderskrifte";
+"cmd.playlist-next" = "Volgende media";
+"cmd.playlist-prev" = "Vorige media";
+"cmd.playlist-move" = "Skuif afspeellysitem";
+"cmd.playlist-clear" = "Wis afspeellys";
+"cmd.playlist-remove" = "Verwyder huidige";
+"cmd.playlist-shuffle" = "Skommel";
+"cmd.write-watch-later-config" = "Onthou afspeelgeskiedenis";
+"cmd.stop" = "Stop";
+"cmd.quit" = "Stop IINA";
+"cmd.quit-watch-later" = "Stop IINA (bewaar vordering)";
+"cmd.screenshot" = "Skermkiekie";
+"cmd.screenshot-to-file" = "Skermkiekie na lêer";
+"cmd.loadfile" = "Laai lêer";
+"cmd.loadlist" = "Laai afspeellys";
+"cmd.run" = "Voer uit";
+
+"iina.flip" = "Kantel";
+"iina.mirror" = "Spieël";
+
+"iina.toggle-pip" = "Tokkel Beeld-in-beeld";
+"iina.toggle-music-mode" = "Tokkel musiekmodus";
+"iina.open-file" = "Open lêer";
+"iina.open-url" = "Open bronadres";
+"iina.video-panel" = "Videopaneel";
+"iina.audio-panel" = "Oudiopaneel";
+"iina.sub-panel" = "Onderskrifpaneel";
+"iina.playlist-panel" = "Afspeellyspaneel";
+"iina.chapter-panel" = "Hoofstukpaneel";
+"iina.bigger-window" = "Groter venster";
+"iina.smaller-window" = "Kleiner venster";
+"iina.fit-to-screen" = "Pas in die skerm";
+"iina.toggle-flip" = "Tokkel kanteling";
+"iina.toggle-mirror" = "Tokkel spieël";
+"iina.save-playlist" = "Bewaar huidige afspeellys";
+"iina.show-current-file-in-finder" = "Toon huidige lêer in Finder";
+"iina.delete-current-file" = "Skrap huidige lêer";
+"iina.delete-current-file-hard" = "Skrap huidige lêer sonder om na asblik te skuif";
+"iina.find-online-subs" = "Soek aanlyn na onderskrifte";
+"iina.save-downloaded-sub" = "Bewaar afgelaaide onderskrif";
+
+"yes" = "Ja";
+"no" = "Nee";
+"to" = "op";
+"by" = "met";
+"in" = "in";
+"add" = "toeneem";
+"minus" = "afneem";
+"forward" = "vorentoe";
+"backward" = "agtertoe";
+"seek-to" = "na";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (presies)";
+"relative-percent+exact" = "% (presies)";
+"absolute+keyframe" = "s (sleutelbeeld)";
+"absolute-percent+keyframe" = "% (sleutelbeeld)";
+
+"opt.pause" = "Wag";
+"opt.speed" = "Snelheid";
+
+"opt.window-scale" = "Vensterskaal";
+
+"opt.video" = "Videosnit";
+"opt.video-aspect-override" = "Beeldverhouding";
+"opt.contrast" = "Kontras";
+"opt.brightness" = "Helderheid";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Versadiging";
+"opt.deinterlace" = "Deïnterlinieer";
+
+"opt.audio" = "Oudiosnit";
+"opt.volume" = "Volume";
+"opt.mute" = "Demp";
+"opt.audio-delay" = "Oudiovertraging";
+
+"opt.sub" = "Onderskrifsnit";
+"opt.sub-delay" = "Onderskrifvertraging";
+"opt.sub-pos" = "Onderskrifposisie";
+"opt.sub-scale" = "Onderskrifskaal";
+"opt.sub-visibility" = "Onderskrifsigbaarheid";
+"opt.secondary-sub-visibility" = "Sekondêreonderskrifsigbaarheid";
+"opt.sub-ass-style-override" = "ASS-styloorheersing";
+
+"opt.fullscreen" = "Volskerm";
+"opt.ontop" = "Sweef bo-aan";
+
+"opt.chapter" = "Hoofstuk";
+
+"read.set" = "Stel {{property}} in op {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Vermenigvuldig {{property}} met {{factor}}x";
+"read.cycle" = "Herhaal {{property}}{{#dir_down}} afwaarts{{/dir_down}}";
+"read.cycle-values" = "Herhaal {{property}} in ({{{values}}})";
+"read.seek" = "Gaan{{#abs}} na{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#fwd}}vorentoe{{/fwd}}{{#bwd}}terug{{/bwd}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Gaan na {{#skip_1}}volgende{{/skip_1}}{{#skip_-1}}vorige{{/skip_-1}} onderskrif";

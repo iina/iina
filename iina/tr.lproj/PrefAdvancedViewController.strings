@@ -1,0 +1,50 @@
+/* Class = "NSTextFieldCell"; title = "Additional mpv options"; ObjectID = "6F6-Y7-8oR"; */
+"6F6-Y7-8oR.title" = "Ek mpv seçenekleri";
+
+/* Class = "NSButtonCell"; title = "Enable advanced settings"; ObjectID = "7ml-VU-xWv"; */
+"7ml-VU-xWv.title" = "Gelişmiş ayarları etkinleştir";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "E3I-Q7-9t1"; */
+"E3I-Q7-9t1.headerCell.title" = "Ad";
+
+/* Class = "NSTextFieldCell"; title = "The following settings will require restarting IINA to take effect."; ObjectID = "HMa-Vz-EUk"; */
+"HMa-Vz-EUk.title" = "Bu ayarların etkinleştirilmesi için IINA’nın yeniden başlatılması gerekecektir.";
+
+/* Class = "NSButtonCell"; title = "Open Log Directory"; ObjectID = "JDA-g3-RNX"; */
+"JDA-g3-RNX.title" = "Günlük Dizinini Aç";
+
+/* Class = "NSButtonCell"; title = "Enable logging to file"; ObjectID = "LCd-uY-Yze"; */
+"LCd-uY-Yze.title" = "Günlük kaydını etkinleştir";
+
+/* Class = "NSButtonCell"; title = "Choose…"; ObjectID = "MRT-u8-xTX"; */
+"MRT-u8-xTX.title" = "Seç…";
+
+/* Class = "NSTextFieldCell"; title = "Settings"; ObjectID = "Qmc-Tb-d7d"; */
+"Qmc-Tb-d7d.title" = "Ayarlar";
+
+/* Class = "NSTableColumn"; headerCell.title = "Value"; ObjectID = "SX9-fy-bss"; */
+"SX9-fy-bss.headerCell.title" = "Değer";
+
+/* Class = "NSButtonCell"; title = "Use config directory:"; ObjectID = "ehL-8Y-G8h"; */
+"ehL-8Y-G8h.title" = "Şu yapılandırma dizinini kullan:";
+
+/* Class = "NSButtonCell"; title = "Use mpv's OSD"; ObjectID = "phK-g9-Vbg"; */
+"phK-g9-Vbg.title" = "mpv’nin OSD’sini kullan";
+
+/* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "nFf-vh-bNd"; */
+"nFf-vh-bNd.title" = "Kayıt düzeyi:";
+
+/* Class = "NSButtonCell"; title = "Show Log Viewer"; ObjectID = "Owx-92-Ogg"; */
+"Owx-92-Ogg.title" = "Günlük Görüntüleyicisini Aç";
+
+/* Class = "NSMenuItem"; title = "Verbose"; ObjectID = "S9M-yY-q0w"; */
+"S9M-yY-q0w.title" = "Ayrıntılı";
+
+/* Class = "NSMenuItem"; title = "Debug"; ObjectID = "hGq-ek-VHd"; */
+"hGq-ek-VHd.title" = "Hata ayıkla";
+
+/* Class = "NSMenuItem"; title = "Warning"; ObjectID = "exP-JC-h7t"; */
+"exP-JC-h7t.title" = "Uyarı";
+
+/* Class = "NSMenuItem"; title = "Error"; ObjectID = "sl8-Df-vbX"; */
+"sl8-Df-vbX.title" = "Hata";

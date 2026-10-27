@@ -1,0 +1,1039 @@
+/*
+  String_ui.strings
+  iina
+
+  Created by lhc on 3/1/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+// Common
+
+"general.on" = "מופעל";
+"general.off" = "כבוי";
+"general.login" = "התחברות";
+"general.logout" = "התנתקות";
+"general.ok" = "אישור";
+"general.cancel" = "ביטול";
+"general.done" = "סיום";
+"general.username" = "שם משתמש";
+"general.password" = "סיסמה";
+"general.na" = "N/A";
+"general.no_result" = "אין תוצאות";
+"general.no_title" = "No Title";
+"general.auto" = "אוטומטי";
+
+"input.value_is_empty" = "הערך לא יכול להיות ריק.";
+"input.already_exists" = "הערך כבר קיים.";
+
+// Guide Window
+"guide.highlights" = "נקודות עיקריות";
+"guide.basic_settings" = "הגדרות בסיסיות";
+"guide.faq" = "שאלות נפוצות";
+
+// Initial Window
+"initial.announcement" = "אתה משתמש בגרסת %@ של IINA";
+"initial.beta.desc" = "אם ברצונך לחזור לגרסה הרגילה, הסר את הסימון \"קבל עדכוני בטא\" בהגדרות > כללי, והתקן את הגרסה הרגילה מ<a href=\"https://iina.io\">האתר הרשמי</a> שלנו.";
+"initial.nightly.desc" = "בניה לילית לא מומלצת לשימוש יומיומי. כרגע, בנייה לילית לא תומכת בעדכון אוטומטי. אנא הורד באופן ידני בניה עדכנית מ<a href=\"https://nightly.iina.io\">האתר</a> שלנו.";
+"initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
+"initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
+
+// Inspector Window
+"inspector.error" = "שגיאה";
+
+// MainWindowController.swift
+"main.buffering_indicator" = "מוריד נתונים… %d%%";
+"main.opening_stream" = "פותח זרם…";
+"main.seeking_indicator" = "מדלג…";
+"osc.precision" = "דיוק";
+"osc.1s" = "שניה";
+"osc.100ms" = "100 אלפיות שניה";
+"osc.10ms" = "10 אלפיות שניה";
+"osc.1ms" = "אלפית שנייה";
+
+// QuickSettingViewController.swift
+"quicksetting.item_default" = "ברירת מחדל";
+"quicksetting.item_none" = "ללא";
+"quicksetting.hwdec" = "פענוח חומרה";
+"quicksetting.deinterlace" = "ביטול שזירה";
+"quicksetting.hdr" = "HDR";
+"quicksetting.hide" = "הסתר";
+"quicksetting.reset_speed" = "איפוס מהירות ל1x";
+
+// EQ Presets
+"eq.preset.flat" = "שטוח";
+"eq.preset.acoustic" = "אקוסטי";
+"eq.preset.classical" = "קלאסי";
+"eq.preset.dance" = "ריקוד";
+"eq.preset.deep" = "עמוק";
+"eq.preset.electronic" = "אלקטרוני";
+"eq.preset.hip_hop" = "היפ הופ";
+"eq.preset.increase_bass" = "הגברת צלילים נמוכים";
+"eq.preset.increase_treble" = "הגברת צלילים גבוהים";
+"eq.preset.increase_vocal" = "הגברת שירה";
+"eq.preset.jazz" = "ג׳אז";
+"eq.preset.latin" = "לטינית";
+"eq.preset.loundness" = "Loundness";
+"eq.preset.lounge" = "טרקלין";
+"eq.preset.piano" = "פסנתר";
+"eq.preset.pop" = "פופ";
+"eq.preset.rnb" = "רית׳ם אנד בלוז";
+"eq.preset.reduce_bass" = "הפחתת צלילים נמוכים";
+"eq.preset.reduce_treble" = "הפחתת צלילים גבוהים";
+"eq.preset.rock" = "רוק";
+"eq.preset.small_speaker" = "רמקול קטן";
+"eq.preset.spoken_word" = "קריינות";
+
+"alert.eq.new_profile.title" = "פרופיל אקולייזר חדש";
+"alert.eq.new_profile.message" = "אנא הזן שם לפרופיל.";
+"alert.eq.rename.title" = "שנה שם פרופיל נוכחי";
+"alert.eq.rename.message" = "אנא הזן שם לפרופיל.";
+
+// OSDMessage.swift
+"osd.pause" = "מושהה";
+"osd.resume" = "התחדש";
+"osd.volume" = "עוצמת שמע: %@";
+"osd.speed" = "מהירות: x%@";
+"osd.aspect" = "יחס גובה-רוחב: %@";
+"osd.crop" = "חיתוך: %@";
+"osd.rotate" = "הטיה: %i°";
+"osd.deinterlace" = "ביטול שזירה: %@";
+"osd.hwdec" = "פענוח חומרה: %@";
+"osd.audio_delay.nodelay" = "עיכוב שמע: ללא עיכוב";
+"osd.audio_delay.later" = "עיכוב שמע: %@ שניות איחור";
+"osd.audio_delay.earlier" = "עיכוב שמע: %@ שניות הקדמה";
+"osd.sub_delay.nodelay" = "עיכוב כתוביות: ללא עיכוב";
+"osd.sub_delay.later" = "עיכוב כתוביות: %@ שניות איחור";
+"osd.sub_delay.earlier" = "עיכוב כתוביות: %@ שניות הקדמה";
+"osd.subtitle_pos" = "מיקום כתוביות: %@";
+"osd.sub_hidden" = "כתוביות מוסתרות";
+"osd.sub_visible" = "כתוביות מוצגות";
+"osd.sub_second_delay.nodelay" = "עיכוב כתוביות משניות: ללא עיכוב";
+"osd.sub_second_delay.later" = "עיכוב כתוביות משניות: %@ שניות איחור";
+"osd.sub_second_delay.earlier" = "עיכוב כתוביות משניות: %@ שניות הקדמה";
+"osd.sub_second_hidden" = "כתוביות משניות מוסתרות";
+"osd.sub_second_pos" = "מיקום כתוביות משניות: %@";
+"osd.sub_second_visible" = "כתוביות משניות מוצגות";
+"osd.mute" = "מושתק";
+"osd.unmute" = "לא מושתק";
+"osd.screenshot" = "בוצע צילום מסך";
+"osd.abloop.a" = "לולאת א-ב: א";
+"osd.abloop.b" = "לולאת א-ב: ב";
+"osd.abloop.clear" = "לולאת א-ב: בוטלה";
+"osd.stop" = "עצור";
+"osd.chapter" = "פרק: %@";
+"osd.subtitle_scale" = "קנה מידה כתוביות: %@x";
+"osd.add_to_playlist" = "נוספו %i קבצים לרשימת ההשמעה";
+"osd.clear_playlist" = "רשימת ההשמעה אופסה";
+"osd.video_eq.contrast" = "ניגודיות: %i";
+"osd.video_eq.gamma" = "גמא: %i";
+"osd.video_eq.hue" = "גוון: %i";
+"osd.video_eq.saturation" = "רוויה: %i";
+"osd.video_eq.brightness" = "בהירות: %i";
+"osd.find_online_sub" = "מחפש כתוביות מקוונות…";
+"osd.find_online_sub.source" = "מאת";
+"osd.sub_not_found" = "לא נמצאו כתוביות";
+"osd.sub_found" = "%d כתוביות נמצאו.";
+"osd.sub_downloading" = "מוריד %d כתוביות";
+"osd.sub_downloaded" = "הכתוביות הורדו";
+"osd.sub_saved" = "הכתוביות נשמרו";
+"osd.network_error" = "שגיאת רשת";
+"osd.file_error" = "שגיאה בקריאת הקובץ";
+"osd.cannot_login" = "ההתחברות נכשלה";
+"osd.canceled" = "מבוטל";
+"osd.cannot_connect" = "ההתחברות נכשלה";
+"osd.timed_out" = "Timed Out";
+"osd.sub_quota_exceeded" = "Subtitle download limit reached";
+"osd.sub_quota_exceeded.detail" = "Try again after %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.filter_added" = "נוסף מסנן: %@";
+"osd.filter_removed" = "המסנן הוסר";
+"osd.file_loop" = "חזרה על הקובץ הנוכחי";
+"osd.playlist_loop" = "חזרה על רשימת ההשמעה";
+"osd.no_loop" = "חזרה מושבתת";
+
+"preference.title" = "העדפות";
+"preference.general" = "כללי";
+"preference.ui" = "Interface";
+"preference.video_audio" = "Video & Audio";
+"preference.subtitle" = "כתוביות";
+"preference.network" = "רשת";
+"preference.control" = "שליטה";
+"preference.keybindings" = "קיצורי מקשים";
+"preference.advanced" = "מתקדם";
+"preference.plugins" = "תוספים";
+"preference.utilities" = "עזרים";
+"preference.scripts" = "סקריפטים";
+"preference.not_logged_in" = "לא מחובר";
+"preference.logged_in_as" = "מחובר בתור %@";
+"preference.system_media_control" = "השתמש בבקרת המדיה של המערכת";
+
+"preference.key_binding_hint_1" = "כדי לערוך קיצור מקשים בקובץ התצורה הנוכחי, לחץ תחילה על כפתור \"שכפול…\" כדי ליצור עותק.";
+"preference.key_binding_hint_2" = "לחץ פעמיים בצד ימין של שורה כדי לערוך את קיצור המקשים.";
+
+"preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
+
+"preference.sub_override_level.no" = "לא";
+"preference.sub_override_level.force" = "כפויה";
+"preference.sub_override_level.scale" = "קנה מידה";
+"preference.sub_override_level.strip" = "הסרת הכל";
+"preference.sub_override_level.yes" = "מאופשרת";
+
+"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"preference.sub_override_level.descriptive_text.force" = "החל את כל סגנונות הכתוביות.";
+"preference.sub_override_level.descriptive_text.scale" = "החל את הגדרת קנה המידה בנוסף להגדרות העיצוב בסעיף זה.";
+"preference.sub_override_level.descriptive_text.strip" = "הסר לחלוטין את כל תגי ה-ASS והעיצובים מהכתוביות.";
+"preference.sub_override_level.descriptive_text.yes" = "החל את כל הגדרות העיצוב בסעיף זה.";
+
+"preference.ytdl_plugin_not_installed" = "התקן את תוסף מדיה מקוונת מתוך \"תוספים > התקן מ-GitHub\" כדי ליהנות מיכולות מתקדמות כמו הורדת וידאו ועדכוני yt-dlp אוטומטיים.";
+"preference.ytdl_plugin_installed" = "התמיכה המובנית ב-youtube-dl מושבתת מאחר שהתקנת את תוסף המדיה המקוונת.";
+
+"menu.volume" = "עוצמת שמע: %@";
+"menu.volume_muted" = "עוצמת שמע: %@ (מושתק)";
+"menu.audio_delay" = "עיכוב שמע: %@ שניות";
+"menu.sub_delay" = "עיכוב כתוביות: %@ שניות";
+"menu.sub_hide" = "הסתר כתוביות";
+"menu.sub_show" = "הצג כתוביות";
+"menu.sub_second_hide" = "הסתר כתוביות משניות";
+"menu.sub_second_show" = "הצג כתוביות משניות";
+"menu.fullscreen" = "עבור למסך מלא";
+"menu.exit_fullscreen" = "צא ממסך מלא";
+"menu.pip" = "היכנס למצב תמונה בתוך תמונה";
+"menu.exit_pip" = "צא ממצב תמונה בתוך תמונה";
+"menu.mini_player" = "היכנס למצב מוזיקה";
+"menu.exit_mini_player" = "צא ממצב מוזיקה";
+"menu.pause" = "השהיה";
+"menu.resume" = "המשך";
+"menu.speed" = "מהירות: x%@";
+"menu.chapters" = "הצג פאנל פרקים";
+"menu.hide_chapters" = "הסתר פאנל פרקים";
+"menu.playlist" = "הצג פאנל רשימת השמעה";
+"menu.hide_playlist" = "הסתר פאנל רשימת השמעה";
+"menu.video" = "הצג פאנל וידאו";
+"menu.hide_video" = "הסתר פאנל וידאו";
+"menu.audio" = "הצג פאנל אודיו";
+"menu.hide_audio" = "הסתר פאנל וידאו";
+"menu.subtitles" = "הצג פאנל כתוביות";
+"menu.hide_subtitles" = "הסתר פאנל כתוביות";
+
+"menu.seek_forward" = "דלג קדימה %@ שניות";
+"menu.seek_backward" = "חזרה %@ שניות אחורה";
+"menu.speed_up" = "הגבר מהירות ב%@x";
+"menu.speed_down" = "הפחת מהירות ב%@x";
+"menu.volume_up" = "הגבר עוצמת שמע ב%@%";
+"menu.volume_down" = "הפחת עוצמת שמע ב%@%";
+"menu.audio_delay_up" = "עיכוב שמע: הוסף %@ שניות";
+"menu.audio_delay_down" = "עיכוב שמע: הפחת %@ שניות";
+"menu.sub_delay_up" = "עיכוב כתוביות: הוסף %@ שניות";
+"menu.sub_delay_down" = "עיכוב כתוביות: הפחת %@ שניות";
+
+"menu.crop_custom" = "מותאם אישית…";
+"menu.find_online_sub" = "מצא כתוביות מקוונות מ-%@";
+
+"menu.manage_plugins" = "נהל תוספים…";
+"menu.developer_tool" = "כלי פיתוח";
+"menu.more_plugin" = "עוד…";
+"menu.conflicting_shortcuts" = "קיצורי המקשים מתנגשים…";
+"menu.reload_plugins" = "טען מחדש את כל התוספים";
+"menu.show_plugins_panel" = "הצג פאנל תוספים";
+"menu.hide_plugins_panel" = "הסתר פאנל תוספים";
+
+"track.audio" = "שמע";
+"track.none" = "<ללא>";
+"track.sub" = "כתוביות";
+"track.video" = "וידאו";
+
+"subtrack.no_loaded" = "לא נטענו כתוביות";
+"subtrack.no_external" = "לא נמצאו כתוביות חיצוניות";
+
+// Alerts
+"alert.beta_channel.title" = "קבל עדכונים עבור גרסאות בטא";
+
+"alert.title_error" = "שגיאה";
+"alert.title_warning" = "אזהרה";
+"alert.title_info" = "מידע";
+
+"alert.fatal_error" = "שגיאה קריטית: %@ \nהאפליקציה תיסגר כעת.";
+"alert.mpv_error" = "שגיאה פנימית %@ (%@) בעת הגדרת האפשרות %@.";
+
+"alert.unsupported_audio" = "קובץ שמע חיצוני לא נתמך.";
+"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_sub" = "הכתוביות החיצוניות לא נתמכות.";
+"alert.unsupported_url" = "כתובת לא נתמכת.";
+"alert.wrong_url_format" = "פורמט כתובת אתר שגוי.";
+
+"alert.error_open" = "שגיאה בפתיחת קובץ/זרם!";
+"alert.error_finding_file" = "הקובץ %@ לא נמצא!";
+"alert.error_loading_script" = "טעינת הסקריפט %@ נכשלה!";
+"alert.error_saving_file" = "אירעה שגיאה בעת שמירת %@: %@";
+"alert.error_deleting_file" = "שגיאה במחיקת הקובץ.";
+
+"alert.target_peak.bad_value" = "The value \"%@\" is invalid.\nPlease provide a value between 10 and 10000, or 0.";
+
+"alert.config.new.title" = "תצורת מקשים חדשה";
+"alert.config.new.message" = "נא להזין שם עבור התצורה החדשה.";
+"alert.config.duplicate.title" = "תצורה כפולה";
+"alert.config.duplicate.message" = "יש להזין שם עבור קובץ התצורה המשוכפל.";
+"alert.config.file_existing.title" = "הקובץ כבר קיים";
+"alert.config.file_existing.message" = "קובץ תצורה באותו שם קובץ כבר קיים. בחר אישור כדי להציג את הקובץ ב-Finder.";
+"alert.config.cannot_create" = "יצירת קובץ התצורה נכשלה!\n%@";
+"alert.config.cannot_write" = "הכתיבה לקובץ התצורה נכשלה!";
+"alert.config.rename.title" = "שנה שם תצורת קלט";
+"alert.config.rename.message" = "נא להזין שם עבור התצורה.";
+
+"alert.filter.incorrect" = "אירעה שגיאה בעת הגדרת המסננים. אנא בדוק את פורמט הפרמטר שהגדרת.";
+"alert.add_filter.title" = "מסנן חדש";
+"alert.add_filter.message" = "אנא הזן מחרוזת מסנן בפורמט פקודת vf או af של mpv.";
+
+"alert.keybinding_config.error" = "שגיאה בניתוח קובץ תצורת קיצורי מקשים \"%@\"! חוזר לקיצורי מקשים ברירת המחדל של IINA. אנא בדוק את התצורה שלך.";
+"alert.delete_keybindingset.title" = "Delete Key Binding Set";
+"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+
+"alert.extra_option.cannot_read" = "קריאת אפשרויות mpv נוספות המוגדרות על ידי המשתמש נכשלה.";
+"alert.extra_option.empty" = "המפתח או הערך לא יכולים להיות ריקים!";
+"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.config_folder" = "שגיאה בהגדרת ספריית התצורה \"%@\".";
+
+"alert.playlist.error_deleting" = "המחיקה נכשלה: %@";
+
+"alert.screenshot.error_taking" = "שגיאה בביצוע צילום מסך!";
+
+"alert.sub.no_selected" = "אנא בחר תחילה כתוביות שהורדת.";
+"alert.sub_lang_not_set" = "אנא הגדר שפות כתוביות מועדפות בהגדרות לפני השימוש ב-OpenSubtitles. אנגלית (en) תשמש הפעם.";
+"alert.sub.cannot_save_passwd" = "שמירת הסיסמה למחזיק המפתחות נכשלה: %@";
+"alert.sub.cannot_login" = "ההתחברות נכשלה. אנא בדוק את שם המשתמש, הסיסמה ומצב הרשת שלך.\n\n%@";
+"alert.sub.save_downloaded.title" = "שמור כתוביות שהורדו";
+
+"alert.set_default.title" = "הגדרת IINA כאפליקציית ברירת המחדל";
+"alert.set_default.message" = "IINA תוגדר כאפליקציית ברירת המחדל עבור כל סוגי הקבצים שבהם היא תומכת.";
+"alert.set_default.success" = "הסתיים עם %d שהצליחו ו-%d שנכשלו.";
+
+"alert.add_watch.title" = "הוסף מאפיין צפייה";
+"alert.add_watch.message" = "אנא הזן שם מאפיין mpv חוקי.";
+
+"alert.jump_to.title" = "קפיצה אל";
+"alert.jump_to.message" = "יש להזין את השעה אליה ברצונך לקפוץ. לדוגמה: 20:35";
+
+"alert.opensub.login.title" = "התחברות ל-OpenSubtitles";
+"alert.opensub.login.message" = "אנא הזן את שם המשתמש והסיסמה שלך";
+
+"alert.open_url.title" = "פתח כתובת אינטרנט";
+"alert.open_url.message" = "אנא הזן כתובת URL:";
+"alert.choose_media_file.title" = "בחר קבצי מדיה";
+
+"alert.add_url.title" = "הוסף URL";
+"alert.add_url.message" = "אנא הזן URL:";
+
+"alert.delete_history.title" = "מחק היסטוריית השמעה";
+"alert.delete_history.message" = "האם אתה בטוח שברצונך למחוק את הערכים שנבחרו?";
+"alert.delete_all_history.title" = "מחק היסטוריית השמעה";
+"alert.delete_all_history.message" = "האם אתה בטוח שברצונך למחוק את כל היסטוריית ההשמעה?";
+"alert.delete_file.title" = "Delete File";
+"alert.delete_file.message" = "Are you sure to trash the selected files?";
+
+"alert.filter_hwdec.message" = "אתה עומד להחיל מסנן וידאו. עם זאת, ייתכן שמפענח החומרה הנוכחי שלך לא תומך היטב במסנני וידאו. ניתן להשבית את פענוח החומרה, או לעבור ל-Auto(Copy), שיגרום לצריכת זיכרון כפולה.\nייתכן שתצטרך לחזור על הפעולה הקודמת (כמו הגדרת החיתוך) כדי שזה יעבוד.";
+"alert.filter_hwdec.abort" = "ביטול";
+"alert.filter_hwdec.turn_off" = "כבה פענוח חומרה";
+"alert.filter_hwdec.use_copy" = "מעבר אל Auto(Copy)";
+
+"alert.clear_cache.title" = "נקה מטמון תמונות ממוזערות";
+"alert.clear_cache.message" = "האם אתה בטוח שברצונך לנקות את מטמון התמונות הממוזערות?";
+
+"alert.clear_history.title" = "מחק היסטוריית השמעה";
+"alert.clear_history.message" = "האם אתה בטוח שברצונך למחוק את כל היסטוריית ההשמעה?";
+
+"alert.clear_watch_later.title" = "נקה התקדמות הפעלה שמורה";
+"alert.clear_watch_later.message" = "האם אתה בטוח שברצונך למחוק את כל התקדמויות ההשמעה שנשמרו (מידע \"צפה מאוחר יותר\")?";
+
+"alert.restore_alerts.title" = "שחזור התראות שהוסתרו";
+"alert.restore_alerts.message" = "האם אתה בטוח שברצונך לשחזר התראות מושתקות?";
+
+"alert.cleared" = "נוקה.";
+"alert.restored" = "שוחזרו.";
+"alert.custom" = "%@";
+
+"alert.nothing_to_open" = "אין מה לפתוח.";
+
+"alert.no_video_track" = "אין רצועת וידאו.";
+
+"alert.duplicate_config" = "לא ניתן לערוך ישירות את תצורות ברירת המחדל. יש לשכפל את התצורה לפני העריכה.";
+
+"alert.assrt_register" = "בשל מגבלות מכסות API, מומלץ מאוד להשתמש באסימון API משלך. אסימון ברירת המחדל מיועד רק לשימוש בהדגמה, ואתה עלול להיתקל בשגיאת רשת.";
+"alert.assrt_register.register" = "הירשם עכשיו";
+"alert.assrt_register.try" = "נסה קודם";
+"alert.assrt_token_prompt.title" = "הזן את אסימון ה-API שלך";
+"alert.assrt_token_prompt.message" = "נא להירשם בדף האינטרנט שיפתח. קבל את האסימון שלך בדף המשתמש שלך והזן אותו למטה:";
+"alert.assrt_token_invalid" = "נראה שאסימון ה-API של Assrt אינו חוקי.";
+
+"alert.plugin_uninstall.title" = "האם אתה בטוח שברצונך להסיר את %@?";
+"alert.plugin_uninstall.message" = "התוסף יימחק מהדיסק.";
+"alert.plugin_reinstall.title" = "התוסף %@ כבר קיים";
+"alert.plugin_reinstall.message" = "האם ברצונך להתקין מחדש את התוסף?";
+"alert.duplicated_plugin_id" = "זוהו מזהי תוסף כפולים. לשני תוספים או יותר יש את אותו מזהה \"%@\". זה עלול לגרום להתנהגויות לא צפויות. אנא מצא אותם בהעדפות > תוספים ודווח למפתחים שלהם. אם תוסף מותקן באופן מקומי, תוכל גם לשנות ידנית את המזהה שלו בקובץ Info.json של התוסף.";
+"alert.plugin_no_update" = "לא נמצא עדכון.";
+"alert.plugin_update_found.title" = "נמצא עדכון עבור %@";
+"alert.plugin_update_found.message" = "הגרסה האחרונה היא %@. גרסתך הנוכחית היא %@. האם תרצה לעדכן?";
+"alert.plugin_permission" = "תוסף זה דורש את ההרשאות הבאות. אנא עיין בהן לפני שתמשיך.";
+"alert.plugin_permission_added" = "עדכון זה דורש הרשאות נוספות. אנא עיין בהן לפני שתמשיך.";
+"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+
+"playlist.total_length" = "%@ סך הכל";
+"playlist.total_length_with_selected" = "נבחרו %@ מתוך %@";
+"playlist.sorting.header" = "Sorting";
+"playlist.sorting.filename_ascending" = "שם קובץ בסדר עולה";
+"playlist.sorting.filename_descending" = "שם קובץ בסדר יורד";
+"playlist.sorting.path_ascending" = "נתיב קובץ בסדר עולה";
+"playlist.sorting.path_descending" = "נתיב קובץ בסדר יורד";
+"pl_menu.title_multi" = "%d פריטים";
+"pl_menu.play_next" = "הפעל את הבא";
+"pl_menu.play_in_new_window" = "הפעלה בחלון חדש";
+"pl_menu.remove" = "הסרה";
+"pl_menu.remove_multi" = "הסרת נבחרים";
+"pl_menu.delete" = "העבר לאשפה";
+"pl_menu.delete_multi" = "העבר קבצים נבחרים לאשפה";
+"pl_menu.delete_after_play" = "העבר לאשפה לאחר ההשמעה";
+"pl_menu.delete_after_play_multi" = "העבר קבצים נבחרים לאשפה לאחר ההשמעה";
+"pl_menu.show_in_finder" = "הצג ב-Finder";
+"pl_menu.add_file" = "הוסף קובץ…";
+"pl_menu.add_url" = "הוסף URL…";
+"pl_menu.clear_playlist" = "איפוס רשימת השמעה";
+"pl_menu.matched_sub" = "נמצאו %d כתוביות";
+"pl_menu.add_sub" = "הוסף כתוביות…";
+"pl_menu.wrong_sub" = "כתוביות לא תקינות!";
+"pl_menu.browser" = "פתח בדפדפן";
+"pl_menu.copy_url" = "העתק URL";
+"pl_menu.copy_url_multi" = "העתק URLs";
+"pl_menu.playback" = "השמעה";
+"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.network_resources" = "Network Resources";
+"pl_menu.file_operations" = "File Operations";
+"pl_menu.plugin" = "תוסף";
+"pl_menu.playlist" = "רשימת השמעה";
+
+"keymapping.title" = "קיצורי מקשים";
+"keymapping.message" = "לחץ על מקש כלשהו כדי להקליט.";
+
+"filter.video_filters" = "מסנני וידאו";
+"filter.audio_filters" = "מסנני שמע";
+
+"hwdec.no" = "השבת פענוח חומרה.";
+"hwdec.auto" = "אפשר פענוח חומרה, אך רוב מסנני הווידאו לא יפעלו כראוי.";
+"hwdec.auto-copy" = "אפשר פענוח חומרה. יצרוך זיכרון כפול אבל יעבוד עם מסנני וידאו.";
+
+"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+
+"subencoding.auto" = "זיהוי אוטומטי";
+
+"osc_toolbar.settings" = "הגדרות מהירות";
+"osc_toolbar.playlist" = "רשימת השמעה ופרקים";
+"osc_toolbar.pip" = "היכנס/צא ממצב תמונה בתוך תמונה";
+"osc_toolbar.full_screen" = "היכנס/צא ממסך מלא";
+"osc_toolbar.music_mode" = "היכנס למצב מוזיקה";
+"osc_toolbar.sub_track" = "בחר רצועת כתוביות";
+"osc_toolbar.screenshot" = "בצע צילום מסך";
+"osc_toolbar.plugins" = "הצג פאנל תוספים";
+"osc_toolbar.live_text" = "Toggle Live Text";
+
+"osc_pos.floating" = "צף";
+"osc_pos.top" = "ראש החלון";
+"osc_pos.bottom" = "בתחתית";
+
+"mini_player.album_art" = "הצג/הסתר תמונת אלבום";
+"mini_player.loop" = "חזרה";
+"mini_player.shuffle" = "ערבוב";
+"mini_player.remove" = "הסר מרשימת השמעה";
+"mini_player.add" = "הוסף לרשימת ההשמעה";
+"mini_player.delete" = "הסר את כל הרצועות מרשימת ההשמעה";
+"mini_player.volume" = "עוצמת קול";
+"mini_player.close" = "סגור מצב מוזיקה";
+"mini_player.back" = "חזור למצב וידאו";
+"mini_player.sort" = "מיין את רשימת ההשמעה";
+
+// Touch bar
+
+"touchbar.ahead_15" = "15 שניות קדימה";
+"touchbar.ahead_30" = "30 שניות קדימה";
+"touchbar.back_15" = "15 שניות אחורה";
+"touchbar.back_30" = "30 שניות אחורה";
+"touchbar.next_video" = "הוידאו הבא";
+"touchbar.prev_video" = "הוידאו הקודם";
+"touchbar.increase_volume" = "הגברת עוצמה";
+"touchbar.decrease_volume" = "הנמכת עוצמה";
+"touchbar.rewind" = "הרצה אחורה";
+"touchbar.fast_forward" = "הרצה קדימה";
+"touchbar.play_pause" = "הפעל/השהה";
+"touchbar.seek" = "חיפוש";
+"touchbar.time" = "זמן מיקום";
+"touchbar.remainingTimeOrTotalDuration" = "זמן שנותר / משך כולל";
+"touchbar.toggle_pip" = "היכנס/צא ממצב תמונה בתוך תמונה";
+
+// Plugin permissions
+
+"permissions.network-request.name" = "בקשת רשת";
+"permissions.network-request.desc" = "תוסף זה יכול לשלוח בקשות רשת ולהעלות נתונים לאתרים הבאים:";
+"permissions.network-request.any_site" = "כל אתר";
+"permissions.show-osd.name" = "הצג OSD";
+"permissions.show-osd.desc" = "תוסף זה יכול להציג הודעות OSD (תצוגה על המסך).";
+"permissions.show-alert.name" = "הצג התראות";
+"permissions.show-alert.desc" = "תוסף זה יכול להציג התראות קופצות.";
+"permissions.video-overlay.name" = "הוסף שכבות על לסרטונים";
+"permissions.video-overlay.desc" = "תוסף זה יכול להציג תוכן נוסף בחלק העליון של הסרטון.";
+"permissions.file-system.name" = "גישה למערכת הקבצים";
+"permissions.file-system.desc" = "תוסף זה יכול לקרוא או לכתוב קבצים בדיסק שלך, שעשויים לכלול מידע רגיש. הוא יכול גם להפעיל תוכניות או יישומים אחרים שיכולים להזיק למחשב שלך, אז הקפד לאמת את המקור.";
+
+"plugin.install" = "התקנה";
+"plugin.installed" = "מותקן";
+"plugin.not_installed" = "לא מותקן";
+"plugin.local" = "מותקן מקומית";
+"alert.plugin.install_error" = "אירעה שגיאה במהלך ההתקנה: %@";
+"alert.invalid_url" = "הכתובת לא תקינה.";
+"plugin.install_error.invalid_url" = "הכתובת לא תקינה.";
+"plugin.install_error.file_not_found" = "קובץ החבילה לא נמצא.";
+"plugin.install_error.cannot_download" = "שגיאה בהורדת התוסף.\n\nפלט: %@\n";
+"plugin.install_error.cannot_unpackage" = "שגיאה בחילוץ התוסף.\n\nפלט: %@\n";
+"plugin.install_error.cannot_load" = "IINA לא יכול לטעון את התוסף הזה. ייתכן שהוא בפורמט שגוי.";
+"plugin.check_for_updates" = "חפש עדכונים";
+"plugin.updating" = "מוריד את העדכון…";
+
+// Log window
+"logwindow.all_subsystems" = "All subsystems";
+"logwindow.title" = "תצוגת יומן";
+"logwindow.time" = "זמן";
+"logwindow.subsystem" = "תת מערכת";
+"logwindow.message" = "הודעה";
+"logwindow.now" = "Now";
+"logwindow.now.desc" = "Follow latest logs";
+"logwindow.log_level" = "Log level";
+"logwindow.save" = "שמירה";
+"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.filter" = "Filter";
+"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.copy" = "העתקה";
+"logwindow.logs" = "logs";
+
+// History window
+"history_window.title" = "היסטוריית השמעה";
+"history_window.col.filename" = "Media";
+"history_window.col.progress" = "התקדמות";
+"history_window.col.played_at" = "נוגן בתאריך";
+"history_window.menu.play" = "הפעלה";
+"history_window.menu.play_new_window" = "הפעלה בחלון חדש";
+"history_window.menu.show_in_finder" = "הצג ב-Finder";
+"history_window.menu.delete" = "מחיקה…";
+"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.toolbar.clear" = "מחק היסטוריית השמעה";
+"history_window.toolbar.group_by" = "Group By";
+"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by.date" = "תאריך";
+"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.location" = "Folder and Website";
+"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
+"history_window.toolbar.expand_collapse" = "Expand/Collapse";
+"history_window.toolbar.expand_all" = "Expand All";
+"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.search.search_in" = "חיפוש ב";
+"history_window.search.filename" = "שם קובץ";
+"history_window.search.full_path" = "Full Path";
+"history_window.search.no_recents" = "אין חיפושים אחרונים";
+"history_window.search.recents_title" = "חיפושים אחרונים";
+"history_window.search.clear_recents" = "נקה רשימת אחרונים";
+
+// Sidebar
+
+"sidebar.layout" = "Layout";
+"sidebar.video" = "וידאו";
+"sidebar.audio" = "שמע";
+"sidebar.sub" = "כתוביות";
+"sidebar.plugins" = "תוספים";
+"sidebar.playlist" = "רשימת השמעה";
+"sidebar.chapters" = "פרקים";
+
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "Sidebar";
+"sidebar.sidebar_position" = "Sidebar Position";
+"sidebar.compact_interface" = "Compact Interface";
+"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
+"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
+"sidebar.docked" = "Docked Control Bar and Titlebar";
+"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.settings" = "הגדרות";
+"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+
+"sidebar.aspect_ratio" = "יחס גובה-רוחב";
+"sidebar.crop" = "חתוך";
+"sidebar.rotation" = "הטיה";
+"sidebar.speed" = "מהירות";
+
+"sidebar.brightness" = "בהירות";
+"sidebar.contrast" = "ניגודיות";
+"sidebar.saturation" = "רוויה";
+"sidebar.gamma" = "גמא";
+"sidebar.hue" = "Hue";
+
+"sidebar.load_external_audio" = "טען רצועת שמע חיצונית…";
+"sidebar.delay" = "Delay";
+
+"sidebar.eq" = "Equalizer";
+"sidebar.save_eq" = "שמור את הגדרות ה EQ הנוכחיות…";
+"sidebar.rename_eq" = "שנה את שם הגדרות ה EQ הנוכחיות…";
+"sidebar.remove_eq" = "הסר את הגדרות ה EQ הנוכחיות";
+"sidebar.manual_eq" = "ידני";
+
+"sidebar.primary" = "Primary";
+"sidebar.secondary" = "Secondary";
+"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.load_subtitle" = "טען כתוביות…";
+"sidebar.search_online" = "חיפוש מקוון…";
+"sidebar.position" = "Position";
+"sidebar.scale" = "Scale";
+"sidebar.font" = "גופן";
+"sidebar.color" = "Color";
+"sidebar.text" = "Text";
+"sidebar.border" = "גבול";
+"sidebar.shadow" = "צל";
+"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
+"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+
+"sidebar.add_file" = "הוסף קובץ…";
+"sidebar.add_url" = "הוסף URL…";
+
+"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+
+// Settings
+
+// Settings - General
+"settings.actionAfterLaunch.items.0" = "הצג חלון ברוך הבא";
+"settings.actionAfterLaunch.items.1" = "הצג פאנל פתיחת קובץ";
+"settings.actionAfterLaunch.items.2" = "אל תעשה כלום";
+"settings.actionAfterLaunch.label" = "בעת הפתיחה";
+"settings.allowDuplicatePlayers.label" = "Allow opening the same file in multiple windows";
+"settings.allowScreenSaverForAudio.desc" = "עדיין מונע מהמערכת להירדם.";
+"settings.allowScreenSaverForAudio.label" = "Not while in \"music mode\" or only playing audio";
+"settings.alwaysOpenInNewWindow.label" = "תמיד פתח מדיה בחלון חדש";
+"settings.autoRepeat.label" = "Loop when a file is opened manually";
+"settings.autoSwitchToMusicMode.label" = "עבור ל\"מצב מוזיקה\" אוטומטית בעת הפעלת קובץ שמע";
+"settings.blackOutMonitor.label" = "החשך מסכים אחרים בעת שימוש במסך מלא";
+"settings.defaultRepeatMode.items.0" = "נגינה חוזרת של רשימת ההשמעה";
+"settings.defaultRepeatMode.items.1" = "חזרה על הקובץ הנוכחי";
+"settings.fullScreenWhenOpen.label" = "עבור למסך מלא";
+"settings.groupSimultaneousOpensInPlaylist.label" = "Group media in playlist when opening multiple files at once";
+"settings.keepOpenOnFileEnd.label" = "שמור את החלון פתוח לאחר סיום ההשמעה";
+"settings.pauseWhenGoesToSleep.label" = "השהה כאשר המחשב נכנס למצב שינה";
+"settings.pauseWhenInactive.label" = "החלון הופך לפעיל/ללא פעיל";
+"settings.pauseWhenLeavingFullScreen.label" = "השהה בעת יציאה ממסך מלא";
+"settings.pauseWhenMinimized.label" = "החלון ממוזער/יוצא ממזעור";
+"settings.pauseWhenOpen.label" = "השהה";
+"settings.pauseresumeWhen" = "השהה/המשך כאשר";
+"settings.playWhenEnteringFullScreen.label" = "הפעל בעת כניסה למסך מלא";
+"settings.playlistAutoAdd.desc" = "נדרשת הפעלה מחדש של IINA כדי ששינוי ההגדרה ישפיע.";
+"settings.playlistAutoAdd.label" = "הוסף אוטומטית קבצים שבאותה תיקיה";
+"settings.playlistAutoPlayNext.label" = "נגן את השיר הבא אוטומטית";
+"settings.playlistShowMetadata.label" = "הצג אמן ושם רצועה עבור קובצי אודיו (כאשר זמינים)";
+"settings.playlistShowMetadataInMusicMode.label" = "רק ב\"מצב מוזיקה\"";
+"settings.preventScreenSaver.label" = "מנע את הפעלת שומר המסך בזמן ניגון";
+"settings.quitWhenNoOpenedWindow.label" = "צא מהתוכנה לאחר סגירת כל החלונות";
+"settings.receiveBetaUpdate.label" = "קבל עדכוני בטא";
+"settings.recordPlaybackHistory.label" = "הפעל היסטוריית השמעה";
+"settings.recordRecentFiles.label" = "הפעל תפריט \"נפתח לאחרונה\"";
+"settings.resumeLastPosition.label" = "המשך את ההשמעה האחרונה";
+"settings.screenShotFormat.label" = "פורמט";
+"settings.screenShotIncludeSubtitle.label" = "כלול כתוביות";
+"settings.screenshotCopyToClipboard.desc" = "יעד";
+"settings.screenshotCopyToClipboard.label" = "העתק ללוח";
+"settings.screenshotSaveToFile.desc" = "/path/to/screenshot/folder";
+"settings.screenshotSaveToFile.label" = "שמור אל";
+"settings.screenshotShowPreview.label" = "הצג תצוגה מקדימה לאחר צילום המסך";
+"settings.trackAllFilesInRecentOpenMenu.desc" = "אחרת רק קבצים שנפתחו ידנית יופיעו בתפריט הזה.";
+"settings.trackAllFilesInRecentOpenMenu.label" = "עקוב אחר כל הקבצים שהושמעו והצג אותם בתפריט \"נפתח לאחרונה\"";
+"settings.useLegacyFullScreen.label" = "השתמש במסך מלא מדור קודם";
+
+// Settings - Video
+"settings.enableHdrSupport.desc" = "הפעל מצב HDR כברירת מחדל בעת הפעלת סרטוני HDR.";
+"settings.enableHdrSupport.label" = "Enable HDR mode";
+"settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
+"settings.enableLiveText.label" = "Live Text";
+"settings.enableToneMapping.label" = "הפעל מיפוי גוונים";
+"settings.forceDedicatedGPU.desc" = "השתמש תמיד ב-GPU הייעודי (אם קיים) כדי לעבד. זה יכול לשפר את הביצועים, אבל עשוי לצרוך יותר סוללה.";
+"settings.forceDedicatedGPU.label" = "כפה שימוש בGPU ייעודי";
+"settings.hardwareDecoder.items.0" = "מושבת";
+"settings.hardwareDecoder.items.0.desc" = "השבת פענוח חומרה.";
+"settings.hardwareDecoder.items.1" = "אוטומטי";
+"settings.hardwareDecoder.items.1.desc" = "אפשר פענוח חומרה, אך רוב מסנני הווידאו לא יפעלו כראוי.";
+"settings.hardwareDecoder.items.2" = "אוטומטי (עותק)";
+"settings.hardwareDecoder.items.2.desc" = "אפשר פענוח חומרה. יצרוך זיכרון כפול אבל יעבוד עם מסנני וידאו.";
+"settings.hardwareDecoder.label" = "מפענח חומרה";
+"settings.loadIccProfile.desc" = "טען את פרופיל ה-ICC עבור התצוגה הנוכחית והשתמש בו כדי להפוך וידאו RGB לפלט מסך. (עבור מצב SDR בלבד)";
+"settings.loadIccProfile.label" = "טען פרופיל ICC";
+"settings.toneMappingAlgorithm.label" = "אלגוריתם";
+"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
+"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
+"settings.toneMappingParamOverride.label" = "Tuning parameter";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingTargetPeak.label" = "בהירות מרבית";
+"settings.videoThreads.desc" = "ברירת מחדל: 0 (אוטומטי)";
+"settings.videoThreads.label" = "מספר ה-Threads";
+
+// Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "The default audio driver.";
+"settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation הוא מנהל שמע חדש וניסיוני המציע תמיכה בשמע מרחבי. עם זאת, ייתכן שתיתקלו בבעיות בעת השימוש בו, כגון עיכובי שמע.";
+"settings.audioDriverEnableAVFoundation.label" = "מנהל התקן של שמע";
+"settings.enableInitialVolume.label" = "עוצמה ראשונית";
+"settings.gaplessAudio.desc" = "Gapless audio";
+"settings.gaplessAudio.items.0" = "מושבת";
+"settings.gaplessAudio.items.0.desc" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
+"settings.gaplessAudio.items.1" = "חלש";
+"settings.gaplessAudio.items.1.desc" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
+"settings.gaplessAudio.items.2" = "חזק";
+"settings.gaplessAudio.items.2.desc" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"settings.gaplessAudio.label" = "Gapless audio";
+"settings.maxVolume.desc" = "(100-1000)";
+"settings.maxVolume.label" = "עוצמה מרבית";
+"settings.preferredAudioDevice.label" = "התקן שמע מועדף";
+"settings.replayGain.desc" = "התאם את עוצמת השמע לפי ערכי ה-ReplayGain השמורים במטא־דאטה של הקובץ.";
+"settings.replayGain.items.0" = "אין התאמה";
+"settings.replayGain.items.1" = "Gain רצועה";
+"settings.replayGain.items.2" = "Gain אלבום";
+"settings.replayGain.label" = "התאמת Gain";
+"settings.replayGainClip.desc" = "If this option is not enabled, clipping will be prevented by lowering the gain.";
+"settings.replayGainClip.label" = "Allow the volume gain to clip";
+"settings.replayGainFallback.desc" = "Gain to apply if the file has no ReplayGain tags.";
+"settings.replayGainFallback.label" = "Fallback";
+"settings.replayGainPreamp.desc" = "Pre-amplification gain to apply to the ReplayGain gain.";
+"settings.replayGainPreamp.label" = "Preamp gain";
+
+// Settings - Control
+"settings.doubleClickAction.items.0" = "ללא פעולה";
+"settings.doubleClickAction.items.1" = "להיכנס/לצאת ממצב מסך מלא";
+"settings.doubleClickAction.items.2" = "להשהות/לחדש";
+"settings.doubleClickAction.items.4" = "להיכנס/לצאת ממצב תמונה בתוך תמונה";
+"settings.doubleClickAction.items.5" = "לולאת א-ב";
+"settings.doubleClickAction.items.6" = "Reset speed";
+"settings.doubleClickAction.label" = "קליק כפול כדי";
+"settings.forceTouchAction.items.0" = "ללא פעולה";
+"settings.forceTouchAction.items.1" = "להיכנס/לצאת ממצב מסך מלא";
+"settings.forceTouchAction.items.2" = "להשהות/לחדש";
+"settings.forceTouchAction.items.3" = "להסתיר את ה-OSD";
+"settings.forceTouchAction.label" = "‏Force Touch כדי";
+"settings.horizontalScrollAction.items.0" = "לשנות את עוצמת הקול";
+"settings.horizontalScrollAction.items.1" = "חיפוש";
+"settings.horizontalScrollAction.items.2" = "ללא פעולה";
+"settings.horizontalScrollAction.items.4" = "Adjust playback speed";
+"settings.horizontalScrollAction.label" = "גלול אופקית כדי";
+"settings.middleClickAction.items.0" = "ללא פעולה";
+"settings.middleClickAction.items.1" = "להיכנס/לצאת ממצב מסך מלא";
+"settings.middleClickAction.items.2" = "להשהות/לחדש";
+"settings.middleClickAction.items.3" = "להסתיר את ה-OSD";
+"settings.middleClickAction.items.4" = "להיכנס/לצאת ממצב תמונה בתוך תמונה";
+"settings.middleClickAction.items.5" = "לולאת א-ב";
+"settings.middleClickAction.items.6" = "Reset speed";
+"settings.middleClickAction.label" = "קליק אמצעי כדי";
+"settings.pinchAction.items.0" = "לשנות את גודל החלון";
+"settings.pinchAction.items.1" = "להיכנס למצב מסך מלא";
+"settings.pinchAction.items.2" = "ללא פעולה";
+"settings.pinchAction.label" = "צביטה כדי";
+"settings.playbackSpeedScrollAmount.label" = "Sensitivity for speed";
+"settings.relativeSeekAmount.label" = "רגישות (חיפוש רגיל)";
+"settings.rightClickAction.desc" = "קליק אמצעי כדי";
+"settings.rightClickAction.items.0" = "ללא פעולה";
+"settings.rightClickAction.items.2" = "להשהות/לחדש";
+"settings.rightClickAction.items.3" = "להסתיר את ה-OSD";
+"settings.rightClickAction.items.4" = "להיכנס/לצאת ממצב תמונה בתוך תמונה";
+"settings.rightClickAction.items.5" = "לולאת א-ב";
+"settings.rightClickAction.items.6" = "Reset speed";
+"settings.rightClickAction.label" = "קליק ימני כדי";
+"settings.singleClickAction.items.0" = "ללא פעולה";
+"settings.singleClickAction.items.2" = "להשהות/לחדש";
+"settings.singleClickAction.items.3" = "להסתיר את ה-OSD";
+"settings.singleClickAction.label" = "קליק בודד כדי";
+"settings.useExactSeek.desc" = "\"חיפוש מדויק\" הוא מדויק יותר אך עלול לגרום לפיגור ולשימוש גבוה יותר במעבד.";
+"settings.useExactSeek.items.0" = "חיפוש פריים";
+"settings.useExactSeek.items.1" = "חיפוש מדויק";
+"settings.useExactSeek.items.2" = "אוטומטי";
+"settings.useExactSeek.label" = "סוג חיפוש";
+"settings.verticalScrollAction.items.0" = "לשנות את עוצמת הקול";
+"settings.verticalScrollAction.items.1" = "חיפוש";
+"settings.verticalScrollAction.items.2" = "ללא פעולה";
+"settings.verticalScrollAction.items.4" = "Adjust playback speed";
+"settings.verticalScrollAction.label" = "גלול אנכית כדי";
+"settings.videoViewAcceptsFirstMouse.desc" = "עכבר";
+"settings.videoViewAcceptsFirstMouse.label" = "קבל לחיצת עכבר ראשונה כאשר החלון לא ממוקד";
+"settings.volumeScrollAmount.label" = "רגישות עוצמת קול";
+
+// Settings - Key Binding
+"settings.displayKeyBindingRawValues.label" = "הצג ערכים גולמיים";
+"settings.useMediaKeys.label" = "השתמש בבקרת המדיה של המערכת";
+
+// Settings - Network
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
+"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.label" = "Buffer before starting playback";
+"settings.defaultCacheSize.desc" = "Default: 153,600";
+"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.httpProxy.desc" = "נדרשת הפעלה מחדש של IINA כדי ששינוי ההגדרה ישפיע.";
+"settings.httpProxy.label" = "פרוקסי HTTP";
+"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.label" = "כמות שניות לאחזור מראש";
+"settings.showBufferingThrobber.label" = "Show throbber when buffering";
+"settings.showSeekingThrobber.label" = "הצג מחוון טעינה בעת דילוג";
+"settings.transportRTSPThrough.items.0" = "אוטומטי";
+"settings.transportRTSPThrough.label" = "העברת זרם RTSP על גבי";
+"settings.userAgent.label" = "‏User agent";
+"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
+"settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlRawOptions.label" = "אפשרויות גולמיות";
+"settings.ytdlSearchPath.desc" = "‏IINA תחפש את youtube-dl בתקייה הזאת. נדרשת הפעלה מחדש של האפליקציה.";
+"settings.ytdlSearchPath.label" = "נתיב לyoutube-dl מותאם אישית";
+
+// Settings - Subtitles
+"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.label" = "חפש כתוביות מקוונות אוטומטית";
+"settings.displayInLetterBox.label" = "במסך מלא, הצג כתוביות בתוך תיבה ממוסגרת";
+"settings.subAlignX.items.0" = "שמאל";
+"settings.subAlignX.items.1" = "במרכז";
+"settings.subAlignX.items.2" = "ימין";
+"settings.subAlignY.items.0" = "ראש החלון";
+"settings.subAlignY.items.1" = "במרכז";
+"settings.subAlignY.items.2" = "בתחתית";
+"settings.subAutoLoadIINA.items.0" = "מושבתת";
+"settings.subAutoLoadIINA.items.1" = "כתוביות שמכילות את שם קובץ המדיה";
+"settings.subAutoLoadIINA.items.2" = "זיהוי חכם על ידי IINA";
+"settings.subAutoLoadIINA.label" = "טעינה אוטומטית";
+"settings.subAutoLoadPriorityString.desc" = "אנא הזן רשימה של מחרוזות מופרדות בפסיקים.";
+"settings.subAutoLoadPriorityString.label" = "לכתוביות יש עדיפות כאשר שם הקובץ מכיל";
+"settings.subAutoLoadSearchPath.desc" = "רשימת תיקיות מופרדת באמצעות נקודתיים (:). ניתן להשתמש בנתיבים יחסיים ובתווים כלליים (*) בסוף הנתיב.";
+"settings.subAutoLoadSearchPath.label" = "חפש כתוביות גם בתיקיות הבאות";
+"settings.subBlur.label" = "טשטוש";
+"settings.subBold.desc" = "sans-serif";
+"settings.subBorderStyle.items.1" = "Outline and Shadow";
+"settings.subBorderStyle.items.3" = "Opaque Box";
+"settings.subBorderStyle.items.4" = "Background Box";
+"settings.subBorderStyle.label" = "Border Style";
+"settings.subBold.label" = "מודגש";
+"settings.subItalic.label" = "נטוי";
+"settings.subLang.desc" = "אפשרות זו תישמר כקוד שפה ISO 639-2 ותעבוד הן עבור mpv והן עבור opensubtitles.";
+"settings.subOverrideLevel.items.0" = "מאופשרת";
+"settings.subOverrideLevel.items.0.desc" = "החל את כל הגדרות העיצוב בסעיף זה.";
+"settings.subOverrideLevel.items.1" = "כפויה";
+"settings.subOverrideLevel.items.1.desc" = "החל את כל סגנונות הכתוביות.";
+"settings.subOverrideLevel.items.2" = "הסרת הכל";
+"settings.subOverrideLevel.items.2.desc" = "הסר לחלוטין את כל תגי ה-ASS והעיצובים מהכתוביות.";
+"settings.subOverrideLevel.items.3" = "קנה מידה";
+"settings.subOverrideLevel.items.3.desc" = "החל את הגדרת קנה המידה בנוסף להגדרות העיצוב בסעיף זה.";
+"settings.subOverrideLevel.items.4" = "לא";
+"settings.subOverrideLevel.items.4.desc" = "Render subtitles as specified by the subtitle scripts, without overrides.";
+"settings.subPos.label" = "מיקום אנכי";
+"settings.subScaleWithWindow.label" = "התאם את גודל הכתוביות לגודל החלון";
+"settings.subSpacing.label" = "ריווח גופן";
+
+// Settings - UI
+"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
+"settings.alwaysFloatOnTop.label" = "הצף תמיד מעל החלונות האחרים בזמן השמעה";
+"settings.alwaysShowOnTopIcon.label" = "הצג תמיד כפתור נעיצה (ציפה מעל הכל) בכותרת החלון";
+"settings.arrowBtnAction.items.0" = "לשנות מהירות";
+"settings.arrowBtnAction.items.1" = "לעבור למדיה הקודמת/הבאה";
+"settings.arrowBtnAction.items.2" = "להריץ קדימה/אחורה";
+"settings.arrowBtnAction.label" = "השתמש במקשי ימינה/שמאלה כדי";
+"settings.controlBarAutoHideTimeout.label" = "Auto hide after";
+"settings.controlBarStickToCenter.label" = "הצמד למרכז בעת גרירה";
+"settings.disableAnimations.desc" = "כאשר הגדרת הנגישות של macOS \"הפחתת תנועות\" מופעלת, IINA תפחית אנימציות של ממשק משתמש שידוע כי הן גורמות לבעיות עבור אנשים עם הפרעה במערכת שיווי המשקל. אם זה לא מספיק, ניתן להשתמש בהגדרה זו כדי לצמצם תנועות על ידי ביטול הנפשות נוספות של ממשק המשתמש.";
+"settings.disableAnimations.label" = "השבת אנימציות";
+"settings.disableOSDFileStartMsg.label" = "התחלת קובץ";
+"settings.disableOSDPauseResumeMsgs.label" = "להשהות/לחדש";
+"settings.disableOSDSeekMsg.label" = "קפיצה";
+"settings.disableOSDSpeedMsg.label" = "מהירות";
+"settings.disablePlaySliderScrolling.label" = "מנע מגלגלת העכבר לשנות את מיקום ההשמעה";
+"settings.disableVolumeSliderScrolling.label" = "מנע מגלגלת העכבר לשנות את עוצמת השמע";
+"settings.displayTimeAndBatteryInFullScreen.label" = "הצג מידע שעה וסוללה כאשר פועל במסך מלא";
+"settings.enableOSD.label" = "הפעל OSD";
+"settings.enableThumbnailForRemoteFiles.label" = "כלול קבצים מכונן מרוחק שממופה למערכת הקבצים";
+"settings.enableThumbnailPreview.label" = "הפעל תצוגה מקדימה של תמונות ממוזערות";
+"settings.maxThumbnailPreviewCacheSize.label" = "גודל מטמון מרבי";
+"settings.oscPosition.items.0" = "צף";
+"settings.oscPosition.items.1" = "ראש החלון";
+"settings.oscPosition.items.2" = "בתחתית";
+"settings.oscPosition.label" = "פקדים על המסך";
+"settings.osdTextSize.label" = "גודל טקסט";
+"settings.pauseWhenPip.label" = "השהה אוטומטית את ההשמעה";
+"settings.resizeWindowOption.items.0" = "התאמה למסך";
+"settings.resizeWindowOption.items.1" = "גודל הוידאו x0.5";
+"settings.resizeWindowOption.items.2" = "גודל הוידאו x1";
+"settings.resizeWindowOption.items.3" = "גודל הוידאו x1.5";
+"settings.resizeWindowOption.items.4" = "גודל הוידאו x2";
+"settings.resizeWindowOption.label" = "שנה גודל חלון ל";
+"settings.scaleRemainingTime.label" = "הצג את הזמן הנותר לפי מהירות ההשמעה";
+"settings.showChapterPos.label" = "הצג מיקום פרק בסרגל ההתקדמות";
+"settings.showRemainingTime.label" = "הצג את הזמן שנותר במקום את משך הזמן הכולל";
+"settings.themeMaterial.desc" = "ערכת נושא";
+"settings.themeMaterial.items.0" = "כהה";
+"settings.themeMaterial.items.2" = "בהירה";
+"settings.themeMaterial.items.4" = "לפי הגדרת המערכת";
+"settings.themeMaterial.label" = "מראה";
+"settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
+"settings.thumbnailWidth.label" = "Thumbnail width";
+"settings.togglePipByMinimizingWindow.label" = "הפעל/כבה מצב תמונה בתוך תמונה על ידי מזעור/ביטול מזעור החלון";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "רק עבור קבצי וידאו";
+"settings.usePhysicalResolution.label" = "השתמש ברזולוציה פיזית על צגי Retina";
+"settings.windowBehaviorWhenPip.items.0" = "אל תעשה כלום";
+"settings.windowBehaviorWhenPip.items.1" = "הסתר";
+"settings.windowBehaviorWhenPip.items.2" = "מזעור";
+"settings.windowBehaviorWhenPip.label" = "חלון";
+
+// Settings - Advanced
+"settings.enableAdvancedSettings.desc" = "שינוי של ההגדרות הבאות דורש הפעלה מחדש של IINA כדי להיכנס לתוקף.";
+"settings.enableAdvancedSettings.label" = "אפשר הגדרות מתקדמות";
+"settings.enableLogging.label" = "הפעל רישום";
+"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
+"settings.logLevel.items.0" = "מפורט";
+"settings.logLevel.items.1" = "ניפוי שגיאות";
+"settings.logLevel.items.2" = "אזהרה";
+"settings.logLevel.items.3" = "שגיאה";
+"settings.logLevel.label" = "רמת יומן";
+"settings.useMpvOsd.label" = "השתמש בOSD של mpv";
+"settings.useUserDefinedConfDir.label" = "השתמש בתקיית תצורה";
+
+// Settings - Inline labels
+"settings.$ASSSubtitles" = "כתוביות ASS";
+"settings.$About" = "אודות";
+"settings.$Accessibility" = "נגישות";
+"settings.$AdditionalMpvOptions" = "אפשרויות mpv נוספות";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$Advanced" = "מתקדם";
+"settings.$Align" = "יישור";
+"settings.$AlwaysWhenPlaying" = "Always when playing a new file";
+"settings.$Appearance" = "מראה";
+"settings.$AssrtAPIToken" = "מפתח API של Assrt";
+"settings.$Author" = "מחבר";
+"settings.$AutoLoad" = "טעינה אוטומטית";
+"settings.$Background" = "רקע";
+"settings.$Behavior" = "התנהגות";
+"settings.$Border" = "גבול";
+"settings.$BrowserExtensions" = "Browser Extensions";
+"settings.$Cache" = "מטמון";
+"settings.$Cancel" = "ביטול";
+"settings.$CheckForUpdates" = "חפש עדכונים";
+"settings.$CheckForUpdates.items.3600" = "מדי שעה";
+"settings.$CheckForUpdates.items.86400" = "מדי יום";
+"settings.$CheckForUpdates.items.604800" = "מדי שבוע";
+"settings.$CheckForUpdates.items.2629800" = "מדי חודש";
+"settings.$Chrome" = "גוגל כרום";
+"settings.$ClearCache" = "נקה מטמון";
+"settings.$ClearPlaybackHistory" = "מחק היסטוריית השמעה";
+"settings.$ClearSavedPlaybackProgress" = "נקה התקדמות הפעלה שמורה";
+"settings.$ClearThumbnailCache" = "נקה מטמון תמונות ממוזערות";
+"settings.$Color" = "צבע";
+"settings.$ColorHDR" = "Color and HDR";
+"settings.$CommunityPlugins" = "Community Plugins";
+"settings.$CreateAnEmptySet" = "Create an empty set…";
+"settings.$Customize" = "התאמה אישית…";
+"settings.$Decoding" = "Decoding";
+"settings.$DefaultApplication" = "יישום ברירת המחדל";
+"settings.$DefaultEncoding" = "קידוד ברירת מחדל";
+"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DoNotResize" = "Do not resize";
+"settings.$DuplicateCurrentSet" = "Duplicate current set…";
+"settings.$FailedToLoadThePage" = "טעינת הדף נכשלה.";
+"settings.$Firefox" = "פיירפוקס";
+"settings.$Font" = "גופן";
+"settings.$GetBrowserExtensionsForIINA" = "קבל הרחבות דפדפן עבור IINA";
+"settings.$GetPlugins" = "Get Plugins…";
+"settings.$Hardware" = "Hardware";
+"settings.$Height" = "גובה";
+"settings.$Help" = "עזרה";
+"settings.$History" = "היסטוריה";
+"settings.$Identifier" = "מזהה";
+"settings.$ImportAnExistingConfigFile" = "ייבא קובץ תצורה קיים";
+"settings.$InitialWindowPosition" = "מיקום חלון ראשוני";
+"settings.$InitialWindowSize" = "גודל חלון ראשוני";
+"settings.$InputGithubURL" = "Input a Github URL";
+"settings.$Install" = "התקנה";
+"settings.$InstallLocalPackage" = "Install Local Package…";
+"settings.$Installed" = "מותקן";
+"settings.$Installing" = "Installing";
+"settings.$KeyBindingSet" = "Key binding set";
+"settings.$Layout" = "פריסה";
+"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
+"settings.$LiveText" = "Live Text";
+"settings.$Logging" = "Logging";
+"settings.$Login" = "התחברות";
+"settings.$MB" = "MB";
+"settings.$MPVSettings" = "mpv Settings";
+"settings.$Margin" = "שוליים";
+"settings.$Mouse" = "עכבר";
+"settings.$Network" = "רשת";
+"settings.$NewKeyBindingSet" = "New key binding set";
+"settings.$NoSelection" = "No Selection";
+"settings.$NotLoggedIn" = "לא מחובר";
+"settings.$OK" = "אישור";
+"settings.$OfficialPlugins" = "Official Plugins";
+"settings.$Offset" = "קיזוז";
+"settings.$OnScreenController" = "פקדים על המסך";
+"settings.$OnScreenDisplay" = "תצוגה על המסך (OSD)";
+"settings.$OnlineSubtitles" = "כתוביות מקוונות";
+"settings.$OpenLinksOrCurrentWebpage" = "פתח קישורים או דף אינטרנט נוכחי ב-IINA בלחיצה אחת. האתר חייב להיות נתמך על ידי youtube-dl.";
+"settings.$OpenLogDirectory" = "פתח את תיקיית הלוגים";
+"settings.$OpenLogWindow" = "Open the log viewer";
+"settings.$OrSelectFrom" = "Or select from available plugins";
+"settings.$Other" = "Other";
+"settings.$OtherStyles" = "סגנונות אחרים";
+"settings.$OverrideLevel" = "רמת דריסה";
+"settings.$Percent" = "%";
+"settings.$PictureinnPicture" = "תמונה בתוך תמונה";
+"settings.$Playlist" = "רשימת השמעה";
+"settings.$PleaseSelectTheMediaTypes" = "אנא בחר את סוגי המדיה שברצונך להפוך את IINA ליישום ברירת המחדל עבורם.";
+"settings.$Position" = "מיקום";
+"settings.$PreferredLanguage" = "שפה מועדפת";
+"settings.$RestoreAlerts" = "שחזור התראות";
+"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "שחזור התראות שהוסתרו";
+"settings.$SPDIFOutput" = "פלט S/PDIF";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$Safari" = "Safari";
+"settings.$Screenshots" = "צילומי מסך";
+"settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
+"settings.$Settings" = "הגדרות";
+"settings.$Shadow" = "צל";
+"settings.$ShowInFinder" = "הצג ב-Finder";
+"settings.$ShowTheConfigFileIn" = "הצג את קובץ התצורה ב-Finder";
+"settings.$Size" = "גודל";
+"settings.$Source" = "מקור";
+"settings.$SubtitleSource" = "Subtitle source";
+"settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
+"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
+"settings.$SuppressMessagesFor" = "בטל הודעות עבור";
+"settings.$TextSubtitles" = "טקסט כתוביות";
+"settings.$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
+"settings.$ThumbnailPreview" = "תצוגה מקדימה ממוזערת";
+"settings.$Toolbar" = "סרגל כלים";
+"settings.$Trackpad" = "משטח עקיבה";
+"settings.$Uninstall" = "הסר התקנה";
+"settings.$Volume" = "עוצמת קול";
+"settings.$Website" = "אתר אינטרנט";
+"settings.$WhenEnteringPIP" = "בעת כניסה למצב תמונה בתוך תמונה";
+"settings.$WhenMediaIsOpened" = "כאשר מדיה נפתחת";
+"settings.$WhenMediaIsOpenedManually" = "כאשר מדיה נפתחת ידנית";
+"settings.$Width" = "רוחב";
+"settings.$Window" = "חלון";
+"settings.$X" = " רוחב";
+"settings.$XOffset" = "היסט גובה";
+"settings.$Y" = "גובה";
+"settings.$YOffset" = "היסט רוחב";
+"settings.$YTDL" = "Online Videos (yt-dlp)";
+"settings.$YouCanInstallANew" = "אתה יכול להתקין תוסף חדש מ-GitHub או חבילת .iinaplgz מקומית. תוספים המותקנים מ-GitHub ניתנים לעדכון אוטומטי.";
+"settings.$bottom" = "בתחתית";
+"settings.$dB" = "dB";
+"settings.$left" = "שמאל";
+"settings.$nits" = "ניטים";
+"settings.$ofScreen" = "אחוז מהמסך";
+"settings.$onlineMediaPluginAdvice" = "The Online Media plugin is recommended";
+"settings.$point" = "נקודות";
+"settings.$pt" = "נקודות";
+"settings.$right" = "ימין";
+"settings.$s" = "שניות";
+"settings.$sideOfTheScreen" = "המסך";
+"settings.$toThe" = "אל ה";
+"settings.$top" = "ראש החלון";
+"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";

@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignoruj";
+"cmd.seek" = "Przewiń";
+"cmd.revert-seek" = "Cofnij przewijanie";
+"cmd.set" = "Ustaw";
+"cmd.cycle" = "Powtarzaj";
+"cmd.cycle-values" = "Powtarzaj w";
+"cmd.add" = "Zmień";
+"cmd.multiply" = "Pomnóż";
+"cmd.frame-step" = "Następna klatka";
+"cmd.frame-back-step" = "Poprzednia klatka";
+"cmd.ab-loop" = "Pętla A-B";
+"cmd.sub-seek" = "Przewiń napisy";
+"cmd.playlist-next" = "Następny plik";
+"cmd.playlist-prev" = "Poprzedni plik";
+"cmd.playlist-move" = "Przenieś pozycję playlisty";
+"cmd.playlist-clear" = "Wyczyść playlistę";
+"cmd.playlist-remove" = "Usuń bieżącą pozycję";
+"cmd.playlist-shuffle" = "Wymieszaj playlistę";
+"cmd.write-watch-later-config" = "Zapisz historię odtwarzania";
+"cmd.stop" = "Zatrzymaj";
+"cmd.quit" = "Wyjdź";
+"cmd.quit-watch-later" = "Wyjdź (zapisz postęp)";
+"cmd.screenshot" = "Zrzut ekranu";
+"cmd.screenshot-to-file" = "Zrzut ekranu do pliku";
+"cmd.loadfile" = "Załaduj plik";
+"cmd.loadlist" = "Załaduj playlistę";
+"cmd.run" = "Uruchom";
+
+"iina.flip" = "Obróć";
+"iina.mirror" = "Odbicie lustrzanie";
+
+"iina.toggle-pip" = "Przełącz tryb Obraz-w-obrazie";
+"iina.toggle-music-mode" = "Przełącz tryb muzyki";
+"iina.open-file" = "Otwórz plik";
+"iina.open-url" = "Otwórz adres URL";
+"iina.video-panel" = "Panel wideo";
+"iina.audio-panel" = "Panel audio";
+"iina.sub-panel" = "Panel napisów";
+"iina.playlist-panel" = "Panel playlisty";
+"iina.chapter-panel" = "Panel rozdziałów";
+"iina.bigger-window" = "Większe okno";
+"iina.smaller-window" = "Mniejsze okno";
+"iina.fit-to-screen" = "Dopasuj do ekranu";
+"iina.toggle-flip" = "Przełącz obrót";
+"iina.toggle-mirror" = "Przełącz odbicie lustrzane";
+"iina.save-playlist" = "Zapisz obecną playlistę";
+"iina.show-current-file-in-finder" = "Pokaż bieżący plik w Finderze";
+"iina.delete-current-file" = "Przenieś plik do kosza";
+"iina.delete-current-file-hard" = "Usuń plik bez przenoszenia do kosza";
+"iina.find-online-subs" = "Znajdź napisy online";
+"iina.save-downloaded-sub" = "Zapisz pobrane napisy";
+
+"yes" = "Tak";
+"no" = "Nie";
+"to" = "do";
+"by" = "o";
+"in" = "w";
+"add" = "zwiększ";
+"minus" = "zmniejsz";
+"forward" = "do przodu";
+"backward" = "do tyłu";
+"seek-to" = "do";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (dokładnie)";
+"relative-percent+exact" = "% (dokładnie)";
+"absolute+keyframe" = "s (klatka)";
+"absolute-percent+keyframe" = "% (klatka)";
+
+"opt.pause" = "Pauza";
+"opt.speed" = "Prędkość";
+
+"opt.window-scale" = "Rozmiar okna";
+
+"opt.video" = "Ścieżka obrazu";
+"opt.video-aspect-override" = "Proporcje obrazu";
+"opt.contrast" = "Kontrast";
+"opt.brightness" = "Jasność";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Nasycenie";
+"opt.deinterlace" = "Usuwanie przeplotu";
+
+"opt.audio" = "Ścieżka audio";
+"opt.volume" = "Głośność";
+"opt.mute" = "Wycisz";
+"opt.audio-delay" = "Opóźnienie dźwięku";
+
+"opt.sub" = "Ścieżka napisów";
+"opt.sub-delay" = "Opóźnienie napisów";
+"opt.sub-pos" = "Pozycja napisów";
+"opt.sub-scale" = "Rozmiar napisów";
+"opt.sub-visibility" = "Widoczność napisów";
+"opt.secondary-sub-visibility" = "Widoczność drugorzędnych napisów";
+"opt.sub-ass-style-override" = "Nadpisz style ASS";
+
+"opt.fullscreen" = "Tryb pełnoekranowy";
+"opt.ontop" = "Zawsze na wierzchu";
+
+"opt.chapter" = "Rozdział";
+
+"read.set" = "Ustaw {{property}} na {{value}}";
+"read.add" = "Ustaw {{property}} na {{value}}";
+"read.multiply" = "Pomnóż {{property}} {{factor}}x";
+"read.cycle" = "Cykl {{property}}{{#dir_down}} od końca{{/dir_down}}";
+"read.cycle-values" = "Wybieranie kolejnej wartości {{property}} w ({{{values}}})";
+"read.seek" = "Przewiń {{#fwd}}w przód{{/fwd}}{{#bwd}}w tył{{/bwd}}{{#abs}}do{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(dokładnie){{/exact}}{{#kf}}(ramka){{/kf}}";
+"read.sub-seek" = "Przewiń do {{#skip_1}}następnych{{/skip_1}}{{#skip_-1}}poprzednich{{/skip_-1}} napisów";

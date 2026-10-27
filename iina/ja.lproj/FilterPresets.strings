@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "切り取り";
+"crop.w" = "幅（デフォルト: ビデオの幅）";
+"crop.h" = "高さ（デフォルト: ビデオの高さ）";
+"crop.x" = "原点X（デフォルト: 中央）";
+"crop.y" = "原点Y（デフォルト: 中央）";
+
+"expand" = "拡げる";
+"expand.w" = "幅（デフォルト: ビデオの幅）";
+"expand.h" = "高さ（デフォルト: ビデオの高さ）";
+"expand.x" = "原点X（デフォルト: 中央）";
+"expand.y" = "原点Y（デフォルト: 中央）";
+"expand.aspect" = "アスペクト比に合わせて拡げる（例: 4/3）";
+"expand.round" = "この値で割り切れるよう切り上げる";
+
+"sharpen" = "シャープ";
+"sharpen.msize" = "マトリックスサイズ";
+"sharpen.amount" = "量";
+
+"blur" = "ブラー";
+"blur.msize" = "マトリックスサイズ";
+"blur.amount" = "量";
+
+"delogo" = "ロゴを除去";
+"delogo.w" = "幅";
+"delogo.h" = "高さ";
+"delogo.x" = "原点X";
+"delogo.y" = "原点Y";
+
+"negative" = "ネガティブ";
+
+"vflip" = "上下反転";
+"hflip" = "左右反転";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "ファイルパス（またはファイルを入力ボックスにドラッグ&ドロップ）";
+"lut3d.interp" = "補間モード";
+
+"custom_mpv" = "カスタム（mpv）";
+"custom_mpv.name" = "フィルタ名";
+"custom_mpv.string" = "フィルタの値";
+
+"custom_ffmpeg" = "カスタム（FFmpeg）";
+"custom_ffmpeg.name" = "フィルタ名";
+"custom_ffmpeg.string" = "フィルタの値";

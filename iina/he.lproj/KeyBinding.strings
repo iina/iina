@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "התעלמות";
+"cmd.seek" = "קפיצה";
+"cmd.revert-seek" = "ביטול קפיצה";
+"cmd.set" = "הגדר";
+"cmd.cycle" = "מחזוריות";
+"cmd.cycle-values" = "מחזוריות ב";
+"cmd.add" = "שינוי";
+"cmd.multiply" = "הכפלה";
+"cmd.frame-step" = "פריים הבא";
+"cmd.frame-back-step" = "פריים קודם";
+"cmd.ab-loop" = "לולאת א-ב";
+"cmd.sub-seek" = "חיפוש כתוביות";
+"cmd.playlist-next" = "מדיה הבאה";
+"cmd.playlist-prev" = "מדיה קודמת";
+"cmd.playlist-move" = "העבר פריט ברשימת השמעה";
+"cmd.playlist-clear" = "ניקוי רשימת ההשמעה";
+"cmd.playlist-remove" = "הסר את הנוכחי";
+"cmd.playlist-shuffle" = "ערבוב";
+"cmd.write-watch-later-config" = "הקלט היסטוריית השמעה";
+"cmd.stop" = "עצור";
+"cmd.quit" = "יציאה";
+"cmd.quit-watch-later" = "יציאה (ושמירת התקדמות)";
+"cmd.screenshot" = "צילום מסך";
+"cmd.screenshot-to-file" = "צילום מסך לקובץ";
+"cmd.loadfile" = "טען קובץ";
+"cmd.loadlist" = "טען רשימת השמעה";
+"cmd.run" = "הפעלה";
+
+"iina.flip" = "היפוך";
+"iina.mirror" = "מראה";
+
+"iina.toggle-pip" = "היכנס/צא ממצב תמונה בתוך תמונה";
+"iina.toggle-music-mode" = "היכנס/צא ממצב מוזיקה";
+"iina.open-file" = "פתח קובץ";
+"iina.open-url" = "פתח כתובת אינטרנט";
+"iina.video-panel" = "פאנל וידאו";
+"iina.audio-panel" = "פאנל אודיו";
+"iina.sub-panel" = "פאנל כתוביות";
+"iina.playlist-panel" = "פאנל רשימת השמעה";
+"iina.chapter-panel" = "פאנל פרקים";
+"iina.bigger-window" = "חלון גדול יותר";
+"iina.smaller-window" = "חלון קטן יותר";
+"iina.fit-to-screen" = "התאמה למסך";
+"iina.toggle-flip" = "היפוך/ביטול היפוך";
+"iina.toggle-mirror" = "הפעלת/ביטול מראה";
+"iina.save-playlist" = "שמור את רשימת ההשמעה הנוכחית";
+"iina.show-current-file-in-finder" = "הצג את הקובץ הנוכחי ב-Finer";
+"iina.delete-current-file" = "מחיקת הקובץ הנוכחי";
+"iina.delete-current-file-hard" = "מחיקת הקובץ הנוכחי לצמיתות (ללא העברה לאשפה)";
+"iina.find-online-subs" = "מצא כתוביות מקוונות";
+"iina.save-downloaded-sub" = "שמור כתוביות שהורדו";
+
+"yes" = "כן";
+"no" = "לא";
+"to" = "אל";
+"by" = "על ידי";
+"in" = "ב-";
+"add" = "הגדלה";
+"minus" = "הפחתה";
+"forward" = "קדימה";
+"backward" = "אחורה";
+"seek-to" = "אל";
+
+"relative" = "שניות";
+"absolute" = "שניות";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "שניות (מדויק)";
+"relative-percent+exact" = "% (מדויק)";
+"absolute+keyframe" = "שניות (חיפוש פריים)";
+"absolute-percent+keyframe" = "% (חיפוש פריים)";
+
+"opt.pause" = "השהיה";
+"opt.speed" = "מהירות";
+
+"opt.window-scale" = "קנה מידה של החלון";
+
+"opt.video" = "רצועת וידאו";
+"opt.video-aspect-override" = "קנה מידה של וידאו";
+"opt.contrast" = "ניגודיות";
+"opt.brightness" = "בהירות";
+"opt.gamma" = "גמא";
+"opt.saturation" = "רוויה";
+"opt.deinterlace" = "ביטול שזירה";
+
+"opt.audio" = "רצועת שמע";
+"opt.volume" = "עוצמת קול";
+"opt.mute" = "השתקה";
+"opt.audio-delay" = "עיכוב שמע";
+
+"opt.sub" = "רצועת כתוביות";
+"opt.sub-delay" = "עיכוב כתוביות";
+"opt.sub-pos" = "מיקום כתוביות";
+"opt.sub-scale" = "קנה מידה של כתוביות";
+"opt.sub-visibility" = "נראות כתוביות";
+"opt.secondary-sub-visibility" = "נראות כתוביות משניות";
+"opt.sub-ass-style-override" = "דריסת עיצוב ASS";
+
+"opt.fullscreen" = "מסך מלא";
+"opt.ontop" = "צף מעל הכל";
+
+"opt.chapter" = "פרק";
+
+"read.set" = "הגדר את {{property}} ל-{{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "הכפל {{property}} ב{{factor}}x";
+"read.cycle" = "חזרה על {{property}}{{#dir_down}} כלפי מטה {{/dir_down}}";
+"read.cycle-values" = "עבור בין {{property}} ב({{{values}}})";
+"read.seek" = "קפיצה {{#abs}}אל{{/abs}} {{value}}{{#sec}} שניות{{/sec}}{{#per}}%{{/per}} {{#fwd}}קדימה{{/fwd}}{{#bwd}}אחורה{{/bwd}} {{#exact}}(מדויק){{/exact}}{{#kf}}(חיפוש פריים){{/kf}}";
+"read.sub-seek" = "קפיצה לכתובית {{#skip_1}}הבאה{{/skip_1}}{{#skip_-1}}הקודמת{{/skip_-1}}";

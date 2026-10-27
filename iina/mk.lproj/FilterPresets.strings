@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Исечи";
+"crop.w" = "Ширина (стандардно: ширина на видео)";
+"crop.h" = "Висина (стандардно: висина на видео)";
+"crop.x" = "Почеток X (стандардно: центар)";
+"crop.y" = "Почеток Y (стандардно: центар)";
+
+"expand" = "Прошири";
+"expand.w" = "Ширина (стандардно: ширина на видео)";
+"expand.h" = "Висина (стандардно: висина на видео)";
+"expand.x" = "Почеток X (стандардно: центар)";
+"expand.y" = "Почеток Y (стандардно: центар)";
+"expand.aspect" = "Се шири до одреден размер (пр: 4:3)";
+"expand.round" = "Заокружува на следниот цел број за да биде деллив со оваа вредност";
+
+"sharpen" = "Изостри";
+"sharpen.msize" = "Големина на матрица";
+"sharpen.amount" = "Износ";
+
+"blur" = "Замати";
+"blur.msize" = "Големина на матрица";
+"blur.amount" = "Износ";
+
+"delogo" = "Отстрани лого";
+"delogo.w" = "Ширина";
+"delogo.h" = "Висина";
+"delogo.x" = "Почеток X";
+"delogo.y" = "Почеток Y";
+
+"negative" = "Негативен";
+
+"vflip" = "Преврти";
+"hflip" = "Огледално пресликување";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Патека до датотеката (можете и да ја повлечете и пуштите датотеката во полето за внес)";
+"lut3d.interp" = "Мод на интерполација";
+
+"custom_mpv" = "Custom (mpv)";
+"custom_mpv.name" = "Име на филтерот";
+"custom_mpv.string" = "Вредност на филтерот";
+
+"custom_ffmpeg" = "Custom (FFmpeg)";
+"custom_ffmpeg.name" = "Име на филтерот";
+"custom_ffmpeg.string" = "Вредност на филтерот";

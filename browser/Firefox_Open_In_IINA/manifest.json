@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "open_in_iina_firefox@iina.io"
+    }
+  },
+  "name": "Open In IINA",
+  "description": "Open videos and audios in IINA.",
+  "version": "2.0.0",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Open In IINA"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

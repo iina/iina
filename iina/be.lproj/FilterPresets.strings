@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Абрэзаць";
+"crop.w" = "Шырыня (прадвызначана: шырыня відэа)";
+"crop.h" = "Вышыня (прадвызначана: вышыня відэа)";
+"crop.x" = "Паходжанне X (па змаўчанні: у цэнтры)";
+"crop.y" = "Паходжанне Y (прадвызначана: у цэнтры)";
+
+"expand" = "Разгарнуць";
+"expand.w" = "Шырыня (прадвызначана: шырыня відэа)";
+"expand.h" = "Вышыня (прадвызначана: вышыня відэа)";
+"expand.x" = "Паходжанне X (прадвызначана: у цэнтры)";
+"expand.y" = "Паходжанне Y (прадвызначана: у цэнтры)";
+"expand.aspect" = "Пашыраць у адпаведнасці з суадносінамі бакоў (напр: 4/3)";
+"expand.round" = "Акругляць, каб дзялілася на гэтае значэнне";
+
+"sharpen" = "Рэзкасць";
+"sharpen.msize" = "Памер матрыцы";
+"sharpen.amount" = "Колькасць";
+
+"blur" = "Размытасць";
+"blur.msize" = "Памер матрыцы";
+"blur.amount" = "Колькасць";
+
+"delogo" = "Сцерці лога";
+"delogo.w" = "Шырыня";
+"delogo.h" = "Вышыня";
+"delogo.x" = "Паходжанне X";
+"delogo.y" = "Паходжанне Y";
+
+"negative" = "Негатыў";
+
+"vflip" = "Перавярнуць";
+"hflip" = "Адлюстраваць";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Шлях да файла (вы таксама можаце перацягнуць файл у поле ўводу)";
+"lut3d.interp" = "Рэжым інтэрпаляцыі";
+
+"custom_mpv" = "Карыстальніцкі (mpv)";
+"custom_mpv.name" = "Назва фільтра";
+"custom_mpv.string" = "Значэнне фільтра";
+
+"custom_ffmpeg" = "Карыстальніцкі (FFmpeg)";
+"custom_ffmpeg.name" = "Назва фільтра";
+"custom_ffmpeg.string" = "Значэнне фільтра";

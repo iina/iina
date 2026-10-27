@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Αγνόηση";
+"cmd.seek" = "Αναζήτηση";
+"cmd.revert-seek" = "Επαναφορά αναζήτησης";
+"cmd.set" = "Ορισμός";
+"cmd.cycle" = "Κύκλος";
+"cmd.cycle-values" = "Κύκλος σε";
+"cmd.add" = "Αλλαγή";
+"cmd.multiply" = "Πολλαπλασιασμός";
+"cmd.frame-step" = "Επόμενο καρέ";
+"cmd.frame-back-step" = "Προηγούμενο καρέ";
+"cmd.ab-loop" = "Επανάληψη Α-Β";
+"cmd.sub-seek" = "Αναζήτηση υποτίτλων";
+"cmd.playlist-next" = "Επόμενο μέσο";
+"cmd.playlist-prev" = "Προηγούμενο μέσο";
+"cmd.playlist-move" = "Μετακίνηση αντικειμένου λίστας αναπαραγωγής";
+"cmd.playlist-clear" = "Εκκαθάριση λίστας αναπαραγωγής";
+"cmd.playlist-remove" = "Αφαίρεση τρέχουσας";
+"cmd.playlist-shuffle" = "Τυχαία σειρά";
+"cmd.write-watch-later-config" = "Αποθήκευση ιστορικού αναπαραγωγής";
+"cmd.stop" = "Διακοπή";
+"cmd.quit" = "Έξοδος";
+"cmd.quit-watch-later" = "Έξοδος (αποθήκευση προόδου)";
+"cmd.screenshot" = "Στιγμιότυπο οθόνης";
+"cmd.screenshot-to-file" = "Στιγμιότυπο οθόνης σε αρχείο";
+"cmd.loadfile" = "Φόρτωση αρχείου";
+"cmd.loadlist" = "Φόρτωση λίστας αναπαραγωγής";
+"cmd.run" = "Εκτέλεση";
+
+"iina.flip" = "Αναστροφή";
+"iina.mirror" = "Κατοπτρισμός";
+
+"iina.toggle-pip" = "Εναλλαγή σε Εικόνα-σε-Εικόνα";
+"iina.toggle-music-mode" = "Εναλλαγή σε Λειτουργία Μουσικής";
+"iina.open-file" = "Άνοιγμα αρχείου";
+"iina.open-url" = "Άνοιγμα συνδέσμου URL";
+"iina.video-panel" = "Πίνακας βίντεο";
+"iina.audio-panel" = "Πίνακας ήχου";
+"iina.sub-panel" = "Πίνακας υποτίτλων";
+"iina.playlist-panel" = "Πίνακας λιστών αναπαραγωγής";
+"iina.chapter-panel" = "Πίνακας κεφαλαίων";
+"iina.bigger-window" = "Μεγαλύτερο παράθυρο";
+"iina.smaller-window" = "Μικρότερο παράθυρο";
+"iina.fit-to-screen" = "Προσαρμογή στην Οθόνη";
+"iina.toggle-flip" = "Ενεργοποίηση Αναστροφής";
+"iina.toggle-mirror" = "Ενεργοποίηση Κατοπτρισμού";
+"iina.save-playlist" = "Αποθήκευση τρέχουσας λίστας αναπαραγωγής";
+"iina.show-current-file-in-finder" = "Εμφάνιση τρέχοντος αρχείου στο Finder";
+"iina.delete-current-file" = "Διαγραφή τρέχοντος αρχείου";
+"iina.delete-current-file-hard" = "Διαγραφή τρέχοντος αρχείου άμεσα χωρίς μετακίνηση στον κάδο";
+"iina.find-online-subs" = "Εύρεση υποτίτλων στο Διαδίκτυο";
+"iina.save-downloaded-sub" = "Αποθήκευση μεταφορτωμένων υποτίτλων";
+
+"yes" = "Ναι";
+"no" = "Όχι";
+"to" = "σε";
+"by" = "από";
+"in" = "σε";
+"add" = "αύξηση";
+"minus" = "μείωση";
+"forward" = "εμπρός";
+"backward" = "πίσω";
+"seek-to" = "σε";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (ακριβώς)";
+"relative-percent+exact" = "% (ακριβώς)";
+"absolute+keyframe" = "s (πλαίσιο-κλειδί)";
+"absolute-percent+keyframe" = "% (πλαίσιο-κλειδί)";
+
+"opt.pause" = "Παύση";
+"opt.speed" = "Ταχύτητα";
+
+"opt.window-scale" = "Κλίμακα Παραθύρου";
+
+"opt.video" = "Κομμάτι Βίντεο";
+"opt.video-aspect-override" = "Video aspect";
+"opt.contrast" = "Αντίθεση";
+"opt.brightness" = "Φωτεινότητα";
+"opt.gamma" = "Γάμμα";
+"opt.saturation" = "Κορεσμός";
+"opt.deinterlace" = "Αποπλεξία";
+
+"opt.audio" = "Κομμάτι Ήχου";
+"opt.volume" = "Ένταση";
+"opt.mute" = "Σίγαση";
+"opt.audio-delay" = "Καθυστέρηση Ήχου";
+
+"opt.sub" = "Κομμάτι Υποτίτλων";
+"opt.sub-delay" = "Καθυστέρηση Υποτίτλων";
+"opt.sub-pos" = "Θέση Υποτίτλων";
+"opt.sub-scale" = "Κλίμακα Υποτίτλων";
+"opt.sub-visibility" = "Ορατότητα Υποτίτλων";
+"opt.secondary-sub-visibility" = "Δευτερεύουσα ορατότητα υποτίτλων";
+"opt.sub-ass-style-override" = "Παράβλεψη Στυλ ASS";
+
+"opt.fullscreen" = "Πλήρης Οθόνη";
+"opt.ontop" = "Αιώρηση στην κορυφή";
+
+"opt.chapter" = "Κεφάλαιο";
+
+"read.set" = "Ορισμός {{property}} σε {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Πολλαπλασιασμός {{property}} επί {{factor}}χ";
+"read.cycle" = "Κύκλος {{property}}{{#dir_down}} προς τα κάτω {{/dir_down}}";
+"read.cycle-values" = "Κύκλος {{property}} σε ({{{values}}})";
+"read.seek" = "Αναζήτηση {{#fwd}} μπροστά {{/fwd}}{{#bwd}} πίσω {{/bwd}}{{#abs}} σε {{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}} (ακριβώς) {{/exact}}{{#kf}} (πλαίσιο-κλειδί) {{/kf}}";
+"read.sub-seek" = "Αναζήτηση σε {{#skip_1}} επόμενο {{/skip_1}}{{#skip_-1}} προηγούμενο {{/skip_-1}} υπότιτλο";

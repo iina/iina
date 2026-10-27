@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Klippa";
+"crop.w" = "Breidd (sjálfgefið: vídeóbreidd)";
+"crop.h" = "Hæð (sjálfgefið: myndhæð)";
+"crop.x" = "Uppruni X (sjálfgefið: miðja)";
+"crop.y" = "Uppruni Y (sjálfgefið: miðja)";
+
+"expand" = "Stækkaðu";
+"expand.w" = "Breidd (sjálfgefið: vídeóbreidd)";
+"expand.h" = "Hæð (sjálfgefið: myndhæð)";
+"expand.x" = "Uppruni X (sjálfgefið: miðja)";
+"expand.y" = "Uppruni Y (sjálfgefið: miðja)";
+"expand.aspect" = "Stækkar til að passa við þætti (td: 4/3)";
+"expand.round" = "Hringir upp til að gera deilanlegt eftir þessu gildi";
+
+"sharpen" = "Skerpa";
+"sharpen.msize" = "Fylkja stærð";
+"sharpen.amount" = "Upphæð";
+
+"blur" = "Þoka";
+"blur.msize" = "Fylkja stærð";
+"blur.amount" = "Upphæð";
+
+"delogo" = "Delogo";
+"delogo.w" = "Breidd";
+"delogo.h" = "Hæð";
+"delogo.x" = "Uprunalega X";
+"delogo.y" = "Upprunalega Y";
+
+"negative" = "Neikvætt";
+
+"vflip" = "Snúa";
+"hflip" = "Spegla";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Skráarslóð (þú getur líka dregið og sleppt skránni í inntakskassann)";
+"lut3d.interp" = "Interpolation ham";
+
+"custom_mpv" = "Sérsniðin (mpv)";
+"custom_mpv.name" = "Sía nafn";
+"custom_mpv.string" = "Sía gildi";
+
+"custom_ffmpeg" = "Sérsniðin (FFmpeg)";
+"custom_ffmpeg.name" = "Sía nafn";
+"custom_ffmpeg.string" = "Sígildi";

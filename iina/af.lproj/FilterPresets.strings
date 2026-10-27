@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Snoei";
+"crop.w" = "Breedte (verstek: videobreedte)";
+"crop.h" = "Hoogte (verstek: videohoogte)";
+"crop.x" = "Oorsprong X (verstek: middel)";
+"crop.y" = "Oorsprong Y (verstek: middel)";
+
+"expand" = "Brei uit";
+"expand.w" = "Breedte (verstek: videobreedte)";
+"expand.h" = "Hoogte (verstek: videohoogte)";
+"expand.x" = "Oorsprong X (verstek: middel)";
+"expand.y" = "Oorsprong Y (verstek: middel)";
+"expand.aspect" = "Brei uit om ’n aspekverhouding te pas (bv. 4:3)";
+"expand.round" = "Rond af om deur hierdie waarde deelbaar te maak";
+
+"sharpen" = "Verskerp";
+"sharpen.msize" = "Matriksgrootte";
+"sharpen.amount" = "Hoeveelheid";
+
+"blur" = "Vervaag";
+"blur.msize" = "Matriksgrootte";
+"blur.amount" = "Hoeveelheid";
+
+"delogo" = "Verwyder logo";
+"delogo.w" = "Breedte";
+"delogo.h" = "Hoogte";
+"delogo.x" = "Oorsprong X";
+"delogo.y" = "Oorsprong Y";
+
+"negative" = "Negatief";
+
+"vflip" = "Kantel";
+"hflip" = "Spieël";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Lêerpad (u kan ook die lêer in die inmandjie sleep-en-los)";
+"lut3d.interp" = "Interpolasiemodus";
+
+"custom_mpv" = "Pasgemaak (mpv)";
+"custom_mpv.name" = "Filternaam";
+"custom_mpv.string" = "Filterwaarde";
+
+"custom_ffmpeg" = "Pasgemaak (FFmpeg)";
+"custom_ffmpeg.name" = "Filternaam";
+"custom_ffmpeg.string" = "Filterwaarde";

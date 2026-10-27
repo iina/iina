@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "تراشیں";
+"crop.w" = "چوڑائی (پہلے سے طے شدہ: ویڈیو کی چوڑائی)";
+"crop.h" = "اونچائی (پہلے سے طے شدہ: ویڈیو کی اونچائی)";
+"crop.x" = "Origin X (پہلے سے طے شدہ: مرکز)";
+"crop.y" = "Origin Y (پہلے سے طے شدہ: مرکز)";
+
+"expand" = "پھیلائیں";
+"expand.w" = "چوڑائی (پہلے سے طے شدہ: ویڈیو کی چوڑائی)";
+"expand.h" = "اونچائی (پہلے سے طے شدہ: ویڈیو کی اونچائی)";
+"expand.x" = "Origin X (پہلے سے طے شدہ: مرکز)";
+"expand.y" = "Origin Y (پہلے سے طے شدہ: مرکز)";
+"expand.aspect" = "Aspect کو فٹ کرنے کے لیے پھیلائیں (جیسے: 4/3)";
+"expand.round" = "اس قدر سے قابل تقسیم بنانے کے لیے راؤنڈ اپ";
+
+"sharpen" = "تیز کریں";
+"sharpen.msize" = "قالب سائز";
+"sharpen.amount" = "رقم";
+
+"blur" = "دھندلا";
+"blur.msize" = "قالب سائز";
+"blur.amount" = "رقم";
+
+"delogo" = "ڈیلوگو";
+"delogo.w" = "چوڑائی";
+"delogo.h" = "اونچائی";
+"delogo.x" = "اورجن X";
+"delogo.y" = "اورجن Y";
+
+"negative" = "منفی";
+
+"vflip" = "پلٹائیں";
+"hflip" = "مرر";
+
+"lut3d" = "3D لٹ";
+"lut3d.file" = "فائل کی جگہ (آپ فائل کو ان پٹ باکس میں گھسیٹ کر چھوڑ بھی سکتے ہیں)";
+"lut3d.interp" = "انٹرپولیشن موڈ";
+
+"custom_mpv" = "حسب ضرورت (mpv)";
+"custom_mpv.name" = "فلٹر کا نام";
+"custom_mpv.string" = "فلٹر کی قدر";
+
+"custom_ffmpeg" = "حسب ضرورت (FFmpeg)";
+"custom_ffmpeg.name" = "فلٹر کا نام";
+"custom_ffmpeg.string" = "فلٹر کی قدر";

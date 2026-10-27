@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "اقتصاص";
+"crop.w" = "العَرض (الافتراضي: عَرض الفيديو الأصلي)";
+"crop.h" = "الطول (الافتراضي: طول الفيديو الأصلي)";
+"crop.x" = "الأصل X (الافتراضي: المنتصف)";
+"crop.y" = "الأصل Y (الافتراضي: المنتصف)";
+
+"expand" = "توسيع";
+"expand.w" = "العَرض (الافتراضي: عَرض الفيديو الأصلي)";
+"expand.h" = "الطول (الافتراضي: طول الفيديو الأصلي)";
+"expand.x" = "الأصل X (الافتراضي: المنتصف)";
+"expand.y" = "الأصل Y (الافتراضي: المنتصف)";
+"expand.aspect" = "توسيع ليتناسب مع العرض (على سبيل المثال: 4/3)";
+"expand.round" = "تقريب لأعلى لجعل القسمة على هذه القيمة";
+
+"sharpen" = "زيادة الحدة";
+"sharpen.msize" = "حجم المصفوفة";
+"sharpen.amount" = "الكمية";
+
+"blur" = "طمس";
+"blur.msize" = "حجم المصفوفة";
+"blur.amount" = "الكمية";
+
+"delogo" = "إزالة الشعارات من الفيديو";
+"delogo.w" = "العُرض";
+"delogo.h" = "الإرتفاع";
+"delogo.x" = "الأصل X";
+"delogo.y" = "الأصل Y";
+
+"negative" = "ألوان سالبة";
+
+"vflip" = "قلب";
+"hflip" = "عكس";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "مسار الملف (يمكنك أيضا سحب وإسقاط الملف في مربع الإدخال)";
+"lut3d.interp" = "وضع الاستكمال";
+
+"custom_mpv" = "مخصص (mpv)";
+"custom_mpv.name" = "اسم الفلتر";
+"custom_mpv.string" = "قيمة الفلتر";
+
+"custom_ffmpeg" = "مخصص (FFmpeg)";
+"custom_ffmpeg.name" = "اسم الفلتر";
+"custom_ffmpeg.string" = "قيمة الفلتر";

@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "ตัด";
+"crop.w" = "Width (default: video width)";
+"crop.h" = "ความสูง";
+"crop.x" = "จุด x เริ่มต้น";
+"crop.y" = "จุด y เริ่มต้น";
+
+"expand" = "ขยาย";
+"expand.w" = "ความกว้าง";
+"expand.h" = "ความสูง";
+"expand.x" = "จุด x เริ่มต้น";
+"expand.y" = "จุด y เริ่มต้น";
+"expand.aspect" = "ขยายโดยคงอัตราส่วนกว้างยาว";
+"expand.round" = "ปัดเศษให้หารลงตัวด้วยเลขนี้";
+
+"sharpen" = "ความคมชัด";
+"sharpen.msize" = "ขนาดเมตริก";
+"sharpen.amount" = "จำนวน";
+
+"blur" = "เบลอ";
+"blur.msize" = "ขนาดเมตริก";
+"blur.amount" = "จำนวน";
+
+"delogo" = "เอาโลโก้ออก";
+"delogo.w" = "กว้าง";
+"delogo.h" = "สูง";
+"delogo.x" = "จุดกำเนิด";
+"delogo.y" = "จุดกำเนิด";
+
+"negative" = "เนกาทีฟ";
+
+"vflip" = "พลิก";
+"hflip" = "ส่องกระจก";
+
+"lut3d" = "ลัส 3 มิติ";
+"lut3d.file" = "ชื่อโฟลเดอร์ (ท่านสามารถใช้ ลาก วาง ไฟล์ในกล้องอินพุท)";
+"lut3d.interp" = "";
+
+"custom_mpv" = "";
+"custom_mpv.name" = "Filter name";
+"custom_mpv.string" = "";
+
+"custom_ffmpeg" = "";
+"custom_ffmpeg.name" = "Filter name";
+"custom_ffmpeg.string" = "Filter name";

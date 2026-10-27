@@ -1,0 +1,12 @@
+# Exclude everything except the FFmpeg headers IINA needs.
+*
+!.gitignore
+!avcodec.h
+!codec.h
+!codec_desc.h
+!codec_id.h
+!codec_par.h
+!defs.h
+!packet.h
+!version.h
+!version_major.h

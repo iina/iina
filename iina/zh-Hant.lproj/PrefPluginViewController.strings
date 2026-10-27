@@ -1,0 +1,87 @@
+/* Class = "NSButtonCell"; title = "Install"; ObjectID = "3xh-dU-HuR"; */
+"3xh-dU-HuR.title" = "安裝";
+
+/* Class = "NSTabViewItem"; label = "Permissions"; ObjectID = "ALD-n6-A0r"; */
+"ALD-n6-A0r.label" = "權限";
+
+/* Class = "NSTextFieldCell"; title = "Author"; ObjectID = "Dkk-JQ-qHA"; */
+"Dkk-JQ-qHA.title" = "開發者";
+
+/* Class = "NSButtonCell"; title = "Email"; ObjectID = "EHl-kr-ZZf"; */
+"EHl-kr-ZZf.title" = "電子信箱";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[1] = "Permissions"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[1]" = "權限";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[0] = "About"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[0]" = "關於";
+
+/* Class = "NSSegmentedCell"; KTN-5r-mMm.ibShadowedLabels[2] = "Settings"; ObjectID = "KTN-5r-mMm"; */
+"KTN-5r-mMm.ibShadowedLabels[2]" = "偏好設定";
+
+/* Class = "NSTextFieldCell"; title = "Help"; ObjectID = "Ka5-V3-g5E"; */
+"Ka5-V3-g5E.title" = "輔助說明";
+
+/* Class = "NSButtonCell"; title = "Check for Updates"; ObjectID = "MyY-5s-tIm"; */
+"MyY-5s-tIm.title" = "檢查更新";
+
+/* Class = "NSTextFieldCell"; title = "Please enter the full URL of the GitHub repository or a string in the \"user/repo\" format. You can also choose one from the default plugins list."; ObjectID = "Nmf-79-hFX"; */
+"Nmf-79-hFX.title" = "請輸入 GitHub 儲存庫的完整 URL 或「user/repo」格式的字串。
+您也可以從預設外掛程式清單中選擇一個。";
+
+/* Class = "NSTabViewItem"; label = "Support"; ObjectID = "T21-nd-TLF"; */
+"T21-nd-TLF.label" = "技術支援";
+
+/* Class = "NSButtonCell"; title = "Website"; ObjectID = "X6J-6H-IPn"; */
+"X6J-6H-IPn.title" = "網站";
+
+/* Class = "NSTextFieldCell"; title = "Installed plugins:"; ObjectID = "Ztn-MG-D7D"; */
+"Ztn-MG-D7D.title" = "已安裝的外掛";
+
+/* Class = "NSTextFieldCell"; placeholderString = "user/repo"; ObjectID = "b60-P6-AN2"; */
+"b60-P6-AN2.placeholderString" = "使用者回饋";
+
+/* Class = "NSButtonCell"; title = "Show in Finder"; ObjectID = "drh-6w-3z1"; */
+"drh-6w-3z1.title" = "顯示於 Finder";
+
+/* Class = "NSButtonCell"; title = "Install from GitHub…"; ObjectID = "enP-C1-4vu"; */
+"enP-C1-4vu.title" = "從 GitHub 安裝...";
+
+/* Class = "NSTabViewItem"; label = "Settings"; ObjectID = "eyS-eb-H4e"; */
+"eyS-eb-H4e.label" = "偏好設定";
+
+/* Class = "NSTextFieldCell"; title = "You can install a new plugin from GitHub or a local .iinaplgz package. Plugins installed from GitHub can be updated automatically."; ObjectID = "fnl-uA-X7r"; */
+"fnl-uA-X7r.title" = "您可以從 GitHub 或利用 .iinaplgz 包安裝新外掛程式。從 GitHub 安裝的外掛程式支援自動更新。";
+
+/* Class = "NSButtonCell"; title = "Reload"; ObjectID = "ixN-OS-w87"; */
+"ixN-OS-w87.title" = "重新載入";
+
+/* Class = "NSTextFieldCell"; title = "Identifier"; ObjectID = "jlQ-sd-s0K"; */
+"jlQ-sd-s0K.title" = "識別碼";
+
+/* Class = "NSTextFieldCell"; title = "Default plugins:"; ObjectID = "np4-XQ-xdI"; */
+"np4-XQ-xdI.title" = "預設外掛程式：";
+
+/* Class = "NSTextFieldCell"; title = "Failed to load the page."; ObjectID = "pkE-3K-CfZ"; */
+"pkE-3K-CfZ.title" = "頁面讀取失敗";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "qje-hT-j7H"; */
+"qje-hT-j7H.title" = "取消";
+
+/* Class = "NSTextFieldCell"; title = "Source"; ObjectID = "r3r-Qh-rC9"; */
+"r3r-Qh-rC9.title" = "來源";
+
+/* Class = "NSButtonCell"; title = "Install Package…"; ObjectID = "sdU-FG-dTO"; */
+"sdU-FG-dTO.title" = "安裝外掛…";
+
+/* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "tfn-0I-n6p"; */
+"tfn-0I-n6p.title" = "外掛程式";
+
+/* Class = "NSTextFieldCell"; title = "Plugins"; ObjectID = "uW4-Bs-Wg3"; */
+"uW4-Bs-Wg3.title" = "外掛程式";
+
+/* Class = "NSButtonCell"; title = "Uninstall"; ObjectID = "ue8-hU-kLm"; */
+"ue8-hU-kLm.title" = "解除安裝";
+
+/* Class = "NSTextFieldCell"; title = "Install a new plugin from GitHub"; ObjectID = "zvu-Up-fQJ"; */
+"zvu-Up-fQJ.title" = "從 Github 安裝外掛程式";

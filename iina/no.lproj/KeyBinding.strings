@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorer";
+"cmd.seek" = "Spol";
+"cmd.revert-seek" = "Spol tilbake";
+"cmd.set" = "Set";
+"cmd.cycle" = "Cycle";
+"cmd.cycle-values" = "Cycle in";
+"cmd.add" = "Endre";
+"cmd.multiply" = "Multipliser";
+"cmd.frame-step" = "Neste bilde";
+"cmd.frame-back-step" = "Forrige bilde";
+"cmd.ab-loop" = "A-B løkke";
+"cmd.sub-seek" = "Subtitle seek";
+"cmd.playlist-next" = "Next media";
+"cmd.playlist-prev" = "Previous media";
+"cmd.playlist-move" = "Flytt spillelisteoppføring";
+"cmd.playlist-clear" = "Tøm spilleliste";
+"cmd.playlist-remove" = "Fjern gjeldende";
+"cmd.playlist-shuffle" = "Bland";
+"cmd.write-watch-later-config" = "Ta opp avspillingshistorikk";
+"cmd.stop" = "Stopp";
+"cmd.quit" = "Avslutt";
+"cmd.quit-watch-later" = "Avslutt (lagre fremgang)";
+"cmd.screenshot" = "Skjermbilde";
+"cmd.screenshot-to-file" = "Skjermbilde til fil";
+"cmd.loadfile" = "Last fil";
+"cmd.loadlist" = "Last spilleliste";
+"cmd.run" = "Kjør";
+
+"iina.flip" = "Vend";
+"iina.mirror" = "Speil";
+
+"iina.toggle-pip" = "Bilde-i-bilde";
+"iina.toggle-music-mode" = "Musikkmodus";
+"iina.open-file" = "Åpne fil";
+"iina.open-url" = "Åpne URL";
+"iina.video-panel" = "Videopanel";
+"iina.audio-panel" = "Lydpanel";
+"iina.sub-panel" = "Undertekstpanel";
+"iina.playlist-panel" = "Spillelistepanel";
+"iina.chapter-panel" = "Kapittelpanel";
+"iina.bigger-window" = "Større vindu";
+"iina.smaller-window" = "Mindre vindu";
+"iina.fit-to-screen" = "Tilpass til skjerm";
+"iina.toggle-flip" = "Vend";
+"iina.toggle-mirror" = "Speil";
+"iina.save-playlist" = "Arkiver spilleliste";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.delete-current-file" = "Slett fil";
+"iina.delete-current-file-hard" = "Slett fil for godt uten å flytte til papirkurv";
+"iina.find-online-subs" = "Finn undertekster på nett";
+"iina.save-downloaded-sub" = "Arkiver nedlastede undertekster";
+
+"yes" = "Ja";
+"no" = "Nei";
+"to" = "til";
+"by" = "av";
+"in" = "i";
+"add" = "øk";
+"minus" = "reduser";
+"forward" = "framover";
+"backward" = "bakover";
+"seek-to" = "til";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (nøyaktig)";
+"relative-percent+exact" = "% (nøyaktig)";
+"absolute+keyframe" = "s (nøkkelbilde)";
+"absolute-percent+keyframe" = "% (nøkkelbilde)";
+
+"opt.pause" = "Pause";
+"opt.speed" = "Hastighet";
+
+"opt.window-scale" = "Vinduskalering";
+
+"opt.video" = "Videospor";
+"opt.video-aspect-override" = "Video aspect";
+"opt.contrast" = "Kontrast";
+"opt.brightness" = "Lysstyrke";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Metning";
+"opt.deinterlace" = "Deinterlace";
+
+"opt.audio" = "Lydspor";
+"opt.volume" = "Volum";
+"opt.mute" = "Demp";
+"opt.audio-delay" = "Lydforsinkelse";
+
+"opt.sub" = "Undertekstspor";
+"opt.sub-delay" = "Undertekstforsinkelse";
+"opt.sub-pos" = "Undertekstposisjon";
+"opt.sub-scale" = "Undrtekstskalering";
+"opt.sub-visibility" = "Undertekstsynlighet";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.sub-ass-style-override" = "Overstyring av ASS-stil";
+
+"opt.fullscreen" = "Fullskjerm";
+"opt.ontop" = "Flyt øverst";
+
+"opt.chapter" = "Kapittel";
+
+"read.set" = "Sett {{property}} til {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multipliser {{property}} med {{factor}}x";
+"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
+"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

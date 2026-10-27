@@ -1,0 +1,568 @@
+//
+//  InspectorWindowController.swift
+//  iina
+//
+//  Created by lhc on 21/12/2016.
+//  Copyright © 2016 lhc. All rights reserved.
+//
+
+import Cocoa
+
+fileprivate let watchTableBackgroundColor = NSColor(red: 2.0/3, green: 2.0/3, blue: 2.0/3, alpha: 0.1)
+fileprivate let watchTableColumnHeaderColor = NSColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
+
+class InspectorWindowController: NSWindowController, NSWindowDelegate, NSTableViewDelegate, NSTableViewDataSource {
+
+  override var windowNibName: NSNib.Name {
+    return NSNib.Name("InspectorWindowController")
+  }
+
+  var updateTimer: Timer?
+
+  var watchProperties: [String] = []
+
+  private var observers: [NSObjectProtocol] = []
+
+  @IBOutlet weak var tabView: NSTabView!
+  @IBOutlet weak var tabButtonGroup: NSSegmentedControl!
+  @IBOutlet weak var trackPopup: NSPopUpButton!
+
+  @IBOutlet weak var pathField: NSTextField!
+  @IBOutlet weak var fileSizeField: NSTextField!
+  @IBOutlet weak var fileFormatField: NSTextField!
+  @IBOutlet weak var chaptersField: NSTextField!
+  @IBOutlet weak var editionsField: NSTextField!
+  @IBOutlet weak var titleField: NSTextField!
+  @IBOutlet weak var commentField: NSTextField!
+
+  @IBOutlet weak var durationField: NSTextField!
+  @IBOutlet weak var vformatField: NSTextField!
+  @IBOutlet weak var vcodecField: NSTextField!
+  @IBOutlet weak var vdecoderField: NSTextField!
+  @IBOutlet weak var vcolorspaceField: NSTextField!
+  @IBOutlet weak var vprimariesField: NSTextField!
+  @IBOutlet weak var vPixelFormat: NSTextField!
+
+  @IBOutlet weak var voField: NSTextField!
+  @IBOutlet weak var vsizeField: NSTextField!
+  @IBOutlet weak var vbitrateField: NSTextField!
+  @IBOutlet weak var vfpsField: NSTextField!
+  @IBOutlet weak var aformatField: NSTextField!
+  @IBOutlet weak var acodecField: NSTextField!
+  @IBOutlet weak var aoField: NSTextField!
+  @IBOutlet weak var achannelsField: NSTextField!
+  @IBOutlet weak var abitrateField: NSTextField!
+  @IBOutlet weak var asamplerateField: NSTextField!
+
+  @IBOutlet weak var trackIdField: NSTextField!
+  @IBOutlet weak var trackDefaultField: NSTextField!
+  @IBOutlet weak var trackForcedField: NSTextField!
+  @IBOutlet weak var trackSelectedField: NSTextField!
+  @IBOutlet weak var trackExternalField: NSTextField!
+  @IBOutlet weak var trackSourceIdField: NSTextField!
+  @IBOutlet weak var trackTitleField: NSTextField!
+  @IBOutlet weak var trackLangField: NSTextField!
+  @IBOutlet weak var trackFilePathField: NSTextField!
+  @IBOutlet weak var trackCodecField: NSTextField!
+  @IBOutlet weak var trackDecoderField: NSTextField!
+  @IBOutlet weak var trackFPSField: NSTextField!
+  @IBOutlet weak var trackChannelsField: NSTextField!
+  @IBOutlet weak var trackSampleRateField: NSTextField!
+
+  @IBOutlet weak var avsyncField: NSTextField!
+  @IBOutlet weak var totalAvsyncField: NSTextField!
+  @IBOutlet weak var droppedFramesField: NSTextField!
+  @IBOutlet weak var mistimedFramesField: NSTextField!
+  @IBOutlet weak var displayFPSField: NSTextField!
+  @IBOutlet weak var voFPSField: NSTextField!
+  @IBOutlet weak var edispFPSField: NSTextField!
+  @IBOutlet weak var watchTableView: NSTableView!
+  @IBOutlet weak var deleteButton: NSButton!
+
+  @IBOutlet weak var watchTableContainerView: NSView!
+  private var tableHeightConstraint: NSLayoutConstraint? = nil
+
+  // MARK: - Window Delegate
+
+  override func windowDidLoad() {
+    super.windowDidLoad()
+
+    watchProperties = Preference.array(for: .watchProperties) as! [String]
+    watchTableView.delegate = self
+    watchTableView.dataSource = self
+
+    let headerFont = NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize)
+    for column in watchTableView.tableColumns {
+      let headerCell = WatchTableColumnHeaderCell()
+      // Use title from the XIB
+      let title = column.headerCell.title
+      // Use small bold system font
+      headerCell.attributedStringValue = NSMutableAttributedString(string: title, attributes: [.font: headerFont])
+      column.headerCell = headerCell
+    }
+
+    watchTableContainerView.wantsLayer = true
+    watchTableContainerView.layer?.backgroundColor = watchTableBackgroundColor.cgColor
+
+    tableHeightConstraint = watchTableContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: computeMinTableHeight())
+    tableHeightConstraint!.isActive = true
+    watchTableContainerView.layout()
+
+    deleteButton.isEnabled = false
+
+    updateInfo()
+    watchTableView.scrollRowToVisible(0)
+
+    let info = PlayerCore.lastActive.info
+    log("""
+      Video tracks:
+      \(info.videoTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose)
+    log("""
+      Audio tracks:
+      \(info.audioTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose)
+    log("""
+      Subtitle tracks:
+      \(info.subTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+      """, level: .verbose)
+  }
+
+  override func showWindow(_ sender: Any?) {
+    log("Showing Inspector window", level: .verbose)
+
+    guard let _ = self.window else { return }  // trigger lazy load if not loaded
+
+    updateInfo()
+
+    removeTimerAndListeners()
+    updateTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(dynamicUpdate), userInfo: nil, repeats: true)
+
+    observers.append(NotificationCenter.default.addObserver(forName: .iinaFileLoaded, object: nil, queue: .main, using: self.fileLoaded))
+    observers.append(NotificationCenter.default.addObserver(forName: .iinaMainWindowChanged, object: nil, queue: .main, using: self.fileLoaded))
+
+    super.showWindow(sender)
+
+    // Log additional information for developers when the inspector window is shown.
+    MemoryUsage.shared.logUsage("after showing inspector window")
+  }
+
+  func windowWillClose(_ notification: Notification) {
+    log("Closing Inspector window", level: .verbose)
+    // Remove timer & listeners to conserve resources
+    removeTimerAndListeners()
+  }
+  
+  /// Workaround (as of macOS 13.4): try to ensure `watchTableView` never scrolls vertically, because `NSTableView` will draw rows
+  /// overlapping the header (maybe only a problem for custom `NSTableHeaderCell`s which are not opaque), but looks quite ugly.
+  private func computeMinTableHeight() -> CGFloat {
+    /// Add `1` to `numberOfRows` because it will scroll if there is not at least 1 empty row
+    return watchTableView.headerView!.frame.height + CGFloat(
+      watchTableView.numberOfRows + 1) * (watchTableView.rowHeight + watchTableView.intercellSpacing.height)
+  }
+
+  private func removeTimerAndListeners() {
+    updateTimer?.invalidate()
+    updateTimer = nil
+    for observer in observers {
+      NotificationCenter.default.removeObserver(observer)
+    }
+    observers = []
+  }
+
+  func updateInfo(dynamic: Bool = false) {
+    let player = PlayerCore.lastActive
+    guard player.info.state.active else { return }
+    let controller = player.mpv!
+    let info = player.info
+
+    DispatchQueue.main.async {
+
+      if !dynamic {
+
+        // File level metadata.
+        let commentKey = MPVProperty.metadata + "/by-key/comment"
+
+        // string properties
+
+        let strProperties: [String: NSTextField] = [
+          MPVProperty.path: self.pathField,
+          MPVProperty.fileFormat: self.fileFormatField,
+          MPVProperty.chapters: self.chaptersField,
+          MPVProperty.editions: self.editionsField,
+          MPVProperty.mediaTitle: self.titleField,
+          commentKey: self.commentField,
+          // in mpv 0.38, video-codec-name is an alias of current-tracks/video/codec, etc
+          MPVProperty.currentTracksVideoCodec: self.vformatField,
+          MPVProperty.currentTracksVideoCodecDesc: self.vcodecField,
+          MPVProperty.containerFps: self.vfpsField,
+          MPVProperty.currentVo: self.voField,
+          MPVProperty.currentTracksAudioCodecDesc: self.acodecField,
+          MPVProperty.audioParamsFormat: self.aformatField,
+          MPVProperty.audioParamsChannels: self.achannelsField,
+          MPVProperty.audioParamsSamplerate: self.asamplerateField
+        ]
+
+        for (k, v) in strProperties {
+          var value = controller.getString(k)
+          if value == "" { value = nil }
+          // If the video does not have a title then mpv returns the filename. If that is the case
+          // then clear the value. The filename is already being displayed in the path.
+          if k == MPVProperty.mediaTitle, let filename = controller.getString(MPVProperty.filename),
+             value == filename {
+            value = nil
+          }
+          // The value of these properties may contain links, if so make them clickable.
+          if k == MPVProperty.path || k == commentKey, let value, let link = self.formLink(value) {
+            v.attributedStringValue = link
+            // Must enable this for the link to be clickable.
+            v.allowsEditingTextAttributes = true
+          } else {
+            v.stringValue = value ?? NSLocalizedString("general.na", comment: "N/A")
+            v.allowsEditingTextAttributes = false
+          }
+          v.isSelectable = value != nil
+          self.setLabelColor(v, by: value != nil)
+        }
+
+        // other properties
+
+        let duration = controller.getDouble(MPVProperty.duration)
+        self.durationField.stringValue = VideoTime(duration).stringRepresentation
+
+        let vwidth = controller.getInt(MPVProperty.width)
+        let vheight = controller.getInt(MPVProperty.height)
+        self.vsizeField.stringValue = "\(vwidth)\u{d7}\(vheight)"
+
+        let fileSize = controller.getInt(MPVProperty.fileSize)
+        self.fileSizeField.stringValue = "\(FloatingPointByteCountFormatter.string(fromByteCount: fileSize))B"
+
+        // track list
+
+        self.trackPopup.removeAllItems()
+        var needSeparator = false
+        for track in info.videoTracks {
+          self.trackPopup.menu?.addItem(withTitle: NSLocalizedString("track.video", comment: "Video") + track.readableTitle,
+                                   action: nil, tag: nil, obj: track, stateOn: false)
+          needSeparator = true
+        }
+        if needSeparator && !info.audioTracks.isEmpty {
+          self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        }
+        for track in info.audioTracks {
+          self.trackPopup.menu?.addItem(withTitle: NSLocalizedString("track.audio", comment: "Audio") + track.readableTitle,
+                                   action: nil, tag: nil, obj: track, stateOn: false)
+          needSeparator = true
+        }
+        if needSeparator && !info.subTracks.isEmpty {
+          self.trackPopup.menu?.addItem(NSMenuItem.separator())
+        }
+        for track in info.subTracks {
+          self.trackPopup.menu?.addItem(withTitle: NSLocalizedString("track.sub", comment: "Subtitle") + track.readableTitle,
+                                   action: nil, tag: nil, obj: track, stateOn: false)
+        }
+        self.trackPopup.selectItem(at: 0)
+        self.updateTrack()
+      }
+
+      let vbitrate = controller.getInt(MPVProperty.videoBitrate)
+      self.vbitrateField.stringValue = FloatingPointByteCountFormatter.string(fromByteCount: vbitrate) + "bps"
+
+      let abitrate = controller.getInt(MPVProperty.audioBitrate)
+      self.abitrateField.stringValue = FloatingPointByteCountFormatter.string(fromByteCount: abitrate) + "bps"
+
+      let dynamicStrProperties: [String: NSTextField] = [
+        // At any point in time while the video is playing hardware decoding may fail causing a fall
+        // back to software decoding.
+        MPVProperty.hwdecCurrent: self.vdecoderField,
+        MPVProperty.avsync: self.avsyncField,
+        MPVProperty.totalAvsyncChange: self.totalAvsyncField,
+        MPVProperty.frameDropCount: self.droppedFramesField,
+        MPVProperty.mistimedFrameCount: self.mistimedFramesField,
+        MPVProperty.displayFps: self.displayFPSField,
+        MPVProperty.estimatedVfFps: self.voFPSField,
+        MPVProperty.estimatedDisplayFps: self.edispFPSField,
+        MPVProperty.currentAo: self.aoField,
+      ]
+
+      for (k, v) in dynamicStrProperties {
+        let value = controller.getString(k)
+        v.stringValue = value ?? NSLocalizedString("general.na", comment: "N/A")
+        v.isSelectable = value != nil
+        self.setLabelColor(v, by: value != nil)
+      }
+
+      let sigPeak = controller.getDouble(MPVProperty.videoParamsSigPeak);
+      self.vprimariesField.stringValue = sigPeak > 0
+        ? "\(controller.getString(MPVProperty.videoParamsPrimaries) ?? "?") / \(controller.getString(MPVProperty.videoParamsGamma) ?? "?") (\(sigPeak > 1 ? "H" : "S")DR)"
+        : NSLocalizedString("general.na", comment: "N/A");
+      self.vprimariesField.isSelectable = sigPeak > 0
+      self.setLabelColor(self.vprimariesField, by: sigPeak > 0)
+
+      let player = PlayerCore.lastActive
+      if player.mainWindow.loaded && player.info.state.loaded {
+        if let colorspace = player.mainWindow.videoView.videoLayer.colorspace {
+          let screenColorSpace = player.mainWindow.window?.screen?.colorSpace
+          let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB
+          let isHdr = colorspace != sdrColorSpace
+          // Prefer the name of the CGColorSpace of the layer. If the CGColorSpace does not have a
+          // name then if the layer is set to the color space of the screen then fall back to the
+          // localized name on the NSColorSpace, if present. Otherwise report it as unspecified.
+          let name: String = {
+            if let name = colorspace.name { return name as String }
+            if let screenColorSpace, colorspace == screenColorSpace.cgColorSpace,
+               let name = screenColorSpace.localizedName { return name }
+            return "Unspecified"
+          }()
+          self.vcolorspaceField.stringValue = "\(name) (\(isHdr ? "H" : "S")DR)"
+        } else {
+          self.vcolorspaceField.stringValue = "Unspecified (SDR)"
+        }
+        self.vcolorspaceField.isSelectable = true
+      } else {
+        self.vcolorspaceField.stringValue = NSLocalizedString("general.na", comment: "N/A")
+        self.vcolorspaceField.isSelectable = false
+      }
+      self.setLabelColor(self.vcolorspaceField, by: player.info.state.loaded)
+
+      if player.mainWindow.loaded && player.info.state.loaded {
+        if let hwPf = controller.getString(MPVProperty.videoParamsHwPixelformat) {
+          self.vPixelFormat.stringValue = "\(hwPf) (HW)"
+          self.vPixelFormat.isSelectable = true
+        } else if let swPf = controller.getString(MPVProperty.videoParamsPixelformat) {
+          self.vPixelFormat.stringValue = "\(swPf) (SW)"
+          self.vPixelFormat.isSelectable = true
+        } else {
+          self.vPixelFormat.stringValue = NSLocalizedString("general.na", comment: "N/A")
+          self.vPixelFormat.isSelectable = false
+        }
+      }
+      self.setLabelColor(self.vPixelFormat, by: player.info.state.loaded)
+    }
+  }
+
+  func fileLoaded(_ notification: Notification) {
+    updateInfo()
+  }
+
+  @objc func dynamicUpdate() {
+    updateInfo(dynamic: true)
+    /// Do not call `reloadData()` (no arg version) because it will clear the selection. Also, because we know the number of rows will not change,
+    /// calling `reloadData(forRowIndexes:)` will get the same result but much more efficiently
+    watchTableView.reloadData(forRowIndexes: IndexSet(0..<watchTableView.numberOfRows), columnIndexes: IndexSet(0..<watchTableView.numberOfColumns))
+  }
+
+  func updateTrack() {
+    guard let track = trackPopup.selectedItem?.representedObject as? MPVTrack else { return }
+
+    trackIdField.stringValue = "\(track.id)"
+    setLabelColor(trackDefaultField, by: track.isDefault)
+    setLabelColor(trackForcedField, by: track.isForced)
+    setLabelColor(trackSelectedField, by: track.isSelected)
+    setLabelColor(trackExternalField, by: track.isExternal)
+
+    let strProperties: [(String?, NSTextField)] = [
+      (track.srcId?.description, trackSourceIdField),
+      (track.title, trackTitleField),
+      (track.readableLanguage, trackLangField),
+      (track.externalFilename, trackFilePathField),
+      (track.codec, trackCodecField),
+      (track.decoderDesc, trackDecoderField),
+      (track.demuxFps?.description, trackFPSField),
+      (track.demuxChannels, trackChannelsField),
+      (track.demuxSamplerate?.description, trackSampleRateField)
+    ]
+
+    for (str, field) in strProperties {
+      field.stringValue = str ?? NSLocalizedString("general.na", comment: "N/A")
+      field.isSelectable = str != nil
+      setLabelColor(field, by: str != nil)
+    }
+  }
+
+  // MARK: - NSTableView
+
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return watchProperties.count
+  }
+
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    guard let identifier = tableColumn?.identifier else { return nil }
+    guard let cell = watchTableView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView else {
+      return nil
+    }
+    guard let property = watchProperties[at: row] else { return nil }
+
+    switch identifier {
+    case .key:
+      if let textField = cell.textField {
+        textField.stringValue =  property
+      }
+      return cell
+    case .value:
+      let player = PlayerCore.lastActive
+
+      if let textField = cell.textField {
+        textField.allowsEditingTextAttributes = false
+        if player.info.state.active, let value = player.mpv.getString(property) {
+          if let link = formLink(value) {
+            textField.attributedStringValue = link
+            // Must enable this for the link to be clickable.
+            textField.allowsEditingTextAttributes = true
+          } else {
+            textField.stringValue = value
+          }
+          textField.isSelectable = true
+          textField.textColor = .labelColor
+        } else {
+          let errorString = NSLocalizedString("inspector.error", comment: "Error")
+
+          let italicDescriptor: NSFontDescriptor = textField.font!.fontDescriptor.withSymbolicTraits(NSFontDescriptor.SymbolicTraits.italic)
+          let errorFont = NSFont(descriptor: italicDescriptor, size: textField.font!.pointSize)
+
+          textField.attributedStringValue = NSMutableAttributedString(string: errorString, attributes: [.font: errorFont!])
+          textField.isSelectable = false
+          textField.textColor = .disabledControlTextColor
+        }
+      }
+      return cell
+    default:
+      log("Unrecognized column: '\(identifier.rawValue)'", level: .error)
+      return nil
+    }
+  }
+
+  func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+    /// The background color for a `NSTableRowView` will default to the parent's background color, which results in an
+    /// unwanted additive effect for translucent backgrounds. Just make each row transparent.
+    rowView.backgroundColor = .clear
+  }
+
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    deleteButton.isEnabled = !watchTableView.selectedRowIndexes.isEmpty
+  }
+
+  func resizeTableColumns(forTableWidth tableWidth: CGFloat) {
+    guard let keyColumn = watchTableView.tableColumn(withIdentifier: .key),
+          let valueColumn = watchTableView.tableColumn(withIdentifier: .value),
+          let tableScrollView = watchTableView.enclosingScrollView else {
+      return
+    }
+
+    let adjustedTableWidth = tableWidth - tableScrollView.verticalScroller!.frame.width
+    let keyColumnMaxWidth = adjustedTableWidth - valueColumn.minWidth
+    var newKeyColumnWidth = keyColumn.width
+    if keyColumn.width > keyColumnMaxWidth {
+      newKeyColumnWidth = keyColumnMaxWidth
+      keyColumn.width = newKeyColumnWidth
+    }
+    valueColumn.width = adjustedTableWidth - newKeyColumnWidth
+    tableScrollView.needsLayout = true
+    tableScrollView.needsDisplay = true
+  }
+
+  func windowWillResize(_ sender: NSWindow, to newWindowSize: NSSize) -> NSSize {
+    if let window, window.inLiveResize {
+      /// Table size will change with window size, so need to find the new table width from `newWindowSize`.
+      /// We know that our window's width is composed of 2 things: the table width + all other fixed "non-table" stuff.
+      /// We first find the non-table width by subtracting current table size from current window size.
+      /// Note: `NSTableView` does not give an honest answer for its width, but can use its parent (`NSClipView`) width.
+      let oldTableWidth = watchTableView.superview!.frame.width
+      let nonTableWidth = window.frame.width - oldTableWidth
+      let newTableWidth = newWindowSize.width - nonTableWidth
+      resizeTableColumns(forTableWidth: newTableWidth)
+    }
+
+    return newWindowSize
+  }
+
+  func windowDidResize(_ notification: Notification) {
+    if let window, window.inLiveResize {
+      let tableWidth = watchTableView.superview!.frame.width
+      resizeTableColumns(forTableWidth: tableWidth)
+    }
+  }
+
+  @IBAction func addWatchAction(_ sender: AnyObject) {
+    Utility.quickPromptPanel("add_watch", sheetWindow: window) { [self] str in
+      self.watchProperties.append(str)
+      self.saveWatchList()
+
+      // Append row to end of table, with animation if preferred
+      let insertIndexSet = IndexSet(integer: watchTableView.numberOfRows)
+      watchTableView.insertRows(at: insertIndexSet, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideDown)
+      watchTableView.selectRowIndexes(insertIndexSet, byExtendingSelection: false)
+      tableHeightConstraint?.constant = computeMinTableHeight()
+      watchTableContainerView.layout()
+    }
+  }
+
+  @IBAction func removeWatchAction(_ sender: AnyObject) {
+    let rowIndexes = watchTableView.selectedRowIndexes
+    guard !rowIndexes.isEmpty else { return }
+
+    let watchPropertiesOld = watchProperties
+    var watchPropertiesNew: [String] = []
+    for (index, property) in watchPropertiesOld.enumerated() {
+      if !rowIndexes.contains(index) {
+        watchPropertiesNew.append(property)
+      }
+    }
+    watchProperties = watchPropertiesNew
+    saveWatchList()
+
+    watchTableView.removeRows(at: rowIndexes, withAnimation: AccessibilityPreferences.motionReductionEnabled ? [] : .slideUp)
+    tableHeightConstraint?.constant = computeMinTableHeight()
+    watchTableContainerView.layout()
+  }
+
+
+  // MARK: - IBActions
+
+  @IBAction func tabSwitched(_ sender: NSSegmentedControl) {
+    tabView.selectTabViewItem(at: sender.selectedSegment)
+  }
+
+  @IBAction func trackSwitched(_ sender: AnyObject) {
+    updateTrack()
+  }
+
+
+  // MARK: - Utils
+
+  /// Form a link from the given string.
+  /// - Parameter value: String value that may be a link.
+  /// - Returns: If `value` should be represented as a clickable link, an attributed string containing a link, otherwise ` nil`.
+  private func formLink(_ value: String) -> NSAttributedString? {
+    guard let url = URL(string: value), let scheme = url.scheme,
+          scheme == "http" || scheme == "https" else { return nil }
+      return NSAttributedString(string: value, attributes: [.link: url])
+  }
+
+  private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
+    Logger.log(message, level: level, subsystem: Logger.Sub.inspector)
+  }
+
+  private func setLabelColor(_ label: NSTextField, by state: Bool) {
+    label.textColor = state ? NSColor.labelColor : NSColor.disabledControlTextColor
+  }
+
+  private func saveWatchList() {
+    Preference.set(watchProperties, for: .watchProperties)
+  }
+
+  class WatchTableColumnHeaderCell: NSTableHeaderCell {
+    override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
+      // Override background color
+      self.drawsBackground = false
+      watchTableColumnHeaderColor.set()
+      cellFrame.fill(using: .sourceOver)
+
+      super.draw(withFrame: cellFrame, in: controlView)
+    }
+  }
+}
+
+extension Logger.Sub {
+  static let inspector = Logger.makeSubsystem("inspector", ["tablecells"])
+}

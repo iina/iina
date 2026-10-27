@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorēt";
+"cmd.seek" = "Meklēt";
+"cmd.revert-seek" = "Reversā meklēšana";
+"cmd.set" = "Iestatīt";
+"cmd.cycle" = "Cikls";
+"cmd.cycle-values" = "Cycle in";
+"cmd.add" = "Change";
+"cmd.multiply" = "Multiply";
+"cmd.frame-step" = "Next frame";
+"cmd.frame-back-step" = "Previous frame";
+"cmd.ab-loop" = "A-B cikls";
+"cmd.sub-seek" = "Meklēt subtitrus";
+"cmd.playlist-next" = "Nākamais medijs";
+"cmd.playlist-prev" = "Iepriekšējais medijs";
+"cmd.playlist-move" = "Pārvietot atskaņošanas saraksta vienumu";
+"cmd.playlist-clear" = "Izdzēst atskaņošanas sarakstu";
+"cmd.playlist-remove" = "Noņemt pašreizējo";
+"cmd.playlist-shuffle" = "Jauktā secībā";
+"cmd.write-watch-later-config" = "Ierakstu atskaņošanas vēsture";
+"cmd.stop" = "Apturēt";
+"cmd.quit" = "Iziet";
+"cmd.quit-watch-later" = "Iziet (saglabāt progresu)";
+"cmd.screenshot" = "Ekrānuzņēmums";
+"cmd.screenshot-to-file" = "Ekrānuzņēmums failā";
+"cmd.loadfile" = "Ielādēt datni";
+"cmd.loadlist" = "Ielādēt atskaņošanas sarakstu";
+"cmd.run" = "Palaist";
+
+"iina.flip" = "Apmest";
+"iina.mirror" = "Mirror";
+
+"iina.toggle-pip" = "Toggle Picture-in-Picture";
+"iina.toggle-music-mode" = "Toggle Music Mode";
+"iina.open-file" = "Open file";
+"iina.open-url" = "Atvērt URL";
+"iina.video-panel" = "Video panel";
+"iina.audio-panel" = "Audio panel";
+"iina.sub-panel" = "Subtitle panel";
+"iina.playlist-panel" = "Playlist panel";
+"iina.chapter-panel" = "Chapter panel";
+"iina.bigger-window" = "Bigger Window";
+"iina.smaller-window" = "Smaller Window";
+"iina.fit-to-screen" = "Ietilpināt ekrānā";
+"iina.toggle-flip" = "Toggle flip";
+"iina.toggle-mirror" = "Toggle mirror";
+"iina.save-playlist" = "Save current playlist";
+"iina.show-current-file-in-finder" = "Show current file in Finder";
+"iina.delete-current-file" = "Delete current file";
+"iina.delete-current-file-hard" = "Delete current file directly without moving to trash";
+"iina.find-online-subs" = "Find online subtitles";
+"iina.save-downloaded-sub" = "Save downloaded subtitle";
+
+"yes" = "Yes";
+"no" = "No";
+"to" = "to";
+"by" = "by";
+"in" = "in";
+"add" = "increase";
+"minus" = "decrease";
+"forward" = "forward";
+"backward" = "backward";
+"seek-to" = "to";
+
+"relative" = "sekundēm";
+"absolute" = "sekundēm";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (exact)";
+"relative-percent+exact" = "% (exact)";
+"absolute+keyframe" = "s (keyframe)";
+"absolute-percent+keyframe" = "% (keyframe)";
+
+"opt.pause" = "Pauze";
+"opt.speed" = "Mainīt ātrumu";
+
+"opt.window-scale" = "Window scale";
+
+"opt.video" = "Video track";
+"opt.video-aspect-override" = "Video aspect";
+"opt.contrast" = "Contrast";
+"opt.brightness" = "Brightness";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Saturation";
+"opt.deinterlace" = "Deinterlace";
+
+"opt.audio" = "Audio track";
+"opt.volume" = "Skaļums";
+"opt.mute" = "Izslēgt skaņu";
+"opt.audio-delay" = "Audio delay";
+
+"opt.sub" = "Subtitle track";
+"opt.sub-delay" = "Subtitle delay";
+"opt.sub-pos" = "Subtitle position";
+"opt.sub-scale" = "Subtitle scale";
+"opt.sub-visibility" = "Subtitle visibility";
+"opt.secondary-sub-visibility" = "Secondary subtitle visibility";
+"opt.sub-ass-style-override" = "ASS style override";
+
+"opt.fullscreen" = "Fullscreen";
+"opt.ontop" = "Float on top";
+
+"opt.chapter" = "Chapter";
+
+"read.set" = "Set {{property}} to {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multiply {{property}} by {{factor}}x";
+"read.cycle" = "Cycle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.cycle-values" = "Cycle {{property}} in ({{{values}}})";
+"read.seek" = "Seek {{#fwd}}forward{{/fwd}}{{#bwd}}backward{{/bwd}}{{#abs}}to{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
+"read.sub-seek" = "Seek to {{#skip_1}}next{{/skip_1}}{{#skip_-1}}previous{{/skip_-1}} subtitle";

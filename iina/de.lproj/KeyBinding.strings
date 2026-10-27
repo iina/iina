@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Ignorieren";
+"cmd.seek" = "Spule";
+"cmd.revert-seek" = "Spulen widerrufen";
+"cmd.set" = "Setze";
+"cmd.cycle" = "Wechsle";
+"cmd.cycle-values" = "Wechsle in";
+"cmd.add" = "Ändere";
+"cmd.multiply" = "Multipliziere";
+"cmd.frame-step" = "Nächster Frame";
+"cmd.frame-back-step" = "Vorheriger Frame";
+"cmd.ab-loop" = "A-B-Schleife";
+"cmd.sub-seek" = "Untertitel suchen";
+"cmd.playlist-next" = "Nächste Datei";
+"cmd.playlist-prev" = "Vorherige Datei";
+"cmd.playlist-move" = "Wiedergabelisteneintrag bewegen";
+"cmd.playlist-clear" = "Wiedergabeliste leeren";
+"cmd.playlist-remove" = "Aus Wiedergabeliste entfernen";
+"cmd.playlist-shuffle" = "Zufällige Wiedergabe";
+"cmd.write-watch-later-config" = "Wiedergabeverlauf sichern";
+"cmd.stop" = "Stoppen";
+"cmd.quit" = "Beenden";
+"cmd.quit-watch-later" = "Beenden (Fortschritt sichern)";
+"cmd.screenshot" = "Bildschirmfoto";
+"cmd.screenshot-to-file" = "Bildschirmfoto in Datei";
+"cmd.loadfile" = "Datei laden";
+"cmd.loadlist" = "Wiedergabeliste laden";
+"cmd.run" = "Ausführen";
+
+"iina.flip" = "Drehen";
+"iina.mirror" = "Spiegeln";
+
+"iina.toggle-pip" = "Bild-in-Bild ein-/ausschalten";
+"iina.toggle-music-mode" = "Musikmodus ein-/ausschalten";
+"iina.open-file" = "Datei öffnen";
+"iina.open-url" = "Adresse öffnen";
+"iina.video-panel" = "Videoeinstellungen";
+"iina.audio-panel" = "Audioeinstellungen";
+"iina.sub-panel" = "Untertiteleinstellungen";
+"iina.playlist-panel" = "Wiedergabeliste";
+"iina.chapter-panel" = "Kapitel";
+"iina.bigger-window" = "Fenster vergrößern";
+"iina.smaller-window" = "Fenster verkleinern";
+"iina.fit-to-screen" = "An Bildschirm anpassen";
+"iina.toggle-flip" = "Drehen ein-/ausschalten";
+"iina.toggle-mirror" = "Spiegeln ein-/ausschalten";
+"iina.save-playlist" = "Aktuelle Wiedergabeliste sichern";
+"iina.show-current-file-in-finder" = "Aktuelle Datei im Finder anzeigen";
+"iina.delete-current-file" = "Wiedergegebene Datei löschen";
+"iina.delete-current-file-hard" = "Wiedergegebene Datei unwiderruflich löschen";
+"iina.find-online-subs" = "Online nach Untertiteln suchen";
+"iina.save-downloaded-sub" = "Geladene Untertitel sichern";
+
+"yes" = "Ein";
+"no" = "Aus";
+"to" = "auf";
+"by" = "mit";
+"in" = "in";
+"add" = "plus";
+"minus" = "minus";
+"forward" = "vorwärts";
+"backward" = "rückwärts";
+"seek-to" = "zu";
+
+"relative" = "Sekunden";
+"absolute" = "Sekunden";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (genau)";
+"relative-percent+exact" = "% (genau)";
+"absolute+keyframe" = "s (Keyframe)";
+"absolute-percent+keyframe" = "% (Keyframe)";
+
+"opt.pause" = "Pausieren";
+"opt.speed" = "Geschwindigkeit";
+
+"opt.window-scale" = "Fenstergröße";
+
+"opt.video" = "Videospur";
+"opt.video-aspect-override" = "Seitenverhältnis";
+"opt.contrast" = "Kontrast";
+"opt.brightness" = "Helligkeit";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Sättigung";
+"opt.deinterlace" = "Deinterlacing";
+
+"opt.audio" = "Audiospur";
+"opt.volume" = "Lautstärke";
+"opt.mute" = "Stumm";
+"opt.audio-delay" = "Verzögerung";
+
+"opt.sub" = "Untertitelspur";
+"opt.sub-delay" = "Verzögerung";
+"opt.sub-pos" = "Position";
+"opt.sub-scale" = "Größe";
+"opt.sub-visibility" = "Sichtbarkeit";
+"opt.secondary-sub-visibility" = "Sichtbarkeit des zweiten Untertitels";
+"opt.sub-ass-style-override" = "ASS-Stil überschreiben";
+
+"opt.fullscreen" = "Vollbild";
+"opt.ontop" = "Oben schweben";
+
+"opt.chapter" = "Kapitel";
+
+"read.set" = "Setze {{property}} auf {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Multipliziere {{property}} mit {{factor}}x";
+"read.cycle" = "Wechsle {{property}}{{#dir_down}} Downwards{{/dir_down}}";
+"read.cycle-values" = "Wechsle {{property}} in ({{{values}}})";
+"read.seek" = "Spule {{#abs}}zu {{/abs}}{{value}} {{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#fwd}}vor{{/fwd}}{{#bwd}}zurück{{/bwd}}{{#exact}} (genau){{/exact}}{{#kf}} (Keyframe){{/kf}}";
+"read.sub-seek" = "Wechsle zu {{#skip_1}}nächstem{{/skip_1}}{{#skip_-1}}vorherigem{{/skip_-1}} Untertitel";

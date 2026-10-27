@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Bỏ qua";
+"cmd.seek" = "Tìm kiếm";
+"cmd.revert-seek" = "Khôi phục tìm kếm";
+"cmd.set" = "Đặt";
+"cmd.cycle" = "Chu kỳ";
+"cmd.cycle-values" = "Chu kì trong";
+"cmd.add" = "Thay đổi";
+"cmd.multiply" = "Nhân";
+"cmd.frame-step" = "Khung hình tiếp theo";
+"cmd.frame-back-step" = "Khung hình trước";
+"cmd.ab-loop" = "Lặp A-B";
+"cmd.sub-seek" = "Tìm kiếm phụ đề";
+"cmd.playlist-next" = "Phương tiện tiếp theo";
+"cmd.playlist-prev" = "Phương tiện trước";
+"cmd.playlist-move" = "Di chuyển mục danh sách phát";
+"cmd.playlist-clear" = "Dọn danh sách phát";
+"cmd.playlist-remove" = "Xóa hiện tại";
+"cmd.playlist-shuffle" = "Xáo trộn";
+"cmd.write-watch-later-config" = "Lịch sử bản ghi";
+"cmd.stop" = "Dừng";
+"cmd.quit" = "Thoát";
+"cmd.quit-watch-later" = "Thoát (lưu tiến trình)";
+"cmd.screenshot" = "Chụp màn hình";
+"cmd.screenshot-to-file" = "Chụp màn hình lưu vào tập tin";
+"cmd.loadfile" = "Nạp tập tin";
+"cmd.loadlist" = "Tải danh sách phát";
+"cmd.run" = "Chạy";
+
+"iina.flip" = "Lật";
+"iina.mirror" = "Đối xứng";
+
+"iina.toggle-pip" = "Hình trong hình";
+"iina.toggle-music-mode" = "Chuyển đổi chế độ âm nhạc";
+"iina.open-file" = "Mở tệp";
+"iina.open-url" = "Mở liên kết URL";
+"iina.video-panel" = "Bảng điều khiển hình ảnh";
+"iina.audio-panel" = "Bảng điều khiển âm thanh";
+"iina.sub-panel" = "Bảng phụ đề";
+"iina.playlist-panel" = "Bảng danh sách phát";
+"iina.chapter-panel" = "Bảng điều khiển chương";
+"iina.bigger-window" = "Cửa sổ lớn hơn";
+"iina.smaller-window" = "Cửa sổ nhỏ hơn";
+"iina.fit-to-screen" = "Vừa màn hình";
+"iina.toggle-flip" = "Chuyển đổi lật";
+"iina.toggle-mirror" = "Chuyển đổi gương";
+"iina.save-playlist" = "Lưu danh sách phát hiện tại";
+"iina.show-current-file-in-finder" = "Hiển thị tệp hiện tại trong Finder";
+"iina.delete-current-file" = "Xoá tập tin hiện tại";
+"iina.delete-current-file-hard" = "Xoá luôn tệp tin mà không chuyển vào thùng rác";
+"iina.find-online-subs" = "Tìm phụ đề trực tuyến";
+"iina.save-downloaded-sub" = "Lưu phụ đề đã tải";
+
+"yes" = "Có";
+"no" = "Không";
+"to" = "đến";
+"by" = "bởi";
+"in" = "trong";
+"add" = "tăng lên";
+"minus" = "giảm";
+"forward" = "đi tới";
+"backward" = "lùi lại";
+"seek-to" = "đến";
+
+"relative" = "s";
+"absolute" = "s";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "s (chính xác)";
+"relative-percent+exact" = "% (chính xác)";
+"absolute+keyframe" = "s (khung hình chính)";
+"absolute-percent+keyframe" = "% (khung hình chính)";
+
+"opt.pause" = "Tạm dừng";
+"opt.speed" = "Tốc độ";
+
+"opt.window-scale" = "Thu phóng cửa sổ";
+
+"opt.video" = "Luồng video";
+"opt.video-aspect-override" = "Video aspect";
+"opt.contrast" = "Độ tương phản";
+"opt.brightness" = "Độ sáng";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Độ rực màu";
+"opt.deinterlace" = "Khử nhoè";
+
+"opt.audio" = "Luồng âm thanh";
+"opt.volume" = "Âm lượng";
+"opt.mute" = "Tắt tiếng";
+"opt.audio-delay" = "Độ trễ âm thanh";
+
+"opt.sub" = "Bản phụ đề";
+"opt.sub-delay" = "Độ trễ phụ đề";
+"opt.sub-pos" = "Vị trí phụ đề";
+"opt.sub-scale" = "Quy mô phụ đề";
+"opt.sub-visibility" = "Hiển thị phụ đề";
+"opt.secondary-sub-visibility" = "Hiển thị phụ đề phụ";
+"opt.sub-ass-style-override" = "Ghi đè kiểu ASS";
+
+"opt.fullscreen" = "Toàn màn hình";
+"opt.ontop" = "Nổi lên trên";
+
+"opt.chapter" = "Chương";
+
+"read.set" = "Đặt {{property}} đến {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Nhân {{property}} với {{factor}}x";
+"read.cycle" = "Chuyển lần lượt {{property}}{{#dir_down}} xuống{{/dir_down}}";
+"read.cycle-values" = "Chuyển lần lượt {{property}} trong ({{{values}}})";
+"read.seek" = "Tìm kiếm {{#fwd}}chuyển đến{{/fwd}}{{#bwd}}trở lại{{/bwd}}{{#abs}}đến{{/abs}} {{value}}{{#sec}} {{/sec}}{{#per}}%{{/per}} {{#exact}}(chính xác){{/exact}}{{#kf}}(khung hình){{/kf}}";
+"read.sub-seek" = "Tua đến phụ đề {{#skip_1}}tiếp theo{{/skip_1}}{{#skip_-1}}trước đó{{/skip_-1}}";

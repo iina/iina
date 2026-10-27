@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Cắt xén";
+"crop.w" = "Chiều dài (mặc định: chiều dài của video)";
+"crop.h" = "Chiều cao (mặc định: chiều cao của video)";
+"crop.x" = "Trục X (mặc định: căn giữa)";
+"crop.y" = "Trục Y (mặc định: căn giữa)";
+
+"expand" = "Mở rộng";
+"expand.w" = "Chiều dài (mặc định: chiều dài của video)";
+"expand.h" = "Chiều cao (mặc định: chiều cao của video)";
+"expand.x" = "Gốc X (mặc định: chính giữa)";
+"expand.y" = "Gốc Y (mặc định: chính giữa)";
+"expand.aspect" = "Mở rộng cho vừa tỷ lệ (ví dụ: 4/3)";
+"expand.round" = "Làm tròn để chia hết cho giá trị này";
+
+"sharpen" = "Độ sắc nét";
+"sharpen.msize" = "Kích thước ma trận";
+"sharpen.amount" = "Số lượng";
+
+"blur" = "Độ mờ";
+"blur.msize" = "Kích thước ma trận";
+"blur.amount" = "Số lượng";
+
+"delogo" = "Xóa logo";
+"delogo.w" = "Chiều rộng";
+"delogo.h" = "Chiều cao";
+"delogo.x" = "Gốc X";
+"delogo.y" = "Gốc Y";
+
+"negative" = "Âm bản";
+
+"vflip" = "Lật";
+"hflip" = "Đối xứng";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Đường dẫn tệp (bạn cũng có thể kéo & thả tệp vào hộp nhập liệu)";
+"lut3d.interp" = "Chế độ Interpolation";
+
+"custom_mpv" = "Tùy chỉnh (mpv)";
+"custom_mpv.name" = "Tên bộ lọc";
+"custom_mpv.string" = "Giá trị lọc";
+
+"custom_ffmpeg" = "Tùy chỉnh (FFmpeg)";
+"custom_ffmpeg.name" = "Tên bộ lọc";
+"custom_ffmpeg.string" = "Giá trị lọc";

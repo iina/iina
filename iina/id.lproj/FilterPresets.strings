@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Crop";
+"crop.w" = "Lebar (bawaan: lebar video)";
+"crop.h" = "Tinggi (bawaan: tinggi video)";
+"crop.x" = "Asal X (bawaan: tengah)";
+"crop.y" = "Asal Y (bawaan: tengah)";
+
+"expand" = "Perluas";
+"expand.w" = "Lebar (bawaan: lebar video)";
+"expand.h" = "Tinggi (bawaan: tinggi video)";
+"expand.x" = "Asal X (bawaan: tengah)";
+"expand.y" = "Asal Y (bawaan: tengah)";
+"expand.aspect" = "Perbesar untuk mengepaskan aspek rasio (cth: 4/3)";
+"expand.round" = "Bulatkan agar dapat dibagi dengan nilai ini";
+
+"sharpen" = "Pertajam";
+"sharpen.msize" = "Ukuran matriks";
+"sharpen.amount" = "Besaran";
+
+"blur" = "Blur";
+"blur.msize" = "Ukuran matriks";
+"blur.amount" = "Besaran";
+
+"delogo" = "Hapus Watermark";
+"delogo.w" = "Lebar";
+"delogo.h" = "Tinggi";
+"delogo.x" = "Asal X";
+"delogo.y" = "Asal Y";
+
+"negative" = "Alih Negatif";
+
+"vflip" = "Balikkan";
+"hflip" = "Cerminkan";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Lokasi file (Anda juga dapat menggeser file langsung ke dalam input box)";
+"lut3d.interp" = "Interpolasi";
+
+"custom_mpv" = "Custom (mpv)";
+"custom_mpv.name" = "Nama filter";
+"custom_mpv.string" = "Nilai filter";
+
+"custom_ffmpeg" = "Kustom (FFmpeg)";
+"custom_ffmpeg.name" = "Nama filter";
+"custom_ffmpeg.string" = "Nilai filter";

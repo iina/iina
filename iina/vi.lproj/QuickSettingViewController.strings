@@ -1,0 +1,227 @@
+/* Class = "NSTextFieldCell"; title = "Speed:"; ObjectID = "1KQ-oZ-A2x"; */
+"1KQ-oZ-A2x.title" = "Tốc độ:";
+
+/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "1VY-EN-1mi"; */
+"1VY-EN-1mi.title" = "g";
+
+/* Class = "NSTextFieldCell"; title = "Width:"; ObjectID = "22j-ra-GAY"; */
+"22j-ra-GAY.title" = "Chiều rộng:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "3kI-6i-ujt"; */
+"3kI-6i-ujt.title" = "Màu sắc:";
+
+/* Class = "NSTextFieldCell"; title = "+12 dB"; ObjectID = "4BZ-H1-GEU"; */
+"4BZ-H1-GEU.title" = "+12 dB";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "6LO-6y-IsA"; */
+"6LO-6y-IsA.title" = "Màu sắc:";
+
+/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[0] = "Primary Subtitles"; ObjectID = "88M-pi-2Hc"; */
+"88M-pi-2Hc.ibShadowedLabels[0]" = "Phụ đề chính";
+
+/* Class = "NSSegmentedCell"; 88M-pi-2Hc.ibShadowedLabels[1] = "Secondary Subtitles"; ObjectID = "88M-pi-2Hc"; */
+"88M-pi-2Hc.ibShadowedLabels[1]" = "Phụ đề phụ";
+
+/* Class = "NSButtonCell"; title = "Load External Audio Track…"; ObjectID = "8Ax-5X-osl"; */
+"8Ax-5X-osl.title" = "Mở track âm thanh bên ngoài…";
+
+/* Class = "NSSegmentedCell"; AB5-UZ-euc.ibShadowedLabels[0] = "Load Subtitle…"; ObjectID = "AB5-UZ-euc"; */
+"AB5-UZ-euc.ibShadowedLabels[0]" = "Mở phụ đề…";
+
+/* Class = "NSTextFieldCell"; title = "Audio delay:"; ObjectID = "AKs-VQ-fKF"; */
+"AKs-VQ-fKF.title" = "Độ trễ âm thanh:";
+
+/* Class = "NSTextFieldCell"; title = "Color:"; ObjectID = "ANn-CR-JOV"; */
+"ANn-CR-JOV.title" = "Màu sắc:";
+
+/* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "B0I-bX-HZS"; */
+"B0I-bX-HZS.title" = "1x";
+
+/* Class = "NSTabViewItem"; label = "Video"; ObjectID = "CYP-el-A6A"; */
+"CYP-el-A6A.label" = "Video";
+
+/* Class = "NSMenuItem"; title = "0.25"; ObjectID = "DdO-VX-HCz"; */
+"DdO-VX-HCz.title" = "0.25";
+
+/* Class = "NSTextFieldCell"; title = "0.25x"; ObjectID = "Ew1-N1-0Pi"; */
+"Ew1-N1-0Pi.title" = "0.25x";
+
+/* Class = "NSTextFieldCell"; title = "BORDER"; ObjectID = "GlZ-YU-dNm"; */
+"GlZ-YU-dNm.title" = "KHUNG";
+
+/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "IYU-eq-dls"; */
+"YCG-xK-eAs.title" = "-5s";
+
+/* Class = "NSMenuItem"; title = "1.5"; ObjectID = "JbG-Ur-b55"; */
+"JbG-Ur-b55.title" = "1.5";
+
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "LEZ-fv-buL"; */
+"LEZ-fv-buL.title" = "0s";
+
+/* Class = "NSTextFieldCell"; title = "External audio:"; ObjectID = "Lnu-kz-cql"; */
+"Lnu-kz-cql.title" = "Âm thanh bên ngoài:";
+
+/* Class = "NSTextFieldCell"; title = "-12 dB"; ObjectID = "Lpw-ws-Ezh"; */
+"Lpw-ws-Ezh.title" = "-12 dB";
+
+/* Class = "NSButtonCell"; title = "SUBTITLES"; ObjectID = "NxO-to-jcI"; */
+"NxO-to-jcI.title" = "PHỤ ĐỀ";
+
+/* Class = "NSTextFieldCell"; title = "4x"; ObjectID = "PLX-gY-e0h"; */
+"PLX-gY-e0h.title" = "4x";
+
+/* Class = "NSTextFieldCell"; title = "External subtitles:"; ObjectID = "RA1-fF-OrB"; */
+"RA1-fF-OrB.title" = "Phụ đề bên ngoài:";
+
+/* Class = "NSSegmentedCell"; Rbb-wh-cLc.ibShadowedLabels[0] = "Search Online…"; ObjectID = "Rbb-wh-cLc"; */
+"Rbb-wh-cLc.ibShadowedLabels[0]" = "Tìm kiếm trực tuyến…";
+
+/* Class = "NSTextFieldCell"; title = "Saturation:"; ObjectID = "Rky-lo-Buu"; */
+"Rky-lo-Buu.title" = "Bão hòa:";
+
+/* Class = "NSTextFieldCell"; title = "Video track:"; ObjectID = "VzC-tM-KT7"; */
+"VzC-tM-KT7.title" = "Track video:";
+
+/* Class = "NSTextFieldCell"; title = "x"; ObjectID = "W7H-mU-v3D"; */
+"W7H-mU-v3D.title" = "x";
+
+/* Class = "NSTextFieldCell"; title = "Scale:"; ObjectID = "Wbx-Ti-qiS"; */
+"Wbx-Ti-qiS.title" = "Tỷ lệ:";
+
+/* Class = "NSTextFieldCell"; title = "Subtitle delay:"; ObjectID = "Wkz-wW-sOM"; */
+"Wkz-wW-sOM.title" = "Độ trễ phụ đề:";
+
+/* Class = "NSTextFieldCell"; title = "Aspect ratio:"; ObjectID = "YgL-iV-bca"; */
+"YgL-iV-bca.title" = "Tỷ lệ khung hình:";
+
+/* Class = "NSTextFieldCell"; title = "Text Style:"; ObjectID = "ZBd-13-lA1"; */
+"ZBd-13-lA1.title" = "Kiểu chữ:";
+
+/* Class = "NSMenuItem"; title = "0.5"; ObjectID = "avJ-cW-Iws"; */
+"avJ-cW-Iws.title" = "0.5";
+
+/* Class = "NSTextFieldCell"; title = "Secondary subtitle:"; ObjectID = "bKb-pW-HnS"; */
+"bKb-pW-HnS.title" = "Phụ đề thứ hai:";
+
+/* Class = "NSTextFieldCell"; title = "s"; ObjectID = "bsT-FB-GhF"; */
+"bsT-FB-GhF.title" = "g";
+
+/* Class = "NSTabViewItem"; label = "Audio"; ObjectID = "bzk-c2-LH5"; */
+"bzk-c2-LH5.label" = "Âm thanh";
+
+/* Class = "NSSegmentedCell"; cMu-YF-riv.ibShadowedLabels[0] = "Default"; ObjectID = "cMu-YF-riv"; */
+"cMu-YF-riv.ibShadowedLabels[0]" = "Mặc định";
+
+/* Class = "NSTextFieldCell"; title = "Brightness:"; ObjectID = "cdR-uY-riN"; */
+"cdR-uY-riN.title" = "Độ sáng:";
+
+/* Class = "NSButtonCell"; title = "AUDIO"; ObjectID = "cpm-5o-a2c"; */
+"cpm-5o-a2c.title" = "ÂM THANH";
+
+/* Class = "NSTextFieldCell"; title = "Contrast:"; ObjectID = "eDl-Si-LSa"; */
+"eDl-Si-LSa.title" = "Tương phản:";
+
+/* Class = "NSTabViewItem"; label = "Plugin"; ObjectID = "eE3-9i-hpU"; */
+"eE3-9i-hpU.label" = "Tiện ích bổ sung";
+
+/* Class = "NSTextFieldCell"; title = "Hue:"; ObjectID = "eLh-fu-pMj"; */
+"eLh-fu-pMj.title" = "Tông màu:";
+
+/* Class = "NSTextFieldCell"; title = "Subtitle:"; ObjectID = "eXZ-HN-qL4"; */
+"eXZ-HN-qL4.title" = "Phụ đề:";
+
+/* Class = "NSTextFieldCell"; title = "FONT"; ObjectID = "g6B-DC-lJ0"; */
+"g6B-DC-lJ0.title" = "PHÔNG CHỮ";
+
+/* Class = "NSButtonCell"; title = "Font…"; ObjectID = "ghy-e7-7Of"; */
+"ghy-e7-7Of.title" = "Phông chữ…";
+
+/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "iS4-Zr-9Ig"; */
+"iS4-Zr-9Ig.title" = "Bộ chỉnh âm:";
+
+/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[0] = "None"; ObjectID = "iuN-rN-jT7"; */
+"iuN-rN-jT7.ibShadowedLabels[0]" = "Không có";
+
+/* Class = "NSSegmentedCell"; iuN-rN-jT7.ibShadowedLabels[6] = "Custom…"; ObjectID = "iuN-rN-jT7"; */
+"iuN-rN-jT7.ibShadowedLabels[6]" = "Tuỳ chỉnh…";
+
+/* Class = "NSTabViewItem"; label = "Subtitle"; ObjectID = "jND-MZ-sKB"; */
+"jND-MZ-sKB.label" = "Phụ đề";
+
+/* Class = "NSTextFieldCell"; title = "0 dB"; ObjectID = "lBn-YS-jL7"; */
+"lBn-YS-jL7.title" = "0 dB";
+
+/* Class = "NSButtonCell"; title = "VIDEO"; ObjectID = "lQt-I0-jHO"; */
+"lQt-I0-jHO.title" = "VIDEO";
+
+/* Class = "NSTextFieldCell"; title = "1x"; ObjectID = "ldQ-YL-IEp"; */
+"ldQ-YL-IEp.title" = "1x";
+
+/* Class = "NSTextFieldCell"; title = "Crop:"; ObjectID = "m9e-IB-IDJ"; */
+"m9e-IB-IDJ.title" = "Cắt xén:";
+
+/* Class = "NSMenuItem"; title = "2.5"; ObjectID = "nPr-QJ-Ty3"; */
+"nPr-QJ-Ty3.title" = "2.5";
+
+/* Class = "NSTextFieldCell"; title = "16x"; ObjectID = "p63-Nx-yJZ"; */
+"p63-Nx-yJZ.title" = "16x";
+
+/* Class = "NSTextFieldCell"; title = "Gamma:"; ObjectID = "r6x-z0-oFC"; */
+"r6x-z0-oFC.title" = "Gamma:";
+
+/* Class = "NSTextFieldCell"; title = "Size:"; ObjectID = "s9l-Hb-SCk"; */
+"s9l-Hb-SCk.title" = "Cỡ chữ:";
+
+/* Class = "NSTextFieldCell"; title = "Position:"; ObjectID = "t03-36-Zge"; */
+"t03-36-Zge.title" = "Vị trí:";
+
+/* Class = "NSTextFieldCell"; title = "Rotation:"; ObjectID = "to3-rc-Agv"; */
+"to3-rc-Agv.title" = "Xoay:";
+
+/* Class = "NSTextFieldCell"; title = "-5s"; ObjectID = "uCX-EC-jXM"; */
+"uCX-EC-jXM.title" = "-5s";
+
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "udN-rq-omw"; */
+"udN-rq-omw.title" = "0s";
+
+/* Class = "NSTextFieldCell"; title = "0s"; ObjectID = "upM-Lz-YwK"; */
+"upM-Lz-YwK.title" = "0s";
+
+/* Class = "NSTextFieldCell"; title = "BACKGROUND"; ObjectID = "uqb-mz-A22"; */
+"uqb-mz-A22.title" = "Nền";
+
+/* Class = "NSTextFieldCell"; title = "Subtitle style options may break ASS rendering, and some of them will be disabled depending on subtitle type."; ObjectID = "wBD-pZ-Bvu"; */
+"wBD-pZ-Bvu.title" = "Tuỳ chỉnh phụ đề có thể làm hỏng phụ đề dạng ASS, và một số phụ đề sẽ bị tắt.";
+
+/* Class = "NSTextFieldCell"; title = "Audio track:"; ObjectID = "x39-62-7KC"; */
+"x39-62-7KC.title" = "Âm thanh:";
+
+/* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "xfX-wr-DTJ"; */
+"xfX-wr-DTJ.title" = "+5s";
+
+/* Class = "NSTextFieldCell"; title = "+5s"; ObjectID = "Kt8-Kg-i2O"; */
+"Kt8-Kg-i2O.title" = "+5s";
+
+/* Class = "NSTextFieldCell"; title = "Equalizer"; ObjectID = "zcD-Tg-7Oi"; */
+"zcD-Tg-7Oi.title" = "Bộ chỉnh âm:";
+
+/* Class = "NSTextFieldCell"; title = "Hardware Decoding"; ObjectID = "rw1-Qb-0RV"; */
+"rw1-Qb-0RV.title" = "Bộ giải mã phần cứng";
+
+/* Class = "NSTextFieldCell"; title = "Deinterlace"; ObjectID = "eqd-nF-8ff"; */
+"eqd-nF-8ff.title" = "Khử nhoè";
+
+/* Class = "NSTextFieldCell"; title = "HDR"; ObjectID = "UW4-by-XRS"; */
+"UW4-by-XRS.title" = "Chế độ HDR";
+
+/* Class = "NSMenuItem"; title = "Save the current EQ as a preset…"; ObjectID = "sE0-LN-T8i"; */
+"sE0-LN-T8i.title" = "Lưu EQ hiện tại thành một preset…";
+
+/* Class = "NSMenuItem"; title = "Rename the current EQ preset…"; ObjectID = "2tD-0L-UUs"; */
+"2tD-0L-UUs.title" = "Đổi tên preset EQ hiện tại…";
+
+/* Class = "NSMenuItem"; title = "Remove the current EQ preset"; ObjectID = "dvI-Rj-7qF"; */
+"dvI-Rj-7qF.title" = "Xóa preset EQ hiện tại";
+
+/* Class = "NSMenuItem"; title = "Manual"; ObjectID = "LPh-nJ-GjN"; */
+"LPh-nJ-GjN.title" = "Manual";

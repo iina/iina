@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "Körbevágás";
+"crop.w" = "Szélesség (alapértelmezett: videó szélessége)";
+"crop.h" = "Magasság (alapértelmezett: videó magassága)";
+"crop.x" = "Középpont X (alapértelmezett: középen)";
+"crop.y" = "Középpont Y (alapértelmezett: középen)";
+
+"expand" = "Kibontás";
+"expand.w" = "Szélesség (alapértelmezett: videó szélessége)";
+"expand.h" = "Magasság (alapértelmezett: videó magassága)";
+"expand.x" = "Középpont X (alapértelmezett: középen)";
+"expand.y" = "Középpont Y (alapértelmezett: középen)";
+"expand.aspect" = "Kiterjesztés megfelelő méretarányhoz (például: 4/3)";
+"expand.round" = "Felfele kerekít, hogy oszthat legyen ezzel az értékkel";
+
+"sharpen" = "Élesítés";
+"sharpen.msize" = "Mátrix méret";
+"sharpen.amount" = "Mennyiség";
+
+"blur" = "Elmosódás";
+"blur.msize" = "Mátrix méret";
+"blur.amount" = "Mennyiség";
+
+"delogo" = "Logó eltávolító";
+"delogo.w" = "Szélesség";
+"delogo.h" = "Magasság";
+"delogo.x" = "Kezdőpont X";
+"delogo.y" = "Kezdőpont Y";
+
+"negative" = "Negatív";
+
+"vflip" = "Fordítás";
+"hflip" = "Tükrözés";
+
+"lut3d" = "3D LUT";
+"lut3d.file" = "Fájl elérési útvonala (A beviteli mezőre is húzható)";
+"lut3d.interp" = "Interpolációs mód";
+
+"custom_mpv" = "Személyreszabott (mpv)";
+"custom_mpv.name" = "Szűrő neve";
+"custom_mpv.string" = "Szűrési érték";
+
+"custom_ffmpeg" = "Személyreszabott (FFmpeg)";
+"custom_ffmpeg.name" = "Szűrő neve";
+"custom_ffmpeg.string" = "Szűrési érték";

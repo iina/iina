@@ -1,0 +1,55 @@
+/*
+  FilterPresets.strings
+  iina
+
+  Created by lhc on 25/8/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+/* It's optional to localize descriptions for each parameter! */
+
+
+
+"crop" = "كېسىش";
+"crop.w" = "كەڭلىكى (سۈكۈتتە: سىن كەڭلىكى)";
+"crop.h" = "ئېگىزلىكى (سۈكۈتتە: سىن ئېگىزلىكى)";
+"crop.x" = "X مەنبە (سۈكۈتتە: مەركىزى)";
+"crop.y" = "Y مەنبە (سۈكۈتتە: مەركىزى)";
+
+"expand" = "كېڭەيتىش";
+"expand.w" = "كەڭلىكى (سۈكۈتتە: سىن كەڭلىكى)";
+"expand.h" = "ئېگىزلىكى (سۈكۈتتە: سىن ئېگىزلىكى)";
+"expand.x" = "X مەنبە (سۈكۈتتە: مەركىزى)";
+"expand.y" = "Y مەنبە (سۈكۈتتە: مەركىزى)";
+"expand.aspect" = "مۇۋاپىق كېڭەيتىش (مەسىلەن: 4\\3)";
+"expand.round" = "بۆلۈنۈشچان قىلىپ پۈتۈنلەش";
+
+"sharpen" = "ئۆتكۈرلەشتۈرۈش";
+"sharpen.msize" = "ماترىكىس چوڭلۇقى";
+"sharpen.amount" = "مىقدارى";
+
+"blur" = "غۇۋالىشىش";
+"blur.msize" = "ماترىكىس چوڭلۇقى";
+"blur.amount" = "مىقدارى";
+
+"delogo" = "سۈزۈش";
+"delogo.w" = "كەڭلىكى";
+"delogo.h" = "ئېگىزلىكى";
+"delogo.x" = "X مەنبە";
+"delogo.y" = "Y مەنبە";
+
+"negative" = "ئىنكار";
+
+"vflip" = "ئېتىش";
+"hflip" = "ئەينەك";
+
+"lut3d" = "3D رەڭ جەدۋىلى";
+"lut3d.file" = "ھۆججەت ئادرېسى (كىرگۈزۈش رامكىسىغا سۆرەپ تاشلاپ قويسىڭىزمۇ بولىدۇ)";
+"lut3d.interp" = "كاندۇك تولدۇرۇش ھالىتى";
+
+"custom_mpv" = "خاس تەڭشەك (mvp)";
+"custom_mpv.name" = "سۈزگۈچ نامى";
+"custom_mpv.string" = "سۈزگۈچ قىممىتى";
+
+"custom_ffmpeg" = "خاس تەڭشەك (FFmpeg)";
+"custom_ffmpeg.name" = "سۈزگۈچ نامى";
+"custom_ffmpeg.string" = "سۈزگۈچ قىممىتى";

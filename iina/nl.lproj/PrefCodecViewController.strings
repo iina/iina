@@ -1,0 +1,146 @@
+/* Class = "NSMenuItem"; title = "Auto (Copy)"; ObjectID = "0DK-uZ-duj"; */
+"0DK-uZ-duj.title" = "Automatisch (via kopie)";
+
+/* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "2yO-To-el7"; */
+"2yO-To-el7.title" = "Standaard: 0 (automatisch)";
+
+/* Class = "NSTextFieldCell"; title = "Maximum volume:"; ObjectID = "44m-ge-naq"; */
+"44m-ge-naq.title" = "Maximale volume:";
+
+/* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "50C-1R-wlJ"; */
+"50C-1R-wlJ.title" = "Aantal threads:";
+
+/* Class = "NSMenuItem"; title = "Strong"; ObjectID = "6vc-ad-xaq"; */
+"6vc-ad-xaq.title" = "Sterk";
+
+/* Class = "NSTextFieldCell"; title = "Gapless audio:"; ObjectID = "8Fa-ft-1tC"; */
+"8Fa-ft-1tC.title" = "Naadloze audio:";
+
+/* Class = "NSButtonCell"; title = "Force dedicated GPU"; ObjectID = "YUr-aJ-xfC"; */
+"YUr-aJ-xfC.title" = "Forceer toegewijde GPU";
+
+/* Class = "NSTextFieldCell"; title = "Default: 0 (Auto)"; ObjectID = "bxW-np-SGm"; */
+"bxW-np-SGm.title" = "Standaard: 0 (automatisch)";
+
+/* Class = "NSTextFieldCell"; title = "(100-1000)"; ObjectID = "cJP-ep-847"; */
+"cJP-ep-847.title" = "(100-1000)";
+
+/* Class = "NSButtonCell"; title = "Initial volume:"; ObjectID = "g4c-vG-URh"; */
+"g4c-vG-URh.title" = "Aanvankelijk volume:";
+
+/* Class = "NSTextFieldCell"; title = "Always use the dedicated GPU for rendering (if exists). This can improve performance but may result in poor battery life."; ObjectID = "gCv-sJ-uQJ"; */
+"gCv-sJ-uQJ.title" = "Gebruik altijd de toegewijde GPU voor het renderen (als deze bestaat). Dit kan de prestaties verbeteren, maar kan de levensduur van de batterij verminderen.";
+
+/* Class = "NSTextFieldCell"; title = "Video:"; ObjectID = "m5P-5f-5uo"; */
+"m5P-5f-5uo.title" = "Video:";
+
+/* Class = "NSMenuItem"; title = "Weak"; ObjectID = "nsT-r3-brW"; */
+"nsT-r3-brW.title" = "Zwak";
+
+/* Class = "NSTextFieldCell"; title = "Hardware decoder:"; ObjectID = "nwg-2K-G2G"; */
+"nwg-2K-G2G.title" = "Hardware-acceleratie:";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "rFu-rL-EJC"; */
+"rFu-rL-EJC.title" = "Uitgeschakeld";
+
+/* Class = "NSTextFieldCell"; title = "Preferred audio device:"; ObjectID = "sLR-vV-xn2"; */
+"sLR-vV-xn2.title" = "Voorkeursapparaat voor audio:";
+
+/* Class = "NSTextFieldCell"; title = "Audio:"; ObjectID = "sV5-dL-MUt"; */
+"sV5-dL-MUt.title" = "Audio:";
+
+/* Class = "NSMenuItem"; title = "Auto"; ObjectID = "tAQ-oU-1AJ"; */
+"tAQ-oU-1AJ.title" = "Automatisch";
+
+/* Class = "NSTextFieldCell"; title = "Number of threads:"; ObjectID = "tO4-pw-2W9"; */
+"tO4-pw-2W9.title" = "Aantal threads:";
+
+/* Class = "NSTextFieldCell"; title = "S/PDIF output:"; ObjectID = "up6-6A-4sn"; */
+"up6-6A-4sn.title" = "S/PDIF-uitvoer:";
+
+/* Class = "NSTextFieldCell"; title = "Preferred language:"; ObjectID = "wjt-O6-KbC"; */
+"wjt-O6-KbC.title" = "Voorkeurstaal:";
+
+/* Class = "NSButtonCell"; title = "Load ICC profile"; ObjectID = "3g4-jW-uJd"; */
+"3g4-jW-uJd.title" = "ICC-profiel laden";
+
+/* Class = "NSTextFieldCell"; title = "Load the ICC profile for current display and use it to transform video RGB to screen output. (Only for SDR mode)"; ObjectID = "M2M-of-gjd"; */
+"M2M-of-gjd.title" = "Laad het ICC-profiel voor huidige weergave en gebruik het om video RGB om te zetten naar schermuitvoer. (Alleen voor SDR-modus)";
+
+/* Class = "NSButtonCell"; title = "Enable HDR support"; ObjectID = "R7Z-9c-vPJ"; */
+"R7Z-9c-vPJ.title" = "HDR-ondersteuning inschakelen";
+
+/* Class = "NSTextFieldCell"; title = "Enable HDR mode by default when playing HDR videos."; ObjectID = "ZgQ-bc-yEE"; */
+"ZgQ-bc-yEE.title" = "HDR-modus standaard inschakelen bij het afspelen van HDR-video's.";
+
+/* Class = "NSButtonCell"; title = "Enable tone mapping"; ObjectID = "a5Y-gU-JTj"; */
+"a5Y-gU-JTj.title" = "Tone mapping inschakelen";
+
+/* Class = "NSTextFieldCell"; title = "Enable tone mapping images onto the display"; ObjectID = "mNn-cb-IVw"; */
+"mNn-cb-IVw.title" = "Tone mapping afbeeldingen inschakelen voor op het scherm";
+
+/* Class = "NSTextFieldCell"; title = "Target peak:"; ObjectID = "xVk-OA-kOf"; */
+"xVk-OA-kOf.title" = "Doel piek:";
+
+/* Class = "NSTextFieldCell"; title = "nits"; ObjectID = "baO-xy-7hD"; */
+"baO-xy-7hD.title" = "nits";
+
+/* Class = "NSTextFieldCell"; title = "Measured peak brightness of the display. If set to 0, IINA detects this value. If detection fails, IINA sets the target peak to 400."; ObjectID = "aTt-aZ-rjK"; */
+"aTt-aZ-rjK.title" = "Gemeten helderheid van het scherm. Indien ingesteld op 0, detecteert IINA deze waarde. Als detectie mislukt, stelt IINA de doel piek in op 400.";
+
+/* Class = "NSTextFieldCell"; title = "Algorithm:"; ObjectID = "qzI-rq-PqO"; */
+"qzI-rq-PqO.title" = "Algoritme:";
+
+/* Class = "NSTextFieldCell"; title = "Algorithm to use for tone mapping images onto the display."; ObjectID = "szA-8r-plt"; */
+"szA-8r-plt.title" = "Algoritme om te gebruiken voor tone mapping afbeeldingen voor op het scherm.";
+
+/* Class = "NSTextFieldCell"; title = "ReplayGain:"; ObjectID = "gfq-nW-dDu"; */
+"gfq-nW-dDu.title" = "ReplayGain:";
+
+/* Class = "NSTextFieldCell"; title = "Gain adjustment:"; ObjectID = "ZRL-b0-k1L"; */
+"ZRL-b0-k1L.title" = "Versterking aanpassing:";
+
+/* Class = "NSMenuItem"; title = "No adjustment"; ObjectID = "k7b-6o-lCK"; */
+"k7b-6o-lCK.title" = "Geen aanpassing";
+
+/* Class = "NSMenuItem"; title = "Disabled"; ObjectID = "ti2-JH-nXX"; */
+"ti2-JH-nXX.title" = "Uitgeschakeld";
+
+/* Class = "NSMenuItem"; title = "Track gain"; ObjectID = "w6E-lw-g7g"; */
+"w6E-lw-g7g.title" = "Nummer versterking";
+
+/* Class = "NSMenuItem"; title = "Album gain"; ObjectID = "ZJJ-1o-ZGD"; */
+"ZJJ-1o-ZGD.title" = "Album versterking";
+
+/* Class = "NSTextFieldCell"; title = "Adjust volume gain according to ReplayGain values stored in the file metadata."; ObjectID = "y61-Ah-c92"; */
+"y61-Ah-c92.title" = "Pas volume versterking aan volgens ReplayGain waarden opgeslagen in de bestandsmetadata.";
+
+/* Class = "NSTextFieldCell"; title = "Preamp gain:"; ObjectID = "9Q0-hw-PdU"; */
+"9Q0-hw-PdU.title" = "Preamp versterking:";
+
+/* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "Bew-Pv-igg"; */
+"Bew-Pv-igg.title" = "dB";
+
+/* Class = "NSTextFieldCell"; title = "Pre-amplification gain to apply to the ReplayGain gain."; ObjectID = "rIW-XP-zGZ"; */
+"rIW-XP-zGZ.title" = "Voorversterking die moet worden toegepast op de ReplayGain versterking.";
+
+/* Class = "NSButtonCell"; title = "Allow the volume gain to clip"; ObjectID = "J3e-oT-fy9"; */
+"J3e-oT-fy9.title" = "De volumeversterking toestaan om te clippen";
+
+/* Class = "NSTextFieldCell"; title = "If this option is not enabled, clipping will be prevented by lowering the gain."; ObjectID = "HQV-tY-NMj"; */
+"HQV-tY-NMj.title" = "Als deze optie niet is ingeschakeld, wordt clippen voorkomen door de versterking te verlagen.";
+
+/* Class = "NSTextFieldCell"; title = "Fallback:"; ObjectID = "fOz-6g-MhS"; */
+"fOz-6g-MhS.title" = "Fallback:";
+
+/* Class = "NSTextFieldCell"; title = "dB"; ObjectID = "ovT-D3-3jS"; */
+"ovT-D3-3jS.title" = "dB";
+
+/* Class = "NSTextFieldCell"; title = "Gain to apply if the file has no ReplayGain tags."; ObjectID = "m2n-yd-a4n"; */
+"m2n-yd-a4n.title" = "Versterking om toe te passen wanneer het bestand geen ReplayGain tags heeft.";
+
+/* Class = "NSTextFieldCell"; title = "Audio driver:"; ObjectID = "Zco-Ba-Idk"; */
+"Zco-Ba-Idk.title" = "Audio stuurprogramma:";
+
+/* Class = "NSTextFieldCell"; title = "AVFoundation is a new, experimental audio driver offering Spatial Audio support. However, you may encounter some issues when using AVFoundation, such as audio delays."; ObjectID = "2Md-pv-gSi"; */
+"2Md-pv-gSi.title" = "AVFoundation is een nieuw, experimenteel audiostuurprogramma die Spatial Audio ondersteuning aanbiedt. Echter kan je problemen ondervinden bij het gebruik van AVFoundation, zoals audiovertragingen.";

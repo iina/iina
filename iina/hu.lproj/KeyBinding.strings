@@ -1,0 +1,118 @@
+/*
+  KeyBinding.strings
+  iina
+
+  Created by lhc on 4/2/2017.
+  Copyright © 2017 lhc. All rights reserved.
+*/
+
+"cmd.ignore" = "Mellőzés";
+"cmd.seek" = "Ugrás";
+"cmd.revert-seek" = "Ugrás visszavonása";
+"cmd.set" = "Beállít";
+"cmd.cycle" = "Ciklus";
+"cmd.cycle-values" = "Ciklus ebben:";
+"cmd.add" = "Módosítás";
+"cmd.multiply" = "Szorzás";
+"cmd.frame-step" = "Következő kocka";
+"cmd.frame-back-step" = "Előző kocka";
+"cmd.ab-loop" = "A-B ciklus";
+"cmd.sub-seek" = "Felirat keresés";
+"cmd.playlist-next" = "Következő média";
+"cmd.playlist-prev" = "Előző média";
+"cmd.playlist-move" = "Lejátszási listaelem mozgatása";
+"cmd.playlist-clear" = "Lejátszási lista törlése";
+"cmd.playlist-remove" = "Aktuális eltávolítása";
+"cmd.playlist-shuffle" = "Véletlenszerű";
+"cmd.write-watch-later-config" = "Lejátszási előzmények felvétele";
+"cmd.stop" = "Stop";
+"cmd.quit" = "Kilépés";
+"cmd.quit-watch-later" = "Kilépés (haladás mentése)";
+"cmd.screenshot" = "Képernyőkép";
+"cmd.screenshot-to-file" = "Képernyőkép fájlba";
+"cmd.loadfile" = "Fájl betöltése";
+"cmd.loadlist" = "Lejátszási lista betöltése";
+"cmd.run" = "Futtatás";
+
+"iina.flip" = "Fordítás";
+"iina.mirror" = "Tükrözés";
+
+"iina.toggle-pip" = "Kép a képben";
+"iina.toggle-music-mode" = "Zene Mód";
+"iina.open-file" = "Fájl megnyitása";
+"iina.open-url" = "URL megnyitása";
+"iina.video-panel" = "Videó panel";
+"iina.audio-panel" = "Hang panel";
+"iina.sub-panel" = "Felirat panel";
+"iina.playlist-panel" = "Lejátszási lista panel";
+"iina.chapter-panel" = "Fejezet panel";
+"iina.bigger-window" = "Nagyobb Ablak";
+"iina.smaller-window" = "Kisebb Ablak";
+"iina.fit-to-screen" = "Képernyőhöz igazít";
+"iina.toggle-flip" = "Fordítás";
+"iina.toggle-mirror" = "Tükrözés";
+"iina.save-playlist" = "Az aktuális lejátszási lista mentése";
+"iina.show-current-file-in-finder" = "Jelenlegi fájl megjelenítése a Finderben";
+"iina.delete-current-file" = "Aktuális fájl törlése";
+"iina.delete-current-file-hard" = "Aktuális fájl törlése kukába mozgatás nélkül";
+"iina.find-online-subs" = "Online feliratok keresése";
+"iina.save-downloaded-sub" = "Letöltött felirat mentése";
+
+"yes" = "Igen";
+"no" = "Nem";
+"to" = "erre:";
+"by" = "ennyivel:";
+"in" = "ezen belül:";
+"add" = "növelés";
+"minus" = "csökkentés";
+"forward" = "előre";
+"backward" = "hátra";
+"seek-to" = "eddig:";
+
+"relative" = "mp";
+"absolute" = "mp";
+"absolute-percent" = "%";
+"relative-percent" = "%";
+"relative+exact" = "mp (pontos)";
+"relative-percent+exact" = "% (pontos)";
+"absolute+keyframe" = "mp (kulcs képkocka)";
+"absolute-percent+keyframe" = "% (kulcs képkocka)";
+
+"opt.pause" = "Szünet";
+"opt.speed" = "Sebesség";
+
+"opt.window-scale" = "Ablak skála";
+
+"opt.video" = "Videsáv";
+"opt.video-aspect-override" = "Videó képarány";
+"opt.contrast" = "Kontraszt";
+"opt.brightness" = "Fényerő";
+"opt.gamma" = "Gamma";
+"opt.saturation" = "Telítettség";
+"opt.deinterlace" = "Váltottsoros képszűrő";
+
+"opt.audio" = "Hangsáv";
+"opt.volume" = "Hangerő";
+"opt.mute" = "Némítás";
+"opt.audio-delay" = "Hangkésleltetés";
+
+"opt.sub" = "Feliratsáv";
+"opt.sub-delay" = "Felirat késleltetés";
+"opt.sub-pos" = "Feliratozás helyzete";
+"opt.sub-scale" = "Felirat skála";
+"opt.sub-visibility" = "Felirat láthatság";
+"opt.secondary-sub-visibility" = "Másodlagos felirat láthatósága";
+"opt.sub-ass-style-override" = "ASS stílus felülírás";
+
+"opt.fullscreen" = "Teljes képernyő";
+"opt.ontop" = "Legfelül maradjon";
+
+"opt.chapter" = "Fejezet";
+
+"read.set" = "Beállítás: {{property}} erre: {{value}}";
+"read.add" = "{{property}} {{value}}";
+"read.multiply" = "Szorzás {{property}} ennyivel: {{factor}}x";
+"read.cycle" = "Ismétlés {{property}}{{#dir_down}} Lefele{{/dir_down}}";
+"read.cycle-values" = "Ismétlés {{property}} ebben: ({{{values}}})";
+"read.seek" = "Ugrás {{#fwd}}előre{{/fwd}}{{#bwd}}hátra{{/bwd}}{{#abs}}ide:{{/abs}} {{value}}{{#sec}}mp{{/sec}}{{#per}}%{{/per}}{{#exact}}(pontosan){{/exact}}{{#kf}}(kulcs képkocka){{/kf}}";
+"read.sub-seek" = "Ugrás ide: {{#skip_1}}következő{{/skip_1}}{{#skip_-1}}előző{{/skip_-1}} felirat";

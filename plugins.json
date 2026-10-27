@@ -224,7 +224,7 @@
   {
     "name": "Whisper AutoSub (Local)",
     "url": "https://github.com/Mo-Shakib/iina-whisper-autosub-local",
-    "desc": "Generate and load English subtitles offline using whisper.cpp and FFmpeg.",
+    "desc": "Generate and load English subtitles locally with automatic Whisper model setup.",
     "id": "io.bento.iina-whisper-autosub"
   }
 ]

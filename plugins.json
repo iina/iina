@@ -132,6 +132,12 @@
     "id": "io.github.thepushkarp.iina-metadata"
   },
   {
+    "name": "MilkDrop Visualizer",
+    "url": "https://github.com/VicFrance/iina-milkdrop-visualizer",
+    "desc": "MilkDrop music visualizations — 1,927 unique presets in a dedicated window that opens automatically when IINA plays audio files.",
+    "id": "com.vic.iina-milkdrop-visualizer"
+  },
+  {
     "name": "Multiple Clips",
     "url": "https://github.com/karthisnk/multi-cutter-iina",
     "desc": "multiple clip of a video using ffmpeg, with Batch Clipping, Vertical Clip, Format Selection, Preview Clip.",

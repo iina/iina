@@ -41,7 +41,7 @@ class VideoView: NSView {
 
   lazy var subsystem = Logger.makeSubsystem("video\(player.playerNumber)", ["film"])
 
-  static let SRGB = CGColorSpaceCreateDeviceRGB()
+  static let SRGB = CGColorSpace(name: CGColorSpace.sRGB)!
 
   // record the last mouse up event which lands on video view
   var lastEventId: Int?
@@ -349,6 +349,7 @@ class VideoView: NSView {
   ///     enabled by setting `USE_ICC_PROFILE_AUTO` in Xcode settings to test a proposed fix to `libmpv`.
   private func setICCProfile() {
     let screenColorSpace = player.mainWindow.window?.screen?.colorSpace
+    var usesDisplayICC = false
     if !Preference.bool(for: .loadIccProfile) {
       logHDR("Not using ICC profile due to user preference")
 #if USE_ICC_PROFILE_AUTO
@@ -365,6 +366,7 @@ class VideoView: NSView {
         // that parameter be set in the render context when icc-profile-auto is in use.
         videoLayer.setRenderICCProfile(screenColorSpace)
         player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, true)
+        usesDisplayICC = true
       } else {
         logHDR("Failed find ICC profile to load", level: .error)
         player.mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
@@ -372,7 +374,7 @@ class VideoView: NSView {
 #else
       if let iccProfilePath = findProfilePath() {
         logHDR("Loading ICC profile: \(iccProfilePath)")
-        player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath)
+        usesDisplayICC = player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, iccProfilePath) >= 0
       } else {
         logHDR("Failed to find ICC profile to load", level: .error)
         player.mpv.setString(MPVOption.GPURendererOptions.iccProfile, "")
@@ -380,7 +382,9 @@ class VideoView: NSView {
 #endif
     }
 
-    let sdrColorSpace = screenColorSpace?.cgColorSpace ?? VideoView.SRGB
+    // Without display ICC conversion, render to sRGB and tag the layer with the
+    // same color space so ColorSync can convert it to the display's profile.
+    let sdrColorSpace = usesDisplayICC ? (screenColorSpace?.cgColorSpace ?? VideoView.SRGB) : VideoView.SRGB
     if videoLayer.colorspace != sdrColorSpace {
       let name: String = {
         if let name = sdrColorSpace.name { return name as String }
@@ -389,11 +393,12 @@ class VideoView: NSView {
       }()
       log("Setting layer color space to \(name)")
       videoLayer.colorspace = sdrColorSpace
-      videoLayer.wantsExtendedDynamicRangeContent = false
-      player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, "auto")
-      player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, "auto")
-      player.mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, false)
     }
+    // Reset output options even when the layer already has the SDR color space.
+    videoLayer.wantsExtendedDynamicRangeContent = false
+    player.mpv.setString(MPVOption.GPURendererOptions.targetTrc, usesDisplayICC ? "auto" : "srgb")
+    player.mpv.setString(MPVOption.GPURendererOptions.targetPrim, usesDisplayICC ? "auto" : "bt.709")
+    player.mpv.setFlag(MPVOption.Screenshot.screenshotTagColorspace, false)
   }
 
   // MARK: - Error Logging
@@ -479,7 +484,7 @@ extension VideoView {
     let edrEnabled: Bool?
     if isHDRVideo() {
       edrEnabled = requestEdrMode()
-      setToneMappingForHDR()
+      setToneMappingForHDR(usingHDRDisplay: edrEnabled == true)
     } else {
       edrEnabled = false
       setToneMappingForSDR()
@@ -568,7 +573,7 @@ extension VideoView {
   /// - [tone-mapping](https://mpv.io/manual/stable/#options-tone-mapping)
   ///
   /// Otherwise these options will be set to their default values.
-  private func setToneMappingForHDR() {
+  private func setToneMappingForHDR(usingHDRDisplay: Bool) {
     guard let mpv = player.mpv else { return }
     guard Preference.bool(for: .enableToneMapping) else {
       // Reset options to their defaults.
@@ -580,12 +585,14 @@ extension VideoView {
     var targetPeak = "auto"
     if Preference.bool(for: .enableToneMappingTargetPeakOverride) {
       targetPeak = String(Preference.integer(for: .toneMappingTargetPeakOverride))
-    } else {
+    } else if usingHDRDisplay {
       // In auto mode mpv will use the target display's peak brightness, if available. Otherwise
       // mpv will apply an appropriate value based on the transfer characteristics of the display.
       // However, mpv is currently missing code for querying the display under macOS. So IINA
       // attempts to determine peak brightness of the display itself and only uses mpv auto mode
       // if unable to obtain the display's brightness.
+      // HDR-to-SDR playback must retain the SDR target instead of using the
+      // display's HDR peak, which would suppress the required tone mapping.
       if let displayInfo = CoreDisplay_DisplayCreateInfoDictionary(currentDisplay!)?.takeRetainedValue()
           as? [String: AnyObject] {
         logHDR("Successfully obtained information about the display")

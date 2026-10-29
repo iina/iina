@@ -183,7 +183,9 @@ class Assrt {
 
     func search(_ query: String) -> Promise<[Subtitle]> {
       return Promise { resolver in
-        Just.post(searchApi, params: ["q": query], headers: header, asyncCompletionHandler: { result in
+        // The query is a video file name, so let Assrt drop the release group and codec info.
+        let params: [String: Any] = ["q": query, "is_file": 1, "no_muxer": 1]
+        Just.post(searchApi, params: params, headers: header, asyncCompletionHandler: { result in
           guard let json = result.json as? [String: Any] else {
             resolver.reject(Error.networkError)
             return

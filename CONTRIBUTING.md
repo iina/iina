@@ -6,10 +6,16 @@ Thanks for your interest in contributing to IINA!
 
 1. **Check the [issue tracker](https://github.com/iina/iina/issues)** to avoid duplicate work and get community input before coding.
 2. **Open a Design Proposal issue** to discuss your idea:
-   - **Required** for UI changes (e.g., sidebar items, toolbar buttons, layout). Including a mockup is recommended.
+   - **Required** for UI changes (e.g., sidebar items, toolbar buttons, layout).
    - **Recommended** if the change contains other interactive elements (e.g., new preferences, dialogs) or is large (spanning multiple files, affecting multiple components).
    - **Optional** for small, self-contained fixes.
-3. **Link your design proposal** in your pull request description. PRs without one (when required) may be closed without review.
+   
+   Please submit one design proposal for one problem. The design proposal should contain:
+   - What problem does it solve.
+   - How does the design work with other parts of IINA, such as different OSC layouts, full screen, music mode, etc.
+   - High-level idea of how you plan to implement this.
+   - A mockup, if possible.
+3. **Link your design proposal** in your pull request description. PRs without one (when required) may be closed without review. It is recommended to submit a design proposal before writing code. A PR will not be reviewed until the discussion in the proposal issue is completed.
 
 By submitting a pull request,
 - You give the IINA team permission to take over and modify your code at any time,
@@ -44,7 +50,9 @@ AI tools are permitted, but low-quality AI-generated code will likely be rejecte
 - You must be responsible for confirming that the code complies with IINA's GPLv3 license.
 - Disclose the AI usage in the PR description.
   Failure to do while submitting obviously AI-generated code may result in your PR being closed without review.
-- Keep the PR description concise and justify your design choices.
+- Keep the PR description concise.
+  You must understand what the AI wrote and communicate the high-level design choices effectively in human language.
+  Failure to do so, including replying with AI only, will likely cause your PR to be closed directly.
 - Test thoroughly and remove excessive comments.
 
 ## Design Guidelines and Code Conventions
@@ -60,6 +68,7 @@ AI tools are permitted, but low-quality AI-generated code will likely be rejecte
 - Add comments only when necessary.
 - In your Xcode settings, use 2-space indentation and remove trailing spaces automatically.
 - No fixed style guide, but we may request changes for consistency with surrounding code.
+- Do not add any tests.
 
 ## Architecture
 

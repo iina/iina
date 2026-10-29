@@ -12,10 +12,10 @@
     "id": "crown.gridness.iina.anilist-sync"
   },
   {
-    "name": "Anime4K",
-    "url": "https://github.com/yorkyang2333/iina-anime4k",
-    "desc": "Apply Anime4K shaders for real-time anime upscaling.",
-    "id": "com.yorkyang2333.anime4k"
+    "name": "AnimeEnhancer",
+    "url": "https://github.com/yorkyang2333/iina-AnimeEnhancer",
+    "desc": "Anime Enhancement Plugin for IINA",
+    "id": "com.yorkyang2333.AnimeEnhancer"
   },
   {
     "name": "Auto Skip",
@@ -48,6 +48,12 @@
     "id": "io.github.niyaro.iina-clickable-subtitles"
   },
   {
+    "name": "ContentPlay",
+    "url": "https://github.com/Arnav12S/iina-contentplay",
+    "desc": "Search movies/series, resolve instant Real-Debrid streams via Stremio, then play a whole season as a playlist.",
+    "id": "com.arnav.contentplay"
+  },
+  {
     "name": "Danmaku",
     "url": "https://github.com/xjbeta/iina-plugin-danmaku",
     "desc": "Overlay comments/danmaku on video.",
@@ -66,6 +72,12 @@
     "id": "com.fxd0h.detached-playlist"
   },
   {
+    "name": "Emby Browser",
+    "url": "https://github.com/fjkfwz/iina-emby",
+    "desc": "Browse and play media from Emby servers with subtitle and playback progress sync.",
+    "id": "com.ghotriw.iina-emby"
+  },
+  {
     "name": "Episode Info",
     "url": "https://github.com/Zain-Imam/iina-episode-info",
     "desc": "TMDB episode/movie info overlay on pause, with built-in subtitle search.",
@@ -76,6 +88,12 @@
     "url": "https://github.com/qktechies/iina-plugin-file-viewer",
     "desc": "bookmark folders, browse directory contents, and play video files directly within IINA.",
     "id": "com.qkong.iina-plugin-file-viewer"
+  },
+  {
+    "name": "HDR Screenshot",
+    "url": "https://github.com/bbeny123/iina-hdr-screenshot",
+    "desc": "FFmpeg-powered HDR to SDR screenshot capture.",
+    "id": "io.iina.hdr-screenshot"
   },
   {
     "name": "Hold to Speed",
@@ -106,6 +124,18 @@
     "url": "https://git.notfire.cc/notfire/iina-listenbrainz",
     "desc": "Scrobble your music to ListenBrainz.",
     "id": "cc.notfire.iina-listenbrainz"
+  },
+  {
+    "name": "Metadata",
+    "url": "https://github.com/thepushkarp/iina-metadata",
+    "desc": "Identify movies and TV episodes via TMDB/TVmaze and save their metadata and artwork into MKV/MP4 files and Kodi/Infuse-style sidecars.",
+    "id": "io.github.thepushkarp.iina-metadata"
+  },
+  {
+    "name": "MilkDrop Visualizer",
+    "url": "https://github.com/VicFrance/iina-milkdrop-visualizer",
+    "desc": "MilkDrop music visualizations — 1,927 unique presets in a dedicated window that opens automatically when IINA plays audio files.",
+    "id": "com.vic.iina-milkdrop-visualizer"
   },
   {
     "name": "Multiple Clips",
@@ -150,6 +180,12 @@
     "id": "com.recorder.iina-plugin"
   },
   {
+    "name": "Save Subtitles",
+    "url": "https://github.com/bbeny123/iina-save-subs",
+    "desc": "Export and perfectly sync subtitles directly from IINA with precise timing and clean SRT output.",
+    "id": "io.iina.save-subtitles"
+  },
+  {
     "name": "Skip Intro",
     "url": "https://github.com/pparanoiidd/iina-skip-intro",
     "desc": "Detect and skip intros, recaps and credits.",
@@ -174,6 +210,12 @@
     "id": "io.github.fahim.iinatraktscrobbler"
   },
   {
+    "name": "Verba Connect",
+    "url": "https://github.com/s4ysolutions/iina-verba",
+    "desc": "Select a word in the subtitles and press A to add it to your Verba vocabulary.",
+    "id": "solutions.s4y.verba"
+  },
+  {
     "name": "VR2D",
     "url": "https://github.com/fetzu/iina-plugin-vr2d",
     "desc": "Watch 3D VR videos (180°/360°, side-by-side or over-under, equirectangular or fisheye) as a flat 2D image you can pan and zoom. Detects VR sources automatically from file names and container metadata.",
@@ -184,5 +226,11 @@
     "url": "https://github.com/qydxyx/iina-webdav",
     "desc": "Connect to a WebDAV server, browse media, and add files or folders to the current playlist.",
     "id": "com.qydxyx.iina-webdav"
+  },
+  {
+    "name": "Whisper AutoSub (Local)",
+    "url": "https://github.com/Mo-Shakib/iina-whisper-autosub-local",
+    "desc": "Generate and load English subtitles locally with automatic Whisper model setup.",
+    "id": "io.bento.iina-whisper-autosub"
   }
 ]

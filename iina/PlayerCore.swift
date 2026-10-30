@@ -360,6 +360,8 @@ class PlayerCore: NSObject {
   }
 
   func clearPlugins() {
+    // Native menus and developer tools may keep the instances alive after reload.
+    plugins.forEach { $0.unload() }
     pluginMap.removeAll()
     plugins.removeAll()
   }

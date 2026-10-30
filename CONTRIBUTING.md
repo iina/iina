@@ -45,11 +45,12 @@ Do not include translations for languages other than English.
 
 ## AI Usage
 
-AI tools are permitted, but low-quality AI-generated code will likely be rejected. If you use AI:
+AI tools are permitted, but low-quality or pure AI-generated code will likely be rejected. If you use AI:
 
 - You must be responsible for confirming that the code complies with IINA's GPLv3 license.
 - Disclose the AI usage in the PR description.
   Failure to do while submitting obviously AI-generated code may result in your PR being closed without review.
+- If possible, demonstrate your own effort. If you can ask your AI to directly generate a PR, we can do the same, and it would be pointless.
 - Keep the PR description concise.
   You must understand what the AI wrote and communicate the high-level design choices effectively in human language.
   Failure to do so, including replying with AI only, will likely cause your PR to be closed directly.

@@ -26,6 +26,7 @@ import JavaScriptCore
   func getHistory() -> Any
   func getRecentDocuments() -> Any
   func getVersion() -> Any
+  func getTheme() -> [String: Any]
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
@@ -134,6 +135,23 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
       "build": build,
       "mpv": MPVOptionDefaults.shared.mpvVersion
     ]
+  }
+
+  func getTheme() -> [String: Any] {
+    let theme: Preference.Theme = Preference.enum(for: .themeMaterial)
+    let appearance = NSAppearance(iinaTheme: theme) ?? NSApp.effectiveAppearance
+    return [
+      "appearance": appearance.isDark ? "dark" : "light",
+      "accentColor": hexString(of: .controlAccentColor)
+    ]
+  }
+
+  private func hexString(of color: NSColor) -> String {
+    guard let rgb = color.usingColorSpace(.sRGB) else { return "#000000" }
+    let r = Int((rgb.redComponent * 255).rounded())
+    let g = Int((rgb.greenComponent * 255).rounded())
+    let b = Int((rgb.blueComponent * 255).rounded())
+    return String(format: "#%02X%02X%02X", r, g, b)
   }
 }
 

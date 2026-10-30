@@ -125,6 +125,8 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var chapterMenu: NSMenu!
   // Video
   @IBOutlet weak var videoMenu: NSMenu!
+  /// The VR2D commands, appended to the Video menu in code.
+  private var vr2dMenu: VR2DMenuController!
   @IBOutlet weak var quickSettingsVideo: NSMenuItem!
   @IBOutlet weak var cycleVideoTracks: NSMenuItem!
   @IBOutlet weak var videoTrack: NSMenuItem!
@@ -281,6 +283,7 @@ class MenuController: NSObject, NSMenuDelegate {
     // Video menu
 
     videoMenu.delegate = self
+    vr2dMenu = VR2DMenuController(videoMenu: videoMenu, after: rotationMenu)
 
     quickSettingsVideo.action = #selector(MainWindowController.menuShowVideoQuickSettings(_:))
     videoTrackMenu.delegate = self
@@ -534,6 +537,7 @@ class MenuController: NSObject, NSMenuDelegate {
     pictureInPicture?.title = isInPIP ? Constants.String.exitPIP : Constants.String.pip
     miniPlayer.title = player.isInMiniPlayer ? Constants.String.exitMiniPlayer : Constants.String.miniPlayer
     delogo.state = isDelogo ? .on : .off
+    vr2dMenu.refresh()
   }
 
   private func updateAudioMenu() {

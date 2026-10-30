@@ -360,6 +360,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     Logger.log("App launched")
+    SharePlayManager.shared.start()
 
     if !isReady {
       getReady()
@@ -493,6 +494,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
   func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
     Logger.log("App should terminate")
+    SharePlayManager.shared.shutdown()
     isTerminating = true
     MemoryUsage.shared.logUsage("before terminating")
 

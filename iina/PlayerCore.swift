@@ -217,6 +217,12 @@ class PlayerCore: NSObject {
 
   var mpv: MPVController!
 
+  var sharePlayPlayback: SharePlayPlayback?
+  var applyingSharePlayCommand = false
+  var sharePlaySeekCompletion: ((Bool) -> Void)?
+  var sharePlaySeekTarget: Double?
+  var sharePlaySavedOptions: [String: String] = [:]
+
   var receivedEndFileWhileLoading: Bool = false
 
   var plugins: [JavascriptPluginInstance] = []
@@ -396,6 +402,7 @@ class PlayerCore: NSObject {
   // MARK: - Control
 
   private func open(_ url: URL?, shouldAutoLoad: Bool = false) {
+    if routeSharePlay(.blocked) { return }
     guard let url else {
       log("empty file path or url", level: .error)
       return
@@ -535,6 +542,7 @@ class PlayerCore: NSObject {
   ///   - url: URL of the media to open.
   ///   - isNetwork: Whether the media must be streamed over the network.
   private func openMainWindow(path: String, url: URL, isNetwork: Bool) {
+    if routeSharePlay(.blocked) { return }
     log("Opening \(path) in main window")
     info.currentURL = url
     info.mpvMd5 = Utility.mpvWatchLaterMd5(url, ignorePathInWatchLaterConfig)
@@ -914,6 +922,7 @@ class PlayerCore: NSObject {
   ///     asleep. Thus `setFlag` **must not** be called if the `mpv` core is idle or stopping. See issue
   ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
+    if routeSharePlay(.pause(true)) { return }
     guard info.state.active else { return }
     log("Pausing playback")
     mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
@@ -923,6 +932,7 @@ class PlayerCore: NSObject {
   /// - Important: Although primary responsibility for ensuring the display link is running when playback is in progress belongs to
   ///     the `pauseChanged` method, this method calls `displayActive` to provide more time for the display link to start up.
   func resume() {
+    if routeSharePlay(.pause(false)) { return }
     log("Resuming playback")
     mainWindow.videoView.displayActive()
     // Restart playback when reached EOF
@@ -950,6 +960,7 @@ class PlayerCore: NSObject {
   ///     and call this method again to continue the process of stopping. It is important to stop the background task as if it is still
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
+    SharePlayManager.shared.playerStopped(self)
     guard info.state != .shutDown else { return }
     savePlaybackPosition()
 
@@ -992,6 +1003,7 @@ class PlayerCore: NSObject {
   }
 
   func seek(percent: Double, forceExact: Bool = false) {
+    if let duration = info.videoDuration?.second, routeSharePlay(.seek(duration * percent / 100)) { return }
     var percent = percent
     // mpv will play next file automatically when seek to EOF.
     // We clamp to a Range to ensure that we don't try to seek to 100%.
@@ -1006,6 +1018,7 @@ class PlayerCore: NSObject {
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
+    if sharePlayPlayback != nil, routeSharePlay(.seek(sharePlaySnapshot.position + relativeSecond)) { return }
     switch option {
 
     case .relative:
@@ -1031,10 +1044,12 @@ class PlayerCore: NSObject {
   }
 
   func seek(absoluteSecond: Double) {
+    if routeSharePlay(.seek(absoluteSecond)) { return }
     mpv.command(.seek, args: ["\(absoluteSecond)", "absolute+exact"])
   }
 
   func frameStep(backwards: Bool) {
+    if routeSharePlay(.blocked) { return }
     // When playback is paused the display link is stopped in order to avoid wasting energy on
     // It must be running when stepping to avoid slowdowns caused by mpv waiting for IINA to call
     // mpv_render_report_swap.
@@ -1195,6 +1210,7 @@ class PlayerCore: NSObject {
   /// a second time it sets the B loop point to the timestamp of the current frame, activating looping and causing mpv to seek back to
   /// the A loop point. When the command is invoked again both loop points are cleared (set to zero) and looping stops.
   func abLoop() {
+    if routeSharePlay(.blocked) { return }
     // may subject to change
     mpv.command(.abLoop)
     syncAbLoop()
@@ -1262,6 +1278,7 @@ class PlayerCore: NSObject {
   }
 
   func setLoopMode(_ newMode: LoopMode) {
+    if routeSharePlay(.blocked) { return }
     switch newMode {
     case .playlist:
       mpv.setString(MPVOption.PlaybackControl.loopPlaylist, "inf")
@@ -1321,6 +1338,7 @@ class PlayerCore: NSObject {
   }
 
   func setSpeed(_ speed: Double) {
+    if routeSharePlay(.speed(speed)) { return }
     let speed = max(AppData.mpvMinPlaybackSpeed, speed)
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
@@ -1599,6 +1617,7 @@ class PlayerCore: NSObject {
   ///     clicking in the playlist on the entry that is currently playing reloads that entry.
   /// - Parameter pos: Position of the entry in the playlist to be played.
   func playFileInPlaylist(_ pos: Int) {
+    if routeSharePlay(.blocked) { return }
     mainWindow.videoView.displayActive()
     if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
       log("Pausing playback before playing entry at index \(pos) in the playlist")
@@ -1623,6 +1642,7 @@ class PlayerCore: NSObject {
   ///     resumes playback.
   /// - Parameter nextMedia: When `true` play the next entry in the playlist; otherwise play the previous entry.
   func navigateInPlaylist(nextMedia: Bool) {
+    if routeSharePlay(.blocked) { return }
     guard !mainWindow.interactiveMode.isActive else { return }
 
     if nextMedia == false && (info.playlist.first?.isPlaying) ?? false {
@@ -1639,6 +1659,7 @@ class PlayerCore: NSObject {
 
   @discardableResult
   func playChapter(_ pos: Int) -> MPVChapter? {
+    if routeSharePlay(.chapter(pos)) { return nil }
     log("Seeking to chapter \(pos)", level: .verbose)
     let chapters = info.chapters
     guard pos < chapters.count else {
@@ -2432,6 +2453,12 @@ class PlayerCore: NSObject {
   }
 
   func playbackRestarted() {
+    if let target = sharePlaySeekTarget, abs(mpv.getDouble(MPVProperty.timePos) - target) <= 0.15 {
+      let callback = sharePlaySeekCompletion
+      sharePlaySeekCompletion = nil
+      sharePlaySeekTarget = nil
+      callback?(true)
+    }
     log("Playback restarted")
 
     // Important to synchronize the time as mpv may slightly alter the playback position during a

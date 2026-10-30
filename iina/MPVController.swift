@@ -1531,26 +1531,33 @@ class MPVController: NSObject {
       break
     }
 
-    // This code is running in the com.colliderli.iina.controller dispatch queue. We must not run
-    // plugins from a task in this queue. Accessing EventController data from a thread in this queue
-    // results in data races that can cause a crash. See issue 3986.
+    // mpv invalidates property.data on the next mpv_wait_event call, so copy it before dispatching.
+    let data: Any
+    if let propertyData = property.data {
+      switch property.format {
+      case MPV_FORMAT_FLAG:
+        data = propertyData.load(as: Int32.self) != 0
+      case MPV_FORMAT_INT64:
+        data = propertyData.load(as: Int64.self)
+      case MPV_FORMAT_DOUBLE:
+        data = propertyData.load(as: Double.self)
+      case MPV_FORMAT_STRING:
+        if let string = propertyData.load(as: UnsafePointer<CChar>?.self) {
+          data = String(cString: string)
+        } else {
+          data = NSNull()
+        }
+      default:
+        data = 0
+      }
+    } else {
+      data = NSNull()
+    }
+
+    // EventController and plugin callbacks must only be accessed on the main queue. See issue 3986.
     DispatchQueue.main.async { [self] in
       let eventName = EventController.Name("mpv.\(name).changed")
       if player.events.hasListener(for: eventName) {
-        // FIXME: better convert to JSValue before passing to call()
-        let data: Any
-        switch property.format {
-        case MPV_FORMAT_FLAG:
-          data = property.data.bindMemory(to: Bool.self, capacity: 1).pointee
-        case MPV_FORMAT_INT64:
-          data = property.data.bindMemory(to: Int64.self, capacity: 1).pointee
-        case MPV_FORMAT_DOUBLE:
-          data = property.data.bindMemory(to: Double.self, capacity: 1).pointee
-        case MPV_FORMAT_STRING:
-          data = property.data.bindMemory(to: String.self, capacity: 1).pointee
-        default:
-          data = 0
-        }
         player.events.emit(eventName, data: data)
       }
     }

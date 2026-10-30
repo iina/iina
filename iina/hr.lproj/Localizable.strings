@@ -666,10 +666,10 @@
 "settings.loadIccProfile.desc" = "Učitaj ICC profil za trenutačni prikaz i koristi ga za transformaciju RGB videa rezultata. (Samo za SDR modus)";
 "settings.loadIccProfile.label" = "Učitaj ICC profil";
 "settings.toneMappingAlgorithm.label" = "Algoritam";
-"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
-"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
-"settings.toneMappingParamOverride.label" = "Tuning parameter";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingAlgorithm.desc" = "Algoritam za mapiranje tonova boja slika na ciljani ekran.";
+"settings.toneMappingParamOverride.desc" = "Parametar za podešavanje algoritma mapiranja tonova. Ovo je standardno postavljeno na standardnu vrijednost koja je specifična za algoritam. Aktiviraj ovu postavku za poništavanje te standardne vrijednosti.";
+"settings.toneMappingParamOverride.label" = "Parametar podešavanja";
+"settings.toneMappingTargetPeak.desc" = "Izmjerena najviša svjetlina ekrana. IINA standardno automatski prepoznaje ovu vrijednost. Ako prepoznavanje ne uspije, ciljna najviša svjetlina će se postaviti na odgovarajuću vrijednost na temelju prijenosnih karakteristika ekrana. Aktiviraj ovu postavku ako želiš ručno odrediti svjetlinu ekrana.";
 "settings.toneMappingTargetPeak.label" = "Ciljani najviši ton";
 "settings.videoThreads.desc" = "Standardno: 0 (Automatski)";
 "settings.videoThreads.label" = "Broj niza";
@@ -765,9 +765,9 @@
 "settings.useMediaKeys.label" = "Koristi sustavsko upravljanje medijima";
 
 // Settings - Network
-"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.desc" = "Broj sekundi za spremanje predmemorije u međuspremnik prije ponovnog pokretanja reprodukcije ako je pokrenut modus međuspremnika. Povećaj ovu postavku ako reprodukcija brzo ponovo pokrene modus međuspremnika.\n\nStandardno: 1";
 "settings.cachePauseWait.label" = "Broj sekundi za spremanje u međuspremnik prije ponovnog pokretanja";
-"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
+"settings.cachePauseInitial.desc" = "Prije početka reprodukcije pokreni modus međuspremanja. To se može koristiti za glatki početak reprodukcije, kao zamjena za čekanje za unaprijed dohvaćanje i međuspremanje mrežnih podataka.";
 "settings.cachePauseInitial.label" = "Spremi u međuspremnik prije pokretanja reprodukcije";
 "settings.defaultCacheSize.desc" = "Standardno: 153.600";
 "settings.defaultCacheSize.label" = "Veličina predmemorije (KiB)";
@@ -932,7 +932,7 @@
 "settings.$DefaultApplication" = "Standardna aplikacija";
 "settings.$DefaultEncoding" = "Standardno kodiranje";
 "settings.$DeleteAllPlaybackHistories" = "Izbriši svu povijest reprodukcija i unose u „Otvori nedavne”.";
-"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DeleteAllWatchLater" = "Izbriši sve datoteke u mapi „gledaj kasnije”. Ove datoteke sadrže sav spremljeni napredak reprodukcije i postavke koje se primijenjuju tijekom reprodukcije.";
 "settings.$DoNotResize" = "Ne mijenjaj veličinu";
 "settings.$DuplicateCurrentSet" = "Dupliciraj trenutačni skup …";
 "settings.$FailedToLoadThePage" = "Neuspjelo učitavanje stranice.";
@@ -990,7 +990,7 @@
 "settings.$RestoreAllAlertsThat" = "Obnovi sva upozorenja koja su bila prikrivena pomoću potvrdnog okvira „Ovu poruku više nemoj prikazivati”.";
 "settings.$RestoreSuppressedAlerts" = "Obnovi prikrivena upozorenja";
 "settings.$SPDIFOutput" = "S/PDIF izlaz";
-"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$SPDIFOutputWarning" = "Popis kodeka za koje treba koristiti izravni prijenos komprimiranog zvuka.\n\nUpozorenje: Ne postoji mnogo razloga za korištenje ove postavke. HDMI podržava višekanalni nekomprimirani PCM zvuk, a dekodiranje zvuka bez gubitka DTS-HD je podržano putem FFmpegova DCA dekodera. Reprodukcija možda neće započeti ako izlazni uređaj ne podržava S/PDIF i ako je ova postavka aktivirana.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Snimke ekrana";
 "settings.$SetIINAAsTheDefault" = "Postavi IINA kao standardnu aplikaciju";

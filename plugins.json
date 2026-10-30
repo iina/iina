@@ -108,6 +108,12 @@
     "id": "com.vedant.hold-to-speed"
   },
   {
+    "name": "iina-glsl-shaders",
+    "url": "https://github.com/BrandenXia/iina-glsl-shaders",
+    "description": "GLSL Shaders Manager for IINA",
+    "id": "org.xia-x.iina-glsl-shaders"
+  },
+  {
     "name": "Jellyfin",
     "url": "https://github.com/mhajder/iina-jellyfin",
     "desc": "Browse and play media from Jellyfin servers.",

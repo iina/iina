@@ -31,7 +31,7 @@
 
 // Initial Window
 "initial.announcement" = "You are using a %@ version of IINA";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.beta.desc" = "If you want to roll back to a release version, untick “receive beta updates” from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended as your daily driver. Currently, nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as a daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
@@ -166,8 +166,8 @@
 "preference.logged_in_as" = "Logged in as %@";
 "preference.system_media_control" = "Use system media control";
 
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
+"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click the “Duplicate…” button first to create a copy.";
+"preference.key_binding_hint_2" = "Double-click a row on the right side to edit the corresponding key binding.";
 
 "preference.enable_adv_settings" = "Enable advanced settings";
 
@@ -183,7 +183,7 @@
 "preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
 "preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
 
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
+"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from “Plugins > Install from GitHub” to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volume: %@";
@@ -285,7 +285,7 @@
 
 "alert.keybinding_config.error" = "Error parsing keybinding configuration file \"%@\"! Fallback to IINA Default keybinding setting. Please check your configuration.";
 "alert.delete_keybindingset.title" = "Delete Key Binding Set";
-"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+"alert.delete_keybindingset.message" = "Are you sure you want to delete this key binding set?";
 
 "alert.extra_option.cannot_read" = "Cannot read user defined extra mpv options.";
 "alert.extra_option.empty" = "Key or value cannot be empty!";
@@ -299,7 +299,7 @@
 "alert.sub.no_selected" = "Please select a downloaded subtitle first.";
 "alert.sub_lang_not_set" = "Please set preferred subtitle languages in Settings before using OpenSubtitles. English(eng) will be used this time.";
 "alert.sub.cannot_save_passwd" = "Cannot save your password to Keychain: %@";
-"alert.sub.cannot_login" = "Cannot login. Please check your username, password and network status.\n\n%@";
+"alert.sub.cannot_login" = "Cannot log in. Please check your username, password and network status.\n\n%@";
 "alert.sub.save_downloaded.title" = "Save Downloaded Subtitle";
 
 "alert.set_default.title" = "Setting IINA as Default App";
@@ -327,7 +327,7 @@
 "alert.delete_all_history.title" = "Clear Playback History";
 "alert.delete_all_history.message" = "Are you sure to delete all playback history?";
 "alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.message" = "Are you sure you want to delete the selected files?";
 
 "alert.filter_hwdec.message" = "You are about to apply a video filter. However, your current hardware decoder may not support video filters well. You can either disable hardware decoding or switch to Auto(Copy), which will consume twice the memory.\nYou may need to repeat previous operation (like setting the crop) to make it work.";
 "alert.filter_hwdec.abort" = "Abort";
@@ -341,7 +341,7 @@
 "alert.clear_history.message" = "Are you sure to delete all playback history?";
 
 "alert.clear_watch_later.title" = "Clear Saved Playback Progress";
-"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (\"watch later\" data)?";
+"alert.clear_watch_later.message" = "Are you sure to delete all saved playback progress (“watch later” data)?";
 
 "alert.restore_alerts.title" = "Restore Suppressed Alerts";
 "alert.restore_alerts.message" = "Are you sure you want to restore suppressed alerts?";
@@ -356,14 +356,14 @@
 
 "alert.duplicate_config" = "You cannot edit default configurations directly. Please duplicate one before editing.";
 
-"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter network error.";
+"alert.assrt_register" = "Due to limited API quota, you are strongly recommended to use your own API token. The default token is only for demo usage, and you may encounter a network error.";
 "alert.assrt_register.register" = "Register Now";
 "alert.assrt_register.try" = "Try First";
 "alert.assrt_token_prompt.title" = "Enter your API token";
 "alert.assrt_token_prompt.message" = "Please register in the opened webpage. Get your token in your user home page and enter it below:";
 "alert.assrt_token_invalid" = "Your Assrt API token seems to be invalid.";
 
-"alert.plugin_uninstall.title" = "Are you sure to uninstall %@?";
+"alert.plugin_uninstall.title" = "Are you sure you want to uninstall %@?";
 "alert.plugin_uninstall.message" = "The plugin will be deleted from your disk.";
 "alert.plugin_reinstall.title" = "Plugin %@ already exists";
 "alert.plugin_reinstall.message" = "Do you want to reinstall the plugin?";
@@ -388,10 +388,10 @@
 "pl_menu.play_in_new_window" = "Play in New Window";
 "pl_menu.remove" = "Remove";
 "pl_menu.remove_multi" = "Remove Selected";
-"pl_menu.delete" = "Move to Trash";
-"pl_menu.delete_multi" = "Move Selected Files to Trash";
-"pl_menu.delete_after_play" = "Move to Trash After Playback";
-"pl_menu.delete_after_play_multi" = "Move Selected Files to Trash After Playback";
+"pl_menu.delete" = "Move to Bin";
+"pl_menu.delete_multi" = "Move Selected Files to Bin";
+"pl_menu.delete_after_play" = "Move to Bin After Playback";
+"pl_menu.delete_after_play_multi" = "Move Selected Files to Bin After Playback";
 "pl_menu.show_in_finder" = "Show in Finder";
 "pl_menu.add_file" = "Add File…";
 "pl_menu.add_url" = "Add URL…";
@@ -421,7 +421,7 @@
 
 "gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
 "gaplessAudio.weak" = "If the audio format of the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. The following files may be resampled.";
 
 "subencoding.auto" = "Auto detect";
 
@@ -521,7 +521,7 @@
 "history_window.menu.play_new_window" = "Play in New Window";
 "history_window.menu.show_in_finder" = "Show in Finder";
 "history_window.menu.delete" = "Delete…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "Move to Bin…";
 "history_window.toolbar.clear" = "Clear Playback History";
 "history_window.toolbar.group_by" = "Group By";
 "history_window.toolbar.group_by.menu" = "Group by";
@@ -588,7 +588,7 @@
 "sidebar.position" = "Position";
 "sidebar.scale" = "Scale";
 "sidebar.font" = "Font";
-"sidebar.color" = "Color";
+"sidebar.color" = "Colour";
 "sidebar.text" = "Text";
 "sidebar.border" = "Border";
 "sidebar.shadow" = "Shadow";
@@ -609,7 +609,7 @@
 "settings.actionAfterLaunch.label" = "At launch";
 "settings.allowDuplicatePlayers.label" = "Allow opening the same file in multiple windows";
 "settings.allowScreenSaverForAudio.desc" = "Still prevents system from sleeping.";
-"settings.allowScreenSaverForAudio.label" = "Not while in \"music mode\" or only playing audio";
+"settings.allowScreenSaverForAudio.label" = "Not while in “music mode” or only playing audio";
 "settings.alwaysOpenInNewWindow.label" = "Always open media in new window";
 "settings.autoRepeat.label" = "Loop when a file is opened manually";
 "settings.autoSwitchToMusicMode.label" = "Switch to “music mode” automatically when playing an audio file";
@@ -669,7 +669,7 @@
 "settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
 "settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
 "settings.toneMappingParamOverride.label" = "Tuning parameter";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display’s brightness.";
 "settings.toneMappingTargetPeak.label" = "Target peak";
 "settings.videoThreads.desc" = "Default: 0 (Auto)";
 "settings.videoThreads.label" = "Number of threads";
@@ -685,7 +685,7 @@
 "settings.gaplessAudio.items.1" = "Weak";
 "settings.gaplessAudio.items.1.desc" = "If the audio format of the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
 "settings.gaplessAudio.items.2" = "Strong";
-"settings.gaplessAudio.items.2.desc" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"settings.gaplessAudio.items.2.desc" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. The following files may be resampled.";
 "settings.gaplessAudio.label" = "Gapless audio";
 "settings.maxVolume.desc" = "(100-1000)";
 "settings.maxVolume.label" = "Maximum volume";
@@ -765,7 +765,7 @@
 "settings.useMediaKeys.label" = "Use system media control";
 
 // Settings - Network
-"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
+"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly re-enters buffering mode.\n\nDefault: 1";
 "settings.cachePauseWait.label" = "Seconds to buffer before restarting";
 "settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
 "settings.cachePauseInitial.label" = "Buffer before starting playback";
@@ -781,7 +781,7 @@
 "settings.transportRTSPThrough.items.0" = "Auto";
 "settings.transportRTSPThrough.label" = "Transport RTSP stream through";
 "settings.userAgent.label" = "User agent";
-"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
+"settings.ytdlEnabled.label" = "Enable mpv’s youtube-dl script";
 "settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
 "settings.ytdlRawOptions.label" = "Raw options";
 "settings.ytdlSearchPath.desc" = "IINA will search youtube-dl in this folder. Restart needed.";
@@ -802,7 +802,7 @@
 "settings.subAutoLoadIINA.items.2" = "Detect intelligently by IINA";
 "settings.subAutoLoadIINA.label" = "Auto load";
 "settings.subAutoLoadPriorityString.desc" = "Please enter a comma-separated list of strings.";
-"settings.subAutoLoadPriorityString.label" = "Subtitles have priority when filename containing";
+"settings.subAutoLoadPriorityString.label" = "Subtitles have priority when filename contains";
 "settings.subAutoLoadSearchPath.desc" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
 "settings.subAutoLoadSearchPath.label" = "Also search subtitles in following directories";
 "settings.subBlur.label" = "Blur";
@@ -813,7 +813,7 @@
 "settings.subBorderStyle.label" = "Border Style";
 "settings.subBold.label" = "Bold";
 "settings.subItalic.label" = "Italic";
-"settings.subLang.desc" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
+"settings.subLang.desc" = "This option will be stored as an ISO 639-2 language code and will work for both mpv and opensubtitles.";
 "settings.subOverrideLevel.items.0" = "yes";
 "settings.subOverrideLevel.items.0.desc" = "Apply all the style settings in this section.";
 "settings.subOverrideLevel.items.1" = "force";
@@ -885,13 +885,13 @@
 "settings.enableAdvancedSettings.desc" = "The following settings will require restarting IINA to take effect.";
 "settings.enableAdvancedSettings.label" = "Enable advanced settings";
 "settings.enableLogging.label" = "Enable logging";
-"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
+"settings.logLevel.desc" = "View logs by choosing Window – Log Viewer from the menu.";
 "settings.logLevel.items.0" = "Verbose";
 "settings.logLevel.items.1" = "Debug";
 "settings.logLevel.items.2" = "Warning";
 "settings.logLevel.items.3" = "Error";
 "settings.logLevel.label" = "Log level";
-"settings.useMpvOsd.label" = "Use mpv's OSD";
+"settings.useMpvOsd.label" = "Use mpv’s OSD";
 "settings.useUserDefinedConfDir.label" = "Use config directory";
 
 // Settings - Inline labels
@@ -924,15 +924,15 @@
 "settings.$ClearSavedPlaybackProgress" = "Clear Saved Playback Progress";
 "settings.$ClearThumbnailCache" = "Clear Thumbnail Cache";
 "settings.$Color" = "Colour";
-"settings.$ColorHDR" = "Color and HDR";
+"settings.$ColorHDR" = "Colour and HDR";
 "settings.$CommunityPlugins" = "Community Plugins";
 "settings.$CreateAnEmptySet" = "Create an empty set…";
 "settings.$Customize" = "Customise…";
 "settings.$Decoding" = "Decoding";
 "settings.$DefaultApplication" = "Default Application";
 "settings.$DefaultEncoding" = "Default encoding";
-"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in “Open Recent”.";
+"settings.$DeleteAllWatchLater" = "Delete all files in the “watch later’ folder. These files contain all saved playback progress and settings applied during playback.";
 "settings.$DoNotResize" = "Do not resize";
 "settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Failed to load the page";
@@ -955,7 +955,7 @@
 "settings.$Installing" = "Installing";
 "settings.$KeyBindingSet" = "Key binding set";
 "settings.$Layout" = "Layout";
-"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
+"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to log in, please access it from the legacy Settings window.";
 "settings.$LiveText" = "Live Text";
 "settings.$Logging" = "Logging";
 "settings.$Login" = "Login";
@@ -983,14 +983,14 @@
 "settings.$Percent" = "%";
 "settings.$PictureinnPicture" = "Picture-in-Picture";
 "settings.$Playlist" = "Playlist";
-"settings.$PleaseSelectTheMediaTypes" = "Please select the media types that you want to make IINA as the default Application for.";
+"settings.$PleaseSelectTheMediaTypes" = "Please select the media types that you want to make IINA the default Application for.";
 "settings.$Position" = "Position";
 "settings.$PreferredLanguage" = "Preferred language";
 "settings.$RestoreAlerts" = "Restore Alerts";
-"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the “Do not show this message again” tick box.";
 "settings.$RestoreSuppressedAlerts" = "Restore Suppressed Alerts";
 "settings.$SPDIFOutput" = "S/PDIF output";
-"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg’s DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Screenshots";
 "settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
@@ -1002,7 +1002,7 @@
 "settings.$Source" = "Source";
 "settings.$SubtitleSource" = "Subtitle source";
 "settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
-"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
+"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin’s settings page for configurations.";
 "settings.$SuppressMessagesFor" = "Suppress messages for";
 "settings.$TextSubtitles" = "Text subtitles";
 "settings.$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
@@ -1036,4 +1036,4 @@
 "settings.$sideOfTheScreen" = "side of the screen";
 "settings.$toThe" = "to the";
 "settings.$top" = "top";
-"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
+"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it’s installed and enabled. The settings below only work if the plugin is not available.";

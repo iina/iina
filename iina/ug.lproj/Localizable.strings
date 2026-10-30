@@ -7,94 +7,98 @@
 */
 // Common
 
-"general.on" = "On";
-"general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
+"general.on" = "ئىچىش";
+"general.off" = "تاقاش";
+"general.login" = "تىزىملىتىش";
+"general.logout" = "چىكىنىش";
 "general.ok" = "ماقۇل";
 "general.cancel" = "بىكار قىلىش";
 "general.done" = "پۈتتى";
-"general.username" = "Username";
-"general.password" = "Password";
+"general.username" = "ئەزانامى";
+"general.password" = "شىفر";
 "general.na" = "N/A";
-"general.no_result" = "No Result";
-"general.no_title" = "No Title";
-"general.auto" = "Auto";
+"general.no_result" = "نەتىجىسى يوق";
+"general.no_title" = "ماۋۇ يوق";
+"general.auto" = "ئاپتۇماتىك";
 
-"input.value_is_empty" = "Value cannot be empty.";
-"input.already_exists" = "Value already exists.";
+"input.value_is_empty" = "قىممەتنى قۇرۇق قالدۇرماڭ.";
+"input.already_exists" = "قىممەت مەۋجۇت.";
 
 // Guide Window
-"guide.highlights" = "Highlights";
-"guide.basic_settings" = "Basic Settings";
-"guide.faq" = "Frequently Asked Questions";
+"guide.highlights" = "يورۇت";
+"guide.basic_settings" = "ئاساسىي تەڭشەكلەر";
+"guide.faq" = "كۆپ كۆرۈلىدىغان مەسىلەر";
 
 // Initial Window
 "initial.announcement" = "سىز ھازىر IINA قويغۇچنىڭ %@ نەشرىنى ئىشلىتىۋاتىسىز";
-"initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
-"initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
-"initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
-"initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.beta.desc" = "تەڭشەكلەر > ئاساسىي تەڭشەكتىن «سىناق يېڭىلانمىسىنى قوبۇل قىل»نى تاللانمىسۇن قىلىپ، <a href=\"https://iina.io\">رەسمىي تور بېتىمىز</a>دىن مۇقىم نەشرىنى قاچىلاڭ.";
+"initial.nightly.desc" = "Nightly نى كۈندىلىك نەشرى قىلىپ ئىشلىتىش تەۋسىيە قىلىنمايدۇ. Nightly قۇرۇلمىلىرى ھازىر ئاپتوماتىك يېڭىلاشنى قوللىمايدۇ. يېڭى نەشرىنى <a href=\"https://nightly.iina.io\">Nightly تور بېكىتى</a> دىن قولدا چۈشۈرۈڭ.
+";
+"initial.debug.desc" = "Debug نەشرى ئادەتتە ئۈنۈم ئۈچۈن ئەلالاشتۇرۇلمىغان، شۇڭا كۈندىلىك ئىشلىتىش تەۋسىيە قىلىنمايدۇ. Debug نەشرى ئاپتوماتىك يېڭىلاشنى قوللىمايدۇ.
+";
+"initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> ئارقىلىق دوكلات قىلىڭ.
+";
 
 // Inspector Window
-"inspector.error" = "Error";
+"inspector.error" = "خاتالىق";
 
 // MainWindowController.swift
-"main.buffering_indicator" = "Buffering… %d%%";
-"main.opening_stream" = "Opening stream…";
-"main.seeking_indicator" = "Seeking…";
-"osc.precision" = "Precision";
-"osc.1s" = "1 second";
-"osc.100ms" = "100 milliseconds";
-"osc.10ms" = "10 milliseconds";
-"osc.1ms" = "1 millisecond";
+"main.buffering_indicator" = "يۈكلىنىۋاتىدۇ… %d%%";
+"main.opening_stream" = "كۆچمە سىن ھۆججىتىنى ئىچىۋاتىدۇ……";
+"main.seeking_indicator" = "ئ‍ىزدەۋاتىدۇ...";
+"osc.precision" = "ئېنىلىقى";
+"osc.1s" = "1 سېكۇنت";
+"osc.100ms" = "100مىللى سېكۇنت";
+"osc.10ms" = "10مىللى سېكۇنت";
+"osc.1ms" = "1مىللى سېكۇنت";
 
 // QuickSettingViewController.swift
 "quicksetting.item_default" = "سۈكۈتتە";
-"quicksetting.item_none" = "None";
-"quicksetting.hwdec" = "Hardware Decoding";
-"quicksetting.deinterlace" = "Deinterlace";
+"quicksetting.item_none" = "يوق";
+"quicksetting.hwdec" = "قاتتىق دېتاللا كودلاش";
+"quicksetting.deinterlace" = "قۇرمۇ-قۇر تەكشۈرۈش";
 "quicksetting.hdr" = "HDR";
-"quicksetting.hide" = "Hide";
-"quicksetting.reset_speed" = "Reset speed to 1x";
+"quicksetting.hide" = "يۇشۇرۇش";
+"quicksetting.reset_speed" = "ئەسلى سۈرئەت";
 
 // EQ Presets
-"eq.preset.flat" = "Flat";
-"eq.preset.acoustic" = "Acoustic";
-"eq.preset.classical" = "Classical";
-"eq.preset.dance" = "Dance";
-"eq.preset.deep" = "Deep";
-"eq.preset.electronic" = "Electronic";
+"eq.preset.flat" = "تەكشىلىك";
+"eq.preset.acoustic" = "ئەسلى ئ‍اۋاز";
+"eq.preset.classical" = "كىلاسسىك";
+"eq.preset.dance" = "ئۇسسۇل";
+"eq.preset.deep" = "چوڭقۇرلۇقى";
+"eq.preset.electronic" = "ئېلېكتىرونلۇق";
 "eq.preset.hip_hop" = "خىپ خاپ";
 "eq.preset.increase_bass" = "تۆۋەن ئاۋازنى كۈچەيتىش";
-"eq.preset.increase_treble" = "Increase Treble";
-"eq.preset.increase_vocal" = "Increase Vocal";
-"eq.preset.jazz" = "Jazz";
-"eq.preset.latin" = "Latin";
-"eq.preset.loundness" = "Loundness";
+"eq.preset.increase_treble" = "يۇقۇرى ئاۋازى كۆتۈرۈش";
+"eq.preset.increase_vocal" = "ئادەم ئاۋازنى كۆتۈرۈش";
+"eq.preset.jazz" = "جاز";
+"eq.preset.latin" = "لاتىنچە";
+"eq.preset.loundness" = "ياڭراقلىق";
 "eq.preset.lounge" = "Lounge";
-"eq.preset.piano" = "Piano";
-"eq.preset.pop" = "Pop";
+"eq.preset.piano" = "پىئانىنو";
+"eq.preset.pop" = "مودا";
 "eq.preset.rnb" = "R&B";
-"eq.preset.reduce_bass" = "Reduce Bass";
-"eq.preset.reduce_treble" = "Reduce Treble";
-"eq.preset.rock" = "Rock";
-"eq.preset.small_speaker" = "Small Speaker";
-"eq.preset.spoken_word" = "Spoken Word";
+"eq.preset.reduce_bass" = "تۆۋەن ئاۋازنى چۈشۈرۈش";
+"eq.preset.reduce_treble" = "يۇقىرى ئاۋازنى تۆۋەنلىتىش";
+"eq.preset.rock" = "تولغىما ئۇسسۇل";
+"eq.preset.small_speaker" = "كىچىك تىپتىكى ياڭراتقۇ";
+"eq.preset.spoken_word" = "Talte ord";
 
-"alert.eq.new_profile.title" = "New EQ Profile";
-"alert.eq.new_profile.message" = "Please enter a profile name.";
+"alert.eq.new_profile.title" = "يېڭى EQ تەڭشىكى
+";
+"alert.eq.new_profile.message" = "شەخسىي ماتىريالدىكى ئىسىمنى كىرگۈزۈڭ.";
 "alert.eq.rename.title" = "Rename Current Profile";
-"alert.eq.rename.message" = "Please enter a new profile name.";
+"alert.eq.rename.message" = "شەخسىي ماتىريالدىكى  يېڭى ئىسىمنى كىرگۈزۈڭ.";
 
 // OSDMessage.swift
-"osd.pause" = "Pause";
+"osd.pause" = "توختىتىش";
 "osd.resume" = "داۋاملىق قويۇش";
-"osd.volume" = "Volume: %@";
-"osd.speed" = "Speed: %@x";
-"osd.aspect" = "Aspect Ratio: %@";
+"osd.volume" = "ئ‍اۋاز：%@";
+"osd.speed" = "سۈرئەت：%@x";
+"osd.aspect" = "كەڭلىك نىسبىتى：%@";
 "osd.crop" = "Crop: %@";
-"osd.rotate" = "Rotate: %i°";
+"osd.rotate" = "ئايلاندۇرۇش：%i°";
 "osd.deinterlace" = "Deinterlace: %@";
 "osd.hwdec" = "Hardware Decoding: %@";
 "osd.audio_delay.nodelay" = "Audio Delay: No Delay";
@@ -129,9 +133,9 @@
 "osd.video_eq.saturation" = "Saturation: %i";
 "osd.video_eq.brightness" = "Brightness: %i";
 "osd.find_online_sub" = "Finding online subtitles…";
-"osd.find_online_sub.source" = "from";
+"osd.find_online_sub.source" = "دىن";
 "osd.sub_not_found" = "No subtitles found";
-"osd.sub_found" = "%d subtitles found.";
+"osd.sub_found" = " %dسىن تىكىستى تىپىلدى.";
 "osd.sub_downloading" = "Downloading %d subtitles";
 "osd.sub_downloaded" = "Subtitle downloaded";
 "osd.sub_saved" = "Subtitle saved";
@@ -186,7 +190,7 @@
 "preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
 "preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
-"menu.volume" = "Volume: %@";
+"menu.volume" = "ئ‍اۋاز：%@";
 "menu.volume_muted" = "Volume: %@ (Muted)";
 "menu.audio_delay" = "Audio Delay: %@s";
 "menu.sub_delay" = "Subtitle Delay: %@s";
@@ -202,7 +206,7 @@
 "menu.exit_mini_player" = "Exit Music Mode";
 "menu.pause" = "Pause";
 "menu.resume" = "داۋاملىق قويۇش";
-"menu.speed" = "Speed: %@x";
+"menu.speed" = "سۈرئەت：%@x";
 "menu.chapters" = "Show Chapters Panel";
 "menu.hide_chapters" = "Hide Chapters Panel";
 "menu.playlist" = "Show Playlist Panel";
@@ -247,7 +251,7 @@
 // Alerts
 "alert.beta_channel.title" = "Receive Updates for Beta Versions";
 
-"alert.title_error" = "Error";
+"alert.title_error" = "خاتالىق";
 "alert.title_warning" = "Warning";
 "alert.title_info" = "Information";
 
@@ -703,24 +707,24 @@
 "settings.replayGainPreamp.label" = "Preamp gain";
 
 // Settings - Control
-"settings.doubleClickAction.items.0" = "None";
+"settings.doubleClickAction.items.0" = "يوق";
 "settings.doubleClickAction.items.1" = "Toggle fullscreen";
 "settings.doubleClickAction.items.2" = "Pause / Resume";
 "settings.doubleClickAction.items.4" = "Toggle Picture-in-Picture";
 "settings.doubleClickAction.items.5" = "A-B loop";
 "settings.doubleClickAction.items.6" = "Reset speed";
 "settings.doubleClickAction.label" = "Double click to";
-"settings.forceTouchAction.items.0" = "None";
+"settings.forceTouchAction.items.0" = "يوق";
 "settings.forceTouchAction.items.1" = "Toggle fullscreen";
 "settings.forceTouchAction.items.2" = "Pause / Resume";
 "settings.forceTouchAction.items.3" = "Hide OSC";
 "settings.forceTouchAction.label" = "Force Touch to";
 "settings.horizontalScrollAction.items.0" = "Adjust volume";
 "settings.horizontalScrollAction.items.1" = "ئاتلاپ كېتىش";
-"settings.horizontalScrollAction.items.2" = "None";
+"settings.horizontalScrollAction.items.2" = "يوق";
 "settings.horizontalScrollAction.items.4" = "Adjust playback speed";
 "settings.horizontalScrollAction.label" = "Scroll horizontally to";
-"settings.middleClickAction.items.0" = "None";
+"settings.middleClickAction.items.0" = "يوق";
 "settings.middleClickAction.items.1" = "Toggle fullscreen";
 "settings.middleClickAction.items.2" = "Pause / Resume";
 "settings.middleClickAction.items.3" = "Hide OSC";
@@ -730,19 +734,19 @@
 "settings.middleClickAction.label" = "Middle click to";
 "settings.pinchAction.items.0" = "Adjust window size";
 "settings.pinchAction.items.1" = "Fullscreen";
-"settings.pinchAction.items.2" = "None";
+"settings.pinchAction.items.2" = "يوق";
 "settings.pinchAction.label" = "Pinch to";
 "settings.playbackSpeedScrollAmount.label" = "Sensitivity for speed";
 "settings.relativeSeekAmount.label" = "Sensitivity for normal seek";
 "settings.rightClickAction.desc" = "Middle click to";
-"settings.rightClickAction.items.0" = "None";
+"settings.rightClickAction.items.0" = "يوق";
 "settings.rightClickAction.items.2" = "Pause / Resume";
 "settings.rightClickAction.items.3" = "Hide OSC";
 "settings.rightClickAction.items.4" = "Toggle Picture-in-Picture";
 "settings.rightClickAction.items.5" = "A-B loop";
 "settings.rightClickAction.items.6" = "Reset speed";
 "settings.rightClickAction.label" = "Right click to";
-"settings.singleClickAction.items.0" = "None";
+"settings.singleClickAction.items.0" = "يوق";
 "settings.singleClickAction.items.2" = "Pause / Resume";
 "settings.singleClickAction.items.3" = "Hide OSC";
 "settings.singleClickAction.label" = "Single click to";
@@ -753,7 +757,7 @@
 "settings.useExactSeek.label" = "Seek type";
 "settings.verticalScrollAction.items.0" = "Adjust volume";
 "settings.verticalScrollAction.items.1" = "ئاتلاپ كېتىش";
-"settings.verticalScrollAction.items.2" = "None";
+"settings.verticalScrollAction.items.2" = "يوق";
 "settings.verticalScrollAction.items.4" = "Adjust playback speed";
 "settings.verticalScrollAction.label" = "Scroll vertically to";
 "settings.videoViewAcceptsFirstMouse.desc" = "Mouse";
@@ -877,7 +881,7 @@
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "Only for video files";
 "settings.usePhysicalResolution.label" = "Use physical resolution on Retina displays";
 "settings.windowBehaviorWhenPip.items.0" = "Do nothing";
-"settings.windowBehaviorWhenPip.items.1" = "Hide";
+"settings.windowBehaviorWhenPip.items.1" = "يۇشۇرۇش";
 "settings.windowBehaviorWhenPip.items.2" = "Minimize";
 "settings.windowBehaviorWhenPip.label" = "Window";
 
@@ -889,7 +893,7 @@
 "settings.logLevel.items.0" = "Verbose";
 "settings.logLevel.items.1" = "Debug";
 "settings.logLevel.items.2" = "Warning";
-"settings.logLevel.items.3" = "Error";
+"settings.logLevel.items.3" = "خاتالىق";
 "settings.logLevel.label" = "Log level";
 "settings.useMpvOsd.label" = "Use mpv's OSD";
 "settings.useUserDefinedConfDir.label" = "Use config directory";
@@ -958,7 +962,7 @@
 "settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
 "settings.$LiveText" = "Live Text";
 "settings.$Logging" = "Logging";
-"settings.$Login" = "Login";
+"settings.$Login" = "تىزىملىتىش";
 "settings.$MB" = "MB";
 "settings.$MPVSettings" = "mpv Settings";
 "settings.$Margin" = "Margin";

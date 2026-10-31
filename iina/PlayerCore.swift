@@ -1600,6 +1600,11 @@ class PlayerCore: NSObject {
   /// - Parameter pos: Position of the entry in the playlist to be played.
   func playFileInPlaylist(_ pos: Int) {
     mainWindow.videoView.displayActive()
+    // Keep mpv's normal playlist behavior unless the user explicitly opts in.
+    // Re-selecting the current entry reloads it; that is not playlist navigation.
+    if info.playlist.indices.contains(pos) && !info.playlist[pos].isPlaying {
+      savePlaybackPositionBeforePlaylistNavigation()
+    }
     if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
       log("Pausing playback before playing entry at index \(pos) in the playlist")
       mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
@@ -1629,6 +1634,7 @@ class PlayerCore: NSObject {
       seek(absoluteSecond: 0)
     } else {
       mainWindow.videoView.displayActive()
+      savePlaybackPositionBeforePlaylistNavigation()
       if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
         log("Pausing playback before playing \(nextMedia ? "next" : "previous") entry in playlist")
         mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
@@ -1996,6 +2002,15 @@ class PlayerCore: NSObject {
   func setSubFont(_ font: String) {
     mpv.setString(MPVOption.Subtitles.subFont, font)
     postNotification(.iinaSubFontChanged)
+  }
+
+  /// Opt-in saving when manually switching playlist items. Do not write an empty
+  /// watch-later record if the current file has not reported a playback position.
+  private func savePlaybackPositionBeforePlaylistNavigation() {
+    guard Preference.bool(for: .savePositionOnPlaylistNavigation),
+          info.state.active,
+          info.videoPosition != nil else { return }
+    savePlaybackPosition()
   }
 
   func savePlaybackPosition() {

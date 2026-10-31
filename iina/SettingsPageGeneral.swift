@@ -130,6 +130,11 @@ class SettingsPageGeneral: SettingsPage {
         SettingsItem.Switch()
           .image(name: "custom.arrow.clockwise.badge.clock")
           .bindTo(.resumeLastPosition)
+          .withDetailView {
+            SettingsItem.Switch()
+              .hasDescription()
+              .bindTo(.savePositionOnPlaylistNavigation)
+          }
         SettingsItem.Switch()
           .image(name: "custom.play.rectangle.badge.clock")
           .bindTo(.recordPlaybackHistory)

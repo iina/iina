@@ -108,6 +108,12 @@
     "id": "com.vedant.hold-to-speed"
   },
   {
+    "name": "Interactive Zoom",
+    "url": "https://github.com/claudiodekker/iina-interactive-zoom",
+    "desc": "Zoom into the video with a draggable minimap and zoom gauge, like VLC's Interactive Zoom.",
+    "id": "io.dekker.interactive-zoom"
+  },
+  {
     "name": "Jellyfin",
     "url": "https://github.com/mhajder/iina-jellyfin",
     "desc": "Browse and play media from Jellyfin servers.",

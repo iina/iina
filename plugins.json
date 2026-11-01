@@ -132,6 +132,12 @@
     "id": "cc.notfire.iina-listenbrainz"
   },
   {
+    "name": "MarkIINA",
+    "url": "https://github.com/vishudhshah/MarkIINA",
+    "desc": "Save and manage named per-video bookmarks from a sidebar or menu.",
+    "id": "io.github.vishudh.markiina"
+  },
+  {
     "name": "Metadata",
     "url": "https://github.com/thepushkarp/iina-metadata",
     "desc": "Identify movies and TV episodes via TMDB/TVmaze and save their metadata and artwork into MKV/MP4 files and Kodi/Infuse-style sidecars.",

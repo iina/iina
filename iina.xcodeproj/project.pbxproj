@@ -124,7 +124,6 @@
 		515B5E5A2A579903001FCD49 /* iina-plugin in Copy Executables */ = {isa = PBXBuildFile; fileRef = E38558872A484A2D0083772D /* iina-plugin */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		516B264D2EDA579700E3CB69 /* MemoryUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516B264C2EDA579600E3CB69 /* MemoryUsage.swift */; };
 		51854CDA2A1C489300C40B78 /* FFmpegLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51854CD92A1C489300C40B78 /* FFmpegLogger.swift */; };
-		518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */ = {isa = PBXBuildFile; fileRef = 518DB7012FA6A2120024F0B0 /* write_info_plist_header.sh */; };
 		5196819A29EC963F00B05D55 /* CoreDisplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5196819929EC963F00B05D55 /* CoreDisplay.framework */; };
 		519872FF26879B9B00F84BCC /* AccessibilityPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519872FE26879B9B00F84BCC /* AccessibilityPreferences.swift */; };
 		519CCABD2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519CCABC2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift */; };
@@ -2826,7 +2825,6 @@
 				8400D5D51E1AB317006785F5 /* FilterWindowController.xib in Resources */,
 				E3B3DD5720FDB8A600325184 /* PreferenceWindowController.xib in Resources */,
 				8418A2F5213F5791003166AC /* OpenURLWindowController.xib in Resources */,
-				518DB7022FA6A2120024F0B0 /* write_info_plist_header.sh in Resources */,
 				8400D5DE1E1AB32A006785F5 /* PrefGeneralViewController.xib in Resources */,
 				8400D5C61E1AB2F1006785F5 /* MainWindowController.xib in Resources */,
 			);

@@ -8,6 +8,14 @@
 
 import Foundation
 
+/// Information about playback that is associated with a `PlayerCore`.
+/// - Important: Much of the information contained in this class is constantly read by user interface classes and relatively
+///     infrequently updated. To avoid the overhead of locks the convention for properties in this class is to only access them
+///     using the main thread.
+///
+///     Some properties are annotated with the `@Atomic` property wrapper. allowing access from multiple threads. This was
+///     done to quickly correct thread sanitizer errors in existing code. That code may be updated in the future to eliminate the
+///     need for locks for these properties.
 class PlaybackInfo {
 
   /// Enumeration representing the status of the [mpv](https://mpv.io/manual/stable/) A-B loop command.

@@ -108,6 +108,12 @@
     "id": "com.vedant.hold-to-speed"
   },
   {
+    "name": "iina cast",
+    "url": "https://github.com/RedShadow0111/iina-cast",
+    "desc": "Send the file IINA is playing to an Apple TV, a Chromecast, or a DLNA television.",
+    "id": "dev.redshadow.iina-cast"
+  },
+  {
     "name": "Interactive Zoom",
     "url": "https://github.com/claudiodekker/iina-interactive-zoom",
     "desc": "Zoom into the video with a draggable minimap and zoom gauge, like VLC's Interactive Zoom.",

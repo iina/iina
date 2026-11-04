@@ -223,11 +223,11 @@ class PlayerCore: NSObject {
   private var pluginMap: [String: JavascriptPluginInstance] = [:]
   var events = EventController()
 
-  lazy var ffmpegController: FFmpegController = {
-    let controller = FFmpegController()
-    controller.delegate = self
-    return controller
-  }()
+  /// The controller that generates thumbnails.
+  ///
+  /// Thumbnail generation is cancelled from the thread of the queue for reading `mpv` events as well as from the main thread,
+  /// so the controller is created with the player and not on first use.
+  let ffmpegController = FFmpegController()
 
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
@@ -331,6 +331,7 @@ class PlayerCore: NSObject {
     playlistQueue = DispatchQueue(label: "IINAPlaylistTask\(playerNumber)", qos: .utility)
     thumbnailQueue = DispatchQueue(label: "IINAPlayerCoreThumbnailTask\(playerNumber)", qos: .utility)
     super.init()
+    ffmpegController.delegate = self
     self.mpv = MPVController(playerCore: self)
     self.mainWindow = MainWindowController(playerCore: self)
     self.miniPlayer = MiniPlayerWindowController(playerCore: self)
@@ -560,10 +561,12 @@ class PlayerCore: NSObject {
     miniPlayer.pendingShow = true
     initialWindow.close()
 
-    if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
-      log("Pausing playback before running load command")
-      mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
-    }
+    // Neither this pause nor force-window below waits for mpv, so that main never waits for it. Pausing paused
+    // playback changes nothing, so whether playback is paused is not read. mpv can run the load command below
+    // before these requests, but it runs them before it opens the file.
+    log("Pausing playback before running load command")
+    mpv.setFlagAsync(MPVOption.PlaybackControl.pause, true, level: .verbose)
+    info.pausedForLoading = true
 
 #if USE_ICC_PROFILE_AUTO // See VideoView.setICCProfile.
     // If this mpv core is being reused icc-profile-auto may have been left set to true. This option
@@ -576,7 +579,8 @@ class PlayerCore: NSObject {
 
     // Delay force-window until an actual file load to avoid Xcode-launched app startup hanging
     // while mpv tries to create a VO before IINA has entered its normal media-open path.
-    mpv.setString(MPVOption.Window.forceWindow, "yes", level: .verbose)
+    mpv.asyncCommand(.set, args: [MPVOption.Window.forceWindow, "yes"], checkError: false, replyUserdata: 0,
+                     level: .verbose)
 
     // Send load file command
     info.justOpenedFile = true
@@ -901,7 +905,7 @@ class PlayerCore: NSObject {
   // MARK: - MPV commands
 
   func togglePause(_ set: Bool? = nil) {
-    info.state == .paused ? resume() : pause()
+    PlaylistStepping.togglePause(self)
   }
 
   /// Pause playback.
@@ -914,9 +918,7 @@ class PlayerCore: NSObject {
   ///     asleep. Thus `setFlag` **must not** be called if the `mpv` core is idle or stopping. See issue
   ///     [#4520](https://github.com/iina/iina/issues/4520)
   func pause() {
-    guard info.state.active else { return }
-    log("Pausing playback")
-    mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+    PlaylistStepping.pause(self)
   }
 
   /// Resume playback.
@@ -1001,8 +1003,9 @@ class PlayerCore: NSObject {
       percent = percent.clamped(to: 0..<100)
     }
     let useExact = forceExact ? true : Preference.bool(for: .useExactSeek)
-    let seekMode = useExact ? "absolute-percent+exact" : "absolute-percent"
-    mpv.command(.seek, args: ["\(percent)", seekMode], checkError: false, level: .verbose)
+    // The seek is sent without waiting for mpv, so that the slider moving it never holds up the main thread.
+    let args = FullLength.seekArguments(percent: percent, fullLength: info.fullLength, exact: useExact)
+    mpv.asyncCommand(.seek, args: args, checkError: false, replyUserdata: 0, level: .verbose)
   }
 
   func seek(relativeSecond: Double, option: Preference.SeekOption) {
@@ -1599,17 +1602,12 @@ class PlayerCore: NSObject {
   ///     clicking in the playlist on the entry that is currently playing reloads that entry.
   /// - Parameter pos: Position of the entry in the playlist to be played.
   func playFileInPlaylist(_ pos: Int) {
-    mainWindow.videoView.displayActive()
-    if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
-      log("Pausing playback before playing entry at index \(pos) in the playlist")
-      mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
-    }
-    mpv.command(.playlistPlayIndex, args: [String(pos)], level: .verbose)
-    getPlaylist()
+    PlaylistStepping.play(self, at: pos)
   }
 
   /// Play the next or the previous entry in the playlist.
-  /// - Important: This method will ensure playback is paused before changing the position in the playlist. If playback is not
+  /// - Important: This method will ensure playback is paused once `mpv` has accepted the change of position in the playlist,
+  ///     before the entry moved to is loaded. When there is no entry to move to playback is left as it is. If playback is not
   ///     paused, audio can start playing before video is shown. This is most noticeable with high resolution videos encoded with
   ///     newer high compression codecs (such as AV1), when running on older Macs that lack support for hardware decoding of the
   ///     codec used. Playback will be started once the video has been loaded and the size of the video is known (unless the "Pause"
@@ -1623,18 +1621,7 @@ class PlayerCore: NSObject {
   ///     resumes playback.
   /// - Parameter nextMedia: When `true` play the next entry in the playlist; otherwise play the previous entry.
   func navigateInPlaylist(nextMedia: Bool) {
-    guard !mainWindow.interactiveMode.isActive else { return }
-
-    if nextMedia == false && (info.playlist.first?.isPlaying) ?? false {
-      seek(absoluteSecond: 0)
-    } else {
-      mainWindow.videoView.displayActive()
-      if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
-        log("Pausing playback before playing \(nextMedia ? "next" : "previous") entry in playlist")
-        mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
-      }
-      mpv.command(nextMedia ? .playlistNext : .playlistPrev, checkError: false)
-    }
+    PlaylistStepping.step(self, forward: nextMedia)
   }
 
   @discardableResult
@@ -2191,6 +2178,7 @@ class PlayerCore: NSObject {
     info.displayWidth = 0
     info.displayHeight = 0
     info.videoDuration = VideoTime(duration)
+    info.fullLength = nil
     if let filename = mpv.getString(MPVProperty.path) {
       info.setCachedVideoDuration(filename, duration)
     }
@@ -2198,10 +2186,9 @@ class PlayerCore: NSObject {
     info.videoRemaining = VideoTime(remaining)
     triedUsingExactSeekForCurrentFile = false
     checkUnsyncedWindowOptions()
-    // generate thumbnails if window has loaded video
-    if mainWindow.isVideoLoaded {
-      generateThumbnails()
-    }
+    // The thumbnails of the previous file must not be shown for this file. Thumbnails for this file
+    // are generated once its video is ready, see notifyWindowVideoSizeChanged.
+    info.thumbnailsReady = false
     // call `trackListChanged` to load tracks and check whether need to switch to music mode
     trackListChanged()
     getPlaylist()
@@ -2400,7 +2387,7 @@ class PlayerCore: NSObject {
   }
 
   func pauseChanged(_ paused: Bool) {
-    guard mainWindow.loaded, info.state.loaded else { return }
+    guard mainWindow.loaded, info.state.loaded, EntryStart.pauseChangeUpdatesState(info.state) else { return }
     if (info.state == .paused) != paused {
       sendOSD(paused ? .pause : .resume)
       // The NowPlayingInfoManager is notified when playback is paused or resumed. The video
@@ -2766,22 +2753,55 @@ class PlayerCore: NSObject {
       currentController.showWindow(self)
       AppDelegate.shared.openURLWindow.close()
     }
-    if info.state == .loaded {
-      // If the media was loaded manually then playback was paused to avoid audio starting to play
-      // before video is ready to be displayed. Now that the video is ready playback can be resumed
-      // unless the IINA "Pause" setting is enabled under "When media is opened".
-      let paused = mpv.getFlag(MPVOption.PlaybackControl.pause)
-      if paused, !Preference.bool(for: .pauseWhenOpen)  {
-        log("Resuming playback now that file has been loaded")
-        mainWindow.videoView.displayActive()
-        mpv.setFlag(MPVOption.PlaybackControl.pause, false, level: .verbose)
-      }
-      info.state = Preference.bool(for: .pauseWhenOpen) ? .paused : .playing
+    // If the media was loaded manually then playback was paused to avoid audio starting to play
+    // before video is ready to be displayed. Now that the video is ready the play state is decided.
+    EntryStart.decidePlayState(self) { [self] in
       syncUI(.playButton)
       if Preference.bool(for: .fullScreenWhenOpen) && !mainWindow.fsState.isFullscreen && !isInMiniPlayer {
         mainWindow.toggleWindowFullScreen()
       }
+      EntryStart.startThumbnails(self)
+      findFullLength()
     }
+  }
+
+  /// Work out the full length of the file being played when `mpv` opened it from its index, and show it
+  /// in place of the shorter duration `mpv` reports, see `FullLength`.
+  ///
+  /// This starts once the play state of the file has been decided and runs off the main thread, so neither the
+  /// start of playback nor a step away waits for it. A result for a file that is no longer current is dropped.
+  private func findFullLength() {
+    guard let url = info.currentURL, url.isFileURL else { return }
+    let path = url.path
+    let shown = info.videoDuration?.second
+    DispatchQueue.global(qos: .utility).async { [self] in
+      let length = FFmpegController.fullLength(ofFragmentedFile: path)
+      guard let duration = FullLength.duration(shown: shown, fullLength: length) else { return }
+      // On main because PlaybackInfo is confined to the main thread, see MPVController.queue, and the time
+      // display is AppKit.
+      DispatchQueue.main.async { [self] in showFullLength(duration, shown: shown, ofFileAt: path) }
+    }
+  }
+
+  /// Show the full length worked out for the file at the given path, unless another file has become current or playback
+  /// has stopped since.
+  ///
+  /// Nothing here waits for `mpv`: the remaining time comes from the position the display already holds.
+  /// - Important: This must be called on the main thread, to which `PlaybackInfo` is confined, see `MPVController.queue`.
+  func showFullLength(_ duration: Double, shown: Double?, ofFileAt path: String) {
+    guard info.state.active, info.currentURL?.path == path else { return }
+    log("Full length of the file is \(duration)s, mpv reports \(shown ?? 0)s")
+    info.fullLength = duration
+    info.videoDuration = VideoTime(duration)
+    info.setCachedVideoDuration(path, duration)
+    if let position = info.videoPosition?.second {
+      // mpv's remaining time is based on the shorter duration it reports, see FullLength.
+      info.videoRemaining?.second = FullLength.remaining(
+        fullLength: duration, position: position,
+        speed: Preference.bool(for: .scaleRemainingTime) ? info.playSpeed : nil)
+    }
+    guard mainWindow.loaded else { return }
+    currentController.updatePlayTime(withDuration: true, andProgressBar: true)
   }
 
   /// Synchronize the video position cached in the `info.videoPosition` property.
@@ -2845,9 +2865,16 @@ class PlayerCore: NSObject {
     case .time:
       let isNetworkStream = info.isNetworkResource
       syncPosition()
-      info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
-      mpv.getDouble(MPVProperty.playtimeRemainingFull) :
-      mpv.getDouble(MPVProperty.timeRemainingFull)
+      if let fullLength = info.fullLength, let position = info.videoPosition?.second {
+        // mpv's remaining time is based on the shorter duration it reports, see FullLength.
+        info.videoRemaining?.second = FullLength.remaining(
+          fullLength: fullLength, position: position,
+          speed: Preference.bool(for: .scaleRemainingTime) ? info.playSpeed : nil)
+      } else {
+        info.videoRemaining?.second = Preference.bool(for: .scaleRemainingTime) ?
+        mpv.getDouble(MPVProperty.playtimeRemainingFull) :
+        mpv.getDouble(MPVProperty.timeRemainingFull)
+      }
       if isNetworkStream {
         // Update cache info
         info.pausedForCache = mpv.getFlag(MPVProperty.pausedForCache)
@@ -3007,17 +3034,18 @@ class PlayerCore: NSObject {
   }
 
   func getPlaylist() {
-    info.$playlist.withLock { playlist in
-      playlist.removeAll()
-      let playlistCount = mpv.getInt(MPVProperty.playlistCount)
-      for index in 0..<playlistCount {
-        let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
-                                           isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
-                                           isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
-                                           title: mpv.getString(MPVProperty.playlistNTitle(index)))
-        playlist.append(playlistItem)
-      }
+    // The playlist is read from mpv before taking the lock, so that a reader of the playlist does not
+    // wait for every entry to be read.
+    var playlist: [MPVPlaylistItem] = []
+    let playlistCount = mpv.getInt(MPVProperty.playlistCount)
+    for index in 0..<playlistCount {
+      let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
+                                         isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
+                                         isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
+                                         title: mpv.getString(MPVProperty.playlistNTitle(index)))
+      playlist.append(playlistItem)
     }
+    info.$playlist.withLock { $0 = playlist }
   }
 
   func getChapters() {
@@ -3212,6 +3240,84 @@ class PlayerCore: NSObject {
       }
     }
     self.info.setCachedMetadata(path, result)
+  }
+}
+
+// MARK: - Moving between playlist entries
+
+extension PlayerCore: PlaylistSteppingPlayer, EntryStartPlayer {
+
+  var playerState: PlayerState {
+    get { info.state }
+    set { info.state = newValue }
+  }
+
+  var pausedForLoading: Bool {
+    get { info.pausedForLoading }
+    set { info.pausedForLoading = newValue }
+  }
+
+  var userPauseCount: Int {
+    get { info.userPauseCount }
+    set { info.userPauseCount = newValue }
+  }
+
+  var isInteractiveModeActive: Bool { mainWindow.interactiveMode.isActive }
+
+  var isFirstEntryPlaying: Bool { info.playlist.first?.isPlaying ?? false }
+
+  var pausesWhenOpened: Bool { Preference.bool(for: .pauseWhenOpen) }
+
+  var isVideoLoaded: Bool { mainWindow.isVideoLoaded }
+
+  /// Seek to the start of the file, sending the command asynchronously so that the main thread does not wait for mpv.
+  func seekToStart() {
+    mpv.asyncCommand(.seek, args: ["0", "absolute+exact"], replyUserdata: 0)
+  }
+
+  func fetchMpvPaused(_ reply: @escaping (Bool) -> Void) {
+    mpv.getFlagAsync(MPVOption.PlaybackControl.pause) { paused in
+      guard let paused else { return }
+      DispatchQueue.main.async { reply(paused) }
+    }
+  }
+
+  func movePlaylistPosition(forward: Bool, whenAccepted: @escaping () -> Void, reply: @escaping (Bool) -> Void) {
+    mpv.asyncCommand(forward ? .playlistNext : .playlistPrev) { returnValue in
+      let accepted = returnValue >= 0
+      if accepted {
+        whenAccepted()
+      }
+      DispatchQueue.main.async { reply(accepted) }
+    }
+  }
+
+  func playPlaylistEntry(at index: Int) {
+    mpv.asyncCommand(.playlistPlayIndex, args: [String(index)], level: .verbose) { [self] returnValue in
+      if returnValue < 0 {
+        log("Cannot play entry at index \(index) in the playlist, mpv error \(returnValue)", level: .error)
+      }
+    }
+  }
+
+  func refreshPlaylist() {
+    playlistQueue.async { [self] in getPlaylist() }
+  }
+
+  func pauseMpv() {
+    mpv.setFlagAsync(MPVOption.PlaybackControl.pause, true, level: .verbose)
+  }
+
+  func resumeMpv() {
+    mpv.setFlagAsync(MPVOption.PlaybackControl.pause, false, level: .verbose)
+  }
+
+  func cancelThumbnailGeneration() {
+    ffmpegController.cancelThumbnailGeneration()
+  }
+
+  func displayActive() {
+    mainWindow.videoView.displayActive()
   }
 }
 

@@ -8,6 +8,41 @@
 
 import Cocoa
 
+/// The value a play slider seeks to, held apart from the slider while the mouse button is down on it.
+///
+/// The slider sends its action at each change while it is tracked and once more when the button is released. In between, the time
+/// shown is synchronized with `mpv`, which sets the slider to the position `mpv` reports, and during a seek past the duration `mpv`
+/// reports for a file whose full length is longer that position is not the one sought. The action sent at the release therefore seeks
+/// to the last value the pointer set, not to the value the slider then holds.
+struct PlaySliderTracking {
+  private var isTracking = false
+  private var pointerValue: Double?
+
+  /// The mouse button went down on the slider.
+  mutating func began() {
+    isTracking = true
+    pointerValue = nil
+  }
+
+  /// The mouse button was released.
+  mutating func ended() {
+    isTracking = false
+  }
+
+  /// The value to seek to when the slider sends its action.
+  /// - Parameter sliderValue: The value the slider holds.
+  /// - Returns: While the slider is tracked, `sliderValue`, which the pointer has just set. For the action sent at the release, the
+  ///     last value the pointer set; without one, `sliderValue`.
+  mutating func seekValue(sliderValue: Double) -> Double {
+    if isTracking {
+      pointerValue = sliderValue
+      return sliderValue
+    }
+    defer { pointerValue = nil }
+    return pointerValue ?? sliderValue
+  }
+}
+
 class PlaySliderCell: NSSliderCell {
   unowned var _playerCore: PlayerCore!
   var playerCore: PlayerCore {
@@ -172,12 +207,18 @@ class PlaySliderCell: NSSliderCell {
 
   // MARK:- Tracking the Mouse
 
+  /// The value to seek to, held apart from the slider while the mouse button is down on it.
+  var tracking = PlaySliderTracking()
+
   override func startTracking(at startPoint: NSPoint, in controlView: NSView) -> Bool {
     isPausedBeforeSeeking = playerCore.info.state == .paused
+    tracking.began()
     let result = super.startTracking(at: startPoint, in: controlView)
     if result {
       playerCore.pause()
       playerCore.mainWindow.thumbnailPeekView.isHidden = true
+    } else {
+      tracking = PlaySliderTracking()
     }
     return result
   }
@@ -186,6 +227,7 @@ class PlaySliderCell: NSSliderCell {
     if !isPausedBeforeSeeking {
       playerCore.resume()
     }
+    tracking.ended()
     super.stopTracking(last: lastPoint, current: stopPoint, in: controlView, mouseIsUp: flag)
   }
 }

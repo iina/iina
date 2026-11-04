@@ -341,6 +341,19 @@ class MPVController: NSObject {
         Utility.screenshotCacheURL.path
     }
 
+    // IINA builds FFmpeg with support for the SVT-AV1 encoder. This encoder is preferred over
+    // libaom for its better performance. Must set the mpv screenshot-avif-encoder option as it
+    // defaults to "libaom-av1".
+    chkErr(setOptionString(MPVOption.Screenshot.screenshotAvifEncoder, "libsvtav1",
+                           level: .verbose))
+
+    // The mpv screenshot-avif-opts option default value uses keys recognized by the libaom encoder.
+    // As IINA is using the SVT-AV1 encoder the default value is inappropriate. Since the encoder is
+    // only being used for screenshots, enable still-picture coding optimizations for improved
+    // coding efficiency and reduced memory usage.
+    chkErr(setOptionString(MPVOption.Screenshot.screenshotAvifOpts, "svtav1-params=avif=1",
+                           level: .verbose))
+
     setUserOption(PK.screenshotFolder, type: .other, forName: MPVOption.Screenshot.screenshotDir,
                   level: .verbose, transformer: setScreenshotPath)
     setUserOption(PK.screenshotSaveToFile, type: .other, forName: MPVOption.Screenshot.screenshotDir,

@@ -552,7 +552,7 @@
 "sidebar.liquid_glass" = "Liquid Glass";
 "sidebar.sidebar" = "Sidebar";
 "sidebar.sidebar_position" = "Sidebar Position";
-"sidebar.compact_interface" = "Compact Interface";
+"sidebar.compact_interface" = "Compact interface";
 "sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
 "sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
 "sidebar.docked" = "Docked Control Bar and Titlebar";
@@ -800,7 +800,7 @@
 "settings.subAutoLoadIINA.items.0" = "Disabled";
 "settings.subAutoLoadIINA.items.1" = "Subtitles containing media filename";
 "settings.subAutoLoadIINA.items.2" = "Detect intelligently by IINA";
-"settings.subAutoLoadIINA.label" = "Auto Load";
+"settings.subAutoLoadIINA.label" = "Auto load";
 "settings.subAutoLoadPriorityString.desc" = "Please enter a comma-separated list of strings.";
 "settings.subAutoLoadPriorityString.label" = "Subtitles have priority when filename containing";
 "settings.subAutoLoadSearchPath.desc" = "Directories are separated by colons (:). Relative paths and wildcards (*) at the end are allowed.";
@@ -810,7 +810,7 @@
 "settings.subBorderStyle.items.1" = "Outline and Shadow";
 "settings.subBorderStyle.items.3" = "Opaque Box";
 "settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.label" = "Border style";
 "settings.subBold.label" = "Bold";
 "settings.subItalic.label" = "Italic";
 "settings.subLang.desc" = "This option will be stored as ISO 639-2 language code and will work for both mpv and opensubtitles.";
@@ -906,7 +906,7 @@
 "settings.$Appearance" = "Appearance";
 "settings.$AssrtAPIToken" = "Assrt API token";
 "settings.$Author" = "Author";
-"settings.$AutoLoad" = "Auto Load";
+"settings.$AutoLoad" = "Auto load";
 "settings.$Background" = "Background";
 "settings.$Behavior" = "Behavior";
 "settings.$Border" = "Border";
@@ -978,7 +978,7 @@
 "settings.$OpenLogWindow" = "Open the log viewer";
 "settings.$OrSelectFrom" = "Or select from available plugins";
 "settings.$Other" = "Other";
-"settings.$OtherStyles" = "Other Styles";
+"settings.$OtherStyles" = "Other styles";
 "settings.$OverrideLevel" = "Override level";
 "settings.$Percent" = "%";
 "settings.$PictureinnPicture" = "Picture-in-Picture";

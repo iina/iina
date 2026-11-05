@@ -5,6 +5,11 @@
 <h1 align="center">IINA</h1>
 
 <p align="center">IINA is the <b>modern</b> video player for macOS.</p>
+ 
+<p align="center">
+<img src="https://iina.io/images/sc-sky.png" alt="Screenshot of IINA" />
+<!-- <br/>Screenshot of IINA -->
+</p>
 
 <p align="center">
 <a href="https://iina.io/">Website</a> ·

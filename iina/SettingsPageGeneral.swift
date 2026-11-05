@@ -134,6 +134,9 @@ class SettingsPageGeneral: SettingsPage {
           .image(name: "custom.play.rectangle.badge.clock")
           .bindTo(.recordPlaybackHistory)
         SettingsItem.Switch()
+          .image(name: "clock.arrow.circlepath")
+          .bindTo(.recordLastPlayedFile)
+        SettingsItem.Switch()
           .image(name: "custom.filemenu.and.selection.badge.clock")
           .bindTo(.recordRecentFiles)
           .withDetailView {

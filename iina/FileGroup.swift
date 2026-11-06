@@ -17,8 +17,8 @@ class FileInfo: Hashable {
   var ext: String
   var nameInSeries: String?
   var characters: [Character]
-  var dist: [FileInfo: UInt] = [:]
-  var minDist: [FileInfo] = []
+  var dist: [String: UInt] = [:]
+  var minDist: Set<String> = []
   var relatedSubs: [FileInfo] = []
   var priorityStringOccurrences = 0
   var isMatched = false

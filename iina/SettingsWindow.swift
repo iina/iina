@@ -181,6 +181,7 @@ class SettingsWindow: CommonWindow {
     contentSplitItem.titlebarSeparatorStyle = .automatic
 
     self.title = "Settings"
+    self.contentMinSize = NSSize(width: 600, height: 400)
     self.isOpaque = false
     self.titlebarAppearsTransparent = true
     self.toolbarStyle = .unified

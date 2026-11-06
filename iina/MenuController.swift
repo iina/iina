@@ -242,6 +242,12 @@ class MenuController: NSObject, NSMenuDelegate {
 
     playbackMenu.delegate = self
 
+    let sharePlay = NSMenuItem(title: NSLocalizedString("shareplay.menu", comment: ""),
+                               action: #selector(showSharePlay), keyEquivalent: "")
+    sharePlay.target = self
+    playbackMenu.addItem(.separator())
+    playbackMenu.addItem(sharePlay)
+
     pause.action = #selector(MainMenuActionHandler.menuTogglePause(_:))
     stop.action = #selector(MainMenuActionHandler.menuStop(_:))
 
@@ -497,6 +503,10 @@ class MenuController: NSObject, NSMenuDelegate {
       menu.addItem(withTitle: track.readableTitle, action: #selector(MainMenuActionHandler.menuChangeTrack(_:)),
                              tag: nil, obj: (track, type), stateOn: track.id == info.trackId(type))
     }
+  }
+
+  @objc private func showSharePlay() {
+    SharePlayManager.shared.show()
   }
 
   private func updatePlaybackMenu() {

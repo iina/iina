@@ -1552,7 +1552,7 @@ class MainWindowController: PlayerWindowController {
     fadeableViews.update()
 
     if player.info.state == .paused {
-      if Preference.bool(for: .playWhenEnteringFullScreen) {
+      if Preference.bool(for: .playWhenEnteringFullScreen), player.sharePlayPlayback == nil {
         player.resume()
       } else {
         // When playback is paused the display link is stopped in order to avoid wasting energy on
@@ -1711,7 +1711,7 @@ class MainWindowController: PlayerWindowController {
     videoView.layoutSubtreeIfNeeded()
     forceDraw("exited full screen mode")
 
-    if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.state == .playing {
+    if Preference.bool(for: .pauseWhenLeavingFullScreen) && player.info.state == .playing && player.sharePlayPlayback == nil {
       player.pause()
     }
 
@@ -2009,7 +2009,7 @@ class MainWindowController: PlayerWindowController {
 
   func windowDidBecomeKey(_ notification: Notification) {
     window!.makeFirstResponder(window!)
-    if Preference.bool(for: .pauseWhenInactive) && isPausedDueToInactive {
+    if Preference.bool(for: .pauseWhenInactive) && isPausedDueToInactive && player.sharePlayPlayback == nil {
       player.resume()
       isPausedDueToInactive = false
     }
@@ -2021,7 +2021,7 @@ class MainWindowController: PlayerWindowController {
     if NSApp.keyWindow == nil ||
       (NSApp.keyWindow?.windowController is MainWindowController ||
         (NSApp.keyWindow?.windowController is MiniPlayerWindowController && NSApp.keyWindow?.windowController != player.miniPlayer)) {
-      if Preference.bool(for: .pauseWhenInactive), player.info.state == .playing {
+      if Preference.bool(for: .pauseWhenInactive), player.info.state == .playing, player.sharePlayPlayback == nil {
         player.pause()
         isPausedDueToInactive = true
       }
@@ -2046,7 +2046,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillMiniaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized), player.info.state == .playing {
+    if Preference.bool(for: .pauseWhenMinimized), player.info.state == .playing, player.sharePlayPlayback == nil {
       isPausedDueToMiniaturization = true
       player.pause()
     }
@@ -2060,7 +2060,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowDidDeminiaturize(_ notification: Notification) {
-    if Preference.bool(for: .pauseWhenMinimized) && isPausedDueToMiniaturization {
+    if Preference.bool(for: .pauseWhenMinimized) && isPausedDueToMiniaturization && player.sharePlayPlayback == nil {
       player.resume()
       isPausedDueToMiniaturization = false
     }
@@ -3126,7 +3126,7 @@ extension MainWindowController: PIPViewControllerDelegate {
         window.miniaturize(self)
         break
       }
-      if Preference.bool(for: .pauseWhenPip) {
+      if Preference.bool(for: .pauseWhenPip), player.sharePlayPlayback == nil {
         player.pause()
       }
     }

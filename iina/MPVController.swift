@@ -781,6 +781,11 @@ class MPVController: NSObject {
   // Send arbitrary mpv command.
   func command(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true,
                level: Logger.Level = .debug, returnValueCallback: ((Int32) -> Void)? = nil) {
+    if Thread.isMainThread, player.sharePlayPlayback != nil, !player.applyingSharePlayCommand,
+       player.routeSharePlay(SharePlayCommandRouter.command([command.rawValue] + args.compactMap { $0 }, snapshot: player.sharePlaySnapshot)) {
+      returnValueCallback?(0)
+      return
+    }
     guard mpv != nil else { return }
     log("Run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))", level: level)
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
@@ -800,6 +805,8 @@ class MPVController: NSObject {
   }
 
   func command(rawString: String, level: Logger.Level = .debug) -> Int32 {
+    if Thread.isMainThread, player.sharePlayPlayback != nil, !player.applyingSharePlayCommand,
+       player.routeSharePlay(SharePlayCommandRouter.raw(rawString, snapshot: player.sharePlaySnapshot)) { return 0 }
     log("Run command: \(rawString)", level: level)
     return mpv_command_string(mpv, rawString)
   }
@@ -829,18 +836,21 @@ class MPVController: NSObject {
 
   // Set property
   func setFlag(_ name: String, _ flag: Bool, level: Logger.Level = .debug) {
+    if player.routeSharePlayProperty(name, value: flag ? "yes" : "no") { return }
     log("Set property: \(name)=\(flag)", level: level)
     var data: Int32 = flag ? 1 : 0
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
   }
 
   func setInt(_ name: String, _ value: Int, level: Logger.Level = .debug) {
+    if player.routeSharePlayProperty(name, value: String(value)) { return }
     log("Set property: \(name)=\(value)", level: level)
     var data = Int64(value)
     mpv_set_property(mpv, name, MPV_FORMAT_INT64, &data)
   }
 
   func setDouble(_ name: String, _ value: Double, level: Logger.Level = .debug) {
+    if player.routeSharePlayProperty(name, value: String(value)) { return }
     log("Set property: \(name)=\(value)", level: level)
     var data = value
     mpv_set_property(mpv, name, MPV_FORMAT_DOUBLE, &data)
@@ -848,6 +858,7 @@ class MPVController: NSObject {
 
   @discardableResult
   func setString(_ name: String, _ value: String, level: Logger.Level = .debug) -> Int32 {
+    if player.routeSharePlayProperty(name, value: value) { return 0 }
     log("Set property: \(name)=\(value)", level: level)
     return mpv_set_property_string(mpv, name, value)
   }

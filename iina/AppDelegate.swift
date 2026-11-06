@@ -1046,6 +1046,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       player.clearPlugins()
     }
 
+    JavascriptPlugin.plugins.forEach { $0.globalInstance?.unload() }
     JavascriptPlugin.recreateAllPlugins()
     JavascriptPlugin.loadGlobalInstances()
 

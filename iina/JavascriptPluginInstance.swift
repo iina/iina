@@ -12,6 +12,7 @@ import JavaScriptCore
 class JavascriptPluginInstance {
   var apis: [String: JavascriptAPI]!
   private var polyfill: JavascriptPolyfill!
+  private var isUnloaded = false
 
   lazy var js: JSContext = createJSContext()
   var logHandler: ((String, Logger.Level) -> Void)?
@@ -70,6 +71,12 @@ class JavascriptPluginInstance {
   }
 
   deinit {
+    unload()
+  }
+
+  func unload() {
+    guard !isUnloaded else { return }
+    isUnloaded = true
     if let plugin = self.plugin {
       Logger.log("Unload \(plugin.name)", level: .debug, subsystem: subsystem)
     }

@@ -17,22 +17,26 @@ import JavaScriptCore
 
 class JavascriptAPIPreferences: JavascriptAPI, JavascriptAPIPreferencesExportable {
   @objc func get(_ key: String) -> Any? {
-    let plugin = pluginInstance.plugin!
+    guard let plugin = pluginInstance?.plugin else { return nil }
     if let value = plugin.preferences[key] {
       return value
     }
     if let value = plugin.defaultPreferences[key] {
       return value
     }
-    Logger.log("Trying to get preference value for undefined key \(key)", level: .warning, subsystem: pluginInstance.subsystem)
+    if let subsystem = pluginInstance?.subsystem {
+      Logger.log("Trying to get preference value for undefined key \(key)", level: .warning, subsystem: subsystem)
+    }
     return nil
   }
 
   @objc func set(_ key: String, _ value: Any) {
-    pluginInstance.plugin.preferences[key] = value
+    guard let plugin = pluginInstance?.plugin else { return }
+    plugin.preferences[key] = value
   }
 
   @objc func sync() {
-    pluginInstance.plugin.syncPreferences()
+    guard let plugin = pluginInstance?.plugin else { return }
+    plugin.syncPreferences()
   }
 }

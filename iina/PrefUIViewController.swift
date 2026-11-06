@@ -109,21 +109,27 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     // size
     if windowSizeCheckBox.state == .on {
       setSubViews(of: windowSizeBox, enabled: true)
+      let isPercent = windowSizeUnitPopUpButton.selectedTag() == UnitPercentTag
+      windowSizeValueTextField.stringValue = GeometryDef.normalizedValue(windowSizeValueTextField.stringValue, isPercent: isPercent)
       geometry += windowSizeTypePopUpButton.selectedTag() == SizeWidthTag ? "" : "x"
       geometry += windowSizeValueTextField.stringValue
-      geometry += windowSizeUnitPopUpButton.selectedTag() == UnitPointTag ? "" : "%"
+      geometry += isPercent ? "%" : ""
     } else {
       setSubViews(of: windowSizeBox, enabled: false)
     }
     // position
     if windowPosCheckBox.state == .on {
       setSubViews(of: windowPosBox, enabled: true)
+      let xIsPercent = windowPosXUnitPopUpButton.selectedTag() == UnitPercentTag
+      let yIsPercent = windowPosYUnitPopUpButton.selectedTag() == UnitPercentTag
+      windowPosXOffsetTextField.stringValue = GeometryDef.normalizedValue(windowPosXOffsetTextField.stringValue, isPercent: xIsPercent)
+      windowPosYOffsetTextField.stringValue = GeometryDef.normalizedValue(windowPosYOffsetTextField.stringValue, isPercent: yIsPercent)
       geometry += windowPosXAnchorPopUpButton.selectedTag() == SideLeftTag ? "+" : "-"
       geometry += windowPosXOffsetTextField.stringValue
-      geometry += windowPosXUnitPopUpButton.selectedTag() == UnitPointTag ? "" : "%"
+      geometry += xIsPercent ? "%" : ""
       geometry += windowPosYAnchorPopUpButton.selectedTag() == SideBottomTag ? "+" : "-"
       geometry += windowPosYOffsetTextField.stringValue
-      geometry += windowPosYUnitPopUpButton.selectedTag() == UnitPointTag ? "" : "%"
+      geometry += yIsPercent ? "%" : ""
     } else {
       setSubViews(of: windowPosBox, enabled: false)
     }
@@ -245,4 +251,3 @@ class PrefUIViewController: PreferenceViewController, PreferenceWindowEmbeddable
     return timing != 2
   }
 }
-

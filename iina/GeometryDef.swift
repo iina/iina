@@ -11,6 +11,11 @@ import Foundation
 struct GeometryDef {
   var x: String?, y: String?, w: String?, h: String?, xSign: String?, ySign: String?
 
+  static func normalizedValue(_ value: String, isPercent: Bool) -> String {
+    guard isPercent else { return value }
+    return String(min(max(Int(value.trimmingCharacters(in: .whitespacesAndNewlines)) ?? 0, 0), 100))
+  }
+
   static func parse(_ geometryString: String) -> GeometryDef? {
     // guard option value
     guard !geometryString.isEmpty else { return nil }

@@ -12,7 +12,111 @@ import Just
 fileprivate let ui = SettingsUIHelper.sharedUI
 
 
+final class PluginPackageDropScrollView: NSScrollView {
+  weak var pluginPage: SettingsPagePlugin? {
+    didSet { dropOverlay.isHidden = true }
+  }
+  private let dropOverlay = PluginPackageDropOverlay()
+
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+    registerForDraggedTypes([.fileURL])
+    dropOverlay.isHidden = true
+    addSubview(dropOverlay)
+  }
+
+  override func layout() {
+    super.layout()
+    dropOverlay.frame = NSRect(x: 8, y: 8, width: max(0, bounds.width - 16), height: max(0, bounds.height - 16))
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func packageURLs(from sender: NSDraggingInfo) -> [URL]? {
+    guard pluginPage?.isInstalling == false,
+          sender.draggingSourceOperationMask.contains(.copy),
+          let urls = sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: [
+            .urlReadingFileURLsOnly: true
+          ]) as? [URL],
+          !urls.isEmpty,
+          urls.allSatisfy({ $0.pathExtension.lowercased() == "iinaplgz" &&
+            (try? $0.resourceValues(forKeys: [.isRegularFileKey]).isRegularFile) == true
+          }) else { return nil }
+    return urls
+  }
+
+  override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
+    let acceptsDrop = packageURLs(from: sender) != nil
+    dropOverlay.isHidden = !acceptsDrop
+    return acceptsDrop ? .copy : []
+  }
+
+  override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation {
+    return draggingEntered(sender)
+  }
+
+  override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
+    return packageURLs(from: sender) != nil
+  }
+
+  override func draggingExited(_ sender: NSDraggingInfo?) {
+    dropOverlay.isHidden = true
+  }
+
+  override func concludeDragOperation(_ sender: NSDraggingInfo?) {
+    dropOverlay.isHidden = true
+  }
+
+  override func performDragOperation(_ sender: NSDraggingInfo) -> Bool {
+    dropOverlay.isHidden = true
+    guard let urls = packageURLs(from: sender), let pluginPage else { return false }
+    pluginPage.installPlugins(localPackageURLs: urls)
+    return true
+  }
+}
+
+
+private final class PluginPackageDropOverlay: NSView {
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+
+    let imageView = NSImageView()
+    imageView.image = .sf("arrow.down.doc", withConfiguration: NSImage.SymbolConfiguration(pointSize: 36, weight: .regular))
+    imageView.contentTintColor = .controlAccentColor
+    let label = NSTextField(labelWithString: NSLocalizedString("plugin.drop_to_install", comment: "Plugin package drag and drop hint"))
+    label.font = .systemFont(ofSize: 20, weight: .semibold)
+    label.textColor = .controlAccentColor
+
+    let stack = NSStackView(views: [imageView, label])
+    stack.orientation = .vertical
+    stack.spacing = 12
+    stack.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(stack)
+    stack.center()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  override func draw(_ dirtyRect: NSRect) {
+    let path = NSBezierPath(roundedRect: bounds.insetBy(dx: 1, dy: 1), xRadius: 12, yRadius: 12)
+    NSColor.windowBackgroundColor.withAlphaComponent(0.95).setFill()
+    path.fill()
+    NSColor.controlAccentColor.setStroke()
+    path.lineWidth = 2
+    path.stroke()
+  }
+
+  override func hitTest(_ point: NSPoint) -> NSView? { nil }
+}
+
+
 class SettingsPagePlugin: SettingsPage {
+  fileprivate private(set) var isInstalling = false
+
   override var identifier: String {
     "plugin"
   }
@@ -67,9 +171,18 @@ class SettingsPagePlugin: SettingsPage {
   }
 
   func installPlugin(localPackageURL url: URL) {
+    installPlugins(localPackageURLs: [url])
+  }
+
+  fileprivate func installPlugins(localPackageURLs urls: [URL]) {
+    guard !isInstalling else { return }
+    isInstalling = true
     Task { @MainActor in
-      await pluginManager.install(localPackageURL: url)
-      self.listView.tableView.reloadData()
+      defer { isInstalling = false }
+      for url in urls {
+        await pluginManager.install(localPackageURL: url)
+        listView.tableView.reloadData()
+      }
     }
   }
 }

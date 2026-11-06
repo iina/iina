@@ -2006,13 +2006,16 @@ class PlayerCore: NSObject {
       log("Write watch later config")
       mpv.command(.writeWatchLaterConfig, level: .verbose)
     }
+    let recordLastPlayedFile = Preference.bool(for: .recordLastPlayedFile)
     if let url = info.currentURL {
-      Preference.set(url, for: .iinaLastPlayedFilePath)
+      if recordLastPlayedFile {
+        Preference.set(url, for: .iinaLastPlayedFilePath)
+      }
       // Write to cache directly (rather than calling `refreshCachedVideoProgress`).
       // If user only closed the window but didn't quit the app, this can make sure playlist displays the correct progress.
       info.setCachedVideoDurationAndProgress(url.path, (duration: info.videoDuration?.second, progress: info.videoPosition?.second))
     }
-    if let position = info.videoPosition?.second {
+    if recordLastPlayedFile, let position = info.videoPosition?.second {
       Preference.set(position, for: .iinaLastPlayedFilePosition)
     }
   }

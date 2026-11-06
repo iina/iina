@@ -101,6 +101,8 @@ class SettingsWindow: CommonWindow {
                styleMask: [.closable, .miniaturizable, .resizable, .titled, .fullSizeContentView],
                backing: .buffered, defer: false)
 
+    self.minSize = NSMakeSize(600, 420)
+
     let splitViewController = NSSplitViewController()
     self.contentViewController = splitViewController
 

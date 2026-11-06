@@ -45,10 +45,12 @@ class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
   }
 
   @objc func xmlrpc(_ location: String) -> JavascriptAPIXmlrpc? {
-    guard hostIsValid(location) else {
-      return nil
+    return whenPermitted(to: .networkRequest) {
+      guard hostIsValid(location) else {
+        return nil
+      }
+      return JavascriptAPIXmlrpc(context: context, pluginInstance: pluginInstance, location: location)
     }
-    return JavascriptAPIXmlrpc(context: context, pluginInstance: pluginInstance, location: location)
   }
 
   func download(_ url: String, _ dest: String, _ options: [String: Any]?) -> JSValue? {
@@ -137,19 +139,21 @@ class JavascriptAPIXmlrpc: JavascriptAPI, JavascriptAPIXmlrpcExportable {
   }
 
   @objc func call(_ method: String, _ args: [Any]) -> JSValue? {
-    return createPromise { resolve, reject in
-      self.xmlrpc.call(method, args) { response in
-        switch response {
-        case .ok(let returnValue):
-          resolve.call(withArguments: [returnValue])
-        case .failure:
-          reject.call(withArguments: [])
-        case .error(let err):
-          reject.call(withArguments: [[
-            "httpCode": err.httpCode,
-            "reason": err.reason,
-            "description": err.readableDescription,
-          ] as [String: Any]])
+    return whenPermitted(to: .networkRequest) {
+      createPromise { resolve, reject in
+        self.xmlrpc.call(method, args) { response in
+          switch response {
+          case .ok(let returnValue):
+            resolve.call(withArguments: [returnValue])
+          case .failure:
+            reject.call(withArguments: [])
+          case .error(let err):
+            reject.call(withArguments: [[
+              "httpCode": err.httpCode,
+              "reason": err.reason,
+              "description": err.readableDescription,
+            ] as [String: Any]])
+          }
         }
       }
     }

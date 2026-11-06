@@ -48,7 +48,7 @@ class SidebarLayoutPane: SidebarScrollView {
       themeSettingStack.addArrangedSubview(ui.vStack(
         spacing: .sidebarItemSpacing,
         ui.hStack(
-          ui.image("liquid.glass", size: 20, config: .sidebarIconConfig),
+          ui.image("capsule.on.rectangle.liquid.glass", "liquid.glass", size: 20, config: .sidebarIconConfig),
           ui.label("sidebar.liquid_glass"),
           ui.flexibleSpace(),
         ),

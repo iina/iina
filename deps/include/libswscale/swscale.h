@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2024 Niklas Haas
  * Copyright (C) 2001-2011 Michael Niedermayer <michaelni@gmx.at>
  *
  * This file is part of FFmpeg.
@@ -61,37 +62,398 @@ const char *swscale_configuration(void);
  */
 const char *swscale_license(void);
 
-/* values for the flags, the stuff on the command line is different */
-#define SWS_FAST_BILINEAR     1
-#define SWS_BILINEAR          2
-#define SWS_BICUBIC           4
-#define SWS_X                 8
-#define SWS_POINT          0x10
-#define SWS_AREA           0x20
-#define SWS_BICUBLIN       0x40
-#define SWS_GAUSS          0x80
-#define SWS_SINC          0x100
-#define SWS_LANCZOS       0x200
-#define SWS_SPLINE        0x400
+/**
+ * Get the AVClass for SwsContext. It can be used in combination with
+ * AV_OPT_SEARCH_FAKE_OBJ for examining options.
+ *
+ * @see av_opt_find().
+ */
+const AVClass *sws_get_class(void);
+
+/******************************
+ * Flags and quality settings *
+ ******************************/
+
+typedef enum SwsDither {
+    SWS_DITHER_NONE = 0, /* disable dithering */
+    SWS_DITHER_AUTO,     /* auto-select from preset */
+    SWS_DITHER_BAYER,    /* ordered dither matrix */
+    SWS_DITHER_ED,       /* error diffusion */
+    SWS_DITHER_A_DITHER, /* arithmetic addition */
+    SWS_DITHER_X_DITHER, /* arithmetic xor */
+    SWS_DITHER_NB,       /* not part of the ABI */
+    SWS_DITHER_MAX_ENUM = 0x7FFFFFFF, /* force size to 32 bits, not a valid dither type */
+} SwsDither;
+
+typedef enum SwsAlphaBlend {
+    SWS_ALPHA_BLEND_NONE = 0,
+    SWS_ALPHA_BLEND_UNIFORM,
+    SWS_ALPHA_BLEND_CHECKERBOARD,
+    SWS_ALPHA_BLEND_NB,  /* not part of the ABI */
+    SWS_ALPHA_BLEND_MAX_ENUM = 0x7FFFFFFF, /* force size to 32 bits, not a valid blend mode */
+} SwsAlphaBlend;
+
+typedef enum SwsScaler {
+    SWS_SCALE_AUTO = 0,
+    SWS_SCALE_BILINEAR, ///< bilinear filtering
+    SWS_SCALE_BICUBIC,  ///< 2-tap cubic BC-spline
+    SWS_SCALE_POINT,    ///< nearest neighbor (point sampling)
+    SWS_SCALE_AREA,     ///< area averaging
+    SWS_SCALE_GAUSSIAN, ///< 2-tap gaussian approximation
+    SWS_SCALE_SINC,     ///< unwindowed sinc
+    SWS_SCALE_LANCZOS,  ///< 3-tap sinc/sinc
+    SWS_SCALE_SPLINE,   ///< unwindowned natural cubic spline
+    SWS_SCALE_NB,       ///< not part of the ABI
+    SWS_SCALE_MAX_ENUM = 0x7FFFFFFF, ///< force size to 32 bits, not a valid filter type
+} SwsScaler;
+
+typedef enum SwsBackend {
+    /* Stable backends */
+    SWS_BACKEND_LEGACY      = (1 << 0), ///< Legacy bespoke format-specific code
+    SWS_BACKEND_STABLE      = SWS_BACKEND_LEGACY,
+
+    /* Unstable backends (auto-selected only if SWS_UNSTABLE is enabled) */
+    SWS_BACKEND_C           = (1 << 1), ///< Template-based C reference implementation
+    SWS_BACKEND_MEMCPY      = (1 << 2), ///< Fast path using libc memcpy() / memset()
+    SWS_BACKEND_X86         = (1 << 3), ///< Chained x86 SIMD kernels
+    SWS_BACKEND_AARCH64     = (1 << 4), ///< Chained AArch64 NEON kernels
+    SWS_BACKEND_SPIRV       = (1 << 5), ///< Vulkan SPIR-V backend
+    SWS_BACKEND_UNSTABLE    = SWS_BACKEND_C |
+                              SWS_BACKEND_MEMCPY |
+                              SWS_BACKEND_X86 |
+                              SWS_BACKEND_AARCH64 |
+                              SWS_BACKEND_SPIRV,
+
+    SWS_BACKEND_ALL = SWS_BACKEND_STABLE | SWS_BACKEND_UNSTABLE,
+    SWS_BACKEND_MAX_ENUM = 0x7FFFFFFF, ///< force size to 32 bits, not a valid backend
+} SwsBackend;
+
+typedef enum SwsFlags {
+    /**
+     * Return an error on underspecified conversions. Without this flag,
+     * unspecified fields are defaulted to sensible values.
+     */
+    SWS_STRICT        = 1 << 11,
+
+    /**
+     * Emit verbose log of scaling parameters.
+     */
+    SWS_PRINT_INFO    = 1 << 12,
+
+    /**
+     * Perform full chroma upsampling when upscaling to RGB.
+     *
+     * For example, when converting 50x50 yuv420p to 100x100 rgba, setting this flag
+     * will scale the chroma plane from 25x25 to 100x100 (4:4:4), and then convert
+     * the 100x100 yuv444p image to rgba in the final output step.
+     *
+     * Without this flag, the chroma plane is instead scaled to 50x100 (4:2:2),
+     * with a single chroma sample being reused for both of the horizontally
+     * adjacent RGBA output pixels.
+     */
+    SWS_FULL_CHR_H_INT = 1 << 13,
+
+    /**
+     * Perform full chroma interpolation when downscaling RGB sources.
+     *
+     * For example, when converting a 100x100 rgba source to 50x50 yuv444p, setting
+     * this flag will generate a 100x100 (4:4:4) chroma plane, which is then
+     * downscaled to the required 50x50.
+     *
+     * Without this flag, the chroma plane is instead generated at 50x100 (dropping
+     * every other pixel), before then being downscaled to the required 50x50
+     * resolution.
+     */
+    SWS_FULL_CHR_H_INP = 1 << 14,
+
+    /**
+     * Force bit-exact output. This will prevent the use of platform-specific
+     * optimizations that may lead to slight difference in rounding, in favor
+     * of always maintaining exact bit output compatibility with the reference
+     * C code.
+     *
+     * Note: It is recommended to set both of these flags simultaneously.
+     */
+    SWS_ACCURATE_RND   = 1 << 18,
+    SWS_BITEXACT       = 1 << 19,
+
+    /**
+     * Allow/prefer using experimental new code paths. This may be faster,
+     * slower, or produce different output, with semantics subject to change
+     * at any point in time. For testing and debugging purposes only.
+     */
+    SWS_UNSTABLE = 1 << 20,
+
+    /**
+     * Deprecated flags.
+     */
+    SWS_DIRECT_BGR      = 1 << 15, ///< This flag has no effect
+    SWS_ERROR_DIFFUSION = 1 << 23, ///< Set `SwsContext.dither` instead
+
+    /**
+     * Scaler selection options. Only one may be active at a time.
+     * Deprecated in favor of `SwsContext.scaler`.
+     */
+    SWS_FAST_BILINEAR = 1 <<  0, ///< fast bilinear filtering
+    SWS_BILINEAR      = 1 <<  1, ///< bilinear filtering
+    SWS_BICUBIC       = 1 <<  2, ///< 2-tap cubic B-spline
+    SWS_X             = 1 <<  3, ///< experimental
+    SWS_POINT         = 1 <<  4, ///< nearest neighbor
+    SWS_AREA          = 1 <<  5, ///< area averaging
+    SWS_BICUBLIN      = 1 <<  6, ///< bicubic luma, bilinear chroma
+    SWS_GAUSS         = 1 <<  7, ///< gaussian approximation
+    SWS_SINC          = 1 <<  8, ///< unwindowed sinc
+    SWS_LANCZOS       = 1 <<  9, ///< 3-tap sinc/sinc
+    SWS_SPLINE        = 1 << 10, ///< unwindowed natural cubic spline
+} SwsFlags;
+
+typedef enum SwsIntent {
+    SWS_INTENT_PERCEPTUAL = 0,            ///< Perceptual tone mapping
+    SWS_INTENT_RELATIVE_COLORIMETRIC = 1, ///< Relative colorimetric clipping
+    SWS_INTENT_SATURATION = 2,            ///< Saturation mapping
+    SWS_INTENT_ABSOLUTE_COLORIMETRIC = 3, ///< Absolute colorimetric clipping
+    SWS_INTENT_NB, ///< not part of the ABI
+} SwsIntent;
+
+/***********************************
+ * Context creation and management *
+ ***********************************/
+
+/**
+ * Main external API structure. New fields can be added to the end with
+ * minor version bumps. Removal, reordering and changes to existing fields
+ * require a major version bump. sizeof(SwsContext) is not part of the ABI.
+ */
+typedef struct SwsContext {
+    const AVClass *av_class;
+
+    /**
+     * Private data of the user, can be used to carry app specific stuff.
+     */
+    void *opaque;
+
+    /**
+     * Bitmask of SWS_*. See `SwsFlags` for details.
+     */
+    unsigned flags;
+
+    /**
+     * Extra parameters for fine-tuning certain scalers.
+     */
+#define SWS_NUM_SCALER_PARAMS 2
+    double scaler_params[SWS_NUM_SCALER_PARAMS];
+
+    /**
+     * How many threads to use for processing, or 0 for automatic selection.
+     */
+    int threads;
+
+    /**
+     * Dither mode.
+     */
+    SwsDither dither;
+
+    /**
+     * Alpha blending mode. See `SwsAlphaBlend` for details.
+     */
+    SwsAlphaBlend alpha_blend;
+
+    /**
+     * Use gamma correct scaling.
+     */
+    int gamma_flag;
+
+    /**
+     * Deprecated frame property overrides, for the legacy API only.
+     *
+     * Ignored by sws_scale_frame() when used in dynamic mode, in which
+     * case all properties are instead taken from the frame directly.
+     */
+    int src_w, src_h;  ///< Width and height of the source frame
+    int dst_w, dst_h;  ///< Width and height of the destination frame
+    int src_format;    ///< Source pixel format
+    int dst_format;    ///< Destination pixel format
+    int src_range;     ///< Source is full range
+    int dst_range;     ///< Destination is full range
+    int src_v_chr_pos; ///< Source vertical chroma position in luma grid / 256
+    int src_h_chr_pos; ///< Source horizontal chroma position
+    int dst_v_chr_pos; ///< Destination vertical chroma position
+    int dst_h_chr_pos; ///< Destination horizontal chroma position
+
+    /**
+     * Desired ICC intent for color space conversions.
+     */
+    int intent;
+
+    /**
+     * Scaling filter. If set to something other than SWS_SCALE_AUTO, this will
+     * override the filter implied by `SwsContext.flags`.
+     *
+     * Note: Does not affect the legacy (stateful) API.
+     */
+    SwsScaler scaler;
+
+    /**
+     * Scaler used specifically for up/downsampling subsampled (chroma) planes.
+     * If set to something other than SWS_SCALE_AUTO, this will override the
+     * filter implied by `SwsContext.scaler`. Otherwise, the same filter
+     * will be used for both main scaling and chroma subsampling.
+     */
+    SwsScaler scaler_sub;
+
+    /**
+     * Bitmask of SWS_BACKEND_*. If non-zero, this will restrict the available
+     * backends to the specified set. If left as zero, a default set of
+     * backends will be selected automatically (based on SWS_UNSTABLE).
+     *
+     * Note: This is only relevant for the new API (sws_scale_frame()). The
+     * stateful legacy API always implies SWS_BACKEND_LEGACY.
+     */
+    SwsBackend backends;
+
+    /* Remember to add new fields to graph.c:opts_equal() */
+} SwsContext;
+
+/**
+ * Allocate an empty SwsContext and set its fields to default values.
+ */
+SwsContext *sws_alloc_context(void);
+
+/**
+ * Free the context and everything associated with it, and write NULL
+ * to the provided pointer.
+ */
+void sws_free_context(SwsContext **ctx);
+
+/***************************
+ * Supported frame formats *
+ ***************************/
+
+/**
+ * Test if a given (software) pixel format is supported by any backend,
+ * excluding unstable backends.
+ *
+ * @param output  If 0, test if compatible with the source/input frame;
+ *                otherwise, with the destination/output frame.
+ * @param format  The format to check.
+ *
+ * @return A positive integer if supported, 0 otherwise.
+ */
+int sws_test_format(enum AVPixelFormat format, int output);
+
+/**
+ * Test if a given hardware pixel format is supported by any backend,
+ * excluding unstable backends.
+ *
+ * @param format  The hardware format to check, or AV_PIX_FMT_NONE.
+ *
+ * @return A positive integer if supported or AV_PIX_FMT_NONE, 0 otherwise.
+ */
+int sws_test_hw_format(enum AVPixelFormat format);
+
+/**
+ * Test if a given color space is supported.
+ *
+ * @param output  If 0, test if compatible with the source/input frame;
+ *                otherwise, with the destination/output frame.
+ * @param colorspace The colorspace to check.
+ *
+ * @return A positive integer if supported, 0 otherwise.
+ */
+int sws_test_colorspace(enum AVColorSpace colorspace, int output);
+
+/**
+ * Test if a given set of color primaries is supported.
+ *
+ * @param output  If 0, test if compatible with the source/input frame;
+ *                otherwise, with the destination/output frame.
+ * @param primaries The color primaries to check.
+ *
+ * @return A positive integer if supported, 0 otherwise.
+ */
+int sws_test_primaries(enum AVColorPrimaries primaries, int output);
+
+/**
+ * Test if a given color transfer function is supported.
+ *
+ * @param output  If 0, test if compatible with the source/input frame;
+ *                otherwise, with the destination/output frame.
+ * @param trc     The color transfer function to check.
+ *
+ * @return A positive integer if supported, 0 otherwise.
+ */
+int sws_test_transfer(enum AVColorTransferCharacteristic trc, int output);
+
+/**
+ * Helper function to run all sws_test_* against a frame, as well as testing
+ * the basic frame properties for sanity. Ignores irrelevant properties - for
+ * example, AVColorSpace is not checked for RGB frames.
+ */
+int sws_test_frame(const AVFrame *frame, int output);
+
+/**
+ * Like `sws_scale_frame`, but without actually scaling. It will instead
+ * merely initialize internal state that *would* be required to perform the
+ * operation, as well as returning the correct error code for unsupported
+ * frame combinations.
+ *
+ * @param ctx   The scaling context.
+ * @param dst   The destination frame to consider.
+ * @param src   The source frame to consider.
+ * @return 0 on success, a negative AVERROR code on failure.
+ */
+int sws_frame_setup(SwsContext *ctx, const AVFrame *dst, const AVFrame *src);
+
+/********************
+ * Main scaling API *
+ ********************/
+
+/**
+ * Check if a given conversion is a noop. Returns a positive integer if
+ * no operation needs to be performed, 0 otherwise.
+ */
+int sws_is_noop(const AVFrame *dst, const AVFrame *src);
+
+/**
+ * Scale source data from `src` and write the output to `dst`.
+ *
+ * This function can be used directly on an allocated context, without setting
+ * up any frame properties or calling `sws_init_context()`. Such usage is fully
+ * dynamic and does not require reallocation if the frame properties change.
+ *
+ * Alternatively, this function can be called on a context that has been
+ * explicitly initialized. However, this is provided only for backwards
+ * compatibility. In this usage mode, all frame properties must be correctly
+ * set at init time, and may no longer change after initialization.
+ *
+ * @param ctx   The scaling context.
+ * @param dst   The destination frame. The data buffers may either be already
+ *              allocated by the caller or left clear, in which case they will
+ *              be allocated by the scaler. The latter may have performance
+ *              advantages - e.g. in certain cases some (or all) output planes
+ *              may be references to input planes, rather than copies.
+ * @param src   The source frame. If the data buffers are set to NULL, then
+ *              this function behaves identically to `sws_frame_setup`.
+ * @return >= 0 on success, a negative AVERROR code on failure.
+ */
+int sws_scale_frame(SwsContext *c, AVFrame *dst, const AVFrame *src);
+
+/**
+ * Filter kernel cut-off value. Values below this (absolute) magnitude
+ * are cut off from the main filter kernel. Note that the window is
+ * always adjusted to the new filter radius, so there will never be
+ * any spectral leakage (for suitably windowed filters).
+ */
+#define SWS_MAX_REDUCE_CUTOFF 0.002
+
+/*************************
+ * Legacy (stateful) API *
+ *************************/
 
 #define SWS_SRC_V_CHR_DROP_MASK     0x30000
 #define SWS_SRC_V_CHR_DROP_SHIFT    16
 
 #define SWS_PARAM_DEFAULT           123456
-
-#define SWS_PRINT_INFO              0x1000
-
-//the following 3 flags are not completely implemented
-//internal chrominance subsampling info
-#define SWS_FULL_CHR_H_INT    0x2000
-//input subsampling info
-#define SWS_FULL_CHR_H_INP    0x4000
-#define SWS_DIRECT_BGR        0x8000
-#define SWS_ACCURATE_RND      0x40000
-#define SWS_BITEXACT          0x80000
-#define SWS_ERROR_DIFFUSION  0x800000
-
-#define SWS_MAX_REDUCE_CUTOFF 0.002
 
 #define SWS_CS_ITU709         1
 #define SWS_CS_FCC            4
@@ -126,8 +488,6 @@ typedef struct SwsFilter {
     SwsVector *chrV;
 } SwsFilter;
 
-struct SwsContext;
-
 /**
  * Return a positive value if pix_fmt is a supported input format, 0
  * otherwise.
@@ -148,26 +508,24 @@ int sws_isSupportedOutput(enum AVPixelFormat pix_fmt);
 int sws_isSupportedEndiannessConversion(enum AVPixelFormat pix_fmt);
 
 /**
- * Allocate an empty SwsContext. This must be filled and passed to
- * sws_init_context(). For filling see AVOptions, options.c and
- * sws_setColorspaceDetails().
- */
-struct SwsContext *sws_alloc_context(void);
-
-/**
  * Initialize the swscaler context sws_context.
+ *
+ * This function is considered deprecated, and provided only for backwards
+ * compatibility with sws_scale() and sws_frame_start(). The preferred way to
+ * use libswscale is to set all frame properties correctly and call
+ * sws_scale_frame() directly, without explicitly initializing the context.
  *
  * @return zero or positive value on success, a negative value on
  * error
  */
 av_warn_unused_result
-int sws_init_context(struct SwsContext *sws_context, SwsFilter *srcFilter, SwsFilter *dstFilter);
+int sws_init_context(SwsContext *sws_context, SwsFilter *srcFilter, SwsFilter *dstFilter);
 
 /**
  * Free the swscaler context swsContext.
  * If swsContext is NULL, then does nothing.
  */
-void sws_freeContext(struct SwsContext *swsContext);
+void sws_freeContext(SwsContext *swsContext);
 
 /**
  * Allocate and return an SwsContext. You need it to perform
@@ -190,15 +548,16 @@ void sws_freeContext(struct SwsContext *swsContext);
  * @note this function is to be removed after a saner alternative is
  *       written
  */
-struct SwsContext *sws_getContext(int srcW, int srcH, enum AVPixelFormat srcFormat,
-                                  int dstW, int dstH, enum AVPixelFormat dstFormat,
-                                  int flags, SwsFilter *srcFilter,
-                                  SwsFilter *dstFilter, const double *param);
+SwsContext *sws_getContext(int srcW, int srcH, enum AVPixelFormat srcFormat,
+                           int dstW, int dstH, enum AVPixelFormat dstFormat,
+                           int flags, SwsFilter *srcFilter,
+                           SwsFilter *dstFilter, const double *param);
 
 /**
  * Scale the image slice in srcSlice and put the resulting scaled
  * slice in the image in dst. A slice is a sequence of consecutive
- * rows in an image.
+ * rows in an image. Requires a context that has previously been
+ * initialized with sws_init_context().
  *
  * Slices have to be provided in sequential order, either in
  * top-bottom or bottom-top order. If slices are provided in
@@ -221,31 +580,14 @@ struct SwsContext *sws_getContext(int srcW, int srcH, enum AVPixelFormat srcForm
  *                  the destination image
  * @return          the height of the output slice
  */
-int sws_scale(struct SwsContext *c, const uint8_t *const srcSlice[],
+int sws_scale(SwsContext *c, const uint8_t *const srcSlice[],
               const int srcStride[], int srcSliceY, int srcSliceH,
               uint8_t *const dst[], const int dstStride[]);
 
 /**
- * Scale source data from src and write the output to dst.
- *
- * This is merely a convenience wrapper around
- * - sws_frame_start()
- * - sws_send_slice(0, src->height)
- * - sws_receive_slice(0, dst->height)
- * - sws_frame_end()
- *
- * @param c   The scaling context
- * @param dst The destination frame. See documentation for sws_frame_start() for
- *            more details.
- * @param src The source frame.
- *
- * @return 0 on success, a negative AVERROR code on failure
- */
-int sws_scale_frame(struct SwsContext *c, AVFrame *dst, const AVFrame *src);
-
-/**
  * Initialize the scaling process for a given pair of source/destination frames.
  * Must be called before any calls to sws_send_slice() and sws_receive_slice().
+ * Requires a context that has previously been initialized with sws_init_context().
  *
  * This function will retain references to src and dst, so they must both use
  * refcounted buffers (if allocated by the caller, in case of dst).
@@ -268,7 +610,7 @@ int sws_scale_frame(struct SwsContext *c, AVFrame *dst, const AVFrame *src);
  *
  * @see sws_frame_end()
  */
-int sws_frame_start(struct SwsContext *c, AVFrame *dst, const AVFrame *src);
+int sws_frame_start(SwsContext *c, AVFrame *dst, const AVFrame *src);
 
 /**
  * Finish the scaling process for a pair of source/destination frames previously
@@ -278,7 +620,7 @@ int sws_frame_start(struct SwsContext *c, AVFrame *dst, const AVFrame *src);
  *
  * @param c   The scaling context
  */
-void sws_frame_end(struct SwsContext *c);
+void sws_frame_end(SwsContext *c);
 
 /**
  * Indicate that a horizontal slice of input data is available in the source
@@ -292,7 +634,7 @@ void sws_frame_end(struct SwsContext *c);
  *
  * @return a non-negative number on success, a negative AVERROR code on failure.
  */
-int sws_send_slice(struct SwsContext *c, unsigned int slice_start,
+int sws_send_slice(SwsContext *c, unsigned int slice_start,
                    unsigned int slice_height);
 
 /**
@@ -312,23 +654,24 @@ int sws_send_slice(struct SwsContext *c, unsigned int slice_start,
  *                         output can be produced
  *         another negative AVERROR code on other kinds of scaling failure
  */
-int sws_receive_slice(struct SwsContext *c, unsigned int slice_start,
+int sws_receive_slice(SwsContext *c, unsigned int slice_start,
                       unsigned int slice_height);
 
 /**
- * Get the alignment required for slices
+ * Get the alignment required for slices. Requires a context that has
+ * previously been initialized with sws_init_context().
  *
  * @param c   The scaling context
  * @return alignment required for output slices requested with sws_receive_slice().
  *         Slice offsets and sizes passed to sws_receive_slice() must be
  *         multiples of the value returned from this function.
  */
-unsigned int sws_receive_slice_alignment(const struct SwsContext *c);
+unsigned int sws_receive_slice_alignment(const SwsContext *c);
 
 /**
  * @param c the scaling context
- * @param dstRange flag indicating the while-black range of the output (1=jpeg / 0=mpeg)
- * @param srcRange flag indicating the while-black range of the input (1=jpeg / 0=mpeg)
+ * @param dstRange flag indicating the white-black range of the output (1=jpeg / 0=mpeg)
+ * @param srcRange flag indicating the white-black range of the input (1=jpeg / 0=mpeg)
  * @param table the yuv2rgb coefficients describing the output yuv space, normally ff_yuv2rgb_coeffs[x]
  * @param inv_table the yuv2rgb coefficients describing the input yuv space, normally ff_yuv2rgb_coeffs[x]
  * @param brightness 16.16 fixed point brightness correction
@@ -338,7 +681,7 @@ unsigned int sws_receive_slice_alignment(const struct SwsContext *c);
  * @return A negative error code on error, non negative otherwise.
  *         If `LIBSWSCALE_VERSION_MAJOR < 7`, returns -1 if not supported.
  */
-int sws_setColorspaceDetails(struct SwsContext *c, const int inv_table[4],
+int sws_setColorspaceDetails(SwsContext *c, const int inv_table[4],
                              int srcRange, const int table[4], int dstRange,
                              int brightness, int contrast, int saturation);
 
@@ -346,7 +689,7 @@ int sws_setColorspaceDetails(struct SwsContext *c, const int inv_table[4],
  * @return A negative error code on error, non negative otherwise.
  *         If `LIBSWSCALE_VERSION_MAJOR < 7`, returns -1 if not supported.
  */
-int sws_getColorspaceDetails(struct SwsContext *c, int **inv_table,
+int sws_getColorspaceDetails(SwsContext *c, int **inv_table,
                              int *srcRange, int **table, int *dstRange,
                              int *brightness, int *contrast, int *saturation);
 
@@ -391,11 +734,11 @@ void sws_freeFilter(SwsFilter *filter);
  * Be warned that srcFilter and dstFilter are not checked, they
  * are assumed to remain the same.
  */
-struct SwsContext *sws_getCachedContext(struct SwsContext *context,
-                                        int srcW, int srcH, enum AVPixelFormat srcFormat,
-                                        int dstW, int dstH, enum AVPixelFormat dstFormat,
-                                        int flags, SwsFilter *srcFilter,
-                                        SwsFilter *dstFilter, const double *param);
+SwsContext *sws_getCachedContext(SwsContext *context, int srcW, int srcH,
+                                 enum AVPixelFormat srcFormat, int dstW, int dstH,
+                                 enum AVPixelFormat dstFormat, int flags,
+                                 SwsFilter *srcFilter, SwsFilter *dstFilter,
+                                 const double *param);
 
 /**
  * Convert an 8-bit paletted frame into a frame with a color depth of 32 bits.
@@ -420,14 +763,6 @@ void sws_convertPalette8ToPacked32(const uint8_t *src, uint8_t *dst, int num_pix
  * @param palette    array with [256] entries, which must match color arrangement (RGB or BGR) of src
  */
 void sws_convertPalette8ToPacked24(const uint8_t *src, uint8_t *dst, int num_pixels, const uint8_t *palette);
-
-/**
- * Get the AVClass for swsContext. It can be used in combination with
- * AV_OPT_SEARCH_FAKE_OBJ for examining options.
- *
- * @see av_opt_find().
- */
-const AVClass *sws_get_class(void);
 
 /**
  * @}

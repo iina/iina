@@ -12,7 +12,7 @@ import JavaScriptCore
 // MARK: Core API
 
 @objc protocol JavascriptAPICoreExportable: JSExport {
-  func open(_ url: String)
+  func open(_ urlString: String)
   func osd(_ message: String)
   func pause()
   func resume()
@@ -26,6 +26,7 @@ import JavaScriptCore
   func getHistory() -> Any
   func getRecentDocuments() -> Any
   func getVersion() -> Any
+  func getTheme() -> [String: Any]
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
@@ -50,8 +51,8 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
     }
   }
 
-  func open(_ url: String) {
-    if let url = parsePath(url, forceLocalPath: false).path {
+  func open(_ urlString: String) {
+    if let url = shouldOpenURL(urlString) {
       Utility.executeOnMainThread {
         player!.openURLString(url)
       }
@@ -135,6 +136,15 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
       "mpv": MPVOptionDefaults.shared.mpvVersion
     ]
   }
+
+  func getTheme() -> [String: Any] {
+    let theme: Preference.Theme = Preference.enum(for: .themeMaterial)
+    let appearance = NSAppearance(iinaTheme: theme) ?? NSApp.effectiveAppearance
+    return [
+      "appearance": appearance.isDark ? "dark" : "light",
+      "accentColor": NSColor.controlAccentColor.hexString
+    ]
+  }
 }
 
 // MARK: Sub API
@@ -206,7 +216,9 @@ fileprivate class TrackAPI: JavascriptAPI, TrackAPIExportable {
       log("loadTrack: the url must be a string", level: .error)
       return
     }
-    let url = URL(fileURLWithPath: urlString)
+    guard let urlString = shouldOpenURL(urlString) else { return }
+    let parsedURL = URL(string: urlString)
+    let url = parsedURL?.scheme == nil ? URL(fileURLWithPath: urlString) : parsedURL!
     switch type {
     case .audio: player!.loadExternalAudioFile(url)
     case .sub, .secondSub: player!.loadExternalSubFile(url)

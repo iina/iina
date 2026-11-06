@@ -26,13 +26,23 @@ class UIHelper {
     return btn
   }
 
-  func input(bindTo key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true) -> NSTextField {
+  func input(bindTo key: Preference.Key, fixedAlignmentRect: Bool = true, isFixedSize: Bool = true,
+             range: ClosedRange<Double>? = nil, allowsFloats: Bool = false) -> NSTextField {
     let input = fixedAlignmentRect ? TextFieldWithFixedAlignmentRect() : NSTextField()
     input.translatesAutoresizingMaskIntoConstraints = false
     input.bezelStyle = .roundedBezel
     input.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
     if isFixedSize {
       input.size(width: 48, height: 25)
+    }
+    if let range {
+      let formatter = NumberFormatter()
+      formatter.allowsFloats = allowsFloats
+      formatter.usesGroupingSeparator = false
+      formatter.minimum = NSNumber(value: range.lowerBound)
+      formatter.maximum = NSNumber(value: range.upperBound)
+      formatter.numberStyle = .decimal
+      input.formatter = formatter
     }
     return input
   }

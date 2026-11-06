@@ -21,6 +21,16 @@ class DurationDisplayTextField: NSTextField {
   var current: VideoTime = .zero
   var remaining: VideoTime = .zero
 
+  override init(frame frameRect: NSRect) {
+    super.init(frame: .zero)
+    let fontSize = NSFont.systemFontSize(for: .mini)
+    self.font = NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   /** Switches the display mode between duration and remaining time */
   private func switchMode() {
     switch mode {
@@ -30,7 +40,6 @@ class DurationDisplayTextField: NSTextField {
       mode = .duration
     }
   }
-
 
   func updateText(with duration: VideoTime, given current: VideoTime,
                   and remaining: VideoTime) {

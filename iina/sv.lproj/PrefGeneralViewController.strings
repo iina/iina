@@ -56,7 +56,7 @@
 "KYi-0W-zOr.title" = "Släck övriga skärmar vid helskärmsläge";
 
 /* Class = "NSTextFieldCell"; title = "Still prevents system from sleeping."; ObjectID = "Kdk-iC-e1C"; */
-"Kdk-iC-e1C.title" = "Still prevents system from sleeping.";
+"Kdk-iC-e1C.title" = "Förhindrar fortfarande systemet från att sova.";
 
 /* Class = "NSButtonCell"; title = "Switch to \"music mode\" automatically when playing an audio file"; ObjectID = "KfL-r7-Uav"; */
 "KfL-r7-Uav.title" = "Växla automatiskt till musikläge vid uppspelning av en ljudfil";
@@ -134,7 +134,7 @@
 "pdx-zt-kf2.title" = "Skärmdumpar:";
 
 /* Class = "NSButtonCell"; title = "Prevent screen saver from starting while playing"; ObjectID = "r2u-P9-J5p"; */
-"r2u-P9-J5p.title" = "Prevent screen saver from starting while playing";
+"r2u-P9-J5p.title" = "Förhindra skärmsläckare från att starta medan du spelar";
 
 /* Class = "NSMenuItem"; title = "Hourly"; ObjectID = "slG-Jb-54B"; */
 "slG-Jb-54B.title" = "Timvis";
@@ -152,7 +152,7 @@
 "xr2-rB-O0x.title" = "Pausa/fortsätt när:";
 
 /* Class = "NSButtonCell"; title = "Not while in \"music mode\" or only playing audio"; ObjectID = "yla-DT-YTx"; */
-"yla-DT-YTx.title" = "Not while in \"music mode\" or only playing audio";
+"yla-DT-YTx.title" = "Inte när du är i \"musikläge\" eller bara spelar upp ljud";
 
 /* Class = "NSMenuItem"; title = "Show welcome window"; ObjectID = "z9T-8h-1T0"; */
 "z9T-8h-1T0.title" = "Visa välkomstfönster";
@@ -167,7 +167,7 @@
 "A1p-L4-jtC.title" = "Loopa en fil";
 
 /* Class = "NSButtonCell"; title = "Group media in playlist when opening multiple files at once"; ObjectID = "WZE-pS-9ne"; */
-"WZE-pS-9ne.title" = "Group media in playlist when opening multiple files at once";
+"WZE-pS-9ne.title" = "Gruppera media i spellista vid öppnande av flera filer samtidigt";
 
 /* Class = "NSButtonCell"; title = "Allow opening the same file in multiple windows"; ObjectID = "Z7U-cf-ezr"; */
-"Z7U-cf-ezr.title" = "Allow opening the same file in multiple windows";
+"Z7U-cf-ezr.title" = "Tillåt öppnande av samma fil i flera fönster";

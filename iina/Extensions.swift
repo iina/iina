@@ -10,6 +10,19 @@ import Cocoa
 import CryptoKit
 import MediaPlayer
 
+extension Array {
+
+  /// Form a string containing the contents of this array suitable for use in a log message.
+  /// - Parameter indent: Number of spaces to indent each line.
+  /// - Returns: Contents of this array formatted for inclusion in a log message.
+  func toStringForLog(indent: Int = 2) -> String {
+    guard !isEmpty else { return "" }
+    let prefix = "\n" + String(repeating: " ", count: indent)
+    let sorted = sorted(by: { "\($0)" < "\($1)" })
+    return prefix + sorted.compactMap({ "\($0)" }).joined(separator: prefix)
+  }
+}
+
 extension CGPoint {
   /**
    Uses the Pythagorean theorem to calculate the distance between two points.
@@ -29,6 +42,32 @@ extension CGPoint {
    */
   func distance(to: CGPoint) -> CGFloat {
     return sqrt(pow(self.x - to.x, 2) + pow(self.y - to.y, 2))
+  }
+}
+
+extension Dictionary where Key: StringProtocol {
+
+  /// Form a string containing the contents of this dictionary suitable for use in a log message.
+  /// - Parameter indent: Number of spaces to indent each line.
+  /// - Returns: Contents of this dictionary formatted for inclusion in a log message.
+  func toStringForLog(indent: Int = 2) -> String {
+    guard !isEmpty else { return "" }
+    var message = ""
+    let prefix = "\n" + String(repeating: " ", count: indent)
+    let sorted = self.sorted( by: { $0.0 < $1.0 })
+    for (key, value) in sorted {
+      message += prefix + key + ": "
+      if let dict = value as? [String: Any] {
+        message += dict.toStringForLog(indent: indent + 2)
+        continue
+      }
+      if let array = value as? [Any] {
+        message += array.toStringForLog(indent: indent + 2)
+        continue
+      }
+      message += "\(value)"
+    }
+    return message
   }
 }
 
@@ -299,7 +338,7 @@ extension NSMenu {
     menuItem.state = stateOn ? .on : .off
     menuItem.isEnabled = enabled
     
-    if let image = image {
+    if let image {
       menuItem.image = .sf(image)
     }
     
@@ -433,6 +472,14 @@ extension NSColor {
     return "\(red)/\(green)/\(blue)/\(alpha)"
   }
 
+  var hexString: String {
+    guard let rgb = usingColorSpace(.sRGB) else { return "#000000" }
+    let r = Int((rgb.redComponent * 255).rounded())
+    let g = Int((rgb.greenComponent * 255).rounded())
+    let b = Int((rgb.blueComponent * 255).rounded())
+    return String(format: "#%02X%02X%02X", r, g, b)
+  }
+
   convenience init?(mpvColorString str: String) {
     // mpv can return hex color string
     if str.starts(with: "#") {
@@ -441,10 +488,11 @@ extension NSColor {
       var rgb: UInt64 = 0
       scanner.scanHexInt64(&rgb)
 
-      let r = Double((rgb >> 32) & 0xFF) / 255
-      let g = Double((rgb >> 16) & 0xFF) / 255
-      let b = Double((rgb >> 8) & 0xFF) / 255
-      let a = Double(rgb & 0xFF) / 255
+      // mpv hex colors are #RRGGBB (100% opaque) or #AARRGGBB (alpha first).
+      let a = hex.count <= 6 ? 1.0 : Double((rgb >> 24) & 0xFF) / 255.0
+      let r = Double((rgb >> 16) & 0xFF) / 255
+      let g = Double((rgb >> 8) & 0xFF) / 255
+      let b = Double(rgb & 0xFF) / 255
 
       self.init(red: r, green: g, blue: b, alpha: a)
     } else {
@@ -599,7 +647,6 @@ extension URL {
 
 
 extension NSTextField {
-
   func setHTMLValue(_ html: String) {
     let font = self.font ?? NSFont.systemFont(ofSize: NSFont.systemFontSize)
     let color = self.textColor ?? NSColor.labelColor
@@ -610,8 +657,16 @@ extension NSTextField {
       self.attributedStringValue = str
     }
   }
-
 }
+
+
+extension NSFont {
+  static func monospacedDigitFont(for size: NSControl.ControlSize) -> NSFont {
+    let fontSize = NSFont.systemFontSize(for: size)
+    return NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .regular)
+  }
+}
+
 
 extension NSImage {
   var cgImage: CGImage? {
@@ -796,24 +851,38 @@ extension NSScreen {
     }
   }
 
+  /// [CGDirectDisplayID](https://developer.apple.com/documentation/CoreGraphics/CGDirectDisplayID) of the
+  /// display associated with the screen.
+  var displayId: CGDirectDisplayID? {
+    let screenNumberKey = NSDeviceDescriptionKey(rawValue: "NSScreenNumber")
+    return deviceDescription[screenNumberKey] as? CGDirectDisplayID
+  }
+
   /// Log the given `NSScreen` object.
-  ///
+  /// 
   /// Due to issues with multiple monitors and how the screen to use for a window is selected detailed logging has been added in this
   /// area in case additional problems are encountered in the future.
-  /// - parameter label: Label to include in the log message.
-  /// - parameter screen: The `NSScreen` object to log.
-  static func log(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
-    guard let screen = screen else {
+  /// - Parameter label: Label to include in the log message.
+  /// - Parameter screen: The `NSScreen` object to log.
+  /// - Parameter details: Whether to include details about the screen (default `true`).
+  /// - Parameter subsystem: The subsystem emitting this message.
+  static func log(_ label: String, _ screen: NSScreen?, details: Bool = true,
+                  subsystem: Logger.Subsystem = .general) {
+    guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
+    guard Logger.isEmitting(.debug) else { return }
     var message = "\(label), \(screen.localizedName)"
     if screen == NSScreen.main {
       message += " (main screen)"
     }
-    let screenNumberKey = NSDeviceDescriptionKey(rawValue: "NSScreenNumber")
-    if let displayId = screen.deviceDescription[screenNumberKey] as? CGDirectDisplayID {
+    if let displayId = screen.displayId {
       message += ", on display \(displayId)"
+    }
+    guard details else {
+      Logger.log(message, subsystem: subsystem)
+      return
     }
     message += ":"
     message += "\n  Frame: \(screen.frame), visible \(screen.visibleFrame)"
@@ -821,13 +890,23 @@ extension NSScreen {
     Logger.log(message, subsystem: subsystem)
   }
 
+  /// Log all screens.
+  /// - Parameter subsystem: The subsystem emitting this message.
+  static func logAll(subsystem: Logger.Subsystem = .general) {
+    guard Logger.isEmitting(.debug) else { return }
+    NSScreen.screens.enumerated().forEach { screen in
+      NSScreen.log("NSScreen.screens[\(screen.offset)]", screen.element, subsystem: subsystem)
+    }
+  }
+
   /// Log EDR aspects of the given `NSScreen` object.
-  /// - parameter screen: The `NSScreen` object to log EDR aspects of.
+  /// - Parameter screen: The `NSScreen` object to log EDR aspects of.
   static func logEDR(_ label: String, _ screen: NSScreen?, subsystem: Logger.Subsystem = .general) {
-    guard let screen = screen else {
+    guard let screen else {
       Logger.log("\(label): nil", level: .warning, subsystem: subsystem)
       return
     }
+    guard Logger.isEmitting(.debug) else { return }
     var message = "\(label), \(screen.localizedName):"
     message += "\n  \(formEDRMessage(screen))"
     Logger.log(message, subsystem: subsystem)
@@ -845,6 +924,18 @@ extension NSScreen {
       """
   }
 }
+
+#if DEBUG
+extension NSUserInterfaceLayoutDirection: @retroactive CustomStringConvertible {
+  public var description: String {
+    switch self {
+    case .leftToRight: return "leftToRight"
+    case .rightToLeft: return "rightToLeft"
+    @unknown default: return String(self.rawValue)
+    }
+  }
+}
+#endif
 
 extension NSWindow {
 

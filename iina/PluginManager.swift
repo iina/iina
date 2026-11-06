@@ -65,8 +65,9 @@ class PluginManager {
         return (.cancelled, nil)
       }
 
-      // alert the user if plugin has new permissions
-      var permissionCleared = newPlugin.permissions.subtracting(plugin.permissions).isEmpty
+      // Alert the user if the update adds permissions or changes the allowed domains.
+      var permissionCleared = newPlugin.permissions.subtracting(plugin.permissions).isEmpty &&
+        newPlugin.domainList == plugin.domainList
       if (!permissionCleared) {
         permissionCleared = await showPermissionsSheet(forPlugin: newPlugin, previousPlugin: plugin)
       }
@@ -123,9 +124,11 @@ class PluginManager {
 
   @MainActor
   private func install(_ plugin: JavascriptPlugin) async -> Result {
-    guard await showPermissionsSheet(forPlugin: plugin) else {
-      plugin.remove()
-      return .cancelled
+    if !plugin.permissions.isEmpty {
+      guard await showPermissionsSheet(forPlugin: plugin) else {
+        plugin.remove()
+        return .cancelled
+      }
     }
     // check whether a duplicate plugin exists, if yes, replace
     if let pos = JavascriptPlugin.plugins.firstIndex(where: { $0.identifier == plugin.identifier }) {
@@ -153,9 +156,9 @@ class PluginManager {
   @MainActor
   func install(gitHubString string: String? = nil, localPackageURL url: URL? = nil, handler: ((Result) -> Void)? = nil) async {
     do {
-      let plugin = if let string = string {
+      let plugin = if let string {
         try JavascriptPlugin.create(fromGitURL: string)
-      } else if let url = url {
+      } else if let url {
         try JavascriptPlugin.create(fromPackageURL: url)
       } else {
         fatalError("PluginManager.install: a source must be provided.")

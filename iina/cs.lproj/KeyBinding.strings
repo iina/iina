@@ -21,7 +21,7 @@
 "cmd.playlist-next" = "Další soubor";
 "cmd.playlist-prev" = "Předchozí soubor";
 "cmd.playlist-move" = "Posunout položku v playlistu";
-"cmd.playlist-clear" = "Smazat playlist";
+"cmd.playlist-clear" = "Vymazat playlist";
 "cmd.playlist-remove" = "Odebrat aktuální playlist";
 "cmd.playlist-shuffle" = "Zamíchat";
 "cmd.write-watch-later-config" = "Zaznamenat pozici přehrávání";
@@ -30,8 +30,8 @@
 "cmd.quit-watch-later" = "Ukončit (uložit pozici přehrávání)";
 "cmd.screenshot" = "Snímek obrazovky";
 "cmd.screenshot-to-file" = "Snímek obrazovky do souboru";
-"cmd.loadfile" = "Otevřít soubor";
-"cmd.loadlist" = "Otevřít playlist";
+"cmd.loadfile" = "Načíst soubor";
+"cmd.loadlist" = "Načíst playlist";
 "cmd.run" = "Spustit";
 
 "iina.flip" = "převrácení";
@@ -79,7 +79,7 @@
 "absolute-percent+keyframe" = " % (snímek)";
 
 "opt.pause" = "pozastavení";
-"opt.speed" = "rychlost";
+"opt.speed" = "Rychlost";
 
 "opt.window-scale" = "poměr stran okna";
 

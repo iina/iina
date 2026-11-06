@@ -123,7 +123,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
   private func _simpleModeSetStyle(_ style: String) {
     Utility.executeOnMainThread {
       evaluateJavaScript("window.iina._simpleModeSetStyle(`\(style)`)") { (_, error) in
-        if let error = error {
+        if let error {
           Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
         }
       }
@@ -133,7 +133,7 @@ class PluginOverlayView: WKWebView, WKNavigationDelegate {
   private func _simpleModeSetContent(_ content: String) {
     Utility.executeOnMainThread {
       evaluateJavaScript("window.iina._simpleModeSetContent(`\(content)`)") { (_, error) in
-        if let error = error {
+        if let error {
           Logger.log(error.localizedDescription, level: .error, subsystem: self.pluginInstance.subsystem)
         }
       }

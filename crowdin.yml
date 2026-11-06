@@ -5,3 +5,5 @@ preserve_hierarchy: true
 files:
   - source: /iina/en.lproj/*.strings
     translation: /iina/%osx_code%/%original_file_name%
+    excluded_target_languages:
+      - zh-HK

@@ -9,7 +9,9 @@
 /// Available constants in OSD messages:
 ///
 /// {{duration}}
+/// {{preciseDuration}}
 /// {{position}}
+/// {{precisePosition}}
 /// {{percentPos}}
 /// {{currChapter}}
 /// {{chapterCount}}
@@ -70,6 +72,7 @@ enum OSDMessage {
   case pause
   case resume
   case seek(String, String, Double)  // current, total, percentage
+  case showTime(Double) // percentage
   case volume(Double)
   case speed(Double)
   case aspect(String)
@@ -181,6 +184,9 @@ enum OSDMessage {
 
     case .seek(let current, let total, let percent):
       return (current + " / " + total, .withPosition(percent))
+
+    case .showTime(let percent):
+      return ("{{precisePosition}} / {{preciseDuration}}", .withPosition(percent))
 
     case .volume(let value):
       let text = String(format: NSLocalizedString("osd.volume", comment: "Volume: %@"), String(format: "%.0f", value))

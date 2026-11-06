@@ -21,9 +21,12 @@ class PrefPluginPermissionListView: NSStackView {
   func setPlugin(_ plugin: JavascriptPlugin, onlyShowAddedFrom previousPlugin: JavascriptPlugin? = nil) {
     views.forEach { removeView($0) }
 
-    let permissions: Set<JavascriptPlugin.Permission>
+    var permissions: Set<JavascriptPlugin.Permission>
     if let previous = previousPlugin {
       permissions = plugin.permissions.subtracting(previous.permissions)
+      if plugin.domainList != previous.domainList {
+        permissions.insert(.networkRequest)
+      }
     } else {
       permissions = plugin.permissions
     }

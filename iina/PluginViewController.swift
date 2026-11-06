@@ -11,7 +11,7 @@ fileprivate let ui = UIHelper.shared
 
 extension SidebarViewController.TabType {
   static let pluginPlaceholder = SidebarViewController.TabType(
-    0, NSLocalizedString("sidebar.plugins", comment: ""), .plugin)
+    0, NSLocalizedString("sidebar.plugins", comment: ""), .puzzlepieceExtensionFill)
 }
 
 class PluginViewController: SidebarViewController {
@@ -26,7 +26,7 @@ class PluginViewController: SidebarViewController {
 
   override var allTabs: [TabType] {
     [.pluginPlaceholder] + allTabs_.enumerated().map { (i, tuple) in
-      TabType(i + 1, tuple.id, .plugin)
+      TabType(i + 1, tuple.id, .puzzlepieceExtensionFill)
     }
   }
   override var defaultTab: TabType { .pluginPlaceholder }
@@ -39,7 +39,7 @@ class PluginViewController: SidebarViewController {
 
   private func getPluginIcon(isSmall: Bool) -> NSImage {
     let config = isSmall ? compactIconConfig : iconConfig
-    return NSImage.sf("puzzlepiece.extension.fill", withConfiguration: config) ?? .plugin
+    return NSImage.sf("puzzlepiece.extension.fill", withConfiguration: config) ?? .puzzlepieceExtensionFill
   }
 
   override func setupTabs() {

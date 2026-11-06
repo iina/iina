@@ -52,7 +52,7 @@ class PrefOSCToolbarDraggingItemViewController: NSViewController, NSPasteboardWr
   }
 
   override func mouseDown(with event: NSEvent) {
-    guard let availableItemsView = availableItemsView else { return }
+    guard let availableItemsView else { return }
 
     guard let dragItem = OSCToolbarButton.buildDragItem(from: toolbarButton, pasteboardWriter: self, buttonType: buttonType) else { return }
     view.beginDraggingSession(with: [dragItem], event: event, source: availableItemsView)

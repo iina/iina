@@ -118,7 +118,7 @@ struct SettingsItem {
       setControlSize(label)
       setControlSize(textField)
 
-      if let key = key {
+      if let key {
         label.stringValue = ui.localized(.init("\(key.rawValue).label"))
         textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
       }
@@ -266,9 +266,9 @@ struct SettingsItem {
     }
 
     private func localizedTitle() -> String {
-      if let labelLocalizationKey = labelLocalizationKey {
+      if let labelLocalizationKey {
         return ui.localized(labelLocalizationKey)
-      } else if let key = key {
+      } else if let key {
         let l10nKey = labelLocalizationKey ?? .init("\(key.rawValue).label")
         return ui.localized(l10nKey)
       } else {
@@ -389,7 +389,7 @@ struct SettingsItem {
     }
 
     func getValueViews() -> [NSView] {
-      if let valueView = valueView {
+      if let valueView {
         return [valueView]
       }
       return []
@@ -471,7 +471,7 @@ struct SettingsItem {
     }
 
     func toggleExpandable(_ setValue: Bool? = nil, animated: Bool = true) {
-      if let setValue = setValue {
+      if let setValue {
         isExpanded = setValue
       } else {
         isExpanded.toggle()
@@ -577,6 +577,16 @@ struct SettingsItem {
       return self
     }
 
+    func bindToSorted<T>(_ key: Preference.Key, ofType t: T.Type) -> Self
+    where T: RawRepresentable & CaseIterable & InitializingFromKey & Comparable, T.RawValue == Int
+    {
+      self.key = key
+      for c in t.allCases.sorted() {
+        valueTypes.append((c.rawValue, String(describing: c)))
+      }
+      return self
+    }
+
     func bindToCustom<T>(type t: T.Type, block: @escaping (NSPopUpButton) -> Void) -> Self
     where T: RawRepresentable & CaseIterable & InitializingFromKey, T.RawValue == Int
     {
@@ -602,9 +612,9 @@ struct SettingsItem {
         popupButton.lastItem?.tag = tag
       }
       popupButton.controlSize = controlSize
-      if let key = key {
+      if let key {
         popupButton.bind(.selectedTag, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(popupButton)
       }
       DispatchQueue.main.async {
@@ -660,9 +670,9 @@ struct SettingsItem {
     }
 
     override func initBinding() {
-      if let key = key {
+      if let key {
         nsSwitch.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(self)
       }
       DispatchQueue.main.async {
@@ -677,13 +687,13 @@ struct SettingsItem {
     }
 
     @objc func switchChanged(_ sender: NSSwitch?) {
-      guard let detailView = renderedDetailView else { return }
-
       let enabled = nsSwitch.state == .on
-      if !isExpandableAndClickable {
-        toggleExpandable(enabled)
+      if let detailView = renderedDetailView {
+        if !isExpandableAndClickable {
+          toggleExpandable(enabled)
+        }
+        setSubControls(detailView, enabled: enabled)
       }
-      setSubControls(detailView, enabled: enabled)
 
       if sender != nil {
         // Only call the callback when the user manually clicked the switch.
@@ -821,6 +831,8 @@ struct SettingsItem {
     private var customBinding = false
     private var customBindingBlock: ((NSTextField) -> Void)?
     private var isLongText = false
+    private var range: ClosedRange<Double>?
+    private var allowsFloats = false
 
     private var cachedStepperValue: Double?
     private var stepper: NSStepper?
@@ -852,12 +864,22 @@ struct SettingsItem {
       return self
     }
 
+    func range(_ range: ClosedRange<Double>, allowsFloats: Bool = false) -> Self {
+      self.range = range
+      self.allowsFloats = allowsFloats
+      return self
+    }
+
     @objc func stepperValueChanged(sender: NSStepper) {
       guard let cachedStepperValue else { return }
-      if cachedStepperValue < sender.doubleValue {
-        textField.doubleValue += sender.increment
-      } else {
-        textField.doubleValue -= sender.increment
+      let increment = cachedStepperValue < sender.doubleValue ? sender.increment : -sender.increment
+      let value = textField.doubleValue + increment
+      let newValue = range.map { value.clamped(to: $0) } ?? value
+      textField.doubleValue = newValue
+      if let info = textField.infoForBinding(.value),
+         let observedObject = info[.observedObject] as? NSObject,
+         let keyPath = info[.observedKeyPath] as? String {
+        observedObject.setValue(newValue, forKeyPath: keyPath)
       }
       self.cachedStepperValue = sender.doubleValue
     }
@@ -869,13 +891,22 @@ struct SettingsItem {
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
+      if let range {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = allowsFloats
+        formatter.usesGroupingSeparator = false
+        formatter.minimum = NSNumber(value: range.lowerBound)
+        formatter.maximum = NSNumber(value: range.upperBound)
+        formatter.numberStyle = .decimal
+        textField.formatter = formatter
+      }
       let stack = NSStackView(views: [textField])
       if let stepper {
         stepper.controlSize = controlSize
         stack.addView(stepper, in: .trailing)
         stack.spacing = 2
       }
-      if let trailingLabel = trailingLabel {
+      if let trailingLabel {
         let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
         return [stack, label]
@@ -896,9 +927,9 @@ struct SettingsItem {
     }
 
     override func initBinding() {
-      if let key = key {
-        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue)
-      } else if customBinding, let customBindingBlock = customBindingBlock {
+      if let key {
+        textField.bind(.value, to: UserDefaults.standard, withKeyPath: key.rawValue, options: [.continuouslyUpdatesValue: true])
+      } else if customBinding, let customBindingBlock {
         customBindingBlock(textField)
       }
     }
@@ -912,24 +943,41 @@ struct SettingsItem {
     private var valueTypes: [(Int, String)] = []
     private var textField: NSTextField!
     private var trailingLabel: SettingsLocalization.Key?
+    private var range: ClosedRange<Double>?
+    private var allowsFloats = false
 
     private var customBindingInput = false
     private var customBindingBlockInput: ((NSTextField) -> Void)?
     private var customBindingSwitch = false
     private var customBindingBlockSwitch: ((NSSwitch) -> Void)?
 
+    func range(_ range: ClosedRange<Double>, allowsFloats: Bool = false) -> Self {
+      self.range = range
+      self.allowsFloats = allowsFloats
+      return self
+    }
+
     override func getValueViews() -> [NSView] {
       nsSwitch = NSSwitch()
       nsSwitch.controlSize = .mini
       nsSwitch.action = #selector(switchChanged)
       nsSwitch.target = self
-      textField = NSTextField()
+      textField = TextFieldWithSwitch(nsSwitch)
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.controlSize = controlSize
       textField.bezelStyle = .roundedBezel
       textField.size(width: 64)
       setControlSize(textField)
-      if let trailingLabel = trailingLabel {
+      if let range {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = allowsFloats
+        formatter.usesGroupingSeparator = false
+        formatter.minimum = NSNumber(value: range.lowerBound)
+        formatter.maximum = NSNumber(value: range.upperBound)
+        formatter.numberStyle = .decimal
+        textField.formatter = formatter
+      }
+      if let trailingLabel {
         let label = NSTextField(labelWithString: ui.localized(trailingLabel))
         setControlSize(label)
         return [textField, label, nsSwitch]
@@ -1235,7 +1283,7 @@ class SettingsAccessory {
     }
 
     private func initBinding() {
-      guard let key = key else { return }
+      guard let key else { return }
       if let transformer = customtransformer {
         selectedValue = transformer.1(Preference.value(for: key))
       } else {
@@ -1260,14 +1308,14 @@ class SettingsAccessory {
     }
 
     deinit {
-      guard let key = key else { return }
+      guard let key else { return }
       ObjcUtils.silenced {
         UserDefaults.standard.removeObserver(self, forKeyPath: key.rawValue)
       }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-      guard let change = change else { return }
+      guard let change else { return }
 
       if let transformer = customtransformer {
         selectedValue = transformer.1(change[.newKey])
@@ -1350,7 +1398,7 @@ class SettingsAccessory {
 
     func makeView() -> NSView {
       audioLangTokenField.awakeFromNib()
-      if let key = key {
+      if let key {
         audioLangTokenField.commaSeparatedValues = Preference.string(for: key) ?? ""
         if hasDesc {
           let descLabel = NSTextField(labelWithString: ui.localized("\(key.rawValue).desc"))
@@ -1364,12 +1412,46 @@ class SettingsAccessory {
     }
 
     @objc func preferredLanguageAction(_ sender: LanguageTokenField) {
-      guard let key = key else { return }
+      guard let key else { return }
       let csv = sender.commaSeparatedValues
       if Preference.string(for: key) != csv {
         Logger.log("Saving \(key.rawValue): \"\(csv)\"", level: .verbose)
         Preference.set(csv, for: key)
       }
     }
+  }
+}
+
+/// A [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) controlled by a
+/// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch).
+class TextFieldWithSwitch: NSTextField {
+
+  /// A Boolean value that indicates whether the receiver reacts to mouse events.
+  ///
+  /// This text field may be part of a subordinate setting. Disabling a primary setting must disable subordinate settings. However
+  /// enabling a primary setting can only enable this text field if the switch that controls it is also enabled.
+  override var isEnabled: Bool {
+    get { super.isEnabled }
+    set {
+      guard newValue else {
+        super.isEnabled = false
+        return
+      }
+      guard nsSwitch.state == .on else { return }
+      super.isEnabled = true
+    }
+  }
+
+  /// [NSSwitch](https://developer.apple.com/documentation/appkit/nsswitch) that controls whether this
+  /// [NSTextField](https://developer.apple.com/documentation/appkit/nstextfield) can be enabled.
+  private let nsSwitch: NSSwitch
+
+  init(_ nsSwitch: NSSwitch) {
+    self.nsSwitch = nsSwitch
+    super.init(frame: NSRect.zero)
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 }

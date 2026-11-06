@@ -41,7 +41,7 @@ class Utility {
   // MARK: - Logs, alerts
   static func showAlert(_ key: String, comment: String? = nil, arguments: [CVarArg]? = nil, style: NSAlert.Style = .critical, sheetWindow: NSWindow? = nil, suppressionKey: PK? = nil, disableMenus: Bool = false) {
     let alert = NSAlert()
-    if let suppressionKey = suppressionKey {
+    if let suppressionKey {
       // This alert includes a suppression button that allows the user to suppress the alert.
       // Do not show the alert if it has been suppressed.
       guard !Preference.bool(for: suppressionKey) else { return }
@@ -81,7 +81,7 @@ class Utility {
     if disableMenus {
       AppDelegate.shared.menuController.disableAllMenus()
     }
-    if let sheetWindow = sheetWindow {
+    if let sheetWindow {
       alert.beginSheetModal(for: sheetWindow)
     } else {
       alert.runModal()
@@ -128,7 +128,7 @@ class Utility {
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
 
-    if let sheetWindow = sheetWindow {
+    if let sheetWindow {
       panel.beginSheetModal(for: sheetWindow, completionHandler: callback)
       return false
     } else {
@@ -155,7 +155,7 @@ class Utility {
     panel.allowedContentTypes = allowedFileTypes?.compactMap { UTType(filenameExtension: $0) } ?? []
     panel.allowsMultipleSelection = false
     panel.level = .modalPanel
-    if let dir = dir {
+    if let dir {
       panel.directoryURL = dir
     }
     let handler: (NSApplication.ModalResponse) -> Void = { result in
@@ -163,7 +163,7 @@ class Utility {
         callback(url)
       }
     }
-    if let sheetWindow = sheetWindow {
+    if let sheetWindow {
       panel.beginSheetModal(for: sheetWindow, completionHandler: handler)
     } else {
       panel.begin(completionHandler: handler)
@@ -186,7 +186,7 @@ class Utility {
     panel.canChooseDirectories = canChooseDir
     panel.resolvesAliases = true
     panel.allowsMultipleSelection = true
-    if let dir = dir {
+    if let dir {
       panel.directoryURL = dir
     }
     panel.begin() { result in
@@ -213,7 +213,7 @@ class Utility {
         callback(url)
       }
     }
-    if let sheetWindow = sheetWindow {
+    if let sheetWindow {
       panel.beginSheetModal(for: sheetWindow, completionHandler: handler)
     } else {
       panel.begin(completionHandler: handler)
@@ -249,7 +249,7 @@ class Utility {
     input.isBezeled = true
     input.bezelStyle = .roundedBezel
     input.controlSize = .large
-    if let inputValue = inputValue {
+    if let inputValue {
       input.stringValue = inputValue
     }
     let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 240, height: 32))
@@ -264,7 +264,7 @@ class Utility {
 
     // validation
     var observer: NSObjectProtocol?
-    if let validator = validator {
+    if let validator {
       let label = NSTextField(labelWithString: "label")
       label.textColor = .secondaryLabelColor
       label.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
@@ -296,19 +296,19 @@ class Utility {
     stackView.translatesAutoresizingMaskIntoConstraints = true
     panel.accessoryView = stackView
 
-    if let sheetWindow = sheetWindow {
+    if let sheetWindow {
       panel.beginSheetModal(for: sheetWindow) { response in
         if response == .alertFirstButtonReturn {
           callback(input.stringValue)
         }
-        if let observer = observer {
+        if let observer {
           NotificationCenter.default.removeObserver(observer)
         }
       }
     } else {
       if panel.runModal() == .alertFirstButtonReturn {
         callback(input.stringValue)
-        if let observer = observer {
+        if let observer {
           NotificationCenter.default.removeObserver(observer)
         }
         return true
@@ -356,7 +356,7 @@ class Utility {
     panel.addButton(withTitle: NSLocalizedString("general.ok", comment: "OK"))
     panel.addButton(withTitle: NSLocalizedString("general.cancel", comment: "Cancel"))
     panel.window.initialFirstResponder = input
-    if let sheetWindow = sheetWindow {
+    if let sheetWindow {
       panel.beginSheetModal(for: sheetWindow) { response in
         if response == .alertFirstButtonReturn {
           callback(input.stringValue, pwField.stringValue)
@@ -643,7 +643,7 @@ class Utility {
         case .right:
           a.alignment = .right
         }
-        if let f = f {
+        if let f {
           NSFont.systemFont(ofSize: NSFont.systemFontSize)
           return [
             .font: f,

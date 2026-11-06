@@ -18,7 +18,8 @@
 "general.password" = "Parola";
 "general.na" = "Mevcut değil";
 "general.no_result" = "Sonuç Yok";
-"general.no_title" = "No Title";
+"general.no_title" = "Başlık Yok";
+"general.auto" = "Otomatik";
 
 "input.value_is_empty" = "Değer boş olamaz.";
 "input.already_exists" = "Değer halihazırda var.";
@@ -140,9 +141,9 @@
 "osd.canceled" = "İptal edildi";
 "osd.cannot_connect" = "Bağlanılamıyor";
 "osd.timed_out" = "Zaman aşımına uğradı";
-"osd.sub_quota_exceeded" = "Subtitle download limit reached";
-"osd.sub_quota_exceeded.detail" = "Try again after %@";
-"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.sub_quota_exceeded" = "Alt yazı indirme sınırına ulaşıldı";
+"osd.sub_quota_exceeded.detail" = "%@ işaretinden sonra tekrar dene";
+"osd.sub_quota_exceeded.detail_unknown" = "Daha sonra tekrar dene";
 "osd.filter_added" = "Süzgeç eklendi: %@";
 "osd.filter_removed" = "Süzgeç kaldırıldı";
 "osd.file_loop" = "Bir Dosyayı Döngüye Al";
@@ -151,10 +152,8 @@
 
 "preference.title" = "Tercihler";
 "preference.general" = "Genel";
-"preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.video" = "Video";
-"preference.audio" = "Ses";
+"preference.ui" = "Arayüz";
+"preference.video_audio" = "Görüntü ve Ses";
 "preference.subtitle" = "Altyazı";
 "preference.network" = "Ağ";
 "preference.control" = "Denetimler";
@@ -285,13 +284,12 @@
 "alert.add_filter.message" = "Lütfen mpv’nin vf veya af komutu biçiminde bir süzgeç dizisi girin.";
 
 "alert.keybinding_config.error" = "“%@” tuş bağıntısı yapılandırma dosyası ayrıştırılırken hata! Saptanmış IINA ayarlarına dönülüyor. Lütfen yapılandırmanızı gözden geçirin.";
-"alert.delete_keybindingset.title" = "Delete Key Binding Set";
-"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
-
+"alert.delete_keybindingset.title" = "Tuş ataması setini sil";
+"alert.delete_keybindingset.message" = "Tuş atama setini silmek istediğinizden emin misiniz?";
 
 "alert.extra_option.cannot_read" = "Kullanıcı tanımlı ek mpv seçenekleri okunamıyor.";
 "alert.extra_option.empty" = "Anahtar veya değer boş olamaz!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.error" = "%d dönüş değeriyle %@=%@ seçeneği ayarlanırken hata. Lütfen Ayarlar > Gelişmiş konumundan ek seçenek ayarınızı denetleyin.";
 "alert.extra_option.config_folder" = "“%@” yapılandırma dizini ayarlanırken hata oluştu.";
 
 "alert.playlist.error_deleting" = "Silme hatası: %@";
@@ -328,8 +326,8 @@
 "alert.delete_history.message" = "Seçili girdileri silmek istediğinizden emin misiniz?";
 "alert.delete_all_history.title" = "Oynatma Geçmişini Temizle";
 "alert.delete_all_history.message" = "Tüm oynatma geçmişini silmek istediğinizden emin misiniz?";
-"alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.title" = "Dosyayı Sil";
+"alert.delete_file.message" = "Seçili dosyaları çöp sepetine göndermek istediğinizden emin misiniz?";
 
 "alert.filter_hwdec.message" = "Bir video süzgeci uygulamak üzeresiniz; ancak donanımsal çözücünüz video süzgeçlerini iyi desteklemiyor olabilir. Donanımsal çözücüyü devre dışı bırakabilirsiniz veya “Otomatik (Kopya)” seçeneğini etkinleştirebilirsiniz. Bu seçenek donanım çözücüsünü kullanır; ancak bellek kullanımı iki kat daha fazladır.\nEylemin çalışması için son işlemi yinelemeniz gerekebilir (kırpma ayarı gibi).";
 "alert.filter_hwdec.abort" = "İptal Et";
@@ -375,8 +373,8 @@
 "alert.plugin_update_found.message" = "Uygulamanın son sürümü %@. Sizde %@ var. Güncellemek ister misiniz?";
 "alert.plugin_permission" = "Bu eklentinin aşağıdaki izinlere gereksinimi var. Sürdürmeden önce izinleri gözden geçirin.";
 "alert.plugin_permission_added" = "Bu güncellemenin ek izinlere gereksinimi var. Sürdürmeden önce ek izinleri gözden geçirin.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
+"alert.install_plugin_macos_11.title" = "Github’dan Eklenti Kur";
+"alert.install_plugin_macos_11.message" = "Kullanıcı/depo biçimini kullanın veya tam Github URL’sini girin. Eklenti mağazası macOS üzerinde kullanılabilir değildir. En iyi deneyim için daha yeni bir sistem kullanmanız tavsiye edilir.";
 
 "playlist.total_length" = "toplamda %@";
 "playlist.total_length_with_selected" = "%@/%@ seçili";
@@ -405,9 +403,9 @@
 "pl_menu.copy_url" = "URL’yi Kopyala";
 "pl_menu.copy_url_multi" = "URL’leri Kopyala";
 "pl_menu.playback" = "Oynatım";
-"pl_menu.subtitles" = "Subtitles (%d loaded)";
-"pl_menu.network_resources" = "Network Resources";
-"pl_menu.file_operations" = "File Operations";
+"pl_menu.subtitles" = "Alt Yazı (%d Yüklendi)";
+"pl_menu.network_resources" = "Ağ Özkaynakları";
+"pl_menu.file_operations" = "Dosya İşlemleri";
 "pl_menu.plugin" = "Eklentiler";
 "pl_menu.playlist" = "Oynatma Listesi";
 
@@ -435,7 +433,7 @@
 "osc_toolbar.sub_track" = "Altyazı parçası seç";
 "osc_toolbar.screenshot" = "Ekran resmi al";
 "osc_toolbar.plugins" = "Eklentiler Panelini Göster";
-"osc_toolbar.live_text" = "Toggle Live Text";
+"osc_toolbar.live_text" = "Canlı Metni Aç/Kapat";
 
 "osc_pos.floating" = "Yüzer";
 "osc_pos.top" = "Üst";
@@ -499,57 +497,68 @@
 "plugin.updating" = "Güncelleme indiriliyor…";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "Tüm alt sistemler";
 "logwindow.title" = "Günlük Görüntüleyicisi";
 "logwindow.time" = "Zaman";
 "logwindow.subsystem" = "Alt Sistem";
 "logwindow.message" = "Mesaj";
-"logwindow.now" = "Now";
-"logwindow.now.desc" = "Follow latest logs";
-"logwindow.log_level" = "Log level";
+"logwindow.now" = "Şimdi";
+"logwindow.now.desc" = "En son günlükleri takip et";
+"logwindow.log_level" = "Günlük düzeyi";
 "logwindow.save" = "Kaydet";
-"logwindow.save_filtered" = "Save filtered logs…";
-"logwindow.filter" = "Filter";
-"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.save_filtered" = "Filtrelenmiş günlükleri kaydet…";
+"logwindow.filter" = "Süzgeç";
+"logwindow.clear_subsystem_selections" = "Seçimleri Temizle";
 "logwindow.copy" = "Kopyala";
-"logwindow.logs" = "logs";
+"logwindow.logs" = "günlükler";
 
 // History window
 "history_window.title" = "Oynatma Geçmişi";
-"history_window.col.filename" = "Media";
+"history_window.col.filename" = "Ortam";
 "history_window.col.progress" = "İlerleme";
 "history_window.col.played_at" = "Oynatma zamanı";
 "history_window.menu.play" = "Oynat";
 "history_window.menu.play_new_window" = "Yeni Pencerede Oynat";
 "history_window.menu.show_in_finder" = "Finder’da Göster";
 "history_window.menu.delete" = "Sil…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "Çöp Sepetine Taşı…";
 "history_window.toolbar.clear" = "Oynatma Geçmişini Temizle";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "Şuna Göre Grupla";
+"history_window.toolbar.group_by.menu" = "Şuna Göre Grupla";
 "history_window.toolbar.group_by.date" = "Tarih";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
-"history_window.toolbar.group_by.location" = "Folder and Website";
-"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
-"history_window.toolbar.expand_all" = "Expand All";
-"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.toolbar.group_by.date_tooltip" = "Tarihe Göre Sırala";
+"history_window.toolbar.group_by.location" = "Klasör ve Web Sitesi";
+"history_window.toolbar.group_by.location_tooltip" = "Klasöre ve Web Sitesine Göre Sırala";
+"history_window.toolbar.expand_collapse" = "Genişlet/Daralt";
+"history_window.toolbar.expand_all" = "Tümünü Genişlet";
+"history_window.toolbar.collapse_all" = "Tümünü Daralt";
 "history_window.search.search_in" = "Şurada ara";
 "history_window.search.filename" = "Dosya Adı";
-"history_window.search.full_path" = "Full Path";
+"history_window.search.full_path" = "Tam Yol";
 "history_window.search.no_recents" = "Son Yapılan Arama Yok";
 "history_window.search.recents_title" = "Son Aramalar";
 "history_window.search.clear_recents" = "Son Kullanılanları Sil";
 
 // Sidebar
 
-"sidebar.layout" = "Layout";
+"sidebar.layout" = "Yerleşim";
 "sidebar.video" = "Video";
 "sidebar.audio" = "Ses";
 "sidebar.sub" = "Altyazılar";
 "sidebar.plugins" = "Eklentiler";
 "sidebar.playlist" = "Oynatma Listesi";
 "sidebar.chapters" = "Fasıllar";
+
+"sidebar.liquid_glass" = "Liquid Glass";
+"sidebar.sidebar" = "Kenar Çubuğu";
+"sidebar.sidebar_position" = "Kenar Çubuğu Konumu";
+"sidebar.compact_interface" = "Sıkışık Arayüz";
+"sidebar.edge_to_edge_video" = "Kenardan Kenara Video";
+"sidebar.lock_window_aspect" = "Pencere En–Boy Oranını Kilitle";
+"sidebar.docked" = "Rıhtımlı Denetim Çubuğu ve Başlık Çubuğu";
+"sidebar.fit_window_to_video" = "Pencereyi Videoya Sığdır";
+"sidebar.settings" = "Ayarlar";
+"sidebar.playlist_and_chapters" = "Oynatma Listesi ve Fasıllar";
 
 "sidebar.aspect_ratio" = "En–Boy Oranı";
 "sidebar.crop" = "Kırp";
@@ -560,36 +569,36 @@
 "sidebar.contrast" = "Karşıtlık";
 "sidebar.saturation" = "Doygunluk";
 "sidebar.gamma" = "Gama";
-"sidebar.hue" = "Hue";
+"sidebar.hue" = "Ton";
 
 "sidebar.load_external_audio" = "Dış Ses Parçası Yükle…";
-"sidebar.delay" = "Delay";
+"sidebar.delay" = "Gecikme";
 
-"sidebar.eq" = "Equalizer";
+"sidebar.eq" = "Ekolayzer";
 "sidebar.save_eq" = "Geçerli EQ’yü Önayar Olarak Kaydet…";
 "sidebar.rename_eq" = "Geçerli EQ’yü Yeniden Adlandır…";
 "sidebar.remove_eq" = "Geçerli EQ Önayarını Kaldır";
 "sidebar.manual_eq" = "Elle";
 
-"sidebar.primary" = "Primary";
-"sidebar.secondary" = "Secondary";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.primary" = "Birincil";
+"sidebar.secondary" = "İkincil";
+"sidebar.external_subtitles" = "Dış Alt Yazılar";
 "sidebar.load_subtitle" = "Altyazı Yükle…";
 "sidebar.search_online" = "İnternette Ara…";
-"sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.position" = "Konum";
+"sidebar.scale" = "Ölçek";
 "sidebar.font" = "Font";
-"sidebar.color" = "Color";
-"sidebar.text" = "Text";
+"sidebar.color" = "Renk";
+"sidebar.text" = "Metin";
 "sidebar.border" = "Kenarlık";
-"sidebar.background" = "Background";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Altyazı stil seçenekleri ASS görüntüsünü bozabilir. Bazı seçenekler ise altyazı türüne bağlı olarak devre dışı bırakılacaktır.";
+"sidebar.shadow" = "Gölge";
+"sidebar.sub_settings_not_available" = "Bu alt yazı türü için bazı ayarlar kullanılabilir değildir.";
+"sidebar.sub_style_warning" = "ASS alt yazıları için stil ayarları yapmak görüntüyü bozabilir.";
 
 "sidebar.add_file" = "Dosya Ekle…";
 "sidebar.add_url" = "URL Ekle…";
 
-"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+"sidebar.plugins_placeholder" = "Eklentiler, özel kenar çubuğu içerikleri gösterebilirler. Kenar çubuğunu göstermek için bir eklenti seçin veya Ayarlar içinden yeni bir eklenti kurun.";
 
 // Settings
 
@@ -602,7 +611,7 @@
 "settings.allowScreenSaverForAudio.desc" = "Sistemin uykuya geçmesini engeller.";
 "settings.allowScreenSaverForAudio.label" = "Yalnızca ses çalarken veya ”müzik kipindeyken“ değil";
 "settings.alwaysOpenInNewWindow.label" = "Ortamı her zaman yeni pencerede aç";
-"settings.autoRepeat.label" = "Bir dosya elle açıldığında";
+"settings.autoRepeat.label" = "Bir dosya elle açıldığında döngüye al";
 "settings.autoSwitchToMusicMode.label" = "Ses dosyası çalarken kendiliğinden ”müzik kipine“ geç";
 "settings.blackOutMonitor.label" = "Tam ekrandayken diğer monitörleri karart";
 "settings.defaultRepeatMode.items.0" = "Oynatma listesini döngüye al";
@@ -641,30 +650,42 @@
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "HDR videoları oynatırken HDR desteğini saptanmış olarak etkinleştirin.";
+"settings.enableHdrSupport.label" = "HDR kipini etkinleştir";
+"settings.enableLiveText.desc" = "Metin tanıma için, duraklatılmış video karelerinin üzerinde Canlı Metin katmanı gösterin. macOS 13 veya daha yeni bir sürümünü gerektirir.";
+"settings.enableLiveText.label" = "Canlı Metin";
 "settings.enableToneMapping.label" = "Ton eşlemlemeyi etkinleştir";
 "settings.forceDedicatedGPU.desc" = "Görüntü işleme için her zaman ayrı GPU’yu kullanın (varsa). Bu performansınızı artırır; ancak pil düzeyinizi düşürebilir.";
 "settings.forceDedicatedGPU.label" = "Ayrı GPU’ya zorla";
 "settings.hardwareDecoder.items.0" = "Devre dışı";
+"settings.hardwareDecoder.items.0.desc" = "Donanımsal çözücü devre dışı bırakıldı.";
 "settings.hardwareDecoder.items.1" = "Otomatik";
+"settings.hardwareDecoder.items.1.desc" = "Donanımsal çözücü etkin. Büyük olasılıkla çoğu video süzgeci düzgün çalışmayacaktır.";
 "settings.hardwareDecoder.items.2" = "Otomatik (Kopya)";
+"settings.hardwareDecoder.items.2.desc" = "Donanımsal çözücü etkin. İki kat daha fazla bellek tüketecektir; ancak video süzgeçleri çalışacaktır.";
 "settings.hardwareDecoder.label" = "Donanımsal çözücü";
 "settings.loadIccProfile.desc" = "Videoyu RGB’den ekran çıktısına çevirebilmek için kullanılan ekrana gerekli olan ICC profilini yükle ve kullan (yalnızca SDR kipi)";
 "settings.loadIccProfile.label" = "ICC profili yükle";
-"settings.toneMappingAlgorithm.items.0" = "Otomatik";
 "settings.toneMappingAlgorithm.label" = "Algoritma";
-"settings.toneMappingTargetPeak.desc" = "Ekranın ölçülen tepe parlaklığı. 0 olarak ayarlanırsa IINA bu değeri algılar. Algılama başarısız olursa IINA hedef zirveyi 400 olarak ayarlar.";
+"settings.toneMappingAlgorithm.desc" = "Görüntüleri hedef ekrana göre ton eşleme işleminde kullanılacak algoritma.";
+"settings.toneMappingParamOverride.desc" = "Ton eşleme algoritmasını ince ayarlamaya yarayan parametre. Saptanmış olarak, algoritmaya özgü bir değer atanmıştır. Bu saptanmış değeri geçersiz kılmak için söz konusu ayarı etkinleştirin.";
+"settings.toneMappingParamOverride.label" = "İnce ayar parametresi";
+"settings.toneMappingTargetPeak.desc" = "Ekranın ölçülen tepe parlaklığı. IINA, bu değeri saptanmış olarak otomatik algılar. Algılama başarısız olursa hedef tepe parlaklığı, ekranın aktarım karakteristikleri temel alınarak uygun bir değere ayarlanır. Ekranın parlaklık değerini elle belirlemek için bu ayarı etkinleştirin.";
 "settings.toneMappingTargetPeak.label" = "Hedef zirve";
 "settings.videoThreads.desc" = "Saptanmış: 0 (Otomatik)";
 "settings.videoThreads.label" = "İş parçacığı sayısı";
 
 // Settings - Audio
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "Saptanmış ses sürücüsü.";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation, Uzamsal Ses desteği sunan yeni, deneysel bir ses sürücüsüdür. Ancak AVFoundation kullanırken, ses gecikmesi gibi bazı sorunlarla karşılaşabilirsiniz.";
 "settings.audioDriverEnableAVFoundation.label" = "Ses sürücüsü";
 "settings.enableInitialVolume.label" = "Başlangıç ses düzeyi";
 "settings.gaplessAudio.desc" = "Kesintisiz ses";
 "settings.gaplessAudio.items.0" = "Devre dışı";
+"settings.gaplessAudio.items.0.desc" = "Ardışık ses dosyalarının çalınması, dosya değiştirme noktasında sessizliğe veya kesintiye neden olabilir.";
 "settings.gaplessAudio.items.1" = "Zayıf";
+"settings.gaplessAudio.items.1.desc" = "Kod çözücünün çıkış ses biçimi değişirse ses aygıtı kapatılıp yeniden açılır ve bu da kesintisiz çalmayı bozar.";
 "settings.gaplessAudio.items.2" = "Güçlü";
+"settings.gaplessAudio.items.2.desc" = "Ses aygıtı, çalınacak ilk dosya için seçilen parametreler kullanılarak açılır ve kesintisiz çalma için açık tutulur. Sonraki dosyalar yeniden örneklenebilir.";
 "settings.gaplessAudio.label" = "Kesintisiz ses";
 "settings.maxVolume.desc" = "(100–1000)";
 "settings.maxVolume.label" = "En yüksek ses düzeyi";
@@ -735,6 +756,7 @@
 "settings.verticalScrollAction.items.2" = "Yok";
 "settings.verticalScrollAction.items.4" = "Oynatma hızını ayarla";
 "settings.verticalScrollAction.label" = "Dikey sar";
+"settings.videoViewAcceptsFirstMouse.desc" = "Fare";
 "settings.videoViewAcceptsFirstMouse.label" = "Odaklı değilken ilk fare tıklamasını kabul eder";
 "settings.volumeScrollAmount.label" = "Ses düzeyi hassasiyeti";
 
@@ -743,32 +765,35 @@
 "settings.useMediaKeys.label" = "Sistem ortam denetim tuşlarını kullan";
 
 // Settings - Network
-"settings.cacheBufferSize.desc" = "Saptanmış: 153600";
-"settings.cacheBufferSize.label" = "Önbellek arabellek boyutu (KB)";
-"settings.enableCache.label" = "Önbelleği etkinleştir";
+"settings.cachePauseWait.desc" = "Önbelleğin, arabelleğe alma kipine girildiğinde oynatmaya yeniden başlamadan önce ne kadar süreyle arabelleğe alınması gerektiğini gösteren saniye sayısı. Oynatma hızlı bir şekilde yeniden arabelleğe alma kipine giriyorsa bu ayarı artırın.\n\nSaptanmış: 1";
+"settings.cachePauseWait.label" = "Yeniden başlatma öncesi kaç saniye arabelleğe alınacağı";
+"settings.cachePauseInitial.desc" = "Oynatmaya başlamadan önce arabelleğe alma kipine girin. Bu, ağ verilerinin önceden alınması ve arabelleğe alınması için bir süre bekleme karşılığında oynatmanın sorunsuz bir şekilde başlamasını sağlamak için kullanılabilir.";
+"settings.cachePauseInitial.label" = "Oynatma öncesi kullanılacak arabellek";
+"settings.defaultCacheSize.desc" = "Saptanmış: 153.600";
+"settings.defaultCacheSize.label" = "Arabellek boyutu (KiB)";
+"settings.enableCache.label" = "Ağ verisini önden al ve arabelleğe koy";
 "settings.httpProxy.desc" = "Etkili olabilmesi için IINA’nın yeniden başlatılması gerekir.";
 "settings.httpProxy.label" = "HTTP vekil sunucusu";
-"settings.secPrefech.desc" = "Saptanmış: 36000";
+"settings.secPrefech.desc" = "Saptanmış: 36.000";
 "settings.secPrefech.label" = "Önceden getirilecek saniyeler";
-"settings.showBufferingThrobber.label" = "Önbelleğe alınırken duraklatıldığında yükleme göstergesini göster";
+"settings.showBufferingThrobber.label" = "Arabelleğe alırken yükleme göstergesini göster";
 "settings.showSeekingThrobber.label" = "Sarılırken yükleme göstergesini göster";
 "settings.transportRTSPThrough.items.0" = "Otomatik";
 "settings.transportRTSPThrough.label" = "RTSP akışını şu yolla taşı";
 "settings.userAgent.label" = "Kullanıcı aracısı";
-"settings.ytdlEnabled.label" = "youtube-dl’yi etkinleştir";
-"settings.ytdlRawOptions.desc" = "Biçim: <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
+"settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
 "settings.ytdlRawOptions.label" = "Ham seçenekler";
 "settings.ytdlSearchPath.desc" = "IINA bu klasörde youtube-dl’i arayacak. Yeniden başlatma gerekir.";
 "settings.ytdlSearchPath.label" = "Özel youtube-dl yolu";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "Etkinleştirildiğinde IINA, yalnızca yüklü alt yazısı bulunmayan ve 20 dakikadan uzun videolar için otomatik olarak çevrim içi alt yazı araması yapacaktır.";
 "settings.autoSearchOnlineSub.label" = "Çevrimiçi altyazıları otomatik olarak ara";
 "settings.displayInLetterBox.label" = "Tam ekranda altyazıları çerçeve içinde görüntüle";
 "settings.subAlignX.items.0" = "Sol";
 "settings.subAlignX.items.1" = "Merkez";
 "settings.subAlignX.items.2" = "Sağ";
-"settings.subAlignX.label" = "Y";
 "settings.subAlignY.items.0" = "Üst";
 "settings.subAlignY.items.1" = "Ortala";
 "settings.subAlignY.items.2" = "Alt";
@@ -781,20 +806,37 @@
 "settings.subAutoLoadSearchPath.desc" = "Dizinler iki nokta üst üste ile ayrılır (:). Göreceli dizin yolları ve adres sonunda joker (*) kullanımı serbesttir.";
 "settings.subAutoLoadSearchPath.label" = "Ayrıca şu dizinlerde altyazı ara";
 "settings.subBlur.label" = "Bulanıklık";
+"settings.subBold.desc" = "serifsiz";
+"settings.subBorderStyle.items.1" = "Dış Hat ve Gölge";
+"settings.subBorderStyle.items.3" = "Mat Kutu";
+"settings.subBorderStyle.items.4" = "Arka Plan Kutusu";
+"settings.subBorderStyle.label" = "Kenarlık Biçemi";
 "settings.subBold.label" = "Kalın";
 "settings.subItalic.label" = "Yatık";
 "settings.subLang.desc" = "Bu seçenek ISO 639-2 dil kodu olarak saklanır ve hem mpv hem de OpenSubtitles için çalışır.";
+"settings.subOverrideLevel.items.0" = "evet";
+"settings.subOverrideLevel.items.0.desc" = "Bu bölümdeki tüm stil ayarlarını uygulayın.";
+"settings.subOverrideLevel.items.1" = "zorla";
+"settings.subOverrideLevel.items.1.desc" = "Tüm alt yazı stillerini uygulayın.";
+"settings.subOverrideLevel.items.2" = "sıyır";
+"settings.subOverrideLevel.items.2.desc" = "Alt yazıdan tüm ASS etiketlerini tümüyle çıkarın.";
+"settings.subOverrideLevel.items.3" = "ölçekle";
+"settings.subOverrideLevel.items.3.desc" = "Bu bölümdeki stil ayarlarına ek olarak ölçek ayarını uygulayın.";
+"settings.subOverrideLevel.items.4" = "hayır";
+"settings.subOverrideLevel.items.4.desc" = "Alt yazıları, alt yazı betiğinde belirtildiği gibi gösterin, zorlama olmadan.";
 "settings.subPos.label" = "Dikey konum";
 "settings.subScaleWithWindow.label" = "Altyazıları pencere boyutu ile ölçeklendir";
 "settings.subSpacing.label" = "Font boşluklandırması";
 
 // Settings - UI
+"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
 "settings.alwaysFloatOnTop.label" = "Oynatırken her zaman en üstte ol";
 "settings.alwaysShowOnTopIcon.label" = "Pencere başlığında her zaman ön plana alma pinini göster";
 "settings.arrowBtnAction.items.0" = "Hız";
 "settings.arrowBtnAction.items.1" = "Önceki/Sonraki Ortam";
 "settings.arrowBtnAction.items.2" = "Hızlı İleri/Geri Sar";
 "settings.arrowBtnAction.label" = "Sağ/Sol okları şunun için kullan";
+"settings.controlBarAutoHideTimeout.label" = "Auto hide after";
 "settings.controlBarStickToCenter.label" = "Sürüklerken merkeze hizala";
 "settings.disableAnimations.desc" = "macOS’in Hareketi Azalt erişilebilirlik ayarı etkinleştirildiğinde IINA, vestibüler bozukluğu olanlar için sorunlara neden olduğu bilinen kullanıcı arayüzü animasyonlarını azaltacaktır. Bunun yetersiz olması durumunda, bu ayar kullanıcı arayüzü animasyonlarını ortadan kaldırarak hareketi daha da azaltmak için kullanılabilir.";
 "settings.disableAnimations.label" = "Animasyonları devre dışı bırak";
@@ -829,6 +871,8 @@
 "settings.themeMaterial.items.2" = "Açık";
 "settings.themeMaterial.items.4" = "Sistem Görünüşüyle Eşleştir";
 "settings.themeMaterial.label" = "Görünüş";
+"settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
+"settings.thumbnailWidth.label" = "Thumbnail width";
 "settings.togglePipByMinimizingWindow.label" = "Pencereyi küçülterek/büyüterek Resim İçinde Resim’i aç/kapat";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "Yalnızca video dosyaları için";
 "settings.usePhysicalResolution.label" = "Retina ekranlarda fiziksel çözünürlüğü kullan";
@@ -841,6 +885,7 @@
 "settings.enableAdvancedSettings.desc" = "Bu ayarların etkinleştirilmesi için IINA’nın yeniden başlatılması gerekecektir.";
 "settings.enableAdvancedSettings.label" = "Gelişmiş ayarları etkinleştir";
 "settings.enableLogging.label" = "Günlük kaydını etkinleştir";
+"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
 "settings.logLevel.items.0" = "Ayrıntılı";
 "settings.logLevel.items.1" = "Hata ayıkla";
 "settings.logLevel.items.2" = "Uyarı";
@@ -850,37 +895,52 @@
 "settings.useUserDefinedConfDir.label" = "Şu yapılandırma dizinini kullan";
 
 // Settings - Inline labels
-"settings.$ASSSubtitles" = "ASS altyazıları";
+"settings.$ASSSubtitles" = "ASS alt yazıları";
 "settings.$About" = "Hakkında";
 "settings.$Accessibility" = "Erişilebilirlik";
 "settings.$AdditionalMpvOptions" = "Ek mpv seçenekleri";
+"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
 "settings.$Advanced" = "Gelişmiş";
 "settings.$Align" = "Hizala";
-"settings.$AlwaysWhenPlaying" = "Her zaman";
+"settings.$AlwaysWhenPlaying" = "Always when playing a new file";
 "settings.$Appearance" = "Görünüş";
 "settings.$AssrtAPIToken" = "Assrt API jetonu";
-"settings.$Audio" = "Ses";
 "settings.$Author" = "Yazar";
-"settings.$AutoLoad" = "Altyazıyı otomatik yükle";
+"settings.$AutoLoad" = "Alt yazıyı otomatik yükle";
 "settings.$Background" = "Arka plan";
 "settings.$Behavior" = "Davranış";
 "settings.$Border" = "Kenarlık";
+"settings.$BrowserExtensions" = "Tarayıcı Genişletmeleri";
 "settings.$Cache" = "Önbellek";
 "settings.$Cancel" = "Vazgeç";
 "settings.$CheckForUpdates" = "Güncellemeleri denetle";
+"settings.$CheckForUpdates.items.3600" = "Her Saat";
+"settings.$CheckForUpdates.items.86400" = "Günlük";
+"settings.$CheckForUpdates.items.604800" = "Haftalık";
+"settings.$CheckForUpdates.items.2629800" = "Aylık";
+"settings.$Chrome" = "Chrome";
 "settings.$ClearCache" = "Önbelleği Temizle";
-"settings.$ClearPlaybackHistory" = "Oynatma Geçmişini Temizle…";
-"settings.$ClearSavedPlaybackProgress" = "Kaydedilmiş Oynatma İlerlemelerini Temizle…";
-"settings.$ClearThumbnailCache" = "Küçük Resim Önbelleğini Temizle…";
+"settings.$ClearPlaybackHistory" = "Oynatma Geçmişini Temizle";
+"settings.$ClearSavedPlaybackProgress" = "Kayıtlı Oynatma İlerlemesini Temizle";
+"settings.$ClearThumbnailCache" = "Küçük Resim Önbelleğini Temizle";
 "settings.$Color" = "Renk";
+"settings.$ColorHDR" = "Renk ve HDR";
+"settings.$CommunityPlugins" = "Topluluk Eklentileri";
+"settings.$CreateAnEmptySet" = "Boş bir küme oluştur…";
 "settings.$Customize" = "Özelleştir…";
+"settings.$Decoding" = "Kod Çözme";
 "settings.$DefaultApplication" = "Saptanmış Uygulama";
 "settings.$DefaultEncoding" = "Saptanmış kodlama";
-"settings.$DeleteAllPlaybackHistories" = "Aşağıdaki düğme, “Son Kullanılanları Aç”daki tüm oynatma geçmişlerini ve girdileri silecektir.";
-"settings.$DeleteAllWatchLater" = "Aşağıdaki düğme, “daha sonra izle” klasöründeki tüm dosyaları silecektir. Bu dosyalar kaydedilmiş tüm oynatma ilerlemelerini ve oynatma sırasında uygulanan ayarları içerir.";
-"settings.$DoNotResize" = "Etkin Değil";
+"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
+"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DoNotResize" = "Do not resize";
+"settings.$DuplicateCurrentSet" = "Duplicate current set…";
 "settings.$FailedToLoadThePage" = "Sayfa yüklenemedi.";
+"settings.$Firefox" = "Firefox";
+"settings.$Font" = "Font";
 "settings.$GetBrowserExtensionsForIINA" = "IINA Tarayıcı Eklentisi’ni Edin";
+"settings.$GetPlugins" = "Get Plugins…";
+"settings.$Hardware" = "Hardware";
 "settings.$Height" = "Yükseklik";
 "settings.$Help" = "Yardım";
 "settings.$History" = "Geçmiş";
@@ -888,63 +948,87 @@
 "settings.$ImportAnExistingConfigFile" = "Bir var olan yapılandırma dosyası içe aktar";
 "settings.$InitialWindowPosition" = "Başlangıç pencere boyutu";
 "settings.$InitialWindowSize" = "Başlangıç pencere boyutu";
+"settings.$InputGithubURL" = "Bir Github URL’si girin";
 "settings.$Install" = "Yükle";
-"settings.$InstallLocalPackage" = "Paket Kur…";
+"settings.$InstallLocalPackage" = "Install Local Package…";
+"settings.$Installed" = "Yüklendi";
+"settings.$Installing" = "Kuruluyor";
+"settings.$KeyBindingSet" = "Düğme bağıntısı seti";
 "settings.$Layout" = "Yerleşim";
+"settings.$LegacyOpenSubAlert" = "⚠️ Eski OpenSubtitles desteği artık kullanılmıyor. Lütfen yerine OpenSubtitles eklentisini kullanın. Oturum açmanız gerekirse buna eski Ayarlar penceresinden ulaşabilirsiniz.";
+"settings.$LiveText" = "Canlı Metin";
+"settings.$Logging" = "Günlükleme";
 "settings.$Login" = "Oturum Aç";
 "settings.$MB" = "MB";
+"settings.$MPVSettings" = "mpv Ayarları";
 "settings.$Margin" = "Kenar Boşluğu";
 "settings.$Mouse" = "Fare";
 "settings.$Network" = "Ağ";
+"settings.$NewKeyBindingSet" = "Yeni düğme bağıntısı seti";
+"settings.$NoSelection" = "Seçim Yok";
 "settings.$NotLoggedIn" = "Giriş yapılmadı";
 "settings.$OK" = "Tamam";
+"settings.$OfficialPlugins" = "Resmî Eklentiler";
 "settings.$Offset" = "Ofset";
 "settings.$OnScreenController" = "Ekran Üzeri Denetleyici";
 "settings.$OnScreenDisplay" = "Ekran Üzeri Görüntü (OSD)";
-"settings.$OnlineSubtitles" = "Çevrimiçi altyazılar";
+"settings.$OnlineSubtitles" = "Çevrim İçi Alt Yazılar";
 "settings.$OpenLinksOrCurrentWebpage" = "Bağlantıları veya geçerli web sayfasını IINA’da tek bir tıklama ile açın. Web sitesi youtube-dl tarafından desteklenmelidir.";
 "settings.$OpenLogDirectory" = "Günlük Dizinini Aç";
+"settings.$OpenLogWindow" = "Günlük görüntüleyicisini aç";
+"settings.$OrSelectFrom" = "Veya kullanılabilir eklentilerden seçin";
+"settings.$Other" = "Diğer";
 "settings.$OtherStyles" = "Diğer Stiller";
 "settings.$OverrideLevel" = "Geçersiz kılma düzeyi";
-"settings.$PictureinnPicture" = "Resim İçinde\nResim";
+"settings.$Percent" = "%";
+"settings.$PictureinnPicture" = "Resim İçinde Resim";
 "settings.$Playlist" = "Oynatma listesi";
 "settings.$PleaseSelectTheMediaTypes" = "Lütfen IINA’yı saptanmış uygulama olarak ayarlamak istediğiniz ortam türlerini seçin.";
 "settings.$Position" = "Konum";
 "settings.$PreferredLanguage" = "Tercih edilen dil";
 "settings.$RestoreAlerts" = "İkazları Geri Yükle";
-"settings.$RestoreAllAlertsThat" = "Aşağıdaki düğme, “Bu mesajı bir daha gösterme” onay kutusu kullanılarak susturulan tüm uyarıları geri yükleyecektir.";
-"settings.$RestoreSuppressedAlerts" = "Susturulmuş İkazları Geri Yükle…";
+"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreSuppressedAlerts" = "Susturulan Uyarıları Geri Yükle";
 "settings.$SPDIFOutput" = "S/PDIF çıktısı";
+"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Ekran resimleri";
-"settings.$SetIINAAsTheDefault" = "IINA’yı Saptanmış Uygulama Yap…";
+"settings.$SetIINAAsTheDefault" = "IINA’yı Saptanmış Uygulama Yap";
 "settings.$Settings" = "Ayarlar";
 "settings.$Shadow" = "Gölge";
 "settings.$ShowInFinder" = "Finder’da Göster";
 "settings.$ShowTheConfigFileIn" = "Yapılandırma dosyasını Finder’da göster";
 "settings.$Size" = "Boyut";
 "settings.$Source" = "Kaynak";
+"settings.$SubtitleSource" = "Alt yazı kaynağı";
+"settings.$SubtitleSource.desc" = "Bu, alt yazı aramak için öntanımlı kaynaktır. Menüden oynatma sırasında, başka kaynaklardan elle alt yazı aramayı seçebilirsiniz.";
+"settings.$SubtitleSourcePluginDesc" = "Bu kaynak, bir eklenti tarafından sağlanmaktadır. Yapılandırma için lütfen eklentinin ayarlar sayfasına gidin.";
 "settings.$SuppressMessagesFor" = "Şu iletileri sustur";
-"settings.$TextSubtitles" = "Altyazı dosyaları";
+"settings.$TextSubtitles" = "Alt yazı dosyaları";
+"settings.$ThisPluginIsNot" = "Bu eklenti, Github üzerinde barındırılmamaktadır. Lütfen indirmek için web sitesine gidin.";
 "settings.$ThumbnailPreview" = "Küçük resim önizlemesi";
 "settings.$Toolbar" = "Araç çubuğu";
 "settings.$Trackpad" = "İzleme Dörtgeni";
 "settings.$Uninstall" = "Yüklemeyi Kaldır";
+"settings.$Volume" = "Ses düzeyi";
 "settings.$Website" = "Web Sitesi";
 "settings.$WhenEnteringPIP" = "Resim İçinde Resim’e girerken";
 "settings.$WhenMediaIsOpened" = "Ortam açıldığında";
 "settings.$WhenMediaIsOpenedManually" = "Ortam elle açılmışsa";
 "settings.$Width" = "Genişlik";
 "settings.$Window" = "Pencere";
-"settings.$X" = " X";
+"settings.$X" = "X";
 "settings.$XOffset" = "Kenardan X uzaklığı";
 "settings.$Y" = "Y";
 "settings.$YOffset" = "Y ofseti";
+"settings.$YTDL" = "Online Videos (yt-dlp)";
 "settings.$YouCanInstallANew" = "Yeni bir eklentiyi GitHub’dan veya yerel bir .iinaplgz paketinden yükleyebilirsiniz. GitHub’dan yüklenen eklentiler otomatik olarak güncellenebilir.";
 "settings.$bottom" = "alt";
 "settings.$dB" = "dB";
 "settings.$left" = "sol";
 "settings.$nits" = "nit";
 "settings.$ofScreen" = "Ekran yüzdesi";
+"settings.$onlineMediaPluginAdvice" = "Çevrim İçi Ortam eklentisi önerilir";
 "settings.$point" = "punto";
 "settings.$pt" = "pnt";
 "settings.$right" = "sağ";
@@ -952,3 +1036,4 @@
 "settings.$sideOfTheScreen" = "ekranın kenarı";
 "settings.$toThe" = "ekranın";
 "settings.$top" = "üst";
+"settings.$ytdlWarning" = "Çevrim İçi Ortam eklentisi; kalite değiştirme ve video indirme gibi ek özellikler sunar. IINA, eklenti kurulu ve etkinleştirilmiş durumdaysa onu kullanacaktır. Aşağıdaki ayarlar ise yalnızca eklenti kullanılabilir değilse işlevseldir.";

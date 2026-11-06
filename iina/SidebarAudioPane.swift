@@ -262,6 +262,7 @@ fileprivate class EqualizerView: NSView, NSMenuDelegate {
     addSubview(container)
     container.padding(.all)
 
+    update()
     player.observe(.iinaAFChanged) { [unowned self] _ in
       update()
     }

@@ -120,4 +120,7 @@ class TranslucentView: NSView {
       break
     }
   }
+
+  override func rightMouseDown(with event: NSEvent) {}
+  override func rightMouseUp(with event: NSEvent) {}
 }

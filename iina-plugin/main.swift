@@ -71,7 +71,7 @@ func handlePluginCommand(_ args: [String]) -> Bool {
 // MARK: - Commands
 
 func createPlugin(_ args: ArraySlice<String>) -> Bool {
-  var args = args
+  var args = Array(args)
   var userTemplateURL: String?
   var idxToBeDropped: [Int] = []
   for (idx, arg) in args.enumerated() {
@@ -80,7 +80,7 @@ func createPlugin(_ args: ArraySlice<String>) -> Bool {
       idxToBeDropped.append(idx)
     }
   }
-  for idx in idxToBeDropped {
+  for idx in idxToBeDropped.reversed() {
     args.remove(at: idx)
   }
   

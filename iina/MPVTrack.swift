@@ -177,7 +177,11 @@ class MPVTrack: NSObject {
     self.init(id: id, type: type, isDefault: isDefault, isForced: isForced, isImage: isImage,
               isSelected: isSelected, isExternal: isExternal)
     srcId = MPVController.nodeValueAsInt(dict["src-id"])
-    title = dict["title"] as? String
+    // MP4 track names can be stored as metadata/name instead of mpv's title.
+    let metadata = dict["metadata"] as? [String: Any]
+    title = [dict["title"] as? String, metadata?["name"] as? String]
+      .compactMap { $0 }
+      .first { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     lang = dict["lang"] as? String
     codec = dict["codec"] as? String
     externalFilename = dict["external-filename"] as? String

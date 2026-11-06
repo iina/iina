@@ -139,7 +139,9 @@ class InteractiveModeController: NSObject {
     ])
 
     then()
-    if !isPausedPriorToInteractiveMode {
+    if isPausedPriorToInteractiveMode {
+      mainWindow.liveText.requestAnalysis()
+    } else {
       player.resume()
     }
   }

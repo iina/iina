@@ -41,8 +41,18 @@ final class PlaySlider: NSSlider {
 
   // MARK: - Initialization
 
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+    cell = PlaySliderCell()
+    commonInit()
+  }
+
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+    commonInit()
+  }
+
+  private func commonInit() {
     // Apple increased the height of sliders in Big Sur. Until we have time to restructure the
     // on screen controller to accommodate a larger slider reduce the size of the slider from
     // regular to small. This makes the slider match the behavior seen under Catalina. This MUST

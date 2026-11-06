@@ -301,7 +301,7 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     super.init(frame: .zero)
 
     self.segmentControl = NSSegmentedControl(
-      labels: AppData.aspectsInPanel,
+      labels: [ui.localized("quicksetting.item_default")] + AppData.aspectsInPanel.dropFirst(1),
       trackingMode: .selectOne,
       target: self, action: #selector(aspectRatioAction)
     )
@@ -318,6 +318,7 @@ fileprivate class AspectRatioView: HorizontalScrollViewWithIndicator {
     )
     size(height: 24)
 
+    update()
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -363,7 +364,7 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
     super.init(frame: .zero)
 
     self.segmentControl = NSSegmentedControl(
-      labels: AppData.cropsInPanel + [NSLocalizedString("menu.crop_custom", comment: "")],
+      labels: [ui.localized("quicksetting.item_none")] + AppData.cropsInPanel.dropFirst(1) + [ui.localized("menu.crop_custom")],
       trackingMode: .selectOne,
       target: self, action: #selector(cropAction)
     )
@@ -372,6 +373,7 @@ fileprivate class CropView: HorizontalScrollViewWithIndicator {
     scrollView.documentView = segmentControl
     size(height: 24)
 
+    update()
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -437,6 +439,7 @@ fileprivate class RotationView: NSView {
     addSubview(segmentControl)
     segmentControl.padding(.all)
 
+    update()
     player.observe(.iinaVideoParamsChanged) { [unowned self] _ in
       update()
     }
@@ -532,7 +535,7 @@ fileprivate class SpeedView: SidebarSliderView {
       slider.neutralValue = 8
     }
     input.formatter = speedFormatter
-    resetButton.toolTip = NSLocalizedString("quicksetting.reset_speed", comment: "Reset speed to 1x")
+    resetButton.toolTip = ui.localized("quicksetting.reset_speed")
   }
 
   /// Return the slider value that represents the given playback speed.
@@ -681,6 +684,7 @@ fileprivate class EqualizerView: NSView {
     addSubview(stack)
     stack.padding(.horizontal(1), .vertical(2))
 
+    update()
     player.observe(.iinaVideoEqualizerChanged) { [unowned self] _ in
       update()
     }

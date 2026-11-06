@@ -81,7 +81,9 @@ class PlayerCore: NSObject {
     return pc
   }
 
+  /// Similar to `activeOrNew`, but supports inverting the action
   static func activeOrNewForMenuAction(isAlternative: Bool) -> PlayerCore {
+    // since it's from a menu item, there is at least one player core
     let useNew = Preference.bool(for: .alwaysOpenInNewWindow) != isAlternative
     return useNew ? newPlayerCore : active
   }
@@ -93,11 +95,14 @@ class PlayerCore: NSObject {
    count of playable files.
    */
   @discardableResult
-  static func openURLs(_ urls: [URL]) -> Int? {
-    let openInCurrentWindow = !Preference.bool(for: .alwaysOpenInNewWindow)
+  static func openURLs(_ urls: [URL], invertOpenInNewWindow: Bool = false) -> Int? {
+    var openInCurrentWindow = !Preference.bool(for: .alwaysOpenInNewWindow)
+    if invertOpenInNewWindow {
+      openInCurrentWindow = !openInCurrentWindow
+    }
     if openInCurrentWindow {
       // open all urls in the active window if any (or, all in one new window)
-      return activeOrNew.openURLs(urls)
+      return active.openURLs(urls)
     } else if
       urls.count > 1,
       Preference.bool(for: .groupSimultaneousOpensInPlaylist)
@@ -391,7 +396,7 @@ class PlayerCore: NSObject {
   // MARK: - Control
 
   private func open(_ url: URL?, shouldAutoLoad: Bool = false) {
-    guard let url = url else {
+    guard let url else {
       log("empty file path or url", level: .error)
       return
     }
@@ -537,6 +542,7 @@ class PlayerCore: NSObject {
     info.audioTracks = []
     info.chapters = []
     info.playlist = []
+    info.isShuffled = false
     info.subTracks = []
     info.thumbnails = []
     info.thumbnailsReady = false
@@ -559,12 +565,14 @@ class PlayerCore: NSObject {
       mpv.setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
     }
 
+#if USE_ICC_PROFILE_AUTO // See VideoView.setICCProfile.
     // If this mpv core is being reused icc-profile-auto may have been left set to true. This option
     // MUST be reset to false to avoid a crash that occurs if the mpv OSD is being used. Another way
     // to fix this would be to add this option to the mpv reset-on-next-file option. However the
     // user might override IINA and set that option themselves and not include icc-profile-auto.
     // Better to directly reset icc-profile-auto. See issue #5727 for details.
     mpv.setFlag(MPVOption.GPURendererOptions.iccProfileAuto, false)
+#endif
 
     // Delay force-window until an actual file load to avoid Xcode-launched app startup hanging
     // while mpv tries to create a VO before IINA has entered its normal media-open path.
@@ -803,6 +811,7 @@ class PlayerCore: NSObject {
     miniPlayer.playlistWrapperView.addSubview(playlistView.view)
     playlistView.view.padding(.all)
     // move video view
+    mainWindow.liveText.clearAnalysis()
     videoView.removeFromSuperview()
     miniPlayer.videoWrapperView.addSubview(videoView, positioned: .below, relativeTo: nil)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": videoView])
@@ -870,6 +879,7 @@ class PlayerCore: NSObject {
     miniPlayer.videoViewAspectConstraint?.isActive = false
     miniPlayer.videoViewAspectConstraint = nil
     mainWindow.addVideoViewToWindow()
+    mainWindow.oscFloatingView.updatePosition()
 
     // hide mini player
     miniPlayer.window?.orderOut(nil)
@@ -883,6 +893,7 @@ class PlayerCore: NSObject {
     }
 
     mainWindow.forceDraw("exited music mode")
+    mainWindow.liveText.requestAnalysis()
     postNotification(.iinaMusicModeChanged)
     events.emit(.musicModeChanged, data: false)
   }
@@ -1239,12 +1250,12 @@ class PlayerCore: NSObject {
   func getLoopMode() -> LoopMode {
     let loopFileStatus = mpv.getString(MPVOption.PlaybackControl.loopFile)
     guard loopFileStatus != "inf" else { return .file }
-    if let loopFileStatus = loopFileStatus, let count = Int(loopFileStatus), count != 0 {
+    if let loopFileStatus, let count = Int(loopFileStatus), count != 0 {
       return .file
     }
     let loopPlaylistStatus = mpv.getString(MPVOption.PlaybackControl.loopPlaylist)
     guard loopPlaylistStatus != "inf", loopPlaylistStatus != "force" else { return .playlist }
-    guard let loopPlaylistStatus = loopPlaylistStatus, let count = Int(loopPlaylistStatus) else {
+    guard let loopPlaylistStatus, let count = Int(loopPlaylistStatus) else {
       return .off
     }
     return count == 0 ? .off : .playlist
@@ -1268,7 +1279,13 @@ class PlayerCore: NSObject {
   }
 
   func toggleShuffle() {
-    mpv.command(.playlistShuffle)
+    if info.isShuffled {
+      mpv.command(.playlistUnshuffle)
+      info.isShuffled = false
+    } else {
+      mpv.command(.playlistShuffle)
+      info.isShuffled = true
+    }
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -1276,9 +1293,15 @@ class PlayerCore: NSObject {
     let maxVolume = Preference.integer(for: .maxVolume)
     let constrainedVolume = volume.clamped(to: 0...Double(maxVolume))
     let appliedVolume = constrain ? constrainedVolume : volume
+    let shouldSendConstrainedVolumeOSD =
+      constrain && volume != constrainedVolume && info.volume == appliedVolume
     info.volume = appliedVolume
     mpv.setDouble(MPVOption.Audio.volume, appliedVolume, level: .verbose)
     Preference.set(constrainedVolume, for: .softVolume)
+    if shouldSendConstrainedVolumeOSD {
+      // mpv won't send MPV_EVENT_PROPERTY_CHANGE if the volume is unchanged.
+      sendOSD(.volume(constrainedVolume))
+    }
   }
 
   func setTrack(_ index: Int, forType: MPVTrack.TrackType) {
@@ -1298,7 +1321,7 @@ class PlayerCore: NSObject {
   }
 
   func setSpeed(_ speed: Double) {
-    let speed = speed < AppData.mpvMinPlaybackSpeed ? AppData.mpvMinPlaybackSpeed : speed
+    let speed = max(AppData.mpvMinPlaybackSpeed, speed)
     mpv.setDouble(MPVOption.PlaybackControl.speed, speed)
   }
 
@@ -1385,9 +1408,9 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalVideoFile(_ url: URL) {
-    mpv.command(.videoAdd, args: [url.path], checkError: false) { code in
+    mpv.command(.videoAdd, args: [url.mpvStr], checkError: false) { code in
       if code < 0 {
-        self.log("Unsupported video: \(url.path)", level: .error)
+        self.log("Unsupported video: \(url.mpvStr)", level: .error)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_video")
         }
@@ -1396,9 +1419,9 @@ class PlayerCore: NSObject {
   }
 
   func loadExternalAudioFile(_ url: URL) {
-    mpv.command(.audioAdd, args: [url.path], checkError: false) { code in
+    mpv.command(.audioAdd, args: [url.mpvStr], checkError: false) { code in
       if code < 0 {
-        self.log("Unsupported audio: \(url.path)", level: .error)
+        self.log("Unsupported audio: \(url.mpvStr)", level: .error)
         DispatchQueue.main.async {
           Utility.showAlert("unsupported_audio")
         }
@@ -1411,7 +1434,7 @@ class PlayerCore: NSObject {
     guard info.state.active else { return }
     let subFont = mpv.getString(MPVOption.Subtitles.subFont)
     Utility.quickFontPickerWindow(selecting: subFont) { [self] result in
-      if let result = result {
+      if let result {
         setSubFont(result)
       }
     }
@@ -1429,15 +1452,15 @@ class PlayerCore: NSObject {
 
   func loadExternalSubFile(_ url: URL, delay: Bool = false, suppressError: Bool = false) {
     var track: MPVTrack?
-    info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.path }) }
-    if let track = track {
+    info.$subTracks.withLock { track = $0.first(where: { $0.externalFilename == url.mpvStr }) }
+    if let track {
       mpv.command(.subReload, args: [String(track.id)], checkError: false)
       return
     }
 
-    mpv.command(.subAdd, args: [url.path], checkError: false, level: .verbose) { code in
+    mpv.command(.subAdd, args: [url.mpvStr], checkError: false, level: .verbose) { code in
       if code < 0 {
-        self.log("Unsupported sub: \(url.path)", level: .error)
+        self.log("Unsupported sub: \(url.mpvStr)", level: .error)
         // only show alert when the subtitle is added manually
         guard !suppressError else { return }
         // if another modal panel is shown, popping up an alert now will cause some infinite loop.
@@ -1484,6 +1507,7 @@ class PlayerCore: NSObject {
 
   func appendToPlaylist(_ path: String, silent: Bool = false) {
     mpv.playlistAppend(path)
+    info.isShuffled = false
     if !silent {
       postNotification(.iinaPlaylistChanged)
     }
@@ -1491,12 +1515,14 @@ class PlayerCore: NSObject {
 
   func playlistMove(_ from: Int, to: Int) {
     mpv.playlistMove(from, to: to)
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
   func playlistReorder(newPlaylist: [MPVPlaylistItem]) {
     guard Set(info.playlist) == Set(newPlaylist) else { return }
     if info.playlist == newPlaylist { return }
+    info.isShuffled = false
     mpv.command(.playlistClear)
     guard let currentPlaying = newPlaylist.firstIndex(where: { $0.isPlaying } ) else {
       for item in newPlaylist {
@@ -1517,6 +1543,7 @@ class PlayerCore: NSObject {
 
   func addToPlaylist(paths: [String], at index: Int = -1) {
     getPlaylist()
+    info.isShuffled = false
     for path in paths {
       mpv.playlistAppend(path)
     }
@@ -1531,6 +1558,7 @@ class PlayerCore: NSObject {
 
   func playlistRemove(_ index: Int) {
     mpv.playlistRemove(index)
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -1541,11 +1569,13 @@ class PlayerCore: NSObject {
       mpv.playlistRemove(i - count)
       count += 1
     }
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
   func clearPlaylist() {
     mpv.command(.playlistClear)
+    info.isShuffled = false
     postNotification(.iinaPlaylistChanged)
   }
 
@@ -1947,11 +1977,11 @@ class PlayerCore: NSObject {
   }
 
   func setSubTextBorderColor(_ colorString: String) {
-    mpv.setString("options/" + MPVOption.Subtitles.subBorderColor, colorString)
+    mpv.setString("options/" + MPVOption.Subtitles.subOutlineColor, colorString)
   }
 
   func setSubTextBorderSize(_ size: Double) {
-    mpv.setDouble("options/" + MPVOption.Subtitles.subBorderSize, size)
+    mpv.setDouble("options/" + MPVOption.Subtitles.subOutlineSize, size)
   }
 
   func setSubTextBgColor(_ colorString: String) {
@@ -1965,6 +1995,7 @@ class PlayerCore: NSObject {
 
   func setSubFont(_ font: String) {
     mpv.setString(MPVOption.Subtitles.subFont, font)
+    postNotification(.iinaSubFontChanged)
   }
 
   func savePlaybackPosition() {
@@ -2019,6 +2050,7 @@ class PlayerCore: NSObject {
       DispatchQueue.main.async { [self] in
         log("Running on_before_start_file hook: shuffling playlist")
         mpv.command(.playlistShuffle)
+        info.isShuffled = true
         /// will cancel this file load sequence (so `fileLoaded` will not be called), then will start loading item at index 0
         mpv.command(.playlistPlayIndex, args: ["0"])
         next()
@@ -2177,6 +2209,19 @@ class PlayerCore: NSObject {
     syncAbLoop()
     refreshSyncUITimer()
     touchBarSupport.setupTouchBarUI()
+
+    // Workaround mpv issue #18581 / IINA issue #6378. Newer iPhones can generate video files with
+    // two audio tracks, one encoded with the Apple Positional Audio Codec to support spatial audio
+    // and one stereo track. FFmpeg 9.0.2 does not support APAC (FFmpeg is adding support). If the
+    // APAC encoded track happens to be the first audio track, mpv will select it, fail to decode it
+    // and continue playback with no sound. Select the second track if this has occurred.
+    if info.aid == 0, info.audioTracks.count >= 2, info.audioTracks[0].codec == "apple_apac" {
+      log("""
+        Audio track 1 uses Apple Positional Audio Codec, switching to audio track 2:
+        \(info.audioTracks.compactMap { String(describing: $0) }.joined(separator: "\n"))
+        """, level: .warning)
+      setTrack(2, forType: .audio)
+    }
 
     if info.aid == 0 {
       mainWindow.muteButton.isHidden = true
@@ -2510,6 +2555,12 @@ class PlayerCore: NSObject {
     getTrackInfo()
     getSelectedTracks()
     let audioStatus = info.isAudio
+
+    // Now Playing is first updated when the file starts, before the track list is known, so the
+    // media is treated as video and the artist and album are omitted. Update it again now.
+    if self == PlayerCore.lastActive {
+      NowPlayingInfoManager.shared.updateInfo(withTitle: true)
+    }
 
     // if need to switch to music mode
     if Preference.bool(for: .autoSwitchToMusicMode) {
@@ -3003,7 +3054,7 @@ class PlayerCore: NSObject {
                              change: [NSKeyValueChangeKey: Any]?,
                              context: UnsafeMutableRawPointer?) {
     // The following guards are sanity checks and should never report an error.
-    guard let keyPath = keyPath else {
+    guard let keyPath else {
       log("Observed key path is missing", level: .error)
       return
     }
@@ -3138,7 +3189,7 @@ class PlayerCore: NSObject {
   func refreshCachedVideoInfo(forVideoPath path: String) {
     guard let dict = FFmpegController.probeVideoInfo(forFile: path) else { return }
     let progress: VideoTime? = {
-      guard let url = URL(string: path) else { return nil }
+      let url = URL(fileURLWithPath: path)
       let mpvMd5 = Utility.mpvWatchLaterMd5(url, ignorePathInWatchLaterConfig)
       return Utility.playbackProgressFromWatchLater(mpvMd5)
     }()
@@ -3169,7 +3220,7 @@ extension PlayerCore: FFmpegControllerDelegate {
   func didUpdate(_ thumbnails: [FFThumbnail]?, forFile filename: String, withProgress progress: Int) {
     guard let currentFilePath = info.currentURL?.path, currentFilePath == filename else { return }
     log("Got new thumbnails, progress \(progress)")
-    if let thumbnails = thumbnails {
+    if let thumbnails {
       info.$thumbnails.withLock { $0.append(contentsOf: thumbnails) }
     }
     info.thumbnailsProgress = Double(progress) / Double(ffmpegController.thumbnailCount)

@@ -1,35 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="25084" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="25084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController" customModule="IINA" customModuleProvider="target">
             <connections>
-                <outlet property="bottomBarBottomConstraint" destination="vP1-IE-sbB" id="G77-vL-Wf8"/>
-                <outlet property="bottomView" destination="Tdb-EA-alw" id="5Xv-Ja-j4G"/>
-                <outlet property="fragControlView" destination="hDm-KI-3o4" id="ITm-fa-cWL"/>
-                <outlet property="fragControlViewLeftView" destination="8Ej-eH-OR9" id="Grg-cg-qxF"/>
-                <outlet property="fragControlViewMiddleButtons1Constraint" destination="aEy-x5-Ctd" id="FYr-la-rQm"/>
-                <outlet property="fragControlViewMiddleButtons2Constraint" destination="WtE-JF-0m3" id="hWF-bV-ifN"/>
-                <outlet property="fragControlViewMiddleView" destination="Yv6-0K-6E4" id="8vA-vh-qiH"/>
-                <outlet property="fragControlViewRightView" destination="Xts-Pc-T8d" id="yhF-yH-Cdh"/>
-                <outlet property="fragSliderView" destination="BE1-yC-oJL" id="KXu-MZ-mx8"/>
-                <outlet property="fragToolbarView" destination="KfP-G9-8pD" id="R84-gZ-D93"/>
-                <outlet property="fragVolumeView" destination="N3B-DL-XOA" id="4VW-Wa-AD7"/>
-                <outlet property="leftArrowButton" destination="10x-bg-xlj" id="HOT-Yl-7aO"/>
-                <outlet property="leftArrowLabel" destination="Yg9-Sd-sWy" id="fps-VD-ZgC"/>
-                <outlet property="leftLabel" destination="NBD-MV-OuG" id="7xb-a1-6NR"/>
-                <outlet property="muteButton" destination="2py-h1-0km" id="baB-6t-gO7"/>
                 <outlet property="pipOverlayView" destination="Nrz-jZ-Luf" id="EU7-oY-Bwp"/>
-                <outlet property="playButton" destination="gxw-pJ-Lcg" id="t9H-xd-uqj"/>
-                <outlet property="playSlider" destination="eBP-6g-bAT" id="lGv-18-YeQ"/>
-                <outlet property="rightArrowButton" destination="EIi-qd-glM" id="U46-Gl-e8D"/>
-                <outlet property="rightArrowLabel" destination="QTI-wi-oyB" id="icX-KI-Muj"/>
-                <outlet property="rightLabel" destination="GgV-Cc-sk0" id="fnx-gO-YPl"/>
-                <outlet property="volumeSlider" destination="SAG-kc-FAt" id="zM0-Gg-vfy"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -38,7 +17,7 @@
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="F0z-JX-Cv5" customClass="MainWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <rect key="contentRect" x="196" y="240" width="640" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1084"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="3440" height="1410"/>
             <view key="contentView" id="se5-gp-TjO" customClass="MainWindowContentView" customModule="IINA" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +26,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="640" height="400"/>
                         <subviews>
                             <imageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YkI-ii-zaW">
-                                <rect key="frame" x="261" y="155" width="118" height="90"/>
+                                <rect key="frame" x="261" y="155" width="118.5" height="90.5"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="pip" catalog="system" id="0QW-Vy-zmW"/>
                                 <symbolConfiguration key="symbolConfiguration" configurationType="pointSize" pointSize="80" weight="thin">
                                     <nil key="locale"/>
@@ -69,21 +48,12 @@
                             <constraint firstItem="YkI-ii-zaW" firstAttribute="centerY" secondItem="Nrz-jZ-Luf" secondAttribute="centerY" id="hhc-1u-xpc"/>
                         </constraints>
                     </visualEffectView>
-                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tdb-EA-alw">
-                        <rect key="frame" x="0.0" y="-60" width="640" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="60" id="sUc-WO-8kQ"/>
-                        </constraints>
-                    </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Tdb-EA-alw" secondAttribute="trailing" id="Mqd-Wb-vqq"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="RFd-ZJ-29u"/>
                     <constraint firstItem="Nrz-jZ-Luf" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Vtd-0f-x7p"/>
                     <constraint firstAttribute="bottom" secondItem="Nrz-jZ-Luf" secondAttribute="bottom" id="kHE-py-RY5"/>
                     <constraint firstAttribute="trailing" secondItem="Nrz-jZ-Luf" secondAttribute="trailing" id="mJs-PF-Ex5"/>
-                    <constraint firstAttribute="bottom" secondItem="Tdb-EA-alw" secondAttribute="bottom" constant="-60" id="vP1-IE-sbB"/>
-                    <constraint firstItem="Tdb-EA-alw" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="wYH-h6-46f"/>
                 </constraints>
             </view>
             <connections>
@@ -91,214 +61,8 @@
             </connections>
             <point key="canvasLocation" x="207" y="109.5"/>
         </window>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="N3B-DL-XOA">
-            <rect key="frame" x="0.0" y="0.0" width="104" height="24"/>
-            <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="2py-h1-0km">
-                    <rect key="frame" x="0.0" y="-3" width="24" height="30"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speaker.wave.3.fill" catalog="system" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyDown" inset="2" id="XXj-HK-hXa">
-                        <behavior key="behavior" lightByContents="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="24" id="MPG-2q-w6a"/>
-                        <constraint firstAttribute="width" constant="24" id="vBo-ma-Dnu"/>
-                    </constraints>
-                    <connections>
-                        <action selector="muteButtonAction:" target="-2" id="wUf-9f-uHT"/>
-                    </connections>
-                </button>
-                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAG-kc-FAt" userLabel="Volume Slider" customClass="VolumeSlider" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="28" y="6" width="70" height="12"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="P2L-LI-jT7"/>
-                    </constraints>
-                    <sliderCell key="cell" controlSize="mini" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ncp-01-dCG" customClass="VolumeSliderCell" customModule="IINA" customModuleProvider="target"/>
-                    <connections>
-                        <action selector="volumeSliderChanges:" target="-2" id="5AA-pG-FOc"/>
-                    </connections>
-                </slider>
-            </subviews>
-            <constraints>
-                <constraint firstItem="SAG-kc-FAt" firstAttribute="leading" secondItem="2py-h1-0km" secondAttribute="trailing" constant="4" id="Wxb-Os-BRF"/>
-                <constraint firstAttribute="trailing" secondItem="SAG-kc-FAt" secondAttribute="trailing" constant="6" id="X07-5M-FbM"/>
-                <constraint firstItem="SAG-kc-FAt" firstAttribute="centerY" secondItem="2py-h1-0km" secondAttribute="centerY" id="snd-ST-z3J"/>
-                <constraint firstItem="2py-h1-0km" firstAttribute="leading" secondItem="N3B-DL-XOA" secondAttribute="leading" id="vCy-sT-v1s"/>
-                <constraint firstAttribute="bottom" secondItem="2py-h1-0km" secondAttribute="bottom" id="wqB-gH-wXf"/>
-                <constraint firstItem="2py-h1-0km" firstAttribute="top" secondItem="N3B-DL-XOA" secondAttribute="top" id="zDt-kW-Co2"/>
-            </constraints>
-            <point key="canvasLocation" x="597" y="659"/>
-        </customView>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="BE1-yC-oJL" customClass="TimeLabelOverflowedView" customModule="IINA" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="28"/>
-            <subviews>
-                <slider verticalHuggingPriority="750" mirrorLayoutDirectionWhenInternationalizing="never" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-6g-bAT" customClass="PlaySlider" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="50" y="6" width="400" height="16"/>
-                    <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="f1c-xF-8a2" customClass="PlaySliderCell" customModule="IINA" customModuleProvider="target"/>
-                    <connections>
-                        <action selector="playSliderChanges:" target="-2" id="UBG-Ky-3rr"/>
-                    </connections>
-                </slider>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBD-MV-OuG" userLabel="Left Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="7" width="50" height="14"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="CMl-dC-PCr"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="center" title="-:--:--" id="6mL-0A-eq2">
-                        <font key="font" metaFont="message" size="11"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="-2" name="font" keyPath="monospacedFont" id="uHM-ya-PZy"/>
-                    </connections>
-                </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" mirrorLayoutDirectionWhenInternationalizing="never" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-Cc-sk0" userLabel="Right Label" customClass="DurationDisplayTextField" customModule="IINA" customModuleProvider="target">
-                    <rect key="frame" x="450" y="7" width="50" height="14"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="sDf-om-KlV"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" baseWritingDirection="leftToRight" alignment="center" title="-:--:--" id="1XQ-Mt-jmZ">
-                        <font key="font" metaFont="message" size="11"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="-2" name="font" keyPath="monospacedFont" id="6lX-sn-136"/>
-                    </connections>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="E6z-SF-UDn"/>
-                <constraint firstAttribute="bottom" secondItem="eBP-6g-bAT" secondAttribute="bottom" constant="6" id="GNu-nJ-qPy"/>
-                <constraint firstItem="GgV-Cc-sk0" firstAttribute="centerY" secondItem="NBD-MV-OuG" secondAttribute="centerY" id="N3P-Qk-arP"/>
-                <constraint firstItem="eBP-6g-bAT" firstAttribute="centerX" secondItem="BE1-yC-oJL" secondAttribute="centerX" id="VDD-aU-mmP"/>
-                <constraint firstItem="eBP-6g-bAT" firstAttribute="centerY" secondItem="NBD-MV-OuG" secondAttribute="centerY" id="dX4-4l-aJM"/>
-                <constraint firstItem="NBD-MV-OuG" firstAttribute="leading" secondItem="BE1-yC-oJL" secondAttribute="leading" constant="2" id="fcm-ao-T7h"/>
-                <constraint firstItem="eBP-6g-bAT" firstAttribute="top" secondItem="BE1-yC-oJL" secondAttribute="top" constant="6" id="oEb-w7-DDS"/>
-                <constraint firstAttribute="trailing" secondItem="GgV-Cc-sk0" secondAttribute="trailing" constant="2" id="plE-qU-XZt"/>
-                <constraint firstItem="eBP-6g-bAT" firstAttribute="leading" secondItem="NBD-MV-OuG" secondAttribute="trailing" constant="2" id="uHE-D2-HgP"/>
-                <constraint firstItem="GgV-Cc-sk0" firstAttribute="leading" secondItem="eBP-6g-bAT" secondAttribute="trailing" constant="2" id="vzW-0s-yR6"/>
-            </constraints>
-            <point key="canvasLocation" x="249" y="659"/>
-        </customView>
-        <customView placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="8Ej-eH-OR9">
-            <rect key="frame" x="0.0" y="0.0" width="26" height="24"/>
-            <subviews>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yg9-Sd-sWy" userLabel="Left Button Label">
-                    <rect key="frame" x="1" y="6" width="27" height="13"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="right" title="-32x" id="eCe-SS-Wlj">
-                        <font key="font" metaFont="system" size="10"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstItem="Yg9-Sd-sWy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8Ej-eH-OR9" secondAttribute="leading" id="UQy-51-n85"/>
-                <constraint firstItem="Yg9-Sd-sWy" firstAttribute="centerY" secondItem="8Ej-eH-OR9" secondAttribute="centerY" id="WQ5-1e-17L"/>
-                <constraint firstAttribute="trailing" secondItem="Yg9-Sd-sWy" secondAttribute="trailing" id="cjX-bE-au9"/>
-                <constraint firstAttribute="width" constant="26" id="grc-Ve-XDC"/>
-                <constraint firstAttribute="height" constant="24" id="zqT-9O-0G6"/>
-            </constraints>
-            <point key="canvasLocation" x="-54" y="727"/>
-        </customView>
-        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Xts-Pc-T8d">
-            <rect key="frame" x="0.0" y="0.0" width="26" height="24"/>
-            <subviews>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" alphaValue="0.5" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QTI-wi-oyB" userLabel="Right Button Label">
-                    <rect key="frame" x="-2" y="6" width="22" height="13"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" title="32x" id="ULE-u4-k9L">
-                        <font key="font" metaFont="system" size="10"/>
-                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstItem="QTI-wi-oyB" firstAttribute="centerY" secondItem="Xts-Pc-T8d" secondAttribute="centerY" id="HgA-Mc-Bhf"/>
-                <constraint firstItem="QTI-wi-oyB" firstAttribute="leading" secondItem="Xts-Pc-T8d" secondAttribute="leading" id="NqC-Xk-Iqd"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QTI-wi-oyB" secondAttribute="trailing" id="eQW-Mv-flr"/>
-                <constraint firstAttribute="height" constant="24" id="sLY-0Y-Hql"/>
-                <constraint firstAttribute="width" constant="26" id="zCh-hV-cEH"/>
-            </constraints>
-            <point key="canvasLocation" x="-145" y="727"/>
-        </customView>
-        <customView placeholderIntrinsicWidth="184" placeholderIntrinsicHeight="24" translatesAutoresizingMaskIntoConstraints="NO" id="Yv6-0K-6E4">
-            <rect key="frame" x="0.0" y="0.0" width="148" height="24"/>
-            <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="10x-bg-xlj" userLabel="Left Button">
-                    <rect key="frame" x="14" y="0.0" width="24" height="24"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speedl" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="ijT-3Y-AK2">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="2E4-Ht-wMT"/>
-                        <constraint firstAttribute="width" secondItem="10x-bg-xlj" secondAttribute="height" multiplier="1:1" id="h3a-98-udy"/>
-                    </constraints>
-                    <connections>
-                        <action selector="leftButtonAction:" target="-2" id="WRV-J4-Hq8"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="gxw-pJ-Lcg">
-                    <rect key="frame" x="62" y="0.0" width="24" height="24"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" alternateImage="pause" refusesFirstResponder="YES" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="mWQ-R0-GGr">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="gxw-pJ-Lcg" secondAttribute="height" multiplier="1:1" id="7Xg-CL-HXe"/>
-                        <constraint firstAttribute="width" constant="24" id="7xv-qQ-n43"/>
-                    </constraints>
-                    <connections>
-                        <action selector="playButtonAction:" target="-2" id="JbM-wO-FAa"/>
-                    </connections>
-                </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="EIi-qd-glM" userLabel="Right Button">
-                    <rect key="frame" x="110" y="0.0" width="24" height="24"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="speed" imagePosition="only" alignment="center" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" inset="2" maxAcceleratorLevel="5" id="Aiu-eh-hd9">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES" multiLevelAccelerator="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="EIi-qd-glM" secondAttribute="height" multiplier="1:1" id="3Wl-xU-eqe"/>
-                        <constraint firstAttribute="width" constant="24" id="KMp-bQ-6E5"/>
-                    </constraints>
-                    <connections>
-                        <action selector="rightButtonAction:" target="-2" id="mQT-3l-E7s"/>
-                    </connections>
-                </button>
-            </subviews>
-            <constraints>
-                <constraint firstItem="10x-bg-xlj" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="4a0-xW-jtL"/>
-                <constraint firstItem="10x-bg-xlj" firstAttribute="left" secondItem="Yv6-0K-6E4" secondAttribute="left" constant="14" id="8Hx-gQ-ez7"/>
-                <constraint firstItem="EIi-qd-glM" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="MRS-GF-0U6"/>
-                <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerX" secondItem="Yv6-0K-6E4" secondAttribute="centerX" id="PrE-1U-klM"/>
-                <constraint firstItem="EIi-qd-glM" firstAttribute="left" secondItem="gxw-pJ-Lcg" secondAttribute="right" constant="24" id="WtE-JF-0m3"/>
-                <constraint firstAttribute="height" constant="24" id="Y49-r6-uWL"/>
-                <constraint firstItem="gxw-pJ-Lcg" firstAttribute="left" secondItem="10x-bg-xlj" secondAttribute="right" constant="24" id="aEy-x5-Ctd"/>
-                <constraint firstItem="gxw-pJ-Lcg" firstAttribute="centerY" secondItem="Yv6-0K-6E4" secondAttribute="centerY" id="dBB-Jk-nlO"/>
-                <constraint firstAttribute="right" secondItem="EIi-qd-glM" secondAttribute="right" constant="14" id="enq-Gg-JrN"/>
-            </constraints>
-            <point key="canvasLocation" x="374" y="727"/>
-        </customView>
-        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalClippingResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="hDm-KI-3o4">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
-            <point key="canvasLocation" x="133" y="727"/>
-        </stackView>
-        <stackView orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" id="KfP-G9-8pD">
-            <rect key="frame" x="0.0" y="0.0" width="106" height="24"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <point key="canvasLocation" x="587" y="727"/>
-        </stackView>
     </objects>
     <resources>
-        <image name="pause" width="24" height="24"/>
-        <image name="pip" catalog="system" width="21" height="16"/>
-        <image name="play" width="24" height="24"/>
-        <image name="speaker.wave.3.fill" catalog="system" width="22" height="15"/>
-        <image name="speed" width="24" height="24"/>
-        <image name="speedl" width="24" height="24"/>
+        <image name="pip" catalog="system" width="20" height="16"/>
     </resources>
 </document>

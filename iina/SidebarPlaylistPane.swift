@@ -70,6 +70,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     loopBtn.setButtonType(.momentaryPushIn)
     updateLoopBtnStatus()
     shuffleBtn = makeButton("shuffle", "shuffle", #selector(shuffleBtnAction))
+    updateShuffleBtnStatus()
     sortBtn = makeButton("sort", "arrow.up.arrow.down", #selector(sortBtnAction))
     addBtn = makeButton("add", "plus", #selector(addToPlaylistBtnAction))
     removeBtn = makeButton("remove", "minus", #selector(removeBtnAction))
@@ -151,6 +152,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     player.observe(.iinaPlaylistChanged) { [unowned self] _ in
       playlistTotalLengthIsReady = false
       updateTable()
+      updateShuffleBtnStatus()
     }
 
     player.observe(.iinaLoopStatusChanged) { [unowned self] _ in
@@ -163,6 +165,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   private func update() {
     updateTable()
     updateLoopBtnStatus()
+    updateShuffleBtnStatus()
   }
 
   private func updateTable() {
@@ -174,18 +177,19 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   func updateLoopBtnStatus() {
     guard player.info.state.active else { return }
     let loopMode = player.getLoopMode()
-    loopBtn.image = switch loopMode {
-    case .off:  .sf("repeat")
-    case .file: .sf("custom.repeat.1.rectangle.fill")
-    default:    .sf("custom.repeat.rectangle.fill")
-    }
+    loopBtn.image = loopMode == .file ? .sf("repeat.1") : .sf("repeat")
+    loopBtn.contentTintColor = loopMode == .off ? nil : .controlAccentColor
   }
 
+  func updateShuffleBtnStatus() {
+    guard player.info.state.active else { return }
+    shuffleBtn.contentTintColor = player.info.isShuffled ? .controlAccentColor : nil
+  }
 
   // MARK: - Total length
 
   private func showTotalLength() {
-    guard let playlistTotalLength = playlistTotalLength, playlistTotalLengthIsReady else { return }
+    guard let playlistTotalLength, playlistTotalLengthIsReady else { return }
     totalLengthLabel.isHidden = false
     if tableView.numberOfSelectedRows > 0 {
       let info = player.info
@@ -350,6 +354,16 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
     showTotalLength()
   }
 
+  func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
+    let identifier = NSUserInterfaceItemIdentifier("PlaylistRowView")
+    if let rowView = tableView.makeView(withIdentifier: identifier, owner: self) as? PlaylistRowView {
+      return rowView
+    }
+    let rowView = PlaylistRowView()
+    rowView.identifier = identifier
+    return rowView
+  }
+
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     guard let identifier = tableColumn?.identifier else { return nil }
 
@@ -499,7 +513,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuPlayNext(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     let current = player.mpv.getInt(MPVProperty.playlistPos)
     var ob = 0  // index offset before current playing item
     var mc = 1  // moved item count, +1 because move to next item of current played one
@@ -528,12 +542,12 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuRemove(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     player.playlistRemove(selectedRows)
   }
 
   @IBAction func contextMenuDeleteFile(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     Logger.log("User chose to delete files from playlist at indexes: \(selectedRows.map{$0})", subsystem: player.subsystem)
 
     var successes = IndexSet()
@@ -559,7 +573,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuShowInFinder(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     var urls: [URL] = []
     player.info.$playlist.withLock { playlist in
       for index in selectedRows {
@@ -573,7 +587,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuAddSubtitle(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows, let index = selectedRows.first else { return }
+    guard let selectedRows, let index = selectedRows.first else { return }
     let filename = player.info.$playlist.withLock { $0[index].filename }
     let fileURL = URL(fileURLWithPath: filename).deletingLastPathComponent()
     Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL, canChooseDir: true) { subURLs in
@@ -586,7 +600,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextMenuWrongSubtitle(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     for index in selectedRows {
       let filename = player.info.$playlist.withLock { $0[index].filename }
       player.info.$matchedSubs.withLock { $0[filename]?.removeAll() }
@@ -595,7 +609,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextOpenInBrowser(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     selectedRows.forEach { i in
       let info = player.info.playlist[i]
       if info.isNetworkResource, let url = URL(string: info.filename) {
@@ -605,7 +619,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
   }
 
   @IBAction func contextCopyURL(_ sender: NSMenuItem) {
-    guard let selectedRows = selectedRows else { return }
+    guard let selectedRows else { return }
     let urls = selectedRows.compactMap { i -> String? in
       let info = player.info.playlist[i]
       return info.isNetworkResource ? info.filename : nil
@@ -768,7 +782,6 @@ class PlaylistTrackCellView: NSTableCellView {
   private var trackNameLabel: NSTextField!
   private var infoLabel: NSTextField!
   private var durationLabel: NSTextField!
-  private var playbackProgressView: PlaylistPlaybackProgressView!
 
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
@@ -791,11 +804,6 @@ class PlaylistTrackCellView: NSTableCellView {
 
     addSubview(stackView)
     stackView.padding(.horizontal(2), .vertical)
-
-    self.playbackProgressView = PlaylistPlaybackProgressView()
-    playbackProgressView.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(playbackProgressView)
-    playbackProgressView.padding(.horizontal, .bottom).size(height: 4)
   }
 
   required init?(coder: NSCoder) {
@@ -803,7 +811,7 @@ class PlaylistTrackCellView: NSTableCellView {
   }
 
   private func setPrefix(_ prefix: String?) {
-    if let prefix = prefix {
+    if let prefix {
       stackView.setVisibilityPriority(.mustHold, for: prefixBtn)
       prefixBtn.text = prefix
     } else {
@@ -812,7 +820,7 @@ class PlaylistTrackCellView: NSTableCellView {
   }
 
   private func setAdditionalInfo(_ string: String?) {
-    if let string = string {
+    if let string {
       stackView.setVisibilityPriority(.mustHold, for: infoLabel)
       infoLabel.stringValue = string
       infoLabel.toolTip = string
@@ -829,8 +837,6 @@ class PlaylistTrackCellView: NSTableCellView {
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    playbackProgressView.percentage = 0
-    playbackProgressView.needsDisplay = true
     setPrefix(nil)
     setAdditionalInfo(nil)
   }
@@ -879,9 +885,10 @@ class PlaylistTrackCellView: NSTableCellView {
           // if FFmpeg got the duration successfully
           DispatchQueue.main.async {
             self.durationLabel.stringValue = VideoTime(duration).stringRepresentation
-            if let progress = cached.progress {
-              self.playbackProgressView.percentage = progress / duration
-              self.playbackProgressView.needsDisplay = true
+            if let progress = cached.progress,
+               let rowView = self.superview as? PlaylistRowView {
+              rowView.percentage = progress / duration
+              rowView.needsDisplay = true
             }
           }
           pane.refreshTotalLength()
@@ -902,6 +909,28 @@ class PlaylistTrackCellView: NSTableCellView {
         }
       }
     }
+  }
+}
+
+
+class PlaylistRowView: NSTableRowView {
+  var percentage: Double = 0
+  private static let barHeight: CGFloat = 3
+
+  override func draw(_ dirtyRect: NSRect) {
+    super.draw(dirtyRect)
+    let width = bounds.width * CGFloat(percentage)
+    guard width > 0 else { return }
+    let rect = NSRect(x: 0, y: bounds.height - Self.barHeight, width: width, height: Self.barHeight)
+    let fillColor = NSColor.controlAccentColor.blended(withFraction: 0.2, of: .white) ?? .controlAccentColor
+    fillColor.setFill()
+    NSBezierPath(rect: rect).fill()
+  }
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    percentage = 0
+    needsDisplay = true
   }
 }
 

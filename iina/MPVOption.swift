@@ -48,6 +48,8 @@ struct MPVOption {
     static let rebaseStartTime = "rebase-start-time"
     /** --speed=<0.01-100> */
     static let speed = "speed"
+    /** --pitch=<0.01-100> */
+    static let pitch = "pitch"
     /** --pause */
     static let pause = "pause"
     /** --shuffle */
@@ -143,6 +145,8 @@ struct MPVOption {
     static let script = "script"
     /** --scripts=file1.lua:file2.lua:... */
     static let scripts = "scripts"
+    /** --script-opt=<key=value> */
+    static let scriptOpt = "script-opt"
     /** --script-opts=key1=value1 */
     static let scriptOpts = "script-opts"
     /** --merge-files */
@@ -157,7 +161,7 @@ struct MPVOption {
     static let useFiledirConf = "use-filedir-conf"
     /** --ytdl=<yes|no> */
     static let ytdl = "ytdl"
-    /** --ytdl-format=<ytdl|best|worst|mp4|webm|...> */
+    /** --ytdl-format=<|ytdl|best|worst|mp4|webm|...> */
     static let ytdlFormat = "ytdl-format"
     /** --ytdl-raw-options=<key>=<value>[ */
     static let ytdlRawOptions = "ytdl-raw-options"
@@ -165,10 +169,18 @@ struct MPVOption {
     static let jsMemoryReport = "js-memory-report"
     /** --load-stats-overlay=<yes|no> */
     static let loadStatsOverlay = "load-stats-overlay"
-    /** --load-osd-console=<yes|no> */
-    static let loadOsdConsole = "load-osd-console"
+    /** --load-console=<yes|no> */
+    static let loadConsole = "load-console"
+    /** --load-commands=<yes|no> */
+    static let loadCommands = "load-commands"
     /** --load-auto-profiles=<yes|no|auto> */
     static let loadAutoProfiles = "load-auto-profiles"
+    /** --load-select=<yes|no> */
+    static let loadSelect = "load-select"
+    /** --load-context-menu=<yes|no> */
+    static let loadContextMenu = "load-context-menu"
+    /** --load-positioning=<yes|no> */
+    static let loadPositioning = "load-positioning"
     /** --player-operation-mode=<cplayer|pseudo-gui> */
     static let playerOperationMode = "player-operation-mode"
   }
@@ -188,6 +200,13 @@ struct MPVOption {
     static let writeFilenameInWatchLaterConfig = "write-filename-in-watch-later-config"
     /** --ignore-path-in-watch-later-config */
     static let ignorePathInWatchLaterConfig = "ignore-path-in-watch-later-config"
+  }
+
+  struct WatchHistory {
+    /** --save-watch-history */
+    static let saveWatchHistory = "save-watch-history"
+    /** --watch-history-path=<path> */
+    static let watchHistoryPath = "watch-history-path"
   }
 
   struct Video {
@@ -221,7 +240,7 @@ struct MPVOption {
     static let panscan = "panscan"
     /** --video-aspect-override=<ratio|no> */
     static let videoAspectOverride = "video-aspect-override"
-    /** --video-aspect-method=<bitstream|container> */
+    /** --video-aspect-method=<bitstream|container|ignore> */
     static let videoAspectMethod = "video-aspect-method"
     /** --video-unscaled=<no|yes|downscale-big> */
     static let videoUnscaled = "video-unscaled"
@@ -243,6 +262,8 @@ struct MPVOption {
     static let videoAlignX = "video-align-x"
     /** --video-align-y=<-1-1> */
     static let videoAlignY = "video-align-y"
+    /** --video-recenter=<yes|no> */
+    static let videoRecenter = "video-recenter"
     /** --video-margin-ratio-left=<val> */
     static let videoMarginRatioLeft = "video-margin-ratio-left"
     /** --video-margin-ratio-right=<val> */
@@ -265,10 +286,12 @@ struct MPVOption {
     static let videoOutputLevels = "video-output-levels"
     /** --hwdec-codecs=<codec1 */
     static let hwdecCodecs = "hwdec-codecs"
+    /** --hwdec-threads=<N> */
+    static let hwdecThreads = "hwdec-threads"
+    /** --hwdec-software-fallback=<yes|no|N> */
+    static let hwdecSoftwareFallback = "hwdec-software-fallback"
     /** --vd-lavc-check-hw-profile=<yes|no> */
     static let vdLavcCheckHwProfile = "vd-lavc-check-hw-profile"
-    /** --vd-lavc-software-fallback=<yes|no|N> */
-    static let vdLavcSoftwareFallback = "vd-lavc-software-fallback"
     /** --vd-lavc-film-grain=<auto|cpu|gpu> */
     static let vdLavcFilmGrain = "vd-lavc-film-grain"
     /** --vd-lavc-dr=<auto|yes|no> */
@@ -336,7 +359,7 @@ struct MPVOption {
     static let replaygainFallback = "replaygain-fallback"
     /** --audio-delay=<sec> */
     static let audioDelay = "audio-delay"
-    /** --mute=<yes|no|auto> */
+    /** --mute=<yes|no> */
     static let mute = "mute"
     /** --audio-demuxer=<[+]name> */
     static let audioDemuxer = "audio-demuxer"
@@ -370,12 +393,14 @@ struct MPVOption {
     static let initialAudioSync = "initial-audio-sync"
     /** --audio-file-auto=<no|exact|fuzzy|all> */
     static let audioFileAuto = "audio-file-auto"
-    /** --audio-file-auto-exts=ext1 */
-    static let audioFileAutoExts = "audio-file-auto-exts"
+    /** --audio-exts=ext1 */
+    static let audioExts = "audio-exts"
     /** --audio-file-paths=<path1:path2:...> */
     static let audioFilePaths = "audio-file-paths"
     /** --audio-client-name=<name> */
     static let audioClientName = "audio-client-name"
+    /** --audio-set-media-role=<yes|no> */
+    static let audioSetMediaRole = "audio-set-media-role"
     /** --audio-buffer=<seconds> */
     static let audioBuffer = "audio-buffer"
     /** --audio-stream-silence=<yes|no> */
@@ -401,6 +426,8 @@ struct MPVOption {
     static let secondarySid = "secondary-sid"
     /** --sub-scale=<0-100> */
     static let subScale = "sub-scale"
+    /** --sub-scale-signs=<yes|no> */
+    static let subScaleSigns = "sub-scale-signs"
     /** --sub-scale-by-window=<yes|no> */
     static let subScaleByWindow = "sub-scale-by-window"
     /** --sub-scale-with-window=<yes|no> */
@@ -417,26 +444,34 @@ struct MPVOption {
     static let subSpeed = "sub-speed"
     /** --sub-ass-style-overrides=<[Style.]Param=Value[ */
     static let subAssStyleOverrides = "sub-ass-style-overrides"
-    /** --sub-ass-hinting=<none|light|normal|native> */
-    static let subAssHinting = "sub-ass-hinting"
-    /** --sub-ass-line-spacing=<value> */
-    static let subAssLineSpacing = "sub-ass-line-spacing"
-    /** --sub-ass-shaper=<simple|complex> */
-    static let subAssShaper = "sub-ass-shaper"
+    /** --sub-hinting=<none|light|normal|native> */
+    static let subHinting = "sub-hinting"
+    /** --sub-line-spacing=<value> */
+    static let subLineSpacing = "sub-line-spacing"
+    /** --sub-shaper=<simple|complex> */
+    static let subShaper = "sub-shaper"
+    /** --sub-ass-prune-delay=<-1|seconds> */
+    static let subAssPruneDelay = "sub-ass-prune-delay"
+    /** --sub-glyph-limit=<value> */
+    static let subGlyphLimit = "sub-glyph-limit"
+    /** --sub-bitmap-max-size=<value> */
+    static let subBitmapMaxSize = "sub-bitmap-max-size"
     /** --sub-ass-styles=<filename> */
     static let subAssStyles = "sub-ass-styles"
-    /** --sub-ass-override=<yes|no|force|scale|strip> */
+    /** --sub-ass-override=<no|yes|scale|force|strip> */
     static let subAssOverride = "sub-ass-override"
-    /** --secondary-sub-ass-override=<yes|no|force|scale|strip> */
+    /** --secondary-sub-ass-override=<no|yes|scale|force|strip> */
     static let secondarySubAssOverride = "secondary-sub-ass-override"
     /** --sub-ass-force-margins */
     static let subAssForceMargins = "sub-ass-force-margins"
     /** --sub-use-margins */
     static let subUseMargins = "sub-use-margins"
-    /** --sub-ass-vsfilter-aspect-compat=<yes|no> */
-    static let subAssVsfilterAspectCompat = "sub-ass-vsfilter-aspect-compat"
-    /** --sub-ass-vsfilter-blur-compat=<yes|no> */
-    static let subAssVsfilterBlurCompat = "sub-ass-vsfilter-blur-compat"
+    /** --sub-ass-use-video-data=<none|aspect-ratio|all> */
+    static let subAssUseVideoData = "sub-ass-use-video-data"
+    /** --sub-ass-video-aspect-override=<no|ratio> */
+    static let subAssVideoAspectOverride = "sub-ass-video-aspect-override"
+    /** --sub-vsfilter-bidi-compat=<yes|no> */
+    static let subVsfilterBidiCompat = "sub-vsfilter-bidi-compat"
     /** --sub-ass-vsfilter-color-compat=<basic|full|force-601|no> */
     static let subAssVsfilterColorCompat = "sub-ass-vsfilter-color-compat"
     /** --stretch-dvd-subs=<yes|no> */
@@ -445,6 +480,10 @@ struct MPVOption {
     static let stretchImageSubsToScreen = "stretch-image-subs-to-screen"
     /** --image-subs-video-resolution=<yes|no> */
     static let imageSubsVideoResolution = "image-subs-video-resolution"
+    /** --image-subs-hdr-peak=<sdr|video|10-10000> */
+    static let imageSubsHdrPeak = "image-subs-hdr-peak"
+    /** --sub-hdr-peak=<sdr|10-10000> */
+    static let subHdrPeak = "sub-hdr-peak"
     /** --sub-ass=<yes|no> */
     static let subAss = "sub-ass"
     /** --sub-auto=<no|exact|fuzzy|all> */
@@ -457,6 +496,10 @@ struct MPVOption {
     static let subStretchDurations = "sub-stretch-durations"
     /** --sub-fix-timing=<yes|no> */
     static let subFixTiming = "sub-fix-timing"
+    /** --sub-fix-timing-threshold=<amount> */
+    static let subFixTimingThreshold = "sub-fix-timing-threshold"
+    /** --sub-fix-timing-keep=<amount> */
+    static let subFixTimingKeep = "sub-fix-timing-keep"
     /** --sub-forced-events-only=<yes|no> */
     static let subForcedEventsOnly = "sub-forced-events-only"
     /** --sub-fps=<rate> */
@@ -481,18 +524,20 @@ struct MPVOption {
     static let subFont = "sub-font"
     /** --sub-font-size=<size> */
     static let subFontSize = "sub-font-size"
-    /** --sub-back-color=<color> */
-    static let subBackColor = "sub-back-color"
     /** --sub-blur=<0..20.0> */
     static let subBlur = "sub-blur"
     /** --sub-bold=<yes|no> */
     static let subBold = "sub-bold"
     /** --sub-italic=<yes|no> */
     static let subItalic = "sub-italic"
-    /** --sub-border-color=<color> */
-    static let subBorderColor = "sub-border-color"
-    /** --sub-border-size=<size> */
-    static let subBorderSize = "sub-border-size"
+    /** --sub-outline-color=<color> */
+    static let subOutlineColor = "sub-outline-color"
+    /** --sub-back-color=<color> */
+    static let subBackColor = "sub-back-color"
+    /** --sub-outline-size=<size> */
+    static let subOutlineSize = "sub-outline-size"
+    /** --sub-border-style=<outline-and-shadow|opaque-box|background-box> */
+    static let subBorderStyle = "sub-border-style"
     /** --sub-color=<color> */
     static let subColor = "sub-color"
     /** --sub-margin-x=<size> */
@@ -507,8 +552,6 @@ struct MPVOption {
     static let subJustify = "sub-justify"
     /** --sub-ass-justify=<yes|no> */
     static let subAssJustify = "sub-ass-justify"
-    /** --sub-shadow-color=<color> */
-    static let subShadowColor = "sub-shadow-color"
     /** --sub-shadow-offset=<size> */
     static let subShadowOffset = "sub-shadow-offset"
     /** --sub-spacing=<size> */
@@ -612,11 +655,13 @@ struct MPVOption {
     static let hidpiWindowScale = "hidpi-window-scale"
     /** --native-fs=<yes|no> */
     static let nativeFs = "native-fs"
+    /** --show-in-taskbar=<yes|no> */
+    static let showInTaskbar = "show-in-taskbar"
     /** --monitorpixelaspect=<ratio> */
     static let monitorpixelaspect = "monitorpixelaspect"
     /** --stop-screensaver=<yes|no|always> */
     static let stopScreensaver = "stop-screensaver"
-    /** --wid=<ID> */
+    /** --wid=<ID|-1> */
     static let wid = "wid"
     /** --window-dragging=<yes|no> */
     static let windowDragging = "window-dragging"
@@ -657,6 +702,8 @@ struct MPVOption {
     static let dvdSpeed = "dvd-speed"
     /** --dvd-angle=<ID> */
     static let dvdAngle = "dvd-angle"
+    /** --bluray-angle=<ID> */
+    static let blurayAngle = "bluray-angle"
   }
 
   struct Equalizer {
@@ -707,6 +754,8 @@ struct MPVOption {
     static let demuxerMkvProbeStartTime = "demuxer-mkv-probe-start-time"
     /** --demuxer-mkv-probe-video-duration=<yes|no|full> */
     static let demuxerMkvProbeVideoDuration = "demuxer-mkv-probe-video-duration"
+    /** --demuxer-mkv-crop-compat=<yes|no> */
+    static let demuxerMkvCropCompat = "demuxer-mkv-crop-compat"
     /** --demuxer-rawaudio-channels=<value> */
     static let demuxerRawaudioChannels = "demuxer-rawaudio-channels"
     /** --demuxer-rawaudio-format=<value> */
@@ -753,11 +802,17 @@ struct MPVOption {
     static let rarListAllVolumes = "rar-list-all-volumes"
     /** --directory-mode=<auto|lazy|recursive|ignore> */
     static let directoryMode = "directory-mode"
+    /** --directory-filter-types=<video */
+    static let directoryFilterTypes = "directory-filter-types"
+    /** --autocreate-playlist=<no|filter|same> */
+    static let autocreatePlaylist = "autocreate-playlist"
   }
 
   struct Input {
     /** --native-keyrepeat=<yes|no> */
     static let nativeKeyrepeat = "native-keyrepeat"
+    /** --native-touch=<yes|no> */
+    static let nativeTouch = "native-touch"
     /** --input-ar-delay */
     static let inputArDelay = "input-ar-delay"
     /** --input-ar-rate */
@@ -768,6 +823,8 @@ struct MPVOption {
     static let inputDefaultBindings = "input-default-bindings"
     /** --input-builtin-bindings=<yes|no> */
     static let inputBuiltinBindings = "input-builtin-bindings"
+    /** --input-builtin-dragging=<yes|no> */
+    static let inputBuiltinDragging = "input-builtin-dragging"
     /** --input-cmdlist */
     static let inputCmdlist = "input-cmdlist"
     /** --input-commands=<cmd1 */
@@ -800,6 +857,14 @@ struct MPVOption {
     static let inputRightAltGr = "input-right-alt-gr"
     /** --input-vo-keyboard=<yes|no> */
     static let inputVoKeyboard = "input-vo-keyboard"
+    /** --input-touch-emulate-mouse=<yes|no> */
+    static let inputTouchEmulateMouse = "input-touch-emulate-mouse"
+    /** --input-tablet-emulate-mouse=<yes|no> */
+    static let inputTabletEmulateMouse = "input-tablet-emulate-mouse"
+    /** --input-dragging-deadzone=<N> */
+    static let inputDraggingDeadzone = "input-dragging-deadzone"
+    /** --input-ime=<yes|no> */
+    static let inputIme = "input-ime"
   }
 
   struct OSD {
@@ -827,6 +892,8 @@ struct MPVOption {
     static let osdPlayingMsg = "osd-playing-msg"
     /** --osd-playing-msg-duration=<time> */
     static let osdPlayingMsgDuration = "osd-playing-msg-duration"
+    /** --osd-playlist-entry=<title|filename|both> */
+    static let osdPlaylistEntry = "osd-playlist-entry"
     /** --osd-bar-align-x=<-1-1> */
     static let osdBarAlignX = "osd-bar-align-x"
     /** --osd-bar-align-y=<-1-1> */
@@ -835,22 +902,34 @@ struct MPVOption {
     static let osdBarW = "osd-bar-w"
     /** --osd-bar-h=<0.1-50> */
     static let osdBarH = "osd-bar-h"
-    /** --osd-bar-border-size=<size> */
-    static let osdBarBorderSize = "osd-bar-border-size"
-    /** --osd-back-color=<color> */
-    static let osdBackColor = "osd-back-color"
+    /** --osd-bar-outline-size=<size> */
+    static let osdBarOutlineSize = "osd-bar-outline-size"
+    /** --osd-bar-marker-scale=<0-100> */
+    static let osdBarMarkerScale = "osd-bar-marker-scale"
+    /** --osd-bar-marker-min-size=<size> */
+    static let osdBarMarkerMinSize = "osd-bar-marker-min-size"
+    /** --osd-bar-marker-style=<none|triangle|line> */
+    static let osdBarMarkerStyle = "osd-bar-marker-style"
     /** --osd-blur=<0..20.0> */
     static let osdBlur = "osd-blur"
     /** --osd-bold=<yes|no> */
     static let osdBold = "osd-bold"
     /** --osd-italic=<yes|no> */
     static let osdItalic = "osd-italic"
-    /** --osd-border-color=<color> */
-    static let osdBorderColor = "osd-border-color"
-    /** --osd-border-size=<size> */
-    static let osdBorderSize = "osd-border-size"
+    /** --osd-outline-color=<color> */
+    static let osdOutlineColor = "osd-outline-color"
+    /** --osd-back-color=<color> */
+    static let osdBackColor = "osd-back-color"
+    /** --osd-outline-size=<size> */
+    static let osdOutlineSize = "osd-outline-size"
+    /** --osd-border-style=<outline-and-shadow|opaque-box|background-box> */
+    static let osdBorderStyle = "osd-border-style"
     /** --osd-color=<color> */
     static let osdColor = "osd-color"
+    /** --osd-selected-color=<color> */
+    static let osdSelectedColor = "osd-selected-color"
+    /** --osd-selected-outline-color=<color> */
+    static let osdSelectedOutlineColor = "osd-selected-outline-color"
     /** --osd-fractions */
     static let osdFractions = "osd-fractions"
     /** --osd-level=<0-3> */
@@ -867,8 +946,6 @@ struct MPVOption {
     static let osdScale = "osd-scale"
     /** --osd-scale-by-window=<yes|no> */
     static let osdScaleByWindow = "osd-scale-by-window"
-    /** --osd-shadow-color=<color> */
-    static let osdShadowColor = "osd-shadow-color"
     /** --osd-shadow-offset=<size> */
     static let osdShadowOffset = "osd-shadow-offset"
     /** --osd-spacing=<size> */
@@ -879,6 +956,14 @@ struct MPVOption {
     static let osdFontProvider = "osd-font-provider"
     /** --osd-fonts-dir=<path> */
     static let osdFontsDir = "osd-fonts-dir"
+    /** --osd-glyph-limit=<value> */
+    static let osdGlyphLimit = "osd-glyph-limit"
+    /** --osd-bitmap-max-size=<value> */
+    static let osdBitmapMaxSize = "osd-bitmap-max-size"
+    /** --osd-prune-delay=<-1|seconds> */
+    static let osdPruneDelay = "osd-prune-delay"
+    /** --osd-shaper=<simple|complex> */
+    static let osdShaper = "osd-shaper"
   }
 
   struct Screenshot {
@@ -1080,7 +1165,7 @@ struct MPVOption {
     static let dvbinCard = "dvbin-card"
     /** --dvbin-file=<filename> */
     static let dvbinFile = "dvbin-file"
-    /** --dvbin-timeout=<1-30> */
+    /** --dvbin-timeout=<seconds> */
     static let dvbinTimeout = "dvbin-timeout"
     /** --dvbin-full-transponder=<yes|no> */
     static let dvbinFullTransponder = "dvbin-full-transponder"
@@ -1213,6 +1298,10 @@ struct MPVOption {
     static let gpuDebug = "gpu-debug"
     /** --opengl-swapinterval=<n> */
     static let openglSwapinterval = "opengl-swapinterval"
+    /** --egl-config-id=<ID> */
+    static let eglConfigId = "egl-config-id"
+    /** --egl-output-format=<auto|rgb8|rgba8|rgb10|rgb10_a2|rgb16|rgba16|rgb16f|rgba16f|rgb32f|rgba32f> */
+    static let eglOutputFormat = "egl-output-format"
     /** --vulkan-device=<device name|UUID> */
     static let vulkanDevice = "vulkan-device"
     /** --vulkan-swap-mode=<mode> */
@@ -1233,6 +1322,8 @@ struct MPVOption {
     static let d3d11ExclusiveFs = "d3d11-exclusive-fs"
     /** --d3d11-warp=<yes|no|auto> */
     static let d3d11Warp = "d3d11-warp"
+    /** --d3d11-output-mode=<auto|window|composition> */
+    static let d3d11OutputMode = "d3d11-output-mode"
     /** --d3d11-feature-level=<12_1|12_0|11_1|11_0|10_1|10_0|9_3|9_2|9_1> */
     static let d3d11FeatureLevel = "d3d11-feature-level"
     /** --d3d11-flip=<yes|no> */
@@ -1253,12 +1344,14 @@ struct MPVOption {
     static let waylandConfigureBounds = "wayland-configure-bounds"
     /** --wayland-content-type=<auto|none|photo|video|game> */
     static let waylandContentType = "wayland-content-type"
-    /** --wayland-disable-vsync=<yes|no> */
-    static let waylandDisableVsync = "wayland-disable-vsync"
     /** --wayland-edge-pixels-pointer=<value> */
     static let waylandEdgePixelsPointer = "wayland-edge-pixels-pointer"
     /** --wayland-edge-pixels-touch=<value> */
     static let waylandEdgePixelsTouch = "wayland-edge-pixels-touch"
+    /** --wayland-internal-vsync=<no|auto|yes> */
+    static let waylandInternalVsync = "wayland-internal-vsync"
+    /** --wayland-present=<yes|no> */
+    static let waylandPresent = "wayland-present"
     /** --spirv-compiler=<compiler> */
     static let spirvCompiler = "spirv-compiler"
     /** --glsl-shader=<file> */
@@ -1303,6 +1396,8 @@ struct MPVOption {
     static let cocoaCbSwRenderer = "cocoa-cb-sw-renderer"
     /** --cocoa-cb-10bit-context=<yes|no> */
     static let cocoaCb10bitContext = "cocoa-cb-10bit-context"
+    /** --cocoa-cb-output-csp=<csp> */
+    static let cocoaCbOutputCsp = "cocoa-cb-output-csp"
     /** --macos-title-bar-appearance=<appearance> */
     static let macosTitleBarAppearance = "macos-title-bar-appearance"
     /** --macos-title-bar-material=<material> */
@@ -1317,13 +1412,19 @@ struct MPVOption {
     static let macosGeometryCalculation = "macos-geometry-calculation"
     /** --macos-render-timer=<timer> */
     static let macosRenderTimer = "macos-render-timer"
+    /** --macos-menu-shortcuts=<yes|no> */
+    static let macosMenuShortcuts = "macos-menu-shortcuts"
+    /** --macos-bundle-path=path1 */
+    static let macosBundlePath = "macos-bundle-path"
     /** --android-surface-size=<WxH> */
     static let androidSurfaceSize = "android-surface-size"
+    /** --d3d11-composition-size=<WxH> */
+    static let d3d11CompositionSize = "d3d11-composition-size"
     /** --gpu-sw */
     static let gpuSw = "gpu-sw"
-    /** --gpu-context=<sys> */
+    /** --gpu-context=<context1 */
     static let gpuContext = "gpu-context"
-    /** --gpu-api=<type> */
+    /** --gpu-api=<type1 */
     static let gpuApi = "gpu-api"
     /** --opengl-es=<mode> */
     static let openglEs = "opengl-es"
@@ -1337,8 +1438,12 @@ struct MPVOption {
     static let imageLut = "image-lut"
     /** --image-lut-type=<value> */
     static let imageLutType = "image-lut-type"
-    /** --target-colorspace-hint */
+    /** --target-colorspace-hint=<auto|yes|no> */
     static let targetColorspaceHint = "target-colorspace-hint"
+    /** --target-colorspace-hint-mode=<target|source|source-dynamic> */
+    static let targetColorspaceHintMode = "target-colorspace-hint-mode"
+    /** --target-colorspace-hint-strict */
+    static let targetColorspaceHintStrict = "target-colorspace-hint-strict"
     /** --target-prim=<value> */
     static let targetPrim = "target-prim"
     /** --target-trc=<value> */
@@ -1351,6 +1456,12 @@ struct MPVOption {
     static let targetGamut = "target-gamut"
     /** --target-lut=<file> */
     static let targetLut = "target-lut"
+    /** --hdr-reference-white=<auto|10-1000000> */
+    static let hdrReferenceWhite = "hdr-reference-white"
+    /** --sdr-adjust-gamma=<auto|yes|no> */
+    static let sdrAdjustGamma = "sdr-adjust-gamma"
+    /** --treat-srgb-as-power22=<no|input|output|both|auto> */
+    static let treatSrgbAsPower22 = "treat-srgb-as-power22"
     /** --tone-mapping=<value> */
     static let toneMapping = "tone-mapping"
     /** --tone-mapping-param=<value> */
@@ -1407,8 +1518,16 @@ struct MPVOption {
     static let background = "background"
     /** --background-color=<color> */
     static let backgroundColor = "background-color"
-    /** --border-background=<none|color|tiles> */
+    /** --background-tile-color-0=<color> */
+    static let backgroundTileColor0 = "background-tile-color-0"
+    /** --background-tile-color-1=<color> */
+    static let backgroundTileColor1 = "background-tile-color-1"
+    /** --background-tile-size=<1-4096> */
+    static let backgroundTileSize = "background-tile-size"
+    /** --border-background=<none|color|tiles|blur> */
     static let borderBackground = "border-background"
+    /** --background-blur-radius=<radius> */
+    static let backgroundBlurRadius = "background-blur-radius"
     /** --opengl-rectangle-textures */
     static let openglRectangleTextures = "opengl-rectangle-textures"
     /** --gpu-tex-pad-x */
@@ -1427,9 +1546,7 @@ struct MPVOption {
     static let libplaceboOpts = "libplacebo-opts"
   }
 
-  struct Miscellaneous {
-    /** --display-tags=tag1 */
-    static let displayTags = "display-tags"
+  struct VideoSync {
     /** --mc=<seconds/frame> */
     static let mc = "mc"
     /** --autosync=<factor> */
@@ -1444,6 +1561,11 @@ struct MPVOption {
     static let videoSyncMaxVideoChange = "video-sync-max-video-change"
     /** --video-sync-max-audio-change=<value> */
     static let videoSyncMaxAudioChange = "video-sync-max-audio-change"
+  }
+
+  struct Miscellaneous {
+    /** --display-tags=tag1 */
+    static let displayTags = "display-tags"
     /** --mf-fps=<value> */
     static let mfFps = "mf-fps"
     /** --mf-type=<value> */
@@ -1460,6 +1582,8 @@ struct MPVOption {
     static let voMmcssProfile = "vo-mmcss-profile"
     /** --priority=<prio> */
     static let priority = "priority"
+    /** --media-controls=<yes|no> */
+    static let mediaControls = "media-controls"
     /** --force-media-title=<string> */
     static let forceMediaTitle = "force-media-title"
     /** --external-files=<file-list> */
@@ -1472,10 +1596,16 @@ struct MPVOption {
     static let coverArtFile = "cover-art-file"
     /** --cover-art-auto=<no|exact|fuzzy|all> */
     static let coverArtAuto = "cover-art-auto"
-    /** --cover-art-auto-exts=ext1 */
-    static let coverArtAutoExts = "cover-art-auto-exts"
-    /** --cover-art-whitelist=<no|yes> */
+    /** --image-exts=ext1 */
+    static let imageExts = "image-exts"
+    /** --cover-art-whitelist=filename1 */
     static let coverArtWhitelist = "cover-art-whitelist"
+    /** --video-exts=ext1 */
+    static let videoExts = "video-exts"
+    /** --archive-exts=ext1 */
+    static let archiveExts = "archive-exts"
+    /** --playlist-exts=ext1 */
+    static let playlistExts = "playlist-exts"
     /** --autoload-files=<yes|no> */
     static let autoloadFiles = "autoload-files"
     /** --stream-record=<file> */
@@ -1484,6 +1614,18 @@ struct MPVOption {
     static let lavfiComplex = "lavfi-complex"
     /** --metadata-codepage=<codepage> */
     static let metadataCodepage = "metadata-codepage"
+    /** --clipboard-backends=<backend1 */
+    static let clipboardBackends = "clipboard-backends"
+    /** --clipboard-monitor=<yes|no> */
+    static let clipboardMonitor = "clipboard-monitor"
+    /** --clipboard-xwayland=<yes|no> */
+    static let clipboardXwayland = "clipboard-xwayland"
+    /** --register */
+    static let register = "register"
+    /** --register-rpath=<string> */
+    static let registerRpath = "register-rpath"
+    /** --unregister */
+    static let unregister = "unregister"
   }
 
 }

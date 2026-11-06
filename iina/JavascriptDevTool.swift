@@ -407,7 +407,7 @@ fileprivate struct ConsoleView: View {
     jsContext.globalObject :
     jsContext.evaluateScript(source)
 
-    if let result = result {
+    if let result {
       if result.isNumber {
         jsResult = .number(result.toNumber())
       } else if result.isString {
@@ -543,7 +543,7 @@ func createJavascriptDevToolWindow(forInstance inst: JavascriptPluginInstance, t
     // override exception handler
     let previousHandler = ctx.exceptionHandler
     ctx.exceptionHandler = { context, exception in
-      if let previousHandler = previousHandler {
+      if let previousHandler {
         previousHandler(context, exception)
       }
 

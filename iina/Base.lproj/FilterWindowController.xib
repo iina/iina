@@ -31,7 +31,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Filters" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5" userLabel="Filters Window">
+        <window title="Filters" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5" userLabel="Filters Window" customClass="CommonWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="608" y="562" width="640" height="382"/>
@@ -455,7 +455,7 @@
             </constraints>
             <point key="canvasLocation" x="-563" y="281"/>
         </customView>
-        <window title="New Filter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="NewFilterWindow" animationBehavior="default" id="8Eh-v2-bbh" userLabel="New Filter Window">
+        <window title="New Filter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="NewFilterWindow" animationBehavior="default" id="8Eh-v2-bbh" userLabel="New Filter Window" customClass="CommonWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="283" y="305" width="620" height="400"/>
@@ -612,7 +612,7 @@ DQ
                 <outlet property="view" destination="RNP-NG-UVn" id="IxR-CL-PuL"/>
             </connections>
         </viewController>
-        <window title="Save Filter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="SaveFilterWindow" animationBehavior="default" id="hsA-Hq-fPV" userLabel="Save Filter Window">
+        <window title="Save Filter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="SaveFilterWindow" animationBehavior="default" id="hsA-Hq-fPV" userLabel="Save Filter Window" customClass="CommonWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="163" y="199" width="403" height="230"/>
@@ -735,7 +735,7 @@ Gw
             </view>
             <point key="canvasLocation" x="-735" y="618"/>
         </window>
-        <window title="Edit Filter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="EditFilterWindow" animationBehavior="default" id="Zxl-uQ-3ud" userLabel="Edit Filter Window">
+        <window title="Edit Filter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="EditFilterWindow" animationBehavior="default" id="Zxl-uQ-3ud" userLabel="Edit Filter Window" customClass="CommonWindow" customModule="IINA" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="163" y="199" width="393" height="240"/>

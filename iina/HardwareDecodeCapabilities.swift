@@ -61,7 +61,7 @@ class HardwareDecodeCapabilities {
   /// - Returns: `true` if hardware decoding is supported; `false` otherwise.
   func isSupported(_ codecType: CMVideoCodecType) -> Bool {
     if !isInitialized {
-      guard let initialization = initialization else {
+      guard let initialization else {
         // Internal error. The cache must be initialized before calling this method.
         Logger.fatal("HardwareDecodeCapabilities.checkCapabilities has not been called")
       }

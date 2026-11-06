@@ -22,7 +22,7 @@ extension Just.HTTPResult {
 
   var jsonIgnoringError: Any? {
     get {
-      guard let content = content else { return nil }
+      guard let content else { return nil }
       var bytes = content.map { $0 }
       bytes.append(0)
       let string = String(cString: &bytes).replacingOccurrences(of: "\u{FFFD}", with: "?")

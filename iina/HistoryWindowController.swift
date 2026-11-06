@@ -68,11 +68,12 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   private var historyDataKeys: [String] = []
 
   init() {
-    let window = NSWindow(
+    let window = CommonWindow(
       contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
       styleMask: [.titled, .closable, .resizable, .miniaturizable],
       backing: .buffered,
-      defer: false
+      defer: false,
+      usesUnifiedToolbar: true
     )
     window.title = NSLocalizedString("history_window.title", comment: "Playback History")
     window.setFrameAutosaveName("PlaybackHistoryWindow")
@@ -288,7 +289,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-    if let item = item {
+    if let item {
       return historyData[item as! String]!.count
     } else {
       return historyData.count
@@ -296,7 +297,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-    if let item = item {
+    if let item {
       return historyData[item as! String]![index]
     } else {
       return historyDataKeys[index]
@@ -576,7 +577,7 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
 
 extension HistoryWindowController: NSToolbarDelegate {
   private static let clear = NSToolbarItem.Identifier("Clear")
-  private static let groupBy = NSToolbarItem.Identifier("GrouopBy")
+  private static let groupBy = NSToolbarItem.Identifier("GroupBy")
   private static let expandCollapse = NSToolbarItem.Identifier("ExpandCollapse")
   private static let searchField = NSToolbarItem.Identifier("SearchField")
   private static let toolbarItems = [groupBy, expandCollapse, .space, clear, .space, searchField]

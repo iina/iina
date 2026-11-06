@@ -8,6 +8,14 @@
 
 import Foundation
 
+/// Information about playback that is associated with a `PlayerCore`.
+/// - Important: Much of the information contained in this class is constantly read by user interface classes and relatively
+///     infrequently updated. To avoid the overhead of locks the convention for properties in this class is to only access them
+///     using the main thread.
+///
+///     Some properties are annotated with the `@Atomic` property wrapper. allowing access from multiple threads. This was
+///     done to quickly correct thread sanitizer errors in existing code. That code may be updated in the future to eliminate the
+///     need for locks for these properties.
 class PlaybackInfo {
 
   /// Enumeration representing the status of the [mpv](https://mpv.io/manual/stable/) A-B loop command.
@@ -100,6 +108,11 @@ class PlaybackInfo {
 
   var videoPosition: VideoTime?
   var videoDuration: VideoTime?
+
+  var progress: Double {
+    guard let progress = videoPosition / videoDuration else { return 0 }
+    return progress
+  }
 
   /// Remaining playback time.
   ///
@@ -222,7 +235,7 @@ class PlaybackInfo {
       id = secondSid
       list = subTracks
     }
-    if let id = id {
+    if let id {
       return list.first { $0.id == id }
     } else {
       return nil
@@ -235,6 +248,8 @@ class PlaybackInfo {
   ///     To avoid the need to lock multiple locks the cache properties are always accessed while holding the playlist lock. The cache
   ///     properties are private to force all access to be through class methods that properly coordinate thread access.
   @Atomic var playlist: [MPVPlaylistItem] = []
+
+  var isShuffled = false
   private var cachedVideoDurationAndProgress: [String: (duration: Double?, progress: Double?)] = [:]
   private var cachedMetadata: [String: (title: String?, album: String?, artist: String?)] = [:]
 

@@ -8,8 +8,37 @@
 
 fileprivate let ui = SettingsUIHelper.sharedUI
 
+private final class MPVOptionFieldEditor: NSTextView {
+  var pasteHandler: ((String) -> Bool)?
+
+  override func paste(_ sender: Any?) {
+    guard let string = NSPasteboard.general.string(forType: .string),
+          pasteHandler?(string) == true else {
+      super.paste(sender)
+      return
+    }
+  }
+}
+
+private final class MPVOptionsTableView: NSTableView {
+  let optionFieldEditor: MPVOptionFieldEditor = {
+    let editor = MPVOptionFieldEditor()
+    editor.isFieldEditor = true
+    return editor
+  }()
+}
+
+private final class MPVOptionTextFieldCell: NSTextFieldCell {
+  override func fieldEditor(for controlView: NSView) -> NSTextView? {
+    return (controlView as? MPVOptionsTableView)?.optionFieldEditor
+  }
+}
 
 class SettingsPageAdvanced: SettingsPage {
+  private var pageView: NSView?
+  private var advancedSettingsView: NSView?
+  private let prefObserver = Preference.Observer()
+
   override var identifier: String {
     "advanced"
   }
@@ -25,6 +54,23 @@ class SettingsPageAdvanced: SettingsPage {
   override var localizationTable: String {
     "SettingsAdvancedLocalizable"
   }
+  
+  override var showSubSections: Bool { false }
+
+  override func pageLoaded() {
+    if let renderedView = advancedSettingsSwitch.renderedView {
+      advancedSettingsView = renderedView
+      var pageView: NSView = renderedView
+      while let superview = pageView.superview, !(superview is NSClipView) {
+        pageView = superview
+      }
+      self.pageView = pageView
+    }
+
+    prefObserver.add(.enableAdvancedSettings, runNow: true) { [weak self] _ in
+      self?.setAdvancedControlsEnabled(Preference.bool(for: .enableAdvancedSettings))
+    }
+  }
 
   private lazy var fileChooseView: SettingsAccessory.FileChooserView = .init(.userDefinedConfDir)
   private lazy var mpvOptionsEditor: MPVOptionsEditor = MPVOptionsEditor()
@@ -34,6 +80,20 @@ class SettingsPageAdvanced: SettingsPage {
     btn.target = self
     btn.action = #selector(openLogFolder)
     return btn
+  }()
+
+  private lazy var advancedSettingsSwitch: SettingsItem.Switch = {
+    let item = SettingsItem.Switch()
+      .bindTo(.enableAdvancedSettings)
+      .image(name: ["flask"])
+      .hasDescription()
+      .withHelpLink(AppData.wikiLink.appending("/MPV-Options-and-Properties"))
+    item.stateChangeCallback = { [weak self] _ in
+      DispatchQueue.main.async {
+        self?.setAdvancedControlsEnabled(Preference.bool(for: .enableAdvancedSettings))
+      }
+    }
+    return item
   }()
 
   override func content() -> [SettingsSection] {
@@ -47,13 +107,14 @@ class SettingsPageAdvanced: SettingsPage {
   private func sectionEnableAdvanced() -> SettingsSection {
     return section {
       SettingsList() {
-        SettingsItem.Switch()
-          .bindTo(.enableAdvancedSettings)
-          .image(name: ["flask"])
-          .hasDescription()
-          .withHelpLink(AppData.wikiLink.appending("/MPV-Options-and-Properties"))
+        advancedSettingsSwitch
       }
     }
+  }
+
+  private func setAdvancedControlsEnabled(_ enabled: Bool) {
+    guard let pageView else { return }
+    setControlsEnabled(in: pageView, enabled: enabled, skipping: advancedSettingsView)
   }
 
   private func sectionLogging() -> SettingsSection {
@@ -90,6 +151,7 @@ class SettingsPageAdvanced: SettingsPage {
       SettingsList {
         SettingsItem.General(title: .text_AdditionalMpvOptions)
           .image(name: ["document.badge.gearshape", "doc.badge.gearshape"])
+          .hasDescription(content: .text_AdditionalMpvOptions_desc)
           .extraViews(mpvOptionsEditor.delBtn, mpvOptionsEditor.addBtn)
         SettingsItem.Custom()
           .view(mpvOptionsEditor.view)
@@ -105,7 +167,7 @@ class SettingsPageAdvanced: SettingsPage {
 fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate, NSTableViewDataSource {
   private static let dragType = NSPasteboard.PasteboardType("com.colliderli.iina.mpv-option-row")
 
-  let tableView: NSTableView = NSTableView()
+  let tableView: MPVOptionsTableView = MPVOptionsTableView()
   let scrollView: NSScrollView = NSScrollView()
   let addBtn: NSButton = NSButton()
   let delBtn: NSButton = NSButton()
@@ -127,14 +189,25 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
     tableView.registerForDraggedTypes([MPVOptionsEditor.dragType])
     tableView.delegate = self
     tableView.dataSource = self
+    tableView.optionFieldEditor.pasteHandler = { [weak self] in self?.pasteOption($0) ?? false }
     let columnKey = NSTableColumn(identifier: .key)
     columnKey.title = "Key"
     columnKey.minWidth = 140
-    (columnKey.dataCell as? NSCell)?.font = monoFont
+    let keyCell = MPVOptionTextFieldCell()
+    keyCell.isEditable = true
+    keyCell.isSelectable = true
+    keyCell.lineBreakMode = .byTruncatingTail
+    keyCell.font = monoFont
+    columnKey.dataCell = keyCell
     tableView.addTableColumn(columnKey)
     let columnValue = NSTableColumn(identifier: .value)
     columnValue.title = "Value"
-    (columnValue.dataCell as? NSCell)?.font = monoFont
+    let valueCell = MPVOptionTextFieldCell()
+    valueCell.isEditable = true
+    valueCell.isSelectable = true
+    valueCell.lineBreakMode = .byTruncatingTail
+    valueCell.font = monoFont
+    columnValue.dataCell = valueCell
     tableView.addTableColumn(columnValue)
     tableView.columnAutoresizingStyle = .sequentialColumnAutoresizingStyle
     tableView.rowHeight = 18
@@ -162,6 +235,32 @@ fileprivate class MPVOptionsEditor: SettingsAccessory.Base, NSTableViewDelegate,
   private func saveToUserDefaults() {
     Preference.set(options, for: .userOptions)
     UserDefaults.standard.synchronize()
+  }
+
+  private static func parsePastedOption(_ string: String) -> [String]? {
+    guard let separator = string.firstIndex(of: "=") else { return nil }
+
+    let whitespaceAndNewlines = CharacterSet.whitespacesAndNewlines
+    let key = String(string[..<separator]).trimmingCharacters(in: whitespaceAndNewlines)
+    let value = String(string[string.index(after: separator)...]).trimmingCharacters(in: whitespaceAndNewlines)
+    guard !key.isEmpty, !value.isEmpty else { return nil }
+    return [key, value]
+  }
+
+  private func pasteOption(_ string: String) -> Bool {
+    // Values may contain `=` themselves, so only split when pasting into the key column
+    guard tableView.editedColumn >= 0,
+          tableView.tableColumns[tableView.editedColumn].identifier == .key,
+          let option = Self.parsePastedOption(string),
+          options.indices.contains(tableView.editedRow) else { return false }
+
+    let row = tableView.editedRow
+    guard tableView.abortEditing() else { return false }
+    options[row] = option
+    tableView.reloadData(forRowIndexes: IndexSet(integer: row),
+                         columnIndexes: IndexSet(integersIn: 0..<tableView.numberOfColumns))
+    saveToUserDefaults()
+    return true
   }
 
   @objc func addOptionAction(_ sender: AnyObject) {

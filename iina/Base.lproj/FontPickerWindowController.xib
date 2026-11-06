@@ -115,10 +115,7 @@
                         </tableHeaderView>
                     </scrollView>
                     <textField focusRingType="none" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ikb-4c-nqb">
-                        <rect key="frame" x="12" y="112" width="434" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="Ome-pP-G3g"/>
-                        </constraints>
+                        <rect key="frame" x="12" y="112" width="434" height="36"/>
                         <textFieldCell key="cell" controlSize="large" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="Test" drawsBackground="YES" id="qwM-r2-9ki">
                             <font key="font" metaFont="system" size="24"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

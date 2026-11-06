@@ -61,11 +61,13 @@ class JavascriptAPIPlaylist: JavascriptAPI, JavascriptAPIPlaylistExportable {
     }
     if url.isArray {
       if let paths = url.toArray() as? [String] {
-        player!.addToPlaylist(paths: paths, at: at)
-        return true
+        let allowedPaths = paths.compactMap(shouldOpenURL)
+        player!.addToPlaylist(paths: allowedPaths, at: at)
+        return allowedPaths.count == paths.count
       }
     } else if url.isString {
-      player!.addToPlaylist(paths: [url.toString()], at: at)
+      guard let url = shouldOpenURL(url.toString()) else { return false }
+      player!.addToPlaylist(paths: [url], at: at)
       return true
     }
     log("playlist.add: The first argument should be a string or an array of strings.", level: .error)

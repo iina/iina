@@ -89,22 +89,25 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.General(title: .text_Color)
           .image(name: "paintpalette")
           .withValueView(subtitlesColorView.view)
+        SettingsItem.PopupButton()
+          .image(name: ["character.textbox.badge.sparkles", "square.dashed.inset.filled", "square.dashed"])
+          .bindTo(.subBorderStyle, ofType: Preference.SubBorderStyle.self)
+          .withHelpLink(AppData.mpvManualLink.appending("/#options-sub-border-style"))
         SettingsItem.General(title: .text_Border)
-          .image(name: "rectangle.dashed")
+          .image(name: ["inset.filled.circle.dashed", "circle.dashed.inset.filled", "circle.dashed.inset.fill"])
           .withValueView(subtitlesBorderView.view)
-      }
-
-      SettingsList {
         SettingsItem.General(title: .text_Shadow)
-          .image(name: ["lightspectrum.horizontal", "lightbulb"])
+          .image(name: ["shadow"])
           .withValueView(subtitlesShadowView.view)
         SettingsItem.General(title: .text_OtherStyles)
-          .image(name: ["star.leadinghalf.filled", "star.leadinghalf.fill"])
+          .image(name: ["textformat.characters.arrow.left.and.right", "star.leadinghalf.filled", "star.leadinghalf.fill"])
           .withExpandingDetailView {
             SettingsItem.Input()
               .bindTo(.subBlur)
+              .range(0...20, allowsFloats: true)
             SettingsItem.Input()
               .bindTo(.subSpacing)
+              .range(-10...10, allowsFloats: true)
           }
       }
     }
@@ -122,6 +125,7 @@ class SettingsPageSubtitles: SettingsPage {
         SettingsItem.Input()
           .image(name: "arrow.up.and.down")
           .bindTo(.subPos)
+          .range(0...150)
           .trailingLabel(.text_Percent)
       }
 
@@ -293,18 +297,18 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
     fontButton.bind(.title, to: UserDefaults.standard, withKeyPath: Preference.Key.subTextFont.rawValue)
     fontButton.size(height: 25)
 
-    let sizeInput = ui.input(bindTo: .subTextSize)
+    let sizeInput = ui.input(bindTo: .subTextSize, range: 1...9000, allowsFloats: true)
 
     let boldButton = SButton(image: .sf("bold"))
     boldButton.translatesAutoresizingMaskIntoConstraints = false
     boldButton.setButtonType(.toggle)
-    boldButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subBold.rawValue)
+    boldButton.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.subBold.rawValue)
     boldButton.size(width: 32, height: 25)
 
     let italicButton = SButton(image: .sf("italic"))
     italicButton.translatesAutoresizingMaskIntoConstraints = false
     italicButton.setButtonType(.toggle)
-    italicButton.cell!.bind(.state, to: UserDefaults.standard, withKeyPath: Preference.Key.subItalic.rawValue)
+    italicButton.bind(.value, to: UserDefaults.standard, withKeyPath: Preference.Key.subItalic.rawValue)
     italicButton.size(width: 32, height: 25)
 
     let stackView = ui.hStack(fontButton, sizeInput, boldButton, italicButton)
@@ -326,17 +330,9 @@ fileprivate class SubtitlesFontView: SettingsAccessory.Base {
 fileprivate class SubtitlesColorView: SettingsAccessory.Base {
   override init() {
     super.init()
-
-    let colorLabel = ui.smallLabel(bindTo: .text_Color)
     let colorWell = ui.colorWell(bindTo: .subTextColorString)
-
-    let backgroundLabel = ui.smallLabel(bindTo: .text_Background)
-    let backgroundWell = ui.colorWell(bindTo: .subBgColorString)
-
-    let stackView = ui.hStack(colorLabel, colorWell, backgroundLabel, backgroundWell)
-
-    view.addSubview(stackView)
-    stackView.padding(.top(8), .bottom(8), .leading, .trailing)
+    view.addSubview(colorWell)
+    colorWell.padding(.top(8), .bottom(8), .leading, .trailing)
   }
 }
 
@@ -346,7 +342,7 @@ fileprivate class SubtitlesBorderView: SettingsAccessory.Base {
     super.init()
 
     let widthLabel = ui.smallLabel(bindTo: .text_Size)
-    let widthInput = ui.input(bindTo: .subBorderSize)
+    let widthInput = ui.input(bindTo: .subBorderSize, range: 0...Double.infinity, allowsFloats: true)
 
     let colorLabel = ui.smallLabel(bindTo: .text_Color)
     let colorWell = ui.colorWell(bindTo: .subBorderColorString)
@@ -382,10 +378,10 @@ fileprivate class SubtitlesMarginView: SettingsAccessory.Base {
     super.init()
 
     let xLabel = ui.smallLabel(bindTo: .text_X)
-    let xInput = ui.input(bindTo: .subMarginX)
+    let xInput = ui.input(bindTo: .subMarginX, range: 0...Double(Int.max))
 
     let yLabel = ui.smallLabel(bindTo: .text_Y)
-    let yInput = ui.input(bindTo: .subMarginY)
+    let yInput = ui.input(bindTo: .subMarginY, range: 0...Double(Int.max))
 
     let stackView = ui.hStack(xLabel, xInput, yLabel, yInput)
 

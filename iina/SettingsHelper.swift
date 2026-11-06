@@ -91,27 +91,27 @@ class SettingsUIHelper: UIHelper {
   }
 
   static func hEquallySpaced(_ views: [NSView], _ space: CGFloat = 8, leading: CGFloat? = nil, trailing: CGFloat? = nil) {
-    if let leading = leading {
+    if let leading {
       views.first!.padding(.leading(leading))
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
       view.spacing(.leading(space), to: views[i - 1])
     }
-    if let trailing = trailing {
+    if let trailing {
       views.last!.padding(.trailing(greaterThan: trailing))
     }
   }
 
   static func vEquallySpaced(_ views: [NSView], _ space: CGFloat = 8, top: CGFloat? = nil, bottom: CGFloat? = nil) {
-    if let top = top {
+    if let top {
       views.first!.padding(.top(top))
     }
     for (i, view) in views.enumerated() {
       if i == 0 { continue }
       view.spacing(.top(space), to: views[i - 1])
     }
-    if let bottom = bottom {
+    if let bottom {
       views.last!.padding(.bottom(bottom))
     }
   }

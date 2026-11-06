@@ -320,11 +320,12 @@ class SidebarController: NSObject {
         panel.view.animator().isHidden = false
       } else {
         panel.edgeConstraint.animator().constant = margin
-        setTitlebarConstraint(
-          for: panel.side,
-          titlebarConstantWhenShown(width: width, margin: margin, side: panel.side)
-        )
       }
+      setTitlebarConstraint(
+        for: panel.side,
+        titlebarConstantWhenShown(width: width, margin: margin, side: panel.side),
+        animated: !useFadeForSidebar
+      )
     }) {
       panel.animationState = .shown
       self.mainWindow.window?.resetCursorRects()
@@ -354,8 +355,8 @@ class SidebarController: NSObject {
         panel.view.animator().alphaValue = 0
       } else {
         panel.edgeConstraint.animator().constant = -currWidth
-        setTitlebarConstraint(for: panel.side, 0)
       }
+      setTitlebarConstraint(for: panel.side, 0, animated: !useFadeForSidebar)
     }) {
       // A new show may have started during the hide animation; only finalize if we still mean to hide.
       guard panel.animationState == .willHide else { return }
@@ -409,7 +410,7 @@ class SidebarController: NSObject {
       return  // don't interrupt in-flight animation on the target side
     }
 
-    let switchTab = { if let tab = tab { viewController.pleaseSwitchToTab(tab) } }
+    let switchTab = { if let tab { viewController.pleaseSwitchToTab(tab) } }
 
     // If this type is already visible (possibly on the other side after a config change), treat
     // a same-tab request as toggle-off and a different-tab request as a tab switch in place.

@@ -59,10 +59,6 @@ enum AVPacketSideDataType {
      * An AV_PKT_DATA_PARAM_CHANGE side data packet is laid out as follows:
      * @code
      * u32le param_flags
-     * if (param_flags & AV_SIDE_DATA_PARAM_CHANGE_CHANNEL_COUNT)
-     *     s32le channel_count
-     * if (param_flags & AV_SIDE_DATA_PARAM_CHANGE_CHANNEL_LAYOUT)
-     *     u64le channel_layout
      * if (param_flags & AV_SIDE_DATA_PARAM_CHANGE_SAMPLE_RATE)
      *     s32le sample_rate
      * if (param_flags & AV_SIDE_DATA_PARAM_CHANGE_DIMENSIONS)
@@ -146,7 +142,7 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_CPB_PROPERTIES,
 
     /**
-     * Recommmends skipping the specified number of samples
+     * Recommends skipping the specified number of samples
      * @code
      * u32le number of samples to skip from start of this packet
      * u32le number of samples to skip from end of this packet
@@ -331,6 +327,63 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_AMBIENT_VIEWING_ENVIRONMENT,
 
     /**
+     * The number of pixels to discard from the top/bottom/left/right border of the
+     * decoded frame to obtain the sub-rectangle intended for presentation.
+     *
+     * @code
+     * u32le crop_top
+     * u32le crop_bottom
+     * u32le crop_left
+     * u32le crop_right
+     * @endcode
+     */
+    AV_PKT_DATA_FRAME_CROPPING,
+
+    /**
+     * Raw LCEVC payload data, as a uint8_t array, with NAL emulation
+     * bytes intact.
+     */
+    AV_PKT_DATA_LCEVC,
+
+    /**
+     * This side data contains information about the reference display width(s)
+     * and reference viewing distance(s) as well as information about the
+     * corresponding reference stereo pair(s), i.e., the pair(s) of views to be
+     * displayed for the viewer's left and right eyes on the reference display
+     * at the reference viewing distance.
+     * The payload is the AV3DReferenceDisplaysInfo struct defined in
+     * libavutil/tdrdi.h.
+     */
+    AV_PKT_DATA_3D_REFERENCE_DISPLAYS,
+
+    /**
+     * Contains the last received RTCP SR (Sender Report) information
+     * in the form of the AVRTCPSenderReport struct.
+     */
+    AV_PKT_DATA_RTCP_SR,
+
+    /**
+     * Extensible image file format metadata. The payload is a buffer containing
+     * EXIF metadata, starting with either 49 49 2a 00, or 4d 4d 00 2a.
+     */
+     AV_PKT_DATA_EXIF,
+
+    /**
+     * HDR dynamic metadata associated with a video frame. The payload is an
+     * AVDynamicHDRSmpte2094App5 type and contains information for color volume
+     * transform as specified in the SMPTE 2094-50 standard.
+     */
+    AV_PKT_DATA_DYNAMIC_HDR_SMPTE_2094_APP5,
+
+    /**
+     * Dolby Vision enhancement-layer HEVC decoder configuration.
+     * Parsed from the @c hvcE box in ISOM-based containers or the
+     * corresponding BlockAdditionMapping in Matroska. The data is a raw
+     * HEVCDecoderConfigurationRecord as defined in ISO 14496-15.
+     */
+    AV_PKT_DATA_HEVC_CONF,
+
+    /**
      * The number of side data types.
      * This is not part of the public API/ABI in the sense that it may
      * change when new side data types are added.
@@ -341,8 +394,6 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_NB
 };
 
-#define AV_PKT_DATA_QUALITY_FACTOR AV_PKT_DATA_QUALITY_STATS //DEPRECATED
-
 /**
  * This structure stores auxiliary information for decoding, presenting, or
  * otherwise processing the coded stream. It is typically exported by demuxers
@@ -351,11 +402,11 @@ enum AVPacketSideDataType {
  *
  * Global side data is handled as follows:
  * - During demuxing, it may be exported through
- *   @ref AVStream.codecpar.side_data "AVStream's codec parameters", which can
+ *   @ref AVCodecParameters.coded_side_data "AVStream's codec parameters", which can
  *   then be passed as input to decoders through the
  *   @ref AVCodecContext.coded_side_data "decoder context's side data", for
  *   initialization.
- * - For muxing, it can be fed through @ref AVStream.codecpar.side_data
+ * - For muxing, it can be fed through @ref AVCodecParameters.coded_side_data
  *   "AVStream's codec parameters", typically  the output of encoders through
  *   the @ref AVCodecContext.coded_side_data "encoder context's side data", for
  *   initialization.
@@ -452,6 +503,36 @@ void av_packet_side_data_remove(AVPacketSideData *sd, int *nb_sd,
  *              the array. Will be set to 0 upon return.
  */
 void av_packet_side_data_free(AVPacketSideData **sd, int *nb_sd);
+
+struct AVFrameSideData;
+
+/**
+ * Add a new packet side data entry to an array based on existing frame
+ * side data, if a matching type exists for packet side data.
+ *
+ * @param flags              Currently unused. Must be 0.
+ * @retval >= 0              Success
+ * @retval AVERROR(EINVAL)   The frame side data type does not have a matching
+ *                           packet side data type.
+ * @retval AVERROR(ENOMEM)   Failed to add a side data entry to the array, or
+ *                           similar.
+ */
+int av_packet_side_data_from_frame(AVPacketSideData **sd, int *nb_sd,
+                                   const struct AVFrameSideData *src, unsigned int flags);
+/**
+ * Add a new frame side data entry to an array based on existing packet
+ * side data, if a matching type exists for frame side data.
+ *
+ * @param flags              Some combination of AV_FRAME_SIDE_DATA_FLAG_* flags,
+ *                           or 0.
+ * @retval >= 0              Success
+ * @retval AVERROR(EINVAL)   The packet side data type does not have a matching
+ *                           frame side data type.
+ * @retval AVERROR(ENOMEM)   Failed to add a side data entry to the array, or
+ *                           similar.
+ */
+int av_packet_side_data_to_frame(struct AVFrameSideData ***sd, int *nb_sd,
+                                 const AVPacketSideData *src, unsigned int flags);
 
 const char *av_packet_side_data_name(enum AVPacketSideDataType type);
 
@@ -565,14 +646,6 @@ typedef struct AVPacket {
      */
     AVRational time_base;
 } AVPacket;
-
-#if FF_API_INIT_PACKET
-attribute_deprecated
-typedef struct AVPacketList {
-    AVPacket pkt;
-    struct AVPacketList *next;
-} AVPacketList;
-#endif
 
 #define AV_PKT_FLAG_KEY     0x0001 ///< The packet contains a keyframe
 #define AV_PKT_FLAG_CORRUPT 0x0002 ///< The packet content is corrupted
@@ -751,7 +824,7 @@ uint8_t* av_packet_get_side_data(const AVPacket *pkt, enum AVPacketSideDataType 
  * @param size pointer to store the size of the returned data
  * @return pointer to data if successful, NULL otherwise
  */
-uint8_t *av_packet_pack_dictionary(AVDictionary *dict, size_t *size);
+uint8_t *av_packet_pack_dictionary(const AVDictionary *dict, size_t *size);
 /**
  * Unpack a dictionary from side_data.
  *
@@ -862,6 +935,13 @@ int av_packet_make_writable(AVPacket *pkt);
  *               converted
  */
 void av_packet_rescale_ts(AVPacket *pkt, AVRational tb_src, AVRational tb_dst);
+
+/**
+ * Allocate an AVContainerFifo instance for AVPacket.
+ *
+ * @param flags currently unused
+ */
+struct AVContainerFifo *av_container_fifo_alloc_avpacket(unsigned flags);
 
 /**
  * @}

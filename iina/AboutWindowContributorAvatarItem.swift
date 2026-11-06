@@ -14,7 +14,7 @@ class AboutWindowContributorAvatarItem: NSCollectionViewItem {
   static let imageCache = NSCache<NSString, NSImage>()
 
   override func viewDidLoad() {
-    guard let imageView = imageView else { return }
+    guard let imageView else { return }
     imageView.wantsLayer = true
     imageView.layer?.shadowColor = NSColor.controlBackgroundColor.cgColor
     imageView.layer?.shadowOffset = CGSize(width: 0, height: 1)
@@ -22,7 +22,7 @@ class AboutWindowContributorAvatarItem: NSCollectionViewItem {
   }
 
   override func viewDidLayout() {
-    guard let imageView = imageView else { return }
+    guard let imageView else { return }
     imageView.layer?.cornerRadius = imageView.frame.width / 2
   }
 

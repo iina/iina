@@ -196,6 +196,10 @@ class PlayerCore: NSObject {
    */
   @Atomic var backgroundQueueTicket = 0
 
+  /// Identifies the playlist of the opened file. The task matching the files in the folder of the opened file, which adds them to
+  /// the playlist, holds a copy of the ticket value at creation.
+  let folderPlaylistTicket = FolderPlaylistTicket()
+
   enum TicketExpiredError: Error {
     case ticketExpired
   }
@@ -578,6 +582,10 @@ class PlayerCore: NSObject {
     // while mpv tries to create a VO before IINA has entered its normal media-open path.
     mpv.setString(MPVOption.Window.forceWindow, "yes", level: .verbose)
 
+    // The load file command replaces the playlist. Stop adding the files in the folder of the file
+    // previously opened to the playlist.
+    folderPlaylistTicket.abandon()
+
     // Send load file command
     info.justOpenedFile = true
     info.state = .loading
@@ -725,6 +733,7 @@ class PlayerCore: NSObject {
   private func stopBackgroundTask() {
     log("Stopping background task")
     $backgroundQueueTicket.withLock { $0 += 1 }
+    folderPlaylistTicket.abandon()
   }
 
   /// Respond to the mpv core shutting down.
@@ -2111,15 +2120,16 @@ class PlayerCore: NSObject {
 
     // Auto load
     $backgroundQueueTicket.withLock { $0 += 1 }
-    let shouldAutoLoadFiles = info.shouldAutoLoadFiles
+    let shouldAutoLoadFiles = FolderPlaylistTicket.takeRequest(&info.shouldAutoLoadFiles)
     let currentTicket = backgroundQueueTicket
+    let currentPlaylistTicket = folderPlaylistTicket.value
     backgroundTaskInUse = true
-    backgroundQueue.async { [self] in
+    backgroundQueue.async(qos: .userInitiated, flags: .enforceQoS) { [self] in
       do {
         // add files in same folder
         if shouldAutoLoadFiles {
           log("Started auto load")
-          try autoLoadFilesInCurrentFolder(ticket: currentTicket)
+          try autoLoadFilesInCurrentFolder(ticket: currentPlaylistTicket)
         }
         // auto load matched subtitles
         if let matchedSubs = self.info.getMatchedSubs(path) {

@@ -184,6 +184,11 @@ class SidebarViewController: NSViewController {
       }
     }
 
+    NotificationCenter.default
+      .addObserver(forName: .iinaFullscreenChanged, object: nil, queue: .main) { [unowned self] n in
+        self.updateTabButtonLayout()
+      }
+
     if useTabView && defaultTab.tag == 0 {
       // if the default tab is 0, it is already loaded and transition() was not called initially.
       // set previousIndex manually, so animation will be triggered on next tab switch.
@@ -321,9 +326,10 @@ class SidebarViewController: NSViewController {
       tabButtonsStackView.removeArrangedSubview($0)
       $0.removeFromSuperview()
     }
+    let isInFullScreen = player.mainWindow.fsState.isFullscreen
     if isLeading {
       closeSidebarBtn.image = .sf("chevron.backward")
-      tabButtonsLeadingConstraint.constant = 96
+      tabButtonsLeadingConstraint.constant = isInFullScreen ? 10 : 96
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing
       tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)

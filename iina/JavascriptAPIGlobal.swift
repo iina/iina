@@ -34,6 +34,7 @@ class JavascriptAPIGlobalController: JavascriptAPI, JavascriptAPIGlobalControlle
   }
 
   override func cleanUp(_ instance: JavascriptPluginInstance) {
+    messageHub.clearListeners()
     instances.values.forEach {
       $0.mainWindow.close()
       $0.shutdown()

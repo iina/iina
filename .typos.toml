@@ -12,6 +12,8 @@ ignore-hidden = false
 extend-ignore-re = [
     "\\bBig Sur\\b",
     '(firstItem|secondItem|id|destination|headerView)="[0-9A-Za-z]+-[0-9A-Za-z]+-[0-9A-Za-z]+"',
+    # Interface Builder ids used as localization keys in Swift.
+    '"[0-9A-Za-z]{3}-[0-9A-Za-z]{2}-[0-9A-Za-z]{3}\.title"',
     'apiKey = "[^"]+"',
     "V\\[alue\\]",
     "ba!",

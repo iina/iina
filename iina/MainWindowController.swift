@@ -1518,6 +1518,7 @@ class MainWindowController: PlayerWindowController {
 
     let isLegacyFullScreen = notification.name == .iinaLegacyFullScreen
     fsState.startAnimatingToFullScreen(legacy: isLegacyFullScreen, priorWindowedFrame: window!.frame)
+    sidebars.updateTabButtonsLeadingSpace()
     setWindowToolbar()
     fadeableViews.update()
   }
@@ -1600,6 +1601,7 @@ class MainWindowController: PlayerWindowController {
     fsState.finishAnimating()
 
     titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: false)
+    sidebars.updateTabButtonsLeadingSpace()
     setWindowToolbar()
     fadeableViews.update()
     showUI()
@@ -1641,6 +1643,7 @@ class MainWindowController: PlayerWindowController {
     additionalInfoView.isHidden = true
 
     fsState.startAnimatingToWindow()
+    sidebars.updateTabButtonsLeadingSpace()
     fadeableViews.update()
   }
 
@@ -1751,6 +1754,7 @@ class MainWindowController: PlayerWindowController {
     fsState.finishAnimating()
 
     titleBarView.update(hasOSC: oscPosition == .top, inFullScreen: true)
+    sidebars.updateTabButtonsLeadingSpace()
     setWindowToolbar()
     fadeableViews.update()
     showUI()

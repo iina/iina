@@ -123,6 +123,10 @@ class SidebarController: NSObject {
     [quickSettingView, playlistView, pluginView]
   }
 
+  func updateTabButtonsLeadingSpace() {
+    viewControllers.filter { $0.isViewLoaded }.forEach { $0.updateTabButtonsLeadingSpace() }
+  }
+
   // MARK: - Layout setup (called from windowDidLoad)
 
   func installSubviews(in contentView: NSView) {

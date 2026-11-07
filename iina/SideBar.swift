@@ -323,19 +323,24 @@ class SidebarViewController: NSViewController {
     }
     if isLeading {
       closeSidebarBtn.image = .sf("chevron.backward")
-      tabButtonsLeadingConstraint.constant = 96
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing
       tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
       tabButtonsStackView.addArrangedSubview(closeSidebarBtn)
     } else {
       closeSidebarBtn.image = .sf("chevron.forward")
-      tabButtonsLeadingConstraint.constant = 10
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing
       tabButtonsStackView.addArrangedSubview(closeSidebarBtn)
       tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
     }
+    updateTabButtonsLeadingSpace()
+  }
+
+  /// Leave room for the traffic light buttons, which are not shown in full screen.
+  func updateTabButtonsLeadingSpace() {
+    let needsRoom = isLeading && !mainWindow.fsState.isFullscreen
+    tabButtonsLeadingConstraint.constant = needsRoom ? 96 : 10
   }
 
   // MARK: - Actions

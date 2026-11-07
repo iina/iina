@@ -89,6 +89,15 @@ class ViewLayer: CAOpenGLLayer {
   /// When `true` drawing will proceed even if mpv indicates nothing needs to be done.
   @Atomic private var forceDraw = false
 
+  /// When `true` mpv has a frame waiting that has not been rendered yet.
+  @Atomic private var pendingFrame = false
+
+  /// Guards against piling up one queued redraw per mouse move: while a redraw
+  /// is already on its way there is no point asking for another, since it would
+  /// draw the same, newest, state.
+  private let redrawLock = Lock()
+  private var redrawQueued = false
+
   /// Indicates whether the view is being rendered as part of a live resizing operation.
   ///
   /// This flag is used to manage setting of the
@@ -150,6 +159,9 @@ class ViewLayer: CAOpenGLLayer {
     contentsFormat = previousLayer.contentsFormat
     inLiveResize = previousLayer.inLiveResize
     isAsynchronous = previousLayer.isAsynchronous
+    // Shares the OpenGL context, so it must share the OpenGL objects too rather
+    // than build a second set and leak the first.
+    vr2dRenderer = previousLayer.vr2dRenderer
     Logger.log("Created view layer shadow copy")
   }
 
@@ -169,7 +181,12 @@ class ViewLayer: CAOpenGLLayer {
       if !inLiveResize {
         isAsynchronous = false
       }
-      return forceDraw || videoView.player.mpv.shouldRenderUpdateFrame()
+      // Ask mpv first and remember the answer. Short-circuiting on `forceDraw`
+      // would leave the reprojection pass unable to tell a new frame from a
+      // repeat, and it has to know: repeats do not need mpv re-run.
+      let hasNewFrame = videoView.player.mpv.shouldRenderUpdateFrame()
+      if hasNewFrame { pendingFrame = true }
+      return forceDraw || hasNewFrame
     }
   }
 
@@ -196,21 +213,57 @@ class ViewLayer: CAOpenGLLayer {
         if let context = mpv.mpvRenderContext {
           fbo = i != 0 ? i : fbo
 
-          var data = mpv_opengl_fbo(fbo: Int32(fbo),
-                                    w: Int32(dims[2]),
-                                    h: Int32(dims[3]),
-                                    internal_format: 0)
-          withUnsafeMutablePointer(to: &data) { data in
-            withUnsafeMutablePointer(to: &bufferDepth) { bufferDepth in
-              var params: [mpv_render_param] = [
-                mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
-                mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
-                mpv_render_param(type: MPV_RENDER_PARAM_DEPTH, data:.init(bufferDepth)),
-                mpv_render_param()
-              ]
-              mpv_render_context_render(context, &params)
-              ignoreGLError()
+          // With VR reprojection on, mpv renders into an offscreen texture at
+          // the video's own size and a shader pass draws the flattened view
+          // from it. mpv fits its output to whatever framebuffer it is given,
+          // so handing it the window's would letterbox and downscale the frame
+          // before the shader ever got to sample it.
+          let vr = vr2dTarget()
+
+          // Panning only changes uniforms. When no new frame has arrived there
+          // is nothing for mpv to do, and re-running its renderer over the same
+          // frame just to move the camera is the single most expensive thing
+          // this could get wrong — at 4K it costs more than the whole pass.
+          let needsMpvRender = vr == nil || vr!.sourceIsStale || pendingFrame
+
+          if needsMpvRender {
+            pendingFrame = false
+            var data = mpv_opengl_fbo(fbo: Int32(vr?.framebuffer ?? GLuint(fbo)),
+                                      w: Int32(vr?.width ?? Int(dims[2])),
+                                      h: Int32(vr?.height ?? Int(dims[3])),
+                                      internal_format: 0)
+            // By default mpv renders a frame early and then blocks inside
+            // render() until its target display time — up to `video-timing-offset`,
+            // 50ms by default. That wait holds the one serial GL queue, so every
+            // pan queued behind it waits too, which is why looking around used to
+            // move at the video's frame rate instead of the display's. VR2D
+            // switches the wait off and sets `video-timing-offset` to 0 so mpv
+            // does not render ahead in the first place, which is what the render
+            // API's own documentation recommends for doing this.
+            var blockForTargetTime: CInt = vr == nil ? 1 : 0
+            withUnsafeMutablePointer(to: &data) { data in
+              withUnsafeMutablePointer(to: &bufferDepth) { bufferDepth in
+                withUnsafeMutablePointer(to: &blockForTargetTime) { blockForTargetTime in
+                  var params: [mpv_render_param] = [
+                    mpv_render_param(type: MPV_RENDER_PARAM_OPENGL_FBO, data: .init(data)),
+                    mpv_render_param(type: MPV_RENDER_PARAM_FLIP_Y, data: .init(flip)),
+                    mpv_render_param(type: MPV_RENDER_PARAM_DEPTH, data:.init(bufferDepth)),
+                    mpv_render_param(type: MPV_RENDER_PARAM_BLOCK_FOR_TARGET_TIME,
+                                     data: .init(blockForTargetTime)),
+                    mpv_render_param()
+                  ]
+                  mpv_render_context_render(context, &params)
+                  ignoreGLError()
+                }
+              }
             }
+            if vr != nil { vr2dRenderer?.markSourceRendered() }
+          }
+
+          if let vr {
+            vr2dRenderer?.draw(target: fbo, width: GLsizei(dims[2]), height: GLsizei(dims[3]),
+                               params: vr.params)
+            ignoreGLError()
           }
         } else {
           glClearColor(0, 0, 0, 1)
@@ -229,6 +282,54 @@ class ViewLayer: CAOpenGLLayer {
         handler(image)
       }
     }
+  }
+
+  // MARK: - VR reprojection
+
+  /// Owns the offscreen buffer and the reprojection shader. Created on demand
+  /// so a player that never opens a VR file pays nothing, and shared with any
+  /// shadow copy of this layer because the OpenGL context is shared too.
+  private var vr2dRenderer: VR2DRenderer?
+
+  private struct VR2DTarget {
+    let framebuffer: GLuint
+    let width: Int
+    let height: Int
+    let params: VR2DRenderer.Params
+    /// `true` when the offscreen buffer holds nothing worth reusing, so mpv has
+    /// to render into it whether or not a new frame arrived.
+    let sourceIsStale: Bool
+  }
+
+  /// The framebuffer mpv should render into this frame, or `nil` to let it draw
+  /// straight into the layer as it normally would.
+  ///
+  /// - Important: Called on the render thread with the OpenGL context current.
+  private func vr2dTarget() -> VR2DTarget? {
+    let state = videoView.player.vr2d.snapshot()
+    guard state.isActive else { return nil }
+
+    let renderer = vr2dRenderer ?? {
+      let renderer = VR2DRenderer()
+      vr2dRenderer = renderer
+      return renderer
+    }()
+    guard !renderer.isBroken,
+          let framebuffer = renderer.acquireSourceFramebuffer(width: state.videoWidth,
+                                                              height: state.videoHeight,
+                                                              float: bufferDepth > 8) else {
+      return nil
+    }
+    return VR2DTarget(framebuffer: framebuffer, width: state.videoWidth, height: state.videoHeight,
+                      params: state.params, sourceIsStale: !renderer.sourceHasContent)
+  }
+
+  /// Release the reprojection pass's OpenGL objects.
+  ///
+  /// - Important: Must be called with the OpenGL context locked and current.
+  func uninitVR2D() {
+    vr2dRenderer?.dispose()
+    vr2dRenderer = nil
   }
 
   // MARK: - Snapshot
@@ -298,6 +399,16 @@ class ViewLayer: CAOpenGLLayer {
       // Neither canDraw nor draw(inCGLContext:) were called by AppKit, needs a skip render.
       // This can happen when IINA is playing in another space, as might occur when just playing
       // audio. See issue #5025.
+      //
+      // This path throws the frame away, which is right when nothing is going
+      // to draw it — that is what it is for. It is wrong when a redraw is
+      // already on its way, which is the normal state of affairs while looking
+      // around: the frame would be discarded moments before the draw that
+      // wanted it. Skip the skip in that case only, so idle behaviour, and the
+      // frame accounting that goes with it, stays exactly as it was.
+      let redrawIsComing = redrawLock.withLock { redrawQueued }
+      if redrawIsComing && videoView.player.vr2d.snapshot().isActive { return }
+
       if let renderContext = videoView.player.mpv.mpvRenderContext,
          videoView.player.mpv.shouldRenderUpdateFrame() {
         var skip: CInt = 1
@@ -313,9 +424,20 @@ class ViewLayer: CAOpenGLLayer {
   }
 
   func update(force: Bool = false) {
+    if force { forceDraw = true }
+    needsFlip = true
+
+    let alreadyQueued = redrawLock.withLock { () -> Bool in
+      if redrawQueued { return true }
+      redrawQueued = true
+      return false
+    }
+    guard !alreadyQueued else { return }
+
     mpvGLQueue.async { [self] in
-      if force { forceDraw = true }
-      needsFlip = true
+      // Cleared before drawing, so a change that lands while this draw is in
+      // flight still gets a redraw of its own.
+      redrawLock.withLock { redrawQueued = false }
       display()
     }
   }

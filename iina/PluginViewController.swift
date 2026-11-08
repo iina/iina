@@ -36,6 +36,11 @@ class PluginViewController: SidebarViewController {
   private var placeholderView: NSView!
 
   private var pluginMenu = NSMenu()
+  private var tabButtonsGlassView: TranslucentView?
+
+  override var tabButtonsView: NSView {
+    tabButtonsGlassView ?? tabButtonsSegmentControl
+  }
 
   private func getPluginIcon(isSmall: Bool) -> NSImage {
     let config = isSmall ? compactIconConfig : iconConfig
@@ -70,6 +75,12 @@ class PluginViewController: SidebarViewController {
 
     tabButtonsSegmentControl.segmentCount = 2
     tabButtonsSegmentControl.trackingMode = .momentary
+    if #available(macOS 27.0, *) {
+      // Momentary segments do not draw the glass background of a tab control.
+      let glassView = TranslucentView(liquidGlassCornerRadius: 20, vevCornerRadius: 0, padding: (0, 0))
+      glassView.setContent(tabButtonsSegmentControl)
+      tabButtonsGlassView = glassView
+    }
 
     updatePluginTabs()
     updateTabActiveStatus()
@@ -168,9 +179,7 @@ class PluginViewController: SidebarViewController {
     let currentItem = pluginMenu.items.first(where: {
       currentTab.name == $0.representedObject as? String
     })
-    if sender.selectedSegment == 1 {
-      pluginMenu.popUp(positioning: currentItem, at: .zero, in: sender)
-    }
+    pluginMenu.popUp(positioning: currentItem, at: .zero, in: sender)
   }
 
   @objc private func menuItemAction(_ sender: NSMenuItem) {

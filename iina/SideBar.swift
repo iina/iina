@@ -96,6 +96,7 @@ class SidebarViewController: NSViewController {
 
   var tabButtonsStackView: NSStackView!
   var tabButtonsSegmentControl: NSSegmentedControl!
+  var tabButtonsView: NSView { tabButtonsSegmentControl }
   var tabButtonsLeadingConstraint: NSLayoutConstraint!
   var tabButtonsTrailingConstraint: NSLayoutConstraint!
   var tabButtonsHeightConstraint: NSLayoutConstraint!
@@ -335,7 +336,7 @@ class SidebarViewController: NSViewController {
       tabButtonsLeadingConstraint.constant = isInFullScreen ? 10 : 96
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing
-      tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
+      tabButtonsStackView.addArrangedSubview(tabButtonsView)
       tabButtonsStackView.addArrangedSubview(closeSidebarBtn)
     } else {
       closeSidebarBtn.image = .sf("chevron.forward")
@@ -343,7 +344,7 @@ class SidebarViewController: NSViewController {
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing
       tabButtonsStackView.addArrangedSubview(closeSidebarBtn)
-      tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
+      tabButtonsStackView.addArrangedSubview(tabButtonsView)
     }
   }
 

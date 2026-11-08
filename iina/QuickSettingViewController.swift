@@ -32,6 +32,30 @@ class QuickSettingViewController: SidebarViewController {
   }
   override var defaultTab: TabType { .video }
 
+  override func setupTabs() {
+    super.setupTabs()
+    tabButtonsSegmentControl.segmentDistribution = .fillEqually
+    for tab in allTabs {
+      let label = NSLocalizedString("sidebar.\(tab.name)", comment: tab.name)
+      tabButtonsSegmentControl.setToolTip(label, forSegment: tab.tag)
+    }
+  }
+
+  override func updateTabActiveStatus() {
+    tabButtonsSegmentControl.selectedSegment = currentTab.tag
+  }
+
+  override func updateTabButtonSize() {
+    super.updateTabButtonSize()
+    for tab in allTabs {
+      let label = NSLocalizedString("sidebar.\(tab.name)", comment: tab.name)
+      if let image = tabButtonsSegmentControl.image(forSegment: tab.tag)?.copy() as? NSImage {
+        image.accessibilityDescription = label
+        tabButtonsSegmentControl.setImage(image, forSegment: tab.tag)
+      }
+    }
+  }
+
   override func getTabView(for tab: SidebarViewController.TabType) -> SidebarPane {
     return switch tab {
     case .layout: SidebarLayoutPane(player: player)

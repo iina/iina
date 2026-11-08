@@ -661,6 +661,22 @@
 		348F71952DE2A814006C587D /* MPVCommandWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPVCommandWrappers.swift; sourceTree = "<group>"; };
 		3494B3F42C00254500F57FC2 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3494B3F52C00254800F57FC2 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		34A2C66930A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		34A2C66A30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/MainWindowController.strings; sourceTree = "<group>"; };
+		34A2C66B30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/FilterWindowController.strings; sourceTree = "<group>"; };
+		34A2C66C30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/AboutWindowController.strings; sourceTree = "<group>"; };
+		34A2C66D30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/OpenURLWindowController.strings; sourceTree = "<group>"; };
+		34A2C66E30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
+		34A2C66F30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
+		34A2C67030A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
+		34A2C67130A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
+		34A2C67230A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
+		34A2C67330A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
+		34A2C67430A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
+		34A2C67530A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		34A2C67630A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/Localizable.strings; sourceTree = "<group>"; };
+		34A2C67730A055AB006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/FilterPresets.strings; sourceTree = "<group>"; };
+		34A2C67830A055AB006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		34AAF7A2302EAF6500E9835C /* libarchive.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libarchive.13.dylib; path = deps/lib/libarchive.13.dylib; sourceTree = "<group>"; };
 		34AAF7A3302EAF6500E9835C /* libass.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libass.9.dylib; path = deps/lib/libass.9.dylib; sourceTree = "<group>"; };
 		34AAF7A4302EAF6500E9835C /* libavcodec.63.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.63.dylib; path = deps/lib/libavcodec.63.dylib; sourceTree = "<group>"; };
@@ -2263,6 +2279,7 @@
 				he,
 				id,
 				hr,
+				yue,
 			);
 			mainGroup = 84EB1ECD1D2F51D3004FA5A1;
 			packageReferences = (
@@ -2687,6 +2704,7 @@
 				0507C27B2B5617680043AD05 /* he */,
 				34F294662C0A1BDF00F14962 /* id */,
 				34ACAD7D2C16917100F871A0 /* hr */,
+				34A2C67430A055AA006AE8DF /* yue */,
 			);
 			name = SubChooseViewController.xib;
 			sourceTree = "<group>";
@@ -2726,6 +2744,7 @@
 				0507C25F2B5617660043AD05 /* he */,
 				34F2944A2C0A1BDE00F14962 /* id */,
 				34ACAD612C16917000F871A0 /* hr */,
+				34A2C66A30A055AA006AE8DF /* yue */,
 			);
 			name = MainWindowController.xib;
 			sourceTree = "<group>";
@@ -2765,6 +2784,7 @@
 				0507C2632B5617660043AD05 /* he */,
 				34F2944E2C0A1BDE00F14962 /* id */,
 				34ACAD652C16917000F871A0 /* hr */,
+				34A2C66B30A055AA006AE8DF /* yue */,
 			);
 			name = FilterWindowController.xib;
 			sourceTree = "<group>";
@@ -2804,6 +2824,7 @@
 				0507C2642B5617660043AD05 /* he */,
 				34F2944F2C0A1BDF00F14962 /* id */,
 				34ACAD662C16917000F871A0 /* hr */,
+				34A2C66C30A055AA006AE8DF /* yue */,
 			);
 			name = AboutWindowController.xib;
 			sourceTree = "<group>";
@@ -2843,6 +2864,7 @@
 				0507C26D2B5617670043AD05 /* he */,
 				34F294582C0A1BDF00F14962 /* id */,
 				34ACAD6F2C16917100F871A0 /* hr */,
+				34A2C67030A055AA006AE8DF /* yue */,
 			);
 			name = FontPickerWindowController.xib;
 			sourceTree = "<group>";
@@ -2882,6 +2904,7 @@
 				0507C2742B5617670043AD05 /* he */,
 				34F2945F2C0A1BDF00F14962 /* id */,
 				34ACAD762C16917100F871A0 /* hr */,
+				34A2C67330A055AA006AE8DF /* yue */,
 			);
 			name = KeyRecordViewController.xib;
 			sourceTree = "<group>";
@@ -2921,6 +2944,7 @@
 				0507C2652B5617660043AD05 /* he */,
 				34F294502C0A1BDF00F14962 /* id */,
 				34ACAD672C16917000F871A0 /* hr */,
+				34A2C66D30A055AA006AE8DF /* yue */,
 			);
 			name = OpenURLWindowController.xib;
 			sourceTree = "<group>";
@@ -2960,6 +2984,7 @@
 				0507C27D2B5624AE0043AD05 /* he */,
 				34F294682C0A1BDF00F14962 /* id */,
 				34ACAD7F2C16917100F871A0 /* hr */,
+				34A2C67630A055AA006AE8DF /* yue */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2999,6 +3024,7 @@
 				0507C25E2B5617650043AD05 /* he */,
 				34F294492C0A1BDE00F14962 /* id */,
 				34ACAD602C16917000F871A0 /* hr */,
+				34A2C66930A055AA006AE8DF /* yue */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -3038,6 +3064,7 @@
 				34F2946A2C0A1BE000F14962 /* id */,
 				34F294702C0A1E8100F14962 /* sr-Latn */,
 				34ACAD802C16917100F871A0 /* hr */,
+				34A2C67730A055AB006AE8DF /* yue */,
 			);
 			name = FilterPresets.strings;
 			sourceTree = "<group>";
@@ -3077,6 +3104,7 @@
 				34F2946B2C0A1BE000F14962 /* id */,
 				34F2946F2C0A1E1800F14962 /* sr-Latn */,
 				34ACAD812C16917100F871A0 /* hr */,
+				34A2C67830A055AB006AE8DF /* yue */,
 			);
 			name = KeyBinding.strings;
 			sourceTree = "<group>";
@@ -3116,6 +3144,7 @@
 				0507C2682B5617660043AD05 /* he */,
 				34F294532C0A1BDF00F14962 /* id */,
 				34ACAD6A2C16917000F871A0 /* hr */,
+				34A2C66E30A055AA006AE8DF /* yue */,
 			);
 			name = MiniPlayerWindowController.xib;
 			sourceTree = "<group>";
@@ -3155,6 +3184,7 @@
 				3494B3F52C00254800F57FC2 /* da */,
 				34F294672C0A1BDF00F14962 /* id */,
 				34ACAD7E2C16917100F871A0 /* hr */,
+				34A2C67530A055AA006AE8DF /* yue */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3194,6 +3224,7 @@
 				34F294BD2C0A211100F14962 /* tr */,
 				34F294BE2C0A211100F14962 /* uk */,
 				34ACAD702C16917100F871A0 /* hr */,
+				34A2C67130A055AA006AE8DF /* yue */,
 			);
 			name = ScreenshootOSDView.xib;
 			sourceTree = "<group>";
@@ -3233,6 +3264,7 @@
 				0507C2712B5617670043AD05 /* he */,
 				34F2945C2C0A1BDF00F14962 /* id */,
 				34ACAD732C16917100F871A0 /* hr */,
+				34A2C67230A055AA006AE8DF /* yue */,
 			);
 			name = PrefOSCToolbarSettingsSheetController.xib;
 			sourceTree = "<group>";
@@ -3272,6 +3304,7 @@
 				0507C2692B5617660043AD05 /* he */,
 				34F294542C0A1BDF00F14962 /* id */,
 				34ACAD6B2C16917000F871A0 /* hr */,
+				34A2C66F30A055AA006AE8DF /* yue */,
 			);
 			name = GuideWindowController.xib;
 			sourceTree = "<group>";

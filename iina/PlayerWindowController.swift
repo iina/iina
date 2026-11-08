@@ -701,7 +701,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playButtonAction(_ sender: NSButton) {
-    player.info.state == .paused ? player.resume() : player.pause()
+    player.togglePause()
   }
 
   @IBAction func muteButtonAction(_ sender: NSButton) {
@@ -710,7 +710,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   @IBAction func playSliderChanges(_ sender: NSSlider) {
     guard player.info.state.active else { return }
-    let percentage = 100 * sender.doubleValue / sender.maxValue
+    let value = (sender.cell as? PlaySliderCell)?.tracking.seekValue(sliderValue: sender.doubleValue) ?? sender.doubleValue
+    let percentage = 100 * value / sender.maxValue
     player.seek(percent: percentage, forceExact: !followGlobalSeekTypeWhenAdjustSlider)
   }
 

@@ -712,7 +712,7 @@
 "settings.videoThreads.label" = "İş parçacığı sayısı";
 
 // Settings - Audio
-"settings.audioDriverEnableAVFoundation.items.0.desc" = "Saptanmış ses sürücüsü.";
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "Saptanmış ses sürücüsü";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation, Uzamsal Ses desteği sunan yeni, deneysel bir ses sürücüsüdür. Ancak AVFoundation kullanırken, ses gecikmesi gibi bazı sorunlarla karşılaşabilirsiniz.";
 "settings.audioDriverEnableAVFoundation.label" = "Ses sürücüsü";
 "settings.enableInitialVolume.label" = "Başlangıç ses düzeyi";

@@ -2,8 +2,39 @@ api_token_env: CROWDIN_TOKEN
 project_id: 383539
 branch: develop
 preserve_hierarchy: true
+pull_request_labels:
+  - "type: localization"
+export_languages:
+  - af
+  - ca
+  - cs
+  - da
+  - de
+  - en-GB
+  - es-ES
+  - fi
+  - fr
+  - he
+  - hi
+  - hr
+  - hu
+  - id
+  - it
+  - ja
+  - ko
+  - nl
+  - pl
+  - pt-BR
+  - pt-PT
+  - ro
+  - ru
+  - sk
+  - sr-CS
+  - sv-SE
+  - tr
+  - uk
+  - zh-CN
+  - zh-TW
 files:
   - source: /iina/en.lproj/*.strings
     translation: /iina/%osx_code%/%original_file_name%
-    excluded_target_languages:
-      - zh-HK

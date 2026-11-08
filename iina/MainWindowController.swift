@@ -8,6 +8,7 @@
 
 import Cocoa
 import Mustache
+import VisionKit
 import WebKit
 
 fileprivate let isMacOS11: Bool = {
@@ -1157,6 +1158,14 @@ class MainWindowController: PlayerWindowController {
       isDragging = false
     } else if sidebars.handleMouseUp(event) {
       // sidebar handled it (resize finish or click-outside-to-dismiss)
+    } else if #available(macOS 13.0, *), event.clickCount == 2,
+              let overlay = liveText.overlayView as? ImageAnalysisOverlayView,
+              case let point = overlay.convert(event.locationInWindow, from: nil),
+              // VisionKit expects a top-left origin
+              overlay.hasText(at: NSPoint(x: point.x, y: overlay.bounds.height - point.y)) {
+      // Live Text uses double click to select a word
+      singleClickTimer?.invalidate()
+      singleClickTimer = nil
     } else {
       if event.clickCount == 2 && event.inAnyOf([titleBarView]) {
         let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")

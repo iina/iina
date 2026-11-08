@@ -28,11 +28,17 @@
 "guide.faq" = "Gyakran Ismételt Kérdések";
 
 // Initial Window
-"initial.announcement" = "Ön Az IINA %@ verzióját használja";
+"initial.announcement" = "Ön az IINA béta verzióját használja";
 "initial.beta.desc" = "Amennyiben végleges verzióra váltana, szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállítások > Általános almenüben, és telepítsen stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
 "initial.nightly.desc" = "A Nightly verzió nem ajánlott mindennapi használatra. Jelenleg a nightly verzió nem támogatja az automatikus frissítést.. Töltsd le a friss verziót a <a href=\"https://nightly.iina.io\">nightly oldalunkról</a>.";
 "initial.debug.desc" = "A hibakeresési verzió általában nincs teljesítményre optimalizálva, ezért nem ajánlott napi használatra. A hibakeresési verziók nem támogatják az automatikus frissítést.";
 "initial.bug_report" = "Jelentés a <a href=\"https://github.com/iina/iina/issues\">GitHub-bugok</a> felületen.";
+"initial.rollback" = "Szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállításokban, majd telepítsen egy stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
+"initial.open_url" = "URL megnyitása…";
+"initial.found_bug" = "Hibát talált?";
+"initial.resume" = "Folytatás";
+"initial.open" = "Megnyitás…";
+"initial.want_to_rollback" = "Vissza akarja állítani?";
 
 // Inspector Window
 "inspector.error" = "Hiba";

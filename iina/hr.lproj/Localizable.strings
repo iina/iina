@@ -28,11 +28,17 @@
 "guide.faq" = "Često postavljena pitanja";
 
 // Initial Window
-"initial.announcement" = "Koristite %@ verziju IINA programa";
+"initial.announcement" = "Koristiš beta verziju programa IINA";
 "initial.beta.desc" = "Ako se želiš vratiti na stariju verziju izdanja, odznači opciju „Primaj aktualiziranja za beta verzije” u Postavke > Općenito i instaliraj stabilno izdanje s naše <a href=\"https://iina.io\">službene web stranice</a>.";
 "initial.nightly.desc" = "Ne preporučujemo noćna izdanja za svakodnevnu upotrebu. Noćne izgradnje trenutačno ne podržavaju automatsko aktualiziranje. Preuzmi novije izgradnje s naše <a href=\"https://nightly.iina.io\">web stranice noćnih izdanja</a>.";
 "initial.debug.desc" = "Izdanja za otklanjanje grešaka obično nisu optimizirane za performanse, stoga se ne preporučuje njihova svakodnevna upotreba. Izdanja za otklanjanje grešaka ne podržavaju automatsko aktualiziranje.";
 "initial.bug_report" = "Prijavi na stranici <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Odznači opciju „primaj beta verzije” u Postavke > Opće i instaliraj stabilno izdanje s naše <a href=\"https://iina.io\">službene web-stranice</a>.";
+"initial.open_url" = "Otvori URL …";
+"initial.found_bug" = "Pronašao/la si grešku?";
+"initial.resume" = "Nastavi";
+"initial.open" = "Otvori …";
+"initial.want_to_rollback" = "Želiš se vratiti na raniju verziju?";
 
 // Inspector Window
 "inspector.error" = "Greška";

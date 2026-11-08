@@ -28,11 +28,17 @@
 "guide.faq" = "Vanliga frågor (FAQ)";
 
 // Initial Window
-"initial.announcement" = "Du använder en %@-version av IINA";
+"initial.announcement" = "Du använder en beta-version av IINA";
 "initial.beta.desc" = "Om du vill återgå till en utgiven version, avbocka \"Ta emot beta-uppdateringar\" under Inställningar > Allmänt och installera en stabil version från vår <a href=\"https://iina.io\">officiella webbsida</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Rapportera fel via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Avmarkera \"ta emot beta-uppdateringar\" i Inställningar - Allmänt, och installera en stabil utgivning från vår <a href=\"https://iina.io\">officiella webbplats</a>.";
+"initial.open_url" = "Öppna URL…";
+"initial.found_bug" = "Hittat ett fel?";
+"initial.resume" = "Återuppta";
+"initial.open" = "Öppna…";
+"initial.want_to_rollback" = "Vill du gå tillbaka?";
 
 // Inspector Window
 "inspector.error" = "Fel";

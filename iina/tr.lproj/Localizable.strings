@@ -28,11 +28,17 @@
 "guide.faq" = "Sık Sorulan Sorular";
 
 // Initial Window
-"initial.announcement" = "Şu an IINA'nın %@ BETA sürümünü kullanıyorsunuz";
+"initial.announcement" = "Şu anda IINA’nın bir beta sürümünü kullanıyorsunuz";
 "initial.beta.desc" = "Lütfen “Ayarlar” → “Genel” sekmesinden “Beta güncellemeleri al” seçeneğini kapatın ve <a href=\"https://iina.io\">resmi sitemizden</a> kararlı son sürümü indirin.";
 "initial.nightly.desc" = "Gecelik sürüm, günlük kullanım için tavsiye edilmez. Şu anda gecelik yapılar kendiliğinden güncellenmeyi desteklememektedir. Daha yeni yapıları elle <a href=\"https://nightly.iina.io\">gecelik sürüm web sitemizden</a> indirebilirsiniz.";
 "initial.debug.desc" = "Hata ayıklama amaçlı derlenmiş sürümler genellikle performans açısından optimize edilmediğinden günlük olarak kullanılması önerilmez. Hata ayıklama amaçlı sürümler otomatik güncellemeyi desteklemez.";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>. web sitesine raporlayabilirsiniz.";
+"initial.rollback" = "Lütfen “Tercihler” → “Genel” sekmesinden “Beta güncellemeleri al”ı kapatın ve <a href=\"https://iina.io\">resmi IINA sitesinden</a> kararlı son yayımı indirin.";
+"initial.open_url" = "URL Aç…";
+"initial.found_bug" = "Bir hata mı buldunuz?";
+"initial.resume" = "Sürdür:";
+"initial.open" = "Aç…";
+"initial.want_to_rollback" = "Eski sürüme dönmek mi istiyorsunuz?";
 
 // Inspector Window
 "inspector.error" = "Hata";

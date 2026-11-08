@@ -28,11 +28,17 @@
 "guide.faq" = "Dúvidas frequentes";
 
 // Initial Window
-"initial.announcement" = "Você está usando uma versão %@ do IINA";
+"initial.announcement" = "Você está usando uma versão beta do IINA";
 "initial.beta.desc" = "Se quiser reverter para uma versão oficial, desmarque a opção \"receber atualizações beta\" em Configurações > Geral e instale uma versão estável do nosso <a href=\"https://iina.io\">site oficial</a>.";
 "initial.nightly.desc" = "Compilações Nightly não são recomendadas para uso diário. Atualmente as compilações Nightly não suportam a atualização automática. Por favor, baixe manualmente versões mais recentes do nosso <a href=\"https://nightly.iina.io\">site Nightly</a>.";
 "initial.debug.desc" = "Compilações de depuração geralmente não são otimizadas para desempenho, então não são recomendadas para uso diário. Compilações de depuração não suportam atualização automática.";
 "initial.bug_report" = "Denuncie via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Desmarque a opção \"receber atualizações beta\" das Preferências - Geral e instale uma versão estável em nosso <a href=\"https://iina.io\">site oficial</a>.";
+"initial.open_url" = "Abrir URL…";
+"initial.found_bug" = "Encontrou um bug?";
+"initial.resume" = "Continuar";
+"initial.open" = "Abrir…";
+"initial.want_to_rollback" = "Quer reverter?";
 
 // Inspector Window
 "inspector.error" = "Erro";

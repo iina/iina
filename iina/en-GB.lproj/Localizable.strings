@@ -28,11 +28,17 @@
 "guide.faq" = "Frequently Asked Questions";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
+"initial.announcement" = "You are using a beta version of IINA";
 "initial.beta.desc" = "If you want to roll back to a release version, untick “receive beta updates” from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended as your daily driver. Currently, nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as a daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Uncheck \"receive beta updates\" from Settings - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.open_url" = "Open URL…";
+"initial.found_bug" = "Found a bug?";
+"initial.resume" = "Resume";
+"initial.open" = "Open…";
+"initial.want_to_rollback" = "Want to roll back?";
 
 // Inspector Window
 "inspector.error" = "Error";

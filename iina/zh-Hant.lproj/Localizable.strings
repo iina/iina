@@ -28,11 +28,17 @@
 "guide.faq" = "常見問題";
 
 // Initial Window
-"initial.announcement" = "您正在使用IINA的%@版本";
+"initial.announcement" = "您正在使用 IINA 的 beta 版本";
 "initial.beta.desc" = "如果您希望回到正式版，請進入「設定 > 一般」，將「接收 Beta 更新」取消勾選，然後從 <a href=\"https://iina.io\">官方網站</a>下載正式版進行安裝。";
 "initial.nightly.desc" = "不推薦您使用「每日構建版 Nightly Build」做為日常使用首選。每日構建版不支援自動更新，請至 <a href=\"https://nightly.iina.io\">每日構建版網站頁面</a> 自行下載更新。";
 "initial.debug.desc" = "「除錯版本 Debug Build」通常沒有針對性能進行最佳化。因此不推薦作為日常使用首選，且此版本不支援自動更新。";
 "initial.bug_report" = "通過<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>發送報告.";
+"initial.rollback" = "偏好設定 > 一般 中取消勾選「接收 beta 版本更新」，然後從<a href=\"https://iina.io\">官網</a>下載並安裝穩定版本。";
+"initial.open_url" = "打開 URL⋯";
+"initial.found_bug" = "發現了 bug？";
+"initial.resume" = "繼續播放";
+"initial.open" = "打開⋯";
+"initial.want_to_rollback" = "想要復原到穩定版本？";
 
 // Inspector Window
 "inspector.error" = "錯誤";

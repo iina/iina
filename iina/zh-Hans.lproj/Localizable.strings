@@ -28,11 +28,17 @@
 "guide.faq" = "常见问题";
 
 // Initial Window
-"initial.announcement" = "您正在使用 IINA 的 %@ 版本";
+"initial.announcement" = "您正在使用 IINA 的测试版本（Beta）";
 "initial.beta.desc" = "如果你想回滚到发布版本，请从“设置” > “通用” 中取消勾选 “接收测试版本（Beta）更新”，并从我们的<a href=\"https://iina.io\">官方网站</a>安装一个稳定版本。";
 "initial.nightly.desc" = "我们不建议将 Nightly 作为日常使用的版本。目前 Nightly 不支持自动更新。请从我们的<a href=\"https://nightly.iina.io\"> Nightly 网站</a>手动下载更新的版本。";
 "initial.debug.desc" = "调试版本（Debug）通常没有对性能进行优化，所以不建议日常用。调试版本（Debug）不支持自动更新。";
 "initial.bug_report" = "通过<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>报告。";
+"initial.rollback" = "请在“设置” > “通用”中，取消勾选“接收测试版本（Beta）更新”，然后在我们的<a href=\"https://iina.io\">官方网站</a>下载稳定版本安装。";
+"initial.open_url" = "打开URL…";
+"initial.found_bug" = "发现错误？";
+"initial.resume" = "继续播放";
+"initial.open" = "打开…";
+"initial.want_to_rollback" = "是否需要回滚到上一稳定版本？";
 
 // Inspector Window
 "inspector.error" = "错误";

@@ -35,6 +35,7 @@ export_languages:
   - uk
   - zh-CN
   - zh-TW
+  - zh-HK
 files:
   - source: /iina/en.lproj/*.strings
     translation: /iina/%osx_code%/%original_file_name%

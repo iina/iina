@@ -9,8 +9,6 @@
 
 "general.on" = "Zapnuté";
 "general.off" = "Vypnuté";
-"general.login" = "Prihlásenie";
-"general.logout" = "Odhlásenie";
 "general.ok" = "OK";
 "general.cancel" = "Zrušiť";
 "general.done" = "Hotovo";
@@ -30,15 +28,82 @@
 "guide.faq" = "Často kladené otázky";
 
 // Initial Window
-"initial.announcement" = "Používate %@ beta verziu aplikácie IINA";
+"initial.announcement" = "Používate beta verziu aplikácie IINA";
 "initial.beta.desc" = "Odškrtnite \"Sťahovať beta aktualizácie\" v Nastavenia - Všeobecné a nainštalujte stabilnú verziu z našej <a href=\"https://iina.io\">oficiálnej stránky</a>.";
 "initial.nightly.desc" = "
 Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasnosti nočné zostavy nepodporujú automatickú aktualizáciu. Nové zostavy si prosím stiahnite ručne z našej <a href=\"https://nightly.iina.io\">stránky s nočnými zostavami</a>.";
 "initial.debug.desc" = "Ladiace zostavenie obvykle nie sú optimalizované pre výkon, nie sú teda odporúčané pre každodenné použitie. Ladiaci zostavenie nepodporujú automatické aktualizácie.";
 "initial.bug_report" = "Nahláste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
+"initial.rollback" = "Odznačte „Sťahovať beta aktualizácie“ v Nastavenia > Všeobecné a nainštalujte stabilnú verziu z našej <a href=\"https://iina.io\">oficiálnej stránky</a>.";
+"initial.open_url" = "Otvoriť URL…";
+"initial.found_bug" = "Našli ste chybu?";
+"initial.resume" = "Pokračovať";
+"initial.open" = "Otvoriť…";
+"initial.want_to_rollback" = "Chcete sa vrátiť späť?";
 
 // Inspector Window
 "inspector.error" = "Chyba";
+"inspector.window_title" = "Informácie";
+"inspector.tab_general" = "Všeobecné";
+"inspector.tab_tracks" = "Stopy";
+"inspector.tab_file" = "Súbor";
+"inspector.tab_status" = "Stav";
+"inspector.segment_general" = "Všeobecné";
+"inspector.segment_tracks" = "Stopy";
+"inspector.segment_file" = "Súbor";
+"inspector.segment_status" = "Stav";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Formát";
+"inspector.video_codec" = "Kodek";
+"inspector.video_hw_decoder" = "HW dekodér";
+"inspector.video_primaries" = "Primárky";
+"inspector.video_colorspace" = "Farebná škála";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Ovládač";
+"inspector.video_size" = "Veľkosť";
+"inspector.video_bitrate" = "Dátový tok";
+"inspector.video_fps" = "FPS";
+"inspector.audio_section" = "ZVUK";
+"inspector.audio_format" = "Formát";
+"inspector.audio_codec" = "Kodek";
+"inspector.audio_driver" = "Ovládač";
+"inspector.audio_channels" = "Kanály";
+"inspector.audio_bitrate" = "Dátový tok";
+"inspector.audio_sample_rate" = "Vzorkovacia frekvencia";
+"inspector.track_label" = "Stopa";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Vlastnosti";
+"inspector.track_default" = "Predvolené";
+"inspector.track_forced" = "Vynútené";
+"inspector.track_selected" = "Označené";
+"inspector.track_external" = "Externé";
+"inspector.track_source_id" = "ID zdroja";
+"inspector.track_title" = "Názov";
+"inspector.track_language" = "Jazyk";
+"inspector.track_file_path" = "Umiestnenie súboru";
+"inspector.track_codec" = "Kodek";
+"inspector.track_decoder" = "Dekodér";
+"inspector.track_fps" = "FPS";
+"inspector.track_channels" = "Kanály";
+"inspector.track_sample_rate" = "Vzorkovacia frekvencia";
+"inspector.file_path" = "Umiestnenie súboru";
+"inspector.file_title" = "Názov";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Veľkosť";
+"inspector.file_format" = "Formát";
+"inspector.file_duration" = "Dĺžka";
+"inspector.file_chapters" = "Kapitoly";
+"inspector.file_editions" = "Edície";
+"inspector.status_avsync_diff" = "Rozdiel v A/V synchronizácii";
+"inspector.status_total_avsync" = "Úplná A/V synchronizácia";
+"inspector.status_dropped_frames" = "Vynechané snímky";
+"inspector.status_mistimed_frames" = "Zle načasované snímky";
+"inspector.status_display_fps" = "Zobraziť FPS";
+"inspector.status_estimated_output_fps" = "Odhadované výstupné FPS";
+"inspector.status_estimated_display_fps" = "Odhadované zobrazené FPS";
+"inspector.status_watch" = "Pozerať";
+"inspector.watch_column_name" = "Názov";
+"inspector.watch_column_value" = "Hodnota";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítava sa… %d%%";
@@ -154,8 +219,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Titulok";
 "preference.network" = "Sieť";
 "preference.control" = "Ovládanie";
 "preference.keybindings" = "Klávesové skratky";
@@ -163,29 +226,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "preference.plugins" = "Pluginy";
 "preference.utilities" = "Pomocné programy";
 "preference.scripts" = "Skripty";
-"preference.not_logged_in" = "Neprihlásený";
-"preference.logged_in_as" = "Prihlásený ako %@";
-"preference.system_media_control" = "Používať systémové multimediálne klávesy";
-
-"preference.key_binding_hint_1" = "Na upravenie priradených kláves v aktuálnom konfiguračnom súbore najprv vytvorte kópiu kliknutím na \"Duplikovať…\".";
-"preference.key_binding_hint_2" = "Dvakrát kliknite na riadok na pravej strane, aby ste upravili priradené klávesy.";
-
-"preference.enable_adv_settings" = "Povoliť pokročilé nastavenia";
-
-"preference.sub_override_level.no" = "nie";
-"preference.sub_override_level.force" = "sila";
-"preference.sub_override_level.scale" = "veľkosť";
-"preference.sub_override_level.strip" = "Základný";
-"preference.sub_override_level.yes" = "áno";
-
-"preference.sub_override_level.descriptive_text.no" = "Vykresli titulky podľa špecifikácie skriptov titulkov bez prepísania.";
-"preference.sub_override_level.descriptive_text.force" = "Použiť všetky štýly titulkov.";
-"preference.sub_override_level.descriptive_text.scale" = "Okrem nastavení štýlu v tejto časti použite aj nastavenie mierky.";
-"preference.sub_override_level.descriptive_text.strip" = "Radikálne odstráňte všetky značky a štýly ASS z nadpisu.";
-"preference.sub_override_level.descriptive_text.yes" = "Použite všetky nastavenia štýlu v tejto časti.";
-
-"preference.ytdl_plugin_not_installed" = "Nainštalujte si plugin Online Media z ponuky „Pluginy > Nainštalovať z GitHub“ a využívajte pokročilé funkcie, ako je napríklad sťahovanie videí a automatické aktualizácie yt-dlp.";
-"preference.ytdl_plugin_installed" = "Vstavaná podpora youtube-dl je vypnutá, pretože máte nainštalovaný doplnok Online médiá.";
 
 "menu.volume" = "Hlasitosť: %@";
 "menu.volume_muted" = "Hlasitosť: %@ (stíšene)";
@@ -484,8 +524,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "permissions.file-system.desc" = "Tento plug-in môže čítať alebo zapisovať súbory na disk, vrátane citlivých informácií. Môže tiež využívať iné programy alebo aplikácie, ktoré môžu poškodiť váš počítač. Uistite sa teda, že ste overili jeho zdroj.";
 
 "plugin.install" = "Inštalovať";
-"plugin.installed" = "Nainštalované";
-"plugin.not_installed" = "Nenainštalované";
 "plugin.local" = "Nainštalované lokálne";
 "alert.plugin.install_error" = "Pri inštalácii sa vyskytla chyba: %@";
 "alert.invalid_url" = "URL je neplatná.";
@@ -494,7 +532,6 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "plugin.install_error.cannot_download" = "Sťahovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_unpackage" = "Rozbaľovanie plug-inu zlyhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_load" = "IINA nemôže načítať tento plugin. Môže byť v chybnom formáte.";
-"plugin.check_for_updates" = "Skontrolovať aktualizácie";
 "plugin.updating" = "Sťahovanie aktualizácie…";
 
 // Log window

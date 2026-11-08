@@ -472,6 +472,14 @@ extension NSColor {
     return "\(red)/\(green)/\(blue)/\(alpha)"
   }
 
+  var hexString: String {
+    guard let rgb = usingColorSpace(.sRGB) else { return "#000000" }
+    let r = Int((rgb.redComponent * 255).rounded())
+    let g = Int((rgb.greenComponent * 255).rounded())
+    let b = Int((rgb.blueComponent * 255).rounded())
+    return String(format: "#%02X%02X%02X", r, g, b)
+  }
+
   convenience init?(mpvColorString str: String) {
     // mpv can return hex color string
     if str.starts(with: "#") {

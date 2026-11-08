@@ -6,10 +6,16 @@
     "id": "dev.faruk.iina-airplay"
   },
   {
-    "name": "Anime4K",
-    "url": "https://github.com/yorkyang2333/iina-anime4k",
-    "desc": "Apply Anime4K shaders for real-time anime upscaling.",
-    "id": "com.yorkyang2333.anime4k"
+    "name": "AniList Sync",
+    "url": "https://github.com/gridness/anilist-sync",
+    "desc": "Sync watched local anime episodes to AniList after playback reaches 85%.",
+    "id": "crown.gridness.iina.anilist-sync"
+  },
+  {
+    "name": "AnimeEnhancer",
+    "url": "https://github.com/yorkyang2333/iina-AnimeEnhancer",
+    "desc": "Anime Enhancement Plugin for IINA",
+    "id": "com.yorkyang2333.AnimeEnhancer"
   },
   {
     "name": "Auto Skip",
@@ -30,6 +36,12 @@
     "id": "com.wyattowalsh.iina-plugin-bookmarks"
   },
   {
+    "name": "Bookmarks Pro",
+    "url": "https://github.com/aminozuur/iina-bookmarks-pro",
+    "desc": "Bookmark moments with thumbs, browse them in a library, and save 5, 10 or 30 second clips.",
+    "id": "com.amin.bookmarks"
+  },
+  {
     "name": "CineMode",
     "url": "https://github.com/D0CA/iina-cinemode",
     "desc": "Fullscreen pause overlay and skip intro; optional Stremio next-episode shortcut.",
@@ -40,6 +52,12 @@
     "url": "https://github.com/kerim/iina-clickable-subtitles",
     "desc": "Click subtitles to define words (macOS Look Up).",
     "id": "io.github.niyaro.iina-clickable-subtitles"
+  },
+  {
+    "name": "ContentPlay",
+    "url": "https://github.com/Arnav12S/iina-contentplay",
+    "desc": "Search movies/series, resolve instant Real-Debrid streams via Stremio, then play a whole season as a playlist.",
+    "id": "com.arnav.contentplay"
   },
   {
     "name": "Danmaku",
@@ -60,6 +78,12 @@
     "id": "com.fxd0h.detached-playlist"
   },
   {
+    "name": "Emby Browser",
+    "url": "https://github.com/fjkfwz/iina-emby",
+    "desc": "Browse and play media from Emby servers with subtitle and playback progress sync.",
+    "id": "com.ghotriw.iina-emby"
+  },
+  {
     "name": "Episode Info",
     "url": "https://github.com/Zain-Imam/iina-episode-info",
     "desc": "TMDB episode/movie info overlay on pause, with built-in subtitle search.",
@@ -72,6 +96,12 @@
     "id": "com.qkong.iina-plugin-file-viewer"
   },
   {
+    "name": "HDR Screenshot",
+    "url": "https://github.com/bbeny123/iina-hdr-screenshot",
+    "desc": "FFmpeg-powered HDR to SDR screenshot capture.",
+    "id": "io.iina.hdr-screenshot"
+  },
+  {
     "name": "Hold to Speed",
     "url": "https://github.com/Tommy12356F/iina-hold-to-speed",
     "desc": "Hold Space to play at 2× speed, just like YouTube.",
@@ -82,6 +112,16 @@
     "url": "https://github.com/BrandenXia/iina-glsl-shaders",
     "description": "GLSL Shaders Manager for IINA",
     "id": "org.xia-x.iina-glsl-shaders"
+    "name": "iina cast",
+    "url": "https://github.com/RedShadow0111/iina-cast",
+    "desc": "Send the file IINA is playing to an Apple TV, a Chromecast, or a DLNA television.",
+    "id": "dev.redshadow.iina-cast"
+  },
+  {
+    "name": "Interactive Zoom",
+    "url": "https://github.com/claudiodekker/iina-interactive-zoom",
+    "desc": "Zoom into the video with a draggable minimap and zoom gauge, like VLC's Interactive Zoom.",
+    "id": "io.dekker.interactive-zoom"
   },
   {
     "name": "Jellyfin",
@@ -106,6 +146,24 @@
     "url": "https://git.notfire.cc/notfire/iina-listenbrainz",
     "desc": "Scrobble your music to ListenBrainz.",
     "id": "cc.notfire.iina-listenbrainz"
+  },
+  {
+    "name": "MarkIINA",
+    "url": "https://github.com/vishudhshah/MarkIINA",
+    "desc": "Save and manage named per-video bookmarks from a sidebar or menu.",
+    "id": "io.github.vishudh.markiina"
+  },
+  {
+    "name": "Metadata",
+    "url": "https://github.com/thepushkarp/iina-metadata",
+    "desc": "Identify movies and TV episodes via TMDB/TVmaze and save their metadata and artwork into MKV/MP4 files and Kodi/Infuse-style sidecars.",
+    "id": "io.github.thepushkarp.iina-metadata"
+  },
+  {
+    "name": "MilkDrop Visualizer",
+    "url": "https://github.com/VicFrance/iina-milkdrop-visualizer",
+    "desc": "MilkDrop music visualizations — 1,927 unique presets in a dedicated window that opens automatically when IINA plays audio files.",
+    "id": "com.vic.iina-milkdrop-visualizer"
   },
   {
     "name": "Multiple Clips",
@@ -150,10 +208,22 @@
     "id": "com.recorder.iina-plugin"
   },
   {
+    "name": "Save Subtitles",
+    "url": "https://github.com/bbeny123/iina-save-subs",
+    "desc": "Export and perfectly sync subtitles directly from IINA with precise timing and clean SRT output.",
+    "id": "io.iina.save-subtitles"
+  },
+  {
     "name": "Skip Intro",
     "url": "https://github.com/pparanoiidd/iina-skip-intro",
     "desc": "Detect and skip intros, recaps and credits.",
     "id": "com.pparanoiidd.skipintro"
+  },
+  {
+    "name": "Sleep Timer",
+    "url": "https://github.com/florinungur/iina-sleep-timer",
+    "desc": "Pause playback after a set number of minutes.",
+    "id": "com.florinungur.sleep-timer"
   },
   {
     "name": "SubTandem",
@@ -174,6 +244,12 @@
     "id": "io.github.fahim.iinatraktscrobbler"
   },
   {
+    "name": "Verba Connect",
+    "url": "https://github.com/s4ysolutions/iina-verba",
+    "desc": "Select a word in the subtitles and press A to add it to your Verba vocabulary.",
+    "id": "solutions.s4y.verba"
+  },
+  {
     "name": "VR2D",
     "url": "https://github.com/fetzu/iina-plugin-vr2d",
     "desc": "Watch 3D VR videos (180°/360°, side-by-side or over-under, equirectangular or fisheye) as a flat 2D image you can pan and zoom. Detects VR sources automatically from file names and container metadata.",
@@ -184,5 +260,11 @@
     "url": "https://github.com/qydxyx/iina-webdav",
     "desc": "Connect to a WebDAV server, browse media, and add files or folders to the current playlist.",
     "id": "com.qydxyx.iina-webdav"
+  },
+  {
+    "name": "Whisper AutoSub (Local)",
+    "url": "https://github.com/Mo-Shakib/iina-whisper-autosub-local",
+    "desc": "Generate and load English subtitles locally with automatic Whisper model setup.",
+    "id": "io.bento.iina-whisper-autosub"
   }
 ]

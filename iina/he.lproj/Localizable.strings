@@ -9,8 +9,6 @@
 
 "general.on" = "מופעל";
 "general.off" = "כבוי";
-"general.login" = "התחברות";
-"general.logout" = "התנתקות";
 "general.ok" = "אישור";
 "general.cancel" = "ביטול";
 "general.done" = "סיום";
@@ -30,14 +28,81 @@
 "guide.faq" = "שאלות נפוצות";
 
 // Initial Window
-"initial.announcement" = "אתה משתמש בגרסת %@ של IINA";
+"initial.announcement" = "אתה משתמש בגרסת בטא של IINA";
 "initial.beta.desc" = "אם ברצונך לחזור לגרסה הרגילה, הסר את הסימון \"קבל עדכוני בטא\" בהגדרות > כללי, והתקן את הגרסה הרגילה מ<a href=\"https://iina.io\">האתר הרשמי</a> שלנו.";
 "initial.nightly.desc" = "בניה לילית לא מומלצת לשימוש יומיומי. כרגע, בנייה לילית לא תומכת בעדכון אוטומטי. אנא הורד באופן ידני בניה עדכנית מ<a href=\"https://nightly.iina.io\">האתר</a> שלנו.";
 "initial.debug.desc" = "בניית ניפוי באגים בדרך כלל אינה מותאמת לטובת ביצועים, ולכן אינה מומלצת לשימוש יומיומי. בניית ניפוי באגים לא תומכת בעדכון אוטומטי.";
 "initial.bug_report" = "דווח באמצעות <a href=\"https://github.com/iina/iina/issues\">בעיות GitHub</a>.";
+"initial.rollback" = "Uncheck \"receive beta updates\" from Preferences - General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.open_url" = "פתח URL…";
+"initial.found_bug" = "מצאת באג?";
+"initial.resume" = "המשך את";
+"initial.open" = "פתח קובץ…";
+"initial.want_to_rollback" = "רוצה לחזור אחורנית?";
 
 // Inspector Window
 "inspector.error" = "שגיאה";
+"inspector.window_title" = "מפקח";
+"inspector.tab_general" = "כללי";
+"inspector.tab_tracks" = "רצועות";
+"inspector.tab_file" = "קובץ";
+"inspector.tab_status" = "מצב";
+"inspector.segment_general" = "כללי";
+"inspector.segment_tracks" = "רצועות";
+"inspector.segment_file" = "קובץ";
+"inspector.segment_status" = "מצב";
+"inspector.video_section" = "וידאו";
+"inspector.video_format" = "פורמט";
+"inspector.video_codec" = "קודק";
+"inspector.video_hw_decoder" = "מפענח חומרה";
+"inspector.video_primaries" = "צבעי בסיס";
+"inspector.video_colorspace" = "טווח צבעים";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "מנהל התקן";
+"inspector.video_size" = "גודל";
+"inspector.video_bitrate" = "קצב ביטים";
+"inspector.video_fps" = "פריימים לשנייה";
+"inspector.audio_section" = "שמע";
+"inspector.audio_format" = "פורמט";
+"inspector.audio_codec" = "קודק";
+"inspector.audio_driver" = "מנהל התקן";
+"inspector.audio_channels" = "ערוצים";
+"inspector.audio_bitrate" = "קצב סיביות";
+"inspector.audio_sample_rate" = "קצב דגימה";
+"inspector.track_label" = "רצועה";
+"inspector.track_id" = "מזהה";
+"inspector.track_properties" = "מאפיינים";
+"inspector.track_default" = "ברירת מחדל";
+"inspector.track_forced" = "מאולצות";
+"inspector.track_selected" = "נבחר";
+"inspector.track_external" = "חיצוני";
+"inspector.track_source_id" = "מזהה מקור";
+"inspector.track_title" = "כותרת";
+"inspector.track_language" = "שפה";
+"inspector.track_file_path" = "נתיב קובץ";
+"inspector.track_codec" = "קודק";
+"inspector.track_decoder" = "מפענח";
+"inspector.track_fps" = "פריימים לשנייה";
+"inspector.track_channels" = "ערוצים";
+"inspector.track_sample_rate" = "קצב דגימה";
+"inspector.file_path" = "נתיב קובץ";
+"inspector.file_title" = "כותרת";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "גודל";
+"inspector.file_format" = "פורמט";
+"inspector.file_duration" = "משך";
+"inspector.file_chapters" = "פרקים";
+"inspector.file_editions" = "מהדורות";
+"inspector.status_avsync_diff" = "הפרש סנכרון אודיו/וידאו";
+"inspector.status_total_avsync" = "סה\"כ סנכרון אודיו/וידאו";
+"inspector.status_dropped_frames" = "פריימים שהושמטו";
+"inspector.status_mistimed_frames" = "פריימים שתוזמנו באופן שגוי";
+"inspector.status_display_fps" = "הצג פריימים לשנייה";
+"inspector.status_estimated_output_fps" = "כמות פריימים משוערת לשניה";
+"inspector.status_estimated_display_fps" = "כמות פריימים מוצגים לשניה (משוער)";
+"inspector.status_watch" = "צפיה";
+"inspector.watch_column_name" = "שם";
+"inspector.watch_column_value" = "ערך";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "מוריד נתונים… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "העדפות";
 "preference.general" = "כללי";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "כתוביות";
 "preference.network" = "רשת";
 "preference.control" = "שליטה";
 "preference.keybindings" = "קיצורי מקשים";
@@ -162,29 +225,6 @@
 "preference.plugins" = "תוספים";
 "preference.utilities" = "עזרים";
 "preference.scripts" = "סקריפטים";
-"preference.not_logged_in" = "לא מחובר";
-"preference.logged_in_as" = "מחובר בתור %@";
-"preference.system_media_control" = "השתמש בבקרת המדיה של המערכת";
-
-"preference.key_binding_hint_1" = "כדי לערוך קיצור מקשים בקובץ התצורה הנוכחי, לחץ תחילה על כפתור \"שכפול…\" כדי ליצור עותק.";
-"preference.key_binding_hint_2" = "לחץ פעמיים בצד ימין של שורה כדי לערוך את קיצור המקשים.";
-
-"preference.enable_adv_settings" = "אפשר הגדרות מתקדמות";
-
-"preference.sub_override_level.no" = "לא";
-"preference.sub_override_level.force" = "כפויה";
-"preference.sub_override_level.scale" = "קנה מידה";
-"preference.sub_override_level.strip" = "הסרת הכל";
-"preference.sub_override_level.yes" = "מאופשרת";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "החל את כל סגנונות הכתוביות.";
-"preference.sub_override_level.descriptive_text.scale" = "החל את הגדרת קנה המידה בנוסף להגדרות העיצוב בסעיף זה.";
-"preference.sub_override_level.descriptive_text.strip" = "הסר לחלוטין את כל תגי ה-ASS והעיצובים מהכתוביות.";
-"preference.sub_override_level.descriptive_text.yes" = "החל את כל הגדרות העיצוב בסעיף זה.";
-
-"preference.ytdl_plugin_not_installed" = "התקן את תוסף מדיה מקוונת מתוך \"תוספים > התקן מ-GitHub\" כדי ליהנות מיכולות מתקדמות כמו הורדת וידאו ועדכוני yt-dlp אוטומטיים.";
-"preference.ytdl_plugin_installed" = "התמיכה המובנית ב-youtube-dl מושבתת מאחר שהתקנת את תוסף המדיה המקוונת.";
 
 "menu.volume" = "עוצמת שמע: %@";
 "menu.volume_muted" = "עוצמת שמע: %@ (מושתק)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "תוסף זה יכול לקרוא או לכתוב קבצים בדיסק שלך, שעשויים לכלול מידע רגיש. הוא יכול גם להפעיל תוכניות או יישומים אחרים שיכולים להזיק למחשב שלך, אז הקפד לאמת את המקור.";
 
 "plugin.install" = "התקנה";
-"plugin.installed" = "מותקן";
-"plugin.not_installed" = "לא מותקן";
 "plugin.local" = "מותקן מקומית";
 "alert.plugin.install_error" = "אירעה שגיאה במהלך ההתקנה: %@";
 "alert.invalid_url" = "הכתובת לא תקינה.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "שגיאה בהורדת התוסף.\n\nפלט: %@\n";
 "plugin.install_error.cannot_unpackage" = "שגיאה בחילוץ התוסף.\n\nפלט: %@\n";
 "plugin.install_error.cannot_load" = "IINA לא יכול לטעון את התוסף הזה. ייתכן שהוא בפורמט שגוי.";
-"plugin.check_for_updates" = "חפש עדכונים";
 "plugin.updating" = "מוריד את העדכון…";
 
 // Log window

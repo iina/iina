@@ -9,8 +9,6 @@
 
 "general.on" = "Activado";
 "general.off" = "Apagado";
-"general.login" = "Iniciar sesión";
-"general.logout" = "Cerrar sesión";
 "general.ok" = "Aceptar";
 "general.cancel" = "Cancelar";
 "general.done" = "Hecho";
@@ -19,7 +17,7 @@
 "general.na" = "No disponible";
 "general.no_result" = "Sin resultados";
 "general.no_title" = "Sin título";
-"general.auto" = "Auto";
+"general.auto" = "Automática";
 
 "input.value_is_empty" = "El valor no puede estar vacío.";
 "input.already_exists" = "El valor ya existe.";
@@ -30,14 +28,81 @@
 "guide.faq" = "Preguntas frecuentes";
 
 // Initial Window
-"initial.announcement" = "Estás usando una versión %@ de IINA";
+"initial.announcement" = "Estás usando una versión beta de IINA";
 "initial.beta.desc" = "Si desea volver a una versión estable, desmarque \"recibir actualizaciones beta\" desde Ajustes > Generales, e instale una versión estable de nuestro <a href=\"https://iina.io\">sitio web oficial</a>.";
 "initial.nightly.desc" = "No se recomienda usar versiones nocturnas para el uso diario. Actualmente las versiones nocturnas no soportan la actualización automática. Por favor, descargue manualmente nuevas versiones de nuestro <a href=\"https://nightly.iina.io\">sitio web nocturno</a>.";
 "initial.debug.desc" = "Las compilaciones de depuración normalmente no están optimizadas para el rendimiento, por lo que no se recomienda que se utilicen de manera habitual. Las compilaciones de depuración no soportan la actualización automática.";
 "initial.bug_report" = "Notifique a través de <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Desmarque \"Recibir actualizaciones beta\" en Preferencias - General, e instale una versión estable desde nuestro <a href=\"https://iina.io\">sitio web oficial</a>.";
+"initial.open_url" = "Abrir URL…";
+"initial.found_bug" = "¿Encontraste un error?";
+"initial.resume" = "Continuar";
+"initial.open" = "Abrir…";
+"initial.want_to_rollback" = "¿Quiere volver a la versión anterior?";
 
 // Inspector Window
 "inspector.error" = "Error";
+"inspector.window_title" = "Inspector";
+"inspector.tab_general" = "General";
+"inspector.tab_tracks" = "Pistas";
+"inspector.tab_file" = "Archivo";
+"inspector.tab_status" = "Estado";
+"inspector.segment_general" = "General";
+"inspector.segment_tracks" = "Pistas";
+"inspector.segment_file" = "Archivo";
+"inspector.segment_status" = "Estado";
+"inspector.video_section" = "VÍDEO";
+"inspector.video_format" = "Formato";
+"inspector.video_codec" = "Códec";
+"inspector.video_hw_decoder" = "Decodificador HW";
+"inspector.video_primaries" = "Primarios";
+"inspector.video_colorspace" = "Espacio de color";
+"inspector.video_pixel_format" = "Formato de píxel";
+"inspector.video_driver" = "Controlador";
+"inspector.video_size" = "Tamaño";
+"inspector.video_bitrate" = "Tasa de bits";
+"inspector.video_fps" = "Fotogramas por segundo";
+"inspector.audio_section" = "SONIDO";
+"inspector.audio_format" = "Formato";
+"inspector.audio_codec" = "Códec";
+"inspector.audio_driver" = "Controlador";
+"inspector.audio_channels" = "Canales";
+"inspector.audio_bitrate" = "Tasa de bits";
+"inspector.audio_sample_rate" = "Tasa de muestreo";
+"inspector.track_label" = "Pista";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Propiedades";
+"inspector.track_default" = "Predeterminado";
+"inspector.track_forced" = "Forzado";
+"inspector.track_selected" = "Seleccionado";
+"inspector.track_external" = "Externo";
+"inspector.track_source_id" = "ID de origen";
+"inspector.track_title" = "Título";
+"inspector.track_language" = "Idioma";
+"inspector.track_file_path" = "Ruta del archivo";
+"inspector.track_codec" = "Códec";
+"inspector.track_decoder" = "Decodificador";
+"inspector.track_fps" = "Fotogramas por segundo";
+"inspector.track_channels" = "Canales";
+"inspector.track_sample_rate" = "Tasa de muestreo";
+"inspector.file_path" = "Ruta del archivo";
+"inspector.file_title" = "Título";
+"inspector.file_comment" = "Comentario";
+"inspector.file_size" = "Tamaño";
+"inspector.file_format" = "Formato";
+"inspector.file_duration" = "Duración";
+"inspector.file_chapters" = "Capítulos";
+"inspector.file_editions" = "Ediciones";
+"inspector.status_avsync_diff" = "Diferencia de sincronización A/V";
+"inspector.status_total_avsync" = "Sincronización A/V total";
+"inspector.status_dropped_frames" = "Fotogramas perdidos";
+"inspector.status_mistimed_frames" = "Fotogramas desajustados";
+"inspector.status_display_fps" = "FPS mostrados";
+"inspector.status_estimated_output_fps" = "FPS de salida estimados";
+"inspector.status_estimated_display_fps" = "FPS Estimados";
+"inspector.status_watch" = "Monitorizar";
+"inspector.watch_column_name" = "Nombre";
+"inspector.watch_column_value" = "Valor";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Cargando… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Preferencias";
 "preference.general" = "General";
 "preference.ui" = "Interfaz";
-"preference.video_audio" = "Vídeo y audio";
-"preference.subtitle" = "Subtítulos";
 "preference.network" = "Red";
 "preference.control" = "Controles";
 "preference.keybindings" = "Atajos de teclado";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "Utilidades";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Sin iniciar sesión";
-"preference.logged_in_as" = "Conectado como %@";
-"preference.system_media_control" = "Utilizar los controles multimedia del sistema";
-
-"preference.key_binding_hint_1" = "Para editar los atajos en el archivo de configuración actual, haga primero clic en el botón \"Duplicar…\" para crear una copia.";
-"preference.key_binding_hint_2" = "Haga doble clic en una fila del lado derecho para editar el atajo correspondiente.";
-
-"preference.enable_adv_settings" = "Habilitar configuración avanzada";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "fuerza";
-"preference.sub_override_level.scale" = "escala";
-"preference.sub_override_level.strip" = "tira";
-"preference.sub_override_level.yes" = "sí";
-
-"preference.sub_override_level.descriptive_text.no" = "Procesar subtítulos como se especifica en los scripts, sin sobreescribir.";
-"preference.sub_override_level.descriptive_text.force" = "Aplicar todos los estilos de subtítulos.";
-"preference.sub_override_level.descriptive_text.scale" = "Aplica el ajuste de escala además de los ajustes de estilo en esta sección.";
-"preference.sub_override_level.descriptive_text.strip" = "Remueve radicalmente todas las etiquetas y estilos ASS del subtítulo.";
-"preference.sub_override_level.descriptive_text.yes" = "Aplicar todos los ajustes de estilo en esta sección.";
-
-"preference.ytdl_plugin_not_installed" = "Instale el plugin multimedia en línea de \"Plugins > Instalar desde GitHub\" para disfrutar de características avanzadas tales como descargas de vídeo y actualizaciones automáticas yt-dlp.";
-"preference.ytdl_plugin_installed" = "El soporte de youtube-dl integrado está deshabilitado, ya que tienes el plugin de medios online instalado.";
 
 "menu.volume" = "Volumen: %@";
 "menu.volume_muted" = "Volumen: %@ (Silenciado)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "Este plugin puede leer o escribir archivos en su disco, incluyendo información confidencial. También puede llamar a otros programas o aplicaciones que pueden dañar su sistema, asegúrese de verificar la fuente.";
 
 "plugin.install" = "Instalar";
-"plugin.installed" = "Instalado";
-"plugin.not_installed" = "No instalado";
 "plugin.local" = "Instalado localmente";
 "alert.plugin.install_error" = "Ha ocurrido un error durante la instalación: %@";
 "alert.invalid_url" = "La URL no es válida.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Error al descargar el plugin.\n\nSalida:%@\n";
 "plugin.install_error.cannot_unpackage" = "Error al desempaquetar el plugin.\n\nSalida:%@\n";
 "plugin.install_error.cannot_load" = "IINA no puede cargar este plugin. Puede estar en el formato incorrecto.";
-"plugin.check_for_updates" = "Buscar actualizaciones";
 "plugin.updating" = "Descargando actualización…";
 
 // Log window
@@ -658,7 +695,7 @@
 "settings.forceDedicatedGPU.label" = "Forzar GPU dedicado";
 "settings.hardwareDecoder.items.0" = "Deshabilitado";
 "settings.hardwareDecoder.items.0.desc" = "Desactivar la descodificación por hardware.";
-"settings.hardwareDecoder.items.1" = "Auto";
+"settings.hardwareDecoder.items.1" = "Automática";
 "settings.hardwareDecoder.items.1.desc" = "Activar la descodificación por hardware. Sin embargo, la mayoría de los filtros de vídeo no funcionarán correctamente.";
 "settings.hardwareDecoder.items.2" = "Auto (Copia)";
 "settings.hardwareDecoder.items.2.desc" = "Activar la descodificación por hardware. Consumirá el doble de memoria, pero funciona con filtros de vídeo.";
@@ -778,7 +815,7 @@
 "settings.secPrefech.label" = "Segundos para precargar";
 "settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "Mostrar indicador de carga al buscar";
-"settings.transportRTSPThrough.items.0" = "Auto";
+"settings.transportRTSPThrough.items.0" = "Automática";
 "settings.transportRTSPThrough.label" = "Transportar RTSP a través de";
 "settings.userAgent.label" = "Agente de usuario";
 "settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";

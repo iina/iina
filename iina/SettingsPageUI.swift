@@ -560,7 +560,7 @@ private class OSCToolbarView: SettingsContainer {
 
   private func updateOSCToolbarButtons() {
     oscToolbarStackView.views.forEach { oscToolbarStackView.removeView($0) }
-    for buttonType in PrefUIViewController.oscToolbarButtons {
+    for buttonType in PrefOSCToolbarSettingsSheetController.oscToolbarButtons {
       let button = NSButton()
       OSCToolbarButton.setStyle(of: button, buttonType: buttonType)
       oscToolbarStackView.addView(button, in: .trailing)
@@ -572,8 +572,8 @@ private class OSCToolbarView: SettingsContainer {
   }
 
   @objc func customizeOSCToolbarAction(_ sender: NSButton!) {
-    toolbarSettingsSheetController.currentItemsView?.initItems(fromItems: PrefUIViewController.oscToolbarButtons)
-    toolbarSettingsSheetController.currentButtonTypes = PrefUIViewController.oscToolbarButtons
+    toolbarSettingsSheetController.currentItemsView?.initItems(fromItems: PrefOSCToolbarSettingsSheetController.oscToolbarButtons)
+    toolbarSettingsSheetController.currentButtonTypes = PrefOSCToolbarSettingsSheetController.oscToolbarButtons
     view.window?.beginSheet(toolbarSettingsSheetController.window!) { response in
       guard response == .OK else { return }
       let newItems = self.toolbarSettingsSheetController.currentButtonTypes

@@ -9,8 +9,6 @@
 
 "general.on" = "On";
 "general.off" = "Off";
-"general.login" = "Accedi";
-"general.logout" = "Disconnetti";
 "general.ok" = "OK";
 "general.cancel" = "Annulla";
 "general.done" = "OK";
@@ -30,14 +28,81 @@
 "guide.faq" = "Domande frequenti (FAQ)";
 
 // Initial Window
-"initial.announcement" = "Stai usando una versione %@ di IINA";
+"initial.announcement" = "Stai usando una versione beta di IINA";
 "initial.beta.desc" = "Se vuoi passare al canale di release ufficiali di IINA, togli la spunta da 'Ricevi aggiornamenti beta' in Impostazioni → Generali, poi scarica l'ultima versione stabile dal <a href=\"https://iina.io\">sito ufficiale</a>.";
 "initial.nightly.desc" = "Le Nightly sono versioni di sviluppo instabili e non adatte all'utilizzo quotidiano. Attualmente, inoltre, non sono aggiornate automaticamente: se desideri, puoi scaricarle dalla <a href=\"https://nightly.iina.io\">pagina dedicata</a>.";
 "initial.debug.desc" = "Le versioni di debug sono dedicate alla raccolta di dati per la risoluzione di problemi e per altre finalità analitiche. Non sono ottimizzate per le prestazioni e non prevedono aggiornamenti automatici; in generale se ne sconsiglia l'utilizzo.";
 "initial.bug_report" = "Segnala tramite <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
+"initial.rollback" = "Deseleziona \"Ricevi aggiornamenti beta\" da Preferenze - Generali e installa la versione stabile dal nostro <a href=\"https://iina.io\"> sito web ufficiale </a>.";
+"initial.open_url" = "Apri URL…";
+"initial.found_bug" = "Hai trovato un bug?";
+"initial.resume" = "Riprendi";
+"initial.open" = "Apri…";
+"initial.want_to_rollback" = "Vuoi ripristinare la versione stabile?";
 
 // Inspector Window
 "inspector.error" = "Errore";
+"inspector.window_title" = "Informazioni";
+"inspector.tab_general" = "Generale";
+"inspector.tab_tracks" = "Tracce";
+"inspector.tab_file" = "File";
+"inspector.tab_status" = "Stato";
+"inspector.segment_general" = "Generale";
+"inspector.segment_tracks" = "Tracce";
+"inspector.segment_file" = "File";
+"inspector.segment_status" = "Stato";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Formato";
+"inspector.video_codec" = "Codec";
+"inspector.video_hw_decoder" = "Decoder HW";
+"inspector.video_primaries" = "Primarie";
+"inspector.video_colorspace" = "Spazio colore";
+"inspector.video_pixel_format" = "Formato pixel";
+"inspector.video_driver" = "Driver";
+"inspector.video_size" = "Dimensione";
+"inspector.video_bitrate" = "Bit rate";
+"inspector.video_fps" = "FPS";
+"inspector.audio_section" = "AUDIO";
+"inspector.audio_format" = "Formato";
+"inspector.audio_codec" = "Codec";
+"inspector.audio_driver" = "Driver";
+"inspector.audio_channels" = "Canali";
+"inspector.audio_bitrate" = "Bit rate";
+"inspector.audio_sample_rate" = "Campionamento";
+"inspector.track_label" = "Tracce";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Proprietà";
+"inspector.track_default" = "Predefinito";
+"inspector.track_forced" = "Forzato";
+"inspector.track_selected" = "Selezionato";
+"inspector.track_external" = "Esterno";
+"inspector.track_source_id" = "ID sorgente";
+"inspector.track_title" = "Titolo";
+"inspector.track_language" = "Lingua";
+"inspector.track_file_path" = "Posizione file";
+"inspector.track_codec" = "Codec";
+"inspector.track_decoder" = "Decoder";
+"inspector.track_fps" = "FPS";
+"inspector.track_channels" = "Canali";
+"inspector.track_sample_rate" = "Campionamento";
+"inspector.file_path" = "Posizione file";
+"inspector.file_title" = "Titolo";
+"inspector.file_comment" = "Commento";
+"inspector.file_size" = "Dimensione";
+"inspector.file_format" = "Formato";
+"inspector.file_duration" = "Durata";
+"inspector.file_chapters" = "Capitoli";
+"inspector.file_editions" = "Modifiche";
+"inspector.status_avsync_diff" = "A/V sinc diff";
+"inspector.status_total_avsync" = "A/V sinc totale";
+"inspector.status_dropped_frames" = "Fotogrammi mancanti";
+"inspector.status_mistimed_frames" = "Fotogrammi fuori sincrono";
+"inspector.status_display_fps" = "Mostra FPS";
+"inspector.status_estimated_output_fps" = "Stima FPS in uscita";
+"inspector.status_estimated_display_fps" = "Stima FSP Disp";
+"inspector.status_watch" = "Visto";
+"inspector.watch_column_name" = "Nome";
+"inspector.watch_column_value" = "Valore";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffer… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
 "preference.ui" = "Interfaccia";
-"preference.video_audio" = "Video e Audio";
-"preference.subtitle" = "Sottotitoli";
 "preference.network" = "Network";
 "preference.control" = "Controlli";
 "preference.keybindings" = "Scorciatoie";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Componenti aggiuntivi";
 "preference.utilities" = "Utilità";
 "preference.scripts" = "Script";
-"preference.not_logged_in" = "Login non effettuato";
-"preference.logged_in_as" = "Collegato come %@";
-"preference.system_media_control" = "Utilizza il controllo multimediale di sistema";
-
-"preference.key_binding_hint_1" = "Per modificare le scorciatoie di tastiera nel file di configurazione corrente, fai prima click su \"Duplica…\" per crearne una copia.";
-"preference.key_binding_hint_2" = "Fai doppio click nella riga sulla destra per modificare la scorciatoia di tastiera corrispondente.";
-
-"preference.enable_adv_settings" = "Abilita impostazioni avanzate";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "striscia";
-"preference.sub_override_level.yes" = "sì";
-
-"preference.sub_override_level.descriptive_text.no" = "Renderizza i sottotitoli come specificato dagli script, senza override.";
-"preference.sub_override_level.descriptive_text.force" = "Applica tutti gli stili dei sottotitoli.";
-"preference.sub_override_level.descriptive_text.scale" = "Imposta il fattore di scala dei sottotitoli (override).";
-"preference.sub_override_level.descriptive_text.strip" = "Rimuove tutti gli stili e i tag ASS dai sottotitoli.";
-"preference.sub_override_level.descriptive_text.yes" = "Regola le impostazioni degli stili.";
-
-"preference.ytdl_plugin_not_installed" = "Installa il plug-in Media Online da 'Plug-in → Installa' da GitHub per godere di funzionalità avanzate come il download di video e aggiornamenti automatici di yt-dlp.";
-"preference.ytdl_plugin_installed" = "Il supporto youtube-dl integrato è disabilitato perché è installato il plugin 'Media online'.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Spento)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "Questo plugin può leggere o scrivere file sul disco, comprese le informazioni sensibili. Può anche utilizzare altri programmi o applicazioni che possono danneggiare il computer. Assicurati di verificare la sua provenienza prima di procedere.";
 
 "plugin.install" = "Installa";
-"plugin.installed" = "Installato";
-"plugin.not_installed" = "Non installato";
 "plugin.local" = "Installato localmente";
 "alert.plugin.install_error" = "Si è verificato un errore durante l'installazione: %@";
 "alert.invalid_url" = "L'URL non è valido.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Impossibile scaricare il plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Scompattamento del plugin non riuscito.\n\nOutput: %@\n";
 "plugin.install_error.cannot_load" = "IINA non può caricare questo plugin. Potrebbe essere nel formato sbagliato.";
-"plugin.check_for_updates" = "Controlla aggiornamenti";
 "plugin.updating" = "Sto scaricando l'aggiornamento…";
 
 // Log window

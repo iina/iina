@@ -2302,7 +2302,10 @@ class MainWindowController: PlayerWindowController {
   private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
     let isCoveredByOSD = !osdView.isHidden && event.inAnyOf([osdView])
     let isCoveredBySidebar = sidebars.isEventCoveringVisibleSidebar(event)
-    if !playSlider.isHidden && event.inAnyOf([playSlider]), !isCoveredByOSD, !isCoveredBySidebar {
+    if !player.disableUI,
+       !playSlider.isHiddenOrHasHiddenAncestor,
+       event.inAnyOf([playSlider]),
+       !isCoveredByOSD, !isCoveredBySidebar {
       updateTimePreviewAndThumbnail(event.locationInWindow)
     } else {
       thumbnailPeekView.isHidden = true

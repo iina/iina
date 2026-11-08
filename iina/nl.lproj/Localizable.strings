@@ -9,8 +9,6 @@
 
 "general.on" = "Aan";
 "general.off" = "Uit";
-"general.login" = "Log in";
-"general.logout" = "Log uit";
 "general.ok" = "Oke";
 "general.cancel" = "Annuleer";
 "general.done" = "Gereed";
@@ -30,14 +28,81 @@
 "guide.faq" = "Veelgestelde vragen";
 
 // Initial Window
-"initial.announcement" = "U gebruikt een %@ versie van IINA";
+"initial.announcement" = "Je gebruikt een bètaversie van IINA";
 "initial.beta.desc" = "Als u wilt teruggaan naar een stabiele versie, vink \"beta updates ontvangen\" uit via Instellingen > Algemeen, en installeer een stabiele release van onze <a href=\"https://iina.io\">officiële website</a>.";
 "initial.nightly.desc" = "Nightly wordt niet aanbevolen voor dagelijks gebruik. Momenteel ondersteunen nightly builds geen automatische updates. Download handmatig nieuwere builds van onze <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds zijn meestal niet geoptimaliseerd voor prestaties, dus deze zijn niet aangeraden voor dagelijks gebruik. Debug builds ondersteunen geen automatische updates.";
 "initial.bug_report" = "Rapporteer via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Verwijder het vinkje bij \"ontvang bètaversies\" in Voorkeuren - Algemeen, en installeer een stabiele versie via onze <a href=\"https://iina.io\">officiële website</a>.";
+"initial.open_url" = "Open URL…";
+"initial.found_bug" = "Een bug gevonden?";
+"initial.resume" = "Hervat";
+"initial.open" = "Open bestand…";
+"initial.want_to_rollback" = "Wil je dit terugdraaien?";
 
 // Inspector Window
 "inspector.error" = "Fout";
+"inspector.window_title" = "Info";
+"inspector.tab_general" = "Algemeen";
+"inspector.tab_tracks" = "Sporen";
+"inspector.tab_file" = "Bestand";
+"inspector.tab_status" = "Status";
+"inspector.segment_general" = "Algemeen";
+"inspector.segment_tracks" = "Sporen";
+"inspector.segment_file" = "Bestand";
+"inspector.segment_status" = "Status";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Structuur";
+"inspector.video_codec" = "Codec";
+"inspector.video_hw_decoder" = "Hardwaredecoder";
+"inspector.video_primaries" = "Prioriteiten";
+"inspector.video_colorspace" = "Kleurruimte";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Driver";
+"inspector.video_size" = "Resolutie";
+"inspector.video_bitrate" = "Bitsnelheid";
+"inspector.video_fps" = "FPS";
+"inspector.audio_section" = "AUDIO";
+"inspector.audio_format" = "Structuur";
+"inspector.audio_codec" = "Codec";
+"inspector.audio_driver" = "Driver";
+"inspector.audio_channels" = "Kanalen";
+"inspector.audio_bitrate" = "Bitsnelheid";
+"inspector.audio_sample_rate" = "Samplefrequentie";
+"inspector.track_label" = "Spoor";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Eigenschappen";
+"inspector.track_default" = "Standaard";
+"inspector.track_forced" = "Geforceerd";
+"inspector.track_selected" = "Geselecteerd";
+"inspector.track_external" = "Extern";
+"inspector.track_source_id" = "Bron-ID";
+"inspector.track_title" = "Titel";
+"inspector.track_language" = "Taal";
+"inspector.track_file_path" = "Bron";
+"inspector.track_codec" = "Codec";
+"inspector.track_decoder" = "Decoder";
+"inspector.track_fps" = "FPS";
+"inspector.track_channels" = "Kanalen";
+"inspector.track_sample_rate" = "Samplefrequentie";
+"inspector.file_path" = "Locatie";
+"inspector.file_title" = "Titel";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Grootte";
+"inspector.file_format" = "Structuur";
+"inspector.file_duration" = "Duur";
+"inspector.file_chapters" = "Hoofdstukken";
+"inspector.file_editions" = "Uitgaven";
+"inspector.status_avsync_diff" = "A/V synchronisatieverschil";
+"inspector.status_total_avsync" = "Algehele A/V-synchronisatie";
+"inspector.status_dropped_frames" = "Verloren frames";
+"inspector.status_mistimed_frames" = "Verkeerd getimede frames";
+"inspector.status_display_fps" = "Verversingssnelheid beeldscherm";
+"inspector.status_estimated_output_fps" = "Video-FPS (benadering)";
+"inspector.status_estimated_display_fps" = "Verv.snelheid beeldscherm (benadering):";
+"inspector.status_watch" = "Gevolgde waardes";
+"inspector.watch_column_name" = "Naam";
+"inspector.watch_column_value" = "Waarde";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Bufferen… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Voorkeuren";
 "preference.general" = "Algemeen";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Ondertiteling";
 "preference.network" = "Netwerk";
 "preference.control" = "Bediening";
 "preference.keybindings" = "Sneltoetsen";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "Hulpmiddelen";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Niet ingelogd";
-"preference.logged_in_as" = "Ingelogd als %@";
-"preference.system_media_control" = "Gebruik mediabediening van het systeem";
-
-"preference.key_binding_hint_1" = "Kies \"Dupliceer…\" om een bewerkbare kopie te maken van de geselecteerde sneltoetsenconfiguratie.";
-"preference.key_binding_hint_2" = "Dubbelklik op een rij om de bijbehorende sneltoets te bewerken.";
-
-"preference.enable_adv_settings" = "Geavanceerde instellingen inschakelen";
-
-"preference.sub_override_level.no" = "nee";
-"preference.sub_override_level.force" = "forceer";
-"preference.sub_override_level.scale" = "schaal";
-"preference.sub_override_level.strip" = "volledig";
-"preference.sub_override_level.yes" = "ja";
-
-"preference.sub_override_level.descriptive_text.no" = "Ondertiteling weergeven zoals gespecificeerd door de ondertitelingsscripts, zonder overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Alle ondertitelstijlen toepassen.";
-"preference.sub_override_level.descriptive_text.scale" = "Schaalinstelling toepassen naast de stijlinstellingen in deze sectie.";
-"preference.sub_override_level.descriptive_text.strip" = "Agressief alle ASS-tags en stijlen van de ondertiteling verwijderen";
-"preference.sub_override_level.descriptive_text.yes" = "Alle stijlinstellingen in deze sectie toepassen.";
-
-"preference.ytdl_plugin_not_installed" = "Installeer de Online Media plug-in van \"Plug-ins > Installeren vanaf GitHub\" om gebruik te maken van geavanceerde functies zoals video downloaden en automatisch yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "De ingebouwde ondersteuning voor youtube-dl is uitgeschakeld omdat de Online Media plug-in is geïnstalleerd.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ gedempt)";
@@ -373,7 +413,7 @@
 "alert.plugin_update_found.message" = "De laatste versie is %@. Je hebt %@. Wil je updaten?";
 "alert.plugin_permission" = "Deze plugin vereist de volgende machtigingen. Controleer deze voordat u verdergaat.";
 "alert.plugin_permission_added" = "Deze update vereist extra machtigingen. Controleer ze voordat u verdergaat.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
+"alert.install_plugin_macos_11.title" = "Installeer plugin van GitHub";
 "alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in totaal";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "Deze plug-in kan bestanden op uw harde schijf lezen of schrijven die gevoelige informatie kunnen bevatten. Het kan ook andere programma's of toepassingen uitvoeren die schadelijk kunnen zijn voor uw computer. Controleer dus de bron.";
 
 "plugin.install" = "Installeren";
-"plugin.installed" = "Geïnstalleerd";
-"plugin.not_installed" = "Niet geïnstalleerd";
 "plugin.local" = "Lokaal geïnstalleerd";
 "alert.plugin.install_error" = "Fout opgetreden tijdens de installatie: %@";
 "alert.invalid_url" = "De URL is ongeldig.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Fout bij het downloaden van de plug-in.\n\nUitvoer:%@\n";
 "plugin.install_error.cannot_unpackage" = "Fout bij het uitpakken van de plug-in.\n\nuitvoer:%@\n";
 "plugin.install_error.cannot_load" = "IINA kan deze plug-in niet laden. Deze kan in het verkeerde formaat geleverd zijn.";
-"plugin.check_for_updates" = "Zoek naar updates";
 "plugin.updating" = "Update downloaden…";
 
 // Log window
@@ -554,7 +591,7 @@
 "sidebar.sidebar_position" = "Sidebar Position";
 "sidebar.compact_interface" = "Compact Interface";
 "sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
-"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
+"sidebar.lock_window_aspect" = "Vergrendel beeldverhouding van venster";
 "sidebar.docked" = "Docked Control Bar and Titlebar";
 "sidebar.fit_window_to_video" = "Fit Window to Video";
 "sidebar.settings" = "Instellingen";
@@ -617,7 +654,7 @@
 "settings.defaultRepeatMode.items.0" = "Afspeellijst herhalen";
 "settings.defaultRepeatMode.items.1" = "Enkel bestand herhalen";
 "settings.fullScreenWhenOpen.label" = "Schakel schermvullende weergave in";
-"settings.groupSimultaneousOpensInPlaylist.label" = "Group media in playlist when opening multiple files at once";
+"settings.groupSimultaneousOpensInPlaylist.label" = "Media in afspeellijst groeperen bij het openen van meerdere bestanden";
 "settings.keepOpenOnFileEnd.label" = "Houd venster open nadat afspelen is voltooid";
 "settings.pauseWhenGoesToSleep.label" = "Pauzeer wanneer de computer in sluimerstand wordt geplaatst";
 "settings.pauseWhenInactive.label" = "Pauzeer zolang het videovenster niet het voorste venster is.";
@@ -652,7 +689,7 @@
 "settings.enableHdrSupport.desc" = "HDR-modus standaard inschakelen bij het afspelen van HDR-video's.";
 "settings.enableHdrSupport.label" = "Enable HDR mode";
 "settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
-"settings.enableLiveText.label" = "Live Text";
+"settings.enableLiveText.label" = "Live tekst";
 "settings.enableToneMapping.label" = "Tone mapping inschakelen";
 "settings.forceDedicatedGPU.desc" = "Gebruik altijd de toegewijde GPU voor het renderen (als deze bestaat). Dit kan de prestaties verbeteren, maar kan de levensduur van de batterij verminderen.";
 "settings.forceDedicatedGPU.label" = "Forceer toegewijde GPU";
@@ -708,7 +745,7 @@
 "settings.doubleClickAction.items.2" = "Pauzeren/hervatten";
 "settings.doubleClickAction.items.4" = "Schakel beeld-in-beeld in/uit";
 "settings.doubleClickAction.items.5" = "Herhaal gedeelte";
-"settings.doubleClickAction.items.6" = "Reset speed";
+"settings.doubleClickAction.items.6" = "Herstel snelheid";
 "settings.doubleClickAction.label" = "Dubbel klikken";
 "settings.forceTouchAction.items.0" = "Geen";
 "settings.forceTouchAction.items.1" = "Schermvullende weergave";
@@ -718,7 +755,7 @@
 "settings.horizontalScrollAction.items.0" = "Volume aanpassen";
 "settings.horizontalScrollAction.items.1" = "Vooruit-/terugspoelen";
 "settings.horizontalScrollAction.items.2" = "Geen";
-"settings.horizontalScrollAction.items.4" = "Adjust playback speed";
+"settings.horizontalScrollAction.items.4" = "Afspeelsnelheid aanpassen";
 "settings.horizontalScrollAction.label" = "Horizontaal scrollen";
 "settings.middleClickAction.items.0" = "Geen";
 "settings.middleClickAction.items.1" = "Schermvullende weergave";
@@ -726,7 +763,7 @@
 "settings.middleClickAction.items.3" = "Afspeelregelaars verbergen";
 "settings.middleClickAction.items.4" = "Schakel beeld-in-beeld in/uit";
 "settings.middleClickAction.items.5" = "Herhaal gedeelte";
-"settings.middleClickAction.items.6" = "Reset speed";
+"settings.middleClickAction.items.6" = "Herstel snelheid";
 "settings.middleClickAction.label" = "Middelklikken";
 "settings.pinchAction.items.0" = "Venstergrootte aanpassen";
 "settings.pinchAction.items.1" = "Schermvullende weergave";
@@ -740,7 +777,7 @@
 "settings.rightClickAction.items.3" = "Afspeelregelaars verbergen";
 "settings.rightClickAction.items.4" = "Schakel beeld-in-beeld in/uit";
 "settings.rightClickAction.items.5" = "Herhaal gedeelte";
-"settings.rightClickAction.items.6" = "Reset speed";
+"settings.rightClickAction.items.6" = "Herstel snelheid";
 "settings.rightClickAction.label" = "Secundair klikken";
 "settings.singleClickAction.items.0" = "Geen";
 "settings.singleClickAction.items.2" = "Pauzeren/hervatten";
@@ -754,7 +791,7 @@
 "settings.verticalScrollAction.items.0" = "Volume aanpassen";
 "settings.verticalScrollAction.items.1" = "Vooruit-/terugspoelen";
 "settings.verticalScrollAction.items.2" = "Geen";
-"settings.verticalScrollAction.items.4" = "Adjust playback speed";
+"settings.verticalScrollAction.items.4" = "Afspeelsnelheid aanpassen";
 "settings.verticalScrollAction.label" = "Verticaal scrollen";
 "settings.videoViewAcceptsFirstMouse.desc" = "Muis";
 "settings.videoViewAcceptsFirstMouse.label" = "Accepteert eerste muisklik wanneer niet gefocust";
@@ -788,7 +825,7 @@
 "settings.ytdlSearchPath.label" = "Aangepaste youtube-dl locatie";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "Indien ingeschakeld, zal IINA automatisch online ondertiteling zoeken voor video's zonder geladen ondertiteling en langer dan 20 minuten.";
 "settings.autoSearchOnlineSub.label" = "Zoek automatisch online naar ondertiteling";
 "settings.displayInLetterBox.label" = "Toon ondertiteling in de zwarte balken van schermvullende weergave";
 "settings.subAlignX.items.0" = "Links";
@@ -956,7 +993,7 @@
 "settings.$KeyBindingSet" = "Key binding set";
 "settings.$Layout" = "Layout";
 "settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
-"settings.$LiveText" = "Live Text";
+"settings.$LiveText" = "Live tekst";
 "settings.$Logging" = "Logging";
 "settings.$Login" = "Log in";
 "settings.$MB" = "MB";

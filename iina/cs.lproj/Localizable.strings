@@ -9,8 +9,6 @@
 
 "general.on" = "Zapnuto";
 "general.off" = "Vypnuto";
-"general.login" = "Přihlásit se";
-"general.logout" = "Odhlásit se";
 "general.ok" = "OK";
 "general.cancel" = "Zrušit";
 "general.done" = "Hotovo";
@@ -30,19 +28,86 @@
 "guide.faq" = "Nejčastější dotazy";
 
 // Initial Window
-"initial.announcement" = "Používáte verzi %@ aplikace IINA";
+"initial.announcement" = "Používáte beta verzi aplikace IINA";
 "initial.beta.desc" = "Pokud se chcete vrátit k vydané verzi, zrušte výběr „Dostávat beta aktualizace“ v Nastavení > Obecné, a nainstalujte stabilní verzi z naší <a href=\"https://iina.io\">oficiální webové stránky</a>.";
 "initial.nightly.desc" = "Noční sestavení nejsou doporučena pro každodenní použití. V současné době nepodporují automatické aktualizace. Stáhněte si prosím ručně novější sestavení z naší <a href=\"https://nightly.iina.io\">noční webové stránky</a>.";
 "initial.debug.desc" = "Ladící sestavení obvykle nejsou optimalizována pro výkon, nejsou tedy doporučena pro každodenní použití. Ladící sestavení nepodporují automatické aktualizace.";
 "initial.bug_report" = "Nahlaste na <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
+"initial.rollback" = "Zrušte výběr „Dostávat beta aktualizace“ v Nastavení > Obecné, a nainstalujte stabilní verzi z naší <a href=\"https://iina.io\">oficiální webové stránky</a>.";
+"initial.open_url" = "Otevřít URL…";
+"initial.found_bug" = "Našli jste chybu?";
+"initial.resume" = "Pokračovat";
+"initial.open" = "Otevřít…";
+"initial.want_to_rollback" = "Chcete se vrátit zpět?";
 
 // Inspector Window
 "inspector.error" = "Chyba";
+"inspector.window_title" = "Inspektor";
+"inspector.tab_general" = "Obecné";
+"inspector.tab_tracks" = "Stopy";
+"inspector.tab_file" = "Soubor";
+"inspector.tab_status" = "Stav";
+"inspector.segment_general" = "Obecné";
+"inspector.segment_tracks" = "Stopy";
+"inspector.segment_file" = "Soubor";
+"inspector.segment_status" = "Stav";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Formát";
+"inspector.video_codec" = "Kodek";
+"inspector.video_hw_decoder" = "HW dekodér";
+"inspector.video_primaries" = "Základní barvy";
+"inspector.video_colorspace" = "Barevný prostor";
+"inspector.video_pixel_format" = "Formát pixelu";
+"inspector.video_driver" = "Ovladač";
+"inspector.video_size" = "Velikost";
+"inspector.video_bitrate" = "Bitový tok";
+"inspector.video_fps" = "FPS";
+"inspector.audio_section" = "ZVUK";
+"inspector.audio_format" = "Formát";
+"inspector.audio_codec" = "Kodek";
+"inspector.audio_driver" = "Ovladač";
+"inspector.audio_channels" = "Kanály";
+"inspector.audio_bitrate" = "Bitový tok";
+"inspector.audio_sample_rate" = "Vzorkovací frekvence";
+"inspector.track_label" = "Stopa";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Vlastnosti";
+"inspector.track_default" = "Výchozí";
+"inspector.track_forced" = "Vynucené";
+"inspector.track_selected" = "Vybrané";
+"inspector.track_external" = "Externí";
+"inspector.track_source_id" = "ID zdroje";
+"inspector.track_title" = "Název";
+"inspector.track_language" = "Jazyk";
+"inspector.track_file_path" = "Cesta k souboru";
+"inspector.track_codec" = "Kodek";
+"inspector.track_decoder" = "Dekodér";
+"inspector.track_fps" = "FPS";
+"inspector.track_channels" = "Kanály";
+"inspector.track_sample_rate" = "Vzorkovací frekvence";
+"inspector.file_path" = "Cesta k souboru";
+"inspector.file_title" = "Název";
+"inspector.file_comment" = "Komentář";
+"inspector.file_size" = "Velikost";
+"inspector.file_format" = "Formát";
+"inspector.file_duration" = "Délka";
+"inspector.file_chapters" = "Kapitoly";
+"inspector.file_editions" = "Edice";
+"inspector.status_avsync_diff" = "A/V rozdíl v synchronizaci";
+"inspector.status_total_avsync" = "Celková A/V synchronizace";
+"inspector.status_dropped_frames" = "Vynechané snímky";
+"inspector.status_mistimed_frames" = "Chybně načasované snímky";
+"inspector.status_display_fps" = "Zobrazené FPS";
+"inspector.status_estimated_output_fps" = "Odhad výstupu FPS";
+"inspector.status_estimated_display_fps" = "Odhad zobrazených FPS:";
+"inspector.status_watch" = "Sledovat";
+"inspector.watch_column_name" = "Název";
+"inspector.watch_column_value" = "Hodnota";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Načítá se… %d%%";
 "main.opening_stream" = "Otevírám stream…";
-"main.seeking_indicator" = "Vyhledávám…";
+"main.seeking_indicator" = "Posouvám…";
 "osc.precision" = "Přesnost";
 "osc.1s" = "1 sekunda";
 "osc.100ms" = "100 milisekund";
@@ -153,8 +218,6 @@
 "preference.title" = "Nastavení";
 "preference.general" = "Obecné";
 "preference.ui" = "Rozhraní";
-"preference.video_audio" = "Video a zvuk";
-"preference.subtitle" = "Titulky";
 "preference.network" = "Síť";
 "preference.control" = "Ovládání";
 "preference.keybindings" = "Klávesové zkratky";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Plug-iny";
 "preference.utilities" = "Utility";
 "preference.scripts" = "Skripty";
-"preference.not_logged_in" = "Nepřihlášen";
-"preference.logged_in_as" = "Přihlášen jako %@";
-"preference.system_media_control" = "Používat systémové multimediální klávesy";
-
-"preference.key_binding_hint_1" = "Pro úpravy konfiguračního souboru klávesových zkratek, vytvořte jejich kopii kliknutím na „Duplikovat…“.";
-"preference.key_binding_hint_2" = "Pro změnu klávesové zkratky, klikněte dvakrát na odpovídající řádek po pravé straně.";
-
-"preference.enable_adv_settings" = "Povolit pokročilá nastavení";
-
-"preference.sub_override_level.no" = "Žádná";
-"preference.sub_override_level.force" = "Vynucená";
-"preference.sub_override_level.scale" = "S měřítkem";
-"preference.sub_override_level.strip" = "Úplná";
-"preference.sub_override_level.yes" = "Základní";
-
-"preference.sub_override_level.descriptive_text.no" = "Vykreslí titulky dle specifikací ve skriptech titulků, bez přepsání.";
-"preference.sub_override_level.descriptive_text.force" = "Použít všechny styly titulků.";
-"preference.sub_override_level.descriptive_text.scale" = "V této části použít kromě nastavení stylu také nastavení měřítka.";
-"preference.sub_override_level.descriptive_text.strip" = "Radikálně odebrat z titulků všechny ASS značky a styly.";
-"preference.sub_override_level.descriptive_text.yes" = "Použít všechna nastavení stylu v této části.";
-
-"preference.ytdl_plugin_not_installed" = "Pro pokročilé funkce jako jsou stahování videa a automatické aktualizace yt-dlp nainstalujte Online Media plug-in pomocí výběru „Instalovat z GitHubu“ v Nastavení > Plug-iny.";
-"preference.ytdl_plugin_installed" = "Vestavěná podpora youtube-dl je zakázána, protože je nainstalován Online media plug-in.";
 
 "menu.volume" = "Hlasitost: %@";
 "menu.volume_muted" = "Hlasitost: %@ (Ztlumeno)";
@@ -463,7 +503,7 @@
 "touchbar.rewind" = "Přetočit";
 "touchbar.fast_forward" = "Rychle vpřed";
 "touchbar.play_pause" = "Přehrát/pozastavit";
-"touchbar.seek" = "Vyhledat";
+"touchbar.seek" = "Posuv";
 "touchbar.time" = "Pozice";
 "touchbar.remainingTimeOrTotalDuration" = "Zbývající čas / Celková délka";
 "touchbar.toggle_pip" = "Přepnout obraz v obrazu";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "Tento plug-in může číst nebo zapisovat soubory na disk, které mohou obsahovat citlivé informace. Může také spouštět jiné programy nebo aplikace, které mohou poškodit váš počítač. Ujistěte se, že jste ověřili jeho zdroj.";
 
 "plugin.install" = "Instalovat";
-"plugin.installed" = "Nainstalován";
-"plugin.not_installed" = "Není nainstalován";
 "plugin.local" = "Nainstalován místně";
 "alert.plugin.install_error" = "Při instalaci došlo k chybě: %@";
 "alert.invalid_url" = "URL adresa je neplatná.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Stahování plug-inu selhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_unpackage" = "Rozbalování plug-inu selhalo.\n\nVýstup:%@\n";
 "plugin.install_error.cannot_load" = "IINA nemůže načíst tento plug-in. Může být v chybném formátu.";
-"plugin.check_for_updates" = "Vyhledávat aktualizace";
 "plugin.updating" = "Stahuje se aktualizace…";
 
 // Log window
@@ -653,7 +690,7 @@
 "settings.enableHdrSupport.label" = "Povolit HDR režim";
 "settings.enableLiveText.desc" = "Zobrazovat překryvnou vrstvu Živého textu na pozastavených snímcích videa pro rozpoznávání textu. Vyžaduje macOS 13 nebo novější.";
 "settings.enableLiveText.label" = "Živý text";
-"settings.enableToneMapping.label" = "Povolit mapování tonality";
+"settings.enableToneMapping.label" = "Povolit mapování tónů";
 "settings.forceDedicatedGPU.desc" = "Vždy použít samostatný grafický procesor pro vykreslování (pokud existuje). Toto umožňuje zvýšit výkon, ale může zkrátit výdrž baterie.";
 "settings.forceDedicatedGPU.label" = "Vynutit používání samostatného grafického procesoru";
 "settings.hardwareDecoder.items.0" = "Zakázáno";
@@ -666,11 +703,11 @@
 "settings.loadIccProfile.desc" = "Načíst ICC profil pro aktuální displej a použít jej k transformaci RGB videa na výstup obrazovky. (Pouze pro režim SDR)";
 "settings.loadIccProfile.label" = "Načíst ICC profil";
 "settings.toneMappingAlgorithm.label" = "Algoritmus";
-"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
-"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
-"settings.toneMappingParamOverride.label" = "Tuning parameter";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
-"settings.toneMappingTargetPeak.label" = "Cílové maximum";
+"settings.toneMappingAlgorithm.desc" = "Algoritmus použitý pro mapování tónů obrazu na cílový displej.";
+"settings.toneMappingParamOverride.desc" = "Parametr pro doladění algoritmu mapování tónů. Výchozí hodnota je nastavená specificky pro daný algoritmus. Povolením tohoto nastavení můžete tuto výchozí hodnotu přepsat.";
+"settings.toneMappingParamOverride.label" = "Parametr ladění";
+"settings.toneMappingTargetPeak.desc" = "Změřený špičkový jas displeje. Ve výchozím nastavení IINA tuto hodnotu detekuje. Pokud detekce selže, cílový špičkový jas se nastaví na vhodnou hodnotu podle přenosových charakteristik displeje. Povolením tohoto nastavení můžete jas displeje zadat ručně.";
+"settings.toneMappingTargetPeak.label" = "Cílový špičkový jas";
 "settings.videoThreads.desc" = "Výchozí: 0 (Automaticky)";
 "settings.videoThreads.label" = "Počet vláken";
 
@@ -765,19 +802,19 @@
 "settings.useMediaKeys.label" = "Používat systémové multimediální klávesy";
 
 // Settings - Network
-"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
-"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
-"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
-"settings.cachePauseInitial.label" = "Buffer before starting playback";
-"settings.defaultCacheSize.desc" = "Default: 153,600";
-"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
-"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.cachePauseWait.desc" = "Počet sekund, které se musí načíst do mezipaměti před opětovným spuštěním přehrávání, pokud došlo k aktivaci režimu načítání. Tuto hodnotu zvyšte, pokud přehrávání opakovaně a rychle vrací do režimu načítání.\n\nVýchozí: 1";
+"settings.cachePauseWait.label" = "Doba načítání dopředu (v sekundách)";
+"settings.cachePauseInitial.desc" = "Spustit režim ukládání do vyrovnávací paměti před spuštěním přehrávání. Tím lze zajistit plynulé spuštění přehrávání výměnou za chvíli čekání, než se síťová data načtou dopředu a uloží do vyrovnávací paměti.";
+"settings.cachePauseInitial.label" = "Před spuštěním přehrávání ukládat do vyrovnávací paměti ";
+"settings.defaultCacheSize.desc" = "Výchozí: 153600";
+"settings.defaultCacheSize.label" = "Velikost vyrovnávací paměti (KB)";
+"settings.enableCache.label" = "Načítat dopředu a ukládat síťová data do vyrovnávací paměti";
 "settings.httpProxy.desc" = "Vyžaduje restartování IINA.";
 "settings.httpProxy.label" = "HTTP proxy";
-"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.desc" = "Výchozí: 36000";
 "settings.secPrefech.label" = "Načtených sekund předem";
-"settings.showBufferingThrobber.label" = "Show throbber when buffering";
-"settings.showSeekingThrobber.label" = "Zobrazit ikonu načítání při vyhledávání";
+"settings.showBufferingThrobber.label" = "Zobrazovat ikonu načítání při ukládání do vyrovnávací paměti";
+"settings.showSeekingThrobber.label" = "Zobrazit ikonu načítání při posuvu";
 "settings.transportRTSPThrough.items.0" = "Automaticky";
 "settings.transportRTSPThrough.label" = "Přenést RTSP stream pomocí";
 "settings.userAgent.label" = "Uživatelský klient";
@@ -801,16 +838,16 @@
 "settings.subAutoLoadIINA.items.1" = "Titulků obsahující název souboru";
 "settings.subAutoLoadIINA.items.2" = "Detekovat inteligentně";
 "settings.subAutoLoadIINA.label" = "Automatické načítání";
-"settings.subAutoLoadPriorityString.desc" = "Seznam řetězců oddělte čárkami.";
+"settings.subAutoLoadPriorityString.desc" = "Zadejte seznam řetězců oddělený čárkami.";
 "settings.subAutoLoadPriorityString.label" = "Titulky obsahující název souboru mají přednost";
 "settings.subAutoLoadSearchPath.desc" = "Složky oddělte dvojtečkou (:). Relativní cesty a zástupné znaky (*) na konci jsou povolené.";
 "settings.subAutoLoadSearchPath.label" = "Hledat titulky také v následujících složkách";
 "settings.subBlur.label" = "Rozostření";
 "settings.subBold.desc" = "Sans-serif";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
-"settings.subBorderStyle.items.3" = "Opaque Box";
-"settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.items.1" = "Obrys a stín";
+"settings.subBorderStyle.items.3" = "Neprůhledné pozadí";
+"settings.subBorderStyle.items.4" = "Průhledné pozadí";
+"settings.subBorderStyle.label" = "Styl ohraničení";
 "settings.subBold.label" = "Tučné";
 "settings.subItalic.label" = "Kurzíva";
 "settings.subLang.desc" = "Tato volba bude uložena jako ISO 639-2 kód a bude kompatibilní s mpv a opensubtitles.";
@@ -840,9 +877,9 @@
 "settings.controlBarStickToCenter.label" = "Přichytit ke středu při táhnutí";
 "settings.disableAnimations.desc" = "Pokud je v macOS ve volbách zpřístupnění zapnuta funkce omezení pohybu, IINA omezí pohyblivé prvky uživatelského rozhraní, o nichž je známo, že způsobují problémy osobám s vestibulárními poruchami. Pokud by to nebylo dostatečné, lze toto nastavení použít k dalšímu omezení pohybu eliminováním animací uživatelského rozhraní.";
 "settings.disableAnimations.label" = "Zakázat animace";
-"settings.disableOSDFileStartMsg.label" = "Otevření souboru";
+"settings.disableOSDFileStartMsg.label" = "Spuštění souboru";
 "settings.disableOSDPauseResumeMsgs.label" = "Pozastavení/pokračování";
-"settings.disableOSDSeekMsg.label" = "Posunutí";
+"settings.disableOSDSeekMsg.label" = "Posuvu";
 "settings.disableOSDSpeedMsg.label" = "Rychlosti";
 "settings.disablePlaySliderScrolling.label" = "Zabránit tomu, aby posouvání na myši měnilo pozici přehrávání";
 "settings.disableVolumeSliderScrolling.label" = "Zabránit tomu, aby posuvání na myši měnilo hlasitost";
@@ -899,7 +936,7 @@
 "settings.$About" = "O plug-inu";
 "settings.$Accessibility" = "Zpřístupnění";
 "settings.$AdditionalMpvOptions" = "Další možnosti mpv";
-"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$AdditionalMpvOptions.desc" = "Vložte volbu ve formátu klíč=hodnota pro automatické vyplnění obou polí.";
 "settings.$Advanced" = "Pokročilé";
 "settings.$Align" = "Zarovnat";
 "settings.$AlwaysWhenPlaying" = "Vždy při přehrávání nového souboru";
@@ -932,7 +969,7 @@
 "settings.$DefaultApplication" = "Výchozí aplikace";
 "settings.$DefaultEncoding" = "Výchozí kódování";
 "settings.$DeleteAllPlaybackHistories" = "Smaže celou historii přehrávání a položky v nabídce „Otevřít poslední položku“.";
-"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
+"settings.$DeleteAllWatchLater" = "Smaže všechny soubory ve složce „přehrát později“. Tyto soubory obsahují všechny uložené pozice přehrávání a nastavení použitá při přehrávání.";
 "settings.$DoNotResize" = "Neměnit velikost";
 "settings.$DuplicateCurrentSet" = "Duplikovat aktuální sadu…";
 "settings.$FailedToLoadThePage" = "Nepodařilo se načíst stránku.";
@@ -990,7 +1027,7 @@
 "settings.$RestoreAllAlertsThat" = "Obnovit všechna upozornění, která byla potlačena zaškrtnutím políčka „Tuto zprávu již příště nezobrazovat“.";
 "settings.$RestoreSuppressedAlerts" = "Obnovit potlačená upozornění";
 "settings.$SPDIFOutput" = "S/PDIF výstup";
-"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$SPDIFOutputWarning" = "Seznam kodeků, pro které se má použít přímý průchod komprimovaného zvuku (passthrough).\n\nVarování: Pro použití tohoto nastavení obvykle není důvod. Rozhraní HDMI podporuje nekomprimované vícekanálové PCM a bezztrátové dekódování DTS-HD podporuje DCA dekodér knihovny FFmpeg. Pokud výstupní zařízení nepodporuje S/PDIF a toto nastavení je povolené, přehrávání se nemusí spustit.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Snímky obrazovky";
 "settings.$SetIINAAsTheDefault" = "Nastavit IINA jako výchozí aplikaci";
@@ -1010,7 +1047,7 @@
 "settings.$Toolbar" = "Panel nástrojů";
 "settings.$Trackpad" = "Trackpad";
 "settings.$Uninstall" = "Odinstalovat";
-"settings.$Volume" = "hlasitost";
+"settings.$Volume" = "Hlasitost";
 "settings.$Website" = "Webová stránka";
 "settings.$WhenEnteringPIP" = "Při spuštění obrazu v obraze";
 "settings.$WhenMediaIsOpened" = "Po otevření souboru";

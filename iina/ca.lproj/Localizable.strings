@@ -9,8 +9,6 @@
 
 "general.on" = "Activat";
 "general.off" = "Desactivat";
-"general.login" = "Inicia la sessió";
-"general.logout" = "Tanca la sessió";
 "general.ok" = "D'acord";
 "general.cancel" = "Cancel·la";
 "general.done" = "Fet";
@@ -30,15 +28,82 @@
 "guide.faq" = "Preguntes freqüents";
 
 // Initial Window
-"initial.announcement" = "Estàs fent servir una versió %@ d'IINA";
+"initial.announcement" = "Estàs fent servir una versió beta d'IINA";
 "initial.beta.desc" = "Si vols tornar a una versió de llançament, desmarca “rebre actualitzacions beta” a Configuració > General i instal·la una versió estable des del nostre lloc  <a href=\"https://iina.io\">web oficial</a>.";
 "initial.nightly.desc" = "La versió Nightly no es recomana com a versió d’ús diari. Actualment, les compilacions Nightly no admeten l’actualització automàtica. Si us plau, descarrega manualment les versions més recents des del nostre  <a href=\"https://nightly.iina.io\">web de nightly</a>.";
 "initial.debug.desc" = "Les versions de depuració normalment no estan optimitzades per al rendiment, per la qual cosa no es recomana utilitzar-les com a versió habitual. Les versions de depuració no admeten actualitzacions automàtiques.
 ";
 "initial.bug_report" = "Informa d'un error a través de <a href=\"https://github.com/iina/iina/issues\">Incidències de GitHub</a>.";
+"initial.rollback" = "Desmarca \"rebre actualitzacions beta\" a les Preferències - General, i installa una versió estable des del nostre <a href=\"https://iina.io\">lloc web oficial</a>.";
+"initial.open_url" = "Obre enllaç…";
+"initial.found_bug" = "Has trobat un error?";
+"initial.resume" = "Reprèn";
+"initial.open" = "Obre…";
+"initial.want_to_rollback" = "Vols tornar a la versió anterior?";
 
 // Inspector Window
 "inspector.error" = "Error";
+"inspector.window_title" = "Inspector";
+"inspector.tab_general" = "General";
+"inspector.tab_tracks" = "Pistes";
+"inspector.tab_file" = "Fitxer";
+"inspector.tab_status" = "Estat";
+"inspector.segment_general" = "General";
+"inspector.segment_tracks" = "Pistes";
+"inspector.segment_file" = "Fitxer";
+"inspector.segment_status" = "Estat";
+"inspector.video_section" = "VÍDEO";
+"inspector.video_format" = "Format";
+"inspector.video_codec" = "Còdec";
+"inspector.video_hw_decoder" = "Decodificador per hardware";
+"inspector.video_primaries" = "Bàsics";
+"inspector.video_colorspace" = "Espai de color";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Controlador";
+"inspector.video_size" = "Mida";
+"inspector.video_bitrate" = "Taxa de bits";
+"inspector.video_fps" = "FPS";
+"inspector.audio_section" = "ÀUDIO";
+"inspector.audio_format" = "Format";
+"inspector.audio_codec" = "Còdec";
+"inspector.audio_driver" = "Controlador";
+"inspector.audio_channels" = "Canals";
+"inspector.audio_bitrate" = "Taxa de bits";
+"inspector.audio_sample_rate" = "Freqüència de mostratge";
+"inspector.track_label" = "Pista";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Propietats";
+"inspector.track_default" = "Per defecte";
+"inspector.track_forced" = "Forçat";
+"inspector.track_selected" = "Seleccionat";
+"inspector.track_external" = "Extern";
+"inspector.track_source_id" = "ID d'órígen";
+"inspector.track_title" = "Títol";
+"inspector.track_language" = "Idioma";
+"inspector.track_file_path" = "Camí al fitxer";
+"inspector.track_codec" = "Còdec";
+"inspector.track_decoder" = "Descodificador";
+"inspector.track_fps" = "FPS";
+"inspector.track_channels" = "Canals";
+"inspector.track_sample_rate" = "Freqüència de mostratge";
+"inspector.file_path" = "Camí al fitxer";
+"inspector.file_title" = "Títol";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Mida";
+"inspector.file_format" = "Format";
+"inspector.file_duration" = "Duració";
+"inspector.file_chapters" = "Capítols";
+"inspector.file_editions" = "Edicions";
+"inspector.status_avsync_diff" = "Diferència de sincronització A/V";
+"inspector.status_total_avsync" = "Total de sincronització A/V";
+"inspector.status_dropped_frames" = "Fotogrames perduts";
+"inspector.status_mistimed_frames" = "Fotogrames desajustats";
+"inspector.status_display_fps" = "FPS mostrats";
+"inspector.status_estimated_output_fps" = "FPS estimats";
+"inspector.status_estimated_display_fps" = "FPS estimats";
+"inspector.status_watch" = "Monitoritza";
+"inspector.watch_column_name" = "Nom";
+"inspector.watch_column_value" = "Valor";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Carregant… %d%%";
@@ -154,8 +219,6 @@
 "preference.title" = "Preferències";
 "preference.general" = "General";
 "preference.ui" = "Interfície";
-"preference.video_audio" = "Vídeo i Àudio";
-"preference.subtitle" = "Subtítols";
 "preference.network" = "Xarxa";
 "preference.control" = "Controls";
 "preference.keybindings" = "Dreceres de teclar";
@@ -163,30 +226,6 @@
 "preference.plugins" = "Extensions";
 "preference.utilities" = "Utilitats";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Sense sessió";
-"preference.logged_in_as" = "Amb sessió com a %@";
-"preference.system_media_control" = "Utilitza els controls multimèdia del sistema";
-
-"preference.key_binding_hint_1" = "Per editar les dreces de teclat en el fitxer actual, prem el botó \"Duplica…\" per crear una còpia.";
-"preference.key_binding_hint_2" = "Doble clic a la dreta de la fila per editar la drecera de teclat corresponent.";
-
-"preference.enable_adv_settings" = "Habilita les opcions avançades";
-
-"preference.sub_override_level.no" = "No";
-"preference.sub_override_level.force" = "Força";
-"preference.sub_override_level.scale" = "Escala";
-"preference.sub_override_level.strip" = "tira";
-"preference.sub_override_level.yes" = "Sí";
-
-"preference.sub_override_level.descriptive_text.no" = "Renderitza els subtítols tal com s’especifica als fitxers dels subtítols, sense aplicar modificacions.
-";
-"preference.sub_override_level.descriptive_text.force" = "Aplica tots els estils de subtítol.";
-"preference.sub_override_level.descriptive_text.scale" = "Aplica la configuració d'escala a més de l'estil de configuració en aquesta secció.";
-"preference.sub_override_level.descriptive_text.strip" = "Estripa totes les etiquetes ASS i estils del subtítol.";
-"preference.sub_override_level.descriptive_text.yes" = "Aplica tots els estils de configuració en aquesta secció.";
-
-"preference.ytdl_plugin_not_installed" = "Instal·la el complement \"Online Media\" des del menú \"Complements > instal·la des de GitHub\". Podràs gaudir de funcions com la descàrrega de vídeos i les actualitzacions del complement \"yt-dlp\".";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volum: %@";
 "menu.volume_muted" = "Volum: %@ (Silenciat)";
@@ -485,8 +524,6 @@
 "permissions.file-system.desc" = "Aquest complement pot llegir o escriure fitxers al teu disc, això pot incloure informació sensible. També pot executar altres programes o aplicacions que poden malmetre el teu ordinador. Comprova el seu origen.";
 
 "plugin.install" = "Instal·la";
-"plugin.installed" = "Instal·lat";
-"plugin.not_installed" = "No instal·lat";
 "plugin.local" = "Instal·lat localment";
 "alert.plugin.install_error" = "Hi ha hagut un error durant la instal·lació: %@";
 "alert.invalid_url" = "L'adreça URL no és vàlida.";
@@ -495,7 +532,6 @@
 "plugin.install_error.cannot_download" = "No s'ha pogut descarregar el complement.\n\nSortida:%@\n";
 "plugin.install_error.cannot_unpackage" = "No s'ha pogut descomprimir el complement.\n\nSortida: %@\n";
 "plugin.install_error.cannot_load" = "IINA no pot carregar aquest complement. Potser té un format incorrecte.";
-"plugin.check_for_updates" = "Comprova si hi ha actualitzacions";
 "plugin.updating" = "S'està baixant l'actualització…";
 
 // Log window

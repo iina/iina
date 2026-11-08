@@ -177,13 +177,26 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         stderrHook = hookVal
       }
 
+      // An empty read means EOF. The handlers are also cleared after the process
+      // exits, but that runs on pluginInstance.queue, which a long-running exec
+      // can block, and until then the handler would keep firing on a spinning CPU.
       stdout.fileHandleForReading.readabilityHandler = { file in
-        guard let output = String(data: file.availableData, encoding: .utf8) else { return }
+        let data = file.availableData
+        guard !data.isEmpty else {
+          file.readabilityHandler = nil
+          return
+        }
+        guard let output = String(data: data, encoding: .utf8) else { return }
         stdoutContent += output
         stdoutHook?.call(withArguments: [output])
       }
       stderr.fileHandleForReading.readabilityHandler = { file in
-        guard let output = String(data: file.availableData, encoding: .utf8) else { return }
+        let data = file.availableData
+        guard !data.isEmpty else {
+          file.readabilityHandler = nil
+          return
+        }
+        guard let output = String(data: data, encoding: .utf8) else { return }
         stderrContent += output
         stderrHook?.call(withArguments: [output])
       }

@@ -9,8 +9,6 @@
 
 "general.on" = "On";
 "general.off" = "Off";
-"general.login" = "Login";
-"general.logout" = "Logout";
 "general.ok" = "OK";
 "general.cancel" = "Cancel";
 "general.done" = "Done";
@@ -30,14 +28,81 @@
 "guide.faq" = "Frequently Asked Questions";
 
 // Initial Window
-"initial.announcement" = "You are using a %@ version of IINA";
+"initial.announcement" = "You are using a beta version of IINA";
 "initial.beta.desc" = "If you want to rollback to a release version, uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Report via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Uncheck \"receive beta updates\" from Settings > General, and install a stable release from our <a href=\"https://iina.io\">official website</a>.";
+"initial.open_url" = "Open URL…";
+"initial.found_bug" = "Found a bug?";
+"initial.resume" = "Resume";
+"initial.open" = "Open…";
+"initial.want_to_rollback" = "Want to rollback?";
 
 // Inspector Window
 "inspector.error" = "Error";
+"inspector.window_title" = "Inspector";
+"inspector.tab_general" = "General";
+"inspector.tab_tracks" = "Tracks";
+"inspector.tab_file" = "File";
+"inspector.tab_status" = "Status";
+"inspector.segment_general" = "General";
+"inspector.segment_tracks" = "Tracks";
+"inspector.segment_file" = "File";
+"inspector.segment_status" = "Status";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Format";
+"inspector.video_codec" = "Codec";
+"inspector.video_hw_decoder" = "Hw Decoder";
+"inspector.video_primaries" = "Primaries";
+"inspector.video_colorspace" = "Colorspace";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Driver";
+"inspector.video_size" = "Size";
+"inspector.video_bitrate" = "Bit Rate";
+"inspector.video_fps" = "FPS";
+"inspector.audio_section" = "AUDIO";
+"inspector.audio_format" = "Format";
+"inspector.audio_codec" = "Codec";
+"inspector.audio_driver" = "Driver";
+"inspector.audio_channels" = "Channels";
+"inspector.audio_bitrate" = "Bit Rate";
+"inspector.audio_sample_rate" = "Sample Rate";
+"inspector.track_label" = "Track";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Properties";
+"inspector.track_default" = "Default";
+"inspector.track_forced" = "Forced";
+"inspector.track_selected" = "Selected";
+"inspector.track_external" = "External";
+"inspector.track_source_id" = "Source ID";
+"inspector.track_title" = "Title";
+"inspector.track_language" = "Language";
+"inspector.track_file_path" = "File Path";
+"inspector.track_codec" = "Codec";
+"inspector.track_decoder" = "Decoder";
+"inspector.track_fps" = "FPS";
+"inspector.track_channels" = "Channels";
+"inspector.track_sample_rate" = "Sample Rate";
+"inspector.file_path" = "File path";
+"inspector.file_title" = "Title";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Size";
+"inspector.file_format" = "Format";
+"inspector.file_duration" = "Duration";
+"inspector.file_chapters" = "Chapters";
+"inspector.file_editions" = "Editions";
+"inspector.status_avsync_diff" = "A/V Sync Diff";
+"inspector.status_total_avsync" = "Total A/V Sync";
+"inspector.status_dropped_frames" = "Dropped Frames";
+"inspector.status_mistimed_frames" = "Mistimed Frames";
+"inspector.status_display_fps" = "Display FPS";
+"inspector.status_estimated_output_fps" = "Estimated Output FPS";
+"inspector.status_estimated_display_fps" = "Estimated Disp FPS";
+"inspector.status_watch" = "Watch";
+"inspector.watch_column_name" = "Name";
+"inspector.watch_column_value" = "Value";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Settings";
 "preference.general" = "General";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Subtitle";
 "preference.network" = "Network";
 "preference.control" = "Control";
 "preference.keybindings" = "Key Bindings";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "Utilities";
 "preference.scripts" = "Scripts";
-"preference.not_logged_in" = "Not logged in";
-"preference.logged_in_as" = "Logged in as %@";
-"preference.system_media_control" = "Use system media control";
-
-"preference.key_binding_hint_1" = "To edit key bindings in current configuration file, click \"Duplicate…\" button first to create a copy.";
-"preference.key_binding_hint_2" = "Double click a row at the right side to edit the corresponding key binding.";
-
-"preference.enable_adv_settings" = "Enable advanced settings";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Volume: %@";
 "menu.volume_muted" = "Volume: %@ (Muted)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Check for Updates";
 "plugin.updating" = "Downloading update…";
 
 // Log window

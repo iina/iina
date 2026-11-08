@@ -9,8 +9,6 @@
 
 "general.on" = "Pornit";
 "general.off" = "Oprit";
-"general.login" = "Logare";
-"general.logout" = "Ieșire";
 "general.ok" = "OK";
 "general.cancel" = "Anulează";
 "general.done" = "Gata";
@@ -30,14 +28,81 @@
 "guide.faq" = "Întrebări adresate frecvent";
 
 // Initial Window
-"initial.announcement" = "Folosești o versiune %@ de IINA";
+"initial.announcement" = "Folosești o versiune beta de IINA";
 "initial.beta.desc" = "Dacă vreți să reveniți la o versiune non-beta, debifați \"primește actualizări beta\" din Setări > General, și instalați o actualizare stabilă de pe <a href=\"https://iina.io\">site-ul nostru oficial</a>.";
 "initial.nightly.desc" = "Versiunea Nightly nu este recomandată pentru utilizare zilnică. In momentul de față, versiunile Nightly nu suportă actualizare automată. Vă rugăm să descărcați manual versiunile mai noi de pe <a href=\"https://nightly.iina.io\">site-ul nostru Nightly</a>.";
 "initial.debug.desc" = "Versiunile de debug de obicei nu sunt optimizate pentru performanță, ca urmare nu sunt recomandate în utilizarea de zi cu zi. Versiunile de debug nu suportă actualizări automate.";
 "initial.bug_report" = "Raportați pe <a href=\"https://github.com/iina/iina/issues\">pagina de probleme de pe GitHub</a>.";
+"initial.rollback" = "Debifează „Primește versiuni beta” din Preferințe - General și instalează o versiune stabilă de pe <a href=\"https://iina.io\">site-ul oficial</a>.";
+"initial.open_url" = "Deschide URL…";
+"initial.found_bug" = "Ai găsit un bug?";
+"initial.resume" = "Reia";
+"initial.open" = "Deschide…";
+"initial.want_to_rollback" = "Vrei să revii?";
 
 // Inspector Window
 "inspector.error" = "Eroare";
+"inspector.window_title" = "Inspector";
+"inspector.tab_general" = "General";
+"inspector.tab_tracks" = "Piste";
+"inspector.tab_file" = "Fișier";
+"inspector.tab_status" = "Stare";
+"inspector.segment_general" = "General";
+"inspector.segment_tracks" = "Piste";
+"inspector.segment_file" = "Fișier";
+"inspector.segment_status" = "Stare";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Format";
+"inspector.video_codec" = "Codec";
+"inspector.video_hw_decoder" = "Decodor HW";
+"inspector.video_primaries" = "Primare";
+"inspector.video_colorspace" = "Spațiu de culori";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Driver";
+"inspector.video_size" = "Dimensiune";
+"inspector.video_bitrate" = "Rată de biți";
+"inspector.video_fps" = "Cadre Pe Secunda";
+"inspector.audio_section" = "SUNET";
+"inspector.audio_format" = "Format";
+"inspector.audio_codec" = "Codec";
+"inspector.audio_driver" = "Driver";
+"inspector.audio_channels" = "Canale";
+"inspector.audio_bitrate" = "Rată de biți";
+"inspector.audio_sample_rate" = "Frecvenţă de eșantionare";
+"inspector.track_label" = "Pistă";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Proprietăți";
+"inspector.track_default" = "Implicit";
+"inspector.track_forced" = "Forțat";
+"inspector.track_selected" = "Selectat";
+"inspector.track_external" = "Extern";
+"inspector.track_source_id" = "ID Sursă";
+"inspector.track_title" = "Titlu";
+"inspector.track_language" = "Limbă";
+"inspector.track_file_path" = "Cale Fișier";
+"inspector.track_codec" = "Codec";
+"inspector.track_decoder" = "Decodor";
+"inspector.track_fps" = "Cadre Pe Secunda";
+"inspector.track_channels" = "Canale";
+"inspector.track_sample_rate" = "Frecvență de eșantionare";
+"inspector.file_path" = "Cale fișier";
+"inspector.file_title" = "Titlu";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Dimensiune";
+"inspector.file_format" = "Format";
+"inspector.file_duration" = "Durată";
+"inspector.file_chapters" = "Capitole";
+"inspector.file_editions" = "Ediții";
+"inspector.status_avsync_diff" = "Diferență Sincronizare A/V";
+"inspector.status_total_avsync" = "Sincronizare A/V totală";
+"inspector.status_dropped_frames" = "Cadre Pierdute";
+"inspector.status_mistimed_frames" = "Cadre Nepotrivite";
+"inspector.status_display_fps" = "Arată FPS";
+"inspector.status_estimated_output_fps" = "FPS Ieșire Estimat";
+"inspector.status_estimated_display_fps" = "FPS Afișat Estimat";
+"inspector.status_watch" = "Urmărește";
+"inspector.watch_column_name" = "Nume";
+"inspector.watch_column_value" = "Valoare";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffering...%d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Preferințe";
 "preference.general" = "General";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Subtitrare";
 "preference.network" = "Rețea";
 "preference.control" = "Control";
 "preference.keybindings" = "Atribuiri de taste";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Extensii";
 "preference.utilities" = "Utilități";
 "preference.scripts" = "Scripturi";
-"preference.not_logged_in" = "Nu te-ai logat";
-"preference.logged_in_as" = "Logat ca %@";
-"preference.system_media_control" = "Utilizează controlul media al sistemului";
-
-"preference.key_binding_hint_1" = "Pentru a edita o atribuire de taste in configurația curentă, click pe butonul „Duplicare…” pentru a crea o copie.";
-"preference.key_binding_hint_2" = "Dublu click pe un rând din dreapta pentru a edita tasta atribuită.";
-
-"preference.enable_adv_settings" = "Activează setările avansate";
-
-"preference.sub_override_level.no" = "nu";
-"preference.sub_override_level.force" = "putere";
-"preference.sub_override_level.scale" = "mărime";
-"preference.sub_override_level.strip" = "de tot";
-"preference.sub_override_level.yes" = "da";
-
-"preference.sub_override_level.descriptive_text.no" = "Redă subtitrările precum sunt specificate de script-ul pentru subtitrări, fără a lua în seamă alte preferințe.";
-"preference.sub_override_level.descriptive_text.force" = "Aplică toate stilurile pentru subtitrări.";
-"preference.sub_override_level.descriptive_text.scale" = "Aplică setarea de mărime împreună cu setarea de stil din această secțiune.";
-"preference.sub_override_level.descriptive_text.strip" = "Elimină complet toate tag-urile și stilurile ASS din subtitrare.";
-"preference.sub_override_level.descriptive_text.yes" = "Aplică toate setările de stil din această secțiune.";
-
-"preference.ytdl_plugin_not_installed" = "Instalați extensia Online Media din \"Extensii > Instalați de pe GitHub\" pentru a vă bucura de caracteristici avansate precum descărcare video și actualizări automate yt-dlp.";
-"preference.ytdl_plugin_installed" = "Suportul youtube-dl încorporat este dezactivat deoarece aveți extensia Online Media instalată.";
 
 "menu.volume" = "Volum: %@";
 "menu.volume_muted" = "Volum: %@ (Mut)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "Această extensie poate citi sau scrie fișiere pe discul dvs., inclusiv informații sensibile. De asemenea, poate apela alte programe sau aplicații care vă pot afecta calculatorul. Deci asigurați-vă că ați verificat sursa.";
 
 "plugin.install" = "Instalare";
-"plugin.installed" = "Instalat";
-"plugin.not_installed" = "Nu este instalat";
 "plugin.local" = "Instalat local";
 "alert.plugin.install_error" = "A apărut o eroare în timpul instalării: %@";
 "alert.invalid_url" = "URL-ul nu este valid.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Descărcarea extensiei a eșuat.\n\nMotiv:%@\n";
 "plugin.install_error.cannot_unpackage" = "Dezarhivarea extensiei a eșuat.\n\nMotiv:%@\n";
 "plugin.install_error.cannot_load" = "IINA nu poate încărca aceasta extensie. Ar putea fi într-un format greşit.";
-"plugin.check_for_updates" = "Verifică dacă există actualizări";
 "plugin.updating" = "Se descarcă actualizarea…";
 
 // Log window

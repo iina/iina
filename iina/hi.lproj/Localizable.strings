@@ -9,8 +9,6 @@
 
 "general.on" = "चालू";
 "general.off" = "बंद";
-"general.login" = "लॉग इन";
-"general.logout" = "लोग आउट";
 "general.ok" = "ठीक";
 "general.cancel" = "रद्द";
 "general.done" = "ठीक है";
@@ -30,14 +28,81 @@
 "guide.faq" = "अक्सर पूछे जाने वाले प्रश्न";
 
 // Initial Window
-"initial.announcement" = "आप IINA का %@ संस्करण उपयोग कर रहे हैं";
+"initial.announcement" = "आप IINA के बीटा संस्करण का उपयोग कर रहे हैं";
 "initial.beta.desc" = "अगर आप रिलीज़ संस्करण पर वापस जाना चाहते हैं, तो सेटिंग्स > सामान्य से \"बीटा अपडेट प्राप्त करें\" को अनचेक करें और हमारी <a href=\"https://iina.io\">आधिकारिक वेबसाइट</a> से एक स्थिर रिलीज़ इंस्टॉल करें।";
 "initial.nightly.desc" = "रोज़मर्रा के उपयोग के लिए नाइटली का इस्तेमाल करने की सिफारिश नहीं की जाती। फिलहाल, नाइटली बिल्ड ऑटो अपडेट को सपोर्ट नहीं करते हैं। कृपया हमारी <a href=\"https://nightly.iina.io\">नाइटली वेबसाइट</a> से नए बिल्ड मैन्युअल रूप से डाउनलोड करें।";
 "initial.debug.desc" = "डीबग बिल्ड आमतौर पर परफॉर्मेंस के लिए ऑप्टिमाइज़ नहीं होते हैं, इसलिए उन्हें रोज़मर्रा के उपयोग के लिए इस्तेमाल करने की सिफारिश नहीं की जाती। डीबग बिल्ड ऑटो अपडेट को सपोर्ट नहीं करते हैं।";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">गिटहब इश्यूज़</a> पर रिपोर्ट करें।";
+"initial.rollback" = "प्राथमिकता - जेनरल से \"बीटा अपडेट प्राप्त करें\" को अनचेक करें, और हमारी <a href=\"https://iina.io\">ऑफिशियल वेबसाइट</a> से स्टेबल रिलीज इंस्टॉल करें।";
+"initial.open_url" = "यूआरएल खोलें…";
+"initial.found_bug" = "एक बग मिला?";
+"initial.resume" = "रिज्यूम";
+"initial.open" = "खोलें…";
+"initial.want_to_rollback" = "रोलबैक करना चाहते हैं?";
 
 // Inspector Window
 "inspector.error" = "त्रुटि";
+"inspector.window_title" = "इंस्पेक्टर";
+"inspector.tab_general" = "सामान्य";
+"inspector.tab_tracks" = "ट्रैक्स";
+"inspector.tab_file" = "फ़ाइल";
+"inspector.tab_status" = "स्थिति";
+"inspector.segment_general" = "सामान्य";
+"inspector.segment_tracks" = "ट्रैक्स";
+"inspector.segment_file" = "फ़ाइल";
+"inspector.segment_status" = "स्थिति";
+"inspector.video_section" = "वीडियो";
+"inspector.video_format" = "फार्मेट";
+"inspector.video_codec" = "कोडेक";
+"inspector.video_hw_decoder" = "Hw डिकोडर";
+"inspector.video_primaries" = "प्राथमिक";
+"inspector.video_colorspace" = "कलर स्पेस";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "ड्राइवर";
+"inspector.video_size" = "आकार";
+"inspector.video_bitrate" = "बिट दर";
+"inspector.video_fps" = "एफपीएस";
+"inspector.audio_section" = "ऑडियो";
+"inspector.audio_format" = "फार्मेट";
+"inspector.audio_codec" = "कोडेक";
+"inspector.audio_driver" = "ड्राइवर";
+"inspector.audio_channels" = "चैनल";
+"inspector.audio_bitrate" = "बिट दर";
+"inspector.audio_sample_rate" = "नमूना दर";
+"inspector.track_label" = "ट्रैक";
+"inspector.track_id" = "आईडी";
+"inspector.track_properties" = "गुण";
+"inspector.track_default" = "डिफ़ॉल्ट";
+"inspector.track_forced" = "मजबूर";
+"inspector.track_selected" = "चयनित";
+"inspector.track_external" = "बाहरी";
+"inspector.track_source_id" = "स्रोत आईडी";
+"inspector.track_title" = "शीर्षक";
+"inspector.track_language" = "भाषा";
+"inspector.track_file_path" = "फ़ाइल पथ";
+"inspector.track_codec" = "कोडेक";
+"inspector.track_decoder" = "डिकोडर";
+"inspector.track_fps" = "एफपीएस";
+"inspector.track_channels" = "चैनल";
+"inspector.track_sample_rate" = "नमूना दर";
+"inspector.file_path" = "फ़ाइल पथ";
+"inspector.file_title" = "शीर्षक";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "आकार";
+"inspector.file_format" = "फार्मेट";
+"inspector.file_duration" = "अवधि";
+"inspector.file_chapters" = "अध्याय";
+"inspector.file_editions" = "संस्करण";
+"inspector.status_avsync_diff" = "A/V सिंक डिफ";
+"inspector.status_total_avsync" = "कुल A/V सिंक";
+"inspector.status_dropped_frames" = "गिरा फ्रेम्स";
+"inspector.status_mistimed_frames" = "धुंधली तख्ती";
+"inspector.status_display_fps" = "एफपीएस प्रदर्शित करें";
+"inspector.status_estimated_output_fps" = "अनुमानित उत्पादन एफपीएस";
+"inspector.status_estimated_display_fps" = "अनुमानित विवाद एफपीएस";
+"inspector.status_watch" = "देखें";
+"inspector.watch_column_name" = "नाम";
+"inspector.watch_column_value" = "मूल्य";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "बफरिंग… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "पसंद";
 "preference.general" = "सामान्य";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "उपशीर्षक";
 "preference.network" = "नेटवर्क";
 "preference.control" = "नियंत्रण";
 "preference.keybindings" = "कुंजी बाइंडिंग";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Plugins";
 "preference.utilities" = "उपयोगिताएँ";
 "preference.scripts" = "स्क्रिप्ट";
-"preference.not_logged_in" = "लोग इन नहीं है";
-"preference.logged_in_as" = "%@ के रूप में लॉग इन किया";
-"preference.system_media_control" = "सिस्टम मीडिया नियंत्रण का उपयोग करें";
-
-"preference.key_binding_hint_1" = "वर्तमान कॉन्फ़िगरेशन फ़ाइल में मुख्य बाइंडिंग को संपादित करने के लिए, प्रतिलिपि बनाने के लिए सबसे पहले \"डुप्लीकेट…\" बटन पर क्लिक करें।";
-"preference.key_binding_hint_2" = "संबंधित कुंजी बंधन को संपादित करने के लिए दाईं ओर एक पंक्ति पर डबल क्लिक करें।";
-
-"preference.enable_adv_settings" = "उन्नत सेटिंग्स सक्षम करें";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "स्ट्रिप";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "ध्वनि: %@";
 "menu.volume_muted" = "Volume: %@ (Muted)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "अद्यतन के लिए जाँच";
 "plugin.updating" = "Downloading update…";
 
 // Log window

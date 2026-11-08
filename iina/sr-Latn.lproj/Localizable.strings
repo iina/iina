@@ -9,8 +9,6 @@
 
 "general.on" = "Uključeno";
 "general.off" = "Isključeno";
-"general.login" = "Prijavi me";
-"general.logout" = "Odjavi me";
 "general.ok" = "U redu";
 "general.cancel" = "Otkaži";
 "general.done" = "Gotovo";
@@ -30,14 +28,81 @@
 "guide.faq" = "Često postavljena pitanja";
 
 // Initial Window
-"initial.announcement" = "Koristite verziju %@ programa IINA";
+"initial.announcement" = "Koristite beta verziju programa IINA";
 "initial.beta.desc" = "Ako želite da se vratite na stabilno izdanje, opozovite izbor stavke „primaj beta ažuriranja“ u okviru opcije Željene postavke – Opšte postavke, a zatim instalirajte stabilno izdanje sa <a href=\"https://iina.io\">zvaničnog veb-sajta</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Izdanja za otklanjanje grešaka obično nisu optimizovana za performanse, tako da se ne preporučuju za svakodnevnu upotrebu. Izdanja za otklanjanje grešaka ne podržavaju automatsko ažuriranje.";
 "initial.bug_report" = "Prijavite putem <a href=\"https://github.com/iina/iina/issues\">problema na GitHubu</a>.";
+"initial.rollback" = "Opozovite izbor stavke „primaj beta ažuriranja“ u okviru opcije Željene postavke – Opšte postavke, a zatim instalirajte stabilno izdanje sa <a href=\"https://iina.io\">zvaničnog veb-sajta</a>.";
+"initial.open_url" = "Otvori URL…";
+"initial.found_bug" = "Pronašli ste grešku?";
+"initial.resume" = "Nastavi";
+"initial.open" = "Otvori…";
+"initial.want_to_rollback" = "Vratite se na prethodnu verziju?";
 
 // Inspector Window
 "inspector.error" = "Grеška";
+"inspector.window_title" = "Nadzornik";
+"inspector.tab_general" = "Opšte";
+"inspector.tab_tracks" = "Zapisi";
+"inspector.tab_file" = "Datoteka";
+"inspector.tab_status" = "Status";
+"inspector.segment_general" = "Opšte";
+"inspector.segment_tracks" = "Zapisi";
+"inspector.segment_file" = "Datoteka";
+"inspector.segment_status" = "Status";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Format";
+"inspector.video_codec" = "Kodek";
+"inspector.video_hw_decoder" = "Hardverski dekoder";
+"inspector.video_primaries" = "Primaries";
+"inspector.video_colorspace" = "Colorspace";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Pokretački program";
+"inspector.video_size" = "Veličina";
+"inspector.video_bitrate" = "Brzina protoka";
+"inspector.video_fps" = "Kadrova u sekundi";
+"inspector.audio_section" = "AUDIO";
+"inspector.audio_format" = "Format";
+"inspector.audio_codec" = "Kodek";
+"inspector.audio_driver" = "Pokretački program";
+"inspector.audio_channels" = "Kanali";
+"inspector.audio_bitrate" = "Brzina protoka";
+"inspector.audio_sample_rate" = "Brzina uzorka";
+"inspector.track_label" = "Zapis";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Svojstva";
+"inspector.track_default" = "Podrazumevano";
+"inspector.track_forced" = "Nametnuto";
+"inspector.track_selected" = "Izabrano";
+"inspector.track_external" = "Eksterno";
+"inspector.track_source_id" = "ID izvora";
+"inspector.track_title" = "Naslov";
+"inspector.track_language" = "Jezik";
+"inspector.track_file_path" = "Putanja datoteke";
+"inspector.track_codec" = "Kodek";
+"inspector.track_decoder" = "Dekoder";
+"inspector.track_fps" = "Kadrova u sekundi";
+"inspector.track_channels" = "Kanali";
+"inspector.track_sample_rate" = "Brzina uzorka";
+"inspector.file_path" = "Putanja datoteke";
+"inspector.file_title" = "Naslov";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Veličina";
+"inspector.file_format" = "Format";
+"inspector.file_duration" = "Trajanje";
+"inspector.file_chapters" = "Poglavlja";
+"inspector.file_editions" = "Verzije";
+"inspector.status_avsync_diff" = "Razlika u A/V sinhronizaciji";
+"inspector.status_total_avsync" = "Ukupna A/V sinhronizacija";
+"inspector.status_dropped_frames" = "Ispuštenih kadrova";
+"inspector.status_mistimed_frames" = "Nesinhronizovanih kadrova";
+"inspector.status_display_fps" = "Prikaži broj kadrova u sekundi";
+"inspector.status_estimated_output_fps" = "Približni broj kadrova";
+"inspector.status_estimated_display_fps" = "Približni broj prikazanih kadrova";
+"inspector.status_watch" = "Nadgledaj";
+"inspector.watch_column_name" = "Naziv";
+"inspector.watch_column_value" = "Vrednost";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Smeštanje u bafer… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Željene postavke";
 "preference.general" = "Opšte postavke";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Titl";
 "preference.network" = "Mreža";
 "preference.control" = "Kontrole";
 "preference.keybindings" = "Prečice na tastaturi";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Dodatne komponente";
 "preference.utilities" = "Uslužni programi";
 "preference.scripts" = "Skripte";
-"preference.not_logged_in" = "Niste prijavljeni";
-"preference.logged_in_as" = "Prijavljeni ste kao %@";
-"preference.system_media_control" = "Koristi sistemske kontrole medija";
-
-"preference.key_binding_hint_1" = "Da biste izmenili prečice na tastaturi u trenutnoj konfiguracionoj datoteci, najpre kliknite na dugme „Dupliraj…“ da biste napravili kopiju.";
-"preference.key_binding_hint_2" = "Dvaput kliknite na red na desnoj strani da biste izmenili odgovarajuću prečicu na tastaturi.";
-
-"preference.enable_adv_settings" = "Omogući napredne postavke";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "ukloni";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Apply all subtitle styles.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Apply all the style settings in this section.";
-
-"preference.ytdl_plugin_not_installed" = "Install the Online Media plugin from \"Plugins > Install from GitHub\" to enjoy advanced features such and video downloading and auto yt-dlp updates.";
-"preference.ytdl_plugin_installed" = "The built-in youtube-dl support is disabled since you have the Online media plugin installed.";
 
 "menu.volume" = "Jačina zvuka: %@";
 "menu.volume_muted" = "Jačina zvuka: %@ (isključen zvuk)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "This plugin can read or write files on your disk, which may include sensitive information. It can also execute other programs or applications that can harm your computer. So be sure to verify the source.";
 
 "plugin.install" = "Install";
-"plugin.installed" = "Installed";
-"plugin.not_installed" = "Not Installed";
 "plugin.local" = "Installed locally";
 "alert.plugin.install_error" = "Error occurred during the installation: %@";
 "alert.invalid_url" = "The URL is invalid.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Failed to download the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_unpackage" = "Failed to unpackage the plugin.\n\nOutput:%@\n";
 "plugin.install_error.cannot_load" = "IINA cannot load this plugin. It might be in the wrong format.";
-"plugin.check_for_updates" = "Proveri da li postoje ažuriranja";
 "plugin.updating" = "Downloading update…";
 
 // Log window

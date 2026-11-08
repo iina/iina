@@ -9,8 +9,6 @@
 
 "general.on" = "Be";
 "general.off" = "Ki";
-"general.login" = "Bejelentkezés";
-"general.logout" = "Kijelentkezés";
 "general.ok" = "OK";
 "general.cancel" = "Mégse";
 "general.done" = "Kész";
@@ -30,14 +28,81 @@
 "guide.faq" = "Gyakran Ismételt Kérdések";
 
 // Initial Window
-"initial.announcement" = "Ön Az IINA %@ verzióját használja";
+"initial.announcement" = "Ön az IINA béta verzióját használja";
 "initial.beta.desc" = "Amennyiben végleges verzióra váltana, szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállítások > Általános almenüben, és telepítsen stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
 "initial.nightly.desc" = "A Nightly verzió nem ajánlott mindennapi használatra. Jelenleg a nightly verzió nem támogatja az automatikus frissítést.. Töltsd le a friss verziót a <a href=\"https://nightly.iina.io\">nightly oldalunkról</a>.";
 "initial.debug.desc" = "A hibakeresési verzió általában nincs teljesítményre optimalizálva, ezért nem ajánlott napi használatra. A hibakeresési verziók nem támogatják az automatikus frissítést.";
 "initial.bug_report" = "Jelentés a <a href=\"https://github.com/iina/iina/issues\">GitHub-bugok</a> felületen.";
+"initial.rollback" = "Szüntesse meg a kijelölést a \"béta frissítések\" opciónál a Beállításokban, majd telepítsen egy stabil verziót a <a href=\"https://iina.io\">hivatalos weboldalunkról</a>.";
+"initial.open_url" = "URL megnyitása…";
+"initial.found_bug" = "Hibát talált?";
+"initial.resume" = "Folytatás";
+"initial.open" = "Megnyitás…";
+"initial.want_to_rollback" = "Vissza akarja állítani?";
 
 // Inspector Window
 "inspector.error" = "Hiba";
+"inspector.window_title" = "Felügyelő";
+"inspector.tab_general" = "Általános";
+"inspector.tab_tracks" = "Sávok";
+"inspector.tab_file" = "Fájl";
+"inspector.tab_status" = "Állapot";
+"inspector.segment_general" = "Általános";
+"inspector.segment_tracks" = "Sávok";
+"inspector.segment_file" = "Fájl";
+"inspector.segment_status" = "Állapot";
+"inspector.video_section" = "VIDEÓ";
+"inspector.video_format" = "Formátum";
+"inspector.video_codec" = "Kodek";
+"inspector.video_hw_decoder" = "Hardver dekóder";
+"inspector.video_primaries" = "Elsődlegesek";
+"inspector.video_colorspace" = "Színtér";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Illesztőprogram";
+"inspector.video_size" = "Méret";
+"inspector.video_bitrate" = "Bit sűrűség";
+"inspector.video_fps" = "FPS";
+"inspector.audio_section" = "HANG";
+"inspector.audio_format" = "Formátum";
+"inspector.audio_codec" = "Kodek";
+"inspector.audio_driver" = "Illesztőprogram";
+"inspector.audio_channels" = "Csatornák";
+"inspector.audio_bitrate" = "Bit sűrűség";
+"inspector.audio_sample_rate" = "Mintavételezési ráta";
+"inspector.track_label" = "Szám";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Tulajdonságok";
+"inspector.track_default" = "Alapértelmezett";
+"inspector.track_forced" = "Kényszerített";
+"inspector.track_selected" = "Kiválasztott";
+"inspector.track_external" = "Külső";
+"inspector.track_source_id" = "Forrás ID";
+"inspector.track_title" = "Cím";
+"inspector.track_language" = "Nyelv";
+"inspector.track_file_path" = "Fájl Elérési Útja";
+"inspector.track_codec" = "Kodek";
+"inspector.track_decoder" = "Dekóder";
+"inspector.track_fps" = "FPS";
+"inspector.track_channels" = "Csatornák";
+"inspector.track_sample_rate" = "Mintavételi arány";
+"inspector.file_path" = "Fájl elérési útvonal";
+"inspector.file_title" = "Cím";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Méret";
+"inspector.file_format" = "Formátum";
+"inspector.file_duration" = "Időtartam";
+"inspector.file_chapters" = "Fejezetek";
+"inspector.file_editions" = "Kiadások";
+"inspector.status_avsync_diff" = "A/V szinkronizációs különbség";
+"inspector.status_total_avsync" = "Teljes A/V szinkron";
+"inspector.status_dropped_frames" = "Eldobásra került képkockák";
+"inspector.status_mistimed_frames" = "Rosszul időzített képkockák";
+"inspector.status_display_fps" = "FPS megjelenítése";
+"inspector.status_estimated_output_fps" = "Becsült kimeneti FPS";
+"inspector.status_estimated_display_fps" = "Becsült Megj. FPS";
+"inspector.status_watch" = "Megfigyelés";
+"inspector.watch_column_name" = "Név";
+"inspector.watch_column_value" = "Érték";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Pufferelés…%d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Beállítások";
 "preference.general" = "Általános";
 "preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Felirat";
 "preference.network" = "Hálózat";
 "preference.control" = "Vezérlés";
 "preference.keybindings" = "Gyorsgombok";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Pluginok";
 "preference.utilities" = "Eszközök";
 "preference.scripts" = "Szkriptek";
-"preference.not_logged_in" = "Nem vagy bejelentkezve";
-"preference.logged_in_as" = "Bejelentkezve, mint %@";
-"preference.system_media_control" = "Rendszer média vezérlők használata";
-
-"preference.key_binding_hint_1" = "A billentyűkiosztás módosításához a jelenlegi fájlban, először nyomja meg a \"Duplikáció...\" gombot egy másolat létrehozásához.";
-"preference.key_binding_hint_2" = "Kattintson duplán egy sorra a jobb oldalon a megfelelő billentyű kiosztás szerkesztéséhez.";
-
-"preference.enable_adv_settings" = "Haladó beállítások engedélyezése";
-
-"preference.sub_override_level.no" = "nem";
-"preference.sub_override_level.force" = "kényszerített";
-"preference.sub_override_level.scale" = "méretezés";
-"preference.sub_override_level.strip" = "csík";
-"preference.sub_override_level.yes" = "igen";
-
-"preference.sub_override_level.descriptive_text.no" = "A feliratokat a feliratozási szkriptek által megadott módon, felülírások nélkül adja vissza.";
-"preference.sub_override_level.descriptive_text.force" = "Minden feliratstílus alkalmazása.";
-"preference.sub_override_level.descriptive_text.scale" = "Az ebben a szakaszban található stílusbeállítások mellett alkalmazza a méretezés beállítását is.";
-"preference.sub_override_level.descriptive_text.strip" = "Alaposan távolítson el minden ASS taget és stílust a feliratból.";
-"preference.sub_override_level.descriptive_text.yes" = "Alkalmazza az összes stílusbeállítást ebben a szakaszban.";
-
-"preference.ytdl_plugin_not_installed" = "Telepítse az Online Media bővítményt a \"Bővítmények > Telepítés a GitHub-ról\" menüpont segítségével, hogy élvezhesse a fejlett képességeket, mint a videó letöltése és az automatikus yt-dlp frissítések.";
-"preference.ytdl_plugin_installed" = "A beépített youtube-dl támogatás nincs engedélyezve, mert az Online Media bővítmény telepítve van.";
 
 "menu.volume" = "Hangerő: %@";
 "menu.volume_muted" = "Hangerő: %@ (Némítva)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "Ez a bővítmény képes olvasni vagy írni a lemezen lévő fájlokat, beleértve az érzékeny információkat is. Más programokat vagy alkalmazásokat is meghívhat, amelyek kárt tehetnek a számítógépében. Ezért mindenképpen ellenőrizze a forrást.";
 
 "plugin.install" = "Telepítés";
-"plugin.installed" = "Telepítve";
-"plugin.not_installed" = "Nincs telepítve";
 "plugin.local" = "Helyben telepítve";
 "alert.plugin.install_error" = "Hiba lépett fel a telepítés során: %@";
 "alert.invalid_url" = "Érvénytelen link.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Nem sikerült letölteni a plugint.\n\nKimenet:%@\n";
 "plugin.install_error.cannot_unpackage" = "Nem sikerült kicsomagolni a plugint.\n\nKimenet:%@\n";
 "plugin.install_error.cannot_load" = "Az IINA nem tudja betölteni ezt a bővítményt. Lehet, hogy rossz formátumban van.";
-"plugin.check_for_updates" = "Frissítések keresése";
 "plugin.updating" = "Frissítés letöltése…";
 
 // Log window

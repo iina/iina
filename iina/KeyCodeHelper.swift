@@ -262,7 +262,6 @@ class KeyCodeHelper {
   ///
   ///     Thus this function will not allow characters made up of multiple code points.
   static func isAllowedInConfFile(_ char: String) -> Bool {
-    let utf8View = char.utf8
     let scalars = char.unicodeScalars
     guard scalars.count == 1 else {
       Logger.log("Character has \(scalars.count) code points")

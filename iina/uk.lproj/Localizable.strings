@@ -9,8 +9,6 @@
 
 "general.on" = "Увімкнути";
 "general.off" = "Вимкнути";
-"general.login" = "Увійти";
-"general.logout" = "Вийти";
 "general.ok" = "ОК";
 "general.cancel" = "Скасувати";
 "general.done" = "Готово";
@@ -18,7 +16,7 @@
 "general.password" = "Пароль";
 "general.na" = "Немає даних";
 "general.no_result" = "Нічого не знайдено";
-"general.no_title" = "No Title";
+"general.no_title" = "Без назви";
 "general.auto" = "Автоматично";
 
 "input.value_is_empty" = "Значення не може бути порожнім.";
@@ -30,14 +28,81 @@
 "guide.faq" = "Часті запитання";
 
 // Initial Window
-"initial.announcement" = "Ви користуєтеся %@ версією IINA";
+"initial.announcement" = "Ви користуєтеся бета-версією IINA";
 "initial.beta.desc" = "Зніміть відмітку «Отримувати бета-оновлення» у розділі налаштувань Параметри → Загальні та встановіть стабільну версію <a href=\"https://iina.io\">з нашого офіційного веб-сайту</a>.";
 "initial.nightly.desc" = "Нічні (тестові) збірки не рекомендовані для щоденного використання. Наразі нічні збірки не підтримують автоматичні оновлення. Завантажуйте новіші збірки вручну <a href=\"https://nightly.iina.io\">з нашого веб-сайту</a>.";
 "initial.debug.desc" = "Збірки налагодження зазвичай не остаточно оптимізовані, тому не рекомендуються для щоденного використання. Збірки налагодження не підтримують автоматичне оновлення.";
 "initial.bug_report" = "Повідомити про проблему <a href=\"https://github.com/iina/iina/issues\">на GitHub</a>.";
+"initial.rollback" = "Зніміть відмітку «Отримувати бета-оновлення» у розділі налаштувань Параметри → Загальні та встановіть стабільну версію <a href=\"https://iina.io\">з нашого офіційного веб-сайту</a>.";
+"initial.open_url" = "Відкрити URL…";
+"initial.found_bug" = "Знайшли помилку?";
+"initial.resume" = "Продовжити";
+"initial.open" = "Відкрити…";
+"initial.want_to_rollback" = "Бажаєте повернутися до попередньої версії?";
 
 // Inspector Window
 "inspector.error" = "Помилка";
+"inspector.window_title" = "Інспектор";
+"inspector.tab_general" = "Загальне";
+"inspector.tab_tracks" = "Доріжки";
+"inspector.tab_file" = "Файл";
+"inspector.tab_status" = "Стан";
+"inspector.segment_general" = "Загальне";
+"inspector.segment_tracks" = "Доріжки";
+"inspector.segment_file" = "Файл";
+"inspector.segment_status" = "Стан";
+"inspector.video_section" = "ВІДЕО";
+"inspector.video_format" = "Формат";
+"inspector.video_codec" = "Кодек";
+"inspector.video_hw_decoder" = "Апар. декодер";
+"inspector.video_primaries" = "Основні характеристики";
+"inspector.video_colorspace" = "Колірний простір";
+"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_driver" = "Драйвер";
+"inspector.video_size" = "Розмір (Ш×В)";
+"inspector.video_bitrate" = "Битрейт";
+"inspector.video_fps" = "Кадр/с";
+"inspector.audio_section" = "АУДІО";
+"inspector.audio_format" = "Формат";
+"inspector.audio_codec" = "Кодек";
+"inspector.audio_driver" = "Драйвер";
+"inspector.audio_channels" = "Канали";
+"inspector.audio_bitrate" = "Бітрейт";
+"inspector.audio_sample_rate" = "Частота дискр";
+"inspector.track_label" = "Доріжка";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Властивості";
+"inspector.track_default" = "Типово";
+"inspector.track_forced" = "Примусово";
+"inspector.track_selected" = "Обрано";
+"inspector.track_external" = "Зовнішній";
+"inspector.track_source_id" = "ID джерела";
+"inspector.track_title" = "Назва";
+"inspector.track_language" = "Мова";
+"inspector.track_file_path" = "Шлях до файлу";
+"inspector.track_codec" = "Кодек";
+"inspector.track_decoder" = "Декодер";
+"inspector.track_fps" = "Кадр/с";
+"inspector.track_channels" = "Каналів";
+"inspector.track_sample_rate" = "Частота дискретизації";
+"inspector.file_path" = "Розташування файлу";
+"inspector.file_title" = "Назва";
+"inspector.file_comment" = "Comment";
+"inspector.file_size" = "Розмір";
+"inspector.file_format" = "Формат";
+"inspector.file_duration" = "Тривалість";
+"inspector.file_chapters" = "Розділи";
+"inspector.file_editions" = "Видання";
+"inspector.status_avsync_diff" = "Різн. синхр. ауд/від";
+"inspector.status_total_avsync" = "Загальна синхронізація аудіо-відео";
+"inspector.status_dropped_frames" = "Пропущено кадрів";
+"inspector.status_mistimed_frames" = "Розсинхрон. кадрів";
+"inspector.status_display_fps" = "Відтвор. кадр/с";
+"inspector.status_estimated_output_fps" = "Орієнт. вихід. кадр/с";
+"inspector.status_estimated_display_fps" = "Орієнт. відтвор. кадр/с";
+"inspector.status_watch" = "Відстеження";
+"inspector.watch_column_name" = "Назва";
+"inspector.watch_column_value" = "Значення";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизація… %d%%";
@@ -153,8 +218,6 @@
 "preference.title" = "Параметри";
 "preference.general" = "Загальні";
 "preference.ui" = "Інтерфейс";
-"preference.video_audio" = "Відео та аудіо";
-"preference.subtitle" = "Субтитри";
 "preference.network" = "Мережа";
 "preference.control" = "Керування";
 "preference.keybindings" = "Призначення клавіш";
@@ -162,29 +225,6 @@
 "preference.plugins" = "Плаґіни";
 "preference.utilities" = "Службові команди";
 "preference.scripts" = "Сценарії";
-"preference.not_logged_in" = "Не зайдено";
-"preference.logged_in_as" = "Зайдено як %@";
-"preference.system_media_control" = "Задіяти системне керування медіафайлами";
-
-"preference.key_binding_hint_1" = "Для призначення клавіатурних скорочень у поточному файлі налаштувань спочатку натисніть на кнопку «Дублювати…», щоб створити копію.";
-"preference.key_binding_hint_2" = "Для редагування призначеного клавіатурного скорочення подвійно клацніть на рядку з правого боку.";
-
-"preference.enable_adv_settings" = "Увімкнути розширені налаштування";
-
-"preference.sub_override_level.no" = "ні";
-"preference.sub_override_level.force" = "сила";
-"preference.sub_override_level.scale" = "масштаб";
-"preference.sub_override_level.strip" = "видалити";
-"preference.sub_override_level.yes" = "так";
-
-"preference.sub_override_level.descriptive_text.no" = "Відображати субтитри, як зазначені в сценарії субтитрів, без змін.";
-"preference.sub_override_level.descriptive_text.force" = "Застосувати всі стилі субтитрів.";
-"preference.sub_override_level.descriptive_text.scale" = "Застосувати налаштування масштабування на додаток до стилів в цьому розділі.";
-"preference.sub_override_level.descriptive_text.strip" = "Радикально вилучати всі теги ASS та стилі з субтитрів.";
-"preference.sub_override_level.descriptive_text.yes" = "Застосувати всі параметри стилів у цьому розділі.";
-
-"preference.ytdl_plugin_not_installed" = "Установіть плагін для онлайн-медіа в розділі «Плагіни > Установлення з GitHub» та отримайте функції завантаження відео та автоматичного оновлення yt-dlp.";
-"preference.ytdl_plugin_installed" = "Вбудована підтримка youtube-dl вимкнена, оскільки ви маєте встановленим плагін для онлайн-медіа.";
 
 "menu.volume" = "Гучність: %@";
 "menu.volume_muted" = "Гучність: %@ (Без звуку)";
@@ -483,8 +523,6 @@
 "permissions.file-system.desc" = "Цей плагін може читати або записувати файли на вашому диску, включаючи конфіденційну інформацію. Також він може викликати інші програми чи програми, які можуть зашкодити комп'ютеру - обов'язково перевіряйте джерело.";
 
 "plugin.install" = "Встановити";
-"plugin.installed" = "Встановлено";
-"plugin.not_installed" = "Не встановлено";
 "plugin.local" = "Встановлено локально";
 "alert.plugin.install_error" = "Сталася помилка під час установки: %@";
 "alert.invalid_url" = "Невірна URL-адреса.";
@@ -493,7 +531,6 @@
 "plugin.install_error.cannot_download" = "Не вдалося завантажити плагін.\n\nРезультат:%@\n";
 "plugin.install_error.cannot_unpackage" = "Не вдалося розпакувати плагін.\n\nРезультат:%@\n";
 "plugin.install_error.cannot_load" = "IINA не може завантажити цей плагін. Можливо, формат плагіну невірний.";
-"plugin.check_for_updates" = "Перевірити наявність оновлень";
 "plugin.updating" = "Завантаження оновлення…";
 
 // Log window

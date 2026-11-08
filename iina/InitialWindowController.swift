@@ -8,8 +8,7 @@
 
 import Cocoa
 
-// FIXME: Move the strings after 1.5.0
-fileprivate let ui = UIHelper(table: "InitialWindowController")
+fileprivate let ui = UIHelper(scope: "initial")
 
 fileprivate extension NSUserInterfaceItemIdentifier {
   static let openFile = NSUserInterfaceItemIdentifier("openFile")
@@ -146,9 +145,9 @@ class InitialWindowController: NSWindowController {
 
     // open button
 
-    let openFileButton = ui.button("qsU-lZ-WQq.title", target: AppDelegate.shared,
+    let openFileButton = ui.button("open", target: AppDelegate.shared,
                                    action: #selector(AppDelegate.openFile(_:)))
-    let openURLButton = ui.button("FKG-Tz-TCV.title", target: AppDelegate.shared,
+    let openURLButton = ui.button("open_url", target: AppDelegate.shared,
                                   action: #selector(AppDelegate.openURL(_:)))
     openFileButton.controlSize = .large
     openURLButton.controlSize = .large
@@ -162,7 +161,7 @@ class InitialWindowController: NSWindowController {
     lastFileContainerView.translatesAutoresizingMaskIntoConstraints = false
     lastFileContainerView.size(height: 32)
     self.lastFileIcon = ui.image("clock.arrow.trianglehead.counterclockwise.rotate.90", "clock", size: 16)
-    let resumeLabel = ui.label("KWZ-BM-GBN.title", canCompress: false)
+    let resumeLabel = ui.label("resume", canCompress: false)
     self.lastFileNameLabel = NSTextField(labelWithString: "")
     lastFileNameLabel.translatesAutoresizingMaskIntoConstraints = false
     lastFileNameLabel.lineBreakMode = .byTruncatingMiddle
@@ -240,11 +239,11 @@ class InitialWindowController: NSWindowController {
   @objc private func showBetaInfoPopover(_ sender: NSButton) {
     let width = CGFloat(240)
     let labels = [
-      "H7D-2H-wQn.title",
-      "s3U-4u-gYp.title",
-      "3aN-Hg-GkT.title",
-      "I6R-Jl-2Jk.title",
-      "BIz-NQ-0qD.title"
+      "announcement",
+      "want_to_rollback",
+      "rollback",
+      "found_bug",
+      "bug_report"
     ].enumerated().map { (index, key) in
       let label = ui.label(key, wrapping: true, canCompress: false)
       label.size(width: width)

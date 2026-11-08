@@ -874,6 +874,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
         player = PlayerCore.activeOrNew
       }
 
+      // pip: before opening, so a window hidden for PiP stays hidden while loading
+      if queryDict["full_screen"] != "1" && queryDict["pip"] == "1" {
+        player.mainWindow.enterPIP()
+      }
+
       // enqueue
       let playlistEmpty = PlayerCore.lastActive.info.$playlist.withLock { $0.isEmpty }
       if let enqueueValue = queryDict["enqueue"], enqueueValue == "1", !playlistEmpty {
@@ -888,9 +893,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       if let fsValue = queryDict["full_screen"], fsValue == "1" {
         // full_screen
         player.mpv.setFlag(MPVOption.Window.fullscreen, true)
-      } else if let pipValue = queryDict["pip"], pipValue == "1" {
-        // pip
-        player.mainWindow.enterPIP()
       }
 
       // mpv options

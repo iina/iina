@@ -346,7 +346,6 @@ struct Preference {
 
     /** Internal */
     static let iinaEnablePluginSystem = Key("iinaEnablePluginSystem")
-    static let enableNewSettings = Key("enableNewSettings")
 
     /// Workaround for issue [#4688](https://github.com/iina/iina/issues/4688)
     /// - Note: This workaround can cause significant slowdown at startup if the list of recent documents contains files on a mounted
@@ -1042,16 +1041,6 @@ struct Preference {
     return Preference.bool(for: .enableLiveText)
   }
   
-  // Expected to be removed later when the new settings window is stable
-  static var enableNewSettings: Bool {
-    set {
-      Preference.set(newValue, for: .enableNewSettings)
-    }
-    get {
-      Preference.bool(for: .enableNewSettings)
-    }
-  }
-
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [
@@ -1236,7 +1225,6 @@ struct Preference {
     .useUserDefinedConfDir: false,
     .userDefinedConfDir: "~/.config/mpv/",
     .iinaEnablePluginSystem: false,
-    .enableNewSettings: true,
 
     .keepOpenOnFileEnd: true,
     .quitWhenNoOpenedWindow: false,

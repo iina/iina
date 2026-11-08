@@ -214,6 +214,9 @@
 "osd.file_loop" = "循环单个文件";
 "osd.playlist_loop" = "循环播放列表";
 "osd.no_loop" = "禁用循环";
+"osd.screenshot.reveal" = "查看";
+"osd.screenshot.edit" = "编辑";
+"osd.screenshot.delete" = "删除";
 
 "preference.title" = "偏好设置";
 "preference.general" = "通用";

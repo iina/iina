@@ -214,6 +214,9 @@
 "osd.file_loop" = "Loop Single File";
 "osd.playlist_loop" = "Loop Playlist";
 "osd.no_loop" = "Disable Looping";
+"osd.screenshot.reveal" = "REVEAL";
+"osd.screenshot.edit" = "EDIT";
+"osd.screenshot.delete" = "DELETE";
 
 "preference.title" = "Settings";
 "preference.general" = "General";

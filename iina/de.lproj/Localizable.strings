@@ -214,6 +214,9 @@
 "osd.file_loop" = "Wiederhole einzelne Datei";
 "osd.playlist_loop" = "Wiedergabeliste wiederholen";
 "osd.no_loop" = "Wiederholen deaktivieren";
+"osd.screenshot.reveal" = "ZEIGEN";
+"osd.screenshot.edit" = "BEARBEITEN";
+"osd.screenshot.delete" = "LÖSCHEN";
 
 "preference.title" = "Einstellungen";
 "preference.general" = "Allgemein";

@@ -214,6 +214,9 @@
 "osd.file_loop" = "Lire en boucle le fichier uniquement";
 "osd.playlist_loop" = "Lire en boucle la liste de lecture";
 "osd.no_loop" = "Désactiver la lecture en boucle";
+"osd.screenshot.reveal" = "RÉVÉLER";
+"osd.screenshot.edit" = "ÉDITER";
+"osd.screenshot.delete" = "SUPPRIMER";
 
 "preference.title" = "Préférences";
 "preference.general" = "Général";

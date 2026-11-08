@@ -214,6 +214,9 @@
 "osd.file_loop" = "1個のファイルを繰り返し再生";
 "osd.playlist_loop" = "プレイリストを繰り返し再生";
 "osd.no_loop" = "繰り返し再生を無効にする";
+"osd.screenshot.reveal" = "表示";
+"osd.screenshot.edit" = "編集";
+"osd.screenshot.delete" = "削除";
 
 "preference.title" = "設定";
 "preference.general" = "一般";

@@ -17,7 +17,7 @@
 "general.na" = "No disponible";
 "general.no_result" = "Sin resultados";
 "general.no_title" = "Sin título";
-"general.auto" = "Auto";
+"general.auto" = "Automática";
 
 "input.value_is_empty" = "El valor no puede estar vacío.";
 "input.already_exists" = "El valor ya existe.";
@@ -695,7 +695,7 @@
 "settings.forceDedicatedGPU.label" = "Forzar GPU dedicado";
 "settings.hardwareDecoder.items.0" = "Deshabilitado";
 "settings.hardwareDecoder.items.0.desc" = "Desactivar la descodificación por hardware.";
-"settings.hardwareDecoder.items.1" = "Auto";
+"settings.hardwareDecoder.items.1" = "Automática";
 "settings.hardwareDecoder.items.1.desc" = "Activar la descodificación por hardware. Sin embargo, la mayoría de los filtros de vídeo no funcionarán correctamente.";
 "settings.hardwareDecoder.items.2" = "Auto (Copia)";
 "settings.hardwareDecoder.items.2.desc" = "Activar la descodificación por hardware. Consumirá el doble de memoria, pero funciona con filtros de vídeo.";
@@ -815,7 +815,7 @@
 "settings.secPrefech.label" = "Segundos para precargar";
 "settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "Mostrar indicador de carga al buscar";
-"settings.transportRTSPThrough.items.0" = "Auto";
+"settings.transportRTSPThrough.items.0" = "Automática";
 "settings.transportRTSPThrough.label" = "Transportar RTSP a través de";
 "settings.userAgent.label" = "Agente de usuario";
 "settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";

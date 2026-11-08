@@ -17,7 +17,7 @@
 "general.na" = "Ikke tilgængelig";
 "general.no_result" = "Ingen resultater";
 "general.no_title" = "No Title";
-"general.auto" = "Auto";
+"general.auto" = "Automatisk";
 
 "input.value_is_empty" = "Værdien kan ikke være tom.";
 "input.already_exists" = "Værdien findes allerede.";
@@ -695,7 +695,7 @@
 "settings.forceDedicatedGPU.label" = "Gennemtving dedikeret GPU";
 "settings.hardwareDecoder.items.0" = "Deaktiveret";
 "settings.hardwareDecoder.items.0.desc" = "Deaktiver hardwareafkodning.";
-"settings.hardwareDecoder.items.1" = "Auto";
+"settings.hardwareDecoder.items.1" = "Automatisk";
 "settings.hardwareDecoder.items.1.desc" = "Aktiver hardwareafkodning. De fleste videofiltre vil ikke virker korrekt.";
 "settings.hardwareDecoder.items.2" = "Auto (Kopi)";
 "settings.hardwareDecoder.items.2.desc" = "Aktiver hardware afkodning. Kræver dobbelt så meget hukommelse, men virker med videofiltre.";

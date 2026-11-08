@@ -366,8 +366,8 @@
 "alert.delete_history.message" = "선택한 재생 기록을 삭제하시겠습니까?";
 "alert.delete_all_history.title" = "재생 기록 지우기";
 "alert.delete_all_history.message" = "재생 기록을 지우겠습니까？";
-"alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.title" = "파일 삭제";
+"alert.delete_file.message" = "선택한 파일들을 휴지통으로 이동하시겠습니까?";
 
 "alert.filter_hwdec.message" = "사용자 비디오 필터를 적용합니다. 그러나 현재 사용 중인 하드웨어 디코더가 비디오 필터를 제대로 지원하지 않을 수도 있습니다. 사용자 필터를 사용하지 않도록 설정하거나, 두 배의 메모리를 사용하는 자동(복사) 방식으로 전환하여 사용할 수 있습니다.\n이전에 설정했던 작업(예를 들어 화면 자르기 설정)이 동작하게 하려면 다시 설정해야 하는 경우도 있습니다.";
 "alert.filter_hwdec.abort" = "중단";
@@ -558,7 +558,7 @@
 "history_window.menu.play_new_window" = "새 윈도우에서 재생";
 "history_window.menu.show_in_finder" = "Finder에서 보기";
 "history_window.menu.delete" = "삭제…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "휴지통으로 이동…";
 "history_window.toolbar.clear" = "재생 기록 지우기";
 "history_window.toolbar.group_by" = "Group By";
 "history_window.toolbar.group_by.menu" = "Group by";
@@ -587,15 +587,15 @@
 "sidebar.chapters" = "챕터";
 
 "sidebar.liquid_glass" = "리퀴드 글래스";
-"sidebar.sidebar" = "Sidebar";
-"sidebar.sidebar_position" = "Sidebar Position";
-"sidebar.compact_interface" = "Compact Interface";
-"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
-"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
-"sidebar.docked" = "Docked Control Bar and Titlebar";
-"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.sidebar" = "사이드바";
+"sidebar.sidebar_position" = "사이드바 위치";
+"sidebar.compact_interface" = "간소화된 인터페이스";
+"sidebar.edge_to_edge_video" = "꽉 찬 화면 비디오";
+"sidebar.lock_window_aspect" = "창 종횡비 잠금";
+"sidebar.docked" = "제목바 및 재생 제어기 고정";
+"sidebar.fit_window_to_video" = "창 크기를 비디오에 맞추기";
 "sidebar.settings" = "설정";
-"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+"sidebar.playlist_and_chapters" = "재생목록 및 챕터";
 
 "sidebar.aspect_ratio" = "화면비";
 "sidebar.crop" = "자르기";
@@ -606,31 +606,31 @@
 "sidebar.contrast" = "대비";
 "sidebar.saturation" = "채도";
 "sidebar.gamma" = "감마";
-"sidebar.hue" = "Hue";
+"sidebar.hue" = "색조";
 
 "sidebar.load_external_audio" = "외부 오디오 트랙 불러오기…";
-"sidebar.delay" = "Delay";
+"sidebar.delay" = "지연";
 
-"sidebar.eq" = "Equalizer";
+"sidebar.eq" = "이퀄라이저";
 "sidebar.save_eq" = "현재 EQ를 프리셋으로 저장…";
 "sidebar.rename_eq" = "현재 EQ 프리셋 이름 변경…";
 "sidebar.remove_eq" = "현재 EQ 프리셋 삭제";
 "sidebar.manual_eq" = "수동";
 
-"sidebar.primary" = "Primary";
-"sidebar.secondary" = "Secondary";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.primary" = "기본 자막";
+"sidebar.secondary" = "보조 자막";
+"sidebar.external_subtitles" = "외부 자막";
 "sidebar.load_subtitle" = "자막 열기…";
 "sidebar.search_online" = "온라인 검색…";
-"sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.position" = "위치";
+"sidebar.scale" = "크기";
 "sidebar.font" = "서체";
-"sidebar.color" = "Color";
-"sidebar.text" = "Text";
+"sidebar.color" = "색상";
+"sidebar.text" = "텍스트";
 "sidebar.border" = "외곽선";
 "sidebar.shadow" = "그림자";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+"sidebar.sub_settings_not_available" = "이 자막 유형에서는 일부 설정을 사용할 수 없습니다.";
+"sidebar.sub_style_warning" = "ASS 자막의 스타일 설정을 변경하면 렌더링에 문제가 발생할 수 있습니다.";
 
 "sidebar.add_file" = "파일 추가…";
 "sidebar.add_url" = "URL 추가…";
@@ -648,7 +648,7 @@
 "settings.allowScreenSaverForAudio.desc" = "시스템 잠자기 방지.";
 "settings.allowScreenSaverForAudio.label" = "\"음악 모드\"이거나 오디오만 재생 중일 때는 적용되지 않음";
 "settings.alwaysOpenInNewWindow.label" = "항상 새로운 윈도우로 파일 열기";
-"settings.autoRepeat.label" = "Loop when a file is opened manually";
+"settings.autoRepeat.label" = "파일을 수동으로 열 때 반복";
 "settings.autoSwitchToMusicMode.label" = "음악을 재생할 때 \"음악 모드\"로 자동 전환";
 "settings.blackOutMonitor.label" = "전체 화면일 때 다른 모니터 끄기";
 "settings.defaultRepeatMode.items.0" = "재생목록 반복 재생";
@@ -1030,7 +1030,7 @@
 "settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "스크린샷";
-"settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
+"settings.$SetIINAAsTheDefault" = "IINA를 기본 응용 프로그램으로 지정";
 "settings.$Settings" = "설정";
 "settings.$Shadow" = "그림자";
 "settings.$ShowInFinder" = "Finder에서 보기";

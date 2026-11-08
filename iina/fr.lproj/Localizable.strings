@@ -28,11 +28,17 @@
 "guide.faq" = "Questions fréquemment posées";
 
 // Initial Window
-"initial.announcement" = "Vous utilisez la version %@ d'IINA";
+"initial.announcement" = "Vous utilisez une version bêta de IINA";
 "initial.beta.desc" = "Si vous voulez revenir à une version officielle, décochez la case \"recevoir les versions bêta\" depuis Réglages > Général, et installez une version stable depuis <a href=\"https://iina.io\">notre site officiel</a>.";
 "initial.nightly.desc" = "Les versions de développement quotidiennes ne sont pas recommandées pour être utilisées en production. Les versions quotidiennes ne prennent pas actuellement en charge les mises à jour automatiques. Veuillez télécharger manuellement les dernières versions de notre site <a href=\"https://nightly.iina.io\">versions de développement quotidiennes</a>.";
 "initial.debug.desc" = "Les versions de débogage ne sont généralement pas optimisées pour les performances, donc il n'est pas recommandé d'être utilisé comme lecteur en production. Les versions de débogage ne prennent pas en charge la mise à jour automatique.";
 "initial.bug_report" = "Signaler un bug via <a href=\"https://github.com/iina/iina/issues\">GitHub</a>.";
+"initial.rollback" = "Décochez « Recevoir les mises à jour bêta » depuis Réglages > Général et installez une version stable depuis notre <a href=\"https://iina.io\">site officiel</a>.";
+"initial.open_url" = "Ouvrir une adresse…";
+"initial.found_bug" = "Avez-vous trouvé un bogue ?";
+"initial.resume" = "Reprendre";
+"initial.open" = "Ouvrir un fichier…";
+"initial.want_to_rollback" = "Vous voulez revenir à la version précédente ?";
 
 // Inspector Window
 "inspector.error" = "Erreur";

@@ -28,11 +28,17 @@
 "guide.faq" = "Ofte stillede spørgsmål";
 
 // Initial Window
-"initial.announcement" = "Du bruger en %@ version af IINA";
+"initial.announcement" = "Du benytter en beta version af IINA";
 "initial.beta.desc" = "Hvis du ønsker at vende tilbage til en udgivelsesversion, skal du fjerne markeringen af \"modtag betaopdateringer\" fra Indstillinger > Generelt, og installere en stabil udgivelse fra vores <a href=\"https://iina.io\">officielle hjemmeside</a>.";
 "initial.nightly.desc" = "Nightly er ikke anbefalet til daglig brug. I øjeblikket understøtter Nightly-versioner ikke automatisk opdatering. Du skal manuelt downloade nyere builds fra vores <a href=\"https://nightly.iina.io\">nightly-hjemmeside</a>.";
 "initial.debug.desc" = "Debug builds er normalt ikke optimeret til ydeevne, så det anbefales ikke at blive brugt til daglig brug. Debug builds understøtter ikke automatisk opdatering.";
 "initial.bug_report" = "Meld fejl via <a href=\"https://github.com/iina/iina/issues\">Github Issues</a>.";
+"initial.rollback" = "Fjern markeringen \"modtag beta-opdateringer\" i Præferencer - Generelt, og installer en stabil udgivelse fra vores <a href=\"https://iina.io\"> officielle hjemmeside </a>.";
+"initial.open_url" = "Åbn URL…";
+"initial.found_bug" = "Fundet en fejl?";
+"initial.resume" = "Genoptag";
+"initial.open" = "Åbn…";
+"initial.want_to_rollback" = "Vil du rulle tilbage?";
 
 // Inspector Window
 "inspector.error" = "Fejl";

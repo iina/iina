@@ -28,11 +28,17 @@
 "guide.faq" = "Întrebări adresate frecvent";
 
 // Initial Window
-"initial.announcement" = "Folosești o versiune %@ de IINA";
+"initial.announcement" = "Folosești o versiune beta de IINA";
 "initial.beta.desc" = "Dacă vreți să reveniți la o versiune non-beta, debifați \"primește actualizări beta\" din Setări > General, și instalați o actualizare stabilă de pe <a href=\"https://iina.io\">site-ul nostru oficial</a>.";
 "initial.nightly.desc" = "Versiunea Nightly nu este recomandată pentru utilizare zilnică. In momentul de față, versiunile Nightly nu suportă actualizare automată. Vă rugăm să descărcați manual versiunile mai noi de pe <a href=\"https://nightly.iina.io\">site-ul nostru Nightly</a>.";
 "initial.debug.desc" = "Versiunile de debug de obicei nu sunt optimizate pentru performanță, ca urmare nu sunt recomandate în utilizarea de zi cu zi. Versiunile de debug nu suportă actualizări automate.";
 "initial.bug_report" = "Raportați pe <a href=\"https://github.com/iina/iina/issues\">pagina de probleme de pe GitHub</a>.";
+"initial.rollback" = "Debifează „Primește versiuni beta” din Preferințe - General și instalează o versiune stabilă de pe <a href=\"https://iina.io\">site-ul oficial</a>.";
+"initial.open_url" = "Deschide URL…";
+"initial.found_bug" = "Ai găsit un bug?";
+"initial.resume" = "Reia";
+"initial.open" = "Deschide…";
+"initial.want_to_rollback" = "Vrei să revii?";
 
 // Inspector Window
 "inspector.error" = "Eroare";

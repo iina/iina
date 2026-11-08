@@ -28,12 +28,18 @@
 "guide.faq" = "Preguntes freqüents";
 
 // Initial Window
-"initial.announcement" = "Estàs fent servir una versió %@ d'IINA";
+"initial.announcement" = "Estàs fent servir una versió beta d'IINA";
 "initial.beta.desc" = "Si vols tornar a una versió de llançament, desmarca “rebre actualitzacions beta” a Configuració > General i instal·la una versió estable des del nostre lloc  <a href=\"https://iina.io\">web oficial</a>.";
 "initial.nightly.desc" = "La versió Nightly no es recomana com a versió d’ús diari. Actualment, les compilacions Nightly no admeten l’actualització automàtica. Si us plau, descarrega manualment les versions més recents des del nostre  <a href=\"https://nightly.iina.io\">web de nightly</a>.";
 "initial.debug.desc" = "Les versions de depuració normalment no estan optimitzades per al rendiment, per la qual cosa no es recomana utilitzar-les com a versió habitual. Les versions de depuració no admeten actualitzacions automàtiques.
 ";
 "initial.bug_report" = "Informa d'un error a través de <a href=\"https://github.com/iina/iina/issues\">Incidències de GitHub</a>.";
+"initial.rollback" = "Desmarca \"rebre actualitzacions beta\" a les Preferències - General, i installa una versió estable des del nostre <a href=\"https://iina.io\">lloc web oficial</a>.";
+"initial.open_url" = "Obre enllaç…";
+"initial.found_bug" = "Has trobat un error?";
+"initial.resume" = "Reprèn";
+"initial.open" = "Obre…";
+"initial.want_to_rollback" = "Vols tornar a la versió anterior?";
 
 // Inspector Window
 "inspector.error" = "Error";

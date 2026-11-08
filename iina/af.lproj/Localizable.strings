@@ -28,11 +28,17 @@
 "guide.faq" = "Gereelde vrae";
 
 // Initial Window
-"initial.announcement" = "U gebruik ’n %@-weergawe van IINA";
+"initial.announcement" = "U gebruik ’n betaweergawe van IINA";
 "initial.beta.desc" = "Indien u na ’n vroeëre weergawe wil terugkeer, verwyder die merkie “ontvang betabywerkings” in Voorkeure - Algemeen en installeer ’n stabiele weergawe d.m.v. ons <a href=\"https://iina.io\">amptelike webwerf</a>.";
 "initial.nightly.desc" = "Elke nag word nie aanbeveel as u daaglikse aandrywer nie. Huidige nagelike maaksels ondersteun nie outobywerking nie. Laai asb. nuwe maaksels van ons <a href=\"https://nightly.iina.io\">nagtelike webwerf</a> af.";
 "initial.debug.desc" = "Maaksels vir ontfouting is nie geoptimeer vir verrigting nie daarom word dit nie aanbeveel om as daaglikse drywer gebruik te word nie. Ontfoutmaaksels ondersteun ook nie outobywerking nie.";
 "initial.bug_report" = "Rapporteer via <a href=\"https://github.com/iina/iina/issues\">GitHub-kwessies</a>.";
+"initial.rollback" = "Verwyder die merkie “ontvang betabywerkings” in Voorkeure - Algemeen en installeer ’n stabiele weergawe d.m.v. ons <a href=\"https://iina.io\">amptelike webwerf</a>.";
+"initial.open_url" = "Open bronadres…";
+"initial.found_bug" = "’n Fout opgespoor?";
+"initial.resume" = "Hervat";
+"initial.open" = "Open…";
+"initial.want_to_rollback" = "Wil u terugdraai?";
 
 // Inspector Window
 "inspector.error" = "Fout";

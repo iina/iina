@@ -28,11 +28,17 @@
 "guide.faq" = "よくある質問";
 
 // Initial Window
-"initial.announcement" = "IINAバージョン%@を使用しています";
+"initial.announcement" = "ベータ版のIINAを使用中";
 "initial.beta.desc" = "リリースバージョンにロールバックする場合は、設定 > 一般 の \"ベータ版のアップデート通知を受け取る\" のチェックを外し、<a href=\"https://iina.io\">公式Webサイト</a> から安定版リリースをインストールしてください。";
 "initial.nightly.desc" = "Nightlyを常用することは推奨されません。Nightlyビルドは、現在自動アップデートに対応していません。新しいビルドは<a href=\"https://nightly.iina.io\">Nightly Webサイト</a>から手動でダウンロードしてください。";
 "initial.debug.desc" = "デバッグビルドは通常パフォーマンスが最適化されていないので、常用することは推奨されません。デバッグビルドは自動アップデートに対応していません。";
 "initial.bug_report" = "<a href=\"https://github.com/iina/iina/issues\">GitHub issues</a> で報告してください。";
+"initial.rollback" = "設定 > 一般 から \"ベータ版のアップデート通知を受け取る\" のチェックを外し、<a href=\"https://iina.io\">公式Webサイト</a>から安定版をインストールしてください。";
+"initial.open_url" = "URLを開く…";
+"initial.found_bug" = "バグを見つけましたか?";
+"initial.resume" = "再開";
+"initial.open" = "開く…";
+"initial.want_to_rollback" = "ロールバックしますか?";
 
 // Inspector Window
 "inspector.error" = "エラー";

@@ -28,11 +28,17 @@
 "guide.faq" = "Pertanyaan Umum";
 
 // Initial Window
-"initial.announcement" = "Kamu memakai IINA versi %@";
+"initial.announcement" = "Anda menggunakan versi beta dari IINA";
 "initial.beta.desc" = "Jika anda ingin mengembalikan ke versi rilis, hilangkan \"terima pembaruan beta\" dari Pengaturan > Umum, dan instal versi stabil dari <a href=\"https://iina.io\">situs resmi</a>.";
 "initial.nightly.desc" = "Versi nightly tidak disarankan untuk digunakan sehari-hari. Versi nightly saat ini tidak mendukung pembaruan otomatis. Unduh versi baru secara manual dari <a href=\"https://nightly.iina.io\">situs nightly</a> kami.";
 "initial.debug.desc" = "Bangunan debug biasanya tidak dioptimalkan performanya, sehingga tidak disarankan untuk digunakan sebagai drive harian. Bangunan debug tidak mendukung pembaruan otomatis.";
 "initial.bug_report" = "Laporkan melalui <a href=\"https://github.com/iina/iina/issues\">Masalah GitHub</a>.";
+"initial.rollback" = "Hilangkan centang \"Terima Pembaruan Beta\" dari Preferensi - Umum, dan instal versi stabil dari <a href=\"https://iina.io\">laman situs resmi</a> kami.";
+"initial.open_url" = "Buka Link…";
+"initial.found_bug" = "Menemukan sebuah masalah atau galat?";
+"initial.resume" = "Lanjutkan";
+"initial.open" = "Buka…";
+"initial.want_to_rollback" = "Ingin kembali ke versi sebelumnya?";
 
 // Inspector Window
 "inspector.error" = "Eror";

@@ -16,13 +16,9 @@ class OSDView: TranslucentView {
   var secondaryLabel: NSTextField
   var progressBar: FixedProgressBar
 
-  weak var mainWindow: MainWindowController!
-
   private var accessoryView: NSView?
 
-  init(mainWindow: MainWindowController) {
-    self.mainWindow = mainWindow
-
+  init() {
     self.stackView = NSStackView()
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.orientation = .vertical

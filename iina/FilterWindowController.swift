@@ -527,8 +527,10 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
   }
 
   @IBAction func sheetAddBtnAction(_ sender: Any) {
-    filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: .OK)
-    guard let preset = currentPreset else { return }
+    guard let preset = currentPreset else {
+      filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: .cancel)
+      return
+    }
     // create instance
     let instance = FilterPresetInstance(from: preset)
     for (name, control) in currentBindings {
@@ -544,7 +546,18 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
       }
     }
     // create filter
-    if filterWindow.addFilter(preset.transformer(instance)) {
+    let filter: MPVFilter
+    if preset.name == "custom_mpv" {
+      guard let parsed = MPVFilter(rawString: instance.value(for: "name").stringValue + "=" + instance.value(for: "string").stringValue) else {
+        Utility.showAlert("filter.incorrect", sheetWindow: filterWindow.window)
+        return
+      }
+      filter = parsed
+    } else {
+      filter = preset.transformer(instance)
+    }
+    filterWindow.window!.endSheet(filterWindow.newFilterSheet, returnCode: .OK)
+    if filterWindow.addFilter(filter) {
       PlayerCore.lastActive.sendOSD(.addFilter(preset.localizedName))
     }
   }

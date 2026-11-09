@@ -414,7 +414,7 @@ class MainWindowController: PlayerWindowController {
     guard let window, let cv = window.contentView else { return nil }
     let view = NSView(frame: .zero)
     view.translatesAutoresizingMaskIntoConstraints = false
-    cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
+    cv.addSubview(view, positioned: .below, relativeTo: pipOverlayView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
     return view
   }()

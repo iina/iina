@@ -3143,13 +3143,12 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func doneExitingPIP() {
-    if !player.isInMiniPlayer, isWindowHidden {
-      window?.makeKeyAndOrderFront(self)
-    }
-
     pipStatus = .notInPIP
 
     if !player.isInMiniPlayer {
+      if isWindowHidden {
+        window?.makeKeyAndOrderFront(self)
+      }
       addVideoViewToWindow()
       oscFloatingView.updatePosition()
     }

@@ -322,7 +322,8 @@ class Titlebar: NSView {
   override func mouseDown(with event: NSEvent) {
     let point = titlebarContainer.convert(event.locationInWindow, from: nil)
 
-    if docIcon.frame.contains(point) && event.modifierFlags.contains(.command) {
+    if event.modifierFlags.contains(.command)
+        && (docIcon.frame.contains(point) || titleTextField.frame.contains(point)) {
       showPathMenu()
     }
   }

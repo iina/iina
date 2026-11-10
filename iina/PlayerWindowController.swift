@@ -163,7 +163,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   /** We need to pause the video when a user starts seeking by scrolling.
    This property records whether the video is paused initially so we can
    recover the status when scrolling finished. */
-  private var wasPlayingBeforeSeeking = false
+  private var scrollGesture = ScrollGesture()
   
   /** Subclasses should set these value to true if the mouse is in some
    special views (e.g. volume slider, play slider) before calling
@@ -507,22 +507,20 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     }
 
-    // pause video when seek begins
-
-    if scrollAction == .seek && isTrackpadBegan {
-      // record pause status
-      if player.info.state == .playing {
-        player.pause()
-        wasPlayingBeforeSeeking = true
-      }
+    // Decide which scroll the event belongs to, and pause playback while a trackpad scroll seeks.
+    // The momentum events that follow scrolling on a trackpad have an empty phase as well.
+    let gestureEvent = ScrollGesture.Event(isTrackpadBegan: isTrackpadBegan, isTrackpadEnded: isTrackpadEnd,
+                                           isMouseWheel: isMouse && event.momentumPhase.isEmpty,
+                                           timestamp: event.timestamp)
+    let outcome = scrollGesture.handle(gestureEvent, seeks: scrollAction == .seek,
+                                       isPlaying: player.info.state == .playing,
+                                       fileStartCount: player.info.fileStartCount,
+                                       loading: player.info.scrollSeekLoading)
+    if outcome.pausesPlayback {
+      player.pause()
     }
-
-    if isTrackpadEnd && wasPlayingBeforeSeeking {
-      // only resume playback when it was playing before seeking
-      if wasPlayingBeforeSeeking {
-        player.resume()
-      }
-      wasPlayingBeforeSeeking = false
+    if outcome.resumesPlayback {
+      player.resume()
     }
 
     // handle the delta value
@@ -545,8 +543,9 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     
     switch scrollAction {
     case .seek:
+      guard outcome.maySeek else { break }
       let seekAmount = (isMouse ? AppData.seekAmountMapMouse : AppData.seekAmountMap)[relativeSeekAmount] * delta
-      player.seek(relativeSecond: seekAmount, option: useExactSeek)
+      player.seek(relativeSecond: seekAmount, option: useExactSeek, byScrolling: true)
     case .volume:
       // don't use precised delta for mouse
       let newVolume = player.info.volume + (isMouse ? delta : AppData.volumeMap[volumeScrollAmount] * delta)
@@ -701,7 +700,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playButtonAction(_ sender: NSButton) {
-    player.info.state == .paused ? player.resume() : player.pause()
+    player.togglePause()
   }
 
   @IBAction func muteButtonAction(_ sender: NSButton) {

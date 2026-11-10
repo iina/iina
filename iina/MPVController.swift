@@ -87,6 +87,7 @@ struct MPVHookValue {
 class MPVController: NSObject {
   struct UserData {
     static let screenshot: UInt64 = 1000000
+    static let scrollSeek: UInt64 = 1000001
   }
 
   // The mpv_handle
@@ -113,6 +114,13 @@ class MPVController: NSObject {
   var needRecordSeekTime: Bool = false
   var recordedSeekStartTime: CFTimeInterval = 0
   var recordedSeekTimeListener: ((Double) -> Void)?
+
+  /// Whether the seek `mpv` is performing was issued by a scroll.
+  /// - Important: This must only be accessed by the thread of the queue for reading `mpv` events.
+  private var scrollSeekAttribution = ScrollSeekAttribution()
+
+  /// The callbacks waiting for `mpv` to reply to asynchronous requests made with a reply.
+  private let replyCallbacks = MPVReplyCallbacks()
 
   @Atomic private var hooks: [UInt64: MPVHookValue] = [:]
   private var hookCounter: UInt64 = 1
@@ -804,9 +812,10 @@ class MPVController: NSObject {
     return mpv_command_string(mpv, rawString)
   }
 
+  @discardableResult
   func asyncCommand(_ command: MPVCommand, args: [String?] = [], checkError: Bool = true,
-                    replyUserdata: UInt64, level: Logger.Level = .debug) {
-    guard mpv != nil else { return }
+                    replyUserdata: UInt64, level: Logger.Level = .debug) -> Int32 {
+    guard mpv != nil else { return MPV_ERROR_UNINITIALIZED.rawValue }
     log("Asynchronously run command: \(command.rawValue) \(args.compactMap{$0}.joined(separator: " "))",
         level: level)
     var cargs = makeCArgs(command, args).map { $0.flatMap { UnsafePointer<CChar>(strdup($0)) } }
@@ -821,6 +830,20 @@ class MPVController: NSObject {
     if checkError {
       chkErr(returnValue)
     }
+    return returnValue
+  }
+
+  /// Run the given command asynchronously, calling `reply` with the error code `mpv` returns for it.
+  ///
+  /// `reply` is called on the thread of the queue for reading `mpv` events, or on the calling thread when the command could not be
+  /// sent. It is not called if `mpv` shuts down before replying.
+  func asyncCommand(_ command: MPVCommand, args: [String?] = [], level: Logger.Level = .debug,
+                    reply: @escaping (Int32) -> Void) {
+    let userdata = replyCallbacks.register { error, _ in reply(error) }
+    let returnValue = asyncCommand(command, args: args, checkError: false, replyUserdata: userdata, level: level)
+    if returnValue < 0 {
+      replyCallbacks.take(userdata)?(returnValue, nil)
+    }
   }
 
   func observe(property: String, format: mpv_format = MPV_FORMAT_DOUBLE) {
@@ -832,6 +855,17 @@ class MPVController: NSObject {
     log("Set property: \(name)=\(flag)", level: level)
     var data: Int32 = flag ? 1 : 0
     mpv_set_property(mpv, name, MPV_FORMAT_FLAG, &data)
+  }
+
+  /// Set the given flag property asynchronously, without waiting for `mpv`. This may be called from any thread.
+  ///
+  /// `mpv` handles asynchronous requests in the order they are made. A synchronous request made later can be handled first, but
+  /// `mpv` handles this one right after it, before it carries on with playback.
+  func setFlagAsync(_ name: String, _ flag: Bool, level: Logger.Level = .debug) {
+    guard mpv != nil else { return }
+    log("Asynchronously set property: \(name)=\(flag)", level: level)
+    var data: Int32 = flag ? 1 : 0
+    mpv_set_property_async(mpv, 0, name, MPV_FORMAT_FLAG, &data)
   }
 
   func setInt(_ name: String, _ value: Int, level: Logger.Level = .debug) {
@@ -885,6 +919,28 @@ class MPVController: NSObject {
     var data = Int32()
     mpv_get_property(mpv, name, MPV_FORMAT_FLAG, &data)
     return data > 0
+  }
+
+  /// Read the given flag property asynchronously, without waiting for `mpv`.
+  ///
+  /// `mpv` handles requests in the order they are made, so the value includes every change requested before this request.
+  /// `reply` is called on the thread of the queue for reading `mpv` events with the value, or with `nil` when `mpv` could not read
+  /// the property. It is called on the calling thread when the request could not be made, and not at all if `mpv` shuts down before
+  /// replying.
+  func getFlagAsync(_ name: String, reply: @escaping (Bool?) -> Void) {
+    let userdata = replyCallbacks.register { error, data in
+      guard error >= 0, let property = data?.assumingMemoryBound(to: mpv_event_property.self).pointee,
+            property.format == MPV_FORMAT_FLAG, let value = property.data else {
+        reply(nil)
+        return
+      }
+      reply(value.load(as: Int32.self) != 0)
+    }
+    let returnValue = mpv == nil ? MPV_ERROR_UNINITIALIZED.rawValue
+      : mpv_get_property_async(mpv, userdata, name, MPV_FORMAT_FLAG)
+    if returnValue < 0 {
+      replyCallbacks.take(userdata)?(returnValue, nil)
+    }
   }
 
   func getString(_ name: String) -> String? {
@@ -1137,6 +1193,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { self.player.onVideoReconfig() }
 
     case MPV_EVENT_START_FILE:
+      player.info.$fileStartCount.withLock { $0 += 1 }
       guard let path = getString(MPVProperty.path) else { break }
       DispatchQueue.main.async { [self] in
         player.info.state = .starting
@@ -1150,6 +1207,7 @@ class MPVController: NSObject {
       DispatchQueue.main.async { self.player.fileLoaded() }
 
     case MPV_EVENT_SEEK:
+      scrollSeekAttribution.seekStarted()
       DispatchQueue.main.async { [self] in
         player.info.isSeeking = true
         // When playback is paused the display link may be shutdown in order to not waste energy.
@@ -1167,8 +1225,10 @@ class MPVController: NSObject {
       }
 
     case MPV_EVENT_PLAYBACK_RESTART:
+      scrollSeekAttribution.playbackRestarted(at: CACurrentMediaTime())
       DispatchQueue.main.async { [self] in
         player.info.isSeeking = false
+        player.info.scrollSeekLoading.playbackRestarted(at: ProcessInfo.processInfo.systemUptime)
         // When playback is paused the display link may be shutdown in order to not waste energy.
         // The display link will be restarted while seeking. If playback is paused shut it down
         // again.
@@ -1195,13 +1255,12 @@ class MPVController: NSObject {
       // loaded. As handling this does not require accessing IINA state not protected by locks and
       // only available to the main thread along with the requirement to pause playback ASAP we will
       // not leave this to the PlayerCore function and handle this now before calling fileEnded.
-      if !dueToStopCommand, Preference.bool(for: .pauseWhenOpen) {
-        setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
-        // Normally a log message is emitted before calling mpv, but in this case, due to the race
-        // condition, playback must be paused as soon as possible, so logging is done afterward.
-        log("Pausing playback because \"pause when media is opened\" is enabled")
+      let endedByScrollSeek = FileEnd.fileEnded(self, dueToStopCommand: dueToStopCommand,
+                                                attribution: &scrollSeekAttribution, at: CACurrentMediaTime())
+      DispatchQueue.main.async { [self] in
+        player.info.scrollSeekLoading.fileEnded(byScrollSeek: endedByScrollSeek)
+        player.fileEnded(dueToStopCommand)
       }
-      DispatchQueue.main.async { self.player.fileEnded(dueToStopCommand) }
 
     case MPV_EVENT_COMMAND_REPLY:
       let reply = event.pointee.reply_userdata
@@ -1219,7 +1278,14 @@ class MPVController: NSObject {
           break
         }
         DispatchQueue.main.async { self.player.screenshotCallback() }
+      } else if let callback = replyCallbacks.take(reply) {
+        callback(event.pointee.error, event.pointee.data)
+      } else {
+        scrollSeekAttribution.commandReplied(userdata: reply, error: event.pointee.error)
       }
+
+    case MPV_EVENT_GET_PROPERTY_REPLY:
+      replyCallbacks.take(event.pointee.reply_userdata)?(event.pointee.error, event.pointee.data)
 
     case MPV_EVENT_QUEUE_OVERFLOW:
       // The mpv event system uses an event queue of limited size. If events are not read quickly
@@ -1770,7 +1836,7 @@ class MPVController: NSObject {
     }
   }
 
-  private func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
+  func log(_ message: @autoclosure () -> String, level: Logger.Level = .debug) {
     Logger.log(message, level: level, subsystem: subsystem)
   }
 
@@ -1836,6 +1902,50 @@ class MPVController: NSObject {
     guard Preference.bool(for: .enableAdvancedSettings),
           let userOptions = Preference.value(for: .userOptions) as? [[String]] else { return false }
     return userOptions.contains { $0[0] == option }
+  }
+}
+
+/// The callbacks waiting for `mpv` to reply to asynchronous requests.
+///
+/// A request is made with the user data `register` returns for its callback, and `mpv` returns that user data with its reply. The
+/// callback is called with the error code of the reply and the data of the reply, which is valid only during the call.
+final class MPVReplyCallbacks {
+
+  typealias Callback = (_ error: Int32, _ data: UnsafeMutableRawPointer?) -> Void
+
+  /// The user data of the first request registered. Lower values are left to the fixed user data of `MPVController.UserData`.
+  static let firstUserdata: UInt64 = 2_000_000
+
+  @Atomic private var callbacks: [UInt64: Callback] = [:]
+  @Atomic private var nextUserdata = MPVReplyCallbacks.firstUserdata
+
+  /// Register the callback of a request.
+  /// - Returns: The user data to make the request with.
+  func register(_ callback: @escaping Callback) -> UInt64 {
+    let userdata = $nextUserdata.withLock { next in
+      defer { next += 1 }
+      return next
+    }
+    $callbacks.withLock { $0[userdata] = callback }
+    return userdata
+  }
+
+  /// Remove and return the callback of the request made with the given user data, or `nil` if there is none.
+  func take(_ userdata: UInt64) -> Callback? {
+    return $callbacks.withLock { $0.removeValue(forKey: userdata) }
+  }
+}
+
+extension MPVController: FileEndPlayer {
+
+  var pausesWhenOpened: Bool { Preference.bool(for: .pauseWhenOpen) }
+
+  func pauseMpv() {
+    setFlag(MPVOption.PlaybackControl.pause, true, level: .verbose)
+  }
+
+  func cancelThumbnailGeneration() {
+    player.ffmpegController.cancelThumbnailGeneration()
   }
 }
 

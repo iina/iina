@@ -36,6 +36,7 @@ class CacheManager {
   func clearOldCache() {
     guard !isJobRunning else { return }
     isJobRunning = true
+    defer { isJobRunning = false }
 
     let maxCacheSize = Preference.integer(for: .maxThumbnailPreviewCacheSize)
     // if full, delete 50% of max cache

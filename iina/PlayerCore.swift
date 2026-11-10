@@ -232,6 +232,7 @@ class PlayerCore: NSObject {
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
   var syncUITimer: Timer?
+  private var pendingShowFallbackTimer: Timer?
 
   var displayOSD: Bool = true
 
@@ -347,6 +348,7 @@ class PlayerCore: NSObject {
   }
 
   deinit {
+    pendingShowFallbackTimer?.invalidate()
     observers.forEach {
       NotificationCenter.default.removeObserver($0)
     }
@@ -950,6 +952,8 @@ class PlayerCore: NSObject {
   ///     and call this method again to continue the process of stopping. It is important to stop the background task as if it is still
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
+    pendingShowFallbackTimer?.invalidate()
+    pendingShowFallbackTimer = nil
     guard info.state != .shutDown else { return }
     savePlaybackPosition()
 
@@ -2230,6 +2234,14 @@ class PlayerCore: NSObject {
 
     if info.vid == 0 {
       notifyWindowVideoSizeChanged()
+    } else if currentController.pendingShow {
+      pendingShowFallbackTimer?.invalidate()
+      pendingShowFallbackTimer = Timer.scheduledTimerInCommonMode(withTimeInterval: 1.0, repeats: false) { [weak self] _ in
+        guard let self, self.currentController.pendingShow else { return }
+        self.pendingShowFallbackTimer = nil
+        self.log("Video reconfig was not received within timeout (video track may be undecodable), forcing window display", level: .warning)
+        self.notifyWindowVideoSizeChanged()
+      }
     }
 
     if self.isInMiniPlayer {
@@ -2760,6 +2772,8 @@ class PlayerCore: NSObject {
   }
 
   func notifyWindowVideoSizeChanged() {
+    pendingShowFallbackTimer?.invalidate()
+    pendingShowFallbackTimer = nil
     currentController.handleVideoSizeChange()
     if currentController.pendingShow {
       currentController.pendingShow = false

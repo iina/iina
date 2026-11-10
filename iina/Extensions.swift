@@ -964,7 +964,7 @@ extension NSWindow {
 
 extension Process {
   @discardableResult
-  static func run(_ cmd: [String], at currentDir: URL? = nil) -> (process: Process, stdout: Pipe, stderr: Pipe) {
+  static func run(_ cmd: [String], at currentDir: URL? = nil) -> (process: Process, stdout: Data, stderr: Data) {
     guard cmd.count > 0 else {
       fatalError("Process.launch: the command should not be empty")
     }
@@ -977,9 +977,19 @@ extension Process {
     process.standardOutput = stdout
     process.standardError = stderr
     process.launch()
+    let stdoutData = NSMutableData()
+    let stderrData = NSMutableData()
+    let readers = DispatchGroup()
+    DispatchQueue.global(qos: .userInitiated).async(group: readers) {
+      stdoutData.append(stdout.fileHandleForReading.readDataToEndOfFile())
+    }
+    DispatchQueue.global(qos: .userInitiated).async(group: readers) {
+      stderrData.append(stderr.fileHandleForReading.readDataToEndOfFile())
+    }
     process.waitUntilExit()
+    readers.wait()
 
-    return (process, stdout, stderr)
+    return (process, stdoutData as Data, stderrData as Data)
   }
 }
 

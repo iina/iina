@@ -256,8 +256,7 @@
 		E31E62FF2FD90288005527B2 /* OSCFloatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */; };
 		E31E63012FDB96F0005527B2 /* FadeableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31E63002FDB96E9005527B2 /* FadeableViewController.swift */; };
 		E32693F924BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */; };
-		E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */; };
-		E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */; };
+		E32712B024EAA14500359DAB /* ScreenshotOSDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32712AE24EAA14500359DAB /* ScreenshotOSDView.swift */; };
 		E32B157D21BC27B100CDBCEA /* JavascriptAPIMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */; };
 		E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */; };
 		E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */; };
@@ -515,7 +514,6 @@
 		0507C2682B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		0507C2692B5617660043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		0507C26D2B5617670043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		0507C26E2B5617670043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		0507C2712B5617670043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		0507C2742B5617670043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		0507C27B2B5617680043AD05 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -551,7 +549,6 @@
 		348B000028DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
 		348B000128DC688D0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
 		348B000428DC688E0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/FontPickerWindowController.strings"; sourceTree = "<group>"; };
-		348B000528DC688E0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/ScreenshootOSDView.strings"; sourceTree = "<group>"; };
 		348B000828DC688E0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/PrefOSCToolbarSettingsSheetController.strings"; sourceTree = "<group>"; };
 		348B000B28DC688E0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/KeyRecordViewController.strings"; sourceTree = "<group>"; };
 		348B001228DC688F0045F683 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/SubChooseViewController.strings"; sourceTree = "<group>"; };
@@ -565,7 +562,6 @@
 		348BFF3528DC5F2D0045F683 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		348BFF3628DC5F2D0045F683 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		348BFF3928DC5F2D0045F683 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		348BFF3A28DC5F2D0045F683 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		348BFF3D28DC5F2E0045F683 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		348BFF4028DC5F2E0045F683 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		348BFF4728DC5F2E0045F683 /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -581,7 +577,6 @@
 		348BFF5728DC61AD0045F683 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		348BFF5828DC61AD0045F683 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		348BFF5B28DC61AD0045F683 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		348BFF5C28DC61AD0045F683 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		348BFF5F28DC61AE0045F683 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		348BFF6228DC61AE0045F683 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		348BFF6928DC61AE0045F683 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -596,7 +591,6 @@
 		348BFF7828DC63C90045F683 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/MiniPlayerWindowController.strings"; sourceTree = "<group>"; };
 		348BFF7928DC63C90045F683 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/GuideWindowController.strings"; sourceTree = "<group>"; };
 		348BFF7C28DC63C90045F683 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/FontPickerWindowController.strings"; sourceTree = "<group>"; };
-		348BFF7D28DC63C90045F683 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/ScreenshootOSDView.strings"; sourceTree = "<group>"; };
 		348BFF8028DC63C90045F683 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/PrefOSCToolbarSettingsSheetController.strings"; sourceTree = "<group>"; };
 		348BFF8328DC63C90045F683 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/KeyRecordViewController.strings"; sourceTree = "<group>"; };
 		348BFF8A28DC63CA0045F683 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/SubChooseViewController.strings"; sourceTree = "<group>"; };
@@ -612,7 +606,6 @@
 		348BFF9A28DC64480045F683 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		348BFF9B28DC64480045F683 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		348BFF9E28DC64480045F683 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		348BFF9F28DC64480045F683 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		348BFFA228DC64490045F683 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		348BFFA528DC64490045F683 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		348BFFAC28DC64490045F683 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -628,7 +621,6 @@
 		348BFFBC28DC64FA0045F683 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		348BFFBD28DC64FA0045F683 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		348BFFC028DC64FA0045F683 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		348BFFC128DC64FA0045F683 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		348BFFC428DC64FA0045F683 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		348BFFC728DC64FB0045F683 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		348BFFCE28DC64FB0045F683 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -644,7 +636,6 @@
 		348BFFDE28DC657D0045F683 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		348BFFDF28DC657D0045F683 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		348BFFE228DC657E0045F683 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		348BFFE328DC657E0045F683 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		348BFFE628DC657E0045F683 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		348BFFE928DC657E0045F683 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		348BFFF028DC657F0045F683 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -669,7 +660,6 @@
 		34A2C66E30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		34A2C66F30A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		34A2C67030A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		34A2C67130A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		34A2C67230A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		34A2C67330A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		34A2C67430A055AA006AE8DF /* yue */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = yue; path = yue.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -768,7 +758,6 @@
 		34ACAD6A2C16917000F871A0 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		34ACAD6B2C16917000F871A0 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		34ACAD6F2C16917100F871A0 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		34ACAD702C16917100F871A0 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		34ACAD732C16917100F871A0 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		34ACAD762C16917100F871A0 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		34ACAD7D2C16917100F871A0 /* hr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hr; path = hr.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -785,7 +774,6 @@
 		34F294532C0A1BDF00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/MiniPlayerWindowController.strings; sourceTree = "<group>"; };
 		34F294542C0A1BDF00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/GuideWindowController.strings; sourceTree = "<group>"; };
 		34F294582C0A1BDF00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/FontPickerWindowController.strings; sourceTree = "<group>"; };
-		34F294592C0A1BDF00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		34F2945C2C0A1BDF00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/PrefOSCToolbarSettingsSheetController.strings; sourceTree = "<group>"; };
 		34F2945F2C0A1BDF00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/KeyRecordViewController.strings; sourceTree = "<group>"; };
 		34F294662C0A1BDF00F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/SubChooseViewController.strings; sourceTree = "<group>"; };
@@ -795,26 +783,6 @@
 		34F2946B2C0A1BE000F14962 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/KeyBinding.strings; sourceTree = "<group>"; };
 		34F2946F2C0A1E1800F14962 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/KeyBinding.strings"; sourceTree = "<group>"; };
 		34F294702C0A1E8100F14962 /* sr-Latn */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "sr-Latn"; path = "sr-Latn.lproj/FilterPresets.strings"; sourceTree = "<group>"; };
-		34F294AB2C0A210200F14962 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294AC2C0A210300F14962 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ScreenshootOSDView.strings"; sourceTree = "<group>"; };
-		34F294AD2C0A210400F14962 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/ScreenshootOSDView.strings"; sourceTree = "<group>"; };
-		34F294AE2C0A210400F14962 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294AF2C0A210500F14962 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B02C0A210800F14962 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B12C0A210900F14962 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B22C0A210A00F14962 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B32C0A210B00F14962 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B42C0A210B00F14962 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B52C0A210C00F14962 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B62C0A210C00F14962 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B72C0A210D00F14962 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/ScreenshootOSDView.strings"; sourceTree = "<group>"; };
-		34F294B82C0A210E00F14962 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294B92C0A210F00F14962 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294BA2C0A210F00F14962 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294BB2C0A211000F14962 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294BC2C0A211000F14962 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294BD2C0A211100F14962 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
-		34F294BE2C0A211100F14962 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
 		34F294BF2C0B68B300F14962 /* Contribution.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Contribution.rtf; sourceTree = "<group>"; };
 		34FB40A53033F746007E0F72 /* libSvtAv1Enc.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSvtAv1Enc.4.dylib; path = deps/lib/libSvtAv1Enc.4.dylib; sourceTree = "<group>"; };
 		34FD798D291C76A600963EDE /* LogWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogWindowController.swift; sourceTree = "<group>"; };
@@ -1215,9 +1183,7 @@
 		E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCFloatingView.swift; sourceTree = "<group>"; };
 		E31E63002FDB96E9005527B2 /* FadeableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeableViewController.swift; sourceTree = "<group>"; };
 		E32693F824BA138000BF7ADC /* JavascriptPluginSubtitleItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginSubtitleItem.swift; sourceTree = "<group>"; };
-		E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshootOSDView.swift; sourceTree = "<group>"; };
-		E32712B324F2B8CA00359DAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ScreenshootOSDView.xib; sourceTree = "<group>"; };
-		E32712B624F2B8D200359DAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScreenshootOSDView.strings; sourceTree = "<group>"; };
+		E32712AE24EAA14500359DAB /* ScreenshotOSDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotOSDView.swift; sourceTree = "<group>"; };
 		E32B157C21BC27B100CDBCEA /* JavascriptAPIMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIMenu.swift; sourceTree = "<group>"; };
 		E32B157E21BE219700CDBCEA /* JavascriptPluginMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptPluginMenuItem.swift; sourceTree = "<group>"; };
 		E3366AF9224A039500EF3C32 /* JavascriptAPIPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptAPIPreferences.swift; sourceTree = "<group>"; };
@@ -1846,8 +1812,7 @@
 				840D479F1DFEFC49000D9A64 /* KeyRecordView.swift */,
 				845E70B1210CB59D00D06C42 /* ScrollingTextField.swift */,
 				E38372912443634500F57718 /* LanguageTokenField.swift */,
-				E32712AE24EAA14500359DAB /* ScreenshootOSDView.swift */,
-				E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */,
+				E32712AE24EAA14500359DAB /* ScreenshotOSDView.swift */,
 				512B8FDC2BC2376E00AF41BF /* OutlineView.swift */,
 				D17504A72918F13E005C3DD0 /* OSCToolbarButton.swift */,
 				51C889D42C42FF7F007B2584 /* PlayerState.swift */,
@@ -2316,7 +2281,6 @@
 			files = (
 				E3DBD23F218EF4F100B3AFBF /* AboutWindowContributorAvatarItem.xib in Resources */,
 				C789872F1E34EF170005769F /* InfoPlist.strings in Resources */,
-				E32712B224F2B8CA00359DAB /* ScreenshootOSDView.xib in Resources */,
 				8400D5DB1E1AB326006785F5 /* FontPickerWindowController.xib in Resources */,
 				8400D5EA1E1AB33B006785F5 /* KeyRecordViewController.xib in Resources */,
 				84EC12861F504D2500137C1E /* FilterPresets.strings in Resources */,
@@ -2562,7 +2526,7 @@
 				844C59E71F7C143D008D1B00 /* CacheManager.swift in Sources */,
 				E3EC8C502F95B0A700FBB51E /* ConstraintsSugar.swift in Sources */,
 				E34EAA83251A36CE00057F27 /* JavascriptAPIFile.swift in Sources */,
-				E32712B024EAA14500359DAB /* ScreenshootOSDView.swift in Sources */,
+				E32712B024EAA14500359DAB /* ScreenshotOSDView.swift in Sources */,
 				E3BA79EE2131443A00529D99 /* OpenURLWindowController.swift in Sources */,
 				E392B8CC2FB2263F005F2C24 /* SettingsSearch.swift in Sources */,
 				E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */,
@@ -3187,46 +3151,6 @@
 				34A2C67530A055AA006AE8DF /* yue */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		E32712B424F2B8CA00359DAB /* ScreenshootOSDView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E32712B324F2B8CA00359DAB /* Base */,
-				E32712B624F2B8D200359DAB /* en */,
-				348BFF3A28DC5F2D0045F683 /* af */,
-				348BFF5C28DC61AD0045F683 /* da */,
-				348BFF7D28DC63C90045F683 /* en-GB */,
-				348BFF9F28DC64480045F683 /* fi */,
-				348BFFC128DC64FA0045F683 /* hu */,
-				348BFFE328DC657E0045F683 /* pt */,
-				348B000528DC688E0045F683 /* sr-Latn */,
-				0507C26E2B5617670043AD05 /* he */,
-				34F294592C0A1BDF00F14962 /* id */,
-				34F294AB2C0A210200F14962 /* ca */,
-				34F294AC2C0A210300F14962 /* zh-Hans */,
-				34F294AD2C0A210400F14962 /* zh-Hant */,
-				34F294AE2C0A210400F14962 /* cs */,
-				34F294AF2C0A210500F14962 /* nl */,
-				34F294B02C0A210800F14962 /* fr */,
-				34F294B12C0A210900F14962 /* de */,
-				34F294B22C0A210A00F14962 /* hi */,
-				34F294B32C0A210B00F14962 /* it */,
-				34F294B42C0A210B00F14962 /* ja */,
-				34F294B52C0A210C00F14962 /* ko */,
-				34F294B62C0A210C00F14962 /* pl */,
-				34F294B72C0A210D00F14962 /* pt-BR */,
-				34F294B82C0A210E00F14962 /* ro */,
-				34F294B92C0A210F00F14962 /* ru */,
-				34F294BA2C0A210F00F14962 /* sk */,
-				34F294BB2C0A211000F14962 /* es */,
-				34F294BC2C0A211000F14962 /* sv */,
-				34F294BD2C0A211100F14962 /* tr */,
-				34F294BE2C0A211100F14962 /* uk */,
-				34ACAD702C16917100F871A0 /* hr */,
-				34A2C67130A055AA006AE8DF /* yue */,
-			);
-			name = ScreenshootOSDView.xib;
 			sourceTree = "<group>";
 		};
 		E34A0E032053F93A00B50097 /* PrefOSCToolbarSettingsSheetController.xib */ = {

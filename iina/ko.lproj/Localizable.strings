@@ -214,6 +214,9 @@
 "osd.file_loop" = "단일 파일 반복 재생";
 "osd.playlist_loop" = "재생목록 반복 재생";
 "osd.no_loop" = "반복 재생하지 않음";
+"osd.screenshot.reveal" = "확인하기";
+"osd.screenshot.edit" = "수정";
+"osd.screenshot.delete" = "제거";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";

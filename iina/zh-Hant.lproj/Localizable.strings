@@ -214,6 +214,9 @@
 "osd.file_loop" = "循環播放單一檔案";
 "osd.playlist_loop" = "循環播放全部檔案";
 "osd.no_loop" = "取消循環播放檔案";
+"osd.screenshot.reveal" = "揭露";
+"osd.screenshot.edit" = "編輯";
+"osd.screenshot.delete" = "刪除";
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";

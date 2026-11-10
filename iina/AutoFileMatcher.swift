@@ -313,12 +313,12 @@ class AutoFileMatcher {
           let threshold = UInt(Double(video.filename.count + sub.filename.count) * 0.6)
           let rawDist = ObjcUtils.levDistance(video.prefix, and: sub.prefix) + ObjcUtils.levDistance(video.suffix, and: sub.suffix)
           let dist: UInt = rawDist < threshold ? rawDist : UInt.max
-          sub.dist[video] = dist
-          video.dist[sub] = dist
+          sub.dist[video.path] = dist
+          video.dist[sub.path] = dist
           if dist < minDistToVideo { minDistToVideo = dist }
         }
         guard minDistToVideo != .max else { continue }
-        sub.minDist = mediaFiles.filter { sub.dist[$0] == minDistToVideo }
+        sub.minDist = Set(mediaFiles.filter { sub.dist[$0.path] == minDistToVideo }.map { $0.path })
       }
 
       // match them
@@ -328,7 +328,7 @@ class AutoFileMatcher {
         guard minDistToSub != .max else { continue }
         try checkTicket()
         unmatchedSubs
-          .filter { video.dist[$0]! == minDistToSub && $0.minDist.contains(video) }
+          .filter { video.dist[$0.path]! == minDistToSub && $0.minDist.contains(video.path) }
           .forEach { sub in
             player.info.$matchedSubs.withLock { $0[video.path, default: []].append(sub.url) }
           }

@@ -217,6 +217,9 @@
 "osd.screenshot.reveal" = "表示";
 "osd.screenshot.edit" = "編集";
 "osd.screenshot.delete" = "削除";
+"osd.sub_choose.prompt" = "ダウンロードする字幕をクリックして選択してください:";
+"osd.sub_choose.cancel" = "キャンセル";
+"osd.sub_choose.download" = "ダウンロード";
 
 "preference.title" = "設定";
 "preference.general" = "一般";

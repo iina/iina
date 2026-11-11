@@ -217,6 +217,9 @@
 "osd.screenshot.reveal" = "VISA";
 "osd.screenshot.edit" = "REDIGERA";
 "osd.screenshot.delete" = "RADERA";
+"osd.sub_choose.prompt" = "Vänligen klicka för att välja undertext för nedladdning:";
+"osd.sub_choose.cancel" = "AVBRYT";
+"osd.sub_choose.download" = "LADDA NER";
 
 "preference.title" = "Inställningar";
 "preference.general" = "Allmänt";

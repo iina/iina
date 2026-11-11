@@ -217,6 +217,9 @@
 "osd.screenshot.reveal" = "VIS";
 "osd.screenshot.edit" = "REDIGER";
 "osd.screenshot.delete" = "SLET";
+"osd.sub_choose.prompt" = "Vælg en undertekst til overførsel:";
+"osd.sub_choose.cancel" = "Annuller";
+"osd.sub_choose.download" = "Overførsel";
 
 "preference.title" = "Indstillinger";
 "preference.general" = "Generelt";

@@ -217,6 +217,9 @@
 "osd.screenshot.reveal" = "MEGMUTAT";
 "osd.screenshot.edit" = "SZERKESZT";
 "osd.screenshot.delete" = "TÖRÖL";
+"osd.sub_choose.prompt" = "Kattintson a letöltendő felirat kiválasztásához:";
+"osd.sub_choose.cancel" = "MÉGSE";
+"osd.sub_choose.download" = "LETÖLTÉS";
 
 "preference.title" = "Beállítások";
 "preference.general" = "Általános";

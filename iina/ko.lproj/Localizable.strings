@@ -217,6 +217,9 @@
 "osd.screenshot.reveal" = "확인하기";
 "osd.screenshot.edit" = "수정";
 "osd.screenshot.delete" = "제거";
+"osd.sub_choose.prompt" = "다운로드할 자막을 선택하십시오";
+"osd.sub_choose.cancel" = "취소";
+"osd.sub_choose.download" = "다운로드";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";

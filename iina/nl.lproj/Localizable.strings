@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Recente zoekopdrachten";
 "history_window.search.clear_recents" = "Recente zoekopdrachten wissen";
 
+// Guide window
+"guide_window.website" = "Website";
+"guide_window.fail" = "Fout bij het laden van hoogtepunten. Bezoek onze website https://iina.io voor meer informatie.";
+"guide_window.continue" = "Doorgaan";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

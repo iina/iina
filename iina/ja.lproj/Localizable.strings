@@ -580,6 +580,11 @@
 "history_window.search.recents_title" = "検索履歴";
 "history_window.search.clear_recents" = "履歴を消去";
 
+// Guide window
+"guide_window.website" = "Webサイト";
+"guide_window.fail" = "ハイライト情報を読み込めませんでした。詳しくは https://iina.io にアクセスしてください。";
+"guide_window.continue" = "続ける";
+
 // Sidebar
 
 "sidebar.layout" = "レイアウト";

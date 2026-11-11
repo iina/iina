@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Seneste søgninger";
 "history_window.search.clear_recents" = "Tøm seneste";
 
+// Guide window
+"guide_window.website" = "Hjemmeside";
+"guide_window.fail" = "Kunne ikke indlæse højdepunkter. Besøg venligst vores hjemmeside https://iina.io for mere information.";
+"guide_window.continue" = "Fortsæt";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

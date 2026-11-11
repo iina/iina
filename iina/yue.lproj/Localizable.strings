@@ -594,6 +594,11 @@
 "history_window.search.recents_title" = "最近的搜尋項目";
 "history_window.search.clear_recents" = "清除最近搜索記錄";
 
+// Guide window
+"guide_window.website" = "網站";
+"guide_window.fail" = "讀取 Highlights 時失敗。請參訪我們嘅網站 https://iina.io 來取得更多資訊。";
+"guide_window.continue" = "繼續";
+
 // Sidebar
 
 "sidebar.layout" = "版面";

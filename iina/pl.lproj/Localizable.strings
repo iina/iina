@@ -580,6 +580,11 @@
 "history_window.search.recents_title" = "Wcześniejsze wyszukiwania";
 "history_window.search.clear_recents" = "Wyczyść ostatnie";
 
+// Guide window
+"guide_window.website" = "Strona internetowa";
+"guide_window.fail" = "Nie udało się załadować informacji o wersji. Aby uzyskać więcej informacji, odwiedź naszą stronę https://iina.io.";
+"guide_window.continue" = "Kontynuuj";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

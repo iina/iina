@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Senaste sökningar";
 "history_window.search.clear_recents" = "Rensa senaste";
 
+// Guide window
+"guide_window.website" = "Webbplats";
+"guide_window.fail" = "Det gick inte att läsa in höjdpunkter. Vänligen besök vår hemsida https://iina.io för mer information.";
+"guide_window.continue" = "Fortsätt";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

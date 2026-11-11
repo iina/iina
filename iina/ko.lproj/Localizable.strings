@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "최근 검색한 항목";
 "history_window.search.clear_recents" = "최근 목록 지우기";
 
+// Guide window
+"guide_window.website" = "웹사이트";
+"guide_window.fail" = "하이라이트를 불러오지 못했습니다. 자세한 내용은 웹 사이트(https://iina.io)에서 확인해주세요.";
+"guide_window.continue" = "계속하기";
+
 // Sidebar
 
 "sidebar.layout" = "레이아웃";

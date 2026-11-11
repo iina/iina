@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "最近的搜索";
 "history_window.search.clear_recents" = "清除最近搜索";
 
+// Guide window
+"guide_window.website" = "网站";
+"guide_window.fail" = "加载失败。请访问我们的网站 https://iina.io 获取更多信息。";
+"guide_window.continue" = "继续";
+
 // Sidebar
 
 "sidebar.layout" = "显示布局";

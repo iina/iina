@@ -11,11 +11,9 @@ import Cocoa
 
 fileprivate let highlightsLink = "https://iina.io/highlights"
 
-class GuideWindowController: NSWindowController {
-  override var windowNibName: NSNib.Name {
-    return NSNib.Name("GuideWindowController")
-  }
+fileprivate let ui = UIHelper(scope: "guide_window")
 
+class GuideWindowController: NSWindowController {
   enum Page {
     case highlights
   }
@@ -23,12 +21,80 @@ class GuideWindowController: NSWindowController {
   private var page = 0
 
   var highlightsWebView: WKWebView?
-  @IBOutlet weak var highlightsContainerView: NSView!
-  @IBOutlet weak var highlightsLoadingIndicator: NSProgressIndicator!
-  @IBOutlet weak var highlightsLoadingFailedBox: NSBox!
+  private let highlightsContainerView = NSView()
+  private let highlightsLoadingIndicator = NSProgressIndicator()
+  private let highlightsLoadingFailedBox = NSBox()
 
-  override func windowDidLoad() {
-    super.windowDidLoad()
+  init() {
+    let window = CommonWindow(
+      contentRect: NSRect(x: 0, y: 0, width: 740, height: 600),
+      styleMask: [.titled, .closable],
+      backing: .buffered,
+      defer: false
+    )
+    super.init(window: window)
+    setupViews()
+    window.center()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func setupViews() {
+    guard let contentView = window?.contentView else { return }
+
+    highlightsContainerView.translatesAutoresizingMaskIntoConstraints = false
+    contentView.addSubview(highlightsContainerView)
+    highlightsContainerView.padding(.top, .horizontal).size(width: 740, height: 540)
+
+    highlightsLoadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+    highlightsLoadingIndicator.style = .spinning
+    highlightsLoadingIndicator.isIndeterminate = true
+    highlightsContainerView.addSubview(highlightsLoadingIndicator)
+    highlightsLoadingIndicator.center()
+
+    let failedLabel = ui.label("fail", wrapping: true, canCompress: false)
+    failedLabel.alignment = .center
+    let websiteBtn = ui.button("website", target: self, action: #selector(visitIINAWebsite(_:)))
+
+    highlightsLoadingFailedBox.translatesAutoresizingMaskIntoConstraints = false
+    highlightsLoadingFailedBox.boxType = .custom
+    highlightsLoadingFailedBox.cornerRadius = 4
+    highlightsLoadingFailedBox.borderColor = .tertiaryLabelColor
+    highlightsLoadingFailedBox.fillColor = .windowBackgroundColor
+    highlightsLoadingFailedBox.titlePosition = .noTitle
+    highlightsLoadingFailedBox.isHidden = true
+    highlightsContainerView.addSubview(highlightsLoadingFailedBox)
+    highlightsLoadingFailedBox.size(width: 360).center()
+
+    let boxContentView = highlightsLoadingFailedBox.contentView!
+    boxContentView.addSubview(failedLabel)
+    boxContentView.addSubview(websiteBtn)
+    failedLabel.padding(.top(16), .horizontal(16))
+    websiteBtn.padding(.bottom(16)).spacing(.top(16), to: failedLabel).center(.x)
+
+    let bottomBar = NSVisualEffectView()
+    bottomBar.translatesAutoresizingMaskIntoConstraints = false
+    bottomBar.material = .titlebar
+    contentView.addSubview(bottomBar)
+    bottomBar.padding(.bottom, .horizontal).spacing(.top, to: highlightsContainerView).size(height: 48)
+
+    let continueBtnCell = GuideWindowButtonCell(textCell: "")
+    continueBtnCell.setButtonType(.momentaryPushIn)
+    continueBtnCell.bezelStyle = .shadowlessSquare
+    continueBtnCell.isBordered = true
+    let continueBtn = NSButton()
+    continueBtn.translatesAutoresizingMaskIntoConstraints = false
+    continueBtn.cell = continueBtnCell
+    continueBtn.attributedTitle = NSAttributedString(
+      string: ui.localized("continue"),
+      attributes: [.foregroundColor: NSColor.white]
+    )
+    continueBtn.target = self
+    continueBtn.action = #selector(continueBtnAction(_:))
+    bottomBar.addSubview(continueBtn)
+    continueBtn.size(width: 140, height: 32).center()
   }
 
   func show(pages: [Page]) {
@@ -51,11 +117,11 @@ class GuideWindowController: NSWindowController {
     highlightsLoadingIndicator.startAnimation(nil)
   }
 
-  @IBAction func continueBtnAction(_ sender: Any) {
+  @objc func continueBtnAction(_ sender: Any) {
     window?.close()
   }
 
-  @IBAction func visitIINAWebsite(_ sender: Any) {
+  @objc func visitIINAWebsite(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.websiteLink)!)
   }
 }
@@ -93,13 +159,6 @@ extension GuideWindowController: WKNavigationDelegate {
 }
 
 class GuideWindowButtonCell: NSButtonCell {
-  override func awakeFromNib() {
-    self.attributedTitle = NSAttributedString(
-      string: title,
-      attributes: [NSAttributedString.Key.foregroundColor: NSColor.white]
-    )
-  }
-
   override func drawBezel(withFrame frame: NSRect, in controlView: NSView) {
     NSGraphicsContext.saveGraphicsState()
     let rectPath = NSBezierPath(

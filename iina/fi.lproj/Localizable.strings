@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Viimeisimmät haut";
 "history_window.search.clear_recents" = "Tyhjennä viimeisimpien luettelo";
 
+// Guide window
+"guide_window.website" = "Verkkosivusto";
+"guide_window.fail" = "Kohokohtien lataaminen epäonnistui. Käy sivuillamme https://iina.io saadaksesi lisätietoja.";
+"guide_window.continue" = "Jatka";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

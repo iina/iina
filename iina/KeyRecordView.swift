@@ -24,7 +24,20 @@ class KeyRecordView: NSView {
   var currentKey: String = ""
   var currentKeyModifiers: NSEvent.ModifierFlags = []
 
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+    setupLayer()
+  }
+
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+  }
+
   override func awakeFromNib() {
+    setupLayer()
+  }
+
+  private func setupLayer() {
     wantsLayer = true
     layer?.backgroundColor = NSColor.keyRecordViewBackgroundActive.cgColor
     layer?.cornerRadius = 4

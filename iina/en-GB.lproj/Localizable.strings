@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Key Mapping";
 "keymapping.message" = "Press any key to record.";
+"keymapping.select_action" = "Select action:";
+"keymapping.enter_command" = "Or enter mpv command:";
 
 "filter.video_filters" = "Video Filters";
 "filter.audio_filters" = "Audio Filters";

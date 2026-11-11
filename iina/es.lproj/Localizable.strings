@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Asignación de teclas";
 "keymapping.message" = "Pulse cualquier tecla para grabar.";
+"keymapping.select_action" = "Seleccionar acción:";
+"keymapping.enter_command" = "O ingrese el comando mpv:";
 
 "filter.video_filters" = "Filtros de vídeo";
 "filter.audio_filters" = "Filtros de audio";

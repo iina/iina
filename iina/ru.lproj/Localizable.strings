@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Назначить клавиши";
 "keymapping.message" = "Нажмите любую клавишу для записи.";
+"keymapping.select_action" = "Выберите действие:";
+"keymapping.enter_command" = "Или введите команду mpv:";
 
 "filter.video_filters" = "Видеофильтры";
 "filter.audio_filters" = "Аудиофильтры";

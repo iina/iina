@@ -458,6 +458,8 @@
 
 "keymapping.title" = "Mapowanie klawiszy";
 "keymapping.message" = "Naciśnij dowolny klawisz, aby zarejestrować.";
+"keymapping.select_action" = "Wybierz akcję:";
+"keymapping.enter_command" = "Lub wprowadź polecenie mpv:";
 
 "filter.video_filters" = "Filtry video";
 "filter.audio_filters" = "Filtry audio";

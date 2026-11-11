@@ -458,6 +458,8 @@
 
 "keymapping.title" = "キーマッピング";
 "keymapping.message" = "記録するには、任意のキーを押します。";
+"keymapping.select_action" = "アクションを選択:";
+"keymapping.enter_command" = "またはmpvコマンドを入力:";
 
 "filter.video_filters" = "ビデオフィルタ";
 "filter.audio_filters" = "オーディオフィルタ";

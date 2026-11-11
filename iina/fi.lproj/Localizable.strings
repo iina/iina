@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Näppäinmääritykset";
 "keymapping.message" = "Tallenna painamalla mitä tahansa näppäintä.";
+"keymapping.select_action" = "Valitse toiminto:";
+"keymapping.enter_command" = "Tai kirjoita mpv-komento:";
 
 "filter.video_filters" = "Videosuodattimet";
 "filter.audio_filters" = "Äänisuodattimet";

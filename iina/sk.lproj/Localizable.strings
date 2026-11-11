@@ -458,6 +458,8 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 
 "keymapping.title" = "Klávesové Skratky";
 "keymapping.message" = "Stlač hociktorú klávesu pre zaznamenanie.";
+"keymapping.select_action" = "Vyberte akciu:";
+"keymapping.enter_command" = "Alebo zadajte mpv príkaz:";
 
 "filter.video_filters" = "Video Filtre";
 "filter.audio_filters" = "Zvukové Filtre";

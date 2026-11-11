@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Configurer une touche";
 "keymapping.message" = "Appuyez sur la touche à configurer.";
+"keymapping.select_action" = "Sélectionnez une action :";
+"keymapping.enter_command" = "Ou entrez une commande mpv :";
 
 "filter.video_filters" = "Filtres vidéo";
 "filter.audio_filters" = "Filtres audio";

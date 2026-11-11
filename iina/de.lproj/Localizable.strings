@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Kurzbefehle";
 "keymapping.message" = "Zum Zuweisen beliebige Taste(n) drücken.";
+"keymapping.select_action" = "Aktion auswählen:";
+"keymapping.enter_command" = "mpv-Befehl eingeben:";
 
 "filter.video_filters" = "Videofilter";
 "filter.audio_filters" = "Audiofilter";

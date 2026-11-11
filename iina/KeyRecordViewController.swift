@@ -8,17 +8,16 @@
 
 import Cocoa
 
+fileprivate let ui = UIHelper(scope: "keymapping")
+
 class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEditorDelegate, NSTextFieldDelegate {
 
-  @IBOutlet weak var keyRecordView: KeyRecordView!
-  @IBOutlet weak var keyLabel: NSTextField!
-  @IBOutlet weak var actionTextField: NSTextField!
-  @IBOutlet weak var ruleEditor: NSRuleEditor!
+  let keyRecordView = KeyRecordView()
+  let keyLabel = NSTextField(labelWithString: "")
+  let actionTextField = NSTextField()
+  let ruleEditor = NSRuleEditor(frame: NSRect(x: 0, y: 0, width: 478, height: 22))
 
   private lazy var criterions: [Criterion] = KeyBindingDataLoader.load()
-
-  private var pendingKey: String?
-  private var pendingAction: String?
 
   @objc dynamic var ready = false
 
@@ -27,11 +26,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
       return keyLabel.stringValue
     }
     set {
-      if let f = keyLabel {
-        f.stringValue = newValue
-      } else {
-        pendingKey = newValue
-      }
+      keyLabel.stringValue = newValue
     }
   }
 
@@ -40,12 +35,54 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
       return actionTextField.stringValue
     }
     set {
-      if let f = actionTextField {
-        f.stringValue = newValue
-      } else {
-        pendingAction = newValue
-      }
+      actionTextField.stringValue = newValue
     }
+  }
+
+  override func loadView() {
+    // Used as an NSAlert accessory view, which is laid out by frame
+    let view = NSView(frame: NSRect(x: 0, y: 0, width: 480, height: 155))
+    self.view = view
+
+    keyRecordView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(keyRecordView)
+    keyRecordView.padding(.top, .horizontal).size(height: 46)
+
+    keyLabel.translatesAutoresizingMaskIntoConstraints = false
+    keyLabel.alignment = .center
+    keyLabel.lineBreakMode = .byClipping
+    keyLabel.font = NSFont(name: "Menlo-Regular", size: 22)
+    keyRecordView.addSubview(keyLabel)
+    keyLabel.padding(.top(8), .horizontal, .bottom(7))
+
+    let selectActionLabel = ui.label("select_action", isSmall: true, canCompress: false)
+    view.addSubview(selectActionLabel)
+    selectActionLabel.padding(.leading, .trailing(greaterThan: 0)).spacing(.top(12), to: keyRecordView)
+
+    let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 480, height: 24))
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.borderType = .bezelBorder
+    scrollView.hasHorizontalScroller = false
+    scrollView.hasVerticalScroller = false
+    scrollView.horizontalScrollElasticity = .none
+    scrollView.verticalScrollElasticity = .none
+    scrollView.contentView.drawsBackground = false
+    ruleEditor.rowHeight = 24
+    ruleEditor.autoresizingMask = [.width, .height]
+    scrollView.documentView = ruleEditor
+    view.addSubview(scrollView)
+    scrollView.padding(.horizontal).spacing(.top(4), to: selectActionLabel).size(height: 24)
+
+    let enterCommandLabel = ui.label("enter_command", isSmall: true, canCompress: false)
+    view.addSubview(enterCommandLabel)
+    enterCommandLabel.padding(.leading, .trailing(greaterThan: 0)).spacing(.top(8), to: scrollView)
+
+    actionTextField.translatesAutoresizingMaskIntoConstraints = false
+    actionTextField.focusRingType = .none
+    actionTextField.usesSingleLineMode = true
+    actionTextField.cell?.allowsUndo = false
+    view.addSubview(actionTextField)
+    actionTextField.padding(.horizontal, .bottom(7)).spacing(.top(4), to: enterCommandLabel).size(height: 22)
   }
 
   override func viewDidLoad() {
@@ -59,15 +96,6 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
 
     keyLabel.delegate = self
     actionTextField.delegate = self
-
-    if let pk = pendingKey {
-      keyLabel.stringValue = pk
-      pendingKey = nil
-    }
-    if let pa = pendingAction {
-      actionTextField.stringValue = pa
-      pendingAction = nil
-    }
 
     NotificationCenter.default.addObserver(forName: .iinaKeyBindingInputChanged, object: nil, queue: .main) { [unowned self] _ in
       self.updateCommandField()

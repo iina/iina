@@ -457,6 +457,8 @@
 
 "keymapping.title" = "快捷键";
 "keymapping.message" = "请按任意键来开始录制。";
+"keymapping.select_action" = "选择操作：";
+"keymapping.enter_command" = "或输入 mpv 命令：";
 
 "filter.video_filters" = "视频滤镜";
 "filter.audio_filters" = "音频滤镜";

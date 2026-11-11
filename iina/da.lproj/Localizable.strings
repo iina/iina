@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Taste kortlægning";
 "keymapping.message" = "Tryk på en vilkårlig tast for at optage.";
+"keymapping.select_action" = "Vælg handling:";
+"keymapping.enter_command" = "Eller vælg mpv-kommando:";
 
 "filter.video_filters" = "Videofiltre";
 "filter.audio_filters" = "Lydfiltre";

@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Pemetaan Tombol";
 "keymapping.message" = "Tekan tombol apapun untuk merekam.";
+"keymapping.select_action" = "Pilih tindakan:";
+"keymapping.enter_command" = "Atau masukkan perintah mpv:";
 
 "filter.video_filters" = "Filter Video";
 "filter.audio_filters" = "Filter Audio";

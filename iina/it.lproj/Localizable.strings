@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Scorciatoie da tastiera";
 "keymapping.message" = "Premi la combinazione di tasti.";
+"keymapping.select_action" = "Seleziona azione:";
+"keymapping.enter_command" = "Oppure inserisci il comando mpv:";
 
 "filter.video_filters" = "Filtri Video";
 "filter.audio_filters" = "Filtri Audio";

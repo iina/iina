@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Billentyűkiosztás";
 "keymapping.message" = "Nyomj egy gombot a felvételhez.";
+"keymapping.select_action" = "Művelet kiválasztása:";
+"keymapping.enter_command" = "Vagy adjon meg egy mpv parancsot:";
 
 "filter.video_filters" = "Videószűrők";
 "filter.audio_filters" = "Hangszűrők";

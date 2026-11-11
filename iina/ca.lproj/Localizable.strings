@@ -458,6 +458,8 @@
 
 "keymapping.title" = "Assignació de tecles";
 "keymapping.message" = "Prem qualsevol tecla per començar a gravar.";
+"keymapping.select_action" = "Selecciona acció:";
+"keymapping.enter_command" = "O introdueix una ordre de mpv:";
 
 "filter.video_filters" = "Filtres de vídeo";
 "filter.audio_filters" = "Filtres d'àudio";

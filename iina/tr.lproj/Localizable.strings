@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Tuş Eşlemlemeleri";
 "keymapping.message" = "Kaydetmek için herhangi bir tuşa basın.";
+"keymapping.select_action" = "Eylem seçin:";
+"keymapping.enter_command" = "Veya mpv komutu girin:";
 
 "filter.video_filters" = "Video Süzgeçleri";
 "filter.audio_filters" = "Ses Süzgeçleri";

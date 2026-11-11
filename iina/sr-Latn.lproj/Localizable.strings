@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Mapiranje tastera";
 "keymapping.message" = "Pritisnite bilo koji taster da biste snimili.";
+"keymapping.select_action" = "Izaberite radnju:";
+"keymapping.enter_command" = "Ili unesite naredbu za mpv:";
 
 "filter.video_filters" = "Video-filteri";
 "filter.audio_filters" = "Audio-filteri";

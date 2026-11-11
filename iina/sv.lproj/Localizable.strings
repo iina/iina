@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Kortkommando";
 "keymapping.message" = "Tryck på valfri tangent för att fånga.";
+"keymapping.select_action" = "Välj åtgärd:";
+"keymapping.enter_command" = "Eller ange mpv-kommando:";
 
 "filter.video_filters" = "Videofilter";
 "filter.audio_filters" = "Ljudfilter";

@@ -457,6 +457,8 @@
 
 "keymapping.title" = "Klávesové zkratky";
 "keymapping.message" = "Pro záznam stiskněte jakoukoliv klávesu.";
+"keymapping.select_action" = "Vyberte akci:";
+"keymapping.enter_command" = "Nebo zadejte mpv příkaz:";
 
 "filter.video_filters" = "Video filtry";
 "filter.audio_filters" = "Zvukové filtry";

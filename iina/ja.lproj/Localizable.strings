@@ -588,6 +588,18 @@
 "guide_window.fail" = "ハイライト情報を読み込めませんでした。詳しくは https://iina.io にアクセスしてください。";
 "guide_window.continue" = "続ける";
 
+// Font picker
+"font_picker.title" = "フォントを選択";
+"font_picker.choose" = "フォントを選択:";
+"font_picker.filter" = "入力して絞り込む…";
+"font_picker.family" = "フォントファミリー";
+"font_picker.typeface" = "書体";
+"font_picker.preview" = "プレビュー";
+"font_picker.test" = "フォントをテスト";
+"font_picker.other" = "またはフォント名を入力:";
+"font_picker.cancel" = "キャンセル";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "レイアウト";

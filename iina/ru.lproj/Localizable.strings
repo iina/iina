@@ -587,6 +587,18 @@
 "guide_window.fail" = "Не удалось загрузить «Что нового». Пожалуйста, посетите наш веб-сайт https://iina.io для получения дополнительной информации.";
 "guide_window.continue" = "Продолжить";
 
+// Font picker
+"font_picker.title" = "Выберите шрифт";
+"font_picker.choose" = "Выберите шрифт:";
+"font_picker.filter" = "Введите текст…";
+"font_picker.family" = "Гарнитура";
+"font_picker.typeface" = "Стиль";
+"font_picker.preview" = "Предварительный просмотр";
+"font_picker.test" = "Проба пера";
+"font_picker.other" = "Или введите название шрифта:";
+"font_picker.cancel" = "Отмена";
+"font_picker.ok" = "ОК";
+
 // Sidebar
 
 "sidebar.layout" = "Макет";

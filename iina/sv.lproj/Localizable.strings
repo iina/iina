@@ -587,6 +587,18 @@
 "guide_window.fail" = "Det gick inte att läsa in höjdpunkter. Vänligen besök vår hemsida https://iina.io för mer information.";
 "guide_window.continue" = "Fortsätt";
 
+// Font picker
+"font_picker.title" = "Välj typsnitt";
+"font_picker.choose" = "Välj typsnitt:";
+"font_picker.filter" = "Skriv för att filtrera…";
+"font_picker.family" = "Familj";
+"font_picker.typeface" = "Variant";
+"font_picker.preview" = "Förhandsvisning";
+"font_picker.test" = "Test";
+"font_picker.other" = "Eller ange typsnittets namn:";
+"font_picker.cancel" = "Avbryt";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

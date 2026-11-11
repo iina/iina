@@ -587,6 +587,18 @@
 "guide_window.fail" = "Kunne ikke indlæse højdepunkter. Besøg venligst vores hjemmeside https://iina.io for mere information.";
 "guide_window.continue" = "Fortsæt";
 
+// Font picker
+"font_picker.title" = "Vælg en skrifttype";
+"font_picker.choose" = "Vælg en skrifttype:";
+"font_picker.filter" = "Tast for at filtrere…";
+"font_picker.family" = "Familie";
+"font_picker.typeface" = "Skrifttype";
+"font_picker.preview" = "Forhåndsvisning";
+"font_picker.test" = "Test";
+"font_picker.other" = "Eller indtast navn på skrifttype:";
+"font_picker.cancel" = "Annuller";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

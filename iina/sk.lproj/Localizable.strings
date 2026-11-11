@@ -588,6 +588,18 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "guide_window.fail" = "Načítanie „Čo je v IINA nové“ zlyhalo. Navštívte našu webovú stránku https://iina.io, kde sa dozviete viac informácií.";
 "guide_window.continue" = "Pokračovať";
 
+// Font picker
+"font_picker.title" = "Vybrať písmo";
+"font_picker.choose" = "Vyberte písmo:";
+"font_picker.filter" = "Vyhľadať…";
+"font_picker.family" = "Rodina";
+"font_picker.typeface" = "Typ písma";
+"font_picker.preview" = "Náhľad";
+"font_picker.test" = "Test";
+"font_picker.other" = "Alebo zadajte názov písma:";
+"font_picker.cancel" = "Zrušiť";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

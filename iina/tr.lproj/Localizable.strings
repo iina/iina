@@ -587,6 +587,18 @@
 "guide_window.fail" = "Vurgular yüklenemedi. Daha fazla bilgi için https://iina.io web sitemizi ziyaret edin.";
 "guide_window.continue" = "Sürdür";
 
+// Font picker
+"font_picker.title" = "Font Seç";
+"font_picker.choose" = "Bir font seçin:";
+"font_picker.filter" = "Süzmek için yaz…";
+"font_picker.family" = "Aile";
+"font_picker.typeface" = "Yazıyüzü";
+"font_picker.preview" = "Önizleme";
+"font_picker.test" = "Bu bir deneme metnidir / iİşŞüÜğĞçÇ.";
+"font_picker.other" = "Veya font adını girin:";
+"font_picker.cancel" = "Vazgeç";
+"font_picker.ok" = "Tamam";
+
 // Sidebar
 
 "sidebar.layout" = "Yerleşim";

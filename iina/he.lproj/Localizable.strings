@@ -587,6 +587,18 @@
 "guide_window.fail" = "טעינת הדגשים נכשלה. אנא בקר באתר האינטרנט שלנו https://iina.io למידע נוסף.";
 "guide_window.continue" = "המשך את";
 
+// Font picker
+"font_picker.title" = "בחר גופן";
+"font_picker.choose" = "בחר גופן:";
+"font_picker.filter" = "הקלד כדי לסנן…";
+"font_picker.family" = "משפחה";
+"font_picker.typeface" = "גופן";
+"font_picker.preview" = "תצוגה מקדימה";
+"font_picker.test" = "בדיקה";
+"font_picker.other" = "או הזן את שם הגופן:";
+"font_picker.cancel" = "ביטול";
+"font_picker.ok" = "אישור";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

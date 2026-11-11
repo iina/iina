@@ -587,6 +587,18 @@
 "guide_window.fail" = "하이라이트를 불러오지 못했습니다. 자세한 내용은 웹 사이트(https://iina.io)에서 확인해주세요.";
 "guide_window.continue" = "계속하기";
 
+// Font picker
+"font_picker.title" = "서체 선택";
+"font_picker.choose" = "서체 선택";
+"font_picker.filter" = "다음을 포함…";
+"font_picker.family" = "서체 목록";
+"font_picker.typeface" = "스타일";
+"font_picker.preview" = "미리 보기";
+"font_picker.test" = "서체 미리보기";
+"font_picker.other" = "직접 입력하여 서체 선택";
+"font_picker.cancel" = "취소";
+"font_picker.ok" = "승인";
+
 // Sidebar
 
 "sidebar.layout" = "레이아웃";

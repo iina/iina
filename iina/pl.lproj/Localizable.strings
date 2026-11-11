@@ -588,6 +588,18 @@
 "guide_window.fail" = "Nie udało się załadować informacji o wersji. Aby uzyskać więcej informacji, odwiedź naszą stronę https://iina.io.";
 "guide_window.continue" = "Kontynuuj";
 
+// Font picker
+"font_picker.title" = "Wybierz czcionkę";
+"font_picker.choose" = "Wybierz czcionkę:";
+"font_picker.filter" = "Wpisz, aby filtrować…";
+"font_picker.family" = "Czcionka";
+"font_picker.typeface" = "Krój";
+"font_picker.preview" = "Podgląd";
+"font_picker.test" = "Wypróbuj";
+"font_picker.other" = "Lub wpisz nazwę czcionki:";
+"font_picker.cancel" = "Anuluj";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

@@ -108,6 +108,7 @@ extension MainMenuActionHandler {
   }
 
   @objc func menuStepFrame(_ sender: NSMenuItem) {
+    if player.routeSharePlay(.blocked) { return }
     if player.info.state == .playing {
       player.pause()
     }

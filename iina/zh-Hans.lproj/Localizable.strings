@@ -587,6 +587,18 @@
 "guide_window.fail" = "加载失败。请访问我们的网站 https://iina.io 获取更多信息。";
 "guide_window.continue" = "继续";
 
+// Font picker
+"font_picker.title" = "选择字体";
+"font_picker.choose" = "选择字体：";
+"font_picker.filter" = "输入以筛选…";
+"font_picker.family" = "字体库";
+"font_picker.typeface" = "显示字型";
+"font_picker.preview" = "预览";
+"font_picker.test" = "测试";
+"font_picker.other" = "或输入字体名称：";
+"font_picker.cancel" = "取消";
+"font_picker.ok" = "确认";
+
 // Sidebar
 
 "sidebar.layout" = "显示布局";

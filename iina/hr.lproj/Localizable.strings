@@ -587,6 +587,18 @@
 "guide_window.fail" = "Greška prilikom učitavanja istaknutog sadržaja. Pogledaj https://iina.io za više informacija.";
 "guide_window.continue" = "Nastavi";
 
+// Font picker
+"font_picker.title" = "Odaberi font";
+"font_picker.choose" = "Odaberi font:";
+"font_picker.filter" = "Tipkaj za filtriranje …";
+"font_picker.family" = "Obitelj";
+"font_picker.typeface" = "Font";
+"font_picker.preview" = "Pregled";
+"font_picker.test" = "Test";
+"font_picker.other" = "Ili upiši ime fonta:";
+"font_picker.cancel" = "Odustani";
+"font_picker.ok" = "U redu";
+
 // Sidebar
 
 "sidebar.layout" = "Raspored";

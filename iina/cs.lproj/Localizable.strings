@@ -587,6 +587,18 @@
 "guide_window.fail" = "Načítání „Co je v IINA nového“ selhalo. Pro více informací prosím navštivte naši webovou stránku https://iina.io.";
 "guide_window.continue" = "Pokračovat";
 
+// Font picker
+"font_picker.title" = "Vybrat písmo";
+"font_picker.choose" = "Vyberte písmo:";
+"font_picker.filter" = "Vyhledat…";
+"font_picker.family" = "Rodina";
+"font_picker.typeface" = "Písmo";
+"font_picker.preview" = "Náhled";
+"font_picker.test" = "Test";
+"font_picker.other" = "Nebo zadejte název písma:";
+"font_picker.cancel" = "Zrušit";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "Uspořádání";

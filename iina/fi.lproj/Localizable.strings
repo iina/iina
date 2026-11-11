@@ -587,6 +587,18 @@
 "guide_window.fail" = "Kohokohtien lataaminen epäonnistui. Käy sivuillamme https://iina.io saadaksesi lisätietoja.";
 "guide_window.continue" = "Jatka";
 
+// Font picker
+"font_picker.title" = "Valitse kirjasintyyppi";
+"font_picker.choose" = "Valitse kirjasintyyppi:";
+"font_picker.filter" = "Kirjoita suodattaaksesi…";
+"font_picker.family" = "Kirjasinperhe";
+"font_picker.typeface" = "Kirjasinlaji";
+"font_picker.preview" = "Esikatselu";
+"font_picker.test" = "Kokeile";
+"font_picker.other" = "Tai syötä kirjasimen nimi:";
+"font_picker.cancel" = "Peruuta";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

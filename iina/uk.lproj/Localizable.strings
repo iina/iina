@@ -587,6 +587,18 @@
 "guide_window.fail" = "Не вдалося завантажити. Для додаткової інформації зайдіть на нашу сторінку https://iina.io.";
 "guide_window.continue" = "Продовжити";
 
+// Font picker
+"font_picker.title" = "Оберіть шрифт";
+"font_picker.choose" = "Оберіть шрифт:";
+"font_picker.filter" = "Фільтрувати…";
+"font_picker.family" = "Сімейство";
+"font_picker.typeface" = "Накреслення";
+"font_picker.preview" = "Перегляд";
+"font_picker.test" = "Тест";
+"font_picker.other" = "Або введіть назву шрифта:";
+"font_picker.cancel" = "Скасувати";
+"font_picker.ok" = "ОК";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

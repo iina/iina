@@ -587,6 +587,18 @@
 "guide_window.fail" = "Nem sikerült betölteni a kiemeléseket. További információkért kérjük, látogasson el a https://iina.io weboldalunkra.";
 "guide_window.continue" = "Folytatás";
 
+// Font picker
+"font_picker.title" = "Válassz betűtípust";
+"font_picker.choose" = "Válassz betűtípust:";
+"font_picker.filter" = "Gépeljen a szűréshez…";
+"font_picker.family" = "Család";
+"font_picker.typeface" = "Betűstílus";
+"font_picker.preview" = "Előnézet";
+"font_picker.test" = "Teszt";
+"font_picker.other" = "Vagy adjon meg egy betűtípus nevet:";
+"font_picker.cancel" = "Mégse";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

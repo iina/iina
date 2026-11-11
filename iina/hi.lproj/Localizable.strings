@@ -587,6 +587,18 @@
 "guide_window.fail" = "विशेष अंश लोड नहीं हो पायी। अधिक जानकारी के लिए https://iina.io पर जाएँ।";
 "guide_window.continue" = "जारी रखें";
 
+// Font picker
+"font_picker.title" = "एक फ़ॉन्ट चुनें";
+"font_picker.choose" = "एक फ़ॉन्ट चुनें:";
+"font_picker.filter" = "फ़िल्टर करने के लिए टाइप करें…";
+"font_picker.family" = "परिवार";
+"font_picker.typeface" = "टाइपफ़ेस";
+"font_picker.preview" = "पूर्वावलोकन";
+"font_picker.test" = "जांच";
+"font_picker.other" = "या फ़ॉन्ट नाम दर्ज करें:";
+"font_picker.cancel" = "रद्द करें";
+"font_picker.ok" = "ठीक";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

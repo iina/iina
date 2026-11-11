@@ -587,6 +587,18 @@
 "guide_window.fail" = "Kon nie hoogtepunte laai nie. Besoek ons webwerf https://iina.io vir meer inligting.";
 "guide_window.continue" = "Gaan voort";
 
+// Font picker
+"font_picker.title" = "Kies ’n lettertipe";
+"font_picker.choose" = "Kies ’n lettertipe:";
+"font_picker.filter" = "Tik om te filter…";
+"font_picker.family" = "Gesin";
+"font_picker.typeface" = "Karakterstyl";
+"font_picker.preview" = "Voorskou";
+"font_picker.test" = "Toets";
+"font_picker.other" = "Of voer die lettertipenaam in:";
+"font_picker.cancel" = "Kanselleer";
+"font_picker.ok" = "Goed";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

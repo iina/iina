@@ -588,6 +588,18 @@
 "guide_window.fail" = "No s'han pogut carregar els elements destacats. Visiteu el nostre lloc web https://iina.io per a obtenir més informació.";
 "guide_window.continue" = "Continua";
 
+// Font picker
+"font_picker.title" = "Tria un tipus de lletra";
+"font_picker.choose" = "Tria un tipus de lletra:";
+"font_picker.filter" = "Escriu per a filtrar...";
+"font_picker.family" = "Família";
+"font_picker.typeface" = "Tipografia";
+"font_picker.preview" = "Previsualització";
+"font_picker.test" = "Prova";
+"font_picker.other" = "O introdueix el nom d'un tipus de lletra:";
+"font_picker.cancel" = "Cancel·la";
+"font_picker.ok" = "D'acord";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

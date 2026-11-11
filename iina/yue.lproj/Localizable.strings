@@ -602,6 +602,18 @@
 "guide_window.fail" = "讀取 Highlights 時失敗。請參訪我們嘅網站 https://iina.io 來取得更多資訊。";
 "guide_window.continue" = "繼續";
 
+// Font picker
+"font_picker.title" = "選擇字體";
+"font_picker.choose" = "選擇字體：";
+"font_picker.filter" = "輸入以篩選……";
+"font_picker.family" = "字體集";
+"font_picker.typeface" = "樣式";
+"font_picker.preview" = "預覽";
+"font_picker.test" = "測試";
+"font_picker.other" = "或輸入字體名稱：";
+"font_picker.cancel" = "取消";
+"font_picker.ok" = "好";
+
 // Sidebar
 
 "sidebar.layout" = "版面";

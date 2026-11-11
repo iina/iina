@@ -8,6 +8,8 @@
 
 import Cocoa
 
+fileprivate let ui = UIHelper(scope: "font_picker")
+
 class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTableViewDataSource, NSTextFieldDelegate, NSControlTextEditingDelegate {
 
   struct FontInfo {
@@ -15,13 +17,13 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     var localizedName: String
   }
 
-  @IBOutlet weak var familyTableView: NSTableView!
-  @IBOutlet weak var faceTableView: NSTableView!
-  @IBOutlet weak var previewField: NSTextField!
+  let familyTableView = NSTableView()
+  let faceTableView = NSTableView()
+  let previewField = NSTextField()
   /// "Type to filter"
-  @IBOutlet weak var searchField: NSTextField!
+  let searchField = NSTextField()
   /// Font name manual entry
-  @IBOutlet weak var otherField: NSTextField!
+  let otherField = NSTextField()
 
   var fontNames: [FontInfo] = []
   var filteredFontNames: [FontInfo] = []
@@ -44,22 +46,18 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
 
   private var enableSelectionChangeListener = true
 
-  override var windowNibName: NSNib.Name {
-    get {
-      return NSNib.Name("FontPickerWindowController")
-    }
-  }
-
   init() {
-    super.init(window: nil)
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  override func windowDidLoad() {
-    super.windowDidLoad()
+    let window = CommonWindow(
+      contentRect: NSRect(x: 0, y: 0, width: 458, height: 496),
+      styleMask: [.titled, .closable, .miniaturizable],
+      backing: .buffered,
+      defer: false
+    )
+    window.title = ui.localized("title")
+    super.init(window: window)
+    setupViews()
+    window.center()
+    window.setFrameAutosaveName("IINAFontPickerWindow")
 
     let manager = NSFontManager.shared
 
@@ -75,6 +73,106 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     searchField.delegate = self
     faceTableView.doubleAction = #selector(okBtnPressed)
     Logger.log("FontPickerWindow init done")
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func setupViews() {
+    guard let contentView = window?.contentView else { return }
+
+    let chooseLabel = ui.label("choose", canCompress: false)
+    contentView.addSubview(chooseLabel)
+    chooseLabel.padding(.top(12), .leading(12), .trailing(greaterThan: 12))
+
+    searchField.translatesAutoresizingMaskIntoConstraints = false
+    searchField.controlSize = .large
+    searchField.bezelStyle = .roundedBezel
+    searchField.focusRingType = .none
+    searchField.placeholderString = ui.localized("filter")
+    contentView.addSubview(searchField)
+    searchField.padding(.horizontal(12)).spacing(.top(8), to: chooseLabel)
+
+    let familyScrollView = makeTableScrollView(familyTableView, title: ui.localized("family"))
+    let faceScrollView = makeTableScrollView(faceTableView, title: ui.localized("typeface"))
+    faceTableView.allowsEmptySelection = false
+    contentView.addSubview(familyScrollView)
+    contentView.addSubview(faceScrollView)
+    familyScrollView.padding(.leading(12)).spacing(.top(8), to: searchField).size(height: 268)
+    faceScrollView.padding(.trailing(12))
+    NSLayoutConstraint.activate([
+      faceScrollView.leadingAnchor.constraint(equalTo: familyScrollView.trailingAnchor, constant: -1),
+      faceScrollView.widthAnchor.constraint(equalTo: familyScrollView.widthAnchor),
+      faceScrollView.heightAnchor.constraint(equalTo: familyScrollView.heightAnchor),
+      faceScrollView.centerYAnchor.constraint(equalTo: familyScrollView.centerYAnchor)
+    ])
+
+    previewField.translatesAutoresizingMaskIntoConstraints = false
+    previewField.controlSize = .large
+    previewField.focusRingType = .none
+    previewField.alignment = .center
+    previewField.lineBreakMode = .byTruncatingTail
+    previewField.font = .systemFont(ofSize: 24)
+    previewField.stringValue = ui.localized("test")
+    contentView.addSubview(previewField)
+    previewField.padding(.horizontal(12)).spacing(.top(8), to: familyScrollView)
+
+    let previewLabel = ui.label("preview", isSmall: true, canCompress: false)
+    previewLabel.textColor = .tertiaryLabelColor
+    contentView.addSubview(previewLabel)
+    previewLabel.padding(.leading(20), .trailing(greaterThan: 20)).spacing(.top(12), to: familyScrollView)
+
+    let otherLabel = ui.label("other", canCompress: false)
+    contentView.addSubview(otherLabel)
+    otherLabel.padding(.leading(12), .trailing(greaterThan: 12)).spacing(.top(12), to: previewField)
+
+    otherField.translatesAutoresizingMaskIntoConstraints = false
+    otherField.controlSize = .large
+    otherField.focusRingType = .none
+    contentView.addSubview(otherField)
+    otherField.padding(.horizontal(12)).spacing(.top(8), to: otherLabel)
+
+    let cancelBtn = ui.button("cancel", target: self, action: #selector(cancelBtnPressed(_:)))
+    cancelBtn.keyEquivalent = "\u{1b}"
+    let okBtn = ui.button("ok", target: self, action: #selector(okBtnPressed(_:)))
+    okBtn.keyEquivalent = "\r"
+    for btn in [cancelBtn, okBtn] {
+      btn.widthAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
+    }
+    let buttonStack = ui.hStack(align: .firstBaseline, spacing: 12, cancelBtn, okBtn)
+    contentView.addSubview(buttonStack)
+    buttonStack.padding(.trailing(12), .bottom(12), .leading(greaterThan: 20)).spacing(.top(16), to: otherField)
+  }
+
+  private func makeTableScrollView(_ tableView: NSTableView, title: String) -> NSScrollView {
+    let column = NSTableColumn()
+    column.title = title
+    column.isEditable = false
+    column.width = 200
+    column.minWidth = 200
+    column.maxWidth = 200
+    column.resizingMask = .autoresizingMask
+    tableView.addTableColumn(column)
+    tableView.style = .plain
+    tableView.rowSizeStyle = .custom
+    tableView.rowHeight = 17
+    tableView.intercellSpacing = NSSize(width: 3, height: 2)
+    tableView.focusRingType = .none
+    tableView.columnAutoresizingStyle = .noColumnAutoresizing
+    tableView.allowsColumnReordering = false
+    tableView.allowsMultipleSelection = false
+    tableView.allowsExpansionToolTips = true
+
+    let scrollView = NSScrollView()
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.focusRingType = .none
+    scrollView.borderType = .bezelBorder
+    scrollView.hasVerticalScroller = true
+    scrollView.hasHorizontalScroller = true
+    scrollView.autohidesScrollers = true
+    scrollView.documentView = tableView
+    return scrollView
   }
 
   func select(_ fontString: String ) {
@@ -177,7 +275,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     updateTablesFromOtherFieldValue()
   }
 
-  @IBAction func okBtnPressed(_ sender: AnyObject) {
+  @objc func okBtnPressed(_ sender: AnyObject) {
     if let finishedPicking {
       let otherString = otherField.stringValue
       let selectedFont = otherString.isEmpty ? Constants.String.mpvDefaultFont : otherString
@@ -188,7 +286,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     self.close()
   }
 
-  @IBAction func cancelBtnPressed(_ sender: AnyObject) {
+  @objc func cancelBtnPressed(_ sender: AnyObject) {
     self.close()
   }
 

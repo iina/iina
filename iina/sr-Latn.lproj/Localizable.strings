@@ -587,6 +587,18 @@
 "guide_window.fail" = "Učitavanje istaknutih sadržaja nije uspelo. Više informacija potražite na našem veb-sajtu: https://iina.io.";
 "guide_window.continue" = "Nastavi";
 
+// Font picker
+"font_picker.title" = "Odaberi font";
+"font_picker.choose" = "Odaberi font:";
+"font_picker.filter" = "Kucajte da biste filtrirali…";
+"font_picker.family" = "Porodica";
+"font_picker.typeface" = "Slovni oblik";
+"font_picker.preview" = "Pregled";
+"font_picker.test" = "Testiraj";
+"font_picker.other" = "Ili unesi naziv fonta:";
+"font_picker.cancel" = "Otkaži";
+"font_picker.ok" = "U redu";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

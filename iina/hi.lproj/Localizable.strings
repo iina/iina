@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "हाल की खोजें";
 "history_window.search.clear_recents" = "साफ़ करें";
 
+// Guide window
+"guide_window.website" = "वैबसाइट";
+"guide_window.fail" = "विशेष अंश लोड नहीं हो पायी। अधिक जानकारी के लिए https://iina.io पर जाएँ।";
+"guide_window.continue" = "जारी रखें";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

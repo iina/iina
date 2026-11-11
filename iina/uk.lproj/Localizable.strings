@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Останні запити";
 "history_window.search.clear_recents" = "Видалити останні";
 
+// Guide window
+"guide_window.website" = "Вебсайт";
+"guide_window.fail" = "Не вдалося завантажити. Для додаткової інформації зайдіть на нашу сторінку https://iina.io.";
+"guide_window.continue" = "Продовжити";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

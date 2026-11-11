@@ -580,6 +580,11 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "history_window.search.recents_title" = "Posledné vyhľadávanie";
 "history_window.search.clear_recents" = "Vymazať posledné";
 
+// Guide window
+"guide_window.website" = "Webová stránka";
+"guide_window.fail" = "Načítanie „Čo je v IINA nové“ zlyhalo. Navštívte našu webovú stránku https://iina.io, kde sa dozviete viac informácií.";
+"guide_window.continue" = "Pokračovať";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

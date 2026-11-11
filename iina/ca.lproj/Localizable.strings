@@ -580,6 +580,11 @@
 "history_window.search.recents_title" = "Cerques recents";
 "history_window.search.clear_recents" = "Neteja els més recents";
 
+// Guide window
+"guide_window.website" = "Lloc web";
+"guide_window.fail" = "No s'han pogut carregar els elements destacats. Visiteu el nostre lloc web https://iina.io per a obtenir més informació.";
+"guide_window.continue" = "Continua";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

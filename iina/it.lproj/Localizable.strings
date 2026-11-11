@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Ricerche recenti";
 "history_window.search.clear_recents" = "Elimina recenti";
 
+// Guide window
+"guide_window.website" = "Sito web";
+"guide_window.fail" = "Impossibile caricare le evidenziazioni. Visita il nostro sito web https://iina.io per maggiori informazioni.";
+"guide_window.continue" = "Continua";
+
 // Sidebar
 
 "sidebar.layout" = "Layout";

@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Son Aramalar";
 "history_window.search.clear_recents" = "Son Kullanılanları Sil";
 
+// Guide window
+"guide_window.website" = "Web Sitesi";
+"guide_window.fail" = "Vurgular yüklenemedi. Daha fazla bilgi için https://iina.io web sitemizi ziyaret edin.";
+"guide_window.continue" = "Sürdür";
+
 // Sidebar
 
 "sidebar.layout" = "Yerleşim";

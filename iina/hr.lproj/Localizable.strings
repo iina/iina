@@ -579,6 +579,11 @@
 "history_window.search.recents_title" = "Nedavne pretrage";
 "history_window.search.clear_recents" = "Očisti nedavne";
 
+// Guide window
+"guide_window.website" = "Web-stranica";
+"guide_window.fail" = "Greška prilikom učitavanja istaknutog sadržaja. Pogledaj https://iina.io za više informacija.";
+"guide_window.continue" = "Nastavi";
+
 // Sidebar
 
 "sidebar.layout" = "Raspored";

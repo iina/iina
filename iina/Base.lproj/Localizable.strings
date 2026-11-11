@@ -217,6 +217,9 @@
 "osd.screenshot.reveal" = "REVEAL";
 "osd.screenshot.edit" = "EDIT";
 "osd.screenshot.delete" = "DELETE";
+"osd.sub_choose.prompt" = "Please click to select subtitles to download:";
+"osd.sub_choose.cancel" = "CANCEL";
+"osd.sub_choose.download" = "DOWNLOAD";
 
 "preference.title" = "Settings";
 "preference.general" = "General";

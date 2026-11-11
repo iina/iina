@@ -217,6 +217,9 @@
 "osd.screenshot.reveal" = "NÄYTÄ";
 "osd.screenshot.edit" = "MUOKKAA";
 "osd.screenshot.delete" = "POISTA";
+"osd.sub_choose.prompt" = "Klikkaa valitaksesi ladattavat tekstitykset:";
+"osd.sub_choose.cancel" = "PERUUTA";
+"osd.sub_choose.download" = "LATAA";
 
 "preference.title" = "Asetukset";
 "preference.general" = "Yleiset";

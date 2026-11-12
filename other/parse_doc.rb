@@ -112,7 +112,8 @@ File.open(File.join(__dir__, 'MPVOption.swift'), 'w') do |file|
 
   option_sections.each do |section|
     section_title = section.at_css 'h2'
-    section_title_camel = section_title.content.to_camel
+    # Must remove suffix from "Network backend (libcurl)"
+    section_title_camel = section_title.content.to_camel.delete_suffix('(libcurl)')
     if section_title_camel == 'TV' then next end  # jump tv
     file.write "  struct #{section_title_camel} {\n"
     option_list = section.xpath './dl/dt/tt'

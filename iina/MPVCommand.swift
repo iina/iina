@@ -53,7 +53,7 @@ struct MPVCommand: RawRepresentable {
   static let playlistNextPlaylist = MPVCommand("playlist-next-playlist")
   /** playlist-prev-playlist */
   static let playlistPrevPlaylist = MPVCommand("playlist-prev-playlist")
-  /** playlist-play-index <integer|current|none> */
+  /** playlist-play-index <integer|current|none> [preserve-options] */
   static let playlistPlayIndex = MPVCommand("playlist-play-index")
   /** loadfile <url> [<flags> [<index> [<options>]]] */
   static let loadfile = MPVCommand("loadfile")
@@ -113,7 +113,7 @@ struct MPVCommand: RawRepresentable {
   static let showText = MPVCommand("show-text")
   /** show-progress */
   static let showProgress = MPVCommand("show-progress")
-  /** overlay-add <id> <x> <y> <file> <offset> <fmt> <w> <h> <stride> <dw> <dh> */
+  /** overlay-add <id> <x> <y> <file> <offset> <fmt> <w> <h> <stride> [<dw> [<dh> [<video_colorspace> [<max_luma> [<primaries> [<transfer>]]]]]] */
   static let overlayAdd = MPVCommand("overlay-add")
   /** overlay-remove <id> */
   static let overlayRemove = MPVCommand("overlay-remove")
@@ -183,4 +183,8 @@ struct MPVCommand: RawRepresentable {
   static let beginVoDragging = MPVCommand("begin-vo-dragging")
   /** context-menu */
   static let contextMenu = MPVCommand("context-menu")
+  /** discnav <action> [<x> <y>] */
+  static let discnav = MPVCommand("discnav")
+  /** update-clipboard <type> [timeout] */
+  static let updateClipboard = MPVCommand("update-clipboard")
 }

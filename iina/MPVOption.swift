@@ -25,6 +25,10 @@ struct MPVOption {
     static let vid = "vid"
     /** --edition=<ID|auto> */
     static let edition = "edition"
+    /** --flatten-editions=<yes|no> */
+    static let flattenEditions = "flatten-editions"
+    /** --show-dependent-tracks=<yes|no> */
+    static let showDependentTracks = "show-dependent-tracks"
     /** --track-auto-selection=<yes|no> */
     static let trackAutoSelection = "track-auto-selection"
     /** --subs-with-matching-audio=<yes|forced|no> */
@@ -52,12 +56,14 @@ struct MPVOption {
     static let pitch = "pitch"
     /** --pause */
     static let pause = "pause"
-    /** --shuffle */
+    /** --shuffle=<yes|no> */
     static let shuffle = "shuffle"
     /** --playlist-start=<auto|index> */
     static let playlistStart = "playlist-start"
     /** --playlist=<filename> */
     static let playlist = "playlist"
+    /** --playlist-inherit-options=<yes|no|current> */
+    static let playlistInheritOptions = "playlist-inherit-options"
     /** --chapter-merge-threshold=<number> */
     static let chapterMergeThreshold = "chapter-merge-threshold"
     /** --chapter-seek-threshold=<seconds> */
@@ -161,7 +167,7 @@ struct MPVOption {
     static let useFiledirConf = "use-filedir-conf"
     /** --ytdl=<yes|no> */
     static let ytdl = "ytdl"
-    /** --ytdl-format=<|ytdl|best|worst|mp4|webm|...> */
+    /** --ytdl-format=<ytdl|best|worst|mp4|webm|...> */
     static let ytdlFormat = "ytdl-format"
     /** --ytdl-raw-options=<key>=<value>[ */
     static let ytdlRawOptions = "ytdl-raw-options"
@@ -228,7 +234,7 @@ struct MPVOption {
     static let hwdec = "hwdec"
     /** --gpu-hwdec-interop=<auto|all|no|name> */
     static let gpuHwdecInterop = "gpu-hwdec-interop"
-    /** --hwdec-extra-frames=<N> */
+    /** --hwdec-extra-frames=<auto|N> */
     static let hwdecExtraFrames = "hwdec-extra-frames"
     /** --hwdec-image-format=<name> */
     static let hwdecImageFormat = "hwdec-image-format"
@@ -426,6 +432,8 @@ struct MPVOption {
     static let secondarySid = "secondary-sid"
     /** --sub-scale=<0-100> */
     static let subScale = "sub-scale"
+    /** --secondary-sub-scale=<0-100> */
+    static let secondarySubScale = "secondary-sub-scale"
     /** --sub-scale-signs=<yes|no> */
     static let subScaleSigns = "sub-scale-signs"
     /** --sub-scale-by-window=<yes|no> */
@@ -480,9 +488,9 @@ struct MPVOption {
     static let stretchImageSubsToScreen = "stretch-image-subs-to-screen"
     /** --image-subs-video-resolution=<yes|no> */
     static let imageSubsVideoResolution = "image-subs-video-resolution"
-    /** --image-subs-hdr-peak=<sdr|video|10-10000> */
+    /** --image-subs-hdr-peak=<sdr|video|video-static|video-dynamic|10-10000> */
     static let imageSubsHdrPeak = "image-subs-hdr-peak"
-    /** --sub-hdr-peak=<sdr|10-10000> */
+    /** --sub-hdr-peak=<auto|sdr|10-10000> */
     static let subHdrPeak = "sub-hdr-peak"
     /** --sub-ass=<yes|no> */
     static let subAss = "sub-ass"
@@ -544,6 +552,8 @@ struct MPVOption {
     static let subMarginX = "sub-margin-x"
     /** --sub-margin-y=<size> */
     static let subMarginY = "sub-margin-y"
+    /** --sub-margin-y-offset=<size> */
+    static let subMarginYOffset = "sub-margin-y-offset"
     /** --sub-align-x=<left|center|right> */
     static let subAlignX = "sub-align-x"
     /** --sub-align-y=<top|center|bottom> */
@@ -641,7 +651,7 @@ struct MPVOption {
     static let forceRgbaOsdRendering = "force-rgba-osd-rendering"
     /** --force-render */
     static let forceRender = "force-render"
-    /** --force-window-position */
+    /** --force-window-position=<yes|no> */
     static let forceWindowPosition = "force-window-position"
     /** --auto-window-resize=<yes|no> */
     static let autoWindowResize = "auto-window-resize"
@@ -678,12 +688,26 @@ struct MPVOption {
   }
 
   struct DiscDevices {
+    /** --disc-menu=<yes|no> */
+    static let discMenu = "disc-menu"
     /** --cdda-device=<path> */
     static let cddaDevice = "cdda-device"
     /** --dvd-device=<path> */
     static let dvdDevice = "dvd-device"
+    /** --dvda-device=<path> */
+    static let dvdaDevice = "dvda-device"
+    /** --dvda-page=<-1|0-...> */
+    static let dvdaPage = "dvda-page"
     /** --bluray-device=<path> */
     static let blurayDevice = "bluray-device"
+    /** --bluray-region=<auto|a|b|c> */
+    static let blurayRegion = "bluray-region"
+    /** --bluray-uo-restriction=<auto|disabled|relaxed|safe|compliant> */
+    static let blurayUoRestriction = "bluray-uo-restriction"
+    /** --bluray-min-title-length=<seconds> */
+    static let blurayMinTitleLength = "bluray-min-title-length"
+    /** --bluray-key-file=<path> */
+    static let blurayKeyFile = "bluray-key-file"
     /** --cdda-speed=<value> */
     static let cddaSpeed = "cdda-speed"
     /** --cdda-paranoia=<0-2> */
@@ -700,6 +724,8 @@ struct MPVOption {
     static let cddaCdtext = "cdda-cdtext"
     /** --dvd-speed=<speed> */
     static let dvdSpeed = "dvd-speed"
+    /** --dvd-region=<auto|1-8> */
+    static let dvdRegion = "dvd-region"
     /** --dvd-angle=<ID> */
     static let dvdAngle = "dvd-angle"
     /** --bluray-angle=<ID> */
@@ -792,6 +818,8 @@ struct MPVOption {
     static let demuxerReadaheadSecs = "demuxer-readahead-secs"
     /** --demuxer-hysteresis-secs=<seconds> */
     static let demuxerHysteresisSecs = "demuxer-hysteresis-secs"
+    /** --demuxer-hysteresis-bytes=<bytesize> */
+    static let demuxerHysteresisBytes = "demuxer-hysteresis-bytes"
     /** --prefetch-playlist=<yes|no> */
     static let prefetchPlaylist = "prefetch-playlist"
     /** --force-seekable=<yes|no> */
@@ -825,6 +853,8 @@ struct MPVOption {
     static let inputBuiltinBindings = "input-builtin-bindings"
     /** --input-builtin-dragging=<yes|no> */
     static let inputBuiltinDragging = "input-builtin-dragging"
+    /** --input-builtin-drag-and-drop=<yes|no> */
+    static let inputBuiltinDragAndDrop = "input-builtin-drag-and-drop"
     /** --input-cmdlist */
     static let inputCmdlist = "input-cmdlist"
     /** --input-commands=<cmd1 */
@@ -938,6 +968,8 @@ struct MPVOption {
     static let osdMarginX = "osd-margin-x"
     /** --osd-margin-y=<size> */
     static let osdMarginY = "osd-margin-y"
+    /** --osd-margin-y-offset=<size> */
+    static let osdMarginYOffset = "osd-margin-y-offset"
     /** --osd-align-x=<left|center|right> */
     static let osdAlignX = "osd-align-x"
     /** --osd-align-y=<top|center|bottom> */
@@ -1142,7 +1174,7 @@ struct MPVOption {
     static let httpProxy = "http-proxy"
     /** --tls-ca-file=<filename> */
     static let tlsCaFile = "tls-ca-file"
-    /** --tls-verify */
+    /** --tls-verify=<yes|no> */
     static let tlsVerify = "tls-verify"
     /** --tls-cert-file */
     static let tlsCertFile = "tls-cert-file"
@@ -1156,6 +1188,23 @@ struct MPVOption {
     static let rtspTransport = "rtsp-transport"
     /** --hls-bitrate=<no|min|max|<rate>> */
     static let hlsBitrate = "hls-bitrate"
+  }
+
+  struct NetworkBackend {
+    /** --curl-enabled=<yes|no> */
+    static let curlEnabled = "curl-enabled"
+    /** --curl-http-version=<auto|1.0|1.1|2|2tls|2-prior-knowledge|3|3only> */
+    static let curlHttpVersion = "curl-http-version"
+    /** --curl-max-redirects=<0-100> */
+    static let curlMaxRedirects = "curl-max-redirects"
+    /** --curl-max-retries=<0-100> */
+    static let curlMaxRetries = "curl-max-retries"
+    /** --curl-connect-timeout=<seconds> */
+    static let curlConnectTimeout = "curl-connect-timeout"
+    /** --curl-buffer-size=<bytes> */
+    static let curlBufferSize = "curl-buffer-size"
+    /** --curl-max-request-size=<bytes> */
+    static let curlMaxRequestSize = "curl-max-request-size"
   }
 
   struct DVB {
@@ -1352,6 +1401,8 @@ struct MPVOption {
     static let waylandInternalVsync = "wayland-internal-vsync"
     /** --wayland-present=<yes|no> */
     static let waylandPresent = "wayland-present"
+    /** --wayland-session=<string> */
+    static let waylandSession = "wayland-session"
     /** --spirv-compiler=<compiler> */
     static let spirvCompiler = "spirv-compiler"
     /** --glsl-shader=<file> */
@@ -1388,7 +1439,7 @@ struct MPVOption {
     static let angleEglWindowing = "angle-egl-windowing"
     /** --angle-flip=<yes|no> */
     static let angleFlip = "angle-flip"
-    /** --angle-renderer=<d3d9|d3d11|auto> */
+    /** --angle-renderer=<d3d11|auto> */
     static let angleRenderer = "angle-renderer"
     /** --macos-force-dedicated-gpu=<yes|no> */
     static let macosForceDedicatedGpu = "macos-force-dedicated-gpu"
@@ -1456,7 +1507,7 @@ struct MPVOption {
     static let targetGamut = "target-gamut"
     /** --target-lut=<file> */
     static let targetLut = "target-lut"
-    /** --hdr-reference-white=<auto|10-1000000> */
+    /** --hdr-reference-white=<auto|10-10000> */
     static let hdrReferenceWhite = "hdr-reference-white"
     /** --sdr-adjust-gamma=<auto|yes|no> */
     static let sdrAdjustGamma = "sdr-adjust-gamma"
@@ -1464,6 +1515,28 @@ struct MPVOption {
     static let treatSrgbAsPower22 = "treat-srgb-as-power22"
     /** --tone-mapping=<value> */
     static let toneMapping = "tone-mapping"
+    /** --tone-mapping-knee-adaptation=<0.0..1.0> */
+    static let toneMappingKneeAdaptation = "tone-mapping-knee-adaptation"
+    /** --tone-mapping-knee-minimum=<0.0..0.5> */
+    static let toneMappingKneeMinimum = "tone-mapping-knee-minimum"
+    /** --tone-mapping-knee-maximum=<0.5..1.0> */
+    static let toneMappingKneeMaximum = "tone-mapping-knee-maximum"
+    /** --tone-mapping-knee-default=<0.0..1.0> */
+    static let toneMappingKneeDefault = "tone-mapping-knee-default"
+    /** --tone-mapping-knee-offset=<0.5..2.0> */
+    static let toneMappingKneeOffset = "tone-mapping-knee-offset"
+    /** --tone-mapping-slope-tuning=<0.0..10.0> */
+    static let toneMappingSlopeTuning = "tone-mapping-slope-tuning"
+    /** --tone-mapping-slope-offset=<0.0..1.0> */
+    static let toneMappingSlopeOffset = "tone-mapping-slope-offset"
+    /** --tone-mapping-spline-contrast=<0.0..1.5> */
+    static let toneMappingSplineContrast = "tone-mapping-spline-contrast"
+    /** --tone-mapping-reinhard-contrast=<0.0..1.0> */
+    static let toneMappingReinhardContrast = "tone-mapping-reinhard-contrast"
+    /** --tone-mapping-linear-knee=<0.0..1.0> */
+    static let toneMappingLinearKnee = "tone-mapping-linear-knee"
+    /** --tone-mapping-exposure=<0.0..10.0> */
+    static let toneMappingExposure = "tone-mapping-exposure"
     /** --tone-mapping-param=<value> */
     static let toneMappingParam = "tone-mapping-param"
     /** --inverse-tone-mapping */
@@ -1490,6 +1563,10 @@ struct MPVOption {
     static let hdrContrastRecovery = "hdr-contrast-recovery"
     /** --hdr-contrast-smoothness=<1.0..100.0> */
     static let hdrContrastSmoothness = "hdr-contrast-smoothness"
+    /** --hdr-mastering-clip=<0.0..1.0> */
+    static let hdrMasteringClip = "hdr-mastering-clip"
+    /** --hdr-film-strength=<0.0..2.0> */
+    static let hdrFilmStrength = "hdr-film-strength"
     /** --use-embedded-icc-profile */
     static let useEmbeddedIccProfile = "use-embedded-icc-profile"
     /** --icc-profile=<file> */

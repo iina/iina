@@ -24,12 +24,6 @@
     "id": "io.iina.auto-skip"
   },
   {
-    "name": "Beautiful Subs",
-    "url": "https://github.com/mtdrabek/iina-beautiful-subs",
-    "desc": "Makes the top (secondary) subtitles look like the bottom ones.",
-    "id": "dev.mtdrabek.iina-beautiful-subs"
-  },
-  {
     "name": "Bilingual Audio",
     "url": "https://github.com/glechic/iina-bilingual-audio",
     "desc": "Play two audio tracks with left/right channel separation for bilingual viewing.",
@@ -238,6 +232,12 @@
     "url": "https://github.com/i3p9/iina-trakt-scrobbler",
     "desc": "Trakt.tv scrobbler plugin for IINA.",
     "id": "io.github.fahim.iinatraktscrobbler"
+  },
+  {
+    "name": "Twin Subs",
+    "url": "https://github.com/mtdrabek/iina-beautiful-subs",
+    "desc": "Makes the top (secondary) subtitles look like the bottom ones.",
+    "id": "dev.mtdrabek.iina-beautiful-subs"
   },
   {
     "name": "Verba Connect",

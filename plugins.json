@@ -132,6 +132,12 @@
     "id": "io.github.lenadweb.keystone"
   },
   {
+    "name": "last.fm Scrobbler",
+    "url": "https://github.com/tueksta/iina-lastfm-scrobbler-plugin",
+    "desc": "Scrobble your music to last.fm.",
+    "id": "io.github.tueksta.iina-lastfm"
+  },
+  {
     "name": "ListenBrainz Scrobbler",
     "url": "https://git.notfire.cc/notfire/iina-listenbrainz",
     "desc": "Scrobble your music to ListenBrainz.",

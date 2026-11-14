@@ -54,6 +54,12 @@
     "id": "com.arnav.contentplay"
   },
   {
+    "name": "CueJump",
+    "url": "https://github.com/HomerHm/iina-cuejump",
+    "desc": "List every subtitle line in a sidebar: search it, click to jump.",
+    "id": "io.github.homerhm.iina-cuejump"
+  },
+  {
     "name": "Danmaku",
     "url": "https://github.com/xjbeta/iina-plugin-danmaku",
     "desc": "Overlay comments/danmaku on video.",

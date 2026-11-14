@@ -701,7 +701,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   }
 
   @IBAction func playButtonAction(_ sender: NSButton) {
-    player.info.state == .paused ? player.resume() : player.pause()
+    player.togglePause()
   }
 
   @IBAction func muteButtonAction(_ sender: NSButton) {

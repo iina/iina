@@ -1211,10 +1211,10 @@ class PlayerCore: NSObject {
         // Neither point is set, the feature is disabled.
         info.abLoopStatus = .cleared
       } else {
-        // The B loop point is set without the A loop point having been set. This is allowed by mpv
-        // but IINA is not supposed to allow mpv to get into this state, so something has gone
-        // wrong. This is an internal error. Log it and pretend that just the A loop point is set.
-        log("Unexpected A-B loop state, ab-loop-a is \(a) ab-loop-b is \(b)", level: .error)
+        // The B loop point is set without the A loop point having been set. This is allowed by mpv.
+        // IINA itself never does this, but a plugin, an input.conf binding or an mpv script can.
+        // Log it and pretend that just the A loop point is set.
+        log("Unexpected A-B loop state, ab-loop-a is \(a) ab-loop-b is \(b)", level: .warning)
         info.abLoopStatus = .aSet
       }
     } else {

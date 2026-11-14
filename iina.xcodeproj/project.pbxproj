@@ -48,14 +48,12 @@
 		5190391530A66E44006E03E8 /* libvorbisenc.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5190390630A66E44006E03E8 /* libvorbisenc.2.dylib */; };
 		5190391630A66E44006E03E8 /* libavdevice.63.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038DA30A66E44006E03E8 /* libavdevice.63.dylib */; };
 		5190391730A66E44006E03E8 /* libsoxr.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038FA30A66E44006E03E8 /* libsoxr.0.dylib */; };
-		5190391830A66E44006E03E8 /* libunibreak.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5190390330A66E44006E03E8 /* libunibreak.7.dylib */; };
 		5190391930A66E44006E03E8 /* libplacebo.387.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038F730A66E44006E03E8 /* libplacebo.387.dylib */; };
 		5190391A30A66E44006E03E8 /* libfribidi.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038E830A66E44006E03E8 /* libfribidi.0.dylib */; };
 		5190391B30A66E44006E03E8 /* libssl.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038FD30A66E44006E03E8 /* libssl.4.dylib */; };
 		5190391C30A66E44006E03E8 /* libzstd.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5190390A30A66E44006E03E8 /* libzstd.1.dylib */; };
 		5190391D30A66E44006E03E8 /* libsharpyuv.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038F930A66E44006E03E8 /* libsharpyuv.0.dylib */; };
 		5190391E30A66E44006E03E8 /* libarchive.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038D630A66E44006E03E8 /* libarchive.13.dylib */; };
-		5190391F30A66E44006E03E8 /* libjxl_cms.0.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038EB30A66E44006E03E8 /* libjxl_cms.0.11.dylib */; };
 		5190392030A66E44006E03E8 /* libjxl.0.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038F030A66E44006E03E8 /* libjxl.0.13.dylib */; };
 		5190392130A66E44006E03E8 /* libmujs.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038F530A66E44006E03E8 /* libmujs.dylib */; };
 		5190392230A66E44006E03E8 /* libjxl_cms.0.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038EC30A66E44006E03E8 /* libjxl_cms.0.13.dylib */; };
@@ -76,9 +74,7 @@
 		5190393130A66E44006E03E8 /* libharfbuzz.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038E930A66E44006E03E8 /* libharfbuzz.0.dylib */; };
 		5190393230A66E44006E03E8 /* libavfilter.12.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038DB30A66E44006E03E8 /* libavfilter.12.dylib */; };
 		5190393330A66E44006E03E8 /* libcrypto.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038E430A66E44006E03E8 /* libcrypto.4.dylib */; };
-		5190393430A66E44006E03E8 /* libjxl.0.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038EF30A66E44006E03E8 /* libjxl.0.11.dylib */; };
 		5190393530A66E44006E03E8 /* libssh.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038FC30A66E44006E03E8 /* libssh.4.dylib */; };
-		5190393630A66E44006E03E8 /* libjxl_threads.0.11.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038ED30A66E44006E03E8 /* libjxl_threads.0.11.dylib */; };
 		5190393730A66E44006E03E8 /* libzimg.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5190390930A66E44006E03E8 /* libzimg.2.dylib */; };
 		5190393830A66E44006E03E8 /* libunibreak.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5190390430A66E44006E03E8 /* libunibreak.8.dylib */; };
 		5190393930A66E44006E03E8 /* libswresample.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038FF30A66E44006E03E8 /* libswresample.7.dylib */; };
@@ -87,7 +83,6 @@
 		5190393C30A66E44006E03E8 /* liblcms2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038F130A66E44006E03E8 /* liblcms2.2.dylib */; };
 		5190393D30A66E44006E03E8 /* libbs2b.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038E330A66E44006E03E8 /* libbs2b.0.dylib */; };
 		5190393E30A66E44006E03E8 /* libdav1d.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038E530A66E44006E03E8 /* libdav1d.7.dylib */; };
-		5190393F30A66E44006E03E8 /* libbluray.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 519038DE30A66E44006E03E8 /* libbluray.3.dylib */; };
 		5190394030A66E71006E03E8 /* libarchive.13.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038D630A66E44006E03E8 /* libarchive.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190394130A66E71006E03E8 /* libaribcaption.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038D730A66E44006E03E8 /* libaribcaption.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190394230A66E71006E03E8 /* libass.9.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038D830A66E44006E03E8 /* libass.9.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -96,7 +91,6 @@
 		5190394530A66E71006E03E8 /* libavfilter.12.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038DB30A66E44006E03E8 /* libavfilter.12.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190394630A66E71006E03E8 /* libavformat.63.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038DC30A66E44006E03E8 /* libavformat.63.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190394730A66E71006E03E8 /* libavutil.61.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038DD30A66E44006E03E8 /* libavutil.61.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5190394830A66E71006E03E8 /* libbluray.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038DE30A66E44006E03E8 /* libbluray.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190394930A66E71006E03E8 /* libbluray.4.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038DF30A66E44006E03E8 /* libbluray.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190394A30A66E71006E03E8 /* libbrotlicommon.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038E030A66E44006E03E8 /* libbrotlicommon.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190394B30A66E71006E03E8 /* libbrotlidec.1.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038E130A66E44006E03E8 /* libbrotlidec.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -109,11 +103,8 @@
 		5190395230A66E71006E03E8 /* libfribidi.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038E830A66E44006E03E8 /* libfribidi.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190395330A66E71006E03E8 /* libharfbuzz.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038E930A66E44006E03E8 /* libharfbuzz.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190395430A66E71006E03E8 /* libjpeg.62.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038EA30A66E44006E03E8 /* libjpeg.62.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5190395530A66E71006E03E8 /* libjxl_cms.0.11.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038EB30A66E44006E03E8 /* libjxl_cms.0.11.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190395630A66E71006E03E8 /* libjxl_cms.0.13.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038EC30A66E44006E03E8 /* libjxl_cms.0.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5190395730A66E71006E03E8 /* libjxl_threads.0.11.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038ED30A66E44006E03E8 /* libjxl_threads.0.11.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190395830A66E71006E03E8 /* libjxl_threads.0.13.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038EE30A66E44006E03E8 /* libjxl_threads.0.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5190395930A66E71006E03E8 /* libjxl.0.11.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038EF30A66E44006E03E8 /* libjxl.0.11.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190395A30A66E71006E03E8 /* libjxl.0.13.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038F030A66E44006E03E8 /* libjxl.0.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190395B30A66E71006E03E8 /* liblcms2.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038F130A66E44006E03E8 /* liblcms2.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190395C30A66E71006E03E8 /* libluajit-5.1.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 519038F230A66E44006E03E8 /* libluajit-5.1.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -133,7 +124,6 @@
 		5190396A30A66E71006E03E8 /* libswscale.10.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 5190390030A66E44006E03E8 /* libswscale.10.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190396B30A66E71006E03E8 /* libuchardet.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 5190390130A66E44006E03E8 /* libuchardet.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190396C30A66E71006E03E8 /* libudfread.3.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 5190390230A66E44006E03E8 /* libudfread.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		5190396D30A66E71006E03E8 /* libunibreak.7.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 5190390330A66E44006E03E8 /* libunibreak.7.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190396E30A66E71006E03E8 /* libunibreak.8.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 5190390430A66E44006E03E8 /* libunibreak.8.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190396F30A66E71006E03E8 /* libvorbis.0.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 5190390530A66E44006E03E8 /* libvorbis.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5190397030A66E71006E03E8 /* libvorbisenc.2.dylib in Copy Dylibs */ = {isa = PBXBuildFile; fileRef = 5190390630A66E44006E03E8 /* libvorbisenc.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -438,7 +428,6 @@
 				5190394530A66E71006E03E8 /* libavfilter.12.dylib in Copy Dylibs */,
 				5190394630A66E71006E03E8 /* libavformat.63.dylib in Copy Dylibs */,
 				5190394730A66E71006E03E8 /* libavutil.61.dylib in Copy Dylibs */,
-				5190394830A66E71006E03E8 /* libbluray.3.dylib in Copy Dylibs */,
 				5190394930A66E71006E03E8 /* libbluray.4.dylib in Copy Dylibs */,
 				5190394A30A66E71006E03E8 /* libbrotlicommon.1.dylib in Copy Dylibs */,
 				5190394B30A66E71006E03E8 /* libbrotlidec.1.dylib in Copy Dylibs */,
@@ -451,11 +440,8 @@
 				5190395230A66E71006E03E8 /* libfribidi.0.dylib in Copy Dylibs */,
 				5190395330A66E71006E03E8 /* libharfbuzz.0.dylib in Copy Dylibs */,
 				5190395430A66E71006E03E8 /* libjpeg.62.dylib in Copy Dylibs */,
-				5190395530A66E71006E03E8 /* libjxl_cms.0.11.dylib in Copy Dylibs */,
 				5190395630A66E71006E03E8 /* libjxl_cms.0.13.dylib in Copy Dylibs */,
-				5190395730A66E71006E03E8 /* libjxl_threads.0.11.dylib in Copy Dylibs */,
 				5190395830A66E71006E03E8 /* libjxl_threads.0.13.dylib in Copy Dylibs */,
-				5190395930A66E71006E03E8 /* libjxl.0.11.dylib in Copy Dylibs */,
 				5190395A30A66E71006E03E8 /* libjxl.0.13.dylib in Copy Dylibs */,
 				5190395B30A66E71006E03E8 /* liblcms2.2.dylib in Copy Dylibs */,
 				5190395C30A66E71006E03E8 /* libluajit-5.1.2.dylib in Copy Dylibs */,
@@ -475,7 +461,6 @@
 				5190396A30A66E71006E03E8 /* libswscale.10.dylib in Copy Dylibs */,
 				5190396B30A66E71006E03E8 /* libuchardet.0.dylib in Copy Dylibs */,
 				5190396C30A66E71006E03E8 /* libudfread.3.dylib in Copy Dylibs */,
-				5190396D30A66E71006E03E8 /* libunibreak.7.dylib in Copy Dylibs */,
 				5190396E30A66E71006E03E8 /* libunibreak.8.dylib in Copy Dylibs */,
 				5190396F30A66E71006E03E8 /* libvorbis.0.dylib in Copy Dylibs */,
 				5190397030A66E71006E03E8 /* libvorbisenc.2.dylib in Copy Dylibs */,
@@ -817,7 +802,6 @@
 		519038DB30A66E44006E03E8 /* libavfilter.12.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavfilter.12.dylib; path = deps/lib/libavfilter.12.dylib; sourceTree = "<group>"; };
 		519038DC30A66E44006E03E8 /* libavformat.63.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.63.dylib; path = deps/lib/libavformat.63.dylib; sourceTree = "<group>"; };
 		519038DD30A66E44006E03E8 /* libavutil.61.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.61.dylib; path = deps/lib/libavutil.61.dylib; sourceTree = "<group>"; };
-		519038DE30A66E44006E03E8 /* libbluray.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.3.dylib; path = deps/lib/libbluray.3.dylib; sourceTree = "<group>"; };
 		519038DF30A66E44006E03E8 /* libbluray.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbluray.4.dylib; path = deps/lib/libbluray.4.dylib; sourceTree = "<group>"; };
 		519038E030A66E44006E03E8 /* libbrotlicommon.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbrotlicommon.1.dylib; path = deps/lib/libbrotlicommon.1.dylib; sourceTree = "<group>"; };
 		519038E130A66E44006E03E8 /* libbrotlidec.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbrotlidec.1.dylib; path = deps/lib/libbrotlidec.1.dylib; sourceTree = "<group>"; };
@@ -830,11 +814,8 @@
 		519038E830A66E44006E03E8 /* libfribidi.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfribidi.0.dylib; path = deps/lib/libfribidi.0.dylib; sourceTree = "<group>"; };
 		519038E930A66E44006E03E8 /* libharfbuzz.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libharfbuzz.0.dylib; path = deps/lib/libharfbuzz.0.dylib; sourceTree = "<group>"; };
 		519038EA30A66E44006E03E8 /* libjpeg.62.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjpeg.62.dylib; path = deps/lib/libjpeg.62.dylib; sourceTree = "<group>"; };
-		519038EB30A66E44006E03E8 /* libjxl_cms.0.11.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjxl_cms.0.11.dylib; path = deps/lib/libjxl_cms.0.11.dylib; sourceTree = "<group>"; };
 		519038EC30A66E44006E03E8 /* libjxl_cms.0.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjxl_cms.0.13.dylib; path = deps/lib/libjxl_cms.0.13.dylib; sourceTree = "<group>"; };
-		519038ED30A66E44006E03E8 /* libjxl_threads.0.11.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjxl_threads.0.11.dylib; path = deps/lib/libjxl_threads.0.11.dylib; sourceTree = "<group>"; };
 		519038EE30A66E44006E03E8 /* libjxl_threads.0.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjxl_threads.0.13.dylib; path = deps/lib/libjxl_threads.0.13.dylib; sourceTree = "<group>"; };
-		519038EF30A66E44006E03E8 /* libjxl.0.11.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjxl.0.11.dylib; path = deps/lib/libjxl.0.11.dylib; sourceTree = "<group>"; };
 		519038F030A66E44006E03E8 /* libjxl.0.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjxl.0.13.dylib; path = deps/lib/libjxl.0.13.dylib; sourceTree = "<group>"; };
 		519038F130A66E44006E03E8 /* liblcms2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblcms2.2.dylib; path = deps/lib/liblcms2.2.dylib; sourceTree = "<group>"; };
 		519038F230A66E44006E03E8 /* libluajit-5.1.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libluajit-5.1.2.dylib"; path = "deps/lib/libluajit-5.1.2.dylib"; sourceTree = "<group>"; };
@@ -854,7 +835,6 @@
 		5190390030A66E44006E03E8 /* libswscale.10.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.10.dylib; path = deps/lib/libswscale.10.dylib; sourceTree = "<group>"; };
 		5190390130A66E44006E03E8 /* libuchardet.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuchardet.0.dylib; path = deps/lib/libuchardet.0.dylib; sourceTree = "<group>"; };
 		5190390230A66E44006E03E8 /* libudfread.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libudfread.3.dylib; path = deps/lib/libudfread.3.dylib; sourceTree = "<group>"; };
-		5190390330A66E44006E03E8 /* libunibreak.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunibreak.7.dylib; path = deps/lib/libunibreak.7.dylib; sourceTree = "<group>"; };
 		5190390430A66E44006E03E8 /* libunibreak.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunibreak.8.dylib; path = deps/lib/libunibreak.8.dylib; sourceTree = "<group>"; };
 		5190390530A66E44006E03E8 /* libvorbis.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbis.0.dylib; path = deps/lib/libvorbis.0.dylib; sourceTree = "<group>"; };
 		5190390630A66E44006E03E8 /* libvorbisenc.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libvorbisenc.2.dylib; path = deps/lib/libvorbisenc.2.dylib; sourceTree = "<group>"; };
@@ -1413,14 +1393,12 @@
 				5190391530A66E44006E03E8 /* libvorbisenc.2.dylib in Frameworks */,
 				5190391630A66E44006E03E8 /* libavdevice.63.dylib in Frameworks */,
 				5190391730A66E44006E03E8 /* libsoxr.0.dylib in Frameworks */,
-				5190391830A66E44006E03E8 /* libunibreak.7.dylib in Frameworks */,
 				5190391930A66E44006E03E8 /* libplacebo.387.dylib in Frameworks */,
 				5190391A30A66E44006E03E8 /* libfribidi.0.dylib in Frameworks */,
 				5190391B30A66E44006E03E8 /* libssl.4.dylib in Frameworks */,
 				5190391C30A66E44006E03E8 /* libzstd.1.dylib in Frameworks */,
 				5190391D30A66E44006E03E8 /* libsharpyuv.0.dylib in Frameworks */,
 				5190391E30A66E44006E03E8 /* libarchive.13.dylib in Frameworks */,
-				5190391F30A66E44006E03E8 /* libjxl_cms.0.11.dylib in Frameworks */,
 				5190392030A66E44006E03E8 /* libjxl.0.13.dylib in Frameworks */,
 				5190392130A66E44006E03E8 /* libmujs.dylib in Frameworks */,
 				5190392230A66E44006E03E8 /* libjxl_cms.0.13.dylib in Frameworks */,
@@ -1441,9 +1419,7 @@
 				5190393130A66E44006E03E8 /* libharfbuzz.0.dylib in Frameworks */,
 				5190393230A66E44006E03E8 /* libavfilter.12.dylib in Frameworks */,
 				5190393330A66E44006E03E8 /* libcrypto.4.dylib in Frameworks */,
-				5190393430A66E44006E03E8 /* libjxl.0.11.dylib in Frameworks */,
 				5190393530A66E44006E03E8 /* libssh.4.dylib in Frameworks */,
-				5190393630A66E44006E03E8 /* libjxl_threads.0.11.dylib in Frameworks */,
 				5190393730A66E44006E03E8 /* libzimg.2.dylib in Frameworks */,
 				5190393830A66E44006E03E8 /* libunibreak.8.dylib in Frameworks */,
 				5190393930A66E44006E03E8 /* libswresample.7.dylib in Frameworks */,
@@ -1452,7 +1428,6 @@
 				5190393C30A66E44006E03E8 /* liblcms2.2.dylib in Frameworks */,
 				5190393D30A66E44006E03E8 /* libbs2b.0.dylib in Frameworks */,
 				5190393E30A66E44006E03E8 /* libdav1d.7.dylib in Frameworks */,
-				5190393F30A66E44006E03E8 /* libbluray.3.dylib in Frameworks */,
 				B4E4470125CE3F930069F06E /* Sparkle in Frameworks */,
 				8451E6D92604AEFC009A15D7 /* Just in Frameworks */,
 				5196819A29EC963F00B05D55 /* CoreDisplay.framework in Frameworks */,
@@ -1576,7 +1551,6 @@
 				519038DB30A66E44006E03E8 /* libavfilter.12.dylib */,
 				519038DC30A66E44006E03E8 /* libavformat.63.dylib */,
 				519038DD30A66E44006E03E8 /* libavutil.61.dylib */,
-				519038DE30A66E44006E03E8 /* libbluray.3.dylib */,
 				519038DF30A66E44006E03E8 /* libbluray.4.dylib */,
 				519038E030A66E44006E03E8 /* libbrotlicommon.1.dylib */,
 				519038E130A66E44006E03E8 /* libbrotlidec.1.dylib */,
@@ -1589,11 +1563,8 @@
 				519038E830A66E44006E03E8 /* libfribidi.0.dylib */,
 				519038E930A66E44006E03E8 /* libharfbuzz.0.dylib */,
 				519038EA30A66E44006E03E8 /* libjpeg.62.dylib */,
-				519038EB30A66E44006E03E8 /* libjxl_cms.0.11.dylib */,
 				519038EC30A66E44006E03E8 /* libjxl_cms.0.13.dylib */,
-				519038ED30A66E44006E03E8 /* libjxl_threads.0.11.dylib */,
 				519038EE30A66E44006E03E8 /* libjxl_threads.0.13.dylib */,
-				519038EF30A66E44006E03E8 /* libjxl.0.11.dylib */,
 				519038F030A66E44006E03E8 /* libjxl.0.13.dylib */,
 				519038F130A66E44006E03E8 /* liblcms2.2.dylib */,
 				519038F230A66E44006E03E8 /* libluajit-5.1.2.dylib */,
@@ -1613,7 +1584,6 @@
 				5190390030A66E44006E03E8 /* libswscale.10.dylib */,
 				5190390130A66E44006E03E8 /* libuchardet.0.dylib */,
 				5190390230A66E44006E03E8 /* libudfread.3.dylib */,
-				5190390330A66E44006E03E8 /* libunibreak.7.dylib */,
 				5190390430A66E44006E03E8 /* libunibreak.8.dylib */,
 				5190390530A66E44006E03E8 /* libvorbis.0.dylib */,
 				5190390630A66E44006E03E8 /* libvorbisenc.2.dylib */,

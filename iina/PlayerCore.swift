@@ -551,7 +551,8 @@ class PlayerCore: NSObject {
     info.videoPosition = nil
     info.videoTracks = []
     info.videoWidth = nil
-    if isNetwork {
+    // A window hidden for PiP stays hidden until PiP is exited.
+    if isNetwork && !mainWindow.isWindowHidden {
       AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
     }
 
@@ -2762,9 +2763,11 @@ class PlayerCore: NSObject {
   func notifyWindowVideoSizeChanged() {
     currentController.handleVideoSizeChange()
     if currentController.pendingShow {
-      currentController.pendingShow = false
-      currentController.showWindow(self)
       AppDelegate.shared.openURLWindow.close()
+      if !mainWindow.isWindowHidden {
+        currentController.pendingShow = false
+        currentController.showWindow(self)
+      }
     }
     if info.state == .loaded {
       // If the media was loaded manually then playback was paused to avoid audio starting to play

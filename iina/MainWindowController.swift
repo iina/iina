@@ -1415,6 +1415,8 @@ class MainWindowController: PlayerWindowController {
 
   func windowWillClose(_ notification: Notification) {
     shouldApplyInitialWindowSize = true
+    // Closing PiP below must not show a window that was never shown
+    pendingShow = false
     // Close PIP
     if pipStatus == .inPIP {
       exitPIP()
@@ -3145,7 +3147,15 @@ extension MainWindowController: PIPViewControllerDelegate {
     pip.replacementWindow = window
 
     // Bring the window to the front and deminiaturize it
-    NSApp.activate(ignoringOtherApps: true)
+    if pendingShow {
+      // A window opened straight into PiP has not been shown yet. macOS moves the user to its Space
+      // only if it is already on screen when IINA activates.
+      pendingShow = false
+      showWindow(self)
+      DispatchQueue.main.async { NSApp.activate(ignoringOtherApps: true) }
+    } else {
+      NSApp.activate(ignoringOtherApps: true)
+    }
     window.deminiaturize(pip)
   }
 

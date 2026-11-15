@@ -419,6 +419,10 @@ fileprivate class TitlebarInnerView: NSView {
 
 
 extension Titlebar: OSCViewContainer {
+  var oscViews: [NSView?] {
+    []
+  }
+
   func setup(osc: OSCController, isActive: Bool) {
     guard isActive else { return }
 

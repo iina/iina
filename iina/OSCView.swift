@@ -32,7 +32,7 @@ class OSCController {
   var toolbarView: NSStackView!
   var sliderView: NSView!
 
-  var currentOSCView: NSView?
+  var currentOSCViews: [NSView?]!
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
@@ -43,6 +43,7 @@ class OSCController {
       .top: mainWindow.titleBarView,
       .bottom: mainWindow.oscBottomView,
       .floating: mainWindow.oscFloatingView,
+      .minimal: mainWindow.oscMinimalView,
     ]
 
     self.volumeView = NSView()
@@ -150,12 +151,15 @@ class OSCController {
       $0!.removeFromSuperview()
     }
 
+    playControlMiddleView.setViews(
+      [leftArrowButton, mainWindow.playButton, rightArrowButton], in: .leading)
+
     playControlMiddleView.spacing = newPosition == .floating ? 24 : 16
     for (pos, view) in oscViews {
       view.setup(osc: self, isActive: newPosition == pos)
     }
 
-    currentOSCView = newPosition == .top ? nil : oscViews[newPosition]!
+    currentOSCViews = oscViews[newPosition]!.oscViews
   }
 
   func attachComponents(in stack: NSStackView) {
@@ -220,6 +224,6 @@ class OSCController {
 
 protocol OSCViewContainer {
   func setup(osc: OSCController, isActive: Bool)
-
+  var oscViews: [NSView?] { get }
   func detachAllComponents()
 }

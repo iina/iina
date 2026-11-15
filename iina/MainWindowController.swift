@@ -70,6 +70,7 @@ class MainWindowController: PlayerWindowController {
   var currentControlBar: NSView?
   var oscBottomView: OSCBottomView!
   var oscFloatingView: OSCFloatingView!
+  var oscMinimalView: OSCMinimalView!
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
@@ -393,7 +394,7 @@ class MainWindowController: PlayerWindowController {
   private var videoContainerConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
 
   override var mouseActionDisabledViews: [NSView?] {
-    sidebars.mouseActionDisabledViews + [osc.currentOSCView, titleBarView]
+    sidebars.mouseActionDisabledViews + osc.currentOSCViews + [titleBarView]
   }
 
   // MARK: - PIP
@@ -466,6 +467,8 @@ class MainWindowController: PlayerWindowController {
     cv.addSubview(oscBottomView)
     oscFloatingView = OSCFloatingView(mainWindow: self)
     cv.addSubview(oscFloatingView)
+    oscMinimalView = OSCMinimalView(mainWindow: self)
+    cv.addSubview(oscMinimalView)
     osdView = OSDView(mainWindow: self)
     cv.addSubview(osdView)
     additionalInfoView = AdditionalInfoView(mainWindow: self)
@@ -488,6 +491,7 @@ class MainWindowController: PlayerWindowController {
     // osc
 
     oscBottomView.padding(.horizontal)
+    oscMinimalView.padding(.all)
     self.osc = OSCController(mainWindow: self)
     osc.initialize()
 
@@ -554,6 +558,10 @@ class MainWindowController: PlayerWindowController {
       } else {
         .alwaysHidden
       }
+    }
+
+    fadeableViews.add(oscMinimalView) { [unowned self] in
+      oscPosition == .minimal ? .auto : .alwaysHidden
     }
 
     fadeableViews.add(oscFloatingView) { [unowned self] in
@@ -813,6 +821,7 @@ class MainWindowController: PlayerWindowController {
 
     oscFloatingView.isHidden = true
     oscBottomView.isHidden = true
+    oscMinimalView.isHidden = true
 
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
@@ -1026,7 +1035,7 @@ class MainWindowController: PlayerWindowController {
     } else if event.inAnyOf([volumeSlider]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
-      guard !event.inAnyOf([osc.currentOSCView]) else { return }
+      guard !event.inAnyOf(osc.currentOSCViews) else { return }
     }
 
     guard !event.inAnyOf(sidebars.mouseActionDisabledViews + [titleBarView])
@@ -1086,7 +1095,7 @@ class MainWindowController: PlayerWindowController {
       showUI()
     }
     // check whether mouse is in osc
-    if event.inAnyOf([osc.currentOSCView, titleBarView]) {
+    if event.inAnyOf(osc.currentOSCViews + [titleBarView]) {
       destroyTimer()
     } else {
       updateTimer()

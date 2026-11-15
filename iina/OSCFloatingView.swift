@@ -182,6 +182,10 @@ class OSCFloatingView: TranslucentView {
 
 
 extension OSCFloatingView: OSCViewContainer {
+  var oscViews: [NSView?] {
+    [self]
+  }
+
   func setup(osc: OSCController, isActive: Bool) {
     isDragging = false
     guard isActive else { return }

@@ -89,6 +89,10 @@ class OSCBottomView: NSView {
 
 
 extension OSCBottomView: OSCViewContainer {
+  var oscViews: [NSView?] {
+    [self]
+  }
+
   func setup(osc: OSCController, isActive: Bool) {
     updateVerticalConstraint(isDisplaying: isActive)
     guard isActive else { return }

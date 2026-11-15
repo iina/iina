@@ -150,6 +150,12 @@
     "id": "cc.notfire.iina-listenbrainz"
   },
   {
+    "name": "LocalSub for IINA",
+    "url": "https://github.com/junghyukhan/iina-localsub",
+    "desc": "Generate subtitles on your Mac without interrupting playback. Requires macOS 26+ and Apple Silicon.",
+    "id": "io.localsub.iina"
+  },
+  {
     "name": "MarkIINA",
     "url": "https://github.com/vishudhshah/MarkIINA",
     "desc": "Save and manage named per-video bookmarks from a sidebar or menu.",

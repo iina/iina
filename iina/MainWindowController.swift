@@ -185,6 +185,11 @@ class MainWindowController: PlayerWindowController {
       }
     }
 
+    var isAnimatingToNativeFullScreen: Bool {
+      if case .animating(_, false, _) = self { return true }
+      return false
+    }
+
     var priorWindowedFrame: NSRect? {
       get {
         switch self {
@@ -233,8 +238,11 @@ class MainWindowController: PlayerWindowController {
       guard player.info.state.active else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
-      case .animating:  break
+      case .animating:  return
       case .windowed:   player.mpv.setFlag(MPVOption.Window.fullscreen, false)
+      }
+      if oldValue.isAnimatingToNativeFullScreen {
+        player.resumeDeferredSyncUITime()
       }
     }
   }

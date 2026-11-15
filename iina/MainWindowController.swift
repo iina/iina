@@ -1608,6 +1608,10 @@ class MainWindowController: PlayerWindowController {
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("failed to enter full screen mode")
+
+    if player.info.state.active {
+      updateWindowParametersForMPV()
+    }
   }
 
   /// The window is about to exit full screen mode.
@@ -1757,6 +1761,10 @@ class MainWindowController: PlayerWindowController {
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("failed to exit full screen mode")
+
+    if player.info.state.active {
+      updateWindowParametersForMPV()
+    }
   }
 
   func toggleWindowFullScreen() {
@@ -1950,7 +1958,10 @@ class MainWindowController: PlayerWindowController {
     // See comments in windowWillExitFullScreen for details.
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
-    updateWindowParametersForMPV()
+    // Skip updating while in full-screen animation. They are updated when the animation ends.
+    if !fsState.isAnimatingToNativeFullScreen {
+      updateWindowParametersForMPV()
+    }
     liveText.requestAnalysis()
   }
 

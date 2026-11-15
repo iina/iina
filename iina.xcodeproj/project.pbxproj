@@ -351,6 +351,8 @@
 		E3EC8C432F94330400FBB51E /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC8C422F9432FD00FBB51E /* Dialog.swift */; };
 		E3EC8C462F9475C600FBB51E /* PluginStorePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC8C452F9475BC00FBB51E /* PluginStorePanel.swift */; };
 		E3EC8C502F95B0A700FBB51E /* ConstraintsSugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */; };
+		E3ECB98730A667820025D3E4 /* OSCMinimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECB98630A6677C0025D3E4 /* OSCMinimalView.swift */; };
+		E3ECB98930A6A1D30025D3E4 /* OSCView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECB98830A6A1CF0025D3E4 /* OSCView.swift */; };
 		E3ECC89E1FE9A6D900BED8C7 /* GeometryDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */; };
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 		E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */; };
@@ -1302,6 +1304,8 @@
 		E3EC8C422F9432FD00FBB51E /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		E3EC8C452F9475BC00FBB51E /* PluginStorePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginStorePanel.swift; sourceTree = "<group>"; };
 		E3EC8C4F2F95B09D00FBB51E /* ConstraintsSugar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsSugar.swift; sourceTree = "<group>"; };
+		E3ECB98630A6677C0025D3E4 /* OSCMinimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCMinimalView.swift; sourceTree = "<group>"; };
+		E3ECB98830A6A1CF0025D3E4 /* OSCView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSCView.swift; sourceTree = "<group>"; };
 		E3ECC89D1FE9A6D900BED8C7 /* GeometryDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryDef.swift; sourceTree = "<group>"; };
 		E3FC31451FE1501E00B9B86F /* PowerSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerSource.swift; sourceTree = "<group>"; };
 		E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginInputManager.swift; sourceTree = "<group>"; };
@@ -2017,8 +2021,10 @@
 			children = (
 				84A0BA9C1D2FAD4000BC8DA1 /* MainWindowController.swift */,
 				E31E63002FDB96E9005527B2 /* FadeableViewController.swift */,
+				E3ECB98830A6A1CF0025D3E4 /* OSCView.swift */,
 				E31E62FE2FD90284005527B2 /* OSCFloatingView.swift */,
 				E31E62FC2FD8F4C5005527B2 /* OSCBottomView.swift */,
+				E3ECB98630A6677C0025D3E4 /* OSCMinimalView.swift */,
 				E3D94E7D2FCDE42C00B08618 /* Titlebar.swift */,
 				3415BC892FC82FD5003B3FBD /* TimePreviewView.swift */,
 				E3A239AB2FC70EC200CE6ACC /* AdditionalInfoView.swift */,
@@ -2452,6 +2458,7 @@
 				E3785B092A83380E00787CB7 /* WebSocketServer.swift in Sources */,
 				84E48D4E1E0F1090002C7A3F /* FilterWindowController.swift in Sources */,
 				E3839C5924FFF817007D0AB4 /* JavascriptAPIStandaloneWindow.swift in Sources */,
+				E3ECB98730A667820025D3E4 /* OSCMinimalView.swift in Sources */,
 				E3366AFA224A039500EF3C32 /* JavascriptAPIPreferences.swift in Sources */,
 				E3D94E802FD0519F00B08618 /* SidebarLayoutPane.swift in Sources */,
 				E32B157F21BE219700CDBCEA /* JavascriptPluginMenuItem.swift in Sources */,
@@ -2511,6 +2518,7 @@
 				E33FEEB52229A44F00B59711 /* JavascriptAPIUtils.swift in Sources */,
 				84C6D3671EB2A427009BF721 /* HistoryWindowController.swift in Sources */,
 				9E47DAC01E3CFA6D00457420 /* DurationDisplayTextField.swift in Sources */,
+				E3ECB98930A6A1D30025D3E4 /* OSCView.swift in Sources */,
 				E35306F62147F7AF008FE492 /* JavascriptAPIMpv.swift in Sources */,
 				840AF5821E732C8F00F4AF92 /* JustXMLRPC.swift in Sources */,
 				51EDB4722E85EE10007E5018 /* DisplayController.swift in Sources */,

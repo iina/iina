@@ -16,12 +16,6 @@ fileprivate let UIAnimationDuration = 0.25
 fileprivate let OSDAnimationDuration = 0.5
 fileprivate let CropAnimationDuration = 0.2
 
-fileprivate extension NSStackView.VisibilityPriority {
-  static let detachEarly = NSStackView.VisibilityPriority(rawValue: 850)
-  static let detachEarlier = NSStackView.VisibilityPriority(rawValue: 800)
-  static let detachEarliest = NSStackView.VisibilityPriority(rawValue: 750)
-}
-
 // The minimum distance that the user must drag before their click or tap gesture is interpreted as a drag gesture:
 fileprivate let minimumInitialDragDistance: CGFloat = 3.0
 
@@ -71,23 +65,11 @@ class MainWindowController: PlayerWindowController {
   var videoViewContainer: NSView!
   var titleBarView: Titlebar!
   var titleBarHeightConstraint: NSLayoutConstraint!
+
+  var osc: OSCController!
+  var currentControlBar: NSView?
   var oscBottomView: OSCBottomView!
   var oscFloatingView: OSCFloatingView!
-
-  var currentControlBar: NSView?
-
-  var oscPlayControlView: NSStackView!
-  var oscPlayControlMiddleView: NSStackView!
-  var leftArrowButton: NSButton!
-  var rightArrowButton: NSButton!
-  var oscSpeedLabelLeftContainer: NSView!
-  var oscSpeedLabelRightContainer: NSView!
-  var oscSpeedLabelLeft: NSTextField!
-  var oscSpeedLabelRight: NSTextField!
-
-  var oscVolumeView: NSView!
-  var oscToolbarView: NSStackView!
-  var oscSliderView: NSView!
 
   var osdView: OSDView!
   var additionalInfoView: AdditionalInfoView!
@@ -310,7 +292,7 @@ class MainWindowController: PlayerWindowController {
     case PK.arrowButtonAction.rawValue:
       if let newValue = change[.newKey] as? Int {
         arrowBtnFunction = Preference.ArrowButtonAction(rawValue: newValue)!
-        updateArrowButtons()
+        osc.updateArrowButtons(arrowBtnFunction)
       }
     case PK.pinchAction.rawValue:
       if let newValue = change[.newKey] as? Int {
@@ -333,9 +315,7 @@ class MainWindowController: PlayerWindowController {
         fadeableViews.update()
       }
     case PK.controlBarToolbarButtons.rawValue:
-      if let newValue = change[.newKey] as? [Int] {
-        setupOSCToolbarButtons(newValue.compactMap(Preference.ToolBarButton.init(rawValue:)))
-      }
+      osc.setupOSCToolbarButtons()
     case PK.alwaysShowOnTopIcon.rawValue:
       titleBarView.updateOnTopIcon()
     case PK.dockedControlBarAndTitlebar.rawValue:
@@ -356,10 +336,7 @@ class MainWindowController: PlayerWindowController {
       }
     case PK.enableLiveText.rawValue:
       if #available(macOS 13, *), let newValue = change[.newKey] as? Bool {
-        let buttons = oscToolbarView.subviews as! [NSButton]
-        if let btn = buttons.first(where: { $0.tag == Preference.ToolBarButton.liveText.rawValue }) {
-          btn.image = newValue ? Preference.ToolBarButton.liveText.alternateImage() : Preference.ToolBarButton.liveText.image()
-        }
+        osc.highlightToolbarButton(.liveText, newValue)
         if newValue {
           liveText.requestAnalysis()
         } else {
@@ -416,7 +393,7 @@ class MainWindowController: PlayerWindowController {
   private var videoContainerConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
 
   override var mouseActionDisabledViews: [NSView?] {
-    sidebars.mouseActionDisabledViews + [currentControlBar, titleBarView]
+    sidebars.mouseActionDisabledViews + [osc.currentOSCView, titleBarView]
   }
 
   // MARK: - PIP
@@ -511,86 +488,8 @@ class MainWindowController: PlayerWindowController {
     // osc
 
     oscBottomView.padding(.horizontal)
-
-    self.oscVolumeView = NSView()
-    oscVolumeView.translatesAutoresizingMaskIntoConstraints = false
-
-    volumeSlider.size(width: 70)
-
-    oscVolumeView.addSubview(muteButton)
-    oscVolumeView.addSubview(volumeSlider)
-    muteButton.size(width: 24, height: 24)
-      .padding(.vertical, .leading(4)).spacing(.trailing(4), to: volumeSlider)
-    volumeSlider.size(width: 70).center(.y)
-      .padding(.trailing(6))
-
-    self.oscPlayControlView = NSStackView()
-    oscPlayControlView.translatesAutoresizingMaskIntoConstraints = false
-    oscPlayControlView.orientation = .horizontal
-    oscPlayControlView.alignment = .centerY
-    oscPlayControlView.spacing = 0
-
-    self.leftArrowButton = NSButton(image: .speedl, target: self, action: #selector(leftButtonAction))
-    leftArrowButton.maxAcceleratorLevel = 5
-
-    self.rightArrowButton = NSButton(image: .speed, target: self, action: #selector(rightButtonAction))
-    rightArrowButton.maxAcceleratorLevel = 5
-
-    [playButton, leftArrowButton, rightArrowButton].forEach { button in
-      button!.translatesAutoresizingMaskIntoConstraints = false
-      button!.bezelStyle = .smallSquare
-      button!.isBordered = false
-      button!.size(width: 24, height: 24)
-    }
-
-    self.oscSpeedLabelLeftContainer = NSView()
-    self.oscSpeedLabelRightContainer = NSView()
-    [oscSpeedLabelLeftContainer, oscSpeedLabelRightContainer].forEach { view in
-      view!.translatesAutoresizingMaskIntoConstraints = false
-      view!.size(width: 30)  // label: 26 + padding: 8
-    }
-
-    self.oscSpeedLabelLeft = NSTextField(labelWithString: "")
-    self.oscSpeedLabelRight = NSTextField(labelWithString: "")
-    [oscSpeedLabelLeft, oscSpeedLabelRight].forEach { label in
-      label!.translatesAutoresizingMaskIntoConstraints = false
-      label!.font = .systemFont(ofSize: 10)
-      label!.textColor = .secondaryLabelColor
-    }
-    oscSpeedLabelLeftContainer.addSubview(oscSpeedLabelLeft)
-    oscSpeedLabelLeft.padding(.vertical, .trailing(8))
-    oscSpeedLabelRightContainer.addSubview(oscSpeedLabelRight)
-    oscSpeedLabelRight.padding(.vertical, .leading(8))
-
-    self.oscPlayControlMiddleView = NSStackView(views: [leftArrowButton, playButton, rightArrowButton])
-    oscPlayControlMiddleView.translatesAutoresizingMaskIntoConstraints = false
-    oscPlayControlMiddleView.orientation = .horizontal
-    oscPlayControlMiddleView.alignment = .centerY
-    oscPlayControlMiddleView.spacing = 24
-
-    self.oscToolbarView = NSStackView()
-    oscToolbarView.translatesAutoresizingMaskIntoConstraints = false
-    oscToolbarView.orientation = .horizontal
-    oscToolbarView.alignment = .centerY
-    oscToolbarView.spacing = 0
-    oscToolbarView.size(height: 24)
-
-    self.oscSliderView = TimeLabelOverflowedView()
-    [leftLabel, rightLabel].forEach { label in
-      label!.textColor = .secondaryLabelColor
-      label!.alignment = .center
-      label!.font = .monospacedDigitSystemFont(ofSize: 11, weight: .regular)
-      label!.widthAnchor.constraint(greaterThanOrEqualToConstant: 46).isActive = true
-    }
-    oscSliderView.translatesAutoresizingMaskIntoConstraints = false
-    oscSliderView.addSubview(leftLabel)
-    oscSliderView.addSubview(rightLabel)
-    oscSliderView.addSubview(playSlider)
-    leftLabel.padding(.leading(2)).spacing(.trailing(2), to: playSlider)
-      .center(.y, with: playSlider)
-    rightLabel.padding(.trailing(2)).spacing(.leading(2), to: playSlider)
-      .center(.y, with: playSlider)
-    playSlider.padding(.vertical(6))
+    self.osc = OSCController(mainWindow: self)
+    osc.initialize()
 
     // osd
 
@@ -627,18 +526,7 @@ class MainWindowController: PlayerWindowController {
     player.initVideo()
     videoView.postsFrameChangedNotifications = true
 
-    // osc views
-
     oscFloatingView.setupConstraints()
-    oscPlayControlView.addView(oscSpeedLabelLeftContainer, in: .center)
-    oscPlayControlView.addView(oscPlayControlMiddleView, in: .center)
-    oscPlayControlView.addView(oscSpeedLabelRightContainer, in: .center)
-    // Video controllers and timeline indicators should not flip in a right-to-left language.
-    oscPlayControlView.userInterfaceLayoutDirection = .leftToRight
-    setupOnScreenController(withPosition: oscPosition, forced: true)
-    let buttons = (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
-    updateArrowButtons()
-    setupOSCToolbarButtons(buttons)
 
     // fade-able views
 
@@ -672,7 +560,7 @@ class MainWindowController: PlayerWindowController {
       oscPosition == .floating ? .auto : .alwaysHidden
     }
 
-    fadeableViews.update()
+    setupOnScreenController(withPosition: oscPosition, forced: true)
 
     // other initialization
     cachedScreens = NSScreen.screens
@@ -681,8 +569,6 @@ class MainWindowController: PlayerWindowController {
     }
     // hide other views
     osdView.isHidden = true
-    oscSpeedLabelLeft.isHidden = true
-    oscSpeedLabelRight.isHidden = true
     pipOverlayView.isHidden = true
 
     if player.disableUI { hideUI() }
@@ -903,48 +789,19 @@ class MainWindowController: PlayerWindowController {
     window.setFrame(newFrame, display: true, animate: true)
   }
 
-  private func setupOSCToolbarButtons(_ buttons: [Preference.ToolBarButton]) {
-    let effectiveButtons = buttons.filter { $0 != .liveText || Preference.isLiveTextEnabled }
-    oscToolbarView.views.forEach { oscToolbarView.removeView($0) }
-    let liveTextEnabled = Preference.bool(for: .enableLiveText)
-    for buttonType in effectiveButtons {
-      let button = NSButton()
-      OSCToolbarButton.setStyle(of: button, buttonType: buttonType, reducedWidth: false)
-      if buttonType == .liveText && liveTextEnabled {
-        button.image = Preference.ToolBarButton.liveText.alternateImage()
-      }
-      button.action = #selector(self.toolBarButtonAction(_:))
-      oscToolbarView.addView(button, in: .trailing)
-    }
-
-//    let menuButton = NSButton()
-//    menuButton.bezelStyle = .regularSquare
-//    menuButton.image = .sf("chevron.forward.2")
-//    menuButton.isBordered = false
-//    menuButton.refusesFirstResponder = true
-//    menuButton.size(width: Preference.ToolBarButton.frameSize, height: Preference.ToolBarButton.frameSize)
-//    oscToolbarView.addView(menuButton, in: .trailing)
-  }
-
   @objc
   private func updateOSCToolbarButtons(_ notification: Notification) {
-    func highlight(_ button: Preference.ToolBarButton, _ isHighlighted: Bool) {
-      let buttons = oscToolbarView.subviews as! [NSButton]
-      let currentButton = buttons.first(where: { $0.tag == button.rawValue })
-      currentButton?.image = isHighlighted ? button.alternateImage() : button.image()
-    }
-
     let enable = (notification.userInfo?["enable"] as? Bool ?? false)
     switch notification.name {
     case .iinaPIPStatusChanged:
-      highlight(.pip, enable)
+      osc.highlightToolbarButton(.pip, enable)
     case .iinaFullscreenChanged:
-      highlight(.fullScreen, enable)
+      osc.highlightToolbarButton(.fullScreen, enable)
     case .iinaSidebarStatusChanged:
       // no userInfo is provided in this notification
-      highlight(.settings, sidebars.isShowing(.settings))
-      highlight(.plugins, sidebars.isShowing(.plugins))
-      highlight(.playlist, sidebars.isShowing(.playlist))
+      osc.highlightToolbarButton(.settings, sidebars.isShowing(.settings))
+      osc.highlightToolbarButton(.plugins, sidebars.isShowing(.plugins))
+      osc.highlightToolbarButton(.playlist, sidebars.isShowing(.playlist))
       fadeableViews.update()
     default:
       break
@@ -954,24 +811,11 @@ class MainWindowController: PlayerWindowController {
   private func setupOnScreenController(withPosition newPosition: Preference.OSCPosition, forced: Bool = false) {
     guard forced || oscPosition != newPosition else { return }
 
+    oscFloatingView.isHidden = true
+    oscBottomView.isHidden = true
+
     let isSwitchingToTop = newPosition == .top
     let isSwitchingFromTop = oscPosition == .top
-    let isFloating = newPosition == .floating
-
-    // reset
-    [oscFloatingView, oscBottomView].forEach { $0.isHidden = true }
-
-    oscFloatingView.isDragging = false
-
-    // detach all fragment views
-    [oscFloatingView.oscTopView, titleBarView.oscView, oscBottomView.oscView].forEach { stackView in
-      stackView!.views.forEach {
-        stackView!.removeView($0)
-      }
-    }
-    [oscSliderView, oscPlayControlView, oscToolbarView, oscVolumeView].forEach {
-        $0!.removeFromSuperview()
-    }
 
     let isInFullScreen = fsState.isFullscreen
     titleBarView.update(hasOSC: isSwitchingToTop, inFullScreen: isInFullScreen)
@@ -980,56 +824,8 @@ class MainWindowController: PlayerWindowController {
       titleBarView.isHidden = true
     }
 
-    oscBottomView.updateVerticalConstraint(isDisplaying: newPosition == .bottom)
-
+    osc.updatePosition(from: oscPosition, to: newPosition, forced: forced)
     oscPosition = newPosition
-
-    // add fragment views
-    switch oscPosition {
-    case .floating:
-      currentControlBar = oscFloatingView
-      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelLeftContainer)
-      oscPlayControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscSpeedLabelRightContainer)
-      oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
-      oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
-      oscFloatingView.oscTopView.addView(oscPlayControlView, in: .center)
-      oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
-      oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
-      oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscFloatingView.oscBottomView.addSubview(oscSliderView)
-      Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": oscSliderView])
-      Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": oscPlayControlView])
-      oscFloatingView.initPosition()
-    case .top:
-      let oscTopMainView = titleBarView.oscView!
-      currentControlBar = nil
-      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelLeftContainer)
-      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelRightContainer)
-      oscTopMainView.addView(oscVolumeView, in: .trailing)
-      oscTopMainView.addView(oscToolbarView, in: .trailing)
-      oscTopMainView.addView(oscPlayControlView, in: .leading)
-      oscTopMainView.addView(oscSliderView, in: .leading)
-      oscTopMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscTopMainView.setVisibilityPriority(.mustHold, for: oscSliderView)
-      oscTopMainView.setVisibilityPriority(.detachEarly, for: oscVolumeView)
-      oscTopMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
-    case .bottom:
-      oscBottomView.isHidden = false
-      let oscBottomMainView = oscBottomView.oscView!
-      currentControlBar = oscBottomView
-      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelLeftContainer)
-      oscPlayControlView.setVisibilityPriority(.notVisible, for: oscSpeedLabelRightContainer)
-      oscBottomMainView.addView(oscVolumeView, in: .trailing)
-      oscBottomMainView.addView(oscToolbarView, in: .trailing)
-      oscBottomMainView.addView(oscPlayControlView, in: .leading)
-      oscBottomMainView.addView(oscSliderView, in: .leading)
-      oscBottomMainView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      oscBottomMainView.setVisibilityPriority(.mustHold, for: oscSliderView)
-      oscBottomMainView.setVisibilityPriority(.detachEarly, for: oscVolumeView)
-      oscBottomMainView.setVisibilityPriority(.detachEarlier, for: oscToolbarView)
-    }
-
-    oscPlayControlMiddleView.spacing = isFloating ? 24: 16
 
     fadeableViews.update()
     showUI()
@@ -1230,7 +1026,7 @@ class MainWindowController: PlayerWindowController {
     } else if event.inAnyOf([volumeSlider]) && volumeSlider.isEnabled {
       volumeOverride = true
     } else {
-      guard !event.inAnyOf([currentControlBar]) else { return }
+      guard !event.inAnyOf([osc.currentOSCView]) else { return }
     }
 
     guard !event.inAnyOf(sidebars.mouseActionDisabledViews + [titleBarView])
@@ -1290,7 +1086,7 @@ class MainWindowController: PlayerWindowController {
       showUI()
     }
     // check whether mouse is in osc
-    if event.inAnyOf([currentControlBar, titleBarView]) {
+    if event.inAnyOf([osc.currentOSCView, titleBarView]) {
       destroyTimer()
     } else {
       updateTimer()
@@ -1893,7 +1689,7 @@ class MainWindowController: PlayerWindowController {
     // and left/right buttons will not be centered after the OSC expands to full size. Forcing
     // layout corrects this. See issue #5244.
     if oscPosition == .floating {
-      oscPlayControlView.needsLayout = true
+      osc.playControlView.needsLayout = true
     }
 
     // call delegate
@@ -2744,30 +2540,6 @@ class MainWindowController: PlayerWindowController {
     syncPIPPlaybackState()
   }
 
-  /// Configure the OSC arrow buttons based on IINA's `Use left/right button for` setting.
-  ///
-  /// For most settings the button is configured to be a
-  /// [momentaryPushIn](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/momentarypushin)
-  /// button. However if the button is set to control playback speed the button is configured to be a
-  /// [multiLevelAccelerator](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/multilevelaccelerator)
-  /// button. This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
-  func updateArrowButtons() {
-    if arrowBtnFunction == .playlist {
-      leftArrowButton.image = #imageLiteral(resourceName: "nextl")
-      rightArrowButton.image = #imageLiteral(resourceName: "nextr")
-    } else {
-      leftArrowButton.image = #imageLiteral(resourceName: "speedl")
-      rightArrowButton.image = #imageLiteral(resourceName: "speed")
-    }
-    if arrowBtnFunction == .speed {
-      leftArrowButton.setButtonType(.multiLevelAccelerator)
-      rightArrowButton.setButtonType(.multiLevelAccelerator)
-    } else {
-      leftArrowButton.setButtonType(.momentaryPushIn)
-      rightArrowButton.setButtonType(.momentaryPushIn)
-    }
-  }
-
   override func updateVolume() {
     guard loaded else { return }
     super.updateVolume()
@@ -2902,19 +2674,19 @@ class MainWindowController: PlayerWindowController {
 
   func updateSpeedLabel(speed: Double) {
     if (speed == 1) {
-      oscSpeedLabelLeft.isHidden = true
-      oscSpeedLabelRight.isHidden = true
+      osc.speedLabelLeft.isHidden = true
+      osc.speedLabelRight.isHidden = true
     } else if speed < 1 {
-      oscSpeedLabelLeft.isHidden = false
-      oscSpeedLabelRight.isHidden = true
-      oscSpeedLabelLeft.stringValue = String(format: "%.2fx", speed)
+      osc.speedLabelLeft.isHidden = false
+      osc.speedLabelRight.isHidden = true
+      osc.speedLabelLeft.stringValue = String(format: "%.2fx", speed)
     } else if speed > 1 {
-      oscSpeedLabelLeft.isHidden = true
-      oscSpeedLabelRight.isHidden = false
+      osc.speedLabelLeft.isHidden = true
+      osc.speedLabelRight.isHidden = false
       let fmt = NumberFormatter()
       fmt.numberStyle = .decimal
       fmt.maximumSignificantDigits = 3
-      oscSpeedLabelRight.stringValue = fmt.string(for: speed)! + "x"
+      osc.speedLabelRight.stringValue = fmt.string(for: speed)! + "x"
     }
   }
 

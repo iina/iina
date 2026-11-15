@@ -179,3 +179,28 @@ class OSCFloatingView: TranslucentView {
     fatalError("init(coder:) has not been implemented")
   }
 }
+
+
+extension OSCFloatingView: OSCViewContainer {
+  func setup(osc: OSCController, isActive: Bool) {
+    isDragging = false
+    guard isActive else { return }
+
+    osc.playControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: osc.speedLabelLeftContainer)
+    osc.playControlView.setVisibilityPriority(.detachOnlyIfNecessary, for: osc.speedLabelRightContainer)
+    oscTopView.addView(osc.volumeView, in: .leading)
+    oscTopView.addView(osc.toolbarView, in: .trailing)
+    oscTopView.addView(osc.playControlView, in: .center)
+    oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: osc.volumeView)
+    oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: osc.toolbarView)
+    oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
+    oscBottomView.addSubview(osc.sliderView)
+    Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": osc.sliderView])
+    Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": osc.playControlView])
+    initPosition()
+  }
+
+  func detachAllComponents() {
+    oscTopView.views.forEach(oscTopView.removeView)
+  }
+}

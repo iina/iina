@@ -1040,7 +1040,11 @@ struct Preference {
     guard isLiveTextAvailable else { return false }
     return Preference.bool(for: .enableLiveText)
   }
-  
+
+  static var oscToolbarButtons: [ToolBarButton] {
+    (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [

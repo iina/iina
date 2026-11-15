@@ -118,6 +118,7 @@ class OSCController {
     sliderView.addSubview(mainWindow.leftLabel)
     sliderView.addSubview(mainWindow.rightLabel)
     sliderView.addSubview(mainWindow.playSlider)
+    sliderView.widthAnchor.constraint(greaterThanOrEqualToConstant: 180).isActive = true
     mainWindow.leftLabel.padding(.leading(2)).spacing(.trailing(2), to: mainWindow.playSlider)
       .center(.y, with: mainWindow.playSlider)
     mainWindow.rightLabel.padding(.trailing(2)).spacing(.leading(2), to: mainWindow.playSlider)

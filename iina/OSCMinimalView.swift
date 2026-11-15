@@ -45,7 +45,19 @@ class OSCMinimalView: NSView {
 
     super.init(frame: .zero)
 
+    postsFrameChangedNotifications = true
     translatesAutoresizingMaskIntoConstraints = false
+
+    NotificationCenter.default.addObserver(
+      forName: NSView.frameDidChangeNotification,
+      object: self,
+      queue: .main
+    ) { [unowned self] _ in
+      toolbarView.isHidden = frame.height < 280
+      [playButtonView, leftArrowView, rightArrowView].forEach {
+        $0.isHidden = frame.height < 180
+      }
+    }
 
     self.container = NSView()
     container.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +93,7 @@ class OSCMinimalView: NSView {
     toolbarView.spacing(.bottom(12), to: mainView)
 
     addSubview(playButtonView)
-    playButtonView.center(.x,).center(.y)
+    playButtonView.center(.x).center(.y)
 
     addSubview(leftArrowView)
     leftArrowView.center(.y, with: playButtonView).spacing(.trailing(20), to: playButtonView)

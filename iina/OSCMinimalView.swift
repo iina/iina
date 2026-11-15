@@ -9,19 +9,15 @@
 
 fileprivate extension LayoutValue {
   static let oscPaddingVertical = LayoutValue(6, 4)
-  static let oscPaddingLeading = LayoutValue(10, 6)
-  static let oscPaddingTrailing = LayoutValue(10, 6)
+  static let oscPaddingHorizontal = LayoutValue(10, 6)
+  static let toolbarPaddingVertical = LayoutValue(8, 6)
+  static let toolbarPaddingHorizontal = LayoutValue(12, 8)
 }
-
-
-fileprivate let ui = UIHelper()
 
 
 class OSCMinimalView: NSView {
   weak var mainWindow: MainWindowController!
   private let prefObserver = Preference.Observer()
-
-  var oscView: TimeLabelOverflowedStackView!
 
   private var mainView: TranslucentView!
   private var toolbarView: TranslucentView!
@@ -30,18 +26,21 @@ class OSCMinimalView: NSView {
   private var rightArrowView: TranslucentView!
 
   private var container: NSView!
-  private var toolbarContainer: NSStackView!
-  private var playButtonContainer: NSStackView!
-  private var leftArrowContainer: NSStackView!
-  private var rightArrowContainer: NSStackView!
+  private var toolbarContainer: NSView!
+
+  private var playSlider: TimeLabelOverflowedStackView!
+  private var toolbar: NSStackView!
+  private var playButton: NSStackView!
+  private var leftArrow: NSStackView!
+  private var rightArrow: NSStackView!
 
   init(mainWindow: MainWindowController) {
     self.mainWindow = mainWindow
     self.mainView = TranslucentView(liquidGlassCornerRadius: 24, vevCornerRadius: 12, padding: (0, 0))
-    self.toolbarView = TranslucentView(liquidGlassCornerRadius: 24, vevCornerRadius: 12, padding: (12, 8))
+    self.toolbarView = TranslucentView(liquidGlassCornerRadius: 24, vevCornerRadius: 12, padding: (0, 0))
     self.playButtonView = TranslucentView(liquidGlassCornerRadius: 32, padding: (20, 20))
-    self.leftArrowView = TranslucentView(liquidGlassCornerRadius: 32, padding: (12, 14))
-    self.rightArrowView = TranslucentView(liquidGlassCornerRadius: 32, padding: (12, 14))
+    self.leftArrowView = TranslucentView(liquidGlassCornerRadius: 32, padding: (12, 12))
+    self.rightArrowView = TranslucentView(liquidGlassCornerRadius: 32, padding: (12, 12))
 
     super.init(frame: .zero)
 
@@ -54,36 +53,38 @@ class OSCMinimalView: NSView {
       queue: .main
     ) { [unowned self] _ in
       toolbarView.isHidden = frame.height < 280
-      [playButtonView, leftArrowView, rightArrowView].forEach {
-        $0.isHidden = frame.height < 180
-      }
+      mainView.isHidden = frame.height < 180
     }
 
     self.container = NSView()
     container.translatesAutoresizingMaskIntoConstraints = false
-    self.toolbarContainer = NSStackView()
-    toolbarContainer.translatesAutoresizingMaskIntoConstraints = false
-    self.playButtonContainer = NSStackView()
-    playButtonContainer.translatesAutoresizingMaskIntoConstraints = false
-    self.leftArrowContainer = NSStackView()
-    leftArrowContainer.translatesAutoresizingMaskIntoConstraints = false
-    leftArrowContainer.addView(ui.space(width: 4, height: 8), in: .center)
-    leftArrowContainer.spacing = 0
-    self.rightArrowContainer = NSStackView()
-    rightArrowContainer.translatesAutoresizingMaskIntoConstraints = false
-    rightArrowContainer.addView(ui.space(width: 4, height: 8), in: .center)
-    rightArrowContainer.spacing = 0
+    self.toolbarContainer = NSView()
+    container.translatesAutoresizingMaskIntoConstraints = false
 
-    self.oscView = TimeLabelOverflowedStackView()
-    oscView.translatesAutoresizingMaskIntoConstraints = false
-    container.addSubview(oscView)
-    oscView.padding(.vertical(.oscPaddingVertical), .trailing(.oscPaddingTrailing), .leading(.oscPaddingLeading))
+    self.toolbar = NSStackView()
+    toolbarContainer.translatesAutoresizingMaskIntoConstraints = false
+    self.playButton = NSStackView()
+    playButton.translatesAutoresizingMaskIntoConstraints = false
+    self.leftArrow = NSStackView()
+    leftArrow.translatesAutoresizingMaskIntoConstraints = false
+    self.rightArrow = NSStackView()
+    rightArrow.translatesAutoresizingMaskIntoConstraints = false
+
+    self.playSlider = TimeLabelOverflowedStackView()
+    playSlider.translatesAutoresizingMaskIntoConstraints = false
+    container.addSubview(playSlider)
+    playSlider.padding(.vertical(.oscPaddingVertical), .horizontal(.oscPaddingHorizontal))
+
+    self.toolbar = NSStackView()
+    toolbar.translatesAutoresizingMaskIntoConstraints = false
+    toolbarContainer.addSubview(toolbar)
+    toolbar.padding(.vertical(.toolbarPaddingVertical), .horizontal(.toolbarPaddingHorizontal))
 
     mainView.setContent(container)
     toolbarView.setContent(toolbarContainer)
-    playButtonView.setContent(playButtonContainer)
-    leftArrowView.setContent(leftArrowContainer)
-    rightArrowView.setContent(rightArrowContainer)
+    playButtonView.setContent(playButton)
+    leftArrowView.setContent(leftArrow)
+    rightArrowView.setContent(rightArrow)
 
     addSubview(mainView)
     mainView.padding(.bottom(10), .horizontal(12))
@@ -122,20 +123,20 @@ extension OSCMinimalView: OSCViewContainer {
 
     osc.playControlView.setVisibilityPriority(.notVisible, for: osc.speedLabelLeftContainer)
     osc.playControlView.setVisibilityPriority(.notVisible, for: osc.speedLabelRightContainer)
-    oscView.addView(osc.volumeView, in: .trailing)
-    oscView.addView(osc.sliderView, in: .leading)
-    oscView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-    oscView.setVisibilityPriority(.mustHold, for: osc.sliderView)
-    oscView.setVisibilityPriority(.oscDetachEarly, for: osc.volumeView)
+    playSlider.addView(osc.volumeView, in: .trailing)
+    playSlider.addView(osc.sliderView, in: .leading)
+    playSlider.setClippingResistancePriority(.defaultLow, for: .horizontal)
+    playSlider.setVisibilityPriority(.mustHold, for: osc.sliderView)
+    playSlider.setVisibilityPriority(.oscDetachEarly, for: osc.volumeView)
 
-    toolbarContainer.addView(osc.toolbarView, in: .center)
-    playButtonContainer.addView(mainWindow.playButton, in: .center)
-    leftArrowContainer.insertView(osc.leftArrowButton, at: 0, in: .center)
-    rightArrowContainer.addView(osc.rightArrowButton, in: .center)
+    toolbar.addView(osc.toolbarView, in: .center)
+    playButton.addView(mainWindow.playButton, in: .center)
+    leftArrow.addView(osc.leftArrowButton, in: .center)
+    rightArrow.addView(osc.rightArrowButton, in: .center)
   }
 
   func detachAllComponents() {
-    [oscView, toolbarContainer, playButtonContainer].forEach { v in
+    [playSlider, toolbar, playButton, leftArrow, rightArrow].forEach { v in
       v.views.forEach(v.removeView)
     }
   }

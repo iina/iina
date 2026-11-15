@@ -14,6 +14,17 @@ extension NSStackView.VisibilityPriority {
 }
 
 
+fileprivate extension NSImage.SymbolConfiguration {
+  static let arrowIconConfig = {
+    if #available(macOS 26.0, *) {
+      NSImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+    } else {
+      NSImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+    }
+  }()
+}
+
+
 class OSCController {
   private unowned var mainWindow: MainWindowController!
 
@@ -62,10 +73,12 @@ class OSCController {
     playControlView.alignment = .centerY
     playControlView.spacing = 0
 
-    self.leftArrowButton = NSButton(image: .speedl, target: mainWindow, action: #selector(MainWindowController.leftButtonAction))
+    self.leftArrowButton = NSButton(image: .sf("backward.fill", withConfiguration: .arrowIconConfig)!,
+                                    target: mainWindow, action: #selector(MainWindowController.leftButtonAction))
     leftArrowButton.maxAcceleratorLevel = 5
 
-    self.rightArrowButton = NSButton(image: .speed, target: mainWindow, action: #selector(MainWindowController.rightButtonAction))
+    self.rightArrowButton = NSButton(image: .sf("forward.fill", withConfiguration: .arrowIconConfig)!,
+                                     target: mainWindow, action: #selector(MainWindowController.rightButtonAction))
     rightArrowButton.maxAcceleratorLevel = 5
 
     [mainWindow.playButton, leftArrowButton, rightArrowButton].forEach { button in
@@ -155,7 +168,7 @@ class OSCController {
     playControlMiddleView.setViews(
       [leftArrowButton, mainWindow.playButton, rightArrowButton], in: .leading)
 
-    playControlMiddleView.spacing = newPosition == .floating ? 24 : 16
+    playControlMiddleView.spacing = newPosition == .floating ? 20 : 16
     for (pos, view) in oscViews {
       view.setup(osc: self, isActive: newPosition == pos)
     }
@@ -206,19 +219,20 @@ class OSCController {
   /// [multiLevelAccelerator](https://developer.apple.com/documentation/appkit/nsbutton/buttontype/multilevelaccelerator) button.
   /// This allows the user to control the speed using pressure when using devices that support pressure sensitivity.
   func updateArrowButtons(_ arrowBtnFunction: Preference.ArrowButtonAction) {
-    if arrowBtnFunction == .playlist {
-      leftArrowButton.image = #imageLiteral(resourceName: "nextl")
-      rightArrowButton.image = #imageLiteral(resourceName: "nextr")
-    } else {
-      leftArrowButton.image = #imageLiteral(resourceName: "speedl")
-      rightArrowButton.image = #imageLiteral(resourceName: "speed")
-    }
+    let isPlaylist = arrowBtnFunction == .playlist
+    leftArrowButton.image = .sf(isPlaylist ? "backward.end.fill" : "backward.fill",
+                                withConfiguration: .arrowIconConfig)
+    rightArrowButton.image = .sf(isPlaylist ? "forward.end.fill" : "forward.fill",
+                                 withConfiguration: .arrowIconConfig)
     if arrowBtnFunction == .speed {
       leftArrowButton.setButtonType(.multiLevelAccelerator)
       rightArrowButton.setButtonType(.multiLevelAccelerator)
     } else {
       leftArrowButton.setButtonType(.momentaryPushIn)
       rightArrowButton.setButtonType(.momentaryPushIn)
+      // if arrow button type changed while speed up/down, need to hide them
+      playControlView.setVisibilityPriority(.notVisible, for: speedLabelLeftContainer)
+      playControlView.setVisibilityPriority(.notVisible, for: speedLabelRightContainer)
     }
   }
 }

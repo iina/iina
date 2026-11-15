@@ -1951,11 +1951,12 @@ class PlayerCore: NSObject {
   }
 
   /** Scale is a double value in [-100, -1] + [1, 100] */
-  func setSubScale(_ scale: Double) {
+  func setSubScale(_ scale: Double, forPrimary: Bool = true) {
+    let option = forPrimary ? MPVOption.Subtitles.subScale : MPVOption.Subtitles.secondarySubScale
     if scale > 0 {
-      mpv.setDouble(MPVOption.Subtitles.subScale, scale, level: .verbose)
+      mpv.setDouble(option, scale, level: .verbose)
     } else {
-      mpv.setDouble(MPVOption.Subtitles.subScale, -scale, level: .verbose)
+      mpv.setDouble(option, -scale, level: .verbose)
     }
   }
 
@@ -2472,6 +2473,14 @@ class PlayerCore: NSObject {
   func secondarySubPosChanged(_ position: Double) {
     sendOSD(.secondSubPos(position))
     postNotification(.iinaSubPositionChanged)
+  }
+
+  func secondarySubScaleChanged(_ scale: Double) {
+    guard scale != 0 else { return }
+    let displayValue = scale >= 1 ? scale : -1 / scale
+    let truncated = round(displayValue * 100) / 100
+    sendOSD(.secondSubScale(truncated))
+    postNotification(.iinaSubScaleChanged)
   }
 
   func secondarySidChanged() {

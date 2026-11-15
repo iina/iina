@@ -44,9 +44,44 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   @Atomic private var playlistTotalLengthIsReady = false
   @Atomic private var playlistTotalLength: Double? = nil
 
-  var selectedRows: IndexSet?
+  private var contextSelectionIDs: Set<Int>?
+  var selectedRows: IndexSet? {
+    get {
+      guard let ids = contextSelectionIDs else { return nil }
+      return player.info.$playlist.withLock { playlist in
+        IndexSet(playlist.indices.filter { ids.contains(playlist[$0].playlistID) })
+      }
+    }
+    set {
+      contextSelectionIDs = newValue.map { rows in
+        player.info.$playlist.withLock { playlist in
+          Set(rows.compactMap { playlist.indices.contains($0) ? playlist[$0].playlistID : nil })
+        }
+      }
+    }
+  }
+  private let standalone: Bool
+  private let searchField = NSSearchField()
+  private var displayedIndexes: [Int] = []
+  private var displayedIDs: [Int] = []
 
-  init(player: PlayerCore) {
+  private func playlistIndexes(for rows: IndexSet) -> IndexSet {
+    let ids = Set(rows.compactMap { displayedIDs.indices.contains($0) ? displayedIDs[$0] : nil })
+    return player.info.$playlist.withLock { playlist in
+      IndexSet(playlist.indices.filter { ids.contains(playlist[$0].playlistID) })
+    }
+  }
+
+  private var selectedPlaylistIndexes: IndexSet {
+    playlistIndexes(for: tableView.selectedRowIndexes)
+  }
+
+  @objc private func searchChanged(_ sender: NSSearchField) {
+    updateTable(reloadPlaylist: false)
+  }
+
+  init(player: PlayerCore, standalone: Bool = false) {
+    self.standalone = standalone
     self.player = player
     super.init(frame: .zero)
 
@@ -89,8 +124,13 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     scrollView.autohidesScrollers = true
     scrollView.drawsBackground = false
 
-    self.tableView = NSTableView()
-    tableView.style = .fullWidth
+    let playlistTable = PlaylistTableView()
+    playlistTable.removeSelection = { [weak self] in
+      guard let self else { return }
+      self.player.playlistRemove(self.selectedPlaylistIndexes)
+    }
+    self.tableView = playlistTable
+    tableView.style = standalone ? .plain : .fullWidth
     tableView.intercellSpacing = .init(width: 4, height: 2)
     tableView.allowsColumnResizing = false
     tableView.allowsEmptySelection = true
@@ -103,8 +143,8 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     tableView.doubleAction = #selector(doubleAction)
     tableView.registerForDraggedTypes([.iinaPlaylistItem, .nsFilenames, .nsURL, .string])
     tableView.headerView = nil
-    tableView.backgroundColor = .sidebarTableBackground
-    tableView.gridStyleMask = [.solidHorizontalGridLineMask]
+    tableView.backgroundColor = standalone ? .clear : .sidebarTableBackground
+    tableView.gridStyleMask = standalone ? [] : [.solidHorizontalGridLineMask]
 
     tableView.rowHeight = LayoutValue.tableRowHeight.get()
     LayoutValue.tableRowHeight.use { [weak self] val in
@@ -138,7 +178,18 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     addSubview(scrollView)
     addSubview(buttonContainer)
 
-    scrollView.padding(.top, .horizontal).spacing(.bottom, to: buttonContainer)
+    if standalone {
+      searchField.translatesAutoresizingMaskIntoConstraints = false
+      searchField.placeholderString = NSLocalizedString("playlist.search", value: "Search playlist", comment: "Search playlist")
+      searchField.target = self
+      searchField.action = #selector(searchChanged(_:))
+      searchField.sendsSearchStringImmediately = true
+      addSubview(searchField)
+      searchField.padding(.top(10), .horizontal(10))
+      scrollView.padding(.horizontal).spacing(.top(8), to: searchField).spacing(.bottom, to: buttonContainer)
+    } else {
+      scrollView.padding(.top, .horizontal).spacing(.bottom, to: buttonContainer)
+    }
     buttonContainer.padding(.bottom, .horizontal)
 
     prefObserver.addAll(.playlistShowMetadata, .playlistShowMetadataInMusicMode) { [unowned self] _ in
@@ -168,10 +219,22 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     updateShuffleBtnStatus()
   }
 
-  private func updateTable() {
+  private func updateTable(reloadPlaylist: Bool = true) {
     guard player.info.state.active else { return }
-    player.getPlaylist()
+    let selectedIDs = Set(tableView.selectedRowIndexes.compactMap {
+      displayedIDs.indices.contains($0) ? displayedIDs[$0] : nil
+    })
+    if reloadPlaylist { player.getPlaylist() }
+    let query = searchField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+    let playlist = player.info.playlist
+    displayedIndexes = playlist.indices.filter {
+      query.isEmpty || playlist[$0].filenameForDisplay.localizedCaseInsensitiveContains(query)
+        || playlist[$0].filename.localizedCaseInsensitiveContains(query)
+    }
+    displayedIDs = displayedIndexes.map { playlist[$0].playlistID }
     tableView.reloadData()
+    tableView.selectRowIndexes(IndexSet(displayedIDs.indices.filter { selectedIDs.contains(displayedIDs[$0]) }),
+                              byExtendingSelection: false)
   }
 
   func updateLoopBtnStatus() {
@@ -193,7 +256,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     totalLengthLabel.isHidden = false
     if tableView.numberOfSelectedRows > 0 {
       let info = player.info
-      let selectedDuration = info.calculateTotalDuration(tableView.selectedRowIndexes)
+      let selectedDuration = info.calculateTotalDuration(selectedPlaylistIndexes)
       totalLengthLabel.stringValue = String(format: NSLocalizedString("playlist.total_length_with_selected", comment: "%@ of %@ selected"),
                                             VideoTime(selectedDuration).stringRepresentation,
                                             VideoTime(playlistTotalLength).stringRepresentation)
@@ -235,13 +298,13 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   }
 
   @objc func paste(_ sender: NSMenuItem) {
-    let dest = tableView.selectedRowIndexes.first ?? 0
+    let dest = standalone ? -1 : (selectedPlaylistIndexes.first ?? 0)
     pasteFromPasteboard(row: dest, from: .general)
   }
 
 
   @objc func delete(_ sender: NSMenuItem) {
-    player.playlistRemove(tableView.selectedRowIndexes)
+    player.playlistRemove(selectedPlaylistIndexes)
   }
 
   @objc func addToPlaylistBtnAction(_ sender: NSButton) {
@@ -249,7 +312,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   }
 
   @objc func removeBtnAction(_ sender: NSButton) {
-    player.playlistRemove(tableView.selectedRowIndexes)
+    player.playlistRemove(selectedPlaylistIndexes)
   }
 
   @objc func addFileAction(_ sender: AnyObject) {
@@ -291,7 +354,8 @@ class SidebarPlaylistPane: NSView, SidebarPane {
 
   @objc func doubleAction(_ sender: AnyObject) {
     guard tableView.numberOfSelectedRows > 0 else { return }
-    player.playFileInPlaylist(tableView.selectedRow)
+    guard let index = selectedPlaylistIndexes.first else { return }
+    player.playFileInPlaylist(index)
     tableView.deselectAll(self)
     tableView.reloadData()
   }
@@ -343,7 +407,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
 
 extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return player.info.$playlist.withLock { $0.count }
+    return displayedIndexes.count
   }
 
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
@@ -368,8 +432,10 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
     guard let identifier = tableColumn?.identifier else { return nil }
 
     let item: MPVPlaylistItem? = player.info.$playlist.withLock { playlist in
-      guard row < playlist.count else { return nil }
-      return playlist[row]
+      guard displayedIndexes.indices.contains(row) else { return nil }
+      let index = displayedIndexes[row]
+      guard playlist.indices.contains(index) else { return nil }
+      return playlist[index]
     }
     guard let item else { return nil }
 
@@ -383,6 +449,7 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
       let pointer = userInterfaceLayoutDirection == .rightToLeft ?
       Constants.String.blackLeftPointingTriangle :  Constants.String.blackRightPointingTriangle
       view.label.stringValue = item.isPlaying ? pointer : ""
+      view.label.textColor = .controlAccentColor
       return view
     } else if identifier == .trackName {
       let view = tableView.makeView(withIdentifier: identifier, owner: self) as? PlaylistTrackCellView ?? {
@@ -409,10 +476,12 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-    tableView.setDropRow(row, dropOperation: .above)
     if info.draggingSource as? NSTableView === tableView {
+      guard searchField.stringValue.isEmpty else { return [] }
+      tableView.setDropRow(row, dropOperation: .above)
       return .move
     }
+    tableView.setDropRow(standalone ? tableView.numberOfRows : row, dropOperation: .above)
     return player.acceptFromPasteboard(info, isPlaylist: true)
   }
 
@@ -420,6 +489,7 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
     if info.draggingSource as? NSTableView === tableView,
       let rowData = info.draggingPasteboard.data(forType: .iinaPlaylistItem),
       let indexSet = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSIndexSet.self, from: rowData) as? IndexSet {
+      guard searchField.stringValue.isEmpty else { return false }
       // Drag & drop within playlistTableView
       var oldIndexOffset = 0, newIndexOffset = 0
       for oldIndex in indexSet {
@@ -436,10 +506,11 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
       return true
     }
     // Otherwise, could be copy/cut & paste within playlistTableView
-    return pasteFromPasteboard(row: row, from: info.draggingPasteboard)
+    return pasteFromPasteboard(row: standalone ? -1 : row, from: info.draggingPasteboard)
   }
 
   func copyToPasteboard(_ tableView: NSTableView, writeRowsWith rowIndexes: IndexSet, to pboard: NSPasteboard) {
+    let rowIndexes = playlistIndexes(for: rowIndexes)
     do {
       let indexesData = try NSKeyedArchiver.archivedData(withRootObject: rowIndexes, requiringSecureCoding: true)
       let filePaths = player.info.$playlist.withLock { playlist in
@@ -457,6 +528,10 @@ extension SidebarPlaylistPane: NSTableViewDelegate, NSTableViewDataSource {
 
   @discardableResult
   func pasteFromPasteboard(row: Int, from pboard: NSPasteboard) -> Bool {
+    if let urls = player.folderDropURLs(from: pboard) {
+      player.folderPlaylistImporter.enqueue(urls)
+      return true
+    }
     if let paths = pboard.propertyList(forType: .nsFilenames) as? [String] {
       let playableFiles = Utility.resolveURLs(player.getPlayableFiles(in: paths.map {
         $0.hasPrefix("/") ? URL(fileURLWithPath: $0) : URL(string: $0)!
@@ -504,9 +579,9 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
       }
     }
 
-    selectedRows = target
+    selectedRows = playlistIndexes(for: target)
     menu.removeAllItems()
-    let items = buildMenu(forRows: target).items
+    let items = buildMenu(forRows: selectedRows!).items
     for item in items {
       menu.addItem(item)
     }
@@ -595,7 +670,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
         guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { return }
         self.player.info.$matchedSubs.withLock { $0[filename, default: []].append(subURL) }
       }
-      self.tableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
+      self.tableView.reloadData()
     }
   }
 
@@ -604,7 +679,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
     for index in selectedRows {
       let filename = player.info.$playlist.withLock { $0[index].filename }
       player.info.$matchedSubs.withLock { $0[filename]?.removeAll() }
-      tableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))
+      tableView.reloadData()
     }
   }
 
@@ -782,6 +857,7 @@ class PlaylistTrackCellView: NSTableCellView {
   private var trackNameLabel: NSTextField!
   private var infoLabel: NSTextField!
   private var durationLabel: NSTextField!
+  private var representedPlaylistID: Int?
 
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
@@ -837,11 +913,15 @@ class PlaylistTrackCellView: NSTableCellView {
 
   override func prepareForReuse() {
     super.prepareForReuse()
+    representedPlaylistID = nil
     setPrefix(nil)
     setAdditionalInfo(nil)
   }
 
   func update(pane: SidebarPlaylistPane, player: PlayerCore, item: MPVPlaylistItem, row: Int) {
+    representedPlaylistID = item.playlistID
+    trackNameLabel.textColor = item.isPlaying ? .controlAccentColor : .labelColor
+    trackNameLabel.font = item.isPlaying ? .boldSystemFont(ofSize: NSFont.systemFontSize) : .systemFont(ofSize: NSFont.systemFontSize)
     // file name
     let filename = item.filenameForDisplay
     let displayStr: String = NSString(string: filename).deletingPathExtension
@@ -874,6 +954,7 @@ class PlaylistTrackCellView: NSTableCellView {
       guard let self else { return }
       if let (artist, title) = getCachedMetadata() {
         DispatchQueue.main.async {
+          guard self.representedPlaylistID == item.playlistID else { return }
           self.setTitle(title)
           self.setAdditionalInfo(artist)
         }
@@ -884,6 +965,7 @@ class PlaylistTrackCellView: NSTableCellView {
         if duration > 0 {
           // if FFmpeg got the duration successfully
           DispatchQueue.main.async {
+            guard self.representedPlaylistID == item.playlistID else { return }
             self.durationLabel.stringValue = VideoTime(duration).stringRepresentation
             if let progress = cached.progress,
                let rowView = self.superview as? PlaylistRowView {
@@ -903,6 +985,8 @@ class PlaylistTrackCellView: NSTableCellView {
             // if FFmpeg got the duration successfully
             pane.refreshTotalLength()
             DispatchQueue.main.async {
+              guard self.representedPlaylistID == item.playlistID,
+                    row < pane.tableView.numberOfRows else { return }
               pane.tableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integersIn: 0...1))
             }
           }
@@ -966,5 +1050,17 @@ class PlaylistPrefixButton: NSButton {
 
   private func refresh() {
     self.title = isFolded ? "…" : text
+  }
+}
+
+private final class PlaylistTableView: NSTableView {
+  var removeSelection: (() -> Void)?
+
+  override func keyDown(with event: NSEvent) {
+    if event.keyCode == 51 || event.keyCode == 117 {
+      removeSelection?()
+    } else {
+      super.keyDown(with: event)
+    }
   }
 }

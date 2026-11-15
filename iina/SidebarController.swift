@@ -202,7 +202,7 @@ class SidebarController: NSObject {
     let panel = sideBar(for: side)
     guard let range = viewController(for: panel.status)?.widthRange else { return false }
     let x = event.locationInWindow.x
-    let newWidth = (visuallyOnLeft(side) ? x : mainWindow.window!.frame.width - x) - 2
+    let newWidth = (visuallyOnLeft(side) ? x : (mainWindow.playbackContentView?.frame.width ?? mainWindow.window!.frame.width) - x) - 2
     let maxWidth = max(range.lowerBound, min(sidebarMaxWidth, range.upperBound))
     let clamped = newWidth.clamped(to: range.lowerBound...maxWidth)
     panel.widthConstraint.constant = clamped
@@ -445,6 +445,12 @@ class SidebarController: NSObject {
       } else {
         fatalError("sidebar or tab is required")
       }
+    }
+    if !mainWindow.player.isInMiniPlayer, view === playlistView, tab == nil || tab == "playlist" {
+      hide(.playlist, animate: false)
+      if hideIfAlreadyShown { mainWindow.playlistWindow.toggle() }
+      else { mainWindow.playlistWindow.show() }
+      return
     }
     let tabType = tab.flatMap(view.findTab(named:))
 

@@ -47,7 +47,7 @@ class MainWindow: CommonWindow {
   }
 
   private func shouldFavorArrowKeyNavigation(for responder: NSResponder) -> Bool {
-    return responder as? NSTextView != nil
+    return responder is NSTextView || responder is NSTableView
   }
 
   override var canBecomeKey: Bool {

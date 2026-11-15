@@ -74,7 +74,7 @@ class VideoView: NSView {
     wantsExtendedDynamicRangeOpenGLSurface = true
 
     // dragging init
-    registerForDraggedTypes([.nsFilenames, .nsURL, .string])
+    registerForDraggedTypes([.nsFilenames, .fileURL, .nsURL, .string])
   }
 
   required init?(coder: NSCoder) {
@@ -144,7 +144,8 @@ class VideoView: NSView {
   }
 
   @objc func showPlaylist() {
-    player.mainWindow.menuShowPlaylistPanel(.dummy)
+    guard !player.isPlaylistVisible else { return }
+    player.mainWindow.playlistWindow.show()
     playlistShown = true
   }
 
@@ -193,9 +194,7 @@ class VideoView: NSView {
   }
 
   override func draggingEnded(_ sender: NSDraggingInfo) {
-    if playlistShown {
-      player.mainWindow.sidebars.hideAllSideBars()
-    }
+    destroyTimer()
     playlistShown = false
     lastMousePosition = nil
   }

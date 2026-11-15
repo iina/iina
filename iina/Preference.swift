@@ -141,6 +141,7 @@ struct Preference {
     static let usePhysicalResolution = Key("usePhysicalResolution")
 
     static let initialWindowSizePosition = Key("initialWindowSizePosition")
+    static let lockPlayerWindowSize = Key("lockPlayerWindowSize")
     static let resizeWindowTiming = Key("resizeWindowTiming")
     static let resizeWindowOption = Key("resizeWindowOption")
 
@@ -1106,6 +1107,7 @@ struct Preference {
 
     .usePhysicalResolution: true,
     .initialWindowSizePosition: "",
+    .lockPlayerWindowSize: true,
     .resizeWindowTiming: ResizeWindowTiming.onlyWhenOpen.rawValue,
     .resizeWindowOption: ResizeWindowOption.videoSize10.rawValue,
     .showRemainingTime: false,

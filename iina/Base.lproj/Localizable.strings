@@ -1075,3 +1075,15 @@
 "settings.$toThe" = "to the";
 "settings.$top" = "top";
 "settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
+
+"playlist.window_title" = "Playlist";
+"playlist.search" = "Search playlist";
+
+
+"playlist.embed_no_space" = "Move the player left or use Free window mode to keep the video area unchanged.";
+
+"playlist.detach" = "Detach Playlist";
+"playlist.attach" = "Attach Playlist to Player";
+
+"settings.lockPlayerWindowSize.label" = "Lock player window size";
+"settings.lockPlayerWindowSize.desc" = "Keep the window size and position when switching videos. You can still resize the window manually. Turn off to use automatic video sizing.";

@@ -10,6 +10,20 @@ import Foundation
 
 extension PlayerCore {
 
+  /// Only inspect top-level metadata here. Recursive validation happens after accepting the drop.
+  func folderDropURLs(from pasteboard: NSPasteboard) -> [URL]? {
+    guard info.state.active else { return nil }
+    let urls: [URL]
+    if let paths = pasteboard.propertyList(forType: .nsFilenames) as? [String] {
+      urls = paths.map { URL(fileURLWithPath: $0) }
+    } else {
+      urls = (pasteboard.readObjects(forClasses: [NSURL.self],
+                                    options: [.urlReadingFileURLsOnly: true]) as? [URL]) ?? []
+    }
+    return urls.contains { (try? $0.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true } ? urls : nil
+  }
+
+
   /**
    Checks whether the path list contains playable file and performs early return if so. Don't use this method for a non-file URL.
 
@@ -136,6 +150,7 @@ extension PlayerCore {
     // get info
     let pb = sender.draggingPasteboard
     guard let types = pb.types else { return [] }
+    if folderDropURLs(from: pb) != nil { return .copy }
 
     if types.contains(.nsFilenames) {
       guard var paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return [] }
@@ -182,6 +197,10 @@ extension PlayerCore {
     // get info
     let pb = sender.draggingPasteboard
     guard let types = pb.types else { return false }
+    if !useGlobalOpenRouting, let urls = folderDropURLs(from: pb) {
+      folderPlaylistImporter.enqueue(urls)
+      return true
+    }
 
     if types.contains(.nsFilenames) {
       guard var paths = pb.propertyList(forType: .nsFilenames) as? [String] else { return false }

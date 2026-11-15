@@ -363,6 +363,8 @@
 		E3FC31461FE1501E00B9B86F /* PowerSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FC31451FE1501E00B9B86F /* PowerSource.swift */; };
 		E3FEC1332A30400F00CFD845 /* PluginInputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEC1322A30400F00CFD845 /* PluginInputManager.swift */; };
 		E3FF5AC02938582F0019CE45 /* JavascriptDevTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FF5ABF2938582F0019CE45 /* JavascriptDevTool.swift */; };
+		C0DE00000000000000000001 /* PlaylistWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000002 /* PlaylistWindowController.swift */; };
+		C0DE00000000000000000003 /* FolderPlaylistImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE00000000000000000004 /* FolderPlaylistImporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1363,6 +1365,8 @@
 		FB011A0421F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FB011A0621F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/FilterPresets.strings; sourceTree = "<group>"; };
 		FB011A0721F8C04200477551 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/KeyBinding.strings; sourceTree = "<group>"; };
+		C0DE00000000000000000002 /* PlaylistWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistWindowController.swift; sourceTree = "<group>"; };
+		C0DE00000000000000000004 /* FolderPlaylistImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderPlaylistImporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2068,6 +2072,8 @@
 				E3C2280A2FDFB7C1009A1A89 /* SidebarAudioPane.swift */,
 				E318D9082FE096960025DBC5 /* SidebarSubtitlesPane.swift */,
 				E318D90E2FE5C8500025DBC5 /* SidebarPlaylistPane.swift */,
+				C0DE00000000000000000002 /* PlaylistWindowController.swift */,
+				C0DE00000000000000000004 /* FolderPlaylistImporter.swift */,
 				E318D9102FE5E2670025DBC5 /* SidebarChaptersPane.swift */,
 				8466BE161D5CDD0300039D03 /* QuickSettingViewController.swift */,
 				8460FBA71D6497490081841B /* PlaylistViewController.swift */,
@@ -2526,6 +2532,8 @@
 				84A886F31E26CA24008755BB /* Regex.swift in Sources */,
 				3415BC8A2FC82FD9003B3FBD /* TimePreviewView.swift in Sources */,
 				E318D90F2FE5C8690025DBC5 /* SidebarPlaylistPane.swift in Sources */,
+				C0DE00000000000000000001 /* PlaylistWindowController.swift in Sources */,
+				C0DE00000000000000000003 /* FolderPlaylistImporter.swift in Sources */,
 				8487BEC31D76A1AF00FD17B0 /* MenuController.swift in Sources */,
 				8450403D1E0A9EE20079C194 /* InspectorWindowController.swift in Sources */,
 				519CCABD2BFFAEF10079DCAF /* HardwareDecodeCapabilities.swift in Sources */,

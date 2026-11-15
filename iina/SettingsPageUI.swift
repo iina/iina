@@ -81,6 +81,10 @@ class SettingsPageUI: SettingsPage {
   private func sectionWindow() -> SettingsSection {
     return section {
       SettingsList(title: .text_Window) {
+        SettingsItem.Switch()
+          .image(name: "lock.rectangle")
+          .bindTo(.lockPlayerWindowSize)
+          .hasDescription()
         SettingsItem.Switch(title: .text_InitialWindowSize)
           .image(name: "custom.arrow.up.left.and.down.right.and.arrow.up.right.and.down.left.rectangle")
           .withExpandingDetailView(windowInitialSizeView)

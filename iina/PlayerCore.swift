@@ -38,7 +38,9 @@ class PlayerCore: NSObject {
   /// - Important: Code referencing this property **must** be run on the main thread because it references
   ///              [NSApplication.mainWindow`](https://developer.apple.com/documentation/appkit/nsapplication/1428723-mainwindow)
   static var active: PlayerCore {
-    if let wc = NSApp.mainWindow?.windowController as? PlayerWindowController {
+    if let wc = NSApp.keyWindow?.windowController as? PlaylistWindowController {
+      return wc.player
+    } else if let wc = NSApp.mainWindow?.windowController as? PlayerWindowController {
       return wc.player
     } else {
       return first
@@ -181,6 +183,7 @@ class PlayerCore: NSObject {
 
   /// A dispatch queue for auto load feature.
   let backgroundQueue: DispatchQueue
+  lazy var folderPlaylistImporter = FolderPlaylistImporter(player: self)
   let playlistQueue: DispatchQueue
   let thumbnailQueue: DispatchQueue
 
@@ -251,7 +254,7 @@ class PlayerCore: NSObject {
   var useExactSeekForCurrentFile: Bool = true
 
   var isPlaylistVisible: Bool {
-    isInMiniPlayer ? miniPlayer.isPlaylistVisible : mainWindow.sidebars.isShowing(.playlist)
+    isInMiniPlayer ? miniPlayer.isPlaylistVisible : mainWindow.playlistWindow.isVisible
   }
 
   /// The A loop point established by the [mpv](https://mpv.io/manual/stable/) A-B loop command.
@@ -788,6 +791,7 @@ class PlayerCore: NSObject {
       mainWindow.toggleWindowFullScreen()
     }
     // hide main window
+    mainWindow.playlistWindow.suspend()
     mainWindow.window?.orderOut(self)
 
     let needRestoreLayout = !miniPlayer.loaded
@@ -2619,7 +2623,7 @@ class PlayerCore: NSObject {
   }
 
   func windowScaleChanged() {
-    guard mainWindow.loaded, info.state.active else { return }
+    guard mainWindow.loaded, info.state.active, !Preference.bool(for: .lockPlayerWindowSize) else { return }
     let windowScale = mpv.getDouble(MPVOption.Window.windowScale)
     if fabs(windowScale - info.cachedWindowScale) > 10e-10 {
       mainWindow.setWindowScale(windowScale)
@@ -3015,6 +3019,7 @@ class PlayerCore: NSObject {
                                            isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
                                            isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
                                            title: mpv.getString(MPVProperty.playlistNTitle(index)))
+        playlistItem.playlistID = mpv.getInt("playlist/\(index)/id")
         playlist.append(playlistItem)
       }
     }

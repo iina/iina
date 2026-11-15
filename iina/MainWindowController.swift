@@ -42,10 +42,12 @@ class MainWindowController: PlayerWindowController {
     return _videoView
   }
 
-  lazy private var _videoView: VideoView = VideoView(frame: window!.contentView!.bounds, player: player)
+  lazy private var _videoView: VideoView = VideoView(frame: playbackContentView!.bounds, player: player)
 
   /// Owns the sidebar panels, view controllers, and show/hide/resize logic.
   lazy var sidebars = SidebarController(mainWindow: self)
+  lazy var playlistWindow = PlaylistWindowController(player: player)
+  var playbackContentView: NSView? { playlistWindow.videoContentView ?? window?.contentView }
 
   private lazy var magnificationGestureRecognizer: NSMagnificationGestureRecognizer = {
     return NSMagnificationGestureRecognizer(target: self, action: #selector(MainWindowController.handleMagnifyGesture(recognizer:)))
@@ -276,6 +278,7 @@ class MainWindowController: PlayerWindowController {
     .controlBarToolbarButtons,
     .alwaysShowOnTopIcon,
     .unlockWindowAspectRatio,
+    .lockPlayerWindowSize,
     .edgeToEdgeVideo,
     .compactUI,
     .dockedControlBarAndTitlebar,
@@ -341,6 +344,9 @@ class MainWindowController: PlayerWindowController {
     case PK.dockedControlBarAndTitlebar.rawValue:
       setupVideoContainerConstraints()
       fadeableViews.update()
+    case PK.lockPlayerWindowSize.rawValue:
+      let size = player.videoSizeForDisplay
+      setWindowAspectRatio(NSSize(width: size.0, height: size.1))
     case PK.edgeToEdgeVideo.rawValue:
       setupVideoContainerConstraints()
       fallthrough
@@ -404,7 +410,7 @@ class MainWindowController: PlayerWindowController {
   @IBOutlet weak var pipOverlayView: NSVisualEffectView!
 
   lazy var pluginOverlayViewContainer: NSView! = {
-    guard let window, let cv = window.contentView else { return nil }
+    guard let window, let cv = playbackContentView else { return nil }
     let view = NSView(frame: .zero)
     view.translatesAutoresizingMaskIntoConstraints = false
     cv.addSubview(view, positioned: .below, relativeTo: pipOverlayView)
@@ -416,7 +422,7 @@ class MainWindowController: PlayerWindowController {
   private var videoContainerConstraints: [NSLayoutConstraint.Attribute: NSLayoutConstraint] = [:]
 
   override var mouseActionDisabledViews: [NSView?] {
-    sidebars.mouseActionDisabledViews + [currentControlBar, titleBarView]
+    sidebars.mouseActionDisabledViews + [currentControlBar, titleBarView, playlistWindow.embeddedPanelView]
   }
 
   // MARK: - PIP
@@ -439,9 +445,10 @@ class MainWindowController: PlayerWindowController {
     super.windowDidLoad()
     MemoryUsage.shared.logUsage("after window loaded")
 
-    guard let window, let cv = window.contentView else { return }
+    guard let window, let cv = playbackContentView else { return }
 
     window.styleMask.insert(.fullSizeContentView)
+    playlistWindow.installVideoHost()
 
     // need to deal with control bar, so we handle it manually
     // w.isMovableByWindowBackground  = true
@@ -451,7 +458,7 @@ class MainWindowController: PlayerWindowController {
 
     // size
     window.minSize = AppData.mainWindowMinSize
-    window.aspectRatio = AppData.sizeWhenNoVideo
+    setWindowAspectRatio(AppData.sizeWhenNoVideo)
     setWindowToolbar()
     cv.autoresizesSubviews = false
     cv.addGestureRecognizer(magnificationGestureRecognizer)
@@ -704,7 +711,7 @@ class MainWindowController: PlayerWindowController {
         forceDraw("window resized during animated enter or exit full screen")
       } else if !videoView.videoLayer.inLiveResize {
         forceDraw("window resized")
-      } else if Preference.unlockWindowAspectRatio && videoView.isIdle {
+      } else if (Preference.bool(for: .lockPlayerWindowSize) || Preference.unlockWindowAspectRatio) && videoView.isIdle {
         forceDraw("window resized with aspect ratio unlocked and paused")
       }
     }
@@ -860,7 +867,7 @@ class MainWindowController: PlayerWindowController {
   }
 
   private func setupVideoContainerConstraints() {
-    guard let cv = window?.contentView else { return }
+    guard let cv = playbackContentView else { return }
 
     layoutSides.forEach { videoContainerConstraints[$0].flatMap(cv.removeConstraint) }
     if Preference.bool(for: .edgeToEdgeVideo) {
@@ -944,7 +951,7 @@ class MainWindowController: PlayerWindowController {
       // no userInfo is provided in this notification
       highlight(.settings, sidebars.isShowing(.settings))
       highlight(.plugins, sidebars.isShowing(.plugins))
-      highlight(.playlist, sidebars.isShowing(.playlist))
+      highlight(.playlist, player.isPlaylistVisible)
       fadeableViews.update()
     default:
       break
@@ -1383,7 +1390,7 @@ class MainWindowController: PlayerWindowController {
     // update buffer indicator view
     bufferIndicatorView.update()
     // start tracking mouse event
-    guard let cv = window.contentView else { return }
+    guard let cv = playbackContentView else { return }
     if cv.trackingAreas.isEmpty {
       cv.addTrackingArea(NSTrackingArea(rect: cv.bounds,
                                         options: [.activeAlways, .enabledDuringMouseDrag, .inVisibleRect, .mouseEnteredAndExited, .mouseMoved],
@@ -1414,6 +1421,8 @@ class MainWindowController: PlayerWindowController {
   }
 
   func windowWillClose(_ notification: Notification) {
+    player.folderPlaylistImporter.cancel()
+    playlistWindow.hide()
     shouldApplyInitialWindowSize = true
     // Close PIP
     if pipStatus == .inPIP {
@@ -1427,7 +1436,7 @@ class MainWindowController: PlayerWindowController {
     }
     player.stop()
     // stop tracking mouse event
-    guard let w = self.window, let cv = w.contentView else { return }
+    guard let w = self.window, let cv = playbackContentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)
     playSlider.trackingAreas.forEach(playSlider.removeTrackingArea)
     UserDefaults.standard.set(NSStringFromRect(window!.frame), forKey: "MainWindowLastPosition")
@@ -1650,6 +1659,7 @@ class MainWindowController: PlayerWindowController {
   /// - Parameter notification: A notification named
   ///     [didExitFullScreenNotification](https://developer.apple.com/documentation/appkit/nswindow/didexitfullscreennotification).
   func windowDidExitFullScreen(_ notification: Notification) {
+    DispatchQueue.main.async { [weak self] in self?.playlistWindow.restoreIfNeeded() }
     log("Exited full screen mode")
 
     if fsState.isFullscreen {
@@ -2291,7 +2301,7 @@ class MainWindowController: PlayerWindowController {
     // layout. But when the legacy full screen preference is enabled the layout height may be
     // larger than the content view if the display contains a camera housing. Use the lower of
     // the two heights.
-    let windowContentHeight = min(window!.contentLayoutRect.height, window!.contentView!.frame.height)
+    let windowContentHeight = min(window!.contentLayoutRect.height, playbackContentView!.frame.height)
     return topOfThumbnail <= windowContentHeight
   }
 
@@ -2299,12 +2309,12 @@ class MainWindowController: PlayerWindowController {
 
   private var currentWindowAspectRatio: NSSize {
     guard let window else { return .zero }
-    return Preference.unlockWindowAspectRatio ? window.frame.size : window.aspectRatio
+    return Preference.bool(for: .lockPlayerWindowSize) || Preference.unlockWindowAspectRatio || playlistWindow.embeddedWidth > 0 ? window.frame.size : window.aspectRatio
   }
 
   private func setWindowAspectRatio(_ aspectRatio: NSSize) {
     guard let window else { return }
-    if Preference.unlockWindowAspectRatio {
+    if Preference.bool(for: .lockPlayerWindowSize) || Preference.unlockWindowAspectRatio || playlistWindow.embeddedWidth > 0 {
       window.aspectRatio = .zero
       window.resizeIncrements = .init(width: 1, height: 1)
     } else {
@@ -2425,11 +2435,6 @@ class MainWindowController: PlayerWindowController {
   func handleVideoSizeChange(keepWindowSize: Bool) {
     guard loaded, let window else { return }
 
-    // When starting to play the file try and find the screen the window was previously on.
-    let screen = player.info.justStartedFile ? determineScreenToUse(window) : window.selectDefaultScreen()
-    let screenRect = screen.visibleFrame
-    let screenSize = screenRect.size
-
     let (width, height) = player.videoSizeForDisplay
 
     // set aspect ratio
@@ -2437,10 +2442,26 @@ class MainWindowController: PlayerWindowController {
     setWindowAspectRatio(originalVideoSize)
     pip.aspectRatio = originalVideoSize
 
+    if Preference.bool(for: .lockPlayerWindowSize) {
+      // Leave both the live frame and the full-screen restoration frame untouched.
+      // mpv fits the video inside the existing rendering surface, including black bars.
+      shouldApplyInitialWindowSize = false
+      if !fsState.isFullscreen { updateWindowParametersForMPV() }
+      finishVideoSizeChange(frame: window.frame)
+      return
+    }
+
+    // When starting to play the file try and find the screen the window was previously on.
+    let screen = player.info.justStartedFile ? determineScreenToUse(window) : window.selectDefaultScreen()
+    let screenRect = screen.visibleFrame
+    let screenSize = screenRect.size
+
+
     var rect: NSRect
     let needResizeWindow: Bool
 
-    let frame = fsState.priorWindowedFrame ?? window.frame
+    var frame = fsState.priorWindowedFrame ?? window.frame
+    frame.size.width -= playlistWindow.embeddedWidth
 
     if player.info.justStartedFile {
       // Many settings can require the window to be resized/repositioned:
@@ -2525,6 +2546,7 @@ class MainWindowController: PlayerWindowController {
 
     shouldApplyInitialWindowSize = false
 
+    rect.size.width += playlistWindow.embeddedWidth
     let rectBefore = rect
     rect = rect.constrain(in: screenRect)
     if rectBefore != rect {
@@ -2556,6 +2578,10 @@ class MainWindowController: PlayerWindowController {
       updateWindowParametersForMPV(withFrame: rect)
     }
 
+    finishVideoSizeChange(frame: rect)
+  }
+
+  private func finishVideoSizeChange(frame: NSRect) {
     // generate thumbnails after video loaded if it's the first time
     if !isVideoLoaded {
       player.generateThumbnails()
@@ -2564,13 +2590,13 @@ class MainWindowController: PlayerWindowController {
 
     // UI and slider
     updatePlayTime(withDuration: true, andProgressBar: true)
-    player.events.emit(.windowSizeAdjusted, data: rect)
+    player.events.emit(.windowSizeAdjusted, data: frame)
   }
 
   func updateWindowParametersForMPV(withFrame frame: NSRect? = nil) {
     guard let window else { return }
     if let videoWidth = player.info.videoWidth {
-      let windowScale = Double((frame ?? window.frame).width) / Double(videoWidth)
+      let windowScale = Double((frame ?? window.frame).width - playlistWindow.embeddedWidth) / Double(videoWidth)
       player.info.cachedWindowScale = windowScale
       player.mpv.setDouble(MPVOption.Window.windowScale, windowScale, level: .verbose)
     }

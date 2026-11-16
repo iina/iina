@@ -40,8 +40,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
   }
 
   override func loadView() {
-    // Used as an NSAlert accessory view, which is laid out by frame
-    let view = NSView(frame: NSRect(x: 0, y: 0, width: 480, height: 155))
+    let view = NSView(frame: NSRect(x: 0, y: 0, width: 480, height: 157))
     self.view = view
 
     keyRecordView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +50,7 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     keyLabel.translatesAutoresizingMaskIntoConstraints = false
     keyLabel.alignment = .center
     keyLabel.lineBreakMode = .byClipping
-    keyLabel.font = NSFont(name: "Menlo-Regular", size: 22)
+    keyLabel.font = .monospacedSystemFont(ofSize: 22, weight: .regular)
     keyRecordView.addSubview(keyLabel)
     keyLabel.padding(.top(8), .horizontal, .bottom(7))
 
@@ -64,14 +63,13 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     scrollView.borderType = .bezelBorder
     scrollView.hasHorizontalScroller = false
     scrollView.hasVerticalScroller = false
-    scrollView.horizontalScrollElasticity = .none
     scrollView.verticalScrollElasticity = .none
     scrollView.contentView.drawsBackground = false
     ruleEditor.rowHeight = 24
     ruleEditor.autoresizingMask = [.width, .height]
     scrollView.documentView = ruleEditor
     view.addSubview(scrollView)
-    scrollView.padding(.horizontal).spacing(.top(4), to: selectActionLabel).size(height: 24)
+    scrollView.padding(.horizontal).spacing(.top(4), to: selectActionLabel).size(height: ruleEditor.rowHeight + 2)
 
     let enterCommandLabel = ui.label("enter_command", isSmall: true, canCompress: false)
     view.addSubview(enterCommandLabel)

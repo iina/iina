@@ -102,7 +102,7 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     familyScrollView.padding(.leading(12)).spacing(.top(8), to: searchField).size(height: 268)
     faceScrollView.padding(.trailing(12))
     NSLayoutConstraint.activate([
-      faceScrollView.leadingAnchor.constraint(equalTo: familyScrollView.trailingAnchor, constant: -1),
+      faceScrollView.leadingAnchor.constraint(equalTo: familyScrollView.trailingAnchor, constant: 16),
       faceScrollView.widthAnchor.constraint(equalTo: familyScrollView.widthAnchor),
       faceScrollView.heightAnchor.constraint(equalTo: familyScrollView.heightAnchor),
       faceScrollView.centerYAnchor.constraint(equalTo: familyScrollView.centerYAnchor)
@@ -149,10 +149,8 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     let column = NSTableColumn()
     column.title = title
     column.isEditable = false
-    column.width = 200
-    column.minWidth = 200
-    column.maxWidth = 200
     column.resizingMask = .autoresizingMask
+    column.width = 200
     tableView.addTableColumn(column)
     tableView.style = .plain
     tableView.rowSizeStyle = .custom
@@ -160,7 +158,6 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     tableView.intercellSpacing = NSSize(width: 3, height: 2)
     tableView.focusRingType = .none
     tableView.columnAutoresizingStyle = .noColumnAutoresizing
-    tableView.allowsColumnReordering = false
     tableView.allowsMultipleSelection = false
     tableView.allowsExpansionToolTips = true
 
@@ -169,7 +166,6 @@ class FontPickerWindowController: NSWindowController, NSTableViewDelegate, NSTab
     scrollView.focusRingType = .none
     scrollView.borderType = .bezelBorder
     scrollView.hasVerticalScroller = true
-    scrollView.hasHorizontalScroller = true
     scrollView.autohidesScrollers = true
     scrollView.documentView = tableView
     return scrollView

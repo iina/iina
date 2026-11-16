@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Værdien kan ikke være tom.";
 "input.already_exists" = "Værdien findes allerede.";
 
+// About Window
+"about.title" = "Om";
+"about.license" = "Licens";
+"about.contributors" = "Bidragsydere";
+"about.credits" = "Tak til";
+"about.crowdin" = "IINA oversættelse er drevet af Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Højdepunkter";
 "guide.basic_settings" = "Grundlæggende indstillinger";

@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Değer boş olamaz.";
 "input.already_exists" = "Değer halihazırda var.";
 
+// About Window
+"about.title" = "Hakkında";
+"about.license" = "Lisans";
+"about.contributors" = "Katkıcılar";
+"about.credits" = "Emeği Geçenler";
+"about.crowdin" = "IINA yerelleştirmesi Crowdin tarafından sağlanmaktadır.";
+
 // Guide Window
 "guide.highlights" = "Öne Çıkanlar";
 "guide.basic_settings" = "Temel Ayarlar";

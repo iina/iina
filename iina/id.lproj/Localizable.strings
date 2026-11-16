@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Nilai tidak boleh kosong.";
 "input.already_exists" = "Nilai sudah ada.";
 
+// About Window
+"about.title" = "Tentang";
+"about.license" = "Lisensi";
+"about.contributors" = "Kontributor";
+"about.credits" = "Kredit";
+"about.crowdin" = "Pelokalan IINA memakai Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Sorotan";
 "guide.basic_settings" = "Pengaturan Dasar";

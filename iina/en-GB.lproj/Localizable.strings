@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Value already exists.";
 
+// About Window
+"about.title" = "About";
+"about.license" = "Licence";
+"about.contributors" = "Contributors";
+"about.credits" = "Credits";
+"about.crowdin" = "IINA localisation is powered by Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Highlights";
 "guide.basic_settings" = "Basic Settings";

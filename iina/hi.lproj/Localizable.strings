@@ -22,6 +22,13 @@
 "input.value_is_empty" = "मान रिक्त नहीं हो सकता ।";
 "input.already_exists" = "वैल्यू पहले से मौजूद है|";
 
+// About Window
+"about.title" = "के बारे में";
+"about.license" = "लाइसेंस";
+"about.contributors" = "योगदानकर्ते";
+"about.credits" = "क्रेडिट";
+"about.crowdin" = "IINA का स्थानीयकरण Crowdin द्वारा संचालित है।";
+
 // Guide Window
 "guide.highlights" = "हाइलाइट";
 "guide.basic_settings" = "मार्गदर्शक. मूल_सेटिंग्स";

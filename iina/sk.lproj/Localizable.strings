@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Hodnota nemôže byť prázdna.";
 "input.already_exists" = "Hodnota už existuje.";
 
+// About Window
+"about.title" = "O aplikácii IINA";
+"about.license" = "LicenAcia";
+"about.contributors" = "Prispievatelia";
+"about.credits" = "Poďakovanie";
+"about.crowdin" = "Lokalizáciu IINA zabezpečuje Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Novinky";
 "guide.basic_settings" = "Základné nastavenia";

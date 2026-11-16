@@ -22,6 +22,13 @@
 "input.value_is_empty" = "값을 비워둘 수 없습니다.";
 "input.already_exists" = "값이 이미 존재합니다.";
 
+// About Window
+"about.title" = "About";
+"about.license" = "라이센스";
+"about.contributors" = "기여자";
+"about.credits" = "크레딧";
+"about.crowdin" = "IINA는 Crowdin을 통해 번역됩니다.";
+
 // Guide Window
 "guide.highlights" = "새로 추가된 기능";
 "guide.basic_settings" = "일반 설정";

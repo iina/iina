@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Az érték nem lehet üres.";
 "input.already_exists" = "Az érték már létezik.";
 
+// About Window
+"about.title" = "Névjegy";
+"about.license" = "Licenc";
+"about.contributors" = "Közreműködők";
+"about.credits" = "Készítők";
+"about.crowdin" = "Az IINA lokalizálása a Crowdin segítségével történik.";
+
 // Guide Window
 "guide.highlights" = "Kiemelések";
 "guide.basic_settings" = "Alapvető beállítások";

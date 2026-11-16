@@ -22,6 +22,13 @@
 "input.value_is_empty" = "El valor no pot estar buit.";
 "input.already_exists" = "El valor ja existeix.";
 
+// About Window
+"about.title" = "Quant a";
+"about.license" = "Llicència";
+"about.contributors" = "Col·laboradors";
+"about.credits" = "Crèdits";
+"about.crowdin" = "La localització d'IINA és gestionada per Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Destacats";
 "guide.basic_settings" = "Configuració bàsica";

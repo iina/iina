@@ -22,6 +22,13 @@
 "input.value_is_empty" = "数值不能为空";
 "input.already_exists" = "值已经存在。";
 
+// About Window
+"about.title" = "关于";
+"about.license" = "许可证";
+"about.contributors" = "贡献者";
+"about.credits" = "致谢";
+"about.crowdin" = "IINA 的本地化由 Crowdin 提供支持。";
+
 // Guide Window
 "guide.highlights" = "更新亮点";
 "guide.basic_settings" = "基本设置";

@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Value cannot be empty.";
 "input.already_exists" = "Value already exists.";
 
+// About Window
+"about.title" = "O programu";
+"about.license" = "Licenca";
+"about.contributors" = "Saradnici";
+"about.credits" = "Zasluge";
+"about.crowdin" = "IINA lokalizaciju omogućava Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Istaknuti sadržaj";
 "guide.basic_settings" = "Osnovne postavke";

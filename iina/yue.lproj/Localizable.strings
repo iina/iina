@@ -22,6 +22,13 @@
 "input.value_is_empty" = "此項為必填項目。";
 "input.already_exists" = "此內容已經被其他項目使用。";
 
+// About Window
+"about.title" = "關於";
+"about.license" = "許可證";
+"about.contributors" = "貢獻者";
+"about.credits" = "開發者";
+"about.crowdin" = "IINA 嘅繁體中文(香港)翻譯由 Crowdin 平台上嘅全球協作翻譯者提供。";
+
 // Guide Window
 "guide.highlights" = "更新特點";
 "guide.basic_settings" = "基本設定";

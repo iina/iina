@@ -22,6 +22,13 @@
 "input.value_is_empty" = "El valor no puede estar vacío.";
 "input.already_exists" = "El valor ya existe.";
 
+// About Window
+"about.title" = "Acerca de";
+"about.license" = "Licencia";
+"about.contributors" = "Colaboradores";
+"about.credits" = "Créditos";
+"about.crowdin" = "La localización de IINA está gestionada por Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Destacados";
 "guide.basic_settings" = "Configuración básica";

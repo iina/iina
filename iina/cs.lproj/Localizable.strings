@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Název nemůže být prázdný.";
 "input.already_exists" = "Název již existuje.";
 
+// About Window
+"about.title" = "O plug-inu";
+"about.license" = "Licence";
+"about.contributors" = "Přispívající";
+"about.credits" = "Uznání";
+"about.crowdin" = "Přeložil Vojtěch Koňařík";
+
 // Guide Window
 "guide.highlights" = "Co je v IINA nového";
 "guide.basic_settings" = "Základní nastavení";

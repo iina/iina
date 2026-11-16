@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Значение не может быть пустым.";
 "input.already_exists" = "Значение уже существует.";
 
+// About Window
+"about.title" = "О приложении";
+"about.license" = "Лицензия";
+"about.contributors" = "Участники";
+"about.credits" = "Благодарности";
+"about.crowdin" = "Перевод IINA выполняется сообществом Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Что нового в IINA";
 "guide.basic_settings" = "Основные параметры";

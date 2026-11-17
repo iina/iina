@@ -22,6 +22,13 @@
 "input.value_is_empty" = "El valor no pot estar buit.";
 "input.already_exists" = "El valor ja existeix.";
 
+// About Window
+"about.title" = "Quant a";
+"about.license" = "Llicència";
+"about.contributors" = "Col·laboradors";
+"about.credits" = "Crèdits";
+"about.crowdin" = "La localització d'IINA és gestionada per Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Destacats";
 "guide.basic_settings" = "Configuració bàsica";
@@ -218,6 +225,9 @@
 "osd.screenshot.reveal" = "Mostra";
 "osd.screenshot.edit" = "Edita";
 "osd.screenshot.delete" = "Elimina";
+"osd.sub_choose.prompt" = "Si us play, fes click per seleccionar els subtítols a baixar:";
+"osd.sub_choose.cancel" = "CANCEL·LA";
+"osd.sub_choose.download" = "Baixa";
 
 "preference.title" = "Preferències";
 "preference.general" = "General";
@@ -455,6 +465,8 @@
 
 "keymapping.title" = "Assignació de tecles";
 "keymapping.message" = "Prem qualsevol tecla per començar a gravar.";
+"keymapping.select_action" = "Selecciona acció:";
+"keymapping.enter_command" = "O introdueix una ordre de mpv:";
 
 "filter.video_filters" = "Filtres de vídeo";
 "filter.audio_filters" = "Filtres d'àudio";
@@ -579,6 +591,23 @@
 "history_window.search.no_recents" = "No hi ha cerques recents";
 "history_window.search.recents_title" = "Cerques recents";
 "history_window.search.clear_recents" = "Neteja els més recents";
+
+// Guide window
+"guide_window.website" = "Lloc web";
+"guide_window.fail" = "No s'han pogut carregar els elements destacats. Visiteu el nostre lloc web https://iina.io per a obtenir més informació.";
+"guide_window.continue" = "Continua";
+
+// Font picker
+"font_picker.title" = "Tria un tipus de lletra";
+"font_picker.choose" = "Tria un tipus de lletra:";
+"font_picker.filter" = "Escriu per a filtrar...";
+"font_picker.family" = "Família";
+"font_picker.typeface" = "Tipografia";
+"font_picker.preview" = "Previsualització";
+"font_picker.test" = "Prova";
+"font_picker.other" = "O introdueix el nom d'un tipus de lletra:";
+"font_picker.cancel" = "Cancel·la";
+"font_picker.ok" = "D'acord";
 
 // Sidebar
 

@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Il campo non può essere vuoto.";
 "input.already_exists" = "Il valore esiste già.";
 
+// About Window
+"about.title" = "Informazioni su IINA";
+"about.license" = "Licenza";
+"about.contributors" = "Collaboratori";
+"about.credits" = "Crediti";
+"about.crowdin" = "La localizzazione multi-lingua di IINA è gestita con Crowdin.";
+
 // Guide Window
 "guide.highlights" = "In evidenza";
 "guide.basic_settings" = "Impostazioni di base";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "MOSTRA";
 "osd.screenshot.edit" = "MODIFICA";
 "osd.screenshot.delete" = "ELIMINA";
+"osd.sub_choose.prompt" = "Fai clic per selezionare i sottotitoli da scaricare:";
+"osd.sub_choose.cancel" = "ANNULLA";
+"osd.sub_choose.download" = "SCARICA";
 
 "preference.title" = "Preferenze";
 "preference.general" = "Generali";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "Scorciatoie da tastiera";
 "keymapping.message" = "Premi la combinazione di tasti.";
+"keymapping.select_action" = "Seleziona azione:";
+"keymapping.enter_command" = "Oppure inserisci il comando mpv:";
 
 "filter.video_filters" = "Filtri Video";
 "filter.audio_filters" = "Filtri Audio";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "Nessuna ricerca recente";
 "history_window.search.recents_title" = "Ricerche recenti";
 "history_window.search.clear_recents" = "Elimina recenti";
+
+// Guide window
+"guide_window.website" = "Sito web";
+"guide_window.fail" = "Impossibile caricare le evidenziazioni. Visita il nostro sito web https://iina.io per maggiori informazioni.";
+"guide_window.continue" = "Continua";
+
+// Font picker
+"font_picker.title" = "Scegli un Font";
+"font_picker.choose" = "Scegli un font:";
+"font_picker.filter" = "Digita per filtrare…";
+"font_picker.family" = "Famiglia";
+"font_picker.typeface" = "Stile";
+"font_picker.preview" = "Anteprima";
+"font_picker.test" = "Prova";
+"font_picker.other" = "O inserisci il nome del font:";
+"font_picker.cancel" = "Annulla";
+"font_picker.ok" = "OK";
 
 // Sidebar
 

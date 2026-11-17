@@ -22,6 +22,13 @@
 "input.value_is_empty" = "El valor no puede estar vacío.";
 "input.already_exists" = "El valor ya existe.";
 
+// About Window
+"about.title" = "Acerca de";
+"about.license" = "Licencia";
+"about.contributors" = "Colaboradores";
+"about.credits" = "Créditos";
+"about.crowdin" = "La localización de IINA está gestionada por Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Destacados";
 "guide.basic_settings" = "Configuración básica";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "REVELAR";
 "osd.screenshot.edit" = "EDITAR";
 "osd.screenshot.delete" = "ELIMINAR";
+"osd.sub_choose.prompt" = "Por favor, haga clic para seleccionar los subtítulos a descargar:";
+"osd.sub_choose.cancel" = "CANCELAR";
+"osd.sub_choose.download" = "DESCARGAR";
 
 "preference.title" = "Preferencias";
 "preference.general" = "General";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "Asignación de teclas";
 "keymapping.message" = "Pulse cualquier tecla para grabar.";
+"keymapping.select_action" = "Seleccionar acción:";
+"keymapping.enter_command" = "O ingrese el comando mpv:";
 
 "filter.video_filters" = "Filtros de vídeo";
 "filter.audio_filters" = "Filtros de audio";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "No hay búsquedas recientes";
 "history_window.search.recents_title" = "Búsquedas recientes";
 "history_window.search.clear_recents" = "Borrar recientes";
+
+// Guide window
+"guide_window.website" = "Página Web";
+"guide_window.fail" = "Fallo al cargar destacados. Por favor, visite nuestra página web https://iina.io para más información.";
+"guide_window.continue" = "Continuar";
+
+// Font picker
+"font_picker.title" = "Elegir un tipo de letra";
+"font_picker.choose" = "Elegir un tipo de letra:";
+"font_picker.filter" = "Escriba para filtrar…";
+"font_picker.family" = "Familia";
+"font_picker.typeface" = "Familia de tipos de letra";
+"font_picker.preview" = "Vista previa";
+"font_picker.test" = "Prueba";
+"font_picker.other" = "O introduzca el nombre del tipo de letra:";
+"font_picker.cancel" = "Cancelar";
+"font_picker.ok" = "Aceptar";
 
 // Sidebar
 

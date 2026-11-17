@@ -22,6 +22,13 @@
 "input.value_is_empty" = "値は空欄にできません。";
 "input.already_exists" = "値はすでに存在します。";
 
+// About Window
+"about.title" = "IINAについて";
+"about.license" = "ライセンス";
+"about.contributors" = "コントリビュータ";
+"about.credits" = "クレジット";
+"about.crowdin" = "IINAのローカリゼーションはCrowdinによって提供されています。";
+
 // Guide Window
 "guide.highlights" = "ハイライト";
 "guide.basic_settings" = "基本設定";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "表示";
 "osd.screenshot.edit" = "編集";
 "osd.screenshot.delete" = "削除";
+"osd.sub_choose.prompt" = "ダウンロードする字幕をクリックして選択してください:";
+"osd.sub_choose.cancel" = "キャンセル";
+"osd.sub_choose.download" = "ダウンロード";
 
 "preference.title" = "設定";
 "preference.general" = "一般";
@@ -455,6 +465,8 @@
 
 "keymapping.title" = "キーマッピング";
 "keymapping.message" = "記録するには、任意のキーを押します。";
+"keymapping.select_action" = "アクションを選択:";
+"keymapping.enter_command" = "またはmpvコマンドを入力:";
 
 "filter.video_filters" = "ビデオフィルタ";
 "filter.audio_filters" = "オーディオフィルタ";
@@ -579,6 +591,23 @@
 "history_window.search.no_recents" = "検索履歴はありません";
 "history_window.search.recents_title" = "検索履歴";
 "history_window.search.clear_recents" = "履歴を消去";
+
+// Guide window
+"guide_window.website" = "Webサイト";
+"guide_window.fail" = "ハイライト情報を読み込めませんでした。詳しくは https://iina.io にアクセスしてください。";
+"guide_window.continue" = "続ける";
+
+// Font picker
+"font_picker.title" = "フォントを選択";
+"font_picker.choose" = "フォントを選択:";
+"font_picker.filter" = "入力して絞り込む…";
+"font_picker.family" = "フォントファミリー";
+"font_picker.typeface" = "書体";
+"font_picker.preview" = "プレビュー";
+"font_picker.test" = "フォントをテスト";
+"font_picker.other" = "またはフォント名を入力:";
+"font_picker.cancel" = "キャンセル";
+"font_picker.ok" = "OK";
 
 // Sidebar
 

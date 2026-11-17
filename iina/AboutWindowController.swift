@@ -21,45 +21,45 @@ struct Contributor: Decodable {
   }
 }
 
+fileprivate let ui = UIHelper(scope: "about")
+
 class AboutWindowController: NSWindowController {
+  private let windowBackgroundBox = NSBox()
+  private let iconImageView = NSImageView()
+  private let iinaLabel = NSTextField(labelWithString: "IINA")
+  private let versionLabel = NSTextField(labelWithString: "")
+  private let mpvVersionLabel = NSTextField(labelWithString: "")
+  private let ffmpegVersionLabel = NSTextField(labelWithString: "")
+  private let buildView = NSView()
+  private let buildBranchButton = NSButton(title: "", target: nil, action: nil)
+  private let buildDateLabel = NSTextField(labelWithString: "")
 
-  override var windowNibName: NSNib.Name {
-    return NSNib.Name("AboutWindowController")
-  }
+  private var detailTextView: NSTextView!
+  private var creditsTextView: NSTextView!
 
-  @IBOutlet weak var windowBackgroundBox: NSBox!
-  @IBOutlet weak var iconImageView: NSImageView!
-  @IBOutlet weak var iinaLabel: NSTextField! {
-    didSet {
-      iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: .light)
-    }
-  }
-  @IBOutlet weak var versionLabel: NSTextField!
-  @IBOutlet weak var mpvVersionLabel: NSTextField!
-  @IBOutlet weak var ffmpegVersionLabel: NSTextField!
-  @IBOutlet weak var buildView: NSView!
-  @IBOutlet weak var buildBranchButton: NSButton!
-  @IBOutlet weak var buildDateLabel: NSTextField!
-
-  @IBOutlet var detailTextView: NSTextView!
-  @IBOutlet var creditsTextView: NSTextView!
-
-  @IBOutlet weak var licenseButton: AboutWindowButton!
-  @IBOutlet weak var contributorsButton: AboutWindowButton!
-  @IBOutlet weak var creditsButton: AboutWindowButton!
-  @IBOutlet weak var tabView: NSTabView!
-  @IBOutlet weak var contributorsCollectionView: NSCollectionView!
-  @IBOutlet weak var contributorsFooterView: NSVisualEffectView!
+  private let licenseButton = AboutWindowButton()
+  private let contributorsButton = AboutWindowButton()
+  private let creditsButton = AboutWindowButton()
+  private let tabView = NSTabView()
+  private let contributorsCollectionView = NSCollectionView()
+  private let contributorsFooterView = NSVisualEffectView()
 
   private lazy var contributors = getContributors()
 
-  override func windowDidLoad() {
-    super.windowDidLoad()
+  init() {
+    let window = CommonWindow(
+      contentRect: NSRect(x: 0, y: 0, width: 640, height: 400),
+      styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
+      backing: .buffered,
+      defer: false
+    )
+    window.title = ui.localized("title")
+    window.titlebarAppearsTransparent = true
+    window.titleVisibility = .hidden
+    super.init(window: window)
+    setupViews()
+    window.center()
 
-    window?.titlebarAppearsTransparent = true
-    window?.titleVisibility = .hidden
-
-    windowBackgroundBox.fillColor = .windowBackgroundColor
     iconImageView.image = NSApp.applicationIconImage
 
     let (version, build) = InfoDictionary.shared.version
@@ -111,8 +111,10 @@ class AboutWindowController: NSWindowController {
     contributorsCollectionView.backgroundColors = [.clear]
     contributorsCollectionView.register(AboutWindowContributorAvatarItem.self, forItemWithIdentifier: .dataSourceItem)
 
-    let image = NSImage(size: contributorsFooterView.frame.size)
-    let rect = CGRect(origin: .zero, size: contributorsFooterView.frame.size)
+    // Frames are not laid out yet, so use the footer's fixed size (tab view width x footer height)
+    let footerSize = NSSize(width: 400, height: 60)
+    let image = NSImage(size: footerSize)
+    let rect = CGRect(origin: .zero, size: footerSize)
     image.lockFocus()
     let loc: [CGFloat] = [0, 0.3, 0.6, 0.8, 1]
     let colors: [CGFloat] = [1, 0.95, 0.8, 0.05, 0]
@@ -122,7 +124,194 @@ class AboutWindowController: NSWindowController {
     contributorsFooterView.material = .windowBackground
     contributorsFooterView.maskImage = image
 
-    contributorsCollectionView.enclosingScrollView?.contentInsets.bottom = contributorsFooterView.frame.height * loc[colors.firstIndex(of: 0)! - 1]
+    contributorsCollectionView.enclosingScrollView?.contentInsets.bottom = footerSize.height * loc[colors.firstIndex(of: 0)! - 1]
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  private func setupViews() {
+    guard let contentView = window?.contentView else { return }
+
+    windowBackgroundBox.translatesAutoresizingMaskIntoConstraints = false
+    windowBackgroundBox.boxType = .custom
+    windowBackgroundBox.borderWidth = 0
+    windowBackgroundBox.titlePosition = .noTitle
+    windowBackgroundBox.fillColor = .windowBackgroundColor
+    contentView.addSubview(windowBackgroundBox)
+    windowBackgroundBox.padding(.all)
+    let boxContentView = windowBackgroundBox.contentView!
+
+    // Sidebar
+
+    let sidebar = NSView()
+    sidebar.translatesAutoresizingMaskIntoConstraints = false
+    boxContentView.addSubview(sidebar)
+    sidebar.padding(.top, .leading, .bottom).size(width: 220)
+
+    iconImageView.translatesAutoresizingMaskIntoConstraints = false
+    iconImageView.imageScaling = .scaleProportionallyDown
+    sidebar.addSubview(iconImageView)
+    iconImageView.padding(.top(40)).size(width: 80, height: 80).center(.x)
+
+    iinaLabel.translatesAutoresizingMaskIntoConstraints = false
+    iinaLabel.font = NSFont.systemFont(ofSize: 24, weight: .light)
+    sidebar.addSubview(iinaLabel)
+    iinaLabel.spacing(.top(8), to: iconImageView).center(.x)
+
+    versionLabel.translatesAutoresizingMaskIntoConstraints = false
+    versionLabel.isSelectable = true
+    versionLabel.textColor = .secondaryLabelColor
+    versionLabel.alignment = .center
+    sidebar.addSubview(versionLabel)
+    versionLabel.spacing(.top(8), to: iinaLabel).center(.x)
+
+    let miniFont = NSFont.systemFont(ofSize: NSFont.systemFontSize(for: .mini))
+    for label in [mpvVersionLabel, ffmpegVersionLabel, buildDateLabel] {
+      label.translatesAutoresizingMaskIntoConstraints = false
+      label.controlSize = .mini
+      label.font = miniFont
+      label.textColor = .secondaryLabelColor
+      label.isSelectable = true
+    }
+    mpvVersionLabel.alignment = .right
+    ffmpegVersionLabel.alignment = .left
+    let versionStack = ui.hStack(align: .top, spacing: 6, mpvVersionLabel, ffmpegVersionLabel)
+    sidebar.addSubview(versionStack)
+    versionStack.spacing(.top(4), to: versionLabel).center(.x)
+
+    buildView.translatesAutoresizingMaskIntoConstraints = false
+    sidebar.addSubview(buildView)
+    buildView.spacing(.top(4), to: versionStack).padding(.bottom(150)).size(width: 180, height: 48).center(.x)
+
+    buildDateLabel.alignment = .center
+    buildDateLabel.isHidden = true
+    buildView.addSubview(buildDateLabel)
+    buildDateLabel.padding(.top, .horizontal)
+
+    buildBranchButton.translatesAutoresizingMaskIntoConstraints = false
+    buildBranchButton.bezelStyle = .roundRect
+    buildBranchButton.isBordered = false
+    buildBranchButton.controlSize = .mini
+    buildBranchButton.font = miniFont
+    buildBranchButton.target = self
+    buildBranchButton.isHidden = true
+    buildView.addSubview(buildBranchButton)
+    buildBranchButton.spacing(.top(4), to: buildDateLabel).center(.x)
+
+    var prevView: NSView = buildView
+    for (index, (button, key)) in [(licenseButton, "license"), (contributorsButton, "contributors"), (creditsButton, "credits")].enumerated() {
+      button.translatesAutoresizingMaskIntoConstraints = false
+      button.title = ui.localized(key)
+      button.tag = index
+      button.state = index == 0 ? .on : .off
+      button.target = self
+      button.action = #selector(sectionBtnAction(_:))
+      button.updateState()
+      sidebar.addSubview(button)
+      button.padding(.leading(lessThan: 40), .trailing(lessThan: 40))
+        .spacing(.top(index == 0 ? 8 : 10), to: prevView)
+        .center(.x)
+      button.heightAnchor.constraint(greaterThanOrEqualToConstant: 24).isActive = true
+      prevView = button
+    }
+
+    // Tab view
+
+    tabView.translatesAutoresizingMaskIntoConstraints = false
+    tabView.tabViewType = .noTabsNoBorder
+    boxContentView.addSubview(tabView)
+    tabView.padding(.top(36), .trailing(20), .bottom(20))
+    tabView.leadingAnchor.constraint(equalTo: sidebar.trailingAnchor).isActive = true
+
+    let (licenseScrollView, licenseTextView) = makeTextScrollView(hasVerticalScroller: false)
+    detailTextView = licenseTextView
+    tabView.addTabViewItem(makeTabViewItem(key: "license", content: licenseScrollView))
+
+    tabView.addTabViewItem(makeTabViewItem(key: "contributors", content: makeContributorsView()))
+
+    let (creditsScrollView, creditsTextView) = makeTextScrollView(hasVerticalScroller: true)
+    self.creditsTextView = creditsTextView
+    tabView.addTabViewItem(makeTabViewItem(key: "credits", content: creditsScrollView))
+  }
+
+  private func makeTabViewItem(key: String, content: NSView) -> NSTabViewItem {
+    let item = NSTabViewItem()
+    item.label = ui.localized(key)
+    let view = NSView()
+    view.addSubview(content)
+    content.padding(.all)
+    item.view = view
+    return item
+  }
+
+  private func makeTextScrollView(hasVerticalScroller: Bool) -> (NSScrollView, NSTextView) {
+    let scrollView = NSTextView.scrollableTextView()
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.borderType = .noBorder
+    scrollView.drawsBackground = false
+    scrollView.hasHorizontalScroller = false
+    scrollView.hasVerticalScroller = hasVerticalScroller
+    let textView = scrollView.documentView as! NSTextView
+    textView.isEditable = false
+    textView.drawsBackground = false
+    textView.importsGraphics = false
+    return (scrollView, textView)
+  }
+
+  private func makeContributorsView() -> NSView {
+    let view = NSView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+
+    let layout = NSCollectionViewFlowLayout()
+    layout.itemSize = NSSize(width: 32, height: 32)
+    layout.minimumInteritemSpacing = 4
+    layout.minimumLineSpacing = 4
+    contributorsCollectionView.collectionViewLayout = layout
+
+    let scrollView = NSScrollView()
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.borderType = .noBorder
+    scrollView.drawsBackground = false
+    scrollView.hasHorizontalScroller = false
+    scrollView.hasVerticalScroller = true
+    scrollView.autohidesScrollers = true
+    scrollView.documentView = contributorsCollectionView
+    view.addSubview(scrollView)
+    scrollView.padding(.top, .horizontal(4))
+
+    contributorsFooterView.translatesAutoresizingMaskIntoConstraints = false
+    contributorsFooterView.blendingMode = .withinWindow
+    contributorsFooterView.state = .followsWindowActiveState
+    view.addSubview(contributorsFooterView)
+    contributorsFooterView.padding(.horizontal).size(height: 60)
+    contributorsFooterView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+
+    let contributorsBtn = makeLinkButton("iina/contributors", action: #selector(contributorsBtnAction(_:)))
+    view.addSubview(contributorsBtn)
+    contributorsBtn.center(.x, with: contributorsFooterView)
+    contributorsBtn.bottomAnchor.constraint(equalTo: contributorsFooterView.bottomAnchor, constant: -8).isActive = true
+
+    let crowdinLabel = ui.label("crowdin", canCompress: false)
+    view.addSubview(crowdinLabel)
+    crowdinLabel.padding(.leading, .trailing(greaterThan: 0)).spacing(.top(8), to: scrollView)
+
+    let translatorsBtn = makeLinkButton("Crowdin", action: #selector(translatorsBtnAction(_:)))
+    view.addSubview(translatorsBtn)
+    translatorsBtn.padding(.bottom).spacing(.top(20), to: crowdinLabel).center(.x)
+
+    return view
+  }
+
+  private func makeLinkButton(_ title: String, action: Selector) -> NSButton {
+    let btn = NSButton(title: title, target: self, action: action)
+    btn.translatesAutoresizingMaskIntoConstraints = false
+    btn.bezelStyle = .inline
+    btn.font = .boldSystemFont(ofSize: NSFont.smallSystemFontSize)
+    btn.image = .sf("link", withConfiguration: .init(pointSize: 9, weight: .bold))
+    btn.imagePosition = .imageLeft
+    return btn
   }
 
   @objc func openCommitLink() {
@@ -130,19 +319,19 @@ class AboutWindowController: NSWindowController {
     NSWorkspace.shared.open(.init(string: "https://github.com/iina/iina/commit/\(commitSHA)")!)
   }
 
-  @IBAction func sectionBtnAction(_ sender: NSButton) {
+  @objc func sectionBtnAction(_ sender: NSButton) {
     tabView.selectTabViewItem(at: sender.tag)
     [licenseButton, contributorsButton, creditsButton].forEach {
-      $0?.state = $0 == sender ? .on : .off
-      $0?.updateState()
+      $0.state = $0 == sender ? .on : .off
+      $0.updateState()
     }
   }
 
-  @IBAction func contributorsBtnAction(_ sender: Any) {
+  @objc func contributorsBtnAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.contributorsLink)!)
   }
 
-  @IBAction func translatorsBtnAction(_ sender: Any) {
+  @objc func translatorsBtnAction(_ sender: Any) {
     NSWorkspace.shared.open(URL(string: AppData.crowdinMembersLink)!)
   }
 }
@@ -192,10 +381,18 @@ extension AboutWindowController: NSCollectionViewDataSource {
 
 class AboutWindowButton: NSButton {
 
-  override func awakeFromNib() {
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+    setButtonType(.momentaryChange)
+    bezelStyle = .shadowlessSquare
+    isBordered = false
+    lineBreakMode = .byTruncatingTail
     wantsLayer = true
     layer?.cornerRadius = 4
-    updateState()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   func updateState() {

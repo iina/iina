@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Vrijednost ne smije biti prazna.";
 "input.already_exists" = "Vrijednosti već postoji.";
 
+// About Window
+"about.title" = "O programu";
+"about.license" = "Licenca";
+"about.contributors" = "Suradnici";
+"about.credits" = "Zasluge";
+"about.crowdin" = "IINA se prevodi na platformi Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Istaknuto";
 "guide.basic_settings" = "Osnovne postavke";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "PRIKAŽI";
 "osd.screenshot.edit" = "UREDI";
 "osd.screenshot.delete" = "IZBRIŠI";
+"osd.sub_choose.prompt" = "Pritisni za biranje titlova za preuzimanje:";
+"osd.sub_choose.cancel" = "OTKAŽI";
+"osd.sub_choose.download" = "PREUZMI";
 
 "preference.title" = "Postavke";
 "preference.general" = "Opće";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "Tipkovni prečaci";
 "keymapping.message" = "Pritisni bilo koju tipku za snimanje.";
+"keymapping.select_action" = "Odaberite radnju:";
+"keymapping.enter_command" = "Ili upiši mpv naredbu:";
 
 "filter.video_filters" = "Video filtri";
 "filter.audio_filters" = "Audio filtri";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "Nema nedavnih pretraga";
 "history_window.search.recents_title" = "Nedavne pretrage";
 "history_window.search.clear_recents" = "Očisti nedavne";
+
+// Guide window
+"guide_window.website" = "Web-stranica";
+"guide_window.fail" = "Greška prilikom učitavanja istaknutog sadržaja. Pogledaj https://iina.io za više informacija.";
+"guide_window.continue" = "Nastavi";
+
+// Font picker
+"font_picker.title" = "Odaberi font";
+"font_picker.choose" = "Odaberi font:";
+"font_picker.filter" = "Tipkaj za filtriranje …";
+"font_picker.family" = "Obitelj";
+"font_picker.typeface" = "Font";
+"font_picker.preview" = "Pregled";
+"font_picker.test" = "Test";
+"font_picker.other" = "Ili upiši ime fonta:";
+"font_picker.cancel" = "Odustani";
+"font_picker.ok" = "U redu";
 
 // Sidebar
 

@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Hodnota nemôže byť prázdna.";
 "input.already_exists" = "Hodnota už existuje.";
 
+// About Window
+"about.title" = "O aplikácii IINA";
+"about.license" = "LicenAcia";
+"about.contributors" = "Prispievatelia";
+"about.credits" = "Poďakovanie";
+"about.crowdin" = "Lokalizáciu IINA zabezpečuje Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Novinky";
 "guide.basic_settings" = "Základné nastavenia";
@@ -218,6 +225,9 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "osd.screenshot.reveal" = "ZOBRAZIŤ";
 "osd.screenshot.edit" = "UPRAVIŤ";
 "osd.screenshot.delete" = "VYMAZAŤ";
+"osd.sub_choose.prompt" = "Označte titulky, ktoré chcete stiahnuť:";
+"osd.sub_choose.cancel" = "ZRUŠIŤ";
+"osd.sub_choose.download" = "STIAHNUŤ";
 
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
@@ -455,6 +465,8 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 
 "keymapping.title" = "Klávesové Skratky";
 "keymapping.message" = "Stlač hociktorú klávesu pre zaznamenanie.";
+"keymapping.select_action" = "Vyberte akciu:";
+"keymapping.enter_command" = "Alebo zadajte mpv príkaz:";
 
 "filter.video_filters" = "Video Filtre";
 "filter.audio_filters" = "Zvukové Filtre";
@@ -579,6 +591,23 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "history_window.search.no_recents" = "Žiadne posledné vyhľadávanie";
 "history_window.search.recents_title" = "Posledné vyhľadávanie";
 "history_window.search.clear_recents" = "Vymazať posledné";
+
+// Guide window
+"guide_window.website" = "Webová stránka";
+"guide_window.fail" = "Načítanie „Čo je v IINA nové“ zlyhalo. Navštívte našu webovú stránku https://iina.io, kde sa dozviete viac informácií.";
+"guide_window.continue" = "Pokračovať";
+
+// Font picker
+"font_picker.title" = "Vybrať písmo";
+"font_picker.choose" = "Vyberte písmo:";
+"font_picker.filter" = "Vyhľadať…";
+"font_picker.family" = "Rodina";
+"font_picker.typeface" = "Typ písma";
+"font_picker.preview" = "Náhľad";
+"font_picker.test" = "Test";
+"font_picker.other" = "Alebo zadajte názov písma:";
+"font_picker.cancel" = "Zrušiť";
+"font_picker.ok" = "OK";
 
 // Sidebar
 

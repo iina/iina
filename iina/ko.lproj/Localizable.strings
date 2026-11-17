@@ -22,6 +22,13 @@
 "input.value_is_empty" = "값을 비워둘 수 없습니다.";
 "input.already_exists" = "값이 이미 존재합니다.";
 
+// About Window
+"about.title" = "About";
+"about.license" = "라이센스";
+"about.contributors" = "기여자";
+"about.credits" = "크레딧";
+"about.crowdin" = "IINA는 Crowdin을 통해 번역됩니다.";
+
 // Guide Window
 "guide.highlights" = "새로 추가된 기능";
 "guide.basic_settings" = "일반 설정";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "확인하기";
 "osd.screenshot.edit" = "수정";
 "osd.screenshot.delete" = "제거";
+"osd.sub_choose.prompt" = "다운로드할 자막을 선택하십시오";
+"osd.sub_choose.cancel" = "취소";
+"osd.sub_choose.download" = "다운로드";
 
 "preference.title" = "환경설정";
 "preference.general" = "일반";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "단축키 지정";
 "keymapping.message" = "단축키로 사용할 키를 누르십시오.";
+"keymapping.select_action" = "동작 선택";
+"keymapping.enter_command" = "mpv 명령행 바로 입력";
 
 "filter.video_filters" = "비디오 필터";
 "filter.audio_filters" = "오디오 필터";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "최근 검색한 항목이 없습니다";
 "history_window.search.recents_title" = "최근 검색한 항목";
 "history_window.search.clear_recents" = "최근 목록 지우기";
+
+// Guide window
+"guide_window.website" = "웹사이트";
+"guide_window.fail" = "하이라이트를 불러오지 못했습니다. 자세한 내용은 웹 사이트(https://iina.io)에서 확인해주세요.";
+"guide_window.continue" = "계속하기";
+
+// Font picker
+"font_picker.title" = "서체 선택";
+"font_picker.choose" = "서체 선택";
+"font_picker.filter" = "다음을 포함…";
+"font_picker.family" = "서체 목록";
+"font_picker.typeface" = "스타일";
+"font_picker.preview" = "미리 보기";
+"font_picker.test" = "서체 미리보기";
+"font_picker.other" = "직접 입력하여 서체 선택";
+"font_picker.cancel" = "취소";
+"font_picker.ok" = "승인";
 
 // Sidebar
 

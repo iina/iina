@@ -22,6 +22,13 @@
 "input.value_is_empty" = "הערך לא יכול להיות ריק.";
 "input.already_exists" = "הערך כבר קיים.";
 
+// About Window
+"about.title" = "אודות";
+"about.license" = "רישיון";
+"about.contributors" = "תורמים";
+"about.credits" = "תודות";
+"about.crowdin" = "לוקליזציית IINA מופעלת על ידי Crowdin.";
+
 // Guide Window
 "guide.highlights" = "נקודות עיקריות";
 "guide.basic_settings" = "הגדרות בסיסיות";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "הצג בתקיה";
 "osd.screenshot.edit" = "עריכה";
 "osd.screenshot.delete" = "מחיקה";
+"osd.sub_choose.prompt" = "אנא לחץ כדי לבחור כתוביות להורדה:";
+"osd.sub_choose.cancel" = "ביטול";
+"osd.sub_choose.download" = "הורדה";
 
 "preference.title" = "העדפות";
 "preference.general" = "כללי";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "קיצורי מקשים";
 "keymapping.message" = "לחץ על מקש כלשהו כדי להקליט.";
+"keymapping.select_action" = "בחר פעולה:";
+"keymapping.enter_command" = "או הזן פקודת mpv:";
 
 "filter.video_filters" = "מסנני וידאו";
 "filter.audio_filters" = "מסנני שמע";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "אין חיפושים אחרונים";
 "history_window.search.recents_title" = "חיפושים אחרונים";
 "history_window.search.clear_recents" = "נקה רשימת אחרונים";
+
+// Guide window
+"guide_window.website" = "אתר אינטרנט";
+"guide_window.fail" = "טעינת הדגשים נכשלה. אנא בקר באתר האינטרנט שלנו https://iina.io למידע נוסף.";
+"guide_window.continue" = "המשך את";
+
+// Font picker
+"font_picker.title" = "בחר גופן";
+"font_picker.choose" = "בחר גופן:";
+"font_picker.filter" = "הקלד כדי לסנן…";
+"font_picker.family" = "משפחה";
+"font_picker.typeface" = "גופן";
+"font_picker.preview" = "תצוגה מקדימה";
+"font_picker.test" = "בדיקה";
+"font_picker.other" = "או הזן את שם הגופן:";
+"font_picker.cancel" = "ביטול";
+"font_picker.ok" = "אישור";
 
 // Sidebar
 

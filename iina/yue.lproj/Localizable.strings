@@ -22,6 +22,13 @@
 "input.value_is_empty" = "此項為必填項目。";
 "input.already_exists" = "此內容已經被其他項目使用。";
 
+// About Window
+"about.title" = "關於";
+"about.license" = "許可證";
+"about.contributors" = "貢獻者";
+"about.credits" = "開發者";
+"about.crowdin" = "IINA 嘅繁體中文(香港)翻譯由 Crowdin 平台上嘅全球協作翻譯者提供。";
+
 // Guide Window
 "guide.highlights" = "更新特點";
 "guide.basic_settings" = "基本設定";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "揭露";
 "osd.screenshot.edit" = "編輯";
 "osd.screenshot.delete" = "刪除";
+"osd.sub_choose.prompt" = "請選擇要下載的字幕：";
+"osd.sub_choose.cancel" = "取消";
+"osd.sub_choose.download" = "下載";
 
 "preference.title" = "偏好設定";
 "preference.general" = "一般";
@@ -468,6 +478,8 @@
 
 "keymapping.title" = "快速鍵";
 "keymapping.message" = "撳任意一個鍵可以開始錄製。";
+"keymapping.select_action" = "選擇動作：";
+"keymapping.enter_command" = "或輸入 mpv 指令：";
 
 "filter.video_filters" = "視訊濾鏡";
 "filter.audio_filters" = "音訊濾鏡";
@@ -593,6 +605,23 @@
 "history_window.search.no_recents" = "沒有最近的搜尋項目";
 "history_window.search.recents_title" = "最近的搜尋項目";
 "history_window.search.clear_recents" = "清除最近搜索記錄";
+
+// Guide window
+"guide_window.website" = "網站";
+"guide_window.fail" = "讀取 Highlights 時失敗。請參訪我們嘅網站 https://iina.io 來取得更多資訊。";
+"guide_window.continue" = "繼續";
+
+// Font picker
+"font_picker.title" = "選擇字體";
+"font_picker.choose" = "選擇字體：";
+"font_picker.filter" = "輸入以篩選……";
+"font_picker.family" = "字體集";
+"font_picker.typeface" = "樣式";
+"font_picker.preview" = "預覽";
+"font_picker.test" = "測試";
+"font_picker.other" = "或輸入字體名稱：";
+"font_picker.cancel" = "取消";
+"font_picker.ok" = "好";
 
 // Sidebar
 

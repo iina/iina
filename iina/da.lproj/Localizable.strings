@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Værdien kan ikke være tom.";
 "input.already_exists" = "Værdien findes allerede.";
 
+// About Window
+"about.title" = "Om";
+"about.license" = "Licens";
+"about.contributors" = "Bidragsydere";
+"about.credits" = "Tak til";
+"about.crowdin" = "IINA oversættelse er drevet af Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Højdepunkter";
 "guide.basic_settings" = "Grundlæggende indstillinger";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "VIS";
 "osd.screenshot.edit" = "REDIGER";
 "osd.screenshot.delete" = "SLET";
+"osd.sub_choose.prompt" = "Vælg en undertekst til overførsel:";
+"osd.sub_choose.cancel" = "Annuller";
+"osd.sub_choose.download" = "Overførsel";
 
 "preference.title" = "Indstillinger";
 "preference.general" = "Generelt";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "Taste kortlægning";
 "keymapping.message" = "Tryk på en vilkårlig tast for at optage.";
+"keymapping.select_action" = "Vælg handling:";
+"keymapping.enter_command" = "Eller vælg mpv-kommando:";
 
 "filter.video_filters" = "Videofiltre";
 "filter.audio_filters" = "Lydfiltre";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "Ingen tidligere søgninger";
 "history_window.search.recents_title" = "Seneste søgninger";
 "history_window.search.clear_recents" = "Tøm seneste";
+
+// Guide window
+"guide_window.website" = "Hjemmeside";
+"guide_window.fail" = "Kunne ikke indlæse højdepunkter. Besøg venligst vores hjemmeside https://iina.io for mere information.";
+"guide_window.continue" = "Fortsæt";
+
+// Font picker
+"font_picker.title" = "Vælg en skrifttype";
+"font_picker.choose" = "Vælg en skrifttype:";
+"font_picker.filter" = "Tast for at filtrere…";
+"font_picker.family" = "Familie";
+"font_picker.typeface" = "Skrifttype";
+"font_picker.preview" = "Forhåndsvisning";
+"font_picker.test" = "Test";
+"font_picker.other" = "Eller indtast navn på skrifttype:";
+"font_picker.cancel" = "Annuller";
+"font_picker.ok" = "OK";
 
 // Sidebar
 

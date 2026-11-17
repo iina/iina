@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Nome não pode ser vazio.";
 "input.already_exists" = "Nome já existe.";
 
+// About Window
+"about.title" = "Acerca de";
+"about.license" = "Licença";
+"about.contributors" = "Colaboradores";
+"about.credits" = "Créditos";
+"about.crowdin" = "Traduções do IINA tiveram o apoio de Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Destaques";
 "guide.basic_settings" = "Configurações Básicas";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "REVELAR";
 "osd.screenshot.edit" = "EDITAR";
 "osd.screenshot.delete" = "EXCLUIR";
+"osd.sub_choose.prompt" = "Por favor, clique para selecionar legendas a descarregar:";
+"osd.sub_choose.cancel" = "CANCELAR";
+"osd.sub_choose.download" = "DESCARREGAR";
 
 "preference.title" = "Definições";
 "preference.general" = "Geral";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "Mapeamento de teclas";
 "keymapping.message" = "Pressione qualquer tecla para gravar.";
+"keymapping.select_action" = "Selecionar ação:";
+"keymapping.enter_command" = "Ou introduza o comando mpv:";
 
 "filter.video_filters" = "Filtros de Vídeo";
 "filter.audio_filters" = "Filtros de Áudio";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "Nenhuma Pesquisa Recente";
 "history_window.search.recents_title" = "Pesquisas Recentes";
 "history_window.search.clear_recents" = "Limpar Recentes";
+
+// Guide window
+"guide_window.website" = "Site";
+"guide_window.fail" = "Falha ao carregar os destaques. Por favor, visite nosso site https://iina.io para mais informações.";
+"guide_window.continue" = "Continuar";
+
+// Font picker
+"font_picker.title" = "Escolher um tipo de letra";
+"font_picker.choose" = "Escolher um tipo de letra:";
+"font_picker.filter" = "Digitar para filtrar…";
+"font_picker.family" = "Família";
+"font_picker.typeface" = "Tipo de letra";
+"font_picker.preview" = "Pré-visualização";
+"font_picker.test" = "Teste";
+"font_picker.other" = "Ou introduza o nome do tipo de letra:";
+"font_picker.cancel" = "Cancelar";
+"font_picker.ok" = "OK";
 
 // Sidebar
 

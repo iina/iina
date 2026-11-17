@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Değer boş olamaz.";
 "input.already_exists" = "Değer halihazırda var.";
 
+// About Window
+"about.title" = "Hakkında";
+"about.license" = "Lisans";
+"about.contributors" = "Katkıcılar";
+"about.credits" = "Emeği Geçenler";
+"about.crowdin" = "IINA yerelleştirmesi Crowdin tarafından sağlanmaktadır.";
+
 // Guide Window
 "guide.highlights" = "Öne Çıkanlar";
 "guide.basic_settings" = "Temel Ayarlar";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "GÖSTER";
 "osd.screenshot.edit" = "DÜZENLE";
 "osd.screenshot.delete" = "SİL";
+"osd.sub_choose.prompt" = "İndirmek istediğiniz altyazıları seçin:";
+"osd.sub_choose.cancel" = "VAZGEÇ";
+"osd.sub_choose.download" = "İNDİR";
 
 "preference.title" = "Tercihler";
 "preference.general" = "Genel";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "Tuş Eşlemlemeleri";
 "keymapping.message" = "Kaydetmek için herhangi bir tuşa basın.";
+"keymapping.select_action" = "Eylem seçin:";
+"keymapping.enter_command" = "Veya mpv komutu girin:";
 
 "filter.video_filters" = "Video Süzgeçleri";
 "filter.audio_filters" = "Ses Süzgeçleri";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "Son Yapılan Arama Yok";
 "history_window.search.recents_title" = "Son Aramalar";
 "history_window.search.clear_recents" = "Son Kullanılanları Sil";
+
+// Guide window
+"guide_window.website" = "Web Sitesi";
+"guide_window.fail" = "Vurgular yüklenemedi. Daha fazla bilgi için https://iina.io web sitemizi ziyaret edin.";
+"guide_window.continue" = "Sürdür";
+
+// Font picker
+"font_picker.title" = "Font Seç";
+"font_picker.choose" = "Bir font seçin:";
+"font_picker.filter" = "Süzmek için yaz…";
+"font_picker.family" = "Aile";
+"font_picker.typeface" = "Yazıyüzü";
+"font_picker.preview" = "Önizleme";
+"font_picker.test" = "Bu bir deneme metnidir / iİşŞüÜğĞçÇ.";
+"font_picker.other" = "Veya font adını girin:";
+"font_picker.cancel" = "Vazgeç";
+"font_picker.ok" = "Tamam";
 
 // Sidebar
 

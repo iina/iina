@@ -22,6 +22,13 @@
 "input.value_is_empty" = "Waarde kan niet leeg zijn.";
 "input.already_exists" = "Waarde bestaat al.";
 
+// About Window
+"about.title" = "Over";
+"about.license" = "Licentie";
+"about.contributors" = "Bijdragers";
+"about.credits" = "Credits";
+"about.crowdin" = "IINA-lokalisatie wordt gevoed door Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Hoogtepunten";
 "guide.basic_settings" = "Basisinstellingen";
@@ -217,6 +224,9 @@
 "osd.screenshot.reveal" = "TOON";
 "osd.screenshot.edit" = "BEWERKEN";
 "osd.screenshot.delete" = "VERWIJDEREN";
+"osd.sub_choose.prompt" = "Selecteer ondertiteling om te downloaden:";
+"osd.sub_choose.cancel" = "ANNULEER";
+"osd.sub_choose.download" = "DOWNLOAD";
 
 "preference.title" = "Voorkeuren";
 "preference.general" = "Algemeen";
@@ -454,6 +464,8 @@
 
 "keymapping.title" = "Sneltoetsen";
 "keymapping.message" = "Druk op een toets om de opname te starten.";
+"keymapping.select_action" = "Selecteer een actie:";
+"keymapping.enter_command" = "Of voer een mpv-commando in:";
 
 "filter.video_filters" = "Videofilters";
 "filter.audio_filters" = "Audiofilters";
@@ -578,6 +590,23 @@
 "history_window.search.no_recents" = "Geen recente zoekopdrachten";
 "history_window.search.recents_title" = "Recente zoekopdrachten";
 "history_window.search.clear_recents" = "Recente zoekopdrachten wissen";
+
+// Guide window
+"guide_window.website" = "Website";
+"guide_window.fail" = "Fout bij het laden van hoogtepunten. Bezoek onze website https://iina.io voor meer informatie.";
+"guide_window.continue" = "Doorgaan";
+
+// Font picker
+"font_picker.title" = "Kies een lettertype";
+"font_picker.choose" = "Kies een lettertype:";
+"font_picker.filter" = "Zoek";
+"font_picker.family" = "Familie";
+"font_picker.typeface" = "Stijl";
+"font_picker.preview" = "Voorvertoning";
+"font_picker.test" = "Test";
+"font_picker.other" = "Of voer de naam van het lettertype in:";
+"font_picker.cancel" = "Annuleer";
+"font_picker.ok" = "OK";
 
 // Sidebar
 

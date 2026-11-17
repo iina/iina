@@ -90,7 +90,10 @@ class KeyRecordViewController: NSViewController, KeyRecordViewDelegate, NSRuleEd
     ruleEditor.nestingMode = .single
     ruleEditor.canRemoveAllRows = false
     ruleEditor.delegate = self
+    // addRow triggers updateCommandField, which would overwrite the action set before the view loaded
+    let initialAction = actionTextField.stringValue
     ruleEditor.addRow(self)
+    actionTextField.stringValue = initialAction
 
     keyLabel.delegate = self
     actionTextField.delegate = self

@@ -185,6 +185,11 @@ class MainWindowController: PlayerWindowController {
       }
     }
 
+    var isAnimatingToNativeFullScreen: Bool {
+      if case .animating(_, false, _) = self { return true }
+      return false
+    }
+
     var priorWindowedFrame: NSRect? {
       get {
         switch self {
@@ -233,8 +238,11 @@ class MainWindowController: PlayerWindowController {
       guard player.info.state.active else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
-      case .animating:  break
+      case .animating:  return
       case .windowed:   player.mpv.setFlag(MPVOption.Window.fullscreen, false)
+      }
+      if oldValue.isAnimatingToNativeFullScreen {
+        player.resumeDeferredSyncUITime()
       }
     }
   }
@@ -1600,6 +1608,10 @@ class MainWindowController: PlayerWindowController {
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("failed to enter full screen mode")
+
+    if player.info.state.active {
+      updateWindowParametersForMPV()
+    }
   }
 
   /// The window is about to exit full screen mode.
@@ -1749,6 +1761,10 @@ class MainWindowController: PlayerWindowController {
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("failed to exit full screen mode")
+
+    if player.info.state.active {
+      updateWindowParametersForMPV()
+    }
   }
 
   func toggleWindowFullScreen() {
@@ -1942,7 +1958,10 @@ class MainWindowController: PlayerWindowController {
     // See comments in windowWillExitFullScreen for details.
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
-    updateWindowParametersForMPV()
+    // Skip updating while in full-screen animation. They are updated when the animation ends.
+    if !fsState.isAnimatingToNativeFullScreen {
+      updateWindowParametersForMPV()
+    }
     liveText.requestAnalysis()
   }
 

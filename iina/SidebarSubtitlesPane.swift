@@ -347,15 +347,6 @@ fileprivate class SubPositionScaleDelayView: NSView {
     scaleResetButton.bezelStyle = .smallSquare
     scaleResetButton.isBordered = false
 
-    let scaleStack = ui.hStack(
-      spacing: 8,
-      ui.image("plus.magnifyingglass", size: 16, config: .sidebarIconConfig),
-      ui.label("sidebar.scale", font: .boldSystemFont(ofSize: 12)),
-      scaleSlider,
-      scaleResetButton,
-    )
-    scaleStack.size(height: 30)
-
     self.delayView = SubDelayView(player: player)
 
     let stack = ui.vStack(
@@ -371,7 +362,17 @@ fileprivate class SubPositionScaleDelayView: NSView {
         ui.flexibleSpace(),
       ),
       positionSlider,
-      scaleStack,
+      ui.hStack(
+        spacing: 8,
+        ui.image("plus.magnifyingglass", size: 16, config: .sidebarIconConfig),
+        ui.label("sidebar.scale", font: .boldSystemFont(ofSize: 12)),
+        ui.flexibleSpace(),
+      ),
+      ui.hStack(
+        spacing: 8,
+        scaleSlider,
+        scaleResetButton,
+      ),
     )
     addSubview(stack)
     stack.padding(.all)

@@ -212,19 +212,34 @@ class Assrt {
             return
           }
           var subtitles: [Subtitle] = []
-          var index = 0
+          var skipped = 0
           for sub in subArray {
+            // assrt may return "muxer" / pack entries that only carry `fileid` and the
+            // `m_*` fields, even though `no_muxer` is requested. They cannot be shown
+            // in the selection panel, so skip them instead of force-unwrapping and
+            // taking the whole app down.
+            guard let id = sub["id"] as? Int,
+                  let nativeName = sub["native_name"] as? String,
+                  let uploadTime = sub["upload_time"] as? String else {
+              Logger.log("Skipping malformed assrt search result: \(sub)",
+                         level: .debug, subsystem: Logger.Sub.assrt)
+              skipped += 1
+              continue
+            }
             var subLang: String? = nil
             if let lang = sub["lang"] as? [String: Any], let desc = lang["desc"] as? String {
               subLang = desc
             }
-            subtitles.append(Subtitle(index: index,
-                                           id: sub["id"] as! Int,
-                                           nativeName: sub["native_name"] as! String,
-                                           uploadTime: sub["upload_time"] as! String,
-                                           subType: sub["subtype"] as? String,
-                                           subLang: subLang))
-            index += 1
+            subtitles.append(Subtitle(index: subtitles.count,
+                                      id: id,
+                                      nativeName: nativeName,
+                                      uploadTime: uploadTime,
+                                      subType: sub["subtype"] as? String,
+                                      subLang: subLang))
+          }
+          if skipped > 0 {
+            Logger.log("Skipped \(skipped) malformed assrt search result(s) of \(subArray.count)",
+                       level: .warning, subsystem: Logger.Sub.assrt)
           }
           resolver.fulfill(subtitles)
         })
@@ -271,19 +286,34 @@ class Assrt {
             resolver.reject(Error.wrongResponseFormat)
             return
           }
-          guard let subArray = subDict["subs"] as? [[String: Any]], subArray.count == 1 else {
+          guard let subArray = subDict["subs"] as? [[String: Any]], let subInfo = subArray.first else {
             resolver.reject(Error.wrongResponseFormat)
             return
           }
 
-          sub.url = URL(string: subArray[0]["url"] as! String)
-          sub.filename = subArray[0]["filename"] as? String
+          if let urlString = subInfo["url"] as? String, let url = URL(string: urlString) {
+            sub.url = url
+          }
+          sub.filename = subInfo["filename"] as? String
 
-          if let fileList = subArray[0]["filelist"] as? [[String: String]] {
-            sub.fileList = fileList.map { info in
-              Subtitle.File(url: URL(string: info["url"]!)!,
-                                 filename: info["f"]!)
+          if let fileList = subInfo["filelist"] as? [[String: Any]] {
+            sub.fileList = fileList.compactMap { info in
+              guard let urlString = info["url"] as? String,
+                    let url = URL(string: urlString),
+                    let filename = info["f"] as? String else {
+                Logger.log("Skipping malformed assrt file entry: \(info)",
+                           level: .debug, subsystem: Logger.Sub.assrt)
+                return nil
+              }
+              return Subtitle.File(url: url, filename: filename)
             }
+          }
+
+          guard sub.url != nil || !(sub.fileList?.isEmpty ?? true) else {
+            Logger.log("No downloadable file in assrt details: \(subInfo)",
+                       level: .debug, subsystem: Logger.Sub.assrt)
+            resolver.reject(Error.wrongResponseFormat)
+            return
           }
 
           resolver.fulfill(sub)

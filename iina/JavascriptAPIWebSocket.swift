@@ -108,10 +108,13 @@ class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketCon
       }
       do {
         try server.send(data: data, to: connEntry, callback: { error in
-          if let error {
-            reject.call(withArguments: [error.toDict()])
-          } else {
-            resolve.call(withArguments: ["success"])
+          // The completion handler runs on the WebSocket server queue.
+          self.performOnMainThread {
+            if let error {
+              reject.call(withArguments: [error.toDict()])
+            } else {
+              resolve.call(withArguments: ["success"])
+            }
           }
         })
       } catch (let error) {
@@ -126,59 +129,69 @@ extension JavascriptAPIWebSocketController: WebSocketServerDelegate {
   func stateUpdated(_ state: NWListener.State) {
     guard let handler = stateHandler?.value else { return }
 
-    switch state {
-    case .setup:
-      handler.call(withArguments: ["setup"])
-    case .waiting(let nWError):
-      handler.call(withArguments: ["waiting", nWError.toDict()])
-    case .ready:
-      handler.call(withArguments: ["ready"])
-    case .failed(let nWError):
-      handler.call(withArguments: ["failed", nWError.toDict()])
-    case .cancelled:
-      handler.call(withArguments: ["cancelled"])
-    @unknown default:
-      handler.call(withArguments: ["\(state)"])
+    // WebSocket events are delivered on the server queue.
+    performOnMainThread {
+      switch state {
+      case .setup:
+        handler.call(withArguments: ["setup"])
+      case .waiting(let nWError):
+        handler.call(withArguments: ["waiting", nWError.toDict()])
+      case .ready:
+        handler.call(withArguments: ["ready"])
+      case .failed(let nWError):
+        handler.call(withArguments: ["failed", nWError.toDict()])
+      case .cancelled:
+        handler.call(withArguments: ["cancelled"])
+      @unknown default:
+        handler.call(withArguments: ["\(state)"])
+      }
     }
   }
 
   func newConnection(_ conn: NWConnection, connID: String) {
     guard let handler = newConnHandler?.value else { return }
-    handler.call(withArguments: [
-      connID,
-      // may add more useful information in the future
-      [
-        "path": conn.currentPath?.remoteEndpoint?.debugDescription
-      ] as [String: Any?]
-    ])
+    performOnMainThread {
+      handler.call(withArguments: [
+        connID,
+        // may add more useful information in the future
+        [
+          "path": conn.currentPath?.remoteEndpoint?.debugDescription
+        ] as [String: Any?]
+      ])
+    }
   }
 
   func connection(_ conn: String, stateUpdated state: NWConnection.State) {
     guard let handler = connStateHandler?.value else { return }
 
-    switch state {
-    case .setup:
-      handler.call(withArguments: [conn, "setup"])
-    case .waiting(let nWError):
-      handler.call(withArguments: [conn, "waiting", nWError.toDict()])
-    case .preparing:
-      handler.call(withArguments: [conn, "preparing"])
-    case .ready:
-      handler.call(withArguments: [conn, "ready"])
-    case .failed(let nWError):
-      handler.call(withArguments: [conn, "failed", nWError.toDict()])
-    case .cancelled:
-      handler.call(withArguments: [conn, "cancelled"])
-    @unknown default:
-      handler.call(withArguments: [conn, "\(state)"])
+    performOnMainThread {
+      switch state {
+      case .setup:
+        handler.call(withArguments: [conn, "setup"])
+      case .waiting(let nWError):
+        handler.call(withArguments: [conn, "waiting", nWError.toDict()])
+      case .preparing:
+        handler.call(withArguments: [conn, "preparing"])
+      case .ready:
+        handler.call(withArguments: [conn, "ready"])
+      case .failed(let nWError):
+        handler.call(withArguments: [conn, "failed", nWError.toDict()])
+      case .cancelled:
+        handler.call(withArguments: [conn, "cancelled"])
+      @unknown default:
+        handler.call(withArguments: [conn, "\(state)"])
+      }
     }
   }
 
   func connection(_ conn: String, receivedData data: Data, context: NWConnection.ContentContext) {
     guard let handler = self.messageHandler?.value else { return }
 
-    let wsMessage = WSMessage(data: data)
-    handler.call(withArguments: [conn, wsMessage])
+    // WebSocket events are delivered on the server queue.
+    performOnMainThread {
+      let wsMessage = WSMessage(data: data)
+      handler.call(withArguments: [conn, wsMessage])
+    }
   }
 }
 

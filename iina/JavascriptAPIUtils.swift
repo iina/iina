@@ -188,7 +188,10 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         }
         guard let output = String(data: data, encoding: .utf8) else { return }
         stdoutContent += output
-        stdoutHook?.call(withArguments: [output])
+        // The readability handler runs on a background queue. See `performOnMainThread`.
+        self.performOnMainThread {
+          stdoutHook?.call(withArguments: [output])
+        }
       }
       stderr.fileHandleForReading.readabilityHandler = { file in
         let data = file.availableData
@@ -198,7 +201,9 @@ class JavascriptAPIUtils: JavascriptAPI, JavascriptAPIUtilsExportable {
         }
         guard let output = String(data: data, encoding: .utf8) else { return }
         stderrContent += output
-        stderrHook?.call(withArguments: [output])
+        self.performOnMainThread {
+          stderrHook?.call(withArguments: [output])
+        }
       }
       Logger.log("Executing \(path) \(args.joined(separator: " "))", subsystem: pluginInstance.subsystem)
       do {

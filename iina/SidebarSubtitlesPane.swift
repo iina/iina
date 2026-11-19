@@ -19,9 +19,8 @@ class SidebarSubtitlesPane: SidebarScrollView {
 
     drawsBackground = false
 
-    let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
-
-    stack.addArrangedSubview(ui.vStack(
+    let split = ui.split()
+    split.addArrangedSubview(ui.vStack(
       spacing: .sidebarItemSpacing,
       wantsToGrow: true,
       ui.hStack(
@@ -40,7 +39,7 @@ class SidebarSubtitlesPane: SidebarScrollView {
       }
     ))
 
-    stack.addArrangedSubview(ui.vStack(
+    split.addArrangedSubview(ui.vStack(
       spacing: .sidebarItemSpacing,
       wantsToGrow: true,
       ui.hStack(
@@ -58,6 +57,9 @@ class SidebarSubtitlesPane: SidebarScrollView {
         $0.padding(.all)
       }
     ))
+
+    let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
+    split.addArrangedSubview(stack)
 
     stack.addArrangedSubview(Container(LoadSubtitleView(player: player)) {
       $0.padding(.all(.sidebarContainerPadding))
@@ -92,8 +94,11 @@ class SidebarSubtitlesPane: SidebarScrollView {
       }
     stack.addArrangedSubview(assWarning)
 
-    documentView!.addSubview(stack)
-    stack.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
+    split.setHoldingPriority(.init(260), forSubviewAt: 0)
+    split.setHoldingPriority(.init(250), forSubviewAt: 1)
+    split.setHoldingPriority(.init(260), forSubviewAt: 2)
+    documentView!.addSubview(split)
+    split.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
 
     let block = { (_: Notification) in
       let tracks = ([.sub, .secondSub] as [MPVTrack.TrackType]).compactMap {

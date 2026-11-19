@@ -32,7 +32,11 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     drawsBackground = false
     wantsLayer = true
     layer?.cornerRadius = 8
-    size(height: 98)
+    heightAnchor.constraint(greaterThanOrEqualToConstant: 98).isActive = true
+    heightAnchor.constraint(lessThanOrEqualToConstant: 500).isActive = true
+    let initialHeight = heightAnchor.constraint(equalToConstant: 150)
+    initialHeight.priority = .init(200)
+    initialHeight.isActive = true
 
     player.observe(.iinaTracklistChanged) { [weak self] _ in
       self?.tableView.reloadData()

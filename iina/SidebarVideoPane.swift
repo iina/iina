@@ -20,15 +20,17 @@ class SidebarVideoPane: SidebarScrollView {
 
     drawsBackground = false
 
-    let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
-
-    stack.addArrangedSubview(Container(TrackSelector(
+    let split = ui.split()
+    split.addArrangedSubview(Container(TrackSelector(
       .video,
       player: player,
       observedKeys: [.iinaVIDChanged]
     )) {
       $0.padding(.horizontal, .vertical)
     })
+
+    let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
+    split.addArrangedSubview(stack)
 
     stack.addArrangedSubview(Container(createSettingsView()) {
       $0.padding(.all(.sidebarContainerPadding))
@@ -46,8 +48,8 @@ class SidebarVideoPane: SidebarScrollView {
       $0.padding(.all(.sidebarContainerPadding))
     })
 
-    documentView!.addSubview(stack)
-    stack.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
+    documentView!.addSubview(split)
+    split.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
   }
   
   required init?(coder: NSCoder) {

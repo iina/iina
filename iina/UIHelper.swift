@@ -155,6 +155,16 @@ class UIHelper {
     return stackView
   }
 
+  func split() -> NSSplitView {
+    let splitView = QuickSettingSplitView()
+    splitView.translatesAutoresizingMaskIntoConstraints = false
+    return splitView
+  }
+
+  class QuickSettingSplitView: NSSplitView {
+    override var dividerThickness: CGFloat { LayoutValue.sidebarStackViewSpacing.value }
+  }
+
   func space(width: CGFloat = 0, height: CGFloat = 0) -> NSView {
     let view = NSView()
     view.size(width: width, height: height)

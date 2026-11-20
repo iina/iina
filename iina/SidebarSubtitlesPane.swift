@@ -20,16 +20,18 @@ class SidebarSubtitlesPane: SidebarScrollView {
     drawsBackground = false
 
     let split = ui.split()
-    split.addArrangedSubview(ui.vStack(
+    let primaryHeader = ui.hStack(
+      spacing: 8,
+      ui.image("1.square.fill", size: 16, config: .sidebarIconConfig),
+      ui.label("sidebar.primary", font: .boldSystemFont(ofSize: 12)),
+      ui.flexibleSpace(),
+      VisibilitySwitch(player: player, isPrimary: true),
+    )
+    primaryHeader.setHuggingPriority(.defaultHigh, for: .vertical)
+    let primaryPane = ui.vStack(
       spacing: .sidebarItemSpacing,
       wantsToGrow: true,
-      ui.hStack(
-        spacing: 8,
-        ui.image("1.square.fill", size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.primary", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-        VisibilitySwitch(player: player, isPrimary: true),
-      ),
+      primaryHeader,
       Container(TrackSelector(
         .sub,
         player: player,
@@ -37,18 +39,22 @@ class SidebarSubtitlesPane: SidebarScrollView {
       )) {
         $0.padding(.all)
       }
-    ))
+    )
+    primaryPane.setHuggingPriority(.required, for: .vertical)
+    split.addArrangedSubview(primaryPane)
 
-    split.addArrangedSubview(ui.vStack(
+    let secondaryHeader = ui.hStack(
+      spacing: 8,
+      ui.image("2.square.fill", size: 16, config: .sidebarIconConfig),
+      ui.label("sidebar.secondary", font: .boldSystemFont(ofSize: 12)),
+      ui.flexibleSpace(),
+      VisibilitySwitch(player: player, isPrimary: false),
+    )
+    secondaryHeader.setHuggingPriority(.defaultHigh, for: .vertical)
+    let secondaryPane = ui.vStack(
       spacing: .sidebarItemSpacing,
       wantsToGrow: true,
-      ui.hStack(
-        spacing: 8,
-        ui.image("2.square.fill", size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.secondary", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-        VisibilitySwitch(player: player, isPrimary: false),
-      ),
+      secondaryHeader,
       Container(TrackSelector(
         .secondSub,
         player: player,
@@ -56,9 +62,12 @@ class SidebarSubtitlesPane: SidebarScrollView {
       )) {
         $0.padding(.all)
       }
-    ))
+    )
+    secondaryPane.setHuggingPriority(.required, for: .vertical)
+    split.addArrangedSubview(secondaryPane)
 
     let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
+    stack.setHuggingPriority(.required, for: .vertical)
     split.addArrangedSubview(stack)
 
     stack.addArrangedSubview(Container(LoadSubtitleView(player: player)) {

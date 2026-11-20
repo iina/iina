@@ -6,6 +6,8 @@
 //  Copyright © 2026 lhc. All rights reserved.
 //
 
+fileprivate let heightOfRow: CGFloat = 26
+
 class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
   private let trackType: MPVTrack.TrackType
   private unowned let player: PlayerCore
@@ -32,9 +34,9 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
     drawsBackground = false
     wantsLayer = true
     layer?.cornerRadius = 8
-    heightAnchor.constraint(greaterThanOrEqualToConstant: 98).isActive = true
-    heightAnchor.constraint(lessThanOrEqualToConstant: 500).isActive = true
-    let initialHeight = heightAnchor.constraint(equalToConstant: 150)
+    heightAnchor.constraint(greaterThanOrEqualToConstant: heightOfRow * 4).isActive = true
+    heightAnchor.constraint(lessThanOrEqualToConstant: heightOfRow * 20).isActive = true
+    let initialHeight = heightAnchor.constraint(equalToConstant: heightOfRow * 6)
     initialHeight.priority = .init(200)
     initialHeight.isActive = true
 
@@ -57,7 +59,7 @@ class TrackSelector: NSScrollView, NSTableViewDelegate, NSTableViewDataSource {
   }
 
   func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-    return 26
+    return heightOfRow
   }
 
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

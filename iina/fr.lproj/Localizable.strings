@@ -26,7 +26,7 @@
 "about.title" = "À propos";
 "about.license" = "Licence";
 "about.contributors" = "Contributeurs";
-"about.credits" = "Remerciements";
+"about.credits" = "Crédits";
 "about.crowdin" = "La localisation IINA est offerte depuis Crowdin.";
 
 // Guide Window
@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Délai des sous-titres secondaires : %@s en avance";
 "osd.sub_second_hidden" = "Sous-titres secondaires masqués";
 "osd.sub_second_pos" = "Position de sous-titre secondaire : %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Sous-titres secondaires visibles";
 "osd.mute" = "Son coupé";
 "osd.unmute" = "Son rétabli";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "La dernière version est %@. Vous avez %@. Voulez-vous mettre à jour ?";
 "alert.plugin_permission" = "Ce module externe demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
 "alert.plugin_permission_added" = "Ce module externe demande les autorisations suivantes. Veuillez les vérifier avant de continuer.";
-"alert.install_plugin_macos_11.title" = "Installer un nouveau module externe depuis GitHub";
-"alert.install_plugin_macos_11.message" = "Utilisez le format utilisateur/dépôt ou entrez l'URL GitHub complète. La boutique de plugin n'est pas disponible sur macOS 11. Un système plus récent est recommandé pour la meilleure expérience.";
 
 "playlist.total_length" = "%@ au total";
 "playlist.total_length_with_selected" = "%@ sur %@ sélectionnés";

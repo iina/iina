@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Secondary Subtitle Delay: %@s Earlier";
 "osd.sub_second_hidden" = "Secondary Subtitles Hidden";
 "osd.sub_second_pos" = "Secondary Subtitle Position: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Secondary Subtitles Visible";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Ponovo uključi zvuk";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Najnovija verzija je %@. Vi imate verziju %@. Da li želite da obavite ažuriranje?";
 "alert.plugin_permission" = "Ova dodatna komponenta iziskuje sledeće dozvole. Pregledajte ih pre nego što nastavite.";
 "alert.plugin_permission_added" = "Ovo ažuriranje iziskuje sledeće dozvole. Pregledajte ih pre nego što nastavite.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "Ukupno %@";
 "playlist.total_length_with_selected" = "%@ od %@ izabranih";

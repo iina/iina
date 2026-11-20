@@ -106,7 +106,7 @@
 "inspector.status_mistimed_frames" = "Chybně načasované snímky";
 "inspector.status_display_fps" = "Zobrazené FPS";
 "inspector.status_estimated_output_fps" = "Odhad výstupu FPS";
-"inspector.status_estimated_display_fps" = "Odhad zobrazených FPS:";
+"inspector.status_estimated_display_fps" = "Odhad zobrazených FPS";
 "inspector.status_watch" = "Sledovat";
 "inspector.watch_column_name" = "Název";
 "inspector.watch_column_value" = "Hodnota";
@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Zpoždění druhých titulků: −%@ s";
 "osd.sub_second_hidden" = "Druhé titulky skryty";
 "osd.sub_second_pos" = "Umístění druhých titulků: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Druhé titulky zobrazeny";
 "osd.mute" = "Ztlumeno";
 "osd.unmute" = "Zesíleno";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Nejnovější dostupná verze k dispozici je %@. Nainstalována je %@. Přejete si nyní stáhnout aktualizaci?";
 "alert.plugin_permission" = "Tento plug-in vyžaduje následující oprávnění. Před pokračováním proveďte jejich kontrolu.";
 "alert.plugin_permission_added" = "Tato aktualizace vyžaduje další oprávnění. Před pokračováním proveďte jejich kontrolu.";
-"alert.install_plugin_macos_11.title" = "Instalovat plug-in z GitHubu";
-"alert.install_plugin_macos_11.message" = "Použijte formát uživatel/repozitář nebo zadejte úplnou adresu URL GitHubu. Obchod s plug-iny není v systému macOS 11 k dispozici. Pro co nejlepší zážitek se doporučuje novější systém.";
 
 "playlist.total_length" = "%@ celkem";
 "playlist.total_length_with_selected" = "Vybráno %@ z %@";
@@ -756,7 +755,7 @@
 "settings.gaplessAudio.items.2" = "Silné";
 "settings.gaplessAudio.items.2.desc" = "Zvukové zařízení se spustí podle parametrů vybraných pro první přehrávaný soubor a zůstane spuštěné pro hladké přechody. Následující soubory mohou být převzorkovány.";
 "settings.gaplessAudio.label" = "Hladké přechody zvuku";
-"settings.maxVolume.desc" = "(100-1000)";
+"settings.maxVolume.desc" = "(100–1000)";
 "settings.maxVolume.label" = "Maximální hlasitost";
 "settings.preferredAudioDevice.label" = "Preferované zvukové zařízení";
 "settings.replayGain.desc" = "Upravit množství zesílení podle ReplayGain hodnot uložených v metadatech souboru.";
@@ -772,24 +771,24 @@
 "settings.replayGainPreamp.label" = "Předzesílení";
 
 // Settings - Control
-"settings.doubleClickAction.items.0" = "-";
+"settings.doubleClickAction.items.0" = "–";
 "settings.doubleClickAction.items.1" = "Přepnout režim celé obrazovky";
 "settings.doubleClickAction.items.2" = "Pozastavit/pokračovat";
 "settings.doubleClickAction.items.4" = "Přepnout obraz v obrazu";
 "settings.doubleClickAction.items.5" = "Smyčka";
 "settings.doubleClickAction.items.6" = "Skutečná rychlost";
 "settings.doubleClickAction.label" = "Dvojité kliknutí";
-"settings.forceTouchAction.items.0" = "-";
+"settings.forceTouchAction.items.0" = "–";
 "settings.forceTouchAction.items.1" = "Přepnout režim celé obrazovky";
 "settings.forceTouchAction.items.2" = "Pozastavit/pokračovat";
 "settings.forceTouchAction.items.3" = "Skrýt ovladač na obrazovce";
 "settings.forceTouchAction.label" = "Přitlačení";
 "settings.horizontalScrollAction.items.0" = "Upravit hlasitost";
 "settings.horizontalScrollAction.items.1" = "Posuv";
-"settings.horizontalScrollAction.items.2" = "-";
+"settings.horizontalScrollAction.items.2" = "–";
 "settings.horizontalScrollAction.items.4" = "Upravit rychlost přehrávání";
 "settings.horizontalScrollAction.label" = "Vodorovný posuv";
-"settings.middleClickAction.items.0" = "-";
+"settings.middleClickAction.items.0" = "–";
 "settings.middleClickAction.items.1" = "Přepnout režim celé obrazovky";
 "settings.middleClickAction.items.2" = "Pozastavit/pokračovat";
 "settings.middleClickAction.items.3" = "Skrýt ovladač na obrazovce";
@@ -799,19 +798,19 @@
 "settings.middleClickAction.label" = "Kliknutí prostředním tlačítkem";
 "settings.pinchAction.items.0" = "Upravit velikost okna";
 "settings.pinchAction.items.1" = "Přepnout režim celé obrazovky";
-"settings.pinchAction.items.2" = "-";
+"settings.pinchAction.items.2" = "–";
 "settings.pinchAction.label" = "Sevření nebo rozevření prstů";
 "settings.playbackSpeedScrollAmount.label" = "Citlivost změny rychlosti";
 "settings.relativeSeekAmount.label" = "Citlivost standardního posuvu";
 "settings.rightClickAction.desc" = "Kliknutí prostředním tlačítkem";
-"settings.rightClickAction.items.0" = "-";
+"settings.rightClickAction.items.0" = "–";
 "settings.rightClickAction.items.2" = "Pozastavit/pokračovat";
 "settings.rightClickAction.items.3" = "Skrýt ovladač na obrazovce";
 "settings.rightClickAction.items.4" = "Přepnout obraz v obrazu";
 "settings.rightClickAction.items.5" = "Smyčka";
 "settings.rightClickAction.items.6" = "Skutečná rychlost";
 "settings.rightClickAction.label" = "Kliknutí pravým tlačítkem";
-"settings.singleClickAction.items.0" = "-";
+"settings.singleClickAction.items.0" = "–";
 "settings.singleClickAction.items.2" = "Pozastavit/pokračovat";
 "settings.singleClickAction.items.3" = "Skrýt ovladač na obrazovce";
 "settings.singleClickAction.label" = "Kliknutí";
@@ -822,7 +821,7 @@
 "settings.useExactSeek.label" = "Režim posuvu";
 "settings.verticalScrollAction.items.0" = "Upravit hlasitost";
 "settings.verticalScrollAction.items.1" = "Posuv";
-"settings.verticalScrollAction.items.2" = "-";
+"settings.verticalScrollAction.items.2" = "–";
 "settings.verticalScrollAction.items.4" = "Upravit rychlost přehrávání";
 "settings.verticalScrollAction.label" = "Svislý posuv";
 "settings.videoViewAcceptsFirstMouse.desc" = "Myš";

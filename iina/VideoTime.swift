@@ -28,18 +28,25 @@ class VideoTime {
   /// | 1 | 100 milliseconds |
   /// | 2 | 10 milliseconds |
   /// | 3 | 1 millisecond |
+  /// | 4 | 1 frame |
   /// - Important: The time is also displayed in the macOS
   ///     [Control Center](https://support.apple.com/guide/mac-help/quickly-change-settings-mchl50f94f8f/mac)
   ///     Now Playing module. Now Playing uses 1 second precision. When the IINA OSC is also configured to use 1 second precision
   ///     it is important that the times displayed match. This means IINA **must** use the same rounding method that Now Playing
   ///     uses, [rounding half down](https://en.wikipedia.org/wiki/Rounding#Rounding_half_down).  IINA must
   ///     round 0.5 to 0 and 0.51 to 1.
-  /// - Parameter precision: Precision to use for the seconds portion of the returned string.
-  /// - Returns: A string containing the time in the format "hh:mm:ss.sss", with the number of digits in the fraction controlled by the
-  ///     precision parameter.
-  func stringRepresentationWithPrecision(_ precision: UInt) -> String {
+  /// - Parameter precision: Precision to use for the seconds portion of the returned string. A value of 4 displays the frame number.
+  /// - Parameter frameRate: The video's frame rate, required when `precision` is 4.
+  /// - Returns: A string containing the time in the format "hh:mm:ss.sss", or "hh:mm:ss:FF" when using frame precision.
+  func stringRepresentationWithPrecision(_ precision: UInt, frameRate: Double? = nil) -> String {
     if self == Constants.Time.infinite {
       return "End"
+    }
+
+    if precision == 4, let frameRate, frameRate > 0 {
+      let wholeSeconds = floor(second)
+      let frame = Int(((second - wholeSeconds) * frameRate).rounded(.down))
+      return "\(VideoTime(wholeSeconds).stringRepresentation):\(String(format: "%02d", frame))"
     }
 
     // Whether to include fractional seconds.

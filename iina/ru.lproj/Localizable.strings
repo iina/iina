@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Задержка вторых субтитров: на %@ с раньше";
 "osd.sub_second_hidden" = "Вторые субтитры скрыты";
 "osd.sub_second_pos" = "Позиция вторых субтитров: %@";
+"osd.sub_second_scale" = "Масштаб вторых субтитров: %@×";
 "osd.sub_second_visible" = "Вторые субтитры видны";
 "osd.mute" = "Звук выключен";
 "osd.unmute" = "Звук включен";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Последняя версия %@. У вас %@. Хотите обновить?";
 "alert.plugin_permission" = "Этот плагин запрашивает следующие разрешения. Проверьте их, перед тем как продолжить.";
 "alert.plugin_permission_added" = "Это обновление требует дополнительные разрешения. Проверьте их, перед тем как продолжить.";
-"alert.install_plugin_macos_11.title" = "Установить плагин с GitHub";
-"alert.install_plugin_macos_11.message" = "Используйте формат «пользователь/репозиторий» или введите полный адрес GitHub-репозитория. Магазин плагинов недоступен для macOS 11 (Big Sur). Для наилучшего результата рекомендуется использование свежей версии ОС.";
 
 "playlist.total_length" = "%@ в общей сложности";
 "playlist.total_length_with_selected" = "%@ из %@ выбрано";

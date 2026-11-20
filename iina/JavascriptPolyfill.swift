@@ -9,7 +9,7 @@
 import JavaScriptCore
 
 class JavascriptPolyfill {
-  weak var plugin: JavascriptPluginInstance!
+  weak var plugin: JavascriptPluginInstance?
   var timers = [String: Timer]()
 
   init(pluginInstance: JavascriptPluginInstance) {
@@ -38,7 +38,8 @@ class JavascriptPolyfill {
     let timeInterval  = ms/1000.0
     let uuid = NSUUID().uuidString
 
-    DispatchQueue.main.async(execute: {
+    DispatchQueue.main.async(execute: { [weak self] in
+      guard let self = self, self.plugin != nil else { return }
       let timer = Timer.scheduledTimer(timeInterval: timeInterval,
                                        target: self,
                                        selector: #selector(self.callJSCallback),
@@ -51,32 +52,40 @@ class JavascriptPolyfill {
 
   @objc func callJSCallback(_ timer: Timer) {
     guard timer.isValid else { return }
+    guard plugin != nil else {
+      timer.invalidate()
+      return
+    }
     let callback = (timer.userInfo as! JSValue)
     callback.call(withArguments: nil)
   }
 
   func register(inContext context: JSContext) {
-    let setInterval: @convention(block) (JSValue, Double) -> String = { [unowned self] (callback, ms) in
-      return self.createTimer(callback: callback, ms: ms, repeats: true)
+    let setInterval: @convention(block) (JSValue, Double) -> String = { [weak self] (callback, ms) in
+      return self?.createTimer(callback: callback, ms: ms, repeats: true) ?? ""
     }
 
-    let setTimeout: @convention(block) (JSValue, Double) -> String = { [unowned self] (callback, ms) in
-      return self.createTimer(callback: callback, ms: ms, repeats: false)
+    let setTimeout: @convention(block) (JSValue, Double) -> String = { [weak self] (callback, ms) in
+      return self?.createTimer(callback: callback, ms: ms, repeats: false) ?? ""
     }
 
-    let clearInterval: @convention(block) (String) -> () = { [unowned self] identifier in
-      self.removeTimer(identifier: identifier)
+    let clearInterval: @convention(block) (String) -> () = { [weak self] identifier in
+      self?.removeTimer(identifier: identifier)
     }
 
-    let clearTimeout: @convention(block) (String) -> () = { [unowned self] identifier in
-      self.removeTimer(identifier: identifier)
+    let clearTimeout: @convention(block) (String) -> () = { [weak self] identifier in
+      self?.removeTimer(identifier: identifier)
     }
 
-    let require: @convention(block) (String) -> Any? = { [unowned self] path in
-      let instance = self.plugin!
-      let currentPath = instance.currentFile!.deletingLastPathComponent()
+    let require: @convention(block) (String) -> Any? = { [weak self] path in
+      guard let instance = self?.plugin,
+            let currentFile = instance.currentFile,
+            let plugin = instance.plugin else {
+        return nil
+      }
+      let currentPath = currentFile.deletingLastPathComponent()
       let requiredURL = currentPath.appendingPathComponent(path).standardized
-      guard requiredURL.absoluteString.hasPrefix(instance.plugin.root.absoluteString) else {
+      guard requiredURL.absoluteString.hasPrefix(plugin.root.absoluteString) else {
         return nil
       }
       return [

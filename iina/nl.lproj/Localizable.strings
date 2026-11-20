@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Secundaire ondertitel vertraging: %@s eerder";
 "osd.sub_second_hidden" = "Secundaire ondertitels verborgen";
 "osd.sub_second_pos" = "Secundaire ondertitelingspositie: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Secundaire ondertitels zichtbaar";
 "osd.mute" = "Geluid uit";
 "osd.unmute" = "Geluid aan";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "De laatste versie is %@. Je hebt %@. Wil je updaten?";
 "alert.plugin_permission" = "Deze plugin vereist de volgende machtigingen. Controleer deze voordat u verdergaat.";
 "alert.plugin_permission_added" = "Deze update vereist extra machtigingen. Controleer ze voordat u verdergaat.";
-"alert.install_plugin_macos_11.title" = "Installeer plugin van GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in totaal";
 "playlist.total_length_with_selected" = "%@ van %@ geselecteerd";
@@ -606,7 +605,7 @@
 "font_picker.test" = "Test";
 "font_picker.other" = "Of voer de naam van het lettertype in:";
 "font_picker.cancel" = "Annuleer";
-"font_picker.ok" = "OK";
+"font_picker.ok" = "Oke";
 
 // Sidebar
 
@@ -1036,7 +1035,7 @@
 "settings.$NewKeyBindingSet" = "New key binding set";
 "settings.$NoSelection" = "No Selection";
 "settings.$NotLoggedIn" = "Niet ingelogd";
-"settings.$OK" = "OK";
+"settings.$OK" = "Oke";
 "settings.$OfficialPlugins" = "Official Plugins";
 "settings.$Offset" = "Afstand";
 "settings.$OnScreenController" = "Afspeelregelaars";

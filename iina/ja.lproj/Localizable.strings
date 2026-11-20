@@ -62,7 +62,7 @@
 "inspector.video_format" = "フォーマット";
 "inspector.video_codec" = "コーデック";
 "inspector.video_hw_decoder" = "HWデコーダ";
-"inspector.video_primaries" = "原色";
+"inspector.video_primaries" = "カラープライマリ";
 "inspector.video_colorspace" = "色空間";
 "inspector.video_pixel_format" = "ピクセルフォーマット";
 "inspector.video_driver" = "ドライバ";
@@ -100,10 +100,10 @@
 "inspector.file_duration" = "再生時間";
 "inspector.file_chapters" = "チャプタ数";
 "inspector.file_editions" = "エディション";
-"inspector.status_avsync_diff" = "A/V同期誤差";
-"inspector.status_total_avsync" = "合計A/V同期";
-"inspector.status_dropped_frames" = "ドロップフレーム";
-"inspector.status_mistimed_frames" = "タイミングずれフレーム";
+"inspector.status_avsync_diff" = "A/V同期差分";
+"inspector.status_total_avsync" = "A/V同期（合計）";
+"inspector.status_dropped_frames" = "ドロップフレーム数";
+"inspector.status_mistimed_frames" = "タイミングずれフレーム数";
 "inspector.status_display_fps" = "表示FPS";
 "inspector.status_estimated_output_fps" = "推定出力FPS";
 "inspector.status_estimated_display_fps" = "推定表示FPS";
@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "副字幕のディレイ: %@秒早く";
 "osd.sub_second_hidden" = "副字幕を非表示";
 "osd.sub_second_pos" = "副字幕の位置: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "副字幕を表示";
 "osd.mute" = "ミュート";
 "osd.unmute" = "ミュートを解除";
@@ -427,8 +428,6 @@
 "alert.plugin_update_found.message" = "最新バージョンは%@です。 現在使用中のバージョンは%@です。アップデートしますか?";
 "alert.plugin_permission" = "このプラグインには次のアクセス権が必要です。続行する前に確認してください。";
 "alert.plugin_permission_added" = "このアップデートには追加のアクセス権が必要です。続行する前に確認してください。";
-"alert.install_plugin_macos_11.title" = "GitHubから新しいプラグインをインストール";
-"alert.install_plugin_macos_11.message" = "ユーザ/リポジトリのフォーマットを使用するか、完全なGitHub URLを入力してください。プラグインストアは macOS 11では利用できません。 最高の体験を得るには、新しいシステムをお勧めします。";
 
 "playlist.total_length" = "合計%@件";
 "playlist.total_length_with_selected" = "%@件（%@件中）を選択";

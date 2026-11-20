@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Másodlagos felirat késleltetés: %@mp-vel előbb";
 "osd.sub_second_hidden" = "Másodlagos feliratok elrejtve";
 "osd.sub_second_pos" = "Másodlagos felirat pozíció: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Másodlagos feliratok megjelenítve";
 "osd.mute" = "Némítás";
 "osd.unmute" = "Némítás feloldása";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "A legújabb verzió a(z) %@. Neked a(z) %@ van telepítve. Szeretne frissíteni?";
 "alert.plugin_permission" = "Ehhez a bővítményhez a következő engedélyekre van szükség. Kérjük, tekintse át őket a folytatás előtt.";
 "alert.plugin_permission_added" = "Ez a frissítés további engedélyeket igényel. Kérjük, tekintse át őket a folytatás előtt.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ összesen";
 "playlist.total_length_with_selected" = "%@/%@ kiválasztva";

@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "עיכוב כתוביות משניות: %@ שניות הקדמה";
 "osd.sub_second_hidden" = "כתוביות משניות מוסתרות";
 "osd.sub_second_pos" = "מיקום כתוביות משניות: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "כתוביות משניות מוצגות";
 "osd.mute" = "מושתק";
 "osd.unmute" = "לא מושתק";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "הגרסה האחרונה היא %@. גרסתך הנוכחית היא %@. האם תרצה לעדכן?";
 "alert.plugin_permission" = "תוסף זה דורש את ההרשאות הבאות. אנא עיין בהן לפני שתמשיך.";
 "alert.plugin_permission_added" = "עדכון זה דורש הרשאות נוספות. אנא עיין בהן לפני שתמשיך.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ סך הכל";
 "playlist.total_length_with_selected" = "נבחרו %@ מתוך %@";

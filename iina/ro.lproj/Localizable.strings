@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Decalaj subtitrări secundare: %@s înainte";
 "osd.sub_second_hidden" = "Subtitrări secundare ascunse";
 "osd.sub_second_pos" = "Poziție subtitrări secundare: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Subtitrări secundare vizibile";
 "osd.mute" = "Mut";
 "osd.unmute" = "Activează sunetul";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Ultima versiune este %@. Aveți %@. Doriți să actualizați?";
 "alert.plugin_permission" = "Această extensie necesită următoarele permisiuni. Vă rugăm să le revizuiți înainte de a continua.";
 "alert.plugin_permission_added" = "Această actualizare necesită permisiuni suplimentare. Vă rugăm să le revizuiți înainte de a continua.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ în total";
 "playlist.total_length_with_selected" = "%@ din %@ selectat";

@@ -184,6 +184,7 @@
 "osd.sub_second_delay.earlier" = "Retard Secundari de Subtítols: %@s Abans";
 "osd.sub_second_hidden" = "Subtítols Secundaris Amagats";
 "osd.sub_second_pos" = "Posició Secundària de Subtítols: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Subtítols Secundaris Visibles";
 "osd.mute" = "Silencia";
 "osd.unmute" = "Amb so";
@@ -427,8 +428,6 @@
 "alert.plugin_update_found.message" = "L'última versió és %@. Tu tens %@. Vols actualitzar?";
 "alert.plugin_permission" = "Aquest complement necessita els següents permisos. Si us plau, revisa'ls abans de continuar.";
 "alert.plugin_permission_added" = "Aquesta actualització necessita els següents permisos. Si us plau, revisa'ls abans de continuar.";
-"alert.install_plugin_macos_11.title" = "Instal·la el connector des de GitHub";
-"alert.install_plugin_macos_11.message" = "Utilitza el format usuari/repositori o introdueix l’URL complet de GitHub. La botiga de connectors no està disponible a macOS 11. Es recomana un sistema més recent per gaudir de la millor experiència.";
 
 "playlist.total_length" = "%@ en total";
 "playlist.total_length_with_selected" = "%@ de %@ seleccionats";

@@ -23,10 +23,10 @@
 "input.already_exists" = "값이 이미 존재합니다.";
 
 // About Window
-"about.title" = "About";
+"about.title" = "IINA에 관하여";
 "about.license" = "라이센스";
 "about.contributors" = "기여자";
-"about.credits" = "크레딧";
+"about.credits" = "승인서";
 "about.crowdin" = "IINA는 Crowdin을 통해 번역됩니다.";
 
 // Guide Window
@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "두번째 자막 지연: %@초 빠르게";
 "osd.sub_second_hidden" = "두번째 자막 숨김";
 "osd.sub_second_pos" = "두번째 자막 위치: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "두번째 자막 보임";
 "osd.mute" = "소리 끔";
 "osd.unmute" = "음소거 해제";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "최신 버전은 %@입니다. %@에서 업데이트 하시겠습니까?";
 "alert.plugin_permission" = "이 플러그인은 다음과 같은 권한을 필요로 합니다. 진행하기 전에 확인해 주세요.";
 "alert.plugin_permission_added" = "이 업데이트는 추가적인 승인이 필요합니다. 진행하기 전에 다시 한번 읽어주세요.";
-"alert.install_plugin_macos_11.title" = "깃허브에서 새로운 플러그인 설치";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "전체 %@";
 "playlist.total_length_with_selected" = "%@ 선택됨 / 전체 %@";
@@ -843,7 +842,7 @@
 "settings.enableCache.label" = "Prefetch and buffer network data";
 "settings.httpProxy.desc" = "설정을 적용하려면 IINA를 종료한 후 다시 실행해야 합니다.";
 "settings.httpProxy.label" = "HTTP 프록시";
-"settings.secPrefech.desc" = "Default: 36,000";
+"settings.secPrefech.desc" = "기본값: 36,000";
 "settings.secPrefech.label" = "미리 읽어오기 (초)";
 "settings.showBufferingThrobber.label" = "Show throbber when buffering";
 "settings.showSeekingThrobber.label" = "탐색 중 로딩 아이콘 표시";

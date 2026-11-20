@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Atraso de Subtítulo Secundário: %@s Anteriores";
 "osd.sub_second_hidden" = "Legendas Secundárias Ocultas";
 "osd.sub_second_pos" = "Posição do Subtítulo Secundário: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Legendas Secundárias Visíveis";
 "osd.mute" = "Sem Audio";
 "osd.unmute" = "Audio Ligado";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "A versão mais recente é %@. Você tem %@. Gostaria de atualizar?";
 "alert.plugin_permission" = "Este plugin requer as seguintes permissões. Por favor, revise-as antes de prosseguir.";
 "alert.plugin_permission_added" = "Esta atualização requer permissões adicionais. Por favor, revise-as antes de prosseguir.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ do total";
 "playlist.total_length_with_selected" = "%@ de %@ selecionado";

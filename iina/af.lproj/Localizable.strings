@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Sekondêreonderskrifvertraging: %@s vroeër";
 "osd.sub_second_hidden" = "Sekondêre onderskrifte is versteek";
 "osd.sub_second_pos" = "Sekondêreonderskfitposisie: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Sekondêre onderskrifte is sigbaar";
 "osd.mute" = "Demp";
 "osd.unmute" = "Ontdemp";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Die nuutste weergawe is %@. U het %@. Wil u bywerk?";
 "alert.plugin_permission" = "Die volgende toestemmings is nodig vir hierdie inprop. Hersien dit voordat u voortgaan.";
 "alert.plugin_permission_added" = "Bykomende toestemmings is nodig vir hierdie bywerking. Hersien dit voordat u voortgaan.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ in totaal";
 "playlist.total_length_with_selected" = "%@ van %@ geselekteer";

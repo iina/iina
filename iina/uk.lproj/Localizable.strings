@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Затримка додаткових субтитрів: %@с раніше";
 "osd.sub_second_hidden" = "Додаткові субтитри приховані";
 "osd.sub_second_pos" = "Позиціювання додаткових субтитрів: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Додаткові субтитри видимі";
 "osd.mute" = "Заглушити";
 "osd.unmute" = "Зі звуком";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Найновіша версія %@. Ваша версія %@. Хотіли би ви оновити?";
 "alert.plugin_permission" = "Цей плагін потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
 "alert.plugin_permission_added" = "Це оновлення потребує додаткових дозволів. Будь ласка, перегляньте їх, перш ніж продовжити.";
-"alert.install_plugin_macos_11.title" = "Встановити плагін з GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ загалом";
 "playlist.total_length_with_selected" = "%@ з %@ вибрано";

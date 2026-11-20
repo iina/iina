@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Penundaan Takarir Sekunder: %@ Dtk Lebih Lambat";
 "osd.sub_second_hidden" = "Takarir Sekunder Tersembunyi";
 "osd.sub_second_pos" = "Posisi Takarir Sekunder: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Takarir Sekunder Terlihat";
 "osd.mute" = "Bisukan Suara";
 "osd.unmute" = "Nyalakan Suara";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Versi terbaru adalah %@. Anda memiliki versi %@. Apakah Anda ingin memperbarui?";
 "alert.plugin_permission" = "Plugin ini memerlukan izin berikut. Mohon dicermati sebelum melanjutkan.";
 "alert.plugin_permission_added" = "Plugin ini memerlukan izin tambahan. Mohon dicermati sebelum melanjutkan.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "Total %@";
 "playlist.total_length_with_selected" = "%@ dari %@ terpilih";

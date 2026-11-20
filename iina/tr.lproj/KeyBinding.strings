@@ -17,7 +17,7 @@
 "cmd.frame-step" = "Sonraki kare";
 "cmd.frame-back-step" = "Önceki kare";
 "cmd.ab-loop" = "A–B döngüsü";
-"cmd.sub-seek" = "Altyazı ara";
+"cmd.sub-seek" = "Alt yazı ara";
 "cmd.playlist-next" = "Sonraki ortam";
 "cmd.playlist-prev" = "Önceki ortam";
 "cmd.playlist-move" = "Oynatma listesi öğesini taşı";
@@ -43,7 +43,7 @@
 "iina.open-url" = "URL aç";
 "iina.video-panel" = "Video paneli";
 "iina.audio-panel" = "Ses paneli";
-"iina.sub-panel" = "Altyazı paneli";
+"iina.sub-panel" = "Alt yazı paneli";
 "iina.playlist-panel" = "Oynatma Listesi paneli";
 "iina.chapter-panel" = "Fasıl paneli";
 "iina.bigger-window" = "Daha Büyük Pencere";
@@ -55,8 +55,8 @@
 "iina.show-current-file-in-finder" = "Geçerli Dosyayı Finder’da Göster";
 "iina.delete-current-file" = "Geçerli dosyayı sil";
 "iina.delete-current-file-hard" = "Geçerli dosyayı çöp kutusuna taşımadan doğrudan sil";
-"iina.find-online-subs" = "Çevrimiçi altyazılar bul";
-"iina.save-downloaded-sub" = "İndirilen altyazıyı kaydet";
+"iina.find-online-subs" = "Çevrim içi alt yazılar bul";
+"iina.save-downloaded-sub" = "İndirilen alt yazıyı kaydet";
 
 "yes" = "Evet";
 "no" = "Hayır";
@@ -96,12 +96,12 @@
 "opt.mute" = "Sesi kapat";
 "opt.audio-delay" = "Ses gecikmesi";
 
-"opt.sub" = "Altyazı parçası";
-"opt.sub-delay" = "Altyazı gecikmesi";
-"opt.sub-pos" = "Altyazı konumu";
-"opt.sub-scale" = "Altyazı ölçeği";
-"opt.sub-visibility" = "Altyazı görünürlüğü";
-"opt.secondary-sub-visibility" = "İkincil altyazı görünürlüğü";
+"opt.sub" = "Alt yazı parçası";
+"opt.sub-delay" = "Alt yazı gecikmesi";
+"opt.sub-pos" = "Alt yazı konumu";
+"opt.sub-scale" = "Alt yazı ölçeği";
+"opt.sub-visibility" = "Alt yazı görünürlüğü";
+"opt.secondary-sub-visibility" = "İkincil alt yazı görünürlüğü";
 "opt.sub-ass-style-override" = "ASS tipi üzerine yazma";
 
 "opt.fullscreen" = "Tam ekran";
@@ -115,4 +115,4 @@
 "read.cycle" = "Geçiş yap {{property}}{{#dir_down}} Aşağı doğru{{/dir_down}}";
 "read.cycle-values" = "Geçiş yap {{property}} şunlar arasında ({{{values}}})";
 "read.seek" = "Sar {{#fwd}}ileri{{/fwd}}{{#bwd}}geri{{/bwd}}{{#abs}}şuraya{{/abs}} {{value}}{{#sec}}s{{/sec}}{{#per}}%{{/per}} {{#exact}}(exact){{/exact}}{{#kf}}(keyframe){{/kf}}";
-"read.sub-seek" = "Şuna sar {{#skip_1}}sıradaki{{/skip_1}}{{#skip_-1}}önceki{{/skip_-1}} altyazı";
+"read.sub-seek" = "{{#skip_1}}Önceki{{/skip_1}}{{#skip_-1}}Sonraki{{/skip_-1}} alt yazıya sar";

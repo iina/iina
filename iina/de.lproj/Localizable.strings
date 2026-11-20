@@ -64,7 +64,7 @@
 "inspector.video_hw_decoder" = "HW-Dekoder";
 "inspector.video_primaries" = "Gamma";
 "inspector.video_colorspace" = "Farbraum";
-"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_pixel_format" = "Pixelformat";
 "inspector.video_driver" = "Treiber";
 "inspector.video_size" = "Größe";
 "inspector.video_bitrate" = "Bitrate";
@@ -94,7 +94,7 @@
 "inspector.track_sample_rate" = "Abtastrate";
 "inspector.file_path" = "Dateipfad";
 "inspector.file_title" = "Titel";
-"inspector.file_comment" = "Comment";
+"inspector.file_comment" = "Kommentar";
 "inspector.file_size" = "Größe";
 "inspector.file_format" = "Format";
 "inspector.file_duration" = "Dauer";
@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Verzögerung des zweiten Untertitels: %@s früher";
 "osd.sub_second_hidden" = "Zweite Untertitel ausgeblendet";
 "osd.sub_second_pos" = "Position des zweiten Untertitels: %@";
+"osd.sub_second_scale" = "Position des zweiten Untertitels: %@";
 "osd.sub_second_visible" = "Zweite Untertitel sichtbar";
 "osd.mute" = "Stumm";
 "osd.unmute" = "Ton ein";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Die neueste Version ist %@. Du verwendest %@. Möchtest du aktualisieren?";
 "alert.plugin_permission" = "Diese Erweiterung benötigt die folgenden Berechtigungen. Bitte überprüfe diese, bevor du fortfährst.";
 "alert.plugin_permission_added" = "Dieses Update erfordert zusätzliche Berechtigungen. Bitte überprüfe diese, bevor du fortfährst.";
-"alert.install_plugin_macos_11.title" = "Von GitHub installieren";
-"alert.install_plugin_macos_11.message" = "Verwenden Sie das Format „user/repo“ oder geben Sie die vollständige GitHub-URL ein. Der Plugin-Store ist unter macOS 11 nicht verfügbar. Für ein optimales Erlebnis wird ein neueres Betriebssystem empfohlen.";
 
 "playlist.total_length" = "%@ insgesamt";
 "playlist.total_length_with_selected" = "%@ von %@ ausgewählt";
@@ -651,23 +650,23 @@
 
 "sidebar.primary" = "Primär";
 "sidebar.secondary" = "Sekundär";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.external_subtitles" = "Externe Untertitel";
 "sidebar.load_subtitle" = "Untertitel hinzufügen …";
 "sidebar.search_online" = "Online suchen …";
 "sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.scale" = "Skalieren";
 "sidebar.font" = "Schriftart";
-"sidebar.color" = "Color";
+"sidebar.color" = "Farbe";
 "sidebar.text" = "Text";
 "sidebar.border" = "Kontur";
 "sidebar.shadow" = "Schatten";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+"sidebar.sub_settings_not_available" = "Einige Einstellungen sind für diesen Untertiteltyp nicht verfügbar.";
+"sidebar.sub_style_warning" = "Die Einstellung der Stil-Optionen für ASS-Untertitel kann die Darstellung beeinträchtigen.";
 
 "sidebar.add_file" = "Datei hinzufügen …";
 "sidebar.add_url" = "Adresse hinzufügen …";
 
-"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+"sidebar.plugins_placeholder" = "Plugins können benutzerdefinierte Seitenleisteninhalte anzeigen. Wählen Sie ein Plugin, um die Seitenleiste anzuzeigen oder installieren Sie ein neues Plugin in den Einstellungen.";
 
 // Settings
 
@@ -676,7 +675,7 @@
 "settings.actionAfterLaunch.items.1" = "„Datei öffnen“-Dialog anzeigen";
 "settings.actionAfterLaunch.items.2" = "Aktion abwarten";
 "settings.actionAfterLaunch.label" = "Beim Start";
-"settings.allowDuplicatePlayers.label" = "Allow opening the same file in multiple windows";
+"settings.allowDuplicatePlayers.label" = "Erlaube das Öffnen derselben Datei in mehreren Fenstern";
 "settings.allowScreenSaverForAudio.desc" = "Verhindert immer noch, dass das System schläft.";
 "settings.allowScreenSaverForAudio.label" = "Nicht im „Musikmodus“ oder bei reiner Audiowiedergabe";
 "settings.alwaysOpenInNewWindow.label" = "Dateien immer in neuem Fenster öffnen";

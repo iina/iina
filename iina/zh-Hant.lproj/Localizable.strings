@@ -24,9 +24,9 @@
 
 // About Window
 "about.title" = "關於";
-"about.license" = "許可證";
+"about.license" = "授權協議";
 "about.contributors" = "貢獻者";
-"about.credits" = "感謝";
+"about.credits" = "開發人員";
 "about.crowdin" = "IINA 的繁體中文翻譯由 Crowdin 平台上的全球協作翻譯者提供。";
 
 // Guide Window
@@ -65,14 +65,14 @@
 "inspector.video_primaries" = "初選";
 "inspector.video_colorspace" = "色彩空間";
 "inspector.video_pixel_format" = "像素格式";
-"inspector.video_driver" = "驅動";
+"inspector.video_driver" = "驅動程式";
 "inspector.video_size" = "大小";
 "inspector.video_bitrate" = "位元率";
 "inspector.video_fps" = "FPS";
 "inspector.audio_section" = "音訊";
 "inspector.audio_format" = "格式";
 "inspector.audio_codec" = "編解碼器";
-"inspector.audio_driver" = "驅動";
+"inspector.audio_driver" = "驅動程式";
 "inspector.audio_channels" = "聲道";
 "inspector.audio_bitrate" = "位元率";
 "inspector.audio_sample_rate" = "取樣頻率";
@@ -94,7 +94,7 @@
 "inspector.track_sample_rate" = "取樣頻率";
 "inspector.file_path" = "檔案路徑";
 "inspector.file_title" = "標題";
-"inspector.file_comment" = "Comment";
+"inspector.file_comment" = "注釋";
 "inspector.file_size" = "大小";
 "inspector.file_format" = "格式";
 "inspector.file_duration" = "持續時間";
@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "小字幕間隔：提前 %@ 秒";
 "osd.sub_second_hidden" = "已隱藏小字幕";
 "osd.sub_second_pos" = "小字幕位置：%@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "已顯示小字幕";
 "osd.mute" = "靜音";
 "osd.unmute" = "取消靜音";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "最新版本是 %@，你的版本是 %@，要更新嗎？";
 "alert.plugin_permission" = "本外掛程式需要以下權限，請在繼續之前先審核這些權限。";
 "alert.plugin_permission_added" = "此更新需要額外的權限，請在繼續之前先審核這些權限。";
-"alert.install_plugin_macos_11.title" = "安裝 GitHub 上的外掛程式";
-"alert.install_plugin_macos_11.message" = "請使用標準的 user/repo 格式，或輸入完整的 GitHub 連結網址。 macOS 11 作業系統不支援外掛程式商店功能，建議搭配版本較新的作業系統，以獲得最佳體驗。";
 
 "playlist.total_length" = "總計 %@";
 "playlist.total_length_with_selected" = "%@ / %@ 已選取";

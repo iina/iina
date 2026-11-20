@@ -76,15 +76,23 @@ class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
                      data: data ?? [:],
                      headers: headers ?? [:],
                      asyncCompletionHandler:  { [unowned self] response in
+          // Just calls this on URLSession's delegate queue.
           if (response.ok) {
             do {
               try response.content?.write(to: URL(fileURLWithPath: destPath))
+              self.performOnMainThread {
+                resolve.call(withArguments: [])
+              }
             } catch {
-              self.throwError(withMessage: "Unable to write to the destination.")
+              self.performOnMainThread {
+                self.throwError(withMessage: "Unable to write to the destination.")
+                resolve.call(withArguments: [])
+              }
             }
-            resolve.call(withArguments: [])
           } else {
-            reject.call(withArguments: [response.toDict()])
+            self.performOnMainThread {
+              reject.call(withArguments: [response.toDict()])
+            }
           }
         })
       }
@@ -106,8 +114,11 @@ class JavascriptAPIHttp: JavascriptAPI, JavascriptAPIHttpExportable {
                      params: params ?? [:],
                      data: data ?? [:],
                      headers: headers ?? [:],
-                     asyncCompletionHandler:  { response in
-          (response.ok ? resolve : reject).call(withArguments: [response.toDict()])
+                     asyncCompletionHandler:  { [unowned self] response in
+          // Just calls this on URLSession's delegate queue.
+          self.performOnMainThread {
+            (response.ok ? resolve : reject).call(withArguments: [response.toDict()])
+          }
         })
       }
     }
@@ -142,17 +153,19 @@ class JavascriptAPIXmlrpc: JavascriptAPI, JavascriptAPIXmlrpcExportable {
     return whenPermitted(to: .networkRequest) {
       createPromise { resolve, reject in
         self.xmlrpc.call(method, args) { response in
-          switch response {
-          case .ok(let returnValue):
-            resolve.call(withArguments: [returnValue])
-          case .failure:
-            reject.call(withArguments: [])
-          case .error(let err):
-            reject.call(withArguments: [[
-              "httpCode": err.httpCode,
-              "reason": err.reason,
-              "description": err.readableDescription,
-            ] as [String: Any]])
+          self.performOnMainThread {
+            switch response {
+            case .ok(let returnValue):
+              resolve.call(withArguments: [returnValue])
+            case .failure:
+              reject.call(withArguments: [])
+            case .error(let err):
+              reject.call(withArguments: [[
+                "httpCode": err.httpCode,
+                "reason": err.reason,
+                "description": err.readableDescription,
+              ] as [String: Any]])
+            }
           }
         }
       }

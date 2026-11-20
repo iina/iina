@@ -81,6 +81,19 @@ class JavascriptAPI: NSObject {
     return context.objectForKeyedSubscript("Promise")!.construct(withArguments: [JSValue(object: block, in: context)!])
   }
 
+  /// Runs a block that calls into plugin JavaScript on the main thread.
+  ///
+  /// JavaScript otherwise continues on whichever thread settles a promise or invokes a callback.
+  /// A later call to a main-thread-only API such as `overlay.setContent` (which uses
+  /// `DispatchQueue.main.sync`) then deadlocks against the main thread waiting for the VM lock.
+  func performOnMainThread(_ block: @escaping () -> Void) {
+    if Thread.isMainThread {
+      block()
+    } else {
+      DispatchQueue.main.async(execute: block)
+    }
+  }
+
   /// Expand the magic strings such as `@tmp` and `@data` in the path.
   /// - Parameters:
   ///   - path: the path to be expanded

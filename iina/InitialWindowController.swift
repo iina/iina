@@ -308,6 +308,7 @@ class InitialWindowController: NSWindowController {
     guard loaded else { return }
     if Preference.bool(for: .recordRecentFiles),
       Preference.bool(for: .resumeLastPosition),
+      Preference.bool(for: .recordLastPlayedFile),
       let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
       FileManager.default.fileExists(atPath: lastFile.path) {
       // if last file exists
@@ -494,7 +495,8 @@ class InitialWindowViewActionButton: NSView {
 
   override func mouseDown(with event: NSEvent) {
     updateBackground(pressedBackground)
-    if let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
+    if Preference.bool(for: .recordLastPlayedFile),
+       let lastFile = Preference.url(for: .iinaLastPlayedFilePath),
        let windowController = window?.windowController as? InitialWindowController {
       windowController.player.openURL(lastFile)
     }

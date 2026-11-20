@@ -45,7 +45,7 @@ class SettingsWindow: CommonWindow {
   ])
 
   let sidebarList: NSTableView
-  private let contentScrollView: NSScrollView
+  private let contentScrollView: PluginPackageDropScrollView
   private let highlightView: HighlightView
 
   var pages: [SettingsPage]
@@ -90,7 +90,7 @@ class SettingsWindow: CommonWindow {
 
   init(_ pages: [SettingsPage]) {
     self.pages = pages
-    contentScrollView = NSScrollView()
+    contentScrollView = PluginPackageDropScrollView()
     contentScrollView.autohidesScrollers = true
 
     self.sidebarList = NSTableView()
@@ -203,6 +203,7 @@ class SettingsWindow: CommonWindow {
 
   func loadPage(at index: Int) {
     guard let page = pages[at: index] else { return }
+    contentScrollView.pluginPage = page as? SettingsPagePlugin
     if cachedPageViews[page.identifier] == nil {
       cachedPageViews[page.identifier] = page.getView()
     }

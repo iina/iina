@@ -8,6 +8,16 @@
 
 import Cocoa
 
+fileprivate extension NSImage.SymbolConfiguration {
+  static let playIconConfig = {
+    if #available(macOS 26.0, *) {
+      NSImage.SymbolConfiguration(pointSize: 24, weight: .bold)
+    } else {
+      NSImage.SymbolConfiguration(pointSize: 24, weight: .regular)
+    }
+  }()
+}
+
 class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
   unowned var player: PlayerCore
@@ -206,8 +216,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
         self.updateTitle()
     }
 
-    self.playButton = NSButton(image: .play, target: self, action: #selector(playButtonAction))
-    playButton.alternateImage = .pause
+    self.playButton = NSButton(image: .sf("play.fill", withConfiguration: .playIconConfig)!,
+                               target: self, action: #selector(playButtonAction))
 
     self.muteButton = VolumeButton(player: player, target: self, action: #selector(muteButtonAction))
     muteButton.size(width: 24, height: 24)
@@ -656,7 +666,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
   
   func updatePlayButtonState(paused: Bool) {
     guard loaded else { return }
-    playButton.image = NSImage(named: paused ? "play" : "pause")
+    playButton.image = .sf(paused ? "play.fill" : "pause.fill", withConfiguration: .playIconConfig)
   }
 
   /** This method will not set `isOntop`! */

@@ -31,6 +31,7 @@ class SidebarLayoutPane: SidebarScrollView {
   init(player: PlayerCore) {
     self.player = player
     super.init(frame: .zero)
+    verticalScroller?.controlSize = .mini
 
     let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
 
@@ -144,7 +145,8 @@ class SidebarLayoutPane: SidebarScrollView {
     }
 
     documentView!.addSubview(stack)
-    stack.padding(.horizontal(.sidebarMargin), .vertical(4))
+    stack.padding(.horizontal(.sidebarMargin), from: self)
+    stack.padding(.vertical(4))
   }
   
   @MainActor required init?(coder: NSCoder) {

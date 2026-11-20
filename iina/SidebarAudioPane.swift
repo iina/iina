@@ -16,10 +16,11 @@ class SidebarAudioPane: SidebarScrollView {
   init(player: PlayerCore) {
     self.player = player
     super.init(frame: .zero)
+    verticalScroller?.controlSize = .mini
 
     drawsBackground = false
 
-    let split = ui.split()
+    let split = SidebarSplitView()
     let stack = ui.vStack(spacing: .sidebarStackViewSpacing)
 
     split.addArrangedSubview(Container(TrackSelector(
@@ -51,7 +52,8 @@ class SidebarAudioPane: SidebarScrollView {
     })
 
     documentView!.addSubview(split)
-    split.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
+    split.padding(.horizontal(.sidebarMargin), from: self)
+    split.padding(.top(4), .bottom(.sidebarMargin))
   }
 
   @objc private func loadExternalAudioAction(_ sender: NSButton) {

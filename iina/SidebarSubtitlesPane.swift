@@ -16,10 +16,11 @@ class SidebarSubtitlesPane: SidebarScrollView {
   init(player: PlayerCore) {
     self.player = player
     super.init(frame: .zero)
+    verticalScroller?.controlSize = .mini
 
     drawsBackground = false
 
-    let split = ui.split()
+    let split = SidebarSplitView()
     let primaryHeader = ui.hStack(
       spacing: 8,
       ui.image("1.square.fill", size: 16, config: .sidebarIconConfig),
@@ -107,7 +108,8 @@ class SidebarSubtitlesPane: SidebarScrollView {
     split.setHoldingPriority(.init(250), forSubviewAt: 1)
     split.setHoldingPriority(.init(260), forSubviewAt: 2)
     documentView!.addSubview(split)
-    split.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
+    split.padding(.horizontal(.sidebarMargin), from: self)
+    split.padding(.top(4), .bottom(.sidebarMargin))
 
     let block = { (_: Notification) in
       let tracks = ([.sub, .secondSub] as [MPVTrack.TrackType]).compactMap {

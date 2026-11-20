@@ -17,10 +17,11 @@ class SidebarVideoPane: SidebarScrollView {
   init(player: PlayerCore) {
     self.player = player
     super.init(frame: .zero)
+    verticalScroller?.controlSize = .mini
 
     drawsBackground = false
 
-    let split = ui.split()
+    let split = SidebarSplitView()
     split.addArrangedSubview(Container(TrackSelector(
       .video,
       player: player,
@@ -49,7 +50,8 @@ class SidebarVideoPane: SidebarScrollView {
     })
 
     documentView!.addSubview(split)
-    split.padding(.horizontal(.sidebarMargin), .top(4), .bottom(.sidebarMargin))
+    split.padding(.horizontal(.sidebarMargin), from: self)
+    split.padding(.top(4), .bottom(.sidebarMargin))
   }
   
   required init?(coder: NSCoder) {

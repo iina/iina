@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Forsinkelse af sekundære undertekster: %@s tidligere";
 "osd.sub_second_hidden" = "Sekundære undertekster er skjulte";
 "osd.sub_second_pos" = "Sekundære underteksters position: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Sekundære undertekster er synlige";
 "osd.mute" = "Lydløs";
 "osd.unmute" = "Lydløs fra";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Den seneste version er %@. Du har %@. Vil du opdatere?";
 "alert.plugin_permission" = "Denne tilføjelse kræver følgende tilladelser. Tjek dem venligst før du fortsætter.";
 "alert.plugin_permission_added" = "Denne opdatering kræver flere tilladelser. Tjek dem venligst inden du fortsætter.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ i alt";
 "playlist.total_length_with_selected" = "%@ af %@ valgte";

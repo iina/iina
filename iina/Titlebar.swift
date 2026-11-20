@@ -208,7 +208,7 @@ class Titlebar: NSView {
       oscView.padding(.trailing(6), .top, .bottom(.oscBottomMargin)).size(height: 24)
 
       oscLeadingConstraint = oscView.leadingAnchor
-        .constraint(equalTo: oscContainer.leadingAnchor, constant: 6)
+        .constraint(equalTo: oscContainer.leadingAnchor, constant: 12)
       oscLeadingConstraint.isActive = true
     }
 

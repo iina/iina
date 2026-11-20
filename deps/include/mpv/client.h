@@ -248,7 +248,7 @@ extern "C" {
  * relational operators (<, >, <=, >=).
  */
 #define MPV_MAKE_VERSION(major, minor) (((major) << 16) | (minor) | 0UL)
-#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(2, 5)
+#define MPV_CLIENT_API_VERSION MPV_MAKE_VERSION(2, 6)
 
 /**
  * The API user is allowed to "#define MPV_ENABLE_DEPRECATED 0" before
@@ -924,13 +924,17 @@ MPV_EXPORT int mpv_command(mpv_handle *ctx, const char **args);
  *      of arguments is as documented in each command description.
  *
  * MPV_FORMAT_NODE_MAP:
- *      Named arguments. This requires at least an entry with the key "name"
- *      to be present, which must be a string, and contains the command name.
+ *      Named arguments. This requires at least a special entry with the key
+ *      "_name" to be present, which must be a string, and contains the command
+ *      name. For compatibility, if the key "_name" does not exist, then the
+ *      entry with the key "name" will be used instead.
  *      The special entry "_flags" is optional, and if present, must be an
  *      array of strings, each being a command prefix to apply. All other
  *      entries are interpreted as arguments. They must use the argument names
  *      as documented in each command description. Some commands do not
  *      support named arguments at all, and must use MPV_FORMAT_NODE_ARRAY.
+ *      Some commands have arguments named "name", and can only be used if
+ *      the command name is specified with key "_name" instead of "name".
  *
  * @param[in] args mpv_node with format set to one of the values documented
  *                 above (see there for details)
@@ -1776,9 +1780,6 @@ MPV_EXPORT void mpv_set_wakeup_callback(mpv_handle *ctx, void (*cb)(void *d), vo
  * This is a helper, and somewhat equivalent to calling mpv_wait_event() in a
  * loop until all known asynchronous requests have sent their reply as event,
  * except that the event queue is not emptied.
- *
- * In case you called mpv_suspend() before, this will also forcibly reset the
- * suspend counter of the given handle.
  */
 MPV_EXPORT void mpv_wait_async_requests(mpv_handle *ctx);
 

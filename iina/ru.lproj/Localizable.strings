@@ -9,8 +9,6 @@
 
 "general.on" = "Вкл";
 "general.off" = "Выкл";
-"general.login" = "Войти";
-"general.logout" = "Выйти";
 "general.ok" = "ОК";
 "general.cancel" = "Отмена";
 "general.done" = "Готово";
@@ -24,20 +22,94 @@
 "input.value_is_empty" = "Значение не может быть пустым.";
 "input.already_exists" = "Значение уже существует.";
 
+// About Window
+"about.title" = "О приложении";
+"about.license" = "Лицензия";
+"about.contributors" = "Участники";
+"about.credits" = "Благодарности";
+"about.crowdin" = "Перевод IINA выполняется сообществом Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Что нового в IINA";
 "guide.basic_settings" = "Основные параметры";
 "guide.faq" = "Часто задаваемые вопросы (FAQ)";
 
 // Initial Window
-"initial.announcement" = "Вы используете %@ версию IINA";
+"initial.announcement" = "Вы используете бета-версию IINA";
 "initial.beta.desc" = "Снимите флажок «Получать бета-обновления» в Настройках (вкладка «Основные») и установите стабильную версию с нашего <a href=\"https://iina.io\">официального сайта</a>.";
 "initial.nightly.desc" = "Ночные сборки не рекомендуются для ежедневного использования. На данный момент ночные сборки не поддерживают автоматическое обновление. Пожалуйста, загрузите новейшую сборку вручную с нашего <a href=\"https://nightly.iina.io\">веб-сайта ночных сборок</a>.";
 "initial.debug.desc" = "Отладочные сборки обычно не окончательно оптимизированы, поэтому не рекомендуются для ежедневного использования. Отладочные сборки не поддерживают автоматическое обновление.";
 "initial.bug_report" = "Сообщить через <a href=\"https://github.com/iina/iina/issues\">GitHub проблемы</a>.";
+"initial.rollback" = "Снимите флажок «Получать бета-обновления» в Настройках (вкладка «Основные») и установите стабильную версию с нашего <a href=\"https://iina.io\">официального сайта</a>.";
+"initial.open_url" = "Открыть адрес…";
+"initial.found_bug" = "Нашли ошибку?";
+"initial.resume" = "Возобновить";
+"initial.open" = "Открыть…";
+"initial.want_to_rollback" = "Хотите вернуться на стабильную версию?";
 
 // Inspector Window
 "inspector.error" = "Ошибка";
+"inspector.window_title" = "Инспектор";
+"inspector.tab_general" = "Общее";
+"inspector.tab_tracks" = "Дорожки";
+"inspector.tab_file" = "Файл";
+"inspector.tab_status" = "Состояние";
+"inspector.segment_general" = "Основное";
+"inspector.segment_tracks" = "Дорожки";
+"inspector.segment_file" = "Файл";
+"inspector.segment_status" = "Состояние";
+"inspector.video_section" = "ВИДЕО";
+"inspector.video_format" = "Формат";
+"inspector.video_codec" = "Кодек";
+"inspector.video_hw_decoder" = "Декодер";
+"inspector.video_primaries" = "Основные цвета";
+"inspector.video_colorspace" = "Цветовое пространство";
+"inspector.video_pixel_format" = "Формат пикселей";
+"inspector.video_driver" = "Драйвер";
+"inspector.video_size" = "Размер";
+"inspector.video_bitrate" = "Битрейт";
+"inspector.video_fps" = "Кадры/с";
+"inspector.audio_section" = "АУДИО";
+"inspector.audio_format" = "Формат";
+"inspector.audio_codec" = "Кодек";
+"inspector.audio_driver" = "Драйвер";
+"inspector.audio_channels" = "Каналы";
+"inspector.audio_bitrate" = "Битрейт";
+"inspector.audio_sample_rate" = "Частота";
+"inspector.track_label" = "Дорожка";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Свойства";
+"inspector.track_default" = "По умолчанию";
+"inspector.track_forced" = "Форсированная";
+"inspector.track_selected" = "Выбранная";
+"inspector.track_external" = "Внешняя";
+"inspector.track_source_id" = "ID источника";
+"inspector.track_title" = "Название";
+"inspector.track_language" = "Язык";
+"inspector.track_file_path" = "Путь к файлу";
+"inspector.track_codec" = "Кодек";
+"inspector.track_decoder" = "Декодер";
+"inspector.track_fps" = "Кадры/с";
+"inspector.track_channels" = "Каналы";
+"inspector.track_sample_rate" = "Частота";
+"inspector.file_path" = "Путь к файлу";
+"inspector.file_title" = "Название";
+"inspector.file_comment" = "Комментарий";
+"inspector.file_size" = "Размер";
+"inspector.file_format" = "Формат";
+"inspector.file_duration" = "Длительность";
+"inspector.file_chapters" = "Главы";
+"inspector.file_editions" = "Версии";
+"inspector.status_avsync_diff" = "Рассинхронизация аудио/видео, тек.";
+"inspector.status_total_avsync" = "Рассинхронизация аудио/видео, общ.";
+"inspector.status_dropped_frames" = "Пропущенных кадров";
+"inspector.status_mistimed_frames" = "Рассинхронизация кадров";
+"inspector.status_display_fps" = "Кадры/с (дисплей)";
+"inspector.status_estimated_output_fps" = "Кадры/с, расчетное значение";
+"inspector.status_estimated_display_fps" = "Кадры/с (дисплей), расчетное значение:";
+"inspector.status_watch" = "Просмотр";
+"inspector.watch_column_name" = "Название";
+"inspector.watch_column_value" = "Значение";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Буферизация… %d% %";
@@ -111,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Задержка вторых субтитров: на %@ с раньше";
 "osd.sub_second_hidden" = "Вторые субтитры скрыты";
 "osd.sub_second_pos" = "Позиция вторых субтитров: %@";
+"osd.sub_second_scale" = "Масштаб вторых субтитров: %@×";
 "osd.sub_second_visible" = "Вторые субтитры видны";
 "osd.mute" = "Звук выключен";
 "osd.unmute" = "Звук включен";
@@ -149,12 +222,16 @@
 "osd.file_loop" = "Повтор одного файла";
 "osd.playlist_loop" = "Повтор плейлиста";
 "osd.no_loop" = "Отключить повтор";
+"osd.screenshot.reveal" = "Показать в Finder";
+"osd.screenshot.edit" = "Правка";
+"osd.screenshot.delete" = "Удалить";
+"osd.sub_choose.prompt" = "Выберите субтитры для скачивания:";
+"osd.sub_choose.cancel" = "Отменить";
+"osd.sub_choose.download" = "Скачать";
 
 "preference.title" = "Настройки";
 "preference.general" = "Основные";
 "preference.ui" = "Интерфейс";
-"preference.video_audio" = "Видео и аудио";
-"preference.subtitle" = "Субтитры";
 "preference.network" = "Сеть";
 "preference.control" = "Управление";
 "preference.keybindings" = "Клавиши";
@@ -162,29 +239,6 @@
 "preference.plugins" = "Плагины";
 "preference.utilities" = "Утилиты";
 "preference.scripts" = "Скрипты";
-"preference.not_logged_in" = "Вход не выполнен";
-"preference.logged_in_as" = "Выполнен вход как %@";
-"preference.system_media_control" = "Использовать системное управление медиа";
-
-"preference.key_binding_hint_1" = "Чтобы изменить привязки клавиш в текущем файле конфигурации, сначала нажмите кнопку «Дублировать…», чтобы создать копию.";
-"preference.key_binding_hint_2" = "Дважды щелкните строку справа, чтобы отредактировать соответствующую привязку клавиш.";
-
-"preference.enable_adv_settings" = "Включить расширенные настройки";
-
-"preference.sub_override_level.no" = "no";
-"preference.sub_override_level.force" = "force";
-"preference.sub_override_level.scale" = "scale";
-"preference.sub_override_level.strip" = "strip";
-"preference.sub_override_level.yes" = "yes";
-
-"preference.sub_override_level.descriptive_text.no" = "Показывать субтитры ASS без переопределения пользователем.";
-"preference.sub_override_level.descriptive_text.force" = "Переопределять оформление стилями, заданными ниже, и принудительно применять другие настройки для субтитров.";
-"preference.sub_override_level.descriptive_text.scale" = "Переопределять оформление стилями, заданными ниже, и применять масштабирование шрифта.";
-"preference.sub_override_level.descriptive_text.strip" = "Игнорировать все стили и теги в субтитрах ASS.";
-"preference.sub_override_level.descriptive_text.yes" = "Переопределять оформление стилями, заданными ниже.";
-
-"preference.ytdl_plugin_not_installed" = "Установите плагин Online Media из меню «Плагины > Установить с GitHub», чтобы получить дополнительные возможности, такие как загрузка видео и автоматическое обновление yt-dlp.";
-"preference.ytdl_plugin_installed" = "Встроенная поддержка youtube-dl отключена, так как у вас установлен плагин Online Media.";
 
 "menu.volume" = "Громкость: %@";
 "menu.volume_muted" = "Громкость: %@ (без звука)";
@@ -373,8 +427,6 @@
 "alert.plugin_update_found.message" = "Последняя версия %@. У вас %@. Хотите обновить?";
 "alert.plugin_permission" = "Этот плагин запрашивает следующие разрешения. Проверьте их, перед тем как продолжить.";
 "alert.plugin_permission_added" = "Это обновление требует дополнительные разрешения. Проверьте их, перед тем как продолжить.";
-"alert.install_plugin_macos_11.title" = "Установить плагин с GitHub";
-"alert.install_plugin_macos_11.message" = "Используйте формат «пользователь/репозиторий» или введите полный адрес GitHub-репозитория. Магазин плагинов недоступен для macOS 11 (Big Sur). Для наилучшего результата рекомендуется использование свежей версии ОС.";
 
 "playlist.total_length" = "%@ в общей сложности";
 "playlist.total_length_with_selected" = "%@ из %@ выбрано";
@@ -411,6 +463,8 @@
 
 "keymapping.title" = "Назначить клавиши";
 "keymapping.message" = "Нажмите любую клавишу для записи.";
+"keymapping.select_action" = "Выберите действие:";
+"keymapping.enter_command" = "Или введите команду mpv:";
 
 "filter.video_filters" = "Видеофильтры";
 "filter.audio_filters" = "Аудиофильтры";
@@ -483,8 +537,6 @@
 "permissions.file-system.desc" = "Этот плагин может получать доступ ко всем файлам на диске, включая конфиденциальную информацию. Он также может запускать другие программы, которые в теории могут навредить компьютеру. Пожалуйста, проверьте исходный код плагина.";
 
 "plugin.install" = "Установить";
-"plugin.installed" = "Установлено";
-"plugin.not_installed" = "Не установлено";
 "plugin.local" = "Установлено локально";
 "alert.plugin.install_error" = "Произошла ошибка при установке: %@";
 "alert.invalid_url" = "Недопустимый адрес.";
@@ -493,7 +545,6 @@
 "plugin.install_error.cannot_download" = "Не удалось загрузить плагин.\n\nВывод установщика:%@\n";
 "plugin.install_error.cannot_unpackage" = "Не удалось распаковать плагин.\n\nВывод установщика:%@\n";
 "plugin.install_error.cannot_load" = "IINA не может загрузить этот плагин. Возможно, у него неверный формат.";
-"plugin.check_for_updates" = "Проверить обновления";
 "plugin.updating" = "Загружаю обновление…";
 
 // Log window
@@ -538,6 +589,23 @@
 "history_window.search.no_recents" = "Нет недавних поисковых запросов";
 "history_window.search.recents_title" = "Недавние поисковые запросы";
 "history_window.search.clear_recents" = "Очистить недавние";
+
+// Guide window
+"guide_window.website" = "Сайт";
+"guide_window.fail" = "Не удалось загрузить «Что нового». Пожалуйста, посетите наш веб-сайт https://iina.io для получения дополнительной информации.";
+"guide_window.continue" = "Продолжить";
+
+// Font picker
+"font_picker.title" = "Выберите шрифт";
+"font_picker.choose" = "Выберите шрифт:";
+"font_picker.filter" = "Введите текст…";
+"font_picker.family" = "Гарнитура";
+"font_picker.typeface" = "Стиль";
+"font_picker.preview" = "Предварительный просмотр";
+"font_picker.test" = "Проба пера";
+"font_picker.other" = "Или введите название шрифта:";
+"font_picker.cancel" = "Отмена";
+"font_picker.ok" = "ОК";
 
 // Sidebar
 

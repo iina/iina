@@ -10,13 +10,6 @@ import Cocoa
 import Mustache
 import WebKit
 
-fileprivate let isMacOS11: Bool = {
-  if #unavailable(macOS 12.0) {
-      return true
-  }
-  return false
-}()
-
 fileprivate let InteractiveModeBottomViewHeight: CGFloat = 60
 
 fileprivate let UIAnimationDuration = 0.25
@@ -192,6 +185,11 @@ class MainWindowController: PlayerWindowController {
       }
     }
 
+    var isAnimatingToNativeFullScreen: Bool {
+      if case .animating(_, false, _) = self { return true }
+      return false
+    }
+
     var priorWindowedFrame: NSRect? {
       get {
         switch self {
@@ -240,8 +238,11 @@ class MainWindowController: PlayerWindowController {
       guard player.info.state.active else { return }
       switch fsState {
       case .fullscreen: player.mpv.setFlag(MPVOption.Window.fullscreen, true)
-      case .animating:  break
+      case .animating:  return
       case .windowed:   player.mpv.setFlag(MPVOption.Window.fullscreen, false)
+      }
+      if oldValue.isAnimatingToNativeFullScreen {
+        player.resumeDeferredSyncUITime()
       }
     }
   }
@@ -414,7 +415,7 @@ class MainWindowController: PlayerWindowController {
     guard let window, let cv = window.contentView else { return nil }
     let view = NSView(frame: .zero)
     view.translatesAutoresizingMaskIntoConstraints = false
-    cv.addSubview(view, positioned: .below, relativeTo: bufferIndicatorView)
+    cv.addSubview(view, positioned: .below, relativeTo: pipOverlayView)
     Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": view])
     return view
   }()
@@ -1000,14 +1001,9 @@ class MainWindowController: PlayerWindowController {
       oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
       oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
       oscFloatingView.oscTopView.addView(oscPlayControlView, in: .center)
-
-      // Setting the visibility priority to detach only will cause freeze when resizing the window
-      // (and triggering the detach) in macOS 11.
-      if !isMacOS11 {
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
-        oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
-        oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
-      }
+      oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscVolumeView)
+      oscFloatingView.oscTopView.setVisibilityPriority(.detachOnlyIfNecessary, for: oscToolbarView)
+      oscFloatingView.oscTopView.setClippingResistancePriority(.defaultLow, for: .horizontal)
       oscFloatingView.oscBottomView.addSubview(oscSliderView)
       Utility.quickConstraints(["H:|[v]|", "V:|[v]|"], ["v": oscSliderView])
       Utility.quickConstraints(["H:|-(>=0)-[v]-(>=0)-|"], ["v": oscPlayControlView])
@@ -1612,6 +1608,10 @@ class MainWindowController: PlayerWindowController {
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("failed to enter full screen mode")
+
+    if player.info.state.active {
+      updateWindowParametersForMPV()
+    }
   }
 
   /// The window is about to exit full screen mode.
@@ -1761,6 +1761,10 @@ class MainWindowController: PlayerWindowController {
     videoView.needsLayout = true
     videoView.layoutSubtreeIfNeeded()
     forceDraw("failed to exit full screen mode")
+
+    if player.info.state.active {
+      updateWindowParametersForMPV()
+    }
   }
 
   func toggleWindowFullScreen() {
@@ -1844,7 +1848,7 @@ class MainWindowController: PlayerWindowController {
     guard let window,
           let screen = window.screen ?? NSScreen.main else {return }
 
-    let unusable = screen.cameraHousingHeight ?? 0
+    let unusable = screen.safeAreaInsets.top
     let frame = NSRect(
       x: screen.frame.minX,
       y: screen.frame.minY,
@@ -1940,36 +1944,6 @@ class MainWindowController: PlayerWindowController {
       oscFloatingView.updatePosition()
     }
 
-    // Detach the views in oscFloatingTopView manually on macOS 11 only; as it will cause freeze
-    if isMacOS11 && oscPosition == .floating {
-      guard let maxWidth = [oscVolumeView, oscToolbarView].compactMap({ $0?.frame.width }).max() else {
-        return
-      }
-
-      // window - 10 - controlBarFloating
-      // controlBarFloating - 12 - oscFloatingTopView
-      let margin: CGFloat = (10 + 12) * 2
-      let hide = (window.frame.width
-                    - oscPlayControlView.frame.width
-                    - maxWidth*2
-                    - margin) < 0
-
-      let views = oscFloatingView.oscTopView.views
-      if hide {
-        if views.contains(oscVolumeView)
-            && views.contains(oscToolbarView) {
-          oscFloatingView.oscTopView.removeView(oscVolumeView)
-          oscFloatingView.oscTopView.removeView(oscToolbarView)
-        }
-      } else {
-        if !views.contains(oscVolumeView)
-            && !views.contains(oscToolbarView) {
-          oscFloatingView.oscTopView.addView(oscVolumeView, in: .leading)
-          oscFloatingView.oscTopView.addView(oscToolbarView, in: .trailing)
-        }
-      }
-    }
-
     player.events.emit(.windowResized, data: window.frame)
   }
 
@@ -1984,7 +1958,10 @@ class MainWindowController: PlayerWindowController {
     // See comments in windowWillExitFullScreen for details.
     guard player.info.state.active else { return }
     videoView.videoLayer.inLiveResize = false
-    updateWindowParametersForMPV()
+    // Skip updating while in full-screen animation. They are updated when the animation ends.
+    if !fsState.isAnimatingToNativeFullScreen {
+      updateWindowParametersForMPV()
+    }
     liveText.requestAnalysis()
   }
 
@@ -2302,7 +2279,10 @@ class MainWindowController: PlayerWindowController {
   private func refreshSeekTimeAndThumbnail(from event: NSEvent) {
     let isCoveredByOSD = !osdView.isHidden && event.inAnyOf([osdView])
     let isCoveredBySidebar = sidebars.isEventCoveringVisibleSidebar(event)
-    if !playSlider.isHidden && event.inAnyOf([playSlider]), !isCoveredByOSD, !isCoveredBySidebar {
+    if !player.disableUI,
+       !playSlider.isHiddenOrHasHiddenAncestor,
+       event.inAnyOf([playSlider]),
+       !isCoveredByOSD, !isCoveredBySidebar {
       updateTimePreviewAndThumbnail(event.locationInWindow)
     } else {
       thumbnailPeekView.isHidden = true

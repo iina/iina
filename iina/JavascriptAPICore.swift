@@ -26,6 +26,7 @@ import JavaScriptCore
   func getHistory() -> Any
   func getRecentDocuments() -> Any
   func getVersion() -> Any
+  func getTheme() -> [String: Any]
 }
 
 class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
@@ -133,6 +134,15 @@ class JavascriptAPICore: JavascriptAPI, JavascriptAPICoreExportable {
       "iina": iinaVersion,
       "build": build,
       "mpv": MPVOptionDefaults.shared.mpvVersion
+    ]
+  }
+
+  func getTheme() -> [String: Any] {
+    let theme: Preference.Theme = Preference.enum(for: .themeMaterial)
+    let appearance = NSAppearance(iinaTheme: theme) ?? NSApp.effectiveAppearance
+    return [
+      "appearance": appearance.isDark ? "dark" : "light",
+      "accentColor": NSColor.controlAccentColor.hexString
     ]
   }
 }

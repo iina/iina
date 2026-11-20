@@ -175,10 +175,10 @@ class JavascriptPluginInstance {
     if player == nil {
       // it's a global instance
       apis["global"] = JavascriptAPIGlobalController(context: ctx, pluginInstance: self)
-    } else if let globalAPI = plugin.globalInstance?.apis["global"] as? JavascriptAPIGlobalController {
-      // it's a normal instance
+    } else if plugin.globalEntryPath != nil {
+      // it's a normal instance.
       let childAPI = JavascriptAPIGlobalChild(context: ctx, pluginInstance: self)
-      childAPI.parentAPI = globalAPI
+      childAPI.parentAPI = plugin.globalInstance?.apis["global"] as? JavascriptAPIGlobalController
       apis["global"] = childAPI
     }
 

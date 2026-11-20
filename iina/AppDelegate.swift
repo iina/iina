@@ -75,26 +75,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     return w
   }()
 
-  lazy var preferenceWindowController: PreferenceWindowController = {
-    var list: [NSViewController & PreferenceWindowEmbeddable] = [
-      PrefGeneralViewController(),
-      PrefUIViewController(),
-      PrefCodecViewController(),
-      PrefSubViewController(),
-      PrefNetworkViewController(),
-      PrefControlViewController(),
-      PrefKeyBindingViewController(),
-      PrefAdvancedViewController(),
-      // PrefPluginViewController(),
-      PrefUtilsViewController(),
-    ]
-
-    if IINA_ENABLE_PLUGIN_SYSTEM {
-      list.insert(PrefPluginViewController(), at: 8)
-    }
-    return PreferenceWindowController(viewControllers: list)
-  }()
-
   /// Whether the shutdown sequence timed out.
   private var timedOut = false
 
@@ -175,7 +155,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     if thermalState != .nominal {
       Logger.log("Thermal state: \(thermalState)")
     }
-    if #available(macOS 12, *), ProcessInfo.processInfo.isLowPowerModeEnabled {
+    if ProcessInfo.processInfo.isLowPowerModeEnabled {
       Logger.log("Low Power Mode is active")
     }
   }
@@ -777,11 +757,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
 
     // if installing a plugin package
     if let pluginPackageURL = urls.first(where: { $0.pathExtension == "iinaplgz" }) {
-      if Preference.enableNewSettings {
-        SettingsWindow.default.installPlugin(localPackageURL: pluginPackageURL)
-      } else {
-        preferenceWindowController.performAction(.installPlugin(url: pluginPackageURL))
-      }
+      SettingsWindow.default.installPlugin(localPackageURL: pluginPackageURL)
       return
     }
 
@@ -802,7 +778,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   /// This is about conformance to [NSSecureCoding](https://developer.apple.com/documentation/foundation/nssecurecoding)
   /// which protects against object substitution attacks. If an application does not implement this method then a warning will be emitted
   /// reporting secure coding is not enabled for restorable state.
-  @available(macOS 12.0, *)
   @MainActor func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
 
   // MARK: - Accept dropped string and URL
@@ -983,20 +958,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
   }
 
   @IBAction func showPreferences(_ sender: AnyObject) {
-    if Preference.enableNewSettings {
-      SettingsWindow.default.show()
-    } else {
-      preferenceWindowController.showWindow(self)
-    }
+    SettingsWindow.default.show()
   }
 
   @objc func showPluginPreferences(_ sender: NSMenuItem) {
-    if Preference.enableNewSettings {
-      SettingsWindow.default.show()
-      SettingsWindow.default.navigateTo(page: "plugin")
-    } else {
-      preferenceWindowController.openPreferenceView(withNibName: "PrefPluginViewController")
-    }
+    SettingsWindow.default.show()
+    SettingsWindow.default.navigateTo(page: "plugin")
   }
 
   @IBAction func showVideoFilterWindow(_ sender: AnyObject) {
@@ -1066,10 +1033,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     }
   }
   
-  @objc func toggleNewSettings(_ sender: AnyObject) {
-    Preference.enableNewSettings = !Preference.enableNewSettings
-  }
-
   /// Dump contents of all player cores to a txt file. Strictly for debugging. No localization needed.
   @IBAction func dumpDebugInfo(_ sender: AnyObject) {
     struct FileStream: TextOutputStream {

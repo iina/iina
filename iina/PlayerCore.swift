@@ -232,6 +232,7 @@ class PlayerCore: NSObject {
   lazy var info: PlaybackInfo = PlaybackInfo(self)
 
   var syncUITimer: Timer?
+  @Atomic private var isSyncUITimeDeferred = false
 
   var displayOSD: Bool = true
 
@@ -591,8 +592,8 @@ class PlayerCore: NSObject {
 
   static func loadKeyBindings() {
     Logger.log("Loading key bindings")
-    let userConfigs = PrefKeyBindingViewController.userConfigs
-    let iinaDefaultConfPath = PrefKeyBindingViewController.defaultConfigs["IINA Default"]!
+    let userConfigs = SettingsPageKeyBindings.userConfigs
+    let iinaDefaultConfPath = SettingsPageKeyBindings.defaultConfigs["IINA Default"]!
     var inputConfPath = iinaDefaultConfPath
     if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
@@ -1173,7 +1174,7 @@ class PlayerCore: NSObject {
     }
 
     DispatchQueue.main.async {
-      let osdView = ScreenshootOSDView()
+      let osdView = ScreenshotOSDView()
       osdView.setImage(image,
                        size: image.size.shrink(toSize: NSSize(width: 300, height: 200)),
                        fileURL: saveToFile ? lastScreenshotURL : nil)
@@ -1648,7 +1649,7 @@ class PlayerCore: NSObject {
     mpv.command(.seek, args: ["\(chapter.time.second)", "absolute"])
     resume()
     // need to update time pos
-    syncUITime()
+    syncUI(.time)
     return chapter
   }
 
@@ -1951,11 +1952,12 @@ class PlayerCore: NSObject {
   }
 
   /** Scale is a double value in [-100, -1] + [1, 100] */
-  func setSubScale(_ scale: Double) {
+  func setSubScale(_ scale: Double, forPrimary: Bool = true) {
+    let option = forPrimary ? MPVOption.Subtitles.subScale : MPVOption.Subtitles.secondarySubScale
     if scale > 0 {
-      mpv.setDouble(MPVOption.Subtitles.subScale, scale, level: .verbose)
+      mpv.setDouble(option, scale, level: .verbose)
     } else {
-      mpv.setDouble(MPVOption.Subtitles.subScale, -scale, level: .verbose)
+      mpv.setDouble(option, -scale, level: .verbose)
     }
   }
 
@@ -2405,7 +2407,7 @@ class PlayerCore: NSObject {
       sendOSD(paused ? .pause : .resume)
       // The NowPlayingInfoManager is notified when playback is paused or resumed. The video
       // position must be updated before notifying the manager.
-      syncUITime()
+      syncUI(.time)
       info.state = paused ? .paused : .playing
       refreshSyncUITimer()
       // Follow energy efficiency best practices and ensure IINA is absolutely idle when the video
@@ -2472,6 +2474,14 @@ class PlayerCore: NSObject {
   func secondarySubPosChanged(_ position: Double) {
     sendOSD(.secondSubPos(position))
     postNotification(.iinaSubPositionChanged)
+  }
+
+  func secondarySubScaleChanged(_ scale: Double) {
+    guard scale != 0 else { return }
+    let displayValue = scale >= 1 ? scale : -1 / scale
+    let truncated = round(displayValue * 100) / 100
+    sendOSD(.secondSubScale(truncated))
+    postNotification(.iinaSubScaleChanged)
   }
 
   func secondarySidChanged() {
@@ -2746,7 +2756,7 @@ class PlayerCore: NSObject {
     // the view becomes visible to sync the time. If the timer was not running the view must be
     // updated now. Playback may be paused. If that is the case then the timer will not be started.
     if !wasTimerRunning {
-      syncUITime()
+      syncTimeOrDefer()
     }
 
     guard useTimer else { return }
@@ -2755,7 +2765,7 @@ class PlayerCore: NSObject {
     syncUITimer = Timer.scheduledTimerInCommonMode(
       timeInterval: timeInterval,
       target: self,
-      selector: #selector(self.syncUITime),
+      selector: #selector(self.syncTimeOrDefer),
     )
   }
 
@@ -2810,9 +2820,9 @@ class PlayerCore: NSObject {
   ///
   /// When portions of the UI that need the video position are visible (OSC, OSD), `syncUITimer` keeps the
   /// `info.videoPosition` property synchronized with mpv. Code outside of the UI needs to call this method before accessing
-  /// the position to ensure the cache is up to date when the timer is not running..
+  /// the position to ensure the cache is up to date when the timer is not running.
   func syncPositionIfNeeded() {
-    if let syncUITimer, syncUITimer.isValid { return }
+    if !isSyncUITimeDeferred, let syncUITimer, syncUITimer.isValid { return }
     guard info.state.active else { return }
     syncPosition()
   }
@@ -2824,8 +2834,22 @@ class PlayerCore: NSObject {
     case volume
   }
 
-  @objc func syncUITime() {
+  @objc func syncTimeOrDefer() {
+    // Mainly used during full-screen animation;
+    // The timer's synchronous mpv property reads can stall the animation.
+    if mainWindow.fsState.isAnimatingToNativeFullScreen {
+      isSyncUITimeDeferred = true
+      return
+    }
     syncUI(.time)
+    isSyncUITimeDeferred = false
+  }
+
+  func resumeDeferredSyncUITime() {
+    DispatchQueue.main.async { [weak self] in
+      guard let self, self.isSyncUITimeDeferred else { return }
+      self.syncTimeOrDefer()
+    }
   }
 
   func syncUI(_ options: [SyncUIOption]) {

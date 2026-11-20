@@ -149,3 +149,16 @@ class SidebarScrollView: NSScrollView, SidebarPane {
     }
   }
 }
+
+class SidebarSplitView: NSSplitView {
+  override var dividerThickness: CGFloat { LayoutValue.sidebarStackViewSpacing.get() }
+
+  override init(frame frameRect: NSRect) {
+    super.init(frame: frameRect)
+    translatesAutoresizingMaskIntoConstraints = false
+  }
+
+  required init?(coder: NSCoder) {
+    super.init(coder: coder)
+  }
+}

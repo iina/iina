@@ -301,12 +301,17 @@ class ViewLayer: CAOpenGLLayer {
       if let renderContext = videoView.player.mpv.mpvRenderContext,
          videoView.player.mpv.shouldRenderUpdateFrame() {
         var skip: CInt = 1
+        var blockForTargetTime: CInt = 0
         withUnsafeMutablePointer(to: &skip) { skip in
-          var params: [mpv_render_param] = [
-            mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
-            mpv_render_param()
-          ]
-          mpv_render_context_render(renderContext, &params)
+          withUnsafeMutablePointer(to: &blockForTargetTime) { blockForTargetTime in
+            var params: [mpv_render_param] = [
+              mpv_render_param(type: MPV_RENDER_PARAM_SKIP_RENDERING, data: .init(skip)),
+              // avoid additional waiting time during full-screen animation 
+              mpv_render_param(type: MPV_RENDER_PARAM_BLOCK_FOR_TARGET_TIME, data: .init(blockForTargetTime)),
+              mpv_render_param()
+            ]
+            mpv_render_context_render(renderContext, &params)
+          }
         }
       }
     }

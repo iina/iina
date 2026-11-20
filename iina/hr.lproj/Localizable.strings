@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Kašnjenje sekundarnih titlova: %@s ranije";
 "osd.sub_second_hidden" = "Sekundardni titlovi skriveni";
 "osd.sub_second_pos" = "Položaj sekundardnih titlova: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Sekundardni titlovi vidljivi";
 "osd.mute" = "Isključi zvuk";
 "osd.unmute" = "Uključi zvuk";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "Najnovija verzija je %@. Ti imaš verziju %@. Želiš li preuzeti novu verziju?";
 "alert.plugin_permission" = "Ovaj dodatak zahtijeva sljedeće dozvole. Pregledaj ih prije nastavljanja.";
 "alert.plugin_permission_added" = "Ova nova verzija zahtijeva sljedeće dozvole. Pregledaj ih prije nastavljanja.";
-"alert.install_plugin_macos_11.title" = "Instaliraj dodatak s GitHub-a";
-"alert.install_plugin_macos_11.message" = "Koristi format user/repo ili upiši potpuni GitHub URL. Trgovina dodataka nije dostupna na macOS-u 11. Za najbolje iskustvo preporučuje se noviji sustav.";
 
 "playlist.total_length" = "Ukupno %@";
 "playlist.total_length_with_selected" = "Odabrano %@ od %@";

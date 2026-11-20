@@ -55,7 +55,7 @@ return -1;\
   double _timestamp;
 }
 
-- (int)getPeeksForFile:(NSString *)file thumbnailsWidth:(int)thumbnailsWidth;
+- (int)getPeeksForFile:(NSString *)file thumbnailsWidth:(int)thumbnailsWidth operation:(NSOperation *)operation;
 - (void)saveThumbnail:(AVFrame *)pFrame width:(int)width height:(int)height index:(int)index realTime:(int)second forFile:(NSString *)file;
 
 @end
@@ -73,6 +73,8 @@ return -1;\
     _addedTimestamps = [[NSMutableSet alloc] init];
     _queue = [[NSOperationQueue alloc] init];
     _queue.maxConcurrentOperationCount = 1;
+    // Generating thumbnails must not compete with playback
+    _queue.qualityOfService = NSQualityOfServiceUtility;
   }
   return self;
 }
@@ -86,11 +88,15 @@ return -1;\
   NSBlockOperation *op = [[NSBlockOperation alloc] init];
   __weak NSBlockOperation *weakOp = op;
   [op addExecutionBlock:^(){
-    if ([weakOp isCancelled]) {
+    if ([self isScanCancelled:weakOp atCheckpoint:FFThumbnailScanCheckpointStart]) {
       return;
     }
     self->_timestamp = CACurrentMediaTime();
-    int success = [self getPeeksForFile:file thumbnailsWidth:thumbWidth];
+    int success = [self getPeeksForFile:file thumbnailsWidth:thumbWidth operation:weakOp];
+    // The thumbnails are incomplete when generation was cancelled
+    if ([self isScanCancelled:weakOp atCheckpoint:FFThumbnailScanCheckpointFinish]) {
+      return;
+    }
     if (self.delegate) {
       [self.delegate didGenerateThumbnails:[NSArray arrayWithArray:self->_thumbnails]
                                    forFile: file
@@ -100,8 +106,24 @@ return -1;\
   [_queue addOperation:op];
 }
 
+- (void)cancelThumbnailGeneration
+{
+  [_queue cancelAllOperations];
+}
+
+- (BOOL)isScanCancelled:(NSOperation *)operation atCheckpoint:(FFThumbnailScanCheckpoint)checkpoint
+{
+  return operation.isCancelled;
+}
+
+static int interruptCallback(void *opaque)
+{
+  return [(__bridge NSOperation *)opaque isCancelled];
+}
+
 - (int)getPeeksForFile:(NSString *)file
        thumbnailsWidth:(int)thumbnailsWidth
+             operation:(NSOperation *)operation
 {
   int i, ret;
 
@@ -114,13 +136,26 @@ return -1;\
   // av_register_all();
 
   // Open video file
-  AVFormatContext *pFormatCtx = NULL;
+  // Blocking operations on the file are interrupted once the operation is cancelled.
+  AVFormatContext *pFormatCtx = avformat_alloc_context();
+  if (pFormatCtx != NULL) {
+    pFormatCtx->interrupt_callback.callback = interruptCallback;
+    pFormatCtx->interrupt_callback.opaque = (__bridge void *)operation;
+  }
   ret = avformat_open_input(&pFormatCtx, cFilename, NULL, NULL);
   free(cFilename);
+  // The context is freed when opening fails.
+  if (ret < 0 && [self isScanCancelled:operation atCheckpoint:FFThumbnailScanCheckpointOpen]) {
+    return -1;
+  }
   CHECK_SUCCESS(ret, @"Cannot open video")
 
   // Find stream information
   ret = avformat_find_stream_info(pFormatCtx, NULL);
+  if ([self isScanCancelled:operation atCheckpoint:FFThumbnailScanCheckpointStreamInfo]) {
+    avformat_close_input(&pFormatCtx);
+    return -1;
+  }
   CHECK_SUCCESS(ret, @"Cannot get stream info")
 
   // Find the first video stream
@@ -208,6 +243,9 @@ return -1;\
 
   // For each preview point
   for (i = 0; i <= self.thumbnailCount; i++) {
+    if ([self isScanCancelled:operation atCheckpoint:FFThumbnailScanCheckpointSeek])
+      break;
+
     int64_t seek_pos = interval * i + pVideoStream->start_time;
 
     avcodec_flush_buffers(pCodecCtx);
@@ -215,6 +253,9 @@ return -1;\
     // Seek to time point
     // avformat_seek_file(pFormatCtx, videoStream, seek_pos-interval, seek_pos, seek_pos+interval, 0);
     ret = av_seek_frame(pFormatCtx, videoStream, seek_pos, AVSEEK_FLAG_BACKWARD);
+    // Seeking fails when interrupted due to cancellation
+    if ([self isScanCancelled:operation atCheckpoint:FFThumbnailScanCheckpointSeekEnd])
+      break;
     CHECK_SUCCESS(ret, @"Cannot seek")
 
     avcodec_flush_buffers(pCodecCtx);
@@ -224,6 +265,10 @@ return -1;\
       @try {
         // Make sure it's video stream
         if (packet.stream_index == videoStream) {
+
+          // Do not decode another frame once cancelled
+          if ([self isScanCancelled:operation atCheckpoint:FFThumbnailScanCheckpointDecode])
+            break;
 
           // Decode video frame
           if (avcodec_send_packet(pCodecCtx, &packet) < 0)

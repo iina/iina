@@ -14,9 +14,9 @@
 "general.done" = "Hotovo";
 "general.username" = "Meno používateľa";
 "general.password" = "Heslo";
-"general.na" = "N/A";
+"general.na" = "Nedostupné";
 "general.no_result" = "Žiadny výsledok";
-"general.no_title" = "No Title";
+"general.no_title" = "Bez názvu";
 "general.auto" = "Automaticky";
 
 "input.value_is_empty" = "Hodnota nemôže byť prázdna.";
@@ -24,7 +24,7 @@
 
 // About Window
 "about.title" = "O aplikácii IINA";
-"about.license" = "LicenAcia";
+"about.license" = "Licencia";
 "about.contributors" = "Prispievatelia";
 "about.credits" = "Poďakovanie";
 "about.crowdin" = "Lokalizáciu IINA zabezpečuje Crowdin.";
@@ -65,7 +65,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "inspector.video_hw_decoder" = "HW dekodér";
 "inspector.video_primaries" = "Primárky";
 "inspector.video_colorspace" = "Farebná škála";
-"inspector.video_pixel_format" = "Pixel Format";
+"inspector.video_pixel_format" = "Formát pixelov";
 "inspector.video_driver" = "Ovládač";
 "inspector.video_size" = "Veľkosť";
 "inspector.video_bitrate" = "Dátový tok";
@@ -95,7 +95,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "inspector.track_sample_rate" = "Vzorkovacia frekvencia";
 "inspector.file_path" = "Umiestnenie súboru";
 "inspector.file_title" = "Názov";
-"inspector.file_comment" = "Comment";
+"inspector.file_comment" = "Komentár";
 "inspector.file_size" = "Veľkosť";
 "inspector.file_format" = "Formát";
 "inspector.file_duration" = "Dĺžka";
@@ -183,7 +183,8 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "osd.sub_second_delay.later" = "Oneskorenie sekundárnych titulkov: %@s neskôr";
 "osd.sub_second_delay.earlier" = "Posun sekundárnych titulkov: %@ s skôr";
 "osd.sub_second_hidden" = "Skryté sekundárne titulky";
-"osd.sub_second_pos" = "Secondary Subtitle Position: %@";
+"osd.sub_second_pos" = "Poloha druhých titulkov: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Viditeľné sekundárne titulky";
 "osd.mute" = "Stlmiť";
 "osd.unmute" = "Zosilniť";
@@ -214,9 +215,9 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "osd.canceled" = "Zrušené";
 "osd.cannot_connect" = "Nie je možné sa pripojiť";
 "osd.timed_out" = "Čas vypršal";
-"osd.sub_quota_exceeded" = "Subtitle download limit reached";
-"osd.sub_quota_exceeded.detail" = "Try again after %@";
-"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.sub_quota_exceeded" = "Dosiahol sa limit sťahovania titulkov";
+"osd.sub_quota_exceeded.detail" = "Skúste to znova po %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Skúste to znova neskôr";
 "osd.filter_added" = "Pridaný filter: %@";
 "osd.filter_removed" = "Odstránený filter";
 "osd.file_loop" = "Opakuj jeden súbor";
@@ -231,7 +232,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 
 "preference.title" = "Nastavenia";
 "preference.general" = "Všeobecné";
-"preference.ui" = "Interface";
+"preference.ui" = "Rozhranie";
 "preference.network" = "Sieť";
 "preference.control" = "Ovládanie";
 "preference.keybindings" = "Klávesové skratky";
@@ -309,7 +310,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "alert.mpv_error" = "Interná chyba %@ (%@) pri nastavení možnosti %@.";
 
 "alert.unsupported_audio" = "Nepodporovaný externý zvukový súbor.";
-"alert.unsupported_video" = "Unsupported external video file.";
+"alert.unsupported_video" = "Nepodporovaný externý videosúbor.";
 "alert.unsupported_sub" = "Nepodporované externé titulky.";
 "alert.unsupported_url" = "Nepodporované URL.";
 "alert.wrong_url_format" = "Zlý formát URL.";
@@ -338,12 +339,12 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "alert.add_filter.message" = "Zadajte reťazec filtru vo formáte mpv príkazu vf alebo af.";
 
 "alert.keybinding_config.error" = "Chyba pri spracovaní konfiguračného súboru s klávesovými skratkami \"%@\"! Budú použité predvolené klávesové skratky. Skontrolujte vašu konfiguráciu.";
-"alert.delete_keybindingset.title" = "Delete Key Binding Set";
-"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+"alert.delete_keybindingset.title" = "Vymazať sadu klávesových skratiek";
+"alert.delete_keybindingset.message" = "Naozaj chcete vymazať túto sadu klávesových skratiek?";
 
 "alert.extra_option.cannot_read" = "Nemožno načítať mpv možnosti definované používateľom.";
 "alert.extra_option.empty" = "Názov alebo hodnota nemôžu byť prázdne!";
-"alert.extra_option.error" = "Error setting option --%@=%@ with return value %d. Please check your extra option settings in Settings > Advanced.";
+"alert.extra_option.error" = "Pri nastavovaní voľby --%@=%@ nastala chyba s návratovou hodnotou %d. Skontrolujte dodatočné voľby v časti Nastavenia > Rozšírené.";
 "alert.extra_option.config_folder" = "Chyba pri nastavovaní konfiguračného priečinka \"%@\".";
 
 "alert.playlist.error_deleting" = "Chyba pri odstraňovaní: %@";
@@ -380,8 +381,8 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "alert.delete_history.message" = "Naozaj chcete vymazať vybrané položky?";
 "alert.delete_all_history.title" = "Vymazať históriu prehrávania";
 "alert.delete_all_history.message" = "Naozaj chcete vymazať celú históriu prehrávania?";
-"alert.delete_file.title" = "Delete File";
-"alert.delete_file.message" = "Are you sure to trash the selected files?";
+"alert.delete_file.title" = "Vymazať súbor";
+"alert.delete_file.message" = "Naozaj chcete presunúť vybraté súbory do Koša?";
 
 "alert.filter_hwdec.message" = "Práve chcete použiť video filter. Avšak, aktuálny hardvéroví dekodér nemusí podporovať video filtre. Môžete vypnúť hardvéroví dekodér alebo ho prepnúť na Auto(Kópia), ktoré dvojnásobne zaťaží pamäť. Môžete zopakovať predchádzajúcu úpravu (napr. orezanie), aby všetko fungovalo.";
 "alert.filter_hwdec.abort" = "Prerušiť";
@@ -427,16 +428,14 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "alert.plugin_update_found.message" = "Najnovšia dostupná verzia je %@. Nainštalovaná je %@. Prajete si teraz stiahnuť aktualizáciu?";
 "alert.plugin_permission" = "Tento plug-in vyžaduje nasledujúce oprávnenia. Pred pokračovaním vykonajte ich kontrolu.";
 "alert.plugin_permission_added" = "Táto aktualizácia vyžaduje ďalšie oprávnenia. Pred pokračovaním vykonajte ich kontrolu.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "%@ celkovo";
 "playlist.total_length_with_selected" = "%@ z %@ označených";
-"playlist.sorting.header" = "Sorting";
-"playlist.sorting.filename_ascending" = "Filename Ascending";
-"playlist.sorting.filename_descending" = "Filename Descending";
-"playlist.sorting.path_ascending" = "File Path Ascending";
-"playlist.sorting.path_descending" = "File Path Descending";
+"playlist.sorting.header" = "Zoradenie";
+"playlist.sorting.filename_ascending" = "Názov súboru vzostupne";
+"playlist.sorting.filename_descending" = "Názov súboru zostupne";
+"playlist.sorting.path_ascending" = "Cesta k súboru vzostupne";
+"playlist.sorting.path_descending" = "Cesta k súboru zostupne";
 "pl_menu.title_multi" = "%d Položky";
 "pl_menu.play_next" = "Prehraj Ďalšie";
 "pl_menu.play_in_new_window" = "Prehraj v Novom Okne";
@@ -457,9 +456,9 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "pl_menu.copy_url" = "Kopírovať URL";
 "pl_menu.copy_url_multi" = "Kopírovať URLs";
 "pl_menu.playback" = "Prehrávanie";
-"pl_menu.subtitles" = "Subtitles (%d loaded)";
-"pl_menu.network_resources" = "Network Resources";
-"pl_menu.file_operations" = "File Operations";
+"pl_menu.subtitles" = "Titulky (načítané: %d)";
+"pl_menu.network_resources" = "Sieťové zdroje";
+"pl_menu.file_operations" = "Operácie so súbormi";
 "pl_menu.plugin" = "Plugin";
 "pl_menu.playlist" = "Zoznam";
 
@@ -475,9 +474,9 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "hwdec.auto" = "Zapnúť Hardvérové Dekódovanie. Avšak, väčšina video filtrov nebude fungovať.";
 "hwdec.auto-copy" = "Zapnúť Hardvérové Dekódovanie. Dvojnásobne zaťažuje pamäť, ale video filtre budú fungovať.";
 
-"gaplessAudio.no" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
-"gaplessAudio.weak" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"gaplessAudio.yes" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
+"gaplessAudio.no" = "Pri prehrávaní zvukových súborov za sebou môže pri prechode na ďalší súbor nastať krátke ticho alebo výpadok.";
+"gaplessAudio.weak" = "Ak sa zmení výstupný formát zvuku z dekodéra, zvukové zariadenie sa zatvorí a znova otvorí, čím sa naruší prehrávanie bez medzier.";
+"gaplessAudio.yes" = "Zvukové zariadenie sa otvorí s parametrami podľa prvého prehrávaného súboru a zostane otvorené, aby prehrávanie pokračovalo bez medzier. Vzorkovacia frekvencia nasledujúcich súborov sa môže upraviť.";
 
 "subencoding.auto" = "Auto detekcia";
 
@@ -489,7 +488,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "osc_toolbar.sub_track" = "Vyber titulky";
 "osc_toolbar.screenshot" = "Vytvoriť snímku obrazovky";
 "osc_toolbar.plugins" = "Zobraziť panel doplnkov";
-"osc_toolbar.live_text" = "Toggle Live Text";
+"osc_toolbar.live_text" = "Prepnúť Živý text";
 
 "osc_pos.floating" = "Vznáša sa";
 "osc_pos.top" = "Hore";
@@ -504,7 +503,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "mini_player.volume" = "Hlasitosť";
 "mini_player.close" = "Zavrieť mód pre hudbu";
 "mini_player.back" = "Späť do video zobrazenia";
-"mini_player.sort" = "Sort the playlist";
+"mini_player.sort" = "Zoradiť zoznam prehrávania";
 
 // Touch bar
 
@@ -550,44 +549,44 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "plugin.updating" = "Sťahovanie aktualizácie…";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "Všetky podsystémy";
 "logwindow.title" = "Prehliadač logov";
 "logwindow.time" = "Čas";
 "logwindow.subsystem" = "Subsystém";
 "logwindow.message" = "Správa";
-"logwindow.now" = "Now";
-"logwindow.now.desc" = "Follow latest logs";
-"logwindow.log_level" = "Log level";
+"logwindow.now" = "Teraz";
+"logwindow.now.desc" = "Sledovať najnovšie záznamy";
+"logwindow.log_level" = "Úroveň záznamov";
 "logwindow.save" = "Uložiť";
-"logwindow.save_filtered" = "Save filtered logs…";
+"logwindow.save_filtered" = "Uložiť filtrované záznamy…";
 "logwindow.filter" = "Filter";
-"logwindow.clear_subsystem_selections" = "Clear Selections";
+"logwindow.clear_subsystem_selections" = "Zrušiť výber";
 "logwindow.copy" = "Kopírovať";
-"logwindow.logs" = "logs";
+"logwindow.logs" = "záznamy";
 
 // History window
 "history_window.title" = "História prehrávania";
-"history_window.col.filename" = "Media";
+"history_window.col.filename" = "Médiá";
 "history_window.col.progress" = "Priebeh";
 "history_window.col.played_at" = "Prehrané";
 "history_window.menu.play" = "Prehrať";
 "history_window.menu.play_new_window" = "Prehrať v novom okne";
 "history_window.menu.show_in_finder" = "Zobraziť vo Finderi";
 "history_window.menu.delete" = "Vymazať…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "Presunúť do Koša…";
 "history_window.toolbar.clear" = "Vymazať históriu prehrávania";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "Zoskupiť podľa";
+"history_window.toolbar.group_by.menu" = "Zoskupiť podľa";
 "history_window.toolbar.group_by.date" = "Dátum";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
-"history_window.toolbar.group_by.location" = "Folder and Website";
-"history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
-"history_window.toolbar.expand_all" = "Expand All";
-"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.toolbar.group_by.date_tooltip" = "Zoradiť podľa dátumu";
+"history_window.toolbar.group_by.location" = "Priečinok a webová stránka";
+"history_window.toolbar.group_by.location_tooltip" = "Zoradiť podľa priečinka a webovej stránky";
+"history_window.toolbar.expand_collapse" = "Rozbaliť/zbaliť";
+"history_window.toolbar.expand_all" = "Rozbaliť všetko";
+"history_window.toolbar.collapse_all" = "Zbaliť všetko";
 "history_window.search.search_in" = "Vyhľadať v";
 "history_window.search.filename" = "Názov súboru";
-"history_window.search.full_path" = "Full Path";
+"history_window.search.full_path" = "Úplná cesta";
 "history_window.search.no_recents" = "Žiadne posledné vyhľadávanie";
 "history_window.search.recents_title" = "Posledné vyhľadávanie";
 "history_window.search.clear_recents" = "Vymazať posledné";
@@ -611,7 +610,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 
 // Sidebar
 
-"sidebar.layout" = "Layout";
+"sidebar.layout" = "Rozloženie";
 "sidebar.video" = "Video";
 "sidebar.audio" = "Zvuk";
 "sidebar.sub" = "Titulky";
@@ -620,15 +619,15 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "sidebar.chapters" = "Kapitoly";
 
 "sidebar.liquid_glass" = "Liquid Glass";
-"sidebar.sidebar" = "Sidebar";
-"sidebar.sidebar_position" = "Sidebar Position";
-"sidebar.compact_interface" = "Compact Interface";
-"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
-"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
-"sidebar.docked" = "Docked Control Bar and Titlebar";
-"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.sidebar" = "Postranný panel";
+"sidebar.sidebar_position" = "Poloha postranného panela";
+"sidebar.compact_interface" = "Kompaktné rozhranie";
+"sidebar.edge_to_edge_video" = "Video od okraja po okraj";
+"sidebar.lock_window_aspect" = "Uzamknúť pomer strán okna";
+"sidebar.docked" = "Ukotvený ovládací panel a titulný pruh";
+"sidebar.fit_window_to_video" = "Prispôsobiť okno videu";
 "sidebar.settings" = "Nastavenia";
-"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+"sidebar.playlist_and_chapters" = "Zoznam prehrávania a kapitoly";
 
 "sidebar.aspect_ratio" = "Pomer Strán";
 "sidebar.crop" = "Orezať";
@@ -639,36 +638,36 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "sidebar.contrast" = "Kontrast";
 "sidebar.saturation" = "Saturácia";
 "sidebar.gamma" = "Gama";
-"sidebar.hue" = "Hue";
+"sidebar.hue" = "Odtieň";
 
 "sidebar.load_external_audio" = "Nahrať externú zvukovú stopu…";
-"sidebar.delay" = "Delay";
+"sidebar.delay" = "Oneskorenie";
 
-"sidebar.eq" = "Equalizer";
+"sidebar.eq" = "Ekvalizér";
 "sidebar.save_eq" = "Uložiť aktuálny EQ ako predvoľbu…";
 "sidebar.rename_eq" = "Premenovať aktuálnu predvoľbu EQ…";
 "sidebar.remove_eq" = "Odstrániť aktuálnu predvoľbu EQ";
 "sidebar.manual_eq" = "Manuálne";
 
-"sidebar.primary" = "Primary";
-"sidebar.secondary" = "Secondary";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.primary" = "Hlavné";
+"sidebar.secondary" = "Druhé";
+"sidebar.external_subtitles" = "Externé titulky";
 "sidebar.load_subtitle" = "Nahrať titulky…";
 "sidebar.search_online" = "Vyhľadať online…";
-"sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.position" = "Poloha";
+"sidebar.scale" = "Mierka";
 "sidebar.font" = "Font";
-"sidebar.color" = "Color";
+"sidebar.color" = "Farba";
 "sidebar.text" = "Text";
 "sidebar.border" = "Okraj";
 "sidebar.shadow" = "Tieň";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+"sidebar.sub_settings_not_available" = "Niektoré nastavenia pre tento typ titulkov nie sú dostupné.";
+"sidebar.sub_style_warning" = "Zmena štýlu titulkov ASS môže narušiť ich vykresľovanie.";
 
 "sidebar.add_file" = "Pridať Súbor…";
 "sidebar.add_url" = "Pridať URL…";
 
-"sidebar.plugins_placeholder" = "Plugins can display custom sidebar contents. Select a plugin to view its sidebar or install a new plugin in Settings.";
+"sidebar.plugins_placeholder" = "Doplnky môžu v postrannom paneli zobrazovať vlastný obsah. Vyberte doplnok, ktorého panel chcete zobraziť, alebo si v Nastaveniach nainštalujte nový.";
 
 // Settings
 
@@ -677,17 +676,17 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.actionAfterLaunch.items.1" = "Zobraziť panel na otvorenie súboru";
 "settings.actionAfterLaunch.items.2" = "Nič nerobiť";
 "settings.actionAfterLaunch.label" = "Pri spustení";
-"settings.allowDuplicatePlayers.label" = "Allow opening the same file in multiple windows";
+"settings.allowDuplicatePlayers.label" = "Povoliť otvorenie toho istého súboru vo viacerých oknách";
 "settings.allowScreenSaverForAudio.desc" = "Stále zabraňuje systému v spánku.";
 "settings.allowScreenSaverForAudio.label" = "Nie počas „režimu hudby“ alebo pri prehrávaní zvukového súboru";
 "settings.alwaysOpenInNewWindow.label" = "Vždy otvoriť súbor v novom okne";
-"settings.autoRepeat.label" = "Loop when a file is opened manually";
+"settings.autoRepeat.label" = "Opakovať prehrávanie pri ručnom otvorení súboru";
 "settings.autoSwitchToMusicMode.label" = "Prepnúť do \"Režim pre Hudbu\" automaticky pri otvorení zvukového súboru";
 "settings.blackOutMonitor.label" = "Zčernať ostatné monitory pri prehrávaní na celej obrazovke";
 "settings.defaultRepeatMode.items.0" = "Opakovať playlist";
 "settings.defaultRepeatMode.items.1" = "Opakovať jeden súbor";
 "settings.fullScreenWhenOpen.label" = "Zobraziť na celej obrazovke";
-"settings.groupSimultaneousOpensInPlaylist.label" = "Group media in playlist when opening multiple files at once";
+"settings.groupSimultaneousOpensInPlaylist.label" = "Pri otvorení viacerých súborov naraz ich zoskupiť v zozname prehrávania";
 "settings.keepOpenOnFileEnd.label" = "Ponechať okno otvorené po skončení prehrávania";
 "settings.pauseWhenGoesToSleep.label" = "Pozastaviť ak sa počítač uspí";
 "settings.pauseWhenInactive.label" = "Okno je neaktívne/aktívne";
@@ -720,9 +719,9 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "Pri prehrávaní HDR videí povoliť ako predvolený režim HDR.";
-"settings.enableHdrSupport.label" = "Enable HDR mode";
-"settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
-"settings.enableLiveText.label" = "Live Text";
+"settings.enableHdrSupport.label" = "Zapnúť režim HDR";
+"settings.enableLiveText.desc" = "Pri pozastavenom videu zobraziť vrstvu Živého textu na rozpoznávanie textu. Vyžaduje macOS 13 alebo novší.";
+"settings.enableLiveText.label" = "Živý text";
 "settings.enableToneMapping.label" = "Povoliť mapovanie tonality";
 "settings.forceDedicatedGPU.desc" = "Vždy použiť samostatný grafický procesor na vykresľovanie (ak existuje). Toto umožňuje zvýšiť výkon, ale môže skrátiť výdrž batérie.";
 "settings.forceDedicatedGPU.label" = "Vynútiť dedikovanú GPU";
@@ -736,27 +735,27 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.loadIccProfile.desc" = "Načítať ICC profil pre aktuálny displej a použiť ho na transformáciu RGB videa na výstup obrazovky. (Len pre režim SDR)";
 "settings.loadIccProfile.label" = "Načítať ICC profil";
 "settings.toneMappingAlgorithm.label" = "Algoritmus";
-"settings.toneMappingAlgorithm.desc" = "Algorithm to use for tone-mapping images onto the target display.";
-"settings.toneMappingParamOverride.desc" = "Parameter for tuning the tone mapping algorithm. By default this is set to an algorithm-specific default value. Enable this setting to override that default.";
-"settings.toneMappingParamOverride.label" = "Tuning parameter";
-"settings.toneMappingTargetPeak.desc" = "Measured peak brightness of the display. By default IINA detects this value. If detection fails, target peak will be set to an appropriate value based on the transfer characteristics of the display. Enable this setting to manually specify the display's brightness.";
+"settings.toneMappingAlgorithm.desc" = "Algoritmus na mapovanie tónov obrazu pre cieľový displej.";
+"settings.toneMappingParamOverride.desc" = "Parameter na doladenie algoritmu mapovania tónov. Predvolená hodnota závisí od algoritmu. Zapnutím tejto možnosti ju môžete zmeniť.";
+"settings.toneMappingParamOverride.label" = "Parameter doladenia";
+"settings.toneMappingTargetPeak.desc" = "Nameraný maximálny jas displeja. IINA túto hodnotu predvolene zisťuje automaticky. Ak sa to nepodarí, použije hodnotu zodpovedajúcu prenosovej charakteristike displeja. Zapnutím tejto možnosti môžete jas displeja zadať ručne.";
 "settings.toneMappingTargetPeak.label" = "Cieľová špička";
 "settings.videoThreads.desc" = "Predvolené: 0 (Automaticky)";
 "settings.videoThreads.label" = "Počet threadov";
 
 // Settings - Audio
-"settings.audioDriverEnableAVFoundation.items.0.desc" = "The default audio driver.";
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "Predvolený ovládač zvuku.";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation je nový, experimentálny audio ovládač, ktorý ponúka podporu priestorového zvuku. Pri používaní AVFoundation sa však môžete stretnúť s niektorými problémami, napríklad s oneskorením zvuku.";
 "settings.audioDriverEnableAVFoundation.label" = "Ovladač zvuku";
 "settings.enableInitialVolume.label" = "Počiatočná hlasitosť";
-"settings.gaplessAudio.desc" = "Gapless audio";
+"settings.gaplessAudio.desc" = "Zvuk bez medzier";
 "settings.gaplessAudio.items.0" = "Vypnuté";
-"settings.gaplessAudio.items.0.desc" = "Playback of consecutive audio files may result in silence or disruption at the point of file change.";
-"settings.gaplessAudio.items.1" = "Weak";
-"settings.gaplessAudio.items.1.desc" = "If the audio format the decoder output changes, the audio device is closed and reopened, disrupting gapless playback.";
-"settings.gaplessAudio.items.2" = "Strong";
-"settings.gaplessAudio.items.2.desc" = "The audio device is opened using parameters chosen for the first file played and is then kept open for gapless playback. Following files may be resampled.";
-"settings.gaplessAudio.label" = "Gapless audio";
+"settings.gaplessAudio.items.0.desc" = "Pri prehrávaní zvukových súborov za sebou môže pri prechode na ďalší súbor nastať krátke ticho alebo výpadok.";
+"settings.gaplessAudio.items.1" = "Slabé";
+"settings.gaplessAudio.items.1.desc" = "Ak sa zmení výstupný formát zvuku z dekodéra, zvukové zariadenie sa zatvorí a znova otvorí, čím sa naruší prehrávanie bez medzier.";
+"settings.gaplessAudio.items.2" = "Silné";
+"settings.gaplessAudio.items.2.desc" = "Zvukové zariadenie sa otvorí s parametrami podľa prvého prehrávaného súboru a zostane otvorené, aby prehrávanie pokračovalo bez medzier. Vzorkovacia frekvencia nasledujúcich súborov sa môže upraviť.";
+"settings.gaplessAudio.label" = "Zvuk bez medzier";
 "settings.maxVolume.desc" = "(100 - 1000)";
 "settings.maxVolume.label" = "Maximálna hlasitosť";
 "settings.preferredAudioDevice.label" = "Preferované zariadenie pre zvuk";
@@ -778,7 +777,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.doubleClickAction.items.2" = "Pozastaviť / Spustiť";
 "settings.doubleClickAction.items.4" = "Prepnúť Picture-in-Picture";
 "settings.doubleClickAction.items.5" = "A-B slučka";
-"settings.doubleClickAction.items.6" = "Reset speed";
+"settings.doubleClickAction.items.6" = "Obnoviť rýchlosť";
 "settings.doubleClickAction.label" = "Dvojkliknutie";
 "settings.forceTouchAction.items.0" = "Prázdne";
 "settings.forceTouchAction.items.1" = "Zobraziť na celej obrazovke";
@@ -788,7 +787,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.horizontalScrollAction.items.0" = "Upraviť hlasitosť";
 "settings.horizontalScrollAction.items.1" = "Posuvník";
 "settings.horizontalScrollAction.items.2" = "Prázdne";
-"settings.horizontalScrollAction.items.4" = "Adjust playback speed";
+"settings.horizontalScrollAction.items.4" = "Upraviť rýchlosť prehrávania";
 "settings.horizontalScrollAction.label" = "Horizontálne skrolovanie";
 "settings.middleClickAction.items.0" = "Prázdne";
 "settings.middleClickAction.items.1" = "Zobraziť na celej obrazovke";
@@ -796,13 +795,13 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.middleClickAction.items.3" = "Skryť OSC";
 "settings.middleClickAction.items.4" = "Zapnúť/vypnúť Picture-in-Picture";
 "settings.middleClickAction.items.5" = "A-B slučka";
-"settings.middleClickAction.items.6" = "Reset speed";
+"settings.middleClickAction.items.6" = "Obnoviť rýchlosť";
 "settings.middleClickAction.label" = "Kliknutie prostredným tlačidlom";
 "settings.pinchAction.items.0" = "Upraviť veľkosť okna";
 "settings.pinchAction.items.1" = "Zobraziť na celej obrazovke";
 "settings.pinchAction.items.2" = "Prázdne";
 "settings.pinchAction.label" = "Rozovretím prstov";
-"settings.playbackSpeedScrollAmount.label" = "Sensitivity for speed";
+"settings.playbackSpeedScrollAmount.label" = "Citlivosť zmeny rýchlosti";
 "settings.relativeSeekAmount.label" = "Citlivosť normálneho posúvania";
 "settings.rightClickAction.desc" = "Kliknutie prostredným tlačidlom";
 "settings.rightClickAction.items.0" = "Prázdne";
@@ -810,7 +809,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.rightClickAction.items.3" = "Skryť OSC";
 "settings.rightClickAction.items.4" = "Prepnúť Picture-in-Picture";
 "settings.rightClickAction.items.5" = "A-B slučka";
-"settings.rightClickAction.items.6" = "Reset speed";
+"settings.rightClickAction.items.6" = "Obnoviť rýchlosť";
 "settings.rightClickAction.label" = "Pravé kliknutie";
 "settings.singleClickAction.items.0" = "Prázdne";
 "settings.singleClickAction.items.2" = "Pozastaviť / Spustiť";
@@ -824,7 +823,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.verticalScrollAction.items.0" = "Upraviť hlasitosť";
 "settings.verticalScrollAction.items.1" = "Posúvať";
 "settings.verticalScrollAction.items.2" = "Prázdne";
-"settings.verticalScrollAction.items.4" = "Adjust playback speed";
+"settings.verticalScrollAction.items.4" = "Upraviť rýchlosť prehrávania";
 "settings.verticalScrollAction.label" = "Vertikálne skrolovanie";
 "settings.videoViewAcceptsFirstMouse.desc" = "Myš";
 "settings.videoViewAcceptsFirstMouse.label" = "Prijať prvý klik myšou, ak aplikácie nie je aktívna";
@@ -835,30 +834,32 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.useMediaKeys.label" = "Používať systémové multimediálne klávesy";
 
 // Settings - Network
-"settings.cachePauseWait.desc" = "Number of seconds the cache should have buffered before starting playback again if buffering mode was entered. Increase this setting if playback quickly reenters buffering mode.\n\nDefault: 1";
-"settings.cachePauseWait.label" = "Seconds to buffer before restarting";
-"settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
-"settings.cachePauseInitial.label" = "Buffer before starting playback";
-"settings.defaultCacheSize.desc" = "Default: 153,600";
-"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
-"settings.enableCache.label" = "Prefetch and buffer network data";
+"settings.cachePauseWait.desc" = "Počet sekúnd, ktoré sa majú načítať do vyrovnávacej pamäte pred obnovením prehrávania. Ak sa prehrávanie krátko po obnovení opäť preruší kvôli načítavaniu, zvýšte túto hodnotu.
+
+Predvolené: 1";
+"settings.cachePauseWait.label" = "Počet sekúnd na načítanie pred obnovením";
+"settings.cachePauseInitial.desc" = "Pred spustením prehrávania načítať údaje do vyrovnávacej pamäte. Prehrávanie sa tak môže začať plynulejšie, no najprv treba počkať na načítanie údajov zo siete.";
+"settings.cachePauseInitial.label" = "Načítať údaje pred spustením prehrávania";
+"settings.defaultCacheSize.desc" = "Predvolené: 153 600";
+"settings.defaultCacheSize.label" = "Veľkosť vyrovnávacej pamäte (KiB)";
+"settings.enableCache.label" = "Načítať sieťové údaje vopred do vyrovnávacej pamäte";
 "settings.httpProxy.desc" = "Vyžaduje sa reštart IINA pre správne fungovanie.";
-"settings.httpProxy.label" = "HTTP proxy";
-"settings.secPrefech.desc" = "Default: 36,000";
+"settings.httpProxy.label" = "Proxy server HTTP";
+"settings.secPrefech.desc" = "Predvolené: 36 000";
 "settings.secPrefech.label" = "Sekundy na predbežné načítanie";
-"settings.showBufferingThrobber.label" = "Show throbber when buffering";
-"settings.showSeekingThrobber.label" = "Show throbber when seeking";
+"settings.showBufferingThrobber.label" = "Zobraziť indikátor pri načítavaní do vyrovnávacej pamäte";
+"settings.showSeekingThrobber.label" = "Zobraziť indikátor pri preskakovaní v prehrávaní";
 "settings.transportRTSPThrough.items.0" = "Automaticky";
 "settings.transportRTSPThrough.label" = "Transportovať RTSP stream cez";
 "settings.userAgent.label" = "Používateľský agent";
-"settings.ytdlEnabled.label" = "Enable mpv's youtube-dl script";
-"settings.ytdlRawOptions.desc" = "Format <key>=<value>[,<key>=<value>[,…]]";
+"settings.ytdlEnabled.label" = "Povoliť skript youtube-dl v mpv";
+"settings.ytdlRawOptions.desc" = "Formát <key>=<value>[,<key>=<value>[,…]]";
 "settings.ytdlRawOptions.label" = "Pokročilé nastavenia";
 "settings.ytdlSearchPath.desc" = "IINA prehľadá youtube-dl v tomto adresári. Vyžaduje sa reštart.";
 "settings.ytdlSearchPath.label" = "Vlastná youtube-dl path";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "Ak je táto možnosť zapnutá, IINA automaticky vyhľadá titulky na internete iba pri videách dlhších ako 20 minút, ktoré nemajú načítané titulky.";
 "settings.autoSearchOnlineSub.label" = "Automaticky vyhľadať titulky na internete";
 "settings.displayInLetterBox.label" = "Zobraziť titulky v čiernych pruhoch pri prehrávaní na celej obrazovke";
 "settings.subAlignX.items.0" = "Vľavo";
@@ -876,11 +877,11 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.subAutoLoadSearchPath.desc" = "Adresáre sú oddelené dvojbodkou (:). Relatívne cesty a \"wildcards\" (*) sú povolené.";
 "settings.subAutoLoadSearchPath.label" = "Taktiež hľadať titulky v nasledujúcich adresároch";
 "settings.subBlur.label" = "Rozmazanie";
-"settings.subBold.desc" = "sans-serif";
-"settings.subBorderStyle.items.1" = "Outline and Shadow";
-"settings.subBorderStyle.items.3" = "Opaque Box";
-"settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBold.desc" = "bezpätkové písmo";
+"settings.subBorderStyle.items.1" = "Obrys a tieň";
+"settings.subBorderStyle.items.3" = "Nepriehľadné pole";
+"settings.subBorderStyle.items.4" = "Pole na pozadí";
+"settings.subBorderStyle.label" = "Štýl okraja";
 "settings.subBold.label" = "Tučné";
 "settings.subItalic.label" = "Kurzíva";
 "settings.subLang.desc" = "Nastavenie bude uložené ako ISO 639-2 jazokový kód a bude fungovať s mpv a opensubtitles.";
@@ -899,14 +900,14 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.subSpacing.label" = "Rozmiestnenie písma";
 
 // Settings - UI
-"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
+"settings.more_ui_settings" = "Ďalšie nastavenia používateľského rozhrania nájdete na postrannom paneli Rozloženie.";
 "settings.alwaysFloatOnTop.label" = "Vždy zobraziť na vrchu počas prehrávania";
 "settings.alwaysShowOnTopIcon.label" = "Vždy zobrazovať plávajúci stav navrchu v záhlaví";
 "settings.arrowBtnAction.items.0" = "Rýchlosť";
 "settings.arrowBtnAction.items.1" = "Predchádzajúci / Ďalší Súbor";
 "settings.arrowBtnAction.items.2" = "Dopredu / Dozadu";
 "settings.arrowBtnAction.label" = "Použiť ľavé/pravé tlačítko na";
-"settings.controlBarAutoHideTimeout.label" = "Auto hide after";
+"settings.controlBarAutoHideTimeout.label" = "Automaticky skryť po";
 "settings.controlBarStickToCenter.label" = "Prichytiť do stredu pri ťahaní";
 "settings.disableAnimations.desc" = "Ak je funkcia obmedzenia pohybu povolená v možnostiach prístupnosti systému macOS, IINA obmedzí pohyblivé prvky používateľského rozhrania, o ktorých je známe, že spôsobujú problémy ľuďom s vestibulárnymi poruchami. Ak by to nebolo dostačujúce, toto nastavenie bude možné použiť na ďalšie obmedzenie pohybu odstránením animácií používateľského rozhrania.";
 "settings.disableAnimations.label" = "Vypnúť animácie";
@@ -914,11 +915,11 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.disableOSDPauseResumeMsgs.label" = "Pozastaviť / Spustiť";
 "settings.disableOSDSeekMsg.label" = "Posunúť";
 "settings.disableOSDSpeedMsg.label" = "Rýchlosť";
-"settings.disablePlaySliderScrolling.label" = "Prevent scroll wheel from changing playback position";
-"settings.disableVolumeSliderScrolling.label" = "Prevent scroll wheel from changing volume";
+"settings.disablePlaySliderScrolling.label" = "Zakázať zmenu polohy prehrávania kolieskom myši";
+"settings.disableVolumeSliderScrolling.label" = "Zakázať zmenu hlasitosti kolieskom myši";
 "settings.displayTimeAndBatteryInFullScreen.label" = "Zobraziť čas a info o batérii počas prehrávania na celej obrazovke";
 "settings.enableOSD.label" = "Povoliť OSD";
-"settings.enableThumbnailForRemoteFiles.label" = "Include files on a mounted remote drive";
+"settings.enableThumbnailForRemoteFiles.label" = "Zahrnúť súbory z pripojeného vzdialeného disku";
 "settings.enableThumbnailPreview.label" = "Povoliť náhľady";
 "settings.maxThumbnailPreviewCacheSize.label" = "Maximálna veľkosť cache";
 "settings.oscPosition.items.0" = "Vznáša sa";
@@ -933,7 +934,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.resizeWindowOption.items.3" = "1.5x veľkosť videa";
 "settings.resizeWindowOption.items.4" = "2x veľkosť videa";
 "settings.resizeWindowOption.label" = "Zmeniť veľkosť okna na";
-"settings.scaleRemainingTime.label" = "Base remaining time on playback speed";
+"settings.scaleRemainingTime.label" = "Vypočítať zostávajúci čas podľa rýchlosti prehrávania";
 "settings.showChapterPos.label" = "Zobraziť pozíciu kapitol v posuvníku";
 "settings.showRemainingTime.label" = "Zobraziť zostávajúci čas";
 "settings.themeMaterial.desc" = "Téma";
@@ -941,10 +942,10 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.themeMaterial.items.2" = "Svetlý";
 "settings.themeMaterial.items.4" = "Zrkadliť Systémový Vzhľad";
 "settings.themeMaterial.label" = "Vzhľad";
-"settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
-"settings.thumbnailWidth.label" = "Thumbnail width";
+"settings.thumbnailWidth.desc" = "Zmena šírky vymaže miniatúry z vyrovnávacej pamäte a znova ich vytvorí vo vybratej veľkosti.";
+"settings.thumbnailWidth.label" = "Šírka miniatúr";
 "settings.togglePipByMinimizingWindow.label" = "Zapnúť/vypnúť Picture-in-Picture zmenšením/zväčšením okna";
-"settings.togglePipByMinimizingWindowForVideoOnly.label" = "Only for video files";
+"settings.togglePipByMinimizingWindowForVideoOnly.label" = "Iba pre videosúbory";
 "settings.usePhysicalResolution.label" = "Použiť skutočné rozlíšenie na Retina displejoch";
 "settings.windowBehaviorWhenPip.items.0" = "Nerobiť nič";
 "settings.windowBehaviorWhenPip.items.1" = "Skryť";
@@ -955,7 +956,7 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.enableAdvancedSettings.desc" = "Nasledujúce nastavenia vyžadujú reštartovať IINA.";
 "settings.enableAdvancedSettings.label" = "Povoliť pokročilé nastavenia";
 "settings.enableLogging.label" = "Povoliť logovanie";
-"settings.logLevel.desc" = "View logs by choosing Window - Log Viewer from the menu.";
+"settings.logLevel.desc" = "Záznamy zobrazíte výberom položky Okno – Zobrazovač záznamov v ponuke.";
 "settings.logLevel.items.0" = "Podrobný";
 "settings.logLevel.items.1" = "Ladenie";
 "settings.logLevel.items.2" = "Upozornenie";
@@ -969,18 +970,18 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.$About" = "O aplikácii IINA";
 "settings.$Accessibility" = "Dostupnosť";
 "settings.$AdditionalMpvOptions" = "Ďalšie mpv nastavenia";
-"settings.$AdditionalMpvOptions.desc" = "Paste an option in the key=value format to fill in both fields automatically.";
+"settings.$AdditionalMpvOptions.desc" = "Vložte voľbu vo formáte key=value a obe polia sa vyplnia automaticky.";
 "settings.$Advanced" = "Pokročilé";
 "settings.$Align" = "Zarovnať";
-"settings.$AlwaysWhenPlaying" = "Always when playing a new file";
+"settings.$AlwaysWhenPlaying" = "Pri každom prehratí nového súboru";
 "settings.$Appearance" = "Vzhľad";
-"settings.$AssrtAPIToken" = "Assrt API token";
+"settings.$AssrtAPIToken" = "Token rozhrania Assrt API";
 "settings.$Author" = "Autor";
 "settings.$AutoLoad" = "Automaticky nahrať";
 "settings.$Background" = "Pozadie";
 "settings.$Behavior" = "Prispôsobenie";
 "settings.$Border" = "Okraj";
-"settings.$BrowserExtensions" = "Browser Extensions";
+"settings.$BrowserExtensions" = "Rozšírenia prehliadača";
 "settings.$Cache" = "Vyrovnávacia pamäť";
 "settings.$Cancel" = "Zrušiť";
 "settings.$CheckForUpdates" = "Kontrolovať aktualizácie";
@@ -994,23 +995,23 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.$ClearSavedPlaybackProgress" = "Vymazať uložené priebehy prehrávania";
 "settings.$ClearThumbnailCache" = "Vyčistiť vyrovnávaciu pamäť s náhľadmi";
 "settings.$Color" = "Farba";
-"settings.$ColorHDR" = "Color and HDR";
-"settings.$CommunityPlugins" = "Community Plugins";
-"settings.$CreateAnEmptySet" = "Create an empty set…";
+"settings.$ColorHDR" = "Farby a HDR";
+"settings.$CommunityPlugins" = "Komunitné doplnky";
+"settings.$CreateAnEmptySet" = "Vytvoriť prázdnu sadu…";
 "settings.$Customize" = "Upraviť…";
-"settings.$Decoding" = "Decoding";
+"settings.$Decoding" = "Dekódovanie";
 "settings.$DefaultApplication" = "Predvolená Aplikácia";
 "settings.$DefaultEncoding" = "Predvolené kódovanie";
-"settings.$DeleteAllPlaybackHistories" = "Delete all playback histories and entries in \"Open Recent\".";
-"settings.$DeleteAllWatchLater" = "Delete all files in the \"watch later\" folder. These files contain all saved playback progress and settings applied during playback.";
-"settings.$DoNotResize" = "Do not resize";
-"settings.$DuplicateCurrentSet" = "Duplicate current set…";
+"settings.$DeleteAllPlaybackHistories" = "Vymazať celú históriu prehrávania a všetky položky v ponuke „Otvoriť posledné“.";
+"settings.$DeleteAllWatchLater" = "Vymazať všetky súbory v priečinku „watch later“. Tieto súbory obsahujú uložené pozície prehrávania a nastavenia použité počas prehrávania.";
+"settings.$DoNotResize" = "Nemeniť veľkosť";
+"settings.$DuplicateCurrentSet" = "Duplikovať aktuálnu sadu…";
 "settings.$FailedToLoadThePage" = "Stránku sa nepodarilo načítať.";
 "settings.$Firefox" = "Firefox";
 "settings.$Font" = "Font";
 "settings.$GetBrowserExtensionsForIINA" = "Získať IINA rozšírenie pre internetové prehliadače";
-"settings.$GetPlugins" = "Get Plugins…";
-"settings.$Hardware" = "Hardware";
+"settings.$GetPlugins" = "Získať doplnky…";
+"settings.$Hardware" = "Hardvér";
 "settings.$Height" = "Výška";
 "settings.$Help" = "Pomoc";
 "settings.$History" = "História";
@@ -1018,64 +1019,66 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.$ImportAnExistingConfigFile" = "Importovať existujúci configuračný súbor";
 "settings.$InitialWindowPosition" = "Počiatočná pozícia okna";
 "settings.$InitialWindowSize" = "Počiatočná veľkosť okna";
-"settings.$InputGithubURL" = "Input a Github URL";
+"settings.$InputGithubURL" = "Zadajte adresu URL z GitHubu";
 "settings.$Install" = "Inštalovať";
-"settings.$InstallLocalPackage" = "Install Local Package…";
+"settings.$InstallLocalPackage" = "Nainštalovať miestny balík…";
 "settings.$Installed" = "Nainštalované";
-"settings.$Installing" = "Installing";
-"settings.$KeyBindingSet" = "Key binding set";
+"settings.$Installing" = "Inštaluje sa";
+"settings.$KeyBindingSet" = "Sada klávesových skratiek";
 "settings.$Layout" = "Rozloženie";
-"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
-"settings.$LiveText" = "Live Text";
-"settings.$Logging" = "Logging";
+"settings.$LegacyOpenSubAlert" = "⚠️ Pôvodná podpora služby OpenSubtitles sa už neodporúča. Použite doplnok OpenSubtitles. Ak sa potrebujete prihlásiť, použite pôvodné okno Nastavenia.";
+"settings.$LiveText" = "Živý text";
+"settings.$Logging" = "Záznamy";
 "settings.$Login" = "Prihlásenie";
 "settings.$MB" = "MB";
-"settings.$MPVSettings" = "mpv Settings";
+"settings.$MPVSettings" = "Nastavenia mpv";
 "settings.$Margin" = "Okraje";
 "settings.$Mouse" = "Myš";
 "settings.$Network" = "Sieť";
-"settings.$NewKeyBindingSet" = "New key binding set";
-"settings.$NoSelection" = "No Selection";
+"settings.$NewKeyBindingSet" = "Nová sada klávesových skratiek";
+"settings.$NoSelection" = "Žiadny výber";
 "settings.$NotLoggedIn" = "Neprihlásený";
 "settings.$OK" = "OK";
-"settings.$OfficialPlugins" = "Official Plugins";
+"settings.$OfficialPlugins" = "Oficiálne doplnky";
 "settings.$Offset" = "Posun";
 "settings.$OnScreenController" = "Ovládač";
 "settings.$OnScreenDisplay" = "Oznam";
 "settings.$OnlineSubtitles" = "Titulky na internete";
 "settings.$OpenLinksOrCurrentWebpage" = "Otvor odkazy v IINA s jedným kliknutím. Webstránka musí byť podporovaná youtube-dl.";
 "settings.$OpenLogDirectory" = "Otvoriť Log adresár";
-"settings.$OpenLogWindow" = "Open the log viewer";
-"settings.$OrSelectFrom" = "Or select from available plugins";
-"settings.$Other" = "Other";
+"settings.$OpenLogWindow" = "Otvoriť zobrazovač záznamov";
+"settings.$OrSelectFrom" = "Alebo vyberte z dostupných doplnkov";
+"settings.$Other" = "Ostatné";
 "settings.$OtherStyles" = "Box";
 "settings.$OverrideLevel" = "Úroveň prepísania";
 "settings.$Percent" = "%";
-"settings.$PictureinnPicture" = "Picture-in-Picture";
+"settings.$PictureinnPicture" = "Obraz v obraze";
 "settings.$Playlist" = "Zoznam";
 "settings.$PleaseSelectTheMediaTypes" = "Prosím, označte typy médií, pre ktoré chcete nastaviť IINA ako predvolenú aplikáciu.";
 "settings.$Position" = "Pozícia";
 "settings.$PreferredLanguage" = "Preferovaný jazyk";
 "settings.$RestoreAlerts" = "Obnoviť varovania";
-"settings.$RestoreAllAlertsThat" = "Restore all alerts that have been suppressed using the \"Do not show this message again\" checkbox.";
+"settings.$RestoreAllAlertsThat" = "Obnoviť všetky upozornenia skryté začiarknutím políčka „Túto správu už nezobrazovať“.";
 "settings.$RestoreSuppressedAlerts" = "Obnoviť potlačené upozornenia";
 "settings.$SPDIFOutput" = "S/PDIF výstup";
-"settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
+"settings.$SPDIFOutputWarning" = "Zoznam kodekov, pri ktorých sa má komprimovaný zvuk prenášať priamo do výstupného zariadenia.
+
+Upozornenie: Túto možnosť spravidla netreba zapínať. HDMI podporuje nekomprimovaný viackanálový zvuk PCM a dekodér DCA z FFmpeg umožňuje bezstratové dekódovanie DTS-HD. Ak je táto možnosť zapnutá a výstupné zariadenie nepodporuje S/PDIF, prehrávanie sa nemusí spustiť.";
 "settings.$Safari" = "Safari";
 "settings.$Screenshots" = "Screenshoty";
-"settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
+"settings.$SetIINAAsTheDefault" = "Nastaviť IINA ako predvolenú aplikáciu";
 "settings.$Settings" = "Nastavenia";
 "settings.$Shadow" = "Tieň";
 "settings.$ShowInFinder" = "Zobraziť vo Finderi";
 "settings.$ShowTheConfigFileIn" = "Zobraziť konfiguračný súbor vo Finderi";
 "settings.$Size" = "Veľkosť";
 "settings.$Source" = "Zdroj";
-"settings.$SubtitleSource" = "Subtitle source";
-"settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
-"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
+"settings.$SubtitleSource" = "Zdroj titulkov";
+"settings.$SubtitleSource.desc" = "Toto je predvolený zdroj na vyhľadávanie titulkov. Počas prehrávania môžete v ponuke ručne vybrať iný zdroj.";
+"settings.$SubtitleSourcePluginDesc" = "Tento zdroj poskytuje doplnok. Nastaviť ho môžete na stránke nastavení doplnku.";
 "settings.$SuppressMessagesFor" = "Potláčať správy pre";
 "settings.$TextSubtitles" = "Titulky";
-"settings.$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
+"settings.$ThisPluginIsNot" = "Tento doplnok nie je dostupný na GitHube. Stiahnite si ho z jeho webovej stránky.";
 "settings.$ThumbnailPreview" = "Náhľad";
 "settings.$Toolbar" = "Panel nástrojov";
 "settings.$Trackpad" = "Trackpad";
@@ -1091,14 +1094,14 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.$XOffset" = "Posun X";
 "settings.$Y" = "Y";
 "settings.$YOffset" = "Posun Y";
-"settings.$YTDL" = "Online Videos (yt-dlp)";
+"settings.$YTDL" = "Videá na internete (yt-dlp)";
 "settings.$YouCanInstallANew" = "Nový plug-in môžte nainštalovať z GitHub alebo miestneho .iinaplgz balíčku. Plug-iny nainštalované z GitHub sa dajú aktualizovať automaticky.";
 "settings.$bottom" = "dole";
 "settings.$dB" = "dB";
 "settings.$left" = "vľavo";
 "settings.$nits" = "nits";
 "settings.$ofScreen" = "% obrazovky";
-"settings.$onlineMediaPluginAdvice" = "The Online Media plugin is recommended";
+"settings.$onlineMediaPluginAdvice" = "Odporúčame doplnok Online Media";
 "settings.$point" = "bodov";
 "settings.$pt" = "b";
 "settings.$right" = "vpravo";
@@ -1106,4 +1109,4 @@ Nočné zostavy sa neodporúčajú používať ako denný ovládač. V súčasno
 "settings.$sideOfTheScreen" = "kraj obrazovky";
 "settings.$toThe" = "do";
 "settings.$top" = "hore";
-"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
+"settings.$ytdlWarning" = "Doplnok Online Media umožňuje aj meniť kvalitu a sťahovať videá. Ak je doplnok nainštalovaný a zapnutý, IINA ho použije. Nastavenia nižšie fungujú iba vtedy, keď doplnok nie je dostupný.";

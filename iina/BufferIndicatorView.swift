@@ -47,12 +47,22 @@ class BufferIndicatorView: TranslucentView {
     fatalError("init(coder:) has not been implemented")
   }
 
+  // A spinner that keeps animating in a hidden Liquid Glass view drops video to 30 fps in native full screen.
+  override func viewDidHide() {
+    super.viewDidHide()
+    progressIndicator.stopAnimation(nil)
+  }
+
+  override func viewDidUnhide() {
+    super.viewDidUnhide()
+    progressIndicator.startAnimation(nil)
+  }
+
   func update() {
     guard mainWindow.loaded else { return }
 
     if player.info.isNetworkResource {
       isHidden = false
-      progressIndicator.startAnimation(nil)
       progressLabel.stringValue = NSLocalizedString("main.opening_stream", comment:"Opening stream…")
       detailLabel.isHidden = true
     } else {

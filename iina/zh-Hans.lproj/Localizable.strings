@@ -26,7 +26,7 @@
 "about.title" = "关于";
 "about.license" = "许可证";
 "about.contributors" = "贡献者";
-"about.credits" = "致谢";
+"about.credits" = "第三方库开源许可";
 "about.crowdin" = "IINA 的本地化由 Crowdin 提供支持。";
 
 // Guide Window
@@ -183,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "二级字幕延迟：提前 %@ 秒";
 "osd.sub_second_hidden" = "隐藏二级字幕";
 "osd.sub_second_pos" = "二级字幕位置：%@";
+"osd.sub_second_scale" = "次要字幕缩放： %@x";
 "osd.sub_second_visible" = "开启二级字幕";
 "osd.mute" = "静音";
 "osd.unmute" = "取消静音";
@@ -426,8 +427,6 @@
 "alert.plugin_update_found.message" = "最新版本是 %@。您有 %@。您想要更新吗？";
 "alert.plugin_permission" = "此插件需要以下权限，请在继续之前检查。";
 "alert.plugin_permission_added" = "此次更新需要额外给予以下权限，请在继续之前检视。";
-"alert.install_plugin_macos_11.title" = "从GitHub安装插件";
-"alert.install_plugin_macos_11.message" = "请使用 user/repo 格式，或输入完整的 GitHub 网址。macOS 11 不支持插件商店。建议使用更新版本的系统以获得最佳体验。";
 
 "playlist.total_length" = "总计 %@";
 "playlist.total_length_with_selected" = "选中 %@ / %@";

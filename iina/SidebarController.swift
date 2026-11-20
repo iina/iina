@@ -37,6 +37,7 @@ class SidebarController: NSObject {
     let view: SideBarContainer
     var widthConstraint: NSLayoutConstraint!
     var edgeConstraint: NSLayoutConstraint!
+    var videoWidthConstraint: NSLayoutConstraint?
     var status: ViewType = .hidden
     var animationState: MainWindowController.UIAnimationState = .hidden {
       didSet {
@@ -253,6 +254,47 @@ class SidebarController: NSObject {
     return window.frame.width * 0.8
   }
 
+  // MARK: - Window resizing
+
+  private var shouldResizeWindowForSidebar: Bool {
+    !Preference.bool(for: .edgeToEdgeVideo)
+  }
+
+  private func beginWindowResize(for panel: Panel) {
+    guard panel.videoWidthConstraint == nil else { return }
+    let container = mainWindow.videoViewContainer!
+    panel.edgeConstraint.isActive = false
+    panel.videoWidthConstraint = container.widthAnchor.constraint(equalToConstant: container.frame.width)
+    panel.videoWidthConstraint!.isActive = true
+  }
+
+  private func endWindowResize(for panel: Panel, edgeConstant: CGFloat) {
+    guard let constraint = panel.videoWidthConstraint else { return }
+    constraint.isActive = false
+    panel.videoWidthConstraint = nil
+    panel.edgeConstraint.constant = edgeConstant
+    panel.edgeConstraint.isActive = true
+  }
+
+  private func resizeWindow(for panel: Panel, by delta: CGFloat) -> NSRect? {
+    guard shouldResizeWindowForSidebar, let window = mainWindow.window else { return nil }
+    let fromLeft = visuallyOnLeft(panel.side)
+    guard mainWindow.fsState == .windowed else {
+      if let prior = mainWindow.fsState.priorWindowedFrame {
+        mainWindow.fsState.priorWindowedFrame = prior.horizontallyResized(by: delta, fromLeft: fromLeft)
+      }
+      return nil
+    }
+    var newFrame = window.frame.horizontallyResized(by: delta, fromLeft: fromLeft)
+    if delta > 0 {
+      let screenFrame = (window.screen ?? NSScreen.main!).visibleFrame
+      // too wide for the screen; fall back to laying out the sidebar inside the window
+      guard newFrame.width <= screenFrame.width else { return nil }
+      newFrame.origin.x = newFrame.origin.x.clamped(to: screenFrame.minX...(screenFrame.maxX - newFrame.width))
+    }
+    return newFrame
+  }
+
   // MARK: - Show
 
   /// macOS reduce-motion is honored by fading; the IINA "Disable animations" pref short-circuits
@@ -300,9 +342,17 @@ class SidebarController: NSObject {
 
     panel.animationState = .willShow
     panel.widthConstraint.constant = width
+    let windowFrame = resizeWindow(for: panel, by: width)
     // Position the sidebar before animation: fade-in starts at the visible position with
     // `isHidden=true`; slide-in starts off-screen with `isHidden=false`.
-    if useFadeForSidebar {
+    // When the window grows, the sidebar starts off-screen and is revealed by the moving window edge.
+    if windowFrame != nil {
+      panel.edgeConstraint.constant = -width
+      beginWindowResize(for: panel)
+      if !useFadeForSidebar {
+        panel.view.isHidden = false
+      }
+    } else if useFadeForSidebar {
       panel.edgeConstraint.constant = 0
     } else {
       panel.edgeConstraint.constant = -width
@@ -316,9 +366,12 @@ class SidebarController: NSObject {
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration)
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
+      if let windowFrame {
+        mainWindow.window?.animator().setFrame(windowFrame, display: true)
+      }
       if useFadeForSidebar {
         panel.view.animator().isHidden = false
-      } else {
+      } else if windowFrame == nil {
         panel.edgeConstraint.animator().constant = margin
       }
       setTitlebarConstraint(
@@ -327,6 +380,9 @@ class SidebarController: NSObject {
         animated: !useFadeForSidebar
       )
     }) {
+      if windowFrame != nil && panel.animationState == .willShow {
+        self.endWindowResize(for: panel, edgeConstant: margin)
+      }
       panel.animationState = .shown
       self.mainWindow.window?.resetCursorRects()
       self.mainWindow.setWindowToolbar()
@@ -347,19 +403,27 @@ class SidebarController: NSObject {
     panel.status = .hidden
     panel.animationState = .willHide
     mainWindow.setWindowToolbar()
+    let windowFrame = resizeWindow(for: panel, by: -currWidth)
+    if windowFrame != nil {
+      beginWindowResize(for: panel)
+    }
 
     NSAnimationContext.runAnimationGroup({ context in
       context.duration = animate ? AccessibilityPreferences.adjustedDuration(SideBarAnimationDuration) : 0
       context.timingFunction = CAMediaTimingFunction(name: .easeIn)
+      if let windowFrame {
+        mainWindow.window?.animator().setFrame(windowFrame, display: true)
+      }
       if useFadeForSidebar {
         panel.view.animator().alphaValue = 0
-      } else {
+      } else if windowFrame == nil {
         panel.edgeConstraint.animator().constant = -currWidth
       }
       setTitlebarConstraint(for: panel.side, 0, animated: !useFadeForSidebar)
     }) {
       // A new show may have started during the hide animation; only finalize if we still mean to hide.
       guard panel.animationState == .willHide else { return }
+      self.endWindowResize(for: panel, edgeConstant: -currWidth)
       panel.view.subviews.removeAll()
       panel.view.isHidden = true
       // When fading, the view stays in its visible position during the animation. Push it

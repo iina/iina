@@ -254,7 +254,7 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
     }
 
     NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.willSleepNotification, object: nil, queue: nil) { [unowned self] _ in
-      if Preference.bool(for: .pauseWhenGoesToSleep) {
+      if Preference.bool(for: .pauseWhenGoesToSleep), self.player.sharePlayPlayback == nil {
         self.player.pause()
       }
     }

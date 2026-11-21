@@ -51,6 +51,7 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
   var volumeControlBackground: NSVisualEffectView!
   var volumeContainerTrailingConstraint: NSLayoutConstraint!
   var defaultAlbumArt: NSView!
+  var mediaLoadingView: MediaLoadingView!
   var togglePlaylistButton: NSButton!
   var toggleAlbumArtButton: NSButton!
 
@@ -123,6 +124,15 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     videoWrapperShrinkConstraint.priority = NSLayoutConstraint.Priority(250)
     videoWrapperShrinkConstraint.isActive = true
     defaultAlbumArt.widthAnchor.constraint(equalTo: defaultAlbumArt.heightAnchor).isActive = true
+
+    self.mediaLoadingView = MediaLoadingView(style: .compact)
+    videoWrapperView.addSubview(mediaLoadingView)
+    NSLayoutConstraint.activate([
+      mediaLoadingView.leadingAnchor.constraint(equalTo: videoWrapperView.leadingAnchor),
+      mediaLoadingView.trailingAnchor.constraint(equalTo: videoWrapperView.trailingAnchor),
+      mediaLoadingView.topAnchor.constraint(equalTo: videoWrapperView.topAnchor),
+      mediaLoadingView.bottomAnchor.constraint(equalTo: videoWrapperView.bottomAnchor)
+    ])
 
     // background view
 
@@ -496,6 +506,21 @@ class MiniPlayerWindowController: PlayerWindowController, NSPopoverDelegate {
     }
     titleLabel.scroll()
     artistAlbumLabel.scroll()
+  }
+
+  override func showLoadingScreen(for url: URL?) {
+    guard let window else { return }
+    updateTitle()
+    mediaLoadingView?.show()
+    if !window.isVisible {
+      showWindow(self)
+    } else {
+      window.makeKeyAndOrderFront(self)
+    }
+  }
+
+  override func hideLoadingScreen() {
+    mediaLoadingView?.hide()
   }
 
   override func updateVolume() {

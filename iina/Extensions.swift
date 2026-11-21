@@ -269,6 +269,14 @@ extension NSRect {
                   height: newSize.height)
   }
 
+  /// Return the rect size after resizing; extend/shrink the left edge if `fromLeft` is true.
+  func horizontallyResized(by delta: CGFloat, fromLeft: Bool) -> NSRect {
+    return NSRect(x: fromLeft ? origin.x - delta : origin.x,
+                  y: origin.y,
+                  width: size.width + delta,
+                  height: size.height)
+  }
+
   // This function preserves the size of the new rect with the old rect
   func areaPreservingResized(newWidth width: CGFloat, height: CGFloat) -> NSRect {
     let targetAspectRatio = width / height

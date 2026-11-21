@@ -223,6 +223,8 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
 
     self.playSlider = PlaySlider()
     playSlider.translatesAutoresizingMaskIntoConstraints = false
+    // Keep the timeline left-to-right so RTL layouts don't seek to the mirrored position (#6504).
+    playSlider.userInterfaceLayoutDirection = .leftToRight
     playSlider.refusesFirstResponder = true
     playSlider.minValue = 0
     playSlider.maxValue = 100

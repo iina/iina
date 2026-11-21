@@ -12,14 +12,14 @@
 "crop" = "Ořez";
 "crop.w" = "Šířka (výchozí: šířka videa)";
 "crop.h" = "Výška (výchozí: výška videa)";
-"crop.x" = "Začátek X (výchozí: střed)";
-"crop.y" = "Začátek Y (výchozí: střed)";
+"crop.x" = "Počáteční X (výchozí: střed)";
+"crop.y" = "Počáteční Y (výchozí: střed)";
 
 "expand" = "Zvětšit";
 "expand.w" = "Šířka (výchozí: šířka videa)";
 "expand.h" = "Výška (výchozí: výška videa)";
-"expand.x" = "Začátek X (výchozí: střed)";
-"expand.y" = "Začátek Y (výchozí: střed)";
+"expand.x" = "Počáteční X (výchozí: střed)";
+"expand.y" = "Počáteční Y (výchozí: střed)";
 "expand.aspect" = "Zvětšit k poměru stran (např.: 4/3)";
 "expand.round" = "Zaokrouhlit, aby byla hodnota dělitelná";
 
@@ -34,8 +34,8 @@
 "delogo" = "Odebrat logo";
 "delogo.w" = "Šířka";
 "delogo.h" = "Výška";
-"delogo.x" = "Začátek X";
-"delogo.y" = "Začátek Y";
+"delogo.x" = "Počáteční X";
+"delogo.y" = "Počáteční Y";
 
 "negative" = "Negativ";
 

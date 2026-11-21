@@ -203,8 +203,6 @@ class MenuController: NSObject, NSMenuDelegate {
   @IBOutlet weak var inspector: NSMenuItem!
   @IBOutlet weak var miniPlayer: NSMenuItem!
   // Help
-  @IBOutlet weak var helpMenu: NSMenu!
-  @IBOutlet weak var useNewSettingsWindow: NSMenuItem!
   @IBOutlet weak var debugDump: NSMenuItem!
 
   /// If `true` then all menu items are disabled.
@@ -433,9 +431,6 @@ class MenuController: NSObject, NSMenuDelegate {
     miniPlayer.action = #selector(MainWindowController.menuSwitchToMiniPlayer(_:))
 
     // Help
-    
-    helpMenu.delegate = self
-    useNewSettingsWindow.action = #selector(AppDelegate.toggleNewSettings)
 
     debugDump.isAlternate = true
     debugDump.keyEquivalentModifierMask = .option
@@ -671,15 +666,13 @@ class MenuController: NSObject, NSMenuDelegate {
         }
       }
 
-      if #available(macOS 12.0, *) {
-        let devToolItem = NSMenuItem()
-        devToolItem.title = instance.plugin.name
+      let devToolItem = NSMenuItem()
+      devToolItem.title = instance.plugin.name
+      developerTool.submenu?.addItem(
+        menuItem(forPluginInstance: instance, tag: JavasctiptDevTool.JSMenuItemInstance))
+      if let globalInst = instance.plugin.globalInstance {
         developerTool.submenu?.addItem(
-          menuItem(forPluginInstance: instance, tag: JavasctiptDevTool.JSMenuItemInstance))
-        if let globalInst = instance.plugin.globalInstance {
-          developerTool.submenu?.addItem(
-            menuItem(forPluginInstance: globalInst, tag: JavasctiptDevTool.JSMenuItemInstance))
-        }
+          menuItem(forPluginInstance: globalInst, tag: JavasctiptDevTool.JSMenuItemInstance))
       }
     }
 
@@ -692,18 +685,10 @@ class MenuController: NSObject, NSMenuDelegate {
     }
 
     pluginMenu.addItem(.separator())
-    if #available(macOS 12.0, *) {
-      pluginMenu.addItem(developerTool)
-    }
+    pluginMenu.addItem(developerTool)
     pluginMenu.addItem(reloadPluginsItem)
 
   }
-  
-  
-  func updateHelpMenu() {
-    useNewSettingsWindow.state = Preference.enableNewSettings ? .on : .off
-  }
-  
 
   @discardableResult
   private func add(menuItemDef item: JavascriptPluginMenuItem,
@@ -846,8 +831,6 @@ class MenuController: NSObject, NSMenuDelegate {
     case pluginMenu:
       PlayerCore.active.events.emit(.menuUpdate)
       updatePluginMenu()
-    case helpMenu:
-      updateHelpMenu()
     default: break
     }
     // check conveniently bound menus

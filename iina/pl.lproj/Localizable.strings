@@ -9,8 +9,6 @@
 
 "general.on" = "Włączono";
 "general.off" = "Wyłączono";
-"general.login" = "Zaloguj się";
-"general.logout" = "Wyloguj";
 "general.ok" = "OK";
 "general.cancel" = "Anuluj";
 "general.done" = "Gotowe";
@@ -24,20 +22,94 @@
 "input.value_is_empty" = "Wartość nie może być pusta.";
 "input.already_exists" = "Wartość już istnieje.";
 
+// About Window
+"about.title" = "O aplikacji";
+"about.license" = "Licencja";
+"about.contributors" = "Współtwórcy";
+"about.credits" = "Podziękowania";
+"about.crowdin" = "Tłumaczenie IINA oparte jest o Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Najważniejsze";
 "guide.basic_settings" = "Ustawienia podstawowe";
 "guide.faq" = "Najczęściej zadawane pytania (FAQ)";
 
 // Initial Window
-"initial.announcement" = "Używasz wersji %@ IINA";
+"initial.announcement" = "Używasz wersji beta aplikacji IINA";
 "initial.beta.desc" = "Jeśli chcesz wrócić do wersji stabilnej, odznacz \"otrzymuj aktualizacje wersji beta\" w Ustawienia > Ogólne, i zainstaluj stabilne wydanie z naszej <a href=\"https://iina.io\">oficjalnej strony</a>.";
 "initial.nightly.desc" = "Wersja \"Nightly\" nie jest zalecana do codziennego użytku. Aktualnie nie wspiera ona automatycznej aktualizacji. Proszę, pobierz ręcznie nowsze wersje z naszej <a href=\"https://nightly.iina.io\">strony internetowej nightly</a>.";
 "initial.debug.desc" = "Wersje \"Debug\" przeważnie nie są zoptymalizowane pod kątem wydajności, więc nie jest zalecane wykorzystywanie ich jako wersji codziennego użytku. Wersje \"Debug\" nie wspierają automatycznych aktualizacji.";
 "initial.bug_report" = "Zgłoś przez <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "W zakładce Ogólne w Preferencjach aplikacji odznacz \"Uwzględniaj wersje beta\" i zainstaluj stabilne wydanie z naszej <a href=\"https://github.com/iina/iina\">oficjalnej strony</a>.";
+"initial.open_url" = "Otwórz URL…";
+"initial.found_bug" = "Znalazłeś błąd?";
+"initial.resume" = "Wznowienie";
+"initial.open" = "Otwórz…";
+"initial.want_to_rollback" = "Chcesz wrócić do stabilnej wersji?";
 
 // Inspector Window
 "inspector.error" = "Błąd";
+"inspector.window_title" = "Inspektor";
+"inspector.tab_general" = "Ogólne";
+"inspector.tab_tracks" = "Ścieżki";
+"inspector.tab_file" = "Plik";
+"inspector.tab_status" = "Status";
+"inspector.segment_general" = "Ogólne";
+"inspector.segment_tracks" = "Ścieżki";
+"inspector.segment_file" = "Plik";
+"inspector.segment_status" = "Status";
+"inspector.video_section" = "OBRAZ";
+"inspector.video_format" = "Format";
+"inspector.video_codec" = "Kodek";
+"inspector.video_hw_decoder" = "Dekoder HW";
+"inspector.video_primaries" = "Podstawowe";
+"inspector.video_colorspace" = "Przestrzeń kolorów";
+"inspector.video_pixel_format" = "Format elementów obrazu";
+"inspector.video_driver" = "Sterownik";
+"inspector.video_size" = "Rozmiar";
+"inspector.video_bitrate" = "Szybkość transmisji";
+"inspector.video_fps" = "Klatkaż";
+"inspector.audio_section" = "DŹWIĘK";
+"inspector.audio_format" = "Format";
+"inspector.audio_codec" = "Kodek";
+"inspector.audio_driver" = "Sterownik";
+"inspector.audio_channels" = "Kanały";
+"inspector.audio_bitrate" = "Szybkość transmisji";
+"inspector.audio_sample_rate" = "Częstotliwość próbkowania";
+"inspector.track_label" = "Ścieżka";
+"inspector.track_id" = "Identyfikator";
+"inspector.track_properties" = "Właściwości";
+"inspector.track_default" = "Domyślne";
+"inspector.track_forced" = "Wymuszone";
+"inspector.track_selected" = "Zaznaczone";
+"inspector.track_external" = "Zewnętrzny";
+"inspector.track_source_id" = "ID źródła";
+"inspector.track_title" = "Tytuł";
+"inspector.track_language" = "Język";
+"inspector.track_file_path" = "Ścieżka pliku";
+"inspector.track_codec" = "Kodek";
+"inspector.track_decoder" = "Dekoder";
+"inspector.track_fps" = "FPS (klatki na sekundę)";
+"inspector.track_channels" = "Kanały";
+"inspector.track_sample_rate" = "Częstotliwość próbkowania";
+"inspector.file_path" = "Ścieżka pliku";
+"inspector.file_title" = "Tytuł";
+"inspector.file_comment" = "Komentarz";
+"inspector.file_size" = "Rozmiar";
+"inspector.file_format" = "Format";
+"inspector.file_duration" = "Czas trwania";
+"inspector.file_chapters" = "Rozdziały";
+"inspector.file_editions" = "Edycje";
+"inspector.status_avsync_diff" = "Różnica synchronizacji A/V";
+"inspector.status_total_avsync" = "Całkowita Synch. A/V";
+"inspector.status_dropped_frames" = "Zgubione klatki";
+"inspector.status_mistimed_frames" = "Opóźnionych klatek";
+"inspector.status_display_fps" = "Wyświetl FPS";
+"inspector.status_estimated_output_fps" = "Szacowane wyjściowe FPS";
+"inspector.status_estimated_display_fps" = "Szacowane wyś. FPS";
+"inspector.status_watch" = "Oglądaj";
+"inspector.watch_column_name" = "Nazwa";
+"inspector.watch_column_value" = "Wartość";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buforowanie… %d%%";
@@ -112,6 +184,7 @@
 ";
 "osd.sub_second_hidden" = "Napisów dodatkowe ukryte";
 "osd.sub_second_pos" = "Pozycja dodatkowych napisów: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = ".";
 "osd.mute" = "Wycisz dźwięk";
 "osd.unmute" = "Włącz dźwięk";
@@ -142,20 +215,24 @@
 "osd.canceled" = "Anulowane";
 "osd.cannot_connect" = "Błąd połączenia";
 "osd.timed_out" = "Upłynął limit czasu odpowiedzi";
-"osd.sub_quota_exceeded" = "Subtitle download limit reached";
-"osd.sub_quota_exceeded.detail" = "Try again after %@";
-"osd.sub_quota_exceeded.detail_unknown" = "Try again later";
+"osd.sub_quota_exceeded" = "Osiągnięto limit pobierania napisów";
+"osd.sub_quota_exceeded.detail" = "Spróbuj ponownie po %@";
+"osd.sub_quota_exceeded.detail_unknown" = "Spróbuj ponownie później";
 "osd.filter_added" = "Dodano filtr: %@";
 "osd.filter_removed" = "Usunięto filtr";
 "osd.file_loop" = "Zapętl pojedynczy plik";
 "osd.playlist_loop" = "Zapętl playlistę";
 "osd.no_loop" = "Wyłącz zapętlenie";
+"osd.screenshot.reveal" = "ODKRYJ";
+"osd.screenshot.edit" = "EDYTUJ";
+"osd.screenshot.delete" = "USUŃ";
+"osd.sub_choose.prompt" = "Proszę zaznaczyć napisy do pobrania:";
+"osd.sub_choose.cancel" = "ANULUJ";
+"osd.sub_choose.download" = "POBIERZ";
 
 "preference.title" = "Preferencje";
 "preference.general" = "Ogólne";
-"preference.ui" = "Interface";
-"preference.video_audio" = "Video & Audio";
-"preference.subtitle" = "Napisy";
+"preference.ui" = "Styk";
 "preference.network" = "Sieć";
 "preference.control" = "Kontrola";
 "preference.keybindings" = "Skróty klawiszowe";
@@ -163,29 +240,6 @@
 "preference.plugins" = "Wtyczki";
 "preference.utilities" = "Narzędzia";
 "preference.scripts" = "Skrypty";
-"preference.not_logged_in" = "Nie zalogowano";
-"preference.logged_in_as" = "Zalogowano jako %@";
-"preference.system_media_control" = "Sterowanie odtwarzania klawiszami multimedialnymi";
-
-"preference.key_binding_hint_1" = "Aby edytować skróty klawiszowe najpierw kliknij \"Zduplikuj konfiguracje\", aby wykonać kopię.";
-"preference.key_binding_hint_2" = "Kliknij dwukrotnie na rząd po prawej stronie, aby zmienić przypisany skrót klawiszowy";
-
-"preference.enable_adv_settings" = "Włącz ustawienia zaawansowane";
-
-"preference.sub_override_level.no" = "nie";
-"preference.sub_override_level.force" = "wymuś";
-"preference.sub_override_level.scale" = "skala";
-"preference.sub_override_level.strip" = "pasek";
-"preference.sub_override_level.yes" = "tak";
-
-"preference.sub_override_level.descriptive_text.no" = "Wyświetlaj napisy zgodnie ze specyfikacją skryptów napisów, bez nadpisywania.";
-"preference.sub_override_level.descriptive_text.force" = "Zastosuj wszystkie style napisów.";
-"preference.sub_override_level.descriptive_text.scale" = "Zastosuj ustawienia skali oprócz ustawień stylu w tej sekcji.";
-"preference.sub_override_level.descriptive_text.strip" = "Całkowicie usuń wszystkie tagi i style ASS z napisów.";
-"preference.sub_override_level.descriptive_text.yes" = "Zastosuj wszystkie ustawienia stylów w tej sekcji.";
-
-"preference.ytdl_plugin_not_installed" = "Zainstaluj wtyczkę Online Media poprzez „Wtyczki > Zainstaluj z GitHub”, aby korzystać z zaawansowanych funkcji, takich jak pobieranie filmów i automatyczne aktualizacje yt-dlp.";
-"preference.ytdl_plugin_installed" = "Wbudowane wsparcie youtube-dl jest wyłączone, ponieważ nie masz zainstalowanej wtyczki Online media.";
 
 "menu.volume" = "Głośność: %@";
 "menu.volume_muted" = "Głośność: %@ (Wyciszono)";
@@ -285,8 +339,8 @@
 "alert.add_filter.message" = "Wprowadź filtry w formacie zgodnym ze specyfikacją mpv.";
 
 "alert.keybinding_config.error" = "Wystąpił błąd podczas wczytywania skrótów klawiszowych \"%@\". Sprawdź, czy plik z konfiguracją jest poprawny.";
-"alert.delete_keybindingset.title" = "Delete Key Binding Set";
-"alert.delete_keybindingset.message" = "Are you sure to delete this key binding set?";
+"alert.delete_keybindingset.title" = "Usuń zestaw przypisań klawiszy";
+"alert.delete_keybindingset.message" = "Czy na pewno chcesz usunąć ten zestaw przypisań klawiszy?";
 
 "alert.extra_option.cannot_read" = "Nie można wczytać konfiguracji mpv.";
 "alert.extra_option.empty" = "Klucz lub wartość nie może być pusta!";
@@ -327,7 +381,7 @@
 "alert.delete_history.message" = "Czy na pewno chcesz usunąć zaznaczone pozycje?";
 "alert.delete_all_history.title" = "Wyczyść historię odtwarzania";
 "alert.delete_all_history.message" = "Czy na pewno chcesz usunąć całą historię odtwarzania?";
-"alert.delete_file.title" = "Delete File";
+"alert.delete_file.title" = "Usuń plik";
 "alert.delete_file.message" = "Are you sure to trash the selected files?";
 
 "alert.filter_hwdec.message" = "Zamierzasz zastosować filtr wideo.  Niestety twój dekoder sprzętowy może nie wpierać filtrów wideo.  Możesz wyłączyć dekodowanie sprzętowe lub przełączyć w tryb Auto(Copy) co spowoduje podwójne zużycie pamięci.  Może być wymagane powtórzenie poprzedniej operacji (jak ustawienie wycięcia) aby ustawienie zadziałało.";
@@ -374,8 +428,6 @@
 "alert.plugin_update_found.message" = "Najnowsza wersja to %@. Masz %@. Czy chcesz zaktualizować?";
 "alert.plugin_permission" = "Ta wtyczka wymaga następujących uprawnień. Sprawdź je przed kontynuowaniem.";
 "alert.plugin_permission_added" = "Ta aktualizacja wymaga dodatkowych uprawnień. Sprawdź je przed kontynuowaniem.";
-"alert.install_plugin_macos_11.title" = "Install plugin from GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "Całkowity czas %@";
 "playlist.total_length_with_selected" = "Zaznaczono %@ z %@";
@@ -404,7 +456,7 @@
 "pl_menu.copy_url" = "Kopiuj adres URL";
 "pl_menu.copy_url_multi" = "Kopiuj adresy URL";
 "pl_menu.playback" = "Odtwarzaj";
-"pl_menu.subtitles" = "Subtitles (%d loaded)";
+"pl_menu.subtitles" = "Napisy (liczba wczytanych: %d)";
 "pl_menu.network_resources" = "Network Resources";
 "pl_menu.file_operations" = "File Operations";
 "pl_menu.plugin" = "Wtyczka";
@@ -412,6 +464,8 @@
 
 "keymapping.title" = "Mapowanie klawiszy";
 "keymapping.message" = "Naciśnij dowolny klawisz, aby zarejestrować.";
+"keymapping.select_action" = "Wybierz akcję:";
+"keymapping.enter_command" = "Lub wprowadź polecenie mpv:";
 
 "filter.video_filters" = "Filtry video";
 "filter.audio_filters" = "Filtry audio";
@@ -434,7 +488,7 @@
 "osc_toolbar.sub_track" = "Wybierz ścieżkę napisów";
 "osc_toolbar.screenshot" = "Wykonaj zrzut ekranu";
 "osc_toolbar.plugins" = "Pokaż panel ze wtyczkami";
-"osc_toolbar.live_text" = "Toggle Live Text";
+"osc_toolbar.live_text" = "Przełącz funkcję „Tekst na żywo”";
 
 "osc_pos.floating" = "Ruchomy";
 "osc_pos.top" = "Góra";
@@ -484,8 +538,6 @@
 "permissions.file-system.desc" = "Ta wtyczka może odczytywać i zapisywać pliki na dysku, w tym poufne informacje. Może także wywoływać inne programy lub aplikacje, które mogą uszkodzić komputer. Dlatego koniecznie sprawdź źródło.";
 
 "plugin.install" = "Zainstaluj";
-"plugin.installed" = "Zainstalowano";
-"plugin.not_installed" = "Nie zainstalowano";
 "plugin.local" = "Zainstalowane lokalnie";
 "alert.plugin.install_error" = "Wystąpił błąd podczas instalacji: %@";
 "alert.invalid_url" = "Adres URL jest nieprawidłowy.";
@@ -494,16 +546,15 @@
 "plugin.install_error.cannot_download" = "Nie udało się pobrać wtyczki.\n\nWyjście:%@\n";
 "plugin.install_error.cannot_unpackage" = "Nie udało się rozpakować wtyczki.\n\nWyjście:%@\n";
 "plugin.install_error.cannot_load" = "IINA nie może załadować tej wtyczki. Może być w złym formacie.";
-"plugin.check_for_updates" = "Sprawdź aktualizacje";
 "plugin.updating" = "Pobieranie aktualizacji…";
 
 // Log window
-"logwindow.all_subsystems" = "All subsystems";
+"logwindow.all_subsystems" = "Wszystkie podsystemy";
 "logwindow.title" = "Przeglądarka dziennika";
 "logwindow.time" = "Czas";
 "logwindow.subsystem" = "Podsystem";
 "logwindow.message" = "Wiadomość";
-"logwindow.now" = "Now";
+"logwindow.now" = "Teraz";
 "logwindow.now.desc" = "Follow latest logs";
 "logwindow.log_level" = "Log level";
 "logwindow.save" = "Zapisz";
@@ -522,27 +573,44 @@
 "history_window.menu.play_new_window" = "Odtwórz w nowym oknie";
 "history_window.menu.show_in_finder" = "Pokaż w Finderze";
 "history_window.menu.delete" = "Usuń…";
-"history_window.menu.delete_file" = "Move to Trash…";
+"history_window.menu.delete_file" = "Przenieś do Kosza…";
 "history_window.toolbar.clear" = "Wyczyść historię odtwarzania";
-"history_window.toolbar.group_by" = "Group By";
-"history_window.toolbar.group_by.menu" = "Group by";
+"history_window.toolbar.group_by" = "Grupuj wg";
+"history_window.toolbar.group_by.menu" = "Grupuj wg";
 "history_window.toolbar.group_by.date" = "Data";
-"history_window.toolbar.group_by.date_tooltip" = "Sort by Date";
+"history_window.toolbar.group_by.date_tooltip" = "Sortuj wg daty";
 "history_window.toolbar.group_by.location" = "Folder and Website";
 "history_window.toolbar.group_by.location_tooltip" = "Sort by Folder and Website";
-"history_window.toolbar.expand_collapse" = "Expand/Collapse";
-"history_window.toolbar.expand_all" = "Expand All";
-"history_window.toolbar.collapse_all" = "Collapse All";
+"history_window.toolbar.expand_collapse" = "Rozwiń/zwiń";
+"history_window.toolbar.expand_all" = "Rozwiń wszystkie";
+"history_window.toolbar.collapse_all" = "Zwiń wszystkie";
 "history_window.search.search_in" = "Szukaj w";
 "history_window.search.filename" = "Nazwa pliku";
-"history_window.search.full_path" = "Full Path";
+"history_window.search.full_path" = "Pełna ścieżka";
 "history_window.search.no_recents" = "Brak wcześniejszych wyszukiwań";
 "history_window.search.recents_title" = "Wcześniejsze wyszukiwania";
 "history_window.search.clear_recents" = "Wyczyść ostatnie";
 
+// Guide window
+"guide_window.website" = "Strona internetowa";
+"guide_window.fail" = "Nie udało się załadować informacji o wersji. Aby uzyskać więcej informacji, odwiedź naszą stronę https://iina.io.";
+"guide_window.continue" = "Kontynuuj";
+
+// Font picker
+"font_picker.title" = "Wybierz czcionkę";
+"font_picker.choose" = "Wybierz czcionkę:";
+"font_picker.filter" = "Wpisz, aby filtrować…";
+"font_picker.family" = "Czcionka";
+"font_picker.typeface" = "Krój";
+"font_picker.preview" = "Podgląd";
+"font_picker.test" = "Wypróbuj";
+"font_picker.other" = "Lub wpisz nazwę czcionki:";
+"font_picker.cancel" = "Anuluj";
+"font_picker.ok" = "OK";
+
 // Sidebar
 
-"sidebar.layout" = "Layout";
+"sidebar.layout" = "Układ";
 "sidebar.video" = "Obraz";
 "sidebar.audio" = "Dźwięk";
 "sidebar.sub" = "Napisy";
@@ -551,15 +619,15 @@
 "sidebar.chapters" = "Rozdział";
 
 "sidebar.liquid_glass" = "Liquid Glass";
-"sidebar.sidebar" = "Sidebar";
-"sidebar.sidebar_position" = "Sidebar Position";
-"sidebar.compact_interface" = "Compact Interface";
-"sidebar.edge_to_edge_video" = "Edge-to-Edge Video";
-"sidebar.lock_window_aspect" = "Lock Window Aspect Ratio";
-"sidebar.docked" = "Docked Control Bar and Titlebar";
-"sidebar.fit_window_to_video" = "Fit Window to Video";
+"sidebar.sidebar" = "Pasek boczny";
+"sidebar.sidebar_position" = "Pozycja paska bocznego";
+"sidebar.compact_interface" = "Kompaktowy styk";
+"sidebar.edge_to_edge_video" = "Obraz „od krawędzi do krawędzi”";
+"sidebar.lock_window_aspect" = "Zablokuj współczynnik proporcji okna";
+"sidebar.docked" = "Zadokowane paski sterowania i tytułowy";
+"sidebar.fit_window_to_video" = "Dopasuj okno do filmu";
 "sidebar.settings" = "Ustawienia";
-"sidebar.playlist_and_chapters" = "Playlist and Chapters";
+"sidebar.playlist_and_chapters" = "Lista odtwarzania i rozdziały";
 
 "sidebar.aspect_ratio" = "Proporcje obrazu";
 "sidebar.crop" = "Kadrowanie";
@@ -581,20 +649,20 @@
 "sidebar.remove_eq" = "Usuń bieżące ustawienia EQ";
 "sidebar.manual_eq" = "Ręczne";
 
-"sidebar.primary" = "Primary";
-"sidebar.secondary" = "Secondary";
-"sidebar.external_subtitles" = "External Subtitles";
+"sidebar.primary" = "Pierwszorzędne";
+"sidebar.secondary" = "Drugorzędne";
+"sidebar.external_subtitles" = "Zewnętrzne napisy";
 "sidebar.load_subtitle" = "Wczytaj napisy…";
 "sidebar.search_online" = "Szukaj w Sieci…";
-"sidebar.position" = "Position";
-"sidebar.scale" = "Scale";
+"sidebar.position" = "Pozycja";
+"sidebar.scale" = "Skala";
 "sidebar.font" = "Czcionka";
-"sidebar.color" = "Color";
-"sidebar.text" = "Text";
+"sidebar.color" = "Kolor";
+"sidebar.text" = "Tekst";
 "sidebar.border" = "Granica";
 "sidebar.shadow" = "Cień";
-"sidebar.sub_settings_not_available" = "Some settings are not available for this subtitle type.";
-"sidebar.sub_style_warning" = "Setting style options for ASS subtitles may break rendering.";
+"sidebar.sub_settings_not_available" = "Niektóre ustawienia nie są dostępne dla tego typu napisów.";
+"sidebar.sub_style_warning" = "Ustawienie opcji stylu napisów ASS może zepsuć ich wyświetlanie.";
 
 "sidebar.add_file" = "Dodaj plik…";
 "sidebar.add_url" = "Dodaj adres URL…";
@@ -608,17 +676,17 @@
 "settings.actionAfterLaunch.items.1" = "Pokaż otwarty panel plików";
 "settings.actionAfterLaunch.items.2" = "Bezczynność";
 "settings.actionAfterLaunch.label" = "Po uruchomieniu";
-"settings.allowDuplicatePlayers.label" = "Allow opening the same file in multiple windows";
+"settings.allowDuplicatePlayers.label" = "Zezwalaj na otwieranie tego samego pliku w wielu oknach";
 "settings.allowScreenSaverForAudio.desc" = "Nadal zapobiega uśpieniu systemu.";
 "settings.allowScreenSaverForAudio.label" = "Nie podczas w \"trybie, tylko muzyki\" lub tylko odtwarzania dźwięku";
 "settings.alwaysOpenInNewWindow.label" = "Zawsze otwieraj multimedia w nowym oknie";
-"settings.autoRepeat.label" = "Loop when a file is opened manually";
+"settings.autoRepeat.label" = "Zapętl, kiedy plik jest otwarty ręcznie";
 "settings.autoSwitchToMusicMode.label" = "Przełącz do trybu muzyki automatycznie po odtworzeniu pliku audio";
 "settings.blackOutMonitor.label" = "Wygaś pozostałe monitory podczas pełnego ekranu";
 "settings.defaultRepeatMode.items.0" = "Zapętl listę odtwarzania";
 "settings.defaultRepeatMode.items.1" = "Zapętl pojedynczy plik";
 "settings.fullScreenWhenOpen.label" = "Otwórz na pełnym ekranie";
-"settings.groupSimultaneousOpensInPlaylist.label" = "Group media in playlist when opening multiple files at once";
+"settings.groupSimultaneousOpensInPlaylist.label" = "Grupuj media na liście odtwarzania podczas otwierania wielu plików naraz";
 "settings.keepOpenOnFileEnd.label" = "Zostaw okno widoczne po zakończeniu odtwarzania";
 "settings.pauseWhenGoesToSleep.label" = "Pauzuj kiedy komputer wchodzi w stan uśpienia";
 "settings.pauseWhenInactive.label" = "Okno stało się nieaktywne/aktywne";
@@ -642,7 +710,7 @@
 "settings.screenShotIncludeSubtitle.label" = "Zawiera napisy";
 "settings.screenshotCopyToClipboard.desc" = "Cel";
 "settings.screenshotCopyToClipboard.label" = "Kopiuj do schowka";
-"settings.screenshotSaveToFile.desc" = "/path/to/screenshot/folder";
+"settings.screenshotSaveToFile.desc" = "/ścieżka/do/folderu/zrzutów/ekranu";
 "settings.screenshotSaveToFile.label" = "Zapisz do";
 "settings.screenshotShowPreview.label" = "Pokaż podgląd po wykonaniu zrzutów ekranu";
 "settings.trackAllFilesInRecentOpenMenu.desc" = "W przeciwnym razie w tym menu pojawią się tylko pliki otwierane ręcznie";
@@ -651,9 +719,9 @@
 
 // Settings - Video
 "settings.enableHdrSupport.desc" = "Włącz tryb HDR domyślnie podczas odtwarzania filmów HDR.";
-"settings.enableHdrSupport.label" = "Enable HDR mode";
-"settings.enableLiveText.desc" = "Show a Live Text overlay on paused video frames for text recognition. Requires macOS 13 or later.";
-"settings.enableLiveText.label" = "Live Text";
+"settings.enableHdrSupport.label" = "Włącz tryb szerokiego zakresu tonalnego";
+"settings.enableLiveText.desc" = "Pokaż nakładkę funkcji „Tekst na żywo” na wstrzymanych klatkach filmu do rozpoznawania tekstu. Wymagany system macOS 13 lub nowszy.";
+"settings.enableLiveText.label" = "Tekst na żywo";
 "settings.enableToneMapping.label" = "Włącz mapowanie tonów";
 "settings.forceDedicatedGPU.desc" = "Zawsze używaj dedykowanej karty graficznej do renderowania (jeżeli istnieje). Może to poprawić wydajność, ale może skrócić czas pracy na baterii.";
 "settings.forceDedicatedGPU.label" = "Wymuś dedykowaną kartę graficzną";
@@ -676,7 +744,7 @@
 "settings.videoThreads.label" = "Liczba wątków";
 
 // Settings - Audio
-"settings.audioDriverEnableAVFoundation.items.0.desc" = "The default audio driver.";
+"settings.audioDriverEnableAVFoundation.items.0.desc" = "Domyślny sterownik dźwięku.";
 "settings.audioDriverEnableAVFoundation.items.1.desc" = "AVFoundation jest nowym, eksperymentalnym sterownikiem dźwiękowym oferującym wsparcie dla Spatial Audio. Możesz jednak napotkać pewne problemy podczas korzystania z AVFoundation, takie jak opóźnienia dźwięku.";
 "settings.audioDriverEnableAVFoundation.label" = "Sterownik audio";
 "settings.enableInitialVolume.label" = "Początkowa głośność";
@@ -709,7 +777,7 @@
 "settings.doubleClickAction.items.2" = "Pauza / Wznowienie";
 "settings.doubleClickAction.items.4" = "Przełącz tryb Obraz-w-obrazie";
 "settings.doubleClickAction.items.5" = "Pętla A-B";
-"settings.doubleClickAction.items.6" = "Reset speed";
+"settings.doubleClickAction.items.6" = "Przywróć domyślną szybkość";
 "settings.doubleClickAction.label" = "Podwójne kliknięcie";
 "settings.forceTouchAction.items.0" = "--";
 "settings.forceTouchAction.items.1" = "Tryb pełnoekranowy";
@@ -719,7 +787,7 @@
 "settings.horizontalScrollAction.items.0" = "Dostosuj głośność";
 "settings.horizontalScrollAction.items.1" = "Przeszukuj";
 "settings.horizontalScrollAction.items.2" = "--";
-"settings.horizontalScrollAction.items.4" = "Adjust playback speed";
+"settings.horizontalScrollAction.items.4" = "Dostosuj szybkość odtwarzania";
 "settings.horizontalScrollAction.label" = "Przewiń w poziomie";
 "settings.middleClickAction.items.0" = "--";
 "settings.middleClickAction.items.1" = "Tryb pełnoekranowy";
@@ -727,7 +795,7 @@
 "settings.middleClickAction.items.3" = "Ukryj interfejs";
 "settings.middleClickAction.items.4" = "Przełącz tryb Obraz-w-obrazie";
 "settings.middleClickAction.items.5" = "Pętla A-B";
-"settings.middleClickAction.items.6" = "Reset speed";
+"settings.middleClickAction.items.6" = "Przywróć domyślną szybkość";
 "settings.middleClickAction.label" = "Środkowy przycisk";
 "settings.pinchAction.items.0" = "Dostosuj rozmiar okna";
 "settings.pinchAction.items.1" = "Pełny ekran";
@@ -741,7 +809,7 @@
 "settings.rightClickAction.items.3" = "Ukryj interfejs";
 "settings.rightClickAction.items.4" = "Przełącz tryb Obraz-w-obrazie";
 "settings.rightClickAction.items.5" = "Pętla A-B";
-"settings.rightClickAction.items.6" = "Reset speed";
+"settings.rightClickAction.items.6" = "Przywróć domyślną szybkość";
 "settings.rightClickAction.label" = "Prawy przycisk";
 "settings.singleClickAction.items.0" = "--";
 "settings.singleClickAction.items.2" = "Pauza / Wznowienie";
@@ -755,7 +823,7 @@
 "settings.verticalScrollAction.items.0" = "Dostosuj głośność";
 "settings.verticalScrollAction.items.1" = "Przeszukuj";
 "settings.verticalScrollAction.items.2" = "--";
-"settings.verticalScrollAction.items.4" = "Adjust playback speed";
+"settings.verticalScrollAction.items.4" = "Dostosuj szybkość odtwarzania";
 "settings.verticalScrollAction.label" = "Przewijanie w pionie";
 "settings.videoViewAcceptsFirstMouse.desc" = "Myszka";
 "settings.videoViewAcceptsFirstMouse.label" = "Akceptuje pierwsze kliknięcie myszki, gdy nie jest skoncentrowane";
@@ -771,7 +839,7 @@
 "settings.cachePauseInitial.desc" = "Enter buffering mode before starting playback. This can be used to ensure playback starts smoothly, in exchange for waiting some time to prefetch and buffer network data.";
 "settings.cachePauseInitial.label" = "Buffer before starting playback";
 "settings.defaultCacheSize.desc" = "Default: 153,600";
-"settings.defaultCacheSize.label" = "Cache buffer size (KiB)";
+"settings.defaultCacheSize.label" = "Rozmiar bufora pamięci podręcznej (KiB)";
 "settings.enableCache.label" = "Prefetch and buffer network data";
 "settings.httpProxy.desc" = "Program IINA musi zostać zrestartowany aby efekt został zastosowany.";
 "settings.httpProxy.label" = "HTTP Proxy";
@@ -789,7 +857,7 @@
 "settings.ytdlSearchPath.label" = "Własna ścieżka do youtube-dl";
 
 // Settings - Subtitles
-"settings.autoSearchOnlineSub.desc" = "If enabled, IINA will automatically search online subtitles only for videos without loaded subtitles and longer than 20 minutes.";
+"settings.autoSearchOnlineSub.desc" = "Jeżeli ta opcja jest włączona, IINA będzie automatycznie szukać napisów w Sieci dla filmów, które nie mają wczytanych napisów i są dłuższe niż 20 minut.";
 "settings.autoSearchOnlineSub.label" = "Automatycznie wyszukuj napisów w sieci";
 "settings.displayInLetterBox.label" = "Wyświetlaj napisy na czarnym tle w trybie pełnoekranowym";
 "settings.subAlignX.items.0" = "Lewo";
@@ -811,7 +879,7 @@
 "settings.subBorderStyle.items.1" = "Outline and Shadow";
 "settings.subBorderStyle.items.3" = "Opaque Box";
 "settings.subBorderStyle.items.4" = "Background Box";
-"settings.subBorderStyle.label" = "Border Style";
+"settings.subBorderStyle.label" = "Styl obramowania";
 "settings.subBold.label" = "Wytłuszczenie";
 "settings.subItalic.label" = "Kursywa";
 "settings.subLang.desc" = "Opcja zostanie przechowywana jako kod języka ISO 639-2 oraz będzie działać zarówno z mpv jak i OpenSubtitles.";
@@ -830,14 +898,14 @@
 "settings.subSpacing.label" = "Odstępy między literami";
 
 // Settings - UI
-"settings.more_ui_settings" = "More User Interface settings are available in the Layout sidebar.";
+"settings.more_ui_settings" = "Więcej ustawień styku użytkownika jest dostępnych w sekcji „Układ” paska bocznego.";
 "settings.alwaysFloatOnTop.label" = "Zawsze na wierzchu podczas odtwarzania";
 "settings.alwaysShowOnTopIcon.label" = "Zawsze pokazuj panel na górze paska tytułowego";
 "settings.arrowBtnAction.items.0" = "Prędkość";
 "settings.arrowBtnAction.items.1" = "Poprzedni/następny plik";
 "settings.arrowBtnAction.items.2" = "Przewijanie w tył/do przodu";
 "settings.arrowBtnAction.label" = "Użyj przycisków lewo/prawo jako";
-"settings.controlBarAutoHideTimeout.label" = "Auto hide after";
+"settings.controlBarAutoHideTimeout.label" = "Ukryj automatycznie po";
 "settings.controlBarStickToCenter.label" = "Przyciągaj do środka podczas przeciągania";
 "settings.disableAnimations.desc" = "Kiedy ustawienie dostępności macOS „Redukuj ruch” jest włączone, IINA zredukuje animacje styku użytkownika, o których wiadomo, że sprawiają problemy tym z zaburzeniami przedsionkowymi. Jeżeli to będzie niewystarczające, to ustawienie może być użyte, aby dodatkowo zredukować ruch poprzez wyeliminowanie animacji styku użytkownika.";
 "settings.disableAnimations.label" = "Wyłącz animacje";
@@ -873,7 +941,7 @@
 "settings.themeMaterial.items.4" = "Dopasuj do wyglądu systemu";
 "settings.themeMaterial.label" = "Wygląd";
 "settings.thumbnailWidth.desc" = "Modifying the width clears the current thumbnail cache and regenerates all thumbnails at the selected size.";
-"settings.thumbnailWidth.label" = "Thumbnail width";
+"settings.thumbnailWidth.label" = "Szerokość miniatur";
 "settings.togglePipByMinimizingWindow.label" = "Przełącz tryb Obraz-w-obrazie poprzed minimalizowanie/maksymalizowanie okna";
 "settings.togglePipByMinimizingWindowForVideoOnly.label" = "Tylko dla plików wideo";
 "settings.usePhysicalResolution.label" = "Użyj fizycznej rozdzielczości na ekranach Retina";
@@ -896,7 +964,7 @@
 "settings.useUserDefinedConfDir.label" = "Użyj plików konfiguracyjnych z katalogu";
 
 // Settings - Inline labels
-"settings.$ASSSubtitles" = "ASS napisów";
+"settings.$ASSSubtitles" = "Napisy ASS";
 "settings.$About" = "O aplikacji";
 "settings.$Accessibility" = "Dostępność";
 "settings.$AdditionalMpvOptions" = "Dodatkowe opcje mpv";
@@ -911,7 +979,7 @@
 "settings.$Background" = "Tło";
 "settings.$Behavior" = "Zachowanie";
 "settings.$Border" = "Granica";
-"settings.$BrowserExtensions" = "Browser Extensions";
+"settings.$BrowserExtensions" = "Rozszerzenia do przeglądarek";
 "settings.$Cache" = "Pamięć podręczna";
 "settings.$Cancel" = "Anuluj";
 "settings.$CheckForUpdates" = "Sprawdzaj aktualizacje";
@@ -926,8 +994,8 @@
 "settings.$ClearThumbnailCache" = "Wyczyść pamięć podręczną miniatur";
 "settings.$Color" = "Kolor";
 "settings.$ColorHDR" = "Color and HDR";
-"settings.$CommunityPlugins" = "Community Plugins";
-"settings.$CreateAnEmptySet" = "Create an empty set…";
+"settings.$CommunityPlugins" = "Wtyczki społeczności";
+"settings.$CreateAnEmptySet" = "Utwórz pusty zestaw…";
 "settings.$Customize" = "Dopasuj…";
 "settings.$Decoding" = "Decoding";
 "settings.$DefaultApplication" = "Domyślna aplikacja";
@@ -941,7 +1009,7 @@
 "settings.$Font" = "Czcionka";
 "settings.$GetBrowserExtensionsForIINA" = "Zdobądź rozszerzenie przeglądarki dla IINA";
 "settings.$GetPlugins" = "Get Plugins…";
-"settings.$Hardware" = "Hardware";
+"settings.$Hardware" = "Sprzęt";
 "settings.$Height" = "Wysokość";
 "settings.$Help" = "Pomoc";
 "settings.$History" = "Historia";
@@ -953,11 +1021,11 @@
 "settings.$Install" = "Zainstaluj";
 "settings.$InstallLocalPackage" = "Install Local Package…";
 "settings.$Installed" = "Zainstalowano";
-"settings.$Installing" = "Installing";
-"settings.$KeyBindingSet" = "Key binding set";
+"settings.$Installing" = "Instalowanie";
+"settings.$KeyBindingSet" = "Zestaw przypisań klawiszy";
 "settings.$Layout" = "Układ";
-"settings.$LegacyOpenSubAlert" = "⚠️ The old OpenSubtitles support is deprecated. Please use the OpenSubtitles plugin instead. If you need to login, please access it from the legacy Settings window.";
-"settings.$LiveText" = "Live Text";
+"settings.$LegacyOpenSubAlert" = "⚠️ Dawne wsparcie dla OpenSubtitles zostało porzucone. Zamiast tego, prosimy korzystać z wtyczki OpenSubtitles. Jeżeli potrzebne jest logowanie, prosimy uzyskać do niego dostęp poprzez starsze okno Ustawień.";
+"settings.$LiveText" = "Tekst na żywo";
 "settings.$Logging" = "Logging";
 "settings.$Login" = "Zaloguj się";
 "settings.$MB" = "MB";
@@ -965,11 +1033,11 @@
 "settings.$Margin" = "Margines";
 "settings.$Mouse" = "Myszka";
 "settings.$Network" = "Sieć";
-"settings.$NewKeyBindingSet" = "New key binding set";
-"settings.$NoSelection" = "No Selection";
+"settings.$NewKeyBindingSet" = "Nowy zestaw przypisań klawiszy";
+"settings.$NoSelection" = "Brak zaznaczenia";
 "settings.$NotLoggedIn" = "Nie zalogowano";
 "settings.$OK" = "Ok";
-"settings.$OfficialPlugins" = "Official Plugins";
+"settings.$OfficialPlugins" = "Oficjalne wtyczki";
 "settings.$Offset" = "Przesunięcie";
 "settings.$OnScreenController" = "On Screen Controller";
 "settings.$OnScreenDisplay" = "Wyświetlaj na ekranie";
@@ -980,10 +1048,10 @@
 "settings.$OrSelectFrom" = "Or select from available plugins";
 "settings.$Other" = "Other";
 "settings.$OtherStyles" = "Box";
-"settings.$OverrideLevel" = "Nadpisz poziom";
+"settings.$OverrideLevel" = "Poziom nadpisania";
 "settings.$Percent" = "%";
 "settings.$PictureinnPicture" = "Obraz-w-Obrazie";
-"settings.$Playlist" = "Playlista";
+"settings.$Playlist" = "Lista odtwarzania";
 "settings.$PleaseSelectTheMediaTypes" = "Wybierz proszę typy plików multimedialnych dla których IINA ma być domyślną aplikacją.";
 "settings.$Position" = "Pozycja";
 "settings.$PreferredLanguage" = "Preferowany język";
@@ -993,19 +1061,19 @@
 "settings.$SPDIFOutput" = "Wyjście S/PDIF";
 "settings.$SPDIFOutputWarning" = "List of codecs for which compressed audio passthrough should be used.\n\nWarning: There is not much reason to use this setting. HDMI supports uncompressed multichannel PCM, and lossless DTS-HD decoding is supported via FFmpeg's DCA decoder. Playback may not start if the output device does not support S/PDIF and this setting is enabled.";
 "settings.$Safari" = "Safari";
-"settings.$Screenshots" = "Zrzuty ekranowe";
-"settings.$SetIINAAsTheDefault" = "Set IINA as the Default Application";
+"settings.$Screenshots" = "Zrzuty ekranu";
+"settings.$SetIINAAsTheDefault" = "Ustaw IINA jako domyślną aplikację";
 "settings.$Settings" = "Ustawienia";
 "settings.$Shadow" = "Cień";
 "settings.$ShowInFinder" = "Pokaż w Finderze";
 "settings.$ShowTheConfigFileIn" = "Pokaż plik konfiguracyjny w Finderze";
 "settings.$Size" = "Rozmiar";
 "settings.$Source" = "Źródło";
-"settings.$SubtitleSource" = "Subtitle source";
-"settings.$SubtitleSource.desc" = "This is the default source for searching subtiles. While playing, you can manually choose to search subtitles from other sources from the menu.";
-"settings.$SubtitleSourcePluginDesc" = "This source is provided by a plugin. Please go to the plugin's settings page for configurations.";
+"settings.$SubtitleSource" = "Źródło napisów";
+"settings.$SubtitleSource.desc" = "To jest domyślne źródło wyszukiwania napisów. Podczas odtwarzania możesz w menu ręcznie wybrać wyszukiwanie napisów z innych źródeł.";
+"settings.$SubtitleSourcePluginDesc" = "To źródło jest dostarczone przez wtyczkę. Prosimy przejść na stronę ustawień wtyczki w celu konfiguracji.";
 "settings.$SuppressMessagesFor" = "Wstrzymaj wiadomości dla";
-"settings.$TextSubtitles" = "Tekst napisów";
+"settings.$TextSubtitles" = "Napisy tekstowe";
 "settings.$ThisPluginIsNot" = "This plugin is not hosted on GitHub. Please go to the website to download.";
 "settings.$ThumbnailPreview" = "Podgląd miniatur";
 "settings.$Toolbar" = "Pasek narzędzi";
@@ -1022,7 +1090,7 @@
 "settings.$XOffset" = "Oś X";
 "settings.$Y" = "Y";
 "settings.$YOffset" = "Oś Y";
-"settings.$YTDL" = "Online Videos (yt-dlp)";
+"settings.$YTDL" = "Filmy w Sieci (yt-dlp)";
 "settings.$YouCanInstallANew" = "Możesz zainstalować nową wtyczkę z GitHub lub lokalnego pakietu .iinaplgz. Wtyczki zainstalowane z GitHub mogą być aktualizowane automatycznie.";
 "settings.$bottom" = "dołu";
 "settings.$dB" = "dB";
@@ -1037,4 +1105,4 @@
 "settings.$sideOfTheScreen" = "strony ekranu";
 "settings.$toThe" = "od";
 "settings.$top" = "góry";
-"settings.$ytdlWarning" = "The Online Media plugin has additional features such as switching quality and video downloading. IINA will use the plugin if it's installed and enabled. The settings below only work if the plugin is not available.";
+"settings.$ytdlWarning" = "Wtyczka „Online Media” posiada dodatkowe funkcje takie jak przełączanie jakości i pobieranie filmów. IINA użyje tej wtyczki, jeżeli jest zainstalowana i włączona. Poniższe ustawienia działają tylko wtedy, kiedy wtyczka nie jest dostępna.";

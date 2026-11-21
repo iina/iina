@@ -208,7 +208,7 @@ class Titlebar: NSView {
       oscView.padding(.trailing(6), .top, .bottom(.oscBottomMargin)).size(height: 24)
 
       oscLeadingConstraint = oscView.leadingAnchor
-        .constraint(equalTo: oscContainer.leadingAnchor, constant: 6)
+        .constraint(equalTo: oscContainer.leadingAnchor, constant: 12)
       oscLeadingConstraint.isActive = true
     }
 
@@ -315,6 +315,14 @@ class Titlebar: NSView {
     let point = titlebarContainer.convert(event.locationInWindow, from: nil)
 
     if docIcon.frame.contains(point) || titleTextField.frame.contains(point) {
+      showPathMenu()
+    }
+  }
+
+  override func mouseDown(with event: NSEvent) {
+    let point = titlebarContainer.convert(event.locationInWindow, from: nil)
+
+    if docIcon.frame.contains(point) && event.modifierFlags.contains(.command) {
       showPathMenu()
     }
   }

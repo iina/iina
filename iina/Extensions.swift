@@ -472,6 +472,14 @@ extension NSColor {
     return "\(red)/\(green)/\(blue)/\(alpha)"
   }
 
+  var hexString: String {
+    guard let rgb = usingColorSpace(.sRGB) else { return "#000000" }
+    let r = Int((rgb.redComponent * 255).rounded())
+    let g = Int((rgb.greenComponent * 255).rounded())
+    let b = Int((rgb.blueComponent * 255).rounded())
+    return String(format: "#%02X%02X%02X", r, g, b)
+  }
+
   convenience init?(mpvColorString str: String) {
     // mpv can return hex color string
     if str.starts(with: "#") {
@@ -833,16 +841,6 @@ extension NSAppearance {
 }
 
 extension NSScreen {
-
-  /// Height of the camera housing on this screen if this screen has an embedded camera.
-  var cameraHousingHeight: CGFloat? {
-    if #available(macOS 12.0, *) {
-      return safeAreaInsets.top == 0.0 ? nil : safeAreaInsets.top
-    } else {
-      return nil
-    }
-  }
-
   /// [CGDirectDisplayID](https://developer.apple.com/documentation/CoreGraphics/CGDirectDisplayID) of the
   /// display associated with the screen.
   var displayId: CGDirectDisplayID? {

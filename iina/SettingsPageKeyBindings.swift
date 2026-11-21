@@ -28,6 +28,32 @@ class SettingsPageKeyBindings: SettingsPage {
   
   override var showSubSections: Bool { false }
 
+  static let defaultConfigMap: KeyValuePairs<String, String> = [
+    "IINA Default": "iina-default-input",
+    "mpv Default": "input",
+    "VLC Default": "vlc-default-input",
+    "Movist Default": "movist-default-input",
+    "Movist v2 Default": "movist-v2-default-input",
+  ]
+
+  static var defaultConfigs: [String: String] = {
+    var configs: [String: String] = [:]
+    for (key, value) in defaultConfigMap {
+      configs[key] = Bundle.main.path(forResource: value, ofType: "conf", inDirectory: "config")!
+    }
+    return configs
+  }()
+
+  static var userConfigs: [String: String] {
+    do {
+      let files = try FileManager.default.contentsOfDirectory(at: Utility.userInputConfDirURL, includingPropertiesForKeys: nil)
+      let configFiles = files.filter { $0.pathExtension == "conf" }
+      return Dictionary(uniqueKeysWithValues: configFiles.map { ($0.deletingPathExtension().lastPathComponent, $0.path) })
+    } catch {
+      Logger.fatal("Cannot get user config file!")
+    }
+  }
+
   private lazy var configEditor: ConfigEditor = ConfigEditor()
 
   override func content() -> [SettingsSection] {
@@ -70,7 +96,7 @@ private extension NSUserInterfaceItemIdentifier {
 
 
 fileprivate class ConfigEditor: SettingsAccessory.Base {
-  fileprivate typealias KC = PrefKeyBindingViewController
+  fileprivate typealias KC = SettingsPageKeyBindings
 
   private let prefObserver = Preference.Observer()
   let chooserView: NSView

@@ -139,6 +139,7 @@ class MPVController: NSObject {
     MPVOption.PlaybackControl.speed: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubPos: MPV_FORMAT_DOUBLE,
+    MPVOption.Subtitles.secondarySubScale: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubVisibility: MPV_FORMAT_FLAG,
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
@@ -613,8 +614,8 @@ class MPVController: NSObject {
     // Load external scripts
 
     // Load keybindings. This is still required for mpv to handle media keys or apple remote.
-    let userConfigs = PrefKeyBindingViewController.userConfigs
-    var inputConfPath =  PrefKeyBindingViewController.defaultConfigs["IINA Default"]
+    let userConfigs = SettingsPageKeyBindings.userConfigs
+    var inputConfPath =  SettingsPageKeyBindings.defaultConfigs["IINA Default"]
     if let confFromUd = Preference.string(for: .currentInputConfigName) {
       if let currentConfigFilePath = Utility.getFilePath(Configs: userConfigs, forConfig: confFromUd, showAlert: false) {
         inputConfPath = currentConfigFilePath
@@ -1407,12 +1408,18 @@ class MPVController: NSObject {
       }
       DispatchQueue.main.async { self.player.subDelayChanged(data) }
 
+    case MPVOption.Subtitles.secondarySubScale:
+      fallthrough
     case MPVOption.Subtitles.subScale:
       guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      DispatchQueue.main.async { self.player.subScaleChanged(data) }
+      if name == MPVOption.Subtitles.subScale {
+        DispatchQueue.main.async { self.player.subScaleChanged(data) }
+      } else {
+        DispatchQueue.main.async { self.player.secondarySubScaleChanged(data) }
+      }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough

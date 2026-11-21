@@ -9,8 +9,6 @@
 
 "general.on" = "På";
 "general.off" = "Av";
-"general.login" = "Logga in";
-"general.logout" = "Logga ut";
 "general.ok" = "OK";
 "general.cancel" = "Avbryt";
 "general.done" = "Klar";
@@ -24,20 +22,94 @@
 "input.value_is_empty" = "Värde kan inte vara tomt.";
 "input.already_exists" = "Värdet finns redan.";
 
+// About Window
+"about.title" = "Om";
+"about.license" = "Licens";
+"about.contributors" = "Bidragsgivare";
+"about.credits" = "Erkännanden";
+"about.crowdin" = "IINA:s lokalisering drivs av Crowdin.";
+
 // Guide Window
 "guide.highlights" = "Höjdpunkter";
 "guide.basic_settings" = "Grundläggande inställningar";
 "guide.faq" = "Vanliga frågor (FAQ)";
 
 // Initial Window
-"initial.announcement" = "Du använder en %@-version av IINA";
+"initial.announcement" = "Du använder en beta-version av IINA";
 "initial.beta.desc" = "Om du vill återgå till en utgiven version, avbocka \"Ta emot beta-uppdateringar\" under Inställningar > Allmänt och installera en stabil version från vår <a href=\"https://iina.io\">officiella webbsida</a>.";
 "initial.nightly.desc" = "Nightly is not recommended to be used as your daily driver. Currently nightly builds do not support auto update. Please manually download newer builds from our <a href=\"https://nightly.iina.io\">nightly website</a>.";
 "initial.debug.desc" = "Debug builds are usually not optimized for performance, so it is not recommended to be used as daily drive. Debug builds do not support auto update.";
 "initial.bug_report" = "Rapportera fel via <a href=\"https://github.com/iina/iina/issues\">GitHub issues</a>.";
+"initial.rollback" = "Avmarkera \"ta emot beta-uppdateringar\" i Inställningar - Allmänt, och installera en stabil utgivning från vår <a href=\"https://iina.io\">officiella webbplats</a>.";
+"initial.open_url" = "Öppna URL…";
+"initial.found_bug" = "Hittat ett fel?";
+"initial.resume" = "Återuppta";
+"initial.open" = "Öppna…";
+"initial.want_to_rollback" = "Vill du gå tillbaka?";
 
 // Inspector Window
 "inspector.error" = "Fel";
+"inspector.window_title" = "Granskare";
+"inspector.tab_general" = "Allmänt";
+"inspector.tab_tracks" = "Spår";
+"inspector.tab_file" = "Fil";
+"inspector.tab_status" = "Status";
+"inspector.segment_general" = "Allmänt";
+"inspector.segment_tracks" = "Spår";
+"inspector.segment_file" = "Fil";
+"inspector.segment_status" = "Status";
+"inspector.video_section" = "VIDEO";
+"inspector.video_format" = "Format";
+"inspector.video_codec" = "Kodek";
+"inspector.video_hw_decoder" = "Hårdvaruavkodare";
+"inspector.video_primaries" = "Primärkulörer";
+"inspector.video_colorspace" = "Färgrymd";
+"inspector.video_pixel_format" = "Pixelformat";
+"inspector.video_driver" = "Drivrutin";
+"inspector.video_size" = "Storlek";
+"inspector.video_bitrate" = "Datahastighet";
+"inspector.video_fps" = "Bilder/s";
+"inspector.audio_section" = "LJUD";
+"inspector.audio_format" = "Format";
+"inspector.audio_codec" = "Kodek";
+"inspector.audio_driver" = "Drivrutin";
+"inspector.audio_channels" = "Kanaler";
+"inspector.audio_bitrate" = "Datahastighet";
+"inspector.audio_sample_rate" = "Samplingshastighet";
+"inspector.track_label" = "Spår";
+"inspector.track_id" = "ID";
+"inspector.track_properties" = "Egenskaper";
+"inspector.track_default" = "Förval";
+"inspector.track_forced" = "Tvingad";
+"inspector.track_selected" = "Vald";
+"inspector.track_external" = "Extern";
+"inspector.track_source_id" = "Käll-ID";
+"inspector.track_title" = "Titel";
+"inspector.track_language" = "Språk";
+"inspector.track_file_path" = "Filsökväg";
+"inspector.track_codec" = "Kodek";
+"inspector.track_decoder" = "Avkodare";
+"inspector.track_fps" = "Bilder/s";
+"inspector.track_channels" = "Kanaler";
+"inspector.track_sample_rate" = "Samplingshastighet";
+"inspector.file_path" = "Filsökväg";
+"inspector.file_title" = "Titel";
+"inspector.file_comment" = "Kommentar";
+"inspector.file_size" = "Storlek";
+"inspector.file_format" = "Format";
+"inspector.file_duration" = "Varaktighet";
+"inspector.file_chapters" = "Kapitel";
+"inspector.file_editions" = "Utgåvor";
+"inspector.status_avsync_diff" = "A/V synk-diff";
+"inspector.status_total_avsync" = "Total A/V-synk";
+"inspector.status_dropped_frames" = "Kastade bildrutor";
+"inspector.status_mistimed_frames" = "Feltimade bildrutor";
+"inspector.status_display_fps" = "Bilder/s (bildskärm)";
+"inspector.status_estimated_output_fps" = "Uppskattat antal bilder/s";
+"inspector.status_estimated_display_fps" = "Uppskattad display-FPS";
+"inspector.status_watch" = "Övervaka";
+"inspector.watch_column_name" = "Namn";
+"inspector.watch_column_value" = "Värde";
 
 // MainWindowController.swift
 "main.buffering_indicator" = "Buffrar… %d%%";
@@ -111,6 +183,7 @@
 "osd.sub_second_delay.earlier" = "Sekundär undertextsfördröjning: %@s tidigare";
 "osd.sub_second_hidden" = "Sekundära undertexter dolda";
 "osd.sub_second_pos" = "Sekundär undertextsposition: %@";
+"osd.sub_second_scale" = "Secondary Subtitle Scale: %@x";
 "osd.sub_second_visible" = "Sekundära undertexter synliga";
 "osd.mute" = "Tysta";
 "osd.unmute" = "Tysta av";
@@ -149,12 +222,16 @@
 "osd.file_loop" = "Repetera enstaka fil";
 "osd.playlist_loop" = "Repetera spellista";
 "osd.no_loop" = "Inaktivera repetering";
+"osd.screenshot.reveal" = "VISA";
+"osd.screenshot.edit" = "REDIGERA";
+"osd.screenshot.delete" = "RADERA";
+"osd.sub_choose.prompt" = "Vänligen klicka för att välja undertext för nedladdning:";
+"osd.sub_choose.cancel" = "AVBRYT";
+"osd.sub_choose.download" = "LADDA NER";
 
 "preference.title" = "Inställningar";
 "preference.general" = "Allmänt";
 "preference.ui" = "Gränssnitt";
-"preference.video_audio" = "Video & ljud";
-"preference.subtitle" = "Undertext";
 "preference.network" = "Nätverk";
 "preference.control" = "Kontroll";
 "preference.keybindings" = "Kortkommandon";
@@ -162,29 +239,6 @@
 "preference.plugins" = "Tillägg";
 "preference.utilities" = "Verktyg";
 "preference.scripts" = "Skript";
-"preference.not_logged_in" = "Ej inloggad";
-"preference.logged_in_as" = "Inloggad som %@";
-"preference.system_media_control" = "Använd systemets mediakontroll";
-
-"preference.key_binding_hint_1" = "För att redigera snabbtangenter i nuvarande konfigurationsfil, klicka på \"Duplicera…\" först för att skapa en kopia.";
-"preference.key_binding_hint_2" = "Dubbelklicka på en rad på höger sida för att redigera motsvarande kortkommando.";
-
-"preference.enable_adv_settings" = "Aktivera avancerade inställningar";
-
-"preference.sub_override_level.no" = "nej";
-"preference.sub_override_level.force" = "tvinga";
-"preference.sub_override_level.scale" = "skala";
-"preference.sub_override_level.strip" = "avlägsna";
-"preference.sub_override_level.yes" = "ja";
-
-"preference.sub_override_level.descriptive_text.no" = "Render subtitles as specified by the subtitle scripts, without overrides.";
-"preference.sub_override_level.descriptive_text.force" = "Tillämpa alla undertextstilar.";
-"preference.sub_override_level.descriptive_text.scale" = "Apply the scale setting in addition to the style settings in this section.";
-"preference.sub_override_level.descriptive_text.strip" = "Radically strip all ASS tags and styles from the subtitle.";
-"preference.sub_override_level.descriptive_text.yes" = "Tillämpa alla stilinställningar i det här avsnittet.";
-
-"preference.ytdl_plugin_not_installed" = "Installera Online Media-tillägget från \"Tillägg > Installera från GitHub\" för att få tillgång till avancerade funktioner som videonedladdning och automatiska yt-dlp-uppdateringar.";
-"preference.ytdl_plugin_installed" = "Det inbyggda youtube-dl-stödet är inaktiverat då du har installerat Online Media-tillägget.";
 
 "menu.volume" = "Volym: %@";
 "menu.volume_muted" = "Volym: %@ (Tystat)";
@@ -373,8 +427,6 @@
 "alert.plugin_update_found.message" = "Den senaste versionen är %@. Du har %@. Vill du uppdatera?";
 "alert.plugin_permission" = "Detta tillägget kräver följande behörigheter. Vänligen granska dem innan du fortsätter.";
 "alert.plugin_permission_added" = "Denna uppdateringen kräver ytterligare behörigheter. Vänligen granska dem innan du fortsätter.";
-"alert.install_plugin_macos_11.title" = "Installera plugin från GitHub";
-"alert.install_plugin_macos_11.message" = "Use the format user/repo or enter the full GitHub URL. The plugin store is not available on macOS 11. A newer system is recommended for the best experience.";
 
 "playlist.total_length" = "Totalt %@";
 "playlist.total_length_with_selected" = "%@ av %@ markerade";
@@ -411,6 +463,8 @@
 
 "keymapping.title" = "Kortkommando";
 "keymapping.message" = "Tryck på valfri tangent för att fånga.";
+"keymapping.select_action" = "Välj åtgärd:";
+"keymapping.enter_command" = "Eller ange mpv-kommando:";
 
 "filter.video_filters" = "Videofilter";
 "filter.audio_filters" = "Ljudfilter";
@@ -483,8 +537,6 @@
 "permissions.file-system.desc" = "Detta tillägget kan läsa och skriva till filer på din hårddisk, inklusive känslig information. Det kan även anropa andra program eller applikationer som kan skada din dator. Se till att verifiera källan noggrant.";
 
 "plugin.install" = "Installera";
-"plugin.installed" = "Installerat";
-"plugin.not_installed" = "Inte installerat";
 "plugin.local" = "Installerat lokalt";
 "alert.plugin.install_error" = "Ett fel uppstod under installationen: %@";
 "alert.invalid_url" = "URL:en är ogiltig.";
@@ -493,7 +545,6 @@
 "plugin.install_error.cannot_download" = "Det gick inte att ladda ner tillägget.\n\nUtdata: %@\n";
 "plugin.install_error.cannot_unpackage" = "Det gick inte att packa upp tillägget.\n\nUtdata: %@\n";
 "plugin.install_error.cannot_load" = "IINA kan inte ladda detta tillägget. Det kanske är i fel format.";
-"plugin.check_for_updates" = "Sök efter uppdateringar";
 "plugin.updating" = "Laddar ner uppdateringen…";
 
 // Log window
@@ -538,6 +589,23 @@
 "history_window.search.no_recents" = "Inga tidigare sökningar";
 "history_window.search.recents_title" = "Senaste sökningar";
 "history_window.search.clear_recents" = "Rensa senaste";
+
+// Guide window
+"guide_window.website" = "Webbplats";
+"guide_window.fail" = "Det gick inte att läsa in höjdpunkter. Vänligen besök vår hemsida https://iina.io för mer information.";
+"guide_window.continue" = "Fortsätt";
+
+// Font picker
+"font_picker.title" = "Välj typsnitt";
+"font_picker.choose" = "Välj typsnitt:";
+"font_picker.filter" = "Skriv för att filtrera…";
+"font_picker.family" = "Familj";
+"font_picker.typeface" = "Variant";
+"font_picker.preview" = "Förhandsvisning";
+"font_picker.test" = "Test";
+"font_picker.other" = "Eller ange typsnittets namn:";
+"font_picker.cancel" = "Avbryt";
+"font_picker.ok" = "OK";
 
 // Sidebar
 

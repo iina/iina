@@ -62,21 +62,27 @@ class JustXMLRPC {
     let reqXML = XMLDocument(rootElement: methodCall)
     // Request
     Just.post(location, requestBody: reqXML.xmlData, asyncCompletionHandler: { response in
-      if response.ok, let content = response.content, let responseDoc = try? XMLDocument(data: content) {
-        let rootElement = responseDoc.rootElement()
-        if let _ = rootElement?.child("fault") {
+      guard response.ok else {
+        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0,
+                                   reason: response.reason, underlyingError: response.error)))
+        return
+      }
+      // Don't load external entities, which can include local files.
+      if let content = response.content,
+         let responseDoc = try? XMLDocument(data: content, options: [.nodeLoadExternalEntitiesNever]),
+         let rootElement = responseDoc.rootElement(), rootElement.name == "methodResponse" {
+        if let _ = rootElement.child("fault") {
           callback(.failure)
-        } else if let params = rootElement?.child("params")?.child("param")?.children,
-          params.count == 1 {
-          callback(.ok(JustXMLRPC.value(fromValueElement: params[0] as! XMLElement)))
+        } else if let params = rootElement.child("params")?.findChildren("param"), params.count == 1,
+                  let values = params[0].findChildren("value"), values.count == 1,
+                  let value = JustXMLRPC.value(fromValueElement: values[0]) {
+          callback(.ok(value))
         } else {
           // unexpected return value
           callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0, reason: "Bad response")))
         }
       } else {
-        // http error
-        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0,
-                                    reason: response.reason, underlyingError: response.error)))
+        callback(.error(XMLRPCError(method: method, httpCode: response.statusCode ?? 0, reason: "Bad response")))
       }
     })
   }
@@ -121,39 +127,53 @@ class JustXMLRPC {
     return valueElement
   }
 
-  private static func value(fromValueElement element: XMLElement) -> Any {
-    let valueElement = element.child(at: 0)! as! XMLElement
+  private static func value(fromValueElement element: XMLElement) -> Any? {
+    let children = element.children?.compactMap { $0 as? XMLElement } ?? []
+    guard !children.isEmpty else {
+      // XML-RPC values without a type element are strings
+      return element.stringValue ?? ""
+    }
+    guard children.count == 1 else { return nil }
+
+    let valueElement = children[0]
     let s = valueElement.stringValue ?? ""
     switch valueElement.name {
     case "boolean":
-      return Bool(s) as Any
+      switch s {
+      case "0": return false
+      case "1": return true
+      default: return nil
+      }
     case "int", "i4":
-      return Int(s) as Any
+      return Int(s)
     case "double":
-      return Double(s) as Any
+      return Double(s)
     case "string":
       return s as Any
     case "dateTime.iso8601":
-      return iso8601DateFormatter.date(from: s)!
+      return iso8601DateFormatter.date(from: s)
     case "base64":
-      return Data(base64Encoded: s) ?? Data()
+      return Data(base64Encoded: s)
     case "array":
+      guard let data = valueElement.child("data") else { return nil }
       var resultArray: [Any] = []
-      for child in valueElement.child("data")?.findChildren("value") ?? [] {
-        resultArray.append(JustXMLRPC.value(fromValueElement: child))
+      for child in data.findChildren("value") ?? [] {
+        guard let value = JustXMLRPC.value(fromValueElement: child) else { return nil }
+        resultArray.append(value)
       }
       return resultArray
     case "struct":
       var resultDict: [String: Any] = [:]
       for child in valueElement.findChildren("member") ?? [] {
-        let key = child.child("name")!.stringValue!
-        let value = JustXMLRPC.value(fromValueElement: child.child("value")!)
+        guard let key = child.child("name")?.stringValue,
+              let element = child.child("value"),
+              let value = JustXMLRPC.value(fromValueElement: element) else { return nil }
         resultDict[key] = value
       }
       return resultDict
     default:
       Logger.log("XMLRPC: Unexpected value type: \(valueElement.name ?? "")", level: .error)
-      return 0
+      return nil
     }
   }
 

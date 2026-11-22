@@ -71,7 +71,7 @@ struct TouchBarSettings {
   }
 
   /// Will be `false` if it is _known for certain_ that the Touch Bar is not configured to show app controls; otherwise `true`.
-  /// - Note: If the the `Press and hold fn key to` setting is set to `App Controls` IINA assumes app controls are being
+  /// - Note: If the `Press and hold fn key to` setting is set to `App Controls` IINA assumes app controls are being
   ///         displayed all the time. It would be possible to optimize this further so that in this case IINA would draw the Touch Bar
   ///         only when the `fn` key is pressed.
   var showAppControls: Bool {

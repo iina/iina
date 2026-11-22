@@ -63,7 +63,11 @@ class JavascriptAPIStandaloneWindow: JavascriptAPI, JavascriptAPIStandaloneWindo
   }
 
   func loadFile(_ path: String) {
-    let rootURL = pluginInstance.plugin.root
+    guard let plugin = pluginInstance?.plugin else {
+      log("standaloneWindow.loadFile was called when the plugin is being reloaded or unloaded; ignored")
+      return
+    }
+    let rootURL = plugin.root
     let url = rootURL.appendingPathComponent(path)
     inSimpleMode = false
     Utility.executeOnMainThread {

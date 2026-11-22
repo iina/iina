@@ -81,6 +81,10 @@ class JavascriptPluginInstance {
     guard let host = url.host else {
       return false
     }
+    guard let plugin else {
+      // The plugin is being reloaded or has been unloaded
+      return false
+    }
     guard plugin.domainList.contains(where: { domain -> Bool in
       if domain == "*" {
         return true

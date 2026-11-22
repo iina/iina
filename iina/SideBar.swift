@@ -186,6 +186,9 @@ class SidebarViewController: NSViewController {
         updateTabActiveStatus()
       }
     }
+    prefObserver.add(.edgeToEdgeVideo) { [unowned self] _ in
+      updateTabButtonLayout()
+    }
 
     NotificationCenter.default
       .addObserver(forName: .iinaFullscreenChanged, object: nil, queue: .main) { [unowned self] n in
@@ -330,15 +333,16 @@ class SidebarViewController: NSViewController {
       $0.removeFromSuperview()
     }
     let isInFullScreen = player.mainWindow.fsState.isFullscreen
+    let closesTowardEdge = isInFullScreen || Preference.bool(for: .edgeToEdgeVideo)
+    let towardLeadingEdge = isLeading == closesTowardEdge
+    closeSidebarBtn.image = .sf(towardLeadingEdge ? "chevron.backward" : "chevron.forward")
     if isLeading {
-      closeSidebarBtn.image = .sf("chevron.backward")
       tabButtonsLeadingConstraint.constant = isInFullScreen ? 10 : 96
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing
       tabButtonsStackView.addArrangedSubview(tabButtonsSegmentControl)
       tabButtonsStackView.addArrangedSubview(closeSidebarBtn)
     } else {
-      closeSidebarBtn.image = .sf("chevron.forward")
       tabButtonsLeadingConstraint.constant = 10
       tabButtonsTrailingConstraint.constant = 10
       tabButtonsStackView.distribution = .equalSpacing

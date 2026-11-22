@@ -86,3 +86,21 @@ class OSCBottomView: NSView {
     verticalConstraint.isActive = true
   }
 }
+
+
+extension OSCBottomView: OSCViewContainer {
+  var oscViews: [NSView?] {
+    [self]
+  }
+
+  func setup(osc: OSCController, isActive: Bool) {
+    updateVerticalConstraint(isDisplaying: isActive)
+    guard isActive else { return }
+
+    osc.attachComponents(in: oscView)
+  }
+
+  func detachAllComponents() {
+    oscView.views.forEach(oscView.removeView)
+  }
+}

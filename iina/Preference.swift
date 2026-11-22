@@ -446,6 +446,7 @@ struct Preference {
     case floating = 0
     case top
     case bottom
+    case minimal
 
     static var defaultValue = OSCPosition.floating
 
@@ -458,6 +459,7 @@ struct Preference {
       case .floating: "floating"
       case .top: "top"
       case .bottom: "bottom"
+      case .minimal: "minimal"
       }
     }
   }
@@ -1040,7 +1042,11 @@ struct Preference {
     guard isLiveTextAvailable else { return false }
     return Preference.bool(for: .enableLiveText)
   }
-  
+
+  static var oscToolbarButtons: [ToolBarButton] {
+    (Preference.array(for: .controlBarToolbarButtons) as? [Int] ?? []).compactMap(Preference.ToolBarButton.init(rawValue:))
+  }
+
   // MARK: - Defaults
 
   static let defaultPreference: [Preference.Key: Any] = [

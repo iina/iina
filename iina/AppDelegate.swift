@@ -1516,7 +1516,7 @@ class RemoteCommandController {
       // the FORWARD and REWIND media keys. The preferredIntervals values are set based on the mpv
       // commands assigned to those keys. The Now Playing module may display the interval in the
       // seek backward and seek forward buttons causing the value displayed in the Now Playing
-      // module buttons to to be out of date. Merely updating the preferredIntervals values is
+      // module buttons to be out of date. Merely updating the preferredIntervals values is
       // insufficient to get the Now Playing module to update its buttons. Support for media keys
       // and remote commands must be disabled and then re-enabled.
       log("Restarting support for remote commands due to changes to key bindings")

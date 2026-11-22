@@ -290,7 +290,7 @@ class OpenSub {
 
     /// Logout of the user session.
     ///
-    /// Open Subtitles requests that applications logout of of user sessions so that they can free resources. This is discussed in the
+    /// Open Subtitles requests that applications logout of user sessions so that they can free resources. This is discussed in the
     /// [Best Practices](https://opensubtitles.stoplight.io/docs/opensubtitles-api/6ef2e232095c7-best-practices)
     /// section of the Open Subtitles REST API documentation.
     /// - Parameter timeout: The timeout to to use for the request.

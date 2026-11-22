@@ -555,7 +555,7 @@ class NewFilterSheetViewController: NSViewController, NSTableViewDelegate, NSTab
 
 }
 
-/* For preventing crash due to to adding filter with no name */
+/* For preventing crash due to adding filter with no name */
 extension NewFilterSheetViewController: NSTextFieldDelegate {
   func controlTextDidChange(_ obj: Notification) {
     if let textField = obj.object as? NSTextField {

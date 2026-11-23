@@ -234,6 +234,24 @@ class PlayerCore: NSObject {
   var syncUITimer: Timer?
   @Atomic private var isSyncUITimeDeferred = false
 
+  private var loadingTimer: Timer?
+  private static let loadingScreenThreshold: TimeInterval = 1.0
+
+  func scheduleLoadingTimer(for url: URL?) {
+    cancelLoadingTimer()
+    loadingTimer = Timer.scheduledTimer(withTimeInterval: Self.loadingScreenThreshold, repeats: false) { [weak self] _ in
+      guard let self else { return }
+      if self.info.state == .loading || self.info.state == .starting {
+        self.currentController.showLoadingScreen(for: url)
+      }
+    }
+  }
+
+  func cancelLoadingTimer() {
+    loadingTimer?.invalidate()
+    loadingTimer = nil
+  }
+
   var displayOSD: Bool = true
 
   var isInMiniPlayer = false
@@ -552,14 +570,20 @@ class PlayerCore: NSObject {
     info.videoPosition = nil
     info.videoTracks = []
     info.videoWidth = nil
-    if isNetwork {
-      AppDelegate.shared.openURLWindow.showLoadingScreen(playerCore: self)
-    }
-
     let _ = mainWindow.window
     mainWindow.pendingShow = true
     miniPlayer.pendingShow = true
     initialWindow.close()
+
+    // If autoSwitchToMusicMode is enabled and opening an audio file, pre-switch to miniPlayer
+    // so loading screen and playback are hosted directly in miniPlayer without window jumping.
+    let isAudioFile = Utility.mediaType(forExtension: url.pathExtension) == .audio
+    if Preference.bool(for: .autoSwitchToMusicMode), !overrideAutoSwitchToMusicMode, isAudioFile, !isInMiniPlayer, !mainWindow.fsState.isFullscreen {
+      log("Pre-switching to mini player for audio file: \(url.pathExtension)")
+      switchToMiniPlayer(automatically: true, showMiniPlayer: false)
+    }
+
+    scheduleLoadingTimer(for: url)
 
     if !mpv.getFlag(MPVOption.PlaybackControl.pause) {
       log("Pausing playback before running load command")
@@ -951,6 +975,8 @@ class PlayerCore: NSObject {
   ///     and call this method again to continue the process of stopping. It is important to stop the background task as if it is still
   ///     running when the mpv core is shutdown it may call into mpv triggering a crash.
   func stop() {
+    cancelLoadingTimer()
+    currentController.hideLoadingScreen()
     guard info.state != .shutDown else { return }
     savePlaybackPosition()
 
@@ -2094,6 +2120,10 @@ class PlayerCore: NSObject {
     }
     info.isNetworkResource = !info.currentURL!.isFileURL
 
+    if loadingTimer == nil {
+      scheduleLoadingTimer(for: info.currentURL)
+    }
+
     // set "date last opened" attribute
     if let url = info.currentURL, url.isFileURL {
       let time = Date().timeIntervalSince1970
@@ -2356,6 +2386,8 @@ class PlayerCore: NSObject {
   }
 
   func idleActiveChanged() {
+    cancelLoadingTimer()
+    currentController.hideLoadingScreen()
     if receivedEndFileWhileLoading && info.state == .starting {
       DispatchQueue.main.async { [unowned self] in
         currentController.close()
@@ -2770,6 +2802,8 @@ class PlayerCore: NSObject {
   }
 
   func notifyWindowVideoSizeChanged() {
+    cancelLoadingTimer()
+    currentController.hideLoadingScreen()
     currentController.handleVideoSizeChange()
     if currentController.pendingShow {
       currentController.pendingShow = false

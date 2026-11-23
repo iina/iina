@@ -3123,14 +3123,15 @@ extension MainWindowController: PIPViewControllerDelegate {
   }
 
   func doneExitingPIP() {
-    if isWindowHidden {
-      window?.makeKeyAndOrderFront(self)
-    }
-
     pipStatus = .notInPIP
 
-    addVideoViewToWindow()
-    oscFloatingView.updatePosition()
+    if !player.isInMiniPlayer {
+      if isWindowHidden {
+        window?.makeKeyAndOrderFront(self)
+      }
+      addVideoViewToWindow()
+      oscFloatingView.updatePosition()
+    }
 
     // Similarly, we need to run a redraw here as well. We check to make sure we are paused, because
     // this causes a janky animation in either case but as it's not necessary while the video is
@@ -3157,6 +3158,11 @@ extension MainWindowController: PIPViewControllerDelegate {
     // not hide in time and ends up covering the video view (which will be added
     // to the window under everything else, including the overlay).
     pipOverlayView.isHidden = true
+
+    if player.isInMiniPlayer {
+      pip.replacementWindow = nil
+      return
+    }
 
     // Set frame to animate back to
     let newVideoSize = videoView.frame.size.shrink(toSize: window.frame.size)

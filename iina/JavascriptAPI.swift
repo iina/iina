@@ -40,7 +40,7 @@ class JavascriptAPI: NSObject {
   }
 
   func permitted(to permission: JavascriptPlugin.Permission) -> Bool {
-    return pluginInstance.plugin.permissions.contains(permission)
+    return pluginInstance?.plugin?.permissions.contains(permission) ?? false
   }
 
   /// Checks whether the plugin is permitted to open the URL and returns the normalized URL string.
@@ -87,10 +87,13 @@ class JavascriptAPI: NSObject {
   ///   - forceLocalPath: whether the path must be a file system path
   /// - Returns: `local`: whether the path is inside the plugin's private folder
   func parsePath(_ path: String, forceLocalPath: Bool = true) -> (path: String?, local: Bool) {
+    guard let plugin = pluginInstance?.plugin else {
+      return (nil, false)
+    }
     if path.hasPrefix("@tmp/") {
-      return (expandPath(path, byReplacing: "tmp", with: pluginInstance.plugin.tmpURL), true)
+      return (expandPath(path, byReplacing: "tmp", with: plugin.tmpURL), true)
     } else if path.hasPrefix("@data/") {
-      return (expandPath(path, byReplacing: "data", with: pluginInstance.plugin.dataURL), true)
+      return (expandPath(path, byReplacing: "data", with: plugin.dataURL), true)
     }
 
     let trackType: MPVTrack.TrackType? =
@@ -123,8 +126,8 @@ class JavascriptAPI: NSObject {
       }
       return (
         absPath,
-        absPath.hasPrefix(pluginInstance.plugin.dataURL.path) ||
-        absPath.hasPrefix(pluginInstance.plugin.tmpURL.path)
+        absPath.hasPrefix(plugin.dataURL.path) ||
+        absPath.hasPrefix(plugin.tmpURL.path)
       )
     } ?? (nil, false)
   }

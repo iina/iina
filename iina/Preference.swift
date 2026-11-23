@@ -44,6 +44,7 @@ struct Preference {
 
     /** Record recent files */
     static let recordPlaybackHistory = Key("recordPlaybackHistory")
+    static let recordLastPlayedFile = Key("recordLastPlayedFile")
     static let recordRecentFiles = Key("recordRecentFiles")
     static let trackAllFilesInRecentOpenMenu = Key("trackAllFilesInRecentOpenMenu")
 
@@ -1051,6 +1052,7 @@ struct Preference {
     .allowDuplicatePlayers: false,
     .enableCmdN: false,
     .recordPlaybackHistory: true,
+    .recordLastPlayedFile: true,
     .recordRecentFiles: true,
     .trackAllFilesInRecentOpenMenu: true,
     .controlBarPositionHorizontal: Float(0.5),
@@ -1483,6 +1485,7 @@ struct Preference {
            .preventScreenSaver,
            .quitWhenNoOpenedWindow,
            .receiveBetaUpdate,
+           .recordLastPlayedFile,
            .recordPlaybackHistory,
            .recordRecentFiles,
            .replayGainClip,

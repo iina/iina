@@ -226,6 +226,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     // with IINA's certificate as is the case for developer and nightly builds.
     restoreRecentDocuments()
 
+    // If recording the last played file is disabled, silently remove any values left over from
+    // when it was enabled.
+    if !Preference.bool(for: .recordLastPlayedFile) {
+      Preference.set(nil, for: .iinaLastPlayedFilePath)
+      Preference.set(nil, for: .iinaLastPlayedFilePosition)
+    }
+
     // register for url event
     NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(self.handleURLEvent(event:withReplyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
 

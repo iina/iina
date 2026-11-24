@@ -53,6 +53,15 @@ extern "C" {
  * OpenGL: via MPV_RENDER_API_TYPE_OPENGL, see render_gl.h header.
  * Software: via MPV_RENDER_API_TYPE_SW, see section "Software renderer"
  *
+ * Renderers
+ * ---------
+ *
+ * The backend determines the graphics API of the target surface. Which of
+ * mpv's video renderers draws into it is selected independently with
+ * MPV_RENDER_PARAM_RENDERER: the renderer of the `gpu-next` video output, or the
+ * renderer of the `gpu` video output. Both accept the same backend parameters,
+ * so you can switch between them without other changes.
+ *
  * Threading
  * ---------
  *
@@ -435,6 +444,25 @@ typedef enum mpv_render_param_type {
      * Type: mpv_d3d11_fbo*
      */
     MPV_RENDER_PARAM_D3D11_FBO = 22,
+    /**
+     * Select the video renderer. Valid for mpv_render_context_create().
+     *
+     * Type: char*
+     *
+     * Defined renderers:
+     *
+     *   MPV_RENDER_RENDERER_GPU_NEXT ("gpu-next"):
+     *      The renderer of the gpu-next video output. (recommended)
+     *   MPV_RENDER_RENDERER_GPU ("gpu"):
+     *      The renderer of the gpu video output.
+     *
+     * If omitted, "gpu-next" is used if it initializes on the given backend,
+     * and "gpu" otherwise. Applications that depend on the options of one
+     * renderer should select it explicitly.
+     *
+     * Ignored with MPV_RENDER_API_TYPE_SW.
+     */
+    MPV_RENDER_PARAM_RENDERER = 23,
 } mpv_render_param_type;
 
 /**
@@ -483,6 +511,12 @@ typedef struct mpv_render_param {
 #define MPV_RENDER_API_TYPE_OPENGL "opengl"
 // See section "Software renderer"
 #define MPV_RENDER_API_TYPE_SW "sw"
+
+/**
+ * Predefined values for MPV_RENDER_PARAM_RENDERER.
+ */
+#define MPV_RENDER_RENDERER_GPU "gpu"
+#define MPV_RENDER_RENDERER_GPU_NEXT "gpu-next"
 
 /**
  * Flags used in mpv_render_frame_info.flags. Each value represents a bit in it.
@@ -569,6 +603,7 @@ typedef struct mpv_render_frame_info {
  * You should pass the following parameters:
  *  - MPV_RENDER_PARAM_API_TYPE to select the underlying backend/GPU API.
  *  - Backend-specific init parameter, like MPV_RENDER_PARAM_OPENGL_INIT_PARAMS.
+ *  - MPV_RENDER_PARAM_RENDERER to select the video renderer.
  *  - Setting MPV_RENDER_PARAM_ADVANCED_CONTROL and following its rules is
  *    strongly recommended.
  *  - If you want to use hwdec, possibly hwdec interop resources.
@@ -584,9 +619,9 @@ typedef struct mpv_render_frame_info {
  * @return error code, including but not limited to:
  *      MPV_ERROR_UNSUPPORTED: the OpenGL version is not supported
  *                             (or required extensions are missing)
- *      MPV_ERROR_NOT_IMPLEMENTED: an unknown API type was provided, or
- *                                 support for the requested API was not
- *                                 built in the used libmpv binary.
+ *      MPV_ERROR_NOT_IMPLEMENTED: an unknown API type or renderer was
+ *                                 provided, or support for the requested API
+ *                                 was not built in the used libmpv binary.
  *      MPV_ERROR_INVALID_PARAMETER: at least one of the provided parameters was
  *                                   not valid.
  */

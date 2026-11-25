@@ -210,6 +210,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
       Logger.log("  \(library.name) \(AppDelegate.versionAsString(library.version))")
     }
     Logger.log("libass \(MPVOptionDefaults.shared.libassVersion)")
+    Logger.log("libplacebo \(MPVOptionDefaults.shared.libplaceboVersion)")
 
     logBuildDetails()
     logPlatformDetails()

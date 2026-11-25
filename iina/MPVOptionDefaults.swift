@@ -36,6 +36,14 @@ class MPVOptionDefaults {
     return "\(major).\(minor).\(patch)"
   }
 
+  /// Version number of the libplacebo library.
+  var libplaceboVersion: String {
+    guard mpv != nil, let version = getPropertyAsString(MPVProperty.libplaceboVersion) else {
+      return "Unable to obtain libplacebo version number"
+    }
+    return version
+  }
+
   /// Version number of the mpv library.
   var mpvVersion: String {
     guard mpv != nil, let version = getPropertyAsString(MPVProperty.mpvVersion) else {

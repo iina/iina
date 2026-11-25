@@ -446,7 +446,8 @@ class Utility {
   static let userInputConfDirURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.userInputConfFolder, isDirectory: true)
     createDirIfNotExist(url: url)
-    return url
+    // contentsOfDirectory(at:) fails with ENOTDIR when the URL's last component is a symlink.
+    return url.resolvingSymlinksInPath()
   }()
 
   static let watchLaterURL: URL = {
@@ -458,7 +459,8 @@ class Utility {
   static let pluginsURL: URL = {
     let url = Utility.appSupportDirUrl.appendingPathComponent(AppData.pluginsFolder, isDirectory: true)
     createDirIfNotExist(url: url)
-    return url
+    // contentsOfDirectory(at:) fails with ENOTDIR when the URL's last component is a symlink.
+    return url.resolvingSymlinksInPath()
   }()
 
   static let binariesURL: URL = {

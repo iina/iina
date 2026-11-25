@@ -51,7 +51,7 @@ class Titlebar: NSView {
   private var topConstraint: NSLayoutConstraint!
   private var verticalConstraint: NSLayoutConstraint!
   private var titleTextField: NSTextField!
-  private var docIcon: NSImageView!
+  private var docIcon: ProxyIconView!
 
   var oscView: TimeLabelOverflowedStackView!
   private var oscContainer: NSView!
@@ -157,7 +157,7 @@ class Titlebar: NSView {
       }
       titleHeightConstraint.isActive = true
 
-      self.docIcon = NSImageView()
+      self.docIcon = ProxyIconView()
       docIcon.translatesAutoresizingMaskIntoConstraints = false
       titlebarContainer.addSubview(docIcon)
       docIcon.padding(.leading(greaterThan: Titlebar.docIconLeadingPadding))
@@ -214,7 +214,7 @@ class Titlebar: NSView {
 
     updateShadow()
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -281,6 +281,7 @@ class Titlebar: NSView {
     }
 
     let filename = window.representedFilename
+    docIcon.url = filename.isEmpty ? nil : URL(fileURLWithPath: filename)
     docIcon.image = filename.isEmpty ? nil : NSWorkspace.shared.icon(forFile: filename)
   }
 
@@ -331,7 +332,7 @@ class Titlebar: NSView {
   override func rightMouseUp(with event: NSEvent) {}
 
   private func showPathMenu() {
-    guard let filename = mainWindow.window?.representedFilename else { return }
+    guard let filename = mainWindow.window?.representedFilename, !filename.isEmpty else { return }
 
     let menu = NSMenu()
     menu.autoenablesItems = false
@@ -399,6 +400,123 @@ class Titlebar: NSView {
 }
 
 
+/// Stand-in for the hidden system proxy icon: hold to drag the file, Command-click or right-click
+/// for the path menu.
+fileprivate final class ProxyIconView: NSImageView, NSDraggingSource {
+  static let dragHoldDelay: TimeInterval = 0.35
+  static let windowDragThreshold: CGFloat = 3
+
+  var url: URL? {
+    didSet {
+      if url == nil {
+        mouseDownEvent = nil
+        window?.isMovable = true
+      } else if isMouseInside {
+        window?.isMovable = false
+      }
+    }
+  }
+
+  // Proxy icon behavior
+
+  private var mouseDownEvent: NSEvent?
+  private var isFileDragging = false
+
+  override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
+
+  override func mouseDown(with event: NSEvent) {
+    // Without a file, or for a Command-click (path menu), let the title bar handle it.
+    guard url != nil, !event.modifierFlags.contains(.command) else {
+      nextResponder?.mouseDown(with: event)
+      return
+    }
+    mouseDownEvent = event
+  }
+
+  override func mouseDragged(with event: NSEvent) {
+    guard let down = mouseDownEvent else { return }
+
+    if event.timestamp - down.timestamp >= Self.dragHoldDelay {
+      mouseDownEvent = nil
+      beginFileDrag(with: down)
+    } else if down.locationInWindow.distance(to: event.locationInWindow) > Self.windowDragThreshold {
+      // Moved before the hold delay ran out: drag the window, as the system title bar does.
+      mouseDownEvent = nil
+      window?.isMovable = true
+      window?.performDrag(with: down)
+      window?.isMovable = !isMouseInside
+    }
+  }
+
+  override func mouseUp(with event: NSEvent) {
+    mouseDownEvent = nil
+    if !isMouseInside { window?.isMovable = true }
+    // Forward the event so that double-clicking the title bar still zooms or minimizes the window.
+    nextResponder?.mouseUp(with: event)
+  }
+
+  private func beginFileDrag(with event: NSEvent) {
+    guard let url else { return }
+    // Drag the icon at the size it's shown in the title bar. Reuse the icon that's already loaded:
+    // looking it up again is slow for files on network volumes.
+    let dragImage = image ?? NSWorkspace.shared.icon(forFile: url.path)
+    let item = NSDraggingItem(pasteboardWriter: url as NSURL)
+    item.setDraggingFrame(bounds, contents: dragImage)
+
+    isFileDragging = true
+    let session = beginDraggingSession(with: [item], event: event, source: self)
+    session.animatesToStartingPositionsOnCancelOrFail = true
+    session.draggingFormation = .none
+  }
+
+  func draggingSession(_ session: NSDraggingSession,
+                       sourceOperationMaskFor context: NSDraggingContext) -> NSDragOperation {
+    // Same as the system proxy icon: never move or delete the file.
+    [.copy, .link, .generic]
+  }
+
+  func draggingSession(_ session: NSDraggingSession, endedAt screenPoint: NSPoint,
+                       operation: NSDragOperation) {
+    isFileDragging = false
+    mouseDownEvent = nil
+    if !isMouseInside { window?.isMovable = true }
+  }
+
+  // Window movement
+  //
+  // In the title bar, the window moves along with a drag even when `mouseDownCanMoveWindow` is
+  // `false`. The only way to stop it is to make the window unmovable before the click, so do that
+  // while the pointer is over the icon.
+
+  private var trackingArea: NSTrackingArea?
+
+  private var isMouseInside: Bool {
+    guard let window else { return false }
+    return bounds.contains(convert(window.mouseLocationOutsideOfEventStream, from: nil))
+  }
+
+  override var mouseDownCanMoveWindow: Bool { url == nil }
+
+  override func updateTrackingAreas() {
+    super.updateTrackingAreas()
+    if let trackingArea { removeTrackingArea(trackingArea) }
+    let area = NSTrackingArea(rect: .zero,
+                              options: [.mouseEnteredAndExited, .activeAlways, .inVisibleRect],
+                              owner: self, userInfo: nil)
+    addTrackingArea(area)
+    trackingArea = area
+  }
+
+  override func mouseEntered(with event: NSEvent) {
+    if url != nil { window?.isMovable = false }
+  }
+
+  override func mouseExited(with event: NSEvent) {
+    if mouseDownEvent == nil && !isFileDragging { window?.isMovable = true }
+  }
+}
+
+
 /// Calls titlebar's updateLayer() to make sure the mask is redrawn during the animation.
 fileprivate class TitlebarInnerView: NSView {
   weak var titlebar: Titlebar!
@@ -407,11 +525,11 @@ fileprivate class TitlebarInnerView: NSView {
     self.titlebar = titlebar
     super.init(frame: .zero)
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+
   override func layout() {
     super.layout()
     titlebar.needsDisplay = true

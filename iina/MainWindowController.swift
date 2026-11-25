@@ -1434,6 +1434,9 @@ class MainWindowController: PlayerWindowController {
       cameraHousingWindow = nil
     }
     player.stop()
+    // The title bar's proxy icon makes the window unmovable while the pointer is over it.
+    // Undo that in case the window closes in that state, since windows are reused.
+    window?.isMovable = true
     // stop tracking mouse event
     guard let w = self.window, let cv = w.contentView else { return }
     cv.trackingAreas.forEach(cv.removeTrackingArea)

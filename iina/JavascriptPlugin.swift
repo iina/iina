@@ -213,8 +213,8 @@ class JavascriptPlugin: NSObject {
     let (process, stdout, stderr) = Process.run(["/bin/sh", "-c", cmd], at: pluginsRoot)
 
     guard process.terminationStatus == 0 else {
-      let outText = String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
-      let errText = String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
+      let outText = String(data: stdout, encoding: .utf8) ?? "None"
+      let errText = String(data: stderr, encoding: .utf8) ?? "None"
       removeTempPluginFolder()
       throw PluginError.cannotUnpackage(outText, errText)
     }
@@ -299,8 +299,8 @@ class JavascriptPlugin: NSObject {
     let (process, stdout, stderr) = Process.run(["/bin/sh", "-c", cmd], at: pluginsRoot)
 
     guard process.terminationStatus == 0 else {
-      let outText = String(data: stdout.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
-      let errText = String(data: stderr.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? "None"
+      let outText = String(data: stdout, encoding: .utf8) ?? "None"
+      let errText = String(data: stderr, encoding: .utf8) ?? "None"
       removeTempPluginFolder()
       throw PluginError.cannotDownload(outText, errText)
     }

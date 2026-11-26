@@ -303,8 +303,8 @@ class SidebarPlaylistPane: NSView, SidebarPane {
     if #available(macOS 14.0, *) {
       menu.addItem(.sectionHeader(title: NSLocalizedString("playlist.sorting.header", comment: "Sorting")))
     }
-    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_ascending", comment: "Filename Ascending"), action: #selector(sortPathAscending), keyEquivalent: "")
-    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_descending", comment: "Filename Descending"), action: #selector(sortPathDesecnding), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_ascending", comment: "Filename Ascending"), action: #selector(sortNameAscending), keyEquivalent: "")
+    menu.addItem(withTitle: NSLocalizedString("playlist.sorting.filename_descending", comment: "Filename Descending"), action: #selector(sortNameDesecnding), keyEquivalent: "")
     menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_ascending", comment: "File Path Ascending"), action: #selector(sortPathAscending), keyEquivalent: "")
     menu.addItem(withTitle: NSLocalizedString("playlist.sorting.path_descending", comment: "File Path Descending"), action: #selector(sortPathDesecnding), keyEquivalent: "")
     NSMenu.popUpContextMenu(menu, with: NSApplication.shared.currentEvent!, for: sender)
@@ -318,8 +318,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   private func sortName(ascending: Bool) {
     var playlist = player.info.playlist
     playlist.sort(by: {
-      let results = $0.filenameForDisplay < $1.filenameForDisplay
-      return ascending ? results : !results
+      ascending ? $0.filenameForDisplay < $1.filenameForDisplay : $0.filenameForDisplay > $1.filenameForDisplay
     })
     player.playlistReorder(newPlaylist: playlist)
   }
@@ -327,8 +326,7 @@ class SidebarPlaylistPane: NSView, SidebarPane {
   private func sortPath(ascending: Bool) {
     var playlist = player.info.playlist
     playlist.sort(by: {
-      let results = $0.filename < $1.filename
-      return ascending ? results : !results
+      ascending ? $0.filename < $1.filename : $0.filename > $1.filename
     })
     player.playlistReorder(newPlaylist: playlist)
   }

@@ -3035,7 +3035,9 @@ class PlayerCore: NSObject {
       playlist.removeAll()
       let playlistCount = mpv.getInt(MPVProperty.playlistCount)
       for index in 0..<playlistCount {
-        let playlistItem = MPVPlaylistItem(filename: mpv.getString(MPVProperty.playlistNFilename(index))!,
+        // The playlist can shrink while it is being read, e.g. when mpv expands a playlist file.
+        guard let filename = mpv.getString(MPVProperty.playlistNFilename(index)) else { break }
+        let playlistItem = MPVPlaylistItem(filename: filename,
                                            isCurrent: mpv.getFlag(MPVProperty.playlistNCurrent(index)),
                                            isPlaying: mpv.getFlag(MPVProperty.playlistNPlaying(index)),
                                            title: mpv.getString(MPVProperty.playlistNTitle(index)))

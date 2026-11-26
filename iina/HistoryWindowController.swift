@@ -447,30 +447,33 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
     }
   }
 
-  private var selectedEntries: [PlaybackHistory] {
+  /// Rows that an action from `sender` applies to. A context menu opened on a row outside the selection
+  /// applies to that row only; anything else (keyboard, main menu) applies to the selection.
+  private func targetEntries(_ sender: Any?) -> [PlaybackHistory] {
     var indexSet = outlineView.selectedRowIndexes
-    indexSet.insert(outlineView.clickedRow)
+    let clickedRow = outlineView.clickedRow
+    if (sender as? NSMenuItem)?.menu?.identifier == .contextMenu, clickedRow >= 0, !indexSet.contains(clickedRow) {
+      indexSet = [clickedRow]
+    }
     return indexSet.compactMap { outlineView.item(atRow: $0) as? PlaybackHistory }
   }
 
-  private var selectedFiles: [URL] {
-    if selectedEntries.isEmpty { return [] }
-    return selectedEntries.map { $0.url }.filter { FileManager.default.fileExists(atPath: $0.path) }
+  private func targetFiles(_ sender: Any?) -> [URL] {
+    return targetEntries(sender).map { $0.url }.filter { FileManager.default.fileExists(atPath: $0.path) }
   }
 
-  private var selectedPlayableEntries: [URL] {
-    if selectedEntries.isEmpty { return [] }
-    return selectedEntries.map { $0.url }.filter { !$0.isFileURL || FileManager.default.fileExists(atPath: $0.path) }
+  private func targetPlayableEntries(_ sender: Any?) -> [URL] {
+    return targetEntries(sender).map { $0.url }.filter { !$0.isFileURL || FileManager.default.fileExists(atPath: $0.path) }
   }
 
   func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
     switch menuItem.tag {
     case MenuItemTagShowInFinder, MenuItemTagDeleteFile:
-      return !selectedFiles.isEmpty
+      return !targetFiles(menuItem).isEmpty
     case MenuItemTagDelete:
-      return !selectedEntries.isEmpty
+      return !targetEntries(menuItem).isEmpty
     case MenuItemTagPlay, MenuItemTagPlayInNewWindow:
-      return !selectedPlayableEntries.isEmpty
+      return !targetPlayableEntries(menuItem).isEmpty
     case MenuItemTagExpandAll:
       return hasCollapsedGroup
     case MenuItemTagCollapseAll:
@@ -506,23 +509,27 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   // MARK: - Action
 
   @objc func playAction(_ sender: Any?) {
-    guard !selectedPlayableEntries.isEmpty else { return }
-    PlayerCore.active.openURLs(selectedPlayableEntries, shouldAutoLoad: false)
+    let urls = targetPlayableEntries(sender)
+    guard !urls.isEmpty else { return }
+    PlayerCore.active.openURLs(urls, shouldAutoLoad: false)
   }
 
   @objc func playInNewWindowAction(_ sender: Any?) {
-    guard !selectedPlayableEntries.isEmpty else { return }
-    PlayerCore.newPlayerCore.openURLs(selectedPlayableEntries, shouldAutoLoad: false)
+    let urls = targetPlayableEntries(sender)
+    guard !urls.isEmpty else { return }
+    PlayerCore.newPlayerCore.openURLs(urls, shouldAutoLoad: false)
   }
 
   @objc func showInFinderAction(_ sender: Any?) {
-    guard !selectedFiles.isEmpty else { return }
-    NSWorkspace.shared.activateFileViewerSelecting(selectedFiles)
+    let files = targetFiles(sender)
+    guard !files.isEmpty else { return }
+    NSWorkspace.shared.activateFileViewerSelecting(files)
   }
 
   @objc func deleteAction(_ sender: Any?) {
-    if !selectedEntries.isEmpty {
-      removeAfterConfirmation(self.selectedEntries)
+    let entries = targetEntries(sender)
+    if !entries.isEmpty {
+      removeAfterConfirmation(entries)
     }
   }
 
@@ -531,8 +538,8 @@ class HistoryWindowController: NSWindowController, NSOutlineViewDelegate, NSOutl
   }
 
   @objc func deleteFileAction(_ sender: Any?) {
-    if !selectedFiles.isEmpty {
-      removeFileAfterConfirmation(self.selectedEntries)
+    if !targetFiles(sender).isEmpty {
+      removeFileAfterConfirmation(targetEntries(sender))
     }
   }
 

@@ -592,7 +592,7 @@ extension SidebarPlaylistPane: NSMenuDelegate, NSMenuItemValidation {
     let fileURL = URL(fileURLWithPath: filename).deletingLastPathComponent()
     Utility.quickMultipleOpenPanel(title: NSLocalizedString("alert.choose_media_file.title", comment: "Choose Media File"), dir: fileURL, canChooseDir: true) { subURLs in
       for subURL in subURLs {
-        guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { return }
+        guard Utility.supportedFileExt[.sub]!.contains(subURL.pathExtension.lowercased()) else { continue }
         self.player.info.$matchedSubs.withLock { $0[filename, default: []].append(subURL) }
       }
       self.tableView.reloadData(forRowIndexes: selectedRows, columnIndexes: IndexSet(integersIn: 0...1))

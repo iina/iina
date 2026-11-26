@@ -578,7 +578,7 @@ extension String {
   }
 
   var mpvFixedLengthQuoted: String {
-    return "%\(count)%\(self)"
+    return "%\(utf8.count)%\(self)"
   }
 
   func equalsIgnoreCase(_ other: String) -> Bool {

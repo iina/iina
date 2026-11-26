@@ -857,7 +857,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, SPUUpdaterDelegate {
     if host == "open" || host == "weblink" {
       // open a file or link
       guard let queries = parsed.queryItems else { return }
-      let queryDict = [String: String](uniqueKeysWithValues: queries.map { ($0.name, $0.value ?? "") })
+      let queryDict = [String: String](queries.map { ($0.name, $0.value ?? "") }, uniquingKeysWith: { first, _ in first })
 
       // url
       guard let urlValue = queryDict["url"], !urlValue.isEmpty else {

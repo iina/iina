@@ -76,12 +76,11 @@ class JavascriptAPIWebSocketController: JavascriptAPI, JavascriptAPIWebSocketCon
   }
 
   private func setHandler(_ handler: JSValue, field: ReferenceWritableKeyPath<JavascriptAPIWebSocketController, JSManagedValue?>) {
-    func removePreviousHandler() {
+    if let previous = self[keyPath: field] {
+      JSContext.current()!.virtualMachine.removeManagedReference(previous, withOwner: self)
       self[keyPath: field] = nil
-      JSContext.current()!.virtualMachine.removeManagedReference(self[keyPath: field], withOwner: self)
     }
-    if handler.isNull || handler.isUndefined || self[keyPath: field] != nil {
-      removePreviousHandler()
+    if handler.isNull || handler.isUndefined {
       return
     }
     guard handler.isObject else {

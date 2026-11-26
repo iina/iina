@@ -39,7 +39,7 @@ class MainMenuActionHandler: NSResponder, NSMenuItemValidation {
         do {
           try playlist.write(to: url, atomically: true, encoding: String.Encoding.utf8)
         } catch let error as NSError {
-          Utility.showAlert("error_saving_file", arguments: ["subtitle",
+          Utility.showAlert("error_saving_file", arguments: ["playlist",
                                                             error.localizedDescription])
         }
       }

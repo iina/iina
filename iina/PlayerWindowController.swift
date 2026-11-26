@@ -299,9 +299,10 @@ class PlayerWindowController: NSWindowController, NSWindowDelegate {
       }
     } else {
       // - mpv command
+      guard let command = keyBinding.action.first else { return false }
       let returnValue: Int32
       // execute the command
-      switch keyBinding.action.first! {
+      switch command {
 
       case MPVCommand.abLoop.rawValue:
         abLoop()

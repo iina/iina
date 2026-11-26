@@ -1062,12 +1062,12 @@ class MainWindowController: PlayerWindowController {
   @discardableResult
   override func handleKeyBinding(_ keyBinding: KeyMapping) -> Bool {
     let success = super.handleKeyBinding(keyBinding)
-    if success && keyBinding.action.first! == MPVCommand.screenshot.rawValue {
+    if success && keyBinding.action.first == MPVCommand.screenshot.rawValue {
       player.sendOSD(.screenshot)
     }
 
-    if !keyBinding.isIINACommand {
-      switch keyBinding.action.first! {
+    if !keyBinding.isIINACommand, let command = keyBinding.action.first {
+      switch command {
       case MPVCommand.showProgress.rawValue:
         player.sendOSD(.showTime(player.info.progress))
       default: ()

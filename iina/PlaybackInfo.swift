@@ -264,8 +264,8 @@ class PlaybackInfo {
 
   func getMatchedSubs(_ file: String) -> [URL]? { $matchedSubs.withLock { $0[file] } }
 
-  var currentSubsInfo: [FileInfo] = []
-  var currentVideosInfo: [FileInfo] = []
+  @Atomic var currentSubsInfo: [FileInfo] = []
+  @Atomic var currentVideosInfo: [FileInfo] = []
 
   func calculateTotalDuration() -> Double? {
     $playlist.withLock { playlist in

@@ -954,7 +954,7 @@ extension NSWindow {
 
 extension Process {
   @discardableResult
-  static func run(_ cmd: [String], at currentDir: URL? = nil) -> (process: Process, stdout: Pipe, stderr: Pipe) {
+  static func run(_ cmd: [String], at currentDir: URL? = nil) -> (process: Process, stdout: Data, stderr: Data) {
     guard cmd.count > 0 else {
       fatalError("Process.launch: the command should not be empty")
     }
@@ -967,9 +967,19 @@ extension Process {
     process.standardOutput = stdout
     process.standardError = stderr
     process.launch()
+
+    // Drain both pipes before waiting. Otherwise a child that fills a pipe buffer (64 KB) blocks on
+    // write and waitUntilExit() never returns.
+    var stderrData = Data()
+    let group = DispatchGroup()
+    DispatchQueue.global(qos: .userInitiated).async(group: group) {
+      stderrData = stderr.fileHandleForReading.readDataToEndOfFile()
+    }
+    let stdoutData = stdout.fileHandleForReading.readDataToEndOfFile()
+    group.wait()
     process.waitUntilExit()
 
-    return (process, stdout, stderr)
+    return (process, stdoutData, stderrData)
   }
 }
 

@@ -58,7 +58,8 @@ class SidebarChaptersPane: NSView, SidebarPane {
   }
 
   @objc func doubleAction(_ sender: AnyObject) {
-    let index = tableView.selectedRow
+    let index = tableView.clickedRow
+    guard index >= 0 else { return }
     player.playChapter(index)
     tableView.deselectAll(self)
     tableView.reloadData()

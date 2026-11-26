@@ -1642,7 +1642,7 @@ class PlayerCore: NSObject {
   func playChapter(_ pos: Int) -> MPVChapter? {
     log("Seeking to chapter \(pos)", level: .verbose)
     let chapters = info.chapters
-    guard pos < chapters.count else {
+    guard chapters.indices.contains(pos) else {
       return nil
     }
     let chapter = chapters[pos]

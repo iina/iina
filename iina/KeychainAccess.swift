@@ -35,10 +35,11 @@ class KeychainAccess {
   static func write(username: String, password: String, forService serviceName: ServiceName, server: String? = nil, port: Int? = nil) throws {
     let status: OSStatus
 
-    if let _ = try? read(username: username, forService: serviceName, server: nil, port: nil) {
+    if let _ = try? read(username: username, forService: serviceName, server: server, port: port) {
 
       // if password exists, try to update the password
-      var query: [String: Any] = [kSecAttrService as String: serviceName.rawValue]
+      var query: [String: Any] = [kSecAttrService as String: serviceName.rawValue,
+                                  kSecAttrAccount as String: username]
       if let server { query[kSecAttrServer as String] = server }
       if let port { query[kSecAttrPort as String] = port }
       query[kSecClass as String] = server == nil && port == nil ? kSecClassGenericPassword : kSecClassInternetPassword

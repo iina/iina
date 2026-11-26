@@ -1151,21 +1151,36 @@ class MainWindowController: PlayerWindowController {
     if isDragging {
       // if it's a mouseup after dragging window
       isDragging = false
-    } else if sidebars.handleMouseUp(event) {
+      return
+    }
+    if sidebars.handleMouseUp(event) {
       // sidebar handled it (resize finish or click-outside-to-dismiss)
-    } else {
-      if event.clickCount == 2 && event.inAnyOf([titleBarView]) {
-        let userDefault = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick")
-        if userDefault == "Minimize" {
-          window?.performMiniaturize(nil)
-        } else if userDefault == "Maximize" {
-          window?.performZoom(nil)
-        }
+      return
+    }
+    if event.clickCount == 2 && event.inAnyOf([titleBarView]) {
+      // Obtain the value of the macOS "Window title bar double-click action" setting.
+      guard let action = UserDefaults.standard.string(forKey: "AppleActionOnDoubleClick") else {
+        // Should not occur.
+        log("Window title bar double-click action setting value missing", level: .error)
         return
       }
-
-      super.mouseUp(with: event)
+      switch action {
+      case "Fill":
+        // TODO: Consider if IINA should have different behavior for Fill and Zoom like Safari.
+        fallthrough
+      case "Maximize":  // Corresponds to the "Zoom" setting in the macOS System Settings UI.
+        window?.performZoom(nil)
+      case "Minimize":
+        window?.performMiniaturize(nil)
+      case "None":  // Corresponds to the "No Action" setting in the macOS System Settings UI.
+        break
+      default:
+        log("Window title bar double-click action setting is not recognized: \(action)",
+            level: .error)
+      }
+      return
     }
+    super.mouseUp(with: event)
   }
 
   override func otherMouseDown(with event: NSEvent) {

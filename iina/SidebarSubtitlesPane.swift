@@ -75,7 +75,7 @@ class SidebarSubtitlesPane: SidebarScrollView {
       $0.padding(.all(.sidebarContainerPadding))
     })
 
-    stack.addArrangedSubview(Container(SubPositionScaleDelayView(player: player)) {
+    stack.addArrangedSubview(Container(SubPositionDelayView(player: player)) {
       $0.padding(.all(.sidebarContainerPadding))
     })
 
@@ -309,14 +309,13 @@ fileprivate class SubDelayView: SidebarSliderView {
 }
 
 
-fileprivate class SubPositionScaleDelayView: NSView {
+fileprivate class SubPositionDelayView: NSView {
   private unowned let player: PlayerCore
   var isPrimary: Bool = true
 
   private var primarySwitch: NSSegmentedControl!
   private var positionSlider: NSSlider!
   private var delayView: SubDelayView!
-  private var scaleSlider: NSSlider!
 
   init(player: PlayerCore) {
     self.player = player
@@ -346,6 +345,73 @@ fileprivate class SubPositionScaleDelayView: NSView {
       positionSlider.tintProminence = .none
     }
 
+    self.delayView = SubDelayView(player: player)
+
+    let stack = ui.vStack(
+      spacing: .sidebarItemSpacing,
+      wantsToGrow: true,
+      primarySwitch,
+      ui.space(),
+      delayView,
+      ui.hStack(
+        spacing: 8,
+        ui.image("arrow.up.and.down", size: 16, config: .sidebarIconConfig),
+        ui.label("sidebar.position", font: .boldSystemFont(ofSize: 12)),
+        ui.flexibleSpace(),
+      ),
+      positionSlider,
+    )
+    addSubview(stack)
+    stack.padding(.all)
+
+    update()
+    player.observe(.iinaSubPositionChanged) { [unowned self] _ in
+      updatePosition()
+    }
+  }
+
+  private func update() {
+    updatePosition()
+    delayView.update()
+  }
+
+  private func updatePosition() {
+    let posOption = isPrimary ? MPVOption.Subtitles.subPos : MPVOption.Subtitles.secondarySubPos
+    positionSlider.intValue = Int32(player.mpv.getInt(posOption))
+  }
+
+  @objc private func switchAction(_ sender: AnyObject) {
+    isPrimary = primarySwitch.selectedSegment == 0
+    delayView.isPrimary = isPrimary
+    update()
+  }
+
+  @objc private func positionAction(_ sender: AnyObject) {
+    player.setSubPos(Int(positionSlider.intValue), forPrimary: isPrimary)
+  }
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
+
+fileprivate class SubStyleView: NSView {
+  private unowned let player: PlayerCore
+
+  private var scaleSlider: NSSlider!
+  private var fontChooser: NSButton!
+  private var fontSizePicker: NSPopUpButton!
+  private var borderSizePicker: NSPopUpButton!
+  private var textColorWell: NSColorWell!
+  private var backgroundColorWell: NSColorWell!
+  private var borderColorWell: NSColorWell!
+
+  init(player: PlayerCore) {
+    self.player = player
+    super.init(frame: .zero)
+
+    translatesAutoresizingMaskIntoConstraints = false
+
     self.scaleSlider = NSSlider()
     scaleSlider.minValue = -5
     scaleSlider.maxValue = 5
@@ -362,114 +428,6 @@ fileprivate class SubPositionScaleDelayView: NSView {
     )
     scaleResetButton.bezelStyle = .smallSquare
     scaleResetButton.isBordered = false
-
-    self.delayView = SubDelayView(player: player)
-
-    let stack = ui.vStack(
-      spacing: .sidebarItemSpacing,
-      wantsToGrow: true,
-      primarySwitch,
-      ui.space(),
-      delayView,
-      ui.hStack(
-        spacing: 8,
-        ui.image("arrow.up.and.down", size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.position", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-      ),
-      positionSlider,
-      ui.hStack(
-        spacing: 8,
-        ui.image("plus.magnifyingglass", size: 16, config: .sidebarIconConfig),
-        ui.label("sidebar.scale", font: .boldSystemFont(ofSize: 12)),
-        ui.flexibleSpace(),
-      ),
-      ui.hStack(
-        spacing: 8,
-        scaleSlider,
-        scaleResetButton,
-      ),
-    )
-    addSubview(stack)
-    stack.padding(.all)
-
-    update()
-    player.observe(.iinaSubPositionChanged) { [unowned self] _ in
-      updatePosition()
-    }
-    player.observe(.iinaSubScaleChanged) { [unowned self] _ in
-      updateScale()
-    }
-  }
-
-  private func update() {
-    updatePosition()
-    updateScale()
-    delayView.update()
-  }
-
-  private func updatePosition() {
-    let posOption = isPrimary ? MPVOption.Subtitles.subPos : MPVOption.Subtitles.secondarySubPos
-    positionSlider.intValue = Int32(player.mpv.getInt(posOption))
-  }
-
-  private func updateScale() {
-    let scaleOption = isPrimary ? MPVOption.Subtitles.subScale : MPVOption.Subtitles.secondarySubScale
-    let currSubScale = player.mpv.getDouble(scaleOption).clamped(to: 0.1...10)
-    let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
-    scaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
-  }
-
-  @objc private func switchAction(_ sender: AnyObject) {
-    isPrimary = primarySwitch.selectedSegment == 0
-    delayView.isPrimary = isPrimary
-    update()
-  }
-
-  @objc private func positionAction(_ sender: AnyObject) {
-    player.setSubPos(Int(positionSlider.intValue), forPrimary: isPrimary)
-  }
-
-  @objc private func scaleAction(_ sender: AnyObject) {
-    let value = scaleSlider.doubleValue
-    let mappedValue: Double, realValue: Double
-    // map [-10, -1], [1, 10] to [-9, 9], bounds may change in future
-    if value > 0 {
-      mappedValue = round((value + 1) * 20) / 20
-      realValue = mappedValue
-    } else {
-      mappedValue = round((value - 1) * 20) / 20
-      realValue = 1 / mappedValue
-    }
-    player.setSubScale(realValue, forPrimary: isPrimary)
-  }
-
-  @objc private func scaleResetButtonAction(_ sender: AnyObject) {
-    player.setSubScale(1, forPrimary: isPrimary)
-    scaleSlider.doubleValue = 0
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
-
-
-fileprivate class SubStyleView: NSView {
-  private unowned let player: PlayerCore
-
-  private var fontChooser: NSButton!
-  private var fontSizePicker: NSPopUpButton!
-  private var borderSizePicker: NSPopUpButton!
-  private var textColorWell: NSColorWell!
-  private var backgroundColorWell: NSColorWell!
-  private var borderColorWell: NSColorWell!
-
-  init(player: PlayerCore) {
-    self.player = player
-    super.init(frame: .zero)
-
-    translatesAutoresizingMaskIntoConstraints = false
 
     self.fontChooser = NSButton()
     fontChooser.bezelStyle = .push
@@ -494,6 +452,15 @@ fileprivate class SubStyleView: NSView {
     borderSizePicker.target = self
     borderSizePicker.action = #selector(chooseSubBorderSizeAction)
 
+    let scaleStack = ui.hStack(
+      spacing: 8,
+      ui.image("plus.magnifyingglass", size: 16, config: .sidebarIconConfig),
+      ui.label("sidebar.scale", font: .boldSystemFont(ofSize: 12)),
+      scaleSlider,
+      scaleResetButton,
+    )
+    scaleStack.size(height: 30)
+
     let fontStackLabel = ui.label("sidebar.font", font: .boldSystemFont(ofSize: 12))
     fontStackLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
     let fontStack = ui.hStack(
@@ -507,6 +474,7 @@ fileprivate class SubStyleView: NSView {
 
     let stack = ui.vStack(
       spacing: .sidebarItemSpacing,
+      scaleStack,
       fontStack,
       ui.hStack(
         spacing: 8,
@@ -537,6 +505,9 @@ fileprivate class SubStyleView: NSView {
 
     update()
     updateTextStyle()
+    player.observe(.iinaSubScaleChanged) { [unowned self] _ in
+      update()
+    }
     player.observe(.iinaSubFontChanged) { [unowned self] _ in
       update()
     }
@@ -566,6 +537,10 @@ fileprivate class SubStyleView: NSView {
     let subFont = player.mpv.getString(MPVOption.Subtitles.subFont) ??
       NSLocalizedString("sidebar.font", comment: "");
     fontChooser.title = subFont
+
+    let currSubScale = player.mpv.getDouble(MPVOption.Subtitles.subScale).clamped(to: 0.1...10)
+    let displaySubScale = Utility.toDisplaySubScale(fromRealSubScale: currSubScale)
+    scaleSlider.doubleValue = displaySubScale + (displaySubScale > 0 ? -1 : 1)
   }
 
   private func updateTextStyle() {
@@ -589,6 +564,25 @@ fileprivate class SubStyleView: NSView {
         colorWell?.color = color
       }
     }
+  }
+
+  @objc private func scaleResetButtonAction(_ sender: AnyObject) {
+    player.setSubScale(1)
+    scaleSlider.doubleValue = 0
+  }
+
+  @objc private func scaleAction(_ sender: AnyObject) {
+    let value = scaleSlider.doubleValue
+    let mappedValue: Double, realValue: Double
+    // map [-10, -1], [1, 10] to [-9, 9], bounds may change in future
+    if value > 0 {
+      mappedValue = round((value + 1) * 20) / 20
+      realValue = mappedValue
+    } else {
+      mappedValue = round((value - 1) * 20) / 20
+      realValue = 1 / mappedValue
+    }
+    player.setSubScale(realValue)
   }
 
   @objc func chooseSubFontAction(_ sender: AnyObject) {

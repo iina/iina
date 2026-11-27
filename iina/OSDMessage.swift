@@ -86,7 +86,6 @@ enum OSDMessage {
   case subHidden
   case subVisible
   case secondSubDelay(Double)
-  case secondSubScale(Double)
   case secondSubHidden
   case secondSubPos(Double)
   case secondSubVisible
@@ -272,10 +271,6 @@ enum OSDMessage {
     case .secondSubPos(let value):
       let text = String(format: NSLocalizedString("osd.sub_second_pos", comment: "Secondary Subtitle Position: %@"), value.groupedStringUpTo6Decimals)
       return (text, .withProgress(value / 100))
-
-    case .secondSubScale(let value):
-      let text = String(format: NSLocalizedString("osd.sub_second_scale", comment: "Secondary Subtitle Scale: %@x"), value.groupedStringUpTo6Decimals)
-      return (text, .normal)
 
     case .subDelay(let value):
       if value == 0 {

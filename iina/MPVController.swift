@@ -139,7 +139,6 @@ class MPVController: NSObject {
     MPVOption.PlaybackControl.speed: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubPos: MPV_FORMAT_DOUBLE,
-    MPVOption.Subtitles.secondarySubScale: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.secondarySubVisibility: MPV_FORMAT_FLAG,
     MPVOption.Subtitles.subDelay: MPV_FORMAT_DOUBLE,
     MPVOption.Subtitles.subPos: MPV_FORMAT_DOUBLE,
@@ -1408,18 +1407,12 @@ class MPVController: NSObject {
       }
       DispatchQueue.main.async { self.player.subDelayChanged(data) }
 
-    case MPVOption.Subtitles.secondarySubScale:
-      fallthrough
     case MPVOption.Subtitles.subScale:
       guard let data = UnsafePointer<Double>(OpaquePointer(property.data))?.pointee else {
         logPropertyValueError(MPVOption.Subtitles.subScale, property.format)
         break
       }
-      if name == MPVOption.Subtitles.subScale {
-        DispatchQueue.main.async { self.player.subScaleChanged(data) }
-      } else {
-        DispatchQueue.main.async { self.player.secondarySubScaleChanged(data) }
-      }
+      DispatchQueue.main.async { self.player.subScaleChanged(data) }
 
     case MPVOption.Subtitles.secondarySubPos:
       fallthrough

@@ -26,8 +26,6 @@ struct MPVProperty {
   static let estimatedFrameCount = "estimated-frame-count"
   /** estimated-frame-number */
   static let estimatedFrameNumber = "estimated-frame-number"
-  /** env */
-  static let env = "env"
   /** pid */
   static let pid = "pid"
   /** path */
@@ -70,6 +68,8 @@ struct MPVProperty {
   static let timePos = "time-pos"
   /** time-pos/full */
   static let timePosFull = "time-pos/full"
+  /** time-start */
+  static let timeStart = "time-start"
   /** time-remaining */
   static let timeRemaining = "time-remaining"
   /** time-remaining/full */
@@ -96,8 +96,6 @@ struct MPVProperty {
   static let edition = "edition"
   /** current-edition */
   static let currentEdition = "current-edition"
-  /** disc-menu-active */
-  static let discMenuActive = "disc-menu-active"
   /** chapters */
   static let chapters = "chapters"
   /** editions */
@@ -117,10 +115,6 @@ struct MPVProperty {
   /** edition-list/N/title */
   static func editionListNTitle(_ n: Int) -> String {
     return "edition-list/\(n)/title"
-  }
-  /** edition-list/N/metadata */
-  static func editionListNMetadata(_ n: Int) -> String {
-    return "edition-list/\(n)/metadata"
   }
   /** metadata */
   static let metadata = "metadata"
@@ -420,14 +414,6 @@ struct MPVProperty {
   static func tabletPosPadBtnsN(_ n: Int) -> String {
     return "tablet-pos/pad-btns/\(n)"
   }
-  /** dropped-files */
-  static let droppedFiles = "dropped-files"
-  /** dropped-files/time */
-  static let droppedFilesTime = "dropped-files/time"
-  /** dropped-files/action */
-  static let droppedFilesAction = "dropped-files/action"
-  /** dropped-files/files */
-  static let droppedFilesFiles = "dropped-files/files"
   /** sub-ass-extradata */
   static let subAssExtradata = "sub-ass-extradata"
   /** sub-text */
@@ -452,10 +438,6 @@ struct MPVProperty {
   static let subEndFull = "sub-end/full"
   /** secondary-sub-end */
   static let secondarySubEnd = "secondary-sub-end"
-  /** sub-lines */
-  static let subLines = "sub-lines"
-  /** secondary-sub-lines */
-  static let secondarySubLines = "secondary-sub-lines"
   /** playlist-pos */
   static let playlistPos = "playlist-pos"
   /** playlist-pos-1 */
@@ -562,10 +544,6 @@ struct MPVProperty {
   static func trackListNProgramId(_ n: Int) -> String {
     return "track-list/\(n)/program-id"
   }
-  /** track-list/N/program-ids */
-  static func trackListNProgramIds(_ n: Int) -> String {
-    return "track-list/\(n)/program-ids"
-  }
   /** track-list/N/codec */
   static func trackListNCodec(_ n: Int) -> String {
     return "track-list/\(n)/codec"
@@ -657,10 +635,6 @@ struct MPVProperty {
   /** track-list/N/demux-par */
   static func trackListNDemuxPar(_ n: Int) -> String {
     return "track-list/\(n)/demux-par"
-  }
-  /** track-list/N/demux-duration */
-  static func trackListNDemuxDuration(_ n: Int) -> String {
-    return "track-list/\(n)/demux-duration"
   }
   /** track-list/N/format-name */
   static func trackListNFormatName(_ n: Int) -> String {
@@ -810,14 +784,6 @@ struct MPVProperty {
   static let currentTracksSubProgramId = "current-tracks/sub/program-id"
   /** current-tracks/sub2/program-id */
   static let currentTracksSub2ProgramId = "current-tracks/sub2/program-id"
-  /** current-tracks/audio/program-ids */
-  static let currentTracksAudioProgramIds = "current-tracks/audio/program-ids"
-  /** current-tracks/video/program-ids */
-  static let currentTracksVideoProgramIds = "current-tracks/video/program-ids"
-  /** current-tracks/sub/program-ids */
-  static let currentTracksSubProgramIds = "current-tracks/sub/program-ids"
-  /** current-tracks/sub2/program-ids */
-  static let currentTracksSub2ProgramIds = "current-tracks/sub2/program-ids"
   /** current-tracks/audio/codec */
   static let currentTracksAudioCodec = "current-tracks/audio/codec"
   /** current-tracks/video/codec */
@@ -1002,14 +968,6 @@ struct MPVProperty {
   static let currentTracksSubDemuxPar = "current-tracks/sub/demux-par"
   /** current-tracks/sub2/demux-par */
   static let currentTracksSub2DemuxPar = "current-tracks/sub2/demux-par"
-  /** current-tracks/audio/demux-duration */
-  static let currentTracksAudioDemuxDuration = "current-tracks/audio/demux-duration"
-  /** current-tracks/video/demux-duration */
-  static let currentTracksVideoDemuxDuration = "current-tracks/video/demux-duration"
-  /** current-tracks/sub/demux-duration */
-  static let currentTracksSubDemuxDuration = "current-tracks/sub/demux-duration"
-  /** current-tracks/sub2/demux-duration */
-  static let currentTracksSub2DemuxDuration = "current-tracks/sub2/demux-duration"
   /** current-tracks/audio/format-name */
   static let currentTracksAudioFormatName = "current-tracks/audio/format-name"
   /** current-tracks/video/format-name */
@@ -1164,8 +1122,6 @@ struct MPVProperty {
   static let userData = "user-data"
   /** user-data/osc/margins */
   static let userDataOscMargins = "user-data/osc/margins"
-  /** user-data/osc/draw-preview */
-  static let userDataOscDrawPreview = "user-data/osc/draw-preview"
   /** user-data/mpv/ytdl */
   static let userDataMpvYtdl = "user-data/mpv/ytdl"
   /** user-data/mpv/ytdl/path */
@@ -1174,8 +1130,6 @@ struct MPVProperty {
   static let userDataMpvYtdlJsonSubprocessResult = "user-data/mpv/ytdl/json-subprocess-result"
   /** user-data/mpv/console/open */
   static let userDataMpvConsoleOpen = "user-data/mpv/console/open"
-  /** user-data/mpv/context-menu/open */
-  static let userDataMpvContextMenuOpen = "user-data/mpv/context-menu/open"
   /** menu-data */
   static let menuData = "menu-data"
   /** working-directory */
@@ -1200,10 +1154,6 @@ struct MPVProperty {
   static let ffmpegVersion = "ffmpeg-version"
   /** libass-version */
   static let libassVersion = "libass-version"
-  /** libplacebo-version */
-  static let libplaceboVersion = "libplacebo-version"
-  /** subrandr-version */
-  static let subrandrVersion = "subrandr-version"
   /** platform */
   static let platform = "platform"
   /** options/<name> */
@@ -1270,8 +1220,6 @@ struct MPVProperty {
   static let clipboardTextPrimary = "clipboard/text-primary"
   /** current-clipboard-backend */
   static let currentClipboardBackend = "current-clipboard-backend"
-  /** player-operation-mode */
-  static let playerOperationMode = "player-operation-mode"
   /** clock */
   static let clock = "clock"
 }
